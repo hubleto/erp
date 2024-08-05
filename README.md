@@ -10,3 +10,5 @@ Installation steps:
   * Create an empty database (if not exists).
   * Modify ConfigEnv.php according to your environment.
   * Run scripts\install.bat
+
+Now you can login as `administrator` with password `administrator`.

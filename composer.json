@@ -1,0 +1,18 @@
+{
+    "require": {
+        "twig/twig": "^3.0",
+        "illuminate/database": "^11.10",
+        "monolog/monolog": "^2.3",
+        "symfony/yaml": "^5.4",
+        "illuminate/pagination": "^11.10",
+        "snipworks/php-smtp": "^2.0",
+        "phpoffice/phpspreadsheet": "^2.1",
+        "wai-blue/adios": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../ADIOS"
+        }
+    ]
+}

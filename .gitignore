@@ -1,0 +1,11 @@
+/vendor
+/tmp
+/app/bin
+/app/assets/compiled
+/upload
+/log
+/ConfigEnv.php
+/composer.lock
+/package-lock.json
+/node_modules
+`

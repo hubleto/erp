@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  /* HTML tags */
+  html { @apply text-gray-800; }
+
+  a { @apply hover:underline }
+
+  h1 { @apply mt-4 text-primary text-2xl; }
+  h2 { @apply mb-2 text-primary text-xl; }
+
+  /* SPECIAL components, idetified by # id */
+  aside#default-sidebar { @apply flex fixed top-0 left-0 z-10 pt-12 h-screen transition-transform -translate-x-full sm:translate-x-0; }
+  aside#default-sidebar > nav { @apply bg-primary p-1 w-12 flex gap-1 flex-col; }
+  aside#default-sidebar > nav .btn { @apply w-full rounded; }
+  aside#default-sidebar > nav .btn .icon { @apply w-full text-center; }
+  aside#default-sidebar > div { @apply h-full w-60 p-1 shadow-lg overflow-y-auto bg-gray-50 dark:bg-gray-800; }
+  /* aside#default-sidebar > div > ul { @apply } */
+  aside#default-sidebar > div > ul > li a { @apply flex items-center px-1 py-0.5 text-gray-900 rounded no-underline dark:text-white hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-700; }
+  aside#default-sidebar > div > ul > li a .icon { @apply block pl-1 pr-3.5; }
+  aside#default-sidebar > div > ul > li a .text { @apply block; }
+  aside#default-sidebar > div > ul > li > ul > li { @apply ml-1; } /* lvl-2 */
+  aside#default-sidebar > div > ul > li > ul > li > ul > li { @apply ml-1 text-sm; } /* lvl-3 */
+  aside#default-sidebar > div > ul > li > ul > li > ul > li > ul > li { @apply ml-2 text-sm; } /* lvl-4 */
+  aside#default-sidebar > div > ul > li > ul > li > ul > li > ul > li > ul > li { @apply ml-4 text-sm; } /* lvl-5 */
+
+  nav#default-navbar { @apply bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 dark:border-gray-600; }
+  nav#default-navbar > div { @apply flex flex-wrap items-center justify-between mx-auto p-2; }
+  nav#default-navbar .btn { @apply !shadow-none border border-gray-200; }
+
+  div#sign-in-screen { @apply w-full h-screen flex items-center justify-center; }
+  div#sign-in-screen > .inner { @apply shadow-lg rounded-lg border w-1/2 flex items-center p-10; }
+  div#sign-in-screen > .inner > .logo { @apply flex-1 flex items-center justify-center p-4; }
+  div#sign-in-screen > .inner > .logo img { max-width: 20rem; }
+  div#sign-in-screen > .inner > .form { @apply flex-1 p-5; }
+  div#sign-in-screen > .inner > .form > .title { @apply text-center; }
+  div#sign-in-screen > .inner > .form > .content > input { @apply border border-gray-300 rounded-sm w-full p-4 mb-1; }
+
+  div#app-main-content { @apply ml-72 mt-16 px-3; }
+  div#app-main-content.sidebar-only-nav { @apply ml-12; }
+
+  /* #default-navbar-mobile a { @apply block py-2 px-3 md:p-0 dark:text-white; } */
+
+  /* CLASSES in alphabetical order */
+
+  .adios.component.table { @apply w-full; }
+  .adios.component.table .table-header { @apply flex justify-between mb-2; }
+  .adios.component.table .table-header-left { @apply flex-1 flex gap-1; }
+  .adios.component.table .table-header-title { @apply flex-1 text-center text-primary text-xl }
+  .adios.component.table .table-header-right { @apply flex-1; }
+  .adios.component.table .table-header-search { @apply border border-gray-300 text-sm rounded-sm block w-full p-1 }
+  .adios.component.table .table-body { @apply border; }
+  .adios.component.table .table-body tr { @apply border divide-x border-transparent hover:bg-gray-100; box-sizing: border-box; }
+  .adios.component.table .table-body thead th td { @apply p-0.5 text-sm; margin: 1px; }
+  .adios.component.table .table-body tbody tr td { @apply p-0.5 text-sm; margin: 1px; }
+  .adios.component.table .table-body tbody tr td > div { @apply text-sm flex justify-between items-center; }
+  .adios.component.table .table-body tbody tr td .inline-edit-icon { @apply invisible cursor-pointer; }
+  .adios.component.table .table-body tbody tr td:hover .inline-edit-icon { @apply visible; }
+  .adios.component.table .table-body tr.highlighted { @apply divide-none text-primary; }
+  .adios.component.table .table-body tr.highlighted td > div { @apply border-b border-primary; }
+  .adios.component.table .table-body tr td { @apply hover:bg-gray-200; }
+
+  .adios.component.input { @apply flex justify-between items-center w-full max-w-[400px]; }
+  .adios.component.input.lookup { @apply block; }
+
+  .adios.component.input input,
+  .adios.component.input textarea,
+  .adios.component.input select { @apply border flex flex-1 border-gray-300 text-sm rounded-sm w-full; }
+
+  .adios.component.input.date input { @apply max-w-[160px]; }
+  .adios.component.input.datetime input { @apply max-w-[160px]; }
+
+  .adios.component.input .inner { @apply flex w-full items-center rounded gap-1; }
+  .adios.component.input .inner .value-element { @apply flex flex-1 items-center pr-1 mr-1 text-sm text-gray-900; min-height: 1.5rem; }
+  .adios.component.input .inner .input-element { @apply flex flex-1 pr-1 mr-1 text-sm text-gray-900 items-center; min-height: 1.5rem; }
+  .adios.component.input .inner .value-element .no-value { @apply text-gray-300 text-sm italic after:content-['N/A']; }
+  .adios.component.input .inner .inline-editing-buttons { @apply flex flex-1 gap-1 invisible; }
+  .adios.component.input .inner .inline-editing-buttons.always-visible { @apply !visible; }
+  .adios.component.input .inner .btn { @apply shadow-none }
+  .adios.component.input .inner:hover .inline-editing-buttons { @apply !visible }
+  .adios.component.input.editing .inner .btn { @apply block }
+
+  .adios.component.input .input-after { @apply flex-1 ml-2; }
+  .adios.component.input .input-unit { @apply flex-1 ml-2; }
+
+  .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
+  .btn .icon { @apply block px-2 py-1 text-sm; background: #FFFFFF20; }
+  .btn .text { @apply block px-2 py-1 text-sm; }
+  .btn .text > small { @apply block text-xs text-gray-600; }
+
+  .btn.btn-small .icon { @apply text-sm px-1.5 py-0.5; }
+  .btn.btn-small .text { @apply text-sm px-1.5 py-0.5; }
+  .btn.btn-large .icon { @apply text-lg px-2.5 py-1.5; }
+  .btn.btn-large .text { @apply text-lg px-2.5 py-1.5; }
+  .btn.btn-extra-large .icon { @apply text-2xl px-3.5 py-2; }
+  .btn.btn-extra-large .text { @apply text-2xl px-3.5 py-2; }
+
+  .btn.btn-transparent { @apply text-gray-800 bg-transparent border border-gray-100 hover:border-gray-200; }
+  .btn.btn-transparent:hover .icon { @apply bg-gray-100; }
+  .btn.btn-white { @apply text-gray-800 bg-transparent border border-gray-100 hover:bg-gray-200; }
+  .btn.btn-light { @apply text-gray-800 bg-gray-200 hover:bg-gray-400; }
+  .btn.btn-danger { @apply text-red-600 bg-red-200 hover:bg-red-400 hover:text-white; }
+  .btn.btn-success { @apply text-white bg-green-700 hover:bg-green-900 hover:text-white; }
+  .btn.btn-success-outline { @apply text-green-700 bg-white border border-dotted border-green-700 hover:border-solid; }
+  .btn.btn-cancel { @apply text-gray-600 bg-gray-200 hover:bg-gray-400 hover:text-white; }
+  .btn.btn-cancel-outline { @apply text-gray-600 bg-white border border-dotted border-gray-200 hover:border-solid; }
+
+  .btn-list-item { @apply flex rounded-none border-none shadow-none justify-between; }
+  .btn-list-item .icon { @apply self-stretch flex items-center; }
+
+  .btn.btn-disabled { @apply text-gray-200 border border-gray-200 hover:border-gray-200 hover:text-gray-200; }
+  .btn.btn-disabled .icon { @apply text-gray-200 hover:text-gray-200; }
+  .btn.btn-disabled .text { @apply text-gray-200 hover:text-gray-200; }
+
+  .btn.btn-dropdown { @apply flex flex-col items-baseline; }
+  .btn.btn-dropdown > .menu > .list { @apply invisible mt-1 bg-white shadow rounded absolute z-10; }
+  .btn.btn-dropdown:focus-within > .menu > .list { @apply visible; }
+  .btn.btn-dropdown:focus-within > .menu > .list .btn { @apply text-nowrap; }
+
+  .btn-group { @apply flex divide-x rounded border border-gray-100; }
+  .btn-group .btn { @apply border-none rounded-none shadow-none; }
+
+  .breadcrumbs { @apply flex border-b border-gray-300 pb-2; }
+
+  .card { @apply border border-solid rounded shadow-lg mb-4; }
+  .card-header { @apply flex justify-between font-bold border-b p-4 bg-gray-50; }
+  .card-header small { @apply font-normal; }
+  .card-body { @apply p-2; }
+  .card-footer { @apply flex justify-between border-t p-4; }
+
+  .dialog { @apply rounded bg-white; }
+  .dialog-handle { @apply p-2 hover:bg-gray-50; }
+  .dialog-header { @apply p-4; }
+  .dialog-body { @apply p-4; }
+  .dialog-footer { @apply p-4 border-t border-gray-200 bg-gray-50; }
+
+  .divider { @apply px-1 pt-12 pb-4; }
+  .divider.dense { @apply px-1 py-2; }
+  .divider > div { @apply relative; }
+  .divider > div > div { @apply flex relative justify-start; }
+  .divider > div > div:nth-child(1) { @apply flex items-center absolute inset-0; }
+  .divider > div > div:nth-child(1) > div { @apply border-t w-full border-gray-200; }
+  .divider > div > div:nth-child(2) > span { @apply flex justify-between items-center text-gray-600 font-semibold leading-6 ml-3 px-3 bg-white; }
+
+  .list { @apply list-none border rounded divide-y; }
+
+  .input-wrapper { @apply flex justify-between items-center border border-transparent; box-sizing: border-box; }
+  .input-wrapper:hover { @apply bg-gray-50; }
+  .input-wrapper .input-label { @apply flex-1 block text-sm font-medium text-gray-900 pl-1; }
+  .input-wrapper:hover .input-label { @apply text-primary; }
+  .input-wrapper .input-body { @apply flex justify-between items-center flex-[3] block; overflow-wrap: anywhere; }
+  .input-wrapper .input-description { @apply text-xs text-gray-500 pr-1; }
+
+  .key-value-table { @apply leading-8 divide-y text-sm border; }
+  .key-value-table.dense { @apply leading-4 border; }
+  .key-value-table > div { @apply flex justify-between p-1 hover:bg-gray-100; }
+  .key-value-table > div div:nth-child(2) { @apply font-bold; }
+
+  .modal { @apply flex flex-col h-screen overflow-auto; }
+  .modal.right { @apply fixed top-0 right-0 w-1/2 z-50 h-full shadow-xl bg-white; }
+  .modal.centered { @apply fixed mx-auto mt-1 w-2/3 h-2/3 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+  .modal.centered.small { @apply fixed mx-auto mt-1 w-1/2 h-1/2 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+  .modal.centered.tiny { @apply fixed mx-auto mt-1 w-1/3 h-1/3 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+  .modal .modal-header { @apply flex border-b border-b-gray-200 text-primary items-baseline w-full justify-between shadow-sm p-2 bg-gray-50; }
+  .modal .modal-header .modal-header-left { @apply flex gap-1; }
+  .modal .modal-header .modal-header-title { @apply text-center; }
+  .modal .modal-header .modal-header-right { @apply flex gap-1; }
+  .modal .modal-body { @apply p-2 flex-1; }
+  .modal .modal-footer { @apply p-2 border-t border-t-gray-200 bg-gray-50; }
+
+  /* PRIMETABLE */
+
+  .p-progressbar .p-progressbar-value { @apply bg-primary; }
+  /* .p-datatable .p-datatable-tbody > tr > td { @apply p-1 text-sm; } */
+  .p-datatable .p-datatable-thead > tr > th { @apply p-1 text-sm border-b border-b-gray-400; }
+  .p-datatable .p-datatable-thead > tr > th .p-sortable-column-icon { @apply scale-[0.75]; }
+  .p-treetable .p-treetable-tbody > tr > td { @apply p-1 text-sm; }
+  .p-tree-container .p-treenode { @apply ml-0; }
+  .p-tree-container .p-treenode .p-treenode { @apply ml-1; }
+  .p-tree-container .p-treenode .p-treenode .p-treenode { @apply ml-2; }
+  .p-tree-container .p-treenode .p-treenode .p-treenode .p-treenode { @apply ml-3; }
+  .p-treenode { @apply p-0; }
+  .p-treenode-content { @apply p-0; }
+  .p-tree-toggler { @apply scale-[0.66]; }
+  .p-tabview .p-tabview-ink-bar { @apply bg-primary; }
+  .p-tabview-panels { @apply pl-0; }
+
+  .p-tree { @apply p-0; }
+
+  /* ASYNC SELECT */
+  .adios-lookup__indicator { padding: 0px !important; }
+  .adios-lookup__control { min-height: auto !important; }
+  .adios-lookup__input-container { @apply !text-sm !w-[300px] !p-0 !m-0; }
+  .adios-lookup__value-container { @apply !p-0; }
+  .adios-lookup__input { @apply !text-sm; }
+
+}
+
+
+body.react-elements-rendering #app-main-content { display: none; }
+body.react-elements-rendered #app-main-content { display: block; }
+body.ajax-loading nav#default-navbar { background: #EEEEEE; opacity: 0.5; }
+

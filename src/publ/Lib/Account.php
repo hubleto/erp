@@ -103,7 +103,7 @@ class Account {
     $configAccount = str_replace('{{ dbUser }}', $this->dbUser, $configAccount);
     $configAccount = str_replace('{{ dbPassword }}', $this->dbPassword, $configAccount);
     $configAccount = str_replace('{{ dbName }}', $this->dbName, $configAccount);
-    $configAccount = str_replace('{{ appRootFolder }}', $this->app->config['dir'], $configAccount);
+    $configAccount = str_replace('{{ accountUrl }}', $this->rootUrl . '/' . $this->uid, $configAccount);
 
     file_put_contents($this->rootFolder . '/' . $this->uid . '/ConfigAccount.php', $configAccount);
 

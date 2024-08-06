@@ -1,11 +1,15 @@
 <?php
 
-// urls
+// dirs
 
+$config['accountDir']                    = __DIR__;
 $config['logDir']                        = __DIR__ . '/log';
 $config['tmpDir']                        = __DIR__ . '/tmp';
 $config['uploadDir']                     = __DIR__ . '/upload';
-$config['uploadUrl']                     = '//' . ($_SERVER['HTTP_HOST'] ?? '') . $config['rewriteBase'] . 'upload';
+
+// urls
+$config['accountUrl']                    = '{{ accountUrl }}';
+$config['uploadUrl']                     = '{{ accountUrl }}/upload';
 
 // db
 $config["db_host"]             = '{{ dbHost }}';

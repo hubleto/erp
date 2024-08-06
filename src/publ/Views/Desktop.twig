@@ -22,6 +22,7 @@
     window.ConfigEnv = {
       'rewriteBase': '{{ config.rewriteBase }}',
       'url': '{{ config.url }}',
+      'accountUrl': '{{ config.accountUrl }}',
     }
   </script>
 
@@ -50,7 +51,7 @@
     </button>
 
     <nav id="default-navbar"><div>
-      <a class="flex items-center space-x-3 rtl:space-x-reverse" href="{{ config.url }}/..">
+      <a class="flex items-center space-x-3 rtl:space-x-reverse" href="{{ config.accountUrl }}/..">
         <img src="{{ config.url }}/app/assets/images/logo.png" class="h-8">
         <span class="self-center text-l font-semibold whitespace-nowrap dark:text-white">
           Ceremony CRM
@@ -71,7 +72,7 @@
             </a>
           </li>
           <li>
-            <a class="btn btn-transparent" href="{{ config.url }}/?sign-out">
+            <a class="btn btn-transparent" href="{{ config.accountUrl }}/?sign-out">
               <span class="icon"><i class='fas fa-sign-out-alt'></i></span>
             </a>
           </li>
@@ -81,7 +82,7 @@
 
     <aside id="default-sidebar">
       <nav>
-        <a class="btn" href="{{ config.url }}" title="Lokality">
+        <a class="btn" href="{{ config.accountUrl }}" title="Lokality">
           <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
         </a>
       </nav>

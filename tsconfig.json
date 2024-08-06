@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@adios/*": ["./vendor/wai-blue/adios/src/Components/*"],
+      "@primereact/*": ["./vendor/wai-blue/adios/node_modules/primereact/*"],
+    }
+  },
+  "include": ["./**/*"]
+} 

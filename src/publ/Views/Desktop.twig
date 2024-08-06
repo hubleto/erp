@@ -21,22 +21,22 @@
   <script>
     window.ConfigEnv = {
       'rewriteBase': '{{ config.rewriteBase }}',
-      'url': '{{ config.url }}',
+      'url': '{{ config.accountUrl }}',
       'accountUrl': '{{ config.accountUrl }}',
     }
   </script>
 
-  <script src='{{ config.url }}/adios/cache.js'></script>
-  <script src='{{ config.url }}/app/assets/compiled/js/app.js'></script>
+  <script src='{{ config.accountUrl }}/adios/cache.js'></script>
+  <script defer src='{{ config.url }}/app/assets/compiled/js/app.js'></script>
 
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/app/assets/css/fontawesome-5.13.0.css">
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/app/assets/compiled/css/app.css">
 
-  <script>
+  {# <script>
     ADIOS.onAppLoaded(() => {
       globalThis.app.language = 'sk';
     });
-  </script>
+  </script> #}
 
 </head>
 

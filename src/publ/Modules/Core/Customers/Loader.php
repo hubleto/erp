@@ -11,9 +11,9 @@ class Loader extends \CeremonyCrmApp\Core\Module {
 
   public function addRouting(\ADIOS\Core\Router $router) {
     $router->addRouting([
-      '/^customers$/' => [
-        'controller' => 'CeremonyCrmApp/Modules/Core/Customers/Controllers/Dashboard',
-        'view' => 'CeremonyCrmApp/Modules/Core/Customers/Views/Dashboard',
+      '/^companies$/' => [
+        'controller' => 'CeremonyCrmApp/Modules/Core/Customers/Controllers/Companies',
+        'view' => 'CeremonyCrmApp/Modules/Core/Customers/Views/Companies',
       ],
     ]);
   }
@@ -22,7 +22,7 @@ class Loader extends \CeremonyCrmApp\Core\Module {
     $sidebar->addLink(1, 'customers', $this->app->translate('Customers'), 'fas fa-user');
 
     $sidebar->addHeading1(2, $this->app->translate('Customers'));
-    $sidebar->addLink(2, 'customers', $this->app->translate('Customers'), 'fas fa-user');
+    $sidebar->addLink(2, 'companies', $this->app->translate('Companies'), 'fas fa-warehouse');
   }
 
   public function generateTestData() {

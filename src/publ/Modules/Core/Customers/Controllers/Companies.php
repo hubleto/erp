@@ -2,4 +2,4 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Controllers;
 
-class Dashboard extends \CeremonyCrmApp\Core\Controller { }
+class Companies extends \CeremonyCrmApp\Core\Controller { }

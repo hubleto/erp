@@ -11,7 +11,6 @@ import InputImage from "@adios/Inputs/Image";
 import InputBoolean from "@adios/Inputs/Boolean";
 import InputColor from "@adios/Inputs/Color";
 
-
 //@ts-ignore
 const app: ADIOS = new ADIOS(window.ConfigEnv);
 

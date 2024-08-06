@@ -37,13 +37,14 @@ class Loader extends \CeremonyCrmApp\Core\Module {
   public function generateTestData() {
     $mCompany = new Models\Company($this->app);
     $mCompany->install();
-    $mCompany->eloquent->create(['name' => 'Test Company Ltd.']);
+    $idCompany = $mCompany->eloquent->create(['name' => 'Test Company Ltd.'])->id;
 
     $mPerson = new Models\Person($this->app);
     $mPerson->install();
     $mPerson->eloquent->create([
       'first_name' => 'John',
       'last_name' => 'Smith',
+      'id_company' => $idCompany,
     ]);
   }
 }

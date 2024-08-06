@@ -8,9 +8,9 @@ use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Person extends \ADIOS\Core\Model\Eloquent {
   public $table = 'persons';
 
-  // public function REPORT(): BelongsTo
-  // {
-  //   return $this->belongsTo(\EMonitorApp\Models\Eloquent\Report::class, 'id_report', 'id')->orderBy('name', 'asc');
-  // }
+  public function id_company(): BelongsTo
+  {
+    return $this->belongsTo(Company::class, 'id_company', 'id')->orderBy('name', 'asc');
+  }
 
 }

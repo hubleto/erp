@@ -7,6 +7,7 @@ class Person extends \ADIOS\Core\Model
   public string $fullTableSqlName = 'persons';
   public string $table = 'persons';
   public string $eloquentClass = Eloquent\Person::class;
+  public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
 
   public function columns(array $columns = []): array
   {
@@ -18,6 +19,11 @@ class Person extends \ADIOS\Core\Model
       "last_name" => [
         "type" => "varchar",
         "title" => "Last name",
+      ],
+      "id_company" => [
+        "type" => "lookup",
+        "title" => "Company",
+        "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
       ],
     ]));
   }

@@ -7,6 +7,7 @@ class Company extends \ADIOS\Core\Model
   public string $fullTableSqlName = 'companies';
   public string $table = 'companies';
   public string $eloquentClass = Eloquent\Company::class;
+  public ?string $lookupSqlValue = "{%TABLE%}.name";
 
   public function columns(array $columns = []): array
   {

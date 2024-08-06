@@ -3,7 +3,6 @@
 use \ADIOS\Core\Helper;
 
 // load configs
-require_once(__DIR__ . "/../../ConfigEnv.php");
 require_once(__DIR__ . "/ConfigApp.php");
 
 // include autoloaders
@@ -26,9 +25,11 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader {
   public function __construct($config = NULL, $mode = NULL) {
     parent::__construct($config, $mode);
 
-    $this->twig->addFunction(new \Twig\TwigFunction(
-      'number',
-      function ($amount) { return number_format($amount, 2, ",", " "); }
-    ));
+    if ($mode == self::ADIOS_MODE_FULL) {
+      $this->twig->addFunction(new \Twig\TwigFunction(
+        'number',
+        function ($amount) { return number_format($amount, 2, ",", " "); }
+      ));
+    }
   }
 }

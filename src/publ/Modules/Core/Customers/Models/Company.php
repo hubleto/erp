@@ -20,7 +20,6 @@ class Company extends \ADIOS\Core\Model
 
   public function tableParams(array $params = []): array {
     $params = parent::tableParams();
-    $params['title'] = 'Companies';
     $params['addButtonText'] = 'Add company';
     return $params;
   }

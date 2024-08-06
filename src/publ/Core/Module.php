@@ -20,7 +20,7 @@ class Module {
     return $this->registeredModels;
   }
 
-  public function addRouting(\ADIOS\Core\Router $router) {
+  public function addRouting(\CeremonyCrmApp\Core\Router $router) {
     // to be overriden
   }
 

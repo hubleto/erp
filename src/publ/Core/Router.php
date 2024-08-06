@@ -139,21 +139,21 @@ class Router extends \ADIOS\Core\Router {
     string $controllerSlug,
     string $viewSlug,
     array $commonParams,
-    array $items
+    array $routes
   ) {
-    $routes = [];
+    $newRoutes = [];
 
-    foreach ($items as $url => $item) {
+    foreach ($routes as $url => $item) {
       $regexp = '/^' . $urlRegexp . str_replace('/', '\\/', $url) . '\\/?$/';
 
       if (is_string($item)) {
-        $routes[$regexp] = [
+        $newRoutes[$regexp] = [
           'controller' => $controllerSlug . '/' . $item ?? '',
           'view' => $viewSlug . '/' . $item ?? '',
           'params' => $commonParams,
         ];
       } else {
-        $routes[$regexp] = [
+        $newRoutes[$regexp] = [
           'controller' => $controllerSlug . '/' . $item['controller'] ?? '',
           'view' => $viewSlug . '/' . $item['view'] ?? '',
           'params' => array_merge($commonParams, $item['params'] ?? []),
@@ -161,6 +161,6 @@ class Router extends \ADIOS\Core\Router {
       }
     }
 
-    $this->addRouting($routes);
+    $this->addRouting($newRoutes);
   }
 }

@@ -27,7 +27,7 @@ class Account {
     string $accountRootFolder,
     string $accountRootUrl,
     string $appRootFolder,
-    string $appRootUrl
+    string $appRootUrl,
   ) {
     $this->app = $app;
     $this->companyName = $companyName;
@@ -92,6 +92,7 @@ class Account {
     $idUserAdministrator = $mUser->eloquent->create([
       'login' => $this->adminEmail,
       'password' => $mUser->hashPassword($this->adminPassword),
+      'email' => $this->adminEmail,
       'is_active' => 1,
     ])->id;
 
@@ -124,10 +125,32 @@ class Account {
 
     file_put_contents($this->accountRootFolder . '/' . $this->uid . '/ConfigAccount.php', $configAccount);
 
+    // LoadApp.php
+    $loadApp = file_get_contents($this->app->config['dir'] . '/account_templates/LoadApp.php');
+    $loadApp = str_replace('{{ appDir }}', $this->appRootFolder, $loadApp);
+    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/LoadApp.php', $loadApp);
+
     // index.php
-    $index = file_get_contents($this->app->config['dir'] . '/account_templates/index.php');
-    $index = str_replace('{{ appDir }}', $this->appRootFolder, $index);
-    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/index.php', $index);
+    copy(
+      $this->app->config['dir'] . '/account_templates/index.php',
+      $this->accountRootFolder . '/' . $this->uid . '/index.php'
+    );
+  }
+
+  public function generateTestData() {
+    array_walk($this->app->getRegisteredModules(), function($moduleClass) {
+      $module = new $moduleClass($this->app);
+      $module->generateTestData();
+    });
+  }
+
+  public function createDevelScripts() {
+    @mkdir($this->accountRootFolder . '/' . $this->uid . '/devel');
+
+    $tplFolder = $this->app->config['dir'] . '/account_templates';
+    $accFolder = $this->accountRootFolder . '/' . $this->uid;
+
+    copy($tplFolder . '/devel/Reinstall.php', $accFolder . '/devel/Reinstall.php');
   }
 
   public function getDatabaseUser(): string {

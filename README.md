@@ -2,13 +2,13 @@
 
 Installation steps:
 
-  * Clone this repo
-  * Run scripts/inity_repo_run_as_administrator.bat
-    * You must run this script as administrator - it creates symlink.
-  * Run `composer install`
-  * Run `npm i`
-  * Create an empty database (if not exists).
-  * Modify ConfigEnv.php according to your environment.
-  * Run scripts\install.bat
-
-Now you can login as `administrator` with password `administrator`.
+  *  vytvor si v root foldri s projektami adresar **ROOT/ceremonycrm** (tak, aby bol viditelny cez http://localhost/ceremony)
+  *  do neho si naklonuj https://github.com/wai-blue/ceremonycrm tak, aby vysledny naklonovany kod sa nachadzal v **ROOT/ceremonycrm/app** a teda aby bol viditelny cez http://localhost/ceremony/app)
+  *  cd **ROOT/ceremonycrm/app**
+      - `npm i`
+      - `composer install`
+  *  vytvor si adresar **ROOT/www** a rozbal si do neho prilozeny zip
+  *  vytvor si adresar **ROOT/www/log**
+  *  uprav si DB connection v **ROOT/www/config.php**
+  *  vytvor si adresar **ROOT/www/accounts**
+  *  v prehliadaci si otvor http://localhost/ceremonycrm/www/create_account.php a vytvor si ucet

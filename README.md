@@ -8,7 +8,7 @@ Installation steps:
       - `npm i`
       - `composer install`
       - `npm run build`
-  * vytvor si symlink, target = **ROOT/ceremonycrm/src**, link = **ROOT/ceremonycrm/app/bin**
+  * vytvor si symlink, target = **ROOT/ceremonycrm/src/publ**, link = **ROOT/ceremonycrm/app/bin**
   *  vytvor si adresar **ROOT/ceremonycrm/www** a rozbal si do neho prilozeny zip
   *  vytvor si adresar **ROOT/ceremonycrm/www/log**
   *  uprav si DB connection v **ROOT/ceremonycrm/www/config.php**

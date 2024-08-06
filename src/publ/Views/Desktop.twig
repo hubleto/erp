@@ -117,7 +117,7 @@
 
     <div
       id="app-main-content"
-      class="{% if viewParams.idLokalita == 0 %} sidebar-only-nav {% endif %}"
+      class="{% if viewParams.sidebar.level2Items|length == 0 %} sidebar-only-nav {% endif %}"
     >
       {{ contentHtml|raw }}
     </div>

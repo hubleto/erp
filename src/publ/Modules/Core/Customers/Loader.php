@@ -9,6 +9,15 @@ class Loader extends \CeremonyCrmApp\Core\Module {
     $this->registerModel(Models\Company::class);
   }
 
+  public function addRouting(\ADIOS\Core\Router $router) {
+    $router->addRouting([
+      '/^customers$/' => [
+        'controller' => 'CeremonyCrmApp/Modules/Core/Customers/Controllers/Dashboard',
+        'view' => 'CeremonyCrmApp/Modules/Core/Customers/Views/Dashboard',
+      ],
+    ]);
+  }
+
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar) {
     $sidebar->addLink(1, 'customers', $this->app->translate('Customers'), 'fas fa-user');
 

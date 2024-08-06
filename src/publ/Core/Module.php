@@ -20,6 +20,10 @@ class Module {
     return $this->registeredModels;
   }
 
+  public function addRouting(\ADIOS\Core\Router $router) {
+    // to be overriden
+  }
+
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar) {
     // to be overriden
   }

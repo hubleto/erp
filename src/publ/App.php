@@ -36,6 +36,11 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader {
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Customers\Loader::class);
 
     $this->sidebar = new \CeremonyCrmApp\Core\Sidebar($this);
+
+    array_walk($this->getRegisteredModules(), function($moduleClass) {
+      $module = new $moduleClass($this);
+      $module->addRouting($this->router);
+    });
   }
 
   public function registerModule(string $module) {

@@ -6,8 +6,10 @@ class Account {
   public \CeremonyCrmApp $app;
   public string $adminEmail = '';
   public string $companyName = '';
-  public string $rootFolder = '';
-  public string $rootUrl = '';
+  public string $accountRootFolder = '';
+  public string $accountRootUrl = '';
+  public string $appRootFolder = '';
+  public string $appRootUrl = '';
 
   public string $uid = '';
   public string $dbHost = '';
@@ -16,12 +18,22 @@ class Account {
   public string $dbPassword = '';
   public string $adminPassword = '';
 
-  public function __construct(\CeremonyCrmApp $app, string $companyName, string $adminEmail, string $rootFolder, string $rootUrl) {
+  public function __construct(
+    \CeremonyCrmApp $app,
+    string $companyName,
+    string $adminEmail,
+    string $accountRootFolder,
+    string $accountRootUrl,
+    string $appRootFolder,
+    string $appRootUrl
+  ) {
     $this->app = $app;
     $this->companyName = $companyName;
     $this->adminEmail = $adminEmail;
-    $this->rootFolder = $rootFolder;
-    $this->rootUrl = $rootUrl;
+    $this->accountRootFolder = $accountRootFolder;
+    $this->accountRootUrl = $accountRootUrl;
+    $this->appRootFolder = $appRootFolder;
+    $this->appRootUrl = $appRootUrl;
 
     $this->uid = \ADIOS\Core\Helper::str2url($this->companyName);
     $this->uid = $this->uid . '-' . rand(100, 999);
@@ -43,8 +55,8 @@ class Account {
     }
 
     if (
-      is_file($this->rootFolder . '/' . $this->uid)
-      || is_dir($this->rootFolder . '/' . $this->uid)
+      is_file($this->accountRootFolder . '/' . $this->uid)
+      || is_dir($this->accountRootFolder . '/' . $this->uid)
     ) {
       throw new Exception('Account folder already exists');
     }
@@ -90,27 +102,29 @@ class Account {
 
   public function createFoldersAndFiles() {
     // folders
-    @mkdir($this->rootFolder . '/' . $this->uid);
-    @mkdir($this->rootFolder . '/' . $this->uid . '/log');
-    @mkdir($this->rootFolder . '/' . $this->uid . '/tmp');
-    @mkdir($this->rootFolder . '/' . $this->uid . '/upload');
+    @mkdir($this->accountRootFolder . '/' . $this->uid);
+    @mkdir($this->accountRootFolder . '/' . $this->uid . '/log');
+    @mkdir($this->accountRootFolder . '/' . $this->uid . '/tmp');
+    @mkdir($this->accountRootFolder . '/' . $this->uid . '/upload');
 
     // ConfigEnv.php
     $configAccount = file_get_contents($this->app->config['dir'] . '/account_templates/ConfigAccount.tpl');
+    $configAccount = str_replace('{{ appDir }}', $this->appRootFolder, $configAccount);
+    $configAccount = str_replace('{{ appUrl }}', $this->appRootUrl, $configAccount);
     $configAccount = str_replace('{{ rewriteBase }}', $this->uid, $configAccount);
-    $configAccount = str_replace('{{ url }}', $this->rootUrl . '/' . $this->uid, $configAccount);
     $configAccount = str_replace('{{ dbHost }}', $this->app->config['db_host'], $configAccount);
     $configAccount = str_replace('{{ dbUser }}', $this->dbUser, $configAccount);
     $configAccount = str_replace('{{ dbPassword }}', $this->dbPassword, $configAccount);
     $configAccount = str_replace('{{ dbName }}', $this->dbName, $configAccount);
-    $configAccount = str_replace('{{ accountUrl }}', $this->rootUrl . '/' . $this->uid, $configAccount);
+    $configAccount = str_replace('{{ accountDir }}', $this->accountRootFolder . '/' . $this->uid, $configAccount);
+    $configAccount = str_replace('{{ accountUrl }}', $this->accountRootUrl . '/' . $this->uid, $configAccount);
 
-    file_put_contents($this->rootFolder . '/' . $this->uid . '/ConfigAccount.php', $configAccount);
+    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/ConfigAccount.php', $configAccount);
 
     // index.php
     $index = file_get_contents($this->app->config['dir'] . '/account_templates/index.php');
-    $index = str_replace('{{ appRootFolder }}', $this->app->config['dir'], $index);
-    file_put_contents($this->rootFolder . '/' . $this->uid . '/index.php', $index);
+    $index = str_replace('{{ appDir }}', $this->appRootFolder, $index);
+    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/index.php', $index);
   }
 
 

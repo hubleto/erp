@@ -10,12 +10,12 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE ^ E_WARNING);
 define('_ADIOS_ID', 'CeremonyCrmApp');
 
 // load configs
-require_once("{{ appRootFolder }}/app/bin/ConfigApp.php");
-require_once("{{ appRootFolder }}/ConfigEnv.php");
+require_once("{{ appDir }}/app/bin/ConfigApp.php");
+require_once("{{ appDir }}/ConfigEnv.php");
 require_once(__DIR__ . "/ConfigAccount.php");
 
 // load application class
-require("{{ appRootFolder }}/app/bin/App.php");
+require("{{ appDir }}/app/bin/App.php");
 
 // render
 $app = new CeremonyCrmApp($config);

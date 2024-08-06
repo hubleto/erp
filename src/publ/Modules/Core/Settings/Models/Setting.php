@@ -38,4 +38,10 @@ class Setting extends \ADIOS\Core\Model {
     ]);
   }
 
+  public function tableParams(array $params = []): array {
+    $params = parent::tableParams();
+    $params['title'] = 'Settings';
+    return $params;
+  }
+
 }

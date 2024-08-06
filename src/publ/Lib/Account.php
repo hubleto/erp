@@ -2,6 +2,10 @@
 
 namespace CeremonyCrmApp\Lib;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\ {
+  Profile, User, UserRole, UserHasRole
+};
+
 class Account {
   public \CeremonyCrmApp $app;
   public string $adminEmail = '';
@@ -86,21 +90,32 @@ class Account {
       );
     }
 
-    $this->app->install();
+    // $this->app->install();
 
-    $mUser = new \CeremonyCrmApp\Modules\Core\Settings\Models\User($this->app);
+    $mProfile = new Profile($this->app);
+    $mUser = new User($this->app);
+    $mUserRole = new UserRole($this->app);
+    $mUserHasRole = new UserHasRole($this->app);
+
+    $mProfile->dropTableIfExists()->install();
+    $mUser->dropTableIfExists()->install();
+    $mUserRole->dropTableIfExists()->install();
+    $mUserHasRole->dropTableIfExists()->install();
+
+    $idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
+
     $idUserAdministrator = $mUser->eloquent->create([
       'login' => $this->adminEmail,
       'password' => $mUser->hashPassword($this->adminPassword),
       'email' => $this->adminEmail,
       'is_active' => 1,
+      'id_active_profile' => $idProfile,
     ])->id;
 
-    $mUserRole = new \CeremonyCrmApp\Modules\Core\Settings\Models\UserRole($this->app);
-    $idRoleAdministrator = $mUserRole->eloquent->create(['name' => 'Administrator'])->id;
+    $idRoleAdministrator = $mUserRole->eloquent->create(['role' => 'Administrator'])->id;
 
-    $mUserHasRole = new \CeremonyCrmApp\Modules\Core\Settings\Models\UserHasRole($this->app);
     $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
+
 
   }
 

@@ -21,6 +21,7 @@ class Loader extends \CeremonyCrmApp\Core\Module {
       [
         '' => 'Dashboard',
         '/users' => 'Users',
+        '/profiles' => 'Profiles',
         '/settings' => 'Settings',
       ]
     );
@@ -32,7 +33,8 @@ class Loader extends \CeremonyCrmApp\Core\Module {
     if (str_starts_with($this->app->requestedUri, 'settings')) {
       $sidebar->addHeading1(2, 99200, $this->app->translate('Settings'));
       $sidebar->addLink(2, 99201, 'settings/users', $this->app->translate('Users'), 'fas fa-user');
-      $sidebar->addLink(2, 99202, 'settings/settings', $this->app->translate('Settings'), 'fas fa-cog');
+      $sidebar->addLink(2, 99202, 'settings/profiles', $this->app->translate('Profiles'), 'fas fa-id-card');
+      $sidebar->addLink(2, 99203, 'settings/settings', $this->app->translate('Settings'), 'fas fa-cog');
     }
   }
 

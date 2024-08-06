@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel='shortcut icon' href='{{ config.url }}/app/assets/images/favicon.png'>
-  <title>Ceremony CRM</title>
+  <title>{{ user.PROFILE.company }} | Ceremony</title>
 
   <script>
     window.ConfigEnv = {
@@ -54,7 +54,8 @@
       <a class="flex items-center space-x-3 rtl:space-x-reverse" href="{{ config.accountUrl }}">
         <img src="{{ config.url }}/app/assets/images/logo.png" class="h-8">
         <span class="self-center text-l font-semibold whitespace-nowrap dark:text-white">
-          Ceremony CRM
+          {{ user.PROFILE.company }}
+          <span class="text-sm text-gray-500"> | Ceremony</span>
         </span>
       </a>
       <button data-collapse-toggle="default-navbar-mobile" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -82,14 +83,21 @@
 
     <aside id="default-sidebar">
       <nav>
+        {% set i = 0 %}
         {% for item in viewParams.sidebar.level1Items %}
           {% if item.type == 'link' %}
-            <a class="btn" href="{{ config.accountUrl }}/{{ item.url }}" title="{{ item.title }}">
+            <a
+              class="btn"
+              id="sidebar-item-level1-{{ i }}"
+              href="{{ config.accountUrl }}/{{ item.url }}" data-pr-tooltip="{{ item.title }}"
+            >
               <span class="icon"><i class="{{ item.icon }}"></i></span>
+              <app-tooltip target="#sidebar-item-level1-{{ i }}"></app-tooltip>
             </a>
           {% elseif item.type == 'divider' %}
             <div class="divider"></div>
           {% endif %}
+          {% set i = i + 1 %}
         {% endfor %}
       </nav>
 
@@ -98,7 +106,7 @@
           <ul>
             {% for item in viewParams.sidebar.level2Items %}
               {% if item.type == 'link' %}
-                <a class="btn btn-light w-full mb-2" href="{{ config.accountUrl }}/{{ item.url }}" title="{{ item.title }}">
+                <a class="btn btn-transparent w-full mb-1" href="{{ config.accountUrl }}/{{ item.url }}" title="{{ item.title }}">
                   <span class="icon"><i class="{{ item.icon }}"></i></span>
                   <span class="text">{{ item.title }}</span>
                 </a>

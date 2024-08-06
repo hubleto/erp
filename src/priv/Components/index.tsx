@@ -1,6 +1,7 @@
 import { ADIOS } from "@adios/Loader"
 import { dictionarySk } from "@adios/Dictionary/Sk";
 
+// ADIOS
 import Table from "@adios/Table";
 import Modal from "@adios/Modal";
 
@@ -10,6 +11,11 @@ import InputLookup from "@adios/Inputs/Lookup";
 import InputImage from "@adios/Inputs/Image";
 import InputBoolean from "@adios/Inputs/Boolean";
 import InputColor from "@adios/Inputs/Color";
+
+// Primereact
+import { Tooltip } from "@primereact/tooltip"
+
+
 
 //@ts-ignore
 const app: ADIOS = new ADIOS(window.ConfigEnv);
@@ -26,6 +32,10 @@ app.registerReactComponent('InputLookup', InputLookup);
 app.registerReactComponent('InputBoolean', InputBoolean);
 app.registerReactComponent('InputImage', InputImage);
 app.registerReactComponent('InputColor', InputColor);
+
+// Primereact
+app.registerReactComponent('Tooltip', Tooltip);
+
 
 // Custom project components
 // ...

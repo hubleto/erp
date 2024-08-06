@@ -30,7 +30,7 @@ class Person extends \ADIOS\Core\Model
 
   public function tableParams(array $params = []): array {
     $params = parent::tableParams();
-    $params['addButtonText'] = 'Add person';
+    $params['title'] = 'Persons';
     return $params;
   }
 

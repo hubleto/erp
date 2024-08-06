@@ -82,14 +82,34 @@
 
     <aside id="default-sidebar">
       <nav>
-        <a class="btn" href="{{ config.accountUrl }}" title="Lokality">
-          <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
-        </a>
+        {% for item in viewParams.sidebar.level1Items %}
+          {% if item.type == 'link' %}
+            <a class="btn" href="{{ config.accountUrl }}/{{ item.url }}" title="{{ item.title }}">
+              <span class="icon"><i class="{{ item.icon }}"></i></span>
+            </a>
+          {% elseif item.type == 'divider' %}
+            <div class="divider"></div>
+          {% endif %}
+        {% endfor %}
       </nav>
 
-      {% if viewParams.idLokalita > 0 %}
+      {% if viewParams.sidebar.level2Items|length > 0 %}
         <div>
           <ul>
+            {% for item in viewParams.sidebar.level2Items %}
+              {% if item.type == 'link' %}
+                <a class="btn btn-light" href="{{ config.accountUrl }}/{{ item.url }}" title="{{ item.title }}">
+                  <span class="icon"><i class="{{ item.icon }}"></i></span>
+                  <span class="text">{{ item.title }}</span>
+                </a>
+              {% elseif item.type == 'heading_1' %}
+                <h1>{{ item.title }}</h1>
+              {% elseif item.type == 'heading_2' %}
+                <h2>{{ item.title }}</h2>
+              {% elseif item.type == 'divider' %}
+                <div class="divider"></div>
+              {% endif %}
+            {% endfor %}
           </ul>
         </div>
       {% endif %}

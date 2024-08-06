@@ -40,6 +40,11 @@ class Controller extends \ADIOS\Core\Controller {
    */
   public function prepareViewParams() {
     parent::prepareViewParams();
+
+    $this->viewParams['sidebar'] = [
+      'level1Items' => $this->app->getSidebar()->getItems(1),
+      'level2Items' => $this->app->getSidebar()->getItems(2),
+    ];
   }
 
 }

@@ -127,7 +127,6 @@ class Account {
     file_put_contents($this->accountRootFolder . '/' . $this->uid . '/index.php', $index);
   }
 
-
   public function getDatabaseUser(): string {
     $dbUser = \ADIOS\Core\Helper::str2url($this->companyName);
     $dbUser = str_replace('-', '_', $dbUser);

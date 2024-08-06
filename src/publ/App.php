@@ -57,4 +57,8 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader {
   public function getSidebar(): \CeremonyCrmApp\Core\Sidebar {
     return $this->sidebar;
   }
+
+  public function getDesktopController(): \CeremonyCrmApp\Core\Controller {
+    return new \CeremonyCrmApp\Core\Controller($this);
+  }
 }

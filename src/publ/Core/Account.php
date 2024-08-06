@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Lib;
+namespace CeremonyCrmApp\Core;
 
 use CeremonyCrmApp\Modules\Core\Settings\Models\ {
   Profile, User, UserRole, UserHasRole

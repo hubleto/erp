@@ -6,6 +6,7 @@ class Account {
   public \CeremonyCrmApp $app;
   public string $adminEmail = '';
   public string $companyName = '';
+  public string $accountRootRewriteBase = '';
   public string $accountRootFolder = '';
   public string $accountRootUrl = '';
   public string $appRootFolder = '';
@@ -22,6 +23,7 @@ class Account {
     \CeremonyCrmApp $app,
     string $companyName,
     string $adminEmail,
+    string $accountRootRewriteBase,
     string $accountRootFolder,
     string $accountRootUrl,
     string $appRootFolder,
@@ -30,6 +32,7 @@ class Account {
     $this->app = $app;
     $this->companyName = $companyName;
     $this->adminEmail = $adminEmail;
+    $this->accountRootRewriteBase = $accountRootRewriteBase;
     $this->accountRootFolder = $accountRootFolder;
     $this->accountRootUrl = $accountRootUrl;
     $this->appRootFolder = $appRootFolder;
@@ -111,11 +114,11 @@ class Account {
     $configAccount = file_get_contents($this->app->config['dir'] . '/account_templates/ConfigAccount.tpl');
     $configAccount = str_replace('{{ appDir }}', $this->appRootFolder, $configAccount);
     $configAccount = str_replace('{{ appUrl }}', $this->appRootUrl, $configAccount);
-    $configAccount = str_replace('{{ rewriteBase }}', $this->uid, $configAccount);
     $configAccount = str_replace('{{ dbHost }}', $this->app->config['db_host'], $configAccount);
     $configAccount = str_replace('{{ dbUser }}', $this->dbUser, $configAccount);
     $configAccount = str_replace('{{ dbPassword }}', $this->dbPassword, $configAccount);
     $configAccount = str_replace('{{ dbName }}', $this->dbName, $configAccount);
+    $configAccount = str_replace('{{ rewriteBase }}', $this->accountRootRewriteBase . $this->uid . '/', $configAccount);
     $configAccount = str_replace('{{ accountDir }}', $this->accountRootFolder . '/' . $this->uid, $configAccount);
     $configAccount = str_replace('{{ accountUrl }}', $this->accountRootUrl . '/' . $this->uid, $configAccount);
 

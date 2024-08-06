@@ -9,7 +9,7 @@ $config['tmpDir'] = __DIR__ . '/tmp';
 $config['uploadDir'] = __DIR__ . '/upload';
 
 // urls
-$config['rewriteBase'] = "/ceremonycrm/app/";
+$config['rewriteBase'] = "{{ rewriteBase }}";
 $config['url'] = '{{ appUrl }}';
 $config['accountUrl'] = '{{ accountUrl }}';
 $config['uploadUrl'] = '{{ accountUrl }}/upload';

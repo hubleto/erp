@@ -7,6 +7,7 @@ Installation steps:
   *  cd **ROOT/ceremonycrm/app**
       - `npm i`
       - `composer install`
+      - `npm run build`
   *  vytvor si adresar **ROOT/ceremonycrm/www** a rozbal si do neho prilozeny zip
   *  vytvor si adresar **ROOT/ceremonycrm/www/log**
   *  uprav si DB connection v **ROOT/ceremonycrm/www/config.php**

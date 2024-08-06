@@ -9,7 +9,7 @@ $config['sessionSalt'] = 'CeremonyCrmApp';
 $config['widgets'] = [];
 
 // misc
-$config['defaultController'] = 'CeremonyCrmApp/Controllers/App/Dashboard';
+// $config['defaultController'] = 'CeremonyCrmApp/Controllers/App/Dashboard';
 
 $config['coreClasses'] = [
   'Core\\Permissions' => \CeremonyCrmApp\Core\Permissions::class,

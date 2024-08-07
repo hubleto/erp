@@ -15,6 +15,8 @@ import InputColor from "@adios/Inputs/Color";
 // Primereact
 import { Tooltip } from "@primereact/tooltip"
 
+// Modules
+import FormUser from "./Modules/Core/Settings/FormUser"
 
 
 //@ts-ignore
@@ -36,9 +38,8 @@ app.registerReactComponent('InputColor', InputColor);
 // Primereact
 app.registerReactComponent('Tooltip', Tooltip);
 
-
-// Custom project components
-// ...
+// Modules
+app.registerReactComponent('FormUser', FormUser);
 
 // Render react elements into body
 app.renderReactElements();

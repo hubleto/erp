@@ -32,11 +32,11 @@
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/app/assets/css/fontawesome-5.13.0.css">
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/app/assets/compiled/css/app.css">
 
-  {# <script>
+  <script>
     ADIOS.onAppLoaded(() => {
-      globalThis.app.language = 'sk';
+      globalThis.app.language = '{{ user.language ?? "en" }}';
     });
-  </script> #}
+  </script>
 
 </head>
 
@@ -67,10 +67,13 @@
       <div class="hidden w-full md:block md:w-auto" id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
           <li>
-            <a class="btn btn-transparent" href="#">
+            <button
+              class="btn btn-transparent"
+              onclick="globalThis.app.reactElements['user-profile-modal'].setState({isOpen: true});"
+            >
               <span class="icon"><i class='fas fa-user-tie'></i></span>
-              <span class="text">{{ user.login }}</span>
-            </a>
+              <span class="text">{{ user.first_name ?: user.email }}</span>
+            </button>
           </li>
           <li>
             <a class="btn btn-transparent" href="{{ config.accountUrl }}/?sign-out">
@@ -92,7 +95,7 @@
               href="{{ config.accountUrl }}/{{ item.url }}" data-pr-tooltip="{{ item.title }}"
             >
               <span class="icon"><i class="{{ item.icon }}"></i></span>
-              <app-tooltip target="#sidebar-item-level1-{{ i }}"></app-tooltip>
+              <app-tooltip string:target="#sidebar-item-level1-{{ i }}"></app-tooltip>
             </a>
           {% elseif item.type == 'divider' %}
             <div class="divider"></div>
@@ -122,6 +125,23 @@
         </div>
       {% endif %}
     </aside>
+
+    <app-modal
+      string:uid="user-profile-modal"
+      bool:is-open="true"
+      string:type="centered"
+    >
+      <app-form-user
+        int:id="{{ user.id }}"
+        bool:show-in-modal="true"
+        bool:show-in-modal-simple="true"
+        bool:is-inline-editing="true"
+        function:on-close="
+          let modal = globalThis.app.reactElements['user-profile-modal'];
+          modal.setState({isOpen: false});
+        "
+      ></app-form-user>
+    </app-modal>
 
     <div
       id="app-main-content"

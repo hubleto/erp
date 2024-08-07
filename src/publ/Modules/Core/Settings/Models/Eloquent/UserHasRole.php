@@ -5,7 +5,8 @@ namespace CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserHasRole extends \ADIOS\Core\Model\Eloquent {
+class UserHasRole extends \ADIOS\Core\Model\Eloquent
+{
   public $table = 'user_has_roles';
 
   // public function REPORT(): BelongsTo

@@ -2,7 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
-class Setting extends \ADIOS\Core\Model {
+class Setting extends \CeremonyCrmApp\Core\Model
+{
   public string $fullTableSqlName = 'settings';
   public string $table = 'settings';
   public string $eloquentClass = Eloquent\Setting::class;
@@ -25,7 +26,8 @@ class Setting extends \ADIOS\Core\Model {
     ]);
   }
 
-  public function indexes(array $indexes = []) {
+  public function indexes(array $indexes = [])
+  {
     return parent::indexes([
       "key" => [
         "type" => "unique",
@@ -38,7 +40,8 @@ class Setting extends \ADIOS\Core\Model {
     ]);
   }
 
-  public function tableParams(array $params = []): array {
+  public function tableParams(array $params = []): array
+  {
     $params = parent::tableParams();
     $params['title'] = 'Settings';
     return $params;

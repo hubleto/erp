@@ -11,7 +11,10 @@ $mUser = new \CeremonyCrmApp\Modules\Core\Settings\Models\User($app);
 $mUserRole = new \CeremonyCrmApp\Modules\Core\Settings\Models\UserRole($app);
 $mUserHasRole = new \CeremonyCrmApp\Modules\Core\Settings\Models\UserHasRole($app);
 
-$origUser1 = $mUser->eloquent->find(1)->toArray();
+$origProfile1 = $mProfile->eloquent->find(1)?->toArray();
+$companyName = $origProfile1['company'] ?? '';
+
+$origUser1 = $mUser->eloquent->find(1)?->toArray();
 $adminEmail = $origUser1['email'] ?? 'user@example.com';
 $adminPassword = 'abcd';
 
@@ -22,7 +25,7 @@ $mUser->install();
 $mUserRole->install();
 $mUserHasRole->install();
 
-$idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
+$idProfile = $mProfile->eloquent->create(['company' => $companyName])->id;
 
 $idUserAdministrator = $mUser->eloquent->create([
   'login' => $adminEmail,
@@ -32,7 +35,7 @@ $idUserAdministrator = $mUser->eloquent->create([
   'id_active_profile' => $idProfile,
 ])->id;
 
-$idRoleAdministrator = $mUserRole->eloquent->create(['name' => 'Administrator'])->id;
+$idRoleAdministrator = $mUserRole->eloquent->create(['role' => 'Administrator'])->id;
 
 $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
 

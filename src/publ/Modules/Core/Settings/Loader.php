@@ -2,8 +2,11 @@
 
 namespace CeremonyCrmApp\Modules\Core\Settings;
 
-class Loader extends \CeremonyCrmApp\Core\Module {
-  public function __construct(\CeremonyCrmApp $app) {
+class Loader extends \CeremonyCrmApp\Core\Module
+{
+
+  public function __construct(\CeremonyCrmApp $app)
+  {
     parent::__construct($app);
 
     $this->registerModel(\CeremonyCrmApp\Modules\Core\Settings\Models\User::class);
@@ -12,7 +15,8 @@ class Loader extends \CeremonyCrmApp\Core\Module {
     $this->registerModel(\CeremonyCrmApp\Modules\Core\Settings\Models\Setting::class);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router) {
+  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  {
     $router->addRoutingGroup(
       'settings',
       'CeremonyCrmApp/Modules/Core/Settings/Controllers',
@@ -27,7 +31,8 @@ class Loader extends \CeremonyCrmApp\Core\Module {
     );
   }
 
-  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar) {
+  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
+  {
     $sidebar->addLink(1, 99100, 'settings', $this->app->translate('Settings'), 'fas fa-cog');
 
     if (str_starts_with($this->app->requestedUri, 'settings')) {
@@ -38,7 +43,8 @@ class Loader extends \CeremonyCrmApp\Core\Module {
     }
   }
 
-  public function generateTestData() {
+  public function generateTestData()
+  {
     $mSetting = new Models\Setting($this->app);
     $mSetting->install();
     $mSetting->eloquent->create(['key' => 'test/setting/example', 'value' => rand(1000, 9999)]);

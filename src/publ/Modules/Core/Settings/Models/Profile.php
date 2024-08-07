@@ -2,7 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
-class Profile extends \ADIOS\Core\Model {
+class Profile extends \CeremonyCrmApp\Core\Model
+{
   public string $fullTableSqlName = 'profiles';
   public string $table = 'profiles';
   public string $eloquentClass = Eloquent\Setting::class;
@@ -20,7 +21,8 @@ class Profile extends \ADIOS\Core\Model {
     ]);
   }
 
-  public function tableParams(array $params = []): array {
+  public function tableParams(array $params = []): array
+  {
     $params = parent::tableParams();
     $params['title'] = 'Profiles';
     return $params;

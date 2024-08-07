@@ -6,7 +6,9 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use \Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class User extends \ADIOS\Core\Model\Eloquent {
+class User extends \ADIOS\Core\Model\Eloquent
+{
+
   /**
    * @var string
    */

@@ -2,7 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
-class UserRole extends \ADIOS\Core\Model {
+class UserRole extends \CeremonyCrmApp\Core\Model
+{
   const ROLE_ADMINISTRATOR = 1;
 
   const USER_ROLES = [

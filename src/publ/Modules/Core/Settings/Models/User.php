@@ -2,7 +2,13 @@
 
 namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
-class User extends \ADIOS\Models\User {
+class User extends \ADIOS\Models\User
+{
+  const ENUM_LANGUAGES = [
+    'en' => 'English',
+    'sk' => 'Slovensky',
+  ];
+
   public string $fullTableSqlName = 'users';
   public string $table = 'users';
   public string $eloquentClass = Eloquent\User::class;
@@ -10,9 +16,30 @@ class User extends \ADIOS\Models\User {
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
+      'first_name' => [
+        'type' => 'varchar',
+        'title' => $this->translate('First name'),
+        'show' => true,
+      ],
+      'middle_name' => [
+        'type' => 'varchar',
+        'title' => $this->translate('Middle name'),
+        'show' => true,
+      ],
+      'last_name' => [
+        'type' => 'varchar',
+        'title' => $this->translate('Last name'),
+        'show' => true,
+      ],
       'email' => [
         'type' => 'varchar',
         'title' => $this->translate('Email'),
+        'show' => true,
+      ],
+      'language' => [
+        'type' => 'varchar',
+        'title' => $this->translate('Language'),
+        'enumValues' => self::ENUM_LANGUAGES,
         'show' => true,
       ],
       'id_active_profile' => [
@@ -25,7 +52,15 @@ class User extends \ADIOS\Models\User {
   }
 
 
-  public function getQueryForUser(int $idUser) {
+  public function prepareLoadRecordQuery(bool $addLookups = false): \Illuminate\Database\Eloquent\Builder {
+    return parent::prepareLoadRecordQuery($addLookups)
+      ->select('login', 'email', 'first_name', 'middle_name', 'last_name', 'is_active', 'language')
+      ->with('ROLES')
+    ;
+  }
+
+  public function getQueryForUser(int $idUser)
+  {
     return $this->eloquent
       ->with('ROLES')
       ->with('PROFILE')
@@ -34,8 +69,8 @@ class User extends \ADIOS\Models\User {
     ;
   }
 
-
-  public function loadUser(int $idUser) {
+  public function loadUser(int $idUser)
+  {
     $user = $this->getQueryForUser($idUser)->first()?->toArray();
 
     $tmpRoles = [];
@@ -47,7 +82,8 @@ class User extends \ADIOS\Models\User {
     return $user;
   }
 
-  public function tableParams(array $params = []): array {
+  public function tableParams(array $params = []): array
+  {
     $params = parent::tableParams();
     $params['title'] = 'Users';
     return $params;

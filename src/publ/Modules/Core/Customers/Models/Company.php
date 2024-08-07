@@ -2,7 +2,7 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
-class Company extends \ADIOS\Core\Model
+class Company extends \CeremonyCrmApp\Core\Model
 {
   public string $fullTableSqlName = 'companies';
   public string $table = 'companies';
@@ -19,7 +19,8 @@ class Company extends \ADIOS\Core\Model
     ]));
   }
 
-  public function tableParams(array $params = []): array {
+  public function tableParams(array $params = []): array
+  {
     $params = parent::tableParams();
     $params['title'] = 'Companies';
     return $params;

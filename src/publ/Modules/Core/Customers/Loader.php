@@ -2,14 +2,18 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers;
 
-class Loader extends \CeremonyCrmApp\Core\Module {
-  public function __construct(\CeremonyCrmApp $app) {
+class Loader extends \CeremonyCrmApp\Core\Module
+{
+
+  public function __construct(\CeremonyCrmApp $app)
+  {
     parent::__construct($app);
 
     $this->registerModel(Models\Company::class);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router) {
+  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  {
     $router->addRoutingGroup(
       'customers',
       'CeremonyCrmApp/Modules/Core/Customers/Controllers',
@@ -24,7 +28,8 @@ class Loader extends \CeremonyCrmApp\Core\Module {
 
   }
 
-  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar) {
+  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
+  {
     $sidebar->addLink(1, 10100, 'customers', $this->app->translate('Customers'), 'fas fa-user');
 
     if (str_starts_with($this->app->requestedUri, 'customers')) {
@@ -34,7 +39,8 @@ class Loader extends \CeremonyCrmApp\Core\Module {
     }
   }
 
-  public function generateTestData() {
+  public function generateTestData()
+  {
     $mCompany = new Models\Company($this->app);
     $mCompany->install();
     $idCompany = $mCompany->eloquent->create(['name' => 'Test Company Ltd.'])->id;

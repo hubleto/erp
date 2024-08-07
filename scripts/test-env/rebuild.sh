@@ -11,6 +11,5 @@ npm --prefix ~/ceremonycrm.com/sub/test-libs/ADIOS install ~/ceremonycrm.com/sub
 npm i
 npm run build
 
-if [ ! -d ~/ceremonycrm.com/sub/test-app/app/bin ]; then
-  ln -sf ~/ceremonycrm.com/sub/test-app/src/publ ~/ceremonycrm.com/sub/test-app/app/bin
-fi
+rm -r ~/ceremonycrm.com/sub/test-app/app/bin
+cp -r ~/ceremonycrm.com/sub/test-app/src/publ ~/ceremonycrm.com/sub/test-app/app/bin

@@ -5,7 +5,12 @@ namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 class User extends \ADIOS\Models\User
 {
   const ENUM_LANGUAGES = [
+    'cz' => 'Česky',
+    'de' => 'Deutsch',
     'en' => 'English',
+    'es' => 'Español',
+    'fr' => 'Francaise',
+    'pl' => 'Polski',
     'sk' => 'Slovensky',
   ];
 

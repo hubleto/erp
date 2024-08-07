@@ -1,0 +1,14 @@
+{
+    "CeremonyCrmApp": {
+        "Home": "Úvod",
+        "Settings": "Nastavenia",
+        "Customers": "Zákazníci",
+        "Support": "Podpora"
+    },
+    "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
+        "Welcome": "Vitajte"
+    },
+    "CeremonyCrmApp:Modules:Core:Settings:Models:User": {
+        "Last access IP": ""
+    }
+}

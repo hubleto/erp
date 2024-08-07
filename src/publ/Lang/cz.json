@@ -1,0 +1,11 @@
+{
+    "CeremonyCrmApp": {
+        "Home": "Úvod",
+        "Settings": "Nastavení",
+        "Customers": "Zákazníci",
+        "Support": "Podpora"
+    },
+    "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
+        "Welcome": "Vítejte"
+    }
+}

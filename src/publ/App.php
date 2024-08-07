@@ -25,6 +25,8 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader {
   public function __construct($config = NULL, $mode = NULL) {
     parent::__construct($config, $mode);
 
+    $this->config['language'] = $this->userProfile['language'] ?? 'en';
+
     if ($mode == self::ADIOS_MODE_FULL) {
       $this->twig->addFunction(new \Twig\TwigFunction(
         'number',

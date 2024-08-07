@@ -75,6 +75,12 @@
               <span class="icon"><i class='fas fa-user-tie'></i></span>
               <span class="text">{{ user.first_name ?: user.email }}</span>
             </button>
+            <button
+              class="btn btn-transparent"
+              onclick="globalThis.app.reactElements['user-profile-modal'].setState({isOpen: true});"
+            >
+              <span class="text">{{ user.language ?: 'en' }}</span>
+            </button>
           </li>
           <li>
             <a class="btn btn-transparent" href="{{ config.accountUrl }}/?sign-out">

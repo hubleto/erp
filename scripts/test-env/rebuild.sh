@@ -1,5 +1,7 @@
 #/usr/bin/sh
 
+nvm use stable
+
 composer --no-interaction config --global use-parent-dir true
 # export COMPOSER="composer-test-env.json"
 

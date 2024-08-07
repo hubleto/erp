@@ -1,10 +1,10 @@
 #/usr/bin/sh
 
-composer config --global use-parent-dir true
-export COMPOSER="composer-test-env.json"
+composer --no-interaction config --global use-parent-dir true
+# export COMPOSER="composer-test-env.json"
 
-composer install
-composer update
+composer --no-interaction install
+composer --no-interaction update
 
 npm --prefix /var/www/html/ceremonycrm/libs/ADIOS install /var/www/html/ceremonycrm/libs/ADIOS/
 

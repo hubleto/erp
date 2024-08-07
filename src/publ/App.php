@@ -25,6 +25,18 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader {
   public function __construct($config = NULL, $mode = NULL) {
     parent::__construct($config, $mode);
 
+    if (
+      $this->params['set-language']
+      && !empty(\CeremonyCrmApp\Modules\Core\Settings\Models\User::ENUM_LANGUAGES[$this->params['set-language']])
+    ) {
+      $mUser = new \CeremonyCrmApp\Modules\Core\Settings\Models\User($this);
+      $mUser->eloquent
+        ->where('id', $this->userProfile['id'])
+        ->update(['language' => $this->params['set-language']])
+      ;
+      $this->userProfile['language'] = $this->params['set-language'];
+    }
+
     $this->config['language'] = $this->userProfile['language'] ?? 'en';
 
     if ($mode == self::ADIOS_MODE_FULL) {
@@ -41,7 +53,8 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader {
 
     $this->sidebar = new \CeremonyCrmApp\Core\Sidebar($this);
 
-    array_walk($this->getRegisteredModules(), function($moduleClass) {
+    $registeredModules = $this->getRegisteredModules();
+    array_walk($registeredModules, function($moduleClass) {
       $module = new $moduleClass($this);
       $module->addRouting($this->router);
     });

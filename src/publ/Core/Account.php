@@ -23,6 +23,8 @@ class Account {
   public string $dbPassword = '';
   public string $adminPassword = '';
 
+  public bool $randomize = false;
+
   public function __construct(
     \CeremonyCrmApp $app,
     string $companyName,
@@ -32,7 +34,9 @@ class Account {
     string $accountRootUrl,
     string $appRootFolder,
     string $appRootUrl,
-  ) {
+    bool $randomize = false
+  )
+  {
     $this->app = $app;
     $this->companyName = $companyName;
     $this->adminEmail = $adminEmail;
@@ -42,8 +46,10 @@ class Account {
     $this->appRootFolder = $appRootFolder;
     $this->appRootUrl = $appRootUrl;
 
+    $this->randomize = $randomize;
+
     $this->uid = \ADIOS\Core\Helper::str2url($this->companyName);
-    $this->uid = $this->uid . '-' . rand(100, 999);
+    $this->uid = $this->uid . ($this->randomize ? '-' . rand(100, 999) : '');
 
     $this->dbHost = $this->app->config['db_host'];
     $this->dbName = 'account_' . str_replace('-', '_', $this->uid);
@@ -56,7 +62,8 @@ class Account {
 
   }
 
-  public function validate() {
+  public function validate()
+  {
     if (!filter_var($this->adminEmail, FILTER_VALIDATE_EMAIL)) {
       throw new Exception('Invalid admin email.');
     }
@@ -65,13 +72,13 @@ class Account {
       is_file($this->accountRootFolder . '/' . $this->uid)
       || is_dir($this->accountRootFolder . '/' . $this->uid)
     ) {
-      throw new Exception('Account folder already exists');
+      throw new \CeremonyCrmApp\Exceptions\AccountAlreadyExists('Account folder already exists');
     }
   }
 
-  public function createDatabase() {
+  public function createDatabase()
+  {
 
-    $this->app->initDatabaseConnections();
     $this->app->pdo->execute("create database {$this->dbName} character set utf8 collate utf8_general_ci");
     $this->app->pdo->execute("create user {$this->dbUser} identified by '{$this->dbPassword}'");
     $this->app->pdo->execute("grant all on {$this->dbName}.* to {$this->dbUser}@{$this->dbHost} identified by '{$this->dbPassword}'");
@@ -119,7 +126,8 @@ class Account {
 
   }
 
-  public function createFoldersAndFiles() {
+  public function createFoldersAndFiles()
+  {
     // folders
     @mkdir($this->accountRootFolder . '/' . $this->uid);
     @mkdir($this->accountRootFolder . '/' . $this->uid . '/log');
@@ -158,14 +166,17 @@ class Account {
     );
   }
 
-  public function generateTestData() {
-    array_walk($this->app->getRegisteredModules(), function($moduleClass) {
+  public function generateTestData()
+  {
+    $registeredModules = $this->app->getRegisteredModules();
+    array_walk($registeredModules, function($moduleClass) {
       $module = new $moduleClass($this->app);
       $module->generateTestData();
     });
   }
 
-  public function createDevelScripts() {
+  public function createDevelScripts()
+  {
     @mkdir($this->accountRootFolder . '/' . $this->uid . '/devel');
 
     $tplFolder = $this->app->config['dir'] . '/account_templates';
@@ -177,7 +188,10 @@ class Account {
   public function getDatabaseUser(): string {
     $dbUser = \ADIOS\Core\Helper::str2url($this->companyName);
     $dbUser = str_replace('-', '_', $dbUser);
-    $dbUser = 'usr_' . $dbUser . '_' . substr(md5(date('YmdHis').rand(1, 10000)), 1, 5);
+    $dbUser = 
+      'usr_' . $dbUser
+      . ($this->randomize ? '_' . substr(md5(date('YmdHis').rand(1, 10000)), 1, 5) : '')
+    ;
 
     return $dbUser;
   }

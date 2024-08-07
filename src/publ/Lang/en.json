@@ -1,17 +1,16 @@
 {
     "CeremonyCrmApp": {
-        "Home": "Úvod",
-        "Settings": "Nastavenia",
-        "Customers": "Zákazníci",
-        "Support": "Podpora",
+        "Home": "",
+        "Settings": "",
+        "Customers": "",
+        "Support": "",
         "Companies": "",
         "Persons": ""
     },
     "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
-        "Welcome": "Vitajte"
+        "Welcome": ""
     },
     "CeremonyCrmApp:Modules:Core:Settings:Models:User": {
-        "Last access IP": "",
         "First name": "",
         "Middle name": "",
         "Last name": "",
@@ -23,6 +22,7 @@
         "Active": "",
         "Time of last login": "",
         "Last login IP": "",
-        "Time of last access": ""
+        "Time of last access": "",
+        "Last access IP": ""
     }
 }

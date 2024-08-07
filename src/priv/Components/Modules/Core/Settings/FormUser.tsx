@@ -56,12 +56,41 @@ export default class FormUser<P, S> extends Form<FormUserProps, FormUserState> {
   }
 
   renderContent(): JSX.Element {
+    const languages = {
+      'cz': 'Česky',
+      'de': 'Deutsch',
+      'en': 'English',
+      'es': 'Español',
+      'fr': 'Francais',
+      'pl': 'Polski',
+      'sk': 'Slovensky',
+    };
     return <>
-      {this.inputWrapper('first_name')}
-      {this.inputWrapper('middle_name')}
-      {this.inputWrapper('last_name')}
-      {this.inputWrapper('email')}
-      {this.inputWrapper('language')}
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '100%',
+      }}>
+        <div>
+          {this.inputWrapper('first_name')}
+          {this.inputWrapper('middle_name')}
+          {this.inputWrapper('last_name')}
+          {this.inputWrapper('email')}
+        </div>
+        <div className="p-2">
+          {Object.keys(languages).map((symbol) => {
+            const lang = languages[symbol];
+
+            return <>
+              <a
+                href={"?set-language=" + symbol}
+                className={"btn btn-" + (symbol == this.state.data?.language ? "primary" : "transparent") + " mr-2"}
+              ><span className="text">{lang}</span></a>
+            </>;
+          })}
+        </div>
+      </div>
     </>;
   }
 }

@@ -3,9 +3,26 @@
         "Home": "Úvod",
         "Settings": "Nastavení",
         "Customers": "Zákazníci",
-        "Support": "Podpora"
+        "Support": "Podpora",
+        "Companies": "",
+        "Persons": ""
     },
     "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
         "Welcome": "Vítejte"
+    },
+    "CeremonyCrmApp:Modules:Core:Settings:Models:User": {
+        "First name": "",
+        "Middle name": "",
+        "Last name": "",
+        "Email": "",
+        "Language": "",
+        "Active profile": "",
+        "Login": "",
+        "Password": "",
+        "Active": "",
+        "Time of last login": "",
+        "Last login IP": "",
+        "Time of last access": "",
+        "Last access IP": ""
     }
 }

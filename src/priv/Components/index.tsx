@@ -3,7 +3,7 @@ import { dictionarySk } from "@adios/Dictionary/Sk";
 
 // ADIOS
 import Table from "@adios/Table";
-import Modal from "@adios/Modal";
+import Modal from "@adios/ModalSimple";
 
 import InputVarchar from "@adios/Inputs/Varchar";
 import InputInt from "@adios/Inputs/Int";

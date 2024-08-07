@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Modules\Core\Dashboard;
+namespace CeremonyCrmApp\Modules\Core\Support;
 
 class Loader extends \CeremonyCrmApp\Core\Module
 {
@@ -13,15 +13,16 @@ class Loader extends \CeremonyCrmApp\Core\Module
   public function addRouting(\CeremonyCrmApp\Core\Router $router)
   {
     $router->addRouting([
-      '/^$/' => [
-        'controller' => 'CeremonyCrmApp/Modules/Core/Dashboard/Controllers/Home',
-        'view' => 'CeremonyCrmApp/Modules/Core/Dashboard/Views/Home',
+      '/^support$/' => [
+        'controller' => 'CeremonyCrmApp/Modules/Core/Support/Controllers/Dashboard',
+        'view' => 'CeremonyCrmApp/Modules/Core/Support/Views/Dashboard',
       ]
     ]);
   }
 
-
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
   {
-    $sidebar->addLink(1, 0, '', $this->app->translate('Home'), 'fas fa-home');
-  }}
+    $sidebar->addLink(1, 98100, 'support', $this->app->translate('Support'), 'fas fa-question');
+  }
+
+}

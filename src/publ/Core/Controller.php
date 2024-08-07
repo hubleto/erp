@@ -4,7 +4,8 @@ namespace CeremonyCrmApp\Core;
 
 use \ADIOS\Core\Helper;
 
-class Controller extends \ADIOS\Core\Controller {
+class Controller extends \ADIOS\Core\Controller
+{
 
   /**
     * Executed after the init() phase.
@@ -12,7 +13,8 @@ class Controller extends \ADIOS\Core\Controller {
     *
     * return bool True if inputs are valid, otherwise false.
     */
-  public function validateInputs(): bool {
+  public function validateInputs(): bool
+  {
     $valid = TRUE;
 
     return $valid;
@@ -24,7 +26,8 @@ class Controller extends \ADIOS\Core\Controller {
    *
    * @throws Exception Should throw an exception on error.
    */
-  public function init() {
+  public function init()
+  {
     // Put your controller's initialization code here. See example below.
     // Throw an exception on error.
 
@@ -38,13 +41,23 @@ class Controller extends \ADIOS\Core\Controller {
    *
    * @return array Parameters used to render TWIG template.
    */
-  public function prepareViewParams() {
+  public function prepareViewParams()
+  {
     parent::prepareViewParams();
+
+    $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
 
     $this->viewParams['sidebar'] = [
       'level1Items' => $this->app->getSidebar()->getItems(1),
       'level2Items' => $this->app->getSidebar()->getItems(2),
     ];
+  }
+
+  public function getBreadcrumbs(): array
+  {
+    return [];
+    //   [ 'url' => '', 'content' => '<i class="fas fa-home"></i>' ]
+    // ];
   }
 
 }

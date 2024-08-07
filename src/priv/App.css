@@ -123,7 +123,7 @@
   .btn-group { @apply flex divide-x rounded border border-gray-100; }
   .btn-group .btn { @apply border-none rounded-none shadow-none; }
 
-  .breadcrumbs { @apply flex border-b border-gray-300 pb-2; }
+  /* .breadcrumbs { @apply flex border-b border-gray-300 pb-2; } */
 
   .card { @apply border border-solid rounded shadow-lg mb-4; }
   .card-header { @apply flex justify-between font-bold border-b p-4 bg-gray-50; }

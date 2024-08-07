@@ -150,6 +150,12 @@ class Account {
       $this->app->config['dir'] . '/account_templates/index.php',
       $this->accountRootFolder . '/' . $this->uid . '/index.php'
     );
+
+    // .htaccess
+    copy(
+      $this->app->config['dir'] . '/account_templates/.htaccess',
+      $this->accountRootFolder . '/' . $this->uid . '/.htaccess'
+    );
   }
 
   public function generateTestData() {

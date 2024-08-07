@@ -46,8 +46,8 @@ class Account {
     $this->uid = $this->uid . '-' . rand(100, 999);
 
     $this->dbHost = $this->app->config['db_host'];
-    $this->dbName = 'crm_' . str_replace('-', '_', $this->uid);
-    $this->dbUser = 'usr_' . str_replace('-', '_', $this->uid);
+    $this->dbName = 'ceremonycrm_' . str_replace('-', '_', $this->uid);
+    $this->dbUser = 'ceremonycrm_usr_' . str_replace('-', '_', $this->uid);
     $this->dbPassword = \ADIOS\Core\Helper::randomPassword();
 
     $this->adminPassword = \ADIOS\Core\Helper::randomPassword();

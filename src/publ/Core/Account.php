@@ -64,8 +64,12 @@ class Account {
 
   public function validate()
   {
+    if (strlen($this->uid) > 32) {
+      throw new \CeremonyCrmApp\Exceptions\AccountValidationFailed('Account name is too long.');
+    }
+
     if (!filter_var($this->adminEmail, FILTER_VALIDATE_EMAIL)) {
-      throw new Exception('Invalid admin email.');
+      throw new \CeremonyCrmApp\Exceptions\AccountValidationFailed('Invalid admin email.');
     }
 
     if (

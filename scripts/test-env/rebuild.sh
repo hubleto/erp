@@ -1,12 +1,9 @@
 #/usr/bin/sh
 
 composer --no-interaction config --global use-parent-dir true
-# export COMPOSER="composer-test-env.json"
 
 composer --no-interaction install
 composer --no-interaction update
-
-nvm use stable
 
 npm -v
 

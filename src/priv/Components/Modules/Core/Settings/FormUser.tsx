@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { deepObjectMerge } from "@adios/Helper";
-import Form, { FormProps, FormState } from '@adios/Form';
+import { deepObjectMerge } from "adios/Helper";
+import Form, { FormProps, FormState } from 'adios/Form';
 
 interface FormUserProps extends FormProps {
 }

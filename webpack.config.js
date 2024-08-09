@@ -28,11 +28,7 @@ module.exports = (env, arg) => {
       ],
     },
     resolve: {
-      alias: {
-        "@adios": path.resolve(__dirname, "./vendor/wai-blue/adios/src/Components"),
-        "@primereact": path.resolve(__dirname, "./vendor/wai-blue/adios/node_modules/primereact"),
-        "@frappe-gantt-react": path.resolve(__dirname, "./vendor/wai-blue/adios/node_modules/frappe-gantt-react"),
-      },
+      modules: [ path.resolve(__dirname, './node_modules') ],
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.css'],
     }
   }

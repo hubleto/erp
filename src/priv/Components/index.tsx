@@ -1,19 +1,20 @@
-import { ADIOS } from "@adios/Loader"
-import { dictionarySk } from "@adios/Dictionary/Sk";
+import { ADIOS } from "adios/Loader"
+import { dictionarySk } from "adios/Dictionary/Sk";
 
 // ADIOS
-import Table from "@adios/Table";
-import Modal from "@adios/ModalSimple";
+import Table from "adios/Table";
+import Modal from "adios/ModalSimple";
 
-import InputVarchar from "@adios/Inputs/Varchar";
-import InputInt from "@adios/Inputs/Int";
-import InputLookup from "@adios/Inputs/Lookup";
-import InputImage from "@adios/Inputs/Image";
-import InputBoolean from "@adios/Inputs/Boolean";
-import InputColor from "@adios/Inputs/Color";
+import InputVarchar from "adios/Inputs/Varchar";
+import InputInt from "adios/Inputs/Int";
+import InputLookup from "adios/Inputs/Lookup";
+import InputImage from "adios/Inputs/Image";
+import InputBoolean from "adios/Inputs/Boolean";
+import InputColor from "adios/Inputs/Color";
+import InputMapPoint from "adios/Inputs/MapPoint";
 
 // Primereact
-import { Tooltip } from "@primereact/tooltip"
+import { Tooltip } from "primereact/tooltip"
 
 // Modules
 import FormUser from "./Modules/Core/Settings/FormUser"
@@ -34,6 +35,7 @@ app.registerReactComponent('InputLookup', InputLookup);
 app.registerReactComponent('InputBoolean', InputBoolean);
 app.registerReactComponent('InputImage', InputImage);
 app.registerReactComponent('InputColor', InputColor);
+app.registerReactComponent('InputMapPoint', InputMapPoint);
 
 // Primereact
 app.registerReactComponent('Tooltip', Tooltip);

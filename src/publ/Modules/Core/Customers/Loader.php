@@ -23,6 +23,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '' => 'Dashboard',
         '/companies' => 'Companies',
         '/persons' => 'Persons',
+        // '/persons-contact' => 'PersonsTable',
       ]
     );
 
@@ -47,10 +48,28 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     $mPerson = new Models\Person($this->app);
     $mPerson->install();
-    $mPerson->eloquent->create([
+    $idPerson = $mPerson->eloquent->create([
       'first_name' => 'John',
       'last_name' => 'Smith',
       'id_company' => $idCompany,
+    ])->id;
+
+    $mPersonContact = new Models\PersonContact($this->app);
+    $mPersonContact->install();
+    $mPersonContact->eloquent->create([
+      'value' => '+4216489616',
+      'type' => 'number',
+      'id_person' => $idPerson,
+    ]);
+
+    $mPersonAddress = new Models\PersonAddress($this->app);
+    $mPersonAddress->install();
+    $mPersonAddress->eloquent->create([
+      'street' => 'Street 123',
+      'city' => 'Pieštany',
+      'postal_code' => '919 87',
+      'country' => 'Slovakia',
+      'id_person' => $idPerson,
     ]);
   }
 }

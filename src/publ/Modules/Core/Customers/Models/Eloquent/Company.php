@@ -9,9 +9,8 @@ class Company extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'companies';
 
-  // public function REPORT(): BelongsTo
-  // {
-  //   return $this->belongsTo(\EMonitorApp\Models\Eloquent\Report::class, 'id_report', 'id')->orderBy('name', 'asc');
-  // }
+  public function PERSONS(): HasMany {
+    return $this->hasMany(Person::class, 'id_company');
+  }
 
 }

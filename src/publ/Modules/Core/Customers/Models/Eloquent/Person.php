@@ -11,7 +11,14 @@ class Person extends \ADIOS\Core\Model\Eloquent
 
   public function id_company(): BelongsTo
   {
-    return $this->belongsTo(Company::class, 'id_company', 'id')->orderBy('name', 'asc');
+    return $this->belongsTo(Company::class, 'id_company', 'id');
   }
-
+  public function CONTACTS(): HasMany
+  {
+    return $this->hasMany(PersonContact::class, 'id_person');
+  }
+  public function ADDRESSES(): HasMany
+  {
+    return $this->hasMany(PersonAddress::class, 'id_person');
+  }
 }

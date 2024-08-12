@@ -46,7 +46,7 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
   }
 
   renderContent(): JSX.Element {
-    const R = {...this.state.record};
+    const R = this.state.record;
 
     return <>
 
@@ -78,7 +78,7 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
 
       <div className="card mt-4">
         <div className="card-header">
-          Other contacts
+          Other contacts - InputTable
           {this.state.isInlineEditing ?
             <button
               className="btn btn-transparent"
@@ -105,7 +105,14 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
               'last_name': {type: 'varchar', title: 'Last name'},
             }}
           ></InputTable>
-          {/* {R.OTHER_PERSONS ? R.OTHER_PERSONS.map((item: any, key: number) => {
+        </div>
+      </div>
+      <div className="card mt-4">
+        <div className="card-header">
+          Other contacts - FormInput with InputVarchar
+        </div>
+        <div className="card-body">
+          {R.OTHER_PERSONS ? R.OTHER_PERSONS.map((item: any, key: number) => {
             return <>
               <FormInput>
                 <div className="flex">
@@ -126,7 +133,22 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
                 </div>
               </FormInput>
             </>;
-          }) : globalThis.app.translate('No other contacts')} */}
+          }) : globalThis.app.translate('No other contacts')}
+        </div>
+      </div>
+      <div className="card mt-4">
+        <div className="card-header">
+          this.state.record
+        </div>
+        <div className="card-body">
+          <pre
+            style={{
+              color: 'blue',
+              width: '100%',
+              fontFamily: 'Courier New',
+              fontSize: '10px',
+            }}
+          >{JSON.stringify(R, null, 2)}</pre>
         </div>
       </div>
     </>;

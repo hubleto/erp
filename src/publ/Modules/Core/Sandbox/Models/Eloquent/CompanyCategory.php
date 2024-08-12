@@ -9,9 +9,14 @@ class CompanyCategory extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'companies_categories';
 
-  // public function REPORT(): BelongsTo
-  // {
-  //   return $this->belongsTo(\EMonitorApp\Models\Eloquent\Report::class, 'id_report', 'id')->orderBy('name', 'asc');
-  // }
+  public function id_company(): BelongsTo
+  {
+    return $this->belongsTo(Company::class, 'id_company', 'id');
+  }
+
+  public function id_category(): BelongsTo
+  {
+    return $this->belongsTo(Category::class, 'id_category', 'id');
+  }
 
 }

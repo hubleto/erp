@@ -40,7 +40,7 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
 
   renderTitle(): JSX.Element {
     return <>
-      <h2>{this.state.record.name}</h2>
+      <h2>{this.state.record.name ?? '[no-name]'}</h2>
       <small>Company</small>
     </>;
   }

@@ -5,7 +5,10 @@
         "Customers": "",
         "Support": "",
         "Companies": "",
-        "Persons": ""
+        "Persons": "",
+        "Users": "",
+        "Profiles": "",
+        "Accounts": ""
     },
     "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
         "Welcome": ""

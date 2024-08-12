@@ -25,6 +25,10 @@ class Person extends \CeremonyCrmApp\Core\Model
         "title" => "Company",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
       ],
+      /* "tags" => [
+        "type" => "tags",
+        "title" => "Tags",
+      ], */
     ]));
   }
 

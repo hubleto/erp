@@ -2,27 +2,25 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Controllers;
 
-use CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent\Person;
 use Illuminate\Database\Eloquent\Builder;
 
 class PersonsTable extends \ADIOS\Controllers\Components\Table {
 
 public function prepareLoadRecordQuery(): Builder
 {
-  //$query = parent::prepareLoadRecordQuery();
+  $query = parent::prepareLoadRecordQuery();
 
-  $mPersons = new Person();
-
-  $query = $mPersons
-    ->with(["CONTACTS" => function ($query) {
-      $query->select("value as virt_contact")->first();
-    }])
-    ->with(["ADRESSES" => function ($query) {
-      $query->select("concat(street, ', ', city) as virt_address")->first();
-    }])
+  $query = $query->selectRaw("
+    (Select value from person_contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,
+    (Select value from person_contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email,
+    (Select concat(street, ', ', city) from person_addresses where id_person = persons.id LIMIT 1) virt_address
+  ")
   ;
 
-  var_dump($query->toSql()); exit;
+   //var_dump($this->params); exit;
+  /* if ($this->params["idAccount"]) {
+    $query = $query->where("join_id_company.id_account");
+  } */
 
   return $query;
 }

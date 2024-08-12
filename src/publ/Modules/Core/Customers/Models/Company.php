@@ -16,6 +16,31 @@ class Company extends \CeremonyCrmApp\Core\Model
         "type" => "varchar",
         "title" => "Name",
       ],
+      "id_account" => [
+        "type" => "lookup",
+        "title" => "Account",
+        "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Account",
+      ],
+      /* "tags" => [
+        "type" => "tags",
+        "title" => "Tags",
+      ], */
+      "street" => [
+        "type" => "varchar",
+        "title" => "Street",
+      ],
+      "city" => [
+        "type" => "varchar",
+        "title" => "City",
+      ],
+      "country" => [
+        "type" => "varchar",
+        "title" => "Country",
+      ],
+      "postal_code" => [
+        "type" => "varchar",
+        "title" => "Postal Code",
+      ],
     ]));
   }
 

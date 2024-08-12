@@ -1,3 +1,8 @@
-<app-table string:model="CeremonyCrmApp/Modules/Core/Customers/Models/Person"></app-table>
-{# <app-table string:endpoint="customers/persons-contact"
-></app-table> #}
+{% if viewParams.idAccount > 0%}
+  <app-table-person
+    string:endpoint="customers/persons-table"
+    number:account="{{viewParams.idAccount}}"
+  ></app-table-person>
+{% else %}
+  <app-table-person string:endpoint="customers/persons-table"></app-table-person>
+{% endif %}

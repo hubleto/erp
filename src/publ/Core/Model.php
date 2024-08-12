@@ -10,7 +10,7 @@ class Model extends \ADIOS\Core\Model {
 
     $origColumns = $this->columns();
     unset($origColumns['id']);
-    
+
     $columns = [];
     foreach ($origColumns as $colName => $colDef) {
       $columns[$this->conversionMap[$colName] ?? $colName] = $colDef;

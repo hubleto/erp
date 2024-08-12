@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Modules\Core\Customers\Models;
+namespace CeremonyCrmApp\Modules\Core\Sandbox\Models;
 
 class Company extends \CeremonyCrmApp\Core\Model
 {
@@ -8,6 +8,12 @@ class Company extends \CeremonyCrmApp\Core\Model
   public string $table = 'companies';
   public string $eloquentClass = Eloquent\Company::class;
   public ?string $lookupSqlValue = "{%TABLE%}.name";
+
+  public array $relations = [
+    'MAIN_PERSON' => [ self::HAS_ONE, Person::class, 'id_company' ],
+    'OTHER_PERSONS' => [ self::HAS_MANY, Person::class, 'id_company' ],
+    'CATEGORIES' => [ self::HAS_MANY, CompanyCategory::class, 'id_company' ],
+  ];
 
   public function columns(array $columns = []): array
   {
@@ -26,7 +32,8 @@ class Company extends \CeremonyCrmApp\Core\Model
     return $params;
   }
 
-  public function getNewRecordDataFromString(string $text): array {
+  public function getNewRecordDataFromString(string $text): array
+  {
     return [
       'name' => $text,
     ];

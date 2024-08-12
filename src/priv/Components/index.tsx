@@ -11,13 +11,14 @@ import InputLookup from "adios/Inputs/Lookup";
 import InputImage from "adios/Inputs/Image";
 import InputBoolean from "adios/Inputs/Boolean";
 import InputColor from "adios/Inputs/Color";
-import InputMapPoint from "adios/Inputs/MapPoint";
 
 // Primereact
 import { Tooltip } from "primereact/tooltip"
 
 // Modules
 import FormUser from "./Modules/Core/Settings/FormUser"
+import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
+import CoreSandboxFormCompany from "./Modules/Core/Sandbox/FormCompany"
 
 
 //@ts-ignore
@@ -35,13 +36,14 @@ app.registerReactComponent('InputLookup', InputLookup);
 app.registerReactComponent('InputBoolean', InputBoolean);
 app.registerReactComponent('InputImage', InputImage);
 app.registerReactComponent('InputColor', InputColor);
-app.registerReactComponent('InputMapPoint', InputMapPoint);
 
 // Primereact
 app.registerReactComponent('Tooltip', Tooltip);
 
 // Modules
 app.registerReactComponent('FormUser', FormUser);
+app.registerReactComponent('CoreSandboxTableCompanies', CoreSandboxTableCompanies);
+app.registerReactComponent('CoreSandboxFormCompany', CoreSandboxFormCompany);
 
 // Render react elements into body
 app.renderReactElements();

@@ -2,4 +2,4 @@
 
 namespace CeremonyCrmApp\Modules\Core\Sandbox\Controllers;
 
-class TestModel1 extends \CeremonyCrmApp\Core\Controller { }
+class Persons extends \CeremonyCrmApp\Core\Controller { }

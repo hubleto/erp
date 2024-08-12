@@ -5,7 +5,11 @@
         "Customers": "",
         "Support": "",
         "Companies": "",
-        "Persons": ""
+        "Persons": "",
+        "`{{ colTitle }}` contains invalid value.": "",
+        "Sandbox": "",
+        "Categories": "",
+        "Companies - Categories": ""
     },
     "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
         "Welcome": ""

@@ -3,7 +3,9 @@ import { deepObjectMerge } from "adios/Helper";
 import Form, { FormProps, FormState } from 'adios/Form';
 import InputVarchar from "adios/Inputs/Varchar";
 import InputTags2 from "adios/Inputs/Tags2";
+import InputTable from "adios/Inputs/Table";
 import FormInput from "adios/FormInput";
+import { Column } from 'primereact/column';
 
 interface FormCompanyProps extends FormProps {
 }
@@ -92,7 +94,18 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
           : null}
         </div>
         <div className="card-body">
-          {R.OTHER_PERSONS ? R.OTHER_PERSONS.map((item: any, key: number) => {
+          <InputTable {...this.getDefaultInputProps()}
+            model='CeremonyCrmApp/Modules/Core/Sandbox/Models/Person'
+            value={R.OTHER_PERSONS}
+            onChange={(value: any) => {
+              this.updateRecord({OTHER_PERSONS: value});
+            }}
+            columns={{
+              'first_name': {type: 'varchar', title: 'First name'},
+              'last_name': {type: 'varchar', title: 'Last name'},
+            }}
+          ></InputTable>
+          {/* {R.OTHER_PERSONS ? R.OTHER_PERSONS.map((item: any, key: number) => {
             return <>
               <FormInput>
                 <div className="flex">
@@ -113,7 +126,7 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
                 </div>
               </FormInput>
             </>;
-          }) : globalThis.app.translate('No other contacts')}
+          }) : globalThis.app.translate('No other contacts')} */}
         </div>
       </div>
     </>;

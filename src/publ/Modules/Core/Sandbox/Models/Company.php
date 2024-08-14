@@ -25,6 +25,12 @@ class Company extends \CeremonyCrmApp\Core\Model
     ]));
   }
 
+  // public function prepareLoadRecordQuery(bool $addLookups = false): \Illuminate\Database\Eloquent\Builder {
+  //   $query = parent::prepareLoadRecordQuery($addLookups);
+  //   $query->with('CATEGORIES.CATEGORY');
+  //   return $query;
+  // }
+
   public function tableParams(array $params = []): array
   {
     $params = parent::tableParams();

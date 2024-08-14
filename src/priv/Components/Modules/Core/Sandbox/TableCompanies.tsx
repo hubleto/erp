@@ -3,9 +3,11 @@ import Table, { TableProps, TableState } from 'adios/Table';
 import FormCompany from "./FormCompany"
 
 interface TableCompaniesProps extends TableProps {
+  categories?: Array<any>,
 }
 
 interface TableCompaniesState extends TableState {
+  categories: Array<any>,
 }
 
 export default class TableCompanies extends Table<TableCompaniesProps, TableCompaniesState> {
@@ -16,8 +18,23 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
   }
 
   props: TableCompaniesProps;
+  state: TableCompaniesState;
+
+  constructor(props: TableCompaniesProps) {
+    super(props);
+    this.state = this.getStateFromProps(props);
+  }
+
+  getStateFromProps(props: TableCompaniesProps) {
+    return {
+      ...super.getStateFromProps(props),
+      categories: props.categories ?? [],
+    }
+  }
 
   renderForm(): JSX.Element {
-    return <FormCompany {...this.getFormParams()}/>;
+    let formParams = this.getFormParams();
+    formParams.categories = this.state.categories;
+    return <FormCompany {...formParams}/>;
   }
 }

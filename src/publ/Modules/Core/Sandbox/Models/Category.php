@@ -16,6 +16,10 @@ class Category extends \CeremonyCrmApp\Core\Model
         "type" => "varchar",
         "title" => "Category",
       ],
+      "color" => [
+        "type" => "color",
+        "title" => "Color",
+      ],
     ]));
   }
 

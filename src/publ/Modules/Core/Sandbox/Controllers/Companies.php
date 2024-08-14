@@ -11,5 +11,13 @@ class Companies extends \CeremonyCrmApp\Core\Controller {
       [ 'url' => '', 'content' => $this->app->translate('Companies') ],
     ]);
   }
+
+  public function prepareViewParams()
+  {
+    parent::prepareViewParams();
+    
+    $mCategory = new \CeremonyCrmApp\Modules\Core\Sandbox\Models\Category($this->app);
+    $this->viewParams['categories'] = \ADIOS\Core\Helper::keyBy('id', $mCategory->eloquent->get()->toArray());
+  }
   
 }

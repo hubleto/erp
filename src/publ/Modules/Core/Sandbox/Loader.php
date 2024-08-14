@@ -51,9 +51,9 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mCategory->install();
     (new Models\CompanyCategory($this->app))->install();
 
-    $mCategory->eloquent->create(['category' => 'Bronze']);
-    $mCategory->eloquent->create(['category' => 'Silver']);
-    $mCategory->eloquent->create(['category' => 'Gold']);
-    $mCategory->eloquent->create(['category' => 'Platinum']);
+    $mCategory->eloquent->create(['category' => 'Bronze', 'color' => '#CE8946']);
+    $mCategory->eloquent->create(['category' => 'Silver', 'color' => '#C0C0C0']);
+    $mCategory->eloquent->create(['category' => 'Gold', 'color' => '#FFD700']);
+    $mCategory->eloquent->create(['category' => 'Platinum', 'color' => '#E5E4E2']);
   }
 }

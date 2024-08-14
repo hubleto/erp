@@ -19,4 +19,9 @@ class CompanyCategory extends \ADIOS\Core\Model\Eloquent
     return $this->belongsTo(Category::class, 'id_category', 'id');
   }
 
+  public function CATEGORY(): BelongsTo
+  {
+    return $this->id_category();
+  }
+
 }

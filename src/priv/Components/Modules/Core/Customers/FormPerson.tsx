@@ -3,8 +3,6 @@ import { deepObjectMerge } from "adios/Helper";
 import Form, { FormProps, FormState } from 'adios/Form';
 
 interface FormPersonProps extends FormProps {
-  idAccounts: number,
-  idReport: number,
 }
 
 interface FormPersonState extends FormState {
@@ -26,8 +24,6 @@ export default class FormPerson<P, S> extends Form<FormPersonProps, FormPersonSt
 
   getEndpointParams(): object {
     let params: object = super.getEndpointParams();
-    params['idZariadenie'] = this.props.idAccounts;
-    params['idReport'] = this.props.idReport;
     return params;
   }
 

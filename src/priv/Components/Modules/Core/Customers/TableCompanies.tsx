@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormPerson from './FormPerson';
+import Form from 'adios/Form';
 
 interface TablePersonProps extends TableProps {
   endpoint: string,
@@ -13,7 +13,7 @@ export default class TablePerson extends Table<TablePersonProps, TablePersonStat
   static defaultProps = {
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
+    model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
   }
 
   props: TablePersonProps;
@@ -38,26 +38,24 @@ export default class TablePerson extends Table<TablePersonProps, TablePersonStat
 
   loadParams(successCallback?: (params: any) => void): void {
     this.setState({
-      addButtonText: 'Add Person',
-      title: "Persons",
+      addButtonText: 'Add Company',
+      title: "Company",
       showHeader: true,
       canCreate: this.props.canCreate ?? true,
       canDelete: this.props.canDelete ?? true,
       canRead: this.props.canRead ?? true,
       canUpdate: this.props.canUpdate ?? true,
       columns: {
-        first_name: { type: 'varchar', title: 'First Name' },
-        last_name: { type: 'varchar', title: 'Last Name'},
-        id_company: { type: 'lookup', title: 'Company', model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company', },
-        virt_address: { type: 'varchar', title: 'Main Address',},
-        virt_email: { type: 'varchar', title: 'Main Email',},
-        virt_number: { type: 'varchar', title: 'Main Phone Number',},
+        name: { type: 'varchar', title: 'Name' },
+        id_account: { type: 'lookup', title: 'Account', model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Account', },
+        street: { type: 'varchar', title: 'Street'},
+        city: { type: 'varchar', title: 'City',},
+        country: { type: 'varchar', title: 'Country',},
+        postal_code: { type: 'varchar', title: 'Postal Code',},
+        tax_id: { type: 'varchar', title: 'Tax ID',},
+        vat_id: { type: 'varchar', title: 'VAT ID',},
+        company_id: { type: 'varchar', title: 'Company ID',},
       },
     });
-  }
-
-  renderForm(): JSX.Element {
-    let formParams = this.getFormParams();
-    return <FormPerson {...formParams}/>;
   }
 }

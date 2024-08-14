@@ -25,12 +25,16 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '' => 'Dashboard',
         '/accounts' => 'Accounts',
         '/companies' => 'Companies',
+        '/companies/table-companies' => 'Company/TableCompanies',
         '/persons' => 'Persons',
-        '/persons-table' => 'PersonsTable',
+        '/persons/table-persons' => 'Person/TablePersons',
+        '/person-addresses' => 'PersonAddresses',
+        '/person-contacts' => 'PersonContacts',
+        '/business-accounts' => 'BusinessAccounts',
       ]
     );
 
-    $regexAccount = '\\/accounts\\/(\d+)';
+    /* $regexAccount = '\\/accounts\\/(\d+)';
     $router->addRoutingGroup(
       'customers' . $regexAccount,
       'CeremonyCrmApp/Modules/Core/Customers/Controllers',
@@ -43,9 +47,9 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/accounts' => 'Accounts',
         '/companies' => 'Companies',
         '/persons' => 'Persons',
-        '/persons-table' => 'PersonsTable',
+        '/persons-table' => 'Person/PersonsTable',
       ]
-    );
+    ); */
 
   }
 
@@ -58,6 +62,9 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 10201, 'customers/accounts', $this->app->translate('Accounts'), 'fas fa-address-card');
       $sidebar->addLink(2, 10202, 'customers/companies', $this->app->translate('Companies'), 'fas fa-warehouse');
       $sidebar->addLink(2, 10203, 'customers/persons', $this->app->translate('Persons'), 'fas fa-users');
+      $sidebar->addLink(2, 10204, 'customers/person-addresses', $this->app->translate('Person Addresses'), 'fas fa-users');
+      $sidebar->addLink(2, 10205, 'customers/person-contacts', $this->app->translate('Persons Contacts'), 'fas fa-users');
+      $sidebar->addLink(2, 10206, 'customers/business-accounts', $this->app->translate('Business Accounts'), 'fas fa-users');
     }
   }
 
@@ -109,6 +116,15 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'postal_code' => '919 87',
       'country' => 'Slovakia',
       'id_person' => $idPerson,
+    ]);
+
+    $mBusinessAccount = new Models\BusinessAccount($this->app);
+    $mBusinessAccount->install();
+    $mBusinessAccount->eloquent->create([
+      'vat_id' => '123456',
+      'company_id' => '987456',
+      'tax_id' => '123987',
+      'id_company' => $idCompany,
     ]);
   }
 }

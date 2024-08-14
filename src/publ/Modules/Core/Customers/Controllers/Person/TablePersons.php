@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmApp\Modules\Core\Customers\Controllers;
+namespace CeremonyCrmApp\Modules\Core\Customers\Controllers\Person;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class PersonsTable extends \ADIOS\Controllers\Components\Table {
+class TablePersons extends \ADIOS\Controllers\Components\Table {
 
 public function prepareLoadRecordQuery(): Builder
 {

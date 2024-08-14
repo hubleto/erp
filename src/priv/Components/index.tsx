@@ -20,6 +20,7 @@ import { Tooltip } from "primereact/tooltip"
 import FormUser from "./Modules/Core/Settings/FormUser"
 import TablePerson from "./Modules/Core/Customers/TablePerson"
 import FormPerson from "./Modules/Core/Customers/FormPerson"
+import TableCompanies from "./Modules/Core/Customers/TableCompanies"
 
 
 //@ts-ignore
@@ -45,7 +46,9 @@ app.registerReactComponent('Tooltip', Tooltip);
 // Modules
 app.registerReactComponent('FormUser', FormUser);
 app.registerReactComponent('TablePerson', TablePerson);
+app.registerReactComponent('TablePerson', TablePerson);
 app.registerReactComponent('FormPerson', FormPerson);
+app.registerReactComponent('TableCompanies', TableCompanies);
 
 // Render react elements into body
 app.renderReactElements();

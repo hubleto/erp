@@ -2,21 +2,21 @@ import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import FormPerson from './FormPerson';
 
-interface TablePersonProps extends TableProps {
+interface TablePersonsProps extends TableProps {
   endpoint: string,
 }
 
-interface TablePersonState extends TableState {
+interface TablePersonsState extends TableState {
 }
 
-export default class TablePerson extends Table<TablePersonProps, TablePersonState> {
+export default class TablePersons extends Table<TablePersonsProps, TablePersonsState> {
   static defaultProps = {
     itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
   }
 
-  props: TablePersonProps;
+  props: TablePersonsProps;
 
   getEndpointUrl(): string {
     return this.props.endpoint;

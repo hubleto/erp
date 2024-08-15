@@ -51,4 +51,10 @@ class Company extends \CeremonyCrmApp\Core\Model
     return $params;
   }
 
+  public function getNewRecordDataFromString(string $text): array {
+    return [
+      'name' => $text,
+    ];
+  }
+
 }

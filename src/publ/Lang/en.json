@@ -8,7 +8,11 @@
         "Persons": "",
         "Users": "",
         "Profiles": "",
-        "Accounts": ""
+        "Accounts": "",
+        "`{{ colTitle }}` contains invalid value.": "",
+        "Sandbox": "",
+        "Categories": "",
+        "Companies - Categories": ""
     },
     "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
         "Welcome": ""

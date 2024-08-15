@@ -8,6 +8,7 @@
   html { @apply text-gray-800; }
 
   a { @apply hover:underline }
+  a[role=button] { @apply text-primary font-bold text-sm; }
 
   h1 { @apply mt-4 text-primary text-2xl; }
   h2 { @apply mb-2 text-primary text-xl; }
@@ -73,15 +74,17 @@
   .adios.component.input.date input { @apply max-w-[160px]; }
   .adios.component.input.datetime input { @apply max-w-[160px]; }
 
+  /* .adios.component.input.tags .tag { @apply p-1 bg-gray-200 rounded-sm mr-1 hover:bg-gray-400 cursor-pointer; } */
+
   .adios.component.input .inner { @apply flex w-full items-center rounded gap-1; }
   .adios.component.input .inner .value-element { @apply flex flex-1 items-center pr-1 mr-1 text-sm text-gray-900; min-height: 1.5rem; }
   .adios.component.input .inner .input-element { @apply flex flex-1 pr-1 mr-1 text-sm text-gray-900 items-center; min-height: 1.5rem; }
   .adios.component.input .inner .value-element .no-value { @apply text-gray-300 text-sm italic after:content-['N/A']; }
-  .adios.component.input .inner .inline-editing-buttons { @apply flex flex-1 gap-1 invisible; }
+  .adios.component.input .inner .inline-editing-buttons { @apply flex gap-1 opacity-10; }
   .adios.component.input .inner .inline-editing-buttons.always-visible { @apply !visible; }
   .adios.component.input .inner .btn { @apply shadow-none }
-  .adios.component.input .inner:hover .inline-editing-buttons { @apply !visible }
-  .adios.component.input.editing .inner .btn { @apply block }
+  .adios.component.input .inner:hover .inline-editing-buttons { @apply opacity-100 }
+  /* .adios.component.input.editing .inner .btn { @apply block } */
 
   .adios.component.input .input-after { @apply flex-1 ml-2; }
   .adios.component.input .input-unit { @apply flex-1 ml-2; }
@@ -151,7 +154,7 @@
   .input-wrapper:hover { @apply bg-gray-50; }
   .input-wrapper .input-label { @apply flex-1 block text-sm font-medium text-gray-900 pl-1; }
   .input-wrapper:hover .input-label { @apply text-primary; }
-  .input-wrapper .input-body { @apply flex justify-between items-center flex-[3] block; overflow-wrap: anywhere; }
+  .input-wrapper .input-body { @apply justify-between items-center flex-[3]; overflow-wrap: anywhere; }
   .input-wrapper .input-description { @apply text-xs text-gray-500 pr-1; }
 
   .key-value-table { @apply leading-8 divide-y text-sm border; }
@@ -160,15 +163,15 @@
   .key-value-table > div div:nth-child(2) { @apply font-bold; }
 
   .modal { @apply flex flex-col h-screen overflow-auto; }
-  .modal.right { @apply fixed top-0 right-0 w-1/2 z-50 h-full shadow-xl bg-white; }
-  .modal.centered { @apply fixed mx-auto mt-1 w-2/3 h-2/3 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+  .modal.right { @apply fixed top-0 right-0 w-1/2 z-50 h-full shadow-2xl bg-white border-l border-l-gray-300; }
+  .modal.centered { @apply fixed mx-auto mt-1 w-2/3 h-2/3 z-50 shadow-2xl rounded bg-white border border-gray-300; top: 50%; left: 50%; transform: translate(-50%, -50%);}
   .modal.centered.small { @apply fixed mx-auto mt-1 w-1/2 h-1/2 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
   .modal.centered.tiny { @apply fixed mx-auto mt-1 w-1/3 h-1/3 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
   .modal .modal-header { @apply flex border-b border-b-gray-200 text-primary items-baseline w-full justify-between shadow-sm p-2 bg-gray-50; }
   .modal .modal-header .modal-header-left { @apply flex gap-1; }
   .modal .modal-header .modal-header-title { @apply text-center; }
   .modal .modal-header .modal-header-right { @apply flex gap-1; }
-  .modal .modal-body { @apply p-2 flex-1; }
+  .modal .modal-body { @apply p-2 flex-1 overflow-y-auto; }
   .modal .modal-footer { @apply p-2 border-t border-t-gray-200 bg-gray-50; }
 
   /* PRIMETABLE */

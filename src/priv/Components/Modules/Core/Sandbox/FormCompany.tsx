@@ -35,7 +35,7 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
     }
   }
 
-  onBeforeSaveRecord(record) {
+  normalizeRecord(record) {
     if (record.MAIN_PERSON) {
       record.MAIN_PERSON.id_company = {_useMasterRecordId_: true};
       record.MAIN_PERSON.is_main = true;

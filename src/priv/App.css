@@ -8,6 +8,7 @@
   html { @apply text-gray-800; }
 
   a { @apply hover:underline }
+  a[role=button] { @apply text-primary font-bold text-sm; }
 
   h1 { @apply mt-4 text-primary text-2xl; }
   h2 { @apply mb-2 text-primary text-xl; }

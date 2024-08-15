@@ -107,19 +107,6 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
           <div className="card mt-4">
             <div className="card-header">
               Other contacts - InputTable
-              {this.state.isInlineEditing ?
-                <button
-                  className="btn btn-transparent"
-                  onClick={() => {
-                    if (!R.OTHER_PERSONS) R.OTHER_PERSONS = [];
-                    R.OTHER_PERSONS.push({id_company: {_useMasterRecordId_: true}, is_main: false});
-                    this.setState({record: R});
-                  }}
-                >
-                  <span className="icon"><i className="fas fa-plus"></i></span>
-                  <span className="text">Add contact</span>
-                </button>
-              : null}
             </div>
             <div className="card-body">
               <InputTable {...this.getDefaultInputProps()}
@@ -133,6 +120,18 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
                   'last_name': {type: 'varchar', title: 'Last name'},
                 }}
               ></InputTable>
+              {this.state.isInlineEditing ?
+                <a
+                  role="button"
+                  onClick={() => {
+                    if (!R.OTHER_PERSONS) R.OTHER_PERSONS = [];
+                    R.OTHER_PERSONS.push({id_company: {_useMasterRecordId_: true}, is_main: false});
+                    this.setState({record: R});
+                  }}
+                >
+                  + Add contact
+                </a>
+              : null}
             </div>
           </div>
           <div className="card mt-4">

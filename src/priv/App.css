@@ -89,6 +89,12 @@
   .adios.component.input .input-after { @apply flex-1 ml-2; }
   .adios.component.input .input-unit { @apply flex-1 ml-2; }
 
+  .alert-info { @apply p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400; }
+  .alert-danger { @apply p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400; }
+  .alert-success { @apply p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400; }
+  .alert-warning { @apply p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400; }
+  .alert-danger { @apply p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400; }
+
   .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
   .btn .icon { @apply block px-2 py-1 text-sm; background: #FFFFFF20; }
   .btn .text { @apply block px-2 py-1 text-sm; }

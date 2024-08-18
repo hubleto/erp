@@ -9,6 +9,12 @@ class Person extends \CeremonyCrmApp\Core\Model
   public string $eloquentClass = Eloquent\Person::class;
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
 
+  public array $relations = [
+    'COMPANY' => [ self::BELONGS_TO, Company::class, "id" ],
+    'CONTACTS' => [ self::HAS_MANY, PersonContact::class, "id_person" ],
+    'ADDRESSES' => [ self::HAS_MANY, PersonAddress::class, "id_person" ],
+  ];
+
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [

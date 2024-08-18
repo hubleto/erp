@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormPerson from './FormPerson';
 
 interface TablePersonsProps extends TableProps {
   endpoint: string,
@@ -54,10 +53,5 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
         virt_number: { type: 'varchar', title: 'Main Phone Number',},
       },
     });
-  }
-
-  renderForm(): JSX.Element {
-    let formParams = this.getFormParams();
-    return <FormPerson {...formParams}/>;
   }
 }

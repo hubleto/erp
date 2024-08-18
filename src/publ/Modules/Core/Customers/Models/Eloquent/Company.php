@@ -16,6 +16,9 @@ class Company extends \ADIOS\Core\Model\Eloquent
   public function id_account(): BelongsTo {
     return $this->belongsTo(Account::class, 'id');
   }
+  public function ACCOUNT(): BelongsTo {
+    return $this->id_account();
+  }
   public function BUSINESS_ACCOUNT(): HasOne {
     return $this->hasOne(BusinessAccount::class, 'id_company');
   }

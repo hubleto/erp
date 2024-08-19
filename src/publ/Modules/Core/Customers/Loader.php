@@ -64,11 +64,11 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 10201, 'customers/accounts', $this->app->translate('Accounts'), 'fas fa-address-card');
       $sidebar->addLink(2, 10202, 'customers/companies', $this->app->translate('Companies'), 'fas fa-warehouse');
       $sidebar->addLink(2, 10203, 'customers/persons', $this->app->translate('Persons'), 'fas fa-users');
-      $sidebar->addLink(2, 10204, 'customers/person-addresses', $this->app->translate('Person Addresses'), 'fas fa-users');
-      $sidebar->addLink(2, 10205, 'customers/person-contacts', $this->app->translate('Persons Contacts'), 'fas fa-users');
-      $sidebar->addLink(2, 10206, 'customers/business-accounts', $this->app->translate('Business Accounts'), 'fas fa-users');
-      $sidebar->addLink(2, 10207, 'customers/activities', $this->app->translate('Activities'), 'fas fa-users');
-      $sidebar->addLink(2, 10208, 'customers/activities/categories', $this->app->translate('Activity Categories'), 'fas fa-users');
+      $sidebar->addLink(2, 10204, 'customers/person-addresses', $this->app->translate('Person Addresses'), 'fas fa-map-pin');
+      $sidebar->addLink(2, 10205, 'customers/person-contacts', $this->app->translate('Persons Contacts'), 'fas fa-address-book');
+      $sidebar->addLink(2, 10206, 'customers/business-accounts', $this->app->translate('Business Accounts'), 'fas fa-business-time');
+      $sidebar->addLink(2, 10207, 'customers/activities', $this->app->translate('Activities'), 'fas fa-check');
+      $sidebar->addLink(2, 10208, 'customers/activities/categories', $this->app->translate('Activity Categories'), 'fas fa-bars');
     }
   }
 
@@ -138,6 +138,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'id_company' => $idCompany,
       "id_user" => 1,
       "subject" => "Test Activity",
+      "due_date" => "2020-01-22",
+      "due_time" => "11:00:00",
+      "duration" => "01:00:00",
+      "completed" => false,
     ]);
 
     $mActivityCategories = new Models\ActivityCategory($this->app);

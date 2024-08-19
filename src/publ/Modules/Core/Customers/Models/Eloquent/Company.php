@@ -13,6 +13,9 @@ class Company extends \ADIOS\Core\Model\Eloquent
   public function PERSONS(): HasMany {
     return $this->hasMany(Person::class, 'id_company');
   }
+  public function FIRST_CONTACT(): HasOne {
+    return $this->hasOne(Person::class, 'id_company')->where("is_primary", true);
+  }
   public function id_account(): BelongsTo {
     return $this->belongsTo(Account::class,'id_account', 'id');
   }
@@ -22,5 +25,9 @@ class Company extends \ADIOS\Core\Model\Eloquent
   public function BUSINESS_ACCOUNT(): HasOne {
     return $this->hasOne(BusinessAccount::class, 'id_company');
   }
+  public function ACTIVITIES(): HasMany {
+    return $this->hasMany(Activity::class, 'id_company');
+  }
+
 
 }

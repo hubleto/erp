@@ -67,6 +67,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 {this.inputWrapper("last_name")}
                 {this.inputWrapper("id_company")}
                 {this.inputWrapper("id_account")}
+                {this.inputWrapper("is_primary")}
               </div>
             </div>
 

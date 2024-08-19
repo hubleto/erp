@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Activity extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'activity_categories';
+  public $table = 'activities';
 
   public function id_company(): BelongsTo
   {
-    return $this->belongsTo(Company::class, 'id');
+    return $this->belongsTo(Company::class, "id_company", 'id');
   }
   public function id_user(): BelongsTo
   {

@@ -63,6 +63,10 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
                 {this.inputWrapper("subject")}
                 {this.inputWrapper("id_company")}
                 {this.inputWrapper("id_user")}
+                {this.inputWrapper("due_date")}
+                {this.inputWrapper("due_time")}
+                {this.inputWrapper("duration")}
+                {this.inputWrapper("completed")}
 
                 <FormInput title='Categories'>
                   <InputTags2 {...this.getDefaultInputProps()}

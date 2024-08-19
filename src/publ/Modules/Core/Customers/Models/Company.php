@@ -11,8 +11,10 @@ class Company extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'PERSONS' => [ self::HAS_MANY, Person::class, "id_company" ],
+    'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, "id_company" ],
     'ACCOUNT' => [ self::BELONGS_TO, Account::class,'id_account', 'id'],
     'BUSINESS_ACCOUNT' => [ self::HAS_ONE, BusinessAccount::class, "id_company" ],
+    'ACTIVITIES' => [ self::HAS_MANY, Activity::class, "id_company" ],
   ];
 
   public function columns(array $columns = []): array

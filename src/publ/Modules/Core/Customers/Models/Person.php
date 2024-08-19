@@ -41,6 +41,10 @@ class Person extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
       ],
+      "is_primary" => [
+        "type" => "boolean",
+        "title" => "First Contact",
+      ],
       /* "tags" => [
         "type" => "tags",
         "title" => "Tags",

@@ -34,10 +34,12 @@ export default class FormCompany<P, S> extends Form<
   }
 
   normalizeRecord(record) {
-    if (record.PERSONS)
-      record.PERSONS.map((item: any, key: number) => {
+    if (record.PERSONS) record.PERSONS.map((item: any, key: number) => {
         record.PERSONS[key].id_company = { _useMasterRecordId_: true };
-      });
+    });
+    if (record.ACTIVITIES) record.ACTIVITIES.map((item: any, key: number) => {
+        record.ACTIVITIES[key].id_company = { _useMasterRecordId_: true };
+    });
     if (record.BUSINESS_ACCOUNT) {
       record.BUSINESS_ACCOUNT.id_company = { _useMasterRecordId_: true };
     }
@@ -103,6 +105,44 @@ export default class FormCompany<P, S> extends Form<
                 ) : null}
               </div>
             </div>
+
+            <div className="card mt-4">
+              <div className="card-header">Company Activities</div>
+              <div className="card-body">
+                <InputTable
+                  {...this.getDefaultInputProps()}
+                  model="CeremonyCrmApp/Modules/Core/Customers/Models/Activity"
+                  value={R.ACTIVITIES}
+                  onChange={(value: any) => {
+                    this.updateRecord({ ACTIVITIES: value });
+                  }}
+                  columns={{
+                    subject: { type: "varchar", title: "Subject" },
+                    due_date: { type: "date", title: "Due Date" },
+                    due_time: { type: "time", title: "Due Time" },
+                    duration: { type: "time", title: "Duration" },
+                    completed: { type: "boolean", title: "Completed" },
+                    id_company: { type: "lookup", title: "Company", model: "CeremonyCrmApp/Modules/Core/Customers/Models/Company" },
+                    id_user: { type: "lookup", title: "Created By", model: "CeremonyCrmApp/Modules/Core/Settings/Models/User" },
+                  }}
+                ></InputTable>
+                {this.state.isInlineEditing ? (
+                  <a
+                    role="button"
+                    onClick={() => {
+                      if (!R.ACTIVITIES) R.ACTIVITIES = [];
+                      R.ACTIVITIES.push({
+                        id_company: { _useMasterRecordId_: true },
+                      });
+                      this.setState({ record: R });
+                    }}
+                  >
+                    + Add activity
+                  </a>
+                ) : null}
+              </div>
+            </div>
+
             <div className="card mt-4">
               <div className="card-header">
                 Contacts - FormInput with InputVarchar

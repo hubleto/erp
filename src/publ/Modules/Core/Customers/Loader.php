@@ -23,13 +23,12 @@ class Loader extends \CeremonyCrmApp\Core\Module
       ],
       [
         '' => 'Dashboard',
-        '/accounts' => 'Accounts',
         '/companies' => 'Companies',
         '/companies/table-companies' => 'Company/TableCompanies',
         '/persons' => 'Persons',
         '/persons/table-persons' => 'Person/TablePersons',
-        '/person-addresses' => 'PersonAddresses',
-        '/person-contacts' => 'PersonContacts',
+        '/address' => 'Addresses',
+        '/contacts' => 'Contacts',
         '/business-accounts' => 'BusinessAccounts',
         '/activities' => 'Activity',
         '/activities/categories' => 'ActivityCategory',
@@ -61,11 +60,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     if (str_starts_with($this->app->requestedUri, 'customers')) {
       $sidebar->addHeading1(2, 10200, $this->app->translate('Customers'));
-      $sidebar->addLink(2, 10201, 'customers/accounts', $this->app->translate('Accounts'), 'fas fa-address-card');
       $sidebar->addLink(2, 10202, 'customers/companies', $this->app->translate('Companies'), 'fas fa-warehouse');
       $sidebar->addLink(2, 10203, 'customers/persons', $this->app->translate('Persons'), 'fas fa-users');
-      $sidebar->addLink(2, 10204, 'customers/person-addresses', $this->app->translate('Person Addresses'), 'fas fa-map-pin');
-      $sidebar->addLink(2, 10205, 'customers/person-contacts', $this->app->translate('Persons Contacts'), 'fas fa-address-book');
+      $sidebar->addLink(2, 10204, 'customers/address', $this->app->translate('Person Addresses'), 'fas fa-map-pin');
+      $sidebar->addLink(2, 10205, 'customers/Contacts', $this->app->translate('Persons Contacts'), 'fas fa-address-book');
       $sidebar->addLink(2, 10206, 'customers/business-accounts', $this->app->translate('Business Accounts'), 'fas fa-business-time');
       $sidebar->addLink(2, 10207, 'customers/activities', $this->app->translate('Activities'), 'fas fa-check');
       $sidebar->addLink(2, 10208, 'customers/activities/categories', $this->app->translate('Activity Categories'), 'fas fa-bars');
@@ -74,11 +72,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function generateTestData()
   {
-    $mAccount = new Models\Account($this->app);
-    $mAccount->install();
-    $idAccount = $mAccount->eloquent->create([
-      'name' => 'Test Account',
-    ])->id;
 
     $mCompany = new Models\Company($this->app);
     $mCompany->install();
@@ -88,7 +81,9 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'city' => 'Pieštany',
       'postal_code' => '919 87',
       'country' => 'Slovakia',
-      'id_account' => $idAccount,
+      'vat_id' => '123456',
+      'company_id' => '987456',
+      'tax_id' => '123987',
     ])->id;
 
     $mPerson = new Models\Person($this->app);
@@ -97,10 +92,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'first_name' => 'John',
       'last_name' => 'Smith',
       'id_company' => $idCompany,
-      'id_account' => $idAccount,
+      'is_primary' => true,
     ])->id;
 
-    $mPersonContact = new Models\PersonContact($this->app);
+    $mPersonContact = new Models\Contact($this->app);
     $mPersonContact->install();
     $mPersonContact->eloquent->create([
       'value' => '+4216489616',
@@ -113,9 +108,9 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'id_person' => $idPerson,
     ]);
 
-    $mPersonAddress = new Models\PersonAddress($this->app);
-    $mPersonAddress->install();
-    $mPersonAddress->eloquent->create([
+    $mAddress = new Models\Address($this->app);
+    $mAddress->install();
+    $mAddress->eloquent->create([
       'street' => 'Street 123',
       'city' => 'Pieštany',
       'postal_code' => '919 87',
@@ -126,10 +121,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mBusinessAccount = new Models\BusinessAccount($this->app);
     $mBusinessAccount->install();
     $mBusinessAccount->eloquent->create([
-      'vat_id' => '123456',
-      'company_id' => '987456',
-      'tax_id' => '123987',
       'id_company' => $idCompany,
+      "name" => "Test Business Account"
     ]);
 
     $mActivity = new Models\Activity($this->app);

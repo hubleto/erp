@@ -19,18 +19,10 @@ class BusinessAccount extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
       ],
-      "vat_id" => [
+      "name" => [
         "type" => "varchar",
-        "title" => "VAT ID",
-      ],
-      "company_id" => [
-        "type" => "varchar",
-        "title" => "Company ID",
-      ],
-      "tax_id" => [
-        "type" => "varchar",
-        "title" => "Tax ID",
-      ],
+        "title" => "Name"
+      ]
     ]));
   }
 

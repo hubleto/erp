@@ -66,7 +66,6 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 {this.inputWrapper("first_name")}
                 {this.inputWrapper("last_name")}
                 {this.inputWrapper("id_company")}
-                {this.inputWrapper("id_account")}
                 {this.inputWrapper("is_primary")}
               </div>
             </div>
@@ -76,7 +75,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               <div className="card-body">
                 <InputTable
                   {...this.getDefaultInputProps()}
-                  model="CeremonyCrmApp/Modules/Core/Customers/Models/PersonAddress"
+                  model="CeremonyCrmApp/Modules/Core/Customers/Models/Address"
                   value={R.ADDRESSES}
                   onChange={(value: any) => {
                     this.updateRecord({ ADDRESSES: value });
@@ -109,7 +108,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               <div className="card-body">
                 <InputTable
                   {...this.getDefaultInputProps()}
-                  model="CeremonyCrmApp/Modules/Core/Customers/Models/PersonContact"
+                  model="CeremonyCrmApp/Modules/Core/Customers/Models/Contact"
                   value={R.CONTACTS}
                   onChange={(value: any) => {
                     this.updateRecord({ PERSONS_CONTACTS: value });

@@ -15,7 +15,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
     'COMPANY' => [ self::HAS_ONE, Company::class, "id_company", "id" ],
     'USER' => [ self::HAS_ONE, User::class, "id_user", "id" ],
     'CATEGORIES' => [ self::HAS_MANY, ActivityCategoryActivity::class, "id_activity", "id" ],
-    // 'ATENDEES' => [ self::HAS_MANY, PersonAddress::class, "id_person" ],
+    // 'ATENDEES' => [ self::HAS_MANY, Address::class, "id_person" ],
     // 'INVITEES' => [ self::BELONGS_TO, Account::class, "id_account", "id" ],
   ];
 
@@ -25,22 +25,27 @@ class Activity extends \CeremonyCrmApp\Core\Model
       "subject" => [
         "type" => "varchar",
         "title" => "Activity subject",
+        "required" => true,
       ],
       "due_date" => [
         "type" => "date",
         "title" => "Due date",
+        "required" => true,
       ],
       "due_time" => [
         "type" => "time",
         "title" => "Due time",
+        "required" => true,
       ],
       "duration" => [
         "type" => "time",
         "title" => "Duration",
+        "required" => false,
       ],
       "completed" => [
         "type" => "boolean",
         "title" => "Completed",
+        "default" => 0,
       ],
       "id_company" => [
         "type" => "lookup",
@@ -48,6 +53,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
+        "required" => false,
       ],
       "id_user" => [
         "type" => "lookup",
@@ -55,6 +61,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
         "model" => "CeremonyCrmApp/Modules/Core/Settings/Models/User",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
+        "required" => false,
       ],
     ]));
   }

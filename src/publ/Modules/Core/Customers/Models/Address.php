@@ -2,12 +2,12 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
-class PersonContact extends \CeremonyCrmApp\Core\Model
+class Address extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'person_contacts';
-  public string $table = 'person_contacts';
-  public string $eloquentClass = Eloquent\PersonContact::class;
-  public ?string $lookupSqlValue = "{%TABLE%}.value";
+  public string $fullTableSqlName = 'person_addresses';
+  public string $table = 'person_addresses';
+  public string $eloquentClass = Eloquent\Address::class;
+  public ?string $lookupSqlValue = "concat({%TABLE%}.street, ', ', {%TABLE%}.city)";
   //public ?string $lookupSqlValue = "concat({%TABLE%}.value, ' - ', {%TABLE%}.type)";
 
   public function columns(array $columns = []): array
@@ -20,14 +20,21 @@ class PersonContact extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
       ],
-      "type" => [
+      "street" => [
         "type" => "varchar",
-        "title" => "Type",
-        "enumValues" => ["email" => "Email", "number" => "Phone Number"],
+        "title" => "Street",
       ],
-      "value" => [
+      "city" => [
         "type" => "varchar",
-        "title" => "Value",
+        "title" => "City",
+      ],
+      "postal_code" => [
+        "type" => "varchar",
+        "title" => "Postal Code",
+      ],
+      "country" => [
+        "type" => "varchar",
+        "title" => "Country",
       ],
     ]));
   }

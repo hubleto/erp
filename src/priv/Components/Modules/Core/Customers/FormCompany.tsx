@@ -66,11 +66,13 @@ export default class FormCompany<P, S> extends Form<
               <div className="card-header">Company Information</div>
               <div className="card-body">
                 {this.inputWrapper("name")}
-                {this.inputWrapper("id_account")}
                 {this.inputWrapper("street")}
                 {this.inputWrapper("city")}
                 {this.inputWrapper("country")}
                 {this.inputWrapper("postal_code")}
+                {this.inputWrapper("vat_id")}
+                {this.inputWrapper("tax_id")}
+                {this.inputWrapper("company_id")}
               </div>
             </div>
 
@@ -120,10 +122,7 @@ export default class FormCompany<P, S> extends Form<
                     subject: { type: "varchar", title: "Subject" },
                     due_date: { type: "date", title: "Due Date" },
                     due_time: { type: "time", title: "Due Time" },
-                    duration: { type: "time", title: "Duration" },
                     completed: { type: "boolean", title: "Completed" },
-                    id_company: { type: "lookup", title: "Company", model: "CeremonyCrmApp/Modules/Core/Customers/Models/Company" },
-                    id_user: { type: "lookup", title: "Created By", model: "CeremonyCrmApp/Modules/Core/Settings/Models/User" },
                   }}
                 ></InputTable>
                 {this.state.isInlineEditing ? (
@@ -191,38 +190,14 @@ export default class FormCompany<P, S> extends Form<
                 {R.BUSINESS_ACCOUNT ? (
                   <FormInput>
                     <div className="grid grid-cols-2 gap-4">
-                      <label htmlFor="">Vat ID</label>
+                      <label htmlFor="">Business Account Name</label>
                       <InputVarchar
                         {...this.getDefaultInputProps()}
-                        value={R.BUSINESS_ACCOUNT.vat_id ?? ""}
-                        placeholder={globalThis.app.translate("VAT ID")}
+                        value={R.BUSINESS_ACCOUNT.name ?? ""}
+                        placeholder={globalThis.app.translate("Business Account Name")}
                         onChange={(value: any) => {
                           this.updateRecord({
-                            BUSINESS_ACCOUNT: { vat_id: value },
-                          });
-                        }}
-                      ></InputVarchar>
-
-                      <label htmlFor="">Company ID</label>
-                      <InputVarchar
-                        {...this.getDefaultInputProps()}
-                        value={R.BUSINESS_ACCOUNT.company_id ?? ""}
-                        placeholder={globalThis.app.translate("Company ID")}
-                        onChange={(value: any) => {
-                          this.updateRecord({
-                            BUSINESS_ACCOUNT: { company_id: value },
-                          });
-                        }}
-                      ></InputVarchar>
-
-                      <label htmlFor="">Tax ID</label>
-                      <InputVarchar
-                        {...this.getDefaultInputProps()}
-                        value={R.BUSINESS_ACCOUNT.tax_id ?? ""}
-                        placeholder={globalThis.app.translate("Tax ID")}
-                        onChange={(value: any) => {
-                          this.updateRecord({
-                            BUSINESS_ACCOUNT: { tax_id: value },
+                            BUSINESS_ACCOUNT: { name: value },
                           });
                         }}
                       ></InputVarchar>

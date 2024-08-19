@@ -134,7 +134,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       "due_date" => "2020-01-22",
       "due_time" => "11:00:00",
       "duration" => "01:00:00",
-      "completed" => false,
+      "completed" => 0,
     ]);
 
     $mActivityCategories = new Models\ActivityCategory($this->app);
@@ -151,5 +151,16 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     $mActivityCategoriesActivity = new Models\ActivityCategoryActivity($this->app);
     $mActivityCategoriesActivity->install();
+    $mActivityCategoriesActivity->eloquent->create([
+      'id_activity' => 1,
+      'id_activity_category' => 1,
+    ]);
+
+    $mAtendance = new Models\Atendance($this->app);
+    $mAtendance->install();
+    $mAtendance->eloquent->create([
+      'id_user' => 1,
+      'id_activity' => 1,
+    ]);
   }
 }

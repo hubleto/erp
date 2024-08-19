@@ -15,7 +15,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
     'COMPANY' => [ self::HAS_ONE, Company::class, "id_company", "id" ],
     'USER' => [ self::HAS_ONE, User::class, "id_user", "id" ],
     'CATEGORIES' => [ self::HAS_MANY, ActivityCategoryActivity::class, "id_activity", "id" ],
-    // 'ATENDEES' => [ self::HAS_MANY, Address::class, "id_person" ],
+    'ATENDANCE' => [ self::HAS_MANY, Atendance::class, "id_activity", "id" ],
     // 'INVITEES' => [ self::BELONGS_TO, Account::class, "id_account", "id" ],
   ];
 
@@ -45,7 +45,6 @@ class Activity extends \CeremonyCrmApp\Core\Model
       "completed" => [
         "type" => "boolean",
         "title" => "Completed",
-        "default" => 0,
       ],
       "id_company" => [
         "type" => "lookup",

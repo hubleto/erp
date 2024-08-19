@@ -17,6 +17,8 @@ class PersonContact extends \CeremonyCrmApp\Core\Model
         "type" => "lookup",
         "title" => "Person",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Person",
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
       ],
       "type" => [
         "type" => "varchar",

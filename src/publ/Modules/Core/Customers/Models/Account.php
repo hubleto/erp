@@ -9,6 +9,11 @@ class Account extends \CeremonyCrmApp\Core\Model
   public string $eloquentClass = Eloquent\Account::class;
   public ?string $lookupSqlValue = "{%TABLE%}.name";
 
+  public array $relations = [
+    'PERSONS' => [ self::HAS_MANY, Person::class, "id_account" ],
+    'COMPANIES' => [ self::HAS_MANY, Company::class,'id_account'],
+  ];
+
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [

@@ -14,6 +14,10 @@ class Person extends \ADIOS\Core\Model\Eloquent
   {
     return $this->belongsTo(Company::class, 'id');
   }
+  public function id_account(): BelongsTo
+  {
+    return $this->belongsTo(Account::class, "id_account", "id");
+  }
   public function COMPANY() {
     return $this->id_company();
   }
@@ -25,4 +29,9 @@ class Person extends \ADIOS\Core\Model\Eloquent
   {
     return $this->hasMany(PersonAddress::class, 'id_person');
   }
+  public function ACCOUNT(): BelongsTo
+  {
+    return $this->id_account();
+  }
+
 }

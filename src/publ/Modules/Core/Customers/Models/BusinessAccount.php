@@ -16,6 +16,8 @@ class BusinessAccount extends \CeremonyCrmApp\Core\Model
         "type" => "lookup",
         "title" => "Company",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
       ],
       "vat_id" => [
         "type" => "varchar",

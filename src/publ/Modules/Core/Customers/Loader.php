@@ -31,6 +31,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/person-addresses' => 'PersonAddresses',
         '/person-contacts' => 'PersonContacts',
         '/business-accounts' => 'BusinessAccounts',
+        '/activities' => 'Activity',
+        '/activities/categories' => 'ActivityCategory',
       ]
     );
 
@@ -65,6 +67,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 10204, 'customers/person-addresses', $this->app->translate('Person Addresses'), 'fas fa-users');
       $sidebar->addLink(2, 10205, 'customers/person-contacts', $this->app->translate('Persons Contacts'), 'fas fa-users');
       $sidebar->addLink(2, 10206, 'customers/business-accounts', $this->app->translate('Business Accounts'), 'fas fa-users');
+      $sidebar->addLink(2, 10207, 'customers/activities', $this->app->translate('Activities'), 'fas fa-users');
+      $sidebar->addLink(2, 10208, 'customers/activities/categories', $this->app->translate('Activity Categories'), 'fas fa-users');
     }
   }
 
@@ -93,6 +97,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'first_name' => 'John',
       'last_name' => 'Smith',
       'id_company' => $idCompany,
+      'id_account' => $idAccount,
     ])->id;
 
     $mPersonContact = new Models\PersonContact($this->app);
@@ -126,5 +131,28 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'tax_id' => '123987',
       'id_company' => $idCompany,
     ]);
+
+    $mActivity = new Models\Activity($this->app);
+    $mActivity->install();
+    $mActivity->eloquent->create([
+      'id_company' => $idCompany,
+      "id_user" => 1,
+      "subject" => "Test Activity",
+    ]);
+
+    $mActivityCategories = new Models\ActivityCategory($this->app);
+    $mActivityCategories->install();
+    $mActivityCategories->eloquent->create([
+      'name' => "Category 1",
+    ]);
+    $mActivityCategories->eloquent->create([
+      'name' => "Category 2",
+    ]);
+    $mActivityCategories->eloquent->create([
+      'name' => "Category 3",
+    ]);
+
+    $mActivityCategoriesActivity = new Models\ActivityCategoryActivity($this->app);
+    $mActivityCategoriesActivity->install();
   }
 }

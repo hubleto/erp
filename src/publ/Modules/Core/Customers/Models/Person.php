@@ -13,6 +13,7 @@ class Person extends \CeremonyCrmApp\Core\Model
     'COMPANY' => [ self::BELONGS_TO, Company::class, "id" ],
     'CONTACTS' => [ self::HAS_MANY, PersonContact::class, "id_person" ],
     'ADDRESSES' => [ self::HAS_MANY, PersonAddress::class, "id_person" ],
+    'ACCOUNT' => [ self::BELONGS_TO, Account::class, "id_account", "id" ],
   ];
 
   public function columns(array $columns = []): array
@@ -30,6 +31,15 @@ class Person extends \CeremonyCrmApp\Core\Model
         "type" => "lookup",
         "title" => "Company",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
+      ],
+      "id_account" => [
+        "type" => "lookup",
+        "title" => "Account",
+        "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Account",
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
       ],
       /* "tags" => [
         "type" => "tags",

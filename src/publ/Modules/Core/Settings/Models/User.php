@@ -18,6 +18,8 @@ class User extends \ADIOS\Models\User
   public string $table = 'users';
   public string $eloquentClass = Eloquent\User::class;
 
+  public ?string $lookupSqlValue = "{%TABLE%}.email";
+
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [

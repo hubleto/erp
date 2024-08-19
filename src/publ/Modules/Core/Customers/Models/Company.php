@@ -11,7 +11,7 @@ class Company extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'PERSONS' => [ self::HAS_MANY, Person::class, "id_company" ],
-    'ACCOUNT' => [ self::BELONGS_TO, Account::class, "id" ],
+    'ACCOUNT' => [ self::BELONGS_TO, Account::class,'id_account', 'id'],
     'BUSINESS_ACCOUNT' => [ self::HAS_ONE, BusinessAccount::class, "id_company" ],
   ];
 
@@ -26,6 +26,8 @@ class Company extends \CeremonyCrmApp\Core\Model
         "type" => "lookup",
         "title" => "Account",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Account",
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
       ],
       /* "tags" => [
         "type" => "tags",

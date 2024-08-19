@@ -12,5 +12,8 @@ class Account extends \ADIOS\Core\Model\Eloquent
   public function COMPANIES(): HasMany {
     return $this->hasMany(Company::class, 'id_account');
   }
+  public function PERSONS(): HasMany {
+    return $this->hasMany(Person::class, 'id_account');
+  }
 
 }

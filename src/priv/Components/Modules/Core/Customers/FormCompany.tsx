@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { deepObjectMerge } from "adios/Helper";
+import Table from "adios/Table";
 import Form, { FormProps, FormState } from "adios/Form";
 import InputVarchar from "adios/Inputs/Varchar";
 import InputTags2 from "adios/Inputs/Tags2";
@@ -89,6 +90,9 @@ export default class FormCompany<P, S> extends Form<
                   columns={{
                     first_name: { type: "varchar", title: "First name" },
                     last_name: { type: "varchar", title: "Last name" },
+                  }}
+                  onRowClick={(table: Table, row: any) => {
+                    console.log(table, row);
                   }}
                 ></InputTable>
                 {this.state.isInlineEditing ? (

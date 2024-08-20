@@ -23,6 +23,11 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
     this.state = this.getStateFromProps(props);
   }
 
+  getFormModalParams(): any {
+    let params: any = super.getFormModalParams();
+    params.type = this.state.formId == -1 ? 'centered' : 'right wide';
+    return params;
+  }
   getStateFromProps(props: TableCompaniesProps) {
     return {
       ...super.getStateFromProps(props),

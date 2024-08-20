@@ -12,7 +12,12 @@
         "`{{ colTitle }}` contains invalid value.": "",
         "Sandbox": "",
         "Categories": "",
-        "Companies - Categories": ""
+        "Companies - Categories": "",
+        "Person Addresses": "",
+        "Persons Contacts": "",
+        "Business Accounts": "",
+        "Activities": "",
+        "Activity Categories": ""
     },
     "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
         "Welcome": ""

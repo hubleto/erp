@@ -18,6 +18,8 @@ class User extends \ADIOS\Models\User
   public string $table = 'users';
   public string $eloquentClass = Eloquent\User::class;
 
+  public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
+
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [

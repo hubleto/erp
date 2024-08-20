@@ -11,8 +11,9 @@ class Company extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'PERSONS' => [ self::HAS_MANY, Person::class, "id_company" ],
-    'ACCOUNT' => [ self::BELONGS_TO, Account::class, "id" ],
+    'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, "id_company" ],
     'BUSINESS_ACCOUNT' => [ self::HAS_ONE, BusinessAccount::class, "id_company" ],
+    'ACTIVITIES' => [ self::HAS_MANY, Activity::class, "id_company" ],
   ];
 
   public function columns(array $columns = []): array
@@ -22,15 +23,6 @@ class Company extends \CeremonyCrmApp\Core\Model
         "type" => "varchar",
         "title" => "Name",
       ],
-      "id_account" => [
-        "type" => "lookup",
-        "title" => "Account",
-        "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Account",
-      ],
-      /* "tags" => [
-        "type" => "tags",
-        "title" => "Tags",
-      ], */
       "street" => [
         "type" => "varchar",
         "title" => "Street",
@@ -46,6 +38,18 @@ class Company extends \CeremonyCrmApp\Core\Model
       "postal_code" => [
         "type" => "varchar",
         "title" => "Postal Code",
+      ],
+      "vat_id" => [
+        "type" => "varchar",
+        "title" => "VAT ID",
+      ],
+      "company_id" => [
+        "type" => "varchar",
+        "title" => "Company ID",
+      ],
+      "tax_id" => [
+        "type" => "varchar",
+        "title" => "Tax ID",
       ],
     ]));
   }

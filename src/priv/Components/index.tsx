@@ -19,6 +19,7 @@ import { Tooltip } from "primereact/tooltip"
 import FormUser from "./Modules/Core/Settings/FormUser"
 import CoreCustomersTablePersons from "./Modules/Core/Customers/TablePersons"
 import CoreCustomersTableCompanies from "./Modules/Core/Customers/TableCompanies"
+import CoreCustomersTableActivities from "./Modules/Core/Customers/TableActivities"
 import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
 
 
@@ -45,6 +46,7 @@ app.registerReactComponent('Tooltip', Tooltip);
 app.registerReactComponent('FormUser', FormUser);
 app.registerReactComponent('CoreCustomersTablePersons', CoreCustomersTablePersons);
 app.registerReactComponent('CoreCustomersTableCompanies', CoreCustomersTableCompanies);
+app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableActivities);
 app.registerReactComponent('CoreSandboxTableCompanies', CoreSandboxTableCompanies);
 
 // Render react elements into body

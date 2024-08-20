@@ -5,7 +5,7 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PersonAddress extends \ADIOS\Core\Model\Eloquent
+class Address extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'person_addresses';
 

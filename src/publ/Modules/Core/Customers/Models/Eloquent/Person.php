@@ -19,10 +19,11 @@ class Person extends \ADIOS\Core\Model\Eloquent
   }
   public function CONTACTS(): HasMany
   {
-    return $this->hasMany(PersonContact::class, 'id_person');
+    return $this->hasMany(Contact::class, 'id_person');
   }
   public function ADDRESSES(): HasMany
   {
-    return $this->hasMany(PersonAddress::class, 'id_person');
+    return $this->hasMany(Address::class, 'id_person');
   }
+
 }

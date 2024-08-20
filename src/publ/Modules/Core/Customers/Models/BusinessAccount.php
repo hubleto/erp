@@ -16,19 +16,13 @@ class BusinessAccount extends \CeremonyCrmApp\Core\Model
         "type" => "lookup",
         "title" => "Company",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
       ],
-      "vat_id" => [
+      "name" => [
         "type" => "varchar",
-        "title" => "VAT ID",
-      ],
-      "company_id" => [
-        "type" => "varchar",
-        "title" => "Company ID",
-      ],
-      "tax_id" => [
-        "type" => "varchar",
-        "title" => "Tax ID",
-      ],
+        "title" => "Name"
+      ]
     ]));
   }
 

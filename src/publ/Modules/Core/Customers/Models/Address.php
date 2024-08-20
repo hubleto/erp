@@ -2,11 +2,11 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
-class PersonAddress extends \CeremonyCrmApp\Core\Model
+class Address extends \CeremonyCrmApp\Core\Model
 {
   public string $fullTableSqlName = 'person_addresses';
   public string $table = 'person_addresses';
-  public string $eloquentClass = Eloquent\PersonAddress::class;
+  public string $eloquentClass = Eloquent\Address::class;
   public ?string $lookupSqlValue = "concat({%TABLE%}.street, ', ', {%TABLE%}.city)";
   //public ?string $lookupSqlValue = "concat({%TABLE%}.value, ' - ', {%TABLE%}.type)";
 
@@ -17,6 +17,8 @@ class PersonAddress extends \CeremonyCrmApp\Core\Model
         "type" => "lookup",
         "title" => "Person",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Person",
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
       ],
       "street" => [
         "type" => "varchar",

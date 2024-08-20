@@ -2,11 +2,11 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
-class PersonContact extends \CeremonyCrmApp\Core\Model
+class Contact extends \CeremonyCrmApp\Core\Model
 {
   public string $fullTableSqlName = 'person_contacts';
   public string $table = 'person_contacts';
-  public string $eloquentClass = Eloquent\PersonContact::class;
+  public string $eloquentClass = Eloquent\Contact::class;
   public ?string $lookupSqlValue = "{%TABLE%}.value";
   //public ?string $lookupSqlValue = "concat({%TABLE%}.value, ' - ', {%TABLE%}.type)";
 
@@ -17,6 +17,8 @@ class PersonContact extends \CeremonyCrmApp\Core\Model
         "type" => "lookup",
         "title" => "Person",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Person",
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
       ],
       "type" => [
         "type" => "varchar",

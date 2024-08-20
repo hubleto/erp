@@ -11,7 +11,7 @@ public function prepareLoadRecordQuery(): Builder
   $query = parent::prepareLoadRecordQuery();
 
   $query = $query
-  ->selectRaw(" tax_id, vat_id, company_id")
+  ->selectRaw("business_accounts.tax_id, business_accounts.vat_id, business_accounts.company_id")
   ->join("business_accounts", "business_accounts.id_company", "companies.id")
   ;
 

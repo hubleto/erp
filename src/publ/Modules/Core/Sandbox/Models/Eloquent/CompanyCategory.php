@@ -7,7 +7,7 @@ use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CompanyCategory extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'companies_categories';
+  public $table = 'sbx_companies_categories';
 
   public function id_company(): BelongsTo
   {

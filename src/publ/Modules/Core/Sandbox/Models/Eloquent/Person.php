@@ -7,7 +7,7 @@ use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Person extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'persons';
+  public $table = 'sbx_persons';
 
   public function id_company(): BelongsTo
   {

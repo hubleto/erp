@@ -4,8 +4,8 @@ namespace CeremonyCrmApp\Modules\Core\Sandbox\Models;
 
 class Category extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'categories';
-  public string $table = 'categories';
+  public string $fullTableSqlName = 'sbx_categories';
+  public string $table = 'sbx_categories';
   public string $eloquentClass = Eloquent\Category::class;
   public ?string $lookupSqlValue = "{%TABLE%}.category";
 

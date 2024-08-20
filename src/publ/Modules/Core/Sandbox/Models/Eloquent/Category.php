@@ -7,5 +7,5 @@ use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Category extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'categories';
+  public $table = 'sbx_categories';
 }

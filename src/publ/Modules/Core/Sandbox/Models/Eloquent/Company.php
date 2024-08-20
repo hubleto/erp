@@ -8,7 +8,7 @@ use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Company extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'companies';
+  public $table = 'sbx_companies';
 
   public function MAIN_PERSON(): HasOne
   {

@@ -7,7 +7,7 @@ composer --no-interaction update
 
 npm -v
 
-npm --prefix /var/www/html/ceremonycrm/libs/ADIOS install /var/www/html/ceremonycrm/libs/ADIOS/
+npm --prefix /var/www/html/github/ADIOS install /var/www/html/github/ADIOS/
 
 npm i
 npm run build

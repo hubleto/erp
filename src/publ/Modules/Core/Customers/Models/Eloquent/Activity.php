@@ -27,9 +27,9 @@ class Activity extends \ADIOS\Core\Model\Eloquent
   {
     return $this->id_user();
   }
-  public function CATEGORIES(): HasMany
+  public function TAGS(): HasMany
   {
-    return $this->hasMany(ActivityCategoryActivity::class, 'id_activity', 'id');
+    return $this->hasMany(ActivityTag::class, 'id_activity', 'id');
   }
   public function ATENDANCE(): HasMany
   {

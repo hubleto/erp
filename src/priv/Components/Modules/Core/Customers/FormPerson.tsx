@@ -58,9 +58,12 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
 
     return (
       <>
-        <div className="grid grid-cols-2 gap-1">
-          <div>
-            <div className="card mt-4">
+        <div className="grid grid-cols-2 gap-1" style=
+          {{gridTemplateAreas:`
+            "person contacts"
+            "addresses addresses"
+          `}}>
+            <div className="card mt-4" style={{gridArea: "person"}}>
               <div className="card-header">Personal Information</div>
               <div className="card-body">
                 {this.inputWrapper("first_name")}
@@ -70,7 +73,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               </div>
             </div>
 
-            <div className="card mt-4">
+            <div className="card mt-4" style={{gridArea: "addresses"}}>
               <div className="card-header">Addresses</div>
               <div className="card-body">
                 <InputTable
@@ -81,7 +84,8 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     this.updateRecord({ ADDRESSES: value });
                   }}
                   columns={{
-                    street: { type: "varchar", title: "Street" },
+                    street_line_1: { type: "varchar", title: "Street Line 1" },
+                    street_line_2: { type: "varchar", title: "Street Line 2" },
                     city: { type: "varchar", title: "City" },
                     postal_code: { type: "varchar", title: "Postal Code" },
                     country: { type: "varchar", title: "Country" },
@@ -103,7 +107,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 ) : null}
               </div>
             </div>
-            <div className="card mt-4">
+            <div className="card mt-4" style={{gridArea: "contacts"}}>
               <div className="card-header">Contacts</div>
               <div className="card-body">
                 <InputTable
@@ -138,9 +142,8 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 ) : null}
               </div>
             </div>
-          </div>
 
-          <div>
+          {/* <div>
             <div className="card">
               <div className="card-header">this.state.record</div>
               <div className="card-body">
@@ -156,7 +159,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 </pre>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </>
     );

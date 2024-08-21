@@ -2,11 +2,11 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
-class BusinessAccount extends \CeremonyCrmApp\Core\Model
+class BillingAccount extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'business_accounts';
-  public string $table = 'business_accounts';
-  public string $eloquentClass = Eloquent\BusinessAccount::class;
+  public string $fullTableSqlName = 'billing_accounts';
+  public string $table = 'billing_accounts';
+  public string $eloquentClass = Eloquent\BillingAccount::class;
   public ?string $lookupSqlValue = "{%TABLE%}.id";
 
   public function columns(array $columns = []): array
@@ -29,7 +29,7 @@ class BusinessAccount extends \CeremonyCrmApp\Core\Model
   public function tableParams(array $params = []): array
   {
     $params = parent::tableParams();
-    $params['title'] = 'Business Account';
+    $params['title'] = 'Billing Account';
     return $params;
   }
 

@@ -37,10 +37,14 @@ class Person extends \CeremonyCrmApp\Core\Model
         "type" => "boolean",
         "title" => "First Contact",
       ],
-      /* "tags" => [
-        "type" => "tags",
-        "title" => "Tags",
-      ], */
+      "note" => [
+        "type" => "text",
+        "title" => "Notes",
+      ],
+      "is_active" => [
+        "type" => "boolean",
+        "title" => "Active",
+      ],
     ]));
   }
 

@@ -6,9 +6,9 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class BusinessAccount extends \ADIOS\Core\Model\Eloquent
+class BillingAccount extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'business_accounts';
+  public $table = 'billing_accounts';
 
   public function id_company(): BelongsTo {
     return $this->belongsTo(Company::class, 'id');

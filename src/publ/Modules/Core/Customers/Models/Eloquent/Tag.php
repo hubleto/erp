@@ -7,8 +7,8 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class ActivityCategory extends \ADIOS\Core\Model\Eloquent
+class Tag extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'activity_categories';
+  public $table = 'tags';
 
 }

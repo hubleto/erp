@@ -43,7 +43,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     }
   }
 
-  public function generateTestData()
+  /* public function generateTestData()
   {
     $mCategory = new Models\Category($this->app);
     (new Models\Company($this->app))->install();
@@ -55,5 +55,5 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mCategory->eloquent->create(['category' => 'Silver', 'color' => '#C0C0C0']);
     $mCategory->eloquent->create(['category' => 'Gold', 'color' => '#FFD700']);
     $mCategory->eloquent->create(['category' => 'Platinum', 'color' => '#E5E4E2']);
-  }
+  } */
 }

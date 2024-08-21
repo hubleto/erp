@@ -13,7 +13,7 @@ public function prepareLoadRecordQuery(): Builder
   $query = $query->selectRaw("
     (Select value from person_contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,
     (Select value from person_contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email,
-    (Select concat(street, ', ', city) from person_addresses where id_person = persons.id LIMIT 1) virt_address
+    (Select concat(street_line_1,', ', street_line_2, ', ', city) from person_addresses where id_person = persons.id LIMIT 1) virt_address
   ")
   ;
 

@@ -20,9 +20,17 @@ class Address extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
       ],
-      "street" => [
+      "street_line_1" => [
         "type" => "varchar",
-        "title" => "Street",
+        "title" => "Street Line 1",
+      ],
+      "street_line_2" => [
+        "type" => "varchar",
+        "title" => "Street Line 2",
+      ],
+      "region" => [
+        "type" => "varchar",
+        "title" => "Region",
       ],
       "city" => [
         "type" => "varchar",

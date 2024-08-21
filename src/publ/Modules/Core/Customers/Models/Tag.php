@@ -2,11 +2,11 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
-class ActivityCategory extends \CeremonyCrmApp\Core\Model
+class Tag extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'activity_categories';
-  public string $table = 'activity_categories';
-  public string $eloquentClass = Eloquent\ActivityCategory::class;
+  public string $fullTableSqlName = 'tags';
+  public string $table = 'tags';
+  public string $eloquentClass = Eloquent\Tag::class;
   public ?string $lookupSqlValue = "{%TABLE%}.name";
 
   public function columns(array $columns = []): array
@@ -26,7 +26,7 @@ class ActivityCategory extends \CeremonyCrmApp\Core\Model
   public function tableParams(array $params = []): array
   {
     $params = parent::tableParams();
-    $params['title'] = 'Activity Categories';
+    $params['title'] = 'Tags';
     return $params;
   }
 

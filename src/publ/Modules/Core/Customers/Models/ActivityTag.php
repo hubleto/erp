@@ -2,14 +2,14 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
-class ActivityCategoryActivity extends \CeremonyCrmApp\Core\Model
+class ActivityTag extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'activity_categories_activities';
-  public string $table = 'activity_categories_activities';
-  public string $eloquentClass = Eloquent\ActivityCategoryActivity::class;
+  public string $fullTableSqlName = 'activities_tags';
+  public string $table = 'activities_tags';
+  public string $eloquentClass = Eloquent\ActivityTag::class;
 
   public array $relations = [
-    'CATEGORY' => [ self::BELONGS_TO, ActivityCategory::class, 'id_category', "id" ],
+    'TAG' => [ self::BELONGS_TO, Tag::class, 'id_activity_tag', "id" ],
   ];
 
   public function columns(array $columns = []): array
@@ -22,10 +22,10 @@ class ActivityCategoryActivity extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
       ],
-      "id_activity_category" => [
+      "id_activity_tag" => [
         "type" => "lookup",
-        "title" => "Activity Category",
-        "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/ActivityCategory",
+        "title" => "Tag",
+        "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Tag",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
       ],

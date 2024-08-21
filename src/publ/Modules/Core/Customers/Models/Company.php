@@ -2,6 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\Country;
+
 class Company extends \CeremonyCrmApp\Core\Model
 {
   public string $fullTableSqlName = 'companies';
@@ -12,8 +14,9 @@ class Company extends \CeremonyCrmApp\Core\Model
   public array $relations = [
     'PERSONS' => [ self::HAS_MANY, Person::class, "id_company" ],
     'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, "id_company" ],
-    'BUSINESS_ACCOUNT' => [ self::HAS_ONE, BusinessAccount::class, "id_company" ],
+    'BILLING_ACCOUNT' => [ self::HAS_ONE, BillingAccount::class, "id_company" ],
     'ACTIVITIES' => [ self::HAS_MANY, Activity::class, "id_company" ],
+    'COUNTRY' => [ self::HAS_ONE, Country::class,  'id','id_country' ],
   ];
 
   public function columns(array $columns = []): array
@@ -23,16 +26,27 @@ class Company extends \CeremonyCrmApp\Core\Model
         "type" => "varchar",
         "title" => "Name",
       ],
-      "street" => [
+      "street_line_1" => [
         "type" => "varchar",
-        "title" => "Street",
+        "title" => "Street Line 1",
+      ],
+      "street_line_2" => [
+        "type" => "varchar",
+        "title" => "Street Line 2",
+      ],
+      "region" => [
+        "type" => "varchar",
+        "title" => "Region",
       ],
       "city" => [
         "type" => "varchar",
         "title" => "City",
       ],
-      "country" => [
-        "type" => "varchar",
+      "id_country" => [
+        "type" => "lookup",
+        "model" => "CeremonyCrmApp/Modules/Core/Settings/Models/Country",
+        'foreignKeyOnUpdate' => 'SET NULL',
+        'foreignKeyOnDelete' => 'SET NULL',
         "title" => "Country",
       ],
       "postal_code" => [
@@ -51,6 +65,11 @@ class Company extends \CeremonyCrmApp\Core\Model
         "type" => "varchar",
         "title" => "Tax ID",
       ],
+      "note" => [
+        "type" => "text",
+        "title" => "Notes",
+        "required" => false,
+      ]
     ]));
   }
 

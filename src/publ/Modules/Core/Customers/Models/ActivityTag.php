@@ -9,7 +9,7 @@ class ActivityTag extends \CeremonyCrmApp\Core\Model
   public string $eloquentClass = Eloquent\ActivityTag::class;
 
   public array $relations = [
-    'TAG' => [ self::BELONGS_TO, Tag::class, 'id_activity_tag', "id" ],
+    'TAG' => [ self::BELONGS_TO, Tag::class, 'id_tag', "id" ],
   ];
 
   public function columns(array $columns = []): array
@@ -22,7 +22,7 @@ class ActivityTag extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
       ],
-      "id_activity_tag" => [
+      "id_tag" => [
         "type" => "lookup",
         "title" => "Tag",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Tag",

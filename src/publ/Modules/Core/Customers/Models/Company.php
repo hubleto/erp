@@ -69,7 +69,13 @@ class Company extends \CeremonyCrmApp\Core\Model
         "type" => "text",
         "title" => "Notes",
         "required" => false,
-      ]
+      ],
+      "is_active" => [
+        "type" => "text",
+        "title" => "Active",
+        "default" => 1,
+      ],
+
     ]));
   }
 

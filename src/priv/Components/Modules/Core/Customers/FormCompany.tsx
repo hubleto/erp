@@ -82,6 +82,7 @@ export default class FormCompany<P, S> extends Form<
                 {this.inputWrapper("tax_id")}
                 {this.inputWrapper("company_id")}
                 {this.inputWrapper("note")}
+                {this.inputWrapper("is_active")}
               </div>
             </div>
 

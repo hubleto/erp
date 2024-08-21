@@ -70,6 +70,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 {this.inputWrapper("last_name")}
                 {this.inputWrapper("id_company")}
                 {this.inputWrapper("is_primary")}
+                {this.inputWrapper("is_active")}
               </div>
             </div>
 

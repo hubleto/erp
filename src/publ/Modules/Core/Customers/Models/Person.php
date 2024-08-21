@@ -44,6 +44,7 @@ class Person extends \CeremonyCrmApp\Core\Model
       "is_active" => [
         "type" => "boolean",
         "title" => "Active",
+        "default" => 1,
       ],
     ]));
   }

@@ -73,7 +73,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
                     value={this.state.record.TAGS}
                     model='CeremonyCrmApp/Modules/Core/Customers/Models/Tag'
                     targetColumn='id_activity'
-                    sourceColumn='id_activity_category'
+                    sourceColumn='id_tag'
                     colorColumn='color'
                     onChange={(value: any) => {
                       this.updateRecord({TAGS: value});

@@ -52,6 +52,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
         virt_address: { type: 'varchar', title: 'Main Address',},
         virt_email: { type: 'varchar', title: 'Main Email',},
         virt_number: { type: 'varchar', title: 'Main Phone Number',},
+        is_active: { type: 'boolean', title: 'Active',},
       },
     });
   }

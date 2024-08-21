@@ -103,6 +103,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'company_id' => '987456',
       'tax_id' => '123987',
       'note' => 'My First Company',
+      'is_active' => true,
     ])->id;
 
     $mPerson = new Models\Person($this->app);
@@ -112,6 +113,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'last_name' => 'Smith',
       'id_company' => $idCompany,
       'is_primary' => true,
+      'is_active' => true,
     ])->id;
 
     $mPersonContact = new Models\Contact($this->app);
@@ -174,7 +176,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mActivityTag->install();
     $mActivityTag->eloquent->create([
       'id_activity' => 1,
-      'id_activity_tag' => 1,
+      'id_tag' => 1,
     ]);
 
     $mAtendance = new Models\Atendance($this->app);

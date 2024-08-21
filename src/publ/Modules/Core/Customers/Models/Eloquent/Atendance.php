@@ -15,15 +15,18 @@ class Atendance extends \ADIOS\Core\Model\Eloquent
   {
     return $this->belongsTo(Activity::class, "id_activity", 'id');
   }
+
   public function ACTIVITY() {
     return $this->id_activity();
   }
+
   public function id_user(): BelongsTo
   {
     return $this->belongsTo(Activity::class, "id_user", 'id');
   }
-  public function ATENDEES() {
-    return $this->id_activity();
+
+  public function USER() {
+    return $this->id_user();
   }
 
 

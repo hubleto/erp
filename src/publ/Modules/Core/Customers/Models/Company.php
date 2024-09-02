@@ -2,6 +2,7 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
+use CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccount;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Country;
 
 class Company extends \CeremonyCrmApp\Core\Model
@@ -13,10 +14,11 @@ class Company extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'PERSONS' => [ self::HAS_MANY, Person::class, "id_company" ],
+    'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
     'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, "id_company" ],
-    'BILLING_ACCOUNT' => [ self::HAS_ONE, BillingAccount::class, "id_company" ],
+    'BILLING_ACCOUNT' => [ self::HAS_MANY, BillingAccount::class, "id_company" ],
     'ACTIVITIES' => [ self::HAS_MANY, Activity::class, "id_company" ],
-    'COUNTRY' => [ self::HAS_ONE, Country::class,  'id','id_country' ],
+    'TAGS' => [ self::HAS_MANY, CompanyTag::class, "id_company", "id" ],
   ];
 
   public function columns(array $columns = []): array
@@ -71,7 +73,7 @@ class Company extends \CeremonyCrmApp\Core\Model
         "required" => false,
       ],
       "is_active" => [
-        "type" => "text",
+        "type" => "boolean",
         "title" => "Active",
         "default" => 1,
       ],

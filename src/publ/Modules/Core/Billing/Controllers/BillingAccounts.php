@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Modules\Core\Customers\Controllers;
+namespace CeremonyCrmApp\Modules\Core\Billing\Controllers;
 
 class BillingAccounts extends \CeremonyCrmApp\Core\Controller {
   public function getBreadcrumbs(): array

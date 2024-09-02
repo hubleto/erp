@@ -13,7 +13,7 @@ class Atendance extends \ADIOS\Core\Model\Eloquent
 
   public function id_activity(): BelongsTo
   {
-    return $this->belongsTo(Activity::class, "id_activity", 'id');
+    return $this->belongsTo(Activity::class, "id_activity");
   }
 
   public function ACTIVITY() {
@@ -22,7 +22,7 @@ class Atendance extends \ADIOS\Core\Model\Eloquent
 
   public function id_user(): BelongsTo
   {
-    return $this->belongsTo(Activity::class, "id_user", 'id');
+    return $this->belongsTo(Activity::class, "id_user");
   }
 
   public function USER() {

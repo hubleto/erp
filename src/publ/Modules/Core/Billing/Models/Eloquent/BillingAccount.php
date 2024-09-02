@@ -1,6 +1,8 @@
 <?php
 
-namespace CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent;
+namespace CeremonyCrmApp\Modules\Core\Billing\Models\Eloquent;
+
+use CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent\Company;
 
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,4 +16,8 @@ class BillingAccount extends \ADIOS\Core\Model\Eloquent
     return $this->belongsTo(Company::class, 'id');
   }
 
+  public function SERVICES(): HasMany
+  {
+    return $this->hasMany(BillingAccountService::class, 'id_billing_account', 'id');
+  }
 }

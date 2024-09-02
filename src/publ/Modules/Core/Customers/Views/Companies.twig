@@ -1,8 +1,1 @@
-<app-core-customers-table-companies
-string:model="CeremonyCrmApp/Modules/Core/Customers/Models/Company"
-string:add-button-text="Add Company"
-  {# string:endpoint="customers/companies/table-companies" #}
-></app-core-customers-table-companies>
-
-  {# <app-table string:model="CeremonyCrmApp/Modules/Core/Customers/Models/Company"
-  ></app-table> #}
+<app-core-customers-table-companies int:record-id="{{ viewParams.recordId }}"></app-core-customers-table-companies>

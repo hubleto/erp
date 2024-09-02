@@ -2,8 +2,6 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers;
 
-use CeremonyCrmApp\Modules\Core\Settings\Models\Country;
-
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
@@ -26,12 +24,9 @@ class Loader extends \CeremonyCrmApp\Core\Module
       [
         '' => 'Dashboard',
         '/companies' => 'Companies',
-        '/companies/table-companies' => 'Company/TableCompanies',
         '/persons' => 'Persons',
-        '/persons/table-persons' => 'Person/TablePersons',
         '/address' => 'Addresses',
         '/contacts' => 'Contacts',
-        '/billing-accounts' => 'BillingAccounts',
         '/activities' => 'Activity',
         '/tags' => 'Tag',
       ]
@@ -64,31 +59,15 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addHeading1(2, 10200, $this->app->translate('Customers'));
       $sidebar->addLink(2, 10202, 'customers/companies', $this->app->translate('Companies'), 'fas fa-warehouse');
       $sidebar->addLink(2, 10203, 'customers/persons', $this->app->translate('Persons'), 'fas fa-users');
-      $sidebar->addLink(2, 10204, 'customers/address', $this->app->translate('Person Addresses'), 'fas fa-map-pin');
-      $sidebar->addLink(2, 10205, 'customers/Contacts', $this->app->translate('Persons Contacts'), 'fas fa-address-book');
-      $sidebar->addLink(2, 10206, 'customers/billing-accounts', $this->app->translate('Billing Accounts'), 'fas fa-business-time');
-      $sidebar->addLink(2, 10207, 'customers/activities', $this->app->translate('Activities'), 'fas fa-check');
-      $sidebar->addLink(2, 10208, 'customers/tags', $this->app->translate('Tags'), 'fas fa-bars');
+      $sidebar->addLink(2, 10204, 'customers/address', $this->app->translate('Addresses'), 'fas fa-map-pin');
+      $sidebar->addLink(2, 10205, 'customers/contacts', $this->app->translate('Contacts'), 'fas fa-address-book');
+      $sidebar->addLink(2, 10206, 'customers/activities', $this->app->translate('Activities'), 'fas fa-check');
+      $sidebar->addLink(2, 10207, 'customers/tags', $this->app->translate('Tags'), 'fas fa-bars');
     }
   }
 
   public function generateTestData()
   {
-    $mCountry = new Country($this->app);
-    $mCountry->install();
-    $countries = [
-      ['country' => 'United States', 'code' => 'US'],
-      ['country' => 'Canada', 'code' => 'CA'],
-      ['country' => 'United Kingdom', 'code' => 'UK'],
-      ['country' => 'Australia', 'code' => 'AU'],
-      ['country' => 'Germany', 'code' => 'DE'],
-      ['country' => 'Slovakia', 'code' => 'SK'],
-  ];
-
-  foreach ($countries as $country) {
-    $mCountry->eloquent->create($country);
-  }
-
     $mCompany = new Models\Company($this->app);
     $mCompany->install();
     $idCompany = $mCompany->eloquent->create([
@@ -137,15 +116,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'region' => 'Trnavský kraj',
       'city' => 'Pieštany',
       'postal_code' => '919 87',
-      'country' => 'Slovakia',
+      'id_country' => 3,
       'id_person' => $idPerson,
-    ]);
-
-    $mBillingAccount = new Models\BillingAccount($this->app);
-    $mBillingAccount->install();
-    $mBillingAccount->eloquent->create([
-      'id_company' => $idCompany,
-      "name" => "Test Business Account"
     ]);
 
     $mActivity = new Models\Activity($this->app);
@@ -176,6 +148,18 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mActivityTag->install();
     $mActivityTag->eloquent->create([
       'id_activity' => 1,
+      'id_tag' => 1,
+    ]);
+    $mPersonTag = new Models\PersonTag($this->app);
+    $mPersonTag->install();
+    $mPersonTag->eloquent->create([
+      'id_person' => $idPerson,
+      'id_tag' => 1,
+    ]);
+    $mCompanyTag = new Models\CompanyTag($this->app);
+    $mCompanyTag->install();
+    $mCompanyTag->eloquent->create([
+      'id_company' => $idCompany,
       'id_tag' => 1,
     ]);
 

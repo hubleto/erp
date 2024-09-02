@@ -4,11 +4,15 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 class Contact extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'person_contacts';
-  public string $table = 'person_contacts';
+  public string $fullTableSqlName = 'contacts';
+  public string $table = 'contacts';
   public string $eloquentClass = Eloquent\Contact::class;
   public ?string $lookupSqlValue = "{%TABLE%}.value";
   //public ?string $lookupSqlValue = "concat({%TABLE%}.value, ' - ', {%TABLE%}.type)";
+
+  public array $relations = [
+    'PERSON' => [ self::BELONGS_TO, Person::class, "id_person", "id" ],
+  ];
 
   public function columns(array $columns = []): array
   {

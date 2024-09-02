@@ -7,7 +7,7 @@ class Addresses extends \CeremonyCrmApp\Core\Controller {
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'customers', 'content' => $this->app->translate('Customers') ],
-      [ 'url' => '', 'content' => $this->app->translate('Person Addresses') ],
+      [ 'url' => '', 'content' => $this->app->translate('Addresses') ],
     ]);
   }
 

@@ -3,7 +3,6 @@ import Table, { TableProps, TableState } from 'adios/Table';
 import FormPerson from './FormPerson';
 
 interface TablePersonsProps extends TableProps {
-  endpoint: string,
 }
 
 interface TablePersonsState extends TableState {
@@ -18,11 +17,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
 
   props: TablePersonsProps;
 
-  getEndpointUrl(): string {
-    return this.props.endpoint;
-  }
-
-  getFormModalParams(): any {
+  /* getFormModalParams(): any {
     return {
       ...super.getFormModalParams(),
       // type: 'centered tiny',
@@ -34,9 +29,9 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
       ...super.getFormParams(),
       isInlineEditing: false,
     }
-  }
+  } */
 
-  loadParams(successCallback?: (params: any) => void): void {
+  loadTableDescription(successCallback?: (params: any) => void): void {
     this.setState({
       addButtonText: 'Add Person',
       title: "Persons",

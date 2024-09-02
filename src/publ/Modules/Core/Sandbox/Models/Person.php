@@ -2,6 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Sandbox\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class Person extends \CeremonyCrmApp\Core\Model
 {
   public string $fullTableSqlName = 'sbx_persons';
@@ -41,6 +43,25 @@ class Person extends \CeremonyCrmApp\Core\Model
     $params = parent::tableParams();
     $params['title'] = 'Persons';
     return $params;
+  }
+
+  public function prepareLoadRecordQuery(bool $addLookups = false): Builder
+  {
+    $query = parent::prepareLoadRecordQuery();
+
+    $query = $query->selectRaw("
+      (Select value from person_contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,
+      (Select value from person_contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email,
+      (Select concat(street_line_1,', ', street_line_2, ', ', city) from person_addresses where id_person = persons.id LIMIT 1) virt_address
+    ")
+    ;
+
+    //var_dump($this->params); exit;
+    /* if ($this->params["idAccount"]) {
+      $query = $query->where("join_id_company.id_account");
+    } */
+
+    return $query;
   }
 
 }

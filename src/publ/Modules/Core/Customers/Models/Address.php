@@ -2,13 +2,19 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\Country;
+
 class Address extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'person_addresses';
-  public string $table = 'person_addresses';
+  public string $fullTableSqlName = 'addresses';
+  public string $table = 'addresses';
   public string $eloquentClass = Eloquent\Address::class;
-  public ?string $lookupSqlValue = "concat({%TABLE%}.street, ', ', {%TABLE%}.city)";
-  //public ?string $lookupSqlValue = "concat({%TABLE%}.value, ' - ', {%TABLE%}.type)";
+  public ?string $lookupSqlValue = "concat({%TABLE%}.street_line_1, ', ', {%TABLE%}.street_line_2, ', ', {%TABLE%}.city)";
+
+  public array $relations = [
+    'PERSON' => [ self::BELONGS_TO, Person::class, "id_person", "id" ],
+    'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
+  ];
 
   public function columns(array $columns = []): array
   {
@@ -40,8 +46,11 @@ class Address extends \CeremonyCrmApp\Core\Model
         "type" => "varchar",
         "title" => "Postal Code",
       ],
-      "country" => [
-        "type" => "varchar",
+      "id_country" => [
+        "type" => "lookup",
+        "model" => "CeremonyCrmApp/Modules/Core/Settings/Models/Country",
+        'foreignKeyOnUpdate' => 'SET NULL',
+        'foreignKeyOnDelete' => 'SET NULL',
         "title" => "Country",
       ],
     ]));

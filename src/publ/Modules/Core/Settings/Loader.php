@@ -52,12 +52,12 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mCountry = new Models\Country($this->app);
     $mCountry->install();
     $countries = [
-      ['country' => 'United States', 'code' => 'US'],
-      ['country' => 'Canada', 'code' => 'CA'],
-      ['country' => 'United Kingdom', 'code' => 'UK'],
-      ['country' => 'Australia', 'code' => 'AU'],
-      ['country' => 'Germany', 'code' => 'DE'],
-      ['country' => 'Slovakia', 'code' => 'SK'],
+      ['name' => 'United States', 'code' => 'US'],
+      ['name' => 'Canada', 'code' => 'CA'],
+      ['name' => 'United Kingdom', 'code' => 'UK'],
+      ['name' => 'Australia', 'code' => 'AU'],
+      ['name' => 'Germany', 'code' => 'DE'],
+      ['name' => 'Slovakia', 'code' => 'SK'],
   ];
 
   foreach ($countries as $country) {

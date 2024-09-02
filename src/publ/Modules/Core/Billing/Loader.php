@@ -31,10 +31,11 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
   {
-    $sidebar->addLink(1, 10101, 'billing', $this->app->translate('Billing'), 'fas fa-money-bill');
+    $sidebar->addLink(1, 20100, 'billing', $this->app->translate('Billing'), 'fas fa-money-bill');
 
-    if (str_starts_with($this->app->requestedUri, 'customers')) {
-      //$sidebar->addHeading1(2, 10200, $this->app->translate('Customers'));
+    if (str_starts_with($this->app->requestedUri, 'billing')) {
+      $sidebar->addHeading1(2, 20200, $this->app->translate('Billing'));
+      $sidebar->addLink(2, 20201, 'billing', $this->app->translate('Billing Accounts'), 'fas fa-warehouse');
     }
   }
 

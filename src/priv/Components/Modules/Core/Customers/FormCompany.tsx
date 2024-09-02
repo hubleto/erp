@@ -69,7 +69,6 @@ export default class FormCompany<P, S> extends Form<
           "company contacts"
           "activities activities"
           "billing billing"
-          "tags tags"
           `}}
         >
             <div className="card mt-4" style={{gridArea: "company"}}>
@@ -87,6 +86,18 @@ export default class FormCompany<P, S> extends Form<
                 {this.inputWrapper("company_id")}
                 {this.inputWrapper("note")}
                 {this.inputWrapper("is_active")}
+                <FormInput title='Categories'>
+                  <InputTags2 {...this.getDefaultInputProps()}
+                    value={this.state.record.TAGS}
+                    model='CeremonyCrmApp/Modules/Core/Customers/Models/Tag'
+                    targetColumn='id_company'
+                    sourceColumn='id_tag'
+                    colorColumn='color'
+                    onChange={(value: any) => {
+                      this.updateRecord({TAGS: value});
+                    }}
+                  ></InputTags2>
+                </FormInput>
               </div>
             </div>
 
@@ -157,6 +168,7 @@ export default class FormCompany<P, S> extends Form<
                       if (!R.ACTIVITIES) R.ACTIVITIES = [];
                       R.ACTIVITIES.push({
                         id_company: { _useMasterRecordId_: true },
+                        completed: false,
                       });
                       this.setState({ record: R });
                     }}
@@ -174,15 +186,10 @@ export default class FormCompany<P, S> extends Form<
                   <FormInput>
                     <div className="grid grid-cols-2 gap-4">
                       <label htmlFor="">Billing Account Description</label>
-                      <InputVarchar
-                        {...this.getDefaultInputProps()}
+                      <InputVarchar {...this.getDefaultInputProps()}
                         value={R.BILLING_ACCOUNT.description ?? ""}
                         placeholder={globalThis.app.translate("Billing Account Description")}
-                        onChange={(value: any) => {
-                          this.updateRecord({
-                            BILLING_ACCOUNT: { description: value },
-                          });
-                        }}
+                        onChange={(value: any) => {this.updateRecord({BILLING_ACCOUNT: { description: value }});}}
                       ></InputVarchar>
                     </div>
                   </FormInput>
@@ -204,38 +211,23 @@ export default class FormCompany<P, S> extends Form<
               </div>
             </div>
 
-            <div style={{gridArea: "tags"}}>
-              <FormInput title='Categories'>
-                <InputTags2 {...this.getDefaultInputProps()}
-                  value={this.state.record.TAGS}
-                  model='CeremonyCrmApp/Modules/Core/Customers/Models/Tag'
-                  targetColumn='id_company'
-                  sourceColumn='id_tag'
-                  colorColumn='color'
-                  onChange={(value: any) => {
-                    this.updateRecord({TAGS: value});
-                  }}
-                ></InputTags2>
-              </FormInput>
-            </div>
-
-          {/* <div>
-            <div className="card">
-              <div className="card-header">this.state.record</div>
-              <div className="card-body">
-                <pre
-                  style={{
-                    color: "blue",
-                    width: "100%",
-                    fontFamily: "Courier New",
-                    fontSize: "10px",
-                  }}
-                >
-                  {JSON.stringify(R, null, 2)}
-                </pre>
+            {/* <div>
+              <div className="card">
+                <div className="card-header">this.state.record</div>
+                <div className="card-body">
+                  <pre
+                    style={{
+                      color: "blue",
+                      width: "100%",
+                      fontFamily: "Courier New",
+                      fontSize: "10px",
+                    }}
+                  >
+                    {JSON.stringify(R, null, 2)}
+                  </pre>
+                </div>
               </div>
-            </div>
-          </div> */}
+            </div> */}
         </div>
       </>
     );

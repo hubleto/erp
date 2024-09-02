@@ -28,6 +28,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/address' => 'Addresses',
         '/contacts' => 'Contacts',
         '/activities' => 'Activity',
+        '/activities/get' => 'ActivityApi',
         '/tags' => 'Tag',
       ]
     );
@@ -57,12 +58,12 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     if (str_starts_with($this->app->requestedUri, 'customers')) {
       $sidebar->addHeading1(2, 10200, $this->app->translate('Customers'));
-      $sidebar->addLink(2, 10202, 'customers/companies', $this->app->translate('Companies'), 'fas fa-warehouse');
-      $sidebar->addLink(2, 10203, 'customers/persons', $this->app->translate('Persons'), 'fas fa-users');
-      $sidebar->addLink(2, 10204, 'customers/address', $this->app->translate('Addresses'), 'fas fa-map-pin');
-      $sidebar->addLink(2, 10205, 'customers/contacts', $this->app->translate('Contacts'), 'fas fa-address-book');
-      $sidebar->addLink(2, 10206, 'customers/activities', $this->app->translate('Activities'), 'fas fa-check');
-      $sidebar->addLink(2, 10207, 'customers/tags', $this->app->translate('Tags'), 'fas fa-bars');
+      $sidebar->addLink(2, 10201, 'customers/companies', $this->app->translate('Companies'), 'fas fa-warehouse');
+      $sidebar->addLink(2, 10202, 'customers/persons', $this->app->translate('Persons'), 'fas fa-users');
+      $sidebar->addLink(2, 10203, 'customers/address', $this->app->translate('Addresses'), 'fas fa-map-pin');
+      $sidebar->addLink(2, 10204, 'customers/contacts', $this->app->translate('Contacts'), 'fas fa-address-book');
+      $sidebar->addLink(2, 10205, 'customers/activities', $this->app->translate('Activities'), 'fas fa-check');
+      $sidebar->addLink(2, 10206, 'customers/tags', $this->app->translate('Tags'), 'fas fa-bars');
     }
   }
 

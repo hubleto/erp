@@ -7,12 +7,12 @@ class Country extends \CeremonyCrmApp\Core\Model
   public string $fullTableSqlName = 'countries';
   public string $table = 'countries';
   public string $eloquentClass = Eloquent\Country::class;
-  public ?string $lookupSqlValue = "{%TABLE%}.country";
+  public ?string $lookupSqlValue = "{%TABLE%}.name";
 
   public function columns(array $columns = []): array
   {
     return parent::columns([
-      'country' => [
+      'name' => [
         'type' => 'varchar',
         'title' => 'Country Name',
       ],

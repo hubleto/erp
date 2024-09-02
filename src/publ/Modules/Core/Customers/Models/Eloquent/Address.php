@@ -18,11 +18,11 @@ class Address extends \ADIOS\Core\Model\Eloquent
   }
   public function id_country(): HasOne {
    return $this->hasOne(Country::class, 'id', 'id_country' );
- }
- public function COUNTRY(): HasOne {
-   return $this->id_country();
- }
+  }
 
+  public function COUNTRY(): HasOne {
+    return $this->id_country();
+  }
   public function PERSON() {
     return $this->id_person();
   }

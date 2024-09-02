@@ -38,6 +38,7 @@
     "react-quill": "^2.0.0",
     "react-select": "^5.8.0",
     "react-tag-input": "^6.10.3",
+    "rsuite": "^5.70.0",
     "sweetalert2": "^11.12.4",
     "tailwindcss": "^3.4.5",
     "uuid": "^9.0.1"

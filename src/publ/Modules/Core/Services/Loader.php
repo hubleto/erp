@@ -25,18 +25,18 @@ class Loader extends \CeremonyCrmApp\Core\Module
         'idAccount' => '$1',
       ],
       [
-        '' => 'Dashboard',
-        'services' => 'Services',
+        '' => 'Services',
       ]
     );
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
   {
-    $sidebar->addLink(1, 10102, 'services', $this->app->translate('Services'), 'fa-brands fa-servicestack');
+    $sidebar->addLink(1, 30100, 'services', $this->app->translate('Services'), 'fa-brands fa-servicestack');
 
-    if (str_starts_with($this->app->requestedUri, 'services/services')) {
-      $sidebar->addHeading1(2, 10200, $this->app->translate('Services'), 'fa-brands fa-servicestack');
+    if (str_starts_with($this->app->requestedUri, 'services')) {
+      $sidebar->addHeading1(2, 30200, $this->app->translate('Services'));
+      $sidebar->addLink(2, 30201, 'services', $this->app->translate('Services'), 'fa-brands fa-servicestack');
     }
   }
 

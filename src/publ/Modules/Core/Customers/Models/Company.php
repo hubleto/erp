@@ -16,7 +16,7 @@ class Company extends \CeremonyCrmApp\Core\Model
     'PERSONS' => [ self::HAS_MANY, Person::class, "id_company" ],
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
     'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, "id_company" ],
-    'BILLING_ACCOUNT' => [ self::HAS_MANY, BillingAccount::class, "id_company" ],
+    'BILLING_ACCOUNT' => [ self::HAS_ONE, BillingAccount::class, "id_company" ],
     'ACTIVITIES' => [ self::HAS_MANY, Activity::class, "id_company" ],
     'TAGS' => [ self::HAS_MANY, CompanyTag::class, "id_company", "id" ],
   ];

@@ -2,6 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Billing\Models;
 
+use CeremonyCrmApp\Modules\Core\Customers\Models\Company;
+
 class BillingAccount extends \CeremonyCrmApp\Core\Model
 {
   public string $fullTableSqlName = 'billing_accounts';
@@ -9,9 +11,9 @@ class BillingAccount extends \CeremonyCrmApp\Core\Model
   public string $eloquentClass = Eloquent\BillingAccount::class;
   public ?string $lookupSqlValue = "{%TABLE%}.description";
 
-
   public array $relations = [
     'SERVICES' => [ self::HAS_MANY, BillingAccountService::class, "id_billing_account", "id" ],
+    'COMPANY' => [ self::BELONGS_TO, Company::class, "id" ],
   ];
 
   public function columns(array $columns = []): array

@@ -16,6 +16,9 @@ class BillingAccount extends \ADIOS\Core\Model\Eloquent
     return $this->belongsTo(Company::class, 'id');
   }
 
+  public function COMPANY(): BelongsTo {
+    return $this->id_company();
+  }
   public function SERVICES(): HasMany
   {
     return $this->hasMany(BillingAccountService::class, 'id_billing_account', 'id');

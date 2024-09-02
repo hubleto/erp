@@ -8,6 +8,5 @@ use \Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Country extends \ADIOS\Core\Model\Eloquent
 {
-
   public $table = 'countries';
 }

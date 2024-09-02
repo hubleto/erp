@@ -74,6 +74,18 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 {this.inputWrapper("id_company")}
                 {this.inputWrapper("is_primary")}
                 {this.inputWrapper("is_active")}
+                <FormInput title='Categories'>
+                  <InputTags2 {...this.getDefaultInputProps()}
+                    value={this.state.record.TAGS}
+                    model='CeremonyCrmApp/Modules/Core/Customers/Models/Tag'
+                    targetColumn='id_person'
+                    sourceColumn='id_tag'
+                    colorColumn='color'
+                    onChange={(value: any) => {
+                      this.updateRecord({TAGS: value});
+                    }}
+                  ></InputTags2>
+                </FormInput>
               </div>
             </div>
 
@@ -148,19 +160,6 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 ) : null}
               </div>
             </div>
-
-            <FormInput title='Categories'>
-              <InputTags2 {...this.getDefaultInputProps()}
-                value={this.state.record.TAGS}
-                model='CeremonyCrmApp/Modules/Core/Customers/Models/Tag'
-                targetColumn='id_person'
-                sourceColumn='id_tag'
-                colorColumn='color'
-                onChange={(value: any) => {
-                  this.updateRecord({TAGS: value});
-                }}
-              ></InputTags2>
-            </FormInput>
 
           {/* <div>
             <div className="card">

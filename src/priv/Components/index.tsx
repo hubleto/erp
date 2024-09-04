@@ -1,4 +1,4 @@
-import { ADIOS } from "adios/Loader"
+import { ADIOS } from "adios/Loader";
 import { dictionarySk } from "adios/Dictionary/Sk";
 
 // ADIOS
@@ -13,7 +13,7 @@ import InputBoolean from "adios/Inputs/Boolean";
 import InputColor from "adios/Inputs/Color";
 
 // Primereact
-import { Tooltip } from "primereact/tooltip"
+import { Tooltip } from "primereact/tooltip";
 
 // rSuite
 import CalendarComponent from "./Modules/Core/Calendar/CalendarComponent";

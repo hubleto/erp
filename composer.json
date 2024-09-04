@@ -13,7 +13,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../libs/ADIOS"
+            "url": "../../github/ADIOS"
         }
     ]
 }

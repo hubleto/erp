@@ -19,7 +19,7 @@
     "@types/react": "^18.2.32",
     "@types/react-dom": "^18.2.14",
     "@uiw/react-color-compact": "^2.3.0",
-    "adios": "file:../../github/ADIOS/src/Components",
+    "adios": "file:../libs/ADIOS/src/Components",
     "axios": "^1.7.3",
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",

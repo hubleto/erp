@@ -2,12 +2,12 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Controllers;
 
-class BusinessAccounts extends \CeremonyCrmApp\Core\Controller {
+class Tag extends \CeremonyCrmApp\Core\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'customers', 'content' => $this->app->translate('Customers') ],
-      [ 'url' => '', 'content' => $this->app->translate('Business Accounts') ],
+      [ 'url' => 'tags', 'content' => $this->app->translate('Tags') ],
     ]);
   }
 

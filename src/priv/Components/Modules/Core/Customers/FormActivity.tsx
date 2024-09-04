@@ -31,8 +31,8 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
   }
 
   normalizeRecord(record) {
-    if (record.CATEGORIES) record.CATEGORIES.map((item: any, key: number) => {
-      record.CATEGORIES[key].id_activity = {_useMasterRecordId_: true};
+    if (record.TAGS) record.TAGS.map((item: any, key: number) => {
+      record.TAGS[key].id_activity = {_useMasterRecordId_: true};
     });
 
     return record;
@@ -70,13 +70,13 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
 
                 <FormInput title='Categories'>
                   <InputTags2 {...this.getDefaultInputProps()}
-                    value={this.state.record.CATEGORIES}
-                    model='CeremonyCrmApp/Modules/Core/Customers/Models/ActivityCategory'
+                    value={this.state.record.TAGS}
+                    model='CeremonyCrmApp/Modules/Core/Customers/Models/Tag'
                     targetColumn='id_activity'
-                    sourceColumn='id_activity_category'
+                    sourceColumn='id_tag'
                     colorColumn='color'
                     onChange={(value: any) => {
-                      this.updateRecord({CATEGORIES: value});
+                      this.updateRecord({TAGS: value});
                     }}
                   ></InputTags2>
                 </FormInput>

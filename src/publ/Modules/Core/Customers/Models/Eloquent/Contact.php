@@ -7,11 +7,15 @@ use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contact extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'person_contacts';
+  public $table = 'contacts';
 
   public function id_person(): BelongsTo
   {
-    return $this->belongsTo(Person::class, 'id_person', 'id');
+    return $this->belongsTo(Person::class, 'id_person');
+  }
+
+  public function PERSON() {
+    return $this->id_person();
   }
 
 }

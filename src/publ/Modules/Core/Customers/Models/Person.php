@@ -2,6 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class Person extends \CeremonyCrmApp\Core\Model
 {
   public string $fullTableSqlName = 'persons';
@@ -10,9 +12,10 @@ class Person extends \CeremonyCrmApp\Core\Model
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
 
   public array $relations = [
-    'COMPANY' => [ self::BELONGS_TO, Company::class, "id" ],
-    'CONTACTS' => [ self::HAS_MANY, Contact::class, "id_person" ],
-    'ADDRESSES' => [ self::HAS_MANY, Address::class, "id_person" ],
+    'COMPANY' => [ self::BELONGS_TO, Company::class, "id_company" ],
+    'CONTACTS' => [ self::HAS_MANY, Contact::class, "id_person", "id" ],
+    'ADDRESSES' => [ self::HAS_MANY, Address::class, "id_person", "id" ],
+    'TAGS' => [ self::HAS_MANY, PersonTag::class, "id_person", "id" ],
   ];
 
   public function columns(array $columns = []): array
@@ -37,10 +40,15 @@ class Person extends \CeremonyCrmApp\Core\Model
         "type" => "boolean",
         "title" => "First Contact",
       ],
-      /* "tags" => [
-        "type" => "tags",
-        "title" => "Tags",
-      ], */
+      "note" => [
+        "type" => "text",
+        "title" => "Notes",
+      ],
+      "is_active" => [
+        "type" => "boolean",
+        "title" => "Active",
+        "default" => 1,
+      ],
     ]));
   }
 
@@ -51,4 +59,22 @@ class Person extends \CeremonyCrmApp\Core\Model
     return $params;
   }
 
+  public function prepareLoadRecordQuery(bool $addLookups = false): Builder
+  {
+    $query = parent::prepareLoadRecordQuery();
+
+    $query = $query->selectRaw("
+      (Select value from contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,
+      (Select value from contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email,
+      (Select concat(street_line_1,', ', street_line_2, ', ', city) from addresses where id_person = persons.id LIMIT 1) virt_address
+    ")
+    ;
+
+    //var_dump($this->params); exit;
+    /* if ($this->params["idAccount"]) {
+      $query = $query->where("join_id_company.id_account");
+    } */
+
+    return $query;
+  }
 }

@@ -41,9 +41,12 @@ export default class FormCompany<P, S> extends Form<
     if (record.ACTIVITIES) record.ACTIVITIES.map((item: any, key: number) => {
         record.ACTIVITIES[key].id_company = { _useMasterRecordId_: true };
     });
-    if (record.BUSINESS_ACCOUNT) {
-      record.BUSINESS_ACCOUNT.id_company = { _useMasterRecordId_: true };
+    if (record.BILLING_ACCOUNT) {
+      record.BILLING_ACCOUNT.id_company = { _useMasterRecordId_: true };
     }
+    if (record.TAGS) record.TAGS.map((item: any, key: number) => {
+      record.TAGS[key].id_person = {_useMasterRecordId_: true};
+    });
 
     return record;
   }
@@ -61,25 +64,53 @@ export default class FormCompany<P, S> extends Form<
 
     return (
       <>
-        <div className="grid grid-cols-2 gap-1">
-          <div>
-            <div className="card mt-4">
+        <div className="grid grid-cols-2 gap-1"
+        style={{gridTemplateAreas:`
+          "company contacts"
+          "activities activities"
+          "billing billing"
+          `}}
+        >
+            <div className="card mt-4" style={{gridArea: "company"}}>
               <div className="card-header">Company Information</div>
               <div className="card-body">
                 {this.inputWrapper("name")}
-                {this.inputWrapper("street")}
+                {this.inputWrapper("street_line_1")}
+                {this.inputWrapper("street_line_2")}
                 {this.inputWrapper("city")}
-                {this.inputWrapper("country")}
+                {this.inputWrapper("region")}
+                {this.inputWrapper("id_country")}
                 {this.inputWrapper("postal_code")}
                 {this.inputWrapper("vat_id")}
                 {this.inputWrapper("tax_id")}
                 {this.inputWrapper("company_id")}
+                {this.inputWrapper("note")}
+                {this.inputWrapper("is_active")}
+                <FormInput title='Categories'>
+                  <InputTags2 {...this.getDefaultInputProps()}
+                    value={this.state.record.TAGS}
+                    model='CeremonyCrmApp/Modules/Core/Customers/Models/Tag'
+                    targetColumn='id_company'
+                    sourceColumn='id_tag'
+                    colorColumn='color'
+                    onChange={(value: any) => {
+                      this.updateRecord({TAGS: value});
+                    }}
+                  ></InputTags2>
+                </FormInput>
               </div>
             </div>
 
-            <div className="card mt-4">
-              <div className="card-header">Contacts</div>
+            <div className="card mt-4" style={{gridArea: "contacts"}}>
+              <div className="card-header">Contact Persons</div>
               <div className="card-body">
+                <style>
+                  {`
+                    table: {
+                      max-width: auto;
+                    }
+                  `}
+                </style>
                 <InputTable
                   {...this.getDefaultInputProps()}
                   model="CeremonyCrmApp/Modules/Core/Customers/Models/Person"
@@ -90,10 +121,11 @@ export default class FormCompany<P, S> extends Form<
                   columns={{
                     first_name: { type: "varchar", title: "First name" },
                     last_name: { type: "varchar", title: "Last name" },
+                    is_primary: { type: "boolean", title: "First Contact" },
                   }}
-                  onRowClick={(table: Table, row: any) => {
+                  /* onRowClick={(table: Table, row: any) => {
                     console.log(table, row);
-                  }}
+                  }} */
                 ></InputTable>
                 {this.state.isInlineEditing ? (
                   <a
@@ -112,7 +144,7 @@ export default class FormCompany<P, S> extends Form<
               </div>
             </div>
 
-            <div className="card mt-4">
+            <div className="card mt-4" style={{gridArea: "activities"}}>
               <div className="card-header">Company Activities</div>
               <div className="card-body">
                 <InputTable
@@ -136,6 +168,7 @@ export default class FormCompany<P, S> extends Form<
                       if (!R.ACTIVITIES) R.ACTIVITIES = [];
                       R.ACTIVITIES.push({
                         id_company: { _useMasterRecordId_: true },
+                        completed: false,
                       });
                       this.setState({ record: R });
                     }}
@@ -146,64 +179,17 @@ export default class FormCompany<P, S> extends Form<
               </div>
             </div>
 
-            <div className="card mt-4">
-              <div className="card-header">
-                Contacts - FormInput with InputVarchar
-              </div>
+            <div className="card mt-4" style={{gridArea: "billing"}}>
+              <div className="card-header">Billing Account</div>
               <div className="card-body">
-                {R.PERSONS ? R.PERSONS.map((item: any, key: number) => {
-                  return (
-                    <>
-                      <FormInput>
-                        <div className="flex">
-                          <InputVarchar
-                            {...this.getDefaultInputProps()}
-                            value={item.first_name ?? ""}
-                            placeholder={globalThis.app.translate(
-                              "First name"
-                            )}
-                            onChange={(value: any) => {
-                              this.updateRecord({
-                                PERSONS: { [key]: { first_name: value } },
-                              });
-                            }}
-                          ></InputVarchar>
-                          <InputVarchar
-                            {...this.getDefaultInputProps()}
-                            value={item.last_name ?? ""}
-                            placeholder={globalThis.app.translate(
-                              "Last name"
-                            )}
-                            onChange={(value: any) => {
-                              this.updateRecord({
-                                PERSONS: { [key]: { last_name: value } },
-                              });
-                            }}
-                          ></InputVarchar>
-                        </div>
-                      </FormInput>
-                    </>
-                  );
-                })
-                : globalThis.app.translate("No contacts")}
-              </div>
-            </div>
-            <div className="card mt-4">
-              <div className="card-header">Business Account</div>
-              <div className="card-body">
-                {R.BUSINESS_ACCOUNT ? (
+                {R.BILLING_ACCOUNT ? (
                   <FormInput>
                     <div className="grid grid-cols-2 gap-4">
-                      <label htmlFor="">Business Account Name</label>
-                      <InputVarchar
-                        {...this.getDefaultInputProps()}
-                        value={R.BUSINESS_ACCOUNT.name ?? ""}
-                        placeholder={globalThis.app.translate("Business Account Name")}
-                        onChange={(value: any) => {
-                          this.updateRecord({
-                            BUSINESS_ACCOUNT: { name: value },
-                          });
-                        }}
+                      <label htmlFor="">Billing Account Description</label>
+                      <InputVarchar {...this.getDefaultInputProps()}
+                        value={R.BILLING_ACCOUNT.description ?? ""}
+                        placeholder={globalThis.app.translate("Billing Account Description")}
+                        onChange={(value: any) => {this.updateRecord({BILLING_ACCOUNT: { description: value }});}}
                       ></InputVarchar>
                     </div>
                   </FormInput>
@@ -211,37 +197,37 @@ export default class FormCompany<P, S> extends Form<
                   <a
                     role="button"
                     onClick={() => {
-                      if (!R.BUSINESS_ACCOUNT) {
-                        R.BUSINESS_ACCOUNT = {
+                      if (!R.BILLING_ACCOUNT) {
+                        R.BILLING_ACCOUNT = {
                           id_company: { _useMasterRecordId_: true },
                         };
                       }
                       this.setState({ record: R });
                     }}
                   >
-                    + Add Business Account
+                    + Add Billing Account
                   </a>
                 )}
               </div>
             </div>
-          </div>
-          <div>
-            <div className="card">
-              <div className="card-header">this.state.record</div>
-              <div className="card-body">
-                <pre
-                  style={{
-                    color: "blue",
-                    width: "100%",
-                    fontFamily: "Courier New",
-                    fontSize: "10px",
-                  }}
-                >
-                  {JSON.stringify(R, null, 2)}
-                </pre>
+
+            {/* <div>
+              <div className="card">
+                <div className="card-header">this.state.record</div>
+                <div className="card-body">
+                  <pre
+                    style={{
+                      color: "blue",
+                      width: "100%",
+                      fontFamily: "Courier New",
+                      fontSize: "10px",
+                    }}
+                  >
+                    {JSON.stringify(R, null, 2)}
+                  </pre>
+                </div>
               </div>
-            </div>
-          </div>
+            </div> */}
         </div>
       </>
     );

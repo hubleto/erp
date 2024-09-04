@@ -16,14 +16,14 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
   }
 
   props: TableCompaniesProps;
-  state: TableCompaniesState;
+  /* state: TableCompaniesState;
 
   constructor(props: TableCompaniesProps) {
     super(props);
     this.state = this.getStateFromProps(props);
-  }
+  } */
 
-  getFormModalParams(): any {
+ /*  getFormModalParams(): any {
     let params: any = super.getFormModalParams();
     params.type = this.state.formId == -1 ? 'centered' : 'right wide';
     return params;
@@ -32,7 +32,7 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
     return {
       ...super.getStateFromProps(props),
     }
-  }
+  } */
 
   renderForm(): JSX.Element {
     let formParams = this.getFormParams();

@@ -63,6 +63,7 @@
   .adios.component.table .table-body tr.highlighted { @apply divide-none text-primary; }
   .adios.component.table .table-body tr.highlighted td > div { @apply border-b border-primary; }
   .adios.component.table .table-body tr td { @apply hover:bg-gray-200; }
+  .adios.component.input.table { @apply max-w-[100%] }
 
   .adios.component.input { @apply flex justify-between items-center w-full max-w-[400px]; }
   .adios.component.input.lookup { @apply block; }

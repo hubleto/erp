@@ -7,21 +7,21 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class ActivityCategoryActivity extends \ADIOS\Core\Model\Eloquent
+class ActivityTag extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'activity_categories_activities';
+  public $table = 'activities_tags';
 
   public function id_activity(): BelongsTo
   {
     return $this->belongsTo(Activity::class, "id_activity", 'id');
   }
-  public function id_activity_category(): BelongsTo
+  public function id_tag(): BelongsTo
   {
-    return $this->belongsTo(ActivityCategory::class, "id_activity_category", "id");
+    return $this->belongsTo(Tag::class, "id_tag", "id");
   }
 
-  public function CATEGORY() {
-    return $this->id_activity_category();
+  public function TAG() {
+    return $this->id_tag();
   }
 
 }

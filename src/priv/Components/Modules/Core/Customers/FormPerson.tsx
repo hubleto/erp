@@ -31,12 +31,15 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
   }
 
   normalizeRecord(record) {
-    /* if (record.PERSONS) record.PERSONS.map((item: any, key: number) => {
-      record.PERSONS[key].id_company = {_useMasterRecordId_: true};
+    if (record.ADDRESSES) record.ADDRESSES.map((item: any, key: number) => {
+      record.ADDRESSES[key].id_person = {_useMasterRecordId_: true};
     });
-    if (record.BUSINESS_ACCOUNT) {
-      record.BUSINESS_ACCOUNT.id_company = {_useMasterRecordId_: true};
-    }; */
+    if (record.CONTACTS) record.CONTACTS.map((item: any, key: number) => {
+      record.CONTACTS[key].id_person = {_useMasterRecordId_: true};
+    });
+    if (record.TAGS) record.TAGS.map((item: any, key: number) => {
+      record.TAGS[key].id_person = {_useMasterRecordId_: true};
+    });
 
     return record;
   }
@@ -58,19 +61,35 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
 
     return (
       <>
-        <div className="grid grid-cols-2 gap-1">
-          <div>
-            <div className="card mt-4">
+        <div className="grid grid-cols-2 gap-1" style=
+          {{gridTemplateAreas:`
+            "person contacts"
+            "addresses addresses"
+          `}}>
+            <div className="card mt-4" style={{gridArea: "person"}}>
               <div className="card-header">Personal Information</div>
               <div className="card-body">
                 {this.inputWrapper("first_name")}
                 {this.inputWrapper("last_name")}
                 {this.inputWrapper("id_company")}
                 {this.inputWrapper("is_primary")}
+                {this.inputWrapper("is_active")}
+                <FormInput title='Categories'>
+                  <InputTags2 {...this.getDefaultInputProps()}
+                    value={this.state.record.TAGS}
+                    model='CeremonyCrmApp/Modules/Core/Customers/Models/Tag'
+                    targetColumn='id_person'
+                    sourceColumn='id_tag'
+                    colorColumn='color'
+                    onChange={(value: any) => {
+                      this.updateRecord({TAGS: value});
+                    }}
+                  ></InputTags2>
+                </FormInput>
               </div>
             </div>
 
-            <div className="card mt-4">
+            <div className="card mt-4" style={{gridArea: "addresses"}}>
               <div className="card-header">Addresses</div>
               <div className="card-body">
                 <InputTable
@@ -81,10 +100,11 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     this.updateRecord({ ADDRESSES: value });
                   }}
                   columns={{
-                    street: { type: "varchar", title: "Street" },
+                    street_line_1: { type: "varchar", title: "Street Line 1" },
+                    street_line_2: { type: "varchar", title: "Street Line 2" },
                     city: { type: "varchar", title: "City" },
                     postal_code: { type: "varchar", title: "Postal Code" },
-                    country: { type: "varchar", title: "Country" },
+                    id_country: { type: "lookup", model: "CeremonyCrmApp/Modules/Core/Settings/Models/Country", title: "Country" },
                   }}
                 ></InputTable>
                 {this.state.isInlineEditing ? (
@@ -103,7 +123,8 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 ) : null}
               </div>
             </div>
-            <div className="card mt-4">
+
+            <div className="card mt-4" style={{gridArea: "contacts"}}>
               <div className="card-header">Contacts</div>
               <div className="card-body">
                 <InputTable
@@ -118,6 +139,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                       type: "varchar",
                       title: "Contact type",
                       enumValues: {"email" : "Email", "number" : "Phone Number"},
+                      //enumCssClasses: {"email" : "bg-yellow-200", "number" : "bg-blue-200"},
                     },
                     value: { type: "varchar", title: "Value" },
                   }}
@@ -138,9 +160,8 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 ) : null}
               </div>
             </div>
-          </div>
 
-          <div>
+          {/* <div>
             <div className="card">
               <div className="card-header">this.state.record</div>
               <div className="card-body">
@@ -156,7 +177,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 </pre>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </>
     );

@@ -12,18 +12,21 @@ class Person extends \ADIOS\Core\Model\Eloquent
 
   public function id_company(): BelongsTo
   {
-    return $this->belongsTo(Company::class, 'id');
+    return $this->belongsTo(Company::class, 'id_company');
   }
   public function COMPANY() {
     return $this->id_company();
   }
   public function CONTACTS(): HasMany
   {
-    return $this->hasMany(Contact::class, 'id_person');
+    return $this->hasMany(Contact::class, 'id_person', 'id');
   }
   public function ADDRESSES(): HasMany
   {
-    return $this->hasMany(Address::class, 'id_person');
+    return $this->hasMany(Address::class, 'id_person', 'id');
   }
-
+  public function TAGS(): HasMany
+  {
+    return $this->hasMany(PersonTag::class, 'id_person', 'id');
+  }
 }

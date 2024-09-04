@@ -15,6 +15,9 @@ import InputColor from "adios/Inputs/Color";
 // Primereact
 import { Tooltip } from "primereact/tooltip"
 
+// rSuite
+import CalendarComponent from "./Modules/Core/Calendar/CalendarComponent";
+
 // Modules
 import FormUser from "./Modules/Core/Settings/FormUser"
 import CoreCustomersTablePersons from "./Modules/Core/Customers/TablePersons"
@@ -41,6 +44,9 @@ app.registerReactComponent('InputColor', InputColor);
 
 // Primereact
 app.registerReactComponent('Tooltip', Tooltip);
+
+//rSuite
+app.registerReactComponent('CalendarComponent', CalendarComponent);
 
 // Modules
 app.registerReactComponent('FormUser', FormUser);

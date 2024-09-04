@@ -48,4 +48,19 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mSetting = new Models\Setting($this->app);
     $mSetting->install();
     $mSetting->eloquent->create(['key' => 'test/setting/example', 'value' => rand(1000, 9999)]);
+
+    $mCountry = new Models\Country($this->app);
+    $mCountry->install();
+    $countries = [
+      ['name' => 'United States', 'code' => 'US'],
+      ['name' => 'Canada', 'code' => 'CA'],
+      ['name' => 'United Kingdom', 'code' => 'UK'],
+      ['name' => 'Australia', 'code' => 'AU'],
+      ['name' => 'Germany', 'code' => 'DE'],
+      ['name' => 'Slovakia', 'code' => 'SK'],
+  ];
+
+  foreach ($countries as $country) {
+    $mCountry->eloquent->create($country);
+  }
   }}

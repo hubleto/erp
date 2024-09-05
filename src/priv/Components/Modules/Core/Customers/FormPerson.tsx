@@ -56,8 +56,20 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
     );
   }
 
+  onBeforeSaveRecord(record: any) {
+    if (!record.is_primary) {
+      record.is_primary = 0;
+    }
+    if (record.id == -1) {
+      record.is_active = 1;
+    }
+
+    return record;
+  }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
+    const showAdditional = R.id > 0 ? true : false;
 
     return (
       <>
@@ -73,7 +85,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 {this.inputWrapper("last_name")}
                 {this.inputWrapper("id_company")}
                 {this.inputWrapper("is_primary")}
-                {this.inputWrapper("is_active")}
+                {showAdditional ? this.inputWrapper("is_active") : null}
                 <FormInput title='Categories'>
                   <InputTags2 {...this.getDefaultInputProps()}
                     value={this.state.record.TAGS}

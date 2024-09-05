@@ -50,8 +50,17 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
     );
   }
 
+  onBeforeSaveRecord(record: any) {
+    if (record.id == -1) {
+      record.completed = 0;
+    }
+
+    return record;
+  }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
+    const showAdditional = R.id > 0 ? true : false;
 
     return (
       <>
@@ -65,7 +74,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
                 {this.inputWrapper("due_date")}
                 {this.inputWrapper("due_time")}
                 {this.inputWrapper("duration")}
-                {this.inputWrapper("completed")}
+                {showAdditional ? this.inputWrapper("completed") : null}
 
                 <FormInput title='Categories'>
                   <InputTags2 {...this.getDefaultInputProps()}

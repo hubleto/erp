@@ -17,7 +17,7 @@ class User extends \ADIOS\Models\User
   public string $table = 'users';
   public string $eloquentClass = Eloquent\User::class;
 
-  public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
+  public ?string $lookupSqlValue = "{%TABLE%}.email";
 
   public function columns(array $columns = []): array
   {

@@ -23,7 +23,7 @@ class Activity extends \ADIOS\Core\Model\Eloquent
   public function COMPANY() {
     return $this->id_company();
   }
-  public function USER(): BelongsTo
+  public function USER()
   {
     return $this->id_user();
   }

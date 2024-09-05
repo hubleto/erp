@@ -1,57 +1,72 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Badge, Calendar, Popover, Whisper } from "rsuite";
+import FormActivity from "../Customers/FormActivity";
 import "rsuite/Calendar/styles/index.css";
-import request from "adios/Request";
-import { exit } from "process";
 
 export default class CalendarComponent extends Component {
+  constructor(props) {
+    super(props);
 
-  props: {
-    data: any;
+    this.state = {
+      events: [],
+      loading: true,
+    };
   }
 
-  getData(idCompany?: number) {
-    request.post(
-      "customers/activities/get",
-      {
-        idCompany: idCompany ?? 0,
-      },
-      {},
-      (res: any) => {
-        console.log(res);
-        this.props.data = res;
-      },
-      (err: any) => {
-        alert(err);
-      }
+  componentDidMount() {
+    this.fetchCalendarEvents();
+  }
+
+  fetchCalendarEvents = () => {
+    fetch("customers/activities/get")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ events: data, loading: false });
+      })
+      .catch((error) => {
+        console.error("Error fetching calendar events:", error);
+        this.setState({ loading: false });
+      });
+  };
+
+  renderCell = (date) => {
+    const { events } = this.state;
+
+    const eventForDate = events.find(
+      (event) => new Date(event.date).toDateString() === date.toDateString()
     );
-  }
 
-  renderCell(date) {
-    var transformedDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-
-    if (
-      date.getFullYear() === this.props.data[transformedDate].date.getFullYear() &&
-      date.getMonth() === this.props.data[transformedDate].date.getMonth() &&
-      date.getDate() === this.props.data[transformedDate].date.getDate()
-    ) {
-      // Customize the cell for the specific date
+    if (eventForDate) {
       return (
-        <div
-          style={{
-            backgroundColor: "lightblue",
-            borderRadius: "50%",
-            padding: "5px",
-          }}
-        >
-          {this.props.data[date]} - {this.props.data[date].title}
+        <div>
+          <div style={{ backgroundColor: "lightblue", padding: "5px" }}>
+            <a
+              target="_blank"
+              href={`customers/activities?recordId=${eventForDate.id}`}
+            >
+              <strong>{eventForDate.title}</strong>
+            </a>
+          </div>
         </div>
       );
     }
-  }
+    return null;
+  };
 
   render() {
-    this.getData();
-    return <Calendar isoWeek={true} bordered renderCell={this.renderCell} />;
+    const { loading } = this.state;
+
+    if (loading) {
+      return <div>Loading Calendar...</div>;
+    }
+
+    const html =
+    <div>
+      <Calendar bordered renderCell={this.renderCell} />;
+      <FormActivity/>
+    </div>
+
+    return html;
+
   }
 }

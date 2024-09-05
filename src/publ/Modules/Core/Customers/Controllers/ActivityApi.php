@@ -10,10 +10,11 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
     $aktivity = $mAktivita->eloquent->all();
     $transformacia = [];
 
-    foreach ($aktivity as $aktivity) {
-      $transformacia["{$aktivity->due_date}"]["date"] = $aktivity->due_date;
-      $transformacia["{$aktivity->due_date}"]["time"] = $aktivity->due_time;
-      $transformacia["{$aktivity->due_date}"]["title"] = $aktivity->subject;
+    foreach ($aktivity as $key => $aktivity) {
+      $transformacia[$key]["id"] = $aktivity->id;
+      $transformacia[$key]["date"] = $aktivity->due_date;
+      $transformacia[$key]["time"] = $aktivity->due_time;
+      $transformacia[$key]["title"] = $aktivity->subject;
     }
 
     return $transformacia;

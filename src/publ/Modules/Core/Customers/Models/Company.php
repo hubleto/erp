@@ -74,6 +74,7 @@ class Company extends \CeremonyCrmApp\Core\Model
       "is_active" => [
         "type" => "boolean",
         "title" => "Active",
+        "required" => false,
         "default" => 1,
       ],
 

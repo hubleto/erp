@@ -62,7 +62,6 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
               <div className="card-body">
                 {this.inputWrapper("subject")}
                 {this.inputWrapper("id_company")}
-                {this.inputWrapper("id_user")}
                 {this.inputWrapper("due_date")}
                 {this.inputWrapper("due_time")}
                 {this.inputWrapper("duration")}

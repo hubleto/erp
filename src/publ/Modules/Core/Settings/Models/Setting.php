@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
 class Setting extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'settings';
   public string $table = 'settings';
   public string $eloquentClass = Eloquent\Setting::class;
 

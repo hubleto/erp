@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 class ActivityTag extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'activities_tags';
   public string $table = 'activities_tags';
   public string $eloquentClass = Eloquent\ActivityTag::class;
 

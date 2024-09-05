@@ -10,7 +10,6 @@ class UserRole extends \CeremonyCrmApp\Core\Model
     self::ROLE_ADMINISTRATOR => 'ADMINISTRATOR',
   ];
 
-  public string $fullTableSqlName = 'user_roles';
   public string $table = 'user_roles';
   public string $eloquentClass = Eloquent\UserRole::class;
   public ?string $lookupSqlValue = "{%TABLE%}.role";

@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
 class UserHasRole extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'user_has_roles';
   public string $table = 'user_has_roles';
   public string $eloquentClass = Eloquent\UserHasRole::class;
 

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Person extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'sbx_persons';
   public string $table = 'sbx_persons';
   public string $eloquentClass = Eloquent\Person::class;
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";

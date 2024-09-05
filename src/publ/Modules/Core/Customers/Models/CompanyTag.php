@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 class CompanyTag extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'companies_tags';
   public string $table = 'companies_tags';
   public string $eloquentClass = Eloquent\CompanyTag::class;
 

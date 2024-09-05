@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 class Contact extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'contacts';
   public string $table = 'contacts';
   public string $eloquentClass = Eloquent\Contact::class;
   public ?string $lookupSqlValue = "{%TABLE%}.value";

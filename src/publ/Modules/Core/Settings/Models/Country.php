@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
 class Country extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'countries';
   public string $table = 'countries';
   public string $eloquentClass = Eloquent\Country::class;
   public ?string $lookupSqlValue = "{%TABLE%}.name";

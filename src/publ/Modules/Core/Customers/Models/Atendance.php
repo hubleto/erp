@@ -6,7 +6,6 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 
 class Atendance extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'atendance';
   public string $table = 'atendance';
   public string $eloquentClass = Eloquent\Atendance::class;
   public ?string $lookupSqlValue = "{%TABLE%}.id_user";

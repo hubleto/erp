@@ -6,7 +6,6 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\Country;
 
 class Address extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'addresses';
   public string $table = 'addresses';
   public string $eloquentClass = Eloquent\Address::class;
   public ?string $lookupSqlValue = "concat({%TABLE%}.street_line_1, ', ', {%TABLE%}.street_line_2, ', ', {%TABLE%}.city)";

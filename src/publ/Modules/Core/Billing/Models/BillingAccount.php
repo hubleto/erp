@@ -6,7 +6,6 @@ use CeremonyCrmApp\Modules\Core\Customers\Models\Company;
 
 class BillingAccount extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'billing_accounts';
   public string $table = 'billing_accounts';
   public string $eloquentClass = Eloquent\BillingAccount::class;
   public ?string $lookupSqlValue = "{%TABLE%}.description";

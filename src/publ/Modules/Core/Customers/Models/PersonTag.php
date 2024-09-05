@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 class PersonTag extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'persons_tags';
   public string $table = 'persons_tags';
   public string $eloquentClass = Eloquent\PersonTag::class;
 

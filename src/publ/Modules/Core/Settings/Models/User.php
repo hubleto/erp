@@ -14,7 +14,6 @@ class User extends \ADIOS\Models\User
     'sk' => 'Slovensky',
   ];
 
-  public string $fullTableSqlName = 'users';
   public string $table = 'users';
   public string $eloquentClass = Eloquent\User::class;
 

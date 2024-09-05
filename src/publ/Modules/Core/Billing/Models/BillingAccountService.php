@@ -6,7 +6,6 @@ use CeremonyCrmApp\Modules\Core\Services\Models\Service;
 
 class BillingAccountService extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'billing_accounts_services';
   public string $table = 'billing_accounts_services';
   public string $eloquentClass = Eloquent\BillingAccountService::class;
 

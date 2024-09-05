@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Sandbox\Models;
 
 class CompanyCategory extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'sbx_companies_categories';
   public string $table = 'sbx_companies_categories';
   public string $eloquentClass = Eloquent\CompanyCategory::class;
 

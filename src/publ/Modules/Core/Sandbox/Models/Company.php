@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Sandbox\Models;
 
 class Company extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'sbx_companies';
   public string $table = 'sbx_companies';
   public string $eloquentClass = Eloquent\Company::class;
   public ?string $lookupSqlValue = "{%TABLE%}.name";

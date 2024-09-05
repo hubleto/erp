@@ -6,7 +6,6 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 
 class Activity extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'activities';
   public string $table = 'activities';
   public string $eloquentClass = Eloquent\Activity::class;
   public ?string $lookupSqlValue = "{%TABLE%}.subject";

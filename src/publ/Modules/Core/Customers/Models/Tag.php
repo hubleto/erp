@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 class Tag extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'tags';
   public string $table = 'tags';
   public string $eloquentClass = Eloquent\Tag::class;
   public ?string $lookupSqlValue = "{%TABLE%}.name";

@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
 class Profile extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'profiles';
   public string $table = 'profiles';
   public string $eloquentClass = Eloquent\Setting::class;
   public ?string $lookupSqlValue = "{%TABLE%}.company";

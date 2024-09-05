@@ -4,7 +4,6 @@ namespace CeremonyCrmApp\Modules\Core\Services\Models;
 
 class Service extends \CeremonyCrmApp\Core\Model
 {
-  public string $fullTableSqlName = 'services';
   public string $table = 'services';
   public string $eloquentClass = Eloquent\Service::class;
   public ?string $lookupSqlValue = "{%TABLE%}.name";

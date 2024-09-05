@@ -54,6 +54,13 @@ export default class FormCompany<P, S> extends Form<
     return record;
   }
 
+  onBeforeSaveRecord(record: any) {
+    if (record.id == -1) {
+      record.is_active = 1;
+    }
+    return record;
+  }
+
   renderTitle(): JSX.Element {
     return (
       <>

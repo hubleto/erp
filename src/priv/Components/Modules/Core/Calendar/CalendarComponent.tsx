@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import { Badge, Calendar, Popover, Whisper } from "rsuite";
 import FormActivity from "../Customers/FormActivity";
 import "rsuite/Calendar/styles/index.css";
+import ModalSimple from "adios/ModalSimple";
 
 export default class CalendarComponent extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class CalendarComponent extends Component {
     this.state = {
       events: [],
       loading: true,
+      showIdActivity: 0
     };
   }
 
@@ -40,12 +42,9 @@ export default class CalendarComponent extends Component {
       return (
         <div>
           <div style={{ backgroundColor: "lightblue", padding: "5px" }}>
-            <a
-              target="_blank"
-              href={`customers/activities?recordId=${eventForDate.id}`}
-            >
+            <button onClick={() => {this.setState({showIdActivity: eventForDate.id})}}>
               <strong>{eventForDate.title}</strong>
-            </a>
+            </button>
           </div>
         </div>
       );
@@ -53,7 +52,7 @@ export default class CalendarComponent extends Component {
     return null;
   };
 
-  render() {
+  render(): JSX.Element {
     const { loading } = this.state;
 
     if (loading) {
@@ -63,7 +62,20 @@ export default class CalendarComponent extends Component {
     const html =
     <div>
       <Calendar bordered renderCell={this.renderCell} />;
-      <FormActivity/>
+      {this.state.showIdActivity <= 0 ? null :
+        <ModalSimple
+          uid='waste_diagram_modal_form_technology'
+          isOpen={true}
+          type='right'
+        >
+          <FormActivity
+            id={this.state.showIdActivity}
+            showInModal={true}
+            showInModalSimple={true}
+            onClose={() => { this.setState({showIdActivity: 0}); }}
+          ></FormActivity>
+        </ModalSimple>
+      }
     </div>
 
     return html;

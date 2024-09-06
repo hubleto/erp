@@ -24,9 +24,9 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     }
   }
 
-  getFormDescription(): any {
+  getFormProps(): any {
     return {
-      ...super.getFormDescription(),
+      ...super.getFormProps(),
       isInlineEditing: false,
     }
   } */
@@ -53,7 +53,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   }
 
   renderForm(): JSX.Element {
-    let formDescription = this.getFormDescription();
+    let formDescription = this.getFormProps();
     return <FormPerson {...formDescription}/>;
   }
 }

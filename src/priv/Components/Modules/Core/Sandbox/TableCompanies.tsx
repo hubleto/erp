@@ -33,8 +33,8 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
   }
 
   renderForm(): JSX.Element {
-    let formParams = this.getFormParams();
-    formParams.categories = this.state.categories;
-    return <FormCompany {...formParams}/>;
+    let formDescription = this.getFormDescription();
+    formDescription.categories = this.state.categories;
+    return <FormCompany {...formDescription}/>;
   }
 }

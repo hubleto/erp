@@ -39,11 +39,11 @@ class Setting extends \CeremonyCrmApp\Core\Model
     ]);
   }
 
-  public function tableParams(array $params = []): array
+  public function tableDescribe(array $description = []): array
   {
-    $params = parent::tableParams();
-    $params['title'] = 'Settings';
-    return $params;
+    $description = parent::tableDescribe();
+    $description['title'] = 'Settings';
+    return $description;
   }
 
 }

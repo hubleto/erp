@@ -6,7 +6,7 @@ class Model extends \ADIOS\Core\Model {
   public array $conversionMap = [];
   public array $conversionRelations = [];
 
-  public function tableParams(array $params = []): array {
+  public function tableDescribe(array $description = []): array {
 
     $origColumns = $this->columns();
     unset($origColumns['id']);

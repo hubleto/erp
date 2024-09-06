@@ -88,11 +88,11 @@ class User extends \ADIOS\Models\User
     return $user;
   }
 
-  public function tableParams(array $params = []): array
+  public function tableDescribe(array $description = []): array
   {
-    $params = parent::tableParams();
-    $params['title'] = 'Users';
-    return $params;
+    $description = parent::tableDescribe();
+    $description['title'] = 'Users';
+    return $description;
   }
 
 }

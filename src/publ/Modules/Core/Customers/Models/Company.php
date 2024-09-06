@@ -81,11 +81,11 @@ class Company extends \CeremonyCrmApp\Core\Model
     ]));
   }
 
-  public function tableParams(array $params = []): array
+  public function tableDescribe(array $description = []): array
   {
-    $params = parent::tableParams();
-    $params['title'] = 'Companies';
-    return $params;
+    $description = parent::tableDescribe();
+    $description['title'] = 'Companies';
+    return $description;
   }
 
   public function getNewRecordDataFromString(string $text): array {

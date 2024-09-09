@@ -29,6 +29,27 @@ import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
 //@ts-ignore
 const app: ADIOS = new ADIOS(window.ConfigEnv);
 
+export class CeremonyCrmApp extends ADIOS {
+    /* static ROLE_ADMINISTRATOR: number = 1;
+    static ROLE_ADVOKAT: number = 2;
+    static ROLE_MANAZER: number = 3;
+    static ROLE_KONCIPIENT: number = 4; */
+
+    language: string = 'en';
+    idUser: number = 0;
+    user: any;
+
+    /* userHasRole(idRole: number) {
+      let has = false;
+      if (this.user.roles) {
+        for (let i in this.user.roles) {
+          if (this.user.roles[i] == idRole) has = true;
+        }
+      }
+      return has;
+    } */
+  }
+
 app.dictionary.sk = dictionarySk;
 
 // ADIOS components

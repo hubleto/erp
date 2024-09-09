@@ -127,7 +127,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'id_company' => $idCompany,
       "id_user" => 1,
       "subject" => "Test Activity",
-      "due_date" => "2020-01-22",
+      "due_date" => date("Y-m-d"),
       "due_time" => "11:00:00",
       "duration" => "01:00:00",
       "completed" => 0,

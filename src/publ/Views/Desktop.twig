@@ -35,6 +35,8 @@
   <script>
     ADIOS.onAppLoaded(() => {
       globalThis.app.language = '{{ user.language ?: "en" }}';
+      globalThis.app.idUser = {{ user.id ?? 0 }};
+      globalThis.app.user = JSON.parse('{{ user|json_encode|raw }}');
     });
   </script>
 

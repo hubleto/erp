@@ -115,6 +115,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     street_line_1: { type: "varchar", title: "Street Line 1" },
                     street_line_2: { type: "varchar", title: "Street Line 2" },
                     city: { type: "varchar", title: "City" },
+                    region: { type: "varchar", title: "Region" },
                     postal_code: { type: "varchar", title: "Postal Code" },
                     id_country: { type: "lookup", model: "CeremonyCrmApp/Modules/Core/Settings/Models/Country", title: "Country" },
                   }}

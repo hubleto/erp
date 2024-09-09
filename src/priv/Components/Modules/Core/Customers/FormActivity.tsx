@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { deepObjectMerge } from "adios/Helper";
 import Form, { FormProps, FormState } from "adios/Form";
-import InputVarchar from "adios/Inputs/Varchar";
 import InputTags2 from "adios/Inputs/Tags2";
-import InputTable from "adios/Inputs/Table";
 import FormInput from "adios/FormInput";
-import { Column } from "primereact/column";
+import { CeremonyCrmApp } from "src/priv/Components";
 
 interface FormActivityProps extends FormProps {}
 
@@ -13,7 +10,7 @@ interface FormActivityState extends FormState {}
 
 export default class FormActivity<P, S> extends Form<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
-    model: "CeremonyCrmApp/Modules/Core/Customers/Models/Person",
+    model: "CeremonyCrmApp/Modules/Core/Customers/Models/Activity",
   };
 
   props: FormActivityProps;
@@ -53,6 +50,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
   onBeforeSaveRecord(record: any) {
     if (record.id == -1) {
       record.completed = 0;
+      record.id_user = globalThis.app.idUser;
     }
 
     return record;
@@ -75,6 +73,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
                 {this.inputWrapper("due_time")}
                 {this.inputWrapper("duration")}
                 {showAdditional ? this.inputWrapper("completed") : null}
+                {showAdditional ? this.inputWrapper("id_user") : null}
 
                 <FormInput title='Categories'>
                   <InputTags2 {...this.getDefaultInputProps()}

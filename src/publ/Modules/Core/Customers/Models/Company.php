@@ -26,10 +26,12 @@ class Company extends \CeremonyCrmApp\Core\Model
       "name" => [
         "type" => "varchar",
         "title" => "Name",
+        "required" => true,
       ],
       "street_line_1" => [
         "type" => "varchar",
         "title" => "Street Line 1",
+        "required" => true,
       ],
       "street_line_2" => [
         "type" => "varchar",
@@ -38,10 +40,12 @@ class Company extends \CeremonyCrmApp\Core\Model
       "region" => [
         "type" => "varchar",
         "title" => "Region",
+        "required" => true,
       ],
       "city" => [
         "type" => "varchar",
         "title" => "City",
+        "required" => true,
       ],
       "id_country" => [
         "type" => "lookup",
@@ -49,10 +53,12 @@ class Company extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'SET NULL',
         'foreignKeyOnDelete' => 'SET NULL',
         "title" => "Country",
+        "required" => true,
       ],
       "postal_code" => [
         "type" => "varchar",
         "title" => "Postal Code",
+        "required" => true,
       ],
       "vat_id" => [
         "type" => "varchar",
@@ -76,6 +82,7 @@ class Company extends \CeremonyCrmApp\Core\Model
         "title" => "Active",
         "required" => false,
         "default" => 1,
+        "required" => false,
       ],
 
     ]));
@@ -85,6 +92,7 @@ class Company extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::tableDescribe();
     $description['title'] = 'Companies';
+    $description['addButtonText'] = 'Add Company';
     return $description;
   }
 

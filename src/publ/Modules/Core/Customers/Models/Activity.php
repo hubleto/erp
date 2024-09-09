@@ -44,6 +44,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
       "completed" => [
         "type" => "boolean",
         "title" => "Completed",
+        "required" => false,
       ],
       "id_company" => [
         "type" => "lookup",

@@ -42,6 +42,7 @@ export default class FormCompany<P, S> extends Form<
     if (record.ACTIVITIES)
       record.ACTIVITIES.map((item: any, key: number) => {
         record.ACTIVITIES[key].id_company = { _useMasterRecordId_: true };
+        record.ACTIVITIES[key].id_user = globalThis.app.idUser;
       });
     if (record.BILLING_ACCOUNT) {
       record.BILLING_ACCOUNT.id_company = { _useMasterRecordId_: true };
@@ -232,24 +233,6 @@ export default class FormCompany<P, S> extends Form<
               )}
             </div>
           </div>
-
-          <div>
-              <div className="card">
-                <div className="card-header">this.state.record</div>
-                <div className="card-body">
-                  <pre
-                    style={{
-                      color: "blue",
-                      width: "100%",
-                      fontFamily: "Courier New",
-                      fontSize: "10px",
-                    }}
-                  >
-                    {JSON.stringify(R, null, 2)}
-                  </pre>
-                </div>
-              </div>
-            </div>
         </div>
       </>
     );

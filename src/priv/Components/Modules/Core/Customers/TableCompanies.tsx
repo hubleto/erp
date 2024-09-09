@@ -16,6 +16,7 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
   }
 
   props: TableCompaniesProps;
+
   /* state: TableCompaniesState;
 
   constructor(props: TableCompaniesProps) {

@@ -20,6 +20,7 @@ class CompanyTag extends \CeremonyCrmApp\Core\Model
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
+        "required" => true,
       ],
       "id_tag" => [
         "type" => "lookup",
@@ -27,6 +28,7 @@ class CompanyTag extends \CeremonyCrmApp\Core\Model
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Tag",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
+        "required" => true,
       ],
     ]));
   }

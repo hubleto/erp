@@ -23,10 +23,12 @@ class Person extends \CeremonyCrmApp\Core\Model
       "first_name" => [
         "type" => "varchar",
         "title" => "First name",
+        "required" => true,
       ],
       "last_name" => [
         "type" => "varchar",
         "title" => "Last name",
+        "required" => true,
       ],
       "id_company" => [
         "type" => "lookup",
@@ -34,6 +36,7 @@ class Person extends \CeremonyCrmApp\Core\Model
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
+        "required" => true,
       ],
       "is_primary" => [
         "type" => "boolean",
@@ -42,6 +45,7 @@ class Person extends \CeremonyCrmApp\Core\Model
       "note" => [
         "type" => "text",
         "title" => "Notes",
+        "required" => false,
       ],
       "is_active" => [
         "type" => "boolean",

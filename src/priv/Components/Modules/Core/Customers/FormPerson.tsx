@@ -173,24 +173,6 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 ) : null}
               </div>
             </div>
-
-          {/* <div>
-            <div className="card">
-              <div className="card-header">this.state.record</div>
-              <div className="card-body">
-                <pre
-                  style={{
-                    color: "blue",
-                    width: "100%",
-                    fontFamily: "Courier New",
-                    fontSize: "10px",
-                  }}
-                >
-                  {JSON.stringify(R, null, 2)}
-                </pre>
-              </div>
-            </div>
-          </div> */}
         </div>
       </>
     );

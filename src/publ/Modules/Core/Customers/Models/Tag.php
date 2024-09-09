@@ -14,10 +14,12 @@ class Tag extends \CeremonyCrmApp\Core\Model
       "name" => [
         "type" => "varchar",
         "title" => "Name",
+        "required" => true,
       ],
       "color" => [
         "type" => "color",
         "title" => "Color",
+        "required" => true,
       ],
     ]));
   }

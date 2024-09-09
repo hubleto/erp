@@ -24,26 +24,32 @@ class Address extends \CeremonyCrmApp\Core\Model
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Person",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
+        "required" => true,
       ],
       "street_line_1" => [
         "type" => "varchar",
         "title" => "Street Line 1",
+        "required" => true,
       ],
       "street_line_2" => [
         "type" => "varchar",
         "title" => "Street Line 2",
+        "required" => true,
       ],
       "region" => [
         "type" => "varchar",
         "title" => "Region",
+        "required" => true,
       ],
       "city" => [
         "type" => "varchar",
         "title" => "City",
+        "required" => true,
       ],
       "postal_code" => [
         "type" => "varchar",
         "title" => "Postal Code",
+        "required" => true,
       ],
       "id_country" => [
         "type" => "lookup",
@@ -51,6 +57,7 @@ class Address extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'SET NULL',
         'foreignKeyOnDelete' => 'SET NULL',
         "title" => "Country",
+        "required" => true,
       ],
     ]));
   }

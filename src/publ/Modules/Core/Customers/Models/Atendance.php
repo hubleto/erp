@@ -24,7 +24,7 @@ class Atendance extends \CeremonyCrmApp\Core\Model
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Activity",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
-        "required" => false,
+        "required" => true,
       ],
       "id_user" => [
         "type" => "lookup",
@@ -32,7 +32,7 @@ class Atendance extends \CeremonyCrmApp\Core\Model
         "model" => "CeremonyCrmApp/Modules/Core/Settings/Models/User",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
-        "required" => false,
+        "required" => true,
       ],
     ]));
   }

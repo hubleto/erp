@@ -22,15 +22,18 @@ class Contact extends \CeremonyCrmApp\Core\Model
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Person",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
+        "required" => true,
       ],
       "type" => [
         "type" => "varchar",
         "title" => "Type",
         "enumValues" => ["email" => "Email", "number" => "Phone Number"],
+        "required" => true,
       ],
       "value" => [
         "type" => "varchar",
         "title" => "Value",
+        "required" => true,
       ],
     ]));
   }
@@ -39,7 +42,7 @@ class Contact extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::tableDescribe();
     $description['title'] = 'Contacts';
-    return $params;
+    return $description;
   }
 
 }

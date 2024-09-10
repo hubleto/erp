@@ -210,8 +210,14 @@
 
 }
 
+/* BODY */
 
 body.react-elements-rendering #app-main-content { display: none; }
 body.react-elements-rendered #app-main-content { display: block; }
 body.ajax-loading nav#default-navbar { background: #EEEEEE; opacity: 0.5; }
+
+/* SWAL */
+
+.swal2-html-title { text-align: left; }
+.swal2-html-container { text-align: left; }
 

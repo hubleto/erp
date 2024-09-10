@@ -18,7 +18,7 @@ git config pull.rebase false
 git reset --hard
 git pull
 
-
+chmod +x /var/www/html/ceremonycrm/app/scripts/test-env/rebuild.sh
 
 cd /var/www/html/ceremonycrm/app
 

@@ -1,7 +1,7 @@
 #/usr/bin/bash
 
 echo Rebuilding... Check log in /var/www/html/ceremonycrm/rebuild.log or http://80.211.204.126/ceremonycrm/rebuild.log.
-exec 2>&1 1>/var/www/html/ceremonycrm/rebuild.log
+exec 2>/var/www/html/ceremonycrm/rebuild.log 1>/var/www/html/ceremonycrm/rebuild.log
 
 date
 

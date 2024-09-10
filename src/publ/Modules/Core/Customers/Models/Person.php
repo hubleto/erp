@@ -34,8 +34,8 @@ class Person extends \CeremonyCrmApp\Core\Model
         "type" => "lookup",
         "title" => "Company",
         "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
         "required" => true,
       ],
       "is_primary" => [

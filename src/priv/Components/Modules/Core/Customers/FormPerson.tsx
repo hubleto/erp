@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { deepObjectMerge } from "adios/Helper";
+import { deepObjectMerge, getUrlParam } from "adios/Helper";
 import Form, { FormProps, FormState } from "adios/Form";
 import InputVarchar from "adios/Inputs/Varchar";
 import InputTags2 from "adios/Inputs/Tags2";
@@ -44,16 +44,38 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
     return record;
   }
 
+  renderHeaderLeft(): JSX.Element {
+    return <>
+      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
+    </>;
+  }
+
+  renderHeaderRight(): JSX.Element {
+    return <>
+      {this.props.showInModal ? this.renderCloseButton() : null}
+    </>;
+  }
+
   renderTitle(): JSX.Element {
-    return (
-      <>
-        <h2>
-          {this.state.record.last_name
-            ? this.state.record.first_name + " " + this.state.record.last_name
-            : "[no-name]"}
-        </h2>
-      </>
-    );
+    if (getUrlParam("recordId") == -1) {
+      return(
+        <>
+          <h2>
+            {"New Person"}
+          </h2>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <h2>
+            {this.state.record.last_name
+              ? this.state.record.first_name + " " + this.state.record.last_name
+              : "[Undefined Name]"}
+          </h2>
+        </>
+      );
+    }
   }
 
   onBeforeSaveRecord(record: any) {
@@ -89,7 +111,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 <FormInput title='Categories'>
                   <InputTags2 {...this.getDefaultInputProps()}
                     value={this.state.record.TAGS}
-                    model='CeremonyCrmApp/Modules/Core/Customers/Models/Tag'
+                    model='CeremonyCrmApp/Modules/Core/Settings/Models/Tag'
                     targetColumn='id_person'
                     sourceColumn='id_tag'
                     colorColumn='color'
@@ -164,6 +186,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                       if (!R.CONTACTS) R.CONTACTS = [];
                       R.CONTACTS.push({
                         id_person: { _useMasterRecordId_: true },
+                        type: "email",
                       });
                       this.setState({ record: R });
                     }}

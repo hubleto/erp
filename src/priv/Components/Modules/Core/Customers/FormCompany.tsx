@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { deepObjectMerge } from "adios/Helper";
+import { deepObjectMerge, getUrlParam } from "adios/Helper";
 import Table from "adios/Table";
 import Form, { FormProps, FormState } from "adios/Form";
 import InputVarchar from "adios/Inputs/Varchar";
@@ -27,6 +27,7 @@ export default class FormCompany<P, S> extends Form<
     super(props);
     this.state = this.getStateFromProps(props);
   }
+
 
   getStateFromProps(props: FormCompanyProps) {
     return {
@@ -62,12 +63,38 @@ export default class FormCompany<P, S> extends Form<
     return record;
   }
 
+  renderHeaderLeft(): JSX.Element {
+    return <>
+      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
+    </>;
+  }
+
+  renderHeaderRight(): JSX.Element {
+    return <>
+      {this.props.showInModal ? this.renderCloseButton() : null}
+    </>;
+  }
+
   renderTitle(): JSX.Element {
-    return (
-      <>
-        <h2>{this.state.record.name ?? "[no-name]"}</h2>
-      </>
-    );
+    if (getUrlParam("recordId") == -1) {
+      return(
+        <>
+          <h2>
+            {"New Company"}
+          </h2>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <h2>
+            {this.state.record.name
+              ? this.state.record.name
+              : "[Undefined Name]"}
+          </h2>
+        </>
+      );
+    }
   }
 
   renderContent(): JSX.Element {
@@ -105,7 +132,7 @@ export default class FormCompany<P, S> extends Form<
                 <InputTags2
                   {...this.getDefaultInputProps()}
                   value={this.state.record.TAGS}
-                  model="CeremonyCrmApp/Modules/Core/Customers/Models/Tag"
+                  model="CeremonyCrmApp/Modules/Core/Settings/Models/Tag"
                   targetColumn="id_company"
                   sourceColumn="id_tag"
                   colorColumn="color"
@@ -136,6 +163,7 @@ export default class FormCompany<P, S> extends Form<
                 columns={{
                   first_name: { type: "varchar", title: "First name" },
                   last_name: { type: "varchar", title: "Last name" },
+
                 }}
                 /* onRowClick={(table: Table, row: any) => {
                     console.log(table, row);

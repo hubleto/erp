@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import FormPerson from './FormPerson';
+import { getUrlParam } from 'adios/Helper';
 
 interface TablePersonsProps extends TableProps {
 }
@@ -16,6 +17,15 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   }
 
   props: TablePersonsProps;
+
+  getFormModalParams() {
+    if (getUrlParam("recordId") > 0) {
+      return {
+        ...super.getFormModalParams(),
+        type: 'right wide'
+      }
+    } else return {...super.getFormModalParams()}
+  }
 
   /* getFormModalParams(): any {
     return {

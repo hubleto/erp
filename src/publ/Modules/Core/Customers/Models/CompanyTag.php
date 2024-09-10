@@ -2,6 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\Tag;
+
 class CompanyTag extends \CeremonyCrmApp\Core\Model
 {
   public string $table = 'companies_tags';
@@ -25,7 +27,7 @@ class CompanyTag extends \CeremonyCrmApp\Core\Model
       "id_tag" => [
         "type" => "lookup",
         "title" => "Tag",
-        "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Tag",
+        "model" => "CeremonyCrmApp/Modules/Core/Settings/Models/Tag",
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         "required" => true,

@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Modules\Core\Customers\Models;
+namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
 class Tag extends \CeremonyCrmApp\Core\Model
 {

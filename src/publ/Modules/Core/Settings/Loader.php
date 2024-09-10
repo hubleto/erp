@@ -27,6 +27,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/users' => 'Users',
         '/profiles' => 'Profiles',
         '/settings' => 'Settings',
+        '/Tags' => 'Tags',
       ]
     );
   }
@@ -40,6 +41,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 99201, 'settings/users', $this->app->translate('Users'), 'fas fa-user');
       $sidebar->addLink(2, 99202, 'settings/profiles', $this->app->translate('Profiles'), 'fas fa-id-card');
       $sidebar->addLink(2, 99203, 'settings/settings', $this->app->translate('Settings'), 'fas fa-cog');
+      $sidebar->addLink(2, 99204, 'settings/tags', $this->app->translate('Tags'), 'fas fa-tags');
     }
   }
 

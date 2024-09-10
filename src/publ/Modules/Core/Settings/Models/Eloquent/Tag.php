@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent;
+namespace CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent;
 
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\User;
 use \Illuminate\Database\Eloquent\Relations\HasMany;

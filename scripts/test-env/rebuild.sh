@@ -1,5 +1,7 @@
 #/usr/bin/bash
 
+exec 2>&1 1>/path/to/file.out
+
 date
 
 . ~/.nvm/nvm.sh

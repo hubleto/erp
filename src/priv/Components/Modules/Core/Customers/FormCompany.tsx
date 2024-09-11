@@ -161,7 +161,6 @@ export default class FormCompany<P, S> extends Form<
                         className="btn btn-transparent btn-small"
                         onClick={(e) => {
                           e.preventDefault();
-                          console.log('otvorit form pre', data);
                           table.openForm(data.id);
                           return false;
                         }}

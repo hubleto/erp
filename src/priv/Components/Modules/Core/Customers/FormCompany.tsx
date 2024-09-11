@@ -7,6 +7,7 @@ import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 import { Column } from 'primereact/column';
+import TablePersons from './TablePersons';
 
 interface FormCompanyProps extends FormProps {}
 
@@ -146,29 +147,43 @@ export default class FormCompany<P, S> extends Form<
           <div className='card mt-4' style={{ gridArea: 'contacts' }}>
             <div className='card-header'>Representatives</div>
             <div className='card-body'>
-              <style>
-                {`
-                  table: {
-                    max-width: auto;
-                  }
-                `}
-              </style>
-              <InputTable
-                {...this.getDefaultInputProps()}
-                model='CeremonyCrmApp/Modules/Core/Customers/Models/Person'
-                value={R.PERSONS}
-                onChange={(value: any) => {
-                  this.updateRecord({ PERSONS: value });
-                }}
+              <TablePersons
+                uid={this.props.uid + '_table_persons'}
+                showHeader={false}
+                showFooter={false}
+                data={{data: R.PERSONS}}
                 columns={{
                   first_name: { type: 'varchar', title: 'First name' },
                   last_name: { type: 'varchar', title: 'Last name' },
-
+                  __more_details: { type: 'none', title: '', cellRenderer: (table: TablePersons, data: any, options: any): JSX.Element => {
+                    return <>
+                      <button
+                        className="btn btn-transparent btn-small"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          console.log('otvorit form pre', data);
+                          table.openForm(data.id);
+                          return false;
+                        }}
+                      >
+                        <span className="icon"><i className="fas fa-external-link-alt"></i></span>
+                      </button>
+                    </>;
+                  } },
                 }}
-                /* onRowClick={(table: Table, row: any) => {
-                    console.log(table, row);
-                  }} */
-              />
+                isUsedAsInput={true}
+                isInlineEditing={this.state.isInlineEditing}
+                readonly={!this.state.isInlineEditing}
+                onRowClick={(table: TablePersons, row: any) => {
+                  this.setState({isInlineEditing: !this.state.isInlineEditing});
+                }}
+                onChange={(table: TablePersons) => {
+                  this.updateRecord({ PERSONS: table.state.data?.data });
+                }}
+                onDeleteSelectionChange={(table: TablePersons) => {
+                  this.updateRecord({ PERSONS: table.state.data?.data ?? [] });
+                }}
+              ></TablePersons>
               {this.state.isInlineEditing ? (
                 <a
                   role='button'

@@ -65,6 +65,9 @@
   .adios.component.table .table-body tr td { @apply hover:bg-gray-200; }
   .adios.component.input.table { @apply max-w-[100%] }
 
+  .adios.component.table .table-body tbody tr td .to-be-deleted { @apply bg-red-500; }
+  .adios.component.table .table-body tbody tr td .to-be-deleted input { @apply text-red-500; }
+
   .adios.component.input { @apply flex justify-between items-center w-full max-w-[400px]; }
   .adios.component.input.lookup { @apply block; }
 

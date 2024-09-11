@@ -46,12 +46,13 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     this.setState({
       addButtonText: 'Add Person',
       title: 'Persons',
-      showHeader: true,
+      showHeader: this.props.showHeader ?? true,
+      showFooter: this.props.showFooter ?? true,
       canCreate: this.props.canCreate ?? true,
       canDelete: this.props.canDelete ?? true,
       canRead: this.props.canRead ?? true,
       canUpdate: this.props.canUpdate ?? true,
-      columns: {
+      columns: this.props.columns ?? {
         first_name: { type: 'varchar', title: 'First Name' },
         last_name: { type: 'varchar', title: 'Last Name'},
         id_company: { type: 'lookup', title: 'Company', model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company', },

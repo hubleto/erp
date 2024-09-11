@@ -12,7 +12,7 @@ class UserRole extends \CeremonyCrmApp\Core\Model
 
   public string $table = 'user_roles';
   public string $eloquentClass = Eloquent\UserRole::class;
-  public ?string $lookupSqlValue = "{%TABLE%}.role";
+  public ?string $lookupSqlValue = '{%TABLE%}.role';
 
   public function columns(array $columns = []): array
   {

@@ -13,11 +13,11 @@ class Activity extends \ADIOS\Core\Model\Eloquent
 
   public function id_company(): BelongsTo
   {
-    return $this->belongsTo(Company::class, "id_company", 'id');
+    return $this->belongsTo(Company::class, 'id_company', 'id');
   }
   public function id_user(): BelongsTo
   {
-    return $this->belongsTo(User::class, "id_user", "id");
+    return $this->belongsTo(User::class, 'id_user', 'id');
   }
 
   public function COMPANY() {

@@ -6,7 +6,7 @@ class Profile extends \CeremonyCrmApp\Core\Model
 {
   public string $table = 'profiles';
   public string $eloquentClass = Eloquent\Setting::class;
-  public ?string $lookupSqlValue = "{%TABLE%}.company";
+  public ?string $lookupSqlValue = '{%TABLE%}.company';
 
   public function columns(array $columns = []): array
   {

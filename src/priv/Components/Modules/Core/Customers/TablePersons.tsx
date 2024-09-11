@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import FormPerson from './FormPerson';
 import { getUrlParam } from 'adios/Helper';
+import { FormProps } from 'adios/Form';
 
 interface TablePersonsProps extends TableProps {
 }
@@ -19,7 +20,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   props: TablePersonsProps;
 
   getFormModalParams() {
-    if (getUrlParam("recordId") > 0) {
+    if (getUrlParam('recordId') > 0) {
       return {
         ...super.getFormModalParams(),
         type: 'right wide'
@@ -44,7 +45,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   loadTableDescription(successCallback?: (params: any) => void): void {
     this.setState({
       addButtonText: 'Add Person',
-      title: "Persons",
+      title: 'Persons',
       showHeader: true,
       canCreate: this.props.canCreate ?? true,
       canDelete: this.props.canDelete ?? true,
@@ -63,7 +64,11 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   }
 
   renderForm(): JSX.Element {
-    let formDescription = this.getFormProps();
-    return <FormPerson {...formDescription}/>;
+    let formProps: FormProps = this.getFormProps();
+    formProps.description.defaultValues = {
+      is_active: 1,
+      is_primary: 0,
+    };
+    return <FormPerson {...formProps}/>;
   }
 }

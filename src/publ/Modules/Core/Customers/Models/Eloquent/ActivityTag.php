@@ -13,11 +13,11 @@ class ActivityTag extends \ADIOS\Core\Model\Eloquent
 
   public function id_activity(): BelongsTo
   {
-    return $this->belongsTo(Activity::class, "id_activity", 'id');
+    return $this->belongsTo(Activity::class, 'id_activity', 'id');
   }
   public function id_tag(): BelongsTo
   {
-    return $this->belongsTo(Tag::class, "id_tag", "id");
+    return $this->belongsTo(Tag::class, 'id_tag', 'id');
   }
 
   public function TAG() {

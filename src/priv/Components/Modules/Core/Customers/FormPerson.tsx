@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { deepObjectMerge, getUrlParam } from "adios/Helper";
-import Form, { FormProps, FormState } from "adios/Form";
-import InputVarchar from "adios/Inputs/Varchar";
-import InputTags2 from "adios/Inputs/Tags2";
-import InputTable from "adios/Inputs/Table";
-import FormInput from "adios/FormInput";
-import { Column } from "primereact/column";
+import React, { Component } from 'react';
+import { deepObjectMerge, getUrlParam } from 'adios/Helper';
+import Form, { FormProps, FormState } from 'adios/Form';
+import InputVarchar from 'adios/Inputs/Varchar';
+import InputTags2 from 'adios/Inputs/Tags2';
+import InputTable from 'adios/Inputs/Table';
+import FormInput from 'adios/FormInput';
+import { Column } from 'primereact/column';
 
 interface FormPersonProps extends FormProps {}
 
@@ -13,7 +13,7 @@ interface FormPersonState extends FormState {}
 
 export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonState> {
   static defaultProps: any = {
-    model: "CeremonyCrmApp/Modules/Core/Customers/Models/Person",
+    model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
   };
 
   props: FormPersonProps;
@@ -57,11 +57,11 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
   }
 
   renderTitle(): JSX.Element {
-    if (getUrlParam("recordId") == -1) {
+    if (getUrlParam('recordId') == -1) {
       return(
         <>
           <h2>
-            {"New Person"}
+            {'New Person'}
           </h2>
         </>
       );
@@ -70,8 +70,8 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
         <>
           <h2>
             {this.state.record.last_name
-              ? this.state.record.first_name + " " + this.state.record.last_name
-              : "[Undefined Name]"}
+              ? this.state.record.first_name + ' ' + this.state.record.last_name
+              : '[Undefined Name]'}
           </h2>
         </>
       );
@@ -81,9 +81,6 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
   onBeforeSaveRecord(record: any) {
     if (!record.is_primary) {
       record.is_primary = 0;
-    }
-    if (record.id == -1) {
-      record.is_active = 1;
     }
 
     return record;
@@ -95,19 +92,19 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
 
     return (
       <>
-        <div className="grid grid-cols-2 gap-1" style=
+        <div className='grid grid-cols-2 gap-1' style=
           {{gridTemplateAreas:`
-            "person contacts"
-            "addresses addresses"
+            'person contacts'
+            'addresses addresses'
           `}}>
-            <div className="card mt-4" style={{gridArea: "person"}}>
-              <div className="card-header">Personal Information</div>
-              <div className="card-body">
-                {this.inputWrapper("first_name")}
-                {this.inputWrapper("last_name")}
-                {this.inputWrapper("id_company")}
-                {this.inputWrapper("is_primary")}
-                {showAdditional ? this.inputWrapper("is_active") : null}
+            <div className='card mt-4' style={{gridArea: 'person'}}>
+              <div className='card-header'>Personal Information</div>
+              <div className='card-body'>
+                {this.inputWrapper('first_name')}
+                {this.inputWrapper('last_name')}
+                {this.inputWrapper('id_company')}
+                {this.inputWrapper('is_primary')}
+                {showAdditional ? this.inputWrapper('is_active') : null}
                 <FormInput title='Categories'>
                   <InputTags2 {...this.getDefaultInputProps()}
                     value={this.state.record.TAGS}
@@ -123,28 +120,28 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               </div>
             </div>
 
-            <div className="card mt-4" style={{gridArea: "addresses"}}>
-              <div className="card-header">Addresses</div>
-              <div className="card-body">
+            <div className='card mt-4' style={{gridArea: 'addresses'}}>
+              <div className='card-header'>Addresses</div>
+              <div className='card-body'>
                 <InputTable
                   {...this.getDefaultInputProps()}
-                  model="CeremonyCrmApp/Modules/Core/Customers/Models/Address"
+                  model='CeremonyCrmApp/Modules/Core/Customers/Models/Address'
                   value={R.ADDRESSES}
                   onChange={(value: any) => {
                     this.updateRecord({ ADDRESSES: value });
                   }}
                   columns={{
-                    street_line_1: { type: "varchar", title: "Street Line 1" },
-                    street_line_2: { type: "varchar", title: "Street Line 2" },
-                    city: { type: "varchar", title: "City" },
-                    region: { type: "varchar", title: "Region" },
-                    postal_code: { type: "varchar", title: "Postal Code" },
-                    id_country: { type: "lookup", model: "CeremonyCrmApp/Modules/Core/Settings/Models/Country", title: "Country" },
+                    street_line_1: { type: 'varchar', title: 'Street Line 1' },
+                    street_line_2: { type: 'varchar', title: 'Street Line 2' },
+                    city: { type: 'varchar', title: 'City' },
+                    region: { type: 'varchar', title: 'Region' },
+                    postal_code: { type: 'varchar', title: 'Postal Code' },
+                    id_country: { type: 'lookup', model: 'CeremonyCrmApp/Modules/Core/Settings/Models/Country', title: 'Country' },
                   }}
                 ></InputTable>
                 {this.state.isInlineEditing ? (
                   <a
-                    role="button"
+                    role='button'
                     onClick={() => {
                       if (!R.ADDRESSES) R.ADDRESSES = [];
                       R.ADDRESSES.push({
@@ -159,34 +156,34 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               </div>
             </div>
 
-            <div className="card mt-4" style={{gridArea: "contacts"}}>
-              <div className="card-header">Contacts</div>
-              <div className="card-body">
+            <div className='card mt-4' style={{gridArea: 'contacts'}}>
+              <div className='card-header'>Contacts</div>
+              <div className='card-body'>
                 <InputTable
                   {...this.getDefaultInputProps()}
-                  model="CeremonyCrmApp/Modules/Core/Customers/Models/Contact"
+                  model='CeremonyCrmApp/Modules/Core/Customers/Models/Contact'
                   value={R.CONTACTS}
                   onChange={(value: any) => {
                     this.updateRecord({ PERSONS_CONTACTS: value });
                   }}
                   columns={{
                     type: {
-                      type: "varchar",
-                      title: "Contact type",
-                      enumValues: {"email" : "Email", "number" : "Phone Number"},
-                      //enumCssClasses: {"email" : "bg-yellow-200", "number" : "bg-blue-200"},
+                      type: 'varchar',
+                      title: 'Contact type',
+                      enumValues: {'email' : 'Email', 'number' : 'Phone Number'},
+                      //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
                     },
-                    value: { type: "varchar", title: "Value" },
+                    value: { type: 'varchar', title: 'Value' },
                   }}
                 ></InputTable>
                 {this.state.isInlineEditing ? (
                   <a
-                    role="button"
+                    role='button'
                     onClick={() => {
                       if (!R.CONTACTS) R.CONTACTS = [];
                       R.CONTACTS.push({
                         id_person: { _useMasterRecordId_: true },
-                        type: "email",
+                        type: 'email',
                       });
                       this.setState({ record: R });
                     }}

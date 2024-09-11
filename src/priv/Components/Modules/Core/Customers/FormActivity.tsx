@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import Form, { FormProps, FormState } from "adios/Form";
-import InputTags2 from "adios/Inputs/Tags2";
-import FormInput from "adios/FormInput";
-import { CeremonyCrmApp } from "src/priv/Components";
-import { getUrlParam } from "adios/Helper";
+import React, { Component } from 'react';
+import Form, { FormProps, FormState } from 'adios/Form';
+import InputTags2 from 'adios/Inputs/Tags2';
+import FormInput from 'adios/FormInput';
+import { CeremonyCrmApp } from 'src/priv/Components';
+import { getUrlParam } from 'adios/Helper';
 
 interface FormActivityProps extends FormProps {}
 
@@ -11,7 +11,7 @@ interface FormActivityState extends FormState {}
 
 export default class FormActivity<P, S> extends Form<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
-    model: "CeremonyCrmApp/Modules/Core/Customers/Models/Activity",
+    model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Activity',
   };
 
   props: FormActivityProps;
@@ -49,11 +49,11 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
   }
 
   renderTitle(): JSX.Element {
-    if (getUrlParam("recordId") == -1) {
+    if (getUrlParam('recordId') == -1) {
       return(
         <>
           <h2>
-            {"New Activity"}
+            {'New Activity'}
           </h2>
         </>
       );
@@ -63,7 +63,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
           <h2>
             {this.state.record.subject
               ? this.state.record.subject
-              : "[Undefined Subject]"}
+              : '[Undefined Subject]'}
           </h2>
         </>
       );
@@ -85,25 +85,25 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
 
     return (
       <>
-        <div className="card mt-4">
-          <div className="card-header">Activity Information</div>
-          <div className="card-body">
-            {this.inputWrapper("subject")}
-            {this.inputWrapper("id_company")}
-            {this.inputWrapper("due_date")}
-            {this.inputWrapper("due_time")}
-            {this.inputWrapper("duration")}
-            {showAdditional ? this.inputWrapper("completed") : null}
-            {showAdditional ? this.inputWrapper("id_user") : null}
+        <div className='card mt-4'>
+          <div className='card-header'>Activity Information</div>
+          <div className='card-body'>
+            {this.inputWrapper('subject')}
+            {this.inputWrapper('id_company')}
+            {this.inputWrapper('due_date')}
+            {this.inputWrapper('due_time')}
+            {this.inputWrapper('duration')}
+            {showAdditional ? this.inputWrapper('completed') : null}
+            {showAdditional ? this.inputWrapper('id_user') : null}
 
-            <FormInput title="Categories">
+            <FormInput title='Categories'>
               <InputTags2
                 {...this.getDefaultInputProps()}
                 value={this.state.record.TAGS}
-                model="CeremonyCrmApp/Modules/Core/Settings/Models/Tag"
-                targetColumn="id_activity"
-                sourceColumn="id_tag"
-                colorColumn="color"
+                model='CeremonyCrmApp/Modules/Core/Settings/Models/Tag'
+                targetColumn='id_activity'
+                sourceColumn='id_tag'
+                colorColumn='color'
                 onChange={(value: any) => {
                   this.updateRecord({ TAGS: value });
                 }}

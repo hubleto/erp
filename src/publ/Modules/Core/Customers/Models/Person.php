@@ -11,47 +11,47 @@ class Person extends \CeremonyCrmApp\Core\Model
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
 
   public array $relations = [
-    'COMPANY' => [ self::BELONGS_TO, Company::class, "id_company" ],
-    'CONTACTS' => [ self::HAS_MANY, Contact::class, "id_person", "id" ],
-    'ADDRESSES' => [ self::HAS_MANY, Address::class, "id_person", "id" ],
-    'TAGS' => [ self::HAS_MANY, PersonTag::class, "id_person", "id" ],
+    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company' ],
+    'CONTACTS' => [ self::HAS_MANY, Contact::class, 'id_person', 'id' ],
+    'ADDRESSES' => [ self::HAS_MANY, Address::class, 'id_person', 'id' ],
+    'TAGS' => [ self::HAS_MANY, PersonTag::class, 'id_person', 'id' ],
   ];
 
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      "first_name" => [
-        "type" => "varchar",
-        "title" => "First name",
-        "required" => true,
+      'first_name' => [
+        'type' => 'varchar',
+        'title' => 'First name',
+        'required' => true,
       ],
-      "last_name" => [
-        "type" => "varchar",
-        "title" => "Last name",
-        "required" => true,
+      'last_name' => [
+        'type' => 'varchar',
+        'title' => 'Last name',
+        'required' => true,
       ],
-      "id_company" => [
-        "type" => "lookup",
-        "title" => "Company",
-        "model" => "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
+      'id_company' => [
+        'type' => 'lookup',
+        'title' => 'Company',
+        'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
-        "required" => true,
+        'required' => true,
       ],
-      "is_primary" => [
-        "type" => "boolean",
-        "title" => "First Contact",
+      'is_primary' => [
+        'type' => 'boolean',
+        'title' => 'First Contact',
       ],
-      "note" => [
-        "type" => "text",
-        "title" => "Notes",
-        "required" => false,
+      'note' => [
+        'type' => 'text',
+        'title' => 'Notes',
+        'required' => false,
       ],
-      "is_active" => [
-        "type" => "boolean",
-        "title" => "Active",
-        "required" => false,
-        "default" => 1,
+      'is_active' => [
+        'type' => 'boolean',
+        'title' => 'Active',
+        'required' => false,
+        'default' => 1,
       ],
     ]));
   }
@@ -75,8 +75,8 @@ class Person extends \CeremonyCrmApp\Core\Model
     ;
 
     //var_dump($this->params); exit;
-    /* if ($this->params["idAccount"]) {
-      $query = $query->where("join_id_company.id_account");
+    /* if ($this->params['idAccount']) {
+      $query = $query->where('join_id_company.id_account');
     } */
 
     return $query;

@@ -14,11 +14,11 @@ class PersonTag extends \ADIOS\Core\Model\Eloquent
 
   public function id_person(): BelongsTo
   {
-    return $this->belongsTo(Company::class, "id_person", 'id');
+    return $this->belongsTo(Company::class, 'id_person', 'id');
   }
   public function id_tag(): BelongsTo
   {
-    return $this->belongsTo(Tag::class, "id_tag", "id");
+    return $this->belongsTo(Tag::class, 'id_tag', 'id');
   }
 
   public function TAG() {

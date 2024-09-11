@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import FormCompany from './FormCompany';
 import { getUrlParam } from 'adios/Helper';
+import { FormProps } from 'adios/Form';
 
 interface TableCompaniesProps extends TableProps {
 }
@@ -20,7 +21,7 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
   state: TableCompaniesState;
 
   getFormModalParams() {
-    if (getUrlParam("recordId") > 0) {
+    if (getUrlParam('recordId') > 0) {
       return {
         ...super.getFormModalParams(),
         type: 'right wide'
@@ -47,7 +48,10 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
   } */
 
   renderForm(): JSX.Element {
-    let formDescription = this.getFormProps();
-    return <FormCompany {...formDescription}/>;
+    let formProps: FormProps = this.getFormProps();
+    formProps.description.defaultValues = {
+      is_active: 1
+    };
+    return <FormCompany {...formProps}/>;
   }
 }

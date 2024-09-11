@@ -11,10 +11,10 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
     $transformacia = [];
 
     foreach ($aktivity as $key => $aktivity) {
-      $transformacia[$key]["id"] = $aktivity->id;
-      $transformacia[$key]["date"] = $aktivity->due_date;
-      $transformacia[$key]["time"] = $aktivity->due_time;
-      $transformacia[$key]["title"] = $aktivity->subject;
+      $transformacia[$key]['id'] = $aktivity->id;
+      $transformacia[$key]['date'] = $aktivity->due_date;
+      $transformacia[$key]['time'] = $aktivity->due_time;
+      $transformacia[$key]['title'] = $aktivity->subject;
     }
 
     return $transformacia;

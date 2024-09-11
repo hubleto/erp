@@ -28,11 +28,11 @@ class Setting extends \CeremonyCrmApp\Core\Model
   public function indexes(array $indexes = [])
   {
     return parent::indexes([
-      "key" => [
-        "type" => "unique",
-        "columns" => [
-          "key" => [
-            "order" => "asc",
+      'key' => [
+        'type' => 'unique',
+        'columns' => [
+          'key' => [
+            'order' => 'asc',
           ],
         ],
       ],

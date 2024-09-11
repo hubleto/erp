@@ -13,7 +13,7 @@ class BillingAccount extends \ADIOS\Core\Model\Eloquent
   public $table = 'billing_accounts';
 
   public function id_company(): BelongsTo {
-    return $this->belongsTo(Company::class, 'id');
+    return $this->belongsTo(Company::class, 'id_company', 'id' );
   }
 
   public function COMPANY(): BelongsTo {

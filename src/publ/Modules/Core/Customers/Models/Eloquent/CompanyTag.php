@@ -14,11 +14,11 @@ class CompanyTag extends \ADIOS\Core\Model\Eloquent
 
   public function id_company(): BelongsTo
   {
-    return $this->belongsTo(Company::class, "id_company", 'id');
+    return $this->belongsTo(Company::class, 'id_company', 'id');
   }
   public function id_tag(): BelongsTo
   {
-    return $this->belongsTo(Tag::class, "id_tag", "id");
+    return $this->belongsTo(Tag::class, 'id_tag', 'id');
   }
 
   public function TAG() {

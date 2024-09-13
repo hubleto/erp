@@ -15,6 +15,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
+    className: 'header-style-1',
   }
 
   props: TablePersonsProps;

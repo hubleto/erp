@@ -20,13 +20,13 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
   props: TableCompaniesProps;
   state: TableCompaniesState;
 
-  getFormModalParams() {
+  getFormModalProps() {
     if (getUrlParam('recordId') > 0) {
       return {
-        ...super.getFormModalParams(),
+        ...super.getFormModalProps(),
         type: 'right wide'
       }
-    } else return {...super.getFormModalParams()}
+    } else return {...super.getFormModalProps()}
   }
 
   /*
@@ -36,8 +36,8 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
     this.state = this.getStateFromProps(props);
   } */
 
- /*  getFormModalParams(): any {
-    let params: any = super.getFormModalParams();
+ /*  getFormModalProps(): any {
+    let params: any = super.getFormModalProps();
     params.type = this.state.formId == -1 ? 'centered' : 'right wide';
     return params;
   }

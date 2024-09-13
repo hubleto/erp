@@ -20,18 +20,18 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
 
   props: TablePersonsProps;
 
-  getFormModalParams() {
+  getFormModalProps() {
     if (getUrlParam('recordId') > 0) {
       return {
-        ...super.getFormModalParams(),
+        ...super.getFormModalProps(),
         type: 'right wide'
       }
-    } else return {...super.getFormModalParams()}
+    } else return {...super.getFormModalProps()}
   }
 
-  /* getFormModalParams(): any {
+  /* getFormModalProps(): any {
     return {
-      ...super.getFormModalParams(),
+      ...super.getFormModalProps(),
       // type: 'centered tiny',
     }
   }

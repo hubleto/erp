@@ -7,6 +7,7 @@ class Model extends \ADIOS\Core\Model {
   public array $conversionRelations = [];
 
   public function tableDescribe(array $description = []): array {
+    $description = parent::tableDescribe($description);
 
     $origColumns = $this->columns();
     unset($origColumns['id']);
@@ -16,9 +17,9 @@ class Model extends \ADIOS\Core\Model {
       $columns[$this->conversionMap[$colName] ?? $colName] = $colDef;
     }
 
-    return [
-      'columns' => $columns,
-    ];
+    $description['columns'] = $columns;
+
+    return $description;
   }
 
   public function recordSave(array $data) {

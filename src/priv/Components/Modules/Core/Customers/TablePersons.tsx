@@ -5,6 +5,8 @@ import { getUrlParam } from 'adios/Helper';
 import { FormProps } from 'adios/Form';
 
 interface TablePersonsProps extends TableProps {
+  showHeader: boolean,
+  showFooter: boolean
 }
 
 interface TablePersonsState extends TableState {
@@ -15,7 +17,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
-    className: 'header-style-1',
+    /* className: 'header-style-1', */
   }
 
   props: TablePersonsProps;
@@ -45,23 +47,29 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
 
   loadTableDescription(successCallback?: (params: any) => void): void {
     this.setState({
-      addButtonText: 'Add Person',
-      title: 'Persons',
-      showHeader: this.props.showHeader ?? true,
-      showFooter: this.props.showFooter ?? true,
-      canCreate: this.props.canCreate ?? true,
-      canDelete: this.props.canDelete ?? true,
-      canRead: this.props.canRead ?? true,
-      canUpdate: this.props.canUpdate ?? true,
-      columns: this.props.columns ?? {
-        first_name: { type: 'varchar', title: 'First Name' },
-        last_name: { type: 'varchar', title: 'Last Name'},
-        id_company: { type: 'lookup', title: 'Company', model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company', },
-        virt_address: { type: 'varchar', title: 'Main Address',},
-        virt_email: { type: 'varchar', title: 'Main Email',},
-        virt_number: { type: 'varchar', title: 'Main Phone Number',},
-        is_active: { type: 'boolean', title: 'Active',},
-      },
+      description: {
+        ui:{
+          addButtonText: 'Add Person',
+          title: 'Persons',
+          showHeader: this.props.showHeader ?? true,
+          showFooter: this.props.showFooter ?? false,
+        },
+        permissions: {
+          canCreate: true,
+          canDelete: true,
+          canRead: true,
+          canUpdate: true,
+        },
+        columns: {
+          first_name: { type: 'varchar', title: 'First Name' },
+          last_name: { type: 'varchar', title: 'Last Name'},
+          id_company: { type: 'lookup', title: 'Company', model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company' },
+          virt_address: { type: 'varchar', title: 'Main Address',},
+          virt_email: { type: 'varchar', title: 'Main Email',},
+          virt_number: { type: 'varchar', title: 'Main Phone Number',},
+          is_active: { type: 'boolean', title: 'Active',},
+        }
+      }
     });
   }
 

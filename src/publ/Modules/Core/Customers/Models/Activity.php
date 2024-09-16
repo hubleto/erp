@@ -69,6 +69,8 @@ class Activity extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::tableDescribe();
     $description['title'] = 'Activities';
+    var_dump($this->app->params);
+
     return $description;
   }
 

@@ -74,11 +74,6 @@ class Person extends \CeremonyCrmApp\Core\Model
     ")
     ;
 
-    //var_dump($this->params); exit;
-    /* if ($this->params['idAccount']) {
-      $query = $query->where('join_id_company.id_account');
-    } */
-
     return $query;
   }
 }

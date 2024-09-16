@@ -24,7 +24,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
         'idAccount' => '$1',
       ],
       [
-        '' => 'Dashboard',
         '/companies' => 'Companies',
         '/persons' => 'Persons',
         '/address' => 'Addresses',
@@ -56,7 +55,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
   {
-    $sidebar->addLink(1, 10100, 'customers', $this->app->translate('Customers'), 'fas fa-user');
+    $sidebar->addLink(1, 10100, 'customers/companies', $this->app->translate('Customers'), 'fas fa-user');
 
     if (str_starts_with($this->app->requestedUri, 'customers')) {
       $sidebar->addHeading1(2, 10200, $this->app->translate('Customers'));

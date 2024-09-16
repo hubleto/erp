@@ -4,6 +4,7 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 use CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccount;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Country;
+use Illuminate\Database\Eloquent\Builder;
 
 class Company extends \CeremonyCrmApp\Core\Model
 {
@@ -91,8 +92,16 @@ class Company extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Companies';
-    $description['addButtonText'] = 'Add Company';
+    $description['ui']['title'] = 'Companies';
+    $description['ui']['addButtonText'] = 'Add Company';
+    $description['ui']['showHeader'] = true;
+    return $description;
+  }
+
+  public function formDescribe(array $description = []): array
+  {
+    $description = parent::formDescribe();
+    $description['defaultValues']['is_active'] = 1;
     return $description;
   }
 

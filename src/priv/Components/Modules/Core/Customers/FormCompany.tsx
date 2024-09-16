@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
 import Table from 'adios/Table';
-import Form, { FormProps, FormState } from 'adios/Form';
+import Form, { FormDescription, FormProps, FormState } from 'adios/Form';
 import InputVarchar from 'adios/Inputs/Varchar';
 import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
@@ -152,23 +152,34 @@ export default class FormCompany<P, S> extends Form<
                 showHeader={false}
                 showFooter={false}
                 data={{data: R.PERSONS}}
-                columns={{
-                  first_name: { type: 'varchar', title: 'First name' },
-                  last_name: { type: 'varchar', title: 'Last name' },
-                  __more_details: { type: 'none', title: '', cellRenderer: (table: TablePersons, data: any, options: any): JSX.Element => {
-                    return <>
-                      <button
-                        className="btn btn-transparent btn-small"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          table.openForm(data.id);
-                          return false;
-                        }}
-                      >
-                        <span className="icon"><i className="fas fa-external-link-alt"></i></span>
-                      </button>
-                    </>;
-                  } },
+                description={{
+                  ui: {
+                    showFilter: false,
+                  },
+                  permissions: {
+                    canCreate: true,
+                    canUpdate: true,
+                    canDelete: true,
+                    canRead: true
+                  },
+                  columns: {
+                    first_name: { type: 'varchar', title: 'First name' },
+                    last_name: { type: 'varchar', title: 'Last name' },
+                    __more_details: { type: 'none', title: '', cellRenderer: (table: TablePersons, data: any, options: any): JSX.Element => {
+                      return <>
+                        <button
+                          className="btn btn-transparent btn-small"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            table.openForm(data.id);
+                            return false;
+                          }}
+                        >
+                          <span className="icon"><i className="fas fa-external-link-alt"></i></span>
+                        </button>
+                      </>;
+                    }},
+                  }
                 }}
                 isUsedAsInput={true}
                 isInlineEditing={this.state.isInlineEditing}
@@ -212,13 +223,15 @@ export default class FormCompany<P, S> extends Form<
                   onChange={(value: any) => {
                     this.updateRecord({ ACTIVITIES: value });
                   }}
-                  columns={{
+                  context="Hello World"
+                  /* columns={{
                     subject: { type: 'varchar', title: 'Subject' },
                     due_date: { type: 'date', title: 'Due Date' },
                     due_time: { type: 'time', title: 'Due Time' },
                     duration: { type: 'time', title: 'Duration' },
                     completed: { type: 'boolean', title: 'Completed' },
-                  }}/>
+                  }} */
+                />
                 {this.state.isInlineEditing ? (
                   <a
                     role='button'

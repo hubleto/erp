@@ -46,31 +46,33 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   } */
 
   loadTableDescription(successCallback?: (params: any) => void): void {
-    this.setState({
-      description: {
-        ui:{
-          addButtonText: 'Add Person',
-          title: 'Persons',
-          showHeader: this.props.showHeader ?? true,
-          showFooter: this.props.showFooter ?? false,
-        },
-        permissions: {
-          canCreate: true,
-          canDelete: true,
-          canRead: true,
-          canUpdate: true,
-        },
-        columns: {
-          first_name: { type: 'varchar', title: 'First Name' },
-          last_name: { type: 'varchar', title: 'Last Name'},
-          id_company: { type: 'lookup', title: 'Company', model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company' },
-          virt_address: { type: 'varchar', title: 'Main Address',},
-          virt_email: { type: 'varchar', title: 'Main Email',},
-          virt_number: { type: 'varchar', title: 'Main Phone Number',},
-          is_active: { type: 'boolean', title: 'Active',},
+    if (!this.props.description) {
+      this.setState({
+        description: {
+          ui:{
+            addButtonText: 'Add Person',
+            title: 'Persons',
+            showHeader: this.props.showHeader ?? true,
+            showFooter: this.props.showFooter ?? false,
+          },
+          permissions: {
+            canCreate: true,
+            canDelete: true,
+            canRead: true,
+            canUpdate: true,
+          },
+          columns: {
+            first_name: { type: 'varchar', title: 'First Name' },
+            last_name: { type: 'varchar', title: 'Last Name'},
+            id_company: { type: 'lookup', title: 'Company', model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company' },
+            virt_address: { type: 'varchar', title: 'Main Address',},
+            virt_email: { type: 'varchar', title: 'Main Email',},
+            virt_number: { type: 'varchar', title: 'Main Phone Number',},
+            is_active: { type: 'boolean', title: 'Active',},
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   renderForm(): JSX.Element {

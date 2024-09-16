@@ -8,6 +8,7 @@ import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 import { Column } from 'primereact/column';
 import TablePersons from './TablePersons';
+import TableActivities from './TableActivities';
 
 interface FormCompanyProps extends FormProps {}
 
@@ -217,21 +218,27 @@ export default class FormCompany<P, S> extends Form<
               <div className='card-header'>Company Activities</div>
               <div className='card-body'>
                 <InputTable
+                  uid={this.props.uid + '_table_activities_input'}
                   {...this.getDefaultInputProps()}
-                  model='CeremonyCrmApp/Modules/Core/Customers/Models/Activity'
                   value={R.ACTIVITIES}
                   onChange={(value: any) => {
                     this.updateRecord({ ACTIVITIES: value });
                   }}
-                  context="Hello World"
-                  /* columns={{
-                    subject: { type: 'varchar', title: 'Subject' },
-                    due_date: { type: 'date', title: 'Due Date' },
-                    due_time: { type: 'time', title: 'Due Time' },
-                    duration: { type: 'time', title: 'Duration' },
-                    completed: { type: 'boolean', title: 'Completed' },
-                  }} */
-                />
+                >
+                  <TableActivities
+                    uid={this.props.uid + '_table_activities'}
+                    context="Hello World"
+                    description={{
+                      columns: {
+                        subject: { type: 'varchar', title: 'Subject' },
+                        due_date: { type: 'date', title: 'Due Date' },
+                        due_time: { type: 'time', title: 'Due Time' },
+                        duration: { type: 'time', title: 'Duration' },
+                        completed: { type: 'boolean', title: 'Completed' },
+                      }
+                    }}
+                  ></TableActivities>
+                </InputTable>
                 {this.state.isInlineEditing ? (
                   <a
                     role='button'

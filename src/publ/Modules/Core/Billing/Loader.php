@@ -41,10 +41,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     $mBillingAccount = new Models\BillingAccount($this->app);
     $mBillingAccount->install();
-    $idBillingAccount = $mBillingAccount->eloquent->create([
+   /*  $idBillingAccount = $mBillingAccount->eloquent->create([
       'id_company' => 1,
-      "description" => "Test Business Account"
-    ])->id;
+      "description" => "Test Billing Account"
+    ])->id; */
 
 
   }

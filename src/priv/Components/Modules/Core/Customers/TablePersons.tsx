@@ -17,7 +17,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
-    /* className: 'header-style-1', */
+    // className: 'header-style-1',
   }
 
   props: TablePersonsProps;
@@ -31,29 +31,24 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     } else return {...super.getFormModalProps()}
   }
 
-  /* getFormModalProps(): any {
-    return {
-      ...super.getFormModalProps(),
-      // type: 'centered tiny',
-    }
-  }
-
-  getFormProps(): any {
-    return {
-      ...super.getFormProps(),
-      isInlineEditing: false,
-    }
-  } */
+  // getFormProps(): any {
+  //   return {
+  //     ...super.getFormProps(),
+  //     isInlineEditing: false,
+  //   }
+  // }
 
   loadTableDescription(successCallback?: (params: any) => void): void {
-    if (!this.props.description) {
+    {
+      this.props.description
+      ??
       this.setState({
         description: {
-          ui:{
-            addButtonText: 'Add Person',
+          ui: {
             title: 'Persons',
-            showHeader: this.props.showHeader ?? true,
-            showFooter: this.props.showFooter ?? false,
+            showHeader: true,
+            showFooter: false,
+            addButtonText: 'Add Person',
           },
           permissions: {
             canCreate: true,
@@ -77,10 +72,6 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
 
   renderForm(): JSX.Element {
     let formProps: FormProps = this.getFormProps();
-    formProps.description.defaultValues = {
-      is_active: 1,
-      is_primary: 0,
-    };
     return <FormPerson {...formProps}/>;
   }
 }

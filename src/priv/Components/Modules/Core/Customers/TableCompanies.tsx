@@ -35,40 +35,6 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
     }
   } */
 
-  /* loadTableDescription(successCallback?: (params: any) => void): void {
-    this.setState({
-      description: {
-        ui: {
-          title: 'Companies',
-          addButtonText: 'Add Companies',
-          showHeader: true,
-          showFooter: false,
-          showFilter: false,
-        },
-        columns: {
-          name: { type: 'varchar', title: 'Company Name' },
-          street_line_1: { type: 'varchar', title: 'Street Line 1'},
-          street_line_2: { type: 'varchar', title: 'Street Line 2'},
-          region: { type: 'varchar', title: 'Region'},
-          city: { type: 'varchar', title: 'City'},
-          id_country: { type: 'lookup', title: 'Country', model: 'CeremonyCrmApp/Modules/Core/Settings/Models/Country'},
-          postal_code: { type: 'varchar', title: 'Postal Code'},
-          vat_id: { type: 'varchar', title: 'Vat ID'},
-          company_id: { type: 'varchar', title: 'Company ID'},
-          tax_id: { type: 'varchar', title: 'Tax ID'},
-          note: { type: 'Text', title: 'Notes'},
-          is_active: { type: 'boolean', title: 'Active'},
-        },
-        permissions:{
-          canCreate: true,
-          canDelete: true,
-          canRead: true,
-          canUpdate: true
-        },
-      }
-    })
-  } */
-
   /*
 
   constructor(props: TableCompaniesProps) {

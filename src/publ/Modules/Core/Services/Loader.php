@@ -50,9 +50,9 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     $mBillingAccountService = new BillingAccountService($this->app);
     $mBillingAccountService->install();
-    $mBillingAccountService->eloquent->create([
+    /* $mBillingAccountService->eloquent->create([
       'id_billing_account' => 1,
       'id_service' => $idService
-    ]);
+    ]); */
   }
 }

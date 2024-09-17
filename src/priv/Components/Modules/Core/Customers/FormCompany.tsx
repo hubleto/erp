@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import Table from 'adios/Table';
 import Form, { FormDescription, FormProps, FormState } from 'adios/Form';
 import InputVarchar from 'adios/Inputs/Varchar';
 import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
-import { Column } from 'primereact/column';
 import TablePersons from './TablePersons';
 import TableActivities from './TableActivities';
 
@@ -103,6 +101,13 @@ export default class FormCompany<P, S> extends Form<
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
+    if (R.ACTIVITIES && R.ACTIVITIES.length > 0 && !this.state.isInlineEditing) {
+      for (let index = 0; index < R.ACTIVITIES.length; index++) {
+        R.ACTIVITIES[index]["_LOOKUP[id_company]"] = R.ACTIVITIES[index].COMPANY.name;
+        R.ACTIVITIES[index]["_LOOKUP[id_user]"] = R.ACTIVITIES[index].USER.email
+      }
+    }
+
     return (
       <>
         <div
@@ -154,9 +159,6 @@ export default class FormCompany<P, S> extends Form<
                 showFooter={false}
                 data={{data: R.PERSONS}}
                 description={{
-                  ui: {
-                    showFilter: false,
-                  },
                   permissions: {
                     canCreate: true,
                     canUpdate: true,
@@ -167,18 +169,20 @@ export default class FormCompany<P, S> extends Form<
                     first_name: { type: 'varchar', title: 'First name' },
                     last_name: { type: 'varchar', title: 'Last name' },
                     __more_details: { type: 'none', title: '', cellRenderer: (table: TablePersons, data: any, options: any): JSX.Element => {
-                      return <>
-                        <button
-                          className="btn btn-transparent btn-small"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            table.openForm(data.id);
-                            return false;
-                          }}
-                        >
-                          <span className="icon"><i className="fas fa-external-link-alt"></i></span>
-                        </button>
-                      </>;
+                      if (data.id > 0) {
+                        return <>
+                          <button
+                            className="btn btn-transparent btn-small"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              table.openForm(data.id);
+                              return false;
+                            }}
+                          >
+                            <span className="icon"><i className="fas fa-external-link-alt"></i></span>
+                          </button>
+                        </>;
+                      }
                     }},
                   }
                 }}

@@ -95,6 +95,7 @@ class Company extends \CeremonyCrmApp\Core\Model
     $description['ui']['title'] = 'Companies';
     $description['ui']['addButtonText'] = 'Add Company';
     $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
 

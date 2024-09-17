@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Form, { FormProps, FormState } from 'adios/Form';
 import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
-import { CeremonyCrmApp } from 'src/priv/Components';
 import { getUrlParam } from 'adios/Helper';
 
 interface FormActivityProps extends FormProps {}

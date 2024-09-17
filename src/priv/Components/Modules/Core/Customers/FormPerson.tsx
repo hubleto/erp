@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
 import Form, { FormProps, FormState } from 'adios/Form';
-import InputVarchar from 'adios/Inputs/Varchar';
 import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
-import { Column } from 'primereact/column';
+import TableAddresses from './TableAddresses';
+import TableContacts from './TableContacts';
 
 interface FormPersonProps extends FormProps {}
 
@@ -90,6 +90,12 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
+    if (R.ADDRESSES && R.ADDRESSES.length > 0 && !this.state.isInlineEditing) {
+      for (let index = 0; index < R.ADDRESSES.length; index++) {
+        R.ADDRESSES[index]["_LOOKUP[id_country]"] = R.ADDRESSES[index].COUNTRY.name;
+      }
+    }
+
     return (
       <>
         <div className='grid grid-cols-2 gap-1' style=
@@ -124,21 +130,28 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               <div className='card-header'>Addresses</div>
               <div className='card-body'>
                 <InputTable
+                  uid={this.props.uid + '_table_addresses_input'}
                   {...this.getDefaultInputProps()}
-                  model='CeremonyCrmApp/Modules/Core/Customers/Models/Address'
                   value={R.ADDRESSES}
                   onChange={(value: any) => {
                     this.updateRecord({ ADDRESSES: value });
                   }}
-                  columns={{
-                    street_line_1: { type: 'varchar', title: 'Street Line 1' },
-                    street_line_2: { type: 'varchar', title: 'Street Line 2' },
-                    city: { type: 'varchar', title: 'City' },
-                    region: { type: 'varchar', title: 'Region' },
-                    postal_code: { type: 'varchar', title: 'Postal Code' },
-                    id_country: { type: 'lookup', model: 'CeremonyCrmApp/Modules/Core/Settings/Models/Country', title: 'Country' },
-                  }}
-                ></InputTable>
+                >
+                  <TableAddresses
+                    uid={this.props.uid + '_table_addresses'}
+                    context="Hello World"
+                    description={{
+                      columns: {
+                        street_line_1: { type: 'varchar', title: 'Street Line 1' },
+                        street_line_2: { type: 'varchar', title: 'Street Line 2' },
+                        city: { type: 'varchar', title: 'City' },
+                        region: { type: 'varchar', title: 'Region' },
+                        postal_code: { type: 'varchar', title: 'Postal Code' },
+                        id_country: { type: 'lookup', model: 'CeremonyCrmApp/Modules/Core/Settings/Models/Country', title: 'Country' },
+                      }
+                    }}
+                  ></TableAddresses>
+                </InputTable>
                 {this.state.isInlineEditing ? (
                   <a
                     role='button'
@@ -160,22 +173,32 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               <div className='card-header'>Contacts</div>
               <div className='card-body'>
                 <InputTable
+                  uid={this.props.uid + '_table_contacts_input'}
                   {...this.getDefaultInputProps()}
-                  model='CeremonyCrmApp/Modules/Core/Customers/Models/Contact'
                   value={R.CONTACTS}
                   onChange={(value: any) => {
-                    this.updateRecord({ PERSONS_CONTACTS: value });
+                    this.updateRecord({ CONTACTS: value });
                   }}
-                  columns={{
-                    type: {
-                      type: 'varchar',
-                      title: 'Contact type',
-                      enumValues: {'email' : 'Email', 'number' : 'Phone Number'},
-                      //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
-                    },
-                    value: { type: 'varchar', title: 'Value' },
-                  }}
-                ></InputTable>
+                >
+                  <TableContacts
+                    uid={this.props.uid + '_table_contacts'}
+                    context="Hello World"
+                    description={{
+                      ui: {
+                        showFilter: false
+                      },
+                      columns: {
+                        type: {
+                          type: 'varchar',
+                          title: 'Contact type',
+                          enumValues: {'email' : 'Email', 'number' : 'Phone Number'},
+                          //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
+                        },
+                        value: { type: 'varchar', title: 'Value' },
+                      }
+                    }}
+                  ></TableContacts>
+                </InputTable>
                 {this.state.isInlineEditing ? (
                   <a
                     role='button'

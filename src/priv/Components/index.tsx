@@ -23,6 +23,8 @@ import FormUser from "./Modules/Core/Settings/FormUser"
 import CoreCustomersTablePersons from "./Modules/Core/Customers/TablePersons"
 import CoreCustomersTableCompanies from "./Modules/Core/Customers/TableCompanies"
 import CoreCustomersTableActivities from "./Modules/Core/Customers/TableActivities"
+import CoreCustomersTableAddresses from "./Modules/Core/Customers/TableAddresses"
+import CoreCustomersTableContacts from "./Modules/Core/Customers/TableContacts"
 import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
 
 
@@ -74,6 +76,8 @@ app.registerReactComponent('FormUser', FormUser);
 app.registerReactComponent('CoreCustomersTablePersons', CoreCustomersTablePersons);
 app.registerReactComponent('CoreCustomersTableCompanies', CoreCustomersTableCompanies);
 app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableActivities);
+app.registerReactComponent('CoreCustomersTableAddresses', CoreCustomersTableAddresses);
+app.registerReactComponent('CoreCustomersTableContacts', CoreCustomersTableContacts);
 app.registerReactComponent('CoreSandboxTableCompanies', CoreSandboxTableCompanies);
 
 // Render react elements into body

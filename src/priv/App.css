@@ -83,7 +83,7 @@
 
   .adios.component.input .inner { @apply flex w-full items-center rounded gap-1; }
   .adios.component.input .inner .value-element { @apply inline-flex flex-1 items-center pr-1 mr-1 text-sm text-gray-900; min-height: 1.5rem; }
-  .adios.component.input .inner .input-element { @apply flex-1 pr-1 mr-1 text-sm text-gray-900 items-center; min-height: 1.5rem; }
+  .adios.component.input .inner .input-element { @apply flex-1 flex flex-row gap-1 pr-1 mr-1 text-sm text-gray-900 items-center; min-height: 1.5rem; }
   .adios.component.input .inner .value-element .no-value { @apply text-gray-300 text-sm italic after:content-['N/A']; }
   .adios.component.input .inner .inline-editing-buttons { @apply flex flex-1 gap-1 invisible; }
   .adios.component.input .inner .inline-editing-buttons.always-visible { @apply !visible; }
@@ -233,7 +233,7 @@
   /* ASYNC SELECT */
   .adios-lookup__indicator { padding: 0px !important; }
   .adios-lookup__control { @apply !w-full rounded-sm; min-height: auto !important; }
-  .adios-lookup__input-container { @apply !text-sm !p-0.5 !m-0; min-width: 2em; }
+  .adios-lookup__input-container { @apply !text-sm !w-[150px] !p-0 !m-0; }
   .adios-lookup__value-container { @apply !p-0; }
   .adios-lookup__input { @apply !text-sm; }
   .adios-lookup__menu * { @apply !text-sm; }

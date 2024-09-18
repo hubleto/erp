@@ -31,10 +31,10 @@ class Activity extends \ADIOS\Core\Model\Eloquent
   {
     return $this->hasMany(ActivityTag::class, 'id_activity', 'id');
   }
-  public function ATENDANCE(): HasMany
-  {
-    return $this->hasMany(Atendance::class, 'id_activity', 'id');
-  }
+  // public function ATENDANCE(): HasMany
+  // {
+  //   return $this->hasMany(Atendance::class, 'id_activity', 'id');
+  // }
 
 
 }

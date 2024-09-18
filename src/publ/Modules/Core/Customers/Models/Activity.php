@@ -14,7 +14,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'TAGS' => [ self::HAS_MANY, ActivityTag::class, 'id_activity', 'id' ],
-    'ATENDANCE' => [ self::HAS_MANY, Atendance::class, 'id_activity', 'id' ],
+    // 'ATENDANCE' => [ self::HAS_MANY, Atendance::class, 'id_activity', 'id' ],
     // 'INVITEES' => [ self::BELONGS_TO, Account::class, 'id_account', 'id' ],
   ];
 

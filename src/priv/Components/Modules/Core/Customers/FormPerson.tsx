@@ -90,12 +90,6 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
-    if (R.ADDRESSES && R.ADDRESSES.length > 0 && !this.state.isInlineEditing) {
-      for (let index = 0; index < R.ADDRESSES.length; index++) {
-        R.ADDRESSES[index]["_LOOKUP[id_country]"] = R.ADDRESSES[index].COUNTRY.name;
-      }
-    }
-
     return (
       <>
         <div className='grid grid-cols-2 gap-1' style=

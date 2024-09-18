@@ -58,7 +58,8 @@ class User extends \ADIOS\Models\User
   }
 
 
-  public function prepareLoadRecordQuery(bool $addLookups = false): \Illuminate\Database\Eloquent\Builder {
+  public function prepareLoadRecordQuery(bool $addLookups = false, $query = null, $level = 0): \Illuminate\Database\Eloquent\Builder
+  {
     return parent::prepareLoadRecordQuery($addLookups)
       ->select('login', 'email', 'first_name', 'middle_name', 'last_name', 'is_active', 'language')
       ->with('ROLES')

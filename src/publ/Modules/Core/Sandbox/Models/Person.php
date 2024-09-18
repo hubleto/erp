@@ -44,7 +44,7 @@ class Person extends \CeremonyCrmApp\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(bool $addLookups = false): Builder
+  public function prepareLoadRecordQuery(bool $addLookups = false, $query = null, $level = 0): \Illuminate\Database\Eloquent\Builder
   {
     $query = parent::prepareLoadRecordQuery();
 

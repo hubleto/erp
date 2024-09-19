@@ -73,7 +73,7 @@ class Person extends \CeremonyCrmApp\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(bool $addLookups = false, $query = null, $level = 0): \Illuminate\Database\Eloquent\Builder
+  public function prepareLoadRecordQuery(int $maxRelationLevel = 0, $query = null, int $level = 0)
   {
     $query = parent::prepareLoadRecordQuery();
 
@@ -81,8 +81,7 @@ class Person extends \CeremonyCrmApp\Core\Model
       (Select value from contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,
       (Select value from contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email,
       (Select concat(street_line_1,', ', street_line_2, ', ', city) from addresses where id_person = persons.id LIMIT 1) virt_address
-    ")
-    ;
+    ");
 
     return $query;
   }

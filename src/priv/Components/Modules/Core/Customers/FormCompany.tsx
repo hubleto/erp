@@ -7,6 +7,7 @@ import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 import TablePersons from './TablePersons';
 import TableActivities from './TableActivities';
+import TableServices from '../Services/TableServices';
 
 interface FormCompanyProps extends FormProps {}
 
@@ -100,14 +101,7 @@ export default class FormCompany<P, S> extends Form<
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
-
-    if (R.ACTIVITIES && R.ACTIVITIES.length > 0 && !this.state.isInlineEditing) {
-      for (let index = 0; index < R.ACTIVITIES.length; index++) {
-        R.ACTIVITIES[index]["_LOOKUP[id_company]"] = R.ACTIVITIES[index].COMPANY.name;
-        R.ACTIVITIES[index]["_LOOKUP[id_user]"] = R.ACTIVITIES[index].USER.email
-      }
-    }
-
+    
     return (
       <>
         <div
@@ -268,7 +262,7 @@ export default class FormCompany<P, S> extends Form<
               {R.BILLING_ACCOUNT ? (
                 <FormInput>
                   <div className='grid grid-cols-2 gap-4'>
-                    <label htmlFor=''>Billing Account Description</label>
+                    <label className='text-sm font-medium' htmlFor=''>Billing Account Description</label>
                     <InputVarchar
                       {...this.getDefaultInputProps()}
                       value={R.BILLING_ACCOUNT.description ?? ''}
@@ -297,7 +291,34 @@ export default class FormCompany<P, S> extends Form<
                   + Add Billing Account
                 </a>
               )}
-            </div><div>
+            </div>
+            {/* <div className='card mt-4'>
+              <div className='card-header'>
+                Services connected to the Billing Account
+              </div>
+              <div className='card-body'>
+                <InputTable
+                    uid={this.props.uid + '_table_activities_input'}
+                    {...this.getDefaultInputProps()}
+                    value={R.ACTIVITIES}
+                    onChange={(value: any) => {
+                      this.updateRecord({ ACTIVITIES: value });
+                    }}
+                  >
+                    <TableServices
+                      uid={this.props.uid + '_table_services'}
+                      context="Hello World"
+                      description={{
+                        columns: {
+                          name: { type: 'varchar', title: 'Subject' },
+                        }
+                      }}
+                    ></TableServices>
+                  </InputTable>
+              </div>
+            </div> */}
+          </div>
+          {/* <div>
             <div className="card">
               <div className="card-header">this.state.record</div>
               <div className="card-body">
@@ -313,8 +334,7 @@ export default class FormCompany<P, S> extends Form<
                 </pre>
               </div>
             </div>
-          </div>
-          </div>
+          </div> */}
         </div>
       </>
     );

@@ -40,5 +40,4 @@ class BillingAccount extends \CeremonyCrmApp\Core\Model
     $description['title'] = 'Billing Accounts';
     return $description;
   }
-
 }

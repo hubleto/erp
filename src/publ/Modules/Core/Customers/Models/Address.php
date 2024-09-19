@@ -34,7 +34,7 @@ class Address extends \CeremonyCrmApp\Core\Model
       'street_line_2' => [
         'type' => 'varchar',
         'title' => 'Street Line 2',
-        'required' => true,
+        'required' => false,
       ],
       'region' => [
         'type' => 'varchar',

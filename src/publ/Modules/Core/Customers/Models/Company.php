@@ -112,4 +112,10 @@ class Company extends \CeremonyCrmApp\Core\Model
     ];
   }
 
+  public function prepareLoadRecordQuery(int $maxRelationLevel = 0, $query = null, int $level = 0)
+  {
+    $query = parent::prepareLoadRecordQuery(3);
+    return $query;
+  }
+
 }

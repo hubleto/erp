@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 
-interface TableServicesProps extends TableProps {
+interface TableBillingAccountServicesProps extends TableProps {
   showHeader: boolean,
   showFooter: boolean
 }
 
-interface TableServicesState extends TableState {
+interface TableBillingAccountServicesState extends TableState {
 }
 
-export default class TableServices extends Table<TableServicesProps, TableServicesState> {
+export default class TableBillingAccountServices extends Table<TableBillingAccountServicesProps, TableBillingAccountServicesState> {
   static defaultProps = {
     itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Services/Models/Service',
   }
 
-  props: TableServicesProps;
-  state: TableServicesState;
+  props: TableBillingAccountServicesProps;
+  state: TableBillingAccountServicesState;
 
-  constructor(props: TableServicesProps) {
+  constructor(props: TableBillingAccountServicesProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-//   getStateFromProps(props: TableServicesProps) {
+//   getStateFromProps(props: TableBillingAccountServicesProps) {
 //     return {
 //       ...super.getStateFromProps(props),
 //     }

@@ -135,6 +135,12 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     uid={this.props.uid + '_table_addresses'}
                     context="Hello World"
                     description={{
+                      permissions: {
+                        canCreate: true,
+                        canDelete: true,
+                        canRead: true,
+                        canUpdate: true
+                      },
                       columns: {
                         street_line_1: { type: 'varchar', title: 'Street Line 1' },
                         street_line_2: { type: 'varchar', title: 'Street Line 2' },
@@ -178,8 +184,11 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     uid={this.props.uid + '_table_contacts'}
                     context="Hello World"
                     description={{
-                      ui: {
-                        showFilter: false
+                      permissions: {
+                        canCreate: true,
+                        canDelete: true,
+                        canRead: true,
+                        canUpdate: true
                       },
                       columns: {
                         type: {

@@ -26,7 +26,7 @@ import CoreCustomersTableActivities from "./Modules/Core/Customers/TableActiviti
 import CoreCustomersTableAddresses from "./Modules/Core/Customers/TableAddresses"
 import CoreCustomersTableContacts from "./Modules/Core/Customers/TableContacts"
 import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
-import CoreSandboxTableServices from "./Modules/Core/Services/TableServices"
+import CoreSandboxTableServices from "./Modules/Core/Services/TableBillingAccountServices"
 
 
 //@ts-ignore

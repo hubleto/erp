@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import Form, { FormDescription, FormProps, FormState } from 'adios/Form';
-import InputVarchar from 'adios/Inputs/Varchar';
-import InputTags2 from 'adios/Inputs/Tags2';
-import InputTable from 'adios/Inputs/Table';
-import FormInput from 'adios/FormInput';
-import TablePersons from './TablePersons';
-import TableActivities from './TableActivities';
-import TableServices from '../Services/TableServices';
+import React, { Component } from "react";
+import { deepObjectMerge, getUrlParam } from "adios/Helper";
+import Form, { FormDescription, FormProps, FormState } from "adios/Form";
+import InputVarchar from "adios/Inputs/Varchar";
+import InputTags2 from "adios/Inputs/Tags2";
+import InputTable from "adios/Inputs/Table";
+import FormInput from "adios/FormInput";
+import TablePersons from "./TablePersons";
+import TableActivities from "./TableActivities";
+import TableBillingAccountServices from "../Services/TableBillingAccountServices";
 
 interface FormCompanyProps extends FormProps {}
 
@@ -18,7 +18,7 @@ export default class FormCompany<P, S> extends Form<
   FormCompanyState
 > {
   static defaultProps: any = {
-    model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
+    model: "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
   };
 
   props: FormCompanyProps;
@@ -28,7 +28,6 @@ export default class FormCompany<P, S> extends Form<
     super(props);
     this.state = this.getStateFromProps(props);
   }
-
 
   getStateFromProps(props: FormCompanyProps) {
     return {
@@ -71,18 +70,14 @@ export default class FormCompany<P, S> extends Form<
   }
 
   renderHeaderRight(): JSX.Element {
-    return <>
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
+    return <>{this.props.showInModal ? this.renderCloseButton() : null}</>;
   }
 
   renderTitle(): JSX.Element {
-    if (getUrlParam('recordId') == -1) {
-      return(
+    if (getUrlParam("recordId") == -1) {
+      return (
         <>
-          <h2>
-            {'New Company'}
-          </h2>
+          <h2>{"New Company"}</h2>
         </>
       );
     } else {
@@ -91,7 +86,7 @@ export default class FormCompany<P, S> extends Form<
           <h2>
             {this.state.record.name
               ? this.state.record.name
-              : '[Undefined Name]'}
+              : "[Undefined Name]"}
           </h2>
         </>
       );
@@ -101,90 +96,93 @@ export default class FormCompany<P, S> extends Form<
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
-    
+
     return (
       <>
         <div
-          className='grid grid-cols-2 gap-1'
+          className="grid grid-cols-2 gap-1"
           style={{
             gridTemplateAreas: `
-          'company contacts'
-          'activities activities'
-          'billing billing'
-          `,
+              'company contacts'
+              'activities activities'
+              'billing billing'
+            `,
           }}
         >
-          <div className='card mt-4' style={{ gridArea: 'company' }}>
-            <div className='card-header'>Company Information</div>
-            <div className='card-body'>
-              {this.inputWrapper('name')}
-              {this.inputWrapper('street_line_1')}
-              {this.inputWrapper('street_line_2')}
-              {this.inputWrapper('city')}
-              {this.inputWrapper('region')}
-              {this.inputWrapper('id_country')}
-              {this.inputWrapper('postal_code')}
-              {this.inputWrapper('vat_id')}
-              {this.inputWrapper('tax_id')}
-              {this.inputWrapper('company_id')}
-              {this.inputWrapper('note')}
-              {showAdditional ? this.inputWrapper('is_active') : null}
-              <FormInput title='Categories'>
+          <div className="card mt-4" style={{ gridArea: "company" }}>
+            <div className="card-header">Company Information</div>
+            <div className="card-body">
+              {this.inputWrapper("name")}
+              {this.inputWrapper("street_line_1")}
+              {this.inputWrapper("street_line_2")}
+              {this.inputWrapper("city")}
+              {this.inputWrapper("region")}
+              {this.inputWrapper("id_country")}
+              {this.inputWrapper("postal_code")}
+              {this.inputWrapper("vat_id")}
+              {this.inputWrapper("tax_id")}
+              {this.inputWrapper("company_id")}
+              {this.inputWrapper("note")}
+              {showAdditional ? this.inputWrapper("is_active") : null}
+              <FormInput title="Categories">
                 <InputTags2
                   {...this.getDefaultInputProps()}
                   value={this.state.record.TAGS}
-                  model='CeremonyCrmApp/Modules/Core/Settings/Models/Tag'
-                  targetColumn='id_company'
-                  sourceColumn='id_tag'
-                  colorColumn='color'
+                  model="CeremonyCrmApp/Modules/Core/Settings/Models/Tag"
+                  targetColumn="id_company"
+                  sourceColumn="id_tag"
+                  colorColumn="color"
                   onChange={(value: any) => {
                     this.updateRecord({ TAGS: value });
-                  }}/>
+                  }}
+                />
               </FormInput>
             </div>
           </div>
 
-          <div className='card mt-4' style={{ gridArea: 'contacts' }}>
-            <div className='card-header'>Representatives</div>
-            <div className='card-body'>
+          <div className="card mt-4" style={{ gridArea: "contacts" }}>
+            <div className="card-header">Representatives</div>
+            <div className="card-body">
               <TablePersons
-                uid={this.props.uid + '_table_persons'}
+                uid={this.props.uid + "_table_persons"}
                 showHeader={false}
                 showFooter={false}
-                data={{data: R.PERSONS}}
+                data={{ data: R.PERSONS }}
                 description={{
                   permissions: {
                     canCreate: true,
                     canUpdate: true,
                     canDelete: true,
-                    canRead: true
+                    canRead: true,
                   },
                   columns: {
-                    first_name: { type: 'varchar', title: 'First name' },
-                    last_name: { type: 'varchar', title: 'Last name' },
-                    __more_details: { type: 'none', title: '', cellRenderer: (table: TablePersons, data: any, options: any): JSX.Element => {
-                      if (data.id > 0) {
-                        return <>
-                          <button
-                            className="btn btn-transparent btn-small"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              table.openForm(data.id);
-                              return false;
-                            }}
-                          >
-                            <span className="icon"><i className="fas fa-external-link-alt"></i></span>
-                          </button>
-                        </>;
-                      }
-                    }},
-                  }
+                    first_name: { type: "varchar", title: "First name" },
+                    last_name: { type: "varchar", title: "Last name" },
+                    __more_details: {type: "none",title: "",cellRenderer: (table: TablePersons, data: any, options: any): JSX.Element => {
+                        if (data.id > 0) {
+                          return (<>
+                              <button
+                                className="btn btn-transparent btn-small"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  table.openForm(data.id);
+                                  return false;
+                                }}
+                              >
+                                <span className="icon"><i className="fas fa-external-link-alt"></i></span>
+                              </button>
+                            </>
+                          );
+                        }
+                      },
+                    },
+                  },
                 }}
                 isUsedAsInput={true}
                 isInlineEditing={this.state.isInlineEditing}
                 readonly={!this.state.isInlineEditing}
                 onRowClick={(table: TablePersons, row: any) => {
-                  this.setState({isInlineEditing: !this.state.isInlineEditing});
+                  this.setState({ isInlineEditing: !this.state.isInlineEditing, });
                 }}
                 onChange={(table: TablePersons) => {
                   this.updateRecord({ PERSONS: table.state.data?.data });
@@ -195,7 +193,7 @@ export default class FormCompany<P, S> extends Form<
               ></TablePersons>
               {this.state.isInlineEditing ? (
                 <a
-                  role='button'
+                  role="button"
                   onClick={() => {
                     if (!R.PERSONS) R.PERSONS = [];
                     R.PERSONS.push({
@@ -212,11 +210,11 @@ export default class FormCompany<P, S> extends Form<
           </div>
 
           {showAdditional ? (
-            <div className='card mt-4' style={{ gridArea: 'activities' }}>
-              <div className='card-header'>Company Activities</div>
-              <div className='card-body'>
+            <div className="card mt-4" style={{ gridArea: "activities" }}>
+              <div className="card-header">Company Activities</div>
+              <div className="card-body">
                 <InputTable
-                  uid={this.props.uid + '_table_activities_input'}
+                  uid={this.props.uid + "_table_activities_input"}
                   {...this.getDefaultInputProps()}
                   value={R.ACTIVITIES}
                   onChange={(value: any) => {
@@ -224,22 +222,22 @@ export default class FormCompany<P, S> extends Form<
                   }}
                 >
                   <TableActivities
-                    uid={this.props.uid + '_table_activities'}
+                    uid={this.props.uid + "_table_activities"}
                     context="Hello World"
                     description={{
                       columns: {
-                        subject: { type: 'varchar', title: 'Subject' },
-                        due_date: { type: 'date', title: 'Due Date' },
-                        due_time: { type: 'time', title: 'Due Time' },
-                        duration: { type: 'time', title: 'Duration' },
-                        completed: { type: 'boolean', title: 'Completed' },
-                      }
+                        subject: { type: "varchar", title: "Subject" },
+                        due_date: { type: "date", title: "Due Date" },
+                        due_time: { type: "time", title: "Due Time" },
+                        duration: { type: "time", title: "Duration" },
+                        completed: { type: "boolean", title: "Completed" },
+                      },
                     }}
                   ></TableActivities>
                 </InputTable>
                 {this.state.isInlineEditing ? (
                   <a
-                    role='button'
+                    role="button"
                     onClick={() => {
                       if (!R.ACTIVITIES) R.ACTIVITIES = [];
                       R.ACTIVITIES.push({
@@ -256,18 +254,18 @@ export default class FormCompany<P, S> extends Form<
             </div>
           ) : null}
 
-          <div className='card mt-4' style={{ gridArea: 'billing' }}>
-            <div className='card-header'>Billing Account</div>
-            <div className='card-body'>
+          <div className="card mt-4" style={{ gridArea: "billing" }}>
+            <div className="card-header">Billing Account</div>
+            <div className="card-body">
               {R.BILLING_ACCOUNT ? (
                 <FormInput>
-                  <div className='grid grid-cols-2 gap-4'>
-                    <label className='text-sm font-medium' htmlFor=''>Billing Account Description</label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <label className="text-sm font-medium">Billing Account Description</label>
                     <InputVarchar
                       {...this.getDefaultInputProps()}
-                      value={R.BILLING_ACCOUNT.description ?? ''}
+                      value={R.BILLING_ACCOUNT.description ?? ""}
                       placeholder={globalThis.app.translate(
-                        'Billing Account Description'
+                        "Billing Account Description"
                       )}
                       onChange={(value: any) => {
                         this.updateRecord({
@@ -278,7 +276,7 @@ export default class FormCompany<P, S> extends Form<
                 </FormInput>
               ) : (
                 <a
-                  role='button'
+                  role="button"
                   onClick={() => {
                     if (!R.BILLING_ACCOUNT) {
                       R.BILLING_ACCOUNT = {
@@ -292,31 +290,54 @@ export default class FormCompany<P, S> extends Form<
                 </a>
               )}
             </div>
-            {/* <div className='card mt-4'>
-              <div className='card-header'>
-                Services connected to the Billing Account
-              </div>
-              <div className='card-body'>
+            <div className="card mt-4">
+              <div className="card-header text-sm">Services connected to the Billing Account</div>
+              <div className="card-body">
                 <InputTable
-                    uid={this.props.uid + '_table_activities_input'}
-                    {...this.getDefaultInputProps()}
-                    value={R.ACTIVITIES}
-                    onChange={(value: any) => {
-                      this.updateRecord({ ACTIVITIES: value });
+                  uid={this.props.uid + "_table_services_input"}
+                  {...this.getDefaultInputProps()}
+                  value={R.BILLING_ACCOUNT.SERVICES}
+                  onChange={(value: any) => {
+                    this.updateRecord({
+                      BILLING_ACCOUNT: {
+                        SERVICES: value,
+                      },
+                    });
+                  }}
+                >
+                  <TableBillingAccountServices
+                    uid={this.props.uid + "_table_services"}
+                    context="Hello World"
+                    description={{
+                      permissions: {
+                        canDelete: true,
+                        canCreate: true,
+                        canRead: true,
+                        canUpdate: true
+                      },
+                      columns: {
+                        id_service: { type: "lookup",
+                        title: "Service Name",
+                        model: "CeremonyCrmApp/Modules/Core/Services/Models/Service", },
+                      },
                     }}
-                  >
-                    <TableServices
-                      uid={this.props.uid + '_table_services'}
-                      context="Hello World"
-                      description={{
-                        columns: {
-                          name: { type: 'varchar', title: 'Subject' },
-                        }
-                      }}
-                    ></TableServices>
-                  </InputTable>
+                  ></TableBillingAccountServices>
+                </InputTable>
+                {this.state.isInlineEditing ? (
+                  <a
+                    role="button"
+                    onClick={() => {
+                      if (!R.BILLING_ACCOUNT.SERVICES) R.BILLING_ACCOUNT.SERVICES = [];
+                      R.BILLING_ACCOUNT.SERVICES.push({
+                        id_billing_account: R.BILLING_ACCOUNT.id,
+                      });
+                      this.setState({ record: R });
+                    }}>
+                    + Add service
+                  </a>
+                ) : null}
               </div>
-            </div> */}
+            </div>
           </div>
           {/* <div>
             <div className="card">

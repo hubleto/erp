@@ -158,7 +158,7 @@ export default class FormCompany<P, S> extends Form<
                   columns: {
                     first_name: { type: "varchar", title: "First name" },
                     last_name: { type: "varchar", title: "Last name" },
-                    __more_details: {type: "none",title: "",cellRenderer: (table: TablePersons, data: any, options: any): JSX.Element => {
+                    __more_details: { type: "none", title: "", cellRenderer: ( table: TablePersons, data: any, options: any): JSX.Element => {
                         if (data.id > 0) {
                           return (<>
                               <button
@@ -290,54 +290,58 @@ export default class FormCompany<P, S> extends Form<
                 </a>
               )}
             </div>
-            <div className="card mt-4">
-              <div className="card-header text-sm">Services connected to the Billing Account</div>
-              <div className="card-body">
-                <InputTable
-                  uid={this.props.uid + "_table_services_input"}
-                  {...this.getDefaultInputProps()}
-                  value={R.BILLING_ACCOUNT.SERVICES}
-                  onChange={(value: any) => {
-                    this.updateRecord({
-                      BILLING_ACCOUNT: {
-                        SERVICES: value,
-                      },
-                    });
-                  }}
-                >
-                  <TableBillingAccountServices
-                    uid={this.props.uid + "_table_services"}
-                    context="Hello World"
-                    description={{
-                      permissions: {
-                        canDelete: true,
-                        canCreate: true,
-                        canRead: true,
-                        canUpdate: true
-                      },
-                      columns: {
-                        id_service: { type: "lookup",
-                        title: "Service Name",
-                        model: "CeremonyCrmApp/Modules/Core/Services/Models/Service", },
-                      },
-                    }}
-                  ></TableBillingAccountServices>
-                </InputTable>
-                {this.state.isInlineEditing ? (
-                  <a
-                    role="button"
-                    onClick={() => {
-                      if (!R.BILLING_ACCOUNT.SERVICES) R.BILLING_ACCOUNT.SERVICES = [];
-                      R.BILLING_ACCOUNT.SERVICES.push({
-                        id_billing_account: R.BILLING_ACCOUNT.id,
+            {R.BILLING_ACCOUNT ? (
+              <div className="card mt-4">
+                <div className="card-header text-sm">Services connected to the Billing Account</div>
+                <div className="card-body">
+                  <InputTable
+                    uid={this.props.uid + "_table_services_input"}
+                    {...this.getDefaultInputProps()}
+                    value={R.BILLING_ACCOUNT.SERVICES}
+                    onChange={(value: any) => {
+                      this.updateRecord({
+                        BILLING_ACCOUNT: {
+                          SERVICES: value,
+                        },
                       });
-                      this.setState({ record: R });
-                    }}>
-                    + Add service
-                  </a>
-                ) : null}
+                    }}
+                  >
+                    <TableBillingAccountServices
+                      uid={this.props.uid + "_table_services"}
+                      context="Hello World"
+                      description={{
+                        permissions: {
+                          canDelete: true,
+                          canCreate: true,
+                          canRead: true,
+                          canUpdate: true,
+                        },
+                        columns: {
+                          id_service: {
+                            type: "lookup",
+                            title: "Service Name",
+                            model: "CeremonyCrmApp/Modules/Core/Services/Models/Service",
+                          },
+                        },
+                      }}
+                    ></TableBillingAccountServices>
+                  </InputTable>
+                  {this.state.isInlineEditing ? (
+                    <a
+                      role="button"
+                      onClick={() => {
+                        if (!R.BILLING_ACCOUNT.SERVICES) R.BILLING_ACCOUNT.SERVICES = [];
+                        R.BILLING_ACCOUNT.SERVICES.push({
+                          id_billing_account: { _useMasterRecordId_: true },
+                        });
+                        this.setState({ record: R });
+                      }}>
+                      + Add service
+                    </a>
+                  ) : null}
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
           {/* <div>
             <div className="card">
@@ -351,7 +355,7 @@ export default class FormCompany<P, S> extends Form<
                     fontSize: "10px",
                   }}
                 >
-                  {JSON.stringify(R, null, 2)}
+                  {JSON.stringify(R.BILLING_ACCOUNT, null, 2)}
                 </pre>
               </div>
             </div>

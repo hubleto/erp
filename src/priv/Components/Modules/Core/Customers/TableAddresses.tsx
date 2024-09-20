@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 
 interface TableAddressesProps extends TableProps {
-  showHeader: boolean,
-  showFooter: boolean
+  // showHeader: boolean,
+  // showFooter: boolean
 }
 
 interface TableAddressesState extends TableState {

@@ -103,6 +103,7 @@ class Company extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 1;
+    $description['includeRelations'] = ['PERSONS', 'COUNTRY', 'FIRST_CONTACT', 'BILLING_ACCOUNT', 'SERVICES'];
     return $description;
   }
 
@@ -112,9 +113,9 @@ class Company extends \CeremonyCrmApp\Core\Model
     ];
   }
 
-  public function prepareLoadRecordQuery(int $maxRelationLevel = 0, $query = null, int $level = 0)
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
   {
-    $query = parent::prepareLoadRecordQuery(3);
+    $query = parent::prepareLoadRecordQuery($includeRelations, 3);
     return $query;
   }
 

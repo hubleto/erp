@@ -70,12 +70,13 @@ class Person extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 1;
     $description['defaultValues']['is_primary'] = 0;
+    $description['includeRelations'] = ['ADDRESSES', 'CONTACTS', 'TAGS'];
     return $description;
   }
 
-  public function prepareLoadRecordQuery(int $maxRelationLevel = 0, $query = null, int $level = 0)
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
   {
-    $query = parent::prepareLoadRecordQuery(1);
+    $query = parent::prepareLoadRecordQuery($includeRelations, 1);
 
     $query = $query->selectRaw("
       (Select value from contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,

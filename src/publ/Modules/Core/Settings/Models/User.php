@@ -57,9 +57,9 @@ class User extends \ADIOS\Models\User
     ]));
   }
 
-  public function prepareLoadRecordQuery(int $maxRelationLevel = 0, $query = null, int $level = 0)
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
   {
-    return parent::prepareLoadRecordQuery()
+    return parent::prepareLoadRecordQuery($includeRelations)
       ->select('login', 'email', 'first_name', 'middle_name', 'last_name', 'is_active', 'language')
       ->with('ROLES')
     ;

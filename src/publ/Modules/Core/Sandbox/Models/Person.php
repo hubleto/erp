@@ -46,7 +46,7 @@ class Person extends \CeremonyCrmApp\Core\Model
 
   public function prepareLoadRecordQuery(bool $addLookups = false, $query = null, $level = 0): \Illuminate\Database\Eloquent\Builder
   {
-    $query = parent::prepareLoadRecordQuery();
+    $query = parent::prepareLoadRecordQuery($includeRelations);
 
     $query = $query->selectRaw("
       (Select value from person_contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,

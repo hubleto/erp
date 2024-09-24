@@ -18,7 +18,7 @@ class BillingAccountService extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'id_billing_account' => [
         'type' => 'lookup',
-        'title' => 'Company',
+        'title' => 'Billing Account',
         'model' => 'CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',

@@ -26,7 +26,7 @@ import CoreCustomersTableActivities from "./Modules/Core/Customers/TableActiviti
 import CoreCustomersTableAddresses from "./Modules/Core/Customers/TableAddresses"
 import CoreCustomersTableContacts from "./Modules/Core/Customers/TableContacts"
 import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
-import CoreSandboxTableServices from "./Modules/Core/Services/TableBillingAccountServices"
+import CoreBillingTableBillingAccountService from "./Modules/Core/Billing/TableBillingAccountServices"
 
 
 //@ts-ignore
@@ -80,7 +80,7 @@ app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableAct
 app.registerReactComponent('CoreCustomersTableAddresses', CoreCustomersTableAddresses);
 app.registerReactComponent('CoreCustomersTableContacts', CoreCustomersTableContacts);
 app.registerReactComponent('CoreSandboxTableCompanies', CoreSandboxTableCompanies);
-app.registerReactComponent('CoreSandboxTableServices', CoreSandboxTableServices);
+app.registerReactComponent('CoreBillingTableBillingAccountService', CoreBillingTableBillingAccountService);
 
 // Render react elements into body
 app.renderReactElements();

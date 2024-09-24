@@ -7,11 +7,15 @@ import InputTable from "adios/Inputs/Table";
 import FormInput from "adios/FormInput";
 import TablePersons from "./TablePersons";
 import TableActivities from "./TableActivities";
-import TableBillingAccountServices from "../Services/TableBillingAccountServices";
+import TableBillingAccountServices from "../Billing/TableBillingAccountServices";
 
-interface FormCompanyProps extends FormProps {}
+interface FormCompanyProps extends FormProps {
+  highlightIdBussinessAccounts: number
+}
 
-interface FormCompanyState extends FormState {}
+interface FormCompanyState extends FormState {
+  highlightIdBussinessAccounts: number
+}
 
 export default class FormCompany<P, S> extends Form<
   FormCompanyProps,
@@ -27,7 +31,11 @@ export default class FormCompany<P, S> extends Form<
 
   constructor(props: FormCompanyProps) {
     super(props);
-    this.state = this.getStateFromProps(props);
+
+    this.state = {
+      ...this.getStateFromProps(props),
+      highlightIdBussinessAccounts: this.props.highlightIdBussinessAccounts ?? 0,
+    }
   }
 
   getStateFromProps(props: FormCompanyProps) {
@@ -46,8 +54,15 @@ export default class FormCompany<P, S> extends Form<
         record.ACTIVITIES[key].id_company = { _useMasterRecordId_: true };
         record.ACTIVITIES[key].id_user = globalThis.app.idUser;
       });
-    if (record.BILLING_ACCOUNT) {
-      record.BILLING_ACCOUNT.id_company = { _useMasterRecordId_: true };
+    if (record.BILLING_ACCOUNTS) {
+      record.BILLING_ACCOUNTS.map((item: any, key: number) => {
+        record.BILLING_ACCOUNTS[key].id_company = { _useMasterRecordId_: true };
+        if (record.BILLING_ACCOUNTS[key].SERVICES) {
+          record.BILLING_ACCOUNTS[key].SERVICES.map((item2: any, key2: number) => {
+            record.BILLING_ACCOUNTS[key].SERVICES[key2].id_billing_account  = { _useMasterRecordId_: true };
+          })
+        }
+      });
     }
     if (record.TAGS)
       record.TAGS.map((item: any, key: number) => {
@@ -227,6 +242,12 @@ export default class FormCompany<P, S> extends Form<
                     context="Hello World"
                     descriptionSource="props"
                     description={{
+                      permissions: {
+                        canDelete: true,
+                        canCreate: true,
+                        canRead: true,
+                        canUpdate: true,
+                      },
                       columns: {
                         subject: { type: "varchar", title: "Subject" },
                         due_date: { type: "date", title: "Due Date" },
@@ -257,40 +278,130 @@ export default class FormCompany<P, S> extends Form<
           ) : null}
 
           <div className="card mt-4" style={{ gridArea: "billing" }}>
-            <div className="card-header">Billing Account</div>
+            <div className="card-header">Billing Accounts</div>
             <div className="card-body">
-              {R.BILLING_ACCOUNT ? (
-                <FormInput>
-                  <div className="grid grid-cols-2 gap-4">
-                    <label className="text-sm font-medium">Billing Account Description</label>
-                    <InputVarchar
-                      {...this.getDefaultInputProps()}
-                      value={R.BILLING_ACCOUNT.description ?? ""}
-                      placeholder={globalThis.app.translate(
-                        "Billing Account Description"
-                      )}
-                      onChange={(value: any) => {
-                        this.updateRecord({
-                          BILLING_ACCOUNT: { description: value },
-                        });
-                      }}/>
-                  </div>
-                </FormInput>
-              ) : (
+              <div className="list">
+
+                {R.BILLING_ACCOUNTS ? R.BILLING_ACCOUNTS.map((input, key) => {
+                  return (
+                    <>
+                      <div className="list-item">
+                        <button
+                          onClick={() => { this.setState({highlightIdBussinessAccounts: input.id,} as FormCompanyState) }}
+                          className={"w-full btn-list-item text-left text-sm p-2 hover:bg-gray-50 " + (this.state.highlightIdBussinessAccounts == input.id ? "font-bold bg-gray-50" : "font-medium")}
+                        >
+                          <div className="flex grow justify-between">
+                            <div className="grow">
+                              <span>{input.description}<br></br></span>
+                              <small className="text text-gray-400">Number of services: {input.SERVICES ? input.SERVICES.length : "0"}</small>
+                            </div>
+                            <div className="flex justify-center"><i className="fas fa-chevron-down self-center"></i></div>
+                          </div>
+
+                        </button>
+                      </div>
+                      {this.state.highlightIdBussinessAccounts == input.id ?
+                        <div className="list-item p-2">
+                          <div className="card mb-0">
+                            <div className="card-header text-sm">Billing Account Information</div>
+                            <div className="card-body">
+                              <FormInput>
+                                <div className="grid grid-cols-2 gap-4">
+                                  <label className="input-label">Billing Account Description</label>
+                                  <InputVarchar
+                                    {...this.getDefaultInputProps()}
+                                    value={input.description}
+                                    placeholder={globalThis.app.translate(
+                                      "Billing Account Description"
+                                    )}
+                                    onChange={(value: any) => {
+                                      this.updateRecord({
+                                        BILLING_ACCOUNTS: { [key]: {description: value} },
+                                      });
+                                    }}/>
+                                  {/* <button className="btn btn-danger" onClick = {() => {
+                                    R.BILLING_ACCOUNTS[key]._toBeDeleted_ = true;
+                                    this.setState({ record: R });
+                                  }}><span className="icon"><i className="fas fa-trash"></i></span></button> */}
+                                </div>
+                              </FormInput>
+                            </div>
+                          </div>
+                        </div>
+                      : null}
+
+                      {(this.state.highlightIdBussinessAccounts == input.id && R.BILLING_ACCOUNTS[key]) ? (
+                        <div className="card mx-2 mb-2">
+                          <div className="card-header text-sm">Services connected to the Billing Account</div>
+                          <div className="card-body">
+                            <InputTable
+                              uid={this.props.uid + "_table_services_input"}
+                              {...this.getDefaultInputProps()}
+                              value={R.BILLING_ACCOUNTS[key].SERVICES}
+                              onChange={(value: any) => {
+                                this.updateRecord({
+                                  BILLING_ACCOUNTS: { [key]: {SERVICES: value}
+                                  },
+                                });
+                              }}
+                            >
+                              <TableBillingAccountServices
+                                uid={this.props.uid + "_table_services"}
+                                context="Hello World"
+                                description={{
+                                  permissions: {
+                                    canDelete: true,
+                                    canCreate: true,
+                                    canRead: true,
+                                    canUpdate: true,
+                                  },
+                                  columns: {
+                                    id_service: {
+                                      type: "lookup",
+                                      title: "Service Name",
+                                      model: "CeremonyCrmApp/Modules/Core/Services/Models/Service",
+                                    },
+                                  },
+                                }}
+                              ></TableBillingAccountServices>
+                            </InputTable>
+                            {this.state.isInlineEditing ? (
+                              <a
+                                role="button"
+                                onClick={() => {
+                                  if (!R.BILLING_ACCOUNTS[key].SERVICES) R.BILLING_ACCOUNTS[key].SERVICES = [];
+                                  R.BILLING_ACCOUNTS[key].SERVICES.push({
+                                    id_billing_account: { _useMasterRecordId_: true },
+                                  });
+                                  this.setState({ record: R });
+                                }}>
+                                + Add service
+                              </a>
+                            ) : null}
+                          </div>
+                        </div>
+                      ) : null}
+                    </>
+                  )
+                }): null}
+
+              </div>
+
+              {this.state.isInlineEditing ? (
                 <a
                   role="button"
                   onClick={() => {
-                    if (!R.BILLING_ACCOUNT) {
-                      R.BILLING_ACCOUNT = {
-                        id_company: { _useMasterRecordId_: true },
-                      };
-                    }
+                    if (!R.BILLING_ACCOUNTS) R.BILLING_ACCOUNTS = [];
+                    R.BILLING_ACCOUNTS.push({
+                      id_company: { _useMasterRecordId_: true },
+                      description: "New Billing Account",
+                    });
                     this.setState({ record: R });
-                  }}
-                >
+                  }}>
                   + Add Billing Account
                 </a>
-              )}
+              ) : null}
+
             </div>
             {R.BILLING_ACCOUNT ? (
               <div className="card mt-4">
@@ -358,7 +469,7 @@ export default class FormCompany<P, S> extends Form<
                     fontSize: "10px",
                   }}
                 >
-                  {JSON.stringify(R.BILLING_ACCOUNT, null, 2)}
+                  {JSON.stringify(R.BILLING_ACCOUNTS, null, 2)}
                 </pre>
               </div>
             </div>

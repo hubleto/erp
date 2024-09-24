@@ -11,6 +11,7 @@ interface TableContactsState extends TableState {
 
 export default class TableContacts extends Table<TableContactsProps, TableContactsState> {
   static defaultProps = {
+    ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Contact',

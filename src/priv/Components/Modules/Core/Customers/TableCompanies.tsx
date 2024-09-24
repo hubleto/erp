@@ -12,6 +12,7 @@ interface TableCompaniesState extends TableState {
 
 export default class TableCompanies extends Table<TableCompaniesProps, TableCompaniesState> {
   static defaultProps = {
+    ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',

@@ -13,6 +13,7 @@ interface FormPersonState extends FormState {}
 
 export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonState> {
   static defaultProps: any = {
+    ...Form.defaultProps,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
   };
 
@@ -134,6 +135,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                   <TableAddresses
                     uid={this.props.uid + '_table_addresses'}
                     context="Hello World"
+                    descriptionSource="props"
                     description={{
                       permissions: {
                         canCreate: true,
@@ -183,6 +185,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                   <TableContacts
                     uid={this.props.uid + '_table_contacts'}
                     context="Hello World"
+                    descriptionSource="props"
                     description={{
                       permissions: {
                         canCreate: true,

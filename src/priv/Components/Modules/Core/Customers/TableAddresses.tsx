@@ -11,6 +11,7 @@ interface TableAddressesState extends TableState {
 
 export default class TableAddresses extends Table<TableAddressesProps, TableAddressesState> {
   static defaultProps = {
+    ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Addresses',

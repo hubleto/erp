@@ -18,6 +18,7 @@ export default class FormCompany<P, S> extends Form<
   FormCompanyState
 > {
   static defaultProps: any = {
+    ...Form.defaultProps,
     model: "CeremonyCrmApp/Modules/Core/Customers/Models/Company",
   };
 
@@ -224,6 +225,7 @@ export default class FormCompany<P, S> extends Form<
                   <TableActivities
                     uid={this.props.uid + "_table_activities"}
                     context="Hello World"
+                    descriptionSource="props"
                     description={{
                       columns: {
                         subject: { type: "varchar", title: "Subject" },
@@ -309,6 +311,7 @@ export default class FormCompany<P, S> extends Form<
                     <TableBillingAccountServices
                       uid={this.props.uid + "_table_services"}
                       context="Hello World"
+                      descriptionSource="props"
                       description={{
                         permissions: {
                           canDelete: true,

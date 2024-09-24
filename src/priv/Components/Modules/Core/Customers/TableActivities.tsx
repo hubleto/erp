@@ -12,6 +12,7 @@ interface TableActivitiesState extends TableState {
 
 export default class TableActivities extends Table<TableActivitiesProps, TableActivitiesState> {
   static defaultProps = {
+    ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Activity',

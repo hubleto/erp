@@ -17,6 +17,7 @@ interface FormCompanyState extends FormState {
 
 export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompanyState> {
   static defaultProps: any = {
+    ...Form.defaultProps,
     model: 'CeremonyCrmApp/Modules/Core/Sandbox/Models/Company',
   }
 
@@ -115,6 +116,7 @@ export default class FormCompany<P, S> extends Form<FormCompanyProps, FormCompan
                 onChange={(value: any) => {
                   this.updateRecord({OTHER_PERSONS: value});
                 }}
+                descriptionSource="props"
                 columns={{
                   'first_name': {type: 'varchar', title: 'First name'},
                   'last_name': {type: 'varchar', title: 'Last name'},

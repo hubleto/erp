@@ -10,6 +10,7 @@ interface FormUserState extends FormState {
 
 export default class FormUser<P, S> extends Form<FormUserProps, FormUserState> {
   static defaultProps: any = {
+    ...Form.defaultProps,
     model: 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
   }
 

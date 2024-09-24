@@ -10,6 +10,7 @@ interface FormActivityState extends FormState {}
 
 export default class FormActivity<P, S> extends Form<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
+    ...Form.defaultProps,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Activity',
   };
 

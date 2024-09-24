@@ -25,8 +25,8 @@ class Company extends \ADIOS\Core\Model\Eloquent
   public function FIRST_CONTACT(): HasOne {
     return $this->hasOne(Person::class, 'id_company')->where('is_primary', true);
   }
-  public function BILLING_ACCOUNT(): HasOne {
-    return $this->hasOne(BillingAccount::class, 'id_company');
+  public function BILLING_ACCOUNTS(): HasMany {
+    return $this->hasMany(BillingAccount::class, 'id_company');
   }
   public function ACTIVITIES(): HasMany {
     return $this->hasMany(Activity::class, 'id_company');

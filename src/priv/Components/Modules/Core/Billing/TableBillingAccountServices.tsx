@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 
 interface TableBillingAccountServicesProps extends TableProps {
-  showHeader: boolean,
-  showFooter: boolean
+  // showHeader: boolean,
+  // showFooter: boolean
 }
 
 interface TableBillingAccountServicesState extends TableState {
@@ -13,7 +13,7 @@ export default class TableBillingAccountServices extends Table<TableBillingAccou
   static defaultProps = {
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmApp/Modules/Core/Services/Models/Service',
+    model: 'CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService',
   }
 
   props: TableBillingAccountServicesProps;

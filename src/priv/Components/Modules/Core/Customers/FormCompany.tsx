@@ -348,6 +348,7 @@ export default class FormCompany<P, S> extends Form<
                               <TableBillingAccountServices
                                 uid={this.props.uid + "_table_services"}
                                 context="Hello World"
+                                descriptionSource="props"
                                 description={{
                                   permissions: {
                                     canDelete: true,

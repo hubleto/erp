@@ -308,7 +308,7 @@ export default class FormCompany<P, S> extends Form<
                             <div className="grow">
                               <span>{input.description}<br></br></span>
                               <small className="text text-gray-400">
-                                Connected services: {input.SERVICES ? servicesString : "None"}
+                                Connected services: {(input.SERVICES?.lenght > 0) ? servicesString : "None"}
                               </small>
                             </div>
 
@@ -372,41 +372,39 @@ export default class FormCompany<P, S> extends Form<
                           <div className="card mx-2 mb-2">
                           <div className="card-header text-sm">Services connected to the Billing Account</div>
                           <div className="card-body">
-                            {R.BILLING_ACCOUNTS[key].SERVICES ? (
-                              <InputTable
-                                uid={this.props.uid + "_table_services_input"}
-                                {...this.getDefaultInputProps()}
-                                value={R.BILLING_ACCOUNTS[key].SERVICES}
-                                /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
-                                onChange={(value: any) => {
-                                  this.updateRecord({
-                                    BILLING_ACCOUNTS: { [key]: {SERVICES: value}
+                            <InputTable
+                              uid={this.props.uid + "_table_services_input"}
+                              {...this.getDefaultInputProps()}
+                              value={R.BILLING_ACCOUNTS[key].SERVICES ?? null}
+                              /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
+                              onChange={(value: any) => {
+                                this.updateRecord({
+                                  BILLING_ACCOUNTS: { [key]: {SERVICES: value}
+                                  },
+                                });
+                              }}
+                            >
+                              <TableBillingAccountServices
+                                uid={this.props.uid + "_table_services"}
+                                context="Hello World"
+                                descriptionSource="props"
+                                description={{
+                                  permissions: {
+                                    canDelete: true,
+                                    canCreate: true,
+                                    canRead: true,
+                                    canUpdate: true,
+                                  },
+                                  columns: {
+                                    id_service: {
+                                      type: "lookup",
+                                      title: "Service Name",
+                                      model: "CeremonyCrmApp/Modules/Core/Services/Models/Service",
                                     },
-                                  });
+                                  },
                                 }}
-                              >
-                                <TableBillingAccountServices
-                                  uid={this.props.uid + "_table_services"}
-                                  context="Hello World"
-                                  descriptionSource="props"
-                                  description={{
-                                    permissions: {
-                                      canDelete: true,
-                                      canCreate: true,
-                                      canRead: true,
-                                      canUpdate: true,
-                                    },
-                                    columns: {
-                                      id_service: {
-                                        type: "lookup",
-                                        title: "Service Name",
-                                        model: "CeremonyCrmApp/Modules/Core/Services/Models/Service",
-                                      },
-                                    },
-                                  }}
-                                ></TableBillingAccountServices>
-                              </InputTable>
-                            ) : <p className="text-sm">No connected services</p>}
+                              ></TableBillingAccountServices>
+                            </InputTable>
                             {this.state.isInlineEditing ? (
                               <a
                                 role="button"

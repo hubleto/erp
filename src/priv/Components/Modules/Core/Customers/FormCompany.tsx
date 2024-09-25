@@ -343,37 +343,36 @@ export default class FormCompany<P, S> extends Form<
 
                         </button>
                         {this.state.highlightIdBussinessAccounts == input.id ?
-                          <div className="list-item p-2">
-                              <div className="card card-body mt-1 mb-0">
-                                <FormInput>
-                                  <div className="grid grid-cols-2 gap-4">
-                                    <label className="input-label">Billing Account Description</label>
-                                    <InputVarchar
-                                      {...this.getDefaultInputProps()}
-                                      value={input.description}
-                                      /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
-                                      placeholder={globalThis.app.translate(
-                                        "Billing Account Description"
-                                      )}
-                                      onChange={(value: any) => {
-                                        this.updateRecord({
-                                          BILLING_ACCOUNTS: { [key]: {description: value} },
-                                        });
-                                      }}/>
-                                    {/* <button className="btn btn-danger" onClick = {() => {
-                                      R.BILLING_ACCOUNTS[key]._toBeDeleted_ = true;
-                                      this.setState({ record: R });
-                                    }}><span className="icon"><i className="fas fa-trash"></i></span></button> */}
-                                  </div>
-                                </FormInput>
+                          <div className="card card-body m-2">
+                            <FormInput>
+                              <div className="grid grid-cols-2 gap-4">
+                                <label className="input-label">Billing Account Description</label>
+                                <InputVarchar
+                                  {...this.getDefaultInputProps()}
+                                  value={input.description}
+                                  /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
+                                  placeholder={globalThis.app.translate(
+                                    "Billing Account Description"
+                                  )}
+                                  onChange={(value: any) => {
+                                    this.updateRecord({
+                                      BILLING_ACCOUNTS: { [key]: {description: value} },
+                                    });
+                                  }}/>
+                                {/* <button className="btn btn-danger" onClick = {() => {
+                                  R.BILLING_ACCOUNTS[key]._toBeDeleted_ = true;
+                                  this.setState({ record: R });
+                                }}><span className="icon"><i className="fas fa-trash"></i></span></button> */}
                               </div>
+                            </FormInput>
                           </div>
                         : null}
 
-                        {(this.state.highlightIdBussinessAccounts == input.id && R.BILLING_ACCOUNTS[key].SERVICES) ? (
+                        {this.state.highlightIdBussinessAccounts == input.id ?
                           <div className="card mx-2 mb-2">
-                            <div className="card-header text-sm">Services connected to the Billing Account</div>
-                            <div className="card-body">
+                          <div className="card-header text-sm">Services connected to the Billing Account</div>
+                          <div className="card-body">
+                            {R.BILLING_ACCOUNTS[key].SERVICES ? (
                               <InputTable
                                 uid={this.props.uid + "_table_services_input"}
                                 {...this.getDefaultInputProps()}
@@ -407,30 +406,31 @@ export default class FormCompany<P, S> extends Form<
                                   }}
                                 ></TableBillingAccountServices>
                               </InputTable>
-                              {this.state.isInlineEditing ? (
-                                <a
-                                  role="button"
-                                  onClick={() => {
-                                    if (!R.BILLING_ACCOUNTS[key].SERVICES) R.BILLING_ACCOUNTS[key].SERVICES = [];
-                                    R.BILLING_ACCOUNTS[key].SERVICES.push({
-                                      id_billing_account: { _useMasterRecordId_: true },
-                                    });
-                                    this.setState({ record: R });
-                                  }}>
-                                  + Connect another service
-                                </a>
-                              ) : null}
-                            </div>
+                            ) : <p className="text-sm">No connected services</p>}
+                            {this.state.isInlineEditing ? (
+                              <a
+                                role="button"
+                                onClick={() => {
+                                  if (!R.BILLING_ACCOUNTS[key].SERVICES) R.BILLING_ACCOUNTS[key].SERVICES = [];
+                                  R.BILLING_ACCOUNTS[key].SERVICES.push({
+                                    id_billing_account: { _useMasterRecordId_: true },
+                                  });
+                                  console.log(R.BILLING_ACCOUNTS[key].SERVICES);
+                                  this.setState({ record: R });
+                                }}>
+                                + Connect another service
+                              </a>
+                            ) : null}
                           </div>
-                        ) : null}
+                        </div>
+                        : null}
                       </div>
                     </>
                   )
                 }): null}
-
               </div>
 
-              {this.state.isInlineEditingBillingAccounts ? (
+              {this.state.isInlineEditing ? (
                 <a
                   role="button"
                   onClick={() => {
@@ -446,59 +446,6 @@ export default class FormCompany<P, S> extends Form<
               ) : null}
 
             </div>
-            {R.BILLING_ACCOUNT ? (
-              <div className="card mt-4">
-                <div className="card-header text-sm">Services connected to the Billing Account</div>
-                <div className="card-body">
-                  <InputTable
-                    uid={this.props.uid + "_table_services_input"}
-                    {...this.getDefaultInputProps()}
-                    value={R.BILLING_ACCOUNT.SERVICES}
-                    onChange={(value: any) => {
-                      this.updateRecord({
-                        BILLING_ACCOUNT: {
-                          SERVICES: value,
-                        },
-                      });
-                    }}
-                  >
-                    <TableBillingAccountServices
-                      uid={this.props.uid + "_table_services"}
-                      context="Hello World"
-                      descriptionSource="props"
-                      description={{
-                        permissions: {
-                          canDelete: true,
-                          canCreate: true,
-                          canRead: true,
-                          canUpdate: true,
-                        },
-                        columns: {
-                          id_service: {
-                            type: "lookup",
-                            title: "Service Name",
-                            model: "CeremonyCrmApp/Modules/Core/Services/Models/Service",
-                          },
-                        },
-                      }}
-                    ></TableBillingAccountServices>
-                  </InputTable>
-                  {this.state.isInlineEditingBillingAccounts ? (
-                    <a
-                      role="button"
-                      onClick={() => {
-                        if (!R.BILLING_ACCOUNT.SERVICES) R.BILLING_ACCOUNT.SERVICES = [];
-                        R.BILLING_ACCOUNT.SERVICES.push({
-                          id_billing_account: { _useMasterRecordId_: true },
-                        });
-                        this.setState({ record: R });
-                      }}>
-                      + Add service
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            ) : null}
           </div>
           {/* <div>
             <div className="card">

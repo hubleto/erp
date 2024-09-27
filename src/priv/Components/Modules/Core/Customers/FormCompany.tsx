@@ -308,7 +308,7 @@ export default class FormCompany<P, S> extends Form<
                             <div className="grow">
                               <span>{input.description}<br></br></span>
                               <small className="text text-gray-400">
-                                Connected services: {(input.SERVICES?.lenght > 0) ? servicesString : "None"}
+                                Connected services: {(servicesString != "") ? servicesString : "None"}
                               </small>
                             </div>
 

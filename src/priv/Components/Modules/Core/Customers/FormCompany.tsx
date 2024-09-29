@@ -338,7 +338,14 @@ export default class FormCompany<P, S> extends Form<
                               }
                             </div>*/}
 
-                            <div className="flex justify-center"><i className="fas fa-chevron-down self-center"></i></div>
+                            <div className="flex justify-between gap-2">
+                              <span className="icon"
+                                onClick={()=> {this.setState({isInlineEditing: true})}}
+                              >
+                                <i className="fas fa-pencil-alt self-center"></i>
+                              </span>
+                              <span className="icon"><i className="fas fa-chevron-down self-center"></i></span>
+                            </div>
                           </div>
 
                         </button>

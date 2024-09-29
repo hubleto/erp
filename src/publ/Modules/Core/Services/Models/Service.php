@@ -21,7 +21,10 @@ class Service extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Services';
+    $description['ui']['title'] = 'Services';
+    $description['ui']['addButtonText'] = 'Add Service';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
 

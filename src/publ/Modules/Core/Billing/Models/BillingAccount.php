@@ -37,7 +37,10 @@ class BillingAccount extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Billing Accounts';
+    $description['ui']['title'] = 'Billing Account';
+    $description['ui']['addButtonText'] = 'Add Billing Account';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
 

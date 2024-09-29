@@ -16,8 +16,8 @@
   /* SPECIAL components, idetified by # id */
   aside#default-sidebar { @apply flex fixed top-0 left-0 z-10 pt-12 h-screen transition-transform -translate-x-full sm:translate-x-0; }
   aside#default-sidebar > nav { @apply bg-primary p-1 w-12 flex gap-1 flex-col; }
-  aside#default-sidebar > nav .btn { @apply w-full rounded; }
-  aside#default-sidebar > nav .btn .icon { @apply w-full text-center; }
+  aside#default-sidebar > nav .btn { @apply w-full h-10 rounded; }
+  aside#default-sidebar > nav .btn .icon { @apply w-full h-10 text-center flex justify-center content-center flex-wrap; }
   aside#default-sidebar > div { @apply h-full w-60 p-1 shadow-lg overflow-y-auto bg-gray-50; }
   /* aside#default-sidebar > div > ul { @apply } */
   aside#default-sidebar > div > ul > li a { @apply flex items-center px-1 py-0.5 text-gray-900 rounded no-underline hover:bg-gray-100 hover:text-primary; }
@@ -62,7 +62,7 @@
   .adios.component.table .table-body tbody tr td:hover .inline-edit-icon { @apply visible; }
   .adios.component.table .table-body tr.highlighted { @apply divide-none text-primary; }
   .adios.component.table .table-body tr.highlighted td > div { @apply border-b border-primary; }
-  .adios.component.table .table-body tr td { @apply hover:bg-gray-200; }
+  .adios.component.table .table-body tr td { @apply cursor-pointer; }
   .adios.component.input.table { @apply max-w-[100%] }
 
   .adios.component.table.header-style-1 { @apply bg-green-50 }

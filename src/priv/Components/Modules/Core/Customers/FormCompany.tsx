@@ -9,6 +9,8 @@ import TablePersons from "./TablePersons";
 import TableActivities from "./TableActivities";
 import TableBillingAccountServices from "../Billing/TableBillingAccountServices";
 import request from "adios/Request";
+import { TabPanel, TabView } from "primereact/tabview";
+import { InputTextarea } from "primereact/inputtextarea";
 
 interface FormCompanyProps extends FormProps {
   highlightIdBussinessAccounts: number
@@ -75,12 +77,16 @@ export default class FormCompany<P, S> extends Form<
     return record;
   }
 
-  /* onBeforeSaveRecord(record: any) {
+  onBeforeSaveRecord(record: any) {
     if (record.id == -1) {
-      record.is_active = 1;
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      record.date_created = `${year}-${month}-${day}`;
     }
     return record;
-  } */
+  }
 
   renderHeaderLeft(): JSX.Element {
     return <>
@@ -118,360 +124,365 @@ export default class FormCompany<P, S> extends Form<
 
     return (
       <>
-        <div
-          className="grid grid-cols-2 gap-1"
-          style={{
-            gridTemplateAreas: `
-              'company contacts'
-              'activities activities'
-              'billing billing'
-            `,
-          }}
-        >
-          <div className="card mt-4" style={{ gridArea: "company" }}>
-            <div className="card-header">Company Information</div>
-            <div className="card-body">
-              {this.inputWrapper("name")}
-              {this.inputWrapper("street_line_1")}
-              {this.inputWrapper("street_line_2")}
-              {this.inputWrapper("city")}
-              {this.inputWrapper("region")}
-              {this.inputWrapper("id_country")}
-              {this.inputWrapper("postal_code")}
-              {this.inputWrapper("vat_id")}
-              {this.inputWrapper("tax_id")}
-              {this.inputWrapper("company_id")}
-              {this.inputWrapper("note")}
-              {showAdditional ? this.inputWrapper("is_active") : null}
-              <FormInput title="Categories">
-                <InputTags2
-                  {...this.getDefaultInputProps()}
-                  value={this.state.record.TAGS}
-                  model="CeremonyCrmApp/Modules/Core/Settings/Models/Tag"
-                  targetColumn="id_company"
-                  sourceColumn="id_tag"
-                  colorColumn="color"
-                  onChange={(value: any) => {
-                    this.updateRecord({ TAGS: value });
-                  }}
-                />
-              </FormInput>
-            </div>
-          </div>
+        <TabView>
+          <TabPanel header="Basic Information">
+            <div
+              className="grid grid-cols-2 gap-1"
+              style={{
+                gridTemplateAreas: `
+                  'company contacts'
+                  'activities activities'
+                `,
+              }}
+            >
+              <div className="card mt-4" style={{ gridArea: "company" }}>
+                <div className="card-header">Company Information</div>
+                <div className="card-body">
+                  {this.inputWrapper("name")}
+                  {this.inputWrapper("street_line_1")}
+                  {this.inputWrapper("street_line_2")}
+                  {this.inputWrapper("city")}
+                  {this.inputWrapper("region")}
+                  {this.inputWrapper("id_country")}
+                  {this.inputWrapper("postal_code")}
+                  {this.inputWrapper("vat_id")}
+                  {this.inputWrapper("tax_id")}
+                  {this.inputWrapper("company_id")}
+                  {showAdditional ? this.inputWrapper("date_created") : null}
+                  {showAdditional ? this.inputWrapper("is_active") : null}
+                  <FormInput title="Categories">
+                    <InputTags2
+                      {...this.getDefaultInputProps()}
+                      value={this.state.record.TAGS}
+                      model="CeremonyCrmApp/Modules/Core/Settings/Models/Tag"
+                      targetColumn="id_company"
+                      sourceColumn="id_tag"
+                      colorColumn="color"
+                      onChange={(value: any) => {
+                        this.updateRecord({ TAGS: value });
+                      }}
+                    />
+                  </FormInput>
+                </div>
+              </div>
 
-          <div className="card mt-4" style={{ gridArea: "contacts" }}>
-            <div className="card-header">Representatives</div>
-            <div className="card-body">
-              <TablePersons
-                uid={this.props.uid + "_table_persons"}
-                showHeader={false}
-                showFooter={false}
-                data={{ data: R.PERSONS }}
-                description={{
-                  permissions: {
-                    canCreate: true,
-                    canUpdate: true,
-                    canDelete: true,
-                    canRead: true,
-                  },
-                  columns: {
-                    first_name: { type: "varchar", title: "First name" },
-                    last_name: { type: "varchar", title: "Last name" },
-                    __more_details: { type: "none", title: "", cellRenderer: ( table: TablePersons, data: any, options: any): JSX.Element => {
-                        if (data.id > 0) {
-                          return (<>
-                              <button
-                                className="btn btn-transparent btn-small"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  table.openForm(data.id);
-                                  return false;
-                                }}
-                              >
-                                <span className="icon"><i className="fas fa-external-link-alt"></i></span>
-                              </button>
-                            </>
-                          );
-                        }
-                      },
-                    },
-                  },
-                }}
-                isUsedAsInput={true}
-                isInlineEditing={this.state.isInlineEditing}
-                readonly={!this.state.isInlineEditing}
-                onRowClick={(table: TablePersons, row: any) => {
-                  this.setState({ isInlineEditing: !this.state.isInlineEditing, });
-                }}
-                onChange={(table: TablePersons) => {
-                  this.updateRecord({ PERSONS: table.state.data?.data });
-                }}
-                onDeleteSelectionChange={(table: TablePersons) => {
-                  this.updateRecord({ PERSONS: table.state.data?.data ?? [] });
-                }}
-              ></TablePersons>
-              {this.state.isInlineEditing ? (
-                <a
-                  role="button"
-                  onClick={() => {
-                    if (!R.PERSONS) R.PERSONS = [];
-                    R.PERSONS.push({
-                      id_company: { _useMasterRecordId_: true },
-                      is_primary: false,
-                      is_active: true,
-                    });
-                    this.setState({ record: R });
-                  }}>
-                  + Add contact
-                </a>
-              ) : null}
-            </div>
-          </div>
-
-          {showAdditional ? (
-            <div className="card mt-4" style={{ gridArea: "activities" }}>
-              <div className="card-header">Company Activities</div>
-              <div className="card-body">
-                <InputTable
-                  uid={this.props.uid + "_table_activities_input"}
-                  {...this.getDefaultInputProps()}
-                  value={R.ACTIVITIES}
-                  onChange={(value: any) => {
-                    this.updateRecord({ ACTIVITIES: value });
-                  }}
-                >
-                  <TableActivities
-                    uid={this.props.uid + "_table_activities"}
-                    context="Hello World"
-                    descriptionSource="props"
+              <div className="card mt-4" style={{ gridArea: "contacts" }}>
+                <div className="card-header">Representatives</div>
+                <div className="card-body">
+                  <TablePersons
+                    uid={this.props.uid + "_table_persons"}
+                    showHeader={false}
+                    showFooter={false}
+                    data={{ data: R.PERSONS }}
                     description={{
                       permissions: {
-                        canDelete: true,
                         canCreate: true,
-                        canRead: true,
                         canUpdate: true,
+                        canDelete: true,
+                        canRead: true,
                       },
                       columns: {
-                        subject: { type: "varchar", title: "Subject" },
-                        due_date: { type: "date", title: "Due Date" },
-                        due_time: { type: "time", title: "Due Time" },
-                        duration: { type: "time", title: "Duration" },
-                        completed: { type: "boolean", title: "Completed" },
+                        first_name: { type: "varchar", title: "First name" },
+                        last_name: { type: "varchar", title: "Last name" },
+                        __more_details: { type: "none", title: "", cellRenderer: ( table: TablePersons, data: any, options: any): JSX.Element => {
+                            if (data.id > 0) {
+                              return (<>
+                                  <button
+                                    className="btn btn-transparent btn-small"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      table.openForm(data.id);
+                                      return false;
+                                    }}
+                                  >
+                                    <span className="icon"><i className="fas fa-external-link-alt"></i></span>
+                                  </button>
+                                </>
+                              );
+                            }
+                          },
+                        },
                       },
                     }}
-                  ></TableActivities>
-                </InputTable>
-                {this.state.isInlineEditing ? (
-                  <a
-                    role="button"
-                    onClick={() => {
-                      if (!R.ACTIVITIES) R.ACTIVITIES = [];
-                      R.ACTIVITIES.push({
-                        id_company: { _useMasterRecordId_: true },
-                        completed: false,
-                        id_user: false,
-                      });
-                      this.setState({ record: R });
-                    }}>
-                    + Add activity
-                  </a>
-                ) : null}
+                    isUsedAsInput={true}
+                    isInlineEditing={this.state.isInlineEditing}
+                    readonly={!this.state.isInlineEditing}
+                    onRowClick={(table: TablePersons, row: any) => {
+                      this.setState({ isInlineEditing: !this.state.isInlineEditing, });
+                    }}
+                    onChange={(table: TablePersons) => {
+                      this.updateRecord({ PERSONS: table.state.data?.data });
+                    }}
+                    onDeleteSelectionChange={(table: TablePersons) => {
+                      this.updateRecord({ PERSONS: table.state.data?.data ?? [] });
+                    }}
+                  ></TablePersons>
+                  {this.state.isInlineEditing ? (
+                    <a
+                      role="button"
+                      onClick={() => {
+                        if (!R.PERSONS) R.PERSONS = [];
+                        R.PERSONS.push({
+                          id_company: { _useMasterRecordId_: true },
+                          is_primary: false,
+                          is_active: true,
+                        });
+                        this.setState({ record: R });
+                      }}>
+                      + Add contact
+                    </a>
+                  ) : null}
+                </div>
               </div>
+
+              {showAdditional ? (
+              <div className="card mt-4" style={{ gridArea: "activities" }}>
+                <div className="card-header">Company Activities</div>
+                <div className="card-body">
+                  <InputTable
+                    uid={this.props.uid + "_table_activities_input"}
+                    {...this.getDefaultInputProps()}
+                    value={R.ACTIVITIES}
+                    onChange={(value: any) => {
+                      this.updateRecord({ ACTIVITIES: value });
+                    }}
+                  >
+                    <TableActivities
+                      uid={this.props.uid + "_table_activities"}
+                      context="Hello World"
+                      descriptionSource="props"
+                      description={{
+                        permissions: {
+                          canDelete: true,
+                          canCreate: true,
+                          canRead: true,
+                          canUpdate: true,
+                        },
+                        columns: {
+                          subject: { type: "varchar", title: "Subject" },
+                          due_date: { type: "date", title: "Due Date" },
+                          due_time: { type: "time", title: "Due Time" },
+                          duration: { type: "time", title: "Duration" },
+                          completed: { type: "boolean", title: "Completed" },
+                        },
+                      }}
+                    ></TableActivities>
+                  </InputTable>
+                  {this.state.isInlineEditing ? (
+                    <a
+                      role="button"
+                      onClick={() => {
+                        if (!R.ACTIVITIES) R.ACTIVITIES = [];
+                        R.ACTIVITIES.push({
+                          id_company: { _useMasterRecordId_: true },
+                          completed: false,
+                          id_user: false,
+                        });
+                        this.setState({ record: R });
+                      }}>
+                      + Add activity
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+              ) : null}
             </div>
-          ) : null}
+          </TabPanel>
+          <TabPanel header="Billing Accounts">
+            <div className="list">
 
-          <div className="card mt-4" style={{ gridArea: "billing" }}>
-            <div className="card-header">Billing Accounts</div>
-            <div className="card-body">
-              <div className="list">
+              {R.BILLING_ACCOUNTS && R.BILLING_ACCOUNTS.length > 0 ? R.BILLING_ACCOUNTS.map((input, key) => {
+                var servicesString = "";
 
-                {R.BILLING_ACCOUNTS && R.BILLING_ACCOUNTS.length > 0 ? R.BILLING_ACCOUNTS.map((input, key) => {
-                  var servicesString = "";
+                if (input?.SERVICES) {
+                  input.SERVICES.map((item, index) => {
+                    if (item.SERVICE?.name) {
+                      if (index == input.SERVICES.length-1) servicesString += item.SERVICE.name;
+                      else servicesString += item.SERVICE.name + ", ";
+                    }
+                  })
+                }
 
-                  if (input?.SERVICES) {
-                    input.SERVICES.map((item, index) => {
-                      if (item.SERVICE?.name) {
-                        if (index == input.SERVICES.length-1) servicesString += item.SERVICE.name;
-                        else servicesString += item.SERVICE.name + ", ";
-                      }
-                    })
-                  }
-
-                  return (
-                    <>
-                      <div className="list-item">
-                        <button
-                          onClick={() => { this.setState({highlightIdBussinessAccounts: input.id} as FormCompanyState) }}
-                          className={"w-full btn-list-item text-left text-sm p-2 hover:bg-gray-50 " + (this.state.highlightIdBussinessAccounts == input.id ? "font-bold bg-gray-50" : "font-medium")}
-                        >
-                          <div className="flex grow justify-between">
-                            <div className="grow">
-                              <span>{input.description}<br></br></span>
-                              <small className="text text-gray-400">
-                                Connected services: {(servicesString != "") ? servicesString : "None"}
-                              </small>
-                            </div>
-
-                            {/*<div>
-                              {this.state.isInlineEditingBillingAccounts ?
-                              <button className="btn btn-light flex justify-center"
-                                onClick={() => {
-                                  request.get(
-                                    'api/v1/record/save',
-                                    {
-                                      model: 'CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount',
-                                      id: input.id,
-                                      record: { ...input, description: input.description },
-                                    },
-                                    (data: any) => {
-                                      let record = {...this.state.record};
-                                      R.BILLING_ACCOUNTS[key] = data.savedRecord;
-                                      this.setState({record: record});
-                                    }
-                                  );
-                                }}
-                              ><i className="fa fa-floppy-disk self-center p-1"></i> Save</button>
-                              :
-                              <button className="btn btn-light flex justify-center"
-                                onClick={() => {this.setState({isInlineEditingBillingAccounts: true} as FormCompanyState)}}
-                              ><i className="fa fa-pencil-alt self-center p-1"></i></button>
-                              }
-                            </div>*/}
-
-                            <div className="flex justify-between gap-2">
-                              <span className="icon"
-                                onClick={()=> {this.setState({isInlineEditing: true})}}
-                              >
-                                <i className="fas fa-pencil-alt self-center"></i>
-                              </span>
-                              <span className="icon"><i className="fas fa-chevron-down self-center"></i></span>
-                            </div>
+                return (
+                  <>
+                    <div className="list-item">
+                      <button
+                        onClick={() => { this.setState({highlightIdBussinessAccounts: input.id} as FormCompanyState) }}
+                        className={"w-full btn-list-item text-left text-sm p-2 hover:bg-gray-50 " + (this.state.highlightIdBussinessAccounts == input.id ? "font-bold bg-gray-50" : "font-medium")}
+                      >
+                        <div className="flex grow justify-between">
+                          <div className="grow">
+                            <span className="break-all">{input.description}<br></br></span>
+                            <small className="text text-gray-400">
+                              Connected services: {(servicesString != "") ? servicesString : "None"}
+                            </small>
                           </div>
 
-                        </button>
-                        {this.state.highlightIdBussinessAccounts == input.id ?
-                          <div className="card card-body m-2">
-                            <FormInput>
-                              <div className="grid grid-cols-2 gap-4">
-                                <label className="input-label">Billing Account Description</label>
-                                <InputVarchar
-                                  {...this.getDefaultInputProps()}
-                                  value={input.description}
-                                  /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
-                                  placeholder={globalThis.app.translate(
-                                    "Billing Account Description"
-                                  )}
-                                  onChange={(value: any) => {
-                                    this.updateRecord({
-                                      BILLING_ACCOUNTS: { [key]: {description: value} },
-                                    });
-                                  }}/>
-                              </div>
-                            </FormInput>
+                          <div className="flex justify-between gap-2">
+                            <span className="icon"
+                              onClick={()=> {this.setState({isInlineEditing: true})}}
+                            >
+                              <i className="fas fa-pencil-alt self-center"></i>
+                            </span>
+                            <span className="icon"><i className="fas fa-chevron-down self-center"></i></span>
                           </div>
-                        : null}
+                        </div>
 
-                        {this.state.highlightIdBussinessAccounts == input.id ?
-                          <div className="card mx-2 mb-2">
-                            <div className="card-header text-sm">Services connected to the Billing Account</div>
-                            <div className="card-body">
-                              <InputTable
-                                uid={this.props.uid + "_table_services_input"}
+                      </button>
+                      {this.state.highlightIdBussinessAccounts == input.id ?
+                        <div className="card card-body m-2">
+                          <FormInput>
+                            <div className="grid grid-cols-2 gap-4">
+                              <label className="input-label">Billing Account Description</label>
+                              <InputVarchar
                                 {...this.getDefaultInputProps()}
-                                value={R.BILLING_ACCOUNTS[key].SERVICES ?? null}
+                                value={input.description}
                                 /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
+                                placeholder={globalThis.app.translate(
+                                  "Billing Account Description"
+                                )}
                                 onChange={(value: any) => {
                                   this.updateRecord({
-                                    BILLING_ACCOUNTS: { [key]: {SERVICES: value}
-                                    },
+                                    BILLING_ACCOUNTS: { [key]: {description: value} },
                                   });
-                                }}
-                              >
-                                <TableBillingAccountServices
-                                  uid={this.props.uid + "_table_services"}
-                                  context="Hello World"
-                                  descriptionSource="props"
-                                  description={{
-                                    permissions: {
-                                      canDelete: true,
-                                      canCreate: true,
-                                      canRead: true,
-                                      canUpdate: true,
-                                    },
-                                    columns: {
-                                      id_service: {
-                                        type: "lookup",
-                                        title: "Service Name",
-                                        model: "CeremonyCrmApp/Modules/Core/Services/Models/Service",
-                                      },
-                                    },
-                                  }}
-                                ></TableBillingAccountServices>
-                              </InputTable>
-                              {this.state.isInlineEditing ? (
-                                <a
-                                  role="button"
-                                  onClick={() => {
-                                    if (!R.BILLING_ACCOUNTS[key].SERVICES) R.BILLING_ACCOUNTS[key].SERVICES = [];
-                                    R.BILLING_ACCOUNTS[key].SERVICES.push({
-                                      id_billing_account: { _useMasterRecordId_: true },
-                                    });
-                                    this.setState({ record: R });
-                                  }}>
-                                  + Connect another service
-                                </a>
-                              ) : null}
+                                }}/>
                             </div>
-                          </div>
-                        : null}
-                        {this.state.highlightIdBussinessAccounts == input.id && this.state.isInlineEditing ?
-                          <div className="mx-2 mb-2 flex flex-row justify-end">
-                            <button
-                              className="btn btn-danger text-sm"
-                              onClick={() => {
-                                request.get(
-                                  'api/record/delete',
-                                  {
-                                    model: 'CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount',
-                                    id: input.id,
+                          </FormInput>
+                        </div>
+                      : null}
+
+                      {this.state.highlightIdBussinessAccounts == input.id ?
+                        <div className="card mx-2 mb-2">
+                          <div className="card-header text-sm">Services connected to the Billing Account</div>
+                          <div className="card-body">
+                            <InputTable
+                              uid={this.props.uid + "_table_services_input"}
+                              {...this.getDefaultInputProps()}
+                              value={R.BILLING_ACCOUNTS[key].SERVICES ?? null}
+                              /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
+                              onChange={(value: any) => {
+                                this.updateRecord({
+                                  BILLING_ACCOUNTS: { [key]: {SERVICES: value}
                                   },
-                                  (data: any) => {
-                                    if (data.status == true || data.id == 0) {
-                                      R.BILLING_ACCOUNTS.splice(key, 1);
-                                      this.setState({record: R});
-                                    }
-                                  }
-                                );
+                                });
                               }}
                             >
-                              <span className="icon"><i className="fas fa-trash-alt"></i></span>
-                              <span className="text">Delete Billing Account</span>
-                            </button>
+                              <TableBillingAccountServices
+                                uid={this.props.uid + "_table_services"}
+                                context="Hello World"
+                                descriptionSource="props"
+                                description={{
+                                  permissions: {
+                                    canDelete: true,
+                                    canCreate: true,
+                                    canRead: true,
+                                    canUpdate: true,
+                                  },
+                                  columns: {
+                                    id_service: {
+                                      type: "lookup",
+                                      title: "Service Name",
+                                      model: "CeremonyCrmApp/Modules/Core/Services/Models/Service",
+                                    },
+                                  },
+                                }}
+                              ></TableBillingAccountServices>
+                            </InputTable>
+                            {this.state.isInlineEditing ? (
+                              <a
+                                role="button"
+                                onClick={() => {
+                                  if (!R.BILLING_ACCOUNTS[key].SERVICES) R.BILLING_ACCOUNTS[key].SERVICES = [];
+                                  R.BILLING_ACCOUNTS[key].SERVICES.push({
+                                    id_billing_account: { _useMasterRecordId_: true },
+                                  });
+                                  this.setState({ record: R });
+                                }}>
+                                + Connect another service
+                              </a>
+                            ) : null}
                           </div>
-                        : null}
-                      </div>
-                    </>
-                  )
-                }): <span className="text-sm p-1">No Billing Accounts</span> }
-              </div>
-
-              {this.state.isInlineEditing ? (
-                <a
-                  role="button"
-                  onClick={() => {
-                    if (!R.BILLING_ACCOUNTS) R.BILLING_ACCOUNTS = [];
-                    R.BILLING_ACCOUNTS.push({
-                      id_company: { _useMasterRecordId_: true },
-                      description: "New Billing Account",
-                    });
-                    this.setState({ record: R });
-                  }}>
-                  + Add Billing Account
-                </a>
-              ) : null}
-
+                        </div>
+                      : null}
+                      {this.state.highlightIdBussinessAccounts == input.id && this.state.isInlineEditing ?
+                        <div className="mx-2 mb-2 flex flex-row justify-end">
+                          <button
+                            className="btn btn-danger text-sm"
+                            onClick={() => {
+                              request.get(
+                                'api/record/delete',
+                                {
+                                  model: 'CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount',
+                                  id: input.id,
+                                },
+                                (data: any) => {
+                                  if (data.status == true || data.id == 0) {
+                                    R.BILLING_ACCOUNTS.splice(key, 1);
+                                    this.setState({record: R});
+                                  }
+                                }
+                              );
+                            }}
+                          >
+                            <span className="icon"><i className="fas fa-trash-alt"></i></span>
+                            <span className="text">Delete Billing Account</span>
+                          </button>
+                        </div>
+                      : null}
+                    </div>
+                  </>
+                )
+              }): <span className="text-sm p-1">No Billing Accounts</span> }
             </div>
-          </div>
+
+            {/*<div>
+              {this.state.isInlineEditingBillingAccounts ?
+              <button className="btn btn-light flex justify-center"
+                onClick={() => {
+                  request.get(
+                    'api/v1/record/save',
+                    {
+                      model: 'CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount',
+                      id: input.id,
+                      record: { ...input, description: input.description },
+                    },
+                    (data: any) => {
+                      let record = {...this.state.record};
+                      R.BILLING_ACCOUNTS[key] = data.savedRecord;
+                      this.setState({record: record});
+                    }
+                  );
+                }}
+              ><i className="fa fa-floppy-disk self-center p-1"></i> Save</button>
+              :
+              <button className="btn btn-light flex justify-center"
+                onClick={() => {this.setState({isInlineEditingBillingAccounts: true} as FormCompanyState)}}
+              ><i className="fa fa-pencil-alt self-center p-1"></i></button>
+              }
+            </div> */}
+
+            {this.state.isInlineEditing ? (
+              <a
+                role="button"
+                onClick={() => {
+                  if (!R.BILLING_ACCOUNTS) R.BILLING_ACCOUNTS = [];
+                  R.BILLING_ACCOUNTS.push({
+                    id_company: { _useMasterRecordId_: true },
+                    description: "New Billing Account",
+                  });
+                  this.setState({ record: R });
+                }}>
+                + Add Billing Account
+              </a>
+            ) : null}
+          </TabPanel>
+          <TabPanel header="Notes">
+            <InputTextarea>
+            </InputTextarea>
+            {this.inputWrapper("note")}
+          </TabPanel>
+        </TabView>
+
           {/* <div>
             <div className="card">
               <div className="card-header">this.state.record</div>
@@ -489,7 +500,7 @@ export default class FormCompany<P, S> extends Form<
               </div>
             </div>
           </div> */}
-        </div>
+        {/* </div> */}
       </>
     );
   }

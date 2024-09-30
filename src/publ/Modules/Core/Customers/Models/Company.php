@@ -77,13 +77,19 @@ class Company extends \CeremonyCrmApp\Core\Model
         'type' => 'text',
         'title' => 'Notes',
         'required' => false,
+        'show_column' => false,
+      ],
+      'date_created' => [
+        'type' => 'date',
+        'title' => 'Date Created',
+        'required' => true,
+        'readonly' => true,
       ],
       'is_active' => [
         'type' => 'boolean',
         'title' => 'Active',
         'required' => false,
         'default' => 1,
-        'required' => false,
       ],
 
     ]));
@@ -96,6 +102,7 @@ class Company extends \CeremonyCrmApp\Core\Model
     $description['ui']['addButtonText'] = 'Add Company';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
+    unset($description['columns']['note']);
     return $description;
   }
 

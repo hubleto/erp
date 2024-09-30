@@ -135,7 +135,7 @@ export default class FormCompany<P, S> extends Form<
                 `,
               }}
             >
-              <div className="card mt-4" style={{ gridArea: "company" }}>
+              <div className="card" style={{ gridArea: "company" }}>
                 <div className="card-header">Company Information</div>
                 <div className="card-body">
                   {this.inputWrapper("name")}
@@ -166,7 +166,7 @@ export default class FormCompany<P, S> extends Form<
                 </div>
               </div>
 
-              <div className="card mt-4" style={{ gridArea: "contacts" }}>
+              <div className="card" style={{ gridArea: "contacts" }}>
                 <div className="card-header">Representatives</div>
                 <div className="card-body">
                   <TablePersons
@@ -236,7 +236,7 @@ export default class FormCompany<P, S> extends Form<
               </div>
 
               {showAdditional ? (
-              <div className="card mt-4" style={{ gridArea: "activities" }}>
+              <div className="card" style={{ gridArea: "activities" }}>
                 <div className="card-header">Company Activities</div>
                 <div className="card-body">
                   <InputTable
@@ -477,8 +477,6 @@ export default class FormCompany<P, S> extends Form<
             ) : null}
           </TabPanel>
           <TabPanel header="Notes">
-            <InputTextarea>
-            </InputTextarea>
             {this.inputWrapper("note")}
           </TabPanel>
         </TabView>

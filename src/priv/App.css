@@ -223,7 +223,7 @@
   .p-tree-toggler { @apply scale-[0.66]; }
   .p-tabview .p-tabview-ink-bar { @apply bg-primary; }
   .p-tabview-nav { @apply border-b border-gray-200; }
-  .p-tabview-panels { @apply pl-0; }
+  .p-tabview-panels { @apply p-1 border-l border-r border-b border-gray-200; }
   .p-tabview-nav-link { @apply mr-0.5 rounded-t border border-gray-200 p-2 text-sm !no-underline font-normal hover:bg-gray-50; }
   .p-tabview-selected > .p-tabview-nav-link { @apply text-primary border-primary text-primary hover:!bg-none; }
   .p-inputswitch { zoom: 0.66; }

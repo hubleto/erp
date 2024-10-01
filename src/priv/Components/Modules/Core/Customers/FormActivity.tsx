@@ -96,7 +96,8 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
             {showAdditional ? this.inputWrapper('completed') : null}
             {showAdditional ? this.inputWrapper('id_user') : null}
 
-            <FormInput title='Categories'>
+            {/* vypnuté kvôli chybe s company tags */}
+            {/* <FormInput title='Categories'>
               <InputTags2
                 {...this.getDefaultInputProps()}
                 value={this.state.record.TAGS}
@@ -108,7 +109,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
                   this.updateRecord({ TAGS: value });
                 }}
               ></InputTags2>
-            </FormInput>
+            </FormInput> */}
           </div>
         </div>
       </>

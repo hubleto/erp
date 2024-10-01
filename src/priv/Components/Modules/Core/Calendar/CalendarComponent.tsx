@@ -2,6 +2,8 @@ import React, { Component, useState } from "react";
 import { Badge, Calendar, Popover, Whisper } from "rsuite";
 import FormActivity from "../Customers/FormActivity";
 import "rsuite/Calendar/styles/index.css";
+import 'rsuite/Badge/styles/index.css';
+import 'rsuite/Popover/styles/index.css';
 import ModalSimple from "adios/ModalSimple";
 
 export default class CalendarComponent extends Component {
@@ -11,7 +13,8 @@ export default class CalendarComponent extends Component {
     this.state = {
       events: [],
       loading: true,
-      showIdActivity: 0
+      showIdActivity: 0,
+      newFormDate: null
     };
   }
 
@@ -34,19 +37,53 @@ export default class CalendarComponent extends Component {
   renderCell = (date) => {
     const { events } = this.state;
 
-    const eventForDate = events.find(
+    const eventsForDate = events.filter(
       (event) => new Date(event.date).toDateString() === date.toDateString()
     );
+    const displayList = eventsForDate.filter((item, index) => index < 2);
 
-    if (eventForDate) {
+    if (eventsForDate.length > 0) {
       return (
-        <div>
-          <div style={{ backgroundColor: "lightblue", padding: "5px" }}>
-            <button onClick={() => {this.setState({showIdActivity: eventForDate.id})}}>
-              <strong>{eventForDate.title}</strong>
-            </button>
-          </div>
-        </div>
+        <ul className="calendar-todo-list">
+          {displayList.map((activity, index) => (
+            <li
+              className="text-xs text-left px-1 my-1 overflow-hidden text-ellipsis whitespace-nowrap w-full border border-purple-400 rounded hover:bg-purple-200"
+              key={index}
+              onClick={() => {this.setState({showIdActivity: activity.id})}}>
+                <span><b>{activity.time}</b> - {activity.title}</span>
+            </li>
+          ))}
+          <li className="flex flex-row justify-between">
+            {eventsForDate.length > 2 ?
+              <Whisper
+                placement="top"
+                trigger="click"
+                speaker={
+                  <Popover>
+                    {eventsForDate.map((activity, index) => (
+                      <p key={index} className="hover:underline" onClick={() => {this.setState({showIdActivity: activity.id})}}>
+                        <b>{activity.time}</b> - {activity.title}
+                      </p>
+                    ))}
+                  </Popover>
+                }
+              >
+                <a className="text-xs">+ {eventsForDate.length} more</a>
+              </Whisper>
+            : null}
+            <button
+              className="btn btn-primary text-xs p-1  h-[18px] w-[18px]"
+              onClick={() => {
+                let year = date.getFullYear();
+                let month = (date.getMonth() + 1).toString().padStart(2, '0');
+                let day = date.getDate().toString().padStart(2, '0');
+                var newDateString = `${year}-${month}-${day}`;
+
+                this.setState({newFormDate: newDateString});
+              }}
+            ><i className="fas fa-plus w-full h-full"></i></button>
+          </li>
+        </ul>
       );
     }
     return null;
@@ -61,10 +98,15 @@ export default class CalendarComponent extends Component {
 
     const html =
     <div>
-      <Calendar bordered renderCell={this.renderCell} />;
+      <Calendar
+        bordered
+        renderCell={this.renderCell}
+        cellClassName={date => (date.getDay() % 2 ? 'bg-gray-100' : undefined)}
+      />;
+
       {this.state.showIdActivity <= 0 ? null :
         <ModalSimple
-          uid='waste_diagram_modal_form_technology'
+          uid='activity_form'
           isOpen={true}
           type='right'
         >
@@ -73,6 +115,26 @@ export default class CalendarComponent extends Component {
             showInModal={true}
             showInModalSimple={true}
             onClose={() => { this.setState({showIdActivity: 0}); }}
+            //onSaveCallback={() => { this.setState({}) }}
+          ></FormActivity>
+        </ModalSimple>
+      }
+      {this.state.newFormDate == null ? null :
+        <ModalSimple
+          uid='activity_form'
+          isOpen={true}
+          type='right'
+        >
+          <FormActivity
+            id={-1}
+            descriptionSource="both"
+            description={{
+              defaultValues: {due_date: this.state.newFormDate}
+            }}
+            showInModal={true}
+            showInModalSimple={true}
+            onClose={() => { this.setState({newFormDate: null}); }}
+            //onSaveCallback={() => { this.setState({}) }}
           ></FormActivity>
         </ModalSimple>
       }

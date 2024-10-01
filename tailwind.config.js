@@ -34,7 +34,8 @@ module.exports = {
     extend: {
       colors: {
         'primary': '#884aaa',
-        'secondary': '#ff9800',
+        // 'secondary': '#ff9800', // povodna oranzova
+        'secondary': '#7FB562', // povodna oranzova
       },
       spacing: {
         '8xl': '96rem',

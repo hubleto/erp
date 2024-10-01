@@ -477,7 +477,7 @@ export default class FormCompany<P, S> extends Form<
             ) : null}
           </TabPanel>
           <TabPanel header="Notes">
-            {this.inputWrapper("note")}
+            {this.input("note")}
           </TabPanel>
         </TabView>
 

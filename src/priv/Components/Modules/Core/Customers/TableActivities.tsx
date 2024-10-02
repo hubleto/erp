@@ -3,8 +3,6 @@ import Table, { TableProps, TableState } from 'adios/Table';
 import FormActivity from './FormActivity';
 
 interface TableActivitiesProps extends TableProps {
-  showHeader: boolean,
-  showFooter: boolean
 }
 
 interface TableActivitiesState extends TableState {

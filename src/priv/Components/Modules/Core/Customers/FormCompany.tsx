@@ -224,7 +224,7 @@ export default class FormCompany<P, S> extends Form<
               </div>
 
               {showAdditional ? (
-              <div className="card" style={{ gridArea: "activities" }}>
+              <div className="card h-" style={{ gridArea: "activities" }}>
                 <div className="card-header">Company Activities</div>
                 <div className="card-body">
                   <InputTable

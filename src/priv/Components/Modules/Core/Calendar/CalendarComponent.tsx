@@ -24,7 +24,7 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
       events: [],
       loading: true,
       showIdActivity: 0,
-      newFormDate: null
+      newFormDate: ""
     };
   }
 
@@ -52,51 +52,61 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
     );
     const displayList = eventsForDate.filter((item, index) => index < 2);
 
-    if (eventsForDate.length > 0) {
-      return (
-        <ul className="calendar-todo-list">
-          {displayList.map((activity, index) => (
-            <li
-              className="text-xs text-left px-1 my-1 overflow-hidden text-ellipsis whitespace-nowrap w-full border border-purple-400 rounded hover:bg-purple-200"
-              key={index}
-              onClick={() => {this.setState({showIdActivity: activity.id})}}>
-                <span><b>{activity.time}</b> - {activity.title}</span>
-            </li>
-          ))}
-          <li className="flex flex-row justify-between">
-            {eventsForDate.length > 2 ?
-              <Whisper
-                placement="top"
-                trigger="click"
-                speaker={
-                  <Popover>
-                    {eventsForDate.map((activity, index) => (
-                      <p key={index} className="hover:underline" onClick={() => {this.setState({showIdActivity: activity.id})}}>
-                        <b>{activity.time}</b> - {activity.title}
-                      </p>
-                    ))}
-                  </Popover>
-                }
-              >
-                <a className="text-xs">+ {eventsForDate.length} more</a>
-              </Whisper>
+    return (
+      <>
+        <div className="h-[70px] w-full flex flex-col justify-between">
+          <div id="activityList" className="grow">
+            {eventsForDate.length > 0 ?
+              <ul className="calendar-todo-list">
+                {displayList.map((activity, index) => (
+                  <li
+                    className="text-xs text-left px-1 my-1 overflow-hidden text-ellipsis whitespace-nowrap w-full border border-purple-400 rounded hover:bg-purple-200"
+                    key={index}
+                    onClick={() => {this.setState({showIdActivity: activity.id})}}
+                  >
+                    <span><b>{activity.time}</b> - {activity.title}</span>
+                  </li>
+                ))}
+              </ul>
             : null}
-            <button
-              className="btn btn-primary text-xs p-1  h-[18px] w-[18px]"
-              onClick={() => {
-                let year = date.getFullYear();
-                let month = (date.getMonth() + 1).toString().padStart(2, '0');
-                let day = date.getDate().toString().padStart(2, '0');
-                var newDateString = `${year}-${month}-${day}`;
+          </div>
+          <div id="addMore" className="flex flex-row justify-between">
+            <div id="more">
+              {eventsForDate.length > 2 ?
+                <Whisper
+                  placement="top"
+                  trigger="click"
+                  speaker={
+                    <Popover>
+                      {eventsForDate.map((activity, index) => (
+                        <p key={index} className="hover:underline" onClick={() => {this.setState({showIdActivity: activity.id})}}>
+                          <b>{activity.time}</b> - {activity.title}
+                        </p>
+                      ))}
+                    </Popover>
+                  }
+                >
+                  <a className="text-xs">+ {eventsForDate.length} more</a>
+                </Whisper>
+              : <div></div>}
+            </div>
+            <div id="add">
+              <button
+                className="btn btn-light text-xs p-1  h-[18px] w-[18px]"
+                onClick={() => {
+                  let year = date.getFullYear();
+                  let month = (date.getMonth() + 1).toString().padStart(2, '0');
+                  let day = date.getDate().toString().padStart(2, '0');
+                  var newDateString = `${year}-${month}-${day}`;
 
-                this.setState({newFormDate: newDateString});
-              }}
-            ><i className="fas fa-plus w-full h-full"></i></button>
-          </li>
-        </ul>
-      );
-    }
-    return null;
+                  this.setState({newFormDate: newDateString});
+                }}
+              ><i className="fas fa-plus w-full h-full"></i></button>
+            </div>
+          </div>
+        </div>
+      </>
+    )
   };
 
   render(): JSX.Element {
@@ -126,18 +136,25 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
             showInModalSimple={true}
             onClose={() => { this.setState({showIdActivity: 0}); }}
             onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+              var transformedActivity = {
+                id: saveResponse.savedRecord.id,
+                date: saveResponse.savedRecord.due_date,
+                time: saveResponse.savedRecord.due_time,
+                title: saveResponse.savedRecord.subject
+              }
               let newEvents = this.state.events;
               for (let i in newEvents) {
                 if (newEvents[i].id == this.state.showIdActivity) {
-                  newEvents[i] = saveResponse.savedRecord;
+                  newEvents[i] = transformedActivity;
+                  this.setState({events: newEvents, showIdActivity: 0});
+                  break;
                 }
               }
-              this.setState({events: newEvents});
             }}
           ></FormActivity>
         </ModalSimple>
       }
-      {this.state.newFormDate == null ? null :
+      {this.state.newFormDate == "" ? null :
         <ModalSimple
           uid='activity_form'
           isOpen={true}
@@ -151,8 +168,18 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
             }}
             showInModal={true}
             showInModalSimple={true}
-            onClose={() => { this.setState({newFormDate: null}); }}
-            //onSaveCallback={() => { this.setState({}) }}
+            onClose={() => { this.setState({newFormDate: ""}); }}
+            onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+              var transformedActivity = {
+                id: saveResponse.savedRecord.id,
+                date: saveResponse.savedRecord.due_date,
+                time: saveResponse.savedRecord.due_time,
+                title: saveResponse.savedRecord.subject
+              }
+              let newEvents = this.state.events;
+              newEvents.push(transformedActivity)
+              this.setState({events: newEvents, newFormDate: ""});
+            }}
           ></FormActivity>
         </ModalSimple>
       }

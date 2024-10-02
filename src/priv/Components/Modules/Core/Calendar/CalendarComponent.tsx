@@ -1,12 +1,22 @@
 import React, { Component, useState } from "react";
 import { Badge, Calendar, Popover, Whisper } from "rsuite";
-import FormActivity from "../Customers/FormActivity";
+import FormActivity, { FormActivityProps, FormActivityState } from "../Customers/FormActivity";
 import "rsuite/Calendar/styles/index.css";
 import 'rsuite/Badge/styles/index.css';
 import 'rsuite/Popover/styles/index.css';
 import ModalSimple from "adios/ModalSimple";
 
-export default class CalendarComponent extends Component {
+interface CalendarProps {
+}
+
+interface CalendarState {
+  events: Array<any>,
+  loading: boolean,
+  showIdActivity: number,
+  newFormDate?: string,
+}
+
+export default class CalendarComponent extends Component<CalendarProps, CalendarState> {
   constructor(props) {
     super(props);
 
@@ -115,7 +125,15 @@ export default class CalendarComponent extends Component {
             showInModal={true}
             showInModalSimple={true}
             onClose={() => { this.setState({showIdActivity: 0}); }}
-            //onSaveCallback={() => { this.setState({}) }}
+            onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+              let newEvents = this.state.events;
+              for (let i in newEvents) {
+                if (newEvents[i].id == this.state.showIdActivity) {
+                  newEvents[i] = saveResponse.savedRecord;
+                }
+              }
+              this.setState({events: newEvents});
+            }}
           ></FormActivity>
         </ModalSimple>
       }

@@ -4,9 +4,9 @@ import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
 import { getUrlParam } from 'adios/Helper';
 
-interface FormActivityProps extends FormProps {}
+export interface FormActivityProps extends FormProps {}
 
-interface FormActivityState extends FormState {}
+export interface FormActivityState extends FormState {}
 
 export default class FormActivity<P, S> extends Form<FormActivityProps,FormActivityState> {
   static defaultProps: any = {

@@ -44,7 +44,8 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
 
     this.setState({
       newTime: timeString,
-      newDate: dateString
+      newDate: dateString,
+      showIdActivity: 0,
     })
   }
 
@@ -85,7 +86,13 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
           //select={handleDateSelect}
           dateClick={(info) => this.reselvoNewDateTime(info)}
           eventContent={this.renderCell} // custom render function
-          eventClick={(eventClickInfo) => {this.setState({showIdActivity: parseInt(eventClickInfo.event.id)})}}
+          eventClick={(eventClickInfo) => {
+            this.setState({
+              showIdActivity: parseInt(eventClickInfo.event.id),
+              newDate: "",
+              newTime: "",
+            })}
+          }
           //eventsSet={handleEvents}
         />
 
@@ -97,6 +104,15 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
           >
             <FormActivity
               id={this.state.showIdActivity}
+              descriptionSource="both"
+              description={{
+                permissions: {
+                  canDelete: true,
+                  canRead: true,
+                  canCreate: true,
+                  canUpdate: true,
+                }
+              }}
               showInModal={true}
               showInModalSimple={true}
               onClose={() => { this.setState({showIdActivity: 0}); }}

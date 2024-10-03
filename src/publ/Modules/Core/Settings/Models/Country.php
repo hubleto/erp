@@ -26,7 +26,7 @@ class Country extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Countries';
+    $description['ui']['title'] = 'Countries';
     return $description;
   }
 

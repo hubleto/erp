@@ -14,12 +14,17 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
 
     $mAktivita = new \CeremonyCrmApp\Modules\Core\Customers\Models\Activity($this->app);
     $aktivity = $mAktivita->eloquent
-      ->with("COMPANY")
       ->where("due_date", ">=", $dateStart)
       ->where("due_date", "<=", $dateEnd)
+      ->with("COMPANY")
+      ->whereHas("ACTIVITY_TYPE", function ($query) {
+        $query->where('calendar_visibility', '=', 1);
+      })
       ->get()
     ;
     $transformacia = [];
+
+    var_dump($aktivity->toArray()); exit;
 
     foreach ($aktivity as $key => $aktivita) {
       $endTime = null;

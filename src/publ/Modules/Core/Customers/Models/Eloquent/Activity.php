@@ -2,6 +2,7 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\ActivityType;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\User;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,6 +31,10 @@ class Activity extends \ADIOS\Core\Model\Eloquent
   public function TAGS(): HasMany
   {
     return $this->hasMany(ActivityTag::class, 'id_activity', 'id');
+  }
+  public function ACTIVITY_TYPE(): HasOne
+  {
+    return $this->HasOne(ActivityType::class, 'id', 'id_activity_type');
   }
   // public function ATENDANCE(): HasMany
   // {

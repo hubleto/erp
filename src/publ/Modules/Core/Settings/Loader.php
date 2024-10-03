@@ -27,7 +27,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/users' => 'Users',
         '/profiles' => 'Profiles',
         '/settings' => 'Settings',
-        '/Tags' => 'Tags',
+        '/tags' => 'Tags',
+        '/activity-types' => 'ActivityTypes',
       ]
     );
   }
@@ -42,6 +43,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 99202, 'settings/profiles', $this->app->translate('Profiles'), 'fas fa-id-card');
       $sidebar->addLink(2, 99203, 'settings/settings', $this->app->translate('Settings'), 'fas fa-cog');
       $sidebar->addLink(2, 99204, 'settings/tags', $this->app->translate('Tags'), 'fas fa-tags');
+      $sidebar->addLink(2, 99205, 'settings/activity-types', $this->app->translate('Activity Types'), 'fas fa-layer-group');
     }
   }
 
@@ -53,7 +55,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     $mCountry = new Models\Country($this->app);
     $mCountry->install();
-    $countries = [
+    /* $countries = [
       ['name' => 'United States', 'code' => 'US'],
       ['name' => 'Canada', 'code' => 'CA'],
       ['name' => 'United Kingdom', 'code' => 'UK'],
@@ -64,5 +66,5 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   foreach ($countries as $country) {
     $mCountry->eloquent->create($country);
-  }
+  } */
   }}

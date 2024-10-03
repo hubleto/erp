@@ -247,6 +247,7 @@ export default class FormCompany<P, S> extends Form<
                           canUpdate: true,
                         },
                         columns: {
+                          id_activity_type: { type: "lookup", title: "Type", model: "CeremonyCrmApp/Modules/Core/Settings/Models/ActivityType"},
                           subject: { type: "varchar", title: "Subject" },
                           due_date: { type: "date", title: "Due Date" },
                           due_time: { type: "time", title: "Due Time" },

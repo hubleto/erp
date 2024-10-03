@@ -62,8 +62,17 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
         <>
           <h2>
             {this.state.record.subject
-              ? this.state.record.subject
-              : '[Undefined Subject]'}
+              ?
+              <div className='flex flex-col justify-center'>
+                <span>{this.state.record.subject}</span>
+                <span className='text-xs text-gray-400 font-normal'>Activity</span>
+              </div>
+              :
+              <div className='flex flex-col justify-center'>
+                <span>'[Undefined Subject]'</span>
+                <span className='text-xs text-gray-400 font-normal'>Activity</span>
+              </div>
+              }
           </h2>
         </>
       );

@@ -2,6 +2,7 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\ActivityType;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 
 class Activity extends \CeremonyCrmApp\Core\Model
@@ -14,6 +15,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'TAGS' => [ self::HAS_MANY, ActivityTag::class, 'id_activity', 'id' ],
+    'ACTIVITY_TYPE' => [ self::HAS_ONE, ActivityType::class, 'id', 'id_activity_type'],
     // 'ATENDANCE' => [ self::HAS_MANY, Atendance::class, 'id_activity', 'id' ],
     // 'INVITEES' => [ self::BELONGS_TO, Account::class, 'id_account', 'id' ],
   ];
@@ -21,6 +23,14 @@ class Activity extends \CeremonyCrmApp\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
+      'id_activity_type' => [
+        'type' => 'lookup',
+        'title' => 'Type',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/ActivityType',
+        'foreignKeyOnUpdate' => 'SET NULL',
+        'foreignKeyOnDelete' => 'SET NULL',
+        'required' => true,
+      ],
       'subject' => [
         'type' => 'varchar',
         'title' => 'Activity subject',

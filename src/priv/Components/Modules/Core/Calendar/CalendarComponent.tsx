@@ -52,7 +52,7 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
   renderCell = (eventInfo) => {
     return (
       <>
-        <b>{eventInfo.timeText} </b><span style={{marginLeft: 4}}>{eventInfo.event.title}</span><i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.company})</i>
+        <b>{eventInfo.timeText}</b><span style={{marginLeft: 4}}>{eventInfo.event.title}</span><i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.company})</i>
       </>
     )
   }

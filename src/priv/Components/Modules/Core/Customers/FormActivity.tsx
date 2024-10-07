@@ -44,6 +44,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
 
   renderHeaderRight(): JSX.Element {
     return <>
+      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
       {this.props.showInModal ? this.renderCloseButton() : null}
     </>;
   }
@@ -90,6 +91,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
 
   renderContent(): JSX.Element {
     const R = this.state.record;
+
     const showAdditional = R.id > 0 ? true : false;
 
     return (

@@ -105,6 +105,7 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
             <FormActivity
               id={this.state.showIdActivity}
               descriptionSource="both"
+              onDeleteCallback={() => { this.setState({showIdActivity: 0}); }}
               description={{
                 permissions: {
                   canDelete: true,

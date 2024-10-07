@@ -14,19 +14,17 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
 
     $mAktivita = new \CeremonyCrmApp\Modules\Core\Customers\Models\Activity($this->app);
     $aktivity = $mAktivita->eloquent
+      ->leftJoin("activity_types", "activity_types.id", "=", "activities.id_activity_type")
+      ->with("COMPANY")
       ->where("due_date", ">=", $dateStart)
       ->where("due_date", "<=", $dateEnd)
-      ->with("COMPANY")
-      ->whereHas("ACTIVITY_TYPE", function ($query) {
-        $query->where('calendar_visibility', '=', 1);
-      })
+      ->where("activity_types.calendar_visibility", 1)
       ->get()
     ;
     $transformacia = [];
 
-    var_dump($aktivity->toArray()); exit;
-
     foreach ($aktivity as $key => $aktivita) {
+      //if ($aktivita->toArray()["ACTIVITY_TYPE"] == null) continue;
       $endTime = null;
       //výpočet trvania aktivity
       if ($aktivita->duration) {
@@ -42,6 +40,7 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
       if ($endTime) $transformacia[$key]['end'] = $endTime;
       else $transformacia[$key]['allDay'] = true;
       $transformacia[$key]['title'] = $aktivita->subject;
+      $transformacia[$key]['color'] = $aktivita->color;
       $transformacia[$key]['company'] = $aktivita->COMPANY->name;
     }
 

@@ -14,7 +14,8 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
 
     $mAktivita = new \CeremonyCrmApp\Modules\Core\Customers\Models\Activity($this->app);
     $aktivity = $mAktivita->eloquent
-      ->leftJoin("activity_types", "activity_types.id", "=", "activities.id_activity_type")
+      ->select("activities.*", "activity_types.color")
+      ->join("activity_types", "activity_types.id", "=", "activities.id_activity_type")
       ->with("COMPANY")
       ->where("due_date", ">=", $dateStart)
       ->where("due_date", "<=", $dateEnd)
@@ -40,6 +41,7 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
       if ($endTime) $transformacia[$key]['end'] = $endTime;
       else $transformacia[$key]['allDay'] = true;
       $transformacia[$key]['title'] = $aktivita->subject;
+      $transformacia[$key]['backColor'] = $aktivita->color;
       $transformacia[$key]['color'] = $aktivita->color;
       $transformacia[$key]['company'] = $aktivita->COMPANY->name;
     }

@@ -53,6 +53,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
 
   renderHeaderRight(): JSX.Element {
     return <>
+      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
       {this.props.showInModal ? this.renderCloseButton() : null}
     </>;
   }

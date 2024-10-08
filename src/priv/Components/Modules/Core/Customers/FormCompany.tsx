@@ -95,7 +95,10 @@ export default class FormCompany<P, S> extends Form<
   }
 
   renderHeaderRight(): JSX.Element {
-    return <>{this.props.showInModal ? this.renderCloseButton() : null}</>;
+    return <>
+      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
+      {this.props.showInModal ? this.renderCloseButton() : null}
+    </>;
   }
 
   renderTitle(): JSX.Element {

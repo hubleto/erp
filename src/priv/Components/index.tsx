@@ -32,6 +32,7 @@ import CoreBillingTableBillingAccountService from "./Modules/Core/Billing/TableB
 
 //sales
 import SalesTableLeads from "./Modules/Sales/TableLeads"
+import SalesTableDeals from "./Modules/Sales/TableDeals"
 
 //sandbox
 import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
@@ -92,6 +93,7 @@ app.registerReactComponent('CoreSandboxTableCompanies', CoreSandboxTableCompanie
 app.registerReactComponent('CoreBillingTableBillingAccountService', CoreBillingTableBillingAccountService);
 //sles
 app.registerReactComponent('SalesTableLeads', SalesTableLeads);
+app.registerReactComponent('SalesTableDeals', SalesTableDeals);
 
 // Render react elements into body
 app.renderReactElements();

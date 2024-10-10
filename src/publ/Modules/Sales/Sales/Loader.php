@@ -21,6 +21,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       ],
       [
         '/leads' => 'Leads',
+        '/deals' => 'Deals',
       ]
     );
   }

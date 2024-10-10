@@ -5,25 +5,26 @@ namespace CeremonyCrmApp\Modules\Sales\Sales\Models;
 use CeremonyCrmApp\Modules\Core\Customers\Models\Company;
 use CeremonyCrmApp\Modules\Core\Customers\Models\Person;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Currency;
-use CeremonyCrmApp\Modules\Core\Settings\Models\LeadStatus;
+use CeremonyCrmApp\Modules\Core\Settings\Models\DealStatus;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadHistory;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadLabel;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\DealLabel;
 
-class Lead extends \CeremonyCrmApp\Core\Model
+class Deal extends \CeremonyCrmApp\Core\Model
 {
-  public string $table = 'leads';
-  public string $eloquentClass = Eloquent\Lead::class;
+  public string $table = 'deals';
+  public string $eloquentClass = Eloquent\Deal::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
+    'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_deal','id'],
     'COMPANY' => [ self::HAS_ONE, Company::class, 'id', 'id_company'],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
-    'STATUS' => [ self::HAS_ONE, LeadStatus::class, 'id', 'id_status'],
+    'STATUS' => [ self::HAS_ONE, DealStatus::class, 'id', 'id_status'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
-    'LEAD_HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
-    'LABELS' => [ self::HAS_MANY, LeadLabel::class, 'id_lead', 'id' ],
+    'DEAL_HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id', ],
+    'LABELS' => [ self::HAS_MANY, DealLabel::class, 'id_deal', 'id' ],
   ];
 
   public function columns(array $columns = []): array
@@ -47,6 +48,14 @@ class Lead extends \CeremonyCrmApp\Core\Model
         'type' => 'lookup',
         'title' => 'Contact Person',
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
+        'foreignKeyOnUpdate' => 'RESTRICT',
+        'foreignKeyOnDelete' => 'RESTRICT',
+        'required' => true,
+      ],
+      'id_lead' => [
+        'type' => 'lookup',
+        'title' => 'Origin Lead',
+        'model' => 'CeremonyCrmApp/Modules/Sales/Sales/Models/Lead',
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
@@ -80,7 +89,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_status' => [
         'type' => 'lookup',
         'title' => 'Status',
-        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/LeadStatus',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/DealStatus',
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
@@ -106,8 +115,8 @@ class Lead extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['ui']['title'] = 'Leads';
-    $description['ui']['addButtonText'] = 'Add Lead';
+    $description['ui']['title'] = 'Deals';
+    $description['ui']['addButtonText'] = 'Add Deal';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
     unset($description['columns']['note']);
@@ -122,19 +131,19 @@ class Lead extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_status'] = 1;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'LEAD_HISTORY', 'LABELS'];
+    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'DEAL_HISTORY', 'LABELS', 'LEAD'];
     return $description;
   }
 
-  public function onBeforeUpdate(array $record): array
+  /* public function onBeforeUpdate(array $record): array
   {
     $lead = $this->eloquent->find($record["id"])->toArray();
-    $mLeadHistory = new LeadHistory($this->app);
-    $mLeadStatus= new LeadStatus($this->app);
+    $mDealHistory = new DealHistory($this->app);
+    $mDealStatus= new DealStatus($this->app);
 
     if ($lead["id_status"] != (int) $record["id_status"]) {
-      $status = $mLeadStatus->eloquent->find((int) $record["id_status"])->name;
-      $mLeadHistory->eloquent->create([
+      $status = $mDealStatus->eloquent->find((int) $record["id_status"])->name;
+      $mDealHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
         "description" => "Status changed to ".$status
@@ -142,7 +151,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     }
 
     return $record;
-  }
+  } */
 
   /* public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
   {

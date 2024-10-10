@@ -5,25 +5,25 @@ import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 
-interface FormLeadProps extends FormProps {}
+interface FormDealProps extends FormProps {}
 
-interface FormLeadState extends FormState {}
+interface FormDealState extends FormState {}
 
-export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
+export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'CeremonyCrmApp/Modules/Sales/Sales/Models/Lead',
+    model: 'CeremonyCrmApp/Modules/Sales/Sales/Models/Deal',
   };
 
-  props: FormLeadProps;
-  state: FormLeadState;
+  props: FormDealProps;
+  state: FormDealState;
 
-  constructor(props: FormLeadProps) {
+  constructor(props: FormDealProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: FormLeadProps) {
+  getStateFromProps(props: FormDealProps) {
     return {
       ...super.getStateFromProps(props),
     };
@@ -52,7 +52,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
       return(
         <>
           <h2>
-            {'New Lead'}
+            {'New Deal'}
           </h2>
         </>
       );
@@ -62,7 +62,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
           <h2>
             {this.state.record.title
               ? this.state.record.title
-              : '[Undefined Lead Name]'}
+              : '[Undefined Deal Name]'}
           </h2>
         </>
       );
@@ -82,7 +82,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             'button button'
           `}}>
             <div className='card mt-2' style={{gridArea: 'info'}}>
-              <div className='card-header'>Lead Information</div>
+              <div className='card-header'>Deal Information</div>
               <div className='card-body flex flex-row gap-2'>
                 <div className='grow'>
                   {this.inputWrapper('title')}
@@ -93,6 +93,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     {this.inputWrapper('id_currency')}
                   </div>
                   {showAdditional ? this.inputWrapper('id_status') : null}
+                  {this.inputWrapper('id_lead')}
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className='grow'>
@@ -104,7 +105,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     <InputTags2 {...this.getDefaultInputProps()}
                       value={this.state.record.LABELS}
                       model='CeremonyCrmApp/Modules/Core/Settings/Models/Label'
-                      targetColumn='id_lead'
+                      targetColumn='id_deal'
                       sourceColumn='id_label'
                       colorColumn='color'
                       onChange={(value: any) => {
@@ -118,26 +119,18 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             </div>
             {showAdditional ?
               <div className='card mt-2' style={{gridArea: 'history'}}>
-                <div className='card-header'>Lead History</div>
+                <div className='card-header'>Deal History</div>
                 <div className='card-body min-h-[100px] flex justify-center' style={{flexDirection: "column"}}>
-                  {R.LEAD_HISTORY.length > 0 ?
-                    R.LEAD_HISTORY.map((history, key) => (
+                  {R.DEAL_HISTORY.length > 0 ?
+                    R.DEAL_HISTORY.map((history, key) => (
                       <div className='w-full flex flex-row' style={{justifyContent: "space-evenly"}}>
                         <p className='font-bold self-center text-sm'>{history.description}</p><hr style={{width: "25%", alignSelf: "center"}}/><p className='self-center text-sm'>{history.change_date}</p>
                       </div>
                     ))
                     :
-                    <p className='text-gray-400'>Lead has no history</p>
+                    <p className='text-gray-400'>Deal has no history</p>
                   }
                 </div>
-              </div>
-            : null}
-            {showAdditional ?
-              <div className='w-full flex flex-row justify-center' style={{gridArea: 'button'}}>
-                <a className='btn btn-primary text-center p-3' onClick={()=>{}}>
-                  <span className='icon'><i className='fas fa-forward'></i></span>
-                  <span className='text'>Convert to a Deal</span>
-                </a>
               </div>
             : null}
         </div>

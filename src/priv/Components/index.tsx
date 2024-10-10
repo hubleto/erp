@@ -19,15 +19,22 @@ import { Tooltip } from "primereact/tooltip";
 import CalendarComponent from "./Modules/Core/Calendar/CalendarComponent";
 
 // Modules
+//core
 import FormUser from "./Modules/Core/Settings/FormUser"
 import CoreCustomersTablePersons from "./Modules/Core/Customers/TablePersons"
 import CoreCustomersTableCompanies from "./Modules/Core/Customers/TableCompanies"
 import CoreCustomersTableActivities from "./Modules/Core/Customers/TableActivities"
 import CoreCustomersTableAddresses from "./Modules/Core/Customers/TableAddresses"
 import CoreCustomersTableContacts from "./Modules/Core/Customers/TableContacts"
-import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
+
+//billing
 import CoreBillingTableBillingAccountService from "./Modules/Core/Billing/TableBillingAccountServices"
 
+//sales
+import SalesTableLeads from "./Modules/Sales/TableLeads"
+
+//sandbox
+import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
 
 //@ts-ignore
 const app: ADIOS = new ADIOS(window.ConfigEnv);
@@ -73,6 +80,7 @@ app.registerReactComponent('Tooltip', Tooltip);
 app.registerReactComponent('CalendarComponent', CalendarComponent);
 
 // Modules
+//core
 app.registerReactComponent('FormUser', FormUser);
 app.registerReactComponent('CoreCustomersTablePersons', CoreCustomersTablePersons);
 app.registerReactComponent('CoreCustomersTableCompanies', CoreCustomersTableCompanies);
@@ -80,7 +88,10 @@ app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableAct
 app.registerReactComponent('CoreCustomersTableAddresses', CoreCustomersTableAddresses);
 app.registerReactComponent('CoreCustomersTableContacts', CoreCustomersTableContacts);
 app.registerReactComponent('CoreSandboxTableCompanies', CoreSandboxTableCompanies);
+//billing
 app.registerReactComponent('CoreBillingTableBillingAccountService', CoreBillingTableBillingAccountService);
+//sles
+app.registerReactComponent('SalesTableLeads', SalesTableLeads);
 
 // Render react elements into body
 app.renderReactElements();

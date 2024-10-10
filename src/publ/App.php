@@ -8,7 +8,6 @@ require_once(__DIR__ . "/ConfigApp.php");
 // include autoloaders
 require_once(__DIR__ . "/../../vendor/autoload.php");
 
-
 // autoloader pre CeremonyCrmApp
 spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);

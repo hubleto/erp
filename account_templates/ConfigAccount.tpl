@@ -21,8 +21,6 @@ $config['db_password'] = '{{ dbPassword }}';
 $config['db_name'] = '{{ dbName }}';
 $config['db_codepage'] = 'utf8mb4';
 $config['global_table_prefix'] = '';
-$config['db']['provider'] = 'MySQLi';
-$config['db']['dsn'] = '';
 
 // misc
 $config['develMode'] = TRUE;

@@ -29,6 +29,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/settings' => 'Settings',
         '/tags' => 'Tags',
         '/activity-types' => 'ActivityTypes',
+        '/countries' => 'Countries',
+        '/currencies' => 'Currencies',
+        '/labels' => 'Labels',
+        '/lead-statuses' => 'LeadStatuses',
       ]
     );
   }
@@ -44,6 +48,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 99203, 'settings/settings', $this->app->translate('Settings'), 'fas fa-cog');
       $sidebar->addLink(2, 99204, 'settings/tags', $this->app->translate('Tags'), 'fas fa-tags');
       $sidebar->addLink(2, 99205, 'settings/activity-types', $this->app->translate('Activity Types'), 'fas fa-layer-group');
+      $sidebar->addLink(2, 99206, 'settings/countries', $this->app->translate('Countries'), 'fas fa-globe');
+      $sidebar->addLink(2, 99207, 'settings/currencies', $this->app->translate('Currencies'), 'fas fa-dollar-sign');
+      $sidebar->addLink(2, 99208, 'settings/labels', $this->app->translate('Labels'), 'fas fa-tags');
+      $sidebar->addLink(2, 99209, 'settings/lead-statuses', $this->app->translate('Lead Statuses'), 'fas fa-chart-simple');
     }
   }
 

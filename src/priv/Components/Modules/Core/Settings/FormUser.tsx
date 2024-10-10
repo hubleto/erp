@@ -51,7 +51,7 @@ export default class FormUser<P, S> extends Form<FormUserProps, FormUserState> {
 
   renderTitle(): JSX.Element {
     return <>
-      <h2>{this.state.data.first_name} {this.state.data.middle_name} {this.state.data.last_name}</h2>
+      <h2>{this.state.record.first_name ?? ''} {this.state.record.middle_name ?? ''} {this.state.record.last_name ?? ''}</h2>
       <small>My account</small>
     </>;
   }
@@ -86,7 +86,7 @@ export default class FormUser<P, S> extends Form<FormUserProps, FormUserState> {
             return <>
               <a
                 href={"?set-language=" + symbol}
-                className={"btn btn-" + (symbol == this.state.data?.language ? "primary" : "transparent") + " mr-2"}
+                className={"btn btn-" + (symbol == this.state.record?.language ? "primary" : "transparent") + " mr-2"}
               ><span className="text">{lang}</span></a>
             </>;
           })}

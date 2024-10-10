@@ -28,3 +28,7 @@ $config['coreClasses'] = [
 //   'Models\\User' => \PortalApp\Models\User::class,
 //   'Core\\ViewWithController' => \PortalApp\Core\ViewWithController::class,
 ];
+
+$config['auth'] = [
+  'provider' => \ADIOS\Auth\ModelUser::class,
+];

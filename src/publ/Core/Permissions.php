@@ -3,6 +3,8 @@
 namespace CeremonyCrmApp\Core;
 
 class Permissions extends \ADIOS\Core\Permissions {
+  public array $administratorRoles = [\CeremonyCrmApp\Modules\Core\Settings\Models\UserRole::ROLE_ADMINISTRATOR];
+
   public function loadPermissions(): array {
     $permissions = parent::loadPermissions();
 

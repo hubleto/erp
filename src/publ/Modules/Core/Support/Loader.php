@@ -22,7 +22,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
   {
-    $sidebar->addLink(1, 98100, 'support', $this->app->translate('Support'), 'fas fa-question');
+    $sidebar->addLink(1, 98100, 'support', $this->app->translate('Support'), 'fas fa-circle-question');
   }
 
 }

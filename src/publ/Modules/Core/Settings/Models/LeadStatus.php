@@ -36,4 +36,11 @@ class LeadStatus extends \CeremonyCrmApp\Core\Model
     return $description;
   }
 
+  /* public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  {
+    $query = parent::prepareLoadRecordQuery();
+    $query->orderBy("order", "asc");
+    return $query;
+  } */
+
 }

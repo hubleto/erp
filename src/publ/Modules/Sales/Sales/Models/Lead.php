@@ -22,7 +22,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
     'STATUS' => [ self::HAS_ONE, LeadStatus::class, 'id', 'id_status'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
-    'LEAD_HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
+    'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
     'LABELS' => [ self::HAS_MANY, LeadLabel::class, 'id_lead', 'id' ],
   ];
 
@@ -110,6 +110,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     $description['ui']['addButtonText'] = 'Add Lead';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
+    $description['columns']['labels'] = ["title" => "Labels"];
     unset($description['columns']['note']);
     unset($description['columns']['id_person']);
     unset($description['columns']['source_channel']);
@@ -122,7 +123,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_status'] = 1;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'LEAD_HISTORY', 'LABELS'];
+    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'HISTORY', 'LABELS'];
     return $description;
   }
 
@@ -142,6 +143,18 @@ class Lead extends \CeremonyCrmApp\Core\Model
     }
 
     return $record;
+  }
+
+  public function onAfterCreate(array $record, $returnValue)
+  {
+    $mLeadHistory = new LeadHistory($this->app);
+    $mLeadHistory->eloquent->create([
+      "change_date" => date("Y-m-d"),
+      "id_lead" => $record["id"],
+      "description" => "Lead created"
+    ]);
+
+    return parent::onAfterCreate($record, $returnValue);
   }
 
   /* public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)

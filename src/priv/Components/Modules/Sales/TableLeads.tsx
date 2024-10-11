@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import FormLead from './FormLead';
+import InputTags2 from 'adios/Inputs/Tags2';
 
 interface TableLeadsProps extends TableProps {
 }
@@ -27,6 +28,29 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   getStateFromProps(props: TableLeadsProps) {
     return {
       ...super.getStateFromProps(props),
+    }
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+
+    if (columnName == "id_status") {
+      return <div style={{color: data.STATUS.color, borderColor: data.STATUS.color}} className='border rounded px-1'>{data.STATUS.name}</div>
+    } else if (columnName == "labels") {
+      return (
+        <div className='flex flex-row gap-2'>
+          {data.LABELS.map((label, key) => {
+            return (
+              <div
+                style={{color: label.LABEL.color, borderColor: label.LABEL.color}}
+                className='border rounded px-1'>
+                {label.LABEL.name}
+              </div>
+            );
+          })}
+        </div>
+      );
+    } else {
+      return super.renderCell(columnName, column, data, options);
     }
   }
 

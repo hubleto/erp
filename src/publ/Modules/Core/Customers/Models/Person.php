@@ -56,15 +56,6 @@ class Person extends \CeremonyCrmApp\Core\Model
     ]));
   }
 
-  // public function tableDescribe(array $description = []): array
-  // {
-  //   $description = parent::tableDescribe();
-  //   $description['ui']['title'] = 'Persons';
-  //   $description['ui']['addButtonText'] = 'Add Person';
-  //   $description['ui']['showHeader'] = true;
-  //   return $description;
-  // }
-
   public function formDescribe(array $description = []): array
   {
     $description = parent::formDescribe();

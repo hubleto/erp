@@ -30,6 +30,28 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
     }
   }
 
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "id_status") {
+      return <div style={{color: data.STATUS.color, borderColor: data.STATUS.color}} className='border rounded px-1'>{data.STATUS.name}</div>
+    } else if (columnName == "labels") {
+      return (
+        <div className='flex flex-row gap-2'>
+          {data.LABELS.map((label, key) => {
+            return (
+              <div
+                style={{color: label.LABEL.color, borderColor: label.LABEL.color}}
+                className='border rounded px-1'>
+                {label.LABEL.name}
+              </div>
+            );
+          })}
+        </div>
+      );
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
+  }
+
   renderForm(): JSX.Element {
     let formDescription = this.getFormProps();
     return <FormDeal {...formDescription}/>;

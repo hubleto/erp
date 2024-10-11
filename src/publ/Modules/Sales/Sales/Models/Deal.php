@@ -23,7 +23,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
     'STATUS' => [ self::HAS_ONE, DealStatus::class, 'id', 'id_status'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
-    'DEAL_HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id', ],
+    'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id', ],
     'LABELS' => [ self::HAS_MANY, DealLabel::class, 'id_deal', 'id' ],
   ];
 
@@ -119,6 +119,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description['ui']['addButtonText'] = 'Add Deal';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
+    $description['columns']['labels'] = ["title" => "Labels"];
     unset($description['columns']['note']);
     unset($description['columns']['id_person']);
     unset($description['columns']['source_channel']);
@@ -131,7 +132,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_status'] = 1;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'DEAL_HISTORY', 'LABELS', 'LEAD'];
+    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD'];
     return $description;
   }
 

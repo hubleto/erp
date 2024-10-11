@@ -41,7 +41,7 @@ class Deal extends \ADIOS\Core\Model\Eloquent
   {
     return $this->hasOne(DealStatus::class, 'id', 'id_status');
   }
-  public function DEAL_HISTORY(): HasMany
+  public function HISTORY(): HasMany
   {
     return $this->hasMany(DealHistory::class, 'id_deal', 'id');
   }

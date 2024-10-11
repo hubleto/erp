@@ -37,7 +37,7 @@ class Lead extends \ADIOS\Core\Model\Eloquent
   {
     return $this->hasOne(LeadStatus::class, 'id', 'id_status');
   }
-  public function LEAD_HISTORY(): HasMany
+  public function HISTORY(): HasMany
   {
     return $this->hasMany(LeadHistory::class, 'id_lead', 'id');
   }

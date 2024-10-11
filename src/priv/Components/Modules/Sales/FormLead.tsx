@@ -4,6 +4,7 @@ import Form, { FormProps, FormState } from 'adios/Form';
 import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
+import request from 'adios/Request';
 
 interface FormLeadProps extends FormProps {}
 
@@ -69,6 +70,18 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     }
   }
 
+  convertLead(recordId: number) {
+    request.get(
+      'sales/convert-lead',
+      {recordId: recordId},
+      (data: any) => {
+        if (data.status == "success") {
+          location.assign(`deals/?recordId=${data.idDeal}&recordTitle=${data.title}`)
+        }
+      }
+    );
+  }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
@@ -119,11 +132,23 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             {showAdditional ?
               <div className='card mt-2' style={{gridArea: 'history'}}>
                 <div className='card-header'>Lead History</div>
-                <div className='card-body min-h-[100px] flex justify-center' style={{flexDirection: "column"}}>
-                  {R.LEAD_HISTORY.length > 0 ?
-                    R.LEAD_HISTORY.map((history, key) => (
-                      <div className='w-full flex flex-row' style={{justifyContent: "space-evenly"}}>
-                        <p className='font-bold self-center text-sm'>{history.description}</p><hr style={{width: "25%", alignSelf: "center"}}/><p className='self-center text-sm'>{history.change_date}</p>
+                <div className='card-body min-h-[100px] flex justify-center' style={{flexDirection: "column", gap: "4px"}}>
+                  {R.HISTORY.length > 0 ?
+                    R.HISTORY.map((history, key) => (
+                      <div className='w-full flex flex-row justify-between'>
+                        <div className='w-1/3'>
+                            <p className='font-bold self-center text-sm text-left'>
+                              {history.description}
+                            </p>
+                          </div>
+                        <div className='w-1/3' style={{alignContent: "center"}}>
+                          <hr style={{width: "100%", alignSelf: "center"}}/>
+                        </div>
+                        <div className='w-1/3 justify-center'>
+                          <p className='self-center text-sm text-center'>
+                            {history.change_date}
+                          </p>
+                        </div>
                       </div>
                     ))
                     :
@@ -134,7 +159,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             : null}
             {showAdditional ?
               <div className='w-full flex flex-row justify-center' style={{gridArea: 'button'}}>
-                <a className='btn btn-primary btn-large' onClick={()=>{}}>
+                <a className='btn btn-primary btn-large' onClick={() => this.convertLead(R.id)}>
                   <span className='icon'><i className='fas fa-forward'></i></span>
                   <span className='text'>Convert to a Deal</span>
                 </a>

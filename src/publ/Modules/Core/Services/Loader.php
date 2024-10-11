@@ -32,11 +32,11 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
   {
-    $sidebar->addLink(1, 40100, 'services', $this->app->translate('Services'), 'fa-brands fa-servicestack');
+    $sidebar->addLink(1, 40100, 'services', $this->app->translate('Services'), 'fas fa-network-wired');
 
     if (str_starts_with($this->app->requestedUri, 'services')) {
-      $sidebar->addHeading1(2, 40200, $this->app->translate('Services'));
-      $sidebar->addLink(2, 40200, 'services', $this->app->translate('Services'), 'fa-brands fa-servicestack');
+      $sidebar->addHeading1(2, 40100, $this->app->translate('Services'));
+      $sidebar->addLink(2, 40200, 'services', $this->app->translate('Services'), 'fas fa-network-wired');
     }
   }
 

@@ -52,8 +52,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 99206, 'settings/countries', $this->app->translate('Countries'), 'fas fa-globe');
       $sidebar->addLink(2, 99207, 'settings/currencies', $this->app->translate('Currencies'), 'fas fa-dollar-sign');
       $sidebar->addLink(2, 99208, 'settings/labels', $this->app->translate('Labels'), 'fas fa-tags');
-      $sidebar->addLink(2, 99209, 'settings/lead-statuses', $this->app->translate('Lead Statuses'), 'fas fa-chart-simple');
-      $sidebar->addLink(2, 99210, 'settings/deal-statuses', $this->app->translate('Deal Statuses'), 'fas fa-chart-simple');
+      $sidebar->addLink(2, 99209, 'settings/lead-statuses', $this->app->translate('Lead Statuses'), 'fas fa-arrow-down-short-wide');
+      $sidebar->addLink(2, 99210, 'settings/deal-statuses', $this->app->translate('Deal Statuses'), 'fas fa-arrow-down-wide-short');
     }
   }
 

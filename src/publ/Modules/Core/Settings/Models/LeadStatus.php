@@ -16,6 +16,16 @@ class LeadStatus extends \CeremonyCrmApp\Core\Model
         'title' => 'Name',
         'required' => true,
       ],
+      'order' => [
+        'type' => 'int',
+        'title' => 'Order',
+        'required' => true,
+      ],
+      'color' => [
+        'type' => 'color',
+        'title' => 'Color',
+        'required' => false,
+      ],
     ]));
   }
 

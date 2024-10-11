@@ -33,6 +33,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/currencies' => 'Currencies',
         '/labels' => 'Labels',
         '/lead-statuses' => 'LeadStatuses',
+        '/deal-statuses' => 'DealStatuses',
       ]
     );
   }
@@ -52,6 +53,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 99207, 'settings/currencies', $this->app->translate('Currencies'), 'fas fa-dollar-sign');
       $sidebar->addLink(2, 99208, 'settings/labels', $this->app->translate('Labels'), 'fas fa-tags');
       $sidebar->addLink(2, 99209, 'settings/lead-statuses', $this->app->translate('Lead Statuses'), 'fas fa-chart-simple');
+      $sidebar->addLink(2, 99210, 'settings/deal-statuses', $this->app->translate('Deal Statuses'), 'fas fa-chart-simple');
     }
   }
 

@@ -22,6 +22,14 @@ class Setting extends \CeremonyCrmApp\Core\Model
         'title' => 'Value',
         'show_column' => true
       ],
+      'id_user' => [
+        'type' => 'lookup',
+        'title' => 'Only for user',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
+        'foreignKeyOnUpdate' => 'RESTRICT',
+        'foreignKeyOnDelete' => 'RESTRICT',
+        'required' => false,
+      ],
     ]);
   }
 

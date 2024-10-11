@@ -402,17 +402,43 @@ export default class FormCompany<P, S> extends Form<
                             <button
                               className="btn btn-danger text-sm"
                               onClick={() => {
-                                request.get(
-                                  'api/record/delete',
+                                globalThis.app.showDialogDanger(
+                                  <>Please confirm</>,
                                   {
-                                    model: 'CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount',
-                                    id: input.id,
-                                  },
-                                  (data: any) => {
-                                    if (data.status == true || data.id == 0) {
-                                      R.BILLING_ACCOUNTS.splice(key, 1);
-                                      this.setState({record: R});
-                                    }
+                                    header: "Delete billing account",
+                                    footer: <>
+                                      <button
+                                        className="btn btn-danger"
+                                        onClick={() => {
+                                          request.get(
+                                            'api/record/delete',
+                                            {
+                                              model: 'CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount',
+                                              id: input.id,
+                                            },
+                                            (data: any) => {
+                                              if (data.status == true || data.id == 0) {
+                                                R.BILLING_ACCOUNTS.splice(key, 1);
+                                                this.setState({record: R});
+                                                globalThis.app.lastShownDialogRef.current.hide();
+                                              }
+                                            }
+                                          );
+                                        }}
+                                      >
+                                        <span className="icon"><i className="fas fa-trash-alt"></i></span>
+                                        <span className="text">Yes, delete</span>
+                                      </button>
+                                      <button
+                                        className="btn btn-transparent"
+                                        onClick={() => {
+                                          globalThis.app.lastShownDialogRef.current.hide();
+                                        }}
+                                      >
+                                        <span className="icon"><i className="fas fa-times"></i></span>
+                                        <span className="text">No, do not delete</span>
+                                      </button>
+                                    </>
                                   }
                                 );
                               }}

@@ -168,15 +168,8 @@
   .card-body { @apply p-2; }
   .card-footer { @apply flex justify-between border-t p-4; }
 
-  .dialog { @apply rounded bg-white; }
-  .dialog-handle { @apply p-2 hover:bg-gray-50; }
-  .dialog-header { @apply p-4; }
-  .dialog-body { @apply p-4; }
-  .dialog-footer { @apply p-4 border-t border-gray-200 bg-gray-50; }
-
   .dialog-danger-header { @apply bg-red-600 text-white hover:bg-red-400; }
-  .dialog-danger-content { @apply text-red-600; }
-  .dialog-danger-content * { @apply text-red-600; }
+  .dialog-warning-header { @apply bg-yellow-300 text-gray-800 hover:bg-yellow-200; }
 
   .divider { @apply px-1 pt-12 pb-4; }
   .divider.dense { @apply px-1 py-2; }
@@ -248,6 +241,10 @@
   .p-tabview-nav-link { @apply mr-0.5 rounded-t border border-gray-200 p-2 text-sm !no-underline font-normal hover:bg-gray-50; }
   .p-tabview-selected > .p-tabview-nav-link { @apply text-primary border-primary text-primary hover:!bg-none; }
   .p-inputswitch { zoom: 0.66; }
+  .p-dialog .p-dialog-header { @apply p-2 text-sm; }
+  .p-dialog .p-dialog-title { @apply text-sm; }
+  .p-dialog .p-dialog-content { @apply p-2 text-sm; }
+  .p-dialog .p-dialog-footer { @apply p-4 text-sm border-t border-gray-200 bg-gray-50 flex justify-between; }
 
   .p-tree { @apply p-0; }
 

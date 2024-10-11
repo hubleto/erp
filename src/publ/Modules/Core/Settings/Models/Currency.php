@@ -27,6 +27,15 @@ class Currency extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::tableDescribe();
     $description['ui']['title'] = 'Currencies';
+    $description['ui']['addButtonText'] = 'Add currency';
+    return $description;
+  }
+
+  public function formDescribe(array $description = []): array
+  {
+    $description = parent::formDescribe();
+    $description['ui']['title'] = ($this->app->params['id'] == -1 ? "New currency" : "Currency");
+    $description['ui']['subTitle'] = ($this->app->params['id'] == -1 ? "Adding" : "Editing");
     return $description;
   }
 

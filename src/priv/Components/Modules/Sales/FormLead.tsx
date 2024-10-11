@@ -134,7 +134,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             : null}
             {showAdditional ?
               <div className='w-full flex flex-row justify-center' style={{gridArea: 'button'}}>
-                <a className='btn btn-primary text-center p-3' onClick={()=>{}}>
+                <a className='btn btn-primary btn-large' onClick={()=>{}}>
                   <span className='icon'><i className='fas fa-forward'></i></span>
                   <span className='text'>Convert to a Deal</span>
                 </a>

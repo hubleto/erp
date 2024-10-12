@@ -78,8 +78,8 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
         <div className='grid grid-cols-2 gap-1' style=
           {{gridTemplateAreas:`
             'info info'
+            'status status'
             'history history'
-            'button button'
           `}}>
             <div className='card mt-2' style={{gridArea: 'info'}}>
               <div className='card-header'>Deal Information</div>
@@ -92,7 +92,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     {this.inputWrapper('price')}
                     {this.inputWrapper('id_currency')}
                   </div>
-                  {showAdditional ? this.inputWrapper('id_status') : null}
+                  {/* {showAdditional ? this.inputWrapper('id_status') : null} */}
                   {this.inputWrapper('id_lead')}
                 </div>
                 <div className='border-l border-gray-200'></div>
@@ -118,32 +118,53 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
               </div>
             </div>
             {showAdditional ?
-              <div className='card mt-2' style={{gridArea: 'history'}}>
-                <div className='card-header'>Deal History</div>
-                <div className='card-body min-h-[100px] flex justify-center' style={{flexDirection: "column", gap: "4px"}}>
-                  {R.HISTORY.length > 0 ?
-                    R.HISTORY.map((history, key) => (
-                      <div className='w-full flex flex-row justify-between'>
-                        <div className='w-1/3'>
-                            <p className='font-bold self-center text-sm text-left'>
-                              {history.description}
+              <>
+                <div className='card mt-2' style={{gridArea: 'status'}}>
+                  <div className='card-header'>Deal Status</div>
+                  <div className='card-body flex flex-row gap-4 justify-center'>
+                    {R.STATUSES.length > 0 ?
+                      R.STATUSES.map((s, i) => {
+                        var statusColor: string = null;
+                        {s.order <= R.STATUS.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
+                        return (
+                          <>
+                            <button style={{height: "50px"}} className={`flex px-3 justify-center btn ${statusColor}`}>
+                              <span className='text text-center self-center'>{s.name}</span>
+                            </button>
+                          </>
+                        )
+                      })
+                    : null}
+                  </div>
+                </div>
+                <div className='card mt-2' style={{gridArea: 'history'}}>
+                  <div className='card-header'>Deal History</div>
+                  <div className='card-body min-h-[100px] flex justify-center' style={{flexDirection: "column", gap: "4px"}}>
+                    {R.HISTORY.length > 0 ?
+                      R.HISTORY.map((history, key) => (
+                        <div className='w-full flex flex-row justify-between'>
+                          <div className='w-1/3'>
+                              <p className='font-bold self-center text-sm text-left'>
+                                {history.description}
+                              </p>
+                            </div>
+                          <div className='w-1/3' style={{alignContent: "center"}}>
+                            <hr style={{width: "100%", alignSelf: "center"}}/>
+                          </div>
+                          <div className='w-1/3 justify-center'>
+                            <p className='self-center text-sm text-center'>
+                              {history.change_date}
                             </p>
                           </div>
-                        <div className='w-1/3' style={{alignContent: "center"}}>
-                          <hr style={{width: "100%", alignSelf: "center"}}/>
                         </div>
-                        <div className='w-1/3 justify-center'>
-                          <p className='self-center text-sm text-center'>
-                            {history.change_date}
-                          </p>
-                        </div>
-                      </div>
-                    ))
-                    :
-                    <p className='text-gray-400'>Deal has no history</p>
-                  }
+                      ))
+                      :
+                      <p className='text-gray-400'>Deal has no history</p>
+                    }
+                  </div>
                 </div>
-              </div>
+              </>
+
             : null}
         </div>
       </>

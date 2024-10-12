@@ -40,7 +40,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
         'type' => 'lookup',
         'title' => 'Company',
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
-        'foreignKeyOnUpdate' => 'RESTRICT',
+        'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
       ],
@@ -48,17 +48,17 @@ class Deal extends \CeremonyCrmApp\Core\Model
         'type' => 'lookup',
         'title' => 'Contact Person',
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,
       ],
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Origin Lead',
         'model' => 'CeremonyCrmApp/Modules/Sales/Sales/Models/Lead',
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => true,
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
+        'required' => false,
       ],
       'price' => [
         'type' => 'float',
@@ -70,7 +70,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
         'title' => 'Currency',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/Currency',
         'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
+        'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,
       ],
       'date_close_expected' => [
@@ -90,8 +90,8 @@ class Deal extends \CeremonyCrmApp\Core\Model
         'type' => 'lookup',
         'title' => 'Status',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/DealStatus',
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,
       ],
       'note' => [
@@ -136,28 +136,12 @@ class Deal extends \CeremonyCrmApp\Core\Model
     return $description;
   }
 
-  /* public function onBeforeUpdate(array $record): array
+  public function onAfterLoadRecord(array $data): array
   {
-    $lead = $this->eloquent->find($record["id"])->toArray();
-    $mDealHistory = new DealHistory($this->app);
-    $mDealStatus= new DealStatus($this->app);
+    $mDealStatus = new DealStatus($this->app);
+    $statuses = $mDealStatus->eloquent->orderBy("order", "asc")->get(["id", "name", "order"])->toArray();
+    $data["STATUSES"] = $statuses;
 
-    if ($lead["id_status"] != (int) $record["id_status"]) {
-      $status = $mDealStatus->eloquent->find((int) $record["id_status"])->name;
-      $mDealHistory->eloquent->create([
-        "change_date" => date("Y-m-d"),
-        "id_lead" => $record["id"],
-        "description" => "Status changed to ".$status
-      ]);
-    }
-
-    return $record;
-  } */
-
-  /* public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
-  {
-    $query = parent::prepareLoadRecordQuery();
-    $query->orderBy("id_status", "asc");
-    return $query;
-  } */
+    return $data;
+  }
 }

@@ -90,6 +90,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
       <>
         <div className='grid grid-cols-2 gap-1' style=
           {{gridTemplateAreas:`
+            'notification notification'
             'info info'
             'history history'
             'button button'
@@ -159,10 +160,16 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             : null}
             {showAdditional ?
               <div className='w-full flex flex-row justify-center' style={{gridArea: 'button'}}>
+                {R.DEAL != null ?
+                <a className='btn btn-primary btn-large' href={`deals/?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
+                  <span className='icon'><i className='fas fa-forward'></i></span>
+                  <span className='text'>Go to the Deal</span>
+                </a>
+                :
                 <a className='btn btn-primary btn-large' onClick={() => this.convertLead(R.id)}>
                   <span className='icon'><i className='fas fa-forward'></i></span>
                   <span className='text'>Convert to a Deal</span>
-                </a>
+                </a>}
               </div>
             : null}
         </div>

@@ -326,7 +326,7 @@ export default class FormCompany<P, S> extends Form<
                           <div className="card card-body m-2">
                             <FormInput>
                               <div className="grid grid-cols-2 gap-4">
-                                <label className="input-label">Billing Account Description</label>
+                                <label className="input-label self-center">Billing Account Description</label>
                                 <InputVarchar
                                   {...this.getDefaultInputProps()}
                                   value={input.description}
@@ -403,7 +403,7 @@ export default class FormCompany<P, S> extends Form<
                               className="btn btn-danger text-sm"
                               onClick={() => {
                                 globalThis.app.showDialogDanger(
-                                  <>Please confirm</>,
+                                  <>This will delete the <b>{input.description}</b> billing account and the connections to the services. Do you want to continue?</>,
                                   {
                                     header: "Delete billing account",
                                     footer: <>
@@ -427,7 +427,7 @@ export default class FormCompany<P, S> extends Form<
                                         }}
                                       >
                                         <span className="icon"><i className="fas fa-trash-alt"></i></span>
-                                        <span className="text">Yes, delete</span>
+                                        <span className="text">Yes, delete billing account</span>
                                       </button>
                                       <button
                                         className="btn btn-transparent"
@@ -436,7 +436,7 @@ export default class FormCompany<P, S> extends Form<
                                         }}
                                       >
                                         <span className="icon"><i className="fas fa-times"></i></span>
-                                        <span className="text">No, do not delete</span>
+                                        <span className="text">No, do not delete billing account</span>
                                       </button>
                                     </>
                                   }

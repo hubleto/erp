@@ -17,6 +17,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
+    'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
     'COMPANY' => [ self::HAS_ONE, Company::class, 'id', 'id_company'],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
@@ -123,7 +124,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_status'] = 1;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'HISTORY', 'LABELS'];
+    $description['includeRelations'] = ['DEAL','COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'HISTORY', 'LABELS'];
     return $description;
   }
 

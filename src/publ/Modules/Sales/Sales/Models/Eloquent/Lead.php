@@ -17,6 +17,10 @@ class Lead extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'leads';
 
+  public function DEAL(): HasOne
+  {
+    return $this->hasOne(Deal::class, 'id_lead', 'id' );
+  }
   public function COMPANY(): HasOne
   {
     return $this->hasOne(Company::class, 'id', 'id_company');

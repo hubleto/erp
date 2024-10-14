@@ -23,6 +23,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/leads' => 'Leads',
         '/deals' => 'Deals',
         '/convert-lead' => 'ConvertLead',
+        '/convert-lead' => 'ConvertLead',
+        '/change-deal-status' => 'ChangeDealStatus',
       ]
     );
   }

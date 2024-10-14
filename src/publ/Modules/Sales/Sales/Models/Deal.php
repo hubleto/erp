@@ -59,6 +59,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
+        'readonly' => true,
       ],
       'price' => [
         'type' => 'float',
@@ -124,6 +125,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     unset($description['columns']['id_person']);
     unset($description['columns']['source_channel']);
     unset($description['columns']['is_archived']);
+    unset($description['columns']['id_lead']);
     return $description;
   }
 
@@ -143,5 +145,28 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $data["STATUSES"] = $statuses;
 
     return $data;
+  }
+
+  public function onBeforeUpdate(array $record): array
+  {
+    $deal = $this->eloquent->find($record["id"])->toArray();
+    $mDealHistory = new DealHistory($this->app);
+
+    if ((float) $deal["price"] != (float) $record["price"]) {
+      $mDealHistory->eloquent->create([
+        "change_date" => date("Y-m-d"),
+        "id_deal" => $record["id"],
+        "description" => "Price changed to ".$record["price"]." ".$record["CURRENCY"]["code"]
+      ]);
+    }
+    if ((string) $deal["date_close_expected"] != (string) $record["date_close_expected"]) {
+      $mDealHistory->eloquent->create([
+        "change_date" => date("Y-m-d"),
+        "id_deal" => $record["id"],
+        "description" => "Expected Close Date changed to ".date("d.m.Y", strtotime($record["date_close_expected"]))
+      ]);
+    }
+
+    return $record;
   }
 }

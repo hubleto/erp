@@ -4,6 +4,7 @@ import Form, { FormProps, FormState } from 'adios/Form';
 import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
+import request from 'adios/Request';
 
 interface FormDealProps extends FormProps {}
 
@@ -69,6 +70,25 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
     }
   }
 
+  changeDealStatus(idStatus: number, R: any) {
+    if (idStatus == R.STATUS.id) return;
+    request.get(
+      'sales/change-deal-status',
+      {
+        idStatus: idStatus,
+        idDeal: R.id
+      },
+      (data: any) => {
+        if (data.status == "success") {
+          R.id_status = data.returnStatus.id;
+          R.STATUS = data.returnStatus;
+          R.HISTORY = data.dealHistory;
+          this.setState({record: R});
+        }
+      }
+    );
+  }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
@@ -93,7 +113,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     {this.inputWrapper('id_currency')}
                   </div>
                   {/* {showAdditional ? this.inputWrapper('id_status') : null} */}
-                  {this.inputWrapper('id_lead')}
+                  {showAdditional ? <a href={`../leads?recordId=${R.id_lead}`}>{this.inputWrapper('id_lead')}</a> : null}
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className='grow'>
@@ -128,7 +148,11 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         {s.order <= R.STATUS.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
                         return (
                           <>
-                            <button style={{height: "50px"}} className={`flex px-3 justify-center btn ${statusColor}`}>
+                            <button
+                              style={{height: "50px"}}
+                              onClick={()=>{this.changeDealStatus(s.id, R)}}
+                              className={`flex px-3 justify-center btn ${statusColor}`}
+                            >
                               <span className='text text-center self-center'>{s.name}</span>
                             </button>
                           </>

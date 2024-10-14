@@ -82,6 +82,34 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     );
   }
 
+  convertDealWarning(recordId: number) {
+    globalThis.app.showDialogDanger(
+      <>Are you sure you want to convert this Lead to a Deal?</>,
+      {
+        headerClassName: "dialog-warning-header",
+        header: "Convert to a Deal",
+        footer: <>
+          <button
+            className="btn btn-yellow"
+            onClick={() => {this.convertLead(recordId)}}
+          >
+            <span className="icon"><i className="fas fa-forward"></i></span>
+            <span className="text">Yes, convert to a Deal</span>
+          </button>
+          <button
+            className="btn btn-transparent"
+            onClick={() => {
+              globalThis.app.lastShownDialogRef.current.hide();
+            }}
+          >
+            <span className="icon"><i className="fas fa-times"></i></span>
+            <span className="text">No, do not convert to a Deal</span>
+          </button>
+        </>
+      }
+    );
+  }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
@@ -166,7 +194,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   <span className='text'>Go to the Deal</span>
                 </a>
                 :
-                <a className='btn btn-primary btn-large' onClick={() => this.convertLead(R.id)}>
+                <a className='btn btn-primary btn-large' onClick={() => this.convertDealWarning(R.id)}>
                   <span className='icon'><i className='fas fa-forward'></i></span>
                   <span className='text'>Convert to a Deal</span>
                 </a>}

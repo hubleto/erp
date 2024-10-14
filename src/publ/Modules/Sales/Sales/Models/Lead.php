@@ -142,6 +142,20 @@ class Lead extends \CeremonyCrmApp\Core\Model
         "description" => "Status changed to ".$status
       ]);
     }
+    if ((float) $lead["price"] != (float) $record["price"]) {
+      $mLeadHistory->eloquent->create([
+        "change_date" => date("Y-m-d"),
+        "id_lead" => $record["id"],
+        "description" => "Price changed to ".$record["price"]." ".$record["CURRENCY"]["code"]
+      ]);
+    }
+    if ((string) $lead["date_close_expected"] != (string) $record["date_close_expected"]) {
+      $mLeadHistory->eloquent->create([
+        "change_date" => date("Y-m-d"),
+        "id_lead" => $record["id"],
+        "description" => "Expected Close Date changed to ".date("d.m.Y", strtotime($record["date_close_expected"]))
+      ]);
+    }
 
     return $record;
   }

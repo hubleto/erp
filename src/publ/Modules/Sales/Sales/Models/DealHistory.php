@@ -31,8 +31,8 @@ class DealHistory extends \CeremonyCrmApp\Core\Model
         'type' => 'lookup',
         'title' => 'Company',
         'model' => 'CeremonyCrmApp/Modules/Sales/Sales/Models/Deal',
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
       ],
       'description' => [

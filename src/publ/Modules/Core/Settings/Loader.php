@@ -34,6 +34,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/labels' => 'Labels',
         '/lead-statuses' => 'LeadStatuses',
         '/deal-statuses' => 'DealStatuses',
+        '/pipelines' => 'Pipelines',
       ]
     );
   }
@@ -53,7 +54,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 99207, 'settings/currencies', $this->app->translate('Currencies'), 'fas fa-dollar-sign');
       $sidebar->addLink(2, 99208, 'settings/labels', $this->app->translate('Labels'), 'fas fa-tags');
       $sidebar->addLink(2, 99209, 'settings/lead-statuses', $this->app->translate('Lead Statuses'), 'fas fa-arrow-down-short-wide');
-      $sidebar->addLink(2, 99210, 'settings/deal-statuses', $this->app->translate('Deal Statuses'), 'fas fa-arrow-down-wide-short');
+      $sidebar->addLink(2, 99211, 'settings/pipelines', $this->app->translate('Pipelines'), 'fas fa-bars-progress');
     }
   }
 
@@ -65,16 +66,4 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     $mCountry = new Models\Country($this->app);
     $mCountry->install();
-    /* $countries = [
-      ['name' => 'United States', 'code' => 'US'],
-      ['name' => 'Canada', 'code' => 'CA'],
-      ['name' => 'United Kingdom', 'code' => 'UK'],
-      ['name' => 'Australia', 'code' => 'AU'],
-      ['name' => 'Germany', 'code' => 'DE'],
-      ['name' => 'Slovakia', 'code' => 'SK'],
-  ];
-
-  foreach ($countries as $country) {
-    $mCountry->eloquent->create($country);
-  } */
   }}

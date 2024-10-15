@@ -70,18 +70,18 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
     }
   }
 
-  changeDealStatus(idStatus: number, R: any) {
-    if (idStatus == R.STATUS.id) return;
+  changeDealStatus(idStep: number, R: any) {
+    if (idStep == R.id_pipeline_step) return;
     request.get(
-      'sales/change-deal-status',
+      'sales/change-pipeline-step',
       {
-        idStatus: idStatus,
+        idStep: idStep,
+        idPipeline: R.id_pipeline,
         idDeal: R.id
       },
       (data: any) => {
         if (data.status == "success") {
-          R.id_status = data.returnStatus.id;
-          R.STATUS = data.returnStatus;
+          R.id_pipeline_step = data.returnStep.id;
           R.HISTORY = data.dealHistory;
           this.setState({record: R});
         }
@@ -113,7 +113,14 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     {this.inputWrapper('id_currency')}
                   </div>
                   {/* {showAdditional ? this.inputWrapper('id_status') : null} */}
-                  {showAdditional ? <a href={`../leads?recordId=${R.id_lead}`}>{this.inputWrapper('id_lead')}</a> : null}
+                  {showAdditional && R.id_lead != null ?
+                    <div className='flex flex-row justify-between'>
+                      {this.inputWrapper('id_lead')}
+                      <a className='btn btn-primary self-center' href={`../leads?recordId=${R.id_lead}`}>
+                        <span className='icon'><i className='fas fa-eye'></i></span>
+                      </a>
+                    </div>
+                  : null}
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className='grow'>
@@ -140,25 +147,33 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
             {showAdditional ?
               <>
                 <div className='card mt-2' style={{gridArea: 'status'}}>
-                  <div className='card-header'>Deal Status</div>
-                  <div className='card-body flex flex-row gap-4 justify-center'>
-                    {R.STATUSES.length > 0 ?
-                      R.STATUSES.map((s, i) => {
-                        var statusColor: string = null;
-                        {s.order <= R.STATUS.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
-                        return (
-                          <>
-                            <button
-                              style={{height: "50px"}}
-                              onClick={()=>{this.changeDealStatus(s.id, R)}}
-                              className={`flex px-3 justify-center btn ${statusColor}`}
-                            >
-                              <span className='text text-center self-center'>{s.name}</span>
-                            </button>
-                          </>
-                        )
-                      })
-                    : null}
+                  <div className='card-header'>Deal Progress</div>
+                  <div className='card-body'>
+                    {this.inputWrapper('id_pipeline')}
+                    <div className=' flex flex-row gap-2 justify-center'>
+
+                      {R.PIPELINE != null && R.PIPELINE.PIPELINE_STEPS.length > 0 ?
+                        R.PIPELINE.PIPELINE_STEPS.map((s, i) => {
+                          var statusColor: string = null;
+                          {s.id <= R.id_pipeline_step ? statusColor = "btn-primary" : statusColor = "btn-light"}
+                          return (
+                            <>
+                              <button
+                                style={{height: "50px"}}
+                                onClick={()=>{this.changeDealStatus(s.id, R)}}
+                                className={`flex px-3 justify-center btn ${statusColor}`}
+                              >
+                                <span className='text text-center self-center'>{s.name}</span>
+                              </button>
+                              {i+1 == R.PIPELINE.PIPELINE_STEPS.length ? null
+                              : <span className='icon flex'><i className='fas fa-angles-right self-center'></i></span>
+                              }
+                            </>
+                          )
+                        })
+                      : null}
+
+                    </div>
                   </div>
                 </div>
                 <div className='card mt-2' style={{gridArea: 'history'}}>

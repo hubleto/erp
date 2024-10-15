@@ -33,9 +33,11 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
         "id_user" => $lead->id_user,
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
-        "id_status" => $lead->id_status,
         "id_lead" => $lead->id,
+        "id_pipeline" => null,
+        "id_pipeline_step" => null
       ]);
+
 
       $leadHistories = $mLeadHistory->eloquent->where("id_lead", $leadId)->get();
 
@@ -60,6 +62,8 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
       ]);
 
     } catch (Exception $e) {
+
+      var_dump($e); exit;
       return [
         "status" => "failed",
         "error" => $e

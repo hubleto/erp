@@ -2,32 +2,37 @@
 
 namespace CeremonyCrmApp\Modules\Sales\Sales\Controllers;
 
-use CeremonyCrmApp\Modules\Core\Settings\Models\DealStatus;
+use CeremonyCrmApp\Modules\Core\Settings\Models\Pipeline;
+use CeremonyCrmApp\Modules\Core\Settings\Models\PipelineStep;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
 use Exception;
 
-class ChangeDealStatus extends \CeremonyCrmApp\Core\Controller
+class ChangePipelineStep extends \CeremonyCrmApp\Core\Controller
 {
 
   public function renderJson(): ?array
   {
     $mDeal = new Deal($this->app);
     $mDealHistory = new DealHistory($this->app);
-    $mDealStatus = new DealStatus($this->app);
+    $mPipelineStep = new PipelineStep($this->app);
 
-    $status = null;
+    $step = null;
 
     try {
       $deal = $mDeal->eloquent->find($this->params["idDeal"]);
-      $deal->id_status = $this->params["idStatus"];
+      $deal->id_pipeline_step = $this->params["idStep"];
       $deal->save();
 
-      $status = $mDealStatus->eloquent->find((int) $this->params["idStatus"]);
+      $step = $mPipelineStep->eloquent
+        ->where("id_pipeline", $this->params["idPipeline"])
+        ->where("id", $this->params["idStep"])
+        ->first()
+      ;
       $mDealHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_deal" => $deal->id,
-        "description" => "Status changed to ".$status->name
+        "description" => "Pipeline step changed to ".$step->name
       ]);
     } catch (Exception $e) {
       return [
@@ -40,7 +45,7 @@ class ChangeDealStatus extends \CeremonyCrmApp\Core\Controller
 
     return [
       "status" => "success",
-      "returnStatus" => $status->toArray(),
+      "returnStep" => $step->toArray(),
       "dealHistory" => $dealHistory->toArray()
     ];
   }

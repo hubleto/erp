@@ -76,7 +76,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => false,
+        'required' => true,
       ],
       'id_status' => [
         'type' => 'lookup',

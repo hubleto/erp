@@ -7,8 +7,13 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class DealStatus extends \ADIOS\Core\Model\Eloquent
+class PipelineStep extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'deal_statuses';
+  public $table = 'pipeline_steps';
+
+  public function PIPELINE(): BelongsTo
+  {
+    return $this->belongsTo(Pipeline::class, 'id_pipeline','id' );
+  }
 
 }

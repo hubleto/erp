@@ -6,6 +6,7 @@ use CeremonyCrmApp\Modules\Core\Customers\Models\Company;
 use CeremonyCrmApp\Modules\Core\Customers\Models\Person;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Currency;
 use CeremonyCrmApp\Modules\Core\Settings\Models\DealStatus;
+use CeremonyCrmApp\Modules\Core\Settings\Models\Pipeline;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealLabel;
@@ -21,7 +22,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     'COMPANY' => [ self::HAS_ONE, Company::class, 'id', 'id_company'],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
-    'STATUS' => [ self::HAS_ONE, DealStatus::class, 'id', 'id_status'],
+    'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id', ],
     'LABELS' => [ self::HAS_MANY, DealLabel::class, 'id_deal', 'id' ],
@@ -85,15 +86,23 @@ class Deal extends \CeremonyCrmApp\Core\Model
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => false,
+        'required' => true,
       ],
-      'id_status' => [
+      'id_pipeline' => [
         'type' => 'lookup',
-        'title' => 'Status',
-        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/DealStatus',
+        'title' => 'Pipeline',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/Pipeline',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
-        'required' => true,
+        'required' => false,
+      ],
+      'id_pipeline_step' => [
+        'type' => 'lookup',
+        'title' => 'Current Step',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/PipelineStep',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
+        'required' => false,
       ],
       'note' => [
         'type' => 'text',
@@ -126,6 +135,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     unset($description['columns']['source_channel']);
     unset($description['columns']['is_archived']);
     unset($description['columns']['id_lead']);
+    unset($description['columns']['id_pipeline']);
     return $description;
   }
 
@@ -134,17 +144,26 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_status'] = 1;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD'];
+    $description['defaultValues']['id_pipeline'] = null;
+    $description['defaultValues']['id_pipeline_step'] = null;
+    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD'];
     return $description;
   }
 
-  public function onAfterLoadRecord(array $data): array
+  public function onAfterCreate(array $record, $returnValue)
   {
-    $mDealStatus = new DealStatus($this->app);
-    $statuses = $mDealStatus->eloquent->orderBy("order", "asc")->get(["id", "name", "order"])->toArray();
-    $data["STATUSES"] = $statuses;
+    $mDealHistory = new DealHistory($this->app);
+    $mDealHistory->eloquent->create([
+      "change_date" => date("Y-m-d"),
+      "id_deal" => $record["id"],
+      "description" => "Deal created"
+    ]);
 
-    return $data;
+    return $this->app->dispatchEventToPlugins("onModelAfterCreate", [
+      "model" => $this,
+      "data" => $record,
+      "returnValue" => $returnValue,
+    ])["returnValue"];
   }
 
   public function onBeforeUpdate(array $record): array

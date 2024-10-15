@@ -24,7 +24,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/deals' => 'Deals',
         '/convert-lead' => 'ConvertLead',
         '/convert-lead' => 'ConvertLead',
-        '/change-deal-status' => 'ChangeDealStatus',
+        '/change-pipeline-step' => 'ChangePipelineStep',
       ]
     );
   }

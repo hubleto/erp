@@ -2,11 +2,15 @@
 
 namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 
-class DealStatus extends \CeremonyCrmApp\Core\Model
+class PipelineStep extends \CeremonyCrmApp\Core\Model
 {
-  public string $table = 'deal_statuses';
-  public string $eloquentClass = Eloquent\DealStatus::class;
+  public string $table = 'pipeline_steps';
+  public string $eloquentClass = Eloquent\PipelineStep::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+
+  public array $relations = [
+    'PIPELINE' => [ self::BELONGS_TO, Pipeline::class, 'id_pipeline', 'id' ]
+  ];
 
   public function columns(array $columns = []): array
   {
@@ -21,10 +25,13 @@ class DealStatus extends \CeremonyCrmApp\Core\Model
         'title' => 'Order',
         'required' => true,
       ],
-      'color' => [
-        'type' => 'color',
-        'title' => 'Color',
-        'required' => false,
+      'id_pipeline' => [
+        'type' => 'lookup',
+        'title' => 'Company',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/Pipeline',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
+        'required' => true,
       ],
     ]));
   }
@@ -32,7 +39,7 @@ class DealStatus extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Deal Statuses';
+    $description['title'] = 'Pipeline Steps';
     return $description;
   }
 

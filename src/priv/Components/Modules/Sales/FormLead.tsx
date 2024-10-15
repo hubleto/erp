@@ -5,6 +5,7 @@ import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 import request from 'adios/Request';
+import InputVarchar from 'adios/Inputs/Varchar';
 
 interface FormLeadProps extends FormProps {}
 
@@ -121,7 +122,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             'notification notification'
             'info info'
             'history history'
-            'button button'
           `}}>
             <div className='card mt-2' style={{gridArea: 'info'}}>
               <div className='card-header'>Lead Information</div>
@@ -135,6 +135,20 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     {this.inputWrapper('id_currency')}
                   </div>
                   {showAdditional ? this.inputWrapper('id_status') : null}
+                  {showAdditional ?
+                    <div className='w-full mt-2'>
+                      {R.DEAL != null ?
+                      <a className='btn btn-primary' href={`deals/?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
+                        <span className='icon'><i className='fas fa-eye'></i></span>
+                        <span className='text'>Go to the Deal</span>
+                      </a>
+                      :
+                      <a className='btn btn-primary' onClick={() => this.convertDealWarning(R.id)}>
+                        <span className='icon'><i className='fas fa-rotate-right'></i></span>
+                        <span className='text'>Convert to a Deal</span>
+                      </a>}
+                    </div>
+                  : null}
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className='grow'>
@@ -184,20 +198,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     <p className='text-gray-400'>Lead has no history</p>
                   }
                 </div>
-              </div>
-            : null}
-            {showAdditional ?
-              <div className='w-full flex flex-row justify-center' style={{gridArea: 'button'}}>
-                {R.DEAL != null ?
-                <a className='btn btn-primary btn-large' href={`deals/?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
-                  <span className='icon'><i className='fas fa-forward'></i></span>
-                  <span className='text'>Go to the Deal</span>
-                </a>
-                :
-                <a className='btn btn-primary btn-large' onClick={() => this.convertDealWarning(R.id)}>
-                  <span className='icon'><i className='fas fa-forward'></i></span>
-                  <span className='text'>Convert to a Deal</span>
-                </a>}
               </div>
             : null}
         </div>

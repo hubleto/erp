@@ -121,39 +121,45 @@ export default class FormCompany<P, S> extends Form<
               className="grid grid-cols-2 gap-1"
               style={{
                 gridTemplateAreas: `
-                  'company contacts'
+                  'company company'
+                  'contacts contacts'
                   'activities activities'
                 `,
               }}
             >
               <div className="card" style={{ gridArea: "company" }}>
                 <div className="card-header">Company Information</div>
-                <div className="card-body">
-                  {this.inputWrapper("name")}
-                  {this.inputWrapper("street_line_1")}
-                  {this.inputWrapper("street_line_2")}
-                  {this.inputWrapper("city")}
-                  {this.inputWrapper("region")}
-                  {this.inputWrapper("id_country")}
-                  {this.inputWrapper("postal_code")}
-                  {this.inputWrapper("vat_id")}
-                  {this.inputWrapper("tax_id")}
-                  {this.inputWrapper("company_id")}
-                  {showAdditional ? this.inputWrapper("date_created") : null}
-                  {showAdditional ? this.inputWrapper("is_active") : null}
-                  <FormInput title="Categories">
-                    <InputTags2
-                      {...this.getDefaultInputProps()}
-                      value={this.state.record.TAGS}
-                      model="CeremonyCrmApp/Modules/Core/Settings/Models/Tag"
-                      targetColumn="id_company"
-                      sourceColumn="id_tag"
-                      colorColumn="color"
-                      onChange={(value: any) => {
-                        this.updateRecord({ TAGS: value });
-                      }}
-                    />
-                  </FormInput>
+                <div className="card-body flex flex-row gap-2">
+                  <div className="w-1/2">
+                    {this.inputWrapper("name")}
+                    {this.inputWrapper("street_line_1")}
+                    {this.inputWrapper("street_line_2")}
+                    {this.inputWrapper("city")}
+                    {this.inputWrapper("region")}
+                    {this.inputWrapper("id_country")}
+                    {this.inputWrapper("postal_code")}
+                  </div>
+                  <div className='border-l border-gray-200'></div>
+                  <div className="w-1/2">
+                    {this.inputWrapper("vat_id")}
+                    {this.inputWrapper("tax_id")}
+                    {this.inputWrapper("company_id")}
+                    {showAdditional ? this.inputWrapper("date_created") : null}
+                    {showAdditional ? this.inputWrapper("is_active") : null}
+                    <FormInput title="Categories">
+                      <InputTags2
+                        {...this.getDefaultInputProps()}
+                        value={this.state.record.TAGS}
+                        model="CeremonyCrmApp/Modules/Core/Settings/Models/Tag"
+                        targetColumn="id_company"
+                        sourceColumn="id_tag"
+                        colorColumn="color"
+                        onChange={(value: any) => {
+                          this.updateRecord({ TAGS: value });
+                        }}
+                      />
+                    </FormInput>
+                  </div>
                 </div>
               </div>
 

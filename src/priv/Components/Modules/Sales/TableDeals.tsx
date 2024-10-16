@@ -31,9 +31,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
-    if (columnName == "id_status") {
-      return <div style={{color: data.STATUS.color, borderColor: data.STATUS.color}} className='border rounded px-1'>{data.STATUS.name}</div>
-    } else if (columnName == "labels") {
+    if (columnName == "labels") {
       return (
         <div className='flex flex-row gap-2'>
           {data.LABELS.map((label, key) => {

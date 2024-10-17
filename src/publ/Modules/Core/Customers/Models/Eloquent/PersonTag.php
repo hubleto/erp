@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PersonTag extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'persons_tags';
+  public $table = 'person_tags';
 
   public function id_person(): BelongsTo
   {

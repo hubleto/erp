@@ -6,7 +6,7 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\Tag;
 
 class PersonTag extends \CeremonyCrmApp\Core\Model
 {
-  public string $table = 'persons_tags';
+  public string $table = 'person_tags';
   public string $eloquentClass = Eloquent\PersonTag::class;
 
   public array $relations = [

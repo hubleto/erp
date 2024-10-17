@@ -21,7 +21,7 @@ class ActivityType extends \CeremonyCrmApp\Core\Model
       ],
       'calendar_visibility' => [
         'type' => 'boolean',
-        'title' => 'Show in Calendar',
+        'title' => 'Shown in Calendar',
       ],
       'icon' => [
         'type' => 'varchar',

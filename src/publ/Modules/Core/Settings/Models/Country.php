@@ -18,7 +18,7 @@ class Country extends \CeremonyCrmApp\Core\Model
       'code' => [
         'type' => 'varchar',
         'byte_size' => '5',
-        'title' => 'Country Code',
+        'title' => 'Code',
       ],
     ]);
   }

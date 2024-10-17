@@ -65,7 +65,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
       ],
-      'date_close_expected' => [
+      'date_expected_close' => [
         'type' => 'date',
         'title' => 'Expected Close Date',
         'required' => false,
@@ -149,11 +149,11 @@ class Lead extends \CeremonyCrmApp\Core\Model
         "description" => "Price changed to ".$record["price"]." ".$record["CURRENCY"]["code"]
       ]);
     }
-    if ((string) $lead["date_close_expected"] != (string) $record["date_close_expected"]) {
+    if ((string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {
       $mLeadHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
-        "description" => "Expected Close Date changed to ".date("d.m.Y", strtotime($record["date_close_expected"]))
+        "description" => "Expected Close Date changed to ".date("d.m.Y", strtotime($record["date_expected_close"]))
       ]);
     }
 

@@ -153,7 +153,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                 <div className='border-l border-gray-200'></div>
                 <div className='grow'>
                   {this.inputWrapper('id_user')}
-                  {this.inputWrapper('date_close_expected')}
+                  {this.inputWrapper('date_expected_close')}
                   {this.inputWrapper('source_channel')}
                   {this.inputWrapper('note')}
                   <FormInput title='Labels'>

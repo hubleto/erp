@@ -6,7 +6,7 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\Tag;
 
 class CompanyTag extends \CeremonyCrmApp\Core\Model
 {
-  public string $table = 'companies_tags';
+  public string $table = 'company_tags';
   public string $eloquentClass = Eloquent\CompanyTag::class;
 
   public array $relations = [

@@ -29,7 +29,7 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
         "id_person" => $lead->id_person,
         "price" => $lead->price,
         "id_currency" => $lead->id_currency,
-        "date_close_expected" => $lead->date_close_expected,
+        "date_expected_close" => $lead->date_expected_close,
         "id_user" => $lead->id_user,
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,

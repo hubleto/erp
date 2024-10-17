@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CompanyTag extends \ADIOS\Core\Model\Eloquent
 {
-  public $table = 'companies_tags';
+  public $table = 'company_tags';
 
   public function id_company(): BelongsTo
   {

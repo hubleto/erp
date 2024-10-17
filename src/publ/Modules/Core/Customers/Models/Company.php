@@ -32,21 +32,22 @@ class Company extends \CeremonyCrmApp\Core\Model
       'street_line_1' => [
         'type' => 'varchar',
         'title' => 'Street Line 1',
-        'required' => true,
+        'required' => false,
       ],
       'street_line_2' => [
         'type' => 'varchar',
         'title' => 'Street Line 2',
+        'required' => false,
       ],
       'region' => [
         'type' => 'varchar',
         'title' => 'Region',
-        'required' => true,
+        'required' => false,
       ],
       'city' => [
         'type' => 'varchar',
         'title' => 'City',
-        'required' => true,
+        'required' => false,
       ],
       'id_country' => [
         'type' => 'lookup',
@@ -54,30 +55,32 @@ class Company extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'SET NULL',
         'foreignKeyOnDelete' => 'SET NULL',
         'title' => 'Country',
-        'required' => true,
+        'required' => false,
       ],
       'postal_code' => [
         'type' => 'varchar',
         'title' => 'Postal Code',
-        'required' => true,
+        'required' => false,
       ],
       'vat_id' => [
         'type' => 'varchar',
         'title' => 'VAT ID',
+        'required' => false,
       ],
       'company_id' => [
         'type' => 'varchar',
         'title' => 'Company ID',
+        'required' => false,
       ],
       'tax_id' => [
         'type' => 'varchar',
         'title' => 'Tax ID',
+        'required' => false,
       ],
       'note' => [
         'type' => 'text',
         'title' => 'Notes',
         'required' => false,
-        'show_column' => false,
       ],
       'date_created' => [
         'type' => 'date',

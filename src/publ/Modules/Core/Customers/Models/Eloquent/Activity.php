@@ -28,10 +28,6 @@ class Activity extends \ADIOS\Core\Model\Eloquent
   {
     return $this->id_user();
   }
-  public function TAGS(): HasMany
-  {
-    return $this->hasMany(ActivityTag::class, 'id_activity', 'id');
-  }
   public function ACTIVITY_TYPE(): HasOne
   {
     return $this->HasOne(ActivityType::class, 'id', 'id_activity_type');

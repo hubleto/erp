@@ -11,13 +11,16 @@ import TableBillingAccountServices from "../Billing/TableBillingAccountServices"
 import request from "adios/Request";
 import { TabPanel, TabView } from "primereact/tabview";
 import { InputTextarea } from "primereact/inputtextarea";
+import FormActivity from "./FormActivity";
 
 interface FormCompanyProps extends FormProps {
-  highlightIdBussinessAccounts: number
+  highlightIdBussinessAccounts: number,
+  highlightIdActivity: number,
 }
 
 interface FormCompanyState extends FormState {
   highlightIdBussinessAccounts: number,
+  highlightIdActivity: number,
   isInlineEditingBillingAccounts: boolean
 }
 
@@ -39,6 +42,7 @@ export default class FormCompany<P, S> extends Form<
     this.state = {
       ...this.getStateFromProps(props),
       highlightIdBussinessAccounts: this.props.highlightIdBussinessAccounts ?? 0,
+      highlightIdActivity: this.props.highlightIdActivity ?? 0,
       isInlineEditingBillingAccounts: false,
     }
   }
@@ -232,8 +236,44 @@ export default class FormCompany<P, S> extends Form<
                 </div>
               </div>
 
-              {showAdditional ? (
-              <div className="card h-" style={{ gridArea: "activities" }}>
+
+            </div>
+          </TabPanel>
+          {showAdditional ? (
+            <TabPanel header="Activities">
+              <div className=" list">
+                {R.ACTIVITIES && R.ACTIVITIES.length > 0 ?
+                  R.ACTIVITIES.map((activity, key) => {
+                    console.log(activity);
+
+                    return (
+                      <div className="list-item">
+                        <button
+                          onClick={() => {
+                            if (this.state.highlightIdActivity == activity.id) {
+                              this.setState({highlightIdActivity: 0} as FormCompanyState)
+                            } else this.setState({highlightIdActivity: activity.id} as FormCompanyState)
+                          }}
+                          className={"w-full btn-list-item text-left text-sm p-2 hover:bg-gray-50 " + (this.state.highlightIdBussinessAccounts == activity.id ? "font-bold bg-gray-50" : "font-medium")}
+                        > Open {activity.subject} {activity.date_start}
+                        </button>
+                        {this.state.highlightIdActivity == activity.id ?
+                          <div className="card card-body m-2">
+                            <FormActivity
+                              id={activity.id}
+                              onDeleteCallback={ () => {
+                                R.ACTIVITIES.splice(key, 1);
+                                this.setState({record: R});
+                              }}
+                            />
+                          </div>
+                        : null}
+                      </div>
+                    )
+                  })
+                : <span className="text">No activities</span>}
+              </div>
+              {/* <div className="card h-" style={{ gridArea: "activities" }}>
                 <div className="card-header">Company Activities</div>
                 <div className="card-body">
                   <InputTable
@@ -258,9 +298,11 @@ export default class FormCompany<P, S> extends Form<
                         columns: {
                           id_activity_type: { type: "lookup", title: "Type", model: "CeremonyCrmApp/Modules/Core/Settings/Models/ActivityType"},
                           subject: { type: "varchar", title: "Subject" },
-                          due_date: { type: "date", title: "Due Date" },
-                          due_time: { type: "time", title: "Due Time" },
-                          duration: { type: "time", title: "Duration" },
+                          date_start: { type: "date", title: "Start Date" },
+                          time_start: { type: "time", title: "Start Time" },
+                          date_end: { type: "date", title: "Date End" },
+                          time_end: { type: "time", title: "Time End" },
+                          all_day: { type: "boolean", title: "All day" },
                           completed: { type: "boolean", title: "Completed" },
                         },
                       }}
@@ -282,10 +324,9 @@ export default class FormCompany<P, S> extends Form<
                     </a>
                   ) : null}
                 </div>
-              </div>
-              ) : null}
-            </div>
-          </TabPanel>
+              </div> */}
+            </TabPanel>
+          ) : null}
           <TabPanel header="Billing Accounts">
             <div className="list">
 

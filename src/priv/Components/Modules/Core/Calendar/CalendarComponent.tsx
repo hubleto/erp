@@ -61,7 +61,6 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
     return (
       <div>
         <FullCalendar
-          dayCellClassNames={"overflow-hidden"}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           firstDay={1}
           headerToolbar={{

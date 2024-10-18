@@ -14,7 +14,6 @@ class Activity extends \CeremonyCrmApp\Core\Model
   public array $relations = [
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
-    'TAGS' => [ self::HAS_MANY, ActivityTag::class, 'id_activity', 'id' ],
     'ACTIVITY_TYPE' => [ self::HAS_ONE, ActivityType::class, 'id', 'id_activity_type'],
     // 'ATENDANCE' => [ self::HAS_MANY, Atendance::class, 'id_activity', 'id' ],
     // 'INVITEES' => [ self::BELONGS_TO, Account::class, 'id_account', 'id' ],
@@ -36,19 +35,29 @@ class Activity extends \CeremonyCrmApp\Core\Model
         'title' => 'Activity subject',
         'required' => true,
       ],
-      'due_date' => [
+      'date_start' => [
         'type' => 'date',
-        'title' => 'Due date',
+        'title' => 'Start Date',
         'required' => true,
       ],
-      'due_time' => [
+      'time_start' => [
         'type' => 'time',
-        'title' => 'Due time',
-        'required' => true,
+        'title' => 'Time Start',
+        'required' => false,
       ],
-      'duration' => [
+      'date_end' => [
+        'type' => 'date',
+        'title' => 'End Date',
+        'required' => false,
+      ],
+      'time_end' => [
         'type' => 'time',
-        'title' => 'Duration',
+        'title' => 'End Time',
+        'required' => false,
+      ],
+      'all_day' => [
+        'type' => 'boolean',
+        'title' => 'All day',
         'required' => false,
       ],
       'completed' => [

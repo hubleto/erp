@@ -119,8 +119,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'id_person' => $idPerson,
     ]); */
 
-    $mActivity = new Models\Activity($this->app);
-    $mActivity->install();
+    /* $mActivity = new Models\Activity($this->app);
+    $mActivity->install(); */
     /* $mActivity->eloquent->create([
       'id_company' => $idCompany,
       "id_user" => 1,

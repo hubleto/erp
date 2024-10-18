@@ -99,28 +99,16 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
         <div className='card mt-4'>
           <div className='card-header'>Activity Information</div>
           <div className='card-body'>
+            {this.inputWrapper('id_activity_type')}
             {this.inputWrapper('subject')}
             {this.inputWrapper('id_company')}
-            {this.inputWrapper('due_date')}
-            {this.inputWrapper('due_time')}
-            {this.inputWrapper('duration')}
+            {this.inputWrapper('date_start')}
+            {this.inputWrapper('time_start')}
+            {this.inputWrapper('date_end')}
+            {this.inputWrapper('time_end')}
+            {this.inputWrapper('all_day')}
             {showAdditional ? this.inputWrapper('completed') : null}
             {showAdditional ? this.inputWrapper('id_user') : null}
-
-            {/* vypnuté kvôli chybe s company tags */}
-            {/* <FormInput title='Categories'>
-              <InputTags2
-                {...this.getDefaultInputProps()}
-                value={this.state.record.TAGS}
-                model='CeremonyCrmApp/Modules/Core/Settings/Models/Tag'
-                targetColumn='id_activity'
-                sourceColumn='id_tag'
-                colorColumn='color'
-                onChange={(value: any) => {
-                  this.updateRecord({ TAGS: value });
-                }}
-              ></InputTags2>
-            </FormInput> */}
           </div>
         </div>
       </>

@@ -28,14 +28,6 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
     };
   }
 
-  normalizeRecord(record) {
-    if (record.TAGS) record.TAGS.map((item: any, key: number) => {
-      record.TAGS[key].id_activity = {_useMasterRecordId_: true};
-    });
-
-    return record;
-  }
-
   renderHeaderLeft(): JSX.Element {
     return <>
       {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}

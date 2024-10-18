@@ -12,6 +12,9 @@ import request from "adios/Request";
 import { TabPanel, TabView } from "primereact/tabview";
 import { InputTextarea } from "primereact/inputtextarea";
 import FormActivity from "./FormActivity";
+import DateTime from "adios/Inputs/DateTime";
+import Lookup from "adios/Inputs/Lookup";
+import Boolean from "adios/Inputs/Boolean";
 
 interface FormCompanyProps extends FormProps {
   highlightIdBussinessAccounts: number,
@@ -241,11 +244,9 @@ export default class FormCompany<P, S> extends Form<
           </TabPanel>
           {showAdditional ? (
             <TabPanel header="Activities">
-              <div className=" list">
+              <div className="list">
                 {R.ACTIVITIES && R.ACTIVITIES.length > 0 ?
                   R.ACTIVITIES.map((activity, key) => {
-                    console.log(activity);
-
                     return (
                       <div className="list-item">
                         <button
@@ -254,77 +255,131 @@ export default class FormCompany<P, S> extends Form<
                               this.setState({highlightIdActivity: 0} as FormCompanyState)
                             } else this.setState({highlightIdActivity: activity.id} as FormCompanyState)
                           }}
-                          className={"w-full btn-list-item text-left text-sm p-2 hover:bg-gray-50 " + (this.state.highlightIdBussinessAccounts == activity.id ? "font-bold bg-gray-50" : "font-medium")}
-                        > Open {activity.subject} {activity.date_start}
+                          className={"w-full btn-list-item text-left text-sm p-2 hover:bg-gray-50 " + (this.state.highlightIdActivity == activity.id ? "font-bold bg-gray-50" : "font-medium")}
+                        >
+                          <div className="flex grow justify-between">
+                            <div className="grow">
+                              <span className="break-all">{activity.subject}<br></br></span>
+                              <small className="text text-gray-400">
+                                Start date: {activity.date_start}
+                              </small>
+                            </div>
+                            <div className="flex justify-between gap-2">
+                              <span className="icon"
+                                onClick={()=> {this.setState({isInlineEditing: true})}}
+                              >
+                                <i className="fas fa-pencil-alt self-center"></i>
+                              </span>
+                              <span className="icon"><i className="fas fa-chevron-down self-center"></i></span>
+                            </div>
+                          </div>
                         </button>
                         {this.state.highlightIdActivity == activity.id ?
-                          <div className="card card-body m-2">
-                            <FormActivity
-                              id={activity.id}
-                              onDeleteCallback={ () => {
-                                R.ACTIVITIES.splice(key, 1);
-                                this.setState({record: R});
-                              }}
-                            />
-                          </div>
+                           <FormInput>
+                            <div className="p-2 w-full flex flex-row justify-between">
+                              <div className='w-1/2'>
+                                <div className="flex flex-col my-1">
+                                  <label className="input-label">Subject</label>
+                                  <InputVarchar
+                                    {...this.getDefaultInputProps()}
+                                    value={activity.subject}
+                                    placeholder={"Subject"}
+                                    onChange={(value: any) => this.updateRecord({ACTIVITIES: {[key]: {subject: value}}})}
+                                  />
+                                </div>
+                                <div className="flex flex-col my-1">
+                                  <label className="input-label">Date Start</label>
+                                  <DateTime
+                                    {...this.getDefaultInputProps()}
+                                    type="date"
+                                    value={activity.date_start}
+                                    placeholder={"DD.MM.YYYY"}
+                                    onChange={(value: any) => this.updateRecord({ACTIVITIES: {[key]: {date_start: value}}})}
+                                  />
+                                </div>
+                                <div className="flex flex-col my-1">
+                                  <label className="input-label">Time Start</label>
+                                  <DateTime
+                                    {...this.getDefaultInputProps()}
+                                    type="time"
+                                    value={activity.time_start}
+                                    placeholder={"HH:MM"}
+                                    onChange={(value: any) => this.updateRecord({ACTIVITIES: {[key]: {time_start: value}}})}
+                                  />
+                                </div>
+                                <div className="flex flex-col my-1">
+                                  <label className="input-label">Date End</label>
+                                  <DateTime
+                                    {...this.getDefaultInputProps()}
+                                    type="date"
+                                    value={activity.date_end}
+                                    placeholder={"DD.MM.YYYY"}
+                                    onChange={(value: any) => this.updateRecord({ACTIVITIES: {[key]: {date_end: value}}})}
+                                  />
+                                </div>
+                                <div className="flex flex-col my-1">
+                                  <label className="input-label">Time End</label>
+                                  <DateTime
+                                    {...this.getDefaultInputProps()}
+                                    type="time"
+                                    value={activity.time_end}
+                                    placeholder={"HH:MM"}
+                                    onChange={(value: any) => this.updateRecord({ACTIVITIES: {[key]: {time_end: value}}})}
+                                  />
+                                </div>
+                              </div>
+                              <div className='border-l border-gray-200'></div>
+                              <div className='w-1/2 ml-1'>
+                                <div className="flex flex-col my-1">
+                                  <label className="input-label">Activity Type</label>
+                                  <Lookup
+                                    {...this.getDefaultInputProps()}
+                                    model="CeremonyCrmApp/Modules/Core/Settings/Models/ActivityType"
+                                    value={activity.id_activity_type}
+                                    placeholder={"Activity type"}
+                                    onChange={(value: any) => this.updateRecord({ACTIVITIES: {[key]: {id_activity_type: value}}})}
+                                  />
+                                </div>
+                                <div className="flex flex-col my-1">
+                                  <label className="input-label">All day</label>
+                                  <Boolean
+                                    {...this.getDefaultInputProps()}
+                                    value={activity.all_day}
+                                    onChange={(value: any) => this.updateRecord({ACTIVITIES: {[key]: {all_day: value}}})}
+                                  />
+                                </div>
+                                <div className="flex flex-col my-1">
+                                  <label className="input-label">Completed</label>
+                                  <Boolean
+                                    {...this.getDefaultInputProps()}
+                                    value={activity.completed}
+                                    onChange={(value: any) => this.updateRecord({ACTIVITIES: {[key]: {completed: value}}})}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </FormInput>
                         : null}
                       </div>
                     )
                   })
                 : <span className="text">No activities</span>}
               </div>
-              {/* <div className="card h-" style={{ gridArea: "activities" }}>
-                <div className="card-header">Company Activities</div>
-                <div className="card-body">
-                  <InputTable
-                    uid={this.props.uid + "_table_activities_input"}
-                    {...this.getDefaultInputProps()}
-                    value={R.ACTIVITIES}
-                    onChange={(value: any) => {
-                      this.updateRecord({ ACTIVITIES: value });
-                    }}
-                  >
-                    <TableActivities
-                      uid={this.props.uid + "_table_activities"}
-                      context="Hello World"
-                      descriptionSource="props"
-                      description={{
-                        permissions: {
-                          canDelete: true,
-                          canCreate: true,
-                          canRead: true,
-                          canUpdate: true,
-                        },
-                        columns: {
-                          id_activity_type: { type: "lookup", title: "Type", model: "CeremonyCrmApp/Modules/Core/Settings/Models/ActivityType"},
-                          subject: { type: "varchar", title: "Subject" },
-                          date_start: { type: "date", title: "Start Date" },
-                          time_start: { type: "time", title: "Start Time" },
-                          date_end: { type: "date", title: "Date End" },
-                          time_end: { type: "time", title: "Time End" },
-                          all_day: { type: "boolean", title: "All day" },
-                          completed: { type: "boolean", title: "Completed" },
-                        },
-                      }}
-                    ></TableActivities>
-                  </InputTable>
-                  {this.state.isInlineEditing ? (
-                    <a
-                      role="button"
-                      onClick={() => {
-                        if (!R.ACTIVITIES) R.ACTIVITIES = [];
-                        R.ACTIVITIES.push({
-                          id_company: { _useMasterRecordId_: true },
-                          completed: false,
-                          id_user: false,
-                        });
-                        this.setState({ record: R });
-                      }}>
-                      + Add activity
-                    </a>
-                  ) : null}
-                </div>
-              </div> */}
+              {this.state.isInlineEditing ? (
+                <a
+                  role="button"
+                  onClick={() => {
+                    if (!R.ACTIVITIES) R.ACTIVITIES = [];
+                    R.ACTIVITIES.push({
+                      subject:  "New Activity",
+                      id_company:  { _useMasterRecordId_: true },
+                      id_user:  globalThis.app.idUser,
+                    });
+                    this.setState({ record: R});
+                  }}>
+                  + Add an activity
+                </a>
+              ) : null}
             </TabPanel>
           ) : null}
           <TabPanel header="Billing Accounts">
@@ -502,32 +557,6 @@ export default class FormCompany<P, S> extends Form<
                 : <span className="text-sm p-1">No Billing Accounts</span>
               }
             </div>
-
-            {/*<div>
-              {this.state.isInlineEditingBillingAccounts ?
-              <button className="btn btn-light flex justify-center"
-                onClick={() => {
-                  request.get(
-                    'api/v1/record/save',
-                    {
-                      model: 'CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount',
-                      id: input.id,
-                      record: { ...input, description: input.description },
-                    },
-                    (data: any) => {
-                      let record = {...this.state.record};
-                      R.BILLING_ACCOUNTS[key] = data.savedRecord;
-                      this.setState({record: record});
-                    }
-                  );
-                }}
-              ><i className="fa fa-floppy-disk self-center p-1"></i> Save</button>
-              :
-              <button className="btn btn-light flex justify-center"
-                onClick={() => {this.setState({isInlineEditingBillingAccounts: true} as FormCompanyState)}}
-              ><i className="fa fa-pencil-alt self-center p-1"></i></button>
-              }
-            </div> */}
 
             {this.state.isInlineEditing ? (
               <a

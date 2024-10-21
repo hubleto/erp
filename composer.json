@@ -6,7 +6,6 @@
         "symfony/yaml": "^5.4",
         "illuminate/pagination": "^11.10",
         "snipworks/php-smtp": "^2.0",
-        "phpoffice/phpspreadsheet": "^2.1",
         "wai-blue/adios": "@dev",
         "laravel/serializable-closure": "^1.3"
     },

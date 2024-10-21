@@ -4,10 +4,15 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import listPlugin from '@fullcalendar/list';
 import FormActivity, { FormActivityProps, FormActivityState } from "../Customers/FormActivity";
 import ModalSimple from "adios/ModalSimple";
+import { getUrlParam } from "adios/Helper";
 
 interface CalendarProps {
+  views?: string,
+  url?: string,
+  height?: any
 }
 
 interface CalendarState {
@@ -58,15 +63,19 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
   }
 
   render(): JSX.Element {
+    console.log(this.state.newTime);
+
     return (
       <div>
         <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          eventClassNames={"truncate cursor-pointer"}
+          height={this.props.height}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
           firstDay={1}
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: this.props.views ?? 'dayGridMonth,timeGridWeek,timeGridDay'
           }}
           initialView='dayGridMonth'
           eventTimeFormat={{
@@ -80,7 +89,7 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
           selectMirror={false}
           dayMaxEvents={true}
           weekends={true}
-          events={{url: "customers/activities/get"}}
+          events={{url: this.props.url}}
           //initialEvents={this.state.events} // alternatively, use the `events` setting to fetch from a feed
           //select={handleDateSelect}
           dateClick={(info) => this.reselvoNewDateTime(info)}
@@ -135,8 +144,9 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
               isInlineEditing={true}
               description={{
                 defaultValues: {
-                  due_date: this.state.newDate,
-                  due_time: this.state.newTime,
+                  date_start: this.state.newDate,
+                  time_start: this.state.newTime == "00:00:00" ? null : this.state.newTime,
+                  id_company: getUrlParam("recordId") > 0 ? getUrlParam("recordId") : null,
                 }
               }}
               showInModal={true}

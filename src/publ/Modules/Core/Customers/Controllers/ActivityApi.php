@@ -20,8 +20,15 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
       ->where("date_start", ">=", $dateStart)
       ->where("date_start", "<=", $dateEnd)
       ->where("activity_types.calendar_visibility", 1)
-      ->get()
     ;
+
+    if (isset($this->params["company"])) {
+      $aktivity->where("id_company", (int) $this->params["company"]);
+    }
+
+    $aktivity = $aktivity->get();
+
+    //var_dump($aktivity); exit;
     $transformacia = [];
 
     foreach ($aktivity as $key => $aktivita) {
@@ -33,7 +40,7 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
         if ($aktivita->time_end != null) $transformacia[$key]['end'] = $aktivita->date_end." ".$aktivita->time_end;
         else $transformacia[$key]['end'] = $aktivita->date_end;
       }
-      /* else $transformacia[$key]['allDay'] = true; */
+      $transformacia[$key]['allDay'] = $aktivita->all_day == 1 || $aktivita->time_start == null ? true : false;
       $transformacia[$key]['title'] = $aktivita->subject;
       $transformacia[$key]['backColor'] = $aktivita->color;
       $transformacia[$key]['color'] = $aktivita->color;

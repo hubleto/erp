@@ -7,6 +7,7 @@ use CeremonyCrmApp\Modules\Core\Customers\Models\Person;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Currency;
 use CeremonyCrmApp\Modules\Core\Settings\Models\DealStatus;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Pipeline;
+use CeremonyCrmApp\Modules\Core\Settings\Models\Setting;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealLabel;
@@ -141,10 +142,17 @@ class Deal extends \CeremonyCrmApp\Core\Model
 
   public function formDescribe(array $description = []): array
   {
+
+    $mSettings = new Setting($this->app);
+    $defaultPipeline =(int) $mSettings->eloquent
+      ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")
+      ->first()
+      ->value
+    ;
+
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
-    $description['defaultValues']['id_status'] = 1;
-    $description['defaultValues']['id_pipeline'] = null;
+    $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
     $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD'];
     return $description;

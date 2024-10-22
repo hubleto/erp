@@ -142,7 +142,6 @@ class Deal extends \CeremonyCrmApp\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-
     $mSettings = new Setting($this->app);
     $defaultPipeline =(int) $mSettings->eloquent
       ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")

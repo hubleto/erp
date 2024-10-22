@@ -31,6 +31,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/activities' => 'Activity',
         '/activities/get' => 'ActivityApi',
         '/tags' => 'Tag',
+        '/documents' => 'Documents',
+
       ]
     );
 

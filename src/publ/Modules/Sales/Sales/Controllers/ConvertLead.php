@@ -2,6 +2,7 @@
 
 namespace CeremonyCrmApp\Modules\Sales\Sales\Controllers;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\Setting;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Lead;
@@ -20,6 +21,13 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
     $mDealHistory = new DealHistory($this->app);
     $deal = null;
 
+    $mSettings = new Setting($this->app);
+    $defaultPipeline =(int) $mSettings->eloquent
+      ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")
+      ->first()
+      ->value
+    ;
+
     try {
       $lead = $mLead->eloquent->where("id", $leadId)->first();
 
@@ -34,7 +42,7 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
         "id_lead" => $lead->id,
-        "id_pipeline" => null,
+        "id_pipeline" => $defaultPipeline,
         "id_pipeline_step" => null
       ]);
 

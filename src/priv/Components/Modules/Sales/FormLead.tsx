@@ -138,7 +138,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   {showAdditional ?
                     <div className='w-full mt-2'>
                       {R.DEAL != null ?
-                      <a className='btn btn-primary' href={`deals/?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
+                      <a className='btn btn-primary' href={`deals?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
                         <span className='icon'><i className='fas fa-eye'></i></span>
                         <span className='text'>Go to the Deal</span>
                       </a>

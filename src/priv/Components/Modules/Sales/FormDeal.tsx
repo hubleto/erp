@@ -116,7 +116,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                   {showAdditional && R.id_lead != null ?
                     <div className='flex flex-row justify-between'>
                       {this.inputWrapper('id_lead')}
-                      <a className='btn btn-primary self-center' href={`../leads?recordId=${R.id_lead}`}>
+                      <a className='btn btn-primary self-center' href={`leads?recordId=${R.id_lead}`}>
                         <span className='icon'><i className='fas fa-eye'></i></span>
                       </a>
                     </div>

@@ -34,11 +34,13 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   renderCell(columnName: string, column: any, data: any, options: any) {
 
     if (columnName == "id_status") {
-      return (
-        <div className='flex flex-row '>
-          <div style={{color: data.STATUS.color, borderColor: data.STATUS.color}} className='border rounded px-1'>{data.STATUS.name}</div>
-        </div>
-      )
+      if ( data.STATUS && data.STATUS.color) {
+        return (
+          <div className='flex flex-row '>
+            <div style={{color: data.STATUS.color, borderColor: data.STATUS.color}} className='border rounded px-1'>{data.STATUS.name}</div>
+          </div>
+        )
+      }
     } else if (columnName == "labels") {
       return (
         <div className='flex flex-row gap-2'>

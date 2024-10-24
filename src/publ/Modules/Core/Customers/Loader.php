@@ -67,74 +67,44 @@ class Loader extends \CeremonyCrmApp\Core\Module
     }
   }
 
-  public function generateTestData()
-  {
+  public function install() {
     $mCompany = new Models\Company($this->app);
     $mCompany->install();
-    /* $idCompany = $mCompany->eloquent->create([
-      'name' => 'Test Company Ltd.',
-      'street_line_1' => 'Street 123',
-      'street_line_2' => 'Street 123',
-      'region' => 'Trnavský kraj',
-      'city' => 'Pieštany',
-      'postal_code' => '919 87',
-      'id_country' => 6,
-      'vat_id' => '123456',
-      'company_id' => '987456',
-      'tax_id' => '123987',
-      'note' => 'My First Company',
-      'is_active' => true,
-    ])->id; */
 
     $mPerson = new Models\Person($this->app);
     $mPerson->install();
-    /* $idPerson = $mPerson->eloquent->create([
-      'first_name' => 'John',
-      'last_name' => 'Smith',
-      'id_company' => 1,
-      'is_primary' => true,
-      'is_active' => true,
-    ])->id; */
 
     $mPersonContact = new Models\Contact($this->app);
     $mPersonContact->install();
-    /* $mPersonContact->eloquent->create([
-      'value' => '+4216489616',
-      'type' => 'number',
-      'id_person' => $idPerson,
-    ]);
-    $mPersonContact->eloquent->create([
-      'value' => 'john@gmail.com',
-      'type' => 'email',
-      'id_person' => $idPerson,
-    ]); */
 
     $mAddress = new Models\Address($this->app);
     $mAddress->install();
-    /* $mAddress->eloquent->create([
-      'street_line_1' => 'Street 123',
-      'street_line_2' => 'Street 123',
-      'region' => 'Trnavský kraj',
-      'city' => 'Pieštany',
-      'postal_code' => '919 87',
-      'id_country' => 3,
-      'id_person' => $idPerson,
-    ]); */
-
-    /* $mActivity = new Models\Activity($this->app);
-    $mActivity->install(); */
-    /* $mActivity->eloquent->create([
-      'id_company' => $idCompany,
-      "id_user" => 1,
-      "subject" => "Test Activity",
-      "due_date" => date("Y-m-d"),
-      "due_time" => "11:00:00",
-      "duration" => "01:00:00",
-      "completed" => 0,
-    ]); */
 
     $mTag = new Tag($this->app);
     $mTag->install();
+
+    $mActivityTag = new Models\ActivityTag($this->app);
+    $mActivityTag->install();
+
+    $mPersonTag = new Models\PersonTag($this->app);
+    $mPersonTag->install();
+
+    $mCompanyTag = new Models\CompanyTag($this->app);
+    $mCompanyTag->install();
+
+    $mAtendance = new Models\Atendance($this->app);
+    $mAtendance->install();
+
+    // pridat zaznamy do Core/Settings/Models/UserPermission
+    // pridat zaznamy do Core/Settings/Models/UserRolePermission
+    // pridat zaznamy do Core/Settings/Models/Setting (default values)
+  }
+
+  public function generateTestData()
+  {
+
+    $mTag = new Tag($this->app);
+
     $mTag->eloquent->create([
       'name' => "Category 1",
     ]);
@@ -144,31 +114,5 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mTag->eloquent->create([
       'name' => "Category 3",
     ]);
-
-    $mActivityTag = new Models\ActivityTag($this->app);
-    $mActivityTag->install();
-    /* $mActivityTag->eloquent->create([
-      'id_activity' => 1,
-      'id_tag' => 1,
-    ]); */
-    $mPersonTag = new Models\PersonTag($this->app);
-    $mPersonTag->install();
-    /* $mPersonTag->eloquent->create([
-      'id_person' => $idPerson,
-      'id_tag' => 1,
-    ]); */
-    $mCompanyTag = new Models\CompanyTag($this->app);
-    $mCompanyTag->install();
-    /* $mCompanyTag->eloquent->create([
-      'id_company' => $idCompany,
-      'id_tag' => 1,
-    ]); */
-
-    $mAtendance = new Models\Atendance($this->app);
-    $mAtendance->install();
-    /* $mAtendance->eloquent->create([
-      'id_user' => 1,
-      'id_activity' => 1,
-    ]); */
   }
 }

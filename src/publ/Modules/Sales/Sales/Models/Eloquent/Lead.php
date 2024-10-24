@@ -17,36 +17,28 @@ class Lead extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'leads';
 
-  public function DEAL(): HasOne
-  {
+  public function DEAL(): HasOne {
     return $this->hasOne(Deal::class, 'id_lead', 'id' );
   }
-  public function COMPANY(): HasOne
-  {
+  public function COMPANY(): HasOne {
     return $this->hasOne(Company::class, 'id', 'id_company');
   }
-  public function USER(): BelongsTo
-  {
+  public function USER(): BelongsTo {
     return $this->belongsTo(User::class, 'id_user','id' );
   }
-  public function PERSON(): HasOne
-  {
+  public function PERSON(): HasOne {
     return $this->hasOne(Person::class, 'id', 'id_person');
   }
-  public function CURRENCY(): HasOne
-  {
+  public function CURRENCY(): HasOne {
     return $this->hasOne(Currency::class, 'id', 'id_currency');
   }
-  public function STATUS(): HasOne
-  {
+  public function STATUS(): HasOne {
     return $this->hasOne(LeadStatus::class, 'id', 'id_status');
   }
-  public function HISTORY(): HasMany
-  {
+  public function HISTORY(): HasMany {
     return $this->hasMany(LeadHistory::class, 'id_lead', 'id');
   }
-  public function LABELS(): HasMany
-  {
+  public function LABELS(): HasMany {
     return $this->hasMany(LeadLabel::class, 'id_lead', 'id');
   }
 }

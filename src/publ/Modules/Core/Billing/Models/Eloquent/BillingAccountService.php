@@ -12,16 +12,10 @@ class BillingAccountService extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'billing_accounts_services';
 
-  public function id_billing_account(): BelongsTo
-  {
+  public function BILLING_ACCOUNT(): BelongsTo {
     return $this->belongsTo(BillingAccount::class, 'id_billing_account','id');
   }
-  public function id_service(): BelongsTo
-  {
+  public function SERVICE(): BelongsTo {
     return $this->belongsTo(Service::class, 'id_service', 'id');
-  }
-
-  public function SERVICE() {
-    return $this->id_service();
   }
 }

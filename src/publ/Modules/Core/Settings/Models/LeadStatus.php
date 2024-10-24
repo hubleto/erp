@@ -32,15 +32,10 @@ class LeadStatus extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Lead Statuses';
+    $description['ui']['title'] = 'Lead Statuses';
+    $description['ui']['addButtonText'] = 'Add Lead Status';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
-
-  /* public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
-  {
-    $query = parent::prepareLoadRecordQuery();
-    $query->orderBy("order", "asc");
-    return $query;
-  } */
-
 }

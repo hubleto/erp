@@ -35,24 +35,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
       ]
     );
-
-    /* $regexAccount = '\\/accounts\\/(\d+)';
-    $router->addRoutingGroup(
-      'customers' . $regexAccount,
-      'CeremonyCrmApp/Modules/Core/Customers/Controllers',
-      'CeremonyCrmApp/Modules/Core/Customers/Views',
-      [
-        'idAccount' => '$1',
-      ],
-      [
-        '' => 'Dashboard',
-        '/accounts' => 'Accounts',
-        '/companies' => 'Companies',
-        '/persons' => 'Persons',
-        '/persons-table' => 'Person/PersonsTable',
-      ]
-    ); */
-
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
@@ -82,9 +64,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     $mTag = new Tag($this->app);
     $mTag->install();
-
-    $mActivityTag = new Models\ActivityTag($this->app);
-    $mActivityTag->install();
 
     $mPersonTag = new Models\PersonTag($this->app);
     $mPersonTag->install();

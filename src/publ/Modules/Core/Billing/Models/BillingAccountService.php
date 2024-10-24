@@ -11,6 +11,7 @@ class BillingAccountService extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'SERVICE' => [ self::BELONGS_TO, Service::class, 'id_service', 'id' ],
+    'BILLING_ACCOUNT' => [ self::BELONGS_TO, BillingAccount::class, 'id_billing_account', 'id' ],
   ];
 
   public function columns(array $columns = []): array
@@ -38,8 +39,8 @@ class BillingAccountService extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['ui']['title'] = 'Billing Account';
-    $description['ui']['addButtonText'] = 'Add Billing Account';
+    $description['ui']['title'] = 'Connected Services';
+    $description['ui']['addButtonText'] = 'Connect a Service';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
     return $description;

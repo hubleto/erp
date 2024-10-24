@@ -27,7 +27,11 @@ class Tag extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Tags';
+    $description['ui']['title'] = 'Tags';
+    $description['ui']['addButtonText'] = 'Add Tag';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
+
     return $description;
   }
 

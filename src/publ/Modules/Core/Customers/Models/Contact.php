@@ -7,7 +7,6 @@ class Contact extends \CeremonyCrmApp\Core\Model
   public string $table = 'contacts';
   public string $eloquentClass = Eloquent\Contact::class;
   public ?string $lookupSqlValue = '{%TABLE%}.value';
-  //public ?string $lookupSqlValue = 'concat({%TABLE%}.value, ' - ', {%TABLE%}.type)';
 
   public array $relations = [
     'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],
@@ -42,7 +41,9 @@ class Contact extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::tableDescribe();
     $description['title'] = 'Contacts';
+    $description['ui']['addButtonText'] = 'Add Company';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
-
 }

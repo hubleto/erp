@@ -33,6 +33,7 @@ class Pipeline extends \CeremonyCrmApp\Core\Model
     $description = parent::tableDescribe();
     $description['ui']['title'] = 'Pipelines';
     $description['ui']['addButtonText'] = 'Add Pipeline';
+    $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
     return $description;
   }

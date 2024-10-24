@@ -12,17 +12,11 @@ class CompanyTag extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'company_tags';
 
-  public function id_company(): BelongsTo
-  {
-    return $this->belongsTo(Company::class, 'id_company', 'id');
-  }
-  public function id_tag(): BelongsTo
-  {
+  public function TAG(): BelongsTo {
     return $this->belongsTo(Tag::class, 'id_tag', 'id');
   }
-
-  public function TAG() {
-    return $this->id_tag();
+  public function COMPANY(): BelongsTo {
+    return $this->belongsTo(Company::class, 'id_company', 'id');
   }
 
 }

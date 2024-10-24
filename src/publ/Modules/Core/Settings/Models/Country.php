@@ -27,6 +27,9 @@ class Country extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::tableDescribe();
     $description['ui']['title'] = 'Countries';
+    $description['ui']['addButtonText'] = 'Add Country';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
 

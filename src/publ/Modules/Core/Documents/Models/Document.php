@@ -31,7 +31,7 @@ class Document extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::tableDescribe();
     $description['ui']['title'] = 'Documents';
-    $description['ui']['addButtonText'] = 'Add Documents';
+    $description['ui']['addButtonText'] = 'Add Document';
     $description['ui']['showHeader'] = true;
     return $description;
   }

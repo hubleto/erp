@@ -91,7 +91,10 @@ class User extends \ADIOS\Models\User
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Users';
+    $description['ui']['title'] = 'Users';
+    $description['ui']['addButtonText'] = 'Add User';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
 

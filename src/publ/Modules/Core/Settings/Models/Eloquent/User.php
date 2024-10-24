@@ -14,18 +14,15 @@ class User extends \ADIOS\Core\Model\Eloquent
    */
   public $table = 'users';
 
-  public function id_active_profile(): BelongsTo
-  {
+  public function id_active_profile(): BelongsTo {
     return $this->belongsTo(Profile::class, 'id_active_profile', 'id');
   }
 
-  public function PROFILE(): BelongsTo
-  {
+  public function PROFILE(): BelongsTo {
     return $this->id_active_profile();
   }
 
-  public function ROLES(): BelongsToMany
-  {
+  public function ROLES(): BelongsToMany {
     return $this->belongsToMany(
       UserRole::class,
       'user_has_roles',

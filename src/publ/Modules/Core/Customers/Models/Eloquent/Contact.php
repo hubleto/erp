@@ -9,13 +9,8 @@ class Contact extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'contacts';
 
-  public function id_person(): BelongsTo
-  {
-    return $this->belongsTo(Person::class, 'id_person');
-  }
-
   public function PERSON() {
-    return $this->id_person();
+    return $this->belongsTo(Person::class, 'id_person');
   }
 
 }

@@ -12,12 +12,10 @@ class DealLabel extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'deal_labels';
 
-  public function DEAL(): BelongsTo
-  {
+  public function DEAL(): BelongsTo {
     return $this->belongsTo(Deal::class, 'id_deal', 'id');
   }
-  public function LABEL(): BelongsTo
-  {
+  public function LABEL(): BelongsTo {
     return $this->belongsTo(Label::class, 'id_label', 'id');
   }
 

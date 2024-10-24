@@ -28,6 +28,8 @@ class Currency extends \CeremonyCrmApp\Core\Model
     $description = parent::tableDescribe();
     $description['ui']['title'] = 'Currencies';
     $description['ui']['addButtonText'] = 'Add currency';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
 

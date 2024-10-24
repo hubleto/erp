@@ -4,6 +4,7 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 use CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccount;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Country;
+use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
 class Company extends \CeremonyCrmApp\Core\Model
@@ -15,6 +16,7 @@ class Company extends \CeremonyCrmApp\Core\Model
   public array $relations = [
     'PERSONS' => [ self::HAS_MANY, Person::class, 'id_company' ],
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
+    'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, 'id_company' ],
     'BILLING_ACCOUNTS' => [ self::HAS_MANY, BillingAccount::class, 'id_company' ],
     'ACTIVITIES' => [ self::HAS_MANY, Activity::class, 'id_company' ],
@@ -52,7 +54,7 @@ class Company extends \CeremonyCrmApp\Core\Model
       'id_country' => [
         'type' => 'lookup',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/Country',
-        'foreignKeyOnUpdate' => 'SET NULL',
+        'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'title' => 'Country',
         'required' => false,
@@ -94,6 +96,15 @@ class Company extends \CeremonyCrmApp\Core\Model
         'required' => false,
         'default' => 1,
       ],
+      'id_user' => [
+        'type' => 'lookup',
+        'title' => 'Owner',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
+        'required' => false,
+        'default' => 1,
+      ]
 
     ]));
   }
@@ -105,7 +116,16 @@ class Company extends \CeremonyCrmApp\Core\Model
     $description['ui']['addButtonText'] = 'Add Company';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
+    unset($description['columns']['street_line_1']);
+    unset($description['columns']['street_line_2']);
+    unset($description['columns']['city']);
+    unset($description['columns']['postal_code']);
+    unset($description['columns']['region']);
+    unset($description['columns']['id_country']);
     unset($description['columns']['note']);
+    unset($description['columns']['note']);
+    unset($description['columns']['note']);
+    unset($description['columns']['is_active']);
     return $description;
   }
 

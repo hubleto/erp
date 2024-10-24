@@ -11,6 +11,7 @@ class CompanyTag extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'TAG' => [ self::BELONGS_TO, Tag::class, 'id_tag', 'id' ],
+    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
   ];
 
   public function columns(array $columns = []): array
@@ -39,6 +40,9 @@ class CompanyTag extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::tableDescribe();
     $description['title'] = 'Company Categories';
+    $description['ui']['addButtonText'] = 'Add Company';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
 

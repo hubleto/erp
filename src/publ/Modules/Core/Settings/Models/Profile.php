@@ -23,7 +23,10 @@ class Profile extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Profiles';
+    $description['ui']['title'] = 'Profiles';
+    $description['ui']['addButtonText'] = 'Add Profile';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
 

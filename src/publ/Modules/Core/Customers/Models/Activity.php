@@ -15,8 +15,6 @@ class Activity extends \CeremonyCrmApp\Core\Model
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'ACTIVITY_TYPE' => [ self::HAS_ONE, ActivityType::class, 'id', 'id_activity_type'],
-    // 'ATENDANCE' => [ self::HAS_MANY, Atendance::class, 'id_activity', 'id' ],
-    // 'INVITEES' => [ self::BELONGS_TO, Account::class, 'id_account', 'id' ],
   ];
 
   public function columns(array $columns = []): array

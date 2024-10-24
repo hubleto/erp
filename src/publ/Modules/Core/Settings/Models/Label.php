@@ -27,8 +27,10 @@ class Label extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Labels';
+    $description['ui']['title'] = 'Labels';
+    $description['ui']['addButtonText'] = 'Add Label';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
-
 }

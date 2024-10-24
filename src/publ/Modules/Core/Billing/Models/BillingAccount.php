@@ -43,17 +43,4 @@ class BillingAccount extends \CeremonyCrmApp\Core\Model
     $description['ui']['showFooter'] = false;
     return $description;
   }
-
-  /* public function formDescribe(array $description = []): array
-  {
-    $description = parent::formDescribe();
-    $description['includeRelations'] = ['SERVICES', 'COMPANY'];
-    return $description;
-  } */
-
-  /* public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
-  {
-    $query = parent::prepareLoadRecordQuery(['SERVICES', 'COMPANY'],0);
-    return $query;
-  } */
 }

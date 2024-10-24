@@ -2,9 +2,6 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Controllers;
 
-use DateInterval;
-use DateTime;
-
 class ActivityApi extends \CeremonyCrmApp\Core\Controller {
 
   public function renderJson(): ?array {
@@ -27,8 +24,6 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
     }
 
     $aktivity = $aktivity->get();
-
-    //var_dump($aktivity); exit;
     $transformacia = [];
 
     foreach ($aktivity as $key => $aktivita) {

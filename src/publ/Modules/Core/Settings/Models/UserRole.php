@@ -23,4 +23,14 @@ class UserRole extends \CeremonyCrmApp\Core\Model
       ],
     ]);
   }
+
+  public function tableDescribe(array $description = []): array
+  {
+    $description = parent::tableDescribe();
+    $description['ui']['title'] = 'User Roles';
+    $description['ui']['addButtonText'] = 'Add User Role';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
+    return $description;
+  }
 }

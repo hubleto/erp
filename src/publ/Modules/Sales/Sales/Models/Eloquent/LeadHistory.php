@@ -17,8 +17,7 @@ class LeadHistory extends \ADIOS\Core\Model\Eloquent
   public $table = 'lead_histories';
 
 
-  public function LEAD(): BelongsTo
-  {
+  public function LEAD(): BelongsTo {
     return $this->belongsTo(Lead::class, 'id_lead', 'id');
   }
 }

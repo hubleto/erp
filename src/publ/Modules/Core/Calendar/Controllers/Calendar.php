@@ -7,7 +7,6 @@ class Calendar extends \CeremonyCrmApp\Core\Controller {
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'calendar', 'content' => $this->app->translate('Calendar') ],
-      [ 'url' => '', 'content' => $this->app->translate('Calendar') ],
     ]);
   }
 

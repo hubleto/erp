@@ -11,8 +11,7 @@ class PipelineStep extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'pipeline_steps';
 
-  public function PIPELINE(): BelongsTo
-  {
+  public function PIPELINE(): BelongsTo {
     return $this->belongsTo(Pipeline::class, 'id_pipeline','id' );
   }
 

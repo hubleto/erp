@@ -11,6 +11,7 @@ class PersonTag extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'TAG' => [ self::BELONGS_TO, Tag::class, 'id_tag', 'id' ],
+    'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],
   ];
 
   public function columns(array $columns = []): array

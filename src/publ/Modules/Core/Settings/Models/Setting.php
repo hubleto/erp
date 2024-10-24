@@ -50,8 +50,10 @@ class Setting extends \CeremonyCrmApp\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    $description['title'] = 'Settings';
+    $description['ui']['title'] = 'Settings';
+    $description['ui']['addButtonText'] = 'Add Setting';
+    $description['ui']['showHeader'] = true;
+    $description['ui']['showFooter'] = false;
     return $description;
   }
-
 }

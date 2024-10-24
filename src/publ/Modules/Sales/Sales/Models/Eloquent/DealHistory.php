@@ -17,8 +17,7 @@ class DealHistory extends \ADIOS\Core\Model\Eloquent
   public $table = 'deal_histories';
 
 
-  public function DEAL(): BelongsTo
-  {
+  public function DEAL(): BelongsTo {
     return $this->belongsTo(Deal::class, 'id_lead', 'id');
   }
 }

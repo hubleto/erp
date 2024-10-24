@@ -19,36 +19,28 @@ class Deal extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'deals';
 
-  public function COMPANY(): HasOne
-  {
+  public function COMPANY(): HasOne {
     return $this->hasOne(Company::class, 'id', 'id_company');
   }
-  public function PIPELINE(): HasOne
-  {
+  public function PIPELINE(): HasOne {
     return $this->hasOne(Pipeline::class, 'id', 'id_pipeline');
   }
-  public function LEAD(): BelongsTo
-  {
+  public function LEAD(): BelongsTo {
     return $this->belongsTo(Lead::class, 'id_lead','id' );
   }
-  public function USER(): BelongsTo
-  {
+  public function USER(): BelongsTo {
     return $this->belongsTo(User::class, 'id_user','id' );
   }
-  public function PERSON(): HasOne
-  {
+  public function PERSON(): HasOne {
     return $this->hasOne(Person::class, 'id', 'id_person');
   }
-  public function CURRENCY(): HasOne
-  {
+  public function CURRENCY(): HasOne {
     return $this->hasOne(Currency::class, 'id', 'id_currency');
   }
-  public function HISTORY(): HasMany
-  {
+  public function HISTORY(): HasMany {
     return $this->hasMany(DealHistory::class, 'id_deal', 'id');
   }
-  public function LABELS(): HasMany
-  {
+  public function LABELS(): HasMany {
     return $this->hasMany(DealLabel::class, 'id_deal', 'id');
   }
 }

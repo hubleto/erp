@@ -2,6 +2,7 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\Permission;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Tag;
 
 class Loader extends \CeremonyCrmApp\Core\Module
@@ -71,9 +72,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mCompanyTag = new Models\CompanyTag($this->app);
     $mCompanyTag->install();
 
-    $mAtendance = new Models\Atendance($this->app);
-    $mAtendance->install();
-
     // pridat zaznamy do Core/Settings/Models/UserPermission
     // pridat zaznamy do Core/Settings/Models/UserRolePermission
     // pridat zaznamy do Core/Settings/Models/Setting (default values)
@@ -93,5 +91,53 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mTag->eloquent->create([
       'name' => "Category 3",
     ]);
+  }
+
+  public function createPermissions()
+  {
+    $mPermission = new Permission($this->app);
+    $permissions = [
+      "Modules/Core/Customers/Models/Activity:Create",
+      "Modules/Core/Customers/Models/Activity:Read",
+      "Modules/Core/Customers/Models/Activity:Update",
+      "Modules/Core/Customers/Models/Activity:Delete",
+      "Modules/Core/Customers/Models/Address:Create",
+      "Modules/Core/Customers/Models/Address:Read",
+      "Modules/Core/Customers/Models/Address:Update",
+      "Modules/Core/Customers/Models/Address:Delete",
+      "Modules/Core/Customers/Models/Company:Create",
+      "Modules/Core/Customers/Models/Company:Read",
+      "Modules/Core/Customers/Models/Company:Update",
+      "Modules/Core/Customers/Models/Company:Delete",
+      "Modules/Core/Customers/Models/CompanyTag:Create",
+      "Modules/Core/Customers/Models/CompanyTag:Read",
+      "Modules/Core/Customers/Models/CompanyTag:Update",
+      "Modules/Core/Customers/Models/CompanyTag:Delete",
+      "Modules/Core/Customers/Models/Contact:Create",
+      "Modules/Core/Customers/Models/Contact:Read",
+      "Modules/Core/Customers/Models/Contact:Update",
+      "Modules/Core/Customers/Models/Contact:Delete",
+      "Modules/Core/Customers/Models/Person:Create",
+      "Modules/Core/Customers/Models/Person:Read",
+      "Modules/Core/Customers/Models/Person:Update",
+      "Modules/Core/Customers/Models/Person:Delete",
+      "Modules/Core/Customers/Models/PersonTag:Create",
+      "Modules/Core/Customers/Models/PersonTag:Read",
+      "Modules/Core/Customers/Models/PersonTag:Update",
+      "Modules/Core/Customers/Models/PersonTag:Delete",
+      "Modules/Core/Customers/Controllers/Activity",
+      "Modules/Core/Customers/Controllers/Address",
+      "Modules/Core/Customers/Controllers/Company",
+      "Modules/Core/Customers/Controllers/CompanyTag",
+      "Modules/Core/Customers/Controllers/Contact",
+      "Modules/Core/Customers/Controllers/Person",
+      "Modules/Core/Customers/Controllers/PersonTag",
+    ];
+
+    foreach ($permissions as $key => $permission_string) {
+      $mPermission->eloquent->create([
+        "permission_string" => $permission_string
+      ]);
+    }
   }
 }

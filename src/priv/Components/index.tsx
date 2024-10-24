@@ -27,6 +27,7 @@ import CoreCustomersTableActivities from "./Modules/Core/Customers/TableActiviti
 import CoreCustomersTableAddresses from "./Modules/Core/Customers/TableAddresses"
 import CoreCustomersTableContacts from "./Modules/Core/Customers/TableContacts"
 import CoreSettingsTablePipelines from "./Modules/Core/Settings/TablePipelines"
+import CoreSettingsTableUserRoles from "./Modules/Core/Settings/TableUserRoles"
 
 //billing
 import CoreBillingTableBillingAccountService from "./Modules/Core/Billing/TableBillingAccountServices"
@@ -91,6 +92,7 @@ app.registerReactComponent('CoreCustomersTableAddresses', CoreCustomersTableAddr
 app.registerReactComponent('CoreCustomersTableContacts', CoreCustomersTableContacts);
 app.registerReactComponent('CoreSandboxTableCompanies', CoreSandboxTableCompanies);
 app.registerReactComponent('CoreSettingsTablePipelines', CoreSettingsTablePipelines);
+app.registerReactComponent('CoreSettingsTableUserRoles', CoreSettingsTableUserRoles);
 //billing
 app.registerReactComponent('CoreBillingTableBillingAccountService', CoreBillingTableBillingAccountService);
 //sles

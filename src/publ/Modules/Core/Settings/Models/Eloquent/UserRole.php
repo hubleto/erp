@@ -9,9 +9,8 @@ class UserRole extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'user_roles';
 
-  // public function REPORT(): BelongsTo
-  // {
-  //   return $this->belongsTo(\EMonitorApp\Models\Eloquent\Report::class, 'id_report', 'id')->orderBy('name', 'asc');
-  // }
+  public function PERMISSIONS(): HasMany {
+    return $this->hasMany(RolePermission::class, 'id_role', 'id' );
+  }
 
 }

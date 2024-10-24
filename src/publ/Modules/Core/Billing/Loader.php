@@ -2,6 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Billing;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\Permission;
+
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
@@ -45,7 +47,27 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'id_company' => 1,
       "description" => "Test Billing Account"
     ])->id; */
+  }
 
+  public function createPermissions()
+  {
+    $mPermission = new Permission($this->app);
+    $permissions = [
+      "Modules/Core/Billing/Models/BillingAccount:Create",
+      "Modules/Core/Billing/Models/BillingAccount:Read",
+      "Modules/Core/Billing/Models/BillingAccount:Update",
+      "Modules/Core/Billing/Models/BillingAccount:Delete",
+      "Modules/Core/Billing/Models/BillingAccountService:Create",
+      "Modules/Core/Billing/Models/BillingAccountService:Read",
+      "Modules/Core/Billing/Models/BillingAccountService:Update",
+      "Modules/Core/Billing/Models/BillingAccountService:Delete",
+      "Modules/Core/Billing/Controllers/BillingAccount",
+    ];
 
+    foreach ($permissions as $key => $permission_string) {
+      $mPermission->eloquent->create([
+        "permission_string" => $permission_string
+      ]);
+    }
   }
 }

@@ -3,7 +3,7 @@
 namespace CeremonyCrmApp\Core;
 
 use CeremonyCrmApp\Modules\Core\Settings\Models\ {
-  Profile, User, UserRole, UserHasRole
+  Permission, Profile, RolePermission, User, UserRole, UserHasRole
 };
 
 class Account {
@@ -107,11 +107,15 @@ class Account {
     $mUser = new User($this->app);
     $mUserRole = new UserRole($this->app);
     $mUserHasRole = new UserHasRole($this->app);
+    $mPermission = new Permission($this->app);
+    $mRolePermission = new RolePermission($this->app);
 
     $mProfile->dropTableIfExists()->install();
     $mUser->dropTableIfExists()->install();
     $mUserRole->dropTableIfExists()->install();
     $mUserHasRole->dropTableIfExists()->install();
+    $mPermission->dropTableIfExists()->install();
+    $mRolePermission->dropTableIfExists()->install();
 
     $idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
 
@@ -179,6 +183,14 @@ class Account {
     });
   }
 
+  public function createPermissions() {
+    $registeredModules = $this->app->getRegisteredModules();
+    array_walk($registeredModules, function($moduleClass) {
+      $module = new $moduleClass($this->app);
+      $module->createPermissions();
+    });
+  }
+
   public function createDevelScripts()
   {
     @mkdir($this->accountRootFolder . '/' . $this->uid . '/devel');
@@ -192,7 +204,7 @@ class Account {
   public function getDatabaseUser(): string {
     $dbUser = \ADIOS\Core\Helper::str2url($this->companyName);
     $dbUser = str_replace('-', '_', $dbUser);
-    $dbUser = 
+    $dbUser =
       'usr_' . $dbUser
       . ($this->randomize ? '_' . substr(md5(date('YmdHis').rand(1, 10000)), 1, 5) : '')
     ;

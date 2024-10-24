@@ -31,4 +31,7 @@ class Module {
   public function generateTestData() {
     // to be overriden
   }
+  public function createPermissions() {
+    // to be overriden
+  }
 }

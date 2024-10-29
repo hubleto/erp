@@ -23,14 +23,21 @@ class UserRole extends \CeremonyCrmApp\Core\Model
     return parent::columns([
       'role' => [
         'type' => 'varchar',
+        'required' => true,
         'title' => $this->translate('Role')
       ],
+      'grant_all' => [
+        'type' => 'boolean',
+        'title' => $this->translate('Grand all permissions')
+      ],
+
     ]);
   }
 
   public function tableDescribe(array $description = []): array
   {
-    $description = parent::tableDescribe();
+    $description["model"] = $this->fullName;
+    $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'User Roles';
     $description['ui']['addButtonText'] = 'Add User Role';
     $description['ui']['showHeader'] = true;

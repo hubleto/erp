@@ -39,7 +39,8 @@ class Person extends \CeremonyCrmApp\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description = parent::tableDescribe();
+    $description["model"] = $this->fullName;
+    $description = parent::tableDescribe($description);
     $description['title'] = 'Persons';
     return $description;
   }

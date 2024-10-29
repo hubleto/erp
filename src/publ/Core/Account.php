@@ -127,11 +127,9 @@ class Account {
       'id_active_profile' => $idProfile,
     ])->id;
 
-    $idRoleAdministrator = $mUserRole->eloquent->create(['role' => 'Administrator'])->id;
+    $idRoleAdministrator = $mUserRole->eloquent->create(['role' => 'Administrator', 'grant_all' => 1])->id;
 
     $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
-
-
   }
 
   public function createFoldersAndFiles()

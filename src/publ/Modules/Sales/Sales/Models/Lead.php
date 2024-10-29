@@ -106,7 +106,8 @@ class Lead extends \CeremonyCrmApp\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description = parent::tableDescribe();
+    $description["model"] = $this->fullName;
+    $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Leads';
     $description['ui']['addButtonText'] = 'Add Lead';
     $description['ui']['showHeader'] = true;

@@ -53,20 +53,20 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     $mPermission = new Permission($this->app);
     $permissions = [
-      "Modules/Core/Billing/Models/BillingAccount:Create",
-      "Modules/Core/Billing/Models/BillingAccount:Read",
-      "Modules/Core/Billing/Models/BillingAccount:Update",
-      "Modules/Core/Billing/Models/BillingAccount:Delete",
-      "Modules/Core/Billing/Models/BillingAccountService:Create",
-      "Modules/Core/Billing/Models/BillingAccountService:Read",
-      "Modules/Core/Billing/Models/BillingAccountService:Update",
-      "Modules/Core/Billing/Models/BillingAccountService:Delete",
-      "Modules/Core/Billing/Controllers/BillingAccount",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount:Create",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount:Read",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount:Update",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount:Delete",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService:Create",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService:Read",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService:Update",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService:Delete",
+      "CeremonyCrmApp/Modules/Core/Billing/Controllers/BillingAccount",
     ];
 
-    foreach ($permissions as $key => $permission_string) {
+    foreach ($permissions as $key => $permission) {
       $mPermission->eloquent->create([
-        "permission_string" => $permission_string
+        "permission" => $permission
       ]);
     }
   }

@@ -6,12 +6,12 @@ class Permission extends \CeremonyCrmApp\Core\Model
 {
   public string $table = 'permissions';
   public string $eloquentClass = Eloquent\Permission::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.permission_string';
+  public ?string $lookupSqlValue = '{%TABLE%}.permission';
 
   public function columns(array $columns = []): array
   {
     return parent::columns([
-      'permission_string' => [
+      'permission' => [
         'type' => 'varchar',
         'title' => 'Permission',
         'show_column' => true
@@ -21,7 +21,8 @@ class Permission extends \CeremonyCrmApp\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description = parent::tableDescribe();
+    $description["model"] = $this->fullName;
+    $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Permissions';
     $description['ui']['showHeader'] = false;
     $description['ui']['showFooter'] = false;

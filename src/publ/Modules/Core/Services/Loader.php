@@ -61,16 +61,16 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     $mPermission = new Permission($this->app);
     $permissions = [
-      "Modules/Core/Service/Models/Service:Create",
-      "Modules/Core/Service/Models/Service:Read",
-      "Modules/Core/Service/Models/Service:Update",
-      "Modules/Core/Service/Models/Service:Delete",
-      "Modules/Core/Service/Controllers/Service",
+      "CeremonyCrmApp/Modules/Core/Service/Models/Service:Create",
+      "CeremonyCrmApp/Modules/Core/Service/Models/Service:Read",
+      "CeremonyCrmApp/Modules/Core/Service/Models/Service:Update",
+      "CeremonyCrmApp/Modules/Core/Service/Models/Service:Delete",
+      "CeremonyCrmApp/Modules/Core/Service/Controllers/Service",
     ];
 
-    foreach ($permissions as $key => $permission_string) {
+    foreach ($permissions as $key => $permission) {
       $mPermission->eloquent->create([
-        "permission_string" => $permission_string
+        "permission" => $permission
       ]);
     }
   }

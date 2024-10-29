@@ -64,7 +64,8 @@ class Address extends \CeremonyCrmApp\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description = parent::tableDescribe();
+    $description["model"] = $this->fullName;
+    $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Contacts';
     $description['ui']['addButtonText'] = 'Add Contact';
     $description['ui']['showHeader'] = true;

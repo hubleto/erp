@@ -2,63 +2,57 @@
 
 namespace CeremonyCrmApp\Core;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\Permission;
+use CeremonyCrmApp\Modules\Core\Settings\Models\RolePermission;
+use CeremonyCrmApp\Modules\Core\Settings\Models\UserRole;
+
 class Permissions extends \ADIOS\Core\Permissions {
-  public array $administratorRoles = [\CeremonyCrmApp\Modules\Core\Settings\Models\UserRole::ROLE_ADMINISTRATOR];
+
+  function __construct(\ADIOS\Core\Loader $app)
+  {
+    parent::__construct($app);
+
+    if ($this->app->requestedUri != "/ceremonycrm/www/create_account.php") {
+      $this->administratorRoles = $this->loadAdministratorRoles();
+    }
+  }
+
+  public function loadAdministratorRoles(): array {
+    $mUserRole = new UserRole($this->app);
+    $administratorRoles = $mUserRole->eloquent
+      ->where("grant_all", 1)
+      ->pluck("id")
+      ->toArray()
+    ;
+
+    return $administratorRoles;
+  }
 
   public function loadPermissions(): array {
     $permissions = parent::loadPermissions();
 
-    // $permissions[\EMonitorApp\Models\User::ROLE_ENGINEER] = [
-    //   'EMonitorApp/App/Dashboard',
-    //   'EMonitorApp/App/Lokalita',
-    //   'EMonitorApp/App/Zariadenie',
-    //   // 'EMonitorApp/App/ImportDataloggerov',
-    //   'EMonitorApp/App/Zariadenie/PridatUpravit',
-    //   // 'EMonitorApp/App/Zariadenie/Porovnat',
-    //   'EMonitorApp/App/Report',
-    //   'EMonitorApp/App/Report/PridatUpravit',
-    //   'EMonitorApp/App/Report/Graf',
-    //   'EMonitorApp/App/Report/Tabulka',
-    //   'EMonitorApp/App/Report/SenzorZobrazenie',
+    if ($this->app->requestedUri != "/ceremonycrm/www/create_account.php") {
+      $mUserRole = new UserRole($this->app);
+      $idCommonUserRoles = $mUserRole->eloquent
+        ->where("grant_all", 0)
+        ->pluck("id")
+        ->toArray()
+      ;
 
-    //   // 'EMonitorApp/Models/Project:Read',
-    //   'EMonitorApp/Models/Zariadenie:Read',
-    //   'EMonitorApp/Models/Report:Read',
-    //   'EMonitorApp/Models/ReportSenzor:Read,Update',
-    //   'EMonitorApp/Models/Senzor:Read,Update',
-    //   'EMonitorApp/Models/SenzorKopia:Read,Update',
-    //   'EMonitorApp/Models/SenzorHodnota:Read',
-    //   'EMonitorApp/Models/SenzorTyp:Read',
-    // ];
+      foreach ($idCommonUserRoles as $idCommonRole) {
+        $mRolePermission = new RolePermission($this->app);
+        $rolePermissions = $mRolePermission->eloquent
+          ->selectRaw("role_permissions.*,permissions.permission")
+          ->where("id_role", $idCommonRole)
+          ->join("permissions", "role_permissions.id_permission", "permissions.id")
+          ->get()
+        ;
 
-    // $permissions[\EMonitorApp\Models\User::ROLE_3] = [
-    //   'EMonitorApp/App/Dashboard',
-    //   'EMonitorApp/App/Lokalita',
-    //   'EMonitorApp/App/Zariadenie',
-
-    //   'EMonitorApp/Models/Senzor:Read',
-    //   'EMonitorApp/Models/SenzorKopia:Read',
-    //   // 'EMonitorApp/App/ImportDataloggerov',
-    //   // 'EMonitorApp/App/Lokalita',
-    //   // 'EMonitorApp/App/Zariadenie',
-    //   // 'EMonitorApp/App/Zariadenie/PridatUpravit',
-    //   // 'EMonitorApp/App/Zariadenie/Porovnat',
-    //   // 'EMonitorApp/App/Report',
-    //   // 'EMonitorApp/App/Report/PridatUpravit',
-    //   // 'EMonitorApp/App/Report/Graf',
-    //   // 'EMonitorApp/App/Report/Tabulka',
-
-    //   // 'EMonitorApp/Models/Project:Read',
-    //   // 'EMonitorApp/Models/ReportSenzor:Read',
-    //   // 'EMonitorApp/Models/Senzor:Read',
-    //   // 'EMonitorApp/Models/SenzorHodnota:Read',
-    //   // 'EMonitorApp/Models/SenzorKopia:Read',
-    //   // 'EMonitorApp/Models/Zariadenie:Read',
-    //   // 'EMonitorApp/Models/Zariadenie/PridatUpravit:Read',
-    //   // 'EMonitorApp/Models/Zariadenie/Porovnanie:Read',
-    //   // 'EMonitorApp/Models/Report:Read',
-    //   // 'EMonitorApp/Models/Report/PridatUpravit:Read',
-    // ];
+        foreach ($rolePermissions as $key => $rolePermission) {
+          $permissions[$idCommonRole][] = $rolePermission->permission;
+        }
+      }
+    }
 
     return $permissions;
   }

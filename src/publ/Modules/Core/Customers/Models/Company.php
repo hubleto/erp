@@ -111,19 +111,19 @@ class Company extends \CeremonyCrmApp\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description = parent::tableDescribe();
+    $description["model"] = $this->fullName;
+    $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Companies';
     $description['ui']['addButtonText'] = 'Add Company';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
+
     unset($description['columns']['street_line_1']);
     unset($description['columns']['street_line_2']);
     unset($description['columns']['city']);
     unset($description['columns']['postal_code']);
     unset($description['columns']['region']);
     unset($description['columns']['id_country']);
-    unset($description['columns']['note']);
-    unset($description['columns']['note']);
     unset($description['columns']['note']);
     unset($description['columns']['is_active']);
     return $description;
@@ -134,6 +134,10 @@ class Company extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 1;
     $description['includeRelations'] = ['PERSONS', 'COUNTRY', 'FIRST_CONTACT', 'BILLING_ACCOUNTS', 'ACTIVITIES', 'TAGS'];
+    $description['permissions']['canRead'] = $this->app->permissions->granted($this->fullName . ':Read');
+    $description['permissions']['canCreate'] = $this->app->permissions->granted($this->fullName . ':Create');
+    $description['permissions']['canUpdate'] = $this->app->permissions->granted($this->fullName . ':Update');
+    $description['permissions']['canDelete'] = $this->app->permissions->granted($this->fullName . ':Delete');
     return $description;
   }
 

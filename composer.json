@@ -1,4 +1,5 @@
 {
+    "name": "wai-blue/ceremonycrm",
     "require": {
         "twig/twig": "^3.0",
         "illuminate/database": "^11.10",

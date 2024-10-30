@@ -7,13 +7,7 @@
         "symfony/yaml": "^5.4",
         "illuminate/pagination": "^11.10",
         "snipworks/php-smtp": "^2.0",
-        "wai-blue/adios": "@dev",
+        "wai-blue/adios": "^1.2",
         "laravel/serializable-closure": "^1.3"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../../github/ADIOS"
-        }
-    ]
+    }
 }

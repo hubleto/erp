@@ -2,19 +2,45 @@
 
 namespace CeremonyCrmApp\Modules\Core\Services\Models;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\Currency;
+
 class Service extends \CeremonyCrmApp\Core\Model
 {
   public string $table = 'services';
   public string $eloquentClass = Eloquent\Service::class;
   public ?string $lookupSqlValue = "{%TABLE%}.name";
 
+  public array $relations = [
+    'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
+  ];
+
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
       "name" => [
         "type" => "varchar",
-        "title" => "Name"
-      ]
+        "title" => "Name",
+        "required" => true,
+      ],
+      "price" => [
+        "type" => "float",
+        "title" => "Unit Price",
+      ],
+      'id_currency' => [
+        'type' => 'lookup',
+        'title' => 'Currency',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/Currency',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
+      ],
+      "unit" => [
+        "type" => "varchar",
+        "title" => "Unit",
+      ],
+      "description" => [
+        "type" => "varchar",
+        "title" => "Description"
+      ],
     ]));
   }
 
@@ -26,6 +52,7 @@ class Service extends \CeremonyCrmApp\Core\Model
     $description['ui']['addButtonText'] = 'Add Service';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
+    unset($description['columns']['description']);
     return $description;
   }
 

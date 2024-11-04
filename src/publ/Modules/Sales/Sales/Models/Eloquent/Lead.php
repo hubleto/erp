@@ -20,8 +20,8 @@ class Lead extends \ADIOS\Core\Model\Eloquent
   public function DEAL(): HasOne {
     return $this->hasOne(Deal::class, 'id_lead', 'id' );
   }
-  public function COMPANY(): HasOne {
-    return $this->hasOne(Company::class, 'id', 'id_company');
+  public function COMPANY(): BelongsTo {
+    return $this->belongsTo(Company::class, 'id_company', 'id' );
   }
   public function USER(): BelongsTo {
     return $this->belongsTo(User::class, 'id_user','id' );

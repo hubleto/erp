@@ -18,7 +18,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
-    'COMPANY' => [ self::HAS_ONE, Company::class, 'id', 'id_company'],
+    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
     'STATUS' => [ self::HAS_ONE, LeadStatus::class, 'id', 'id_status'],
@@ -46,7 +46,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       ],
       'id_person' => [
         'type' => 'lookup',
-        'title' => 'Contact Person',
+        'title' => 'Representative',
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',

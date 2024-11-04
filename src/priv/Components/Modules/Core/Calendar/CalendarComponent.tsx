@@ -114,14 +114,14 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
               id={this.state.showIdActivity}
               descriptionSource="both"
               onDeleteCallback={() => { this.setState({showIdActivity: 0}); }}
-              description={{
+              /* description={{
                 permissions: {
                   canDelete: true,
                   canRead: true,
                   canCreate: true,
                   canUpdate: true,
                 }
-              }}
+              }} */
               showInModal={true}
               showInModalSimple={true}
               onClose={() => { this.setState({showIdActivity: 0}); }}

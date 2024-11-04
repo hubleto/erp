@@ -46,10 +46,10 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
       this.setState({
         description: {
           ui: {
-            title: 'Contact Persons',
+            title: 'Representatives',
             showHeader: true,
             showFooter: false,
-            addButtonText: 'Add Contact Person',
+            addButtonText: 'Add Representative',
           },
           permissions: {
             canCreate: true,

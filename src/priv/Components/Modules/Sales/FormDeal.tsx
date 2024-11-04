@@ -108,7 +108,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                   {this.inputWrapper('title')}
                   {this.inputWrapper('id_company')}
                   {this.inputWrapper('id_person')}
-                  <div className='flex flex-row'>
+                  <div className='flex flex-row *:w-1/2'>
                     {this.inputWrapper('price')}
                     {this.inputWrapper('id_currency')}
                   </div>

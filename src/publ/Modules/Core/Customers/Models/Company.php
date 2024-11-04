@@ -5,6 +5,8 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 use CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccount;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Country;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\Lead;
 use Illuminate\Database\Eloquent\Builder;
 
 class Company extends \CeremonyCrmApp\Core\Model
@@ -21,6 +23,8 @@ class Company extends \CeremonyCrmApp\Core\Model
     'BILLING_ACCOUNTS' => [ self::HAS_MANY, BillingAccount::class, 'id_company' ],
     'ACTIVITIES' => [ self::HAS_MANY, Activity::class, 'id_company' ],
     'TAGS' => [ self::HAS_MANY, CompanyTag::class, 'id_company', 'id' ],
+    'LEADS' => [ self::HAS_MANY, Lead::class, 'id_company', 'id'],
+    'DEALS' => [ self::HAS_MANY, Deal::class, 'id_company', 'id'],
   ];
 
   public function columns(array $columns = []): array
@@ -133,7 +137,7 @@ class Company extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 1;
-    $description['includeRelations'] = ['PERSONS', 'COUNTRY', 'FIRST_CONTACT', 'BILLING_ACCOUNTS', 'ACTIVITIES', 'TAGS'];
+    $description['includeRelations'] = ['PERSONS', 'COUNTRY', 'FIRST_CONTACT', 'BILLING_ACCOUNTS', 'ACTIVITIES', 'TAGS', 'LEADS', 'DEALS'];
     $description['permissions']['canRead'] = $this->app->permissions->granted($this->fullName . ':Read');
     $description['permissions']['canCreate'] = $this->app->permissions->granted($this->fullName . ':Create');
     $description['permissions']['canUpdate'] = $this->app->permissions->granted($this->fullName . ':Update');

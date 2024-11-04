@@ -19,8 +19,8 @@ class Deal extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'deals';
 
-  public function COMPANY(): HasOne {
-    return $this->hasOne(Company::class, 'id', 'id_company');
+  public function COMPANY(): BelongsTo {
+    return $this->belongsTo(Company::class, 'id_company', 'id' );
   }
   public function PIPELINE(): HasOne {
     return $this->hasOne(Pipeline::class, 'id', 'id_pipeline');

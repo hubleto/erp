@@ -77,7 +77,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
       {recordId: recordId},
       (data: any) => {
         if (data.status == "success") {
-          location.assign(`deals/?recordId=${data.idDeal}&recordTitle=${data.title}`)
+          location.assign(`../sales/deals?recordId=${data.idDeal}&recordTitle=${data.title}`)
         }
       }
     );
@@ -130,7 +130,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   {this.inputWrapper('title')}
                   {this.inputWrapper('id_company')}
                   {this.inputWrapper('id_person')}
-                  <div className='flex flex-row'>
+                  <div className='flex flex-row *:w-1/2'>
                     {this.inputWrapper('price')}
                     {this.inputWrapper('id_currency')}
                   </div>
@@ -138,12 +138,12 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   {showAdditional ?
                     <div className='w-full mt-2'>
                       {R.DEAL != null ?
-                      <a className='btn btn-primary' href={`deals?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
+                      <a className='btn btn-primary' href={`../sales/deals?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
                         <span className='icon'><i className='fas fa-eye'></i></span>
                         <span className='text'>Go to the Deal</span>
                       </a>
                       :
-                      <a className='btn btn-primary' onClick={() => this.convertDealWarning(R.id)}>
+                      <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
                         <span className='icon'><i className='fas fa-rotate-right'></i></span>
                         <span className='text'>Convert to a Deal</span>
                       </a>}

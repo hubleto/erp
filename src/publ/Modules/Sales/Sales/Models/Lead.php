@@ -154,7 +154,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       $mLeadHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
-        "description" => "Expected Close Date changed to ".date("d.m.Y", strtotime($record["date_expected_close"]))
+        "description" => "Expected Close Date changed to ".date("d.m.Y", strtotime((string) $record["date_expected_close"]))
       ]);
     }
 

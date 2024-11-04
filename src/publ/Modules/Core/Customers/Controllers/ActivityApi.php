@@ -6,8 +6,8 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
 
   public function renderJson(): ?array {
 
-    $dateStart = date("Y-m-d H:i:s", strtotime($this->params["start"]));
-    $dateEnd = date("Y-m-d H:i:s", strtotime($this->params["end"]));
+    $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->params["start"]));
+    $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->params["end"]));
 
     $mAktivita = new \CeremonyCrmApp\Modules\Core\Customers\Models\Activity($this->app);
     $aktivity = $mAktivita->eloquent

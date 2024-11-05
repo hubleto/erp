@@ -27,6 +27,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id', ],
     'LABELS' => [ self::HAS_MANY, DealLabel::class, 'id_deal', 'id' ],
+    'SERVICES' => [ self::HAS_MANY, LeadService::class, 'id_deal', 'id' ],
   ];
 
   public function columns(array $columns = []): array
@@ -48,7 +49,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       ],
       'id_person' => [
         'type' => 'lookup',
-        'title' => 'Representative',
+        'title' => 'Contact Person',
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
@@ -65,7 +66,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       ],
       'price' => [
         'type' => 'float',
-        'title' => 'Amount',
+        'title' => 'Price',
         'required' => true,
       ],
       'id_currency' => [
@@ -154,7 +155,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD'];
+    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD','SERVICES'];
     return $description;
   }
 

@@ -61,8 +61,8 @@ class Person extends \CeremonyCrmApp\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe();
-    $description['title'] = 'Representatives';
-    $description['ui']['addButtonText'] = 'Add Representative';
+    $description['title'] = 'Contact Persons';
+    $description['ui']['addButtonText'] = 'Add Contact Person';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
     return $description;

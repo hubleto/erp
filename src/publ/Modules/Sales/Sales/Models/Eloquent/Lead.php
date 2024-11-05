@@ -41,4 +41,7 @@ class Lead extends \ADIOS\Core\Model\Eloquent
   public function LABELS(): HasMany {
     return $this->hasMany(LeadLabel::class, 'id_lead', 'id');
   }
+  public function SERVICES(): HasMany {
+    return $this->hasMany(LeadService::class, 'id_lead', 'id');
+  }
 }

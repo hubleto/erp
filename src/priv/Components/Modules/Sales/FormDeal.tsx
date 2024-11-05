@@ -5,6 +5,7 @@ import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 import request from 'adios/Request';
+import TableDealServices from './TableDealServices';
 
 interface FormDealProps extends FormProps {}
 
@@ -99,6 +100,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
           {{gridTemplateAreas:`
             'info info'
             'status status'
+            'services services'
             'history history'
           `}}>
             <div className='card mt-2' style={{gridArea: 'info'}}>
@@ -176,6 +178,57 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     </div>
                   </div>
                 </div>
+                {showAdditional ?
+                  <div className='card mt-2' style={{gridArea: 'services'}}>
+                    <div className='card-header'>Services</div>
+                    <div className='card-body flex flex-row gap-2'>
+                      <TableDealServices
+                        uid={this.props.uid + "_table_lead_services"}
+                        data={{ data: R.SERVICES }}
+                        descriptionSource='props'
+                        description={{
+                          ui: {
+                            showHeader: false,
+                            showFooter: false
+                          },
+                          permissions: {
+                            canCreate: true,
+                            canUpdate: true,
+                            canDelete: true,
+                            canRead: true,
+                          },
+                          columns: {
+                            id_service: { type: "lookup", title: "Service", model: "CeremonyCrmApp/Modules/Core/Services/Models/Service" },
+                            unit_price: { type: "float", title: "Unit Price" },
+                            amount: { type: "int", title: "Amount" },
+                          },
+                        }}
+                        isUsedAsInput={true}
+                        isInlineEditing={this.state.isInlineEditing}
+                        readonly={!this.state.isInlineEditing}
+                        onChange={(table: TableDealServices) => {
+                          this.updateRecord({ SERVICES: table.state.data?.data });
+                        }}
+                        onDeleteSelectionChange={(table: TableDealServices) => {
+                          this.updateRecord({ SERVICES: table.state.data?.data ?? [] });
+                        }}
+                      ></TableDealServices>
+                    </div>
+                      {this.state.isInlineEditing ? (
+                        <a
+                          role="button"
+                          onClick={() => {
+                            if (!R.SERVICES) R.SERVICES = [];
+                            R.SERVICES.push({
+                              id_lead: { _useMasterRecordId_: true },
+                            });
+                            this.setState({ record: R });
+                          }}>
+                          + Add service
+                        </a>
+                      ) : null}
+                  </div>
+                : null}
                 <div className='card mt-2' style={{gridArea: 'history'}}>
                   <div className='card-header'>Deal History</div>
                   <div className='card-body min-h-[100px] flex justify-center' style={{flexDirection: "column", gap: "4px"}}>

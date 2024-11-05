@@ -183,7 +183,7 @@ export default class FormCompany<P, S> extends Form<
               </div>
 
               <div className="card" style={{ gridArea: "contacts" }}>
-                <div className="card-header">Representatives</div>
+                <div className="card-header">Contact Persons</div>
                 <div className="card-body">
                   <TablePersons
                     uid={this.props.uid + "_table_persons"}

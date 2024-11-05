@@ -24,15 +24,4 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
     super(props);
     this.state = this.getStateFromProps(props);
   }
-
-//   getStateFromProps(props: TableContactsProps) {
-//     return {
-//       ...super.getStateFromProps(props),
-//     }
-//   }
-
-//   renderForm(): JSX.Element {
-//     let formDescription = this.getFormProps();
-//     return <FormActivity {...formDescription}/>;
-//   }
 }

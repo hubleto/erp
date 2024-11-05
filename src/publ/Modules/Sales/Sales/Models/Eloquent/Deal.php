@@ -43,4 +43,7 @@ class Deal extends \ADIOS\Core\Model\Eloquent
   public function LABELS(): HasMany {
     return $this->hasMany(DealLabel::class, 'id_deal', 'id');
   }
+  public function SERVICES(): HasMany {
+    return $this->hasMany(LeadService::class, 'id_lead', 'id');
+  }
 }

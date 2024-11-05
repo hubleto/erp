@@ -6,5 +6,6 @@
 /log
 /ConfigEnv.php
 /composer.lock
+/composer-dev.lock
 /package-lock.json
 /node_modules

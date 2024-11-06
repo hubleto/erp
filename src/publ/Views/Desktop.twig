@@ -104,7 +104,7 @@
               id="sidebar-item-level1-{{ i }}"
               href="{{ config.accountUrl }}/{{ item.url }}" data-pr-tooltip="{{ item.title }}"
             >
-              <span class="icon"><i class="{{ item.icon }}"></i></span>
+              <span class="icon"><i class="{{ item.icon }}"></i></span><span class="text">{{ item.title }}</span>
               <app-tooltip string:target="#sidebar-item-level1-{{ i }}"></app-tooltip>
             </a>
           {% elseif item.type == 'divider' %}

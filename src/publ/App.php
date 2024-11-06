@@ -5,23 +5,26 @@ use \ADIOS\Core\Helper;
 // load configs
 require_once(__DIR__ . "/ConfigApp.php");
 
-// include autoloaders
-require_once(__DIR__ . "/../../vendor/autoload.php");
-
 // autoloader pre CeremonyCrmApp
 spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);
-  if (strpos($class, 'CeremonyCrmApp/') === 0) {
+  if (str_starts_with($class, 'CeremonyCrmApp/') && !str_starts_with($class, 'CeremonyCrmApp/Extensions/')) {
     require_once(__DIR__ . '/' . str_replace('CeremonyCrmApp/', '', $class) . '.php');
   }
 });
 
 // create own ADIOS class
-class CeremonyCrmApp extends \ADIOS\Core\Loader {
+class CeremonyCrmApp extends \ADIOS\Core\Loader
+{
+  protected \Twig\Loader\FilesystemLoader $twigLoader;
+
   protected array $registeredModules = [];
   protected \CeremonyCrmApp\Core\Sidebar $sidebar;
 
-  public function __construct($config = NULL, $mode = NULL) {
+  protected array $extensions = [];
+
+  public function __construct($config = NULL, $mode = NULL)
+  {
     parent::__construct($config, $mode);
 
     $setLanguage = $this->params['set-language'] ?? '';
@@ -58,6 +61,10 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader {
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Support\Loader::class);
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Sandbox\Loader::class);
 
+    foreach ($this->getInstalledExtensions() as $extName) {
+      $this->addExtension($extName);
+    }
+
     $this->sidebar = new \CeremonyCrmApp\Core\Sidebar($this);
 
     $registeredModules = $this->getRegisteredModules();
@@ -65,23 +72,72 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader {
       $module = new $moduleClass($this);
       $module->addRouting($this->router);
     });
+
+    foreach ($this->extensions as $extName => $extension) {
+      $extNameSanitized = str_replace('/', '-', str_replace('\\', '-', $extName));
+      $this->router->addRoutingGroup(
+        'extensions\/' . str_replace('/', '\/', $extension->getUrlBase()),
+        'CeremonyCrmApp/Extensions/' . $extName . '/Controllers',
+        '@ext-' . $extNameSanitized,
+        [],
+        $extension->getRoutes(),
+      );
+
+      $this->twigLoader->addPath($extension->rootFolder . '/src/Views', 'ext-' . $extNameSanitized);
+    }
+
+    // var_dump($this->extractRouteFromRequest());
+    // var_dump($this->router->routing);
+    // var_dump($this->router->applyRouting($this->extractRouteFromRequest(), []));exit;
+
   }
 
-  public function registerModule(string $module) {
+  public function initTwig()
+  {
+    $this->twigLoader = new \Twig\Loader\FilesystemLoader();
+    $this->twigLoader->addPath(__DIR__, 'app');
+
+    $this->twig = new \Twig\Environment($this->twigLoader, array(
+      'cache' => FALSE,
+      'debug' => TRUE,
+    ));
+  }
+
+  public function registerModule(string $module)
+  {
     if (!in_array($module, $this->registeredModules)) {
       $this->registeredModules[] = $module;
     }
   }
 
-  public function getRegisteredModules(): array {
+  public function getRegisteredModules(): array
+  {
     return $this->registeredModules;
   }
 
-  public function getSidebar(): \CeremonyCrmApp\Core\Sidebar {
+  public function getSidebar(): \CeremonyCrmApp\Core\Sidebar
+  {
     return $this->sidebar;
   }
 
-  public function getDesktopController(): \CeremonyCrmApp\Core\Controller {
+  public function getDesktopController(): \CeremonyCrmApp\Core\Controller
+  {
     return new \CeremonyCrmApp\Core\Controller($this);
   }
+
+  public function addExtension(string $extName)
+  {
+    $extClass = '\\CeremonyCrmApp\\Extensions\\' . $extName . '\\Loader';
+    $this->extensions[$extName] = new $extClass($this);
+  }
+
+  public function getInstalledExtensions(): array
+  {
+    if (isset($this->config['extensions']) && is_array($this->config['extensions'])) {
+      return $this->config['extensions'];
+    } else {
+      return [];
+    }
+  }
+
 }

@@ -15,6 +15,7 @@ class Account {
   public string $accountRootUrl = '';
   public string $appRootFolder = '';
   public string $appRootUrl = '';
+  public string $extRootFolder = '';
 
   public string $uid = '';
   public string $dbHost = '';
@@ -34,6 +35,7 @@ class Account {
     string $accountRootUrl,
     string $appRootFolder,
     string $appRootUrl,
+    string $extRootFolder,
     bool $randomize = false
   )
   {
@@ -45,6 +47,7 @@ class Account {
     $this->accountRootUrl = $accountRootUrl;
     $this->appRootFolder = $appRootFolder;
     $this->appRootUrl = $appRootUrl;
+    $this->extRootFolder = $extRootFolder;
 
     $this->randomize = $randomize;
 
@@ -143,6 +146,7 @@ class Account {
     // ConfigEnv.php
     $configAccount = file_get_contents($this->app->config['dir'] . '/account_templates/ConfigAccount.tpl');
     $configAccount = str_replace('{{ appDir }}', $this->appRootFolder, $configAccount);
+    $configAccount = str_replace('{{ extDir }}', $this->extRootFolder, $configAccount);
     $configAccount = str_replace('{{ appUrl }}', $this->appRootUrl, $configAccount);
     $configAccount = str_replace('{{ dbHost }}', $this->app->config['db_host'], $configAccount);
     $configAccount = str_replace('{{ dbUser }}', $this->dbUser, $configAccount);
@@ -157,6 +161,7 @@ class Account {
     // LoadApp.php
     $loadApp = file_get_contents($this->app->config['dir'] . '/account_templates/LoadApp.php');
     $loadApp = str_replace('{{ appDir }}', $this->appRootFolder, $loadApp);
+    $loadApp = str_replace('{{ extDir }}', $this->extRootFolder, $loadApp);
     file_put_contents($this->accountRootFolder . '/' . $this->uid . '/LoadApp.php', $loadApp);
 
     // index.php

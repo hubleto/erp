@@ -15,7 +15,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $router->addRoutingGroup(
       'calendar',
       'CeremonyCrmApp/Modules/Core/Calendar/Controllers',
-      'CeremonyCrmApp/Modules/Core/Calendar/Views',
+      '@app/Modules/Core/Calendar/Views',
       [
         'idAccount' => '$1',
       ],

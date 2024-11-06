@@ -26,7 +26,7 @@ $config['coreClasses'] = [
 ];
 
 $config['db'] = [
-  'provider' => \ADIOS\Core\DB\Providers\MySQLi::class,
+  'provider' => \ADIOS\Core\Db\Providers\MySQLi::class,
 ];
 
 $config['auth'] = [

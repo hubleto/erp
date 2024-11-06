@@ -67,7 +67,7 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
         </svg>
       </button>
-      {{ include('CeremonyCrmApp/Views/Breadcrumbs', {'items': viewParams.breadcrumbs}) }}
+      {{ include('@app/Views/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
       <div class="hidden w-full md:block md:w-auto" id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
           <li>

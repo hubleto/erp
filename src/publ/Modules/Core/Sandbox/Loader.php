@@ -17,7 +17,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $router->addRoutingGroup(
       'sandbox',
       'CeremonyCrmApp/Modules/Core/Sandbox/Controllers',
-      'CeremonyCrmApp/Modules/Core/Sandbox/Views',
+      '@app/Modules/Core/Sandbox/Views',
       [],
       [
         '' => 'Dashboard',

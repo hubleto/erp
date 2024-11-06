@@ -19,7 +19,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $router->addRoutingGroup(
       'billing',
       'CeremonyCrmApp/Modules/Core/Billing/Controllers',
-      'CeremonyCrmApp/Modules/Core/Billing/Views',
+      '@app/Modules/Core/Billing/Views',
       [
         'idAccount' => '$1',
       ],

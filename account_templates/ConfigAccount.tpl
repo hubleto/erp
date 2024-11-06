@@ -7,6 +7,7 @@ $config['accountDir'] = __DIR__;
 $config['logDir'] = __DIR__ . '/log';
 $config['tmpDir'] = __DIR__ . '/tmp';
 $config['uploadDir'] = __DIR__ . '/upload';
+$config['extDir'] = '{{ extDir }}';
 
 // urls
 $config['rewriteBase'] = "{{ rewriteBase }}";

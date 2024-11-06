@@ -21,7 +21,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $router->addRoutingGroup(
       'services',
       'CeremonyCrmApp/Modules/Core/Services/Controllers',
-      'CeremonyCrmApp/Modules/Core/Services/Views',
+      '@app/Modules/Core/Services/Views',
       [
         'idAccount' => '$1',
       ],

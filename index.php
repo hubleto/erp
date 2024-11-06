@@ -13,6 +13,10 @@ define('_ADIOS_ID', 'CeremonyCrmApp');
 require_once(__DIR__ . "/ConfigEnv.php");
 require_once(__DIR__ . "/app/bin/ConfigApp.php");
 
+// include autoloaders
+require_once(__DIR__ . "/vendor/autoload.php");
+require_once(__DIR__ . "/../ext/vendor/autoload.php");
+
 // load application class
 require("app/bin/App.php");
 

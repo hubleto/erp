@@ -15,7 +15,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $router->addRouting([
       '/^$/' => [
         'controller' => 'CeremonyCrmApp/Modules/Core/Dashboard/Controllers/Home',
-        'view' => 'CeremonyCrmApp/Modules/Core/Dashboard/Views/Home',
+        'view' => '@app/Modules/Core/Dashboard/Views/Home',
       ]
     ]);
   }

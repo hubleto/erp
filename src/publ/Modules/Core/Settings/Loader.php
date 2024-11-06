@@ -22,7 +22,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $router->addRoutingGroup(
       'settings',
       'CeremonyCrmApp/Modules/Core/Settings/Controllers',
-      'CeremonyCrmApp/Modules/Core/Settings/Views',
+      '@app/Modules/Core/Settings/Views',
       [],
       [
         '' => 'Dashboard',

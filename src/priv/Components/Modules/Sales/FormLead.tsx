@@ -72,6 +72,23 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     }
   }
 
+  getLeadSumPrice(recordServices: any) {
+    var sumLeadPrice = 0;
+    recordServices.map((service, index) => {
+      if (service.unit_price && service.amount) {
+        var sum = service.unit_price * service.amount
+        if (service.discount) {
+          sum = sum - (sum * (service.discount / 100))
+        }
+        if (service.tax) {
+          sum = sum - (sum * (service.tax / 100))
+        }
+        sumLeadPrice += sum;
+      }
+    });
+    return Number(sumLeadPrice.toFixed(2));
+  }
+
   convertLead(recordId: number) {
     request.get(
       'sales/convert-lead',
@@ -115,6 +132,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
+    if (R.HISTORY && R.HISTORY.length > 0) R.HISTORY = this.state.record.HISTORY.reverse();
 
     return (
       <>
@@ -133,7 +151,9 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   {this.inputWrapper('id_company')}
                   {this.inputWrapper('id_person')}
                   <div className='flex flex-row *:w-1/2'>
-                    {this.inputWrapper('price')}
+                    {this.inputWrapper('price', {
+                      readonly: R.SERVICES && R.SERVICES.length > 0 ? true : false,
+                    })}
                     {this.inputWrapper('id_currency')}
                   </div>
                   {showAdditional ? this.inputWrapper('id_status') : null}
@@ -177,15 +197,16 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             {showAdditional ?
               <div className='card mt-2' style={{gridArea: 'services'}}>
                 <div className='card-header'>Services</div>
-                <div className='card-body flex flex-row gap-2'>
+                <div className='card-body flex flex-col gap-2'>
                   <TableLeadServices
                     uid={this.props.uid + "_table_lead_services"}
                     data={{ data: R.SERVICES }}
+                    leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
                     descriptionSource='props'
                     description={{
                       ui: {
                         showHeader: false,
-                        showFooter: false
+                        showFooter: true
                       },
                       permissions: {
                         canCreate: true,
@@ -197,13 +218,35 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         id_service: { type: "lookup", title: "Service", model: "CeremonyCrmApp/Modules/Core/Services/Models/Service" },
                         unit_price: { type: "float", title: "Unit Price" },
                         amount: { type: "int", title: "Amount" },
+                        discount: { type: "float", title: "Discount (%)" },
+                        tax: { type: "float", title: "Tax (%)" },
+                        __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
+                          if (data.unit_price && data.amount) {
+                            var sum = data.unit_price * data.amount
+                            if (data.discount) {
+                              sum = sum - (sum * (data.discount / 100))
+                            }
+                            if (data.tax) {
+                              sum = sum - (sum * (data.tax / 100))
+                            }
+                            sum = Number(sum.toFixed(2));
+                            return (<>
+                                <span>{sum} {R.CURRENCY.code}</span>
+                              </>
+                            );
+                          }
+                        },
+                      },
                       },
                     }}
                     isUsedAsInput={true}
                     isInlineEditing={this.state.isInlineEditing}
                     readonly={!this.state.isInlineEditing}
+                    onRowClick={() => this.setState({isInlineEditing: true})}
                     onChange={(table: TableLeadServices) => {
                       this.updateRecord({ SERVICES: table.state.data?.data });
+                      R.price = this.getLeadSumPrice(R.SERVICES);
+                      this.setState({record: R});
                     }}
                     onDeleteSelectionChange={(table: TableLeadServices) => {
                       this.updateRecord({ SERVICES: table.state.data?.data ?? [] });
@@ -254,6 +297,24 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
               </div>
             : null}
         </div>
+        {/* <div>
+          <div className="card">
+            <div className="card-header">this.state.record</div>
+            <div className="card-body">
+              <pre
+                style={{
+                  color: "blue",
+                  width: "100%",
+                  fontFamily: "Courier New",
+                  fontSize: "10px",
+                }}
+              >
+                {JSON.stringify(R.price, null, 2)}
+                {JSON.stringify(R.SERVICES, null, 2)}
+              </pre>
+            </div>
+          </div>
+        </div> */}
       </>
     );
   }

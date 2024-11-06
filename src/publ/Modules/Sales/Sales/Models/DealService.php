@@ -37,10 +37,20 @@ class DealService extends \CeremonyCrmApp\Core\Model
       "unit_price" => [
         "type" => "float",
         "title" => "Unit Price",
+        "required" => true,
       ],
       "amount" => [
         "type" => "int",
         "title" => "Amount",
+        "required" => true,
+      ],
+      "discount" => [
+        "type" => "float",
+        "title" => "Dicount (%)",
+      ],
+      "tax" => [
+        "type" => "float",
+        "title" => "Tax (%)",
       ],
     ]));
   }

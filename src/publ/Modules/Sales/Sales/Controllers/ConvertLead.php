@@ -5,8 +5,10 @@ namespace CeremonyCrmApp\Modules\Sales\Sales\Controllers;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Setting;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\DealService;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Lead;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadHistory;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadService;
 use Exception;
 
 class ConvertLead extends \CeremonyCrmApp\Core\Controller
@@ -17,8 +19,10 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
     $leadId = $this->params["recordId"];
     $mLead = new Lead($this->app);
     $mLeadHistory = new LeadHistory($this->app);
+    $mLeadService = new LeadService($this->app);
     $mDeal = new Deal($this->app);
     $mDealHistory = new DealHistory($this->app);
+    $mDealService = new DealService($this->app);
     $deal = null;
 
     $mSettings = new Setting($this->app);
@@ -46,6 +50,18 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
         "id_pipeline_step" => null
       ]);
 
+      $leadServices = $mLeadService->eloquent->where("id_lead", $leadId)->get();
+
+      foreach ($leadServices as $leadService) {
+        $mDealService->eloquent->create([
+          "id_service" => $leadService->id_service,
+          "id_deal" => $deal->id,
+          "unit_price" => $leadService->unit_price,
+          "amount" => $leadService->amount,
+          "discount" => $leadService->discount,
+          "tax" => $leadService->tax,
+        ]);
+      }
 
       $leadHistories = $mLeadHistory->eloquent->where("id_lead", $leadId)->get();
 
@@ -71,7 +87,6 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
 
     } catch (Exception $e) {
 
-      var_dump($e); exit;
       return [
         "status" => "failed",
         "error" => $e

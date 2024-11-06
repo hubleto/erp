@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 
 interface TableLeadServicesProps extends TableProps {
+  leadTotal?: any
 }
 
 interface TableLeadServicesState extends TableState {
@@ -21,5 +22,11 @@ export default class TableLeadServices extends Table<TableLeadServicesProps, Tab
   constructor(props: TableLeadServicesProps) {
     super(props);
     this.state = this.getStateFromProps(props);
+  }
+
+  renderFooter(): JSX.Element {
+    return <>
+      <div className='flex flexx-row justify-end'><strong className='mr-4'>{this.props.leadTotal}</strong></div>
+    </>;
   }
 }

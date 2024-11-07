@@ -60,8 +60,9 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Services\Loader::class);
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Support\Loader::class);
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Sandbox\Loader::class);
+    $this->registerModule(\CeremonyCrmApp\Modules\Core\Extensions\Loader::class);
 
-    foreach ($this->getInstalledExtensions() as $extName) {
+    foreach ($this->getInstalledExtensionNames() as $extName) {
       $this->addExtension($extName);
     }
 
@@ -76,7 +77,7 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     foreach ($this->extensions as $extName => $extension) {
       $extNameSanitized = str_replace('/', '-', str_replace('\\', '-', $extName));
       $this->router->addRoutingGroup(
-        'extensions\/' . str_replace('/', '\/', $extension->getUrlBase()),
+        'extensions\/' . str_replace('/', '\/', $extension->urlBase),
         'CeremonyCrmApp/Extensions/' . $extName . '/Controllers',
         '@ext-' . $extNameSanitized,
         [],
@@ -131,13 +132,18 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     $this->extensions[$extName] = new $extClass($this);
   }
 
-  public function getInstalledExtensions(): array
+  public function getInstalledExtensionNames(): array
   {
     if (isset($this->config['extensions']) && is_array($this->config['extensions'])) {
       return $this->config['extensions'];
     } else {
       return [];
     }
+  }
+
+  public function getExtensions(): array
+  {
+    return $this->extensions;
   }
 
 }

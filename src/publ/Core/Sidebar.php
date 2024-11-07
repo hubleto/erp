@@ -22,6 +22,7 @@ class Sidebar {
       $module = new $moduleClass($this->app);
       $module->modifySidebar($this);
     });
+
   }
 
   public function addItem(int $level, int $key, string $type, string $url, string $title, string $icon) {

@@ -19,6 +19,7 @@
   aside#default-sidebar > nav .btn { @apply w-full h-10 rounded; }
   aside#default-sidebar > nav .btn .icon { @apply w-10 h-10 text-center flex justify-center content-center flex-wrap; }
   aside#default-sidebar > nav .btn .text { @apply font-bold; }
+  aside#default-sidebar > nav .btn.btn-primary { @apply bg-white text-gray-800; }
   aside#default-sidebar > div { @apply h-full w-60 p-1 shadow-lg overflow-y-auto bg-gray-50; }
   /* aside#default-sidebar > div > ul { @apply } */
   aside#default-sidebar > div > ul > li a { @apply flex items-center px-1 py-0.5 text-gray-900 rounded no-underline hover:bg-gray-100 hover:text-primary; }

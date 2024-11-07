@@ -46,6 +46,11 @@ class Controller extends \ADIOS\Core\Controller
     parent::prepareViewParams();
 
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
+    $this->viewParams['requestedUri'] = $this->app->requestedUri;
+
+    $tmp =  strpos($this->app->requestedUri, '/');
+    if ($tmp === false) $this->viewParams['requestedUriFirstPart'] = $this->app->requestedUri;
+    else $this->viewParams['requestedUriFirstPart'] = substr($this->app->requestedUri, 0, strpos($this->app->requestedUri, '/'));
 
     $this->viewParams['sidebar'] = [
       'level1Items' => $this->app->getSidebar()->getItems(1),

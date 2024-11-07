@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-css": "npx tailwindcss -i ./src/priv/App.css -o ./app/assets/compiled/css/app.css",
+    "watch-css": "npx tailwindcss --watch -i ./src/priv/App.css -o ./app/assets/compiled/css/app.css",
     "build-js": "npx webpack --mode development",
     "build": "npx webpack --mode development && npx tailwindcss -i ./src/priv/App.css -o ./app/assets/compiled/css/app.css",
     "build:prod": "npx webpack --mode production"

@@ -14,11 +14,6 @@ class Extension
     $this->rootFolder = realpath(pathinfo((new \ReflectionClass(get_class($this)))->getFileName(), PATHINFO_DIRNAME) . '/..');
   }
 
-  public function getUrlBase(): string
-  {
-    return 'set-your-url-base-' . rand(1000, 9000);
-  }
-
   public function getRoutes(): array
   {
     return [

@@ -9,6 +9,7 @@ class DealService extends \CeremonyCrmApp\Core\Model
 {
   public string $table = 'deal_services';
   public string $eloquentClass = Eloquent\DealService::class;
+  public ?string $lookupSqlValue = '{%TABLE%}.id_service';
 
   public array $relations = [
     'SERVICE' => [ self::BELONGS_TO, Service::class, 'id_service', 'id' ],

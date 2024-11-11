@@ -7,6 +7,7 @@ use CeremonyCrmApp\Modules\Core\Customers\Models\Person;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Currency;
 use CeremonyCrmApp\Modules\Core\Settings\Models\DealStatus;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Pipeline;
+use CeremonyCrmApp\Modules\Core\Settings\Models\PipelineStep;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Setting;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
@@ -24,8 +25,9 @@ class Deal extends \CeremonyCrmApp\Core\Model
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
+    'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
-    'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id', ],
+    'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
     'LABELS' => [ self::HAS_MANY, DealLabel::class, 'id_deal', 'id' ],
     'SERVICES' => [ self::HAS_MANY, LeadService::class, 'id_deal', 'id' ],
   ];
@@ -155,7 +157,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD','SERVICES'];
+    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'PIPELINE_STEP', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD','SERVICES'];
     return $description;
   }
 

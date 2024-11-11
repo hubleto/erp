@@ -7,6 +7,7 @@ use CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent\Person;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\Currency;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\DealStatus;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\Pipeline;
+use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\PipelineStep;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\User;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Eloquent\DealHistory;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Eloquent\DealLabel;
@@ -24,6 +25,9 @@ class Deal extends \ADIOS\Core\Model\Eloquent
   }
   public function PIPELINE(): HasOne {
     return $this->hasOne(Pipeline::class, 'id', 'id_pipeline');
+  }
+  public function PIPELINE_STEP(): HasOne {
+    return $this->hasOne(PipelineStep::class, 'id', 'id_pipeline_step');
   }
   public function LEAD(): BelongsTo {
     return $this->belongsTo(Lead::class, 'id_lead','id' );

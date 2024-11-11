@@ -9,6 +9,7 @@ class LeadService extends \CeremonyCrmApp\Core\Model
 {
   public string $table = 'lead_services';
   public string $eloquentClass = Eloquent\LeadService::class;
+  public ?string $lookupSqlValue = '{%TABLE%}.id_service';
 
   public array $relations = [
     'SERVICE' => [ self::BELONGS_TO, Service::class, 'id_service', 'id' ],

@@ -12,6 +12,6 @@ class Pipeline extends \ADIOS\Core\Model\Eloquent
   public $table = 'pipelines';
 
   public function PIPELINE_STEPS(): HasMany {
-    return $this->hasMany(PipelineStep::class, 'id_pipeline', 'id' );
+    return $this->hasMany(PipelineStep::class, 'id_pipeline', 'id' )->orderBy('order', 'asc');
   }
 }

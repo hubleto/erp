@@ -84,6 +84,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
         if (data.status == "success") {
           R.id_pipeline_step = data.returnStep.id;
           R.HISTORY = data.dealHistory;
+          R.PIPELINE_STEP = data.returnStep;
           this.setState({record: R});
         }
       }
@@ -177,7 +178,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       {R.PIPELINE != null && R.PIPELINE.PIPELINE_STEPS.length > 0 ?
                         R.PIPELINE.PIPELINE_STEPS.map((s, i) => {
                           var statusColor: string = null;
-                          {s.id <= R.id_pipeline_step ? statusColor = "btn-primary" : statusColor = "btn-light"}
+                          {s.order <= R.PIPELINE_STEP.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
                           return (
                             <>
                               <button

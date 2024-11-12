@@ -20,8 +20,8 @@ class Company extends \CeremonyCrmApp\Core\Model
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, 'id_company' ],
-    'BILLING_ACCOUNTS' => [ self::HAS_MANY, BillingAccount::class, 'id_company' ],
-    'ACTIVITIES' => [ self::HAS_MANY, Activity::class, 'id_company' ],
+    //'BILLING_ACCOUNTS' => [ self::HAS_MANY, BillingAccount::class, 'id_company', ],
+    'ACTIVITIES' => [ self::HAS_MANY, ActivityCompany::class, 'id_company', 'id' ],
     'TAGS' => [ self::HAS_MANY, CompanyTag::class, 'id_company', 'id' ],
     'LEADS' => [ self::HAS_MANY, Lead::class, 'id_company', 'id'],
     'DEALS' => [ self::HAS_MANY, Deal::class, 'id_company', 'id'],
@@ -102,11 +102,12 @@ class Company extends \CeremonyCrmApp\Core\Model
       ],
       'id_user' => [
         'type' => 'lookup',
-        'title' => 'Owner',
+        'title' => 'Assigned User',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
-        'required' => false,
+        'required' => true,
+        //'readonly' => $this->app->permissions->granted($this->fullName . ':Update'),
         'default' => 1,
       ]
 
@@ -137,7 +138,7 @@ class Company extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 1;
-    $description['includeRelations'] = ['PERSONS', 'COUNTRY', 'FIRST_CONTACT', 'BILLING_ACCOUNTS', 'ACTIVITIES', 'TAGS', 'LEADS', 'DEALS'];
+    $description['includeRelations'] = ['PERSONS', 'COUNTRY', 'FIRST_CONTACT', 'BILLING_ACCOUNTS', 'ACTIVITIES', 'TAGS', 'LEADS', 'DEALS','USER'];
     $description['permissions']['canRead'] = $this->app->permissions->granted($this->fullName . ':Read');
     $description['permissions']['canCreate'] = $this->app->permissions->granted($this->fullName . ':Create');
     $description['permissions']['canUpdate'] = $this->app->permissions->granted($this->fullName . ':Update');

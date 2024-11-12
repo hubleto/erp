@@ -43,7 +43,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => true,
+        'required' => false,
       ],
       'id_person' => [
         'type' => 'lookup',
@@ -51,7 +51,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
-        'required' => true,
+        'required' => false,
       ],
       'price' => [
         'type' => 'float',
@@ -73,7 +73,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       ],
       'id_user' => [
         'type' => 'lookup',
-        'title' => 'Owner',
+        'title' => 'Assigned User',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',

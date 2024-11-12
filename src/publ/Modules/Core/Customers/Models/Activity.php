@@ -88,6 +88,14 @@ class Activity extends \CeremonyCrmApp\Core\Model
     return $description;
   }
 
+  public function formDescribe(array $description = []): array
+  {
+      $description = parent::formDescribe();
+      $description['defaultValues']['id_user'] = $this->app->user;
+      $description['includeRelations'] = ["COMPANY_ACTIVITY", "LEAD_ACTIVITY", "DEAL_ACTIVITY", "USER", "ACTIVITY_TYPE"];
+      return $description;
+  }
+
   public function onAfterCreate(array $record, $returnValue)
   {
     if (isset($record["creatingForModel"])) {

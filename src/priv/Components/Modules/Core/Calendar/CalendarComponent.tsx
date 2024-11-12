@@ -59,14 +59,12 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
   renderCell = (eventInfo) => {
     return (
       <>
-        <b>{eventInfo.timeText}</b><span style={{marginLeft: 4}}>{eventInfo.event.title}</span><i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.company})</i>
+        <b>{eventInfo.timeText}</b><span style={{marginLeft: 4}}>{eventInfo.event.title}</span><i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.type})</i>
       </>
     )
   }
 
   render(): JSX.Element {
-    console.log(this.state.newTime);
-
     return (
       <div>
         <FullCalendar
@@ -115,6 +113,8 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
             <FormActivity
               id={this.state.showIdActivity}
               descriptionSource="both"
+              creatingForModel={this.props.creatingForModel}
+              creatingForId={this.props.creatingForId}
               onDeleteCallback={() => { this.setState({showIdActivity: 0}); }}
               description={{
                 defaultValues: {

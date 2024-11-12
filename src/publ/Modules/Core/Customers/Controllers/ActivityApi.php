@@ -11,7 +11,7 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
 
     $mAktivita = new \CeremonyCrmApp\Modules\Core\Customers\Models\Activity($this->app);
     $aktivity = $mAktivita->eloquent
-      ->select("activities.*", "activity_types.color")
+      ->select("activities.*", "activity_types.color", "activity_types.name as activity_type")
       ->join("activity_types", "activity_types.id", "=", "activities.id_activity_type")
       ->where("date_start", ">=", $dateStart)
       ->where("date_start", "<=", $dateEnd)
@@ -52,12 +52,14 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
       if ($aktivita->date_end != null) {
         if ($aktivita->time_end != null) $transformacia[$key]['end'] = $aktivita->date_end." ".$aktivita->time_end;
         else $transformacia[$key]['end'] = $aktivita->date_end;
+      } else if ($aktivita->time_end != null) {
+        $transformacia[$key]['end'] = $aktivita->date_start." ".$aktivita->time_end;
       }
       $transformacia[$key]['allDay'] = $aktivita->all_day == 1 || $aktivita->time_start == null ? true : false;
       $transformacia[$key]['title'] = $aktivita->subject;
       $transformacia[$key]['backColor'] = $aktivita->color;
       $transformacia[$key]['color'] = $aktivita->color;
-      $transformacia[$key]['company'] = $aktivita->COMPANY->name;
+      $transformacia[$key]['type'] = $aktivita->activity_type;
     }
 
     return $transformacia;

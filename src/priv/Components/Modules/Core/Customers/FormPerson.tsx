@@ -7,9 +7,13 @@ import FormInput from 'adios/FormInput';
 import TableAddresses from './TableAddresses';
 import TableContacts from './TableContacts';
 
-interface FormPersonProps extends FormProps {}
+interface FormPersonProps extends FormProps {
+  newEntryId?: number,
+}
 
-interface FormPersonState extends FormState {}
+interface FormPersonState extends FormState {
+  newEntryId?: number,
+}
 
 export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonState> {
   static defaultProps: any = {
@@ -22,7 +26,10 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
 
   constructor(props: FormPersonProps) {
     super(props);
-    this.state = this.getStateFromProps(props);
+    this.state = {
+      ...this.getStateFromProps(props),
+      newEntryId: this.props.newEntryId ?? -1,
+    }
   }
 
   getStateFromProps(props: FormPersonProps) {
@@ -161,9 +168,11 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     onClick={() => {
                       if (!R.ADDRESSES) R.ADDRESSES = [];
                       R.ADDRESSES.push({
+                        id: this.state.newEntryId,
                         id_person: { _useMasterRecordId_: true },
                       });
                       this.setState({ record: R });
+                      this.setState({ newEntryId: this.state.newEntryId - 1 } as FormPersonState);
                     }}
                   >
                     + Add address
@@ -212,10 +221,12 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     onClick={() => {
                       if (!R.CONTACTS) R.CONTACTS = [];
                       R.CONTACTS.push({
+                        id: this.state.newEntryId,
                         id_person: { _useMasterRecordId_: true },
                         type: 'email',
                       });
                       this.setState({ record: R });
+                      this.setState({ newEntryId: this.state.newEntryId - 1 } as FormPersonState);
                     }}
                   >
                     + Add Contact

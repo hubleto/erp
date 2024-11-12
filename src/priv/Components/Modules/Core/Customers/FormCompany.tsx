@@ -27,6 +27,7 @@ interface FormCompanyProps extends FormProps {
   highlightIdActivity: number,
   createNewLead: boolean,
   createNewDeal: boolean,
+  newEntryId?: number,
 }
 
 interface FormCompanyState extends FormState {
@@ -34,6 +35,7 @@ interface FormCompanyState extends FormState {
   highlightIdActivity: number,
   createNewLead: boolean,
   createNewDeal: boolean,
+  newEntryId?: number,
   //isInlineEditingBillingAccounts: boolean
 }
 
@@ -58,6 +60,7 @@ export default class FormCompany<P, S> extends Form<
       highlightIdActivity: this.props.highlightIdActivity ?? 0,
       createNewLead: this.props.createNewLead ?? false,
       createNewDeal: this.props.createNewDeal ?? false,
+      newEntryId: this.props.newEntryId ?? -1,
       //isInlineEditingBillingAccounts: false,
     }
   }
@@ -178,6 +181,7 @@ export default class FormCompany<P, S> extends Form<
                         }}
                       />
                     </FormInput>
+                    {this.inputWrapper("id_user")}
                   </div>
                 </div>
               </div>
@@ -239,11 +243,13 @@ export default class FormCompany<P, S> extends Form<
                       onClick={() => {
                         if (!R.PERSONS) R.PERSONS = [];
                         R.PERSONS.push({
+                          id: this.state.newEntryId,
                           id_company: { _useMasterRecordId_: true },
                           is_primary: false,
                           is_active: true,
                         });
                         this.setState({ record: R });
+                        this.setState({ newEntryId: this.state.newEntryId - 1 } as FormCompanyState);
                       }}>
                       + Add contact
                     </a>
@@ -407,7 +413,7 @@ export default class FormCompany<P, S> extends Form<
                     fontSize: "10px",
                   }}
                 >
-                  {JSON.stringify(R.BILLING_ACCOUNTS, null, 2)}
+                  {JSON.stringify(R.PERSONS, null, 2)}
                 </pre>
               </div>
             </div>

@@ -8,9 +8,13 @@ import request from 'adios/Request';
 import InputVarchar from 'adios/Inputs/Varchar';
 import TableLeadServices from './TableLeadServices';
 
-interface FormLeadProps extends FormProps {}
+interface FormLeadProps extends FormProps {
+  newEntryId?: number,
+}
 
-interface FormLeadState extends FormState {}
+interface FormLeadState extends FormState {
+  newEntryId?: number,
+}
 
 export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   static defaultProps: any = {
@@ -23,7 +27,10 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
 
   constructor(props: FormLeadProps) {
     super(props);
-    this.state = this.getStateFromProps(props);
+    this.state = {
+      ...this.getStateFromProps(props),
+      newEntryId: this.props.newEntryId ?? -1,
+    };
   }
 
   getStateFromProps(props: FormLeadProps) {
@@ -259,9 +266,11 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                       onClick={() => {
                         if (!R.SERVICES) R.SERVICES = [];
                         R.SERVICES.push({
+                          id: this.state.newEntryId,
                           id_lead: { _useMasterRecordId_: true },
                         });
                         this.setState({ record: R });
+                        this.setState({ newEntryId: this.state.newEntryId - 1 } as FormLeadState);
                       }}>
                       + Add service
                     </a>

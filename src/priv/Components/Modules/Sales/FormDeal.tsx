@@ -7,9 +7,13 @@ import FormInput from 'adios/FormInput';
 import request from 'adios/Request';
 import TableDealServices from './TableDealServices';
 
-interface FormDealProps extends FormProps {}
+interface FormDealProps extends FormProps {
+  newEntryId?: number,
+}
 
-interface FormDealState extends FormState {}
+interface FormDealState extends FormState {
+  newEntryId?: number,
+}
 
 export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
   static defaultProps: any = {
@@ -22,7 +26,10 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
 
   constructor(props: FormDealProps) {
     super(props);
-    this.state = this.getStateFromProps(props);
+    this.state = {
+      ...this.getStateFromProps(props),
+      newEntryId: this.props.newEntryId ?? -1,
+    };
   }
 
   getStateFromProps(props: FormDealProps) {
@@ -264,9 +271,11 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           onClick={() => {
                             if (!R.SERVICES) R.SERVICES = [];
                             R.SERVICES.push({
+                              id: this.state.newEntryId,
                               id_lead: { _useMasterRecordId_: true },
                             });
                             this.setState({ record: R });
+                            this.setState({ newEntryId: this.state.newEntryId - 1 } as FormDealState);
                           }}>
                           + Add service
                         </a>

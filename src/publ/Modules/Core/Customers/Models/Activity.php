@@ -12,7 +12,9 @@ class Activity extends \CeremonyCrmApp\Core\Model
   public ?string $lookupSqlValue = '{%TABLE%}.subject';
 
   public array $relations = [
-    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
+    'COMPANY_ACTIVITY' => [ self::HAS_ONE, ActivityCompany::class, 'id_activity', 'id' ],
+    //'LEAD' => [ self::BELONGS_TO, ActivityLead::class, 'id_activity', 'id' ],
+    //'DEAL' => [ self::BELONGS_TO, ActivityDeal::class, 'id_activity', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'ACTIVITY_TYPE' => [ self::HAS_ONE, ActivityType::class, 'id', 'id_activity_type'],
   ];
@@ -63,14 +65,6 @@ class Activity extends \CeremonyCrmApp\Core\Model
         'title' => 'Completed',
         'required' => false,
       ],
-      'id_company' => [
-        'type' => 'lookup',
-        'title' => 'Company',
-        'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => false,
-      ],
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Created by',
@@ -90,6 +84,20 @@ class Activity extends \CeremonyCrmApp\Core\Model
     $description['ui']['addButtonText'] = 'Add Activity';
     $description['ui']['showHeader'] = true;
     return $description;
+  }
+
+  public function onAfterCreate(array $record, $returnValue)
+  {
+    if (isset($record["creatingForModel"])) {
+      if ($record["creatingForModel"] == "Company") {
+        $mActvityCompany = new ActivityCompany($this->app);
+        $mActvityCompany->eloquent->create([
+          "id_activity" => $record["id"],
+          "id_company" => $record["creatingForId"]
+        ]);
+      }
+    }
+    return $record;
   }
 
 }

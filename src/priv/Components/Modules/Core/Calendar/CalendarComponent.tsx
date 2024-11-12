@@ -12,7 +12,9 @@ import { getUrlParam } from "adios/Helper";
 interface CalendarProps {
   views?: string,
   url?: string,
-  height?: any
+  height?: any,
+  creatingForModel?: string,
+  creatingForId?: number,
 }
 
 interface CalendarState {
@@ -75,7 +77,7 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
-            right: this.props.views ?? 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: this.props.views ?? 'timeGridDay,timeGridWeek,dayGridMonth'
           }}
           initialView='dayGridMonth'
           eventTimeFormat={{
@@ -114,14 +116,12 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
               id={this.state.showIdActivity}
               descriptionSource="both"
               onDeleteCallback={() => { this.setState({showIdActivity: 0}); }}
-              /* description={{
-                permissions: {
-                  canDelete: true,
-                  canRead: true,
-                  canCreate: true,
-                  canUpdate: true,
+              description={{
+                defaultValues: {
+                  creatingForModel: this.props.creatingForModel,
+                  creatingForId: this.props.creatingForId,
                 }
-              }} */
+              }}
               showInModal={true}
               showInModalSimple={true}
               onClose={() => { this.setState({showIdActivity: 0}); }}
@@ -146,7 +146,8 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
                 defaultValues: {
                   date_start: this.state.newDate,
                   time_start: this.state.newTime == "00:00:00" ? null : this.state.newTime,
-                  id_company: getUrlParam("recordId") > 0 ? getUrlParam("recordId") : null,
+                  creatingForModel:this.props.creatingForModel,
+                  creatingForId:this.props.creatingForId,
                 }
               }}
               showInModal={true}

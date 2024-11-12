@@ -263,8 +263,10 @@ export default class FormCompany<P, S> extends Form<
           {showAdditional ? (
             <TabPanel header="Activities">
               <CalendarComponent
-                views={"dayGridMonth,listYear"}
-                url={`activities/get?company=${R.id}`}
+                creatingForModel="Company"
+                creatingForId={R.id}
+                views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+                url={`activities/get?creatingForModel=Company&creatingForId=${R.id}`}
               ></CalendarComponent>
             </TabPanel>
           ) : null}

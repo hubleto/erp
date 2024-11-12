@@ -4,7 +4,10 @@ import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
 import { getUrlParam } from 'adios/Helper';
 
-export interface FormActivityProps extends FormProps {}
+export interface FormActivityProps extends FormProps {
+  creatingForModel?: string,
+  creatingForId?: number,
+}
 
 export interface FormActivityState extends FormState {}
 
@@ -93,7 +96,6 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
           <div className='card-body'>
             {this.inputWrapper('id_activity_type')}
             {this.inputWrapper('subject')}
-            {this.inputWrapper('id_company')}
             {this.inputWrapper('date_start')}
             {this.inputWrapper('time_start')}
             {this.inputWrapper('date_end')}

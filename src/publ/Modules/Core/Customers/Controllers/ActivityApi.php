@@ -13,15 +13,22 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
     $aktivity = $mAktivita->eloquent
       ->select("activities.*", "activity_types.color")
       ->join("activity_types", "activity_types.id", "=", "activities.id_activity_type")
-      ->with("COMPANY")
       ->where("date_start", ">=", $dateStart)
       ->where("date_start", "<=", $dateEnd)
-      ->where("activity_types.calendar_visibility", 1)
     ;
 
-    if (isset($this->params["company"])) {
-      $aktivity->where("id_company", (int) $this->params["company"]);
+    if (isset($this->params["creatingForModel"])) {
+      if ($this->params["creatingForModel"] == "Company")
+      $aktivity
+        ->join("company_activities", "company_activities.id_activity", "=", "activities.id")
+        ->where("company_activities.id_company", $this->params["creatingForId"])
+      ;
+    } else {
+      //ak je hlavný kalendár
+      $aktivity->where("activity_types.calendar_visibility", 1);
     }
+
+    //var_dump($aktivity->toSql()); exit;
 
     $aktivity = $aktivity->get();
     $transformacia = [];

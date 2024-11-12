@@ -86,7 +86,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       ],
       'id_user' => [
         'type' => 'lookup',
-        'title' => 'Owner',
+        'title' => 'Assigned User',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',

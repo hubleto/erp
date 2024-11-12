@@ -6,6 +6,7 @@ import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 import request from 'adios/Request';
 import TableDealServices from './TableDealServices';
+import Lookup from 'adios/Inputs/Lookup';
 
 interface FormDealProps extends FormProps {
   newEntryId?: number,
@@ -115,6 +116,22 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
     return Number(dealSumPrice.toFixed(2));
   }
 
+  pipelineChange(newRecord) {
+    request.get(
+      'sales/change-pipeline',
+      {
+        idPipeline: newRecord.id_pipeline
+      },
+      (data: any) => {
+        if (data.status == "success") {
+          newRecord.PIPELINE = data.newPipeline;
+          newRecord.PIPELINE_STEP.order = 0;
+          this.setState({record: newRecord});
+        }
+      }
+    );
+  }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
@@ -179,7 +196,17 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 <div className='card mt-2' style={{gridArea: 'status'}}>
                   <div className='card-header'>Deal Progress</div>
                   <div className='card-body'>
-                    {this.inputWrapper('id_pipeline')}
+
+                    <FormInput title={"Pipeline"}>
+                      <Lookup {...this.getDefaultInputProps()}
+                        model='CeremonyCrmApp/Modules/Core/Settings/Models/Pipeline'
+                        value={R.id_pipeline}
+                        onChange={(value: any) => {
+                          this.updateRecord({ id_pipeline: value });
+                          this.pipelineChange(R);
+                        }}
+                      ></Lookup>
+                    </FormInput>
                     <div className=' flex flex-row gap-2 justify-center'>
 
                       {R.PIPELINE != null && R.PIPELINE.PIPELINE_STEPS.length > 0 ?

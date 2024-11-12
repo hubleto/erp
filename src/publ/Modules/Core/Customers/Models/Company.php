@@ -21,7 +21,7 @@ class Company extends \CeremonyCrmApp\Core\Model
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, 'id_company' ],
     //'BILLING_ACCOUNTS' => [ self::HAS_MANY, BillingAccount::class, 'id_company', ],
-    'ACTIVITIES' => [ self::HAS_MANY, ActivityCompany::class, 'id_company', 'id' ],
+    'ACTIVITIES' => [ self::HAS_MANY, CompanyActivity::class, 'id_company', 'id' ],
     'TAGS' => [ self::HAS_MANY, CompanyTag::class, 'id_company', 'id' ],
     'LEADS' => [ self::HAS_MANY, Lead::class, 'id_company', 'id'],
     'DEALS' => [ self::HAS_MANY, Deal::class, 'id_company', 'id'],

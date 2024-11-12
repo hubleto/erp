@@ -26,6 +26,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
     'LABELS' => [ self::HAS_MANY, LeadLabel::class, 'id_lead', 'id' ],
     'SERVICES' => [ self::HAS_MANY, LeadService::class, 'id_lead', 'id' ],
+    'ACTIVITIES' => [ self::HAS_MANY, LeadActivity::class, 'id_lead', 'id' ],
   ];
 
   public function columns(array $columns = []): array
@@ -126,7 +127,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_status'] = 1;
-    $description['includeRelations'] = ['DEAL','COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'HISTORY', 'LABELS', 'SERVICES'];
+    $description['includeRelations'] = ['DEAL','COMPANY', 'USER', 'PERSON', 'STATUS', 'CURRENCY', 'HISTORY', 'LABELS', 'SERVICES', 'ACTIVITIES'];
     return $description;
   }
 

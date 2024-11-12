@@ -18,11 +18,22 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
     ;
 
     if (isset($this->params["creatingForModel"])) {
-      if ($this->params["creatingForModel"] == "Company")
-      $aktivity
-        ->join("company_activities", "company_activities.id_activity", "=", "activities.id")
-        ->where("company_activities.id_company", $this->params["creatingForId"])
-      ;
+      if ($this->params["creatingForModel"] == "Company") {
+        $aktivity
+          ->join("company_activities", "company_activities.id_activity", "=", "activities.id")
+          ->where("company_activities.id_company", $this->params["creatingForId"])
+        ;
+      } else if ($this->params["creatingForModel"] == "Lead"){
+        $aktivity
+          ->join("lead_activities", "lead_activities.id_activity", "=", "activities.id")
+          ->where("lead_activities.id_lead", $this->params["creatingForId"])
+        ;
+      } else if ($this->params["creatingForModel"] == "Deal"){
+        $aktivity
+          ->join("deal_activities", "deal_activities.id_activity", "=", "activities.id")
+          ->where("deal_activities.id_deal", $this->params["creatingForId"])
+        ;
+      }
     } else {
       //ak je hlavný kalendár
       $aktivity->where("activity_types.calendar_visibility", 1);

@@ -5,7 +5,6 @@ namespace CeremonyCrmApp\Modules\Sales\Sales\Models\Eloquent;
 use CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent\Company;
 use CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent\Person;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\Currency;
-use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\DealStatus;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\Pipeline;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\PipelineStep;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\User;
@@ -49,5 +48,8 @@ class Deal extends \ADIOS\Core\Model\Eloquent
   }
   public function SERVICES(): HasMany {
     return $this->hasMany(LeadService::class, 'id_lead', 'id');
+  }
+  public function ACTIVITIES(): HasMany {
+    return $this->hasMany(DealActivity::class, 'id_deal', 'id' );
   }
 }

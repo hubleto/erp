@@ -4,6 +4,8 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 use CeremonyCrmApp\Modules\Core\Settings\Models\ActivityType;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadActivity;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\DealActivity;
 
 class Activity extends \CeremonyCrmApp\Core\Model
 {
@@ -12,9 +14,9 @@ class Activity extends \CeremonyCrmApp\Core\Model
   public ?string $lookupSqlValue = '{%TABLE%}.subject';
 
   public array $relations = [
-    'COMPANY_ACTIVITY' => [ self::HAS_ONE, ActivityCompany::class, 'id_activity', 'id' ],
-    //'LEAD' => [ self::BELONGS_TO, ActivityLead::class, 'id_activity', 'id' ],
-    //'DEAL' => [ self::BELONGS_TO, ActivityDeal::class, 'id_activity', 'id' ],
+    'COMPANY_ACTIVITY' => [ self::HAS_ONE, CompanyActivity::class, 'id_activity', 'id' ],
+    'LEAD_ACTIVITY' => [ self::HAS_ONE, LeadActivity::class, 'id_activity', 'id' ],
+    'DEAL_ACTIVITY' => [ self::HAS_ONE, DealActivity::class, 'id_activity', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'ACTIVITY_TYPE' => [ self::HAS_ONE, ActivityType::class, 'id', 'id_activity_type'],
   ];
@@ -90,10 +92,22 @@ class Activity extends \CeremonyCrmApp\Core\Model
   {
     if (isset($record["creatingForModel"])) {
       if ($record["creatingForModel"] == "Company") {
-        $mActvityCompany = new ActivityCompany($this->app);
+        $mActvityCompany = new CompanyActivity($this->app);
         $mActvityCompany->eloquent->create([
           "id_activity" => $record["id"],
           "id_company" => $record["creatingForId"]
+        ]);
+      } else if ($record["creatingForModel"] == "Lead") {
+        $mLeadActivity = new LeadActivity($this->app);
+        $mLeadActivity->eloquent->create([
+          "id_activity" => $record["id"],
+          "id_lead" => $record["creatingForId"]
+        ]);
+      } else if ($record["creatingForModel"] == "Deal") {
+        $mDealActivity = new DealActivity($this->app);
+        $mDealActivity->eloquent->create([
+          "id_activity" => $record["id"],
+          "id_deal" => $record["creatingForId"]
         ]);
       }
     }

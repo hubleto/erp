@@ -1,31 +1,33 @@
 <?php
 
-namespace CeremonyCrmApp\Modules\Core\Customers\Models;
+namespace CeremonyCrmApp\Modules\Sales\Sales\Models;
 
-class ActivityCompany extends \CeremonyCrmApp\Core\Model
+use CeremonyCrmApp\Modules\Core\Customers\Models\Activity;
+
+class LeadActivity extends \CeremonyCrmApp\Core\Model
 {
-  public string $table = 'company_activities';
-  public string $eloquentClass = Eloquent\ActivityCompany::class;
+  public string $table = 'lead_activities';
+  public string $eloquentClass = Eloquent\LeadActivity::class;
 
   public array $relations = [
-    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
+    'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id' ],
     'ACTIVITY' => [ self::BELONGS_TO, Activity::class, 'id_activity', 'id' ],
   ];
 
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_company' => [
+      'id_lead' => [
         'type' => 'lookup',
-        'title' => 'Company',
-        'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
+        'title' => 'Lead',
+        'model' => 'CeremonyCrmApp/Modules/Sales/Sales/Models/Lead',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
       ],
       'id_activity' => [
         'type' => 'lookup',
-        'title' => 'Tag',
+        'title' => 'Activity',
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Activity',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',

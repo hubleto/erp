@@ -5,7 +5,7 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class ActivityCompany extends \ADIOS\Core\Model\Eloquent
+class CompanyActivity extends \ADIOS\Core\Model\Eloquent
 {
   public $table = 'company_activities';
 

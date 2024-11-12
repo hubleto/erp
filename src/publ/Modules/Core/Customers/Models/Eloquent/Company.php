@@ -28,7 +28,7 @@ class Company extends \ADIOS\Core\Model\Eloquent
     return $this->hasMany(BillingAccount::class, 'id_company');
   } */
   public function ACTIVITIES(): HasMany {
-    return $this->hasMany(ActivityCompany::class, 'id_company', 'id' );
+    return $this->hasMany(CompanyActivity::class, 'id_company', 'id' );
   }
   public function TAGS(): HasMany {
     return $this->hasMany(CompanyTag::class, 'id_company', 'id');

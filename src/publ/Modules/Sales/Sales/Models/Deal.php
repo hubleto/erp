@@ -20,7 +20,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
-    'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_deal','id'],
+    'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id'],
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
@@ -30,6 +30,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
     'LABELS' => [ self::HAS_MANY, DealLabel::class, 'id_deal', 'id' ],
     'SERVICES' => [ self::HAS_MANY, LeadService::class, 'id_deal', 'id' ],
+    'ACTIVITIES' => [ self::HAS_MANY, DealActivity::class, 'id_deal', 'id' ],
   ];
 
   public function columns(array $columns = []): array
@@ -157,7 +158,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'PIPELINE_STEP', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD','SERVICES'];
+    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'PIPELINE_STEP', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD','SERVICES', 'ACTIVITIES'];
     return $description;
   }
 

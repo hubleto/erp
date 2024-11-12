@@ -212,10 +212,12 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         </FormInput>
                         <div className=' flex flex-row gap-2 justify-center'>
 
-                          {R.PIPELINE != null && R.PIPELINE.PIPELINE_STEPS.length > 0 ?
+                          {R.PIPELINE != null
+                            && R.PIPELINE.PIPELINE_STEPS
+                            && R.PIPELINE.PIPELINE_STEPS.length > 0 ?
                             R.PIPELINE.PIPELINE_STEPS.map((s, i) => {
                               var statusColor: string = null;
-                              {s.order <= R.PIPELINE_STEP.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
+                              {R.PIPELINE_STEP && s.order <= R.PIPELINE_STEP.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
                               return (
                                 <>
                                   <button

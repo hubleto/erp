@@ -199,7 +199,6 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     <div className='card mt-2' style={{gridArea: 'status'}}>
                       <div className='card-header'>Deal Progress</div>
                       <div className='card-body'>
-
                         <FormInput title={"Pipeline"}>
                           <Lookup {...this.getDefaultInputProps()}
                             model='CeremonyCrmApp/Modules/Core/Settings/Models/Pipeline'
@@ -211,7 +210,6 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           ></Lookup>
                         </FormInput>
                         <div className=' flex flex-row gap-2 justify-center'>
-
                           {R.PIPELINE != null
                             && R.PIPELINE.PIPELINE_STEPS
                             && R.PIPELINE.PIPELINE_STEPS.length > 0 ?
@@ -259,7 +257,34 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                                 canRead: true,
                               },
                               columns: {
-                                id_service: { type: "lookup", title: "Service", model: "CeremonyCrmApp/Modules/Core/Services/Models/Service" },
+                                id_service: { type: "lookup", title: "Service",
+                                model: "CeremonyCrmApp/Modules/Core/Services/Models/Service",
+                                cellRenderer: ( table: TableDealServices, data: any, options: any): JSX.Element => {
+                                  return (
+                                    <FormInput>
+                                      <Lookup {...this.getDefaultInputProps()}
+                                        model='CeremonyCrmApp/Modules/Core/Services/Models/Service'
+                                        value={data.id_service}
+                                        onChange={(value: any) => {
+                                          fetch('../services/get-service-price?serviceId='+value)
+                                          .then(response => {
+                                            if (!response.ok) {
+                                              throw new Error('Network response was not ok ' + response.statusText);
+                                            }
+                                            return response.json();
+                                          }).then(returnData => {
+                                            data.id_service = value;
+                                            data.unit_price = returnData.unit_price;
+                                            this.updateRecord({ SERVICES: table.state.data?.data });
+                                            this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
+                                            console.log(table.state.data);
+                                          })
+                                        }}
+                                      ></Lookup>
+                                    </FormInput>
+                                  )
+                                },
+                                },
                                 unit_price: { type: "float", title: "Unit Price" },
                                 amount: { type: "int", title: "Amount" },
                                 discount: { type: "float", title: "Discount (%)" },

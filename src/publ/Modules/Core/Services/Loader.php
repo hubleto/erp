@@ -27,6 +27,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       ],
       [
         '' => 'Services',
+        '/get-service-price' => 'GetServicePrice',
       ]
     );
   }

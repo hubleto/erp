@@ -9,6 +9,7 @@ import InputVarchar from 'adios/Inputs/Varchar';
 import TableLeadServices from './TableLeadServices';
 import { TabPanel, TabView } from 'primereact/tabview';
 import CalendarComponent from '../Core/Calendar/CalendarComponent';
+import Lookup from 'adios/Inputs/Lookup';
 
 interface FormLeadProps extends FormProps {
   newEntryId?: number,
@@ -225,7 +226,34 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                             canRead: true,
                           },
                           columns: {
-                            id_service: { type: "lookup", title: "Service", model: "CeremonyCrmApp/Modules/Core/Services/Models/Service" },
+                            id_service: { type: "lookup", title: "Service",
+                              model: "CeremonyCrmApp/Modules/Core/Services/Models/Service",
+                              cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
+                                return (
+                                  <FormInput>
+                                    <Lookup {...this.getDefaultInputProps()}
+                                      model='CeremonyCrmApp/Modules/Core/Services/Models/Service'
+                                      value={data.id_service}
+                                      onChange={(value: any) => {
+                                        fetch('../services/get-service-price?serviceId='+value)
+                                        .then(response => {
+                                          if (!response.ok) {
+                                            throw new Error('Network response was not ok ' + response.statusText);
+                                          }
+                                          return response.json();
+                                        }).then(returnData => {
+                                          data.id_service = value;
+                                          data.unit_price = returnData.unit_price;
+                                          this.updateRecord({ SERVICES: table.state.data?.data });
+                                          this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
+                                          console.log(table.state.data);
+                                        })
+                                      }}
+                                    ></Lookup>
+                                  </FormInput>
+                                )
+                              },
+                            },
                             unit_price: { type: "float", title: "Unit Price" },
                             amount: { type: "int", title: "Amount" },
                             discount: { type: "float", title: "Discount (%)" },

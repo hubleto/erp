@@ -20,6 +20,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
         'idAccount' => '$1',
       ],
       [
+        '' => 'Home',
         '/leads' => 'Leads',
         '/deals' => 'Deals',
         '/convert-lead' => 'ConvertLead',
@@ -32,7 +33,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
   {
-    $sidebar->addLink(1, 80100, 'sales/leads', $this->app->translate('Sales'), 'fas fa-money-bill');
+    $sidebar->addLink(1, 80100, 'sales', $this->app->translate('Sales'), 'fas fa-money-bill');
 
     if (str_starts_with($this->app->requestedUri, 'sales')) {
       $sidebar->addHeading1(2, 10200, $this->app->translate('Sales'));

@@ -1,0 +1,23 @@
+
+<h2>{{ viewParams.pipeline.name}}</h2>
+
+<div class="flex flex-row justify-start gap-2 w-full">
+  {% for step in viewParams.pipeline.PIPELINE_STEPS %}
+    <div class="card min-h-[85vh] w-[230px]">
+      <div class="card-header">{{ step.name }}</div>
+      <div class="card-body">
+        {% for deal in viewParams.deals %}
+          {% if deal.id_pipeline_step == step.id %}
+            <div class="card">
+              <div class="card-header h-10 flex flex-col justify-center p-2 text-sm">{{deal.title}}</div>
+              <div class="card-body text-sm flex flex-row justify-between">
+                <span>{{deal.price}} {{deal.CURRENCY.code}}</span>
+                <span class="icon"><a href="./sales/deals?recordId={{deal.id}}"><i class="fas fa-circle-right text-gray-300"></i></a></span>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

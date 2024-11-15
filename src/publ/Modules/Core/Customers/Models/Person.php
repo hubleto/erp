@@ -36,7 +36,7 @@ class Person extends \CeremonyCrmApp\Core\Model
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
+        'required' => false,
       ],
       'is_primary' => [
         'type' => 'boolean',
@@ -57,16 +57,21 @@ class Person extends \CeremonyCrmApp\Core\Model
   }
 
   //v tablePersons
-  /* public function tableDescribe(array $description = []): array
+  public function tableDescribe(array $description = []): array
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe();
-    $description['title'] = 'Contact Persons';
+    $description['ui']['title'] = 'Contact Persons';
     $description['ui']['addButtonText'] = 'Add Contact Person';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
+    $description['columns']['virt_email'] = ["title" => "Emails"];
+    $description['columns']['virt_number'] = ["title" => "Phone Numbers"];
+    unset($description['columns']['is_primary']);
+    unset($description['columns']['note']);
+    unset($description['columns']['is_active']);
     return $description;
-  } */
+  }
 
   public function formDescribe(array $description = []): array
   {
@@ -83,9 +88,9 @@ class Person extends \CeremonyCrmApp\Core\Model
 
     $query = $query->selectRaw("
       (Select value from contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,
-      (Select value from contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email,
-      (Select concat(street_line_1,', ', street_line_2, ', ', city) from addresses where id_person = persons.id LIMIT 1) virt_address
+      (Select value from contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email
     ");
+      //(Select concat(street_line_1,', ', street_line_2, ', ', city) from addresses where id_person = persons.id LIMIT 1) virt_address
 
     return $query;
   }

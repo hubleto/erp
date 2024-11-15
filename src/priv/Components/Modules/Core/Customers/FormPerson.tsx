@@ -207,7 +207,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                         type: {
                           type: 'varchar',
                           title: 'Contact type',
-                          enumValues: {'email' : 'Email', 'number' : 'Phone Number'},
+                          enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
                           //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
                         },
                         value: { type: 'varchar', title: 'Value' },

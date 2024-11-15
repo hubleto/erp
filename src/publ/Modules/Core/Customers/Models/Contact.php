@@ -26,7 +26,7 @@ class Contact extends \CeremonyCrmApp\Core\Model
       'type' => [
         'type' => 'varchar',
         'title' => 'Type',
-        'enumValues' => ['email' => 'Email', 'number' => 'Phone Number'],
+        'enumValues' => ['email' => 'Email', 'number' => 'Phone Number', 'other' => 'Other'],
         'required' => true,
       ],
       'value' => [

@@ -155,8 +155,26 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                   <div className='card-body flex flex-row gap-2'>
                     <div className='grow'>
                       {this.inputWrapper('title')}
-                      {this.inputWrapper('id_company')}
-                      {this.inputWrapper('id_person')}
+                      <FormInput title={"Company"} required={true}>
+                        <Lookup {...this.getDefaultInputProps()}
+                          model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
+                          value={R.id_company}
+                          onChange={(value: any) => {
+                            this.updateRecord({ id_company: value, id_person: 0 }), () => (this.loadRecord())
+                          }}
+                        ></Lookup>
+                      </FormInput>
+                      <FormInput title={"Contact Person"} required={true}>
+                        <Lookup {...this.getDefaultInputProps()}
+                          model='CeremonyCrmApp/Modules/Core/Customers/Models/Person'
+                          customEndpointParams={{id_company: R.id_company}}
+                          endpoint={`customers/get-company-contacts`}
+                          value={R.id_person}
+                          onChange={(value: any) => {
+                            this.updateRecord({ id_person: value })
+                          }}
+                        ></Lookup>
+                      </FormInput>
                       <div className='flex flex-row *:w-1/2'>
                         {this.inputWrapper('price', {
                           readonly: R.SERVICES && R.SERVICES.length > 0 ? true : false,

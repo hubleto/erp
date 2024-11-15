@@ -33,6 +33,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/activities/get' => 'ActivityApi',
         '/tags' => 'Tag',
         '/documents' => 'Documents',
+        '/get-company-contacts' => 'GetCompanyContacts'
 
       ]
     );

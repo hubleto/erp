@@ -53,6 +53,12 @@ class Person extends \CeremonyCrmApp\Core\Model
         'required' => false,
         'default' => 1,
       ],
+      'date_created' => [
+        'type' => 'date',
+        'title' => 'Date Created',
+        'required' => true,
+        'readonly' => true,
+      ],
     ]));
   }
 
@@ -69,7 +75,15 @@ class Person extends \CeremonyCrmApp\Core\Model
     $description['columns']['virt_number'] = ["title" => "Phone Numbers"];
     unset($description['columns']['is_primary']);
     unset($description['columns']['note']);
+
+    //nadstavit aby boli tieto stĺpce posledné
+    $tempColumn = $description['columns']['date_created'];
+    unset($description['columns']['date_created']);
+    $description['columns']['date_created'] = $tempColumn;
+    $tempColumn = $description['columns']['is_active'];
     unset($description['columns']['is_active']);
+    $description['columns']['is_active'] = $tempColumn;
+
     return $description;
   }
 

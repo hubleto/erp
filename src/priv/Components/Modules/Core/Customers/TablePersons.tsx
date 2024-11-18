@@ -40,37 +40,37 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   // }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
-    if (columnName == "virt_email") {
-      return (
-        <div className='flex flex-row gap-2 flex-wrap max-w-lg'>
-          {data.CONTACTS.map((contact, key) => {
-            if (contact.type == "email") {
-              return (
-                <div className='border border-gray-400 rounded px-1'>
-                  {contact.value}
-                </div>
-              );
-            } else return <></>;
-          })}
-        </div>
-      );
-    } else if (columnName == "virt_number") {
-      return (
-        <div className='flex flex-row gap-2 flex-wrap max-w-lg'>
-          {data.CONTACTS.map((contact, key) => {
-            if (contact.type == "number") {
-              return (
-                <div className='border border-gray-400 rounded px-1'>
-                  {contact.value}
-                </div>
-              );
-            } else return <></>;
-          })}
-        </div>
-      );
-    } else {
-      return super.renderCell(columnName, column, data, options);
-    }
+    if (data.CONTACTS && data.CONTACTS.length > 0) {
+      if (columnName == "virt_email") {
+        return (
+          <div className='flex flex-row gap-2 flex-wrap max-w-lg'>
+            {data.CONTACTS.map((contact, key) => {
+              if (contact.type == "email") {
+                return (
+                  <div className='border border-gray-400 rounded px-1'>
+                    {contact.value} ({contact.CONTACT_TYPE.name})
+                  </div>
+                );
+              } else return <></>;
+            })}
+          </div>
+        );
+      } else if (columnName == "virt_number") {
+        return (
+          <div className='flex flex-row gap-2 flex-wrap max-w-lg'>
+            {data.CONTACTS.map((contact, key) => {
+              if (contact.type == "number") {
+                return (
+                  <div className='border border-gray-400 rounded px-1'>
+                    {contact.value}  ({contact.CONTACT_TYPE.name})
+                  </div>
+                );
+              } else return <></>;
+            })}
+          </div>
+        );
+      } else return super.renderCell(columnName, column, data, options);
+    } else return super.renderCell(columnName, column, data, options);
   }
 
   renderForm(): JSX.Element {

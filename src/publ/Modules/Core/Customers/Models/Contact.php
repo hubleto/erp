@@ -2,6 +2,8 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
+use CeremonyCrmApp\Modules\Core\Settings\Models\ContactType;
+
 class Contact extends \CeremonyCrmApp\Core\Model
 {
   public string $table = 'contacts';
@@ -10,6 +12,7 @@ class Contact extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],
+    'CONTACT_TYPE' => [ self::HAS_ONE, ContactType::class, 'id_contact_type', 'id'],
   ];
 
   public function columns(array $columns = []): array
@@ -19,6 +22,14 @@ class Contact extends \CeremonyCrmApp\Core\Model
         'type' => 'lookup',
         'title' => 'Person',
         'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
+        'required' => true,
+      ],
+      'id_contact_type' => [
+        'type' => 'lookup',
+        'title' => 'Contact Category',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/ContactType',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -46,5 +57,11 @@ class Contact extends \CeremonyCrmApp\Core\Model
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
     return $description;
+  }
+
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  {
+    $query = parent::prepareLoadRecordQuery($includeRelations, 3, $query, $level);
+    return $query;
   }
 }

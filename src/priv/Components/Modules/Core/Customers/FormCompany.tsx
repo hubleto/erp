@@ -21,6 +21,7 @@ import FormLead from "../../Sales/FormLead";
 import ModalSimple from "adios/ModalSimple";
 import TableDeals from "../../Sales/TableDeals";
 import FormDeal from "../../Sales/FormDeal";
+import moment from 'moment';
 
 interface FormCompanyProps extends FormProps {
   highlightIdBussinessAccounts: number,
@@ -193,6 +194,7 @@ export default class FormCompany<P, S> extends Form<
                     uid={this.props.uid + "_table_persons"}
                     showHeader={false}
                     showFooter={false}
+                    descriptionSource="props"
                     data={{ data: R.PERSONS }}
                     description={{
                       permissions: {
@@ -247,6 +249,7 @@ export default class FormCompany<P, S> extends Form<
                           id_company: { _useMasterRecordId_: true },
                           is_primary: false,
                           is_active: true,
+                          date_created: moment().format("YYYY-MM-DD")
                         });
                         this.setState({ record: R });
                         this.setState({ newEntryId: this.state.newEntryId - 1 } as FormCompanyState);

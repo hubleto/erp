@@ -6,6 +6,7 @@ import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 import TableAddresses from './TableAddresses';
 import TableContacts from './TableContacts';
+import moment from 'moment';
 
 interface FormPersonProps extends FormProps {
   newEntryId?: number,
@@ -91,6 +92,9 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
     if (!record.is_primary) {
       record.is_primary = 0;
     }
+    if (record.id == -1) {
+      record.date_created = moment().format("YYYY-MM-DD");
+    }
 
     return record;
   }
@@ -126,6 +130,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     }}
                   ></InputTags2>
                 </FormInput>
+                {showAdditional ? this.inputWrapper('date_created') : null}
               </div>
             </div>
 
@@ -206,11 +211,12 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                       columns: {
                         type: {
                           type: 'varchar',
-                          title: 'Contact type',
+                          title: 'Contact Type',
                           enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
                           //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
                         },
                         value: { type: 'varchar', title: 'Value' },
+                        id_contact_type: { type: 'lookup', title: 'Contact Category', model: 'CeremonyCrmApp/Modules/Core/Settings/Models/ContactType'},
                       }
                     }}
                   ></TableContacts>

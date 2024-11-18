@@ -130,7 +130,13 @@ class Company extends \CeremonyCrmApp\Core\Model
     unset($description['columns']['region']);
     unset($description['columns']['id_country']);
     unset($description['columns']['note']);
+
+    //nadstavit aby bol is_active posledný
+    $tempColumn = $description['columns']['is_active'];
     unset($description['columns']['is_active']);
+    $description['columns']['is_active'] = $tempColumn;
+
+
     return $description;
   }
 

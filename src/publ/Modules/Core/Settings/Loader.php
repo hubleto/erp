@@ -32,6 +32,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
         '/settings' => 'Settings',
         '/tags' => 'Tags',
         '/activity-types' => 'ActivityTypes',
+        '/contact-types' => 'ContactTypes',
         '/countries' => 'Countries',
         '/currencies' => 'Currencies',
         '/labels' => 'Labels',
@@ -56,11 +57,12 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 99205, 'settings/permissions', $this->app->translate('Permissions'), 'fas fa-shield-halved');
       $sidebar->addLink(2, 99206, 'settings/tags', $this->app->translate('Tags'), 'fas fa-tags');
       $sidebar->addLink(2, 99207, 'settings/activity-types', $this->app->translate('Activity Types'), 'fas fa-layer-group');
-      $sidebar->addLink(2, 99208, 'settings/countries', $this->app->translate('Countries'), 'fas fa-globe');
-      $sidebar->addLink(2, 99209, 'settings/currencies', $this->app->translate('Currencies'), 'fas fa-dollar-sign');
-      $sidebar->addLink(2, 99210, 'settings/labels', $this->app->translate('Labels'), 'fas fa-tags');
-      $sidebar->addLink(2, 99211, 'settings/lead-statuses', $this->app->translate('Lead Statuses'), 'fas fa-arrow-down-short-wide');
-      $sidebar->addLink(2, 99212, 'settings/pipelines', $this->app->translate('Pipelines'), 'fas fa-bars-progress');
+      $sidebar->addLink(2, 99208, 'settings/contact-types', $this->app->translate('Contact Types'), 'fas fa-phone');
+      $sidebar->addLink(2, 99209, 'settings/countries', $this->app->translate('Countries'), 'fas fa-globe');
+      $sidebar->addLink(2, 99210, 'settings/currencies', $this->app->translate('Currencies'), 'fas fa-dollar-sign');
+      $sidebar->addLink(2, 99211, 'settings/labels', $this->app->translate('Labels'), 'fas fa-tags');
+      $sidebar->addLink(2, 99212, 'settings/lead-statuses', $this->app->translate('Lead Statuses'), 'fas fa-arrow-down-short-wide');
+      $sidebar->addLink(2, 99213, 'settings/pipelines', $this->app->translate('Pipelines'), 'fas fa-bars-progress');
     }
   }
 

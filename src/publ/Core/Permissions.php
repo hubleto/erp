@@ -12,7 +12,7 @@ class Permissions extends \ADIOS\Core\Permissions {
   {
     parent::__construct($app);
 
-    if ($this->app->requestedUri != "/ceremonycrm/www/create_account.php") {
+    if ($this->app->db) {
       $this->administratorRoles = $this->loadAdministratorRoles();
     }
   }
@@ -31,7 +31,7 @@ class Permissions extends \ADIOS\Core\Permissions {
   public function loadPermissions(): array {
     $permissions = parent::loadPermissions();
 
-    if ($this->app->requestedUri != "/ceremonycrm/www/create_account.php") {
+    if ($this->app->db) {
       $mUserRole = new UserRole($this->app);
       $idCommonUserRoles = $mUserRole->eloquent
         ->where("grant_all", 0)

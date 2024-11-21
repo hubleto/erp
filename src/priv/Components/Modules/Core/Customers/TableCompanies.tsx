@@ -75,20 +75,6 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
     }
   }
 
-  render(): JSX.Element {
-    return <>
-    {this.state.tableOptions == true ?
-    <>
-      {this.renderOptionsForm()}
-      {super.render()}
-    </>
-    :
-    super.render()
-    }
-
-    </>
-  }
-
   renderForm(): JSX.Element {
     let formProps: FormProps = this.getFormProps();
     return <FormCompany {...formProps}/>;

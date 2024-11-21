@@ -122,6 +122,7 @@ class Company extends \CeremonyCrmApp\Core\Model
     $description['ui']['addButtonText'] = 'Add Company';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
+    $description['columns']['categories'] = ["title" => "Categories"];
 
     unset($description['columns']['street_line_1']);
     unset($description['columns']['street_line_2']);

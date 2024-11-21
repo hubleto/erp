@@ -54,6 +54,41 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
     }
   } */
 
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "categories") {
+      return (
+        <div className='flex flex-row flex-wrap gap-2 min-w-64'>
+          {data.TAGS.map((tag, key) => {
+            return (
+              <div
+                style={{color: tag.TAG.color, borderColor: tag.TAG.color}}
+                className='border rounded px-1'>
+                {tag.TAG.name}
+              </div>
+            );
+          })}
+        </div>
+      );
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
+  }
+
+  render(): JSX.Element {
+    return <>
+    {this.state.tableOptions == true ?
+    <>
+      {this.renderOptionsForm()}
+      {super.render()}
+    </>
+    :
+    super.render()
+    }
+
+    </>
+  }
+
   renderForm(): JSX.Element {
     let formProps: FormProps = this.getFormProps();
     return <FormCompany {...formProps}/>;

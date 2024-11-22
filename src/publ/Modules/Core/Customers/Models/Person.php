@@ -38,9 +38,9 @@ class Person extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => false,
       ],
-      'is_primary' => [
+      'is_main' => [
         'type' => 'boolean',
-        'title' => 'First Contact',
+        'title' => 'Main Contact',
       ],
       'note' => [
         'type' => 'text',
@@ -73,7 +73,7 @@ class Person extends \CeremonyCrmApp\Core\Model
     $description['ui']['showFooter'] = false;
     $description['columns']['virt_email'] = ["title" => "Emails"];
     $description['columns']['virt_number'] = ["title" => "Phone Numbers"];
-    unset($description['columns']['is_primary']);
+    unset($description['columns']['is_main']);
     unset($description['columns']['note']);
 
     //nadstavit aby boli tieto stĺpce posledné
@@ -91,7 +91,7 @@ class Person extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 1;
-    $description['defaultValues']['is_primary'] = 0;
+    $description['defaultValues']['is_main'] = 0;
     $description['includeRelations'] = ['ADDRESSES', 'CONTACTS', 'TAGS'];
     return $description;
   }

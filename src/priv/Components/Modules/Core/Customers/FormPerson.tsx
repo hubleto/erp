@@ -89,8 +89,8 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
   }
 
   onBeforeSaveRecord(record: any) {
-    if (!record.is_primary) {
-      record.is_primary = 0;
+    if (!record.is_main) {
+      record.is_main = 0;
     }
     if (record.id == -1) {
       record.date_created = moment().format("YYYY-MM-DD");
@@ -116,7 +116,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 {this.inputWrapper('first_name')}
                 {this.inputWrapper('last_name')}
                 {this.inputWrapper('id_company')}
-                {this.inputWrapper('is_primary')}
+                {this.inputWrapper('is_main')}
                 {showAdditional ? this.inputWrapper('is_active') : null}
                 <FormInput title='Tags'>
                   <InputTags2 {...this.getDefaultInputProps()}

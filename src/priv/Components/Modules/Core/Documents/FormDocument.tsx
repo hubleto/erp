@@ -83,20 +83,20 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
     var entryType: string = "";
 
     if (R.COMPANY_DOCUMENT && !this.props.creatingForModel) {
-      entryURL = "customers/companies?recordId="+R.COMPANY_DOCUMENT.id_company;
+      entryURL = "./customers/companies?recordId="+R.COMPANY_DOCUMENT.id_company;
       entryType = "Company"
     } else if (R.LEAD_DOCUMENT && !this.props.creatingForModel) {
-      entryURL = "sales/leads?recordId="+R.LEAD_DOCUMENT.id_lead;
+      entryURL = "./sales/leads?recordId="+R.LEAD_DOCUMENT.id_lead;
       entryType = "Lead"
     } else if (R.DEAL_DOCUMENT && !this.props.creatingForModel) {
-      entryURL = "sales/deals?recordId="+R.DEAL_DOCUMENT.id_deal;
+      entryURL = "./sales/deals?recordId="+R.DEAL_DOCUMENT.id_deal;
       entryType = "Deal"
     }
 
     return (
       <>
         <div className='card mt-4'>
-          <div className='card-body flex flex-row gap-2'>
+          <div className='card-body'>
               {this.inputWrapper('name')}
               {this.inputWrapper('file')}
               {!this.props.creatingForModel && showAdditional && entryType ?

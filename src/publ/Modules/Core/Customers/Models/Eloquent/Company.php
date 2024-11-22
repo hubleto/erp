@@ -23,7 +23,7 @@ class Company extends \ADIOS\Core\Model\Eloquent
     return $this->hasOne(Country::class, 'id', 'id_country' );
   }
   public function FIRST_CONTACT(): HasOne {
-    return $this->hasOne(Person::class, 'id_company')->where('is_primary', true);
+    return $this->hasOne(Person::class, 'id_company')->where('is_main', true);
   }
   /* public function BILLING_ACCOUNTS(): HasMany {
     return $this->hasMany(BillingAccount::class, 'id_company');

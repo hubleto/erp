@@ -87,7 +87,6 @@ export default class FormCompany<P, S> extends Form<
     if (record.ACTIVITIES)
       record.ACTIVITIES.map((item: any, key: number) => {
         record.ACTIVITIES[key].id_company = { _useMasterRecordId_: true };
-        record.ACTIVITIES[key].id_user = globalThis.app.idUser;
       });
     /* if (record.BILLING_ACCOUNTS) {
       record.BILLING_ACCOUNTS.map((item: any, key: number) => {
@@ -172,8 +171,8 @@ export default class FormCompany<P, S> extends Form<
                   <div className='border-l border-gray-200'></div>
                   <div className="w-1/2">
                     {this.inputWrapper("vat_id")}
-                    {this.inputWrapper("tax_id")}
                     {this.inputWrapper("company_id")}
+                    {this.inputWrapper("tax_id")}
                     {showAdditional ? this.inputWrapper("date_created") : null}
                     {showAdditional ? this.inputWrapper("is_active") : null}
                     <FormInput title="Tags">
@@ -213,6 +212,7 @@ export default class FormCompany<P, S> extends Form<
                       columns: {
                         first_name: { type: "varchar", title: "First name" },
                         last_name: { type: "varchar", title: "Last name" },
+                        is_main: { type: "boolean", title: "Main Contact" },
                         __more_details: { type: "none", title: "", cellRenderer: ( table: TablePersons, data: any, options: any): JSX.Element => {
                             if (data.id > 0) {
                               return (<>
@@ -256,7 +256,7 @@ export default class FormCompany<P, S> extends Form<
                         R.PERSONS.push({
                           id: this.state.newEntryId,
                           id_company: { _useMasterRecordId_: true },
-                          is_primary: false,
+                          is_main: false,
                           is_active: true,
                           date_created: moment().format("YYYY-MM-DD")
                         });
@@ -428,7 +428,7 @@ export default class FormCompany<P, S> extends Form<
                     canUpdate: true
                   },
                   columns: {
-                    id_document: { type: "lookup", title: "Docuement", model: "CeremonyCrmApp/Modules/Core/Documents/Models/Document" },
+                    id_document: { type: "lookup", title: "Document", model: "CeremonyCrmApp/Modules/Core/Documents/Models/Document" },
                   }
                 }}
                 isUsedAsInput={true}
@@ -445,34 +445,34 @@ export default class FormCompany<P, S> extends Form<
                 + Add Document
               </a>
               {this.state.createNewDocument == true ?
-              <ModalSimple
-                uid='document_form'
-                isOpen={true}
-                type='right'
-              >
-                <FormDocument
-                  id={-1}
-                  descriptionSource="both"
-                  isInlineEditing={true}
-                  creatingForModel="Company"
-                  creatingForId={this.state.id}
-                  description={{
-                    defaultValues: {
-                      creatingForModel: "Company",
-                      creatingForId: this.state.record.id,
-                    }
-                  }}
-                  showInModal={true}
-                  showInModalSimple={true}
-                  onClose={() => { this.setState({ createNewDocument: false } as FormCompanyState) }}
-                  onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-                    if (saveResponse.status = "success") {
-                      this.loadRecord();
-                      this.setState({ createNewDocument: false } as FormCompanyState)
-                    }
-                  }}
-                ></FormDocument>
-              </ModalSimple>
+                <ModalSimple
+                  uid='document_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormDocument
+                    id={-1}
+                    descriptionSource="both"
+                    isInlineEditing={true}
+                    creatingForModel="Company"
+                    creatingForId={this.state.id}
+                    description={{
+                      defaultValues: {
+                        creatingForModel: "Company",
+                        creatingForId: this.state.record.id,
+                      }
+                    }}
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onClose={() => { this.setState({ createNewDocument: false } as FormCompanyState) }}
+                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                        this.setState({ createNewDocument: false } as FormCompanyState)
+                      }
+                    }}
+                  ></FormDocument>
+                </ModalSimple>
               : null}
               {this.state.showDocument > 0 ?
                 <ModalSimple
@@ -483,6 +483,7 @@ export default class FormCompany<P, S> extends Form<
                   <FormDocument
                     id={this.state.showDocument}
                     onClose={() => this.setState({showDocument: 0} as FormCompanyState)}
+                    creatingForModel="Company"
                     showInModal={true}
                     showInModalSimple={true}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {

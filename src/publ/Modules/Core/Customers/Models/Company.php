@@ -82,7 +82,7 @@ class Company extends \CeremonyCrmApp\Core\Model
       'tax_id' => [
         'type' => 'varchar',
         'title' => 'Tax ID',
-        'required' => false,
+        'required' => true,
       ],
       'note' => [
         'type' => 'text',

@@ -115,6 +115,35 @@ class Company extends \CeremonyCrmApp\Core\Model
     ]));
   }
 
+  public function indexes(array $indexes = []) {
+    return parent::indexes([
+      "vat_id" => [
+        "type" => "unique",
+        "columns" => [
+          "vat_id" => [
+            "order" => "asc",
+          ],
+        ],
+      ],
+      "company_id" => [
+        "type" => "unique",
+        "columns" => [
+          "company_id" => [
+            "order" => "asc",
+          ],
+        ],
+      ],
+      "tax_id" => [
+        "type" => "unique",
+        "columns" => [
+          "tax_id" => [
+            "order" => "asc",
+          ],
+        ],
+      ],
+    ]);
+  }
+
   public function tableDescribe(array $description = []): array
   {
     $description["model"] = $this->fullName;

@@ -3,6 +3,7 @@
 namespace CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent;
 
 use CeremonyCrmApp\Modules\Core\Billing\Models\Eloquent\BillingAccount;
+use CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent\CompanyDocument;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\Country;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\User;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Eloquent\Deal;
@@ -29,6 +30,9 @@ class Company extends \ADIOS\Core\Model\Eloquent
   } */
   public function ACTIVITIES(): HasMany {
     return $this->hasMany(CompanyActivity::class, 'id_company', 'id' );
+  }
+  public function DOCUMENTS(): HasMany {
+    return $this->hasMany(CompanyDocument::class, 'id_company', 'id' );
   }
   public function TAGS(): HasMany {
     return $this->hasMany(CompanyTag::class, 'id_company', 'id');

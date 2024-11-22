@@ -56,7 +56,7 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
 
 
   renderCell(columnName: string, column: any, data: any, options: any) {
-    if (columnName == "categories") {
+    if (columnName == "tags") {
       return (
         <div className='flex flex-row flex-wrap gap-2 min-w-64'>
           {data.TAGS.map((tag, key) => {

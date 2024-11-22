@@ -22,6 +22,9 @@ import ModalSimple from "adios/ModalSimple";
 import TableDeals from "../../Sales/TableDeals";
 import FormDeal from "../../Sales/FormDeal";
 import moment from 'moment';
+import TableDocuments from "../Documents/TableDocuments";
+import TableCompanyDocuments from "./TableCompanyDocuments";
+import FormDocument from "../Documents/FormDocument";
 
 interface FormCompanyProps extends FormProps {
   highlightIdBussinessAccounts: number,
@@ -36,6 +39,8 @@ interface FormCompanyState extends FormState {
   highlightIdActivity: number,
   createNewLead: boolean,
   createNewDeal: boolean,
+  createNewDocument: boolean,
+  showDocument: number,
   newEntryId?: number,
   //isInlineEditingBillingAccounts: boolean
 }
@@ -59,8 +64,10 @@ export default class FormCompany<P, S> extends Form<
       ...this.getStateFromProps(props),
       //highlightIdBussinessAccounts: this.props.highlightIdBussinessAccounts ?? 0,
       highlightIdActivity: this.props.highlightIdActivity ?? 0,
-      createNewLead: this.props.createNewLead ?? false,
-      createNewDeal: this.props.createNewDeal ?? false,
+      createNewLead: false,
+      createNewDeal: false,
+      createNewDocument: false,
+      showDocument: 0,
       newEntryId: this.props.newEntryId ?? -1,
       //isInlineEditingBillingAccounts: false,
     }
@@ -169,7 +176,7 @@ export default class FormCompany<P, S> extends Form<
                     {this.inputWrapper("company_id")}
                     {showAdditional ? this.inputWrapper("date_created") : null}
                     {showAdditional ? this.inputWrapper("is_active") : null}
-                    <FormInput title="Categories">
+                    <FormInput title="Tags">
                       <InputTags2
                         {...this.getDefaultInputProps()}
                         value={this.state.record.TAGS}
@@ -230,7 +237,9 @@ export default class FormCompany<P, S> extends Form<
                     isInlineEditing={this.state.isInlineEditing}
                     readonly={!this.state.isInlineEditing}
                     onRowClick={(table: TablePersons, row: any) => {
-                      this.setState({ isInlineEditing: !this.state.isInlineEditing, });
+                      if (this.state.isInlineEditing == false) {
+                        this.setState({ isInlineEditing: true });
+                      }
                     }}
                     onChange={(table: TablePersons) => {
                       this.updateRecord({ PERSONS: table.state.data?.data });
@@ -399,6 +408,91 @@ export default class FormCompany<P, S> extends Form<
                   />
                 </ModalSimple>
               ): null}
+            </TabPanel>
+          ) : null}
+          {showAdditional ? (
+            <TabPanel header="Documents">
+              <TableCompanyDocuments
+                uid={this.props.uid + "_table_deals"}
+                data={{ data: R.DOCUMENTS }}
+                descriptionSource="props"
+                description={{
+                  ui: {
+                    showFooter: false,
+                    showHeader: false,
+                  },
+                  permissions: {
+                    canCreate: true,
+                    canDelete: true,
+                    canRead: true,
+                    canUpdate: true
+                  },
+                  columns: {
+                    id_document: { type: "lookup", title: "Docuement", model: "CeremonyCrmApp/Modules/Core/Documents/Models/Document" },
+                  }
+                }}
+                isUsedAsInput={true}
+                //isInlineEditing={this.state.isInlineEditing}
+                readonly={!this.state.isInlineEditing}
+                onRowClick={(table: TableCompanyDocuments, row: any) => {
+                  this.setState({showDocument: row.id_document} as FormCompanyState);
+                }}
+              />
+              <a
+                role="button"
+                onClick={() => this.setState({createNewDocument: true} as FormCompanyState)}
+              >
+                + Add Document
+              </a>
+              {this.state.createNewDocument == true ?
+              <ModalSimple
+                uid='document_form'
+                isOpen={true}
+                type='right'
+              >
+                <FormDocument
+                  id={-1}
+                  descriptionSource="both"
+                  isInlineEditing={true}
+                  creatingForModel="Company"
+                  creatingForId={this.state.id}
+                  description={{
+                    defaultValues: {
+                      creatingForModel: "Company",
+                      creatingForId: this.state.record.id,
+                    }
+                  }}
+                  showInModal={true}
+                  showInModalSimple={true}
+                  onClose={() => { this.setState({ createNewDocument: false } as FormCompanyState) }}
+                  onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                    if (saveResponse.status = "success") {
+                      this.loadRecord();
+                      this.setState({ createNewDocument: false } as FormCompanyState)
+                    }
+                  }}
+                ></FormDocument>
+              </ModalSimple>
+              : null}
+              {this.state.showDocument > 0 ?
+                <ModalSimple
+                  uid='document_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormDocument
+                    id={this.state.showDocument}
+                    onClose={() => this.setState({showDocument: 0} as FormCompanyState)}
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                      }
+                    }}
+                  />
+                </ModalSimple>
+              : null}
             </TabPanel>
           ) : null}
           <TabPanel header="Notes">

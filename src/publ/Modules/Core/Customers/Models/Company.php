@@ -22,6 +22,7 @@ class Company extends \CeremonyCrmApp\Core\Model
     'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, 'id_company' ],
     //'BILLING_ACCOUNTS' => [ self::HAS_MANY, BillingAccount::class, 'id_company', ],
     'ACTIVITIES' => [ self::HAS_MANY, CompanyActivity::class, 'id_company', 'id' ],
+    'DOCUMENTS' => [ self::HAS_MANY, CompanyDocument::class, 'id_company', 'id'],
     'TAGS' => [ self::HAS_MANY, CompanyTag::class, 'id_company', 'id' ],
     'LEADS' => [ self::HAS_MANY, Lead::class, 'id_company', 'id'],
     'DEALS' => [ self::HAS_MANY, Deal::class, 'id_company', 'id'],
@@ -122,7 +123,7 @@ class Company extends \CeremonyCrmApp\Core\Model
     $description['ui']['addButtonText'] = 'Add Company';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
-    $description['columns']['categories'] = ["title" => "Categories"];
+    $description['columns']['tags'] = ["title" => "Tags"];
 
     unset($description['columns']['street_line_1']);
     unset($description['columns']['street_line_2']);
@@ -145,7 +146,18 @@ class Company extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 1;
-    $description['includeRelations'] = ['PERSONS', 'COUNTRY', 'FIRST_CONTACT', 'BILLING_ACCOUNTS', 'ACTIVITIES', 'TAGS', 'LEADS', 'DEALS','USER'];
+    $description['includeRelations'] = [
+      'PERSONS',
+      'COUNTRY',
+      'FIRST_CONTACT',
+      'BILLING_ACCOUNTS',
+      'ACTIVITIES',
+      'TAGS',
+      'LEADS',
+      'DEALS',
+      'USER',
+      'DOCUMENTS',
+    ];
     $description['permissions']['canRead'] = $this->app->permissions->granted($this->fullName . ':Read');
     $description['permissions']['canCreate'] = $this->app->permissions->granted($this->fullName . ':Create');
     $description['permissions']['canUpdate'] = $this->app->permissions->granted($this->fullName . ':Update');

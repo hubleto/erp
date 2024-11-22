@@ -118,7 +118,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 {this.inputWrapper('id_company')}
                 {this.inputWrapper('is_primary')}
                 {showAdditional ? this.inputWrapper('is_active') : null}
-                <FormInput title='Categories'>
+                <FormInput title='Tags'>
                   <InputTags2 {...this.getDefaultInputProps()}
                     value={this.state.record.TAGS}
                     model='CeremonyCrmApp/Modules/Core/Settings/Models/Tag'

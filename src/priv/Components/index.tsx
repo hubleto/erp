@@ -36,6 +36,9 @@ import CoreBillingTableBillingAccountService from "./Modules/Core/Billing/TableB
 import SalesTableLeads from "./Modules/Sales/TableLeads"
 import SalesTableDeals from "./Modules/Sales/TableDeals"
 
+//documents
+import CoreDocumentsTableDocuments from "./Modules/Core/Documents/TableDocuments"
+
 //sandbox
 import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
 
@@ -93,11 +96,14 @@ app.registerReactComponent('CoreCustomersTableContacts', CoreCustomersTableConta
 app.registerReactComponent('CoreSandboxTableCompanies', CoreSandboxTableCompanies);
 app.registerReactComponent('CoreSettingsTablePipelines', CoreSettingsTablePipelines);
 app.registerReactComponent('CoreSettingsTableUserRoles', CoreSettingsTableUserRoles);
+//documents
+app.registerReactComponent('CoreDocumentsTableDocuments', CoreDocumentsTableDocuments);
 //billing
 app.registerReactComponent('CoreBillingTableBillingAccountService', CoreBillingTableBillingAccountService);
-//sles
+//sales
 app.registerReactComponent('SalesTableLeads', SalesTableLeads);
 app.registerReactComponent('SalesTableDeals', SalesTableDeals);
+
 
 // Render react elements into body
 app.renderReactElements();

@@ -42,30 +42,34 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (data.CONTACTS && data.CONTACTS.length > 0) {
       if (columnName == "virt_email") {
+        let contactsRendered = 0;
         return (
           <div className='flex flex-row gap-2 flex-wrap max-w-lg'>
             {data.CONTACTS.map((contact, key) => {
-              if (contact.type == "email") {
+              if (contact.type == "email" && contactsRendered < 2) {
+                contactsRendered += 1;
                 return (
                   <div className='border border-gray-400 rounded px-1'>
                     {contact.value} ({contact.CONTACT_TYPE.name})
                   </div>
                 );
-              } else return <></>;
+              } else return null;
             })}
           </div>
         );
       } else if (columnName == "virt_number") {
+        let contactsRendered = 0;
         return (
           <div className='flex flex-row gap-2 flex-wrap max-w-lg'>
             {data.CONTACTS.map((contact, key) => {
-              if (contact.type == "number") {
+              if (contact.type == "number" && contactsRendered < 2) {
+                contactsRendered += 1;
                 return (
                   <div className='border border-gray-400 rounded px-1'>
                     {contact.value}  ({contact.CONTACT_TYPE.name})
                   </div>
                 );
-              } else return <></>;
+              } else return null;
             })}
           </div>
         );

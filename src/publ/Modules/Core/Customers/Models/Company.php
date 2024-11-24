@@ -175,6 +175,7 @@ class Company extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 1;
+    $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['includeRelations'] = [
       'PERSONS',
       'COUNTRY',

@@ -282,6 +282,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                                     <FormInput>
                                       <Lookup {...this.getDefaultInputProps()}
                                         model='CeremonyCrmApp/Modules/Core/Services/Models/Service'
+                                        cssClass='min-w-44'
                                         value={data.id_service}
                                         onChange={(value: any) => {
                                           fetch('../services/get-service-price?serviceId='+value)

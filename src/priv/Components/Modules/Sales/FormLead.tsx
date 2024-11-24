@@ -259,6 +259,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                                   <FormInput>
                                     <Lookup {...this.getDefaultInputProps()}
                                       model='CeremonyCrmApp/Modules/Core/Services/Models/Service'
+                                      cssClass='min-w-44'
                                       value={data.id_service}
                                       onChange={(value: any) => {
                                         fetch('../services/get-service-price?serviceId='+value)
@@ -376,24 +377,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             {this.inputWrapper('note')}
           </TabPanel>
         </TabView>
-        <div>
-          <div className="card">
-            <div className="card-header">this.state.record</div>
-            <div className="card-body">
-              <pre
-                style={{
-                  color: "blue",
-                  width: "100%",
-                  fontFamily: "Courier New",
-                  fontSize: "10px",
-                }}
-              >
-                {JSON.stringify(R.id_company, null, 2)}
-                {/* {JSON.stringify(R.PERSON, null, 2)} */}
-              </pre>
-            </div>
-          </div>
-        </div>
       </>
     );
   }

@@ -107,13 +107,11 @@ export default class FormCompany<P, S> extends Form<
   }
 
   onBeforeSaveRecord(record: any) {
-    if (record.id == -1) {
-      const today = new Date();
-      const year = today.getFullYear();
-      const month = String(today.getMonth() + 1).padStart(2, '0');
-      const day = String(today.getDate()).padStart(2, '0');
-      record.date_created = `${year}-${month}-${day}`;
-    }
+    //Delete all spaces in identifiers
+    if (record.tax_id) record.tax_id = record.tax_id.replace(/\s+/g, "");
+    if (record.vat_id) record.vat_id = record.vat_id.replace(/\s+/g, "");
+    if (record.company_id) record.company_id = record.company_id.replace(/\s+/g, "");
+
     return record;
   }
 

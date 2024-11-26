@@ -52,4 +52,7 @@ class Deal extends \ADIOS\Core\Model\Eloquent
   public function ACTIVITIES(): HasMany {
     return $this->hasMany(DealActivity::class, 'id_deal', 'id' );
   }
+  public function DOCUMENTS(): HasMany {
+    return $this->hasMany(DealDocument::class, 'id_deal', 'id' );
+  }
 }

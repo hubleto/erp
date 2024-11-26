@@ -31,6 +31,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     'LABELS' => [ self::HAS_MANY, DealLabel::class, 'id_deal', 'id' ],
     'SERVICES' => [ self::HAS_MANY, DealService::class, 'id_deal', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, DealActivity::class, 'id_deal', 'id' ],
+    'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_deal', 'id'],
   ];
 
   public function columns(array $columns = []): array
@@ -158,7 +159,20 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'PIPELINE_STEP', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD','SERVICES', 'ACTIVITIES'];
+    $description['includeRelations'] = [
+      'COMPANY',
+      'USER',
+      'PERSON',
+      'PIPELINE',
+      'PIPELINE_STEP',
+      'CURRENCY',
+      'HISTORY',
+      'LABELS',
+      'LEAD',
+      'SERVICES',
+      'ACTIVITIES',
+      'DOCUMENTS',
+    ];
     return $description;
   }
 

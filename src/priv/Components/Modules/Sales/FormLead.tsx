@@ -10,6 +10,9 @@ import TableLeadServices from './TableLeadServices';
 import { TabPanel, TabView } from 'primereact/tabview';
 import CalendarComponent from '../Core/Calendar/CalendarComponent';
 import Lookup from 'adios/Inputs/Lookup';
+import TableLeadDocuments from './TableLeadDocuments';
+import ModalSimple from 'adios/ModalSimple';
+import FormDocument from '../Core/Documents/FormDocument';
 
 interface FormLeadProps extends FormProps {
   newEntryId?: number,
@@ -17,6 +20,9 @@ interface FormLeadProps extends FormProps {
 
 interface FormLeadState extends FormState {
   newEntryId?: number,
+  createNewDocument: boolean,
+  showDocument: number,
+  historyReversed: boolean,
 }
 
 export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
@@ -33,6 +39,9 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     this.state = {
       ...this.getStateFromProps(props),
       newEntryId: this.props.newEntryId ?? -1,
+      createNewDocument: false,
+      showDocument: 0,
+      historyReversed: false,
     };
   }
 
@@ -142,7 +151,10 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
-    if (R.HISTORY && R.HISTORY.length > 0) R.HISTORY = this.state.record.HISTORY.reverse();
+    if (R.HISTORY && R.HISTORY.length > 0 && this.state.historyReversed == false) {
+      R.HISTORY = this.state.record.HISTORY.reverse();
+      this.setState({historyReversed: true} as FormLeadState);
+    }
 
     return (
       <>
@@ -366,13 +378,99 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             </div>
           </TabPanel>
           <TabPanel header="Activities">
-              <CalendarComponent
-                creatingForModel="Lead"
-                creatingForId={R.id}
-                views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                url={`../customers/activities/get?creatingForModel=Lead&creatingForId=${R.id}`}
-              ></CalendarComponent>
+            <CalendarComponent
+              creatingForModel="Lead"
+              creatingForId={R.id}
+              views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+              url={`../customers/activities/get?creatingForModel=Lead&creatingForId=${R.id}`}
+            ></CalendarComponent>
           </TabPanel>
+          {showAdditional ? (
+            <TabPanel header="Documents">
+              <TableLeadDocuments
+                uid={this.props.uid + "_table_lead_document"}
+                data={{ data: R.DOCUMENTS }}
+                descriptionSource="props"
+                description={{
+                  ui: {
+                    showFooter: false,
+                    showHeader: false,
+                  },
+                  permissions: {
+                    canCreate: true,
+                    canDelete: true,
+                    canRead: true,
+                    canUpdate: true
+                  },
+                  columns: {
+                    id_document: { type: "lookup", title: "Document", model: "CeremonyCrmApp/Modules/Core/Documents/Models/Document" },
+                  }
+                }}
+                isUsedAsInput={true}
+                //isInlineEditing={this.state.isInlineEditing}
+                readonly={!this.state.isInlineEditing}
+                onRowClick={(table: TableLeadDocuments, row: any) => {
+                  this.setState({showDocument: row.id_document} as FormLeadState);
+                }}
+              />
+              <a
+                role="button"
+                onClick={() => this.setState({createNewDocument: true} as FormLeadState)}
+              >
+                + Add Document
+              </a>
+              {this.state.createNewDocument == true ?
+                <ModalSimple
+                  uid='document_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormDocument
+                    id={-1}
+                    descriptionSource="both"
+                    isInlineEditing={true}
+                    creatingForModel="Lead"
+                    creatingForId={this.state.id}
+                    description={{
+                      defaultValues: {
+                        creatingForModel: "Lead",
+                        creatingForId: this.state.record.id,
+                      }
+                    }}
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onClose={() => { this.setState({ createNewDocument: false } as FormLeadState) }}
+                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                        this.setState({ createNewDocument: false } as FormLeadState)
+                      }
+                    }}
+                  ></FormDocument>
+                </ModalSimple>
+              : null}
+              {this.state.showDocument > 0 ?
+                <ModalSimple
+                  uid='document_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormDocument
+                    id={this.state.showDocument}
+                    onClose={() => this.setState({showDocument: 0} as FormLeadState)}
+                    creatingForModel="Company"
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                      }
+                    }}
+                  />
+                </ModalSimple>
+              : null}
+            </TabPanel>
+          ) : null}
           <TabPanel header="Notes">
             {this.inputWrapper('note')}
           </TabPanel>

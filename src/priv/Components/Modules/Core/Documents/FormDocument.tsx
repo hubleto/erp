@@ -77,20 +77,19 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
 
   renderContent(): JSX.Element {
     const R = this.state.record;
-
     const showAdditional: boolean = R.id > 0 ? true : false;
-    var entryURL: string = "";
-    var entryType: string = "";
 
     if (R.COMPANY_DOCUMENT && !this.props.creatingForModel) {
-      entryURL = "./customers/companies?recordId="+R.COMPANY_DOCUMENT.id_company;
-      entryType = "Company"
-    } else if (R.LEAD_DOCUMENT && !this.props.creatingForModel) {
-      entryURL = "./sales/leads?recordId="+R.LEAD_DOCUMENT.id_lead;
-      entryType = "Lead"
-    } else if (R.DEAL_DOCUMENT && !this.props.creatingForModel) {
-      entryURL = "./sales/deals?recordId="+R.DEAL_DOCUMENT.id_deal;
-      entryType = "Deal"
+      var companyEntryURL = "./customers/companies?recordId="+R.COMPANY_DOCUMENT.id_company;
+      var companyEntryType = "Company"
+    }
+    if (R.LEAD_DOCUMENT && !this.props.creatingForModel) {
+      var leadEntryURL = "./sales/leads?recordId="+R.LEAD_DOCUMENT.id_lead;
+      var leadEntryType = "Lead"
+    }
+    if (R.DEAL_DOCUMENT && !this.props.creatingForModel) {
+      var dealEntryURL = "./sales/deals?recordId="+R.DEAL_DOCUMENT.id_deal;
+      var dealEntryType = "Deal"
     }
 
     return (
@@ -99,10 +98,28 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
           <div className='card-body'>
               {this.inputWrapper('name')}
               {this.inputWrapper('file')}
-              {!this.props.creatingForModel && showAdditional && entryType ?
-                <a href={entryURL} className='btn btn-primary mt-2'>
+              {!this.props.creatingForModel && showAdditional && companyEntryType ?
+                <>
+                  <a href={companyEntryURL} className='btn btn-primary'>
+                    <span className='icon'><i className='fas fa-eye'></i></span>
+                    <span className='text'>Go to {companyEntryType}</span>
+                  </a>
+                  <br></br>
+                </>
+              : null}
+              {!this.props.creatingForModel && showAdditional && leadEntryType ?
+                <>
+                  <a href={leadEntryURL} className='btn btn-primary mt-2'>
+                    <span className='icon'><i className='fas fa-eye'></i></span>
+                    <span className='text'>Go to {leadEntryType}</span>
+                  </a>
+                  <br></br>
+                </>
+              : null}
+              {!this.props.creatingForModel && showAdditional && dealEntryType ?
+                <a href={dealEntryURL} className='btn btn-primary mt-2'>
                   <span className='icon'><i className='fas fa-eye'></i></span>
-                  <span className='text'>Go to {entryType}</span>
+                  <span className='text'>Go to {dealEntryType}</span>
                 </a>
               : null}
           </div>

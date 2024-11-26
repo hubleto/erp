@@ -47,4 +47,7 @@ class Lead extends \ADIOS\Core\Model\Eloquent
   public function ACTIVITIES(): HasMany {
     return $this->hasMany(LeadActivity::class, 'id_lead', 'id' );
   }
+  public function DOCUMENTS(): HasMany {
+    return $this->hasMany(LeadDocument::class, 'id_lead', 'id' );
+  }
 }

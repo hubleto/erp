@@ -117,7 +117,7 @@ class Company extends \CeremonyCrmApp\Core\Model
 
   public function indexes(array $indexes = []) {
     return parent::indexes([
-      "vat_id" => [
+      /* "vat_id" => [
         "type" => "unique",
         "columns" => [
           "vat_id" => [
@@ -132,7 +132,7 @@ class Company extends \CeremonyCrmApp\Core\Model
             "order" => "asc",
           ],
         ],
-      ],
+      ], */
       "tax_id" => [
         "type" => "unique",
         "columns" => [

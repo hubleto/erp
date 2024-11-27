@@ -37,8 +37,9 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     if (str_starts_with($this->app->requestedUri, 'sales')) {
       $sidebar->addHeading1(2, 10200, $this->app->translate('Sales'));
-      $sidebar->addLink(2, 10201, 'sales/leads', $this->app->translate('Leads'), 'fas fa-arrows-turn-to-dots');
-      $sidebar->addLink(2, 10202, 'sales/deals', $this->app->translate('Deals'), 'fa-regular fa-handshake');
+      $sidebar->addLink(2, 10201, 'sales', $this->app->translate('Pipeline'), 'fas fa-timeline');
+      $sidebar->addLink(2, 10202, 'sales/leads', $this->app->translate('Leads'), 'fas fa-arrows-turn-to-dots');
+      $sidebar->addLink(2, 10203, 'sales/deals', $this->app->translate('Deals'), 'fa-regular fa-handshake');
     }
   }
 

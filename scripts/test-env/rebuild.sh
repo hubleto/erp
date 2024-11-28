@@ -22,6 +22,7 @@ git reset --hard
 git pull
 
 chmod +x /var/www/html/ceremonycrm/app/scripts/test-env/rebuild.sh
+chmod +x /var/www/html/ceremonycrm/app/composer-dev.sh
 
 cd /var/www/html/ceremonycrm/app
 

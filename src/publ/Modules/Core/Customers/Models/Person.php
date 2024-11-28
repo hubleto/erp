@@ -13,7 +13,7 @@ class Person extends \CeremonyCrmApp\Core\Model
   public array $relations = [
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company' ],
     'CONTACTS' => [ self::HAS_MANY, Contact::class, 'id_person', 'id' ],
-    'ADDRESSES' => [ self::HAS_MANY, Address::class, 'id_person', 'id' ],
+    //'ADDRESSES' => [ self::HAS_MANY, Address::class, 'id_person', 'id' ],
     'TAGS' => [ self::HAS_MANY, PersonTag::class, 'id_person', 'id' ],
   ];
 
@@ -92,7 +92,11 @@ class Person extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 1;
     $description['defaultValues']['is_main'] = 0;
-    $description['includeRelations'] = ['ADDRESSES', 'CONTACTS', 'TAGS'];
+    $description['includeRelations'] = [
+      /* 'ADDRESSES', */
+      'CONTACTS',
+      'TAGS'
+    ];
     return $description;
   }
 

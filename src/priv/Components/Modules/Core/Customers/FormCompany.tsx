@@ -100,7 +100,7 @@ export default class FormCompany<P, S> extends Form<
     } */
     if (record.TAGS)
       record.TAGS.map((item: any, key: number) => {
-        record.TAGS[key].id_person = { _useMasterRecordId_: true };
+        record.TAGS[key].id_company = { _useMasterRecordId_: true };
       });
 
     return record;

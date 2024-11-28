@@ -4,7 +4,7 @@ import Form, { FormProps, FormState } from 'adios/Form';
 import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
-import TableAddresses from './TableAddresses';
+/* import TableAddresses from './TableAddresses'; */
 import TableContacts from './TableContacts';
 import moment from 'moment';
 
@@ -40,9 +40,9 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
   }
 
   normalizeRecord(record) {
-    if (record.ADDRESSES) record.ADDRESSES.map((item: any, key: number) => {
+    /* if (record.ADDRESSES) record.ADDRESSES.map((item: any, key: number) => {
       record.ADDRESSES[key].id_person = {_useMasterRecordId_: true};
-    });
+    }); */
     if (record.CONTACTS) record.CONTACTS.map((item: any, key: number) => {
       record.CONTACTS[key].id_person = {_useMasterRecordId_: true};
     });
@@ -134,7 +134,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               </div>
             </div>
 
-            <div className='card mt-4' style={{gridArea: 'addresses'}}>
+            {/* <div className='card mt-4' style={{gridArea: 'addresses'}}>
               <div className='card-header'>Addresses</div>
               <div className='card-body'>
                 <InputTable
@@ -184,7 +184,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                   </a>
                 ) : null}
               </div>
-            </div>
+            </div> */}
 
             <div className='card mt-4' style={{gridArea: 'contacts'}}>
               <div className='card-header'>Contacts</div>

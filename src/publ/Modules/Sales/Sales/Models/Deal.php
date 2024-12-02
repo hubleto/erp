@@ -26,6 +26,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
+    'STATUS' => [ self::HAS_ONE, DealStatus::class, 'id', 'id_deal_status'],
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
@@ -179,6 +180,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description['includeRelations'] = [
       'COMPANY',
       'USER',
+      'STATUS',
       'PERSON',
       'PIPELINE',
       'PIPELINE_STEP',

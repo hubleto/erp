@@ -10,8 +10,7 @@ class Home extends \CeremonyCrmApp\Core\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'sales', 'content' => $this->app->translate('Sales') ],
-      [ 'url' => 'home', 'content' => $this->app->translate('Home') ],
+      [ 'url' => '', 'content' => $this->app->translate('Sales') ],
     ]);
   }
 

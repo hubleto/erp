@@ -9,6 +9,7 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\LeadStatus;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadHistory;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadLabel;
+use Exception;
 
 class Lead extends \CeremonyCrmApp\Core\Model
 {
@@ -85,8 +86,8 @@ class Lead extends \CeremonyCrmApp\Core\Model
         'type' => 'lookup',
         'title' => 'Status',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/LeadStatus',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
+        'foreignKeyOnUpdate' => 'RESTRICT',
+        'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
       ],
       'note' => [
@@ -126,6 +127,8 @@ class Lead extends \CeremonyCrmApp\Core\Model
   public function formDescribe(array $description = []): array
   {
     $description = parent::formDescribe();
+    $description['defaultValues']['id_company'] = null;
+    $description['defaultValues']['id_person'] = null;
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_status'] = 1;
     $description['includeRelations'] = [
@@ -144,8 +147,30 @@ class Lead extends \CeremonyCrmApp\Core\Model
     return $description;
   }
 
+  public function getOwnership($record) {
+    if ($record["id_company"] && !isset($record["checkOwnership"])) {
+      $mCompany = new Company($this->app);
+      $company = $mCompany->eloquent
+        ->where("id", (int) $record["id_company"])
+        ->first()
+      ;
+
+      if ($company->id_user != (int) $record["id_user"]) {
+        throw new Exception("This lead cannot be assigned to the selected user,\nbecause they are not assigned to the selected company.");
+      }
+    }
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    $this->getOwnership($record);
+    return $record;
+  }
+
   public function onBeforeUpdate(array $record): array
   {
+    $this->getOwnership($record);
+
     $lead = $this->eloquent->find($record["id"])->toArray();
     $mLeadHistory = new LeadHistory($this->app);
     $mLeadStatus= new LeadStatus($this->app);

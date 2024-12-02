@@ -12,6 +12,7 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\Setting;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealLabel;
+use Exception;
 
 class Deal extends \CeremonyCrmApp\Core\Model
 {
@@ -192,8 +193,31 @@ class Deal extends \CeremonyCrmApp\Core\Model
     ])["returnValue"];
   }
 
+  public function getOwnership($record) {
+    if ($record["id_company"] && !isset($record["checkOwnership"])) {
+      $mCompany = new Company($this->app);
+      $company = $mCompany->eloquent
+        ->where("id", $record["id_company"])
+        ->first()
+      ;
+
+      if ($company->id_user != $record["id_user"]) {
+        throw new Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected company.
+        ");
+      }
+    }
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    $this->getOwnership($record);
+    return $record;
+  }
+
   public function onBeforeUpdate(array $record): array
   {
+    $this->getOwnership($record);
+
     $deal = $this->eloquent->find($record["id"])->toArray();
     $mDealHistory = new DealHistory($this->app);
 

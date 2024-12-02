@@ -146,9 +146,22 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
+
+    if (R.LEAD) R.LEAD.checkOwnership = false;
+
     if (R.HISTORY && R.HISTORY.length > 0 && this.state.historyReversed == false) {
       R.HISTORY = this.state.record.HISTORY.reverse();
       this.setState({historyReversed: true} as FormDealState);
+    }
+
+    if (R.id > 0 && globalThis.app.user.id != R.id_user && !this.state.recordChanged) {
+      return (
+        <>
+          <div className='w-full h-full flex flex-col justify-center'>
+            <span className='text-center'>This deal belongs to a different user</span>
+          </div>
+        </>
+      )
     }
 
     return (
@@ -172,7 +185,11 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
                           value={R.id_company}
                           onChange={(value: any) => {
-                            this.updateRecord({ id_company: value, id_person: 0 }), () => (this.loadRecord())
+                            this.updateRecord({ id_company: value, id_person: null });
+                            if (R.id_company == 0) {
+                              R.id_company = null;
+                              this.setState({record: R});
+                            }
                           }}
                         ></Lookup>
                       </FormInput>
@@ -184,6 +201,10 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           value={R.id_person}
                           onChange={(value: any) => {
                             this.updateRecord({ id_person: value })
+                            if (R.id_person == 0) {
+                              R.id_person = null;
+                              this.setState({record: R})
+                            }
                           }}
                         ></Lookup>
                       </FormInput>

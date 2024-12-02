@@ -156,6 +156,18 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
       this.setState({historyReversed: true} as FormLeadState);
     }
 
+    if (R.DEAL) R.DEAL.checkOwnership = false;
+
+    if (R.id > 0 && globalThis.app.user.id != R.id_user && !this.state.recordChanged) {
+      return (
+        <>
+          <div className='w-full h-full flex flex-col justify-center'>
+            <span className='text-center'>This lead belongs to a different user</span>
+          </div>
+        </>
+      )
+    }
+
     return (
       <>
         <TabView>
@@ -177,10 +189,10 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                           model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
                           value={R.id_company}
                           onChange={(value: any) => {
-                            this.updateRecord({ id_company: value, id_person: 0 }), () => (this.loadRecord())
+                            this.updateRecord({ id_company: value, id_person: null });
                             if (R.id_company == 0) {
-                              delete R.id_company;
-                              this.setState({record: R})
+                              R.id_company = null;
+                              this.setState({record: R});
                             }
                           }}
                         ></Lookup>
@@ -194,7 +206,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                           onChange={(value: any) => {
                             this.updateRecord({ id_person: value })
                             if (R.id_person == 0) {
-                              delete R.id_person;
+                              R.id_person = null;
                               this.setState({record: R})
                             }
                           }}

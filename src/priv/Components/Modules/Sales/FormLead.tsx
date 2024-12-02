@@ -172,6 +172,12 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
       <>
         <TabView>
           <TabPanel header="Basic Information">
+            {R.DEAL && R.is_archived == 1 ?
+              <div className='alert-warning mt-2 mb-1'>
+                <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
+                <span className='text'>This lead was converted to a deal and cannot be edited</span>
+              </div>
+            : null}
             <div className='grid grid-cols-2 gap-1' style=
               {{gridTemplateAreas:`
                 'notification notification'
@@ -251,6 +257,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                           }}
                         ></InputTags2>
                       </FormInput>
+                      {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
                   </div>

@@ -53,7 +53,8 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
         "is_archived" => $lead->is_archived,
         "id_lead" => $lead->id,
         "id_pipeline" => $defaultPipeline,
-        "id_pipeline_step" => null
+        "id_pipeline_step" => null,
+        "id_deal_status" => 1,
       ]);
 
       $leadServices = $mLeadService->eloquent->where("id_lead", $leadId)->get();
@@ -98,6 +99,9 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
         "change_date" => date("Y-m-d"),
         "id_deal" => $deal->id
       ]);
+
+      $lead->is_archived = 1;
+      $lead->save();
     } catch (Exception $e) {
 
       return [

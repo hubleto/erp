@@ -82,6 +82,12 @@ class Lead extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
       ],
+      'date_created' => [
+        'type' => 'date',
+        'title' => 'Date Created',
+        'required' => true,
+        'readonly' => true,
+      ],
       'id_status' => [
         'type' => 'lookup',
         'title' => 'Status',
@@ -128,6 +134,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::formDescribe();
     $description['defaultValues']['id_company'] = null;
+    $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_person'] = null;
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_status'] = 1;

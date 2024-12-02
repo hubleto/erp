@@ -95,6 +95,12 @@ class Deal extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
       ],
+      'date_created' => [
+        'type' => 'date',
+        'title' => 'Date Created',
+        'required' => true,
+        'readonly' => true,
+      ],
       'id_pipeline' => [
         'type' => 'lookup',
         'title' => 'Pipeline',
@@ -105,7 +111,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       ],
       'id_pipeline_step' => [
         'type' => 'lookup',
-        'title' => 'Current Step',
+        'title' => 'Pipeline Step',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/PipelineStep',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
@@ -167,6 +173,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_deal_status'] = 1;
+    $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
     $description['includeRelations'] = [

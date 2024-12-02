@@ -241,6 +241,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           }}
                         ></InputTags2>
                       </FormInput>
+                      {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
                   </div>

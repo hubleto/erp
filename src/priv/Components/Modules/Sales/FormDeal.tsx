@@ -183,6 +183,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       <FormInput title={"Company"} required={true}>
                         <Lookup {...this.getDefaultInputProps()}
                           model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
+                          endpoint={`customers/get-company`}
                           value={R.id_company}
                           onChange={(value: any) => {
                             this.updateRecord({ id_company: value, id_person: null });

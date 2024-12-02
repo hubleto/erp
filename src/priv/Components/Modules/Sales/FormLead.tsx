@@ -193,6 +193,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                       <FormInput title={"Company"}>
                         <Lookup {...this.getDefaultInputProps()}
                           model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
+                          endpoint={`customers/get-company`}
                           value={R.id_company}
                           onChange={(value: any) => {
                             this.updateRecord({ id_company: value, id_person: null });

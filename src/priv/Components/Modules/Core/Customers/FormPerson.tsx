@@ -7,6 +7,7 @@ import FormInput from 'adios/FormInput';
 /* import TableAddresses from './TableAddresses'; */
 import TableContacts from './TableContacts';
 import moment from 'moment';
+import Lookup from 'adios/Inputs/Lookup';
 
 interface FormPersonProps extends FormProps {
   newEntryId?: number,
@@ -115,7 +116,16 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               <div className='card-body'>
                 {this.inputWrapper('first_name')}
                 {this.inputWrapper('last_name')}
-                {this.inputWrapper('id_company')}
+                <FormInput title={"Company"}>
+                  <Lookup {...this.getDefaultInputProps()}
+                    model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
+                    endpoint={`customers/get-company`}
+                    value={R.id_company}
+                    onChange={(value: any) => {
+                      this.updateRecord({ id_company: value});
+                    }}
+                  ></Lookup>
+                </FormInput>
                 {this.inputWrapper('is_main')}
                 {showAdditional ? this.inputWrapper('is_active') : null}
                 <FormInput title='Tags'>

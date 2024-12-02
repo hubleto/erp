@@ -126,6 +126,14 @@ class Deal extends \CeremonyCrmApp\Core\Model
         'title' => 'Archived',
         'required' => false,
       ],
+      'id_deal_status' => [
+        'type' => 'lookup',
+        'title' => 'Status',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/DealStatus',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
+        'required' => false,
+      ],
     ]));
   }
 
@@ -158,6 +166,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
 
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
+    $description['defaultValues']['id_deal_status'] = 1;
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
     $description['includeRelations'] = [

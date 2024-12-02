@@ -214,7 +214,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         })}
                         {this.inputWrapper('id_currency')}
                       </div>
-                      {/* {showAdditional ? this.inputWrapper('id_status') : null} */}
+                      {this.inputWrapper('id_deal_status')}
                       {showAdditional && R.id_lead != null ?
                         <div className='flex flex-row justify-between'>
                           {this.inputWrapper('id_lead')}

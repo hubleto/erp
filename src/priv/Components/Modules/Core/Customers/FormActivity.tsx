@@ -87,18 +87,17 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
     const R = this.state.record;
 
     const showAdditional: boolean = R.id > 0 ? true : false;
-    var entryURL: string = "";
-    var entryType: string = "";
-
-    if (R.COMPANY_ACTIVITY && !this.props.creatingForModel) {
-      entryURL = "customers/companies?recordId="+R.COMPANY_ACTIVITY.id_company;
-      entryType = "Company"
-    } else if (R.LEAD_ACTIVITY && !this.props.creatingForModel) {
-      entryURL = "sales/leads?recordId="+R.LEAD_ACTIVITY.id_lead;
-      entryType = "Lead"
-    } else if (R.DEAL_ACTIVITY && !this.props.creatingForModel) {
-      entryURL = "sales/deals?recordId="+R.DEAL_ACTIVITY.id_deal;
-      entryType = "Deal"
+    if (R.COMPANY_ACTIVITY) {
+      var companyEntryURL = window.ConfigEnv.rewriteBase+"customers/companies?recordId="+R.COMPANY_ACTIVITY.id_company;
+      var companyEntryType = "Company"
+    }
+    if (R.LEAD_ACTIVITY) {
+      var leadEntryURL = window.ConfigEnv.rewriteBase+"sales/leads?recordId="+R.LEAD_ACTIVITY.id_lead;
+      var leadEntryType = "Lead"
+    }
+    if (R.DEAL_ACTIVITY) {
+      var dealEntryURL = window.ConfigEnv.rewriteBase+"sales/deals?recordId="+R.DEAL_ACTIVITY.id_deal;
+      var dealEntryType = "Deal"
     }
 
     return (
@@ -111,10 +110,28 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
               {this.inputWrapper('subject')}
               {showAdditional ? this.inputWrapper('completed') : null}
               {this.inputWrapper('id_user', {readonly: true, value: globalThis.app.idUser})}
-              {!this.props.creatingForModel && showAdditional && entryType ?
-                <a href={entryURL} className='btn btn-primary mt-2'>
-                  <span className='icon'><i className='fas fa-eye'></i></span>
-                  <span className='text'>Go to {entryType}</span>
+              {(this.props.creatingForModel == "Lead" || this.props.creatingForModel == "Deal" || !this.props.creatingForModel) && showAdditional && companyEntryType ?
+                <>
+                  <a href={companyEntryURL} className='btn btn-primary'>
+                    <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+                    <span className='text'>Go to linked {companyEntryType}</span>
+                  </a>
+                  <br></br>
+                </>
+              : null}
+              {(this.props.creatingForModel == "Company" || !this.props.creatingForModel) && showAdditional && leadEntryType ?
+                <>
+                  <a href={leadEntryURL} className='btn btn-primary mt-2'>
+                    <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+                    <span className='text'>Go to linked {leadEntryType}</span>
+                  </a>
+                  <br></br>
+                </>
+              : null}
+              {(this.props.creatingForModel == "Company" || !this.props.creatingForModel) && showAdditional && dealEntryType ?
+                <a href={dealEntryURL} className='btn btn-primary mt-2'>
+                  <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+                  <span className='text'>Go to linked {dealEntryType}</span>
                 </a>
               : null}
             </div>

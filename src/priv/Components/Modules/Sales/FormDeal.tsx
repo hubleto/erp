@@ -217,10 +217,10 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       </div>
                       {this.inputWrapper('id_deal_status')}
                       {showAdditional && R.id_lead != null ?
-                        <div className='flex flex-row justify-between'>
-                          {this.inputWrapper('id_lead')}
+                        <div className='mt-2'>
                           <a className='btn btn-primary self-center' href={`leads?recordId=${R.id_lead}`}>
-                            <span className='icon'><i className='fas fa-eye'></i></span>
+                            <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+                            <span className='text'>Go to origin Lead</span>
                           </a>
                         </div>
                       : null}
@@ -505,7 +505,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                   <FormDocument
                     id={this.state.showDocument}
                     onClose={() => this.setState({showDocument: 0} as FormDealState)}
-                    creatingForModel="Company"
+                    creatingForModel="Deal"
                     showInModal={true}
                     showInModalSimple={true}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {

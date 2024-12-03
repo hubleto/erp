@@ -3,8 +3,10 @@
 namespace CeremonyCrmApp\Modules\Core\Documents\Models;
 
 use CeremonyCrmApp\Modules\Core\Customers\Models\CompanyDocument;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadDocument;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealDocument;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\Lead;
 
 class Document extends \CeremonyCrmApp\Core\Model
 {
@@ -53,34 +55,39 @@ class Document extends \CeremonyCrmApp\Core\Model
 
   public function onAfterCreate(array $record, $returnValue)
   {
+    $mCompanyDocument = new CompanyDocument($this->app);
+    $mLead = new Lead($this->app);
+    $mDeal = new Deal($this->app);
+    $mLeadDocument = new LeadDocument($this->app);
+    $mDealDocument = new DealDocument($this->app);
+
     if (isset($record["creatingForModel"])) {
       if ($record["creatingForModel"] == "Company") {
-        $mCompanyDocument = new CompanyDocument($this->app);
         $mCompanyDocument->eloquent->create([
           "id_document" => $record["id"],
           "id_company" => $record["creatingForId"]
         ]);
       } else if ($record["creatingForModel"] == "Lead") {
-        $mCompanyDocument = new CompanyDocument($this->app);
+
+        $lead = $mLead->eloquent->find($record["creatingForId"]);
         $mCompanyDocument->eloquent->create([
           "id_document" => $record["id"],
           "id_company" => $record["creatingForId"]
         ]);
-        $mLeadDocument = new LeadDocument($this->app);
         $mLeadDocument->eloquent->create([
           "id_document" => $record["id"],
-          "id_lead" => $record["creatingForId"]
+          "id_lead" => $lead->id
         ]);
       } else if ($record["creatingForModel"] == "Deal") {
-        $mCompanyDocument = new CompanyDocument($this->app);
+
+        $deal = $mDeal->eloquent->find($record["creatingForId"]);
         $mCompanyDocument->eloquent->create([
           "id_document" => $record["id"],
           "id_company" => $record["creatingForId"]
         ]);
-        $mDealDocument = new DealDocument($this->app);
         $mDealDocument->eloquent->create([
           "id_document" => $record["id"],
-          "id_deal" => $record["creatingForId"]
+          "id_deal" => $deal->id
         ]);
       }
     }

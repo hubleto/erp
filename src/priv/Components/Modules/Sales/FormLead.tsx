@@ -230,13 +230,13 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         <div className='w-full mt-2'>
                           {R.DEAL != null ?
                           <a className='btn btn-primary' href={`../sales/deals?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
-                            <span className='icon'><i className='fas fa-eye'></i></span>
-                            <span className='text'>Go to the Deal</span>
+                            <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+                            <span className='text'>Go to Deal</span>
                           </a>
                           :
                           <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
                             <span className='icon'><i className='fas fa-rotate-right'></i></span>
-                            <span className='text'>Convert to a Deal</span>
+                            <span className='text'>Convert to Deal</span>
                           </a>}
                         </div>
                       : null}
@@ -397,14 +397,16 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                 : null}
             </div>
           </TabPanel>
-          <TabPanel header="Activities">
-            <CalendarComponent
-              creatingForModel="Lead"
-              creatingForId={R.id}
-              views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-              url={`../customers/activities/get?creatingForModel=Lead&creatingForId=${R.id}`}
-            ></CalendarComponent>
-          </TabPanel>
+          {showAdditional ?
+            <TabPanel header="Activities">
+              <CalendarComponent
+                creatingForModel="Lead"
+                creatingForId={R.id}
+                views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+                url={`../customers/activities/get?creatingForModel=Lead&creatingForId=${R.id}`}
+              ></CalendarComponent>
+            </TabPanel>
+          : null}
           {showAdditional ? (
             <TabPanel header="Documents">
               <TableLeadDocuments
@@ -478,7 +480,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   <FormDocument
                     id={this.state.showDocument}
                     onClose={() => this.setState({showDocument: 0} as FormLeadState)}
-                    creatingForModel="Company"
+                    creatingForModel="Lead"
                     showInModal={true}
                     showInModalSimple={true}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {

@@ -33,7 +33,7 @@ class Lead extends \ADIOS\Core\Model\Eloquent
     return $this->hasOne(Currency::class, 'id', 'id_currency');
   }
   public function STATUS(): HasOne {
-    return $this->hasOne(LeadStatus::class, 'id', 'id_status');
+    return $this->hasOne(LeadStatus::class, 'id', 'id_lead_status');
   }
   public function HISTORY(): HasMany {
     return $this->hasMany(LeadHistory::class, 'id_lead', 'id');

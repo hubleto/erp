@@ -225,7 +225,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         })}
                         {this.inputWrapper('id_currency')}
                       </div>
-                      {showAdditional ? this.inputWrapper('id_status') : null}
+                      {showAdditional ? this.inputWrapper('id_lead_status') : null}
                       {showAdditional ?
                         <div className='w-full mt-2'>
                           {R.DEAL != null ?

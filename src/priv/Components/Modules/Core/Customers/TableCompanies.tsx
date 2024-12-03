@@ -14,6 +14,10 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
   static defaultProps = {
     ...Table.defaultProps,
     itemsPerPage: 15,
+    orderBy: {
+      field: "id",
+      direction: "desc"
+    },
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
   }

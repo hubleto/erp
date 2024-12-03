@@ -22,7 +22,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
-    'STATUS' => [ self::HAS_ONE, LeadStatus::class, 'id', 'id_status'],
+    'STATUS' => [ self::HAS_ONE, LeadStatus::class, 'id', 'id_lead_status'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
     'LABELS' => [ self::HAS_MANY, LeadLabel::class, 'id_lead', 'id' ],
@@ -88,7 +88,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
         'required' => true,
         'readonly' => true,
       ],
-      'id_status' => [
+      'id_lead_status' => [
         'type' => 'lookup',
         'title' => 'Status',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/LeadStatus',
@@ -137,7 +137,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_person'] = null;
     $description['defaultValues']['is_archived'] = 0;
-    $description['defaultValues']['id_status'] = 1;
+    $description['defaultValues']['id_lead_status'] = 1;
     $description['includeRelations'] = [
       'DEAL',
       'COMPANY',
@@ -182,8 +182,8 @@ class Lead extends \CeremonyCrmApp\Core\Model
     $mLeadHistory = new LeadHistory($this->app);
     $mLeadStatus= new LeadStatus($this->app);
 
-    if ($lead["id_status"] != (int) $record["id_status"]) {
-      $status = $mLeadStatus->eloquent->find((int) $record["id_status"])->name;
+    if ($lead["id_lead_status"] != (int) $record["id_lead_status"]) {
+      $status = $mLeadStatus->eloquent->find((int) $record["id_lead_status"])->name;
       $mLeadHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
@@ -219,11 +219,4 @@ class Lead extends \CeremonyCrmApp\Core\Model
 
     return parent::onAfterCreate($record, $returnValue);
   }
-
-  /* public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
-  {
-    $query = parent::prepareLoadRecordQuery();
-    $query->orderBy("id_status", "asc");
-    return $query;
-  } */
 }

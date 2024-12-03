@@ -1,13 +1,13 @@
 {
     "name": "wai-blue/ceremonycrm",
     "require": {
-        "twig/twig": "^3.0",
-        "illuminate/database": "^11.10",
-        "monolog/monolog": "^3.7",
-        "symfony/yaml": "^7.0",
-        "illuminate/pagination": "^11.10",
-        "snipworks/php-smtp": "^2.0",
-        "wai-blue/adios": "^1.2",
-        "laravel/serializable-closure": "^1.3"
+        "twig/twig": "^3",
+        "illuminate/database": "^11",
+        "monolog/monolog": "^3",
+        "symfony/yaml": "^7",
+        "illuminate/pagination": "^11",
+        "snipworks/php-smtp": "^2",
+        "wai-blue/adios": "^1",
+        "laravel/serializable-closure": "^2"
     }
 }

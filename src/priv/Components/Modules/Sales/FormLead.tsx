@@ -10,6 +10,9 @@ import TableLeadServices from './TableLeadServices';
 import { TabPanel, TabView } from 'primereact/tabview';
 import CalendarComponent from '../Core/Calendar/CalendarComponent';
 import Lookup from 'adios/Inputs/Lookup';
+import TableLeadDocuments from './TableLeadDocuments';
+import ModalSimple from 'adios/ModalSimple';
+import FormDocument from '../Core/Documents/FormDocument';
 
 interface FormLeadProps extends FormProps {
   newEntryId?: number,
@@ -17,6 +20,9 @@ interface FormLeadProps extends FormProps {
 
 interface FormLeadState extends FormState {
   newEntryId?: number,
+  createNewDocument: boolean,
+  showDocument: number,
+  historyReversed: boolean,
 }
 
 export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
@@ -33,6 +39,9 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     this.state = {
       ...this.getStateFromProps(props),
       newEntryId: this.props.newEntryId ?? -1,
+      createNewDocument: false,
+      showDocument: 0,
+      historyReversed: false,
     };
   }
 
@@ -142,12 +151,33 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
-    if (R.HISTORY && R.HISTORY.length > 0) R.HISTORY = this.state.record.HISTORY.reverse();
+    if (R.HISTORY && R.HISTORY.length > 0 && this.state.historyReversed == false) {
+      R.HISTORY = this.state.record.HISTORY.reverse();
+      this.setState({historyReversed: true} as FormLeadState);
+    }
+
+    if (R.DEAL) R.DEAL.checkOwnership = false;
+
+    if (R.id > 0 && globalThis.app.user.id != R.id_user && !this.state.recordChanged) {
+      return (
+        <>
+          <div className='w-full h-full flex flex-col justify-center'>
+            <span className='text-center'>This lead belongs to a different user</span>
+          </div>
+        </>
+      )
+    }
 
     return (
       <>
         <TabView>
           <TabPanel header="Basic Information">
+            {R.DEAL && R.is_archived == 1 ?
+              <div className='alert-warning mt-2 mb-1'>
+                <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
+                <span className='text'>This lead was converted to a deal and cannot be edited</span>
+              </div>
+            : null}
             <div className='grid grid-cols-2 gap-1' style=
               {{gridTemplateAreas:`
                 'notification notification'
@@ -163,12 +193,13 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                       <FormInput title={"Company"}>
                         <Lookup {...this.getDefaultInputProps()}
                           model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
+                          endpoint={`customers/get-company`}
                           value={R.id_company}
                           onChange={(value: any) => {
-                            this.updateRecord({ id_company: value, id_person: 0 }), () => (this.loadRecord())
+                            this.updateRecord({ id_company: value, id_person: null });
                             if (R.id_company == 0) {
-                              delete R.id_company;
-                              this.setState({record: R})
+                              R.id_company = null;
+                              this.setState({record: R});
                             }
                           }}
                         ></Lookup>
@@ -182,7 +213,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                           onChange={(value: any) => {
                             this.updateRecord({ id_person: value })
                             if (R.id_person == 0) {
-                              delete R.id_person;
+                              R.id_person = null;
                               this.setState({record: R})
                             }
                           }}
@@ -194,18 +225,18 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         })}
                         {this.inputWrapper('id_currency')}
                       </div>
-                      {showAdditional ? this.inputWrapper('id_status') : null}
+                      {showAdditional ? this.inputWrapper('id_lead_status') : null}
                       {showAdditional ?
                         <div className='w-full mt-2'>
                           {R.DEAL != null ?
                           <a className='btn btn-primary' href={`../sales/deals?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
-                            <span className='icon'><i className='fas fa-eye'></i></span>
-                            <span className='text'>Go to the Deal</span>
+                            <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+                            <span className='text'>Go to Deal</span>
                           </a>
                           :
                           <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
                             <span className='icon'><i className='fas fa-rotate-right'></i></span>
-                            <span className='text'>Convert to a Deal</span>
+                            <span className='text'>Convert to Deal</span>
                           </a>}
                         </div>
                       : null}
@@ -227,6 +258,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                           }}
                         ></InputTags2>
                       </FormInput>
+                      {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
                   </div>
@@ -365,14 +397,102 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                 : null}
             </div>
           </TabPanel>
-          <TabPanel header="Activities">
+          {showAdditional ?
+            <TabPanel header="Activities">
               <CalendarComponent
                 creatingForModel="Lead"
                 creatingForId={R.id}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
                 url={`../customers/activities/get?creatingForModel=Lead&creatingForId=${R.id}`}
               ></CalendarComponent>
-          </TabPanel>
+            </TabPanel>
+          : null}
+          {showAdditional ? (
+            <TabPanel header="Documents">
+              <TableLeadDocuments
+                uid={this.props.uid + "_table_lead_document"}
+                data={{ data: R.DOCUMENTS }}
+                descriptionSource="props"
+                description={{
+                  ui: {
+                    showFooter: false,
+                    showHeader: false,
+                  },
+                  permissions: {
+                    canCreate: true,
+                    canDelete: true,
+                    canRead: true,
+                    canUpdate: true
+                  },
+                  columns: {
+                    id_document: { type: "lookup", title: "Document", model: "CeremonyCrmApp/Modules/Core/Documents/Models/Document" },
+                  }
+                }}
+                isUsedAsInput={true}
+                //isInlineEditing={this.state.isInlineEditing}
+                readonly={!this.state.isInlineEditing}
+                onRowClick={(table: TableLeadDocuments, row: any) => {
+                  this.setState({showDocument: row.id_document} as FormLeadState);
+                }}
+              />
+              <a
+                role="button"
+                onClick={() => this.setState({createNewDocument: true} as FormLeadState)}
+              >
+                + Add Document
+              </a>
+              {this.state.createNewDocument == true ?
+                <ModalSimple
+                  uid='document_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormDocument
+                    id={-1}
+                    descriptionSource="both"
+                    isInlineEditing={true}
+                    creatingForModel="Lead"
+                    creatingForId={this.state.id}
+                    description={{
+                      defaultValues: {
+                        creatingForModel: "Lead",
+                        creatingForId: this.state.record.id,
+                      }
+                    }}
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onClose={() => { this.setState({ createNewDocument: false } as FormLeadState) }}
+                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                        this.setState({ createNewDocument: false } as FormLeadState)
+                      }
+                    }}
+                  ></FormDocument>
+                </ModalSimple>
+              : null}
+              {this.state.showDocument > 0 ?
+                <ModalSimple
+                  uid='document_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormDocument
+                    id={this.state.showDocument}
+                    onClose={() => this.setState({showDocument: 0} as FormLeadState)}
+                    creatingForModel="Lead"
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                      }
+                    }}
+                  />
+                </ModalSimple>
+              : null}
+            </TabPanel>
+          ) : null}
           <TabPanel header="Notes">
             {this.inputWrapper('note')}
           </TabPanel>

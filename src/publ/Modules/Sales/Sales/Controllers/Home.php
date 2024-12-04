@@ -10,8 +10,7 @@ class Home extends \CeremonyCrmApp\Core\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'sales', 'content' => $this->app->translate('Sales') ],
-      [ 'url' => 'home', 'content' => $this->app->translate('Home') ],
+      [ 'url' => '', 'content' => $this->app->translate('Sales') ],
     ]);
   }
 
@@ -22,6 +21,8 @@ class Home extends \CeremonyCrmApp\Core\Controller {
     $mPipeline = new Pipeline($this->app);
     $mDeal = new Deal($this->app);
 
+    $pipelines = $mPipeline->eloquent->get();
+
     $defaultPipelineId = $mSetting->eloquent
       ->select("value")
       ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")
@@ -30,21 +31,34 @@ class Home extends \CeremonyCrmApp\Core\Controller {
     ;
     $defaultPipelineId = reset($defaultPipelineId);
 
-    $defaultPipeline = $mPipeline->eloquent
-      ->where("id", $defaultPipelineId)
-      ->with("PIPELINE_STEPS")
-      ->first()
-      ->toArray()
-    ;
+    $searchPipeline = null;
+    if (isset($this->params["id_pipeline"])){
+      $searchPipeline = $mPipeline->eloquent
+        ->where("id", (int) $this->params["id_pipeline"])
+        ->with("PIPELINE_STEPS")
+        ->first()
+        ->toArray()
+      ;
+    }
+    else {
+      $searchPipeline = $mPipeline->eloquent
+        ->where("id", (int) $defaultPipelineId)
+        ->with("PIPELINE_STEPS")
+        ->first()
+        ->toArray()
+      ;
+    }
 
     $deals = $mDeal->eloquent
-      ->where("id_pipeline", $defaultPipelineId)
+      ->where("id_pipeline", (int) $searchPipeline["id"])
       ->with("CURRENCY")
+      ->with("COMPANY")
       ->get()
       ->toArray()
     ;
 
-    $this->viewParams["pipeline"] = $defaultPipeline;
+    $this->viewParams["pipelines"] = $pipelines;
+    $this->viewParams["pipeline"] = $searchPipeline;
     $this->viewParams["deals"] = $deals;
   }
 

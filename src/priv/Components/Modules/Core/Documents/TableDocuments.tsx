@@ -11,6 +11,10 @@ export default class TableDocuments extends Table<TableDocumentsProps, TableDocu
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
+    orderBy: {
+      field: "id",
+      direction: "desc"
+    },
     model: 'CeremonyCrmApp/Modules/Core/Documents/Models/Document',
   }
 

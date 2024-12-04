@@ -15,7 +15,11 @@ interface TablePersonsState extends TableState {
 export default class TablePersons extends Table<TablePersonsProps, TablePersonsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 20,
+    itemsPerPage: 15,
+    orderBy: {
+      field: "id",
+      direction: "desc"
+    },
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
     // className: 'header-style-1',

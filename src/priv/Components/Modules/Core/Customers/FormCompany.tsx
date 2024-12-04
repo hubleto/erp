@@ -140,6 +140,19 @@ export default class FormCompany<P, S> extends Form<
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
+    if (R.LEADS && R.LEADS.length > 0) {
+      R.LEADS.map((lead, index) => {
+        lead.checkOwnership = false;
+        if (lead.DEAL) lead.DEAL.checkOwnership = false;
+      })
+    }
+    if (R.DEALS && R.DEALS.length > 0) {
+      R.DEALS.map((deal, index) => {
+        deal.checkOwnership = false;
+        if (deal.LEAD) deal.LEAD.checkOwnership = false;
+      })
+    }
+
     return (
       <>
         <TabView>
@@ -300,9 +313,9 @@ export default class FormCompany<P, S> extends Form<
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                 }}
-                isUsedAsInput={true}
+                isUsedAsInput={false}
                 //isInlineEditing={this.state.isInlineEditing}
-                readonly={!this.state.isInlineEditing}
+                readonly={true}
                 onRowClick={(table: TableLeads, row: any) => {
                   table.openForm(row.id);
                 }}
@@ -364,9 +377,9 @@ export default class FormCompany<P, S> extends Form<
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                 }}
-                isUsedAsInput={true}
+                isUsedAsInput={false}
                 //isInlineEditing={this.state.isInlineEditing}
-                readonly={!this.state.isInlineEditing}
+                readonly={false}
                 onRowClick={(table: TableDeals, row: any) => {
                   table.openForm(row.id);
                 }}

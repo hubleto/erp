@@ -4,8 +4,12 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 use CeremonyCrmApp\Modules\Core\Settings\Models\ActivityType;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadActivity;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealActivity;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\Lead;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadHistory;
 
 class Activity extends \CeremonyCrmApp\Core\Model
 {
@@ -90,32 +94,65 @@ class Activity extends \CeremonyCrmApp\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-      $description = parent::formDescribe();
-      $description['defaultValues']['id_user'] = $this->app->user;
-      $description['includeRelations'] = ["COMPANY_ACTIVITY", "LEAD_ACTIVITY", "DEAL_ACTIVITY", "USER", "ACTIVITY_TYPE"];
-      return $description;
+    $description = parent::formDescribe();
+    $description['defaultValues']['id_user'] = $this->app->user;
+    $description['includeRelations'] = ["COMPANY_ACTIVITY", "LEAD_ACTIVITY", "DEAL_ACTIVITY", "USER", "ACTIVITY_TYPE"];
+    return $description;
   }
 
   public function onAfterCreate(array $record, $returnValue)
   {
+    $mActivityCompany = new CompanyActivity($this->app);
+    $mLead = new Lead($this->app);
+    $mDeal = new Deal($this->app);
+    $mLeadActivity = new LeadActivity($this->app);
+    $mDealActivity = new DealActivity($this->app);
+    $mLeadHistory = new LeadHistory($this->app);
+    $mDealHistory = new DealHistory($this->app);
+
     if (isset($record["creatingForModel"])) {
       if ($record["creatingForModel"] == "Company") {
-        $mActvityCompany = new CompanyActivity($this->app);
-        $mActvityCompany->eloquent->create([
+
+        $mActivityCompany->eloquent->create([
           "id_activity" => $record["id"],
           "id_company" => $record["creatingForId"]
         ]);
+
       } else if ($record["creatingForModel"] == "Lead") {
-        $mLeadActivity = new LeadActivity($this->app);
+
+        $lead = $mLead->eloquent->find($record["creatingForId"]);
+        $mActivityCompany->eloquent->create([
+          "id_activity" => $record["id"],
+          "id_company" => $lead->id_company
+        ]);
         $mLeadActivity->eloquent->create([
           "id_activity" => $record["id"],
           "id_lead" => $record["creatingForId"]
         ]);
+
+        $mLeadHistory->eloquent->create([
+          "change_date" => date("Y-m-d"),
+          "id_lead" => $record["creatingForId"],
+          "description" => "Activity ". $record["subject"] ." created"
+        ]);
+
       } else if ($record["creatingForModel"] == "Deal") {
-        $mDealActivity = new DealActivity($this->app);
+
+        $deal = $mDeal->eloquent->find($record["creatingForId"]);
+
+        $mActivityCompany->eloquent->create([
+          "id_activity" => $record["id"],
+          "id_company" => $deal->id_company
+        ]);
         $mDealActivity->eloquent->create([
           "id_activity" => $record["id"],
           "id_deal" => $record["creatingForId"]
+        ]);
+
+        $mDealHistory->eloquent->create([
+          "change_date" => date("Y-m-d"),
+          "id_deal" => $record["creatingForId"],
+          "description" => "Activity ". $record["subject"] ." created"
         ]);
       }
     }

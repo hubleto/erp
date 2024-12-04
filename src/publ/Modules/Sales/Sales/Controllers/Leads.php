@@ -7,7 +7,7 @@ class Leads extends \CeremonyCrmApp\Core\Controller {
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'sales', 'content' => $this->app->translate('Sales') ],
-      [ 'url' => 'leads', 'content' => $this->app->translate('Leads') ],
+      [ 'url' => '', 'content' => $this->app->translate('Leads') ],
     ]);
   }
 

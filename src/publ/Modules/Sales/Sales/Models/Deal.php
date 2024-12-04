@@ -12,6 +12,7 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\Setting;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealLabel;
+use Exception;
 
 class Deal extends \CeremonyCrmApp\Core\Model
 {
@@ -25,12 +26,14 @@ class Deal extends \CeremonyCrmApp\Core\Model
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
+    'STATUS' => [ self::HAS_ONE, DealStatus::class, 'id', 'id_deal_status'],
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
     'LABELS' => [ self::HAS_MANY, DealLabel::class, 'id_deal', 'id' ],
     'SERVICES' => [ self::HAS_MANY, DealService::class, 'id_deal', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, DealActivity::class, 'id_deal', 'id' ],
+    'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_deal', 'id'],
   ];
 
   public function columns(array $columns = []): array
@@ -93,6 +96,12 @@ class Deal extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
       ],
+      'date_created' => [
+        'type' => 'date',
+        'title' => 'Date Created',
+        'required' => true,
+        'readonly' => true,
+      ],
       'id_pipeline' => [
         'type' => 'lookup',
         'title' => 'Pipeline',
@@ -103,7 +112,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       ],
       'id_pipeline_step' => [
         'type' => 'lookup',
-        'title' => 'Current Step',
+        'title' => 'Pipeline Step',
         'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/PipelineStep',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
@@ -122,6 +131,14 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'is_archived' => [
         'type' => 'boolean',
         'title' => 'Archived',
+        'required' => false,
+      ],
+      'id_deal_status' => [
+        'type' => 'lookup',
+        'title' => 'Status',
+        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/DealStatus',
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
       ],
     ]));
@@ -156,9 +173,25 @@ class Deal extends \CeremonyCrmApp\Core\Model
 
     $description = parent::formDescribe();
     $description['defaultValues']['is_archived'] = 0;
+    $description['defaultValues']['id_deal_status'] = 1;
+    $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
-    $description['includeRelations'] = ['COMPANY', 'USER', 'PERSON', 'PIPELINE', 'PIPELINE_STEP', 'CURRENCY', 'HISTORY', 'LABELS', 'LEAD','SERVICES', 'ACTIVITIES'];
+    $description['includeRelations'] = [
+      'COMPANY',
+      'USER',
+      'STATUS',
+      'PERSON',
+      'PIPELINE',
+      'PIPELINE_STEP',
+      'CURRENCY',
+      'HISTORY',
+      'LABELS',
+      'LEAD',
+      'SERVICES',
+      'ACTIVITIES',
+      'DOCUMENTS',
+    ];
     return $description;
   }
 
@@ -178,8 +211,31 @@ class Deal extends \CeremonyCrmApp\Core\Model
     ])["returnValue"];
   }
 
+  public function getOwnership($record) {
+    if ($record["id_company"] && !isset($record["checkOwnership"])) {
+      $mCompany = new Company($this->app);
+      $company = $mCompany->eloquent
+        ->where("id", $record["id_company"])
+        ->first()
+      ;
+
+      if ($company->id_user != $record["id_user"]) {
+        throw new Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected company.
+        ");
+      }
+    }
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    $this->getOwnership($record);
+    return $record;
+  }
+
   public function onBeforeUpdate(array $record): array
   {
+    $this->getOwnership($record);
+
     $deal = $this->eloquent->find($record["id"])->toArray();
     $mDealHistory = new DealHistory($this->app);
 

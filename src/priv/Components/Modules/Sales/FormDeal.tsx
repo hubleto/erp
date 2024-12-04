@@ -9,6 +9,9 @@ import TableDealServices from './TableDealServices';
 import Lookup from 'adios/Inputs/Lookup';
 import { TabPanel, TabView } from 'primereact/tabview';
 import CalendarComponent from '../Core/Calendar/CalendarComponent';
+import TableDealDocuments from './TableDealDocuments';
+import FormDocument from '../Core/Documents/FormDocument';
+import ModalSimple from 'adios/ModalSimple';
 
 interface FormDealProps extends FormProps {
   newEntryId?: number,
@@ -16,6 +19,9 @@ interface FormDealProps extends FormProps {
 
 interface FormDealState extends FormState {
   newEntryId?: number,
+  createNewDocument: boolean,
+  showDocument: number,
+  historyReversed: boolean,
 }
 
 export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
@@ -32,6 +38,9 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
     this.state = {
       ...this.getStateFromProps(props),
       newEntryId: this.props.newEntryId ?? -1,
+      createNewDocument: false,
+      showDocument: 0,
+      historyReversed: false
     };
   }
 
@@ -137,7 +146,23 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
-    if (R.HISTORY && R.HISTORY.length > 0) R.HISTORY = this.state.record.HISTORY.reverse();
+
+    if (R.LEAD) R.LEAD.checkOwnership = false;
+
+    if (R.HISTORY && R.HISTORY.length > 0 && this.state.historyReversed == false) {
+      R.HISTORY = this.state.record.HISTORY.reverse();
+      this.setState({historyReversed: true} as FormDealState);
+    }
+
+    if (R.id > 0 && globalThis.app.user.id != R.id_user && !this.state.recordChanged) {
+      return (
+        <>
+          <div className='w-full h-full flex flex-col justify-center'>
+            <span className='text-center'>This deal belongs to a different user</span>
+          </div>
+        </>
+      )
+    }
 
     return (
       <>
@@ -158,9 +183,14 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       <FormInput title={"Company"} required={true}>
                         <Lookup {...this.getDefaultInputProps()}
                           model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
+                          endpoint={`customers/get-company`}
                           value={R.id_company}
                           onChange={(value: any) => {
-                            this.updateRecord({ id_company: value, id_person: 0 }), () => (this.loadRecord())
+                            this.updateRecord({ id_company: value, id_person: null });
+                            if (R.id_company == 0) {
+                              R.id_company = null;
+                              this.setState({record: R});
+                            }
                           }}
                         ></Lookup>
                       </FormInput>
@@ -172,6 +202,10 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           value={R.id_person}
                           onChange={(value: any) => {
                             this.updateRecord({ id_person: value })
+                            if (R.id_person == 0) {
+                              R.id_person = null;
+                              this.setState({record: R})
+                            }
                           }}
                         ></Lookup>
                       </FormInput>
@@ -181,12 +215,12 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         })}
                         {this.inputWrapper('id_currency')}
                       </div>
-                      {/* {showAdditional ? this.inputWrapper('id_status') : null} */}
+                      {this.inputWrapper('id_deal_status')}
                       {showAdditional && R.id_lead != null ?
-                        <div className='flex flex-row justify-between'>
-                          {this.inputWrapper('id_lead')}
+                        <div className='mt-2'>
                           <a className='btn btn-primary self-center' href={`leads?recordId=${R.id_lead}`}>
-                            <span className='icon'><i className='fas fa-eye'></i></span>
+                            <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+                            <span className='text'>Go to origin Lead</span>
                           </a>
                         </div>
                       : null}
@@ -208,6 +242,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           }}
                         ></InputTags2>
                       </FormInput>
+                      {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
                   </div>
@@ -397,6 +432,92 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 url={`../customers/activities/get?creatingForModel=Deal&creatingForId=${R.id}`}
               ></CalendarComponent>
           </TabPanel>
+          {showAdditional ? (
+            <TabPanel header="Documents">
+              <TableDealDocuments
+                uid={this.props.uid + "_table_deal_documents"}
+                data={{ data: R.DOCUMENTS }}
+                descriptionSource="props"
+                description={{
+                  ui: {
+                    showFooter: false,
+                    showHeader: false,
+                  },
+                  permissions: {
+                    canCreate: true,
+                    canDelete: true,
+                    canRead: true,
+                    canUpdate: true
+                  },
+                  columns: {
+                    id_document: { type: "lookup", title: "Document", model: "CeremonyCrmApp/Modules/Core/Documents/Models/Document" },
+                  }
+                }}
+                isUsedAsInput={true}
+                //isInlineEditing={this.state.isInlineEditing}
+                readonly={!this.state.isInlineEditing}
+                onRowClick={(table: TableDealDocuments, row: any) => {
+                  this.setState({showDocument: row.id_document} as FormDealState);
+                }}
+              />
+              <a
+                role="button"
+                onClick={() => this.setState({createNewDocument: true} as FormDealState)}
+              >
+                + Add Document
+              </a>
+              {this.state.createNewDocument == true ?
+                <ModalSimple
+                  uid='document_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormDocument
+                    id={-1}
+                    descriptionSource="both"
+                    isInlineEditing={true}
+                    creatingForModel="Deal"
+                    creatingForId={this.state.id}
+                    description={{
+                      defaultValues: {
+                        creatingForModel: "Deal",
+                        creatingForId: this.state.record.id,
+                      }
+                    }}
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onClose={() => { this.setState({ createNewDocument: false } as FormDealState) }}
+                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                        this.setState({ createNewDocument: false } as FormDealState)
+                      }
+                    }}
+                  ></FormDocument>
+                </ModalSimple>
+              : null}
+              {this.state.showDocument > 0 ?
+                <ModalSimple
+                  uid='document_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormDocument
+                    id={this.state.showDocument}
+                    onClose={() => this.setState({showDocument: 0} as FormDealState)}
+                    creatingForModel="Deal"
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                      }
+                    }}
+                  />
+                </ModalSimple>
+              : null}
+            </TabPanel>
+          ) : null}
           <TabPanel header="Notes">
             {this.inputWrapper('note')}
           </TabPanel>

@@ -12,7 +12,11 @@ interface TableLeadsState extends TableState {
 export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 20,
+    itemsPerPage: 15,
+    orderBy: {
+      field: "id",
+      direction: "desc"
+    },
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Sales/Sales/Models/Lead',
   }
@@ -33,7 +37,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
 
   renderCell(columnName: string, column: any, data: any, options: any) {
 
-    if (columnName == "id_status") {
+    if (columnName == "id_lead_status") {
       if ( data.STATUS && data.STATUS.color) {
         return (
           <div className='flex flex-row '>

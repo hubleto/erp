@@ -4,9 +4,11 @@ namespace CeremonyCrmApp\Modules\Sales\Sales\Controllers;
 
 use CeremonyCrmApp\Modules\Core\Settings\Models\Setting;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\DealDocument;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\DealService;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Lead;
+use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadDocument;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadHistory;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadService;
 use Exception;
@@ -17,12 +19,16 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
   public function renderJson(): ?array
   {
     $leadId = $this->params["recordId"];
+
     $mLead = new Lead($this->app);
     $mLeadHistory = new LeadHistory($this->app);
     $mLeadService = new LeadService($this->app);
+    $mLeadDocument = new LeadDocument($this->app);
+
     $mDeal = new Deal($this->app);
     $mDealHistory = new DealHistory($this->app);
     $mDealService = new DealService($this->app);
+    $mDealDocument = new DealDocument($this->app);
     $deal = null;
 
     $mSettings = new Setting($this->app);
@@ -42,12 +48,14 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
         "price" => $lead->price,
         "id_currency" => $lead->id_currency,
         "date_expected_close" => $lead->date_expected_close,
+        "date_created" => date("Y-m-d"),
         "id_user" => $lead->id_user,
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
         "id_lead" => $lead->id,
         "id_pipeline" => $defaultPipeline,
-        "id_pipeline_step" => null
+        "id_pipeline_step" => null,
+        "id_deal_status" => 1,
       ]);
 
       $leadServices = $mLeadService->eloquent->where("id_lead", $leadId)->get();
@@ -60,6 +68,14 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
           "amount" => $leadService->amount,
           "discount" => $leadService->discount,
           "tax" => $leadService->tax,
+        ]);
+      }
+
+      $leadDocuments = $mLeadDocument->eloquent->where("id_lead", $leadId)->get();
+      foreach ($leadDocuments as $leadDocument) {
+        $mDealDocument->eloquent->create([
+          "id_document" => $leadDocument->id_document,
+          "id_deal" => $deal->id
         ]);
       }
 
@@ -85,6 +101,8 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
         "id_deal" => $deal->id
       ]);
 
+      $lead->is_archived = 1;
+      $lead->save();
     } catch (Exception $e) {
 
       return [

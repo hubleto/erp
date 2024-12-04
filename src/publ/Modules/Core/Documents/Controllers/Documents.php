@@ -10,4 +10,10 @@ class Documents extends \CeremonyCrmApp\Core\Controller {
     ]);
   }
 
- }
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@app/Modules/Core/Documents/Views/Documents.twig');
+  }
+
+}

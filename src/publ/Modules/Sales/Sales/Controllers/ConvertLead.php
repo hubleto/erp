@@ -18,7 +18,7 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
 
   public function renderJson(): ?array
   {
-    $leadId = $this->params["recordId"];
+    $leadId = $this->app->params["recordId"];
 
     $mLead = new Lead($this->app);
     $mLeadHistory = new LeadHistory($this->app);

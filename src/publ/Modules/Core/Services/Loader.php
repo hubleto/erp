@@ -16,20 +16,25 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $this->registerModel(Models\Service::class);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  public function init(): void
   {
-    $router->addRoutingGroup(
-      'services',
-      'CeremonyCrmApp/Modules/Core/Services/Controllers',
-      '@app/Modules/Core/Services/Views',
-      [
-        'idAccount' => '$1',
-      ],
-      [
-        '' => 'Services',
-        '/get-service-price' => 'GetServicePrice',
-      ]
-    );
+    $this->app->router->httpGet([
+      '/^services\/?$/' => Controllers\Services::class,
+      '/^get-service-price\/?$/' => Controllers\GetServicePrice::class,
+    ]);
+
+    // $router(
+    //   'services',
+    //   'CeremonyCrmApp/Modules/Core/Services/Controllers',
+    //   '@app/Modules/Core/Services/Views',
+    //   [
+    //     'idAccount' => '$1',
+    //   ],
+    //   [
+    //     '' => 'Services',
+    //     '/get-service-price' => 'GetServicePrice',
+    //   ]
+    // );
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)

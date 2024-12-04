@@ -14,7 +14,7 @@ class GetServicePrice extends \CeremonyCrmApp\Core\Controller {
 
     try {
       $service = $mService->eloquent
-        ->where("id", $this->params["serviceId"])
+        ->where("id", $this->app->params["serviceId"])
         ->first()
         ->toArray()
       ;

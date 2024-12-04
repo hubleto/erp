@@ -17,31 +17,49 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $this->registerModel(\CeremonyCrmApp\Modules\Core\Settings\Models\Setting::class);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  public function init(): void
   {
-    $router->addRoutingGroup(
-      'settings',
-      'CeremonyCrmApp/Modules/Core/Settings/Controllers',
-      '@app/Modules/Core/Settings/Views',
-      [],
-      [
-        '' => 'Dashboard',
-        '/users' => 'Users',
-        '/user-roles' => 'UserRoles',
-        '/profiles' => 'Profiles',
-        '/settings' => 'Settings',
-        '/tags' => 'Tags',
-        '/activity-types' => 'ActivityTypes',
-        '/contact-types' => 'ContactTypes',
-        '/countries' => 'Countries',
-        '/currencies' => 'Currencies',
-        '/labels' => 'Labels',
-        '/lead-statuses' => 'LeadStatuses',
-        '/deal-statuses' => 'DealStatuses',
-        '/pipelines' => 'Pipelines',
-        '/permissions' => 'Permissions',
-      ]
-    );
+    $this->app->router->httpGet([
+      '/^settings\/?$/' => Controllers\Dashboard::class,
+      '/^settings\/users\/?$/' => Controllers\Users::class,
+      '/^settings\/user-roles\/?$/' => Controllers\UserRoles::class,
+      '/^settings\/profiles\/?$/' => Controllers\Profiles::class,
+      '/^settings\/settings\/?$/' => Controllers\Settings::class,
+      '/^settings\/tags\/?$/' => Controllers\Tags::class,
+      '/^settings\/activity-types\/?$/' => Controllers\ActivityTypes::class,
+      '/^settings\/contact-types\/?$/' => Controllers\ContactTypes::class,
+      '/^settings\/countries\/?$/' => Controllers\Countries::class,
+      '/^settings\/currencies\/?$/' => Controllers\Currencies::class,
+      '/^settings\/labels\/?$/' => Controllers\Labels::class,
+      '/^settings\/lead-statuses\/?$/' => Controllers\LeadStatuses::class,
+      '/^settings\/deal-statuses\/?$/' => Controllers\DealStatuses::class,
+      '/^settings\/pipelines\/?$/' => Controllers\Pipelines::class,
+      '/^settings\/permissions\/?$/' => Controllers\Permissions::class,
+    ]);
+
+    // $router(
+    //   'settings',
+    //   'CeremonyCrmApp/Modules/Core/Settings/Controllers',
+    //   '@app/Modules/Core/Settings/Views',
+    //   [],
+    //   [
+    //     '' => 'Dashboard',
+    //     '/users' => 'Users',
+    //     '/user-roles' => 'UserRoles',
+    //     '/profiles' => 'Profiles',
+    //     '/settings' => 'Settings',
+    //     '/tags' => 'Tags',
+    //     '/activity-types' => 'ActivityTypes',
+    //     '/contact-types' => 'ContactTypes',
+    //     '/countries' => 'Countries',
+    //     '/currencies' => 'Currencies',
+    //     '/labels' => 'Labels',
+    //     '/lead-statuses' => 'LeadStatuses',
+    //     '/deal-statuses' => 'DealStatuses',
+    //     '/pipelines' => 'Pipelines',
+    //     '/permissions' => 'Permissions',
+    //   ]
+    // );
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)

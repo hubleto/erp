@@ -9,7 +9,7 @@ class Controller extends \ADIOS\Core\Controller
 
   /**
     * Executed after the init() phase.
-    * Validates inputs ($this->params) used for the TWIG template.
+    * Validates inputs ($this->app->params) used for the TWIG template.
     *
     * return bool True if inputs are valid, otherwise false.
     */
@@ -26,7 +26,7 @@ class Controller extends \ADIOS\Core\Controller
    *
    * @throws Exception Should throw an exception on error.
    */
-  public function init()
+  public function init(): void
   {
     // Put your controller's initialization code here. See example below.
     // Throw an exception on error.
@@ -41,9 +41,9 @@ class Controller extends \ADIOS\Core\Controller
    *
    * @return array Parameters used to render TWIG template.
    */
-  public function prepareViewParams()
+  public function prepareView(): void
   {
-    parent::prepareViewParams();
+    parent::prepareView();
 
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->app->requestedUri;

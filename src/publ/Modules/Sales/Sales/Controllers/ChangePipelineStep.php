@@ -20,13 +20,13 @@ class ChangePipelineStep extends \CeremonyCrmApp\Core\Controller
     $step = null;
 
     try {
-      $deal = $mDeal->eloquent->find($this->params["idDeal"]);
-      $deal->id_pipeline_step = $this->params["idStep"];
+      $deal = $mDeal->eloquent->find($this->app->params["idDeal"]);
+      $deal->id_pipeline_step = $this->app->params["idStep"];
       $deal->save();
 
       $step = $mPipelineStep->eloquent
-        ->where("id_pipeline", $this->params["idPipeline"])
-        ->where("id", $this->params["idStep"])
+        ->where("id_pipeline", $this->app->params["idPipeline"])
+        ->where("id", $this->app->params["idStep"])
         ->first()
       ;
       $mDealHistory->eloquent->create([

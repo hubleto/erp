@@ -10,14 +10,18 @@ class Loader extends \CeremonyCrmApp\Core\Module
     parent::__construct($app);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  public function init(): void
   {
-    $router->addRouting([
-      '/^support$/' => [
-        'controller' => 'CeremonyCrmApp/Modules/Core/Support/Controllers/Dashboard',
-        'view' => '@app/Modules/Core/Support/Views/Dashboard',
-      ]
+    $this->app->router->httpGet([
+      '/^support\/?$/' => Controllers\Dashboard::class,
     ]);
+
+    // $router(
+    //   '/^support$/' => [
+    //     'controller' => 'CeremonyCrmApp/Modules/Core/Support/Controllers/Dashboard',
+    //     'view' => '@app/Modules/Core/Support/Views/Dashboard',
+    //   ]
+    // ]);
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)

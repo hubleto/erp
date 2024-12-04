@@ -14,11 +14,9 @@ class Extension
     $this->rootFolder = realpath(pathinfo((new \ReflectionClass(get_class($this)))->getFileName(), PATHINFO_DIRNAME) . '/..');
   }
 
-  public function getRoutes(): array
+  public function init(): void
   {
-    return [
-      '' => 'Home',
-    ];
+    // to be overriden
   }
 
 }

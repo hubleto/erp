@@ -14,19 +14,23 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $this->registerModel(Models\BillingAccount::class);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  public function init(): void
   {
-    $router->addRoutingGroup(
-      'billing',
-      'CeremonyCrmApp/Modules/Core/Billing/Controllers',
-      '@app/Modules/Core/Billing/Views',
-      [
-        'idAccount' => '$1',
-      ],
-      [
-        '' => 'BillingAccounts',
-      ]
-    );
+    $this->app->router->httpGet([
+      '/^billing\/?$/' => Controllers\BillingAccounts::class,
+    ]);
+
+    // $router(
+    //   'billing',
+    //   'CeremonyCrmApp/Modules/Core/Billing/Controllers',
+    //   '@app/Modules/Core/Billing/Views',
+    //   [
+    //     'idAccount' => '$1',
+    //   ],
+    //   [
+    //     '' => 'BillingAccounts',
+    //   ]
+    // );
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)

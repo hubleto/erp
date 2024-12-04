@@ -10,13 +10,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
     parent::__construct($app);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  public function init(): void
   {
-    $router->addRouting([
-      '/^$/' => [
-        'controller' => 'CeremonyCrmApp/Modules/Core/Dashboard/Controllers/Home',
-        'view' => '@app/Modules/Core/Dashboard/Views/Home',
-      ]
+    $this->app->router->httpGet([
+      '/^$/' => Controllers\Home::class,
     ]);
   }
 

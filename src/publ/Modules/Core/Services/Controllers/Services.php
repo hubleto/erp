@@ -3,6 +3,7 @@
 namespace CeremonyCrmApp\Modules\Core\Services\Controllers;
 
 class Services extends \CeremonyCrmApp\Core\Controller {
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -10,4 +11,10 @@ class Services extends \CeremonyCrmApp\Core\Controller {
     ]);
   }
 
- }
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@app/Modules/Core/Services/Views/Services.twig');
+  }
+
+}

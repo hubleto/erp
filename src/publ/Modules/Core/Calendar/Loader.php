@@ -10,19 +10,23 @@ class Loader extends \CeremonyCrmApp\Core\Module
     parent::__construct($app);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  public function init(): void
   {
-    $router->addRoutingGroup(
-      'calendar',
-      'CeremonyCrmApp/Modules/Core/Calendar/Controllers',
-      '@app/Modules/Core/Calendar/Views',
-      [
-        'idAccount' => '$1',
-      ],
-      [
-        '' => 'Calendar',
-      ]
-    );
+    $this->app->router->httpGet([
+      '/^calendar\/?$/' => Controllers\Calendar::class,
+    ]);
+
+    // $router(
+    //   'calendar',
+    //   'CeremonyCrmApp/Modules/Core/Calendar/Controllers',
+    //   '@app/Modules/Core/Calendar/Views',
+    //   [
+    //     'idAccount' => '$1',
+    //   ],
+    //   [
+    //     '' => 'Calendar',
+    //   ]
+    // );
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)

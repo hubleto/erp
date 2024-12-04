@@ -6,8 +6,8 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
 
   public function renderJson(): ?array {
 
-    $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->params["start"]));
-    $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->params["end"]));
+    $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->app->params["start"]));
+    $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->app->params["end"]));
 
     $mAktivita = new \CeremonyCrmApp\Modules\Core\Customers\Models\Activity($this->app);
     $aktivity = $mAktivita->eloquent
@@ -17,21 +17,21 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
       ->where("date_start", "<=", $dateEnd)
     ;
 
-    if (isset($this->params["creatingForModel"])) {
-      if ($this->params["creatingForModel"] == "Company") {
+    if (isset($this->app->params["creatingForModel"])) {
+      if ($this->app->params["creatingForModel"] == "Company") {
         $aktivity
           ->join("company_activities", "company_activities.id_activity", "=", "activities.id")
-          ->where("company_activities.id_company", $this->params["creatingForId"])
+          ->where("company_activities.id_company", $this->app->params["creatingForId"])
         ;
-      } else if ($this->params["creatingForModel"] == "Lead"){
+      } else if ($this->app->params["creatingForModel"] == "Lead"){
         $aktivity
           ->join("lead_activities", "lead_activities.id_activity", "=", "activities.id")
-          ->where("lead_activities.id_lead", $this->params["creatingForId"])
+          ->where("lead_activities.id_lead", $this->app->params["creatingForId"])
         ;
-      } else if ($this->params["creatingForModel"] == "Deal"){
+      } else if ($this->app->params["creatingForModel"] == "Deal"){
         $aktivity
           ->join("deal_activities", "deal_activities.id_activity", "=", "activities.id")
-          ->where("deal_activities.id_deal", $this->params["creatingForId"])
+          ->where("deal_activities.id_deal", $this->app->params["creatingForId"])
         ;
       }
     } else {

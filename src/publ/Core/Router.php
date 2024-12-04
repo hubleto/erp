@@ -7,33 +7,33 @@ class Router extends \ADIOS\Core\Router {
     parent::__construct($adios);
   }
 
-  public function addRoutingGroup(
-    string $urlRegexp,
-    string $controllerSlug,
-    string $viewSlug,
-    array $commonParams,
-    array $routes
-  ) {
-    $newRoutes = [];
+  // public function axddRoutingGroup(
+  //   string $urlRegexp,
+  //   string $controllerSlug,
+  //   string $viewSlug,
+  //   array $commonParams,
+  //   array $routes
+  // ) {
+  //   $newRoutes = [];
 
-    foreach ($routes as $url => $item) {
-      $regexp = '/^' . $urlRegexp . str_replace('/', '\\/', $url) . '\\/?$/';
+  //   foreach ($routes as $url => $item) {
+  //     $regexp = '/^' . $urlRegexp . str_replace('/', '\\/', $url) . '\\/?$/';
 
-      if (is_string($item)) {
-        $newRoutes[$regexp] = [
-          'controller' => $controllerSlug . '/' . $item ?? '',
-          'view' => $viewSlug . '/' . $item ?? '',
-          'params' => $commonParams,
-        ];
-      } else {
-        $newRoutes[$regexp] = [
-          'controller' => $controllerSlug . '/' . $item['controller'] ?? '',
-          'view' => $viewSlug . '/' . $item['view'] ?? '',
-          'params' => array_merge($commonParams, $item['params'] ?? []),
-        ];
-      }
-    }
+  //     if (is_string($item)) {
+  //       $newRoutes[$regexp] = [
+  //         'controller' => $controllerSlug . '/' . $item ?? '',
+  //         'view' => $viewSlug . '/' . $item ?? '',
+  //         'params' => $commonParams,
+  //       ];
+  //     } else {
+  //       $newRoutes[$regexp] = [
+  //         'controller' => $controllerSlug . '/' . $item['controller'] ?? '',
+  //         'view' => $viewSlug . '/' . $item['view'] ?? '',
+  //         'params' => array_merge($commonParams, $item['params'] ?? []),
+  //       ];
+  //     }
+  //   }
 
-    $this->addRouting($newRoutes);
-  }
+  //   $this->axddRouting($newRoutes);
+  // }
 }

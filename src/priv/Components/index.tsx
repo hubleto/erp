@@ -39,9 +39,6 @@ import SalesTableDeals from "./Modules/Sales/TableDeals"
 //documents
 import CoreDocumentsTableDocuments from "./Modules/Core/Documents/TableDocuments"
 
-//sandbox
-import CoreSandboxTableCompanies from "./Modules/Core/Sandbox/TableCompanies"
-
 //@ts-ignore
 const app: ADIOS = new ADIOS(window.ConfigEnv);
 
@@ -93,7 +90,6 @@ app.registerReactComponent('CoreCustomersTableCompanies', CoreCustomersTableComp
 app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableActivities);
 app.registerReactComponent('CoreCustomersTableAddresses', CoreCustomersTableAddresses);
 app.registerReactComponent('CoreCustomersTableContacts', CoreCustomersTableContacts);
-app.registerReactComponent('CoreSandboxTableCompanies', CoreSandboxTableCompanies);
 app.registerReactComponent('CoreSettingsTablePipelines', CoreSettingsTablePipelines);
 app.registerReactComponent('CoreSettingsTableUserRoles', CoreSettingsTableUserRoles);
 //documents

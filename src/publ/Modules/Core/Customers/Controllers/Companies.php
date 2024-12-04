@@ -12,4 +12,10 @@ class Companies extends \CeremonyCrmApp\Core\Controller {
     ]);
   }
 
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@app/Modules/Core/Customers/Views/Companies.twig');
+  }
+
 }

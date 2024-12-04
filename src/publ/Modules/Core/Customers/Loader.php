@@ -15,29 +15,42 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $this->registerModel(Models\Company::class);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  public function init(): void
   {
-    $router->addRoutingGroup(
-      'customers',
-      'CeremonyCrmApp/Modules/Core/Customers/Controllers',
-      '@app/Modules/Core/Customers/Views',
-      [
-        'idAccount' => '$1',
-      ],
-      [
-        '/companies' => 'Companies',
-        '/persons' => 'Persons',
-        '/address' => 'Addresses',
-        '/contacts' => 'Contacts',
-        '/activities' => 'Activity',
-        '/activities/get' => 'ActivityApi',
-        '/tags' => 'Tag',
-        '/documents' => 'Documents',
-        '/get-company' => 'GetCompany',
-        '/get-company-contacts' => 'GetCompanyContacts',
+    $this->app->router->httpGet([
+      '/^customers\/companies\/?$/' => Controllers\Companies::class,
+      '/^customers\/persons\/?$/' => Controllers\Persons::class,
+      '/^customers\/address\/?$/' => Controllers\Addresses::class,
+      '/^customers\/contacts\/?$/' => Controllers\Contacts::class,
+      '/^customers\/activities\/?$/' => Controllers\Activity::class,
+      '/^customers\/activities\/get\/?$/' => Controllers\ActivityApi::class,
+      '/^customers\/tags\/?$/' => Controllers\Tag::class,
+      '/^customers\/documents\/?$/' => Controllers\Documents::class,
+      '/^customers\/get-company\/?$/' => Controllers\GetCompany::class,
+      '/^customers\/get-company-contacts\/?$/' => Controllers\GetCompanyContacts::class,
+    ]);
 
-      ]
-    );
+    // $router(
+      // 'customers',
+      // 'CeremonyCrmApp/Modules/Core/Customers/Controllers',
+      // '@app/Modules/Core/Customers/Views',
+      // [
+      //   'idAccount' => '$1',
+      // ],
+      // [
+      //   '/companies' => 'Companies',
+      //   '/persons' => 'Persons',
+      //   '/address' => 'Addresses',
+      //   '/contacts' => 'Contacts',
+      //   '/activities' => 'Activity',
+      //   '/activities/get' => 'ActivityApi',
+      //   '/tags' => 'Tag',
+      //   '/documents' => 'Documents',
+      //   '/get-company' => 'GetCompany',
+      //   '/get-company-contacts' => 'GetCompanyContacts',
+
+      // ]
+    // );
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)

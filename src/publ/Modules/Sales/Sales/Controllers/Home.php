@@ -14,9 +14,10 @@ class Home extends \CeremonyCrmApp\Core\Controller {
     ]);
   }
 
-  public function prepareViewParams()
+  public function prepareView(): void
   {
-    parent::prepareViewParams();
+    parent::prepareView();
+
     $mSetting = new Setting($this->app);
     $mPipeline = new Pipeline($this->app);
     $mDeal = new Deal($this->app);
@@ -32,9 +33,9 @@ class Home extends \CeremonyCrmApp\Core\Controller {
     $defaultPipelineId = reset($defaultPipelineId);
 
     $searchPipeline = null;
-    if (isset($this->params["id_pipeline"])){
+    if (isset($this->app->params["id_pipeline"])){
       $searchPipeline = $mPipeline->eloquent
-        ->where("id", (int) $this->params["id_pipeline"])
+        ->where("id", (int) $this->app->params["id_pipeline"])
         ->with("PIPELINE_STEPS")
         ->first()
         ->toArray()
@@ -60,6 +61,8 @@ class Home extends \CeremonyCrmApp\Core\Controller {
     $this->viewParams["pipelines"] = $pipelines;
     $this->viewParams["pipeline"] = $searchPipeline;
     $this->viewParams["deals"] = $deals;
+
+    $this->setView('@app/Modules/Sales/Sales/Views/Home.twig');
   }
 
  }

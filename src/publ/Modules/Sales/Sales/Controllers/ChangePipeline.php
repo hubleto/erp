@@ -17,7 +17,7 @@ class ChangePipeline extends \CeremonyCrmApp\Core\Controller
 
     try {
       $newPipeline = $mPipeline->eloquent
-        ->where("id", $this->params["idPipeline"])
+        ->where("id", $this->app->params["idPipeline"])
         ->with("PIPELINE_STEPS")
         ->first()
         ->toArray()

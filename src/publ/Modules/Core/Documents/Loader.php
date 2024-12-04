@@ -12,19 +12,23 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $this->registerModel(Models\Document::class);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  public function init(): void
   {
-    $router->addRoutingGroup(
-      'documents',
-      'CeremonyCrmApp/Modules/Core/Documents/Controllers',
-      '@app/Modules/Core/Documents/Views',
-      [
-        'idAccount' => '$1',
-      ],
-      [
-        '' => 'Documents',
-      ]
-    );
+    $this->app->router->httpGet([
+      '/^documents\/?$/' => Controllers\Documents::class,
+    ]);
+
+    // $router(
+    //   'documents',
+    //   'CeremonyCrmApp/Modules/Core/Documents/Controllers',
+    //   '@app/Modules/Core/Documents/Views',
+    //   [
+    //     'idAccount' => '$1',
+    //   ],
+    //   [
+    //     '' => 'Documents',
+    //   ]
+    // );
 
   }
 

@@ -10,25 +10,34 @@ class Loader extends \CeremonyCrmApp\Core\Module
     parent::__construct($app);
   }
 
-  public function addRouting(\CeremonyCrmApp\Core\Router $router)
+  public function init(): void
   {
-    $router->addRoutingGroup(
-      'sales',
-      'CeremonyCrmApp/Modules/Sales/Sales/Controllers',
-      '@app/Modules/Sales/Sales/Views',
-      [
-        'idAccount' => '$1',
-      ],
-      [
-        '' => 'Home',
-        '/leads' => 'Leads',
-        '/deals' => 'Deals',
-        '/convert-lead' => 'ConvertLead',
-        '/convert-lead' => 'ConvertLead',
-        '/change-pipeline' => 'ChangePipeline',
-        '/change-pipeline-step' => 'ChangePipelineStep',
-      ]
-    );
+    $this->app->router->httpGet([
+      '/^sales\/?$/' => Controllers\Home::class,
+      '/^sales\/leads\/?$/' => Controllers\Leads::class,
+      '/^sales\/deals\/?$/' => Controllers\Deals::class,
+      '/^sales\/convert-lead\/?$/' => Controllers\ConvertLead::class,
+      '/^sales\/change-pipeline\/?$/' => Controllers\ChangePipeline::class,
+      '/^sales\/change-pipeline-step\/?$/' => Controllers\ChangePipelineStep::class,
+    ]);
+
+    // $router(
+    //   'sales',
+    //   'CeremonyCrmApp/Modules/Sales/Sales/Controllers',
+    //   '@app/Modules/Sales/Sales/Views',
+    //   [
+    //     'idAccount' => '$1',
+    //   ],
+    //   [
+    //     '' => 'Home',
+    //     '/leads' => 'Leads',
+    //     '/deals' => 'Deals',
+    //     '/convert-lead' => 'ConvertLead',
+    //     '/convert-lead' => 'ConvertLead',
+    //     '/change-pipeline' => 'ChangePipeline',
+    //     '/change-pipeline-step' => 'ChangePipelineStep',
+    //   ]
+    // );
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)

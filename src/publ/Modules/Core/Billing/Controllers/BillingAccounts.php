@@ -11,4 +11,10 @@ class BillingAccounts extends \CeremonyCrmApp\Core\Controller {
     ]);
   }
 
- }
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@app/Modules/Core/Billing/Views/BillingAccounts.twig');
+  }
+
+}

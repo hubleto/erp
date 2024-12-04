@@ -11,4 +11,9 @@ class Leads extends \CeremonyCrmApp\Core\Controller {
     ]);
   }
 
- }
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@app/Modules/Sales/Sales/Views/Leads.twig');
+  }
+}

@@ -12,11 +12,11 @@ class Dashboard extends \CeremonyCrmApp\Core\Controller
     ]);
   }
   
-  public function prepareViewParams()
+  public function prepareView(): void
   {
-    parent::prepareViewParams();
-
+    parent::prepareView();
     $this->viewParams['extensions'] = $this->app->getExtensions();
+    $this->setView('@app/Modules/Core/Extensions/Views/Dashboard.twig');
   }
 
 }

@@ -3,6 +3,7 @@
 namespace CeremonyCrmApp\Modules\Core\Settings\Controllers;
 
 class Profiles extends \CeremonyCrmApp\Core\Controller {
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -10,4 +11,11 @@ class Profiles extends \CeremonyCrmApp\Core\Controller {
       [ 'url' => 'profiles', 'content' => $this->app->translate('Profiles') ],
     ]);
   }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@app/Modules/Core/Settings/Views/Profiles.twig');
+  }
+
 }

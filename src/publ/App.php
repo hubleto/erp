@@ -59,7 +59,6 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Billing\Loader::class);
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Services\Loader::class);
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Support\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Sandbox\Loader::class);
     $this->registerModule(\CeremonyCrmApp\Modules\Core\Extensions\Loader::class);
 
     foreach ($this->getInstalledExtensionNames() as $extName) {
@@ -71,18 +70,12 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     $registeredModules = $this->getRegisteredModules();
     array_walk($registeredModules, function($moduleClass) {
       $module = new $moduleClass($this);
-      $module->addRouting($this->router);
+      $module->init();
     });
 
     foreach ($this->extensions as $extName => $extension) {
       $extNameSanitized = str_replace('/', '-', str_replace('\\', '-', $extName));
-      $this->router->addRoutingGroup(
-        'extensions\/' . str_replace('/', '\/', $extension->urlBase),
-        'CeremonyCrmApp/Extensions/' . $extName . '/Controllers',
-        '@ext-' . $extNameSanitized,
-        [],
-        $extension->getRoutes(),
-      );
+      $extension->init();
 
       $this->twigLoader->addPath($extension->rootFolder . '/src/Views', 'ext-' . $extNameSanitized);
     }

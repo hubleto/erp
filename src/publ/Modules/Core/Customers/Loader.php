@@ -24,8 +24,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^customers\/contacts\/?$/' => Controllers\Contacts::class,
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
       '/^customers\/activities\/get\/?$/' => Controllers\ActivityApi::class,
-      '/^customers\/tags\/?$/' => Controllers\Tag::class,
-      '/^customers\/documents\/?$/' => Controllers\Documents::class,
       '/^customers\/get-company\/?$/' => Controllers\GetCompany::class,
       '/^customers\/get-company-contacts\/?$/' => Controllers\GetCompanyContacts::class,
     ]);

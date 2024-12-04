@@ -117,4 +117,5 @@ class ConvertLead extends \CeremonyCrmApp\Core\Controller
       "title" => str_replace(" ", "+", $deal->title)
     ];
   }
+
 }

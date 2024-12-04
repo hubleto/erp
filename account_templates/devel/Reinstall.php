@@ -39,8 +39,7 @@ $idRoleAdministrator = $mUserRole->eloquent->create(['role' => 'Administrator'])
 
 $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
 
-array_walk($app->getRegisteredModules(), function($moduleClass) use($app) {
-  $module = new $moduleClass($app);
+array_walk($app->getModules(), function($module) use($app) {
   $module->generateTestData();
 });
 

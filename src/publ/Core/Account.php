@@ -179,17 +179,13 @@ class Account {
 
   public function generateTestData()
   {
-    $registeredModules = $this->app->getRegisteredModules();
-    array_walk($registeredModules, function($moduleClass) {
-      $module = new $moduleClass($this->app);
+    array_walk($this->app->getModules(), function($module) {
       $module->generateTestData();
     });
   }
 
   public function createPermissions() {
-    $registeredModules = $this->app->getRegisteredModules();
-    array_walk($registeredModules, function($moduleClass) {
-      $module = new $moduleClass($this->app);
+    array_walk($this->app->getModules(), function($module) {
       $module->createPermissions();
     });
   }

@@ -7,6 +7,7 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\Setting;
 use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
 
 class Home extends \CeremonyCrmApp\Core\Controller {
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -65,4 +66,4 @@ class Home extends \CeremonyCrmApp\Core\Controller {
     $this->setView('@app/Modules/Sales/Sales/Views/Home.twig');
   }
 
- }
+}

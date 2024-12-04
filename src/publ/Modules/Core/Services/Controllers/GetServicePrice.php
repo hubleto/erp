@@ -30,4 +30,5 @@ class GetServicePrice extends \CeremonyCrmApp\Core\Controller {
       "status" => "success"
     ];
   }
+
 }

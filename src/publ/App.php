@@ -18,7 +18,7 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
 {
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
-  protected array $registeredModules = [];
+  protected array $modules = [];
   protected \CeremonyCrmApp\Core\Sidebar $sidebar;
 
   protected array $extensions = [];
@@ -50,16 +50,16 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
       ));
     }
 
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Dashboard\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Settings\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Customers\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Documents\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Calendar\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Sales\Sales\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Billing\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Services\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Support\Loader::class);
-    $this->registerModule(\CeremonyCrmApp\Modules\Core\Extensions\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Core\Dashboard\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Core\Settings\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Core\Customers\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Core\Documents\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Core\Calendar\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Sales\Sales\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Core\Billing\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Core\Services\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Core\Support\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Core\Extensions\Loader::class);
 
     foreach ($this->getInstalledExtensionNames() as $extName) {
       $this->addExtension($extName);
@@ -67,9 +67,7 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
 
     $this->sidebar = new \CeremonyCrmApp\Core\Sidebar($this);
 
-    $registeredModules = $this->getRegisteredModules();
-    array_walk($registeredModules, function($moduleClass) {
-      $module = new $moduleClass($this);
+    array_walk($this->getModules(), function($module) {
       $module->init();
     });
 
@@ -97,16 +95,16 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     ));
   }
 
-  public function registerModule(string $module)
+  public function addModule(string $module)
   {
-    if (!in_array($module, $this->registeredModules)) {
-      $this->registeredModules[] = $module;
+    if (!in_array($module, $this->modules)) {
+      $this->modules[$module] = new $module($this);
     }
   }
 
-  public function getRegisteredModules(): array
+  public function getModules(): array
   {
-    return $this->registeredModules;
+    return $this->modules;
   }
 
   public function getSidebar(): \CeremonyCrmApp\Core\Sidebar

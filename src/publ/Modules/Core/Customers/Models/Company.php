@@ -5,8 +5,8 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 use CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccount;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Country;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Lead;
+use CeremonyCrmApp\Modules\Sales\Deals\Models\Deal;
+use CeremonyCrmApp\Modules\Sales\Leads\Models\Lead;
 use Illuminate\Database\Eloquent\Builder;
 
 class Company extends \CeremonyCrmApp\Core\Model

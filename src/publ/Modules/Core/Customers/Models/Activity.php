@@ -4,12 +4,12 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models;
 
 use CeremonyCrmApp\Modules\Core\Settings\Models\ActivityType;
 use CeremonyCrmApp\Modules\Core\Settings\Models\User;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadActivity;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\DealActivity;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\DealHistory;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Lead;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadHistory;
+use CeremonyCrmApp\Modules\Sales\Deals\Models\Deal;
+use CeremonyCrmApp\Modules\Sales\Leads\Models\LeadActivity;
+use CeremonyCrmApp\Modules\Sales\Deals\Models\DealActivity;
+use CeremonyCrmApp\Modules\Sales\Deals\Models\DealHistory;
+use CeremonyCrmApp\Modules\Sales\Leads\Models\Lead;
+use CeremonyCrmApp\Modules\Sales\Leads\Models\LeadHistory;
 
 class Activity extends \CeremonyCrmApp\Core\Model
 {

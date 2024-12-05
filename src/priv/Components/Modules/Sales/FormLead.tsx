@@ -28,7 +28,7 @@ interface FormLeadState extends FormState {
 export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'CeremonyCrmApp/Modules/Sales/Sales/Models/Lead',
+    model: 'CeremonyCrmApp/Modules/Sales/Leads/Models/Lead',
   };
 
   props: FormLeadProps;

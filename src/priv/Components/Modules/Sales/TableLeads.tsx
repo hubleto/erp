@@ -18,7 +18,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'CeremonyCrmApp/Modules/Sales/Sales/Models/Lead',
+    model: 'CeremonyCrmApp/Modules/Sales/Leads/Models/Lead',
   }
 
   props: TableLeadsProps;

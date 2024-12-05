@@ -27,7 +27,7 @@ interface FormDealState extends FormState {
 export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'CeremonyCrmApp/Modules/Sales/Sales/Models/Deal',
+    model: 'CeremonyCrmApp/Modules/Sales/Deals/Models/Deal',
   };
 
   props: FormDealProps;

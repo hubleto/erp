@@ -3,10 +3,10 @@
 namespace CeremonyCrmApp\Modules\Core\Documents\Models;
 
 use CeremonyCrmApp\Modules\Core\Customers\Models\CompanyDocument;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Deal;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\LeadDocument;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\DealDocument;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Lead;
+use CeremonyCrmApp\Modules\Sales\Deals\Models\Deal;
+use CeremonyCrmApp\Modules\Sales\Leads\Models\LeadDocument;
+use CeremonyCrmApp\Modules\Sales\Deals\Models\DealDocument;
+use CeremonyCrmApp\Modules\Sales\Leads\Models\Lead;
 
 class Document extends \CeremonyCrmApp\Core\Model
 {

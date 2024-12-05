@@ -20,7 +20,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     $this->app->router->httpGet([
       '/^services\/?$/' => Controllers\Services::class,
-      '/^get-service-price\/?$/' => Controllers\GetServicePrice::class,
+      '/^services\/get-service-price\/?$/' => Controllers\GetServicePrice::class,
     ]);
 
     // $router(

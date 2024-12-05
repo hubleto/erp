@@ -55,7 +55,9 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     $this->addModule(\CeremonyCrmApp\Modules\Core\Customers\Loader::class);
     $this->addModule(\CeremonyCrmApp\Modules\Core\Documents\Loader::class);
     $this->addModule(\CeremonyCrmApp\Modules\Core\Calendar\Loader::class);
-    $this->addModule(\CeremonyCrmApp\Modules\Sales\Sales\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Sales\Deals\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Sales\Leads\Loader::class);
+    $this->addModule(\CeremonyCrmApp\Modules\Sales\Core\Loader::class);
     $this->addModule(\CeremonyCrmApp\Modules\Core\Billing\Loader::class);
     $this->addModule(\CeremonyCrmApp\Modules\Core\Services\Loader::class);
     $this->addModule(\CeremonyCrmApp\Modules\Core\Support\Loader::class);

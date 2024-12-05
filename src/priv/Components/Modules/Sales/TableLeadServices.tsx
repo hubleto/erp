@@ -13,7 +13,7 @@ export default class TableLeadServices extends Table<TableLeadServicesProps, Tab
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmApp/Modules/Sales/Sales/Models/LeadService',
+    model: 'CeremonyCrmApp/Modules/Sales/Leads/Models/LeadService',
   }
 
   props: TableLeadServicesProps;

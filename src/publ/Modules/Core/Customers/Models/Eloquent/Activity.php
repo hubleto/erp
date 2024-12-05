@@ -4,8 +4,8 @@ namespace CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent;
 
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\ActivityType;
 use CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\User;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Eloquent\LeadActivity;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Eloquent\DealActivity;
+use CeremonyCrmApp\Modules\Sales\Leads\Models\Eloquent\LeadActivity;
+use CeremonyCrmApp\Modules\Sales\Deals\Models\Eloquent\DealActivity;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

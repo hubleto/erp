@@ -17,7 +17,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'CeremonyCrmApp/Modules/Sales/Sales/Models/Deal',
+    model: 'CeremonyCrmApp/Modules/Sales/Deals/Models/Deal',
   }
 
   props: TableDealsProps;

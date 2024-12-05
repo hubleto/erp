@@ -13,7 +13,7 @@ export default class TableDealServices extends Table<TableDealServicesProps, Tab
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmApp/Modules/Sales/Sales/Models/DealService',
+    model: 'CeremonyCrmApp/Modules/Sales/Deals/Models/DealService',
   }
 
   props: TableDealServicesProps;

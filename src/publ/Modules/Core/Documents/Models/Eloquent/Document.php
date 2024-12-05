@@ -3,8 +3,8 @@
 namespace CeremonyCrmApp\Modules\Core\Documents\Models\Eloquent;
 
 use CeremonyCrmApp\Modules\Core\Customers\Models\Eloquent\CompanyDocument;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Eloquent\LeadDocument;
-use CeremonyCrmApp\Modules\Sales\Sales\Models\Eloquent\DealDocument;
+use CeremonyCrmApp\Modules\Sales\Leads\Models\Eloquent\LeadDocument;
+use CeremonyCrmApp\Modules\Sales\Deals\Models\Eloquent\DealDocument;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

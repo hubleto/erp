@@ -16,9 +16,9 @@
   /* SPECIAL components, idetified by # id */
   aside#default-sidebar { @apply flex fixed top-0 left-0 z-10 pt-12 h-screen transition-transform -translate-x-full sm:translate-x-0; }
   aside#default-sidebar > nav { @apply bg-primary p-1 flex gap-1 flex-col; }
-  aside#default-sidebar > nav .btn { @apply w-full h-10 rounded; }
-  aside#default-sidebar > nav .btn .icon { @apply w-10 h-10 text-center flex justify-center content-center flex-wrap; }
-  aside#default-sidebar > nav .btn .text { @apply font-bold; }
+  aside#default-sidebar > nav .btn { @apply w-full rounded; }
+  aside#default-sidebar > nav .btn .icon { @apply w-10 h-8 text-center flex justify-center content-center flex-wrap; }
+  /* aside#default-sidebar > nav .btn .text { @apply font-bold; } */
   aside#default-sidebar > nav .btn.btn-primary { @apply bg-white text-gray-800; }
   aside#default-sidebar > div { @apply h-full w-60 p-1 shadow-lg overflow-y-auto bg-gray-50; }
   /* aside#default-sidebar > div > ul { @apply } */

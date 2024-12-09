@@ -114,6 +114,7 @@ class Account {
     (new \CeremonyCrmApp\Modules\Core\Services\Loader($this->app))->installTables();
     (new \CeremonyCrmApp\Modules\Core\Customers\Loader($this->app))->installTables();
     (new \CeremonyCrmApp\Modules\Core\Invoices\Loader($this->app))->installTables();
+    (new \CeremonyCrmApp\Modules\Core\Billing\Loader($this->app))->installTables();
     (new \CeremonyCrmApp\Modules\Sales\Core\Loader($this->app))->installTables();
     (new \CeremonyCrmApp\Modules\Sales\Leads\Loader($this->app))->installTables();
     (new \CeremonyCrmApp\Modules\Sales\Deals\Loader($this->app))->installTables();

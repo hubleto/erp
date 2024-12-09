@@ -44,8 +44,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
   }
 
   public function installTables() {
-    $mBillingAccount = new \CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccount($app);
-    $mBillingAccountService = new \CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccountService($app);
+    $mBillingAccount = new \CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccount($this->app);
+    $mBillingAccountService = new \CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccountService($this->app);
 
     $mBillingAccount->dropTableIfExists()->install();
     $mBillingAccountService->dropTableIfExists()->install();

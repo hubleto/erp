@@ -20,7 +20,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
   {
-    $sidebar->addLink(1, 85100, 'invoices', $this->app->translate('Invoices'), 'fas fa-money-euro');
+    $sidebar->addLink(1, 85100, 'invoices', $this->app->translate('Invoices'), 'fas fa-euro-sign');
   }
 
   public function installTables()

@@ -41,9 +41,9 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
     itemsPerPage: 25,
     formUseModalSimple: true,
     model: 'CeremonyCrmApp/Modules/Core/Invoices/Models/Invoice',
-    description: {
-      ui: { addButtonText: globalThis.app.translate('Create invoice') }
-    },
+    // description: {
+    //   ui: { addButtonText: globalThis.app.translate('Create invoice') }
+    // },
   }
 
   props: TableInvoicesProps;

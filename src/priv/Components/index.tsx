@@ -19,53 +19,54 @@ import { Tooltip } from "primereact/tooltip";
 import CalendarComponent from "./Modules/Core/Calendar/CalendarComponent";
 
 // Modules
-//core
-import FormUser from "./Modules/Core/Settings/FormUser"
+
+// Module: Core/Billing
+import CoreBillingTableBillingAccountService from "./Modules/Core/Billing/TableBillingAccountServices"
+
+// Module: Core/Customers
 import CoreCustomersTablePersons from "./Modules/Core/Customers/TablePersons"
 import CoreCustomersTableCompanies from "./Modules/Core/Customers/TableCompanies"
 import CoreCustomersTableActivities from "./Modules/Core/Customers/TableActivities"
 import CoreCustomersTableAddresses from "./Modules/Core/Customers/TableAddresses"
 import CoreCustomersTableContacts from "./Modules/Core/Customers/TableContacts"
+
+// Module: Core/Documents
+import CoreDocumentsTableDocuments from "./Modules/Core/Documents/TableDocuments"
+
+// Module: Core/Invoices
+import CoreInvoicesTableInvoices from "./Modules/Core/Invoices/TableInvoices"
+
+// Module: Core/Settings
+import CoreSettingsFormUser from "./Modules/Core/Settings/FormUser"
 import CoreSettingsTablePipelines from "./Modules/Core/Settings/TablePipelines"
 import CoreSettingsTableUserRoles from "./Modules/Core/Settings/TableUserRoles"
 
-//billing
-import CoreBillingTableBillingAccountService from "./Modules/Core/Billing/TableBillingAccountServices"
-
-//sales
+// Module: Sales/Leads
 import SalesTableLeads from "./Modules/Sales/TableLeads"
-import SalesTableDeals from "./Modules/Sales/TableDeals"
 import SalesTableLeadsArchive from "./Modules/Sales/TableLeadsArchive"
+
+// Module: Sales/Deals
+import SalesTableDeals from "./Modules/Sales/TableDeals"
 import SalesTableDealsArchive from "./Modules/Sales/TableDealsArchive"
 
-//documents
-import CoreDocumentsTableDocuments from "./Modules/Core/Documents/TableDocuments"
+
+
+
+
 
 //@ts-ignore
 const app: ADIOS = new ADIOS(window.ConfigEnv);
 
 export class CeremonyCrmApp extends ADIOS {
-    /* static ROLE_ADMINISTRATOR: number = 1;
-    static ROLE_ADVOKAT: number = 2;
-    static ROLE_MANAZER: number = 3;
-    static ROLE_KONCIPIENT: number = 4; */
-
-    language: string = 'en';
-    idUser: number = 0;
-    user: any;
-
-    /* userHasRole(idRole: number) {
-      let has = false;
-      if (this.user.roles) {
-        for (let i in this.user.roles) {
-          if (this.user.roles[i] == idRole) has = true;
-        }
-      }
-      return has;
-    } */
-  }
+  language: string = 'en';
+  idUser: number = 0;
+  user: any;
+}
 
 app.dictionary.sk = dictionarySk;
+
+
+
 
 // ADIOS components
 app.registerReactComponent('Table', Table);
@@ -85,23 +86,34 @@ app.registerReactComponent('Tooltip', Tooltip);
 app.registerReactComponent('CalendarComponent', CalendarComponent);
 
 // Modules
-//core
-app.registerReactComponent('FormUser', FormUser);
+
+// Module: Core/Billing
+app.registerReactComponent('CoreBillingTableBillingAccountService', CoreBillingTableBillingAccountService);
+
+// Module: Core/Customers
+app.registerReactComponent('CoreSettingsFormUser', CoreSettingsFormUser);
 app.registerReactComponent('CoreCustomersTablePersons', CoreCustomersTablePersons);
 app.registerReactComponent('CoreCustomersTableCompanies', CoreCustomersTableCompanies);
 app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableActivities);
 app.registerReactComponent('CoreCustomersTableAddresses', CoreCustomersTableAddresses);
 app.registerReactComponent('CoreCustomersTableContacts', CoreCustomersTableContacts);
+
+// Module: Core/Documents
+app.registerReactComponent('CoreDocumentsTableDocuments', CoreDocumentsTableDocuments);
+
+// Module: Core/Invoices
+app.registerReactComponent('CoreInvoicesTableInvoices', CoreInvoicesTableInvoices);
+
+// Module: Core/Settings
 app.registerReactComponent('CoreSettingsTablePipelines', CoreSettingsTablePipelines);
 app.registerReactComponent('CoreSettingsTableUserRoles', CoreSettingsTableUserRoles);
-//documents
-app.registerReactComponent('CoreDocumentsTableDocuments', CoreDocumentsTableDocuments);
-//billing
-app.registerReactComponent('CoreBillingTableBillingAccountService', CoreBillingTableBillingAccountService);
-//sales
+
+// Module: Sale/Leads
 app.registerReactComponent('SalesTableLeads', SalesTableLeads);
-app.registerReactComponent('SalesTableDeals', SalesTableDeals);
 app.registerReactComponent('SalesTableLeadsArchive', SalesTableLeadsArchive);
+
+// Module: Sale/Deals
+app.registerReactComponent('SalesTableDeals', SalesTableDeals);
 app.registerReactComponent('SalesTableDealsArchive', SalesTableDealsArchive);
 
 

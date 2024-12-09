@@ -13,7 +13,7 @@ class Invoice extends \ADIOS\Core\Model {
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Company::class, "id_customer" ],
-    'PROFILE' => [ self::BELONGS_TO, \CeremonyCrmApp\Modules\Core\Settings\Models\Eloquent\InvoiceProfile::class, "id_profile" ],
+    'PROFILE' => [ self::BELONGS_TO, InvoiceProfile::class, "id_profile" ],
     'ISSUED_BY' => [ self::BELONGS_TO, User::class, "id_issued_by" ],
     'ITEMS' => [ self::HAS_MANY, InvoiceItem::class, "id_invoice", "id" ],
   ];
@@ -21,7 +21,7 @@ class Invoice extends \ADIOS\Core\Model {
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      "id_profile" => [ "type" => "lookup", "model" => \CeremonyCrmApp\Modules\Core\Settings\Models\InvoiceProfile::class, "title" => $this->translate("Profile") ],
+      "id_profile" => [ "type" => "lookup", "model" => InvoiceProfile::class, "title" => $this->translate("Profile") ],
       "id_issued_by" => [ "type" => "lookup", "model" => User::class, "title" => $this->translate("Issued by") ],
       "id_customer" => [ "type" => "lookup", "model" => Company::class, "title" => $this->translate("Customer") ],
       "number" => [ "type" => "varchar", "title" => $this->translate("Number"), "description" => $this->translate("TIP: Number is auto-generated based on the pattern configured in the profile.") ],
@@ -38,6 +38,8 @@ class Invoice extends \ADIOS\Core\Model {
 
   public function onBeforeCreate(array $record): array
   {
+
+    $mInvoiceProfile = new InvoiceProfile($this->app);
 
     $invoicesThisYear = $this->eloquent->whereYear('date_delivery', date('Y'))->get()->toArray();
     $profil = $mInvoiceProfile->eloquent->where('id', $record['id_profile'])->first()->toArray();

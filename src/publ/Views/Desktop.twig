@@ -141,7 +141,7 @@
       bool:is-open="false"
       string:type="centered"
     >
-      <app-form-user
+      <app-core-settings-form-user
         int:id="{{ user.id }}"
         bool:show-in-modal="true"
         bool:show-in-modal-simple="true"
@@ -150,7 +150,7 @@
           let modal = globalThis.app.reactElements['user-profile-modal'];
           modal.setState({isOpen: false});
         "
-      ></app-form-user>
+      ></app-core-settings-form-user>
     </app-modal>
 
     <div

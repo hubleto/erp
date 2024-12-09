@@ -96,7 +96,13 @@ class Activity extends \CeremonyCrmApp\Core\Model
   {
     $description = parent::formDescribe();
     $description['defaultValues']['id_user'] = $this->app->auth->user["id"];
-    $description['includeRelations'] = ["COMPANY_ACTIVITY", "LEAD_ACTIVITY", "DEAL_ACTIVITY", "USER", "ACTIVITY_TYPE"];
+    $description['includeRelations'] = [
+      "COMPANY_ACTIVITY",
+      "LEAD_ACTIVITY",
+      "DEAL_ACTIVITY",
+      "USER",
+      "ACTIVITY_TYPE"
+    ];
     return $description;
   }
 

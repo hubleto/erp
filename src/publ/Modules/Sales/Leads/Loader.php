@@ -15,6 +15,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $this->app->router->httpGet([
       '/^sales\/leads\/?$/' => Controllers\Leads::class,
       '/^sales\/convert-lead\/?$/' => Controllers\ConvertLead::class,
+      '/^sales\/leads\/archive\/?$/' => Controllers\LeadsArchive::class,
     ]);
 
     // $router(
@@ -40,6 +41,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     if (str_starts_with($this->app->requestedUri, 'sales')) {
       $sidebar->addLink(2, 10202, 'sales/leads', $this->app->translate('Leads'), 'fas fa-arrows-turn-to-dots');
+      $sidebar->addLink(2, 10204, 'sales/leads/archive', $this->app->translate('Leads Archive'), 'fas fa-box-archive');
     }
   }
 

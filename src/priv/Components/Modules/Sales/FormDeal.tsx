@@ -179,12 +179,13 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                   <div className='card-header'>Deal Information</div>
                   <div className='card-body flex flex-row gap-2'>
                     <div className='grow'>
-                      {this.inputWrapper('title')}
+                      {this.inputWrapper('title', {readonly: R.is_archived})}
                       <FormInput title={"Company"} required={true}>
                         <Lookup {...this.getDefaultInputProps()}
                           model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
                           endpoint={`customers/get-company`}
                           value={R.id_company}
+                          readonly={R.is_archived}
                           onChange={(value: any) => {
                             this.updateRecord({ id_company: value, id_person: null });
                             if (R.id_company == 0) {
@@ -200,6 +201,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           customEndpointParams={{id_company: R.id_company}}
                           endpoint={`customers/get-company-contacts`}
                           value={R.id_person}
+                          readonly={R.is_archived}
                           onChange={(value: any) => {
                             this.updateRecord({ id_person: value })
                             if (R.id_person == 0) {
@@ -211,11 +213,11 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       </FormInput>
                       <div className='flex flex-row *:w-1/2'>
                         {this.inputWrapper('price', {
-                          readonly: R.SERVICES && R.SERVICES.length > 0 ? true : false,
+                          readonly: (R.SERVICES && R.SERVICES.length > 0) || R.is_archived ? true : false,
                         })}
-                        {this.inputWrapper('id_currency')}
+                        {this.inputWrapper('id_currency', {readonly: R.is_archived})}
                       </div>
-                      {this.inputWrapper('id_deal_status')}
+                      {this.inputWrapper('id_deal_status', {readonly: R.is_archived})}
                       {showAdditional && R.id_lead != null ?
                         <div className='mt-2'>
                           <a className='btn btn-primary self-center' href={`leads?recordId=${R.id_lead}`}>
@@ -227,12 +229,13 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     </div>
                     <div className='border-l border-gray-200'></div>
                     <div className='grow'>
-                      {this.inputWrapper('id_user')}
-                      {this.inputWrapper('date_expected_close')}
-                      {this.inputWrapper('source_channel')}
+                      {this.inputWrapper('id_user', {readonly: R.is_archived})}
+                      {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
+                      {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                       <FormInput title='Labels'>
                         <InputTags2 {...this.getDefaultInputProps()}
                           value={this.state.record.LABELS}
+                          readonly={R.is_archived}
                           model='CeremonyCrmApp/Modules/Core/Settings/Models/Label'
                           targetColumn='id_deal'
                           sourceColumn='id_label'
@@ -242,7 +245,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           }}
                         ></InputTags2>
                       </FormInput>
-                      {showAdditional ? this.inputWrapper('date_created') : null}
+                      {showAdditional ? this.inputWrapper('date_created', {readonly: R.is_archived}) : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
                   </div>
@@ -254,6 +257,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       <div className='card-body'>
                         <FormInput title={"Pipeline"}>
                           <Lookup {...this.getDefaultInputProps()}
+                            readonly={R.is_archived}
                             model='CeremonyCrmApp/Modules/Core/Settings/Models/Pipeline'
                             value={R.id_pipeline}
                             onChange={(value: any) => {
@@ -273,7 +277,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                                 <>
                                   <button
                                     style={{height: "50px"}}
-                                    onClick={()=>{this.changeDealStatus(s.id, R)}}
+                                    onClick={R.is_archived ? null : ()=>{this.changeDealStatus(s.id, R)}}
                                     className={`flex px-3 justify-center btn ${statusColor}`}
                                   >
                                     <span className='text text-center self-center'>{s.name}</span>
@@ -364,7 +368,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                             }}
                             isUsedAsInput={true}
                             isInlineEditing={this.state.isInlineEditing}
-                            readonly={!this.state.isInlineEditing}
+                            readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                             onRowClick={() => this.setState({isInlineEditing: true})}
                             onChange={(table: TableDealServices) => {
                               this.updateRecord({ SERVICES: table.state.data?.data });
@@ -376,7 +380,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                             }}
                           ></TableDealServices>
                         </div>
-                          {this.state.isInlineEditing ? (
+                          {this.state.isInlineEditing && !R.is_archived ? (
                             <a
                               role="button"
                               onClick={() => {
@@ -429,7 +433,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 creatingForModel="Deal"
                 creatingForId={R.id}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                url={`../customers/activities/get?creatingForModel=Deal&creatingForId=${R.id}`}
+                url={`../../customers/activities/get?creatingForModel=Deal&creatingForId=${R.id}`}
               ></CalendarComponent>
           </TabPanel>
           {showAdditional ? (
@@ -455,17 +459,19 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 }}
                 isUsedAsInput={true}
                 //isInlineEditing={this.state.isInlineEditing}
-                readonly={!this.state.isInlineEditing}
+                readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                 onRowClick={(table: TableDealDocuments, row: any) => {
                   this.setState({showDocument: row.id_document} as FormDealState);
                 }}
               />
-              <a
-                role="button"
-                onClick={() => this.setState({createNewDocument: true} as FormDealState)}
-              >
-                + Add Document
-              </a>
+              {this.state.isInlineEditing  && !R.is_archived ?
+                <a
+                  role="button"
+                  onClick={() => this.setState({createNewDocument: true} as FormDealState)}
+                >
+                  + Add Document
+                </a>
+              : null}
               {this.state.createNewDocument == true ?
                 <ModalSimple
                   uid='document_form'
@@ -508,6 +514,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     creatingForModel="Deal"
                     showInModal={true}
                     showInModalSimple={true}
+                    readonly={R.is_archived}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
@@ -519,7 +526,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
             </TabPanel>
           ) : null}
           <TabPanel header="Notes">
-            {this.inputWrapper('note')}
+            {this.inputWrapper('note', {readonly: R.is_archived})}
           </TabPanel>
         </TabView>
       </>

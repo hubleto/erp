@@ -185,7 +185,7 @@ export default class FormCompany<P, S> extends Form<
                     {this.inputWrapper("company_id")}
                     {this.inputWrapper("tax_id")}
                     {showAdditional ? this.inputWrapper("date_created") : null}
-                    {showAdditional ? this.inputWrapper("is_active") : null}
+                    {this.inputWrapper("is_active")}
                     <FormInput title="Tags">
                       <InputTags2
                         {...this.getDefaultInputProps()}

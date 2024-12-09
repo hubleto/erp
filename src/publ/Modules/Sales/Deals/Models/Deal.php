@@ -178,6 +178,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
+    $description['defaultValues']['id_user'] = $this->app->auth->user["id"];
     $description['includeRelations'] = [
       'COMPANY',
       'USER',

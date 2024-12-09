@@ -174,7 +174,8 @@ class Company extends \CeremonyCrmApp\Core\Model
   public function formDescribe(array $description = []): array
   {
     $description = parent::formDescribe();
-    $description['defaultValues']['is_active'] = 1;
+    $description['defaultValues']['is_active'] = 0;
+    $description['defaultValues']['id_user'] = $this->app->auth->user["id"];
     $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['includeRelations'] = [
       'PERSONS',

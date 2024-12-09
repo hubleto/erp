@@ -104,21 +104,24 @@ class Account {
       );
     }
 
-    // $this->app->install();
+  }
 
-    $mProfile = new Profile($this->app);
-    $mUser = new User($this->app);
-    $mUserRole = new UserRole($this->app);
-    $mUserHasRole = new UserHasRole($this->app);
-    $mPermission = new Permission($this->app);
-    $mRolePermission = new RolePermission($this->app);
+  public function installTables()
+  {
 
-    $mProfile->dropTableIfExists()->install();
-    $mUser->dropTableIfExists()->install();
-    $mUserRole->dropTableIfExists()->install();
-    $mUserHasRole->dropTableIfExists()->install();
-    $mPermission->dropTableIfExists()->install();
-    $mRolePermission->dropTableIfExists()->install();
+    (new \CeremonyCrmApp\Modules\Core\Settings\Loader($this->app))->installTables();
+    (new \CeremonyCrmApp\Modules\Core\Documents\Loader($this->app))->installTables();
+    (new \CeremonyCrmApp\Modules\Core\Services\Loader($this->app))->installTables();
+    (new \CeremonyCrmApp\Modules\Core\Customers\Loader($this->app))->installTables();
+    (new \CeremonyCrmApp\Modules\Core\Invoices\Loader($this->app))->installTables();
+    (new \CeremonyCrmApp\Modules\Sales\Core\Loader($this->app))->installTables();
+    (new \CeremonyCrmApp\Modules\Sales\Leads\Loader($this->app))->installTables();
+    (new \CeremonyCrmApp\Modules\Sales\Deals\Loader($this->app))->installTables();
+
+    $mProfile = new \CeremonyCrmApp\Modules\Core\Settings\Models\Profile($this->app);
+    $mUser = new \CeremonyCrmApp\Modules\Core\Settings\Models\User($this->app);
+    $mUserRole = new \CeremonyCrmApp\Modules\Core\Settings\Models\UserRole($this->app);
+    $mUserHasRole = new \CeremonyCrmApp\Modules\Core\Settings\Models\UserHasRole($this->app);
 
     $idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
 
@@ -130,7 +133,9 @@ class Account {
       'id_active_profile' => $idProfile,
     ])->id;
 
-    $idRoleAdministrator = $mUserRole->eloquent->create(['role' => 'Administrator', 'grant_all' => 1])->id;
+    $idRoleAdministrator = $mUserRole->eloquent->create(['id' => UserRole::ROLE_ADMINISTRATOR, 'role' => 'Administrator', 'grant_all' => 1])->id;
+    $idRoleSalesManager = $mUserRole->eloquent->create(['id' => UserRole::ROLE_SALES_MANAGER, 'role' => 'Sales manager', 'grant_all' => 0])->id;
+    $idRoleAccountant = $mUserRole->eloquent->create(['id' => UserRole::ROLE_ACCOUNTANT, 'role' => 'Accountant', 'grant_all' => 0])->id;
 
     $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
   }
@@ -177,16 +182,10 @@ class Account {
     );
   }
 
-  public function generateTestData()
-  {
-    array_walk($this->app->getModules(), function($module) {
-      $module->generateTestData();
-    });
-  }
-
-  public function createPermissions() {
-    array_walk($this->app->getModules(), function($module) {
-      $module->createPermissions();
+  public function installDefaultPermissions() {
+    $modules = $this->app->getModules();
+    array_walk($modules, function($module) {
+      $module->installDefaultPermissions();
     });
   }
 

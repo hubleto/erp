@@ -32,11 +32,12 @@ class Module {
     // to be overriden
   }
 
-  public function generateTestData()
+  public function installTables()
   {
     // to be overriden
   }
-  public function createPermissions()
+
+  public function installDefaultPermissions()
   {
     // to be overriden
   }

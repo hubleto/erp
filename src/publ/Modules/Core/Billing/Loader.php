@@ -43,28 +43,21 @@ class Loader extends \CeremonyCrmApp\Core\Module
     }
   }
 
-  public function generateTestData()
-  {
-    $mBillingAccount = new Models\BillingAccount($this->app);
-    $mBillingAccount->install();
-   /*  $idBillingAccount = $mBillingAccount->eloquent->create([
-      'id_company' => 1,
-      "description" => "Test Billing Account"
-    ])->id; */
+  public function installTables() {
+    $mBillingAccount = new \CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccount($app);
+    $mBillingAccountService = new \CeremonyCrmApp\Modules\Core\Billing\Models\BillingAccountService($app);
+
+    $mBillingAccount->dropTableIfExists()->install();
+    $mBillingAccountService->dropTableIfExists()->install();
   }
 
-  public function createPermissions()
+  public function installDefaultPermissions()
   {
-    $mPermission = new Permission($this->app);
+  
+    $mPermission = new \CeremonyCrmApp\Modules\Core\Settings\Models\Permission($this->app);
     $permissions = [
-      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount:Create",
-      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount:Read",
-      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount:Update",
-      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount:Delete",
-      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService:Create",
-      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService:Read",
-      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService:Update",
-      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService:Delete",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccount:Create,Read,Update,Delete",
+      "CeremonyCrmApp/Modules/Core/Billing/Models/BillingAccountService:Create,Read,Update,Delete",
       "CeremonyCrmApp/Modules/Core/Billing/Controllers/BillingAccount",
     ];
 

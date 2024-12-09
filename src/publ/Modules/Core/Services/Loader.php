@@ -47,30 +47,17 @@ class Loader extends \CeremonyCrmApp\Core\Module
     }
   }
 
-  public function generateTestData()
+  public function installTables()
   {
     $mService = new Models\Service($this->app);
     $mService->install();
-    $idService = $mService->eloquent->create([
-      "name" => "Test Service 1"
-    ])->id;
-
-    $mBillingAccountService = new BillingAccountService($this->app);
-    $mBillingAccountService->install();
-    /* $mBillingAccountService->eloquent->create([
-      'id_billing_account' => 1,
-      'id_service' => $idService
-    ]); */
   }
 
-  public function createPermissions()
+  public function installDefaultPermissions()
   {
-    $mPermission = new Permission($this->app);
+    $mPermission = new \CeremonyCrmApp\Modules\Core\Settings\Models\Permission($this->app);
     $permissions = [
-      "CeremonyCrmApp/Modules/Core/Service/Models/Service:Create",
-      "CeremonyCrmApp/Modules/Core/Service/Models/Service:Read",
-      "CeremonyCrmApp/Modules/Core/Service/Models/Service:Update",
-      "CeremonyCrmApp/Modules/Core/Service/Models/Service:Delete",
+      "CeremonyCrmApp/Modules/Core/Service/Models/Service:Create,Read,Update,Delete",
       "CeremonyCrmApp/Modules/Core/Service/Controllers/Service",
     ];
 

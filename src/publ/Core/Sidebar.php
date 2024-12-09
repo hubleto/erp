@@ -16,7 +16,8 @@ class Sidebar {
     $this->items[1] = [];
     $this->items[2] = [];
 
-    array_walk($app->getModules(), function($module) {
+    $modules = $app->getModules();
+    array_walk($modules, function($module) {
       $module->modifySidebar($this);
     });
 

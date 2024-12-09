@@ -34,6 +34,4 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $sidebar->addLink(1, 20100, 'calendar', $this->app->translate('Calendar'), 'fas fa-calendar');
   }
 
-  public function generateTestData()
-  {}
 }

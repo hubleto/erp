@@ -2,9 +2,6 @@
 
 namespace CeremonyCrmApp\Modules\Core\Customers;
 
-use CeremonyCrmApp\Modules\Core\Settings\Models\Permission;
-use CeremonyCrmApp\Modules\Core\Settings\Models\Tag;
-
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
@@ -63,81 +60,39 @@ class Loader extends \CeremonyCrmApp\Core\Module
     }
   }
 
-  public function install() {
-    $mCompany = new Models\Company($this->app);
-    $mCompany->install();
+  public function installTables() {
+    $mPerson = new \CeremonyCrmApp\Modules\Core\Customers\Models\Person($this->app);
+    $mCompany = new \CeremonyCrmApp\Modules\Core\Customers\Models\Company($this->app);
+    $mAddress = new \CeremonyCrmApp\Modules\Core\Customers\Models\Address($this->app);
+    $mContact = new \CeremonyCrmApp\Modules\Core\Customers\Models\Contact($this->app);
+    $mActivity = new \CeremonyCrmApp\Modules\Core\Customers\Models\Activity($this->app);
+    $mCompanyActivity = new \CeremonyCrmApp\Modules\Core\Customers\Models\CompanyActivity($this->app);
+    $mCompanyDocument = new \CeremonyCrmApp\Modules\Core\Customers\Models\CompanyDocument($this->app);
+    $mCompanyTag = new \CeremonyCrmApp\Modules\Core\Customers\Models\CompanyTag($this->app);
+    $mPersonTag = new \CeremonyCrmApp\Modules\Core\Customers\Models\PersonTag($this->app);
 
-    $mPerson = new Models\Person($this->app);
-    $mPerson->install();
-
-    $mPersonContact = new Models\Contact($this->app);
-    $mPersonContact->install();
-
-    $mAddress = new Models\Address($this->app);
-    $mAddress->install();
-
-    $mTag = new Tag($this->app);
-    $mTag->install();
-
-    $mPersonTag = new Models\PersonTag($this->app);
-    $mPersonTag->install();
-
-    $mCompanyTag = new Models\CompanyTag($this->app);
-    $mCompanyTag->install();
-
-    // pridat zaznamy do Core/Settings/Models/UserPermission
-    // pridat zaznamy do Core/Settings/Models/UserRolePermission
-    // pridat zaznamy do Core/Settings/Models/Setting (default values)
+    $mCompany->dropTableIfExists()->install();
+    $mPerson->dropTableIfExists()->install();
+    $mAddress->dropTableIfExists()->install();
+    $mContact->dropTableIfExists()->install();
+    $mCompanyTag->dropTableIfExists()->install();
+    $mPersonTag->dropTableIfExists()->install();
+    $mActivity->dropTableIfExists()->install();
+    $mCompanyActivity->dropTableIfExists()->install();
+    $mCompanyDocument->dropTableIfExists()->install();
   }
 
-  public function generateTestData()
+  public function installDefaultPermissions()
   {
-
-    $mTag = new Tag($this->app);
-
-    $mTag->eloquent->create([
-      'name' => "Category 1",
-    ]);
-    $mTag->eloquent->create([
-      'name' => "Category 2",
-    ]);
-    $mTag->eloquent->create([
-      'name' => "Category 3",
-    ]);
-  }
-
-  public function createPermissions()
-  {
-    $mPermission = new Permission($this->app);
+    $mPermission = new \CeremonyCrmApp\Modules\Core\Settings\Models\Permission($this->app);
     $permissions = [
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Activity:Create",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Activity:Read",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Activity:Update",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Activity:Delete",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Address:Create",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Address:Read",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Address:Update",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Address:Delete",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Company:Create",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Company:Read",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Company:Update",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Company:Delete",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/CompanyTag:Create",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/CompanyTag:Read",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/CompanyTag:Update",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/CompanyTag:Delete",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Contact:Create",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Contact:Read",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Contact:Update",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Contact:Delete",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Person:Create",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Person:Read",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Person:Update",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/Person:Delete",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/PersonTag:Create",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/PersonTag:Read",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/PersonTag:Update",
-      "CeremonyCrmApp/Modules/Core/Customers/Models/PersonTag:Delete",
+      "CeremonyCrmApp/Modules/Core/Customers/Models/Activity:Create,Read,Update,Delete",
+      "CeremonyCrmApp/Modules/Core/Customers/Models/Address:Create,Read,Update,Delete",
+      "CeremonyCrmApp/Modules/Core/Customers/Models/Company:Create,Read,Update,Delete",
+      "CeremonyCrmApp/Modules/Core/Customers/Models/CompanyTag:Create,Read,Update,Delete",
+      "CeremonyCrmApp/Modules/Core/Customers/Models/Contact:Create,Read,Update,Delete",
+      "CeremonyCrmApp/Modules/Core/Customers/Models/Person:Create,Read,Update,Delete",
+      "CeremonyCrmApp/Modules/Core/Customers/Models/PersonTag:Create,Read,Update,Delete",
 
       "CeremonyCrmApp/Modules/Core/Customers/Controllers/Activity",
       "CeremonyCrmApp/Modules/Core/Customers/Controllers/Address",

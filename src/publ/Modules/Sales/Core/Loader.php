@@ -15,24 +15,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $this->app->router->httpGet([
       '/^sales\/?$/' => Controllers\Home::class,
     ]);
-
-    // $router(
-    //   'sales',
-    //   'CeremonyCrmApp/Modules/Sales/Sales/Controllers',
-    //   '@app/Modules/Sales/Sales/Views',
-    //   [
-    //     'idAccount' => '$1',
-    //   ],
-    //   [
-    //     '' => 'Home',
-    //     '/leads' => 'Leads',
-    //     '/deals' => 'Deals',
-    //     '/convert-lead' => 'ConvertLead',
-    //     '/convert-lead' => 'ConvertLead',
-    //     '/change-pipeline' => 'ChangePipeline',
-    //     '/change-pipeline-step' => 'ChangePipelineStep',
-    //   ]
-    // );
   }
 
   public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
@@ -44,7 +26,4 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $sidebar->addLink(2, 10201, 'sales', $this->app->translate('Pipeline'), 'fas fa-timeline');
     }
   }
-
-  public function generateTestData()
-  {}
 }

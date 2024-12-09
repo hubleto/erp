@@ -37,9 +37,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $sidebar->addLink(1, 70100, 'documents', $this->app->translate('Documents'), 'fa-regular fa-file');
   }
 
-  public function generateTestData()
+  public function installTables()
   {
-    $mCompany = new Models\Document($this->app);
-    $mCompany->install();
+    $mDocuments = new \CeremonyCrmApp\Modules\Core\Documents\Models\Document($this->app);
+    $mDocuments->dropTableIfExists()->install();
   }
+
 }

@@ -43,6 +43,21 @@ class Loader extends \CeremonyCrmApp\Core\Module
     }
   }
 
-  public function generateTestData()
-  {}
+  public function installTables()
+  {
+    $mLead = new \CeremonyCrmApp\Modules\Sales\Leads\Models\Lead($this->app);
+    $mLeadHistory = new \CeremonyCrmApp\Modules\Sales\Leads\Models\LeadHistory($this->app);
+    $mLeadLabel = new \CeremonyCrmApp\Modules\Sales\Leads\Models\LeadLabel($this->app);
+    $mLeadService = new \CeremonyCrmApp\Modules\Sales\Leads\Models\LeadService($this->app);
+    $mLeadActivity = new \CeremonyCrmApp\Modules\Sales\Leads\Models\LeadActivity($this->app);
+    $mLeadDocument = new \CeremonyCrmApp\Modules\Sales\Leads\Models\LeadDocument($this->app);
+
+    $mLead->dropTableIfExists()->install();
+    $mLeadHistory->dropTableIfExists()->install();
+    $mLeadLabel->dropTableIfExists()->install();
+    $mLeadService->dropTableIfExists()->install();
+    $mLeadActivity->dropTableIfExists()->install();
+    $mLeadDocument->dropTableIfExists()->install();
+  }
+
 }

@@ -39,8 +39,4 @@ $idRoleAdministrator = $mUserRole->eloquent->create(['role' => 'Administrator'])
 
 $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
 
-array_walk($app->getModules(), function($module) use($app) {
-  $module->generateTestData();
-});
-
 echo "New admin credentials: {$adminEmail} / {$adminPassword}";

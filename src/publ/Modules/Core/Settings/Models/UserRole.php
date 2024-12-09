@@ -5,9 +5,13 @@ namespace CeremonyCrmApp\Modules\Core\Settings\Models;
 class UserRole extends \CeremonyCrmApp\Core\Model
 {
   const ROLE_ADMINISTRATOR = 1;
+  const ROLE_SALES_MANAGER = 2;
+  const ROLE_ACCOUNTANT = 3;
 
   const USER_ROLES = [
     self::ROLE_ADMINISTRATOR => 'ADMINISTRATOR',
+    self::ROLE_SALES_MANAGER => 'SALES_MANAGER',
+    self::ROLE_ACCOUNTANT => 'ACCOUNTANT',
   ];
 
   public string $table = 'user_roles';
@@ -28,7 +32,7 @@ class UserRole extends \CeremonyCrmApp\Core\Model
       ],
       'grant_all' => [
         'type' => 'boolean',
-        'title' => $this->translate('Grand all permissions')
+        'title' => $this->translate('Grant all permissions')
       ],
 
     ]);

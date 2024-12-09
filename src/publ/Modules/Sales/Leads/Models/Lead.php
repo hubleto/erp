@@ -156,6 +156,37 @@ class Lead extends \CeremonyCrmApp\Core\Model
     return $description;
   }
 
+  public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  {
+    $relations = [
+      'DEAL',
+      'COMPANY',
+      'USER',
+      'PERSON',
+      'STATUS',
+      'CURRENCY',
+      'HISTORY',
+      'LABELS',
+      'SERVICES',
+      'ACTIVITIES',
+      'DOCUMENTS',
+    ];
+    $query = parent::prepareLoadRecordQuery($relations, 4);
+
+    /**
+     * These are the query filters for tables with archived and non-archived lead entries.
+     * The params["id"] needs to be there to properly load the data of the entry in a form.
+     */
+    if (isset($this->app->params["id"])) {
+      $query = $query->where("leads.id", (int) $this->app->params["id"]);
+    } else if ($this->app->params["archive"] == 1) {
+      $query = $query->where("leads.is_archived", 1);
+    } else {
+      $query = $query->where("leads.is_archived", 0);
+    }
+    return $query;
+  }
+
   public function getOwnership($record) {
     if ($record["id_company"] && !isset($record["checkOwnership"])) {
       $mCompany = new Company($this->app);

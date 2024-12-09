@@ -35,6 +35,8 @@ import CoreBillingTableBillingAccountService from "./Modules/Core/Billing/TableB
 //sales
 import SalesTableLeads from "./Modules/Sales/TableLeads"
 import SalesTableDeals from "./Modules/Sales/TableDeals"
+import SalesTableLeadsArchive from "./Modules/Sales/TableLeadsArchive"
+import SalesTableDealsArchive from "./Modules/Sales/TableDealsArchive"
 
 //documents
 import CoreDocumentsTableDocuments from "./Modules/Core/Documents/TableDocuments"
@@ -99,6 +101,8 @@ app.registerReactComponent('CoreBillingTableBillingAccountService', CoreBillingT
 //sales
 app.registerReactComponent('SalesTableLeads', SalesTableLeads);
 app.registerReactComponent('SalesTableDeals', SalesTableDeals);
+app.registerReactComponent('SalesTableLeadsArchive', SalesTableLeadsArchive);
+app.registerReactComponent('SalesTableDealsArchive', SalesTableDealsArchive);
 
 
 // Render react elements into body

@@ -16,6 +16,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^sales\/deals\/?$/' => Controllers\Deals::class,
       '/^sales\/change-pipeline\/?$/' => Controllers\ChangePipeline::class,
       '/^sales\/change-pipeline-step\/?$/' => Controllers\ChangePipelineStep::class,
+      '/^sales\/deals\/archive\/?$/' => Controllers\DealsArchive::class,
     ]);
 
     // $router(
@@ -41,6 +42,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     if (str_starts_with($this->app->requestedUri, 'sales')) {
       $sidebar->addLink(2, 10203, 'sales/deals', $this->app->translate('Deals'), 'fa-regular fa-handshake');
+      $sidebar->addLink(2, 10205, 'sales/deals/archive', $this->app->translate('Deals Archive'), 'fas fa-box-archive');
     }
   }
 

@@ -197,6 +197,39 @@ class Deal extends \CeremonyCrmApp\Core\Model
     return $description;
   }
 
+  public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  {
+    $relations = [
+      'COMPANY',
+      'USER',
+      'STATUS',
+      'PERSON',
+      'PIPELINE',
+      'PIPELINE_STEP',
+      'CURRENCY',
+      'HISTORY',
+      'LABELS',
+      'LEAD',
+      'SERVICES',
+      'ACTIVITIES',
+      'DOCUMENTS',
+    ];
+    $query = parent::prepareLoadRecordQuery($relations, 4);
+
+    /**
+     * These are the query filters for tables with archived and non-archived deal entries.
+     * The params["id"] needs to be there to properly load the data of the entry in a form.
+     */
+    if (isset($this->app->params["id"])) {
+      $query = $query->where("deals.id", (int) $this->app->params["id"]);
+    } else if ($this->app->params["archive"] == 1) {
+      $query = $query->where("deals.is_archived", 1);
+    } else {
+      $query = $query->where("deals.is_archived", 0);
+    }
+    return $query;
+  }
+
   public function onAfterCreate(array $record, $returnValue)
   {
     $mDealHistory = new DealHistory($this->app);

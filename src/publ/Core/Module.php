@@ -7,6 +7,11 @@ class Module {
   protected array $registeredModels = [];
   public string $translationContext = '';
 
+  public static function canBeAdded(\CeremonyCrmApp $app): bool
+  {
+    return true;
+  }
+
   public function __construct(\CeremonyCrmApp $app)
   {
     $this->app = $app;

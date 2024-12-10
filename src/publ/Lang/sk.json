@@ -106,7 +106,7 @@
     },
     "mod.core.billing.loader": {
         "Billing": "Účtovanie",
-        "Billing Accounts": "=Učty"
+        "Billing Accounts": "Účty"
     },
     "mod.core.calendar.loader": {
         "Calendar": "Kalendár"
@@ -123,7 +123,7 @@
         "Documents": "Dokumenty"
     },
     "mod.core.extensions.loader": {
-        "Extensions": "Nadstavby"
+        "Extensions": "Rozšírenia"
     },
     "mod.core.invoices.loader": {
         "Invoices": "Faktúry"
@@ -279,7 +279,10 @@
         "Invoices": "Faktúry"
     },
     "mod.core.extensions.controllers.dashboard": {
-        "Extensions": "Nadstavby"
+        "Extensions": "Rozšírenia",
+        "You are using free version of Ceremony.": "Používate zdarma verziu Ceremony.",
+        "If you want to install extensions, you must upgrade to PRO.": "Ak chcete mať prístup k rozšíreniam, musíte prejsť na PRO verziu.",
+        "Upgrade to PRO": "Prejsť na verziu PRO"
     },
     "mod.core.customers.controllers.persons": {
         "Customers": "Zákazníci",
@@ -308,8 +311,8 @@
         "Archive": "Archív"
     },
     "mod.core.customers.tableCompanies": {
-        "Start typing to search...": "Začnite vyhľadávať...",
-        "Delete": "Zmazať"
+        "Start typing to search...": "",
+        "Delete": ""
     },
     "mod.core.sales.tableDeals": {
         "Delete": "Zmazať",
@@ -334,5 +337,9 @@
     },
     "mod.core.invoices.formInvoice": {
         "Invoice": "Faktúra"
+    },
+    "mod.core.upgrade.loader": {
+        "Upgrade to PRO": "",
+        "Upgrade": ""
     }
 }

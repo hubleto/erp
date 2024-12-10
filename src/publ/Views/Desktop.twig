@@ -54,7 +54,7 @@
 
     <nav id="default-navbar"><div>
       <a class="flex items-center space-x-3 rtl:space-x-reverse" href="{{ config.accountUrl }}">
-        <img src="{{ config.url }}/app/assets/images/logo.png" class="h-8">
+        <img id="logo" src="{{ config.url }}/app/assets/images/logo.png" class="h-8">
         <span class="self-center text-l font-semibold whitespace-nowrap dark:text-white">
           {{ user.PROFILE.company }}
           <span class="text-gray-400 ml-2 font-normal">Ceremony CRM</span>
@@ -69,6 +69,18 @@
       {{ include('@app/Views/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
       <div class="hidden w-full md:block md:w-auto" id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
+          <li>
+            {% if app.isPro %}
+              <a href="{{ config.accountUrl }}/you-are-pro" class="btn btn-transparent btn-small">
+                <span class="icon text-yellow-500"><i class="fas fa-trophy"></i></span>
+              </a>
+            {% else %}
+              <a href="{{ config.accountUrl }}/upgrade" class="btn btn-red-outline btn-small">
+                <span class="icon"><i class="fas fa-cloud-arrow-up"></i></span>
+                <span class="text">Upgrade to PRO</span>
+              </a>
+            {% endif %}
+          </li>
           <li>
             <button class="btn btn-transparent btn-dropdown">
               <span class="icon"><img src="{{ config.url }}/app/assets/images/flags/{{ user.language ?: 'en' }}.jpg" style="max-height:1em;" /></span>
@@ -87,7 +99,7 @@
           </li>
           <li>
             <button
-              class="btn btn-transparent"
+              class="btn btn-transparent btn-small"
               onclick="globalThis.app.reactElements['user-profile-modal'].setState({isOpen: true});"
             >
               <span class="icon"><i class='fas fa-user-tie'></i></span>

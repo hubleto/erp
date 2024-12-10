@@ -22,12 +22,17 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   public \CeremonyCrmApp\Core\Sidebar $sidebar;
 
   protected array $extensions = [];
+  public bool $isPro = false;
 
   public function __construct($config = NULL, $mode = NULL)
   {
     parent::__construct($config, $mode);
 
     $this->config['language'] = $this->auth->user['language'] ?? 'en';
+
+    if (is_file($this->config['accountDir'] . '/pro')) {
+      $this->isPro = file_get_contents($this->config['accountDir'] . '/pro') == '1';
+    }
 
     if ($mode == self::ADIOS_MODE_FULL) {
       $this->twig->addFunction(new \Twig\TwigFunction(
@@ -37,7 +42,9 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     }
 
     foreach ($this->config['enabledModules'] ?? [] as $module) {
-      $this->addModule($module);
+      if ($module::canBeAdded($this)) {
+        $this->addModule($module);
+      }
     }
 
     foreach ($this->getInstalledExtensionNames() as $extName) {

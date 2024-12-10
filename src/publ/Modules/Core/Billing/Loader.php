@@ -24,10 +24,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     $this->app->sidebar->addLink(1, 30100, 'billing', $this->translate('Billing'), 'fas fa-file-invoice-dollar');
 
-    if (str_starts_with($this->app->requestedUri, 'billing')) {
-      $this->app->sidebar->addHeading1(2, 30100, $this->translate('Billing'));
-      $this->app->sidebar->addLink(2, 30200, 'billing', $this->translate('Billing Accounts'), 'fas fa-file-invoice-dollar');
-    }
+    // if (str_starts_with($this->app->requestedUri, 'billing')) {
+    //   $this->app->sidebar->addHeading1(2, 30100, $this->translate('Billing'));
+    //   $this->app->sidebar->addLink(2, 30200, 'billing', $this->translate('Billing Accounts'), 'fas fa-file-invoice-dollar');
+    // }
   }
 
   public function installTables() {

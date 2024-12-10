@@ -27,10 +27,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
     $this->app->sidebar->addLink(1, 40100, 'services', $this->translate('Services'), 'fas fa-network-wired');
 
-    if (str_starts_with($this->app->requestedUri, 'services')) {
-      $this->app->sidebar->addHeading1(2, 40100, $this->translate('Services'));
-      $this->app->sidebar->addLink(2, 40200, 'services', $this->translate('Services'), 'fas fa-network-wired');
-    }
+    // if (str_starts_with($this->app->requestedUri, 'services')) {
+    //   $this->app->sidebar->addHeading1(2, 40100, $this->translate('Services'));
+    //   $this->app->sidebar->addLink(2, 40200, 'services', $this->translate('Services'), 'fas fa-network-wired');
+    // }
   }
 
   public function installTables()

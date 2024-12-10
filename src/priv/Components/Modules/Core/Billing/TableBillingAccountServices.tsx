@@ -20,6 +20,8 @@ export default class TableBillingAccountServices extends Table<TableBillingAccou
   props: TableBillingAccountServicesProps;
   state: TableBillingAccountServicesState;
 
+  translationContext: string = 'mod.core.billing.tableBillingAccountServices';
+
   constructor(props: TableBillingAccountServicesProps) {
     super(props);
     this.state = this.getStateFromProps(props);

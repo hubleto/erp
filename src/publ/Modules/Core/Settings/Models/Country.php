@@ -14,12 +14,12 @@ class Country extends \CeremonyCrmApp\Core\Model
     return parent::columns([
       'name' => [
         'type' => 'varchar',
-        $this->translate('Country Name'),
+        'title' => $this->translate('Country Name'),
       ],
       'code' => [
         'type' => 'varchar',
         'byte_size' => '5',
-        $this->translate('Code'),
+        'title' => $this->translate('Code'),
       ],
     ]);
   }

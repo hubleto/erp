@@ -26,6 +26,8 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
   props: FormPersonProps;
   state: FormPersonState;
 
+  translationContext: string = 'mod.core.customers.formPerson';
+
   constructor(props: FormPersonProps) {
     super(props);
     this.state = {

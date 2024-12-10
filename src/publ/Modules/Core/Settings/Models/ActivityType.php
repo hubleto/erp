@@ -14,7 +14,7 @@ class ActivityType extends \CeremonyCrmApp\Core\Model
     return parent::columns([
       'name' => [
         'type' => 'varchar',
-        $this->translate('Type Name'),
+        'title' => $this->translate('Type Name'),
       ],
       'color' => [
         'type' => 'color',
@@ -22,11 +22,11 @@ class ActivityType extends \CeremonyCrmApp\Core\Model
       ],
       'calendar_visibility' => [
         'type' => 'boolean',
-        $this->translate('Shown in Calendar'),
+        'title' => $this->translate('Shown in Calendar'),
       ],
       'icon' => [
         'type' => 'varchar',
-        $this->translate('Icon'),
+        'title' => $this->translate('Icon'),
       ]
     ]);
   }

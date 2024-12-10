@@ -19,6 +19,8 @@ export default class TablePipelines extends Table<TablePipelinesProps, TablePipe
   props: TablePipelinesProps;
   state: TablePipelinesState;
 
+  translationContext: string = 'mod.core.settings.tablePipelines';
+
   constructor(props: TablePipelinesProps) {
     super(props);
     this.state = this.getStateFromProps(props);

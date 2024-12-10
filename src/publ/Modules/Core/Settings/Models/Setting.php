@@ -14,18 +14,18 @@ class Setting extends \CeremonyCrmApp\Core\Model
       'key' => [
         'type' => 'varchar',
         'byte_size' => '250',
-        $this->translate('Key'),
+        'title' => $this->translate('Key'),
         'show_column' => true
       ],
       'value' => [
         'type' => 'text',
         'interface' => 'plain_text',
-        $this->translate('Value'),
+        'title' => $this->translate('Value'),
         'show_column' => true
       ],
       'id_user' => [
         'type' => 'lookup',
-        $this->translate('Only for user'),
+        'title' => $this->translate('Only for user'),
         'model' => User::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',

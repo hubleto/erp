@@ -5,6 +5,8 @@ namespace CeremonyCrmApp\Modules\Sales\Deals;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
+  public string $translationContext = 'mod.sales.deals.loades';
+
   public function __construct(\CeremonyCrmApp $app)
   {
     parent::__construct($app);
@@ -20,8 +22,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
     ]);
 
     if (str_starts_with($this->app->requestedUri, 'sales')) {
-      $this->app->sidebar->addLink(2, 10203, 'sales/deals', $this->app->translate('Deals'), 'fa-regular fa-handshake');
-      $this->app->sidebar->addLink(2, 10205, 'sales/deals/archive', $this->app->translate('Deals Archive'), 'fas fa-box-archive');
+      $this->app->sidebar->addLink(2, 10203, 'sales/deals', $this->translate('Deals'), 'fa-regular fa-handshake');
+      $this->app->sidebar->addLink(2, 10205, 'sales/deals/archive', $this->translate('Deals Archive'), 'fas fa-box-archive');
     }
   }
 

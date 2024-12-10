@@ -19,6 +19,8 @@ export default class TableActivities extends Table<TableActivitiesProps, TableAc
   props: TableActivitiesProps;
   state: TableActivitiesState;
 
+  translationContext: string = 'mod.core.customers.tableActivities';
+
   constructor(props: TableActivitiesProps) {
     super(props);
     this.state = this.getStateFromProps(props);

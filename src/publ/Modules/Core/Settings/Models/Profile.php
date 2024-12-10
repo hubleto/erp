@@ -15,7 +15,7 @@ class Profile extends \CeremonyCrmApp\Core\Model
       'company' => [
         'type' => 'varchar',
         'byte_size' => '250',
-        $this->translate('Company'),
+        'title' => $this->translate('Company'),
         'show_column' => true
       ],
     ]);

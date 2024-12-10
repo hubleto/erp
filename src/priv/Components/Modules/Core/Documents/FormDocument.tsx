@@ -20,6 +20,8 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
   props: FormDocumentProps;
   state: FormDocumentState;
 
+  translationContext: string = 'mod.core.documents.formDocument';
+
   constructor(props: FormDocumentProps) {
     super(props);
     this.state = this.getStateFromProps(props);

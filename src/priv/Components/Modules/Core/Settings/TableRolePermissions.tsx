@@ -18,6 +18,8 @@ export default class TableRolePermissions extends Table<TableRolePermissionsProp
   props: TableRolePermissionsProps;
   state: TableRolePermissionsState;
 
+  translationContext: string = 'mod.core.settings.tableRolePermissions';
+
   constructor(props: TableRolePermissionsProps) {
     super(props);
     this.state = this.getStateFromProps(props);

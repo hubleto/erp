@@ -5,6 +5,8 @@ namespace CeremonyCrmApp\Modules\Sales\Leads;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
+  public string $translationContext = 'mod.sales.leads.loaders';
+
   public function __construct(\CeremonyCrmApp $app)
   {
     parent::__construct($app);
@@ -19,8 +21,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
     ]);
 
     if (str_starts_with($this->app->requestedUri, 'sales')) {
-      $this->app->sidebar->addLink(2, 10202, 'sales/leads', $this->app->translate('Leads'), 'fas fa-arrows-turn-to-dots');
-      $this->app->sidebar->addLink(2, 10204, 'sales/leads/archive', $this->app->translate('Leads Archive'), 'fas fa-box-archive');
+      $this->app->sidebar->addLink(2, 10202, 'sales/leads', $this->translate('Leads'), 'fas fa-arrows-turn-to-dots');
+      $this->app->sidebar->addLink(2, 10204, 'sales/leads/archive', $this->translate('Leads Archive'), 'fas fa-box-archive');
     }
   }
 

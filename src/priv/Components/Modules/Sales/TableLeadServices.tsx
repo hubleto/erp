@@ -19,6 +19,8 @@ export default class TableLeadServices extends Table<TableLeadServicesProps, Tab
   props: TableLeadServicesProps;
   state: TableLeadServicesState;
 
+  translationContext: string = 'mod.core.sales.tableLeadServices';
+
   constructor(props: TableLeadServicesProps) {
     super(props);
     this.state = this.getStateFromProps(props);

@@ -19,6 +19,8 @@ export default class FormPipeline<P, S> extends Form<FormPipelineProps,FormPipel
   props: FormPipelineProps;
   state: FormPipelineState;
 
+  translationContext: string = 'mod.core.settings.formPipeline';
+
   constructor(props: FormPipelineProps) {
     super(props);
     this.state = this.getStateFromProps(props);

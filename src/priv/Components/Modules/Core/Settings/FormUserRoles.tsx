@@ -19,6 +19,8 @@ export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUse
   props: FormUserRolesProps;
   state: FormUserRolesState;
 
+  translationContext: string = 'mod.core.settings.formUserRole';
+
   constructor(props: FormUserRolesProps) {
     super(props);
     this.state = this.getStateFromProps(props);

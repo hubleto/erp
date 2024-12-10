@@ -15,6 +15,8 @@ export default class TableLeadDocuments extends Table<TableLeadDocumentsProps, T
   props: TableLeadDocumentsProps;
   state: TableLeadDocumentsState;
 
+  translationContext: string = 'mod.core.sales.tableLeadDocuments';
+
   constructor(props: TableLeadDocumentsProps) {
     super(props);
     this.state = this.getStateFromProps(props);

@@ -25,6 +25,8 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
   props: TableCompaniesProps;
   state: TableCompaniesState;
 
+  translationContext: string = 'mod.core.customers.tableCompanies';
+
   getFormModalProps() {
     if (getUrlParam('recordId') > 0) {
       return {

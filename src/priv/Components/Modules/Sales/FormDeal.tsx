@@ -32,6 +32,8 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
   props: FormDealProps;
   state: FormDealState;
 
+  translationContext: string = 'mod.core.sales.formDeal';
+
   constructor(props: FormDealProps) {
     super(props);
     this.state = {

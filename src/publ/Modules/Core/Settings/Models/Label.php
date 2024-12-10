@@ -14,12 +14,12 @@ class Label extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'name' => [
         'type' => 'varchar',
-        $this->translate('Name'),
+        'title' => $this->translate('Name'),
         'required' => true,
       ],
       'color' => [
         'type' => 'color',
-        $this->translate('Color'),
+        'title' => $this->translate('Color'),
         'required' => true,
       ],
     ]));

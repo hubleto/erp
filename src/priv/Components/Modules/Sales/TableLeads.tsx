@@ -26,6 +26,8 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   props: TableLeadsProps;
   state: TableLeadsState;
 
+  translationContext: string = 'mod.core.sales.tableLeads';
+
   constructor(props: TableLeadsProps) {
     super(props);
     this.state = this.getStateFromProps(props);

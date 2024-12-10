@@ -3,11 +3,14 @@
 namespace CeremonyCrmApp\Modules\Core\Customers\Controllers;
 
 class Contacts extends \CeremonyCrmApp\Core\Controller {
+
+  public string $translationContext = 'mod.core.customers.controllers.contacts';
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'customers/companies', 'content' => $this->app->translate('Customers') ],
-      [ 'url' => '', 'content' => $this->app->translate('Contacts') ],
+      [ 'url' => 'customers/companies', 'content' => $this->translate('Customers') ],
+      [ 'url' => '', 'content' => $this->translate('Contacts') ],
     ]);
   }
 

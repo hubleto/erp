@@ -25,6 +25,8 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
   props: TableDealsProps;
   state: TableDealsState;
 
+  translationContext: string = 'mod.core.sales.tableDeals';
+
   constructor(props: TableDealsProps) {
     super(props);
     this.state = this.getStateFromProps(props);

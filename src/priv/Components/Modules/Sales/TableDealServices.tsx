@@ -19,6 +19,8 @@ export default class TableDealServices extends Table<TableDealServicesProps, Tab
   props: TableDealServicesProps;
   state: TableDealServicesState;
 
+  translationContext: string = 'mod.core.sales.tableDealServices';
+
   constructor(props: TableDealServicesProps) {
     super(props);
     this.state = this.getStateFromProps(props);

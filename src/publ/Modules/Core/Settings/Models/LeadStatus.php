@@ -14,17 +14,17 @@ class LeadStatus extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'name' => [
         'type' => 'varchar',
-        $this->translate('Name'),
+        'title' => $this->translate('Name'),
         'required' => true,
       ],
       'order' => [
         'type' => 'int',
-        $this->translate('Order'),
+        'title' => $this->translate('Order'),
         'required' => true,
       ],
       'color' => [
         'type' => 'color',
-        $this->translate('Color'),
+        'title' => $this->translate('Color'),
         'required' => false,
       ],
     ]));

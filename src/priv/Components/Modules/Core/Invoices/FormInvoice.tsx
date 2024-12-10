@@ -18,6 +18,8 @@ export default class FormInvoice extends Form<FormInvoiceProps, FormInvoiceState
   props: FormInvoiceProps;
   state: FormInvoiceState;
 
+  translationContext: string = 'mod.core.invoices.formInvoice';
+
   constructor(props: FormInvoiceProps) {
     super(props);
   }

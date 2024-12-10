@@ -18,7 +18,7 @@ class RolePermission extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'id_permission' => [
         'type' => 'lookup',
-        $this->translate('Permission'),
+        'title' => $this->translate('Permission'),
         'model' => Permission::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
@@ -26,7 +26,7 @@ class RolePermission extends \CeremonyCrmApp\Core\Model
       ],
       'id_role' => [
         'type' => 'lookup',
-        $this->translate('Role'),
+        'title' => $this->translate('Role'),
         'model' => UserRole::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',

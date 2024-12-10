@@ -14,12 +14,12 @@ class Currency extends \CeremonyCrmApp\Core\Model
     return parent::columns([
       'name' => [
         'type' => 'varchar',
-        $this->translate('Currency Name'),
+        'title' => $this->translate('Currency Name'),
       ],
       'code' => [
         'type' => 'varchar',
         'byte_size' => '5',
-        $this->translate('Currency Code'),
+        'title' => $this->translate('Currency Code'),
       ],
     ]);
   }

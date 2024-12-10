@@ -33,6 +33,8 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   props: FormLeadProps;
   state: FormLeadState;
 
+  translationContext: string = 'mod.core.sales.formLead';
+
   constructor(props: FormLeadProps) {
     super(props);
     this.state = {

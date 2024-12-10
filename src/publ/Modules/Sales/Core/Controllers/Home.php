@@ -8,10 +8,12 @@ use CeremonyCrmApp\Modules\Sales\Deals\Models\Deal;
 
 class Home extends \CeremonyCrmApp\Core\Controller {
 
+  public string $translationContext = 'mod.sales.core.controllers.home';
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => '', 'content' => $this->app->translate('Sales') ],
+      [ 'url' => '', 'content' => $this->translate('Sales') ],
     ]);
   }
 

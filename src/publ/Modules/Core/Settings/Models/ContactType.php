@@ -14,7 +14,7 @@ class ContactType extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'name' => [
         'type' => 'varchar',
-        $this->translate('Name'),
+        'title' => $this->translate('Name'),
         'required' => true,
       ],
     ]));
@@ -24,7 +24,7 @@ class ContactType extends \CeremonyCrmApp\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Contact Types';
+    $description['ui']['title'] = $this->translate('Contact Types');
     $description['ui']['addButtonText'] = 'Add Contact Type';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;

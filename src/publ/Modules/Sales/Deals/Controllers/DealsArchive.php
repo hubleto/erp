@@ -3,12 +3,15 @@
 namespace CeremonyCrmApp\Modules\Sales\Deals\Controllers;
 
 class DealsArchive extends \CeremonyCrmApp\Core\Controller {
+
+  public string $translationContext = 'mod.sales.deals.controllers.dealsArchive';
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'sales', 'content' => $this->app->translate('Sales') ],
-      [ 'url' => 'sales/leads', 'content' => $this->app->translate('Deals') ],
-      [ 'url' => '', 'content' => $this->app->translate('Archive') ],
+      [ 'url' => 'sales', 'content' => $this->translate('Sales') ],
+      [ 'url' => 'sales/leads', 'content' => $this->translate('Deals') ],
+      [ 'url' => '', 'content' => $this->translate('Archive') ],
     ]);
   }
 

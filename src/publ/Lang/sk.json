@@ -12,11 +12,7 @@
         "Yes, delete": "Áno, zmazať",
         "No, do not delete": "Nie, zavrieť okno",
         "Choose image": "Vybrať obrázok",
-        "Start typing to search...": "Začnite vyhľadávať...",
-        "Support": "",
-        "Sales": "",
-        "Customers": "",
-        "Companies": ""
+        "Start typing to search...": "Začnite vyhľadávať..."
     },
     "mod.core.customers.formCompany": {
         "Basic Information": "O firme",
@@ -28,9 +24,9 @@
         "Deals": "Dealy",
         "Notes": "Poznámky",
         "Add contact": "Pridať kontakt",
-        "Last name": "",
-        "First name": "",
-        "Main Contact": ""
+        "Last name": "Priezvisko",
+        "First name": "Meno",
+        "Main Contact": "Hlavný kontakt"
     },
     "mod.core.customers.dashboard.home": {
         "Welcome": "Vitajte"
@@ -204,7 +200,11 @@
         "Main Contact": "Hlavný kontakt",
         "Notes": "Poznámky",
         "Active": "Aktívny",
-        "Date Created": "Vytvorený"
+        "Date Created": "Vytvorený",
+        "Contact Persons": "Kontaktné osoby",
+        "Add Contact Person": "Pridať kontaktnú osobu",
+        "Emails": "Emaily",
+        "Phone Numbers": "Telefóny"
     },
     "mod.core.customers.models.contact": {
         "Person": "Osoba",
@@ -214,5 +214,124 @@
         "Phone Number": "Telefón",
         "Other": "Iné",
         "Value": "Hodnota"
+    },
+    "table": {
+        "Delete": "",
+        "Start typing to search...": ""
+    },
+    "mod.core.settings.models.userRole": {
+        "Role": "Rola",
+        "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)"
+    },
+    "mod.core.settings.models.rolePermission": {
+        "Permission": "Povolenie",
+        "Role": "Rola"
+    },
+    "mod.core.settings.models.permission": {
+        "Permission": "Povolenie"
+    },
+    "mod.core.settings.models.contactType": {
+        "Name": "Názov",
+        "Contact Types": "Typy kontaktov"
+    },
+    "form": {
+        "Record": "Záznam",
+        "New record": "Nový záznam"
+    },
+    "mod.core.support.loader": {
+        "Support": "Podpora"
+    },
+    "mod.sales.core.loader": {
+        "Sales": "Obchod",
+        "Pipeline": "Pipeline"
+    },
+    "mod.core.settings.controllers.contactTypes": {
+        "Settings": "Nastavenia",
+        "Contact Types": "Typy kontaktov"
+    },
+    "mod.core.customers.controllers.companies": {
+        "Customers": "Zákazníci",
+        "Companies": "Firmy"
+    },
+    "mod.core.calendar.controllers.calendar": {
+        "Calendar": "Kalendár"
+    },
+    "mod.core.billing.controllers.billingAccounts": {
+        "Customers": "Zákazníci",
+        "Billing Accounts": "Účty"
+    },
+    "mod.core.services.controllers.services": {
+        "Services": "Služby"
+    },
+    "mod.sales.deals.loades": {
+        "Deals": "Dealy",
+        "Deals Archive": "Archív dealov"
+    },
+    "mod.sales.leads.loaders": {
+        "Leads": "Leady",
+        "Leads Archive": "Archív leadov"
+    },
+    "mod.sales.core.controllers.home": {
+        "Sales": "Obchod"
+    },
+    "mod.core.invoices.controllers.invoices": {
+        "Invoices": "Faktúry"
+    },
+    "mod.core.extensions.controllers.dashboard": {
+        "Extensions": "Nadstavby"
+    },
+    "mod.core.customers.controllers.persons": {
+        "Customers": "Zákazníci",
+        "Contact Persons": "Kontaktné osoby"
+    },
+    "mod.sales.leads.controllers.leads": {
+        "Sales": "Obchod",
+        "Leads": "Leady"
+    },
+    "mod.core.settings.models.label": {
+        "Name": "Názov",
+        "Color": "Farba"
+    },
+    "mod.sales.deals.controllers.deals": {
+        "Sales": "Obchod",
+        "Deals": "Dealy"
+    },
+    "mod.sales.leads.controllers.leadsArchive": {
+        "Sales": "Obchod",
+        "Leads": "Leady",
+        "Archive": "Archív"
+    },
+    "mod.sales.deals.controllers.dealsArchive": {
+        "Sales": "Obchod",
+        "Deals": "Dealy",
+        "Archive": "Archív"
+    },
+    "mod.core.customers.tableCompanies": {
+        "Start typing to search...": "Začnite vyhľadávať...",
+        "Delete": "Zmazať"
+    },
+    "mod.core.sales.tableDeals": {
+        "Delete": "Zmazať",
+        "Start typing to search...": "Začnite vyhľadávať..."
+    },
+    "mod.core.sales.tableLeads": {
+        "Start typing to search...": "Začnite vyhľadávať..."
+    },
+    "mod.core.invoices.tableInvoices": {
+        "Total excl. VAT": "",
+        "Total incl. VAT": "",
+        "VAT": "",
+        "Customer": "",
+        "Variable symbol": "",
+        "Number": "",
+        "Issue": "",
+        "Due": "",
+        "Delivery": "",
+        "Payment": "",
+        "Total VAT": "",
+        "Start typing to search...": ""
+    },
+    "mod.core.invoices.formInvoice": {
+        "Invoice": "Faktúra"
     }
 }

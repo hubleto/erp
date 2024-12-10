@@ -19,6 +19,8 @@ export default class TableUserRoles extends Table<TableUserRolesProps, TableUser
   props: TableUserRolesProps;
   state: TableUserRolesState;
 
+  translationContext: string = 'mod.core.settings.tableUserRoles';
+
   constructor(props: TableUserRolesProps) {
     super(props);
     this.state = this.getStateFromProps(props);

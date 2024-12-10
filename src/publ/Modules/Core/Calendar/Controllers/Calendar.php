@@ -3,10 +3,13 @@
 namespace CeremonyCrmApp\Modules\Core\Calendar\Controllers;
 
 class Calendar extends \CeremonyCrmApp\Core\Controller {
+
+  public string $translationContext = 'mod.core.calendar.controllers.calendar';
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'calendar', 'content' => $this->app->translate('Calendar') ],
+      [ 'url' => 'calendar', 'content' => $this->translate('Calendar') ],
     ]);
   }
 

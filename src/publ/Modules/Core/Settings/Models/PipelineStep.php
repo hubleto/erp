@@ -18,17 +18,17 @@ class PipelineStep extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'name' => [
         'type' => 'varchar',
-        $this->translate('Name'),
+        'title' => $this->translate('Name'),
         'required' => true,
       ],
       'order' => [
         'type' => 'int',
-        $this->translate('Order'),
+        'title' => $this->translate('Order'),
         'required' => true,
       ],
       'id_pipeline' => [
         'type' => 'lookup',
-        $this->translate('Company'),
+        'title' => $this->translate('Company'),
         'model' => Pipeline::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',

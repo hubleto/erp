@@ -17,6 +17,8 @@ export default class FormUser<P, S> extends Form<FormUserProps, FormUserState> {
   props: FormUserProps;
   state: FormUserState;
 
+  translationContext: string = 'mod.core.settings.formUser';
+
   constructor(props: FormUserProps) {
     super(props);
   }

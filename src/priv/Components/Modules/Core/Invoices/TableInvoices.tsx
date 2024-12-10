@@ -49,6 +49,8 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
   props: TableInvoicesProps;
   state: TableInvoicesState;
 
+  translationContext: string = 'mod.core.invoices.tableInvoices';
+
   constructor(props: TableInvoicesProps) {
     super(props);
     this.state = this.getStateFromProps(props) as TableInvoicesState;

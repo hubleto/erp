@@ -23,27 +23,11 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^services\/get-service-price\/?$/' => Controllers\GetServicePrice::class,
     ]);
 
-    // $router(
-    //   'services',
-    //   'CeremonyCrmApp/Modules/Core/Services/Controllers',
-    //   '@app/Modules/Core/Services/Views',
-    //   [
-    //     'idAccount' => '$1',
-    //   ],
-    //   [
-    //     '' => 'Services',
-    //     '/get-service-price' => 'GetServicePrice',
-    //   ]
-    // );
-  }
-
-  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
-  {
-    $sidebar->addLink(1, 40100, 'services', $this->app->translate('Services'), 'fas fa-network-wired');
+    $this->app->sidebar->addLink(1, 40100, 'services', $this->app->translate('Services'), 'fas fa-network-wired');
 
     if (str_starts_with($this->app->requestedUri, 'services')) {
-      $sidebar->addHeading1(2, 40100, $this->app->translate('Services'));
-      $sidebar->addLink(2, 40200, 'services', $this->app->translate('Services'), 'fas fa-network-wired');
+      $this->app->sidebar->addHeading1(2, 40100, $this->app->translate('Services'));
+      $this->app->sidebar->addLink(2, 40200, 'services', $this->app->translate('Services'), 'fas fa-network-wired');
     }
   }
 

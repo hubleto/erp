@@ -8,6 +8,8 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\ {
 
 class Account {
   public \CeremonyCrmApp $app;
+  public string $adminName = '';
+  public string $adminFamilyName = '';
   public string $adminEmail = '';
   public string $adminPassword = '';
   public string $companyName = '';
@@ -30,6 +32,8 @@ class Account {
     \CeremonyCrmApp $app,
     string $uid,
     string $companyName,
+    string $adminName,
+    string $adminFamilyName,
     string $adminEmail,
     string $adminPassword,
     string $accountRootRewriteBase,
@@ -48,6 +52,8 @@ class Account {
     $this->app = $app;
     $this->uid = $uid;
     $this->companyName = $companyName;
+    $this->adminName = $adminName;
+    $this->adminFamilyName = $adminFamilyName;
     $this->adminEmail = $adminEmail;
     $this->adminPassword = $adminPassword;
     $this->accountRootRewriteBase = $accountRootRewriteBase;

@@ -9,18 +9,12 @@ class Sidebar {
   const ITEM_HEADING_2 = 'heading_2';
 
   public \CeremonyCrmApp $app;
-  protected array $items = [];
+  public array $items = [];
 
   public function __construct(\CeremonyCrmApp $app) {
     $this->app = $app;
     $this->items[1] = [];
     $this->items[2] = [];
-
-    $modules = $app->getModules();
-    array_walk($modules, function($module) {
-      $module->modifySidebar($this);
-    });
-
   }
 
   public function addItem(int $level, int $key, string $type, string $url, string $title, string $icon) {

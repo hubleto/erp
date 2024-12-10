@@ -35,9 +35,8 @@
 
   <script>
     ADIOS.onAppLoaded(() => {
-      globalThis.app.language = '{{ user.language ?: "en" }}';
-      globalThis.app.user = JSON.parse('{{ user|json_encode|raw }}');
       globalThis.app.idUser = {{ user.id ?? 0 }};
+      globalThis.app.loadDictionary('{{ user.language ?: "en" }}');
     });
   </script>
 
@@ -71,18 +70,28 @@
       <div class="hidden w-full md:block md:w-auto" id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
           <li>
+            <button class="btn btn-transparent btn-dropdown">
+              <span class="icon"><img src="{{ config.url }}/app/assets/images/flags/{{ user.language ?: 'en' }}.jpg" style="max-height:1em;" /></span>
+              <div class="menu">
+                <div class="list">
+                  <div class="flex items-center p-1"><img src="{{ config.url }}/app/assets/images/flags/cz.jpg" style="max-height:1em;max-width:1em;" /> <a href="?set-language=cz"><span class="text">Česky</span></a></div>
+                  <div class="flex items-center p-1"><img src="{{ config.url }}/app/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /> <a href="?set-language=de"><span class="text">Deutsch</span></a></div>
+                  <div class="flex items-center p-1"><img src="{{ config.url }}/app/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /> <a href="?set-language=en"><span class="text">English</span></a></div>
+                  <div class="flex items-center p-1"><img src="{{ config.url }}/app/assets/images/flags/es.jpg" style="max-height:1em;max-width:1em;" /> <a href="?set-language=es"><span class="text">Español</span></a></div>
+                  <div class="flex items-center p-1"><img src="{{ config.url }}/app/assets/images/flags/fr.jpg" style="max-height:1em;max-width:1em;" /> <a href="?set-language=fr"><span class="text">Francais</span></a></div>
+                  <div class="flex items-center p-1"><img src="{{ config.url }}/app/assets/images/flags/pl.jpg" style="max-height:1em;max-width:1em;" /> <a href="?set-language=pl"><span class="text">Polski</span></a></div>
+                  <div class="flex items-center p-1"><img src="{{ config.url }}/app/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /> <a href="?set-language=sk"><span class="text">Slovensky</span></a></div>
+                </div>
+              </div>
+            </button>
+          </li>
+          <li>
             <button
               class="btn btn-transparent"
               onclick="globalThis.app.reactElements['user-profile-modal'].setState({isOpen: true});"
             >
               <span class="icon"><i class='fas fa-user-tie'></i></span>
               <span class="text">{{ user.first_name ?: user.email }}</span>
-            </button>
-            <button
-              class="btn btn-transparent"
-              onclick="globalThis.app.reactElements['user-profile-modal'].setState({isOpen: true});"
-            >
-              <span class="text">{{ user.language ?: 'en' }}</span>
             </button>
           </li>
           <li>

@@ -19,7 +19,7 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
   protected array $modules = [];
-  protected \CeremonyCrmApp\Core\Sidebar $sidebar;
+  public \CeremonyCrmApp\Core\Sidebar $sidebar;
 
   protected array $extensions = [];
 
@@ -27,21 +27,7 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   {
     parent::__construct($config, $mode);
 
-    $setLanguage = $this->params['set-language'] ?? '';
-
-    if (
-      !empty($setLanguage)
-      && !empty(\CeremonyCrmApp\Modules\Core\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
-    ) {
-      $mUser = new \CeremonyCrmApp\Modules\Core\Settings\Models\User($this);
-      $mUser->eloquent
-        ->where('id', $this->userProfile['id'])
-        ->update(['language' => $setLanguage])
-      ;
-      $this->userProfile['language'] = $setLanguage;
-    }
-
-    $this->config['language'] = $this->userProfile['language'] ?? 'en';
+    $this->config['language'] = $this->auth->user['language'] ?? 'en';
 
     if ($mode == self::ADIOS_MODE_FULL) {
       $this->twig->addFunction(new \Twig\TwigFunction(
@@ -72,6 +58,7 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
       $this->twigLoader->addPath($extension->rootFolder . '/src/Views', 'ext-' . $extNameSanitized);
     }
 
+    // var_dump($this->sidebar->items);exit;
     // var_dump($this->extractRouteFromRequest());
     // var_dump($this->router->routing);
     // var_dump($this->router->applyRouting($this->extractRouteFromRequest(), []));exit;

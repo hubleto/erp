@@ -15,10 +15,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $this->app->router->httpGet([
       '/^$/' => Controllers\Home::class,
     ]);
-  }
 
-
-  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
-  {
-    $sidebar->addLink(1, 0, '', $this->app->translate('Home'), 'fas fa-home');
+    $this->app->sidebar->addLink(1, 0, '', $this->app->translate('Home'), 'fas fa-home');
   }}

@@ -4,8 +4,23 @@
         "Settings": "Nastavenia",
         "Customers": "Zákazníci",
         "Support": "Podpora",
-        "Companies": "",
-        "Persons": ""
+        "Companies": "Firmy",
+        "Persons": "Osoby",
+        "Billing": "Účtovanie",
+        "Billing Accounts": "Účty",
+        "Calendar": "Kalendár",
+        "Documents": "Dokumenty",
+        "Extensions": "Nadstavby",
+        "Invoices": "Faktúry",
+        "Services": "Služby",
+        "Sales": "Obchod",
+        "Contact Persons": "Kontaktné osoby"
+    },
+    "CeremonyCrmApp:Modules:Core:Customers:FormCustomer": {
+        "Basic Information": "O firme",
+        "Activities": "Aktivity",
+        "Leads": "Leady",
+        "Contact Persons": "Kontaktné osoby"
     },
     "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
         "Welcome": "Vitajte"
@@ -24,5 +39,13 @@
         "Time of last login": "",
         "Last login IP": "",
         "Time of last access": ""
+    },
+    "CeremonyCrmApp:Modules:Core:Settings:Models:UserRole": {
+        "Role": "",
+        "Grant all permissions": ""
+    },
+    "CeremonyCrmApp:Modules:Core:Settings:Models:UserHasRole": {
+        "User": "",
+        "Role": ""
     }
 }

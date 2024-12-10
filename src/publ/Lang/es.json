@@ -5,7 +5,14 @@
         "Customers": "",
         "Companies": "",
         "Persons": "",
-        "Support": ""
+        "Support": "",
+        "Billing": "",
+        "Calendar": "",
+        "Documents": "",
+        "Extensions": "",
+        "Invoices": "",
+        "Services": "",
+        "Sales": ""
     },
     "CeremonyCrmApp:Modules:Core:Settings:Models:User": {
         "First name": "",
@@ -21,5 +28,8 @@
         "Last login IP": "",
         "Time of last access": "",
         "Last access IP": ""
+    },
+    "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
+        "Welcome": ""
     }
 }

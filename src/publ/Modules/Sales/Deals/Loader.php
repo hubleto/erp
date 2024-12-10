@@ -19,30 +19,9 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^sales\/deals\/archive\/?$/' => Controllers\DealsArchive::class,
     ]);
 
-    // $router(
-    //   'sales',
-    //   'CeremonyCrmApp/Modules/Sales/Sales/Controllers',
-    //   '@app/Modules/Sales/Sales/Views',
-    //   [
-    //     'idAccount' => '$1',
-    //   ],
-    //   [
-    //     '' => 'Home',
-    //     '/leads' => 'Leads',
-    //     '/deals' => 'Deals',
-    //     '/convert-lead' => 'ConvertLead',
-    //     '/convert-lead' => 'ConvertLead',
-    //     '/change-pipeline' => 'ChangePipeline',
-    //     '/change-pipeline-step' => 'ChangePipelineStep',
-    //   ]
-    // );
-  }
-
-  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
-  {
     if (str_starts_with($this->app->requestedUri, 'sales')) {
-      $sidebar->addLink(2, 10203, 'sales/deals', $this->app->translate('Deals'), 'fa-regular fa-handshake');
-      $sidebar->addLink(2, 10205, 'sales/deals/archive', $this->app->translate('Deals Archive'), 'fas fa-box-archive');
+      $this->app->sidebar->addLink(2, 10203, 'sales/deals', $this->app->translate('Deals'), 'fa-regular fa-handshake');
+      $this->app->sidebar->addLink(2, 10205, 'sales/deals/archive', $this->app->translate('Deals Archive'), 'fas fa-box-archive');
     }
   }
 

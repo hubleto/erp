@@ -37,29 +37,26 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^settings\/permissions\/?$/' => Controllers\Permissions::class,
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
     ]);
-  }
 
-  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
-  {
-    $sidebar->addLink(1, 99100, 'settings', $this->app->translate('Settings'), 'fas fa-cog');
+    $this->app->sidebar->addLink(1, 99100, 'settings', $this->app->translate('Settings'), 'fas fa-cog');
 
     if (str_starts_with($this->app->requestedUri, 'settings')) {
-      $sidebar->addHeading1(2, 99200, $this->app->translate('Settings'));
-      $sidebar->addLink(2, 99201, 'settings/users', $this->app->translate('Users'), 'fas fa-user');
-      $sidebar->addLink(2, 99202, 'settings/user-roles', $this->app->translate('User Roles'), 'fas fa-user-group');
-      $sidebar->addLink(2, 99203, 'settings/profiles', $this->app->translate('Profiles'), 'fas fa-id-card');
-      $sidebar->addLink(2, 99204, 'settings/settings', $this->app->translate('Settings'), 'fas fa-cog');
-      $sidebar->addLink(2, 99205, 'settings/permissions', $this->app->translate('Permissions'), 'fas fa-shield-halved');
-      $sidebar->addLink(2, 99206, 'settings/tags', $this->app->translate('Tags'), 'fas fa-tags');
-      $sidebar->addLink(2, 99207, 'settings/activity-types', $this->app->translate('Activity Types'), 'fas fa-layer-group');
-      $sidebar->addLink(2, 99208, 'settings/contact-types', $this->app->translate('Contact Types'), 'fas fa-phone');
-      $sidebar->addLink(2, 99209, 'settings/countries', $this->app->translate('Countries'), 'fas fa-globe');
-      $sidebar->addLink(2, 99210, 'settings/currencies', $this->app->translate('Currencies'), 'fas fa-dollar-sign');
-      $sidebar->addLink(2, 99211, 'settings/labels', $this->app->translate('Labels'), 'fas fa-tags');
-      $sidebar->addLink(2, 99212, 'settings/lead-statuses', $this->app->translate('Lead Statuses'), 'fas fa-arrow-down-short-wide');
-      $sidebar->addLink(2, 99213, 'settings/deal-statuses', $this->app->translate('Deal Statuses'), 'fas fa-arrow-up-short-wide');
-      $sidebar->addLink(2, 99214, 'settings/pipelines', $this->app->translate('Pipelines'), 'fas fa-bars-progress');
-      $sidebar->addLink(2, 99214, 'settings/invoice-profiles', $this->app->translate('Invoice profiles'), 'fas fa-user-tie');
+      $this->app->sidebar->addHeading1(2, 99200, $this->app->translate('Settings'));
+      $this->app->sidebar->addLink(2, 99201, 'settings/users', $this->app->translate('Users'), 'fas fa-user');
+      $this->app->sidebar->addLink(2, 99202, 'settings/user-roles', $this->app->translate('User Roles'), 'fas fa-user-group');
+      $this->app->sidebar->addLink(2, 99203, 'settings/profiles', $this->app->translate('Profiles'), 'fas fa-id-card');
+      $this->app->sidebar->addLink(2, 99204, 'settings/settings', $this->app->translate('Settings'), 'fas fa-cog');
+      $this->app->sidebar->addLink(2, 99205, 'settings/permissions', $this->app->translate('Permissions'), 'fas fa-shield-halved');
+      $this->app->sidebar->addLink(2, 99206, 'settings/tags', $this->app->translate('Tags'), 'fas fa-tags');
+      $this->app->sidebar->addLink(2, 99207, 'settings/activity-types', $this->app->translate('Activity Types'), 'fas fa-layer-group');
+      $this->app->sidebar->addLink(2, 99208, 'settings/contact-types', $this->app->translate('Contact Types'), 'fas fa-phone');
+      $this->app->sidebar->addLink(2, 99209, 'settings/countries', $this->app->translate('Countries'), 'fas fa-globe');
+      $this->app->sidebar->addLink(2, 99210, 'settings/currencies', $this->app->translate('Currencies'), 'fas fa-dollar-sign');
+      $this->app->sidebar->addLink(2, 99211, 'settings/labels', $this->app->translate('Labels'), 'fas fa-tags');
+      $this->app->sidebar->addLink(2, 99212, 'settings/lead-statuses', $this->app->translate('Lead Statuses'), 'fas fa-arrow-down-short-wide');
+      $this->app->sidebar->addLink(2, 99213, 'settings/deal-statuses', $this->app->translate('Deal Statuses'), 'fas fa-arrow-up-short-wide');
+      $this->app->sidebar->addLink(2, 99214, 'settings/pipelines', $this->app->translate('Pipelines'), 'fas fa-bars-progress');
+      $this->app->sidebar->addLink(2, 99214, 'settings/invoice-profiles', $this->app->translate('Invoice profiles'), 'fas fa-user-tie');
     }
   }
 

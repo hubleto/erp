@@ -1,4 +1,6 @@
 import { ADIOS } from "adios/Loader";
+import request from "adios/Request";
+
 import { dictionarySk } from "adios/Dictionary/Sk";
 
 // ADIOS
@@ -54,19 +56,30 @@ import SalesTableDealsArchive from "./Modules/Sales/TableDealsArchive"
 
 
 
-//@ts-ignore
-const app: ADIOS = new ADIOS(window.ConfigEnv);
-
 export class CeremonyCrmApp extends ADIOS {
-  language: string = 'en';
   idUser: number = 0;
   user: any;
+
+  loadDictionary(language: string) {
+    if (language == 'en') return;
+
+    request.get(
+      'api/dictionary',
+      { language: language },
+      (data: any) => {
+        console.log(data);
+        this.dictionary = data;
+
+        if (language == 'sk') this.dictionary = { ...this.dictionary[this.language], _default_: dictionarySk };
+
+        console.log(this.dictionary);
+      }
+    );
+  }
 }
 
-app.dictionary.sk = dictionarySk;
-
-
-
+//@ts-ignore
+const app: CeremonyCrmApp = new CeremonyCrmApp(window.ConfigEnv);
 
 // ADIOS components
 app.registerReactComponent('Table', Table);

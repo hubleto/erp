@@ -20,26 +20,11 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^billing\/?$/' => Controllers\BillingAccounts::class,
     ]);
 
-    // $router(
-    //   'billing',
-    //   'CeremonyCrmApp/Modules/Core/Billing/Controllers',
-    //   '@app/Modules/Core/Billing/Views',
-    //   [
-    //     'idAccount' => '$1',
-    //   ],
-    //   [
-    //     '' => 'BillingAccounts',
-    //   ]
-    // );
-  }
-
-  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
-  {
-    $sidebar->addLink(1, 30100, 'billing', $this->app->translate('Billing'), 'fas fa-file-invoice-dollar');
+    $this->app->sidebar->addLink(1, 30100, 'billing', $this->app->translate('Billing'), 'fas fa-file-invoice-dollar');
 
     if (str_starts_with($this->app->requestedUri, 'billing')) {
-      $sidebar->addHeading1(2, 30100, $this->app->translate('Billing'));
-      $sidebar->addLink(2, 30200, 'billing', $this->app->translate('Billing Accounts'), 'fas fa-file-invoice-dollar');
+      $this->app->sidebar->addHeading1(2, 30100, $this->app->translate('Billing'));
+      $this->app->sidebar->addLink(2, 30200, 'billing', $this->app->translate('Billing Accounts'), 'fas fa-file-invoice-dollar');
     }
   }
 

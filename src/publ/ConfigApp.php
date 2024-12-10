@@ -30,5 +30,5 @@ $config['db'] = [
 ];
 
 $config['auth'] = [
-  'provider' => \ADIOS\Auth\Providers\DefaultProvider::class,
+  'provider' => \CeremonyCrmApp\Core\Auth::class,
 ];

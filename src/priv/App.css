@@ -155,8 +155,10 @@
   .btn.btn-disabled .icon { @apply text-gray-200 hover:text-gray-200; }
   .btn.btn-disabled .text { @apply text-gray-200 hover:text-gray-200; }
 
-  .btn.btn-dropdown { @apply flex flex-col items-baseline; }
+  .btn.btn-dropdown { @apply flex items-baseline; }
+  .btn.btn-dropdown > .menu { @apply relative; left: -100%; top: 0.5em; }
   .btn.btn-dropdown > .menu > .list { @apply invisible mt-1 bg-white shadow rounded absolute z-10; }
+  .btn.btn-dropdown:focus-within { @apply bg-gray-100; }
   .btn.btn-dropdown:focus-within > .menu > .list { @apply visible; }
   .btn.btn-dropdown:focus-within > .menu > .list .btn { @apply text-nowrap; }
 

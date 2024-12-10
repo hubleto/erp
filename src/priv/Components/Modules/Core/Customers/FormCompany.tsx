@@ -140,6 +140,8 @@ export default class FormCompany<P, S> extends Form<
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
+    globalThis.app.setTranslationContext('CeremonyCrmApp:Modules:Core:Customers:FormCustomer');
+
     if (R.LEADS && R.LEADS.length > 0) {
       R.LEADS.map((lead, index) => {
         lead.checkOwnership = false;
@@ -156,7 +158,7 @@ export default class FormCompany<P, S> extends Form<
     return (
       <>
         <TabView>
-          <TabPanel header="Basic Information">
+          <TabPanel header={globalThis.app.translate('Basic Information')}>
             <div
               className="grid grid-cols-2 gap-1"
               style={{
@@ -205,7 +207,7 @@ export default class FormCompany<P, S> extends Form<
               </div>
 
               <div className="card" style={{ gridArea: "contacts" }}>
-                <div className="card-header">Contact Persons</div>
+                <div className="card-header">{globalThis.app.translate('Contact Persons')}</div>
                 <div className="card-body">
                   <TablePersons
                     uid={this.props.uid + "_table_persons"}
@@ -284,7 +286,7 @@ export default class FormCompany<P, S> extends Form<
             </div>
           </TabPanel>
           {showAdditional ? (
-            <TabPanel header="Activities">
+            <TabPanel header={globalThis.app.translate('Activities')}>
               <CalendarComponent
                 creatingForModel="Company"
                 creatingForId={R.id}
@@ -294,7 +296,7 @@ export default class FormCompany<P, S> extends Form<
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header="Leads">
+            <TabPanel header={globalThis.app.translate('Leads')}>
               <TableLeads
                 uid={this.props.uid + "_table_leads"}
                 data={{ data: R.LEADS }}

@@ -27,11 +27,6 @@ class Module {
     return $this->registeredModels;
   }
 
-  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
-  {
-    // to be overriden
-  }
-
   public function installTables()
   {
     // to be overriden

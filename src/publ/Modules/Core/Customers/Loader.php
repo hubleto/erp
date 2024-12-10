@@ -25,38 +25,13 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^customers\/get-company-contacts\/?$/' => Controllers\GetCompanyContacts::class,
     ]);
 
-    // $router(
-      // 'customers',
-      // 'CeremonyCrmApp/Modules/Core/Customers/Controllers',
-      // '@app/Modules/Core/Customers/Views',
-      // [
-      //   'idAccount' => '$1',
-      // ],
-      // [
-      //   '/companies' => 'Companies',
-      //   '/persons' => 'Persons',
-      //   '/address' => 'Addresses',
-      //   '/contacts' => 'Contacts',
-      //   '/activities' => 'Activity',
-      //   '/activities/get' => 'ActivityApi',
-      //   '/tags' => 'Tag',
-      //   '/documents' => 'Documents',
-      //   '/get-company' => 'GetCompany',
-      //   '/get-company-contacts' => 'GetCompanyContacts',
-
-      // ]
-    // );
-  }
-
-  public function modifySidebar(\CeremonyCrmApp\Core\Sidebar $sidebar)
-  {
-    $sidebar->addLink(1, 10100, 'customers/companies', $this->app->translate('Customers'), 'fas fa-address-card');
+    $this->app->sidebar->addLink(1, 10100, 'customers/companies', $this->app->translate('Customers'), 'fas fa-address-card');
 
     if (str_starts_with($this->app->requestedUri, 'customers')) {
-      $sidebar->addHeading1(2, 10200, $this->app->translate('Customers'));
-      $sidebar->addLink(2, 10201, 'customers/companies', $this->app->translate('Companies'), 'fas fa-building');
-      $sidebar->addLink(2, 10202, 'customers/persons', $this->app->translate('Contact Persons'), 'fas fa-users');
-      //$sidebar->addLink(2, 10203, 'customers/activities', $this->app->translate('Activities'), 'fas fa-users');
+      $this->app->sidebar->addHeading1(2, 10200, $this->app->translate('Customers'));
+      $this->app->sidebar->addLink(2, 10201, 'customers/companies', $this->app->translate('Companies'), 'fas fa-building');
+      $this->app->sidebar->addLink(2, 10202, 'customers/persons', $this->app->translate('Contact Persons'), 'fas fa-users');
+      //$this->app->sidebar->addLink(2, 10203, 'customers/activities', $this->app->translate('Activities'), 'fas fa-users');
     }
   }
 

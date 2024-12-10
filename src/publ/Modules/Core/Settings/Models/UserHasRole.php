@@ -14,12 +14,12 @@ class UserHasRole extends \CeremonyCrmApp\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => $this->translate('User'),
-        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
+        'model' => User::class,
       ],
       'id_role' => [
         'type' => 'lookup',
         'title' => $this->translate('Role'),
-        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/UserRole',
+        'model' => UserRole::class,
       ],
     ]);
   }

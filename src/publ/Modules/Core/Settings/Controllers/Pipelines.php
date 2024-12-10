@@ -4,6 +4,8 @@ namespace CeremonyCrmApp\Modules\Core\Settings\Controllers;
 
 class Pipelines extends \CeremonyCrmApp\Core\Controller {
 
+  public string $translationContext = 'mod.core.settings.controllers.pipelines';
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

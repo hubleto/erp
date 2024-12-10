@@ -18,12 +18,12 @@ class Pipeline extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'name' => [
         'type' => 'varchar',
-        'title' => 'Name',
+        $this->translate('Name'),
         'required' => true,
       ],
       'description' => [
         'type' => 'varchar',
-        'title' => 'Description',
+        $this->translate('Description'),
         'required' => false,
       ],
     ]));

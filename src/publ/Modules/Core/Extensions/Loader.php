@@ -5,6 +5,8 @@ namespace CeremonyCrmApp\Modules\Core\Extensions;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
+  public string $translationContext = 'mod.core.extensions.loader';
+
   public function __construct(\CeremonyCrmApp $app)
   {
     parent::__construct($app);
@@ -16,7 +18,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^extensions\/?$/' => Controllers\Dashboard::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 999999, 'extensions', $this->app->translate('Extensions'), 'fas fa-puzzle-piece');
+    $this->app->sidebar->addLink(1, 999999, 'extensions', $this->translate('Extensions'), 'fas fa-puzzle-piece');
   }
 
 }

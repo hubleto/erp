@@ -5,6 +5,8 @@ namespace CeremonyCrmApp\Modules\Core\Dashboard;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
+  public string $translationContext = 'mod.core.dashboard.loader';
+
   public function __construct(\CeremonyCrmApp $app)
   {
     parent::__construct($app);
@@ -16,5 +18,5 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^$/' => Controllers\Home::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 0, '', $this->app->translate('Home'), 'fas fa-home');
+    $this->app->sidebar->addLink(1, 0, '', $this->translate('Home'), 'fas fa-home');
   }}

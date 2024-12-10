@@ -5,6 +5,7 @@ namespace CeremonyCrmApp\Core;
 class Module {
   public \CeremonyCrmApp $app;
   protected array $registeredModels = [];
+  public string $translationContext = '';
 
   public function __construct(\CeremonyCrmApp $app)
   {
@@ -13,6 +14,11 @@ class Module {
 
   public function init(): void
   {
+  }
+
+  public function translate(string $string, array $vars = []): string
+  {
+    return $this->app->translate($string, $vars, $this->translationContext);
   }
 
   public function registerModel(string $model)

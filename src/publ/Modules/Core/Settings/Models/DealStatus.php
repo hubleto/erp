@@ -7,23 +7,24 @@ class DealStatus extends \CeremonyCrmApp\Core\Model
   public string $table = 'deal_statuses';
   public string $eloquentClass = Eloquent\DealStatus::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public string $translationContext = 'mod.core.settings.models.dealStatus';
 
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
       'name' => [
         'type' => 'varchar',
-        'title' => 'Name',
+        $this->translate('Name'),
         'required' => true,
       ],
       'order' => [
         'type' => 'int',
-        'title' => 'Order',
+        $this->translate('Order'),
         'required' => true,
       ],
       'color' => [
         'type' => 'color',
-        'title' => 'Color',
+        $this->translate('Color'),
         'required' => false,
       ],
     ]));

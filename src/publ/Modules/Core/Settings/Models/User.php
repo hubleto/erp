@@ -50,7 +50,7 @@ class User extends \ADIOS\Models\User
       ],
       'id_active_profile' => [
         'type' => 'lookup',
-        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/Profile',
+        'model' => Profile::class,
         'title' => $this->translate('Active profile'),
         'show' => true,
       ],

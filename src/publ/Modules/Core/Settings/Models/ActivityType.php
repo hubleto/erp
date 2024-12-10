@@ -7,25 +7,26 @@ class ActivityType extends \CeremonyCrmApp\Core\Model
   public string $table = 'activity_types';
   public string $eloquentClass = Eloquent\ActivityType::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public string $translationContext = 'mod.core.settings.models.activityType';
 
   public function columns(array $columns = []): array
   {
     return parent::columns([
       'name' => [
         'type' => 'varchar',
-        'title' => 'Type Name',
+        $this->translate('Type Name'),
       ],
       'color' => [
         'type' => 'color',
-        'title' => 'Color',
+        'title' => $this->translate('Color'),
       ],
       'calendar_visibility' => [
         'type' => 'boolean',
-        'title' => 'Shown in Calendar',
+        $this->translate('Shown in Calendar'),
       ],
       'icon' => [
         'type' => 'varchar',
-        'title' => 'Icon',
+        $this->translate('Icon'),
       ]
     ]);
   }

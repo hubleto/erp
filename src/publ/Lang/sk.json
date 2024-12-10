@@ -13,21 +13,21 @@
         "No, do not delete": "Nie, zavrieť okno",
         "Choose image": "Vybrať obrázok",
         "Start typing to search...": "Začnite vyhľadávať...",
-        "Home": "Úvod",
-        "Settings": "Nastavenia",
-        "Customers": "Zákazníci",
-        "Support": "Podpora",
-        "Companies": "Firmy",
-        "Persons": "Osoby",
-        "Billing": "Účtovanie",
-        "Billing Accounts": "Účty",
-        "Calendar": "Kalendár",
-        "Documents": "Dokumenty",
-        "Extensions": "Nadstavby",
-        "Invoices": "Faktúry",
-        "Services": "Služby",
-        "Sales": "Obchod",
-        "Contact Persons": "Kontaktné osoby"
+        "Support": "",
+        "Sales": "",
+        "Extensions": "",
+        "Customers": "",
+        "Companies": "",
+        "Calendar": "",
+        "Billing Accounts": "",
+        "Services": "",
+        "Documents": "",
+        "Pipeline": "",
+        "Deals": "",
+        "Deals Archive": "",
+        "Leads": "",
+        "Leads Archive": "",
+        "Invoices": ""
     },
     "mod.core.customers.formCompany": {
         "Basic Information": "O firme",
@@ -39,18 +39,147 @@
         "Welcome": "Vitajte"
     },
     "mod.core.settings.models.user": {
-        "First name": "",
-        "Middle name": "",
-        "Last name": "",
-        "Email": "",
-        "Language": "",
-        "Active profile": "",
-        "Login": "",
-        "Password": "",
-        "Active": "",
-        "Time of last login": "",
-        "Last login IP": "",
-        "Time of last access": "",
-        "Last access IP": ""
+        "First name": "Meno",
+        "Middle name": "Stredné meno",
+        "Last name": "Priezvisko",
+        "Email": "Email",
+        "Language": "Jazyk",
+        "Active profile": "Aktívny profil",
+        "Login": "Login",
+        "Password": "Heslo",
+        "Active": "Účet je aktívny",
+        "Time of last login": "Čas posledného prihlásenia",
+        "Last login IP": "IP adresa posledného prihlásenia",
+        "Time of last access": "Čas posledného prístupu",
+        "Last access IP": "IP adresa posledného prístupu"
+    },
+    "mod.core.settings.models.country": {
+        "Country Name": "Štát",
+        "Code": "Kód"
+    },
+    "mod.core.settings.models.profile": {
+        "Company": "Firma"
+    },
+    "mod.core.settings.models.activityType": {
+        "Type Name": "Typ",
+        "Color": "Farba",
+        "Shown in Calendar": "Zobraziť v kalendári",
+        "Icon": "Ikonka"
+    },
+    "mod.core.settings.models.currency": {
+        "Currency Name": "Mena",
+        "Currency Code": "Kód"
+    },
+    "mod.core.settings.models.leadStatus": {
+        "Name": "Názov",
+        "Order": "Poradie",
+        "Color": "Farba"
+    },
+    "mod.core.settings.models.pipeline": {
+        "Name": "Názov",
+        "Description": "Popis"
+    },
+    "mod.core.settings.models.pipelineStep": {
+        "Name": "Názov",
+        "Order": "Poradie",
+        "Company": "Farba"
+    },
+    "mod.core.settings.models.dealStatus": {
+        "Name": "Názov",
+        "Order": "Poradie",
+        "Color": "Farba"
+    },
+    "mod.core.settings.models.tag": {
+        "Name": "Názov",
+        "Color": "Farba"
+    },
+    "mod.core.settings.loader": {
+        "Settings": "Nastavenia",
+        "Users": "Používatelia",
+        "User Roles": "Používateľské role",
+        "Profiles": "Profily",
+        "Permissions": "Povolenia",
+        "Tags": "Tagy",
+        "Activity Types": "Typy aktivít",
+        "Contact Types": "Typy kontaktov",
+        "Countries": "Štáty",
+        "Currencies": "Meny",
+        "Labels": "Značky",
+        "Lead Statuses": "Stavy leadov",
+        "Deal Statuses": "Stavy dealov",
+        "Pipelines": "Pipeline",
+        "Invoice profiles": "Fakturačné profily"
+    },
+    "mod.core.billing.loader": {
+        "Billing": "Účtovanie",
+        "Billing Accounts": "=Učty"
+    },
+    "mod.core.calendar.loader": {
+        "Calendar": "Kalendár"
+    },
+    "mod.core.customers.loader": {
+        "Customers": "Zákazníci",
+        "Companies": "Firmy",
+        "Contact Persons": "Kontaktné osoby"
+    },
+    "mod.core.dashboard.loader": {
+        "Home": "Úvod"
+    },
+    "mod.core.documents.loader": {
+        "Documents": "Dokumenty"
+    },
+    "mod.core.extensions.loader": {
+        "Extensions": "Nadstavby"
+    },
+    "mod.core.invoices.loader": {
+        "Invoices": "Faktúry"
+    },
+    "mod.core.services.loader": {
+        "Services": "Služby"
+    },
+    "mod.core.settings.models.setting": {
+        "Key": "Parameter",
+        "Value": "Hodnota",
+        "Only for user": "Iba pre používateľa"
+    },
+    "mod.core.invoices.models.invoice": {
+        "Profile": "Profil",
+        "Issued by": "Vystavil",
+        "Customer": "Zákazník",
+        "Number": "Číslo",
+        "TIP: Number is auto-generated based on the pattern configured in the profile.": "TIP: Číslo je generované automaticky podľa vzorca v profile.",
+        "Variable symbol": "Variabilný symbol",
+        "Constant symbol": "Konštantný symbol",
+        "Specific symbol": "Špecifický symbol",
+        "Issued": "Vystavená",
+        "Delivered": "Dodanie služby",
+        "Due": "Splatnosť",
+        "Payment": "Úhrada",
+        "Notes": "Poznámky"
+    },
+    "mod.core.invoices.models.invoiceItem": {
+        "Invoice": "Faktúra",
+        "Item": "Položka",
+        "Unit price": "Jednotková cena",
+        "Amount": "Množstvo"
+    },
+    "mod.core.settings.models.invoiceProfile": {
+        "Name": "Názov",
+        "Phone": "Telefón",
+        "E-mail": "Email",
+        "WWW": "WWW",
+        "Company ID": "IČO",
+        "Tax ID": "DIČ",
+        "VAT ID": "IČ DPH",
+        "Street, line 1": "Ulica, riadok č. 1",
+        "Street, line 2": "Ulica, riadok č. 2",
+        "ZIP": "PSČ",
+        "City": "Mesto",
+        "Country": "Štát",
+        "Bank name": "Názov banky",
+        "Account number": "Číslo účtu",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SIFT",
+        "Numbering pattern": "Vzorec pre číslovanie"
     }
 }

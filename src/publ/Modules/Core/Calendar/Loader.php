@@ -5,6 +5,8 @@ namespace CeremonyCrmApp\Modules\Core\Calendar;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
+  public string $translationContext = 'mod.core.calendar.loader';
+
   public function __construct(\CeremonyCrmApp $app)
   {
     parent::__construct($app);
@@ -16,7 +18,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^calendar\/?$/' => Controllers\Calendar::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 20100, 'calendar', $this->app->translate('Calendar'), 'fas fa-calendar');
+    $this->app->sidebar->addLink(1, 20100, 'calendar', $this->translate('Calendar'), 'fas fa-calendar');
   }
 
 }

@@ -9,6 +9,8 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\Permission;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
+  public string $translationContext = 'mod.core.services.loader';
+
   public function __construct(\CeremonyCrmApp $app)
   {
     parent::__construct($app);
@@ -23,11 +25,11 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^services\/get-service-price\/?$/' => Controllers\GetServicePrice::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 40100, 'services', $this->app->translate('Services'), 'fas fa-network-wired');
+    $this->app->sidebar->addLink(1, 40100, 'services', $this->translate('Services'), 'fas fa-network-wired');
 
     if (str_starts_with($this->app->requestedUri, 'services')) {
-      $this->app->sidebar->addHeading1(2, 40100, $this->app->translate('Services'));
-      $this->app->sidebar->addLink(2, 40200, 'services', $this->app->translate('Services'), 'fas fa-network-wired');
+      $this->app->sidebar->addHeading1(2, 40100, $this->translate('Services'));
+      $this->app->sidebar->addLink(2, 40200, 'services', $this->translate('Services'), 'fas fa-network-wired');
     }
   }
 

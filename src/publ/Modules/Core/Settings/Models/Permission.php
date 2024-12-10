@@ -14,7 +14,7 @@ class Permission extends \CeremonyCrmApp\Core\Model
     return parent::columns([
       'permission' => [
         'type' => 'varchar',
-        'title' => 'Permission',
+        $this->translate('Permission'),
         'show_column' => true
       ],
     ]);

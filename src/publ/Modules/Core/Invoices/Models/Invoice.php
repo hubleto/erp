@@ -10,6 +10,7 @@ class Invoice extends \ADIOS\Core\Model {
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '{%TABLE%}.number';
   public string $eloquentClass = Eloquent\Invoice::class;
+  public string $translationContext = 'mod.core.invoices.models.invoice';
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Company::class, "id_customer" ],
@@ -31,7 +32,7 @@ class Invoice extends \ADIOS\Core\Model {
       "date_issue" => [ "type" => "date", "title" => $this->translate("Issued") ],
       "date_delivery" => [ "type" => "date", "title" => $this->translate("Delivered") ],
       "date_due" => [ "type" => "date", "title" => $this->translate("Due") ],
-      "date_payment" => [ "type" => "date", "title" => $this->translate("Paymen") ],
+      "date_payment" => [ "type" => "date", "title" => $this->translate("Payment") ],
       "notes" => [ "type" => "text", "title" => $this->translate("Notes") ],
     ]));
   }

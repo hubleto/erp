@@ -5,6 +5,8 @@ namespace CeremonyCrmApp\Modules\Core\Customers;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
+  public string $translationContext = 'mod.core.customers.loader';
+
   public function __construct(\CeremonyCrmApp $app)
   {
     parent::__construct($app);
@@ -25,13 +27,13 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^customers\/get-company-contacts\/?$/' => Controllers\GetCompanyContacts::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 10100, 'customers/companies', $this->app->translate('Customers'), 'fas fa-address-card');
+    $this->app->sidebar->addLink(1, 10100, 'customers/companies', $this->translate('Customers'), 'fas fa-address-card');
 
     if (str_starts_with($this->app->requestedUri, 'customers')) {
-      $this->app->sidebar->addHeading1(2, 10200, $this->app->translate('Customers'));
-      $this->app->sidebar->addLink(2, 10201, 'customers/companies', $this->app->translate('Companies'), 'fas fa-building');
-      $this->app->sidebar->addLink(2, 10202, 'customers/persons', $this->app->translate('Contact Persons'), 'fas fa-users');
-      //$this->app->sidebar->addLink(2, 10203, 'customers/activities', $this->app->translate('Activities'), 'fas fa-users');
+      $this->app->sidebar->addHeading1(2, 10200, $this->translate('Customers'));
+      $this->app->sidebar->addLink(2, 10201, 'customers/companies', $this->translate('Companies'), 'fas fa-building');
+      $this->app->sidebar->addLink(2, 10202, 'customers/persons', $this->translate('Contact Persons'), 'fas fa-users');
+      //$this->app->sidebar->addLink(2, 10203, 'customers/activities', $this->translate('Activities'), 'fas fa-users');
     }
   }
 

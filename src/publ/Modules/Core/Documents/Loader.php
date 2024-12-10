@@ -5,6 +5,8 @@ namespace CeremonyCrmApp\Modules\Core\Documents;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
+  public string $translationContext = 'mod.core.documents.loader';
+
   public function __construct(\CeremonyCrmApp $app)
   {
     parent::__construct($app);
@@ -18,7 +20,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^documents\/?$/' => Controllers\Documents::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 70100, 'documents', $this->app->translate('Documents'), 'fa-regular fa-file');
+    $this->app->sidebar->addLink(1, 70100, 'documents', $this->translate('Documents'), 'fa-regular fa-file');
   }
 
   public function installTables()

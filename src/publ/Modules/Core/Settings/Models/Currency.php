@@ -7,18 +7,19 @@ class Currency extends \CeremonyCrmApp\Core\Model
   public string $table = 'currencies';
   public string $eloquentClass = Eloquent\Currency::class;
   public ?string $lookupSqlValue = 'CONCAT({%TABLE%}.name ," ","(",{%TABLE%}.code,")")';
+  public string $translationContext = 'mod.core.settings.models.currency';
 
   public function columns(array $columns = []): array
   {
     return parent::columns([
       'name' => [
         'type' => 'varchar',
-        'title' => 'Currency Name',
+        $this->translate('Currency Name'),
       ],
       'code' => [
         'type' => 'varchar',
         'byte_size' => '5',
-        'title' => 'Currency Code',
+        $this->translate('Currency Code'),
       ],
     ]);
   }

@@ -45,11 +45,9 @@ import CoreSettingsTableUserRoles from "./Modules/Core/Settings/TableUserRoles"
 
 // Module: Sales/Leads
 import SalesTableLeads from "./Modules/Sales/TableLeads"
-import SalesTableLeadsArchive from "./Modules/Sales/TableLeadsArchive"
 
 // Module: Sales/Deals
 import SalesTableDeals from "./Modules/Sales/TableDeals"
-import SalesTableDealsArchive from "./Modules/Sales/TableDealsArchive"
 
 
 
@@ -123,11 +121,9 @@ app.registerReactComponent('CoreSettingsTableUserRoles', CoreSettingsTableUserRo
 
 // Module: Sale/Leads
 app.registerReactComponent('SalesTableLeads', SalesTableLeads);
-app.registerReactComponent('SalesTableLeadsArchive', SalesTableLeadsArchive);
 
 // Module: Sale/Deals
 app.registerReactComponent('SalesTableDeals', SalesTableDeals);
-app.registerReactComponent('SalesTableDealsArchive', SalesTableDealsArchive);
 
 
 // Render react elements into body

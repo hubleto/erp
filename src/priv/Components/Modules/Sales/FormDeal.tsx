@@ -102,7 +102,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
       (data: any) => {
         if (data.status == "success") {
           R.id_pipeline_step = data.returnStep.id;
-          R.HISTORY = data.dealHistory;
+          R.HISTORY = data.dealHistory.reverse();
           R.PIPELINE_STEP = data.returnStep;
           this.setState({record: R});
         }
@@ -245,7 +245,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           }}
                         ></InputTags2>
                       </FormInput>
-                      {showAdditional ? this.inputWrapper('date_created', {readonly: R.is_archived}) : null}
+                      {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
                   </div>
@@ -430,10 +430,11 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
           </TabPanel>
           <TabPanel header="Activities">
               <CalendarComponent
+                readonly={R.is_archived}
                 creatingForModel="Deal"
                 creatingForId={R.id}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                url={`../../customers/activities/get?creatingForModel=Deal&creatingForId=${R.id}`}
+                url={`${window.ConfigEnv.rewriteBase}/customers/activities/get?creatingForModel=Deal&creatingForId=${R.id}`}
               ></CalendarComponent>
           </TabPanel>
           {showAdditional ? (

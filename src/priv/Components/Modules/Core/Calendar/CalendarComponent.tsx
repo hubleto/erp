@@ -15,6 +15,7 @@ interface CalendarProps {
   height?: any,
   creatingForModel?: string,
   creatingForId?: number,
+  readonly?: number,
 }
 
 interface CalendarState {
@@ -92,7 +93,9 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
           events={{url: this.props.url}}
           //initialEvents={this.state.events} // alternatively, use the `events` setting to fetch from a feed
           //select={handleDateSelect}
-          dateClick={(info) => this.reselvoNewDateTime(info)}
+          dateClick={(info) => {
+            if (!this.props.readonly) this.reselvoNewDateTime(info);
+          }}
           eventContent={this.renderCell} // custom render function
           eventClick={(eventClickInfo) => {
             this.setState({

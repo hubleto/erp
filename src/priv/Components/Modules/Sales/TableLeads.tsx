@@ -4,9 +4,11 @@ import FormLead from './FormLead';
 import InputTags2 from 'adios/Inputs/Tags2';
 
 interface TableLeadsProps extends TableProps {
+  archive?: any
 }
 
 interface TableLeadsState extends TableState {
+  archive: any
 }
 
 export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> {
@@ -32,6 +34,14 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   getStateFromProps(props: TableLeadsProps) {
     return {
       ...super.getStateFromProps(props),
+      archive: props.archive ?? false,
+    }
+  }
+
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      archive: this.state.archive,
     }
   }
 

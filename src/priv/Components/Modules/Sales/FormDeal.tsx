@@ -21,7 +21,6 @@ interface FormDealState extends FormState {
   newEntryId?: number,
   createNewDocument: boolean,
   showDocument: number,
-  historyReversed: boolean,
 }
 
 export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
@@ -40,8 +39,8 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
       newEntryId: this.props.newEntryId ?? -1,
       createNewDocument: false,
       showDocument: 0,
-      historyReversed: false
     };
+    this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
 
   getStateFromProps(props: FormDealProps) {
@@ -143,18 +142,22 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
     );
   }
 
+  onCreateActivityCallback() {
+    this.loadRecord();
+  }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
     if (R.LEAD) R.LEAD.checkOwnership = false;
 
-    if (R.HISTORY && R.HISTORY.length > 0 && this.state.historyReversed == false) {
-      R.HISTORY = this.state.record.HISTORY.reverse();
-      this.setState({historyReversed: true} as FormDealState);
+    if (R.HISTORY && R.HISTORY.length > 0) {
+      if (R.HISTORY.length > 1 && (R.HISTORY[0].id < R.HISTORY[R.HISTORY.length-1].id))
+        R.HISTORY = this.state.record.HISTORY.reverse();
     }
 
-    if (R.id > 0 && globalThis.app.user.id != R.id_user && !this.state.recordChanged) {
+    if (R.id > 0 && globalThis.app.idUser != R.id_user && !this.state.recordChanged) {
       return (
         <>
           <div className='w-full h-full flex flex-col justify-center'>
@@ -430,6 +433,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
           </TabPanel>
           <TabPanel header="Activities">
               <CalendarComponent
+                onCreateCallback={() => this.onCreateActivityCallback()}
                 readonly={R.is_archived}
                 creatingForModel="Deal"
                 creatingForId={R.id}

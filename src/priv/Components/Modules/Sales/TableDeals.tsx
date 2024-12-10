@@ -3,9 +3,11 @@ import Table, { TableProps, TableState } from 'adios/Table';
 import FormDeal from './FormDeal';
 
 interface TableDealsProps extends TableProps {
+  archive?: any
 }
 
 interface TableDealsState extends TableState {
+  archive: any
 }
 
 export default class TableDeals extends Table<TableDealsProps, TableDealsState> {
@@ -31,6 +33,14 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
   getStateFromProps(props: TableDealsProps) {
     return {
       ...super.getStateFromProps(props),
+      archive: props.archive ?? false,
+    }
+  }
+
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      archive: this.state.archive,
     }
   }
 

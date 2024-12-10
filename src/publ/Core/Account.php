@@ -20,6 +20,7 @@ class Account {
   public string $appRootUrl = '';
   public string $extRootFolder = '';
 
+  public string $env = '';
   public string $uid = '';
   public string $dbHost = '';
   public string $dbName = '';
@@ -30,6 +31,7 @@ class Account {
 
   public function __construct(
     \CeremonyCrmApp $app,
+    string $env,
     string $uid,
     string $companyName,
     string $adminName,
@@ -50,6 +52,7 @@ class Account {
   )
   {
     $this->app = $app;
+    $this->env = $env;
     $this->uid = $uid;
     $this->companyName = $companyName;
     $this->adminName = $adminName;

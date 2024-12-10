@@ -12,7 +12,8 @@
         "Yes, delete": "Áno, zmazať",
         "No, do not delete": "Nie, zavrieť okno",
         "Choose image": "Vybrať obrázok",
-        "Start typing to search...": "Začnite vyhľadávať..."
+        "Start typing to search...": "Začnite vyhľadávať...",
+        "Documents": ""
     },
     "mod.core.customers.formCompany": {
         "Basic Information": "O firme",

@@ -170,7 +170,7 @@ export default class FormCompany<P, S> extends Form<
               }}
             >
               <div className="card" style={{ gridArea: "company" }}>
-                <div className="card-header">Company Information</div>
+                <div className="card-header">{globalThis.app.translate('Company Information')}</div>
                 <div className="card-body flex flex-row gap-2">
                   <div className="w-1/2">
                     {this.inputWrapper("name")}
@@ -360,7 +360,7 @@ export default class FormCompany<P, S> extends Form<
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header="Deals">
+            <TabPanel header={globalThis.app.translate('Deals')}>
               <TableDeals
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DEALS }}
@@ -424,7 +424,7 @@ export default class FormCompany<P, S> extends Form<
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header="Documents">
+            <TabPanel header={globalThis.app.translate('Documents')}>
               <TableCompanyDocuments
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DOCUMENTS }}
@@ -509,7 +509,7 @@ export default class FormCompany<P, S> extends Form<
               : null}
             </TabPanel>
           ) : null}
-          <TabPanel header="Notes">
+          <TabPanel header={globalThis.app.translate('Notes')}>
             {this.input("note")}
           </TabPanel>
         </TabView>

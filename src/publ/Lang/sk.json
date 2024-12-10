@@ -181,5 +181,23 @@
         "Account IBAN": "IBAN",
         "SWIFT": "SIFT",
         "Numbering pattern": "Vzorec pre číslovanie"
+    },
+    "mod.core.customers.models.company": {
+        "Add Company": "Pridať firmu",
+        "Name": "Názov",
+        "Street Line 1": "Ulica, riadok č. 1",
+        "Street Line 2": "Ulica, riadok č. 2",
+        "Region": "Región",
+        "City": "Mesto",
+        "Country": "Štát",
+        "Postal Code": "PSČ",
+        "VAT ID": "IČ DPH",
+        "Company ID": "IČO",
+        "Tax ID": "DIČ",
+        "Notes": "Poznámky",
+        "Date Created": "Vytvorený",
+        "Active": "Aktívny",
+        "Assigned User": "Vlastník",
+        "Companies": "Firmy"
     }
 }

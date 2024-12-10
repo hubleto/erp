@@ -14,6 +14,7 @@ class Company extends \CeremonyCrmApp\Core\Model
   public string $table = 'companies';
   public string $eloquentClass = Eloquent\Company::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public string $translationContext = 'mod.core.customers.models.company';
 
   public array $relations = [
     'PERSONS' => [ self::HAS_MANY, Person::class, 'id_company' ],
@@ -33,78 +34,78 @@ class Company extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'name' => [
         'type' => 'varchar',
-        'title' => 'Name',
+        'title' => $this->translate('Name'),
         'required' => true,
       ],
       'street_line_1' => [
         'type' => 'varchar',
-        'title' => 'Street Line 1',
+        'title' => $this->translate('Street Line 1'),
         'required' => false,
       ],
       'street_line_2' => [
         'type' => 'varchar',
-        'title' => 'Street Line 2',
+        'title' => $this->translate('Street Line 2'),
         'required' => false,
       ],
       'region' => [
         'type' => 'varchar',
-        'title' => 'Region',
+        'title' => $this->translate('Region'),
         'required' => false,
       ],
       'city' => [
         'type' => 'varchar',
-        'title' => 'City',
+        'title' => $this->translate('City'),
         'required' => false,
       ],
       'id_country' => [
         'type' => 'lookup',
-        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/Country',
+        'model' => \CeremonyCrmApp\Modules\Core\Settings\Models\Country::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
-        'title' => 'Country',
+        'title' => $this->translate('Country'),
         'required' => false,
       ],
       'postal_code' => [
         'type' => 'varchar',
-        'title' => 'Postal Code',
+        'title' => $this->translate('Postal Code'),
         'required' => false,
       ],
       'vat_id' => [
         'type' => 'varchar',
-        'title' => 'VAT ID',
+        'title' => $this->translate('VAT ID'),
         'required' => false,
       ],
       'company_id' => [
         'type' => 'varchar',
-        'title' => 'Company ID',
+        'title' => $this->translate('Company ID'),
         'required' => false,
       ],
       'tax_id' => [
         'type' => 'varchar',
-        'title' => 'Tax ID',
+        'title' => $this->translate('Tax ID'),
         'required' => true,
       ],
       'note' => [
         'type' => 'text',
-        'title' => 'Notes',
+        'title' => $this->translate('Notes'),
         'required' => false,
       ],
       'date_created' => [
         'type' => 'date',
-        'title' => 'Date Created',
+        'title' => $this->translate('Date Created'),
         'required' => true,
         'readonly' => true,
       ],
       'is_active' => [
         'type' => 'boolean',
-        'title' => 'Active',
+        'title' => $this->translate('Active'),
         'required' => false,
         'default' => 1,
       ],
       'id_user' => [
         'type' => 'lookup',
-        'title' => 'Assigned User',
-        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/User',
+        'title' => $this->translate('Assigned User'),
+        'model' => \CeremonyCrmApp\Modules\Core\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,
@@ -148,8 +149,8 @@ class Company extends \CeremonyCrmApp\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Companies';
-    $description['ui']['addButtonText'] = 'Add Company';
+    $description['ui']['title'] = $this->translate('Companies');
+    $description['ui']['addButtonText'] = $this->translate('Add Company');
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
     $description['columns']['tags'] = ["title" => "Tags"];

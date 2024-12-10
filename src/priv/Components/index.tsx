@@ -55,11 +55,14 @@ import SalesTableDeals from "./Modules/Sales/TableDeals"
 
 
 export class CeremonyCrmApp extends ADIOS {
+  language: string = 'en';
   idUser: number = 0;
   user: any;
 
   loadDictionary(language: string) {
     if (language == 'en') return;
+
+    this.language = language;
 
     request.get(
       'api/dictionary',
@@ -68,6 +71,13 @@ export class CeremonyCrmApp extends ADIOS {
         this.dictionary = data;
         console.log(this.dictionary);
       }
+    );
+  }
+
+  addToDictionary(orig: string, context: string) {
+    request.get(
+      'api/dictionary',
+      { language: this.language, addNew: { orig: orig, context: context } },
     );
   }
 }

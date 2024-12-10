@@ -16,6 +16,7 @@ interface CalendarProps {
   creatingForModel?: string,
   creatingForId?: number,
   readonly?: number,
+  onCreateCallback?: any
 }
 
 interface CalendarState {
@@ -129,7 +130,7 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
               showInModalSimple={true}
               onClose={() => { this.setState({showIdActivity: 0}); }}
               onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
-                if (saveResponse.status = "success") this.setState({showIdActivity: 0});
+                if (saveResponse.status == "success") this.setState({showIdActivity: 0});
               }}
             ></FormActivity>
           </ModalSimple>
@@ -157,7 +158,10 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
               showInModalSimple={true}
               onClose={() => { this.setState({ newDate: "", newTime: "" }) }}
               onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
-                if (saveResponse.status = "success") this.setState({ newDate: "", newTime: "" })
+                if (saveResponse.status == "success") {
+                  this.setState({ newDate: "", newTime: "" });
+                  this.props.onCreateCallback();
+                }
               }}
             ></FormActivity>
           </ModalSimple>

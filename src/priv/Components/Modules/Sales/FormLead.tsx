@@ -403,10 +403,11 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
           {showAdditional ?
             <TabPanel header="Activities">
               <CalendarComponent
+                readonly={R.is_archived}
                 creatingForModel="Lead"
                 creatingForId={R.id}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                url={`../../customers/activities/get?creatingForModel=Lead&creatingForId=${R.id}`}
+                url={`${window.ConfigEnv.rewriteBase}/customers/activities/get?creatingForModel=Lead&creatingForId=${R.id}`}
               ></CalendarComponent>
             </TabPanel>
           : null}

@@ -53,20 +53,16 @@
     </button>
 
     <nav id="default-navbar"><div>
-      <a class="flex items-center space-x-3 rtl:space-x-reverse" href="{{ config.accountUrl }}">
-        <img id="logo" src="{{ config.url }}/app/assets/images/logo.png" class="h-8">
-        <span class="self-center text-l font-semibold whitespace-nowrap dark:text-white">
-          {{ user.PROFILE.company }}
-          <span class="text-gray-400 ml-2 font-normal">Ceremony CRM</span>
-        </span>
-      </a>
-      <button data-collapse-toggle="default-navbar-mobile" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-        </svg>
-      </button>
-      {{ include('@app/Views/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
+      <div class="flex items-center">
+        <div class="w-24">
+          <a class="flex" href="{{ config.accountUrl }}">
+            <img id="logo" src="{{ config.url }}/app/assets/images/logo.png" class="h-8 m-auto">
+          </a>
+        </div>
+        <div class="ml-4">
+          {{ include('@app/Views/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
+        </div>
+      </div>
       <div class="hidden w-full md:block md:w-auto" id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
           <li>
@@ -77,7 +73,7 @@
             {% else %}
               <a href="{{ config.accountUrl }}/upgrade" class="btn btn-red-outline btn-small">
                 <span class="icon"><i class="fas fa-cloud-arrow-up"></i></span>
-                <span class="text">Upgrade to PRO</span>
+                <span class="text">{{ translate('Upgrade to PRO') }}</span>
               </a>
             {% endif %}
           </li>

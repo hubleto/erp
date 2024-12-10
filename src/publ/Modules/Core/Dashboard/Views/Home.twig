@@ -1,7 +1,29 @@
-<div class="shadow border rounded p-12 text-xl">
-  {{ translate('Welcome') }}, {{ user.email }}
-</div>
+<div class="grid grid-cols-2 gap-2">
+  <div>
+    <div class="shadow border rounded p-12 text-xl">
+      {{ translate('Welcome') }}, {{ user.email }}
+    </div>
 
-<div style="width:10em;margin:auto;margin-top:4em;">
-  <img src="{{ config.url }}/app/assets/images/logo-s-textom.png">
+    <div style="width:10em;margin:auto;margin-top:4em;">
+      <img src="{{ config.url }}/app/assets/images/logo-s-textom.png">
+    </div>
+  </div>
+  <div>
+    {% if not app.isPro %}
+      <div class="card border-yellow-100">
+        <div class="card-header text-yellow-900 bg-yellow-100 border-yellow-200">
+          {{ translate('Upgrade to PRO and get exciting rewards.') }}
+          <i class="fas fa-cloud-arrow-up"></i>
+        </div>
+        <div class="card-body bg-yellow-50 border-yellow-100">
+          {{ translate('You are using free version of Ceremony. Certain features are unavailable.') }}<br/>
+          <br/>
+          <a href="{{ config.accountUrl }}/upgrade" class="btn btn-primary btn-large">
+            <span class="icon"><i class="fas fa-cloud-arrow-up"></i></span>
+            <span class="text">{{ translate('Upgrade to PRO') }}</span>
+          </a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
 </div>

@@ -30,7 +30,10 @@
         "Main Contact": "Hlavný kontakt"
     },
     "mod.core.customers.dashboard.home": {
-        "Welcome": "Vitajte"
+        "Welcome": "Vitajte",
+        "Upgrade to PRO and get exciting rewards.": "Prejdite na PRO verziu a získajte skvelé odmeny.",
+        "You are using free version of Ceremony. Certain features are unavailable.": "Používate voľne dostupnú verziu Ceremony. Niektoré funkcie nie sú dostupné.",
+        "Upgrade to PRO": "Prejsť na verziu PRO"
     },
     "mod.core.settings.models.user": {
         "First name": "Meno",
@@ -86,23 +89,6 @@
     "mod.core.settings.models.tag": {
         "Name": "Názov",
         "Color": "Farba"
-    },
-    "mod.core.settings.loader": {
-        "Settings": "Nastavenia",
-        "Users": "Používatelia",
-        "User Roles": "Používateľské role",
-        "Profiles": "Profily",
-        "Permissions": "Povolenia",
-        "Tags": "Tagy",
-        "Activity Types": "Typy aktivít",
-        "Contact Types": "Typy kontaktov",
-        "Countries": "Štáty",
-        "Currencies": "Meny",
-        "Labels": "Značky",
-        "Lead Statuses": "Stavy leadov",
-        "Deal Statuses": "Stavy dealov",
-        "Pipelines": "Pipeline",
-        "Invoice profiles": "Fakturačné profily"
     },
     "mod.core.billing.loader": {
         "Billing": "Účtovanie",
@@ -217,8 +203,8 @@
         "Value": "Hodnota"
     },
     "table": {
-        "Delete": "",
-        "Start typing to search...": ""
+        "Delete": "Zmazať",
+        "Start typing to search...": "Začnite vyhľadávať..."
     },
     "mod.core.settings.models.userRole": {
         "Role": "Rola",
@@ -311,8 +297,8 @@
         "Archive": "Archív"
     },
     "mod.core.customers.tableCompanies": {
-        "Start typing to search...": "",
-        "Delete": ""
+        "Start typing to search...": "Začnite vyhľadávať...",
+        "Delete": "Zmazať"
     },
     "mod.core.sales.tableDeals": {
         "Delete": "Zmazať",
@@ -341,5 +327,37 @@
     "mod.core.upgrade.loader": {
         "Upgrade to PRO": "",
         "Upgrade": ""
+    },
+    "mod.core.settings.controllers.dashboard": {
+        "Settings": "Nastavenia",
+        "Users": "Používatelia",
+        "User Roles": "Používateľské role",
+        "Profiles": "Profily",
+        "Permissions": "Povolenia",
+        "Tags": "Tagy",
+        "Activity Types": "Typy aktivít",
+        "Contact Types": "Typy kontaktov",
+        "Countries": "Štáty",
+        "Currencies": "Meny",
+        "Labels": "Značky",
+        "Lead Statuses": "Stavy leadov",
+        "Deal Statuses": "Stavy dealov",
+        "Pipelines": "Pipeline",
+        "Invoice profiles": "Fakturačné profily"
+    },
+    "mod.core.settings.controllers.userRoles": {
+        "Settings": "Nastavenia",
+        "User Roles": "Používateľské role"
+    },
+    "mod.core.settings.controllers.countries": {
+        "Settings": "Nastavenia",
+        "Countries": "Štáty"
+    },
+    "mod.core.settings.loader": {
+        "Settings": "Nastavenia"
+    },
+    "mod.core.settings.controllers.users": {
+        "Settings": "",
+        "Users": ""
     }
 }

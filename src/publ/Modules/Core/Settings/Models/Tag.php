@@ -7,6 +7,7 @@ class Tag extends \CeremonyCrmApp\Core\Model
   public string $table = 'tags';
   public string $eloquentClass = Eloquent\Tag::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public string $translationContext = 'mod.core.settings.models.tag';
 
   public function columns(array $columns = []): array
   {

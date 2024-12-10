@@ -7,6 +7,7 @@ class LeadStatus extends \CeremonyCrmApp\Core\Model
   public string $table = 'lead_statuses';
   public string $eloquentClass = Eloquent\LeadStatus::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public string $translationContext = 'mod.core.settings.models.leadStatus';
 
   public function columns(array $columns = []): array
   {

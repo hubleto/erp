@@ -6,6 +6,7 @@ class Setting extends \CeremonyCrmApp\Core\Model
 {
   public string $table = 'settings';
   public string $eloquentClass = Eloquent\Setting::class;
+  public string $translationContext = 'mod.core.settings.models.setting';
 
   public function columns(array $columns = []): array
   {

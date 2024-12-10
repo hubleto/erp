@@ -1,5 +1,18 @@
 {
-    "CeremonyCrmApp": {
+    "app": {
+        "Add": "Pridať",
+        "Save": "Uložiť",
+        "Copy": "Kopírovať",
+        "Delete": "Zmazať",
+        "Confirm delete": "Potvrďte zmazanie",
+        "Edit": "Upraviť",
+        "Adding record": "Pridať záznam",
+        "Editing record": "Úprava záznamu",
+        "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
+        "Yes, delete": "Áno, zmazať",
+        "No, do not delete": "Nie, zavrieť okno",
+        "Choose image": "Vybrať obrázok",
+        "Start typing to search...": "Začnite vyhľadávať...",
         "Home": "Úvod",
         "Settings": "Nastavenia",
         "Customers": "Zákazníci",
@@ -16,17 +29,16 @@
         "Sales": "Obchod",
         "Contact Persons": "Kontaktné osoby"
     },
-    "CeremonyCrmApp:Modules:Core:Customers:FormCustomer": {
+    "mod.core.customers.formCompany": {
         "Basic Information": "O firme",
         "Activities": "Aktivity",
         "Leads": "Leady",
         "Contact Persons": "Kontaktné osoby"
     },
-    "CeremonyCrmApp:Modules:Core:Dashboard:Controllers:Home": {
+    "mod.core.customers.dashboard.home": {
         "Welcome": "Vitajte"
     },
-    "CeremonyCrmApp:Modules:Core:Settings:Models:User": {
-        "Last access IP": "",
+    "mod.core.settings.models.user": {
         "First name": "",
         "Middle name": "",
         "Last name": "",
@@ -38,14 +50,7 @@
         "Active": "",
         "Time of last login": "",
         "Last login IP": "",
-        "Time of last access": ""
-    },
-    "CeremonyCrmApp:Modules:Core:Settings:Models:UserRole": {
-        "Role": "",
-        "Grant all permissions": ""
-    },
-    "CeremonyCrmApp:Modules:Core:Settings:Models:UserHasRole": {
-        "User": "",
-        "Role": ""
+        "Time of last access": "",
+        "Last access IP": ""
     }
 }

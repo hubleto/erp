@@ -6,6 +6,7 @@ class UserHasRole extends \CeremonyCrmApp\Core\Model
 {
   public string $table = 'user_has_roles';
   public string $eloquentClass = Eloquent\UserHasRole::class;
+  public string $translationContext = 'mod.core.settings.models.userHasRol';
 
   public function columns(array $columns = []): array
   {

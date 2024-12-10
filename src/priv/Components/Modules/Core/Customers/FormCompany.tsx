@@ -57,6 +57,8 @@ export default class FormCompany<P, S> extends Form<
   props: FormCompanyProps;
   state: FormCompanyState;
 
+  translationContext: string = 'mod.core.customers.formCompany';
+
   constructor(props: FormCompanyProps) {
     super(props);
 
@@ -139,8 +141,6 @@ export default class FormCompany<P, S> extends Form<
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
-
-    globalThis.app.setTranslationContext('CeremonyCrmApp:Modules:Core:Customers:FormCustomer');
 
     if (R.LEADS && R.LEADS.length > 0) {
       R.LEADS.map((lead, index) => {

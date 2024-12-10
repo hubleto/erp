@@ -67,11 +67,7 @@ export class CeremonyCrmApp extends ADIOS {
       'api/dictionary',
       { language: language },
       (data: any) => {
-        console.log(data);
         this.dictionary = data;
-
-        if (language == 'sk') this.dictionary = { ...this.dictionary[this.language], _default_: dictionarySk };
-
         console.log(this.dictionary);
       }
     );

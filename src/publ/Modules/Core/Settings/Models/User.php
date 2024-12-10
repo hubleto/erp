@@ -16,8 +16,8 @@ class User extends \ADIOS\Models\User
 
   public string $table = 'users';
   public string $eloquentClass = Eloquent\User::class;
-
   public ?string $lookupSqlValue = '{%TABLE%}.email';
+  public string $translationContext = 'mod.core.settings.models.user';
 
   public function columns(array $columns = []): array
   {

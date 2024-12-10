@@ -7,6 +7,7 @@ class Permission extends \CeremonyCrmApp\Core\Model
   public string $table = 'permissions';
   public string $eloquentClass = Eloquent\Permission::class;
   public ?string $lookupSqlValue = '{%TABLE%}.permission';
+  public string $translationContext = 'mod.core.settings.models.permission';
 
   public function columns(array $columns = []): array
   {

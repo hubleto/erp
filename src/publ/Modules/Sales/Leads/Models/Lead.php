@@ -119,8 +119,22 @@ class Lead extends \CeremonyCrmApp\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Leads';
-    $description['ui']['addButtonText'] = 'Add Lead';
+    if ($this->app->params["archive"] == 1) {
+      $description["ui"] = [
+        "title" => "Leads Archive"
+      ];
+      $description["permissions"] = [
+        "canCreate" => false,
+        "canUpdate" => false,
+        "canRead" => true,
+        "canDelete" => true
+      ];
+    } else {
+      $description['ui'] = [
+        'title' => 'Leads',
+        'addButtonText' => 'Add Lead'
+      ];
+    }
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
     $description['columns']['labels'] = ["title" => "Labels"];

@@ -223,9 +223,9 @@ export default class FormCompany<P, S> extends Form<
                         canRead: true,
                       },
                       columns: {
-                        first_name: { type: "varchar", title: "First name" },
-                        last_name: { type: "varchar", title: "Last name" },
-                        is_main: { type: "boolean", title: "Main Contact" },
+                        first_name: { type: "varchar", title: globalThis.app.translate("First name") },
+                        last_name: { type: "varchar", title: globalThis.app.translate("Last name") },
+                        is_main: { type: "boolean", title: globalThis.app.translate("Main Contact") },
                         __more_details: { type: "none", title: "", cellRenderer: ( table: TablePersons, data: any, options: any): JSX.Element => {
                             if (data.id > 0) {
                               return (<>
@@ -276,7 +276,7 @@ export default class FormCompany<P, S> extends Form<
                         this.setState({ record: R });
                         this.setState({ newEntryId: this.state.newEntryId - 1 } as FormCompanyState);
                       }}>
-                      + Add contact
+                      + {globalThis.app.translate('Add contact')}
                     </a>
                   ) : null}
                 </div>

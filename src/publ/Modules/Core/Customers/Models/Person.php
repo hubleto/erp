@@ -9,6 +9,7 @@ class Person extends \CeremonyCrmApp\Core\Model
   public string $table = 'persons';
   public string $eloquentClass = Eloquent\Person::class;
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
+  public string $translationContext = 'mod.core.customers.models.person';
 
   public array $relations = [
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company' ],
@@ -22,40 +23,40 @@ class Person extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'first_name' => [
         'type' => 'varchar',
-        'title' => 'First name',
+        'title' => $this->translate('First name'),
         'required' => true,
       ],
       'last_name' => [
         'type' => 'varchar',
-        'title' => 'Last name',
+        'title' => $this->translate('Last name'),
         'required' => true,
       ],
       'id_company' => [
         'type' => 'lookup',
-        'title' => 'Company',
-        'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Company',
+        'title' => $this->translate('Company'),
+        'model' => Company::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => false,
       ],
       'is_main' => [
         'type' => 'boolean',
-        'title' => 'Main Contact',
+        'title' => $this->translate('Main Contact'),
       ],
       'note' => [
         'type' => 'text',
-        'title' => 'Notes',
+        'title' => $this->translate('Notes'),
         'required' => false,
       ],
       'is_active' => [
         'type' => 'boolean',
-        'title' => 'Active',
+        'title' => $this->translate('Active'),
         'required' => false,
         'default' => 1,
       ],
       'date_created' => [
         'type' => 'date',
-        'title' => 'Date Created',
+        'title' => $this->translate('Date Created'),
         'required' => true,
         'readonly' => true,
       ],
@@ -67,12 +68,12 @@ class Person extends \CeremonyCrmApp\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe();
-    $description['ui']['title'] = 'Contact Persons';
-    $description['ui']['addButtonText'] = 'Add Contact Person';
+    $description['ui']['title'] = $this->translate('Contact Persons');
+    $description['ui']['addButtonText'] = $this->translate('Add Contact Person');
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
-    $description['columns']['virt_email'] = ["title" => "Emails"];
-    $description['columns']['virt_number'] = ["title" => "Phone Numbers"];
+    $description['columns']['virt_email'] = ["title" => $this->translate("Emails")];
+    $description['columns']['virt_number'] = ["title" => $this->translate("Phone Numbers")];
     unset($description['columns']['is_main']);
     unset($description['columns']['note']);
 

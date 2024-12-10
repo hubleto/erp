@@ -243,8 +243,11 @@
   .p-tabview .p-tabview-ink-bar { @apply bg-primary; }
   .p-tabview-nav { @apply border-b border-gray-200; }
   .p-tabview-panels { @apply p-1 border-l border-r border-b border-gray-200; }
-  .p-tabview-nav-link { @apply mr-0.5 rounded-t border border-gray-200 p-2 text-sm !no-underline font-normal hover:bg-gray-50; }
-  .p-tabview-selected > .p-tabview-nav-link { @apply text-primary border-primary text-primary hover:!bg-none; }
+  /* .p-tabview-panels { @apply p-1; } */
+  .p-tabview-nav-link { @apply mr-0.5 p-0 rounded-none border border-gray-200 border-t-gray-400 text-sm bg-transparent !no-underline font-normal hover:text-primary hover:border-t-primary; }
+  .p-tabview-title { @apply p-3 block; }
+  .p-tabview-selected > .p-tabview-nav-link { @apply text-primary border-t-primary border-l-primary/10 border-r-primary/10 text-primary bg-white hover:!bg-none; }
+  .p-tabview-selected .p-tabview-title { @apply bg-primary/10 hover:!bg-primary/10; }
   .p-inputswitch { zoom: 0.66; }
   .p-dialog .p-dialog-header { @apply p-2 text-sm; }
   .p-dialog .p-dialog-title { @apply text-sm; }

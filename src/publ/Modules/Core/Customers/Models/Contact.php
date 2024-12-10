@@ -9,6 +9,7 @@ class Contact extends \CeremonyCrmApp\Core\Model
   public string $table = 'contacts';
   public string $eloquentClass = Eloquent\Contact::class;
   public ?string $lookupSqlValue = '{%TABLE%}.value';
+  public string $translationContext = 'mod.core.customers.models.contact';
 
   public array $relations = [
     'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],
@@ -20,29 +21,29 @@ class Contact extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'id_person' => [
         'type' => 'lookup',
-        'title' => 'Person',
-        'model' => 'CeremonyCrmApp/Modules/Core/Customers/Models/Person',
+        'title' => $this->translate('Person'),
+        'model' => Person::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
       ],
       'id_contact_type' => [
         'type' => 'lookup',
-        'title' => 'Contact Category',
-        'model' => 'CeremonyCrmApp/Modules/Core/Settings/Models/ContactType',
+        'title' => $this->translate('Contact Category'),
+        'model' => \CeremonyCrmApp\Modules\Core\Settings\Models\ContactType::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
       ],
       'type' => [
         'type' => 'varchar',
-        'title' => 'Type',
-        'enumValues' => ['email' => 'Email', 'number' => 'Phone Number', 'other' => 'Other'],
+        'title' => $this->translate('Type'),
+        'enumValues' => ['email' => $this->translate('Email'), 'number' => $this->translate('Phone Number'), 'other' => $this->translate('Other')],
         'required' => true,
       ],
       'value' => [
         'type' => 'varchar',
-        'title' => 'Value',
+        'title' => $this->translate('Value'),
         'required' => true,
       ],
     ]));

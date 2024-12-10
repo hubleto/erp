@@ -15,25 +15,22 @@
         "Start typing to search...": "Začnite vyhľadávať...",
         "Support": "",
         "Sales": "",
-        "Extensions": "",
         "Customers": "",
-        "Companies": "",
-        "Calendar": "",
-        "Billing Accounts": "",
-        "Services": "",
-        "Documents": "",
-        "Pipeline": "",
-        "Deals": "",
-        "Deals Archive": "",
-        "Leads": "",
-        "Leads Archive": "",
-        "Invoices": ""
+        "Companies": ""
     },
     "mod.core.customers.formCompany": {
         "Basic Information": "O firme",
         "Activities": "Aktivity",
         "Leads": "Leady",
-        "Contact Persons": "Kontaktné osoby"
+        "Contact Persons": "Kontaktné osoby",
+        "Documents": "Dokumenty",
+        "Company Information": "O firme",
+        "Deals": "Dealy",
+        "Notes": "Poznámky",
+        "Add contact": "Pridať kontakt",
+        "Last name": "",
+        "First name": "",
+        "Main Contact": ""
     },
     "mod.core.customers.dashboard.home": {
         "Welcome": "Vitajte"
@@ -199,5 +196,23 @@
         "Active": "Aktívny",
         "Assigned User": "Vlastník",
         "Companies": "Firmy"
+    },
+    "mod.core.customers.models.person": {
+        "First name": "Meno",
+        "Last name": "Priezvisko",
+        "Company": "Firma",
+        "Main Contact": "Hlavný kontakt",
+        "Notes": "Poznámky",
+        "Active": "Aktívny",
+        "Date Created": "Vytvorený"
+    },
+    "mod.core.customers.models.contact": {
+        "Person": "Osoba",
+        "Contact Category": "Kategória",
+        "Type": "Typ",
+        "Email": "Email",
+        "Phone Number": "Telefón",
+        "Other": "Iné",
+        "Value": "Hodnota"
     }
 }

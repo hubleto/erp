@@ -9,6 +9,7 @@ use CeremonyCrmApp\Modules\Core\Settings\Models\ {
 class Account {
   public \CeremonyCrmApp $app;
   public string $adminEmail = '';
+  public string $adminPassword = '';
   public string $companyName = '';
   public string $accountRootRewriteBase = '';
   public string $accountRootFolder = '';
@@ -22,26 +23,33 @@ class Account {
   public string $dbName = '';
   public string $dbUser = '';
   public string $dbPassword = '';
-  public string $adminPassword = '';
 
   public bool $randomize = false;
 
   public function __construct(
     \CeremonyCrmApp $app,
+    string $uid,
     string $companyName,
     string $adminEmail,
+    string $adminPassword,
     string $accountRootRewriteBase,
     string $accountRootFolder,
     string $accountRootUrl,
     string $appRootFolder,
     string $appRootUrl,
     string $extRootFolder,
+    string $dbHost,
+    string $dbName,
+    string $dbUser,
+    string $dbPassword,
     bool $randomize = false
   )
   {
     $this->app = $app;
+    $this->uid = $uid;
     $this->companyName = $companyName;
     $this->adminEmail = $adminEmail;
+    $this->adminPassword = $adminPassword;
     $this->accountRootRewriteBase = $accountRootRewriteBase;
     $this->accountRootFolder = $accountRootFolder;
     $this->accountRootUrl = $accountRootUrl;
@@ -49,19 +57,12 @@ class Account {
     $this->appRootUrl = $appRootUrl;
     $this->extRootFolder = $extRootFolder;
 
+    $this->dbHost = $dbHost;
+    $this->dbName = $dbName;
+    $this->dbUser = $dbUser;
+    $this->dbPassword = $dbPassword;
+
     $this->randomize = $randomize;
-
-    $this->uid = \ADIOS\Core\Helper::str2url($this->companyName);
-    $this->uid = $this->uid . ($this->randomize ? '-' . rand(100, 999) : '');
-
-    $this->dbHost = $this->app->config['db_host'];
-    $this->dbName = 'crm_account_' . str_replace('-', '_', $this->uid);
-    $this->dbUser = 'crm_account_usr_' . str_replace('-', '_', $this->uid);
-    $this->dbPassword = \ADIOS\Core\Helper::randomPassword();
-
-    $this->adminPassword = \ADIOS\Core\Helper::randomPassword();
-
-// $this->dbName = 'crm_wai_5cac7';
 
   }
 
@@ -141,15 +142,8 @@ class Account {
     $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
   }
 
-  public function createFoldersAndFiles()
+  public function getConfigAccountContent(): string
   {
-    // folders
-    @mkdir($this->accountRootFolder . '/' . $this->uid);
-    @mkdir($this->accountRootFolder . '/' . $this->uid . '/log');
-    @mkdir($this->accountRootFolder . '/' . $this->uid . '/tmp');
-    @mkdir($this->accountRootFolder . '/' . $this->uid . '/upload');
-
-    // ConfigEnv.php
     $configAccount = file_get_contents($this->app->config['dir'] . '/account_templates/ConfigAccount.tpl');
     $configAccount = str_replace('{{ appDir }}', $this->appRootFolder, $configAccount);
     $configAccount = str_replace('{{ extDir }}', $this->extRootFolder, $configAccount);
@@ -161,11 +155,24 @@ class Account {
     $configAccount = str_replace('{{ rewriteBase }}', $this->accountRootRewriteBase . $this->uid . '/', $configAccount);
     $configAccount = str_replace('{{ accountDir }}', $this->accountRootFolder . '/' . $this->uid, $configAccount);
     $configAccount = str_replace('{{ accountUrl }}', $this->accountRootUrl . '/' . $this->uid, $configAccount);
+    return $configAccount;
+  }
 
-    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/ConfigAccount.php', $configAccount);
+  public function createFoldersAndFiles()
+  {
+    // folders
+    @mkdir($this->accountRootFolder . '/' . $this->uid);
+    @mkdir($this->accountRootFolder . '/' . $this->uid . '/log');
+    @mkdir($this->accountRootFolder . '/' . $this->uid . '/tmp');
+    @mkdir($this->accountRootFolder . '/' . $this->uid . '/upload');
+
+    // ConfigEnv.php
+
+    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/ConfigAccount.php', $this->getConfigAccountContent());
 
     // LoadApp.php
     $loadApp = file_get_contents($this->app->config['dir'] . '/account_templates/LoadApp.php');
+    $loadApp = str_replace('{{ uid }}', $this->uid, $loadApp);
     $loadApp = str_replace('{{ appDir }}', $this->appRootFolder, $loadApp);
     $loadApp = str_replace('{{ extDir }}', $this->extRootFolder, $loadApp);
     file_put_contents($this->accountRootFolder . '/' . $this->uid . '/LoadApp.php', $loadApp);

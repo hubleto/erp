@@ -26,14 +26,14 @@
       <div class="form">
         <div class="title">
           <h1 class="h4 mb-0">Ceremony</h1>
-          <p class="mb-4">Ultimate CRM</p>
+          <p class="mb-4">Trading is a game. Play it like a pro.</p>
         </div>
         <form class="content" id="login_form" action="" method="POST">
           <input type=hidden name="language" id="language" value="{{ config.language }}">
           <input type=hidden name="authUser" id="authUser" value="1">
 
           <input
-            type="text" name="login" value="{{ login }}" placeholder="Login" autofocus
+            type="text" name="login" value="{{ login }}" placeholder="Your email" autofocus
             onkeypress='if (event.keyCode == 13) { document.getElementById("login_form").submit(); }'
           />
 
@@ -47,15 +47,15 @@
             <label for="keep_logged_in">Keep signed in</label>
           </div>
 
-          <button type="submit" class="btn mt-4">
+          <button type="submit" class="btn btn-large mt-4">
             <span class="icon"><i class="fas fa-arrow-right"></i></span>
             <span class="text">Sign in</span>
           </button>
 
         </form>
         {% if viewParams.login != "" %}
-          <div class="small mt-4 text-danger text-center">
-            Wrong login or password
+          <div class="small mt-8 text-red-400 text-center">
+            Invalid email or password.
           </div>
         {% endif %}
       </div>

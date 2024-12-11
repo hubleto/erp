@@ -13,8 +13,19 @@
         "No, do not delete": "Nie, zavrieť okno",
         "Choose image": "Vybrať obrázok",
         "Start typing to search...": "Začnite vyhľadávať...",
-        "Documents": "",
-        "Upgrade to PRO": "Prejsť na PRO verziu"
+        "Documents": ""
+    },
+    "desktop": {
+        "Upgrade to PRO": "Prejsť na PRO",
+        "Your messages": "Vaše správy",
+        "Help center": "Centrum pomoci",
+        "Browse knowledgebase": "Prejsť na bázu znalostí",
+        "Hot tips & tricks": "Horúce tipy a triky",
+        "Need more help?": "Potrebujete pomôcť?",
+        "Contact us": "Kontaktujte nás",
+        "Manage your account": "Spravovať účet",
+        "Sign out": "Odhlásiť sa",
+        "Search knowledgebase...": "Prehľadávať bázu znalostí..."
     },
     "mod.core.customers.formCompany": {
         "Basic Information": "O firme",
@@ -31,10 +42,18 @@
         "Main Contact": "Hlavný kontakt"
     },
     "mod.core.customers.dashboard.home": {
-        "Welcome": "Vitajte",
+        "Welcome": "Vitaj",
         "Upgrade to PRO and get exciting rewards.": "Prejdite na PRO verziu a získajte skvelé odmeny.",
         "You are using free version of Ceremony. Certain features are unavailable.": "Používate voľne dostupnú verziu Ceremony. Niektoré funkcie nie sú dostupné.",
-        "Upgrade to PRO": "Prejsť na verziu PRO"
+        "Upgrade to PRO": "Prejsť na verziu PRO",
+        "Manage your account": "",
+        "Sign out": "",
+        "Your messages": "",
+        "Help center": "",
+        "Hot tips": "",
+        "Hot tips & tricks": "",
+        "Need more help?": "",
+        "Contact us": ""
     },
     "mod.core.settings.models.user": {
         "First name": "Meno",
@@ -204,8 +223,8 @@
         "Value": "Hodnota"
     },
     "table": {
-        "Delete": "Zmazať",
-        "Start typing to search...": "Začnite vyhľadávať..."
+        "Delete": "",
+        "Start typing to search...": ""
     },
     "mod.core.settings.models.userRole": {
         "Role": "Rola",
@@ -239,10 +258,24 @@
     },
     "mod.core.customers.controllers.companies": {
         "Customers": "Zákazníci",
-        "Companies": "Firmy"
+        "Companies": "Firmy",
+        "Your messages": "",
+        "Help center": "",
+        "Hot tips & tricks": "",
+        "Need more help?": "",
+        "Contact us": "",
+        "Manage your account": "",
+        "Sign out": ""
     },
     "mod.core.calendar.controllers.calendar": {
-        "Calendar": "Kalendár"
+        "Calendar": "Kalendár",
+        "Your messages": "",
+        "Help center": "",
+        "Hot tips & tricks": "",
+        "Need more help?": "",
+        "Contact us": "",
+        "Manage your account": "",
+        "Sign out": ""
     },
     "mod.core.billing.controllers.billingAccounts": {
         "Customers": "Zákazníci",
@@ -298,8 +331,8 @@
         "Archive": "Archív"
     },
     "mod.core.customers.tableCompanies": {
-        "Start typing to search...": "Začnite vyhľadávať...",
-        "Delete": "Zmazať"
+        "Start typing to search...": "",
+        "Delete": ""
     },
     "mod.core.sales.tableDeals": {
         "Delete": "Zmazať",
@@ -359,6 +392,15 @@
     },
     "mod.core.settings.controllers.users": {
         "Settings": "",
-        "Users": ""
+        "Users": "",
+        "Sign out": "",
+        "Manage your account": ""
+    },
+    "mod.core.documents.tableDocuments": {
+        "Start typing to search...": ""
+    },
+    "mod.core.settings.controllers.dealStatuses": {
+        "Settings": "",
+        "Deal Statuses": ""
     }
 }

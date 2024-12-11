@@ -118,8 +118,7 @@
   .btn.btn-extra-large .icon { @apply text-2xl px-3.5 py-2; }
   .btn.btn-extra-large .text { @apply text-2xl px-3.5 py-2; }
 
-  .btn.btn-transparent { @apply text-gray-800 bg-transparent border border-gray-100 hover:border-gray-200; }
-  .btn.btn-transparent:hover .icon { @apply bg-gray-100; }
+  .btn.btn-transparent { @apply text-gray-800 bg-transparent border border-gray-100 hover:border-gray-200 hover:bg-gray-100; }
   .btn.btn-white { @apply text-gray-800 bg-transparent border border-gray-100 hover:bg-gray-200; }
   .btn.btn-light { @apply text-gray-800 bg-gray-200 hover:bg-gray-400; }
   .btn.btn-danger { @apply text-red-600 bg-red-200 hover:bg-red-400 hover:text-white; }
@@ -156,7 +155,7 @@
   .btn.btn-disabled .text { @apply text-gray-200 hover:text-gray-200; }
 
   .btn.btn-dropdown { @apply flex items-baseline; }
-  .btn.btn-dropdown > .menu { @apply relative; left: -100%; top: 0.5em; }
+  .btn.btn-dropdown > .menu { @apply cursor-default relative; left: -100%; top: 0.5em; }
   .btn.btn-dropdown > .menu > .list { @apply invisible mt-1 bg-white shadow rounded absolute z-10; }
   .btn.btn-dropdown:focus-within { @apply bg-gray-100; }
   .btn.btn-dropdown:focus-within > .menu > .list { @apply visible; }

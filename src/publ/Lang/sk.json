@@ -43,17 +43,9 @@
     },
     "mod.core.customers.dashboard.home": {
         "Welcome": "Vitaj",
-        "Upgrade to PRO and get exciting rewards.": "Prejdite na PRO verziu a získajte skvelé odmeny.",
+        "Upgrade to PRO and get exciting rewards.": "Prejdite na PRO a získajte skvelé odmeny.",
         "You are using free version of Ceremony. Certain features are unavailable.": "Používate voľne dostupnú verziu Ceremony. Niektoré funkcie nie sú dostupné.",
-        "Upgrade to PRO": "Prejsť na verziu PRO",
-        "Manage your account": "",
-        "Sign out": "",
-        "Your messages": "",
-        "Help center": "",
-        "Hot tips": "",
-        "Hot tips & tricks": "",
-        "Need more help?": "",
-        "Contact us": ""
+        "Upgrade to PRO": "Prejsť na PRO"
     },
     "mod.core.settings.models.user": {
         "First name": "Meno",
@@ -223,8 +215,8 @@
         "Value": "Hodnota"
     },
     "table": {
-        "Delete": "",
-        "Start typing to search...": ""
+        "Delete": "Zmazať",
+        "Start typing to search...": "Začnite vyhľadávať..."
     },
     "mod.core.settings.models.userRole": {
         "Role": "Rola",
@@ -258,24 +250,10 @@
     },
     "mod.core.customers.controllers.companies": {
         "Customers": "Zákazníci",
-        "Companies": "Firmy",
-        "Your messages": "",
-        "Help center": "",
-        "Hot tips & tricks": "",
-        "Need more help?": "",
-        "Contact us": "",
-        "Manage your account": "",
-        "Sign out": ""
+        "Companies": "Firmy"
     },
     "mod.core.calendar.controllers.calendar": {
-        "Calendar": "Kalendár",
-        "Your messages": "",
-        "Help center": "",
-        "Hot tips & tricks": "",
-        "Need more help?": "",
-        "Contact us": "",
-        "Manage your account": "",
-        "Sign out": ""
+        "Calendar": "Kalendár"
     },
     "mod.core.billing.controllers.billingAccounts": {
         "Customers": "Zákazníci",
@@ -300,9 +278,9 @@
     },
     "mod.core.extensions.controllers.dashboard": {
         "Extensions": "Rozšírenia",
-        "You are using free version of Ceremony.": "Používate zdarma verziu Ceremony.",
-        "If you want to install extensions, you must upgrade to PRO.": "Ak chcete mať prístup k rozšíreniam, musíte prejsť na PRO verziu.",
-        "Upgrade to PRO": "Prejsť na verziu PRO"
+        "You are using free version of Ceremony.": "Používate voľne dostupnú verziu Ceremony.",
+        "If you want to install extensions, you must upgrade to PRO.": "Ak chcete mať prístup k rozšíreniam, musíte prejsť na PRO.",
+        "Upgrade to PRO": "Prejsť na PRO"
     },
     "mod.core.customers.controllers.persons": {
         "Customers": "Zákazníci",
@@ -359,8 +337,7 @@
         "Invoice": "Faktúra"
     },
     "mod.core.upgrade.loader": {
-        "Upgrade to PRO": "",
-        "Upgrade": ""
+        "Upgrade": "PRO"
     },
     "mod.core.settings.controllers.dashboard": {
         "Settings": "Nastavenia",
@@ -389,18 +366,5 @@
     },
     "mod.core.settings.loader": {
         "Settings": "Nastavenia"
-    },
-    "mod.core.settings.controllers.users": {
-        "Settings": "",
-        "Users": "",
-        "Sign out": "",
-        "Manage your account": ""
-    },
-    "mod.core.documents.tableDocuments": {
-        "Start typing to search...": ""
-    },
-    "mod.core.settings.controllers.dealStatuses": {
-        "Settings": "",
-        "Deal Statuses": ""
     }
 }

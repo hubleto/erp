@@ -12,13 +12,13 @@ import CalendarComponent from '../Core/Calendar/CalendarComponent';
 import Lookup from 'adios/Inputs/Lookup';
 import TableLeadDocuments from './TableLeadDocuments';
 import ModalSimple from 'adios/ModalSimple';
-import FormDocument from '../Core/Documents/FormDocument';
+import FormDocument, {FormDocumentProps, FormDocumentState} from '../Core/Documents/FormDocument';
 
-interface FormLeadProps extends FormProps {
+export interface FormLeadProps extends FormProps {
   newEntryId?: number,
 }
 
-interface FormLeadState extends FormState {
+export interface FormLeadState extends FormState {
   newEntryId?: number,
   createNewDocument: boolean,
   showDocument: number,
@@ -448,7 +448,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
               {this.state.isInlineEditing  && !R.is_archived ?
                 <a
                   role="button"
-                  onClick={() => this.setState({createNewDocument: true} as FormDealState)}
+                  onClick={() => this.setState({createNewDocument: true} as FormLeadState)}
                 >
                   + Add Document
                 </a>

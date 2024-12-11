@@ -10,14 +10,14 @@ import Lookup from 'adios/Inputs/Lookup';
 import { TabPanel, TabView } from 'primereact/tabview';
 import CalendarComponent from '../Core/Calendar/CalendarComponent';
 import TableDealDocuments from './TableDealDocuments';
-import FormDocument from '../Core/Documents/FormDocument';
+import FormDocument, {FormDocumentProps, FormDocumentState} from '../Core/Documents/FormDocument';
 import ModalSimple from 'adios/ModalSimple';
 
-interface FormDealProps extends FormProps {
+export interface FormDealProps extends FormProps {
   newEntryId?: number,
 }
 
-interface FormDealState extends FormState {
+export interface FormDealState extends FormState {
   newEntryId?: number,
   createNewDocument: boolean,
   showDocument: number,
@@ -433,7 +433,8 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 : null}
             </div>
           </TabPanel>
-          <TabPanel header="Activities">
+          {showAdditional ?
+            <TabPanel header="Activities">
               <CalendarComponent
                 onCreateCallback={() => this.onCreateActivityCallback()}
                 readonly={R.is_archived}
@@ -442,7 +443,8 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
                 url={`${window.ConfigEnv.rewriteBase}/customers/activities/get?creatingForModel=Deal&creatingForId=${R.id}`}
               ></CalendarComponent>
-          </TabPanel>
+            </TabPanel>
+          : null}
           {showAdditional ? (
             <TabPanel header="Documents">
               <TableDealDocuments

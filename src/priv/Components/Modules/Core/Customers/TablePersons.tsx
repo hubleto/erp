@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormPerson from './FormPerson';
+import FormPerson, { FormPersonProps, FormPersonState } from './FormPerson';
 import { getUrlParam } from 'adios/Helper';
 import { FormProps } from 'adios/Form';
 
@@ -36,12 +36,14 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     } else return {...super.getFormModalProps()}
   }
 
-  // getFormProps(): any {
-  //   return {
-  //     ...super.getFormProps(),
-  //     isInlineEditing: false,
-  //   }
-  // }
+  getFormProps(): any {
+    return {
+      ...super.getFormProps(),
+      onSaveCallback: (form: FormPerson<FormPersonProps, FormPersonState>, saveResponse: any) => {
+        this.props.parentForm.reload();
+      }
+    }
+  }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (data.CONTACTS && data.CONTACTS.length > 0) {

@@ -17,14 +17,13 @@ import Lookup from "adios/Inputs/Lookup";
 import Boolean from "adios/Inputs/Boolean";
 import CalendarComponent from "../Calendar/CalendarComponent";
 import TableLeads from "../../Sales/TableLeads";
-import FormLead from "../../Sales/FormLead";
+import FormLead, {FormLeadProps, FormLeadState} from "../../Sales/FormLead";
 import ModalSimple from "adios/ModalSimple";
 import TableDeals from "../../Sales/TableDeals";
-import FormDeal from "../../Sales/FormDeal";
-import moment from 'moment';
-import TableDocuments from "../Documents/TableDocuments";
+import FormDeal, {FormDealProps, FormDealState} from "../../Sales/FormDeal";
 import TableCompanyDocuments from "./TableCompanyDocuments";
-import FormDocument from "../Documents/FormDocument";
+import FormDocument, {FormDocumentProps, FormDocumentState} from "../Documents/FormDocument";
+import FormPerson, {FormPersonProps, FormPersonState} from "./FormPerson";
 
 interface FormCompanyProps extends FormProps {
   highlightIdBussinessAccounts: number,
@@ -40,6 +39,7 @@ interface FormCompanyState extends FormState {
   createNewLead: boolean,
   createNewDeal: boolean,
   createNewDocument: boolean,
+  createNewPerson: boolean,
   showDocument: number,
   newEntryId?: number,
   //isInlineEditingBillingAccounts: boolean
@@ -69,6 +69,7 @@ export default class FormCompany<P, S> extends Form<
       createNewLead: false,
       createNewDeal: false,
       createNewDocument: false,
+      createNewPerson: false,
       showDocument: 0,
       newEntryId: this.props.newEntryId ?? -1,
       //isInlineEditingBillingAccounts: false,
@@ -136,6 +137,38 @@ export default class FormCompany<P, S> extends Form<
     } else {
       return <h2>{this.state.record.name ? this.state.record.name : "[Undefined Name]"}</h2>;
     }
+  }
+
+  renderNewPersonForm(R: any) {
+    return (
+      <ModalSimple
+        uid='person_form'
+        isOpen={true}
+        type='right wide'
+      >
+        <FormPerson
+          id={-1}
+          creatingNew={true}
+          isInlineEditing={true}
+          descriptionSource="both"
+          description={{
+            defaultValues: {
+              id_company: R.id
+            }
+          }}
+          showInModal={true}
+          showInModalSimple={true}
+          onClose={() => { this.setState({ createNewPerson: false } as FormCompanyState); }}
+          onSaveCallback={(form: FormPerson<FormPersonProps, FormPersonState>, saveResponse: any) => {
+            if (saveResponse.status = "success") {
+              this.loadRecord()
+              this.setState({createNewPerson: false} as FormCompanyState)
+            }
+          }}
+        >
+        </FormPerson>
+      </ModalSimple>
+    )
   }
 
   renderContent(): JSX.Element {
@@ -206,6 +239,7 @@ export default class FormCompany<P, S> extends Form<
                 </div>
               </div>
 
+              {showAdditional ?
               <div className="card" style={{ gridArea: "contacts" }}>
                 <div className="card-header">{globalThis.app.translate('Contact Persons')}</div>
                 <div className="card-body">
@@ -215,6 +249,7 @@ export default class FormCompany<P, S> extends Form<
                     showFooter={false}
                     descriptionSource="props"
                     data={{ data: R.PERSONS }}
+                    parentForm={this}
                     description={{
                       permissions: {
                         canCreate: true,
@@ -226,7 +261,7 @@ export default class FormCompany<P, S> extends Form<
                         first_name: { type: "varchar", title: globalThis.app.translate("First name") },
                         last_name: { type: "varchar", title: globalThis.app.translate("Last name") },
                         is_main: { type: "boolean", title: globalThis.app.translate("Main Contact") },
-                        __more_details: { type: "none", title: "", cellRenderer: ( table: TablePersons, data: any, options: any): JSX.Element => {
+                        /* __more_details: { type: "none", title: "", cellRenderer: ( table: TablePersons, data: any, options: any): JSX.Element => {
                             if (data.id > 0) {
                               return (<>
                                   <button
@@ -243,16 +278,13 @@ export default class FormCompany<P, S> extends Form<
                               );
                             }
                           },
-                        },
+                        }, */
                       },
                     }}
                     isUsedAsInput={true}
-                    isInlineEditing={this.state.isInlineEditing}
-                    readonly={!this.state.isInlineEditing}
+                    readonly={false}
                     onRowClick={(table: TablePersons, row: any) => {
-                      if (this.state.isInlineEditing == false) {
-                        this.setState({ isInlineEditing: true });
-                      }
+                      table.openForm(row.id);
                     }}
                     onChange={(table: TablePersons) => {
                       this.updateRecord({ PERSONS: table.state.data?.data });
@@ -266,23 +298,17 @@ export default class FormCompany<P, S> extends Form<
                       role="button"
                       onClick={() => {
                         if (!R.PERSONS) R.PERSONS = [];
-                        R.PERSONS.push({
-                          id: this.state.newEntryId,
-                          id_company: { _useMasterRecordId_: true },
-                          is_main: false,
-                          is_active: true,
-                          date_created: moment().format("YYYY-MM-DD")
-                        });
-                        this.setState({ record: R });
-                        this.setState({ newEntryId: this.state.newEntryId - 1 } as FormCompanyState);
+                        this.setState({createNewPerson: true} as FormCompanyState);
                       }}>
                       + {globalThis.app.translate('Add contact')}
                     </a>
                   ) : null}
+                  {this.state.createNewPerson ?
+                    this.renderNewPersonForm(R)
+                  : null}
                 </div>
               </div>
-
-
+              : null}
             </div>
           </TabPanel>
           {showAdditional ? (
@@ -316,7 +342,6 @@ export default class FormCompany<P, S> extends Form<
                   },
                 }}
                 isUsedAsInput={false}
-                //isInlineEditing={this.state.isInlineEditing}
                 readonly={true}
                 onRowClick={(table: TableLeads, row: any) => {
                   table.openForm(row.id);
@@ -350,8 +375,8 @@ export default class FormCompany<P, S> extends Form<
                     onClose={() => { this.setState({ createNewLead: false } as FormCompanyState); }}
                     onSaveCallback={(form: FormLead<FormLeadProps, FormLeadState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
-                        R.LEADS.push(saveResponse.savedRecord);
-                        this.setState({ record: R });
+                        this.loadRecord();
+                        this.setState({createNewLead: false} as FormCompanyState)
                       }
                     }}
                   />
@@ -414,8 +439,8 @@ export default class FormCompany<P, S> extends Form<
                     onClose={() => { this.setState({ createNewDeal: false } as FormCompanyState); }}
                     onSaveCallback={(form: FormDeal<FormDealProps, FormDealState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
-                        R.DEALS.push(saveResponse.savedRecord);
-                        this.setState({ record: R });
+                        this.loadRecord();
+                        this.setState({createNewDeal: false} as FormCompanyState)
                       }
                     }}
                   />

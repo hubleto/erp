@@ -157,7 +157,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
-        "canDelete" => true
+        "canDelete" => $this->app->permissions->granted($this->fullName . ':Delete')
       ];
     } else {
       $description['ui'] = [

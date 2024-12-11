@@ -9,11 +9,12 @@ import TableContacts from './TableContacts';
 import moment from 'moment';
 import Lookup from 'adios/Inputs/Lookup';
 
-interface FormPersonProps extends FormProps {
+export interface FormPersonProps extends FormProps {
   newEntryId?: number,
+  creatingNew: boolean
 }
 
-interface FormPersonState extends FormState {
+export interface FormPersonState extends FormState {
   newEntryId?: number,
 }
 
@@ -123,6 +124,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     model='CeremonyCrmApp/Modules/Core/Customers/Models/Company'
                     endpoint={`customers/get-company`}
                     value={R.id_company}
+                    readonly={this.props.creatingNew}
                     onChange={(value: any) => {
                       this.updateRecord({ id_company: value});
                     }}
@@ -145,58 +147,6 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 {showAdditional ? this.inputWrapper('date_created') : null}
               </div>
             </div>
-
-            {/* <div className='card mt-4' style={{gridArea: 'addresses'}}>
-              <div className='card-header'>Addresses</div>
-              <div className='card-body'>
-                <InputTable
-                  uid={this.props.uid + '_table_addresses_input'}
-                  {...this.getDefaultInputProps()}
-                  value={R.ADDRESSES}
-                  onChange={(value: any) => {
-                    this.updateRecord({ ADDRESSES: value });
-                  }}
-                >
-                  <TableAddresses
-                    uid={this.props.uid + '_table_addresses'}
-                    context="Hello World"
-                    descriptionSource="props"
-                    description={{
-                      permissions: {
-                        canCreate: true,
-                        canDelete: true,
-                        canRead: true,
-                        canUpdate: true
-                      },
-                      columns: {
-                        street_line_1: { type: 'varchar', title: 'Street Line 1' },
-                        street_line_2: { type: 'varchar', title: 'Street Line 2' },
-                        city: { type: 'varchar', title: 'City' },
-                        region: { type: 'varchar', title: 'Region' },
-                        postal_code: { type: 'varchar', title: 'Postal Code' },
-                        id_country: { type: 'lookup', model: 'CeremonyCrmApp/Modules/Core/Settings/Models/Country', title: 'Country' },
-                      }
-                    }}
-                  ></TableAddresses>
-                </InputTable>
-                {this.state.isInlineEditing ? (
-                  <a
-                    role='button'
-                    onClick={() => {
-                      if (!R.ADDRESSES) R.ADDRESSES = [];
-                      R.ADDRESSES.push({
-                        id: this.state.newEntryId,
-                        id_person: { _useMasterRecordId_: true },
-                      });
-                      this.setState({ record: R });
-                      this.setState({ newEntryId: this.state.newEntryId - 1 } as FormPersonState);
-                    }}
-                  >
-                    + Add address
-                  </a>
-                ) : null}
-              </div>
-            </div> */}
 
             <div className='card mt-4' style={{gridArea: 'contacts'}}>
               <div className='card-header'>Contacts</div>

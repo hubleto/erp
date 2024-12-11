@@ -216,7 +216,7 @@
     },
     "table": {
         "Delete": "Zmazať",
-        "Start typing to search...": "Začnite vyhľadávať..."
+        "Start typing to search...": ""
     },
     "mod.core.settings.models.userRole": {
         "Role": "Rola",

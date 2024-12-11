@@ -134,17 +134,23 @@
   .btn.btn-cancel-outline { @apply text-gray-600 bg-white border border-dotted border-gray-200 hover:border-solid; }
 
   .btn.btn-blue { @apply text-blue-800 bg-blue-100 border border-blue-100 hover:border-blue-200; }
-  .btn.btn-blue-outline { @apply text-blue-800 bg-transparent border border-blue-100 hover:border-blue-200; }
+  .btn.btn-blue-outline { @apply text-blue-800 bg-transparent border border-blue-100 hover:bg-blue-200; }
+  .btn.btn-blue-outline .text { @apply !border-blue-800; }
   .btn.btn-green { @apply text-green-800 bg-green-100 border border-green-100 hover:border-green-200; }
-  .btn.btn-green-outline { @apply text-green-800 bg-transparent border border-green-100 hover:border-green-200; }
+  .btn.btn-green-outline { @apply text-green-800 bg-transparent border border-green-100 hover:bg-green-200; }
+  .btn.btn-green-outline .text { @apply !border-green-800; }
   .btn.btn-red { @apply text-red-800 bg-red-100 border border-red-100 hover:border-red-200; }
-  .btn.btn-red-outline { @apply text-red-800 bg-transparent border border-red-100 hover:border-red-200; }
+  .btn.btn-red-outline { @apply text-red-800 bg-transparent border border-red-100 hover:bg-red-200; }
+  .btn.btn-red-outline .text { @apply !border-red-800; }
   .btn.btn-yellow { @apply text-yellow-800 bg-yellow-100 border border-yellow-100 hover:border-yellow-200; }
-  .btn.btn-yellow-outline { @apply text-yellow-800 bg-transparent border border-yellow-100 hover:border-yellow-200; }
+  .btn.btn-yellow-outline { @apply text-yellow-800 bg-transparent border !border-yellow-800 hover:bg-yellow-50; }
+  .btn.btn-yellow-outline .text { @apply !border-yellow-800; }
   .btn.btn-lime { @apply text-lime-800 bg-lime-100 border border-lime-100 hover:border-lime-200; }
-  .btn.btn-lime-outline { @apply text-lime-800 bg-transparent border border-lime-100 hover:border-lime-200; }
+  .btn.btn-lime-outline { @apply text-lime-800 bg-transparent border border-lime-100 hover:bg-lime-200; }
+  .btn.btn-lime-outline .text { @apply !border-lime-800; }
   .btn.btn-violet { @apply text-violet-800 bg-violet-100 border border-violet-100 hover:border-violet-200; }
-  .btn.btn-violet-outline { @apply text-violet-800 bg-transparent border border-violet-100 hover:border-violet-200; }
+  .btn.btn-violet-outline { @apply text-violet-800 bg-transparent border border-violet-100 hover:bg-violet-200; }
+  .btn.btn-violet-outline .text { @apply !border-violet-800; }
 
   .btn-list-item { @apply flex rounded-none border-none shadow-none; }
   .btn-list-item .text { @apply border-none flex-1; }
@@ -156,7 +162,7 @@
 
   .btn.btn-dropdown { @apply flex items-baseline; }
   .btn.btn-dropdown > .menu { @apply cursor-default relative; left: -100%; top: 0.5em; }
-  .btn.btn-dropdown > .menu > .list { @apply invisible mt-1 bg-white shadow rounded absolute z-10; }
+  .btn.btn-dropdown > .menu > .list { @apply invisible mt-1 bg-white shadow-xl rounded absolute z-10; }
   .btn.btn-dropdown:focus-within { @apply bg-gray-100; }
   .btn.btn-dropdown:focus-within > .menu > .list { @apply visible; }
   .btn.btn-dropdown:focus-within > .menu > .list .btn { @apply text-nowrap; }

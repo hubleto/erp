@@ -25,7 +25,8 @@
         "Contact us": "Kontaktujte nás",
         "Manage your account": "Spravovať účet",
         "Sign out": "Odhlásiť sa",
-        "Search knowledgebase...": "Prehľadávať bázu znalostí..."
+        "Search knowledgebase...": "Prehľadávať bázu znalostí...",
+        "No hot tips for this screen": "Žiadne horúce tipy pre túto obrazovku"
     },
     "mod.core.customers.formCompany": {
         "Basic Information": "O firme",

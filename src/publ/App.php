@@ -51,6 +51,7 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
       $this->addExtension($extName);
     }
 
+    $this->help = new \CeremonyCrmApp\Core\Help($this);
     $this->sidebar = new \CeremonyCrmApp\Core\Sidebar($this);
 
     $modules = $this->getModules();

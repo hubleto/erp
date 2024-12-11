@@ -6,10 +6,10 @@ require(__DIR__ . "/../LoadApp.php");
 // render
 $app = new CeremonyCrmApp($config);
 
-$mProfile = new \CeremonyCrmApp\Modules\Core\Settings\Models\Profile($app);
-$mUser = new \CeremonyCrmApp\Modules\Core\Settings\Models\User($app);
-$mUserRole = new \CeremonyCrmApp\Modules\Core\Settings\Models\UserRole($app);
-$mUserHasRole = new \CeremonyCrmApp\Modules\Core\Settings\Models\UserHasRole($app);
+$mProfile = new \CeremonyCrmMod\Core\Settings\Models\Profile($app);
+$mUser = new \CeremonyCrmMod\Core\Settings\Models\User($app);
+$mUserRole = new \CeremonyCrmMod\Core\Settings\Models\UserRole($app);
+$mUserHasRole = new \CeremonyCrmMod\Core\Settings\Models\UserHasRole($app);
 
 $origProfile1 = $mProfile->eloquent->find(1)?->toArray();
 $companyName = $origProfile1['company'] ?? '';

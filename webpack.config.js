@@ -4,10 +4,10 @@ module.exports = (env, arg) => {
   return {
     // stats: 'verbose',
     entry: {
-      app: ['./src/priv/Components/index.tsx'],
+      app: ['./src/App.tsx'],
     },
     output: {
-      path: path.resolve(__dirname, 'app/assets/compiled/js'),
+      path: path.resolve(__dirname, 'assets/compiled'),
       filename: '[name].js',
       clean: true
     },

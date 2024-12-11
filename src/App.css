@@ -109,6 +109,8 @@
   .btn .text { @apply block px-2 py-1 text-sm; }
   .btn .text > small { @apply block text-xs text-gray-600; }
 
+  .btn.btn-no-border { @apply !border-none; }
+
   .btn.btn-extra-small .icon { @apply text-xs px-1 py-0.5; }
   .btn.btn-extra-small .text { @apply text-xs px-1 py-0.5; }
   .btn.btn-small .icon { @apply text-sm px-1.5 py-0.5; }
@@ -134,7 +136,7 @@
   .btn.btn-cancel-outline { @apply text-gray-600 bg-white border border-dotted border-gray-200 hover:border-solid; }
 
   .btn.btn-blue { @apply text-blue-800 bg-blue-100 border border-blue-100 hover:border-blue-200; }
-  .btn.btn-blue-outline { @apply text-blue-800 bg-transparent border border-blue-100 hover:bg-blue-200; }
+  .btn.btn-blue-outline { @apply text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-200; }
   .btn.btn-blue-outline .text { @apply !border-blue-800; }
   .btn.btn-green { @apply text-green-800 bg-green-100 border border-green-100 hover:border-green-200; }
   .btn.btn-green-outline { @apply text-green-800 bg-transparent border border-green-100 hover:bg-green-200; }
@@ -152,8 +154,8 @@
   .btn.btn-violet-outline { @apply text-violet-800 bg-transparent border border-violet-100 hover:bg-violet-200; }
   .btn.btn-violet-outline .text { @apply !border-violet-800; }
 
-  .btn-list-item { @apply flex rounded-none border-none shadow-none; }
-  .btn-list-item .text { @apply border-none flex-1; }
+  .btn-list-item { @apply flex rounded-none shadow-none; }
+  .btn-list-item .text { @apply flex-1; }
   .btn-list-item .icon { @apply self-stretch flex items-center; }
 
   .btn.btn-disabled { @apply text-gray-200 border border-gray-200 hover:border-gray-200 hover:text-gray-200; }
@@ -162,7 +164,7 @@
 
   .btn.btn-dropdown { @apply flex items-baseline; }
   .btn.btn-dropdown > .menu { @apply cursor-default relative; left: -100%; top: 0.5em; }
-  .btn.btn-dropdown > .menu > .list { @apply invisible mt-1 bg-white shadow-xl rounded absolute z-10; }
+  .btn.btn-dropdown > .menu > .list { @apply divide-none invisible mt-1 bg-white shadow-xl rounded absolute z-10; }
   .btn.btn-dropdown:focus-within { @apply bg-gray-100; }
   .btn.btn-dropdown:focus-within > .menu > .list { @apply visible; }
   .btn.btn-dropdown:focus-within > .menu > .list .btn { @apply text-nowrap; }

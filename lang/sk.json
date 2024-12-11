@@ -367,5 +367,9 @@
     },
     "mod.core.settings.loader": {
         "Settings": "Nastavenia"
+    },
+    "mod.core.settings.controllers.users": {
+        "Settings": "",
+        "Users": ""
     }
 }

@@ -82,9 +82,9 @@
                   </div>
                   <h1 class="text-center p-6 m-0">{{ translate('Your messages') }}</h1>
                   <div>
-                    <a href="#" class="btn btn-white btn-list-item"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Využite špeciálnu zľavu</span></a>
-                    <a href="#" class="btn btn-white btn-list-item"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Vydali sme novú verziu</span></a>
-                    <a href="#" class="btn btn-white btn-list-item"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Príďte nás navštíviť na CODECON</span></a>
+                    <a href="#" class="btn btn-white btn-list-item m-1"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Využite špeciálnu zľavu</span></a>
+                    <a href="#" class="btn btn-white btn-list-item m-1"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Vydali sme novú verziu</span></a>
+                    <a href="#" class="btn btn-white btn-list-item m-1"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Príďte nás navštíviť na CODECON</span></a>
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@
             <button class="btn btn-white btn-small btn-dropdown">
               <span class="icon"><i class="fas fa-life-ring"></i></span>
               <div class="menu">
-                <div class="list" style="margin-left:-16.2em;width:18em;">
+                <div class="list !bg-yellow-50 p-4" style="position:fixed;right:0;top:0;width:30em;max-width:50%;height:100vh;margin:0;border-radius:0;border:none;">
                   <div class="text-center">
                     <i class="fas fa-life-ring text-primary text-2xl p-4"></i>
                   </div>
@@ -124,7 +124,7 @@
                   >
                     <span class="text">{{ translate('Browse knowledgebase') }}</span>
                   </a>
-                  <h2 class="px-1 py-2 m-0">{{ translate('Hot tips & tricks') }}</h2>
+                  <h2 class="px-1 py-8 m-0">{{ translate('Hot tips & tricks') }}</h2>
                   {% if viewParams.help.hotTips|length == 0 %}
                     <a
                       href="{{ config.helpRootUrl }}/{{ user.language }}"
@@ -137,7 +137,7 @@
                     {% for tipSlug, tipTitle in viewParams.help.hotTips %}
                       <a
                         href="{{ config.helpRootUrl }}/{{ tipSlug }}"
-                        class="btn btn-yellow-outline m-1"
+                        class="btn btn-blue-outline m-1"
                         target="_blank"
                       >
                         <span class="icon"><i class="fas fa-question"></i></span>
@@ -147,7 +147,7 @@
                   {% endif %}
                   {# <a href="#" class="btn btn-white btn-list-item"><span class="text">Plan activity in calendar</span></a>
                   <a href="#" class="btn btn-white btn-list-item"><span class="text">Add new lead</span></a> #}
-                  <h2 class="px-1 py-2 m-0">{{ translate('Need more help?') }}</h2>
+                  <h2 class="px-1 py-8 m-0">{{ translate('Need more help?') }}</h2>
                   <a href="#" class="btn btn-white btn-list-item"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">{{ translate('Contact us') }}</span></a>
                 </div>
               </div>
@@ -158,14 +158,14 @@
               <span class="text">{{ user.language ?: 'en' }}</span>
               <div class="menu">
                 <div class="list" style="margin-left:-6.2em;width:8em;">
-                  <a href="?set-language=en" class="btn btn-white btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">English</span></a>
-                  <a href="?set-language=de" class="btn btn-white btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Deutsch</span></a>
-                  <a href="?set-language=es" class="btn btn-white btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/es.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Español</span></a>
-                  <a href="?set-language=fr" class="btn btn-white btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/fr.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Francais</span></a>
-                  <a href="?set-language=it" class="btn btn-white btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/it.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Italiano</span></a>
-                  <a href="?set-language=pl" class="btn btn-white btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/pl.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Polski</span></a>
-                  <a href="?set-language=cz" class="btn btn-white btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cz.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Česky</span></a>
-                  <a href="?set-language=sk" class="btn btn-white btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Slovensky</span></a>
+                  <a href="?set-language=en" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">English</span></a>
+                  <a href="?set-language=de" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Deutsch</span></a>
+                  <a href="?set-language=es" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/es.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Español</span></a>
+                  <a href="?set-language=fr" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/fr.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Francais</span></a>
+                  <a href="?set-language=it" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/it.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Italiano</span></a>
+                  <a href="?set-language=pl" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/pl.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Polski</span></a>
+                  <a href="?set-language=cz" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cz.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Česky</span></a>
+                  <a href="?set-language=sk" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Slovensky</span></a>
                 </div>
               </div>
             </button>

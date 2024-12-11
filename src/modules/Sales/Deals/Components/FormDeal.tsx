@@ -527,6 +527,13 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
+                        this.setState({ showDocument: 0 } as FormCompanyState)
+                      }
+                    }}
+                    onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                        this.setState({ showDocument: 0 } as FormCompanyState)
                       }
                     }}
                   />

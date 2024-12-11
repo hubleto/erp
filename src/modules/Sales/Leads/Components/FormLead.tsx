@@ -499,6 +499,13 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
+                        this.setState({ showDocument: 0 } as FormCompanyState)
+                      }
+                    }}
+                    onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                        this.setState({ showDocument: 0 } as FormCompanyState)
                       }
                     }}
                   />

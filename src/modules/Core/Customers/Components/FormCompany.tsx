@@ -527,6 +527,13 @@ export default class FormCompany<P, S> extends Form<
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
+                        this.setState({ showDocument: 0 } as FormCompanyState)
+                      }
+                    }}
+                    onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                      if (saveResponse.status = "success") {
+                        this.loadRecord();
+                        this.setState({ showDocument: 0 } as FormCompanyState)
                       }
                     }}
                   />

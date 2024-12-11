@@ -1,12 +1,12 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace CeremonyCrmApp\Installer;
 
 use CeremonyCrmMod\Core\Settings\Models\ {
   Permission, Profile, RolePermission, User, UserRole, UserHasRole
 };
 
-class Account {
+class Installer {
   public \CeremonyCrmApp $app;
   public string $adminName = '';
   public string $adminFamilyName = '';
@@ -153,7 +153,7 @@ class Account {
 
   public function getConfigAccountContent(): string
   {
-    $configAccount = file_get_contents($this->app->config['dir'] . '/account_templates/ConfigAccount.tpl');
+    $configAccount = file_get_contents(__DIR__ . '/template/ConfigAccount.tpl');
     $configAccount = str_replace('{{ appDir }}', $this->appRootFolder, $configAccount);
     $configAccount = str_replace('{{ extDir }}', $this->extRootFolder, $configAccount);
     $configAccount = str_replace('{{ appUrl }}', $this->appRootUrl, $configAccount);
@@ -180,7 +180,7 @@ class Account {
     file_put_contents($this->accountRootFolder . '/' . $this->uid . '/ConfigAccount.php', $this->getConfigAccountContent());
 
     // LoadApp.php
-    $loadApp = file_get_contents($this->app->config['dir'] . '/account_templates/LoadApp.php');
+    $loadApp = file_get_contents(__DIR__ . '/template/LoadApp.php');
     $loadApp = str_replace('{{ uid }}', $this->uid, $loadApp);
     $loadApp = str_replace('{{ appDir }}', $this->appRootFolder, $loadApp);
     $loadApp = str_replace('{{ extDir }}', $this->extRootFolder, $loadApp);
@@ -188,13 +188,13 @@ class Account {
 
     // index.php
     copy(
-      $this->app->config['dir'] . '/account_templates/index.php',
+      __DIR__ . '/template/index.php',
       $this->accountRootFolder . '/' . $this->uid . '/index.php'
     );
 
     // .htaccess
     copy(
-      $this->app->config['dir'] . '/account_templates/.htaccess',
+      __DIR__ . '/template/.htaccess',
       $this->accountRootFolder . '/' . $this->uid . '/.htaccess'
     );
   }
@@ -210,7 +210,7 @@ class Account {
   {
     @mkdir($this->accountRootFolder . '/' . $this->uid . '/devel');
 
-    $tplFolder = $this->app->config['dir'] . '/account_templates';
+    $tplFolder = __DIR__ . '/template';
     $accFolder = $this->accountRootFolder . '/' . $this->uid;
 
     copy($tplFolder . '/devel/Reinstall.php', $accFolder . '/devel/Reinstall.php');

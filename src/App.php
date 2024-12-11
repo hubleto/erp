@@ -3,13 +3,17 @@
 use \ADIOS\Core\Helper;
 
 // load configs
-require_once(__DIR__ . "/ConfigApp.php");
+require_once(__DIR__ . "/../ConfigApp.php");
 
 // autoloader pre CeremonyCrmApp
 spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);
   if (str_starts_with($class, 'CeremonyCrmMod/')) {
     require_once(__DIR__ . '/modules/' . str_replace('CeremonyCrmMod/', '', $class) . '.php');
+  } else if (str_starts_with($class, 'CeremonyCrmApp/Core/')) {
+    require_once(__DIR__ . '/core/' . str_replace('CeremonyCrmApp/Core/', '', $class) . '.php');
+  } else if (str_starts_with($class, 'CeremonyCrmApp/Installer/')) {
+    require_once(__DIR__ . '/installer/' . str_replace('CeremonyCrmApp/Installer/', '', $class) . '.php');
   } else if (str_starts_with($class, 'CeremonyCrmApp/') && !str_starts_with($class, 'CeremonyCrmApp/Extensions/')) {
     require_once(__DIR__ . '/core/' . str_replace('CeremonyCrmApp/', '', $class) . '.php');
   }

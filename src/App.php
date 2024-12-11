@@ -79,6 +79,12 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
 
   }
 
+  public function getDictionaryFilename(string $language = ''): string
+  {
+    if (strlen($language) !== 2) return '';
+    else return realpath(__DIR__ . '/../lang/' . $language . '.json');
+  }
+
   public function initTwig()
   {
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();

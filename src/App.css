@@ -15,7 +15,7 @@
 
   /* SPECIAL components, idetified by # id */
   aside#default-sidebar { @apply flex fixed top-0 left-0 z-10 pt-12 h-screen transition-transform -translate-x-full sm:translate-x-0; }
-  aside#default-sidebar > nav { @apply bg-primary p-1 flex gap-0.5 flex-col; }
+  aside#default-sidebar > nav { @apply bg-primary p-1 flex gap-0.5 flex-col w-32; }
   aside#default-sidebar > nav .btn { @apply w-full rounded; }
   aside#default-sidebar > nav .btn .icon { @apply text-xs w-6 text-left flex justify-center content-center flex-wrap border-none; }
   aside#default-sidebar > nav .btn .text { @apply text-xs border-none; }
@@ -30,7 +30,7 @@
   aside#default-sidebar > div > ul > li > ul > li > ul > li > ul > li { @apply ml-2 text-sm; } /* lvl-4 */
   aside#default-sidebar > div > ul > li > ul > li > ul > li > ul > li > ul > li { @apply ml-4 text-sm; } /* lvl-5 */
 
-  nav#default-navbar { @apply bg-white fixed w-full z-20 top-0 start-0; }
+  nav#default-navbar { @apply bg-white fixed w-full z-20 top-0 start-0;  }
   nav#default-navbar > div { @apply flex flex-wrap items-center justify-between mx-auto p-2; }
   nav#default-navbar .btn { @apply !shadow-none border border-gray-200; }
 
@@ -42,8 +42,8 @@
   div#sign-in-screen > .inner > .form > .title { @apply text-center; }
   div#sign-in-screen > .inner > .form > .content > input { @apply border border-gray-300 rounded-sm w-full p-4 mb-1; }
 
-  div#app-main-content { @apply ml-60 mt-12 px-3; }
-  div#app-main-content.sidebar-only-nav { @apply ml-28; }
+  div#app-main-content { @apply ml-64 mt-12 px-3; }
+  div#app-main-content.sidebar-only-nav { @apply ml-32; }
 
   /* #default-navbar-mobile a { @apply block py-2 px-3 md:p-0 dark:text-white; } */
 

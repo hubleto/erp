@@ -18,7 +18,7 @@ class Dictionary extends \ADIOS\Core\Controller
 
     $dict = (array) json_decode(file_get_contents($dictFile), true);
 
-    if (is_array($this->app->params['addNew'])) {
+    if (is_array($this->app->params['addNew']) && $language != 'en') {
       $context = $this->app->params['addNew']['context'] ?? '';
       $orig = $this->app->params['addNew']['orig'] ?? '';
 

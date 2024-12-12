@@ -353,5 +353,8 @@
     },
     "mod.core.settings.loader": {
         "Settings": "Ustawienia"
+    },
+    "input": {
+        "Upload file": ""
     }
 }

@@ -30,9 +30,6 @@ module.exports = (env, arg) => {
     resolve: {
       modules: [ path.resolve(__dirname, './node_modules') ],
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.css'],
-      alias: {
-        adios: path.resolve(__dirname, './lib/vendor/wai-blue/adios/src/Components'),
-      },
     }
   }
 };

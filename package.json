@@ -26,7 +26,7 @@
     "@types/react": "^18.2.32",
     "@types/react-dom": "^18.2.14",
     "@uiw/react-color-compact": "^2.3.0",
-    "adios": "file:./vendor/wai-blue/adios/src/Components",
+    "adios": "file:./lib/vendor/wai-blue/adios/src/Components",
     "axios": "^1.7.3",
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^10.0",

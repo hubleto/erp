@@ -30,7 +30,7 @@ class Document extends \CeremonyCrmApp\Core\Model
       ],
       "file" => [
         "title" => "File",
-        "type" => "image",
+        "type" => "file",
         "required" => true,
       ],
     ]));

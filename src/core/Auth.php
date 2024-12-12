@@ -25,7 +25,7 @@ class Auth extends \ADIOS\Auth\Providers\DefaultProvider {
       $this->app->router->redirectTo('');
     }
 
-    if (strlen($this->user['language']) != 2) $this->user['language'] = 'en';
+    if ($this->user && strlen($this->user['language']) != 2) $this->user['language'] = 'en';
   }
 
 }

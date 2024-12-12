@@ -92,7 +92,7 @@
   .adios.component.input .inner .inline-editing-buttons.always-visible { @apply !visible; }
   .adios.component.input .inner .btn { @apply shadow-none }
   .adios.component.input .inner:hover .inline-editing-buttons { @apply !visible }
-  .adios.component.input.editing .inner .btn { @apply block }
+  /* .adios.component.input.editing .inner .btn { @apply block } */
 
   .adios.component.input .input-after { @apply flex-1 ml-2; }
   .adios.component.input .input-unit { @apply text-sm flex-1 ml-2; }

@@ -172,7 +172,7 @@
         "Bank name": "Názov banky",
         "Account number": "Číslo účtu",
         "Account IBAN": "IBAN",
-        "SWIFT": "SIFT",
+        "SWIFT": "SWIFT",
         "Numbering pattern": "Vzorec pre číslovanie"
     },
     "mod.core.customers.models.company": {

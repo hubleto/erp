@@ -10,7 +10,7 @@ class Dictionary extends \ADIOS\Core\Controller
   public function renderJson(): array
   {
     $language = $this->app->params['language'];
-    $dictFile = __DIR__ . '/../Lang/' . $language . '.json';
+    $dictFile = __DIR__ . '/../../lang/' . $language . '.json';
 
     if ($language == 'en') return [];
     if (!in_array($language, array_keys(\CeremonyCrmMod\Core\Settings\Models\User::ENUM_LANGUAGES))) return [];

@@ -1,0 +1,371 @@
+{
+    "app": {
+        "Add": "Dodać",
+        "Save": "Ratować",
+        "Copy": "Kopia",
+        "Delete": "Usuwać",
+        "Confirm delete": "Potwierdź usunięcie",
+        "Edit": "Redagować",
+        "Adding record": "Dodaj rekord",
+        "Editing record": "Edytuj rekord",
+        "You are about to delete the record. Press OK to confirm.": "Zamierzasz usunąć rekord. Potwierdź naciskając przycisk OK.",
+        "Yes, delete": "Tak, usuń",
+        "No, do not delete": "Nie, zamknij okno",
+        "Choose image": "Wybierz obraz",
+        "Start typing to search...": "Aby wyszukać, zacznij pisać...",
+        "Documents": "Dokumenty"
+    },
+    "desktop": {
+        "Upgrade to PRO": "Przejdź do PRO",
+        "Your messages": "Twoje wiadomości",
+        "Help center": "Centrum pomocy",
+        "Browse knowledgebase": "Przeglądaj bazę wiedzy",
+        "Hot tips & tricks": "Gorące porady i wskazówki",
+        "Need more help?": "Czy potrzebujesz pomocy?",
+        "Contact us": "Skontaktuj się z nami",
+        "Manage your account": "Zarządzaj kontem",
+        "Sign out": "Wyloguj się",
+        "Search knowledgebase...": "Przeglądaj bazę wiedzy...",
+        "No hot tips for this screen": "Brak porad i wskazówek dotyczących tego ekranu"
+    },
+    "mod.core.customers.formCompany": {
+        "Basic Information": "Podstawowe informacje",
+        "Activities": "Działania",
+        "Leads": "Leads",
+        "Contact Persons": "Osoby kontaktowe",
+        "Documents": "Dokumenty",
+        "Company Information": "Informacje o firmie",
+        "Deals": "Dealys",
+        "Notes": "Notatki",
+        "Add contact": "Dodaj kontakt",
+        "Last name": "Nazwisko",
+        "First name": "Imię",
+        "Main Contact": "Główny kontakt"
+    },
+    "mod.core.customers.dashboard.home": {
+        "Welcome": "Witamy",
+        "Upgrade to PRO and get exciting rewards.": "Przejdź na wersję PRO i zdobądź wspaniałe nagrody.",
+        "You are using free version of Ceremony. Certain features are unavailable.": "Korzystasz z darmowej wersji Ceremony. Niektóre funkcje nie są dostępne.",
+        "Upgrade to PRO": "Przejdź do PRO"
+    },
+    "mod.core.settings.models.user": {
+        "First name": "Imię",
+        "Middle name": "Drugie imię",
+        "Last name": "Nazwisko",
+        "Email": "Email",
+        "Language": "Język",
+        "Active profile": "Aktywny profil",
+        "Login": "Login",
+        "Password": "Hasło",
+        "Active": "Konto jest aktywne",
+        "Time of last login": "Godzina ostatniego logowania",
+        "Last login IP": "Adres IP ostatniego logowania",
+        "Time of last access": "Ostatni czas dostępu",
+        "Last access IP": "Adres IP ostatniego dostępu"
+    },
+    "mod.core.settings.models.country": {
+        "Country Name": "Państwo",
+        "Code": "Kod"
+    },
+    "mod.core.settings.models.profile": {
+        "Company": "Firma"
+    },
+    "mod.core.settings.models.activityType": {
+        "Type Name": "Typ",
+        "Color": "Kolor",
+        "Shown in Calendar": "Zobacz w kalendarzu",
+        "Icon": "Ikona"
+    },
+    "mod.core.settings.models.currency": {
+        "Currency Name": "Waluta",
+        "Currency Code": "Kod"
+    },
+    "mod.core.settings.models.leadStatus": {
+        "Name": "Nazwa",
+        "Order": "Zamówienie",
+        "Color": "Kolor"
+    },
+    "mod.core.settings.models.pipeline": {
+        "Name": "Nazwa",
+        "Description": "Opis"
+    },
+    "mod.core.settings.models.pipelineStep": {
+        "Name": "Nazwa",
+        "Order": "Zamówienie",
+        "Company": "Kolor"
+    },
+    "mod.core.settings.models.dealStatus": {
+        "Name": "Nazwa",
+        "Order": "Zamówienie",
+        "Color": "Kolor"
+    },
+    "mod.core.settings.models.tag": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
+    },
+    "mod.core.billing.loader": {
+        "Billing": "Rozliczenia",
+        "Billing Accounts": "Konta do fakturowania"
+    },
+    "mod.core.calendar.loader": {
+        "Calendar": "Kalendarz"
+    },
+    "mod.core.customers.loader": {
+        "Customers": "Klienci",
+        "Companies": "Firmy",
+        "Contact Persons": "Osoby kontaktowe"
+    },
+    "mod.core.dashboard.loader": {
+        "Home": "Wstęp"
+    },
+    "mod.core.documents.loader": {
+        "Documents": "Dokumenty"
+    },
+    "mod.core.extensions.loader": {
+        "Extensions": "Rozszerzenia"
+    },
+    "mod.core.invoices.loader": {
+        "Invoices": "Faktury"
+    },
+    "mod.core.services.loader": {
+        "Services": "Usługi"
+    },
+    "mod.core.settings.models.setting": {
+        "Key": "Parametr",
+        "Value": "Wartość",
+        "Only for user": "Tylko dla użytkownika"
+    },
+    "mod.core.invoices.models.invoice": {
+        "Profile": "Profil",
+        "Issued by": "Wystawiał",
+        "Customer": "Klient",
+        "Number": "Numer",
+        "TIP: Number is auto-generated based on the pattern configured in the profile.": "TIP: Numer generowany jest automatycznie według wzoru w profilu.",
+        "Variable symbol": "Zmienny symbol",
+        "Constant symbol": "Stały symbol",
+        "Specific symbol": "Specyficzny symbol",
+        "Issued": "Narażona",
+        "Delivered": "Dostawne",
+        "Due": "Dojrzałość",
+        "Payment": "Zwrot kosztów",
+        "Notes": "Notatki"
+    },
+    "mod.core.invoices.models.invoiceItem": {
+        "Invoice": "Faktura",
+        "Item": "Przedmiot",
+        "Unit price": "Cena jednostkowa",
+        "Amount": "Ilość"
+    },
+    "mod.core.settings.models.invoiceProfile": {
+        "Name": "Nazwa",
+        "Phone": "Telefon",
+        "E-mail": "Email",
+        "WWW": "WWW",
+        "Company ID": "Numer identyfikacyjny",
+        "Tax ID": "CYNA",
+        "VAT ID": "NUMER VAT",
+        "Street, line 1": "Ulica, rząd nr. 1",
+        "Street, line 2": "Ulica, rząd nr. 2",
+        "ZIP": "Kod pocztowy",
+        "City": "Miasto",
+        "Country": "Państwo",
+        "Bank name": "Názwa banku",
+        "Account number": "Numer konta",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SWIFT",
+        "Numbering pattern": "Wzór na numerację"
+    },
+    "mod.core.customers.models.company": {
+        "Add Company": "Dodaj firmę",
+        "Name": "Nazwa",
+        "Street Line 1": "Ulica, rząd nr. 1",
+        "Street Line 2": "Ulica, rząd nr. 2",
+        "Region": "Region",
+        "City": "Miasto",
+        "Country": "Państwo",
+        "Postal Code": "Kod pocztowy",
+        "VAT ID": "NUMER VAT",
+        "Company ID": "Numer identyfikacyjny",
+        "Tax ID": "CYNA",
+        "Notes": "Notatki",
+        "Date Created": "Utworzono dnia",
+        "Active": "Aktywny",
+        "Assigned User": "Właściciel",
+        "Companies": "Firmy"
+    },
+    "mod.core.customers.models.person": {
+        "First name": "Imie",
+        "Last name": "Nazwisko",
+        "Company": "Firma",
+        "Main Contact": "Główny kontakt",
+        "Notes": "Notatki",
+        "Active": "Aktywny",
+        "Date Created": "Utworzono dnia",
+        "Contact Persons": "Osoby kontaktowe",
+        "Add Contact Person": "Dodaj osobę kontaktową",
+        "Emails": "Emaile",
+        "Phone Numbers": "Numery telefonów"
+    },
+    "mod.core.customers.models.contact": {
+        "Person": "Osoba",
+        "Contact Category": "Kategoria",
+        "Type": "Typ",
+        "Email": "Email",
+        "Phone Number": "Telefon",
+        "Other": "Inny",
+        "Value": "Wartość"
+    },
+    "table": {
+        "Delete": "Usuwać",
+        "Aby wyszukać, zacznij pisać...": ""
+    },
+    "mod.core.settings.models.userRole": {
+        "Role": "Rola",
+        "Grant all permissions": "Przyznaj wszystkie uprawnienia"
+    },
+    "mod.core.settings.models.rolePermission": {
+        "Permission": "Pozwolenie",
+        "Role": "Rola"
+    },
+    "mod.core.settings.models.permission": {
+        "Permission": "Pozwolenie"
+    },
+    "mod.core.settings.models.contactType": {
+        "Name": "Nazwa",
+        "Contact Types": "Rodzaje kontaktów"
+    },
+    "form": {
+        "Record": "Rekord",
+        "New record": "Nowy rekord"
+    },
+    "mod.core.support.loader": {
+        "Support": "Wsparcie"
+    },
+    "mod.sales.core.loader": {
+        "Sales": "Sprzedaż",
+        "Pipeline": "Pipeline"
+    },
+    "mod.core.settings.controllers.contactTypes": {
+        "Settings": "Ustawienia",
+        "Contact Types": "Rodzaje kontaktów"
+    },
+    "mod.core.customers.controllers.companies": {
+        "Customers": "Klienci",
+        "Companies": "Firmy"
+    },
+    "mod.core.calendar.controllers.calendar": {
+        "Calendar": "Kalendarz"
+    },
+    "mod.core.billing.controllers.billingAccounts": {
+        "Customers": "Klienci",
+        "Billing Accounts": "Konta do fakturowania"
+    },
+    "mod.core.services.controllers.services": {
+        "Services": "Usługi"
+    },
+    "mod.sales.deals.loades": {
+        "Deals": "Deals",
+        "Deals Archive": "Archiwum dealów"
+    },
+    "mod.sales.leads.loaders": {
+        "Leads": "Leads",
+        "Leads Archive": "Archiwum leadów"
+    },
+    "mod.sales.core.controllers.home": {
+        "Sales": "Sprzedaż"
+    },
+    "mod.core.invoices.controllers.invoices": {
+        "Invoices": "Faktury"
+    },
+    "mod.core.extensions.controllers.dashboard": {
+        "Extensions": "Rozszerzenia",
+        "You are using free version of Ceremony.": "Korzystasz z darmowej wersji Ceremony.",
+        "If you want to install extensions, you must upgrade to PRO.": "Aby zainstalować rozszerzenia, musisz dokonać aktualizacji do wersji PRO.",
+        "Upgrade to PRO": "Przejdź do PRO"
+    },
+    "mod.core.customers.controllers.persons": {
+        "Customers": "Klienci",
+        "Contact Persons": "Osoby kontaktowe"
+    },
+    "mod.sales.leads.controllers.leads": {
+        "Sales": "Sprzedaż",
+        "Leads": "Leads"
+    },
+    "mod.core.settings.models.label": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
+    },
+    "mod.sales.deals.controllers.deals": {
+        "Sales": "Sprzedaż",
+        "Deals": "Deals"
+    },
+    "mod.sales.leads.controllers.leadsArchive": {
+        "Sales": "Sprzedaż",
+        "Leads": "Leads",
+        "Archive": "Archiwum"
+    },
+    "mod.sales.deals.controllers.dealsArchive": {
+        "Sales": "Sprzedaż",
+        "Deals": "Deals",
+        "Archive": "Archiwum"
+    },
+    "mod.core.customers.tableCompanies": {
+        "Start typing to search...": "Aby wyszukać, zacznij pisać...",
+        "Delete": "Usuwać"
+    },
+    "mod.core.sales.tableDeals": {
+        "Delete": "Usuwać",
+        "Start typing to search...": "Aby wyszukać, zacznij pisać..."
+    },
+    "mod.core.sales.tableLeads": {
+        "Start typing to search...": "Aby wyszukać, zacznij pisać..."
+    },
+    "mod.core.invoices.tableInvoices": {
+        "Total excl. VAT": "Razem bez VAT",
+        "Total incl. VAT": "Razem z VAT",
+        "VAT": "VAT",
+        "Customer": "Klient",
+        "Variable symbol": "Zmienny symbol",
+        "Number": "Numer",
+        "Issue": "Wydany",
+        "Due": "Termin",
+        "Delivery": "Data dostawy",
+        "Payment": "Zapłata",
+        "Total VAT": "Całkowity podatek VAT",
+        "Start typing to search...": "Aby wyszukać, zacznij pisać..."
+    },
+    "mod.core.invoices.formInvoice": {
+        "Invoice": "Faktura"
+    },
+    "mod.core.upgrade.loader": {
+        "Upgrade": "PRO"
+    },
+    "mod.core.settings.controllers.dashboard": {
+        "Settings": "Ustawienia",
+        "Users": "Użytkownicy",
+        "User Roles": "Role użytkowników",
+        "Profiles": "Profile",
+        "Permissions": "Uprawnienia",
+        "Tags": "Tags",
+        "Activity Types": "Rodzaje działalności",
+        "Contact Types": "Rodzaje działalności",
+        "Countries": "Państwa",
+        "Currencies": "Waluty",
+        "Labels": "Marki",
+        "Lead Statuses": "Statusy leadów",
+        "Deal Statuses": "Statusy dealów",
+        "Pipelines": "Pipelines",
+        "Invoice profiles": "Profile rozliczeniowe"
+    },
+    "mod.core.settings.controllers.userRoles": {
+        "Settings": "Ustawienia",
+        "User Roles": "Role użytkowników"
+    },
+    "mod.core.settings.controllers.countries": {
+        "Settings": "Ustawienia",
+        "Countries": "Państwa"
+    },
+    "mod.core.settings.loader": {
+        "Settings": "Ustawienia"
+    }
+}

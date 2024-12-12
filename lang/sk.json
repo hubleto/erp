@@ -1,18 +1,5 @@
 {
     "app": {
-        "Add": "Pridať",
-        "Save": "Uložiť",
-        "Copy": "Kopírovať",
-        "Delete": "Zmazať",
-        "Confirm delete": "Potvrďte zmazanie",
-        "Edit": "Upraviť",
-        "Adding record": "Pridať záznam",
-        "Editing record": "Úprava záznamu",
-        "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
-        "Yes, delete": "Áno, zmazať",
-        "No, do not delete": "Nie, zavrieť okno",
-        "Choose image": "Vybrať obrázok",
-        "Start typing to search...": "Začnite vyhľadávať...",
         "Documents": ""
     },
     "desktop": {
@@ -216,8 +203,11 @@
         "Value": "Hodnota"
     },
     "table": {
+        "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
+        "Yes, delete": "Áno, zmazať",
+        "No, do not delete": "Nie, zavrieť okno",
         "Delete": "Zmazať",
-        "Start typing to search...": ""
+        "Start typing to search...": "Začnite vyhľadávať..."
     },
     "mod.core.settings.models.userRole": {
         "Role": "Rola",
@@ -235,6 +225,14 @@
         "Contact Types": "Typy kontaktov"
     },
     "form": {
+        "Add": "Pridať",
+        "Save": "Uložiť",
+        "Copy": "Kopírovať",
+        "Delete": "Zmazať",
+        "Confirm delete": "Potvrďte zmazanie",
+        "Edit": "Upraviť",
+        "Adding record": "Pridať záznam",
+        "Editing record": "Úprava záznamu",
         "Record": "Záznam",
         "New record": "Nový záznam"
     },
@@ -309,17 +307,6 @@
         "Deals": "Dealy",
         "Archive": "Archív"
     },
-    "mod.core.customers.tableCompanies": {
-        "Start typing to search...": "",
-        "Delete": ""
-    },
-    "mod.core.sales.tableDeals": {
-        "Delete": "Zmazať",
-        "Start typing to search...": "Začnite vyhľadávať..."
-    },
-    "mod.core.sales.tableLeads": {
-        "Start typing to search...": "Začnite vyhľadávať..."
-    },
     "mod.core.invoices.tableInvoices": {
         "Total excl. VAT": "",
         "Total incl. VAT": "",
@@ -331,8 +318,7 @@
         "Due": "",
         "Delivery": "",
         "Payment": "",
-        "Total VAT": "",
-        "Start typing to search...": ""
+        "Total VAT": ""
     },
     "mod.core.invoices.formInvoice": {
         "Invoice": "Faktúra"

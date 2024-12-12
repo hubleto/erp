@@ -1,18 +1,5 @@
 {
     "app": {
-        "Add": "Hinzufügen",
-        "Save": "Speichern",
-        "Copy": "Kopieren",
-        "Delete": "Löschen",
-        "Confirm delete": "Löschen bestätigen",
-        "Edit": "Bearbeiten",
-        "Adding record": "Eintrag hinzufügen",
-        "Editing record": "Eintrag bearbeiten",
-        "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, einen Eintrag zu löschen. Drücken Sie OK um dies zu bestätigen.",
-        "Yes, delete": "Ja, löschen",
-        "No, do not delete": "Nein, Fenster schließen",
-        "Choose image": "Bild auswählen",
-        "Start typing to search...": "Suche mit Tippen beginnen...",
         "Documents": "Dokumente"
     },
     "desktop": {
@@ -216,8 +203,11 @@
         "Value": "Wert"
     },
     "table": {
+        "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, einen Eintrag zu löschen. Drücken Sie OK um dies zu bestätigen.",
+        "Yes, delete": "Ja, löschen",
+        "No, do not delete": "Nein, Fenster schließen",
         "Delete": "Löschen",
-        "Start typing to search...": ""
+        "Start typing to search...": "Suchen..."
     },
     "mod.core.settings.models.userRole": {
         "Role": "Rolle",
@@ -235,6 +225,14 @@
         "Contact Types": "Kontakttyp"
     },
     "form": {
+        "Add": "Hinzufügen",
+        "Save": "Speichern",
+        "Copy": "Kopieren",
+        "Delete": "Löschen",
+        "Confirm delete": "Löschen bestätigen",
+        "Edit": "Bearbeiten",
+        "Adding record": "Eintrag hinzufügen",
+        "Editing record": "Eintrag bearbeiten",
         "Record": "Eintrag",
         "New record": "Neuer Eintrag"
     },
@@ -309,17 +307,6 @@
         "Deals": "Leads",
         "Archive": "Archiv"
     },
-    "mod.core.customers.tableCompanies": {
-        "Start typing to search...": "",
-        "Delete": ""
-    },
-    "mod.core.sales.tableDeals": {
-        "Delete": "Löschen",
-        "Start typing to search...": "Suchen..."
-    },
-    "mod.core.sales.tableLeads": {
-        "Start typing to search...": "Suchen..."
-    },
     "mod.core.invoices.tableInvoices": {
         "Total excl. VAT": "",
         "Total incl. VAT": "",
@@ -331,8 +318,7 @@
         "Due": "",
         "Delivery": "",
         "Payment": "",
-        "Total VAT": "",
-        "Start typing to search...": ""
+        "Total VAT": ""
     },
     "mod.core.invoices.formInvoice": {
         "Invoice": "Rechnung"

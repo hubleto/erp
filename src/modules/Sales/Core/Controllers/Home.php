@@ -2,6 +2,7 @@
 
 namespace CeremonyCrmMod\Sales\Core\Controllers;
 
+use CeremonyCrmMod\Core\Settings\Models\Label;
 use CeremonyCrmMod\Core\Settings\Models\Pipeline;
 use CeremonyCrmMod\Core\Settings\Models\Setting;
 use CeremonyCrmMod\Sales\Deals\Models\Deal;
@@ -24,6 +25,8 @@ class Home extends \CeremonyCrmApp\Core\Controller {
     $mSetting = new Setting($this->app);
     $mPipeline = new Pipeline($this->app);
     $mDeal = new Deal($this->app);
+    $mLabel = new Label($this->app);
+    $sumPipelinePrice = 0;
 
     $pipelines = $mPipeline->eloquent->get();
 
@@ -53,14 +56,36 @@ class Home extends \CeremonyCrmApp\Core\Controller {
       ;
     }
 
+    foreach ($searchPipeline["PIPELINE_STEPS"] as $key => $step) {
+      $sumPrice = $mDeal->eloquent
+        ->selectRaw("SUM(price) as price")
+        ->where("id_pipeline", $searchPipeline["id"])
+        ->where("id_pipeline_step", $step["id"])
+        ->first()
+        ->price
+      ;
+      $searchPipeline["PIPELINE_STEPS"][$key]["sum_price"] = $sumPrice;
+      $sumPipelinePrice += $sumPrice;
+    }
+
+    $searchPipeline["price"] = $sumPipelinePrice;
+
     $deals = $mDeal->eloquent
       ->where("id_pipeline", (int) $searchPipeline["id"])
       ->with("CURRENCY")
       ->with("COMPANY")
+      ->with("LABELS")
       ->get()
       ->toArray()
     ;
 
+    foreach ($deals as $key => $deal) {
+      $label = $mLabel->eloquent->find($deal["LABELS"][0]["id_label"])->toArray();
+      $deals[$key]["LABEL"] = $label;
+      unset($deals[$key]["LABELS"]);
+    }
+
+    //var_dump($deals); exit;
     $this->viewParams["pipelines"] = $pipelines;
     $this->viewParams["pipeline"] = $searchPipeline;
     $this->viewParams["deals"] = $deals;

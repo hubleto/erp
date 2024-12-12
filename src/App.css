@@ -60,7 +60,7 @@
   .adios.component.table .table-body thead th td { @apply p-0.5 text-sm; margin: 1px; }
   .adios.component.table .table-body tbody tr td { @apply p-0.5 text-sm; margin: 1px; }
   .adios.component.table .table-body tbody tr td > div { @apply text-sm; }
-  .adios.component.table .table-body tbody tr td > div > .lookup { @apply min-w-44; }
+  /* .adios.component.table .table-body tbody tr td > div > .lookup { @apply min-w-44; } */
   .adios.component.table .table-body tbody tr td .inline-edit-icon { @apply invisible cursor-pointer; }
   .adios.component.table .table-body tbody tr td:hover .inline-edit-icon { @apply visible; }
   .adios.component.table .table-body tr.highlighted { @apply divide-none text-primary; }

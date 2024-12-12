@@ -93,4 +93,26 @@ class Document extends \CeremonyCrmApp\Core\Model
     }
     return $record;
   }
+
+  public function onBeforeUpdate(array $record): array
+  {
+    $document = $this->eloquent->find($record["id"])->toArray();
+    $prevFilename = ltrim($document["file"],"./");
+    if (file_exists($this->app->config['uploadDir']."/".$prevFilename)) {
+      unlink($this->app->config['uploadDir']."/".$prevFilename);
+    }
+
+    return $record;
+  }
+
+  public function onBeforeDelete(int $id): int
+  {
+    $document = $this->eloquent->find($id)->toArray();
+    $prevFilename = ltrim($document["file"],"./");
+    if (file_exists($this->app->config['uploadDir']."/".$prevFilename)) {
+      unlink($this->app->config['uploadDir']."/".$prevFilename);
+    }
+
+    return $id;
+  }
 }

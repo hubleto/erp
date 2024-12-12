@@ -160,7 +160,7 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
               onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
                 if (saveResponse.status == "success") {
                   this.setState({ newDate: "", newTime: "" });
-                  this.props.onCreateCallback();
+                  if (this.props.onCreateCallback) this.props.onCreateCallback();
                 }
               }}
             ></FormActivity>

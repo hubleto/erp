@@ -109,42 +109,47 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
 
     return (
       <>
-        <div className='grid grid-cols-2 gap-1' style=
+        <div className='grid grid-cols-1 gap-1' style=
           {{gridTemplateAreas:`
-            'person contacts'
-            'addresses addresses'
+            'person'
+            'contacts'
           `}}>
             <div className='card mt-4' style={{gridArea: 'person'}}>
               <div className='card-header'>Personal Information</div>
-              <div className='card-body'>
-                {this.inputWrapper('first_name')}
-                {this.inputWrapper('last_name')}
-                <FormInput title={"Company"}>
-                  <Lookup {...this.getDefaultInputProps()}
-                    model='CeremonyCrmMod/Core/Customers/Models/Company'
-                    endpoint={`customers/get-company`}
-                    value={R.id_company}
-                    readonly={this.props.creatingNew}
-                    onChange={(value: any) => {
-                      this.updateRecord({ id_company: value});
-                    }}
-                  ></Lookup>
-                </FormInput>
-                {this.inputWrapper('is_main')}
-                {showAdditional ? this.inputWrapper('is_active') : null}
-                <FormInput title='Tags'>
-                  <InputTags2 {...this.getDefaultInputProps()}
-                    value={this.state.record.TAGS}
-                    model='CeremonyCrmMod/Core/Settings/Models/Tag'
-                    targetColumn='id_person'
-                    sourceColumn='id_tag'
-                    colorColumn='color'
-                    onChange={(value: any) => {
-                      this.updateRecord({TAGS: value});
-                    }}
-                  ></InputTags2>
-                </FormInput>
-                {showAdditional ? this.inputWrapper('date_created') : null}
+              <div className='card-body flex flex-row gap-2'>
+                <div className="w-1/2">
+                  {this.inputWrapper('first_name')}
+                  {this.inputWrapper('last_name')}
+                  <FormInput title={"Company"}>
+                    <Lookup {...this.getDefaultInputProps()}
+                      model='CeremonyCrmMod/Core/Customers/Models/Company'
+                      endpoint={`customers/get-company`}
+                      value={R.id_company}
+                      readonly={this.props.creatingNew}
+                      onChange={(value: any) => {
+                        this.updateRecord({ id_company: value});
+                      }}
+                    ></Lookup>
+                  </FormInput>
+                  <FormInput title='Tags'>
+                    <InputTags2 {...this.getDefaultInputProps()}
+                      value={this.state.record.TAGS}
+                      model='CeremonyCrmMod/Core/Settings/Models/Tag'
+                      targetColumn='id_person'
+                      sourceColumn='id_tag'
+                      colorColumn='color'
+                      onChange={(value: any) => {
+                        this.updateRecord({TAGS: value});
+                      }}
+                    ></InputTags2>
+                  </FormInput>
+                </div>
+                <div className='border-l border-gray-200'></div>
+                <div className="w-1/2">
+                  {this.inputWrapper('is_main')}
+                  {showAdditional ? this.inputWrapper('is_active') : null}
+                  {showAdditional ? this.inputWrapper('date_created') : null}
+                </div>
               </div>
             </div>
 
@@ -177,8 +182,8 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                           enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
                           //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
                         },
-                        value: { type: 'varchar', title: 'Value' },
-                        id_contact_type: { type: 'lookup', title: 'Contact Category', model: 'CeremonyCrmMod/Core/Settings/Models/ContactType'},
+                        value: { type: 'varchar', title: 'Value'},
+                        id_contact_type: { type: 'lookup', title: 'Contact Category', model: 'CeremonyCrmMod/Core/Settings/Models/ContactType' },
                       }
                     }}
                   ></TableContacts>

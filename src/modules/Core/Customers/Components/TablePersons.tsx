@@ -31,7 +31,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     if (getUrlParam('recordId') > 0) {
       return {
         ...super.getFormModalProps(),
-        type: 'right wide'
+        type: 'right'
       }
     } else return {...super.getFormModalProps()}
   }

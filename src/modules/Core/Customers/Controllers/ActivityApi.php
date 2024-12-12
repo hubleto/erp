@@ -15,31 +15,13 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
       ->join("activity_types", "activity_types.id", "=", "activities.id_activity_type")
       ->where("date_start", ">=", $dateStart)
       ->where("date_start", "<=", $dateEnd)
+      ->where("activities.id_user", $this->app->auth->user["id"])
     ;
 
-    if (isset($this->app->params["creatingForModel"])) {
-      if ($this->app->params["creatingForModel"] == "Company") {
-        $aktivity
-          ->join("company_activities", "company_activities.id_activity", "=", "activities.id")
-          ->where("company_activities.id_company", $this->app->params["creatingForId"])
-        ;
-      } else if ($this->app->params["creatingForModel"] == "Lead"){
-        $aktivity
-          ->join("lead_activities", "lead_activities.id_activity", "=", "activities.id")
-          ->where("lead_activities.id_lead", $this->app->params["creatingForId"])
-        ;
-      } else if ($this->app->params["creatingForModel"] == "Deal"){
-        $aktivity
-          ->join("deal_activities", "deal_activities.id_activity", "=", "activities.id")
-          ->where("deal_activities.id_deal", $this->app->params["creatingForId"])
-        ;
-      }
-    } else {
-      //ak je hlavný kalendár
+    //ak je hlavný kalendár
+    if (!isset($this->app->params["creatingForModel"])) {
       $aktivity->where("activity_types.calendar_visibility", 1);
     }
-
-    //var_dump($aktivity->toSql()); exit;
 
     $aktivity = $aktivity->get();
     $transformacia = [];

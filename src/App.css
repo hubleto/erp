@@ -209,6 +209,7 @@
   /* .input-wrapper:hover .input-label { @apply font-medium; } */
   .input-wrapper.required .input-label { @apply pl-3; }
   .input-wrapper .input-body { @apply flex items-center flex-[2]; overflow-wrap: anywhere; }
+  .input-wrapper .input-info { @apply text-xs text-gray-500 pr-1; }
   .input-wrapper .input-description { @apply text-xs text-gray-500 pr-1; }
 
   .key-value-table { @apply leading-8 divide-y text-sm border; }

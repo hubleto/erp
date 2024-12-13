@@ -5,6 +5,10 @@ namespace CeremonyCrmApp\Core;
 class Module {
   public \CeremonyCrmApp $app;
   protected array $registeredModels = [];
+
+  public string $rootFolder = '';
+
+  public string $translationRootContext = '';
   public string $translationContext = '';
 
   public static function canBeAdded(\CeremonyCrmApp $app): bool
@@ -15,10 +19,23 @@ class Module {
   public function __construct(\CeremonyCrmApp $app)
   {
     $this->app = $app;
+    $this->rootFolder = pathinfo((new \ReflectionClass($this))->getFilename(), PATHINFO_DIRNAME);
   }
 
   public function init(): void
   {
+  }
+
+  public function loadDictionary(string $language): array {
+
+    $dict = [];
+
+    if (strlen($language) == 2) {
+      $dictFilename = $this->rootFolder . '/Lang/' . $language . '.json';
+      if (is_file($dictFilename)) $dict = @json_decode(file_get_contents($dictFilename), true);
+    }
+
+    return $dict;
   }
 
   public function translate(string $string, array $vars = []): string

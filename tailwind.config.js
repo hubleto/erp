@@ -3,8 +3,8 @@ module.exports = {
   darkMode: 'selector',
   content: [
     "./src/**/*.{html,js,twig,tsx}",
-    "./lib/vendor/wai-blue/adios/**/*.{tsx,twig}",
-    "./lib/vendor/wai-blue/adios/node_modules/primereact/**/*.{js,ts,jsx,tsx}",
+    "./vendor/wai-blue/adios/**/*.{tsx,twig}",
+    "./vendor/wai-blue/adios/node_modules/primereact/**/*.{js,ts,jsx,tsx}",
   ],
   safelist: [
     'adios-lookup__indicator',

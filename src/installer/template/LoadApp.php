@@ -14,7 +14,7 @@ require_once("{{ appDir }}/ConfigApp.php");
 require_once(__DIR__ . "/ConfigAccount.php");
 
 // load autoloaders
-require("{{ appDir }}/lib/vendor/autoload.php");
+require("{{ appDir }}/vendor/autoload.php");
 require("{{ extDir }}/vendor/autoload.php");
 
 // load application class

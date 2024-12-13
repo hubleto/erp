@@ -5,6 +5,7 @@ namespace CeremonyCrmMod\Core\Customers;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
+  public string $translationRootContext = 'mod.core.customers';
   public string $translationContext = 'mod.core.customers.loader';
 
   public function __construct(\CeremonyCrmApp $app)

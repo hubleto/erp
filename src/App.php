@@ -79,12 +79,6 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
 
   }
 
-  public function getDictionaryFilename(string $language = ''): string
-  {
-    if (strlen($language) !== 2) return '';
-    else return realpath(__DIR__ . '/../lang/' . $language . '.json');
-  }
-
   public function initTwig()
   {
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
@@ -113,6 +107,11 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   public function getSidebar(): \CeremonyCrmApp\Core\Sidebar
   {
     return $this->sidebar;
+  }
+
+  public function getTranslator(): \CeremonyCrmApp\Core\Translator
+  {
+    return new \CeremonyCrmApp\Core\Translator($this);
   }
 
   public function getDesktopController(): \CeremonyCrmApp\Core\Controller

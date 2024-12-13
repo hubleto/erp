@@ -15,26 +15,6 @@
         "Search knowledgebase...": "Wissensbasis durchsuchen...",
         "No hot tips for this screen": "Keine heißen Tipps für diesen Bildschirm"
     },
-    "mod.core.customers.formCompany": {
-        "Basic Information": "Über die Firma",
-        "Activities": "Aktivitäten",
-        "Leads": "Leads",
-        "Contact Persons": "Kontaktpersonen",
-        "Documents": "Dokumente",
-        "Company Information": "Über die Firma",
-        "Deals": "Deals",
-        "Notes": "Notizen",
-        "Add contact": "Kontakt hinzufügen",
-        "Last name": "Nachname",
-        "First name": "Vorname",
-        "Main Contact": "Hauptkontakt"
-    },
-    "mod.core.customers.dashboard.home": {
-        "Welcome": "Willkommen",
-        "Upgrade to PRO and get exciting rewards.": "Upgrade auf PRO und tolle Prämien erhalten.",
-        "You are using free version of Ceremony. Certain features are unavailable.": "Sie verwenden die kostenlose Version von Ceremony. Manche Funktionen sind nicht verfügbar.",
-        "Upgrade to PRO": "Upgrade auf PRO"
-    },
     "mod.core.settings.models.user": {
         "First name": "Vorname",
         "Middle name": "Mittelname",
@@ -97,11 +77,6 @@
     "mod.core.calendar.loader": {
         "Calendar": "Kalender"
     },
-    "mod.core.customers.loader": {
-        "Customers": "Kunden",
-        "Companies": "Unternehmen",
-        "Contact Persons": "Kontaktpersonen"
-    },
     "mod.core.dashboard.loader": {
         "Home": "Startseite"
     },
@@ -162,46 +137,6 @@
         "SWIFT": "SWIFT",
         "Numbering pattern": "Nummerierungsmuster"
     },
-    "mod.core.customers.models.company": {
-        "Add Company": "Unternehmen hinzufügen",
-        "Name": "Name",
-        "Street Line 1": "Straße, erste Zeile",
-        "Street Line 2": "Straße, zweite Zeile",
-        "Region": "Region",
-        "City": "Stadt",
-        "Country": "Land",
-        "Postal Code": "PLZ",
-        "Company ID": "Firmenkennung",
-        "Tax ID": "Steuer-IdNr.",
-        "VAT ID": "USt-IdNr.",
-        "Notes": "Notizen",
-        "Date Created": "Erstellt am",
-        "Active": "Aktiv",
-        "Assigned User": "Inhaber",
-        "Companies": "Unternehmen"
-    },
-    "mod.core.customers.models.person": {
-        "First name": "Vorname",
-        "Last name": "Nachname",
-        "Company": "Firma",
-        "Main Contact": "Hauptkontakt",
-        "Notes": "Notizen",
-        "Active": "Aktiv",
-        "Date Created": "Erstellt am",
-        "Contact Persons": "Kontaktpersonen",
-        "Add Contact Person": "Kontaktperson hinzufügen",
-        "Emails": "E-Mails",
-        "Phone Numbers": "Telefonnummer"
-    },
-    "mod.core.customers.models.contact": {
-        "Person": "Person",
-        "Contact Category": "Kategorie",
-        "Type": "Typ",
-        "Email": "E-Mail",
-        "Phone Number": "Telefonnummer",
-        "Other": "Sonstiges",
-        "Value": "Wert"
-    },
     "table": {
         "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, einen Eintrag zu löschen. Drücken Sie OK um dies zu bestätigen.",
         "Yes, delete": "Ja, löschen",
@@ -247,10 +182,6 @@
         "Settings": "Einstellungen",
         "Contact Types": "Kontakttypen"
     },
-    "mod.core.customers.controllers.companies": {
-        "Customers": "Kunden",
-        "Companies": "Firmen"
-    },
     "mod.core.calendar.controllers.calendar": {
         "Calendar": "Kalender"
     },
@@ -280,10 +211,6 @@
         "You are using free version of Ceremony.": "Sie verwenden die kostenlose Version von Ceremony.",
         "If you want to install extensions, you must upgrade to PRO.": "Wenn Sie Zugriff auf die Erweiterungen haben wollen, müssen Sie auf PRO wechseln.",
         "Upgrade to PRO": "Upgrade auf PRO"
-    },
-    "mod.core.customers.controllers.persons": {
-        "Customers": "Kunden",
-        "Contact Persons": "Kontaktpersonen"
     },
     "mod.sales.leads.controllers.leads": {
         "Sales": "Geschäft",

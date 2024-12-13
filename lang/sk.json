@@ -15,26 +15,6 @@
         "Search knowledgebase...": "Prehľadávať bázu znalostí...",
         "No hot tips for this screen": "Žiadne horúce tipy pre túto obrazovku"
     },
-    "mod.core.customers.formCompany": {
-        "Basic Information": "O firme",
-        "Activities": "Aktivity",
-        "Leads": "Leady",
-        "Contact Persons": "Kontaktné osoby",
-        "Documents": "Dokumenty",
-        "Company Information": "O firme",
-        "Deals": "Dealy",
-        "Notes": "Poznámky",
-        "Add contact": "Pridať kontakt",
-        "Last name": "Priezvisko",
-        "First name": "Meno",
-        "Main Contact": "Hlavný kontakt"
-    },
-    "mod.core.customers.dashboard.home": {
-        "Welcome": "Vitaj",
-        "Upgrade to PRO and get exciting rewards.": "Prejdite na PRO a získajte skvelé odmeny.",
-        "You are using free version of Ceremony. Certain features are unavailable.": "Používate voľne dostupnú verziu Ceremony. Niektoré funkcie nie sú dostupné.",
-        "Upgrade to PRO": "Prejsť na PRO"
-    },
     "mod.core.settings.models.user": {
         "First name": "Meno",
         "Middle name": "Stredné meno",
@@ -97,11 +77,6 @@
     "mod.core.calendar.loader": {
         "Calendar": "Kalendár"
     },
-    "mod.core.customers.loader": {
-        "Customers": "Zákazníci",
-        "Companies": "Firmy",
-        "Contact Persons": "Kontaktné osoby"
-    },
     "mod.core.dashboard.loader": {
         "Home": "Úvod"
     },
@@ -162,46 +137,6 @@
         "SWIFT": "SWIFT",
         "Numbering pattern": "Vzorec pre číslovanie"
     },
-    "mod.core.customers.models.company": {
-        "Add Company": "Pridať firmu",
-        "Name": "Názov",
-        "Street Line 1": "Ulica, riadok č. 1",
-        "Street Line 2": "Ulica, riadok č. 2",
-        "Region": "Región",
-        "City": "Mesto",
-        "Country": "Štát",
-        "Postal Code": "PSČ",
-        "VAT ID": "IČ DPH",
-        "Company ID": "IČO",
-        "Tax ID": "DIČ",
-        "Notes": "Poznámky",
-        "Date Created": "Vytvorený",
-        "Active": "Aktívny",
-        "Assigned User": "Vlastník",
-        "Companies": "Firmy"
-    },
-    "mod.core.customers.models.person": {
-        "First name": "Meno",
-        "Last name": "Priezvisko",
-        "Company": "Firma",
-        "Main Contact": "Hlavný kontakt",
-        "Notes": "Poznámky",
-        "Active": "Aktívny",
-        "Date Created": "Vytvorený",
-        "Contact Persons": "Kontaktné osoby",
-        "Add Contact Person": "Pridať kontaktnú osobu",
-        "Emails": "Emaily",
-        "Phone Numbers": "Telefóny"
-    },
-    "mod.core.customers.models.contact": {
-        "Person": "Osoba",
-        "Contact Category": "Kategória",
-        "Type": "Typ",
-        "Email": "Email",
-        "Phone Number": "Telefón",
-        "Other": "Iné",
-        "Value": "Hodnota"
-    },
     "table": {
         "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
         "Yes, delete": "Áno, zmazať",
@@ -247,10 +182,6 @@
         "Settings": "Nastavenia",
         "Contact Types": "Typy kontaktov"
     },
-    "mod.core.customers.controllers.companies": {
-        "Customers": "Zákazníci",
-        "Companies": "Firmy"
-    },
     "mod.core.calendar.controllers.calendar": {
         "Calendar": "Kalendár"
     },
@@ -280,10 +211,6 @@
         "You are using free version of Ceremony.": "Používate voľne dostupnú verziu Ceremony.",
         "If you want to install extensions, you must upgrade to PRO.": "Ak chcete mať prístup k rozšíreniam, musíte prejsť na PRO.",
         "Upgrade to PRO": "Prejsť na PRO"
-    },
-    "mod.core.customers.controllers.persons": {
-        "Customers": "Zákazníci",
-        "Contact Persons": "Kontaktné osoby"
     },
     "mod.sales.leads.controllers.leads": {
         "Sales": "Obchod",

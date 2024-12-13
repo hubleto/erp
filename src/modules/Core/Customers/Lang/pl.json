@@ -1,5 +1,5 @@
 {
-    "mod.core.customers.formCompany": {
+    "formCompany": {
         "Basic Information": "Podstawowe informacje",
         "Activities": "Działania",
         "Leads": "Leads",
@@ -13,18 +13,18 @@
         "First name": "Imię",
         "Main Contact": "Główny kontakt"
     },
-    "mod.core.customers.dashboard.home": {
+    "dashboard.home": {
         "Welcome": "Witamy",
         "Upgrade to PRO and get exciting rewards.": "Przejdź na wersję PRO i zdobądź wspaniałe nagrody.",
         "You are using free version of Ceremony. Certain features are unavailable.": "Korzystasz z darmowej wersji Ceremony. Niektóre funkcje nie są dostępne.",
         "Upgrade to PRO": "Przejdź do PRO"
     },
-    "mod.core.customers.loader": {
+    "loader": {
         "Customers": "Klienci",
         "Companies": "Firmy",
         "Contact Persons": "Osoby kontaktowe"
     },
-    "mod.core.customers.models.company": {
+    "models.company": {
         "Add Company": "Dodaj firmę",
         "Name": "Nazwa",
         "Street Line 1": "Ulica, rząd nr. 1",
@@ -42,7 +42,7 @@
         "Assigned User": "Właściciel",
         "Companies": "Firmy"
     },
-    "mod.core.customers.models.person": {
+    "models.person": {
         "First name": "Imie",
         "Last name": "Nazwisko",
         "Company": "Firma",
@@ -55,7 +55,7 @@
         "Emails": "Emaile",
         "Phone Numbers": "Numery telefonów"
     },
-    "mod.core.customers.models.contact": {
+    "models.contact": {
         "Person": "Osoba",
         "Contact Category": "Kategoria",
         "Type": "Typ",
@@ -64,11 +64,11 @@
         "Other": "Inny",
         "Value": "Wartość"
     },
-    "mod.core.customers.controllers.companies": {
+    "controllers.companies": {
         "Customers": "Klienci",
         "Companies": "Firmy"
     },
-    "mod.core.customers.controllers.persons": {
+    "controllers.persons": {
         "Customers": "Klienci",
         "Contact Persons": "Osoby kontaktowe"
     }

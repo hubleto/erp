@@ -1,5 +1,5 @@
 {
-    "mod.core.customers.formCompany": {
+    "formCompany": {
         "Basic Information": "O firme",
         "Activities": "Aktivity",
         "Leads": "Leady",
@@ -13,18 +13,18 @@
         "First name": "Meno",
         "Main Contact": "Hlavný kontakt"
     },
-    "mod.core.customers.dashboard.home": {
+    "dashboard.home": {
         "Welcome": "Vitaj",
         "Upgrade to PRO and get exciting rewards.": "Prejdite na PRO a získajte skvelé odmeny.",
         "You are using free version of Ceremony. Certain features are unavailable.": "Používate voľne dostupnú verziu Ceremony. Niektoré funkcie nie sú dostupné.",
         "Upgrade to PRO": "Prejsť na PRO"
     },
-    "mod.core.customers.loader": {
+    "loader": {
         "Customers": "Zákazníci",
         "Companies": "Firmy",
         "Contact Persons": "Kontaktné osoby"
     },
-    "mod.core.customers.models.company": {
+    "models.company": {
         "Add Company": "Pridať firmu",
         "Name": "Názov",
         "Street Line 1": "Ulica, riadok č. 1",
@@ -42,7 +42,7 @@
         "Assigned User": "Vlastník",
         "Companies": "Firmy"
     },
-    "mod.core.customers.models.person": {
+    "models.person": {
         "First name": "Meno",
         "Last name": "Priezvisko",
         "Company": "Firma",
@@ -55,7 +55,7 @@
         "Emails": "Emaily",
         "Phone Numbers": "Telefóny"
     },
-    "mod.core.customers.models.contact": {
+    "models.contact": {
         "Person": "Osoba",
         "Contact Category": "Kategória",
         "Type": "Typ",
@@ -64,11 +64,11 @@
         "Other": "Iné",
         "Value": "Hodnota"
     },
-    "mod.core.customers.controllers.companies": {
+    "controllers.companies": {
         "Customers": "Zákazníci",
         "Companies": "Firmy"
     },
-    "mod.core.customers.controllers.persons": {
+    "controllers.persons": {
         "Customers": "Zákazníci",
         "Contact Persons": "Kontaktné osoby"
     }

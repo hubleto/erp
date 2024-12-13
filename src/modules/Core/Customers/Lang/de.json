@@ -1,5 +1,5 @@
 {
-    "mod.core.customers.formCompany": {
+    "formCompany": {
         "Basic Information": "Über die Firma",
         "Activities": "Aktivitäten",
         "Leads": "Leads",
@@ -13,18 +13,18 @@
         "First name": "Vorname",
         "Main Contact": "Hauptkontakt"
     },
-    "mod.core.customers.dashboard.home": {
+    "dashboard.home": {
         "Welcome": "Willkommen",
         "Upgrade to PRO and get exciting rewards.": "Upgrade auf PRO und tolle Prämien erhalten.",
         "You are using free version of Ceremony. Certain features are unavailable.": "Sie verwenden die kostenlose Version von Ceremony. Manche Funktionen sind nicht verfügbar.",
         "Upgrade to PRO": "Upgrade auf PRO"
     },
-    "mod.core.customers.loader": {
+    "loader": {
         "Customers": "Kunden",
         "Companies": "Unternehmen",
         "Contact Persons": "Kontaktpersonen"
     },
-    "mod.core.customers.models.company": {
+    "models.company": {
         "Add Company": "Unternehmen hinzufügen",
         "Name": "Name",
         "Street Line 1": "Straße, erste Zeile",
@@ -42,7 +42,7 @@
         "Assigned User": "Inhaber",
         "Companies": "Unternehmen"
     },
-    "mod.core.customers.models.person": {
+    "models.person": {
         "First name": "Vorname",
         "Last name": "Nachname",
         "Company": "Firma",
@@ -55,7 +55,7 @@
         "Emails": "E-Mails",
         "Phone Numbers": "Telefonnummer"
     },
-    "mod.core.customers.models.contact": {
+    "models.contact": {
         "Person": "Person",
         "Contact Category": "Kategorie",
         "Type": "Typ",
@@ -64,7 +64,7 @@
         "Other": "Sonstiges",
         "Value": "Wert"
     },
-    "mod.core.customers.controllers.companies": {
+    "controllers.companies": {
         "Customers": "Kunden",
         "Companies": "Firmen"
     },
@@ -72,7 +72,7 @@
         "Customers": "Kunden",
         "Billing Accounts": "Abrechnungskontos"
     },
-    "mod.core.customers.controllers.persons": {
+    "controllers.persons": {
         "Customers": "Kunden",
         "Contact Persons": "Kontaktpersonen"
     }

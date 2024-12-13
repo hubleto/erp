@@ -1,0 +1,15 @@
+{
+    "ceremonycrmmod.sales.leads.loaders": {
+        "Leads": "Leads",
+        "Leads Archive": "Leadsarchiv"
+    },
+    "ceremonycrmmod.sales.leads.controllers.leads": {
+        "Sales": "Geschäft",
+        "Leads": "Leads"
+    },
+    "ceremonycrmmod.sales.leads.controllers.leadsArchive": {
+        "Sales": "Geschäft",
+        "Leads": "Leads",
+        "Archive": "Archiv"
+    }
+}

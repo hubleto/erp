@@ -1,7 +1,4 @@
 {
-    "app": {
-        "Documents": "Dokumente"
-    },
     "desktop": {
         "Upgrade to PRO": "Upgrade auf PRO",
         "Your messages": "Ihre Nachrichten",
@@ -15,57 +12,6 @@
         "Search knowledgebase...": "Wissensbasis durchsuchen...",
         "No hot tips for this screen": "Keine heißen Tipps für diesen Bildschirm"
     },
-    "ceremonycrmmod.core.billing.loader": {
-        "Billing": "Abrechnung",
-        "Billing Accounts": "Abrechnungskontos"
-    },
-    "ceremonycrmmod.core.calendar.loader": {
-        "Calendar": "Kalender"
-    },
-    "ceremonycrmmod.core.dashboard.loader": {
-        "Home": "Startseite"
-    },
-    "ceremonycrmmod.core.documents.loader": {
-        "Documents": "Dokumente"
-    },
-    "ceremonycrmmod.core.extensions.loader": {
-        "Extensions": "Erweiterungen"
-    },
-    "ceremonycrmmod.core.invoices.loader": {
-        "Invoices": "Rechnungen"
-    },
-    "ceremonycrmmod.core.services.loader": {
-        "Services": "Dienste"
-    },
-    "ceremonycrmmod.core.invoices.models.invoice": {
-        "Profile": "Profil",
-        "Issued by": "Ausgestellt von",
-        "Customer": "Kunde",
-        "Number": "Nummer",
-        "TIP: Number is auto-generated based on the pattern configured in the profile.": "Hinweis: Die Nummer wird automatisch basierend auf dem im Profil konfigurierten Muster generiert.",
-        "Variable symbol": "Variabler Symbol",
-        "Constant symbol": "Konstanter Symbol",
-        "Specific symbol": "Spezifischer Symbol",
-        "Issued": "Ausgestellt",
-        "Delivered": "Dodanie služby",
-        "Due": "Fällig",
-        "Payment": "Zahlung",
-        "Notes": "Notizen"
-    },
-    "ceremonycrmmod.core.invoices.models.invoiceItem": {
-        "Invoice": "Rechnung",
-        "Item": "Artikel",
-        "Unit price": "Einheitspreis",
-        "Amount": "Menge"
-    },
-    "table": {
-        "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, einen Eintrag zu löschen. Drücken Sie OK um dies zu bestätigen.",
-        "Yes, delete": "Ja, löschen",
-        "No, do not delete": "Nein, Fenster schließen",
-        "Delete": "Löschen",
-        "Start typing to search...": "Suchen...",
-        "No data.": "Keine Daten"
-    },
     "form": {
         "Add": "Hinzufügen",
         "Save": "Speichern",
@@ -78,78 +24,15 @@
         "Record": "Eintrag",
         "New record": "Neuer Eintrag"
     },
-    "ceremonycrmmod.core.support.loader": {
-        "Support": "Unterstützung"
+    "input": {
+        "Upload file": ""
     },
-    "ceremonycrmmod.sales.core.loader": {
-        "Sales": "Geschäft",
-        "Pipeline": "Pipeline"
-    },
-    "ceremonycrmmod.core.calendar.controllers.calendar": {
-        "Calendar": "Kalender"
-    },
-    "ceremonycrmmod.core.billing.controllers.billingAccounts": {
-        "Customers": "Kunden",
-        "Billing Accounts": "Abrechnungskontos"
-    },
-    "ceremonycrmmod.core.services.controllers.services": {
-        "Services": "Služby"
-    },
-    "ceremonycrmmod.sales.deals.loades": {
-        "Deals": "Dealy",
-        "Deals Archive": "Archív dealov"
-    },
-    "ceremonycrmmod.sales.leads.loaders": {
-        "Leads": "Leads",
-        "Leads Archive": "Leadsarchiv"
-    },
-    "ceremonycrmmod.sales.core.controllers.home": {
-        "Sales": "Geschäft"
-    },
-    "ceremonycrmmod.core.invoices.controllers.invoices": {
-        "Invoices": "Rechnungen"
-    },
-    "ceremonycrmmod.core.extensions.controllers.dashboard": {
-        "Extensions": "Erweiterungen",
-        "You are using free version of Ceremony.": "Sie verwenden die kostenlose Version von Ceremony.",
-        "If you want to install extensions, you must upgrade to PRO.": "Wenn Sie Zugriff auf die Erweiterungen haben wollen, müssen Sie auf PRO wechseln.",
-        "Upgrade to PRO": "Upgrade auf PRO"
-    },
-    "ceremonycrmmod.sales.leads.controllers.leads": {
-        "Sales": "Geschäft",
-        "Leads": "Leads"
-    },
-    "ceremonycrmmod.sales.deals.controllers.deals": {
-        "Sales": "Geschäft",
-        "Deals": "Deals"
-    },
-    "ceremonycrmmod.sales.leads.controllers.leadsArchive": {
-        "Sales": "Geschäft",
-        "Leads": "Leads",
-        "Archive": "Archiv"
-    },
-    "ceremonycrmmod.sales.deals.controllers.dealsArchive": {
-        "Sales": "Geschäft",
-        "Deals": "Leads",
-        "Archive": "Archiv"
-    },
-    "ceremonycrmmod.core.invoices.tableInvoices": {
-        "Total excl. VAT": "",
-        "Total incl. VAT": "",
-        "VAT": "",
-        "Customer": "",
-        "Variable symbol": "",
-        "Number": "",
-        "Issue": "",
-        "Due": "",
-        "Delivery": "",
-        "Payment": "",
-        "Total VAT": ""
-    },
-    "ceremonycrmmod.core.invoices.formInvoice": {
-        "Invoice": "Rechnung"
-    },
-    "ceremonycrmmod.core.upgrade.loader": {
-        "Upgrade": "PRO"
+    "table": {
+        "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, einen Eintrag zu löschen. Drücken Sie OK um dies zu bestätigen.",
+        "Yes, delete": "Ja, löschen",
+        "No, do not delete": "Nein, Fenster schließen",
+        "Delete": "Löschen",
+        "Start typing to search...": "Suchen...",
+        "No data.": "Keine Daten"
     }
 }

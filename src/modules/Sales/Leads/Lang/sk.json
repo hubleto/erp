@@ -1,0 +1,15 @@
+{
+    "ceremonycrmmod.sales.leads.loaders": {
+        "Leads": "Leady",
+        "Leads Archive": "Archív leadov"
+    },
+    "ceremonycrmmod.sales.leads.controllers.leads": {
+        "Sales": "Obchod",
+        "Leads": "Leady"
+    },
+    "ceremonycrmmod.sales.leads.controllers.leadsArchive": {
+        "Sales": "Obchod",
+        "Leads": "Leady",
+        "Archive": "Archív"
+    }
+}

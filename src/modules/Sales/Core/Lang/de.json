@@ -1,0 +1,8 @@
+{
+    "controllers.home": {
+        "Sales": "Geschäft"
+    },
+    "loader": {
+        "Sales": ""
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "ceremonycrmmod.core.extensions.controllers.dashboard": {
+        "Extensions": "Rozszerzenia",
+        "You are using free version of Ceremony.": "Korzystasz z darmowej wersji Ceremony.",
+        "If you want to install extensions, you must upgrade to PRO.": "Aby zainstalować rozszerzenia, musisz dokonać aktualizacji do wersji PRO.",
+        "Upgrade to PRO": "Przejdź do PRO"
+    },
+    "ceremonycrmmod.core.extensions.loader": {
+        "Extensions": "Rozszerzenia"
+    }
+}

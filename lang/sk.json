@@ -1,7 +1,4 @@
 {
-    "app": {
-        "Documents": ""
-    },
     "desktop": {
         "Upgrade to PRO": "Prejsť na PRO",
         "Your messages": "Vaše správy",
@@ -15,56 +12,6 @@
         "Search knowledgebase...": "Prehľadávať bázu znalostí...",
         "No hot tips for this screen": "Žiadne horúce tipy pre túto obrazovku"
     },
-    "ceremonycrmmod.core.billing.loader": {
-        "Billing": "Účtovanie",
-        "Billing Accounts": "Účty"
-    },
-    "ceremonycrmmod.core.calendar.loader": {
-        "Calendar": "Kalendár"
-    },
-    "ceremonycrmmod.core.dashboard.loader": {
-        "Home": "Úvod"
-    },
-    "ceremonycrmmod.core.documents.loader": {
-        "Documents": "Dokumenty"
-    },
-    "ceremonycrmmod.core.extensions.loader": {
-        "Extensions": "Rozšírenia"
-    },
-    "ceremonycrmmod.core.invoices.loader": {
-        "Invoices": "Faktúry"
-    },
-    "ceremonycrmmod.core.services.loader": {
-        "Services": "Služby"
-    },
-    "ceremonycrmmod.core.invoices.models.invoice": {
-        "Profile": "Profil",
-        "Issued by": "Vystavil",
-        "Customer": "Zákazník",
-        "Number": "Číslo",
-        "TIP: Number is auto-generated based on the pattern configured in the profile.": "TIP: Číslo je generované automaticky podľa vzorca v profile.",
-        "Variable symbol": "Variabilný symbol",
-        "Constant symbol": "Konštantný symbol",
-        "Specific symbol": "Špecifický symbol",
-        "Issued": "Vystavená",
-        "Delivered": "Dodanie služby",
-        "Due": "Splatnosť",
-        "Payment": "Úhrada",
-        "Notes": "Poznámky"
-    },
-    "ceremonycrmmod.core.invoices.models.invoiceItem": {
-        "Invoice": "Faktúra",
-        "Item": "Položka",
-        "Unit price": "Jednotková cena",
-        "Amount": "Množstvo"
-    },
-    "table": {
-        "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
-        "Yes, delete": "Áno, zmazať",
-        "No, do not delete": "Nie, zavrieť okno",
-        "Delete": "",
-        "Start typing to search...": ""
-    },
     "form": {
         "Add": "Pridať",
         "Save": "Uložiť",
@@ -77,78 +24,14 @@
         "Record": "Záznam",
         "New record": "Nový záznam"
     },
-    "ceremonycrmmod.core.support.loader": {
-        "Support": "Podpora"
+    "input": {
+        "Upload file": ""
     },
-    "ceremonycrmmod.sales.core.loader": {
-        "Sales": "Obchod",
-        "Pipeline": "Pipeline"
-    },
-    "ceremonycrmmod.core.calendar.controllers.calendar": {
-        "Calendar": "Kalendár"
-    },
-    "ceremonycrmmod.core.billing.controllers.billingAccounts": {
-        "Customers": "Zákazníci",
-        "Billing Accounts": "Účty"
-    },
-    "ceremonycrmmod.core.services.controllers.services": {
-        "Services": "Služby"
-    },
-    "ceremonycrmmod.sales.deals.loades": {
-        "Deals": "Dealy",
-        "Deals Archive": "Archív dealov"
-    },
-    "ceremonycrmmod.sales.leads.loaders": {
-        "Leads": "Leady",
-        "Leads Archive": "Archív leadov"
-    },
-    "ceremonycrmmod.sales.core.controllers.home": {
-        "Sales": "Obchod"
-    },
-    "ceremonycrmmod.core.invoices.controllers.invoices": {
-        "Invoices": "Faktúry"
-    },
-    "ceremonycrmmod.core.extensions.controllers.dashboard": {
-        "Extensions": "Rozšírenia",
-        "You are using free version of Ceremony.": "Používate voľne dostupnú verziu Ceremony.",
-        "If you want to install extensions, you must upgrade to PRO.": "Ak chcete mať prístup k rozšíreniam, musíte prejsť na PRO.",
-        "Upgrade to PRO": "Prejsť na PRO"
-    },
-    "ceremonycrmmod.sales.leads.controllers.leads": {
-        "Sales": "Obchod",
-        "Leads": "Leady"
-    },
-    "ceremonycrmmod.sales.deals.controllers.deals": {
-        "Sales": "Obchod",
-        "Deals": "Dealy"
-    },
-    "ceremonycrmmod.sales.leads.controllers.leadsArchive": {
-        "Sales": "Obchod",
-        "Leads": "Leady",
-        "Archive": "Archív"
-    },
-    "ceremonycrmmod.sales.deals.controllers.dealsArchive": {
-        "Sales": "Obchod",
-        "Deals": "Dealy",
-        "Archive": "Archív"
-    },
-    "ceremonycrmmod.core.invoices.tableInvoices": {
-        "Total excl. VAT": "",
-        "Total incl. VAT": "",
-        "VAT": "",
-        "Customer": "",
-        "Variable symbol": "",
-        "Number": "",
-        "Issue": "",
-        "Due": "",
-        "Delivery": "",
-        "Payment": "",
-        "Total VAT": ""
-    },
-    "ceremonycrmmod.core.invoices.formInvoice": {
-        "Invoice": "Faktúra"
-    },
-    "ceremonycrmmod.core.upgrade.loader": {
-        "Upgrade": "PRO"
+    "table": {
+        "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
+        "Yes, delete": "Áno, zmazať",
+        "No, do not delete": "Nie, zavrieť okno",
+        "Delete": "",
+        "Start typing to search...": ""
     }
 }

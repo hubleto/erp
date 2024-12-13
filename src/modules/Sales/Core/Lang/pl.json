@@ -1,0 +1,9 @@
+{
+    "ceremonycrmmod.sales.core.loader": {
+        "Sales": "Sprzedaż",
+        "Pipeline": "Pipeline"
+    },
+    "ceremonycrmmod.sales.core.controllers.home": {
+        "Sales": "Sprzedaż"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "ceremonycrmmod.core.extensions.controllers.dashboard": {
+        "Extensions": "Rozšírenia",
+        "You are using free version of Ceremony.": "Používate voľne dostupnú verziu Ceremony.",
+        "If you want to install extensions, you must upgrade to PRO.": "Ak chcete mať prístup k rozšíreniam, musíte prejsť na PRO.",
+        "Upgrade to PRO": "Prejsť na PRO"
+    },
+    "ceremonycrmmod.core.extensions.loader": {
+        "Extensions": "Rozšírenia"
+    }
+}

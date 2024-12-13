@@ -36,7 +36,8 @@ class Module {
 
     if (strlen($language) == 2) {
       $dictFilename = $this->rootFolder . '/Lang/' . $language . '.json';
-      if (is_file($dictFilename)) $dict = @json_decode(file_get_contents($dictFilename), true);
+      if (is_file($dictFilename)) $dict = json_decode(file_get_contents($dictFilename), true);
+      if (!is_array($dict)) throw new \Exception("Dictionary file {$dictFilename} could not be loaded.");
     }
 
     return $dict;

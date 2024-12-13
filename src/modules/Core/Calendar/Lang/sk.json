@@ -1,0 +1,8 @@
+{
+    "ceremonycrmmod.core.calendar.controllers.calendar": {
+        "Calendar": "Kalendár"
+    },
+    "ceremonycrmmod.core.calendar.loader": {
+        "Calendar": "Kalendár"
+    }
+}

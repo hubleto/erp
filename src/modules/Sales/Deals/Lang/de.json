@@ -1,0 +1,15 @@
+{
+    "ceremonycrmmod.sales.deals.loader": {
+        "Deals": "Dealy",
+        "Deals Archive": "Archív dealov"
+    },
+    "ceremonycrmmod.sales.deals.controllers.deals": {
+        "Sales": "Geschäft",
+        "Deals": "Deals"
+    },
+    "ceremonycrmmod.sales.deals.controllers.dealsArchive": {
+        "Sales": "Geschäft",
+        "Deals": "Leads",
+        "Archive": "Archiv"
+    }
+}

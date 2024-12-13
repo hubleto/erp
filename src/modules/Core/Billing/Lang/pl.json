@@ -1,0 +1,10 @@
+{
+    "ceremonycrmmod.core.billing.loader": {
+        "Billing": "Rozliczenia",
+        "Billing Accounts": "Konta do fakturowania"
+    },
+    "ceremonycrmmod.core.billing.controllers.billingAccounts": {
+        "Customers": "Klienci",
+        "Billing Accounts": "Konta do fakturowania"
+    }
+}

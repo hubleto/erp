@@ -7,7 +7,6 @@ class ContactType extends \CeremonyCrmApp\Core\Model
   public string $table = 'contact_types';
   public string $eloquentClass = Eloquent\ContactType::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
-  public string $translationContext = 'mod.core.settings.models.contactType';
 
   public function columns(array $columns = []): array
   {

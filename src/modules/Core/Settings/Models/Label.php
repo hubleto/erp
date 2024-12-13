@@ -7,7 +7,6 @@ class Label extends \CeremonyCrmApp\Core\Model
   public string $table = 'labels';
   public string $eloquentClass = Eloquent\Label::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
-  public string $translationContext = 'mod.core.settings.models.label';
 
   public function columns(array $columns = []): array
   {

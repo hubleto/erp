@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Core\Calendar\Controllers;
 
 class Calendar extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.core.calendar.controllers.calendar';
 
   public function getBreadcrumbs(): array
   {

@@ -47,7 +47,7 @@ export default class CeremonyCrmApp extends ADIOS {
       { language: language },
       (data: any) => {
         this.dictionary = data;
-        console.log(this.dictionary);
+        console.log('loaddict', this.dictionary);
       }
     );
   }

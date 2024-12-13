@@ -5,7 +5,6 @@ namespace CeremonyCrmMod\Core\Upgrade;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
-  public string $translationContext = 'mod.core.upgrade.loader';
 
   // public static function canBeAdded(\CeremonyCrmApp $app): bool
   // {

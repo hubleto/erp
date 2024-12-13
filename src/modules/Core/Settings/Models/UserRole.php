@@ -17,7 +17,6 @@ class UserRole extends \CeremonyCrmApp\Core\Model
   public string $table = 'user_roles';
   public string $eloquentClass = Eloquent\UserRole::class;
   public ?string $lookupSqlValue = '{%TABLE%}.role';
-  public string $translationContext = 'mod.core.settings.models.userRole';
 
   public array $relations = [
     'PERMISSIONS' => [ self::HAS_MANY, RolePermission::class, 'id_role', 'id'],

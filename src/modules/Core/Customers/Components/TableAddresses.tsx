@@ -20,7 +20,7 @@ export default class TableAddresses extends Table<TableAddressesProps, TableAddr
   props: TableAddressesProps;
   state: TableAddressesState;
 
-  translationContext: string = 'mod.core.customers.tableAddresses';
+  translationContext: string = 'ceremonycrmmod.core.customers.tableAddresses';
 
   constructor(props: TableAddressesProps) {
     super(props);

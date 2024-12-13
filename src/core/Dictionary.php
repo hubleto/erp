@@ -16,18 +16,20 @@ class Dictionary extends \ADIOS\Core\Controller
     if (!in_array($language, array_keys(\CeremonyCrmMod\Core\Settings\Models\User::ENUM_LANGUAGES))) return [];
     if (!is_file($dictFile)) return [];
 
-    $dict = (array) json_decode(file_get_contents($dictFile), true);
+    // $dict = (array) json_decode(file_get_contents($dictFile), true);
+    $dict = $this->app->translator->loadDictionary($language);
 
     if (is_array($this->app->params['addNew']) && $language != 'en') {
       $context = $this->app->params['addNew']['context'] ?? '';
       $orig = $this->app->params['addNew']['orig'] ?? '';
 
-      if (!empty($orig) && !empty($context)) {
-        $dict[$context][$orig] = "";
-        file_put_contents($dictFile, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-      }
+      // if (!empty($orig) && !empty($context)) {
+      //   $dict[$context][$orig] = "";
+      //   file_put_contents($dictFile, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+      // }
+      $this->app->translator->addToDictionary($orig, $context, $language);
 
-      return ['dictFile' => $dictFile, 'status' => true];
+      return ['status' => true];
     } else {
       return $dict;
     }

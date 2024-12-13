@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Core\Invoices\Controllers;
 
 class Invoices extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.core.invoices.controllers.invoices';
 
   public function getBreadcrumbs(): array
   {

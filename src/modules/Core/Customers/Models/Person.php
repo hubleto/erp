@@ -9,7 +9,6 @@ class Person extends \CeremonyCrmApp\Core\Model
   public string $table = 'persons';
   public string $eloquentClass = Eloquent\Person::class;
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
-  public string $translationContext = 'mod.core.customers.models.person';
 
   public array $relations = [
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company' ],

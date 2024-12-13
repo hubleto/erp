@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Core\Settings\Controllers;
 
 class Labels extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.core.settings.controllers.labels';
 
   public function getBreadcrumbs(): array
   {

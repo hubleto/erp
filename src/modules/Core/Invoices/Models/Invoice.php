@@ -10,7 +10,6 @@ class Invoice extends \ADIOS\Core\Model {
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '{%TABLE%}.number';
   public string $eloquentClass = Eloquent\Invoice::class;
-  public string $translationContext = 'mod.core.invoices.models.invoice';
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Company::class, "id_customer" ],

@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Core\Billing\Controllers;
 
 class BillingAccounts extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.core.billing.controllers.billingAccounts';
 
   public function getBreadcrumbs(): array
   {

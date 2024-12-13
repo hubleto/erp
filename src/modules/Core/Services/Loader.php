@@ -9,7 +9,6 @@ use CeremonyCrmMod\Core\Settings\Models\Permission;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
-  public string $translationContext = 'mod.core.services.loader';
 
   public function __construct(\CeremonyCrmApp $app)
   {

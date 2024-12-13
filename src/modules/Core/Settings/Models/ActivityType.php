@@ -7,7 +7,6 @@ class ActivityType extends \CeremonyCrmApp\Core\Model
   public string $table = 'activity_types';
   public string $eloquentClass = Eloquent\ActivityType::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
-  public string $translationContext = 'mod.core.settings.models.activityType';
 
   public function columns(array $columns = []): array
   {

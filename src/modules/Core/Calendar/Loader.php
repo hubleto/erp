@@ -5,8 +5,6 @@ namespace CeremonyCrmMod\Core\Calendar;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
-  public string $translationContext = 'mod.core.calendar.loader';
-
   public function __construct(\CeremonyCrmApp $app)
   {
     parent::__construct($app);

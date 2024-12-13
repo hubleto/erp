@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Core\Settings\Controllers;
 
 class ActivityTypes extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.core.settings.controllers.activityType';
 
   public function getBreadcrumbs(): array
   {

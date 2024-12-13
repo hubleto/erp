@@ -6,7 +6,6 @@ class InvoiceProfile extends \ADIOS\Core\Model {
   public string $table = 'invoice_profiles';
   public ?string $lookupSqlValue = '{%TABLE%}.name';
   public string $eloquentClass = Eloquent\InvoiceProfile::class;
-  public string $translationContext = 'mod.core.settings.models.invoiceProfile';
 
   public function columns(array $columns = []): array
   {

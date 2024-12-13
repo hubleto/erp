@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Core\Settings\Controllers;
 
 class Permissions extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.core.settings.controllers.permissions';
 
   public function getBreadcrumbs(): array
   {

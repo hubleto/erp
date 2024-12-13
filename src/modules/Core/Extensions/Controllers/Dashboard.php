@@ -5,8 +5,6 @@ namespace CeremonyCrmMod\Core\Extensions\Controllers;
 class Dashboard extends \CeremonyCrmApp\Core\Controller
 {
 
-  public string $translationContext = 'mod.core.extensions.controllers.dashboard';
-
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

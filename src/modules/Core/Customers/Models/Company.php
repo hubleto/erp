@@ -14,7 +14,6 @@ class Company extends \CeremonyCrmApp\Core\Model
   public string $table = 'companies';
   public string $eloquentClass = Eloquent\Company::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
-  public string $translationContext = 'mod.core.customers.models.company';
 
   public array $relations = [
     'PERSONS' => [ self::HAS_MANY, Person::class, 'id_company' ],

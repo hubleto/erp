@@ -7,7 +7,6 @@ class Pipeline extends \CeremonyCrmApp\Core\Model
   public string $table = 'pipelines';
   public string $eloquentClass = Eloquent\Pipeline::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
-  public string $translationContext = 'mod.core.settings.models.pipeline';
 
   public array $relations = [
     'PIPELINE_STEPS' => [ self::HAS_MANY, PipelineStep::class, 'id_pipeline', 'id' ]

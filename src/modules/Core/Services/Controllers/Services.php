@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Core\Services\Controllers;
 
 class Services extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.core.services.controllers.services';
 
   public function getBreadcrumbs(): array
   {

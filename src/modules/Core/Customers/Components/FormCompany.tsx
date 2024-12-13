@@ -57,7 +57,7 @@ export default class FormCompany<P, S> extends Form<
   props: FormCompanyProps;
   state: FormCompanyState;
 
-  translationContext: string = 'mod.core.customers.formCompany';
+  translationContext: string = 'ceremonycrmmod.core.customers.formCompany';
 
   constructor(props: FormCompanyProps) {
     super(props);

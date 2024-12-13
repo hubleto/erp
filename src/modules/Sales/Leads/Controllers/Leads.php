@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Sales\Leads\Controllers;
 
 class Leads extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.sales.leads.controllers.leads';
 
   public function getBreadcrumbs(): array
   {

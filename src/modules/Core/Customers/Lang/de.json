@@ -68,10 +68,6 @@
         "Customers": "Kunden",
         "Companies": "Firmen"
     },
-    "mod.core.billing.controllers.billingAccounts": {
-        "Customers": "Kunden",
-        "Billing Accounts": "Abrechnungskontos"
-    },
     "controllers.persons": {
         "Customers": "Kunden",
         "Contact Persons": "Kontaktpersonen"

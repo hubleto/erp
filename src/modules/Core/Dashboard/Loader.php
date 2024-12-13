@@ -5,7 +5,6 @@ namespace CeremonyCrmMod\Core\Dashboard;
 class Loader extends \CeremonyCrmApp\Core\Module
 {
 
-  public string $translationContext = 'mod.core.dashboard.loader';
 
   public function __construct(\CeremonyCrmApp $app)
   {

@@ -9,7 +9,6 @@ use CeremonyCrmMod\Sales\Deals\Models\Deal;
 
 class Home extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.sales.core.controllers.home';
 
   public function getBreadcrumbs(): array
   {

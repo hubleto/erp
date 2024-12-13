@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Core\Customers\Controllers;
 
 class Companies extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.core.customers.controllers.companies';
 
   public function getBreadcrumbs(): array
   {

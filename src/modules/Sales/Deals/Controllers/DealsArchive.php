@@ -4,7 +4,6 @@ namespace CeremonyCrmMod\Sales\Deals\Controllers;
 
 class DealsArchive extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.sales.deals.controllers.dealsArchive';
 
   public function getBreadcrumbs(): array
   {

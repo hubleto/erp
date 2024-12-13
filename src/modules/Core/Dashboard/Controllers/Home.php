@@ -3,7 +3,6 @@
 namespace CeremonyCrmMod\Core\Dashboard\Controllers;
 
 class Home extends \CeremonyCrmApp\Core\Controller {
-  public string $translationContext = 'mod.core.customers.dashboard.home';
 
   public function init(): void
   {

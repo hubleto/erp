@@ -4,8 +4,6 @@ namespace CeremonyCrmMod\Core\Customers\Controllers;
 
 class Activity extends \CeremonyCrmApp\Core\Controller {
 
-  public string $translationContext = 'mod.core.customers.controllers.activity';
-
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

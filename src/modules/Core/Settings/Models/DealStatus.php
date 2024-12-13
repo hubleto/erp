@@ -7,7 +7,6 @@ class DealStatus extends \CeremonyCrmApp\Core\Model
   public string $table = 'deal_statuses';
   public string $eloquentClass = Eloquent\DealStatus::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
-  public string $translationContext = 'mod.core.settings.models.dealStatus';
 
   public function columns(array $columns = []): array
   {

@@ -18,8 +18,12 @@ class Module {
 
   public function __construct(\CeremonyCrmApp $app)
   {
+    $reflection = new \ReflectionClass($this);
+
     $this->app = $app;
-    $this->rootFolder = pathinfo((new \ReflectionClass($this))->getFilename(), PATHINFO_DIRNAME);
+    $this->rootFolder = pathinfo($reflection->getFilename(), PATHINFO_DIRNAME);
+    $this->translationRootContext = str_replace('.loader', '', strtolower(str_replace('\\', '.', $reflection->getName())));
+    $this->translationContext = $this->translationRootContext . '.loader';
   }
 
   public function init(): void

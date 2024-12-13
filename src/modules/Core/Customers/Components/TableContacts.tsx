@@ -20,7 +20,7 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
   props: TableContactsProps;
   state: TableContactsState;
 
-  translationContext: string = 'mod.core.customers.tableContacts';
+  translationContext: string = 'ceremonycrmmod.core.customers.tableContacts';
 
   constructor(props: TableContactsProps) {
     super(props);

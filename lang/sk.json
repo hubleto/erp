@@ -15,7 +15,7 @@
         "Search knowledgebase...": "Prehľadávať bázu znalostí...",
         "No hot tips for this screen": "Žiadne horúce tipy pre túto obrazovku"
     },
-    "mod.core.settings.models.user": {
+    "ceremonycrmmod.core.settings.models.user": {
         "First name": "Meno",
         "Middle name": "Stredné meno",
         "Last name": "Priezvisko",
@@ -30,74 +30,74 @@
         "Time of last access": "Čas posledného prístupu",
         "Last access IP": "IP adresa posledného prístupu"
     },
-    "mod.core.settings.models.country": {
+    "ceremonycrmmod.core.settings.models.country": {
         "Country Name": "Štát",
         "Code": "Kód"
     },
-    "mod.core.settings.models.profile": {
+    "ceremonycrmmod.core.settings.models.profile": {
         "Company": "Firma"
     },
-    "mod.core.settings.models.activityType": {
+    "ceremonycrmmod.core.settings.models.activityType": {
         "Type Name": "Typ",
         "Color": "Farba",
         "Shown in Calendar": "Zobraziť v kalendári",
         "Icon": "Ikonka"
     },
-    "mod.core.settings.models.currency": {
+    "ceremonycrmmod.core.settings.models.currency": {
         "Currency Name": "Mena",
         "Currency Code": "Kód"
     },
-    "mod.core.settings.models.leadStatus": {
+    "ceremonycrmmod.core.settings.models.leadStatus": {
         "Name": "Názov",
         "Order": "Poradie",
         "Color": "Farba"
     },
-    "mod.core.settings.models.pipeline": {
+    "ceremonycrmmod.core.settings.models.pipeline": {
         "Name": "Názov",
         "Description": "Popis"
     },
-    "mod.core.settings.models.pipelineStep": {
+    "ceremonycrmmod.core.settings.models.pipelineStep": {
         "Name": "Názov",
         "Order": "Poradie",
         "Company": "Farba"
     },
-    "mod.core.settings.models.dealStatus": {
+    "ceremonycrmmod.core.settings.models.dealStatus": {
         "Name": "Názov",
         "Order": "Poradie",
         "Color": "Farba"
     },
-    "mod.core.settings.models.tag": {
+    "ceremonycrmmod.core.settings.models.tag": {
         "Name": "Názov",
         "Color": "Farba"
     },
-    "mod.core.billing.loader": {
+    "ceremonycrmmod.core.billing.loader": {
         "Billing": "Účtovanie",
         "Billing Accounts": "Účty"
     },
-    "mod.core.calendar.loader": {
+    "ceremonycrmmod.core.calendar.loader": {
         "Calendar": "Kalendár"
     },
-    "mod.core.dashboard.loader": {
+    "ceremonycrmmod.core.dashboard.loader": {
         "Home": "Úvod"
     },
-    "mod.core.documents.loader": {
+    "ceremonycrmmod.core.documents.loader": {
         "Documents": "Dokumenty"
     },
-    "mod.core.extensions.loader": {
+    "ceremonycrmmod.core.extensions.loader": {
         "Extensions": "Rozšírenia"
     },
-    "mod.core.invoices.loader": {
+    "ceremonycrmmod.core.invoices.loader": {
         "Invoices": "Faktúry"
     },
-    "mod.core.services.loader": {
+    "ceremonycrmmod.core.services.loader": {
         "Services": "Služby"
     },
-    "mod.core.settings.models.setting": {
+    "ceremonycrmmod.core.settings.models.setting": {
         "Key": "Parameter",
         "Value": "Hodnota",
         "Only for user": "Iba pre používateľa"
     },
-    "mod.core.invoices.models.invoice": {
+    "ceremonycrmmod.core.invoices.models.invoice": {
         "Profile": "Profil",
         "Issued by": "Vystavil",
         "Customer": "Zákazník",
@@ -112,13 +112,13 @@
         "Payment": "Úhrada",
         "Notes": "Poznámky"
     },
-    "mod.core.invoices.models.invoiceItem": {
+    "ceremonycrmmod.core.invoices.models.invoiceItem": {
         "Invoice": "Faktúra",
         "Item": "Položka",
         "Unit price": "Jednotková cena",
         "Amount": "Množstvo"
     },
-    "mod.core.settings.models.invoiceProfile": {
+    "ceremonycrmmod.core.settings.models.invoiceProfile": {
         "Name": "Názov",
         "Phone": "Telefón",
         "E-mail": "Email",
@@ -144,18 +144,18 @@
         "Delete": "",
         "Start typing to search...": ""
     },
-    "mod.core.settings.models.userRole": {
+    "ceremonycrmmod.core.settings.models.userRole": {
         "Role": "Rola",
         "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)"
     },
-    "mod.core.settings.models.rolePermission": {
+    "ceremonycrmmod.core.settings.models.rolePermission": {
         "Permission": "Povolenie",
         "Role": "Rola"
     },
-    "mod.core.settings.models.permission": {
+    "ceremonycrmmod.core.settings.models.permission": {
         "Permission": "Povolenie"
     },
-    "mod.core.settings.models.contactType": {
+    "ceremonycrmmod.core.settings.models.contactType": {
         "Name": "Názov",
         "Contact Types": "Typy kontaktov"
     },
@@ -171,70 +171,70 @@
         "Record": "Záznam",
         "New record": "Nový záznam"
     },
-    "mod.core.support.loader": {
+    "ceremonycrmmod.core.support.loader": {
         "Support": "Podpora"
     },
-    "mod.sales.core.loader": {
+    "ceremonycrmmod.sales.core.loader": {
         "Sales": "Obchod",
         "Pipeline": "Pipeline"
     },
-    "mod.core.settings.controllers.contactTypes": {
+    "ceremonycrmmod.core.settings.controllers.contactTypes": {
         "Settings": "Nastavenia",
         "Contact Types": "Typy kontaktov"
     },
-    "mod.core.calendar.controllers.calendar": {
+    "ceremonycrmmod.core.calendar.controllers.calendar": {
         "Calendar": "Kalendár"
     },
-    "mod.core.billing.controllers.billingAccounts": {
+    "ceremonycrmmod.core.billing.controllers.billingAccounts": {
         "Customers": "Zákazníci",
         "Billing Accounts": "Účty"
     },
-    "mod.core.services.controllers.services": {
+    "ceremonycrmmod.core.services.controllers.services": {
         "Services": "Služby"
     },
-    "mod.sales.deals.loades": {
+    "ceremonycrmmod.sales.deals.loades": {
         "Deals": "Dealy",
         "Deals Archive": "Archív dealov"
     },
-    "mod.sales.leads.loaders": {
+    "ceremonycrmmod.sales.leads.loaders": {
         "Leads": "Leady",
         "Leads Archive": "Archív leadov"
     },
-    "mod.sales.core.controllers.home": {
+    "ceremonycrmmod.sales.core.controllers.home": {
         "Sales": "Obchod"
     },
-    "mod.core.invoices.controllers.invoices": {
+    "ceremonycrmmod.core.invoices.controllers.invoices": {
         "Invoices": "Faktúry"
     },
-    "mod.core.extensions.controllers.dashboard": {
+    "ceremonycrmmod.core.extensions.controllers.dashboard": {
         "Extensions": "Rozšírenia",
         "You are using free version of Ceremony.": "Používate voľne dostupnú verziu Ceremony.",
         "If you want to install extensions, you must upgrade to PRO.": "Ak chcete mať prístup k rozšíreniam, musíte prejsť na PRO.",
         "Upgrade to PRO": "Prejsť na PRO"
     },
-    "mod.sales.leads.controllers.leads": {
+    "ceremonycrmmod.sales.leads.controllers.leads": {
         "Sales": "Obchod",
         "Leads": "Leady"
     },
-    "mod.core.settings.models.label": {
+    "ceremonycrmmod.core.settings.models.label": {
         "Name": "Názov",
         "Color": "Farba"
     },
-    "mod.sales.deals.controllers.deals": {
+    "ceremonycrmmod.sales.deals.controllers.deals": {
         "Sales": "Obchod",
         "Deals": "Dealy"
     },
-    "mod.sales.leads.controllers.leadsArchive": {
+    "ceremonycrmmod.sales.leads.controllers.leadsArchive": {
         "Sales": "Obchod",
         "Leads": "Leady",
         "Archive": "Archív"
     },
-    "mod.sales.deals.controllers.dealsArchive": {
+    "ceremonycrmmod.sales.deals.controllers.dealsArchive": {
         "Sales": "Obchod",
         "Deals": "Dealy",
         "Archive": "Archív"
     },
-    "mod.core.invoices.tableInvoices": {
+    "ceremonycrmmod.core.invoices.tableInvoices": {
         "Total excl. VAT": "",
         "Total incl. VAT": "",
         "VAT": "",
@@ -247,13 +247,13 @@
         "Payment": "",
         "Total VAT": ""
     },
-    "mod.core.invoices.formInvoice": {
+    "ceremonycrmmod.core.invoices.formInvoice": {
         "Invoice": "Faktúra"
     },
-    "mod.core.upgrade.loader": {
+    "ceremonycrmmod.core.upgrade.loader": {
         "Upgrade": "PRO"
     },
-    "mod.core.settings.controllers.dashboard": {
+    "ceremonycrmmod.core.settings.controllers.dashboard": {
         "Settings": "Nastavenia",
         "Users": "Používatelia",
         "User Roles": "Používateľské role",
@@ -270,18 +270,18 @@
         "Pipelines": "Pipeline",
         "Invoice profiles": "Fakturačné profily"
     },
-    "mod.core.settings.controllers.userRoles": {
+    "ceremonycrmmod.core.settings.controllers.userRoles": {
         "Settings": "Nastavenia",
         "User Roles": "Používateľské role"
     },
-    "mod.core.settings.controllers.countries": {
+    "ceremonycrmmod.core.settings.controllers.countries": {
         "Settings": "Nastavenia",
         "Countries": "Štáty"
     },
-    "mod.core.settings.loader": {
+    "ceremonycrmmod.core.settings.loader": {
         "Settings": "Nastavenia"
     },
-    "mod.core.settings.controllers.users": {
+    "ceremonycrmmod.core.settings.controllers.users": {
         "Settings": "",
         "Users": ""
     }

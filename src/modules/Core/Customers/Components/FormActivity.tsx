@@ -20,7 +20,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
   props: FormActivityProps;
   state: FormActivityState;
 
-  translationContext: string = 'mod.core.customers.formActivity';
+  translationContext: string = 'ceremonycrmmod.core.customers.formActivity';
 
   constructor(props: FormActivityProps) {
     super(props);

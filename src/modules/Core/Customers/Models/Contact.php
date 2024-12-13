@@ -9,7 +9,6 @@ class Contact extends \CeremonyCrmApp\Core\Model
   public string $table = 'contacts';
   public string $eloquentClass = Eloquent\Contact::class;
   public ?string $lookupSqlValue = '{%TABLE%}.value';
-  public string $translationContext = 'mod.core.customers.models.contact';
 
   public array $relations = [
     'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],

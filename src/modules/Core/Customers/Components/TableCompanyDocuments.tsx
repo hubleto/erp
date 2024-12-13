@@ -15,7 +15,7 @@ export default class TableCompanyDocuments extends Table<TableCompanyDocumentsPr
   props: TableCompanyDocumentsProps;
   state: TableCompanyDocumentsState;
 
-  translationContext: string = 'mod.core.customers.tableCompanyDocuments';
+  translationContext: string = 'ceremonycrmmod.core.customers.tableCompanyDocuments';
 
   constructor(props: TableCompanyDocumentsProps) {
     super(props);

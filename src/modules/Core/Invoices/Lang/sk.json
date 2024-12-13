@@ -1,8 +1,8 @@
 {
-    "ceremonycrmmod.core.invoices.loader": {
+    "loader": {
         "Invoices": "Faktúry"
     },
-    "ceremonycrmmod.core.invoices.models.invoice": {
+    "models.invoice": {
         "Profile": "Profil",
         "Issued by": "Vystavil",
         "Customer": "Zákazník",
@@ -17,16 +17,16 @@
         "Payment": "Úhrada",
         "Notes": "Poznámky"
     },
-    "ceremonycrmmod.core.invoices.models.invoiceItem": {
+    "models.invoiceItem": {
         "Invoice": "Faktúra",
         "Item": "Položka",
         "Unit price": "Jednotková cena",
         "Amount": "Množstvo"
     },
-    "ceremonycrmmod.core.invoices.controllers.invoices": {
+    "controllers.invoices": {
         "Invoices": "Faktúry"
     },
-    "ceremonycrmmod.core.invoices.tableInvoices": {
+    "tableInvoices": {
         "Total excl. VAT": "",
         "Total incl. VAT": "",
         "VAT": "",
@@ -39,7 +39,7 @@
         "Payment": "",
         "Total VAT": ""
     },
-    "ceremonycrmmod.core.invoices.formInvoice": {
+    "formInvoice": {
         "Invoice": "Faktúra"
     }
 }

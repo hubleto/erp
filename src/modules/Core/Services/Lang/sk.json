@@ -1,8 +1,8 @@
 {
-    "ceremonycrmmod.core.services.controllers.services": {
+    "controllers.services": {
         "Services": "Služby"
     },
-    "ceremonycrmmod.core.services.loader": {
+    "loader": {
         "Services": "Služby"
     }
 }

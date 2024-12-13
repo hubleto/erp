@@ -1,8 +1,8 @@
 {
-    "ceremonycrmmod.core.invoices.loader": {
+    "loader": {
         "Invoices": "Faktury"
     },
-    "ceremonycrmmod.core.invoices.models.invoice": {
+    "models.invoice": {
         "Profile": "Profil",
         "Issued by": "Wystawiał",
         "Customer": "Klient",
@@ -17,16 +17,16 @@
         "Payment": "Zwrot kosztów",
         "Notes": "Notatki"
     },
-    "ceremonycrmmod.core.invoices.models.invoiceItem": {
+    "models.invoiceItem": {
         "Invoice": "Faktura",
         "Item": "Przedmiot",
         "Unit price": "Cena jednostkowa",
         "Amount": "Ilość"
     },
-    "ceremonycrmmod.core.invoices.controllers.invoices": {
+    "controllers.invoices": {
         "Invoices": "Faktury"
     },
-    "ceremonycrmmod.core.invoices.tableInvoices": {
+    "tableInvoices": {
         "Total excl. VAT": "Razem bez VAT",
         "Total incl. VAT": "Razem z VAT",
         "VAT": "VAT",

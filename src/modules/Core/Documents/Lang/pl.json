@@ -1,5 +1,5 @@
 {
-    "ceremonycrmmod.core.documents.loader": {
+    "loader": {
         "Documents": "Dokumenty"
     }
 }

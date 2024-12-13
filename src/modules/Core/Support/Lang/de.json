@@ -1,5 +1,5 @@
 {
-    "ceremonycrmmod.core.support.loader": {
+    "loader": {
         "Support": "Unterstützung"
     }
 }

@@ -1,5 +1,5 @@
 {
-    "ceremonycrmmod.core.dashboard.loader": {
+    "loader": {
         "Home": "Wstęp"
     }
 }

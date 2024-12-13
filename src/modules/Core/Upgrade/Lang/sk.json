@@ -1,5 +1,5 @@
 {
-    "ceremonycrmmod.core.upgrade.loader": {
+    "loader": {
         "Upgrade": "PRO"
     }
 }

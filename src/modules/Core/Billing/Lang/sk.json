@@ -1,9 +1,9 @@
 {
-    "ceremonycrmmod.core.billing.loader": {
+    "loader": {
         "Billing": "Účtovanie",
         "Billing Accounts": "Účty"
     },
-    "ceremonycrmmod.core.billing.controllers.billingAccounts": {
+    "controllers.billingAccounts": {
         "Customers": "Zákazníci",
         "Billing Accounts": "Účty"
     }

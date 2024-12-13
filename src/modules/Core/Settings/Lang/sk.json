@@ -1,0 +1,136 @@
+{
+    "models.user": {
+        "First name": "Meno",
+        "Middle name": "Stredné meno",
+        "Last name": "Priezvisko",
+        "Email": "Email",
+        "Language": "Jazyk",
+        "Active profile": "Aktívny profil",
+        "Login": "Login",
+        "Password": "Heslo",
+        "Active": "Účet je aktívny",
+        "Time of last login": "Čas posledného prihlásenia",
+        "Last login IP": "IP adresa posledného prihlásenia",
+        "Time of last access": "Čas posledného prístupu",
+        "Last access IP": "IP adresa posledného prístupu"
+    },
+    "models.country": {
+        "Country Name": "Štát",
+        "Code": "Kód"
+    },
+    "models.profile": {
+        "Company": "Firma"
+    },
+    "models.activityType": {
+        "Type Name": "Typ",
+        "Color": "Farba",
+        "Shown in Calendar": "Zobraziť v kalendári",
+        "Icon": "Ikonka"
+    },
+    "models.currency": {
+        "Currency Name": "Mena",
+        "Currency Code": "Kód"
+    },
+    "models.leadStatus": {
+        "Name": "Názov",
+        "Order": "Poradie",
+        "Color": "Farba"
+    },
+    "models.pipeline": {
+        "Name": "Názov",
+        "Description": "Popis"
+    },
+    "models.pipelineStep": {
+        "Name": "Názov",
+        "Order": "Poradie",
+        "Company": "Farba"
+    },
+    "models.dealStatus": {
+        "Name": "Názov",
+        "Order": "Poradie",
+        "Color": "Farba"
+    },
+    "models.tag": {
+        "Name": "Názov",
+        "Color": "Farba"
+    },
+    "models.setting": {
+        "Key": "Parameter",
+        "Value": "Hodnota",
+        "Only for user": "Iba pre používateľa"
+    },
+    "models.invoiceProfile": {
+        "Name": "Názov",
+        "Phone": "Telefón",
+        "E-mail": "Email",
+        "WWW": "WWW",
+        "Company ID": "IČO",
+        "Tax ID": "DIČ",
+        "VAT ID": "IČ DPH",
+        "Street, line 1": "Ulica, riadok č. 1",
+        "Street, line 2": "Ulica, riadok č. 2",
+        "ZIP": "PSČ",
+        "City": "Mesto",
+        "Country": "Štát",
+        "Bank name": "Názov banky",
+        "Account number": "Číslo účtu",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SWIFT",
+        "Numbering pattern": "Vzorec pre číslovanie"
+    },
+    "models.userRole": {
+        "Role": "Rola",
+        "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)"
+    },
+    "models.rolePermission": {
+        "Permission": "Povolenie",
+        "Role": "Rola"
+    },
+    "models.permission": {
+        "Permission": "Povolenie"
+    },
+    "models.contactType": {
+        "Name": "Názov",
+        "Contact Types": "Typy kontaktov"
+    },
+    "controllers.contactTypes": {
+        "Settings": "Nastavenia",
+        "Contact Types": "Typy kontaktov"
+    },
+    "models.label": {
+        "Name": "Názov",
+        "Color": "Farba"
+    },
+    "controllers.dashboard": {
+        "Settings": "Nastavenia",
+        "Users": "Používatelia",
+        "User Roles": "Používateľské role",
+        "Profiles": "Profily",
+        "Permissions": "Povolenia",
+        "Tags": "Tagy",
+        "Activity Types": "Typy aktivít",
+        "Contact Types": "Typy kontaktov",
+        "Countries": "Štáty",
+        "Currencies": "Meny",
+        "Labels": "Značky",
+        "Lead Statuses": "Stavy leadov",
+        "Deal Statuses": "Stavy dealov",
+        "Pipelines": "Pipeline",
+        "Invoice profiles": "Fakturačné profily"
+    },
+    "controllers.userRoles": {
+        "Settings": "Nastavenia",
+        "User Roles": "Používateľské role"
+    },
+    "controllers.countries": {
+        "Settings": "Nastavenia",
+        "Countries": "Štáty"
+    },
+    "loader": {
+        "Settings": "Nastavenia"
+    },
+    "controllers.users": {
+        "Settings": "",
+        "Users": ""
+    }
+}

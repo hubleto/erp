@@ -15,61 +15,6 @@
         "Search knowledgebase...": "Prehľadávať bázu znalostí...",
         "No hot tips for this screen": "Žiadne horúce tipy pre túto obrazovku"
     },
-    "ceremonycrmmod.core.settings.models.user": {
-        "First name": "Meno",
-        "Middle name": "Stredné meno",
-        "Last name": "Priezvisko",
-        "Email": "Email",
-        "Language": "Jazyk",
-        "Active profile": "Aktívny profil",
-        "Login": "Login",
-        "Password": "Heslo",
-        "Active": "Účet je aktívny",
-        "Time of last login": "Čas posledného prihlásenia",
-        "Last login IP": "IP adresa posledného prihlásenia",
-        "Time of last access": "Čas posledného prístupu",
-        "Last access IP": "IP adresa posledného prístupu"
-    },
-    "ceremonycrmmod.core.settings.models.country": {
-        "Country Name": "Štát",
-        "Code": "Kód"
-    },
-    "ceremonycrmmod.core.settings.models.profile": {
-        "Company": "Firma"
-    },
-    "ceremonycrmmod.core.settings.models.activityType": {
-        "Type Name": "Typ",
-        "Color": "Farba",
-        "Shown in Calendar": "Zobraziť v kalendári",
-        "Icon": "Ikonka"
-    },
-    "ceremonycrmmod.core.settings.models.currency": {
-        "Currency Name": "Mena",
-        "Currency Code": "Kód"
-    },
-    "ceremonycrmmod.core.settings.models.leadStatus": {
-        "Name": "Názov",
-        "Order": "Poradie",
-        "Color": "Farba"
-    },
-    "ceremonycrmmod.core.settings.models.pipeline": {
-        "Name": "Názov",
-        "Description": "Popis"
-    },
-    "ceremonycrmmod.core.settings.models.pipelineStep": {
-        "Name": "Názov",
-        "Order": "Poradie",
-        "Company": "Farba"
-    },
-    "ceremonycrmmod.core.settings.models.dealStatus": {
-        "Name": "Názov",
-        "Order": "Poradie",
-        "Color": "Farba"
-    },
-    "ceremonycrmmod.core.settings.models.tag": {
-        "Name": "Názov",
-        "Color": "Farba"
-    },
     "ceremonycrmmod.core.billing.loader": {
         "Billing": "Účtovanie",
         "Billing Accounts": "Účty"
@@ -92,11 +37,6 @@
     "ceremonycrmmod.core.services.loader": {
         "Services": "Služby"
     },
-    "ceremonycrmmod.core.settings.models.setting": {
-        "Key": "Parameter",
-        "Value": "Hodnota",
-        "Only for user": "Iba pre používateľa"
-    },
     "ceremonycrmmod.core.invoices.models.invoice": {
         "Profile": "Profil",
         "Issued by": "Vystavil",
@@ -118,46 +58,12 @@
         "Unit price": "Jednotková cena",
         "Amount": "Množstvo"
     },
-    "ceremonycrmmod.core.settings.models.invoiceProfile": {
-        "Name": "Názov",
-        "Phone": "Telefón",
-        "E-mail": "Email",
-        "WWW": "WWW",
-        "Company ID": "IČO",
-        "Tax ID": "DIČ",
-        "VAT ID": "IČ DPH",
-        "Street, line 1": "Ulica, riadok č. 1",
-        "Street, line 2": "Ulica, riadok č. 2",
-        "ZIP": "PSČ",
-        "City": "Mesto",
-        "Country": "Štát",
-        "Bank name": "Názov banky",
-        "Account number": "Číslo účtu",
-        "Account IBAN": "IBAN",
-        "SWIFT": "SWIFT",
-        "Numbering pattern": "Vzorec pre číslovanie"
-    },
     "table": {
         "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
         "Yes, delete": "Áno, zmazať",
         "No, do not delete": "Nie, zavrieť okno",
         "Delete": "",
         "Start typing to search...": ""
-    },
-    "ceremonycrmmod.core.settings.models.userRole": {
-        "Role": "Rola",
-        "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)"
-    },
-    "ceremonycrmmod.core.settings.models.rolePermission": {
-        "Permission": "Povolenie",
-        "Role": "Rola"
-    },
-    "ceremonycrmmod.core.settings.models.permission": {
-        "Permission": "Povolenie"
-    },
-    "ceremonycrmmod.core.settings.models.contactType": {
-        "Name": "Názov",
-        "Contact Types": "Typy kontaktov"
     },
     "form": {
         "Add": "Pridať",
@@ -177,10 +83,6 @@
     "ceremonycrmmod.sales.core.loader": {
         "Sales": "Obchod",
         "Pipeline": "Pipeline"
-    },
-    "ceremonycrmmod.core.settings.controllers.contactTypes": {
-        "Settings": "Nastavenia",
-        "Contact Types": "Typy kontaktov"
     },
     "ceremonycrmmod.core.calendar.controllers.calendar": {
         "Calendar": "Kalendár"
@@ -216,10 +118,6 @@
         "Sales": "Obchod",
         "Leads": "Leady"
     },
-    "ceremonycrmmod.core.settings.models.label": {
-        "Name": "Názov",
-        "Color": "Farba"
-    },
     "ceremonycrmmod.sales.deals.controllers.deals": {
         "Sales": "Obchod",
         "Deals": "Dealy"
@@ -252,37 +150,5 @@
     },
     "ceremonycrmmod.core.upgrade.loader": {
         "Upgrade": "PRO"
-    },
-    "ceremonycrmmod.core.settings.controllers.dashboard": {
-        "Settings": "Nastavenia",
-        "Users": "Používatelia",
-        "User Roles": "Používateľské role",
-        "Profiles": "Profily",
-        "Permissions": "Povolenia",
-        "Tags": "Tagy",
-        "Activity Types": "Typy aktivít",
-        "Contact Types": "Typy kontaktov",
-        "Countries": "Štáty",
-        "Currencies": "Meny",
-        "Labels": "Značky",
-        "Lead Statuses": "Stavy leadov",
-        "Deal Statuses": "Stavy dealov",
-        "Pipelines": "Pipeline",
-        "Invoice profiles": "Fakturačné profily"
-    },
-    "ceremonycrmmod.core.settings.controllers.userRoles": {
-        "Settings": "Nastavenia",
-        "User Roles": "Používateľské role"
-    },
-    "ceremonycrmmod.core.settings.controllers.countries": {
-        "Settings": "Nastavenia",
-        "Countries": "Štáty"
-    },
-    "ceremonycrmmod.core.settings.loader": {
-        "Settings": "Nastavenia"
-    },
-    "ceremonycrmmod.core.settings.controllers.users": {
-        "Settings": "",
-        "Users": ""
     }
 }

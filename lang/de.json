@@ -15,61 +15,6 @@
         "Search knowledgebase...": "Wissensbasis durchsuchen...",
         "No hot tips for this screen": "Keine heißen Tipps für diesen Bildschirm"
     },
-    "ceremonycrmmod.core.settings.models.user": {
-        "First name": "Vorname",
-        "Middle name": "Mittelname",
-        "Last name": "Nachname",
-        "Email": "E-Mail",
-        "Language": "Sprache",
-        "Active profile": "Aktives Profil",
-        "Login": "Login",
-        "Password": "Passwort",
-        "Active": "Konto ist inaktiv",
-        "Time of last login": "Zeit letzter Anmeldung",
-        "Last login IP": "IP-Adresse letzter Anmeldung",
-        "Time of last access": "Zeit von letztem Zugriff",
-        "Last access IP": "IP-Adresse von letztem Zugriff"
-    },
-    "ceremonycrmmod.core.settings.models.country": {
-        "Country Name": "Land",
-        "Code": "Code"
-    },
-    "ceremonycrmmod.core.settings.models.profile": {
-        "Company": "Firma"
-    },
-    "ceremonycrmmod.core.settings.models.activityType": {
-        "Type Name": "Typ",
-        "Color": "Farbe",
-        "Shown in Calendar": "Im Kalender anzeigen",
-        "Icon": "Symbol"
-    },
-    "ceremonycrmmod.core.settings.models.currency": {
-        "Currency Name": "Währung",
-        "Currency Code": "Code"
-    },
-    "ceremonycrmmod.core.settings.models.leadStatus": {
-        "Name": "Titel",
-        "Order": "Reihenfolge",
-        "Color": "Farbe"
-    },
-    "ceremonycrmmod.core.settings.models.pipeline": {
-        "Name": "Titel",
-        "Description": "Beschreibung"
-    },
-    "ceremonycrmmod.core.settings.models.pipelineStep": {
-        "Name": "Titel",
-        "Order": "Reihenfolge",
-        "Company": "Farbe"
-    },
-    "ceremonycrmmod.core.settings.models.dealStatus": {
-        "Name": "Titel",
-        "Order": "Reihenfolge",
-        "Color": "Farbe"
-    },
-    "ceremonycrmmod.core.settings.models.tag": {
-        "Name": "Titel",
-        "Color": "Farbe"
-    },
     "ceremonycrmmod.core.billing.loader": {
         "Billing": "Abrechnung",
         "Billing Accounts": "Abrechnungskontos"
@@ -92,11 +37,6 @@
     "ceremonycrmmod.core.services.loader": {
         "Services": "Dienste"
     },
-    "ceremonycrmmod.core.settings.models.setting": {
-        "Key": "Parameter",
-        "Value": "Wert",
-        "Only for user": "Nur für Nutzer"
-    },
     "ceremonycrmmod.core.invoices.models.invoice": {
         "Profile": "Profil",
         "Issued by": "Ausgestellt von",
@@ -118,25 +58,6 @@
         "Unit price": "Einheitspreis",
         "Amount": "Menge"
     },
-    "ceremonycrmmod.core.settings.models.invoiceProfile": {
-        "Name": "Titel",
-        "Phone": "Telefon",
-        "E-mail": "E-Mail:",
-        "WWW": "WWW",
-        "Company ID": "Firmenkennung",
-        "Tax ID": "Steuer-IdNr.",
-        "VAT ID": "USt-IdNr.",
-        "Street, line 1": "Straße, erste Zeile",
-        "Street, line 2": "Straße, zweite Zeile",
-        "ZIP": "PLZ",
-        "City": "Stadt",
-        "Country": "Land",
-        "Bank name": "Bankname",
-        "Account number": "Kontonummer",
-        "Account IBAN": "IBAN",
-        "SWIFT": "SWIFT",
-        "Numbering pattern": "Nummerierungsmuster"
-    },
     "table": {
         "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, einen Eintrag zu löschen. Drücken Sie OK um dies zu bestätigen.",
         "Yes, delete": "Ja, löschen",
@@ -144,21 +65,6 @@
         "Delete": "Löschen",
         "Start typing to search...": "Suchen...",
         "No data.": "Keine Daten"
-    },
-    "ceremonycrmmod.core.settings.models.userRole": {
-        "Role": "Rolle",
-        "Grant all permissions": "Alle Berechtigungen erteilen"
-    },
-    "ceremonycrmmod.core.settings.models.rolePermission": {
-        "Permission": "Berechtigung",
-        "Role": "Rolle"
-    },
-    "ceremonycrmmod.core.settings.models.permission": {
-        "Permission": "Berechtigung"
-    },
-    "ceremonycrmmod.core.settings.models.contactType": {
-        "Name": "Name",
-        "Contact Types": "Kontakttyp"
     },
     "form": {
         "Add": "Hinzufügen",
@@ -178,10 +84,6 @@
     "ceremonycrmmod.sales.core.loader": {
         "Sales": "Geschäft",
         "Pipeline": "Pipeline"
-    },
-    "ceremonycrmmod.core.settings.controllers.contactTypes": {
-        "Settings": "Einstellungen",
-        "Contact Types": "Kontakttypen"
     },
     "ceremonycrmmod.core.calendar.controllers.calendar": {
         "Calendar": "Kalender"
@@ -217,10 +119,6 @@
         "Sales": "Geschäft",
         "Leads": "Leads"
     },
-    "ceremonycrmmod.core.settings.models.label": {
-        "Name": "Titel",
-        "Color": "Farbe"
-    },
     "ceremonycrmmod.sales.deals.controllers.deals": {
         "Sales": "Geschäft",
         "Deals": "Deals"
@@ -253,33 +151,5 @@
     },
     "ceremonycrmmod.core.upgrade.loader": {
         "Upgrade": "PRO"
-    },
-    "ceremonycrmmod.core.settings.controllers.dashboard": {
-        "Settings": "Einstellungen",
-        "Users": "Benutzer",
-        "User Roles": "Benutzerrollen",
-        "Profiles": "Profile",
-        "Permissions": "Berechtigungen",
-        "Tags": "Markierungen",
-        "Activity Types": "Aktivitätstypen",
-        "Contact Types": "Kontakttypen",
-        "Countries": "Länder",
-        "Currencies": "Währungen",
-        "Labels": "Labels",
-        "Lead Statuses": "Lead Zustände",
-        "Deal Statuses": "Deal Zustände",
-        "Pipelines": "Pipeline",
-        "Invoice profiles": "Abrechnungsprofile"
-    },
-    "ceremonycrmmod.core.settings.controllers.userRoles": {
-        "Settings": "Einstellungen",
-        "User Roles": "Benutzerrollen"
-    },
-    "ceremonycrmmod.core.settings.controllers.countries": {
-        "Settings": "Einstellungen",
-        "Countries": "Länder"
-    },
-    "ceremonycrmmod.core.settings.loader": {
-        "Settings": "Einstellungen"
     }
 }

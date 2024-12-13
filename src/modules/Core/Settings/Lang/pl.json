@@ -1,0 +1,135 @@
+{
+    "models.user": {
+        "First name": "Imię",
+        "Middle name": "Drugie imię",
+        "Last name": "Nazwisko",
+        "Email": "Email",
+        "Language": "Język",
+        "Active profile": "Aktywny profil",
+        "Login": "Login",
+        "Password": "Hasło",
+        "Active": "Konto jest aktywne",
+        "Time of last login": "Godzina ostatniego logowania",
+        "Last login IP": "Adres IP ostatniego logowania",
+        "Time of last access": "Ostatni czas dostępu",
+        "Last access IP": "Adres IP ostatniego dostępu"
+    },
+    "models.country": {
+        "Country Name": "Państwo",
+        "Code": "Kod"
+    },
+    "models.profile": {
+        "Company": "Firma"
+    },
+    "models.activityType": {
+        "Type Name": "Typ",
+        "Color": "Kolor",
+        "Shown in Calendar": "Zobacz w kalendarzu",
+        "Icon": "Ikona"
+    },
+    "models.currency": {
+        "Currency Name": "Waluta",
+        "Currency Code": "Kod"
+    },
+    "models.leadStatus": {
+        "Name": "Nazwa",
+        "Order": "Zamówienie",
+        "Color": "Kolor"
+    },
+    "models.pipeline": {
+        "Name": "Nazwa",
+        "Description": "Opis"
+    },
+    "models.pipelineStep": {
+        "Name": "Nazwa",
+        "Order": "Zamówienie",
+        "Company": "Kolor"
+    },
+    "models.dealStatus": {
+        "Name": "Nazwa",
+        "Order": "Zamówienie",
+        "Color": "Kolor"
+    },
+    "models.tag": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
+    },
+    "models.setting": {
+        "Key": "Parametr",
+        "Value": "Wartość",
+        "Only for user": "Tylko dla użytkownika"
+    },
+    "models.invoiceProfile": {
+        "Name": "Nazwa",
+        "Phone": "Telefon",
+        "E-mail": "Email",
+        "WWW": "WWW",
+        "Company ID": "Numer identyfikacyjny",
+        "Tax ID": "CYNA",
+        "VAT ID": "NUMER VAT",
+        "Street, line 1": "Ulica, rząd nr. 1",
+        "Street, line 2": "Ulica, rząd nr. 2",
+        "ZIP": "Kod pocztowy",
+        "City": "Miasto",
+        "Country": "Państwo",
+        "Bank name": "Názwa banku",
+        "Account number": "Numer konta",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SWIFT",
+        "Numbering pattern": "Wzór na numerację"
+    },
+    "models.userRole": {
+        "Role": "Rola",
+        "Grant all permissions": "Przyznaj wszystkie uprawnienia"
+    },
+    "models.rolePermission": {
+        "Permission": "Pozwolenie",
+        "Role": "Rola"
+    },
+    "models.permission": {
+        "Permission": "Pozwolenie"
+    },
+    "models.contactType": {
+        "Name": "Nazwa",
+        "Contact Types": "Rodzaje kontaktów"
+    },
+    "controllers.contactTypes": {
+        "Settings": "Ustawienia",
+        "Contact Types": "Rodzaje kontaktów"
+    },
+    "models.label": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
+    },
+    "controllers.dashboard": {
+        "Settings": "Ustawienia",
+        "Users": "Użytkownicy",
+        "User Roles": "Role użytkowników",
+        "Profiles": "Profile",
+        "Permissions": "Uprawnienia",
+        "Tags": "Tags",
+        "Activity Types": "Rodzaje działalności",
+        "Contact Types": "Rodzaje działalności",
+        "Countries": "Państwa",
+        "Currencies": "Waluty",
+        "Labels": "Marki",
+        "Lead Statuses": "Statusy leadów",
+        "Deal Statuses": "Statusy dealów",
+        "Pipelines": "Pipelines",
+        "Invoice profiles": "Profile rozliczeniowe"
+    },
+    "controllers.userRoles": {
+        "Settings": "Ustawienia",
+        "User Roles": "Role użytkowników"
+    },
+    "controllers.countries": {
+        "Settings": "Ustawienia",
+        "Countries": "Państwa"
+    },
+    "loader": {
+        "Settings": "Ustawienia"
+    },
+    "input": {
+        "Upload file": ""
+    }
+}

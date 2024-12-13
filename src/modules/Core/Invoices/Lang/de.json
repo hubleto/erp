@@ -1,6 +1,6 @@
 {
     "loader": {
-        "Invoices": ""
+        "Invoices": "Rechnungen"
     },
     "models.invoice": {
         "Profile": "Profil",

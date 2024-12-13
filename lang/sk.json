@@ -206,8 +206,8 @@
         "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
         "Yes, delete": "Áno, zmazať",
         "No, do not delete": "Nie, zavrieť okno",
-        "Delete": "Zmazať",
-        "Start typing to search...": "Začnite vyhľadávať..."
+        "Delete": "",
+        "Start typing to search...": ""
     },
     "mod.core.settings.models.userRole": {
         "Role": "Rola",

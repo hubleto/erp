@@ -49,7 +49,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'CeremonyCrmMod/Core/Customers/Models/Company',
+        'model' => \CeremonyCrmMod\Core\Customers\Models\Company::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
@@ -57,15 +57,15 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Contact Person',
-        'model' => 'CeremonyCrmMod/Core/Customers/Models/Person',
+        'model' => \CeremonyCrmMod\Core\Customers\Models\Person::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
-        'required' => true,
+        'required' => false,
       ],
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Origin Lead',
-        'model' => 'CeremonyCrmMod/Sales/Leads/Models/Lead',
+        'model' => \CeremonyCrmMod\Sales\Leads\Models\Lead::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -79,7 +79,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_currency' => [
         'type' => 'lookup',
         'title' => 'Currency',
-        'model' => 'CeremonyCrmMod/Core/Settings/Models/Currency',
+        'model' => \CeremonyCrmMod\Core\Settings\Models\Currency::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,
@@ -92,7 +92,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Assigned User',
-        'model' => 'CeremonyCrmMod/Core/Settings/Models/User',
+        'model' => \CeremonyCrmMod\Core\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
@@ -106,7 +106,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_pipeline' => [
         'type' => 'lookup',
         'title' => 'Pipeline',
-        'model' => 'CeremonyCrmMod/Core/Settings/Models/Pipeline',
+        'model' => \CeremonyCrmMod\Core\Settings\Models\Pipeline::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -114,7 +114,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_pipeline_step' => [
         'type' => 'lookup',
         'title' => 'Pipeline Step',
-        'model' => 'CeremonyCrmMod/Core/Settings/Models/PipelineStep',
+        'model' => \CeremonyCrmMod\Core\Settings\Models\PipelineStep::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -137,7 +137,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_deal_status' => [
         'type' => 'lookup',
         'title' => 'Status',
-        'model' => 'CeremonyCrmMod/Core/Settings/Models/DealStatus',
+        'model' => \CeremonyCrmMod\Core\Settings\Models\DealStatus::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -149,7 +149,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    if ($this->app->params["archive"] == 1) {
+    if ((bool) $this->app->params["showArchive"]) {
       $description["ui"] = [
         "title" => "Deals Archive"
       ];
@@ -234,9 +234,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
      * These are the query filters for tables with archived and non-archived deal entries.
      * The params["id"] needs to be there to properly load the data of the entry in a form.
      */
-    if (isset($this->app->params["id"])) {
-      $query = $query->where("deals.id", (int) $this->app->params["id"]);
-    } else if ($this->app->params["archive"] == 1) {
+    if ((bool) $this->app->params["showArchive"]) {
       $query = $query->where("deals.is_archived", 1);
     } else {
       $query = $query->where("deals.is_archived", 0);

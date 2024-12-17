@@ -21,10 +21,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     $this->app->router->httpGet([
       '/^services\/?$/' => Controllers\Services::class,
-      '/^services\/get-service-price\/?$/' => Controllers\GetServicePrice::class,
+      '/^services\/get-service-price\/?$/' => Controllers\Api\GetServicePrice::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 40100, 'services', $this->translate('Services'), 'fas fa-network-wired');
+    $this->app->sidebar->addLink(1, 600, 'services', $this->translate('Services'), 'fas fa-network-wired', str_starts_with($this->app->requestedUri, 'services'));
 
     // if (str_starts_with($this->app->requestedUri, 'services')) {
     //   $this->app->sidebar->addHeading1(2, 40100, $this->translate('Services'));

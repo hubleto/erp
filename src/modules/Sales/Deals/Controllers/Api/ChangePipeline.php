@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmMod\Sales\Deals\Controllers;
+namespace CeremonyCrmMod\Sales\Deals\Controllers\Api;
 
 use CeremonyCrmMod\Core\Settings\Models\Pipeline;
 use CeremonyCrmMod\Core\Settings\Models\PipelineStep;

@@ -17,7 +17,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^invoices\/?$/' => Controllers\Invoices::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 85100, 'invoices', $this->translate('Invoices'), 'fas fa-euro-sign');
+    $this->app->sidebar->addLink(1, 800, 'invoices', $this->translate('Invoices'), 'fas fa-euro-sign', str_starts_with($this->app->requestedUri, 'invoices'));
   }
 
   public function installTables()

@@ -199,7 +199,7 @@
         {% for item in viewParams.sidebar.level1Items %}
           {% if item.type == 'link' %}
             <a
-              class="btn {% if viewParams.requestedUriFirstPart == item.url|split('/')|first %} btn-primary {% endif %} "
+              class="btn {% if item.highlighted %} btn-primary {% endif %} "
               id="sidebar-item-level1-{{ i }}"
               href="{{ config.accountUrl }}/{{ item.url }}" data-pr-tooltip="{{ item.title }}"
             >

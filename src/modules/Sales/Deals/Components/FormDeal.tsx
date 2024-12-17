@@ -8,9 +8,10 @@ import request from 'adios/Request';
 import TableDealServices from './TableDealServices';
 import Lookup from 'adios/Inputs/Lookup';
 import { TabPanel, TabView } from 'primereact/tabview';
-import CalendarComponent from '../../../Core/Calendar/Components/CalendarComponent';
+import Calendar from '../../../Core/Calendar/Components/Calendar';
 import TableDealDocuments from './TableDealDocuments';
-import FormDocument, {FormDocumentProps, FormDocumentState} from '../../../Core/Documents/Components/FormDocument';
+import FormDocument, { FormDocumentProps, FormDocumentState } from '../../../Core/Documents/Components/FormDocument';
+import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import ModalSimple from 'adios/ModalSimple';
 
 export interface FormDealProps extends FormProps {
@@ -19,8 +20,10 @@ export interface FormDealProps extends FormProps {
 
 export interface FormDealState extends FormState {
   newEntryId?: number,
-  createNewDocument: boolean,
-  showDocument: number,
+  showIdDocument: number,
+  showIdActivity: number,
+  activityCalendarTimeClicked: string,
+  activityCalendarDateClicked: string,
 }
 
 export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
@@ -39,8 +42,10 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
     this.state = {
       ...this.getStateFromProps(props),
       newEntryId: this.props.newEntryId ?? -1,
-      createNewDocument: false,
-      showDocument: 0,
+      showIdDocument: 0,
+      showIdActivity: 0,
+      activityCalendarTimeClicked: '',
+      activityCalendarDateClicked: '',
     };
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
@@ -94,7 +99,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
   changeDealStatus(idStep: number, R: any) {
     if (idStep == R.id_pipeline_step) return;
     request.get(
-      'sales/change-pipeline-step',
+      'sales/deals/change-pipeline-step',
       {
         idStep: idStep,
         idPipeline: R.id_pipeline,
@@ -130,7 +135,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
 
   pipelineChange(newRecord) {
     request.get(
-      'sales/change-pipeline',
+      'sales/deals/change-pipeline',
       {
         idPipeline: newRecord.id_pipeline
       },
@@ -172,7 +177,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
     return (
       <>
         <TabView>
-          <TabPanel header="Basic Information">
+          <TabPanel header="Deal">
             <div className='grid grid-cols-2 gap-1' style=
               {{gridTemplateAreas:`
                 'info info'
@@ -181,7 +186,6 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 'history history'
               `}}>
                 <div className='card mt-2' style={{gridArea: 'info'}}>
-                  <div className='card-header'>Deal Information</div>
                   <div className='card-body flex flex-row gap-2'>
                     <div className='grow'>
                       {this.inputWrapper('title', {readonly: R.is_archived})}
@@ -200,7 +204,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           }}
                         ></Lookup>
                       </FormInput>
-                      <FormInput title={"Contact Person"} required={true}>
+                      <FormInput title={"Contact Person"}>
                         <Lookup {...this.getDefaultInputProps()}
                           model='CeremonyCrmMod/Core/Customers/Models/Person'
                           customEndpointParams={{id_company: R.id_company}}
@@ -303,7 +307,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         <div className='card-header'>Services</div>
                         <div className='card-body flex flex-col gap-2'>
                           <TableDealServices
-                            uid={this.props.uid + "_table_lead_services"}
+                            uid={this.props.uid + "_table_deal_services"}
                             data={{ data: R.SERVICES }}
                             dealTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
                             descriptionSource='props'
@@ -402,47 +406,59 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                           ) : null}
                       </div>
                     : null}
-                    <div className='card mt-2' style={{gridArea: 'history'}}>
-                      <div className='card-header'>Deal History</div>
-                      <div className='card-body min-h-[100px] flex justify-center' style={{flexDirection: "column", gap: "4px"}}>
-                        {R.HISTORY.length > 0 ?
-                          R.HISTORY.map((history, key) => (
-                            <div className='w-full flex flex-row justify-between'>
-                              <div className='w-1/3'>
-                                  <p className='font-bold self-center text-sm text-left'>
-                                    {history.description}
-                                  </p>
-                                </div>
-                              <div className='w-1/3' style={{alignContent: "center"}}>
-                                <hr style={{width: "100%", alignSelf: "center"}}/>
-                              </div>
-                              <div className='w-1/3 justify-center'>
-                                <p className='self-center text-sm text-center'>
-                                  {history.change_date}
-                                </p>
-                              </div>
-                            </div>
-                          ))
-                          :
-                          <p className='text-gray-400'>Deal has no history</p>
-                        }
-                      </div>
-                    </div>
                   </>
 
                 : null}
             </div>
           </TabPanel>
           {showAdditional ?
-            <TabPanel header="Activities">
-              <CalendarComponent
-                onCreateCallback={() => this.onCreateActivityCallback()}
+            <TabPanel header={globalThis.app.translate('Calendar')}>
+              <Calendar
+                onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
-                creatingForModel="Deal"
-                creatingForId={R.id}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                url={`${window.ConfigEnv.rewriteBase}/customers/activities/get?creatingForModel=Deal&creatingForId=${R.id}`}
-              ></CalendarComponent>
+                eventsEndpoint={globalThis.app.config.rewriteBase + '/sales/deals/get-calendar-events?idDeal=' + R.id}
+                onDateClick={(date, time, info) => {
+                  this.setState({
+                    activityCalendarDateClicked: date,
+                    activityCalendarTimeClicked: time,
+                    showIdActivity: -1,
+                  } as FormDealState);
+                }}
+                onEventClick={(info) => {
+                  this.setState({
+                    showIdActivity: parseInt(info.event.id),
+                  } as FormDealState);
+                }}
+              ></Calendar>
+              {this.state.showIdActivity == 0 ? <></> :
+                <ModalSimple
+                  uid='activity_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormActivity
+                    id={this.state.showIdActivity}
+                    isInlineEditing={true}
+                    description={{
+                      defaultValues: {
+                        id_deal: R.id,
+                        date_start: this.state.activityCalendarDateClicked,
+                        time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
+                        date_end: this.state.activityCalendarDateClicked,
+                      }
+                    }}
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}
+                    onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+                      if (saveResponse.status == "success") {
+                        this.setState({ showIdActivity: 0 } as FormDealState);
+                      }
+                    }}
+                  ></FormActivity>
+                </ModalSimple>
+              }
             </TabPanel>
           : null}
           {showAdditional ? (
@@ -470,18 +486,18 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 //isInlineEditing={this.state.isInlineEditing}
                 readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                 onRowClick={(table: TableDealDocuments, row: any) => {
-                  this.setState({showDocument: row.id_document} as FormDealState);
+                  this.setState({showIdDocument: row.id_document} as FormDealState);
                 }}
               />
               {this.state.isInlineEditing  && !R.is_archived ?
                 <a
                   role="button"
-                  onClick={() => this.setState({createNewDocument: true} as FormDealState)}
+                  onClick={() => this.setState({showIdDocument: -1} as FormDealState)}
                 >
                   + Add Document
                 </a>
               : null}
-              {this.state.createNewDocument == true ?
+              {this.state.showIdDocument < 0 ?
                 <ModalSimple
                   uid='document_form'
                   isOpen={true}
@@ -501,25 +517,25 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     }}
                     showInModal={true}
                     showInModalSimple={true}
-                    onClose={() => { this.setState({ createNewDocument: false } as FormDealState) }}
+                    onClose={() => { this.setState({ showIdDocument: 0 } as FormDealState) }}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({ createNewDocument: false } as FormDealState)
+                        this.setState({ showIdDocument: 0 } as FormDealState)
                       }
                     }}
                   ></FormDocument>
                 </ModalSimple>
               : null}
-              {this.state.showDocument > 0 ?
+              {this.state.showIdDocument > 0 ?
                 <ModalSimple
                   uid='document_form'
                   isOpen={true}
                   type='right'
                 >
                   <FormDocument
-                    id={this.state.showDocument}
-                    onClose={() => this.setState({showDocument: 0} as FormDealState)}
+                    id={this.state.showIdDocument}
+                    onClose={() => this.setState({showIdDocument: 0} as FormDealState)}
                     creatingForModel="Deal"
                     showInModal={true}
                     showInModalSimple={true}
@@ -527,13 +543,13 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({ showDocument: 0 } as FormCompanyState)
+                        this.setState({ showIdDocument: 0 } as FormDealState)
                       }
                     }}
                     onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({ showDocument: 0 } as FormCompanyState)
+                        this.setState({ showIdDocument: 0 } as FormDealState)
                       }
                     }}
                   />
@@ -544,6 +560,31 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
           <TabPanel header="Notes">
             {this.inputWrapper('note', {readonly: R.is_archived})}
           </TabPanel>
+          {showAdditional ?
+            <TabPanel header={globalThis.app.translate('History')}>
+              {R.HISTORY.length > 0 ?
+                R.HISTORY.map((history, key) => (
+                  <div className='w-full flex flex-row justify-between'>
+                    <div className='w-1/3'>
+                        <p className='font-bold self-center text-sm text-left'>
+                          {history.description}
+                        </p>
+                      </div>
+                    <div className='w-1/3' style={{alignContent: "center"}}>
+                      <hr style={{width: "100%", alignSelf: "center"}}/>
+                    </div>
+                    <div className='w-1/3 justify-center'>
+                      <p className='self-center text-sm text-center'>
+                        {history.change_date}
+                      </p>
+                    </div>
+                  </div>
+                ))
+                :
+                <p className='text-gray-400'>Deal has no history</p>
+              }
+            </TabPanel>
+          : null}
         </TabView>
       </>
     );

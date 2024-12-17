@@ -30,15 +30,15 @@ class Activity extends \CeremonyCrmApp\Core\Model
     return parent::columns(array_merge($columns, [
       'id_activity_type' => [
         'type' => 'lookup',
-        'title' => 'Type',
-        'model' => 'CeremonyCrmMod/Core/Settings/Models/ActivityType',
+        'title' => $this->translate('Activity type'),
+        'model' => \CeremonyCrmMod\Core\Settings\Models\ActivityType::class,
         'foreignKeyOnUpdate' => 'SET NULL',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,
       ],
       'subject' => [
         'type' => 'varchar',
-        'title' => 'Activity subject',
+        'title' => $this->translate('Subject'),
         'required' => true,
       ],
       'date_start' => [
@@ -48,7 +48,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
       ],
       'time_start' => [
         'type' => 'time',
-        'title' => 'Time Start',
+        'title' => 'Start Time',
         'required' => false,
       ],
       'date_end' => [
@@ -74,7 +74,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Created by',
-        'model' => 'CeremonyCrmMod/Core/Settings/Models/User',
+        'model' => \CeremonyCrmMod\Core\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => false,
@@ -103,6 +103,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
       "USER",
       "ACTIVITY_TYPE"
     ];
+    $description['ui']['addButtonText'] = $this->translate('Add activity');
     return $description;
   }
 

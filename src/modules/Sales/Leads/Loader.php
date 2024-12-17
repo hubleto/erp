@@ -15,14 +15,19 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     $this->app->router->httpGet([
       '/^sales\/leads\/?$/' => Controllers\Leads::class,
-      '/^sales\/convert-lead\/?$/' => Controllers\ConvertLead::class,
       '/^sales\/leads\/archive\/?$/' => Controllers\LeadsArchive::class,
+      '/^sales\/leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
+      '/^sales\/leads\/convert-to-deal\/?$/' => Controllers\Api\ConvertLead::class,
     ]);
 
-    if (str_starts_with($this->app->requestedUri, 'sales')) {
-      $this->app->sidebar->addLink(2, 10202, 'sales/leads', $this->translate('Leads'), 'fas fa-arrows-turn-to-dots');
-      $this->app->sidebar->addLink(2, 10204, 'sales/leads/archive', $this->translate('Leads Archive'), 'fas fa-box-archive');
-    }
+    $this->app->sidebar->addLink(1, 100, 'sales/leads', $this->translate('Leads'), 'fas fa-people-arrows', str_starts_with($this->app->requestedUri, 'sales/leads'));
+
+    $this->app->addCalendar(Calendar::class);
+
+    // if (str_starts_with($this->app->requestedUri, 'sales')) {
+    //   $this->app->sidebar->addLink(2, 10202, 'sales/leads', $this->translate('Leads'), 'fas fa-arrows-turn-to-dots');
+    //   $this->app->sidebar->addLink(2, 10204, 'sales/leads/archive', $this->translate('Leads Archive'), 'fas fa-box-archive');
+    // }
   }
 
   public function installTables()

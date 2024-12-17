@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmMod\Core\Customers\Controllers;
+namespace CeremonyCrmMod\Core\Customers\Controllers\Api;
 
 use CeremonyCrmMod\Core\Customers\Models\Company;
 use CeremonyCrmMod\Core\Customers\Models\Person;

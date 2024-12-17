@@ -60,7 +60,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'price' => [
         'type' => 'float',
         'title' => 'Price',
-        'required' => true,
+        // 'required' => true,
       ],
       'id_currency' => [
         'type' => 'lookup',
@@ -68,7 +68,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
         'model' => 'CeremonyCrmMod/Core/Settings/Models/Currency',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
-        'required' => true,
+        // 'required' => true,
       ],
       'date_expected_close' => [
         'type' => 'date',
@@ -119,7 +119,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    if ($this->app->params["archive"] == 1) {
+    if ((bool) $this->app->params["showArchive"]) {
       $description["ui"] = [
         "title" => "Leads Archive"
       ];
@@ -167,6 +167,9 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'ACTIVITIES',
       'DOCUMENTS',
     ];
+
+    $description['ui']['addButtonText'] = $this->translate('Add lead');
+
     return $description;
   }
 
@@ -187,21 +190,16 @@ class Lead extends \CeremonyCrmApp\Core\Model
     ];
     $query = parent::prepareLoadRecordQuery($relations, 4);
 
-    /**
-     * These are the query filters for tables with archived and non-archived lead entries.
-     * The params["id"] needs to be there to properly load the data of the entry in a form.
-     */
-    if (isset($this->app->params["id"])) {
-      $query = $query->where("leads.id", (int) $this->app->params["id"]);
-    } else if ($this->app->params["archive"] == 1) {
+    if ((bool) $this->app->params["showArchive"]) {
       $query = $query->where("leads.is_archived", 1);
     } else {
       $query = $query->where("leads.is_archived", 0);
     }
+
     return $query;
   }
 
-  public function getOwnership($record) {
+  public function checkOwnership($record) {
     if ($record["id_company"] && !isset($record["checkOwnership"])) {
       $mCompany = new Company($this->app);
       $company = $mCompany->eloquent
@@ -217,17 +215,17 @@ class Lead extends \CeremonyCrmApp\Core\Model
 
   public function onBeforeCreate(array $record): array
   {
-    $this->getOwnership($record);
+    $this->checkOwnership($record);
     return $record;
   }
 
   public function onBeforeUpdate(array $record): array
   {
-    $this->getOwnership($record);
+    $this->checkOwnership($record);
 
     $lead = $this->eloquent->find($record["id"])->toArray();
     $mLeadHistory = new LeadHistory($this->app);
-    $mLeadStatus= new LeadStatus($this->app);
+    $mLeadStatus = new LeadStatus($this->app);
 
     if ($lead["id_lead_status"] != (int) $record["id_lead_status"]) {
       $status = $mLeadStatus->eloquent->find((int) $record["id_lead_status"])->name;

@@ -15,15 +15,20 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     $this->app->router->httpGet([
       '/^sales\/deals\/?$/' => Controllers\Deals::class,
-      '/^sales\/change-pipeline\/?$/' => Controllers\ChangePipeline::class,
-      '/^sales\/change-pipeline-step\/?$/' => Controllers\ChangePipelineStep::class,
+      '/^sales\/deals\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^sales\/deals\/archive\/?$/' => Controllers\DealsArchive::class,
+      '/^sales\/deals\/change-pipeline\/?$/' => Controllers\Api\ChangePipeline::class,
+      '/^sales\/deals\/change-pipeline-step\/?$/' => Controllers\Api\ChangePipelineStep::class,
     ]);
 
-    if (str_starts_with($this->app->requestedUri, 'sales')) {
-      $this->app->sidebar->addLink(2, 10203, 'sales/deals', $this->translate('Deals'), 'fa-regular fa-handshake');
-      $this->app->sidebar->addLink(2, 10205, 'sales/deals/archive', $this->translate('Deals Archive'), 'fas fa-box-archive');
-    }
+    $this->app->sidebar->addLink(1, 200, 'sales/deals', $this->translate('Deals'), 'fas fa-handshake', str_starts_with($this->app->requestedUri, 'sales/deals'));
+
+    $this->app->addCalendar(Calendar::class);
+
+    // if (str_starts_with($this->app->requestedUri, 'sales')) {
+    //   $this->app->sidebar->addLink(2, 10203, 'sales/deals', $this->translate('Deals'), 'fa-regular fa-handshake');
+    //   $this->app->sidebar->addLink(2, 10205, 'sales/deals/archive', $this->translate('Deals Archive'), 'fas fa-box-archive');
+    // }
   }
 
   public function installTables()

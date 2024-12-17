@@ -4,11 +4,11 @@ import FormLead from './FormLead';
 import InputTags2 from 'adios/Inputs/Tags2';
 
 interface TableLeadsProps extends TableProps {
-  archive?: any
+  showArchive?: boolean,
 }
 
 interface TableLeadsState extends TableState {
-  archive: any
+  showArchive: boolean,
 }
 
 export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> {
@@ -36,21 +36,41 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   getStateFromProps(props: TableLeadsProps) {
     return {
       ...super.getStateFromProps(props),
-      archive: props.archive ?? false,
+      showArchive: props.showArchive ?? false,
     }
+  }
+
+  getFormModalProps(): any {
+    let params = super.getFormModalProps();
+    params.type = 'right wide';
+    return params;
   }
 
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      archive: this.state.archive,
+      showArchive: this.state.showArchive ? 1 : 0,
     }
   }
 
-  renderCell(columnName: string, column: any, data: any, options: any) {
+  renderHeaderRight(): Array<JSX.Element> {
+    let elements: Array<JSX.Element> = super.renderHeaderRight();
 
+    if (!this.state.showArchive) {
+      elements.push(
+        <a className="btn btn-transparent" href="leads/archive">
+          <span className="icon"><i className="fas fa-box-archive"></i></span>
+          <span className="text">Archive</span>
+        </a>
+      );
+    }
+
+    return elements;
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "id_lead_status") {
-      if ( data.STATUS && data.STATUS.color) {
+      if (data.STATUS && data.STATUS.color) {
         return (
           <div className='flex flex-row '>
             <div style={{color: data.STATUS.color, borderColor: data.STATUS.color}} className='border rounded px-1'>{data.STATUS.name}</div>
@@ -77,7 +97,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   }
 
   renderForm(): JSX.Element {
-    let formDescription = this.getFormProps();
-    return <FormLead {...formDescription}/>;
+    let formProps = this.getFormProps();
+    return <FormLead {...formProps}/>;
   }
 }

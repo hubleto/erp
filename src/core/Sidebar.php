@@ -17,19 +17,20 @@ class Sidebar {
     $this->items[2] = [];
   }
 
-  public function addItem(int $level, int $key, string $type, string $url, string $title, string $icon) {
+  public function addItem(int $level, int $key, string $type, string $url, string $title, string $icon, $highlighted = false) {
     $this->items[$level][$key] = [
       'type' => $type,
       'url' => $url,
       'title' => $title,
-      'icon' => $icon
+      'icon' => $icon,
+      'highlighted' => $highlighted,
     ];
 
     ksort($this->items[$level]);
   }
 
-  public function addLink(int $level, int $key, string $url, string $title, string $icon) {
-    $this->addItem($level, $key, self::ITEM_LINK, $url, $title, $icon);
+  public function addLink(int $level, int $key, string $url, string $title, string $icon, $highlighted = false) {
+    $this->addItem($level, $key, self::ITEM_LINK, $url, $title, $icon, $highlighted);
   }
 
   public function addDivider(int $level, int $key) {

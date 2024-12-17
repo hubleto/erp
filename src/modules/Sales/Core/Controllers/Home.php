@@ -79,7 +79,7 @@ class Home extends \CeremonyCrmApp\Core\Controller {
     ;
 
     foreach ($deals as $key => $deal) {
-      $label = $mLabel->eloquent->find($deal["LABELS"][0]["id_label"])->toArray();
+      $label = $mLabel->eloquent->find($deal["LABELS"][0]["id_label"])?->toArray();
       $deals[$key]["LABEL"] = $label;
       unset($deals[$key]["LABELS"]);
     }

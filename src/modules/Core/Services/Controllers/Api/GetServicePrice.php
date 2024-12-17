@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmMod\Core\Services\Controllers;
+namespace CeremonyCrmMod\Core\Services\Controllers\Api;
 
 use CeremonyCrmMod\Core\Services\Models\Service;
 use Exception;

@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Core\Customers\Controllers;
+namespace CeremonyCrmMod\Core\Customers\Controllers\Api;
 
-class ActivityApi extends \CeremonyCrmApp\Core\Controller {
+class Activity extends \CeremonyCrmApp\Core\Controller {
 
   public function renderJson(): ?array {
 
@@ -16,12 +16,8 @@ class ActivityApi extends \CeremonyCrmApp\Core\Controller {
       ->where("date_start", ">=", $dateStart)
       ->where("date_start", "<=", $dateEnd)
       ->where("activities.id_user", $this->app->auth->user["id"])
+      ->where("activity_types.calendar_visibility", 1)
     ;
-
-    //ak je hlavný kalendár
-    if (!isset($this->app->params["creatingForModel"])) {
-      $aktivity->where("activity_types.calendar_visibility", 1);
-    }
 
     $aktivity = $aktivity->get();
     $transformacia = [];

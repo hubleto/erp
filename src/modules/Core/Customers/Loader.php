@@ -20,17 +20,17 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^customers\/address\/?$/' => Controllers\Addresses::class,
       '/^customers\/contacts\/?$/' => Controllers\Contacts::class,
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
-      '/^customers\/activities\/get\/?$/' => Controllers\ActivityApi::class,
-      '/^customers\/get-company\/?$/' => Controllers\GetCompany::class,
-      '/^customers\/get-company-contacts\/?$/' => Controllers\GetCompanyContacts::class,
+      '/^customers\/activities\/get\/?$/' => Controllers\Api\Activity::class,
+      '/^customers\/get-company\/?$/' => Controllers\Api\GetCompany::class,
+      '/^customers\/get-company-contacts\/?$/' => Controllers\Api\GetCompanyContacts::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 10100, 'customers/companies', $this->translate('Customers'), 'fas fa-address-card');
+    $this->app->sidebar->addLink(1, 40, 'customers/companies', $this->translate('Customers'), 'fas fa-address-card', str_starts_with($this->app->requestedUri, 'customers'));
 
     if (str_starts_with($this->app->requestedUri, 'customers')) {
-      $this->app->sidebar->addHeading1(2, 10200, $this->translate('Customers'));
-      $this->app->sidebar->addLink(2, 10201, 'customers/companies', $this->translate('Companies'), 'fas fa-building');
-      $this->app->sidebar->addLink(2, 10202, 'customers/persons', $this->translate('Contact Persons'), 'fas fa-users');
+      $this->app->sidebar->addHeading1(2, 310, $this->translate('Customers'));
+      $this->app->sidebar->addLink(2, 320, 'customers/companies', $this->translate('Companies'), 'fas fa-building');
+      $this->app->sidebar->addLink(2, 330, 'customers/persons', $this->translate('Contact Persons'), 'fas fa-users');
       //$this->app->sidebar->addLink(2, 10203, 'customers/activities', $this->translate('Activities'), 'fas fa-users');
     }
   }

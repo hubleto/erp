@@ -38,7 +38,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 99100, 'settings', $this->translate('Settings'), 'fas fa-cog');
+    $this->app->sidebar->addLink(1, 900, 'settings', $this->translate('Settings'), 'fas fa-cog', str_starts_with($this->app->requestedUri, 'settings'));
 
     // if (str_starts_with($this->app->requestedUri, 'settings')) {
     //   $this->app->sidebar->addHeading1(2, 99200, $this->translate('Settings'));
@@ -218,54 +218,19 @@ class Loader extends \CeremonyCrmApp\Core\Module
       'id_pipeline' => 2,
     ]);
 
-    $mActivityTypes->eloquent->create([
-      'name' => 'Meeting',
-      'color' => '#ff5733',
-      'calendar_visibility' => true,
-    ]);
-    $mActivityTypes->eloquent->create([
-      'name' => 'Bussiness Trip',
-      'color' => '#0070ff',
-      'calendar_visibility' => true,
-    ]);
-    $mActivityTypes->eloquent->create([
-      'name' => 'Call',
-      'color' => '#16fa07',
-      'calendar_visibility' => false,
-    ]);
-    $mActivityTypes->eloquent->create([
-      'name' => 'Email',
-      'color' => '#d4ff00',
-      'calendar_visibility' => false,
-    ]);
-    $mActivityTypes->eloquent->create([
-      'name' => 'Other',
-      'color' => '#333333',
-      'calendar_visibility' => true,
-    ]);
+    $mActivityTypes->eloquent->create([ 'name' => 'Meeting', 'color' => '#607d8b', 'calendar_visibility' => true ]);
+    $mActivityTypes->eloquent->create([ 'name' => 'Bussiness Trip', 'color' => '#673ab7', 'calendar_visibility' => true ]);
+    $mActivityTypes->eloquent->create([ 'name' => 'Call', 'color' => '#348789', 'calendar_visibility' => true ]);
+    $mActivityTypes->eloquent->create([ 'name' => 'Email', 'color' => '#3f51b5', 'calendar_visibility' => true ]);
+    $mActivityTypes->eloquent->create([ 'name' => 'Other', 'color' => '#91133e', 'calendar_visibility' => true ]);
 
-    $mContactType->eloquent->create([
-      'name' => 'Work'
-    ]);
-    $mContactType->eloquent->create([
-      'name' => 'Home'
-    ]);
-    $mContactType->eloquent->create([
-      'name' => 'Other'
-    ]);
+    $mContactType->eloquent->create([ 'name' => 'Work' ]);
+    $mContactType->eloquent->create([ 'name' => 'Home' ]);
+    $mContactType->eloquent->create([ 'name' => 'Other' ]);
 
-    $mTag->eloquent->create([
-      'name' => "Tag 1",
-      'color' => '#ff5733',
-    ]);
-    $mTag->eloquent->create([
-      'name' => "Tag 2",
-      'color' => '#0070ff',
-    ]);
-    $mTag->eloquent->create([
-      'name' => "Tag 3",
-      'color' => '#16fa07',
-    ]);
+    $mTag->eloquent->create([ 'name' => "Tag 1", 'color' => '#ff5733' ]);
+    $mTag->eloquent->create([ 'name' => "Tag 2", 'color' => '#0070ff' ]);
+    $mTag->eloquent->create([ 'name' => "Tag 3", 'color' => '#16fa07' ]);
 
 
 

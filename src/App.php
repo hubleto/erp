@@ -27,12 +27,18 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   protected array $modules = [];
   public \CeremonyCrmApp\Core\Sidebar $sidebar;
 
+  public string $requestedUriFirstPart = '';
   protected array $extensions = [];
   public bool $isPro = false;
+  private array $calendars;
 
   public function __construct($config = NULL, $mode = NULL)
   {
     parent::__construct($config, $mode);
+
+    $tmp =  strpos($this->requestedUri, '/');
+    if ($tmp === false) $this->requestedUriFirstPart = $this->requestedUri;
+    else $this->requestedUriFirstPart = substr($this->requestedUri, 0, strpos($this->requestedUri, '/'));
 
     $this->config['language'] = $this->auth->user['language'] ?? 'en';
 
@@ -76,7 +82,6 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     // var_dump($this->extractRouteFromRequest());
     // var_dump($this->router->routing);
     // var_dump($this->router->applyRouting($this->extractRouteFromRequest(), []));exit;
-
   }
 
   public function initTwig()
@@ -137,6 +142,21 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   public function getExtensions(): array
   {
     return $this->extensions;
+  }
+
+  public function addCalendar(string $calendarClass)
+  {
+    $this->calendars[$calendarClass] = new $calendarClass($this);
+  }
+
+  public function getCalendars(): array
+  {
+    return $this->calendars;
+  }
+
+  public function getCalendar(string $calendarClass): \CeremonyCrmApp\Core\Calendar
+  {
+    return $this->calendars[$calendarClass];
   }
 
 }

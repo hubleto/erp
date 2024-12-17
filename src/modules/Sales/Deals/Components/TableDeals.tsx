@@ -3,11 +3,11 @@ import Table, { TableProps, TableState } from 'adios/Table';
 import FormDeal from './FormDeal';
 
 interface TableDealsProps extends TableProps {
-  archive?: any
+  showArchive?: boolean,
 }
 
 interface TableDealsState extends TableState {
-  archive: any
+  showArchive: boolean,
 }
 
 export default class TableDeals extends Table<TableDealsProps, TableDealsState> {
@@ -35,15 +35,36 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
   getStateFromProps(props: TableDealsProps) {
     return {
       ...super.getStateFromProps(props),
-      archive: props.archive ?? false,
+      showArchive: props.showArchive ?? false,
     }
+  }
+
+  getFormModalProps(): any {
+    let params = super.getFormModalProps();
+    params.type = 'right wide';
+    return params;
   }
 
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      archive: this.state.archive,
+      showArchive: this.state.showArchive ? 1 : 0,
     }
+  }
+
+  renderHeaderRight(): Array<JSX.Element> {
+    let elements: Array<JSX.Element> = super.renderHeaderRight();
+
+    if (!this.state.showArchive) {
+      elements.push(
+        <a className="btn btn-transparent" href="deals/archive">
+          <span className="icon"><i className="fas fa-box-archive"></i></span>
+          <span className="text">Archive</span>
+        </a>
+      );
+    }
+
+    return elements;
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
@@ -67,7 +88,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
   }
 
   renderForm(): JSX.Element {
-    let formDescription = this.getFormProps();
-    return <FormDeal {...formDescription}/>;
+    let formProps = this.getFormProps();
+    return <FormDeal {...formProps}/>;
   }
 }

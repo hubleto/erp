@@ -79,7 +79,6 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
     return params;
   }
 
-
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),

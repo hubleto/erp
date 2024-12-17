@@ -24,7 +24,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     ]);
 
     if (!$this->app->isPro) {
-      $this->app->sidebar->addLink(1, 100100, 'upgrade', $this->translate('Upgrade'), 'fas fa-trophy');
+      $this->app->sidebar->addLink(1, 1000, 'upgrade', $this->translate('Upgrade'), 'fas fa-trophy', str_starts_with($this->app->requestedUri, 'upgrade'));
     }
   }
 

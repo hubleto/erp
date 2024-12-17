@@ -17,5 +17,5 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^$/' => Controllers\Home::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 0, '', $this->translate('Home'), 'fas fa-home');
+    $this->app->sidebar->addLink(1, 0, '', $this->translate('Home'), 'fas fa-home', $this->app->requestedUri == '');
   }}

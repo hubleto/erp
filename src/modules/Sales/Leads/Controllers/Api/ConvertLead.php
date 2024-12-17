@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmMod\Sales\Leads\Controllers;
+namespace CeremonyCrmMod\Sales\Leads\Controllers\Api;
 
 use CeremonyCrmMod\Core\Settings\Models\Setting;
 use CeremonyCrmMod\Sales\Deals\Models\Deal;

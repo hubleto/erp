@@ -18,7 +18,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^documents\/?$/' => Controllers\Documents::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 70100, 'documents', $this->translate('Documents'), 'fa-regular fa-file');
+    $this->app->sidebar->addLink(1, 700, 'documents', $this->translate('Documents'), 'fa-regular fa-file', str_starts_with($this->app->requestedUri, 'documents'));
   }
 
   public function installTables()

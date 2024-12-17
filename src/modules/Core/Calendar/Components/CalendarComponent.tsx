@@ -150,10 +150,11 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
                 defaultValues: {
                   date_start: this.state.newDate,
                   time_start: this.state.newTime == "00:00:00" ? null : this.state.newTime,
-                  creatingForModel:this.props.creatingForModel,
-                  creatingForId:this.props.creatingForId,
+                  date_end: this.state.newDate,
                 }
               }}
+              creatingForModel={this.props.creatingForModel}
+              creatingForId={this.props.creatingForId}
               showInModal={true}
               showInModalSimple={true}
               onClose={() => { this.setState({ newDate: "", newTime: "" }) }}

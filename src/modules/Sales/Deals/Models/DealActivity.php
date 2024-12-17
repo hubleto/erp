@@ -11,7 +11,6 @@ class DealActivity extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_deal', 'id' ],
-    'ACTIVITY' => [ self::BELONGS_TO, Activity::class, 'id_activity', 'id' ],
   ];
 
   public function columns(array $columns = []): array
@@ -25,13 +24,56 @@ class DealActivity extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
       ],
-      'id_activity' => [
+      'id_activity_type' => [
         'type' => 'lookup',
-        'title' => 'Activity',
-        'model' => 'CeremonyCrmMod/Core/Customers/Models/Activity',
+        'title' => $this->translate('Activity type'),
+        'model' => \CeremonyCrmMod\Core\Settings\Models\ActivityType::class,
+        'foreignKeyOnUpdate' => 'SET NULL',
+        'foreignKeyOnDelete' => 'SET NULL',
+        'required' => true,
+      ],
+      'subject' => [
+        'type' => 'varchar',
+        'title' => $this->translate('Subject'),
+        'required' => true,
+      ],
+      'date_start' => [
+        'type' => 'date',
+        'title' => 'Start Date',
+        'required' => true,
+      ],
+      'time_start' => [
+        'type' => 'time',
+        'title' => 'Start Time',
+        'required' => false,
+      ],
+      'date_end' => [
+        'type' => 'date',
+        'title' => 'End Date',
+        'required' => false,
+      ],
+      'time_end' => [
+        'type' => 'time',
+        'title' => 'End Time',
+        'required' => false,
+      ],
+      'all_day' => [
+        'type' => 'boolean',
+        'title' => 'All day',
+        'required' => false,
+      ],
+      'completed' => [
+        'type' => 'boolean',
+        'title' => 'Completed',
+        'required' => false,
+      ],
+      'id_user' => [
+        'type' => 'lookup',
+        'title' => 'Created by',
+        'model' => \CeremonyCrmMod\Core\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
+        'required' => false,
       ],
     ]));
   }

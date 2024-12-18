@@ -31,7 +31,7 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
     if (getUrlParam('recordId') > 0) {
       return {
         ...super.getFormModalProps(),
-        type: 'right'
+        type: 'right wide'
       }
     } else return {...super.getFormModalProps()}
   }

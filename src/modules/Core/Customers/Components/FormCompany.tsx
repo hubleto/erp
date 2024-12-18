@@ -191,7 +191,7 @@ export default class FormCompany<P, S> extends Form<
     return (
       <>
         <TabView>
-          <TabPanel header={globalThis.app.translate('Basic Information')}>
+          <TabPanel header={globalThis.app.translate('Company')}>
             <div
               className="grid grid-cols-2 gap-1"
               style={{
@@ -203,7 +203,6 @@ export default class FormCompany<P, S> extends Form<
               }}
             >
               <div className="card" style={{ gridArea: "company" }}>
-                <div className="card-header">{globalThis.app.translate('Company Information')}</div>
                 <div className="card-body flex flex-row gap-2">
                   <div className="w-1/2">
                     {this.inputWrapper("name")}
@@ -256,6 +255,9 @@ export default class FormCompany<P, S> extends Form<
                         canUpdate: true,
                         canDelete: true,
                         canRead: true,
+                      },
+                      ui: {
+                        addButtonText: this.translate('Add contact person'),
                       },
                       columns: {
                         first_name: { type: "varchar", title: globalThis.app.translate("First name") },
@@ -312,7 +314,7 @@ export default class FormCompany<P, S> extends Form<
             </div>
           </TabPanel>
           {showAdditional ? (
-            <TabPanel header={globalThis.app.translate('Activities')}>
+            <TabPanel header={globalThis.app.translate('Calendar')}>
               <CalendarComponent
                 creatingForModel="Company"
                 creatingForId={R.id}
@@ -342,7 +344,7 @@ export default class FormCompany<P, S> extends Form<
                   },
                 }}
                 isUsedAsInput={false}
-                readonly={true}
+                readonly={false}
                 onRowClick={(table: TableLeads, row: any) => {
                   table.openForm(row.id);
                 }}

@@ -32,7 +32,7 @@ class Activity extends \CeremonyCrmApp\Core\Model
         'model' => \CeremonyCrmMod\Core\Settings\Models\ActivityType::class,
         'foreignKeyOnUpdate' => 'SET NULL',
         'foreignKeyOnDelete' => 'SET NULL',
-        'required' => true,
+        'required' => false,
       ],
       'subject' => [
         'type' => 'varchar',

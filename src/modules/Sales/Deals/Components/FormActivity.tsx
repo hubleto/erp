@@ -58,8 +58,8 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
     return (
       <>
         {this.inputWrapper('id_deal')}
-        {this.inputWrapper('id_activity_type')}
         {this.inputWrapper('subject')}
+        {this.inputWrapper('id_activity_type')}
         {showAdditional ? this.inputWrapper('completed') : null}
         {this.inputWrapper('date_start')}
         {this.inputWrapper('time_start')}

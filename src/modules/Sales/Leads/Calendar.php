@@ -15,7 +15,7 @@ class Calendar extends \CeremonyCrmApp\Core\Calendar {
 
     $activities = $mLeadActivity->eloquent
       ->select("lead_activities.*", "activity_types.color", "activity_types.name as activity_type")
-      ->join("activity_types", "activity_types.id", "=", "lead_activities.id_activity_type")
+      ->leftJoin("activity_types", "activity_types.id", "=", "lead_activities.id_activity_type")
       ->where("date_start", ">=", $dateStart)
       ->where("date_start", "<=", $dateEnd)
     ;

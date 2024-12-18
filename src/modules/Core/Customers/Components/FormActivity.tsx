@@ -87,8 +87,8 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
 
     return (
       <>
-        {this.inputWrapper('id_activity_type')}
         {this.inputWrapper('subject')}
+        {this.inputWrapper('id_activity_type')}
         {showAdditional ? this.inputWrapper('completed') : null}
         {(this.props.creatingForModel == "Lead" || this.props.creatingForModel == "Deal" || !this.props.creatingForModel) && showAdditional && companyEntryType ?
           <>

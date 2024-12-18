@@ -17,12 +17,6 @@ class Activity extends \ADIOS\Core\Model\Eloquent
   public function COMPANY_ACTIVITY(): HasOne {
     return $this->hasOne(CompanyActivity::class, 'id_activity', 'id');
   }
-  public function LEAD_ACTIVITY(): HasOne {
-    return $this->hasOne(LeadActivity::class, 'id_activity', 'id');
-  }
-  public function DEAL_ACTIVITY(): HasOne {
-    return $this->hasOne(DealActivity::class, 'id_activity', 'id');
-  }
   public function USER(): BelongsTo {
     return $this->belongsTo(User::class, 'id_user', 'id');
   }

@@ -19,8 +19,6 @@ class Activity extends \CeremonyCrmApp\Core\Model
 
   public array $relations = [
     'COMPANY_ACTIVITY' => [ self::HAS_ONE, CompanyActivity::class, 'id_activity', 'id' ],
-    'LEAD_ACTIVITY' => [ self::HAS_ONE, LeadActivity::class, 'id_activity', 'id' ],
-    'DEAL_ACTIVITY' => [ self::HAS_ONE, DealActivity::class, 'id_activity', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'ACTIVITY_TYPE' => [ self::HAS_ONE, ActivityType::class, 'id', 'id_activity_type'],
   ];

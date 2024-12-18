@@ -1,0 +1,208 @@
+<?php
+
+global $clih;
+
+require("vendor/autoload.php");
+require("src/App.php");
+
+const OS = 'win';
+
+$clih = fopen("php://stdin", "r");
+
+// HELPER functions
+
+function color(string $colorName) {
+  $sequences = [
+    'win' => [
+      'red' => "\033[31m",
+      'green' => "\033[32m",
+      'yellow' => "\033[33m",
+      'blue' => "\033[34m",
+      'cyan' => "\033[36m",
+      'white' => "\033[37m",
+      'bg-default' => "\033[49m",
+      'bg-cyan' => "\033[46m",
+    ],
+  ];
+
+  if (isset($sequences[OS][$colorName])) {
+    echo $sequences[OS][$colorName];
+  }
+}
+
+function read(string $message, string $default = ''): string {
+  global $clih;
+
+  yellow($message . (empty($default) ? '' : ' (press Enter for \'' . $default . '\')') . ': ');
+
+  $input = trim(fgets($clih));
+  if (empty($input)) $input = $default;
+
+  white('  -> ' . $input . "\n");
+
+  return $input;
+}
+
+function yellow(string $message) { color('yellow'); echo $message; }
+function green(string $message) { color('green'); echo $message; }
+function red(string $message) { color('red'); echo $message; }
+function blue(string $message) { color('blue'); echo $message; }
+function cyan(string $message) { color('cyan'); echo $message; }
+function white(string $message) { color('white'); echo $message; }
+
+function run(string $action, string $argument): bool {
+  $exit = false;
+
+  try {
+    switch ($action) {
+      case 'help': case 'h':
+        white("  'help' or 'h' = this help\n");
+        white("  'init' or 'i' = init empty Ceremony project\n");
+        white("  'exit' or 'x' = exit\n");
+      break;
+
+      case 'init': case 'i':
+
+        $dir = __DIR__;
+        $lastDir = pathinfo(__DIR__, PATHINFO_BASENAME);
+
+        green(': Configuration of the environment :' . "\n\n");
+        $rewriteBase = read('ConfigEnv.rewriteBase', '/' . $lastDir . '/');
+        $accountUrl = read('ConfigEnv.accountUrl', 'http://localhost/' . $lastDir);
+        $dbHost = read('ConfigEnv.dbHost', 'localhost');
+        $dbUser = read('ConfigEnv.dbUser (user must exist)', 'root');
+        $dbPassword = read('ConfigEnv.dbPassword');
+        $dbName = read('ConfigEnv.dbName (database will be created)', 'my_ceremony');
+        $dbCodepage = read('ConfigEnv.dbCodepage', 'utf8mb4');
+
+        green("\n");
+        green(': Configuration of the admin account :' . "\n\n");
+
+        $companyName = read('Account.companyName', 'My Company');
+        $adminName = read('Account.adminName', 'John');
+        $adminFamilyName = read('Account.adminFamilyName', 'Smith');
+        $adminEmail = read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
+        $adminPassword = read('Account.adminEmail (leave empty to generate random password)');
+
+        $appConfig = [
+          'db_host' => $dbHost,
+          'db_user' => $dbUser,
+          'db_password' => $dbPassword,
+          'dir' => __DIR__,
+          'logDir' => __DIR__ . '/log',
+
+          'accountRootRewriteBase' => $rewriteBase,
+          'accountRootFolder' => __DIR__,
+          'accountRootUrl' => $accountUrl,
+          'appRootUrl' => $accountUrl,
+          'appRootFolder' => __DIR__,
+        ];
+
+        cyan("Hurray. Installing your Ceremony...\n");
+
+        // install
+        $app = new \CeremonyCrmApp($appConfig, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
+        $app->initDatabaseConnections();
+
+        $installer = new \CeremonyCrmApp\Installer\Installer(
+          $app,
+          'local-env',
+          '', // uid
+          $companyName,
+          $adminName,
+          $adminFamilyName,
+          $adminEmail,
+          (empty($dbPassword) ? \ADIOS\Core\Helper::randomPassword() : $dbPassword),
+          $rewriteBase,
+          __DIR__, // acccountRootFolder
+          $accountUrl, // acccountUrl
+          __DIR__, // appRootFolder
+          $accountUrl, // appUrl
+          __DIR__, // extRootFolder
+          $dbHost,
+          $dbName,
+          $dbUser,
+          $dbPassword,
+          false, // randomize (deprecated)
+        );
+
+        $installer->enabledModules = [
+          '\CeremonyCrmMod\Core\Billing\Loader::class',
+          '\CeremonyCrmMod\Core\Calendar\Loader::class',
+          '\CeremonyCrmMod\Core\Customers\Loader::class',
+          '\CeremonyCrmMod\Core\Dashboard\Loader::class',
+          '\CeremonyCrmMod\Core\Documents\Loader::class',
+          '\CeremonyCrmMod\Core\Invoices\Loader::class',
+          '\CeremonyCrmMod\Core\Services\Loader::class',
+          '\CeremonyCrmMod\Core\Settings\Loader::class',
+          '\CeremonyCrmMod\Sales\Core\Loader::class',
+          '\CeremonyCrmMod\Sales\Deals\Loader::class',
+          '\CeremonyCrmMod\Sales\Leads\Loader::class',
+        ];
+
+        $installer->createDatabase();
+        $installer->installTables();
+        $installer->installDefaultPermissions();
+        $installer->createFoldersAndFiles();
+
+        green("All done! You're a fantastic CRM developer. Now you can:\n");
+        green("  -> Open {$accountUrl} and login with '{$adminName}' and '{$adminPassword}'.\n");
+        green("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
+        green("  -> Check the developer's guide at https://developer.ceremonycrm.com.\n");
+        green("  -> Browse the ./src/modules.\n");
+
+      break;
+
+      // case exit
+      case 'exit': case 'x':
+        $exit = true;
+      break;
+
+      // default
+      default:
+        red("Don't know what to do.\n");
+      break;
+    }
+  } catch (\Exception $e) {
+    red("!!! ERROR. {$e->getMessage()}\n");
+  }
+
+  return $exit;
+}
+
+// MAIN code
+
+white("Ceremony CLI agent.\n");
+white("\n");
+cyan("HINT: If you want to run any action from command line directly, run this script with arguments.\n");
+cyan("Example: php ceremony init.\n");
+cyan("\n");
+
+$action = (string) ($argv[1] ?? '');
+$argument = (string) ($argv[2] ?? '');
+
+if (!empty($action)) {
+  run($action, $argument);
+} else {
+
+  $exit = false;
+
+  while (!$exit) {
+    yellow("What do you want to do? ('help' or 'h' for help)");
+    $input = read();
+
+    if (strpos($input, ' ') !== false) {
+      list($action, $argument) = explode(' ', $input);
+      $action = trim($action);
+      $argument = trim($argument);
+    } else {
+      $action = trim($input);
+      $argument = '';
+    }
+
+    $exit = run($action, $argument);
+  }
+}
+
+white("\n");
+white("Exiting.\n");

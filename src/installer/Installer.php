@@ -29,6 +29,8 @@ class Installer {
 
   public bool $randomize = false;
 
+  public array $enabledModules = [];
+
   public function __construct(
     \CeremonyCrmApp $app,
     string $env,
@@ -96,10 +98,8 @@ class Installer {
   public function createDatabase()
   {
 
-    $this->app->pdo->execute("create database {$this->dbName} character set utf8 collate utf8_general_ci");
-    $this->app->pdo->execute("create user {$this->dbUser} identified by '{$this->dbPassword}'");
-    $this->app->pdo->execute("grant all on {$this->dbName}.* to {$this->dbUser}@{$this->dbHost} identified by '{$this->dbPassword}'");
-    $this->app->pdo->execute("flush privileges");
+    $this->app->pdo->execute("drop database if exists `{$this->dbName}`");
+    $this->app->pdo->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
 
     $this->app->config['db_name'] = $this->dbName;
     $this->app->config['db_codepage'] = "utf8mb4";
@@ -161,23 +161,34 @@ class Installer {
     $configAccount = str_replace('{{ dbUser }}', $this->dbUser, $configAccount);
     $configAccount = str_replace('{{ dbPassword }}', $this->dbPassword, $configAccount);
     $configAccount = str_replace('{{ dbName }}', $this->dbName, $configAccount);
-    $configAccount = str_replace('{{ rewriteBase }}', $this->accountRootRewriteBase . $this->uid . '/', $configAccount);
-    $configAccount = str_replace('{{ accountDir }}', $this->accountRootFolder . '/' . $this->uid, $configAccount);
-    $configAccount = str_replace('{{ accountUrl }}', $this->accountRootUrl . '/' . $this->uid, $configAccount);
+    $configAccount = str_replace('{{ rewriteBase }}', $this->accountRootRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configAccount);
+    $configAccount = str_replace('{{ accountDir }}', $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid), $configAccount);
+    $configAccount = str_replace('{{ accountUrl }}', $this->accountRootUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configAccount);
+
+    $configAccount .= '' . "\n";
+    $configAccount .= '$config[\'enabledModules\'] = [' . "\n";
+    foreach ($this->enabledModules as $module) {
+      $configAccount .= '  ' . $module . ',' . "\n";
+    }
+    $configAccount .= '];' . "\n";
+
+    $configAccount .= '' . "\n";
+    $configAccount .= '$config[\'env\'] = \'' . $this->env . '\';' . "\n";
+
     return $configAccount;
   }
 
   public function createFoldersAndFiles()
   {
     // folders
-    @mkdir($this->accountRootFolder . '/' . $this->uid);
-    @mkdir($this->accountRootFolder . '/' . $this->uid . '/log');
-    @mkdir($this->accountRootFolder . '/' . $this->uid . '/tmp');
-    @mkdir($this->accountRootFolder . '/' . $this->uid . '/upload');
+    @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid));
+    @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/log');
+    @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/tmp');
+    @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/upload');
 
     // ConfigEnv.php
 
-    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/ConfigAccount.php', $this->getConfigAccountContent());
+    file_put_contents($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigAccount.php', $this->getConfigAccountContent());
 
     // LoadApp.php
     $loadApp = file_get_contents(__DIR__ . '/template/LoadApp.php');
@@ -189,13 +200,13 @@ class Installer {
     // index.php
     copy(
       __DIR__ . '/template/index.php',
-      $this->accountRootFolder . '/' . $this->uid . '/index.php'
+      $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/index.php'
     );
 
     // .htaccess
     copy(
       __DIR__ . '/template/.htaccess',
-      $this->accountRootFolder . '/' . $this->uid . '/.htaccess'
+      $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/.htaccess'
     );
   }
 
@@ -206,25 +217,25 @@ class Installer {
     });
   }
 
-  public function createDevelScripts()
-  {
-    @mkdir($this->accountRootFolder . '/' . $this->uid . '/devel');
+  // public function createDevelScripts()
+  // {
+  //   @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/devel');
 
-    $tplFolder = __DIR__ . '/template';
-    $accFolder = $this->accountRootFolder . '/' . $this->uid;
+  //   $tplFolder = __DIR__ . '/template';
+  //   $accFolder = $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid);
 
-    copy($tplFolder . '/devel/Reinstall.php', $accFolder . '/devel/Reinstall.php');
-  }
+  //   copy($tplFolder . '/devel/Reinstall.php', $accFolder . '/devel/Reinstall.php');
+  // }
 
-  public function getDatabaseUser(): string {
-    $dbUser = \ADIOS\Core\Helper::str2url($this->companyName);
-    $dbUser = str_replace('-', '_', $dbUser);
-    $dbUser =
-      'usr_' . $dbUser
-      . ($this->randomize ? '_' . substr(md5(date('YmdHis').rand(1, 10000)), 1, 5) : '')
-    ;
+  // public function getDatabaseUser(): string {
+  //   $dbUser = \ADIOS\Core\Helper::str2url($this->companyName);
+  //   $dbUser = str_replace('-', '_', $dbUser);
+  //   $dbUser =
+  //     'usr_' . $dbUser
+  //     . ($this->randomize ? '_' . substr(md5(date('YmdHis').rand(1, 10000)), 1, 5) : '')
+  //   ;
 
-    return $dbUser;
-  }
+  //   return $dbUser;
+  // }
 
 }

@@ -6,3 +6,7 @@
 /package-lock.json
 /node_modules
 /composer-dev.json
+/ConfigAccount.php
+/index.php
+/LoadApp.php
+/.htaccess

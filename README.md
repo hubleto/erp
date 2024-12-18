@@ -19,4 +19,4 @@ Open source CRM platform for any business.
 | Install PHP dependencies      | `composer install`                                      |
 | Install JS dependencies       | `npm install`                                           |
 | Build JS and CSS              | `npm run build`                                         |
-| Initialize project            | `.\ceremony.bat init` or     `./ceremony.sh init`       |
+| Initialize project            | `php ceremony init`                                     |

@@ -1,0 +1,15 @@
+{
+    "loader": {
+        "Deals": "Accords de vente",
+        "Deals Archive": "Archive des accords de vente"
+    },
+    "controllers.deals": {
+        "Sales": "Ventes",
+        "Deals": "Accords de vente"
+    },
+    "controllers.dealsArchive": {
+        "Sales": "Ventes",
+        "Deals": "Accords de vente",
+        "Archive": "Archive"
+    }
+}

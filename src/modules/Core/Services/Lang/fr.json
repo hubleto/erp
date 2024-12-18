@@ -1,0 +1,8 @@
+{
+    "controllers.services": {
+        "Services": "Services"
+    },
+    "loader": {
+        "Services": "Services"
+    }
+}

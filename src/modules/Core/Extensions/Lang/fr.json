@@ -1,0 +1,11 @@
+{
+    "controllers.dashboard": {
+        "Extensions": "Extensions",
+        "You are using the free version of Ceremony.": "Vous utilisez la version gratuite de Ceremony.",
+        "If you want to install extensions, you must upgrade to PRO.": "Si vous voulez installer des extensions, vous devez passer à la version PRO.",
+        "Upgrade to PRO": "Passer à la version PRO"
+    },
+    "loader": {
+        "Extensions": "Extensions"
+    }
+}

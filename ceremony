@@ -43,6 +43,24 @@ function read(string $message, string $default = ''): string {
   return $input;
 }
 
+function choose(array $options, string $message, string $default = ''): string {
+  global $clih;
+
+  yellow($message . "\n");
+  foreach ($options as $key => $option) {
+    white(' ' . $key . ' = ' . $option . "\n");
+  }
+  yellow('Select one of the options, provide a value' . (empty($default) ? '' : ' or press Enter for \'' . $default . '\'') . ': ');
+
+  $input = trim(fgets($clih));
+  if (is_numeric($input)) $input = $options[$input] ?? '';
+  if (empty($input)) $input = $default;
+
+  white('  -> ' . $input . "\n");
+
+  return $input;
+}
+
 function yellow(string $message) { color('yellow'); echo $message; }
 function green(string $message) { color('green'); echo $message; }
 function red(string $message) { color('red'); echo $message; }
@@ -63,12 +81,17 @@ function run(string $action, string $argument): bool {
 
       case 'init': case 'i':
 
-        $dir = __DIR__;
-        $lastDir = pathinfo(__DIR__, PATHINFO_BASENAME);
+        $rewriteBases = [];
+        $lastRewriteBase = '';
+
+        foreach (array_reverse(explode('/', str_replace('\\', '/', __DIR__))) as $tmpDir) {
+          $rewriteBases[] = $lastRewriteBase . '/';
+          $lastRewriteBase = '/' . $tmpDir . $lastRewriteBase;
+        }
 
         green(': Configuration of the environment :' . "\n\n");
-        $rewriteBase = read('ConfigEnv.rewriteBase', '/' . $lastDir . '/');
-        $accountUrl = read('ConfigEnv.accountUrl', 'http://localhost/' . $lastDir);
+        $rewriteBase = choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
+        $accountUrl = read('ConfigEnv.accountUrl', 'http://localhost/' . trim($rewriteBase, '/'));
         $dbHost = read('ConfigEnv.dbHost', 'localhost');
         $dbUser = read('ConfigEnv.dbUser (user must exist)', 'root');
         $dbPassword = read('ConfigEnv.dbPassword');
@@ -98,6 +121,7 @@ function run(string $action, string $argument): bool {
           'appRootFolder' => __DIR__,
         ];
 
+        cyan("\n");
         cyan("Hurray. Installing your Ceremony...\n");
 
         // install
@@ -145,6 +169,7 @@ function run(string $action, string $argument): bool {
         $installer->installDefaultPermissions();
         $installer->createFoldersAndFiles();
 
+        green("\n");
         green("All done! You're a fantastic CRM developer. Now you can:\n");
         green("  -> Open {$accountUrl} and login with '{$adminName}' and '{$adminPassword}'.\n");
         green("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");

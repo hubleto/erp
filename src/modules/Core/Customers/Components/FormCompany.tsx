@@ -1,21 +1,11 @@
 import React, { Component } from "react";
 import { deepObjectMerge, getUrlParam } from "adios/Helper";
 import Form, { FormDescription, FormProps, FormState } from "adios/Form";
-import InputVarchar from "adios/Inputs/Varchar";
 import InputTags2 from "adios/Inputs/Tags2";
-import InputTable from "adios/Inputs/Table";
 import FormInput from "adios/FormInput";
 import TablePersons from "./TablePersons";
-import TableActivities from "./TableActivities";
-import TableBillingAccountServices from "../../Billing/Components/TableBillingAccountServices";
-import request from "adios/Request";
 import { TabPanel, TabView } from "primereact/tabview";
-import { InputTextarea } from "primereact/inputtextarea";
-import FormActivity from "./FormActivity";
-import DateTime from "adios/Inputs/DateTime";
-import Lookup from "adios/Inputs/Lookup";
-import Boolean from "adios/Inputs/Boolean";
-import CalendarComponent from "../../Calendar/Components/CalendarComponent";
+import FormActivity, {FormActivityProps, FormActivityState} from "./FormActivity";
 import TableLeads from "../../../Sales/Leads/Components/TableLeads";
 import FormLead, {FormLeadProps, FormLeadState} from "../../../Sales/Leads/Components/FormLead";
 import ModalSimple from "adios/ModalSimple";
@@ -24,6 +14,7 @@ import FormDeal, {FormDealProps, FormDealState} from "../../../Sales/Deals/Compo
 import TableCompanyDocuments from "./TableCompanyDocuments";
 import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
 import FormPerson, {FormPersonProps, FormPersonState} from "./FormPerson";
+import Calendar from '../../../Core/Calendar/Components/Calendar'
 
 interface FormCompanyProps extends FormProps {
   highlightIdBussinessAccounts: number,
@@ -40,8 +31,11 @@ interface FormCompanyState extends FormState {
   createNewDeal: boolean,
   createNewDocument: boolean,
   createNewPerson: boolean,
-  showDocument: number,
   newEntryId?: number,
+  showIdDocument: number,
+  showIdActivity: number,
+  activityCalendarTimeClicked: string,
+  activityCalendarDateClicked: string,
   //isInlineEditingBillingAccounts: boolean
 }
 
@@ -70,8 +64,11 @@ export default class FormCompany<P, S> extends Form<
       createNewDeal: false,
       createNewDocument: false,
       createNewPerson: false,
-      showDocument: 0,
+      showIdDocument: 0,
       newEntryId: this.props.newEntryId ?? -1,
+      showIdActivity: 0,
+      activityCalendarTimeClicked: '',
+      activityCalendarDateClicked: '',
       //isInlineEditingBillingAccounts: false,
     }
   }
@@ -161,8 +158,8 @@ export default class FormCompany<P, S> extends Form<
           onClose={() => { this.setState({ createNewPerson: false } as FormCompanyState); }}
           onSaveCallback={(form: FormPerson<FormPersonProps, FormPersonState>, saveResponse: any) => {
             if (saveResponse.status = "success") {
-              this.loadRecord()
               this.setState({createNewPerson: false} as FormCompanyState)
+              this.loadRecord()
             }
           }}
         >
@@ -263,24 +260,6 @@ export default class FormCompany<P, S> extends Form<
                         first_name: { type: "varchar", title: globalThis.app.translate("First name") },
                         last_name: { type: "varchar", title: globalThis.app.translate("Last name") },
                         is_main: { type: "boolean", title: globalThis.app.translate("Main Contact") },
-                        /* __more_details: { type: "none", title: "", cellRenderer: ( table: TablePersons, data: any, options: any): JSX.Element => {
-                            if (data.id > 0) {
-                              return (<>
-                                  <button
-                                    className="btn btn-transparent btn-small"
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      table.openForm(data.id);
-                                      return false;
-                                    }}
-                                  >
-                                    <span className="icon"><i className="fas fa-external-link-alt"></i></span>
-                                  </button>
-                                </>
-                              );
-                            }
-                          },
-                        }, */
                       },
                     }}
                     isUsedAsInput={true}
@@ -315,12 +294,52 @@ export default class FormCompany<P, S> extends Form<
           </TabPanel>
           {showAdditional ? (
             <TabPanel header={globalThis.app.translate('Calendar')}>
-              <CalendarComponent
-                creatingForModel="Company"
-                creatingForId={R.id}
+              <Calendar
+                onCreateCallback={() => this.loadRecord()}
+                readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                url={`activities/get?creatingForModel=Company&creatingForId=${R.id}`}
-              ></CalendarComponent>
+                eventsEndpoint={globalThis.app.config.rewriteBase + 'customers/get-calendar-events?idCompany=' + R.id}
+                onDateClick={(date, time, info) => {
+                  this.setState({
+                    activityCalendarDateClicked: date,
+                    activityCalendarTimeClicked: time,
+                    showIdActivity: -1,
+                  } as FormCompanyState);
+                }}
+                onEventClick={(info) => {
+                  this.setState({
+                    showIdActivity: parseInt(info.event.id),
+                  } as FormCompanyState);
+                }}
+              ></Calendar>
+              {this.state.showIdActivity == 0 ? <></> :
+                <ModalSimple
+                  uid='activity_form'
+                  isOpen={true}
+                  type='right'
+                >
+                  <FormActivity
+                    id={this.state.showIdActivity}
+                    isInlineEditing={true}
+                    description={{
+                      defaultValues: {
+                        id_company: R.id,
+                        date_start: this.state.activityCalendarDateClicked,
+                        time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
+                        date_end: this.state.activityCalendarDateClicked,
+                      }
+                    }}
+                    showInModal={true}
+                    showInModalSimple={true}
+                    onClose={() => { this.setState({ showIdActivity: 0 } as FormCompanyState) }}
+                    onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+                      if (saveResponse.status == "success") {
+                        this.setState({ showIdActivity: 0 } as FormCompanyState);
+                      }
+                    }}
+                  ></FormActivity>
+                </ModalSimple>
+              }
             </TabPanel>
           ) : null}
           {showAdditional ? (
@@ -475,7 +494,7 @@ export default class FormCompany<P, S> extends Form<
                 //isInlineEditing={this.state.isInlineEditing}
                 readonly={!this.state.isInlineEditing}
                 onRowClick={(table: TableCompanyDocuments, row: any) => {
-                  this.setState({showDocument: row.id_document} as FormCompanyState);
+                  this.setState({showIdDocument: row.id_document} as FormCompanyState);
                 }}
               />
               <a
@@ -514,28 +533,28 @@ export default class FormCompany<P, S> extends Form<
                   ></FormDocument>
                 </ModalSimple>
               : null}
-              {this.state.showDocument > 0 ?
+              {this.state.showIdDocument > 0 ?
                 <ModalSimple
                   uid='document_form'
                   isOpen={true}
                   type='right'
                 >
                   <FormDocument
-                    id={this.state.showDocument}
-                    onClose={() => this.setState({showDocument: 0} as FormCompanyState)}
+                    id={this.state.showIdDocument}
+                    onClose={() => this.setState({showIdDocument: 0} as FormCompanyState)}
                     creatingForModel="Company"
                     showInModal={true}
                     showInModalSimple={true}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({ showDocument: 0 } as FormCompanyState)
+                        this.setState({ showIdDocument: 0 } as FormCompanyState)
                       }
                     }}
                     onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({ showDocument: 0 } as FormCompanyState)
+                        this.setState({ showIdDocument: 0 } as FormCompanyState)
                       }
                     }}
                   />

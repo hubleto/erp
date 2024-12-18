@@ -23,6 +23,7 @@ class DealActivity extends \CeremonyCrmApp\Core\Model
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
+        'readonly'=> true,
       ],
       'id_activity_type' => [
         'type' => 'lookup',

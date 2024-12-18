@@ -20,9 +20,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^customers\/address\/?$/' => Controllers\Addresses::class,
       '/^customers\/contacts\/?$/' => Controllers\Contacts::class,
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
-      '/^customers\/activities\/get\/?$/' => Controllers\Api\Activity::class,
+      //'/^customers\/activities\/get\/?$/' => Controllers\Api\Activity::class,
       '/^customers\/get-company\/?$/' => Controllers\Api\GetCompany::class,
       '/^customers\/get-company-contacts\/?$/' => Controllers\Api\GetCompanyContacts::class,
+      '/^customers\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
     $this->app->sidebar->addLink(1, 40, 'customers/companies', $this->translate('Customers'), 'fas fa-address-card', str_starts_with($this->app->requestedUri, 'customers'));
@@ -33,6 +34,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
       $this->app->sidebar->addLink(2, 330, 'customers/persons', $this->translate('Contact Persons'), 'fas fa-users');
       //$this->app->sidebar->addLink(2, 10203, 'customers/activities', $this->translate('Activities'), 'fas fa-users');
     }
+
+    $this->app->addCalendar(Calendar::class);
   }
 
   public function installTables() {
@@ -40,7 +43,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mCompany = new \CeremonyCrmMod\Core\Customers\Models\Company($this->app);
     $mAddress = new \CeremonyCrmMod\Core\Customers\Models\Address($this->app);
     $mContact = new \CeremonyCrmMod\Core\Customers\Models\Contact($this->app);
-    $mActivity = new \CeremonyCrmMod\Core\Customers\Models\Activity($this->app);
+    //$mActivity = new \CeremonyCrmMod\Core\Customers\Models\Activity($this->app);
     $mCompanyActivity = new \CeremonyCrmMod\Core\Customers\Models\CompanyActivity($this->app);
     $mCompanyDocument = new \CeremonyCrmMod\Core\Customers\Models\CompanyDocument($this->app);
     $mCompanyTag = new \CeremonyCrmMod\Core\Customers\Models\CompanyTag($this->app);
@@ -52,7 +55,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mContact->dropTableIfExists()->install();
     $mCompanyTag->dropTableIfExists()->install();
     $mPersonTag->dropTableIfExists()->install();
-    $mActivity->dropTableIfExists()->install();
+    //$mActivity->dropTableIfExists()->install();
     $mCompanyActivity->dropTableIfExists()->install();
     $mCompanyDocument->dropTableIfExists()->install();
   }

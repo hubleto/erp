@@ -417,7 +417,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.app.config.rewriteBase + '/sales/deals/get-calendar-events?idDeal=' + R.id}
+                eventsEndpoint={globalThis.app.config.rewriteBase + 'sales/deals/get-calendar-events?idDeal=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityCalendarDateClicked: date,

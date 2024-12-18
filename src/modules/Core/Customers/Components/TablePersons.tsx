@@ -37,10 +37,20 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   }
 
   getFormProps(): any {
+    var formProps = super.getFormProps();
     return {
       ...super.getFormProps(),
       onSaveCallback: (form: FormPerson<FormPersonProps, FormPersonState>, saveResponse: any) => {
-        this.props.parentForm.reload();
+        formProps.onSaveCallback(form, saveResponse);
+        if (this.props.parentForm) {
+          this.props.parentForm.reload();
+        }
+      },
+      onDeleteCallback: (form: FormPerson<FormPersonProps, FormPersonState>, saveResponse: any) => {
+        formProps.onDeleteCallback(form, saveResponse);
+        if (this.props.parentForm) {
+          this.props.parentForm.reload();
+        }
       }
     }
   }

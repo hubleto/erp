@@ -371,7 +371,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.app.config.rewriteBase + '/sales/leads/get-calendar-events?idLead=' + R.id}
+                eventsEndpoint={globalThis.app.config.rewriteBase + 'sales/leads/get-calendar-events?idLead=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityCalendarDateClicked: date,

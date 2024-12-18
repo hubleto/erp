@@ -105,7 +105,9 @@ function run(string $action, string $argument): bool {
         $adminName = read('Account.adminName', 'John');
         $adminFamilyName = read('Account.adminFamilyName', 'Smith');
         $adminEmail = read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
-        $adminPassword = read('Account.adminEmail (leave empty to generate random password)');
+        $adminPassword = read('Account.adminPassword (leave empty to generate random password)');
+
+        if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
         $appConfig = [
           'db_host' => $dbHost,
@@ -136,7 +138,7 @@ function run(string $action, string $argument): bool {
           $adminName,
           $adminFamilyName,
           $adminEmail,
-          (empty($dbPassword) ? \ADIOS\Core\Helper::randomPassword() : $dbPassword),
+          $adminPassword,
           $rewriteBase,
           __DIR__, // acccountRootFolder
           $accountUrl, // acccountUrl
@@ -171,7 +173,7 @@ function run(string $action, string $argument): bool {
 
         green("\n");
         green("All done! You're a fantastic CRM developer. Now you can:\n");
-        green("  -> Open {$accountUrl} and login with '{$adminName}' and '{$adminPassword}'.\n");
+        green("  -> Open {$accountUrl} and login with '{$adminEmail}' and '{$adminPassword}'.\n");
         green("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
         green("  -> Check the developer's guide at https://developer.ceremonycrm.com.\n");
         green("  -> Browse the ./src/modules.\n");

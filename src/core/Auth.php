@@ -12,9 +12,9 @@ class Auth extends \ADIOS\Auth\Providers\DefaultProvider {
 
     if (
       !empty($setLanguage)
-      && !empty(\CeremonyCrmMod\Core\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
+      && !empty(\CeremonyCrmMod\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
-      $mUser = new \CeremonyCrmMod\Core\Settings\Models\User($this->app);
+      $mUser = new \CeremonyCrmMod\Settings\Models\User($this->app);
       $mUser->eloquent
         ->where('id', $this->user['id'])
         ->update(['language' => $setLanguage])

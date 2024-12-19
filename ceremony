@@ -153,17 +153,17 @@ function run(string $action, string $argument): bool {
         );
 
         $installer->enabledModules = [
-          '\CeremonyCrmMod\Core\Billing\Loader::class',
-          '\CeremonyCrmMod\Core\Calendar\Loader::class',
-          '\CeremonyCrmMod\Core\Customers\Loader::class',
-          '\CeremonyCrmMod\Core\Dashboard\Loader::class',
-          '\CeremonyCrmMod\Core\Documents\Loader::class',
-          '\CeremonyCrmMod\Core\Invoices\Loader::class',
-          '\CeremonyCrmMod\Core\Services\Loader::class',
-          '\CeremonyCrmMod\Core\Settings\Loader::class',
-          '\CeremonyCrmMod\Sales\Core\Loader::class',
-          '\CeremonyCrmMod\Sales\Deals\Loader::class',
-          '\CeremonyCrmMod\Sales\Leads\Loader::class',
+          '\CeremonyCrmMod\Billing\Loader::class',
+          '\CeremonyCrmMod\Calendar\Loader::class',
+          '\CeremonyCrmMod\Customers\Loader::class',
+          '\CeremonyCrmMod\Dashboard\Loader::class',
+          '\CeremonyCrmMod\Documents\Loader::class',
+          '\CeremonyCrmMod\Invoices\Loader::class',
+          '\CeremonyCrmMod\Services\Loader::class',
+          '\CeremonyCrmMod\Settings\Loader::class',
+          '\CeremonyCrmMod\Pipeline\Loader::class',
+          '\CeremonyCrmMod\Deals\Loader::class',
+          '\CeremonyCrmMod\Leads\Loader::class',
         ];
 
         $installer->createDatabase();

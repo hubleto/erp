@@ -2,9 +2,9 @@
 
 namespace CeremonyCrmApp\Core;
 
-use CeremonyCrmMod\Core\Settings\Models\Permission;
-use CeremonyCrmMod\Core\Settings\Models\RolePermission;
-use CeremonyCrmMod\Core\Settings\Models\UserRole;
+use CeremonyCrmMod\Settings\Models\Permission;
+use CeremonyCrmMod\Settings\Models\RolePermission;
+use CeremonyCrmMod\Settings\Models\UserRole;
 
 class Permissions extends \ADIOS\Core\Permissions {
 

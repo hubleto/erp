@@ -104,6 +104,8 @@
   .alert-warning { @apply p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50; }
   .alert-danger { @apply p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50; }
 
+  .badge { @apply text-xs p-0.5 text-white rounded inline m-0.5; }
+
   .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
   .btn .icon { @apply block px-2 py-1 text-sm; }
   .btn .text { @apply block px-2 py-1 text-sm; }

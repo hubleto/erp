@@ -2,7 +2,7 @@
 
 namespace CeremonyCrmApp\Installer;
 
-use CeremonyCrmMod\Core\Settings\Models\ {
+use CeremonyCrmMod\Settings\Models\ {
   Permission, Profile, RolePermission, User, UserRole, UserHasRole
 };
 
@@ -119,20 +119,20 @@ class Installer {
   public function installTables()
   {
 
-    (new \CeremonyCrmMod\Core\Settings\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Core\Documents\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Core\Services\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Core\Customers\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Core\Invoices\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Core\Billing\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Sales\Core\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Sales\Leads\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Sales\Deals\Loader($this->app))->installTables();
+    (new \CeremonyCrmMod\Settings\Loader($this->app))->installTables();
+    (new \CeremonyCrmMod\Documents\Loader($this->app))->installTables();
+    (new \CeremonyCrmMod\Services\Loader($this->app))->installTables();
+    (new \CeremonyCrmMod\Customers\Loader($this->app))->installTables();
+    (new \CeremonyCrmMod\Invoices\Loader($this->app))->installTables();
+    (new \CeremonyCrmMod\Billing\Loader($this->app))->installTables();
+    (new \CeremonyCrmMod\Pipeline\Loader($this->app))->installTables();
+    (new \CeremonyCrmMod\Leads\Loader($this->app))->installTables();
+    (new \CeremonyCrmMod\Deals\Loader($this->app))->installTables();
 
-    $mProfile = new \CeremonyCrmMod\Core\Settings\Models\Profile($this->app);
-    $mUser = new \CeremonyCrmMod\Core\Settings\Models\User($this->app);
-    $mUserRole = new \CeremonyCrmMod\Core\Settings\Models\UserRole($this->app);
-    $mUserHasRole = new \CeremonyCrmMod\Core\Settings\Models\UserHasRole($this->app);
+    $mProfile = new \CeremonyCrmMod\Settings\Models\Profile($this->app);
+    $mUser = new \CeremonyCrmMod\Settings\Models\User($this->app);
+    $mUserRole = new \CeremonyCrmMod\Settings\Models\UserRole($this->app);
+    $mUserHasRole = new \CeremonyCrmMod\Settings\Models\UserHasRole($this->app);
 
     $idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
 

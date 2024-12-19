@@ -19,9 +19,9 @@ $config['coreClasses'] = [
 //   'Core/Locale' => \PortalApp\Core\Locale::class,
 //   'Core/TwigLoader' => \PortalApp\Core\TwigLoader::class,
 //   'Core/UserNotifications' => \PortalApp\Core\UserNotifications::class,
-  'Models/User' => \CeremonyCrmMod\Core\Settings\Models\User::class,
-  'Models/UserRole' => \CeremonyCrmMod\Core\Settings\Models\UserRole::class,
-  'Models/UserHasRole' => \CeremonyCrmMod\Core\Settings\Models\UserHasRole::class,
+  'Models/User' => \CeremonyCrmMod\Settings\Models\User::class,
+  'Models/UserRole' => \CeremonyCrmMod\Settings\Models\UserRole::class,
+  'Models/UserHasRole' => \CeremonyCrmMod\Settings\Models\UserHasRole::class,
   'Controllers/Desktop' => \CeremonyCrmApp\Controllers\Desktop::class,
 ];
 

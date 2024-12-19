@@ -448,6 +448,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         date_end: this.state.activityCalendarDateClicked,
                       }
                     }}
+                    idCompany={R.id_company}
                     showInModal={true}
                     showInModalSimple={true}
                     onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}

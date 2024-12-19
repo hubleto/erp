@@ -402,6 +402,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         date_end: this.state.activityCalendarDateClicked,
                       }
                     }}
+                    idCompany={R.id_company}
                     showInModal={true}
                     showInModalSimple={true}
                     onClose={() => { this.setState({ showIdActivity: 0 } as FormLeadState) }}

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Form, { FormProps, FormState } from 'adios/Form';
+import Lookup from 'adios/Inputs/Lookup';
+import FormInput from 'adios/FormInput';
 
 export interface FormActivityProps extends FormProps {
   idDeal: number,
+  idCompany?: number,
 }
 
 export interface FormActivityState extends FormState {}
@@ -58,6 +61,21 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
     return (
       <>
         {this.inputWrapper('id_deal')}
+        <FormInput title={"Contact Person"}>
+          <Lookup {...this.getDefaultInputProps()}
+            model='CeremonyCrmMod/Customers/Models/Person'
+            endpoint={`customers/get-company-contacts`}
+            customEndpointParams={{id_company: this.props.idCompany}}
+            value={R.id_person}
+            onChange={(value: any) => {
+              this.updateRecord({ id_person: value })
+              if (R.id_person == 0) {
+                R.id_person = null;
+                this.setState({record: R})
+              }
+            }}
+          ></Lookup>
+        </FormInput>
         {this.inputWrapper('subject')}
         {this.inputWrapper('id_activity_type')}
         {showAdditional ? this.inputWrapper('completed') : null}

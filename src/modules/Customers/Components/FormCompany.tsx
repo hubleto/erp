@@ -254,7 +254,7 @@ export default class FormCompany<P, S> extends Form<
                         canRead: true,
                       },
                       ui: {
-                        addButtonText: this.translate('Add contact person'),
+                        addButtonText: globalThis.app.translate('Add contact person'),
                       },
                       columns: {
                         first_name: { type: "varchar", title: globalThis.app.translate("First name") },

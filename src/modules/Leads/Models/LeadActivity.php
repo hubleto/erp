@@ -26,6 +26,13 @@ class LeadActivity extends \CeremonyCrmApp\Core\Model
         'required' => true,
         'readonly'=> true,
       ],
+      'id_person' => [
+        'type' => 'lookup',
+        'title' => 'Contact Person',
+        'model' => \CeremonyCrmMod\Customers\Models\Person::class,
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
+      ],
       'id_activity_type' => [
         'type' => 'lookup',
         'title' => $this->translate('Activity type'),

@@ -48,7 +48,7 @@
 
     <nav id="default-navbar"><div>
       <div class="flex items-center">
-        <div class="w-24">
+        <div class="w-28">
           <a class="flex" href="{{ config.accountUrl }}">
             <img id="logo" src="{{ config.url }}/assets/images/logo.png" class="h-8 m-auto">
           </a>
@@ -202,6 +202,7 @@
             <a
               class="btn {% if item.highlighted %} btn-primary {% endif %} "
               id="sidebar-item-level1-{{ i }}"
+              aria-keyshortcuts="Alt+Shift+{{ i }}"
               href="{{ config.accountUrl }}/{{ item.url }}" data-pr-tooltip="{{ item.title }}"
             >
               <span class="icon"><i class="{{ item.icon }}"></i></span><span class="text">{{ item.title }}</span>
@@ -271,9 +272,9 @@
 <script>
   function smis(e, q) {
     let b = $("#default-sidebar .btn");
-    if (q == '') b.show(); else {
+    if (q == '') b.slideDown(100); else {
       let r = new RegExp(q, "i");
-      b.hide().each(function() { if ($(this).find('.text').text().match(r)) $(this).show(); });
+      b.each(function() { if ($(this).find('.text').text().match(r)) $(this).slideDown(100); else $(this).slideUp(100); });
     }
     if (e.keyCode == 13) { b.filter(':visible').get(0).click(); return; }
   }

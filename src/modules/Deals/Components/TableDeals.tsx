@@ -70,17 +70,11 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "tags") {
       return (
-        <div className='flex flex-row gap-2'>
+        <>
           {data.TAGS.map((tag, key) => {
-            return (
-              <div
-                style={{color: tag.TAG.color, borderColor: tag.TAG.color}}
-                className='border rounded px-1'>
-                {tag.TAG.name}
-              </div>
-            );
+            return <div style={{backgroundColor: tag.TAG.color}} className='badge'>{tag.TAG.name}</div>;
           })}
-        </div>
+        </>
       );
     } else {
       return super.renderCell(columnName, column, data, options);

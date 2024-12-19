@@ -66,11 +66,7 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
       return (
         <>
           {data.TAGS.map((tag, key) => {
-            return (
-              <div style={{backgroundColor: tag.TAG.color}} className='badge'>
-                {tag.TAG.name}
-              </div>
-            );
+            return <div style={{backgroundColor: tag.TAG.color}} className='badge'>{tag.TAG.name}</div>;
           })}
         </>
       );

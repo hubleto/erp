@@ -71,11 +71,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "id_lead_status") {
       if (data.STATUS && data.STATUS.color) {
-        return (
-          <div className='flex flex-row '>
-            <div style={{color: data.STATUS.color, borderColor: data.STATUS.color}} className='border rounded px-1'>{data.STATUS.name}</div>
-          </div>
-        )
+        return <div style={{backgroundColor: data.STATUS.color}} className='badge'>{data.STATUS.name}</div>;
       }
     } else if (columnName == "tags") {
       return (

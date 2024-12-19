@@ -1,0 +1,45 @@
+{
+    "loader": {
+        "Invoices": "Factures"
+    },
+    "models.invoice": {
+        "Profile": "Profil",
+        "Issued by": "Délivrée par",
+        "Customer": "Client",
+        "Number": "Nombre",
+        "TIP: Number is auto-generated based on the pattern configured in the profile.": "TIP: Le numéro est généré automatiquement en fonction du modèle configuré dans le profil.",
+        "Variable symbol": "Symbole variable",
+        "Constant symbol": "Symbole constant",
+        "Specific symbol": "Symbole spécific",
+        "Issued": "Délivrée",
+        "Delivered": "Livraison",
+        "Due": "Terme échéant",
+        "Payment": "Paiement",
+        "Notes": "Notes"
+    },
+    "models.invoiceItem": {
+        "Invoice": "Facture",
+        "Item": "Article",
+        "Unit price": "Prix unitaire",
+        "Amount": "Quantité"
+    },
+    "controllers.invoices": {
+        "Invoices": "Factures"
+    },
+    "tableInvoices": {
+        "Total excl. VAT": "",
+        "Total incl. VAT": "",
+        "VAT": "",
+        "Customer": "",
+        "Variable symbol": "",
+        "Number": "",
+        "Issue": "",
+        "Due": "",
+        "Delivery": "",
+        "Payment": "",
+        "Total VAT": ""
+    },
+    "formInvoice": {
+        "Invoice": "Facture"
+    }
+}

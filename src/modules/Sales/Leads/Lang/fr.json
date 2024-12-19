@@ -1,0 +1,15 @@
+{
+    "loaders": {
+        "Leads": "Clients potentiels",
+        "Leads Archive": "Archive de clients potentiels"
+    },
+    "controllers.leads": {
+        "Sales": "Ventes",
+        "Leads": "Archive de clients potentiels"
+    },
+    "controllers.leadsArchive": {
+        "Sales": "Ventes",
+        "Leads": "Clients potentiels",
+        "Archive": "Archive"
+    }
+}

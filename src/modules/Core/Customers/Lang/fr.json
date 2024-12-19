@@ -1,0 +1,75 @@
+{
+    "formCompany": {
+        "Basic Information": "Informations fondamentaux sur l'entreprise",
+        "Activities": "Activités",
+        "Leads": "Clients potentiels",
+        "Contact Persons": "Personnes de contact",
+        "Documents": "Documents",
+        "Company Information": "Informations sur l'entreprise",
+        "Deals": "Accords de vente",
+        "Notes": "Notes",
+        "Add contact": "Ajouter un contact",
+        "Last name": "Nom",
+        "First name": "Prénom",
+        "Main Contact": "Contact principal"
+    },
+    "dashboard.home": {
+        "Welcome": "Bienvenue",
+        "Upgrade to PRO and get exciting rewards.": "Passez à PRO et obtenez de récompenses extraordinaires.",
+        "You are using free version of Ceremony. Certain features are unavailable.": "Vous utilisez la version gratuite de Ceremony. Certaines fonctions ne sont pas disponibles.",
+        "Upgrade to PRO": "Passer à la version PRO."
+    },
+    "loader": {
+        "Customers": "Clients",
+        "Companies": "Entreprises",
+        "Contact Persons": "Personnes de contact"
+    },
+    "models.company": {
+        "Add Company": "Ajouter une entreprise",
+        "Name": "Nom",
+        "Street Line 1": "Rue, ligne no. 1",
+        "Street Line 2": "Rue, ligne no. 2",
+        "Region": "Région",
+        "City": "Ville",
+        "Country": "Pays",
+        "Postal Code": "Code postal",
+        "VAT ID": "Numéro de TVA",
+        "Company ID": "Identifiant de l'entreprise",
+        "Tax ID": "Numéro d'identification fiscale",
+        "Notes": "Notes",
+        "Date Created": "Créé",
+        "Active": "Actif",
+        "Assigned User": "Propriétaire",
+        "Companies": "Entreprises"
+    },
+    "models.person": {
+        "First name": "Prénom",
+        "Last name": "Nom",
+        "Company": "Entreprise",
+        "Main Contact": "Contact principal",
+        "Notes": "Notes",
+        "Active": "Actif",
+        "Date Created": "Créé",
+        "Contact Persons": "Personnes de contact",
+        "Add Contact Person": "Ajouter une personne de contact",
+        "Emails": "Courriels",
+        "Phone Numbers": "Numéros de téléphone"
+    },
+    "models.contact": {
+        "Person": "Personne",
+        "Contact Category": "Catégorie de contact",
+        "Type": "Type",
+        "Email": "Courriel",
+        "Phone Number": "Téléphone",
+        "Other": "Autres",
+        "Value": "Valeurs"
+    },
+    "controllers.companies": {
+        "Customers": "Clients",
+        "Companies": "Entreprises"
+    },
+    "controllers.persons": {
+        "Customers": "Clients",
+        "Contact Persons": "Personnes de contact"
+    }
+}

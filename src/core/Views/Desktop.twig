@@ -94,61 +94,7 @@
               <span class="icon"><i class="fas fa-life-ring"></i></span>
               <div class="menu">
                 <div class="list !bg-yellow-50 p-4" style="position:fixed;right:0;top:0;width:30em;max-width:50%;height:100vh;margin:0;border-radius:0;border:none;">
-                  <div class="text-center">
-                    <i class="fas fa-life-ring text-primary text-2xl p-4"></i>
-                  </div>
-                  <h1 class="text-center p-6 m-0">{{ translate('Help center') }}</h1>
-                  <div class="flex">
-                    <div class="adios component input p-1">
-                      <input
-                        type="text"
-                        id="helpQuery"
-                        placeholder="{{ translate('Search knowledgebase...') }}"
-                        class="p-1"
-                        onkeypress="if (event.keyCode == 13) submitHelpQuery();"
-                      />
-                    </div>
-                    <a class="btn btn-white btn-list-item" onclick="submitHelpQuery()">
-                      <span class="icon"><i class="fas fa-arrow-right"></i></span>
-                    </a>
-                    <script>
-                      function submitHelpQuery() {
-                        window.open("{{ config.helpRootUrl }}/{{ user.language }}/?q=" + encodeURIComponent($("#helpQuery").val()));
-                      }
-                    </script>
-                  </div>
-                  <a
-                    href="{{ config.helpRootUrl }}/{{ user.language }}"
-                    class="btn btn-white btn-list-item"
-                    target="_blank"
-                  >
-                    <span class="text">{{ translate('Browse knowledgebase') }}</span>
-                  </a>
-                  <h2 class="px-1 py-8 m-0">{{ translate('Hot tips & tricks') }}</h2>
-                  {% if viewParams.help.hotTips|length == 0 %}
-                    <a
-                      href="{{ config.helpRootUrl }}/{{ user.language }}"
-                      class="btn btn-white btn-list-item"
-                      target="_blank"
-                    >
-                      <span class="text">{{ translate('No hot tips for this screen') }}</span>
-                    </a>
-                  {% else %}
-                    {% for tipSlug, tipTitle in viewParams.help.hotTips %}
-                      <a
-                        href="{{ config.helpRootUrl }}/{{ tipSlug }}"
-                        class="btn btn-blue-outline m-1"
-                        target="_blank"
-                      >
-                        <span class="icon"><i class="fas fa-question"></i></span>
-                        <span class="text">{{ tipTitle }}</span>
-                      </a>
-                    {% endfor %}
-                  {% endif %}
-                  {# <a href="#" class="btn btn-white btn-list-item"><span class="text">Plan activity in calendar</span></a>
-                  <a href="#" class="btn btn-white btn-list-item"><span class="text">Add new lead</span></a> #}
-                  <h2 class="px-1 py-8 m-0">{{ translate('Need more help?') }}</h2>
-                  <a href="#" class="btn btn-white btn-list-item"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">{{ translate('Contact us') }}</span></a>
+                  {{ include('@mod/Help/Views/HelpCenterInner.twig') }}
                 </div>
               </div>
             </button>

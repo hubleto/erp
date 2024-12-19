@@ -1,10 +1,9 @@
 <?php
 
-namespace CeremonyCrmMod\Extensions;
+namespace CeremonyCrmMod\Help;
 
 class Loader extends \CeremonyCrmApp\Core\Module
 {
-
 
   public function __construct(\CeremonyCrmApp $app)
   {
@@ -14,10 +13,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
   public function init(): void
   {
     $this->app->router->httpGet([
-      '/^extensions\/?$/' => Controllers\Dashboard::class,
+      '/^help\/?$/' => Controllers\Help::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 999999, 'extensions', $this->translate('Extensions'), 'fas fa-puzzle-piece');
+    $this->app->sidebar->addLink(1, 1900, 'help', $this->translate('Help'), 'fas fa-life-ring', str_starts_with($this->app->requestedUri, 'help'));
   }
 
 }

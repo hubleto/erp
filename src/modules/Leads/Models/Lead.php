@@ -5,7 +5,6 @@ namespace CeremonyCrmMod\Leads\Models;
 use CeremonyCrmMod\Customers\Models\Company;
 use CeremonyCrmMod\Customers\Models\Person;
 use CeremonyCrmMod\Settings\Models\Currency;
-use CeremonyCrmMod\Settings\Models\LeadStatus;
 use CeremonyCrmMod\Settings\Models\User;
 use CeremonyCrmMod\Deals\Models\Deal;
 use CeremonyCrmMod\Leads\Models\LeadHistory;
@@ -44,7 +43,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'CeremonyCrmMod/Customers/Models/Company',
+        'model' => \CeremonyCrmMod\Customers\Models\Company::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => false,
@@ -52,7 +51,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Contact Person',
-        'model' => 'CeremonyCrmMod/Customers/Models/Person',
+        'model' => \CeremonyCrmMod\Customers\Models\Person::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -65,7 +64,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_currency' => [
         'type' => 'lookup',
         'title' => 'Currency',
-        'model' => 'CeremonyCrmMod/Settings/Models/Currency',
+        'model' => \CeremonyCrmMod\Settings\Models\Currency::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         // 'required' => true,
@@ -78,7 +77,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Assigned User',
-        'model' => 'CeremonyCrmMod/Settings/Models/User',
+        'model' => \CeremonyCrmMod\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
@@ -92,7 +91,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_lead_status' => [
         'type' => 'lookup',
         'title' => 'Status',
-        'model' => 'CeremonyCrmMod/Settings/Models/LeadStatus',
+        'model' => LeadStatus::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,

@@ -19,20 +19,23 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
       '/^deals\/change-pipeline\/?$/' => Controllers\Api\ChangePipeline::class,
       '/^deals\/change-pipeline-step\/?$/' => Controllers\Api\ChangePipelineStep::class,
+      '/^settings\/deal-statuses\/?$/' => Controllers\DealStatuses::class,
     ]);
 
     $this->app->sidebar->addLink(1, 200, 'deals', $this->translate('Deals'), 'fas fa-handshake', str_starts_with($this->app->requestedUri, 'deals'));
 
-    $this->app->addCalendar(Calendar::class);
+    $this->app->addSetting([
+      'title' => $this->translate('Deal statuses'),
+      'icon' => 'fas fa-arrow-up-short-wide',
+      'url' => 'settings/deal-statuses',
+    ]);
 
-    // if (str_starts_with($this->app->requestedUri, 'sales')) {
-    //   $this->app->sidebar->addLink(2, 10203, 'deals', $this->translate('Deals'), 'fa-regular fa-handshake');
-    //   $this->app->sidebar->addLink(2, 10205, 'deals/archive', $this->translate('Deals Archive'), 'fas fa-box-archive');
-    // }
+    $this->app->addCalendar(Calendar::class);
   }
 
   public function installTables()
   {
+    $mDealStatus = new Models\DealStatus($this->app);
     $mDeal = new \CeremonyCrmMod\Deals\Models\Deal($this->app);
     $mDealHistory = new \CeremonyCrmMod\Deals\Models\DealHistory($this->app);
     $mDealTag = new \CeremonyCrmMod\Deals\Models\DealTag($this->app);
@@ -40,11 +43,18 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mDealActivity = new \CeremonyCrmMod\Deals\Models\DealActivity($this->app);
     $mDealDocument = new \CeremonyCrmMod\Deals\Models\DealDocument($this->app);
 
+    $mDealStatus->dropTableIfExists()->install();
     $mDeal->dropTableIfExists()->install();
     $mDealHistory->dropTableIfExists()->install();
     $mDealTag->dropTableIfExists()->install();
     $mDealService->dropTableIfExists()->install();
     $mDealActivity->dropTableIfExists()->install();
     $mDealDocument->dropTableIfExists()->install();
+
+    $mDealStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
+    $mDealStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
+    $mDealStatus->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'color' => '#42ddf5' ]);
+    $mDealStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
+
   }
 }

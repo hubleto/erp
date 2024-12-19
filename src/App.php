@@ -30,7 +30,8 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   public string $requestedUriFirstPart = '';
   protected array $extensions = [];
   public bool $isPro = false;
-  private array $calendars;
+  private array $calendars = [];
+  private array $settings = [];
 
   public function __construct($config = NULL, $mode = NULL)
   {
@@ -157,6 +158,21 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   public function getCalendar(string $calendarClass): \CeremonyCrmApp\Core\Calendar
   {
     return $this->calendars[$calendarClass];
+  }
+
+  public function addSetting(array $setting)
+  {
+    $this->settings[] = $setting;
+  }
+
+  public function getSettings(): array
+  {
+    $settings = $this->settings;
+    $titles = array_column($this->settings, 'title');
+    array_multisort($titles, SORT_ASC, $settings);
+
+    return $settings;
+
   }
 
 }

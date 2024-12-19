@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace CeremonyCrmMod\Deals\Models;
 
-class LeadStatus extends \CeremonyCrmApp\Core\Model
+class DealStatus extends \CeremonyCrmApp\Core\Model
 {
-  public string $table = 'lead_statuses';
-  public string $eloquentClass = Eloquent\LeadStatus::class;
+  public string $table = 'deal_statuses';
+  public string $eloquentClass = Eloquent\DealStatus::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function columns(array $columns = []): array
@@ -33,8 +33,8 @@ class LeadStatus extends \CeremonyCrmApp\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Lead Statuses';
-    $description['ui']['addButtonText'] = 'Add Lead Status';
+    $description['ui']['title'] = 'Deal Statuses';
+    $description['ui']['addButtonText'] = 'Add Deal Status';
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
     return $description;

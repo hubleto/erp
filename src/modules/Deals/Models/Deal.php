@@ -5,7 +5,6 @@ namespace CeremonyCrmMod\Deals\Models;
 use CeremonyCrmMod\Customers\Models\Company;
 use CeremonyCrmMod\Customers\Models\Person;
 use CeremonyCrmMod\Settings\Models\Currency;
-use CeremonyCrmMod\Settings\Models\DealStatus;
 use CeremonyCrmMod\Settings\Models\Pipeline;
 use CeremonyCrmMod\Settings\Models\PipelineStep;
 use CeremonyCrmMod\Settings\Models\Setting;
@@ -137,7 +136,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_deal_status' => [
         'type' => 'lookup',
         'title' => 'Status',
-        'model' => \CeremonyCrmMod\Settings\Models\DealStatus::class,
+        'model' => DealStatus::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,

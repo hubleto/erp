@@ -1,24 +1,22 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Controllers;
+namespace CeremonyCrmMod\Leads\Controllers;
 
-class Dashboard extends \CeremonyCrmApp\Core\Controller {
+class LeadStatuses extends \CeremonyCrmApp\Core\Controller {
 
 
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
+      [ 'url' => 'lead-statuses', 'content' => $this->translate('Lead Statuses') ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-
-    $this->viewParams['settings'] = $this->app->getSettings();
-
-    $this->setView('@mod/Settings/Views/Dashboard.twig');
+    $this->setView('@mod/Leads/Views/LeadStatuses.twig');
   }
 
 }

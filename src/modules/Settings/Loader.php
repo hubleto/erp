@@ -30,14 +30,25 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^settings\/contact-types\/?$/' => Controllers\ContactTypes::class,
       '/^settings\/countries\/?$/' => Controllers\Countries::class,
       '/^settings\/currencies\/?$/' => Controllers\Currencies::class,
-      '/^settings\/lead-statuses\/?$/' => Controllers\LeadStatuses::class,
-      '/^settings\/deal-statuses\/?$/' => Controllers\DealStatuses::class,
       '/^settings\/pipelines\/?$/' => Controllers\Pipelines::class,
       '/^settings\/permissions\/?$/' => Controllers\Permissions::class,
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
     ]);
 
     $this->app->sidebar->addLink(1, 900, 'settings', $this->translate('Settings'), 'fas fa-cog', str_starts_with($this->app->requestedUri, 'settings'));
+
+    $this->app->addSetting(['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
+    $this->app->addSetting(['title' => $this->translate('User roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
+    $this->app->addSetting(['title' => $this->translate('Profiles'), 'icon' => 'fas fa-id-card', 'url' => 'settings/profiles']);
+    $this->app->addSetting(['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/settings']);
+    $this->app->addSetting(['title' => $this->translate('Permissions'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
+    $this->app->addSetting(['title' => $this->translate('Tags'), 'icon' => 'fas fa-tags', 'url' => 'settings/tags']);
+    $this->app->addSetting(['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
+    $this->app->addSetting(['title' => $this->translate('Contact types'), 'icon' => 'fas fa-phone', 'url' => 'settings/contact-types']);
+    $this->app->addSetting(['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
+    $this->app->addSetting(['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
+    $this->app->addSetting(['title' => $this->translate('Pipelines'), 'icon' => 'fas fa-bars-progress', 'url' => 'settings/pipelines']);
+    $this->app->addSetting(['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
   }
 
   public function installTables()
@@ -55,8 +66,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mContactType = new Models\ContactType($this->app);
     $mCurrency = new Models\Currency($this->app);
     $mTag = new Models\Tag($this->app);
-    $mLeadStatus = new Models\LeadStatus($this->app);
-    $mDealStatus = new Models\DealStatus($this->app);
     $mPipeline = new Models\Pipeline($this->app);
     $mPipelineStep = new Models\PipelineStep($this->app);
     $mInvoiceProfile = new Models\InvoiceProfile($this->app);
@@ -73,8 +82,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mActivityTypes->dropTableIfExists()->install();
     $mContactType->dropTableIfExists()->install();
     $mCurrency->dropTableIfExists()->install();
-    $mLeadStatus->dropTableIfExists()->install();
-    $mDealStatus->dropTableIfExists()->install();
     $mPipeline->dropTableIfExists()->install();
     $mPipelineStep->dropTableIfExists()->install();
     $mInvoiceProfile->dropTableIfExists()->install();
@@ -88,16 +95,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mCurrency->eloquent->create([ 'name' => 'Euro', 'code' => 'EUR' ]);
     $mCurrency->eloquent->create([ 'name' => 'Dollar', 'code' => 'USD' ]);
     $mCurrency->eloquent->create([ 'name' => 'Koruny', 'code' => 'CZK' ]);
-
-    $mLeadStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
-    $mLeadStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
-    $mLeadStatus->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'color' => '#42ddf5' ]);
-    $mLeadStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
-
-    $mDealStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
-    $mDealStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
-    $mDealStatus->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'color' => '#42ddf5' ]);
-    $mDealStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
 
     $mPipeline->eloquent->create([ "name" => "Test Pipeline" ]);
     $mPipelineStep->eloquent->create([ 'name' => 'New', 'order' => 1, 'id_pipeline' => 1 ]);

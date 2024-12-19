@@ -2,6 +2,8 @@
 
 Open source CRM platform for any business.
 
+Follow us at LinkedIn: https://www.linkedin.com/company/ceremonycrm
+
 ## Installation
 
 ### Prerequisities

@@ -11,7 +11,7 @@ use CeremonyCrmMod\Settings\Models\PipelineStep;
 use CeremonyCrmMod\Settings\Models\Setting;
 use CeremonyCrmMod\Settings\Models\User;
 use CeremonyCrmMod\Deals\Models\DealHistory;
-use CeremonyCrmMod\Deals\Models\DealLabel;
+use CeremonyCrmMod\Deals\Models\DealTag;
 use CeremonyCrmMod\Leads\Models\Lead;
 use Exception;
 
@@ -31,7 +31,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
-    'LABELS' => [ self::HAS_MANY, DealLabel::class, 'id_deal', 'id' ],
+    'TAGS' => [ self::HAS_MANY, DealTag::class, 'id_deal', 'id' ],
     'SERVICES' => [ self::HAS_MANY, DealService::class, 'id_deal', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, DealActivity::class, 'id_deal', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_deal', 'id'],
@@ -167,7 +167,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
     }
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
-    $description['columns']['labels'] = ["title" => "Labels"];
+    $description['columns']['tags'] = ["title" => "Tags"];
     unset($description['columns']['note']);
     unset($description['columns']['id_person']);
     unset($description['columns']['source_channel']);
@@ -202,7 +202,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'PIPELINE_STEP',
       'CURRENCY',
       'HISTORY',
-      'LABELS',
+      'TAGS',
       'LEAD',
       'SERVICES',
       'ACTIVITIES',
@@ -222,7 +222,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'PIPELINE_STEP',
       'CURRENCY',
       'HISTORY',
-      'LABELS',
+      'TAGS',
       'LEAD',
       'SERVICES',
       'ACTIVITIES',

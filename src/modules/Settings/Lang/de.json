@@ -97,10 +97,6 @@
         "Settings": "Einstellungen",
         "Contact Types": "Kontakttypen"
     },
-    "models.label": {
-        "Name": "Titel",
-        "Color": "Farbe"
-    },
     "controllers.dashboard": {
         "Settings": "Einstellungen",
         "Users": "Benutzer",
@@ -112,7 +108,6 @@
         "Contact Types": "Kontakttypen",
         "Countries": "Länder",
         "Currencies": "Währungen",
-        "Labels": "Labels",
         "Lead Statuses": "Lead Zustände",
         "Deal Statuses": "Deal Zustände",
         "Pipelines": "Pipeline",

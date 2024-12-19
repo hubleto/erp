@@ -34,14 +34,14 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     $mLead = new \CeremonyCrmMod\Leads\Models\Lead($this->app);
     $mLeadHistory = new \CeremonyCrmMod\Leads\Models\LeadHistory($this->app);
-    $mLeadLabel = new \CeremonyCrmMod\Leads\Models\LeadLabel($this->app);
+    $mLeadTag = new \CeremonyCrmMod\Leads\Models\LeadTag($this->app);
     $mLeadService = new \CeremonyCrmMod\Leads\Models\LeadService($this->app);
     $mLeadActivity = new \CeremonyCrmMod\Leads\Models\LeadActivity($this->app);
     $mLeadDocument = new \CeremonyCrmMod\Leads\Models\LeadDocument($this->app);
 
     $mLead->dropTableIfExists()->install();
     $mLeadHistory->dropTableIfExists()->install();
-    $mLeadLabel->dropTableIfExists()->install();
+    $mLeadTag->dropTableIfExists()->install();
     $mLeadService->dropTableIfExists()->install();
     $mLeadActivity->dropTableIfExists()->install();
     $mLeadDocument->dropTableIfExists()->install();

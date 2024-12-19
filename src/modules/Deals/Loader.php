@@ -35,14 +35,14 @@ class Loader extends \CeremonyCrmApp\Core\Module
   {
     $mDeal = new \CeremonyCrmMod\Deals\Models\Deal($this->app);
     $mDealHistory = new \CeremonyCrmMod\Deals\Models\DealHistory($this->app);
-    $mDealLabel = new \CeremonyCrmMod\Deals\Models\DealLabel($this->app);
+    $mDealTag = new \CeremonyCrmMod\Deals\Models\DealTag($this->app);
     $mDealService = new \CeremonyCrmMod\Deals\Models\DealService($this->app);
     $mDealActivity = new \CeremonyCrmMod\Deals\Models\DealActivity($this->app);
     $mDealDocument = new \CeremonyCrmMod\Deals\Models\DealDocument($this->app);
 
     $mDeal->dropTableIfExists()->install();
     $mDealHistory->dropTableIfExists()->install();
-    $mDealLabel->dropTableIfExists()->install();
+    $mDealTag->dropTableIfExists()->install();
     $mDealService->dropTableIfExists()->install();
     $mDealActivity->dropTableIfExists()->install();
     $mDealDocument->dropTableIfExists()->install();

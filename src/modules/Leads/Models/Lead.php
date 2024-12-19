@@ -9,7 +9,7 @@ use CeremonyCrmMod\Settings\Models\LeadStatus;
 use CeremonyCrmMod\Settings\Models\User;
 use CeremonyCrmMod\Deals\Models\Deal;
 use CeremonyCrmMod\Leads\Models\LeadHistory;
-use CeremonyCrmMod\Leads\Models\LeadLabel;
+use CeremonyCrmMod\Leads\Models\LeadTag;
 use Exception;
 
 class Lead extends \CeremonyCrmApp\Core\Model
@@ -26,7 +26,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     'STATUS' => [ self::HAS_ONE, LeadStatus::class, 'id', 'id_lead_status'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
-    'LABELS' => [ self::HAS_MANY, LeadLabel::class, 'id_lead', 'id' ],
+    'TAGS' => [ self::HAS_MANY, LeadTag::class, 'id_lead', 'id' ],
     'SERVICES' => [ self::HAS_MANY, LeadService::class, 'id_lead', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, LeadActivity::class, 'id_lead', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, LeadDocument::class, 'id_lead', 'id'],
@@ -137,7 +137,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
     }
     $description['ui']['showHeader'] = true;
     $description['ui']['showFooter'] = false;
-    $description['columns']['labels'] = ["title" => "Labels"];
+    $description['columns']['tags'] = ["title" => "Tags"];
     unset($description['columns']['note']);
     unset($description['columns']['id_person']);
     unset($description['columns']['source_channel']);
@@ -162,7 +162,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'STATUS',
       'CURRENCY',
       'HISTORY',
-      'LABELS',
+      'TAGS',
       'SERVICES',
       'ACTIVITIES',
       'DOCUMENTS',
@@ -183,7 +183,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'STATUS',
       'CURRENCY',
       'HISTORY',
-      'LABELS',
+      'TAGS',
       'SERVICES',
       'ACTIVITIES',
       'DOCUMENTS',

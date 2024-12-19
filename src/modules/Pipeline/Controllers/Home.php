@@ -2,7 +2,7 @@
 
 namespace CeremonyCrmMod\Pipeline\Controllers;
 
-use CeremonyCrmMod\Settings\Models\Label;
+use CeremonyCrmMod\Settings\Models\Tag;
 use CeremonyCrmMod\Settings\Models\Pipeline;
 use CeremonyCrmMod\Settings\Models\Setting;
 use CeremonyCrmMod\Deals\Models\Deal;
@@ -24,7 +24,7 @@ class Home extends \CeremonyCrmApp\Core\Controller {
     $mSetting = new Setting($this->app);
     $mPipeline = new Pipeline($this->app);
     $mDeal = new Deal($this->app);
-    $mLabel = new Label($this->app);
+    $mTag = new Tag($this->app);
     $sumPipelinePrice = 0;
 
     $pipelines = $mPipeline->eloquent->get();
@@ -94,15 +94,15 @@ class Home extends \CeremonyCrmApp\Core\Controller {
       ->where("id_pipeline", (int) $searchPipeline["id"])
       ->with("CURRENCY")
       ->with("COMPANY")
-      ->with("LABELS")
+      ->with("TAGS")
       ->get()
       ->toArray()
     ;
 
     foreach ($deals as $key => $deal) {
-      $label = $mLabel->eloquent->find($deal["LABELS"][0]["id_label"])?->toArray();
-      $deals[$key]["LABEL"] = $label;
-      unset($deals[$key]["LABELS"]);
+      $tag = $mTag->eloquent->find($deal["TAGS"][0]["id_tag"])?->toArray();
+      $deals[$key]["TAG"] = $tag;
+      unset($deals[$key]["TAGS"]);
     }
 
     //var_dump($deals); exit;

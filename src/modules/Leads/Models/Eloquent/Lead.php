@@ -9,7 +9,7 @@ use CeremonyCrmMod\Settings\Models\Eloquent\LeadStatus;
 use CeremonyCrmMod\Settings\Models\Eloquent\User;
 use CeremonyCrmMod\Deals\Models\Eloquent\Deal;
 use CeremonyCrmMod\Leads\Models\Eloquent\LeadHistory;
-use CeremonyCrmMod\Leads\Models\Eloquent\LeadLabel;
+use CeremonyCrmMod\Leads\Models\Eloquent\LeadTag;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -39,8 +39,8 @@ class Lead extends \ADIOS\Core\Model\Eloquent
   public function HISTORY(): HasMany {
     return $this->hasMany(LeadHistory::class, 'id_lead', 'id');
   }
-  public function LABELS(): HasMany {
-    return $this->hasMany(LeadLabel::class, 'id_lead', 'id');
+  public function TAGS(): HasMany {
+    return $this->hasMany(LeadTag::class, 'id_lead', 'id');
   }
   public function SERVICES(): HasMany {
     return $this->hasMany(LeadService::class, 'id_lead', 'id');

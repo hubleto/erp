@@ -241,16 +241,16 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     {this.inputWrapper('id_user', {readonly: R.is_archived})}
                     {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                     {this.inputWrapper('source_channel', {readonly: R.is_archived})}
-                    <FormInput title='Labels'>
+                    <FormInput title='Tags'>
                       <InputTags2 {...this.getDefaultInputProps()}
-                        value={this.state.record.LABELS}
+                        value={this.state.record.TAGS}
                         readonly={R.is_archived}
-                        model='CeremonyCrmMod/Settings/Models/Label'
+                        model='CeremonyCrmMod/Settings/Models/Tag'
                         targetColumn='id_lead'
-                        sourceColumn='id_label'
+                        sourceColumn='id_tag'
                         colorColumn='color'
                         onChange={(value: any) => {
-                          this.updateRecord({LABELS: value});
+                          this.updateRecord({TAGS: value});
                         }}
                       ></InputTags2>
                     </FormInput>

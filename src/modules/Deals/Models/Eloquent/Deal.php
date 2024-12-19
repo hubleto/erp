@@ -10,7 +10,7 @@ use CeremonyCrmMod\Settings\Models\Eloquent\Pipeline;
 use CeremonyCrmMod\Settings\Models\Eloquent\PipelineStep;
 use CeremonyCrmMod\Settings\Models\Eloquent\User;
 use CeremonyCrmMod\Deals\Models\Eloquent\DealHistory;
-use CeremonyCrmMod\Deals\Models\Eloquent\DealLabel;
+use CeremonyCrmMod\Deals\Models\Eloquent\DealTag;
 use CeremonyCrmMod\Leads\Models\Eloquent\Lead;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -47,8 +47,8 @@ class Deal extends \ADIOS\Core\Model\Eloquent
   public function HISTORY(): HasMany {
     return $this->hasMany(DealHistory::class, 'id_deal', 'id');
   }
-  public function LABELS(): HasMany {
-    return $this->hasMany(DealLabel::class, 'id_deal', 'id');
+  public function TAGS(): HasMany {
+    return $this->hasMany(DealTag::class, 'id_deal', 'id');
   }
   public function SERVICES(): HasMany {
     return $this->hasMany(DealService::class, 'id_deal', 'id');

@@ -31,11 +31,11 @@
       <div class="card-body">
         {% for deal in viewParams.deals %}
           {% if deal.id_pipeline_step == step.id %}
-            <div class="card" style="border-color: {{deal.LABEL.color}};">
+            <div class="card" style="border-color: {{deal.TAG.color}};">
               <div class="card-header rounded flex flex-col p-2 text-sm">
                 <div class="flex flex-row justify-between gap-3">
                   <span class="truncate">{{deal.COMPANY.name}}</span>
-                  <span style="color: {{deal.LABEL.color}};" class="font-normal">{{deal.LABEL.name}}</span>
+                  <span style="color: {{deal.TAG.color}};" class="font-normal">{{deal.TAG.name}}</span>
                 </div>
                 <span style="font-size: 8pt;" class="text-gray-300 truncate">{{deal.title}}</span>
               </div>

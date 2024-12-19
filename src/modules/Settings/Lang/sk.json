@@ -97,10 +97,6 @@
         "Settings": "Nastavenia",
         "Contact Types": "Typy kontaktov"
     },
-    "models.label": {
-        "Name": "Názov",
-        "Color": "Farba"
-    },
     "controllers.dashboard": {
         "Settings": "Nastavenia",
         "Users": "Používatelia",
@@ -112,7 +108,6 @@
         "Contact Types": "Typy kontaktov",
         "Countries": "Štáty",
         "Currencies": "Meny",
-        "Labels": "Značky",
         "Lead Statuses": "Stavy leadov",
         "Deal Statuses": "Stavy dealov",
         "Pipelines": "Pipeline",

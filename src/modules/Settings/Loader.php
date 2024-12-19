@@ -30,7 +30,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^settings\/contact-types\/?$/' => Controllers\ContactTypes::class,
       '/^settings\/countries\/?$/' => Controllers\Countries::class,
       '/^settings\/currencies\/?$/' => Controllers\Currencies::class,
-      '/^settings\/labels\/?$/' => Controllers\Labels::class,
       '/^settings\/lead-statuses\/?$/' => Controllers\LeadStatuses::class,
       '/^settings\/deal-statuses\/?$/' => Controllers\DealStatuses::class,
       '/^settings\/pipelines\/?$/' => Controllers\Pipelines::class,
@@ -39,25 +38,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
     ]);
 
     $this->app->sidebar->addLink(1, 900, 'settings', $this->translate('Settings'), 'fas fa-cog', str_starts_with($this->app->requestedUri, 'settings'));
-
-    // if (str_starts_with($this->app->requestedUri, 'settings')) {
-    //   $this->app->sidebar->addHeading1(2, 99200, $this->translate('Settings'));
-    //   $this->app->sidebar->addLink(2, 99201, 'settings/users', $this->translate('Users'), 'fas fa-user');
-    //   $this->app->sidebar->addLink(2, 99202, 'settings/user-roles', $this->translate('User Roles'), 'fas fa-user-group');
-    //   $this->app->sidebar->addLink(2, 99203, 'settings/profiles', $this->translate('Profiles'), 'fas fa-id-card');
-    //   $this->app->sidebar->addLink(2, 99204, 'settings/settings', $this->translate('Settings'), 'fas fa-cog');
-    //   $this->app->sidebar->addLink(2, 99205, 'settings/permissions', $this->translate('Permissions'), 'fas fa-shield-halved');
-    //   $this->app->sidebar->addLink(2, 99206, 'settings/tags', $this->translate('Tags'), 'fas fa-tags');
-    //   $this->app->sidebar->addLink(2, 99207, 'settings/activity-types', $this->translate('Activity Types'), 'fas fa-layer-group');
-    //   $this->app->sidebar->addLink(2, 99208, 'settings/contact-types', $this->translate('Contact Types'), 'fas fa-phone');
-    //   $this->app->sidebar->addLink(2, 99209, 'settings/countries', $this->translate('Countries'), 'fas fa-globe');
-    //   $this->app->sidebar->addLink(2, 99210, 'settings/currencies', $this->translate('Currencies'), 'fas fa-dollar-sign');
-    //   $this->app->sidebar->addLink(2, 99211, 'settings/labels', $this->translate('Labels'), 'fas fa-tags');
-    //   $this->app->sidebar->addLink(2, 99212, 'settings/lead-statuses', $this->translate('Lead Statuses'), 'fas fa-arrow-down-short-wide');
-    //   $this->app->sidebar->addLink(2, 99213, 'settings/deal-statuses', $this->translate('Deal Statuses'), 'fas fa-arrow-up-short-wide');
-    //   $this->app->sidebar->addLink(2, 99214, 'settings/pipelines', $this->translate('Pipelines'), 'fas fa-bars-progress');
-    //   $this->app->sidebar->addLink(2, 99214, 'settings/invoice-profiles', $this->translate('Invoice profiles'), 'fas fa-user-tie');
-    // }
   }
 
   public function installTables()
@@ -74,7 +54,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mActivityTypes = new Models\ActivityType($this->app);
     $mContactType = new Models\ContactType($this->app);
     $mCurrency = new Models\Currency($this->app);
-    $mLabel = new Models\Label($this->app);
+    $mTag = new Models\Tag($this->app);
     $mLeadStatus = new Models\LeadStatus($this->app);
     $mDealStatus = new Models\DealStatus($this->app);
     $mPipeline = new Models\Pipeline($this->app);
@@ -93,7 +73,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mActivityTypes->dropTableIfExists()->install();
     $mContactType->dropTableIfExists()->install();
     $mCurrency->dropTableIfExists()->install();
-    $mLabel->dropTableIfExists()->install();
     $mLeadStatus->dropTableIfExists()->install();
     $mDealStatus->dropTableIfExists()->install();
     $mPipeline->dropTableIfExists()->install();
@@ -109,10 +88,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mCurrency->eloquent->create([ 'name' => 'Euro', 'code' => 'EUR' ]);
     $mCurrency->eloquent->create([ 'name' => 'Dollar', 'code' => 'USD' ]);
     $mCurrency->eloquent->create([ 'name' => 'Koruny', 'code' => 'CZK' ]);
-
-    $mLabel->eloquent->create([ 'name' => 'Hot', 'color' => '#f55442' ]);
-    $mLabel->eloquent->create([ 'name' => 'Warm', 'color' => '#f5bc42' ]);
-    $mLabel->eloquent->create([ 'name' => 'Cold', 'color' => '#42ddf5' ]);
 
     $mLeadStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
     $mLeadStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
@@ -432,10 +407,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
       "CeremonyCrmMod/Settings/Models/Currency:Update" => [],
       "CeremonyCrmMod/Settings/Models/Currency:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/Label:Create" => [],
-      "CeremonyCrmMod/Settings/Models/Label:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/Label:Update" => [],
-      "CeremonyCrmMod/Settings/Models/Label:Delete" => [],
+      "CeremonyCrmMod/Settings/Models/Tag:Create" => [],
+      "CeremonyCrmMod/Settings/Models/Tag:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "CeremonyCrmMod/Settings/Models/Tag:Update" => [],
+      "CeremonyCrmMod/Settings/Models/Tag:Delete" => [],
 
       "CeremonyCrmMod/Settings/Models/Pipeline:Create" => [],
       "CeremonyCrmMod/Settings/Models/Pipeline:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
@@ -456,11 +431,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
       "CeremonyCrmMod/Settings/Models/Setting:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
       "CeremonyCrmMod/Settings/Models/Setting:Update" => [],
       "CeremonyCrmMod/Settings/Models/Setting:Delete" => [],
-
-      "CeremonyCrmMod/Settings/Models/Tag:Create" => [],
-      "CeremonyCrmMod/Settings/Models/Tag:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/Tag:Update" => [],
-      "CeremonyCrmMod/Settings/Models/Tag:Delete" => [],
 
       "CeremonyCrmMod/Settings/Models/User:Create" => [],
       "CeremonyCrmMod/Settings/Models/User:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
@@ -485,7 +455,6 @@ class Loader extends \CeremonyCrmApp\Core\Module
       "CeremonyCrmMod/Setting/Controllers/ActivityType" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
       "CeremonyCrmMod/Setting/Controllers/Country" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
       "CeremonyCrmMod/Setting/Controllers/Currency" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/Label" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
       "CeremonyCrmMod/Setting/Controllers/Pipeline" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
       "CeremonyCrmMod/Setting/Controllers/PipelineStep" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
       "CeremonyCrmMod/Setting/Controllers/Profile" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],

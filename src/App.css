@@ -50,7 +50,7 @@
   /* CLASSES in alphabetical order */
 
   .adios.component.table { @apply w-full; }
-  .adios.component.table .table-header { @apply flex flex-row gap-2 mb-2; }
+  .adios.component.table .table-header { @apply flex flex-row items-center gap-2 mb-2; }
   .adios.component.table .table-header-left { @apply flex gap-1; }
   .adios.component.table .table-header-title { @apply text-left text-primary text-2xl mr-2 }
   .adios.component.table .table-header-right { @apply text-center flex gap-1; }
@@ -104,7 +104,7 @@
   .alert-warning { @apply p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50; }
   .alert-danger { @apply p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50; }
 
-  .badge { @apply text-xs p-0.5 text-white rounded inline m-0.5; }
+  .badge { @apply text-xs p-1 text-white rounded inline m-0.5; }
 
   .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
   .btn .icon { @apply block px-2 py-1 text-sm; }

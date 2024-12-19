@@ -59,7 +59,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
       elements.push(
         <a className="btn btn-transparent" href="deals/archive">
           <span className="icon"><i className="fas fa-box-archive"></i></span>
-          <span className="text">Archive</span>
+          <span className="text">Show</span>
         </a>
       );
     }
@@ -68,15 +68,15 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
-    if (columnName == "labels") {
+    if (columnName == "tags") {
       return (
         <div className='flex flex-row gap-2'>
-          {data.LABELS.map((label, key) => {
+          {data.TAGS.map((tag, key) => {
             return (
               <div
-                style={{color: label.LABEL.color, borderColor: label.LABEL.color}}
+                style={{color: tag.TAG.color, borderColor: tag.TAG.color}}
                 className='border rounded px-1'>
-                {label.LABEL.name}
+                {tag.TAG.name}
               </div>
             );
           })}

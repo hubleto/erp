@@ -77,15 +77,15 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
           </div>
         )
       }
-    } else if (columnName == "labels") {
+    } else if (columnName == "tags") {
       return (
         <div className='flex flex-row gap-2'>
-          {data.LABELS.map((label, key) => {
+          {data.TAGS.map((tag, key) => {
             return (
               <div
-                style={{color: label.LABEL.color, borderColor: label.LABEL.color}}
+                style={{color: tag.TAG.color, borderColor: tag.TAG.color}}
                 className='border rounded px-1'>
-                {label.LABEL.name}
+                {tag.TAG.name}
               </div>
             );
           })}

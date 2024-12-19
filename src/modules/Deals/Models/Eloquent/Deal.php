@@ -5,7 +5,6 @@ namespace CeremonyCrmMod\Deals\Models\Eloquent;
 use CeremonyCrmMod\Customers\Models\Eloquent\Company;
 use CeremonyCrmMod\Customers\Models\Eloquent\Person;
 use CeremonyCrmMod\Settings\Models\Eloquent\Currency;
-use CeremonyCrmMod\Settings\Models\Eloquent\DealStatus;
 use CeremonyCrmMod\Settings\Models\Eloquent\Pipeline;
 use CeremonyCrmMod\Settings\Models\Eloquent\PipelineStep;
 use CeremonyCrmMod\Settings\Models\Eloquent\User;

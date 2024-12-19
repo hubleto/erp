@@ -195,6 +195,7 @@
 
     <aside id="default-sidebar">
       <nav>
+        <input class="bg-white/20 text-white text-xs m-1 p-1 rounded placeholder-white" placeholder="Search module..." onkeyup="smis(event, this.value);" />
         {% set i = 0 %}
         {% for item in viewParams.sidebar.level1Items %}
           {% if item.type == 'link' %}
@@ -266,6 +267,18 @@
     </div>
 
   {% endif %}
+
+<script>
+  function smis(e, q) {
+    let b = $("#default-sidebar .btn");
+    if (q == '') b.show(); else {
+      let r = new RegExp(q, "i");
+      b.hide().each(function() { if ($(this).find('.text').text().match(r)) $(this).show(); });
+    }
+    if (e.keyCode == 13) { b.filter(':visible').get(0).click(); return; }
+  }
+</script>
+
 </body>
 
 </html>

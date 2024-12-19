@@ -1,7 +1,7 @@
 <h1>{{ translate('Settings') }}</h1>
 
 <script>
-  function search(q) {
+  function searchSetting(q) {
     if (q == '') {
       $("#setting-buttons .btn").show();
     } else {
@@ -21,7 +21,7 @@
   <input
     class="w-full p-2 border border-gray"
     placeholder="Search settings..."
-    onkeyup="search(this.value);"
+    onkeyup="searchSetting(this.value);"
   />
 </div>
 

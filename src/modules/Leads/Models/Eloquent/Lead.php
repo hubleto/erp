@@ -5,7 +5,6 @@ namespace CeremonyCrmMod\Leads\Models\Eloquent;
 use CeremonyCrmMod\Customers\Models\Eloquent\Company;
 use CeremonyCrmMod\Customers\Models\Eloquent\Person;
 use CeremonyCrmMod\Settings\Models\Eloquent\Currency;
-use CeremonyCrmMod\Settings\Models\Eloquent\LeadStatus;
 use CeremonyCrmMod\Settings\Models\Eloquent\User;
 use CeremonyCrmMod\Deals\Models\Eloquent\Deal;
 use CeremonyCrmMod\Leads\Models\Eloquent\LeadHistory;

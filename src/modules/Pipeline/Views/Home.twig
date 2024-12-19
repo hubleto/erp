@@ -1,13 +1,10 @@
-
-
-<!-- <h2>{{ viewParams.pipeline.name}}</h2> -->
-{% set pipelinePrice = 'Price by currency:\n' %}
+{% set pipelinePrice = 'Profit by currency:\n' %}
 {% for currencyGroup in viewParams.pipeline.currency_groups %}
   {% set pipelinePrice = pipelinePrice ~ currencyGroup.price ~ ' ' ~ currencyGroup.code ~ '\n' %}
 {% endfor %}
 
 <div>
-  <form class="inline-block" action="" method="post">
+  <form class="inline-block mr-2" action="" method="post">
     <select class="border p-2 mb-2 mt-2 rounded-md border-gray-200 text-2xl font-bold text-purple-500" name="id_pipeline" onchange="submit()">
       {% for pipeline in viewParams.pipelines %}
         <option value="{{ pipeline.id }}"
@@ -16,33 +13,53 @@
       {% endfor %}
     </select>
   </form>
-  <span class="inline-block align-bottom mb-2 text-gray-400">Potential Pipeline Gain: {{viewParams.pipeline.price}}</span>
+  <span class="inline-block align-bottom mb-2 mr-2 text-gray-400">Potential Pipeline Profit: {{viewParams.pipeline.price}}</span>
   <a class="inline-block align-bottom mb-2 text-gray-400" id="pipiline-price" data-pr-tooltip="{{ pipelinePrice|raw }}"><i class="fa fa-info-circle"></i></a>
   <app-tooltip string:target="#pipiline-price"></app-tooltip>
 </div>
 
-<div class="flex flex-row justify-start gap-2 w-full">
+<div class="flex flex-row justify-start gap-2">
   {% for step in viewParams.pipeline.PIPELINE_STEPS %}
-    <div class="card min-h-[85vh] w-[230px]">
+
+    {# Set up the currency groups for the pipeline step #}
+    {% set pipelineStepPrice = 'Profit by currency:\n' %}
+    {% for currencyGroup in step.currency_groups %}
+      {% set pipelineStepPrice = pipelineStepPrice ~ currencyGroup.price ~ ' ' ~ currencyGroup.code ~ '\n' %}
+    {% endfor %}
+
+    {# Step Containter #}
+    <div class="card min-h-[85vh] w-[280px]">
+
       <div class="card-header flex flex-col gap-1">
         <span>{{ step.name }}</span>
-        <span style="font-size: 9pt;" class="text-gray-300 font-normal">Potential Gain: {{step.sum_price}} €</span>
+
+        <div class="flex flex-row gap-2 align-items-center text-gray-400">
+          <span style="font-size: 9pt;" class="font-normal pt-1">Potential Step Profit: {{step.sum_price}}</span>
+
+          {# Currency groups tooltip #}
+          <a class="inline-block align-bottom" id="pipiline-step-price-{{ loop.index }}" data-pr-tooltip="{{ pipelineStepPrice|raw }}"><i class="fa fa-info-circle"></i></a>
+          <app-tooltip string:target="#pipiline-step-price-{{ loop.index }}"></app-tooltip>
+        </div>
       </div>
+
       <div class="card-body">
+        {# Deal Card #}
         {% for deal in viewParams.deals %}
           {% if deal.id_pipeline_step == step.id %}
             <div class="card" style="border-color: {{deal.TAG.color}};">
               <div class="card-header rounded flex flex-col p-2 text-sm">
-                <div class="flex flex-row justify-between gap-3">
-                  <span class="truncate">{{deal.COMPANY.name}}</span>
-                  <span style="color: {{deal.TAG.color}};" class="font-normal">{{deal.TAG.name}}</span>
+                <div class="grid grid-cols-3">
+                  <div class="flex flex-col col-span-2">
+                    <span class="truncate">{{deal.COMPANY.name}}</span>
+                    <span style="font-size: 8pt;" class="text-gray-400 truncate">{{deal.title}}</span>
+                  </div>
+                  <span class="font-normal col-span-1 text-right" style="color: {{deal.TAG.color}};">{{deal.TAG.name}}</span>
                 </div>
-                <span style="font-size: 8pt;" class="text-gray-300 truncate">{{deal.title}}</span>
               </div>
               <div class="card-body flex flex-row justify-between">
                 <span>{{deal.price}} {{deal.CURRENCY.code}}</span>
                 <span class="icon">
-                  <a href="./deals?recordId={{deal.id}}">
+                  <a href="./deals?recordId={{deal.id}}" target="_blank">
                     <i class="fas fa-circle-right text-gray-300 hover:text-gray-500"></i>
                   </a></span>
               </div>

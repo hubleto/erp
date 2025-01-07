@@ -1,13 +1,13 @@
 <?php
 
-namespace CeremonyCrmMod\Invoices\Models\Eloquent;
+namespace HubletoApp\Invoices\Models\Eloquent;
 
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-use \CeremonyCrmMod\Customers\Models\Eloquent\Company;
-use \CeremonyCrmMod\Settings\Models\Eloquent\User;
-use \CeremonyCrmMod\Settings\Models\Eloquent\InvoiceProfile;
+use \HubletoApp\Customers\Models\Eloquent\Company;
+use \HubletoApp\Settings\Models\Eloquent\User;
+use \HubletoApp\Settings\Models\Eloquent\InvoiceProfile;
 
 class Invoice extends \ADIOS\Core\Model\Eloquent {
   public $table = 'invoices';

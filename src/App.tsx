@@ -16,7 +16,7 @@ import InputColor from "adios/Inputs/Color";
 // Primereact
 import { Tooltip } from "primereact/tooltip";
 
-export default class CeremonyCrmApp extends ADIOS {
+export default class HubletoCore extends ADIOS {
   language: string = 'en';
   idUser: number = 0;
   user: any;

@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Models;
+namespace HubletoApp\Deals\Models;
 
-class DealStatus extends \CeremonyCrmApp\Core\Model
+class DealStatus extends \HubletoCore\Core\Model
 {
   public string $table = 'deal_statuses';
   public string $eloquentClass = Eloquent\DealStatus::class;

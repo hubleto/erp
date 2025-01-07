@@ -1,15 +1,15 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models;
+namespace HubletoApp\Customers\Models;
 
-use CeremonyCrmMod\Billing\Models\BillingAccount;
-use CeremonyCrmMod\Settings\Models\Country;
-use CeremonyCrmMod\Settings\Models\User;
-use CeremonyCrmMod\Deals\Models\Deal;
-use CeremonyCrmMod\Leads\Models\Lead;
+use HubletoApp\Billing\Models\BillingAccount;
+use HubletoApp\Settings\Models\Country;
+use HubletoApp\Settings\Models\User;
+use HubletoApp\Deals\Models\Deal;
+use HubletoApp\Leads\Models\Lead;
 use Illuminate\Database\Eloquent\Builder;
 
-class Company extends \CeremonyCrmApp\Core\Model
+class Company extends \HubletoCore\Core\Model
 {
   public string $table = 'companies';
   public string $eloquentClass = Eloquent\Company::class;
@@ -58,7 +58,7 @@ class Company extends \CeremonyCrmApp\Core\Model
       ],
       'id_country' => [
         'type' => 'lookup',
-        'model' => \CeremonyCrmMod\Settings\Models\Country::class,
+        'model' => \HubletoApp\Settings\Models\Country::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'title' => $this->translate('Country'),
@@ -104,7 +104,7 @@ class Company extends \CeremonyCrmApp\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => $this->translate('Assigned User'),
-        'model' => \CeremonyCrmMod\Settings\Models\User::class,
+        'model' => \HubletoApp\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,

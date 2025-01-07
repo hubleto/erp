@@ -12,7 +12,7 @@ export default class TablePipelineSteps extends Table<TablePipelineStepsProps, T
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Settings/Models/PipelineStep',
+    model: 'HubletoApp/Settings/Models/PipelineStep',
   }
 
   props: TablePipelineStepsProps;

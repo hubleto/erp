@@ -1,17 +1,17 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Models;
+namespace HubletoApp\Leads\Models;
 
-use CeremonyCrmMod\Customers\Models\Company;
-use CeremonyCrmMod\Customers\Models\Person;
-use CeremonyCrmMod\Settings\Models\Currency;
-use CeremonyCrmMod\Settings\Models\User;
-use CeremonyCrmMod\Deals\Models\Deal;
-use CeremonyCrmMod\Leads\Models\LeadHistory;
-use CeremonyCrmMod\Leads\Models\LeadTag;
+use HubletoApp\Customers\Models\Company;
+use HubletoApp\Customers\Models\Person;
+use HubletoApp\Settings\Models\Currency;
+use HubletoApp\Settings\Models\User;
+use HubletoApp\Deals\Models\Deal;
+use HubletoApp\Leads\Models\LeadHistory;
+use HubletoApp\Leads\Models\LeadTag;
 use Exception;
 
-class Lead extends \CeremonyCrmApp\Core\Model
+class Lead extends \HubletoCore\Core\Model
 {
   public string $table = 'leads';
   public string $eloquentClass = Eloquent\Lead::class;
@@ -43,7 +43,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => \CeremonyCrmMod\Customers\Models\Company::class,
+        'model' => \HubletoApp\Customers\Models\Company::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => false,
@@ -51,7 +51,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Contact Person',
-        'model' => \CeremonyCrmMod\Customers\Models\Person::class,
+        'model' => \HubletoApp\Customers\Models\Person::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -64,7 +64,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_currency' => [
         'type' => 'lookup',
         'title' => 'Currency',
-        'model' => \CeremonyCrmMod\Settings\Models\Currency::class,
+        'model' => \HubletoApp\Settings\Models\Currency::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         // 'required' => true,
@@ -77,7 +77,7 @@ class Lead extends \CeremonyCrmApp\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Assigned User',
-        'model' => \CeremonyCrmMod\Settings\Models\User::class,
+        'model' => \HubletoApp\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,

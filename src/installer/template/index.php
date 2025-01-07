@@ -4,5 +4,5 @@
 require(__DIR__ . "/LoadApp.php");
 
 // render
-$app = new CeremonyCrmApp($config);
+$app = new HubletoCore($config);
 echo $app->render();

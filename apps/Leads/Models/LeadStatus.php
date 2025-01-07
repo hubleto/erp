@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Models;
+namespace HubletoApp\Leads\Models;
 
-class LeadStatus extends \CeremonyCrmApp\Core\Model
+class LeadStatus extends \HubletoCore\Core\Model
 {
   public string $table = 'lead_statuses';
   public string $eloquentClass = Eloquent\LeadStatus::class;

@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Models;
+namespace HubletoApp\Deals\Models;
 
-use CeremonyCrmMod\Settings\Models\Tag;
-use CeremonyCrmMod\Deals\Models\Deal;
+use HubletoApp\Settings\Models\Tag;
+use HubletoApp\Deals\Models\Deal;
 
-class DealTag extends \CeremonyCrmApp\Core\Model
+class DealTag extends \HubletoCore\Core\Model
 {
   public string $table = 'deal_tags';
   public string $eloquentClass = Eloquent\DealTag::class;
@@ -21,7 +21,7 @@ class DealTag extends \CeremonyCrmApp\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',
-        'model' => \CeremonyCrmMod\Deals\Models\Deal::class,
+        'model' => \HubletoApp\Deals\Models\Deal::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -29,7 +29,7 @@ class DealTag extends \CeremonyCrmApp\Core\Model
       'id_tag' => [
         'type' => 'lookup',
         'title' => 'Tag',
-        'model' => \CeremonyCrmMod\Settings\Models\Tag::class,
+        'model' => \HubletoApp\Settings\Models\Tag::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

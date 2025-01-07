@@ -1,12 +1,12 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace HubletoCore\Core;
 
 class Calendar {
 
-  public \CeremonyCrmApp $app;
+  public \HubletoCore $app;
 
-  public function __construct(\CeremonyCrmApp $app) {
+  public function __construct(\HubletoCore $app) {
     $this->app = $app;
   }
 

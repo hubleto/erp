@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Invoices;
+namespace HubletoApp\Invoices;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
     $this->registerModel(Models\Invoice::class);
@@ -22,8 +22,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function installTables()
   {
-    $mInvoice = new \CeremonyCrmMod\Invoices\Models\Invoice($this->app);
-    $mInvoiceItem = new \CeremonyCrmMod\Invoices\Models\InvoiceItem($this->app);
+    $mInvoice = new \HubletoApp\Invoices\Models\Invoice($this->app);
+    $mInvoiceItem = new \HubletoApp\Invoices\Models\InvoiceItem($this->app);
 
     $mInvoice->dropTableIfExists()->install();
     $mInvoiceItem->dropTableIfExists()->install();
@@ -31,11 +31,11 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function installDefaultPermissions()
   {
-    $mPermission = new \CeremonyCrmMod\Settings\Models\Permission($this->app);
+    $mPermission = new \HubletoApp\Settings\Models\Permission($this->app);
     $permissions = [
-      "CeremonyCrmMod/Invoices/Models/Invoice:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Invoices/Models/InvoiceItem:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Invoices/Controllers/Print",
+      "HubletoApp/Invoices/Models/Invoice:Create,Read,Update,Delete",
+      "HubletoApp/Invoices/Models/InvoiceItem:Create,Read,Update,Delete",
+      "HubletoApp/Invoices/Controllers/Print",
     ];
 
     foreach ($permissions as $key => $permission) {

@@ -1,16 +1,16 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Models\Eloquent;
+namespace HubletoApp\Deals\Models\Eloquent;
 
-use CeremonyCrmMod\Customers\Models\Eloquent\Company;
-use CeremonyCrmMod\Customers\Models\Eloquent\Person;
-use CeremonyCrmMod\Settings\Models\Eloquent\Currency;
-use CeremonyCrmMod\Settings\Models\Eloquent\Pipeline;
-use CeremonyCrmMod\Settings\Models\Eloquent\PipelineStep;
-use CeremonyCrmMod\Settings\Models\Eloquent\User;
-use CeremonyCrmMod\Deals\Models\Eloquent\DealHistory;
-use CeremonyCrmMod\Deals\Models\Eloquent\DealTag;
-use CeremonyCrmMod\Leads\Models\Eloquent\Lead;
+use HubletoApp\Customers\Models\Eloquent\Company;
+use HubletoApp\Customers\Models\Eloquent\Person;
+use HubletoApp\Settings\Models\Eloquent\Currency;
+use HubletoApp\Settings\Models\Eloquent\Pipeline;
+use HubletoApp\Settings\Models\Eloquent\PipelineStep;
+use HubletoApp\Settings\Models\Eloquent\User;
+use HubletoApp\Deals\Models\Eloquent\DealHistory;
+use HubletoApp\Deals\Models\Eloquent\DealTag;
+use HubletoApp\Leads\Models\Eloquent\Lead;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

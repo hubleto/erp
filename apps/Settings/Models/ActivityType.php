@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
-class ActivityType extends \CeremonyCrmApp\Core\Model
+class ActivityType extends \HubletoCore\Core\Model
 {
   public string $table = 'activity_types';
   public string $eloquentClass = Eloquent\ActivityType::class;

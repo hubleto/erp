@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
-class UserRole extends \CeremonyCrmApp\Core\Model
+class UserRole extends \HubletoCore\Core\Model
 {
   const ROLE_ADMINISTRATOR = 1;
   const ROLE_SALES_MANAGER = 2;

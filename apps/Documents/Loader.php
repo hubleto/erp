@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Documents;
+namespace HubletoApp\Documents;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
 
@@ -23,7 +23,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function installTables()
   {
-    $mDocuments = new \CeremonyCrmMod\Documents\Models\Document($this->app);
+    $mDocuments = new \HubletoApp\Documents\Models\Document($this->app);
     $mDocuments->dropTableIfExists()->install();
   }
 

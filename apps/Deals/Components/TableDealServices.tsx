@@ -13,7 +13,7 @@ export default class TableDealServices extends Table<TableDealServicesProps, Tab
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Deals/Models/DealService',
+    model: 'HubletoApp/Deals/Models/DealService',
   }
 
   props: TableDealServicesProps;

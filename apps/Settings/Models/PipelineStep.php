@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
-class PipelineStep extends \CeremonyCrmApp\Core\Model
+class PipelineStep extends \HubletoCore\Core\Model
 {
   public string $table = 'pipeline_steps';
   public string $eloquentClass = Eloquent\PipelineStep::class;

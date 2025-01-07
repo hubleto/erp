@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace HubletoCore\Core;
 
 use \ADIOS\Core\Helper;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Customers;
+namespace HubletoApp\Customers;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
 
@@ -39,15 +39,15 @@ class Loader extends \CeremonyCrmApp\Core\Module
   }
 
   public function installTables() {
-    $mPerson = new \CeremonyCrmMod\Customers\Models\Person($this->app);
-    $mCompany = new \CeremonyCrmMod\Customers\Models\Company($this->app);
-    $mAddress = new \CeremonyCrmMod\Customers\Models\Address($this->app);
-    $mContact = new \CeremonyCrmMod\Customers\Models\Contact($this->app);
-    //$mActivity = new \CeremonyCrmMod\Customers\Models\Activity($this->app);
-    $mCompanyActivity = new \CeremonyCrmMod\Customers\Models\CompanyActivity($this->app);
-    $mCompanyDocument = new \CeremonyCrmMod\Customers\Models\CompanyDocument($this->app);
-    $mCompanyTag = new \CeremonyCrmMod\Customers\Models\CompanyTag($this->app);
-    $mPersonTag = new \CeremonyCrmMod\Customers\Models\PersonTag($this->app);
+    $mPerson = new \HubletoApp\Customers\Models\Person($this->app);
+    $mCompany = new \HubletoApp\Customers\Models\Company($this->app);
+    $mAddress = new \HubletoApp\Customers\Models\Address($this->app);
+    $mContact = new \HubletoApp\Customers\Models\Contact($this->app);
+    //$mActivity = new \HubletoApp\Customers\Models\Activity($this->app);
+    $mCompanyActivity = new \HubletoApp\Customers\Models\CompanyActivity($this->app);
+    $mCompanyDocument = new \HubletoApp\Customers\Models\CompanyDocument($this->app);
+    $mCompanyTag = new \HubletoApp\Customers\Models\CompanyTag($this->app);
+    $mPersonTag = new \HubletoApp\Customers\Models\PersonTag($this->app);
 
     $mCompany->dropTableIfExists()->install();
     $mPerson->dropTableIfExists()->install();
@@ -62,32 +62,32 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function installDefaultPermissions()
   {
-    $mPermission = new \CeremonyCrmMod\Settings\Models\Permission($this->app);
+    $mPermission = new \HubletoApp\Settings\Models\Permission($this->app);
     $permissions = [
-      "CeremonyCrmMod/Customers/Models/Activity:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Customers/Models/Address:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Customers/Models/Company:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Customers/Models/CompanyTag:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Customers/Models/Contact:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Customers/Models/Person:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Customers/Models/PersonTag:Create,Read,Update,Delete",
+      "HubletoApp/Customers/Models/Activity:Create,Read,Update,Delete",
+      "HubletoApp/Customers/Models/Address:Create,Read,Update,Delete",
+      "HubletoApp/Customers/Models/Company:Create,Read,Update,Delete",
+      "HubletoApp/Customers/Models/CompanyTag:Create,Read,Update,Delete",
+      "HubletoApp/Customers/Models/Contact:Create,Read,Update,Delete",
+      "HubletoApp/Customers/Models/Person:Create,Read,Update,Delete",
+      "HubletoApp/Customers/Models/PersonTag:Create,Read,Update,Delete",
 
-      "CeremonyCrmMod/Customers/Controllers/Activity",
-      "CeremonyCrmMod/Customers/Controllers/Address",
-      "CeremonyCrmMod/Customers/Controllers/Company",
-      "CeremonyCrmMod/Customers/Controllers/CompanyTag",
-      "CeremonyCrmMod/Customers/Controllers/Contact",
-      "CeremonyCrmMod/Customers/Controllers/Person",
-      "CeremonyCrmMod/Customers/Controllers/PersonTag",
-      "CeremonyCrmMod/Customers/Controllers/Activity",
+      "HubletoApp/Customers/Controllers/Activity",
+      "HubletoApp/Customers/Controllers/Address",
+      "HubletoApp/Customers/Controllers/Company",
+      "HubletoApp/Customers/Controllers/CompanyTag",
+      "HubletoApp/Customers/Controllers/Contact",
+      "HubletoApp/Customers/Controllers/Person",
+      "HubletoApp/Customers/Controllers/PersonTag",
+      "HubletoApp/Customers/Controllers/Activity",
 
-      "CeremonyCrmMod/Customers/Addresses",
-      "CeremonyCrmMod/Customers/Companies",
-      "CeremonyCrmMod/Customers/CompanyTag",
-      "CeremonyCrmMod/Customers/Contacts",
-      "CeremonyCrmMod/Customers/Persons",
-      "CeremonyCrmMod/Customers/PersonTag",
-      "CeremonyCrmMod/Customers/Activity",
+      "HubletoApp/Customers/Addresses",
+      "HubletoApp/Customers/Companies",
+      "HubletoApp/Customers/CompanyTag",
+      "HubletoApp/Customers/Contacts",
+      "HubletoApp/Customers/Persons",
+      "HubletoApp/Customers/PersonTag",
+      "HubletoApp/Customers/Activity",
     ];
 
     foreach ($permissions as $key => $permission) {

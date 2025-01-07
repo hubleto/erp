@@ -1,13 +1,13 @@
 <?php
 
-namespace CeremonyCrmApp\Installer;
+namespace HubletoCore\Installer;
 
-use CeremonyCrmMod\Settings\Models\ {
+use HubletoApp\Settings\Models\ {
   Permission, Profile, RolePermission, User, UserRole, UserHasRole
 };
 
 class Installer {
-  public \CeremonyCrmApp $app;
+  public \HubletoCore $app;
   public string $adminName = '';
   public string $adminFamilyName = '';
   public string $adminEmail = '';
@@ -32,7 +32,7 @@ class Installer {
   public array $enabledModules = [];
 
   public function __construct(
-    \CeremonyCrmApp $app,
+    \HubletoCore $app,
     string $env,
     string $uid,
     string $companyName,
@@ -80,18 +80,18 @@ class Installer {
   public function validate()
   {
     if (strlen($this->uid) > 32) {
-      throw new \CeremonyCrmApp\Exceptions\AccountValidationFailed('Account name is too long.');
+      throw new \HubletoCore\Exceptions\AccountValidationFailed('Account name is too long.');
     }
 
     if (!filter_var($this->adminEmail, FILTER_VALIDATE_EMAIL)) {
-      throw new \CeremonyCrmApp\Exceptions\AccountValidationFailed('Invalid admin email.');
+      throw new \HubletoCore\Exceptions\AccountValidationFailed('Invalid admin email.');
     }
 
     if (
       is_file($this->accountRootFolder . '/' . $this->uid)
       || is_dir($this->accountRootFolder . '/' . $this->uid)
     ) {
-      throw new \CeremonyCrmApp\Exceptions\AccountAlreadyExists('Account folder already exists');
+      throw new \HubletoCore\Exceptions\AccountAlreadyExists('Account folder already exists');
     }
   }
 
@@ -119,20 +119,20 @@ class Installer {
   public function installTables()
   {
 
-    (new \CeremonyCrmMod\Settings\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Documents\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Services\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Customers\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Invoices\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Billing\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Pipeline\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Leads\Loader($this->app))->installTables();
-    (new \CeremonyCrmMod\Deals\Loader($this->app))->installTables();
+    (new \HubletoApp\Settings\Loader($this->app))->installTables();
+    (new \HubletoApp\Documents\Loader($this->app))->installTables();
+    (new \HubletoApp\Services\Loader($this->app))->installTables();
+    (new \HubletoApp\Customers\Loader($this->app))->installTables();
+    (new \HubletoApp\Invoices\Loader($this->app))->installTables();
+    (new \HubletoApp\Billing\Loader($this->app))->installTables();
+    (new \HubletoApp\Pipeline\Loader($this->app))->installTables();
+    (new \HubletoApp\Leads\Loader($this->app))->installTables();
+    (new \HubletoApp\Deals\Loader($this->app))->installTables();
 
-    $mProfile = new \CeremonyCrmMod\Settings\Models\Profile($this->app);
-    $mUser = new \CeremonyCrmMod\Settings\Models\User($this->app);
-    $mUserRole = new \CeremonyCrmMod\Settings\Models\UserRole($this->app);
-    $mUserHasRole = new \CeremonyCrmMod\Settings\Models\UserHasRole($this->app);
+    $mProfile = new \HubletoApp\Settings\Models\Profile($this->app);
+    $mUser = new \HubletoApp\Settings\Models\User($this->app);
+    $mUserRole = new \HubletoApp\Settings\Models\UserRole($this->app);
+    $mUserHasRole = new \HubletoApp\Settings\Models\UserHasRole($this->app);
 
     $idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
 

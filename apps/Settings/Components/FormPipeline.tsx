@@ -13,7 +13,7 @@ interface FormPipelineState extends FormState {}
 export default class FormPipeline<P, S> extends Form<FormPipelineProps,FormPipelineState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'CeremonyCrmMod/Settings/Models/Pipeline',
+    model: 'HubletoApp/Settings/Models/Pipeline',
   };
 
   props: FormPipelineProps;

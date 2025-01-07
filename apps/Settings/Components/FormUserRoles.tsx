@@ -13,7 +13,7 @@ interface FormUserRolesState extends FormState {}
 export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUserRolesState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'CeremonyCrmMod/Settings/Models/UserRole',
+    model: 'HubletoApp/Settings/Models/UserRole',
   };
 
   props: FormUserRolesProps;
@@ -126,7 +126,7 @@ export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUse
                           id_permission: {
                             type: "lookup",
                             title: "Permission",
-                            model: "CeremonyCrmMod/Settings/Models/Permission",
+                            model: "HubletoApp/Settings/Models/Permission",
                           },
                         }
                       }}

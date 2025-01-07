@@ -1,9 +1,9 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models\Eloquent;
+namespace HubletoApp\Customers\Models\Eloquent;
 
-use CeremonyCrmMod\Settings\Models\Eloquent\Tag;
-use CeremonyCrmMod\Settings\Models\Eloquent\User;
+use HubletoApp\Settings\Models\Eloquent\Tag;
+use HubletoApp\Settings\Models\Eloquent\User;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Calendar\Controllers;
+namespace HubletoApp\Calendar\Controllers;
 
-class Calendar extends \CeremonyCrmApp\Core\Controller {
+class Calendar extends \HubletoCore\Core\Controller {
 
 
   public function getBreadcrumbs(): array

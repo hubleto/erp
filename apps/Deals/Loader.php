@@ -1,12 +1,12 @@
 <?php
 
-namespace CeremonyCrmMod\Deals;
+namespace HubletoApp\Deals;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
   }
@@ -36,12 +36,12 @@ class Loader extends \CeremonyCrmApp\Core\Module
   public function installTables()
   {
     $mDealStatus = new Models\DealStatus($this->app);
-    $mDeal = new \CeremonyCrmMod\Deals\Models\Deal($this->app);
-    $mDealHistory = new \CeremonyCrmMod\Deals\Models\DealHistory($this->app);
-    $mDealTag = new \CeremonyCrmMod\Deals\Models\DealTag($this->app);
-    $mDealService = new \CeremonyCrmMod\Deals\Models\DealService($this->app);
-    $mDealActivity = new \CeremonyCrmMod\Deals\Models\DealActivity($this->app);
-    $mDealDocument = new \CeremonyCrmMod\Deals\Models\DealDocument($this->app);
+    $mDeal = new \HubletoApp\Deals\Models\Deal($this->app);
+    $mDealHistory = new \HubletoApp\Deals\Models\DealHistory($this->app);
+    $mDealTag = new \HubletoApp\Deals\Models\DealTag($this->app);
+    $mDealService = new \HubletoApp\Deals\Models\DealService($this->app);
+    $mDealActivity = new \HubletoApp\Deals\Models\DealActivity($this->app);
+    $mDealDocument = new \HubletoApp\Deals\Models\DealDocument($this->app);
 
     $mDealStatus->dropTableIfExists()->install();
     $mDeal->dropTableIfExists()->install();

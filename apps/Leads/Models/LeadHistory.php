@@ -1,14 +1,14 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Models;
+namespace HubletoApp\Leads\Models;
 
-use CeremonyCrmMod\Customers\Models\Company;
-use CeremonyCrmMod\Customers\Models\Person;
-use CeremonyCrmMod\Leads\Models\Lead;
-use CeremonyCrmMod\Settings\Models\Currency;
-use CeremonyCrmMod\Settings\Models\User;
+use HubletoApp\Customers\Models\Company;
+use HubletoApp\Customers\Models\Person;
+use HubletoApp\Leads\Models\Lead;
+use HubletoApp\Settings\Models\Currency;
+use HubletoApp\Settings\Models\User;
 
-class LeadHistory extends \CeremonyCrmApp\Core\Model
+class LeadHistory extends \HubletoCore\Core\Model
 {
   public string $table = 'lead_histories';
   public string $eloquentClass = Eloquent\LeadHistory::class;
@@ -30,7 +30,7 @@ class LeadHistory extends \CeremonyCrmApp\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'CeremonyCrmMod/Leads/Models/Lead',
+        'model' => 'HubletoApp/Leads/Models/Lead',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

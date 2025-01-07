@@ -15,7 +15,7 @@ export default class TableDocuments extends Table<TableDocumentsProps, TableDocu
       field: "id",
       direction: "desc"
     },
-    model: 'CeremonyCrmMod/Documents/Models/Document',
+    model: 'HubletoApp/Documents/Models/Document',
   }
 
   props: TableDocumentsProps;

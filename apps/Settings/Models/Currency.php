@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
-class Currency extends \CeremonyCrmApp\Core\Model
+class Currency extends \HubletoCore\Core\Model
 {
   public string $table = 'currencies';
   public string $eloquentClass = Eloquent\Currency::class;

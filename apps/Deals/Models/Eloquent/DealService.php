@@ -1,9 +1,9 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Models\Eloquent;
+namespace HubletoApp\Deals\Models\Eloquent;
 
-use CeremonyCrmMod\Services\Models\Eloquent\Service;
-use CeremonyCrmMod\Deals\Models\Eloquent\Deal;
+use HubletoApp\Services\Models\Eloquent\Service;
+use HubletoApp\Deals\Models\Eloquent\Deal;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DealService extends \ADIOS\Core\Model\Eloquent

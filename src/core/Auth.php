@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace HubletoCore\Core;
 
 class Auth extends \ADIOS\Auth\Providers\DefaultProvider {
 
@@ -12,9 +12,9 @@ class Auth extends \ADIOS\Auth\Providers\DefaultProvider {
 
     if (
       !empty($setLanguage)
-      && !empty(\CeremonyCrmMod\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
+      && !empty(\HubletoApp\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
-      $mUser = new \CeremonyCrmMod\Settings\Models\User($this->app);
+      $mUser = new \HubletoApp\Settings\Models\User($this->app);
       $mUser->eloquent
         ->where('id', $this->user['id'])
         ->update(['language' => $setLanguage])

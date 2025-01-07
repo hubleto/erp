@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Controllers\Person;
+namespace HubletoApp\Customers\Controllers\Person;
 
 use Illuminate\Database\Eloquent\Builder;
 

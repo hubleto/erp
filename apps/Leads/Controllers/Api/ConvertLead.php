@@ -1,19 +1,19 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Controllers\Api;
+namespace HubletoApp\Leads\Controllers\Api;
 
-use CeremonyCrmMod\Settings\Models\Setting;
-use CeremonyCrmMod\Deals\Models\Deal;
-use CeremonyCrmMod\Deals\Models\DealDocument;
-use CeremonyCrmMod\Deals\Models\DealHistory;
-use CeremonyCrmMod\Deals\Models\DealService;
-use CeremonyCrmMod\Leads\Models\Lead;
-use CeremonyCrmMod\Leads\Models\LeadDocument;
-use CeremonyCrmMod\Leads\Models\LeadHistory;
-use CeremonyCrmMod\Leads\Models\LeadService;
+use HubletoApp\Settings\Models\Setting;
+use HubletoApp\Deals\Models\Deal;
+use HubletoApp\Deals\Models\DealDocument;
+use HubletoApp\Deals\Models\DealHistory;
+use HubletoApp\Deals\Models\DealService;
+use HubletoApp\Leads\Models\Lead;
+use HubletoApp\Leads\Models\LeadDocument;
+use HubletoApp\Leads\Models\LeadHistory;
+use HubletoApp\Leads\Models\LeadService;
 use Exception;
 
-class ConvertLead extends \CeremonyCrmApp\Core\Controller
+class ConvertLead extends \HubletoCore\Core\Controller
 {
 
   public function renderJson(): ?array

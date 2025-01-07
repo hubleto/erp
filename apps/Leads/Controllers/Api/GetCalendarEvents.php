@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Controllers\Api;
+namespace HubletoApp\Leads\Controllers\Api;
 
-class GetCalendarEvents extends \CeremonyCrmApp\Core\Controller {
+class GetCalendarEvents extends \HubletoCore\Core\Controller {
 
   public function renderJson(): array
   {
-    return $this->app->getCalendar(\CeremonyCrmMod\Leads\Calendar::class)->loadEvents($this->app->params);
+    return $this->app->getCalendar(\HubletoApp\Leads\Calendar::class)->loadEvents($this->app->params);
   }
 }

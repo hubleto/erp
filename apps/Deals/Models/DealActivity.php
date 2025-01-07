@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Models;
+namespace HubletoApp\Deals\Models;
 
-use CeremonyCrmMod\Customers\Models\Activity;
+use HubletoApp\Customers\Models\Activity;
 
-class DealActivity extends \CeremonyCrmApp\Core\Model
+class DealActivity extends \HubletoCore\Core\Model
 {
   public string $table = 'deal_activities';
   public string $eloquentClass = Eloquent\DealActivity::class;
@@ -19,7 +19,7 @@ class DealActivity extends \CeremonyCrmApp\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',
-        'model' => 'CeremonyCrmMod/Deals/Models/Deal',
+        'model' => 'HubletoApp/Deals/Models/Deal',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,14 +28,14 @@ class DealActivity extends \CeremonyCrmApp\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Contact Person',
-        'model' => \CeremonyCrmMod\Customers\Models\Person::class,
+        'model' => \HubletoApp\Customers\Models\Person::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
       ],
       'id_activity_type' => [
         'type' => 'lookup',
         'title' => $this->translate('Activity type'),
-        'model' => \CeremonyCrmMod\Settings\Models\ActivityType::class,
+        'model' => \HubletoApp\Settings\Models\ActivityType::class,
         'foreignKeyOnUpdate' => 'SET NULL',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -78,7 +78,7 @@ class DealActivity extends \CeremonyCrmApp\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Created by',
-        'model' => \CeremonyCrmMod\Settings\Models\User::class,
+        'model' => \HubletoApp\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => false,

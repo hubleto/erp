@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Controllers;
+namespace HubletoApp\Leads\Controllers;
 
-class LeadStatuses extends \CeremonyCrmApp\Core\Controller {
+class LeadStatuses extends \HubletoCore\Core\Controller {
 
 
   public function getBreadcrumbs(): array

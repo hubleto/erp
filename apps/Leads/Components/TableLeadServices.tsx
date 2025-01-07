@@ -13,7 +13,7 @@ export default class TableLeadServices extends Table<TableLeadServicesProps, Tab
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Leads/Models/LeadService',
+    model: 'HubletoApp/Leads/Models/LeadService',
   }
 
   props: TableLeadServicesProps;

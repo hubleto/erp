@@ -1,13 +1,13 @@
 <?php
 
-namespace CeremonyCrmMod\Billing;
+namespace HubletoApp\Billing;
 
-use CeremonyCrmMod\Settings\Models\Permission;
+use HubletoApp\Settings\Models\Permission;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
 
@@ -25,8 +25,8 @@ class Loader extends \CeremonyCrmApp\Core\Module
   }
 
   public function installTables() {
-    $mBillingAccount = new \CeremonyCrmMod\Billing\Models\BillingAccount($this->app);
-    $mBillingAccountService = new \CeremonyCrmMod\Billing\Models\BillingAccountService($this->app);
+    $mBillingAccount = new \HubletoApp\Billing\Models\BillingAccount($this->app);
+    $mBillingAccountService = new \HubletoApp\Billing\Models\BillingAccountService($this->app);
 
     $mBillingAccount->dropTableIfExists()->install();
     $mBillingAccountService->dropTableIfExists()->install();
@@ -35,11 +35,11 @@ class Loader extends \CeremonyCrmApp\Core\Module
   public function installDefaultPermissions()
   {
   
-    $mPermission = new \CeremonyCrmMod\Settings\Models\Permission($this->app);
+    $mPermission = new \HubletoApp\Settings\Models\Permission($this->app);
     $permissions = [
-      "CeremonyCrmMod/Billing/Models/BillingAccount:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Billing/Models/BillingAccountService:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Billing/Controllers/BillingAccount",
+      "HubletoApp/Billing/Models/BillingAccount:Create,Read,Update,Delete",
+      "HubletoApp/Billing/Models/BillingAccountService:Create,Read,Update,Delete",
+      "HubletoApp/Billing/Controllers/BillingAccount",
     ];
 
     foreach ($permissions as $key => $permission) {

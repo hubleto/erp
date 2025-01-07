@@ -5,25 +5,25 @@ use \ADIOS\Core\Helper;
 // load configs
 require_once(__DIR__ . "/../ConfigApp.php");
 
-// autoloader pre CeremonyCrmApp
+// autoloader pre HubletoCore
 spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);
-  if (str_starts_with($class, 'CeremonyCrmMod/')) {
-    require_once(__DIR__ . '/../apps/' . str_replace('CeremonyCrmMod/', '', $class) . '.php');
-  } else if (str_starts_with($class, 'CeremonyCrmApp/Core/')) {
-    require_once(__DIR__ . '/core/' . str_replace('CeremonyCrmApp/Core/', '', $class) . '.php');
-  } else if (str_starts_with($class, 'CeremonyCrmApp/Installer/')) {
-    require_once(__DIR__ . '/installer/' . str_replace('CeremonyCrmApp/Installer/', '', $class) . '.php');
+  if (str_starts_with($class, 'HubletoApp/')) {
+    require_once(__DIR__ . '/../apps/' . str_replace('HubletoApp/', '', $class) . '.php');
+  } else if (str_starts_with($class, 'HubletoCore/Core/')) {
+    require_once(__DIR__ . '/core/' . str_replace('HubletoCore/Core/', '', $class) . '.php');
+  } else if (str_starts_with($class, 'HubletoCore/Installer/')) {
+    require_once(__DIR__ . '/installer/' . str_replace('HubletoCore/Installer/', '', $class) . '.php');
   }
 });
 
 // create own ADIOS class
-class CeremonyCrmApp extends \ADIOS\Core\Loader
+class HubletoCore extends \ADIOS\Core\Loader
 {
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
   protected array $modules = [];
-  public \CeremonyCrmApp\Core\Sidebar $sidebar;
+  public \HubletoCore\Core\Sidebar $sidebar;
 
   public string $requestedUriFirstPart = '';
   public bool $isPro = false;
@@ -53,11 +53,11 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
       ));
     }
 
-    $this->addModule(\CeremonyCrmMod\Dashboard\Loader::class);
-    $this->addModule(\CeremonyCrmMod\Customers\Loader::class);
-    $this->addModule(\CeremonyCrmMod\Calendar\Loader::class);
-    $this->addModule(\CeremonyCrmMod\Settings\Loader::class);
-    $this->addModule(\CeremonyCrmMod\Help\Loader::class);
+    $this->addModule(\HubletoApp\Dashboard\Loader::class);
+    $this->addModule(\HubletoApp\Customers\Loader::class);
+    $this->addModule(\HubletoApp\Calendar\Loader::class);
+    $this->addModule(\HubletoApp\Settings\Loader::class);
+    $this->addModule(\HubletoApp\Help\Loader::class);
 
     foreach ($this->config['enabledModules'] ?? [] as $module) {
       if ($module::canBeAdded($this)) {
@@ -65,8 +65,8 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
       }
     }
 
-    $this->help = new \CeremonyCrmApp\Core\Help($this);
-    $this->sidebar = new \CeremonyCrmApp\Core\Sidebar($this);
+    $this->help = new \HubletoCore\Core\Help($this);
+    $this->sidebar = new \HubletoCore\Core\Sidebar($this);
 
     $modules = $this->getModules();
     array_walk($modules, function($module) {
@@ -99,19 +99,19 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     return $this->modules;
   }
 
-  public function getSidebar(): \CeremonyCrmApp\Core\Sidebar
+  public function getSidebar(): \HubletoCore\Core\Sidebar
   {
     return $this->sidebar;
   }
 
-  public function getTranslator(): \CeremonyCrmApp\Core\Translator
+  public function getTranslator(): \HubletoCore\Core\Translator
   {
-    return new \CeremonyCrmApp\Core\Translator($this);
+    return new \HubletoCore\Core\Translator($this);
   }
 
-  public function getDesktopController(): \CeremonyCrmApp\Core\Controller
+  public function getDesktopController(): \HubletoCore\Core\Controller
   {
-    return new \CeremonyCrmApp\Core\Controller($this);
+    return new \HubletoCore\Core\Controller($this);
   }
 
   public function addCalendar(string $calendarClass)
@@ -124,7 +124,7 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
     return $this->calendars;
   }
 
-  public function getCalendar(string $calendarClass): \CeremonyCrmApp\Core\Calendar
+  public function getCalendar(string $calendarClass): \HubletoCore\Core\Calendar
   {
     return $this->calendars[$calendarClass];
   }

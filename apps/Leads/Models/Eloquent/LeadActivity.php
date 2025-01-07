@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Models\Eloquent;
+namespace HubletoApp\Leads\Models\Eloquent;
 
-// use CeremonyCrmMod\Customers\Models\Eloquent\Activity;
+// use HubletoApp\Customers\Models\Eloquent\Activity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

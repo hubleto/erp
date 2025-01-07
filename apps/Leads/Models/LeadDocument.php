@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Models;
+namespace HubletoApp\Leads\Models;
 
-use CeremonyCrmMod\Documents\Models\Document;
-use CeremonyCrmMod\Leads\Models\Lead;
+use HubletoApp\Documents\Models\Document;
+use HubletoApp\Leads\Models\Lead;
 
-class LeadDocument extends \CeremonyCrmApp\Core\Model
+class LeadDocument extends \HubletoCore\Core\Model
 {
   public string $table = 'lead_documents';
   public string $eloquentClass = Eloquent\LeadDocument::class;
@@ -21,7 +21,7 @@ class LeadDocument extends \CeremonyCrmApp\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Lead',
-        'model' => 'CeremonyCrmMod/Leads/Models/Lead',
+        'model' => 'HubletoApp/Leads/Models/Lead',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -29,7 +29,7 @@ class LeadDocument extends \CeremonyCrmApp\Core\Model
       'id_document' => [
         'type' => 'lookup',
         'title' => 'Document',
-        'model' => 'CeremonyCrmMod/Documents/Models/Document',
+        'model' => 'HubletoApp/Documents/Models/Document',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

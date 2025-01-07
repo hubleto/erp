@@ -1,16 +1,16 @@
 <?php
 
-$config['appNamespace'] = 'CeremonyCrmApp';
-$config['sessionSalt'] = 'CeremonyCrmApp';
+$config['appNamespace'] = 'HubletoCore';
+$config['sessionSalt'] = 'HubletoCore';
 
 $config['coreClasses'] = [
-  'Core/Permissions' => \CeremonyCrmApp\Core\Permissions::class,
-  'Core/Router' => \CeremonyCrmApp\Core\Router::class,
-  'Core/Controller' => \CeremonyCrmApp\Core\Controller::class,
-  'Models/User' => \CeremonyCrmMod\Settings\Models\User::class,
-  'Models/UserRole' => \CeremonyCrmMod\Settings\Models\UserRole::class,
-  'Models/UserHasRole' => \CeremonyCrmMod\Settings\Models\UserHasRole::class,
-  'Controllers/Desktop' => \CeremonyCrmApp\Controllers\Desktop::class,
+  'Core/Permissions' => \HubletoCore\Core\Permissions::class,
+  'Core/Router' => \HubletoCore\Core\Router::class,
+  'Core/Controller' => \HubletoCore\Core\Controller::class,
+  'Models/User' => \HubletoApp\Settings\Models\User::class,
+  'Models/UserRole' => \HubletoApp\Settings\Models\UserRole::class,
+  'Models/UserHasRole' => \HubletoApp\Settings\Models\UserHasRole::class,
+  'Controllers/Desktop' => \HubletoCore\Controllers\Desktop::class,
 ];
 
 $config['db'] = [
@@ -18,5 +18,5 @@ $config['db'] = [
 ];
 
 $config['auth'] = [
-  'provider' => \CeremonyCrmApp\Core\Auth::class,
+  'provider' => \HubletoCore\Core\Auth::class,
 ];

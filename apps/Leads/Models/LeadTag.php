@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Models;
+namespace HubletoApp\Leads\Models;
 
-use CeremonyCrmMod\Settings\Models\Tag;
-use CeremonyCrmMod\Leads\Models\Lead;
+use HubletoApp\Settings\Models\Tag;
+use HubletoApp\Leads\Models\Lead;
 
-class LeadTag extends \CeremonyCrmApp\Core\Model
+class LeadTag extends \HubletoCore\Core\Model
 {
   public string $table = 'lead_tags';
   public string $eloquentClass = Eloquent\LeadTag::class;
@@ -21,7 +21,7 @@ class LeadTag extends \CeremonyCrmApp\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Lead',
-        'model' => \CeremonyCrmMod\Leads\Models\Lead::class,
+        'model' => \HubletoApp\Leads\Models\Lead::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -29,7 +29,7 @@ class LeadTag extends \CeremonyCrmApp\Core\Model
       'id_tag' => [
         'type' => 'lookup',
         'title' => 'Tag',
-        'model' => \CeremonyCrmMod\Settings\Models\Tag::class,
+        'model' => \HubletoApp\Settings\Models\Tag::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

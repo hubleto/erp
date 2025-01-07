@@ -14,13 +14,13 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Customers/Models/Contact',
+    model: 'HubletoApp/Customers/Models/Contact',
   }
 
   props: TableContactsProps;
   state: TableContactsState;
 
-  translationContext: string = 'ceremonycrmmod.core.customers.tableContacts';
+  translationContext: string = 'hubleto.app.customers.tableContacts';
 
   constructor(props: TableContactsProps) {
     super(props);

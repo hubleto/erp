@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Billing\Models;
+namespace HubletoApp\Billing\Models;
 
-use CeremonyCrmMod\Services\Models\Service;
+use HubletoApp\Services\Models\Service;
 
-class BillingAccountService extends \CeremonyCrmApp\Core\Model
+class BillingAccountService extends \HubletoCore\Core\Model
 {
   public string $table = 'billing_accounts_services';
   public string $eloquentClass = Eloquent\BillingAccountService::class;
@@ -20,7 +20,7 @@ class BillingAccountService extends \CeremonyCrmApp\Core\Model
       'id_billing_account' => [
         'type' => 'lookup',
         'title' => 'Billing Account',
-        'model' => 'CeremonyCrmMod/Billing/Models/BillingAccount',
+        'model' => 'HubletoApp/Billing/Models/BillingAccount',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class BillingAccountService extends \CeremonyCrmApp\Core\Model
       'id_service' => [
         'type' => 'lookup',
         'title' => 'Service',
-        'model' => 'CeremonyCrmMod/Services/Models/Service',
+        'model' => 'HubletoApp/Services/Models/Service',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

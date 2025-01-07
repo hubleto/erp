@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
 class InvoiceProfile extends \ADIOS\Core\Model {
   public string $table = 'invoice_profiles';

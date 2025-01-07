@@ -1,9 +1,9 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace HubletoCore\Core;
 
 class Module {
-  public \CeremonyCrmApp $app;
+  public \HubletoCore $app;
   protected array $registeredModels = [];
 
   public string $rootFolder = '';
@@ -12,12 +12,12 @@ class Module {
   public string $translationRootContext = '';
   public string $translationContext = '';
 
-  public static function canBeAdded(\CeremonyCrmApp $app): bool
+  public static function canBeAdded(\HubletoCore $app): bool
   {
     return true;
   }
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     $reflection = new \ReflectionClass($this);
 

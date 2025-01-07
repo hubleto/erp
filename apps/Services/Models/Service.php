@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Services\Models;
+namespace HubletoApp\Services\Models;
 
-use CeremonyCrmMod\Settings\Models\Currency;
+use HubletoApp\Settings\Models\Currency;
 
-class Service extends \CeremonyCrmApp\Core\Model
+class Service extends \HubletoCore\Core\Model
 {
   public string $table = 'services';
   public string $eloquentClass = Eloquent\Service::class;
@@ -29,7 +29,7 @@ class Service extends \CeremonyCrmApp\Core\Model
       'id_currency' => [
         'type' => 'lookup',
         'title' => 'Currency',
-        'model' => 'CeremonyCrmMod/Settings/Models/Currency',
+        'model' => 'HubletoApp/Settings/Models/Currency',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
       ],

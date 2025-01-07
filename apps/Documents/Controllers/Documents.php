@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Documents\Controllers;
+namespace HubletoApp\Documents\Controllers;
 
-class Documents extends \CeremonyCrmApp\Core\Controller {
+class Documents extends \HubletoCore\Core\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

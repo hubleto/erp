@@ -1,5 +1,5 @@
 <?php
 
-namespace CeremonyCrmApp\Exceptions;
+namespace HubletoCore\Exceptions;
 
 class AccountValidationFailed extends \Exception { }

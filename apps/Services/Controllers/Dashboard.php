@@ -1,5 +1,5 @@
 <?php
 
-namespace CeremonyCrmMod\Services\Controllers;
+namespace HubletoApp\Services\Controllers;
 
-class Dashboard extends \CeremonyCrmApp\Core\Controller { }
+class Dashboard extends \HubletoCore\Core\Controller { }

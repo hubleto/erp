@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace HubletoCore\Core;
 
 class Sidebar {
   const ITEM_LINK = 'link';
@@ -8,10 +8,10 @@ class Sidebar {
   const ITEM_HEADING_1 = 'heading_1';
   const ITEM_HEADING_2 = 'heading_2';
 
-  public \CeremonyCrmApp $app;
+  public \HubletoCore $app;
   public array $items = [];
 
-  public function __construct(\CeremonyCrmApp $app) {
+  public function __construct(\HubletoCore $app) {
     $this->app = $app;
     $this->items[1] = [];
     $this->items[2] = [];

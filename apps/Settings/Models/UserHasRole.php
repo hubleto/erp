@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
-class UserHasRole extends \CeremonyCrmApp\Core\Model
+class UserHasRole extends \HubletoCore\Core\Model
 {
   public string $table = 'user_has_roles';
   public string $eloquentClass = Eloquent\UserHasRole::class;

@@ -21,13 +21,13 @@ export interface FormPersonState extends FormState {
 export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'CeremonyCrmMod/Customers/Models/Person',
+    model: 'HubletoApp/Customers/Models/Person',
   };
 
   props: FormPersonProps;
   state: FormPersonState;
 
-  translationContext: string = 'ceremonycrmmod.core.customers.formPerson';
+  translationContext: string = 'hubleto.app.customers.formPerson';
 
   constructor(props: FormPersonProps) {
     super(props);
@@ -122,7 +122,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                   {this.inputWrapper('last_name')}
                   <FormInput title={"Company"}>
                     <Lookup {...this.getDefaultInputProps()}
-                      model='CeremonyCrmMod/Customers/Models/Company'
+                      model='HubletoApp/Customers/Models/Company'
                       endpoint={`customers/get-company`}
                       value={R.id_company}
                       readonly={this.props.creatingNew}
@@ -134,7 +134,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                   <FormInput title='Tags'>
                     <InputTags2 {...this.getDefaultInputProps()}
                       value={this.state.record.TAGS}
-                      model='CeremonyCrmMod/Settings/Models/Tag'
+                      model='HubletoApp/Settings/Models/Tag'
                       targetColumn='id_person'
                       sourceColumn='id_tag'
                       colorColumn='color'
@@ -183,7 +183,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                           //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
                         },
                         value: { type: 'varchar', title: 'Value'},
-                        id_contact_type: { type: 'lookup', title: 'Contact Category', model: 'CeremonyCrmMod/Settings/Models/ContactType' },
+                        id_contact_type: { type: 'lookup', title: 'Contact Category', model: 'HubletoApp/Settings/Models/ContactType' },
                       }
                     }}
                   ></TableContacts>

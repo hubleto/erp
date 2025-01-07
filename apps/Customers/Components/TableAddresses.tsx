@@ -14,13 +14,13 @@ export default class TableAddresses extends Table<TableAddressesProps, TableAddr
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Customers/Models/Addresses',
+    model: 'HubletoApp/Customers/Models/Addresses',
   }
 
   props: TableAddressesProps;
   state: TableAddressesState;
 
-  translationContext: string = 'ceremonycrmmod.core.customers.tableAddresses';
+  translationContext: string = 'hubleto.app.customers.tableAddresses';
 
   constructor(props: TableAddressesProps) {
     super(props);

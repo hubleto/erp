@@ -1,13 +1,13 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models\Eloquent;
+namespace HubletoApp\Customers\Models\Eloquent;
 
-use CeremonyCrmMod\Billing\Models\Eloquent\BillingAccount;
-use CeremonyCrmMod\Customers\Models\Eloquent\CompanyDocument;
-use CeremonyCrmMod\Settings\Models\Eloquent\Country;
-use CeremonyCrmMod\Settings\Models\Eloquent\User;
-use CeremonyCrmMod\Deals\Models\Eloquent\Deal;
-use CeremonyCrmMod\Leads\Models\Eloquent\Lead;
+use HubletoApp\Billing\Models\Eloquent\BillingAccount;
+use HubletoApp\Customers\Models\Eloquent\CompanyDocument;
+use HubletoApp\Settings\Models\Eloquent\Country;
+use HubletoApp\Settings\Models\Eloquent\User;
+use HubletoApp\Deals\Models\Eloquent\Deal;
+use HubletoApp\Leads\Models\Eloquent\Lead;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

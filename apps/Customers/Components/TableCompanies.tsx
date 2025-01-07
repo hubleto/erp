@@ -19,13 +19,13 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Customers/Models/Company',
+    model: 'HubletoApp/Customers/Models/Company',
   }
 
   props: TableCompaniesProps;
   state: TableCompaniesState;
 
-  translationContext: string = 'ceremonycrmmod.core.customers.tableCompanies';
+  translationContext: string = 'hubleto.app.customers.tableCompanies';
 
   getFormModalProps() {
     if (getUrlParam('recordId') > 0) {

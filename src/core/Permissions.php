@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace HubletoCore\Core;
 
-use CeremonyCrmMod\Settings\Models\Permission;
-use CeremonyCrmMod\Settings\Models\RolePermission;
-use CeremonyCrmMod\Settings\Models\UserRole;
+use HubletoApp\Settings\Models\Permission;
+use HubletoApp\Settings\Models\RolePermission;
+use HubletoApp\Settings\Models\UserRole;
 
 class Permissions extends \ADIOS\Core\Permissions {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models;
+namespace HubletoApp\Customers\Models;
 
-use CeremonyCrmMod\Documents\Models\Document;
+use HubletoApp\Documents\Models\Document;
 
-class CompanyDocument extends \CeremonyCrmApp\Core\Model
+class CompanyDocument extends \HubletoCore\Core\Model
 {
   public string $table = 'company_documents';
   public string $eloquentClass = Eloquent\CompanyDocument::class;
@@ -20,7 +20,7 @@ class CompanyDocument extends \CeremonyCrmApp\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'CeremonyCrmMod/Customers/Models/Company',
+        'model' => 'HubletoApp/Customers/Models/Company',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class CompanyDocument extends \CeremonyCrmApp\Core\Model
       'id_document' => [
         'type' => 'lookup',
         'title' => 'Document',
-        'model' => 'CeremonyCrmMod/Documents/Models/Document',
+        'model' => 'HubletoApp/Documents/Models/Document',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

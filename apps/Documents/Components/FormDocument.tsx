@@ -14,7 +14,7 @@ export interface FormDocumentState extends FormState {}
 export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocumentState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'CeremonyCrmMod/Documents/Models/Document',
+    model: 'HubletoApp/Documents/Models/Document',
   };
 
   props: FormDocumentProps;

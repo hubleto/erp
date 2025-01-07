@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
-class Profile extends \CeremonyCrmApp\Core\Model
+class Profile extends \HubletoCore\Core\Model
 {
   public string $table = 'profiles';
   public string $eloquentClass = Eloquent\Setting::class;

@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Dashboard\Controllers;
+namespace HubletoApp\Dashboard\Controllers;
 
-class Home extends \CeremonyCrmApp\Core\Controller {
+class Home extends \HubletoCore\Core\Controller {
 
   public function init(): void
   {

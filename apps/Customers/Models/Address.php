@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models;
+namespace HubletoApp\Customers\Models;
 
-use CeremonyCrmMod\Settings\Models\Country;
+use HubletoApp\Settings\Models\Country;
 
-class Address extends \CeremonyCrmApp\Core\Model
+class Address extends \HubletoCore\Core\Model
 {
   public string $table = 'addresses';
   public string $eloquentClass = Eloquent\Address::class;
@@ -21,7 +21,7 @@ class Address extends \CeremonyCrmApp\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Person',
-        'model' => 'CeremonyCrmMod/Customers/Models/Person',
+        'model' => 'HubletoApp/Customers/Models/Person',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -53,7 +53,7 @@ class Address extends \CeremonyCrmApp\Core\Model
       ],
       'id_country' => [
         'type' => 'lookup',
-        'model' => 'CeremonyCrmMod/Settings/Models/Country',
+        'model' => 'HubletoApp/Settings/Models/Country',
         'foreignKeyOnUpdate' => 'SET NULL',
         'foreignKeyOnDelete' => 'SET NULL',
         'title' => 'Country',

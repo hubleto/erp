@@ -1,15 +1,15 @@
-import CeremonyCrmApp from './src/App';
-import Billing from '../src/apps/Billing/Loader'
-import Calendar from '../src/apps/Calendar/Loader'
-import Customers from '../src/apps/Customers/Loader'
-import Documents from '../src/apps/Documents/Loader'
-import Invoices from '../src/apps/Invoices/Loader'
-import Settings from '../src/apps/Settings/Loader'
-import Leads from '../src/apps/Leads/Loader'
-import Deals from '../src/apps/Deals/Loader'
+import HubletoCore from './src/App';
+import Billing from './apps/Billing/Loader'
+import Calendar from './apps/Calendar/Loader'
+import Customers from './apps/Customers/Loader'
+import Documents from './apps/Documents/Loader'
+import Invoices from './apps/Invoices/Loader'
+import Settings from './apps/Settings/Loader'
+import Leads from './apps/Leads/Loader'
+import Deals from './apps/Deals/Loader'
 
 //@ts-ignore
-const app: CeremonyCrmApp = new CeremonyCrmApp(window.ConfigEnv);
+const app: HubletoCore = new HubletoCore(window.ConfigEnv);
 
 app.registerModule(Billing);
 app.registerModule(Calendar);

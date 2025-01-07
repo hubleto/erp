@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
-class ContactType extends \CeremonyCrmApp\Core\Model
+class ContactType extends \HubletoCore\Core\Model
 {
   public string $table = 'contact_types';
   public string $eloquentClass = Eloquent\ContactType::class;

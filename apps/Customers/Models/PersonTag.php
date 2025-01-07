@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models;
+namespace HubletoApp\Customers\Models;
 
-use CeremonyCrmMod\Settings\Models\Tag;
+use HubletoApp\Settings\Models\Tag;
 
-class PersonTag extends \CeremonyCrmApp\Core\Model
+class PersonTag extends \HubletoCore\Core\Model
 {
   public string $table = 'person_tags';
   public string $eloquentClass = Eloquent\PersonTag::class;
@@ -20,7 +20,7 @@ class PersonTag extends \CeremonyCrmApp\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Person',
-        'model' => 'CeremonyCrmMod/Customers/Models/Person',
+        'model' => 'HubletoApp/Customers/Models/Person',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class PersonTag extends \CeremonyCrmApp\Core\Model
       'id_tag' => [
         'type' => 'lookup',
         'title' => 'Tag',
-        'model' => 'CeremonyCrmMod/Settings/Models/Tag',
+        'model' => 'HubletoApp/Settings/Models/Tag',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

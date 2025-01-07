@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace HubletoCore\Core;
 
 use \ADIOS\Core\Helper;
 
@@ -13,7 +13,7 @@ class Dictionary extends \ADIOS\Core\Controller
     $dictFile = __DIR__ . '/../../lang/' . $language . '.json';
 
     if ($language == 'en') return [];
-    if (!in_array($language, array_keys(\CeremonyCrmMod\Settings\Models\User::ENUM_LANGUAGES))) return [];
+    if (!in_array($language, array_keys(\HubletoApp\Settings\Models\User::ENUM_LANGUAGES))) return [];
     if (!is_file($dictFile)) return [];
 
     // $dict = (array) json_decode(file_get_contents($dictFile), true);

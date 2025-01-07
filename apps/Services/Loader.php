@@ -1,16 +1,16 @@
 <?php
 
-namespace CeremonyCrmMod\Services;
+namespace HubletoApp\Services;
 
-use CeremonyCrmMod\Billing\Models\BillingAccount;
-use CeremonyCrmMod\Billing\Models\BillingAccountService;
-use CeremonyCrmMod\Settings\Models\Permission;
+use HubletoApp\Billing\Models\BillingAccount;
+use HubletoApp\Billing\Models\BillingAccountService;
+use HubletoApp\Settings\Models\Permission;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
 
@@ -40,10 +40,10 @@ class Loader extends \CeremonyCrmApp\Core\Module
 
   public function installDefaultPermissions()
   {
-    $mPermission = new \CeremonyCrmMod\Settings\Models\Permission($this->app);
+    $mPermission = new \HubletoApp\Settings\Models\Permission($this->app);
     $permissions = [
-      "CeremonyCrmMod/Service/Models/Service:Create,Read,Update,Delete",
-      "CeremonyCrmMod/Service/Controllers/Service",
+      "HubletoApp/Service/Models/Service:Create,Read,Update,Delete",
+      "HubletoApp/Service/Controllers/Service",
     ];
 
     foreach ($permissions as $key => $permission) {

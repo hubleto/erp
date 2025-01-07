@@ -9,13 +9,13 @@ export default class TableCompanyDocuments extends Table<TableCompanyDocumentsPr
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Customers/Models/CompanyDocument',
+    model: 'HubletoApp/Customers/Models/CompanyDocument',
   }
 
   props: TableCompanyDocumentsProps;
   state: TableCompanyDocumentsState;
 
-  translationContext: string = 'ceremonycrmmod.core.customers.tableCompanyDocuments';
+  translationContext: string = 'hubleto.app.customers.tableCompanyDocuments';
 
   constructor(props: TableCompanyDocumentsProps) {
     super(props);

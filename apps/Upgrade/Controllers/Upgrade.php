@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Upgrade\Controllers;
+namespace HubletoApp\Upgrade\Controllers;
 
-class Upgrade extends \CeremonyCrmApp\Core\Controller {
+class Upgrade extends \HubletoCore\Core\Controller {
 
   public function prepareView(): void
   {

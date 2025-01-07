@@ -1,17 +1,17 @@
 <?php
 
-namespace CeremonyCrmMod\Upgrade;
+namespace HubletoApp\Upgrade;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
 
-  // public static function canBeAdded(\CeremonyCrmApp $app): bool
+  // public static function canBeAdded(\HubletoCore $app): bool
   // {
   //   return !$app->isPro;
   // }
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
   }

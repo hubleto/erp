@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
-class RolePermission extends \CeremonyCrmApp\Core\Model
+class RolePermission extends \HubletoCore\Core\Model
 {
   public string $table = 'role_permissions';
   public string $eloquentClass = Eloquent\RolePermission::class;

@@ -1,12 +1,12 @@
 <?php
 
-namespace CeremonyCrmMod\Leads;
+namespace HubletoApp\Leads;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
   }
@@ -35,12 +35,12 @@ class Loader extends \CeremonyCrmApp\Core\Module
   public function installTables()
   {
     $mLeadStatus = new Models\LeadStatus($this->app);
-    $mLead = new \CeremonyCrmMod\Leads\Models\Lead($this->app);
-    $mLeadHistory = new \CeremonyCrmMod\Leads\Models\LeadHistory($this->app);
-    $mLeadTag = new \CeremonyCrmMod\Leads\Models\LeadTag($this->app);
-    $mLeadService = new \CeremonyCrmMod\Leads\Models\LeadService($this->app);
-    $mLeadActivity = new \CeremonyCrmMod\Leads\Models\LeadActivity($this->app);
-    $mLeadDocument = new \CeremonyCrmMod\Leads\Models\LeadDocument($this->app);
+    $mLead = new \HubletoApp\Leads\Models\Lead($this->app);
+    $mLeadHistory = new \HubletoApp\Leads\Models\LeadHistory($this->app);
+    $mLeadTag = new \HubletoApp\Leads\Models\LeadTag($this->app);
+    $mLeadService = new \HubletoApp\Leads\Models\LeadService($this->app);
+    $mLeadActivity = new \HubletoApp\Leads\Models\LeadActivity($this->app);
+    $mLeadDocument = new \HubletoApp\Leads\Models\LeadDocument($this->app);
 
     $mLeadStatus->dropTableIfExists()->install();
     $mLead->dropTableIfExists()->install();

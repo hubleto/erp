@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Controllers;
+namespace HubletoApp\Settings\Controllers;
 
-class Currencies extends \CeremonyCrmApp\Core\Controller {
+class Currencies extends \HubletoCore\Core\Controller {
 
 
   public function getBreadcrumbs(): array

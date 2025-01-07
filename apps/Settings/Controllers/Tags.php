@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Controllers;
+namespace HubletoApp\Settings\Controllers;
 
-class Tags extends \CeremonyCrmApp\Core\Controller {
+class Tags extends \HubletoCore\Core\Controller {
 
 
   public function getBreadcrumbs(): array

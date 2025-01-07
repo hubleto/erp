@@ -40,7 +40,7 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
     ...Table.defaultProps,
     itemsPerPage: 25,
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Invoices/Models/Invoice',
+    model: 'HubletoApp/Invoices/Models/Invoice',
     // description: {
     //   ui: { addButtonText: globalThis.app.translate('Create invoice') }
     // },
@@ -157,7 +157,7 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
               <b className="text-sm">{globalThis.app.translate('Customer')}</b><br/>
               <InputLookup
                 uid={this.props.uid + '_filter_customer'}
-                model='CeremonyCrmMod/Customers/Models/Company'
+                model='HubletoApp/Customers/Models/Company'
                 value={this.state.idCustomer}
                 onChange={(value: any) => {
                   this.setState({idCustomer: value} as TableInvoicesState, () => { this.loadData(); });

@@ -1,12 +1,12 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Controllers\Api;
+namespace HubletoApp\Customers\Controllers\Api;
 
-use CeremonyCrmMod\Customers\Models\Company;
-use CeremonyCrmMod\Customers\Models\Person;
+use HubletoApp\Customers\Models\Company;
+use HubletoApp\Customers\Models\Person;
 use Exception;
 
-class GetCompany extends \CeremonyCrmApp\Core\Controller {
+class GetCompany extends \HubletoCore\Core\Controller {
 
   public function renderJson(): ?array
   {

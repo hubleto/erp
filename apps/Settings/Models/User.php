@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
 class User extends \ADIOS\Models\User
 {

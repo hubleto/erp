@@ -1,14 +1,14 @@
 <?php
 
-namespace CeremonyCrmMod\Documents\Models;
+namespace HubletoApp\Documents\Models;
 
-use CeremonyCrmMod\Customers\Models\CompanyDocument;
-use CeremonyCrmMod\Deals\Models\Deal;
-use CeremonyCrmMod\Leads\Models\LeadDocument;
-use CeremonyCrmMod\Deals\Models\DealDocument;
-use CeremonyCrmMod\Leads\Models\Lead;
+use HubletoApp\Customers\Models\CompanyDocument;
+use HubletoApp\Deals\Models\Deal;
+use HubletoApp\Leads\Models\LeadDocument;
+use HubletoApp\Deals\Models\DealDocument;
+use HubletoApp\Leads\Models\Lead;
 
-class Document extends \CeremonyCrmApp\Core\Model
+class Document extends \HubletoCore\Core\Model
 {
   public string $table = 'documents';
   public string $eloquentClass = Eloquent\Document::class;

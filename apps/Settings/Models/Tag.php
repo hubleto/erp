@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Models;
+namespace HubletoApp\Settings\Models;
 
-class Tag extends \CeremonyCrmApp\Core\Model
+class Tag extends \HubletoCore\Core\Model
 {
   public string $table = 'tags';
   public string $eloquentClass = Eloquent\Tag::class;

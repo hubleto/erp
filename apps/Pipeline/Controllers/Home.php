@@ -1,13 +1,13 @@
 <?php
 
-namespace CeremonyCrmMod\Pipeline\Controllers;
+namespace HubletoApp\Pipeline\Controllers;
 
-use CeremonyCrmMod\Settings\Models\Tag;
-use CeremonyCrmMod\Settings\Models\Pipeline;
-use CeremonyCrmMod\Settings\Models\Setting;
-use CeremonyCrmMod\Deals\Models\Deal;
+use HubletoApp\Settings\Models\Tag;
+use HubletoApp\Settings\Models\Pipeline;
+use HubletoApp\Settings\Models\Setting;
+use HubletoApp\Deals\Models\Deal;
 
-class Home extends \CeremonyCrmApp\Core\Controller {
+class Home extends \HubletoCore\Core\Controller {
 
 
   public function getBreadcrumbs(): array

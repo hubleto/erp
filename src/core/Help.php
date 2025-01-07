@@ -1,13 +1,13 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace HubletoCore\Core;
 
 class Help {
-  public \CeremonyCrmApp $app;
+  public \HubletoCore $app;
 
   public array $hotTips = [];
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     $this->app = $app;
   }

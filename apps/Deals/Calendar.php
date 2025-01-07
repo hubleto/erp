@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Deals;
+namespace HubletoApp\Deals;
 
-class Calendar extends \CeremonyCrmApp\Core\Calendar {
+class Calendar extends \HubletoCore\Core\Calendar {
 
   public function loadEvents(array $params = []): array
   {
@@ -11,7 +11,7 @@ class Calendar extends \CeremonyCrmApp\Core\Calendar {
     $dateStart = date("Y-m-d H:i:s", strtotime((string) $params["start"]));
     $dateEnd = date("Y-m-d H:i:s", strtotime((string) $params["end"]));
 
-    $mDealActivity = new \CeremonyCrmMod\Deals\Models\DealActivity($this->app);
+    $mDealActivity = new \HubletoApp\Deals\Models\DealActivity($this->app);
 
     $activities = $mDealActivity->eloquent
       ->select("deal_activities.*", "activity_types.color", "activity_types.name as activity_type")

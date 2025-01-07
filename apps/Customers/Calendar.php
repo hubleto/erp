@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Customers;
+namespace HubletoApp\Customers;
 
-use CeremonyCrmMod\Customers\Models\CompanyActivity;
+use HubletoApp\Customers\Models\CompanyActivity;
 
-class Calendar extends \CeremonyCrmApp\Core\Calendar {
+class Calendar extends \HubletoCore\Core\Calendar {
 
   public function loadEvents(array $params = []): array
   {

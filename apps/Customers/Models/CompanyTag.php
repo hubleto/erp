@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models;
+namespace HubletoApp\Customers\Models;
 
-use CeremonyCrmMod\Settings\Models\Tag;
+use HubletoApp\Settings\Models\Tag;
 
-class CompanyTag extends \CeremonyCrmApp\Core\Model
+class CompanyTag extends \HubletoCore\Core\Model
 {
   public string $table = 'company_tags';
   public string $eloquentClass = Eloquent\CompanyTag::class;
@@ -20,7 +20,7 @@ class CompanyTag extends \CeremonyCrmApp\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'CeremonyCrmMod/Customers/Models/Company',
+        'model' => 'HubletoApp/Customers/Models/Company',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class CompanyTag extends \CeremonyCrmApp\Core\Model
       'id_tag' => [
         'type' => 'lookup',
         'title' => 'Tag',
-        'model' => 'CeremonyCrmMod/Settings/Models/Tag',
+        'model' => 'HubletoApp/Settings/Models/Tag',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

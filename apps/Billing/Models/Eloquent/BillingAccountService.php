@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Billing\Models\Eloquent;
+namespace HubletoApp\Billing\Models\Eloquent;
 
-use CeremonyCrmMod\Services\Models\Eloquent\Service;
+use HubletoApp\Services\Models\Eloquent\Service;
 
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;

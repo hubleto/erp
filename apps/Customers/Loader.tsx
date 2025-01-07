@@ -1,4 +1,4 @@
-import CeremonyCrmApp from "../../../App";
+import HubletoCore from "../../../App";
 import CoreCustomersTablePersons from "./Components/TablePersons"
 import CoreCustomersTableCompanies from "./Components/TableCompanies"
 import CoreCustomersTableActivities from "./Components/TableActivities"
@@ -7,7 +7,7 @@ import CoreCustomersTableContacts from "./Components/TableContacts"
 
 export default class Loader {
   uid: string = 'customers';
-  constructor(app: CeremonyCrmApp) {
+  constructor(app: HubletoCore) {
     app.registerReactComponent('CoreCustomersTablePersons', CoreCustomersTablePersons);
     app.registerReactComponent('CoreCustomersTableCompanies', CoreCustomersTableCompanies);
     app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableActivities);

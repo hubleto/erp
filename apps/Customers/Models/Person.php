@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models;
+namespace HubletoApp\Customers\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class Person extends \CeremonyCrmApp\Core\Model
+class Person extends \HubletoCore\Core\Model
 {
   public string $table = 'persons';
   public string $eloquentClass = Eloquent\Person::class;

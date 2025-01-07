@@ -1,20 +1,20 @@
 <?php
 
-namespace CeremonyCrmMod\Settings;
+namespace HubletoApp\Settings;
 
-use CeremonyCrmMod\Settings\Models\Permission;
+use HubletoApp\Settings\Models\Permission;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
 
-    $this->registerModel(\CeremonyCrmMod\Settings\Models\User::class);
-    $this->registerModel(\CeremonyCrmMod\Settings\Models\Models\UserRole::class);
-    $this->registerModel(\CeremonyCrmMod\Settings\Models\UserHasRole::class);
-    $this->registerModel(\CeremonyCrmMod\Settings\Models\Setting::class);
+    $this->registerModel(\HubletoApp\Settings\Models\User::class);
+    $this->registerModel(\HubletoApp\Settings\Models\Models\UserRole::class);
+    $this->registerModel(\HubletoApp\Settings\Models\UserHasRole::class);
+    $this->registerModel(\HubletoApp\Settings\Models\Setting::class);
   }
 
   public function init(): void
@@ -389,78 +389,78 @@ class Loader extends \CeremonyCrmApp\Core\Module
     $mRolePermission = new Models\RolePermission($this->app);
 
     $permissions = [
-      "CeremonyCrmMod/Settings/Models/ActivityType:Create" => [],
-      "CeremonyCrmMod/Settings/Models/ActivityType:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/ActivityType:Update" => [],
-      "CeremonyCrmMod/Settings/Models/ActivityType:Delete" => [],
+      "HubletoApp/Settings/Models/ActivityType:Create" => [],
+      "HubletoApp/Settings/Models/ActivityType:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/ActivityType:Update" => [],
+      "HubletoApp/Settings/Models/ActivityType:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/Country:Create" => [],
-      "CeremonyCrmMod/Settings/Models/Country:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/Country:Update" => [],
-      "CeremonyCrmMod/Settings/Models/Country:Delete" => [],
+      "HubletoApp/Settings/Models/Country:Create" => [],
+      "HubletoApp/Settings/Models/Country:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/Country:Update" => [],
+      "HubletoApp/Settings/Models/Country:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/Currency:Create" => [],
-      "CeremonyCrmMod/Settings/Models/Currency:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/Currency:Update" => [],
-      "CeremonyCrmMod/Settings/Models/Currency:Delete" => [],
+      "HubletoApp/Settings/Models/Currency:Create" => [],
+      "HubletoApp/Settings/Models/Currency:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/Currency:Update" => [],
+      "HubletoApp/Settings/Models/Currency:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/Tag:Create" => [],
-      "CeremonyCrmMod/Settings/Models/Tag:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/Tag:Update" => [],
-      "CeremonyCrmMod/Settings/Models/Tag:Delete" => [],
+      "HubletoApp/Settings/Models/Tag:Create" => [],
+      "HubletoApp/Settings/Models/Tag:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/Tag:Update" => [],
+      "HubletoApp/Settings/Models/Tag:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/Pipeline:Create" => [],
-      "CeremonyCrmMod/Settings/Models/Pipeline:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/Pipeline:Update" => [],
-      "CeremonyCrmMod/Settings/Models/Pipeline:Delete" => [],
+      "HubletoApp/Settings/Models/Pipeline:Create" => [],
+      "HubletoApp/Settings/Models/Pipeline:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/Pipeline:Update" => [],
+      "HubletoApp/Settings/Models/Pipeline:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/PipelineStep:Create" => [],
-      "CeremonyCrmMod/Settings/Models/PipelineStep:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/PipelineStep:Update" => [],
-      "CeremonyCrmMod/Settings/Models/PipelineStep:Delete" => [],
+      "HubletoApp/Settings/Models/PipelineStep:Create" => [],
+      "HubletoApp/Settings/Models/PipelineStep:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/PipelineStep:Update" => [],
+      "HubletoApp/Settings/Models/PipelineStep:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/Profile:Create" => [],
-      "CeremonyCrmMod/Settings/Models/Profile:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/Profile:Update" => [],
-      "CeremonyCrmMod/Settings/Models/Profile:Delete" => [],
+      "HubletoApp/Settings/Models/Profile:Create" => [],
+      "HubletoApp/Settings/Models/Profile:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/Profile:Update" => [],
+      "HubletoApp/Settings/Models/Profile:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/Setting:Create" => [],
-      "CeremonyCrmMod/Settings/Models/Setting:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/Setting:Update" => [],
-      "CeremonyCrmMod/Settings/Models/Setting:Delete" => [],
+      "HubletoApp/Settings/Models/Setting:Create" => [],
+      "HubletoApp/Settings/Models/Setting:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/Setting:Update" => [],
+      "HubletoApp/Settings/Models/Setting:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/User:Create" => [],
-      "CeremonyCrmMod/Settings/Models/User:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/User:Update" => [],
-      "CeremonyCrmMod/Settings/Models/User:Delete" => [],
+      "HubletoApp/Settings/Models/User:Create" => [],
+      "HubletoApp/Settings/Models/User:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/User:Update" => [],
+      "HubletoApp/Settings/Models/User:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/UserRole:Create" => [],
-      "CeremonyCrmMod/Settings/Models/UserRole:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/UserRole:Update" => [],
-      "CeremonyCrmMod/Settings/Models/UserRole:Delete" => [],
+      "HubletoApp/Settings/Models/UserRole:Create" => [],
+      "HubletoApp/Settings/Models/UserRole:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/UserRole:Update" => [],
+      "HubletoApp/Settings/Models/UserRole:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/UserHasRole:Create" => [],
-      "CeremonyCrmMod/Settings/Models/UserHasRole:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/UserHasRole:Update" => [],
-      "CeremonyCrmMod/Settings/Models/UserHasRole:Delete" => [],
+      "HubletoApp/Settings/Models/UserHasRole:Create" => [],
+      "HubletoApp/Settings/Models/UserHasRole:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/UserHasRole:Update" => [],
+      "HubletoApp/Settings/Models/UserHasRole:Delete" => [],
 
-      "CeremonyCrmMod/Settings/Models/Permission:Create" => [],
-      "CeremonyCrmMod/Settings/Models/Permission:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Settings/Models/Permission:Update" => [],
-      "CeremonyCrmMod/Settings/Models/Permission:Delete" => [],
+      "HubletoApp/Settings/Models/Permission:Create" => [],
+      "HubletoApp/Settings/Models/Permission:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Settings/Models/Permission:Update" => [],
+      "HubletoApp/Settings/Models/Permission:Delete" => [],
 
-      "CeremonyCrmMod/Setting/Controllers/ActivityType" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/Country" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/Currency" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/Pipeline" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/PipelineStep" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/Profile" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/Setting" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/Tag" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/User" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/UserRole" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/UserHasRole" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "CeremonyCrmMod/Setting/Controllers/Permissions" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/ActivityType" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/Country" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/Currency" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/Pipeline" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/PipelineStep" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/Profile" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/Setting" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/Tag" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/User" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/UserRole" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/UserHasRole" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Setting/Controllers/Permissions" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
     ];
 
     foreach ($permissions as $permission => $grantedForRoles) {

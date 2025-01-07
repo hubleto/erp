@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models\Eloquent;
+namespace HubletoApp\Customers\Models\Eloquent;
 
-use CeremonyCrmMod\Settings\Models\Eloquent\ContactType;
+use HubletoApp\Settings\Models\Eloquent\ContactType;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 

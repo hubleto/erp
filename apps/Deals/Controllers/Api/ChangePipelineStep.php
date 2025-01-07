@@ -1,14 +1,14 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Controllers\Api;
+namespace HubletoApp\Deals\Controllers\Api;
 
-use CeremonyCrmMod\Settings\Models\Pipeline;
-use CeremonyCrmMod\Settings\Models\PipelineStep;
-use CeremonyCrmMod\Deals\Models\Deal;
-use CeremonyCrmMod\Deals\Models\DealHistory;
+use HubletoApp\Settings\Models\Pipeline;
+use HubletoApp\Settings\Models\PipelineStep;
+use HubletoApp\Deals\Models\Deal;
+use HubletoApp\Deals\Models\DealHistory;
 use Exception;
 
-class ChangePipelineStep extends \CeremonyCrmApp\Core\Controller
+class ChangePipelineStep extends \HubletoCore\Core\Controller
 {
 
   public function renderJson(): ?array

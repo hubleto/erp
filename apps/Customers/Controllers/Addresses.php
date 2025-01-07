@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Controllers;
+namespace HubletoApp\Customers\Controllers;
 
-class Addresses extends \CeremonyCrmApp\Core\Controller {
+class Addresses extends \HubletoCore\Core\Controller {
 
   public function getBreadcrumbs(): array
   {

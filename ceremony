@@ -75,7 +75,7 @@ function run(string $action, string $argument): bool {
     switch ($action) {
       case 'help': case 'h':
         white("  'help' or 'h' = this help\n");
-        white("  'init' or 'i' = init empty Ceremony project\n");
+        white("  'init' or 'i' = init empty Hubleto project\n");
         white("  'exit' or 'x' = exit\n");
       break;
 
@@ -95,7 +95,7 @@ function run(string $action, string $argument): bool {
         $dbHost = read('ConfigEnv.dbHost', 'localhost');
         $dbUser = read('ConfigEnv.dbUser (user must exist)', 'root');
         $dbPassword = read('ConfigEnv.dbPassword');
-        $dbName = read('ConfigEnv.dbName (database will be created)', 'my_ceremony');
+        $dbName = read('ConfigEnv.dbName (database will be created)', 'my_hubleto');
         $dbCodepage = read('ConfigEnv.dbCodepage', 'utf8mb4');
 
         green("\n");
@@ -124,13 +124,13 @@ function run(string $action, string $argument): bool {
         ];
 
         cyan("\n");
-        cyan("Hurray. Installing your Ceremony...\n");
+        cyan("Hurray. Installing your Hubleto...\n");
 
         // install
-        $app = new \CeremonyCrmApp($appConfig, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
+        $app = new \HubletoCore($appConfig, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
         $app->initDatabaseConnections();
 
-        $installer = new \CeremonyCrmApp\Installer\Installer(
+        $installer = new \HubletoCore\Installer\Installer(
           $app,
           'local-env',
           '', // uid
@@ -153,17 +153,17 @@ function run(string $action, string $argument): bool {
         );
 
         $installer->enabledModules = [
-          '\CeremonyCrmMod\Billing\Loader::class',
-          '\CeremonyCrmMod\Calendar\Loader::class',
-          '\CeremonyCrmMod\Customers\Loader::class',
-          '\CeremonyCrmMod\Dashboard\Loader::class',
-          '\CeremonyCrmMod\Documents\Loader::class',
-          '\CeremonyCrmMod\Invoices\Loader::class',
-          '\CeremonyCrmMod\Services\Loader::class',
-          '\CeremonyCrmMod\Settings\Loader::class',
-          '\CeremonyCrmMod\Pipeline\Loader::class',
-          '\CeremonyCrmMod\Deals\Loader::class',
-          '\CeremonyCrmMod\Leads\Loader::class',
+          '\HubletoApp\Billing\Loader::class',
+          '\HubletoApp\Calendar\Loader::class',
+          '\HubletoApp\Customers\Loader::class',
+          '\HubletoApp\Dashboard\Loader::class',
+          '\HubletoApp\Documents\Loader::class',
+          '\HubletoApp\Invoices\Loader::class',
+          '\HubletoApp\Services\Loader::class',
+          '\HubletoApp\Settings\Loader::class',
+          '\HubletoApp\Pipeline\Loader::class',
+          '\HubletoApp\Deals\Loader::class',
+          '\HubletoApp\Leads\Loader::class',
         ];
 
         $installer->createDatabase();
@@ -175,11 +175,11 @@ function run(string $action, string $argument): bool {
         green("All done! You're a fantastic CRM developer. Now you can:\n");
         green("  -> Open {$accountUrl} and sign in with '{$adminEmail}' and '{$adminPassword}'.\n");
         green("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
-        green("     See https://developer.ceremonycrm.com/nginx for more details.\n");
+        green("     See https://developer.hubleto.com/nginx for more details.\n");
         green("  -> Create your app in ./src/apps.\n");
-        green("     See https://developer.ceremonycrm.com/start-developing-own-module for tips how to start.\n");
-        green("     See https://developer.ceremonycrm.com/publish-module for instructions how to publish.\n");
-        green("  -> Check the developer's guide at https://developer.ceremonycrm.com for more tips & tricks.\n");
+        green("     See https://developer.hubleto.com/start-developing-own-module for tips how to start.\n");
+        green("     See https://developer.hubleto.com/publish-module for instructions how to publish.\n");
+        green("  -> Check the developer's guide at https://developer.hubleto.com for more tips & tricks.\n");
 
       break;
 
@@ -202,10 +202,10 @@ function run(string $action, string $argument): bool {
 
 // MAIN code
 
-white("Ceremony CLI agent.\n");
+white("Hubleto CLI agent.\n");
 white("\n");
 cyan("HINT: If you want to run any action from command line directly, run this script with arguments.\n");
-cyan("Example: php ceremony init.\n");
+cyan("Example: php hubleto init.\n");
 cyan("\n");
 
 $action = (string) ($argv[1] ?? '');

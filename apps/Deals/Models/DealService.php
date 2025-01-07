@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Models;
+namespace HubletoApp\Deals\Models;
 
-use CeremonyCrmMod\Services\Models\Service;
-use CeremonyCrmMod\Deals\Models\Deal;
+use HubletoApp\Services\Models\Service;
+use HubletoApp\Deals\Models\Deal;
 
-class DealService extends \CeremonyCrmApp\Core\Model
+class DealService extends \HubletoCore\Core\Model
 {
   public string $table = 'deal_services';
   public string $eloquentClass = Eloquent\DealService::class;
@@ -22,7 +22,7 @@ class DealService extends \CeremonyCrmApp\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',
-        'model' => 'CeremonyCrmMod/Deals/Models/Deal',
+        'model' => 'HubletoApp/Deals/Models/Deal',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -30,7 +30,7 @@ class DealService extends \CeremonyCrmApp\Core\Model
       'id_service' => [
         'type' => 'lookup',
         'title' => 'Service',
-        'model' => 'CeremonyCrmMod/Services/Models/Service',
+        'model' => 'HubletoApp/Services/Models/Service',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

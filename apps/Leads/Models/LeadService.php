@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Leads\Models;
+namespace HubletoApp\Leads\Models;
 
-use CeremonyCrmMod\Services\Models\Service;
-use CeremonyCrmMod\Leads\Models\Lead;
+use HubletoApp\Services\Models\Service;
+use HubletoApp\Leads\Models\Lead;
 
-class LeadService extends \CeremonyCrmApp\Core\Model
+class LeadService extends \HubletoCore\Core\Model
 {
   public string $table = 'lead_services';
   public string $eloquentClass = Eloquent\LeadService::class;
@@ -22,7 +22,7 @@ class LeadService extends \CeremonyCrmApp\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Lead',
-        'model' => 'CeremonyCrmMod/Leads/Models/Lead',
+        'model' => 'HubletoApp/Leads/Models/Lead',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -30,7 +30,7 @@ class LeadService extends \CeremonyCrmApp\Core\Model
       'id_service' => [
         'type' => 'lookup',
         'title' => 'Service',
-        'model' => 'CeremonyCrmMod/Services/Models/Service',
+        'model' => 'HubletoApp/Services/Models/Service',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

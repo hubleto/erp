@@ -1,9 +1,9 @@
 <?php
 
-namespace CeremonyCrmMod\Invoices\Models;
+namespace HubletoApp\Invoices\Models;
 
-use \CeremonyCrmMod\Customers\Models\Company;
-use \CeremonyCrmMod\Settings\Models\User;
+use \HubletoApp\Customers\Models\Company;
+use \HubletoApp\Settings\Models\User;
 
 class InvoiceItem extends \ADIOS\Core\Model {
   public string $table = 'invoice_items';

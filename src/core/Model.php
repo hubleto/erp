@@ -1,6 +1,6 @@
 <?php
 
-namespace CeremonyCrmApp\Core;
+namespace HubletoCore\Core;
 
 class Model extends \ADIOS\Core\Model {
   public array $conversionMap = [];

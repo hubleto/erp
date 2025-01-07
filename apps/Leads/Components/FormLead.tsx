@@ -30,7 +30,7 @@ export interface FormLeadState extends FormState {
 export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'CeremonyCrmMod/Leads/Models/Lead',
+    model: 'HubletoApp/Leads/Models/Lead',
   };
 
   props: FormLeadProps;
@@ -185,7 +185,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     {this.inputWrapper('title', {readonly: R.is_archived})}
                     <FormInput title={"Company"}>
                       <Lookup {...this.getDefaultInputProps()}
-                        model='CeremonyCrmMod/Customers/Models/Company'
+                        model='HubletoApp/Customers/Models/Company'
                         endpoint={`customers/get-company`}
                         readonly={R.is_archived}
                         value={R.id_company}
@@ -200,7 +200,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     </FormInput>
                     <FormInput title={"Contact Person"}>
                       <Lookup {...this.getDefaultInputProps()}
-                        model='CeremonyCrmMod/Customers/Models/Person'
+                        model='HubletoApp/Customers/Models/Person'
                         customEndpointParams={{id_company: R.id_company}}
                         readonly={R.is_archived}
                         endpoint={`customers/get-company-contacts`}
@@ -245,7 +245,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                       <InputTags2 {...this.getDefaultInputProps()}
                         value={this.state.record.TAGS}
                         readonly={R.is_archived}
-                        model='CeremonyCrmMod/Settings/Models/Tag'
+                        model='HubletoApp/Settings/Models/Tag'
                         targetColumn='id_lead'
                         sourceColumn='id_tag'
                         colorColumn='color'
@@ -281,12 +281,12 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         },
                         columns: {
                           id_service: { type: "lookup", title: "Service",
-                            model: "CeremonyCrmMod/Services/Models/Service",
+                            model: "HubletoApp/Services/Models/Service",
                             cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
                               return (
                                 <FormInput>
                                   <Lookup {...this.getDefaultInputProps()}
-                                    model='CeremonyCrmMod/Services/Models/Service'
+                                    model='HubletoApp/Services/Models/Service'
                                     cssClass='min-w-44'
                                     value={data.id_service}
                                     onChange={(value: any) => {
@@ -434,7 +434,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     canUpdate: true
                   },
                   columns: {
-                    id_document: { type: "lookup", title: "Document", model: "CeremonyCrmMod/Documents/Models/Document" },
+                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Documents/Models/Document" },
                   }
                 }}
                 isUsedAsInput={true}

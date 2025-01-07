@@ -19,7 +19,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Deals/Models/Deal',
+    model: 'HubletoApp/Deals/Models/Deal',
   }
 
   props: TableDealsProps;

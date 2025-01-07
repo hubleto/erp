@@ -13,13 +13,13 @@ export interface FormActivityState extends FormState {}
 export default class FormActivity<P, S> extends Form<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'CeremonyCrmMod/Deals/Models/DealActivity',
+    model: 'HubletoApp/Deals/Models/DealActivity',
   };
 
   props: FormActivityProps;
   state: FormActivityState;
 
-  translationContext: string = 'ceremonycrmmod.sales.deals.formActivity';
+  translationContext: string = 'hubleto.app.deals.formActivity';
 
   renderHeaderLeft(): JSX.Element {
     return this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton();
@@ -63,7 +63,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
         {this.inputWrapper('id_deal')}
         <FormInput title={"Contact Person"}>
           <Lookup {...this.getDefaultInputProps()}
-            model='CeremonyCrmMod/Customers/Models/Person'
+            model='HubletoApp/Customers/Models/Person'
             endpoint={`customers/get-company-contacts`}
             customEndpointParams={{id_company: this.props.idCompany}}
             value={R.id_person}

@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Customers\Models;
+namespace HubletoApp\Customers\Models;
 
-use CeremonyCrmMod\Settings\Models\ContactType;
+use HubletoApp\Settings\Models\ContactType;
 
-class Contact extends \CeremonyCrmApp\Core\Model
+class Contact extends \HubletoCore\Core\Model
 {
   public string $table = 'contacts';
   public string $eloquentClass = Eloquent\Contact::class;
@@ -29,7 +29,7 @@ class Contact extends \CeremonyCrmApp\Core\Model
       'id_contact_type' => [
         'type' => 'lookup',
         'title' => $this->translate('Contact Category'),
-        'model' => \CeremonyCrmMod\Settings\Models\ContactType::class,
+        'model' => \HubletoApp\Settings\Models\ContactType::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

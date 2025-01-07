@@ -1,14 +1,14 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Models;
+namespace HubletoApp\Deals\Models;
 
-use CeremonyCrmMod\Customers\Models\Company;
-use CeremonyCrmMod\Customers\Models\Person;
-use CeremonyCrmMod\Deals\Models\Deal;
-use CeremonyCrmMod\Settings\Models\Currency;
-use CeremonyCrmMod\Settings\Models\User;
+use HubletoApp\Customers\Models\Company;
+use HubletoApp\Customers\Models\Person;
+use HubletoApp\Deals\Models\Deal;
+use HubletoApp\Settings\Models\Currency;
+use HubletoApp\Settings\Models\User;
 
-class DealHistory extends \CeremonyCrmApp\Core\Model
+class DealHistory extends \HubletoCore\Core\Model
 {
   public string $table = 'deal_histories';
   public string $eloquentClass = Eloquent\DealHistory::class;
@@ -30,7 +30,7 @@ class DealHistory extends \CeremonyCrmApp\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'CeremonyCrmMod/Deals/Models/Deal',
+        'model' => 'HubletoApp/Deals/Models/Deal',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

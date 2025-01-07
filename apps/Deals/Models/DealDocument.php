@@ -1,10 +1,10 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Models;
+namespace HubletoApp\Deals\Models;
 
-use CeremonyCrmMod\Documents\Models\Document;
+use HubletoApp\Documents\Models\Document;
 
-class DealDocument extends \CeremonyCrmApp\Core\Model
+class DealDocument extends \HubletoCore\Core\Model
 {
   public string $table = 'deal_documents';
   public string $eloquentClass = Eloquent\DealDocument::class;
@@ -20,7 +20,7 @@ class DealDocument extends \CeremonyCrmApp\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',
-        'model' => 'CeremonyCrmMod/Deals/Models/Deal',
+        'model' => 'HubletoApp/Deals/Models/Deal',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class DealDocument extends \CeremonyCrmApp\Core\Model
       'id_document' => [
         'type' => 'lookup',
         'title' => 'Document',
-        'model' => 'CeremonyCrmMod/Documents/Models/Document',
+        'model' => 'HubletoApp/Documents/Models/Document',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

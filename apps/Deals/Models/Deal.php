@@ -1,20 +1,20 @@
 <?php
 
-namespace CeremonyCrmMod\Deals\Models;
+namespace HubletoApp\Deals\Models;
 
-use CeremonyCrmMod\Customers\Models\Company;
-use CeremonyCrmMod\Customers\Models\Person;
-use CeremonyCrmMod\Settings\Models\Currency;
-use CeremonyCrmMod\Settings\Models\Pipeline;
-use CeremonyCrmMod\Settings\Models\PipelineStep;
-use CeremonyCrmMod\Settings\Models\Setting;
-use CeremonyCrmMod\Settings\Models\User;
-use CeremonyCrmMod\Deals\Models\DealHistory;
-use CeremonyCrmMod\Deals\Models\DealTag;
-use CeremonyCrmMod\Leads\Models\Lead;
+use HubletoApp\Customers\Models\Company;
+use HubletoApp\Customers\Models\Person;
+use HubletoApp\Settings\Models\Currency;
+use HubletoApp\Settings\Models\Pipeline;
+use HubletoApp\Settings\Models\PipelineStep;
+use HubletoApp\Settings\Models\Setting;
+use HubletoApp\Settings\Models\User;
+use HubletoApp\Deals\Models\DealHistory;
+use HubletoApp\Deals\Models\DealTag;
+use HubletoApp\Leads\Models\Lead;
 use Exception;
 
-class Deal extends \CeremonyCrmApp\Core\Model
+class Deal extends \HubletoCore\Core\Model
 {
   public string $table = 'deals';
   public string $eloquentClass = Eloquent\Deal::class;
@@ -48,7 +48,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => \CeremonyCrmMod\Customers\Models\Company::class,
+        'model' => \HubletoApp\Customers\Models\Company::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
@@ -56,7 +56,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Contact Person',
-        'model' => \CeremonyCrmMod\Customers\Models\Person::class,
+        'model' => \HubletoApp\Customers\Models\Person::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -64,7 +64,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Origin Lead',
-        'model' => \CeremonyCrmMod\Leads\Models\Lead::class,
+        'model' => \HubletoApp\Leads\Models\Lead::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -78,7 +78,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_currency' => [
         'type' => 'lookup',
         'title' => 'Currency',
-        'model' => \CeremonyCrmMod\Settings\Models\Currency::class,
+        'model' => \HubletoApp\Settings\Models\Currency::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,
@@ -91,7 +91,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Assigned User',
-        'model' => \CeremonyCrmMod\Settings\Models\User::class,
+        'model' => \HubletoApp\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
@@ -105,7 +105,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_pipeline' => [
         'type' => 'lookup',
         'title' => 'Pipeline',
-        'model' => \CeremonyCrmMod\Settings\Models\Pipeline::class,
+        'model' => \HubletoApp\Settings\Models\Pipeline::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -113,7 +113,7 @@ class Deal extends \CeremonyCrmApp\Core\Model
       'id_pipeline_step' => [
         'type' => 'lookup',
         'title' => 'Pipeline Step',
-        'model' => \CeremonyCrmMod\Settings\Models\PipelineStep::class,
+        'model' => \HubletoApp\Settings\Models\PipelineStep::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,

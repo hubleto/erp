@@ -20,7 +20,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Leads/Models/Lead',
+    model: 'HubletoApp/Leads/Models/Lead',
   }
 
   props: TableLeadsProps;

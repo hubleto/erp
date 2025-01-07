@@ -1,11 +1,11 @@
 <?php
 
-namespace CeremonyCrmMod\Help;
+namespace HubletoApp\Help;
 
-class Loader extends \CeremonyCrmApp\Core\Module
+class Loader extends \HubletoCore\Core\Module
 {
 
-  public function __construct(\CeremonyCrmApp $app)
+  public function __construct(\HubletoCore $app)
   {
     parent::__construct($app);
   }

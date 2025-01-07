@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Settings\Controllers;
+namespace HubletoApp\Settings\Controllers;
 
-class InvoiceProfiles extends \CeremonyCrmApp\Core\Controller {
+class InvoiceProfiles extends \HubletoCore\Core\Controller {
 
 
   public function getBreadcrumbs(): array

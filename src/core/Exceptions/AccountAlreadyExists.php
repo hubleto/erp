@@ -1,5 +1,5 @@
 <?php
 
-namespace CeremonyCrmApp\Exceptions;
+namespace HubletoCore\Exceptions;
 
 class AccountAlreadyExists extends \Exception { }

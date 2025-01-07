@@ -13,13 +13,13 @@ export default class TableActivities extends Table<TableActivitiesProps, TableAc
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'CeremonyCrmMod/Customers/Models/Activity',
+    model: 'HubletoApp/Customers/Models/Activity',
   }
 
   props: TableActivitiesProps;
   state: TableActivitiesState;
 
-  translationContext: string = 'ceremonycrmmod.core.customers.tableActivities';
+  translationContext: string = 'hubleto.app.customers.tableActivities';
 
   constructor(props: TableActivitiesProps) {
     super(props);

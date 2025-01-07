@@ -1,8 +1,8 @@
 <?php
 
-namespace CeremonyCrmMod\Services\Models\Eloquent;
+namespace HubletoApp\Services\Models\Eloquent;
 
-use CeremonyCrmMod\Settings\Models\Eloquent\Currency;
+use HubletoApp\Settings\Models\Eloquent\Currency;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

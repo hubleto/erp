@@ -7,7 +7,7 @@ use HubletoApp\Settings\Models\Pipeline;
 use HubletoApp\Settings\Models\Setting;
 use HubletoApp\Deals\Models\Deal;
 
-class Home extends \HubletoCore\Core\Controller {
+class Home extends \HubletoMain\Core\Controller {
 
 
   public function getBreadcrumbs(): array

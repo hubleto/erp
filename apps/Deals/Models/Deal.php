@@ -14,7 +14,7 @@ use HubletoApp\Deals\Models\DealTag;
 use HubletoApp\Leads\Models\Lead;
 use Exception;
 
-class Deal extends \HubletoCore\Core\Model
+class Deal extends \HubletoMain\Core\Model
 {
   public string $table = 'deals';
   public string $eloquentClass = Eloquent\Deal::class;

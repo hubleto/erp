@@ -4,7 +4,7 @@ namespace HubletoApp\Customers\Models;
 
 use HubletoApp\Settings\Models\Country;
 
-class Address extends \HubletoCore\Core\Model
+class Address extends \HubletoMain\Core\Model
 {
   public string $table = 'addresses';
   public string $eloquentClass = Eloquent\Address::class;

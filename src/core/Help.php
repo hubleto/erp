@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoCore\Core;
+namespace HubletoMain\Core;
 
 class Help {
-  public \HubletoCore $app;
+  public \HubletoMain $app;
 
   public array $hotTips = [];
 
-  public function __construct(\HubletoCore $app)
+  public function __construct(\HubletoMain $app)
   {
     $this->app = $app;
   }

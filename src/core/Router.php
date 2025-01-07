@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoCore\Core;
+namespace HubletoMain\Core;
 
 class Router extends \ADIOS\Core\Router {
   public function __construct(\ADIOS\Core\Loader $adios) {

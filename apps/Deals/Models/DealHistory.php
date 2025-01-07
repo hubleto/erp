@@ -8,7 +8,7 @@ use HubletoApp\Deals\Models\Deal;
 use HubletoApp\Settings\Models\Currency;
 use HubletoApp\Settings\Models\User;
 
-class DealHistory extends \HubletoCore\Core\Model
+class DealHistory extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_histories';
   public string $eloquentClass = Eloquent\DealHistory::class;

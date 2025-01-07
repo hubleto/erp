@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class UserHasRole extends \HubletoCore\Core\Model
+class UserHasRole extends \HubletoMain\Core\Model
 {
   public string $table = 'user_has_roles';
   public string $eloquentClass = Eloquent\UserHasRole::class;

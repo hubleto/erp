@@ -5,7 +5,7 @@ namespace HubletoApp\Leads\Models;
 use HubletoApp\Settings\Models\Tag;
 use HubletoApp\Leads\Models\Lead;
 
-class LeadTag extends \HubletoCore\Core\Model
+class LeadTag extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_tags';
   public string $eloquentClass = Eloquent\LeadTag::class;

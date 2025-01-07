@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Support;
 
-class Loader extends \HubletoCore\Core\Module
+class Loader extends \HubletoMain\Core\Module
 {
 
 
-  public function __construct(\HubletoCore $app)
+  public function __construct(\HubletoMain $app)
   {
     parent::__construct($app);
   }

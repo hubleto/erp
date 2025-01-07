@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Calendar\Controllers\Api;
 
-class GetCalendarEvents extends \HubletoCore\Core\Controller {
+class GetCalendarEvents extends \HubletoMain\Core\Controller {
 
   public function renderJson(): array
   {

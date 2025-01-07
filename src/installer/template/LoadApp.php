@@ -7,7 +7,7 @@ ini_set('error_append_string', "</pre>");
 ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL ^ E_NOTICE ^ E_WARNING);
 
-define('_ADIOS_ID', 'HubletoCore-{{ uid }}');
+define('_ADIOS_ID', 'HubletoMain-{{ uid }}');
 
 // load configs
 require_once("{{ appDir }}/ConfigApp.php");

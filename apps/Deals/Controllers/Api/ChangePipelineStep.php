@@ -8,7 +8,7 @@ use HubletoApp\Deals\Models\Deal;
 use HubletoApp\Deals\Models\DealHistory;
 use Exception;
 
-class ChangePipelineStep extends \HubletoCore\Core\Controller
+class ChangePipelineStep extends \HubletoMain\Core\Controller
 {
 
   public function renderJson(): ?array

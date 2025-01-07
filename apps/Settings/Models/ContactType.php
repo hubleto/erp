@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class ContactType extends \HubletoCore\Core\Model
+class ContactType extends \HubletoMain\Core\Model
 {
   public string $table = 'contact_types';
   public string $eloquentClass = Eloquent\ContactType::class;

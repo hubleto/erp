@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoCore\Core;
+namespace HubletoMain\Core;
 
 class Translator extends \ADIOS\Core\Translator {
 

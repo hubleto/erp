@@ -127,10 +127,10 @@ function run(string $action, string $argument): bool {
         cyan("Hurray. Installing your Hubleto...\n");
 
         // install
-        $app = new \HubletoCore($appConfig, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
+        $app = new \HubletoMain($appConfig, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
         $app->initDatabaseConnections();
 
-        $installer = new \HubletoCore\Installer\Installer(
+        $installer = new \HubletoMain\Installer\Installer(
           $app,
           'local-env',
           '', // uid

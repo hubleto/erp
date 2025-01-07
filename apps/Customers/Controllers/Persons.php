@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Customers\Controllers;
 
-class Persons extends \HubletoCore\Core\Controller {
+class Persons extends \HubletoMain\Core\Controller {
 
 
   public function getBreadcrumbs(): array

@@ -2,4 +2,4 @@
 
 namespace HubletoApp\Services\Controllers;
 
-class Dashboard extends \HubletoCore\Core\Controller { }
+class Dashboard extends \HubletoMain\Core\Controller { }

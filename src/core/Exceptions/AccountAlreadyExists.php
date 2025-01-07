@@ -1,5 +1,5 @@
 <?php
 
-namespace HubletoCore\Exceptions;
+namespace HubletoMain\Exceptions;
 
 class AccountAlreadyExists extends \Exception { }

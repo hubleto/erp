@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoCore\Core;
+namespace HubletoMain\Core;
 
 use \ADIOS\Core\Helper;
 

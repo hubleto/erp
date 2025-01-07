@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class Setting extends \HubletoCore\Core\Model
+class Setting extends \HubletoMain\Core\Model
 {
   public string $table = 'settings';
   public string $eloquentClass = Eloquent\Setting::class;

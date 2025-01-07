@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Billing\Controllers;
 
-class BillingAccounts extends \HubletoCore\Core\Controller {
+class BillingAccounts extends \HubletoMain\Core\Controller {
 
 
   public function getBreadcrumbs(): array

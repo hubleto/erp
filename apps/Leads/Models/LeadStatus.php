@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Leads\Models;
 
-class LeadStatus extends \HubletoCore\Core\Model
+class LeadStatus extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_statuses';
   public string $eloquentClass = Eloquent\LeadStatus::class;

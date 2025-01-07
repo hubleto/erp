@@ -5,25 +5,25 @@ use \ADIOS\Core\Helper;
 // load configs
 require_once(__DIR__ . "/../ConfigApp.php");
 
-// autoloader pre HubletoCore
+// autoloader pre HubletoMain
 spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);
   if (str_starts_with($class, 'HubletoApp/')) {
     require_once(__DIR__ . '/../apps/' . str_replace('HubletoApp/', '', $class) . '.php');
-  } else if (str_starts_with($class, 'HubletoCore/Core/')) {
-    require_once(__DIR__ . '/core/' . str_replace('HubletoCore/Core/', '', $class) . '.php');
-  } else if (str_starts_with($class, 'HubletoCore/Installer/')) {
-    require_once(__DIR__ . '/installer/' . str_replace('HubletoCore/Installer/', '', $class) . '.php');
+  } else if (str_starts_with($class, 'HubletoMain/Core/')) {
+    require_once(__DIR__ . '/core/' . str_replace('HubletoMain/Core/', '', $class) . '.php');
+  } else if (str_starts_with($class, 'HubletoMain/Installer/')) {
+    require_once(__DIR__ . '/installer/' . str_replace('HubletoMain/Installer/', '', $class) . '.php');
   }
 });
 
 // create own ADIOS class
-class HubletoCore extends \ADIOS\Core\Loader
+class HubletoMain extends \ADIOS\Core\Loader
 {
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
   protected array $modules = [];
-  public \HubletoCore\Core\Sidebar $sidebar;
+  public \HubletoMain\Core\Sidebar $sidebar;
 
   public string $requestedUriFirstPart = '';
   public bool $isPro = false;
@@ -65,8 +65,8 @@ class HubletoCore extends \ADIOS\Core\Loader
       }
     }
 
-    $this->help = new \HubletoCore\Core\Help($this);
-    $this->sidebar = new \HubletoCore\Core\Sidebar($this);
+    $this->help = new \HubletoMain\Core\Help($this);
+    $this->sidebar = new \HubletoMain\Core\Sidebar($this);
 
     $modules = $this->getModules();
     array_walk($modules, function($module) {
@@ -99,19 +99,19 @@ class HubletoCore extends \ADIOS\Core\Loader
     return $this->modules;
   }
 
-  public function getSidebar(): \HubletoCore\Core\Sidebar
+  public function getSidebar(): \HubletoMain\Core\Sidebar
   {
     return $this->sidebar;
   }
 
-  public function getTranslator(): \HubletoCore\Core\Translator
+  public function getTranslator(): \HubletoMain\Core\Translator
   {
-    return new \HubletoCore\Core\Translator($this);
+    return new \HubletoMain\Core\Translator($this);
   }
 
-  public function getDesktopController(): \HubletoCore\Core\Controller
+  public function getDesktopController(): \HubletoMain\Core\Controller
   {
-    return new \HubletoCore\Core\Controller($this);
+    return new \HubletoMain\Core\Controller($this);
   }
 
   public function addCalendar(string $calendarClass)
@@ -124,7 +124,7 @@ class HubletoCore extends \ADIOS\Core\Loader
     return $this->calendars;
   }
 
-  public function getCalendar(string $calendarClass): \HubletoCore\Core\Calendar
+  public function getCalendar(string $calendarClass): \HubletoMain\Core\Calendar
   {
     return $this->calendars[$calendarClass];
   }

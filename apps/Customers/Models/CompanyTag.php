@@ -4,7 +4,7 @@ namespace HubletoApp\Customers\Models;
 
 use HubletoApp\Settings\Models\Tag;
 
-class CompanyTag extends \HubletoCore\Core\Model
+class CompanyTag extends \HubletoMain\Core\Model
 {
   public string $table = 'company_tags';
   public string $eloquentClass = Eloquent\CompanyTag::class;

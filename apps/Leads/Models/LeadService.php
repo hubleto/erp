@@ -5,7 +5,7 @@ namespace HubletoApp\Leads\Models;
 use HubletoApp\Services\Models\Service;
 use HubletoApp\Leads\Models\Lead;
 
-class LeadService extends \HubletoCore\Core\Model
+class LeadService extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_services';
   public string $eloquentClass = Eloquent\LeadService::class;

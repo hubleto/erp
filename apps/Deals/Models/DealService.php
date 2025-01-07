@@ -5,7 +5,7 @@ namespace HubletoApp\Deals\Models;
 use HubletoApp\Services\Models\Service;
 use HubletoApp\Deals\Models\Deal;
 
-class DealService extends \HubletoCore\Core\Model
+class DealService extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_services';
   public string $eloquentClass = Eloquent\DealService::class;

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Deals\Models;
 
-class DealStatus extends \HubletoCore\Core\Model
+class DealStatus extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_statuses';
   public string $eloquentClass = Eloquent\DealStatus::class;

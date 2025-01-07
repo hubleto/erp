@@ -6,11 +6,11 @@ use HubletoApp\Billing\Models\BillingAccount;
 use HubletoApp\Billing\Models\BillingAccountService;
 use HubletoApp\Settings\Models\Permission;
 
-class Loader extends \HubletoCore\Core\Module
+class Loader extends \HubletoMain\Core\Module
 {
 
 
-  public function __construct(\HubletoCore $app)
+  public function __construct(\HubletoMain $app)
   {
     parent::__construct($app);
 

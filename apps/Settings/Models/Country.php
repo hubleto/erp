@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class Country extends \HubletoCore\Core\Model
+class Country extends \HubletoMain\Core\Model
 {
   public string $table = 'countries';
   public string $eloquentClass = Eloquent\Country::class;

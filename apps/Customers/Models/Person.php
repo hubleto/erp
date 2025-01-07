@@ -4,7 +4,7 @@ namespace HubletoApp\Customers\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class Person extends \HubletoCore\Core\Model
+class Person extends \HubletoMain\Core\Model
 {
   public string $table = 'persons';
   public string $eloquentClass = Eloquent\Person::class;

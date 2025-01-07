@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Upgrade\Controllers;
 
-class Upgrade extends \HubletoCore\Core\Controller {
+class Upgrade extends \HubletoMain\Core\Controller {
 
   public function prepareView(): void
   {

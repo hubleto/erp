@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Dashboard\Controllers;
 
-class Home extends \HubletoCore\Core\Controller {
+class Home extends \HubletoMain\Core\Controller {
 
   public function init(): void
   {

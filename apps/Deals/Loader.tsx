@@ -1,9 +1,9 @@
-import HubletoCore from "../../../App";
+import HubletoMain from "../../../App";
 import SalesTableDeals from "./Components/TableDeals"
 
 export default class Loader {
   uid: string = 'deals';
-  constructor(app: HubletoCore) {
+  constructor(app: HubletoMain) {
     app.registerReactComponent('SalesTableDeals', SalesTableDeals);
   }
 }

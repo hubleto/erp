@@ -4,7 +4,7 @@ namespace HubletoApp\Customers\Models;
 
 use HubletoApp\Documents\Models\Document;
 
-class CompanyDocument extends \HubletoCore\Core\Model
+class CompanyDocument extends \HubletoMain\Core\Model
 {
   public string $table = 'company_documents';
   public string $eloquentClass = Eloquent\CompanyDocument::class;

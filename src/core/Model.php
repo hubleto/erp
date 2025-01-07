@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoCore\Core;
+namespace HubletoMain\Core;
 
 class Model extends \ADIOS\Core\Model {
   public array $conversionMap = [];

@@ -9,7 +9,7 @@ use HubletoApp\Deals\Models\Deal;
 use HubletoApp\Leads\Models\Lead;
 use Illuminate\Database\Eloquent\Builder;
 
-class Company extends \HubletoCore\Core\Model
+class Company extends \HubletoMain\Core\Model
 {
   public string $table = 'companies';
   public string $eloquentClass = Eloquent\Company::class;

@@ -5,7 +5,7 @@ namespace HubletoApp\Customers\Controllers\Api;
 use HubletoApp\Customers\Models\Person;
 use Exception;
 
-class GetCompanyContacts extends \HubletoCore\Core\Controller {
+class GetCompanyContacts extends \HubletoMain\Core\Controller {
 
   public function renderJson(): ?array
   {

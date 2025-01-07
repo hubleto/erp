@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Leads\Controllers;
 
-class LeadStatuses extends \HubletoCore\Core\Controller {
+class LeadStatuses extends \HubletoMain\Core\Controller {
 
 
   public function getBreadcrumbs(): array

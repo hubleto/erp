@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoCore\Core;
+namespace HubletoMain\Core;
 
 class Sidebar {
   const ITEM_LINK = 'link';
@@ -8,10 +8,10 @@ class Sidebar {
   const ITEM_HEADING_1 = 'heading_1';
   const ITEM_HEADING_2 = 'heading_2';
 
-  public \HubletoCore $app;
+  public \HubletoMain $app;
   public array $items = [];
 
-  public function __construct(\HubletoCore $app) {
+  public function __construct(\HubletoMain $app) {
     $this->app = $app;
     $this->items[1] = [];
     $this->items[2] = [];

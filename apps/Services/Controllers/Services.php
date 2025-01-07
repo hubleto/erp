@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Services\Controllers;
 
-class Services extends \HubletoCore\Core\Controller {
+class Services extends \HubletoMain\Core\Controller {
 
 
   public function getBreadcrumbs(): array

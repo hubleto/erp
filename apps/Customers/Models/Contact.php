@@ -4,7 +4,7 @@ namespace HubletoApp\Customers\Models;
 
 use HubletoApp\Settings\Models\ContactType;
 
-class Contact extends \HubletoCore\Core\Model
+class Contact extends \HubletoMain\Core\Model
 {
   public string $table = 'contacts';
   public string $eloquentClass = Eloquent\Contact::class;

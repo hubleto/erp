@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class UserRole extends \HubletoCore\Core\Model
+class UserRole extends \HubletoMain\Core\Model
 {
   const ROLE_ADMINISTRATOR = 1;
   const ROLE_SALES_MANAGER = 2;

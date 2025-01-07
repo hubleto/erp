@@ -4,7 +4,7 @@ namespace HubletoApp\Deals\Models;
 
 use HubletoApp\Documents\Models\Document;
 
-class DealDocument extends \HubletoCore\Core\Model
+class DealDocument extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_documents';
   public string $eloquentClass = Eloquent\DealDocument::class;

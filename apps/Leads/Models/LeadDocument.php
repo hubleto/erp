@@ -5,7 +5,7 @@ namespace HubletoApp\Leads\Models;
 use HubletoApp\Documents\Models\Document;
 use HubletoApp\Leads\Models\Lead;
 
-class LeadDocument extends \HubletoCore\Core\Model
+class LeadDocument extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_documents';
   public string $eloquentClass = Eloquent\LeadDocument::class;

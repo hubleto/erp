@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoCore\Installer;
+namespace HubletoMain\Installer;
 
 use HubletoApp\Settings\Models\ {
   Permission, Profile, RolePermission, User, UserRole, UserHasRole
 };
 
 class Installer {
-  public \HubletoCore $app;
+  public \HubletoMain $app;
   public string $adminName = '';
   public string $adminFamilyName = '';
   public string $adminEmail = '';
@@ -32,7 +32,7 @@ class Installer {
   public array $enabledModules = [];
 
   public function __construct(
-    \HubletoCore $app,
+    \HubletoMain $app,
     string $env,
     string $uid,
     string $companyName,
@@ -80,18 +80,18 @@ class Installer {
   public function validate()
   {
     if (strlen($this->uid) > 32) {
-      throw new \HubletoCore\Exceptions\AccountValidationFailed('Account name is too long.');
+      throw new \HubletoMain\Exceptions\AccountValidationFailed('Account name is too long.');
     }
 
     if (!filter_var($this->adminEmail, FILTER_VALIDATE_EMAIL)) {
-      throw new \HubletoCore\Exceptions\AccountValidationFailed('Invalid admin email.');
+      throw new \HubletoMain\Exceptions\AccountValidationFailed('Invalid admin email.');
     }
 
     if (
       is_file($this->accountRootFolder . '/' . $this->uid)
       || is_dir($this->accountRootFolder . '/' . $this->uid)
     ) {
-      throw new \HubletoCore\Exceptions\AccountAlreadyExists('Account folder already exists');
+      throw new \HubletoMain\Exceptions\AccountAlreadyExists('Account folder already exists');
     }
   }
 

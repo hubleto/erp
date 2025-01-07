@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Deals;
 
-class Calendar extends \HubletoCore\Core\Calendar {
+class Calendar extends \HubletoMain\Core\Calendar {
 
   public function loadEvents(array $params = []): array
   {

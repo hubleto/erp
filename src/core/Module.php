@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoCore\Core;
+namespace HubletoMain\Core;
 
 class Module {
-  public \HubletoCore $app;
+  public \HubletoMain $app;
   protected array $registeredModels = [];
 
   public string $rootFolder = '';
@@ -12,12 +12,12 @@ class Module {
   public string $translationRootContext = '';
   public string $translationContext = '';
 
-  public static function canBeAdded(\HubletoCore $app): bool
+  public static function canBeAdded(\HubletoMain $app): bool
   {
     return true;
   }
 
-  public function __construct(\HubletoCore $app)
+  public function __construct(\HubletoMain $app)
   {
     $reflection = new \ReflectionClass($this);
 

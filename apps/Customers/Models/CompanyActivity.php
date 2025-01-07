@@ -4,7 +4,7 @@ namespace HubletoApp\Customers\Models;
 
 use HubletoApp\Customers\Models\Company;
 
-class CompanyActivity extends \HubletoCore\Core\Model
+class CompanyActivity extends \HubletoMain\Core\Model
 {
   public string $table = 'company_activities';
   public string $eloquentClass = Eloquent\CompanyActivity::class;

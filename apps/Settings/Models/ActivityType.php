@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class ActivityType extends \HubletoCore\Core\Model
+class ActivityType extends \HubletoMain\Core\Model
 {
   public string $table = 'activity_types';
   public string $eloquentClass = Eloquent\ActivityType::class;

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class Profile extends \HubletoCore\Core\Model
+class Profile extends \HubletoMain\Core\Model
 {
   public string $table = 'profiles';
   public string $eloquentClass = Eloquent\Setting::class;

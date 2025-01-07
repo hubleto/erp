@@ -8,7 +8,7 @@ use HubletoApp\Leads\Models\Lead;
 use HubletoApp\Settings\Models\Currency;
 use HubletoApp\Settings\Models\User;
 
-class LeadHistory extends \HubletoCore\Core\Model
+class LeadHistory extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_histories';
   public string $eloquentClass = Eloquent\LeadHistory::class;

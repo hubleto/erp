@@ -4,7 +4,7 @@ namespace HubletoApp\Services\Models;
 
 use HubletoApp\Settings\Models\Currency;
 
-class Service extends \HubletoCore\Core\Model
+class Service extends \HubletoMain\Core\Model
 {
   public string $table = 'services';
   public string $eloquentClass = Eloquent\Service::class;

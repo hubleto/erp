@@ -4,7 +4,7 @@ namespace HubletoApp\Billing\Models;
 
 use HubletoApp\Services\Models\Service;
 
-class BillingAccountService extends \HubletoCore\Core\Model
+class BillingAccountService extends \HubletoMain\Core\Model
 {
   public string $table = 'billing_accounts_services';
   public string $eloquentClass = Eloquent\BillingAccountService::class;

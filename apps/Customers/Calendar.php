@@ -4,7 +4,7 @@ namespace HubletoApp\Customers;
 
 use HubletoApp\Customers\Models\CompanyActivity;
 
-class Calendar extends \HubletoCore\Core\Calendar {
+class Calendar extends \HubletoMain\Core\Calendar {
 
   public function loadEvents(array $params = []): array
   {

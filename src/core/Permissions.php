@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoCore\Core;
+namespace HubletoMain\Core;
 
 use HubletoApp\Settings\Models\Permission;
 use HubletoApp\Settings\Models\RolePermission;

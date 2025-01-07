@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class Currency extends \HubletoCore\Core\Model
+class Currency extends \HubletoMain\Core\Model
 {
   public string $table = 'currencies';
   public string $eloquentClass = Eloquent\Currency::class;

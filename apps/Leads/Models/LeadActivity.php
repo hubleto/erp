@@ -4,7 +4,7 @@ namespace HubletoApp\Leads\Models;
 
 use HubletoApp\Customers\Models\Activity;
 
-class LeadActivity extends \HubletoCore\Core\Model
+class LeadActivity extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_activities';
   public string $eloquentClass = Eloquent\LeadActivity::class;

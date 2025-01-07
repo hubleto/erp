@@ -2,16 +2,16 @@
 
 namespace HubletoApp\Upgrade;
 
-class Loader extends \HubletoCore\Core\Module
+class Loader extends \HubletoMain\Core\Module
 {
 
 
-  // public static function canBeAdded(\HubletoCore $app): bool
+  // public static function canBeAdded(\HubletoMain $app): bool
   // {
   //   return !$app->isPro;
   // }
 
-  public function __construct(\HubletoCore $app)
+  public function __construct(\HubletoMain $app)
   {
     parent::__construct($app);
   }

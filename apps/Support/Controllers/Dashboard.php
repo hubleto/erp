@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Support\Controllers;
 
-class Dashboard extends \HubletoCore\Core\Controller {
+class Dashboard extends \HubletoMain\Core\Controller {
 
   public function prepareView(): void
   {

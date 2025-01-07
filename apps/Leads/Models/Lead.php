@@ -11,7 +11,7 @@ use HubletoApp\Leads\Models\LeadHistory;
 use HubletoApp\Leads\Models\LeadTag;
 use Exception;
 
-class Lead extends \HubletoCore\Core\Model
+class Lead extends \HubletoMain\Core\Model
 {
   public string $table = 'leads';
   public string $eloquentClass = Eloquent\Lead::class;

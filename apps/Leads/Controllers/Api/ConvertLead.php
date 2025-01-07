@@ -13,7 +13,7 @@ use HubletoApp\Leads\Models\LeadHistory;
 use HubletoApp\Leads\Models\LeadService;
 use Exception;
 
-class ConvertLead extends \HubletoCore\Core\Controller
+class ConvertLead extends \HubletoMain\Core\Controller
 {
 
   public function renderJson(): ?array

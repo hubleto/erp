@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoCore\Core;
+namespace HubletoMain\Core;
 
 class CustomRenderer {
   public function render(string $view, array $params): string {

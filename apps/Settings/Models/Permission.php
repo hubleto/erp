@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class Permission extends \HubletoCore\Core\Model
+class Permission extends \HubletoMain\Core\Model
 {
   public string $table = 'permissions';
   public string $eloquentClass = Eloquent\Permission::class;

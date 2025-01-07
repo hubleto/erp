@@ -5,7 +5,7 @@ namespace HubletoApp\Deals\Models;
 use HubletoApp\Settings\Models\Tag;
 use HubletoApp\Deals\Models\Deal;
 
-class DealTag extends \HubletoCore\Core\Model
+class DealTag extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_tags';
   public string $eloquentClass = Eloquent\DealTag::class;

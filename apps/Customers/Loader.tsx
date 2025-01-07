@@ -1,4 +1,4 @@
-import HubletoCore from "../../../App";
+import HubletoMain from "../../../App";
 import CoreCustomersTablePersons from "./Components/TablePersons"
 import CoreCustomersTableCompanies from "./Components/TableCompanies"
 import CoreCustomersTableActivities from "./Components/TableActivities"
@@ -7,7 +7,7 @@ import CoreCustomersTableContacts from "./Components/TableContacts"
 
 export default class Loader {
   uid: string = 'customers';
-  constructor(app: HubletoCore) {
+  constructor(app: HubletoMain) {
     app.registerReactComponent('CoreCustomersTablePersons', CoreCustomersTablePersons);
     app.registerReactComponent('CoreCustomersTableCompanies', CoreCustomersTableCompanies);
     app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableActivities);

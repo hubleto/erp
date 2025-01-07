@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class PipelineStep extends \HubletoCore\Core\Model
+class PipelineStep extends \HubletoMain\Core\Model
 {
   public string $table = 'pipeline_steps';
   public string $eloquentClass = Eloquent\PipelineStep::class;

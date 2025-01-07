@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Settings\Models;
 
-class Tag extends \HubletoCore\Core\Model
+class Tag extends \HubletoMain\Core\Model
 {
   public string $table = 'tags';
   public string $eloquentClass = Eloquent\Tag::class;

@@ -6,7 +6,7 @@ use HubletoApp\Customers\Models\Company;
 use HubletoApp\Customers\Models\Person;
 use Exception;
 
-class GetCompany extends \HubletoCore\Core\Controller {
+class GetCompany extends \HubletoMain\Core\Controller {
 
   public function renderJson(): ?array
   {

@@ -5,7 +5,7 @@ namespace HubletoApp\Services\Controllers\Api;
 use HubletoApp\Services\Models\Service;
 use Exception;
 
-class GetServicePrice extends \HubletoCore\Core\Controller {
+class GetServicePrice extends \HubletoMain\Core\Controller {
 
   public function renderJson(): ?array
   {

@@ -8,7 +8,7 @@ use HubletoApp\Leads\Models\LeadDocument;
 use HubletoApp\Deals\Models\DealDocument;
 use HubletoApp\Leads\Models\Lead;
 
-class Document extends \HubletoCore\Core\Model
+class Document extends \HubletoMain\Core\Model
 {
   public string $table = 'documents';
   public string $eloquentClass = Eloquent\Document::class;

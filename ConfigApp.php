@@ -3,6 +3,9 @@
 $config['appNamespace'] = 'HubletoMain';
 $config['sessionSalt'] = 'HubletoMain';
 
+$config['defaultSignInView'] = '@hubleto/SignIn.twig';
+$config['defaultDesktopView'] = '@hubleto/Desktop.twig';
+
 $config['coreClasses'] = [
   'Core/Permissions' => \HubletoMain\Core\Permissions::class,
   'Core/Router' => \HubletoMain\Core\Router::class,

@@ -78,7 +78,7 @@ class HubletoMain extends \ADIOS\Core\Loader
   public function initTwig()
   {
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
-    $this->twigLoader->addPath(__DIR__ . '/core', 'hubleto');
+    $this->twigLoader->addPath(__DIR__ . '/views', 'hubleto');
     $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
 
     $this->twig = new \Twig\Environment($this->twigLoader, array(

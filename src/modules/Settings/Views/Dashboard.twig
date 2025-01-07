@@ -17,19 +17,62 @@
   }
 </script>
 
-<div class="text-lg m-auto w-1/2">
-  <input
-    class="w-full p-2 border border-gray"
-    placeholder="Search settings..."
-    onkeyup="searchSetting(this.value);"
-  />
+<div class="flex">
+  <div class="basis-8/12">
+    <div class="text-lg m-auto w-1/2">
+      <input
+        class="w-full p-2 border border-gray"
+        placeholder="Search settings..."
+        onkeyup="searchSetting(this.value);"
+      />
+    </div>
+
+    <div id="setting-buttons" class="mt-4 grid grid-cols-4 gap-2">
+      {% for setting in viewParams.settings %}
+        <a class="btn btn-transparent" href="{{ setting.url }}">
+          <span class="icon"><i class="{{ setting.icon }}"></i></span>
+          <span class="text">{{ setting.title }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="basis-4/12 ml-2">
+    {% if viewParams.app.isPro %}
+      <div class="alert alert-success mt-2">
+        You are already PRO.
+      </div>
+    {% else %}
+      <div class="card mt-2">
+        <div class="card-header">
+          You're not PRO
+        </div>
+        <div class="card-body">
+          <a class="btn btn-large btn-primary" href="{{ config.accountUrl }}/upgrade">
+            <span class="icon"><i class="fas fa-trophy"></i></span>
+            <span class="text">Upgrade to PRO</span>
+          </a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
 </div>
 
-<div id="setting-buttons" class="mt-4 grid grid-cols-4 gap-2">
-  {% for setting in viewParams.settings %}
-    <a class="btn btn-transparent" href="{{ setting.url }}">
-      <span class="icon"><i class="{{ setting.icon }}"></i></span>
-      <span class="text">{{ setting.title }}</span>
-    </a>
-  {% endfor %}
+<div class="card mt-2">
+  <div class="card-header">Manage installed apps</div>
+  <div class="card-body">
+    {% for module in viewParams.app.modules %}
+      <div class="my-1 flex justify-between">
+        <span class="text-sm">{{ module.namespace }}</span>
+        <div>
+          <a class="btn btn-transparent" href="{{ module.url }}">
+            <span class="text">Disable</span>
+          </a>
+          <a class="btn btn-red" href="{{ module.url }}">
+            <span class="text">Uninstall</span>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 </div>

@@ -17,7 +17,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^support\/?$/' => Controllers\Dashboard::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 98100, 'support', $this->translate('Support'), 'fas fa-circle-question');
+    // $this->app->sidebar->addLink(1, 98100, 'support', $this->translate('Support'), 'fas fa-circle-question');
   }
 
 }

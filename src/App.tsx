@@ -1,3 +1,5 @@
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+
 import { ADIOS } from "adios/Loader";
 import request from "adios/Request";
 

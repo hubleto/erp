@@ -5,7 +5,7 @@
 @layer base {
 
   /* HTML tags */
-  html { @apply text-gray-800; }
+  html { @apply !font-sans text-gray-800; }
 
   a { @apply hover:underline }
   a[role=button] { @apply text-primary font-bold text-sm; }
@@ -17,11 +17,10 @@
   aside#default-sidebar { @apply flex fixed top-0 left-0 z-10 pt-12 h-screen transition-transform -translate-x-full sm:translate-x-0; }
   aside#default-sidebar > nav { @apply bg-primary p-1 flex gap-0.5 flex-col w-32; }
   aside#default-sidebar > nav .btn { @apply w-full rounded; }
-  aside#default-sidebar > nav .btn .icon { @apply text-xs w-6 text-left flex justify-center content-center flex-wrap border-none; }
+  aside#default-sidebar > nav .btn .icon { @apply text-xs w-6 text-left flex justify-center content-center flex-wrap border-none bg-transparent; }
   aside#default-sidebar > nav .btn .text { @apply text-xs border-none; }
   aside#default-sidebar > nav .btn.btn-primary { @apply bg-white text-gray-800; }
   aside#default-sidebar > div { @apply h-full w-32 p-1 shadow-lg overflow-y-auto bg-gray-50; }
-  /* aside#default-sidebar > div > ul { @apply } */
   aside#default-sidebar > div > ul > li a { @apply flex items-center px-1 py-0.5 text-gray-900 rounded no-underline hover:bg-gray-100 hover:text-primary; }
   aside#default-sidebar > div > ul a .icon { @apply block text-xs w-8 text-center; }
   aside#default-sidebar > div > ul a .text { @apply block text-xs; }
@@ -35,32 +34,28 @@
   nav#default-navbar .btn { @apply !shadow-none border border-gray-200; }
 
   div#sign-in-screen { @apply w-full h-screen flex items-center justify-center; }
-  div#sign-in-screen > .inner { @apply shadow-lg rounded-lg border w-1/2 flex items-center p-10; }
-  div#sign-in-screen > .inner > .logo { @apply flex-1 flex items-center justify-center p-4; }
-  div#sign-in-screen > .inner > .logo img { max-width: 20rem; }
-  div#sign-in-screen > .inner > .form { @apply flex-1 p-5; }
+  div#sign-in-screen > .inner { @apply shadow-lg rounded-lg border w-1/2 flex flex-col items-center p-10; }
+  div#sign-in-screen > .inner > .logo { @apply flex-1 flex items-center justify-center; }
+  div#sign-in-screen > .inner > .form { @apply flex-1 border-none shadow-none; }
   div#sign-in-screen > .inner > .form > .title { @apply text-center; }
   div#sign-in-screen > .inner > .form > .content > input { @apply border border-gray-300 rounded-sm w-full p-4 mb-1; }
 
   div#app-main-content { @apply ml-64 mt-12 px-3; }
   div#app-main-content.sidebar-only-nav { @apply ml-32; }
 
-  /* #default-navbar-mobile a { @apply block py-2 px-3 md:p-0 dark:text-white; } */
-
   /* CLASSES in alphabetical order */
 
   .adios.component.table { @apply w-full; }
-  .adios.component.table .table-header { @apply flex flex-row items-center gap-2 mb-2; }
-  .adios.component.table .table-header-left { @apply flex gap-1; }
-  .adios.component.table .table-header-title { @apply text-left text-primary text-2xl mr-2 }
-  .adios.component.table .table-header-right { @apply text-center flex gap-1; }
+  .adios.component.table .table-header { @apply flex flex-row items-center gap-2 mb-2 justify-between; }
+  .adios.component.table .table-header-left { @apply flex gap-1 flex-1; }
+  .adios.component.table .table-header-title { @apply flex-1 text-left text-primary text-center text-2xl mr-2 }
+  .adios.component.table .table-header-right { @apply flex-1 text-center flex gap-1 justify-end; }
   .adios.component.table .table-header-search { @apply border border-gray-300 text-sm rounded-sm block w-full p-1 }
   .adios.component.table .table-body { @apply border; }
   .adios.component.table .table-body tr { @apply border divide-x border-transparent hover:bg-gray-100; box-sizing: border-box; }
   .adios.component.table .table-body thead th td { @apply p-0.5 text-sm; margin: 1px; }
   .adios.component.table .table-body tbody tr td { @apply p-0.5 text-sm; margin: 1px; }
   .adios.component.table .table-body tbody tr td > div { @apply text-sm; }
-  /* .adios.component.table .table-body tbody tr td > div > .lookup { @apply min-w-44; } */
   .adios.component.table .table-body tbody tr td .inline-edit-icon { @apply invisible cursor-pointer; }
   .adios.component.table .table-body tbody tr td:hover .inline-edit-icon { @apply visible; }
   .adios.component.table .table-body tr.highlighted { @apply divide-none text-primary; }
@@ -74,7 +69,6 @@
   .adios.component.table .table-body tbody tr td .to-be-deleted input { @apply text-red-500; }
 
   .adios.component.input { @apply inline-flex justify-between items-center w-full; }
-  /* .adios.component.input.lookup { @apply block; } */
 
   .adios.component.input input,
   .adios.component.input textarea,
@@ -92,11 +86,9 @@
   .adios.component.input .inner .inline-editing-buttons.always-visible { @apply !visible; }
   .adios.component.input .inner .btn { @apply shadow-none }
   .adios.component.input .inner:hover .inline-editing-buttons { @apply !visible }
-  /* .adios.component.input.editing .inner .btn { @apply block } */
 
   .adios.component.input .input-after { @apply flex-1 ml-2; }
   .adios.component.input .input-unit { @apply text-sm flex-1 ml-2; }
-
 
   .alert-info { @apply p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50; }
   .alert-danger { @apply p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50; }
@@ -106,24 +98,30 @@
 
   .badge { @apply text-xs p-1 text-white rounded inline m-0.5; }
 
-  .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
+  /* .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
   .btn .icon { @apply block px-2 py-1 text-sm; }
   .btn .text { @apply block px-2 py-1 text-sm; }
-  .btn .text > small { @apply block text-xs text-gray-600; }
+  .btn .text > small { @apply block text-xs text-gray-600; } */
+
+  .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
+  .btn.btn-small { height: 1.25rem; }
+  .btn .icon { @apply flex h-full items-center px-2 py-1 text-sm justify-center; }
+  .btn .text { @apply flex h-full items-center px-2 py-1 text-sm break-all; max-height: 3.5rem; overflow: hidden; }
 
   .btn.btn-no-border { @apply !border-none; }
 
-  .btn.btn-extra-small .icon { @apply text-xs px-1 py-0.5; }
-  .btn.btn-extra-small .text { @apply text-xs px-1 py-0.5; }
-  .btn.btn-small .icon { @apply text-sm px-1.5 py-0.5; }
-  .btn.btn-small .text { @apply text-sm px-1.5 py-0.5; }
+  .btn.btn-extra-small .icon { @apply px-1 py-0.5; font-size: 0.3rem; }
+  .btn.btn-extra-small .text { @apply px-1 py-0.5; font-size: 0.3rem; }
+  .btn.btn-small .icon { @apply text-xs py-0; height: 1.25rem; }
+  .btn.btn-small .text { @apply text-xs py-0; height: 1.25rem; }
   .btn.btn-large .icon { @apply text-lg px-2.5 py-1.5; }
   .btn.btn-large .text { @apply text-lg px-2.5 py-1.5; }
   .btn.btn-extra-large .icon { @apply text-2xl px-3.5 py-2; }
   .btn.btn-extra-large .text { @apply text-2xl px-3.5 py-2; }
 
   .btn.btn-transparent { @apply text-gray-800 bg-transparent border border-gray-100 hover:border-gray-200 hover:bg-gray-100; }
-  .btn.btn-white { @apply text-gray-800 bg-transparent border border-gray-100 hover:bg-gray-200; }
+  .btn.btn-transparent:hover .icon { @apply bg-gray-100; }
+  .btn.btn-white { @apply text-gray-800 bg-white border border-gray-100; }
   .btn.btn-light { @apply text-gray-800 bg-gray-200 hover:bg-gray-400; }
   .btn.btn-danger { @apply text-red-600 bg-red-200 hover:bg-red-400 hover:text-white; }
   .btn.btn-success { @apply text-white bg-green-700 hover:bg-green-900 hover:text-white; }
@@ -164,7 +162,7 @@
   .btn.btn-disabled .icon { @apply text-gray-200 hover:text-gray-200; }
   .btn.btn-disabled .text { @apply text-gray-200 hover:text-gray-200; }
 
-  .btn.btn-dropdown { @apply flex items-baseline; }
+  .btn.btn-dropdown { @apply items-baseline; }
   .btn.btn-dropdown > .menu { @apply cursor-default relative; left: -100%; top: 0.5em; }
   .btn.btn-dropdown > .menu > .list { @apply divide-none invisible mt-1 bg-white shadow-xl rounded absolute z-10; }
   .btn.btn-dropdown:focus-within { @apply bg-gray-100; }
@@ -172,6 +170,7 @@
   .btn.btn-dropdown:focus-within > .menu > .list .btn { @apply text-nowrap; }
 
   .btn-group { @apply flex divide-x rounded border border-gray-100; }
+  .btn-group.vertical { @apply flex-col divide-y; }
   .btn-group .btn { @apply border-none rounded-none shadow-none; }
 
   .breadcrumbs { @apply flex pb-2; }
@@ -181,6 +180,11 @@
   .card-header small { @apply font-normal; }
   .card-body { @apply p-2; }
   .card-footer { @apply flex justify-between border-t p-4; }
+
+  .dialog { @apply rounded bg-white; }
+  .dialog-header { @apply p-4; }
+  .dialog-body { @apply p-4; }
+  .dialog-footer { @apply p-4 border-t border-gray-200 bg-gray-50; }
 
   .dialog-danger-header { @apply bg-red-600 text-white hover:bg-red-400; }
   .dialog-warning-header { @apply bg-yellow-300 text-gray-800 hover:bg-yellow-200; }
@@ -195,15 +199,13 @@
 
   .list { @apply list-none border rounded divide-y; }
 
-  /* Stary dizajn inputov
-  .input-wrapper { @apply flex justify-between items-center border border-transparent; box-sizing: border-box; }
-  .input-wrapper:hover { @apply bg-gray-50; }
-  .input-wrapper .input-label { @apply flex-1 block text-sm font-medium text-gray-900 ml-1 mr-1; }
-  .input-wrapper.required { @apply before:content-['*'] before:text-red-600; }
-  .input-wrapper:hover .input-label { @apply text-primary; }
-  .input-wrapper .input-body { @apply flex items-center flex-[3]; overflow-wrap: anywhere; }
-  .input-wrapper .input-description { @apply text-xs text-gray-500 pr-1; }
- */
+  .form { @apply shadow-sm rounded-sm border border-gray-200; }
+  .form .form-header { @apply flex border-b border-b-gray-200 text-primary items-baseline w-full justify-between shadow-sm p-2 bg-gray-50; }
+  .form .form-header .modal-header-left { @apply flex flex-1 gap-1; }
+  .form .form-header .modal-header-title { @apply flex-1 text-center; }
+  .form .form-header .modal-header-right { @apply flex flex-1 gap-1 justify-end; }
+  .form .form-body { @apply p-2 flex-1 overflow-y-auto; }
+  .form .form-footer { @apply p-2 border-t border-t-gray-200 bg-gray-50; }
 
   .input-wrapper { @apply relative justify-between items-center border border-transparent py-1 hover:bg-gray-50; box-sizing: border-box; }
   .input-wrapper .input-label { @apply flex-1 block text-xs text-gray-400; }
@@ -228,10 +230,10 @@
   .modal.centered.small { @apply fixed mx-auto mt-1 w-1/2 h-1/2 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
   .modal.centered.tiny { @apply fixed mx-auto mt-1 w-1/3 h-1/3 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
   .modal .modal-header { @apply flex items-center border-b border-b-primary/20 text-primary items-baseline w-full justify-between p-2 bg-primary/5; }
-  .modal .modal-header .modal-header-left { @apply flex gap-1; }
-  .modal .modal-header .modal-header-title { @apply text-center font-bold; }
+  .modal .modal-header .modal-header-left { @apply flex flex-1 gap-1; }
+  .modal .modal-header .modal-header-title { @apply flex-1 text-center; }
   .modal .modal-header .modal-header-title h2 { @apply m-0 p-0; }
-  .modal .modal-header .modal-header-right { @apply flex gap-1; }
+  .modal .modal-header .modal-header-right { @apply flex flex-1 gap-1 justify-end; }
   .modal .modal-body { @apply p-2 flex-1 overflow-y-auto; }
   .modal .modal-footer { @apply p-2 border-t border-t-gray-200 bg-gray-50; }
 

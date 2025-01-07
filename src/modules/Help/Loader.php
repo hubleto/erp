@@ -16,7 +16,7 @@ class Loader extends \CeremonyCrmApp\Core\Module
       '/^help\/?$/' => Controllers\Help::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 1900, 'help', $this->translate('Help'), 'fas fa-life-ring', str_starts_with($this->app->requestedUri, 'help'));
+    // $this->app->sidebar->addLink(1, 1900, 'help', $this->translate('Help'), 'fas fa-life-ring', str_starts_with($this->app->requestedUri, 'help'));
   }
 
 }

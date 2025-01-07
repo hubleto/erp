@@ -28,12 +28,13 @@ module.exports = {
     //   // 'gray-light': '#d3dce6',
     // },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
+      sans: ['Fredoka-Regular', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
     extend: {
       colors: {
-        'primary': '#884aaa',
+        'primary': '#008000',
+        // 'primary': '#884aaa', // fialova Ceremony
         // 'secondary': '#ff9800', // povodna oranzova
         'secondary': '#7FB562', // povodna oranzova
       },

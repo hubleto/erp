@@ -11,5 +11,21 @@
         "Sales": "Obchod",
         "Leads": "Leady",
         "Archive": "Archív"
+    },
+    "loader": {
+        "Leads": "",
+        "Lead statuses": ""
+    },
+    "models.leadactivity": {
+        "Activity type": "",
+        "Subject": ""
+    },
+    "models.leadstatus": {
+        "Name": "",
+        "Order": "",
+        "Color": ""
+    },
+    "models.lead": {
+        "Add lead": ""
     }
 }

@@ -7,6 +7,7 @@ class Module {
   protected array $registeredModels = [];
 
   public string $rootFolder = '';
+  public string $namespace = '';
 
   public string $translationRootContext = '';
   public string $translationContext = '';
@@ -22,6 +23,7 @@ class Module {
 
     $this->app = $app;
     $this->rootFolder = pathinfo($reflection->getFilename(), PATHINFO_DIRNAME);
+    $this->namespace = $reflection->getNamespaceName();
     $this->translationRootContext = str_replace('.loader', '', strtolower(str_replace('\\', '.', $reflection->getName())));
     $this->translationContext = $this->translationRootContext . '.loader';
   }

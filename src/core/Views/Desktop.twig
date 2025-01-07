@@ -9,8 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel='shortcut icon' href='{{ config.url }}/assets/images/favicon.png'>
-  <title>{{ user.PROFILE.company }} | Ceremony CRM</title>
+  <link rel='shortcut icon' href='{{ config.url }}/assets/images/logo-hubleto.png'>
+  <title>{{ user.PROFILE.company }} | Hubleto | Business Application Hub</title>
 
   <script>
     window.ConfigEnv = {
@@ -27,6 +27,14 @@
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/fontawesome-6.6.css">
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/app.css">
 
+  <style>
+    @font-face {
+      font-family: 'Fredoka-Regular';
+      font-style: normal;
+      font-weight: 500;
+      src: url({{ config.url }}/assets/fredoka/static/Fredoka-Regular.ttf) format('truetype');
+    }
+  </style>
   <script>
     ADIOS.onAppLoaded(() => {
       globalThis.app.idUser = {{ user.id ?? 0 }};
@@ -50,7 +58,7 @@
       <div class="flex items-center">
         <div class="w-28">
           <a class="flex" href="{{ config.accountUrl }}">
-            <img id="logo" src="{{ config.url }}/assets/images/logo.png" class="h-8 m-auto">
+            <img id="logo" src="{{ config.url }}/assets/images/logo-hubleto.png" class="h-8 m-auto">
           </a>
         </div>
         <div class="ml-4">
@@ -90,6 +98,7 @@
               </div>
             </button>
           </li>
+          <li>
             <button class="btn btn-white btn-small btn-dropdown">
               <span class="icon"><i class="fas fa-life-ring"></i></span>
               <div class="menu">
@@ -141,7 +150,7 @@
 
     <aside id="default-sidebar">
       <nav>
-        <input class="bg-white/20 text-white text-xs m-1 p-1 rounded placeholder-white" placeholder="Search module..." onkeyup="smis(event, this.value);" />
+        <input class="bg-white/20 text-white text-xs m-1 p-1 rounded placeholder-white" placeholder="Search app..." onkeyup="smis(event, this.value);" />
         {% set i = 0 %}
         {% for item in viewParams.sidebar.level1Items %}
           {% if item.type == 'link' %}

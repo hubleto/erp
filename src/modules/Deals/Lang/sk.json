@@ -1,7 +1,8 @@
 {
     "loader": {
         "Deals": "Dealy",
-        "Deals Archive": "Archív dealov"
+        "Deals Archive": "Archív dealov",
+        "Deal statuses": ""
     },
     "controllers.deals": {
         "Sales": "Obchod",
@@ -11,5 +12,18 @@
         "Sales": "Obchod",
         "Deals": "Dealy",
         "Archive": "Archív"
+    },
+    "models.dealactivity": {
+        "Activity type": "",
+        "Subject": ""
+    },
+    "models.dealstatus": {
+        "Name": "",
+        "Order": "",
+        "Color": ""
+    },
+    "controllers.dealsarchive": {
+        "Deals": "",
+        "Archive": ""
     }
 }

@@ -122,10 +122,56 @@
         "Countries": "Štáty"
     },
     "loader": {
-        "Settings": "Nastavenia"
+        "Settings": "Nastavenia",
+        "Users": "",
+        "User roles": "",
+        "Profiles": "",
+        "General settings": "",
+        "Permissions": "",
+        "Tags": "",
+        "Activity types": "",
+        "Contact types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Pipelines": "",
+        "Invoice profiles": ""
     },
     "controllers.users": {
         "Settings": "",
         "Users": ""
+    },
+    "models.pipelinestep": {
+        "Name": "",
+        "Order": "",
+        "Company": ""
+    },
+    "models.invoiceprofile": {
+        "Name": "",
+        "Phone": "",
+        "E-mail": "",
+        "WWW": "",
+        "Company ID": "",
+        "Tax ID": "",
+        "VAT ID": "",
+        "Street, line 1": "",
+        "Street, line 2": "",
+        "ZIP": "",
+        "City": "",
+        "Country": "",
+        "Bank name": "",
+        "Account number": "",
+        "Account IBAN": "",
+        "SWIFT": "",
+        "Numbering pattern": ""
+    },
+    "models.activitytype": {
+        "Type Name": "",
+        "Color": "",
+        "Shown in Calendar": "",
+        "Icon": ""
+    },
+    "controllers.activitytypes": {
+        "Settings": "",
+        "Activity Types": ""
     }
 }

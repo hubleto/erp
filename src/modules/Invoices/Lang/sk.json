@@ -41,5 +41,11 @@
     },
     "formInvoice": {
         "Invoice": "Faktúra"
+    },
+    "models.invoiceitem": {
+        "Invoice": "",
+        "Item": "",
+        "Unit price": "",
+        "Amount": ""
     }
 }

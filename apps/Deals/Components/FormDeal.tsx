@@ -164,7 +164,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
         R.HISTORY = this.state.record.HISTORY.reverse();
     }
 
-    if (R.id > 0 && globalThis.app.idUser != R.id_user && !this.state.recordChanged) {
+    if (R.id > 0 && globalThis.main.idUser != R.id_user && !this.state.recordChanged) {
       return (
         <>
           <div className='w-full h-full flex flex-col justify-center'>
@@ -412,12 +412,12 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
             </div>
           </TabPanel>
           {showAdditional ?
-            <TabPanel header={globalThis.app.translate('Calendar')}>
+            <TabPanel header={globalThis.main.translate('Calendar')}>
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.app.config.rewriteBase + 'deals/get-calendar-events?idDeal=' + R.id}
+                eventsEndpoint={globalThis.main.config.rewriteBase + 'deals/get-calendar-events?idDeal=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityCalendarDateClicked: date,
@@ -562,7 +562,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
             {this.inputWrapper('note', {readonly: R.is_archived})}
           </TabPanel>
           {showAdditional ?
-            <TabPanel header={globalThis.app.translate('History')}>
+            <TabPanel header={globalThis.main.translate('History')}>
               {R.HISTORY.length > 0 ?
                 R.HISTORY.map((history, key) => (
                   <div className='w-full flex flex-row justify-between'>

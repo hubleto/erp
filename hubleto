@@ -3,7 +3,7 @@
 global $clih;
 
 require("vendor/autoload.php");
-require("src/App.php");
+require("src/Main.php");
 
 const OS = 'win';
 
@@ -152,7 +152,7 @@ function run(string $action, string $argument): bool {
           false, // randomize (deprecated)
         );
 
-        $installer->enabledModules = [
+        $installer->enabledApps = [
           '\HubletoApp\Billing\Loader::class',
           '\HubletoApp\Calendar\Loader::class',
           '\HubletoApp\Customers\Loader::class',

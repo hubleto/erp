@@ -71,7 +71,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
 
   renderTitle(): JSX.Element {
     if (getUrlParam('recordId') == -1) {
-      return <h2>{globalThis.app.translate('New Lead')}</h2>;
+      return <h2>{globalThis.main.translate('New Lead')}</h2>;
     } else {
       return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Lead Name]'}</h2>
     }
@@ -107,7 +107,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   }
 
   convertDealWarning(recordId: number) {
-    globalThis.app.showDialogDanger(
+    globalThis.main.showDialogDanger(
       <>
         <div>
           Are you sure you want to convert this Lead to a Deal?<br/>
@@ -130,7 +130,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
           <button
             className="btn btn-transparent"
             onClick={() => {
-              globalThis.app.lastShownDialogRef.current.hide();
+              globalThis.main.lastShownDialogRef.current.hide();
             }}
           >
             <span className="icon"><i className="fas fa-times"></i></span>
@@ -152,7 +152,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
 
     if (R.DEAL) R.DEAL.checkOwnership = false;
 
-    if (R.id > 0 && globalThis.app.idUser != R.id_user && !this.state.recordChanged) {
+    if (R.id > 0 && globalThis.main.idUser != R.id_user && !this.state.recordChanged) {
       return (
         <>
           <div className='w-full h-full flex flex-col justify-center'>
@@ -165,7 +165,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     return (
       <>
         <TabView>
-          <TabPanel header={globalThis.app.translate('Lead')}>
+          <TabPanel header={globalThis.main.translate('Lead')}>
             {R.DEAL && R.is_archived == 1 ?
               <div className='alert-warning mt-2 mb-1'>
                 <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
@@ -366,12 +366,12 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             </div>
           </TabPanel>
           {showAdditional ?
-            <TabPanel header={globalThis.app.translate('Calendar')}>
+            <TabPanel header={globalThis.main.translate('Calendar')}>
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.app.config.rewriteBase + 'leads/get-calendar-events?idLead=' + R.id}
+                eventsEndpoint={globalThis.main.config.rewriteBase + 'leads/get-calendar-events?idLead=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityCalendarDateClicked: date,
@@ -516,7 +516,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             {this.inputWrapper('note', {readonly: R.is_archived})}
           </TabPanel>
           {showAdditional ?
-            <TabPanel header={globalThis.app.translate('History')}>
+            <TabPanel header={globalThis.main.translate('History')}>
               {R.HISTORY.length > 0 ?
                 R.HISTORY.map((history, key) => (
                   <div className='w-full flex flex-row justify-between'>

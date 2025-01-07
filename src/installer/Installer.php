@@ -29,7 +29,7 @@ class Installer {
 
   public bool $randomize = false;
 
-  public array $enabledModules = [];
+  public array $enabledApps = [];
 
   public function __construct(
     \HubletoMain $app,
@@ -166,9 +166,9 @@ class Installer {
     $configAccount = str_replace('{{ accountUrl }}', $this->accountRootUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configAccount);
 
     $configAccount .= '' . "\n";
-    $configAccount .= '$config[\'enabledModules\'] = [' . "\n";
-    foreach ($this->enabledModules as $module) {
-      $configAccount .= '  ' . $module . ',' . "\n";
+    $configAccount .= '$config[\'enabledApps\'] = [' . "\n";
+    foreach ($this->enabledApps as $app) {
+      $configAccount .= '  ' . $app . ',' . "\n";
     }
     $configAccount .= '];' . "\n";
 
@@ -190,12 +190,12 @@ class Installer {
 
     file_put_contents($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigAccount.php', $this->getConfigAccountContent());
 
-    // LoadApp.php
-    $loadApp = file_get_contents(__DIR__ . '/template/LoadApp.php');
-    $loadApp = str_replace('{{ uid }}', $this->uid, $loadApp);
-    $loadApp = str_replace('{{ appDir }}', $this->appRootFolder, $loadApp);
-    $loadApp = str_replace('{{ extDir }}', $this->extRootFolder, $loadApp);
-    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/LoadApp.php', $loadApp);
+    // LoadMain.php
+    $loadMain = file_get_contents(__DIR__ . '/template/LoadMain.php');
+    $loadMain = str_replace('{{ uid }}', $this->uid, $loadMain);
+    $loadMain = str_replace('{{ appDir }}', $this->appRootFolder, $loadMain);
+    $loadMain = str_replace('{{ extDir }}', $this->extRootFolder, $loadMain);
+    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/LoadMain.php', $loadMain);
 
     // index.php
     copy(
@@ -211,7 +211,7 @@ class Installer {
   }
 
   public function installDefaultPermissions() {
-    $modules = $this->app->getModules();
+    $modules = $this->app->getRegisteredApps();
     array_walk($modules, function($module) {
       $module->installDefaultPermissions();
     });

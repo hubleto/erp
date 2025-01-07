@@ -20,7 +20,7 @@ export default class HubletoMain extends ADIOS {
   language: string = 'en';
   idUser: number = 0;
   user: any;
-  modules: any = {};
+  apps: any = {};
 
   constructor(config: object) {
     super(config);
@@ -61,9 +61,9 @@ export default class HubletoMain extends ADIOS {
     );
   }
 
-  registerModule(mClass) {
-    const module = new mClass(this);
-    if (!module.uid || module.uid == '') console.error('app: module does not have uid');
-    this.modules[module.uid] = module
+  registerApp(appClass) {
+    const app = new appClass(this);
+    if (!app.uid || app.uid == '') console.error('app: module does not have uid');
+    this.apps[app.uid] = app
   }
 }

@@ -1,4 +1,4 @@
-import HubletoMain from './src/App';
+import HubletoMain from './src/Main';
 import Billing from './apps/Billing/Loader'
 import Calendar from './apps/Calendar/Loader'
 import Customers from './apps/Customers/Loader'
@@ -9,18 +9,19 @@ import Leads from './apps/Leads/Loader'
 import Deals from './apps/Deals/Loader'
 
 //@ts-ignore
-const app: HubletoMain = new HubletoMain(window.ConfigEnv);
+const main: HubletoMain = new HubletoMain(window.ConfigEnv);
 
-app.registerModule(Billing);
-app.registerModule(Calendar);
-app.registerModule(Customers);
-app.registerModule(Documents);
-app.registerModule(Invoices);
-app.registerModule(Settings);
-app.registerModule(Leads);
-app.registerModule(Deals);
+main.registerApp(Billing);
+main.registerApp(Calendar);
+main.registerApp(Customers);
+main.registerApp(Documents);
+main.registerApp(Invoices);
+main.registerApp(Settings);
+main.registerApp(Leads);
+main.registerApp(Deals);
 
 // Render react elements into body
-app.renderReactElements();
+main.renderReactElements();
 
-globalThis.app = app;
+globalThis.app = main; // ADIOS requires 'app' property
+globalThis.main = main;

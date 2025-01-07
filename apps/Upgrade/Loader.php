@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Upgrade;
 
-class Loader extends \HubletoMain\Core\Module
+class Loader extends \HubletoMain\Core\App
 {
 
 

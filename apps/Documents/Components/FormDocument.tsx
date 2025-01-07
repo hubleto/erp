@@ -82,15 +82,15 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
     const showAdditional: boolean = R.id > 0 ? true : false;
 
     if (R.COMPANY_DOCUMENT) {
-      var companyEntryURL = globalThis.app.config.rewriteBase+"customers/companies?recordId="+R.COMPANY_DOCUMENT.id_company;
+      var companyEntryURL = globalThis.main.config.rewriteBase+"customers/companies?recordId="+R.COMPANY_DOCUMENT.id_company;
       var companyEntryType = "Company"
     }
     if (R.LEAD_DOCUMENT) {
-      var leadEntryURL = globalThis.app.config.rewriteBase+"leads?recordId="+R.LEAD_DOCUMENT.id_lead;
+      var leadEntryURL = globalThis.main.config.rewriteBase+"leads?recordId="+R.LEAD_DOCUMENT.id_lead;
       var leadEntryType = "Lead"
     }
     if (R.DEAL_DOCUMENT) {
-      var dealEntryURL = globalThis.app.config.rewriteBase+"deals?recordId="+R.DEAL_DOCUMENT.id_deal;
+      var dealEntryURL = globalThis.main.config.rewriteBase+"deals?recordId="+R.DEAL_DOCUMENT.id_deal;
       var dealEntryType = "Deal"
     }
 

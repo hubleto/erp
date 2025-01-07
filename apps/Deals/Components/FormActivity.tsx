@@ -34,7 +34,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
 
   renderTitle(): JSX.Element {
     if (this.state.creatingRecord) {
-      return <h2>{globalThis.app.translate('New activity for deal')}</h2>;
+      return <h2>{globalThis.main.translate('New activity for deal')}</h2>;
     } else {
       return (
         <>
@@ -84,7 +84,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
         {this.inputWrapper('date_end')}
         {this.inputWrapper('time_end')}
         {this.inputWrapper('all_day')}
-        {this.inputWrapper('id_user', {readonly: true, value: globalThis.app.idUser})}
+        {this.inputWrapper('id_user', {readonly: true, value: globalThis.main.idUser})}
       </>
     );
   }

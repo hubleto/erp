@@ -4,7 +4,7 @@ namespace HubletoApp\Billing;
 
 use HubletoApp\Settings\Models\Permission;
 
-class Loader extends \HubletoMain\Core\Module
+class Loader extends \HubletoMain\Core\App
 {
 
   public function __construct(\HubletoMain $app)

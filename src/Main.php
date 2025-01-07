@@ -22,7 +22,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 {
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
-  protected array $modules = [];
+  protected array $apps = [];
   public \HubletoMain\Core\Sidebar $sidebar;
 
   public string $requestedUriFirstPart = '';
@@ -53,24 +53,24 @@ class HubletoMain extends \ADIOS\Core\Loader
       ));
     }
 
-    $this->addModule(\HubletoApp\Dashboard\Loader::class);
-    $this->addModule(\HubletoApp\Customers\Loader::class);
-    $this->addModule(\HubletoApp\Calendar\Loader::class);
-    $this->addModule(\HubletoApp\Settings\Loader::class);
-    $this->addModule(\HubletoApp\Help\Loader::class);
+    $this->registerApp(\HubletoApp\Dashboard\Loader::class);
+    $this->registerApp(\HubletoApp\Customers\Loader::class);
+    $this->registerApp(\HubletoApp\Calendar\Loader::class);
+    $this->registerApp(\HubletoApp\Settings\Loader::class);
+    $this->registerApp(\HubletoApp\Help\Loader::class);
 
-    foreach ($this->config['enabledModules'] ?? [] as $module) {
-      if ($module::canBeAdded($this)) {
-        $this->addModule($module);
+    foreach ($this->config['enabledApps'] ?? [] as $app) {
+      if ($app::canBeAdded($this)) {
+        $this->registerApp($app);
       }
     }
 
     $this->help = new \HubletoMain\Core\Help($this);
     $this->sidebar = new \HubletoMain\Core\Sidebar($this);
 
-    $modules = $this->getModules();
-    array_walk($modules, function($module) {
-      $module->init();
+    $apps = $this->getRegisteredApps();
+    array_walk($apps, function($app) {
+      $app->init();
     });
 
   }
@@ -87,16 +87,16 @@ class HubletoMain extends \ADIOS\Core\Loader
     ));
   }
 
-  public function addModule(string $module)
+  public function registerApp(string $app)
   {
-    if (!in_array($module, $this->modules)) {
-      $this->modules[$module] = new $module($this);
+    if (!in_array($app, $this->apps)) {
+      $this->apps[$app] = new $app($this);
     }
   }
 
-  public function getModules(): array
+  public function getRegisteredApps(): array
   {
-    return $this->modules;
+    return $this->apps;
   }
 
   public function getSidebar(): \HubletoMain\Core\Sidebar

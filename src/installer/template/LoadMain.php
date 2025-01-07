@@ -17,6 +17,6 @@ require_once(__DIR__ . "/ConfigAccount.php");
 require("{{ appDir }}/vendor/autoload.php");
 if (is_file("{{ extDir }}/vendor/autoload.php")) require("{{ extDir }}/vendor/autoload.php");
 
-// load application class
-require("{{ appDir }}/src/App.php");
+// load entry class
+require("{{ appDir }}/src/Main.php");
 

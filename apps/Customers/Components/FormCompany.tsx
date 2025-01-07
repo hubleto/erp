@@ -188,7 +188,7 @@ export default class FormCompany<P, S> extends Form<
     return (
       <>
         <TabView>
-          <TabPanel header={globalThis.app.translate('Company')}>
+          <TabPanel header={globalThis.main.translate('Company')}>
             <div
               className="grid grid-cols-2 gap-1"
               style={{
@@ -237,7 +237,7 @@ export default class FormCompany<P, S> extends Form<
 
               {showAdditional ?
               <div className="card" style={{ gridArea: "contacts" }}>
-                <div className="card-header">{globalThis.app.translate('Contact Persons')}</div>
+                <div className="card-header">{globalThis.main.translate('Contact Persons')}</div>
                 <div className="card-body">
                   <TablePersons
                     uid={this.props.uid + "_table_persons"}
@@ -254,12 +254,12 @@ export default class FormCompany<P, S> extends Form<
                         canRead: true,
                       },
                       ui: {
-                        addButtonText: globalThis.app.translate('Add contact person'),
+                        addButtonText: globalThis.main.translate('Add contact person'),
                       },
                       columns: {
-                        first_name: { type: "varchar", title: globalThis.app.translate("First name") },
-                        last_name: { type: "varchar", title: globalThis.app.translate("Last name") },
-                        is_main: { type: "boolean", title: globalThis.app.translate("Main Contact") },
+                        first_name: { type: "varchar", title: globalThis.main.translate("First name") },
+                        last_name: { type: "varchar", title: globalThis.main.translate("Last name") },
+                        is_main: { type: "boolean", title: globalThis.main.translate("Main Contact") },
                       },
                     }}
                     isUsedAsInput={true}
@@ -281,7 +281,7 @@ export default class FormCompany<P, S> extends Form<
                         if (!R.PERSONS) R.PERSONS = [];
                         this.setState({createNewPerson: true} as FormCompanyState);
                       }}>
-                      + {globalThis.app.translate('Add contact')}
+                      + {globalThis.main.translate('Add contact')}
                     </a>
                   ) : null}
                   {this.state.createNewPerson ?
@@ -293,12 +293,12 @@ export default class FormCompany<P, S> extends Form<
             </div>
           </TabPanel>
           {showAdditional ? (
-            <TabPanel header={globalThis.app.translate('Calendar')}>
+            <TabPanel header={globalThis.main.translate('Calendar')}>
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.app.config.rewriteBase + 'customers/get-calendar-events?idCompany=' + R.id}
+                eventsEndpoint={globalThis.main.config.rewriteBase + 'customers/get-calendar-events?idCompany=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityCalendarDateClicked: date,
@@ -343,7 +343,7 @@ export default class FormCompany<P, S> extends Form<
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header={globalThis.app.translate('Leads')}>
+            <TabPanel header={globalThis.main.translate('Leads')}>
               <TableLeads
                 uid={this.props.uid + "_table_leads"}
                 data={{ data: R.LEADS }}
@@ -406,7 +406,7 @@ export default class FormCompany<P, S> extends Form<
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header={globalThis.app.translate('Deals')}>
+            <TabPanel header={globalThis.main.translate('Deals')}>
               <TableDeals
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DEALS }}
@@ -470,7 +470,7 @@ export default class FormCompany<P, S> extends Form<
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header={globalThis.app.translate('Documents')}>
+            <TabPanel header={globalThis.main.translate('Documents')}>
               <TableCompanyDocuments
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DOCUMENTS }}
@@ -562,7 +562,7 @@ export default class FormCompany<P, S> extends Form<
               : null}
             </TabPanel>
           ) : null}
-          <TabPanel header={globalThis.app.translate('Notes')}>
+          <TabPanel header={globalThis.main.translate('Notes')}>
             {this.input("note")}
           </TabPanel>
         </TabView>

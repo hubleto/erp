@@ -25,7 +25,7 @@
   <script defer src='{{ config.url }}/assets/compiled/app.js'></script>
 
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/fontawesome-6.6.css">
-  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/app.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/main.css">
 
   <style>
     @font-face {
@@ -37,8 +37,8 @@
   </style>
   <script>
     ADIOS.onAppLoaded(() => {
-      globalThis.app.idUser = {{ user.id ?? 0 }};
-      globalThis.app.loadDictionary('{{ user.language ?: "en" }}');
+      globalThis.main.idUser = {{ user.id ?? 0 }};
+      globalThis.main.loadDictionary('{{ user.language ?: "en" }}');
     });
   </script>
 
@@ -203,7 +203,7 @@
         bool:show-in-modal-simple="true"
         bool:is-inline-editing="true"
         function:on-close="
-          let modal = globalThis.app.reactElements['user-profile-modal'];
+          let modal = globalThis.main.reactElements['user-profile-modal'];
           modal.setState({isOpen: false});
         "
       ></app-core-settings-form-user>

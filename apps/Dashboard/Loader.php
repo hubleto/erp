@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Dashboard;
 
-class Loader extends \HubletoMain\Core\Module
+class Loader extends \HubletoMain\Core\App
 {
 
 

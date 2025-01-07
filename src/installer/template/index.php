@@ -1,7 +1,7 @@
 <?php
 
 // load application class
-require(__DIR__ . "/LoadApp.php");
+require(__DIR__ . "/LoadMain.php");
 
 // render
 $app = new HubletoMain($config);

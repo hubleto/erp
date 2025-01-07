@@ -42,7 +42,7 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
     formUseModalSimple: true,
     model: 'HubletoApp/Invoices/Models/Invoice',
     // description: {
-    //   ui: { addButtonText: globalThis.app.translate('Create invoice') }
+    //   ui: { addButtonText: globalThis.main.translate('Create invoice') }
     // },
   }
 
@@ -105,19 +105,19 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
 
     description.columns['TOTAL_EXCLUDING_VAT'] = {
       type: 'float',
-      title: globalThis.app.translate('Total excl. VAT'),
+      title: globalThis.main.translate('Total excl. VAT'),
       unit: '€',
     };
 
     description.columns['TOTAL_VAT'] = {
       type: 'float',
-      title: globalThis.app.translate('VAT'),
+      title: globalThis.main.translate('VAT'),
       unit: '€',
     };
 
     description.columns['TOTAL_INCLUDING_VAT'] = {
       type: 'float',
-      title: globalThis.app.translate('Total incl. VAT'),
+      title: globalThis.main.translate('Total incl. VAT'),
       unit: '€',
     };
 
@@ -154,7 +154,7 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
           <div><i className="fas fa-filter text-2xl text-gray-200 mr-4"></i></div>
           <div className={"p-1 flex-1" + (this.state.idCustomer > 0 || this.state.number != '' || this.state.vs != '' ? " bg-yellow-100" : "")}>
             {this.props.idCustomer ? null : <div>
-              <b className="text-sm">{globalThis.app.translate('Customer')}</b><br/>
+              <b className="text-sm">{globalThis.main.translate('Customer')}</b><br/>
               <InputLookup
                 uid={this.props.uid + '_filter_customer'}
                 model='HubletoApp/Customers/Models/Company'
@@ -167,7 +167,7 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
               ></InputLookup>
             </div>}
             <div>
-              <b className="text-sm">{globalThis.app.translate('Number')}</b><br/>
+              <b className="text-sm">{globalThis.main.translate('Number')}</b><br/>
               <InputVarchar
                 uid={this.props.uid + '_filter_number'}
                 value={this.state.number}
@@ -179,7 +179,7 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
               ></InputVarchar>
             </div>
             <div>
-              <b className="text-sm">{globalThis.app.translate('Variable symbol')}</b><br/>
+              <b className="text-sm">{globalThis.main.translate('Variable symbol')}</b><br/>
               <InputVarchar
                 uid={this.props.uid + '_filter_vs'}
                 value={this.state.vs}
@@ -192,24 +192,24 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
             </div>
           </div>
           <div className={"p-1 flex-1" + (this.state.dateIssueFrom != '' || this.state.dateIssueTo != '' || this.state.dateDeliveryFrom != '' || this.state.dateDeliveryTo != '' || this.state.dateDueFrom != '' || this.state.dateDueTo != ''? " bg-yellow-100" : "")}>
-            <b className="text-sm">{globalThis.app.translate('Issue')}</b><br/>
+            <b className="text-sm">{globalThis.main.translate('Issue')}</b><br/>
             <div className="flex">
               {this._datetimeFilter('dateIssueFrom', 'date-issue-from')}
               {this._datetimeFilter('dateIssueTo', 'date-issue-to')}
             </div>
-            <b className="text-sm">{globalThis.app.translate('Delivery')}</b><br/>
+            <b className="text-sm">{globalThis.main.translate('Delivery')}</b><br/>
             <div className="flex">
               {this._datetimeFilter('dateDeliveryFrom', 'date-delivery-from')}
               {this._datetimeFilter('dateDeliveryTo', 'date-delivery-to')}
             </div>
-            <b className="text-sm">{globalThis.app.translate('Due')}</b><br/>
+            <b className="text-sm">{globalThis.main.translate('Due')}</b><br/>
             <div className="flex">
               {this._datetimeFilter('dateDueFrom', 'date-due-from')}
               {this._datetimeFilter('dateDueTo', 'date-due-to')}
             </div>
           </div>
           <div className={"p-1 flex-1" + (this.state.datePaymentFrom != '' || this.state.datePaymentTo != '' ? " bg-yellow-100" : "")}>
-            <b className="text-sm">{globalThis.app.translate('Payment')}</b><br/>
+            <b className="text-sm">{globalThis.main.translate('Payment')}</b><br/>
             <div className="flex">
               {this._datetimeFilter('datePaymentFrom', 'date-payment-from')}
               {this._datetimeFilter('datePaymentTo', 'date-payment-to')}
@@ -234,9 +234,9 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
 
     return <>
       <div className="font-bold">
-        {globalThis.app.translate('Total excl. VAT')}: {totalExclVat.toFixed(2)} €<br/>
-        {globalThis.app.translate('Total VAT')}: {totalVat.toFixed(2)} €<br/>
-        {globalThis.app.translate('Total incl. VAT')}: {totalInclVat.toFixed(2)} €
+        {globalThis.main.translate('Total excl. VAT')}: {totalExclVat.toFixed(2)} €<br/>
+        {globalThis.main.translate('Total VAT')}: {totalVat.toFixed(2)} €<br/>
+        {globalThis.main.translate('Total incl. VAT')}: {totalInclVat.toFixed(2)} €
       </div>
     </>
   }
@@ -247,7 +247,7 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
       defaultValues: {
         id_klient: this.state.idCustomer,
         id_profil: 1,
-        id_vystavil: globalThis.app.idUser,
+        id_vystavil: globalThis.main.idUser,
       },
       ui: { headerClassName: 'bg-indigo-50', },
     };

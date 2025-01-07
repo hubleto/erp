@@ -7,5 +7,5 @@
 /node_modules
 /composer-dev.json
 /ConfigAccount.php
-/LoadApp.php
+/LoadMain.php
 /.htaccess

@@ -6,7 +6,7 @@ use HubletoApp\Billing\Models\BillingAccount;
 use HubletoApp\Billing\Models\BillingAccountService;
 use HubletoApp\Settings\Models\Permission;
 
-class Loader extends \HubletoMain\Core\Module
+class Loader extends \HubletoMain\Core\App
 {
 
 

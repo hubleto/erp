@@ -49,7 +49,7 @@
                         {...this.getDefaultInputProps()}
                         value={input.description}
                         /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
-                        placeholder={globalThis.app.translate(
+                        placeholder={globalThis.main.translate(
                           "Billing Account Description"
                         )}
                         onChange={(value: any) => {
@@ -120,7 +120,7 @@
                   <button
                     className="btn btn-danger text-sm"
                     onClick={() => {
-                      globalThis.app.showDialogDanger(
+                      globalThis.main.showDialogDanger(
                         <>This will delete the <b>{input.description}</b> billing account and the connections to the services. Do you want to continue?</>,
                         {
                           header: "Delete billing account",
@@ -138,7 +138,7 @@
                                     if (data.status == true || data.id == 0) {
                                       R.BILLING_ACCOUNTS.splice(key, 1);
                                       this.setState({record: R});
-                                      globalThis.app.lastShownDialogRef.current.hide();
+                                      globalThis.main.lastShownDialogRef.current.hide();
                                     }
                                   }
                                 );
@@ -150,7 +150,7 @@
                             <button
                               className="btn btn-transparent"
                               onClick={() => {
-                                globalThis.app.lastShownDialogRef.current.hide();
+                                globalThis.main.lastShownDialogRef.current.hide();
                               }}
                             >
                               <span className="icon"><i className="fas fa-times"></i></span>

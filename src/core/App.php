@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Core;
 
-class Module {
+class App {
   public \HubletoMain $app;
   protected array $registeredModels = [];
 

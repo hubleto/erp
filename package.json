@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-css": "npx tailwindcss -i ./src/App.css -o ./assets/compiled/app.css",
-    "watch-css": "npx tailwindcss --watch -i ./src/App.css -o ./assets/compiled/app.css",
+    "build-css": "npx tailwindcss -i ./src/Main.css -o ./assets/compiled/main.css",
+    "watch-css": "npx tailwindcss --watch -i ./src/Main.css -o ./assets/compiled/main.css",
     "build-js": "npx webpack --mode development",
-    "build": "npx webpack --mode development && npx tailwindcss -i ./src/App.css -o ./assets/compiled/app.css",
+    "build": "npx webpack --mode development && npx tailwindcss -i ./src/Main.css -o ./assets/compiled/main.css",
     "build:prod": "npx webpack --mode production"
   },
   "dependencies": {

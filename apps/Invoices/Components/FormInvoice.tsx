@@ -28,7 +28,7 @@ export default class FormInvoice extends Form<FormInvoiceProps, FormInvoiceState
     const r = this.state.record;
     return <>
       <h2>{r.number ? r.number : '---'}</h2>
-      <div className="badge border-indigo-500 text-indigo-500 text-lg">{globalThis.app.translate('Invoice')}</div>
+      <div className="badge border-indigo-500 text-indigo-500 text-lg">{globalThis.main.translate('Invoice')}</div>
     </>;
   }
 
@@ -56,7 +56,7 @@ export default class FormInvoice extends Form<FormInvoiceProps, FormInvoiceState
 
             {this.state.record.datum_uhrady == '0000-00-00' ? <>
               <div className="alert alert-danger mt-1">
-                {globalThis.app.translate('Invoice is not paid.')}
+                {globalThis.main.translate('Invoice is not paid.')}
               </div>
             </> : null}
           </div>
@@ -66,16 +66,16 @@ export default class FormInvoice extends Form<FormInvoiceProps, FormInvoiceState
         <div className="mt-4">
           <a
             className='btn btn-large'
-            href={globalThis.app.config['accountUrl'] + '/invoices/print?id=' + this.state.record._idHash_}
+            href={globalThis.main.config['accountUrl'] + '/invoices/print?id=' + this.state.record._idHash_}
             target="_blank"
           >
             <span className='icon'><i className='fas fa-print'></i></span>
-            <span className='text'>{globalThis.app.translate('Print invoice')}</span>
+            <span className='text'>{globalThis.main.translate('Print invoice')}</span>
           </a>
         </div>
         <div className="card mt-4">
           <div className="card-header">
-            {globalThis.app.translate('Items')}
+            {globalThis.main.translate('Items')}
           </div>
           <div className="card-body">
             {/* <TableInvoiceItems

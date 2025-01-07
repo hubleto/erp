@@ -60,15 +60,15 @@
 
 <div class="card mt-2">
   <div class="card-header">Manage installed apps</div>
-  <div class="card-body">
-    {% for module in viewParams.app.modules %}
+  <div class="card-body">{{ dump(viewParams.app) }}
+    {% for app in viewParams.app.apps %}
       <div class="my-1 flex justify-between">
-        <span class="text-sm">{{ module.namespace }}</span>
+        <span class="text-sm">{{ app.namespace }}</span>
         <div>
-          <a class="btn btn-transparent" href="{{ module.url }}">
+          <a class="btn btn-transparent" href="{{ app.url }}">
             <span class="text">Disable</span>
           </a>
-          <a class="btn btn-red" href="{{ module.url }}">
+          <a class="btn btn-red" href="{{ app.url }}">
             <span class="text">Uninstall</span>
           </a>
         </div>

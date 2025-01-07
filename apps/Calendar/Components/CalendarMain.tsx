@@ -44,7 +44,7 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
       <Calendar
         readonly={false}
         views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-        eventsEndpoint={globalThis.app.config.rewriteBase + '/calendar/get-calendar-events'}
+        eventsEndpoint={globalThis.main.config.rewriteBase + '/calendar/get-calendar-events'}
         onDateClick={(date, time, info) => {
           alert('Zobrazit formular na vyber a) customera, b) leadu alebo c) dealu. Ak si jedno z toho zvoli, otvori sa prislusny form. Ak si nezvoli nic, otvori sa form, ktory bude ukladat do noveho modelu Calendar/Models/Activity');
         }}

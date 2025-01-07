@@ -1,5 +1,5 @@
 {
-    "name": "wai-blue/ceremonycrm",
+    "name": "wai-blue/hubleto",
     "require": {
         "twig/twig": "^3",
         "illuminate/database": "^11",

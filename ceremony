@@ -176,7 +176,7 @@ function run(string $action, string $argument): bool {
         green("  -> Open {$accountUrl} and sign in with '{$adminEmail}' and '{$adminPassword}'.\n");
         green("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
         green("     See https://developer.ceremonycrm.com/nginx for more details.\n");
-        green("  -> Create your module in ./src/modules.\n");
+        green("  -> Create your app in ./src/apps.\n");
         green("     See https://developer.ceremonycrm.com/start-developing-own-module for tips how to start.\n");
         green("     See https://developer.ceremonycrm.com/publish-module for instructions how to publish.\n");
         green("  -> Check the developer's guide at https://developer.ceremonycrm.com for more tips & tricks.\n");

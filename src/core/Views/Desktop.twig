@@ -62,7 +62,7 @@
           </a>
         </div>
         <div class="ml-4">
-          {{ include('@core/Views/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
+          {{ include('@hubleto/Views/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
         </div>
       </div>
       <div class="hidden w-full md:block md:w-auto" id="default-navbar-mobile">
@@ -103,7 +103,7 @@
               <span class="icon"><i class="fas fa-life-ring"></i></span>
               <div class="menu">
                 <div class="list !bg-yellow-50 p-4" style="position:fixed;right:0;top:0;width:30em;max-width:50%;height:100vh;margin:0;border-radius:0;border:none;">
-                  {{ include('@mod/Help/Views/HelpCenterInner.twig') }}
+                  {{ include('@app/Help/Views/HelpCenterInner.twig') }}
                 </div>
               </div>
             </button>

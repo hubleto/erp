@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../ConfigApp.php");
 spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);
   if (str_starts_with($class, 'CeremonyCrmMod/')) {
-    require_once(__DIR__ . '/modules/' . str_replace('CeremonyCrmMod/', '', $class) . '.php');
+    require_once(__DIR__ . '/../apps/' . str_replace('CeremonyCrmMod/', '', $class) . '.php');
   } else if (str_starts_with($class, 'CeremonyCrmApp/Core/')) {
     require_once(__DIR__ . '/core/' . str_replace('CeremonyCrmApp/Core/', '', $class) . '.php');
   } else if (str_starts_with($class, 'CeremonyCrmApp/Installer/')) {
@@ -29,6 +29,8 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   public bool $isPro = false;
   private array $calendars = [];
   private array $settings = [];
+
+  public string $twigNamespaceCore = 'hubleto';
 
   public function __construct($config = NULL, $mode = NULL)
   {
@@ -76,9 +78,8 @@ class CeremonyCrmApp extends \ADIOS\Core\Loader
   public function initTwig()
   {
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
-    $this->twigLoader->addPath(__DIR__ . '/core', 'app');
-    $this->twigLoader->addPath(__DIR__ . '/core', 'core');
-    $this->twigLoader->addPath(__DIR__ . '/modules', 'mod');
+    $this->twigLoader->addPath(__DIR__ . '/core', 'hubleto');
+    $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
 
     $this->twig = new \Twig\Environment($this->twigLoader, array(
       'cache' => FALSE,

@@ -1,12 +1,12 @@
 import CeremonyCrmApp from './src/App';
-import Billing from './src/modules/Billing/Loader'
-import Calendar from './src/modules/Calendar/Loader'
-import Customers from './src/modules/Customers/Loader'
-import Documents from './src/modules/Documents/Loader'
-import Invoices from './src/modules/Invoices/Loader'
-import Settings from './src/modules/Settings/Loader'
-import Leads from './src/modules/Leads/Loader'
-import Deals from './src/modules/Deals/Loader'
+import Billing from '../src/apps/Billing/Loader'
+import Calendar from '../src/apps/Calendar/Loader'
+import Customers from '../src/apps/Customers/Loader'
+import Documents from '../src/apps/Documents/Loader'
+import Invoices from '../src/apps/Invoices/Loader'
+import Settings from '../src/apps/Settings/Loader'
+import Leads from '../src/apps/Leads/Loader'
+import Deals from '../src/apps/Deals/Loader'
 
 //@ts-ignore
 const app: CeremonyCrmApp = new CeremonyCrmApp(window.ConfigEnv);

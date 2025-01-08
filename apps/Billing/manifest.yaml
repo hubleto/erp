@@ -1,0 +1,17 @@
+namespace: HubletoApp\Billing
+rootUrlSlug: billing
+name: Billing
+author:
+  name: "Richard Ondrejka"
+  nick: "rindo"
+  company: "wai.blue"
+  github: "https://github.com/rindo789"
+  linkedin: "https://www.linkedin.com/in/richard-ondrejka/"
+highlight: Management of multiple billing accounts.
+tags:
+  - invoice
+  - billing
+  - account
+  - currency
+requires:
+  - HubletoApp\Customers

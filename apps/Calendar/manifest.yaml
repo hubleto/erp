@@ -1,0 +1,13 @@
+namespace: HubletoApp\Calendar
+rootUrlSlug: calendar
+name: Calendar
+author:
+  name: "Dusan Daniska"
+  nick: "shoki"
+  company: "wai.blue"
+  github: "https://github.com/dusan-daniska"
+  linkedin: "https://www.linkedin.com/in/dusan-daniska"
+highlight: Default calendar app. Display calendars and events from other apps.
+tags:
+  - calendar
+  - event

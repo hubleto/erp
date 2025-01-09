@@ -16,8 +16,8 @@ class Installer {
   public string $accountRootRewriteBase = '';
   public string $accountRootFolder = '';
   public string $accountRootUrl = '';
-  public string $appRootFolder = '';
-  public string $appRootUrl = '';
+  public string $mainRootFolder = '';
+  public string $mainRootUrl = '';
   public string $extRootFolder = '';
 
   public string $env = '';
@@ -43,8 +43,8 @@ class Installer {
     string $accountRootRewriteBase,
     string $accountRootFolder,
     string $accountRootUrl,
-    string $appRootFolder,
-    string $appRootUrl,
+    string $mainRootFolder,
+    string $mainRootUrl,
     string $extRootFolder,
     string $dbHost,
     string $dbName,
@@ -64,8 +64,8 @@ class Installer {
     $this->accountRootRewriteBase = $accountRootRewriteBase;
     $this->accountRootFolder = $accountRootFolder;
     $this->accountRootUrl = $accountRootUrl;
-    $this->appRootFolder = $appRootFolder;
-    $this->appRootUrl = $appRootUrl;
+    $this->mainRootFolder = $mainRootFolder;
+    $this->mainRootUrl = $mainRootUrl;
     $this->extRootFolder = $extRootFolder;
 
     $this->dbHost = $dbHost;
@@ -154,15 +154,13 @@ class Installer {
   public function getConfigAccountContent(): string
   {
     $configAccount = file_get_contents(__DIR__ . '/template/ConfigAccount.tpl');
-    $configAccount = str_replace('{{ appDir }}', $this->appRootFolder, $configAccount);
-    $configAccount = str_replace('{{ extDir }}', $this->extRootFolder, $configAccount);
-    $configAccount = str_replace('{{ appUrl }}', $this->appRootUrl, $configAccount);
+    $configAccount = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $configAccount);
+    $configAccount = str_replace('{{ mainRootUrl }}', $this->mainRootUrl, $configAccount);
     $configAccount = str_replace('{{ dbHost }}', $this->app->config['db_host'], $configAccount);
     $configAccount = str_replace('{{ dbUser }}', $this->dbUser, $configAccount);
     $configAccount = str_replace('{{ dbPassword }}', $this->dbPassword, $configAccount);
     $configAccount = str_replace('{{ dbName }}', $this->dbName, $configAccount);
     $configAccount = str_replace('{{ rewriteBase }}', $this->accountRootRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configAccount);
-    $configAccount = str_replace('{{ accountDir }}', $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid), $configAccount);
     $configAccount = str_replace('{{ accountUrl }}', $this->accountRootUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configAccount);
 
     $configAccount .= '' . "\n";
@@ -193,8 +191,7 @@ class Installer {
     // LoadMain.php
     $loadMain = file_get_contents(__DIR__ . '/template/LoadMain.php');
     $loadMain = str_replace('{{ uid }}', $this->uid, $loadMain);
-    $loadMain = str_replace('{{ appDir }}', $this->appRootFolder, $loadMain);
-    $loadMain = str_replace('{{ extDir }}', $this->extRootFolder, $loadMain);
+    $loadMain = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $loadMain);
     file_put_contents($this->accountRootFolder . '/' . $this->uid . '/LoadMain.php', $loadMain);
 
     // index.php

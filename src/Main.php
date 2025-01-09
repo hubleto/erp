@@ -22,7 +22,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 {
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
-  protected array $apps = [];
+  public array $apps = [];
   public \HubletoMain\Core\Sidebar $sidebar;
 
   public string $requestedUriFirstPart = '';

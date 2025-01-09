@@ -119,8 +119,8 @@ function run(string $action, string $argument): bool {
           'accountRootRewriteBase' => $rewriteBase,
           'accountRootFolder' => __DIR__,
           'accountRootUrl' => $accountUrl,
-          'appRootUrl' => $accountUrl,
-          'appRootFolder' => __DIR__,
+          'mainRootUrl' => $accountUrl, // main and account are the same folders in single-tenant installation
+          'mainRootFolder' => __DIR__,
         ];
 
         cyan("\n");
@@ -142,8 +142,8 @@ function run(string $action, string $argument): bool {
           $rewriteBase,
           __DIR__, // acccountRootFolder
           $accountUrl, // acccountUrl
-          __DIR__, // appRootFolder
-          $accountUrl, // appUrl
+          __DIR__, // mainRootFolder
+          $accountUrl, // mainRootUrl
           __DIR__, // extRootFolder
           $dbHost,
           $dbName,

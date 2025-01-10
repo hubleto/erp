@@ -60,7 +60,7 @@
 
 <div class="card mt-2">
   <div class="card-header">Manage installed apps</div>
-  <div class="card-body">{{ dump(viewParams.app) }}
+  <div class="card-body">
     {% for app in viewParams.app.apps %}
       <div class="my-1 flex justify-between">
         <span class="text-sm">{{ app.namespace }}</span>

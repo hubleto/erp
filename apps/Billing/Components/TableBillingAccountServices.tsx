@@ -14,7 +14,7 @@ export default class TableBillingAccountServices extends Table<TableBillingAccou
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Billing/Models/BillingAccountService',
+    model: 'HubletoApp/Community/Billing/Models/BillingAccountService',
   }
 
   props: TableBillingAccountServicesProps;

@@ -25,3 +25,7 @@ $config['global_table_prefix'] = '';
 // misc
 $config['develMode'] = TRUE;
 $config['language'] = 'en';
+
+// enterprise setup
+
+const HUBLETO_ENTERPRISE_REPO = __DIR__ . '/../enterprise';

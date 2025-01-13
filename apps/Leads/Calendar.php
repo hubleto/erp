@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Leads;
+namespace HubletoApp\Community\Leads;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 
@@ -11,7 +11,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
     $dateStart = date("Y-m-d H:i:s", strtotime((string) $params["start"]));
     $dateEnd = date("Y-m-d H:i:s", strtotime((string) $params["end"]));
 
-    $mLeadActivity = new \HubletoApp\Leads\Models\LeadActivity($this->main);
+    $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
 
     $activities = $mLeadActivity->eloquent
       ->select("lead_activities.*", "activity_types.color", "activity_types.name as activity_type")

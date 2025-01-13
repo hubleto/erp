@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Documents\Models;
+namespace HubletoApp\Community\Documents\Models;
 
-use HubletoApp\Customers\Models\CompanyDocument;
-use HubletoApp\Deals\Models\Deal;
-use HubletoApp\Leads\Models\LeadDocument;
-use HubletoApp\Deals\Models\DealDocument;
-use HubletoApp\Leads\Models\Lead;
+use HubletoApp\Community\Customers\Models\CompanyDocument;
+use HubletoApp\Community\Deals\Models\Deal;
+use HubletoApp\Community\Leads\Models\LeadDocument;
+use HubletoApp\Community\Deals\Models\DealDocument;
+use HubletoApp\Community\Leads\Models\Lead;
 
 class Document extends \HubletoMain\Core\Model
 {

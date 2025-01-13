@@ -1,16 +1,16 @@
 <?php
 
-namespace HubletoApp\Leads\Controllers\Api;
+namespace HubletoApp\Community\Leads\Controllers\Api;
 
-use HubletoApp\Settings\Models\Setting;
-use HubletoApp\Deals\Models\Deal;
-use HubletoApp\Deals\Models\DealDocument;
-use HubletoApp\Deals\Models\DealHistory;
-use HubletoApp\Deals\Models\DealService;
-use HubletoApp\Leads\Models\Lead;
-use HubletoApp\Leads\Models\LeadDocument;
-use HubletoApp\Leads\Models\LeadHistory;
-use HubletoApp\Leads\Models\LeadService;
+use HubletoApp\Community\Settings\Models\Setting;
+use HubletoApp\Community\Deals\Models\Deal;
+use HubletoApp\Community\Deals\Models\DealDocument;
+use HubletoApp\Community\Deals\Models\DealHistory;
+use HubletoApp\Community\Deals\Models\DealService;
+use HubletoApp\Community\Leads\Models\Lead;
+use HubletoApp\Community\Leads\Models\LeadDocument;
+use HubletoApp\Community\Leads\Models\LeadHistory;
+use HubletoApp\Community\Leads\Models\LeadService;
 use Exception;
 
 class ConvertLead extends \HubletoMain\Core\Controller

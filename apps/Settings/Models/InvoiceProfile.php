@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Settings\Models;
+namespace HubletoApp\Community\Settings\Models;
 
 class InvoiceProfile extends \ADIOS\Core\Model {
   public string $table = 'invoice_profiles';

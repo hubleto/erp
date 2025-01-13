@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Leads\Models;
+namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Settings\Models\Tag;
-use HubletoApp\Leads\Models\Lead;
+use HubletoApp\Community\Settings\Models\Tag;
+use HubletoApp\Community\Leads\Models\Lead;
 
 class LeadTag extends \HubletoMain\Core\Model
 {
@@ -21,7 +21,7 @@ class LeadTag extends \HubletoMain\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Lead',
-        'model' => \HubletoApp\Leads\Models\Lead::class,
+        'model' => \HubletoApp\Community\Leads\Models\Lead::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -29,7 +29,7 @@ class LeadTag extends \HubletoMain\Core\Model
       'id_tag' => [
         'type' => 'lookup',
         'title' => 'Tag',
-        'model' => \HubletoApp\Settings\Models\Tag::class,
+        'model' => \HubletoApp\Community\Settings\Models\Tag::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

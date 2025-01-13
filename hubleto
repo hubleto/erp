@@ -154,17 +154,17 @@ function run(string $action, array $argv): bool {
         );
 
         $installer->enabledApps = [
-          '\HubletoApp\Billing\Loader::class',
-          '\HubletoApp\Calendar\Loader::class',
-          '\HubletoApp\Customers\Loader::class',
-          '\HubletoApp\Dashboard\Loader::class',
-          '\HubletoApp\Documents\Loader::class',
-          '\HubletoApp\Invoices\Loader::class',
-          '\HubletoApp\Services\Loader::class',
-          '\HubletoApp\Settings\Loader::class',
-          '\HubletoApp\Pipeline\Loader::class',
-          '\HubletoApp\Deals\Loader::class',
-          '\HubletoApp\Leads\Loader::class',
+          '\HubletoApp\Community\Billing\Loader::class',
+          '\HubletoApp\Community\Calendar\Loader::class',
+          '\HubletoApp\Community\Customers\Loader::class',
+          '\HubletoApp\Community\Dashboard\Loader::class',
+          '\HubletoApp\Community\Documents\Loader::class',
+          '\HubletoApp\Community\Invoices\Loader::class',
+          '\HubletoApp\Community\Services\Loader::class',
+          '\HubletoApp\Community\Community\Settings\Loader::class',
+          '\HubletoApp\Community\Pipeline\Loader::class',
+          '\HubletoApp\Community\Deals\Loader::class',
+          '\HubletoApp\Community\Leads\Loader::class',
         ];
 
         $installer->createDatabase();
@@ -194,7 +194,7 @@ function run(string $action, array $argv): bool {
         green('Installing ' . $appToInstall . "\n");
 
         require_once(__DIR__ . "/ConfigApp.php");
-        require_once(__DIR__ . "/ConfigAccount.php");
+        require_once(__DIR__ . "/ConfigEnv.php");
 
         $main = new \HubletoMain($config, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
         $main->initDatabaseConnections();

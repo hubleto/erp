@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Leads\Models\Eloquent;
+namespace HubletoApp\Community\Leads\Models\Eloquent;
 
-use HubletoApp\Services\Models\Eloquent\Service;
-use HubletoApp\Leads\Models\Eloquent\Lead;
+use HubletoApp\Community\Services\Models\Eloquent\Service;
+use HubletoApp\Community\Leads\Models\Eloquent\Lead;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LeadService extends \ADIOS\Core\Model\Eloquent

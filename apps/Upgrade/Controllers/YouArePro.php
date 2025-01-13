@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Upgrade\Controllers;
+namespace HubletoApp\Community\Upgrade\Controllers;
 
 class YouArePro extends \HubletoMain\Core\Controller {
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Deals\Models;
+namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Customers\Models\Company;
-use HubletoApp\Customers\Models\Person;
-use HubletoApp\Deals\Models\Deal;
-use HubletoApp\Settings\Models\Currency;
-use HubletoApp\Settings\Models\User;
+use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Person;
+use HubletoApp\Community\Deals\Models\Deal;
+use HubletoApp\Community\Settings\Models\Currency;
+use HubletoApp\Community\Settings\Models\User;
 
 class DealHistory extends \HubletoMain\Core\Model
 {
@@ -30,7 +30,7 @@ class DealHistory extends \HubletoMain\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'HubletoApp/Deals/Models/Deal',
+        'model' => 'HubletoApp/Community/Deals/Models/Deal',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

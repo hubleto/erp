@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Leads\Models;
+namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Customers\Models\Company;
-use HubletoApp\Customers\Models\Person;
-use HubletoApp\Leads\Models\Lead;
-use HubletoApp\Settings\Models\Currency;
-use HubletoApp\Settings\Models\User;
+use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Person;
+use HubletoApp\Community\Leads\Models\Lead;
+use HubletoApp\Community\Settings\Models\Currency;
+use HubletoApp\Community\Settings\Models\User;
 
 class LeadHistory extends \HubletoMain\Core\Model
 {
@@ -30,7 +30,7 @@ class LeadHistory extends \HubletoMain\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'HubletoApp/Leads/Models/Lead',
+        'model' => 'HubletoApp/Community/Leads/Models/Lead',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Deals\Models;
+namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Customers\Models\Activity;
+use HubletoApp\Community\Customers\Models\Activity;
 
 class DealActivity extends \HubletoMain\Core\Model
 {
@@ -19,7 +19,7 @@ class DealActivity extends \HubletoMain\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',
-        'model' => 'HubletoApp/Deals/Models/Deal',
+        'model' => 'HubletoApp/Community/Deals/Models/Deal',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,14 +28,14 @@ class DealActivity extends \HubletoMain\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Contact Person',
-        'model' => \HubletoApp\Customers\Models\Person::class,
+        'model' => \HubletoApp\Community\Customers\Models\Person::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
       ],
       'id_activity_type' => [
         'type' => 'lookup',
         'title' => $this->translate('Activity type'),
-        'model' => \HubletoApp\Settings\Models\ActivityType::class,
+        'model' => \HubletoApp\Community\Settings\Models\ActivityType::class,
         'foreignKeyOnUpdate' => 'SET NULL',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -78,7 +78,7 @@ class DealActivity extends \HubletoMain\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Created by',
-        'model' => \HubletoApp\Settings\Models\User::class,
+        'model' => \HubletoApp\Community\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => false,

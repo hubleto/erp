@@ -9,7 +9,7 @@ export default class TableLeadDocuments extends Table<TableLeadDocumentsProps, T
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Leads/Models/LeadDocument',
+    model: 'HubletoApp/Community/Leads/Models/LeadDocument',
   }
 
   props: TableLeadDocumentsProps;

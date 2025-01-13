@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Settings\Controllers;
+namespace HubletoApp\Community\Settings\Controllers;
 
 class Permissions extends \HubletoMain\Core\Controller {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Services\Controllers;
+namespace HubletoApp\Community\Services\Controllers;
 
 class Services extends \HubletoMain\Core\Controller {
 

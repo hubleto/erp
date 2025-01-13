@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Customers\Models;
+namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Settings\Models\Tag;
+use HubletoApp\Community\Settings\Models\Tag;
 
 class PersonTag extends \HubletoMain\Core\Model
 {
@@ -20,7 +20,7 @@ class PersonTag extends \HubletoMain\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Person',
-        'model' => 'HubletoApp/Customers/Models/Person',
+        'model' => 'HubletoApp/Community/Customers/Models/Person',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class PersonTag extends \HubletoMain\Core\Model
       'id_tag' => [
         'type' => 'lookup',
         'title' => 'Tag',
-        'model' => 'HubletoApp/Settings/Models/Tag',
+        'model' => 'HubletoApp/Community/Settings/Models/Tag',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

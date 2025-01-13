@@ -19,7 +19,7 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Customers/Models/Company',
+    model: 'HubletoApp/Community/Customers/Models/Company',
   }
 
   props: TableCompaniesProps;

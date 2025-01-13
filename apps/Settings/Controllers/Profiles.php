@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Settings\Controllers;
+namespace HubletoApp\Community\Settings\Controllers;
 
 class Profiles extends \HubletoMain\Core\Controller {
 

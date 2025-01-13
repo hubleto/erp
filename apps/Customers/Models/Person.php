@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Customers\Models;
+namespace HubletoApp\Community\Customers\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Deals\Models;
+namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Settings\Models\Tag;
-use HubletoApp\Deals\Models\Deal;
+use HubletoApp\Community\Settings\Models\Tag;
+use HubletoApp\Community\Deals\Models\Deal;
 
 class DealTag extends \HubletoMain\Core\Model
 {
@@ -21,7 +21,7 @@ class DealTag extends \HubletoMain\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',
-        'model' => \HubletoApp\Deals\Models\Deal::class,
+        'model' => \HubletoApp\Community\Deals\Models\Deal::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -29,7 +29,7 @@ class DealTag extends \HubletoMain\Core\Model
       'id_tag' => [
         'type' => 'lookup',
         'title' => 'Tag',
-        'model' => \HubletoApp\Settings\Models\Tag::class,
+        'model' => \HubletoApp\Community\Settings\Models\Tag::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

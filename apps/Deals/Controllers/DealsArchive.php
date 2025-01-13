@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Deals\Controllers;
+namespace HubletoApp\Community\Deals\Controllers;
 
 class DealsArchive extends \HubletoMain\Core\Controller {
 

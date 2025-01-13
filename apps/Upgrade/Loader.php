@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Upgrade;
+namespace HubletoApp\Community\Upgrade;
 
 class Loader extends \HubletoMain\Core\App
 {

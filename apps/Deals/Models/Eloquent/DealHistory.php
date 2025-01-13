@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Deals\Models\Eloquent;
+namespace HubletoApp\Community\Deals\Models\Eloquent;
 
-use HubletoApp\Customers\Models\Eloquent\Company;
-use HubletoApp\Customers\Models\Eloquent\Person;
-use HubletoApp\Deals\Models\Eloquent\Deal;
-use HubletoApp\Settings\Models\Eloquent\ActivityType;
-use HubletoApp\Settings\Models\Eloquent\Currency;
-use HubletoApp\Settings\Models\Eloquent\User;
+use HubletoApp\Community\Customers\Models\Eloquent\Company;
+use HubletoApp\Community\Customers\Models\Eloquent\Person;
+use HubletoApp\Community\Deals\Models\Eloquent\Deal;
+use HubletoApp\Community\Settings\Models\Eloquent\ActivityType;
+use HubletoApp\Community\Settings\Models\Eloquent\Currency;
+use HubletoApp\Community\Settings\Models\Eloquent\User;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

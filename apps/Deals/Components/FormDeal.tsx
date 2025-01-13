@@ -29,7 +29,7 @@ export interface FormDealState extends FormState {
 export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'HubletoApp/Deals/Models/Deal',
+    model: 'HubletoApp/Community/Deals/Models/Deal',
   };
 
   props: FormDealProps;
@@ -191,7 +191,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       {this.inputWrapper('title', {readonly: R.is_archived})}
                       <FormInput title={"Company"} required={true}>
                         <Lookup {...this.getDefaultInputProps()}
-                          model='HubletoApp/Customers/Models/Company'
+                          model='HubletoApp/Community/Customers/Models/Company'
                           endpoint={`customers/get-company`}
                           value={R.id_company}
                           readonly={R.is_archived}
@@ -206,7 +206,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       </FormInput>
                       <FormInput title={"Contact Person"}>
                         <Lookup {...this.getDefaultInputProps()}
-                          model='HubletoApp/Customers/Models/Person'
+                          model='HubletoApp/Community/Customers/Models/Person'
                           customEndpointParams={{id_company: R.id_company}}
                           endpoint={`customers/get-company-contacts`}
                           value={R.id_person}
@@ -245,7 +245,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         <InputTags2 {...this.getDefaultInputProps()}
                           value={this.state.record.TAGS}
                           readonly={R.is_archived}
-                          model='HubletoApp/Settings/Models/Tag'
+                          model='HubletoApp/Community/Settings/Models/Tag'
                           targetColumn='id_deal'
                           sourceColumn='id_tag'
                           colorColumn='color'
@@ -267,7 +267,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         <FormInput title={"Pipeline"}>
                           <Lookup {...this.getDefaultInputProps()}
                             readonly={R.is_archived}
-                            model='HubletoApp/Settings/Models/Pipeline'
+                            model='HubletoApp/Community/Settings/Models/Pipeline'
                             value={R.id_pipeline}
                             onChange={(value: any) => {
                               this.updateRecord({ id_pipeline: value });
@@ -324,12 +324,12 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                               },
                               columns: {
                                 id_service: { type: "lookup", title: "Service",
-                                model: "HubletoApp/Services/Models/Service",
+                                model: "HubletoApp/Community/Services/Models/Service",
                                 cellRenderer: ( table: TableDealServices, data: any, options: any): JSX.Element => {
                                   return (
                                     <FormInput>
                                       <Lookup {...this.getDefaultInputProps()}
-                                        model='HubletoApp/Services/Models/Service'
+                                        model='HubletoApp/Community/Services/Models/Service'
                                         cssClass='min-w-44'
                                         value={data.id_service}
                                         onChange={(value: any) => {
@@ -480,7 +480,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     canUpdate: true
                   },
                   columns: {
-                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Documents/Models/Document" },
+                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
                   }
                 }}
                 isUsedAsInput={true}

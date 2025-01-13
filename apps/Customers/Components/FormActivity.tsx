@@ -12,7 +12,7 @@ export interface FormActivityState extends FormState {}
 export default class FormActivity<P, S> extends Form<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'HubletoApp/Customers/Models/CompanyActivity',
+    model: 'HubletoApp/Community/Customers/Models/CompanyActivity',
   };
 
   props: FormActivityProps;
@@ -62,7 +62,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
         {this.inputWrapper('id_company')}
         <FormInput title={"Contact Person"}>
           <Lookup {...this.getDefaultInputProps()}
-            model='HubletoApp/Customers/Models/Person'
+            model='HubletoApp/Community/Customers/Models/Person'
             endpoint={`customers/get-company-contacts`}
             customEndpointParams={{id_company: R.id_company}}
             value={R.id_person}

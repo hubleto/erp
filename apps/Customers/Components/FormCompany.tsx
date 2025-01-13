@@ -45,7 +45,7 @@ export default class FormCompany<P, S> extends Form<
 > {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: "HubletoApp/Customers/Models/Company",
+    model: "HubletoApp/Community/Customers/Models/Company",
   };
 
   props: FormCompanyProps;
@@ -221,7 +221,7 @@ export default class FormCompany<P, S> extends Form<
                       <InputTags2
                         {...this.getDefaultInputProps()}
                         value={this.state.record.TAGS}
-                        model="HubletoApp/Settings/Models/Tag"
+                        model="HubletoApp/Community/Settings/Models/Tag"
                         targetColumn="id_company"
                         sourceColumn="id_tag"
                         colorColumn="color"
@@ -358,7 +358,7 @@ export default class FormCompany<P, S> extends Form<
                   columns: {
                     title: { type: "varchar", title: "Title" },
                     price: { type: "float", title: "Amount" },
-                    id_currency: { type: "lookup", title: "Amount", model: 'HubletoApp/Settings/Models/Currency' },
+                    id_currency: { type: "lookup", title: "Amount", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                 }}
@@ -421,7 +421,7 @@ export default class FormCompany<P, S> extends Form<
                   columns: {
                     title: { type: "varchar", title: "Title" },
                     price: { type: "float", title: "Amount" },
-                    id_currency: { type: "lookup", title: "Amount", model: 'HubletoApp/Settings/Models/Currency' },
+                    id_currency: { type: "lookup", title: "Amount", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                 }}
@@ -487,7 +487,7 @@ export default class FormCompany<P, S> extends Form<
                     canUpdate: true
                   },
                   columns: {
-                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Documents/Models/Document" },
+                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
                   }
                 }}
                 isUsedAsInput={true}

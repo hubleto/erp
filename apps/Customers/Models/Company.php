@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Customers\Models;
+namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Billing\Models\BillingAccount;
-use HubletoApp\Settings\Models\Country;
-use HubletoApp\Settings\Models\User;
-use HubletoApp\Deals\Models\Deal;
-use HubletoApp\Leads\Models\Lead;
+use HubletoApp\Community\Billing\Models\BillingAccount;
+use HubletoApp\Community\Settings\Models\Country;
+use HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Deals\Models\Deal;
+use HubletoApp\Community\Leads\Models\Lead;
 use Illuminate\Database\Eloquent\Builder;
 
 class Company extends \HubletoMain\Core\Model
@@ -58,7 +58,7 @@ class Company extends \HubletoMain\Core\Model
       ],
       'id_country' => [
         'type' => 'lookup',
-        'model' => \HubletoApp\Settings\Models\Country::class,
+        'model' => \HubletoApp\Community\Settings\Models\Country::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'title' => $this->translate('Country'),
@@ -104,7 +104,7 @@ class Company extends \HubletoMain\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => $this->translate('Assigned User'),
-        'model' => \HubletoApp\Settings\Models\User::class,
+        'model' => \HubletoApp\Community\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,

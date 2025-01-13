@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Customers\Models;
+namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Settings\Models\ContactType;
+use HubletoApp\Community\Settings\Models\ContactType;
 
 class Contact extends \HubletoMain\Core\Model
 {
@@ -29,7 +29,7 @@ class Contact extends \HubletoMain\Core\Model
       'id_contact_type' => [
         'type' => 'lookup',
         'title' => $this->translate('Contact Category'),
-        'model' => \HubletoApp\Settings\Models\ContactType::class,
+        'model' => \HubletoApp\Community\Settings\Models\ContactType::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

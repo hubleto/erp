@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Leads\Models;
+namespace HubletoApp\Community\Leads\Models;
 
 class LeadStatus extends \HubletoMain\Core\Model
 {

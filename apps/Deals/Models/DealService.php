@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Deals\Models;
+namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Services\Models\Service;
-use HubletoApp\Deals\Models\Deal;
+use HubletoApp\Community\Services\Models\Service;
+use HubletoApp\Community\Deals\Models\Deal;
 
 class DealService extends \HubletoMain\Core\Model
 {
@@ -22,7 +22,7 @@ class DealService extends \HubletoMain\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',
-        'model' => 'HubletoApp/Deals/Models/Deal',
+        'model' => 'HubletoApp/Community/Deals/Models/Deal',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -30,7 +30,7 @@ class DealService extends \HubletoMain\Core\Model
       'id_service' => [
         'type' => 'lookup',
         'title' => 'Service',
-        'model' => 'HubletoApp/Services/Models/Service',
+        'model' => 'HubletoApp/Community/Services/Models/Service',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

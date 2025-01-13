@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Billing\Models\Eloquent;
+namespace HubletoApp\Community\Billing\Models\Eloquent;
 
-use HubletoApp\Customers\Models\Eloquent\Company;
+use HubletoApp\Community\Customers\Models\Eloquent\Company;
 
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;

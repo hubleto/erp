@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Leads\Models;
+namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Documents\Models\Document;
-use HubletoApp\Leads\Models\Lead;
+use HubletoApp\Community\Documents\Models\Document;
+use HubletoApp\Community\Leads\Models\Lead;
 
 class LeadDocument extends \HubletoMain\Core\Model
 {
@@ -21,7 +21,7 @@ class LeadDocument extends \HubletoMain\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Lead',
-        'model' => 'HubletoApp/Leads/Models/Lead',
+        'model' => 'HubletoApp/Community/Leads/Models/Lead',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -29,7 +29,7 @@ class LeadDocument extends \HubletoMain\Core\Model
       'id_document' => [
         'type' => 'lookup',
         'title' => 'Document',
-        'model' => 'HubletoApp/Documents/Models/Document',
+        'model' => 'HubletoApp/Community/Documents/Models/Document',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

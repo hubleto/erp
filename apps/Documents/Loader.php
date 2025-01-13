@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Documents;
+namespace HubletoApp\Community\Documents;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -23,7 +23,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function installTables()
   {
-    $mDocuments = new \HubletoApp\Documents\Models\Document($this->main);
+    $mDocuments = new \HubletoApp\Community\Documents\Models\Document($this->main);
     $mDocuments->dropTableIfExists()->install();
   }
 

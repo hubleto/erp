@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Documents\Controllers;
+namespace HubletoApp\Community\Documents\Controllers;
 
 class Documents extends \HubletoMain\Core\Controller {
   public function getBreadcrumbs(): array

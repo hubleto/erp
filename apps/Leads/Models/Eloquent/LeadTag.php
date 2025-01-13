@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Leads\Models\Eloquent;
+namespace HubletoApp\Community\Leads\Models\Eloquent;
 
-use HubletoApp\Settings\Models\Eloquent\Tag;
-use HubletoApp\Leads\Models\Eloquent\Lead;
+use HubletoApp\Community\Settings\Models\Eloquent\Tag;
+use HubletoApp\Community\Leads\Models\Eloquent\Lead;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

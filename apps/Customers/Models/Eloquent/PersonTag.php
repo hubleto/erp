@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Customers\Models\Eloquent;
+namespace HubletoApp\Community\Customers\Models\Eloquent;
 
-use HubletoApp\Settings\Models\Eloquent\Tag;
+use HubletoApp\Community\Settings\Models\Eloquent\Tag;
 
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;

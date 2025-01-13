@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Customers\Models\Eloquent;
+namespace HubletoApp\Community\Customers\Models\Eloquent;
 
-use HubletoApp\Settings\Models\Eloquent\Country;
+use HubletoApp\Community\Settings\Models\Eloquent\Country;
 
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;

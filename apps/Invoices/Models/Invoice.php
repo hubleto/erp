@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Invoices\Models;
+namespace HubletoApp\Community\Invoices\Models;
 
-use \HubletoApp\Customers\Models\Company;
-use \HubletoApp\Settings\Models\User;
-use \HubletoApp\Settings\Models\InvoiceProfile;
+use \HubletoApp\Community\Customers\Models\Company;
+use \HubletoApp\Community\Settings\Models\User;
+use \HubletoApp\Community\Settings\Models\InvoiceProfile;
 
 class Invoice extends \ADIOS\Core\Model {
   public string $table = 'invoices';

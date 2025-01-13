@@ -9,7 +9,7 @@ export default class TableCompanyDocuments extends Table<TableCompanyDocumentsPr
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Customers/Models/CompanyDocument',
+    model: 'HubletoApp/Community/Customers/Models/CompanyDocument',
   }
 
   props: TableCompanyDocumentsProps;

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Invoices\Models\Eloquent;
+namespace HubletoApp\Community\Invoices\Models\Eloquent;
 
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;

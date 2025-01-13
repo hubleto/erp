@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Customers\Models;
+namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Settings\Models\Country;
+use HubletoApp\Community\Settings\Models\Country;
 
 class Address extends \HubletoMain\Core\Model
 {
@@ -21,7 +21,7 @@ class Address extends \HubletoMain\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Person',
-        'model' => 'HubletoApp/Customers/Models/Person',
+        'model' => 'HubletoApp/Community/Customers/Models/Person',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -53,7 +53,7 @@ class Address extends \HubletoMain\Core\Model
       ],
       'id_country' => [
         'type' => 'lookup',
-        'model' => 'HubletoApp/Settings/Models/Country',
+        'model' => 'HubletoApp/Community/Settings/Models/Country',
         'foreignKeyOnUpdate' => 'SET NULL',
         'foreignKeyOnDelete' => 'SET NULL',
         'title' => 'Country',

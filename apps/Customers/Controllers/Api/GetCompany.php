@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Customers\Controllers\Api;
+namespace HubletoApp\Community\Customers\Controllers\Api;
 
-use HubletoApp\Customers\Models\Company;
-use HubletoApp\Customers\Models\Person;
+use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Person;
 use Exception;
 
 class GetCompany extends \HubletoMain\Core\Controller {

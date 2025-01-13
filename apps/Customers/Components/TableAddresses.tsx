@@ -14,7 +14,7 @@ export default class TableAddresses extends Table<TableAddressesProps, TableAddr
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Customers/Models/Addresses',
+    model: 'HubletoApp/Community/Customers/Models/Addresses',
   }
 
   props: TableAddressesProps;

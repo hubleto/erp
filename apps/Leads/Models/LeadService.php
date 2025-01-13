@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Leads\Models;
+namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Services\Models\Service;
-use HubletoApp\Leads\Models\Lead;
+use HubletoApp\Community\Services\Models\Service;
+use HubletoApp\Community\Leads\Models\Lead;
 
 class LeadService extends \HubletoMain\Core\Model
 {
@@ -22,7 +22,7 @@ class LeadService extends \HubletoMain\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Lead',
-        'model' => 'HubletoApp/Leads/Models/Lead',
+        'model' => 'HubletoApp/Community/Leads/Models/Lead',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -30,7 +30,7 @@ class LeadService extends \HubletoMain\Core\Model
       'id_service' => [
         'type' => 'lookup',
         'title' => 'Service',
-        'model' => 'HubletoApp/Services/Models/Service',
+        'model' => 'HubletoApp/Community/Services/Models/Service',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

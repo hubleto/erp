@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Installer;
 
-use HubletoApp\Settings\Models\ {
+use HubletoApp\Community\Settings\Models\ {
   Permission, Profile, RolePermission, User, UserRole, UserHasRole
 };
 
@@ -119,20 +119,20 @@ class Installer {
   public function installTables()
   {
 
-    (new \HubletoApp\Settings\Loader($this->main))->installTables();
-    (new \HubletoApp\Documents\Loader($this->main))->installTables();
-    (new \HubletoApp\Services\Loader($this->main))->installTables();
-    (new \HubletoApp\Customers\Loader($this->main))->installTables();
-    (new \HubletoApp\Invoices\Loader($this->main))->installTables();
-    (new \HubletoApp\Billing\Loader($this->main))->installTables();
-    (new \HubletoApp\Pipeline\Loader($this->main))->installTables();
-    (new \HubletoApp\Leads\Loader($this->main))->installTables();
-    (new \HubletoApp\Deals\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Settings\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Documents\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Services\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Customers\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Invoices\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Billing\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Pipeline\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Leads\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Deals\Loader($this->main))->installTables();
 
-    $mProfile = new \HubletoApp\Settings\Models\Profile($this->main);
-    $mUser = new \HubletoApp\Settings\Models\User($this->main);
-    $mUserRole = new \HubletoApp\Settings\Models\UserRole($this->main);
-    $mUserHasRole = new \HubletoApp\Settings\Models\UserHasRole($this->main);
+    $mProfile = new \HubletoApp\Community\Settings\Models\Profile($this->main);
+    $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+    $mUserRole = new \HubletoApp\Community\Settings\Models\UserRole($this->main);
+    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
 
     $idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
 
@@ -151,29 +151,29 @@ class Installer {
     $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
   }
 
-  public function getConfigAccountContent(): string
+  public function getConfigEnvContent(): string
   {
-    $configAccount = file_get_contents(__DIR__ . '/template/ConfigAccount.tpl');
-    $configAccount = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $configAccount);
-    $configAccount = str_replace('{{ mainRootUrl }}', $this->mainRootUrl, $configAccount);
-    $configAccount = str_replace('{{ dbHost }}', $this->main->config['db_host'], $configAccount);
-    $configAccount = str_replace('{{ dbUser }}', $this->dbUser, $configAccount);
-    $configAccount = str_replace('{{ dbPassword }}', $this->dbPassword, $configAccount);
-    $configAccount = str_replace('{{ dbName }}', $this->dbName, $configAccount);
-    $configAccount = str_replace('{{ rewriteBase }}', $this->accountRootRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configAccount);
-    $configAccount = str_replace('{{ accountUrl }}', $this->accountRootUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configAccount);
+    $configEnv = file_get_contents(__DIR__ . '/template/ConfigEnv.tpl');
+    $configEnv = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $configEnv);
+    $configEnv = str_replace('{{ mainRootUrl }}', $this->mainRootUrl, $configEnv);
+    $configEnv = str_replace('{{ dbHost }}', $this->main->config['db_host'], $configEnv);
+    $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
+    $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);
+    $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);
+    $configEnv = str_replace('{{ rewriteBase }}', $this->accountRootRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configEnv);
+    $configEnv = str_replace('{{ accountUrl }}', $this->accountRootUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
 
-    $configAccount .= '' . "\n";
-    $configAccount .= '$config[\'enabledApps\'] = [' . "\n";
+    $configEnv .= '' . "\n";
+    $configEnv .= '$config[\'enabledApps\'] = [' . "\n";
     foreach ($this->enabledApps as $app) {
-      $configAccount .= '  ' . $app . ',' . "\n";
+      $configEnv .= '  ' . $app . ',' . "\n";
     }
-    $configAccount .= '];' . "\n";
+    $configEnv .= '];' . "\n";
 
-    $configAccount .= '' . "\n";
-    $configAccount .= '$config[\'env\'] = \'' . $this->env . '\';' . "\n";
+    $configEnv .= '' . "\n";
+    $configEnv .= '$config[\'env\'] = \'' . $this->env . '\';' . "\n";
 
-    return $configAccount;
+    return $configEnv;
   }
 
   public function createFoldersAndFiles()
@@ -186,19 +186,13 @@ class Installer {
 
     // ConfigEnv.php
 
-    file_put_contents($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigAccount.php', $this->getConfigAccountContent());
-
-    // LoadMain.php
-    $loadMain = file_get_contents(__DIR__ . '/template/LoadMain.php');
-    $loadMain = str_replace('{{ uid }}', $this->uid, $loadMain);
-    $loadMain = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $loadMain);
-    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/LoadMain.php', $loadMain);
+    file_put_contents($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigEnv.php', $this->getConfigEnvContent());
 
     // index.php
-    copy(
-      __DIR__ . '/template/index.php',
-      $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/index.php'
-    );
+    $index = file_get_contents(__DIR__ . '/template/index.php');
+    $index = str_replace('{{ uid }}', $this->uid, $index);
+    $index = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $index);
+    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/index.php', $index);
 
     // .htaccess
     copy(

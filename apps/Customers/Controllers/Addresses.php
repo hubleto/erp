@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Customers\Controllers;
+namespace HubletoApp\Community\Customers\Controllers;
 
 class Addresses extends \HubletoMain\Core\Controller {
 

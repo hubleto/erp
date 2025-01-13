@@ -13,7 +13,7 @@ export default class TableActivities extends Table<TableActivitiesProps, TableAc
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Customers/Models/Activity',
+    model: 'HubletoApp/Community/Customers/Models/Activity',
   }
 
   props: TableActivitiesProps;

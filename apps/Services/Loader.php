@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Services;
+namespace HubletoApp\Community\Services;
 
-use HubletoApp\Billing\Models\BillingAccount;
-use HubletoApp\Billing\Models\BillingAccountService;
-use HubletoApp\Settings\Models\Permission;
+use HubletoApp\Community\Billing\Models\BillingAccount;
+use HubletoApp\Community\Billing\Models\BillingAccountService;
+use HubletoApp\Community\Settings\Models\Permission;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -40,7 +40,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function installDefaultPermissions()
   {
-    $mPermission = new \HubletoApp\Settings\Models\Permission($this->main);
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
       "HubletoApp/Service/Models/Service:Create,Read,Update,Delete",
       "HubletoApp/Service/Controllers/Service",

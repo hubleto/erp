@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Deals\Models;
+namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Documents\Models\Document;
+use HubletoApp\Community\Documents\Models\Document;
 
 class DealDocument extends \HubletoMain\Core\Model
 {
@@ -20,7 +20,7 @@ class DealDocument extends \HubletoMain\Core\Model
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',
-        'model' => 'HubletoApp/Deals/Models/Deal',
+        'model' => 'HubletoApp/Community/Deals/Models/Deal',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class DealDocument extends \HubletoMain\Core\Model
       'id_document' => [
         'type' => 'lookup',
         'title' => 'Document',
-        'model' => 'HubletoApp/Documents/Models/Document',
+        'model' => 'HubletoApp/Community/Documents/Models/Document',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

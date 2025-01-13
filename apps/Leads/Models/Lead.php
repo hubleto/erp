@@ -1,14 +1,14 @@
 <?php
 
-namespace HubletoApp\Leads\Models;
+namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Customers\Models\Company;
-use HubletoApp\Customers\Models\Person;
-use HubletoApp\Settings\Models\Currency;
-use HubletoApp\Settings\Models\User;
-use HubletoApp\Deals\Models\Deal;
-use HubletoApp\Leads\Models\LeadHistory;
-use HubletoApp\Leads\Models\LeadTag;
+use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Person;
+use HubletoApp\Community\Settings\Models\Currency;
+use HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Deals\Models\Deal;
+use HubletoApp\Community\Leads\Models\LeadHistory;
+use HubletoApp\Community\Leads\Models\LeadTag;
 use Exception;
 
 class Lead extends \HubletoMain\Core\Model
@@ -43,7 +43,7 @@ class Lead extends \HubletoMain\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => \HubletoApp\Customers\Models\Company::class,
+        'model' => \HubletoApp\Community\Customers\Models\Company::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => false,
@@ -51,7 +51,7 @@ class Lead extends \HubletoMain\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Contact Person',
-        'model' => \HubletoApp\Customers\Models\Person::class,
+        'model' => \HubletoApp\Community\Customers\Models\Person::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -64,7 +64,7 @@ class Lead extends \HubletoMain\Core\Model
       'id_currency' => [
         'type' => 'lookup',
         'title' => 'Currency',
-        'model' => \HubletoApp\Settings\Models\Currency::class,
+        'model' => \HubletoApp\Community\Settings\Models\Currency::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         // 'required' => true,
@@ -77,7 +77,7 @@ class Lead extends \HubletoMain\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Assigned User',
-        'model' => \HubletoApp\Settings\Models\User::class,
+        'model' => \HubletoApp\Community\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,

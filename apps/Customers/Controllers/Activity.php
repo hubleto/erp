@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Customers\Controllers;
+namespace HubletoApp\Community\Customers\Controllers;
 
 class Activity extends \HubletoMain\Core\Controller {
 

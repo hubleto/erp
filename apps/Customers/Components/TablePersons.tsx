@@ -21,7 +21,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Customers/Models/Person',
+    model: 'HubletoApp/Community/Customers/Models/Person',
     // className: 'header-style-1',
   }
 

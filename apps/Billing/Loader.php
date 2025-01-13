@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Billing;
+namespace HubletoApp\Community\Billing;
 
-use HubletoApp\Settings\Models\Permission;
+use HubletoApp\Community\Settings\Models\Permission;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -25,8 +25,8 @@ class Loader extends \HubletoMain\Core\App
   }
 
   public function installTables() {
-    $mBillingAccount = new \HubletoApp\Billing\Models\BillingAccount($this->main);
-    $mBillingAccountService = new \HubletoApp\Billing\Models\BillingAccountService($this->main);
+    $mBillingAccount = new \HubletoApp\Community\Billing\Models\BillingAccount($this->main);
+    $mBillingAccountService = new \HubletoApp\Community\Billing\Models\BillingAccountService($this->main);
 
     $mBillingAccount->dropTableIfExists()->install();
     $mBillingAccountService->dropTableIfExists()->install();
@@ -35,11 +35,11 @@ class Loader extends \HubletoMain\Core\App
   public function installDefaultPermissions()
   {
   
-    $mPermission = new \HubletoApp\Settings\Models\Permission($this->main);
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Billing/Models/BillingAccount:Create,Read,Update,Delete",
-      "HubletoApp/Billing/Models/BillingAccountService:Create,Read,Update,Delete",
-      "HubletoApp/Billing/Controllers/BillingAccount",
+      "HubletoApp/Community/Billing/Models/BillingAccount:Create,Read,Update,Delete",
+      "HubletoApp/Community/Billing/Models/BillingAccountService:Create,Read,Update,Delete",
+      "HubletoApp/Community/Billing/Controllers/BillingAccount",
     ];
 
     foreach ($permissions as $key => $permission) {

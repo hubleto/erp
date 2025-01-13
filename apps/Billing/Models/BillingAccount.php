@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Billing\Models;
+namespace HubletoApp\Community\Billing\Models;
 
-use HubletoApp\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Company;
 
 class BillingAccount extends \HubletoMain\Core\Model
 {
@@ -21,7 +21,7 @@ class BillingAccount extends \HubletoMain\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'HubletoApp/Customers/Models/Company',
+        'model' => 'HubletoApp/Community/Customers/Models/Company',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true

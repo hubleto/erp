@@ -1,17 +1,17 @@
 <?php
 
-namespace HubletoApp\Deals\Models;
+namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Customers\Models\Company;
-use HubletoApp\Customers\Models\Person;
-use HubletoApp\Settings\Models\Currency;
-use HubletoApp\Settings\Models\Pipeline;
-use HubletoApp\Settings\Models\PipelineStep;
-use HubletoApp\Settings\Models\Setting;
-use HubletoApp\Settings\Models\User;
-use HubletoApp\Deals\Models\DealHistory;
-use HubletoApp\Deals\Models\DealTag;
-use HubletoApp\Leads\Models\Lead;
+use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Person;
+use HubletoApp\Community\Settings\Models\Currency;
+use HubletoApp\Community\Settings\Models\Pipeline;
+use HubletoApp\Community\Settings\Models\PipelineStep;
+use HubletoApp\Community\Settings\Models\Setting;
+use HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Deals\Models\DealHistory;
+use HubletoApp\Community\Deals\Models\DealTag;
+use HubletoApp\Community\Leads\Models\Lead;
 use Exception;
 
 class Deal extends \HubletoMain\Core\Model
@@ -48,7 +48,7 @@ class Deal extends \HubletoMain\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => \HubletoApp\Customers\Models\Company::class,
+        'model' => \HubletoApp\Community\Customers\Models\Company::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
@@ -56,7 +56,7 @@ class Deal extends \HubletoMain\Core\Model
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Contact Person',
-        'model' => \HubletoApp\Customers\Models\Person::class,
+        'model' => \HubletoApp\Community\Customers\Models\Person::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -64,7 +64,7 @@ class Deal extends \HubletoMain\Core\Model
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Origin Lead',
-        'model' => \HubletoApp\Leads\Models\Lead::class,
+        'model' => \HubletoApp\Community\Leads\Models\Lead::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -78,7 +78,7 @@ class Deal extends \HubletoMain\Core\Model
       'id_currency' => [
         'type' => 'lookup',
         'title' => 'Currency',
-        'model' => \HubletoApp\Settings\Models\Currency::class,
+        'model' => \HubletoApp\Community\Settings\Models\Currency::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,
@@ -91,7 +91,7 @@ class Deal extends \HubletoMain\Core\Model
       'id_user' => [
         'type' => 'lookup',
         'title' => 'Assigned User',
-        'model' => \HubletoApp\Settings\Models\User::class,
+        'model' => \HubletoApp\Community\Settings\Models\User::class,
         'foreignKeyOnUpdate' => 'RESTRICT',
         'foreignKeyOnDelete' => 'RESTRICT',
         'required' => true,
@@ -105,7 +105,7 @@ class Deal extends \HubletoMain\Core\Model
       'id_pipeline' => [
         'type' => 'lookup',
         'title' => 'Pipeline',
-        'model' => \HubletoApp\Settings\Models\Pipeline::class,
+        'model' => \HubletoApp\Community\Settings\Models\Pipeline::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,
@@ -113,7 +113,7 @@ class Deal extends \HubletoMain\Core\Model
       'id_pipeline_step' => [
         'type' => 'lookup',
         'title' => 'Pipeline Step',
-        'model' => \HubletoApp\Settings\Models\PipelineStep::class,
+        'model' => \HubletoApp\Community\Settings\Models\PipelineStep::class,
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => false,

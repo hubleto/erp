@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Customers\Models;
+namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Documents\Models\Document;
+use HubletoApp\Community\Documents\Models\Document;
 
 class CompanyDocument extends \HubletoMain\Core\Model
 {
@@ -20,7 +20,7 @@ class CompanyDocument extends \HubletoMain\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'HubletoApp/Customers/Models/Company',
+        'model' => 'HubletoApp/Community/Customers/Models/Company',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class CompanyDocument extends \HubletoMain\Core\Model
       'id_document' => [
         'type' => 'lookup',
         'title' => 'Document',
-        'model' => 'HubletoApp/Documents/Models/Document',
+        'model' => 'HubletoApp/Community/Documents/Models/Document',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Leads\Models\Eloquent;
+namespace HubletoApp\Community\Leads\Models\Eloquent;
 
-// use HubletoApp\Customers\Models\Eloquent\Activity;
+// use HubletoApp\Community\Customers\Models\Eloquent\Activity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

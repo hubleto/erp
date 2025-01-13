@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Deals\Controllers;
+namespace HubletoApp\Community\Deals\Controllers;
 
 class DealStatuses extends \HubletoMain\Core\Controller {
 

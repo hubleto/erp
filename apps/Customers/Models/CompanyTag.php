@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Customers\Models;
+namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Settings\Models\Tag;
+use HubletoApp\Community\Settings\Models\Tag;
 
 class CompanyTag extends \HubletoMain\Core\Model
 {
@@ -20,7 +20,7 @@ class CompanyTag extends \HubletoMain\Core\Model
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',
-        'model' => 'HubletoApp/Customers/Models/Company',
+        'model' => 'HubletoApp/Community/Customers/Models/Company',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class CompanyTag extends \HubletoMain\Core\Model
       'id_tag' => [
         'type' => 'lookup',
         'title' => 'Tag',
-        'model' => 'HubletoApp/Settings/Models/Tag',
+        'model' => 'HubletoApp/Community/Settings/Models/Tag',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

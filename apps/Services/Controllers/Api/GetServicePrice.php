@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Services\Controllers\Api;
+namespace HubletoApp\Community\Services\Controllers\Api;
 
-use HubletoApp\Services\Models\Service;
+use HubletoApp\Community\Services\Models\Service;
 use Exception;
 
 class GetServicePrice extends \HubletoMain\Core\Controller {

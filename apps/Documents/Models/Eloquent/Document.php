@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Documents\Models\Eloquent;
+namespace HubletoApp\Community\Documents\Models\Eloquent;
 
-use HubletoApp\Customers\Models\Eloquent\CompanyDocument;
-use HubletoApp\Leads\Models\Eloquent\LeadDocument;
-use HubletoApp\Deals\Models\Eloquent\DealDocument;
+use HubletoApp\Community\Customers\Models\Eloquent\CompanyDocument;
+use HubletoApp\Community\Leads\Models\Eloquent\LeadDocument;
+use HubletoApp\Community\Deals\Models\Eloquent\DealDocument;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

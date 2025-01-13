@@ -93,7 +93,7 @@
                             id_service: {
                               type: "lookup",
                               title: "Service Name",
-                              model: "HubletoApp/Services/Models/Service",
+                              model: "HubletoApp/Community/Services/Models/Service",
                             },
                           },
                         }}
@@ -131,7 +131,7 @@
                                 request.get(
                                   'api/record/delete',
                                   {
-                                    model: 'HubletoApp/Billing/Models/BillingAccount',
+                                    model: 'HubletoApp/Community/Billing/Models/BillingAccount',
                                     id: input.id,
                                   },
                                   (data: any) => {

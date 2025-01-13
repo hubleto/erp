@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Pipeline\Controllers;
+namespace HubletoApp\Community\Pipeline\Controllers;
 
-use HubletoApp\Settings\Models\Tag;
-use HubletoApp\Settings\Models\Pipeline;
-use HubletoApp\Settings\Models\Setting;
-use HubletoApp\Deals\Models\Deal;
+use HubletoApp\Community\Settings\Models\Tag;
+use HubletoApp\Community\Settings\Models\Pipeline;
+use HubletoApp\Community\Settings\Models\Setting;
+use HubletoApp\Community\Deals\Models\Deal;
 
 class Home extends \HubletoMain\Core\Controller {
 

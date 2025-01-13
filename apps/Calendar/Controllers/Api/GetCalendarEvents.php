@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Calendar\Controllers\Api;
+namespace HubletoApp\Community\Calendar\Controllers\Api;
 
 class GetCalendarEvents extends \HubletoMain\Core\Controller {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Billing\Controllers;
+namespace HubletoApp\Community\Billing\Controllers;
 
 class BillingAccounts extends \HubletoMain\Core\Controller {
 

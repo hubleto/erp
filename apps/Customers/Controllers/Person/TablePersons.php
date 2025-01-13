@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Customers\Controllers\Person;
+namespace HubletoApp\Community\Customers\Controllers\Person;
 
 use Illuminate\Database\Eloquent\Builder;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Leads;
+namespace HubletoApp\Community\Leads;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -35,12 +35,12 @@ class Loader extends \HubletoMain\Core\App
   public function installTables()
   {
     $mLeadStatus = new Models\LeadStatus($this->main);
-    $mLead = new \HubletoApp\Leads\Models\Lead($this->main);
-    $mLeadHistory = new \HubletoApp\Leads\Models\LeadHistory($this->main);
-    $mLeadTag = new \HubletoApp\Leads\Models\LeadTag($this->main);
-    $mLeadService = new \HubletoApp\Leads\Models\LeadService($this->main);
-    $mLeadActivity = new \HubletoApp\Leads\Models\LeadActivity($this->main);
-    $mLeadDocument = new \HubletoApp\Leads\Models\LeadDocument($this->main);
+    $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
+    $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
+    $mLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
+    $mLeadService = new \HubletoApp\Community\Leads\Models\LeadService($this->main);
+    $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
+    $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
 
     $mLeadStatus->dropTableIfExists()->install();
     $mLead->dropTableIfExists()->install();

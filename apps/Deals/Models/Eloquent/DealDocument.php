@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Deals\Models\Eloquent;
+namespace HubletoApp\Community\Deals\Models\Eloquent;
 
-use HubletoApp\Documents\Models\Eloquent\Document;
+use HubletoApp\Community\Documents\Models\Eloquent\Document;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

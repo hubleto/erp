@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Services\Models;
+namespace HubletoApp\Community\Services\Models;
 
-use HubletoApp\Settings\Models\Currency;
+use HubletoApp\Community\Settings\Models\Currency;
 
 class Service extends \HubletoMain\Core\Model
 {
@@ -29,7 +29,7 @@ class Service extends \HubletoMain\Core\Model
       'id_currency' => [
         'type' => 'lookup',
         'title' => 'Currency',
-        'model' => 'HubletoApp/Settings/Models/Currency',
+        'model' => 'HubletoApp/Community/Settings/Models/Currency',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
       ],

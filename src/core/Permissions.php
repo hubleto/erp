@@ -2,9 +2,9 @@
 
 namespace HubletoMain\Core;
 
-use HubletoApp\Settings\Models\Permission;
-use HubletoApp\Settings\Models\RolePermission;
-use HubletoApp\Settings\Models\UserRole;
+use HubletoApp\Community\Settings\Models\Permission;
+use HubletoApp\Community\Settings\Models\RolePermission;
+use HubletoApp\Community\Settings\Models\UserRole;
 
 class Permissions extends \ADIOS\Core\Permissions {
 

@@ -9,7 +9,7 @@ export default class TableDealDocuments extends Table<TableDealDocumentsProps, T
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Deals/Models/DealDocument',
+    model: 'HubletoApp/Community/Deals/Models/DealDocument',
   }
 
   props: TableDealDocumentsProps;

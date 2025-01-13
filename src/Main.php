@@ -2,14 +2,18 @@
 
 use \ADIOS\Core\Helper;
 
+const HUBLETO_COMMUNITY_REPO = __DIR__ . '/../apps';
+
 // load configs
 require_once(__DIR__ . "/../ConfigApp.php");
 
 // autoloader pre HubletoMain
 spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);
-  if (str_starts_with($class, 'HubletoApp/')) {
-    require_once(__DIR__ . '/../apps/' . str_replace('HubletoApp/', '', $class) . '.php');
+  if (str_starts_with($class, 'HubletoApp/Community/')) {
+    require_once(HUBLETO_COMMUNITY_REPO . '/' . str_replace('HubletoApp/Community/', '', $class) . '.php');
+  } else if (str_starts_with($class, 'HubletoApp/Enterprise/')) {
+    require_once(HUBLETO_ENTERPRISE_REPO . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
   } else if (str_starts_with($class, 'HubletoMain/Core/')) {
     require_once(__DIR__ . '/core/' . str_replace('HubletoMain/Core/', '', $class) . '.php');
   } else if (str_starts_with($class, 'HubletoMain/Installer/')) {
@@ -53,11 +57,11 @@ class HubletoMain extends \ADIOS\Core\Loader
       ));
     }
 
-    $this->registerApp(\HubletoApp\Dashboard\Loader::class);
-    $this->registerApp(\HubletoApp\Customers\Loader::class);
-    $this->registerApp(\HubletoApp\Calendar\Loader::class);
-    $this->registerApp(\HubletoApp\Settings\Loader::class);
-    $this->registerApp(\HubletoApp\Help\Loader::class);
+    $this->registerApp(\HubletoApp\Community\Dashboard\Loader::class);
+    $this->registerApp(\HubletoApp\Community\Customers\Loader::class);
+    $this->registerApp(\HubletoApp\Community\Calendar\Loader::class);
+    $this->registerApp(\HubletoApp\Community\Settings\Loader::class);
+    $this->registerApp(\HubletoApp\Community\Help\Loader::class);
 
     foreach ($this->config['enabledApps'] ?? [] as $app) {
       if ($app::canBeAdded($this)) {

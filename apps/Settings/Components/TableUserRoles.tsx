@@ -13,7 +13,7 @@ export default class TableUserRoles extends Table<TableUserRolesProps, TableUser
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Settings/Models/UserRole',
+    model: 'HubletoApp/Community/Settings/Models/UserRole',
   }
 
   props: TableUserRolesProps;

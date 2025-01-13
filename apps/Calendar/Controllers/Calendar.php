@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Calendar\Controllers;
+namespace HubletoApp\Community\Calendar\Controllers;
 
 class Calendar extends \HubletoMain\Core\Controller {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Leads\Controllers;
+namespace HubletoApp\Community\Leads\Controllers;
 
 class Leads extends \HubletoMain\Core\Controller {
 

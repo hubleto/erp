@@ -12,7 +12,7 @@ export default class TableRolePermissions extends Table<TableRolePermissionsProp
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Settings/Models/RolePermission',
+    model: 'HubletoApp/Community/Settings/Models/RolePermission',
   }
 
   props: TableRolePermissionsProps;

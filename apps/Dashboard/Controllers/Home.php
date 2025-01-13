@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Dashboard\Controllers;
+namespace HubletoApp\Community\Dashboard\Controllers;
 
 class Home extends \HubletoMain\Core\Controller {
 

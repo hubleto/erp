@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Billing\Models;
+namespace HubletoApp\Community\Billing\Models;
 
-use HubletoApp\Services\Models\Service;
+use HubletoApp\Community\Services\Models\Service;
 
 class BillingAccountService extends \HubletoMain\Core\Model
 {
@@ -20,7 +20,7 @@ class BillingAccountService extends \HubletoMain\Core\Model
       'id_billing_account' => [
         'type' => 'lookup',
         'title' => 'Billing Account',
-        'model' => 'HubletoApp/Billing/Models/BillingAccount',
+        'model' => 'HubletoApp/Community/Billing/Models/BillingAccount',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,
@@ -28,7 +28,7 @@ class BillingAccountService extends \HubletoMain\Core\Model
       'id_service' => [
         'type' => 'lookup',
         'title' => 'Service',
-        'model' => 'HubletoApp/Services/Models/Service',
+        'model' => 'HubletoApp/Community/Services/Models/Service',
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'CASCADE',
         'required' => true,

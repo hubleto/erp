@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Deals\Controllers\Api;
+namespace HubletoApp\Community\Deals\Controllers\Api;
 
-use HubletoApp\Settings\Models\Pipeline;
-use HubletoApp\Settings\Models\PipelineStep;
+use HubletoApp\Community\Settings\Models\Pipeline;
+use HubletoApp\Community\Settings\Models\PipelineStep;
 use Exception;
 
 class ChangePipeline extends \HubletoMain\Core\Controller

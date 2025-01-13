@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Invoices;
+namespace HubletoApp\Community\Invoices;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -22,8 +22,8 @@ class Loader extends \HubletoMain\Core\App
 
   public function installTables()
   {
-    $mInvoice = new \HubletoApp\Invoices\Models\Invoice($this->main);
-    $mInvoiceItem = new \HubletoApp\Invoices\Models\InvoiceItem($this->main);
+    $mInvoice = new \HubletoApp\Community\Invoices\Models\Invoice($this->main);
+    $mInvoiceItem = new \HubletoApp\Community\Invoices\Models\InvoiceItem($this->main);
 
     $mInvoice->dropTableIfExists()->install();
     $mInvoiceItem->dropTableIfExists()->install();
@@ -31,11 +31,11 @@ class Loader extends \HubletoMain\Core\App
 
   public function installDefaultPermissions()
   {
-    $mPermission = new \HubletoApp\Settings\Models\Permission($this->main);
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Invoices/Models/Invoice:Create,Read,Update,Delete",
-      "HubletoApp/Invoices/Models/InvoiceItem:Create,Read,Update,Delete",
-      "HubletoApp/Invoices/Controllers/Print",
+      "HubletoApp/Community/Invoices/Models/Invoice:Create,Read,Update,Delete",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Create,Read,Update,Delete",
+      "HubletoApp/Community/Invoices/Controllers/Print",
     ];
 
     foreach ($permissions as $key => $permission) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Deals;
+namespace HubletoApp\Community\Deals;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -36,12 +36,12 @@ class Loader extends \HubletoMain\Core\App
   public function installTables()
   {
     $mDealStatus = new Models\DealStatus($this->main);
-    $mDeal = new \HubletoApp\Deals\Models\Deal($this->main);
-    $mDealHistory = new \HubletoApp\Deals\Models\DealHistory($this->main);
-    $mDealTag = new \HubletoApp\Deals\Models\DealTag($this->main);
-    $mDealService = new \HubletoApp\Deals\Models\DealService($this->main);
-    $mDealActivity = new \HubletoApp\Deals\Models\DealActivity($this->main);
-    $mDealDocument = new \HubletoApp\Deals\Models\DealDocument($this->main);
+    $mDeal = new \HubletoApp\Community\Deals\Models\Deal($this->main);
+    $mDealHistory = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
+    $mDealTag = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
+    $mDealService = new \HubletoApp\Community\Deals\Models\DealService($this->main);
+    $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
+    $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
     $mDealStatus->dropTableIfExists()->install();
     $mDeal->dropTableIfExists()->install();

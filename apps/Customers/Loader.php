@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Customers;
+namespace HubletoApp\Community\Customers;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -39,15 +39,15 @@ class Loader extends \HubletoMain\Core\App
   }
 
   public function installTables() {
-    $mPerson = new \HubletoApp\Customers\Models\Person($this->main);
-    $mCompany = new \HubletoApp\Customers\Models\Company($this->main);
-    $mAddress = new \HubletoApp\Customers\Models\Address($this->main);
-    $mContact = new \HubletoApp\Customers\Models\Contact($this->main);
-    //$mActivity = new \HubletoApp\Customers\Models\Activity($this->main);
-    $mCompanyActivity = new \HubletoApp\Customers\Models\CompanyActivity($this->main);
-    $mCompanyDocument = new \HubletoApp\Customers\Models\CompanyDocument($this->main);
-    $mCompanyTag = new \HubletoApp\Customers\Models\CompanyTag($this->main);
-    $mPersonTag = new \HubletoApp\Customers\Models\PersonTag($this->main);
+    $mPerson = new \HubletoApp\Community\Customers\Models\Person($this->main);
+    $mCompany = new \HubletoApp\Community\Customers\Models\Company($this->main);
+    $mAddress = new \HubletoApp\Community\Customers\Models\Address($this->main);
+    $mContact = new \HubletoApp\Community\Customers\Models\Contact($this->main);
+    //$mActivity = new \HubletoApp\Community\Customers\Models\Activity($this->main);
+    $mCompanyActivity = new \HubletoApp\Community\Customers\Models\CompanyActivity($this->main);
+    $mCompanyDocument = new \HubletoApp\Community\Customers\Models\CompanyDocument($this->main);
+    $mCompanyTag = new \HubletoApp\Community\Customers\Models\CompanyTag($this->main);
+    $mPersonTag = new \HubletoApp\Community\Customers\Models\PersonTag($this->main);
 
     $mCompany->dropTableIfExists()->install();
     $mPerson->dropTableIfExists()->install();
@@ -62,32 +62,32 @@ class Loader extends \HubletoMain\Core\App
 
   public function installDefaultPermissions()
   {
-    $mPermission = new \HubletoApp\Settings\Models\Permission($this->main);
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Customers/Models/Activity:Create,Read,Update,Delete",
-      "HubletoApp/Customers/Models/Address:Create,Read,Update,Delete",
-      "HubletoApp/Customers/Models/Company:Create,Read,Update,Delete",
-      "HubletoApp/Customers/Models/CompanyTag:Create,Read,Update,Delete",
-      "HubletoApp/Customers/Models/Contact:Create,Read,Update,Delete",
-      "HubletoApp/Customers/Models/Person:Create,Read,Update,Delete",
-      "HubletoApp/Customers/Models/PersonTag:Create,Read,Update,Delete",
+      "HubletoApp/Community/Customers/Models/Activity:Create,Read,Update,Delete",
+      "HubletoApp/Community/Customers/Models/Address:Create,Read,Update,Delete",
+      "HubletoApp/Community/Customers/Models/Company:Create,Read,Update,Delete",
+      "HubletoApp/Community/Customers/Models/CompanyTag:Create,Read,Update,Delete",
+      "HubletoApp/Community/Customers/Models/Contact:Create,Read,Update,Delete",
+      "HubletoApp/Community/Customers/Models/Person:Create,Read,Update,Delete",
+      "HubletoApp/Community/Customers/Models/PersonTag:Create,Read,Update,Delete",
 
-      "HubletoApp/Customers/Controllers/Activity",
-      "HubletoApp/Customers/Controllers/Address",
-      "HubletoApp/Customers/Controllers/Company",
-      "HubletoApp/Customers/Controllers/CompanyTag",
-      "HubletoApp/Customers/Controllers/Contact",
-      "HubletoApp/Customers/Controllers/Person",
-      "HubletoApp/Customers/Controllers/PersonTag",
-      "HubletoApp/Customers/Controllers/Activity",
+      "HubletoApp/Community/Customers/Controllers/Activity",
+      "HubletoApp/Community/Customers/Controllers/Address",
+      "HubletoApp/Community/Customers/Controllers/Company",
+      "HubletoApp/Community/Customers/Controllers/CompanyTag",
+      "HubletoApp/Community/Customers/Controllers/Contact",
+      "HubletoApp/Community/Customers/Controllers/Person",
+      "HubletoApp/Community/Customers/Controllers/PersonTag",
+      "HubletoApp/Community/Customers/Controllers/Activity",
 
-      "HubletoApp/Customers/Addresses",
-      "HubletoApp/Customers/Companies",
-      "HubletoApp/Customers/CompanyTag",
-      "HubletoApp/Customers/Contacts",
-      "HubletoApp/Customers/Persons",
-      "HubletoApp/Customers/PersonTag",
-      "HubletoApp/Customers/Activity",
+      "HubletoApp/Community/Customers/Addresses",
+      "HubletoApp/Community/Customers/Companies",
+      "HubletoApp/Community/Customers/CompanyTag",
+      "HubletoApp/Community/Customers/Contacts",
+      "HubletoApp/Community/Customers/Persons",
+      "HubletoApp/Community/Customers/PersonTag",
+      "HubletoApp/Community/Customers/Activity",
     ];
 
     foreach ($permissions as $key => $permission) {

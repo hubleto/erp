@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Invoices\Controllers;
+namespace HubletoApp\Community\Invoices\Controllers;
 
 class Invoices extends \HubletoMain\Core\Controller {
 

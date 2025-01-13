@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Customers;
+namespace HubletoApp\Community\Customers;
 
-use HubletoApp\Customers\Models\CompanyActivity;
+use HubletoApp\Community\Customers\Models\CompanyActivity;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 

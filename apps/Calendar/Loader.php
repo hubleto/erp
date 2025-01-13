@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Calendar;
+namespace HubletoApp\Community\Calendar;
 
 class Loader extends \HubletoMain\Core\App
 {

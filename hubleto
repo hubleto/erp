@@ -68,18 +68,19 @@ function blue(string $message) { color('blue'); echo $message; }
 function cyan(string $message) { color('cyan'); echo $message; }
 function white(string $message) { color('white'); echo $message; }
 
-function run(string $action, string $argument): bool {
+function run(string $action, array $argv): bool {
   $exit = false;
 
   try {
     switch ($action) {
-      case 'help': case 'h':
-        white("  'help' or 'h' = this help\n");
-        white("  'init' or 'i' = init empty Hubleto project\n");
-        white("  'exit' or 'x' = exit\n");
+      case 'help':
+        white("  'help' = this help\n");
+        white("  'init' = init empty Hubleto project\n");
+        white("  'install' = install SQL tables for existing Hubleto project\n");
+        white("  'exit' = exit\n");
       break;
 
-      case 'init': case 'i':
+      case 'init':
 
         $rewriteBases = [];
         $lastRewriteBase = '';
@@ -109,7 +110,7 @@ function run(string $action, string $argument): bool {
 
         if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
-        $appConfig = [
+        $mainConfig = [
           'db_host' => $dbHost,
           'db_user' => $dbUser,
           'db_password' => $dbPassword,
@@ -127,11 +128,11 @@ function run(string $action, string $argument): bool {
         cyan("Hurray. Installing your Hubleto...\n");
 
         // install
-        $app = new \HubletoMain($appConfig, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
-        $app->initDatabaseConnections();
+        $main = new \HubletoMain($mainConfig, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
+        $main->initDatabaseConnections();
 
         $installer = new \HubletoMain\Installer\Installer(
-          $app,
+          $main,
           'local-env',
           '', // uid
           $companyName,
@@ -183,8 +184,28 @@ function run(string $action, string $argument): bool {
 
       break;
 
+      case 'install-app':
+        $appToInstall = $argv[2];
+
+        if (empty($appToInstall)) {
+          red("What app you want to install? Usage: php hubleto install-app APP_NAME\n");
+        }
+
+        green('Installing ' . $appToInstall . "\n");
+
+        require_once(__DIR__ . "/ConfigApp.php");
+        require_once(__DIR__ . "/ConfigAccount.php");
+
+        $main = new \HubletoMain($config, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
+        $main->initDatabaseConnections();
+
+        $app = new ($appToInstall . '\\Loader')($main);
+        $app->installTables();
+
+      break;
+
       // case exit
-      case 'exit': case 'x':
+      case 'exit':
         $exit = true;
       break;
 
@@ -209,28 +230,25 @@ cyan("Example: php hubleto init.\n");
 cyan("\n");
 
 $action = (string) ($argv[1] ?? '');
-$argument = (string) ($argv[2] ?? '');
 
 if (!empty($action)) {
-  run($action, $argument);
+  run($action, $argv);
 } else {
 
   $exit = false;
 
   while (!$exit) {
     yellow("What do you want to do? ('help' or 'h' for help)");
-    $input = read();
+    $input = trim(read());
 
     if (strpos($input, ' ') !== false) {
       list($action, $argument) = explode(' ', $input);
-      $action = trim($action);
-      $argument = trim($argument);
+      $exit = run(trim($action), [trim($argument)]);
     } else {
-      $action = trim($input);
-      $argument = '';
+      $exit = run($input, $argv);
     }
 
-    $exit = run($action, $argument);
+    
   }
 }
 

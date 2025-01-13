@@ -6,7 +6,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class RolePermission extends \ADIOS\Core\Model\Eloquent
+class RolePermission extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'role_permissions';
 

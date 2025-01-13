@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Settings\Models\Eloquent;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserHasRole extends \ADIOS\Core\Model\Eloquent
+class UserHasRole extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'user_has_roles';
 

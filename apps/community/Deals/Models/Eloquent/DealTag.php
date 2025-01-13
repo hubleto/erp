@@ -8,7 +8,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class DealTag extends \ADIOS\Core\Model\Eloquent
+class DealTag extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'deal_tags';
 

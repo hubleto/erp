@@ -9,7 +9,7 @@ use \HubletoApp\Community\Customers\Models\Eloquent\Company;
 use \HubletoApp\Community\Settings\Models\Eloquent\User;
 use \HubletoApp\Community\Settings\Models\Eloquent\InvoiceProfile;
 
-class Invoice extends \ADIOS\Core\Model\Eloquent {
+class Invoice extends \HubletoMain\Core\ModelEloquent {
   public $table = 'invoices';
 
   public function CUSTOMER(): BelongsTo { return $this->BelongsTo(Company::class, 'id_customer'); }

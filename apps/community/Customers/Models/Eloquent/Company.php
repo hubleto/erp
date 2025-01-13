@@ -12,7 +12,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Company extends \ADIOS\Core\Model\Eloquent
+class Company extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'companies';
 

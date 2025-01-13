@@ -6,7 +6,7 @@ use HubletoApp\Community\Settings\Models\Eloquent\ContactType;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Contact extends \ADIOS\Core\Model\Eloquent
+class Contact extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'contacts';
 

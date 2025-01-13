@@ -1,8 +1,5 @@
 <?php
 
-const HUBLETO_COMMUNITY_REPO = __DIR__ . '/apps/community';
-const HUBLETO_EXTERNAL_REPO = __DIR__ . '/apps/external';
-
 $config['appNamespace'] = 'HubletoMain';
 $config['sessionSalt'] = 'HubletoMain';
 

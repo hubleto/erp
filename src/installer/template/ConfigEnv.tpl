@@ -2,6 +2,10 @@
 
 // dirs
 
+const HUBLETO_COMMUNITY_REPO = '{{ mainRootFolder }}/apps/community';
+const HUBLETO_EXTERNAL_REPO = '{{ mainRootFolder }}/apps/external';
+const HUBLETO_ENTERPRISE_REPO = '{{ mainRootFolder }}/apps/enterprise';
+
 $config['dir'] = '{{ mainRootFolder }}';
 $config['accountDir'] = __DIR__;
 $config['logDir'] = __DIR__ . '/log';
@@ -26,6 +30,3 @@ $config['global_table_prefix'] = '';
 $config['develMode'] = TRUE;
 $config['language'] = 'en';
 
-// enterprise setup
-
-const HUBLETO_ENTERPRISE_REPO = __DIR__ . '/../enterprise';

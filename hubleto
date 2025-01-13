@@ -70,6 +70,30 @@ function blue(string $message) { color('blue'); echo $message; }
 function cyan(string $message) { color('cyan'); echo $message; }
 function white(string $message) { color('white'); echo $message; }
 
+function installApp($app, $main, &$installed = []) {
+  if (in_array($app, $installed)) {
+    return;
+  }
+  $app = new ($app)($main);
+  if (file_exists($app->rootFolder . '/manifest.yaml')) {
+    $manifestFile = file_get_contents($app->rootFolder . '/manifest.yaml');
+    $dependencies = yaml_parse($manifestFile)['requires'] ?? [];
+  } else {
+    $dependencies = [];
+  }
+
+  foreach ($dependencies as $dependency) {
+    green("Installing dependency: " . $dependency  . "\n");
+    installApp($dependency  . '\\Loader', $main, $installed);
+  }
+
+  $app->installTables();
+  $alreadyInstalled[] = $app;
+
+  $installed[] = $app;
+  return true;
+}
+
 function run(string $action, array $argv): bool {
   $exit = false;
 
@@ -186,6 +210,37 @@ function run(string $action, array $argv): bool {
 
       break;
 
+      case 'install':
+        green("Installing enabled apps\n");
+
+        require_once(__DIR__ . "/ConfigApp.php");
+        require_once(__DIR__ . "/ConfigEnv.php");
+
+        $main = new \HubletoMain($config, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
+        $main->initDatabaseConnections();
+
+        $alreadyInstalled = [];
+
+        foreach ($config['enabledApps'] as $app) {
+          if (!in_array($app, $alreadyInstalled)) {
+            green("Installing " . $app . "\n");
+            try {
+              installApp($app, $main, $alreadyInstalled);
+            } catch (\mysqli_sql_exception $e) {
+              red('There was an error installing an app.' . "\n");
+              red($e->getMessage());
+              red("\n\nThe error was caused by: " . $app . "\n");
+              red("Verify, whether all your apps have correct dependencies or contact the developers.\n");
+              break;
+            }
+          }
+        }
+
+        //$app = new ($appToInstall . '\\Loader')($main);
+        //$app->installTables();
+
+      break;
+
       case 'install-app':
         $appToInstall = $argv[2];
 
@@ -202,7 +257,14 @@ function run(string $action, array $argv): bool {
         $main->initDatabaseConnections();
 
         $app = new ($appToInstall . '\\Loader')($main);
-        $app->installTables();
+        try {
+          installApp($app, $main);
+          green("App installed successfully.\n");
+        } catch (\mysqli_sql_exception $e) {
+          red('There was an error installing an app.' . "\n");
+          red($e->getMessage());
+          red("\n\nVerify, whether all your apps have correct dependencies or contact the developers.\n");
+        }
 
       break;
 

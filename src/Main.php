@@ -2,8 +2,6 @@
 
 use \ADIOS\Core\Helper;
 
-const HUBLETO_COMMUNITY_REPO = __DIR__ . '/../apps';
-
 // load configs
 require_once(__DIR__ . "/../ConfigApp.php");
 
@@ -12,6 +10,8 @@ spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);
   if (str_starts_with($class, 'HubletoApp/Community/')) {
     require_once(HUBLETO_COMMUNITY_REPO . '/' . str_replace('HubletoApp/Community/', '', $class) . '.php');
+  } else if (str_starts_with($class, 'HubletoApp/External/')) {
+    require_once(HUBLETO_EXTERNAL_REPO . '/' . str_replace('HubletoApp/External/', '', $class) . '.php');
   } else if (str_starts_with($class, 'HubletoApp/Enterprise/')) {
     require_once(HUBLETO_ENTERPRISE_REPO . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
   } else if (str_starts_with($class, 'HubletoMain/Core/')) {

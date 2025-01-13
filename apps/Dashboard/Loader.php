@@ -6,16 +6,16 @@ class Loader extends \HubletoMain\Core\App
 {
 
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^$/' => Controllers\Home::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 0, '', $this->translate('Home'), 'fas fa-home', $this->app->requestedUri == '');
+    $this->main->sidebar->addLink(1, 0, '', $this->translate('Home'), 'fas fa-home', $this->main->requestedUri == '');
   }}

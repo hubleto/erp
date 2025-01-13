@@ -18,20 +18,20 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
   public function renderJson(): ?array
   {
-    $leadId = $this->app->params["recordId"];
+    $leadId = $this->main->params["recordId"];
 
-    $mLead = new Lead($this->app);
-    $mLeadHistory = new LeadHistory($this->app);
-    $mLeadService = new LeadService($this->app);
-    $mLeadDocument = new LeadDocument($this->app);
+    $mLead = new Lead($this->main);
+    $mLeadHistory = new LeadHistory($this->main);
+    $mLeadService = new LeadService($this->main);
+    $mLeadDocument = new LeadDocument($this->main);
 
-    $mDeal = new Deal($this->app);
-    $mDealHistory = new DealHistory($this->app);
-    $mDealService = new DealService($this->app);
-    $mDealDocument = new DealDocument($this->app);
+    $mDeal = new Deal($this->main);
+    $mDealHistory = new DealHistory($this->main);
+    $mDealService = new DealService($this->main);
+    $mDealDocument = new DealDocument($this->main);
     $deal = null;
 
-    $mSettings = new Setting($this->app);
+    $mSettings = new Setting($this->main);
     $defaultPipeline =(int) $mSettings->eloquent
       ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")
       ->first()

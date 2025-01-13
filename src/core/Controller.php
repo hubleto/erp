@@ -7,9 +7,17 @@ use \ADIOS\Core\Helper;
 class Controller extends \ADIOS\Core\Controller
 {
 
+  public \HubletoMain $main;
+
+  function __construct(\ADIOS\Core\Loader $main)
+  {
+    $this->main = $main;
+    parent::__construct($main);
+  }
+
   /**
     * Executed after the init() phase.
-    * Validates inputs ($this->app->params) used for the TWIG template.
+    * Validates inputs ($this->main->params) used for the TWIG template.
     *
     * return bool True if inputs are valid, otherwise false.
     */
@@ -45,18 +53,18 @@ class Controller extends \ADIOS\Core\Controller
   {
     parent::prepareView();
 
-    $this->viewParams['app'] = $this->app;
-    $this->viewParams['help'] = $this->app->help;
+    $this->viewParams['app'] = $this->main;
+    $this->viewParams['help'] = $this->main->help;
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
-    $this->viewParams['requestedUri'] = $this->app->requestedUri;
+    $this->viewParams['requestedUri'] = $this->main->requestedUri;
 
-    $tmp =  strpos($this->app->requestedUri, '/');
-    if ($tmp === false) $this->viewParams['requestedUriFirstPart'] = $this->app->requestedUri;
-    else $this->viewParams['requestedUriFirstPart'] = substr($this->app->requestedUri, 0, strpos($this->app->requestedUri, '/'));
+    $tmp =  strpos($this->main->requestedUri, '/');
+    if ($tmp === false) $this->viewParams['requestedUriFirstPart'] = $this->main->requestedUri;
+    else $this->viewParams['requestedUriFirstPart'] = substr($this->main->requestedUri, 0, strpos($this->main->requestedUri, '/'));
 
     $this->viewParams['sidebar'] = [
-      'level1Items' => $this->app->getSidebar()->getItems(1),
-      'level2Items' => $this->app->getSidebar()->getItems(2),
+      'level1Items' => $this->main->getSidebar()->getItems(1),
+      'level2Items' => $this->main->getSidebar()->getItems(2),
     ];
   }
 

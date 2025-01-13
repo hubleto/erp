@@ -4,5 +4,5 @@
 require(__DIR__ . "/LoadMain.php");
 
 // render
-$app = new HubletoMain($config);
-echo $app->render();
+$main = new HubletoMain($config);
+echo $main->render();

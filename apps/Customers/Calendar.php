@@ -10,10 +10,10 @@ class Calendar extends \HubletoMain\Core\Calendar {
   {
 
     $idCompany = (int) $params["idCompany"];
-    $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->app->params["start"]));
-    $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->app->params["end"]));
+    $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->main->params["start"]));
+    $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->main->params["end"]));
 
-    $mCompanyActivity = new CompanyActivity($this->app);
+    $mCompanyActivity = new CompanyActivity($this->main);
 
     $activities = $mCompanyActivity->eloquent
       ->select("company_activities.*", "activity_types.color", "activity_types.name as activity_type")

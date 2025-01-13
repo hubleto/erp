@@ -4,10 +4,10 @@ namespace HubletoMain\Core;
 
 class Calendar {
 
-  public \HubletoMain $app;
+  public \HubletoMain $main;
 
-  public function __construct(\HubletoMain $app) {
-    $this->app = $app;
+  public function __construct(\HubletoMain $main) {
+    $this->main = $main;
   }
 
   public function loadEvents(array $params = []): array

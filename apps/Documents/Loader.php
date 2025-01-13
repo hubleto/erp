@@ -5,25 +5,25 @@ namespace HubletoApp\Documents;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
 
     $this->registerModel(Models\Document::class);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^documents\/?$/' => Controllers\Documents::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 700, 'documents', $this->translate('Documents'), 'fa-regular fa-file', str_starts_with($this->app->requestedUri, 'documents'));
+    $this->main->sidebar->addLink(1, 700, 'documents', $this->translate('Documents'), 'fa-regular fa-file', str_starts_with($this->main->requestedUri, 'documents'));
   }
 
   public function installTables()
   {
-    $mDocuments = new \HubletoApp\Documents\Models\Document($this->app);
+    $mDocuments = new \HubletoApp\Documents\Models\Document($this->main);
     $mDocuments->dropTableIfExists()->install();
   }
 

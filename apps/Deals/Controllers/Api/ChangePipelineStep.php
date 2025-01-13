@@ -13,20 +13,20 @@ class ChangePipelineStep extends \HubletoMain\Core\Controller
 
   public function renderJson(): ?array
   {
-    $mDeal = new Deal($this->app);
-    $mDealHistory = new DealHistory($this->app);
-    $mPipelineStep = new PipelineStep($this->app);
+    $mDeal = new Deal($this->main);
+    $mDealHistory = new DealHistory($this->main);
+    $mPipelineStep = new PipelineStep($this->main);
 
     $step = null;
 
     try {
-      $deal = $mDeal->eloquent->find($this->app->params["idDeal"]);
-      $deal->id_pipeline_step = $this->app->params["idStep"];
+      $deal = $mDeal->eloquent->find($this->main->params["idDeal"]);
+      $deal->id_pipeline_step = $this->main->params["idStep"];
       $deal->save();
 
       $step = $mPipelineStep->eloquent
-        ->where("id_pipeline", $this->app->params["idPipeline"])
-        ->where("id", $this->app->params["idStep"])
+        ->where("id_pipeline", $this->main->params["idPipeline"])
+        ->where("id", $this->main->params["idStep"])
         ->first()
       ;
       $mDealHistory->eloquent->create([

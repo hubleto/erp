@@ -6,14 +6,14 @@ class Loader extends \HubletoMain\Core\App
 {
 
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^leads\/?$/' => Controllers\Leads::class,
       '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
       '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
@@ -21,26 +21,26 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/lead-statuses\/?$/' => Controllers\LeadStatuses::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 100, 'leads', $this->translate('Leads'), 'fas fa-people-arrows', str_starts_with($this->app->requestedUri, 'leads'));
+    $this->main->sidebar->addLink(1, 100, 'leads', $this->translate('Leads'), 'fas fa-people-arrows', str_starts_with($this->main->requestedUri, 'leads'));
 
-    $this->app->addSetting([
+    $this->main->addSetting([
       'title' => $this->translate('Lead statuses'),
       'icon' => 'fas fa-arrow-up-short-wide',
       'url' => 'settings/lead-statuses',
     ]);
 
-    $this->app->addCalendar(Calendar::class);
+    $this->main->addCalendar(Calendar::class);
   }
 
   public function installTables()
   {
-    $mLeadStatus = new Models\LeadStatus($this->app);
-    $mLead = new \HubletoApp\Leads\Models\Lead($this->app);
-    $mLeadHistory = new \HubletoApp\Leads\Models\LeadHistory($this->app);
-    $mLeadTag = new \HubletoApp\Leads\Models\LeadTag($this->app);
-    $mLeadService = new \HubletoApp\Leads\Models\LeadService($this->app);
-    $mLeadActivity = new \HubletoApp\Leads\Models\LeadActivity($this->app);
-    $mLeadDocument = new \HubletoApp\Leads\Models\LeadDocument($this->app);
+    $mLeadStatus = new Models\LeadStatus($this->main);
+    $mLead = new \HubletoApp\Leads\Models\Lead($this->main);
+    $mLeadHistory = new \HubletoApp\Leads\Models\LeadHistory($this->main);
+    $mLeadTag = new \HubletoApp\Leads\Models\LeadTag($this->main);
+    $mLeadService = new \HubletoApp\Leads\Models\LeadService($this->main);
+    $mLeadActivity = new \HubletoApp\Leads\Models\LeadActivity($this->main);
+    $mLeadDocument = new \HubletoApp\Leads\Models\LeadDocument($this->main);
 
     $mLeadStatus->dropTableIfExists()->install();
     $mLead->dropTableIfExists()->install();

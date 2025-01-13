@@ -5,25 +5,25 @@ namespace HubletoApp\Invoices;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
     $this->registerModel(Models\Invoice::class);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^invoices\/?$/' => Controllers\Invoices::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 800, 'invoices', $this->translate('Invoices'), 'fas fa-euro-sign', str_starts_with($this->app->requestedUri, 'invoices'));
+    $this->main->sidebar->addLink(1, 800, 'invoices', $this->translate('Invoices'), 'fas fa-euro-sign', str_starts_with($this->main->requestedUri, 'invoices'));
   }
 
   public function installTables()
   {
-    $mInvoice = new \HubletoApp\Invoices\Models\Invoice($this->app);
-    $mInvoiceItem = new \HubletoApp\Invoices\Models\InvoiceItem($this->app);
+    $mInvoice = new \HubletoApp\Invoices\Models\Invoice($this->main);
+    $mInvoiceItem = new \HubletoApp\Invoices\Models\InvoiceItem($this->main);
 
     $mInvoice->dropTableIfExists()->install();
     $mInvoiceItem->dropTableIfExists()->install();
@@ -31,7 +31,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function installDefaultPermissions()
   {
-    $mPermission = new \HubletoApp\Settings\Models\Permission($this->app);
+    $mPermission = new \HubletoApp\Settings\Models\Permission($this->main);
     $permissions = [
       "HubletoApp/Invoices/Models/Invoice:Create,Read,Update,Delete",
       "HubletoApp/Invoices/Models/InvoiceItem:Create,Read,Update,Delete",

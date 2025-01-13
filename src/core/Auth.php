@@ -8,13 +8,13 @@ class Auth extends \ADIOS\Auth\Providers\DefaultProvider {
   {
     parent::auth();
 
-    $setLanguage = $this->app->params['set-language'] ?? '';
+    $setLanguage = $this->main->params['set-language'] ?? '';
 
     if (
       !empty($setLanguage)
       && !empty(\HubletoApp\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
-      $mUser = new \HubletoApp\Settings\Models\User($this->app);
+      $mUser = new \HubletoApp\Settings\Models\User($this->main);
       $mUser->eloquent
         ->where('id', $this->user['id'])
         ->update(['language' => $setLanguage])
@@ -22,7 +22,7 @@ class Auth extends \ADIOS\Auth\Providers\DefaultProvider {
       $this->user['language'] = $setLanguage;
       $this->updateUserInSession($this->user);
 
-      $this->app->router->redirectTo('');
+      $this->main->router->redirectTo('');
     }
 
     if (strlen($this->user['language'] ?? '') != 2) $this->user['language'] = 'en';

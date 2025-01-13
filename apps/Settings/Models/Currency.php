@@ -37,8 +37,8 @@ class Currency extends \HubletoMain\Core\Model
   public function formDescribe(array $description = []): array
   {
     $description = parent::formDescribe();
-    $description['ui']['title'] = ($this->app->params['id'] == -1 ? "New currency" : "Currency");
-    $description['ui']['subTitle'] = ($this->app->params['id'] == -1 ? "Adding" : "Editing");
+    $description['ui']['title'] = ($this->main->params['id'] == -1 ? "New currency" : "Currency");
+    $description['ui']['subTitle'] = ($this->main->params['id'] == -1 ? "Adding" : "Editing");
     return $description;
   }
 

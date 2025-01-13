@@ -5,18 +5,18 @@ namespace HubletoApp\Help;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^help\/?$/' => Controllers\Help::class,
     ]);
 
-    // $this->app->sidebar->addLink(1, 1900, 'help', $this->translate('Help'), 'fas fa-life-ring', str_starts_with($this->app->requestedUri, 'help'));
+    // $this->main->sidebar->addLink(1, 1900, 'help', $this->translate('Help'), 'fas fa-life-ring', str_starts_with($this->main->requestedUri, 'help'));
   }
 
 }

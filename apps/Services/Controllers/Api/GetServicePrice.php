@@ -9,12 +9,12 @@ class GetServicePrice extends \HubletoMain\Core\Controller {
 
   public function renderJson(): ?array
   {
-    $mService = new Service($this->app);
+    $mService = new Service($this->main);
     $service = null;
 
     try {
       $service = $mService->eloquent
-        ->where("id", $this->app->params["serviceId"])
+        ->where("id", $this->main->params["serviceId"])
         ->first()
         ->toArray()
       ;

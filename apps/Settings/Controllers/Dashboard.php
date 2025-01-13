@@ -16,7 +16,7 @@ class Dashboard extends \HubletoMain\Core\Controller {
   {
     parent::prepareView();
 
-    $this->viewParams['settings'] = $this->app->getSettings();
+    $this->viewParams['settings'] = $this->main->getSettings();
 
     $this->setView('@app/Settings/Views/Dashboard.twig');
   }

@@ -9,17 +9,17 @@ class GetCompanyContacts extends \HubletoMain\Core\Controller {
 
   public function renderJson(): ?array
   {
-    $mPerson = new Person($this->app);
+    $mPerson = new Person($this->main);
     $persons = null;
     $personArray = [];
 
     try {
       $persons = $mPerson->eloquent->selectRaw("*, CONCAT(first_name, ' ', last_name) as _LOOKUP");
-      if ((int) $this->app->params["id_company"] > 0) {
-        $persons = $persons->where("id_company", (int) $this->app->params["id_company"]);
+      if ((int) $this->main->params["id_company"] > 0) {
+        $persons = $persons->where("id_company", (int) $this->main->params["id_company"]);
       }
-      if ($this->app->params["search"] != "") {
-        $persons->whereRaw("CONCAT(first_name, ' ', last_name) LIKE '%".$this->app->params["search"]."%'");
+      if ($this->main->params["search"] != "") {
+        $persons->whereRaw("CONCAT(first_name, ' ', last_name) LIKE '%".$this->main->params["search"]."%'");
       }
 
       $persons = $persons->get()->toArray();

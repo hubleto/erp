@@ -7,7 +7,7 @@ use HubletoApp\Settings\Models\ {
 };
 
 class Installer {
-  public \HubletoMain $app;
+  public \HubletoMain $main;
   public string $adminName = '';
   public string $adminFamilyName = '';
   public string $adminEmail = '';
@@ -32,7 +32,7 @@ class Installer {
   public array $enabledApps = [];
 
   public function __construct(
-    \HubletoMain $app,
+    \HubletoMain $main,
     string $env,
     string $uid,
     string $companyName,
@@ -53,7 +53,7 @@ class Installer {
     bool $randomize = false
   )
   {
-    $this->app = $app;
+    $this->main = $main;
     $this->env = $env;
     $this->uid = $uid;
     $this->companyName = $companyName;
@@ -98,16 +98,16 @@ class Installer {
   public function createDatabase()
   {
 
-    $this->app->pdo->execute("drop database if exists `{$this->dbName}`");
-    $this->app->pdo->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
+    $this->main->pdo->execute("drop database if exists `{$this->dbName}`");
+    $this->main->pdo->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
 
-    $this->app->config['db_name'] = $this->dbName;
-    $this->app->config['db_codepage'] = "utf8mb4";
-    $this->app->initDatabaseConnections();
+    $this->main->config['db_name'] = $this->dbName;
+    $this->main->config['db_codepage'] = "utf8mb4";
+    $this->main->initDatabaseConnections();
 
-    foreach ($this->app->registeredModels as $modelClass) {
-      $model = $this->app->getModel($modelClass);
-      $this->app->db->addTable(
+    foreach ($this->main->registeredModels as $modelClass) {
+      $model = $this->main->getModel($modelClass);
+      $this->main->db->addTable(
         $model->getFullTableSqlName(),
         $model->columns(),
         $model->isJunctionTable
@@ -119,20 +119,20 @@ class Installer {
   public function installTables()
   {
 
-    (new \HubletoApp\Settings\Loader($this->app))->installTables();
-    (new \HubletoApp\Documents\Loader($this->app))->installTables();
-    (new \HubletoApp\Services\Loader($this->app))->installTables();
-    (new \HubletoApp\Customers\Loader($this->app))->installTables();
-    (new \HubletoApp\Invoices\Loader($this->app))->installTables();
-    (new \HubletoApp\Billing\Loader($this->app))->installTables();
-    (new \HubletoApp\Pipeline\Loader($this->app))->installTables();
-    (new \HubletoApp\Leads\Loader($this->app))->installTables();
-    (new \HubletoApp\Deals\Loader($this->app))->installTables();
+    (new \HubletoApp\Settings\Loader($this->main))->installTables();
+    (new \HubletoApp\Documents\Loader($this->main))->installTables();
+    (new \HubletoApp\Services\Loader($this->main))->installTables();
+    (new \HubletoApp\Customers\Loader($this->main))->installTables();
+    (new \HubletoApp\Invoices\Loader($this->main))->installTables();
+    (new \HubletoApp\Billing\Loader($this->main))->installTables();
+    (new \HubletoApp\Pipeline\Loader($this->main))->installTables();
+    (new \HubletoApp\Leads\Loader($this->main))->installTables();
+    (new \HubletoApp\Deals\Loader($this->main))->installTables();
 
-    $mProfile = new \HubletoApp\Settings\Models\Profile($this->app);
-    $mUser = new \HubletoApp\Settings\Models\User($this->app);
-    $mUserRole = new \HubletoApp\Settings\Models\UserRole($this->app);
-    $mUserHasRole = new \HubletoApp\Settings\Models\UserHasRole($this->app);
+    $mProfile = new \HubletoApp\Settings\Models\Profile($this->main);
+    $mUser = new \HubletoApp\Settings\Models\User($this->main);
+    $mUserRole = new \HubletoApp\Settings\Models\UserRole($this->main);
+    $mUserHasRole = new \HubletoApp\Settings\Models\UserHasRole($this->main);
 
     $idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
 
@@ -156,7 +156,7 @@ class Installer {
     $configAccount = file_get_contents(__DIR__ . '/template/ConfigAccount.tpl');
     $configAccount = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $configAccount);
     $configAccount = str_replace('{{ mainRootUrl }}', $this->mainRootUrl, $configAccount);
-    $configAccount = str_replace('{{ dbHost }}', $this->app->config['db_host'], $configAccount);
+    $configAccount = str_replace('{{ dbHost }}', $this->main->config['db_host'], $configAccount);
     $configAccount = str_replace('{{ dbUser }}', $this->dbUser, $configAccount);
     $configAccount = str_replace('{{ dbPassword }}', $this->dbPassword, $configAccount);
     $configAccount = str_replace('{{ dbName }}', $this->dbName, $configAccount);
@@ -208,7 +208,7 @@ class Installer {
   }
 
   public function installDefaultPermissions() {
-    $modules = $this->app->getRegisteredApps();
+    $modules = $this->main->getRegisteredApps();
     array_walk($modules, function($module) {
       $module->installDefaultPermissions();
     });

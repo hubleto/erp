@@ -108,7 +108,7 @@ class Company extends \HubletoMain\Core\Model
         'foreignKeyOnUpdate' => 'CASCADE',
         'foreignKeyOnDelete' => 'SET NULL',
         'required' => true,
-        //'readonly' => $this->app->permissions->granted($this->fullName . ':Update'),
+        //'readonly' => $this->main->permissions->granted($this->fullName . ':Update'),
         'default' => 1,
       ]
 
@@ -175,7 +175,7 @@ class Company extends \HubletoMain\Core\Model
   {
     $description = parent::formDescribe();
     $description['defaultValues']['is_active'] = 0;
-    $description['defaultValues']['id_user'] = $this->app->auth->user["id"];
+    $description['defaultValues']['id_user'] = $this->main->auth->user["id"];
     $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['includeRelations'] = [
       'PERSONS',
@@ -189,10 +189,10 @@ class Company extends \HubletoMain\Core\Model
       'USER',
       'DOCUMENTS',
     ];
-    $description['permissions']['canRead'] = $this->app->permissions->granted($this->fullName . ':Read');
-    $description['permissions']['canCreate'] = $this->app->permissions->granted($this->fullName . ':Create');
-    $description['permissions']['canUpdate'] = $this->app->permissions->granted($this->fullName . ':Update');
-    $description['permissions']['canDelete'] = $this->app->permissions->granted($this->fullName . ':Delete');
+    $description['permissions']['canRead'] = $this->main->permissions->granted($this->fullName . ':Read');
+    $description['permissions']['canCreate'] = $this->main->permissions->granted($this->fullName . ':Create');
+    $description['permissions']['canUpdate'] = $this->main->permissions->granted($this->fullName . ':Update');
+    $description['permissions']['canDelete'] = $this->main->permissions->granted($this->fullName . ':Delete');
     return $description;
   }
 

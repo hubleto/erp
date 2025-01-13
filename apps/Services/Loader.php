@@ -10,37 +10,37 @@ class Loader extends \HubletoMain\Core\App
 {
 
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
 
     $this->registerModel(Models\Service::class);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^services\/?$/' => Controllers\Services::class,
       '/^services\/get-service-price\/?$/' => Controllers\Api\GetServicePrice::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 600, 'services', $this->translate('Services'), 'fas fa-network-wired', str_starts_with($this->app->requestedUri, 'services'));
+    $this->main->sidebar->addLink(1, 600, 'services', $this->translate('Services'), 'fas fa-network-wired', str_starts_with($this->main->requestedUri, 'services'));
 
-    // if (str_starts_with($this->app->requestedUri, 'services')) {
-    //   $this->app->sidebar->addHeading1(2, 40100, $this->translate('Services'));
-    //   $this->app->sidebar->addLink(2, 40200, 'services', $this->translate('Services'), 'fas fa-network-wired');
+    // if (str_starts_with($this->main->requestedUri, 'services')) {
+    //   $this->main->sidebar->addHeading1(2, 40100, $this->translate('Services'));
+    //   $this->main->sidebar->addLink(2, 40200, 'services', $this->translate('Services'), 'fas fa-network-wired');
     // }
   }
 
   public function installTables()
   {
-    $mService = new Models\Service($this->app);
+    $mService = new Models\Service($this->main);
     $mService->install();
   }
 
   public function installDefaultPermissions()
   {
-    $mPermission = new \HubletoApp\Settings\Models\Permission($this->app);
+    $mPermission = new \HubletoApp\Settings\Models\Permission($this->main);
     $permissions = [
       "HubletoApp/Service/Models/Service:Create,Read,Update,Delete",
       "HubletoApp/Service/Controllers/Service",

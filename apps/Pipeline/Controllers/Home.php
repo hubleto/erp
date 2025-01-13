@@ -21,10 +21,10 @@ class Home extends \HubletoMain\Core\Controller {
   {
     parent::prepareView();
 
-    $mSetting = new Setting($this->app);
-    $mPipeline = new Pipeline($this->app);
-    $mDeal = new Deal($this->app);
-    $mTag = new Tag($this->app);
+    $mSetting = new Setting($this->main);
+    $mPipeline = new Pipeline($this->main);
+    $mDeal = new Deal($this->main);
+    $mTag = new Tag($this->main);
     $sumPipelinePrice = 0;
 
     $pipelines = $mPipeline->eloquent->get();
@@ -39,9 +39,9 @@ class Home extends \HubletoMain\Core\Controller {
 
     $searchPipeline = null;
 
-    if (isset($this->app->params["id_pipeline"])){
+    if (isset($this->main->params["id_pipeline"])){
       $searchPipeline = $mPipeline->eloquent
-        ->where("id", (int) $this->app->params["id_pipeline"])
+        ->where("id", (int) $this->main->params["id_pipeline"])
         ->with("PIPELINE_STEPS")
         ->first()
         ->toArray()

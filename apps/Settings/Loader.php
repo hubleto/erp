@@ -7,9 +7,9 @@ use HubletoApp\Settings\Models\Permission;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
 
     $this->registerModel(\HubletoApp\Settings\Models\User::class);
     $this->registerModel(\HubletoApp\Settings\Models\Models\UserRole::class);
@@ -19,7 +19,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^settings\/?$/' => Controllers\Dashboard::class,
       '/^settings\/users\/?$/' => Controllers\Users::class,
       '/^settings\/user-roles\/?$/' => Controllers\UserRoles::class,
@@ -35,40 +35,40 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 900, 'settings', $this->translate('Settings'), 'fas fa-cog', str_starts_with($this->app->requestedUri, 'settings'));
+    $this->main->sidebar->addLink(1, 900, 'settings', $this->translate('Settings'), 'fas fa-cog', str_starts_with($this->main->requestedUri, 'settings'));
 
-    $this->app->addSetting(['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
-    $this->app->addSetting(['title' => $this->translate('User roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
-    $this->app->addSetting(['title' => $this->translate('Profiles'), 'icon' => 'fas fa-id-card', 'url' => 'settings/profiles']);
-    $this->app->addSetting(['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/settings']);
-    $this->app->addSetting(['title' => $this->translate('Permissions'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
-    $this->app->addSetting(['title' => $this->translate('Tags'), 'icon' => 'fas fa-tags', 'url' => 'settings/tags']);
-    $this->app->addSetting(['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
-    $this->app->addSetting(['title' => $this->translate('Contact types'), 'icon' => 'fas fa-phone', 'url' => 'settings/contact-types']);
-    $this->app->addSetting(['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
-    $this->app->addSetting(['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
-    $this->app->addSetting(['title' => $this->translate('Pipelines'), 'icon' => 'fas fa-bars-progress', 'url' => 'settings/pipelines']);
-    $this->app->addSetting(['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
+    $this->main->addSetting(['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
+    $this->main->addSetting(['title' => $this->translate('User roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
+    $this->main->addSetting(['title' => $this->translate('Profiles'), 'icon' => 'fas fa-id-card', 'url' => 'settings/profiles']);
+    $this->main->addSetting(['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/settings']);
+    $this->main->addSetting(['title' => $this->translate('Permissions'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
+    $this->main->addSetting(['title' => $this->translate('Tags'), 'icon' => 'fas fa-tags', 'url' => 'settings/tags']);
+    $this->main->addSetting(['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
+    $this->main->addSetting(['title' => $this->translate('Contact types'), 'icon' => 'fas fa-phone', 'url' => 'settings/contact-types']);
+    $this->main->addSetting(['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
+    $this->main->addSetting(['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
+    $this->main->addSetting(['title' => $this->translate('Pipelines'), 'icon' => 'fas fa-bars-progress', 'url' => 'settings/pipelines']);
+    $this->main->addSetting(['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
   }
 
   public function installTables()
   {
-    $mProfile = new Models\Profile($this->app);
-    $mUser = new Models\User($this->app);
-    $mUserRole = new Models\UserRole($this->app);
-    $mUserHasRole = new Models\UserHasRole($this->app);
-    $mPermission = new Models\Permission($this->app);
-    $mRolePermission = new Models\RolePermission($this->app);
-    $mCountry = new Models\Country($this->app);
-    $mSetting = new Models\Setting($this->app);
-    $mTag = new Models\Tag($this->app);
-    $mActivityTypes = new Models\ActivityType($this->app);
-    $mContactType = new Models\ContactType($this->app);
-    $mCurrency = new Models\Currency($this->app);
-    $mTag = new Models\Tag($this->app);
-    $mPipeline = new Models\Pipeline($this->app);
-    $mPipelineStep = new Models\PipelineStep($this->app);
-    $mInvoiceProfile = new Models\InvoiceProfile($this->app);
+    $mProfile = new Models\Profile($this->main);
+    $mUser = new Models\User($this->main);
+    $mUserRole = new Models\UserRole($this->main);
+    $mUserHasRole = new Models\UserHasRole($this->main);
+    $mPermission = new Models\Permission($this->main);
+    $mRolePermission = new Models\RolePermission($this->main);
+    $mCountry = new Models\Country($this->main);
+    $mSetting = new Models\Setting($this->main);
+    $mTag = new Models\Tag($this->main);
+    $mActivityTypes = new Models\ActivityType($this->main);
+    $mContactType = new Models\ContactType($this->main);
+    $mCurrency = new Models\Currency($this->main);
+    $mTag = new Models\Tag($this->main);
+    $mPipeline = new Models\Pipeline($this->main);
+    $mPipelineStep = new Models\PipelineStep($this->main);
+    $mInvoiceProfile = new Models\InvoiceProfile($this->main);
 
     $mProfile->dropTableIfExists()->install();
     $mUser->dropTableIfExists()->install();
@@ -385,8 +385,8 @@ class Loader extends \HubletoMain\Core\App
 
   public function installDefaultPermissions()
   {
-    $mPermission = new Models\Permission($this->app);
-    $mRolePermission = new Models\RolePermission($this->app);
+    $mPermission = new Models\Permission($this->main);
+    $mRolePermission = new Models\RolePermission($this->main);
 
     $permissions = [
       "HubletoApp/Settings/Models/ActivityType:Create" => [],

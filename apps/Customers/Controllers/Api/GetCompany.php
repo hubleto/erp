@@ -11,7 +11,7 @@ class GetCompany extends \HubletoMain\Core\Controller {
   public function renderJson(): ?array
   {
 
-    $mCompany = new Company($this->app);
+    $mCompany = new Company($this->main);
     $companies = null;
     $companyArray = [];
 
@@ -21,12 +21,12 @@ class GetCompany extends \HubletoMain\Core\Controller {
        * The string needs to be at least two characters long for the search to activate
        * due to the lookup inputs not clearing the search parameter when empty
        */
-      if ($this->app->params["search"] != "" && strlen($this->app->params["search"]) > 1) {
+      if ($this->main->params["search"] != "" && strlen($this->main->params["search"]) > 1) {
         $companies
-          ->where("name", "LIKE", "%".$this->app->params["search"]."%")
-          ->orWhere("tax_id", "LIKE", "%".$this->app->params["search"]."%")
-          ->orWhere("company_id", "LIKE", "%".$this->app->params["search"]."%")
-          ->orWhere("vat_id", "LIKE", "%".$this->app->params["search"]."%")
+          ->where("name", "LIKE", "%".$this->main->params["search"]."%")
+          ->orWhere("tax_id", "LIKE", "%".$this->main->params["search"]."%")
+          ->orWhere("company_id", "LIKE", "%".$this->main->params["search"]."%")
+          ->orWhere("vat_id", "LIKE", "%".$this->main->params["search"]."%")
         ;
       }
 

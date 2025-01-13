@@ -5,16 +5,16 @@ namespace HubletoApp\Customers;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
 
     $this->registerModel(Models\Company::class);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^customers\/companies\/?$/' => Controllers\Companies::class,
       '/^customers\/persons\/?$/' => Controllers\Persons::class,
       '/^customers\/address\/?$/' => Controllers\Addresses::class,
@@ -26,28 +26,28 @@ class Loader extends \HubletoMain\Core\App
       '/^customers\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 40, 'customers/companies', $this->translate('Customers'), 'fas fa-address-card', str_starts_with($this->app->requestedUri, 'customers'));
+    $this->main->sidebar->addLink(1, 40, 'customers/companies', $this->translate('Customers'), 'fas fa-address-card', str_starts_with($this->main->requestedUri, 'customers'));
 
-    if (str_starts_with($this->app->requestedUri, 'customers')) {
-      $this->app->sidebar->addHeading1(2, 310, $this->translate('Customers'));
-      $this->app->sidebar->addLink(2, 320, 'customers/companies', $this->translate('Companies'), 'fas fa-building');
-      $this->app->sidebar->addLink(2, 330, 'customers/persons', $this->translate('Contact Persons'), 'fas fa-users');
-      //$this->app->sidebar->addLink(2, 10203, 'customers/activities', $this->translate('Activities'), 'fas fa-users');
+    if (str_starts_with($this->main->requestedUri, 'customers')) {
+      $this->main->sidebar->addHeading1(2, 310, $this->translate('Customers'));
+      $this->main->sidebar->addLink(2, 320, 'customers/companies', $this->translate('Companies'), 'fas fa-building');
+      $this->main->sidebar->addLink(2, 330, 'customers/persons', $this->translate('Contact Persons'), 'fas fa-users');
+      //$this->main->sidebar->addLink(2, 10203, 'customers/activities', $this->translate('Activities'), 'fas fa-users');
     }
 
-    $this->app->addCalendar(Calendar::class);
+    $this->main->addCalendar(Calendar::class);
   }
 
   public function installTables() {
-    $mPerson = new \HubletoApp\Customers\Models\Person($this->app);
-    $mCompany = new \HubletoApp\Customers\Models\Company($this->app);
-    $mAddress = new \HubletoApp\Customers\Models\Address($this->app);
-    $mContact = new \HubletoApp\Customers\Models\Contact($this->app);
-    //$mActivity = new \HubletoApp\Customers\Models\Activity($this->app);
-    $mCompanyActivity = new \HubletoApp\Customers\Models\CompanyActivity($this->app);
-    $mCompanyDocument = new \HubletoApp\Customers\Models\CompanyDocument($this->app);
-    $mCompanyTag = new \HubletoApp\Customers\Models\CompanyTag($this->app);
-    $mPersonTag = new \HubletoApp\Customers\Models\PersonTag($this->app);
+    $mPerson = new \HubletoApp\Customers\Models\Person($this->main);
+    $mCompany = new \HubletoApp\Customers\Models\Company($this->main);
+    $mAddress = new \HubletoApp\Customers\Models\Address($this->main);
+    $mContact = new \HubletoApp\Customers\Models\Contact($this->main);
+    //$mActivity = new \HubletoApp\Customers\Models\Activity($this->main);
+    $mCompanyActivity = new \HubletoApp\Customers\Models\CompanyActivity($this->main);
+    $mCompanyDocument = new \HubletoApp\Customers\Models\CompanyDocument($this->main);
+    $mCompanyTag = new \HubletoApp\Customers\Models\CompanyTag($this->main);
+    $mPersonTag = new \HubletoApp\Customers\Models\PersonTag($this->main);
 
     $mCompany->dropTableIfExists()->install();
     $mPerson->dropTableIfExists()->install();
@@ -62,7 +62,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function installDefaultPermissions()
   {
-    $mPermission = new \HubletoApp\Settings\Models\Permission($this->app);
+    $mPermission = new \HubletoApp\Settings\Models\Permission($this->main);
     $permissions = [
       "HubletoApp/Customers/Models/Activity:Create,Read,Update,Delete",
       "HubletoApp/Customers/Models/Address:Create,Read,Update,Delete",

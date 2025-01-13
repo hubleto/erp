@@ -118,7 +118,7 @@ class Lead extends \HubletoMain\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    if ((bool) $this->app->params["showArchive"]) {
+    if ((bool) $this->main->params["showArchive"]) {
       $description["ui"] = [
         "title" => "Leads Archive"
       ];
@@ -126,7 +126,7 @@ class Lead extends \HubletoMain\Core\Model
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
-        "canDelete" => $this->app->permissions->granted($this->fullName . ':Delete')
+        "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
       ];
     } else {
       $description['ui'] = [
@@ -152,7 +152,7 @@ class Lead extends \HubletoMain\Core\Model
     $description['defaultValues']['id_person'] = null;
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_lead_status'] = 1;
-    $description['defaultValues']['id_user'] = $this->app->auth->user["id"];
+    $description['defaultValues']['id_user'] = $this->main->auth->user["id"];
     $description['includeRelations'] = [
       'DEAL',
       'COMPANY',
@@ -189,7 +189,7 @@ class Lead extends \HubletoMain\Core\Model
     ];
     $query = parent::prepareLoadRecordQuery($relations, 4);
 
-    if ((bool) $this->app->params["showArchive"]) {
+    if ((bool) $this->main->params["showArchive"]) {
       $query = $query->where("leads.is_archived", 1);
     } else {
       $query = $query->where("leads.is_archived", 0);
@@ -200,7 +200,7 @@ class Lead extends \HubletoMain\Core\Model
 
   public function checkOwnership($record) {
     if ($record["id_company"] && !isset($record["checkOwnership"])) {
-      $mCompany = new Company($this->app);
+      $mCompany = new Company($this->main);
       $company = $mCompany->eloquent
         ->where("id", (int) $record["id_company"])
         ->first()
@@ -223,8 +223,8 @@ class Lead extends \HubletoMain\Core\Model
     $this->checkOwnership($record);
 
     $lead = $this->eloquent->find($record["id"])->toArray();
-    $mLeadHistory = new LeadHistory($this->app);
-    $mLeadStatus = new LeadStatus($this->app);
+    $mLeadHistory = new LeadHistory($this->main);
+    $mLeadStatus = new LeadStatus($this->main);
 
     if ($lead["id_lead_status"] != (int) $record["id_lead_status"]) {
       $status = $mLeadStatus->eloquent->find((int) $record["id_lead_status"])->name;
@@ -254,7 +254,7 @@ class Lead extends \HubletoMain\Core\Model
 
   public function onAfterCreate(array $record, $returnValue)
   {
-    $mLeadHistory = new LeadHistory($this->app);
+    $mLeadHistory = new LeadHistory($this->main);
     $mLeadHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
       "id_lead" => $record["id"],

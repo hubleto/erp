@@ -9,7 +9,7 @@ class Dictionary extends \ADIOS\Core\Controller
 
   public function renderJson(): array
   {
-    $language = $this->app->params['language'];
+    $language = $this->main->params['language'];
     $dictFile = __DIR__ . '/../../lang/' . $language . '.json';
 
     if ($language == 'en') return [];
@@ -17,17 +17,17 @@ class Dictionary extends \ADIOS\Core\Controller
     if (!is_file($dictFile)) return [];
 
     // $dict = (array) json_decode(file_get_contents($dictFile), true);
-    $dict = $this->app->translator->loadDictionary($language);
+    $dict = $this->main->translator->loadDictionary($language);
 
-    if (is_array($this->app->params['addNew']) && $language != 'en') {
-      $context = $this->app->params['addNew']['context'] ?? '';
-      $orig = $this->app->params['addNew']['orig'] ?? '';
+    if (is_array($this->main->params['addNew']) && $language != 'en') {
+      $context = $this->main->params['addNew']['context'] ?? '';
+      $orig = $this->main->params['addNew']['orig'] ?? '';
 
       // if (!empty($orig) && !empty($context)) {
       //   $dict[$context][$orig] = "";
       //   file_put_contents($dictFile, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
       // }
-      $this->app->translator->addToDictionary($orig, $context, $language);
+      $this->main->translator->addToDictionary($orig, $context, $language);
 
       return ['status' => true];
     } else {

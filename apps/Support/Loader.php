@@ -6,18 +6,18 @@ class Loader extends \HubletoMain\Core\App
 {
 
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^support\/?$/' => Controllers\Dashboard::class,
     ]);
 
-    // $this->app->sidebar->addLink(1, 98100, 'support', $this->translate('Support'), 'fas fa-circle-question');
+    // $this->main->sidebar->addLink(1, 98100, 'support', $this->translate('Support'), 'fas fa-circle-question');
   }
 
 }

@@ -6,6 +6,6 @@ class GetCalendarEvents extends \HubletoMain\Core\Controller {
 
   public function renderJson(): array
   {
-    return $this->app->getCalendar(\HubletoApp\Customers\Calendar::class)->loadEvents($this->app->params);
+    return $this->main->getCalendar(\HubletoApp\Customers\Calendar::class)->loadEvents($this->main->params);
   }
 }

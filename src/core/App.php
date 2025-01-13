@@ -3,7 +3,7 @@
 namespace HubletoMain\Core;
 
 class App {
-  public \HubletoMain $app;
+  public \HubletoMain $main;
   protected array $registeredModels = [];
 
   public string $rootFolder = '';
@@ -12,16 +12,16 @@ class App {
   public string $translationRootContext = '';
   public string $translationContext = '';
 
-  public static function canBeAdded(\HubletoMain $app): bool
+  public static function canBeAdded(\HubletoMain $main): bool
   {
     return true;
   }
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
     $reflection = new \ReflectionClass($this);
 
-    $this->app = $app;
+    $this->main = $main;
     $this->rootFolder = pathinfo($reflection->getFilename(), PATHINFO_DIRNAME);
     $this->namespace = $reflection->getNamespaceName();
     $this->translationRootContext = str_replace('.loader', '', strtolower(str_replace('\\', '.', $reflection->getName())));
@@ -47,7 +47,7 @@ class App {
 
   public function translate(string $string, array $vars = []): string
   {
-    return $this->app->translate($string, $vars, $this->translationContext);
+    return $this->main->translate($string, $vars, $this->translationContext);
   }
 
   public function registerModel(string $model)

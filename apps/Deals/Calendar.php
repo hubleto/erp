@@ -11,7 +11,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
     $dateStart = date("Y-m-d H:i:s", strtotime((string) $params["start"]));
     $dateEnd = date("Y-m-d H:i:s", strtotime((string) $params["end"]));
 
-    $mDealActivity = new \HubletoApp\Deals\Models\DealActivity($this->app);
+    $mDealActivity = new \HubletoApp\Deals\Models\DealActivity($this->main);
 
     $activities = $mDealActivity->eloquent
       ->select("deal_activities.*", "activity_types.color", "activity_types.name as activity_type")

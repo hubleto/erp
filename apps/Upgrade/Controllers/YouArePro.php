@@ -8,9 +8,9 @@ class YouArePro extends \HubletoMain\Core\Controller {
   {
     parent::prepareView();
 
-    if ($this->app->params['simulate'] == 'down') {
-      @unlink($this->app->config['accountDir'] . '/pro');
-      $this->app->router->redirectTo('');
+    if ($this->main->params['simulate'] == 'down') {
+      @unlink($this->main->config['accountDir'] . '/pro');
+      $this->main->router->redirectTo('');
     }
 
     $this->setView('@app/Upgrade/Views/YouArePro.twig');

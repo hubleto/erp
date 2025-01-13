@@ -3,8 +3,16 @@
 namespace HubletoMain\Core;
 
 class Model extends \ADIOS\Core\Model {
+  public \HubletoMain $main;
+
   public array $conversionMap = [];
   public array $conversionRelations = [];
+
+  function __construct(\ADIOS\Core\Loader $main)
+  {
+    $this->main = $main;
+    parent::__construct($main);
+  }
 
   public function tableDescribe(array $description = []): array {
     $description = parent::tableDescribe($description);
@@ -44,12 +52,12 @@ class Model extends \ADIOS\Core\Model {
       switch ($relationType) {
         case 'belongsTo':
           if (is_array($row[$relation])) {
-            $newRow[$relation] = (new $modelClass($this->app))->convertRecord($row[$relation], $reverseConversion);
+            $newRow[$relation] = (new $modelClass($this->main))->convertRecord($row[$relation], $reverseConversion);
           }
         break;
         case 'hasMany':
           if (is_array($row[$relation])) {
-            $newRow[$relation] = (new $modelClass($this->app))->convert($row[$relation], $reverseConversion);
+            $newRow[$relation] = (new $modelClass($this->main))->convert($row[$relation], $reverseConversion);
           }
         break;
       }

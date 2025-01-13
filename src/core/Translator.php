@@ -7,7 +7,7 @@ class Translator extends \ADIOS\Core\Translator {
 
   public function getRootContext(string $context): string
   {
-    foreach ($this->app->getRegisteredApps() as $module) {
+    foreach ($this->main->getRegisteredApps() as $module) {
       if (empty($module->translationRootContext)) continue;
       if (str_starts_with($context, $module->translationRootContext)) {
         return $module->translationRootContext;
@@ -21,10 +21,10 @@ class Translator extends \ADIOS\Core\Translator {
   {
     $dictionaryFilename = '';
 
-    if (empty($language)) $language = $this->app->config['language'] ?? 'en';
+    if (empty($language)) $language = $this->main->config['language'] ?? 'en';
     if (empty($language)) $language = 'en';
 
-    foreach ($this->app->getRegisteredApps() as $module) {
+    foreach ($this->main->getRegisteredApps() as $module) {
       if (empty($module->translationRootContext)) continue;
       if (str_starts_with($context, $module->translationRootContext)) {
         $dictionaryFilename = $module->rootFolder . '/Lang/' . $language . '.json';
@@ -70,7 +70,7 @@ class Translator extends \ADIOS\Core\Translator {
       if (is_file($dictFilename)) $dictionary = @json_decode(file_get_contents($dictFilename), true);
     }
 
-    foreach ($this->app->getRegisteredApps() as $module) {
+    foreach ($this->main->getRegisteredApps() as $module) {
       $mDict = $module->loadDictionary($language);
       foreach ($mDict as $key => $value) {
         $dictionary[$module->translationRootContext . '.' . $key] = $value;
@@ -85,7 +85,7 @@ class Translator extends \ADIOS\Core\Translator {
   public function translate(string $string, array $vars = [], string $context = "core", $toLanguage = ""): string
   {
     if (empty($toLanguage)) {
-      $toLanguage = $this->app->config['language'] ?? "en";
+      $toLanguage = $this->main->config['language'] ?? "en";
     }
 
     if ($toLanguage == "en") {

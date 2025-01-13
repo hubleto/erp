@@ -3,13 +3,13 @@
 namespace HubletoMain\Core;
 
 class Help {
-  public \HubletoMain $app;
+  public \HubletoMain $main;
 
   public array $hotTips = [];
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    $this->app = $app;
+    $this->main = $main;
   }
 
   public function addHotTip($slug, $title) {

@@ -6,14 +6,14 @@ class Loader extends \HubletoMain\Core\App
 {
 
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^deals\/?$/' => Controllers\Deals::class,
       '/^deals\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
@@ -22,26 +22,26 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/deal-statuses\/?$/' => Controllers\DealStatuses::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 200, 'deals', $this->translate('Deals'), 'fas fa-handshake', str_starts_with($this->app->requestedUri, 'deals'));
+    $this->main->sidebar->addLink(1, 200, 'deals', $this->translate('Deals'), 'fas fa-handshake', str_starts_with($this->main->requestedUri, 'deals'));
 
-    $this->app->addSetting([
+    $this->main->addSetting([
       'title' => $this->translate('Deal statuses'),
       'icon' => 'fas fa-arrow-up-short-wide',
       'url' => 'settings/deal-statuses',
     ]);
 
-    $this->app->addCalendar(Calendar::class);
+    $this->main->addCalendar(Calendar::class);
   }
 
   public function installTables()
   {
-    $mDealStatus = new Models\DealStatus($this->app);
-    $mDeal = new \HubletoApp\Deals\Models\Deal($this->app);
-    $mDealHistory = new \HubletoApp\Deals\Models\DealHistory($this->app);
-    $mDealTag = new \HubletoApp\Deals\Models\DealTag($this->app);
-    $mDealService = new \HubletoApp\Deals\Models\DealService($this->app);
-    $mDealActivity = new \HubletoApp\Deals\Models\DealActivity($this->app);
-    $mDealDocument = new \HubletoApp\Deals\Models\DealDocument($this->app);
+    $mDealStatus = new Models\DealStatus($this->main);
+    $mDeal = new \HubletoApp\Deals\Models\Deal($this->main);
+    $mDealHistory = new \HubletoApp\Deals\Models\DealHistory($this->main);
+    $mDealTag = new \HubletoApp\Deals\Models\DealTag($this->main);
+    $mDealService = new \HubletoApp\Deals\Models\DealService($this->main);
+    $mDealActivity = new \HubletoApp\Deals\Models\DealActivity($this->main);
+    $mDealDocument = new \HubletoApp\Deals\Models\DealDocument($this->main);
 
     $mDealStatus->dropTableIfExists()->install();
     $mDeal->dropTableIfExists()->install();

@@ -39,7 +39,7 @@ class Invoice extends \ADIOS\Core\Model {
   public function onBeforeCreate(array $record): array
   {
 
-    $mInvoiceProfile = new InvoiceProfile($this->app);
+    $mInvoiceProfile = new InvoiceProfile($this->main);
 
     $invoicesThisYear = $this->eloquent->whereYear('date_delivery', date('Y'))->get()->toArray();
     $profil = $mInvoiceProfile->eloquent->where('id', $record['id_profile'])->first()->toArray();
@@ -65,23 +65,23 @@ class Invoice extends \ADIOS\Core\Model {
   
     $query = parent::prepareLoadRecordQuery($includeRelations, $maxRelationLevel, $query, $level);
 
-    $idCustomer = (int) $this->app->params['idCustomer'];
+    $idCustomer = (int) $this->main->params['idCustomer'];
     if ($idCustomer > 0) $query->where('id_customer', $idCustomer);
 
-    $idProfile = (int) $this->app->params['idProfile'];
+    $idProfile = (int) $this->main->params['idProfile'];
     if ($idProfile > 0) $query->where('id_profil', $idProfile);
 
-    if ($this->app->params['number']) $query->where('number', 'like', '%' . $this->app->params['number'] . '%');
-    if ($this->app->params['vs']) $query->where('vs', 'like', '%' . $this->app->params['vs'] . '%');
+    if ($this->main->params['number']) $query->where('number', 'like', '%' . $this->main->params['number'] . '%');
+    if ($this->main->params['vs']) $query->where('vs', 'like', '%' . $this->main->params['vs'] . '%');
 
-    if ($this->app->params['dateIssueFrom']) $query->whereDate('date_issue', '>=', $this->app->params['dateIssueFrom']);
-    if ($this->app->params['dateIssueTo']) $query->whereDate('date_issue', '<=', $this->app->params['dateIssueTo']);
-    if ($this->app->params['dateDeliveryFrom']) $query->whereDate('date_delivery', '>=', $this->app->params['dateDeliveryFrom']);
-    if ($this->app->params['dateDeliveryTo']) $query->whereDate('date_delivery', '<=', $this->app->params['dateDeliveryTo']);
-    if ($this->app->params['dateTueFrom']) $query->whereDate('date_due', '>=', $this->app->params['dateTueFrom']);
-    if ($this->app->params['dateTueTo']) $query->whereDate('date_due', '<=', $this->app->params['dateTueTo']);
-    if ($this->app->params['datePaymentFrom']) $query->whereDate('date_payment', '>=', $this->app->params['datePaymentFrom']);
-    if ($this->app->params['datePaymentTo']) $query->whereDate('date_payment', '<=', $this->app->params['datePaymentTo']);
+    if ($this->main->params['dateIssueFrom']) $query->whereDate('date_issue', '>=', $this->main->params['dateIssueFrom']);
+    if ($this->main->params['dateIssueTo']) $query->whereDate('date_issue', '<=', $this->main->params['dateIssueTo']);
+    if ($this->main->params['dateDeliveryFrom']) $query->whereDate('date_delivery', '>=', $this->main->params['dateDeliveryFrom']);
+    if ($this->main->params['dateDeliveryTo']) $query->whereDate('date_delivery', '<=', $this->main->params['dateDeliveryTo']);
+    if ($this->main->params['dateTueFrom']) $query->whereDate('date_due', '>=', $this->main->params['dateTueFrom']);
+    if ($this->main->params['dateTueTo']) $query->whereDate('date_due', '<=', $this->main->params['dateTueTo']);
+    if ($this->main->params['datePaymentFrom']) $query->whereDate('date_payment', '>=', $this->main->params['datePaymentFrom']);
+    if ($this->main->params['datePaymentTo']) $query->whereDate('date_payment', '<=', $this->main->params['datePaymentTo']);
 
     $query
       ->first()

@@ -6,25 +6,25 @@ class Loader extends \HubletoMain\Core\App
 {
 
 
-  // public static function canBeAdded(\HubletoMain $app): bool
+  // public static function canBeAdded(\HubletoMain $main): bool
   // {
-  //   return !$app->isPro;
+  //   return !$main->isPro;
   // }
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^upgrade\/?$/' => Controllers\Upgrade::class,
       '/^you-are-pro\/?$/' => Controllers\YouArePro::class,
     ]);
 
-    // if (!$this->app->isPro) {
-    //   $this->app->sidebar->addLink(1, 1000, 'upgrade', $this->translate('Upgrade'), 'fas fa-trophy', str_starts_with($this->app->requestedUri, 'upgrade'));
+    // if (!$this->main->isPro) {
+    //   $this->main->sidebar->addLink(1, 1000, 'upgrade', $this->translate('Upgrade'), 'fas fa-trophy', str_starts_with($this->main->requestedUri, 'upgrade'));
     // }
   }
 

@@ -148,7 +148,7 @@ class Deal extends \HubletoMain\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    if ((bool) $this->app->params["showArchive"]) {
+    if ((bool) $this->main->params["showArchive"]) {
       $description["ui"] = [
         "title" => "Deals Archive"
       ];
@@ -156,7 +156,7 @@ class Deal extends \HubletoMain\Core\Model
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
-        "canDelete" => $this->app->permissions->granted($this->fullName . ':Delete')
+        "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
       ];
     } else {
       $description['ui'] = [
@@ -178,7 +178,7 @@ class Deal extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $mSettings = new Setting($this->app);
+    $mSettings = new Setting($this->main);
     $defaultPipeline =(int) $mSettings->eloquent
       ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")
       ->first()
@@ -191,7 +191,7 @@ class Deal extends \HubletoMain\Core\Model
     $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
-    $description['defaultValues']['id_user'] = $this->app->auth->user["id"];
+    $description['defaultValues']['id_user'] = $this->main->auth->user["id"];
     $description['includeRelations'] = [
       'COMPANY',
       'USER',
@@ -233,7 +233,7 @@ class Deal extends \HubletoMain\Core\Model
      * These are the query filters for tables with archived and non-archived deal entries.
      * The params["id"] needs to be there to properly load the data of the entry in a form.
      */
-    if ((bool) $this->app->params["showArchive"]) {
+    if ((bool) $this->main->params["showArchive"]) {
       $query = $query->where("deals.is_archived", 1);
     } else {
       $query = $query->where("deals.is_archived", 0);
@@ -243,14 +243,14 @@ class Deal extends \HubletoMain\Core\Model
 
   public function onAfterCreate(array $record, $returnValue)
   {
-    $mDealHistory = new DealHistory($this->app);
+    $mDealHistory = new DealHistory($this->main);
     $mDealHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
       "id_deal" => $record["id"],
       "description" => "Deal created"
     ]);
 
-    return $this->app->dispatchEventToPlugins("onModelAfterCreate", [
+    return $this->main->dispatchEventToPlugins("onModelAfterCreate", [
       "model" => $this,
       "data" => $record,
       "returnValue" => $returnValue,
@@ -259,7 +259,7 @@ class Deal extends \HubletoMain\Core\Model
 
   public function getOwnership($record) {
     if ($record["id_company"] && !isset($record["checkOwnership"])) {
-      $mCompany = new Company($this->app);
+      $mCompany = new Company($this->main);
       $company = $mCompany->eloquent
         ->where("id", $record["id_company"])
         ->first()
@@ -283,7 +283,7 @@ class Deal extends \HubletoMain\Core\Model
     $this->getOwnership($record);
 
     $deal = $this->eloquent->find($record["id"])->toArray();
-    $mDealHistory = new DealHistory($this->app);
+    $mDealHistory = new DealHistory($this->main);
 
     if ((float) $deal["price"] != (float) $record["price"]) {
       $mDealHistory->eloquent->create([

@@ -11,13 +11,13 @@ class ChangePipeline extends \HubletoMain\Core\Controller
 
   public function renderJson(): ?array
   {
-    $mPipeline = new Pipeline($this->app);
-    $mPipelineStep = new PipelineStep($this->app);
+    $mPipeline = new Pipeline($this->main);
+    $mPipelineStep = new PipelineStep($this->main);
     $newPipeline = null;
 
     try {
       $newPipeline = $mPipeline->eloquent
-        ->where("id", $this->app->params["idPipeline"])
+        ->where("id", $this->main->params["idPipeline"])
         ->with("PIPELINE_STEPS")
         ->first()
         ->toArray()

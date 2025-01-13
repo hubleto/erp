@@ -8,8 +8,8 @@ class GetCalendarEvents extends \HubletoMain\Core\Controller {
   {
     $events = [];
 
-    foreach ($this->app->getCalendars() as $calendarClass => $calendar) {
-      $calEvents = $calendar->loadEvents($this->app->params);
+    foreach ($this->main->getCalendars() as $calendarClass => $calendar) {
+      $calEvents = $calendar->loadEvents($this->main->params);
       foreach ($calEvents as $key => $value) {
         $calEvents[$key]['sourceCalendar'] = $calendarClass;
       }

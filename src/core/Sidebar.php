@@ -8,11 +8,11 @@ class Sidebar {
   const ITEM_HEADING_1 = 'heading_1';
   const ITEM_HEADING_2 = 'heading_2';
 
-  public \HubletoMain $app;
+  public \HubletoMain $main;
   public array $items = [];
 
-  public function __construct(\HubletoMain $app) {
-    $this->app = $app;
+  public function __construct(\HubletoMain $main) {
+    $this->main = $main;
     $this->items[1] = [];
     $this->items[2] = [];
   }

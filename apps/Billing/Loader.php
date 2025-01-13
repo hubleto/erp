@@ -7,26 +7,26 @@ use HubletoApp\Settings\Models\Permission;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $app)
+  public function __construct(\HubletoMain $main)
   {
-    parent::__construct($app);
+    parent::__construct($main);
 
     $this->registerModel(Models\BillingAccount::class);
   }
 
   public function init(): void
   {
-    $this->app->router->httpGet([
+    $this->main->router->httpGet([
       '/^billing\/?$/' => Controllers\BillingAccounts::class,
     ]);
 
-    $this->app->sidebar->addLink(1, 810, 'billing', $this->translate('Billing'), 'fas fa-file-invoice-dollar', str_starts_with($this->app->requestedUri, 'billing'));
+    $this->main->sidebar->addLink(1, 810, 'billing', $this->translate('Billing'), 'fas fa-file-invoice-dollar', str_starts_with($this->main->requestedUri, 'billing'));
 
   }
 
   public function installTables() {
-    $mBillingAccount = new \HubletoApp\Billing\Models\BillingAccount($this->app);
-    $mBillingAccountService = new \HubletoApp\Billing\Models\BillingAccountService($this->app);
+    $mBillingAccount = new \HubletoApp\Billing\Models\BillingAccount($this->main);
+    $mBillingAccountService = new \HubletoApp\Billing\Models\BillingAccountService($this->main);
 
     $mBillingAccount->dropTableIfExists()->install();
     $mBillingAccountService->dropTableIfExists()->install();
@@ -35,7 +35,7 @@ class Loader extends \HubletoMain\Core\App
   public function installDefaultPermissions()
   {
   
-    $mPermission = new \HubletoApp\Settings\Models\Permission($this->app);
+    $mPermission = new \HubletoApp\Settings\Models\Permission($this->main);
     $permissions = [
       "HubletoApp/Billing/Models/BillingAccount:Create,Read,Update,Delete",
       "HubletoApp/Billing/Models/BillingAccountService:Create,Read,Update,Delete",

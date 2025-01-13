@@ -55,11 +55,11 @@ class Document extends \HubletoMain\Core\Model
 
   public function onAfterCreate(array $record, $returnValue)
   {
-    $mCompanyDocument = new CompanyDocument($this->app);
-    $mLead = new Lead($this->app);
-    $mDeal = new Deal($this->app);
-    $mLeadDocument = new LeadDocument($this->app);
-    $mDealDocument = new DealDocument($this->app);
+    $mCompanyDocument = new CompanyDocument($this->main);
+    $mLead = new Lead($this->main);
+    $mDeal = new Deal($this->main);
+    $mLeadDocument = new LeadDocument($this->main);
+    $mDealDocument = new DealDocument($this->main);
 
     if (isset($record["creatingForModel"])) {
       if ($record["creatingForModel"] == "Company") {
@@ -98,8 +98,8 @@ class Document extends \HubletoMain\Core\Model
   {
     $document = $this->eloquent->find($record["id"])->toArray();
     $prevFilename = ltrim($document["file"],"./");
-    if (file_exists($this->app->config['uploadDir']."/".$prevFilename)) {
-      unlink($this->app->config['uploadDir']."/".$prevFilename);
+    if (file_exists($this->main->config['uploadDir']."/".$prevFilename)) {
+      unlink($this->main->config['uploadDir']."/".$prevFilename);
     }
 
     return $record;
@@ -109,8 +109,8 @@ class Document extends \HubletoMain\Core\Model
   {
     $document = $this->eloquent->find($id)->toArray();
     $prevFilename = ltrim($document["file"],"./");
-    if (file_exists($this->app->config['uploadDir']."/".$prevFilename)) {
-      unlink($this->app->config['uploadDir']."/".$prevFilename);
+    if (file_exists($this->main->config['uploadDir']."/".$prevFilename)) {
+      unlink($this->main->config['uploadDir']."/".$prevFilename);
     }
 
     return $id;

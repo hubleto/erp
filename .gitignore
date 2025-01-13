@@ -8,5 +8,6 @@
 /composer-dev.json
 /ConfigAccount.php
 /ConfigEnv.php
-/LoadMain.php
 /.htaccess
+/apps/external/*
+!/apps/external/README.md

@@ -161,7 +161,7 @@ function run(string $action, array $argv): bool {
           '\HubletoApp\Community\Documents\Loader::class',
           '\HubletoApp\Community\Invoices\Loader::class',
           '\HubletoApp\Community\Services\Loader::class',
-          '\HubletoApp\Community\Community\Settings\Loader::class',
+          '\HubletoApp\Community\Settings\Loader::class',
           '\HubletoApp\Community\Pipeline\Loader::class',
           '\HubletoApp\Community\Deals\Loader::class',
           '\HubletoApp\Community\Leads\Loader::class',

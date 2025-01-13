@@ -1,12 +1,12 @@
 import HubletoMain from './src/Main';
-import Billing from './apps/Billing/Loader'
-import Calendar from './apps/Calendar/Loader'
-import Customers from './apps/Customers/Loader'
-import Documents from './apps/Documents/Loader'
-import Invoices from './apps/Invoices/Loader'
-import Settings from './apps/Settings/Loader'
-import Leads from './apps/Leads/Loader'
-import Deals from './apps/Deals/Loader'
+import Billing from './apps/community/Billing/Loader'
+import Calendar from './apps/community/Calendar/Loader'
+import Customers from './apps/community/Customers/Loader'
+import Documents from './apps/community/Documents/Loader'
+import Invoices from './apps/community/Invoices/Loader'
+import Settings from './apps/community/Settings/Loader'
+import Leads from './apps/community/Leads/Loader'
+import Deals from './apps/community/Deals/Loader'
 
 //@ts-ignore
 const main: HubletoMain = new HubletoMain(window.ConfigEnv);

@@ -1,4 +1,4 @@
-namespace: HubletoApp\Calendar
+namespace: HubletoApp\Community\Calendar
 rootUrlSlug: calendar
 name: Calendar
 author:

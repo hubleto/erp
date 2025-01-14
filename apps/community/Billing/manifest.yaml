@@ -1,4 +1,4 @@
-namespace: HubletoApp\Billing
+namespace: HubletoApp\Community\Billing
 rootUrlSlug: billing
 name: Billing
 author:
@@ -14,4 +14,4 @@ tags:
   - account
   - currency
 requires:
-  - HubletoApp\Customers
+  - HubletoApp\Community\Customers

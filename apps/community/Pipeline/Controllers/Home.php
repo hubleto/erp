@@ -111,7 +111,7 @@ class Home extends \HubletoMain\Core\Controller {
     $this->viewParams["pipeline"]["currency_groups"] = $currencyGroups;
     $this->viewParams["deals"] = $deals;
 
-    $this->setView('@app/Community/Pipeline/Views/Home.twig');
+    $this->setView('@app/community/Pipeline/Views/Home.twig');
   }
 
 }

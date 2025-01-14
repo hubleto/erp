@@ -15,7 +15,7 @@ class Invoices extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Invoices/Views/Invoices.twig');
+    $this->setView('@app/community/Invoices/Views/Invoices.twig');
   }
 
 }

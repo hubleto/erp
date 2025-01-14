@@ -16,7 +16,7 @@ class Tags extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Settings/Views/Tags.twig');
+    $this->setView('@app/community/Settings/Views/Tags.twig');
   }
 
 }

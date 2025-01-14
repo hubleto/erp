@@ -15,7 +15,7 @@ class Addresses extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Customers/Views/Addresses.twig');
+    $this->setView('@app/community/Customers/Views/Addresses.twig');
   }
 
 }

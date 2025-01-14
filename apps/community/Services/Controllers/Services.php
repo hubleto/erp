@@ -15,7 +15,7 @@ class Services extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Services/Views/Services.twig');
+    $this->setView('@app/community/Services/Views/Services.twig');
   }
 
 }

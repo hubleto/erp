@@ -16,6 +16,6 @@ class Home extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Dashboard/Views/Home.twig');
+    $this->setView('@app/community/Dashboard/Views/Home.twig');
   }
 }

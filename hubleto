@@ -84,6 +84,8 @@ function run(string $action, array $argv): bool {
 
       case 'init':
 
+        $packageNames = $argv[2] ?? 'core,sales';
+
         $rewriteBases = [];
         $lastRewriteBase = '';
 
@@ -155,19 +157,9 @@ function run(string $action, array $argv): bool {
           false, // randomize (deprecated)
         );
 
-        $installer->enabledApps = [
-          '\HubletoApp\Community\Billing\Loader::class',
-          '\HubletoApp\Community\Calendar\Loader::class',
-          '\HubletoApp\Community\Customers\Loader::class',
-          '\HubletoApp\Community\Dashboard\Loader::class',
-          '\HubletoApp\Community\Documents\Loader::class',
-          '\HubletoApp\Community\Invoices\Loader::class',
-          '\HubletoApp\Community\Services\Loader::class',
-          '\HubletoApp\Community\Settings\Loader::class',
-          '\HubletoApp\Community\Pipeline\Loader::class',
-          '\HubletoApp\Community\Deals\Loader::class',
-          '\HubletoApp\Community\Leads\Loader::class',
-        ];
+        foreach (explode(',', $packageNames) as $packageName) {
+          $installer->enabledApps = $installer->packages[trim($packageName)];
+        }
 
         $installer->createDatabase();
         $installer->installTables();

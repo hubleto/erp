@@ -31,6 +31,29 @@ class Installer {
 
   public array $enabledApps = [];
 
+  public array $packages = [
+    'core' => [
+      '\HubletoApp\Community\Settings\Loader::class',
+      '\HubletoApp\Community\Dashboard\Loader::class',
+      '\HubletoApp\Community\Calendar\Loader::class',
+      '\HubletoApp\Community\Customers\Loader::class',
+      '\HubletoApp\Community\Documents\Loader::class',
+    ],
+    'invoices' => [
+      '\HubletoApp\Community\Billing\Loader::class',
+      '\HubletoApp\Community\Invoices\Loader::class',
+      '\HubletoApp\Community\Services\Loader::class',
+    ],
+    'sales' => [
+      '\HubletoApp\Community\Pipeline\Loader::class',
+      '\HubletoApp\Community\Deals\Loader::class',
+      '\HubletoApp\Community\Leads\Loader::class',
+    ],
+    'sync' => [
+      '\HubletoApp\Community\CalendarSync\Loader::class',
+    ],
+  ];
+
   public function __construct(
     \HubletoMain $main,
     string $env,

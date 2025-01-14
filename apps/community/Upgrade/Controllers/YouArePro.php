@@ -13,7 +13,7 @@ class YouArePro extends \HubletoMain\Core\Controller {
       $this->main->router->redirectTo('');
     }
 
-    $this->setView('@app/Community/Upgrade/Views/YouArePro.twig');
+    $this->setView('@app/community/Upgrade/Views/YouArePro.twig');
   }
 
 }

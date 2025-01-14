@@ -16,7 +16,7 @@ class BillingAccounts extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Billing/Views/BillingAccounts.twig');
+    $this->setView('@app/community/Billing/Views/BillingAccounts.twig');
   }
 
 }

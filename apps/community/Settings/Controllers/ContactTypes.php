@@ -16,7 +16,7 @@ class ContactTypes extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Settings/Views/ContactTypes.twig');
+    $this->setView('@app/community/Settings/Views/ContactTypes.twig');
   }
 
 }

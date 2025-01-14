@@ -16,7 +16,7 @@ class Profiles extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Settings/Views/Profiles.twig');
+    $this->setView('@app/community/Settings/Views/Profiles.twig');
   }
 
 }

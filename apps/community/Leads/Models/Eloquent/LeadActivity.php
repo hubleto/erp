@@ -6,7 +6,7 @@ namespace HubletoApp\Community\Leads\Models\Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class LeadActivity extends \ADIOS\Core\Model\Eloquent
+class LeadActivity extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'lead_activities';
 

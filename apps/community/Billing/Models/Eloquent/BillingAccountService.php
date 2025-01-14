@@ -8,7 +8,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class BillingAccountService extends \ADIOS\Core\Model\Eloquent
+class BillingAccountService extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'billing_accounts_services';
 

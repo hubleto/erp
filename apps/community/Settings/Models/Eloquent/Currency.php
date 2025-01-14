@@ -6,7 +6,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use \Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Currency extends \ADIOS\Core\Model\Eloquent
+class Currency extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'currencies';
 }

@@ -6,7 +6,7 @@ use HubletoApp\Community\Documents\Models\Eloquent\Document;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class DealDocument extends \ADIOS\Core\Model\Eloquent
+class DealDocument extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'deal_documents';
 

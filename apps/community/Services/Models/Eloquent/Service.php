@@ -7,7 +7,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Service extends \ADIOS\Core\Model\Eloquent
+class Service extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'services';
 

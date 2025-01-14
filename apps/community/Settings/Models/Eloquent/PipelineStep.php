@@ -7,7 +7,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class PipelineStep extends \ADIOS\Core\Model\Eloquent
+class PipelineStep extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'pipeline_steps';
 

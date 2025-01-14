@@ -6,7 +6,7 @@ use HubletoApp\Community\Services\Models\Eloquent\Service;
 use HubletoApp\Community\Deals\Models\Eloquent\Deal;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DealService extends \ADIOS\Core\Model\Eloquent
+class DealService extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'deal_services';
 

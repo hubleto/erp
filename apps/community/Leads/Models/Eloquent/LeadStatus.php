@@ -7,7 +7,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class LeadStatus extends \ADIOS\Core\Model\Eloquent
+class LeadStatus extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'lead_statuses';
 

@@ -1,4 +1,4 @@
-namespace: HubletoApp\Customers
+namespace: HubletoApp\Community\Customers
 rootUrlSlug: customers
 name: Customers
 author:

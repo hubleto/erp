@@ -1,4 +1,4 @@
-namespace: HubletoApp\Leads
+namespace: HubletoApp\Community\Leads
 rootUrlSlug: leads
 name: Leads
 author:
@@ -14,5 +14,5 @@ tags:
   - leads
   - deals
 requires:
-  - HubletoApp\Customers
-  - HubletoApp\Calendar
+  - HubletoApp\Community\Customers
+  - HubletoApp\Community\Calendar

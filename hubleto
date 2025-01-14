@@ -158,6 +158,7 @@ function run(string $action, array $argv): bool {
         );
 
         foreach (explode(',', $packageNames) as $packageName) {
+          cyan("  Package: {$packageName}\n");
           $installer->enabledApps = $installer->packages[trim($packageName)];
         }
 

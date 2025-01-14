@@ -16,7 +16,7 @@ class InvoiceProfiles extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Settings/Views/InvoiceProfiles.twig');
+    $this->setView('@app/community/Settings/Views/InvoiceProfiles.twig');
   }
 
 }

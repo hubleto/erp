@@ -16,6 +16,6 @@ class Pipelines extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Settings/Views/Pipelines.twig');
+    $this->setView('@app/community/Settings/Views/Pipelines.twig');
   }
 }

@@ -16,7 +16,7 @@ class Currencies extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Settings/Views/Currencies.twig');
+    $this->setView('@app/community/Settings/Views/Currencies.twig');
   }
 
 }

@@ -16,6 +16,6 @@ class DealsArchive extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/Community/Deals/Views/DealsArchive.twig');
+    $this->setView('@app/community/Deals/Views/DealsArchive.twig');
   }
 }

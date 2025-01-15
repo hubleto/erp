@@ -2,8 +2,6 @@
 
 global $clih;
 
-const HUBLETO_COMMUNITY_REPO = __DIR__ . '/apps/community';
-
 require("vendor/autoload.php");
 require("src/Main.php");
 
@@ -83,6 +81,8 @@ function run(string $action, array $argv): bool {
       break;
 
       case 'init':
+
+        define('HUBLETO_COMMUNITY_REPO', __DIR__ . '/apps/community');
 
         $packageNames = $argv[2] ?? 'core,sales';
 

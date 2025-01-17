@@ -53,6 +53,9 @@ class Installer {
     'sync' => [
       \HubletoApp\Community\CalendarSync\Loader::class => [ 'enabled' => true ],
     ],
+    'shop' => [
+      \HubletoApp\Community\Shop\Loader::class => [ 'enabled' => true ],
+    ]
   ];
 
   public function __construct(
@@ -154,6 +157,7 @@ class Installer {
     (new \HubletoApp\Community\Pipeline\Loader($this->main))->installTables();
     (new \HubletoApp\Community\Leads\Loader($this->main))->installTables();
     (new \HubletoApp\Community\Deals\Loader($this->main))->installTables();
+    (new \HubletoApp\Community\Shop\Loader($this->main))->installTables();
 
     $mProfile = new \HubletoApp\Community\Settings\Models\Profile($this->main);
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);

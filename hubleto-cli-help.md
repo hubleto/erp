@@ -1,11 +1,11 @@
 # Basic commands (php hubleto <command>)
 
-| Command | Description                                                        |
-| ------- | ------------------------------------------------------------------ |
-| help    | Prints this help                                                   |
-| init    | init empty Hubleto project with default packages and configuration |
-| install | install tables for existing Hubleto project                        |
-| app     | See command group 'app'.                                           |
+| Command       | Description                                                        |
+| ------------- | ------------------------------------------------------------------ |
+| app           | See command group 'app'.                                           |
+| factory-reset | Re-install all apps their 'factory reset' state.                   |
+| help          | Prints this help                                                   |
+| init          | Init empty Hubleto project with default packages and configuration |
 
 Examples:
   php hubleto help
@@ -16,6 +16,7 @@ Examples:
 
 | Command                             | Description                                             |
 | ----------------------------------- | ------------------------------------------------------- |
+| disable <appClass>                  | Disable app. This will not delete app's data.           |
 | list                                | List all installed apps                                 |
 | install <appClass> [forceReinstall] | Install app                                             |
 |                                     | <appClass> must be full path to the app's loader class. |

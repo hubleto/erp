@@ -19,7 +19,7 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
 
   public function isAppInstalled(string $appClass): bool
   {
-    return isset($this->main->config['enabledApps'][trim($appClass, '\\')]);
+    return isset($this->main->config['installedApps'][trim($appClass, '\\')]);
   }
 
   public function installApp(string $appClass, bool $forceInstall = false)
@@ -51,12 +51,17 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
 
     $app->installTables();
 
-    if (!in_array($appClass, $this->main->config['enabledApps'])) {
-      $this->main->config['enabledApps'][$appClass] = [];
-      $this->main->saveConfigByPath('enabledApps/' . trim($appClass, '\\'), '');
+    if (!in_array($appClass, $this->main->config['installedApps'])) {
+      $this->main->config['installedApps'][$appClass] = [];
+      $this->main->saveConfigByPath('installedApps/' . trim($appClass, '\\'), '');
     }
 
     return true;
+  }
+
+  public function disableApp(string $appClass)
+  {
+    $this->main->saveConfigByPath('installedApps/' . trim($appClass, '\\') . '/enabled', '0');
   }
 
 }

@@ -29,29 +29,29 @@ class Installer {
 
   public bool $randomize = false;
 
-  public array $enabledApps = [];
+  public array $installedApps = [];
 
   public array $packages = [
     'core' => [
-      \HubletoApp\Community\Settings\Loader::class => [],
-      \HubletoApp\Community\Dashboard\Loader::class => [],
-      \HubletoApp\Community\Upgrade\Loader::class => [],
-      \HubletoApp\Community\Calendar\Loader::class => [],
-      \HubletoApp\Community\Customers\Loader::class => [],
-      \HubletoApp\Community\Documents\Loader::class => [],
+      \HubletoApp\Community\Settings\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Dashboard\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Upgrade\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Calendar\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Customers\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Documents\Loader::class => [ 'enabled' => true ],
     ],
     'invoices' => [
-      \HubletoApp\Community\Billing\Loader::class => [],
-      \HubletoApp\Community\Invoices\Loader::class => [],
-      \HubletoApp\Community\Services\Loader::class => [],
+      \HubletoApp\Community\Billing\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Invoices\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Services\Loader::class => [ 'enabled' => true ],
     ],
     'sales' => [
-      \HubletoApp\Community\Pipeline\Loader::class => [],
-      \HubletoApp\Community\Deals\Loader::class => [],
-      \HubletoApp\Community\Leads\Loader::class => [],
+      \HubletoApp\Community\Pipeline\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Deals\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Leads\Loader::class => [ 'enabled' => true ],
     ],
     'sync' => [
-      \HubletoApp\Community\CalendarSync\Loader::class => [],
+      \HubletoApp\Community\CalendarSync\Loader::class => [ 'enabled' => true ],
     ],
   ];
 
@@ -190,9 +190,9 @@ class Installer {
     $configEnv = str_replace('{{ accountUrl }}', $this->accountRootUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
 
     $configEnv .= '' . "\n";
-    $configEnv .= '$config[\'enabledApps\'] = [' . "\n";
-    foreach ($this->enabledApps as $appClass => $appConfig) {
-      $configEnv .= '  \\' . $appClass . '::class => [],' . "\n";
+    $configEnv .= '$config[\'installedApps\'] = [' . "\n";
+    foreach ($this->installedApps as $appClass => $appConfig) {
+      $configEnv .= '  \\' . $appClass . '::class => ' . var_export($appConfig, true) . ',' . "\n";
     }
     $configEnv .= '];' . "\n";
 

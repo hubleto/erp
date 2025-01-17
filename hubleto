@@ -21,8 +21,9 @@ $cli = new \HubletoMain\Core\CliAgent($main);
 $appManager = new \HubletoMain\Core\AppManager($main);
 $appManager->setCli($cli);
 
-function run(\HubletoMain\Core\AppManager $appManager, \HubletoMain\Core\CliAgent $cli, string $action, array $config, array $argv): bool {
+function run(\HubletoMain\Core\AppManager $appManager, string $action, array $argv): bool {
   $exit = false;
+  $cli = $appManager->cli;
   $main = $cli->main;
 
   try {
@@ -107,7 +108,7 @@ function run(\HubletoMain\Core\AppManager $appManager, \HubletoMain\Core\CliAgen
 
         foreach (explode(',', $packageNames) as $packageName) {
           $cli->cyan("  Package: {$packageName}\n");
-          $installer->enabledApps = $installer->packages[trim($packageName)];
+          $installer->installedApps = $installer->packages[trim($packageName)];
         }
 
         $installer->createDatabase();
@@ -127,62 +128,63 @@ function run(\HubletoMain\Core\AppManager $appManager, \HubletoMain\Core\CliAgen
 
       break;
 
-      case 'install':
-        $cli->green("Installing enabled apps\n");
+      case 'factory-reset':
+        $cli->green("Reinstalling all apps...\n");
 
-        require_once(($config['dir'] ?? __DIR__) . "/ConfigApp.php");
-        require_once(($config['accountDir'] ?? __DIR__) . "/ConfigEnv.php");
+        require_once(($main->config['dir'] ?? __DIR__) . "/ConfigApp.php");
+        require_once(($main->config['accountDir'] ?? __DIR__) . "/ConfigEnv.php");
 
-        foreach ($config['enabledApps'] as $appClass => $appConfig) {
-          if (!$cli->isAppInstalled($appClass)) {
-            $cli->green("Installing " . $appClass . "\n");
-            try {
-              $appManager->installApp($appClass);
-            } catch (\Throwable $e) {
-              $cli->red($e->getMessage());
-              $cli->red("\n\nThe error was caused by: " . $appClass . "\n");
-              $cli->red("Verify, whether all your apps have correct dependencies or contact the developers.\n");
-              break;
-            }
+        foreach ($main->config['installedApps'] as $appClass => $appConfig) {
+          try {
+            $appManager->installApp($appClass, true);
+          } catch (\Throwable $e) {
+            $cli->red($e->getMessage() . "\n");
+            $cli->red("\n\nThe error was caused by: " . $appClass . "\n");
+            $cli->red("Verify, whether all your apps have correct dependencies or contact the developers.\n");
+            break;
           }
         }
-
-        //$app = new ($appToInstall . '\\Loader')($main);
-        //$app->installTables();
 
       break;
 
       case 'app':
         $appAction = $argv[2];
-        switch ($appAction) {
-          case 'list':
-            $enabledApps = $main->config['enabledApps'];
-            ksort($enabledApps);
+        try {
+          switch ($appAction) {
 
-            $cli->cyan("You have following apps installed:\n");
-            foreach ($enabledApps as $appClass => $appConfig) {
-              $cli->cyan("  {$appClass}\n");
-            };
-          break;
-          case 'install':
+            case 'list':
+              $installedApps = $main->config['installedApps'];
+              ksort($installedApps);
 
-            $appClass = $argv[3] ?? '';
-            $forceInstall = (bool) ($argv[4] ?? false);
+              $cli->cyan("You have following apps installed:\n");
+              foreach ($installedApps as $appClass => $appConfig) $cli->cyan("  {$appClass}: " . json_encode($appConfig) . "\n");
+            break;
 
-            if (empty($appClass)) {
-              $cli->red("What app you want to install? Usage: php hubleto app install <APP_NAME>\n");
-            }
+            case 'install':
 
-            require_once(($config['dir'] ?? __DIR__) . "/ConfigApp.php");
-            require_once(($config['accountDir'] ?? __DIR__) . "/ConfigEnv.php");
+              $appClass = $argv[3] ?? '';
+              $forceInstall = (bool) ($argv[4] ?? false);
 
-            try {
+              if (empty($appClass)) {
+                $cli->red("What app you want to install? Usage: php hubleto app install <APP_NAME>\n");
+              }
+
+              require_once(($main->config['dir'] ?? __DIR__) . "/ConfigApp.php");
+              require_once(($main->config['accountDir'] ?? __DIR__) . "/ConfigEnv.php");
+
               $appManager->installApp($appClass, $forceInstall);
               $cli->green("{$appClass} installed successfully.\n");
-            } catch (\Throwable $e) {
-              $cli->red($e->getMessage());
-            }
-          break;
+            break;
+
+            case 'disable':
+
+              $appClass = $argv[3] ?? '';
+              $appManager->disableApp($appClass);
+              $cli->green("{$appClass} disabled successfully.\n");
+            break;
+          }
+        } catch (\Throwable $e) {
+          $cli->red($e->getMessage() . "\n");
         }
       break;
 
@@ -208,21 +210,11 @@ function run(\HubletoMain\Core\AppManager $appManager, \HubletoMain\Core\CliAgen
 $cli->green("Hubleto " . \HubletoMain::RELEASE . " CLI agent.\n");
 $cli->green("\n");
 
-// if ($argc == 1) {
-//   $cli->white("\n");
-//   $cli->cyan("HINT: If you want to run any action from command line directly, run this script with arguments.\n");
-//   $cli->cyan("Example: php hubleto init.\n");
-//   $cli->cyan("\n");
-// }
-
 $action = (string) ($argv[1] ?? '');
 
 if (!empty($action)) {
-  run($appManager, $cli, $action, $config, $argv);
+  run($appManager, $action, $argv);
 } else {
   $cli->green("Usage: php hubleto <command>\n");
   $cli->green("Example: php hubleto help\n");
 }
-
-$cli->white("\n");
-// $cli->white("Exiting.\n");

@@ -9,21 +9,24 @@ require_once(__DIR__ . "/../ConfigApp.php");
 spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);
   if (str_starts_with($class, 'HubletoApp/Community/')) {
-    require_once(HUBLETO_COMMUNITY_REPO . '/' . str_replace('HubletoApp/Community/', '', $class) . '.php');
+    @include(HUBLETO_COMMUNITY_REPO . '/' . str_replace('HubletoApp/Community/', '', $class) . '.php');
   } else if (str_starts_with($class, 'HubletoApp/External/')) {
-    require_once(HUBLETO_EXTERNAL_REPO . '/' . str_replace('HubletoApp/External/', '', $class) . '.php');
+    @include(HUBLETO_EXTERNAL_REPO . '/' . str_replace('HubletoApp/External/', '', $class) . '.php');
   } else if (str_starts_with($class, 'HubletoApp/Enterprise/')) {
-    require_once(HUBLETO_ENTERPRISE_REPO . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
+    @include(HUBLETO_ENTERPRISE_REPO . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
   } else if (str_starts_with($class, 'HubletoMain/Core/')) {
-    require_once(__DIR__ . '/core/' . str_replace('HubletoMain/Core/', '', $class) . '.php');
+    @include(__DIR__ . '/core/' . str_replace('HubletoMain/Core/', '', $class) . '.php');
   } else if (str_starts_with($class, 'HubletoMain/Installer/')) {
-    require_once(__DIR__ . '/installer/' . str_replace('HubletoMain/Installer/', '', $class) . '.php');
+    @include(__DIR__ . '/installer/' . str_replace('HubletoMain/Installer/', '', $class) . '.php');
   }
 });
 
 // create own ADIOS class
 class HubletoMain extends \ADIOS\Core\Loader
 {
+
+  const RELEASE = 'v0.4';
+
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
   public array $apps = [];
@@ -63,9 +66,9 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->registerApp(\HubletoApp\Community\Settings\Loader::class);
     $this->registerApp(\HubletoApp\Community\Help\Loader::class);
 
-    foreach ($this->config['enabledApps'] ?? [] as $app) {
-      if ($app::canBeAdded($this)) {
-        $this->registerApp($app);
+    foreach ($this->config['enabledApps'] ?? [] as $appClass => $appConfig) {
+      if ($appClass::canBeAdded($this)) {
+        $this->registerApp($appClass);
       }
     }
 

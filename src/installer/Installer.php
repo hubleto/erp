@@ -33,24 +33,25 @@ class Installer {
 
   public array $packages = [
     'core' => [
-      '\HubletoApp\Community\Settings\Loader::class',
-      '\HubletoApp\Community\Dashboard\Loader::class',
-      '\HubletoApp\Community\Calendar\Loader::class',
-      '\HubletoApp\Community\Customers\Loader::class',
-      '\HubletoApp\Community\Documents\Loader::class',
+      \HubletoApp\Community\Settings\Loader::class => [],
+      \HubletoApp\Community\Dashboard\Loader::class => [],
+      \HubletoApp\Community\Upgrade\Loader::class => [],
+      \HubletoApp\Community\Calendar\Loader::class => [],
+      \HubletoApp\Community\Customers\Loader::class => [],
+      \HubletoApp\Community\Documents\Loader::class => [],
     ],
     'invoices' => [
-      '\HubletoApp\Community\Billing\Loader::class',
-      '\HubletoApp\Community\Invoices\Loader::class',
-      '\HubletoApp\Community\Services\Loader::class',
+      \HubletoApp\Community\Billing\Loader::class => [],
+      \HubletoApp\Community\Invoices\Loader::class => [],
+      \HubletoApp\Community\Services\Loader::class => [],
     ],
     'sales' => [
-      '\HubletoApp\Community\Pipeline\Loader::class',
-      '\HubletoApp\Community\Deals\Loader::class',
-      '\HubletoApp\Community\Leads\Loader::class',
+      \HubletoApp\Community\Pipeline\Loader::class => [],
+      \HubletoApp\Community\Deals\Loader::class => [],
+      \HubletoApp\Community\Leads\Loader::class => [],
     ],
     'sync' => [
-      '\HubletoApp\Community\CalendarSync\Loader::class',
+      \HubletoApp\Community\CalendarSync\Loader::class => [],
     ],
   ];
 
@@ -142,6 +143,8 @@ class Installer {
   public function installTables()
   {
 
+    (new \ADIOS\Models\Config($this->main))->install();
+
     (new \HubletoApp\Community\Settings\Loader($this->main))->installTables();
     (new \HubletoApp\Community\Documents\Loader($this->main))->installTables();
     (new \HubletoApp\Community\Services\Loader($this->main))->installTables();
@@ -188,8 +191,8 @@ class Installer {
 
     $configEnv .= '' . "\n";
     $configEnv .= '$config[\'enabledApps\'] = [' . "\n";
-    foreach ($this->enabledApps as $app) {
-      $configEnv .= '  ' . $app . ',' . "\n";
+    foreach ($this->enabledApps as $appClass => $appConfig) {
+      $configEnv .= '  \\' . $appClass . '::class => [],' . "\n";
     }
     $configEnv .= '];' . "\n";
 
@@ -216,6 +219,12 @@ class Installer {
     $index = str_replace('{{ uid }}', $this->uid, $index);
     $index = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $index);
     file_put_contents($this->accountRootFolder . '/' . $this->uid . '/index.php', $index);
+
+    // hubleto cli agent
+    copy(
+      __DIR__ . '/template/hubleto',
+      $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/hubleto'
+    );
 
     // .htaccess
     copy(

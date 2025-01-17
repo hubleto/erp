@@ -1,83 +1,34 @@
 <?php
 
+if (php_sapi_name() !== 'cli') exit;
+
 global $clih;
 
 require("vendor/autoload.php");
 require("src/Main.php");
 
-const OS = 'win';
-
 $clih = fopen("php://stdin", "r");
 
-// HELPER functions
+// cli agent is used also in 'Installer/template/hubleto'
+if (!is_array($config)) $config = [];
 
-function color(string $colorName) {
-  $sequences = [
-    'win' => [
-      'red' => "\033[31m",
-      'green' => "\033[32m",
-      'yellow' => "\033[33m",
-      'blue' => "\033[34m",
-      'cyan' => "\033[36m",
-      'white' => "\033[37m",
-      'bg-default' => "\033[49m",
-      'bg-cyan' => "\033[46m",
-    ],
-  ];
 
-  if (isset($sequences[OS][$colorName])) {
-    echo $sequences[OS][$colorName];
-  }
-}
+$main = new \HubletoMain($config, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
+$main->initDatabaseConnections();
+$main->loadConfigFromDB();
 
-function read(string $message, string $default = ''): string {
-  global $clih;
+$cli = new \HubletoMain\Core\CliAgent($main);
+$appManager = new \HubletoMain\Core\AppManager($main);
+$appManager->setCli($cli);
 
-  yellow($message . (empty($default) ? '' : ' (press Enter for \'' . $default . '\')') . ': ');
-
-  $input = trim(fgets($clih));
-  if (empty($input)) $input = $default;
-
-  white('  -> ' . $input . "\n");
-
-  return $input;
-}
-
-function choose(array $options, string $message, string $default = ''): string {
-  global $clih;
-
-  yellow($message . "\n");
-  foreach ($options as $key => $option) {
-    white(' ' . $key . ' = ' . $option . "\n");
-  }
-  yellow('Select one of the options, provide a value' . (empty($default) ? '' : ' or press Enter for \'' . $default . '\'') . ': ');
-
-  $input = trim(fgets($clih));
-  if (is_numeric($input)) $input = $options[$input] ?? '';
-  if (empty($input)) $input = $default;
-
-  white('  -> ' . $input . "\n");
-
-  return $input;
-}
-
-function yellow(string $message) { color('yellow'); echo $message; }
-function green(string $message) { color('green'); echo $message; }
-function red(string $message) { color('red'); echo $message; }
-function blue(string $message) { color('blue'); echo $message; }
-function cyan(string $message) { color('cyan'); echo $message; }
-function white(string $message) { color('white'); echo $message; }
-
-function run(string $action, array $argv): bool {
+function run(\HubletoMain\Core\AppManager $appManager, \HubletoMain\Core\CliAgent $cli, string $action, array $config, array $argv): bool {
   $exit = false;
+  $main = $cli->main;
 
   try {
     switch ($action) {
       case 'help':
-        white("  'help' = this help\n");
-        white("  'init' = init empty Hubleto project with community apps\n");
-        white("  'install' = install SQL tables for existing Hubleto project\n");
-        white("  'exit' = exit\n");
+        $cli->cyan(file_get_contents(__DIR__ . "/hubleto-cli-help.md"));
       break;
 
       case 'init':
@@ -94,23 +45,23 @@ function run(string $action, array $argv): bool {
           $lastRewriteBase = '/' . $tmpDir . $lastRewriteBase;
         }
 
-        green(': Configuration of the environment :' . "\n\n");
-        $rewriteBase = choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
-        $accountUrl = read('ConfigEnv.accountUrl', 'http://localhost/' . trim($rewriteBase, '/'));
-        $dbHost = read('ConfigEnv.dbHost', 'localhost');
-        $dbUser = read('ConfigEnv.dbUser (user must exist)', 'root');
-        $dbPassword = read('ConfigEnv.dbPassword');
-        $dbName = read('ConfigEnv.dbName (database will be created)', 'my_hubleto');
-        $dbCodepage = read('ConfigEnv.dbCodepage', 'utf8mb4');
+        $cli->green(': Configuration of the environment :' . "\n\n");
+        $rewriteBase = $cli->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
+        $accountUrl = $cli->read('ConfigEnv.accountUrl', 'http://localhost/' . trim($rewriteBase, '/'));
+        $dbHost = $cli->read('ConfigEnv.dbHost', 'localhost');
+        $dbUser = $cli->read('ConfigEnv.dbUser (user must exist)', 'root');
+        $dbPassword = $cli->read('ConfigEnv.dbPassword');
+        $dbName = $cli->read('ConfigEnv.dbName (database will be created)', 'my_hubleto');
+        $dbCodepage = $cli->read('ConfigEnv.dbCodepage', 'utf8mb4');
 
-        green("\n");
-        green(': Configuration of the admin account :' . "\n\n");
+        $cli->green("\n");
+        $cli->green(': Configuration of the admin account :' . "\n\n");
 
-        $companyName = read('Account.companyName', 'My Company');
-        $adminName = read('Account.adminName', 'John');
-        $adminFamilyName = read('Account.adminFamilyName', 'Smith');
-        $adminEmail = read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
-        $adminPassword = read('Account.adminPassword (leave empty to generate random password)');
+        $companyName = $cli->read('Account.companyName', 'My Company');
+        $adminName = $cli->read('Account.adminName', 'John');
+        $adminFamilyName = $cli->read('Account.adminFamilyName', 'Smith');
+        $adminEmail = $cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
+        $adminPassword = $cli->read('Account.adminPassword (leave empty to generate random password)');
 
         if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
@@ -128,13 +79,10 @@ function run(string $action, array $argv): bool {
           'mainRootFolder' => __DIR__,
         ];
 
-        cyan("\n");
-        cyan("Hurray. Installing your Hubleto...\n");
+        $cli->cyan("\n");
+        $cli->cyan("Hurray. Installing your Hubleto...\n");
 
         // install
-        $main = new \HubletoMain($mainConfig, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
-        $main->initDatabaseConnections();
-
         $installer = new \HubletoMain\Installer\Installer(
           $main,
           'local-env',
@@ -158,7 +106,7 @@ function run(string $action, array $argv): bool {
         );
 
         foreach (explode(',', $packageNames) as $packageName) {
-          cyan("  Package: {$packageName}\n");
+          $cli->cyan("  Package: {$packageName}\n");
           $installer->enabledApps = $installer->packages[trim($packageName)];
         }
 
@@ -167,39 +115,33 @@ function run(string $action, array $argv): bool {
         $installer->installDefaultPermissions();
         $installer->createFoldersAndFiles();
 
-        green("\n");
-        green("All done! You're a fantastic CRM developer. Now you can:\n");
-        green("  -> Open {$accountUrl} and sign in with '{$adminEmail}' and '{$adminPassword}'.\n");
-        green("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
-        green("     See https://developer.hubleto.com/nginx for more details.\n");
-        green("  -> Create your app in ./src/apps.\n");
-        green("     See https://developer.hubleto.com/start-developing-own-module for tips how to start.\n");
-        green("     See https://developer.hubleto.com/publish-module for instructions how to publish.\n");
-        green("  -> Check the developer's guide at https://developer.hubleto.com for more tips & tricks.\n");
+        $cli->green("\n");
+        $cli->green("All done! You're a fantastic CRM developer. Now you can:\n");
+        $cli->green("  -> Open {$accountUrl} and sign in with '{$adminEmail}' and '{$adminPassword}'.\n");
+        $cli->green("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
+        $cli->green("     See https://developer.hubleto.com/nginx for more details.\n");
+        $cli->green("  -> Create your app in ./src/apps.\n");
+        $cli->green("     See https://developer.hubleto.com/start-developing-own-module for tips how to start.\n");
+        $cli->green("     See https://developer.hubleto.com/publish-module for instructions how to publish.\n");
+        $cli->green("  -> Check the developer's guide at https://developer.hubleto.com for more tips & tricks.\n");
 
       break;
 
       case 'install':
-        green("Installing enabled apps\n");
+        $cli->green("Installing enabled apps\n");
 
-        require_once(__DIR__ . "/ConfigApp.php");
-        require_once(__DIR__ . "/ConfigEnv.php");
+        require_once(($config['dir'] ?? __DIR__) . "/ConfigApp.php");
+        require_once(($config['accountDir'] ?? __DIR__) . "/ConfigEnv.php");
 
-        $main = new \HubletoMain($config, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
-        $main->initDatabaseConnections();
-
-        $alreadyInstalled = [];
-
-        foreach ($config['enabledApps'] as $app) {
-          if (!in_array($app, $alreadyInstalled)) {
-            green("Installing " . $app . "\n");
+        foreach ($config['enabledApps'] as $appClass => $appConfig) {
+          if (!$cli->isAppInstalled($appClass)) {
+            $cli->green("Installing " . $appClass . "\n");
             try {
-              \HubletoMain\Core\CliAgent::installApp($app, $main, $alreadyInstalled);
-            } catch (\mysqli_sql_exception $e) {
-              red('There was an error installing an app.' . "\n");
-              red($e->getMessage());
-              red("\n\nThe error was caused by: " . $app . "\n");
-              red("Verify, whether all your apps have correct dependencies or contact the developers.\n");
+              $appManager->installApp($appClass);
+            } catch (\Throwable $e) {
+              $cli->red($e->getMessage());
+              $cli->red("\n\nThe error was caused by: " . $appClass . "\n");
+              $cli->red("Verify, whether all your apps have correct dependencies or contact the developers.\n");
               break;
             }
           }
@@ -210,31 +152,38 @@ function run(string $action, array $argv): bool {
 
       break;
 
-      case 'install-app':
-        $appToInstall = $argv[2];
+      case 'app':
+        $appAction = $argv[2];
+        switch ($appAction) {
+          case 'list':
+            $enabledApps = $main->config['enabledApps'];
+            ksort($enabledApps);
 
-        if (empty($appToInstall)) {
-          red("What app you want to install? Usage: php hubleto install-app APP_NAME\n");
+            $cli->cyan("You have following apps installed:\n");
+            foreach ($enabledApps as $appClass => $appConfig) {
+              $cli->cyan("  {$appClass}\n");
+            };
+          break;
+          case 'install':
+
+            $appClass = $argv[3] ?? '';
+            $forceInstall = (bool) ($argv[4] ?? false);
+
+            if (empty($appClass)) {
+              $cli->red("What app you want to install? Usage: php hubleto app install <APP_NAME>\n");
+            }
+
+            require_once(($config['dir'] ?? __DIR__) . "/ConfigApp.php");
+            require_once(($config['accountDir'] ?? __DIR__) . "/ConfigEnv.php");
+
+            try {
+              $appManager->installApp($appClass, $forceInstall);
+              $cli->green("{$appClass} installed successfully.\n");
+            } catch (\Throwable $e) {
+              $cli->red($e->getMessage());
+            }
+          break;
         }
-
-        green('Installing ' . $appToInstall . "\n");
-
-        require_once(__DIR__ . "/ConfigApp.php");
-        require_once(__DIR__ . "/ConfigEnv.php");
-
-        $main = new \HubletoMain($config, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
-        $main->initDatabaseConnections();
-
-        $app = new ($appToInstall . '\\Loader')($main);
-        try {
-          \HubletoMain\Core\CliAgent::installApp($app, $main);
-          green("App installed successfully.\n");
-        } catch (\mysqli_sql_exception $e) {
-          red('There was an error installing an app.' . "\n");
-          red($e->getMessage());
-          red("\n\nVerify, whether all your apps have correct dependencies or contact the developers.\n");
-        }
-
       break;
 
       // case exit
@@ -244,11 +193,11 @@ function run(string $action, array $argv): bool {
 
       // default
       default:
-        red("Don't know what to do.\n");
+        $cli->red("Don't know what to do.\n");
       break;
     }
   } catch (\Exception $e) {
-    red("!!! ERROR. {$e->getMessage()}\n");
+    $cli->red("!!! ERROR. {$e->getMessage()}\n");
   }
 
   return $exit;
@@ -256,34 +205,24 @@ function run(string $action, array $argv): bool {
 
 // MAIN code
 
-white("Hubleto CLI agent.\n");
-white("\n");
-cyan("HINT: If you want to run any action from command line directly, run this script with arguments.\n");
-cyan("Example: php hubleto init.\n");
-cyan("\n");
+$cli->green("Hubleto " . \HubletoMain::RELEASE . " CLI agent.\n");
+$cli->green("\n");
+
+// if ($argc == 1) {
+//   $cli->white("\n");
+//   $cli->cyan("HINT: If you want to run any action from command line directly, run this script with arguments.\n");
+//   $cli->cyan("Example: php hubleto init.\n");
+//   $cli->cyan("\n");
+// }
 
 $action = (string) ($argv[1] ?? '');
 
 if (!empty($action)) {
-  run($action, $argv);
+  run($appManager, $cli, $action, $config, $argv);
 } else {
-
-  $exit = false;
-
-  while (!$exit) {
-    yellow("What do you want to do? ('help' or 'h' for help)");
-    $input = trim(read());
-
-    if (strpos($input, ' ') !== false) {
-      list($action, $argument) = explode(' ', $input);
-      $exit = run(trim($action), [trim($argument)]);
-    } else {
-      $exit = run($input, $argv);
-    }
-
-    
-  }
+  $cli->green("Usage: php hubleto <command>\n");
+  $cli->green("Example: php hubleto help\n");
 }
 
-white("\n");
-white("Exiting.\n");
+$cli->white("\n");
+// $cli->white("Exiting.\n");

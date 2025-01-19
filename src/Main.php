@@ -8,15 +8,34 @@ require_once(__DIR__ . "/../ConfigApp.php");
 // autoloader pre HubletoMain
 spl_autoload_register(function($class) {
   $class = str_replace('\\', '/', $class);
+
+  // cli
+  if (str_starts_with($class, 'HubletoMain/Cli/')) {
+    @include(__DIR__ . '/cli/' . str_replace('HubletoMain/Cli/', '', $class) . '.php');
+  }
+
+  // community
   if (str_starts_with($class, 'HubletoApp/Community/')) {
     @include(HUBLETO_COMMUNITY_REPO . '/' . str_replace('HubletoApp/Community/', '', $class) . '.php');
-  } else if (str_starts_with($class, 'HubletoApp/External/')) {
-    @include(HUBLETO_EXTERNAL_REPO . '/' . str_replace('HubletoApp/External/', '', $class) . '.php');
-  } else if (str_starts_with($class, 'HubletoApp/Enterprise/')) {
-    @include(HUBLETO_ENTERPRISE_REPO . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
-  } else if (str_starts_with($class, 'HubletoMain/Core/')) {
+  }
+
+  // core
+  if (str_starts_with($class, 'HubletoMain/Core/')) {
     @include(__DIR__ . '/core/' . str_replace('HubletoMain/Core/', '', $class) . '.php');
-  } else if (str_starts_with($class, 'HubletoMain/Installer/')) {
+  }
+
+  // enterprise
+  if (str_starts_with($class, 'HubletoApp/Enterprise/')) {
+    @include(HUBLETO_ENTERPRISE_REPO . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
+  }
+
+  // external
+  if (str_starts_with($class, 'HubletoApp/External/')) {
+    @include(HUBLETO_EXTERNAL_REPO . '/' . str_replace('HubletoApp/External/', '', $class) . '.php');
+  }
+
+  // installer
+  if (str_starts_with($class, 'HubletoMain/Installer/')) {
     @include(__DIR__ . '/installer/' . str_replace('HubletoMain/Installer/', '', $class) . '.php');
   }
 });

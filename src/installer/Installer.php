@@ -166,7 +166,7 @@ class Installer {
       'login' => $this->adminEmail,
       'password' => $mUser->hashPassword($this->adminPassword),
       'email' => $this->adminEmail,
-      'is_active' => 1,
+      'is_active' => true,
       'id_active_profile' => $idProfile,
     ])->id;
 

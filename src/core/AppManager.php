@@ -24,7 +24,7 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
 
   public function installApp(string $appClass, bool $forceInstall = false)
   {
-    if ($this->cli) $this->cli->green("Installing {$appClass}.\n");
+    if ($this->cli) $this->cli->cyan("Installing {$appClass}.\n");
 
     if ($this->isAppInstalled($appClass) && !$forceInstall) {
       throw new \Exception("{$appClass} already installed. Set forceInstall to true if you want to reinstall.");
@@ -44,7 +44,7 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
     foreach ($dependencies as $dependency) {
       $dependencyAppClass = $dependency . '\\Loader';
       if (!$this->isAppInstalled($dependencyAppClass)) {
-        if ($this->cli) $this->cli->green("Installing dependency {$dependency}.\n");
+        if ($this->cli) $this->cli->cyan("Installing dependency {$dependency}.\n");
         $this->installApp(new $dependencyAppClass($this->main), $forceInstall);
       }
     }

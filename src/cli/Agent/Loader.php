@@ -1,14 +1,17 @@
 <?php
 
-namespace HubletoMain\Core;
+namespace HubletoMain\Cli\Agent;
 
-class CliAgent {
+class Loader {
 
   public \HubletoMain $main;
+
+  public $clih;
 
   public function __construct(\HubletoMain $main)
   {
     $this->main = $main;
+    $this->clih = fopen("php://stdin", "r");
   }
 
   public function color(string $colorName) {
@@ -29,11 +32,9 @@ class CliAgent {
   }
 
   public function read(string $message, string $default = ''): string {
-    global $clih;
-
     $this->yellow($message . (empty($default) ? '' : ' (press Enter for \'' . $default . '\')') . ': ');
 
-    $input = trim(fgets($clih));
+    $input = trim(fgets($this->clih));
     if (empty($input)) $input = $default;
 
     $this->white('  -> ' . $input . "\n");
@@ -42,15 +43,13 @@ class CliAgent {
   }
 
   public function choose(array $options, string $message, string $default = ''): string {
-    global $clih;
-
     $this->yellow($message . "\n");
     foreach ($options as $key => $option) {
       $this->white(' ' . $key . ' = ' . $option . "\n");
     }
     $this->yellow('Select one of the options, provide a value' . (empty($default) ? '' : ' or press Enter for \'' . $default . '\'') . ': ');
 
-    $input = trim(fgets($clih));
+    $input = trim(fgets($this->clih));
     if (is_numeric($input)) $input = $options[$input] ?? '';
     if (empty($input)) $input = $default;
 

@@ -28,7 +28,7 @@ class Installer {
 
   public bool $randomize = false;
 
-  public array $installedApps = [];
+  public array $apps = [];
 
   public array $packages = [
     'core' => [
@@ -187,8 +187,8 @@ class Installer {
     $configEnv = str_replace('{{ accountUrl }}', $this->accountUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
 
     $configEnv .= '' . "\n";
-    $configEnv .= '$config[\'installedApps\'] = [' . "\n";
-    foreach ($this->installedApps as $appClass => $appConfig) {
+    $configEnv .= '$config[\'apps\'] = [' . "\n";
+    foreach ($this->apps as $appClass => $appConfig) {
       $configEnv .= '  \\' . $appClass . '::class => ' . var_export($appConfig, true) . ',' . "\n";
     }
     $configEnv .= '];' . "\n";

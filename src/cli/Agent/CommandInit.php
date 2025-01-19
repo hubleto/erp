@@ -125,11 +125,11 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       false, // randomize (deprecated)
     );
 
-    $installer->installedApps = [];
+    $installer->apps = [];
     foreach (explode(',', $packagesToInstall) as $package) {
       $this->cli->cyan("  Package: {$package}\n");
-      $installer->installedApps = array_merge(
-        $installer->installedApps,
+      $installer->apps = array_merge(
+        $installer->apps,
         $installer->packages[trim($package)]
       );
     }

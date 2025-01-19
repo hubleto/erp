@@ -9,10 +9,10 @@ class ShowInstalled extends \HubletoMain\Cli\Agent\Command
     $cli = $this->cli;
     $main = $this->main;
 
-    $installedApps = $main->config['installedApps'];
-    ksort($installedApps);
+    $apps = $main->config['apps'];
+    ksort($apps);
 
     $cli->cyan("You have following apps installed:\n");
-    foreach ($installedApps as $appClass => $appConfig) $cli->cyan("  {$appClass}: " . json_encode($appConfig) . "\n");
+    foreach ($apps as $appClass => $appConfig) $cli->cyan("  {$appClass}: " . json_encode($appConfig) . "\n");
   }
 }

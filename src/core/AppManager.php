@@ -4,7 +4,7 @@ namespace HubletoMain\Core;
 
 class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
   public \HubletoMain $main;
-  public \HubletoMain\Core\CliAgent|null $cli;
+  public \HubletoMain\Cli\Agent\Loader|null $cli;
 
   public function __construct(\HubletoMain $main)
   {
@@ -12,18 +12,29 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
     $this->cli = null;
   }
 
-  public function setCli(\HubletoMain\Core\CliAgent $cli)
+  public function setCli(\HubletoMain\Cli\Agent\Loader $cli)
   {
     $this->cli = $cli;
   }
 
+  public function getAppNameForConfig(string $appClass): string
+  {
+    return str_replace('\\', '-', trim($appClass, '\\'));
+  }
+
+  public function getAppConfig(string $appClass): array
+  {
+    return $this->main->config['apps'][$this->getAppNameForConfig($appClass)] ?? [];
+  }
+
   public function isAppInstalled(string $appClass): bool
   {
-    return isset($this->main->config['installedApps'][trim($appClass, '\\')]);
+    return isset($this->main->config['apps'][$this->getAppNameForConfig($appClass)]);
   }
 
   public function installApp(string $appClass, bool $forceInstall = false)
   {
+
     if ($this->cli) $this->cli->cyan("Installing {$appClass}.\n");
 
     if ($this->isAppInstalled($appClass) && !$forceInstall) {
@@ -45,15 +56,15 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
       $dependencyAppClass = $dependency . '\\Loader';
       if (!$this->isAppInstalled($dependencyAppClass)) {
         if ($this->cli) $this->cli->cyan("Installing dependency {$dependency}.\n");
-        $this->installApp(new $dependencyAppClass($this->main), $forceInstall);
+        $this->installApp($dependencyAppClass, $forceInstall);
       }
     }
 
     $app->installTables();
 
-    if (!in_array($appClass, $this->main->config['installedApps'])) {
-      $this->main->config['installedApps'][$appClass] = [];
-      $this->main->saveConfigByPath('installedApps/' . trim($appClass, '\\'), '');
+    if (!in_array($appClass, $this->main->config['apps'])) {
+      $this->main->config['apps'][$this->getAppNameForConfig($appClass)] = [];
+      $this->main->saveConfigByPath('apps/' . $this->getAppNameForConfig($appClass), date('Y-m-d H:i:s'));
     }
 
     return true;
@@ -61,7 +72,7 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
 
   public function disableApp(string $appClass)
   {
-    $this->main->saveConfigByPath('installedApps/' . trim($appClass, '\\') . '/enabled', '0');
+    $this->main->saveConfigByPath('apps/' . $this->getAppNameForConfig($appClass) . '/enabled', '0');
   }
 
 }

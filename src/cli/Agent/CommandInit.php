@@ -4,6 +4,7 @@ namespace HubletoMain\Cli\Agent;
 
 class CommandInit extends \HubletoMain\Cli\Agent\Command
 {
+  public array $initConfig = [];
   public function run()
   {
     // define('HUBLETO_COMMUNITY_REPO', __DIR__ . '/../../apps/community');
@@ -25,29 +26,30 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $adminPassword = null;
     $packagesToInstall = null;
 
-
     $configFile = $this->arguments[2] ?? '';
 
     if (!empty($configFile) && is_file($configFile)) {
       $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($configFile)) ?? [];
-
-      if (isset($config['rewriteBase'])) $rewriteBase = $config['rewriteBase'];
-      if (isset($config['accountFolder'])) $accountFolder = $config['accountFolder'];
-      if (isset($config['accountUrl'])) $accountUrl = $config['accountUrl'];
-      if (isset($config['mainFolder'])) $mainFolder = $config['mainFolder'];
-      if (isset($config['mainUrl'])) $mainUrl = $config['mainUrl'];
-      if (isset($config['dbHost'])) $dbHost = $config['dbHost'];
-      if (isset($config['dbUser'])) $dbUser = $config['dbUser'];
-      if (isset($config['dbPassword'])) $dbPassword = $config['dbPassword'];
-      if (isset($config['dbName'])) $dbName = $config['dbName'];
-      if (isset($config['dbCodepage'])) $dbCodepage = $config['dbCodepage'];
-      if (isset($config['companyName'])) $companyName = $config['companyName'];
-      if (isset($config['adminName'])) $adminName = $config['adminName'];
-      if (isset($config['adminFamilyName'])) $adminFamilyName = $config['adminFamilyName'];
-      if (isset($config['adminEmail'])) $adminEmail = $config['adminEmail'];
-      if (isset($config['adminPassword'])) $adminPassword = $config['adminPassword'];
-      if (isset($config['packagesToInstall'])) $packagesToInstall = $config['packagesToInstall'];
+    } else {
+      $config = $this->initConfig;
     }
+
+    if (isset($config['rewriteBase'])) $rewriteBase = $config['rewriteBase'];
+    if (isset($config['accountFolder'])) $accountFolder = $config['accountFolder'];
+    if (isset($config['accountUrl'])) $accountUrl = $config['accountUrl'];
+    if (isset($config['mainFolder'])) $mainFolder = $config['mainFolder'];
+    if (isset($config['mainUrl'])) $mainUrl = $config['mainUrl'];
+    if (isset($config['dbHost'])) $dbHost = $config['dbHost'];
+    if (isset($config['dbUser'])) $dbUser = $config['dbUser'];
+    if (isset($config['dbPassword'])) $dbPassword = $config['dbPassword'];
+    if (isset($config['dbName'])) $dbName = $config['dbName'];
+    if (isset($config['dbCodepage'])) $dbCodepage = $config['dbCodepage'];
+    if (isset($config['companyName'])) $companyName = $config['companyName'];
+    if (isset($config['adminName'])) $adminName = $config['adminName'];
+    if (isset($config['adminFamilyName'])) $adminFamilyName = $config['adminFamilyName'];
+    if (isset($config['adminEmail'])) $adminEmail = $config['adminEmail'];
+    if (isset($config['adminPassword'])) $adminPassword = $config['adminPassword'];
+    if (isset($config['packagesToInstall'])) $packagesToInstall = $config['packagesToInstall'];
 
     $rewriteBases = [];
     $lastRewriteBase = '';

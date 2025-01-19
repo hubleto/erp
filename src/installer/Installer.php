@@ -219,9 +219,9 @@ class Installer {
     file_put_contents($this->accountFolder . '/' . $this->uid . '/index.php', $index);
 
     // hubleto cli agent
-    // $hubleto = file_get_contents(__DIR__ . '/template/hubleto');
-    // $hubleto = str_replace('{{ mainFolder }}', $this->mainFolder, $hubleto);
-    // file_put_contents($this->accountFolder . '/' . $this->uid . '/hubleto', $hubleto);
+    $hubleto = file_get_contents(__DIR__ . '/template/hubleto');
+    $hubleto = str_replace('{{ mainFolder }}', $this->mainFolder, $hubleto);
+    file_put_contents($this->accountFolder . '/' . $this->uid . '/hubleto', $hubleto);
 
     // .htaccess
     copy(

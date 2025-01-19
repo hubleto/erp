@@ -60,9 +60,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
 
     if ($rewriteBase === null) $rewriteBase = $this->cli->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
-    if ($accountFolder === null) $accountFolder = realpath(__DIR__ . '/../..');
+    if ($accountFolder === null) $accountFolder = realpath(__DIR__ . '/../../..');
     if ($accountUrl === null) $accountUrl = $this->cli->read('ConfigEnv.accountUrl', 'http://localhost/' . trim($rewriteBase, '/'));
-    if ($mainFolder === null) $mainFolder = realpath(__DIR__ . '/../..');
+    if ($mainFolder === null) $mainFolder = realpath(__DIR__ . '/../../..');
     if ($mainUrl === null) $mainUrl = $accountUrl;
     if ($dbHost === null) $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
     if ($dbUser === null) $dbUser = $this->cli->read('ConfigEnv.dbUser (user must exist)', 'root');

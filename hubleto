@@ -32,7 +32,7 @@ if (!empty($action)) {
       break;
       case 'app':
         switch ($argv[2]) {
-          case 'show': $command = new \HubletoMain\Cli\Agent\App\Show($cli, $argv); break;
+          case 'show-installed': $command = new \HubletoMain\Cli\Agent\App\ShowInstalled($cli, $argv); break;
           case 'install': $command = new \HubletoMain\Cli\Agent\App\Install($cli, $argv); break;
           case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($cli, $argv); break;
           case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($cli, $argv); break;
@@ -56,7 +56,8 @@ if (!empty($action)) {
       $command->run();
     }
   } catch (\Throwable $e) {
-    $cli->red("!!! ERROR. {$e->getMessage()}\n");
+    $cli->red("{$e->getMessage()}\n");
+    $cli->red($e->getTraceAsString()."\n");
   }
 } else {
   $cli->green("Usage: php hubleto <command>\n");

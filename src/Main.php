@@ -16,7 +16,8 @@ spl_autoload_register(function($class) {
 
   // community
   if (str_starts_with($class, 'HubletoApp/Community/')) {
-    @include(HUBLETO_COMMUNITY_REPO . '/' . str_replace('HubletoApp/Community/', '', $class) . '.php');
+    $dir = defined('HUBLETO_COMMUNITY_REPO') ? HUBLETO_COMMUNITY_REPO : realpath(__DIR__ . '/../apps/community');
+    @include($dir . '/' . str_replace('HubletoApp/Community/', '', $class) . '.php');
   }
 
   // core
@@ -26,11 +27,13 @@ spl_autoload_register(function($class) {
 
   // enterprise
   if (str_starts_with($class, 'HubletoApp/Enterprise/')) {
+    $dir = defined('HUBLETO_ENTERPRISE_REPO') ? HUBLETO_ENTERPRISE_REPO : realpath(__DIR__ . '/../apps/enterprise');
     @include(HUBLETO_ENTERPRISE_REPO . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
   }
 
   // external
   if (str_starts_with($class, 'HubletoApp/External/')) {
+    $dir = defined('HUBLETO_EXTERNAL_REPO') ? HUBLETO_EXTERNAL_REPO : realpath(__DIR__ . '/../apps/external');
     @include(HUBLETO_EXTERNAL_REPO . '/' . str_replace('HubletoApp/External/', '', $class) . '.php');
   }
 

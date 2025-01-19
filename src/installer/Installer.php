@@ -18,7 +18,6 @@ class Installer {
   public string $accountRootUrl = '';
   public string $mainRootFolder = '';
   public string $mainRootUrl = '';
-  public string $extRootFolder = '';
 
   public string $env = '';
   public string $uid = '';
@@ -69,7 +68,6 @@ class Installer {
     string $accountRootUrl,
     string $mainRootFolder,
     string $mainRootUrl,
-    string $extRootFolder,
     string $dbHost,
     string $dbName,
     string $dbUser,
@@ -90,7 +88,6 @@ class Installer {
     $this->accountRootUrl = $accountRootUrl;
     $this->mainRootFolder = $mainRootFolder;
     $this->mainRootUrl = $mainRootUrl;
-    $this->extRootFolder = $extRootFolder;
 
     $this->dbHost = $dbHost;
     $this->dbName = $dbName;

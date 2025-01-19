@@ -2,8 +2,10 @@
 
 if (php_sapi_name() !== 'cli') exit;
 
-require("vendor/autoload.php");
-require("src/Main.php");
+require_once("vendor/autoload.php");
+require_once("src/Main.php");
+
+if (is_file(__DIR__ . '/ConfigEnv.php')) require_once(__DIR__ . '/ConfigEnv.php');
 
 // cli agent is used also in 'Installer/template/hubleto'
 if (!is_array($config)) $config = [];

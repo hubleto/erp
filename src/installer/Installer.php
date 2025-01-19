@@ -13,11 +13,11 @@ class Installer {
   public string $adminEmail = '';
   public string $adminPassword = '';
   public string $companyName = '';
-  public string $accountRootRewriteBase = '';
-  public string $accountRootFolder = '';
-  public string $accountRootUrl = '';
-  public string $mainRootFolder = '';
-  public string $mainRootUrl = '';
+  public string $accountRewriteBase = '';
+  public string $accountFolder = '';
+  public string $accountUrl = '';
+  public string $mainFolder = '';
+  public string $mainUrl = '';
 
   public string $env = '';
   public string $uid = '';
@@ -63,11 +63,11 @@ class Installer {
     string $adminFamilyName,
     string $adminEmail,
     string $adminPassword,
-    string $accountRootRewriteBase,
-    string $accountRootFolder,
-    string $accountRootUrl,
-    string $mainRootFolder,
-    string $mainRootUrl,
+    string $accountRewriteBase,
+    string $accountFolder,
+    string $accountUrl,
+    string $mainFolder,
+    string $mainUrl,
     string $dbHost,
     string $dbName,
     string $dbUser,
@@ -83,11 +83,11 @@ class Installer {
     $this->adminFamilyName = $adminFamilyName;
     $this->adminEmail = $adminEmail;
     $this->adminPassword = $adminPassword;
-    $this->accountRootRewriteBase = $accountRootRewriteBase;
-    $this->accountRootFolder = $accountRootFolder;
-    $this->accountRootUrl = $accountRootUrl;
-    $this->mainRootFolder = $mainRootFolder;
-    $this->mainRootUrl = $mainRootUrl;
+    $this->accountRewriteBase = $accountRewriteBase;
+    $this->accountFolder = $accountFolder;
+    $this->accountUrl = $accountUrl;
+    $this->mainFolder = $mainFolder;
+    $this->mainUrl = $mainUrl;
 
     $this->dbHost = $dbHost;
     $this->dbName = $dbName;
@@ -109,8 +109,8 @@ class Installer {
     }
 
     if (
-      is_file($this->accountRootFolder . '/' . $this->uid)
-      || is_dir($this->accountRootFolder . '/' . $this->uid)
+      is_file($this->accountFolder . '/' . $this->uid)
+      || is_dir($this->accountFolder . '/' . $this->uid)
     ) {
       throw new \HubletoMain\Exceptions\AccountAlreadyExists('Account folder already exists');
     }
@@ -177,14 +177,14 @@ class Installer {
   public function getConfigEnvContent(): string
   {
     $configEnv = file_get_contents(__DIR__ . '/template/ConfigEnv.tpl');
-    $configEnv = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $configEnv);
-    $configEnv = str_replace('{{ mainRootUrl }}', $this->mainRootUrl, $configEnv);
+    $configEnv = str_replace('{{ mainFolder }}', $this->mainFolder, $configEnv);
+    $configEnv = str_replace('{{ mainUrl }}', $this->mainUrl, $configEnv);
     $configEnv = str_replace('{{ dbHost }}', $this->main->config['db_host'], $configEnv);
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
     $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);
     $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);
-    $configEnv = str_replace('{{ rewriteBase }}', $this->accountRootRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configEnv);
-    $configEnv = str_replace('{{ accountUrl }}', $this->accountRootUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
+    $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configEnv);
+    $configEnv = str_replace('{{ accountUrl }}', $this->accountUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
 
     $configEnv .= '' . "\n";
     $configEnv .= '$config[\'installedApps\'] = [' . "\n";
@@ -203,30 +203,30 @@ class Installer {
   {
 
     // folders
-    @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid));
-    @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/log');
-    @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/tmp');
-    @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/upload');
+    @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid));
+    @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/log');
+    @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/tmp');
+    @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/upload');
 
     // ConfigEnv.php
 
-    file_put_contents($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigEnv.php', $this->getConfigEnvContent());
+    file_put_contents($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigEnv.php', $this->getConfigEnvContent());
 
     // index.php
     $index = file_get_contents(__DIR__ . '/template/index.php');
     $index = str_replace('{{ uid }}', $this->uid, $index);
-    $index = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $index);
-    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/index.php', $index);
+    $index = str_replace('{{ mainFolder }}', $this->mainFolder, $index);
+    file_put_contents($this->accountFolder . '/' . $this->uid . '/index.php', $index);
 
     // hubleto cli agent
-    $hubleto = file_get_contents(__DIR__ . '/template/hubleto');
-    $hubleto = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $hubleto);
-    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/hubleto', $hubleto);
+    // $hubleto = file_get_contents(__DIR__ . '/template/hubleto');
+    // $hubleto = str_replace('{{ mainFolder }}', $this->mainFolder, $hubleto);
+    // file_put_contents($this->accountFolder . '/' . $this->uid . '/hubleto', $hubleto);
 
     // .htaccess
     copy(
       __DIR__ . '/template/.htaccess',
-      $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/.htaccess'
+      $this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/.htaccess'
     );
   }
 
@@ -239,10 +239,10 @@ class Installer {
 
   // public function createDevelScripts()
   // {
-  //   @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/devel');
+  //   @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/devel');
 
   //   $tplFolder = __DIR__ . '/template';
-  //   $accFolder = $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid);
+  //   $accFolder = $this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid);
 
   //   copy($tplFolder . '/devel/Reinstall.php', $accFolder . '/devel/Reinstall.php');
   // }

@@ -2,11 +2,11 @@
 
 // dirs
 
-const HUBLETO_COMMUNITY_REPO = '{{ mainRootFolder }}/apps/community';
-const HUBLETO_EXTERNAL_REPO = '{{ mainRootFolder }}/apps/external';
-const HUBLETO_ENTERPRISE_REPO = '{{ mainRootFolder }}/apps/enterprise';
+const HUBLETO_COMMUNITY_REPO = '{{ mainFolder }}/apps/community';
+const HUBLETO_EXTERNAL_REPO = '{{ mainFolder }}/apps/external';
+const HUBLETO_ENTERPRISE_REPO = '{{ mainFolder }}/apps/enterprise';
 
-$config['dir'] = '{{ mainRootFolder }}';
+$config['dir'] = '{{ mainFolder }}';
 $config['accountDir'] = __DIR__;
 $config['logDir'] = __DIR__ . '/log';
 $config['tmpDir'] = __DIR__ . '/tmp';
@@ -14,7 +14,7 @@ $config['uploadDir'] = __DIR__ . '/upload';
 
 // urls
 $config['rewriteBase'] = "{{ rewriteBase }}";
-$config['url'] = '{{ mainRootUrl }}';
+$config['url'] = '{{ mainUrl }}';
 $config['accountUrl'] = '{{ accountUrl }}';
 $config['uploadUrl'] = '{{ accountUrl }}/upload';
 

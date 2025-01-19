@@ -9,8 +9,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     // define('HUBLETO_COMMUNITY_REPO', __DIR__ . '/../../apps/community');
 
     $rewriteBase = null;
-    $accountRootFolder = null;
+    $accountFolder = null;
     $accountUrl = null;
+    $mainFolder = null;
+    $mainUrl = null;
     $dbHost = null;
     $dbUser = null;
     $dbPassword = null;
@@ -30,8 +32,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($configFile)) ?? [];
 
       if (isset($config['rewriteBase'])) $rewriteBase = $config['rewriteBase'];
-      if (isset($config['accountRootFolder'])) $accountRootFolder = $config['accountRootFolder'];
+      if (isset($config['accountFolder'])) $accountFolder = $config['accountFolder'];
       if (isset($config['accountUrl'])) $accountUrl = $config['accountUrl'];
+      if (isset($config['mainFolder'])) $mainFolder = $config['mainFolder'];
+      if (isset($config['mainUrl'])) $mainUrl = $config['mainUrl'];
       if (isset($config['dbHost'])) $dbHost = $config['dbHost'];
       if (isset($config['dbUser'])) $dbUser = $config['dbUser'];
       if (isset($config['dbPassword'])) $dbPassword = $config['dbPassword'];
@@ -54,8 +58,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
 
     if ($rewriteBase === null) $rewriteBase = $this->cli->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
-    if ($accountRootFolder === null) $accountRootFolder = realpath(__DIR__ . '/../..');
+    if ($accountFolder === null) $accountFolder = realpath(__DIR__ . '/../..');
     if ($accountUrl === null) $accountUrl = $this->cli->read('ConfigEnv.accountUrl', 'http://localhost/' . trim($rewriteBase, '/'));
+    if ($mainFolder === null) $mainFolder = realpath(__DIR__ . '/../..');
+    if ($mainUrl === null) $mainUrl = $accountUrl;
     if ($dbHost === null) $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
     if ($dbUser === null) $dbUser = $this->cli->read('ConfigEnv.dbUser (user must exist)', 'root');
     if ($dbPassword === null) $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
@@ -69,7 +75,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->cyan("Initializing with following config:\n");
     $this->cli->cyan("  rewriteBase = {$rewriteBase}\n");
-    $this->cli->cyan("  accountRootFolder = {$accountRootFolder}\n");
+    $this->cli->cyan("  accountFolder = {$accountFolder}\n");
     $this->cli->cyan("  accountUrl = {$accountUrl}\n");
     $this->cli->cyan("  dbHost = {$dbHost}\n");
     $this->cli->cyan("  dbUser = {$dbUser}\n");
@@ -92,20 +98,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (empty($packagesToInstall)) $packagesToInstall = 'core,sales';
     if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
-    // $this->mainConfig = [
-    //   'db_host' => $dbHost,
-    //   'db_user' => $dbUser,
-    //   'db_password' => $dbPassword,
-    //   'dir' => __DIR__,
-    //   'logDir' => __DIR__ . '/log',
-
-    //   'accountRootRewriteBase' => $rewriteBase,
-    //   'accountRootFolder' => __DIR__,
-    //   'accountRootUrl' => $accountUrl,
-    //   'mainRootUrl' => $accountUrl, // main and account are the same folders in single-tenant installation
-    //   'mainRootFolder' => __DIR__,
-    // ];
-
     $this->cli->cyan("\n");
     $this->cli->cyan("Hurray. Installing your Hubleto...\n");
 
@@ -120,10 +112,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $adminEmail,
       $adminPassword,
       $rewriteBase,
-      $accountRootFolder,
+      $accountFolder,
       $accountUrl,
-      realpath(__DIR__ . '/../..'), // mainRootFolder
-      $accountUrl, // mainRootUrl
+      realpath(__DIR__ . '/../../..'), // mainFolder
+      $mainUrl, // mainUrl
       $dbHost,
       $dbName,
       $dbUser,

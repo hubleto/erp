@@ -10,14 +10,14 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE ^ E_WARNING);
 define('_ADIOS_ID', 'HubletoMain-{{ uid }}');
 
 // load configs
-require_once("{{ mainRootFolder }}/ConfigApp.php");
+require_once("{{ mainFolder }}/ConfigApp.php");
 require_once(__DIR__ . "/ConfigEnv.php");
 
 // load autoloaders
-require("{{ mainRootFolder }}/vendor/autoload.php");
+require("{{ mainFolder }}/vendor/autoload.php");
 
 // load entry class
-require("{{ mainRootFolder }}/src/Main.php");
+require("{{ mainFolder }}/src/Main.php");
 
 // render
 $main = new HubletoMain($config);

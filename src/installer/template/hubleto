@@ -1,3 +1,2 @@
 <?php
-define('HUBLETO_CLI_AGENT_DIR', __DIR__);
-require_once('{{ mainRootFolder }}/../hubleto');
+require_once('{{ mainFolder }}/hubleto');

@@ -29,22 +29,16 @@ class Order extends \HubletoMain\Core\Model
         "type" => "lookup",
         "title" => $this->translate("Customer"),
         "required" => true,
-        "model" => Company::class
+        "model" => Company::class,
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'RESTRICT',
       ],
 
       "price" => [
         "type" => "float",
         "title" => $this->translate("Price"),
-        //"required" => true,
         "readonly" => true,
       ],
-
-      /* "id_klient" => [
-        "type" => "lookup",
-        "title" => "Klient",
-        "model" => "Widgets/Klienti/Models/Klient",
-        "show_column" => TRUE,
-      ], */
 
       "date_order" => [
         "type" => "date",

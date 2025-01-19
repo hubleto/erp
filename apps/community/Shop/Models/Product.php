@@ -8,6 +8,11 @@ class Product extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Product::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
+  public array $relations = [
+    'GROUP' => [ self::HAS_ONE, ProductGroup::class, 'id','id_product_group'],
+    'SUPPLIER' => [ self::HAS_ONE, ProductSupplier::class, 'id','id_supplier'],
+  ];
+
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns,[
@@ -18,17 +23,22 @@ class Product extends \HubletoMain\Core\Model
         "required" => true,
       ],
 
-      /* "id_group" => [
+      "id_product_group" => [
         "type" => "lookup",
-        "model" => "Widgets/Tovary/Models/TovarSkupina",
-        "title" => "Skupina",
-        "required" => true
-      ], */
+        "model" => ProductGroup::class,
+        "title" => $this->translate("Group"),
+        "required" => false,
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
+      ],
 
-      "supplier" => [
-        "type" => "varchar",
+      "id_supplier" => [
+        "type" => "lookup",
+        "model" => ProductSupplier::class,
         "title" => $this->translate("Supplier"),
-        "required" => false
+        "required" => false,
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'SET NULL',
       ],
 
       "is_on_sale" => [
@@ -163,7 +173,7 @@ class Product extends \HubletoMain\Core\Model
     unset($description["columns"]["needs_reodering"]);
     unset($description["columns"]["storage_rules"]);
     unset($description["columns"]["table"]);
-    unset($description["columns"]["supplier"]);
+    unset($description["columns"]["description"]);
 
     return $description;
   }

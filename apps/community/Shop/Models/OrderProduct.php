@@ -21,6 +21,8 @@ class OrderProduct extends \HubletoMain\Core\Model
         "model" => Product::class,
         "title" => $this->translate("Product"),
         "required" => true,
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'RESTRICT',
       ],
 
       "id_order" => [
@@ -28,13 +30,33 @@ class OrderProduct extends \HubletoMain\Core\Model
         "model" => Order::class,
         "title" => $this->translate("Order"),
         "required" => true,
+        'foreignKeyOnUpdate' => 'CASCADE',
+        'foreignKeyOnDelete' => 'CASCADE',
+      ],
+
+      "unit_price" => [
+        "type" => "float",
+        "title" => $this->translate("Unit Price"),
+        "required" => true,
       ],
 
       "amount" => [
-        "type" => "float",
+        "type" => "int",
         "title" => $this->translate("Amount"),
         "required" => true,
-      ]
+      ],
+
+      "discount" => [
+        "type" => "int",
+        "title" => $this->translate("Dicount (%)"),
+        "required" => false,
+      ],
+
+      "tax" => [
+        "type" => "int",
+        "title" => $this->translate("Tax (%)"),
+        "required" => true,
+      ],
 
     ]));
   }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 
-interface TableOrderProductsProps extends TableProps {}
+interface TableOrderProductsProps extends TableProps {
+  sum?: number,
+}
 
 interface TableOrderProductsState extends TableState {}
 
@@ -49,5 +51,11 @@ export default class TableOrderProducts extends Table<TableOrderProductsProps, T
     let elements: Array<JSX.Element> = super.renderHeaderRight();
 
     return elements;
+  }
+
+  renderFooter(): JSX.Element {
+    return <>
+      <div className='flex flexx-row justify-end'><strong className='mr-5'>Total price after tax: {this.props.sum}</strong></div>
+    </>;
   }
 }

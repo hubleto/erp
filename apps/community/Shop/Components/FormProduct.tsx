@@ -63,11 +63,13 @@ export default class FormProduct<P, S> extends Form<FormProductProps,FormProduct
           {this.inputWrapper('tax')}
           {this.inputWrapper('margin')}
           {this.inputWrapper('unit')}
+          {this.inputWrapper('id_supplier')}
         </div>
         <div className='border-l border-gray-200'></div>
         <div className='grow'>
           {this.inputWrapper('image')}
           {this.inputWrapper('description')}
+          {this.inputWrapper('id_product_group')}
           {this.inputWrapper('count_in_package')}
           {this.inputWrapper('is_on_sale')}
           {this.inputWrapper('sale_ended')}

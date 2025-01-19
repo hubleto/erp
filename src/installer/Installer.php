@@ -201,6 +201,7 @@ class Installer {
 
   public function createFoldersAndFiles()
   {
+
     // folders
     @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid));
     @mkdir($this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/log');
@@ -218,10 +219,9 @@ class Installer {
     file_put_contents($this->accountRootFolder . '/' . $this->uid . '/index.php', $index);
 
     // hubleto cli agent
-    copy(
-      __DIR__ . '/template/hubleto',
-      $this->accountRootFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/hubleto'
-    );
+    $hubleto = file_get_contents(__DIR__ . '/template/hubleto');
+    $hubleto = str_replace('{{ mainRootFolder }}', $this->mainRootFolder, $hubleto);
+    file_put_contents($this->accountRootFolder . '/' . $this->uid . '/hubleto', $hubleto);
 
     // .htaccess
     copy(

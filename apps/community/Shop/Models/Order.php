@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\Shop\Models;
 
+use HubletoApp\Community\Customers\Models\Company;
+
 class Order extends \HubletoMain\Core\Model
 {
   public string $table = 'orders';
@@ -10,6 +12,7 @@ class Order extends \HubletoMain\Core\Model
 
   public array $relations = [
     'PRODUCTS' => [ self::HAS_MANY, OrderProduct::class, 'id_order', 'id' ],
+    'CUSTOMER' => [ self::HAS_ONE, Company::class, 'id','id_company'],
   ];
 
   public function columns(array $columns = []): array
@@ -18,14 +21,22 @@ class Order extends \HubletoMain\Core\Model
       "order_number" => [
         "type" => "int",
         "title" => $this->translate("Order Number"),
-        "required" => true,
-        //"readonly" => true,
+        "required" => false,
+        "readonly" => true,
       ],
+
+      "id_company" => [
+        "type" => "lookup",
+        "title" => $this->translate("Customer"),
+        "required" => true,
+        "model" => Company::class
+      ],
+
       "price" => [
         "type" => "float",
         "title" => $this->translate("Price"),
-        "required" => true,
-        //"readonly" => true,
+        //"required" => true,
+        "readonly" => true,
       ],
 
       /* "id_klient" => [
@@ -88,11 +99,35 @@ class Order extends \HubletoMain\Core\Model
     $description = parent::tableDescribe();
 
     $description['ui']['title'] = 'Orders';
-    $description["ui"]["addButtonText"] = $this->translate("Add product");
+    $description["ui"]["addButtonText"] = $this->translate("Add order");
 
     unset($description["columns"]["shipping_info"]);
     unset($description["columns"]["note"]);
 
     return $description;
+  }
+
+  public function formDescribe(array $description = []): array
+  {
+    $description = parent::formDescribe();
+    $description["defaultValues"]["date_order"] = date("Y-m-d");
+    $description["defaultValues"]["price"] = 0;
+    ;
+    $description['includeRelations'] = [
+      'PRODUCTS',
+      'CUSTOMER',
+    ];
+
+    return $description;
+  }
+
+  public function onAfterCreate(array $record, $returnValue)
+  {
+
+    $order = $this->eloquent->find($record["id"]);
+    $order->order_number = $order->id;
+    $order->save();
+
+    return parent::onAfterCreate($record, $returnValue);
   }
 }

@@ -2,7 +2,9 @@
 
 namespace HubletoApp\Community\Shop\Models\Eloquent;
 
+use HubletoApp\Community\Customers\Models\Eloquent\Company;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends \HubletoMain\Core\ModelEloquent
 {
@@ -10,5 +12,8 @@ class Order extends \HubletoMain\Core\ModelEloquent
 
   public function PRODUCTS(): HasMany {
     return $this->hasMany(OrderProduct::class, 'id_order', 'id');
+  }
+  public function CUSTOMER(): HasOne {
+    return $this->hasOne(Company::class, 'id','id_company');
   }
 }

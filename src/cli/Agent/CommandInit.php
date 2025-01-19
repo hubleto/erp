@@ -54,7 +54,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $rewriteBases = [];
     $lastRewriteBase = '';
 
-    foreach (array_reverse(explode('/', str_replace('\\', '/', __DIR__))) as $tmpDir) {
+    foreach (array_reverse(explode('/', str_replace('\\', '/', realpath(__DIR__ . '/../../..')))) as $tmpDir) {
       $rewriteBases[] = $lastRewriteBase . '/';
       $lastRewriteBase = '/' . $tmpDir . $lastRewriteBase;
     }
@@ -74,6 +74,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($adminFamilyName === null) $adminFamilyName = $this->cli->read('Account.adminFamilyName', 'Smith');
     if ($adminEmail === null) $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
     if ($adminPassword === null) $adminPassword = $this->cli->read('Account.adminPassword (leave empty to generate random password)');
+
+    if (empty($packagesToInstall)) $packagesToInstall = 'core,sales';
+    if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
     $this->cli->cyan("Initializing with following config:\n");
     $this->cli->cyan("  rewriteBase = {$rewriteBase}\n");
@@ -96,9 +99,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->main->config['db_password'] = $dbPassword;
     $this->main->config['db_name'] = $dbName;
     $this->main->initDatabaseConnections();
-
-    if (empty($packagesToInstall)) $packagesToInstall = 'core,sales';
-    if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
     $this->cli->cyan("\n");
     $this->cli->cyan("Hurray. Installing your Hubleto...\n");

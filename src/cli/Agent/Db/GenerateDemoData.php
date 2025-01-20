@@ -95,10 +95,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
     //Shop
-    $mProduct = new \HubletoApp\Community\Shop\Models\Product($this->main);
-    $mProductGroup = new \HubletoApp\Community\Shop\Models\ProductGroup($this->main);
-    $mProductSupplier= new \HubletoApp\Community\Shop\Models\ProductSupplier($this->main);
-
+    $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
+    $mGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
+    $mSupplier= new \HubletoApp\Community\Products\Models\Supplier($this->main);
 
     $this->generateCompanies($mCompany, $mCompanyTag);
     $this->generatePersons($mPerson, $mPersonTag, $mContact, $mAddress);
@@ -106,7 +105,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $this->generateServices($mCompany, $mService);
     $this->generateLeads($mCompany, $mLead, $mLeadHistory, $mLeadTag);
     $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag);
-    $this->generateProducts($mProduct,$mProductGroup, $mProductSupplier);
+    $this->generateProducts($mProduct,$mGroup, $mSupplier);
 
     $this->cli->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
   }
@@ -701,31 +700,31 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   }
 
   function generateProducts(
-    \HubletoApp\Community\Shop\Models\Product $mProduct,
-    \HubletoApp\Community\Shop\Models\ProductGroup $mProductGroup,
-    \HubletoApp\Community\Shop\Models\ProductSupplier $mProductSupplier,
+    \HubletoApp\Community\Products\Models\Product $mProduct,
+    \HubletoApp\Community\Products\Models\Group $mGroup,
+    \HubletoApp\Community\Products\Models\Supplier $mSupplier,
   ): void {
 
-    $mProductGroup->eloquent->create([
+    $mGroup->eloquent->create([
       "title" => "Food"
     ]);
-    $mProductGroup->eloquent->create([
+    $mGroup->eloquent->create([
       "title" => "Furniture"
     ]);
-    $mProductGroup->eloquent->create([
+    $mGroup->eloquent->create([
       "title" => "Dry foods"
     ]);
-    $mProductGroup->eloquent->create([
+    $mGroup->eloquent->create([
       "title" => "Liquids"
     ]);
 
-    $mProductSupplier->eloquent->create([
+    $mSupplier->eloquent->create([
       "title" => "Fox Foods"
     ]);
-    $mProductSupplier->eloquent->create([
+    $mSupplier->eloquent->create([
       "title" => "Bořek Furniture"
     ]);
-    $mProductSupplier->eloquent->create([
+    $mSupplier->eloquent->create([
       "title" => "Denise's Dry Goods"
     ]);
 
@@ -759,8 +758,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       ["Beets - Candy Cane, Organic",29.0,95.1,23,"dc"],
       ["Oven Mitt - 13 Inch",57.49,89.41,23,"ml"],
     ];
-
-    $filename = __DIR__ . '/../demo_data/products.csv';
 
     foreach ($products as $product) {
       $idProduct = $mProduct->eloquent->create([

@@ -36,7 +36,7 @@ export default class TableProducts extends Table<TableProductsProps, TableProduc
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'right';
+    params.type = 'right wide';
     return params;
   }
 

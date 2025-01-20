@@ -130,7 +130,7 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
                     addButtonText: "Add Product"
                   },
                   permissions: {
-                    canCreate: true,
+                    canCreate: false,
                     canUpdate: true,
                     canDelete: true,
                     canRead: true,
@@ -161,23 +161,24 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
                           </FormInput>
                         )
                       }
-                  },
-                  amount: { type: "int", title: "Amount" },
-                  unit_price: { type: "float", title: "Unit Price", readonly: true },
-                  discount: { type: "float", title: "Discount (%)" },
-                  tax: { type: "float", title: "Tax (%)", readonly: true },
-                  __sum: { type: "none", title: "Sum after tax",
-                    cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
-                      if (data.unit_price && data.amount) {
-                        let sum = data.unit_price * data.amount;
-                        if (data.tax) sum = sum + (sum * (data.tax / 100));
-                        if (data.discount) sum = sum - (sum * (data.discount / 100));
-                        sum = Number(sum.toFixed(2));
-                        return (<><span>{sum}</span></>);
+                    },
+                    amount: { type: "int", title: "Amount" },
+                    unit_price: { type: "float", title: "Unit Price", readonly: true },
+                    discount: { type: "float", title: "Discount (%)" },
+                    tax: { type: "float", title: "Tax (%)", readonly: true },
+                    __sum: { type: "none", title: "Sum after tax",
+                      cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
+                        if (data.unit_price && data.amount) {
+                          let sum = data.unit_price * data.amount;
+                          if (data.tax) sum = sum + (sum * (data.tax / 100));
+                          if (data.discount) sum = sum - (sum * (data.discount / 100));
+                          sum = Number(sum.toFixed(2));
+                          return (<><span>{sum}</span></>);
+                        }
                       }
-                    }
-                  },
-                }}}
+                    },
+                  }
+                }}
                 isUsedAsInput={true}
                 isInlineEditing={this.state.isInlineEditing}
                 onRowClick={() => this.setState({isInlineEditing: true})}

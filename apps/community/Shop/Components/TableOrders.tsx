@@ -30,13 +30,13 @@ export default class TableOrders extends Table<TableOrdersProps, TableOrdersStat
 
   getStateFromProps(props: TableOrdersProps) {
     return {
-      ...super.getStateFromProps(props)
+      ...super.getStateFromProps(props),
     }
   }
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'right';
+    params.type = 'right wide';
     return params;
   }
 

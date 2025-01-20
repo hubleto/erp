@@ -94,7 +94,10 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
     $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
-
+    //Shop
+    $mProduct = new \HubletoApp\Community\Shop\Models\Product($this->main);
+    $mProductGroup = new \HubletoApp\Community\Shop\Models\ProductGroup($this->main);
+    $mProductSupplier= new \HubletoApp\Community\Shop\Models\ProductSupplier($this->main);
 
 
     $this->generateCompanies($mCompany, $mCompanyTag);
@@ -103,6 +106,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $this->generateServices($mCompany, $mService);
     $this->generateLeads($mCompany, $mLead, $mLeadHistory, $mLeadTag);
     $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag);
+    $this->generateProducts($mProduct,$mProductGroup, $mProductSupplier);
 
     $this->cli->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
   }
@@ -693,6 +697,81 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_deal" => $idDeal,
         "id_tag" => $leadTag->id_tag
       ]);
+    }
+  }
+
+  function generateProducts(
+    \HubletoApp\Community\Shop\Models\Product $mProduct,
+    \HubletoApp\Community\Shop\Models\ProductGroup $mProductGroup,
+    \HubletoApp\Community\Shop\Models\ProductSupplier $mProductSupplier,
+  ): void {
+
+    $mProductGroup->eloquent->create([
+      "title" => "Food"
+    ]);
+    $mProductGroup->eloquent->create([
+      "title" => "Furniture"
+    ]);
+    $mProductGroup->eloquent->create([
+      "title" => "Dry foods"
+    ]);
+    $mProductGroup->eloquent->create([
+      "title" => "Liquids"
+    ]);
+
+    $mProductSupplier->eloquent->create([
+      "title" => "Fox Foods"
+    ]);
+    $mProductSupplier->eloquent->create([
+      "title" => "Bořek Furniture"
+    ]);
+    $mProductSupplier->eloquent->create([
+      "title" => "Denise's Dry Goods"
+    ]);
+
+
+    $products = [
+      ["Wine - Masi Valpolocell",94.27,62.93,23,"l"],
+      ["Eggplant Italian",21.98,86.56,23,"ml"],
+      ["Carrots - Mini, Stem On",76.44,56.95,23,"kg"],
+      ["Lentils - Green Le Puy",42.94,98.78,23,"l"],
+      ["Ice - Clear, 300 Lb For Carving",51.43,70.54,23,"ml"],
+      ["Chicken - Leg / Back Attach",82.7,96.13,23,"l"],
+      ["Thyme - Dried",96.11,76.39,23,"l"],
+      ["Lettuce - Belgian Endive",35.14,89.06,23,"bottle"],
+      ["Pasta - Rotini, Dry",4.42,88.99,23,"l"],
+      ["Coffee Cup 8oz 5338cd",25.64,77.44,23,"mg"],
+      ["Wine - Magnotta, White",7.21,89.8,23,"dc"],
+      ["Sauerkraut",41.14,71.11,23,"bottle"],
+      ["Yams",58.91,70.92,23,"l"],
+      ["Salt - Celery",54.01,90.84,23,"bottle"],
+      ["Bar Mix - Lemon",49.62,61.33,23,"kg"],
+      ["Raspberries - Fresh",78.84,74.08,23,"l"],
+      ["Lambcasing",71.23,58.71,23,"dc"],
+      ["Sauce - Chili",14.92,92.16,23,"ml"],
+      ["Chef Hat 20cm",62.76,71.59,23,"mg"],
+      ["Wine - Sake",96.35,68.66,23,"bottle"],
+      ["Chevril",20.34,88.6,23,"ml"],
+      ["Milk - Buttermilk",26.1,74.32,23,"kg"],
+      ["Cream - 35%",59.74,68.28,23,"bottle"],
+      ["Liqueur - Melon",88.46,85.78,23,"l"],
+      ["Beer - Muskoka Cream Ale",53.6,62.33,23,"l"],
+      ["Beets - Candy Cane, Organic",29.0,95.1,23,"dc"],
+      ["Oven Mitt - 13 Inch",57.49,89.41,23,"ml"],
+    ];
+
+    $filename = __DIR__ . '/../demo_data/products.csv';
+
+    foreach ($products as $product) {
+      $idProduct = $mProduct->eloquent->create([
+        "title" => $product[0],
+        "unit_price" => $product[1],
+        "margin" => $product[2],
+        "tax" => $product[3],
+        "unit" => $product[4],
+        "id_product_group" => rand(1,4),
+        "id_supplier" => rand(1,3),
+      ])->id;
     }
   }
 }

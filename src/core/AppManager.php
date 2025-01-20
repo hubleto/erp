@@ -52,10 +52,9 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
       $dependencies = [];
     }
 
-    foreach ($dependencies as $dependency) {
-      $dependencyAppClass = $dependency . '\\Loader';
+    foreach ($dependencies as $dependencyAppClass) {
       if (!$this->isAppInstalled($dependencyAppClass)) {
-        if ($this->cli) $this->cli->cyan("Installing dependency {$dependency}.\n");
+        if ($this->cli) $this->cli->cyan("Installing dependency {$dependencyAppClass}.\n");
         $this->installApp($dependencyAppClass, $forceInstall);
       }
     }
@@ -73,6 +72,12 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
   public function disableApp(string $appClass)
   {
     $this->main->saveConfigByPath('apps/' . $this->getAppNameForConfig($appClass) . '/enabled', '0');
+  }
+
+  public function testApp(string $appClass, string $test)
+  {
+    $app = new $appClass($this->main);
+    $app->test($this->cli, $test);
   }
 
 }

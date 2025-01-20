@@ -13,6 +13,8 @@ if (!is_array($config)) $config = [];
 $main = new \HubletoMain($config, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
 $main->initDatabaseConnections();
 $main->loadConfigFromDB();
+$main->initTwig();
+$main->configureTwig();
 
 $cli = new \HubletoMain\Cli\Agent\Loader($main);
 
@@ -34,15 +36,16 @@ if (!empty($action)) {
       break;
       case 'app':
         switch ($argv[2]) {
-          case 'show-installed': $command = new \HubletoMain\Cli\Agent\App\ShowInstalled($cli, $argv); break;
+          case 'list-installed': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($cli, $argv); break;
           case 'install': $command = new \HubletoMain\Cli\Agent\App\Install($cli, $argv); break;
           case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($cli, $argv); break;
+          case 'test': $command = new \HubletoMain\Cli\Agent\App\Test($cli, $argv); break;
           case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($cli, $argv); break;
         }
       break;
       case 'code':
         switch ($argv[2]) {
-          case 'show-templates': $command = new \HubletoMain\Cli\Agent\Code\ShowTemplates($cli, $argv); break;
+          case 'list-templates': $command = new \HubletoMain\Cli\Agent\Code\ListTemplates($cli, $argv); break;
         }
       break;
       case 'db':

@@ -9,13 +9,14 @@
 | ----- COMMAND GROUP 'app' -------------- | ----------------------------------------------------------------------- |
 | app disable <appClass>                   | Disable app. This will not delete app's data.                           |
 | app install <appClass> [forceReinstall]  | Install specified app.                                                  |
+| app test <appClass> [forceReinstall]     | Test specified app. ONLY FOR DEVELOPMENT! MAY MODIFY YOUR DATA.         |
 | app reset-all                            | Re-install all apps their 'factory' state.                              |
-| app show-installed                       | Show all installed apps.                                                |
+| app list-installed                       | List all installed apps.                                                |
 | ----- COMMAND GROUP 'code' ------------- | ----------------------------------------------------------------------- |
 | code generate <template>                 | Generate code by given template.                                        |
-| code show-templates                      | Show all available templates for `generate` command.                    |
+| code list-templates                      | List all available templates for `generate` command.                    |
 | ----- COMMAND GROUP 'db' --------------- | ----------------------------------------------------------------------- |
-| db generate-demo-data                    | Generate demo data. RESETS ALL DATA, INCLUDING USER ACCOUNTS !          |
+| db generate-demo-data                    | Generate demo data. ONLY FOR DEVELOPMENT! COMPLETELY RESETS ALL DATA !  |
 
 Examples:
   php hubleto help

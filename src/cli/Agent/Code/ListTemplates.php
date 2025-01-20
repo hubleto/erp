@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Cli\Agent\Code;
 
-class ShowTemplates extends \HubletoMain\Cli\Agent\Command
+class ListTemplates extends \HubletoMain\Cli\Agent\Command
 {
   public function run()
   {

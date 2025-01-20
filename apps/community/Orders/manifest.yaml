@@ -8,9 +8,9 @@ author:
   github: "https://github.com/rindo789"
   linkedin: "https://www.linkedin.com/in/richard-ondrejka/"
 highlight: Default order managment.
-dependencies:
- - Products
- - Customers
+requires:
+ - HubletoApp\Community\Products\Loader
+ - HubletoApp\Community\Customers\Loader
 tags:
   - e-commerce
   - products

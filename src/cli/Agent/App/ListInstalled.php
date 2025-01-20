@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Cli\Agent\App;
 
-class ShowInstalled extends \HubletoMain\Cli\Agent\Command
+class ListInstalled extends \HubletoMain\Cli\Agent\Command
 {
   public function run()
   {

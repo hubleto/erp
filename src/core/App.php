@@ -32,6 +32,13 @@ class App {
   {
   }
 
+  public function test(\HubletoMain\Cli\Agent\Loader $cli, string $test): void
+  {
+    $reflection = new \ReflectionClass($this);
+    $testClass = $reflection->getNamespaceName() . '\\Tests\\' . $test;
+    (new $testClass($this, $cli))->run();
+  }
+
   public function loadDictionary(string $language): array {
 
     $dict = [];

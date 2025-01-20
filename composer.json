@@ -1,6 +1,14 @@
 {
     "name": "wai-blue/hubleto",
+    "description": "Business Application Hub. Opensource ERP and CRM.",
+    "homepage": "https://www.hubleto.com",
+    "support": {
+        "issues": "https://github.com/wai-blue/hubleto/issues",
+        "source": "https://github.com/wai-blue/hubleto"
+    },
+    "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "require": {
+        "php": "^8.2",
         "twig/twig": "^3",
         "illuminate/database": "^11",
         "monolog/monolog": "^3",
@@ -9,5 +17,10 @@
         "snipworks/php-smtp": "^2",
         "wai-blue/adios": "^1",
         "laravel/serializable-closure": "^2"
+    },
+    "autoload": {
+        "psr-4": {
+            "WaiBlue\\": ""
+        }
     }
 }

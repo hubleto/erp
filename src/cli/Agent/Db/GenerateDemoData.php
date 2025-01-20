@@ -719,13 +719,16 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ]);
 
     $mSupplier->eloquent->create([
-      "title" => "Fox Foods"
+      "title" => "Fox Foods",
+      "id_country" => 1,
     ]);
     $mSupplier->eloquent->create([
-      "title" => "Bořek Furniture"
+      "title" => "Bořek Furniture",
+      "id_country" => 1,
     ]);
     $mSupplier->eloquent->create([
-      "title" => "Denise's Dry Goods"
+      "title" => "Denise's Dry Goods",
+      "id_country" => 1,
     ]);
 
 

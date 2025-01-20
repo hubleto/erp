@@ -16,9 +16,11 @@ class Loader extends \HubletoMain\Core\App
   public function installTables() {
     $mOrder = new \HubletoApp\Community\Orders\Models\Order($this->main);
     $mOrderProduct = new \HubletoApp\Community\Orders\Models\OrderProduct($this->main);
+    $mHistory = new \HubletoApp\Community\Orders\Models\History($this->main);
 
     $mOrder->dropTableIfExists()->install();
     $mOrderProduct->dropTableIfExists()->install();
+    $mHistory->dropTableIfExists()->install();
   }
 
   public function installDefaultPermissions()

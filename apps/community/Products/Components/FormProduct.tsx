@@ -56,40 +56,45 @@ export default class FormProduct<P, S> extends Form<FormProductProps,FormProduct
     const showAdditional = R.id > 0 ? true : false;7
 
     return (<>
-      <div className='card-body flex flex-row gap-2'>
-        <div className='grow'>
-          {this.inputWrapper('title')}
-          {this.inputWrapper('unit_price')}
-          {this.inputWrapper('tax')}
-          {this.inputWrapper('margin')}
-          {this.inputWrapper('unit')}
-          {this.inputWrapper('id_supplier')}
+      <div className='card'>
+        <div className='card-body grid grid-cols-2 gap-2'>
+          <div className='border-r border-gray-200'>
+            {this.inputWrapper('title')}
+            {this.inputWrapper('unit_price')}
+            {this.inputWrapper('tax')}
+            {this.inputWrapper('margin')}
+            {this.inputWrapper('unit')}
+            {this.inputWrapper('id_supplier')}
+          </div>
+          <div className=''>
+            {this.inputWrapper('image')}
+            {this.inputWrapper('description')}
+            {this.inputWrapper('id_product_group')}
+            {this.inputWrapper('count_in_package')}
+            {this.inputWrapper('is_on_sale')}
+            {this.inputWrapper('sale_ended')}
+          </div>
+
+          <div className='border-r border-t border-gray-200'>
+            {this.inputWrapper('is_single_order_posible')}
+            {this.inputWrapper('show_price')}
+            {this.inputWrapper('packaging')}
+            {this.inputWrapper('needs_reodering')}
+            {this.inputWrapper('supplier')}
+          </div>
+          <div className='border-t border-gray-200'>
+            {this.inputWrapper('price_after_reweight')}
+            {this.inputWrapper('storage_rules')}
+            {this.inputWrapper('table')}
+          </div>
         </div>
-        <div className='border-l border-gray-200'></div>
-        <div className='grow'>
-          {this.inputWrapper('image')}
-          {this.inputWrapper('description')}
-          {this.inputWrapper('id_product_group')}
-          {this.inputWrapper('count_in_package')}
-          {this.inputWrapper('is_on_sale')}
-          {this.inputWrapper('sale_ended')}
-        </div>
+      </div>
+      {/* <div className='card-body flex flex-row gap-2'>
+
       </div>
       <div className='card-body border-t border-gray-200 flex flex-row gap-2'>
-        <div className='grow'>
-          {this.inputWrapper('is_single_order_posible')}
-          {this.inputWrapper('show_price')}
-          {this.inputWrapper('packaging')}
-          {this.inputWrapper('needs_reodering')}
-          {this.inputWrapper('supplier')}
-        </div>
-        <div className='border-l border-gray-200'></div>
-        <div className='grow'>
-          {this.inputWrapper('price_after_reweight')}
-          {this.inputWrapper('storage_rules')}
-          {this.inputWrapper('table')}
-        </div>
-      </div>
+
+      </div> */}
     </>);
   }
 }

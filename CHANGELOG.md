@@ -1,5 +1,9 @@
 # Hubleto changelog
 
+## Release v0.6
+
+  * fixed CORS for assets
+
 ## Release v0.5
 
   * improved CLI agent

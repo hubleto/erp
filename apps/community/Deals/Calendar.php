@@ -6,10 +6,19 @@ class Calendar extends \HubletoMain\Core\Calendar {
 
   public function loadEvents(array $params = []): array
   {
+    $idDeal = null;
+    $dateStart = null;
+    $dateEnd = null;
+    if (isset($params["idDeal"])) $idDeal = (int) $params["idDeal"];
+    else return [];
 
-    $idDeal = (int) $params["idDeal"];
-    $dateStart = date("Y-m-d H:i:s", strtotime((string) $params["start"]));
-    $dateEnd = date("Y-m-d H:i:s", strtotime((string) $params["end"]));
+    if (isset($this->main->params["start"]) && isset($this->main->params["end"])) {
+      $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->main->params["start"]));
+      $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->main->params["end"]));
+    } else {
+      $dateStart = date("Y-m-d H:i:s");
+      $dateEnd = date("Y-m-d H:i:s", strtotime("tommorow"));
+    }
 
     $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
 

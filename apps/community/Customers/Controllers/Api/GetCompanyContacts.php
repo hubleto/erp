@@ -15,10 +15,10 @@ class GetCompanyContacts extends \HubletoMain\Core\Controller {
 
     try {
       $persons = $mPerson->eloquent->selectRaw("*, CONCAT(first_name, ' ', last_name) as _LOOKUP");
-      if ((int) $this->main->params["id_company"] > 0) {
+      if (isset($this->main->params["id_company"]) && (int) $this->main->params["id_company"] > 0) {
         $persons = $persons->where("id_company", (int) $this->main->params["id_company"]);
       }
-      if ($this->main->params["search"] != "") {
+      if (isset($this->main->params["search"]) && $this->main->params["search"] != "") {
         $persons->whereRaw("CONCAT(first_name, ' ', last_name) LIKE '%".$this->main->params["search"]."%'");
       }
 

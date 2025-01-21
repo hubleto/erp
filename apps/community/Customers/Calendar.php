@@ -8,10 +8,19 @@ class Calendar extends \HubletoMain\Core\Calendar {
 
   public function loadEvents(array $params = []): array
   {
+    $idCompany = null;
+    $dateStart = null;
+    $dateEnd = null;
+    if (isset($params["idCompany"])) $idCompany = (int) $params["idCompany"];
+    else return [];
 
-    $idCompany = (int) $params["idCompany"];
-    $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->main->params["start"]));
-    $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->main->params["end"]));
+    if (isset($this->main->params["start"]) && isset($this->main->params["end"])) {
+      $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->main->params["start"]));
+      $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->main->params["end"]));
+    } else {
+      $dateStart = date("Y-m-d H:i:s");
+      $dateEnd = date("Y-m-d H:i:s", strtotime("tommorow"));
+    }
 
     $mCompanyActivity = new CompanyActivity($this->main);
 

@@ -18,6 +18,13 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
   public function renderJson(): ?array
   {
+    if (!isset($this->main->params["recordId"])) {
+      return [
+        "status" => "failed",
+        "error" => "The lead for converting was not set"
+      ];
+    }
+
     $leadId = $this->main->params["recordId"];
 
     $mLead = new Lead($this->main);
@@ -104,7 +111,6 @@ class ConvertLead extends \HubletoMain\Core\Controller
       $lead->is_archived = 1;
       $lead->save();
     } catch (Exception $e) {
-
       return [
         "status" => "failed",
         "error" => $e

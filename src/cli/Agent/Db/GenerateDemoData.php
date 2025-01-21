@@ -3,7 +3,7 @@
 namespace HubletoMain\Cli\Agent\Db;
 
 use HubletoApp\Community\Settings\Models\ {
-  Permission, Profile, RolePermission, User, UserRole, UserHasRole
+    Country, Permission, Profile, RolePermission, User, UserRole, UserHasRole
 };
 
 class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
@@ -718,17 +718,19 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       "title" => "Liquids"
     ]);
 
+    $mCountry = new Country($this->main);
+
     $mSupplier->eloquent->create([
       "title" => "Fox Foods",
-      "id_country" => 1,
+      "id_country" => $mCountry->eloquent->inRandomOrder()->first()->id,
     ]);
     $mSupplier->eloquent->create([
       "title" => "Bořek Furniture",
-      "id_country" => 1,
+      "id_country" => $mCountry->eloquent->inRandomOrder()->first()->id,
     ]);
     $mSupplier->eloquent->create([
       "title" => "Denise's Dry Goods",
-      "id_country" => 1,
+      "id_country" => $mCountry->eloquent->inRandomOrder()->first()->id,
     ]);
 
 

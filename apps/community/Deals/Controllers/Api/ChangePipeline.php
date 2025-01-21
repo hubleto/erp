@@ -15,19 +15,27 @@ class ChangePipeline extends \HubletoMain\Core\Controller
     $mPipelineStep = new PipelineStep($this->main);
     $newPipeline = null;
 
-    try {
-      $newPipeline = $mPipeline->eloquent
-        ->where("id", $this->main->params["idPipeline"])
-        ->with("PIPELINE_STEPS")
-        ->first()
-        ->toArray()
-      ;
-    } catch (Exception $e) {
+    if (isset($this->main->params["idPipeline"])) {
+      try {
+        $newPipeline = $mPipeline->eloquent
+          ->where("id", $this->main->params["idPipeline"])
+          ->with("PIPELINE_STEPS")
+          ->first()
+          ->toArray()
+        ;
+      } catch (Exception $e) {
+        return [
+          "status" => "failed",
+          "error" => $e
+        ];
+      }
+    } else {
       return [
         "status" => "failed",
-        "error" => $e
+        "error" => "Pipeline parameter was not defined",
       ];
     }
+
 
     return [
       "newPipeline" => $newPipeline,

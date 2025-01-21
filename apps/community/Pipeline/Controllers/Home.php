@@ -100,6 +100,7 @@ class Home extends \HubletoMain\Core\Controller {
     ;
 
     foreach ($deals as $key => $deal) {
+      if (empty($deal["TAGS"])) continue;
       $tag = $mTag->eloquent->find($deal["TAGS"][0]["id_tag"])?->toArray();
       $deals[$key]["TAG"] = $tag;
       unset($deals[$key]["TAGS"]);

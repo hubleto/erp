@@ -19,25 +19,32 @@ class ChangePipelineStep extends \HubletoMain\Core\Controller
 
     $step = null;
 
-    try {
-      $deal = $mDeal->eloquent->find($this->main->params["idDeal"]);
-      $deal->id_pipeline_step = $this->main->params["idStep"];
-      $deal->save();
+    if (isset($this->main->params["idDeal"]) && isset($this->main->params["idStep"])) {
+      try {
+        $deal = $mDeal->eloquent->find($this->main->params["idDeal"]);
+        $deal->id_pipeline_step = $this->main->params["idStep"];
+        $deal->save();
 
-      $step = $mPipelineStep->eloquent
-        ->where("id_pipeline", $this->main->params["idPipeline"])
-        ->where("id", $this->main->params["idStep"])
-        ->first()
-      ;
-      $mDealHistory->eloquent->create([
-        "change_date" => date("Y-m-d"),
-        "id_deal" => $deal->id,
-        "description" => "Pipeline step changed to ".$step->name
-      ]);
-    } catch (Exception $e) {
+        $step = $mPipelineStep->eloquent
+          ->where("id_pipeline", $this->main->params["idPipeline"])
+          ->where("id", $this->main->params["idStep"])
+          ->first()
+        ;
+        $mDealHistory->eloquent->create([
+          "change_date" => date("Y-m-d"),
+          "id_deal" => $deal->id,
+          "description" => "Pipeline step changed to ".$step->name
+        ]);
+      } catch (Exception $e) {
+        return [
+          "status" => "failed",
+          "error" => $e
+        ];
+      }
+    } else {
       return [
         "status" => "failed",
-        "error" => $e
+        "error" => "Required parameters were not defined."
       ];
     }
 

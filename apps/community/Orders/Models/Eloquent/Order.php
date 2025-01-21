@@ -13,6 +13,9 @@ class Order extends \HubletoMain\Core\ModelEloquent
   public function PRODUCTS(): HasMany {
     return $this->hasMany(OrderProduct::class, 'id_order', 'id');
   }
+  public function HISTORY(): HasMany {
+    return $this->hasMany(History::class, 'id_order', 'id');
+  }
   public function CUSTOMER(): HasOne {
     return $this->hasOne(Company::class, 'id','id_company');
   }

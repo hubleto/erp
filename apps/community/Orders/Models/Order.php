@@ -3,6 +3,7 @@
 namespace HubletoApp\Community\Orders\Models;
 
 use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Products\Models\Product;
 
 class Order extends \HubletoMain\Core\Model
 {
@@ -12,6 +13,7 @@ class Order extends \HubletoMain\Core\Model
 
   public array $relations = [
     'PRODUCTS' => [ self::HAS_MANY, OrderProduct::class, 'id_order', 'id' ],
+    'HISTORY' => [ self::HAS_MANY, History::class, 'id_order', 'id' ],
     'CUSTOMER' => [ self::HAS_ONE, Company::class, 'id','id_company'],
   ];
 
@@ -110,9 +112,34 @@ class Order extends \HubletoMain\Core\Model
     $description['includeRelations'] = [
       'PRODUCTS',
       'CUSTOMER',
+      'HISTORY',
     ];
 
     return $description;
+  }
+
+  public function onAfterUpdate(array $record, $returnValue)
+  {
+    $mProduct = new Product($this->main);
+    $longDescription = "";
+
+    foreach ($record["PRODUCTS"] as $product) {
+      if ($product["_toBeDeleted_"] == true) continue;
+      $productTitle = $mProduct->eloquent->find((int) $product["id_product"])->title;
+      $longDescription .=  "{$productTitle} - Amount: {$product["amount"]} - Unit Price: {$product["unit_price"]} - Tax: {$product["tax"]} - Discount: {$product["discount"]} \n\n";
+    }
+
+    if ($longDescription == "") $longDescription = "The order had no products or all products were deleted";
+
+    $mHistory = new History($this->main);
+    $mHistory->eloquent->create([
+      "id_order" => $record["id"],
+      "short_description" => "Order has been updated",
+      "long_description" => $longDescription,
+      "date_time" => date("Y-m-d H:i:s"),
+    ]);
+
+    return parent::onAfterUpdate($record, $returnValue);
   }
 
   public function onAfterCreate(array $record, $returnValue)
@@ -121,6 +148,13 @@ class Order extends \HubletoMain\Core\Model
     $order = $this->eloquent->find($record["id"]);
     $order->order_number = $order->id;
     $order->save();
+
+    $mHistory = new History($this->main);
+    $mHistory->eloquent->create([
+      "id_order" => $order->id,
+      "short_description" => "Order created",
+      "date_time" => date("Y-m-d H:i:s"),
+    ]);
 
     return parent::onAfterCreate($record, $returnValue);
   }

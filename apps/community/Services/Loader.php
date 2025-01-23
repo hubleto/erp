@@ -49,7 +49,7 @@ class Loader extends \HubletoMain\Core\App
 
       "HubletoApp/Community/Services/Controllers/Services",
 
-      "HubletoApp/Community/Servicse/Api/GetServicePrice",
+      "HubletoApp/Community/Services/Api/GetServicePrice",
 
       "HubletoApp/Community/Services/Services",
     ];

@@ -38,9 +38,9 @@ class Loader extends \HubletoMain\Core\App
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
       "HubletoApp/Community/Billing/Models/BillingAccount:Create",
-      "HubletoApp/Community/Billing/Models/BillingAccountRead",
-      "HubletoApp/Community/Billing/Models/BillingAccountUpdate",
-      "HubletoApp/Community/Billing/Models/BillingAccountDelete",
+      "HubletoApp/Community/Billing/Models/BillingAccount:Read",
+      "HubletoApp/Community/Billing/Models/BillingAccount:Update",
+      "HubletoApp/Community/Billing/Models/BillingAccount:Delete",
 
       "HubletoApp/Community/Billing/Models/BillingAccountService:Create",
       "HubletoApp/Community/Billing/Models/BillingAccountService:Read",

@@ -38,8 +38,14 @@ class GetPermissions extends \HubletoMain\Core\Controller
         preg_match($pattern, $permission["permission"], $matches);
         $MVCNamespace = $matches[1];
 
+        //capture the namespace after the MVC namespaces
+        $pattern = "#^(?:[^/]+/){4}([^/]+)#";
+        preg_match($pattern, $permission["permission"], $matches);
+        $modPermission = $permission;
+        $modPermission["alias"] = $matches[1];
+
         if (in_array($MVCNamespace, $this->MVCNamespaces)) {
-          $sortedAllPermissions[$appNamespace][$MVCNamespace][] = $permission;
+          $sortedAllPermissions[$appNamespace][$MVCNamespace][] = $modPermission;
         } else $sortedAllPermissions[$appNamespace]["Other"][] = $permission;
       }
 

@@ -178,7 +178,7 @@ export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUse
                               <p className='font-bold'>{key}</p>
                               {Object.entries(group).map(([key, permission]) => (
                                 <div className='flex flex-row justify-between'>
-                                  <label htmlFor={`permission_id_${permission.id}`}>{permission.permission}</label>
+                                  <label htmlFor={`permission_id_${permission.id}`}>{permission.alias ?? permission.permission}</label>
                                   <input
                                     id={`permission_id_${permission.id}`}
                                     type='checkbox'

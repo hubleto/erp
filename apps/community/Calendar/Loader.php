@@ -24,15 +24,16 @@ class Loader extends \HubletoMain\Core\App
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Community/Calendar/Calendar" => "Calendar",
-      "HubletoApp/Community/Calendar/Controllers/Calendar" => "Calendar/Controller",
-      "HubletoApp/Community/Calendar/Api/GetCalendarEvents" => "Calendar/Api/GetCalendarEvents",
+      "HubletoApp/Community/Calendar/Calendar",
+
+      "HubletoApp/Community/Calendar/Controllers/Calendar",
+
+      "HubletoApp/Community/Calendar/Api/GetCalendarEvents",
     ];
 
-    foreach ($permissions as $permission => $allias) {
+    foreach ($permissions as $permission) {
       $mPermission->eloquent->create([
-        "permission" => $permission,
-        "allias" => $allias,
+        "permission" => $permission
       ]);
     }
   }

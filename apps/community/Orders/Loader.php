@@ -26,9 +26,28 @@ class Loader extends \HubletoMain\Core\App
   public function installDefaultPermissions()
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [];
+    $permissions = [
+      "HubletoApp/Community/Orders/Models/Order:Create",
+      "HubletoApp/Community/Orders/Models/Order:Read",
+      "HubletoApp/Community/Orders/Models/Order:Update",
+      "HubletoApp/Community/Orders/Models/Order:Delete",
 
-    foreach ($permissions as $key => $permission) {
+      "HubletoApp/Community/Orders/Models/History:Create",
+      "HubletoApp/Community/Orders/Models/History:Read",
+      "HubletoApp/Community/Orders/Models/History:Update",
+      "HubletoApp/Community/Orders/Models/History:Delete",
+
+      "HubletoApp/Community/Orders/Models/OrderProduct:Create",
+      "HubletoApp/Community/Orders/Models/OrderProduct:Read",
+      "HubletoApp/Community/Orders/Models/OrderProduct:Update",
+      "HubletoApp/Community/Orders/Models/OrderProduct:Delete",
+
+      "HubletoApp/Community/Orders/Controllers/Orders",
+
+      "HubletoApp/Community/Orders/Orders",
+    ];
+
+    foreach ($permissions as $permission) {
       $mPermission->eloquent->create([
         "permission" => $permission
       ]);

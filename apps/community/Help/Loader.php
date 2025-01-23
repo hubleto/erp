@@ -24,15 +24,14 @@ class Loader extends \HubletoMain\Core\App
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
 
-      "HubletoApp/Community/Help/Controllers/Help" => "Help/Controller",
+      "HubletoApp/Community/Help/Controllers/Help",
 
-      "HubletoApp/Community/Help/Help" => "Help",
+      "HubletoApp/Community/Help/Help",
     ];
 
-    foreach ($permissions as $permission => $allias) {
+    foreach ($permissions as $permission) {
       $mPermission->eloquent->create([
-        "permission" => $permission,
-        "allias" => $allias,
+        "permission" => $permission
       ]);
     }
   }

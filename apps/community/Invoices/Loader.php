@@ -34,24 +34,24 @@ class Loader extends \HubletoMain\Core\App
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
 
-      "HubletoApp/Community/Invoices/Models/Invoice:Create" => "Invoice/Create",
-      "HubletoApp/Community/Invoices/Models/Invoice:Read" => "Invoice/Read",
-      "HubletoApp/Community/Invoices/Models/Invoice:Update" => "Invoice/Update",
-      "HubletoApp/Community/Invoices/Models/Invoice:Delete" => "Invoice/Delete",
-      "HubletoApp/Community/Invoices/Models/InvoiceItem:Create" => "InvoiceItem/Create",
-      "HubletoApp/Community/Invoices/Models/InvoiceItem:Read" => "InvoiceItem/Read",
-      "HubletoApp/Community/Invoices/Models/InvoiceItem:Update" => "InvoiceItem/Update",
-      "HubletoApp/Community/Invoices/Models/InvoiceItem:Delete" => "InvoiceItem/Delete",
+      "HubletoApp/Community/Invoices/Models/Invoice:Create",
+      "HubletoApp/Community/Invoices/Models/Invoice:Read",
+      "HubletoApp/Community/Invoices/Models/Invoice:Update",
+      "HubletoApp/Community/Invoices/Models/Invoice:Delete",
 
-      "HubletoApp/Community/Invoices/Controllers/Invoices" => "Invoice/Controller",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Create",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Read",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Update",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Delete",
 
-      "HubletoApp/Community/Invoices/Invoices" => "Invoice",
+      "HubletoApp/Community/Invoices/Controllers/Invoices",
+
+      "HubletoApp/Community/Invoices/Invoices",
     ];
 
-    foreach ($permissions as $permission => $allias) {
+    foreach ($permissions as $permission) {
       $mPermission->eloquent->create([
-        "permission" => $permission,
-        "allias" => $allias,
+        "permission" => $permission
       ]);
     }
   }

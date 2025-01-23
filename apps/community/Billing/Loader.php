@@ -34,12 +34,23 @@ class Loader extends \HubletoMain\Core\App
 
   public function installDefaultPermissions()
   {
-  
+
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Community/Billing/Models/BillingAccount:Create,Read,Update,Delete",
-      "HubletoApp/Community/Billing/Models/BillingAccountService:Create,Read,Update,Delete",
+      "HubletoApp/Community/Billing/Models/BillingAccount:Create",
+      "HubletoApp/Community/Billing/Models/BillingAccountRead",
+      "HubletoApp/Community/Billing/Models/BillingAccountUpdate",
+      "HubletoApp/Community/Billing/Models/BillingAccountDelete",
+
+      "HubletoApp/Community/Billing/Models/BillingAccountService:Create",
+      "HubletoApp/Community/Billing/Models/BillingAccountService:Read",
+      "HubletoApp/Community/Billing/Models/BillingAccountService:Update",
+      "HubletoApp/Community/Billing/Models/BillingAccountService:Delete",
+
       "HubletoApp/Community/Billing/Controllers/BillingAccount",
+      "HubletoApp/Community/Billing/Controllers/BillingAccountService",
+
+      "HubletoApp/Community/Billing/BillingAccount",
     ];
 
     foreach ($permissions as $key => $permission) {

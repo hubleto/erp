@@ -9,7 +9,7 @@ class Controller extends \ADIOS\Core\Controller
 
   public \HubletoMain $main;
 
-  function __construct(\ADIOS\Core\Loader $main)
+  function __construct(\HubletoMain $main)
   {
     $this->main = $main;
     parent::__construct($main);
@@ -32,7 +32,7 @@ class Controller extends \ADIOS\Core\Controller
   /**
    * Executed at the end of the constructor.
    *
-   * @throws Exception Should throw an exception on error.
+   * @throws \Exception Should throw an exception on error.
    */
   public function init(): void
   {
@@ -45,9 +45,9 @@ class Controller extends \ADIOS\Core\Controller
   }
 
   /**
-   * Returns parameters used to render TWIG template.
+   * Used to set parametere for the view renderer.
    *
-   * @return array Parameters used to render TWIG template.
+   * @return void
    */
   public function prepareView(): void
   {
@@ -60,7 +60,7 @@ class Controller extends \ADIOS\Core\Controller
 
     $tmp =  strpos($this->main->requestedUri, '/');
     if ($tmp === false) $this->viewParams['requestedUriFirstPart'] = $this->main->requestedUri;
-    else $this->viewParams['requestedUriFirstPart'] = substr($this->main->requestedUri, 0, strpos($this->main->requestedUri, '/'));
+    else $this->viewParams['requestedUriFirstPart'] = substr($this->main->requestedUri, 0, (int) $tmp);
 
     $this->viewParams['sidebar'] = [
       'level1Items' => $this->main->getSidebar()->getItems(1),

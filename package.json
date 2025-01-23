@@ -6,6 +6,7 @@
   "scripts": {
     "build-css": "npx tailwindcss -i ./src/Main.css -o ./assets/compiled/main.css",
     "watch-css": "npx tailwindcss --watch -i ./src/Main.css -o ./assets/compiled/main.css",
+    "analyse-php": "vendor/bim/phpstan analyse",
     "build-js": "npx webpack --mode development",
     "build": "npx webpack --mode development && npx tailwindcss -i ./src/Main.css -o ./assets/compiled/main.css",
     "build:prod": "npx webpack --mode production"

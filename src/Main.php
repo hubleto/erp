@@ -51,8 +51,12 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
+
+  /** @var array<\HubletoMain\Core\App> */
   public array $apps = [];
+
   public \HubletoMain\Core\Sidebar $sidebar;
+  public \HubletoMain\Core\Help $help;
 
   public string $requestedUriFirstPart = '';
   public bool $isPro = false;
@@ -104,7 +108,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   }
 
-  public function initTwig()
+  public function initTwig(): void
   {
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
     $this->twigLoader->addPath(__DIR__ . '/views', 'hubleto');
@@ -116,13 +120,16 @@ class HubletoMain extends \ADIOS\Core\Loader
     ));
   }
 
-  public function registerApp(string $app)
+  public function registerApp(string $appClass): void
   {
-    if (!in_array($app, $this->apps)) {
-      $this->apps[$app] = new $app($this);
+    if (!isset($this->apps[$appClass])) {
+      $this->apps[$appClass] = new $appClass($this);
     }
   }
 
+  /**
+  * @return array<\HubletoMain\Core\App>
+  */
   public function getRegisteredApps(): array
   {
     return $this->apps;

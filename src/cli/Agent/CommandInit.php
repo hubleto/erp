@@ -5,7 +5,16 @@ namespace HubletoMain\Cli\Agent;
 class CommandInit extends \HubletoMain\Cli\Agent\Command
 {
   public array $initConfig = [];
-  public function run()
+
+  /**
+  * @return array<string>
+  */
+  public function parseConfigFile(string $configFile): array
+  {
+    return \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($configFile)) ?? [];
+  }
+
+  public function run(): void
   {
     // define('HUBLETO_COMMUNITY_REPO', __DIR__ . '/../../apps/community');
 
@@ -26,10 +35,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $adminPassword = null;
     $packagesToInstall = null;
 
-    $configFile = $this->arguments[2] ?? '';
+    $configFile = (string) ($this->arguments[2] ?? '');
 
     if (!empty($configFile) && is_file($configFile)) {
-      $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($configFile)) ?? [];
+      $config = $this->parseConfigFile($configFile);
     } else {
       $config = $this->initConfig;
     }
@@ -54,14 +63,14 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $rewriteBases = [];
     $lastRewriteBase = '';
 
-    foreach (array_reverse(explode('/', str_replace('\\', '/', realpath(__DIR__ . '/../../..')))) as $tmpDir) {
+    foreach (array_reverse(explode('/', str_replace('\\', '/', (string) realpath(__DIR__ . '/../../..')))) as $tmpDir) {
       $rewriteBases[] = $lastRewriteBase . '/';
       $lastRewriteBase = '/' . $tmpDir . $lastRewriteBase;
     }
 
     if ($rewriteBase === null) $rewriteBase = $this->cli->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
     if ($accountFolder === null) $accountFolder = realpath(__DIR__ . '/../../..');
-    if ($accountUrl === null) $accountUrl = $this->cli->read('ConfigEnv.accountUrl', 'http://localhost/' . trim($rewriteBase, '/'));
+    if ($accountUrl === null) $accountUrl = $this->cli->read('ConfigEnv.accountUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
     if ($mainFolder === null) $mainFolder = realpath(__DIR__ . '/../../..');
     if ($mainUrl === null) $mainUrl = $accountUrl;
     if ($dbHost === null) $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
@@ -79,20 +88,20 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
     $this->cli->cyan("Initializing with following config:\n");
-    $this->cli->cyan("  rewriteBase = {$rewriteBase}\n");
-    $this->cli->cyan("  accountFolder = {$accountFolder}\n");
-    $this->cli->cyan("  accountUrl = {$accountUrl}\n");
-    $this->cli->cyan("  dbHost = {$dbHost}\n");
-    $this->cli->cyan("  dbUser = {$dbUser}\n");
-    $this->cli->cyan("  dbPassword = {$dbPassword}\n");
-    $this->cli->cyan("  dbName = {$dbName}\n");
-    $this->cli->cyan("  dbCodepage = {$dbCodepage}\n");
-    $this->cli->cyan("  companyName = {$companyName}\n");
-    $this->cli->cyan("  adminName = {$adminName}\n");
-    $this->cli->cyan("  adminFamilyName = {$adminFamilyName}\n");
-    $this->cli->cyan("  adminEmail = {$adminEmail}\n");
-    $this->cli->cyan("  adminPassword = {$adminPassword}\n");
-    $this->cli->cyan("  packagesToInstall = {$packagesToInstall}\n");
+    $this->cli->cyan('  rewriteBase = ' . (string) $rewriteBase . "\n");
+    $this->cli->cyan('  accountFolder = ' . (string) $accountFolder . "\n");
+    $this->cli->cyan('  accountUrl = ' . (string) $accountUrl . "\n");
+    $this->cli->cyan('  dbHost = ' . (string) $dbHost . "\n");
+    $this->cli->cyan('  dbUser = ' . (string) $dbUser . "\n");
+    $this->cli->cyan('  dbPassword = ' . (string) $dbPassword . "\n");
+    $this->cli->cyan('  dbName = ' . (string) $dbName . "\n");
+    $this->cli->cyan('  dbCodepage = ' . (string) $dbCodepage . "\n");
+    $this->cli->cyan('  companyName = ' . (string) $companyName . "\n");
+    $this->cli->cyan('  adminName = ' . (string) $adminName . "\n");
+    $this->cli->cyan('  adminFamilyName = ' . (string) $adminFamilyName . "\n");
+    $this->cli->cyan('  adminEmail = ' . (string) $adminEmail . "\n");
+    $this->cli->cyan('  adminPassword = ' . (string) $adminPassword . "\n");
+    $this->cli->cyan('  packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
     $this->main->config['db_host'] = $dbHost;
     $this->main->config['db_user'] = $dbUser;
@@ -108,29 +117,31 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $this->main,
       'local-env',
       '', // uid
-      $companyName,
-      $adminName,
-      $adminFamilyName,
-      $adminEmail,
-      $adminPassword,
-      $rewriteBase,
-      $accountFolder,
-      $accountUrl,
-      realpath(__DIR__ . '/../../..'), // mainFolder
-      $mainUrl, // mainUrl
-      $dbHost,
-      $dbName,
-      $dbUser,
-      $dbPassword,
+      (string) $companyName,
+      (string) $adminName,
+      (string) $adminFamilyName,
+      (string) $adminEmail,
+      (string) $adminPassword,
+      (string) $rewriteBase,
+      (string) $accountFolder,
+      (string) $accountUrl,
+      (string) realpath(__DIR__ . '/../../..'), // mainFolder
+      (string) $mainUrl, // mainUrl
+      (string) $dbHost,
+      (string) $dbName,
+      (string) $dbUser,
+      (string) $dbPassword,
       false, // randomize (deprecated)
     );
 
     $installer->apps = [];
-    foreach (explode(',', $packagesToInstall) as $package) {
+    foreach (explode(',', (string) $packagesToInstall) as $package) {
+      $package = trim((string) $package);
       $this->cli->cyan("  Package: {$package}\n");
+      $appsInPackage = (is_array($installer->packages[$package]) ? $installer->packages[$package] : []);
       $installer->apps = array_merge(
         $installer->apps,
-        $installer->packages[trim($package)]
+        $appsInPackage
       );
     }
 
@@ -141,7 +152,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->cyan("\n");
     $this->cli->cyan("All done! You're a fantastic CRM developer. Now you can:\n");
-    $this->cli->cyan("  -> Open {$accountUrl} and sign in with '{$adminEmail}' and '{$adminPassword}'.\n");
+    $this->cli->cyan("  -> Open " . (string) $accountUrl . " and sign in with '" . (string) $adminEmail . "' and '" . (string) $adminPassword . "'.\n");
     $this->cli->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
     $this->cli->cyan("     See https://developer.hubleto.com/nginx for more details.\n");
     $this->cli->cyan("  -> Create your app in ./src/apps.\n");

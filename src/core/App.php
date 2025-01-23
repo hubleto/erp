@@ -39,7 +39,11 @@ class App {
     (new $testClass($this, $cli))->run();
   }
 
-  public function loadDictionary(string $language): array {
+  /**
+  * @return array<string, array<string, string>>
+  */
+  public function loadDictionary(string $language): array
+  {
 
     $dict = [];
 
@@ -64,6 +68,9 @@ class App {
     }
   }
 
+  /**
+  * @return array<string>
+  */
   public function getRegisteredModels(): array
   {
     return $this->registeredModels;

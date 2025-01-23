@@ -12,7 +12,8 @@ class Help {
     $this->main = $main;
   }
 
-  public function addHotTip($slug, $title) {
+  public function addHotTip(string $slug, string $title): void
+  {
     $this->hotTips[$slug] = $title;
   }
 }

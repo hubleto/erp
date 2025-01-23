@@ -4,7 +4,7 @@ namespace HubletoMain\Cli\Agent\App;
 
 class Disable extends \HubletoMain\Cli\Agent\Command
 {
-  public function run()
+  public function run(): void
   {
     $appManager = new \HubletoMain\Core\AppManager($this->main);
 

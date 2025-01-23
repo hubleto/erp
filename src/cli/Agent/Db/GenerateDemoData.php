@@ -2,14 +2,19 @@
 
 namespace HubletoMain\Cli\Agent\Db;
 
-use HubletoApp\Community\Settings\Models\ {
-    Country, Permission, Profile, RolePermission, User, UserRole, UserHasRole
-};
+use HubletoApp\Community\Settings\Models\Country;
+use HubletoApp\Community\Settings\Models\Permission;
+use HubletoApp\Community\Settings\Models\Profile;
+use HubletoApp\Community\Settings\Models\RolePermission;
+use HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Settings\Models\UserRole;
+use HubletoApp\Community\Settings\Models\UserHasRole;
+use HubletoApp\Community\Settings\Models\Tag;
 
 class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 {
 
-  public function run()
+  public function run(): void
   {
     (new \HubletoMain\Cli\Agent\App\ResetAll($this->cli, $this->arguments))->run();
 
@@ -110,19 +115,19 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
   }
 
-  public function generateInvoiceProfiles()
+  public function generateInvoiceProfiles(): void
   {
-    $mInvoiceProfile = new Models\InvoiceProfile($this->main);
+    $mInvoiceProfile = new \HubletoApp\Community\Settings\Models\InvoiceProfile($this->main);
     $mInvoiceProfile->install();
     $mInvoiceProfile = $mInvoiceProfile->eloquent->create([
       "name" => "Test Invoice Profile"
     ])->id;
   }
 
-  public function generateTags()
+  public function generateTags(): void
   {
 
-    $mTag = new Tag($this->main);
+    $mTag = new \HubletoApp\Community\Settings\Models\Tag($this->main);
 
     $mTag->eloquent->create([
       'name' => "Category 1",
@@ -135,7 +140,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ]);
   }
 
-  function generateCompanies(
+  public function generateCompanies(
     \HubletoApp\Community\Customers\Models\Company $mCompany,
     \HubletoApp\Community\Customers\Models\CompanyTag $mCompanyTag,
   ): void {
@@ -275,7 +280,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     }
   }
 
-  function generatePersons(
+  public function generatePersons(
     \HubletoApp\Community\Customers\Models\Person $mPerson,
     \HubletoApp\Community\Customers\Models\PersonTag $mPersonTag,
     \HubletoApp\Community\Customers\Models\Contact $mContact,
@@ -451,7 +456,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $mContact->eloquent->create([
         "id_person" => $idPerson,
         "type" => "email",
-        "value" => str_replace("'", "", iconv('UTF-8', 'ASCII//TRANSLIT', $person[7])),
+        "value" => str_replace("'", "", (string) iconv('UTF-8', 'ASCII//TRANSLIT', $person[7])),
         "id_contact_type" => rand(1,2),
       ]);
 
@@ -483,7 +488,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     }
   }
 
-  function generateActivities(
+  public function generateActivities(
     \HubletoApp\Community\Customers\Models\Company $mCompany,
     \HubletoApp\Community\Customers\Models\Activity $mActivity,
     \HubletoApp\Community\Customers\Models\CompanyActivity $mCompanyActivity,
@@ -498,7 +503,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
       for ($i = 0; $i < $activityCount; $i++) {
         $date = date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month")));
-        $randomHour = str_pad(rand(6,18), 2, "0", STR_PAD_LEFT);
+        $randomHour = str_pad((string) rand(6,18), 2, "0", STR_PAD_LEFT);
         $randomMinute = $minutes[rand(0,3)];
         $timeString = $date." ".$randomHour.":".$randomMinute.":00";
         $time = date("H:i:s", strtotime($timeString));
@@ -539,7 +544,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     }
   }
 
-  function generateServices(
+  public function generateServices(
     \HubletoApp\Community\Customers\Models\Company $mCompany,
     \HubletoApp\Community\Services\Models\Service $mService
   ): void {
@@ -588,12 +593,12 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     } */
   }
 
-  function generateLeads(
+  public function generateLeads(
     \HubletoApp\Community\Customers\Models\Company $mCompany,
     \HubletoApp\Community\Leads\Models\Lead $mLead,
     \HubletoApp\Community\Leads\Models\LeadHistory $mLeadHistory,
     \HubletoApp\Community\Leads\Models\LeadTag $mLeadTag,
-  ) {
+  ): void {
 
     $companies = $mCompany->eloquent
       ->with("PERSONS")
@@ -636,14 +641,14 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
   }
 
-  function generateDeals(
+  public function generateDeals(
     \HubletoApp\Community\Leads\Models\Lead $mLead,
     \HubletoApp\Community\Leads\Models\LeadHistory $mLeadHistory,
     \HubletoApp\Community\Leads\Models\LeadTag $mLeadTag,
     \HubletoApp\Community\Deals\Models\Deal $mDeal,
     \HubletoApp\Community\Deals\Models\DealHistory $mDealHistory,
     \HubletoApp\Community\Deals\Models\DealTag $mDealTag,
-  ) {
+  ): void {
 
     $leads = $mLead->eloquent->get();
 
@@ -699,7 +704,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     }
   }
 
-  function generateProducts(
+  public function generateProducts(
     \HubletoApp\Community\Products\Models\Product $mProduct,
     \HubletoApp\Community\Products\Models\Group $mGroup,
     \HubletoApp\Community\Products\Models\Supplier $mSupplier,

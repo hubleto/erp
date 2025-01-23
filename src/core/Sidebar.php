@@ -9,6 +9,8 @@ class Sidebar {
   const ITEM_HEADING_2 = 'heading_2';
 
   public \HubletoMain $main;
+
+  /** @var array<int, array<int, array<string, bool|string>>> */
   public array $items = [];
 
   public function __construct(\HubletoMain $main) {
@@ -17,7 +19,8 @@ class Sidebar {
     $this->items[2] = [];
   }
 
-  public function addItem(int $level, int $order, string $type, string $url, string $title, string $icon, $highlighted = false) {
+  public function addItem(int $level, int $order, string $type, string $url, string $title, string $icon, bool $highlighted = false): void
+  {
     $this->items[$level][$order] = [
       'type' => $type,
       'url' => $url,
@@ -29,23 +32,28 @@ class Sidebar {
     ksort($this->items[$level]);
   }
 
-  public function addLink(int $level, int $order, string $url, string $title, string $icon, $highlighted = false) {
+  public function addLink(int $level, int $order, string $url, string $title, string $icon, bool $highlighted = false): void
+  {
     $this->addItem($level, $order, self::ITEM_LINK, $url, $title, $icon, $highlighted);
   }
 
-  public function addDivider(int $level, int $order) {
-    $this->addItem($level, $order, self::ITEM_DIVIDER);
+  public function addDivider(int $level, int $order): void
+  {
+    $this->addItem($level, $order, self::ITEM_DIVIDER, '', '', '');
   }
 
-  public function addHeading1(int $level, int $order, string $title) {
+  public function addHeading1(int $level, int $order, string $title): void
+  {
     $this->addItem($level, $order, self::ITEM_HEADING_1, '', $title, '');
   }
 
-  public function addHeading2(int $level, int $order, string $title) {
+  public function addHeading2(int $level, int $order, string $title): void
+  {
     $this->addItem($level, $order, self::ITEM_HEADING_2, '', $title, '');
   }
 
-  public function getItems(int $level): array {
+  public function getItems(int $level): array
+  {
     return $this->items[$level] ?? [];
   }
 

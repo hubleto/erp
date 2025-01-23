@@ -10,20 +10,21 @@ class Permissions extends \ADIOS\Core\Permissions {
 
   public \HubletoMain $main;
 
-  function __construct(\ADIOS\Core\Loader $main)
+  function __construct(\HubletoMain $main)
   {
     $this->main = $main;
 
     parent::__construct($main);
 
-    if ($this->main->db) {
+    if ($this->main->db->isConnected) {
       $this->administratorRoles = $this->loadAdministratorRoles();
     }
   }
 
-  public function loadAdministratorRoles(): array {
+  public function loadAdministratorRoles(): array
+  {
     $mUserRole = new UserRole($this->main);
-    $administratorRoles = $mUserRole->eloquent
+    $administratorRoles = (array) $mUserRole->eloquent
       ->where("grant_all", 1)
       ->pluck("id")
       ->toArray()
@@ -32,28 +33,39 @@ class Permissions extends \ADIOS\Core\Permissions {
     return $administratorRoles;
   }
 
-  public function loadPermissions(): array {
+  /**
+  * @return array<int, array<int, string>>
+  */
+  public function loadPermissions(): array
+  {
     $permissions = parent::loadPermissions();
 
-    if ($this->main->db) {
+    if ($this->main->db->isConnected) {
       $mUserRole = new UserRole($this->main);
-      $idCommonUserRoles = $mUserRole->eloquent
+
+      /** @var array<int, string> */
+      $idCommonUserRoles = (array) $mUserRole->eloquent
         ->where("grant_all", 0)
         ->pluck("id")
         ->toArray()
       ;
 
       foreach ($idCommonUserRoles as $idCommonRole) {
+        $idCommonRole = (int) $idCommonRole;
+
         $mRolePermission = new RolePermission($this->main);
-        $rolePermissions = $mRolePermission->eloquent
+
+        /** @var array<int, array> */
+        $rolePermissions = (array) $mRolePermission->eloquent
           ->selectRaw("role_permissions.*,permissions.permission")
           ->where("id_role", $idCommonRole)
           ->join("permissions", "role_permissions.id_permission", "permissions.id")
           ->get()
+          ->toArray()
         ;
 
         foreach ($rolePermissions as $key => $rolePermission) {
-          $permissions[$idCommonRole][] = $rolePermission->permission;
+          $permissions[$idCommonRole][] = (string) $rolePermission['permission'];
         }
       }
     }

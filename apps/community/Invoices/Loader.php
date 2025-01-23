@@ -33,14 +33,25 @@ class Loader extends \HubletoMain\Core\App
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Community/Invoices/Models/Invoice:Create,Read,Update,Delete",
-      "HubletoApp/Community/Invoices/Models/InvoiceItem:Create,Read,Update,Delete",
-      "HubletoApp/Community/Invoices/Controllers/Print",
+
+      "HubletoApp/Community/Invoices/Models/Invoice:Create" => "Invoice/Create",
+      "HubletoApp/Community/Invoices/Models/Invoice:Read" => "Invoice/Read",
+      "HubletoApp/Community/Invoices/Models/Invoice:Update" => "Invoice/Update",
+      "HubletoApp/Community/Invoices/Models/Invoice:Delete" => "Invoice/Delete",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Create" => "InvoiceItem/Create",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Read" => "InvoiceItem/Read",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Update" => "InvoiceItem/Update",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Delete" => "InvoiceItem/Delete",
+
+      "HubletoApp/Community/Invoices/Controllers/Invoices" => "Invoice/Controller",
+
+      "HubletoApp/Community/Invoices/Invoices" => "Invoice",
     ];
 
-    foreach ($permissions as $key => $permission) {
+    foreach ($permissions as $permission => $allias) {
       $mPermission->eloquent->create([
-        "permission" => $permission
+        "permission" => $permission,
+        "allias" => $allias,
       ]);
     }
   }

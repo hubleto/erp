@@ -89,7 +89,7 @@ class Person extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['defaultValues']['is_active'] = 1;
     $description['defaultValues']['is_main'] = 0;
     $description['includeRelations'] = [

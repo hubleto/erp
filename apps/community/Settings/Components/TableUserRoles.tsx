@@ -21,6 +21,12 @@ export default class TableUserRoles extends Table<TableUserRolesProps, TableUser
 
   translationContext: string = 'mod.core.settings.tableUserRoles';
 
+  getFormModalProps(): any {
+    let params = super.getFormModalProps();
+    params.type = 'right wide';
+    return params;
+  }
+
   constructor(props: TableUserRolesProps) {
     super(props);
     this.state = this.getStateFromProps(props);

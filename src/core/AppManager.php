@@ -60,6 +60,7 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
     }
 
     $app->installTables();
+    $app->installDefaultPermissions();
 
     if (!in_array($appClass, $this->main->config['apps'])) {
       $this->main->config['apps'][$this->getAppNameForConfig($appClass)] = [];

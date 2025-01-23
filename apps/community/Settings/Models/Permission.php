@@ -6,7 +6,7 @@ class Permission extends \HubletoMain\Core\Model
 {
   public string $table = 'permissions';
   public string $eloquentClass = Eloquent\Permission::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.permission';
+  public ?string $lookupSqlValue = '{%TABLE%}.allias';
 
   public function columns(array $columns = []): array
   {
@@ -14,6 +14,11 @@ class Permission extends \HubletoMain\Core\Model
       'permission' => [
         'type' => 'varchar',
         'title' => $this->translate('Permission'),
+        'show_column' => true
+      ],
+      'allias' => [
+        'type' => 'varchar',
+        'title' => $this->translate('Allias'),
         'show_column' => true
       ],
     ]);

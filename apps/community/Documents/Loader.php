@@ -27,4 +27,25 @@ class Loader extends \HubletoMain\Core\App
     $mDocuments->dropTableIfExists()->install();
   }
 
+  public function installDefaultPermissions()
+  {
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+    $permissions = [
+      "HubletoApp/Community/Documents/Models/Document:Create" => "Document/Create",
+      "HubletoApp/Community/Documents/Models/Document:Read" => "Document/Read",
+      "HubletoApp/Community/Documents/Models/Document:Update" => "Document/Update",
+      "HubletoApp/Community/Documents/Models/Document:Delete" => "Document/Delete",
+
+      "HubletoApp/Community/Documents/Controllers/Documents" => "Document/Controller",
+
+      "HubletoApp/Community/Documents/Documents" => "Document",
+    ];
+
+    foreach ($permissions as $permission => $allias) {
+      $mPermission->eloquent->create([
+        "permission" => $permission,
+        "allias" => $allias,
+      ]);
+    }
+  }
 }

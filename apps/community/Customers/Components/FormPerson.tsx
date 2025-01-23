@@ -169,12 +169,12 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     context="Hello World"
                     descriptionSource="props"
                     description={{
-                      permissions: {
+                      /* permissions: {
                         canCreate: true,
                         canDelete: true,
                         canRead: true,
                         canUpdate: true
-                      },
+                      }, */
                       columns: {
                         type: {
                           type: 'varchar',

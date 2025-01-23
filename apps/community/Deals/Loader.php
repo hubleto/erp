@@ -57,4 +57,61 @@ class Loader extends \HubletoMain\Core\App
     $mDealStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
 
   }
+
+  public function installDefaultPermissions()
+  {
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+    $permissions = [
+      "HubletoApp/Community/Deals/Models/Deal:Create" => "Deal/Create",
+      "HubletoApp/Community/Deals/Models/Deal:Read" => "Deal/Read",
+      "HubletoApp/Community/Deals/Models/Deal:Update" => "Deal/Update",
+      "HubletoApp/Community/Deals/Models/Deal:Delete" => "Deal/Delete",
+      "HubletoApp/Community/Deals/Models/DealActivity:Create" => "DealActivity/Create",
+      "HubletoApp/Community/Deals/Models/DealActivity:Read" => "DealActivity/Read",
+      "HubletoApp/Community/Deals/Models/DealActivity:Update" => "DealActivity/Update",
+      "HubletoApp/Community/Deals/Models/DealActivity:Delete" => "DealActivity/Delete",
+      "HubletoApp/Community/Deals/Models/DealDocument:Create" => "DealDocument/Create",
+      "HubletoApp/Community/Deals/Models/DealDocument:Read" => "DealDocument/Read",
+      "HubletoApp/Community/Deals/Models/DealDocument:Update" => "DealDocument/Update",
+      "HubletoApp/Community/Deals/Models/DealDocument:Delete" => "DealDocument/Delete",
+      "HubletoApp/Community/Deals/Models/DealHistory:Create" => "DealHistory/Create",
+      "HubletoApp/Community/Deals/Models/DealHistory:Read" => "DealHistory/Read",
+      "HubletoApp/Community/Deals/Models/DealHistory:Update" => "DealHistory/Update",
+      "HubletoApp/Community/Deals/Models/DealHistory:Delete" => "DealHistory/Delete",
+      "HubletoApp/Community/Deals/Models/DealService:Create" => "DealService/Create",
+      "HubletoApp/Community/Deals/Models/DealService:Read" => "DealService/Read",
+      "HubletoApp/Community/Deals/Models/DealService:Update" => "DealService/Update",
+      "HubletoApp/Community/Deals/Models/DealService:Delete" => "DealService/Delete",
+      "HubletoApp/Community/Deals/Models/DealStatus:Create" => "DealStatus/Create",
+      "HubletoApp/Community/Deals/Models/DealStatus:Read" => "DealStatus/Read",
+      "HubletoApp/Community/Deals/Models/DealStatus:Update" => "DealStatus/Update",
+      "HubletoApp/Community/Deals/Models/DealStatus:Delete" => "DealStatus/Delete",
+      "HubletoApp/Community/Deals/Models/DealTag:Create" => "DealTag/Create",
+      "HubletoApp/Community/Deals/Models/DealTag:Read" => "DealTag/Read",
+      "HubletoApp/Community/Deals/Models/DealTag:Update" => "DealTag/Update",
+      "HubletoApp/Community/Deals/Models/DealTag:Delete" => "DealTag/Delete",
+
+      "HubletoApp/Community/Deals/Controllers/Deals" => "Deals/Controller",
+      "HubletoApp/Community/Deals/Controllers/DealsArchive" => "DealsArchive/Controller",
+      "HubletoApp/Community/Deals/Controllers/DealStatuses" => "DealStatuses/Controller",
+
+      "HubletoApp/Community/Deals/Api/ChangePipelineStep" => "Company/Api/ChangePipelineStep",
+      "HubletoApp/Community/Deals/Api/GetCalendarEvents" => "Company/Api/GetCalendarEvents",
+
+      "HubletoApp/Community/Deals/Deals" => "Deal",
+      "HubletoApp/Community/Deals/DealActivities" => "DealActivity",
+      "HubletoApp/Community/Deals/DealDocuments" => "DealDocument",
+      "HubletoApp/Community/Deals/DealHistories" => "DealHistory",
+      "HubletoApp/Community/Deals/DealServices" => "DealService",
+      "HubletoApp/Community/Deals/DealStatuses" => "DealStatus",
+      "HubletoApp/Community/Deals/DealTags" => "DealTag",
+    ];
+
+    foreach ($permissions as $permission => $allias) {
+      $mPermission->eloquent->create([
+        "permission" => $permission,
+        "allias" => $allias,
+      ]);
+    }
+  }
 }

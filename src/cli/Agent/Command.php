@@ -19,7 +19,7 @@ class Command
     $this->arguments = $arguments;
   }
 
-  public function run()
+  public function run(): void
   {
     // to be implemented in sub-classes
   }

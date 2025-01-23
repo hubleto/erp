@@ -8,6 +8,7 @@ use HubletoApp\Community\Settings\Models\ {
 
 class Installer {
   public \HubletoMain $main;
+
   public string $adminName = '';
   public string $adminFamilyName = '';
   public string $adminEmail = '';
@@ -49,9 +50,9 @@ class Installer {
       \HubletoApp\Community\Deals\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Leads\Loader::class => [ 'enabled' => true ],
     ],
-    'sync' => [
-      \HubletoApp\Community\CalendarSync\Loader::class => [ 'enabled' => true ],
-    ],
+    // 'sync' => [
+    //   \HubletoApp\Community\CalendarSync\Loader::class => [ 'enabled' => true ],
+    // ],
     'shop' => [
       \HubletoApp\Community\Products\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Orders\Loader::class => [ 'enabled' => true ],
@@ -102,7 +103,7 @@ class Installer {
 
   }
 
-  public function validate()
+  public function validate(): void
   {
     if (strlen($this->uid) > 32) {
       throw new \HubletoMain\Exceptions\AccountValidationFailed('Account name is too long.');
@@ -120,7 +121,7 @@ class Installer {
     }
   }
 
-  public function createDatabase()
+  public function createDatabase(): void
   {
 
     $this->main->pdo->execute("drop database if exists `{$this->dbName}`");
@@ -130,7 +131,7 @@ class Installer {
     $this->main->config['db_codepage'] = "utf8mb4";
     $this->main->initDatabaseConnections();
 
-    foreach ($this->main->registeredModels as $modelClass) {
+    foreach ($this->main->getRegisteredModels() as $modelClass) {
       $model = $this->main->getModel($modelClass);
       $this->main->db->addTable(
         $model->getFullTableSqlName(),
@@ -141,7 +142,7 @@ class Installer {
 
   }
 
-  public function installTables()
+  public function installTables(): void
   {
 
     (new \ADIOS\Models\Config($this->main))->install();
@@ -182,10 +183,10 @@ class Installer {
 
   public function getConfigEnvContent(): string
   {
-    $configEnv = file_get_contents(__DIR__ . '/template/ConfigEnv.tpl');
+    $configEnv = (string) file_get_contents(__DIR__ . '/template/ConfigEnv.php.tpl');
     $configEnv = str_replace('{{ mainFolder }}', $this->mainFolder, $configEnv);
     $configEnv = str_replace('{{ mainUrl }}', $this->mainUrl, $configEnv);
-    $configEnv = str_replace('{{ dbHost }}', $this->main->config['db_host'], $configEnv);
+    $configEnv = str_replace('{{ dbHost }}', $this->main->configAsString('db_host'), $configEnv);
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
     $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);
     $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);
@@ -205,7 +206,7 @@ class Installer {
     return $configEnv;
   }
 
-  public function createFoldersAndFiles()
+  public function createFoldersAndFiles(): void
   {
 
     // folders
@@ -219,7 +220,7 @@ class Installer {
     file_put_contents($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigEnv.php', $this->getConfigEnvContent());
 
     // index.php
-    $index = file_get_contents(__DIR__ . '/template/index.php');
+    $index = (string) file_get_contents(__DIR__ . '/template/index.php.tpl');
     $index = str_replace('{{ uid }}', $this->uid, $index);
     $index = str_replace('{{ mainFolder }}', $this->mainFolder, $index);
     file_put_contents($this->accountFolder . '/' . $this->uid . '/index.php', $index);
@@ -227,44 +228,24 @@ class Installer {
     // hubleto cli agent
     $hubletoCliAgentFile = $this->accountFolder . '/' . $this->uid . '/hubleto';
     if (!is_file($hubletoCliAgentFile)) {
-      $hubleto = file_get_contents(__DIR__ . '/template/hubleto');
+      $hubleto = (string) file_get_contents(__DIR__ . '/template/hubleto.tpl');
       $hubleto = str_replace('{{ mainFolder }}', $this->mainFolder, $hubleto);
       file_put_contents($hubletoCliAgentFile, $hubleto);
     }
 
     // .htaccess
     copy(
-      __DIR__ . '/template/.htaccess',
+      __DIR__ . '/template/.htaccess.tpl',
       $this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/.htaccess'
     );
   }
 
-  public function installDefaultPermissions() {
+  public function installDefaultPermissions(): void
+  {
     $modules = $this->main->getRegisteredApps();
     array_walk($modules, function($module) {
       $module->installDefaultPermissions();
     });
   }
-
-  // public function createDevelScripts()
-  // {
-  //   @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/devel');
-
-  //   $tplFolder = __DIR__ . '/template';
-  //   $accFolder = $this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid);
-
-  //   copy($tplFolder . '/devel/Reinstall.php', $accFolder . '/devel/Reinstall.php');
-  // }
-
-  // public function getDatabaseUser(): string {
-  //   $dbUser = \ADIOS\Core\Helper::str2url($this->companyName);
-  //   $dbUser = str_replace('-', '_', $dbUser);
-  //   $dbUser =
-  //     'usr_' . $dbUser
-  //     . ($this->randomize ? '_' . substr(md5(date('YmdHis').rand(1, 10000)), 1, 5) : '')
-  //   ;
-
-  //   return $dbUser;
-  // }
 
 }

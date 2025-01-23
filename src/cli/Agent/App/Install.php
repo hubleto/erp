@@ -4,7 +4,7 @@ namespace HubletoMain\Cli\Agent\App;
 
 class Install extends \HubletoMain\Cli\Agent\Command
 {
-  public function run()
+  public function run(): void
   {
     $cli = $this->cli;
 

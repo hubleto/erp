@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Settings\Models;
 class Profile extends \HubletoMain\Core\Model
 {
   public string $table = 'profiles';
-  public string $eloquentClass = Eloquent\Setting::class;
+  public string $eloquentClass = Eloquent\Profile::class;
   public ?string $lookupSqlValue = '{%TABLE%}.company';
 
   public function columns(array $columns = []): array

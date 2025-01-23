@@ -4,7 +4,7 @@ namespace HubletoMain\Cli\Agent\App;
 
 class Test extends \HubletoMain\Cli\Agent\Command
 {
-  public function run()
+  public function run(): void
   {
     $appClass = $this->arguments[3] ?? '';
     $test = $this->arguments[4] ?? '';

@@ -1,0 +1,13 @@
+parameters:
+	level: 10
+	paths:
+		- src
+		- apps
+	ignoreErrors:
+		-
+			identifier: missingType.iterableValue
+		- '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::.+#'
+		- '#Cannot call method (.*?) on mixed\.#'
+		- '#Cannot access property (.*?) on mixed\.#'
+		- '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model.+#'
+		- '#Cannot cast mixed to string.#'

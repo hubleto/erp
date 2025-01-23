@@ -4,7 +4,7 @@ namespace HubletoMain\Cli\Agent\App;
 
 class ListInstalled extends \HubletoMain\Cli\Agent\Command
 {
-  public function run()
+  public function run(): void
   {
     $cli = $this->cli;
     $main = $this->main;

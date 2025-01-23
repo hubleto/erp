@@ -169,15 +169,22 @@ export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUse
                   <div className='card-body'>
                     {Object.entries(this.state.sortedAllPermissions).map(([app, groups]) => (
                       <div className='card' >
-                        <div className='card-header cursor-pointer' onClick={() => this.setState({ selectedGroup: app } as FormUserRolesState)}>
+                        <div className='card-header cursor-pointer'
+                          onClick={() => {
+                            if (this.state.selectedGroup == app) {
+                              this.setState({ selectedGroup: "" } as FormUserRolesState);
+                            } else this.setState({ selectedGroup: app } as FormUserRolesState)}
+                          }
+                        >
                           <p>{app}</p>
+                          <span className='icon'><i className='fas fa-chevron-down'></i></span>
                         </div>
                         <div className={`card-body ${this.state.selectedGroup == app ? "block" : "hidden"}`}>
                           {Object.entries(groups).map(([key, group]) => (
                             <div className='card card-body mb-2'>
                               <p className='font-bold'>{key}</p>
                               {Object.entries(group).map(([key, permission]) => (
-                                <div className='flex flex-row justify-between'>
+                                <div className='flex flex-row justify-between my-1'>
                                   <label htmlFor={`permission_id_${permission.id}`}>{permission.alias ?? permission.permission}</label>
                                   <input
                                     id={`permission_id_${permission.id}`}

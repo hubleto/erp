@@ -23,7 +23,7 @@ export default class TableUserRoles extends Table<TableUserRolesProps, TableUser
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'right wide';
+    params.type = 'right';
     return params;
   }
 

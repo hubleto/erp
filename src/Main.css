@@ -55,8 +55,6 @@
   .adios.component.table .table-body tr { @apply border divide-x border-transparent hover:bg-gray-100; box-sizing: border-box; }
   .adios.component.table .table-body thead th td { @apply p-0.5 text-sm; margin: 1px; }
   .adios.component.table .table-body tbody tr td { @apply p-0.5 text-sm; margin: 1px; }
-  .adios.component.table .table-body thead th:nth-child(n+4) { @apply hidden md:table-cell; }
-  .adios.component.table .table-body tbody tr td:nth-child(n+4) { @apply hidden md:table-cell;}
   .adios.component.table .table-body tbody tr td > div { @apply text-sm; }
   .adios.component.table .table-body tbody tr td .inline-edit-icon { @apply invisible cursor-pointer; }
   .adios.component.table .table-body tbody tr td:hover .inline-edit-icon { @apply visible; }
@@ -64,6 +62,10 @@
   .adios.component.table .table-body tr.highlighted td > div { @apply border-b border-primary; }
   .adios.component.table .table-body tr td { @apply cursor-pointer; }
   .adios.component.input.table { @apply max-w-[100%] }
+
+  /* main table responsivness */
+  #app-main-content > * > .adios.component.table .table-body thead th:nth-child(n+4) { @apply hidden md:table-cell; }
+  #app-main-content > * > .adios.component.table .table-body tbody tr td:nth-child(n+4) { @apply hidden md:table-cell;}
 
   .adios.component.table.header-style-1 { @apply bg-green-50 }
 
@@ -106,7 +108,7 @@
   .btn .text > small { @apply block text-xs text-gray-600; } */
 
   .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
-  .btn.btn-small { height: 1.25rem; }
+  .btn.btn-small { @apply h-auto md:h-[1.25rem]; }
   .btn .icon { @apply flex h-full items-center px-2 py-1 text-sm justify-center; }
   .btn .text { @apply flex h-full items-center px-2 py-1 text-sm break-all; max-height: 3.5rem; overflow: hidden; }
 
@@ -114,8 +116,8 @@
 
   .btn.btn-extra-small .icon { @apply px-1 py-0.5; font-size: 0.3rem; }
   .btn.btn-extra-small .text { @apply px-1 py-0.5; font-size: 0.3rem; }
-  .btn.btn-small .icon { @apply text-xs py-0; height: 1.25rem; }
-  .btn.btn-small .text { @apply text-xs py-0; height: 1.25rem; }
+  .btn.btn-small .icon { @apply text-xs py-0 h-auto md:h-[1.25rem]; }
+  .btn.btn-small .text { @apply text-xs py-0 h-auto md:h-[1.25rem]; }
   .btn.btn-large .icon { @apply text-lg px-2.5 py-1.5; }
   .btn.btn-large .text { @apply text-lg px-2.5 py-1.5; }
   .btn.btn-extra-large .icon { @apply text-2xl px-3.5 py-2; }
@@ -176,6 +178,7 @@
   .btn-group .btn { @apply border-none rounded-none shadow-none; }
 
   .breadcrumbs { @apply flex pb-2; }
+  .breadcrumbs ol li:nth-child(n+2) { @apply hidden sm:block md:block ;}
 
   .card { @apply border border-solid rounded shadow-lg mb-4; }
   .card-header { @apply flex justify-between font-bold border-b p-4 bg-gray-50; }

@@ -17,8 +17,8 @@
   }
 </script>
 
-<div class="flex">
-  <div class="basis-8/12">
+<div class="flex flex-col sm:flex-row">
+  <div class="basis-8/12 order-2 sm:order-1">
     <div class="text-lg m-auto w-1/2">
       <input
         class="w-full p-2 border border-gray"
@@ -27,7 +27,7 @@
       />
     </div>
 
-    <div id="setting-buttons" class="mt-4 grid grid-cols-4 gap-2">
+    <div id="setting-buttons" class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
       {% for setting in viewParams.settings %}
         <a class="btn btn-transparent" href="{{ setting.url }}">
           <span class="icon"><i class="{{ setting.icon }}"></i></span>
@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <div class="basis-4/12 ml-2">
+  <div class="basis-4/12 ml-2  order-1 sm:order-2">
     {% if viewParams.app.isPro %}
       <div class="alert alert-success mt-2">
         You are already PRO.
@@ -62,7 +62,7 @@
   <div class="card-header">Manage installed apps</div>
   <div class="card-body">
     {% for app in viewParams.app.apps %}
-      <div class="my-1 flex justify-between">
+      <div class="my-1 sm:flex flex-wrap sm:flex-nowrap justify-between">
         <span class="text-sm">{{ app.namespace }}</span>
         <div>
           <a class="btn btn-transparent" href="{{ app.url }}">

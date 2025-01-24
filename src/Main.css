@@ -226,14 +226,14 @@
   .key-value-table > div { @apply flex justify-between p-1 hover:bg-gray-100; }
   .key-value-table > div div:nth-child(2) { @apply font-bold; }
 
-  .modal { @apply flex flex-col h-screen overflow-auto; }
-  .modal.right { @apply fixed top-0 right-0 w-full md:w-1/2 z-50 h-full shadow-2xl bg-white border-l border-l-primary; }
-  .modal.right.wide { @apply w-full md:w-2/3; }
-  .modal.right.wider { width: 90vw; }
-  .modal.centered { @apply fixed mx-auto md:my-4 w-full md:w-2/3 h-full md:h-[calc(100vh-theme(space.8))] z-50 shadow-2xl rounded bg-white border border-primary resize; top: 0; left: 50%; transform: translate(-50%, 0%);}
-  .modal.centered.large { width: 90vw; height: 90vh; }
-  .modal.centered.small { @apply fixed mx-auto mt-1 w-1/2 h-1/2 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
-  .modal.centered.tiny { @apply fixed mx-auto mt-1 w-1/3 h-1/3 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+  .modal { @apply flex flex-col h-screen w-full overflow-auto; }
+  .modal.right { @apply fixed top-0 right-0 md:w-1/2 z-50 h-full shadow-2xl bg-white border-l border-l-primary; }
+  .modal.right.wide { @apply md:w-2/3; }
+  .modal.right.wider { @apply md:w-[90vw] ;}
+  .modal.centered { @apply fixed mx-auto md:my-4 md:w-2/3 md:h-[calc(100vh-theme(space.8))] z-50 shadow-2xl rounded bg-white border border-primary resize; top: 0; left: 50%; transform: translate(-50%, 0%);}
+  .modal.centered.large { @apply md:w-[90vw] md:h-[90vh];}
+  .modal.centered.small { @apply fixed mx-auto mt-1 md:w-1/2 md:h-1/2 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+  .modal.centered.tiny { @apply fixed mx-auto mt-1 md:w-1/3 md:h-1/3 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
   .modal .modal-header { @apply flex items-center border-b border-b-primary/20 text-primary items-baseline w-full justify-between p-2 bg-primary/5; }
   .modal .modal-header .modal-header-left { @apply flex flex-1 gap-1; }
   .modal .modal-header .modal-header-title { @apply flex-1 text-center; }

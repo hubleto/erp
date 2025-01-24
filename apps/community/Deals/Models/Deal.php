@@ -146,7 +146,6 @@ class Deal extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     if ((bool) $this->main->params["showArchive"]) {
       $description["ui"] = [
@@ -185,7 +184,7 @@ class Deal extends \HubletoMain\Core\Model
       ->value
     ;
 
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_deal_status'] = 1;
     $description['defaultValues']['date_created'] = date("Y-m-d");

@@ -91,8 +91,7 @@ class Order extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe();
+    $description = parent::tableDescribe($description);
 
     $description['ui']['title'] = 'Orders';
     $description["ui"]["addButtonText"] = $this->translate("Add order");
@@ -105,7 +104,7 @@ class Order extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description["defaultValues"]["date_order"] = date("Y-m-d");
     $description["defaultValues"]["price"] = 0;
     ;

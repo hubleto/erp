@@ -146,7 +146,7 @@ class Lead extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['defaultValues']['id_company'] = null;
     $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_person'] = null;

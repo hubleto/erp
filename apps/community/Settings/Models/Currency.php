@@ -25,7 +25,6 @@ class Currency extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Currencies';
     $description['ui']['addButtonText'] = 'Add currency';
@@ -36,7 +35,7 @@ class Currency extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['ui']['title'] = ($this->main->params['id'] == -1 ? "New currency" : "Currency");
     $description['ui']['subTitle'] = ($this->main->params['id'] == -1 ? "Adding" : "Editing");
     return $description;

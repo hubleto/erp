@@ -49,7 +49,6 @@ class Setting extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Settings';
     $description['ui']['addButtonText'] = 'Add Setting';

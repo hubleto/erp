@@ -50,7 +50,6 @@ class Contact extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['title'] = 'Contacts';
     $description['ui']['addButtonText'] = 'Add Company';

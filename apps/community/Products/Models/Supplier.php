@@ -98,8 +98,7 @@ class Supplier extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe();
+    $description = parent::tableDescribe($description);
 
     $description['ui']['title'] = 'Product Suppliers';
     $description["ui"]["addButtonText"] = $this->translate("Add product supplier");

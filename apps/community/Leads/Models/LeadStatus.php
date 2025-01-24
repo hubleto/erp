@@ -31,7 +31,6 @@ class LeadStatus extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Lead Statuses';
     $description['ui']['addButtonText'] = 'Add Lead Status';

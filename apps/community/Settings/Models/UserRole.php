@@ -40,7 +40,6 @@ class UserRole extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'User Roles';
     $description['ui']['addButtonText'] = 'Add User Role';
@@ -51,7 +50,7 @@ class UserRole extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['includeRelations'] = ['PERMISSIONS'];
     return $description;
   }

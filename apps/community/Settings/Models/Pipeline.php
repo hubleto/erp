@@ -30,7 +30,6 @@ class Pipeline extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Pipelines';
     $description['ui']['addButtonText'] = 'Add Pipeline';
@@ -41,7 +40,7 @@ class Pipeline extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['includeRelations'] = ['PIPELINE_STEPS'];
     return $description;
   }

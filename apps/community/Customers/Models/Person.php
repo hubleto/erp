@@ -65,8 +65,7 @@ class Person extends \HubletoMain\Core\Model
   //v tablePersons
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe();
+    $description = parent::tableDescribe($description);
     $description['ui']['title'] = $this->translate('Contact Persons');
     $description['ui']['addButtonText'] = $this->translate('Add Contact Person');
     $description['ui']['showHeader'] = true;

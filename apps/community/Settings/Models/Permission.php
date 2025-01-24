@@ -21,7 +21,6 @@ class Permission extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Permissions';
     $description['ui']['showHeader'] = false;
@@ -34,7 +33,7 @@ class Permission extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['ui']['title'] = 'Permission';
     $description['ui']['subTitle'] = '';
     $description['permissions']['canCreate'] = false;

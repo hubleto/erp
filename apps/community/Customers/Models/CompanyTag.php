@@ -38,7 +38,6 @@ class CompanyTag extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['title'] = 'Company Categories';
     $description['ui']['addButtonText'] = 'Add Company';

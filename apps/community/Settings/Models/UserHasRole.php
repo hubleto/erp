@@ -24,7 +24,6 @@ class UserHasRole extends \HubletoMain\Core\Model
   }
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Role Assigments';
     $description['ui']['addButtonText'] = 'Assign Roles';

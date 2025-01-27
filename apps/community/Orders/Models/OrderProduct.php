@@ -65,11 +65,12 @@ class OrderProduct extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe();
 
-    $description['ui']['title'] = 'Order Products';
-    $description["ui"]["addButtonText"] = $this->translate("Add product");
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Order Products';
+      $description["ui"]["addButtonText"] = $this->translate("Add product");
+    }
 
     return $description;
   }

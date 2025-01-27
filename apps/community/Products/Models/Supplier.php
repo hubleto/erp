@@ -98,20 +98,23 @@ class Supplier extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe();
 
-    $description['ui']['title'] = 'Product Suppliers';
-    $description["ui"]["addButtonText"] = $this->translate("Add product supplier");
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Product Suppliers';
+      $description["ui"]["addButtonText"] = $this->translate("Add product supplier");
+    }
 
-    unset($description["columns"]["address"]);
-    unset($description["columns"]["city"]);
-    unset($description["columns"]["postal_code"]);
-    unset($description["columns"]["id_country"]);
-    unset($description["columns"]["tax_id"]);
-    unset($description["columns"]["company_id"]);
-    unset($description["columns"]["vat_id"]);
-    unset($description["columns"]["payment_account"]);
+    if (is_array($description['columns'])) {
+      unset($description["columns"]["address"]);
+      unset($description["columns"]["city"]);
+      unset($description["columns"]["postal_code"]);
+      unset($description["columns"]["id_country"]);
+      unset($description["columns"]["tax_id"]);
+      unset($description["columns"]["company_id"]);
+      unset($description["columns"]["vat_id"]);
+      unset($description["columns"]["payment_account"]);
+    }
 
     return $description;
   }

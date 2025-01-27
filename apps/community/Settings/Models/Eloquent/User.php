@@ -14,15 +14,21 @@ class User extends \HubletoMain\Core\ModelEloquent
    */
   public $table = 'users';
 
-  public function id_active_profile(): BelongsTo {
+  /** @return BelongsTo<Profile, covariant User> */
+  public function id_active_profile(): BelongsTo
+  {
     return $this->belongsTo(Profile::class, 'id_active_profile', 'id');
   }
 
-  public function PROFILE(): BelongsTo {
+  /** @return BelongsTo<Profile, covariant User> */
+  public function PROFILE(): BelongsTo
+  {
     return $this->id_active_profile();
   }
 
-  public function ROLES(): BelongsToMany {
+  /** @return BelongsToMany<UserRole, covariant User> */
+  public function ROLES(): BelongsToMany
+  {
     return $this->belongsToMany(
       UserRole::class,
       'user_has_roles',

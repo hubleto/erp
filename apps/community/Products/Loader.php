@@ -32,16 +32,4 @@ class Loader extends \HubletoMain\Core\App
     $mProductGroup->dropTableIfExists()->install();
     $mProduct->dropTableIfExists()->install();
   }
-
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [];
-
-    foreach ($permissions as $key => $permission) {
-      $mPermission->eloquent->create([
-        "permission" => $permission
-      ]);
-    }
-  }
 }

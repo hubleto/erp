@@ -91,14 +91,17 @@ class Order extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe();
 
-    $description['ui']['title'] = 'Orders';
-    $description["ui"]["addButtonText"] = $this->translate("Add order");
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Orders';
+      $description["ui"]["addButtonText"] = $this->translate("Add order");
+    }
 
-    unset($description["columns"]["shipping_info"]);
-    unset($description["columns"]["note"]);
+    if (is_array($description['columns'])) {
+      unset($description["columns"]["shipping_info"]);
+      unset($description["columns"]["note"]);
+    }
 
     return $description;
   }
@@ -106,9 +109,12 @@ class Order extends \HubletoMain\Core\Model
   public function formDescribe(array $description = []): array
   {
     $description = parent::formDescribe();
-    $description["defaultValues"]["date_order"] = date("Y-m-d");
-    $description["defaultValues"]["price"] = 0;
-    ;
+
+    if (is_array($description['defaultValues'])) {
+      $description["defaultValues"]["date_order"] = date("Y-m-d");
+      $description["defaultValues"]["price"] = 0;
+    }
+
     $description['includeRelations'] = [
       'PRODUCTS',
       'CUSTOMER',

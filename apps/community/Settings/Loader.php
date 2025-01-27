@@ -12,7 +12,7 @@ class Loader extends \HubletoMain\Core\App
     parent::__construct($main);
 
     $this->registerModel(\HubletoApp\Community\Settings\Models\User::class);
-    $this->registerModel(\HubletoApp\Community\Settings\Models\Models\UserRole::class);
+    $this->registerModel(\HubletoApp\Community\Settings\Models\UserRole::class);
     $this->registerModel(\HubletoApp\Community\Settings\Models\UserHasRole::class);
     $this->registerModel(\HubletoApp\Community\Settings\Models\Setting::class);
   }

@@ -60,12 +60,7 @@ class Invoice extends \ADIOS\Core\Model {
     return $record;
   }
 
-  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0):
-    \Illuminate\Database\Eloquent\Builder
-    |\Illuminate\Database\Eloquent\Relations\HasOne
-    |\Illuminate\Database\Eloquent\Relations\BelongsTo
-    |\Illuminate\Database\Eloquent\Relations\HasMany
-  {
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed {
   
     $query = parent::prepareLoadRecordQuery($includeRelations, $maxRelationLevel, $query, $level);
 

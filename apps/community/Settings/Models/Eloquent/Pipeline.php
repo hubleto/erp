@@ -11,7 +11,8 @@ class Pipeline extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'pipelines';
 
-  public function PIPELINE_STEPS(): HasMany {
+  public function PIPELINE_STEPS(): \Illuminate\Database\Query\Builder
+  {
     return $this->hasMany(PipelineStep::class, 'id_pipeline', 'id' )->orderBy('order', 'asc');
   }
 }

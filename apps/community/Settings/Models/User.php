@@ -56,18 +56,13 @@ class User extends \ADIOS\Models\User
     ]));
   }
 
-  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0):
-    \Illuminate\Database\Eloquent\Builder
-    |\Illuminate\Database\Eloquent\Relations\HasOne
-    |\Illuminate\Database\Eloquent\Relations\BelongsTo
-    |\Illuminate\Database\Eloquent\Relations\HasMany
-  {
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed {
     return parent::prepareLoadRecordQuery($includeRelations, $maxRelationLevel, $query, $level)
       ->with('ROLES')
     ;
   }
 
-  public function getQueryForUser(int $idUser)
+  public function getQueryForUser(int $idUser): mixed
   {
     return $this->eloquent
       ->with('ROLES')
@@ -77,13 +72,15 @@ class User extends \ADIOS\Models\User
     ;
   }
 
-  public function loadUser(int $idUser)
+  public function loadUser(int $idUser): array
   {
-    $user = $this->getQueryForUser($idUser)->first()?->toArray();
+    $user = (array) $this->getQueryForUser($idUser)->first()?->toArray();
 
     $tmpRoles = [];
-    foreach ($user['ROLES'] ?? [] as $role) {
-      $tmpRoles[] = (int) $role['pivot']['id_role'];
+    if (is_array($user['ROLES'])) {
+      foreach ($user['ROLES'] as $role) {
+        $tmpRoles[] = (int) $role['pivot']['id_role']; // @phpstan-ignore-line
+      }
     }
     $user['ROLES'] = $tmpRoles;
 

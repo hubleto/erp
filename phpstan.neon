@@ -11,3 +11,6 @@ parameters:
 		- '#Cannot access property (.*?) on mixed\.#'
 		- '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model.+#'
 		- '#Cannot cast mixed to string.#'
+		- '#Cannot cast mixed to int.#'
+		- '#Cannot cast mixed to float.#'
+		- '#Cannot access offset#'

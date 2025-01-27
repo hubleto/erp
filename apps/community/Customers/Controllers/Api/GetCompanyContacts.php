@@ -18,7 +18,7 @@ class GetCompanyContacts extends \HubletoMain\Core\Controller {
       if (isset($this->main->params["id_company"]) && (int) $this->main->params["id_company"] > 0) {
         $persons = $persons->where("id_company", (int) $this->main->params["id_company"]);
       }
-      if (isset($this->main->params["search"]) && $this->main->params["search"] != "") {
+      if (isset($this->main->params["search"]) && strlen($this->main->params["search"]) > 1) {
         $persons->whereRaw("CONCAT(first_name, ' ', last_name) LIKE '%".$this->main->params["search"]."%'");
       }
 

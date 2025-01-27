@@ -13,7 +13,8 @@ class Loader extends \HubletoMain\Core\App
     $this->main->sidebar->addLink(1, 100, 'orders', $this->translate('Orders'), 'fas fa-file-lines', str_starts_with($this->main->requestedUri, 'shop'));
   }
 
-  public function installTables() {
+  public function installTables(): void
+  {
     $mOrder = new \HubletoApp\Community\Orders\Models\Order($this->main);
     $mOrderProduct = new \HubletoApp\Community\Orders\Models\OrderProduct($this->main);
     $mHistory = new \HubletoApp\Community\Orders\Models\History($this->main);
@@ -23,7 +24,7 @@ class Loader extends \HubletoMain\Core\App
     $mHistory->dropTableIfExists()->install();
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [];

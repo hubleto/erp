@@ -20,7 +20,7 @@ class Loader extends \HubletoMain\Core\App
     $this->main->sidebar->addLink(1, 800, 'invoices', $this->translate('Invoices'), 'fas fa-euro-sign', str_starts_with($this->main->requestedUri, 'invoices'));
   }
 
-  public function installTables()
+  public function installTables(): void
   {
     $mInvoice = new \HubletoApp\Community\Invoices\Models\Invoice($this->main);
     $mInvoiceItem = new \HubletoApp\Community\Invoices\Models\InvoiceItem($this->main);
@@ -29,7 +29,7 @@ class Loader extends \HubletoMain\Core\App
     $mInvoiceItem->dropTableIfExists()->install();
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [

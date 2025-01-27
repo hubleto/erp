@@ -59,7 +59,11 @@ class Contact extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0):
+    \Illuminate\Database\Eloquent\Builder
+    |\Illuminate\Database\Eloquent\Relations\HasOne
+    |\Illuminate\Database\Eloquent\Relations\BelongsTo
+    |\Illuminate\Database\Eloquent\Relations\HasMany
   {
     $query = parent::prepareLoadRecordQuery($includeRelations, 3, $query, $level);
     return $query;

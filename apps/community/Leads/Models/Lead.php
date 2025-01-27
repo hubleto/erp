@@ -172,7 +172,11 @@ class Lead extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0):
+    \Illuminate\Database\Eloquent\Builder
+    |\Illuminate\Database\Eloquent\Relations\HasOne
+    |\Illuminate\Database\Eloquent\Relations\BelongsTo
+    |\Illuminate\Database\Eloquent\Relations\HasMany
   {
     $relations = [
       'DEAL',
@@ -189,7 +193,7 @@ class Lead extends \HubletoMain\Core\Model
     ];
     $query = parent::prepareLoadRecordQuery($relations, 4);
 
-    if ((bool) $this->main->params["showArchive"]) {
+    if ((bool) ($this->main->params["showArchive"] ?? false)) {
       $query = $query->where("leads.is_archived", 1);
     } else {
       $query = $query->where("leads.is_archived", 0);

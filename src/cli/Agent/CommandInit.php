@@ -6,12 +6,11 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 {
   public array $initConfig = [];
 
-  /**
-  * @return array<string>
-  */
   public function parseConfigFile(string $configFile): array
   {
-    return \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($configFile)) ?? [];
+    $configStr = (string) file_get_contents($configFile);
+    $config = (array) (\Symfony\Component\Yaml\Yaml::parse($configStr) ?? []);
+    return $config;
   }
 
   public function run(): void

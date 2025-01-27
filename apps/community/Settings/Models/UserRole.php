@@ -40,12 +40,15 @@ class UserRole extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'User Roles';
-    $description['ui']['addButtonText'] = 'Add User Role';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'User Roles';
+      $description['ui']['addButtonText'] = 'Add User Role';
+      $description['ui']['showHeader'] = true;
+      $description['ui']['showFooter'] = false;
+    }
+
     return $description;
   }
 

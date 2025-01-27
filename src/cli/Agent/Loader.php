@@ -6,6 +6,7 @@ class Loader {
 
   public \HubletoMain $main;
 
+  /** @var resource|false */
   public $clih;
 
   public function __construct(\HubletoMain $main)
@@ -14,7 +15,7 @@ class Loader {
     $this->clih = fopen("php://stdin", "r");
   }
 
-  public function color(string $colorName)
+  public function color(string $colorName): void
   {
     $sequences = [
       'red' => "\033[31m",
@@ -32,11 +33,20 @@ class Loader {
     }
   }
 
+  public function readRaw(): string
+  {
+    $input = ($this->clih ? (string) fgets($this->clih) : '');
+    $input = trim($input);
+    return $input;
+  }
+
   public function read(string $message, string $default = ''): string
   {
+    if (!$this->clih) return $default;
+
     $this->yellow($message . (empty($default) ? '' : ' (press Enter for \'' . $default . '\')') . ': ');
 
-    $input = trim(fgets($this->clih));
+    $input = $this->readRaw();
     if (empty($input)) $input = $default;
 
     $this->white('  -> ' . $input . "\n");
@@ -46,14 +56,16 @@ class Loader {
 
   public function choose(array $options, string $message, string $default = ''): string
   {
+    if (!$this->clih) return $default;
+
     $this->yellow($message . "\n");
     foreach ($options as $key => $option) {
-      $this->white(' ' . $key . ' = ' . $option . "\n");
+      $this->white(' ' . (string) $key . ' = ' . (string) $option . "\n");
     }
     $this->yellow('Select one of the options, provide a value' . (empty($default) ? '' : ' or press Enter for \'' . $default . '\'') . ': ');
 
-    $input = trim(fgets($this->clih));
-    if (is_numeric($input)) $input = $options[$input] ?? '';
+    $input = $this->readRaw();
+    if (is_numeric($input)) $input = (string) ($options[$input] ?? '');
     if (empty($input)) $input = $default;
 
     $this->white('  -> ' . $input . "\n");

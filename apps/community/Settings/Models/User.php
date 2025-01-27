@@ -56,7 +56,11 @@ class User extends \ADIOS\Models\User
     ]));
   }
 
-  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0):
+    \Illuminate\Database\Eloquent\Builder
+    |\Illuminate\Database\Eloquent\Relations\HasOne
+    |\Illuminate\Database\Eloquent\Relations\BelongsTo
+    |\Illuminate\Database\Eloquent\Relations\HasMany
   {
     return parent::prepareLoadRecordQuery($includeRelations, $maxRelationLevel, $query, $level)
       ->with('ROLES')
@@ -88,12 +92,15 @@ class User extends \ADIOS\Models\User
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Users';
-    $description['ui']['addButtonText'] = 'Add User';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Users';
+      $description['ui']['addButtonText'] = 'Add User';
+      $description['ui']['showHeader'] = true;
+      $description['ui']['showFooter'] = false;
+    }
+
     return $description;
   }
 

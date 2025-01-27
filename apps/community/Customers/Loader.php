@@ -38,7 +38,8 @@ class Loader extends \HubletoMain\Core\App
     $this->main->addCalendar(Calendar::class);
   }
 
-  public function installTables() {
+  public function installTables(): void
+  {
     $mPerson = new \HubletoApp\Community\Customers\Models\Person($this->main);
     $mCompany = new \HubletoApp\Community\Customers\Models\Company($this->main);
     $mAddress = new \HubletoApp\Community\Customers\Models\Address($this->main);
@@ -60,7 +61,7 @@ class Loader extends \HubletoMain\Core\App
     $mCompanyDocument->dropTableIfExists()->install();
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [

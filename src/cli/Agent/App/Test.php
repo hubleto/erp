@@ -6,8 +6,8 @@ class Test extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appClass = $this->arguments[3] ?? '';
-    $test = $this->arguments[4] ?? '';
+    $appClass = (string) ($this->arguments[3] ?? '');
+    $test = (string) ($this->arguments[4] ?? '');
 
     if (empty($appClass) || empty($test)) {
       $this->cli->white("Usage: php hubleto app test <appClass> <testName>\n");

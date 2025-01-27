@@ -22,7 +22,8 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installTables() {
+  public function installTables(): void
+  {
     $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
     $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
     $mProductGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
@@ -32,7 +33,7 @@ class Loader extends \HubletoMain\Core\App
     $mProduct->dropTableIfExists()->install();
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [];

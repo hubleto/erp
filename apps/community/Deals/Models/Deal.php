@@ -210,7 +210,11 @@ class Deal extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0):
+    \Illuminate\Database\Eloquent\Builder
+    |\Illuminate\Database\Eloquent\Relations\HasOne
+    |\Illuminate\Database\Eloquent\Relations\BelongsTo
+    |\Illuminate\Database\Eloquent\Relations\HasMany
   {
     $relations = [
       'COMPANY',
@@ -233,7 +237,7 @@ class Deal extends \HubletoMain\Core\Model
      * These are the query filters for tables with archived and non-archived deal entries.
      * The params["id"] needs to be there to properly load the data of the entry in a form.
      */
-    if ((bool) $this->main->params["showArchive"]) {
+    if ((bool) ($this->main->params["showArchive"] ?? false)) {
       $query = $query->where("deals.is_archived", 1);
     } else {
       $query = $query->where("deals.is_archived", 0);

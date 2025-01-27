@@ -30,24 +30,28 @@ class InvoiceProfile extends \ADIOS\Core\Model {
     ]));
   }
 
-  public function tableDescribe(array $description = []): array {
+  public function tableDescribe(array $description = []): array
+  {
     $description = parent::tableDescribe($description);
 
+    if (!is_array($description['ui'])) $description['ui'] = [];
     $description['ui']['addButtonText'] = "Add invoice profile";
 
-    unset($description['columns']['phone']);
-    unset($description['columns']['email']);
-    unset($description['columns']['www']);
-    unset($description['columns']['tax_id']);
-    unset($description['columns']['vat_id']);
-    unset($description['columns']['street_1']);
-    unset($description['columns']['street_2']);
-    unset($description['columns']['zip']);
-    unset($description['columns']['city']);
-    unset($description['columns']['country']);
-    unset($description['columns']['bank_name']);
-    unset($description['columns']['account_number']);
-    unset($description['columns']['swift']);
+    if (is_array($description['columns'])) {
+      unset($description['columns']['phone']);
+      unset($description['columns']['email']);
+      unset($description['columns']['www']);
+      unset($description['columns']['tax_id']);
+      unset($description['columns']['vat_id']);
+      unset($description['columns']['street_1']);
+      unset($description['columns']['street_2']);
+      unset($description['columns']['zip']);
+      unset($description['columns']['city']);
+      unset($description['columns']['country']);
+      unset($description['columns']['bank_name']);
+      unset($description['columns']['account_number']);
+      unset($description['columns']['swift']);
+    }
 
     return $description;
   }

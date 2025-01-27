@@ -115,7 +115,8 @@ class Company extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function indexes(array $indexes = []) {
+  public function indexes(array $indexes = []): array
+  {
     return parent::indexes([
       /* "vat_id" => [
         "type" => "unique",

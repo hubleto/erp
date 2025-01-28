@@ -14,7 +14,7 @@ class Translator extends \ADIOS\Core\Translator {
 
   public function getRootContext(string $context): string
   {
-    foreach ($this->main->getRegisteredApps() as $app) {
+    foreach ($this->main->appManager->getRegisteredApps() as $app) {
       if (empty($app->translationRootContext)) continue;
       if (str_starts_with($context, $app->translationRootContext)) {
         return $app->translationRootContext;
@@ -31,7 +31,7 @@ class Translator extends \ADIOS\Core\Translator {
     if (empty($language)) $language = $this->main->configAsString('language', 'en');
     if (empty($language)) $language = 'en';
 
-    foreach ($this->main->getRegisteredApps() as $app) {
+    foreach ($this->main->appManager->getRegisteredApps() as $app) {
       if (empty($app->translationRootContext)) continue;
       if (str_starts_with($context, $app->translationRootContext)) {
         $dictionaryFilename = $app->rootFolder . '/Lang/' . $language . '.json';
@@ -71,15 +71,15 @@ class Translator extends \ADIOS\Core\Translator {
   }
 
   /**
-  * @return array<string, array<string, string>>
+  * @return array|array<string, array<string, string>>
   */
   public function loadDictionaryFromJsonFile(string $jsonFile): array
   {
-    return @json_decode((string) file_get_contents($jsonFile), true); //@phpstan-ignore-line
+    return (array) @json_decode((string) file_get_contents($jsonFile), true);
   }
 
   /**
-  * @return array<string, array<string, string>>
+  * @return array|array<string, array<string, string>>
   */
   public function loadDictionary(string $language = ""): array
   {
@@ -92,14 +92,12 @@ class Translator extends \ADIOS\Core\Translator {
       }
     }
 
-    foreach ($this->main->getRegisteredApps() as $app) {
+    foreach ($this->main->appManager->getRegisteredApps() as $app) {
       $mDict = $app->loadDictionary($language);
       foreach ($mDict as $key => $value) {
         $dictionary[$app->translationRootContext . '.' . (string) $key] = $value;
       }
     }
-
-    // var_dump($dictionary);exit;
 
     return $dictionary;
   }

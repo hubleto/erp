@@ -11,7 +11,9 @@ class PipelineStep extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'pipeline_steps';
 
-  public function PIPELINE(): BelongsTo {
+  /** @return BelongsTo<Pipeline, covariant PipelineStep> */
+  public function PIPELINE(): BelongsTo
+  {
     return $this->belongsTo(Pipeline::class, 'id_pipeline','id' );
   }
 

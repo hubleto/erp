@@ -27,10 +27,13 @@ class Tag extends \HubletoMain\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Tags';
-    $description['ui']['addButtonText'] = 'Add Tag';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Tags';
+      $description['ui']['addButtonText'] = 'Add Tag';
+      $description['ui']['showHeader'] = true;
+      $description['ui']['showFooter'] = false;
+    }
 
     return $description;
   }

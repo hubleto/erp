@@ -6,13 +6,11 @@ class ListInstalled extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $cli = $this->cli;
-    $main = $this->main;
+    $appManager = new \HubletoMain\Core\AppManager($this->main);
 
-    $apps = $main->config['apps'];
-    ksort($apps);
+    $apps = $appManager->getApps();
 
-    $cli->cyan("You have following apps installed:\n");
-    foreach ($apps as $appClass => $appConfig) $cli->cyan("  {$appClass}: " . json_encode($appConfig) . "\n");
+    $this->cli->cyan("You have following apps installed:\n");
+    foreach ($apps as $appClass => $appConfig) $this->cli->cyan("  {$appClass}: " . json_encode($appConfig) . "\n");
   }
 }

@@ -22,23 +22,37 @@ class Permission extends \HubletoMain\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Permissions';
-    $description['ui']['showHeader'] = false;
-    $description['ui']['showFooter'] = false;
-    $description['permissions']['canCreate'] = false;
-    $description['permissions']['canUpdate'] = false;
-    $description['permissions']['canDelete'] = false;
+
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Permissions';
+      $description['ui']['showHeader'] = false;
+      $description['ui']['showFooter'] = false;
+    }
+
+    if (is_array($description['permissions'])) {
+      $description['permissions']['canCreate'] = false;
+      $description['permissions']['canUpdate'] = false;
+      $description['permissions']['canDelete'] = false;
+    }
+
     return $description;
   }
 
   public function formDescribe(array $description = []): array
   {
     $description = parent::formDescribe($description);
-    $description['ui']['title'] = 'Permission';
-    $description['ui']['subTitle'] = '';
-    $description['permissions']['canCreate'] = false;
-    $description['permissions']['canUpdate'] = false;
-    $description['permissions']['canDelete'] = false;
+
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Permission';
+      $description['ui']['subTitle'] = '';
+    }
+
+    if (is_array($description['permissions'])) {
+      $description['permissions']['canCreate'] = false;
+      $description['permissions']['canUpdate'] = false;
+      $description['permissions']['canDelete'] = false;
+    }
+
     return $description;
   }
 }

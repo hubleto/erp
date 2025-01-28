@@ -152,7 +152,7 @@ class Lead extends \HubletoMain\Core\Model
     $description['defaultValues']['id_person'] = null;
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_lead_status'] = 1;
-    $description['defaultValues']['id_user'] = $this->main->auth->user["id"];
+    $description['defaultValues']['id_user'] = (int) ($this->main->auth->user ? $this->main->auth->user["id"] : 0);
     $description['includeRelations'] = [
       'DEAL',
       'COMPANY',
@@ -172,8 +172,7 @@ class Lead extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
-  {
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed {
     $relations = [
       'DEAL',
       'COMPANY',
@@ -189,7 +188,7 @@ class Lead extends \HubletoMain\Core\Model
     ];
     $query = parent::prepareLoadRecordQuery($relations, 4);
 
-    if ((bool) $this->main->params["showArchive"]) {
+    if ((bool) ($this->main->params["showArchive"] ?? false)) {
       $query = $query->where("leads.is_archived", 1);
     } else {
       $query = $query->where("leads.is_archived", 0);
@@ -198,7 +197,8 @@ class Lead extends \HubletoMain\Core\Model
     return $query;
   }
 
-  public function checkOwnership($record) {
+  public function checkOwnership(array $record): void
+  {
     if ($record["id_company"] && !isset($record["checkOwnership"])) {
       $mCompany = new Company($this->main);
       $company = $mCompany->eloquent
@@ -227,40 +227,40 @@ class Lead extends \HubletoMain\Core\Model
     $mLeadStatus = new LeadStatus($this->main);
 
     if ($lead["id_lead_status"] != (int) $record["id_lead_status"]) {
-      $status = $mLeadStatus->eloquent->find((int) $record["id_lead_status"])->name;
+      $status = (string) $mLeadStatus->eloquent->find((int) $record["id_lead_status"])->name;
       $mLeadHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
-        "description" => "Status changed to ".$status
+        "description" => "Status changed to " . $status
       ]);
     }
     if ((float) $lead["price"] != (float) $record["price"]) {
       $mLeadHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
-        "description" => "Price changed to ".$record["price"]." ".$record["CURRENCY"]["code"]
+        "description" => "Price changed to " . (string) $record["price"] . " " . (string) $record["CURRENCY"]["code"],
       ]);
     }
     if ((string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {
       $mLeadHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
-        "description" => "Expected Close Date changed to ".date("d.m.Y", strtotime((string) $record["date_expected_close"]))
+        "description" => "Expected Close Date changed to " . date("d.m.Y", (int) strtotime((string) $record["date_expected_close"])),
       ]);
     }
 
     return $record;
   }
 
-  public function onAfterCreate(array $record, $returnValue)
+  public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
     $mLeadHistory = new LeadHistory($this->main);
     $mLeadHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
-      "id_lead" => $record["id"],
+      "id_lead" => $originalRecord["id"],
       "description" => "Lead created"
     ]);
 
-    return parent::onAfterCreate($record, $returnValue);
+    return parent::onAfterCreate($originalRecord, $savedRecord);
   }
 }

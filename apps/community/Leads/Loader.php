@@ -32,7 +32,7 @@ class Loader extends \HubletoMain\Core\App
     $this->main->addCalendar(Calendar::class);
   }
 
-  public function installTables()
+  public function installTables(): void
   {
     $mLeadStatus = new Models\LeadStatus($this->main);
     $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);

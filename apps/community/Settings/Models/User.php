@@ -56,14 +56,13 @@ class User extends \ADIOS\Models\User
     ]));
   }
 
-  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
-  {
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed {
     return parent::prepareLoadRecordQuery($includeRelations, $maxRelationLevel, $query, $level)
       ->with('ROLES')
     ;
   }
 
-  public function getQueryForUser(int $idUser)
+  public function getQueryForUser(int $idUser): mixed
   {
     return $this->eloquent
       ->with('ROLES')
@@ -73,13 +72,15 @@ class User extends \ADIOS\Models\User
     ;
   }
 
-  public function loadUser(int $idUser)
+  public function loadUser(int $idUser): array
   {
-    $user = $this->getQueryForUser($idUser)->first()?->toArray();
+    $user = (array) $this->getQueryForUser($idUser)->first()?->toArray();
 
     $tmpRoles = [];
-    foreach ($user['ROLES'] ?? [] as $role) {
-      $tmpRoles[] = (int) $role['pivot']['id_role'];
+    if (is_array($user['ROLES'])) {
+      foreach ($user['ROLES'] as $role) {
+        $tmpRoles[] = (int) $role['pivot']['id_role']; // @phpstan-ignore-line
+      }
     }
     $user['ROLES'] = $tmpRoles;
 
@@ -89,10 +90,14 @@ class User extends \ADIOS\Models\User
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Users';
-    $description['ui']['addButtonText'] = 'Add User';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Users';
+      $description['ui']['addButtonText'] = 'Add User';
+      $description['ui']['showHeader'] = true;
+      $description['ui']['showFooter'] = false;
+    }
+
     return $description;
   }
 

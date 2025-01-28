@@ -26,10 +26,14 @@ class Country extends \HubletoMain\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Countries';
-    $description['ui']['addButtonText'] = 'Add Country';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Countries';
+      $description['ui']['addButtonText'] = 'Add Country';
+      $description['ui']['showHeader'] = true;
+      $description['ui']['showFooter'] = false;
+    }
+
     return $description;
   }
 

@@ -93,11 +93,15 @@ class Order extends \HubletoMain\Core\Model
   {
     $description = parent::tableDescribe($description);
 
-    $description['ui']['title'] = 'Orders';
-    $description["ui"]["addButtonText"] = $this->translate("Add order");
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Orders';
+      $description["ui"]["addButtonText"] = $this->translate("Add order");
+    }
 
-    unset($description["columns"]["shipping_info"]);
-    unset($description["columns"]["note"]);
+    if (is_array($description['columns'])) {
+      unset($description["columns"]["shipping_info"]);
+      unset($description["columns"]["note"]);
+    }
 
     return $description;
   }
@@ -105,9 +109,12 @@ class Order extends \HubletoMain\Core\Model
   public function formDescribe(array $description = []): array
   {
     $description = parent::formDescribe($description);
-    $description["defaultValues"]["date_order"] = date("Y-m-d");
-    $description["defaultValues"]["price"] = 0;
-    ;
+
+    if (is_array($description['defaultValues'])) {
+      $description["defaultValues"]["date_order"] = date("Y-m-d");
+      $description["defaultValues"]["price"] = 0;
+    }
+
     $description['includeRelations'] = [
       'PRODUCTS',
       'CUSTOMER',
@@ -117,34 +124,34 @@ class Order extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function onAfterUpdate(array $record, $returnValue)
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $mProduct = new Product($this->main);
     $longDescription = "";
 
-    foreach ($record["PRODUCTS"] as $product) {
+    foreach ((array) $originalRecord["PRODUCTS"] as $product) {
       if ($product["_toBeDeleted_"] == true) continue;
-      $productTitle = $mProduct->eloquent->find((int) $product["id_product"])->title;
-      $longDescription .=  "{$productTitle} - Amount: {$product["amount"]} - Unit Price: {$product["unit_price"]} - Tax: {$product["tax"]} - Discount: {$product["discount"]} \n\n";
+      $productTitle = (string) $mProduct->eloquent->find((int) $product["id_product"])->title;
+      $longDescription .=  "{$productTitle} - Amount: ".(string) $product["amount"]." - Unit Price: ".(string) $product["unit_price"]." - Tax: ".(string) $product["tax"]." - Discount: ".(string) $product["discount"]." \n\n";
     }
 
     if ($longDescription == "") $longDescription = "The order had no products or all products were deleted";
 
     $mHistory = new History($this->main);
     $mHistory->eloquent->create([
-      "id_order" => $record["id"],
+      "id_order" => $originalRecord["id"],
       "short_description" => "Order has been updated",
       "long_description" => $longDescription,
       "date_time" => date("Y-m-d H:i:s"),
     ]);
 
-    return parent::onAfterUpdate($record, $returnValue);
+    return parent::onAfterUpdate($originalRecord, $savedRecord);
   }
 
-  public function onAfterCreate(array $record, $returnValue)
+  public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
 
-    $order = $this->eloquent->find($record["id"]);
+    $order = $this->eloquent->find($originalRecord["id"]);
     $order->order_number = $order->id;
     $order->save();
 
@@ -155,6 +162,6 @@ class Order extends \HubletoMain\Core\Model
       "date_time" => date("Y-m-d H:i:s"),
     ]);
 
-    return parent::onAfterCreate($record, $returnValue);
+    return parent::onAfterCreate($originalRecord, $savedRecord);
   }
 }

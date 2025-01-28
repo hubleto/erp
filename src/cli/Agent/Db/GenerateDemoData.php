@@ -488,61 +488,61 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     }
   }
 
-  public function generateActivities(
-    \HubletoApp\Community\Customers\Models\Company $mCompany,
-    \HubletoApp\Community\Customers\Models\Activity $mActivity,
-    \HubletoApp\Community\Customers\Models\CompanyActivity $mCompanyActivity,
-  ): void {
+  // public function generateActivities(
+  //   \HubletoApp\Community\Customers\Models\Company $mCompany,
+  //   \HubletoApp\Community\Customers\Models\Activity $mActivity,
+  //   \HubletoApp\Community\Customers\Models\CompanyActivity $mCompanyActivity,
+  // ): void {
 
-    $activityTypes = ["Meeting", "Bussiness Trip", "Call", "Email"];
-    $minutes = ["00", "15", "30", "45"];
-    $companies = $mCompany->eloquent->all();
+  //   $activityTypes = ["Meeting", "Bussiness Trip", "Call", "Email"];
+  //   $minutes = ["00", "15", "30", "45"];
+  //   $companies = $mCompany->eloquent->all();
 
-    foreach ($companies as $company) {
-      $activityCount = rand(1, 5);
+  //   foreach ($companies as $company) {
+  //     $activityCount = rand(1, 5);
 
-      for ($i = 0; $i < $activityCount; $i++) {
-        $date = date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month")));
-        $randomHour = str_pad((string) rand(6,18), 2, "0", STR_PAD_LEFT);
-        $randomMinute = $minutes[rand(0,3)];
-        $timeString = $date." ".$randomHour.":".$randomMinute.":00";
-        $time = date("H:i:s", strtotime($timeString));
+  //     for ($i = 0; $i < $activityCount; $i++) {
+  //       $date = date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month")));
+  //       $randomHour = str_pad((string) rand(6,18), 2, "0", STR_PAD_LEFT);
+  //       $randomMinute = $minutes[rand(0,3)];
+  //       $timeString = $date." ".$randomHour.":".$randomMinute.":00";
+  //       $time = date("H:i:s", strtotime($timeString));
 
-        $randomSubject = $activityTypes[rand(0, 3)];
-        $activityType = null;
+  //       $randomSubject = $activityTypes[rand(0, 3)];
+  //       $activityType = null;
 
-        switch ($randomSubject) {
-          case $activityTypes[0]:
-            $activityType = 1;
-            break;
-          case $activityTypes[1]:
-            $activityType = 2;
-            break;
-          case $activityTypes[2]:
-            $activityType = 3;
-            break;
-          case $activityTypes[3]:
-            $activityType = 4;
-            break;
-        }
+  //       switch ($randomSubject) {
+  //         case $activityTypes[0]:
+  //           $activityType = 1;
+  //           break;
+  //         case $activityTypes[1]:
+  //           $activityType = 2;
+  //           break;
+  //         case $activityTypes[2]:
+  //           $activityType = 3;
+  //           break;
+  //         case $activityTypes[3]:
+  //           $activityType = 4;
+  //           break;
+  //       }
 
-        $activityId = $mActivity->eloquent->create([
-          "id_activity_type" => $activityType,
-          "subject" => $randomSubject,
-          "date_start" => $date,
-          "completed" => rand(0, 1),
-          "id_user" => 1,
-          "id_company" => $company->id,
-          "id_person" => null,
-        ])->id;
+  //       $activityId = $mActivity->eloquent->create([
+  //         "id_activity_type" => $activityType,
+  //         "subject" => $randomSubject,
+  //         "date_start" => $date,
+  //         "completed" => rand(0, 1),
+  //         "id_user" => 1,
+  //         "id_company" => $company->id,
+  //         "id_person" => null,
+  //       ])->id;
 
-        $mCompanyActivity->eloquent->create([
-          "id_company" => $company->id,
-          "id_activity" => $activityId
-        ]);
-      }
-    }
-  }
+  //       $mCompanyActivity->eloquent->create([
+  //         "id_company" => $company->id,
+  //         "id_activity" => $activityId
+  //       ]);
+  //     }
+  //   }
+  // }
 
   public function generateServices(
     \HubletoApp\Community\Customers\Models\Company $mCompany,
@@ -556,7 +556,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     foreach ($serviceNames as $serviceName) {
       $mService->eloquent->create([
         "name" => $serviceName,
-        "id_currency" => null,
         "price" => rand(10,100),
         "id_currency" => 1,
       ]);
@@ -652,7 +651,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $leads = $mLead->eloquent->get();
 
-    foreach ($leads as $lead) {
+    foreach ($leads as $lead) { // @phpstan-ignore-line
       $pipeline = rand(1,2);
       if ($pipeline === 1) $pipelineStep = rand(1,3);
       else $pipelineStep = rand(4,7);
@@ -684,7 +683,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         ->get()
       ;
 
-      foreach  ($leadHistories as $leadHistory) {
+      foreach  ($leadHistories as $leadHistory) { // @phpstan-ignore-line
         $mDealHistory->eloquent->create([
           "description" => $leadHistory->description,
           "change_date" => $leadHistory->change_date,

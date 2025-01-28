@@ -47,11 +47,18 @@ class Service extends \HubletoMain\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Services';
-    $description['ui']['addButtonText'] = 'Add Service';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
-    unset($description['columns']['description']);
+
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Services';
+      $description['ui']['addButtonText'] = 'Add Service';
+      $description['ui']['showHeader'] = true;
+      $description['ui']['showFooter'] = false;
+    }
+
+    if (is_array($description['columns'])) {
+      unset($description['columns']['description']);
+    }
+
     return $description;
   }
 

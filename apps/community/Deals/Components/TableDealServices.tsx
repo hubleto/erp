@@ -29,7 +29,7 @@ export default class TableDealServices extends Table<TableDealServicesProps, Tab
 
   renderFooter(): JSX.Element {
     return <>
-      <div className='flex flexx-row justify-end'><strong className='mr-4'>{this.props.dealTotal}</strong></div>
+      <div className='flex flex-row justify-start md:justify-end'><strong className='mr-4'>{this.props.dealTotal}</strong></div>
     </>;
   }
 }

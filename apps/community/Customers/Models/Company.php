@@ -115,7 +115,8 @@ class Company extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function indexes(array $indexes = []) {
+  public function indexes(array $indexes = []): array
+  {
     return parent::indexes([
       /* "vat_id" => [
         "type" => "unique",
@@ -201,8 +202,7 @@ class Company extends \HubletoMain\Core\Model
     ];
   }
 
-  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
-  {
+  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed {
     $query = parent::prepareLoadRecordQuery($includeRelations, 3);
     return $query;
   }

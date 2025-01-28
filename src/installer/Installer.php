@@ -242,7 +242,7 @@ class Installer {
 
   public function installDefaultPermissions(): void
   {
-    $modules = $this->main->getRegisteredApps();
+    $modules = $this->main->appManager->getRegisteredApps();
     array_walk($modules, function($module) {
       $module->installDefaultPermissions();
     });

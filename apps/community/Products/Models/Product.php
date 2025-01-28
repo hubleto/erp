@@ -158,20 +158,24 @@ class Product extends \HubletoMain\Core\Model
   {
     $description = parent::tableDescribe($description);
 
-    $description['ui']['title'] = 'Products';
-    $description["ui"]["addButtonText"] = $this->translate("Add product");
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Products';
+      $description["ui"]["addButtonText"] = $this->translate("Add product");
+    }
 
-    unset($description["columns"]["is_on_sale"]);
-    unset($description["columns"]["image"]);
-    unset($description["columns"]["count_in_package"]);
-    unset($description["columns"]["is_single_order_posible"]);
-    unset($description["columns"]["packaging"]);
-    unset($description["columns"]["show_price"]);
-    unset($description["columns"]["price_after_reweight"]);
-    unset($description["columns"]["needs_reodering"]);
-    unset($description["columns"]["storage_rules"]);
-    unset($description["columns"]["table"]);
-    unset($description["columns"]["description"]);
+    if (is_array($description['columns'])) {
+      unset($description["columns"]["is_on_sale"]);
+      unset($description["columns"]["image"]);
+      unset($description["columns"]["count_in_package"]);
+      unset($description["columns"]["is_single_order_posible"]);
+      unset($description["columns"]["packaging"]);
+      unset($description["columns"]["show_price"]);
+      unset($description["columns"]["price_after_reweight"]);
+      unset($description["columns"]["needs_reodering"]);
+      unset($description["columns"]["storage_rules"]);
+      unset($description["columns"]["table"]);
+      unset($description["columns"]["description"]);
+    }
 
     return $description;
   }

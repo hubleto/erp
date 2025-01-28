@@ -24,7 +24,8 @@ class Loader extends \HubletoMain\Core\App
 
   }
 
-  public function installTables() {
+  public function installTables(): void
+  {
     $mBillingAccount = new \HubletoApp\Community\Billing\Models\BillingAccount($this->main);
     $mBillingAccountService = new \HubletoApp\Community\Billing\Models\BillingAccountService($this->main);
 
@@ -32,7 +33,7 @@ class Loader extends \HubletoMain\Core\App
     $mBillingAccountService->dropTableIfExists()->install();
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
 
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);

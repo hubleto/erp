@@ -12,7 +12,7 @@ class Loader extends \HubletoMain\Core\App
     parent::__construct($main);
 
     $this->registerModel(\HubletoApp\Community\Settings\Models\User::class);
-    $this->registerModel(\HubletoApp\Community\Settings\Models\Models\UserRole::class);
+    $this->registerModel(\HubletoApp\Community\Settings\Models\UserRole::class);
     $this->registerModel(\HubletoApp\Community\Settings\Models\UserHasRole::class);
     $this->registerModel(\HubletoApp\Community\Settings\Models\Setting::class);
   }
@@ -55,7 +55,7 @@ class Loader extends \HubletoMain\Core\App
     $this->main->addSetting(['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
   }
 
-  public function installTables()
+  public function installTables(): void
   {
     $mProfile = new Models\Profile($this->main);
     $mUser = new Models\User($this->main);
@@ -387,7 +387,7 @@ class Loader extends \HubletoMain\Core\App
 
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new Models\Permission($this->main);
     $mRolePermission = new Models\RolePermission($this->main);

@@ -25,6 +25,7 @@ export default class HubletoMain extends ADIOS {
   constructor(config: object) {
     super(config);
 
+    // ADIOS components
     this.registerReactComponent('Table', Table);
     this.registerReactComponent('Modal', Modal);
 
@@ -63,7 +64,7 @@ export default class HubletoMain extends ADIOS {
 
   registerApp(appClass) {
     const app = new appClass(this);
-    if (!app.uid || app.uid == '') console.error('app: module does not have uid');
+    if (!app.uid || app.uid == '') console.error(appClass + ': app\'s UID is empty.');
     this.apps[app.uid] = app
   }
 }

@@ -31,10 +31,14 @@ class Pipeline extends \HubletoMain\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Pipelines';
-    $description['ui']['addButtonText'] = 'Add Pipeline';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Pipelines';
+      $description['ui']['addButtonText'] = 'Add Pipeline';
+      $description['ui']['showHeader'] = true;
+      $description['ui']['showFooter'] = false;
+    }
+
     return $description;
   }
 

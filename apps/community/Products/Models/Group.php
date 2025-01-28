@@ -25,8 +25,10 @@ class Group extends \HubletoMain\Core\Model
   {
     $description = parent::tableDescribe($description);
 
-    $description['ui']['title'] = 'Product Groups';
-    $description["ui"]["addButtonText"] = $this->translate("Add product group");
+    if (is_array($description['ui'])) {
+      $description['ui']['title'] = 'Product Groups';
+      $description["ui"]["addButtonText"] = $this->translate("Add product group");
+    }
 
     return $description;
   }

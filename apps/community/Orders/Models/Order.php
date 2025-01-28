@@ -124,7 +124,7 @@ class Order extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  public function onAfterUpdate(array $originalRecord, $savedRecord)
   {
     $mProduct = new Product($this->main);
     $longDescription = "";
@@ -148,7 +148,7 @@ class Order extends \HubletoMain\Core\Model
     return parent::onAfterUpdate($originalRecord, $savedRecord);
   }
 
-  public function onAfterCreate(array $originalRecord, array $savedRecord): array
+  public function onAfterCreate(array $originalRecord, $savedRecord)
   {
 
     $order = $this->eloquent->find($originalRecord["id"]);

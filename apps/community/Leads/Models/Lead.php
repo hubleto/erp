@@ -252,7 +252,7 @@ class Lead extends \HubletoMain\Core\Model
     return $record;
   }
 
-  public function onAfterCreate(array $originalRecord, array $savedRecord): array
+  public function onAfterCreate(array $originalRecord, $savedRecord)
   {
     $mLeadHistory = new LeadHistory($this->main);
     $mLeadHistory->eloquent->create([

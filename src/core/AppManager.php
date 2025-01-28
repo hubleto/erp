@@ -74,7 +74,7 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
   {
     $apps = $this->getApps();
     $key = $this->getAppNameForConfig($appClass);
-    return is_array($apps[$key]) && isset($apps[$key]['installedOn']);
+    return isset($apps[$key]) && is_array($apps[$key]) && isset($apps[$key]['installedOn']);
   }
 
   public function installApp(string $appClass, bool $forceInstall = false): bool

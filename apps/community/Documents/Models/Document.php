@@ -53,7 +53,7 @@ class Document extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function onAfterCreate(array $record, $returnValue)
+  public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
     $mCompanyDocument = new CompanyDocument($this->main);
     $mLead = new Lead($this->main);
@@ -61,37 +61,37 @@ class Document extends \HubletoMain\Core\Model
     $mLeadDocument = new LeadDocument($this->main);
     $mDealDocument = new DealDocument($this->main);
 
-    if (isset($record["creatingForModel"])) {
-      if ($record["creatingForModel"] == "Company") {
+    if (isset($originalRecord["creatingForModel"])) {
+      if ($originalRecord["creatingForModel"] == "Company") {
         $mCompanyDocument->eloquent->create([
-          "id_document" => $record["id"],
-          "id_company" => $record["creatingForId"]
+          "id_document" => $originalRecord["id"],
+          "id_company" => $originalRecord["creatingForId"]
         ]);
-      } else if ($record["creatingForModel"] == "Lead") {
+      } else if ($originalRecord["creatingForModel"] == "Lead") {
 
-        $lead = $mLead->eloquent->find($record["creatingForId"]);
+        $lead = $mLead->eloquent->find($originalRecord["creatingForId"]);
         $mCompanyDocument->eloquent->create([
-          "id_document" => $record["id"],
-          "id_company" => $record["creatingForId"]
+          "id_document" => $originalRecord["id"],
+          "id_company" => $originalRecord["creatingForId"]
         ]);
         $mLeadDocument->eloquent->create([
-          "id_document" => $record["id"],
+          "id_document" => $originalRecord["id"],
           "id_lead" => $lead->id
         ]);
-      } else if ($record["creatingForModel"] == "Deal") {
+      } else if ($originalRecord["creatingForModel"] == "Deal") {
 
-        $deal = $mDeal->eloquent->find($record["creatingForId"]);
+        $deal = $mDeal->eloquent->find($originalRecord["creatingForId"]);
         $mCompanyDocument->eloquent->create([
-          "id_document" => $record["id"],
-          "id_company" => $record["creatingForId"]
+          "id_document" => $originalRecord["id"],
+          "id_company" => $originalRecord["creatingForId"]
         ]);
         $mDealDocument->eloquent->create([
-          "id_document" => $record["id"],
+          "id_document" => $originalRecord["id"],
           "id_deal" => $deal->id
         ]);
       }
     }
-    return $record;
+    return $originalRecord;
   }
 
   public function onBeforeUpdate(array $record): array

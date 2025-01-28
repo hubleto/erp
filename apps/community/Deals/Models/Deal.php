@@ -240,19 +240,19 @@ class Deal extends \HubletoMain\Core\Model
     return $query;
   }
 
-  public function onAfterCreate(array $record, $returnValue)
+  public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
     $mDealHistory = new DealHistory($this->main);
     $mDealHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
-      "id_deal" => $record["id"],
+      "id_deal" => $originalRecord["id"],
       "description" => "Deal created"
     ]);
 
     return $this->main->dispatchEventToPlugins("onModelAfterCreate", [
       "model" => $this,
-      "data" => $record,
-      "returnValue" => $returnValue,
+      "data" => $originalRecord,
+      "returnValue" => $savedRecord,
     ])["returnValue"];
   }
 

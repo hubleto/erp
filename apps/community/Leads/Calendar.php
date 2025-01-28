@@ -12,12 +12,12 @@ class Calendar extends \HubletoMain\Core\Calendar {
     if (isset($params["idLead"])) $idLead = (int) $params["idLead"];
     else return [];
 
-    if (isset($this->main->params["start"]) && isset($this->main->params["end"])) {
-      $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->main->params["start"]));
-      $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->main->params["end"]));
+    if ($this->main->isUrlParam("start") && $this->main->isUrlParam("end")) {
+      $dateStart = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("start")));
+      $dateEnd = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("end")));
     } else {
       $dateStart = date("Y-m-d H:i:s");
-      $dateEnd = date("Y-m-d H:i:s", strtotime("tommorow"));
+      $dateEnd = date("Y-m-d H:i:s", (int) strtotime("tommorow"));
     }
 
     $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
@@ -37,13 +37,13 @@ class Calendar extends \HubletoMain\Core\Calendar {
     foreach ($activities as $key => $activity) {
 
       $events[$key]['id'] = $activity->id;
-      if ($activity->time_start != null) $events[$key]['start'] = $activity->date_start." ".$activity->time_start;
+      if ($activity->time_start != null) $events[$key]['start'] = (string) $activity->date_start . " " . (string) $activity->time_start;
       else $events[$key]['start'] = $activity->date_start;
       if ($activity->date_end != null) {
-        if ($activity->time_end != null) $events[$key]['end'] = $activity->date_end." ".$activity->time_end;
-        else $events[$key]['end'] = $activity->date_end;
+        if ($activity->time_end != null) $events[$key]['end'] = (string) $activity->date_end . " " . (string) $activity->time_end;
+        else $events[$key]['end'] = (string) $activity->date_end;
       } else if ($activity->time_end != null) {
-        $events[$key]['end'] = $activity->date_start." ".$activity->time_end;
+        $events[$key]['end'] = (string) $activity->date_start . " " . (string) $activity->time_end;
       }
 
       $events[$key]['allDay'] = $activity->all_day == 1 || $activity->time_start == null ? true : false;

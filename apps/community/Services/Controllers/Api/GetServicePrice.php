@@ -12,7 +12,7 @@ class GetServicePrice extends \HubletoMain\Core\Controller {
     $mService = new Service($this->main);
     $service = null;
 
-    if (!isset($this->main->params["serviceId"])) {
+    if (!$this->main->isUrlParam("serviceId")) {
       return [
         "status" => "failed",
         "error" => "The searched service was not specified"
@@ -21,7 +21,7 @@ class GetServicePrice extends \HubletoMain\Core\Controller {
 
     try {
       $service = (array) $mService->eloquent
-        ->where("id", $this->main->params["serviceId"])
+        ->where("id", $this->main->urlParamAsInteger("serviceId"))
         ->first()
         ->toArray()
       ;

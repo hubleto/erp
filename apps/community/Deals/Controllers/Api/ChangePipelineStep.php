@@ -19,15 +19,15 @@ class ChangePipelineStep extends \HubletoMain\Core\Controller
 
     $step = null;
 
-    if (isset($this->main->params["idDeal"]) && isset($this->main->params["idStep"])) {
+    if ($this->main->isUrlParam("idDeal") && $this->main->isUrlParam("idStep")) {
       try {
-        $deal = $mDeal->eloquent->find($this->main->params["idDeal"]);
-        $deal->id_pipeline_step = $this->main->params["idStep"];
+        $deal = $mDeal->eloquent->find($this->main->urlParamAsInteger("idDeal"));
+        $deal->id_pipeline_step = $this->main->urlParamAsInteger("idStep");
         $deal->save();
 
         $step = $mPipelineStep->eloquent
-          ->where("id_pipeline", $this->main->params["idPipeline"])
-          ->where("id", $this->main->params["idStep"])
+          ->where("id_pipeline", $this->main->urlParamAsInteger("idPipeline"))
+          ->where("id", $this->main->urlParamAsInteger("idStep"))
           ->first()
         ;
         $mDealHistory->eloquent->create([

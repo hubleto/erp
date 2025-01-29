@@ -18,14 +18,14 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
   public function renderJson(): ?array
   {
-    if (!isset($this->main->params["recordId"])) {
+    if (!$this->main->isUrlParam("recordId")) {
       return [
         "status" => "failed",
         "error" => "The lead for converting was not set"
       ];
     }
 
-    $leadId = $this->main->params["recordId"];
+    $leadId = $this->main->urlParamAsInteger("recordId");
 
     $mLead = new Lead($this->main);
     $mLeadHistory = new LeadHistory($this->main);

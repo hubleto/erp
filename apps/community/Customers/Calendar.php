@@ -14,9 +14,9 @@ class Calendar extends \HubletoMain\Core\Calendar {
     if (isset($params["idCompany"])) $idCompany = (int) $params["idCompany"];
     else return [];
 
-    if (isset($this->main->params["start"]) && isset($this->main->params["end"])) {
-      $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->main->params["start"]));
-      $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->main->params["end"]));
+    if ($this->main->isUrlParam("start") && $this->main->isUrlParam("end")) {
+      $dateStart = date("Y-m-d H:i:s", strtotime($this->main->urlParamAsString("start")));
+      $dateEnd = date("Y-m-d H:i:s", strtotime($this->main->urlParamAsString("end")));
     } else {
       $dateStart = date("Y-m-d H:i:s");
       $dateEnd = date("Y-m-d H:i:s", strtotime("tommorow"));

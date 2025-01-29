@@ -118,7 +118,7 @@ class Lead extends \HubletoMain\Core\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
-    if ((bool) $this->main->params["showArchive"]) {
+    if ($this->main->urlParamAsBool("showArchive")) {
       $description["ui"] = [
         "title" => "Leads Archive"
       ];
@@ -172,7 +172,8 @@ class Lead extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed {
+  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
+  {
     $relations = [
       'DEAL',
       'COMPANY',
@@ -188,7 +189,7 @@ class Lead extends \HubletoMain\Core\Model
     ];
     $query = parent::prepareLoadRecordQuery($relations, 4);
 
-    if ((bool) ($this->main->params["showArchive"] ?? false)) {
+    if ($this->main->urlParamAsBool("showArchive")) {
       $query = $query->where("leads.is_archived", 1);
     } else {
       $query = $query->where("leads.is_archived", 0);

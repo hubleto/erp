@@ -127,8 +127,8 @@ class Installer {
     $this->main->pdo->execute("drop database if exists `{$this->dbName}`");
     $this->main->pdo->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
 
-    $this->main->config['db_name'] = $this->dbName;
-    $this->main->config['db_codepage'] = "utf8mb4";
+    $this->main->setConfig('db_name', $this->dbName);
+    $this->main->setConfig('db_codepage', "utf8mb4");
     $this->main->initDatabaseConnections();
 
     foreach ($this->main->getRegisteredModels() as $modelClass) {

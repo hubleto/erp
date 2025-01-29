@@ -98,8 +98,8 @@ class Document extends \HubletoMain\Core\Model
   {
     $document = $this->eloquent->find($record["id"])->toArray();
     $prevFilename = ltrim($document["file"],"./");
-    if (file_exists($this->main->config['uploadDir']."/".$prevFilename)) {
-      unlink($this->main->config['uploadDir']."/".$prevFilename);
+    if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
+      unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);
     }
 
     return $record;
@@ -109,8 +109,8 @@ class Document extends \HubletoMain\Core\Model
   {
     $document = $this->eloquent->find($id)->toArray();
     $prevFilename = ltrim($document["file"],"./");
-    if (file_exists($this->main->config['uploadDir']."/".$prevFilename)) {
-      unlink($this->main->config['uploadDir']."/".$prevFilename);
+    if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
+      unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);
     }
 
     return $id;

@@ -191,7 +191,7 @@ class Deal extends \HubletoMain\Core\Model
     $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
-    $description['defaultValues']['id_user'] = $this->main->auth->user["id"];
+    $description['defaultValues']['id_user'] = $this->main->auth->getUserId();
     $description['includeRelations'] = [
       'COMPANY',
       'USER',

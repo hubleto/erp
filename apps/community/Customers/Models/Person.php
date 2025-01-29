@@ -99,7 +99,8 @@ class Person extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed {
+  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
+  {
     $query = parent::prepareLoadRecordQuery($includeRelations, 1);
 
     $query = $query->selectRaw("

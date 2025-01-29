@@ -24,12 +24,14 @@ class GetCompany extends \HubletoMain\Core\Controller
        * The string needs to be at least two characters long for the search to activate
        * due to the lookup inputs not clearing the search parameter when empty
        */
-      if ($searchString != "" && strlen($searchString) > 1) {
+
+      $search = $this->main->urlParamAsString("search");
+      if (strlen($search) > 1) {
         $companies
-          ->where("name", "LIKE", "%" . $searchString . "%")
-          ->orWhere("tax_id", "LIKE", "%" . $searchString . "%")
-          ->orWhere("company_id", "LIKE", "%" . $searchString . "%")
-          ->orWhere("vat_id", "LIKE", "%" . $searchString . "%")
+          ->where("name", "LIKE", "%" . $search . "%")
+          ->orWhere("tax_id", "LIKE", "%" . $search . "%")
+          ->orWhere("company_id", "LIKE", "%" . $search . "%")
+          ->orWhere("vat_id", "LIKE", "%" . $search . "%")
         ;
       }
 

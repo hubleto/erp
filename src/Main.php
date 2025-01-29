@@ -66,7 +66,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   public string $twigNamespaceCore = 'hubleto';
 
-  public function __construct(array|null $config = null, int $mode = self::ADIOS_MODE_FULL)
+  public function __construct(array $config = [], int $mode = self::ADIOS_MODE_FULL)
   {
     parent::__construct($config, $mode);
 

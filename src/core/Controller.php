@@ -53,7 +53,7 @@ class Controller extends \ADIOS\Core\Controller
   {
     parent::prepareView();
 
-    $this->viewParams['app'] = $this->main;
+    $this->viewParams['main'] = $this->main;
     $this->viewParams['help'] = $this->main->help;
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;

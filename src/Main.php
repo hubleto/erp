@@ -74,7 +74,9 @@ class HubletoMain extends \ADIOS\Core\Loader
     if ($tmp === false) $this->requestedUriFirstPart = $this->requestedUri;
     else $this->requestedUriFirstPart = substr($this->requestedUri, 0, (int) strpos($this->requestedUri, '/'));
 
-    $this->config['language'] = $this->auth->user['language'] ?? 'en';
+    $userLanguage = $this->auth->getUserLanguage();
+    if (empty($userLanguage)) $userLanguage = 'en';
+    $this->config['language'] = $userLanguage;
 
     if (is_file($this->configAsString('accountDir', '') . '/pro')) {
       $this->isPro = (string) file_get_contents($this->configAsString('accountDir', '') . '/pro') == '1';

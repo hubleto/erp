@@ -190,7 +190,7 @@ class Deal extends \HubletoMain\Core\Model
     $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_pipeline'] = $defaultPipeline;
     $description['defaultValues']['id_pipeline_step'] = null;
-    $description['defaultValues']['id_user'] = $this->main->auth->user["id"];
+    $description['defaultValues']['id_user'] = $this->main->auth->getUserId();
     $description['includeRelations'] = [
       'COMPANY',
       'USER',
@@ -239,19 +239,19 @@ class Deal extends \HubletoMain\Core\Model
     return $query;
   }
 
-  public function onAfterCreate(array $record, $returnValue)
+  public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
     $mDealHistory = new DealHistory($this->main);
     $mDealHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
-      "id_deal" => $record["id"],
+      "id_deal" => $originalRecord["id"],
       "description" => "Deal created"
     ]);
 
     return $this->main->dispatchEventToPlugins("onModelAfterCreate", [
       "model" => $this,
-      "data" => $record,
-      "returnValue" => $returnValue,
+      "data" => $originalRecord,
+      "returnValue" => $savedRecord,
     ])["returnValue"];
   }
 

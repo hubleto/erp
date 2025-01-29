@@ -152,7 +152,7 @@ class Lead extends \HubletoMain\Core\Model
     $description['defaultValues']['id_person'] = null;
     $description['defaultValues']['is_archived'] = 0;
     $description['defaultValues']['id_lead_status'] = 1;
-    $description['defaultValues']['id_user'] = (int) ($this->main->auth->user ? $this->main->auth->user["id"] : 0);
+    $description['defaultValues']['id_user'] = $this->main->auth->getUserId();
     $description['includeRelations'] = [
       'DEAL',
       'COMPANY',

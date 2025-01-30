@@ -1,4 +1,4 @@
-# Hubleto changelog
+# Hubleto CHANGELOG
 
 ## Release v0.6 (not released yet)
 

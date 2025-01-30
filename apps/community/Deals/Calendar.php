@@ -7,12 +7,9 @@ class Calendar extends \HubletoMain\Core\Calendar {
   public function loadEvents(): array
   {
 
-    $idDeal = 0;
+    $idDeal = $this->main->urlParamAsInteger('idDeal');
     $dateStart = '';
     $dateEnd = '';
-
-    if ($this->main->isUrlParam('idDeal')) $idDeal = $this->main->urlParamAsInteger('idDeal');
-    else return [];
 
     if ($this->main->isUrlParam("start") && $this->main->isUrlParam("end")) {
       $dateStart = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("start")));

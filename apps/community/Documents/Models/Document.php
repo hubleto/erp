@@ -29,8 +29,8 @@ class Document extends \HubletoMain\Core\Model
         "required" => true,
       ],
       "file" => [
-        "title" => "File",
         "type" => "file",
+        "title" => "File",
         "required" => true,
       ],
     ]));

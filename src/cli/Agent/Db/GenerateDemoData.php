@@ -16,7 +16,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
   public function run(): void
   {
-    (new \HubletoMain\Cli\Agent\App\ResetAll($this->cli, $this->arguments))->run();
+    // (new \HubletoMain\Cli\Agent\App\ResetAll($this->cli, $this->arguments))->run();
 
     $this->cli->cyan("Generating demo data...\n");
 
@@ -25,23 +25,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mUserRole = new \HubletoApp\Community\Settings\Models\UserRole($this->main);
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
 
-    $idProfile = $mProfile->eloquent->create(['company' => 'Hubleto Demo Ltd.'])->id;
-
-    $idUserAdministrator = $mUser->eloquent->create([
-      'login' => 'demo@hubleto.com',
-      'password' => $mUser->hashPassword('demo'),
-      'email' => 'demo@hubleto.com',
-      'is_active' => true,
-      'id_active_profile' => $idProfile,
-    ])->id;
-
-    $idRoleAdministrator = $mUserRole->eloquent->create(['id' => UserRole::ROLE_ADMINISTRATOR, 'role' => 'Administrator', 'grant_all' => 1])->id;
-    $idRoleSalesManager = $mUserRole->eloquent->create(['id' => UserRole::ROLE_SALES_MANAGER, 'role' => 'Sales manager', 'grant_all' => 0])->id;
-    $idRoleAccountant = $mUserRole->eloquent->create(['id' => UserRole::ROLE_ACCOUNTANT, 'role' => 'Accountant', 'grant_all' => 0])->id;
-
-    $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
-
-
+    $idProfile = 1; // plati za predpokladu, ze tento command sa spusta hned po CommandInit
 
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
     $idUserSalesManager = $mUser->eloquent->create([

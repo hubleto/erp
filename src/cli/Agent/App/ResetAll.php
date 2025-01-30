@@ -14,10 +14,10 @@ class ResetAll extends \HubletoMain\Cli\Agent\Command
     require_once($this->main->configAsString('dir', __DIR__) . "/ConfigApp.php");
     require_once($this->main->configAsString('accountDir', __DIR__) . "/ConfigEnv.php");
 
-    foreach ($appManager->getApps() as $appClass => $appConfig) {
+    foreach ($appManager->getInstalledApps() as $appClass => $appConfig) {
       try {
         if (!$appManager->isAppInstalled($appClass)) {
-          $appManager->installApp($appClass);
+          $appManager->installApp($appClass, []);
         }
       } catch (\Throwable $e) {
         $this->cli->red($e->getMessage() . "\n");

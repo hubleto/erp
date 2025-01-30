@@ -18,7 +18,7 @@ class Install extends \HubletoMain\Cli\Agent\Command
     require_once($this->main->configAsString('dir', __DIR__) . "/ConfigApp.php");
     require_once($this->main->configAsString('accountDir', __DIR__) . "/ConfigEnv.php");
 
-    $appManager->installApp($appClass, $forceInstall);
+    $appManager->installApp($appClass, [], $forceInstall);
     $this->cli->green("{$appClass} installed successfully.\n");
   }
 }

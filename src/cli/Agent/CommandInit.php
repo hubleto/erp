@@ -133,20 +133,29 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       false, // randomize (deprecated)
     );
 
-    $installer->apps = [];
+    $installer->appsToInstall = [];
     foreach (explode(',', (string) $packagesToInstall) as $package) {
       $package = trim((string) $package);
       $this->cli->cyan("  Package: {$package}\n");
       $appsInPackage = (is_array($installer->packages[$package]) ? $installer->packages[$package] : []);
-      $installer->apps = array_merge(
-        $installer->apps,
+      $installer->appsToInstall = array_merge(
+        $installer->appsToInstall,
         $appsInPackage
       );
     }
 
+    $this->cli->cyan("\n");
+
+    $this->cli->cyan("Creating database.\n");
     $installer->createDatabase();
-    $installer->installTables();
-    $installer->installDefaultPermissions();
+
+    $this->cli->cyan("Installing apps.\n");
+    $installer->installApps();
+
+    $this->cli->cyan("Adding default company profile and admin user.\n");
+    $installer->addCompanyProfileAndAdminUser();
+
+    $this->cli->cyan("Creating folders and files.\n");
     $installer->createFoldersAndFiles();
 
     $this->cli->cyan("\n");

@@ -268,7 +268,8 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         uid={this.props.uid + "_table_lead_services"}
                         data={{ data: R.SERVICES }}
                         leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
-                        descriptionSource='props'
+                        descriptionSource='both'
+                        customEndpointParams={{'idLead': R.id}}
                         description={{
                           ui: {
                             showHeader: false,

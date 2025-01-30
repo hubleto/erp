@@ -20,7 +20,7 @@ class GetPermissions extends \HubletoMain\Core\Controller
     $allPermissions = [];
     $sortedAllPermissions = [];
     $rolePermissions = [];
-    $roleId = (int) $this->main->params["roleId"] ?? null;
+    $roleId = $this->main->urlParamAsInteger("roleId") ?? null;
 
     try {
       $mPermission = new Permission($this->main);
@@ -42,7 +42,7 @@ class GetPermissions extends \HubletoMain\Core\Controller
         $pattern = "#^(?:[^/]+/){4}([^/]+)#";
         preg_match($pattern, $permission["permission"], $matches);
         $modPermission = $permission;
-        $modPermission["alias"] = $matches[1];
+        if (!empty($matches)) $modPermission["alias"] = $matches[1];
 
         if (in_array($MVCNamespace, $this->MVCNamespaces)) {
           $sortedAllPermissions[$appNamespace][$MVCNamespace][] = $modPermission;

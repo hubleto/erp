@@ -8,15 +8,16 @@
     },
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "require": {
-        "php": "^8.2",
-        "twig/twig": "^3",
         "illuminate/database": "^11",
-        "monolog/monolog": "^3",
-        "symfony/yaml": "^7",
         "illuminate/pagination": "^11",
+        "laravel/serializable-closure": "^2",
+        "monolog/monolog": "^3",
+        "php": "^8.2",
+        "phpstan/phpstan": "^2",
         "snipworks/php-smtp": "^2",
-        "wai-blue/adios": "^1",
-        "laravel/serializable-closure": "^2"
+        "symfony/yaml": "^7",
+        "twig/twig": "^3",
+        "wai-blue/adios": "^1"
     },
     "autoload": {
         "psr-4": {

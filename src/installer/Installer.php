@@ -126,6 +126,9 @@ class Installer {
   public function createDatabase(): void
   {
 
+    $this->main->setConfig('db_name', '');
+    $this->main->initDatabaseConnections();
+
     $this->main->pdo->execute("drop database if exists `{$this->dbName}`");
     $this->main->pdo->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
 

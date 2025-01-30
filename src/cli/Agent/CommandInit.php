@@ -86,30 +86,40 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (empty($packagesToInstall)) $packagesToInstall = 'core,sales';
     if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
+    $this->cli->green("       ###         \n");
+    $this->cli->green("      ###        ##\n");
+    $this->cli->green("     #####      ###\n");
+    $this->cli->green("    ###  ####  ### \n");
+    $this->cli->green("   ###      #####  \n");
+    $this->cli->green("   ##        ###   \n");
+    $this->cli->green("            ###    \n");
+    $this->cli->cyan("\n");
+    $this->cli->green("Hubleto, release " . \HubletoMain::RELEASE . "\n");
+    $this->cli->cyan("\n");
+
     $this->cli->cyan("Initializing with following config:\n");
-    $this->cli->cyan('  rewriteBase = ' . (string) $rewriteBase . "\n");
-    $this->cli->cyan('  accountFolder = ' . (string) $accountFolder . "\n");
-    $this->cli->cyan('  accountUrl = ' . (string) $accountUrl . "\n");
-    $this->cli->cyan('  dbHost = ' . (string) $dbHost . "\n");
-    $this->cli->cyan('  dbUser = ' . (string) $dbUser . "\n");
-    $this->cli->cyan('  dbPassword = ' . (string) $dbPassword . "\n");
-    $this->cli->cyan('  dbName = ' . (string) $dbName . "\n");
-    $this->cli->cyan('  dbCodepage = ' . (string) $dbCodepage . "\n");
-    $this->cli->cyan('  companyName = ' . (string) $companyName . "\n");
-    $this->cli->cyan('  adminName = ' . (string) $adminName . "\n");
-    $this->cli->cyan('  adminFamilyName = ' . (string) $adminFamilyName . "\n");
-    $this->cli->cyan('  adminEmail = ' . (string) $adminEmail . "\n");
-    $this->cli->cyan('  adminPassword = ' . (string) $adminPassword . "\n");
-    $this->cli->cyan('  packagesToInstall = ' . (string) $packagesToInstall . "\n");
+    $this->cli->cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
+    $this->cli->cyan('  -> accountFolder = ' . (string) $accountFolder . "\n");
+    $this->cli->cyan('  -> accountUrl = ' . (string) $accountUrl . "\n");
+    $this->cli->cyan('  -> dbHost = ' . (string) $dbHost . "\n");
+    $this->cli->cyan('  -> dbUser = ' . (string) $dbUser . "\n");
+    $this->cli->cyan('  -> dbPassword = ***' . "\n");
+    $this->cli->cyan('  -> dbName = ' . (string) $dbName . "\n");
+    $this->cli->cyan('  -> dbCodepage = ' . (string) $dbCodepage . "\n");
+    $this->cli->cyan('  -> companyName = ' . (string) $companyName . "\n");
+    $this->cli->cyan('  -> adminName = ' . (string) $adminName . "\n");
+    $this->cli->cyan('  -> adminFamilyName = ' . (string) $adminFamilyName . "\n");
+    $this->cli->cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
+    $this->cli->cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
+    $this->cli->cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
     $this->main->setConfig('db_host', $dbHost);
     $this->main->setConfig('db_user', $dbUser);
     $this->main->setConfig('db_password', $dbPassword);
     $this->main->setConfig('db_name', $dbName);
-    $this->main->initDatabaseConnections();
 
     $this->cli->cyan("\n");
-    $this->cli->cyan("Hurray. Installing your Hubleto...\n");
+    $this->cli->cyan("Hurray. Installing your Hubleto packages: " . join(", ", explode(",", $packagesToInstall)) . "\n");
 
     // install
     $installer = new \HubletoMain\Installer\Installer(
@@ -136,7 +146,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $installer->appsToInstall = [];
     foreach (explode(',', (string) $packagesToInstall) as $package) {
       $package = trim((string) $package);
-      $this->cli->cyan("  Package: {$package}\n");
       $appsInPackage = (is_array($installer->packages[$package]) ? $installer->packages[$package] : []);
       $installer->appsToInstall = array_merge(
         $installer->appsToInstall,
@@ -144,18 +153,16 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       );
     }
 
-    $this->cli->cyan("\n");
-
-    $this->cli->cyan("Creating database.\n");
+    $this->cli->cyan("  -> Creating database.\n");
     $installer->createDatabase();
 
-    $this->cli->cyan("Installing apps.\n");
+    $this->cli->cyan("  -> Installing apps.\n");
     $installer->installApps();
 
-    $this->cli->cyan("Adding default company profile and admin user.\n");
+    $this->cli->cyan("  -> Adding default company profile and admin user.\n");
     $installer->addCompanyProfileAndAdminUser();
 
-    $this->cli->cyan("Creating folders and files.\n");
+    $this->cli->cyan("  -> Creating folders and files.\n");
     $installer->createFoldersAndFiles();
 
     $this->cli->cyan("\n");

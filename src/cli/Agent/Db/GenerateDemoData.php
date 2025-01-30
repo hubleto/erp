@@ -16,8 +16,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
   public function run(): void
   {
-    // (new \HubletoMain\Cli\Agent\App\ResetAll($this->cli, $this->arguments))->run();
-
     $this->cli->cyan("Generating demo data...\n");
 
     $mProfile = new \HubletoApp\Community\Settings\Models\Profile($this->main);

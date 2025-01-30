@@ -99,7 +99,7 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->appManager->registerApp(\HubletoApp\Community\Settings\Loader::class);
     $this->appManager->registerApp(\HubletoApp\Community\Help\Loader::class);
 
-    foreach ($this->appManager->getApps() as $appClass => $appConfig) {
+    foreach ($this->appManager->getInstalledApps() as $appClass => $appConfig) {
       $appClass = (string) $appClass;
       if (is_array($appConfig) && ($appConfig['enabled'] ?? false) && $appClass::canBeAdded($this)) {
         $this->appManager->registerApp($appClass);

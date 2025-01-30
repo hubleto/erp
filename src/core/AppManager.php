@@ -28,16 +28,22 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
     return str_replace('\\', '-', trim($appClass, '\\'));
   }
 
-  public function getApps(): array
+  public function getInstalledApps(): array
   {
-    $apps = $this->main->configAsArray('apps');
-    ksort($apps);
+    $tmp = $this->main->configAsArray('apps');
+    ksort($tmp);
+
+    $apps = [];
+    foreach ($tmp as $key => $value) {
+      $apps[str_replace('-', '\\', $key)] = $value;
+    }
+
     return $apps;
   }
 
   public function getAppConfig(string $appClass): array
   {
-    $apps = $this->getApps();
+    $apps = $this->getInstalledApps();
     $key = $this->getAppNameForConfig($appClass);
     if (isset($apps[$key]) && is_array($apps[$key])) return $apps[$key];
     else return [];
@@ -72,12 +78,13 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
 
   public function isAppInstalled(string $appClass): bool
   {
-    $apps = $this->getApps();
+    $apps = $this->getInstalledApps();
     $key = $this->getAppNameForConfig($appClass);
     return isset($apps[$key]) && is_array($apps[$key]) && isset($apps[$key]['installedOn']);
   }
 
-  public function installApp(string $appClass, bool $forceInstall = false): bool
+  /** @param array<string, string> $appConfig */
+  public function installApp(string $appClass, array $appConfig, bool $forceInstall = false): bool
   {
 
     if ($this->cli) $this->cli->cyan("Installing {$appClass}.\n");
@@ -102,15 +109,23 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
       $dependencyAppClass = (string) $dependencyAppClass;
       if (!$this->isAppInstalled($dependencyAppClass)) {
         if ($this->cli) $this->cli->cyan("Installing dependency {$dependencyAppClass}.\n");
-        $this->installApp($dependencyAppClass, $forceInstall);
+        $this->installApp($dependencyAppClass, [], $forceInstall);
       }
     }
 
     $app->installTables();
+    $app->installDefaultPermissions();
 
-    if (!in_array($appClass, $this->getApps())) {
-      $this->main->setConfig('apps/' . $this->getAppNameForConfig($appClass) . "/installedOn", date('Y-m-d H:i:s'));
-      $this->main->saveConfigByPath('apps/' . $this->getAppNameForConfig($appClass) . "/installedOn", date('Y-m-d H:i:s'));
+    $appNameForConfig = $this->getAppNameForConfig($appClass);
+
+    if (!in_array($appClass, $this->getInstalledApps())) {
+      $this->main->setConfig('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+      $this->main->saveConfigByPath('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+    }
+
+    foreach ($appConfig as $cPath => $cValue) {
+      $this->main->setConfig('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
+      $this->main->saveConfigByPath('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
     }
 
     return true;

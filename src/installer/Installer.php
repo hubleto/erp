@@ -29,7 +29,8 @@ class Installer {
 
   public bool $randomize = false;
 
-  public array $apps = [];
+  /** @var array<string> */
+  public array $appsToInstall = [];
 
   public array $packages = [
     'core' => [
@@ -37,8 +38,8 @@ class Installer {
       \HubletoApp\Community\Dashboard\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Upgrade\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Calendar\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Customers\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Documents\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Customers\Loader::class => [ 'enabled' => true ],
     ],
     'invoices' => [
       \HubletoApp\Community\Billing\Loader::class => [ 'enabled' => true ],
@@ -47,8 +48,9 @@ class Installer {
     ],
     'sales' => [
       \HubletoApp\Community\Pipeline\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Deals\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Services\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Leads\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Deals\Loader::class => [ 'enabled' => true ],
     ],
     // 'sync' => [
     //   \HubletoApp\Community\CalendarSync\Loader::class => [ 'enabled' => true ],
@@ -89,9 +91,9 @@ class Installer {
     $this->adminEmail = $adminEmail;
     $this->adminPassword = $adminPassword;
     $this->accountRewriteBase = $accountRewriteBase;
-    $this->accountFolder = $accountFolder;
+    $this->accountFolder = str_replace('\\', '/', $accountFolder);
     $this->accountUrl = $accountUrl;
-    $this->mainFolder = $mainFolder;
+    $this->mainFolder = str_replace('\\', '/', $mainFolder);
     $this->mainUrl = $mainUrl;
 
     $this->dbHost = $dbHost;
@@ -142,26 +144,19 @@ class Installer {
 
   }
 
-  public function installTables(): void
+  public function installApps(): void
   {
-
     (new \ADIOS\Models\Config($this->main))->install();
 
-    (new \HubletoApp\Community\Settings\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Documents\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Services\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Customers\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Invoices\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Billing\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Pipeline\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Leads\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Deals\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Products\Loader($this->main))->installTables();
-    (new \HubletoApp\Community\Orders\Loader($this->main))->installTables();
+    foreach ($this->appsToInstall as $appClass => $appConfig) {
+      $this->main->appManager->installApp($appClass, $appConfig, true);
+    }
+  }
 
+  public function addCompanyProfileAndAdminUser(): void
+  {
     $mProfile = new \HubletoApp\Community\Settings\Models\Profile($this->main);
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
-    $mUserRole = new \HubletoApp\Community\Settings\Models\UserRole($this->main);
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
 
     $idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
@@ -174,11 +169,10 @@ class Installer {
       'id_active_profile' => $idProfile,
     ])->id;
 
-    $idRoleAdministrator = $mUserRole->eloquent->create(['id' => UserRole::ROLE_ADMINISTRATOR, 'role' => 'Administrator', 'grant_all' => 1])->id;
-    $idRoleSalesManager = $mUserRole->eloquent->create(['id' => UserRole::ROLE_SALES_MANAGER, 'role' => 'Sales manager', 'grant_all' => 0])->id;
-    $idRoleAccountant = $mUserRole->eloquent->create(['id' => UserRole::ROLE_ACCOUNTANT, 'role' => 'Accountant', 'grant_all' => 0])->id;
-
-    $mUserHasRole->eloquent->create(['id_user' => $idUserAdministrator, 'id_role' => $idRoleAdministrator])->id;
+    $mUserHasRole->eloquent->create([
+      'id_user' => $idUserAdministrator,
+      'id_role' => \HubletoApp\Community\Settings\Models\UserRole::ROLE_ADMINISTRATOR,
+    ])->id;
   }
 
   public function getConfigEnvContent(): string
@@ -195,7 +189,7 @@ class Installer {
 
     $configEnv .= '' . "\n";
     $configEnv .= '$config[\'apps\'] = [' . "\n";
-    foreach ($this->apps as $appClass => $appConfig) {
+    foreach ($this->appsToInstall as $appClass => $appConfig) {
       $configEnv .= '  \\' . $appClass . '::class => ' . var_export($appConfig, true) . ',' . "\n";
     }
     $configEnv .= '];' . "\n";
@@ -242,9 +236,9 @@ class Installer {
 
   public function installDefaultPermissions(): void
   {
-    $modules = $this->main->appManager->getRegisteredApps();
-    array_walk($modules, function($module) {
-      $module->installDefaultPermissions();
+    $apps = $this->main->appManager->getRegisteredApps();
+    array_walk($apps, function($apps) {
+      $apps->installDefaultPermissions();
     });
   }
 

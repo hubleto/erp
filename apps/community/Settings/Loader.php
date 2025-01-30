@@ -387,6 +387,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function installDefaultPermissions(): void
   {
+    $mUserRole = new Models\UserRole($this->main);
     $mPermission = new Models\Permission($this->main);
     $mRolePermission = new Models\RolePermission($this->main);
 
@@ -465,13 +466,18 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Setting/Controllers/Permissions" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
     ];
 
+    $idRoles = [];
+    $idRoles[Models\UserRole::ROLE_ADMINISTRATOR] = $mUserRole->eloquent->create(['id' => Models\UserRole::ROLE_ADMINISTRATOR, 'role' => 'Administrator', 'grant_all' => 1])->id;
+    $idRoles[Models\UserRole::ROLE_SALES_MANAGER] = $mUserRole->eloquent->create(['id' => Models\UserRole::ROLE_SALES_MANAGER, 'role' => 'Sales manager', 'grant_all' => 0])->id;
+    $idRoles[Models\UserRole::ROLE_ACCOUNTANT] = $mUserRole->eloquent->create(['id' => Models\UserRole::ROLE_ACCOUNTANT, 'role' => 'Accountant', 'grant_all' => 0])->id;
+
     foreach ($permissions as $permission => $grantedForRoles) {
       $idPermission = $mPermission->eloquent->create([
         "permission" => $permission
       ])->id;
 
       foreach ($grantedForRoles as $idRole) {
-        $mRolePermission->eloquent->create(['id_role' => $idRole, 'id_permission' => $idPermission]);
+        $mRolePermission->eloquent->create(['id_role' => $idRoles[$idRole], 'id_permission' => $idPermission]);
       }
     }
   }

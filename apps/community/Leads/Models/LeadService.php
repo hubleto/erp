@@ -55,4 +55,12 @@ class LeadService extends \HubletoMain\Core\Model
       ],
     ]));
   }
+
+  public function tableDescribe(array $description = []): array
+  {
+    $description = parent::tableDescribe();
+    if ($this->main->urlParamAsInteger('idLead') > 0){
+      // custom table description
+    }
+  }
 }

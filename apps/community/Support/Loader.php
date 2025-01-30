@@ -18,7 +18,7 @@ class Loader extends \HubletoMain\Core\App
     // $this->main->sidebar->addLink(1, 98100, 'support', $this->translate('Support'), 'fas fa-circle-question');
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [

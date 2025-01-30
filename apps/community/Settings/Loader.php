@@ -390,7 +390,6 @@ class Loader extends \HubletoMain\Core\App
   public function installDefaultPermissions(): void
   {
     $mPermission = new Models\Permission($this->main);
-    $mRolePermission = new Models\RolePermission($this->main);
 
     $permissions = [
       "HubletoApp/Community/Settings/Models/ActivityType:Create",

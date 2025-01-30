@@ -57,7 +57,7 @@ class Loader extends \HubletoMain\Core\App
 
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [

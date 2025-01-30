@@ -54,7 +54,7 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Billing/BillingAccount",
     ];
 
-    foreach ($permissions as $key => $permission) {
+    foreach ($permissions as $permission) {
       $mPermission->eloquent->create([
         "permission" => $permission
       ]);

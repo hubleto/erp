@@ -24,7 +24,7 @@ class Loader extends \HubletoMain\Core\App
     $mHistory->dropTableIfExists()->install();
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [

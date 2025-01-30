@@ -6,7 +6,7 @@ use \HubletoApp\Community\Customers\Models\Company;
 use \HubletoApp\Community\Settings\Models\User;
 use \HubletoApp\Community\Settings\Models\InvoiceProfile;
 
-class Invoice extends \ADIOS\Core\Model {
+class Invoice extends \HubletoMain\Core\Model {
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '{%TABLE%}.number';
   public string $eloquentClass = Eloquent\Invoice::class;
@@ -41,10 +41,10 @@ class Invoice extends \ADIOS\Core\Model {
 
     $mInvoiceProfile = new InvoiceProfile($this->main);
 
-    $invoicesThisYear = $this->eloquent->whereYear('date_delivery', date('Y'))->get()->toArray();
+    $invoicesThisYear = (array) $this->eloquent->whereYear('date_delivery', date('Y'))->get()->toArray();
     $profil = $mInvoiceProfile->eloquent->where('id', $record['id_profile'])->first()->toArray();
 
-    $record['number'] = $profil['numbering_pattern'] ?? '{YYYY}{NNNN}';
+    $record['number'] = (string) ($profil['numbering_pattern'] ?? '{YYYY}{NNNN}');
     $record['number'] = str_replace('{YY}', date('y'), $record['number']);
     $record['number'] = str_replace('{YYYY}', date('Y'), $record['number']);
     $record['number'] = str_replace('{NN}', str_pad((string) (count($invoicesThisYear) + 1), 2, '0', STR_PAD_LEFT), $record['number']);
@@ -95,8 +95,10 @@ class Invoice extends \ADIOS\Core\Model {
     $vatPercent = 20;
 
     $total = 0;
-    foreach ($record['ITEMS'] as $key => $item) {
-      $itemPrice = (float) $item['unit_price'] * (float) $cinnost['amount'];
+    foreach ($record['ITEMS'] as $key => $item) { //@phpstan-ignore-line
+      $unitPrice = (float) ($item['unit_price'] ?? 0);
+      $amount = (float) ($item['amount'] ?? 0);
+      $itemPrice = $unitPrice * $amount;
       $itemVat = $itemPrice*$vatPercent/100;
       $total += $itemPrice;
 

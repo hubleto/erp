@@ -29,7 +29,7 @@ class Loader extends \HubletoMain\Core\App
       'url' => 'settings/lead-statuses',
     ]);
 
-    $this->main->addCalendar(Calendar::class);
+    $this->main->calendarManager->addCalendar(Calendar::class);
   }
 
   public function installTables(): void

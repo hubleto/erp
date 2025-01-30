@@ -8,6 +8,9 @@ use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 class InvoiceItem extends \HubletoMain\Core\ModelEloquent {
   public $table = 'invoice_items';
 
-  public function INVOICE(): BelongsTo { return $this->BelongsTo(Invoice::class, 'id_invoice'); }
+  /** @return BelongsTo<Invoice, covariant InvoiceItem> */
+  public function INVOICE(): BelongsTo {
+    return $this->BelongsTo(Invoice::class, 'id_invoice');
+  }
 
 }

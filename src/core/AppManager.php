@@ -2,7 +2,9 @@
 
 namespace HubletoMain\Core;
 
-class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
+class AppManager
+{
+
   public \HubletoMain $main;
   public \HubletoMain\Cli\Agent\Loader|null $cli;
 
@@ -74,6 +76,12 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
   public function getRegisteredApps(): array
   {
     return $this->apps;
+  }
+
+  public function getApp(string $appClass): null|\HubletoMain\Core\App
+  {
+    if (isset($this->apps[$appClass])) return $this->app[$appClass];
+    else return null;
   }
 
   public function isAppInstalled(string $appClass): bool

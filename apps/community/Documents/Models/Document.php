@@ -96,8 +96,8 @@ class Document extends \HubletoMain\Core\Model
 
   public function onBeforeUpdate(array $record): array
   {
-    $document = $this->eloquent->find($record["id"])->toArray();
-    $prevFilename = ltrim($document["file"],"./");
+    $document = (array) $this->eloquent->find($record["id"])->toArray();
+    $prevFilename = ltrim((string) $document["file"],"./");
     if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
       unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);
     }
@@ -107,8 +107,8 @@ class Document extends \HubletoMain\Core\Model
 
   public function onBeforeDelete(int $id): int
   {
-    $document = $this->eloquent->find($id)->toArray();
-    $prevFilename = ltrim($document["file"],"./");
+    $document = (array) $this->eloquent->find($id)->toArray();
+    $prevFilename = ltrim((string) $document["file"],"./");
     if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
       unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);
     }

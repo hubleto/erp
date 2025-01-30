@@ -12,10 +12,14 @@ class LeadTag extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'lead_tags';
 
+  /** @return BelongsTo<Lead, covariant LeadTag> */
   public function LEAD(): BelongsTo {
     return $this->belongsTo(Lead::class, 'id_lead', 'id');
   }
+
+  /** @return BelongsTo<Tag, covariant LeadTag> */
   public function TAG(): BelongsTo {
     return $this->belongsTo(Tag::class, 'id_tag', 'id');
   }
+
 }

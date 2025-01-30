@@ -9,6 +9,7 @@
   * static code analysis checks (thanks to the PHPStan)
   * new features in community apps
   * improved routing featurs (using named groups in routes), see [Dynamic routes with variables](https://developer.hubleto.com/tutorial/advanced/dynamic-routes)
+  * new `\HubletoMain\Core\CalendarManager` class and `$this->main->calendarManager` object
 
 New ASCII art logo :-)
 

@@ -10,9 +10,7 @@ class LeadActivity extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'lead_activities';
 
-  // public function ACTIVITY(): BelongsTo {
-  //   return $this->belongsTo(Activity::class, 'id_activity', 'id');
-  // }
+  /** @return BelongsTo<Lead, covariant LeadActivity> */
   public function LEAD(): BelongsTo {
     return $this->belongsTo(Lead::class, 'id_lead', 'id');
   }

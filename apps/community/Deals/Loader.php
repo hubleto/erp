@@ -30,7 +30,7 @@ class Loader extends \HubletoMain\Core\App
       'url' => 'settings/deal-statuses',
     ]);
 
-    $this->main->addCalendar(Calendar::class);
+    $this->main->calendarManager->addCalendar(Calendar::class);
   }
 
   public function installTables(): void

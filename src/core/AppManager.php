@@ -110,8 +110,8 @@ class AppManager extends \ADIOS\Auth\Providers\DefaultProvider {
     $app->installDefaultPermissions();
 
     if (!in_array($appClass, $this->getApps())) {
-      $this->main->setConfig('apps/' . $this->getAppNameForConfig($appClass), ['installedOn' => date('Y-m-d H:i:s')]);
-      $this->main->saveConfigByPath('apps/' . $this->getAppNameForConfig($appClass), ['installedOn' => date('Y-m-d H:i:s')]);
+      $this->main->setConfig('apps/' . $this->getAppNameForConfig($appClass) . "/installedOn", date('Y-m-d H:i:s'));
+      $this->main->saveConfigByPath('apps/' . $this->getAppNameForConfig($appClass) . "/installedOn", date('Y-m-d H:i:s'));
     }
 
     return true;

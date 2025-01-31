@@ -14,9 +14,9 @@ class Service extends \HubletoMain\Core\Model
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       "name" => [
         "type" => "varchar",
         "title" => "Name",

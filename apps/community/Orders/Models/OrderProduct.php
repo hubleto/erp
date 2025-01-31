@@ -15,9 +15,9 @@ class OrderProduct extends \HubletoMain\Core\Model
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns,[
+    return parent::columnsLegacy(array_merge($columns,[
       "id_product" => [
         "type" => "lookup",
         "model" => Product::class,

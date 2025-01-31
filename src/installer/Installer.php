@@ -140,7 +140,7 @@ class Installer {
       $model = $this->main->getModel($modelClass);
       $this->main->db->addTable(
         $model->getFullTableSqlName(),
-        $model->columns(),
+        $model->columnsLegacy(),
         $model->isJunctionTable
       );
     }

@@ -13,9 +13,9 @@ class Product extends \HubletoMain\Core\Model
     'SUPPLIER' => [ self::HAS_ONE, Supplier::class, 'id','id_supplier'],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns,[
+    return parent::columnsLegacy(array_merge($columns,[
 
       "title" => [
         "type" => "varchar",

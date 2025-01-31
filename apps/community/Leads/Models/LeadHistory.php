@@ -18,9 +18,9 @@ class LeadHistory extends \HubletoMain\Core\Model
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead','id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
 
       'change_date' => [
         'type' => 'date',

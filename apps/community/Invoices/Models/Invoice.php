@@ -18,9 +18,9 @@ class Invoice extends \HubletoMain\Core\Model {
     'ITEMS' => [ self::HAS_MANY, InvoiceItem::class, "id_invoice", "id" ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       "id_profile" => [ "type" => "lookup", "model" => InvoiceProfile::class, "title" => $this->translate("Profile") ],
       "id_issued_by" => [ "type" => "lookup", "model" => User::class, "title" => $this->translate("Issued by") ],
       "id_customer" => [ "type" => "lookup", "model" => Company::class, "title" => $this->translate("Customer") ],

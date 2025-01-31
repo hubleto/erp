@@ -12,9 +12,9 @@ class PipelineStep extends \HubletoMain\Core\Model
     'PIPELINE' => [ self::BELONGS_TO, Pipeline::class, 'id_pipeline', 'id' ]
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'name' => [
         'type' => 'varchar',
         'title' => $this->translate('Name'),

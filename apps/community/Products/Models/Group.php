@@ -8,9 +8,9 @@ class Group extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Group::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns,[
+    return parent::columnsLegacy(array_merge($columns,[
 
       "title" => [
         "type" => "varchar",

@@ -15,9 +15,9 @@ class LeadDocument extends \HubletoMain\Core\Model
     'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Lead',

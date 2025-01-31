@@ -18,9 +18,9 @@ class User extends \ADIOS\Models\User
   public string $eloquentClass = Eloquent\User::class;
   public ?string $lookupSqlValue = '{%TABLE%}.email';
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'first_name' => [
         'type' => 'varchar',
         'title' => $this->translate('First name'),

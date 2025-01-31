@@ -12,9 +12,9 @@ class History extends \HubletoMain\Core\Model
     'ORDER'   => [ self::BELONGS_TO, Order::class, 'id_order', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns,[
+    return parent::columnsLegacy(array_merge($columns,[
       "id_order" => [
         "type" => "lookup",
         "model" => Order::class,

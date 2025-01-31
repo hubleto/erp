@@ -36,9 +36,9 @@ class Deal extends \HubletoMain\Core\Model
     'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_deal', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
 
       'title' => [
         'type' => 'varchar',

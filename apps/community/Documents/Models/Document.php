@@ -20,9 +20,9 @@ class Document extends \HubletoMain\Core\Model
     'DEAL_DOCUMENT' => [ self::HAS_ONE, DealDocument::class, 'id_document', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       "name" => [
         "title" => "Document name",
         "type" => "varchar",

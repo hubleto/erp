@@ -7,9 +7,9 @@ class Setting extends \HubletoMain\Core\Model
   public string $table = 'settings';
   public string $eloquentClass = Eloquent\Setting::class;
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns([
+    return parent::columnsLegacy([
       'key' => [
         'type' => 'varchar',
         'byte_size' => '250',

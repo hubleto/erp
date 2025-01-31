@@ -14,9 +14,9 @@ class PersonTag extends \HubletoMain\Core\Model
     'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Person',

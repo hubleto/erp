@@ -15,9 +15,9 @@ class Address extends \HubletoMain\Core\Model
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_person' => [
         'type' => 'lookup',
         'title' => 'Person',

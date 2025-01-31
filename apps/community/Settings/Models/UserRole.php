@@ -22,9 +22,9 @@ class UserRole extends \HubletoMain\Core\Model
     'PERMISSIONS' => [ self::HAS_MANY, RolePermission::class, 'id_role', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns([
+    return parent::columnsLegacy([
       'role' => [
         'type' => 'varchar',
         'required' => true,

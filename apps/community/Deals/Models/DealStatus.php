@@ -8,9 +8,9 @@ class DealStatus extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\DealStatus::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'name' => [
         'type' => 'varchar',
         'title' => $this->translate('Name'),

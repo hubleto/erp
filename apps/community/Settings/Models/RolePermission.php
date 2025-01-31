@@ -12,9 +12,9 @@ class RolePermission extends \HubletoMain\Core\Model
     'PERMISSION' => [ self::BELONGS_TO, Permission::class, 'id_permission', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_permission' => [
         'type' => 'lookup',
         'title' => $this->translate('Permission'),

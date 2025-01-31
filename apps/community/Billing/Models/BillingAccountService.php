@@ -14,9 +14,9 @@ class BillingAccountService extends \HubletoMain\Core\Model
     'BILLING_ACCOUNT' => [ self::BELONGS_TO, BillingAccount::class, 'id_billing_account', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_billing_account' => [
         'type' => 'lookup',
         'title' => 'Billing Account',

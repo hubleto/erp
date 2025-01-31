@@ -172,6 +172,18 @@ class Deal extends \HubletoMain\Core\Model
     unset($description['columns']['is_archived']);
     unset($description['columns']['id_lead']);
     unset($description['columns']['id_pipeline']);
+
+    if ($this->main->urlParamAsBool('idCompany') > 0) {
+      $description['permissions'] = [
+        'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
+      ];
+      unset($description["columns"]);
+      unset($description["ui"]);
+    }
+
     return $description;
   }
 
@@ -206,6 +218,7 @@ class Deal extends \HubletoMain\Core\Model
       'ACTIVITIES',
       'DOCUMENTS',
     ];
+
     return $description;
   }
 

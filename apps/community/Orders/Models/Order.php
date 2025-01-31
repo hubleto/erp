@@ -130,7 +130,7 @@ class Order extends \HubletoMain\Core\Model
     $longDescription = "";
 
     foreach ((array) $originalRecord["PRODUCTS"] as $product) {
-      if ($product["_toBeDeleted_"] == true) continue;
+      if (isset($product["_toBeDeleted_"])) continue;
       $productTitle = (string) $mProduct->eloquent->find((int) $product["id_product"])->title;
       $longDescription .=  "{$productTitle} - Amount: ".(string) $product["amount"]." - Unit Price: ".(string) $product["unit_price"]." - Tax: ".(string) $product["tax"]." - Discount: ".(string) $product["discount"]." \n\n";
     }
@@ -150,8 +150,7 @@ class Order extends \HubletoMain\Core\Model
 
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
-
-    $order = $this->eloquent->find($originalRecord["id"]);
+    $order = $this->eloquent->find($savedRecord["id"]);
     $order->order_number = $order->id;
     $order->save();
 

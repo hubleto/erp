@@ -275,12 +275,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                             showHeader: false,
                             showFooter: true
                           },
-                          permissions: {
-                            canCreate: true,
-                            canUpdate: true,
-                            canDelete: true,
-                            canRead: true,
-                          },
                           columns: {
                             id_service: { type: "lookup", title: "Service",
                               model: "HubletoApp/Community/Services/Models/Service",
@@ -424,17 +418,12 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
               <TableLeadDocuments
                 uid={this.props.uid + "_table_lead_document"}
                 data={{ data: R.DOCUMENTS }}
-                descriptionSource="props"
+                descriptionSource="both"
+                customEndpointParams={{idLead: R.id}}
                 description={{
                   ui: {
                     showFooter: false,
                     showHeader: false,
-                  },
-                  permissions: {
-                    canCreate: true,
-                    canDelete: true,
-                    canRead: true,
-                    canUpdate: true
                   },
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },

@@ -141,12 +141,25 @@ class Lead extends \HubletoMain\Core\Model
     unset($description['columns']['id_person']);
     unset($description['columns']['source_channel']);
     unset($description['columns']['is_archived']);
+
+    if ($this->main->urlParamAsBool('idCompany') > 0) {
+      $description['permissions'] = [
+        'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
+      ];
+      unset($description["columns"]);
+      unset($description["ui"]);
+    }
+
     return $description;
   }
 
   public function formDescribe(array $description = []): array
   {
     $description = parent::formDescribe($description);
+
     $description['defaultValues']['id_company'] = null;
     $description['defaultValues']['date_created'] = date("Y-m-d");
     $description['defaultValues']['id_person'] = null;

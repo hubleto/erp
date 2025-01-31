@@ -16,7 +16,6 @@ class GetPermissions extends \HubletoMain\Core\Controller
 
   public function renderJson(): ?array
   {
-
     $allPermissions = [];
     $sortedAllPermissions = [];
     $rolePermissions = [];
@@ -27,22 +26,28 @@ class GetPermissions extends \HubletoMain\Core\Controller
       $allPermissions = $mPermission->eloquent->orderBy("permission", "asc")->get()->toArray();
 
       foreach ($allPermissions as $permission) {
+        /*
+          [0] => HubletoApp namespace
+          [1] => App Version
+          [2] => App Name
+          [3] => Controller, Model, Api or other
+          [4] => Permission name
+        */
+
+        $appNamespace = "";
+        $MVCNamespace = "";
+        $modPermission = [];
+        $explodedStrings = explode("/", $permission["permission"]);
 
         //capture the namespace of the app
-        $pattern = "#^((?:[^/]+/){2}[^/]+)#";
-        preg_match($pattern, $permission["permission"], $matches);
-        $appNamespace = $matches[1];
+        if (isset($explodedStrings[2])) $appNamespace = $explodedStrings[2];
 
-        //capture the Model, Controller or Api (fourth segement of the namespace)
-        $pattern = "#^(?:[^/]+/){3}([^/]+)#";
-        preg_match($pattern, $permission["permission"], $matches);
-        $MVCNamespace = $matches[1];
+        //capture the Model, Controller or Api
+        if (isset($explodedStrings[3])) $MVCNamespace = $explodedStrings[3];
 
         //capture the namespace after the MVC namespaces
-        $pattern = "#^(?:[^/]+/){4}([^/]+)#";
-        preg_match($pattern, $permission["permission"], $matches);
         $modPermission = $permission;
-        if (!empty($matches)) $modPermission["alias"] = $matches[1];
+        if (isset($explodedStrings[4])) $modPermission["alias"] = $explodedStrings[4];
 
         if (in_array($MVCNamespace, $this->MVCNamespaces)) {
           $sortedAllPermissions[$appNamespace][$MVCNamespace][] = $modPermission;

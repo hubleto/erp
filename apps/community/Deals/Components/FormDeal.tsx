@@ -310,17 +310,12 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                               uid={this.props.uid + "_table_deal_services"}
                               data={{ data: R.SERVICES }}
                               dealTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
-                              descriptionSource='props'
+                              descriptionSource='both'
+                              customEndpointParams={{idDeal: R.id}}
                               description={{
                                 ui: {
                                   showHeader: false,
                                   showFooter: true
-                                },
-                                permissions: {
-                                  canCreate: true,
-                                  canUpdate: true,
-                                  canDelete: true,
-                                  canRead: true,
                                 },
                                 columns: {
                                   id_service: { type: "lookup", title: "Service",
@@ -468,17 +463,12 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
               <TableDealDocuments
                 uid={this.props.uid + "_table_deal_documents"}
                 data={{ data: R.DOCUMENTS }}
-                descriptionSource="props"
+                customEndpointParams={{idDeal: R.id}}
+                descriptionSource="both"
                 description={{
                   ui: {
                     showFooter: false,
                     showHeader: false,
-                  },
-                  permissions: {
-                    canCreate: true,
-                    canDelete: true,
-                    canRead: true,
-                    canUpdate: true
                   },
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },

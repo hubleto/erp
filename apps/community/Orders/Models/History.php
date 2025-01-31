@@ -9,40 +9,16 @@ class History extends \HubletoMain\Core\Model
   public ?string $lookupSqlValue = '{%TABLE%}.id';
 
   public array $relations = [
-    'ORDER'   => [ self::BELONGS_TO, Order::class, 'id_order', 'id'],
+    'ORDER' => [ self::BELONGS_TO, Order::class, 'id_order', 'id'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns,[
-      "id_order" => [
-        "type" => "lookup",
-        "model" => Order::class,
-        "title" => $this->translate("Order"),
-        "required" => true,
-        "readonly" => true,
-      ],
-
-      "short_description" => [
-        "type" => "varchar",
-        "title" =>  $this->translate("Short Description"),
-        "required" => false,
-        "readonly" => true,
-      ],
-
-      "long_description" => [
-        "type" => "text",
-        "title" =>  $this->translate("Long Description"),
-        "required" => false,
-        "readonly" => true,
-      ],
-
-      "date_time" => [
-        "type" => "datetime",
-        "title" => $this->translate("Date Time"),
-        "required" => true
-      ],
-
+    return parent::columns(array_merge($columns, [
+      "id_order" => (new \ADIOS\Core\Db\Column\Lookup($this, $this->translate("Order"), Order::class))->setRequired()->setReadonly(),
+      "short_description" => (new \ADIOS\Core\Db\Column\Varchar($this, $this->translate("Short Description")))->setReadonly(),
+      "long_description" => (new \ADIOS\Core\Db\Column\Text($this, $this->translate("Long Description")))->setReadonly(),
+      "date_time" => (new \ADIOS\Core\Db\Column\DateTime($this, $this->translate("Date Time")))->setRequired(),
     ]));
   }
 }

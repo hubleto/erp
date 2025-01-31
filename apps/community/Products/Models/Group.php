@@ -8,16 +8,10 @@ class Group extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Group::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns,[
-
-      "title" => [
-        "type" => "varchar",
-        "title" => $this->translate("Title"),
-        "required" => true,
-      ],
-
+    return parent::columns(array_merge($columns, [
+      "title" => (new \ADIOS\Core\Db\Column\Varchar($this, $this->translate("Title")))->setRequired()
     ]));
   }
 

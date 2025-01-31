@@ -151,7 +151,7 @@ class Order extends \HubletoMain\Core\Model
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
 
-    $order = $this->eloquent->find($originalRecord["id"]);
+    $order = $this->eloquent->find($savedRecord["id"]);
     $order->order_number = $order->id;
     $order->save();
 

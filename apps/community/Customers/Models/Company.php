@@ -147,7 +147,6 @@ class Company extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = $this->translate('Companies');
     $description['ui']['addButtonText'] = $this->translate('Add Company');
@@ -174,7 +173,7 @@ class Company extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['defaultValues']['is_active'] = 0;
     $description['defaultValues']['id_user'] = $this->main->auth->getUserId();
     $description['defaultValues']['date_created'] = date("Y-m-d");

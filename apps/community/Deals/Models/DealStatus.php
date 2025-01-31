@@ -31,7 +31,6 @@ class DealStatus extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Deal Statuses';
     $description['ui']['addButtonText'] = 'Add Deal Status';

@@ -38,7 +38,6 @@ class Document extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
     $description = parent::tableDescribe($description);
     $description['ui']['title'] = 'Documents';
     $description['ui']['addButtonText'] = 'Add Document';
@@ -48,7 +47,7 @@ class Document extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['includeRelations'] = ['COMPANY_DOCUMENT', 'LEAD_DOCUMENT', 'DEAL_DOCUMENT'];
     return $description;
   }

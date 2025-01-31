@@ -57,4 +57,60 @@ class Loader extends \HubletoMain\Core\App
     $mDealStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
 
   }
+
+  public function installDefaultPermissions(): void
+  {
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+    $permissions = [
+      "HubletoApp/Community/Deals/Models/Deal:Create",
+      "HubletoApp/Community/Deals/Models/Deal:Read",
+      "HubletoApp/Community/Deals/Models/Deal:Update",
+      "HubletoApp/Community/Deals/Models/Deal:Delete",
+
+      "HubletoApp/Community/Deals/Models/DealActivity:Create",
+      "HubletoApp/Community/Deals/Models/DealActivity:Read",
+      "HubletoApp/Community/Deals/Models/DealActivity:Update",
+      "HubletoApp/Community/Deals/Models/DealActivity:Delete",
+
+      "HubletoApp/Community/Deals/Models/DealDocument:Create",
+      "HubletoApp/Community/Deals/Models/DealDocument:Read",
+      "HubletoApp/Community/Deals/Models/DealDocument:Update",
+      "HubletoApp/Community/Deals/Models/DealDocument:Delete",
+
+      "HubletoApp/Community/Deals/Models/DealHistory:Create",
+      "HubletoApp/Community/Deals/Models/DealHistory:Read",
+      "HubletoApp/Community/Deals/Models/DealHistory:Update",
+      "HubletoApp/Community/Deals/Models/DealHistory:Delete",
+
+      "HubletoApp/Community/Deals/Models/DealService:Create",
+      "HubletoApp/Community/Deals/Models/DealService:Read",
+      "HubletoApp/Community/Deals/Models/DealService:Update",
+      "HubletoApp/Community/Deals/Models/DealService:Delete",
+
+      "HubletoApp/Community/Deals/Models/DealStatus:Create",
+      "HubletoApp/Community/Deals/Models/DealStatus:Read",
+      "HubletoApp/Community/Deals/Models/DealStatus:Update",
+      "HubletoApp/Community/Deals/Models/DealStatus:Delete",
+
+      "HubletoApp/Community/Deals/Models/DealTag:Create",
+      "HubletoApp/Community/Deals/Models/DealTag:Read",
+      "HubletoApp/Community/Deals/Models/DealTag:Update",
+      "HubletoApp/Community/Deals/Models/DealTag:Delete",
+
+      "HubletoApp/Community/Deals/Controllers/Deals",
+      "HubletoApp/Community/Deals/Controllers/DealsArchive",
+      "HubletoApp/Community/Deals/Controllers/DealStatuses",
+
+      "HubletoApp/Community/Deals/Api/ChangePipelineStep",
+      "HubletoApp/Community/Deals/Api/GetCalendarEvents",
+
+      "HubletoApp/Community/Deals/Deals",
+    ];
+
+    foreach ($permissions as $permission) {
+      $mPermission->eloquent->create([
+        "permission" => $permission
+      ]);
+    }
+  }
 }

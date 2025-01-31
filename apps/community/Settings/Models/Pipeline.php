@@ -44,7 +44,7 @@ class Pipeline extends \HubletoMain\Core\Model
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['includeRelations'] = ['PIPELINE_STEPS'];
     return $description;
   }

@@ -14,9 +14,9 @@ class InvoiceItem extends \ADIOS\Core\Model {
     'INVOICE' => [ self::BELONGS_TO, Invoice::class, "id_invoice" ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       "id_invoice" => [ "type" => "lookup", "model" => Invoice::class, "title" => $this->translate("Invoice") ],
       "item" => [ "type" => "varchar", "title" => $this->translate("Item") ],
       "unit_price" => [ "type" => "float", "title" => $this->translate("Unit price") ],

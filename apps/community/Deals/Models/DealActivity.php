@@ -13,9 +13,9 @@ class DealActivity extends \HubletoMain\Core\Model
     'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_deal', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',

@@ -3,9 +3,9 @@ parameters:
 	paths:
 		- src
 		- apps
+	reportUnmatchedIgnoredErrors: false
 	ignoreErrors:
-		-
-			identifier: missingType.iterableValue
+		- identifier: missingType.iterableValue
 		- '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::.+#'
 		- '#Cannot call method (.*?) on mixed\.#'
 		- '#Cannot access property (.*?) on mixed\.#'
@@ -14,3 +14,5 @@ parameters:
 		- '#Cannot cast mixed to int.#'
 		- '#Cannot cast mixed to float.#'
 		- '#Cannot access offset#'
+includes:
+	- vendor/phpstan/phpstan-deprecation-rules/rules.neon

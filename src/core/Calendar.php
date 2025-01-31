@@ -10,7 +10,7 @@ class Calendar {
     $this->main = $main;
   }
 
-  public function loadEvents(array $params = []): array
+  public function loadEvents(): array
   {
     return [];
   }

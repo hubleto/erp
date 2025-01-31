@@ -12,9 +12,12 @@ class BillingAccountService extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'billing_accounts_services';
 
+  /** @return BelongsTo<BillingAccount, covariant BillingAccountService> */
   public function BILLING_ACCOUNT(): BelongsTo {
     return $this->belongsTo(BillingAccount::class, 'id_billing_account','id');
   }
+
+  /** @return BelongsTo<Service, covariant BillingAccountService> */
   public function SERVICE(): BelongsTo {
     return $this->belongsTo(Service::class, 'id_service', 'id');
   }

@@ -13,9 +13,9 @@ class CompanyActivity extends \HubletoMain\Core\Model
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_company' => [
         'type' => 'lookup',
         'title' => 'Company',

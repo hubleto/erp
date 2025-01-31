@@ -54,13 +54,11 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   public \HubletoMain\Core\Sidebar $sidebar;
   public \HubletoMain\Core\Help $help;
+  public \HubletoMain\Core\CalendarManager $calendarManager;
   public \HubletoMain\Core\AppManager $appManager;
 
   public string $requestedUriFirstPart = '';
   public bool $isPro = false;
-
-  /** @var array<string, \HubletoMain\Core\Calendar> */
-  private array $calendars = [];
 
   private array $settings = [];
 
@@ -90,6 +88,8 @@ class HubletoMain extends \ADIOS\Core\Loader
         }
       ));
     }
+
+    $this->calendarManager = new \HubletoMain\Core\CalendarManager($this);
 
     $this->appManager = new \HubletoMain\Core\AppManager($this);
 
@@ -141,24 +141,6 @@ class HubletoMain extends \ADIOS\Core\Loader
   public function getDesktopController(): \HubletoMain\Core\Controller
   {
     return new \HubletoMain\Core\Controller($this);
-  }
-
-  public function addCalendar(string $calendarClass): void
-  {
-    $calendar = new $calendarClass($this);
-    if ($calendar instanceof \HubletoMain\Core\Calendar) {
-      $this->calendars[$calendarClass] = $calendar;
-    }
-  }
-
-  public function getCalendars(): array
-  {
-    return $this->calendars;
-  }
-
-  public function getCalendar(string $calendarClass): \HubletoMain\Core\Calendar
-  {
-    return $this->calendars[$calendarClass];
   }
 
   public function addSetting(array $setting): void

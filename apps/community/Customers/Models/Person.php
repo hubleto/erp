@@ -17,9 +17,9 @@ class Person extends \HubletoMain\Core\Model
     'TAGS' => [ self::HAS_MANY, PersonTag::class, 'id_person', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'first_name' => [
         'type' => 'varchar',
         'title' => $this->translate('First name'),

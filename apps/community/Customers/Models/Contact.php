@@ -15,9 +15,9 @@ class Contact extends \HubletoMain\Core\Model
     'CONTACT_TYPE' => [ self::HAS_ONE, ContactType::class, 'id_contact_type', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_person' => [
         'type' => 'lookup',
         'title' => $this->translate('Person'),

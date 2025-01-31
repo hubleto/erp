@@ -14,9 +14,9 @@ class LeadActivity extends \HubletoMain\Core\Model
     // 'ACTIVITY' => [ self::BELONGS_TO, Activity::class, 'id_activity', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_lead' => [
         'type' => 'lookup',
         'title' => 'Lead',

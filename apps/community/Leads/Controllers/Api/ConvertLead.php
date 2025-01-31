@@ -67,7 +67,7 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
       $leadServices = $mLeadService->eloquent->where("id_lead", $leadId)->get();
 
-      foreach ($leadServices as $leadService) {
+      foreach ($leadServices as $leadService) { //@phpstan-ignore-line
         $mDealService->eloquent->create([
           "id_service" => $leadService->id_service,
           "id_deal" => $deal->id,
@@ -79,7 +79,8 @@ class ConvertLead extends \HubletoMain\Core\Controller
       }
 
       $leadDocuments = $mLeadDocument->eloquent->where("id_lead", $leadId)->get();
-      foreach ($leadDocuments as $leadDocument) {
+
+      foreach ($leadDocuments as $leadDocument) { //@phpstan-ignore-line
         $mDealDocument->eloquent->create([
           "id_document" => $leadDocument->id_document,
           "id_deal" => $deal->id
@@ -88,7 +89,7 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
       $leadHistories = $mLeadHistory->eloquent->where("id_lead", $leadId)->get();
 
-      foreach ($leadHistories as $leadHistory) {
+      foreach ($leadHistories as $leadHistory) { //@phpstan-ignore-line
         $mDealHistory->eloquent->create([
           "description" => $leadHistory->description,
           "change_date" => $leadHistory->change_date,
@@ -120,7 +121,7 @@ class ConvertLead extends \HubletoMain\Core\Controller
     return [
       "status" => "success",
       "idDeal" => $deal->id,
-      "title" => str_replace(" ", "+", $deal->title)
+      "title" => str_replace(" ", "+", (string) $deal->title)
     ];
   }
 

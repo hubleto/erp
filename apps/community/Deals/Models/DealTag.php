@@ -15,9 +15,9 @@ class DealTag extends \HubletoMain\Core\Model
     'TAG' => [ self::BELONGS_TO, Tag::class, 'id_tag', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       'id_deal' => [
         'type' => 'lookup',
         'title' => 'Deal',

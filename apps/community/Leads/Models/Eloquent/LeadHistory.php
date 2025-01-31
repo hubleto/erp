@@ -16,8 +16,9 @@ class LeadHistory extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'lead_histories';
 
-
+  /** @return BelongsTo<Lead, covariant LeadHistory> */
   public function LEAD(): BelongsTo {
     return $this->belongsTo(Lead::class, 'id_lead', 'id');
   }
+
 }

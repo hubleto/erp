@@ -20,9 +20,9 @@ class Document extends \HubletoMain\Core\Model
     'DEAL_DOCUMENT' => [ self::HAS_ONE, DealDocument::class, 'id_document', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
       "name" => [
         "title" => "Document name",
         "type" => "varchar",
@@ -95,8 +95,8 @@ class Document extends \HubletoMain\Core\Model
 
   public function onBeforeUpdate(array $record): array
   {
-    $document = $this->eloquent->find($record["id"])->toArray();
-    $prevFilename = ltrim($document["file"],"./");
+    $document = (array) $this->eloquent->find($record["id"])->toArray();
+    $prevFilename = ltrim((string) $document["file"],"./");
     if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
       unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);
     }
@@ -106,8 +106,8 @@ class Document extends \HubletoMain\Core\Model
 
   public function onBeforeDelete(int $id): int
   {
-    $document = $this->eloquent->find($id)->toArray();
-    $prevFilename = ltrim($document["file"],"./");
+    $document = (array) $this->eloquent->find($id)->toArray();
+    $prevFilename = ltrim((string) $document["file"],"./");
     if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
       unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);
     }

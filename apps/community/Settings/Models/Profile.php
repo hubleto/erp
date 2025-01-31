@@ -8,9 +8,9 @@ class Profile extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Profile::class;
   public ?string $lookupSqlValue = '{%TABLE%}.company';
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns([
+    return parent::columnsLegacy([
       'company' => [
         'type' => 'varchar',
         'byte_size' => '250',

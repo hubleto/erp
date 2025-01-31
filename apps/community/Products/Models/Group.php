@@ -10,14 +10,8 @@ class Group extends \HubletoMain\Core\Model
 
   public function columns(array $columns = []): array
   {
-    return parent::columns(array_merge($columns,[
-
-      "title" => [
-        "type" => "varchar",
-        "title" => $this->translate("Title"),
-        "required" => true,
-      ],
-
+    return parent::columns(array_merge($columns, [
+      "title" => (new \ADIOS\Core\Db\Column\Varchar($this, $this->translate("Title")))->setRequired()
     ]));
   }
 

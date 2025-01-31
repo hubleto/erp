@@ -35,7 +35,7 @@ class Loader extends \HubletoMain\Core\App
       //$this->main->sidebar->addLink(2, 10203, 'customers/activities', $this->translate('Activities'), 'fas fa-users');
     }
 
-    $this->main->addCalendar(Calendar::class);
+    $this->main->calendarManager->addCalendar(Calendar::class);
   }
 
   public function installTables(): void

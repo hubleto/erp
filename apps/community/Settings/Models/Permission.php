@@ -8,9 +8,9 @@ class Permission extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Permission::class;
   public ?string $lookupSqlValue = '{%TABLE%}.permission';
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns([
+    return parent::columnsLegacy([
       'permission' => [
         'type' => 'varchar',
         'title' => $this->translate('Permission'),

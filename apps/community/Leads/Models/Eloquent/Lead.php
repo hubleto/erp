@@ -17,37 +17,59 @@ class Lead extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'leads';
 
+  /** @return hasOne<Deal, covariant Lead> */
   public function DEAL(): HasOne {
     return $this->hasOne(Deal::class, 'id_lead', 'id' );
   }
+
+  /** @return BelongsTo<Company, covariant Lead> */
   public function COMPANY(): BelongsTo {
     return $this->belongsTo(Company::class, 'id_company', 'id' );
   }
+
+  /** @return BelongsTo<User, covariant Lead> */
   public function USER(): BelongsTo {
     return $this->belongsTo(User::class, 'id_user','id' );
   }
+
+  /** @return hasOne<Person, covariant Lead> */
   public function PERSON(): HasOne {
     return $this->hasOne(Person::class, 'id', 'id_person');
   }
+
+  /** @return hasOne<Currency, covariant Lead> */
   public function CURRENCY(): HasOne {
     return $this->hasOne(Currency::class, 'id', 'id_currency');
   }
+
+  /** @return hasOne<LeadStatus, covariant Lead> */
   public function STATUS(): HasOne {
     return $this->hasOne(LeadStatus::class, 'id', 'id_lead_status');
   }
+
+  /** @return hasMany<LeadHistory, covariant Lead> */
   public function HISTORY(): HasMany {
     return $this->hasMany(LeadHistory::class, 'id_lead', 'id');
   }
+
+  /** @return hasMany<LeadTag, covariant Lead> */
   public function TAGS(): HasMany {
     return $this->hasMany(LeadTag::class, 'id_lead', 'id');
   }
+
+  /** @return hasMany<LeadService, covariant Lead> */
   public function SERVICES(): HasMany {
     return $this->hasMany(LeadService::class, 'id_lead', 'id');
   }
+
+  /** @return hasMany<LeadActivity, covariant Lead> */
   public function ACTIVITIES(): HasMany {
     return $this->hasMany(LeadActivity::class, 'id_lead', 'id' );
   }
+
+  /** @return hasMany<LeadDocument, covariant Lead> */
   public function DOCUMENTS(): HasMany {
     return $this->hasMany(LeadDocument::class, 'id_lead', 'id' );
   }
+
 }

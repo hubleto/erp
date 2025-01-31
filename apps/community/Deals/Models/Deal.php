@@ -36,9 +36,9 @@ class Deal extends \HubletoMain\Core\Model
     'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_deal', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns(array_merge($columns, [
+    return parent::columnsLegacy(array_merge($columns, [
 
       'title' => [
         'type' => 'varchar',
@@ -262,14 +262,15 @@ class Deal extends \HubletoMain\Core\Model
       "description" => "Deal created"
     ]);
 
-    return $this->main->dispatchEventToPlugins("onModelAfterCreate", [
+    return (array) $this->main->dispatchEventToPlugins("onModelAfterCreate", [
       "model" => $this,
       "data" => $originalRecord,
       "returnValue" => $savedRecord,
     ])["returnValue"];
   }
 
-  public function getOwnership($record) {
+  public function getOwnership(array $record): void
+  {
     if ($record["id_company"] && !isset($record["checkOwnership"])) {
       $mCompany = new Company($this->main);
       $company = $mCompany->eloquent
@@ -278,8 +279,7 @@ class Deal extends \HubletoMain\Core\Model
       ;
 
       if ($company->id_user != $record["id_user"]) {
-        throw new Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected company.
-        ");
+        throw new Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected company.");
       }
     }
   }
@@ -300,15 +300,15 @@ class Deal extends \HubletoMain\Core\Model
     if ((float) $deal["price"] != (float) $record["price"]) {
       $mDealHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
-        "id_deal" => $record["id"],
-        "description" => "Price changed to ".$record["price"]." ".$record["CURRENCY"]["code"]
+        "id_deal" => (int) ($record["id"] ?? 0),
+        "description" => "Price changed to " . (string) ($record["price"] ?? '') . " " . (string) ($record["CURRENCY"]["code"] ?? '')
       ]);
     }
     if ((string) $deal["date_expected_close"] != (string) $record["date_expected_close"]) {
       $mDealHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_deal" => $record["id"],
-        "description" => "Expected Close Date changed to ".date("d.m.Y", strtotime((string) $record["date_expected_close"]))
+        "description" => "Expected Close Date changed to ".date("d.m.Y", (int) strtotime((string) $record["date_expected_close"]))
       ]);
     }
 

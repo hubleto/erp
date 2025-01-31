@@ -16,8 +16,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
   public function run(): void
   {
-    // (new \HubletoMain\Cli\Agent\App\ResetAll($this->cli, $this->arguments))->run();
-
     $this->cli->cyan("Generating demo data...\n");
 
     $mProfile = new \HubletoApp\Community\Settings\Models\Profile($this->main);
@@ -68,9 +66,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mInvoiceItem = new \HubletoApp\Community\Invoices\Models\InvoiceItem($this->main);
 
     //Leads
-    $mLead         = new \HubletoApp\Community\Leads\Models\Lead($this->main);
+    $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
     $mLeadHistory  = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
-    $mLeadTag      = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
+    $mLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
     $mLeadServices = new \HubletoApp\Community\Leads\Models\LeadService($this->main);
     $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
     $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
@@ -86,14 +84,14 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     //Shop
     $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
     $mGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
-    $mSupplier= new \HubletoApp\Community\Products\Models\Supplier($this->main);
+    $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
 
     $this->generateCompanies($mCompany, $mCompanyTag);
     $this->generatePersons($mPerson, $mPersonTag, $mContact, $mAddress);
     //$this->generateActivities($mCompany, $mActivity, $mCompanyActivity);
     $this->generateServices($mCompany, $mService);
-    $this->generateLeads($mCompany, $mLead, $mLeadHistory, $mLeadTag);
-    $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag);
+    $this->generateLeads($mCompany, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
+    $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity);
     $this->generateProducts($mProduct,$mGroup, $mSupplier);
 
     $this->cli->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
@@ -581,7 +579,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     \HubletoApp\Community\Leads\Models\Lead $mLead,
     \HubletoApp\Community\Leads\Models\LeadHistory $mLeadHistory,
     \HubletoApp\Community\Leads\Models\LeadTag $mLeadTag,
+    \HubletoApp\Community\Leads\Models\LeadActivity $mLeadActivity,
   ): void {
+
 
     $companies = $mCompany->eloquent
       ->with("PERSONS")
@@ -596,24 +596,37 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
       $person = $company->PERSONS->first();
 
+      $leadDateCreatedTs = (int) rand(strtotime("-1 month"), strtotime("+1 month"));
+      $leadDateCreated = date("Y-m-d", $leadDateCreatedTs);
+      $leadDateClose = date("Y-m-d", $leadDateCreatedTs + rand(4, 6)*24*3600);
+
       $idLead = $mLead->eloquent->create([
         "title" => $titles[rand(0, count($titles)-1)],
         "id_company" => $company->id,
         "id_person" => $person->id,
         "price" => rand(10,100),
         "id_currency" => rand(1,3),
-        "date_expected_close" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
+        "date_expected_close" => $leadDateClose,
         "id_user" => 1,
         "source_channel" => $sources[rand(0, count($sources)-1)],
         "is_archived" => false,
         "id_lead_status" => rand(1,4),
-        "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
+        "date_created" => $leadDateCreated,
       ])->id;
 
       $mLeadHistory->eloquent->create([
         "description" => "Lead created",
         "change_date" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
         "id_lead" => $idLead
+      ]);
+
+      $mLeadActivity->eloquent->create([
+        "subject" => "Follow-up call",
+        "date_start" => $leadDateCreated,
+        "id_lead" => $idLead,
+        "id_person" => 1,
+        "id_activity_type" => 1,
+        "id_user" => 1,
       ]);
 
       $mLeadTag->eloquent->create([
@@ -631,6 +644,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     \HubletoApp\Community\Deals\Models\Deal $mDeal,
     \HubletoApp\Community\Deals\Models\DealHistory $mDealHistory,
     \HubletoApp\Community\Deals\Models\DealTag $mDealTag,
+    \HubletoApp\Community\Deals\Models\DealActivity $mDealActivity
   ): void {
 
     $leads = $mLead->eloquent->get();
@@ -639,13 +653,18 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $pipeline = rand(1,2);
       if ($pipeline === 1) $pipelineStep = rand(1,3);
       else $pipelineStep = rand(4,7);
+
+      $dealDateCreatedTs = (int) rand(strtotime("-1 month"), strtotime("+1 month"));
+      $dealDateCreated = date("Y-m-d", $dealDateCreatedTs);
+      $dealDateClose = date("Y-m-d", $dealDateCreatedTs + rand(4, 6)*24*3600);
+
       $idDeal = $mDeal->eloquent->create([
         "title" => $lead->title,
         "id_company" => $lead->id_company,
         "id_person" => $lead->id_person,
         "price" => $lead->price,
         "id_currency" => $lead->id_currency,
-        "date_expected_close" => $lead->date_expected_close,
+        "date_expected_close" => $dealDateClose,
         "id_user" => $lead->id_user,
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
@@ -653,7 +672,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_pipeline_step" => $pipelineStep,
         "id_lead" => $lead->id,
         "id_deal_status" => rand(1,4),
-        "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
+        "date_created" => $dealDateCreated,
       ])->id;
 
       $mLeadHistory->eloquent->create([
@@ -667,7 +686,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         ->get()
       ;
 
-      foreach  ($leadHistories as $leadHistory) { // @phpstan-ignore-line
+      foreach ($leadHistories as $leadHistory) { // @phpstan-ignore-line
         $mDealHistory->eloquent->create([
           "description" => $leadHistory->description,
           "change_date" => $leadHistory->change_date,
@@ -679,6 +698,15 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         ->where("id_lead", $lead->id)
         ->first()
       ;
+
+      $mDealActivity->eloquent->create([
+        "subject" => "Follow-up call",
+        "date_start" => $dealDateCreated,
+        "id_deal" => $idDeal,
+        "id_person" => 1,
+        "id_activity_type" => 1,
+        "id_user" => 1,
+      ]);
 
       $mDealTag->eloquent->create([
         "id_deal" => $idDeal,

@@ -8,9 +8,9 @@ class Country extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Country::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
-  public function columns(array $columns = []): array
+  public function columnsLegacy(array $columns = []): array
   {
-    return parent::columns([
+    return parent::columnsLegacy([
       'name' => [
         'type' => 'varchar',
         'title' => $this->translate('Country Name'),

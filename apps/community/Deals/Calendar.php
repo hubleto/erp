@@ -4,17 +4,16 @@ namespace HubletoApp\Community\Deals;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 
-  public function loadEvents(array $params = []): array
+  public function loadEvents(): array
   {
-    $idDeal = null;
-    $dateStart = null;
-    $dateEnd = null;
-    if (isset($params["idDeal"])) $idDeal = (int) $params["idDeal"];
-    else return [];
+
+    $idDeal = $this->main->urlParamAsInteger('idDeal');
+    $dateStart = '';
+    $dateEnd = '';
 
     if ($this->main->isUrlParam("start") && $this->main->isUrlParam("end")) {
-      $dateStart = date("Y-m-d H:i:s", strtotime((string) $this->main->isUrlParam("start")));
-      $dateEnd = date("Y-m-d H:i:s", strtotime((string) $this->main->isUrlParam("end")));
+      $dateStart = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("start")));
+      $dateEnd = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("end")));
     } else {
       $dateStart = date("Y-m-d H:i:s");
       $dateEnd = date("Y-m-d H:i:s", strtotime("tommorow"));
@@ -34,19 +33,26 @@ class Calendar extends \HubletoMain\Core\Calendar {
     $activities = $activities->get();
     $events = [];
 
-    foreach ($activities as $key => $activity) {
+    foreach ($activities as $key => $activity) { //@phpstan-ignore-line
+
+      $dStart = (string) $activity->date_start;
+      $tStart = (string) $activity->time_start;
+      $dEnd = (string) $activity->date_end;
+      $tEnd = (string) $activity->time_end;
 
       $events[$key]['id'] = $activity->id;
-      if ($activity->time_start != null) $events[$key]['start'] = $activity->date_start." ".$activity->time_start;
-      else $events[$key]['start'] = $activity->date_start;
-      if ($activity->date_end != null) {
-        if ($activity->time_end != null) $events[$key]['end'] = $activity->date_end." ".$activity->time_end;
-        else $events[$key]['end'] = $activity->date_end;
-      } else if ($activity->time_end != null) {
-        $events[$key]['end'] = $activity->date_start." ".$activity->time_end;
+
+      if ($tStart != '') $events[$key]['start'] = $dStart . " " . $tStart;
+      else $events[$key]['start'] = $dStart;
+
+      if ($dEnd != '') {
+        if ($tEnd != '') $events[$key]['end'] = $dEnd . " " . $tEnd;
+        else $events[$key]['end'] = $dEnd;
+      } else if ($tEnd != '') {
+        $events[$key]['end'] = $dStart . " " . $tEnd;
       }
 
-      $events[$key]['allDay'] = $activity->all_day == 1 || $activity->time_start == null ? true : false;
+      $events[$key]['allDay'] = $activity->all_day == 1 || $tStart == '' ? true : false;
       $events[$key]['title'] = $activity->subject;
       $events[$key]['backColor'] = $activity->color;
       $events[$key]['color'] = $activity->color;

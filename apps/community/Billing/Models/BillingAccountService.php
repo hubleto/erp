@@ -4,6 +4,8 @@ namespace HubletoApp\Community\Billing\Models;
 
 use HubletoApp\Community\Services\Models\Service;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class BillingAccountService extends \HubletoMain\Core\Model
 {
   public string $table = 'billing_accounts_services';
@@ -14,25 +16,11 @@ class BillingAccountService extends \HubletoMain\Core\Model
     'BILLING_ACCOUNT' => [ self::BELONGS_TO, BillingAccount::class, 'id_billing_account', 'id' ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'id_billing_account' => [
-        'type' => 'lookup',
-        'title' => 'Billing Account',
-        'model' => 'HubletoApp/Community/Billing/Models/BillingAccount',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_service' => [
-        'type' => 'lookup',
-        'title' => 'Service',
-        'model' => 'HubletoApp/Community/Services/Models/Service',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'id_billing_account' => (new Lookup($this, $this->translate("Billing Account"), BillingAccount::class, 'CASCADE'))->setRequired(),
+      'id_service' => (new Lookup($this, $this->translate("Service"), Service::class, 'CASCADE'))->setRequired(),
     ]));
   }
 

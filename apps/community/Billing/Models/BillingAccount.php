@@ -4,6 +4,9 @@ namespace HubletoApp\Community\Billing\Models;
 
 use HubletoApp\Community\Customers\Models\Company;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+
 class BillingAccount extends \HubletoMain\Core\Model
 {
   public string $table = 'billing_accounts';
@@ -15,22 +18,11 @@ class BillingAccount extends \HubletoMain\Core\Model
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id'  ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'id_company' => [
-        'type' => 'lookup',
-        'title' => 'Company',
-        'model' => 'HubletoApp/Community/Customers/Models/Company',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true
-      ],
-      'description' => [
-        'type' => 'varchar',
-        'title' => 'Description',
-        'required' => true,
-      ]
+    return parent::columns(array_merge($columns, [
+      'id_company' => (new Lookup($this, $this->translate("Company"), Company::class, 'CASCADE'))->setRequired(),
+      'description' => (new Varchar($this, $this->translate("Description")))->setRequired(),
     ]));
   }
 

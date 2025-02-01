@@ -9,6 +9,12 @@ use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\Lead;
 use Illuminate\Database\Eloquent\Builder;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Text;
+use \ADIOS\Core\Db\Column\Boolean;
+use \ADIOS\Core\Db\Column\Date;
+
 class Company extends \HubletoMain\Core\Model
 {
   public string $table = 'companies';
@@ -28,90 +34,23 @@ class Company extends \HubletoMain\Core\Model
     'DEALS' => [ self::HAS_MANY, Deal::class, 'id_company', 'id'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Name'),
-        'required' => true,
-      ],
-      'street_line_1' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Street Line 1'),
-        'required' => false,
-      ],
-      'street_line_2' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Street Line 2'),
-        'required' => false,
-      ],
-      'region' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Region'),
-        'required' => false,
-      ],
-      'city' => [
-        'type' => 'varchar',
-        'title' => $this->translate('City'),
-        'required' => false,
-      ],
-      'id_country' => [
-        'type' => 'lookup',
-        'model' => \HubletoApp\Community\Settings\Models\Country::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-        'title' => $this->translate('Country'),
-        'required' => false,
-      ],
-      'postal_code' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Postal Code'),
-        'required' => false,
-      ],
-      'vat_id' => [
-        'type' => 'varchar',
-        'title' => $this->translate('VAT ID'),
-        'required' => false,
-      ],
-      'company_id' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Company ID'),
-        'required' => false,
-      ],
-      'tax_id' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Tax ID'),
-        'required' => true,
-      ],
-      'note' => [
-        'type' => 'text',
-        'title' => $this->translate('Notes'),
-        'required' => false,
-      ],
-      'date_created' => [
-        'type' => 'date',
-        'title' => $this->translate('Date Created'),
-        'required' => true,
-        'readonly' => true,
-      ],
-      'is_active' => [
-        'type' => 'boolean',
-        'title' => $this->translate('Active'),
-        'required' => false,
-        'default' => 1,
-      ],
-      'id_user' => [
-        'type' => 'lookup',
-        'title' => $this->translate('Assigned User'),
-        'model' => \HubletoApp\Community\Settings\Models\User::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-        'required' => true,
-        //'readonly' => $this->main->permissions->granted($this->fullName . ':Update'),
-        'default' => 1,
-      ]
-
+    return parent::columns(array_merge($columns, [
+      'name' => (new Varchar($this, $this->translate("Name")))->setRequired(),
+      'street_line_1' => (new Varchar($this, $this->translate("Street Line 1"))),
+      'street_line_2' => (new Varchar($this, $this->translate("Street Line 2"))),
+      'region' => (new Varchar($this, $this->translate("Region"))),
+      'city' => (new Varchar($this, $this->translate("City"))),
+      'postal_code' => (new Varchar($this, $this->translate("Postal Code"))),
+      'id_country' => (new Lookup($this, $this->translate("Country"), Country::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'vat_id' => (new Varchar($this, $this->translate("VAT ID"))),
+      'company_id' => (new Varchar($this, $this->translate("Company ID"))),
+      'tax_id' => (new Varchar($this, $this->translate("Tax ID"))),
+      'note' => (new Text($this, $this->translate("Notes"))),
+      'date_created' => (new Date($this, $this->translate("Date Created")))->setReadonly()->setRequired(),
+      'is_active' => (new Boolean($this, $this->translate("Active")))->setDefaultValue(1),
+      'id_user' => (new Lookup($this, $this->translate("Assigned User"), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
     ]));
   }
 

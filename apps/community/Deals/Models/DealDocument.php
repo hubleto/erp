@@ -4,6 +4,8 @@ namespace HubletoApp\Community\Deals\Models;
 
 use HubletoApp\Community\Documents\Models\Document;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class DealDocument extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_documents';
@@ -14,25 +16,11 @@ class DealDocument extends \HubletoMain\Core\Model
     'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id' ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'id_deal' => [
-        'type' => 'lookup',
-        'title' => 'Deal',
-        'model' => 'HubletoApp/Community/Deals/Models/Deal',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_document' => [
-        'type' => 'lookup',
-        'title' => 'Document',
-        'model' => 'HubletoApp/Community/Documents/Models/Document',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class, 'CASCADE'))->setRequired(),
+      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
     ]));
   }
 

@@ -37,20 +37,20 @@ class Company extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'name' => (new Varchar($this, $this->translate("Name")))->setRequired(),
-      'street_line_1' => (new Varchar($this, $this->translate("Street Line 1"))),
-      'street_line_2' => (new Varchar($this, $this->translate("Street Line 2"))),
-      'region' => (new Varchar($this, $this->translate("Region"))),
-      'city' => (new Varchar($this, $this->translate("City"))),
-      'postal_code' => (new Varchar($this, $this->translate("Postal Code"))),
-      'id_country' => (new Lookup($this, $this->translate("Country"), Country::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
-      'vat_id' => (new Varchar($this, $this->translate("VAT ID"))),
-      'company_id' => (new Varchar($this, $this->translate("Company ID"))),
-      'tax_id' => (new Varchar($this, $this->translate("Tax ID"))),
-      'note' => (new Text($this, $this->translate("Notes"))),
-      'date_created' => (new Date($this, $this->translate("Date Created")))->setReadonly()->setRequired(),
-      'is_active' => (new Boolean($this, $this->translate("Active")))->setDefaultValue(1),
-      'id_user' => (new Lookup($this, $this->translate("Assigned User"), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
+      'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
+      'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),
+      'region' => (new Varchar($this, $this->translate('Region'))),
+      'city' => (new Varchar($this, $this->translate('City'))),
+      'postal_code' => (new Varchar($this, $this->translate('Postal Code'))),
+      'id_country' => (new Lookup($this, $this->translate('Country'), Country::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
+      'company_id' => (new Varchar($this, $this->translate('Company ID'))),
+      'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
+      'note' => (new Text($this, $this->translate('Notes'))),
+      'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
+      'id_user' => (new Lookup($this, $this->translate('Assigned User'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
     ]));
   }
 

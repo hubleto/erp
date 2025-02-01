@@ -4,6 +4,8 @@ namespace HubletoApp\Community\Customers\Models;
 
 use HubletoApp\Community\Settings\Models\Tag;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class PersonTag extends \HubletoMain\Core\Model
 {
   public string $table = 'person_tags';
@@ -14,25 +16,11 @@ class PersonTag extends \HubletoMain\Core\Model
     'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'id_person' => [
-        'type' => 'lookup',
-        'title' => 'Person',
-        'model' => 'HubletoApp/Community/Customers/Models/Person',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_tag' => [
-        'type' => 'lookup',
-        'title' => 'Tag',
-        'model' => 'HubletoApp/Community/Settings/Models/Tag',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'id_person' => (new Lookup($this, $this->translate('Person'), Person::class, 'CASCADE'))->setRequired(),
+      'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class, 'CASCADE'))->setRequired(),
     ]));
   }
 

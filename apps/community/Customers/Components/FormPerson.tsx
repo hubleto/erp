@@ -167,14 +167,9 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                   <TableContacts
                     uid={this.props.uid + '_table_contacts'}
                     context="Hello World"
-                    descriptionSource="props"
+                    descriptionSource="both"
+                    customEndpointParams={{idPerson: R.id}}
                     description={{
-                      permissions: {
-                        canCreate: true,
-                        canDelete: true,
-                        canRead: true,
-                        canUpdate: true
-                      },
                       columns: {
                         type: {
                           type: 'varchar',

@@ -34,6 +34,8 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/permissions\/?$/' => Controllers\Permissions::class,
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
       '/^settings\/config\/?$/' => Controllers\Config::class,
+      '/^settings\/get-permissions\/?$/' => Controllers\Api\GetPermissions::class,
+      '/^settings\/save-permissions\/?$/' => Controllers\Api\SavePermissions::class,
     ]);
 
     $this->main->sidebar->addLink(1, 900, 'settings', $this->translate('Settings'), 'fas fa-cog', str_starts_with($this->main->requestedUri, 'settings'));
@@ -389,81 +391,96 @@ class Loader extends \HubletoMain\Core\App
   {
     $mUserRole = new Models\UserRole($this->main);
     $mPermission = new Models\Permission($this->main);
-    $mRolePermission = new Models\RolePermission($this->main);
 
     $permissions = [
-      "HubletoApp/Community/Settings/Models/ActivityType:Create" => [],
-      "HubletoApp/Community/Settings/Models/ActivityType:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/ActivityType:Update" => [],
-      "HubletoApp/Community/Settings/Models/ActivityType:Delete" => [],
+      "HubletoApp/Community/Settings/Models/ActivityType:Create",
+      "HubletoApp/Community/Settings/Models/ActivityType:Read",
+      "HubletoApp/Community/Settings/Models/ActivityType:Update",
+      "HubletoApp/Community/Settings/Models/ActivityType:Delete",
 
-      "HubletoApp/Community/Settings/Models/Country:Create" => [],
-      "HubletoApp/Community/Settings/Models/Country:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/Country:Update" => [],
-      "HubletoApp/Community/Settings/Models/Country:Delete" => [],
+      "HubletoApp/Community/Settings/Models/Country:Create",
+      "HubletoApp/Community/Settings/Models/Country:Read",
+      "HubletoApp/Community/Settings/Models/Country:Update",
+      "HubletoApp/Community/Settings/Models/Country:Delete",
 
-      "HubletoApp/Community/Settings/Models/Currency:Create" => [],
-      "HubletoApp/Community/Settings/Models/Currency:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/Currency:Update" => [],
-      "HubletoApp/Community/Settings/Models/Currency:Delete" => [],
+      "HubletoApp/Community/Settings/Models/Currency:Create",
+      "HubletoApp/Community/Settings/Models/Currency:Read",
+      "HubletoApp/Community/Settings/Models/Currency:Update",
+      "HubletoApp/Community/Settings/Models/Currency:Delete",
 
-      "HubletoApp/Community/Settings/Models/Tag:Create" => [],
-      "HubletoApp/Community/Settings/Models/Tag:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/Tag:Update" => [],
-      "HubletoApp/Community/Settings/Models/Tag:Delete" => [],
+      "HubletoApp/Community/Settings/Models/Tag:Create",
+      "HubletoApp/Community/Settings/Models/Tag:Read",
+      "HubletoApp/Community/Settings/Models/Tag:Update",
+      "HubletoApp/Community/Settings/Models/Tag:Delete",
 
-      "HubletoApp/Community/Settings/Models/Pipeline:Create" => [],
-      "HubletoApp/Community/Settings/Models/Pipeline:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/Pipeline:Update" => [],
-      "HubletoApp/Community/Settings/Models/Pipeline:Delete" => [],
+      "HubletoApp/Community/Settings/Models/Pipeline:Create",
+      "HubletoApp/Community/Settings/Models/Pipeline:Read",
+      "HubletoApp/Community/Settings/Models/Pipeline:Update",
+      "HubletoApp/Community/Settings/Models/Pipeline:Delete",
 
-      "HubletoApp/Community/Settings/Models/PipelineStep:Create" => [],
-      "HubletoApp/Community/Settings/Models/PipelineStep:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/PipelineStep:Update" => [],
-      "HubletoApp/Community/Settings/Models/PipelineStep:Delete" => [],
+      "HubletoApp/Community/Settings/Models/PipelineStep:Create",
+      "HubletoApp/Community/Settings/Models/PipelineStep:Read",
+      "HubletoApp/Community/Settings/Models/PipelineStep:Update",
+      "HubletoApp/Community/Settings/Models/PipelineStep:Delete",
 
-      "HubletoApp/Community/Settings/Models/Profile:Create" => [],
-      "HubletoApp/Community/Settings/Models/Profile:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/Profile:Update" => [],
-      "HubletoApp/Community/Settings/Models/Profile:Delete" => [],
+      "HubletoApp/Community/Settings/Models/Profile:Create",
+      "HubletoApp/Community/Settings/Models/Profile:Read",
+      "HubletoApp/Community/Settings/Models/Profile:Update",
+      "HubletoApp/Community/Settings/Models/Profile:Delete",
 
-      "HubletoApp/Community/Settings/Models/Setting:Create" => [],
-      "HubletoApp/Community/Settings/Models/Setting:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/Setting:Update" => [],
-      "HubletoApp/Community/Settings/Models/Setting:Delete" => [],
+      "HubletoApp/Community/Settings/Models/Setting:Create",
+      "HubletoApp/Community/Settings/Models/Setting:Read",
+      "HubletoApp/Community/Settings/Models/Setting:Update",
+      "HubletoApp/Community/Settings/Models/Setting:Delete",
 
-      "HubletoApp/Community/Settings/Models/User:Create" => [],
-      "HubletoApp/Community/Settings/Models/User:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/User:Update" => [],
-      "HubletoApp/Community/Settings/Models/User:Delete" => [],
+      "HubletoApp/Community/Settings/Models/User:Create",
+      "HubletoApp/Community/Settings/Models/User:Read",
+      "HubletoApp/Community/Settings/Models/User:Update",
+      "HubletoApp/Community/Settings/Models/User:Delete",
 
-      "HubletoApp/Community/Settings/Models/UserRole:Create" => [],
-      "HubletoApp/Community/Settings/Models/UserRole:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/UserRole:Update" => [],
-      "HubletoApp/Community/Settings/Models/UserRole:Delete" => [],
+      "HubletoApp/Community/Settings/Models/UserRole:Create",
+      "HubletoApp/Community/Settings/Models/UserRole:Read",
+      "HubletoApp/Community/Settings/Models/UserRole:Update",
+      "HubletoApp/Community/Settings/Models/UserRole:Delete",
 
-      "HubletoApp/Community/Settings/Models/UserHasRole:Create" => [],
-      "HubletoApp/Community/Settings/Models/UserHasRole:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/UserHasRole:Update" => [],
-      "HubletoApp/Community/Settings/Models/UserHasRole:Delete" => [],
+      "HubletoApp/Community/Settings/Models/UserHasRole:Create",
+      "HubletoApp/Community/Settings/Models/UserHasRole:Read",
+      "HubletoApp/Community/Settings/Models/UserHasRole:Update",
+      "HubletoApp/Community/Settings/Models/UserHasRole:Delete",
 
-      "HubletoApp/Community/Settings/Models/Permission:Create" => [],
-      "HubletoApp/Community/Settings/Models/Permission:Read" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Community/Settings/Models/Permission:Update" => [],
-      "HubletoApp/Community/Settings/Models/Permission:Delete" => [],
+      "HubletoApp/Community/Settings/Models/Permission:Create",
+      "HubletoApp/Community/Settings/Models/Permission:Read",
+      "HubletoApp/Community/Settings/Models/Permission:Update",
+      "HubletoApp/Community/Settings/Models/Permission:Delete",
 
-      "HubletoApp/Setting/Controllers/ActivityType" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/Country" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/Currency" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/Pipeline" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/PipelineStep" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/Profile" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/Setting" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/Tag" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/User" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/UserRole" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/UserHasRole" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
-      "HubletoApp/Setting/Controllers/Permissions" => [Models\UserRole::ROLE_SALES_MANAGER, Models\UserRole::ROLE_ACCOUNTANT],
+      "HubletoApp/Community/Settings/Controllers/Dashboard",
+      "HubletoApp/Community/Settings/Controllers/ActivityType",
+      "HubletoApp/Community/Settings/Controllers/Country",
+      "HubletoApp/Community/Settings/Controllers/Currency",
+      "HubletoApp/Community/Settings/Controllers/Pipeline",
+      "HubletoApp/Community/Settings/Controllers/PipelineStep",
+      "HubletoApp/Community/Settings/Controllers/Profile",
+      "HubletoApp/Community/Settings/Controllers/Setting",
+      "HubletoApp/Community/Settings/Controllers/Tag",
+      "HubletoApp/Community/Settings/Controllers/User",
+      "HubletoApp/Community/Settings/Controllers/UserRole",
+      "HubletoApp/Community/Settings/Controllers/UserHasRole",
+      "HubletoApp/Community/Settings/Controllers/Permissions",
+      "HubletoApp/Community/Settings/Controllers/Dashboard",
+
+      "HubletoApp/Community/Settings/Dashboard",
+      "HubletoApp/Community/Settings/ActivityType",
+      "HubletoApp/Community/Settings/Country",
+      "HubletoApp/Community/Settings/Currency",
+      "HubletoApp/Community/Settings/Pipeline",
+      "HubletoApp/Community/Settings/PipelineStep",
+      "HubletoApp/Community/Settings/Profile",
+      "HubletoApp/Community/Settings/Setting",
+      "HubletoApp/Community/Settings/Tag",
+      "HubletoApp/Community/Settings/User",
+      "HubletoApp/Community/Settings/UserRole",
+      "HubletoApp/Community/Settings/UserHasRole",
+      "HubletoApp/Community/Settings/Permissions",
     ];
 
     $idRoles = [];
@@ -471,14 +488,10 @@ class Loader extends \HubletoMain\Core\App
     $idRoles[Models\UserRole::ROLE_SALES_MANAGER] = $mUserRole->eloquent->create(['id' => Models\UserRole::ROLE_SALES_MANAGER, 'role' => 'Sales manager', 'grant_all' => 0])->id;
     $idRoles[Models\UserRole::ROLE_ACCOUNTANT] = $mUserRole->eloquent->create(['id' => Models\UserRole::ROLE_ACCOUNTANT, 'role' => 'Accountant', 'grant_all' => 0])->id;
 
-    foreach ($permissions as $permission => $grantedForRoles) {
-      $idPermission = $mPermission->eloquent->create([
+    foreach ($permissions as $permission) {
+      $mPermission->eloquent->create([
         "permission" => $permission
-      ])->id;
-
-      foreach ($grantedForRoles as $idRole) {
-        $mRolePermission->eloquent->create(['id_role' => $idRoles[$idRole], 'id_permission' => $idPermission]);
-      }
+      ]);
     }
   }
 }

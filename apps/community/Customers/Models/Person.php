@@ -65,8 +65,7 @@ class Person extends \HubletoMain\Core\Model
   //v tablePersons
   public function tableDescribe(array $description = []): array
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe();
+    $description = parent::tableDescribe($description);
     $description['ui']['title'] = $this->translate('Contact Persons');
     $description['ui']['addButtonText'] = $this->translate('Add Contact Person');
     $description['ui']['showHeader'] = true;
@@ -84,12 +83,23 @@ class Person extends \HubletoMain\Core\Model
     unset($description['columns']['is_active']);
     $description['columns']['is_active'] = $tempColumn;
 
+    if ($this->main->urlParamAsBool('idCompany') > 0) {
+      $description['permissions'] = [
+        'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
+      ];
+      unset($description["columns"]);
+      unset($description["ui"]);
+    }
+
     return $description;
   }
 
   public function formDescribe(array $description = []): array
   {
-    $description = parent::formDescribe();
+    $description = parent::formDescribe($description);
     $description['defaultValues']['is_active'] = 1;
     $description['defaultValues']['is_main'] = 0;
     $description['includeRelations'] = [

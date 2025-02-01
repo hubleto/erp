@@ -65,33 +65,60 @@ class Loader extends \HubletoMain\Core\App
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Community/Customers/Models/Activity:Create,Read,Update,Delete",
-      "HubletoApp/Community/Customers/Models/Address:Create,Read,Update,Delete",
-      "HubletoApp/Community/Customers/Models/Company:Create,Read,Update,Delete",
-      "HubletoApp/Community/Customers/Models/CompanyTag:Create,Read,Update,Delete",
-      "HubletoApp/Community/Customers/Models/Contact:Create,Read,Update,Delete",
-      "HubletoApp/Community/Customers/Models/Person:Create,Read,Update,Delete",
-      "HubletoApp/Community/Customers/Models/PersonTag:Create,Read,Update,Delete",
+      "HubletoApp/Community/Customers/Models/CompanyActivity:Create",
+      "HubletoApp/Community/Customers/Models/CompanyActivity:Read",
+      "HubletoApp/Community/Customers/Models/CompanyActivity:Update",
+      "HubletoApp/Community/Customers/Models/CompanyActivity:Delete",
 
-      "HubletoApp/Community/Customers/Controllers/Activity",
-      "HubletoApp/Community/Customers/Controllers/Address",
+      "HubletoApp/Community/Customers/Models/Address:Create",
+      "HubletoApp/Community/Customers/Models/Address:Read",
+      "HubletoApp/Community/Customers/Models/Address:Update",
+      "HubletoApp/Community/Customers/Models/Address:Delete",
+
+      "HubletoApp/Community/Customers/Models/Company:Create",
+      "HubletoApp/Community/Customers/Models/Company:Read",
+      "HubletoApp/Community/Customers/Models/Company:Update",
+      "HubletoApp/Community/Customers/Models/Company:Delete",
+
+      "HubletoApp/Community/Customers/Models/CompanyTag:Create",
+      "HubletoApp/Community/Customers/Models/CompanyTag:Read",
+      "HubletoApp/Community/Customers/Models/CompanyTag:Update",
+      "HubletoApp/Community/Customers/Models/CompanyTag:Delete",
+
+      "HubletoApp/Community/Customers/Models/Contact:Create",
+      "HubletoApp/Community/Customers/Models/Contact:Read",
+      "HubletoApp/Community/Customers/Models/Contact:Update",
+      "HubletoApp/Community/Customers/Models/Contact:Delete",
+
+      "HubletoApp/Community/Customers/Models/Person:Create",
+      "HubletoApp/Community/Customers/Models/Person:Read",
+      "HubletoApp/Community/Customers/Models/Person:Update",
+      "HubletoApp/Community/Customers/Models/Person:Delete",
+
+      "HubletoApp/Community/Customers/Models/PersonTag:Create",
+      "HubletoApp/Community/Customers/Models/PersonTag:Read",
+      "HubletoApp/Community/Customers/Models/PersonTag:Update",
+      "HubletoApp/Community/Customers/Models/PersonTag:Delete",
+
       "HubletoApp/Community/Customers/Controllers/Company",
+      "HubletoApp/Community/Customers/Controllers/CompanyActivity",
+      "HubletoApp/Community/Customers/Controllers/Address",
       "HubletoApp/Community/Customers/Controllers/CompanyTag",
       "HubletoApp/Community/Customers/Controllers/Contact",
       "HubletoApp/Community/Customers/Controllers/Person",
       "HubletoApp/Community/Customers/Controllers/PersonTag",
-      "HubletoApp/Community/Customers/Controllers/Activity",
+      "HubletoApp/Community/Customers/Controllers/CompanyActivity",
+      "HubletoApp/Community/Customers/Controllers/Company",
 
-      "HubletoApp/Community/Customers/Addresses",
+      "HubletoApp/Community/Customers/Api/GetCalendarEvents",
+      "HubletoApp/Community/Customers/Api/GetCompany",
+      "HubletoApp/Community/Customers/Api/GetCompanyContacts",
+
       "HubletoApp/Community/Customers/Companies",
-      "HubletoApp/Community/Customers/CompanyTag",
-      "HubletoApp/Community/Customers/Contacts",
       "HubletoApp/Community/Customers/Persons",
-      "HubletoApp/Community/Customers/PersonTag",
-      "HubletoApp/Community/Customers/Activity",
     ];
 
-    foreach ($permissions as $key => $permission) {
+    foreach ($permissions as $permission) {
       $mPermission->eloquent->create([
         "permission" => $permission
       ]);

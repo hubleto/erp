@@ -59,9 +59,17 @@ class LeadService extends \HubletoMain\Core\Model
   public function tableDescribe(array $description = []): array
   {
     $description = parent::tableDescribe();
-    if ($this->main->urlParamAsInteger('idLead') > 0) {
-      // custom table description
+    if ($this->main->urlParamAsInteger('idLead') > 0){
+      $description['permissions'] = [
+        'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
+      ];
+      unset($description["columns"]);
+      unset($description["ui"]);
     }
+
     return $description;
   }
 }

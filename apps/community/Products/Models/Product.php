@@ -156,7 +156,7 @@ class Product extends \HubletoMain\Core\Model
 
   public function tableDescribe(array $description = []): array
   {
-    $description = parent::tableDescribe();
+    $description = parent::tableDescribe($description);
 
     if (is_array($description['ui'])) {
       $description['ui']['title'] = 'Products';

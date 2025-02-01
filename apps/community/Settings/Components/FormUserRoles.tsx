@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, createRef, RefObject } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
 import Form, { FormProps, FormState } from 'adios/Form';
-import InputTags2 from 'adios/Inputs/Tags2';
-import InputTable from 'adios/Inputs/Table';
-import FormInput from 'adios/FormInput';
-import TableRolePermissions from './TableRolePermissions';
+import request from 'adios/Request';
+
+const formRef = createRef();
 
 interface FormUserRolesProps extends FormProps {}
 
-interface FormUserRolesState extends FormState {}
+interface FormUserRolesState extends FormState {
+  sortedAllPermissions: any,
+  rolePermissions: any,
+  dataLoading: boolean,
+  dataCalled: boolean,
+  selectedGroup: string,
+}
 
 export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUserRolesState> {
   static defaultProps: any = {
@@ -23,7 +28,14 @@ export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUse
 
   constructor(props: FormUserRolesProps) {
     super(props);
-    this.state = this.getStateFromProps(props);
+    this.state = {
+      ...this.getStateFromProps(props),
+      sortedAllPermissions: null,
+      rolePermissions: null,
+      dataLoading: true,
+      dataCalled: false,
+      selectedGroup: "",
+    };
   }
 
   getStateFromProps(props: FormUserRolesProps) {
@@ -32,10 +44,50 @@ export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUse
     };
   }
 
-  /* normalizeRecord(record) {
+  saveRecord(): void {
+    this.setState({ dataLoading: true, isInlineEditing: false } as FormUserRolesState);
 
-    return record;
-  } */
+    if (formRef.current) {
+      const formData = new FormData(formRef.current);
+      const formValues = Object.fromEntries(formData.entries());
+
+      request.get(
+        'settings/save-permissions',
+        {
+          roleId: this.state.record.id,
+          permissions: formValues,
+          roleTitle: this.state.record.role,
+          grantAll: this.state.record.grant_all,
+        },
+        (data: any) => {
+          if (data.status == "success") {
+            this.loadRecord();
+            this.props.parentTable.loadData();
+            this.getPermissions();
+          }
+        }
+      );
+    }
+  }
+
+  renderSaveButton(): JSX.Element {
+    let id = this.state.id ? this.state.id : 0;
+
+    return <>
+      {this.state.description?.permissions?.canUpdate ? <button
+        onClick={() => this.saveRecord()}
+        className={
+          "btn btn-add "
+          + (id <= 0 && this.state.description?.permissions?.canCreate || id > 0 && this.state.description?.permissions?.canUpdate ? "d-block" : "d-none")
+        }
+      >
+        <span className="icon"><i className="fas fa-save"></i></span>
+        <span className="text">
+          {this.state.description?.ui?.saveButtonText ?? this.translate("Save")}
+        </span>
+      </button> : null}
+    </>;
+  }
 
   renderHeaderLeft(): JSX.Element {
     return <>
@@ -72,85 +124,93 @@ export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUse
     }
   }
 
-  /* onBeforeSaveRecord(record: any) {
-
-    return record;
-  } */
+  getPermissions(): any {
+    this.setState({ dataLoading: true } as FormUserRolesState);
+    request.get(
+      'settings/get-permissions',
+      {roleId: this.state.record.id},
+      (data: any) => {
+        if (data.status == "success") {
+          this.setState({
+            sortedAllPermissions: data.sortedAllPermissions,
+            rolePermissions: data.rolePermissions,
+            dataLoading: false,
+          } as FormUserRolesState)
+        }
+      }
+    );
+  }
 
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
+    if (this.state.dataCalled == false) {
+      this.setState({ dataCalled: true } as FormUserRolesState)
+      this.getPermissions();
+    }
+
     return (
       <>
-        <div className='grid grid-cols-2 gap-1' style=
-          {{gridTemplateAreas:`
-            'info info'
-            'permissions permissions'
-          `}}>
-            <div className='card mt-4' style={{gridArea: 'info'}}>
-              <div className='card-body'>
-                {this.inputWrapper('role')}
+        {this.state.dataLoading ? <>Loading</> :
+          <>
+            <div className='card'>
+              <div className='card-body flex flex-row justify-around'>
+                {this.inputWrapper("role")}
+                {this.inputWrapper("grant_all")}
               </div>
             </div>
+            {R.grant_all == false ?
+              <form ref={formRef}>
+                <div className='card'>
+                  <div className='card-header'>
+                    <p className='text-bold'>Permissions</p>
+                  </div>
+                  <div className='card-body'>
+                    {Object.entries(this.state.sortedAllPermissions).map(([app, groups]) => (
+                      <div className='card' >
+                        <div className='card-header cursor-pointer'
+                          onClick={() => {
+                            if (this.state.selectedGroup == app) {
+                              this.setState({ selectedGroup: "" } as FormUserRolesState);
+                            } else this.setState({ selectedGroup: app } as FormUserRolesState)}
+                          }
+                        >
+                          <p>{app}</p>
+                          <span className='icon'><i className='fas fa-chevron-down'></i></span>
+                        </div>
+                        <div className={`card-body ${this.state.selectedGroup == app ? "block" : "hidden"}`}>
+                          {Object.entries(groups).map(([key, group]) => (
+                            <div className='card card-body mb-2'>
+                              <p className='font-bold'>{key}</p>
+                              {Object.entries(group).map(([key, permission]) => (
+                                <div className='flex flex-row justify-between my-1'>
+                                  <label htmlFor={`permission_id_${permission.id}`}>{permission.alias ?? permission.permission}</label>
+                                  <input
+                                    id={`permission_id_${permission.id}`}
+                                    type='checkbox'
+                                    readOnly={this.state.isInlineEditing}
+                                    onClick={() => this.setState({ isInlineEditing: true })}
+                                    defaultChecked={this.state.rolePermissions.includes(permission.id) ? true : null}
+                                    name={permission.id}
+                                    value={permission.id}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </form>
+            : <></>}
+          </>
 
-            <div className='card mt-2' style={{gridArea: 'permissions'}}>
-              <div className='card-header'>Permissions</div>
-              <div className='card-body'>
-                {this.inputWrapper('grant_all')}
-                {R.grant_all == 1 ? null :
-                  <InputTable
-                    uid={this.props.uid + '_table_permissions_steps_input'}
-                    {...this.getDefaultInputProps()}
-                    value={R.PERMISSIONS}
-                    onChange={(value: any) => {
-                      this.updateRecord({ PERMISSIONS: value });
-                    }}
-                  >
-                    <TableRolePermissions
-                      uid={this.props.uid + '_permissions_steps'}
-                      context="Hello World"
-                      descriptionSource="props"
-                      description={{
-                        ui: {
-                          showFooter: false,
-                          showHeader: false
-                        },
-                        permissions: {
-                          canCreate: true,
-                          canDelete: true,
-                          canRead: true,
-                          canUpdate: true
-                        },
-                        columns: {
-                          id_permission: {
-                            type: "lookup",
-                            title: "Permission",
-                            model: "HubletoApp/Community/Settings/Models/Permission",
-                          },
-                        }
-                      }}
-                    ></TableRolePermissions>
-                  </InputTable>
-                }
-                {this.state.isInlineEditing && R.grant_all == 0 ? (
-                  <a
-                    role='button'
-                    onClick={() => {
-                      if (!R.PERMISSIONS) R.PERMISSIONS = [];
-                      R.PERMISSIONS.push({
-                        id_role: { _useMasterRecordId_: true },
-                      });
-                      this.setState({ record: R });
-                    }}
-                  >
-                    + Add Permission
-                  </a>
-                ) : null}
-              </div>
-            </div>
-        </div>
+        }
+
       </>
-    );
+    )
   }
 }

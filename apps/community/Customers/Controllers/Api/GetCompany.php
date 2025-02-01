@@ -16,6 +16,8 @@ class GetCompany extends \HubletoMain\Core\Controller
     $companies = null;
     $companyArray = [];
 
+    $searchString = $this->main->params["search"] ?? "";
+
     try {
       $companies = $mCompany->eloquent->selectRaw("*, name as _LOOKUP");
       /**

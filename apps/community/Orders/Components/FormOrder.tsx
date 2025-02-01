@@ -84,7 +84,7 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
     }
 
     const R = this.state.record;
-    const showAdditional = R.id > 0 ? true : false;7
+    const showAdditional = R.id > 0 ? true : false;
 
     return (<>
       <TabView>
@@ -130,18 +130,13 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
                     sum={R.price ?? 0}
                     uid={this.props.uid + "_table_order_products"}
                     data={{ data: R.PRODUCTS }}
-                    descriptionSource='props'
+                    customEndpointParams={{idOrder: R.id}}
+                    descriptionSource='both'
                     description={{
                       ui: {
                         showHeader: false,
                         showFooter: true,
                         addButtonText: "Add Product"
-                      },
-                      permissions: {
-                        canCreate: false,
-                        canUpdate: true,
-                        canDelete: this.state.isInlineEditing,
-                        canRead: true,
                       },
                       columns: {
                         id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",

@@ -5,6 +5,13 @@ namespace HubletoApp\Community\Orders\Models;
 use HubletoApp\Community\Customers\Models\Company;
 use HubletoApp\Community\Products\Models\Product;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Integer;
+use \ADIOS\Core\Db\Column\Decimal;
+use \ADIOS\Core\Db\Column\Date;
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Text;
+
 class Order extends \HubletoMain\Core\Model
 {
   public string $table = 'orders';
@@ -17,60 +24,22 @@ class Order extends \HubletoMain\Core\Model
     'CUSTOMER' => [ self::HAS_ONE, Company::class, 'id','id_company'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns,[
-      "order_number" => [
-        "type" => "int",
-        "title" => $this->translate("Order Number"),
-        "required" => false,
-        "readonly" => true,
-      ],
-
-      "id_company" => [
-        "type" => "lookup",
-        "title" => $this->translate("Customer"),
-        "required" => true,
-        "model" => Company::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'RESTRICT',
-      ],
-
-      "price" => [
-        "type" => "float",
-        "title" => $this->translate("Price"),
-        "readonly" => true,
-      ],
-
-      "date_order" => [
-        "type" => "date",
-        "title" => $this->translate("Order Date"),
-        "required" => true
-      ],
-
-      "required_delivery_date" => [
-        "type" => "date",
-        "title" => $this->translate("Required Delivery date"),
-        "required" => false
-      ],
-
-      "shipping_info" => [
-        "type" => "varchar",
-        "title" =>  $this->translate("Shipping information"),
-        "required" => false,
-      ],
+    return parent::columns(array_merge($columns,[
+      'order_number' => (new Varchar($this, $this->translate('Order number')))->setReadonly(),
+      'id_company' => (new Lookup($this, $this->translate('Customer'), Company::class))->setRequired()->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
+      'price' => (new Decimal($this, $this->translate('Price')))->setReadonly(),
+      'date_order' => (new Date($this, $this->translate('Order date')))->setRequired(),
+      'required_delivery_date' => (new Date($this, $this->translate('Required delivery date')))->setRequired(),
+      'shipping_info' => (new Varchar($this, $this->translate('Shipping information'))),
+      'note' => (new Text($this, $this->translate('Notes'))),
 
       /* "zakaznicke_objednavacie_cislo" => [
         "type" => "varchar",
         "title" => "Zákaznícke objednávacie číslo",
         "show_column" => TRUE,
       ], */
-
-      "note" => [
-        "type" => "text",
-        "title" =>  $this->translate("Notes"),
-        "required" => false,
-      ],
 
       /* "status" => [
         "type" => "lookup",
@@ -89,38 +58,24 @@ class Order extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Orders';
-      $description["ui"]["addButtonText"] = $this->translate("Add order");
-    }
+    $description->ui['title'] = 'Orders';
+    $description->ui['addButtonText'] = $this->translate("Add order");
 
-    if (is_array($description['columns'])) {
-      unset($description["columns"]["shipping_info"]);
-      unset($description["columns"]["note"]);
-    }
+    unset($description->columns["shipping_info"]);
+    unset($description->columns["note"]);
 
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
+  public function formDescribe(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe($description);
-
-    if (is_array($description['defaultValues'])) {
-      $description["defaultValues"]["date_order"] = date("Y-m-d");
-      $description["defaultValues"]["price"] = 0;
-    }
-
-    $description['includeRelations'] = [
-      'PRODUCTS',
-      'CUSTOMER',
-      'HISTORY',
-    ];
-
+    $description = parent::formDescribe();
+    $description->defaultValues["date_order"] = date("Y-m-d");
+    $description->defaultValues["price"] = 0;
     return $description;
   }
 

@@ -76,10 +76,10 @@ export default class FormProduct<P, S> extends Form<FormProductProps,FormProduct
           </div>
 
           <div className='border-r border-t border-gray-200'>
-            {this.inputWrapper('is_single_order_posible')}
+            {this.inputWrapper('is_single_order_possible')}
             {this.inputWrapper('show_price')}
             {this.inputWrapper('packaging')}
-            {this.inputWrapper('needs_reodering')}
+            {this.inputWrapper('needs_reordering')}
             {this.inputWrapper('supplier')}
           </div>
           <div className='border-t border-gray-200'>

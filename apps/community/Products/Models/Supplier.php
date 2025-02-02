@@ -4,117 +4,50 @@ namespace HubletoApp\Community\Products\Models;
 
 use HubletoApp\Community\Settings\Models\Country;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Lookup;
+
 class Supplier extends \HubletoMain\Core\Model
 {
   public string $table = 'product_suppliers';
   public string $eloquentClass = Eloquent\Supplier::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns,[
+    return parent::columns(array_merge($columns,[
 
-      "title" => [
-        "type" => "varchar",
-        "title" => $this->translate("Title"),
-        "required" => true,
-      ],
-
-      "address" => [
-        "type" => "varchar",
-        "title" => $this->translate("Address"),
-        "required" => false,
-      ],
-
-      "city" => [
-        "type" => "varchar",
-        "title" => $this->translate("City"),
-        "required" => false,
-      ],
-
-      "postal_code" => [
-        "type" => "varchar",
-        "title" => $this->translate("Postal Code"),
-        "required" => false,
-      ],
-
-      "id_country" => [
-        "type" => "lookup",
-        "model" => Country::class,
-        "title" => $this->translate("Country"),
-        "required" => false,
-      ],
-
-      "contact_person" => [
-        "type" => "varchar",
-        "title" => $this->translate("Contact Person"),
-        "required" => false,
-      ],
-
-      "phone_number" => [
-        "type" => "varchar",
-        "title" => $this->translate("Phone Number"),
-        "required" => false,
-      ],
-
-      "email" => [
-        "type" => "varchar",
-        "title" => $this->translate("Supplier Email"),
-        "required" => false,
-      ],
-
-      "order_email" => [
-        "type" => "varchar",
-        "title" => $this->translate("Order Email"),
-        "required" => false,
-      ],
-
-      "tax_id" => [
-        "type" => "varchar",
-        "title" => $this->translate("Tax ID"),
-        "required" => false,
-      ],
-
-      "company_id" => [
-        "type" => "varchar",
-        "title" => $this->translate("Company ID"),
-        "required" => false,
-      ],
-
-      "vat_id" => [
-        "type" => "varchar",
-        "title" => $this->translate("VAT ID"),
-        "required" => false,
-      ],
-
-      "payment_account" => [
-        "type" => "varchar",
-        "title" => $this->translate("Payment Account Number"),
-        "required" => false,
-      ],
-
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'address' => (new Varchar($this, $this->translate('Address'))),
+      'city' => (new Varchar($this, $this->translate('City'))),
+      'postal_code' => (new Varchar($this, $this->translate('Postal code'))),
+      'id_country' => (new Lookup($this, $this->translate('Country'), Country::class)),
+      'contact_person' => (new Varchar($this, $this->translate('Contact person'))),
+      'phone_number' => (new Varchar($this, $this->translate('Phone number'))),
+      'email' => (new Varchar($this, $this->translate('Supplier email'))),
+      'order_email' => (new Varchar($this, $this->translate('Order email'))),
+      'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
+      'company_id' => (new Varchar($this, $this->translate('Company ID'))),
+      'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
+      'payment_account' => (new Varchar($this, $this->translate('Payment account number'))),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Product Suppliers';
-      $description["ui"]["addButtonText"] = $this->translate("Add product supplier");
-    }
+    $description->ui['title'] = 'Product Suppliers';
+    $description->ui["addButtonText"] = $this->translate("Add product supplier");
 
-    if (is_array($description['columns'])) {
-      unset($description["columns"]["address"]);
-      unset($description["columns"]["city"]);
-      unset($description["columns"]["postal_code"]);
-      unset($description["columns"]["id_country"]);
-      unset($description["columns"]["tax_id"]);
-      unset($description["columns"]["company_id"]);
-      unset($description["columns"]["vat_id"]);
-      unset($description["columns"]["payment_account"]);
-    }
+    unset($description->columns["address"]);
+    unset($description->columns["city"]);
+    unset($description->columns["postal_code"]);
+    unset($description->columns["id_country"]);
+    unset($description->columns["tax_id"]);
+    unset($description->columns["company_id"]);
+    unset($description->columns["vat_id"]);
+    unset($description->columns["payment_account"]);
 
     return $description;
   }

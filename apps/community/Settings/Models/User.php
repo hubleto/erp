@@ -2,6 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Lookup;
+
 class User extends \ADIOS\Models\User
 {
   const ENUM_LANGUAGES = [
@@ -18,41 +21,15 @@ class User extends \ADIOS\Models\User
   public string $eloquentClass = Eloquent\User::class;
   public ?string $lookupSqlValue = '{%TABLE%}.email';
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'first_name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('First name'),
-        'show' => true,
-      ],
-      'middle_name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Middle name'),
-        'show' => true,
-      ],
-      'last_name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Last name'),
-        'show' => true,
-      ],
-      'email' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Email'),
-        'show' => true,
-      ],
-      'language' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Language'),
-        'enumValues' => self::ENUM_LANGUAGES,
-        'show' => true,
-      ],
-      'id_active_profile' => [
-        'type' => 'lookup',
-        'model' => Profile::class,
-        'title' => $this->translate('Active profile'),
-        'show' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'first_name' => (new Varchar($this, $this->translate('First name'))),
+      'middle_name' => (new Varchar($this, $this->translate('Middle name'))),
+      'last_name' => (new Varchar($this, $this->translate('Last name'))),
+      'email' => (new Varchar($this, $this->translate('Email'))),
+      'language' => (new Varchar($this, $this->translate('Language')))->setEnumValues(self::ENUM_LANGUAGES),
+      'id_active_profile' => (new Lookup($this, $this->translate("Active profile"), Profile::class)),
     ]));
   }
 
@@ -88,16 +65,14 @@ class User extends \ADIOS\Models\User
     return $user;
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Users';
-      $description['ui']['addButtonText'] = 'Add User';
-      $description['ui']['showHeader'] = true;
-      $description['ui']['showFooter'] = false;
-    }
+    $description->ui['title'] = 'Users';
+    $description->ui['addButtonText'] = 'Add User';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
 
     return $description;
   }

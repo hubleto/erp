@@ -4,6 +4,10 @@ namespace HubletoApp\Community\Services\Models;
 
 use HubletoApp\Community\Settings\Models\Currency;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Decimal;
+use \ADIOS\Core\Db\Column\Lookup;
+
 class Service extends \HubletoMain\Core\Model
 {
   public string $table = 'services';
@@ -14,50 +18,27 @@ class Service extends \HubletoMain\Core\Model
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      "name" => [
-        "type" => "varchar",
-        "title" => "Name",
-        "required" => true,
-      ],
-      "price" => [
-        "type" => "float",
-        "title" => "Unit Price",
-      ],
-      'id_currency' => [
-        'type' => 'lookup',
-        'title' => 'Currency',
-        'model' => 'HubletoApp/Community/Settings/Models/Currency',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-      ],
-      "unit" => [
-        "type" => "varchar",
-        "title" => "Unit",
-      ],
-      "description" => [
-        "type" => "varchar",
-        "title" => "Description"
-      ],
+    return parent::columns(array_merge($columns, [
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
+      'price' => (new Decimal($this, $this->translate('Unit price'))),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setRequired()->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'unit' => (new Varchar($this, $this->translate('Unit'))),
+      'description' => (new Varchar($this, $this->translate('Description'))),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Services';
-      $description['ui']['addButtonText'] = 'Add Service';
-      $description['ui']['showHeader'] = true;
-      $description['ui']['showFooter'] = false;
-    }
+    $description->ui['title'] = 'Services';
+    $description->ui['addButtonText'] = 'Add Service';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
 
-    if (is_array($description['columns'])) {
-      unset($description['columns']['description']);
-    }
+    unset($description->columns['description']);
 
     return $description;
   }

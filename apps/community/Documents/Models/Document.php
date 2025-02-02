@@ -8,6 +8,9 @@ use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Deals\Models\DealDocument;
 use HubletoApp\Community\Leads\Models\Lead;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\File;
+
 class Document extends \HubletoMain\Core\Model
 {
   public string $table = 'documents';
@@ -20,35 +23,20 @@ class Document extends \HubletoMain\Core\Model
     'DEAL_DOCUMENT' => [ self::HAS_ONE, DealDocument::class, 'id_document', 'id' ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      "name" => [
-        "title" => "Document name",
-        "type" => "varchar",
-        "required" => true,
-      ],
-      "file" => [
-        "type" => "file",
-        "title" => "File",
-        "required" => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'name' => (new Varchar($this, $this->translate('Document name')))->setRequired(),
+      'file' => (new File($this, $this->translate('File')))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Documents';
-    $description['ui']['addButtonText'] = 'Add Document';
-    $description['ui']['showHeader'] = true;
-    return $description;
-  }
-
-  public function formDescribe(array $description = []): array
-  {
-    $description = parent::formDescribe($description);
-    $description['includeRelations'] = ['COMPANY_DOCUMENT', 'LEAD_DOCUMENT', 'DEAL_DOCUMENT'];
+    $description = parent::tableDescribe();
+    $description->ui['title'] = 'Documents';
+    $description->ui['addButtonText'] = 'Add Document';
+    $description->ui['showHeader'] = true;
     return $description;
   }
 

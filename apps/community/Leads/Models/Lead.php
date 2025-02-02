@@ -9,7 +9,13 @@ use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Leads\Models\LeadTag;
-use Exception;
+
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Date;
+use \ADIOS\Core\Db\Column\Text;
+use \ADIOS\Core\Db\Column\Decimal;
+use \ADIOS\Core\Db\Column\Boolean;
 
 class Lead extends \HubletoMain\Core\Model
 {
@@ -31,116 +37,47 @@ class Lead extends \HubletoMain\Core\Model
     'DOCUMENTS' => [ self::HAS_MANY, LeadDocument::class, 'id_lead', 'id'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-
-      'title' => [
-        'type' => 'varchar',
-        'title' => 'Title',
-        'required' => true,
-      ],
-      'id_company' => [
-        'type' => 'lookup',
-        'title' => 'Company',
-        'model' => \HubletoApp\Community\Customers\Models\Company::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => false,
-      ],
-      'id_person' => [
-        'type' => 'lookup',
-        'title' => 'Contact Person',
-        'model' => \HubletoApp\Community\Customers\Models\Person::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-        'required' => false,
-      ],
-      'price' => [
-        'type' => 'float',
-        'title' => 'Price',
-        // 'required' => true,
-      ],
-      'id_currency' => [
-        'type' => 'lookup',
-        'title' => 'Currency',
-        'model' => \HubletoApp\Community\Settings\Models\Currency::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-        // 'required' => true,
-      ],
-      'date_expected_close' => [
-        'type' => 'date',
-        'title' => 'Expected Close Date',
-        'required' => false,
-      ],
-      'id_user' => [
-        'type' => 'lookup',
-        'title' => 'Assigned User',
-        'model' => \HubletoApp\Community\Settings\Models\User::class,
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => true,
-      ],
-      'date_created' => [
-        'type' => 'date',
-        'title' => 'Date Created',
-        'required' => true,
-        'readonly' => true,
-      ],
-      'id_lead_status' => [
-        'type' => 'lookup',
-        'title' => 'Status',
-        'model' => LeadStatus::class,
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => true,
-      ],
-      'note' => [
-        'type' => 'text',
-        'title' => 'Notes',
-        'required' => false,
-      ],
-      'source_channel' => [
-        'type' => 'varchar',
-        'title' => 'Source Channel',
-        'required' => false,
-      ],
-      'is_archived' => [
-        'type' => 'boolean',
-        'title' => 'Archived',
-        'required' => false,
-      ],
+    return parent::columns(array_merge($columns, [
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
+      'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'price' => (new Decimal($this, $this->translate('Price'))),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
+      'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class, 'RESTRICT'))->setRequired(),
+      'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
+      'id_lead_status' => (new Lookup($this, $this->translate('Status'), LeadStatus::class, 'RESTRICT'))->setRequired(),
+      'note' => (new Text($this, $this->translate('Notes'))),
+      'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
+      'is_archived' => (new Boolean($this, $this->translate('Archived'))),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
     $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
     if ($this->main->urlParamAsBool("showArchive")) {
-      $description["ui"] = [
-        "title" => "Leads Archive"
-      ];
-      $description["permissions"] = [
+      $description->ui['title'] = "Leads Archive";
+      $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
         "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
       ];
     } else {
-      $description['ui'] = [
-        'title' => 'Leads',
-        'addButtonText' => 'Add Lead'
-      ];
+      $description->ui['title'] = 'Leads';
+      $description->ui['addButtonText'] = 'Add Lead';
     }
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
-    $description['columns']['tags'] = ["title" => "Tags"];
-    unset($description['columns']['note']);
-    unset($description['columns']['id_person']);
-    unset($description['columns']['source_channel']);
-    unset($description['columns']['is_archived']);
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+    $description->columns['tags'] = ["title" => "Tags"];
+    unset($description->columns['note']);
+    unset($description->columns['id_person']);
+    unset($description->columns['source_channel']);
+    unset($description->columns['is_archived']);
 
     if ($this->main->urlParamAsBool('idCompany') > 0) {
       $description['permissions'] = [
@@ -149,38 +86,23 @@ class Lead extends \HubletoMain\Core\Model
         'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
       ];
-      unset($description["columns"]);
-      unset($description["ui"]);
     }
 
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
+  public function formDescribe(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe($description);
+    $description = parent::formDescribe();
 
-    $description['defaultValues']['id_company'] = null;
-    $description['defaultValues']['date_created'] = date("Y-m-d");
-    $description['defaultValues']['id_person'] = null;
-    $description['defaultValues']['is_archived'] = 0;
-    $description['defaultValues']['id_lead_status'] = 1;
-    $description['defaultValues']['id_user'] = $this->main->auth->getUserId();
-    $description['includeRelations'] = [
-      'DEAL',
-      'COMPANY',
-      'USER',
-      'PERSON',
-      'STATUS',
-      'CURRENCY',
-      'HISTORY',
-      'TAGS',
-      'SERVICES',
-      'ACTIVITIES',
-      'DOCUMENTS',
-    ];
+    $description->defaultValues['id_company'] = null;
+    $description->defaultValues['date_created'] = date("Y-m-d");
+    $description->defaultValues['id_person'] = null;
+    $description->defaultValues['is_archived'] = 0;
+    $description->defaultValues['id_lead_status'] = 1;
+    $description->defaultValues['id_user'] = $this->main->auth->getUserId();
 
-    $description['ui']['addButtonText'] = $this->translate('Add lead');
+    $description->ui['addButtonText'] = $this->translate('Add lead');
 
     return $description;
   }

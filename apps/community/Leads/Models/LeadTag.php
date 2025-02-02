@@ -5,6 +5,8 @@ namespace HubletoApp\Community\Leads\Models;
 use HubletoApp\Community\Settings\Models\Tag;
 use HubletoApp\Community\Leads\Models\Lead;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class LeadTag extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_tags';
@@ -15,32 +17,18 @@ class LeadTag extends \HubletoMain\Core\Model
     'TAG' => [ self::BELONGS_TO, Tag::class, 'id_tag', 'id' ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'id_lead' => [
-        'type' => 'lookup',
-        'title' => 'Lead',
-        'model' => \HubletoApp\Community\Leads\Models\Lead::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_tag' => [
-        'type' => 'lookup',
-        'title' => 'Tag',
-        'model' => \HubletoApp\Community\Settings\Models\Tag::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'id_lead' => (new Lookup($this, $this->translate('LeaD'), LeaD::class))->setRequired(),
+      'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
-    $description['title'] = 'Company Categories';
+    $description = parent::tableDescribe();
+    $description->ui['title'] = 'Company Categories';
     return $description;
   }
 

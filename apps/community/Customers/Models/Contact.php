@@ -4,6 +4,9 @@ namespace HubletoApp\Community\Customers\Models;
 
 use HubletoApp\Community\Settings\Models\ContactType;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+
 class Contact extends \HubletoMain\Core\Model
 {
   public string $table = 'contacts';
@@ -15,56 +18,33 @@ class Contact extends \HubletoMain\Core\Model
     'CONTACT_TYPE' => [ self::HAS_ONE, ContactType::class, 'id_contact_type', 'id'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'id_person' => [
-        'type' => 'lookup',
-        'title' => $this->translate('Person'),
-        'model' => Person::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_contact_type' => [
-        'type' => 'lookup',
-        'title' => $this->translate('Contact Category'),
-        'model' => \HubletoApp\Community\Settings\Models\ContactType::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'type' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Type'),
-        'enumValues' => ['email' => $this->translate('Email'), 'number' => $this->translate('Phone Number'), 'other' => $this->translate('Other')],
-        'required' => true,
-      ],
-      'value' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Value'),
-        'required' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'id_person' => (new Lookup($this, $this->translate('Person'), Person::class))->setRequired(),
+      'id_contact_type' => (new Lookup($this, $this->translate('Contact Category'), ContactType::class))->setRequired(),
+      'type' => (new Varchar($this, $this->translate('Type')))->setRequired()
+        ->setEnumValues(['email' => $this->translate('Email'), 'number' => $this->translate('Phone Number'), 'other' => $this->translate('Other')])
+      ,
+      'value' => (new Varchar($this, $this->translate('Value')))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
-    $description['title'] = 'Contacts';
-    $description['ui']['addButtonText'] = 'Add Company';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+    $description = parent::tableDescribe();
+    $description->ui['title'] = 'Contacts';
+    $description->ui['addButtonText'] = 'Add Company';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
 
     if ($this->main->urlParamAsBool('idPerson') > 0) {
-      $description['permissions'] = [
+      $description->permissions = [
         'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
         'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
       ];
-      unset($description["columns"]);
-      unset($description["ui"]);
     }
 
     return $description;

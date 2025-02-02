@@ -2,6 +2,14 @@
 
 namespace HubletoApp\Community\Products\Models;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Text;
+use \ADIOS\Core\Db\Column\Boolean;
+use \ADIOS\Core\Db\Column\Date;
+use \ADIOS\Core\Db\Column\Image;
+use \ADIOS\Core\Db\Column\Decimal;
+
 class Product extends \HubletoMain\Core\Model
 {
   public string $table = 'products';
@@ -13,169 +21,49 @@ class Product extends \HubletoMain\Core\Model
     'SUPPLIER' => [ self::HAS_ONE, Supplier::class, 'id','id_supplier'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns,[
-
-      "title" => [
-        "type" => "varchar",
-        "title" => $this->translate("Title"),
-        "required" => true,
-      ],
-
-      "id_product_group" => [
-        "type" => "lookup",
-        "model" => Group::class,
-        "title" => $this->translate("Group"),
-        "required" => false,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-      ],
-
-      "id_supplier" => [
-        "type" => "lookup",
-        "model" => Supplier::class,
-        "title" => $this->translate("Supplier"),
-        "required" => false,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-      ],
-
-      "is_on_sale" => [
-        "type" => "boolean",
-        "title" => $this->translate("On sale"),
-        "required" => false,
-      ],
-
-      "image" => [
-        'type' => 'image',
-        'title' => $this->translate("Image").' [540x600px]',
-        'required' => false,
-      ],
-
-      "description" => [
-        "type" => "text",
-        "title" => $this->translate("Description"),
-        "required" => false,
-      ],
-
-      "count_in_package" => [
-        "type" => "float",
-        "title" => $this->translate("Number of items in package"),
-        "required" => false,
-      ],
-
-      "unit_price" => [
-        "type" => "float",
-        "title" => $this->translate("Single unit price"),
-        "required" => true,
-      ],
-
-      "margin" => [
-        "type" => "float",
-        "title" => $this->translate("Margin"),
-        "unit" => "%",
-        "required" => false,
-      ],
-
-      "tax" => [
-        "type" => "float",
-        "title" => $this->translate("Tax"),
-        "unit" => "%",
-        "required" => true,
-      ],
-
-      "is_single_order_posible" => [
-        "type" => "boolean",
-        "title" => $this->translate("Single unit order posible"),
-        "required" => false,
-      ],
-
-      "unit" => [
-        "type" => "varchar",
-        "title" => $this->translate("Unit"),
-        "required" => false,
-      ],
-
-      "packaging" => [
-        "type" => "varchar",
-        "title" => $this->translate("Packaging"),
-        "required" => false,
-      ],
-
-      /* "netto_obsah" => [
-        "type" => "float",
-        "title" => "Netto obsah",
-        "required" => TRUE,
-      ], */
-
-      /* "netto_jednotka" => [
-        "type" => "varchar",
-        "title" => "Netto jednotka",
-        "required" => TRUE,
-      ], */
-
-      "sale_ended" => [
-        "type" => "date",
-        "title" => $this->translate("Sale ended"),
-        "required" => false,
-      ],
-
-      "show_price" => [
-        "type" => "boolean",
-        "title" => $this->translate("Show price to customer"),
-        "required" => false,
-      ],
-
-      "price_after_reweight" => [
-        "type" => "boolean",
-        "title" => $this->translate("Set price after reweight?"),
-        "required" => false,
-      ],
-
-      "needs_reodering" => [
-        "type" => "boolean",
-        "title" => $this->translate("Needs reordering?"),
-        "required" => false,
-      ],
-
-      "storage_rules" => [
-        "type" => "text",
-        "title" => $this->translate("Storage rules"),
-        "required" => false,
-      ],
-
-      "table" => [
-        "type" => "text",
-        "title" => $this->translate("Table"),
-        "required" => false,
-      ],
-
+    return parent::columns(array_merge($columns,[
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'id_product_group' => (new Lookup($this, $this->translate('Assigned User'), Group::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'is_on_sale' => new Boolean($this, $this->translate('On sale')),
+      'image' => new Image($this, $this->translate('Image') . ' [540x600px]'),
+      'description' => new Text($this, $this->translate('Description')),
+      'count_in_package' => new Decimal($this, $this->translate('Number of items in package')),
+      'unit_price' => (new Decimal($this, $this->translate('Single unit price')))->setRequired(),
+      'margin' => new Decimal($this, $this->translate('Margin')),
+      'tax' => (new Decimal($this, $this->translate('Tax')))->setRequired(),
+      'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
+      'unit' => new Varchar($this, $this->translate('Unit')),
+      'packaging' => new Varchar($this, $this->translate('Packaging')),
+      'sale_ended' => new Date($this, $this->translate('Sale ended')),
+      'show_price' => new Boolean($this, $this->translate('Show price to customer')),
+      'price_after_reweight' => new Boolean($this, $this->translate('Set price after reweight?')),
+      'needs_reordering' => new Boolean($this, $this->translate('Needs reordering?')),
+      'storage_rules' => new Text($this, $this->translate('Storage rules')),
+      'table' => new Text($this, $this->translate('Table')),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Products';
-      $description["ui"]["addButtonText"] = $this->translate("Add product");
-    }
+    $description->ui['title'] = 'Products';
+    $description->ui["addButtonText"] = $this->translate("Add product");
 
-    if (is_array($description['columns'])) {
-      unset($description["columns"]["is_on_sale"]);
-      unset($description["columns"]["image"]);
-      unset($description["columns"]["count_in_package"]);
-      unset($description["columns"]["is_single_order_posible"]);
-      unset($description["columns"]["packaging"]);
-      unset($description["columns"]["show_price"]);
-      unset($description["columns"]["price_after_reweight"]);
-      unset($description["columns"]["needs_reodering"]);
-      unset($description["columns"]["storage_rules"]);
-      unset($description["columns"]["table"]);
-      unset($description["columns"]["description"]);
-    }
+    unset($description->columns["is_on_sale"]);
+    unset($description->columns["image"]);
+    unset($description->columns["count_in_package"]);
+    unset($description->columns["is_single_order_possible"]);
+    unset($description->columns["packaging"]);
+    unset($description->columns["show_price"]);
+    unset($description->columns["price_after_reweight"]);
+    unset($description->columns["needs_reordering"]);
+    unset($description->columns["storage_rules"]);
+    unset($description->columns["table"]);
+    unset($description->columns["description"]);
 
     return $description;
   }

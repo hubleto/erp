@@ -2,40 +2,32 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Integer;
+use \ADIOS\Core\Db\Column\Color;
+
 class DealStatus extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_statuses';
   public string $eloquentClass = Eloquent\DealStatus::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Name'),
-        'required' => true,
-      ],
-      'order' => [
-        'type' => 'int',
-        'title' => $this->translate('Order'),
-        'required' => true,
-      ],
-      'color' => [
-        'type' => 'color',
-        'title' => $this->translate('Color'),
-        'required' => false,
-      ],
+    return parent::columns(array_merge($columns, [
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
+      'order' => (new Integer($this, $this->translate('Order')))->setRequired(),
+      'color' => new Color($this, $this->translate('Color')),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Deal Statuses';
-    $description['ui']['addButtonText'] = 'Add Deal Status';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+    $description = parent::tableDescribe();
+    $description->ui['title'] = 'Deal Statuses';
+    $description->ui['addButtonText'] = 'Add Deal Status';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
     return $description;
   }
 }

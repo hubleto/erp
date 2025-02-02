@@ -2,34 +2,21 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Text;
+
 class Setting extends \HubletoMain\Core\Model
 {
   public string $table = 'settings';
   public string $eloquentClass = Eloquent\Setting::class;
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy([
-      'key' => [
-        'type' => 'varchar',
-        'byte_size' => '250',
-        'title' => $this->translate('Key'),
-        'show_column' => true
-      ],
-      'value' => [
-        'type' => 'text',
-        'interface' => 'plain_text',
-        'title' => $this->translate('Value'),
-        'show_column' => true
-      ],
-      'id_user' => [
-        'type' => 'lookup',
-        'title' => $this->translate('Only for user'),
-        'model' => User::class,
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => false,
-      ],
+    return parent::columns([
+      'key' => (new Varchar($this, $this->translate("Key")))->setRequired(),
+      'value' => (new Text($this, $this->translate("Value"))),
+      'id_user' => (new Lookup($this, $this->translate("Only for user"), User::class, 'RESTRICT')),
     ]);
   }
 
@@ -47,16 +34,14 @@ class Setting extends \HubletoMain\Core\Model
     ]);
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Settings';
-      $description['ui']['addButtonText'] = 'Add Setting';
-      $description['ui']['showHeader'] = true;
-      $description['ui']['showFooter'] = false;
-    }
+    $description->ui['title'] = 'Settings';
+    $description->ui['addButtonText'] = 'Add Setting';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
 
     return $description;
   }

@@ -31,13 +31,13 @@ class Address extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Contacts';
-    $description['ui']['addButtonText'] = 'Add Contact';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+    $description = parent::tableDescribe();
+    $description->ui['title'] = 'Contacts';
+    $description->ui['addButtonText'] = 'Add Contact';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
     return $description;
   }
 

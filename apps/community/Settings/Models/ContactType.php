@@ -2,33 +2,29 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+
 class ContactType extends \HubletoMain\Core\Model
 {
   public string $table = 'contact_types';
   public string $eloquentClass = Eloquent\ContactType::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Name'),
-        'required' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'name' => (new Varchar($this, $this->translate('Type')))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = $this->translate('Contact Types');
-      $description['ui']['addButtonText'] = 'Add Contact Type';
-      $description['ui']['showHeader'] = true;
-      $description['ui']['showFooter'] = false;
-    }
+    $description->ui['title'] = $this->translate('Contact Types');
+    $description->ui['addButtonText'] = 'Add Contact Type';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
 
     return $description;
   }

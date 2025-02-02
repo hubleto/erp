@@ -24,10 +24,10 @@ class PersonTag extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
-    $description['title'] = 'Person Categories';
+    $description = parent::tableDescribe();
+    $description->ui['title'] = 'Person Categories';
     return $description;
   }
 

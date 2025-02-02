@@ -2,56 +2,41 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+
 class Permission extends \HubletoMain\Core\Model
 {
   public string $table = 'permissions';
   public string $eloquentClass = Eloquent\Permission::class;
   public ?string $lookupSqlValue = '{%TABLE%}.permission';
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy([
-      'permission' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Permission'),
-        'show_column' => true
-      ],
+    return parent::columns([
+      'permission' => (new Varchar($this, $this->translate('Permission'))),
     ]);
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Permissions';
-      $description['ui']['showHeader'] = false;
-      $description['ui']['showFooter'] = false;
-    }
+    $description->ui['title'] = 'Permissions';
+    $description->ui['showHeader'] = false;
+    $description->ui['showFooter'] = false;
 
-    if (is_array($description['permissions'])) {
-      $description['permissions']['canCreate'] = false;
-      $description['permissions']['canUpdate'] = false;
-      $description['permissions']['canDelete'] = false;
-    }
+    $description->permissions['canCreate'] = false;
+    $description->permissions['canUpdate'] = false;
+    $description->permissions['canDelete'] = false;
 
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
+  public function formDescribe(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe($description);
+    $description = parent::formDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Permission';
-      $description['ui']['subTitle'] = '';
-    }
-
-    if (is_array($description['permissions'])) {
-      $description['permissions']['canCreate'] = false;
-      $description['permissions']['canUpdate'] = false;
-      $description['permissions']['canDelete'] = false;
-    }
+    $description->ui['title'] = 'Permission';
 
     return $description;
   }

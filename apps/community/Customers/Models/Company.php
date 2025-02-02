@@ -46,7 +46,7 @@ class Company extends \HubletoMain\Core\Model
       'id_country' => (new Lookup($this, $this->translate('Country'), Country::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
       'company_id' => (new Varchar($this, $this->translate('Company ID'))),
-      'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
+      'tax_id' => (new Varchar($this, $this->translate('Tax ID')))->setRequired(),
       'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
@@ -84,54 +84,40 @@ class Company extends \HubletoMain\Core\Model
     ]);
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = $this->translate('Companies');
-    $description['ui']['addButtonText'] = $this->translate('Add Company');
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
-    $description['columns']['tags'] = ["title" => "Tags"];
+    $description = parent::tableDescribe();
+    $description->ui['title'] = $this->translate('Companies');
+    $description->ui['addButtonText'] = $this->translate('Add Company');
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+    $description->columns['tags'] = ["title" => "Tags"];
 
-    unset($description['columns']['street_line_1']);
-    unset($description['columns']['street_line_2']);
-    unset($description['columns']['city']);
-    unset($description['columns']['postal_code']);
-    unset($description['columns']['region']);
-    unset($description['columns']['id_country']);
-    unset($description['columns']['note']);
+    unset($description->columns['street_line_1']);
+    unset($description->columns['street_line_2']);
+    unset($description->columns['city']);
+    unset($description->columns['postal_code']);
+    unset($description->columns['region']);
+    unset($description->columns['id_country']);
+    unset($description->columns['note']);
 
     //nadstavit aby bol is_active posledný
-    $tempColumn = $description['columns']['is_active'];
-    unset($description['columns']['is_active']);
-    $description['columns']['is_active'] = $tempColumn;
+    $tempColumn = $description->columns['is_active'];
+    unset($description->columns['is_active']);
+    $description->columns['is_active'] = $tempColumn;
 
 
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
+  public function formDescribe(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe($description);
-    $description['defaultValues']['is_active'] = 0;
-    $description['defaultValues']['id_user'] = $this->main->auth->getUserId();
-    $description['defaultValues']['date_created'] = date("Y-m-d");
-    $description['includeRelations'] = [
-      'PERSONS',
-      'COUNTRY',
-      'FIRST_CONTACT',
-      'BILLING_ACCOUNTS',
-      'ACTIVITIES',
-      'TAGS',
-      'LEADS',
-      'DEALS',
-      'USER',
-      'DOCUMENTS',
-    ];
-    $description['permissions']['canRead'] = $this->main->permissions->granted($this->fullName . ':Read');
-    $description['permissions']['canCreate'] = $this->main->permissions->granted($this->fullName . ':Create');
-    $description['permissions']['canUpdate'] = $this->main->permissions->granted($this->fullName . ':Update');
-    $description['permissions']['canDelete'] = $this->main->permissions->granted($this->fullName . ':Delete');
+    $description = parent::formDescribe();
+
+    $description->defaultValues['is_active'] = 0;
+    $description->defaultValues['id_user'] = $this->main->auth->getUserId();
+    $description->defaultValues['date_created'] = date("Y-m-d");
+
     return $description;
   }
 

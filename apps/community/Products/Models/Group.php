@@ -15,14 +15,12 @@ class Group extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Product Groups';
-      $description["ui"]["addButtonText"] = $this->translate("Add product group");
-    }
+    $description->ui['title'] = 'Product Groups';
+    $description->ui["addButtonText"] = $this->translate("Add product group");
 
     return $description;
   }

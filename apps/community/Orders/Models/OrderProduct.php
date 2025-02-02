@@ -4,6 +4,10 @@ namespace HubletoApp\Community\Orders\Models;
 
 use HubletoApp\Community\Products\Models\Product;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Decimal;
+use \ADIOS\Core\Db\Column\Integer;
+
 class OrderProduct extends \HubletoMain\Core\Model
 {
   public string $table = 'order_products';
@@ -15,72 +19,32 @@ class OrderProduct extends \HubletoMain\Core\Model
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns,[
-      "id_product" => [
-        "type" => "lookup",
-        "model" => Product::class,
-        "title" => $this->translate("Product"),
-        "required" => true,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'RESTRICT',
-      ],
-
-      "id_order" => [
-        "type" => "lookup",
-        "model" => Order::class,
-        "title" => $this->translate("Order"),
-        "required" => true,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-      ],
-
-      "unit_price" => [
-        "type" => "float",
-        "title" => $this->translate("Unit Price"),
-        "required" => true,
-      ],
-
-      "amount" => [
-        "type" => "int",
-        "title" => $this->translate("Amount"),
-        "required" => true,
-      ],
-
-      "discount" => [
-        "type" => "int",
-        "title" => $this->translate("Dicount (%)"),
-        "required" => false,
-      ],
-
-      "tax" => [
-        "type" => "int",
-        "title" => $this->translate("Tax (%)"),
-        "required" => true,
-      ],
-
+    return parent::columns(array_merge($columns,[
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setRequired()->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
+      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
+      'unit_price' => (new Decimal($this, $this->translate('Unit price')))->setRequired(),
+      'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
+      'discount' => (new Integer($this, $this->translate('Discount (%)'))),
+      'tax' => (new Integer($this, $this->translate('Tax (%)')))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Order Products';
-      $description["ui"]["addButtonText"] = $this->translate("Add product");
-    }
+    $description->ui['title'] = 'Order Products';
+    $description->ui["addButtonText"] = $this->translate("Add product");
 
     if ($this->main->urlParamAsBool('idOrder') > 0) {
-      $description['permissions'] = [
+      $description->permissions = [
         'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
         'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
       ];
-      unset($description["columns"]);
-      unset($description["ui"]);
     }
 
     return $description;

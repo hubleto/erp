@@ -24,19 +24,17 @@ class CompanyDocument extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
     if ($this->main->urlParamAsBool('idCompany') > 0) {
-      $description['permissions'] = [
+      $description->permissions = [
         'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
         'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
       ];
-      unset($description["columns"]);
-      unset($description["ui"]);
     }
 
     return $description;

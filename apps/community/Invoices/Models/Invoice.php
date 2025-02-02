@@ -6,6 +6,11 @@ use \HubletoApp\Community\Customers\Models\Company;
 use \HubletoApp\Community\Settings\Models\User;
 use \HubletoApp\Community\Settings\Models\InvoiceProfile;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Text;
+use \ADIOS\Core\Db\Column\Date;
+
 class Invoice extends \HubletoMain\Core\Model {
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '{%TABLE%}.number';
@@ -18,21 +23,21 @@ class Invoice extends \HubletoMain\Core\Model {
     'ITEMS' => [ self::HAS_MANY, InvoiceItem::class, "id_invoice", "id" ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      "id_profile" => [ "type" => "lookup", "model" => InvoiceProfile::class, "title" => $this->translate("Profile") ],
-      "id_issued_by" => [ "type" => "lookup", "model" => User::class, "title" => $this->translate("Issued by") ],
-      "id_customer" => [ "type" => "lookup", "model" => Company::class, "title" => $this->translate("Customer") ],
-      "number" => [ "type" => "varchar", "title" => $this->translate("Number"), "description" => $this->translate("TIP: Number is auto-generated based on the pattern configured in the profile.") ],
-      "vs" => [ "type" => "varchar", "title" => $this->translate("Variable symbol") ],
-      "cs" => [ "type" => "varchar", "title" => $this->translate("Constant symbol") ],
-      "ss" => [ "type" => "varchar", "title" => $this->translate("Specific symbol") ],
-      "date_issue" => [ "type" => "date", "title" => $this->translate("Issued") ],
-      "date_delivery" => [ "type" => "date", "title" => $this->translate("Delivered") ],
-      "date_due" => [ "type" => "date", "title" => $this->translate("Due") ],
-      "date_payment" => [ "type" => "date", "title" => $this->translate("Payment") ],
-      "notes" => [ "type" => "text", "title" => $this->translate("Notes") ],
+    return parent::columns(array_merge($columns, [
+      'id_profile' => (new Lookup($this, $this->translate('Profile'), InvoiceProfile::class)),
+      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class)),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Company::class)),
+      'number' => (new Varchar($this, $this->translate('Number'))),
+      'vs' => (new Varchar($this, $this->translate('Variable symbol'))),
+      'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
+      'ss' => (new Varchar($this, $this->translate('Specific symbol'))),
+      'date_issue' => (new Date($this, $this->translate('Issued'))),
+      'date_delivery' => (new Date($this, $this->translate('Delivered'))),
+      'date_delivery' => (new Date($this, $this->translate('Due'))),
+      'date_due' => (new Date($this, $this->translate('Payment'))),
+      'notes' => (new Text($this, $this->translate('Notes'))),
     ]));
   }
 

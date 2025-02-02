@@ -5,6 +5,10 @@ namespace HubletoApp\Community\Deals\Models;
 use HubletoApp\Community\Services\Models\Service;
 use HubletoApp\Community\Deals\Models\Deal;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Integer;
+use \ADIOS\Core\Db\Column\Decimal;
+
 class DealService extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_services';
@@ -16,58 +20,28 @@ class DealService extends \HubletoMain\Core\Model
     'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_deal', 'id' ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'id_deal' => [
-        'type' => 'lookup',
-        'title' => 'Deal',
-        'model' => 'HubletoApp/Community/Deals/Models/Deal',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_service' => [
-        'type' => 'lookup',
-        'title' => 'Service',
-        'model' => 'HubletoApp/Community/Services/Models/Service',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      "unit_price" => [
-        "type" => "float",
-        "title" => "Unit Price",
-        "required" => true,
-      ],
-      "amount" => [
-        "type" => "int",
-        "title" => "Amount",
-        "required" => true,
-      ],
-      "discount" => [
-        "type" => "float",
-        "title" => "Dicount (%)",
-      ],
-      "tax" => [
-        "type" => "float",
-        "title" => "Tax (%)",
-      ],
+    return parent::columns(array_merge($columns, [
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setRequired(),
+      'id_service' => (new Lookup($this, $this->translate('Service'), Service::class))->setRequired(),
+      'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
+      'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
+      'discount' => new Decimal($this, $this->translate('Dicount (%)')),
+      'tax' => new Decimal($this, $this->translate('Tax (%)')),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
     $description = parent::tableDescribe();
-    if ($this->main->urlParamAsInteger('idDeal') > 0){
-      $description['permissions'] = [
+    if ($this->main->urlParamAsInteger('idDeal') > 0) {
+      $description->permissions = [
         'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
         'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
       ];
-      unset($description["columns"]);
-      unset($description["ui"]);
     }
 
     return $description;

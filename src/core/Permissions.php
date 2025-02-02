@@ -16,9 +16,9 @@ class Permissions extends \ADIOS\Core\Permissions {
 
     parent::__construct($main);
 
-    if ($this->main->db->isConnected) {
+    // if ($this->main->db->isConnected) {
       $this->administratorRoles = $this->loadAdministratorRoles();
-    }
+    // }
   }
 
   public function loadAdministratorRoles(): array
@@ -40,7 +40,7 @@ class Permissions extends \ADIOS\Core\Permissions {
   {
     $permissions = parent::loadPermissions();
 
-    if ($this->main->db->isConnected) {
+    // if ($this->main->db->isConnected) {
       $mUserRole = new UserRole($this->main);
 
       /** @var array<int, string> */
@@ -68,7 +68,7 @@ class Permissions extends \ADIOS\Core\Permissions {
           $permissions[$idCommonRole][] = (string) $rolePermission['permission'];
         }
       }
-    }
+    // }
 
     return $permissions;
   }

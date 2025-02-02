@@ -2,6 +2,10 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Integer;
+use \ADIOS\Core\Db\Column\Lookup;
+
 class PipelineStep extends \HubletoMain\Core\Model
 {
   public string $table = 'pipeline_steps';
@@ -12,40 +16,23 @@ class PipelineStep extends \HubletoMain\Core\Model
     'PIPELINE' => [ self::BELONGS_TO, Pipeline::class, 'id_pipeline', 'id' ]
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Name'),
-        'required' => true,
-      ],
-      'order' => [
-        'type' => 'int',
-        'title' => $this->translate('Order'),
-        'required' => true,
-      ],
-      'id_pipeline' => [
-        'type' => 'lookup',
-        'title' => $this->translate('Company'),
-        'model' => Pipeline::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
+      'order' => (new Integer($this, $this->translate('Order')))->setRequired(),
+      'id_pipeline' => (new Lookup($this, $this->translate("Pipeline"), Pipeline::class, 'CASCADE'))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Pipeline Steps';
-      $description['ui']['addButtonText'] = 'Add Pipeline Step';
-      $description['ui']['showHeader'] = true;
-      $description['ui']['showFooter'] = false;
-    }
+    $description->ui['title'] = 'Pipeline Steps';
+    $description->ui['addButtonText'] = 'Add Pipeline Step';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
 
     return $description;
   }

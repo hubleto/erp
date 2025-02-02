@@ -2,67 +2,64 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+
 class InvoiceProfile extends \ADIOS\Core\Model {
   public string $table = 'invoice_profiles';
   public ?string $lookupSqlValue = '{%TABLE%}.name';
   public string $eloquentClass = Eloquent\InvoiceProfile::class;
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      "name" => [ "type" => "varchar", "title" => $this->translate("Name") ],
-      "phone" => [ "type" => "varchar", "title" => $this->translate("Phone") ],
-      "email" => [ "type" => "varchar", "title" => $this->translate("E-mail") ],
-      "www" => [ "type" => "varchar", "title" => $this->translate("WWW") ],
-      "company_id" => [ "type" => "varchar", "title" => $this->translate("Company ID") ],
-      "tax_id" => [ "type" => "varchar", "title" => $this->translate("Tax ID") ],
-      "vat_id" => [ "type" => "varchar", "title" => $this->translate("VAT ID") ],
-      "streer_1" => [ "type" => "varchar", "title" => $this->translate("Street, line 1") ],
-      "streer_2" => [ "type" => "varchar", "title" => $this->translate("Street, line 2") ],
-      "zip" => [ "type" => "varchar", "title" => $this->translate("ZIP") ],
-      "city" => [ "type" => "varchar", "title" => $this->translate("City") ],
-      "country" => [ "type" => "varchar", "title" => $this->translate("Country") ],
-      "bank_name" => [ "type" => "varchar", "title" => $this->translate("Bank name") ],
-      "account_number" => [ "type" => "varchar", "title" => $this->translate("Account number") ],
-      "account_iban" => [ "type" => "varchar", "title" => $this->translate("Account IBAN") ],
-      "swift" => [ "type" => "varchar", "title" => $this->translate("SWIFT") ],
-      "numbering_pattern" => [ "type" => "varchar", "title" => $this->translate("Numbering pattern") ],
+    return parent::columns(array_merge($columns, [
+      'name' => (new Varchar($this, $this->translate('Name'))),
+      'phone' => (new Varchar($this, $this->translate('Phone'))),
+      'email' => (new Varchar($this, $this->translate('E-mail'))),
+      'www' => (new Varchar($this, $this->translate('WWW'))),
+      'company_id' => (new Varchar($this, $this->translate('Company ID'))),
+      'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
+      'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
+      'streer_1' => (new Varchar($this, $this->translate('Street, line 1'))),
+      'streer_2' => (new Varchar($this, $this->translate('Street, line 2'))),
+      'zip' => (new Varchar($this, $this->translate('ZIP'))),
+      'city' => (new Varchar($this, $this->translate('City'))),
+      'country' => (new Varchar($this, $this->translate('Country'))),
+      'bank_name' => (new Varchar($this, $this->translate('Bank name'))),
+      'account_number' => (new Varchar($this, $this->translate('Account number'))),
+      'account_iban' => (new Varchar($this, $this->translate('Account IBAN'))),
+      'swift' => (new Varchar($this, $this->translate('SWIFT'))),
+      'numbering_pattern' => (new Varchar($this, $this->translate('Numbering pattern'))),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (!is_array($description['ui'])) $description['ui'] = [];
-    $description['ui']['addButtonText'] = "Add invoice profile";
+    $description->ui['addButtonText'] = "Add invoice profile";
 
-    if (is_array($description['columns'])) {
-      unset($description['columns']['phone']);
-      unset($description['columns']['email']);
-      unset($description['columns']['www']);
-      unset($description['columns']['tax_id']);
-      unset($description['columns']['vat_id']);
-      unset($description['columns']['street_1']);
-      unset($description['columns']['street_2']);
-      unset($description['columns']['zip']);
-      unset($description['columns']['city']);
-      unset($description['columns']['country']);
-      unset($description['columns']['bank_name']);
-      unset($description['columns']['account_number']);
-      unset($description['columns']['swift']);
-    }
+    unset($description->columns['phone']);
+    unset($description->columns['email']);
+    unset($description->columns['www']);
+    unset($description->columns['tax_id']);
+    unset($description->columns['vat_id']);
+    unset($description->columns['street_1']);
+    unset($description->columns['street_2']);
+    unset($description->columns['zip']);
+    unset($description->columns['city']);
+    unset($description->columns['country']);
+    unset($description->columns['bank_name']);
+    unset($description->columns['account_number']);
+    unset($description->columns['swift']);
 
     return $description;
   }
 
-  public function formDescribe(array $description = []): array {
-    $description = parent::formDescribe($description);
+  public function formDescribe(): \ADIOS\Core\Description\Form
+  {
+    $description = parent::formDescribe();
 
-    $description['ui'] = [
-      'title' => 'Invoice profile',
-      'subTitle' => '',
-    ];
+    $description->ui['title'] = 'Invoice profile';
 
     return $description;
   }

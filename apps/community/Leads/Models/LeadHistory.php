@@ -8,6 +8,10 @@ use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\User;
 
+use \ADIOS\Core\Db\Column\Date;
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+
 class LeadHistory extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_histories';
@@ -18,39 +22,23 @@ class LeadHistory extends \HubletoMain\Core\Model
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead','id'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-
-      'change_date' => [
-        'type' => 'date',
-        'title' => 'Change Date',
-        'required' => true,
-      ],
-      'id_lead' => [
-        'type' => 'lookup',
-        'title' => 'Company',
-        'model' => 'HubletoApp/Community/Leads/Models/Lead',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'description' => [
-        'type' => 'varchar',
-        'title' => 'Description',
-        'required' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'change_date' => (new Date($this, $this->translate('Change Date')))->setRequired(),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
+      'description' => (new Varchar($this, $this->translate('Description')))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Leads';
-    $description['ui']['addButtonText'] = 'Add Lead';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
-    unset($description['columns']['note']);
+    $description = parent::tableDescribe();
+    $description->ui['title'] = 'Leads';
+    $description->ui['addButtonText'] = 'Add Lead';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+    unset($description->columns['note']);
     return $description;
   }
 

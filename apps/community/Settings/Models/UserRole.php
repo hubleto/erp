@@ -2,6 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Boolean;
+
 class UserRole extends \HubletoMain\Core\Model
 {
   const ROLE_ADMINISTRATOR = 1;
@@ -22,40 +25,24 @@ class UserRole extends \HubletoMain\Core\Model
     'PERMISSIONS' => [ self::HAS_MANY, RolePermission::class, 'id_role', 'id'],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy([
-      'role' => [
-        'type' => 'varchar',
-        'required' => true,
-        'title' => $this->translate('Role')
-      ],
-      'grant_all' => [
-        'type' => 'boolean',
-        'title' => $this->translate('Grant all permissions')
-      ],
-
+    return parent::columns([
+      'role' => (new Varchar($this, $this->translate("Role")))->setRequired(),
+      'grant_all' => (new Boolean($this, $this->translate("Grant all permissions (admin role)"))),
     ]);
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'User Roles';
-      $description['ui']['addButtonText'] = 'Add User Role';
-      $description['ui']['showHeader'] = true;
-      $description['ui']['showFooter'] = false;
-    }
+    $description->ui['title'] = 'User Roles';
+    $description->ui['addButtonText'] = 'Add User Role';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
 
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
-  {
-    $description = parent::formDescribe($description);
-    $description['includeRelations'] = ['PERMISSIONS'];
-    return $description;
-  }
 }

@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class RolePermission extends \HubletoMain\Core\Model
 {
   public string $table = 'role_permissions';
@@ -12,37 +14,21 @@ class RolePermission extends \HubletoMain\Core\Model
     'PERMISSION' => [ self::BELONGS_TO, Permission::class, 'id_permission', 'id' ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'id_permission' => [
-        'type' => 'lookup',
-        'title' => $this->translate('Permission'),
-        'model' => Permission::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_role' => [
-        'type' => 'lookup',
-        'title' => $this->translate('Role'),
-        'model' => UserRole::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'id_permission' => (new Lookup($this, $this->translate('Permission'), Permission::class))->setRequired(),
+      'id_role' => (new Lookup($this, $this->translate('Role'), UserRole::class))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
+    $description = parent::tableDescribe();
 
-    if (is_array($description['ui'])) {
-      $description['ui']['title'] = 'Role Permissions';
-      $description['ui']['showHeader'] = false;
-      $description['ui']['showFooter'] = false;
-    }
+    $description->ui['title'] = 'Role Permissions';
+    $description->ui['showHeader'] = false;
+    $description->ui['showFooter'] = false;
 
     return $description;
   }

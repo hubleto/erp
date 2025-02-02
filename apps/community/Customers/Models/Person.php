@@ -4,6 +4,12 @@ namespace HubletoApp\Community\Customers\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Text;
+use \ADIOS\Core\Db\Column\Boolean;
+use \ADIOS\Core\Db\Column\Date;
+
 class Person extends \HubletoMain\Core\Model
 {
   public string $table = 'persons';
@@ -17,71 +23,39 @@ class Person extends \HubletoMain\Core\Model
     'TAGS' => [ self::HAS_MANY, PersonTag::class, 'id_person', 'id' ],
   ];
 
-  public function columnsLegacy(array $columns = []): array
+  public function columns(array $columns = []): array
   {
-    return parent::columnsLegacy(array_merge($columns, [
-      'first_name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('First name'),
-        'required' => true,
-      ],
-      'last_name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Last name'),
-        'required' => true,
-      ],
-      'id_company' => [
-        'type' => 'lookup',
-        'title' => $this->translate('Company'),
-        'model' => Company::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => false,
-      ],
-      'is_main' => [
-        'type' => 'boolean',
-        'title' => $this->translate('Main Contact'),
-      ],
-      'note' => [
-        'type' => 'text',
-        'title' => $this->translate('Notes'),
-        'required' => false,
-      ],
-      'is_active' => [
-        'type' => 'boolean',
-        'title' => $this->translate('Active'),
-        'required' => false,
-        'default' => 1,
-      ],
-      'date_created' => [
-        'type' => 'date',
-        'title' => $this->translate('Date Created'),
-        'required' => true,
-        'readonly' => true,
-      ],
+    return parent::columns(array_merge($columns, [
+      'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
+      'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
+      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class)),
+      'is_main' => new Boolean($this, $this->translate('Main Contact')),
+      'note' => (new Text($this, $this->translate('Notes'))),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
+      'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
     ]));
   }
 
   //v tablePersons
-  public function tableDescribe(array $description = []): array
+  public function tableDescribe(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = $this->translate('Contact Persons');
-    $description['ui']['addButtonText'] = $this->translate('Add Contact Person');
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
-    $description['columns']['virt_email'] = ["title" => $this->translate("Emails")];
-    $description['columns']['virt_number'] = ["title" => $this->translate("Phone Numbers")];
-    unset($description['columns']['is_main']);
-    unset($description['columns']['note']);
+    $description = parent::tableDescribe();
+    $description->ui['title'] = $this->translate('Contact Persons');
+    $description->ui['addButtonText'] = $this->translate('Add Contact Person');
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+    $description->columns['virt_email'] = ["title" => $this->translate("Emails")];
+    $description->columns['virt_number'] = ["title" => $this->translate("Phone Numbers")];
+    unset($description->columns['is_main']);
+    unset($description->columns['note']);
 
     //nadstavit aby boli tieto stĺpce posledné
-    $tempColumn = $description['columns']['date_created'];
-    unset($description['columns']['date_created']);
-    $description['columns']['date_created'] = $tempColumn;
-    $tempColumn = $description['columns']['is_active'];
-    unset($description['columns']['is_active']);
-    $description['columns']['is_active'] = $tempColumn;
+    $tempColumn = $description->columns['date_created'];
+    unset($description->columns['date_created']);
+    $description->columns['date_created'] = $tempColumn;
+    $tempColumn = $description->columns['is_active'];
+    unset($description->columns['is_active']);
+    $description->columns['is_active'] = $tempColumn;
 
     if ($this->main->urlParamAsBool('idCompany') > 0) {
       $description['permissions'] = [
@@ -90,23 +64,16 @@ class Person extends \HubletoMain\Core\Model
         'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
       ];
-      unset($description["columns"]);
-      unset($description["ui"]);
     }
 
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
+  public function formDescribe(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe($description);
-    $description['defaultValues']['is_active'] = 1;
-    $description['defaultValues']['is_main'] = 0;
-    $description['includeRelations'] = [
-      /* 'ADDRESSES', */
-      'CONTACTS',
-      'TAGS'
-    ];
+    $description = parent::formDescribe();
+    $description->defaultValues['is_active'] = 1;
+    $description->defaultValues['is_main'] = 0;
     return $description;
   }
 

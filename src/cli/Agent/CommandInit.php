@@ -156,6 +156,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       );
     }
 
+    $this->cli->cyan("  -> Creating folders and files.\n");
+    $installer->createFoldersAndFiles();
+
     $this->cli->cyan("  -> Creating database.\n");
     $installer->createDatabase();
 
@@ -164,9 +167,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->cyan("  -> Adding default company profile and admin user.\n");
     $installer->addCompanyProfileAndAdminUser();
-
-    $this->cli->cyan("  -> Creating folders and files.\n");
-    $installer->createFoldersAndFiles();
 
     $this->cli->cyan("\n");
     $this->cli->cyan("All done! You're a fantastic CRM developer. Now you can:\n");

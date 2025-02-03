@@ -16,10 +16,6 @@ $config['coreClasses'] = [
   'Controllers/Desktop' => \HubletoMain\Controllers\Desktop::class,
 ];
 
-$config['db'] = [
-  'provider' => \ADIOS\Core\Db\Providers\MySQLi::class,
-];
-
 $config['auth'] = [
   'provider' => \HubletoMain\Core\Auth::class,
 ];

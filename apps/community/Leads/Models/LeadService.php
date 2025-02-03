@@ -23,8 +23,8 @@ class LeadService extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
-      'id_service' => (new Lookup($this, $this->translate('Service'), Service::class))->setRequired(),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired(),
+      'id_service' => (new Lookup($this, $this->translate('Service'), Service::class, 'CASCADE'))->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
       'discount' => new Decimal($this, $this->translate('Dicount (%)')),
@@ -42,6 +42,8 @@ class LeadService extends \HubletoMain\Core\Model
         'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
+      $description->columns = [];
+      $description->ui = [];
     }
 
     return $description;

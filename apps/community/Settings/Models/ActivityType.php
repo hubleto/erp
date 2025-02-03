@@ -18,7 +18,7 @@ class ActivityType extends \HubletoMain\Core\Model
       'name' => (new Varchar($this, $this->translate('Type'))),
       'color' => (new Color($this, $this->translate('Color'))),
       'calendar_visibility' => (new Boolean($this, $this->translate('Show in calendar'))),
-      'icon' => (new Varchar($this, $this->translate('TIconype'))),
+      'icon' => (new Varchar($this, $this->translate('Icon'))),
     ]);
   }
 

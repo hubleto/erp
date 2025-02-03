@@ -16,7 +16,7 @@ class Setting extends \HubletoMain\Core\Model
     return parent::columns([
       'key' => (new Varchar($this, $this->translate("Key")))->setRequired(),
       'value' => (new Text($this, $this->translate("Value"))),
-      'id_user' => (new Lookup($this, $this->translate("Only for user"), User::class, 'RESTRICT')),
+      'id_user' => (new Lookup($this, $this->translate("Only for user"), User::class)),
     ]);
   }
 

@@ -28,7 +28,7 @@ class Supplier extends \HubletoMain\Core\Model
       'order_email' => (new Varchar($this, $this->translate('Order email'))),
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'company_id' => (new Varchar($this, $this->translate('Company ID'))),
-      'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
+      'vat_id' => (new Varchar($this, $this->translate('VAT ID')))->setRequired(),
       'payment_account' => (new Varchar($this, $this->translate('Payment account number'))),
     ]));
   }

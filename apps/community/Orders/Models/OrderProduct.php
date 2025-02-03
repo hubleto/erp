@@ -23,7 +23,7 @@ class OrderProduct extends \HubletoMain\Core\Model
   {
     return parent::columns(array_merge($columns,[
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
-      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
+      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class, 'CASCADE'))->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
       'discount' => (new Integer($this, $this->translate('Discount (%)'))),
@@ -45,6 +45,8 @@ class OrderProduct extends \HubletoMain\Core\Model
         'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
+      $description->columns = [];
+      $description->ui = [];
     }
 
     return $description;

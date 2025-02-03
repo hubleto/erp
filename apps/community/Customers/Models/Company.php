@@ -84,9 +84,9 @@ class Company extends \HubletoMain\Core\Model
     ]);
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
     $description->ui['title'] = $this->translate('Companies');
     $description->ui['addButtonText'] = $this->translate('Add Company');
     $description->ui['showHeader'] = true;
@@ -110,9 +110,9 @@ class Company extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function formDescribe(): \ADIOS\Core\Description\Form
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe();
+    $description = parent::describeForm();
 
     $description->defaultValues['is_active'] = 0;
     $description->defaultValues['id_user'] = $this->main->auth->getUserId();

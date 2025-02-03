@@ -31,9 +31,9 @@ class Contact extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
     $description->ui['title'] = 'Contacts';
     $description->ui['addButtonText'] = 'Add Company';
     $description->ui['showHeader'] = true;

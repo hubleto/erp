@@ -31,9 +31,9 @@ class LeadHistory extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
     $description->ui['title'] = 'Leads';
     $description->ui['addButtonText'] = 'Add Lead';
     $description->ui['showHeader'] = true;

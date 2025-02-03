@@ -18,9 +18,9 @@ class Country extends \HubletoMain\Core\Model
     ]);
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
 
     $description->ui['title'] = 'Countries';
     $description->ui['addButtonText'] = 'Add Country';

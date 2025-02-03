@@ -32,9 +32,9 @@ class InvoiceProfile extends \ADIOS\Core\Model {
     ]));
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
 
     $description->ui['addButtonText'] = "Add invoice profile";
 
@@ -55,9 +55,9 @@ class InvoiceProfile extends \ADIOS\Core\Model {
     return $description;
   }
 
-  public function formDescribe(): \ADIOS\Core\Description\Form
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe();
+    $description = parent::describeForm();
 
     $description->ui['title'] = 'Invoice profile';
 

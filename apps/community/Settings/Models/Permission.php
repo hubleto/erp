@@ -17,9 +17,9 @@ class Permission extends \HubletoMain\Core\Model
     ]);
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
 
     $description->ui['title'] = 'Permissions';
     $description->ui['showHeader'] = false;
@@ -32,9 +32,9 @@ class Permission extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function formDescribe(): \ADIOS\Core\Description\Form
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe();
+    $description = parent::describeForm();
 
     $description->ui['title'] = 'Permission';
 

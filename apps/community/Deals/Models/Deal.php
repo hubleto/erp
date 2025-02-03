@@ -63,9 +63,9 @@ class Deal extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
     if ($this->main->urlParamAsBool("showArchive")) {
       $description->ui['title'] = "Deals Archive";
       $description->permissions = [
@@ -100,7 +100,7 @@ class Deal extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function formDescribe(): \ADIOS\Core\Description\Form
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
     $mSettings = new Setting($this->main);
     $defaultPipeline =(int) $mSettings->eloquent
@@ -109,7 +109,7 @@ class Deal extends \HubletoMain\Core\Model
       ->value
     ;
 
-    $description = parent::formDescribe();
+    $description = parent::describeForm();
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['id_deal_status'] = 1;
     $description->defaultValues['date_created'] = date("Y-m-d");

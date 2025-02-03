@@ -55,10 +55,10 @@ class Lead extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description["model"] = $this->fullName;
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
     if ($this->main->urlParamAsBool("showArchive")) {
       $description->ui['title'] = "Leads Archive";
       $description->permissions = [
@@ -91,9 +91,9 @@ class Lead extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function formDescribe(): \ADIOS\Core\Description\Form
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe();
+    $description = parent::describeForm();
 
     $description->defaultValues['id_company'] = null;
     $description->defaultValues['date_created'] = date("Y-m-d");

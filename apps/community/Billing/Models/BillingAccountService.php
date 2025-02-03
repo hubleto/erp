@@ -24,9 +24,9 @@ class BillingAccountService extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
     $description->ui['title'] = 'Connected Services';
     $description->ui['addButtonText'] = 'Connect a Service';
     $description->ui['showHeader'] = true;

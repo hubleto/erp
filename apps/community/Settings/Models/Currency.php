@@ -18,9 +18,9 @@ class Currency extends \HubletoMain\Core\Model
     ]);
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
 
     $description->ui['title'] = 'Currencies';
     $description->ui['addButtonText'] = 'Add currency';
@@ -30,9 +30,9 @@ class Currency extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function formDescribe(): \ADIOS\Core\Description\Form
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe();
+    $description = parent::describeForm();
 
     $id = $this->main->urlParamAsInteger('id');
 

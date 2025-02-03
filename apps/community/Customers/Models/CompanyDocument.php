@@ -24,9 +24,9 @@ class CompanyDocument extends \HubletoMain\Core\Model
     ]));
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
 
     if ($this->main->urlParamAsBool('idCompany') > 0) {
       $description->permissions = [

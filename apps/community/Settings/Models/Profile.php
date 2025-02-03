@@ -17,9 +17,9 @@ class Profile extends \HubletoMain\Core\Model
     ]);
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
 
     $description->ui['title'] = 'Profiles';
     $description->ui['addButtonText'] = 'Add Profile';

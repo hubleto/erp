@@ -33,9 +33,9 @@ class UserRole extends \HubletoMain\Core\Model
     ]);
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
 
     $description->ui['title'] = 'User Roles';
     $description->ui['addButtonText'] = 'Add User Role';

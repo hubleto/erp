@@ -65,9 +65,9 @@ class User extends \ADIOS\Models\User
     return $user;
   }
 
-  public function tableDescribe(): \ADIOS\Core\Description\Table
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description = parent::tableDescribe();
+    $description = parent::describeTable();
 
     $description->ui['title'] = 'Users';
     $description->ui['addButtonText'] = 'Add User';

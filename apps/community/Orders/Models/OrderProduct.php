@@ -38,7 +38,7 @@ class OrderProduct extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Order Products';
     $description->ui["addButtonText"] = $this->translate("Add product");
 
-    if ($this->main->urlParamAsBool('idOrder') > 0) {
+    if ($this->main->urlParamAsInteger('idOrder') > 0) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),

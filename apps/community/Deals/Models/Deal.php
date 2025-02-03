@@ -88,7 +88,7 @@ class Deal extends \HubletoMain\Core\Model
     unset($description->columns['id_lead']);
     unset($description->columns['id_pipeline']);
 
-    if ($this->main->urlParamAsBool('idCompany') > 0) {
+    if ($this->main->urlParamAsInteger('idCompany') > 0) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
@@ -158,7 +158,7 @@ class Deal extends \HubletoMain\Core\Model
     $mDealHistory = new DealHistory($this->main);
     $mDealHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
-      "id_deal" => $originalRecord["id"],
+      "id_deal" => $savedRecord["id"],
       "description" => "Deal created"
     ]);
 

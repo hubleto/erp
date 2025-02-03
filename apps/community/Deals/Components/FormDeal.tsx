@@ -339,7 +339,6 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                                               data.unit_price = returnData.unit_price;
                                               this.updateRecord({ SERVICES: table.state.data?.data });
                                               this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
-                                              console.log(table.state.data);
                                             })
                                           }}
                                         ></Lookup>
@@ -392,7 +391,8 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                                 if (!R.SERVICES) R.SERVICES = [];
                                 R.SERVICES.push({
                                   id: this.state.newEntryId,
-                                  id_lead: { _useMasterRecordId_: true },
+                                  id_deal: { _useMasterRecordId_: true },
+                                  amount: 1
                                 });
                                 this.setState({ record: R });
                                 this.setState({ newEntryId: this.state.newEntryId - 1 } as FormDealState);

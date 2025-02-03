@@ -79,7 +79,7 @@ class Lead extends \HubletoMain\Core\Model
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
 
-    if ($this->main->urlParamAsBool('idCompany') > 0) {
+    if ($this->main->urlParamAsInteger('idCompany') > 0) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
@@ -195,7 +195,7 @@ class Lead extends \HubletoMain\Core\Model
     $mLeadHistory = new LeadHistory($this->main);
     $mLeadHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
-      "id_lead" => $originalRecord["id"],
+      "id_lead" => $savedRecord["id"],
       "description" => "Lead created"
     ]);
 

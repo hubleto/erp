@@ -46,6 +46,8 @@ class Contact extends \HubletoMain\Core\Model
         'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
+      $description->columns = [];
+      $description->ui = [];
     }
 
     return $description;

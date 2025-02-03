@@ -46,9 +46,9 @@ class Lead extends \HubletoMain\Core\Model
       'price' => (new Decimal($this, $this->translate('Price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class, 'RESTRICT'))->setRequired(),
+      'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
       'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
-      'id_lead_status' => (new Lookup($this, $this->translate('Status'), LeadStatus::class, 'RESTRICT'))->setRequired(),
+      'id_lead_status' => (new Lookup($this, $this->translate('Status'), LeadStatus::class))->setRequired(),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
@@ -80,12 +80,14 @@ class Lead extends \HubletoMain\Core\Model
     unset($description->columns['is_archived']);
 
     if ($this->main->urlParamAsBool('idCompany') > 0) {
-      $description['permissions'] = [
+      $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
         'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
+      $description->columns = [];
+      $description->ui = [];
     }
 
     return $description;

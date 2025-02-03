@@ -7,6 +7,7 @@ use HubletoApp\Community\Settings\Models\Currency;
 use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Text;
 
 class Service extends \HubletoMain\Core\Model
 {
@@ -25,7 +26,7 @@ class Service extends \HubletoMain\Core\Model
       'price' => (new Decimal($this, $this->translate('Unit price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
       'unit' => (new Varchar($this, $this->translate('Unit'))),
-      'description' => (new Varchar($this, $this->translate('Description'))),
+      'description' => (new Text($this, $this->translate('Description'))),
     ]));
   }
 

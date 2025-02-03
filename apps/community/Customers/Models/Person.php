@@ -28,7 +28,7 @@ class Person extends \HubletoMain\Core\Model
     return parent::columns(array_merge($columns, [
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
-      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class)),
+      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class, 'CASCADE')),
       'is_main' => new Boolean($this, $this->translate('Main Contact')),
       'note' => (new Text($this, $this->translate('Notes'))),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
@@ -57,12 +57,14 @@ class Person extends \HubletoMain\Core\Model
     $description->columns['is_active'] = $tempColumn;
 
     if ($this->main->urlParamAsBool('idCompany') > 0) {
-      $description['permissions'] = [
+      $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
         'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
+      $description->columns = [];
+      $description->ui = [];
     }
 
     return $description;

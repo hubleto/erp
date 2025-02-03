@@ -31,7 +31,7 @@ class GetCompanyContacts extends \HubletoMain\Core\Controller {
       ];
     }
 
-    foreach ($persons as $person) {
+    foreach ($persons as $person) { //@phpstan-ignore-line
       $personArray[$person["id"]] = $person;
     }
 

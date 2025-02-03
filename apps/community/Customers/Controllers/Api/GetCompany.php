@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Customers\Controllers\Api;
 
 use HubletoApp\Community\Customers\Models\Company;
 use HubletoApp\Community\Customers\Models\Person;
-use Exception;
 
 class GetCompany extends \HubletoMain\Core\Controller
 {
@@ -36,14 +35,14 @@ class GetCompany extends \HubletoMain\Core\Controller
       }
 
       $companies = $companies->get()->toArray();
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       return [
         "status" => "failed",
         "error" => $e
       ];
     }
 
-    foreach ($companies as $company) {
+    foreach ($companies as $company) { //@phpstan-ignore-line
       $companyArray[$company["id"]] = $company;
     }
 

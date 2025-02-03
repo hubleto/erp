@@ -16,8 +16,9 @@ class DealHistory extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'deal_histories';
 
-
+  /** @return BelongsTo<Deal, covariant DealHistory> */
   public function DEAL(): BelongsTo {
     return $this->belongsTo(Deal::class, 'id_lead', 'id');
   }
+
 }

@@ -23,7 +23,7 @@ class Service extends \HubletoMain\Core\Model
     return parent::columns(array_merge($columns, [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'price' => (new Decimal($this, $this->translate('Unit price'))),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setRequired()->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
       'unit' => (new Varchar($this, $this->translate('Unit'))),
       'description' => (new Varchar($this, $this->translate('Description'))),
     ]));

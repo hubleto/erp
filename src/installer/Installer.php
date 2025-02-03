@@ -29,7 +29,7 @@ class Installer {
 
   public bool $randomize = false;
 
-  /** @var array<string> */
+  /** @var array<string, array<string, mixed>> */
   public array $appsToInstall = [];
 
   public array $packages = [

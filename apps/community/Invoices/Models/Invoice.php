@@ -35,8 +35,8 @@ class Invoice extends \HubletoMain\Core\Model {
       'ss' => (new Varchar($this, $this->translate('Specific symbol'))),
       'date_issue' => (new Date($this, $this->translate('Issued'))),
       'date_delivery' => (new Date($this, $this->translate('Delivered'))),
-      'date_delivery' => (new Date($this, $this->translate('Due'))),
-      'date_due' => (new Date($this, $this->translate('Payment'))),
+      'date_due' => (new Date($this, $this->translate('Due'))),
+      'date_payment' => (new Date($this, $this->translate('Payment'))),
       'notes' => (new Text($this, $this->translate('Notes'))),
     ]));
   }

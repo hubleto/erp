@@ -12,9 +12,12 @@ class DealTag extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'deal_tags';
 
+  /** @return BelongsTo<Deal, covariant DealTag> */
   public function DEAL(): BelongsTo {
     return $this->belongsTo(Deal::class, 'id_deal', 'id');
   }
+
+  /** @return BelongsTo<Tag, covariant DealTag> */
   public function TAG(): BelongsTo {
     return $this->belongsTo(Tag::class, 'id_tag', 'id');
   }

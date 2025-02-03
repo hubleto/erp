@@ -10,7 +10,9 @@ class DealActivity extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'deal_activities';
 
+  /** @return BelongsTo<Deal, covariant DealActivity> */
   public function DEAL(): BelongsTo {
     return $this->belongsTo(Deal::class, 'id_deal', 'id');
   }
+
 }

@@ -23,7 +23,7 @@ class CalendarManager
     }
   }
 
-  /** @var array<string, \HubletoMain\Core\Calendar> */
+  /** @return array<string, \HubletoMain\Core\Calendar> */
   public function getCalendars(): array
   {
     return $this->calendars;

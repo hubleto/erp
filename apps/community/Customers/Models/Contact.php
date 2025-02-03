@@ -23,8 +23,9 @@ class Contact extends \HubletoMain\Core\Model
     return parent::columns(array_merge($columns, [
       'id_person' => (new Lookup($this, $this->translate('Person'), Person::class))->setRequired(),
       'id_contact_type' => (new Lookup($this, $this->translate('Contact Category'), ContactType::class))->setRequired(),
-      'type' => (new Varchar($this, $this->translate('Type')))->setRequired()
+      'type' => (new Varchar($this, $this->translate('Type')))
         ->setEnumValues(['email' => $this->translate('Email'), 'number' => $this->translate('Phone Number'), 'other' => $this->translate('Other')])
+        ->setRequired()
       ,
       'value' => (new Varchar($this, $this->translate('Value')))->setRequired(),
     ]));
@@ -40,10 +41,10 @@ class Contact extends \HubletoMain\Core\Model
 
     if ($this->main->urlParamAsBool('idPerson') > 0) {
       $description->permissions = [
-        'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
-        'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
-        'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
-        'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
+        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
     }
 

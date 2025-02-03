@@ -8,7 +8,8 @@ use HubletoApp\Community\Settings\Models\RolePermission;
 
 class GetPermissions extends \HubletoMain\Core\Controller
 {
-  private $MVCNamespaces = [
+
+  private array $MVCNamespaces = [
     "Models",
     "Controllers",
     "Api"
@@ -19,13 +20,13 @@ class GetPermissions extends \HubletoMain\Core\Controller
     $allPermissions = [];
     $sortedAllPermissions = [];
     $rolePermissions = [];
-    $roleId = $this->main->urlParamAsInteger("roleId") ?? null;
+    $roleId = $this->main->urlParamAsInteger("roleId");
 
     try {
       $mPermission = new Permission($this->main);
       $allPermissions = $mPermission->eloquent->orderBy("permission", "asc")->get()->toArray();
 
-      foreach ($allPermissions as $permission) {
+      foreach ($allPermissions as $permission) { //@phpstan-ignore-line
         /*
           [0] => HubletoApp namespace
           [1] => App Version
@@ -37,7 +38,7 @@ class GetPermissions extends \HubletoMain\Core\Controller
         $appNamespace = "";
         $MVCNamespace = "";
         $modPermission = [];
-        $explodedStrings = explode("/", $permission["permission"]);
+        $explodedStrings = explode("/", (string) $permission["permission"]);
 
         //capture the namespace of the app
         if (isset($explodedStrings[2])) $appNamespace = $explodedStrings[2];
@@ -54,7 +55,7 @@ class GetPermissions extends \HubletoMain\Core\Controller
         } else $sortedAllPermissions[$appNamespace]["Other"][] = $permission;
       }
 
-      if ($roleId && $roleId > 0) {
+      if ($roleId > 0) {
         $mRolePermission = new RolePermission($this->main);
         $rolePermissions = $mRolePermission->eloquent->where("id_role", $roleId)->pluck("id_permission")->toArray();
       } else $rolePermissions = [];

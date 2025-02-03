@@ -119,7 +119,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->main->setConfig('db_name', $dbName);
 
     $this->cli->cyan("\n");
-    $this->cli->cyan("Hurray. Installing your Hubleto packages: " . join(", ", explode(",", $packagesToInstall)) . "\n");
+    $this->cli->cyan("Hurray. Installing your Hubleto packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
 
     // install
     $installer = new \HubletoMain\Installer\Installer(
@@ -146,7 +146,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $installer->appsToInstall = [];
     foreach (explode(',', (string) $packagesToInstall) as $package) {
       $package = trim((string) $package);
+
+      /** @var array<string, array<string, mixed>> */
       $appsInPackage = (is_array($installer->packages[$package]) ? $installer->packages[$package] : []);
+
       $installer->appsToInstall = array_merge(
         $installer->appsToInstall,
         $appsInPackage

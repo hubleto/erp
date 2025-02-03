@@ -11,10 +11,10 @@ class SavePermissions extends \HubletoMain\Core\Controller
 {
   public function renderJson(): ?array
   {
-    $roleId = (int) $this->main->urlParamAsInteger("roleId") ?? null;
-    $rolePermissions = $this->main->urlParamAsArray("permissions") ?? [];
-    $roleTitle = $this->main->urlParamAsString("roleTitle") ?? "";
-    $grantAll = $this->main->urlParamAsBool("grantAll") ?? false;
+    $roleId = $this->main->urlParamAsInteger("roleId");
+    $rolePermissions = $this->main->urlParamAsArray("permissions");
+    $roleTitle = $this->main->urlParamAsString("roleTitle");
+    $grantAll = $this->main->urlParamAsBool("grantAll");
 
     if ($roleId > 0) {
       try {

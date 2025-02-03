@@ -10,9 +10,12 @@ class DealService extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'deal_services';
 
+  /** @return BelongsTo<Deal, covariant DealService> */
   public function DEAL(): BelongsTo {
     return $this->belongsTo(Deal::class, 'id_deal', 'id');
   }
+
+  /** @return BelongsTo<Service, covariant DealService> */
   public function SERVICE(): BelongsTo {
     return $this->belongsTo(Service::class, 'id_service', 'id');
   }

@@ -22,7 +22,7 @@ class OrderProduct extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns,[
-      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setRequired()->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
@@ -40,10 +40,10 @@ class OrderProduct extends \HubletoMain\Core\Model
 
     if ($this->main->urlParamAsBool('idOrder') > 0) {
       $description->permissions = [
-        'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
-        'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
-        'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
-        'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
+        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
     }
 

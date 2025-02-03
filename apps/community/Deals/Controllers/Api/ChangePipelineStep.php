@@ -33,7 +33,7 @@ class ChangePipelineStep extends \HubletoMain\Core\Controller
         $mDealHistory->eloquent->create([
           "change_date" => date("Y-m-d"),
           "id_deal" => $deal->id,
-          "description" => "Pipeline step changed to ".$step->name
+          "description" => "Pipeline step changed to " . (string) $step->name
         ]);
       } catch (Exception $e) {
         return [

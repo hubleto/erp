@@ -12,9 +12,12 @@ class PersonTag extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'person_tags';
 
+  /** @return BelongsTo<Tag, covariant PersonTag> */
   public function TAG() {
     return $this->belongsTo(Tag::class, 'id_tag', 'id');
   }
+
+  /** @return BelongsTo<Person, covariant PersonTag> */
   public function PERSON(): BelongsTo {
     return $this->belongsTo(Person::class, 'id_person', 'id');
   }

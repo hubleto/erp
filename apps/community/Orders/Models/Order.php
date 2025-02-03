@@ -28,7 +28,7 @@ class Order extends \HubletoMain\Core\Model
   {
     return parent::columns(array_merge($columns,[
       'order_number' => (new Varchar($this, $this->translate('Order number')))->setReadonly(),
-      'id_company' => (new Lookup($this, $this->translate('Customer'), Company::class))->setRequired()->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
+      'id_company' => (new Lookup($this, $this->translate('Customer'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'price' => (new Decimal($this, $this->translate('Price')))->setReadonly(),
       'date_order' => (new Date($this, $this->translate('Order date')))->setRequired(),
       'required_delivery_date' => (new Date($this, $this->translate('Required delivery date')))->setRequired(),

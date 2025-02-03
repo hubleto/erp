@@ -46,11 +46,11 @@ class Deal extends \HubletoMain\Core\Model
   {
     return parent::columns(array_merge($columns, [
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setRequired()->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
+      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setReadonly()->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'price' => (new Decimal($this, $this->translate('Price')))->setRequired(),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setRequired()->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL'),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setRequired(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class, 'RESTRICT')),
       'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
@@ -90,10 +90,10 @@ class Deal extends \HubletoMain\Core\Model
 
     if ($this->main->urlParamAsBool('idCompany') > 0) {
       $description['permissions'] = [
-        'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
-        'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
-        'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
-        'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
+        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
     }
 
@@ -160,11 +160,7 @@ class Deal extends \HubletoMain\Core\Model
       "description" => "Deal created"
     ]);
 
-    return (array) $this->main->dispatchEventToPlugins("onModelAfterCreate", [
-      "model" => $this,
-      "data" => $originalRecord,
-      "returnValue" => $savedRecord,
-    ])["returnValue"];
+    return $savedRecord;
   }
 
   public function getOwnership(array $record): void

@@ -36,7 +36,6 @@ class Person extends \HubletoMain\Core\Model
     ]));
   }
 
-  //v tablePersons
   public function tableDescribe(): \ADIOS\Core\Description\Table
   {
     $description = parent::tableDescribe();
@@ -59,10 +58,10 @@ class Person extends \HubletoMain\Core\Model
 
     if ($this->main->urlParamAsBool('idCompany') > 0) {
       $description['permissions'] = [
-        'canRead' => $this->app->permissions->granted($this->fullName . ':Read'),
-        'canCreate' => $this->app->permissions->granted($this->fullName . ':Create'),
-        'canUpdate' => $this->app->permissions->granted($this->fullName . ':Update'),
-        'canDelete' => $this->app->permissions->granted($this->fullName . ':Delete'),
+        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
     }
 

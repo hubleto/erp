@@ -28,7 +28,7 @@ class CompanyActivity extends \HubletoMain\Core\Model
     return parent::columns(array_merge($columns, [
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class, 'CASCADE'))->setRequired()->setReadonly(),
       'id_person' => (new Lookup($this, $this->translate('Contact Person'), Person::class, 'CASCADE')),
-      'id_person' => (new Lookup($this, $this->translate('Contact Person'), ActivityType::class, 'SET NULL'))->setRequired(),
+      'id_activity_type' => (new Lookup($this, $this->translate('Contact Person'), ActivityType::class, 'SET NULL'))->setRequired(),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),
       'date_start' => (new Date($this, $this->translate('Start Date')))->setRequired(),
       'time_start' => (new Time($this, $this->translate('Start Time'))),

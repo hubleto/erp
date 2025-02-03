@@ -17,7 +17,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
       $dateEnd = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("end")));
     } else {
       $dateStart = date("Y-m-d H:i:s");
-      $dateEnd = date("Y-m-d H:i:s", strtotime("tommorow"));
+      $dateEnd = date("Y-m-d H:i:s", strtotime("+1 day"));
     }
 
     $mCompanyActivity = new CompanyActivity($this->main);

@@ -8,9 +8,8 @@ class Pipeline extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'pipelines';
 
-  /** @return HasMany<PipelineStep, covariant Pipeline> */
-  public function PIPELINE_STEPS(): HasMany
+  public function PIPELINE_STEPS(): HasMany //@phpstan-ignore-line
   {
-    return $this->hasMany(PipelineStep::class, 'id_pipeline', 'id' )->orderBy('order', 'asc');
+    return $this->hasMany(PipelineStep::class, 'id_pipeline', 'id')->orderBy('order', 'asc'); //@phpstan-ignore-line
   }
 }

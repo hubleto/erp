@@ -80,7 +80,7 @@ class AppManager
 
   public function getApp(string $appClass): null|\HubletoMain\Core\App
   {
-    if (isset($this->apps[$appClass])) return $this->app[$appClass];
+    if (isset($this->apps[$appClass])) return $this->apps[$appClass];
     else return null;
   }
 
@@ -90,7 +90,7 @@ class AppManager
     return isset($apps[$appClass]) && is_array($apps[$appClass]) && isset($apps[$appClass]['installedOn']);
   }
 
-  /** @param array<string, string> $appConfig */
+  /** @param array<string, mixed> $appConfig */
   public function installApp(string $appClass, array $appConfig, bool $forceInstall = false): bool
   {
 

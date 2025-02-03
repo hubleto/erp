@@ -52,7 +52,7 @@ class Deal extends \HubletoMain\Core\Model
       'price' => (new Decimal($this, $this->translate('Price')))->setRequired(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setRequired(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class, 'RESTRICT')),
+      'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
       'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
@@ -89,12 +89,14 @@ class Deal extends \HubletoMain\Core\Model
     unset($description->columns['id_pipeline']);
 
     if ($this->main->urlParamAsBool('idCompany') > 0) {
-      $description['permissions'] = [
+      $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
         'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
         'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
+      $description->columns = [];
+      $description->ui = [];
     }
 
     return $description;

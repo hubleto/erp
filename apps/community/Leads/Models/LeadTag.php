@@ -20,7 +20,7 @@ class LeadTag extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_lead' => (new Lookup($this, $this->translate('LeaD'), LeaD::class))->setRequired(),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
       'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class))->setRequired(),
     ]));
   }

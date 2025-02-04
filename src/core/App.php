@@ -55,6 +55,20 @@ class App {
     ($this->createTestInstance($test))->run();
   }
 
+  /** @return array<string> */
+  public function getAllTests(): array
+  {
+    $tests = [];
+    $testFiles = (array) @scandir($this->rootFolder . '/Tests');
+    foreach ($testFiles as $testFile) {
+      if (substr($testFile, -4) == '.php') {
+        $tests[] = substr($testFile, 0, -4);
+      }
+    }
+
+    return $tests;
+  }
+
   /**
   * @return array|array<string, array<string, string>>
   */

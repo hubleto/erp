@@ -23,7 +23,7 @@ class Address extends \HubletoMain\Core\Model
     return parent::columns(array_merge($columns, [
       'id_person' => (new Lookup($this, $this->translate("Person"), Person::class, 'CASCADE'))->setRequired(),
       'street_line_1' => (new Varchar($this, $this->translate("Street Line 1")))->setRequired(),
-      'street_line_2' => (new Varchar($this, $this->translate("Street Line 2")))->setRequired(),
+      'street_line_2' => (new Varchar($this, $this->translate("Street Line 2"))),
       'region' => (new Varchar($this, $this->translate("Region")))->setRequired(),
       'city' => (new Varchar($this, $this->translate("City")))->setRequired(),
       'postal_code' => (new Varchar($this, $this->translate("Postal Code")))->setRequired(),

@@ -101,7 +101,7 @@ export default class FormPipeline<P, S> extends Form<FormPipelineProps,FormPipel
               <div className='card-body'>
                 <InputTable
                   uid={this.props.uid + '_table_pipeline_steps_input'}
-                  {...this.getDefaultInputProps()}
+                  {...this.getInputProps()}
                   value={R.PIPELINE_STEPS}
                   onChange={(value: any) => {
                     this.updateRecord({ PIPELINE_STEPS: value });

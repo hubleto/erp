@@ -184,7 +184,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   <div className='grow'>
                     {this.inputWrapper('title', {readonly: R.is_archived})}
                     <FormInput title={"Company"}>
-                      <Lookup {...this.getDefaultInputProps()}
+                      <Lookup {...this.getInputProps()}
                         model='HubletoApp/Community/Customers/Models/Company'
                         endpoint={`customers/get-company`}
                         readonly={R.is_archived}
@@ -199,7 +199,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                       ></Lookup>
                     </FormInput>
                     <FormInput title={"Contact Person"}>
-                      <Lookup {...this.getDefaultInputProps()}
+                      <Lookup {...this.getInputProps()}
                         model='HubletoApp/Community/Customers/Models/Person'
                         customEndpointParams={{id_company: R.id_company}}
                         readonly={R.is_archived}
@@ -242,7 +242,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                     {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                     <FormInput title='Tags'>
-                      <InputTags2 {...this.getDefaultInputProps()}
+                      <InputTags2 {...this.getInputProps()}
                         value={this.state.record.TAGS}
                         readonly={R.is_archived}
                         model='HubletoApp/Community/Settings/Models/Tag'
@@ -281,7 +281,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                               cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
                                 return (
                                   <FormInput>
-                                    <Lookup {...this.getDefaultInputProps()}
+                                    <Lookup {...this.getInputProps()}
                                       model='HubletoApp/Community/Services/Models/Service'
                                       cssClass='min-w-44'
                                       value={data.id_service}

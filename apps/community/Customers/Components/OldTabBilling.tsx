@@ -46,7 +46,7 @@
                     <div className="grid grid-cols-2 gap-4">
                       <label className="input-label self-center">Billing Account Description</label>
                       <InputVarchar
-                        {...this.getDefaultInputProps()}
+                        {...this.getInputProps()}
                         value={input.description}
                         /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
                         placeholder={globalThis.main.translate(
@@ -68,7 +68,7 @@
                   <div className="card-body">
                     <InputTable
                       uid={this.props.uid + "_table_services_input"}
-                      {...this.getDefaultInputProps()}
+                      {...this.getInputProps()}
                       value={R.BILLING_ACCOUNTS[key].SERVICES ?? null}
                       /* isInlineEditing={this.state.isInlineEditingBillingAccounts} */
                       onChange={(value: any) => {

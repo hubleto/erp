@@ -158,11 +158,11 @@ class Deal extends \HubletoMain\Core\Model
     $mDealHistory = new DealHistory($this->main);
     $mDealHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
-      "id_deal" => $originalRecord["id"],
+      "id_deal" => $savedRecord["id"],
       "description" => "Deal created"
     ]);
 
-    return $savedRecord;
+    return parent::onAfterCreate($originalRecord, $savedRecord);
   }
 
   public function getOwnership(array $record): void

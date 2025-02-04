@@ -121,7 +121,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                   {this.inputWrapper('first_name')}
                   {this.inputWrapper('last_name')}
                   <FormInput title={"Company"}>
-                    <Lookup {...this.getDefaultInputProps()}
+                    <Lookup {...this.getInputProps()}
                       model='HubletoApp/Community/Customers/Models/Company'
                       endpoint={`customers/get-company`}
                       value={R.id_company}
@@ -132,7 +132,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     ></Lookup>
                   </FormInput>
                   <FormInput title='Tags'>
-                    <InputTags2 {...this.getDefaultInputProps()}
+                    <InputTags2 {...this.getInputProps()}
                       value={this.state.record.TAGS}
                       model='HubletoApp/Community/Settings/Models/Tag'
                       targetColumn='id_person'
@@ -158,7 +158,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
               <div className='card-body'>
                 <InputTable
                   uid={this.props.uid + '_table_contacts_input'}
-                  {...this.getDefaultInputProps()}
+                  {...this.getInputProps()}
                   value={R.CONTACTS}
                   onChange={(value: any) => {
                     this.updateRecord({ CONTACTS: value });
@@ -171,6 +171,16 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     customEndpointParams={{idPerson: R.id}}
                     description={{
                       columns: {
+                        type: {
+                          type: 'varchar',
+                          title: 'Contact Type',
+                          enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
+                          //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
+                        },
+                        value: { type: 'varchar', title: 'Value'},
+                        id_contact_type: { type: 'lookup', title: 'Contact Category', model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                      },
+                      inputs: {
                         type: {
                           type: 'varchar',
                           title: 'Contact Type',

@@ -190,7 +190,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     <div className='grow'>
                       {this.inputWrapper('title', {readonly: R.is_archived})}
                       <FormInput title={"Company"} required={true}>
-                        <Lookup {...this.getDefaultInputProps()}
+                        <Lookup {...this.getInputProps()}
                           model='HubletoApp/Community/Customers/Models/Company'
                           endpoint={`customers/get-company`}
                           value={R.id_company}
@@ -205,7 +205,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         ></Lookup>
                       </FormInput>
                       <FormInput title={"Contact Person"}>
-                        <Lookup {...this.getDefaultInputProps()}
+                        <Lookup {...this.getInputProps()}
                           model='HubletoApp/Community/Customers/Models/Person'
                           customEndpointParams={{id_company: R.id_company}}
                           endpoint={`customers/get-company-contacts`}
@@ -242,7 +242,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                       {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                       <FormInput title='Tags'>
-                        <InputTags2 {...this.getDefaultInputProps()}
+                        <InputTags2 {...this.getInputProps()}
                           value={this.state.record.TAGS}
                           readonly={R.is_archived}
                           model='HubletoApp/Community/Settings/Models/Tag'
@@ -265,7 +265,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       <div className='card-header'>Deal Progress</div>
                       <div className='card-body'>
                         <FormInput title={"Pipeline"}>
-                          <Lookup {...this.getDefaultInputProps()}
+                          <Lookup {...this.getInputProps()}
                             readonly={R.is_archived}
                             model='HubletoApp/Community/Settings/Models/Pipeline'
                             value={R.id_pipeline}
@@ -323,7 +323,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                                   cellRenderer: ( table: TableDealServices, data: any, options: any): JSX.Element => {
                                     return (
                                       <FormInput>
-                                        <Lookup {...this.getDefaultInputProps()}
+                                        <Lookup {...this.getInputProps()}
                                           model='HubletoApp/Community/Services/Models/Service'
                                           cssClass='min-w-44'
                                           value={data.id_service}

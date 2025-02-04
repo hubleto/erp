@@ -62,7 +62,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
       <>
         {this.inputWrapper('id_deal')}
         <FormInput title={"Contact Person"}>
-          <Lookup {...this.getDefaultInputProps()}
+          <Lookup {...this.getInputProps()}
             model='HubletoApp/Community/Customers/Models/Person'
             endpoint={`customers/get-company-contacts`}
             customEndpointParams={{id_company: this.props.idCompany}}

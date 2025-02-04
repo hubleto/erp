@@ -195,7 +195,7 @@ class Lead extends \HubletoMain\Core\Model
     $mLeadHistory = new LeadHistory($this->main);
     $mLeadHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
-      "id_lead" => $originalRecord["id"],
+      "id_lead" => $savedRecord["id"],
       "description" => "Lead created"
     ]);
 

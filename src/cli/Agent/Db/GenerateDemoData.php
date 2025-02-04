@@ -16,6 +16,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
   public function run(): void
   {
+
+    $this->main->permissions->DANGEROUS__grantAllPermissions();
+  
     $this->cli->cyan("Generating demo data...\n");
 
     $mProfile = new \HubletoApp\Community\Settings\Models\Profile($this->main);
@@ -26,7 +29,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $idProfile = 1; // plati za predpokladu, ze tento command sa spusta hned po CommandInit
 
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
-    $idUserSalesManager = $mUser->eloquent->create([
+    $idUserSalesManager = $mUser->recordCreate([
       "first_name" => "Sales",
       "last_name" => "Manager",
       "email" => "test@user.sk",
@@ -34,16 +37,16 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       "is_active" => true,
       "login" => "sales.manager",
       "password" => password_hash("sales.manager", PASSWORD_DEFAULT),
-    ])->id;
+    ]);
 
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
-    $mUserHasRole->eloquent->create([
+    $mUserHasRole->recordCreate([
       "id_user" => $idUserSalesManager,
       "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_SALES_MANAGER,
     ]);
 
     $mInvoiceProfile = new \HubletoApp\Community\Settings\Models\InvoiceProfile($this->main);
-    $mInvoiceProfile->eloquent->create(['name' => 'Test Profile 1']);
+    $mInvoiceProfile->recordCreate(['name' => 'Test Profile 1']);
 
     //Documents
     $mDocuments = new \HubletoApp\Community\Documents\Models\Document($this->main);
@@ -95,15 +98,17 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $this->generateProducts($mProduct,$mGroup, $mSupplier);
 
     $this->cli->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
+
+    $this->main->permissions->revokeGrantAllPermissions();
   }
 
   public function generateInvoiceProfiles(): void
   {
     $mInvoiceProfile = new \HubletoApp\Community\Settings\Models\InvoiceProfile($this->main);
     $mInvoiceProfile->install();
-    $mInvoiceProfile = $mInvoiceProfile->eloquent->create([
+    $mInvoiceProfile = $mInvoiceProfile->recordCreate([
       "name" => "Test Invoice Profile"
-    ])->id;
+    ]);
   }
 
   public function generateTags(): void
@@ -111,13 +116,13 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $mTag = new \HubletoApp\Community\Settings\Models\Tag($this->main);
 
-    $mTag->eloquent->create([
+    $mTag->recordCreate([
       'name' => "Category 1",
     ]);
-    $mTag->eloquent->create([
+    $mTag->recordCreate([
       'name' => "Category 2",
     ]);
-    $mTag->eloquent->create([
+    $mTag->recordCreate([
       'name' => "Category 3",
     ]);
   }
@@ -235,7 +240,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     foreach ($companies as $companyCsvData) {
       $company = explode(",", trim($companyCsvData));
 
-      $idCompany = $mCompany->eloquent->create([
+      $idCompany = $mCompany->recordCreate([
         "id_country" => $company[0],
         "company_id" => $company[1],
         "name" => $company[2],
@@ -250,11 +255,11 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "is_active" => 1,
         "id_user" => 1,
         "date_created" => date("Y-m-d", rand(1722456000, strtotime("now"))),
-      ])->id;
+      ]);
 
       $tagCount = rand(0, 3);
       for ($i = 0; $i < $tagCount; $i++) {
-        $mCompanyTag->eloquent->create([
+        $mCompanyTag->recordCreate([
           "id_company" => $idCompany,
           "id_tag" => rand(1, 3)
         ]);
@@ -425,7 +430,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ];
 
     foreach ($persons as $person) {
-      $idPerson = $mPerson->eloquent->create([
+      $idPerson = $mPerson->recordCreate([
         "id_company" => rand(1, 100),
         "first_name" => $person[2],
         "last_name" => $person[3],
@@ -433,9 +438,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "is_main" => rand(0, 1),
         "is_active" => 1,
         "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
-      ])->id;
+      ]);
 
-      $mContact->eloquent->create([
+      $mContact->recordCreate([
         "id_person" => $idPerson,
         "type" => "email",
         "value" => str_replace("'", "", (string) iconv('UTF-8', 'ASCII//TRANSLIT', $person[7])),
@@ -443,7 +448,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       ]);
 
       $phoneNumber = "+421 9" . rand(0, 3) . rand(4, 8) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9);
-      $mContact->eloquent->create([
+      $mContact->recordCreate([
         "id_person" => $idPerson,
         "type" => "number",
         "value" => $phoneNumber,
@@ -452,13 +457,13 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
       $tagCount = rand(0, 3);
       for ($i = 0; $i < $tagCount; $i++) {
-        $mPersonTag->eloquent->create([
+        $mPersonTag->recordCreate([
           "id_person" => $idPerson,
           "id_tag" => rand(1, 3)
         ]);
       }
 
-      $mAddress->eloquent->create([
+      $mAddress->recordCreate([
         "id_person" => $idPerson,
         "street_line_1" => $streets[rand(0, 9)],
         "street_line_2" => "",
@@ -508,7 +513,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   //           break;
   //       }
 
-  //       $activityId = $mActivity->eloquent->create([
+  //       $activityId = $mActivity->recordCreate([
   //         "id_activity_type" => $activityType,
   //         "subject" => $randomSubject,
   //         "date_start" => $date,
@@ -516,9 +521,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   //         "id_user" => 1,
   //         "id_company" => $company->id,
   //         "id_person" => null,
-  //       ])->id;
+  //       ]);
 
-  //       $mCompanyActivity->eloquent->create([
+  //       $mCompanyActivity->recordCreate([
   //         "id_company" => $company->id,
   //         "id_activity" => $activityId
   //       ]);
@@ -536,7 +541,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     //Create all services
     foreach ($serviceNames as $serviceName) {
-      $mService->eloquent->create([
+      $mService->recordCreate([
         "name" => $serviceName,
         "price" => rand(10,100),
         "id_currency" => 1,
@@ -546,13 +551,13 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     //Generate Billing Accounts and connect Services to them
     /* foreach ($companies as $company) {
       $NOServices = rand(1, count($serviceNames));
-      $idBillingAccount = $mBillingAccount->eloquent->create([
+      $idBillingAccount = $mBillingAccount->recordCreate([
         "id_company" => $company->id,
         "description" => "Fakturácia",
-      ])->id;
+      ]);
 
       for ($i = 0; $i < $NOServices; $i++) {
-        $mBillingAccountService->eloquent->create([
+        $mBillingAccountService->recordCreate([
           "id_billing_account" => $idBillingAccount,
           "id_service" => rand(1, count($serviceNames) - 1)
         ]);
@@ -560,13 +565,13 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     }
     foreach ($companies as $company) {
       $NOServices = rand(1, count($serviceNames));
-      $idBillingAccount = $mBillingAccount->eloquent->create([
+      $idBillingAccount = $mBillingAccount->recordCreate([
         "id_company" => $company->id,
         "description" => "Objednávky",
-      ])->id;
+      ]);
 
       for ($i = 0; $i < $NOServices; $i++) {
-        $mBillingAccountService->eloquent->create([
+        $mBillingAccountService->recordCreate([
           "id_billing_account" => $idBillingAccount,
           "id_service" => rand(1, count($serviceNames) - 1)
         ]);
@@ -600,7 +605,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $leadDateCreated = date("Y-m-d", $leadDateCreatedTs);
       $leadDateClose = date("Y-m-d", $leadDateCreatedTs + rand(4, 6)*24*3600);
 
-      $idLead = $mLead->eloquent->create([
+      $idLead = $mLead->recordCreate([
         "title" => $titles[rand(0, count($titles)-1)],
         "id_company" => $company->id,
         "id_person" => $person->id,
@@ -612,15 +617,15 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "is_archived" => false,
         "id_lead_status" => rand(1,4),
         "date_created" => $leadDateCreated,
-      ])->id;
+      ]);
 
-      $mLeadHistory->eloquent->create([
+      $mLeadHistory->recordCreate([
         "description" => "Lead created",
         "change_date" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
         "id_lead" => $idLead
       ]);
 
-      $mLeadActivity->eloquent->create([
+      $mLeadActivity->recordCreate([
         "subject" => "Follow-up call",
         "date_start" => $leadDateCreated,
         "id_lead" => $idLead,
@@ -629,7 +634,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_user" => 1,
       ]);
 
-      $mLeadTag->eloquent->create([
+      $mLeadTag->recordCreate([
         "id_lead" => $idLead,
         "id_tag" => rand(1,3)
       ]);
@@ -658,7 +663,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $dealDateCreated = date("Y-m-d", $dealDateCreatedTs);
       $dealDateClose = date("Y-m-d", $dealDateCreatedTs + rand(4, 6)*24*3600);
 
-      $idDeal = $mDeal->eloquent->create([
+      $idDeal = $mDeal->recordCreate([
         "title" => $lead->title,
         "id_company" => $lead->id_company,
         "id_person" => $lead->id_person,
@@ -673,9 +678,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_lead" => $lead->id,
         "id_deal_status" => rand(1,4),
         "date_created" => $dealDateCreated,
-      ])->id;
+      ]);
 
-      $mLeadHistory->eloquent->create([
+      $mLeadHistory->recordCreate([
         "description" => "Converted to a deal",
         "change_date" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
         "id_lead" => $lead->id
@@ -687,7 +692,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       ;
 
       foreach ($leadHistories as $leadHistory) { // @phpstan-ignore-line
-        $mDealHistory->eloquent->create([
+        $mDealHistory->recordCreate([
           "description" => $leadHistory->description,
           "change_date" => $leadHistory->change_date,
           "id_deal" => $idDeal
@@ -699,7 +704,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         ->first()
       ;
 
-      $mDealActivity->eloquent->create([
+      $mDealActivity->recordCreate([
         "subject" => "Follow-up call",
         "date_start" => $dealDateCreated,
         "id_deal" => $idDeal,
@@ -708,7 +713,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_user" => 1,
       ]);
 
-      $mDealTag->eloquent->create([
+      $mDealTag->recordCreate([
         "id_deal" => $idDeal,
         "id_tag" => $leadTag->id_tag
       ]);
@@ -721,30 +726,33 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     \HubletoApp\Community\Products\Models\Supplier $mSupplier,
   ): void {
 
-    $mGroup->eloquent->create([
+    $mGroup->recordCreate([
       "title" => "Food"
     ]);
-    $mGroup->eloquent->create([
+    $mGroup->recordCreate([
       "title" => "Furniture"
     ]);
-    $mGroup->eloquent->create([
+    $mGroup->recordCreate([
       "title" => "Dry foods"
     ]);
-    $mGroup->eloquent->create([
+    $mGroup->recordCreate([
       "title" => "Liquids"
     ]);
 
     $mCountry = new Country($this->main);
 
-    $mSupplier->eloquent->create([
+    $mSupplier->recordCreate([
+      "vat_id" => "GB123562563",
       "title" => "Fox Foods",
       "id_country" => $mCountry->eloquent->inRandomOrder()->first()->id,
     ]);
-    $mSupplier->eloquent->create([
+    $mSupplier->recordCreate([
+      "vat_id" => "CZ123562563",
       "title" => "Bořek Furniture",
       "id_country" => $mCountry->eloquent->inRandomOrder()->first()->id,
     ]);
-    $mSupplier->eloquent->create([
+    $mSupplier->recordCreate([
+      "vat_id" => "FR123562563",
       "title" => "Denise's Dry Goods",
       "id_country" => $mCountry->eloquent->inRandomOrder()->first()->id,
     ]);
@@ -781,7 +789,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ];
 
     foreach ($products as $product) {
-      $idProduct = $mProduct->eloquent->create([
+      $idProduct = $mProduct->recordCreate([
         "title" => $product[0],
         "unit_price" => $product[1],
         "margin" => $product[2],
@@ -789,7 +797,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "unit" => $product[4],
         "id_product_group" => rand(1,4),
         "id_supplier" => rand(1,3),
-      ])->id;
+      ]);
     }
   }
 }

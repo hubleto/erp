@@ -219,7 +219,7 @@ export default class FormCompany<P, S> extends Form<
                     {this.inputWrapper("is_active")}
                     <FormInput title="Tags">
                       <InputTags2
-                        {...this.getDefaultInputProps()}
+                        {...this.getInputProps()}
                         value={this.state.record.TAGS}
                         model="HubletoApp/Community/Settings/Models/Tag"
                         targetColumn="id_company"

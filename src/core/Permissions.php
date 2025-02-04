@@ -10,6 +10,8 @@ class Permissions extends \ADIOS\Core\Permissions {
 
   public \HubletoMain $main;
 
+  protected bool $grantAllPermissions = false;
+
   function __construct(\HubletoMain $main)
   {
     $this->main = $main;
@@ -19,6 +21,14 @@ class Permissions extends \ADIOS\Core\Permissions {
     if ($this->main->configAsString('db_name') !== '') {
       $this->administratorRoles = $this->loadAdministratorRoles();
     }
+  }
+
+  public function DANGEROUS__grantAllPermissions() {
+    $this->grantAllPermissions = true;
+  }
+
+  public function revokeGrantAllPermissions() {
+    $this->grantAllPermissions = false;
   }
 
   public function loadAdministratorRoles(): array
@@ -71,5 +81,14 @@ class Permissions extends \ADIOS\Core\Permissions {
     }
 
     return $permissions;
+  }
+
+  public function granted(string $permission, array $userRoles = []) : bool
+  {
+    if ($this->grantAllPermissions) {
+      return true;
+    } else {
+      return parent::granted($permission, $userRoles);
+    }
   }
 }

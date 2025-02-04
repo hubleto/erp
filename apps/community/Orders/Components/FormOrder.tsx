@@ -143,7 +143,7 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
                           cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
                             return (
                               <FormInput>
-                                <Lookup {...this.getDefaultInputProps()}
+                                <Lookup {...this.getInputProps()}
                                   ref={lookupElement}
                                   model='HubletoApp/Community/Products/Models/Product'
                                   cssClass='min-w-44'

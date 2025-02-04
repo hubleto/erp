@@ -351,6 +351,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                           R.SERVICES.push({
                             id: this.state.newEntryId,
                             id_lead: { _useMasterRecordId_: true },
+                            amount: 1,
                           });
                           this.setState({ record: R });
                           this.setState({ newEntryId: this.state.newEntryId - 1 } as FormLeadState);

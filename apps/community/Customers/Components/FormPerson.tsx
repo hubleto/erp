@@ -168,7 +168,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                     uid={this.props.uid + '_table_contacts'}
                     context="Hello World"
                     descriptionSource="both"
-                    customEndpointParams={{idPerson: R.id}}
+                    customEndpointParams={{inForm: true}}
                     description={{
                       columns: {
                         type: {

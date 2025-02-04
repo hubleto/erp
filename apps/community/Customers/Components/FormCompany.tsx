@@ -348,7 +348,7 @@ export default class FormCompany<P, S> extends Form<
                   columns: {
                     title: { type: "varchar", title: "Title" },
                     price: { type: "float", title: "Amount" },
-                    id_currency: { type: "lookup", title: "Amount", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                 }}
@@ -408,7 +408,7 @@ export default class FormCompany<P, S> extends Form<
                   columns: {
                     title: { type: "varchar", title: "Title" },
                     price: { type: "float", title: "Amount" },
-                    id_currency: { type: "lookup", title: "Amount", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                 }}

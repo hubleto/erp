@@ -39,7 +39,7 @@ class Contact extends \HubletoMain\Core\Model
     $description->ui['showHeader'] = true;
     $description->ui['showFooter'] = false;
 
-    if ($this->main->urlParamAsBool('idPerson') > 0) {
+    if ($this->main->urlParamAsBool('inForm') == true) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),

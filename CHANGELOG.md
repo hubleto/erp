@@ -1,6 +1,10 @@
 # Hubleto CHANGELOG
 
-## Release v0.6 (not released yet)
+## Release v0.7 (not released yet)
+
+  * improved unit testing
+
+## Release v0.6
 
   * fixed CORS for assets
   * compatibility fixes for Tailwind CSS 4 and other npm packages

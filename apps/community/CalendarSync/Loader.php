@@ -19,7 +19,8 @@ class Loader extends \HubletoMain\Core\App
     $this->main->sidebar->addLink(1, 100, 'calendar-sources', $this->translate('Calendar sources'), 'fas fa-calendar', str_starts_with($this->main->requestedUri, 'calendar-sources'));
   }
 
-  public function installTables() {
+  public function installTables(): void
+  {
     $mSource = new \HubletoApp\Community\CalendarSync\Models\Source($this->main);
 
     $mSource->dropTableIfExists()->install();

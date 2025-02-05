@@ -18,7 +18,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   {
 
     $this->main->permissions->DANGEROUS__grantAllPermissions();
-  
+
     $this->cli->cyan("Generating demo data...\n");
 
     $mProfile = new \HubletoApp\Community\Settings\Models\Profile($this->main);
@@ -444,7 +444,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_person" => $idPerson,
         "type" => "email",
         "value" => str_replace("'", "", (string) iconv('UTF-8', 'ASCII//TRANSLIT', $person[7])),
-        "id_contact_type" => rand(1,2),
+        "id_contact_category" => rand(1,2),
       ]);
 
       $phoneNumber = "+421 9" . rand(0, 3) . rand(4, 8) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9);
@@ -452,7 +452,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_person" => $idPerson,
         "type" => "number",
         "value" => $phoneNumber,
-        "id_contact_type" => rand(1,2),
+        "id_contact_category" => rand(1,2),
       ]);
 
       $tagCount = rand(0, 3);

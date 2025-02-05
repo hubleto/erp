@@ -15,14 +15,14 @@ class Contact extends \HubletoMain\Core\Model
 
   public array $relations = [
     'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],
-    'CONTACT_TYPE' => [ self::HAS_ONE, ContactType::class, 'id_contact_type', 'id'],
+    'CONTACT_TYPE' => [ self::HAS_ONE, ContactType::class, 'id_contact_category', 'id'],
   ];
 
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
       'id_person' => (new Lookup($this, $this->translate('Person'), Person::class))->setRequired(),
-      'id_contact_type' => (new Lookup($this, $this->translate('Contact Category'), ContactType::class))->setRequired(),
+      'id_contact_category' => (new Lookup($this, $this->translate('Contact Category'), ContactType::class))->setRequired(),
       'type' => (new Varchar($this, $this->translate('Type')))
         ->setEnumValues(['email' => $this->translate('Email'), 'number' => $this->translate('Phone Number'), 'other' => $this->translate('Other')])
         ->setRequired()

@@ -178,7 +178,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                           //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
                         },
                         value: { type: 'varchar', title: 'Value'},
-                        id_contact_type: { type: 'lookup', title: 'Contact Category', model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                        id_contact_category: { type: 'lookup', title: 'Contact Category', model: 'HubletoApp/Community/Settings/Models/ContactType' },
                       },
                       inputs: {
                         type: {
@@ -188,7 +188,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                           //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
                         },
                         value: { type: 'varchar', title: 'Value'},
-                        id_contact_type: { type: 'lookup', title: 'Contact Category', model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                        id_contact_category: { type: 'lookup', title: 'Contact Category', model: 'HubletoApp/Community/Settings/Models/ContactType' },
                       }
                     }}
                   ></TableContacts>

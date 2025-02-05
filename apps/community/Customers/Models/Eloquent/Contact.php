@@ -17,7 +17,7 @@ class Contact extends \HubletoMain\Core\ModelEloquent
 
   /** @return BelongsTo<ContactType, covariant Contact> */
   public function CONTACT_TYPE(): BelongsTo {
-    return $this->belongsTo(ContactType::class, 'id_contact_type', 'id');
+    return $this->belongsTo(ContactType::class, 'id_contact_category', 'id');
   }
 
 }

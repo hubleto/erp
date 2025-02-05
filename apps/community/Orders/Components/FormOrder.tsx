@@ -179,6 +179,48 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
                             }
                           }
                         },
+                      },
+                      inputs: {
+                        id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                          cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
+                            return (
+                              <FormInput>
+                                <Lookup {...this.getInputProps()}
+                                  ref={lookupElement}
+                                  model='HubletoApp/Community/Products/Models/Product'
+                                  cssClass='min-w-44'
+                                  value={data.id_product}
+                                  onChange={(value: any) => {
+                                    getLookupData();
+
+                                    if (lookupData[value]) {
+                                      data.id_product = value;
+                                      data.unit_price = lookupData[value].unit_price;
+                                      data.tax = lookupData[value].tax;
+                                      this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                      this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
+                                    }
+                                  }}
+                                ></Lookup>
+                              </FormInput>
+                            )
+                          }
+                        },
+                        amount: { type: "int", title: "Amount" },
+                        unit_price: { type: "float", title: "Unit Price"},
+                        tax: { type: "float", title: "Tax (%)"},
+                        discount: { type: "float", title: "Discount (%)" },
+                        __sum: { type: "none", title: "Sum after tax",
+                          cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
+                            if (data.unit_price && data.amount) {
+                              let sum = data.unit_price * data.amount;
+                              if (data.tax) sum = sum + (sum * (data.tax / 100));
+                              if (data.discount) sum = sum - (sum * (data.discount / 100));
+                              sum = Number(sum.toFixed(2));
+                              return (<><span>{sum}</span></>);
+                            }
+                          }
+                        },
                       }
                     }}
                     isUsedAsInput={true}
@@ -214,6 +256,10 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
                   canRead: true,
                 },
                 columns: {
+                  short_description: { type: "text", title: "Short Description" },
+                  date: { type: "datetime", title: "Date Time"},
+                },
+                inputs: {
                   short_description: { type: "text", title: "Short Description" },
                   date: { type: "datetime", title: "Date Time"},
                 }

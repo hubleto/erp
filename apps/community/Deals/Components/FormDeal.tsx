@@ -368,6 +368,57 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                                   },
                                 },
                                 },
+                                inputs: {
+                                  id_service: { type: "lookup", title: "Service",
+                                  model: "HubletoApp/Community/Services/Models/Service",
+                                  cellRenderer: ( table: TableDealServices, data: any, options: any): JSX.Element => {
+                                    return (
+                                      <FormInput>
+                                        <Lookup {...this.getInputProps()}
+                                          model='HubletoApp/Community/Services/Models/Service'
+                                          cssClass='min-w-44'
+                                          value={data.id_service}
+                                          onChange={(value: any) => {
+                                            fetch(globalThis.main.config.rewriteBase + '/services/get-service-price?serviceId='+value)
+                                            .then(response => {
+                                              if (!response.ok) {
+                                                throw new Error('Network response was not ok ' + response.statusText);
+                                              }
+                                              return response.json();
+                                            }).then(returnData => {
+                                              data.id_service = value;
+                                              data.unit_price = returnData.unit_price;
+                                              this.updateRecord({ SERVICES: table.state.data?.data });
+                                              this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
+                                            })
+                                          }}
+                                        ></Lookup>
+                                      </FormInput>
+                                    )
+                                  },
+                                  },
+                                  unit_price: { type: "float", title: "Unit Price" },
+                                  amount: { type: "int", title: "Amount" },
+                                  discount: { type: "float", title: "Discount (%)" },
+                                  tax: { type: "float", title: "Tax (%)" },
+                                  __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableDealServices, data: any, options: any): JSX.Element => {
+                                    if (data.unit_price && data.amount) {
+                                      var sum = data.unit_price * data.amount
+                                      if (data.discount) {
+                                        sum = sum - (sum * (data.discount / 100))
+                                      }
+                                      if (data.tax) {
+                                        sum = sum - (sum * (data.tax / 100))
+                                      }
+                                      sum = Number(sum.toFixed(2));
+                                      return (<>
+                                          <span>{sum} {R.CURRENCY.code}</span>
+                                        </>
+                                      );
+                                    }
+                                  },
+                                },
+                                },
                               }}
                               isUsedAsInput={true}
                               isInlineEditing={this.state.isInlineEditing}
@@ -471,6 +522,9 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     showHeader: false,
                   },
                   columns: {
+                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                  },
+                  inputs: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
                   }
                 }}

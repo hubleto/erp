@@ -96,6 +96,7 @@ class Deal extends \HubletoMain\Core\Model
         'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
       ];
       $description->columns = [];
+      $description->inputs = [];
       $description->ui = [];
     }
 

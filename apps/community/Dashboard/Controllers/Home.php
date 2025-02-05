@@ -6,7 +6,7 @@ class Home extends \HubletoMain\Core\Controller {
 
   public function init(): void
   {
-    switch ($this->main->auth->user['language']) {
+    switch ($this->main->auth->getUserLanguage()) {
       case 'sk':
         $this->main->help->addHotTip('sk/zakaznici/vytvorenie-noveho-kontaktu', 'Pridať nový kontakt');
       break;

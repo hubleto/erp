@@ -4,6 +4,8 @@ namespace HubletoApp\Community\Customers\Models;
 
 use HubletoApp\Community\Settings\Models\Tag;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class CompanyTag extends \HubletoMain\Core\Model
 {
   public string $table = 'company_tags';
@@ -17,33 +19,18 @@ class CompanyTag extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_company' => [
-        'type' => 'lookup',
-        'title' => 'Company',
-        'model' => 'HubletoApp/Community/Customers/Models/Company',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_tag' => [
-        'type' => 'lookup',
-        'title' => 'Tag',
-        'model' => 'HubletoApp/Community/Settings/Models/Tag',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class, 'CASCADE'))->setRequired(),
+      'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class, 'CASCADE'))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['title'] = 'Company Categories';
-    $description['ui']['addButtonText'] = 'Add Company';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+    $description = parent::describeTable();
+    $description->ui['title'] = 'Company Categories';
+    $description->ui['addButtonText'] = 'Add Company';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
     return $description;
   }
 

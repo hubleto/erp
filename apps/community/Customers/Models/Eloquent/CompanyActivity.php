@@ -10,6 +10,7 @@ class CompanyActivity extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'company_activities';
 
+  /** @return BelongsTo<Company, covariant CompanyActivity> */
   public function COMPANY(): BelongsTo {
     return $this->belongsTo(Company::class, 'id_company', 'id');
   }

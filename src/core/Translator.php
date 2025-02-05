@@ -3,14 +3,21 @@
 namespace HubletoMain\Core;
 
 class Translator extends \ADIOS\Core\Translator {
+  public \HubletoMain $main;
+
+  public function __construct(\HubletoMain $app)
+  {
+    parent::__construct($app);
+    $this->main = $app;
+  }
 
 
   public function getRootContext(string $context): string
   {
-    foreach ($this->main->getRegisteredApps() as $module) {
-      if (empty($module->translationRootContext)) continue;
-      if (str_starts_with($context, $module->translationRootContext)) {
-        return $module->translationRootContext;
+    foreach ($this->main->appManager->getRegisteredApps() as $app) {
+      if (empty($app->translationRootContext)) continue;
+      if (str_starts_with($context, $app->translationRootContext)) {
+        return $app->translationRootContext;
       }
     }
 
@@ -21,13 +28,13 @@ class Translator extends \ADIOS\Core\Translator {
   {
     $dictionaryFilename = '';
 
-    if (empty($language)) $language = $this->main->config['language'] ?? 'en';
+    if (empty($language)) $language = $this->main->configAsString('language', 'en');
     if (empty($language)) $language = 'en';
 
-    foreach ($this->main->getRegisteredApps() as $module) {
-      if (empty($module->translationRootContext)) continue;
-      if (str_starts_with($context, $module->translationRootContext)) {
-        $dictionaryFilename = $module->rootFolder . '/Lang/' . $language . '.json';
+    foreach ($this->main->appManager->getRegisteredApps() as $app) {
+      if (empty($app->translationRootContext)) continue;
+      if (str_starts_with($context, $app->translationRootContext)) {
+        $dictionaryFilename = $app->rootFolder . '/Lang/' . $language . '.json';
       }
     }
 
@@ -36,10 +43,12 @@ class Translator extends \ADIOS\Core\Translator {
     return $dictionaryFilename;
   }
 
-  public function addToDictionary(string $string, string $context, string $toLanguage) {
+  public function addToDictionary(string $string, string $context, string $toLanguage): void
+  {
     $dictionaryFile = $this->getDictionaryFilename($context, $toLanguage);
     $rootContext = $this->getRootContext($context);
-    $this->dictionary[$context][$string] = '';
+
+    $this->dictionary[$context][$string] = ''; // @phpstan-ignore-line
 
     if (!empty($dictionaryFile) && is_file($dictionaryFile)) {
       $dictionaryFiltered = [];
@@ -61,34 +70,48 @@ class Translator extends \ADIOS\Core\Translator {
     }
   }
 
+  /**
+  * @return array|array<string, array<string, string>>
+  */
+  public function loadDictionaryFromJsonFile(string $jsonFile): array
+  {
+    return (array) @json_decode((string) file_get_contents($jsonFile), true);
+  }
+
+  /**
+  * @return array|array<string, array<string, string>>
+  */
   public function loadDictionary(string $language = ""): array
   {
     $dictionary = [];
 
     if (strlen($language) == 2) {
       $dictFilename = __DIR__ . '/../../lang/' . $language . '.json';
-      if (is_file($dictFilename)) $dictionary = @json_decode(file_get_contents($dictFilename), true);
-    }
-
-    foreach ($this->main->getRegisteredApps() as $module) {
-      $mDict = $module->loadDictionary($language);
-      foreach ($mDict as $key => $value) {
-        $dictionary[$module->translationRootContext . '.' . $key] = $value;
+      if (is_file($dictFilename)) {
+        $dictionary = $this->loadDictionaryFromJsonFile($dictFilename);
       }
     }
 
-    // var_dump($dictionary);exit;
+    foreach ($this->main->appManager->getRegisteredApps() as $app) {
+      $mDict = $app->loadDictionary($language);
+      foreach ($mDict as $key => $value) {
+        $dictionary[$app->translationRootContext . '.' . (string) $key] = $value;
+      }
+    }
 
     return $dictionary;
   }
 
-  public function translate(string $string, array $vars = [], string $context = "core", $toLanguage = ""): string
+  /**
+  * @param array<string, string> $vars
+  */
+  public function translate(string $string, array $vars = [], string $context = "core", string $toLanguage = ""): string
   {
     if (empty($toLanguage)) {
-      $toLanguage = $this->main->config['language'] ?? "en";
+      $toLanguage = $this->main->configAsString('language', 'en');
     }
 
-    if ($toLanguage == "en") {
+    if ($toLanguage == 'en') {
       $translated = $string;
     } else {
       if (empty($this->dictionary)) {
@@ -97,8 +120,8 @@ class Translator extends \ADIOS\Core\Translator {
 
       $translated = '';
 
-      if (isset($this->dictionary[$context][$string])) {
-        $translated = $this->dictionary[$context][$string];
+      if (isset($this->dictionary[$context][$string])) { // @phpstan-ignore-line
+        $translated = (string) $this->dictionary[$context][$string];
       }
 
       if (empty($translated) && $toLanguage != 'en') {

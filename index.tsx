@@ -7,6 +7,8 @@ import Invoices from './apps/community/Invoices/Loader'
 import Settings from './apps/community/Settings/Loader'
 import Leads from './apps/community/Leads/Loader'
 import Deals from './apps/community/Deals/Loader'
+import Products from './apps/community/Products/Loader'
+import Orders from './apps/community/Orders/Loader'
 
 //@ts-ignore
 const main: HubletoMain = new HubletoMain(window.ConfigEnv);
@@ -19,6 +21,8 @@ main.registerApp(Invoices);
 main.registerApp(Settings);
 main.registerApp(Leads);
 main.registerApp(Deals);
+main.registerApp(Products);
+main.registerApp(Orders);
 
 // Render react elements into body
 main.renderReactElements();

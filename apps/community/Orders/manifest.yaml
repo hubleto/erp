@@ -1,0 +1,17 @@
+namespace: HubletoApp\Community\Orders
+rootUrlSlug: orders
+name: Orders
+author:
+  name: "Richard Ondrejka"
+  nick: "rindo789"
+  company: "wai.blue"
+  github: "https://github.com/rindo789"
+  linkedin: "https://www.linkedin.com/in/richard-ondrejka/"
+highlight: Default order managment.
+requires:
+ - HubletoApp\Community\Products\Loader
+ - HubletoApp\Community\Customers\Loader
+tags:
+  - e-commerce
+  - products
+  - orders

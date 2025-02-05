@@ -4,6 +4,8 @@ namespace HubletoApp\Community\Deals\Models;
 
 use HubletoApp\Community\Documents\Models\Document;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class DealDocument extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_documents';
@@ -17,22 +19,26 @@ class DealDocument extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_deal' => [
-        'type' => 'lookup',
-        'title' => 'Deal',
-        'model' => 'HubletoApp/Community/Deals/Models/Deal',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_document' => [
-        'type' => 'lookup',
-        'title' => 'Document',
-        'model' => 'HubletoApp/Community/Documents/Models/Document',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class, 'CASCADE'))->setRequired(),
+      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
     ]));
+  }
+
+  public function describeTable(): \ADIOS\Core\Description\Table
+  {
+    $description = parent::describeTable();
+    if ($this->main->urlParamAsInteger('idLead') > 0){
+      $description->permissions = [
+        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
+      ];
+      $description->columns = [];
+      $description->inputs = [];
+      $description->ui = [];
+    }
+
+    return $description;
   }
 }

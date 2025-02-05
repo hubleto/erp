@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Customers\Controllers;
 
 class Companies extends \HubletoMain\Core\Controller {
 
-
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

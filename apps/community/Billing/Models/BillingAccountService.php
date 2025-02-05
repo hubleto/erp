@@ -4,6 +4,8 @@ namespace HubletoApp\Community\Billing\Models;
 
 use HubletoApp\Community\Services\Models\Service;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class BillingAccountService extends \HubletoMain\Core\Model
 {
   public string $table = 'billing_accounts_services';
@@ -17,33 +19,18 @@ class BillingAccountService extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_billing_account' => [
-        'type' => 'lookup',
-        'title' => 'Billing Account',
-        'model' => 'HubletoApp/Community/Billing/Models/BillingAccount',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_service' => [
-        'type' => 'lookup',
-        'title' => 'Service',
-        'model' => 'HubletoApp/Community/Services/Models/Service',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+      'id_billing_account' => (new Lookup($this, $this->translate("Billing Account"), BillingAccount::class, 'CASCADE'))->setRequired(),
+      'id_service' => (new Lookup($this, $this->translate("Service"), Service::class, 'CASCADE'))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Connected Services';
-    $description['ui']['addButtonText'] = 'Connect a Service';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+    $description = parent::describeTable();
+    $description->ui['title'] = 'Connected Services';
+    $description->ui['addButtonText'] = 'Connect a Service';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
     return $description;
   }
 

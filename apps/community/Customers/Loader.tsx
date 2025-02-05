@@ -8,6 +8,7 @@ import CoreCustomersTableContacts from "./Components/TableContacts"
 export default class Loader {
   uid: string = 'customers';
   constructor(app: HubletoMain) {
+  console.log('customers constructor');
     app.registerReactComponent('CoreCustomersTablePersons', CoreCustomersTablePersons);
     app.registerReactComponent('CoreCustomersTableCompanies', CoreCustomersTableCompanies);
     app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableActivities);

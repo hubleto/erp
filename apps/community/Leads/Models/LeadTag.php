@@ -5,6 +5,8 @@ namespace HubletoApp\Community\Leads\Models;
 use HubletoApp\Community\Settings\Models\Tag;
 use HubletoApp\Community\Leads\Models\Lead;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class LeadTag extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_tags';
@@ -18,30 +20,15 @@ class LeadTag extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_lead' => [
-        'type' => 'lookup',
-        'title' => 'Lead',
-        'model' => \HubletoApp\Community\Leads\Models\Lead::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_tag' => [
-        'type' => 'lookup',
-        'title' => 'Tag',
-        'model' => \HubletoApp\Community\Settings\Models\Tag::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
+      'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['title'] = 'Company Categories';
+    $description = parent::describeTable();
+    $description->ui['title'] = 'Company Categories';
     return $description;
   }
 

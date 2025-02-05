@@ -14,7 +14,7 @@
   h2 { @apply mb-2 text-primary text-xl; }
 
   /* SPECIAL components, idetified by # id */
-  aside#default-sidebar { @apply flex fixed top-0 left-0 z-10 pt-12 h-screen transition-transform -translate-x-full sm:translate-x-0; }
+  aside#default-sidebar { @apply flex fixed top-0 left-0 z-10 pt-12 h-screen transition-transform -translate-x-full md:translate-x-0; }
   aside#default-sidebar > nav { @apply bg-primary p-1 flex gap-0.5 flex-col w-32; }
   aside#default-sidebar > nav .btn { @apply w-full rounded; }
   aside#default-sidebar > nav .btn .icon { @apply text-xs w-6 text-left flex justify-center content-center flex-wrap border-none bg-transparent; }
@@ -40,8 +40,8 @@
   div#sign-in-screen > .inner > .form > .title { @apply text-center; }
   div#sign-in-screen > .inner > .form > .content > input { @apply border border-gray-300 rounded-sm w-full p-4 mb-1; }
 
-  div#app-main-content { @apply ml-64 mt-12 px-3; }
-  div#app-main-content.sidebar-only-nav { @apply ml-32; }
+  div#app-main-content { @apply sm:ml-0 md:ml-64 mt-12 px-3; }
+  div#app-main-content.sidebar-only-nav { @apply md:ml-32; }
 
   /* CLASSES in alphabetical order */
 
@@ -62,6 +62,10 @@
   .adios.component.table .table-body tr.highlighted td > div { @apply border-b border-primary; }
   .adios.component.table .table-body tr td { @apply cursor-pointer; }
   .adios.component.input.table { @apply max-w-[100%] }
+
+  /* main table responsivness */
+  #app-main-content > * > .adios.component.table .table-body thead th:nth-child(n+4) { @apply hidden md:table-cell; }
+  #app-main-content > * > .adios.component.table .table-body tbody tr td:nth-child(n+4) { @apply hidden md:table-cell;}
 
   .adios.component.table.header-style-1 { @apply bg-green-50 }
 
@@ -104,7 +108,7 @@
   .btn .text > small { @apply block text-xs text-gray-600; } */
 
   .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
-  .btn.btn-small { height: 1.25rem; }
+  .btn.btn-small { @apply h-auto md:h-[1.25rem]; }
   .btn .icon { @apply flex h-full items-center px-2 py-1 text-sm justify-center; }
   .btn .text { @apply flex h-full items-center px-2 py-1 text-sm break-all; max-height: 3.5rem; overflow: hidden; }
 
@@ -112,8 +116,8 @@
 
   .btn.btn-extra-small .icon { @apply px-1 py-0.5; font-size: 0.3rem; }
   .btn.btn-extra-small .text { @apply px-1 py-0.5; font-size: 0.3rem; }
-  .btn.btn-small .icon { @apply text-xs py-0; height: 1.25rem; }
-  .btn.btn-small .text { @apply text-xs py-0; height: 1.25rem; }
+  .btn.btn-small .icon { @apply text-xs py-0 h-auto md:h-[1.25rem]; }
+  .btn.btn-small .text { @apply text-xs py-0 h-auto md:h-[1.25rem]; }
   .btn.btn-large .icon { @apply text-lg px-2.5 py-1.5; }
   .btn.btn-large .text { @apply text-lg px-2.5 py-1.5; }
   .btn.btn-extra-large .icon { @apply text-2xl px-3.5 py-2; }
@@ -174,6 +178,7 @@
   .btn-group .btn { @apply border-none rounded-none shadow-none; }
 
   .breadcrumbs { @apply flex pb-2; }
+  .breadcrumbs ol li:nth-child(n+2) { @apply hidden sm:block md:block ;}
 
   .card { @apply border border-solid rounded shadow-lg mb-4; }
   .card-header { @apply flex justify-between font-bold border-b p-4 bg-gray-50; }
@@ -221,14 +226,14 @@
   .key-value-table > div { @apply flex justify-between p-1 hover:bg-gray-100; }
   .key-value-table > div div:nth-child(2) { @apply font-bold; }
 
-  .modal { @apply flex flex-col h-screen overflow-auto; }
-  .modal.right { @apply fixed top-0 right-0 w-1/2 z-50 h-full shadow-2xl bg-white border-l border-l-primary; }
-  .modal.right.wide { @apply w-2/3; }
-  .modal.right.wider { width: 90vw; }
-  .modal.centered { @apply fixed mx-auto my-4 w-2/3 h-[calc(100vh-theme(space.8))] z-50 shadow-2xl rounded bg-white border border-primary resize; top: 0; left: 50%; transform: translate(-50%, 0%);}
-  .modal.centered.large { width: 90vw; height: 90vh; }
-  .modal.centered.small { @apply fixed mx-auto mt-1 w-1/2 h-1/2 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
-  .modal.centered.tiny { @apply fixed mx-auto mt-1 w-1/3 h-1/3 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+  .modal { @apply flex flex-col h-screen w-full overflow-auto; }
+  .modal.right { @apply fixed top-0 right-0 md:w-1/2 z-50 h-full shadow-2xl bg-white border-l border-l-primary; }
+  .modal.right.wide { @apply md:w-2/3; }
+  .modal.right.wider { @apply md:w-[90vw] ;}
+  .modal.centered { @apply fixed mx-auto md:my-4 md:w-2/3 md:h-[calc(100vh-theme(space.8))] z-50 shadow-2xl rounded bg-white border border-primary resize; top: 0; left: 50%; transform: translate(-50%, 0%);}
+  .modal.centered.large { @apply md:w-[90vw] md:h-[90vh];}
+  .modal.centered.small { @apply fixed mx-auto mt-1 md:w-1/2 md:h-1/2 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+  .modal.centered.tiny { @apply fixed mx-auto mt-1 md:w-1/3 md:h-1/3 z-50 shadow-xl bg-white; top: 50%; left: 50%; transform: translate(-50%, -50%);}
   .modal .modal-header { @apply flex items-center border-b border-b-primary/20 text-primary items-baseline w-full justify-between p-2 bg-primary/5; }
   .modal .modal-header .modal-header-left { @apply flex flex-1 gap-1; }
   .modal .modal-header .modal-header-title { @apply flex-1 text-center; }
@@ -243,6 +248,9 @@
   /* .p-datatable .p-datatable-tbody > tr > td { @apply p-1 text-sm; } */
   .p-datatable .p-datatable-thead > tr > th { @apply p-1 text-sm border-b border-b-gray-400; }
   .p-datatable .p-datatable-thead > tr > th .p-sortable-column-icon { @apply scale-[0.75]; }
+  .p-datatable .p-sortable-column.p-highlight .p-column-header-content .p-column-title { @apply text-primary; }
+  .p-datatable .p-sortable-column.p-highlight .p-column-header-content .p-sortable-column-icon { @apply text-primary; }
+  .p-datatable-footer { @apply p-2 text-xs bg-slate-100; }
   .p-treetable .p-treetable-tbody > tr > td { @apply p-1 text-sm; }
   .p-tree-container .p-treenode { @apply ml-2; }
   .p-tree-container .p-treenode .p-treenode .p-treenode .btn-transparent { @apply bg-slate-50 border-gray-300; }

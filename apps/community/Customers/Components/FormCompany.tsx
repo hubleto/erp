@@ -219,7 +219,7 @@ export default class FormCompany<P, S> extends Form<
                     {this.inputWrapper("is_active")}
                     <FormInput title="Tags">
                       <InputTags2
-                        {...this.getDefaultInputProps()}
+                        {...this.getInputProps()}
                         value={this.state.record.TAGS}
                         model="HubletoApp/Community/Settings/Models/Tag"
                         targetColumn="id_company"
@@ -243,20 +243,20 @@ export default class FormCompany<P, S> extends Form<
                     uid={this.props.uid + "_table_persons"}
                     showHeader={false}
                     showFooter={false}
-                    descriptionSource="props"
+                    descriptionSource="both"
+                    customEndpointParams={{idCompany: R.id}}
                     data={{ data: R.PERSONS }}
                     parentForm={this}
                     description={{
-                      permissions: {
-                        canCreate: true,
-                        canUpdate: true,
-                        canDelete: true,
-                        canRead: true,
-                      },
                       ui: {
                         addButtonText: globalThis.main.translate('Add contact person'),
                       },
                       columns: {
+                        first_name: { type: "varchar", title: globalThis.main.translate("First name") },
+                        last_name: { type: "varchar", title: globalThis.main.translate("Last name") },
+                        is_main: { type: "boolean", title: globalThis.main.translate("Main Contact") },
+                      },
+                      inputs: {
                         first_name: { type: "varchar", title: globalThis.main.translate("First name") },
                         last_name: { type: "varchar", title: globalThis.main.translate("Last name") },
                         is_main: { type: "boolean", title: globalThis.main.translate("Main Contact") },
@@ -281,7 +281,7 @@ export default class FormCompany<P, S> extends Form<
                         if (!R.PERSONS) R.PERSONS = [];
                         this.setState({createNewPerson: true} as FormCompanyState);
                       }}>
-                      + {globalThis.main.translate('Add contact')}
+                      + {globalThis.main.translate('Add contact person')}
                     </a>
                   ) : null}
                   {this.state.createNewPerson ?
@@ -347,18 +347,19 @@ export default class FormCompany<P, S> extends Form<
               <TableLeads
                 uid={this.props.uid + "_table_leads"}
                 data={{ data: R.LEADS }}
-                descriptionSource="props"
+                descriptionSource="both"
+                customEndpointParams={{idCompany: R.id}}
                 description={{
-                  permissions: {
-                    canCreate: true,
-                    canUpdate: true,
-                    canDelete: true,
-                    canRead: true,
-                  },
                   columns: {
                     title: { type: "varchar", title: "Title" },
                     price: { type: "float", title: "Amount" },
-                    id_currency: { type: "lookup", title: "Amount", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    date_expected_close: { type: "date", title: "Expected Close Date" },
+                  },
+                  inputs: {
+                    title: { type: "varchar", title: "Title" },
+                    price: { type: "float", title: "Amount" },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                 }}
@@ -371,11 +372,13 @@ export default class FormCompany<P, S> extends Form<
                   this.updateRecord({ LEADS: table.state.data?.data ?? [] });
                 }}
               />
-              <a
-                role="button"
-                onClick={() => {this.setState({ createNewLead: true } as FormCompanyState);}}>
-                + Add Lead
-              </a>
+              {this.state.isInlineEditing ? (
+                <a
+                  role="button"
+                  onClick={() => {this.setState({ createNewLead: true } as FormCompanyState);}}>
+                  + Add Lead
+                </a>
+              ) : <></>}
               {this.state.createNewLead == true ? (
                 <ModalSimple
                   uid='lead_form'
@@ -410,18 +413,19 @@ export default class FormCompany<P, S> extends Form<
               <TableDeals
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DEALS }}
-                descriptionSource="props"
+                descriptionSource="both"
+                customEndpointParams={{idCompany: R.id}}
                 description={{
-                  permissions: {
-                    canCreate: true,
-                    canUpdate: true,
-                    canDelete: true,
-                    canRead: true,
-                  },
                   columns: {
                     title: { type: "varchar", title: "Title" },
                     price: { type: "float", title: "Amount" },
-                    id_currency: { type: "lookup", title: "Amount", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    date_expected_close: { type: "date", title: "Expected Close Date" },
+                  },
+                  inputs: {
+                    title: { type: "varchar", title: "Title" },
+                    price: { type: "float", title: "Amount" },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                 }}
@@ -435,11 +439,13 @@ export default class FormCompany<P, S> extends Form<
                   this.updateRecord({ DEALS: table.state.data?.data ?? [] });
                 }}
               />
-              <a
-                role="button"
-                onClick={() => {this.setState({ createNewDeal: true } as FormCompanyState);}}>
-                + Add Deal
-              </a>
+              {this.state.isInlineEditing ? (
+                <a
+                  role="button"
+                  onClick={() => {this.setState({ createNewDeal: true } as FormCompanyState);}}>
+                  + Add Deal
+                </a>
+              ) : <></>}
               {this.state.createNewDeal == true ? (
                 <ModalSimple
                   uid='deal_form'
@@ -474,21 +480,19 @@ export default class FormCompany<P, S> extends Form<
               <TableCompanyDocuments
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DOCUMENTS }}
-                descriptionSource="props"
+                descriptionSource="both"
+                customEndpointParams={{idCompany: R.id}}
                 description={{
                   ui: {
                     showFooter: false,
                     showHeader: false,
                   },
-                  permissions: {
-                    canCreate: true,
-                    canDelete: true,
-                    canRead: true,
-                    canUpdate: true
-                  },
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                  }
+                  },
+                  inputs: {
+                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                  },
                 }}
                 isUsedAsInput={true}
                 //isInlineEditing={this.state.isInlineEditing}
@@ -497,12 +501,14 @@ export default class FormCompany<P, S> extends Form<
                   this.setState({showIdDocument: row.id_document} as FormCompanyState);
                 }}
               />
-              <a
-                role="button"
-                onClick={() => this.setState({createNewDocument: true} as FormCompanyState)}
-              >
-                + Add Document
-              </a>
+              {this.state.isInlineEditing ? (
+                <a
+                  role="button"
+                  onClick={() => this.setState({createNewDocument: true} as FormCompanyState)}
+                >
+                  + Add Document
+                </a>
+              ) : <></>}
               {this.state.createNewDocument == true ?
                 <ModalSimple
                   uid='document_form'

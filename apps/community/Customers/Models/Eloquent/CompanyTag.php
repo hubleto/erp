@@ -12,9 +12,12 @@ class CompanyTag extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'company_tags';
 
+  /** @return BelongsTo<Tag, covariant CompanyTag> */
   public function TAG(): BelongsTo {
     return $this->belongsTo(Tag::class, 'id_tag', 'id');
   }
+
+  /** @return BelongsTo<Company, covariant CompanyTag> */
   public function COMPANY(): BelongsTo {
     return $this->belongsTo(Company::class, 'id_company', 'id');
   }

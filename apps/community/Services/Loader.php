@@ -32,21 +32,29 @@ class Loader extends \HubletoMain\Core\App
     // }
   }
 
-  public function installTables()
+  public function installTables(): void
   {
     $mService = new Models\Service($this->main);
     $mService->install();
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Service/Models/Service:Create,Read,Update,Delete",
-      "HubletoApp/Service/Controllers/Service",
+      "HubletoApp/Community/Services/Models/Service:Create",
+      "HubletoApp/Community/Services/Models/Service:Read",
+      "HubletoApp/Community/Services/Models/Service:Update",
+      "HubletoApp/Community/Services/Models/Service:Delete",
+
+      "HubletoApp/Community/Services/Controllers/Services",
+
+      "HubletoApp/Community/Services/Api/GetServicePrice",
+
+      "HubletoApp/Community/Services/Services",
     ];
 
-    foreach ($permissions as $key => $permission) {
+    foreach ($permissions as $permission) {
       $mPermission->eloquent->create([
         "permission" => $permission
       ]);

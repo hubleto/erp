@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+
 class Currency extends \HubletoMain\Core\Model
 {
   public string $table = 'currencies';
@@ -11,34 +13,32 @@ class Currency extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns([
-      'name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Currency Name'),
-      ],
-      'code' => [
-        'type' => 'varchar',
-        'byte_size' => '5',
-        'title' => $this->translate('Currency Code'),
-      ],
+      'name' => (new Varchar($this, $this->translate('Currency'))),
+      'code' => (new Varchar($this, $this->translate('Code'))),
     ]);
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Currencies';
-    $description['ui']['addButtonText'] = 'Add currency';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+    $description = parent::describeTable();
+
+    $description->ui['title'] = 'Currencies';
+    $description->ui['addButtonText'] = 'Add currency';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe();
-    $description['ui']['title'] = ($this->main->params['id'] == -1 ? "New currency" : "Currency");
-    $description['ui']['subTitle'] = ($this->main->params['id'] == -1 ? "Adding" : "Editing");
+    $description = parent::describeForm();
+
+    $id = $this->main->urlParamAsInteger('id');
+
+    $description->ui['title'] = ($id == -1 ? "New currency" : "Currency");
+    $description->ui['subTitle'] = ($id == -1 ? "Adding" : "Editing");
+
     return $description;
   }
 

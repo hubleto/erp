@@ -4,6 +4,11 @@ namespace HubletoApp\Community\Services\Models;
 
 use HubletoApp\Community\Settings\Models\Currency;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Decimal;
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Text;
+
 class Service extends \HubletoMain\Core\Model
 {
   public string $table = 'services';
@@ -17,42 +22,25 @@ class Service extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      "name" => [
-        "type" => "varchar",
-        "title" => "Name",
-        "required" => true,
-      ],
-      "price" => [
-        "type" => "float",
-        "title" => "Unit Price",
-      ],
-      'id_currency' => [
-        'type' => 'lookup',
-        'title' => 'Currency',
-        'model' => 'HubletoApp/Community/Settings/Models/Currency',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-      ],
-      "unit" => [
-        "type" => "varchar",
-        "title" => "Unit",
-      ],
-      "description" => [
-        "type" => "varchar",
-        "title" => "Description"
-      ],
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
+      'price' => (new Decimal($this, $this->translate('Unit price'))),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
+      'unit' => (new Varchar($this, $this->translate('Unit'))),
+      'description' => (new Text($this, $this->translate('Description'))),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Services';
-    $description['ui']['addButtonText'] = 'Add Service';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
-    unset($description['columns']['description']);
+    $description = parent::describeTable();
+
+    $description->ui['title'] = 'Services';
+    $description->ui['addButtonText'] = 'Add Service';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+
+    unset($description->columns['description']);
+
     return $description;
   }
 

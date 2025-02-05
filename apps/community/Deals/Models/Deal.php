@@ -12,7 +12,13 @@ use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Deals\Models\DealHistory;
 use HubletoApp\Community\Deals\Models\DealTag;
 use HubletoApp\Community\Leads\Models\Lead;
-use Exception;
+
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Date;
+use \ADIOS\Core\Db\Column\Text;
+use \ADIOS\Core\Db\Column\Decimal;
+use \ADIOS\Core\Db\Column\Boolean;
 
 class Deal extends \HubletoMain\Core\Model
 {
@@ -39,144 +45,65 @@ class Deal extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-
-      'title' => [
-        'type' => 'varchar',
-        'title' => 'Title',
-        'required' => true,
-      ],
-      'id_company' => [
-        'type' => 'lookup',
-        'title' => 'Company',
-        'model' => \HubletoApp\Community\Customers\Models\Company::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => true,
-      ],
-      'id_person' => [
-        'type' => 'lookup',
-        'title' => 'Contact Person',
-        'model' => \HubletoApp\Community\Customers\Models\Person::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-        'required' => false,
-      ],
-      'id_lead' => [
-        'type' => 'lookup',
-        'title' => 'Origin Lead',
-        'model' => \HubletoApp\Community\Leads\Models\Lead::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-        'required' => false,
-        'readonly' => true,
-      ],
-      'price' => [
-        'type' => 'float',
-        'title' => 'Price',
-        'required' => true,
-      ],
-      'id_currency' => [
-        'type' => 'lookup',
-        'title' => 'Currency',
-        'model' => \HubletoApp\Community\Settings\Models\Currency::class,
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'SET NULL',
-        'required' => true,
-      ],
-      'date_expected_close' => [
-        'type' => 'date',
-        'title' => 'Expected Close Date',
-        'required' => false,
-      ],
-      'id_user' => [
-        'type' => 'lookup',
-        'title' => 'Assigned User',
-        'model' => \HubletoApp\Community\Settings\Models\User::class,
-        'foreignKeyOnUpdate' => 'RESTRICT',
-        'foreignKeyOnDelete' => 'RESTRICT',
-        'required' => true,
-      ],
-      'date_created' => [
-        'type' => 'date',
-        'title' => 'Date Created',
-        'required' => true,
-        'readonly' => true,
-      ],
-      'id_pipeline' => [
-        'type' => 'lookup',
-        'title' => 'Pipeline',
-        'model' => \HubletoApp\Community\Settings\Models\Pipeline::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-        'required' => false,
-      ],
-      'id_pipeline_step' => [
-        'type' => 'lookup',
-        'title' => 'Pipeline Step',
-        'model' => \HubletoApp\Community\Settings\Models\PipelineStep::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-        'required' => false,
-      ],
-      'note' => [
-        'type' => 'text',
-        'title' => 'Notes',
-        'required' => false,
-      ],
-      'source_channel' => [
-        'type' => 'varchar',
-        'title' => 'Source Channel',
-        'required' => false,
-      ],
-      'is_archived' => [
-        'type' => 'boolean',
-        'title' => 'Archived',
-        'required' => false,
-      ],
-      'id_deal_status' => [
-        'type' => 'lookup',
-        'title' => 'Status',
-        'model' => DealStatus::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'SET NULL',
-        'required' => false,
-      ],
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
+      'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
+      'price' => (new Decimal($this, $this->translate('Price')))->setRequired(),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setRequired(),
+      'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
+      'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
+      'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
+      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'note' => (new Text($this, $this->translate('Notes'))),
+      'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
+      'is_archived' => (new Boolean($this, $this->translate('Archived'))),
+      'id_deal_status' => (new Lookup($this, $this->translate('Status'), DealStatus::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    if ((bool) $this->main->params["showArchive"]) {
-      $description["ui"] = [
-        "title" => "Deals Archive"
-      ];
-      $description["permissions"] = [
+    $description = parent::describeTable();
+    if ($this->main->urlParamAsBool("showArchive")) {
+      $description->ui['title'] = "Deals Archive";
+      $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
         "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
       ];
     } else {
-      $description['ui'] = [
-        'title' => 'Deal',
-        'addButtonText' => 'Add Deal'
-      ];
+      $description->ui['title'] = 'Deal';
+      $description->ui['addButtonText'] = 'Add Deal';
     }
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
-    $description['columns']['tags'] = ["title" => "Tags"];
-    unset($description['columns']['note']);
-    unset($description['columns']['id_person']);
-    unset($description['columns']['source_channel']);
-    unset($description['columns']['is_archived']);
-    unset($description['columns']['id_lead']);
-    unset($description['columns']['id_pipeline']);
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+    $description->columns['tags'] = ["title" => "Tags"];
+    unset($description->columns['note']);
+    unset($description->columns['id_person']);
+    unset($description->columns['source_channel']);
+    unset($description->columns['is_archived']);
+    unset($description->columns['id_lead']);
+    unset($description->columns['id_pipeline']);
+
+    if ($this->main->urlParamAsInteger('idCompany') > 0) {
+      $description->permissions = [
+        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
+      ];
+      $description->columns = [];
+      $description->inputs = [];
+      $description->ui = [];
+    }
+
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
     $mSettings = new Setting($this->main);
     $defaultPipeline =(int) $mSettings->eloquent
@@ -185,32 +112,18 @@ class Deal extends \HubletoMain\Core\Model
       ->value
     ;
 
-    $description = parent::formDescribe();
-    $description['defaultValues']['is_archived'] = 0;
-    $description['defaultValues']['id_deal_status'] = 1;
-    $description['defaultValues']['date_created'] = date("Y-m-d");
-    $description['defaultValues']['id_pipeline'] = $defaultPipeline;
-    $description['defaultValues']['id_pipeline_step'] = null;
-    $description['defaultValues']['id_user'] = $this->main->auth->user["id"];
-    $description['includeRelations'] = [
-      'COMPANY',
-      'USER',
-      'STATUS',
-      'PERSON',
-      'PIPELINE',
-      'PIPELINE_STEP',
-      'CURRENCY',
-      'HISTORY',
-      'TAGS',
-      'LEAD',
-      'SERVICES',
-      'ACTIVITIES',
-      'DOCUMENTS',
-    ];
+    $description = parent::describeForm();
+    $description->defaultValues['is_archived'] = 0;
+    $description->defaultValues['id_deal_status'] = 1;
+    $description->defaultValues['date_created'] = date("Y-m-d");
+    $description->defaultValues['id_pipeline'] = $defaultPipeline;
+    $description->defaultValues['id_pipeline_step'] = null;
+    $description->defaultValues['id_user'] = $this->main->auth->getUserId();
+
     return $description;
   }
 
-  public function prepareLoadRecordQuery(?array $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
   {
     $relations = [
       'COMPANY',
@@ -233,7 +146,7 @@ class Deal extends \HubletoMain\Core\Model
      * These are the query filters for tables with archived and non-archived deal entries.
      * The params["id"] needs to be there to properly load the data of the entry in a form.
      */
-    if ((bool) $this->main->params["showArchive"]) {
+    if ($this->main->urlParamAsBool("showArchive")) {
       $query = $query->where("deals.is_archived", 1);
     } else {
       $query = $query->where("deals.is_archived", 0);
@@ -241,23 +154,20 @@ class Deal extends \HubletoMain\Core\Model
     return $query;
   }
 
-  public function onAfterCreate(array $record, $returnValue)
+  public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
     $mDealHistory = new DealHistory($this->main);
     $mDealHistory->eloquent->create([
       "change_date" => date("Y-m-d"),
-      "id_deal" => $record["id"],
+      "id_deal" => $savedRecord["id"],
       "description" => "Deal created"
     ]);
 
-    return $this->main->dispatchEventToPlugins("onModelAfterCreate", [
-      "model" => $this,
-      "data" => $record,
-      "returnValue" => $returnValue,
-    ])["returnValue"];
+    return parent::onAfterCreate($originalRecord, $savedRecord);
   }
 
-  public function getOwnership($record) {
+  public function getOwnership(array $record): void
+  {
     if ($record["id_company"] && !isset($record["checkOwnership"])) {
       $mCompany = new Company($this->main);
       $company = $mCompany->eloquent
@@ -266,8 +176,7 @@ class Deal extends \HubletoMain\Core\Model
       ;
 
       if ($company->id_user != $record["id_user"]) {
-        throw new Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected company.
-        ");
+        throw new \Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected company.");
       }
     }
   }
@@ -288,15 +197,15 @@ class Deal extends \HubletoMain\Core\Model
     if ((float) $deal["price"] != (float) $record["price"]) {
       $mDealHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
-        "id_deal" => $record["id"],
-        "description" => "Price changed to ".$record["price"]." ".$record["CURRENCY"]["code"]
+        "id_deal" => (int) ($record["id"] ?? 0),
+        "description" => "Price changed to " . (string) ($record["price"] ?? '') . " " . (string) ($record["CURRENCY"]["code"] ?? '')
       ]);
     }
     if ((string) $deal["date_expected_close"] != (string) $record["date_expected_close"]) {
       $mDealHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_deal" => $record["id"],
-        "description" => "Expected Close Date changed to ".date("d.m.Y", strtotime((string) $record["date_expected_close"]))
+        "description" => "Expected Close Date changed to ".date("d.m.Y", (int) strtotime((string) $record["date_expected_close"]))
       ]);
     }
 

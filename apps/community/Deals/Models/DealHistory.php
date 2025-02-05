@@ -8,6 +8,10 @@ use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\User;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Date;
+
 class DealHistory extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_histories';
@@ -21,37 +25,20 @@ class DealHistory extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-
-      'change_date' => [
-        'type' => 'date',
-        'title' => 'Change Date',
-        'required' => true,
-      ],
-      'id_deal' => [
-        'type' => 'lookup',
-        'title' => 'Company',
-        'model' => 'HubletoApp/Community/Deals/Models/Deal',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'description' => [
-        'type' => 'varchar',
-        'title' => 'Description',
-        'required' => true,
-      ],
+      'change_date' => (new Date($this, $this->translate('Change Date')))->setRequired(),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setRequired(),
+      'description' => (new Varchar($this, $this->translate('Description')))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Deals';
-    $description['ui']['addButtonText'] = 'Add Deal';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
-    unset($description['columns']['note']);
+    $description = parent::describeTable();
+    $description->ui['title'] = 'Deals';
+    $description->ui['addButtonText'] = 'Add Deal';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+    unset($description->columns['note']);
     return $description;
   }
 

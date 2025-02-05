@@ -25,4 +25,20 @@ class Loader extends \HubletoMain\Core\App
     //   $this->main->sidebar->addLink(2, 10201, 'sales', $this->translate('Pipeline'), 'fas fa-timeline');
     // }
   }
+
+  public function installDefaultPermissions(): void
+  {
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+    $permissions = [
+      "HubletoApp/Community/Pipeline/Controllers/Home",
+
+      "HubletoApp/Community/Pipeline/Home",
+    ];
+
+    foreach ($permissions as $permission) {
+      $mPermission->eloquent->create([
+        "permission" => $permission
+      ]);
+    }
+  }
 }

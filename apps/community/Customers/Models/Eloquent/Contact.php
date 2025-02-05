@@ -10,11 +10,14 @@ class Contact extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'contacts';
 
-  public function PERSON() {
+  /** @return BelongsTo<Person, covariant Contact> */
+  public function PERSON(): BelongsTo {
     return $this->belongsTo(Person::class, 'id_person');
   }
-  public function CONTACT_TYPE() {
-    return $this->belongsTo(ContactType::class, 'id_contact_type', 'id');
+
+  /** @return BelongsTo<ContactType, covariant Contact> */
+  public function CONTACT_TYPE(): BelongsTo {
+    return $this->belongsTo(ContactType::class, 'id_contact_category', 'id');
   }
 
 }

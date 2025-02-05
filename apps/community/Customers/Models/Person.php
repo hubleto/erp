@@ -4,6 +4,12 @@ namespace HubletoApp\Community\Customers\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Text;
+use \ADIOS\Core\Db\Column\Boolean;
+use \ADIOS\Core\Db\Column\Date;
+
 class Person extends \HubletoMain\Core\Model
 {
   public string $table = 'persons';
@@ -20,87 +26,60 @@ class Person extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'first_name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('First name'),
-        'required' => true,
-      ],
-      'last_name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Last name'),
-        'required' => true,
-      ],
-      'id_company' => [
-        'type' => 'lookup',
-        'title' => $this->translate('Company'),
-        'model' => Company::class,
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => false,
-      ],
-      'is_main' => [
-        'type' => 'boolean',
-        'title' => $this->translate('Main Contact'),
-      ],
-      'note' => [
-        'type' => 'text',
-        'title' => $this->translate('Notes'),
-        'required' => false,
-      ],
-      'is_active' => [
-        'type' => 'boolean',
-        'title' => $this->translate('Active'),
-        'required' => false,
-        'default' => 1,
-      ],
-      'date_created' => [
-        'type' => 'date',
-        'title' => $this->translate('Date Created'),
-        'required' => true,
-        'readonly' => true,
-      ],
+      'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
+      'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
+      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class, 'CASCADE')),
+      'is_main' => new Boolean($this, $this->translate('Main Contact')),
+      'note' => (new Text($this, $this->translate('Notes'))),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
+      'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
     ]));
   }
 
-  //v tablePersons
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe();
-    $description['ui']['title'] = $this->translate('Contact Persons');
-    $description['ui']['addButtonText'] = $this->translate('Add Contact Person');
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
-    $description['columns']['virt_email'] = ["title" => $this->translate("Emails")];
-    $description['columns']['virt_number'] = ["title" => $this->translate("Phone Numbers")];
-    unset($description['columns']['is_main']);
-    unset($description['columns']['note']);
+    $description = parent::describeTable();
+    $description->ui['title'] = $this->translate('Contact Persons');
+    $description->ui['addButtonText'] = $this->translate('Add Contact Person');
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+    $description->columns['virt_email'] = ["title" => $this->translate("Emails")];
+    $description->columns['virt_number'] = ["title" => $this->translate("Phone Numbers")];
+    unset($description->columns['is_main']);
+    unset($description->columns['note']);
 
     //nadstavit aby boli tieto stĺpce posledné
-    $tempColumn = $description['columns']['date_created'];
-    unset($description['columns']['date_created']);
-    $description['columns']['date_created'] = $tempColumn;
-    $tempColumn = $description['columns']['is_active'];
-    unset($description['columns']['is_active']);
-    $description['columns']['is_active'] = $tempColumn;
+    $tempColumn = $description->columns['date_created'];
+    unset($description->columns['date_created']);
+    $description->columns['date_created'] = $tempColumn;
+    $tempColumn = $description->columns['is_active'];
+    unset($description->columns['is_active']);
+    $description->columns['is_active'] = $tempColumn;
+
+    if ($this->main->urlParamAsInteger('idCompany') > 0) {
+      $description->permissions = [
+        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
+      ];
+      $description->columns = [];
+      $description->inputs = [];
+      $description->ui = [];
+    }
 
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe();
-    $description['defaultValues']['is_active'] = 1;
-    $description['defaultValues']['is_main'] = 0;
-    $description['includeRelations'] = [
-      /* 'ADDRESSES', */
-      'CONTACTS',
-      'TAGS'
-    ];
+    $description = parent::describeForm();
+    $description->defaultValues['is_active'] = 1;
+    $description->defaultValues['is_main'] = 0;
     return $description;
   }
 
-  public function prepareLoadRecordQuery(array|null $includeRelations = null, int $maxRelationLevel = 0, $query = null, int $level = 0)
+  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
   {
     $query = parent::prepareLoadRecordQuery($includeRelations, 1);
 

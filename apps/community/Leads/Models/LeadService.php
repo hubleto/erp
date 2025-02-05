@@ -5,6 +5,10 @@ namespace HubletoApp\Community\Leads\Models;
 use HubletoApp\Community\Services\Models\Service;
 use HubletoApp\Community\Leads\Models\Lead;
 
+use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Integer;
+use \ADIOS\Core\Db\Column\Decimal;
+
 class LeadService extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_services';
@@ -19,40 +23,30 @@ class LeadService extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_lead' => [
-        'type' => 'lookup',
-        'title' => 'Lead',
-        'model' => 'HubletoApp/Community/Leads/Models/Lead',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_service' => [
-        'type' => 'lookup',
-        'title' => 'Service',
-        'model' => 'HubletoApp/Community/Services/Models/Service',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      "unit_price" => [
-        "type" => "float",
-        "title" => "Unit Price",
-        "required" => true,
-      ],
-      "amount" => [
-        "type" => "int",
-        "title" => "Amount",
-        "required" => true,
-      ],
-      "discount" => [
-        "type" => "float",
-        "title" => "Dicount (%)",
-      ],
-      "tax" => [
-        "type" => "float",
-        "title" => "Tax (%)",
-      ],
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired(),
+      'id_service' => (new Lookup($this, $this->translate('Service'), Service::class, 'CASCADE'))->setRequired(),
+      'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
+      'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
+      'discount' => new Decimal($this, $this->translate('Dicount (%)')),
+      'tax' => new Decimal($this, $this->translate('Tax (%)')),
     ]));
+  }
+
+  public function describeTable(): \ADIOS\Core\Description\Table
+  {
+    $description = parent::describeTable();
+    if ($this->main->urlParamAsInteger('idLead') > 0){
+      $description->permissions = [
+        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
+      ];
+      $description->columns = [];
+      $description->inputs = [];
+      $description->ui = [];
+    }
+
+    return $description;
   }
 }

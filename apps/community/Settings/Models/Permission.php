@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+
 class Permission extends \HubletoMain\Core\Model
 {
   public string $table = 'permissions';
@@ -11,35 +13,31 @@ class Permission extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns([
-      'permission' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Permission'),
-        'show_column' => true
-      ],
+      'permission' => (new Varchar($this, $this->translate('Permission'))),
     ]);
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Permissions';
-    $description['ui']['showHeader'] = false;
-    $description['ui']['showFooter'] = false;
-    $description['permissions']['canCreate'] = false;
-    $description['permissions']['canUpdate'] = false;
-    $description['permissions']['canDelete'] = false;
+    $description = parent::describeTable();
+
+    $description->ui['title'] = 'Permissions';
+    $description->ui['showHeader'] = false;
+    $description->ui['showFooter'] = false;
+
+    $description->permissions['canCreate'] = false;
+    $description->permissions['canUpdate'] = false;
+    $description->permissions['canDelete'] = false;
+
     return $description;
   }
 
-  public function formDescribe(array $description = []): array
+  public function describeForm(): \ADIOS\Core\Description\Form
   {
-    $description = parent::formDescribe();
-    $description['ui']['title'] = 'Permission';
-    $description['ui']['subTitle'] = '';
-    $description['permissions']['canCreate'] = false;
-    $description['permissions']['canUpdate'] = false;
-    $description['permissions']['canDelete'] = false;
+    $description = parent::describeForm();
+
+    $description->ui['title'] = 'Permission';
+
     return $description;
   }
 }

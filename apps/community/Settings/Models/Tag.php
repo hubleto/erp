@@ -2,6 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
+use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Color;
+
 class Tag extends \HubletoMain\Core\Model
 {
   public string $table = 'tags';
@@ -11,27 +14,19 @@ class Tag extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'name' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Name'),
-        'required' => true,
-      ],
-      'color' => [
-        'type' => 'color',
-        'title' => $this->translate('Color'),
-        'required' => true,
-      ],
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
+      'color' => (new Color($this, $this->translate('Color')))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Tags';
-    $description['ui']['addButtonText'] = 'Add Tag';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+    $description = parent::describeTable();
+
+    $description->ui['title'] = 'Tags';
+    $description->ui['addButtonText'] = 'Add Tag';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
 
     return $description;
   }

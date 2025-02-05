@@ -29,42 +29,43 @@ class Home extends \HubletoMain\Core\Controller {
 
     $pipelines = $mPipeline->eloquent->get();
 
-    $defaultPipelineId = $mSetting->eloquent
+    $defaultPipeline = $mSetting->eloquent
       ->select("value")
       ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")
       ->first()
-      ->toArray()
     ;
-    $defaultPipelineId = reset($defaultPipelineId);
+    $defaultPipelineId = (int) $defaultPipeline->value;
 
     $searchPipeline = null;
 
-    if (isset($this->main->params["id_pipeline"])){
-      $searchPipeline = $mPipeline->eloquent
-        ->where("id", (int) $this->main->params["id_pipeline"])
+    if ($this->main->isUrlParam("id_pipeline")) {
+      $searchPipeline = (array) $mPipeline->eloquent
+        ->where("id", (int) $this->main->urlParamAsInteger("id_pipeline"))
         ->with("PIPELINE_STEPS")
         ->first()
         ->toArray()
       ;
     }
     else {
-      $searchPipeline = $mPipeline->eloquent
-        ->where("id", (int) $defaultPipelineId)
+      $searchPipeline = (array) $mPipeline->eloquent
+        ->where("id", $defaultPipelineId)
         ->with("PIPELINE_STEPS")
         ->first()
         ->toArray()
       ;
     }
 
-    foreach ($searchPipeline["PIPELINE_STEPS"] as $key => $step) {
-      $sumPrice = $mDeal->eloquent
+    foreach ((array) $searchPipeline["PIPELINE_STEPS"] as $key => $step) {
+      $step = (array) $step;
+
+      $sumPrice = (float) $mDeal->eloquent
         ->selectRaw("SUM(price) as price")
         ->where("id_pipeline", $searchPipeline["id"])
         ->where("id_pipeline_step", $step["id"])
         ->first()
         ->price
       ;
-      $currencyGroups = $mDeal->eloquent
+      $currencyGroups = (array) $mDeal->eloquent
         ->selectRaw("SUM(price) as price, currencies.code")
         ->where("id_pipeline", $searchPipeline["id"])
         ->where("id_pipeline_step", $step["id"])
@@ -99,7 +100,8 @@ class Home extends \HubletoMain\Core\Controller {
       ->toArray()
     ;
 
-    foreach ($deals as $key => $deal) {
+    foreach ((array) $deals as $key => $deal) {
+      if (empty($deal["TAGS"])) continue;
       $tag = $mTag->eloquent->find($deal["TAGS"][0]["id_tag"])?->toArray();
       $deals[$key]["TAG"] = $tag;
       unset($deals[$key]["TAGS"]);

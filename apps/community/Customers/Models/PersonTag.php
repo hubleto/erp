@@ -4,6 +4,8 @@ namespace HubletoApp\Community\Customers\Models;
 
 use HubletoApp\Community\Settings\Models\Tag;
 
+use \ADIOS\Core\Db\Column\Lookup;
+
 class PersonTag extends \HubletoMain\Core\Model
 {
   public string $table = 'person_tags';
@@ -17,30 +19,15 @@ class PersonTag extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_person' => [
-        'type' => 'lookup',
-        'title' => 'Person',
-        'model' => 'HubletoApp/Community/Customers/Models/Person',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
-      'id_tag' => [
-        'type' => 'lookup',
-        'title' => 'Tag',
-        'model' => 'HubletoApp/Community/Settings/Models/Tag',
-        'foreignKeyOnUpdate' => 'CASCADE',
-        'foreignKeyOnDelete' => 'CASCADE',
-        'required' => true,
-      ],
+      'id_person' => (new Lookup($this, $this->translate('Person'), Person::class, 'CASCADE'))->setRequired(),
+      'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class, 'CASCADE'))->setRequired(),
     ]));
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['title'] = 'Person Categories';
+    $description = parent::describeTable();
+    $description->ui['title'] = 'Person Categories';
     return $description;
   }
 

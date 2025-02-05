@@ -20,7 +20,7 @@ class Loader extends \HubletoMain\Core\App
     $this->main->sidebar->addLink(1, 800, 'invoices', $this->translate('Invoices'), 'fas fa-euro-sign', str_starts_with($this->main->requestedUri, 'invoices'));
   }
 
-  public function installTables()
+  public function installTables(): void
   {
     $mInvoice = new \HubletoApp\Community\Invoices\Models\Invoice($this->main);
     $mInvoiceItem = new \HubletoApp\Community\Invoices\Models\InvoiceItem($this->main);
@@ -29,16 +29,27 @@ class Loader extends \HubletoMain\Core\App
     $mInvoiceItem->dropTableIfExists()->install();
   }
 
-  public function installDefaultPermissions()
+  public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Community/Invoices/Models/Invoice:Create,Read,Update,Delete",
-      "HubletoApp/Community/Invoices/Models/InvoiceItem:Create,Read,Update,Delete",
-      "HubletoApp/Community/Invoices/Controllers/Print",
+
+      "HubletoApp/Community/Invoices/Models/Invoice:Create",
+      "HubletoApp/Community/Invoices/Models/Invoice:Read",
+      "HubletoApp/Community/Invoices/Models/Invoice:Update",
+      "HubletoApp/Community/Invoices/Models/Invoice:Delete",
+
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Create",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Read",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Update",
+      "HubletoApp/Community/Invoices/Models/InvoiceItem:Delete",
+
+      "HubletoApp/Community/Invoices/Controllers/Invoices",
+
+      "HubletoApp/Community/Invoices/Invoices",
     ];
 
-    foreach ($permissions as $key => $permission) {
+    foreach ($permissions as $permission) {
       $mPermission->eloquent->create([
         "permission" => $permission
       ]);

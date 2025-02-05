@@ -256,6 +256,11 @@ export default class FormCompany<P, S> extends Form<
                         last_name: { type: "varchar", title: globalThis.main.translate("Last name") },
                         is_main: { type: "boolean", title: globalThis.main.translate("Main Contact") },
                       },
+                      inputs: {
+                        first_name: { type: "varchar", title: globalThis.main.translate("First name") },
+                        last_name: { type: "varchar", title: globalThis.main.translate("Last name") },
+                        is_main: { type: "boolean", title: globalThis.main.translate("Main Contact") },
+                      },
                     }}
                     isUsedAsInput={true}
                     readonly={false}
@@ -351,6 +356,12 @@ export default class FormCompany<P, S> extends Form<
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
+                  inputs: {
+                    title: { type: "varchar", title: "Title" },
+                    price: { type: "float", title: "Amount" },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    date_expected_close: { type: "date", title: "Expected Close Date" },
+                  },
                 }}
                 isUsedAsInput={false}
                 readonly={false}
@@ -406,6 +417,12 @@ export default class FormCompany<P, S> extends Form<
                 customEndpointParams={{idCompany: R.id}}
                 description={{
                   columns: {
+                    title: { type: "varchar", title: "Title" },
+                    price: { type: "float", title: "Amount" },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    date_expected_close: { type: "date", title: "Expected Close Date" },
+                  },
+                  inputs: {
                     title: { type: "varchar", title: "Title" },
                     price: { type: "float", title: "Amount" },
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
@@ -472,7 +489,10 @@ export default class FormCompany<P, S> extends Form<
                   },
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                  }
+                  },
+                  inputs: {
+                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                  },
                 }}
                 isUsedAsInput={true}
                 //isInlineEditing={this.state.isInlineEditing}

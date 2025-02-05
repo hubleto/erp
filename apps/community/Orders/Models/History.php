@@ -18,7 +18,7 @@ class History extends \HubletoMain\Core\Model
       "id_order" => (new \ADIOS\Core\Db\Column\Lookup($this, $this->translate("Order"), Order::class))->setRequired()->setReadonly(),
       "short_description" => (new \ADIOS\Core\Db\Column\Varchar($this, $this->translate("Short Description")))->setReadonly(),
       "long_description" => (new \ADIOS\Core\Db\Column\Text($this, $this->translate("Long Description")))->setReadonly(),
-      "date_time" => (new \ADIOS\Core\Db\Column\DateTime($this, $this->translate("Date Time")))->setRequired(),
+      "date_time" => (new \ADIOS\Core\Db\Column\DateTime($this, $this->translate("Date Time")))->setRequired()->setReadonly(),
     ]));
   }
 }

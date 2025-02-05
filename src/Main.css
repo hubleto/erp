@@ -194,7 +194,7 @@
   .dialog-danger-header { @apply bg-red-600 text-white hover:bg-red-400; }
   .dialog-warning-header { @apply bg-yellow-300 text-gray-800 hover:bg-yellow-200; }
 
-  .divider { @apply px-1 pt-12 pb-4; }
+  .divider { @apply px-1 pt-4 pb-2; }
   .divider.dense { @apply px-1 py-2; }
   .divider > div { @apply relative; }
   .divider > div > div { @apply flex relative justify-start; }
@@ -219,7 +219,7 @@
   .input-wrapper.required .input-label { @apply pl-3; }
   .input-wrapper .input-body { @apply flex items-center flex-[2]; overflow-wrap: anywhere; }
   .input-wrapper .input-info { @apply text-xs text-gray-500 pr-1; }
-  .input-wrapper .input-description { @apply text-xs text-gray-500 pr-1; }
+  .input-wrapper .input-description { @apply text-xs text-primary pr-1; }
 
   .key-value-table { @apply leading-8 divide-y text-sm border; }
   .key-value-table.dense { @apply leading-4 border; }

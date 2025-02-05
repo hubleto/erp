@@ -11,7 +11,7 @@ define('_ADIOS_ID', 'HubletoMain-');
 
 // load configs
 require_once("/var/www/hubleto/ConfigApp.php");
-require_once(__DIR__ . "/ConfigEnv.php");
+require_once(__DIR__ . "/ConfigAccount.php");
 
 // load autoloaders
 require("/var/www/hubleto/vendor/autoload.php");
@@ -19,6 +19,3 @@ require("/var/www/hubleto/vendor/autoload.php");
 // load entry class
 require("/var/www/hubleto/src/Main.php");
 
-// render
-$main = new HubletoMain($config);
-echo $main->render();

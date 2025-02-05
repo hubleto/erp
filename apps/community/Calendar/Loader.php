@@ -17,7 +17,7 @@ class Loader extends \HubletoMain\Core\App
       '/^calendar\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 50, 'calendar', $this->translate('Calendar'), 'fas fa-calendar-days', str_starts_with($this->main->requestedUri, 'calendar'));
+    $this->main->sidebar->addLink(1, 50, 'calendar', $this->translate('Calendar'), 'fas fa-calendar-days', str_starts_with($this->main->requestedUri, 'calendar/') || $this->main->requestedUri == 'calendar');
   }
 
   public function installDefaultPermissions(): void

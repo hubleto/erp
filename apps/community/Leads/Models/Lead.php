@@ -49,10 +49,25 @@ class Lead extends \HubletoMain\Core\Model
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
       'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
       'id_lead_status' => (new Lookup($this, $this->translate('Status'), LeadStatus::class))->setRequired(),
+      'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
     ]));
+  }
+
+  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  {
+    $description = parent::describeInput($columnName);
+    switch ($columnName) {
+      case 'shared_folder':
+        $description
+          ->setReactComponent('InputHyperlink')
+          ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
+        ;
+      break;
+    }
+    return $description;
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

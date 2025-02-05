@@ -56,11 +56,26 @@ class Deal extends \HubletoMain\Core\Model
       'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
       'id_deal_status' => (new Lookup($this, $this->translate('Status'), DealStatus::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
     ]));
+  }
+
+  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  {
+    $description = parent::describeInput($columnName);
+    switch ($columnName) {
+      case 'shared_folder':
+        $description
+          ->setReactComponent('InputHyperlink')
+          ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
+        ;
+      break;
+    }
+    return $description;
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

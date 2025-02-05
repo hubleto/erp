@@ -76,24 +76,14 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
 
   renderTitle(): JSX.Element {
     if (getUrlParam('recordId') == -1) {
-      return(
-        <>
-          <h2>
-            {'New Deal'}
-          </h2>
-        </>
-      );
+      return <h2>{globalThis.main.translate('New Deal')}</h2>;
     } else {
-      return (
-        <>
-          <h2>
-            {this.state.record.title
-              ? this.state.record.title
-              : '[Undefined Deal Name]'}
-          </h2>
-        </>
-      );
+      return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Deal Name]'}</h2>
     }
+  }
+
+  renderSubTitle(): JSX.Element {
+    return <small>{globalThis.main.translate('Lead')}</small>;
   }
 
   changeDealStatus(idStep: number, R: any) {
@@ -257,6 +247,9 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
+                  </div>
+                  <div className='card-body flex flex-row gap-2'>
+                    {this.inputWrapper('note', {readonly: R.is_archived})}
                   </div>
                 </div>
                 {showAdditional ?
@@ -511,6 +504,9 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
           : null}
           {showAdditional ? (
             <TabPanel header="Documents">
+              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Shared documents')}</span></div></div></div>
+              {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Local documents')}</span></div></div></div>
               <TableDealDocuments
                 uid={this.props.uid + "_table_deal_documents"}
                 data={{ data: R.DOCUMENTS }}
@@ -603,9 +599,6 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
               : null}
             </TabPanel>
           ) : null}
-          <TabPanel header="Notes">
-            {this.inputWrapper('note', {readonly: R.is_archived})}
-          </TabPanel>
           {showAdditional ?
             <TabPanel header={globalThis.main.translate('History')}>
               {R.HISTORY.length > 0 ?

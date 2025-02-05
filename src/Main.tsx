@@ -12,6 +12,7 @@ import InputLookup from "adios/Inputs/Lookup";
 import InputImage from "adios/Inputs/Image";
 import InputBoolean from "adios/Inputs/Boolean";
 import InputColor from "adios/Inputs/Color";
+import InputHyperlink from "adios/Inputs/Hyperlink";
 
 // Primereact
 import { Tooltip } from "primereact/tooltip";
@@ -35,6 +36,7 @@ export default class HubletoMain extends ADIOS {
     this.registerReactComponent('InputBoolean', InputBoolean);
     this.registerReactComponent('InputImage', InputImage);
     this.registerReactComponent('InputColor', InputColor);
+    this.registerReactComponent('InputHyperlink', InputHyperlink);
 
     // Primereact
     this.registerReactComponent('Tooltip', Tooltip);

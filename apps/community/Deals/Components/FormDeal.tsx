@@ -248,6 +248,9 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
                   </div>
+                  <div className='card-body flex flex-row gap-2'>
+                    {this.inputWrapper('note', {readonly: R.is_archived})}
+                  </div>
                 </div>
                 {showAdditional ?
                   <>
@@ -596,9 +599,6 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
               : null}
             </TabPanel>
           ) : null}
-          <TabPanel header="Notes">
-            {this.inputWrapper('note', {readonly: R.is_archived})}
-          </TabPanel>
           {showAdditional ?
             <TabPanel header={globalThis.main.translate('History')}>
               {R.HISTORY.length > 0 ?

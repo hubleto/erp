@@ -1,8 +1,8 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
-@layer base {
+@layer tailwind-base {
 
   /* HTML tags */
   html { @apply !font-sans text-gray-800; }

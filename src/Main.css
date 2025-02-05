@@ -248,6 +248,9 @@
   /* .p-datatable .p-datatable-tbody > tr > td { @apply p-1 text-sm; } */
   .p-datatable .p-datatable-thead > tr > th { @apply p-1 text-sm border-b border-b-gray-400; }
   .p-datatable .p-datatable-thead > tr > th .p-sortable-column-icon { @apply scale-[0.75]; }
+  .p-datatable .p-sortable-column.p-highlight .p-column-header-content .p-column-title { @apply text-primary; }
+  .p-datatable .p-sortable-column.p-highlight .p-column-header-content .p-sortable-column-icon { @apply text-primary; }
+  .p-datatable-footer { @apply p-2 text-xs bg-slate-100; }
   .p-treetable .p-treetable-tbody > tr > td { @apply p-1 text-sm; }
   .p-tree-container .p-treenode { @apply ml-2; }
   .p-tree-container .p-treenode .p-treenode .p-treenode .btn-transparent { @apply bg-slate-50 border-gray-300; }

@@ -40,6 +40,7 @@ class Installer {
       \HubletoApp\Community\Calendar\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Documents\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Customers\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Reports\Loader::class => [ 'enabled' => true ],
     ],
     'invoices' => [
       \HubletoApp\Community\Billing\Loader::class => [ 'enabled' => true ],

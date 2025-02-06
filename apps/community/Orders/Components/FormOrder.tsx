@@ -55,7 +55,7 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
     if (getUrlParam('recordId') == -1) {
       return <h2>{globalThis.main.translate('New Order')}</h2>;
     } else {
-      return <h2>{this.state.record.id_company ? this.state.record.order_number + " - " + this.state.record.CUSTOMER.name : '[Undefined Order]'}</h2>
+      return <h2>{this.state.record.id_company ? this.state.record.order_number : '[Undefined Order]'}</h2>
     }
   }
 

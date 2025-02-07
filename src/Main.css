@@ -1,8 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
+@import "tailwindcss";
+@config "../tailwind.config.js";
+@layer theme, base, components, utilities, primereact, tailwind-base;
+@layer tailwind-base {
 
   /* HTML tags */
   html { @apply !font-sans text-gray-800; }
@@ -34,7 +33,7 @@
   nav#default-navbar .btn { @apply !shadow-none border border-gray-200; }
 
   div#sign-in-screen { @apply w-full h-screen flex items-center justify-center; }
-  div#sign-in-screen > .inner { @apply shadow-lg rounded-lg border w-1/2 flex flex-col items-center p-10; }
+  div#sign-in-screen > .inner { @apply shadow-lg rounded-lg border border-slate-200 w-1/2 flex flex-col items-center p-10; }
   div#sign-in-screen > .inner > .logo { @apply flex-1 flex items-center justify-center; }
   div#sign-in-screen > .inner > .form { @apply flex-1 border-none shadow-none; }
   div#sign-in-screen > .inner > .form > .title { @apply text-center; }
@@ -51,8 +50,8 @@
   .adios.component.table .table-header-title { @apply flex-1 text-left text-primary text-center text-2xl mr-2 }
   .adios.component.table .table-header-right { @apply flex-1 text-center flex gap-1 justify-end; }
   .adios.component.table .table-header-search { @apply border border-gray-300 text-sm rounded-sm block w-full p-1 }
-  .adios.component.table .table-body { @apply border; }
-  .adios.component.table .table-body tr { @apply border divide-x border-transparent hover:bg-gray-100; box-sizing: border-box; }
+  .adios.component.table .table-body { @apply border border-slate-200; }
+  .adios.component.table .table-body tr { @apply border border-transparent divide-x hover:bg-gray-100; box-sizing: border-box; }
   .adios.component.table .table-body thead th td { @apply p-0.5 text-sm; margin: 1px; }
   .adios.component.table .table-body tbody tr td { @apply p-0.5 text-sm; margin: 1px; }
   .adios.component.table .table-body tbody tr td > div { @apply text-sm; }
@@ -76,7 +75,7 @@
 
   .adios.component.input input,
   .adios.component.input textarea,
-  .adios.component.input select { @apply border flex flex-1 border-gray-300 text-sm rounded-sm w-full p-0.5; }
+  .adios.component.input select { @apply border border-slate-200 flex flex-1 text-sm rounded-sm w-full p-0.5; }
 
   .adios.component.input.int input { @apply max-w-[160px]; }
   .adios.component.input.date input { @apply max-w-[160px]; }
@@ -107,10 +106,10 @@
   .btn .text { @apply block px-2 py-1 text-sm; }
   .btn .text > small { @apply block text-xs text-gray-600; } */
 
-  .btn { @apply divide-x rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
+  .btn { @apply rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white cursor-pointer hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
   .btn.btn-small { @apply h-auto md:h-[1.25rem]; }
-  .btn .icon { @apply flex h-full items-center px-2 py-1 text-sm justify-center; }
-  .btn .text { @apply flex h-full items-center px-2 py-1 text-sm break-all; max-height: 3.5rem; overflow: hidden; }
+  .btn .icon { @apply flex h-full items-center px-2 py-1 text-sm justify-center border-slate-200; }
+  .btn .text { @apply flex h-full items-center px-2 py-1 text-sm break-all border-slate-200; max-height: 3.5rem; overflow: hidden; }
 
   .btn.btn-no-border { @apply !border-none; }
 
@@ -180,21 +179,21 @@
   .breadcrumbs { @apply flex pb-2; }
   .breadcrumbs ol li:nth-child(n+2) { @apply hidden sm:block md:block ;}
 
-  .card { @apply border border-solid rounded shadow-lg mb-4; }
-  .card-header { @apply flex justify-between font-bold border-b p-4 bg-gray-50; }
+  .card { @apply border border-solid border-slate-200 rounded shadow-lg mb-4; }
+  .card-header { @apply flex justify-between font-bold border-b border-slate-200 p-4 bg-gray-50; }
   .card-header small { @apply font-normal; }
   .card-body { @apply p-2; }
-  .card-footer { @apply flex justify-between border-t p-4; }
+  .card-footer { @apply flex justify-between border-t border-slate-200 p-4; }
 
   .dialog { @apply rounded bg-white; }
   .dialog-header { @apply p-4; }
   .dialog-body { @apply p-4; }
-  .dialog-footer { @apply p-4 border-t border-gray-200 bg-gray-50; }
+  .dialog-footer { @apply p-4 border-t border-slate-200 bg-gray-50; }
 
   .dialog-danger-header { @apply bg-red-600 text-white hover:bg-red-400; }
   .dialog-warning-header { @apply bg-yellow-300 text-gray-800 hover:bg-yellow-200; }
 
-  .divider { @apply px-1 pt-12 pb-4; }
+  .divider { @apply px-1 pt-4 pb-2; }
   .divider.dense { @apply px-1 py-2; }
   .divider > div { @apply relative; }
   .divider > div > div { @apply flex relative justify-start; }
@@ -202,15 +201,15 @@
   .divider > div > div:nth-child(1) > div { @apply border-t w-full border-gray-200; }
   .divider > div > div:nth-child(2) > span { @apply flex justify-between items-center text-gray-600 font-semibold leading-6 ml-3 px-3 bg-white; }
 
-  .list { @apply list-none border rounded divide-y; }
+  .list { @apply list-none border border-slate-200 rounded divide-y; }
 
-  .form { @apply shadow-sm rounded-sm border border-gray-200; }
-  .form .form-header { @apply flex border-b border-b-gray-200 text-primary items-baseline w-full justify-between shadow-sm p-2 bg-gray-50; }
+  .form { @apply shadow-sm rounded-sm border border-slate-200; }
+  .form .form-header { @apply flex border-b border-b-slate-200 text-primary items-baseline w-full justify-between shadow-sm p-2 bg-gray-50; }
   .form .form-header .modal-header-left { @apply flex flex-1 gap-1; }
   .form .form-header .modal-header-title { @apply flex-1 text-center; }
   .form .form-header .modal-header-right { @apply flex flex-1 gap-1 justify-end; }
   .form .form-body { @apply p-2 flex-1 overflow-y-auto; }
-  .form .form-footer { @apply p-2 border-t border-t-gray-200 bg-gray-50; }
+  .form .form-footer { @apply p-2 border-t border-t-slate-200 bg-gray-50; }
 
   .input-wrapper { @apply relative justify-between items-center border border-transparent py-1 hover:bg-gray-50; box-sizing: border-box; }
   .input-wrapper .input-label { @apply flex-1 block text-xs text-gray-400; }
@@ -219,10 +218,10 @@
   .input-wrapper.required .input-label { @apply pl-3; }
   .input-wrapper .input-body { @apply flex items-center flex-[2]; overflow-wrap: anywhere; }
   .input-wrapper .input-info { @apply text-xs text-gray-500 pr-1; }
-  .input-wrapper .input-description { @apply text-xs text-gray-500 pr-1; }
+  .input-wrapper .input-description { @apply text-xs text-primary pr-1; }
 
-  .key-value-table { @apply leading-8 divide-y text-sm border; }
-  .key-value-table.dense { @apply leading-4 border; }
+  .key-value-table { @apply leading-8 divide-y text-sm border border-slate-200; }
+  .key-value-table.dense { @apply leading-4 border border-slate-200; }
   .key-value-table > div { @apply flex justify-between p-1 hover:bg-gray-100; }
   .key-value-table > div div:nth-child(2) { @apply font-bold; }
 
@@ -248,6 +247,9 @@
   /* .p-datatable .p-datatable-tbody > tr > td { @apply p-1 text-sm; } */
   .p-datatable .p-datatable-thead > tr > th { @apply p-1 text-sm border-b border-b-gray-400; }
   .p-datatable .p-datatable-thead > tr > th .p-sortable-column-icon { @apply scale-[0.75]; }
+  .p-datatable .p-sortable-column.p-highlight .p-column-header-content .p-column-title { @apply text-primary; }
+  .p-datatable .p-sortable-column.p-highlight .p-column-header-content .p-sortable-column-icon { @apply text-primary; }
+  .p-datatable-footer { @apply p-2 text-xs bg-slate-100; }
   .p-treetable .p-treetable-tbody > tr > td { @apply p-1 text-sm; }
   .p-tree-container .p-treenode { @apply ml-2; }
   .p-tree-container .p-treenode .p-treenode .p-treenode .btn-transparent { @apply bg-slate-50 border-gray-300; }

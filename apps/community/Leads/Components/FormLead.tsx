@@ -77,6 +77,10 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     }
   }
 
+  renderSubTitle(): JSX.Element {
+    return <small>{globalThis.main.translate('Lead')}</small>;
+  }
+
   getLeadSumPrice(recordServices: any) {
     var sumLeadPrice = 0;
     recordServices.map((service, index) => {
@@ -468,6 +472,9 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
           : null}
           {showAdditional ? (
             <TabPanel header="Documents">
+              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Shared documents')}</span></div></div></div>
+              {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Local documents')}</span></div></div></div>
               <TableLeadDocuments
                 uid={this.props.uid + "_table_lead_document"}
                 data={{ data: R.DOCUMENTS }}

@@ -151,7 +151,7 @@
 
     <aside id="default-sidebar">
       <nav>
-        <input class="bg-white/20 text-white text-xs m-1 p-1 rounded placeholder-white" placeholder="Search app..." onkeyup="smis(event, this.value);" />
+        <input class="bg-white/20 text-white text-xs m-1 p-1 rounded !placeholder-white" placeholder="Search app..." onkeyup="smis(event, this.value);" />
         {% set i = 0 %}
         {% for item in viewParams.sidebar.level1Items %}
           {% if item.type == 'link' %}

@@ -3,6 +3,7 @@
 ## Release v0.7 (not released yet)
 
   * improved unit testing
+  * deals and leads are now linked to an online shared folder (document storage)
 
 ## Release v0.6
 

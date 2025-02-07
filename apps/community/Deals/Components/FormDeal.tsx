@@ -171,6 +171,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
             <div className='grid grid-cols-2 gap-1' style=
               {{gridTemplateAreas:`
                 'info info'
+                'notes notes'
                 'status status'
                 'services services'
                 'history history'
@@ -178,6 +179,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                 <div className='card mt-2' style={{gridArea: 'info'}}>
                   <div className='card-body flex flex-row gap-2'>
                     <div className='grow'>
+                      {this.inputWrapper('identifier', {readonly: R.is_archived})}
                       {this.inputWrapper('title', {readonly: R.is_archived})}
                       <FormInput title={"Company"} required={true}>
                         <Lookup {...this.getInputProps()}
@@ -214,7 +216,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         {this.inputWrapper('price', {
                           readonly: (R.SERVICES && R.SERVICES.length > 0) || R.is_archived ? true : false,
                         })}
-                        {this.inputWrapper('id_currency', {readonly: R.is_archived})}
+                        {this.inputWrapper('id_currency')}
                       </div>
                       {this.inputWrapper('id_deal_status', {readonly: R.is_archived})}
                       {showAdditional && R.id_lead != null ?
@@ -247,9 +249,6 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
-                  </div>
-                  <div className='card-body flex flex-row gap-2'>
-                    {this.inputWrapper('note', {readonly: R.is_archived})}
                   </div>
                 </div>
                 {showAdditional ?
@@ -294,11 +293,14 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         </div>
                       </div>
                     </div>
+                    <div className='card card-body' style={{gridArea: 'notes'}}>
+                      {this.inputWrapper('note', {readonly: R.is_archived})}
+                    </div>
                     {showAdditional ?
                       <div className='card mt-2' style={{gridArea: 'services'}}>
                         <div className='card-header'>Services</div>
                         <div className='card-body flex flex-col gap-2'>
-                          <div className='w-full h-full overflow-x-scroll'>
+                          <div className='w-full h-full overflow-x-auto'>
                             <TableDealServices
                               uid={this.props.uid + "_table_deal_services"}
                               data={{ data: R.SERVICES }}

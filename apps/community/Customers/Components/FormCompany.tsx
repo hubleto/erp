@@ -194,6 +194,7 @@ export default class FormCompany<P, S> extends Form<
               style={{
                 gridTemplateAreas: `
                   'company company'
+                  'notes notes'
                   'contacts contacts'
                   'activities activities'
                 `,
@@ -233,6 +234,10 @@ export default class FormCompany<P, S> extends Form<
                     {this.inputWrapper("id_user")}
                   </div>
                 </div>
+              </div>
+
+              <div className="card card-body"  style={{ gridArea: "notes" }}>
+                {this.inputWrapper("note")}
               </div>
 
               {showAdditional ?
@@ -568,9 +573,6 @@ export default class FormCompany<P, S> extends Form<
               : null}
             </TabPanel>
           ) : null}
-          <TabPanel header={globalThis.main.translate('Notes')}>
-            {this.input("note")}
-          </TabPanel>
         </TabView>
 
           {/* <div>

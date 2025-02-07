@@ -11,6 +11,8 @@ use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Text;
+use HubletoApp\Community\Settings\Models\Currency;
+use HubletoApp\Community\Settings\Models\Setting;
 
 class Order extends \HubletoMain\Core\Model
 {
@@ -22,6 +24,7 @@ class Order extends \HubletoMain\Core\Model
     'PRODUCTS' => [ self::HAS_MANY, OrderProduct::class, 'id_order', 'id' ],
     'HISTORY' => [ self::HAS_MANY, History::class, 'id_order', 'id' ],
     'CUSTOMER' => [ self::HAS_ONE, Company::class, 'id','id_company'],
+    'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
   ];
 
   public function columns(array $columns = []): array
@@ -29,9 +32,10 @@ class Order extends \HubletoMain\Core\Model
     return parent::columns(array_merge($columns,[
       'order_number' => (new Varchar($this, $this->translate('Order number')))->setReadonly(),
       'id_company' => (new Lookup($this, $this->translate('Customer'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
-      'price' => (new Decimal($this, $this->translate('Price')))->setReadonly(),
+      'price' => (new Decimal($this, $this->translate('Price')))->setReadonly()->setRequired(),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_order' => (new Date($this, $this->translate('Order date')))->setRequired(),
-      'required_delivery_date' => (new Date($this, $this->translate('Required delivery date')))->setRequired(),
+      'required_delivery_date' => (new Date($this, $this->translate('Required delivery date'))),
       'shipping_info' => (new Varchar($this, $this->translate('Shipping information'))),
       'note' => (new Text($this, $this->translate('Notes'))),
 
@@ -73,8 +77,16 @@ class Order extends \HubletoMain\Core\Model
 
   public function describeForm(): \ADIOS\Core\Description\Form
   {
+    $mSettings = new Setting($this->main);
+    $defaultCurrency = (int) $mSettings->eloquent
+      ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
+      ->first()
+      ->value
+    ;
+
     $description = parent::describeForm();
     $description->defaultValues["date_order"] = date("Y-m-d");
+    $description->defaultValues["id_currency"] = $defaultCurrency;
     $description->defaultValues["price"] = 0;
     return $description;
   }

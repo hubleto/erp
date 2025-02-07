@@ -180,12 +180,14 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
               {{gridTemplateAreas:`
                 'notification notification'
                 'info info'
+                'notes notes'
                 'services services'
                 'history history'
               `}}>
               <div className='card mt-2' style={{gridArea: 'info'}}>
                 <div className='card-body flex flex-row gap-2'>
                   <div className='grow'>
+                    {this.inputWrapper('identifier', {readonly: R.is_archived})}
                     {this.inputWrapper('title', {readonly: R.is_archived})}
                     <FormInput title={"Company"}>
                       <Lookup {...this.getInputProps()}
@@ -222,7 +224,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                       {this.inputWrapper('price', {
                         readonly: (R.SERVICES && R.SERVICES.length) > 0 || R.is_archived ? true : false,
                       })}
-                      {this.inputWrapper('id_currency', {readonly: R.is_archived})}
+                      {this.inputWrapper('id_currency')}
                     </div>
                     {showAdditional ? this.inputWrapper('id_lead_status', {readonly: R.is_archived}) : null}
                     {showAdditional ?
@@ -263,15 +265,18 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   </div>
                 </div>
               </div>
+              <div className='card card-body' style={{gridArea: 'notes'}}>
+                {this.inputWrapper('note', {readonly: R.is_archived})}
+              </div>
               {showAdditional ?
                 <div className='card mt-2' style={{gridArea: 'services'}}>
                   <div className='card-header'>Services</div>
                   <div className='card-body flex flex-col gap-2'>
-                    <div className='w-full h-full overflow-x-scroll'>
+                    <div className='w-full h-full overflow-x-auto'>
                       <TableLeadServices
                         uid={this.props.uid + "_table_lead_services"}
                         data={{ data: R.SERVICES }}
-                        leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
+                        leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : "Total: 0 " + R.CURRENCY.code }
                         descriptionSource='both'
                         customEndpointParams={{'idLead': R.id}}
                         description={{
@@ -567,9 +572,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
               : null}
             </TabPanel>
           ) : null}
-          <TabPanel header="Notes">
-            {this.inputWrapper('note', {readonly: R.is_archived})}
-          </TabPanel>
           {showAdditional ?
             <TabPanel header={globalThis.main.translate('History')}>
               {R.HISTORY.length > 0 ?

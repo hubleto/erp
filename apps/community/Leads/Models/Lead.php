@@ -16,6 +16,7 @@ use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
+use HubletoApp\Community\Settings\Models\Setting;
 
 class Lead extends \HubletoMain\Core\Model
 {
@@ -40,11 +41,12 @@ class Lead extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
+      'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
       'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'price' => (new Decimal($this, $this->translate('Price'))),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
       'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
@@ -113,10 +115,18 @@ class Lead extends \HubletoMain\Core\Model
   {
     $description = parent::describeForm();
 
+    $mSettings = new Setting($this->main);
+    $defaultCurrency = (int) $mSettings->eloquent
+      ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
+      ->first()
+      ->value
+    ;
+
     $description->defaultValues['id_company'] = null;
     $description->defaultValues['date_created'] = date("Y-m-d");
     $description->defaultValues['id_person'] = null;
     $description->defaultValues['is_archived'] = 0;
+    $description->defaultValues['id_currency'] = $defaultCurrency;
     $description->defaultValues['id_lead_status'] = 1;
     $description->defaultValues['id_user'] = $this->main->auth->getUserId();
 

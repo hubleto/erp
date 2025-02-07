@@ -108,7 +108,8 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
     switch (input.type) {
       case "int":
       case "float":
-        return <>
+        return <div className="input-wrapper">
+          <label className="input-label">Search</label>
           <input
             readOnly={this.props.readonly ?? false}
             onChange={(e) => this.setState({selectedValue: e.target.value})}
@@ -116,10 +117,11 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
             className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
             type="number"
           />
-        </>
+        </div>
       case "varchar":
       case "text":
-        return <>
+        return <div className="input-wrapper">
+          <label className="input-label">Search</label>
           <input
             readOnly={this.props.readonly ?? false}
             onChange={(e) => this.setState({selectedValue: e.target.value})}
@@ -127,11 +129,12 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
             className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
             type="text"
           />
-        </>
+        </div>
       case "date":
       case "datetime":
       case "time":
-        return <>
+        return <div className="input-wrapper">
+          <label className="input-label">Search</label>
           <input
             readOnly={this.props.readonly ?? false}
             onChange={(e) => this.setState({selectedValue: e.target.value})}
@@ -139,9 +142,10 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
             className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
             type={input.type}
           />
-        </>
+        </div>
       case "lookup":
-        return <>
+        return <div className="input-wrapper">
+          <label className="input-label">Search</label>
           <FormInput>
             <Lookup
               readonly={this.props.readonly ?? false}
@@ -151,9 +155,10 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
               model={input.model}
             ></Lookup>
           </FormInput>
-        </>
+        </div>
       case "boolean":
-        return <>
+        return <div className="input-wrapper">
+          <label className="input-label">Search</label>
           <select
             disabled={this.props.readonly ?? false}
             onChange={(e) => this.setState({selectedValue: e.target.value})}
@@ -162,7 +167,7 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
             <option value={0}>No</option>
             <option value={1}>Yes</option>
           </select>
-        </>
+        </div>
       default:
         return <></>
     }
@@ -177,9 +182,9 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
               y: {
                 beginAtZero: true,
               },
-            }}
-          }
-          data={ {
+            },
+          }}
+          data={{
             labels: this.state.data != null ? [...this.state.data.labels] : [],
             datasets: [
               {
@@ -191,18 +196,26 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
 
         />
       case "doughnut":
-        return <Doughnut
-          data={ {
-            labels: this.state.data ? [...this.state.data.labels] : [],
-            datasets: [
-              {
-                data: this.state.data ? [...this.state.data.values] : [],
-                backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
+        return <div className="w-[35vh]">
+          <Doughnut
+            options={{
+              plugins: {
+                legend: {
+                  position: "left",
+                }
               }
-            ]
-          }}
-        />
-
+            }}
+            data={ {
+              labels: this.state.data ? [...this.state.data.labels] : [],
+              datasets: [
+                {
+                  data: this.state.data ? [...this.state.data.values] : [],
+                  backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
+                }
+              ]
+            }}
+          />
+        </div>
       default:
         return <></>;
     }
@@ -232,90 +245,110 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
   render(): JSX.Element {
     return (
       <>
-        <div>
-          <h2>{this.props.name}</h2>
-          <select
-            disabled={this.props.readonly ?? false}
-            name="field"
-            id="configs.fields"
-            className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-            onChange={(e) => {
-              this.setState({selectedField: e.target.value})
-              this.changeOptions(e.target.value)
-            }}
-          >
-            {Object.keys(this.props.configs.fields).map( (key) => (
-              <option
-                value={key}
+        <h2>{this.props.name}</h2>
+        <div className="card card-body">
+          <div className="flex flex-row items-end gap-2">
+            {/* --- FIELDS --- */}
+            <div className="input-wrapper">
+              <label className="input-label">Field</label>
+              <select
+                disabled={this.props.readonly ?? false}
+                name="field"
+                id="configs.fields"
+                className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+                onChange={(e) => {
+                  this.setState({selectedField: e.target.value})
+                  this.changeOptions(e.target.value)
+                }}
               >
-                {this.props.configs.fields[key].title}
-              </option>
-            ))}
-          </select>
-          <select
-            disabled={this.props.readonly ?? false}
-            name="options"
-            id="options"
-            value={this.state.selectedOption}
-            className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-            onChange={(e) => {
-              this.setState({selectedOption: Number(e.target.value)})
-            }}
-          >
-            {this.state.filterOptions ?
-              Object.keys(this.state.filterOptions).map((key) => (
-                <option
-                  value={key}
-                >
-                  {this.state.filterOptions[key]}
-                </option>
-              ))
-            : <option>Empty</option>}
-          </select>
-
-          {this.state.selectedField ?
-            this.renderInputElement(this.state.selectedField)
-          : this.renderInputElement(Object.keys(this.props.configs.fields)[0])}
-          <div>
-            <button onClick={() => this.requestData()} className="btn btn-primary"><span className="icon"><i className="fas fa-search"></i></span></button>
+                {Object.keys(this.props.configs.fields).map( (key) => (
+                  <option
+                    value={key}
+                  >
+                    {this.props.configs.fields[key].title}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* --- OPERATIONS --- */}
+            <div className="input-wrapper">
+              <select
+                disabled={this.props.readonly ?? false}
+                name="options"
+                id="options"
+                value={this.state.selectedOption}
+                className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+                onChange={(e) => {
+                  this.setState({selectedOption: Number(e.target.value)})
+                }}
+              >
+                {this.state.filterOptions ?
+                  Object.keys(this.state.filterOptions).map((key) => (
+                    <option
+                      value={key}
+                    >
+                      {this.state.filterOptions[key]}
+                    </option>
+                  ))
+                : <option>Empty</option>}
+              </select>
+            </div>
+            {/* --- SEARCH INPUT --- */}
+            {this.renderInputElement(this.state.selectedField)}
+          </div>
+          <div className="flex flex-row items-end gap-2">
+            <div className="input-wrapper">
+              <label className="input-label">Result</label>
+              <select
+                disabled={this.props.readonly ?? false}
+                name="types"
+                id="types"
+                value={this.state.selectedType}
+                className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+                onChange={(e) => {
+                  this.setState({selectedType: e.target.value})
+                }}
+              >
+                {Object.keys(this.props.configs.returnWith).map( (key) => (
+                  <optgroup label={key}>
+                    {Object.keys(this.props.configs.returnWith[key]).map( (item, index) => (
+                      <option value={key + "/" + index}>{this.props.configs.returnWith[key][item]["title"]}</option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+            <div className="input-wrapper">
+              <label className="input-label">View by</label>
+              <select
+                disabled={this.props.readonly ?? false}
+                name="groups"
+                id="groups"
+                value={this.state.selectedGroup}
+                className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+                onChange={(e) => {
+                  this.setState({selectedGroup: e.target.value})
+                }}
+              >
+                {Object.keys(this.props.configs.groupsBy).map( (key) => (
+                  <option value={this.props.configs.groupsBy[key]["field"]}>{this.props.configs.groupsBy[key]["title"]}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="card card-body">
+          {/* --- BUTTONS --- */}
+          <div className="flex flex-row gap-1">
+            {this.props.readonly ? <></> :
+              <button onClick={() => this.requestData()} className="btn btn-primary"><span className="icon"><i className="fas fa-search"></i></span><span className="text">Search</span></button>
+            }
             <button onClick={() => this.setState({selectedGraph: "doughnut"})} className="btn btn-primary"><span className="icon"><i className="fas fa-chart-pie"></i></span></button>
             <button onClick={() => this.setState({selectedGraph: "bar"})} className="btn btn-primary"><span className="icon"><i className="fas fa-chart-bar"></i></span></button>
           </div>
-        </div>
-        <select
-          disabled={this.props.readonly ?? false}
-          name="types"
-          id="types"
-          value={this.state.selectedType}
-          className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-          onChange={(e) => {
-            this.setState({selectedType: e.target.value})
-          }}
-        >
-          {Object.keys(this.props.configs.returnWith).map( (key) => (
-            <optgroup label={key}>
-              {Object.keys(this.props.configs.returnWith[key]).map( (item, index) => (
-                <option value={key + "/" + index}>{this.props.configs.returnWith[key][item]["title"]}</option>
-              ))}
-            </optgroup>
-          ))}
-        </select>
-        <select
-          disabled={this.props.readonly ?? false}
-          name="groups"
-          id="groups"
-          value={this.state.selectedGroup}
-          className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-          onChange={(e) => {
-            this.setState({selectedGroup: e.target.value})
-          }}
-        >
-          {Object.keys(this.props.configs.groupsBy).map( (key) => (
-            <option value={this.props.configs.groupsBy[key]["field"]}>{this.props.configs.groupsBy[key]["title"]}</option>
-          ))}
-        </select>
-        <div className="h-[500px] w-[800px]">
-          {this.state.data && this.state.data.values.length > 0 ? this.renderChart() : <>No data was found with selected parameters</>}
+          <div className="w-full flex flex-row justify-center h-[35vh]">
+            {this.state.data && this.state.data.values.length > 0 ? this.renderChart() : <>No data was found with selected parameters</>}
+          </div>
         </div>
       </>
     );

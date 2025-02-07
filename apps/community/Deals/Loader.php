@@ -30,7 +30,7 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
     $this->main->calendarManager->addCalendar(Calendar::class);
-    $this->main->reportManager->addReport(Reports\HighPrice::class);
+    $this->main->reportManager->addReport(Reports\MyRevenue::class);
     $this->main->reportManager->addReport(Reports\TodayRevenue::class);
   }
 

@@ -9,7 +9,7 @@ import Leads from './apps/community/Leads/Loader'
 import Deals from './apps/community/Deals/Loader'
 import Products from './apps/community/Products/Loader'
 import Orders from './apps/community/Orders/Loader'
-import Report from './apps/enterprise/Reports/Loader'
+import Report from './apps/community/Reports/Loader'
 
 //@ts-ignore
 const main: HubletoMain = new HubletoMain(window.ConfigEnv);

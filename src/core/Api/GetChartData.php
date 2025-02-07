@@ -7,7 +7,6 @@ use HubletoMain\Core\Model;
 
 class GetChartData extends \HubletoMain\Core\Controller
 {
-  public Model $model;
 
   const OPERATIONS = [
     1 => "=",
@@ -19,14 +18,21 @@ class GetChartData extends \HubletoMain\Core\Controller
 
   public function renderJson(): ?array
   {
-    $this->model = $this->main->getModel($this->main->urlParamAsString("model"));
+    $model = $this->main->getModel($this->main->urlParamAsString("model")) ?? null;
     $field = $this->main->urlParamAsString("field") ?? null;
     $option = $this->main->urlParamAsInteger("option") ?? null;
-    $value = $this->main->urlParamAsString("value") ?? "";
+    $value = $this->main->urlParamAsString("value") ?? null;
     $type = $this->main->urlParamAsString("type") ?? null;
     $typeOptions = $this->main->urlParamAsString("typeOptions") ?? null;
     $groupBy = $this->main->urlParamAsString("groupBy") ?? null;
     $returnData = [];
+
+    if (!isset($model) || !isset($field) || $option == 0 || !isset($value) || !isset($type) || !isset($typeOptions) || !isset($groupBy)) {
+      return [
+        "status" => "failed",
+        "error" => "Missing needed parameters"
+      ];
+    }
 
     try {
       $typeOptions = json_decode($typeOptions, true);
@@ -45,18 +51,18 @@ class GetChartData extends \HubletoMain\Core\Controller
           break;
       }
 
-      $data = $this->model->eloquent->selectRaw($function." as function, ".$groupBy);
+      $data = $model->eloquent->selectRaw($function." as function, ".$groupBy);
       if ($option == 5) $data = $data->where($field, GetChartData::OPERATIONS[$option], '%'.$value.'%');
       else $data = $data->where($field, GetChartData::OPERATIONS[$option], $value);
       $data = $data->groupBy($groupBy)->get()->toArray();
 
-      $groupByModel = $this->main->getModel($this->model->getColumn($groupBy)->jsonSerialize()["model"]);
+      $groupByModel = $this->main->getModel($model->getColumn($groupBy)->jsonSerialize()["model"]);
       $groupByModelLookupSqlValue = $groupByModel->lookupSqlValue;
       $groupByModelLookupSqlValue = str_replace("{%TABLE%}.", "", $groupByModelLookupSqlValue);
 
       if (empty($data)) {
         $returnData["labels"] = [];
-        $returnData["labels"] = [];
+        $returnData["values"] = [];
         $returnData["colors"] = [];
       } else {
         foreach ($data as $value) {

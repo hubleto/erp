@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Deals\Reports;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class HighPrice extends \HubletoMain\Core\Report {
+class MyRevenue extends \HubletoMain\Core\Report {
 
   protected string $urlSlug = 'high-price';
   public string $name = 'Deals with high value';
@@ -24,10 +24,10 @@ class HighPrice extends \HubletoMain\Core\Report {
         ["field" => "price", "title" => "Total price of deals"],
       ],
     ];
-    $data['fields'] = ["price" => $this->model->getColumn("price")];
 
+    $data['fields'] = ["price" => $this->model->getColumn("price")];
     $data["option"] = 3;
-    $data["value"] = 50;
+    $data["value"] = 80;
 
     return $data;
   }

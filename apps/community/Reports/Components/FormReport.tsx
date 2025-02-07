@@ -30,7 +30,7 @@ export interface FormReportState {
   selectedGroup: string,
   filterOptions: any,
   data: any,
-  graphType: string,
+  selectedGraph: string,
 }
 
 export default class FormReport extends Component<FormReportProps,FormReportState> {
@@ -40,12 +40,12 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
     this.state = {
       filterOptions: null,
       selectedField: Object.keys(this.props.configs.fields)[0],
-      selectedOption: this.props.option ?? 1,
+      selectedOption: this.props.option || !isNaN(this.props.option) ? this.props.option : 1,
       selectedType: Object.keys(this.props.configs.returnWith)[0]+"/0",
       selectedGroup: this.props.configs.groupsBy[0]["field"],
       selectedValue: this.props.value ?? null,
+      selectedGraph: "doughnut",
       data: null,
-      graphType: "doughnut"
     };
   }
 
@@ -108,19 +108,44 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
     switch (input.type) {
       case "int":
       case "float":
-        return <input readOnly={this.props.readonly ?? false} onChange={(e) => this.setState({selectedValue: e.target.value})} value={this.props.value ?? null} className="border p-2 mb-2 mt-2 rounded-md border-gray-200" type="number"></input>
+        return <>
+          <input
+            readOnly={this.props.readonly ?? false}
+            onChange={(e) => this.setState({selectedValue: e.target.value})}
+            value={this.props.value ?? null}
+            className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+            type="number"
+          />
+        </>
       case "varchar":
       case "text":
-        return <input readOnly={this.props.readonly ?? false} onChange={(e) => this.setState({selectedValue: e.target.value})} value={this.props.value ?? null} className="border p-2 mb-2 mt-2 rounded-md border-gray-200" type="text"></input>
+        return <>
+          <input
+            readOnly={this.props.readonly ?? false}
+            onChange={(e) => this.setState({selectedValue: e.target.value})}
+            value={this.props.value ?? null}
+            className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+            type="text"
+          />
+        </>
       case "date":
       case "datetime":
       case "time":
-        return <input readOnly={this.props.readonly ?? false} onChange={(e) => this.setState({selectedValue: e.target.value})} value={this.props.value ?? null} className="border p-2 mb-2 mt-2 rounded-md border-gray-200" type="date"></input>
+        return <>
+          <input
+            readOnly={this.props.readonly ?? false}
+            onChange={(e) => this.setState({selectedValue: e.target.value})}
+            value={this.props.value ?? null}
+            className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+            type={input.type}
+          />
+        </>
       case "lookup":
         return <>
           <FormInput>
             <Lookup
               readonly={this.props.readonly ?? false}
+              value={this.props.value ?? this.state.selectedValue}
               onChange={(value: any) => this.setState({selectedValue: value})}
               uid={"lookup_filter_"+newSelectedField}
               model={input.model}
@@ -128,21 +153,23 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
           </FormInput>
         </>
       case "boolean":
-        return <select
-          disabled={this.props.readonly ?? false}
-          onChange={(e) => this.setState({selectedValue: e.target.value})}
-          className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-        >
-          <option value={0}>No</option>
-          <option value={1}>Yes</option>
-        </select>
+        return <>
+          <select
+            disabled={this.props.readonly ?? false}
+            onChange={(e) => this.setState({selectedValue: e.target.value})}
+            className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+          >
+            <option value={0}>No</option>
+            <option value={1}>Yes</option>
+          </select>
+        </>
       default:
         return <></>
     }
   }
 
   renderChart(): JSX.Element {
-    switch (this.state.graphType) {
+    switch (this.state.selectedGraph) {
       case "bar":
         return <Bar
           options={{
@@ -251,8 +278,8 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
           : this.renderInputElement(Object.keys(this.props.configs.fields)[0])}
           <div>
             <button onClick={() => this.requestData()} className="btn btn-primary"><span className="icon"><i className="fas fa-search"></i></span></button>
-            <button onClick={() => this.setState({graphType: "doughnut"})} className="btn btn-primary"><span className="icon"><i className="fas fa-chart-pie"></i></span></button>
-            <button onClick={() => this.setState({graphType: "bar"})} className="btn btn-primary"><span className="icon"><i className="fas fa-chart-bar"></i></span></button>
+            <button onClick={() => this.setState({selectedGraph: "doughnut"})} className="btn btn-primary"><span className="icon"><i className="fas fa-chart-pie"></i></span></button>
+            <button onClick={() => this.setState({selectedGraph: "bar"})} className="btn btn-primary"><span className="icon"><i className="fas fa-chart-bar"></i></span></button>
           </div>
         </div>
         <select
@@ -288,7 +315,7 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
           ))}
         </select>
         <div className="h-[500px] w-[800px]">
-          {this.renderChart()}
+          {this.state.data && this.state.data.values.length > 0 ? this.renderChart() : <>No data was found with selected parameters</>}
         </div>
       </>
     );

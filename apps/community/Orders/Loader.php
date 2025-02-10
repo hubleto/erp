@@ -10,7 +10,7 @@ class Loader extends \HubletoMain\Core\App
       '/^orders\/?$/' => Controllers\Orders::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 100, 'orders', $this->translate('Orders'), 'fas fa-file-lines', str_starts_with($this->main->requestedUri, 'shop'));
+    $this->main->sidebar->addLink(1, 105, 'orders', $this->translate('Orders'), 'fas fa-file-lines', str_starts_with($this->main->requestedUri, 'shop'));
   }
 
   public function installTables(): void

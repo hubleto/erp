@@ -91,8 +91,13 @@ class Loader extends \HubletoMain\Core\App
     $mInvoiceProfile->dropTableIfExists()->install();
 
     $mSetting->eloquent->create([
-      'key' => 'Modules\Core\Settings\Pipeline\DefaultPipeline',
+      'key' => 'Apps\Community\Settings\Pipeline\DefaultPipeline',
       'value' => '2',
+      'id_user' => null
+    ]);
+    $mSetting->eloquent->create([
+      'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',
+      'value' => '1',
       'id_user' => null
     ]);
 

@@ -9,6 +9,7 @@ use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Leads\Models\LeadTag;
+use HubletoApp\Community\Settings\Models\Setting;
 
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Varchar;
@@ -16,6 +17,7 @@ use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
+use Illuminate\Database\Eloquent\Builder;
 
 class Lead extends \HubletoMain\Core\Model
 {
@@ -40,11 +42,12 @@ class Lead extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
+      'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
       'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'price' => (new Decimal($this, $this->translate('Price'))),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
       'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
@@ -72,27 +75,16 @@ class Lead extends \HubletoMain\Core\Model
 
   public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
     $description = parent::describeTable();
-    if ($this->main->urlParamAsBool("showArchive")) {
-      $description->ui['title'] = "Leads Archive";
-      $description->permissions = [
-        "canCreate" => false,
-        "canUpdate" => false,
-        "canRead" => true,
-        "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
-      ];
-    } else {
-      $description->ui['title'] = 'Leads';
-      $description->ui['addButtonText'] = 'Add Lead';
-    }
     $description->ui['showHeader'] = true;
     $description->ui['showFooter'] = false;
     $description->columns['tags'] = ["title" => "Tags"];
+
     unset($description->columns['note']);
     unset($description->columns['id_person']);
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
+    unset($description->columns['shared_folder']);
 
     if ($this->main->urlParamAsInteger('idCompany') > 0) {
       $description->permissions = [
@@ -105,6 +97,18 @@ class Lead extends \HubletoMain\Core\Model
       $description->inputs = [];
       $description->ui = [];
     }
+    if ($this->main->urlParamAsBool("showArchive")) {
+      $description->ui['title'] = "Leads Archive";
+      $description->permissions = [
+        "canCreate" => false,
+        "canUpdate" => false,
+        "canRead" => true,
+        "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
+      ];
+    } else {
+      $description->ui['title'] = 'Leads';
+      $description->ui['addButtonText'] = 'Add Lead';
+    }
 
     return $description;
   }
@@ -113,10 +117,18 @@ class Lead extends \HubletoMain\Core\Model
   {
     $description = parent::describeForm();
 
+    $mSettings = new Setting($this->main);
+    $defaultCurrency = (int) $mSettings->eloquent
+      ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
+      ->first()
+      ->value
+    ;
+
     $description->defaultValues['id_company'] = null;
     $description->defaultValues['date_created'] = date("Y-m-d");
     $description->defaultValues['id_person'] = null;
     $description->defaultValues['is_archived'] = 0;
+    $description->defaultValues['id_currency'] = $defaultCurrency;
     $description->defaultValues['id_lead_status'] = 1;
     $description->defaultValues['id_user'] = $this->main->auth->getUserId();
 
@@ -125,7 +137,7 @@ class Lead extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
+  public function prepareLoadRecordsQuery(array $includeRelations = [], int $maxRelationLevel = 0, string $search = '', array $filterBy = [], array $where = [], array $orderBy = []): Builder
   {
     $relations = [
       'DEAL',
@@ -140,7 +152,7 @@ class Lead extends \HubletoMain\Core\Model
       'ACTIVITIES',
       'DOCUMENTS',
     ];
-    $query = parent::prepareLoadRecordQuery($relations, 4);
+    $query = parent::prepareLoadRecordsQuery($relations, 4);
 
     if ($this->main->urlParamAsBool("showArchive")) {
       $query = $query->where("leads.is_archived", 1);

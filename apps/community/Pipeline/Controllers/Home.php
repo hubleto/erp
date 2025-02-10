@@ -31,7 +31,7 @@ class Home extends \HubletoMain\Core\Controller {
 
     $defaultPipeline = $mSetting->eloquent
       ->select("value")
-      ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")
+      ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
       ->first()
     ;
     $defaultPipelineId = (int) $defaultPipeline->value;

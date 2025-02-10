@@ -20,9 +20,20 @@ class LeadDocument extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
-      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class))->setRequired(),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
+      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
     ]));
+  }
+
+  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  {
+    $description = parent::describeInput($columnName);
+    switch ($columnName) {
+      case 'hyperlink':
+        $description->setReactComponent('InputHyperlink');
+      break;
+    }
+    return $description;
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

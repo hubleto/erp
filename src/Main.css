@@ -109,7 +109,7 @@
   .btn { @apply rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white cursor-pointer hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
   .btn.btn-small { @apply h-auto md:h-[1.25rem]; }
   .btn .icon { @apply flex h-full items-center px-2 py-1 text-sm justify-center border-slate-200; }
-  .btn .text { @apply flex h-full items-center px-2 py-1 text-sm break-all border-slate-200; max-height: 3.5rem; overflow: hidden; }
+  .btn .text { @apply flex h-full items-center px-2 py-1 text-sm break-words border-slate-200; max-height: 3.5rem; overflow: hidden; }
 
   .btn.btn-no-border { @apply !border-none; }
 
@@ -247,6 +247,7 @@
   /* .p-datatable .p-datatable-tbody > tr > td { @apply p-1 text-sm; } */
   .p-datatable .p-datatable-thead > tr > th { @apply p-1 text-sm border-b border-b-gray-400; }
   .p-datatable .p-datatable-thead > tr > th .p-sortable-column-icon { @apply scale-[0.75]; }
+  .p-datatable .p-sortable-column.p-highlight { @apply bg-slate-100; }
   .p-datatable .p-sortable-column.p-highlight .p-column-header-content .p-column-title { @apply text-primary; }
   .p-datatable .p-sortable-column.p-highlight .p-column-header-content .p-sortable-column-icon { @apply text-primary; }
   .p-datatable-footer { @apply p-2 text-xs bg-slate-100; }
@@ -266,13 +267,20 @@
   /* .p-tabview-panels { @apply p-1; } */
   .p-tabview-nav-link { @apply mr-0.5 p-0 rounded-none border border-gray-200 border-t-gray-400 text-sm bg-transparent !no-underline font-normal hover:text-primary hover:border-t-primary; }
   .p-tabview-title { @apply p-3 block; }
-  .p-tabview-selected > .p-tabview-nav-link { @apply text-primary border-t-primary border-l-primary/10 border-r-primary/10 text-primary bg-white hover:!bg-none; }
+  .p-tabview-selected > .p-tabview-nav-link { @apply text-primary border-t-primary border-l-primary/10 border-r-primary/10 bg-white hover:!bg-none; }
   .p-tabview-selected .p-tabview-title { @apply bg-primary/10 hover:!bg-primary/10; }
   .p-inputswitch { zoom: 0.66; }
   .p-dialog .p-dialog-header { @apply p-2 text-sm; }
   .p-dialog .p-dialog-title { @apply text-sm; }
   .p-dialog .p-dialog-content { @apply p-2 text-sm; }
   .p-dialog .p-dialog-footer { @apply p-4 text-sm border-t border-gray-200 bg-gray-50 flex justify-between; }
+
+  /* PRIMETABLE PAGINATION*/
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight { @apply bg-secondary border-secondary text-white; }
+  .p-paginator .p-paginator-pages .p-paginator-page { @apply border-1 border-gray-300 rounded-2xl transition-all; }
+  .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover { @apply border-1 border-gray-500 bg-gray-500 text-white; }
+
+
 
   .p-tree { @apply p-0; }
 

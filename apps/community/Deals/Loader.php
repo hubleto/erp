@@ -5,7 +5,6 @@ namespace HubletoApp\Community\Deals;
 class Loader extends \HubletoMain\Core\App
 {
 
-
   public function __construct(\HubletoMain $main)
   {
     parent::__construct($main);
@@ -31,6 +30,7 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
     $this->main->calendarManager->addCalendar(Calendar::class);
+    $this->main->reportManager->addReport(Reports\TodayRevenue::class);
   }
 
   public function installTables(): void

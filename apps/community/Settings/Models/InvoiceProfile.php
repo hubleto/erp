@@ -9,9 +9,9 @@ class InvoiceProfile extends \ADIOS\Core\Model {
   public ?string $lookupSqlValue = '{%TABLE%}.name';
   public string $eloquentClass = Eloquent\InvoiceProfile::class;
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name'))),
       'phone' => (new Varchar($this, $this->translate('Phone'))),
       'email' => (new Varchar($this, $this->translate('E-mail'))),
@@ -29,7 +29,7 @@ class InvoiceProfile extends \ADIOS\Core\Model {
       'account_iban' => (new Varchar($this, $this->translate('Account IBAN'))),
       'swift' => (new Varchar($this, $this->translate('SWIFT'))),
       'numbering_pattern' => (new Varchar($this, $this->translate('Numbering pattern'))),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

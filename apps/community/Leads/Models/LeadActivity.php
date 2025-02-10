@@ -22,9 +22,9 @@ class LeadActivity extends \HubletoMain\Core\Model
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired()->setReadonly(),
       'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class, 'CASCADE')),
       'id_activity_type' => (new Lookup($this, $this->translate('Activity type'), ActivityType::class, 'SET NULL')),
@@ -36,6 +36,6 @@ class LeadActivity extends \HubletoMain\Core\Model
       'all_day' => (new Boolean($this, $this->translate('All day'))),
       'completed' => (new Boolean($this, $this->translate('Completed'))),
       'id_user' => (new Lookup($this, $this->translate('Created by'), User::class, 'CASCADE')),
-    ]));
+    ]);
   }
 }

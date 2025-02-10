@@ -12,9 +12,9 @@ class ActivityType extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\ActivityType::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns([
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Type'))),
       'color' => (new Color($this, $this->translate('Color'))),
       'calendar_visibility' => (new Boolean($this, $this->translate('Show in calendar'))),

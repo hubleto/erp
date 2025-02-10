@@ -20,16 +20,16 @@ class DealService extends \HubletoMain\Core\Model
     'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_deal', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class, 'CASCADE'))->setRequired(),
       'id_service' => (new Lookup($this, $this->translate('Service'), Service::class))->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
       'discount' => new Decimal($this, $this->translate('Dicount (%)')),
       'tax' => new Decimal($this, $this->translate('Tax (%)')),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

@@ -14,12 +14,12 @@ class Pipeline extends \HubletoMain\Core\Model
     'PIPELINE_STEPS' => [ self::HAS_MANY, PipelineStep::class, 'id_pipeline', 'id' ]
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'description' => (new Varchar($this, $this->translate('Description'))),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

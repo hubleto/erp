@@ -18,9 +18,9 @@ class Contact extends \HubletoMain\Core\Model
     'CONTACT_TYPE' => [ self::HAS_ONE, ContactType::class, 'id_contact_category', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_person' => (new Lookup($this, $this->translate('Person'), Person::class))->setRequired(),
       'id_contact_category' => (new Lookup($this, $this->translate('Contact Category'), ContactType::class))->setRequired(),
       'type' => (new Varchar($this, $this->translate('Type')))
@@ -28,7 +28,7 @@ class Contact extends \HubletoMain\Core\Model
         ->setRequired()
       ,
       'value' => (new Varchar($this, $this->translate('Value')))->setRequired(),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

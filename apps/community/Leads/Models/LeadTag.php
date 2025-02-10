@@ -17,12 +17,12 @@ class LeadTag extends \HubletoMain\Core\Model
     'TAG' => [ self::BELONGS_TO, Tag::class, 'id_tag', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
       'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class))->setRequired(),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

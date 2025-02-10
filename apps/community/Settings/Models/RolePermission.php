@@ -14,12 +14,12 @@ class RolePermission extends \HubletoMain\Core\Model
     'PERMISSION' => [ self::BELONGS_TO, Permission::class, 'id_permission', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_permission' => (new Lookup($this, $this->translate('Permission'), Permission::class))->setRequired(),
       'id_role' => (new Lookup($this, $this->translate('Role'), UserRole::class))->setRequired(),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

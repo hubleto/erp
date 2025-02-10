@@ -25,9 +25,9 @@ class UserRole extends \HubletoMain\Core\Model
     'PERMISSIONS' => [ self::HAS_MANY, RolePermission::class, 'id_role', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns([
+    return array_merge(parent::describeColumns(), [
       'role' => (new Varchar($this, $this->translate("Role")))->setRequired(),
       'grant_all' => (new Boolean($this, $this->translate("Grant all permissions (admin role)"))),
     ]);

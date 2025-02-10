@@ -19,15 +19,15 @@ class Service extends \HubletoMain\Core\Model
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'price' => (new Decimal($this, $this->translate('Unit price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
       'unit' => (new Varchar($this, $this->translate('Unit'))),
       'description' => (new Text($this, $this->translate('Description'))),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

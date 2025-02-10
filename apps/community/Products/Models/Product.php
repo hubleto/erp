@@ -22,9 +22,9 @@ class Product extends \HubletoMain\Core\Model
     'SUPPLIER' => [ self::HAS_ONE, Supplier::class, 'id','id_supplier'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns,[
+    return array_merge(parent::describeColumns(), [
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_product_group' => (new Lookup($this, $this->translate('Assigned User'), Group::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
@@ -44,7 +44,7 @@ class Product extends \HubletoMain\Core\Model
       'needs_reordering' => new Boolean($this, $this->translate('Needs reordering?')),
       'storage_rules' => new Text($this, $this->translate('Storage rules')),
       'table' => new Text($this, $this->translate('Table')),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table
@@ -54,7 +54,7 @@ class Product extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Products';
     $description->ui["addButtonText"] = $this->translate("Add product");
 
-    $description->columns['unit_price']->setColorScale('red-to-green');
+    $description->columns['unit_price']->setColorScale('green-to-red');
     $description->columns['margin']->setColorScale('light-blue-to-dark-blue');
 
     unset($description->columns["is_on_sale"]);

@@ -22,13 +22,13 @@ class LeadHistory extends \HubletoMain\Core\Model
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead','id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'change_date' => (new Date($this, $this->translate('Change Date')))->setRequired(),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired(),
       'description' => (new Varchar($this, $this->translate('Description')))->setRequired(),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

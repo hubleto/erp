@@ -27,9 +27,9 @@ class Order extends \HubletoMain\Core\Model
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns,[
+    return array_merge(parent::describeColumns(), [
       'order_number' => (new Varchar($this, $this->translate('Order number')))->setReadonly(),
       'id_company' => (new Lookup($this, $this->translate('Customer'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'price' => (new Decimal($this, $this->translate('Price')))->setReadonly()->setRequired(),
@@ -59,7 +59,7 @@ class Order extends \HubletoMain\Core\Model
         "show_column" => TRUE,
       ], */
 
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

@@ -23,9 +23,9 @@ class Person extends \HubletoMain\Core\Model
     'TAGS' => [ self::HAS_MANY, PersonTag::class, 'id_person', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class, 'CASCADE')),
@@ -33,7 +33,7 @@ class Person extends \HubletoMain\Core\Model
       'note' => (new Text($this, $this->translate('Notes'))),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

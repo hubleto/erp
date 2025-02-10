@@ -10,9 +10,9 @@ class Currency extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Currency::class;
   public ?string $lookupSqlValue = 'CONCAT({%TABLE%}.name ," ","(",{%TABLE%}.code,")")';
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns([
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Currency'))),
       'code' => (new Varchar($this, $this->translate('Code'))),
     ]);

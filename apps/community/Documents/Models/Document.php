@@ -23,13 +23,13 @@ class Document extends \HubletoMain\Core\Model
     'DEAL_DOCUMENT' => [ self::HAS_ONE, DealDocument::class, 'id_document', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired(),
       'file' => (new File($this, $this->translate('File'))),
       'hyperlink' => (new Varchar($this, $this->translate('Link'))),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

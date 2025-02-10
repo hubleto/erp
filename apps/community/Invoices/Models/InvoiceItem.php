@@ -18,13 +18,14 @@ class InvoiceItem extends \ADIOS\Core\Model {
     'INVOICE' => [ self::BELONGS_TO, Invoice::class, "id_invoice" ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class))->setRequired(),
       'item' => (new Varchar($this, $this->translate('Item')))->setRequired(),
       'unit_price' => new Decimal($this, $this->translate('Unit price')),
       'amount' => new Decimal($this, $this->translate('Amount')),
-    ]));
+    ]);
   }
+
 }

@@ -39,9 +39,9 @@ class Lead extends \HubletoMain\Core\Model
     'DOCUMENTS' => [ self::HAS_MANY, LeadDocument::class, 'id_lead', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
@@ -56,7 +56,7 @@ class Lead extends \HubletoMain\Core\Model
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
-    ]));
+    ]);
   }
 
   public function describeInput(string $columnName): \ADIOS\Core\Description\Input

@@ -29,7 +29,7 @@ class Report
   }
 
   public function getAllFields(): array {
-    $columns = $this->model->columns();
+    $columns = $this->model->getColumns();
 
     $fields = [];
 

@@ -34,9 +34,9 @@ class Company extends \HubletoMain\Core\Model
     'DEALS' => [ self::HAS_MANY, Deal::class, 'id_company', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
       'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),
@@ -52,7 +52,7 @@ class Company extends \HubletoMain\Core\Model
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
       'id_user' => (new Lookup($this, $this->translate('Assigned User'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
-    ]));
+    ]);
   }
 
   public function indexes(array $indexes = []): array

@@ -9,9 +9,9 @@ class UserHasRole extends \HubletoMain\Core\Model
   public string $table = 'user_has_roles';
   public string $eloquentClass = Eloquent\UserHasRole::class;
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns([
+    return array_merge(parent::describeColumns(), [
       'id_user' => (new Lookup($this, $this->translate('User'), User::class)),
       'id_role' => (new Lookup($this, $this->translate('Role'), UserRole::class)),
     ]);

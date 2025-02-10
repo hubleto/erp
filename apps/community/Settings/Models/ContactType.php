@@ -10,11 +10,11 @@ class ContactType extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\ContactType::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Type')))->setRequired(),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

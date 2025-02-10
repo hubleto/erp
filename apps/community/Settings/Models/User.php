@@ -21,16 +21,16 @@ class User extends \ADIOS\Models\User
   public string $eloquentClass = Eloquent\User::class;
   public ?string $lookupSqlValue = '{%TABLE%}.email';
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'first_name' => (new Varchar($this, $this->translate('First name'))),
       'middle_name' => (new Varchar($this, $this->translate('Middle name'))),
       'last_name' => (new Varchar($this, $this->translate('Last name'))),
       'email' => (new Varchar($this, $this->translate('Email'))),
       'language' => (new Varchar($this, $this->translate('Language')))->setEnumValues(self::ENUM_LANGUAGES),
       'id_active_profile' => (new Lookup($this, $this->translate("Active profile"), Profile::class)),
-    ]));
+    ]);
   }
 
   public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed

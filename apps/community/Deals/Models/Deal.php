@@ -43,9 +43,9 @@ class Deal extends \HubletoMain\Core\Model
     'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_deal', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Deal Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
@@ -63,7 +63,7 @@ class Deal extends \HubletoMain\Core\Model
       'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
       'id_deal_status' => (new Lookup($this, $this->translate('Status'), DealStatus::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
-    ]));
+    ]);
   }
 
   public function describeInput(string $columnName): \ADIOS\Core\Description\Input

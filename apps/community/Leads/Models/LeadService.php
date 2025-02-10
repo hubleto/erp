@@ -20,16 +20,16 @@ class LeadService extends \HubletoMain\Core\Model
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired(),
       'id_service' => (new Lookup($this, $this->translate('Service'), Service::class, 'CASCADE'))->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
       'discount' => new Decimal($this, $this->translate('Dicount (%)')),
       'tax' => new Decimal($this, $this->translate('Tax (%)')),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

@@ -149,7 +149,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
-    console.log(R);
     if (R.HISTORY && R.HISTORY.length > 0) {
       if (R.HISTORY.length > 1 && (R.HISTORY[0].id < R.HISTORY[R.HISTORY.length-1].id))
         R.HISTORY = this.state.record.HISTORY.reverse();
@@ -307,7 +306,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                                           data.unit_price = returnData.unit_price;
                                           this.updateRecord({ SERVICES: table.state.data?.data });
                                           this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
-                                          console.log(table.state.data);
                                         })
                                       }}
                                     ></Lookup>
@@ -359,7 +357,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                                           data.unit_price = returnData.unit_price;
                                           this.updateRecord({ SERVICES: table.state.data?.data });
                                           this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
-                                          console.log(table.state.data);
                                         })
                                       }}
                                     ></Lookup>

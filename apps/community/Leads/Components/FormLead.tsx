@@ -14,6 +14,7 @@ import TableLeadDocuments from './TableLeadDocuments';
 import ModalSimple from 'adios/ModalSimple';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
+import Hyperlink from 'adios/Inputs/Hyperlink';
 
 export interface FormLeadProps extends FormProps {
   newEntryId?: number,
@@ -492,9 +493,20 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   },
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                    hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableLeadDocuments, data: any, options: any): JSX.Element => {
+                    return (
+                      <FormInput>
+                        <Hyperlink {...this.getInputProps()}
+                          value={data.DOCUMENT.hyperlink}
+                          readonly={true}
+                        ></Hyperlink>
+                      </FormInput>
+                    )
+                  },},
                   },
                   inputs: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                    hyperlink: { type: "varchar", title: "Link", readonly: true},
                   },
                 }}
                 isUsedAsInput={true}

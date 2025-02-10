@@ -15,6 +15,7 @@ import TableCompanyDocuments from "./TableCompanyDocuments";
 import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
 import FormPerson, {FormPersonProps, FormPersonState} from "./FormPerson";
 import Calendar from '../../Calendar/Components/Calendar'
+import Hyperlink from "adios/Inputs/Hyperlink";
 
 interface FormCompanyProps extends FormProps {
   highlightIdBussinessAccounts: number,
@@ -482,6 +483,9 @@ export default class FormCompany<P, S> extends Form<
           ) : null}
           {showAdditional ? (
             <TabPanel header={globalThis.main.translate('Documents')}>
+              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Shared documents')}</span></div></div></div>
+              {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Local documents')}</span></div></div></div>
               <TableCompanyDocuments
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DOCUMENTS }}
@@ -494,9 +498,20 @@ export default class FormCompany<P, S> extends Form<
                   },
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                    hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableCompanyDocuments, data: any, options: any): JSX.Element => {
+                      return (
+                        <FormInput>
+                          <Hyperlink {...this.getInputProps()}
+                            value={data.DOCUMENT.hyperlink}
+                            readonly={true}
+                          ></Hyperlink>
+                        </FormInput>
+                      )
+                    },},
                   },
                   inputs: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                    hyperlink: { type: "varchar", title: "Link", readonly: true},
                   },
                 }}
                 isUsedAsInput={true}

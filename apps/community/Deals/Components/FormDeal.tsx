@@ -13,6 +13,7 @@ import TableDealDocuments from './TableDealDocuments';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import ModalSimple from 'adios/ModalSimple';
+import Hyperlink from 'adios/Inputs/Hyperlink';
 
 export interface FormDealProps extends FormProps {
   newEntryId?: number,
@@ -521,9 +522,20 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                   },
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                    hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableDealDocuments, data: any, options: any): JSX.Element => {
+                      return (
+                        <FormInput>
+                          <Hyperlink {...this.getInputProps()}
+                            value={data.DOCUMENT.hyperlink}
+                            readonly={true}
+                          ></Hyperlink>
+                        </FormInput>
+                      )
+                    },},
                   },
                   inputs: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                    hyperlink: { type: "varchar", title: "Link", readonly: true},
                   }
                 }}
                 isUsedAsInput={true}

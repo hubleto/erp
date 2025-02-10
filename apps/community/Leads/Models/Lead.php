@@ -9,6 +9,7 @@ use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Leads\Models\LeadTag;
+use HubletoApp\Community\Settings\Models\Setting;
 
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Varchar;
@@ -16,7 +17,7 @@ use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
-use HubletoApp\Community\Settings\Models\Setting;
+use Illuminate\Database\Eloquent\Builder;
 
 class Lead extends \HubletoMain\Core\Model
 {
@@ -74,27 +75,16 @@ class Lead extends \HubletoMain\Core\Model
 
   public function describeTable(): \ADIOS\Core\Description\Table
   {
-    $description["model"] = $this->fullName;
     $description = parent::describeTable();
-    if ($this->main->urlParamAsBool("showArchive")) {
-      $description->ui['title'] = "Leads Archive";
-      $description->permissions = [
-        "canCreate" => false,
-        "canUpdate" => false,
-        "canRead" => true,
-        "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
-      ];
-    } else {
-      $description->ui['title'] = 'Leads';
-      $description->ui['addButtonText'] = 'Add Lead';
-    }
     $description->ui['showHeader'] = true;
     $description->ui['showFooter'] = false;
     $description->columns['tags'] = ["title" => "Tags"];
+
     unset($description->columns['note']);
     unset($description->columns['id_person']);
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
+    unset($description->columns['shared_folder']);
 
     if ($this->main->urlParamAsInteger('idCompany') > 0) {
       $description->permissions = [
@@ -106,6 +96,18 @@ class Lead extends \HubletoMain\Core\Model
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];
+    }
+    if ($this->main->urlParamAsBool("showArchive")) {
+      $description->ui['title'] = "Leads Archive";
+      $description->permissions = [
+        "canCreate" => false,
+        "canUpdate" => false,
+        "canRead" => true,
+        "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
+      ];
+    } else {
+      $description->ui['title'] = 'Leads';
+      $description->ui['addButtonText'] = 'Add Lead';
     }
 
     return $description;
@@ -135,7 +137,7 @@ class Lead extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
+  public function prepareLoadRecordsQuery(array $includeRelations = [], int $maxRelationLevel = 0, string $search = '', array $filterBy = [], array $where = [], array $orderBy = []): Builder
   {
     $relations = [
       'DEAL',
@@ -150,7 +152,7 @@ class Lead extends \HubletoMain\Core\Model
       'ACTIVITIES',
       'DOCUMENTS',
     ];
-    $query = parent::prepareLoadRecordQuery($relations, 4);
+    $query = parent::prepareLoadRecordsQuery($relations, 4);
 
     if ($this->main->urlParamAsBool("showArchive")) {
       $query = $query->where("leads.is_archived", 1);

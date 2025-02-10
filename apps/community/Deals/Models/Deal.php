@@ -19,6 +19,7 @@ use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
+use Illuminate\Database\Eloquent\Builder;
 
 class Deal extends \HubletoMain\Core\Model
 {
@@ -103,6 +104,7 @@ class Deal extends \HubletoMain\Core\Model
     unset($description->columns['is_archived']);
     unset($description->columns['id_lead']);
     unset($description->columns['id_pipeline']);
+    unset($description->columns['shared_folder']);
 
     if ($this->main->urlParamAsInteger('idCompany') > 0) {
       $description->permissions = [
@@ -145,7 +147,7 @@ class Deal extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
+  public function prepareLoadRecordsQuery(array $includeRelations = [], int $maxRelationLevel = 0, string $search = '', array $filterBy = [], array $where = [], array $orderBy = []): Builder
   {
     $relations = [
       'COMPANY',
@@ -162,7 +164,7 @@ class Deal extends \HubletoMain\Core\Model
       'ACTIVITIES',
       'DOCUMENTS',
     ];
-    $query = parent::prepareLoadRecordQuery($relations, 4);
+    $query = parent::prepareLoadRecordsQuery($relations, 4);
 
     /**
      * These are the query filters for tables with archived and non-archived deal entries.
@@ -173,6 +175,7 @@ class Deal extends \HubletoMain\Core\Model
     } else {
       $query = $query->where("deals.is_archived", 0);
     }
+
     return $query;
   }
 

@@ -100,6 +100,7 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
           <div className='card-body'>
               {this.inputWrapper('name', {readonly: this.props.readonly})}
               {this.inputWrapper('file', {readonly: this.props.readonly})}
+              {this.inputWrapper('hyperlink', {readonly: this.props.readonly})}
               {(this.props.creatingForModel == "Lead" || this.props.creatingForModel == "Deal" || !this.props.creatingForModel) && showAdditional && companyEntryType ?
                 <>
                   <a href={companyEntryURL} className='btn btn-primary'>

@@ -6,10 +6,10 @@ use HubletoApp\Community\Deals\Models\Deal;
 
 class TodayRevenue extends \HubletoMain\Core\Report {
 
-  protected string $urlSlug = 'my-revenue';
-  public string $name = 'My revenue';
+  protected string $urlSlug = 'my-today-revenue';
+  public string $name = 'My today\'s revenue';
 
-  public function getReportData(): array
+  public function getReportConfig(): array
   {
     $data = [];
 
@@ -24,10 +24,11 @@ class TodayRevenue extends \HubletoMain\Core\Report {
         ["field" => "price", "title" => "Total price of deals"],
       ],
     ];
-    $data['fields'] = ["id_user" => $this->model->getColumn("id_user")];
 
-    $data["option"] = 1;
-    $data["value"] = 1;
+    $data["searchGroups"] = [
+      ["fieldName" => "id_user", "field" => $this->model->getColumn("id_user"), "option" => 1,  "value" => $this->main->auth->getUser()["id"],],
+      ["fieldName" => "date_created", "field" => $this->model->getColumn("date_created"), "option" => 1,  "value" => date("Y-m-d")],
+    ];
 
     return $data;
   }

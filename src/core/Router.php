@@ -8,7 +8,7 @@ class Router extends \ADIOS\Core\Router {
 
     $this->httpGet([
       '/^api\/dictionary\/?$/' => Dictionary::class,
-      '/^api\/get-chart-data\/?$/' =>  \HubletoMain\Core\Api\GetChartData::class,
+      '/^api\/get-chart-data\/?$/' =>  \HubletoMain\Core\Api\GetTemplateChartData::class,
     ]);
 
   }

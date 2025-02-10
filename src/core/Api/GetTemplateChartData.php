@@ -5,9 +5,8 @@ namespace HubletoMain\Core\Api;
 use Exception;
 use HubletoMain\Core\Model;
 
-class GetChartData extends \HubletoMain\Core\Controller
+class GetTemplateChartData extends \HubletoMain\Core\Controller
 {
-
   const OPERATIONS = [
     1 => "=",
     2 => "!=",
@@ -18,43 +17,37 @@ class GetChartData extends \HubletoMain\Core\Controller
 
   public function renderJson(): ?array
   {
-    $model = $this->main->getModel($this->main->urlParamAsString("model")) ?? null;
-    $field = $this->main->urlParamAsString("field") ?? null;
-    $option = $this->main->urlParamAsInteger("option") ?? null;
-    $value = $this->main->urlParamAsString("value") ?? null;
-    $type = $this->main->urlParamAsString("type") ?? null;
-    $typeOptions = $this->main->urlParamAsString("typeOptions") ?? null;
-    $groupBy = $this->main->urlParamAsString("groupBy") ?? null;
+    $config = $this->main->urlParamAsString("config");
+    $config = json_decode($config, true);
+    $model = $this->main->getModel($config["model"]);
+    $groupBy = $config["groupsBy"][0]["field"];
+    $typeOptions = $config["returnWith"];
+
     $returnData = [];
 
-    if (!isset($model) || !isset($field) || $option == 0 || !isset($value) || !isset($type) || !isset($typeOptions) || !isset($groupBy)) {
-      return [
-        "status" => "failed",
-        "error" => "Missing needed parameters"
-      ];
-    }
-
     try {
-      $typeOptions = json_decode($typeOptions, true);
-      $exType = explode("/",$type);
+      $operation = array_key_first($typeOptions);
 
       $function = "";
-      switch ($exType[0]) {
+      switch ($operation) {
         case "count":
-          $function = "COUNT(".$typeOptions[$exType[0]][(int) $exType[1]]["field"].")";
+          $function = "COUNT(".$typeOptions[$operation][0]["field"].")";
           break;
         case "average":
-          $function = "AVG(".$typeOptions[$exType[0]][(int) $exType[1]]["field"].")";
+          $function = "AVG(".$typeOptions[$operation][0]["field"].")";
           break;
         case "total":
-          $function = "SUM(".$typeOptions[$exType[0]][(int) $exType[1]]["field"].")";
+          $function = "SUM(".$typeOptions[$operation][0]["field"].")";
           break;
       }
 
-      $data = $model->eloquent->selectRaw($function." as function, ".$groupBy);
-      if ($option == 5) $data = $data->where($field, GetChartData::OPERATIONS[$option], '%'.$value.'%');
-      else $data = $data->where($field, GetChartData::OPERATIONS[$option], $value);
-      $data = $data->groupBy($groupBy)->get()->toArray();
+      $query = $model->eloquent->selectRaw($function." as function, ".$groupBy);
+      foreach ($config["searchGroups"] as $searchGroup) {
+        if ($searchGroup["option"] == 5) $query = $query->where($searchGroup["fieldName"], GetTemplateChartData::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
+        else $query = $query->where($searchGroup["fieldName"], GetTemplateChartData::OPERATIONS[$searchGroup["option"]], $searchGroup["value"]);
+      }
+
+      $data = $query->groupBy($groupBy)->get()->toArray();
 
       $groupByModel = $this->main->getModel($model->getColumn($groupBy)->jsonSerialize()["model"]);
       $groupByModelLookupSqlValue = $groupByModel->lookupSqlValue;

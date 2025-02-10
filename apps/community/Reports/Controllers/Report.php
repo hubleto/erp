@@ -10,10 +10,10 @@ class Report extends \HubletoMain\Core\Controller {
 
     $reportUrlSlug = $this->main->router->routeVarAsString('reportUrlSlug');
     $report = $this->main->reportManager->getReportByUrlSlug($reportUrlSlug);
-    $reportData = $report->getReportData();
+    $reportConfig = $report->getReportConfig();
 
     $this->viewParams['report'] = $report;
-    $this->viewParams['reportData'] = $reportData;
+    $this->viewParams['reportConfig'] = $reportConfig;
 
     $this->setView('@app/community/Reports/Views/Report.twig');
   }

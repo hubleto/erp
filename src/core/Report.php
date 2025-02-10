@@ -22,7 +22,7 @@ class Report
 
   public function getUrlSlug(): string { return $this->urlSlug; }
 
-  public function getReportData(): array
+  public function getReportConfig(): array
   {
     // to be overriden
     return [];

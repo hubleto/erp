@@ -1,9 +1,7 @@
 <app-form-report
-  configs="{{ viewParams.reportData|json_encode }}"
-  string:model="{{ viewParams.reportData.model }}"
-  string:name="{{ viewParams.reportData.name }}"
+  config="{{ viewParams.reportConfig|json_encode }}"
+  string:model="{{ viewParams.reportConfig.model }}"
+  string:name="{{ viewParams.reportConfig.name }}"
   bool:readonly="true"
-  string:value="{{ viewParams.reportData.value }}"
-  int:option={{ viewParams.reportData.option }}
 ></app-form-report>
 

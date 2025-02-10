@@ -7,28 +7,14 @@ import { Bar, Doughnut, Line } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend, BarController, BarElement, CategoryScale, LinearScale);
 
-interface ReportConfig {
-  fields: any,
-  returnWith: any,
-  groupsBy: any,
-}
-
 export interface FormReportProps {
-  configs: ReportConfig,
+  config: any,
   model: string,
-  value?: string,
   readonly?: boolean,
-  option?: number,
   name?: string,
 }
 
 export interface FormReportState {
-  selectedField: string,
-  selectedOption: number,
-  selectedValue: string,
-  selectedType: string,
-  selectedGroup: string,
-  filterOptions: any,
   data: any,
   selectedGraph: string,
 }
@@ -38,82 +24,62 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
     super(props);
 
     this.state = {
-      filterOptions: null,
-      selectedField: Object.keys(this.props.configs.fields)[0],
-      selectedOption: this.props.option || !isNaN(this.props.option) ? this.props.option : 1,
-      selectedType: Object.keys(this.props.configs.returnWith)[0]+"/0",
-      selectedGroup: this.props.configs.groupsBy[0]["field"],
-      selectedValue: this.props.value ?? null,
       selectedGraph: "doughnut",
       data: null,
     };
   }
 
   componentDidMount(): void {
-    this.changeOptions(Object.keys(this.props.configs.fields)[0]);
-    if (this.props.readonly) {
-      this.setState({selectedOption: this.props.option});
-      this.requestData();
-    }
+    this.requestData();
   }
 
-  changeOptions(newSelectedField: string): void {
-    var input = this.props.configs.fields[newSelectedField];
-    this.setState({selectedOption: 1})
-
-    switch (input.type) {
+  renderOptions(fieldType: string): Object {
+    switch (fieldType) {
       case "int":
       case "float":
-        this.setState({filterOptions: {
+        return {
           1: "Is",
           2: "Is Not",
           3: "More Than",
           4: "Less Than",
-        }});
-        break;
+        };
       case "varchar":
       case "text":
-        this.setState({filterOptions: {
+        return {
           1: "Is",
           2: "Is Not",
           5: "Contains",
-        }});
-        break;
+        };
       case "date":
       case "datetime":
       case "time":
-        this.setState({filterOptions: {
+        return {
           1: "On",
           2: "Not On",
           6: "Between",
-        }});
-        break;
+        };
       case "lookup":
-        this.setState({filterOptions: {
+        return {
           1: "Is",
           2: "Is Not",
-        }});
-        break;
+        };
       case "boolean":
-        this.setState({filterOptions: {
+        return {
           1: "Is",
-        }});
-        break;
+        };
     }
   }
 
-  renderInputElement(newSelectedField: string): JSX.Element {
-    let input = this.props.configs.fields[newSelectedField];
+  renderInputElement(field: any, value: any): JSX.Element {
 
-    switch (input.type) {
+    switch (field.type) {
       case "int":
       case "float":
         return <div className="input-wrapper">
           <label className="input-label">Search</label>
           <input
             readOnly={this.props.readonly ?? false}
-            onChange={(e) => this.setState({selectedValue: e.target.value})}
-            value={this.props.value ?? null}
+            value={value ?? null}
             className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
             type="number"
           />
@@ -124,8 +90,7 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
           <label className="input-label">Search</label>
           <input
             readOnly={this.props.readonly ?? false}
-            onChange={(e) => this.setState({selectedValue: e.target.value})}
-            value={this.props.value ?? null}
+            value={value ?? null}
             className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
             type="text"
           />
@@ -137,10 +102,9 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
           <label className="input-label">Search</label>
           <input
             readOnly={this.props.readonly ?? false}
-            onChange={(e) => this.setState({selectedValue: e.target.value})}
-            value={this.props.value ?? null}
+            value={value ?? null}
             className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-            type={input.type}
+            type={field.type}
           />
         </div>
       case "lookup":
@@ -149,10 +113,9 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
           <FormInput>
             <Lookup
               readonly={this.props.readonly ?? false}
-              value={this.props.value ?? this.state.selectedValue}
-              onChange={(value: any) => this.setState({selectedValue: value})}
-              uid={"lookup_filter_"+newSelectedField}
-              model={input.model}
+              value={value ?? null}
+              uid={"lookup_filter_"+this.props.model}
+              model={field.model}
             ></Lookup>
           </FormInput>
         </div>
@@ -161,11 +124,9 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
           <label className="input-label">Search</label>
           <select
             disabled={this.props.readonly ?? false}
-            onChange={(e) => this.setState({selectedValue: e.target.value})}
             className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
           >
-            <option value={0}>No</option>
-            <option value={1}>Yes</option>
+            {value ? <option value={1}>Yes</option> : <option value={0}>No</option>}
           </select>
         </div>
       default:
@@ -224,13 +185,7 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
   requestData(): any {
     fetch(globalThis.main.config.rewriteBase
       + '/api/get-chart-data?'
-      + 'field='+this.state.selectedField
-      + '&option='+this.state.selectedOption
-      + '&value='+this.state.selectedValue
-      + '&type='+this.state.selectedType
-      + '&model='+this.props.model
-      + '&groupBy='+this.state.selectedGroup
-      + '&typeOptions='+JSON.stringify(this.props.configs.returnWith)
+      + 'config=' + JSON.stringify(this.props.config)
     )
     .then(response => {
       if (!response.ok) {
@@ -243,59 +198,52 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
   }
 
   render(): JSX.Element {
+    var searchGroups = this.props.config.searchGroups;
+
     return (
       <>
         <h2>{this.props.name}</h2>
         <div className="card card-body">
-          <div className="flex flex-row items-end gap-2">
-            {/* --- FIELDS --- */}
-            <div className="input-wrapper">
-              <label className="input-label">Field</label>
-              <select
-                disabled={this.props.readonly ?? false}
-                name="field"
-                id="configs.fields"
-                className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-                onChange={(e) => {
-                  this.setState({selectedField: e.target.value})
-                  this.changeOptions(e.target.value)
-                }}
-              >
-                {Object.keys(this.props.configs.fields).map( (key) => (
-                  <option
-                    value={key}
-                  >
-                    {this.props.configs.fields[key].title}
+          {Object.keys(searchGroups).map( ( key ) => (
+            <div className="flex flex-row items-end gap-2">
+              {/* --- FIELDS --- */}
+              <div className="input-wrapper">
+                <label className="input-label">Field</label>
+                <select
+                  id="configs.fields"
+                  className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+                  name="field"
+                  value={searchGroups[key].fieldName}
+                  disabled={this.props.readonly ?? false}
+                >
+                  <option value={searchGroups[key].fieldName}>
+                    {searchGroups[key].field.title}
                   </option>
-                ))}
-              </select>
-            </div>
-            {/* --- OPERATIONS --- */}
-            <div className="input-wrapper">
-              <select
-                disabled={this.props.readonly ?? false}
-                name="options"
-                id="options"
-                value={this.state.selectedOption}
-                className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-                onChange={(e) => {
-                  this.setState({selectedOption: Number(e.target.value)})
-                }}
-              >
-                {this.state.filterOptions ?
-                  Object.keys(this.state.filterOptions).map((key) => (
-                    <option
-                      value={key}
-                    >
-                      {this.state.filterOptions[key]}
+                </select>
+              </div>
+              {/* --- OPERATIONS --- */}
+              <div className="input-wrapper">
+                <select
+                  disabled={this.props.readonly ?? false}
+                  name="options"
+                  id="options"
+                  value={searchGroups[key].option}
+                  className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+                >
+                  {Object.keys(this.renderOptions(searchGroups[key].field.type)).map((option) => (
+                    <option value={option}>
+                      {this.renderOptions(searchGroups[key].field.type)[option]}
                     </option>
-                  ))
-                : <option>Empty</option>}
-              </select>
+                  ))}
+                </select>
+              </div>
+              {/* --- SEARCH INPUT --- */}
+              {this.renderInputElement(searchGroups[key].field, searchGroups[key].value)}
             </div>
-            {/* --- SEARCH INPUT --- */}
-            {this.renderInputElement(this.state.selectedField)}
-          </div>
+          ))}
+
+
+          {/* RESULT TO RETURN */}
           <div className="flex flex-row items-end gap-2">
             <div className="input-wrapper">
               <label className="input-label">Result</label>
@@ -303,19 +251,12 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
                 disabled={this.props.readonly ?? false}
                 name="types"
                 id="types"
-                value={this.state.selectedType}
                 className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-                onChange={(e) => {
-                  this.setState({selectedType: e.target.value})
-                }}
+                value={this.props.config.returnWith[Object.keys(this.props.config.returnWith)[0]][0].field}
               >
-                {Object.keys(this.props.configs.returnWith).map( (key) => (
-                  <optgroup label={key}>
-                    {Object.keys(this.props.configs.returnWith[key]).map( (item, index) => (
-                      <option value={key + "/" + index}>{this.props.configs.returnWith[key][item]["title"]}</option>
-                    ))}
-                  </optgroup>
-                ))}
+                <option value={this.props.config.returnWith[Object.keys(this.props.config.returnWith)[0]][0].field}>
+                  {this.props.config.returnWith[Object.keys(this.props.config.returnWith)[0]][0].title}
+                </option>
               </select>
             </div>
             <div className="input-wrapper">
@@ -324,15 +265,10 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
                 disabled={this.props.readonly ?? false}
                 name="groups"
                 id="groups"
-                value={this.state.selectedGroup}
+                value={this.props.config.groupsBy[0].field}
                 className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-                onChange={(e) => {
-                  this.setState({selectedGroup: e.target.value})
-                }}
               >
-                {Object.keys(this.props.configs.groupsBy).map( (key) => (
-                  <option value={this.props.configs.groupsBy[key]["field"]}>{this.props.configs.groupsBy[key]["title"]}</option>
-                ))}
+                <option value={this.props.config.groupsBy[0].field}>{this.props.config.groupsBy[0].title}</option>
               </select>
             </div>
           </div>

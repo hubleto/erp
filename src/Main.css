@@ -109,7 +109,7 @@
   .btn { @apply rounded inline-flex text-left p-0 m-0 items-center bg-primary text-white cursor-pointer hover:bg-secondary hover:text-white hover:no-underline; box-sizing: border-box; }
   .btn.btn-small { @apply h-auto md:h-[1.25rem]; }
   .btn .icon { @apply flex h-full items-center px-2 py-1 text-sm justify-center border-slate-200; }
-  .btn .text { @apply flex h-full items-center px-2 py-1 text-sm break-all border-slate-200; max-height: 3.5rem; overflow: hidden; }
+  .btn .text { @apply flex h-full items-center px-2 py-1 text-sm break-words border-slate-200; max-height: 3.5rem; overflow: hidden; }
 
   .btn.btn-no-border { @apply !border-none; }
 

@@ -54,6 +54,9 @@ class Product extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Products';
     $description->ui["addButtonText"] = $this->translate("Add product");
 
+    $description->columns['unit_price']->setColorScale('red-to-green');
+    $description->columns['margin']->setColorScale('light-blue-to-dark-blue');
+
     unset($description->columns["is_on_sale"]);
     unset($description->columns["image"]);
     unset($description->columns["count_in_package"]);

@@ -9,6 +9,7 @@ use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Image;
 use \ADIOS\Core\Db\Column\Decimal;
+use HubletoApp\Community\Settings\Models\Setting;
 
 class Product extends \HubletoMain\Core\Model
 {
@@ -32,8 +33,8 @@ class Product extends \HubletoMain\Core\Model
       'description' => new Text($this, $this->translate('Description')),
       'count_in_package' => new Decimal($this, $this->translate('Number of items in package')),
       'unit_price' => (new Decimal($this, $this->translate('Single unit price')))->setRequired(),
-      'margin' => new Decimal($this, $this->translate('Margin')),
-      'tax' => (new Decimal($this, $this->translate('Tax')))->setRequired(),
+      'margin' => (new Decimal($this, $this->translate('Margin')))->setUnit("%"),
+      'tax' => (new Decimal($this, $this->translate('Tax')))->setUnit("%")->setRequired(),
       'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
       'unit' => new Varchar($this, $this->translate('Unit')),
       'packaging' => new Varchar($this, $this->translate('Packaging')),

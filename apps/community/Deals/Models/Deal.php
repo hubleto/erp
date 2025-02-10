@@ -19,6 +19,7 @@ use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
+use Illuminate\Database\Eloquent\Builder;
 
 class Deal extends \HubletoMain\Core\Model
 {
@@ -45,12 +46,13 @@ class Deal extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
+      'identifier' => (new Varchar($this, $this->translate('Deal Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'price' => (new Decimal($this, $this->translate('Price')))->setRequired(),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setRequired(),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setRequired()->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
       'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
@@ -102,6 +104,7 @@ class Deal extends \HubletoMain\Core\Model
     unset($description->columns['is_archived']);
     unset($description->columns['id_lead']);
     unset($description->columns['id_pipeline']);
+    unset($description->columns['shared_folder']);
 
     if ($this->main->urlParamAsInteger('idCompany') > 0) {
       $description->permissions = [
@@ -121,8 +124,13 @@ class Deal extends \HubletoMain\Core\Model
   public function describeForm(): \ADIOS\Core\Description\Form
   {
     $mSettings = new Setting($this->main);
-    $defaultPipeline =(int) $mSettings->eloquent
-      ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")
+    $defaultPipeline = (int) $mSettings->eloquent
+      ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
+      ->first()
+      ->value
+    ;
+    $defaultCurrency = (int) $mSettings->eloquent
+      ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
       ->value
     ;
@@ -131,6 +139,7 @@ class Deal extends \HubletoMain\Core\Model
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['id_deal_status'] = 1;
     $description->defaultValues['date_created'] = date("Y-m-d");
+    $description->defaultValues['id_currency'] = $defaultCurrency;
     $description->defaultValues['id_pipeline'] = $defaultPipeline;
     $description->defaultValues['id_pipeline_step'] = null;
     $description->defaultValues['id_user'] = $this->main->auth->getUserId();
@@ -138,7 +147,7 @@ class Deal extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
+  public function prepareLoadRecordsQuery(array $includeRelations = [], int $maxRelationLevel = 0, string $search = '', array $filterBy = [], array $where = [], array $orderBy = []): Builder
   {
     $relations = [
       'COMPANY',
@@ -155,7 +164,7 @@ class Deal extends \HubletoMain\Core\Model
       'ACTIVITIES',
       'DOCUMENTS',
     ];
-    $query = parent::prepareLoadRecordQuery($relations, 4);
+    $query = parent::prepareLoadRecordsQuery($relations, 4);
 
     /**
      * These are the query filters for tables with archived and non-archived deal entries.
@@ -166,6 +175,7 @@ class Deal extends \HubletoMain\Core\Model
     } else {
       $query = $query->where("deals.is_archived", 0);
     }
+
     return $query;
   }
 

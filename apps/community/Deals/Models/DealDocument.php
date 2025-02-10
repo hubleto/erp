@@ -19,15 +19,26 @@ class DealDocument extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class, 'CASCADE'))->setRequired(),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
       'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
     ]));
+  }
+
+  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  {
+    $description = parent::describeInput($columnName);
+    switch ($columnName) {
+      case 'hyperlink':
+        $description->setReactComponent('InputHyperlink');
+      break;
+    }
+    return $description;
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    if ($this->main->urlParamAsInteger('idLead') > 0){
+    if ($this->main->urlParamAsInteger('idDeal') > 0){
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),

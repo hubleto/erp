@@ -23,7 +23,7 @@ class DealService extends \HubletoMain\Core\Model
   public function columns(array $columns = []): array
   {
     return parent::columns(array_merge($columns, [
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setRequired(),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class, 'CASCADE'))->setRequired(),
       'id_service' => (new Lookup($this, $this->translate('Service'), Service::class))->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),

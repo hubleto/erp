@@ -93,7 +93,12 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
             <div className='card-body flex flex-row gap-2'>
               <div className='grow'>
                 {showAdditional ? this.inputWrapper('order_number') : <></>}
-                {showAdditional ? this.inputWrapper('price') : <></>}
+                {showAdditional ?
+                  <div className='flex flex-row *:w-1/2'>
+                    {this.inputWrapper('price')}
+                    {this.inputWrapper('id_currency')}
+                  </div>
+                : <></>}
                 {this.inputWrapper('date_order')}
                 {this.inputWrapper('required_delivery_date')}
                 {this.inputWrapper('shipping_info')}
@@ -126,113 +131,115 @@ export default class FormOrder<P, S> extends Form<FormOrderProps,FormOrderState>
                     }}>
                     + Add product
                   </a>
-                  <TableOrderProducts
-                    sum={R.price ?? 0}
-                    uid={this.props.uid + "_table_order_products"}
-                    data={{ data: R.PRODUCTS }}
-                    customEndpointParams={{idOrder: R.id}}
-                    descriptionSource='both'
-                    description={{
-                      ui: {
-                        showHeader: false,
-                        showFooter: true,
-                        addButtonText: "Add Product"
-                      },
-                      columns: {
-                        id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
-                          cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
-                            return (
-                              <FormInput>
-                                <Lookup {...this.getInputProps()}
-                                  ref={lookupElement}
-                                  model='HubletoApp/Community/Products/Models/Product'
-                                  cssClass='min-w-44'
-                                  value={data.id_product}
-                                  onChange={(value: any) => {
-                                    getLookupData();
+                  <div className='w-full h-full overflow-x-auto'>
+                    <TableOrderProducts
+                      sum={"Total: " + R.price + " " + R.CURRENCY.code}
+                      uid={this.props.uid + "_table_order_products"}
+                      data={{ data: R.PRODUCTS }}
+                      customEndpointParams={{idOrder: R.id}}
+                      descriptionSource='both'
+                      description={{
+                        ui: {
+                          showHeader: false,
+                          showFooter: true,
+                          addButtonText: "Add Product"
+                        },
+                        columns: {
+                          id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                            cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
+                              return (
+                                <FormInput>
+                                  <Lookup {...this.getInputProps()}
+                                    ref={lookupElement}
+                                    model='HubletoApp/Community/Products/Models/Product'
+                                    cssClass='min-w-44'
+                                    value={data.id_product}
+                                    onChange={(value: any) => {
+                                      getLookupData();
 
-                                    if (lookupData[value]) {
-                                      data.id_product = value;
-                                      data.unit_price = lookupData[value].unit_price;
-                                      data.tax = lookupData[value].tax;
-                                      this.updateRecord({ PRODUCTS: table.state.data?.data });
-                                      this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
-                                    }
-                                  }}
-                                ></Lookup>
-                              </FormInput>
-                            )
-                          }
-                        },
-                        amount: { type: "int", title: "Amount" },
-                        unit_price: { type: "float", title: "Unit Price"},
-                        tax: { type: "float", title: "Tax (%)"},
-                        discount: { type: "float", title: "Discount (%)" },
-                        __sum: { type: "none", title: "Sum after tax",
-                          cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
-                            if (data.unit_price && data.amount) {
-                              let sum = data.unit_price * data.amount;
-                              if (data.tax) sum = sum + (sum * (data.tax / 100));
-                              if (data.discount) sum = sum - (sum * (data.discount / 100));
-                              sum = Number(sum.toFixed(2));
-                              return (<><span>{sum}</span></>);
+                                      if (lookupData[value]) {
+                                        data.id_product = value;
+                                        data.unit_price = lookupData[value].unit_price;
+                                        data.tax = lookupData[value].tax;
+                                        this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                        this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
+                                      }
+                                    }}
+                                  ></Lookup>
+                                </FormInput>
+                              )
                             }
-                          }
+                          },
+                          amount: { type: "int", title: "Amount" },
+                          unit_price: { type: "float", title: "Unit Price"},
+                          tax: { type: "float", title: "Tax (%)"},
+                          discount: { type: "float", title: "Discount (%)" },
+                          __sum: { type: "none", title: "Sum after tax",
+                            cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
+                              if (data.unit_price && data.amount) {
+                                let sum = data.unit_price * data.amount;
+                                if (data.tax) sum = sum + (sum * (data.tax / 100));
+                                if (data.discount) sum = sum - (sum * (data.discount / 100));
+                                sum = Number(sum.toFixed(2));
+                                return (<><span>{sum + " " + R.CURRENCY.code}</span></>);
+                              }
+                            }
+                          },
                         },
-                      },
-                      inputs: {
-                        id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
-                          cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
-                            return (
-                              <FormInput>
-                                <Lookup {...this.getInputProps()}
-                                  ref={lookupElement}
-                                  model='HubletoApp/Community/Products/Models/Product'
-                                  cssClass='min-w-44'
-                                  value={data.id_product}
-                                  onChange={(value: any) => {
-                                    getLookupData();
+                        inputs: {
+                          id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                            cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
+                              return (
+                                <FormInput>
+                                  <Lookup {...this.getInputProps()}
+                                    ref={lookupElement}
+                                    model='HubletoApp/Community/Products/Models/Product'
+                                    cssClass='min-w-44'
+                                    value={data.id_product}
+                                    onChange={(value: any) => {
+                                      getLookupData();
 
-                                    if (lookupData[value]) {
-                                      data.id_product = value;
-                                      data.unit_price = lookupData[value].unit_price;
-                                      data.tax = lookupData[value].tax;
-                                      this.updateRecord({ PRODUCTS: table.state.data?.data });
-                                      this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
-                                    }
-                                  }}
-                                ></Lookup>
-                              </FormInput>
-                            )
-                          }
-                        },
-                        amount: { type: "int", title: "Amount" },
-                        unit_price: { type: "float", title: "Unit Price"},
-                        tax: { type: "float", title: "Tax (%)"},
-                        discount: { type: "float", title: "Discount (%)" },
-                        __sum: { type: "none", title: "Sum after tax",
-                          cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
-                            if (data.unit_price && data.amount) {
-                              let sum = data.unit_price * data.amount;
-                              if (data.tax) sum = sum + (sum * (data.tax / 100));
-                              if (data.discount) sum = sum - (sum * (data.discount / 100));
-                              sum = Number(sum.toFixed(2));
-                              return (<><span>{sum}</span></>);
+                                      if (lookupData[value]) {
+                                        data.id_product = value;
+                                        data.unit_price = lookupData[value].unit_price;
+                                        data.tax = lookupData[value].tax;
+                                        this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                        this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
+                                      }
+                                    }}
+                                  ></Lookup>
+                                </FormInput>
+                              )
                             }
-                          }
-                        },
-                      }
-                    }}
-                    isUsedAsInput={true}
-                    isInlineEditing={this.state.isInlineEditing}
-                    onRowClick={() => this.setState({isInlineEditing: true})}
-                    onChange={(table: TableOrderProducts) => {
-                      this.updateRecord({ price: this.getSumPrice( R.PRODUCTS ), PRODUCTS: table.state.data?.data });
-                    }}
-                    onDeleteSelectionChange={(table: TableOrderProducts) => {
-                      this.updateRecord({ PRODUCTS: table.state.data?.data ?? [] });
-                    }}
-                  />
+                          },
+                          amount: { type: "int", title: "Amount" },
+                          unit_price: { type: "float", title: "Unit Price"},
+                          tax: { type: "float", title: "Tax (%)"},
+                          discount: { type: "float", title: "Discount (%)" },
+                          __sum: { type: "none", title: "Sum after tax",
+                            cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
+                              if (data.unit_price && data.amount) {
+                                let sum = data.unit_price * data.amount;
+                                if (data.tax) sum = sum + (sum * (data.tax / 100));
+                                if (data.discount) sum = sum - (sum * (data.discount / 100));
+                                sum = Number(sum.toFixed(2));
+                                return (<><span>{sum}</span></>);
+                              }
+                            }
+                          },
+                        }
+                      }}
+                      isUsedAsInput={true}
+                      isInlineEditing={this.state.isInlineEditing}
+                      onRowClick={() => this.setState({isInlineEditing: true})}
+                      onChange={(table: TableOrderProducts) => {
+                        this.updateRecord({ price: this.getSumPrice( R.PRODUCTS ), PRODUCTS: table.state.data?.data });
+                      }}
+                      onDeleteSelectionChange={(table: TableOrderProducts) => {
+                        this.updateRecord({ PRODUCTS: table.state.data?.data ?? [] });
+                      }}
+                    />
+                  </div>
                 </div>
               </>
             : <></>}

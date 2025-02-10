@@ -51,6 +51,7 @@ class Company extends \HubletoMain\Core\Model
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
       'id_user' => (new Lookup($this, $this->translate('Assigned User'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
+      'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
     ]));
   }
 
@@ -84,6 +85,20 @@ class Company extends \HubletoMain\Core\Model
     ]);
   }
 
+  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  {
+    $description = parent::describeInput($columnName);
+    switch ($columnName) {
+      case 'shared_folder':
+        $description
+          ->setReactComponent('InputHyperlink')
+          ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
+        ;
+      break;
+    }
+    return $description;
+  }
+
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
@@ -100,6 +115,7 @@ class Company extends \HubletoMain\Core\Model
     unset($description->columns['region']);
     unset($description->columns['id_country']);
     unset($description->columns['note']);
+    unset($description->columns['shared_folder']);
 
     //nadstavit aby bol is_active posledný
     $tempColumn = $description->columns['is_active'];

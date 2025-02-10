@@ -14,6 +14,7 @@ import TableLeadDocuments from './TableLeadDocuments';
 import ModalSimple from 'adios/ModalSimple';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
+import Hyperlink from 'adios/Inputs/Hyperlink';
 
 export interface FormLeadProps extends FormProps {
   newEntryId?: number,
@@ -148,7 +149,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
-    console.log(R);
     if (R.HISTORY && R.HISTORY.length > 0) {
       if (R.HISTORY.length > 1 && (R.HISTORY[0].id < R.HISTORY[R.HISTORY.length-1].id))
         R.HISTORY = this.state.record.HISTORY.reverse();
@@ -180,12 +180,14 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
               {{gridTemplateAreas:`
                 'notification notification'
                 'info info'
+                'notes notes'
                 'services services'
                 'history history'
               `}}>
               <div className='card mt-2' style={{gridArea: 'info'}}>
                 <div className='card-body flex flex-row gap-2'>
                   <div className='grow'>
+                    {this.inputWrapper('identifier', {readonly: R.is_archived})}
                     {this.inputWrapper('title', {readonly: R.is_archived})}
                     <FormInput title={"Company"}>
                       <Lookup {...this.getInputProps()}
@@ -222,7 +224,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                       {this.inputWrapper('price', {
                         readonly: (R.SERVICES && R.SERVICES.length) > 0 || R.is_archived ? true : false,
                       })}
-                      {this.inputWrapper('id_currency', {readonly: R.is_archived})}
+                      {this.inputWrapper('id_currency')}
                     </div>
                     {showAdditional ? this.inputWrapper('id_lead_status', {readonly: R.is_archived}) : null}
                     {showAdditional ?
@@ -263,15 +265,18 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   </div>
                 </div>
               </div>
+              <div className='card card-body' style={{gridArea: 'notes'}}>
+                {this.inputWrapper('note', {readonly: R.is_archived})}
+              </div>
               {showAdditional ?
                 <div className='card mt-2' style={{gridArea: 'services'}}>
                   <div className='card-header'>Services</div>
                   <div className='card-body flex flex-col gap-2'>
-                    <div className='w-full h-full overflow-x-scroll'>
+                    <div className='w-full h-full overflow-x-auto'>
                       <TableLeadServices
                         uid={this.props.uid + "_table_lead_services"}
                         data={{ data: R.SERVICES }}
-                        leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
+                        leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : "Total: 0 " + R.CURRENCY.code }
                         descriptionSource='both'
                         customEndpointParams={{'idLead': R.id}}
                         description={{
@@ -301,7 +306,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                                           data.unit_price = returnData.unit_price;
                                           this.updateRecord({ SERVICES: table.state.data?.data });
                                           this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
-                                          console.log(table.state.data);
                                         })
                                       }}
                                     ></Lookup>
@@ -353,7 +357,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                                           data.unit_price = returnData.unit_price;
                                           this.updateRecord({ SERVICES: table.state.data?.data });
                                           this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
-                                          console.log(table.state.data);
                                         })
                                       }}
                                     ></Lookup>
@@ -487,9 +490,20 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   },
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                    hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableLeadDocuments, data: any, options: any): JSX.Element => {
+                    return (
+                      <FormInput>
+                        <Hyperlink {...this.getInputProps()}
+                          value={data.DOCUMENT.hyperlink}
+                          readonly={true}
+                        ></Hyperlink>
+                      </FormInput>
+                    )
+                  },},
                   },
                   inputs: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                    hyperlink: { type: "varchar", title: "Link", readonly: true},
                   },
                 }}
                 isUsedAsInput={true}
@@ -567,9 +581,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
               : null}
             </TabPanel>
           ) : null}
-          <TabPanel header="Notes">
-            {this.inputWrapper('note', {readonly: R.is_archived})}
-          </TabPanel>
           {showAdditional ?
             <TabPanel header={globalThis.main.translate('History')}>
               {R.HISTORY.length > 0 ?

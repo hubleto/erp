@@ -595,6 +595,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $titles = ["TV", "Internet", "Fiber", "Landline", "Marketing", "Vitual Server"];
     $sources = ["Advertisement", "Phone Call", "Email", "Newsletter"];
+    $identifierPrefixes = ["US", "EU", "AS"];
 
     foreach ($companies as $company) {
       if ($company->PERSONS->count() < 1) continue;
@@ -606,11 +607,12 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $leadDateClose = date("Y-m-d", $leadDateCreatedTs + rand(4, 6)*24*3600);
 
       $idLead = $mLead->record->create([
+        "identifier" => $identifierPrefixes[rand(0,2)] . rand(1,3000),
         "title" => $titles[rand(0, count($titles)-1)],
         "id_company" => $company->id,
         "id_person" => $person->id,
         "price" => rand(10,100),
-        "id_currency" => rand(1,3),
+        "id_currency" => 1,
         "date_expected_close" => $leadDateClose,
         "id_user" => 1,
         "source_channel" => $sources[rand(0, count($sources)-1)],
@@ -664,6 +666,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $dealDateClose = date("Y-m-d", $dealDateCreatedTs + rand(4, 6)*24*3600);
 
       $idDeal = $mDeal->record->create([
+        "identifier" => $lead->identifier,
         "title" => $lead->title,
         "id_company" => $lead->id_company,
         "id_person" => $lead->id_person,

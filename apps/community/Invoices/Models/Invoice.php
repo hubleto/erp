@@ -23,9 +23,9 @@ class Invoice extends \HubletoMain\Core\Model {
     'ITEMS' => [ self::HAS_MANY, InvoiceItem::class, "id_invoice", "id" ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_profile' => (new Lookup($this, $this->translate('Profile'), InvoiceProfile::class)),
       'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class)),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Company::class)),
@@ -38,7 +38,7 @@ class Invoice extends \HubletoMain\Core\Model {
       'date_due' => (new Date($this, $this->translate('Due'))),
       'date_payment' => (new Date($this, $this->translate('Payment'))),
       'notes' => (new Text($this, $this->translate('Notes'))),
-    ]));
+    ]);
   }
 
   public function onBeforeCreate(array $record): array

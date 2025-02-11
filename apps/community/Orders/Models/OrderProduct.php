@@ -19,16 +19,16 @@ class OrderProduct extends \HubletoMain\Core\Model
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns,[
+    return array_merge(parent::describeColumns(), [
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class, 'CASCADE'))->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
       'discount' => (new Integer($this, $this->translate('Discount (%)'))),
       'tax' => (new Integer($this, $this->translate('Tax (%)')))->setRequired(),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

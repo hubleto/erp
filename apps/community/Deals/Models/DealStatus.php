@@ -12,13 +12,13 @@ class DealStatus extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\DealStatus::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'order' => (new Integer($this, $this->translate('Order')))->setRequired(),
       'color' => new Color($this, $this->translate('Color')),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

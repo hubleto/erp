@@ -10,9 +10,9 @@ class Profile extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Profile::class;
   public ?string $lookupSqlValue = '{%TABLE%}.company';
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns([
+    return array_merge(parent::describeColumns(), [
       'company' => (new Varchar($this, $this->translate('Company')))->setRequired(),
     ]);
   }

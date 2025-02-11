@@ -22,10 +22,11 @@
   </script>
 
   <script src='{{ config.accountUrl }}/adios/cache.js'></script>
-  <script defer src='{{ config.url }}/assets/compiled/app.js'></script>
+  <script defer src='{{ config.url }}/assets/compiled/js/adios.js'></script>
+  <script defer src='{{ config.url }}/assets/compiled/js/app.js'></script>
 
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/fontawesome-6.6.css">
-  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/css/main.css">
 
   <style>
     @font-face {
@@ -151,7 +152,7 @@
 
     <aside id="default-sidebar">
       <nav>
-        <input class="bg-white/20 text-white text-xs m-1 p-1 rounded placeholder-white" placeholder="Search app..." onkeyup="smis(event, this.value);" />
+        <input class="bg-white/20 text-white text-xs m-1 p-1 rounded !placeholder-white" placeholder="Search app..." onkeyup="smis(event, this.value);" />
         {% set i = 0 %}
         {% for item in viewParams.sidebar.level1Items %}
           {% if item.type == 'link' %}
@@ -238,7 +239,7 @@
 
   $(window).on('resize', function() {
     if ($(window).width() > 768) {
-      $('#default-sidebar').css('transform', '');
+      $('#default-sidebar').css('translate', '');
       $("#menuButton").attr('class', 'fas fa-chevron-right');
       sidebarState = false;
     }
@@ -246,11 +247,11 @@
 
   function showSidebar() {
     if (sidebarState == false) {
-      $("#default-sidebar").css("transform", 'translateX(0)');
+      $("#default-sidebar").css("translate", 0,0)
       $("#menuButton").attr('class', 'fas fa-chevron-left');
       sidebarState = true;
     } else {
-      $("#default-sidebar").css("transform", 'translateX(-100%)');
+      $("#default-sidebar").css("translate", "-100%",0)
       $("#menuButton").attr('class', 'fas fa-chevron-right');
       sidebarState = false;
     }

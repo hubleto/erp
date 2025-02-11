@@ -4,6 +4,11 @@
 
   * improved unit testing
   * deals and leads are now linked to an online shared folder (document storage)
+  * started to use `value objects` (see why: https://stevegrunwell.com/blog/php-value-objects)
+  * RecordManager extracted from the Model
+  * `columns()` renamed to `describeColumns()`
+  * more flexible CSS skin (thanks to TailwindCSS v4)
+  * color scales in tables
 
 ## Release v0.6
 

@@ -8,11 +8,11 @@ class Group extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Group::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       "title" => (new \ADIOS\Core\Db\Column\Varchar($this, $this->translate("Title")))->setRequired()
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

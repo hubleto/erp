@@ -16,12 +16,12 @@ class BillingAccountService extends \HubletoMain\Core\Model
     'BILLING_ACCOUNT' => [ self::BELONGS_TO, BillingAccount::class, 'id_billing_account', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_billing_account' => (new Lookup($this, $this->translate("Billing Account"), BillingAccount::class, 'CASCADE'))->setRequired(),
       'id_service' => (new Lookup($this, $this->translate("Service"), Service::class, 'CASCADE'))->setRequired(),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

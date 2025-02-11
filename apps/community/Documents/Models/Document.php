@@ -23,12 +23,13 @@ class Document extends \HubletoMain\Core\Model
     'DEAL_DOCUMENT' => [ self::HAS_ONE, DealDocument::class, 'id_document', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired(),
-      'file' => (new File($this, $this->translate('File')))->setRequired(),
-    ]));
+      'file' => (new File($this, $this->translate('File'))),
+      'hyperlink' => (new Varchar($this, $this->translate('Link'))),
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table
@@ -40,6 +41,17 @@ class Document extends \HubletoMain\Core\Model
     return $description;
   }
 
+  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  {
+    $description = parent::describeInput($columnName);
+    switch ($columnName) {
+      case 'hyperlink':
+        $description->setReactComponent('InputHyperlink');
+      break;
+    }
+    return $description;
+  }
+
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
     $mCompanyDocument = new CompanyDocument($this->main);
@@ -48,42 +60,45 @@ class Document extends \HubletoMain\Core\Model
     $mLeadDocument = new LeadDocument($this->main);
     $mDealDocument = new DealDocument($this->main);
 
-    if (isset($originalRecord["creatingForModel"])) {
-      if ($originalRecord["creatingForModel"] == "Company") {
+    if (isset($savedRecord["creatingForModel"])) {
+      if ($savedRecord["creatingForModel"] == "Company") {
         $mCompanyDocument->eloquent->create([
-          "id_document" => $originalRecord["id"],
-          "id_company" => $originalRecord["creatingForId"]
+          "id_document" => $savedRecord["id"],
+          "id_company" => $savedRecord["creatingForId"]
         ]);
-      } else if ($originalRecord["creatingForModel"] == "Lead") {
+      } else if ($savedRecord["creatingForModel"] == "Lead") {
 
-        $lead = $mLead->eloquent->find($originalRecord["creatingForId"]);
+        $lead = $mLead->eloquent->find($savedRecord["creatingForId"]);
         $mCompanyDocument->eloquent->create([
-          "id_document" => $originalRecord["id"],
-          "id_company" => $originalRecord["creatingForId"]
+          "id_document" => $savedRecord["id"],
+          "id_company" => $savedRecord["creatingForId"]
         ]);
         $mLeadDocument->eloquent->create([
-          "id_document" => $originalRecord["id"],
+          "id_document" => $savedRecord["id"],
           "id_lead" => $lead->id
         ]);
-      } else if ($originalRecord["creatingForModel"] == "Deal") {
+      } else if ($savedRecord["creatingForModel"] == "Deal") {
 
-        $deal = $mDeal->eloquent->find($originalRecord["creatingForId"]);
+        $deal = $mDeal->eloquent->find($savedRecord["creatingForId"]);
         $mCompanyDocument->eloquent->create([
-          "id_document" => $originalRecord["id"],
-          "id_company" => $originalRecord["creatingForId"]
+          "id_document" => $savedRecord["id"],
+          "id_company" => $savedRecord["creatingForId"]
         ]);
         $mDealDocument->eloquent->create([
-          "id_document" => $originalRecord["id"],
+          "id_document" => $savedRecord["id"],
           "id_deal" => $deal->id
         ]);
       }
     }
-    return $originalRecord;
+    return $savedRecord;
   }
 
   public function onBeforeUpdate(array $record): array
   {
     $document = (array) $this->eloquent->find($record["id"])->toArray();
+
+    if (!isset($document["file"])) return $record;
+
     $prevFilename = ltrim((string) $document["file"],"./");
     if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
       unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);
@@ -95,6 +110,9 @@ class Document extends \HubletoMain\Core\Model
   public function onBeforeDelete(int $id): int
   {
     $document = (array) $this->eloquent->find($id)->toArray();
+
+    if (!isset($document["file"])) return $id;
+
     $prevFilename = ltrim((string) $document["file"],"./");
     if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
       unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);

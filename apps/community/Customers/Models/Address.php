@@ -18,9 +18,9 @@ class Address extends \HubletoMain\Core\Model
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
+    return array_merge(parent::describeColumns(), [
       'id_person' => (new Lookup($this, $this->translate("Person"), Person::class, 'CASCADE'))->setRequired(),
       'street_line_1' => (new Varchar($this, $this->translate("Street Line 1")))->setRequired(),
       'street_line_2' => (new Varchar($this, $this->translate("Street Line 2"))),
@@ -28,7 +28,7 @@ class Address extends \HubletoMain\Core\Model
       'city' => (new Varchar($this, $this->translate("City")))->setRequired(),
       'postal_code' => (new Varchar($this, $this->translate("Postal Code")))->setRequired(),
       'id_country' => (new Lookup($this, $this->translate("Country"), Country::class, 'SET NULL'))->setRequired(),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

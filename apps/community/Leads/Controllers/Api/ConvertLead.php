@@ -40,7 +40,7 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
     $mSettings = new Setting($this->main);
     $defaultPipeline =(int) $mSettings->eloquent
-      ->where("key", "Modules\Core\Settings\Pipeline\DefaultPipeline")
+      ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
       ->first()
       ->value
     ;

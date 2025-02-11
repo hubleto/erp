@@ -16,12 +16,23 @@ class CompanyDocument extends \HubletoMain\Core\Model
     'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id' ],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
-      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class, 'CASCADE'))->setRequired(),
+    return array_merge(parent::describeColumns(), [
+      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
       'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
-    ]));
+    ]);
+  }
+
+  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  {
+    $description = parent::describeInput($columnName);
+    switch ($columnName) {
+      case 'hyperlink':
+        $description->setReactComponent('InputHyperlink');
+      break;
+    }
+    return $description;
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

@@ -9,6 +9,7 @@ use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Image;
 use \ADIOS\Core\Db\Column\Decimal;
+use HubletoApp\Community\Settings\Models\Setting;
 
 class Product extends \HubletoMain\Core\Model
 {
@@ -21,9 +22,9 @@ class Product extends \HubletoMain\Core\Model
     'SUPPLIER' => [ self::HAS_ONE, Supplier::class, 'id','id_supplier'],
   ];
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns,[
+    return array_merge(parent::describeColumns(), [
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_product_group' => (new Lookup($this, $this->translate('Assigned User'), Group::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
@@ -32,8 +33,8 @@ class Product extends \HubletoMain\Core\Model
       'description' => new Text($this, $this->translate('Description')),
       'count_in_package' => new Decimal($this, $this->translate('Number of items in package')),
       'unit_price' => (new Decimal($this, $this->translate('Single unit price')))->setRequired(),
-      'margin' => new Decimal($this, $this->translate('Margin')),
-      'tax' => (new Decimal($this, $this->translate('Tax')))->setRequired(),
+      'margin' => (new Decimal($this, $this->translate('Margin')))->setUnit("%"),
+      'tax' => (new Decimal($this, $this->translate('Tax')))->setUnit("%")->setRequired(),
       'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
       'unit' => new Varchar($this, $this->translate('Unit')),
       'packaging' => new Varchar($this, $this->translate('Packaging')),
@@ -43,7 +44,7 @@ class Product extends \HubletoMain\Core\Model
       'needs_reordering' => new Boolean($this, $this->translate('Needs reordering?')),
       'storage_rules' => new Text($this, $this->translate('Storage rules')),
       'table' => new Text($this, $this->translate('Table')),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table
@@ -52,6 +53,9 @@ class Product extends \HubletoMain\Core\Model
 
     $description->ui['title'] = 'Products';
     $description->ui["addButtonText"] = $this->translate("Add product");
+
+    $description->columns['unit_price']->setColorScale('green-to-red');
+    $description->columns['margin']->setColorScale('light-blue-to-dark-blue');
 
     unset($description->columns["is_on_sale"]);
     unset($description->columns["image"]);

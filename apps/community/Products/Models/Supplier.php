@@ -13,10 +13,9 @@ class Supplier extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Supplier::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns,[
-
+    return array_merge(parent::describeColumns(), [
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'address' => (new Varchar($this, $this->translate('Address'))),
       'city' => (new Varchar($this, $this->translate('City'))),
@@ -30,7 +29,7 @@ class Supplier extends \HubletoMain\Core\Model
       'company_id' => (new Varchar($this, $this->translate('Company ID'))),
       'vat_id' => (new Varchar($this, $this->translate('VAT ID')))->setRequired(),
       'payment_account' => (new Varchar($this, $this->translate('Payment account number'))),
-    ]));
+    ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

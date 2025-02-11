@@ -4,11 +4,12 @@ module.exports = (env, arg) => {
   return {
     // stats: 'verbose',
     entry: {
+      adios: ['./vendor/wai-blue/adios/src/Components/Loader.tsx'],
       app: ['./index.tsx'],
     },
     output: {
-      path: path.resolve(__dirname, 'assets/compiled'),
-      filename: 'app.js',
+      path: path.resolve(__dirname, 'assets/compiled/js'),
+      filename: '[name].js',
       clean: true
     },
     optimization: {

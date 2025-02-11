@@ -1,6 +1,19 @@
 @config "../tailwind.config.js";
 @layer theme, base, components, utilities, primereact, adios, app;
 
+@theme {
+  --font-sans: 'Fredoka-Regular', 'sans-serif';
+  --font-serif: 'Merriweather', 'serif';
+
+  --color-primary: #008000;
+  --color-secondary: #7FB562;
+  
+  --spacing-8xl: 96rem;
+  --spacing-9x': 128rem;
+
+  --radius-4xl: 2rem;
+}
+
 @import "tailwindcss";
 @import "../vendor/wai-blue/adios/src/Assets/Css/desktop.css";
 @import "../vendor/wai-blue/adios/src/Assets/Css/components.css";

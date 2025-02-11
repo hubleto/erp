@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-css": "npx @tailwindcss/cli -i ./src/Main.css -o ./assets/compiled/main.css",
-    "watch-css": "npx @tailwindcss/cli --watch -i ./src/Main.css -o ./assets/compiled/main.css",
+    "build-css": "npx @tailwindcss/cli -i ./src/Main.twcss -o ./assets/compiled/css/main.css",
+    "watch-css": "npx @tailwindcss/cli --watch -i ./src/Main.twcss -o ./assets/compiled/css/main.css",
     "analyse-php": "vendor/bim/phpstan analyse",
     "build-js": "npx webpack --mode development",
-    "build": "npx webpack --mode development && npx @tailwindcss/cli -i ./src/Main.css -o ./assets/compiled/main.css",
+    "watch-js": "npx webpack --watch --mode development",
+    "build": "npx webpack --mode development && npx @tailwindcss/cli -i ./src/Main.twcss -o ./assets/compiled/css/main.css",
     "build:prod": "npx webpack --mode production"
   },
   "dependencies": {

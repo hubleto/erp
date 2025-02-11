@@ -7,7 +7,7 @@ class Report
 
   public \HubletoMain $main;
 
-  public Model $model;
+  public string $modelClass;
   public array $returnWith;
   public array $groupsBy;
   public array $fields;
@@ -28,17 +28,17 @@ class Report
     return [];
   }
 
-  public function getAllFields(): array {
-    $columns = $this->model->getColumns();
+  // public function getAllFields(): array {
+  //   $columns = $this->model->getColumns();
 
-    $fields = [];
+  //   $fields = [];
 
-    foreach ($columns as $key => $column) {
-      if ($key == "id") continue;
-      $columnDescription = $column->jsonSerialize();
-      $fields[$key] = $columnDescription;
-    }
+  //   foreach ($columns as $key => $column) {
+  //     if ($key == "id") continue;
+  //     $columnDescription = $column->jsonSerialize();
+  //     $fields[$key] = $columnDescription;
+  //   }
 
-    return $fields;
-  }
+  //   return $fields;
+  // }
 }

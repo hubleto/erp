@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Lookup from "adios/Inputs/Lookup";
 import FormInput from "adios/FormInput";
+import request from "adios/Request";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarController, BarElement, CategoryScale, LinearScale } from "chart.js";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
@@ -183,18 +184,26 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
   }
 
   requestData(): any {
-    fetch(globalThis.main.config.rewriteBase
-      + '/api/get-chart-data?'
-      + 'config=' + JSON.stringify(this.props.config)
-    )
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
+    request.post(
+      'api/get-chart-data',
+      this.props.config,
+      {},
+      (chartData: any) => {
+        console.log('chart-data', chartData);
       }
-      return response.json();
-    }).then(returnData => {
-      this.setState({data: returnData.data})
-    })
+    );
+    // fetch(globalThis.main.config.rewriteBase
+    //   + '/api/get-chart-data?'
+    //   + 'config=' + JSON.stringify(this.props.config)
+    // )
+    // .then(response => {
+    //   if (!response.ok) {
+    //     throw new Error('Network response was not ok ' + response.statusText);
+    //   }
+    //   return response.json();
+    // }).then(returnData => {
+    //   this.setState({data: returnData.data})
+    // })
   }
 
   render(): JSX.Element {

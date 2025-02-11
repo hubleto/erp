@@ -2,26 +2,19 @@
 
 namespace HubletoApp\Community\CalendarSync\Models;
 
+use ADIOS\Core\Db\Column\Varchar;
+
 class Source extends \HubletoMain\Core\Model
 {
   public string $table = 'sources';
   public string $eloquentClass = \HubletoApp\Community\CalendarSync\Models\Eloquent\Source::class;
 
-  public function columns(array $columns = []): array
+  public function describeColumns(): array
   {
-    return parent::columns(array_merge($columns, [
-      'link' => [
-        'type' => 'varchar',
-        'title' => 'Calendar link',
-        'required' => true
-      ],
-      'type' => [
-        'type' => 'varchar',
-        'title' => $this->translate('Type'),
-        'enumValues' => ['google' => "Google Calendar"],
-        'required' => true,
-      ]
-    ]));
+    return array_merge(parent::describeColumns(), [
+      'link' => (new Varchar($this, $this->translate('Calendar ID')))->setRequired(),
+      'type' => (new Varchar($this, $this->translate('Type')))->setRequired()->setEnumValues(['google' => "Google Calendar"]),
+    ]);
   }
 
   public function tableDescribe(array $description = []): array

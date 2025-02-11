@@ -9,7 +9,7 @@ interface TableSourcesProps extends TableProps {
 interface TableSourcesState extends TableState {
 }
 
-export default class TableAddresses extends Table<TableSourcesProps, TableSourcesState> {
+export default class TableSources extends Table<TableSourcesProps, TableSourcesState> {
   static defaultProps = {
     ...Table.defaultProps,
     itemsPerPage: 15,

@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\CalendarSync;
 
+use HubletoApp\Community\CalendarSync\Controllers\Sources;
+
 class Loader extends \HubletoMain\Core\App
 {
 
@@ -13,10 +15,12 @@ class Loader extends \HubletoMain\Core\App
   public function init(): void
   {
     $this->main->router->httpGet([
-      '/^calendar-sources\/?$/' => \HubletoApp\Community\CalendarSync\Controllers\Sources::class,
+      '/^calendar-sources\/?$/' => Sources::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 100, 'calendar-sources', $this->translate('Calendar sources'), 'fas fa-calendar', str_starts_with($this->main->requestedUri, 'calendar-sources'));
+    $this->main->sidebar->addLink(1, 51, 'calendar-sources', $this->translate('Calendar sources'), 'fas fa-calendar', str_starts_with($this->main->requestedUri, 'calendar-sources/') || $this->main->requestedUri == 'calendar-sources');
+
+    $this->main->calendarManager->addCalendar(Calendar::class);
   }
 
   public function installTables(): void
@@ -24,6 +28,22 @@ class Loader extends \HubletoMain\Core\App
     $mSource = new \HubletoApp\Community\CalendarSync\Models\Source($this->main);
 
     $mSource->dropTableIfExists()->install();
+  }
+
+  public function installDefaultPermissions(): void
+  {
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+    $permissions = [
+      "HubletoApp/Community/CalendarSync/Source",
+
+      "HubletoApp/Community/Calendar/Controllers/Sources",
+    ];
+
+    foreach ($permissions as $permission) {
+      $mPermission->eloquent->create([
+        "permission" => $permission
+      ]);
+    }
   }
 
 }

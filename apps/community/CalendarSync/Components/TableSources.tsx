@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
+import FormSource from "./FormSource";
 
 interface TableSourcesProps extends TableProps {
   // showHeader: boolean,
@@ -27,14 +28,8 @@ export default class TableSources extends Table<TableSourcesProps, TableSourcesS
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: TableSourcesProps) {
-    return {
-      ...super.getStateFromProps(props),
-    }
+  renderForm(): JSX.Element {
+    let formDescription = this.getFormProps();
+    return <FormSource {...formDescription}/>;
   }
-
-  // renderForm(): JSX.Element {
-  //   let formDescription = this.getFormProps();
-  //   return <FormActivity {...formDescription}/>;
-  // }
 }

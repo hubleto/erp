@@ -18,7 +18,7 @@ class Loader extends \HubletoMain\Core\App
       '/^calendar-sources\/?$/' => Sources::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 51, 'calendar-sources', $this->translate('Calendar sources'), 'fas fa-calendar', str_starts_with($this->main->requestedUri, 'calendar-sources/') || $this->main->requestedUri == 'calendar-sources');
+    $this->main->sidebar->addLink(1, 51, 'calendar-sources', $this->translate('Sources'), 'fas fa-calendar', str_starts_with($this->main->requestedUri, 'calendar-sources/') || $this->main->requestedUri == 'calendar-sources');
 
     $this->main->calendarManager->addCalendar(Calendar::class);
   }

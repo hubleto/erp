@@ -25,7 +25,7 @@ main.registerApp(Leads);
 main.registerApp(Deals);
 main.registerApp(Products);
 main.registerApp(Orders);
-main.registerApp(Report)
+main.registerApp(Report);
 main.registerApp(CalendarSync)
 
 // Render react elements into body

@@ -6,7 +6,7 @@ class Sources extends \HubletoMain\Core\Controller {
   public function prepareView(): void {
     parent::prepareView();
     $this->viewParams['now'] = date('Y-m-d H:i:s');
-    $this->setView('@app/community/CalendarSync/Views/sources.twig');
+    $this->setView('@HubletoApp:Community:CalendarSync/sources.twig');
 
     // $mSource = new Source($this->app);
     // $mSource->install();

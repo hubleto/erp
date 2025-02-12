@@ -7,13 +7,10 @@ use HubletoApp\Community\CalendarSync\Controllers\Sources;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $app)
-  {
-    parent::__construct($app);
-  }
-
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^calendar-sources\/?$/' => Sources::class,
     ]);

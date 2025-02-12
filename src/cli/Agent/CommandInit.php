@@ -33,6 +33,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $adminEmail = null;
     $adminPassword = null;
     $packagesToInstall = null;
+    $externalAppsRepositories = [];
 
     $configFile = (string) ($this->arguments[2] ?? '');
 
@@ -58,6 +59,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['adminEmail'])) $adminEmail = $config['adminEmail'];
     if (isset($config['adminPassword'])) $adminPassword = $config['adminPassword'];
     if (isset($config['packagesToInstall'])) $packagesToInstall = $config['packagesToInstall'];
+    if (isset($config['externalAppsRepositories'])) $externalAppsRepositories = $config['externalAppsRepositories'];
 
     $rewriteBases = [];
     $lastRewriteBase = '';
@@ -155,6 +157,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
         $appsInPackage
       );
     }
+
+    $installer->externalAppsRepositories = $externalAppsRepositories;
 
     $this->cli->cyan("  -> Creating folders and files.\n");
     $installer->createFoldersAndFiles();

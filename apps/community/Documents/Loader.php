@@ -5,15 +5,17 @@ namespace HubletoApp\Community\Documents;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $main)
-  {
-    parent::__construct($main);
+  // public function __construct(\HubletoMain $main)
+  // {
+  //   parent::__construct($main);
 
-    $this->registerModel(Models\Document::class);
-  }
+  //   $this->registerModel(Models\Document::class);
+  // }
 
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^documents\/?$/' => Controllers\Documents::class,
     ]);

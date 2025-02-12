@@ -4,13 +4,15 @@ namespace HubletoApp\Community\Support;
 
 class Loader extends \HubletoMain\Core\App
 {
-  public function __construct(\HubletoMain $main)
-  {
-    parent::__construct($main);
-  }
+  // public function __construct(\HubletoMain $main)
+  // {
+  //   parent::__construct($main);
+  // }
 
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^support\/?$/' => Controllers\Dashboard::class,
     ]);

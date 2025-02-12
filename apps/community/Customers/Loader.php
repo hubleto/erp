@@ -5,15 +5,17 @@ namespace HubletoApp\Community\Customers;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $main)
-  {
-    parent::__construct($main);
+  // public function __construct(\HubletoMain $main)
+  // {
+  //   parent::__construct($main);
 
-    $this->registerModel(Models\Company::class);
-  }
+  //   $this->registerModel(Models\Company::class);
+  // }
 
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^customers\/companies\/?$/' => Controllers\Companies::class,
       '/^customers\/persons\/?$/' => Controllers\Persons::class,

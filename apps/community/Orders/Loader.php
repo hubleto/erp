@@ -6,6 +6,8 @@ class Loader extends \HubletoMain\Core\App
 {
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^orders\/?$/' => Controllers\Orders::class,
     ]);

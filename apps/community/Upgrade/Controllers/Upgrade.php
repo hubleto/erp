@@ -13,7 +13,7 @@ class Upgrade extends \HubletoMain\Core\Controller {
       $this->main->router->redirectTo('');
     }
 
-    $this->setView('@app/community/Upgrade/Views/Upgrade.twig');
+    $this->setView('@HubletoApp:Community:Upgrade/Upgrade.twig');
   }
 
 }

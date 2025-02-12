@@ -5,13 +5,15 @@ namespace HubletoApp\Community\Deals;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $main)
-  {
-    parent::__construct($main);
-  }
+  // public function __construct(\HubletoMain $main)
+  // {
+  //   parent::__construct($main);
+  // }
 
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^deals\/?$/' => Controllers\Deals::class,
       '/^deals\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,

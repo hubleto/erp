@@ -36,7 +36,7 @@ if (!empty($action)) {
       break;
       case 'app':
         switch ($argv[2]) {
-          case 'list-installed': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($cli, $argv); break;
+          case 'list': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($cli, $argv); break;
           case 'install': $command = new \HubletoMain\Cli\Agent\App\Install($cli, $argv); break;
           case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($cli, $argv); break;
           case 'test': $command = new \HubletoMain\Cli\Agent\App\Test($cli, $argv); break;

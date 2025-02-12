@@ -18,6 +18,8 @@ class Loader extends \HubletoMain\Core\App
 
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^upgrade\/?$/' => Controllers\Upgrade::class,
       '/^you-are-pro\/?$/' => Controllers\YouArePro::class,

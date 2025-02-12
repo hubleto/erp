@@ -10,15 +10,17 @@ class Loader extends \HubletoMain\Core\App
 {
 
 
-  public function __construct(\HubletoMain $main)
-  {
-    parent::__construct($main);
+  // public function __construct(\HubletoMain $main)
+  // {
+  //   parent::__construct($main);
 
-    $this->registerModel(Models\Service::class);
-  }
+  //   $this->registerModel(Models\Service::class);
+  // }
 
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^services\/?$/' => Controllers\Services::class,
       '/^services\/get-service-price\/?$/' => Controllers\Api\GetServicePrice::class,

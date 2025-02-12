@@ -29,8 +29,11 @@ class Installer {
 
   public bool $randomize = false;
 
-  /** @var array<string, array<string, mixed>> */
+  /** @property array<string, array<string, mixed>> */
   public array $appsToInstall = [];
+
+  /** @property array<string, string> */
+  public array $externalAppsRepositories = [];
 
   public array $packages = [
     'core' => [
@@ -197,6 +200,16 @@ class Installer {
       $configEnv .= '  \\' . $appClass . '::class => ' . var_export($appConfig, true) . ',' . "\n";
     }
     $configEnv .= '];' . "\n";
+
+
+    if (count($this->externalAppsRepositories) > 0) {
+      $configEnv .= '' . "\n";
+      $configEnv .= '$config[\'externalAppsRepositories\'] = [' . "\n";
+      foreach ($this->externalAppsRepositories as $vendor => $folder) {
+        $configEnv .= '  \'' . $vendor . '\' => \'' . str_replace('\\', '/', (string) ($folder)) . '\',' . "\n";
+      }
+      $configEnv .= '];' . "\n";
+    }
 
     $configEnv .= '' . "\n";
     $configEnv .= '$config[\'env\'] = \'' . $this->env . '\';' . "\n";

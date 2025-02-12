@@ -16,7 +16,7 @@ class Permissions extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Settings/Views/Permissions.twig');
+    $this->setView('@HubletoApp:Community:Settings/Permissions.twig');
   }
 
 }

@@ -7,15 +7,16 @@ use HubletoApp\Community\Settings\Models\Permission;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $main)
-  {
-    parent::__construct($main);
-
-    $this->registerModel(Models\BillingAccount::class);
-  }
+  // public function __construct(\HubletoMain $main)
+  // {
+  //   parent::__construct($main);
+  //   $this->registerModel(Models\BillingAccount::class);
+  // }
 
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^billing\/?$/' => Controllers\BillingAccounts::class,
     ]);

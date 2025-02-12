@@ -16,7 +16,7 @@ class Persons extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Customers/Views/Persons.twig');
+    $this->setView('@HubletoApp:Community:Customers/Persons.twig');
   }
 
 }

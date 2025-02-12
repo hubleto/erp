@@ -16,7 +16,7 @@ class Countries extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Settings/Views/Countries.twig');
+    $this->setView('@HubletoApp:Community:Settings/Countries.twig');
   }
 
 }

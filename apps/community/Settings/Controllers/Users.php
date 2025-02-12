@@ -16,7 +16,7 @@ class Users extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Settings/Views/Users.twig');
+    $this->setView('@HubletoApp:Community:Settings/Users.twig');
   }
 
 }

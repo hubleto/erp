@@ -33,8 +33,15 @@ spl_autoload_register(function(string $class) {
 
   // external
   if (str_starts_with($class, 'HubletoApp/External/')) {
-    $dir = (string) (defined('HUBLETO_EXTERNAL_REPO') ? HUBLETO_EXTERNAL_REPO : realpath(__DIR__ . '/../apps/external'));
-    @include($dir . '/' . str_replace('HubletoApp/External/', '', $class) . '.php');
+    // $dir = (string) (defined('HUBLETO_EXTERNAL_REPO') ? HUBLETO_EXTERNAL_REPO : realpath(__DIR__ . '/../apps/external'));
+    $tmp = str_replace('HubletoApp/External/', '', $class);
+    $vendor = substr($tmp, 0, strpos($tmp, '/'));
+    $app = substr($tmp, strpos($tmp, '/') + 1);
+    $hubletoMain = $GLOBALS['hubletoMain'];
+    $externalAppsRepositories = $hubletoMain->configAsArray('externalAppsRepositories');
+    $folder = $externalAppsRepositories[$vendor] ?? '';
+
+    @include($folder . '/' . $app . '.php');
   }
 
   // installer
@@ -47,7 +54,7 @@ spl_autoload_register(function(string $class) {
 class HubletoMain extends \ADIOS\Core\Loader
 {
 
-  const RELEASE = 'v0.5';
+  const RELEASE = 'v0.6';
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
@@ -67,6 +74,8 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   public function __construct(array $config = [], int $mode = self::ADIOS_MODE_FULL)
   {
+    $this->setAsGlobal();
+
     parent::__construct($config, $mode);
 
     $tmp =  strpos($this->requestedUri, '/');
@@ -103,7 +112,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     foreach ($this->appManager->getInstalledApps() as $appClass => $appConfig) {
       $appClass = (string) $appClass;
-      if (is_array($appConfig) && ($appConfig['enabled'] ?? false) && $appClass::canBeAdded($this)) {
+      if (is_array($appConfig) && (((bool) $appConfig['enabled']) ?? false) && $appClass::canBeAdded($this)) {
         $this->appManager->registerApp($appClass);
       }
     }
@@ -118,6 +127,10 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   }
 
+  public function setAsGlobal() {
+    $GLOBALS['hubletoMain'] = $this;
+  }
+
   public function initTwig(): void
   {
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
@@ -128,6 +141,12 @@ class HubletoMain extends \ADIOS\Core\Loader
       'cache' => FALSE,
       'debug' => TRUE,
     ));
+  }
+
+  public function addTwigViewNamespace(string $folder, string $namespace) {
+    if (isset($this->twigLoader)) {
+      $this->twigLoader->addPath($folder, $namespace);
+    }
   }
 
   public function getSidebar(): \HubletoMain\Core\Sidebar

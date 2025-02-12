@@ -15,6 +15,6 @@ class Suppliers extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Products/Views/Suppliers.twig');
+    $this->setView('@HubletoApp:Community:Products/Suppliers.twig');
   }
 }

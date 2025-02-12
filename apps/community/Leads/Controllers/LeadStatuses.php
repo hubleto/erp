@@ -16,7 +16,7 @@ class LeadStatuses extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Leads/Views/LeadStatuses.twig');
+    $this->setView('@HubletoApp:Community:Leads/LeadStatuses.twig');
   }
 
 }

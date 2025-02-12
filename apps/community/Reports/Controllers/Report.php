@@ -15,7 +15,7 @@ class Report extends \HubletoMain\Core\Controller {
     $this->viewParams['report'] = $report;
     // $this->viewParams['reportConfig'] = $reportConfig;
 
-    $this->setView('@app/community/Reports/Views/Report.twig');
+    $this->setView('@HubletoApp:Community:Reports/Report.twig');
   }
 
 }

@@ -22,14 +22,14 @@ class Source extends \HubletoMain\Core\Model
     ]);
   }
 
-  public function tableDescribe(array $description = []): array
+  public function describeTable(array $description = []): \ADIOS\Core\Description\Table
   {
     $description["model"] = $this->fullName;
-    $description = parent::tableDescribe($description);
-    $description['ui']['title'] = 'Calendar sources';
-    $description['ui']['addButtonText'] = 'Add calendar source';
-    $description['ui']['showHeader'] = true;
-    $description['ui']['showFooter'] = false;
+    $description = parent::describeTable($description);
+    $description->ui['title'] = 'Calendar sources';
+    $description->ui['addButtonText'] = 'Add calendar source';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
     return $description;
   }
 }

@@ -1,0 +1,8 @@
+namespace: HubletoApp\Community\CalendarSync
+rootUrlSlug: calendar-sources
+name: Calendar Sync
+author:
+  name: "Michal Barnas"
+  nick: "mrgopes"
+  company: "wai.blue"
+  github: "https://github.com/mrgopes"

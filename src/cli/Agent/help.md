@@ -12,7 +12,7 @@
 | app test <appClass> <testName>          | Run one test. ONLY FOR DEVELOPMENT! MAY MODIFY YOUR DATA.                |
 | app test <appClass>                     | Run all tests in <appClass>. ONLY FOR DEVELOPMENT! MAY MODIFY YOUR DATA. |
 | app reset-all                           | Re-install all apps their 'factory' state.                               |
-| app list-installed                      | List all installed apps.                                                 |
+| app list                                | List all installed apps.                                                 |
 |                                         |                                                                          |
 | code generate <template>                | Generate code by given template.                                         |
 | code list-templates                     | List all available templates for `generate` command.                     |

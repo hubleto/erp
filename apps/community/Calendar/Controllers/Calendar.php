@@ -15,7 +15,7 @@ class Calendar extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Calendar/Views/Calendar.twig');
+    $this->setView('@HubletoApp:Community:Calendar/Calendar.twig');
   }
 
 }

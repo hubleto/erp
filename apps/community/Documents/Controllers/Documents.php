@@ -13,7 +13,7 @@ class Documents extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Documents/Views/Documents.twig');
+    $this->setView('@HubletoApp:Community:Documents/Documents.twig');
   }
 
 }

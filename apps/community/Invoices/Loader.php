@@ -5,14 +5,16 @@ namespace HubletoApp\Community\Invoices;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $main)
-  {
-    parent::__construct($main);
-    $this->registerModel(Models\Invoice::class);
-  }
+  // public function __construct(\HubletoMain $main)
+  // {
+  //   parent::__construct($main);
+  //   $this->registerModel(Models\Invoice::class);
+  // }
 
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^invoices\/?$/' => Controllers\Invoices::class,
     ]);

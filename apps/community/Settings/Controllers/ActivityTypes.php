@@ -16,7 +16,7 @@ class ActivityTypes extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Settings/Views/ActivityTypes.twig');
+    $this->setView('@HubletoApp:Community:Settings/ActivityTypes.twig');
   }
 
 }

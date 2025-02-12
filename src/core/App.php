@@ -32,10 +32,15 @@ class App {
     $this->namespace = $reflection->getNamespaceName();
     $this->translationRootContext = str_replace('.loader', '', strtolower(str_replace('\\', '.', $reflection->getName())));
     $this->translationContext = $this->translationRootContext . '.loader';
+
+    $this->viewNamespace = $this->namespace;
+    $this->viewNamespace = str_replace('\\', ':', $this->viewNamespace);
+
   }
 
   public function init(): void
   {
+    $this->main->addTwigViewNamespace($this->rootFolder . '/Views', $this->viewNamespace);
   }
 
   public function setCli(\HubletoMain\Cli\Agent\Loader $cli): void

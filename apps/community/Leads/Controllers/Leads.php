@@ -16,6 +16,6 @@ class Leads extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Leads/Views/Leads.twig');
+    $this->setView('@HubletoApp:Community:Leads/Leads.twig');
   }
 }

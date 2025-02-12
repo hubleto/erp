@@ -15,7 +15,7 @@ class Contacts extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Customers/Views/Contacts.twig');
+    $this->setView('@HubletoApp:Community:Customers/Contacts.twig');
   }
 
 }

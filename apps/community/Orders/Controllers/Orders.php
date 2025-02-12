@@ -14,6 +14,6 @@ class Orders extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Orders/Views/Orders.twig');
+    $this->setView('@HubletoApp:Community:Orders/Orders.twig');
   }
 }

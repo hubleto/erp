@@ -7,7 +7,7 @@ class Dashboard extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Support/Views/Dashboard.twig');
+    $this->setView('@HubletoApp:Community:Support/Dashboard.twig');
   }
 
 }

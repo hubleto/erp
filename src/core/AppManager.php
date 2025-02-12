@@ -103,14 +103,11 @@ class AppManager
     if (!class_exists($appClass)) throw new \Exception("{$appClass} does not exist.");
 
     $app = $this->createAppInstance($appClass);
+    if (!file_exists($app->rootFolder . '/manifest.yaml')) throw new \Exception("{$appClass} does not provide manifest.yaml file.");
 
-    if (file_exists($app->rootFolder . '/manifest.yaml')) {
-      $manifestFile = (string) file_get_contents($app->rootFolder . '/manifest.yaml');
-      $manifest = (array) \Symfony\Component\Yaml\Yaml::parse($manifestFile);
-      $dependencies = (array) ($manifest['requires'] ?? []);
-    } else {
-      $dependencies = [];
-    }
+    $manifestFile = (string) file_get_contents($app->rootFolder . '/manifest.yaml');
+    $manifest = (array) \Symfony\Component\Yaml\Yaml::parse($manifestFile);
+    $dependencies = (array) ($manifest['requires'] ?? []);
 
     foreach ($dependencies as $dependencyAppClass) {
       $dependencyAppClass = (string) $dependencyAppClass;
@@ -127,7 +124,9 @@ class AppManager
 
     if (!in_array($appClass, $this->getInstalledApps())) {
       $this->main->setConfig('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+      $this->main->setConfig('apps/' . $appNameForConfig . "/enabled", true);
       $this->main->saveConfigByPath('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+      $this->main->saveConfigByPath('apps/' . $appNameForConfig . "/enabled", '1');
     }
 
     foreach ($appConfig as $cPath => $cValue) {

@@ -15,7 +15,7 @@ class Companies extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Customers/Views/Companies.twig');
+    $this->setView('@HubletoApp:Community:Customers/Companies.twig');
   }
 
 }

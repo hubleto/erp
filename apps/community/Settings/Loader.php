@@ -7,18 +7,20 @@ use HubletoApp\Community\Settings\Models\Permission;
 class Loader extends \HubletoMain\Core\App
 {
 
-  public function __construct(\HubletoMain $main)
-  {
-    parent::__construct($main);
+  // public function __construct(\HubletoMain $main)
+  // {
+  //   parent::__construct($main);
 
-    $this->registerModel(\HubletoApp\Community\Settings\Models\User::class);
-    $this->registerModel(\HubletoApp\Community\Settings\Models\UserRole::class);
-    $this->registerModel(\HubletoApp\Community\Settings\Models\UserHasRole::class);
-    $this->registerModel(\HubletoApp\Community\Settings\Models\Setting::class);
-  }
+  //   $this->registerModel(\HubletoApp\Community\Settings\Models\User::class);
+  //   $this->registerModel(\HubletoApp\Community\Settings\Models\UserRole::class);
+  //   $this->registerModel(\HubletoApp\Community\Settings\Models\UserHasRole::class);
+  //   $this->registerModel(\HubletoApp\Community\Settings\Models\Setting::class);
+  // }
 
   public function init(): void
   {
+    parent::init();
+
     $this->main->router->httpGet([
       '/^settings\/?$/' => Controllers\Dashboard::class,
       '/^settings\/users\/?$/' => Controllers\Users::class,

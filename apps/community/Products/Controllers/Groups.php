@@ -15,6 +15,6 @@ class Groups extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@app/community/Products/Views/Groups.twig');
+    $this->setView('@HubletoApp:Community:Products/Groups.twig');
   }
 }

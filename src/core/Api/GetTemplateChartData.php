@@ -17,9 +17,9 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
 
   public function renderJson(): ?array
   {
-    $config = $this->main->urlParamAsString("config");
-    $config = json_decode($config, true);
-    $model = $this->main->getModel($config["model"]);
+    $config = $this->main->urlParamAsArray("config");
+    $model = $this->main->getModel($this->main->urlParamAsString("model"));
+
     $groupBy = $config["groupsBy"][0]["field"];
     $typeOptions = $config["returnWith"];
 

@@ -186,10 +186,10 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
   requestData(): any {
     request.post(
       'api/get-chart-data',
-      this.props.config,
+      {config: this.props.config, model: this.props.model},
       {},
       (chartData: any) => {
-        console.log('chart-data', chartData);
+        this.setState({data: chartData.data});
       }
     );
     // fetch(globalThis.main.config.rewriteBase

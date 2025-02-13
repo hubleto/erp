@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormSource from "./FormSource";
+import FormCalendarSyncSource from "./FormCalendarSyncSource";
 
 interface TableSourcesProps extends TableProps {
   // showHeader: boolean,
@@ -10,7 +10,7 @@ interface TableSourcesProps extends TableProps {
 interface TableSourcesState extends TableState {
 }
 
-export default class TableSources extends Table<TableSourcesProps, TableSourcesState> {
+export default class TableCalendarSyncSources extends Table<TableSourcesProps, TableSourcesState> {
   static defaultProps = {
     ...Table.defaultProps,
     itemsPerPage: 15,
@@ -30,6 +30,6 @@ export default class TableSources extends Table<TableSourcesProps, TableSourcesS
 
   renderForm(): JSX.Element {
     let formDescription = this.getFormProps();
-    return <FormSource {...formDescription}/>;
+    return <FormCalendarSyncSource {...formDescription}/>;
   }
 }

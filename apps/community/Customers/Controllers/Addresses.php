@@ -7,7 +7,7 @@ class Addresses extends \HubletoMain\Core\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'customers/companies', 'content' => $this->translate('Customers') ],
+      [ 'url' => 'customers/customers', 'content' => $this->translate('Customers') ],
       [ 'url' => '', 'content' => $this->translate('Addresses') ],
     ]);
   }

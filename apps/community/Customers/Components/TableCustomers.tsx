@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormCompany from './FormCompany';
+import FormCustomer from './FormCustomer';
 import { getUrlParam } from 'adios/Helper';
 import { FormProps } from 'adios/Form';
 
-interface TableCompaniesProps extends TableProps {
+interface TableCustomersProps extends TableProps {
 }
 
-interface TableCompaniesState extends TableState {
+interface TableCustomersState extends TableState {
 }
 
-export default class TableCompanies extends Table<TableCompaniesProps, TableCompaniesState> {
+export default class TableCustomers extends Table<TableCustomersProps, TableCustomersState> {
   static defaultProps = {
     ...Table.defaultProps,
     itemsPerPage: 15,
@@ -19,13 +19,13 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Customers/Models/Company',
+    model: 'HubletoApp/Community/Customers/Models/Customer',
   }
 
-  props: TableCompaniesProps;
-  state: TableCompaniesState;
+  props: TableCustomersProps;
+  state: TableCustomersState;
 
-  translationContext: string = 'hubleto.app.customers.tableCompanies';
+  translationContext: string = 'hubleto.app.customers.tableCustomers';
 
   getFormModalProps() {
     if (getUrlParam('recordId') > 0) {
@@ -44,7 +44,7 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
 
   /*
 
-  constructor(props: TableCompaniesProps) {
+  constructor(props: TableCustomersProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   } */
@@ -54,7 +54,7 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
     params.type = this.state.formId == -1 ? 'centered' : 'right wide';
     return params;
   }
-  getStateFromProps(props: TableCompaniesProps) {
+  getStateFromProps(props: TableCustomersProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -77,6 +77,6 @@ export default class TableCompanies extends Table<TableCompaniesProps, TableComp
 
   renderForm(): JSX.Element {
     let formProps: FormProps = this.getFormProps();
-    return <FormCompany {...formProps}/>;
+    return <FormCustomer {...formProps}/>;
   }
 }

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Customers\Models\Person;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Pipeline;
@@ -29,7 +29,7 @@ class Deal extends \HubletoMain\Core\Model
 
   public array $relations = [
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id'],
-    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
+    'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
@@ -48,7 +48,7 @@ class Deal extends \HubletoMain\Core\Model
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Deal Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'price' => (new Decimal($this, $this->translate('Price')))->setRequired(),
@@ -106,7 +106,7 @@ class Deal extends \HubletoMain\Core\Model
     unset($description->columns['id_pipeline']);
     unset($description->columns['shared_folder']);
 
-    if ($this->main->urlParamAsInteger('idCompany') > 0) {
+    if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
@@ -150,7 +150,7 @@ class Deal extends \HubletoMain\Core\Model
   public function prepareLoadRecordsQuery(array $includeRelations = [], int $maxRelationLevel = 0, string $search = '', array $filterBy = [], array $where = [], array $orderBy = []): Builder
   {
     $relations = [
-      'COMPANY',
+      'CUSTOMER',
       'USER',
       'STATUS',
       'PERSON',
@@ -193,15 +193,15 @@ class Deal extends \HubletoMain\Core\Model
 
   public function getOwnership(array $record): void
   {
-    if ($record["id_company"] && !isset($record["checkOwnership"])) {
-      $mCompany = new Company($this->main);
-      $company = $mCompany->eloquent
-        ->where("id", $record["id_company"])
+    if ($record["id_customer"] && !isset($record["checkOwnership"])) {
+      $mCustomer = new Customer($this->main);
+      $customer = $mCustomer->eloquent
+        ->where("id", $record["id_customer"])
         ->first()
       ;
 
-      if ($company->id_user != $record["id_user"]) {
-        throw new \Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected company.");
+      if ($customer->id_user != $record["id_user"]) {
+        throw new \Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected customer.");
       }
     }
   }

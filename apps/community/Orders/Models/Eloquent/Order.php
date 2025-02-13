@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Orders\Models\Eloquent;
 
-use HubletoApp\Community\Customers\Models\Eloquent\Company;
+use HubletoApp\Community\Customers\Models\Eloquent\Customer;
 use HubletoApp\Community\Settings\Models\Eloquent\Currency;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -21,9 +21,9 @@ class Order extends \HubletoMain\Core\ModelEloquent
     return $this->hasMany(History::class, 'id_order', 'id');
   }
 
-  /** @return HasOne<Company, covariant Order> */
+  /** @return HasOne<Customer, covariant Order> */
   public function CUSTOMER(): HasOne {
-    return $this->hasOne(Company::class, 'id','id_company');
+    return $this->hasOne(Customer::class, 'id','id_customer');
   }
 
   /** @return hasOne<Currency, covariant Lead> */

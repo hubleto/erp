@@ -120,14 +120,14 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                 <div className="w-1/2">
                   {this.inputWrapper('first_name')}
                   {this.inputWrapper('last_name')}
-                  <FormInput title={"Company"}>
+                  <FormInput title={"Customer"}>
                     <Lookup {...this.getInputProps()}
-                      model='HubletoApp/Community/Customers/Models/Company'
-                      endpoint={`customers/get-company`}
-                      value={R.id_company}
+                      model='HubletoApp/Community/Customers/Models/Customer'
+                      endpoint={`customers/get-customer`}
+                      value={R.id_customer}
                       readonly={this.props.creatingNew}
                       onChange={(value: any) => {
-                        this.updateRecord({ id_company: value});
+                        this.updateRecord({ id_customer: value});
                       }}
                     ></Lookup>
                   </FormInput>

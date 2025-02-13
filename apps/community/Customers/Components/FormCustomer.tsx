@@ -11,13 +11,13 @@ import FormLead, {FormLeadProps, FormLeadState} from "../../Leads/Components/For
 import ModalSimple from "adios/ModalSimple";
 import TableDeals from "../../Deals/Components/TableDeals";
 import FormDeal, {FormDealProps, FormDealState} from "../../Deals/Components/FormDeal";
-import TableCompanyDocuments from "./TableCompanyDocuments";
+import TableCustomerDocuments from "./TableCustomerDocuments";
 import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
 import FormPerson, {FormPersonProps, FormPersonState} from "./FormPerson";
 import Calendar from '../../Calendar/Components/Calendar'
 import Hyperlink from "adios/Inputs/Hyperlink";
 
-interface FormCompanyProps extends FormProps {
+interface FormCustomerProps extends FormProps {
   highlightIdBussinessAccounts: number,
   highlightIdActivity: number,
   createNewLead: boolean,
@@ -25,7 +25,7 @@ interface FormCompanyProps extends FormProps {
   newEntryId?: number,
 }
 
-interface FormCompanyState extends FormState {
+interface FormCustomerState extends FormState {
   //highlightIdBussinessAccounts: number,
   highlightIdActivity: number,
   createNewLead: boolean,
@@ -40,21 +40,21 @@ interface FormCompanyState extends FormState {
   //isInlineEditingBillingAccounts: boolean
 }
 
-export default class FormCompany<P, S> extends Form<
-  FormCompanyProps,
-  FormCompanyState
+export default class FormCustomer<P, S> extends Form<
+  FormCustomerProps,
+  FormCustomerState
 > {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: "HubletoApp/Community/Customers/Models/Company",
+    model: "HubletoApp/Community/Customers/Models/Customer",
   };
 
-  props: FormCompanyProps;
-  state: FormCompanyState;
+  props: FormCustomerProps;
+  state: FormCustomerState;
 
-  translationContext: string = 'hubleto.app.customers.formCompany';
+  translationContext: string = 'hubleto.app.customers.formCustomer';
 
-  constructor(props: FormCompanyProps) {
+  constructor(props: FormCustomerProps) {
     super(props);
 
     this.state = {
@@ -74,7 +74,7 @@ export default class FormCompany<P, S> extends Form<
     }
   }
 
-  getStateFromProps(props: FormCompanyProps) {
+  getStateFromProps(props: FormCustomerProps) {
     return {
       ...super.getStateFromProps(props),
     };
@@ -83,15 +83,15 @@ export default class FormCompany<P, S> extends Form<
   normalizeRecord(record) {
     if (record.PERSONS)
       record.PERSONS.map((item: any, key: number) => {
-        record.PERSONS[key].id_company = { _useMasterRecordId_: true };
+        record.PERSONS[key].id_customer = { _useMasterRecordId_: true };
       });
     if (record.ACTIVITIES)
       record.ACTIVITIES.map((item: any, key: number) => {
-        record.ACTIVITIES[key].id_company = { _useMasterRecordId_: true };
+        record.ACTIVITIES[key].id_customer = { _useMasterRecordId_: true };
       });
     /* if (record.BILLING_ACCOUNTS) {
       record.BILLING_ACCOUNTS.map((item: any, key: number) => {
-        record.BILLING_ACCOUNTS[key].id_company = { _useMasterRecordId_: true };
+        record.BILLING_ACCOUNTS[key].id_customer = { _useMasterRecordId_: true };
         if (record.BILLING_ACCOUNTS[key].SERVICES) {
           record.BILLING_ACCOUNTS[key].SERVICES.map((item2: any, key2: number) => {
             record.BILLING_ACCOUNTS[key].SERVICES[key2].id_billing_account  = { _useMasterRecordId_: true };
@@ -101,7 +101,7 @@ export default class FormCompany<P, S> extends Form<
     } */
     if (record.TAGS)
       record.TAGS.map((item: any, key: number) => {
-        record.TAGS[key].id_company = { _useMasterRecordId_: true };
+        record.TAGS[key].id_customer = { _useMasterRecordId_: true };
       });
 
     return record;
@@ -111,7 +111,7 @@ export default class FormCompany<P, S> extends Form<
     //Delete all spaces in identifiers
     if (record.tax_id) record.tax_id = record.tax_id.replace(/\s+/g, "");
     if (record.vat_id) record.vat_id = record.vat_id.replace(/\s+/g, "");
-    if (record.company_id) record.company_id = record.company_id.replace(/\s+/g, "");
+    if (record.customer_id) record.customer_id = record.customer_id.replace(/\s+/g, "");
 
     return record;
   }
@@ -131,7 +131,7 @@ export default class FormCompany<P, S> extends Form<
 
   renderTitle(): JSX.Element {
     if (getUrlParam("recordId") == -1) {
-      return <h2>New Company</h2>;
+      return <h2>New Customer</h2>;
     } else {
       return <h2>{this.state.record.name ? this.state.record.name : "[Undefined Name]"}</h2>;
     }
@@ -151,15 +151,15 @@ export default class FormCompany<P, S> extends Form<
           descriptionSource="both"
           description={{
             defaultValues: {
-              id_company: R.id
+              id_customer: R.id
             }
           }}
           showInModal={true}
           showInModalSimple={true}
-          onClose={() => { this.setState({ createNewPerson: false } as FormCompanyState); }}
+          onClose={() => { this.setState({ createNewPerson: false } as FormCustomerState); }}
           onSaveCallback={(form: FormPerson<FormPersonProps, FormPersonState>, saveResponse: any) => {
             if (saveResponse.status = "success") {
-              this.setState({createNewPerson: false} as FormCompanyState)
+              this.setState({createNewPerson: false} as FormCustomerState)
               this.loadRecord()
             }
           }}
@@ -189,19 +189,19 @@ export default class FormCompany<P, S> extends Form<
     return (
       <>
         <TabView>
-          <TabPanel header={globalThis.main.translate('Company')}>
+          <TabPanel header={globalThis.main.translate('Customer')}>
             <div
               className="grid grid-cols-2 gap-1"
               style={{
                 gridTemplateAreas: `
-                  'company company'
+                  'customer customer'
                   'notes notes'
                   'contacts contacts'
                   'activities activities'
                 `,
               }}
             >
-              <div className="card" style={{ gridArea: "company" }}>
+              <div className="card" style={{ gridArea: "customer" }}>
                 <div className="card-body flex flex-row gap-2">
                   <div className="w-1/2">
                     {this.inputWrapper("name")}
@@ -215,7 +215,7 @@ export default class FormCompany<P, S> extends Form<
                   <div className='border-l border-gray-200'></div>
                   <div className="w-1/2">
                     {this.inputWrapper("vat_id")}
-                    {this.inputWrapper("company_id")}
+                    {this.inputWrapper("customer_id")}
                     {this.inputWrapper("tax_id")}
                     {showAdditional ? this.inputWrapper("date_created") : null}
                     {this.inputWrapper("is_active")}
@@ -224,7 +224,7 @@ export default class FormCompany<P, S> extends Form<
                         {...this.getInputProps()}
                         value={this.state.record.TAGS}
                         model="HubletoApp/Community/Settings/Models/Tag"
-                        targetColumn="id_company"
+                        targetColumn="id_customer"
                         sourceColumn="id_tag"
                         colorColumn="color"
                         onChange={(value: any) => {
@@ -250,7 +250,7 @@ export default class FormCompany<P, S> extends Form<
                     showHeader={false}
                     showFooter={false}
                     descriptionSource="both"
-                    customEndpointParams={{idCompany: R.id}}
+                    customEndpointParams={{idCustomer: R.id}}
                     data={{ data: R.PERSONS }}
                     parentForm={this}
                     description={{
@@ -285,7 +285,7 @@ export default class FormCompany<P, S> extends Form<
                       role="button"
                       onClick={() => {
                         if (!R.PERSONS) R.PERSONS = [];
-                        this.setState({createNewPerson: true} as FormCompanyState);
+                        this.setState({createNewPerson: true} as FormCustomerState);
                       }}>
                       + {globalThis.main.translate('Add contact person')}
                     </a>
@@ -304,18 +304,18 @@ export default class FormCompany<P, S> extends Form<
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.main.config.rewriteBase + 'customers/get-calendar-events?idCompany=' + R.id}
+                eventsEndpoint={globalThis.main.config.rewriteBase + 'customers/get-calendar-events?idCustomer=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityCalendarDateClicked: date,
                     activityCalendarTimeClicked: time,
                     showIdActivity: -1,
-                  } as FormCompanyState);
+                  } as FormCustomerState);
                 }}
                 onEventClick={(info) => {
                   this.setState({
                     showIdActivity: parseInt(info.event.id),
-                  } as FormCompanyState);
+                  } as FormCustomerState);
                 }}
               ></Calendar>
               {this.state.showIdActivity == 0 ? <></> :
@@ -329,7 +329,7 @@ export default class FormCompany<P, S> extends Form<
                     isInlineEditing={true}
                     description={{
                       defaultValues: {
-                        id_company: R.id,
+                        id_customer: R.id,
                         date_start: this.state.activityCalendarDateClicked,
                         time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
                         date_end: this.state.activityCalendarDateClicked,
@@ -337,10 +337,10 @@ export default class FormCompany<P, S> extends Form<
                     }}
                     showInModal={true}
                     showInModalSimple={true}
-                    onClose={() => { this.setState({ showIdActivity: 0 } as FormCompanyState) }}
+                    onClose={() => { this.setState({ showIdActivity: 0 } as FormCustomerState) }}
                     onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
                       if (saveResponse.status == "success") {
-                        this.setState({ showIdActivity: 0 } as FormCompanyState);
+                        this.setState({ showIdActivity: 0 } as FormCustomerState);
                       }
                     }}
                   ></FormActivity>
@@ -354,7 +354,7 @@ export default class FormCompany<P, S> extends Form<
                 uid={this.props.uid + "_table_leads"}
                 data={{ data: R.LEADS }}
                 descriptionSource="both"
-                customEndpointParams={{idCompany: R.id}}
+                customEndpointParams={{idCustomer: R.id}}
                 description={{
                   columns: {
                     title: { type: "varchar", title: "Title" },
@@ -381,7 +381,7 @@ export default class FormCompany<P, S> extends Form<
               {this.state.isInlineEditing ? (
                 <a
                   role="button"
-                  onClick={() => {this.setState({ createNewLead: true } as FormCompanyState);}}>
+                  onClick={() => {this.setState({ createNewLead: true } as FormCustomerState);}}>
                   + Add Lead
                 </a>
               ) : <></>}
@@ -397,16 +397,16 @@ export default class FormCompany<P, S> extends Form<
                     descriptionSource="both"
                     description={{
                       defaultValues: {
-                        id_company: R.id,
+                        id_customer: R.id,
                       }
                     }}
                     showInModal={true}
                     showInModalSimple={true}
-                    onClose={() => { this.setState({ createNewLead: false } as FormCompanyState); }}
+                    onClose={() => { this.setState({ createNewLead: false } as FormCustomerState); }}
                     onSaveCallback={(form: FormLead<FormLeadProps, FormLeadState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({createNewLead: false} as FormCompanyState)
+                        this.setState({createNewLead: false} as FormCustomerState)
                       }
                     }}
                   />
@@ -420,7 +420,7 @@ export default class FormCompany<P, S> extends Form<
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DEALS }}
                 descriptionSource="both"
-                customEndpointParams={{idCompany: R.id}}
+                customEndpointParams={{idCustomer: R.id}}
                 description={{
                   columns: {
                     title: { type: "varchar", title: "Title" },
@@ -448,7 +448,7 @@ export default class FormCompany<P, S> extends Form<
               {this.state.isInlineEditing ? (
                 <a
                   role="button"
-                  onClick={() => {this.setState({ createNewDeal: true } as FormCompanyState);}}>
+                  onClick={() => {this.setState({ createNewDeal: true } as FormCustomerState);}}>
                   + Add Deal
                 </a>
               ) : <></>}
@@ -464,16 +464,16 @@ export default class FormCompany<P, S> extends Form<
                     descriptionSource="both"
                     description={{
                       defaultValues: {
-                        id_company: R.id,
+                        id_customer: R.id,
                       }
                     }}
                     showInModal={true}
                     showInModalSimple={true}
-                    onClose={() => { this.setState({ createNewDeal: false } as FormCompanyState); }}
+                    onClose={() => { this.setState({ createNewDeal: false } as FormCustomerState); }}
                     onSaveCallback={(form: FormDeal<FormDealProps, FormDealState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({createNewDeal: false} as FormCompanyState)
+                        this.setState({createNewDeal: false} as FormCustomerState)
                       }
                     }}
                   />
@@ -486,11 +486,11 @@ export default class FormCompany<P, S> extends Form<
               <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Shared documents')}</span></div></div></div>
               {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
               <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Local documents')}</span></div></div></div>
-              <TableCompanyDocuments
+              <TableCustomerDocuments
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DOCUMENTS }}
                 descriptionSource="both"
-                customEndpointParams={{idCompany: R.id}}
+                customEndpointParams={{idCustomer: R.id}}
                 description={{
                   ui: {
                     showFooter: false,
@@ -498,7 +498,7 @@ export default class FormCompany<P, S> extends Form<
                   },
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                    hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableCompanyDocuments, data: any, options: any): JSX.Element => {
+                    hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableCustomerDocuments, data: any, options: any): JSX.Element => {
                       return (
                         <FormInput>
                           <Hyperlink {...this.getInputProps()}
@@ -517,14 +517,14 @@ export default class FormCompany<P, S> extends Form<
                 isUsedAsInput={true}
                 //isInlineEditing={this.state.isInlineEditing}
                 readonly={!this.state.isInlineEditing}
-                onRowClick={(table: TableCompanyDocuments, row: any) => {
-                  this.setState({showIdDocument: row.id_document} as FormCompanyState);
+                onRowClick={(table: TableCustomerDocuments, row: any) => {
+                  this.setState({showIdDocument: row.id_document} as FormCustomerState);
                 }}
               />
               {this.state.isInlineEditing ? (
                 <a
                   role="button"
-                  onClick={() => this.setState({createNewDocument: true} as FormCompanyState)}
+                  onClick={() => this.setState({createNewDocument: true} as FormCustomerState)}
                 >
                   + Add Document
                 </a>
@@ -539,21 +539,21 @@ export default class FormCompany<P, S> extends Form<
                     id={-1}
                     descriptionSource="both"
                     isInlineEditing={true}
-                    creatingForModel="Company"
+                    creatingForModel="Customer"
                     creatingForId={this.state.id}
                     description={{
                       defaultValues: {
-                        creatingForModel: "Company",
+                        creatingForModel: "Customer",
                         creatingForId: this.state.record.id,
                       }
                     }}
                     showInModal={true}
                     showInModalSimple={true}
-                    onClose={() => { this.setState({ createNewDocument: false } as FormCompanyState) }}
+                    onClose={() => { this.setState({ createNewDocument: false } as FormCustomerState) }}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({ createNewDocument: false } as FormCompanyState)
+                        this.setState({ createNewDocument: false } as FormCustomerState)
                       }
                     }}
                   ></FormDocument>
@@ -567,20 +567,20 @@ export default class FormCompany<P, S> extends Form<
                 >
                   <FormDocument
                     id={this.state.showIdDocument}
-                    onClose={() => this.setState({showIdDocument: 0} as FormCompanyState)}
-                    creatingForModel="Company"
+                    onClose={() => this.setState({showIdDocument: 0} as FormCustomerState)}
+                    creatingForModel="Customer"
                     showInModal={true}
                     showInModalSimple={true}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({ showIdDocument: 0 } as FormCompanyState)
+                        this.setState({ showIdDocument: 0 } as FormCustomerState)
                       }
                     }}
                     onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();
-                        this.setState({ showIdDocument: 0 } as FormCompanyState)
+                        this.setState({ showIdDocument: 0 } as FormCustomerState)
                       }
                     }}
                   />

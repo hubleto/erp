@@ -15,23 +15,23 @@ use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Date;
 
-class Company extends \HubletoMain\Core\Model
+class Customer extends \HubletoMain\Core\Model
 {
-  public string $table = 'companies';
-  public string $eloquentClass = Eloquent\Company::class;
+  public string $table = 'customers';
+  public string $eloquentClass = Eloquent\Customer::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
-    'PERSONS' => [ self::HAS_MANY, Person::class, 'id_company' ],
+    'PERSONS' => [ self::HAS_MANY, Person::class, 'id_customer' ],
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
-    'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, 'id_company' ],
-    //'BILLING_ACCOUNTS' => [ self::HAS_MANY, BillingAccount::class, 'id_company', ],
-    'ACTIVITIES' => [ self::HAS_MANY, CompanyActivity::class, 'id_company', 'id' ],
-    'DOCUMENTS' => [ self::HAS_MANY, CompanyDocument::class, 'id_company', 'id'],
-    'TAGS' => [ self::HAS_MANY, CompanyTag::class, 'id_company', 'id' ],
-    'LEADS' => [ self::HAS_MANY, Lead::class, 'id_company', 'id'],
-    'DEALS' => [ self::HAS_MANY, Deal::class, 'id_company', 'id'],
+    'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, 'id_customer' ],
+    //'BILLING_ACCOUNTS' => [ self::HAS_MANY, BillingAccount::class, 'id_customer', ],
+    'ACTIVITIES' => [ self::HAS_MANY, CustomerActivity::class, 'id_customer', 'id' ],
+    'DOCUMENTS' => [ self::HAS_MANY, CustomerDocument::class, 'id_customer', 'id'],
+    'TAGS' => [ self::HAS_MANY, CustomerTag::class, 'id_customer', 'id' ],
+    'LEADS' => [ self::HAS_MANY, Lead::class, 'id_customer', 'id'],
+    'DEALS' => [ self::HAS_MANY, Deal::class, 'id_customer', 'id'],
   ];
 
   public function describeColumns(): array
@@ -45,7 +45,7 @@ class Company extends \HubletoMain\Core\Model
       'postal_code' => (new Varchar($this, $this->translate('Postal Code'))),
       'id_country' => (new Lookup($this, $this->translate('Country'), Country::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
-      'company_id' => (new Varchar($this, $this->translate('Company ID'))),
+      'customer_id' => (new Varchar($this, $this->translate('Customer ID'))),
       'tax_id' => (new Varchar($this, $this->translate('Tax ID')))->setRequired(),
       'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
@@ -66,10 +66,10 @@ class Company extends \HubletoMain\Core\Model
           ],
         ],
       ],
-      "company_id" => [
+      "customer_id" => [
         "type" => "unique",
         "columns" => [
-          "company_id" => [
+          "customer_id" => [
             "order" => "asc",
           ],
         ],
@@ -102,8 +102,8 @@ class Company extends \HubletoMain\Core\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = $this->translate('Companies');
-    $description->ui['addButtonText'] = $this->translate('Add Company');
+    $description->ui['title'] = $this->translate('Customers');
+    $description->ui['addButtonText'] = $this->translate('Add Customer');
     $description->ui['showHeader'] = true;
     $description->ui['showFooter'] = false;
     $description->columns['tags'] = ["title" => "Tags"];

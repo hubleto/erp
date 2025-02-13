@@ -17,7 +17,7 @@ class Person extends \HubletoMain\Core\Model
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
 
   public array $relations = [
-    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company' ],
+    'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer' ],
     'CONTACTS' => [ self::HAS_MANY, Contact::class, 'id_person', 'id' ],
     //'ADDRESSES' => [ self::HAS_MANY, Address::class, 'id_person', 'id' ],
     'TAGS' => [ self::HAS_MANY, PersonTag::class, 'id_person', 'id' ],
@@ -28,7 +28,7 @@ class Person extends \HubletoMain\Core\Model
     return array_merge(parent::describeColumns(), [
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
-      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class, 'CASCADE')),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE')),
       'is_main' => new Boolean($this, $this->translate('Main Contact')),
       'note' => (new Text($this, $this->translate('Notes'))),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
@@ -56,7 +56,7 @@ class Person extends \HubletoMain\Core\Model
     unset($description->columns['is_active']);
     $description->columns['is_active'] = $tempColumn;
 
-    if ($this->main->urlParamAsInteger('idCompany') > 0) {
+    if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),

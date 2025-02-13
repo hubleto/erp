@@ -6,7 +6,7 @@ import Lookup from 'adios/Inputs/Lookup';
 export default class FormSource<P, S> extends Form<FormProps, FormState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'HubletoApp/Community/Customers/Models/CompanyActivity',
+    model: 'HubletoApp/Community/Customers/Models/CustomerActivity',
   };
 
   props: FormProps;

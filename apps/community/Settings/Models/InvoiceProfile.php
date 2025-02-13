@@ -16,7 +16,7 @@ class InvoiceProfile extends \ADIOS\Core\Model {
       'phone' => (new Varchar($this, $this->translate('Phone'))),
       'email' => (new Varchar($this, $this->translate('E-mail'))),
       'www' => (new Varchar($this, $this->translate('WWW'))),
-      'company_id' => (new Varchar($this, $this->translate('Company ID'))),
+      'customer_id' => (new Varchar($this, $this->translate('Customer ID'))),
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
       'streer_1' => (new Varchar($this, $this->translate('Street, line 1'))),

@@ -6,20 +6,20 @@ use HubletoApp\Community\Documents\Models\Document;
 
 use \ADIOS\Core\Db\Column\Lookup;
 
-class CompanyDocument extends \HubletoMain\Core\Model
+class CustomerDocument extends \HubletoMain\Core\Model
 {
-  public string $table = 'company_documents';
-  public string $eloquentClass = Eloquent\CompanyDocument::class;
+  public string $table = 'customer_documents';
+  public string $eloquentClass = Eloquent\CustomerDocument::class;
 
   public array $relations = [
-    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
+    'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
       'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
     ]);
   }
@@ -39,7 +39,7 @@ class CompanyDocument extends \HubletoMain\Core\Model
   {
     $description = parent::describeTable();
 
-    if ($this->main->urlParamAsInteger('idCompany') > 0) {
+    if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),

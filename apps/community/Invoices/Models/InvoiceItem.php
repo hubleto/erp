@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Invoices\Models;
 
-use \HubletoApp\Community\Customers\Models\Company;
+use \HubletoApp\Community\Customers\Models\Customer;
 use \HubletoApp\Community\Settings\Models\User;
 
 use \ADIOS\Core\Db\Column\Lookup;

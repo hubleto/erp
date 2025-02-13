@@ -1,11 +1,11 @@
 {
-    "formCompany": {
+    "formCustomer": {
         "Basic Information": "Über die Firma",
         "Activities": "Aktivitäten",
         "Leads": "Leads",
         "Contact Persons": "Kontaktpersonen",
         "Documents": "Dokumente",
-        "Company Information": "Über die Firma",
+        "Customer Information": "Über die Firma",
         "Deals": "Deals",
         "Notes": "Notizen",
         "Add contact": "Kontakt hinzufügen",
@@ -21,11 +21,11 @@
     },
     "loader": {
         "Customers": "Kunden",
-        "Companies": "Unternehmen",
+        "Customers": "Unternehmen",
         "Contact Persons": "Kontaktpersonen"
     },
-    "models.company": {
-        "Add Company": "Unternehmen hinzufügen",
+    "models.customer": {
+        "Add Customer": "Unternehmen hinzufügen",
         "Name": "Name",
         "Street Line 1": "Straße, erste Zeile",
         "Street Line 2": "Straße, zweite Zeile",
@@ -33,19 +33,19 @@
         "City": "Stadt",
         "Country": "Land",
         "Postal Code": "PLZ",
-        "Company ID": "Firmenkennung",
+        "Customer ID": "Firmenkennung",
         "Tax ID": "Steuer-IdNr.",
         "VAT ID": "USt-IdNr.",
         "Notes": "Notizen",
         "Date Created": "Erstellt am",
         "Active": "Aktiv",
         "Assigned User": "Inhaber",
-        "Companies": "Unternehmen"
+        "Customers": "Unternehmen"
     },
     "models.person": {
         "First name": "Vorname",
         "Last name": "Nachname",
-        "Company": "Firma",
+        "Customer": "Firma",
         "Main Contact": "Hauptkontakt",
         "Notes": "Notizen",
         "Active": "Aktiv",
@@ -64,9 +64,9 @@
         "Other": "Sonstiges",
         "Value": "Wert"
     },
-    "controllers.companies": {
+    "controllers.customers": {
         "Customers": "Kunden",
-        "Companies": "Firmen"
+        "Customers": "Firmen"
     },
     "controllers.persons": {
         "Customers": "Kunden",

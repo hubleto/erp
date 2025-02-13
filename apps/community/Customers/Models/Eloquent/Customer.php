@@ -3,7 +3,7 @@
 namespace HubletoApp\Community\Customers\Models\Eloquent;
 
 use \HubletoApp\Community\Billing\Models\Eloquent\BillingAccount;
-use \HubletoApp\Community\Customers\Models\Eloquent\CompanyDocument;
+use \HubletoApp\Community\Customers\Models\Eloquent\CustomerDocument;
 use \HubletoApp\Community\Settings\Models\Eloquent\Country;
 use \HubletoApp\Community\Settings\Models\Eloquent\User;
 use \HubletoApp\Community\Deals\Models\Eloquent\Deal;
@@ -13,50 +13,50 @@ use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use \Illuminate\Database\Eloquent\Relations\HasOne;
 use \Illuminate\Database\Eloquent\Builder;
 
-class Company extends \HubletoMain\Core\ModelEloquent
+class Customer extends \HubletoMain\Core\ModelEloquent
 {
-  public $table = 'companies';
+  public $table = 'customers';
 
-  /** @return HasMany<Person, covariant Company> */
+  /** @return HasMany<Person, covariant Customer> */
   public function PERSONS(): HasMany {
-    return $this->hasMany(Person::class, 'id_company');
+    return $this->hasMany(Person::class, 'id_customer');
   }
 
-  /** @return HasOne<Country, covariant Company> */
+  /** @return HasOne<Country, covariant Customer> */
   public function COUNTRY(): HasOne {
     return $this->hasOne(Country::class, 'id', 'id_country' );
   }
 
   public function FIRST_CONTACT(): HasOne { //@phpstan-ignore-line
-    return $this->hasOne(Person::class, 'id_company')->where('is_main', true); //@phpstan-ignore-line
+    return $this->hasOne(Person::class, 'id_customer')->where('is_main', true); //@phpstan-ignore-line
   }
 
-  /** @return HasMany<CompanyActivity, covariant Company> */
+  /** @return HasMany<CustomerActivity, covariant Customer> */
   public function ACTIVITIES(): HasMany {
-    return $this->hasMany(CompanyActivity::class, 'id_company', 'id' );
+    return $this->hasMany(CustomerActivity::class, 'id_customer', 'id' );
   }
 
-  /** @return HasMany<CompanyDocument, covariant Company> */
+  /** @return HasMany<CustomerDocument, covariant Customer> */
   public function DOCUMENTS(): HasMany {
-    return $this->hasMany(CompanyDocument::class, 'id_company', 'id' );
+    return $this->hasMany(CustomerDocument::class, 'id_customer', 'id' );
   }
 
-  /** @return HasMany<CompanyTag, covariant Company> */
+  /** @return HasMany<CustomerTag, covariant Customer> */
   public function TAGS(): HasMany {
-    return $this->hasMany(CompanyTag::class, 'id_company', 'id');
+    return $this->hasMany(CustomerTag::class, 'id_customer', 'id');
   }
 
-  /** @return HasMany<Lead, covariant Company> */
+  /** @return HasMany<Lead, covariant Customer> */
   public function LEADS(): HasMany {
-    return $this->hasMany(Lead::class, 'id_company', 'id');
+    return $this->hasMany(Lead::class, 'id_customer', 'id');
   }
 
-  /** @return HasMany<Deal, covariant Company> */
+  /** @return HasMany<Deal, covariant Customer> */
   public function DEALS(): HasMany {
-    return $this->hasMany(Deal::class, 'id_company', 'id');
+    return $this->hasMany(Deal::class, 'id_customer', 'id');
   }
 
-  /** @return BelongsTo<User, covariant Company> */
+  /** @return BelongsTo<User, covariant Customer> */
   public function USER(): BelongsTo {
     return $this->belongsTo(User::class, 'id_user', 'id');
   }

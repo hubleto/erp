@@ -1,11 +1,11 @@
 {
-    "formCompany": {
+    "formCustomer": {
         "Basic Information": "O firme",
         "Activities": "Aktivity",
         "Leads": "Leady",
         "Contact Persons": "Kontaktné osoby",
         "Documents": "Dokumenty",
-        "Company Information": "O firme",
+        "Customer Information": "O firme",
         "Deals": "Dealy",
         "Notes": "Poznámky",
         "Add contact": "Pridať kontakt",
@@ -21,11 +21,11 @@
     },
     "loader": {
         "Customers": "Zákazníci",
-        "Companies": "Firmy",
+        "Customers": "Firmy",
         "Contact Persons": "Kontaktné osoby"
     },
-    "models.company": {
-        "Add Company": "Pridať firmu",
+    "models.customer": {
+        "Add Customer": "Pridať firmu",
         "Name": "Názov",
         "Street Line 1": "Ulica, riadok č. 1",
         "Street Line 2": "Ulica, riadok č. 2",
@@ -34,18 +34,18 @@
         "Country": "Štát",
         "Postal Code": "PSČ",
         "VAT ID": "IČ DPH",
-        "Company ID": "IČO",
+        "Customer ID": "IČO",
         "Tax ID": "DIČ",
         "Notes": "Poznámky",
         "Date Created": "Vytvorený",
         "Active": "Aktívny",
         "Assigned User": "Vlastník",
-        "Companies": "Firmy"
+        "Customers": "Firmy"
     },
     "models.person": {
         "First name": "Meno",
         "Last name": "Priezvisko",
-        "Company": "Firma",
+        "Customer": "Firma",
         "Main Contact": "Hlavný kontakt",
         "Notes": "Poznámky",
         "Active": "Aktívny",
@@ -64,15 +64,15 @@
         "Other": "Iné",
         "Value": "Hodnota"
     },
-    "controllers.companies": {
+    "controllers.customers": {
         "Customers": "Zákazníci",
-        "Companies": "Firmy"
+        "Customers": "Firmy"
     },
     "controllers.persons": {
         "Customers": "Zákazníci",
         "Contact Persons": "Kontaktné osoby"
     },
-    "models.companyactivity": {
+    "models.customeractivity": {
         "Activity type": "",
         "Subject": ""
     }

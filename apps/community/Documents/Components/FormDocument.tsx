@@ -81,9 +81,9 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
     const R = this.state.record;
     const showAdditional: boolean = R.id > 0 ? true : false;
 
-    if (R.COMPANY_DOCUMENT) {
-      var companyEntryURL = globalThis.main.config.rewriteBase+"customers/companies?recordId="+R.COMPANY_DOCUMENT.id_company;
-      var companyEntryType = "Company"
+    if (R.CUSTOMER_DOCUMENT) {
+      var customerEntryURL = globalThis.main.config.rewriteBase+"customers/customers?recordId="+R.CUSTOMER_DOCUMENT.id_customer;
+      var customerEntryType = "Customer"
     }
     if (R.LEAD_DOCUMENT) {
       var leadEntryURL = globalThis.main.config.rewriteBase+"leads?recordId="+R.LEAD_DOCUMENT.id_lead;
@@ -101,16 +101,16 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
               {this.inputWrapper('name', {readonly: this.props.readonly})}
               {this.inputWrapper('file', {readonly: this.props.readonly})}
               {this.inputWrapper('hyperlink', {readonly: this.props.readonly})}
-              {(this.props.creatingForModel == "Lead" || this.props.creatingForModel == "Deal" || !this.props.creatingForModel) && showAdditional && companyEntryType ?
+              {(this.props.creatingForModel == "Lead" || this.props.creatingForModel == "Deal" || !this.props.creatingForModel) && showAdditional && customerEntryType ?
                 <>
-                  <a href={companyEntryURL} className='btn btn-primary'>
+                  <a href={customerEntryURL} className='btn btn-primary'>
                     <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                    <span className='text'>Go to linked {companyEntryType}</span>
+                    <span className='text'>Go to linked {customerEntryType}</span>
                   </a>
                   <br></br>
                 </>
               : null}
-              {(this.props.creatingForModel == "Company" || !this.props.creatingForModel) && showAdditional && leadEntryType ?
+              {(this.props.creatingForModel == "Customer" || !this.props.creatingForModel) && showAdditional && leadEntryType ?
                 <>
                   <a href={leadEntryURL} className='btn btn-primary mt-2'>
                     <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
@@ -119,7 +119,7 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
                   <br></br>
                 </>
               : null}
-              {(this.props.creatingForModel == "Company" || !this.props.creatingForModel) && showAdditional && dealEntryType ?
+              {(this.props.creatingForModel == "Customer" || !this.props.creatingForModel) && showAdditional && dealEntryType ?
                 <a href={dealEntryURL} className='btn btn-primary mt-2'>
                   <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
                   <span className='text'>Go to linked {dealEntryType}</span>

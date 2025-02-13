@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Customers\Models\Person;
 use HubletoApp\Community\Settings\Models\ActivityType;
 use HubletoApp\Community\Settings\Models\User;
@@ -14,19 +14,19 @@ use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Date;
 
-class CompanyActivity extends \HubletoMain\Core\Model
+class CustomerActivity extends \HubletoMain\Core\Model
 {
-  public string $table = 'company_activities';
-  public string $eloquentClass = Eloquent\CompanyActivity::class;
+  public string $table = 'customer_activities';
+  public string $eloquentClass = Eloquent\CustomerActivity::class;
 
   public array $relations = [
-    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
+    'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class, 'CASCADE'))->setRequired()->setReadonly(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE'))->setRequired()->setReadonly(),
       'id_person' => (new Lookup($this, $this->translate('Contact Person'), Person::class, 'CASCADE')),
       'id_activity_type' => (new Lookup($this, $this->translate('Contact Person'), ActivityType::class, 'SET NULL'))->setRequired(),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),

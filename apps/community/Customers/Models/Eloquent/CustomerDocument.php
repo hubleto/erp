@@ -6,17 +6,17 @@ use HubletoApp\Community\Documents\Models\Eloquent\Document;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class CompanyDocument extends \HubletoMain\Core\ModelEloquent
+class CustomerDocument extends \HubletoMain\Core\ModelEloquent
 {
-  public $table = 'company_documents';
+  public $table = 'customer_documents';
 
-  /** @return BelongsTo<Document, covariant CompanyDocument> */
+  /** @return BelongsTo<Document, covariant CustomerDocument> */
   public function DOCUMENT(): BelongsTo {
     return $this->belongsTo(Document::class, 'id_document', 'id');
   }
 
-  /** @return BelongsTo<Company, covariant CompanyDocument> */
-  public function COMPANY(): BelongsTo {
-    return $this->belongsTo(Company::class, 'id_company', 'id');
+  /** @return BelongsTo<Customer, covariant CustomerDocument> */
+  public function CUSTOMER(): BelongsTo {
+    return $this->belongsTo(Customer::class, 'id_customer', 'id');
   }
 }

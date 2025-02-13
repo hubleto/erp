@@ -10,9 +10,9 @@ class Person extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'persons';
 
-  /** @return BelongsTo<Company, covariant Person> */
-  public function COMPANY(): BelongsTo {
-    return $this->belongsTo(Company::class, 'id_company');
+  /** @return BelongsTo<Customer, covariant Person> */
+  public function CUSTOMER(): BelongsTo {
+    return $this->belongsTo(Customer::class, 'id_customer');
   }
 
   /** @return HasMany<Contact, covariant Person> */

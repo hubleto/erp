@@ -35,7 +35,7 @@ class Contact extends \HubletoMain\Core\Model
   {
     $description = parent::describeTable();
     $description->ui['title'] = 'Contacts';
-    $description->ui['addButtonText'] = 'Add Company';
+    $description->ui['addButtonText'] = 'Add Customer';
     $description->ui['showHeader'] = true;
     $description->ui['showFooter'] = false;
 

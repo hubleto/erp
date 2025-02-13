@@ -2,23 +2,23 @@
 
 namespace HubletoApp\Community\Customers\Controllers\Api;
 
-use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Customers\Models\Person;
 
-class GetCompany extends \HubletoMain\Core\Controller
+class GetCustomer extends \HubletoMain\Core\Controller
 {
 
   public function renderJson(): ?array
   {
 
-    $mCompany = new Company($this->main);
-    $companies = null;
-    $companyArray = [];
+    $mCustomer = new Customer($this->main);
+    $customers = null;
+    $customerArray = [];
 
     $searchString = $this->main->params["search"] ?? "";
 
     try {
-      $companies = $mCompany->eloquent->selectRaw("*, name as _LOOKUP");
+      $customers = $mCustomer->eloquent->selectRaw("*, name as _LOOKUP");
       /**
        * The string needs to be at least two characters long for the search to activate
        * due to the lookup inputs not clearing the search parameter when empty
@@ -26,15 +26,15 @@ class GetCompany extends \HubletoMain\Core\Controller
 
       $search = $this->main->urlParamAsString("search");
       if (strlen($search) > 1) {
-        $companies
+        $customers
           ->where("name", "LIKE", "%" . $search . "%")
           ->orWhere("tax_id", "LIKE", "%" . $search . "%")
-          ->orWhere("company_id", "LIKE", "%" . $search . "%")
+          ->orWhere("customer_id", "LIKE", "%" . $search . "%")
           ->orWhere("vat_id", "LIKE", "%" . $search . "%")
         ;
       }
 
-      $companies = $companies->get()->toArray();
+      $customers = $customers->get()->toArray();
     } catch (\Exception $e) {
       return [
         "status" => "failed",
@@ -42,10 +42,10 @@ class GetCompany extends \HubletoMain\Core\Controller
       ];
     }
 
-    foreach ($companies as $company) { //@phpstan-ignore-line
-      $companyArray[$company["id"]] = $company;
+    foreach ($customers as $customer) { //@phpstan-ignore-line
+      $customerArray[$customer["id"]] = $customer;
     }
 
-    return $companyArray;
+    return $customerArray;
   }
 }

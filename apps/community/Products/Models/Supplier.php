@@ -20,7 +20,7 @@ class Supplier extends \HubletoMain\Core\Model
       'address' => (new Varchar($this, $this->translate('Address'))),
       'city' => (new Varchar($this, $this->translate('City'))),
       'postal_code' => (new Varchar($this, $this->translate('Postal code'))),
-      'id_country' => (new Lookup($this, $this->translate('Country'), Country::class)),
+      'id_country' => (new Lookup($this, $this->translate('Country'), Country::class))->setFkOnUpdate("CASCADE")->setFkOnDelete("SET NULL"),
       'contact_person' => (new Varchar($this, $this->translate('Contact person'))),
       'phone_number' => (new Varchar($this, $this->translate('Phone number'))),
       'email' => (new Varchar($this, $this->translate('Supplier email'))),

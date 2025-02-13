@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Models\Eloquent;
 
-use HubletoApp\Community\Customers\Models\Eloquent\Company;
+use HubletoApp\Community\Customers\Models\Eloquent\Customer;
 use HubletoApp\Community\Customers\Models\Eloquent\Person;
 use HubletoApp\Community\Settings\Models\Eloquent\Currency;
 use HubletoApp\Community\Settings\Models\Eloquent\User;
@@ -22,9 +22,9 @@ class Lead extends \HubletoMain\Core\ModelEloquent
     return $this->hasOne(Deal::class, 'id_lead', 'id' );
   }
 
-  /** @return BelongsTo<Company, covariant Lead> */
-  public function COMPANY(): BelongsTo {
-    return $this->belongsTo(Company::class, 'id_company', 'id' );
+  /** @return BelongsTo<Customer, covariant Lead> */
+  public function CUSTOMER(): BelongsTo {
+    return $this->belongsTo(Customer::class, 'id_customer', 'id' );
   }
 
   /** @return BelongsTo<User, covariant Lead> */

@@ -147,29 +147,10 @@ class Deal extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordsQuery(array $includeRelations = [], int $maxRelationLevel = 0, string $search = '', array $filterBy = [], array $where = [], array $orderBy = []): Builder
+  public function prepareLoadRecordQuery(): Builder
   {
-    $relations = [
-      'CUSTOMER',
-      'USER',
-      'STATUS',
-      'PERSON',
-      'PIPELINE',
-      'PIPELINE_STEP',
-      'CURRENCY',
-      'HISTORY',
-      'TAGS',
-      'LEAD',
-      'SERVICES',
-      'ACTIVITIES',
-      'DOCUMENTS',
-    ];
-    $query = parent::prepareLoadRecordsQuery($relations, 4);
+    $query = parent::prepareLoadRecordQuery();
 
-    /**
-     * These are the query filters for tables with archived and non-archived deal entries.
-     * The params["id"] needs to be there to properly load the data of the entry in a form.
-     */
     if ($this->main->urlParamAsBool("showArchive")) {
       $query = $query->where("deals.is_archived", 1);
     } else {
@@ -223,7 +204,7 @@ class Deal extends \HubletoMain\Core\Model
       $mDealHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_deal" => (int) ($record["id"] ?? 0),
-        "description" => "Price changed to " . (string) ($record["price"] ?? '') . " " . (string) ($record["CURRENCY"]["code"] ?? '')
+        "description" => "Price changed to " . (string) ($record["price"] ?? '')
       ]);
     }
     if ((string) $deal["date_expected_close"] != (string) $record["date_expected_close"]) {

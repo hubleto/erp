@@ -137,22 +137,9 @@ class Lead extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordsQuery(array $includeRelations = [], int $maxRelationLevel = 0, string $search = '', array $filterBy = [], array $where = [], array $orderBy = []): Builder
+  public function prepareLoadRecordQuery(): mixed
   {
-    $relations = [
-      'DEAL',
-      'CUSTOMER',
-      'USER',
-      'PERSON',
-      'STATUS',
-      'CURRENCY',
-      'HISTORY',
-      'TAGS',
-      'SERVICES',
-      'ACTIVITIES',
-      'DOCUMENTS',
-    ];
-    $query = parent::prepareLoadRecordsQuery($relations, 4);
+    $query = parent::prepareLoadRecordQuery();
 
     if ($this->main->urlParamAsBool("showArchive")) {
       $query = $query->where("leads.is_archived", 1);
@@ -204,7 +191,7 @@ class Lead extends \HubletoMain\Core\Model
       $mLeadHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
-        "description" => "Price changed to " . (string) $record["price"] . " " . (string) $record["CURRENCY"]["code"],
+        "description" => "Price changed to " . (string) $record["price"],
       ]);
     }
     if ((string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {

@@ -33,6 +33,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $adminEmail = null;
     $adminPassword = null;
     $packagesToInstall = null;
+    $appsToInstall = null;
     $externalAppsRepositories = [];
 
     $configFile = (string) ($this->arguments[2] ?? '');
@@ -59,6 +60,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['adminEmail'])) $adminEmail = $config['adminEmail'];
     if (isset($config['adminPassword'])) $adminPassword = $config['adminPassword'];
     if (isset($config['packagesToInstall'])) $packagesToInstall = $config['packagesToInstall'];
+    if (isset($config['appsToInstall'])) $appsToInstall = $config['appsToInstall'];
     if (isset($config['externalAppsRepositories'])) $externalAppsRepositories = $config['externalAppsRepositories'];
 
     $rewriteBases = [];
@@ -120,6 +122,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->main->setConfig('db_password', $dbPassword);
     $this->main->setConfig('db_name', $dbName);
 
+    $this->main->appManager->setCli($this->cli);
+
     $this->cli->cyan("\n");
     $this->cli->cyan("Hurray. Installing your Hubleto packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
 
@@ -158,6 +162,14 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       );
     }
 
+    if (is_array($appsToInstall)) {
+      foreach ($appsToInstall as $appToInstall => $appConfig) {
+        if (!isset($installer->appsToInstall[$appToInstall])) {
+          $installer->appsToInstall[$appToInstall] = $appConfig;
+        }
+      }
+    }
+
     $installer->externalAppsRepositories = $externalAppsRepositories;
 
     $this->cli->cyan("  -> Creating folders and files.\n");
@@ -176,10 +188,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("All done! You're a fantastic CRM developer. Now you can:\n");
     $this->cli->cyan("  -> Open " . (string) $accountUrl . " and sign in with '" . (string) $adminEmail . "' and '" . (string) $adminPassword . "'.\n");
     $this->cli->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
-    $this->cli->cyan("     See https://developer.hubleto.com/nginx for more details.\n");
-    $this->cli->cyan("  -> Create your app in ./src/apps.\n");
-    $this->cli->cyan("     See https://developer.hubleto.com/start-developing-own-module for tips how to start.\n");
-    $this->cli->cyan("     See https://developer.hubleto.com/publish-module for instructions how to publish.\n");
-    $this->cli->cyan("  -> Check the developer's guide at https://developer.hubleto.com for more tips & tricks.\n");
+    $this->cli->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
+    $this->cli->cyan("\n");
   }
 }

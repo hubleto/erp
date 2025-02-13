@@ -3,7 +3,7 @@ import { deepObjectMerge, getUrlParam } from "adios/Helper";
 import Form, { FormDescription, FormProps, FormState } from "adios/Form";
 import InputTags2 from "adios/Inputs/Tags2";
 import FormInput from "adios/FormInput";
-import TablePersons from "./TablePersons";
+import TablePersons from "../../Contacts/Components/TablePersons";
 import { TabPanel, TabView } from "primereact/tabview";
 import FormActivity, {FormActivityProps, FormActivityState} from "./FormActivity";
 import TableLeads from "../../Leads/Components/TableLeads";
@@ -13,7 +13,7 @@ import TableDeals from "../../Deals/Components/TableDeals";
 import FormDeal, {FormDealProps, FormDealState} from "../../Deals/Components/FormDeal";
 import TableCustomerDocuments from "./TableCustomerDocuments";
 import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
-import FormPerson, {FormPersonProps, FormPersonState} from "./FormPerson";
+import FormPerson, {FormPersonProps, FormPersonState} from "../../Contacts/Components/FormPerson";
 import Calendar from '../../Calendar/Components/Calendar'
 import Hyperlink from "adios/Inputs/Hyperlink";
 

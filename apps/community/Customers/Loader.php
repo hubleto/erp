@@ -17,50 +17,40 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^customers\/customers\/?$/' => Controllers\Customers::class,
-      '/^customers\/persons\/?$/' => Controllers\Persons::class,
-      '/^customers\/address\/?$/' => Controllers\Addresses::class,
-      '/^customers\/contacts\/?$/' => Controllers\Contacts::class,
+      '/^customers\/?$/' => Controllers\Customers::class,
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
-      //'/^customers\/activities\/get\/?$/' => Controllers\Api\Activity::class,
       '/^customers\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
-      '/^customers\/get-customer-contacts\/?$/' => Controllers\Api\GetCustomerContacts::class,
       '/^customers\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 40, 'customers/customers', $this->translate('Customers'), 'fas fa-address-card', str_starts_with($this->main->requestedUri, 'customers'));
-
-    if (str_starts_with($this->main->requestedUri, 'customers')) {
-      $this->main->sidebar->addHeading1(2, 310, $this->translate('Customers'));
-      $this->main->sidebar->addLink(2, 320, 'customers/customers', $this->translate('Customers'), 'fas fa-building');
-      $this->main->sidebar->addLink(2, 330, 'customers/persons', $this->translate('Contact Persons'), 'fas fa-users');
-      //$this->main->sidebar->addLink(2, 10203, 'customers/activities', $this->translate('Activities'), 'fas fa-users');
-    }
+    $this->main->sidebar->addLink(1, 40, 'customers', $this->translate('Customers'), 'fas fa-address-card', str_starts_with($this->main->requestedUri, 'customers'));
 
     $this->main->calendarManager->addCalendar(Calendar::class);
   }
 
   public function installTables(): void
   {
-    $mPerson = new \HubletoApp\Community\Customers\Models\Person($this->main);
+    $mPerson = new \HubletoApp\Community\Contacts\Models\Person($this->main);
+    $mContact = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
+    $mAddress = new \HubletoApp\Community\Contacts\Models\Address($this->main);
+    $mPersonTag = new \HubletoApp\Community\Contacts\Models\PersonTag($this->main);
+
     $mCustomer = new \HubletoApp\Community\Customers\Models\Customer($this->main);
-    $mAddress = new \HubletoApp\Community\Customers\Models\Address($this->main);
-    $mContact = new \HubletoApp\Community\Customers\Models\Contact($this->main);
-    //$mActivity = new \HubletoApp\Community\Customers\Models\Activity($this->main);
     $mCustomerActivity = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
     $mCustomerDocument = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
     $mCustomerTag = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
-    $mPersonTag = new \HubletoApp\Community\Customers\Models\PersonTag($this->main);
 
     $mCustomer->dropTableIfExists()->install();
     $mPerson->dropTableIfExists()->install();
-    $mAddress->dropTableIfExists()->install();
-    $mContact->dropTableIfExists()->install();
+
     $mCustomerTag->dropTableIfExists()->install();
-    $mPersonTag->dropTableIfExists()->install();
-    //$mActivity->dropTableIfExists()->install();
     $mCustomerActivity->dropTableIfExists()->install();
     $mCustomerDocument->dropTableIfExists()->install();
+
+    $mAddress->dropTableIfExists()->install();
+    $mContact->dropTableIfExists()->install();
+    $mPersonTag->dropTableIfExists()->install();
+
   }
 
   public function installDefaultPermissions(): void

@@ -14,7 +14,7 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Customers/Models/Contact',
+    model: 'HubletoApp/Community/Contacts/Models/Contact',
   }
 
   props: TableContactsProps;

@@ -209,7 +209,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         model='HubletoApp/Community/Customers/Models/Person'
                         customEndpointParams={{id_customer: R.id_customer}}
                         readonly={R.is_archived}
-                        endpoint={`customers/get-customer-contacts`}
+                        endpoint={`contacts/get-customer-contacts`}
                         value={R.id_person}
                         onChange={(value: any) => {
                           this.updateRecord({ id_person: value })

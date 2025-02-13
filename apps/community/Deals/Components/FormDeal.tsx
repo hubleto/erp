@@ -201,7 +201,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         <Lookup {...this.getInputProps()}
                           model='HubletoApp/Community/Customers/Models/Person'
                           customEndpointParams={{id_customer: R.id_customer}}
-                          endpoint={`customers/get-customer-contacts`}
+                          endpoint={`contacts/get-customer-contacts`}
                           value={R.id_person}
                           readonly={R.is_archived}
                           onChange={(value: any) => {

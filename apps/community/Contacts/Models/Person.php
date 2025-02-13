@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Models;
+namespace HubletoApp\Community\Contacts\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 
@@ -9,6 +9,8 @@ use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Date;
+
+use HubletoApp\Community\Customers\Models\Customer;
 
 class Person extends \HubletoMain\Core\Model
 {

@@ -7,8 +7,7 @@ class Customers extends \HubletoMain\Core\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'customers/customers', 'content' => $this->translate('Customers') ],
-      [ 'url' => '', 'content' => $this->translate('Customers') ],
+      [ 'url' => 'customers', 'content' => $this->translate('Customers') ],
     ]);
   }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Models;
+namespace HubletoApp\Community\Contacts\Models;
 
 use HubletoApp\Community\Settings\Models\Country;
 

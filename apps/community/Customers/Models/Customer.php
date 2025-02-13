@@ -15,6 +15,8 @@ use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Date;
 
+use HubletoApp\Community\Contacts\Models\Person;
+
 class Customer extends \HubletoMain\Core\Model
 {
   public string $table = 'customers';

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Models\Eloquent;
+namespace HubletoApp\Community\Contacts\Models\Eloquent;
 
 use HubletoApp\Community\Settings\Models\Eloquent\ContactType;
 use \Illuminate\Database\Eloquent\Relations\HasMany;

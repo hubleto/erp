@@ -3,6 +3,7 @@
 namespace HubletoApp\Community\Customers\Models\Eloquent;
 
 use \HubletoApp\Community\Billing\Models\Eloquent\BillingAccount;
+use HubletoApp\Community\Contacts\Models\Eloquent\Person;
 use \HubletoApp\Community\Customers\Models\Eloquent\CustomerDocument;
 use \HubletoApp\Community\Settings\Models\Eloquent\Country;
 use \HubletoApp\Community\Settings\Models\Eloquent\User;

@@ -3,7 +3,7 @@
 namespace HubletoApp\Community\Deals\Models;
 
 use HubletoApp\Community\Customers\Models\Customer;
-use HubletoApp\Community\Customers\Models\Person;
+use HubletoApp\Community\Contacts\Models\Person;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\User;

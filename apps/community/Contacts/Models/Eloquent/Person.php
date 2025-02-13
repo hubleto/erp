@@ -1,7 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Models\Eloquent;
+namespace HubletoApp\Community\Contacts\Models\Eloquent;
 
+use HubletoApp\Community\Customers\Models\Eloquent\Customer;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

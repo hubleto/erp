@@ -63,7 +63,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
         <FormInput title={"Contact Person"}>
           <Lookup {...this.getInputProps()}
             model='HubletoApp/Community/Customers/Models/Person'
-            endpoint={`customers/get-customer-contacts`}
+            endpoint={`contacts/get-customer-contacts`}
             customEndpointParams={{id_customer: R.id_customer}}
             value={R.id_person}
             onChange={(value: any) => {
@@ -83,7 +83,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
         {this.inputWrapper('date_end')}
         {this.inputWrapper('time_end')}
         {this.inputWrapper('all_day')}
-        {this.inputWrapper('id_user', {readonly: true, value: globalThis.main.idUser})}
+        {this.inputWrapper('id_user', {readonly: true})}
       </>
     );
   }

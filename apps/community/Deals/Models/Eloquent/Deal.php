@@ -3,7 +3,7 @@
 namespace HubletoApp\Community\Deals\Models\Eloquent;
 
 use HubletoApp\Community\Customers\Models\Eloquent\Customer;
-use HubletoApp\Community\Customers\Models\Eloquent\Person;
+use HubletoApp\Community\Contacts\Models\Eloquent\Person;
 use HubletoApp\Community\Settings\Models\Eloquent\Currency;
 use HubletoApp\Community\Settings\Models\Eloquent\Pipeline;
 use HubletoApp\Community\Settings\Models\Eloquent\PipelineStep;

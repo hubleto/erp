@@ -54,15 +54,15 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     //Services
     $mService = new \HubletoApp\Community\Services\Models\Service($this->main);
 
-    //Customers
-    $mPerson             = new \HubletoApp\Community\Customers\Models\Person($this->main);
+    //Customers & Contacts
     $mCustomer            = new \HubletoApp\Community\Customers\Models\Customer($this->main);
-    $mAddress            = new \HubletoApp\Community\Customers\Models\Address($this->main);
-    $mContact            = new \HubletoApp\Community\Customers\Models\Contact($this->main);
+    $mPerson             = new \HubletoApp\Community\Contacts\Models\Person($this->main);
+    $mPersonTag          = new \HubletoApp\Community\Contacts\Models\PersonTag($this->main);
+    $mContact            = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
+    $mAddress            = new \HubletoApp\Community\Contacts\Models\Address($this->main);
     $mCustomerActivity    = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
     $mCustomerDocument    = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
     $mCustomerTag         = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
-    $mPersonTag          = new \HubletoApp\Community\Customers\Models\PersonTag($this->main);
 
     //Invoices
     $mInvoice = new \HubletoApp\Community\Invoices\Models\Invoice($this->main);
@@ -268,10 +268,10 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   }
 
   public function generatePersons(
-    \HubletoApp\Community\Customers\Models\Person $mPerson,
-    \HubletoApp\Community\Customers\Models\PersonTag $mPersonTag,
-    \HubletoApp\Community\Customers\Models\Contact $mContact,
-    \HubletoApp\Community\Customers\Models\Address $mAddress,
+    \HubletoApp\Community\Contacts\Models\Person $mPerson,
+    \HubletoApp\Community\Contacts\Models\PersonTag $mPersonTag,
+    \HubletoApp\Community\Contacts\Models\Contact $mContact,
+    \HubletoApp\Community\Contacts\Models\Address $mAddress,
   ): void {
 
     $persons = [

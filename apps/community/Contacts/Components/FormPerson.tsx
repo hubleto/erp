@@ -21,7 +21,7 @@ export interface FormPersonState extends FormState {
 export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'HubletoApp/Community/Customers/Models/Person',
+    model: 'HubletoApp/Community/Contacts/Models/Person',
   };
 
   props: FormPersonProps;
@@ -122,7 +122,7 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
                   {this.inputWrapper('last_name')}
                   <FormInput title={"Customer"}>
                     <Lookup {...this.getInputProps()}
-                      model='HubletoApp/Community/Customers/Models/Customer'
+                      model='HubletoApp/Community/Contacts/Models/Customer'
                       endpoint={`customers/get-customer`}
                       value={R.id_customer}
                       readonly={this.props.creatingNew}

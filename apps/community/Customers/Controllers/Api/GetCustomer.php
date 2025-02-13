@@ -3,7 +3,7 @@
 namespace HubletoApp\Community\Customers\Controllers\Api;
 
 use HubletoApp\Community\Customers\Models\Customer;
-use HubletoApp\Community\Customers\Models\Person;
+use HubletoApp\Community\Contacts\Models\Person;
 
 class GetCustomer extends \HubletoMain\Core\Controller
 {

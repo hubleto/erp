@@ -3,7 +3,7 @@ import Form, { FormProps, FormState } from 'adios/Form';
 import FormInput from 'adios/FormInput';
 import Lookup from 'adios/Inputs/Lookup';
 
-export default class FormSource<P, S> extends Form<FormProps, FormState> {
+export default class FormCalendarSyncSource<P, S> extends Form<FormProps, FormState> {
   static defaultProps: any = {
     ...Form.defaultProps,
     model: 'HubletoApp/Community/Customers/Models/CompanyActivity',

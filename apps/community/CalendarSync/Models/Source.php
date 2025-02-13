@@ -32,4 +32,19 @@ class Source extends \HubletoMain\Core\Model
     $description->ui['showFooter'] = false;
     return $description;
   }
+
+  public function prepareLoadRecordQuery(): mixed
+  {
+    $query = parent::prepareLoadRecordQuery();
+    $type = $this->app->urlParamAsString('type') ?? "";
+
+    if ($type == 'google') {
+      $query->where('type', 'google');
+    }
+    else if ($type == 'ics') {
+      $query->where('type', 'ics');
+    }
+
+    return $query;
+  }
 }

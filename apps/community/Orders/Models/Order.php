@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
-use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Products\Models\Product;
 
 use \ADIOS\Core\Db\Column\Lookup;
@@ -23,7 +23,7 @@ class Order extends \HubletoMain\Core\Model
   public array $relations = [
     'PRODUCTS' => [ self::HAS_MANY, OrderProduct::class, 'id_order', 'id' ],
     'HISTORY' => [ self::HAS_MANY, History::class, 'id_order', 'id' ],
-    'CUSTOMER' => [ self::HAS_ONE, Company::class, 'id','id_company'],
+    'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id','id_customer'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
   ];
 
@@ -31,7 +31,7 @@ class Order extends \HubletoMain\Core\Model
   {
     return array_merge(parent::describeColumns(), [
       'order_number' => (new Varchar($this, $this->translate('Order number')))->setReadonly(),
-      'id_company' => (new Lookup($this, $this->translate('Customer'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'price' => (new Decimal($this, $this->translate('Price')))->setReadonly()->setRequired(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_order' => (new Date($this, $this->translate('Order date')))->setRequired(),
@@ -88,6 +88,7 @@ class Order extends \HubletoMain\Core\Model
     $description->defaultValues["date_order"] = date("Y-m-d");
     $description->defaultValues["id_currency"] = $defaultCurrency;
     $description->defaultValues["price"] = 0;
+
     return $description;
   }
 
@@ -96,8 +97,8 @@ class Order extends \HubletoMain\Core\Model
     $mProduct = new Product($this->main);
     $longDescription = "";
 
-    if (isset($savedRecord["PRODUCTS"])) {
-      foreach ($savedRecord["PRODUCTS"] as $product) {
+    if (isset($originalRecord["PRODUCTS"])) {
+      foreach ($originalRecord["PRODUCTS"] as $product) {
         if (isset($product["_toBeDeleted_"])) continue;
         $productTitle = (string) $mProduct->eloquent->find((int) $product["id_product"])->title;
         $longDescription .=  "{$productTitle} - Amount: ".(string) $product["amount"]." - Unit Price: ".(string) $product["unit_price"]." - Tax: ".(string) $product["tax"]." - Discount: ".(string) $product["discount"]." \n\n";

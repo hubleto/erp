@@ -14,7 +14,6 @@ class Loader extends \HubletoMain\Core\App
       '/^reports\/(?<reportUrlSlug>.*?)\/?$/' => Controllers\Report::class,
     ]);
 
-    // $this->main->sidebar->addLink(1, 2200, 'reports', $this->translate('Reports'), 'fas fa-square-poll-vertical', str_starts_with($this->main->requestedUri, 'reports'));
   }
 
 }

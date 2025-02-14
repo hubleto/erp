@@ -14,8 +14,6 @@ class Loader extends \HubletoMain\Core\App
       '/^products\/suppliers\/?$/' => Controllers\Suppliers::class,
     ]);
 
-    // $this->main->sidebar->addLink(1, 99, 'products', $this->translate('Products'), 'fas fa-cart-shopping', str_starts_with($this->main->requestedUri, 'shop'));
-
     if (str_starts_with($this->main->requestedUri, 'products')) {
       $this->main->sidebar->addHeading1(2, 310, $this->translate('Products'));
       $this->main->sidebar->addLink(2, 320, 'products', $this->translate('Products'), 'fas fa-cart-shopping');

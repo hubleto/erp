@@ -40,8 +40,6 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/save-permissions\/?$/' => Controllers\Api\SavePermissions::class,
     ]);
 
-    // $this->main->sidebar->addLink(1, 900, 'settings', $this->translate('Settings'), 'fas fa-cog', str_starts_with($this->main->requestedUri, 'settings'));
-
     $this->main->addSetting(['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
     $this->main->addSetting(['title' => $this->translate('User roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
     $this->main->addSetting(['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/profiles']);

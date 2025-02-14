@@ -7,12 +7,6 @@ use HubletoApp\Community\Settings\Models\Permission;
 class Loader extends \HubletoMain\Core\App
 {
 
-  // public function __construct(\HubletoMain $main)
-  // {
-  //   parent::__construct($main);
-  //   $this->registerModel(Models\BillingAccount::class);
-  // }
-
   public function init(): void
   {
     parent::init();
@@ -20,8 +14,6 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^billing\/?$/' => Controllers\BillingAccounts::class,
     ]);
-
-    $this->main->sidebar->addLink(1, 810, 'billing', $this->translate('Billing'), 'fas fa-file-invoice-dollar', str_starts_with($this->main->requestedUri, 'billing'));
 
   }
 

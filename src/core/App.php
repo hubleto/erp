@@ -11,8 +11,11 @@ class App {
   */
   protected array $registeredModels = [];
 
+  public array $manifest = [];
+
   public string $rootFolder = '';
   public string $namespace = '';
+  public string $fullName = '';
 
   public string $translationRootContext = '';
   public string $translationContext = '';
@@ -30,12 +33,16 @@ class App {
     $this->cli = null;
     $this->rootFolder = pathinfo((string) $reflection->getFilename(), PATHINFO_DIRNAME);
     $this->namespace = $reflection->getNamespaceName();
+    $this->fullName = $reflection->getName();
     $this->translationRootContext = str_replace('.loader', '', strtolower(str_replace('\\', '.', $reflection->getName())));
     $this->translationContext = $this->translationRootContext . '.loader';
 
     $this->viewNamespace = $this->namespace;
     $this->viewNamespace = str_replace('\\', ':', $this->viewNamespace);
 
+    $manifestFile = $this->rootFolder . '/manifest.yaml';
+    if (is_file($manifestFile)) $this->manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($manifestFile));
+    else $this->manifest = [];
   }
 
   public function init(): void
@@ -120,4 +127,35 @@ class App {
   {
     // to be overriden
   }
+
+  public function getFullConfigPath(string $path): string
+  {
+    return 'apps/' . $this->main->appManager->getAppNameForConfig($this->fullName) . '/' . $path;
+  }
+
+  public function configAsString(string $path, string $defaultValue = ''): string
+  {
+    return (string) $this->main->getConfig($this->getFullConfigPath($path), $defaultValue);
+  }
+
+  public function configAsInteger(string $path, int $defaultValue = 0): int
+  {
+    return (int) $this->main->getConfig($this->getFullConfigPath($path), $defaultValue);
+  }
+
+  public function configAsFloat(string $path, float $defaultValue = 0): float
+  {
+    return (float) $this->main->getConfig($this->getFullConfigPath($path), $defaultValue);
+  }
+
+  public function configAsBool(string $path, bool $defaultValue = false): bool
+  {
+    return (bool) $this->main->getConfig($this->getFullConfigPath($path), $defaultValue);
+  }
+
+  public function configAsArray(string $path, array $defaultValue = []): array
+  {
+    return (array) $this->getConfig($path, $defaultValue);
+  }
+
 }

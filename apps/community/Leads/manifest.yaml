@@ -1,6 +1,7 @@
 namespace: HubletoApp\Community\Leads
 rootUrlSlug: leads
 name: Leads
+icon: fas fa-people-arrows
 author:
   name: "Richard Ondrejka"
   nick: "rindo"

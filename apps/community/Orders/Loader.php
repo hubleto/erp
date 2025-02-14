@@ -4,6 +4,7 @@ namespace HubletoApp\Community\Orders;
 
 class Loader extends \HubletoMain\Core\App
 {
+
   public function init(): void
   {
     parent::init();
@@ -11,8 +12,6 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^orders\/?$/' => Controllers\Orders::class,
     ]);
-
-    $this->main->sidebar->addLink(1, 105, 'orders', $this->translate('Orders'), 'fas fa-file-lines', str_starts_with($this->main->requestedUri, 'shop'));
   }
 
   public function installTables(): void

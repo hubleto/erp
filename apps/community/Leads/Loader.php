@@ -5,12 +5,6 @@ namespace HubletoApp\Community\Leads;
 class Loader extends \HubletoMain\Core\App
 {
 
-
-  // public function __construct(\HubletoMain $main)
-  // {
-  //   parent::__construct($main);
-  // }
-
   public function init(): void
   {
     parent::init();
@@ -22,8 +16,6 @@ class Loader extends \HubletoMain\Core\App
       '/^leads\/convert-to-Lead\/?$/' => Controllers\Api\ConvertLead::class,
       '/^settings\/lead-statuses\/?$/' => Controllers\LeadStatuses::class,
     ]);
-
-    $this->main->sidebar->addLink(1, 100, 'leads', $this->translate('Leads'), 'fas fa-people-arrows', str_starts_with($this->main->requestedUri, 'leads'));
 
     $this->main->addSetting([
       'title' => $this->translate('Lead statuses'),

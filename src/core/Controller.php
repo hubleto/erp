@@ -58,7 +58,16 @@ class Controller extends \ADIOS\Core\Controller
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
 
-    $tmp =  strpos($this->main->requestedUri, '/');
+    $appsInSidebar = $this->main->appManager->getRegisteredApps();
+    uasort($appsInSidebar, function($a, $b) {
+      $aOrder = $a->configAsInteger('sidebarOrder');
+      $bOrder = $b->configAsInteger('sidebarOrder');
+      return $aOrder <=> $bOrder;
+    });
+
+    $this->viewParams['appsInSidebar'] = $appsInSidebar;
+
+    $tmp = strpos($this->main->requestedUri, '/');
     if ($tmp === false) $this->viewParams['requestedUriFirstPart'] = $this->main->requestedUri;
     else $this->viewParams['requestedUriFirstPart'] = substr($this->main->requestedUri, 0, (int) $tmp);
 

@@ -26,7 +26,7 @@ class Loader extends \HubletoMain\Core\App
       '/^services\/get-service-price\/?$/' => Controllers\Api\GetServicePrice::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 600, 'services', $this->translate('Services'), 'fas fa-network-wired', str_starts_with($this->main->requestedUri, 'services'));
+    // $this->main->sidebar->addLink(1, 600, 'services', $this->translate('Services'), 'fas fa-network-wired', str_starts_with($this->main->requestedUri, 'services'));
 
     // if (str_starts_with($this->main->requestedUri, 'services')) {
     //   $this->main->sidebar->addHeading1(2, 40100, $this->translate('Services'));

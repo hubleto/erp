@@ -1,6 +1,7 @@
 namespace: HubletoApp\Community\Calendar
 rootUrlSlug: calendar
 name: Calendar
+icon: fas fa-calendar-days
 author:
   name: "Dusan Daniska"
   nick: "shoki"

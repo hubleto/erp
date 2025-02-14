@@ -5,13 +5,6 @@ namespace HubletoApp\Community\Customers;
 class Loader extends \HubletoMain\Core\App
 {
 
-  // public function __construct(\HubletoMain $main)
-  // {
-  //   parent::__construct($main);
-
-  //   $this->registerModel(Models\Company::class);
-  // }
-
   public function init(): void
   {
     parent::init();
@@ -27,15 +20,6 @@ class Loader extends \HubletoMain\Core\App
       '/^customers\/get-company-contacts\/?$/' => Controllers\Api\GetCompanyContacts::class,
       '/^customers\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
-
-    $this->main->sidebar->addLink(1, 40, 'customers/companies', $this->translate('Customers'), 'fas fa-address-card', str_starts_with($this->main->requestedUri, 'customers'));
-
-    if (str_starts_with($this->main->requestedUri, 'customers')) {
-      $this->main->sidebar->addHeading1(2, 310, $this->translate('Customers'));
-      $this->main->sidebar->addLink(2, 320, 'customers/companies', $this->translate('Companies'), 'fas fa-building');
-      $this->main->sidebar->addLink(2, 330, 'customers/persons', $this->translate('Contact Persons'), 'fas fa-users');
-      //$this->main->sidebar->addLink(2, 10203, 'customers/activities', $this->translate('Activities'), 'fas fa-users');
-    }
 
     $this->main->calendarManager->addCalendar(Calendar::class);
   }

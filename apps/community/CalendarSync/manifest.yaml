@@ -1,6 +1,7 @@
 namespace: HubletoApp\Community\CalendarSync
 rootUrlSlug: calendar-sources
 name: Calendar Sync
+icon: fas fa-calendar
 author:
   name: "Michal Barnas"
   nick: "mrgopes"

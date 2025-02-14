@@ -1,6 +1,7 @@
 namespace: HubletoApp\Community\Deals
 rootUrlSlug: deals
 name: Deals
+icon: fas fa-handshake
 author:
   name: "Richard Ondrejka"
   nick: "rindo"

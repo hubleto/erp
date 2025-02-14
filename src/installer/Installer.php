@@ -37,31 +37,32 @@ class Installer {
 
   public array $packages = [
     'core' => [
-      \HubletoApp\Community\Settings\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Dashboard\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Upgrade\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Calendar\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Documents\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Customers\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Reports\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Settings\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 100, ],
+      \HubletoApp\Community\Dashboard\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 110, ],
+      \HubletoApp\Community\Upgrade\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 120, ],
+      \HubletoApp\Community\Calendar\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 130, ],
+      \HubletoApp\Community\Documents\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 140, ],
+      \HubletoApp\Community\Customers\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 150, ],
+      \HubletoApp\Community\Reports\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 160, ],
+      \HubletoApp\Community\Help\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 160, ],
     ],
     'invoices' => [
-      \HubletoApp\Community\Billing\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Invoices\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Services\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Billing\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 170, ],
+      \HubletoApp\Community\Invoices\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 180, ],
+      \HubletoApp\Community\Services\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 190, ],
     ],
     'sales' => [
-      \HubletoApp\Community\Pipeline\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Services\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Leads\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Deals\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Pipeline\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 200, ],
+      \HubletoApp\Community\Services\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 210, ],
+      \HubletoApp\Community\Leads\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 220, ],
+      \HubletoApp\Community\Deals\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 230, ],
     ],
     // 'sync' => [
-    //   \HubletoApp\Community\CalendarSync\Loader::class => [ 'enabled' => true ],
+    //   \HubletoApp\Community\CalendarSync\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 100, ],
     // ],
     'shop' => [
-      \HubletoApp\Community\Products\Loader::class => [ 'enabled' => true ],
-      \HubletoApp\Community\Orders\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Products\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 500, ],
+      \HubletoApp\Community\Orders\Loader::class => [ 'enabled' => true, 'sidebarOrder' => 510, ],
     ]
   ];
 

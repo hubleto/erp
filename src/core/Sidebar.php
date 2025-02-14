@@ -32,25 +32,25 @@ class Sidebar {
     ksort($this->items[$level]);
   }
 
-  public function addLink(int $level, int $order, string $url, string $title, string $icon, bool $highlighted = false): void
-  {
-    $this->addItem($level, $order, self::ITEM_LINK, $url, $title, $icon, $highlighted);
-  }
+  // public function addLink(int $level, int $order, string $url, string $title, string $icon, bool $highlighted = false): void
+  // {
+  //   $this->addItem($level, $order, self::ITEM_LINK, $url, $title, $icon, $highlighted);
+  // }
 
-  public function addDivider(int $level, int $order): void
-  {
-    $this->addItem($level, $order, self::ITEM_DIVIDER, '', '', '');
-  }
+  // public function addDivider(int $level, int $order): void
+  // {
+  //   $this->addItem($level, $order, self::ITEM_DIVIDER, '', '', '');
+  // }
 
-  public function addHeading1(int $level, int $order, string $title): void
-  {
-    $this->addItem($level, $order, self::ITEM_HEADING_1, '', $title, '');
-  }
+  // public function addHeading1(int $level, int $order, string $title): void
+  // {
+  //   $this->addItem($level, $order, self::ITEM_HEADING_1, '', $title, '');
+  // }
 
-  public function addHeading2(int $level, int $order, string $title): void
-  {
-    $this->addItem($level, $order, self::ITEM_HEADING_2, '', $title, '');
-  }
+  // public function addHeading2(int $level, int $order, string $title): void
+  // {
+  //   $this->addItem($level, $order, self::ITEM_HEADING_2, '', $title, '');
+  // }
 
   public function getItems(int $level): array
   {

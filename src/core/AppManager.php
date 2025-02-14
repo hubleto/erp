@@ -30,7 +30,7 @@ class AppManager
     return str_replace('\\', '-', trim($appClass, '\\'));
   }
 
-  public function getInstalledApps(): array
+  public function getInstalledAppClasses(): array
   {
     $tmp = $this->main->configAsArray('apps');
     ksort($tmp);
@@ -45,7 +45,7 @@ class AppManager
 
   public function getAppConfig(string $appClass): array
   {
-    $apps = $this->getInstalledApps();
+    $apps = $this->getInstalledAppClasses();
     $key = $this->getAppNameForConfig($appClass);
     if (isset($apps[$key]) && is_array($apps[$key])) return $apps[$key];
     else return [];
@@ -86,7 +86,7 @@ class AppManager
 
   public function isAppInstalled(string $appClass): bool
   {
-    $apps = $this->getInstalledApps();
+    $apps = $this->getInstalledAppClasses();
     return isset($apps[$appClass]) && is_array($apps[$appClass]) && isset($apps[$appClass]['installedOn']);
   }
 
@@ -122,7 +122,7 @@ class AppManager
 
     $appNameForConfig = $this->getAppNameForConfig($appClass);
 
-    if (!in_array($appClass, $this->getInstalledApps())) {
+    if (!in_array($appClass, $this->getInstalledAppClasses())) {
       $this->main->setConfig('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
       $this->main->setConfig('apps/' . $appNameForConfig . "/enabled", true);
       $this->main->saveConfigByPath('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));

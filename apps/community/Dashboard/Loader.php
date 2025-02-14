@@ -5,6 +5,10 @@ namespace HubletoApp\Community\Dashboard;
 class Loader extends \HubletoMain\Core\App
 {
 
+  const DEFAULT_INSTALLATION_CONFIG = [
+    'sidebarOrder' => 0,
+  ];
+
   public function init(): void
   {
     parent::init();
@@ -12,6 +16,8 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^$/' => Controllers\Home::class,
     ]);
+
+    $this->setConfigAsInteger('sidebarOrder', 0);
   }
 
   public function installDefaultPermissions(): void

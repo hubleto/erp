@@ -3,6 +3,11 @@
 namespace HubletoMain\Core;
 
 class App {
+
+  const DEFAULT_INSTALLATION_CONFIG = [
+    'sidebarOrder' => 500,
+  ];
+
   public \HubletoMain $main;
   public \HubletoMain\Cli\Agent\Loader|null $cli;
 
@@ -157,6 +162,31 @@ class App {
   public function configAsArray(string $path, array $defaultValue = []): array
   {
     return (array) $this->getConfig($path, $defaultValue);
+  }
+
+  public function setConfigAsString(string $path, string $value = ''): void
+  {
+    $this->main->setConfig($this->getFullConfigPath($path), $value);
+  }
+
+  public function setConfigAsInteger(string $path, int $value = 0): void
+  {
+    $this->main->setConfig($this->getFullConfigPath($path), $value);
+  }
+
+  public function setConfigAsFloat(string $path, float $value = 0): void
+  {
+    $this->main->setConfig($this->getFullConfigPath($path), $value);
+  }
+
+  public function setConfigAsBool(string $path, bool $value = false): void
+  {
+    $this->main->setConfig($this->getFullConfigPath($path), $value);
+  }
+
+  public function setConfigAsArray(string $path, array $value = []): void
+  {
+    $this->main->setConfig($this->getFullConfigPath($path), $value);
   }
 
 }

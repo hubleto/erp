@@ -27,7 +27,7 @@ class AppManager
 
   public function getAppNameForConfig(string $appClass): string
   {
-    return str_replace('\\', '-', trim($appClass, '\\'));
+    return $appClass;//str_replace('\\', '-', trim($appClass, '\\'));
   }
 
   public function getInstalledAppClasses(): array
@@ -104,6 +104,8 @@ class AppManager
 
     $app = $this->createAppInstance($appClass);
     if (!file_exists($app->rootFolder . '/manifest.yaml')) throw new \Exception("{$appClass} does not provide manifest.yaml file.");
+
+    $appConfig = array_merge($app::DEFAULT_INSTALLATION_CONFIG, $appConfig);
 
     $manifestFile = (string) file_get_contents($app->rootFolder . '/manifest.yaml');
     $manifest = (array) \Symfony\Component\Yaml\Yaml::parse($manifestFile);

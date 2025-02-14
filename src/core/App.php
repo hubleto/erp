@@ -14,6 +14,7 @@ class App {
   public array $manifest = [];
 
   public string $rootFolder = '';
+  public string $viewNamespace = '';
   public string $namespace = '';
   public string $fullName = '';
 

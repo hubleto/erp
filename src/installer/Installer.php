@@ -139,15 +139,6 @@ class Installer {
     $this->main->setConfig('db_codepage', "utf8mb4");
     $this->main->initDatabaseConnections();
 
-    // foreach ($this->main->getRegisteredModels() as $modelClass) {
-    //   $model = $this->main->getModel($modelClass);
-    //   $this->main->db->addTable(
-    //     $model->getFullTableSqlName(),
-    //     $model->columns(),
-    //     $model->isJunctionTable
-    //   );
-    // }
-
   }
 
   public function installApps(): void

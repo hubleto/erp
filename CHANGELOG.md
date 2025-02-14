@@ -1,6 +1,6 @@
 # Hubleto CHANGELOG
 
-## Release v0.7 (not released yet)
+## Release v0.7
 
   * improved unit testing
   * deals and leads are now linked to an online shared folder (document storage)

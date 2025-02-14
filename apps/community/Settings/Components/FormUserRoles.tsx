@@ -1,13 +1,13 @@
 import React, { Component, createRef, RefObject } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import request from 'adios/Request';
 
 const formRef = createRef();
 
-interface FormUserRolesProps extends FormProps {}
+interface FormUserRolesProps extends HubletoFormProps {}
 
-interface FormUserRolesState extends FormState {
+interface FormUserRolesState extends HubletoFormState {
   sortedAllPermissions: any,
   rolePermissions: any,
   dataLoading: boolean,
@@ -15,9 +15,9 @@ interface FormUserRolesState extends FormState {
   selectedGroup: string,
 }
 
-export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUserRolesState> {
+export default class FormUserRoles<P, S> extends HubletoForm<FormUserRolesProps,FormUserRolesState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Settings/Models/UserRole',
   };
 
@@ -86,19 +86,6 @@ export default class FormUserRoles<P, S> extends Form<FormUserRolesProps,FormUse
           {this.state.description?.ui?.saveButtonText ?? this.translate("Save")}
         </span>
       </button> : null}
-    </>;
-  }
-
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
-    </>;
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
     </>;
   }
 

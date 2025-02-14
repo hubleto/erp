@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { deepObjectMerge } from "adios/Helper";
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 
-interface FormUserProps extends FormProps {
+interface FormUserProps extends HubletoFormProps {
 }
 
-interface FormUserState extends FormState {
+interface FormUserState extends HubletoFormState {
 }
 
-export default class FormUser<P, S> extends Form<FormUserProps, FormUserState> {
+export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Settings/Models/User',
   }
 
@@ -22,34 +22,6 @@ export default class FormUser<P, S> extends Form<FormUserProps, FormUserState> {
   constructor(props: FormUserProps) {
     super(props);
   }
-
-  // getEndpointParams(): any {
-  //   return {
-  //     ...super.getEndpointParams(),
-  //   }
-  // }
-
-  // loadParams() {
-  //   let newState: any = deepObjectMerge({
-  //     canCreate: true,
-  //     canDelete: true,
-  //     canRead: true,
-  //     canUpdate: true,
-  //     columns: {
-  //       idCostingModel: {
-  //         type: 'lookup', title: 'Costing model', 'model': 'AquilaCostingApp/Models/CostingModel',
-  //         value: this.props.idCostingModel,
-  //         readonly: true,
-  //       },
-  //       name: { type: 'varchar', title: 'Name' },
-  //       isdcNumber: { type: 'varchar', title: 'ISDC Number' },
-  //     },
-  //   }, this.props);
-
-  //   this.setState(newState, () => {
-  //     this.loadRecord();
-  //   });
-  // }
 
   renderTitle(): JSX.Element {
     return <>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { deepObjectMerge, getUrlParam } from "adios/Helper";
-import Form, { FormDescription, FormProps, FormState } from "adios/Form";
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from "adios/Inputs/Tags2";
 import FormInput from "adios/FormInput";
 import TablePersons from "../../Contacts/Components/TablePersons";
@@ -17,7 +17,7 @@ import FormPerson, {FormPersonProps, FormPersonState} from "../../Contacts/Compo
 import Calendar from '../../Calendar/Components/Calendar'
 import Hyperlink from "adios/Inputs/Hyperlink";
 
-interface FormCustomerProps extends FormProps {
+interface FormCustomerProps extends HubletoFormProps {
   highlightIdBussinessAccounts: number,
   highlightIdActivity: number,
   createNewLead: boolean,
@@ -25,7 +25,7 @@ interface FormCustomerProps extends FormProps {
   newEntryId?: number,
 }
 
-interface FormCustomerState extends FormState {
+interface FormCustomerState extends HubletoFormState {
   //highlightIdBussinessAccounts: number,
   highlightIdActivity: number,
   createNewLead: boolean,
@@ -40,12 +40,12 @@ interface FormCustomerState extends FormState {
   //isInlineEditingBillingAccounts: boolean
 }
 
-export default class FormCustomer<P, S> extends Form<
+export default class FormCustomer<P, S> extends HubletoForm<
   FormCustomerProps,
   FormCustomerState
 > {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: "HubletoApp/Community/Customers/Models/Customer",
   };
 
@@ -114,19 +114,6 @@ export default class FormCustomer<P, S> extends Form<
     if (record.customer_id) record.customer_id = record.customer_id.replace(/\s+/g, "");
 
     return record;
-  }
-
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
-    </>;
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
   }
 
   renderTitle(): JSX.Element {

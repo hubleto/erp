@@ -36,31 +36,6 @@ export default class TableCustomers extends Table<TableCustomersProps, TableCust
     } else return {...super.getFormModalProps()}
   }
 
-  /* getFormProps(): any {
-    return {
-      ...super.getFormProps(),
-    }
-  } */
-
-  /*
-
-  constructor(props: TableCustomersProps) {
-    super(props);
-    this.state = this.getStateFromProps(props);
-  } */
-
- /*  getFormModalProps(): any {
-    let params: any = super.getFormModalProps();
-    params.type = this.state.formId == -1 ? 'centered' : 'right wide';
-    return params;
-  }
-  getStateFromProps(props: TableCustomersProps) {
-    return {
-      ...super.getStateFromProps(props),
-    }
-  } */
-
-
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "tags") {
       return (

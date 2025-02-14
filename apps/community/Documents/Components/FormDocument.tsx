@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
 import { getUrlParam } from 'adios/Helper';
 
-export interface FormDocumentProps extends FormProps {
+export interface FormDocumentProps extends HubletoFormProps {
   creatingForModel?: string,
   creatingForId?: number,
 }
 
-export interface FormDocumentState extends FormState {}
+export interface FormDocumentState extends HubletoFormState {}
 
-export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocumentState> {
+export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,FormDocumentState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Documents/Models/Document',
   };
 
@@ -31,19 +31,6 @@ export default class FormDocument<P, S> extends Form<FormDocumentProps,FormDocum
     return {
       ...super.getStateFromProps(props),
     };
-  }
-
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
-    </>;
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
   }
 
   renderTitle(): JSX.Element {

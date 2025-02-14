@@ -4,7 +4,7 @@ import { ADIOS } from "adios/Loader";
 import request from "adios/Request";
 
 // ADIOS
-import Table from "adios/Table";
+// import Table from "adios/Table";
 import Modal from "adios/ModalSimple";
 import InputVarchar from "adios/Inputs/Varchar";
 import InputInt from "adios/Inputs/Int";
@@ -13,6 +13,10 @@ import InputImage from "adios/Inputs/Image";
 import InputBoolean from "adios/Inputs/Boolean";
 import InputColor from "adios/Inputs/Color";
 import InputHyperlink from "adios/Inputs/Hyperlink";
+
+// Hubleto
+import HubletoForm from "./core/Components/HubletoForm";
+import HubletoTable from "./core/Components/HubletoTable";
 
 // Primereact
 import { Tooltip } from "primereact/tooltip";
@@ -27,7 +31,7 @@ export default class HubletoMain extends ADIOS {
     super(config);
 
     // ADIOS components
-    this.registerReactComponent('Table', Table);
+    // this.registerReactComponent('Table', Table);
     this.registerReactComponent('Modal', Modal);
 
     this.registerReactComponent('InputVarchar', InputVarchar);
@@ -37,6 +41,10 @@ export default class HubletoMain extends ADIOS {
     this.registerReactComponent('InputImage', InputImage);
     this.registerReactComponent('InputColor', InputColor);
     this.registerReactComponent('InputHyperlink', InputHyperlink);
+
+    // Hubleto components
+    this.registerReactComponent('Form', HubletoForm);
+    this.registerReactComponent('Table', HubletoTable);
 
     // Primereact
     this.registerReactComponent('Tooltip', Tooltip);

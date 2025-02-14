@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
-import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 import request from 'adios/Request';
 import TableDealServices from './TableDealServices';
@@ -15,11 +14,11 @@ import FormActivity, { FormActivityProps, FormActivityState } from './FormActivi
 import ModalSimple from 'adios/ModalSimple';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 
-export interface FormDealProps extends FormProps {
+export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
 }
 
-export interface FormDealState extends FormState {
+export interface FormDealState extends HubletoFormState {
   newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
@@ -27,9 +26,9 @@ export interface FormDealState extends FormState {
   activityCalendarDateClicked: string,
 }
 
-export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
+export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Deals/Models/Deal',
   };
 
@@ -55,24 +54,6 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
     return {
       ...super.getStateFromProps(props),
     };
-  }
-
-  /* normalizeRecord(record) {
-
-    return record;
-  } */
-
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
-    </>;
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
   }
 
   renderTitle(): JSX.Element {

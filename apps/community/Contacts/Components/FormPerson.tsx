@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
@@ -9,18 +9,18 @@ import TableContacts from './TableContacts';
 import moment from 'moment';
 import Lookup from 'adios/Inputs/Lookup';
 
-export interface FormPersonProps extends FormProps {
+export interface FormPersonProps extends HubletoFormProps {
   newEntryId?: number,
   creatingNew: boolean
 }
 
-export interface FormPersonState extends FormState {
+export interface FormPersonState extends HubletoFormState {
   newEntryId?: number,
 }
 
-export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonState> {
+export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPersonState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Contacts/Models/Person',
   };
 
@@ -55,19 +55,6 @@ export default class FormPerson<P, S> extends Form<FormPersonProps,FormPersonSta
     });
 
     return record;
-  }
-
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
-    </>;
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
   }
 
   renderTitle(): JSX.Element {

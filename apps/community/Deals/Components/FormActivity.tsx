@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import Lookup from 'adios/Inputs/Lookup';
 import FormInput from 'adios/FormInput';
 
-export interface FormActivityProps extends FormProps {
+export interface FormActivityProps extends HubletoFormProps {
   idDeal: number,
   idCustomer?: number,
 }
 
-export interface FormActivityState extends FormState {}
+export interface FormActivityState extends HubletoFormState {}
 
-export default class FormActivity<P, S> extends Form<FormActivityProps,FormActivityState> {
+export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Deals/Models/DealActivity',
   };
 
@@ -20,17 +20,6 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
   state: FormActivityState;
 
   translationContext: string = 'hubleto.app.deals.formActivity';
-
-  renderHeaderLeft(): JSX.Element {
-    return this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton();
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
-  }
 
   renderTitle(): JSX.Element {
     if (this.state.creatingRecord) {

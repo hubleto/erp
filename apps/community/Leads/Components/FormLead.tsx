@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
@@ -16,11 +16,11 @@ import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Docume
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 
-export interface FormLeadProps extends FormProps {
+export interface FormLeadProps extends HubletoFormProps {
   newEntryId?: number,
 }
 
-export interface FormLeadState extends FormState {
+export interface FormLeadState extends HubletoFormState {
   newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
@@ -28,9 +28,9 @@ export interface FormLeadState extends FormState {
   activityCalendarDateClicked: string,
 }
 
-export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
+export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Leads/Models/Lead',
   };
 
@@ -55,19 +55,6 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     return {
       ...super.getStateFromProps(props),
     };
-  }
-
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
-    </>;
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
   }
 
   renderTitle(): JSX.Element {

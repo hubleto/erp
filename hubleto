@@ -34,6 +34,11 @@ if (!empty($action)) {
       case 'init':
         $command = new \HubletoMain\Cli\Agent\CommandInit($cli, $argv);
       break;
+      case 'release':
+        switch ($argv[2]) {
+          case 'create': $command = new \HubletoMain\Cli\Agent\Release\Create($cli, $argv); break;
+        }
+      break;
       case 'app':
         switch ($argv[2]) {
           case 'list': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($cli, $argv); break;

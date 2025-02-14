@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Deals\Models\Eloquent;
 
-use HubletoApp\Community\Customers\Models\Eloquent\Company;
-use HubletoApp\Community\Customers\Models\Eloquent\Person;
+use HubletoApp\Community\Customers\Models\Eloquent\Customer;
+use HubletoApp\Community\Contacts\Models\Eloquent\Person;
 use HubletoApp\Community\Settings\Models\Eloquent\Currency;
 use HubletoApp\Community\Settings\Models\Eloquent\Pipeline;
 use HubletoApp\Community\Settings\Models\Eloquent\PipelineStep;
@@ -19,9 +19,9 @@ class Deal extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'deals';
 
-  /** @return BelongsTo<Company, covariant Deal> */
-  public function COMPANY(): BelongsTo {
-    return $this->belongsTo(Company::class, 'id_company', 'id' );
+  /** @return BelongsTo<Customer, covariant Deal> */
+  public function CUSTOMER(): BelongsTo {
+    return $this->belongsTo(Customer::class, 'id_customer', 'id' );
   }
 
   /** @return HasOne<Pipeline, covariant Deal> */

@@ -157,7 +157,7 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
               <b className="text-sm">{globalThis.main.translate('Customer')}</b><br/>
               <InputLookup
                 uid={this.props.uid + '_filter_customer'}
-                model='HubletoApp/Community/Customers/Models/Company'
+                model='HubletoApp/Community/Customers/Models/Customer'
                 value={this.state.idCustomer}
                 onChange={(value: any) => {
                   this.setState({idCustomer: value} as TableInvoicesState, () => { this.loadData(); });

@@ -10,14 +10,9 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^customers\/companies\/?$/' => Controllers\Companies::class,
-      '/^customers\/persons\/?$/' => Controllers\Persons::class,
-      '/^customers\/address\/?$/' => Controllers\Addresses::class,
-      '/^customers\/contacts\/?$/' => Controllers\Contacts::class,
+      '/^customers\/?$/' => Controllers\Customers::class,
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
-      //'/^customers\/activities\/get\/?$/' => Controllers\Api\Activity::class,
-      '/^customers\/get-company\/?$/' => Controllers\Api\GetCompany::class,
-      '/^customers\/get-company-contacts\/?$/' => Controllers\Api\GetCompanyContacts::class,
+      '/^customers\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
       '/^customers\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
@@ -26,50 +21,52 @@ class Loader extends \HubletoMain\Core\App
 
   public function installTables(): void
   {
-    $mPerson = new \HubletoApp\Community\Customers\Models\Person($this->main);
-    $mCompany = new \HubletoApp\Community\Customers\Models\Company($this->main);
-    $mAddress = new \HubletoApp\Community\Customers\Models\Address($this->main);
-    $mContact = new \HubletoApp\Community\Customers\Models\Contact($this->main);
-    //$mActivity = new \HubletoApp\Community\Customers\Models\Activity($this->main);
-    $mCompanyActivity = new \HubletoApp\Community\Customers\Models\CompanyActivity($this->main);
-    $mCompanyDocument = new \HubletoApp\Community\Customers\Models\CompanyDocument($this->main);
-    $mCompanyTag = new \HubletoApp\Community\Customers\Models\CompanyTag($this->main);
-    $mPersonTag = new \HubletoApp\Community\Customers\Models\PersonTag($this->main);
+    $mPerson = new \HubletoApp\Community\Contacts\Models\Person($this->main);
+    $mContact = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
+    $mAddress = new \HubletoApp\Community\Contacts\Models\Address($this->main);
+    $mPersonTag = new \HubletoApp\Community\Contacts\Models\PersonTag($this->main);
 
-    $mCompany->dropTableIfExists()->install();
+    $mCustomer = new \HubletoApp\Community\Customers\Models\Customer($this->main);
+    $mCustomerActivity = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
+    $mCustomerDocument = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
+    $mCustomerTag = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
+
+    $mCustomer->dropTableIfExists()->install();
     $mPerson->dropTableIfExists()->install();
+
+    $mCustomerTag->dropTableIfExists()->install();
+    $mCustomerActivity->dropTableIfExists()->install();
+    $mCustomerDocument->dropTableIfExists()->install();
+
     $mAddress->dropTableIfExists()->install();
     $mContact->dropTableIfExists()->install();
-    $mCompanyTag->dropTableIfExists()->install();
     $mPersonTag->dropTableIfExists()->install();
-    //$mActivity->dropTableIfExists()->install();
-    $mCompanyActivity->dropTableIfExists()->install();
-    $mCompanyDocument->dropTableIfExists()->install();
+
   }
 
   public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Community/Customers/Models/CompanyActivity:Create",
-      "HubletoApp/Community/Customers/Models/CompanyActivity:Read",
-      "HubletoApp/Community/Customers/Models/CompanyActivity:Update",
-      "HubletoApp/Community/Customers/Models/CompanyActivity:Delete",
+      "HubletoApp/Community/Customers/Models/CustomerActivity:Create",
+      "HubletoApp/Community/Customers/Models/CustomerActivity:Read",
+      "HubletoApp/Community/Customers/Models/CustomerActivity:Update",
+      "HubletoApp/Community/Customers/Models/CustomerActivity:Delete",
 
       "HubletoApp/Community/Customers/Models/Address:Create",
       "HubletoApp/Community/Customers/Models/Address:Read",
       "HubletoApp/Community/Customers/Models/Address:Update",
       "HubletoApp/Community/Customers/Models/Address:Delete",
 
-      "HubletoApp/Community/Customers/Models/Company:Create",
-      "HubletoApp/Community/Customers/Models/Company:Read",
-      "HubletoApp/Community/Customers/Models/Company:Update",
-      "HubletoApp/Community/Customers/Models/Company:Delete",
+      "HubletoApp/Community/Customers/Models/Customer:Create",
+      "HubletoApp/Community/Customers/Models/Customer:Read",
+      "HubletoApp/Community/Customers/Models/Customer:Update",
+      "HubletoApp/Community/Customers/Models/Customer:Delete",
 
-      "HubletoApp/Community/Customers/Models/CompanyTag:Create",
-      "HubletoApp/Community/Customers/Models/CompanyTag:Read",
-      "HubletoApp/Community/Customers/Models/CompanyTag:Update",
-      "HubletoApp/Community/Customers/Models/CompanyTag:Delete",
+      "HubletoApp/Community/Customers/Models/CustomerTag:Create",
+      "HubletoApp/Community/Customers/Models/CustomerTag:Read",
+      "HubletoApp/Community/Customers/Models/CustomerTag:Update",
+      "HubletoApp/Community/Customers/Models/CustomerTag:Delete",
 
       "HubletoApp/Community/Customers/Models/Contact:Create",
       "HubletoApp/Community/Customers/Models/Contact:Read",
@@ -86,21 +83,21 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Customers/Models/PersonTag:Update",
       "HubletoApp/Community/Customers/Models/PersonTag:Delete",
 
-      "HubletoApp/Community/Customers/Controllers/Company",
-      "HubletoApp/Community/Customers/Controllers/CompanyActivity",
+      "HubletoApp/Community/Customers/Controllers/Customer",
+      "HubletoApp/Community/Customers/Controllers/CustomerActivity",
       "HubletoApp/Community/Customers/Controllers/Address",
-      "HubletoApp/Community/Customers/Controllers/CompanyTag",
+      "HubletoApp/Community/Customers/Controllers/CustomerTag",
       "HubletoApp/Community/Customers/Controllers/Contact",
       "HubletoApp/Community/Customers/Controllers/Person",
       "HubletoApp/Community/Customers/Controllers/PersonTag",
-      "HubletoApp/Community/Customers/Controllers/CompanyActivity",
-      "HubletoApp/Community/Customers/Controllers/Company",
+      "HubletoApp/Community/Customers/Controllers/CustomerActivity",
+      "HubletoApp/Community/Customers/Controllers/Customer",
 
       "HubletoApp/Community/Customers/Api/GetCalendarEvents",
-      "HubletoApp/Community/Customers/Api/GetCompany",
-      "HubletoApp/Community/Customers/Api/GetCompanyContacts",
+      "HubletoApp/Community/Customers/Api/GetCustomer",
+      "HubletoApp/Community/Customers/Api/GetCustomerContacts",
 
-      "HubletoApp/Community/Customers/Companies",
+      "HubletoApp/Community/Customers/Customers",
       "HubletoApp/Community/Customers/Persons",
     ];
 

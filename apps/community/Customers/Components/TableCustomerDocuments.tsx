@@ -1,0 +1,30 @@
+import React, { Component } from 'react'
+import Table, { TableProps, TableState } from 'adios/Table';
+
+interface TableCustomerDocumentsProps extends TableProps {}
+interface TableCustomerDocumentsState extends TableState {}
+
+export default class TableCustomerDocuments extends Table<TableCustomerDocumentsProps, TableCustomerDocumentsState> {
+  static defaultProps = {
+    ...Table.defaultProps,
+    itemsPerPage: 15,
+    formUseModalSimple: true,
+    model: 'HubletoApp/Community/Customers/Models/CustomerDocument',
+  }
+
+  props: TableCustomerDocumentsProps;
+  state: TableCustomerDocumentsState;
+
+  translationContext: string = 'hubleto.app.customers.tableCustomerDocuments';
+
+  constructor(props: TableCustomerDocumentsProps) {
+    super(props);
+    this.state = this.getStateFromProps(props);
+  }
+
+  getStateFromProps(props: TableCustomerDocumentsProps) {
+    return {
+      ...super.getStateFromProps(props),
+    }
+  }
+}

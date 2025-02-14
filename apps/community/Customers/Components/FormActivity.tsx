@@ -4,7 +4,7 @@ import FormInput from 'adios/FormInput';
 import Lookup from 'adios/Inputs/Lookup';
 
 export interface FormActivityProps extends FormProps {
-  idCompany: number,
+  idCustomer: number,
 }
 
 export interface FormActivityState extends FormState {}
@@ -12,7 +12,7 @@ export interface FormActivityState extends FormState {}
 export default class FormActivity<P, S> extends Form<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'HubletoApp/Community/Customers/Models/CompanyActivity',
+    model: 'HubletoApp/Community/Customers/Models/CustomerActivity',
   };
 
   props: FormActivityProps;
@@ -33,7 +33,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
 
   renderTitle(): JSX.Element {
     if (this.state.creatingRecord) {
-      return <h2>{globalThis.main.translate('New activity for company')}</h2>;
+      return <h2>{globalThis.main.translate('New activity for customer')}</h2>;
     } else {
       return (
         <>
@@ -59,12 +59,12 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
 
     return (
       <>
-        {this.inputWrapper('id_company')}
+        {this.inputWrapper('id_customer')}
         <FormInput title={"Contact Person"}>
           <Lookup {...this.getInputProps()}
             model='HubletoApp/Community/Customers/Models/Person'
-            endpoint={`customers/get-company-contacts`}
-            customEndpointParams={{id_company: R.id_company}}
+            endpoint={`contacts/get-customer-contacts`}
+            customEndpointParams={{id_customer: R.id_customer}}
             value={R.id_person}
             onChange={(value: any) => {
               this.updateRecord({ id_person: value })
@@ -83,7 +83,7 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
         {this.inputWrapper('date_end')}
         {this.inputWrapper('time_end')}
         {this.inputWrapper('all_day')}
-        {this.inputWrapper('id_user', {readonly: true, value: globalThis.main.idUser})}
+        {this.inputWrapper('id_user', {readonly: true})}
       </>
     );
   }

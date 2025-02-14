@@ -3,7 +3,7 @@
 namespace HubletoApp\Community\Deals\Models;
 
 use HubletoApp\Community\Customers\Models\Activity;
-use HubletoApp\Community\Customers\Models\Person;
+use HubletoApp\Community\Contacts\Models\Person;
 use HubletoApp\Community\Settings\Models\ActivityType;
 use HubletoApp\Community\Settings\Models\User;
 

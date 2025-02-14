@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Documents\Models;
 
-use HubletoApp\Community\Customers\Models\CompanyDocument;
+use HubletoApp\Community\Customers\Models\CustomerDocument;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Deals\Models\DealDocument;
@@ -18,7 +18,7 @@ class Document extends \HubletoMain\Core\Model
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
-    'COMPANY_DOCUMENT' => [ self::HAS_ONE, CompanyDocument::class, 'id_document', 'id' ],
+    'CUSTOMER_DOCUMENT' => [ self::HAS_ONE, CustomerDocument::class, 'id_document', 'id' ],
     'LEAD_DOCUMENT' => [ self::HAS_ONE, LeadDocument::class, 'id_document', 'id' ],
     'DEAL_DOCUMENT' => [ self::HAS_ONE, DealDocument::class, 'id_document', 'id' ],
   ];
@@ -54,24 +54,24 @@ class Document extends \HubletoMain\Core\Model
 
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
-    $mCompanyDocument = new CompanyDocument($this->main);
+    $mCustomerDocument = new CustomerDocument($this->main);
     $mLead = new Lead($this->main);
     $mDeal = new Deal($this->main);
     $mLeadDocument = new LeadDocument($this->main);
     $mDealDocument = new DealDocument($this->main);
 
     if (isset($savedRecord["creatingForModel"])) {
-      if ($savedRecord["creatingForModel"] == "Company") {
-        $mCompanyDocument->eloquent->create([
+      if ($savedRecord["creatingForModel"] == "Customer") {
+        $mCustomerDocument->eloquent->create([
           "id_document" => $savedRecord["id"],
-          "id_company" => $savedRecord["creatingForId"]
+          "id_customer" => $savedRecord["creatingForId"]
         ]);
       } else if ($savedRecord["creatingForModel"] == "Lead") {
 
         $lead = $mLead->eloquent->find($savedRecord["creatingForId"]);
-        $mCompanyDocument->eloquent->create([
+        $mCustomerDocument->eloquent->create([
           "id_document" => $savedRecord["id"],
-          "id_company" => $savedRecord["creatingForId"]
+          "id_customer" => $savedRecord["creatingForId"]
         ]);
         $mLeadDocument->eloquent->create([
           "id_document" => $savedRecord["id"],
@@ -80,9 +80,9 @@ class Document extends \HubletoMain\Core\Model
       } else if ($savedRecord["creatingForModel"] == "Deal") {
 
         $deal = $mDeal->eloquent->find($savedRecord["creatingForId"]);
-        $mCompanyDocument->eloquent->create([
+        $mCustomerDocument->eloquent->create([
           "id_document" => $savedRecord["id"],
-          "id_company" => $savedRecord["creatingForId"]
+          "id_customer" => $savedRecord["creatingForId"]
         ]);
         $mDealDocument->eloquent->create([
           "id_document" => $savedRecord["id"],

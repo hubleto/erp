@@ -50,7 +50,7 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
       $deal = $mDeal->eloquent->create([
         "title" => $lead->title,
-        "id_company" => $lead->id_company,
+        "id_customer" => $lead->id_customer,
         "id_person" => $lead->id_person,
         "price" => $lead->price,
         "id_currency" => $lead->id_currency,

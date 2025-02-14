@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Documents\Models\Eloquent;
 
-use HubletoApp\Community\Customers\Models\Eloquent\CompanyDocument;
+use HubletoApp\Community\Customers\Models\Eloquent\CustomerDocument;
 use HubletoApp\Community\Leads\Models\Eloquent\LeadDocument;
 use HubletoApp\Community\Deals\Models\Eloquent\DealDocument;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,9 +13,9 @@ class Document extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'documents';
 
-  /** @return hasOne<CompanyDocument, covariant Document> */
-  public function COMPANY_DOCUMENT(): HasOne {
-    return $this->hasOne(CompanyDocument::class, 'id_document', 'id');
+  /** @return hasOne<CustomerDocument, covariant Document> */
+  public function CUSTOMER_DOCUMENT(): HasOne {
+    return $this->hasOne(CustomerDocument::class, 'id_document', 'id');
   }
 
   /** @return hasOne<LeadDocument, covariant Document> */

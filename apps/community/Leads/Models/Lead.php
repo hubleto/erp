@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Community\Customers\Models\Company;
-use HubletoApp\Community\Customers\Models\Person;
+use HubletoApp\Community\Customers\Models\Customer;
+use HubletoApp\Community\Contacts\Models\Person;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Deals\Models\Deal;
@@ -27,7 +27,7 @@ class Lead extends \HubletoMain\Core\Model
 
   public array $relations = [
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
-    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
+    'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
     'STATUS' => [ self::HAS_ONE, LeadStatus::class, 'id', 'id_lead_status'],
@@ -44,7 +44,7 @@ class Lead extends \HubletoMain\Core\Model
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
       'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'price' => (new Decimal($this, $this->translate('Price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
@@ -86,7 +86,7 @@ class Lead extends \HubletoMain\Core\Model
     unset($description->columns['is_archived']);
     unset($description->columns['shared_folder']);
 
-    if ($this->main->urlParamAsInteger('idCompany') > 0) {
+    if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
@@ -124,7 +124,7 @@ class Lead extends \HubletoMain\Core\Model
       ->value
     ;
 
-    $description->defaultValues['id_company'] = null;
+    $description->defaultValues['id_customer'] = null;
     $description->defaultValues['date_created'] = date("Y-m-d");
     $description->defaultValues['id_person'] = null;
     $description->defaultValues['is_archived'] = 0;
@@ -137,22 +137,9 @@ class Lead extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordsQuery(array $includeRelations = [], int $maxRelationLevel = 0, string $search = '', array $filterBy = [], array $where = [], array $orderBy = []): Builder
+  public function prepareLoadRecordQuery(): mixed
   {
-    $relations = [
-      'DEAL',
-      'COMPANY',
-      'USER',
-      'PERSON',
-      'STATUS',
-      'CURRENCY',
-      'HISTORY',
-      'TAGS',
-      'SERVICES',
-      'ACTIVITIES',
-      'DOCUMENTS',
-    ];
-    $query = parent::prepareLoadRecordsQuery($relations, 4);
+    $query = parent::prepareLoadRecordQuery();
 
     if ($this->main->urlParamAsBool("showArchive")) {
       $query = $query->where("leads.is_archived", 1);
@@ -165,15 +152,15 @@ class Lead extends \HubletoMain\Core\Model
 
   public function checkOwnership(array $record): void
   {
-    if ($record["id_company"] && !isset($record["checkOwnership"])) {
-      $mCompany = new Company($this->main);
-      $company = $mCompany->eloquent
-        ->where("id", (int) $record["id_company"])
+    if ($record["id_customer"] && !isset($record["checkOwnership"])) {
+      $mCustomer = new Customer($this->main);
+      $customer = $mCustomer->eloquent
+        ->where("id", (int) $record["id_customer"])
         ->first()
       ;
 
-      if ($company->id_user != (int) $record["id_user"]) {
-        throw new \Exception("This lead cannot be assigned to the selected user,\nbecause they are not assigned to the selected company.");
+      if ($customer->id_user != (int) $record["id_user"]) {
+        throw new \Exception("This lead cannot be assigned to the selected user,\nbecause they are not assigned to the selected customer.");
       }
     }
   }
@@ -204,7 +191,7 @@ class Lead extends \HubletoMain\Core\Model
       $mLeadHistory->eloquent->create([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
-        "description" => "Price changed to " . (string) $record["price"] . " " . (string) $record["CURRENCY"]["code"],
+        "description" => "Price changed to " . (string) $record["price"],
       ]);
     }
     if ((string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {

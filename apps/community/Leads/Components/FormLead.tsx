@@ -189,16 +189,16 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   <div className='grow'>
                     {this.inputWrapper('identifier', {readonly: R.is_archived})}
                     {this.inputWrapper('title', {readonly: R.is_archived})}
-                    <FormInput title={"Company"}>
+                    <FormInput title={"Customer"}>
                       <Lookup {...this.getInputProps()}
-                        model='HubletoApp/Community/Customers/Models/Company'
-                        endpoint={`customers/get-company`}
+                        model='HubletoApp/Community/Customers/Models/Customer'
+                        endpoint={`customers/get-customer`}
                         readonly={R.is_archived}
-                        value={R.id_company}
+                        value={R.id_customer}
                         onChange={(value: any) => {
-                          this.updateRecord({ id_company: value, id_person: null });
-                          if (R.id_company == 0) {
-                            R.id_company = null;
+                          this.updateRecord({ id_customer: value, id_person: null });
+                          if (R.id_customer == 0) {
+                            R.id_customer = null;
                             this.setState({record: R});
                           }
                         }}
@@ -207,9 +207,9 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     <FormInput title={"Contact Person"}>
                       <Lookup {...this.getInputProps()}
                         model='HubletoApp/Community/Customers/Models/Person'
-                        customEndpointParams={{id_company: R.id_company}}
+                        customEndpointParams={{id_customer: R.id_customer}}
                         readonly={R.is_archived}
-                        endpoint={`customers/get-company-contacts`}
+                        endpoint={`contacts/get-customer-contacts`}
                         value={R.id_person}
                         onChange={(value: any) => {
                           this.updateRecord({ id_person: value })
@@ -459,7 +459,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         date_end: this.state.activityCalendarDateClicked,
                       }
                     }}
-                    idCompany={R.id_company}
+                    idCustomer={R.id_customer}
                     showInModal={true}
                     showInModalSimple={true}
                     onClose={() => { this.setState({ showIdActivity: 0 } as FormLeadState) }}

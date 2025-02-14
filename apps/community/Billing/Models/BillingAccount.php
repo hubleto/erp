@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Billing\Models;
 
-use HubletoApp\Community\Customers\Models\Company;
+use HubletoApp\Community\Customers\Models\Customer;
 
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Varchar;
@@ -15,13 +15,13 @@ class BillingAccount extends \HubletoMain\Core\Model
 
   public array $relations = [
     'SERVICES' => [ self::HAS_MANY, BillingAccountService::class, 'id_billing_account', 'id' ],
-    'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id'  ],
+    'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id'  ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_company' => (new Lookup($this, $this->translate("Company"), Company::class, 'CASCADE'))->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate("Customer"), Customer::class, 'CASCADE'))->setRequired(),
       'description' => (new Varchar($this, $this->translate("Description")))->setRequired(),
     ]);
   }

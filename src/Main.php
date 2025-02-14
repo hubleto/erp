@@ -105,6 +105,7 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->appManager = new \HubletoMain\Core\AppManager($this);
 
     $this->appManager->registerApp(\HubletoApp\Community\Dashboard\Loader::class);
+    $this->appManager->registerApp(\HubletoApp\Community\Contacts\Loader::class);
     $this->appManager->registerApp(\HubletoApp\Community\Customers\Loader::class);
     $this->appManager->registerApp(\HubletoApp\Community\Calendar\Loader::class);
     $this->appManager->registerApp(\HubletoApp\Community\Settings\Loader::class);

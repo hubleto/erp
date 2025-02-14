@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Deals\Models\Eloquent;
 
-use HubletoApp\Community\Customers\Models\Eloquent\Company;
-use HubletoApp\Community\Customers\Models\Eloquent\Person;
+use HubletoApp\Community\Customers\Models\Eloquent\Customer;
+use HubletoApp\Community\Contacts\Models\Eloquent\Person;
 use HubletoApp\Community\Deals\Models\Eloquent\Deal;
 use HubletoApp\Community\Settings\Models\Eloquent\ActivityType;
 use HubletoApp\Community\Settings\Models\Eloquent\Currency;

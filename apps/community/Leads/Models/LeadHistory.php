@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Community\Customers\Models\Company;
-use HubletoApp\Community\Customers\Models\Person;
+use HubletoApp\Community\Customers\Models\Customer;
+use HubletoApp\Community\Contacts\Models\Person;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\User;

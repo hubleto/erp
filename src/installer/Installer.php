@@ -42,6 +42,7 @@ class Installer {
       \HubletoApp\Community\Upgrade\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Calendar\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Documents\Loader::class => [ 'enabled' => true ],
+      \HubletoApp\Community\Contacts\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Customers\Loader::class => [ 'enabled' => true ],
       \HubletoApp\Community\Reports\Loader::class => [ 'enabled' => true ],
     ],

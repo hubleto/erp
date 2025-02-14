@@ -55,7 +55,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
         foreach ($matches[0] as $event) {
           preg_match('/DTSTART(?:;.*)?:(\d{8}(?:T\d{6}Z?)?)/', $event, $startMatch);
           preg_match('/DTEND(?:;.*)?:(\d{8}(?:T\d{6}Z?)?)/', $event, $endMatch);
-          preg_match('/SUMMARY:(.*)/', $event, $summaryMatch);
+          preg_match('/SUMMARY(?:;.*)?:(.*)/', $event, $summaryMatch);
 
           $start = isset($startMatch[1]) ? date('Y-m-d\TH:i:s', strtotime($startMatch[1])) : date('Y-m-d\TH:i:s');
           $end = isset($endMatch[1]) ? date('Y-m-d\TH:i:s', strtotime($endMatch[1])) : $start;

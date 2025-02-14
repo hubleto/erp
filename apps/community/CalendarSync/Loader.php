@@ -2,7 +2,9 @@
 
 namespace HubletoApp\Community\CalendarSync;
 
-use HubletoApp\Community\CalendarSync\Controllers\Sources;
+use HubletoApp\Community\CalendarSync\Controllers\Google;
+use HubletoApp\Community\CalendarSync\Controllers\Home;
+use HubletoApp\Community\CalendarSync\Controllers\Ics;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -12,10 +14,24 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^calendar-sources\/?$/' => Sources::class,
+      '/^settings\/calendar-sources\/google\/?$/' => Google::class,
+      '/^settings\/calendar-sources\/?$/' => Home::class,
+      '/^settings\/calendar-sources\/ics\/?$/' => Ics::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 51, 'calendar-sources', $this->translate('Sources'), 'fas fa-calendar', str_starts_with($this->main->requestedUri, 'calendar-sources/') || $this->main->requestedUri == 'calendar-sources');
+    $this->main->addSetting([
+      'title' => $this->translate('Calendar sources'),
+      'icon' => 'fas fa-calendar',
+      'url' => 'settings/calendar-sources',
+    ]);
+
+    if (str_starts_with($this->main->requestedUri, 'settings/calendar-sources')) {
+      $this->main->sidebar->addHeading1(2, 310, $this->translate('Calendar sources'));
+      $this->main->sidebar->addLink(2, 320, 'settings/calendar-sources', $this->translate('Overview'), 'fas fa-home');
+      $this->main->sidebar->addLink(2, 330, 'settings/calendar-sources/google', $this->translate('Google Calendar'), 'fab fa-google');
+      $this->main->sidebar->addLink(2, 340, 'settings/calendar-sources/ics', $this->translate('ICS'), 'fas fa-file');
+      //$this->main->sidebar->addLink(2, 10203, 'customers/activities', $this->translate('Activities'), 'fas fa-users');
+    }
 
     $this->main->calendarManager->addCalendar(Calendar::class);
   }
@@ -32,8 +48,8 @@ class Loader extends \HubletoMain\Core\App
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
       "HubletoApp/Community/CalendarSync/Source",
-
-      "HubletoApp/Community/Calendar/Controllers/Sources",
+      "HubletoApp/Community/CalendarSync/Controllers/Home",
+      "HubletoApp/Community/CalendarSync/Controllers/Google",
     ];
 
     foreach ($permissions as $permission) {

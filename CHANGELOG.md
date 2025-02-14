@@ -9,6 +9,9 @@
   * `columns()` renamed to `describeColumns()`
   * more flexible CSS skin (thanks to TailwindCSS v4)
   * color scales in tables
+  * more consisent form design thanks to a `HubletoForm` react component
+  * sidebar is now generated using information from app manifests
+  * first prototyping of external apps
 
 ## Release v0.6
 

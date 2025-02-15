@@ -1,5 +1,9 @@
 # Hubleto CHANGELOG
 
+## Release v0.8 (not released yet)
+
+  * new `<HubletoChart>` React component
+
 ## Release v0.7
 
   * improved unit testing

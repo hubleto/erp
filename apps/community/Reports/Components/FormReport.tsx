@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import Lookup from "adios/Inputs/Lookup";
 import FormInput from "adios/FormInput";
 import request from "adios/Request";
-
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarController, BarElement, CategoryScale, LinearScale } from "chart.js";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
-
-ChartJS.register(ArcElement, Tooltip, Legend, BarController, BarElement, CategoryScale, LinearScale);
+import HubletoChart, { HubletoChartType } from "@hubleto/src/core/Components/HubletoChart";
 
 export interface FormReportProps {
   config: any,
@@ -17,7 +13,7 @@ export interface FormReportProps {
 
 export interface FormReportState {
   data: any,
-  selectedGraph: string,
+  selectedGraph: HubletoChartType,
 }
 
 export default class FormReport extends Component<FormReportProps,FormReportState> {
@@ -135,54 +131,6 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
     }
   }
 
-  renderChart(): JSX.Element {
-    switch (this.state.selectedGraph) {
-      case "bar":
-        return <Bar
-          options={{
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          }}
-          data={{
-            labels: this.state.data != null ? [...this.state.data.labels] : [],
-            datasets: [
-              {
-                data: this.state.data != null ? [...this.state.data.values] : [],
-                backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
-              }
-            ]
-          }}
-
-        />
-      case "doughnut":
-        return <div className="w-[35vh]">
-          <Doughnut
-            options={{
-              plugins: {
-                legend: {
-                  position: "left",
-                }
-              }
-            }}
-            data={ {
-              labels: this.state.data ? [...this.state.data.labels] : [],
-              datasets: [
-                {
-                  data: this.state.data ? [...this.state.data.values] : [],
-                  backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
-                }
-              ]
-            }}
-          />
-        </div>
-      default:
-        return <></>;
-    }
-  }
-
   requestData(): any {
     request.post(
       'api/get-chart-data',
@@ -292,7 +240,10 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
             <button onClick={() => this.setState({selectedGraph: "bar"})} className="btn btn-primary"><span className="icon"><i className="fas fa-chart-bar"></i></span></button>
           </div>
           <div className="w-full flex flex-row justify-center h-[35vh]">
-            {this.state.data && this.state.data.values.length > 0 ? this.renderChart() : <>No data was found with selected parameters</>}
+            {this.state.data && this.state.data.values.length > 0
+              ? <HubletoChart type={this.state.selectedGraph} data={this.state.data} />
+              : <>No data was found with selected parameters</>
+            }
           </div>
         </div>
       </>

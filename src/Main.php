@@ -54,7 +54,7 @@ spl_autoload_register(function(string $class) {
 class HubletoMain extends \ADIOS\Core\Loader
 {
 
-  const RELEASE = 'v0.7';
+  const RELEASE = 'v0.8';
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
@@ -106,7 +106,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     foreach ($this->appManager->getInstalledAppClasses() as $appClass => $appConfig) {
       $appClass = (string) $appClass;
-      if (is_array($appConfig) && (((bool) $appConfig['enabled']) ?? false) && $appClass::canBeAdded($this)) {
+      if (is_array($appConfig) && $appClass::canBeAdded($this)) {
         $this->appManager->registerApp($appClass);
       }
     }
@@ -138,7 +138,7 @@ class HubletoMain extends \ADIOS\Core\Loader
   }
 
   public function addTwigViewNamespace(string $folder, string $namespace) {
-    if (isset($this->twigLoader)) {
+    if (isset($this->twigLoader) && is_dir($folder)) {
       $this->twigLoader->addPath($folder, $namespace);
     }
   }

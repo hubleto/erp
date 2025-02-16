@@ -27,7 +27,7 @@ class AppManager
 
   public function getAppNameForConfig(string $appClass): string
   {
-    return $appClass;//str_replace('\\', '-', trim($appClass, '\\'));
+    return trim($appClass, '\\');//str_replace('\\', '-', trim($appClass, '\\'));
   }
 
   public function getInstalledAppClasses(): array

@@ -38,43 +38,30 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
   render(): JSX.Element {
     switch (this.state.type) {
       case "bar":
-        return <Bar
-          options={{
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          }}
-          data={{
-            labels: this.state.data != null ? [...this.state.data.labels] : [],
-            datasets: [
-              {
-                data: this.state.data != null ? [...this.state.data.values] : [],
-                backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
-              }
-            ]
-          }}
-
-        />
-      case "doughnut":
-        return <div className="w-[35vh]">
-          <Doughnut
+        return (
+          <Bar
+            width={0}
+            height={0}
             options={{
-              plugins: {
-                legend: {
-                  position: "left",
-                }
-              }
+              scales: {
+                x: {
+                  ticks: {
+                    display: false,
+                  },
+                },
+                y: {
+                  beginAtZero: true,
+                },
+              },
             }}
-            data={ {
-              labels: this.state.data ? [...this.state.data.labels] : [],
+            data={{
+              labels: this.state.data != null ? [...this.state.data.labels] : [],
               datasets: [
                 {
-                  data: this.state.data ? [...this.state.data.values] : [],
+                  data: this.state.data != null ? [...this.state.data.values] : [],
                   backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
-                }
-              ]
+                },
+              ],
             }}
           />
         </div>
@@ -82,5 +69,4 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
         return <></>;
     }
   }
-
 }

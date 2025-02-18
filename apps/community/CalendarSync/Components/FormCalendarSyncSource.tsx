@@ -12,7 +12,7 @@ export default class FormCalendarSyncSource<P, S> extends Form<FormProps, FormSt
   props: FormProps;
   state: FormState;
 
-  translationContext: string = 'hubleto.app.calendarSync.formSource';
+  translationContext: string = 'HubletoApp/Community/CalendarSync/Components/FormSource';
 
   renderContent(): JSX.Element {
 

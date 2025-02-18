@@ -24,7 +24,7 @@ export default class FormUserRoles<P, S> extends HubletoForm<FormUserRolesProps,
   props: FormUserRolesProps;
   state: FormUserRolesState;
 
-  translationContext: string = 'mod.core.settings.formUserRole';
+  translationContext: string = 'HubletoApp/Community/Settings/Components/FormUserRole';
 
   constructor(props: FormUserRolesProps) {
     super(props);

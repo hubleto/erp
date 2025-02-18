@@ -12,7 +12,15 @@ class Controller extends \ADIOS\Core\Controller
   function __construct(\HubletoMain $main)
   {
     $this->main = $main;
+
+    $reflection = new \ReflectionClass($this);
+    preg_match('/^(.*?)\\\Controllers\\\(.*?)$/', $reflection->getName(), $m);
+    if (isset($m[1]) && isset($m[2])) {
+      $this->translationContext = $m[1] . '\\Loader::Controllers\\' . $m[2];
+    }
+
     parent::__construct($main);
+
   }
 
   /**

@@ -134,7 +134,9 @@
         "Countries": "",
         "Currencies": "",
         "Pipelines": "",
-        "Invoice profiles": ""
+        "Invoice profiles": "",
+        "Your companies": "",
+        "Platform config": ""
     },
     "controllers.users": {
         "Settings": "",
@@ -173,5 +175,61 @@
     "controllers.activitytypes": {
         "Settings": "",
         "Activity Types": ""
+    },
+    "manifest": {
+        "Settings": ""
+    },
+    "root": {
+        "Users": "",
+        "User roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions": "",
+        "Tags": "",
+        "Activity types": "",
+        "Contact types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Pipelines": "",
+        "Invoice profiles": "",
+        "Platform config": ""
+    },
+    "Models\\Country": {
+        "Country": "",
+        "Code": ""
+    },
+    "Models\\ContactType": {
+        "Type": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
+    },
+    "Models\\Profile": {
+        "Company": ""
+    },
+    "Models\\ActivityType": {
+        "Type": "",
+        "Color": "",
+        "Show in calendar": "",
+        "Icon": ""
+    },
+    "Models\\Currency": {
+        "Currency": "",
+        "Code": ""
+    },
+    "Models\\Pipeline": {
+        "Name": "",
+        "Description": ""
+    },
+    "Models\\PipelineStep": {
+        "Name": "",
+        "Order": "",
+        "Pipeline": ""
+    },
+    "Models\\Setting": {
+        "Key": "",
+        "Value": "",
+        "Only for user": ""
     }
 }

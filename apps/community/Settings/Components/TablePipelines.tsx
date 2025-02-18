@@ -19,7 +19,7 @@ export default class TablePipelines extends Table<TablePipelinesProps, TablePipe
   props: TablePipelinesProps;
   state: TablePipelinesState;
 
-  translationContext: string = 'mod.core.settings.tablePipelines';
+  translationContext: string = 'HubletoApp/Community/Settings/Components/TablePipelines';
 
   constructor(props: TablePipelinesProps) {
     super(props);

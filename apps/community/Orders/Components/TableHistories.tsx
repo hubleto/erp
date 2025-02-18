@@ -22,7 +22,7 @@ export default class TableHistories extends Table<TableHistoriesProps, TableHist
   props: TableHistoriesProps;
   state: TableHistoriesState;
 
-  translationContext: string = 'mod.core.orders.TableHistories';
+  translationContext: string = 'HubletoApp/Community/Orders/Components/TableHistories';
 
   constructor(props: TableHistoriesProps) {
     super(props);

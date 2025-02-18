@@ -50,6 +50,26 @@ export default class HubletoMain extends ADIOS {
     this.registerReactComponent('Tooltip', Tooltip);
   }
 
+  translate(orig: string, context?: string): string {
+    let translated: string = orig;
+
+    if (this.dictionary === null) return orig;
+
+    let tmp = (context ?? '').split('::');
+    const contextClass = tmp[0];
+    const contextInner = tmp[1];
+
+    if (this.dictionary[contextClass] && this.dictionary[contextClass][contextInner]) {
+      translated = this.dictionary[contextClass][contextInner][orig] ?? '';
+    } else {
+      translated = '';
+    }
+
+    if (translated == '') translated = context + '#' + orig;
+
+    return translated;
+  }
+
   loadDictionary(language: string) {
     if (language == 'en') return;
 
@@ -60,15 +80,7 @@ export default class HubletoMain extends ADIOS {
       { language: language },
       (data: any) => {
         this.dictionary = data;
-        console.log('loaddict', this.dictionary);
       }
-    );
-  }
-
-  addToDictionary(orig: string, context: string) {
-    request.get(
-      'api/dictionary',
-      { language: this.language, addNew: { orig: orig, context: context } },
     );
   }
 

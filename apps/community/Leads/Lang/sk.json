@@ -31,5 +31,65 @@
     "controllers.leadstatuses": {
         "Settings": "",
         "Lead Statuses": ""
+    },
+    "manifest": {
+        "Leads": ""
+    },
+    "root": {
+        "Lead statuses": ""
+    },
+    "Models\\Lead": {
+        "Lead Identifier": "",
+        "Title": "",
+        "Customer": "",
+        "Contact person": "",
+        "Price": "",
+        "Currency": "",
+        "Expected close date": "",
+        "Assigned user": "",
+        "Date created": "",
+        "Status": "",
+        "Notes": "",
+        "Source channel": "",
+        "Archived": ""
+    },
+    "Models\\LeadStatus": {
+        "Name": "",
+        "Order": "",
+        "Color": ""
+    },
+    "Models\\LeadHistory": {
+        "Change Date": "",
+        "Lead": "",
+        "Description": ""
+    },
+    "Models\\LeadTag": {
+        "Lead": "",
+        "Tag": ""
+    },
+    "Models\\LeadService": {
+        "Lead": "",
+        "Service": "",
+        "Unit Price": "",
+        "Amount": "",
+        "Dicount (%)": "",
+        "Tax (%)": ""
+    },
+    "Models\\LeadActivity": {
+        "Lead": "",
+        "Contact person": "",
+        "Activity type": "",
+        "Subject": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Created by": ""
+    },
+    "Models\\LeadDocument": {
+        "Lead": "",
+        "Document": ""
     }
 }

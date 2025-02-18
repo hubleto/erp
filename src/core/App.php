@@ -25,7 +25,6 @@ class App {
 
   public \HubletoMain\Core\Sidebar $sidebar;
 
-  public string $translationRootContext = '';
   public string $translationContext = '';
 
   public static function canBeAdded(\HubletoMain $main): bool
@@ -42,8 +41,7 @@ class App {
     $this->rootFolder = pathinfo((string) $reflection->getFilename(), PATHINFO_DIRNAME);
     $this->namespace = $reflection->getNamespaceName();
     $this->fullName = $reflection->getName();
-    $this->translationRootContext = str_replace('.loader', '', strtolower(str_replace('\\', '.', $reflection->getName())));
-    $this->translationContext = $this->translationRootContext . '.loader';
+    $this->translationContext = trim(str_replace('\\', '/', $this->fullName), '/');
 
     $this->viewNamespace = $this->namespace;
     $this->viewNamespace = str_replace('\\', ':', $this->viewNamespace);
@@ -53,10 +51,18 @@ class App {
     $manifestFile = $this->rootFolder . '/manifest.yaml';
     if (is_file($manifestFile)) $this->manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($manifestFile));
     else $this->manifest = [];
+
+    $this->validateManifest();
+
+  }
+
+  public function validateManifest() {
+    if (empty($this->manifest['name'])) throw new \Exception("{$this->fullName}: Manifest does not contain 'name'.");
   }
 
   public function init(): void
   {
+    $this->manifest['nameTranslated'] = $this->translate($this->manifest['name'], [], 'manifest');
     $this->main->addTwigViewNamespace($this->rootFolder . '/Views', $this->viewNamespace);
   }
 
@@ -95,26 +101,30 @@ class App {
     return $tests;
   }
 
+  public static function getDictionaryFilename(string $language): string
+  {
+    $appClass = get_called_class();
+    $reflection = new \ReflectionClass(get_called_class());
+    $rootFolder = pathinfo((string) $reflection->getFilename(), PATHINFO_DIRNAME);
+    return $rootFolder . '/Lang/' . $language . '.json';
+  }
+
   /**
   * @return array|array<string, array<string, string>>
   */
-  public function loadDictionary(string $language): array
+  public static function loadDictionary(string $language): array
   {
-
     $dict = [];
-
     if (strlen($language) == 2) {
-      $dictFilename = $this->rootFolder . '/Lang/' . $language . '.json';
+      $dictFilename = static::getDictionaryFilename($language);
       if (is_file($dictFilename)) $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
-      // if (!is_array($dict)) throw new \Exception("Dictionary file {$dictFilename} could not be loaded.");
     }
-
     return $dict;
   }
 
-  public function translate(string $string, array $vars = []): string
+  public function translate(string $string, array $vars = [], string $context = 'root'): string
   {
-    return $this->main->translate($string, $vars, $this->translationContext);
+    return $this->main->translate($string, $vars, $this->fullName . '::' . $context);
   }
 
   public function registerModel(string $model): void

@@ -20,7 +20,6 @@
         "Upgrade to PRO": "Prejsť na PRO"
     },
     "loader": {
-        "Customers": "Zákazníci",
         "Customers": "Firmy",
         "Contact Persons": "Kontaktné osoby"
     },
@@ -40,7 +39,8 @@
         "Date Created": "Vytvorený",
         "Active": "Aktívny",
         "Assigned User": "Vlastník",
-        "Customers": "Firmy"
+        "Customers": "Firmy",
+        "Link to shared folder (online storage) with related documents": ""
     },
     "models.person": {
         "First name": "Meno",
@@ -51,7 +51,7 @@
         "Active": "Aktívny",
         "Date Created": "Vytvorený",
         "Contact Persons": "Kontaktné osoby",
-        "Add Contact Person": "Pridať kontaktnú osobu",
+        "Add Contact": "Pridať kontakt",
         "Emails": "Emaily",
         "Phone Numbers": "Telefóny"
     },
@@ -65,7 +65,6 @@
         "Value": "Hodnota"
     },
     "controllers.customers": {
-        "Customers": "Zákazníci",
         "Customers": "Firmy"
     },
     "controllers.persons": {
@@ -75,5 +74,51 @@
     "models.customeractivity": {
         "Activity type": "",
         "Subject": ""
+    },
+    "manifest": {
+        "Customers": ""
+    },
+    "Models\\Customer": {
+        "Name": "",
+        "Street Line 1": "",
+        "Street Line 2": "",
+        "Region": "",
+        "City": "",
+        "Postal Code": "",
+        "Country": "",
+        "VAT ID": "",
+        "Customer ID": "",
+        "Tax ID": "",
+        "Notes": "",
+        "Date Created": "",
+        "Active": "",
+        "Assigned User": "",
+        "Link to shared folder (online storage) with related documents": "",
+        "Customers": "",
+        "Add Customer": ""
+    },
+    "Models\\CustomerActivity": {
+        "Customer": "",
+        "Contact Person": "",
+        "Activity type": "",
+        "Subject": "",
+        "Start Date": "",
+        "Start Time": "",
+        "End Date": "",
+        "End Time": "",
+        "All day": "",
+        "Completed": "",
+        "Created by": ""
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "",
+        "Document": ""
+    },
+    "Models\\CustomerTag": {
+        "Customer": "",
+        "Tag": ""
+    },
+    "Controllers\\Customers": {
+        "Customers": ""
     }
 }

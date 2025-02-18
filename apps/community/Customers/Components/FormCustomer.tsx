@@ -52,7 +52,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
   props: FormCustomerProps;
   state: FormCustomerState;
 
-  translationContext: string = 'hubleto.app.customers.formCustomer';
+  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\FormCustomer';
 
   constructor(props: FormCustomerProps) {
     super(props);
@@ -230,7 +230,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
 
               {showAdditional ?
               <div className="card" style={{ gridArea: "contacts" }}>
-                <div className="card-header">{globalThis.main.translate('Contact Persons')}</div>
+                <div className="card-header">{globalThis.main.translate('Contacts')}</div>
                 <div className="card-body">
                   <TablePersons
                     uid={this.props.uid + "_table_persons"}
@@ -242,7 +242,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
                     parentForm={this}
                     description={{
                       ui: {
-                        addButtonText: globalThis.main.translate('Add contact person'),
+                        addButtonText: globalThis.main.translate('Add contact'),
                       },
                       columns: {
                         first_name: { type: "varchar", title: globalThis.main.translate("First name") },
@@ -274,7 +274,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
                         if (!R.PERSONS) R.PERSONS = [];
                         this.setState({createNewPerson: true} as FormCustomerState);
                       }}>
-                      + {globalThis.main.translate('Add contact person')}
+                      + {globalThis.main.translate('Add contact')}
                     </a>
                   ) : null}
                   {this.state.createNewPerson ?

@@ -22,7 +22,7 @@ export default class TableOrderProducts extends Table<TableOrderProductsProps, T
   props: TableOrderProductsProps;
   state: TableOrderProductsState;
 
-  translationContext: string = 'mod.core.orders.TableOrderProducts';
+  translationContext: string = 'HubletoApp/Community/Orders/Components/TableOrderProducts';
 
   constructor(props: TableOrderProductsProps) {
     super(props);

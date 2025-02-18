@@ -19,7 +19,7 @@ export default class TableLeadServices extends Table<TableLeadServicesProps, Tab
   props: TableLeadServicesProps;
   state: TableLeadServicesState;
 
-  translationContext: string = 'mod.core.sales.tableLeadServices';
+  translationContext: string = 'HubletoApp/Community/Leads/Components/TableLeadServices';
 
   constructor(props: TableLeadServicesProps) {
     super(props);

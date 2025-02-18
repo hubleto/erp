@@ -4,5 +4,15 @@
     },
     "loader": {
         "Services": "Služby"
+    },
+    "manifest": {
+        "Services": ""
+    },
+    "Models\\Service": {
+        "Name": "",
+        "Unit price": "",
+        "Currency": "",
+        "Unit": "",
+        "Description": ""
     }
 }

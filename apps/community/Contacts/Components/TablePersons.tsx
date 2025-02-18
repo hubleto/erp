@@ -27,6 +27,8 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
 
   props: TablePersonsProps;
 
+  translationContext: string = 'HubletoApp/Community/Customers/Components/TablePersons';
+
   getFormModalProps() {
     if (getUrlParam('recordId') > 0) {
       return {

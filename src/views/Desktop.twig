@@ -1,4 +1,4 @@
-{{ setTranslationContext('desktop') }}
+{{ setTranslationContext('HubletoMain::Desktop') }}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -159,9 +159,9 @@
             class="btn {% if app.isActivated %} btn-primary {% endif %} "
             id="sidebar-item-level1-{{ i }}"
             aria-keyshortcuts="Alt+Shift+{{ i }}"
-            href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.name }}"
+            href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
           >
-            <span class="icon"><i class="{{ app.manifest.icon }}"></i></span><span class="text">{{ app.manifest.name }}</span>
+            <span class="icon"><i class="{{ app.manifest.icon }}"></i></span><span class="text">{{ app.manifest.nameTranslated }}</span>
           </a>
           {% set i = i + 1 %}
         {% endfor %}

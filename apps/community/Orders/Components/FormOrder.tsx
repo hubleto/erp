@@ -22,7 +22,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
   props: FormOrderProps;
   state: FormOrderState;
 
-  translationContext: string = 'mod.core.orders.FormOrder';
+  translationContext: string = 'HubletoApp/Community/Orders/Components/FormOrder';
 
   constructor(props: FormOrderProps) {
     super(props);

@@ -1,8 +1,13 @@
 {
-    "controllers.calendar": {
-        "Calendar": "Kalendár"
-    },
     "loader": {
-        "Calendar": "Kalendár"
+        "Calendar Sync": "",
+        "Calendar sources": "",
+        "Calendar": ""
+    },
+    "manifest": {
+        "Calendar": ""
+    },
+    "Controllers\\Calendar": {
+        "Calendar": ""
     }
 }

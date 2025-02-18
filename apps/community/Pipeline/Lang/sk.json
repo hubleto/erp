@@ -5,5 +5,11 @@
     },
     "controllers.home": {
         "Sales": "Obchod"
+    },
+    "manifest": {
+        "Pipeline": ""
+    },
+    "Controllers\\Home": {
+        "Sales": ""
     }
 }

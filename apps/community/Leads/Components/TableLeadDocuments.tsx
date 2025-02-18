@@ -15,7 +15,7 @@ export default class TableLeadDocuments extends Table<TableLeadDocumentsProps, T
   props: TableLeadDocumentsProps;
   state: TableLeadDocumentsState;
 
-  translationContext: string = 'mod.core.sales.tableLeadDocuments';
+  translationContext: string = 'HubletoApp/Community/Leads/Components/TableLeadDocuments';
 
   constructor(props: TableLeadDocumentsProps) {
     super(props);

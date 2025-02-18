@@ -72,14 +72,19 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
 
+    $this->viewParams['activatedApp'] = $this->main->appManager->getActivatedApp();
+    if ($this->viewParams['activatedApp']) {
+      $this->viewParams['activatedApppSidebar'] = $this->viewParams['activatedApp']->sidebar->getItems();
+    }
+
     $tmp = strpos($this->main->requestedUri, '/');
     if ($tmp === false) $this->viewParams['requestedUriFirstPart'] = $this->main->requestedUri;
     else $this->viewParams['requestedUriFirstPart'] = substr($this->main->requestedUri, 0, (int) $tmp);
 
-    $this->viewParams['sidebar'] = [
-      'level1Items' => $this->main->getSidebar()->getItems(1),
-      'level2Items' => $this->main->getSidebar()->getItems(2),
-    ];
+    // $this->viewParams['sidebar'] = [
+    //   'level1Items' => $this->main->getSidebar()->getItems(1),
+    //   'level2Items' => $this->main->getSidebar()->getItems(2),
+    // ];
   }
 
   public function getBreadcrumbs(): array

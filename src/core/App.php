@@ -23,6 +23,8 @@ class App {
   public string $namespace = '';
   public string $fullName = '';
 
+  public \HubletoMain\Core\Sidebar $sidebar;
+
   public string $translationRootContext = '';
   public string $translationContext = '';
 
@@ -46,6 +48,8 @@ class App {
     $this->viewNamespace = $this->namespace;
     $this->viewNamespace = str_replace('\\', ':', $this->viewNamespace);
 
+    $this->sidebar = new \HubletoMain\Core\Sidebar($this->main);
+
     $manifestFile = $this->rootFolder . '/manifest.yaml';
     if (is_file($manifestFile)) $this->manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($manifestFile));
     else $this->manifest = [];
@@ -54,6 +58,10 @@ class App {
   public function init(): void
   {
     $this->main->addTwigViewNamespace($this->rootFolder . '/Views', $this->viewNamespace);
+  }
+
+  public function getRootUrlSlug(): string {
+    return $this->manifest['rootUrlSlug'] ?? '';
   }
 
   public function setCli(\HubletoMain\Cli\Agent\Loader $cli): void

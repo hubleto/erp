@@ -24,4 +24,6 @@
 
 @layer app {
   /* add your custom css here */
+  #app-main-content { @apply ml-0 md:ml-36; }
+  #app-main-content.sidebar-two-levels { @apply ml-0 md:ml-68; }
 }

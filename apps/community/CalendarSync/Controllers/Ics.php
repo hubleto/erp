@@ -11,4 +11,13 @@ class Ics extends \HubletoMain\Core\Controller {
     // $mSource = new Source($this->app);
     // $mSource->install();
   }
+
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
+      [ 'url' => 'settings/calendar-sources', 'content' => $this->translate('Calendar Sources') ],
+      [ 'url' => '', 'content' => $this->translate('.ics Calendars') ],
+    ]);
+  }
 }

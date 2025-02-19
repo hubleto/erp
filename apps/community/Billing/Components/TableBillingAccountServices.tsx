@@ -20,7 +20,7 @@ export default class TableBillingAccountServices extends Table<TableBillingAccou
   props: TableBillingAccountServicesProps;
   state: TableBillingAccountServicesState;
 
-  translationContext: string = 'HubletoApp/Community/Billing/Components/TableBillingAccountServices';
+  translationContext: string = 'HubletoApp\\Community\\Billing\\Loader::Components\\TableBillingAccountServices';
 
   constructor(props: TableBillingAccountServicesProps) {
     super(props);

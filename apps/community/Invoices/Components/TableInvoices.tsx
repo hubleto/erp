@@ -49,7 +49,7 @@ export default class TableInvoices extends Table<TableInvoicesProps, TableInvoic
   props: TableInvoicesProps;
   state: TableInvoicesState;
 
-  translationContext: string = 'HubletoApp/Community/Invoices/Components/TableInvoices';
+  translationContext: string = 'HubletoApp\\Community\\Invoices\\Loader::Components\\TableInvoices';
 
   constructor(props: TableInvoicesProps) {
     super(props);

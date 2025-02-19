@@ -12,28 +12,24 @@
         "Deals": "Dealy",
         "Archive": "Archív"
     },
-    "Models\\dealStatus": {
-        "Name": "",
-        "Order": "",
-        "Color": ""
-    },
     "Models\\Deal": {
-        "Deal Identifier": "",
-        "Title": "",
-        "Customer": "",
-        "Contact person": "",
-        "Lead": "",
-        "Price": "",
-        "Currency": "",
-        "Expected close date": "",
-        "Assigned user": "",
-        "Date created": "",
-        "Pipeline": "",
-        "Pipeline step": "",
-        "Notes": "",
-        "Source channel": "",
-        "Archived": "",
-        "Status": ""
+        "Deal Identifier": "Identifikátor",
+        "Title": "Názov",
+        "Customer": "Zákazník",
+        "Contact person": "Kontaktná osoba",
+        "Lead": "Lead",
+        "Price": "Cena",
+        "Currency": "Mena",
+        "Expected close date": "Predpokladaný dátum ukončenia",
+        "Assigned user": "Zodpovedný",
+        "Date created": "Vytvorený",
+        "Pipeline": "Pipeline",
+        "Pipeline step": "Krok pipeline",
+        "Notes": "Poznámky",
+        "Source channel": "Zdroj",
+        "Archived": "Archivovaný",
+        "Status": "Stav",
+        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný dokument"
     },
     "Models\\DealStatus": {
         "Name": "",
@@ -76,5 +72,13 @@
     },
     "root": {
         "Deal statuses": ""
+    },
+    "Components\\FormDeal": {
+        "Calendar": "Kalendár",
+        "Local documents": "Dokumenty",
+        "Shared documents": "Zdieľané dokumenty",
+        "History": "História",
+        "Go to original lead": "Prejsť na pôvodný lead",
+        "Documents": "Dokumenty"
     }
 }

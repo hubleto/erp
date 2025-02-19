@@ -19,7 +19,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
   props: FormActivityProps;
   state: FormActivityState;
 
-  translationContext: string = 'HubletoApp/Community/Deals/Components/FormActivity';
+  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormActivity';
 
   renderTitle(): JSX.Element {
     if (this.state.creatingRecord) {

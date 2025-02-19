@@ -19,7 +19,7 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps,Fo
   props: FormPipelineProps;
   state: FormPipelineState;
 
-  translationContext: string = 'HubletoApp/Community/Settings/Components/FormPipeline';
+  translationContext: string = 'HubletoApp\\Community\\Settings\\Loader::Components\\FormPipeline';
 
   constructor(props: FormPipelineProps) {
     super(props);

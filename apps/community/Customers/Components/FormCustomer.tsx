@@ -208,7 +208,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
                     {this.inputWrapper("is_active")}
                     <FormInput title="Tags">
                       <InputTags2
-                        {...this.getInputProps()}
+                        {...this.getInputProps('color_tags')}
                         value={this.state.record.TAGS}
                         model="HubletoApp/Community/Settings/Models/Tag"
                         targetColumn="id_customer"
@@ -488,7 +488,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
                     hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableCustomerDocuments, data: any, options: any): JSX.Element => {
                       return (
                         <FormInput>
-                          <Hyperlink {...this.getInputProps()}
+                          <Hyperlink {...this.getInputProps('document_link')}
                             value={data.DOCUMENT.hyperlink}
                             readonly={true}
                           ></Hyperlink>

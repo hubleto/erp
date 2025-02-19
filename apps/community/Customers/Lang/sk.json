@@ -3,20 +3,6 @@
         "Customers": "Zákazníci",
         "Default customer management and addressbook.": ""
     },
-    "formCustomer": {
-        "Basic Information": "O firme",
-        "Activities": "Aktivity",
-        "Leads": "Leady",
-        "Contact Persons": "Kontaktné osoby",
-        "Documents": "Dokumenty",
-        "Customer Information": "O firme",
-        "Deals": "Dealy",
-        "Notes": "Poznámky",
-        "Add contact": "Pridať kontakt",
-        "Last name": "Priezvisko",
-        "First name": "Meno",
-        "Main Contact": "Hlavný kontakt"
-    },
     "Models\\Customer": {
         "Add Customer": "Pridať firmu",
         "Name": "Názov",
@@ -59,5 +45,19 @@
     "Models\\CustomerTag": {
         "Customer": "",
         "Tag": ""
+    },
+    "Components\\FormCustomer": {
+        "Contacts": "Kontakty",
+        "Add contact": "Pridať kontakt",
+        "Customer": "Zákazník",
+        "Last name": "Priezvisko",
+        "Main Contact": "Hlavný kontakt",
+        "First name": "Meno",
+        "Leads": "Leady",
+        "Deals": "Dealy",
+        "Calendar": "Kalendár",
+        "Shared documents": "Zdieľané dokumenty",
+        "Local documents": "Dokumenty",
+        "Documents": "Dokumenty"
     }
 }

@@ -15,7 +15,7 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
   props: FormProductProps;
   state: FormProductState;
 
-  translationContext: string = 'HubletoApp/Community/Products/Components/FormProduct';
+  translationContext: string = 'HubletoApp\\Community\\Products\\Loader::Components\\FormProduct';
 
   constructor(props: FormProductProps) {
     super(props);

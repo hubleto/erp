@@ -35,7 +35,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   props: FormDealProps;
   state: FormDealState;
 
-  translationContext: string = 'HubletoApp/Community/Deals/Components/FormDeal';
+  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormDeal';
 
   constructor(props: FormDealProps) {
     super(props);
@@ -58,14 +58,14 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
   renderTitle(): JSX.Element {
     if (getUrlParam('recordId') == -1) {
-      return <h2>{globalThis.main.translate('New Deal')}</h2>;
+      return <h2>{this.translate('New Deal')}</h2>;
     } else {
       return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Deal Name]'}</h2>
     }
   }
 
   renderSubTitle(): JSX.Element {
-    return <small>{globalThis.main.translate('Lead')}</small>;
+    return <small>{this.translate('Lead')}</small>;
   }
 
   changeDealStatus(idStep: number, R: any) {
@@ -205,7 +205,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                         <div className='mt-2'>
                           <a className='btn btn-primary self-center' href={`leads?recordId=${R.id_lead}`}>
                             <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                            <span className='text'>Go to origin Lead</span>
+                            <span className='text'>{this.translate('Go to original lead')}</span>
                           </a>
                         </div>
                       : null}
@@ -436,7 +436,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             </div>
           </TabPanel>
           {showAdditional ?
-            <TabPanel header={globalThis.main.translate('Calendar')}>
+            <TabPanel header={this.translate('Calendar')}>
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
@@ -487,10 +487,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             </TabPanel>
           : null}
           {showAdditional ? (
-            <TabPanel header="Documents">
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Shared documents')}</span></div></div></div>
+            <TabPanel header={this.translate("Documents")}>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
               {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Local documents')}</span></div></div></div>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               <TableDealDocuments
                 uid={this.props.uid + "_table_deal_documents"}
                 data={{ data: R.DOCUMENTS }}
@@ -595,7 +595,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             </TabPanel>
           ) : null}
           {showAdditional ?
-            <TabPanel header={globalThis.main.translate('History')}>
+            <TabPanel header={this.translate('History')}>
               {R.HISTORY.length > 0 ?
                 R.HISTORY.map((history, key) => (
                   <div className='w-full flex flex-row justify-between'>

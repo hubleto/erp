@@ -37,7 +37,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   props: FormLeadProps;
   state: FormLeadState;
 
-  translationContext: string = 'HubletoApp/Community/Leads/Components/FormLead';
+  translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\FormLead';
 
   constructor(props: FormLeadProps) {
     super(props);

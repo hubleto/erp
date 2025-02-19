@@ -21,7 +21,7 @@ export default class TableCalendarSyncSources extends Table<TableSourcesProps, T
   props: TableSourcesProps;
   state: TableSourcesState;
 
-  translationContext: string = 'HubletoApp/Community/CalendarSync/Components/TableSources';
+  translationContext: string = 'HubletoApp\\Community\\CalendarSync\\Loader::Components\\TableSources';
 
   constructor(props: TableSourcesProps) {
     super(props);

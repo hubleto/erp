@@ -20,7 +20,7 @@ export default class TableAddresses extends Table<TableAddressesProps, TableAddr
   props: TableAddressesProps;
   state: TableAddressesState;
 
-  translationContext: string = 'HubletoApp/Community/Customers/Components/TableAddresses';
+  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableAddresses';
 
   constructor(props: TableAddressesProps) {
     super(props);

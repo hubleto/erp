@@ -25,7 +25,7 @@ export default class TableCustomers extends Table<TableCustomersProps, TableCust
   props: TableCustomersProps;
   state: TableCustomersState;
 
-  translationContext: string = 'HubletoApp/Community/Customers/Components/TableCustomers';
+  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableCustomers';
 
   getFormModalProps() {
     if (getUrlParam('recordId') > 0) {

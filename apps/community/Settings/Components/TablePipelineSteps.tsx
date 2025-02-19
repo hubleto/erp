@@ -18,7 +18,7 @@ export default class TablePipelineSteps extends Table<TablePipelineStepsProps, T
   props: TablePipelineStepsProps;
   state: TablePipelineStepsState;
 
-  translationContext: string = 'HubletoApp/Community/Settings/Components/TablePipelineSteps';
+  translationContext: string = 'HubletoApp\\Community\\Settings\\Loader::Components\\TablePipelineSteps';
 
   constructor(props: TablePipelineStepsProps) {
     super(props);

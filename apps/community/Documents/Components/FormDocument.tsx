@@ -20,7 +20,7 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
   props: FormDocumentProps;
   state: FormDocumentState;
 
-  translationContext: string = 'HubletoApp/Community/Documents/Components/FormDocument';
+  translationContext: string = 'HubletoApp\\Community\\Documents\\Loader::Components\\FormDocument';
 
   constructor(props: FormDocumentProps) {
     super(props);

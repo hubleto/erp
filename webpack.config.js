@@ -31,6 +31,9 @@ module.exports = (env, arg) => {
     resolve: {
       modules: [ path.resolve(__dirname, './node_modules') ],
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.css'],
+      alias: {
+        '@hubleto': path.resolve(__dirname),
+      },
     }
   }
 };

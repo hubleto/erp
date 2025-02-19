@@ -28,7 +28,8 @@ class Dictionary extends \ADIOS\Core\Controller
     $dict = $this->main->translator->loadDictionary($language);
 
     if (isset($addNew['context']) && isset($addNew['orig']) && $language != 'en') {
-      $this->main->translator->addToDictionary($addNew['orig'], $addNew['context'], $language);
+      list($contextClass, $contextInner) = explode('::', $addNew['context']);
+      $contextClass::addToDictionary($language, $contextInner, $addNew['orig']);
       return ['status' => true];
     } else {
       return $dict;

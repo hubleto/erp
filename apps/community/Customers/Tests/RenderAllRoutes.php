@@ -8,13 +8,13 @@ class RenderAllRoutes extends \HubletoMain\Core\AppTest
   public function run(): void
   {
     $routes = [
-      'customers/companies',
+      'customers/customers',
       'customers/persons',
       'customers/address',
       'customers/contacts',
       'customers/activities',
-      'customers/get-company',
-      'customers/get-company-contacts',
+      'customers/get-customer',
+      'contacts/get-customer-contacts',
       'customers/get-calendar-events',
     ];
 

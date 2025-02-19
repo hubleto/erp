@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Billing\Models\Eloquent;
 
-use HubletoApp\Community\Customers\Models\Eloquent\Company;
+use HubletoApp\Community\Customers\Models\Eloquent\Customer;
 
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,9 +12,9 @@ class BillingAccount extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'billing_accounts';
 
-  /** @return BelongsTo<Company, covariant BillingAccount> */
-  public function COMPANY(): BelongsTo {
-    return $this->belongsTo(Company::class, 'id_company', 'id' );
+  /** @return BelongsTo<Customer, covariant BillingAccount> */
+  public function CUSTOMER(): BelongsTo {
+    return $this->belongsTo(Customer::class, 'id_customer', 'id' );
   }
 
   /** @return HasMany<BillingAccountService, covariant BillingAccount> */

@@ -54,7 +54,7 @@ spl_autoload_register(function(string $class) {
 class HubletoMain extends \ADIOS\Core\Loader
 {
 
-  const RELEASE = 'v0.6';
+  const RELEASE = 'v0.8';
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
@@ -104,15 +104,9 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     $this->appManager = new \HubletoMain\Core\AppManager($this);
 
-    $this->appManager->registerApp(\HubletoApp\Community\Dashboard\Loader::class);
-    $this->appManager->registerApp(\HubletoApp\Community\Customers\Loader::class);
-    $this->appManager->registerApp(\HubletoApp\Community\Calendar\Loader::class);
-    $this->appManager->registerApp(\HubletoApp\Community\Settings\Loader::class);
-    $this->appManager->registerApp(\HubletoApp\Community\Help\Loader::class);
-
-    foreach ($this->appManager->getInstalledApps() as $appClass => $appConfig) {
+    foreach ($this->appManager->getInstalledAppClasses() as $appClass => $appConfig) {
       $appClass = (string) $appClass;
-      if (is_array($appConfig) && (((bool) $appConfig['enabled']) ?? false) && $appClass::canBeAdded($this)) {
+      if (is_array($appConfig) && $appClass::canBeAdded($this)) {
         $this->appManager->registerApp($appClass);
       }
     }
@@ -144,7 +138,7 @@ class HubletoMain extends \ADIOS\Core\Loader
   }
 
   public function addTwigViewNamespace(string $folder, string $namespace) {
-    if (isset($this->twigLoader)) {
+    if (isset($this->twigLoader) && is_dir($folder)) {
       $this->twigLoader->addPath($folder, $namespace);
     }
   }
@@ -154,12 +148,12 @@ class HubletoMain extends \ADIOS\Core\Loader
     return $this->sidebar;
   }
 
-  public function getTranslator(): \HubletoMain\Core\Translator
+  public function createTranslator(): \HubletoMain\Core\Translator
   {
     return new \HubletoMain\Core\Translator($this);
   }
 
-  public function getDesktopController(): \HubletoMain\Core\Controller
+  public function createDesktopController(): \HubletoMain\Core\Controller
   {
     return new \HubletoMain\Core\Controller($this);
   }
@@ -175,6 +169,16 @@ class HubletoMain extends \ADIOS\Core\Loader
     $titles = array_column($this->settings, 'title');
     array_multisort($titles, SORT_ASC, $settings);
     return $settings;
+  }
+
+  public static function loadDictionary(string $language): array
+  {
+    $dict = [];
+    if (strlen($language) == 2) {
+      $dictFilename = __DIR__ . '/../lang/' . $language . '.json';
+      if (is_file($dictFilename)) $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
+    }
+    return $dict;
   }
 
 }

@@ -25,10 +25,8 @@ class Loader extends \HubletoMain\Core\App
       '/^you-are-pro\/?$/' => Controllers\YouArePro::class,
     ]);
 
-    // if (!$this->main->isPro) {
-    //   $this->main->sidebar->addLink(1, 1000, 'upgrade', $this->translate('Upgrade'), 'fas fa-trophy', str_starts_with($this->main->requestedUri, 'upgrade'));
-    // }
   }
+
   public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);

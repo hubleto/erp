@@ -32,4 +32,6 @@ $config['global_table_prefix'] = '';
 // misc
 $config['develMode'] = TRUE;
 $config['language'] = 'en';
-
+$config['externalAppsRepositories'] = [
+  'MyCompany' => __DIR__ . '/apps/external/MyCompany'
+];

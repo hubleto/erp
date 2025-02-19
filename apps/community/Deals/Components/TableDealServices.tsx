@@ -19,7 +19,7 @@ export default class TableDealServices extends Table<TableDealServicesProps, Tab
   props: TableDealServicesProps;
   state: TableDealServicesState;
 
-  translationContext: string = 'mod.core.sales.tableDealServices';
+  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\TableDealServices';
 
   constructor(props: TableDealServicesProps) {
     super(props);

@@ -5,11 +5,9 @@ namespace HubletoApp\Community\Dashboard;
 class Loader extends \HubletoMain\Core\App
 {
 
-
-  // public function __construct(\HubletoMain $main)
-  // {
-  //   parent::__construct($main);
-  // }
+  const DEFAULT_INSTALLATION_CONFIG = [
+    'sidebarOrder' => 0,
+  ];
 
   public function init(): void
   {
@@ -19,9 +17,9 @@ class Loader extends \HubletoMain\Core\App
       '/^$/' => Controllers\Home::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 0, '', $this->translate('Home'), 'fas fa-home', $this->main->requestedUri == '');
-
+    $this->setConfigAsInteger('sidebarOrder', 0);
   }
+
   public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);

@@ -21,7 +21,7 @@ export default class TableDocuments extends Table<TableDocumentsProps, TableDocu
   props: TableDocumentsProps;
   state: TableDocumentsState;
 
-  translationContext: string = 'mod.core.documents.tableDocuments';
+  translationContext: string = 'HubletoApp\\Community\\Documents\\Loader::Components\\TableDocuments';
 
   constructor(props: TableDocumentsProps) {
     super(props);

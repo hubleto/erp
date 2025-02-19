@@ -1,13 +1,14 @@
 namespace: HubletoApp\Community\Deals
 rootUrlSlug: deals
 name: Deals
+icon: fas fa-handshake
 author:
   name: "Richard Ondrejka"
   nick: "rindo"
   company: "wai.blue"
   github: "https://github.com/rindo789"
   linkedin: "https://www.linkedin.com/in/richard-ondrejka/"
-highlight: From deal to purchase.
+highlight: Deal management. From deal to purchase.
 tags:
   - pipeline
   - sales

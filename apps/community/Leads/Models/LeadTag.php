@@ -28,7 +28,7 @@ class LeadTag extends \HubletoMain\Core\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Company Categories';
+    $description->ui['title'] = 'Customer Categories';
     return $description;
   }
 

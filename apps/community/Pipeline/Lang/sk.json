@@ -1,9 +1,9 @@
 {
-    "loader": {
-        "Sales": "Obchod",
-        "Pipeline": "Pipeline"
+    "manifest": {
+        "Pipeline": "Pipeline",
+        "...": ""
     },
-    "controllers.home": {
-        "Sales": "Obchod"
+    "Controllers\\Home": {
+        "Pipeline": "Pipeline"
     }
 }

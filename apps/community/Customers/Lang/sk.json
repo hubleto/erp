@@ -1,31 +1,10 @@
 {
-    "formCompany": {
-        "Basic Information": "O firme",
-        "Activities": "Aktivity",
-        "Leads": "Leady",
-        "Contact Persons": "Kontaktné osoby",
-        "Documents": "Dokumenty",
-        "Company Information": "O firme",
-        "Deals": "Dealy",
-        "Notes": "Poznámky",
-        "Add contact": "Pridať kontakt",
-        "Last name": "Priezvisko",
-        "First name": "Meno",
-        "Main Contact": "Hlavný kontakt"
-    },
-    "dashboard.home": {
-        "Welcome": "Vitaj",
-        "Upgrade to PRO and get exciting rewards.": "Prejdite na PRO a získajte skvelé odmeny.",
-        "You are using free version of Hubleto. Certain features are unavailable.": "Používate voľne dostupnú verziu Hubleto. Niektoré funkcie nie sú dostupné.",
-        "Upgrade to PRO": "Prejsť na PRO"
-    },
-    "loader": {
+    "manifest": {
         "Customers": "Zákazníci",
-        "Companies": "Firmy",
-        "Contact Persons": "Kontaktné osoby"
+        "Default customer management and addressbook.": "Adresár a manažment zákazníkov."
     },
-    "models.company": {
-        "Add Company": "Pridať firmu",
+    "Models\\Customer": {
+        "Add Customer": "Pridať firmu",
         "Name": "Názov",
         "Street Line 1": "Ulica, riadok č. 1",
         "Street Line 2": "Ulica, riadok č. 2",
@@ -34,46 +13,51 @@
         "Country": "Štát",
         "Postal Code": "PSČ",
         "VAT ID": "IČ DPH",
-        "Company ID": "IČO",
+        "Customer ID": "IČO",
         "Tax ID": "DIČ",
         "Notes": "Poznámky",
         "Date Created": "Vytvorený",
         "Active": "Aktívny",
         "Assigned User": "Vlastník",
-        "Companies": "Firmy"
+        "Customers": "Firmy",
+        "Link to shared folder (online storage) with related documents": ""
     },
-    "models.person": {
-        "First name": "Meno",
-        "Last name": "Priezvisko",
-        "Company": "Firma",
-        "Main Contact": "Hlavný kontakt",
-        "Notes": "Poznámky",
-        "Active": "Aktívny",
-        "Date Created": "Vytvorený",
-        "Contact Persons": "Kontaktné osoby",
-        "Add Contact Person": "Pridať kontaktnú osobu",
-        "Emails": "Emaily",
-        "Phone Numbers": "Telefóny"
+    "Controllers\\Customers": {
+        "Customers": "Firmy"
     },
-    "models.contact": {
-        "Person": "Osoba",
-        "Contact Category": "Kategória",
-        "Type": "Typ",
-        "Email": "Email",
-        "Phone Number": "Telefón",
-        "Other": "Iné",
-        "Value": "Hodnota"
-    },
-    "controllers.companies": {
-        "Customers": "Zákazníci",
-        "Companies": "Firmy"
-    },
-    "controllers.persons": {
-        "Customers": "Zákazníci",
-        "Contact Persons": "Kontaktné osoby"
-    },
-    "models.companyactivity": {
+    "Models\\CustomerActivity": {
+        "Customer": "",
+        "Contact Person": "",
         "Activity type": "",
-        "Subject": ""
+        "Subject": "",
+        "Start Date": "",
+        "Start Time": "",
+        "End Date": "",
+        "End Time": "",
+        "All day": "",
+        "Completed": "",
+        "Created by": ""
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "",
+        "Document": ""
+    },
+    "Models\\CustomerTag": {
+        "Customer": "",
+        "Tag": ""
+    },
+    "Components\\FormCustomer": {
+        "Contacts": "Kontakty",
+        "Add contact": "Pridať kontakt",
+        "Customer": "Zákazník",
+        "Last name": "Priezvisko",
+        "Main Contact": "Hlavný kontakt",
+        "First name": "Meno",
+        "Leads": "Leady",
+        "Deals": "Dealy",
+        "Calendar": "Kalendár",
+        "Shared documents": "Zdieľané dokumenty",
+        "Local documents": "Dokumenty",
+        "Documents": "Dokumenty"
     }
 }

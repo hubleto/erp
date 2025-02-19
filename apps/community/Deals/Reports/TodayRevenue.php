@@ -18,7 +18,7 @@ class TodayRevenue extends \HubletoMain\Core\Report {
     // $config["model"] = $this->model->fullName;
     // $config["name"] = $this->name;
     $config['groupsBy'] = [
-      ["field" => "id_user", "title" => "User"],
+      ["field" => "id_customer", "title" => "Customer"],
     ];
     $config['returnWith'] = [
       "total" => [
@@ -28,7 +28,7 @@ class TodayRevenue extends \HubletoMain\Core\Report {
 
     $config["searchGroups"] = [
       ["fieldName" => "id_user", "field" => $model->getColumn("id_user"), "option" => 1,  "value" => $this->main->auth->getUser()["id"],],
-      ["fieldName" => "date_created", "field" => $model->getColumn("date_created"), "option" => 1,  "value" => date("Y-m-d")],
+      ["fieldName" => "date_created", "field" => $model->getColumn("date_created"), "option" => 1,  "value" => date("2025-02-11")],
     ];
 
     return $config;

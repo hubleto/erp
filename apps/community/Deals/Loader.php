@@ -5,11 +5,6 @@ namespace HubletoApp\Community\Deals;
 class Loader extends \HubletoMain\Core\App
 {
 
-  // public function __construct(\HubletoMain $main)
-  // {
-  //   parent::__construct($main);
-  // }
-
   public function init(): void
   {
     parent::init();
@@ -22,8 +17,6 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/change-pipeline-step\/?$/' => Controllers\Api\ChangePipelineStep::class,
       '/^settings\/deal-statuses\/?$/' => Controllers\DealStatuses::class,
     ]);
-
-    $this->main->sidebar->addLink(1, 200, 'deals', $this->translate('Deals'), 'fas fa-handshake', str_starts_with($this->main->requestedUri, 'deals'));
 
     $this->main->addSetting([
       'title' => $this->translate('Deal statuses'),

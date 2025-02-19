@@ -27,10 +27,10 @@ class AppManager
 
   public function getAppNameForConfig(string $appClass): string
   {
-    return str_replace('\\', '-', trim($appClass, '\\'));
+    return trim($appClass, '\\');//str_replace('\\', '-', trim($appClass, '\\'));
   }
 
-  public function getInstalledApps(): array
+  public function getInstalledAppClasses(): array
   {
     $tmp = $this->main->configAsArray('apps');
     ksort($tmp);
@@ -45,7 +45,7 @@ class AppManager
 
   public function getAppConfig(string $appClass): array
   {
-    $apps = $this->getInstalledApps();
+    $apps = $this->getInstalledAppClasses();
     $key = $this->getAppNameForConfig($appClass);
     if (isset($apps[$key]) && is_array($apps[$key])) return $apps[$key];
     else return [];
@@ -78,6 +78,17 @@ class AppManager
     return $this->apps;
   }
 
+  public function getActivatedApp(): \HubletoMain\Core\App|null
+  {
+    $apps = $this->getRegisteredApps();
+    foreach ($apps as $app) {
+      if (str_starts_with($this->main->requestedUri, $app->getRootUrlSlug())) {
+        return $app;
+      }
+    }
+    return null;
+  }
+
   public function getApp(string $appClass): null|\HubletoMain\Core\App
   {
     if (isset($this->apps[$appClass])) return $this->apps[$appClass];
@@ -86,7 +97,7 @@ class AppManager
 
   public function isAppInstalled(string $appClass): bool
   {
-    $apps = $this->getInstalledApps();
+    $apps = $this->getInstalledAppClasses();
     return isset($apps[$appClass]) && is_array($apps[$appClass]) && isset($apps[$appClass]['installedOn']);
   }
 
@@ -105,6 +116,8 @@ class AppManager
     $app = $this->createAppInstance($appClass);
     if (!file_exists($app->rootFolder . '/manifest.yaml')) throw new \Exception("{$appClass} does not provide manifest.yaml file.");
 
+    $appConfig = array_merge($app::DEFAULT_INSTALLATION_CONFIG, $appConfig);
+
     $manifestFile = (string) file_get_contents($app->rootFolder . '/manifest.yaml');
     $manifest = (array) \Symfony\Component\Yaml\Yaml::parse($manifestFile);
     $dependencies = (array) ($manifest['requires'] ?? []);
@@ -122,7 +135,7 @@ class AppManager
 
     $appNameForConfig = $this->getAppNameForConfig($appClass);
 
-    if (!in_array($appClass, $this->getInstalledApps())) {
+    if (!in_array($appClass, $this->getInstalledAppClasses())) {
       $this->main->setConfig('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
       $this->main->setConfig('apps/' . $appNameForConfig . "/enabled", true);
       $this->main->saveConfigByPath('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));

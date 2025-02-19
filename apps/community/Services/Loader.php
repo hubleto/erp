@@ -9,14 +9,6 @@ use HubletoApp\Community\Settings\Models\Permission;
 class Loader extends \HubletoMain\Core\App
 {
 
-
-  // public function __construct(\HubletoMain $main)
-  // {
-  //   parent::__construct($main);
-
-  //   $this->registerModel(Models\Service::class);
-  // }
-
   public function init(): void
   {
     parent::init();
@@ -26,12 +18,6 @@ class Loader extends \HubletoMain\Core\App
       '/^services\/get-service-price\/?$/' => Controllers\Api\GetServicePrice::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 600, 'services', $this->translate('Services'), 'fas fa-network-wired', str_starts_with($this->main->requestedUri, 'services'));
-
-    // if (str_starts_with($this->main->requestedUri, 'services')) {
-    //   $this->main->sidebar->addHeading1(2, 40100, $this->translate('Services'));
-    //   $this->main->sidebar->addLink(2, 40200, 'services', $this->translate('Services'), 'fas fa-network-wired');
-    // }
   }
 
   public function installTables(): void

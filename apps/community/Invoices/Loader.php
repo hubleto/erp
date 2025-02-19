@@ -5,12 +5,6 @@ namespace HubletoApp\Community\Invoices;
 class Loader extends \HubletoMain\Core\App
 {
 
-  // public function __construct(\HubletoMain $main)
-  // {
-  //   parent::__construct($main);
-  //   $this->registerModel(Models\Invoice::class);
-  // }
-
   public function init(): void
   {
     parent::init();
@@ -19,7 +13,6 @@ class Loader extends \HubletoMain\Core\App
       '/^invoices\/?$/' => Controllers\Invoices::class,
     ]);
 
-    $this->main->sidebar->addLink(1, 800, 'invoices', $this->translate('Invoices'), 'fas fa-euro-sign', str_starts_with($this->main->requestedUri, 'invoices'));
   }
 
   public function installTables(): void

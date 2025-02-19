@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 
-export interface FormProductProps extends FormProps {}
+export interface FormProductProps extends HubletoFormProps {}
 
-export interface FormProductState extends FormState {}
+export interface FormProductState extends HubletoFormState {}
 
-export default class FormProduct<P, S> extends Form<FormProductProps,FormProductState> {
+export default class FormProduct<P, S> extends HubletoForm<FormProductProps,FormProductState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Products/Models/Product',
   };
 
   props: FormProductProps;
   state: FormProductState;
 
-  translationContext: string = 'mod.core.products.FormProduct';
+  translationContext: string = 'HubletoApp\\Community\\Products\\Loader::Components\\FormProduct';
 
   constructor(props: FormProductProps) {
     super(props);
@@ -28,19 +28,6 @@ export default class FormProduct<P, S> extends Form<FormProductProps,FormProduct
     return {
       ...super.getStateFromProps(props),
     };
-  }
-
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
-    </>;
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
   }
 
   renderTitle(): JSX.Element {

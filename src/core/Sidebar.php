@@ -10,51 +10,47 @@ class Sidebar {
 
   public \HubletoMain $main;
 
-  /** @var array<int, array<int, array<string, bool|string>>> */
+  /** @var array<int, array<string, bool|string>> */
   public array $items = [];
 
   public function __construct(\HubletoMain $main) {
     $this->main = $main;
-    $this->items[1] = [];
-    $this->items[2] = [];
   }
 
-  public function addItem(int $level, int $order, string $type, string $url, string $title, string $icon, bool $highlighted = false): void
+  public function addItem(string $type, string $url, string $title, string $icon, bool $highlighted = false): void
   {
-    $this->items[$level][$order] = [
+    $this->items[] = [
       'type' => $type,
       'url' => $url,
       'title' => $title,
       'icon' => $icon,
       'highlighted' => $highlighted,
     ];
-
-    ksort($this->items[$level]);
   }
 
-  public function addLink(int $level, int $order, string $url, string $title, string $icon, bool $highlighted = false): void
+  public function addLink(string $url, string $title, string $icon, bool $highlighted = false): void
   {
-    $this->addItem($level, $order, self::ITEM_LINK, $url, $title, $icon, $highlighted);
+    $this->addItem(self::ITEM_LINK, $url, $title, $icon, $highlighted);
   }
 
-  public function addDivider(int $level, int $order): void
+  public function addDivider(): void
   {
-    $this->addItem($level, $order, self::ITEM_DIVIDER, '', '', '');
+    $this->addItem(self::ITEM_DIVIDER, '', '', '');
   }
 
-  public function addHeading1(int $level, int $order, string $title): void
+  public function addHeading1(string $title): void
   {
-    $this->addItem($level, $order, self::ITEM_HEADING_1, '', $title, '');
+    $this->addItem(self::ITEM_HEADING_1, '', $title, '');
   }
 
-  public function addHeading2(int $level, int $order, string $title): void
+  public function addHeading2(string $title): void
   {
-    $this->addItem($level, $order, self::ITEM_HEADING_2, '', $title, '');
+    $this->addItem(self::ITEM_HEADING_2, '', $title, '');
   }
 
-  public function getItems(int $level): array
+  public function getItems(): array
   {
-    return $this->items[$level] ?? [];
+    return $this->items;
   }
 
 }

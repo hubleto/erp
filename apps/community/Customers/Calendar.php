@@ -2,13 +2,13 @@
 
 namespace HubletoApp\Community\Customers;
 
-use HubletoApp\Community\Customers\Models\CompanyActivity;
+use HubletoApp\Community\Customers\Models\CustomerActivity;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 
   public function loadEvents(): array
   {
-    $idCompany = $this->main->urlParamAsInteger('idCompany');
+    $idCustomer = $this->main->urlParamAsInteger('idCustomer');
     $dateStart = '';
     $dateEnd = '';
 
@@ -20,16 +20,16 @@ class Calendar extends \HubletoMain\Core\Calendar {
       $dateEnd = date("Y-m-d H:i:s", strtotime("+1 day"));
     }
 
-    $mCompanyActivity = new CompanyActivity($this->main);
+    $mCustomerActivity = new CustomerActivity($this->main);
 
-    $activities = $mCompanyActivity->eloquent
-      ->select("company_activities.*", "activity_types.color", "activity_types.name as activity_type")
-      ->leftJoin("activity_types", "activity_types.id", "=", "company_activities.id_activity_type")
+    $activities = $mCustomerActivity->eloquent
+      ->select("customer_activities.*", "activity_types.color", "activity_types.name as activity_type")
+      ->leftJoin("activity_types", "activity_types.id", "=", "customer_activities.id_activity_type")
       ->where("date_start", ">=", $dateStart)
       ->where("date_start", "<=", $dateEnd)
     ;
 
-    if ($idCompany > 0) $activities = $activities->where("id_company", $idCompany);
+    if ($idCustomer > 0) $activities = $activities->where("id_customer", $idCustomer);
 
     $activities = $activities->get();
     $events = [];

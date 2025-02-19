@@ -13,7 +13,7 @@ class Home extends \HubletoMain\Core\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => '', 'content' => $this->translate('Sales') ],
+      [ 'url' => '', 'content' => $this->translate('Pipeline') ],
     ]);
   }
 
@@ -94,7 +94,7 @@ class Home extends \HubletoMain\Core\Controller {
     $deals = $mDeal->eloquent
       ->where("id_pipeline", (int) $searchPipeline["id"])
       ->with("CURRENCY")
-      ->with("COMPANY")
+      ->with("CUSTOMER")
       ->with("TAGS")
       ->get()
       ->toArray()

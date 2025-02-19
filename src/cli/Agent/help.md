@@ -18,6 +18,8 @@
 | code list-templates                     | List all available templates for `generate` command.                     |
 |                                         |                                                                          |
 | db generate-demo-data                   | Generate demo data. ONLY FOR DEVELOPMENT! COMPLETELY RESETS ALL DATA !   |
+|                                         |                                                                          |
+| release create                          | Creates a release of your project for easy deployment.                   |
 
 Examples:
   php hubleto help

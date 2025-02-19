@@ -1,4 +1,13 @@
-<h1>{{ translate('Calendar Sync Settings') }}</h1>
+<h1>{{ translate('Calendar Sources') }}</h1>
 
-<p>In the sidebar on the left you may choose which calendar source list you want to add or edit.</p>
-<p>When using Google Calendar integration, also make sure to have $config['google-api-key'] defined in your ConfigEnv.php.</p>
+<br/>
+
+<a class="btn" href="calendar-sources/google">
+  <span class="icon"><i class="fab fa-google"></i></span>
+  <span class="text">{{ translate('Manage Google Calendars') }}</span>
+</a><br/>
+<br/>
+<a class="btn" href="calendar-sources/ics">
+  <span class="icon"><i class="fas fa-file"></i></span>
+  <span class="text">{{ translate('Manage online .ics Calendars') }}</span>
+</a>

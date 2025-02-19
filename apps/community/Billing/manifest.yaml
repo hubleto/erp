@@ -1,6 +1,7 @@
 namespace: HubletoApp\Community\Billing
 rootUrlSlug: billing
 name: Billing
+icon: fas fa-file-invoice-dollar
 author:
   name: "Richard Ondrejka"
   nick: "rindo"

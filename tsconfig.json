@@ -4,7 +4,10 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "preserveSymlinks": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@hubleto/*": ["./*"],
+    }
   },
   "include": ["./**/*"]
 }

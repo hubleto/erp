@@ -1,5 +1,14 @@
 {
-    "loader": {
+    "manifest": {
+        "Documents": "Dokumenty",
+        "...": ""
+    },
+    "Models\\Document": {
+        "Document name": "Názov dokumentu",
+        "File": "Súbor",
+        "Link": "Odkaz na online verziu"
+    },
+    "Controllers\\Documents": {
         "Documents": "Dokumenty"
     }
 }

@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 
-interface FormInvoiceProps extends FormProps {
+interface FormInvoiceProps extends HubletoFormProps {
 }
 
-interface FormInvoiceState extends FormState {
+interface FormInvoiceState extends HubletoFormState {
 }
 
-export default class FormInvoice extends Form<FormInvoiceProps, FormInvoiceState> {
+export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoiceState> {
   static defaultProps = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
     }
@@ -18,7 +18,7 @@ export default class FormInvoice extends Form<FormInvoiceProps, FormInvoiceState
   props: FormInvoiceProps;
   state: FormInvoiceState;
 
-  translationContext: string = 'mod.core.invoices.formInvoice';
+  translationContext: string = 'HubletoApp\\Community\\Invoices\\Loader::Components\\FormInvoice';
 
   constructor(props: FormInvoiceProps) {
     super(props);

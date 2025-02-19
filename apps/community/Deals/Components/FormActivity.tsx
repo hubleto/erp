@@ -1,36 +1,25 @@
 import React, { Component } from 'react';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import Lookup from 'adios/Inputs/Lookup';
 import FormInput from 'adios/FormInput';
 
-export interface FormActivityProps extends FormProps {
+export interface FormActivityProps extends HubletoFormProps {
   idDeal: number,
-  idCompany?: number,
+  idCustomer?: number,
 }
 
-export interface FormActivityState extends FormState {}
+export interface FormActivityState extends HubletoFormState {}
 
-export default class FormActivity<P, S> extends Form<FormActivityProps,FormActivityState> {
+export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Deals/Models/DealActivity',
   };
 
   props: FormActivityProps;
   state: FormActivityState;
 
-  translationContext: string = 'hubleto.app.deals.formActivity';
-
-  renderHeaderLeft(): JSX.Element {
-    return this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton();
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
-  }
+  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormActivity';
 
   renderTitle(): JSX.Element {
     if (this.state.creatingRecord) {
@@ -64,8 +53,8 @@ export default class FormActivity<P, S> extends Form<FormActivityProps,FormActiv
         <FormInput title={"Contact Person"}>
           <Lookup {...this.getInputProps()}
             model='HubletoApp/Community/Customers/Models/Person'
-            endpoint={`customers/get-company-contacts`}
-            customEndpointParams={{id_company: this.props.idCompany}}
+            endpoint={`contacts/get-customer-contacts`}
+            customEndpointParams={{id_customer: this.props.idCustomer}}
             value={R.id_person}
             onChange={(value: any) => {
               this.updateRecord({ id_person: value })

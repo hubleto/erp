@@ -1,5 +1,3 @@
-# Repository for external Hubleto apps
+# Default repository for external apps
 
-Place here all apps developed outside Hubleto and not published to Hubleto app store.
-
-For more details check https://developer.hubleto.com.
+Modify `ConfigEnv.php` to change this configuration or read documentation on https://developer.hubleto.com to learn more about external app repositories.

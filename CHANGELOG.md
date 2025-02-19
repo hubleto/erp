@@ -1,6 +1,10 @@
 # Hubleto CHANGELOG
 
-## Release v0.7 (not released yet)
+## Release v0.8 (not released yet)
+
+  * new `<HubletoChart>` React component
+
+## Release v0.7
 
   * improved unit testing
   * deals and leads are now linked to an online shared folder (document storage)
@@ -9,6 +13,9 @@
   * `columns()` renamed to `describeColumns()`
   * more flexible CSS skin (thanks to TailwindCSS v4)
   * color scales in tables
+  * more consisent form design thanks to a `HubletoForm` react component
+  * sidebar is now generated using information from app manifests
+  * first prototyping of external apps
 
 ## Release v0.6
 

@@ -1,5 +1,6 @@
 {
-    "loader": {
-        "Upgrade": "PRO"
+    "manifest": {
+        "Upgrade": "PRO",
+        "...": ""
     }
 }

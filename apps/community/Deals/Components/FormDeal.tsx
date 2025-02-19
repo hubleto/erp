@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
-import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 import request from 'adios/Request';
 import TableDealServices from './TableDealServices';
@@ -15,11 +14,11 @@ import FormActivity, { FormActivityProps, FormActivityState } from './FormActivi
 import ModalSimple from 'adios/ModalSimple';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 
-export interface FormDealProps extends FormProps {
+export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
 }
 
-export interface FormDealState extends FormState {
+export interface FormDealState extends HubletoFormState {
   newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
@@ -27,16 +26,16 @@ export interface FormDealState extends FormState {
   activityCalendarDateClicked: string,
 }
 
-export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
+export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Deals/Models/Deal',
   };
 
   props: FormDealProps;
   state: FormDealState;
 
-  translationContext: string = 'mod.core.sales.formDeal';
+  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormDeal';
 
   constructor(props: FormDealProps) {
     super(props);
@@ -57,34 +56,16 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
     };
   }
 
-  /* normalizeRecord(record) {
-
-    return record;
-  } */
-
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
-    </>;
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
-  }
-
   renderTitle(): JSX.Element {
     if (getUrlParam('recordId') == -1) {
-      return <h2>{globalThis.main.translate('New Deal')}</h2>;
+      return <h2>{this.translate('New Deal')}</h2>;
     } else {
       return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Deal Name]'}</h2>
     }
   }
 
   renderSubTitle(): JSX.Element {
-    return <small>{globalThis.main.translate('Lead')}</small>;
+    return <small>{this.translate('Lead')}</small>;
   }
 
   changeDealStatus(idStep: number, R: any) {
@@ -182,16 +163,16 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                     <div className='grow'>
                       {this.inputWrapper('identifier', {readonly: R.is_archived})}
                       {this.inputWrapper('title', {readonly: R.is_archived})}
-                      <FormInput title={"Company"} required={true}>
+                      <FormInput title={"Customer"} required={true}>
                         <Lookup {...this.getInputProps()}
-                          model='HubletoApp/Community/Customers/Models/Company'
-                          endpoint={`customers/get-company`}
-                          value={R.id_company}
+                          model='HubletoApp/Community/Customers/Models/Customer'
+                          endpoint={`customers/get-customer`}
+                          value={R.id_customer}
                           readonly={R.is_archived}
                           onChange={(value: any) => {
-                            this.updateRecord({ id_company: value, id_person: null });
-                            if (R.id_company == 0) {
-                              R.id_company = null;
+                            this.updateRecord({ id_customer: value, id_person: null });
+                            if (R.id_customer == 0) {
+                              R.id_customer = null;
                               this.setState({record: R});
                             }
                           }}
@@ -200,8 +181,8 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                       <FormInput title={"Contact Person"}>
                         <Lookup {...this.getInputProps()}
                           model='HubletoApp/Community/Customers/Models/Person'
-                          customEndpointParams={{id_company: R.id_company}}
-                          endpoint={`customers/get-company-contacts`}
+                          customEndpointParams={{id_customer: R.id_customer}}
+                          endpoint={`contacts/get-customer-contacts`}
                           value={R.id_person}
                           readonly={R.is_archived}
                           onChange={(value: any) => {
@@ -224,7 +205,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         <div className='mt-2'>
                           <a className='btn btn-primary self-center' href={`leads?recordId=${R.id_lead}`}>
                             <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                            <span className='text'>Go to origin Lead</span>
+                            <span className='text'>{this.translate('Go to original lead')}</span>
                           </a>
                         </div>
                       : null}
@@ -455,7 +436,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
             </div>
           </TabPanel>
           {showAdditional ?
-            <TabPanel header={globalThis.main.translate('Calendar')}>
+            <TabPanel header={this.translate('Calendar')}>
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
@@ -491,7 +472,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
                         date_end: this.state.activityCalendarDateClicked,
                       }
                     }}
-                    idCompany={R.id_company}
+                    idCustomer={R.id_customer}
                     showInModal={true}
                     showInModalSimple={true}
                     onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}
@@ -506,10 +487,10 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
             </TabPanel>
           : null}
           {showAdditional ? (
-            <TabPanel header="Documents">
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Shared documents')}</span></div></div></div>
+            <TabPanel header={this.translate("Documents")}>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
               {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Local documents')}</span></div></div></div>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               <TableDealDocuments
                 uid={this.props.uid + "_table_deal_documents"}
                 data={{ data: R.DOCUMENTS }}
@@ -614,7 +595,7 @@ export default class FormDeal<P, S> extends Form<FormDealProps,FormDealState> {
             </TabPanel>
           ) : null}
           {showAdditional ?
-            <TabPanel header={globalThis.main.translate('History')}>
+            <TabPanel header={this.translate('History')}>
               {R.HISTORY.length > 0 ?
                 R.HISTORY.map((history, key) => (
                   <div className='w-full flex flex-row justify-between'>

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Invoices\Models;
 
-use \HubletoApp\Community\Customers\Models\Company;
+use \HubletoApp\Community\Customers\Models\Customer;
 use \HubletoApp\Community\Settings\Models\User;
 use \HubletoApp\Community\Settings\Models\InvoiceProfile;
 
@@ -17,7 +17,7 @@ class Invoice extends \HubletoMain\Core\Model {
   public string $eloquentClass = Eloquent\Invoice::class;
 
   public array $relations = [
-    'CUSTOMER' => [ self::BELONGS_TO, Company::class, "id_customer" ],
+    'CUSTOMER' => [ self::BELONGS_TO, Customer::class, "id_customer" ],
     'PROFILE' => [ self::BELONGS_TO, InvoiceProfile::class, "id_profile" ],
     'ISSUED_BY' => [ self::BELONGS_TO, User::class, "id_issued_by" ],
     'ITEMS' => [ self::HAS_MANY, InvoiceItem::class, "id_invoice", "id" ],
@@ -28,7 +28,7 @@ class Invoice extends \HubletoMain\Core\Model {
     return array_merge(parent::describeColumns(), [
       'id_profile' => (new Lookup($this, $this->translate('Profile'), InvoiceProfile::class)),
       'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class)),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Company::class)),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
       'number' => (new Varchar($this, $this->translate('Number'))),
       'vs' => (new Varchar($this, $this->translate('Variable symbol'))),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
@@ -67,7 +67,7 @@ class Invoice extends \HubletoMain\Core\Model {
 
   public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
   {
-  
+
     $query = parent::prepareLoadRecordQuery($includeRelations, $maxRelationLevel, $query, $level);
 
     $idCustomer = $this->main->urlParamAsInteger('idCustomer');

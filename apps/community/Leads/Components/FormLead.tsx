@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import Form, { FormProps, FormState } from 'adios/Form';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
 import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
@@ -16,11 +16,11 @@ import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Docume
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 
-export interface FormLeadProps extends FormProps {
+export interface FormLeadProps extends HubletoFormProps {
   newEntryId?: number,
 }
 
-export interface FormLeadState extends FormState {
+export interface FormLeadState extends HubletoFormState {
   newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
@@ -28,16 +28,16 @@ export interface FormLeadState extends FormState {
   activityCalendarDateClicked: string,
 }
 
-export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
+export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadState> {
   static defaultProps: any = {
-    ...Form.defaultProps,
+    ...HubletoForm.defaultProps,
     model: 'HubletoApp/Community/Leads/Models/Lead',
   };
 
   props: FormLeadProps;
   state: FormLeadState;
 
-  translationContext: string = 'mod.core.sales.formLead';
+  translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\FormLead';
 
   constructor(props: FormLeadProps) {
     super(props);
@@ -57,29 +57,16 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     };
   }
 
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
-    </>;
-  }
-
-  renderHeaderRight(): JSX.Element {
-    return <>
-      {this.state.isInlineEditing ? this.renderDeleteButton() : null}
-      {this.props.showInModal ? this.renderCloseButton() : null}
-    </>;
-  }
-
   renderTitle(): JSX.Element {
     if (getUrlParam('recordId') == -1) {
-      return <h2>{globalThis.main.translate('New Lead')}</h2>;
+      return <h2>{this.translate('New Lead')}</h2>;
     } else {
       return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Lead Name]'}</h2>
     }
   }
 
   renderSubTitle(): JSX.Element {
-    return <small>{globalThis.main.translate('Lead')}</small>;
+    return <small>{this.translate('Lead')}</small>;
   }
 
   getLeadSumPrice(recordServices: any) {
@@ -169,7 +156,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
     return (
       <>
         <TabView>
-          <TabPanel header={globalThis.main.translate('Lead')}>
+          <TabPanel header={this.translate('Lead')}>
             {R.DEAL && R.is_archived == 1 ?
               <div className='alert-warning mt-2 mb-1'>
                 <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
@@ -189,16 +176,16 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   <div className='grow'>
                     {this.inputWrapper('identifier', {readonly: R.is_archived})}
                     {this.inputWrapper('title', {readonly: R.is_archived})}
-                    <FormInput title={"Company"}>
+                    <FormInput title={"Customer"}>
                       <Lookup {...this.getInputProps()}
-                        model='HubletoApp/Community/Customers/Models/Company'
-                        endpoint={`customers/get-company`}
+                        model='HubletoApp/Community/Customers/Models/Customer'
+                        endpoint={`customers/get-customer`}
                         readonly={R.is_archived}
-                        value={R.id_company}
+                        value={R.id_customer}
                         onChange={(value: any) => {
-                          this.updateRecord({ id_company: value, id_person: null });
-                          if (R.id_company == 0) {
-                            R.id_company = null;
+                          this.updateRecord({ id_customer: value, id_person: null });
+                          if (R.id_customer == 0) {
+                            R.id_customer = null;
                             this.setState({record: R});
                           }
                         }}
@@ -207,9 +194,9 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     <FormInput title={"Contact Person"}>
                       <Lookup {...this.getInputProps()}
                         model='HubletoApp/Community/Customers/Models/Person'
-                        customEndpointParams={{id_company: R.id_company}}
+                        customEndpointParams={{id_customer: R.id_customer}}
                         readonly={R.is_archived}
-                        endpoint={`customers/get-company-contacts`}
+                        endpoint={`contacts/get-customer-contacts`}
                         value={R.id_person}
                         onChange={(value: any) => {
                           this.updateRecord({ id_person: value })
@@ -232,7 +219,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         {R.DEAL != null ?
                         <a className='btn btn-primary' href={`../deals?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
                           <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                          <span className='text'>Go to Deal</span>
+                          <span className='text'>{this.translate('Go to deal')}</span>
                         </a>
                         :
                         <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
@@ -248,7 +235,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                     {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                     {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                     <FormInput title='Tags'>
-                      <InputTags2 {...this.getInputProps()}
+                      <InputTags2 {...this.getInputProps('tags_input')}
                         value={this.state.record.TAGS}
                         readonly={R.is_archived}
                         model='HubletoApp/Community/Settings/Models/Tag'
@@ -423,7 +410,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             </div>
           </TabPanel>
           {showAdditional ?
-            <TabPanel header={globalThis.main.translate('Calendar')}>
+            <TabPanel header={this.translate('Calendar')}>
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
@@ -459,7 +446,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                         date_end: this.state.activityCalendarDateClicked,
                       }
                     }}
-                    idCompany={R.id_company}
+                    idCustomer={R.id_customer}
                     showInModal={true}
                     showInModalSimple={true}
                     onClose={() => { this.setState({ showIdActivity: 0 } as FormLeadState) }}
@@ -474,10 +461,10 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             </TabPanel>
           : null}
           {showAdditional ? (
-            <TabPanel header="Documents">
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Shared documents')}</span></div></div></div>
+            <TabPanel header={this.translate("Documents")}>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
               {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Local documents')}</span></div></div></div>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               <TableLeadDocuments
                 uid={this.props.uid + "_table_lead_document"}
                 data={{ data: R.DOCUMENTS }}
@@ -491,15 +478,15 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
                     hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableLeadDocuments, data: any, options: any): JSX.Element => {
-                    return (
-                      <FormInput>
-                        <Hyperlink {...this.getInputProps()}
-                          value={data.DOCUMENT.hyperlink}
-                          readonly={true}
-                        ></Hyperlink>
-                      </FormInput>
-                    )
-                  },},
+                      return (
+                        <FormInput>
+                          <Hyperlink {...this.getInputProps('link_input')}
+                            value={data.DOCUMENT.hyperlink}
+                            readonly={true}
+                          ></Hyperlink>
+                        </FormInput>
+                      )
+                    }},
                   },
                   inputs: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
@@ -582,7 +569,7 @@ export default class FormLead<P, S> extends Form<FormLeadProps,FormLeadState> {
             </TabPanel>
           ) : null}
           {showAdditional ?
-            <TabPanel header={globalThis.main.translate('History')}>
+            <TabPanel header={this.translate('History')}>
               {R.HISTORY.length > 0 ?
                 R.HISTORY.map((history, key) => (
                   <div className='w-full flex flex-row justify-between'>

@@ -1,0 +1,55 @@
+{
+    "manifest": {
+        "Contacts": "Kontakty",
+        "Default customer management and addressbook.": "Adresár a manažment zákazníkov."
+    },
+    "Components\\FormPerson": {
+        "Edit": "Upraviť",
+        "Save": "Uložiť",
+        "Delete": "Zmazať",
+        "Personal Information": "Osobné údaje",
+        "Category": "Kategória",
+        "Type": "Typ",
+        "Email": "Email",
+        "Phone Number": "Telefón",
+        "Customer": "Zákazník",
+        "Tags": "Tagy",
+        "Value": "Hodnota"
+    },
+    "Components\\TablePersons": {
+        "Start typing to search...": "Hľadať..."
+    },
+    "Models\\Person": {
+        "First name": "Meno",
+        "Last name": "Priezvisko",
+        "Customer": "Zákazník",
+        "Main Contact": "Hlavný kontakt",
+        "Notes": "Poznámky",
+        "Active": "Aktívny",
+        "Date Created": "Vytvorený",
+        "Contacts": "Kontakty",
+        "Add Contact": "Pridať kontakt",
+        "Emails": "Emaily",
+        "Phone Numbers": "Telefóny",
+        "Add": "Pridať",
+        "Save": "",
+        "Copy": "",
+        "Delete": ""
+    },
+    "Controllers\\Persons": {
+        "Contacts": "Kontakty"
+    },
+    "Models\\Contact": {
+        "Person": "",
+        "Contact Category": "",
+        "Type": "",
+        "Email": "",
+        "Phone Number": "",
+        "Other": "",
+        "Value": ""
+    },
+    "Models\\PersonTag": {
+        "Person": "",
+        "Tag": ""
+    }
+}

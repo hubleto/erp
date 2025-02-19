@@ -154,6 +154,9 @@ class Translator extends \ADIOS\Core\Translator {
 
       if (empty($translated) && $toLanguage != 'en') {
         $translated = $context . '#' . $string;
+        if (class_exists($contextClass)) {
+          $contextClass::addToDictionary($language, $contextInner, $string);
+        }
       }
     }
 

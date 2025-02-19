@@ -1,18 +1,12 @@
 {
-    "controllers.services": {
-        "Services": "Služby"
-    },
-    "loader": {
-        "Services": "Služby"
-    },
     "manifest": {
-        "Services": ""
+        "Services": "Služby"
     },
     "Models\\Service": {
-        "Name": "",
-        "Unit price": "",
-        "Currency": "",
-        "Unit": "",
-        "Description": ""
+        "Name": "Názov",
+        "Unit price": "Jednotková cena",
+        "Currency": "Mena",
+        "Unit": "Jednotka",
+        "Description": "Popis"
     }
 }

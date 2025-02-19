@@ -2,35 +2,19 @@
     "manifest": {
         "Deals": "Dealy"
     },
-    "loader": {
-        "Deals": "Dealy",
-        "Deals Archive": "Archív dealov",
-        "Deal statuses": ""
-    },
-    "controllers.deals": {
+    "Controllers\\Deals": {
         "Sales": "Obchod",
         "Deals": "Dealy"
     },
-    "controllers.dealsArchive": {
+    "Controllers\\DealsArchive": {
         "Sales": "Obchod",
         "Deals": "Dealy",
         "Archive": "Archív"
     },
-    "models.dealactivity": {
-        "Activity type": "",
-        "Subject": ""
-    },
-    "models.dealstatus": {
+    "Models\\dealStatus": {
         "Name": "",
         "Order": "",
         "Color": ""
-    },
-    "controllers.dealsarchive": {
-        "Deals": "",
-        "Archive": ""
-    },
-    "root": {
-        "Deal statuses": ""
     },
     "Models\\Deal": {
         "Deal Identifier": "",

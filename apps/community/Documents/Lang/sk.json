@@ -3,8 +3,8 @@
         "Documents": "Dokumenty"
     },
     "Models\\Document": {
-        "Document name": "",
-        "File": "",
-        "Link": ""
+        "Document name": "Názov dokumentu",
+        "File": "Súbor",
+        "Link": "Odkaz na online verziu"
     }
 }

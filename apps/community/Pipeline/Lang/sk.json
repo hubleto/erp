@@ -1,15 +1,8 @@
 {
-    "loader": {
-        "Sales": "Obchod",
+    "manifest": {
         "Pipeline": "Pipeline"
     },
-    "controllers.home": {
-        "Sales": "Obchod"
-    },
-    "manifest": {
-        "Pipeline": ""
-    },
     "Controllers\\Home": {
-        "Sales": ""
+        "Sales": "Obchod"
     }
 }

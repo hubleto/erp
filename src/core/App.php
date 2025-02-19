@@ -57,12 +57,20 @@ class App {
   }
 
   public function validateManifest() {
-    if (empty($this->manifest['name'])) throw new \Exception("{$this->fullName}: Manifest does not contain 'name'.");
+    $missing = [];
+    if (empty($this->manifest['namespace'])) $missing[] = 'namespace';
+    if (empty($this->manifest['rootUrlSlug'])) $missing[] = 'rootUrlSlug';
+    if (empty($this->manifest['name'])) $missing[] = 'name';
+    if (empty($this->manifest['highlight'])) $missing[] = 'highlight';
+    if (empty($this->manifest['icon'])) $missing[] = 'icon';
+    if (count($missing) > 0) throw new \Exception("{$this->fullName}: Some properties are missing in manifest (" . join(", ", $missing) . ").");
   }
 
   public function init(): void
   {
     $this->manifest['nameTranslated'] = $this->translate($this->manifest['name'], [], 'manifest');
+    $this->manifest['highlightTranslated'] = $this->translate($this->manifest['highlight'], [], 'manifest');
+
     $this->main->addTwigViewNamespace($this->rootFolder . '/Views', $this->viewNamespace);
   }
 
@@ -103,10 +111,14 @@ class App {
 
   public static function getDictionaryFilename(string $language): string
   {
-    $appClass = get_called_class();
-    $reflection = new \ReflectionClass(get_called_class());
-    $rootFolder = pathinfo((string) $reflection->getFilename(), PATHINFO_DIRNAME);
-    return $rootFolder . '/Lang/' . $language . '.json';
+    if (strlen($language) == 2) {
+      $appClass = get_called_class();
+      $reflection = new \ReflectionClass(get_called_class());
+      $rootFolder = pathinfo((string) $reflection->getFilename(), PATHINFO_DIRNAME);
+      return $rootFolder . '/Lang/' . $language . '.json';
+    } else {
+      return '';
+    }
   }
 
   /**
@@ -115,11 +127,22 @@ class App {
   public static function loadDictionary(string $language): array
   {
     $dict = [];
-    if (strlen($language) == 2) {
-      $dictFilename = static::getDictionaryFilename($language);
-      if (is_file($dictFilename)) $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
-    }
+    $dictFilename = static::getDictionaryFilename($language);
+    if (is_file($dictFilename)) $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
     return $dict;
+  }
+
+  /**
+  * @return array|array<string, array<string, string>>
+  */
+  public static function addToDictionary(string $language, string $contextInner, string $string): void
+  {
+    $dictFilename = static::getDictionaryFilename($language);
+    if (is_file($dictFilename)) {
+      $dict = static::loadDictionary($language);
+      $dict[$contextInner][$string] = '';
+      file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
   }
 
   public function translate(string $string, array $vars = [], string $context = 'root'): string

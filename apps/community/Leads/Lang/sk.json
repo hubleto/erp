@@ -1,95 +1,30 @@
 {
-    "loaders": {
-        "Leads": "Leady",
-        "Leads Archive": "Archív leadov"
+    "manifest": {
+        "Leads": "Leady"
     },
-    "controllers.leads": {
+    "Controllers\\Leads": {
         "Sales": "Obchod",
         "Leads": "Leady"
     },
-    "controllers.leadsArchive": {
+    "Controllers\\LeadsArchive": {
         "Sales": "Obchod",
         "Leads": "Leady",
         "Archive": "Archív"
     },
-    "loader": {
-        "Leads": "",
-        "Lead statuses": ""
-    },
-    "models.leadactivity": {
-        "Activity type": "",
-        "Subject": ""
-    },
-    "models.leadstatus": {
-        "Name": "",
-        "Order": "",
-        "Color": ""
-    },
-    "models.lead": {
-        "Add lead": ""
-    },
-    "controllers.leadstatuses": {
+    "Controllers\\LeadStatuses": {
         "Settings": "",
         "Lead Statuses": ""
     },
-    "manifest": {
-        "Leads": ""
-    },
-    "root": {
-        "Lead statuses": ""
-    },
-    "Models\\Lead": {
-        "Lead Identifier": "",
-        "Title": "",
-        "Customer": "",
-        "Contact person": "",
-        "Price": "",
-        "Currency": "",
-        "Expected close date": "",
-        "Assigned user": "",
-        "Date created": "",
-        "Status": "",
-        "Notes": "",
-        "Source channel": "",
-        "Archived": ""
+    "Models\\LeadActivity": {
+        "Activity type": "",
+        "Subject": ""
     },
     "Models\\LeadStatus": {
-        "Name": "",
-        "Order": "",
-        "Color": ""
+        "Name": "Stav",
+        "Order": "Poradie",
+        "Color": "Farba"
     },
-    "Models\\LeadHistory": {
-        "Change Date": "",
-        "Lead": "",
-        "Description": ""
-    },
-    "Models\\LeadTag": {
-        "Lead": "",
-        "Tag": ""
-    },
-    "Models\\LeadService": {
-        "Lead": "",
-        "Service": "",
-        "Unit Price": "",
-        "Amount": "",
-        "Dicount (%)": "",
-        "Tax (%)": ""
-    },
-    "Models\\LeadActivity": {
-        "Lead": "",
-        "Contact person": "",
-        "Activity type": "",
-        "Subject": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Created by": ""
-    },
-    "Models\\LeadDocument": {
-        "Lead": "",
-        "Document": ""
+    "Models\\Lead": {
+        "Add lead": "Pridať lead"
     }
 }

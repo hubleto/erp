@@ -1,5 +1,8 @@
 {
-    "models.user": {
+    "manifest": {
+        "Settings": "Nastavenia"
+    },
+    "Models\\User": {
         "First name": "Meno",
         "Middle name": "Stredné meno",
         "Last name": "Priezvisko",
@@ -14,52 +17,52 @@
         "Time of last access": "Čas posledného prístupu",
         "Last access IP": "IP adresa posledného prístupu"
     },
-    "models.country": {
+    "Models\\Country": {
         "Country Name": "Štát",
         "Code": "Kód"
     },
-    "models.profile": {
+    "Models\\Profile": {
         "Company": "Firma"
     },
-    "models.activityType": {
+    "Models\\ActivityType": {
         "Type Name": "Typ",
         "Color": "Farba",
         "Shown in Calendar": "Zobraziť v kalendári",
         "Icon": "Ikonka"
     },
-    "models.currency": {
+    "Models\\Currency": {
         "Currency Name": "Mena",
         "Currency Code": "Kód"
     },
-    "models.leadStatus": {
+    "Models\\LeadStatus": {
         "Name": "Názov",
         "Order": "Poradie",
         "Color": "Farba"
     },
-    "models.pipeline": {
+    "Models\\Pipeline": {
         "Name": "Názov",
         "Description": "Popis"
     },
-    "models.pipelineStep": {
+    "Models\\PipelineStep": {
         "Name": "Názov",
         "Order": "Poradie",
         "Company": "Farba"
     },
-    "models.dealStatus": {
+    "Models\\DealStatus": {
         "Name": "Názov",
         "Order": "Poradie",
         "Color": "Farba"
     },
-    "models.tag": {
+    "Models\\Tag": {
         "Name": "Názov",
         "Color": "Farba"
     },
-    "models.setting": {
+    "Models\\Setting": {
         "Key": "Parameter",
         "Value": "Hodnota",
         "Only for user": "Iba pre používateľa"
     },
-    "models.invoiceProfile": {
+    "Models\\InvoiceProfile": {
         "Name": "Názov",
         "Phone": "Telefón",
         "E-mail": "Email",
@@ -78,26 +81,26 @@
         "SWIFT": "SWIFT",
         "Numbering pattern": "Vzorec pre číslovanie"
     },
-    "models.userRole": {
+    "Models\\UserRole": {
         "Role": "Rola",
         "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)"
     },
-    "models.rolePermission": {
+    "Models\\RolePermission": {
         "Permission": "Povolenie",
         "Role": "Rola"
     },
-    "models.permission": {
+    "Models\\Permission": {
         "Permission": "Povolenie"
     },
-    "models.contactType": {
+    "Models\\ContactType": {
         "Name": "Názov",
         "Contact Types": "Typy kontaktov"
     },
-    "controllers.contactTypes": {
+    "Controllers\\ContactTypes": {
         "Settings": "Nastavenia",
         "Contact Types": "Typy kontaktov"
     },
-    "controllers.dashboard": {
+    "Controllers\\Dashboard": {
         "Settings": "Nastavenia",
         "Users": "Používatelia",
         "User Roles": "Používateľské role",
@@ -113,123 +116,20 @@
         "Pipelines": "Pipeline",
         "Invoice profiles": "Fakturačné profily"
     },
-    "controllers.userRoles": {
+    "Controllers\\UserRoles": {
         "Settings": "Nastavenia",
         "User Roles": "Používateľské role"
     },
-    "controllers.countries": {
+    "Controllers\\Countries": {
         "Settings": "Nastavenia",
         "Countries": "Štáty"
     },
-    "loader": {
-        "Settings": "Nastavenia",
-        "Users": "",
-        "User roles": "",
-        "Profiles": "",
-        "General settings": "",
-        "Permissions": "",
-        "Tags": "",
-        "Activity types": "",
-        "Contact types": "",
-        "Countries": "",
-        "Currencies": "",
-        "Pipelines": "",
-        "Invoice profiles": "",
-        "Your companies": "",
-        "Platform config": ""
-    },
-    "controllers.users": {
+    "Controllers\\Users": {
         "Settings": "",
         "Users": ""
     },
-    "models.pipelinestep": {
-        "Name": "",
-        "Order": "",
-        "Company": ""
-    },
-    "models.invoiceprofile": {
-        "Name": "",
-        "Phone": "",
-        "E-mail": "",
-        "WWW": "",
-        "Company ID": "",
-        "Tax ID": "",
-        "VAT ID": "",
-        "Street, line 1": "",
-        "Street, line 2": "",
-        "ZIP": "",
-        "City": "",
-        "Country": "",
-        "Bank name": "",
-        "Account number": "",
-        "Account IBAN": "",
-        "SWIFT": "",
-        "Numbering pattern": ""
-    },
-    "models.activitytype": {
-        "Type Name": "",
-        "Color": "",
-        "Shown in Calendar": "",
-        "Icon": ""
-    },
-    "controllers.activitytypes": {
+    "Controllers\\Activitytypes": {
         "Settings": "",
         "Activity Types": ""
-    },
-    "manifest": {
-        "Settings": ""
-    },
-    "root": {
-        "Users": "",
-        "User roles": "",
-        "Your companies": "",
-        "General settings": "",
-        "Permissions": "",
-        "Tags": "",
-        "Activity types": "",
-        "Contact types": "",
-        "Countries": "",
-        "Currencies": "",
-        "Pipelines": "",
-        "Invoice profiles": "",
-        "Platform config": ""
-    },
-    "Models\\Country": {
-        "Country": "",
-        "Code": ""
-    },
-    "Models\\ContactType": {
-        "Type": ""
-    },
-    "Models\\Tag": {
-        "Name": "",
-        "Color": ""
-    },
-    "Models\\Profile": {
-        "Company": ""
-    },
-    "Models\\ActivityType": {
-        "Type": "",
-        "Color": "",
-        "Show in calendar": "",
-        "Icon": ""
-    },
-    "Models\\Currency": {
-        "Currency": "",
-        "Code": ""
-    },
-    "Models\\Pipeline": {
-        "Name": "",
-        "Description": ""
-    },
-    "Models\\PipelineStep": {
-        "Name": "",
-        "Order": "",
-        "Pipeline": ""
-    },
-    "Models\\Setting": {
-        "Key": "",
-        "Value": "",
-        "Only for user": ""
     }
 }

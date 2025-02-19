@@ -1,4 +1,7 @@
 {
+    "manifest": {
+        "Customers": "Zákazníci"
+    },
     "formCustomer": {
         "Basic Information": "O firme",
         "Activities": "Aktivity",
@@ -13,17 +16,7 @@
         "First name": "Meno",
         "Main Contact": "Hlavný kontakt"
     },
-    "dashboard.home": {
-        "Welcome": "Vitaj",
-        "Upgrade to PRO and get exciting rewards.": "Prejdite na PRO a získajte skvelé odmeny.",
-        "You are using free version of Hubleto. Certain features are unavailable.": "Používate voľne dostupnú verziu Hubleto. Niektoré funkcie nie sú dostupné.",
-        "Upgrade to PRO": "Prejsť na PRO"
-    },
-    "loader": {
-        "Customers": "Firmy",
-        "Contact Persons": "Kontaktné osoby"
-    },
-    "models.customer": {
+    "Models\\Customer": {
         "Add Customer": "Pridať firmu",
         "Name": "Názov",
         "Street Line 1": "Ulica, riadok č. 1",
@@ -42,83 +35,7 @@
         "Customers": "Firmy",
         "Link to shared folder (online storage) with related documents": ""
     },
-    "models.person": {
-        "First name": "Meno",
-        "Last name": "Priezvisko",
-        "Customer": "Firma",
-        "Main Contact": "Hlavný kontakt",
-        "Notes": "Poznámky",
-        "Active": "Aktívny",
-        "Date Created": "Vytvorený",
-        "Contact Persons": "Kontaktné osoby",
-        "Add Contact": "Pridať kontakt",
-        "Emails": "Emaily",
-        "Phone Numbers": "Telefóny"
-    },
-    "models.contact": {
-        "Person": "Osoba",
-        "Contact Category": "Kategória",
-        "Type": "Typ",
-        "Email": "Email",
-        "Phone Number": "Telefón",
-        "Other": "Iné",
-        "Value": "Hodnota"
-    },
-    "controllers.customers": {
-        "Customers": "Firmy"
-    },
-    "controllers.persons": {
-        "Customers": "Zákazníci",
-        "Contact Persons": "Kontaktné osoby"
-    },
-    "models.customeractivity": {
-        "Activity type": "",
-        "Subject": ""
-    },
-    "manifest": {
-        "Customers": ""
-    },
-    "Models\\Customer": {
-        "Name": "",
-        "Street Line 1": "",
-        "Street Line 2": "",
-        "Region": "",
-        "City": "",
-        "Postal Code": "",
-        "Country": "",
-        "VAT ID": "",
-        "Customer ID": "",
-        "Tax ID": "",
-        "Notes": "",
-        "Date Created": "",
-        "Active": "",
-        "Assigned User": "",
-        "Link to shared folder (online storage) with related documents": "",
-        "Customers": "",
-        "Add Customer": ""
-    },
-    "Models\\CustomerActivity": {
-        "Customer": "",
-        "Contact Person": "",
-        "Activity type": "",
-        "Subject": "",
-        "Start Date": "",
-        "Start Time": "",
-        "End Date": "",
-        "End Time": "",
-        "All day": "",
-        "Completed": "",
-        "Created by": ""
-    },
-    "Models\\CustomerDocument": {
-        "Customer": "",
-        "Document": ""
-    },
-    "Models\\CustomerTag": {
-        "Customer": "",
-        "Tag": ""
-    },
     "Controllers\\Customers": {
-        "Customers": ""
+        "Customers": "Firmy"
     }
 }

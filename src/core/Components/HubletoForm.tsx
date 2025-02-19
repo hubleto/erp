@@ -20,6 +20,10 @@ export default class HubletoForm<P, S> extends Form<HubletoFormProps,HubletoForm
 
   renderHeaderLeft(): JSX.Element {
     return <>
+      <div className="pr-4">
+        {this.renderPrevRecordButton()}
+        {this.renderNextRecordButton()}
+      </div>
       {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
     </>;
   }

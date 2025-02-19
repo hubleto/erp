@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Contacts": "Kontakty",
-        "Default customer management and addressbook.": ""
+        "Default customer management and addressbook.": "Adresár a manažment zákazníkov."
     },
     "Components\\FormPerson": {
         "Edit": "Upraviť",

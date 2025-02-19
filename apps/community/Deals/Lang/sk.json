@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Deals": "Dealy",
-        "From deal to purchase.": ""
+        "Deal management. From deal to purchase.": "Manažment obchodných prípadov až po vytvorenie ponuky."
     },
     "Controllers\\Deals": {
         "Sales": "Obchod",

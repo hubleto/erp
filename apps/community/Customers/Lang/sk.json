@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Customers": "Zákazníci",
-        "Default customer management and addressbook.": ""
+        "Default customer management and addressbook.": "Adresár a manažment zákazníkov."
     },
     "Models\\Customer": {
         "Add Customer": "Pridať firmu",

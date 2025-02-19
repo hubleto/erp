@@ -122,7 +122,11 @@
         "Lead Statuses": "Stavy leadov",
         "Deal Statuses": "Stavy dealov",
         "Pipelines": "Pipeline",
-        "Invoice profiles": "Fakturačné profily"
+        "Invoice profiles": "Fakturačné profily",
+        "Manage installed apps": "Spravovať nainštalované aplikácie",
+        "Disable": "Deaktivovať",
+        "Uninstall": "Odinštalovať",
+        "Open": "Otvoriť"
     },
     "Controllers\\UserRoles": {
         "Settings": "Nastavenia",

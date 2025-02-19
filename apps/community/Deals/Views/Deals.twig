@@ -1,1 +1,19 @@
+<div class="grid grid-cols-3 gap-4">
+  <div class="card">
+    <div class="card-header">
+      <h3>Value of Deals</h3>
+    </div>
+    <div class="flex flex-row justify-around">
+      <div>
+          <p>Number of open deals</p>
+          <h2>{{ viewParams.result.count }}</h2>
+        </div>
+      <div>
+          <p>Value of opened deals</p>
+          <h2>{{ viewParams.result.price }}</h2>
+        </div>
+      </div>
+    </div>
+</div>
+
 <app-sales-table-deals int:record-id="{{ viewParams.recordId }}"></app-sales-table-deals>

@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Deals": "Dealy"
+        "Deals": "Dealy",
+        "From deal to purchase.": ""
     },
     "Controllers\\Deals": {
         "Sales": "Obchod",
@@ -72,5 +73,8 @@
     "Models\\DealDocument": {
         "Deal": "",
         "Document": ""
+    },
+    "root": {
+        "Deal statuses": ""
     }
 }

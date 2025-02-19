@@ -99,6 +99,8 @@ class Translator extends \ADIOS\Core\Translator {
       }
     }
 
+    $dictionary['ADIOS\\Core\\Loader'] = \ADIOS\Core\Loader::loadDictionary($language);
+
     return $dictionary;
   }
 
@@ -150,13 +152,12 @@ class Translator extends \ADIOS\Core\Translator {
 
       if (isset($this->dictionary[$contextClass][$contextInner][$string])) { // @phpstan-ignore-line
         $translated = (string) $this->dictionary[$contextClass][$contextInner][$string];
+      } else if (class_exists($contextClass)) {
+        $contextClass::addToDictionary($toLanguage, $contextInner, $string);
       }
 
       if (empty($translated) && $toLanguage != 'en') {
         $translated = $context . '#' . $string;
-        if (class_exists($contextClass)) {
-          $contextClass::addToDictionary($language, $contextInner, $string);
-        }
       }
     }
 

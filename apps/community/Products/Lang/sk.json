@@ -1,5 +1,6 @@
 {
     "manifest": {
-        "Products": "Produkty"
+        "Products": "Produkty",
+        "Default product managment.": ""
     }
 }

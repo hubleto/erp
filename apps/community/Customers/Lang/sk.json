@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Customers": "Zákazníci"
+        "Customers": "Zákazníci",
+        "Default customer management and addressbook.": ""
     },
     "formCustomer": {
         "Basic Information": "O firme",
@@ -37,5 +38,26 @@
     },
     "Controllers\\Customers": {
         "Customers": "Firmy"
+    },
+    "Models\\CustomerActivity": {
+        "Customer": "",
+        "Contact Person": "",
+        "Activity type": "",
+        "Subject": "",
+        "Start Date": "",
+        "Start Time": "",
+        "End Date": "",
+        "End Time": "",
+        "All day": "",
+        "Completed": "",
+        "Created by": ""
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "",
+        "Document": ""
+    },
+    "Models\\CustomerTag": {
+        "Customer": "",
+        "Tag": ""
     }
 }

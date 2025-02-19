@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Settings": "Nastavenia"
+        "Settings": "Nastavenia",
+        "...": ""
     },
     "Models\\User": {
         "First name": "Meno",
@@ -19,7 +20,8 @@
     },
     "Models\\Country": {
         "Country Name": "Štát",
-        "Code": "Kód"
+        "Code": "Kód",
+        "Country": ""
     },
     "Models\\Profile": {
         "Company": "Firma"
@@ -28,11 +30,15 @@
         "Type Name": "Typ",
         "Color": "Farba",
         "Shown in Calendar": "Zobraziť v kalendári",
-        "Icon": "Ikonka"
+        "Icon": "Ikonka",
+        "Type": "",
+        "Show in calendar": ""
     },
     "Models\\Currency": {
         "Currency Name": "Mena",
-        "Currency Code": "Kód"
+        "Currency Code": "Kód",
+        "Currency": "",
+        "Code": ""
     },
     "Models\\LeadStatus": {
         "Name": "Názov",
@@ -46,7 +52,8 @@
     "Models\\PipelineStep": {
         "Name": "Názov",
         "Order": "Poradie",
-        "Company": "Farba"
+        "Company": "Farba",
+        "Pipeline": ""
     },
     "Models\\DealStatus": {
         "Name": "Názov",
@@ -94,7 +101,8 @@
     },
     "Models\\ContactType": {
         "Name": "Názov",
-        "Contact Types": "Typy kontaktov"
+        "Contact Types": "Typy kontaktov",
+        "Type": ""
     },
     "Controllers\\ContactTypes": {
         "Settings": "Nastavenia",
@@ -131,5 +139,20 @@
     "Controllers\\Activitytypes": {
         "Settings": "",
         "Activity Types": ""
+    },
+    "root": {
+        "Users": "",
+        "User roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions": "",
+        "Tags": "",
+        "Activity types": "",
+        "Contact types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Pipelines": "",
+        "Invoice profiles": "",
+        "Platform config": ""
     }
 }

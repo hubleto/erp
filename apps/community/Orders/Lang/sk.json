@@ -1,5 +1,6 @@
 {
     "manifest": {
-        "Orders": "Objednávky"
+        "Orders": "Objednávky",
+        "Default order managment.": ""
     }
 }

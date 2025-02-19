@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Calendar": "Kalendár"
+        "Calendar": "Kalendár",
+        "Default calendar app. Display calendars and events from other apps.": ""
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalendár"

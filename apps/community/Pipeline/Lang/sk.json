@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Pipeline": "Pipeline"
+        "Pipeline": "Pipeline",
+        "...": ""
     },
     "Controllers\\Home": {
         "Sales": "Obchod"

@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Documents": "Dokumenty"
+        "Documents": "Dokumenty",
+        "...": ""
     },
     "Models\\Document": {
         "Document name": "Názov dokumentu",

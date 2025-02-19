@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Services": "Služby"
+        "Services": "Služby",
+        "...": ""
     },
     "Models\\Service": {
         "Name": "Názov",

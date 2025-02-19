@@ -53,16 +53,19 @@ export default class HubletoMain extends ADIOS {
   translate(orig: string, context?: string): string {
     let translated: string = orig;
 
-    if (this.dictionary === null) return orig;
-
     let tmp = (context ?? '').split('::');
     const contextClass = tmp[0];
     const contextInner = tmp[1];
+
+    console.log('translate', contextClass, contextInner, orig, this.dictionary);
+
+    if (this.dictionary === null) return orig;
 
     if (this.dictionary[contextClass] && this.dictionary[contextClass][contextInner]) {
       translated = this.dictionary[contextClass][contextInner][orig] ?? '';
     } else {
       translated = '';
+      this.addToDictionary(orig, context);
     }
 
     if (translated == '') translated = context + '#' + orig;
@@ -81,6 +84,13 @@ export default class HubletoMain extends ADIOS {
       (data: any) => {
         this.dictionary = data;
       }
+    );
+  }
+
+  addToDictionary(orig: string, context: string) {
+    request.get(
+      'api/dictionary',
+      { language: this.language, addNew: { orig: orig, context: context } },
     );
   }
 

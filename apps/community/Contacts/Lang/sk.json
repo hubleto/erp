@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Contacts": "Kontakty"
+        "Contacts": "Kontakty",
+        "Default customer management and addressbook.": ""
     },
     "Components\\FormPerson": {
         "Edit": "Upraviť",
@@ -16,7 +17,7 @@
         "Value": "Hodnota"
     },
     "Components\\TablePersons": {
-      "Start typing to search...": "Hľadať..."
+        "Start typing to search...": "Hľadať..."
     },
     "Models\\Person": {
         "First name": "Meno",
@@ -30,9 +31,25 @@
         "Add Contact": "Pridať kontakt",
         "Emails": "Emaily",
         "Phone Numbers": "Telefóny",
-        "Add": "Pridať"
+        "Add": "Pridať",
+        "Save": "",
+        "Copy": "",
+        "Delete": ""
     },
     "Controllers\\Persons": {
         "Contacts": "Kontakty"
+    },
+    "Models\\Contact": {
+        "Person": "",
+        "Contact Category": "",
+        "Type": "",
+        "Email": "",
+        "Phone Number": "",
+        "Other": "",
+        "Value": ""
+    },
+    "Models\\PersonTag": {
+        "Person": "",
+        "Tag": ""
     }
 }

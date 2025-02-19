@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Dashboard": "Úvod"
+        "Dashboard": "Úvod",
+        "...": ""
     },
     "Controllers\\Home": {
         "Welcome": "Vitajte",

@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Leads": "Leady"
+        "Leads": "Leady",
+        "Management of leads, cold contacts. Convert leads to deals.": ""
     },
     "Controllers\\Leads": {
         "Sales": "Obchod",
@@ -17,7 +18,16 @@
     },
     "Models\\LeadActivity": {
         "Activity type": "",
-        "Subject": ""
+        "Subject": "",
+        "Lead": "",
+        "Contact person": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Created by": ""
     },
     "Models\\LeadStatus": {
         "Name": "Stav",
@@ -25,6 +35,43 @@
         "Color": "Farba"
     },
     "Models\\Lead": {
-        "Add lead": "Pridať lead"
+        "Add lead": "Pridať lead",
+        "Lead Identifier": "",
+        "Title": "",
+        "Customer": "",
+        "Contact person": "",
+        "Price": "",
+        "Currency": "",
+        "Expected close date": "",
+        "Assigned user": "",
+        "Date created": "",
+        "Status": "",
+        "Notes": "",
+        "Source channel": "",
+        "Archived": ""
+    },
+    "root": {
+        "Lead statuses": ""
+    },
+    "Models\\LeadHistory": {
+        "Change Date": "",
+        "Lead": "",
+        "Description": ""
+    },
+    "Models\\LeadTag": {
+        "Lead": "",
+        "Tag": ""
+    },
+    "Models\\LeadService": {
+        "Lead": "",
+        "Service": "",
+        "Unit Price": "",
+        "Amount": "",
+        "Dicount (%)": "",
+        "Tax (%)": ""
+    },
+    "Models\\LeadDocument": {
+        "Lead": "",
+        "Document": ""
     }
 }

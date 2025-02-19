@@ -13,7 +13,7 @@ class Home extends \HubletoMain\Core\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => '', 'content' => $this->translate('Sales') ],
+      [ 'url' => '', 'content' => $this->translate('Pipeline') ],
     ]);
   }
 

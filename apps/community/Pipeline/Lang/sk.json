@@ -4,6 +4,6 @@
         "...": ""
     },
     "Controllers\\Home": {
-        "Sales": "Obchod"
+        "Pipeline": "Pipeline"
     }
 }

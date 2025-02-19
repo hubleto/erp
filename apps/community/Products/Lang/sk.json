@@ -2,5 +2,53 @@
     "manifest": {
         "Products": "Produkty",
         "Default product managment.": ""
+    },
+    "root": {
+        "Products": "Produkty",
+        "Product Groups": "Skupiny produktov",
+        "Suppliers": "Dodávatelia"
+    },
+    "Controllers\\Products": {
+        "Products": "Produkty"
+    },
+    "Models\\Product": {
+        "Title": "",
+        "Assigned User": "",
+        "Supplier": "",
+        "On sale": "",
+        "Image": "",
+        "Description": "",
+        "Number of items in package": "",
+        "Single unit price": "",
+        "Margin": "",
+        "Tax": "",
+        "Single unit order possible": "",
+        "Unit": "",
+        "Packaging": "",
+        "Sale ended": "",
+        "Show price to customer": "",
+        "Set price after reweight?": "",
+        "Needs reordering?": "",
+        "Storage rules": "",
+        "Table": "",
+        "Add product": ""
+    },
+    "Models\\Group": {
+        "Title": ""
+    },
+    "Models\\Supplier": {
+        "Title": "",
+        "Address": "",
+        "City": "",
+        "Postal code": "",
+        "Country": "",
+        "Contact person": "",
+        "Phone number": "",
+        "Supplier email": "",
+        "Order email": "",
+        "Tax ID": "",
+        "Company ID": "",
+        "VAT ID": "",
+        "Payment account number": ""
     }
 }

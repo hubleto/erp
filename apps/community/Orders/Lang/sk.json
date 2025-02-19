@@ -2,5 +2,33 @@
     "manifest": {
         "Orders": "Objednávky",
         "Default order managment.": ""
+    },
+    "Controllers\\Orders": {
+        "Orders": "Objednávky"
+    },
+    "Models\\Order": {
+        "Order number": "Číslo objednávky",
+        "Customer": "Zákazník",
+        "Price": "Cena",
+        "Currency": "Mena",
+        "Order date": "Dátum objednania",
+        "Required delivery date": "Požadovaný dátum dodania",
+        "Shipping information": "Dodacie informácie",
+        "Notes": "Poznámky",
+        "Add order": "Pridať objednávku"
+    },
+    "Models\\OrderProduct": {
+        "Product": "",
+        "Order": "",
+        "Unit price": "",
+        "Amount": "",
+        "Discount (%)": "",
+        "Tax (%)": ""
+    },
+    "Models\\History": {
+        "Order": "",
+        "Short Description": "",
+        "Long Description": "",
+        "Date Time": ""
     }
 }

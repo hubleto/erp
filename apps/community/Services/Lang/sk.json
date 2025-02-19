@@ -9,5 +9,8 @@
         "Currency": "Mena",
         "Unit": "Jednotka",
         "Description": "Popis"
+    },
+    "Controllers\\Services": {
+        "Services": "Služby"
     }
 }

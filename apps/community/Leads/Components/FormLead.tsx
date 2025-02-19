@@ -59,14 +59,14 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
   renderTitle(): JSX.Element {
     if (getUrlParam('recordId') == -1) {
-      return <h2>{globalThis.main.translate('New Lead')}</h2>;
+      return <h2>{this.translate('New Lead')}</h2>;
     } else {
       return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Lead Name]'}</h2>
     }
   }
 
   renderSubTitle(): JSX.Element {
-    return <small>{globalThis.main.translate('Lead')}</small>;
+    return <small>{this.translate('Lead')}</small>;
   }
 
   getLeadSumPrice(recordServices: any) {
@@ -156,7 +156,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     return (
       <>
         <TabView>
-          <TabPanel header={globalThis.main.translate('Lead')}>
+          <TabPanel header={this.translate('Lead')}>
             {R.DEAL && R.is_archived == 1 ?
               <div className='alert-warning mt-2 mb-1'>
                 <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
@@ -219,7 +219,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         {R.DEAL != null ?
                         <a className='btn btn-primary' href={`../deals?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
                           <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                          <span className='text'>Go to Deal</span>
+                          <span className='text'>{this.translate('Go to deal')}</span>
                         </a>
                         :
                         <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
@@ -235,7 +235,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                     {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                     <FormInput title='Tags'>
-                      <InputTags2 {...this.getInputProps()}
+                      <InputTags2 {...this.getInputProps('tags_input')}
                         value={this.state.record.TAGS}
                         readonly={R.is_archived}
                         model='HubletoApp/Community/Settings/Models/Tag'
@@ -410,7 +410,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             </div>
           </TabPanel>
           {showAdditional ?
-            <TabPanel header={globalThis.main.translate('Calendar')}>
+            <TabPanel header={this.translate('Calendar')}>
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
@@ -461,10 +461,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             </TabPanel>
           : null}
           {showAdditional ? (
-            <TabPanel header="Documents">
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Shared documents')}</span></div></div></div>
+            <TabPanel header={this.translate("Documents")}>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
               {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Local documents')}</span></div></div></div>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               <TableLeadDocuments
                 uid={this.props.uid + "_table_lead_document"}
                 data={{ data: R.DOCUMENTS }}
@@ -478,15 +478,15 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   columns: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
                     hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableLeadDocuments, data: any, options: any): JSX.Element => {
-                    return (
-                      <FormInput>
-                        <Hyperlink {...this.getInputProps()}
-                          value={data.DOCUMENT.hyperlink}
-                          readonly={true}
-                        ></Hyperlink>
-                      </FormInput>
-                    )
-                  },},
+                      return (
+                        <FormInput>
+                          <Hyperlink {...this.getInputProps('link_input')}
+                            value={data.DOCUMENT.hyperlink}
+                            readonly={true}
+                          ></Hyperlink>
+                        </FormInput>
+                      )
+                    }},
                   },
                   inputs: {
                     id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
@@ -569,7 +569,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             </TabPanel>
           ) : null}
           {showAdditional ?
-            <TabPanel header={globalThis.main.translate('History')}>
+            <TabPanel header={this.translate('History')}>
               {R.HISTORY.length > 0 ?
                 R.HISTORY.map((history, key) => (
                   <div className='w-full flex flex-row justify-between'>

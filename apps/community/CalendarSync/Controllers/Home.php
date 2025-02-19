@@ -11,4 +11,12 @@ class Home extends \HubletoMain\Core\Controller {
     // $mSource = new Source($this->app);
     // $mSource->install();
   }
+
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
+      [ 'url' => '', 'content' => $this->translate('Calendar Sources') ],
+    ]);
+  }
 }

@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-2">
+<div class="grid md:grid-cols-2 gap-2">
   <div>
     <div class="shadow border border-slate-200 rounded p-12 text-xl">
       {{ translate('Welcome') }}, {{ user.email }}
@@ -8,7 +8,7 @@
       <img src="{{ config.url }}/assets/images/logo-hubleto-s-textom.png">
     </div>
   </div>
-  <div>
+  {# <div>
     {% if not app.isPro %}
       <div class="card border-yellow-100">
         <div class="card-header text-yellow-900 bg-yellow-100 border-yellow-200">
@@ -25,5 +25,5 @@
         </div>
       </div>
     {% endif %}
-  </div>
+  </div> #}
 </div>

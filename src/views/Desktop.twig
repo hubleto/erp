@@ -1,4 +1,4 @@
-{{ setTranslationContext('desktop') }}
+{{ setTranslationContext('HubletoMain::Desktop') }}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -159,18 +159,17 @@
             class="btn {% if app.isActivated %} btn-primary {% endif %} "
             id="sidebar-item-level1-{{ i }}"
             aria-keyshortcuts="Alt+Shift+{{ i }}"
-            href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.name }}"
+            href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
           >
-            <span class="icon"><i class="{{ app.manifest.icon }}"></i></span><span class="text">{{ app.manifest.name }}</span>
+            <span class="icon"><i class="{{ app.manifest.icon }}"></i></span><span class="text">{{ app.manifest.nameTranslated }}</span>
           </a>
           {% set i = i + 1 %}
         {% endfor %}
       </nav>
-
-      {% if viewParams.sidebar.level2Items|length > 0 %}
+      {% if viewParams.activatedApppSidebar|length > 0 %}
         <div>
           <ul>
-            {% for item in viewParams.sidebar.level2Items %}
+            {% for item in viewParams.activatedApppSidebar %}
               {% if item.type == 'link' %}
                 <a class="btn btn-transparent w-full mb-1" href="{{ config.accountUrl }}/{{ item.url }}" title="{{ item.title }}">
                   <span class="icon"><i class="{{ item.icon }}"></i></span>
@@ -208,7 +207,7 @@
 
     <div
       id="app-main-content"
-      class="{% if viewParams.sidebar.level2Items|length == 0 %} sidebar-only-nav {% endif %}"
+      class="{% if viewParams.activatedApppSidebar|length > 0 %} sidebar-two-levels {% endif %}"
     >
       {{ contentHtml|raw }}
     </div>

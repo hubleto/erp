@@ -20,7 +20,7 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
   props: TableContactsProps;
   state: TableContactsState;
 
-  translationContext: string = 'hubleto.app.customers.tableContacts';
+  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableContacts';
 
   constructor(props: TableContactsProps) {
     super(props);

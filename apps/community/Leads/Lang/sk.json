@@ -1,35 +1,87 @@
 {
-    "loaders": {
+    "manifest": {
         "Leads": "Leady",
-        "Leads Archive": "Archív leadov"
+        "Management of leads, cold contacts. Convert leads to deals.": ""
     },
-    "controllers.leads": {
+    "Controllers\\Leads": {
         "Sales": "Obchod",
         "Leads": "Leady"
     },
-    "controllers.leadsArchive": {
+    "Controllers\\LeadsArchive": {
         "Sales": "Obchod",
         "Leads": "Leady",
         "Archive": "Archív"
     },
-    "loader": {
-        "Leads": "",
-        "Lead statuses": ""
-    },
-    "models.leadactivity": {
-        "Activity type": "",
-        "Subject": ""
-    },
-    "models.leadstatus": {
-        "Name": "",
-        "Order": "",
-        "Color": ""
-    },
-    "models.lead": {
-        "Add lead": ""
-    },
-    "controllers.leadstatuses": {
+    "Controllers\\LeadStatuses": {
         "Settings": "",
         "Lead Statuses": ""
+    },
+    "Models\\LeadActivity": {
+        "Activity type": "",
+        "Subject": "",
+        "Lead": "",
+        "Contact person": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Created by": ""
+    },
+    "Models\\LeadStatus": {
+        "Name": "Stav",
+        "Order": "Poradie",
+        "Color": "Farba"
+    },
+    "Models\\Lead": {
+        "Add lead": "Pridať lead",
+        "Lead Identifier": "Identifikátor",
+        "Title": "Názov",
+        "Customer": "Zákazník",
+        "Contact person": "Kontaktná osoba",
+        "Price": "Cena",
+        "Currency": "Mena",
+        "Expected close date": "Predpokladaný dátum ukončenia",
+        "Assigned user": "Zodpovedný",
+        "Date created": "Vytvorený",
+        "Status": "Stav",
+        "Notes": "Poznámky",
+        "Source channel": "Zdroj",
+        "Archived": "Archivovaný",
+        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok"
+    },
+    "root": {
+        "Lead statuses": ""
+    },
+    "Models\\LeadHistory": {
+        "Change Date": "",
+        "Lead": "",
+        "Description": ""
+    },
+    "Models\\LeadTag": {
+        "Lead": "",
+        "Tag": ""
+    },
+    "Models\\LeadService": {
+        "Lead": "",
+        "Service": "",
+        "Unit Price": "",
+        "Amount": "",
+        "Dicount (%)": "",
+        "Tax (%)": ""
+    },
+    "Models\\LeadDocument": {
+        "Lead": "",
+        "Document": ""
+    },
+    "Components\\FormLead": {
+        "Lead": "Lead",
+        "Documents": "Dokumenty",
+        "Calendar": "Kalendár",
+        "Shared documents": "Zdieľané dokumenty",
+        "History": "História",
+        "Local documents": "Dokumenty",
+        "Go to deal": "Prejsť na deal"
     }
 }

@@ -78,6 +78,17 @@ class AppManager
     return $this->apps;
   }
 
+  public function getActivatedApp(): \HubletoMain\Core\App|null
+  {
+    $apps = $this->getRegisteredApps();
+    foreach ($apps as $app) {
+      if (str_starts_with($this->main->requestedUri, $app->getRootUrlSlug())) {
+        return $app;
+      }
+    }
+    return null;
+  }
+
   public function getApp(string $appClass): null|\HubletoMain\Core\App
   {
     if (isset($this->apps[$appClass])) return $this->apps[$appClass];

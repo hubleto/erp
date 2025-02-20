@@ -25,6 +25,12 @@ class Person extends \HubletoMain\Core\Model
     'TAGS' => [ self::HAS_MANY, PersonTag::class, 'id_person', 'id' ],
   ];
 
+  public function translate(string $string, array $vars = []): string
+  {
+    // var_dump($string);
+    return parent::translate($string, $vars);
+  }
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
@@ -41,8 +47,8 @@ class Person extends \HubletoMain\Core\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = $this->translate('Contact Persons');
-    $description->ui['addButtonText'] = $this->translate('Add Contact Person');
+    $description->ui['title'] = $this->translate('Contacts');
+    $description->ui['addButtonText'] = $this->translate('Add Contact');
     $description->ui['showHeader'] = true;
     $description->ui['showFooter'] = false;
     $description->columns['virt_email'] = ["title" => $this->translate("Emails")];

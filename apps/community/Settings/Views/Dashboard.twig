@@ -59,18 +59,27 @@
 </div>
 
 <div class="card mt-2">
-  <div class="card-header">Manage installed apps</div>
+  <div class="card-header">{{ translate('Manage installed apps') }}</div>
   <div class="card-body">
     {% for app in viewParams.main.appManager.getRegisteredApps() %}
-      <div class="my-1 sm:flex flex-wrap sm:flex-nowrap justify-between">
-        <span class="text-sm">{{ app.namespace }}</span>
+      <div class="my-1 sm:flex flex-wrap p-1 sm:flex-nowrap justify-between hover:bg-slate-100">
+        <div class="flex gap-2">
+          <div class="w-10 text-xl">
+            <i class="{{ app.manifest.icon }}"></i>
+          </div>
+          <div class="text-sm">
+            <div><b>{{ app.manifest.nameTranslated }}</b></div>
+            <div>{{ app.manifest.highlightTranslated }}</div>
+            <div class="text-gray-400">{{ app.namespace }}</div>
+          </div>
+        </div>
         <div>
-          <a class="btn btn-transparent" href="{{ app.url }}">
-            <span class="text">Disable</span>
+          <a class="btn btn-transparent" href="{{ app.manifest.rootUrlSlug }}">
+            <span class="text">{{ translate('Open') }}</span>
           </a>
-          <a class="btn btn-red" href="{{ app.url }}">
-            <span class="text">Uninstall</span>
-          </a>
+          {# <a class="btn btn-red" href="{{ app.url }}">
+            <span class="text">{{ translate('Uninstall') }}</span>
+          </a> #}
         </div>
       </div>
     {% endfor %}

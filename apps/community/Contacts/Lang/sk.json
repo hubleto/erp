@@ -1,79 +1,55 @@
 {
-    "formCustomer": {
-        "Basic Information": "O firme",
-        "Activities": "Aktivity",
-        "Leads": "Leady",
-        "Contact Persons": "Kontaktné osoby",
-        "Documents": "Dokumenty",
-        "Customer Information": "O firme",
-        "Deals": "Dealy",
-        "Notes": "Poznámky",
-        "Add contact": "Pridať kontakt",
-        "Last name": "Priezvisko",
-        "First name": "Meno",
-        "Main Contact": "Hlavný kontakt"
+    "manifest": {
+        "Contacts": "Kontakty",
+        "Default customer management and addressbook.": "Adresár a manažment zákazníkov."
     },
-    "dashboard.home": {
-        "Welcome": "Vitaj",
-        "Upgrade to PRO and get exciting rewards.": "Prejdite na PRO a získajte skvelé odmeny.",
-        "You are using free version of Hubleto. Certain features are unavailable.": "Používate voľne dostupnú verziu Hubleto. Niektoré funkcie nie sú dostupné.",
-        "Upgrade to PRO": "Prejsť na PRO"
+    "Components\\FormPerson": {
+        "Edit": "Upraviť",
+        "Save": "Uložiť",
+        "Delete": "Zmazať",
+        "Personal Information": "Osobné údaje",
+        "Category": "Kategória",
+        "Type": "Typ",
+        "Email": "Email",
+        "Phone Number": "Telefón",
+        "Customer": "Zákazník",
+        "Tags": "Tagy",
+        "Value": "Hodnota"
     },
-    "loader": {
-        "Customers": "Zákazníci",
-        "Customers": "Firmy",
-        "Contact Persons": "Kontaktné osoby"
+    "Components\\TablePersons": {
+        "Start typing to search...": "Hľadať..."
     },
-    "models.customer": {
-        "Add Customer": "Pridať firmu",
-        "Name": "Názov",
-        "Street Line 1": "Ulica, riadok č. 1",
-        "Street Line 2": "Ulica, riadok č. 2",
-        "Region": "Región",
-        "City": "Mesto",
-        "Country": "Štát",
-        "Postal Code": "PSČ",
-        "VAT ID": "IČ DPH",
-        "Customer ID": "IČO",
-        "Tax ID": "DIČ",
-        "Notes": "Poznámky",
-        "Date Created": "Vytvorený",
-        "Active": "Aktívny",
-        "Assigned User": "Vlastník",
-        "Customers": "Firmy"
-    },
-    "models.person": {
+    "Models\\Person": {
         "First name": "Meno",
         "Last name": "Priezvisko",
-        "Customer": "Firma",
+        "Customer": "Zákazník",
         "Main Contact": "Hlavný kontakt",
         "Notes": "Poznámky",
         "Active": "Aktívny",
         "Date Created": "Vytvorený",
-        "Contact Persons": "Kontaktné osoby",
-        "Add Contact Person": "Pridať kontaktnú osobu",
+        "Contacts": "Kontakty",
+        "Add Contact": "Pridať kontakt",
         "Emails": "Emaily",
-        "Phone Numbers": "Telefóny"
+        "Phone Numbers": "Telefóny",
+        "Add": "Pridať",
+        "Save": "",
+        "Copy": "",
+        "Delete": ""
     },
-    "models.contact": {
-        "Person": "Osoba",
-        "Contact Category": "Kategória",
-        "Type": "Typ",
-        "Email": "Email",
-        "Phone Number": "Telefón",
-        "Other": "Iné",
-        "Value": "Hodnota"
+    "Controllers\\Persons": {
+        "Contacts": "Kontakty"
     },
-    "controllers.customers": {
-        "Customers": "Zákazníci",
-        "Customers": "Firmy"
+    "Models\\Contact": {
+        "Person": "",
+        "Contact Category": "",
+        "Type": "",
+        "Email": "",
+        "Phone Number": "",
+        "Other": "",
+        "Value": ""
     },
-    "controllers.persons": {
-        "Customers": "Zákazníci",
-        "Contact Persons": "Kontaktné osoby"
-    },
-    "models.customeractivity": {
-        "Activity type": "",
-        "Subject": ""
+    "Models\\PersonTag": {
+        "Person": "",
+        "Tag": ""
     }
 }

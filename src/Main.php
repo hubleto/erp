@@ -148,12 +148,12 @@ class HubletoMain extends \ADIOS\Core\Loader
     return $this->sidebar;
   }
 
-  public function getTranslator(): \HubletoMain\Core\Translator
+  public function createTranslator(): \HubletoMain\Core\Translator
   {
     return new \HubletoMain\Core\Translator($this);
   }
 
-  public function getDesktopController(): \HubletoMain\Core\Controller
+  public function createDesktopController(): \HubletoMain\Core\Controller
   {
     return new \HubletoMain\Core\Controller($this);
   }
@@ -169,6 +169,16 @@ class HubletoMain extends \ADIOS\Core\Loader
     $titles = array_column($this->settings, 'title');
     array_multisort($titles, SORT_ASC, $settings);
     return $settings;
+  }
+
+  public static function loadDictionary(string $language): array
+  {
+    $dict = [];
+    if (strlen($language) == 2) {
+      $dictFilename = __DIR__ . '/../lang/' . $language . '.json';
+      if (is_file($dictFilename)) $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
+    }
+    return $dict;
   }
 
 }

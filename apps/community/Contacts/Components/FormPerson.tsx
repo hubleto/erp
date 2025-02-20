@@ -27,7 +27,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
   props: FormPersonProps;
   state: FormPersonState;
 
-  translationContext: string = 'hubleto.app.customers.formPerson';
+  translationContext: string = 'HubletoApp\\Community\\Contacts\\Loader::Components\\FormPerson';
 
   constructor(props: FormPersonProps) {
     super(props);
@@ -102,13 +102,13 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
             'contacts'
           `}}>
             <div className='card mt-4' style={{gridArea: 'person'}}>
-              <div className='card-header'>Personal Information</div>
+              <div className='card-header'>{this.translate('Personal Information')}</div>
               <div className='card-body flex flex-row gap-2'>
                 <div className="w-1/2">
                   {this.inputWrapper('first_name')}
                   {this.inputWrapper('last_name')}
-                  <FormInput title={"Customer"}>
-                    <Lookup {...this.getInputProps()}
+                  <FormInput title={this.translate("Customer")}>
+                    <Lookup {...this.getInputProps('id_customer')}
                       model='HubletoApp/Community/Contacts/Models/Customer'
                       endpoint={`customers/get-customer`}
                       value={R.id_customer}
@@ -118,8 +118,8 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                       }}
                     ></Lookup>
                   </FormInput>
-                  <FormInput title='Tags'>
-                    <InputTags2 {...this.getInputProps()}
+                  <FormInput title={this.translate('Tags')}>
+                    <InputTags2 {...this.getInputProps('id_person')}
                       value={this.state.record.TAGS}
                       model='HubletoApp/Community/Settings/Models/Tag'
                       targetColumn='id_person'
@@ -145,7 +145,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
               <div className='card-body'>
                 <InputTable
                   uid={this.props.uid + '_table_contacts_input'}
-                  {...this.getInputProps()}
+                  {...this.getInputProps('contacts')}
                   value={R.CONTACTS}
                   onChange={(value: any) => {
                     this.updateRecord({ CONTACTS: value });
@@ -160,22 +160,22 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                       columns: {
                         type: {
                           type: 'varchar',
-                          title: 'Contact Type',
-                          enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
+                          title: this.translate('Type'),
+                          enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
                           //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
                         },
-                        value: { type: 'varchar', title: 'Value'},
-                        id_contact_category: { type: 'lookup', title: 'Contact Category', model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                        value: { type: 'varchar', title: this.translate('Value')},
+                        id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Settings/Models/ContactType' },
                       },
                       inputs: {
                         type: {
                           type: 'varchar',
-                          title: 'Contact Type',
+                          title: this.translate('Type'),
                           enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
                           //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
                         },
-                        value: { type: 'varchar', title: 'Value'},
-                        id_contact_category: { type: 'lookup', title: 'Contact Category', model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                        value: { type: 'varchar', title: this.translate('Value')},
+                        id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Settings/Models/ContactType' },
                       }
                     }}
                   ></TableContacts>

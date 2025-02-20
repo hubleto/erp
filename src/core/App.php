@@ -23,7 +23,8 @@ class App {
   public string $namespace = '';
   public string $fullName = '';
 
-  public string $translationRootContext = '';
+  public \HubletoMain\Core\Sidebar $sidebar;
+
   public string $translationContext = '';
 
   public static function canBeAdded(\HubletoMain $main): bool
@@ -40,20 +41,41 @@ class App {
     $this->rootFolder = pathinfo((string) $reflection->getFilename(), PATHINFO_DIRNAME);
     $this->namespace = $reflection->getNamespaceName();
     $this->fullName = $reflection->getName();
-    $this->translationRootContext = str_replace('.loader', '', strtolower(str_replace('\\', '.', $reflection->getName())));
-    $this->translationContext = $this->translationRootContext . '.loader';
+    $this->translationContext = trim(str_replace('\\', '/', $this->fullName), '/');
 
     $this->viewNamespace = $this->namespace;
     $this->viewNamespace = str_replace('\\', ':', $this->viewNamespace);
 
+    $this->sidebar = new \HubletoMain\Core\Sidebar($this->main);
+
     $manifestFile = $this->rootFolder . '/manifest.yaml';
     if (is_file($manifestFile)) $this->manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($manifestFile));
     else $this->manifest = [];
+
+    $this->validateManifest();
+
+  }
+
+  public function validateManifest() {
+    $missing = [];
+    if (empty($this->manifest['namespace'])) $missing[] = 'namespace';
+    if (empty($this->manifest['rootUrlSlug'])) $missing[] = 'rootUrlSlug';
+    if (empty($this->manifest['name'])) $missing[] = 'name';
+    if (empty($this->manifest['highlight'])) $missing[] = 'highlight';
+    if (empty($this->manifest['icon'])) $missing[] = 'icon';
+    if (count($missing) > 0) throw new \Exception("{$this->fullName}: Some properties are missing in manifest (" . join(", ", $missing) . ").");
   }
 
   public function init(): void
   {
+    $this->manifest['nameTranslated'] = $this->translate($this->manifest['name'], [], 'manifest');
+    $this->manifest['highlightTranslated'] = $this->translate($this->manifest['highlight'], [], 'manifest');
+
     $this->main->addTwigViewNamespace($this->rootFolder . '/Views', $this->viewNamespace);
+  }
+
+  public function getRootUrlSlug(): string {
+    return $this->manifest['rootUrlSlug'] ?? '';
   }
 
   public function setCli(\HubletoMain\Cli\Agent\Loader $cli): void
@@ -87,26 +109,45 @@ class App {
     return $tests;
   }
 
+  public static function getDictionaryFilename(string $language): string
+  {
+    if (strlen($language) == 2) {
+      $appClass = get_called_class();
+      $reflection = new \ReflectionClass(get_called_class());
+      $rootFolder = pathinfo((string) $reflection->getFilename(), PATHINFO_DIRNAME);
+      return $rootFolder . '/Lang/' . $language . '.json';
+    } else {
+      return '';
+    }
+  }
+
   /**
   * @return array|array<string, array<string, string>>
   */
-  public function loadDictionary(string $language): array
+  public static function loadDictionary(string $language): array
   {
-
     $dict = [];
-
-    if (strlen($language) == 2) {
-      $dictFilename = $this->rootFolder . '/Lang/' . $language . '.json';
-      if (is_file($dictFilename)) $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
-      // if (!is_array($dict)) throw new \Exception("Dictionary file {$dictFilename} could not be loaded.");
-    }
-
+    $dictFilename = static::getDictionaryFilename($language);
+    if (is_file($dictFilename)) $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
     return $dict;
   }
 
-  public function translate(string $string, array $vars = []): string
+  /**
+  * @return array|array<string, array<string, string>>
+  */
+  public static function addToDictionary(string $language, string $contextInner, string $string): void
   {
-    return $this->main->translate($string, $vars, $this->translationContext);
+    $dictFilename = static::getDictionaryFilename($language);
+    if (is_file($dictFilename)) {
+      $dict = static::loadDictionary($language);
+      $dict[$contextInner][$string] = '';
+      file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+  }
+
+  public function translate(string $string, array $vars = [], string $context = 'root'): string
+  {
+    return $this->main->translate($string, $vars, $this->fullName . '::' . $context);
   }
 
   public function registerModel(string $model): void

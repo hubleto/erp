@@ -15,7 +15,7 @@ export default class TableDealDocuments extends Table<TableDealDocumentsProps, T
   props: TableDealDocumentsProps;
   state: TableDealDocumentsState;
 
-  translationContext: string = 'mod.core.sales.tableDealDocuments';
+  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\TableDealDocuments';
 
   constructor(props: TableDealDocumentsProps) {
     super(props);

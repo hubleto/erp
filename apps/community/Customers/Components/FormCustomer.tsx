@@ -52,7 +52,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
   props: FormCustomerProps;
   state: FormCustomerState;
 
-  translationContext: string = 'hubleto.app.customers.formCustomer';
+  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\FormCustomer';
 
   constructor(props: FormCustomerProps) {
     super(props);
@@ -176,7 +176,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
     return (
       <>
         <TabView>
-          <TabPanel header={globalThis.main.translate('Customer')}>
+          <TabPanel header={this.translate('Customer')}>
             <div
               className="grid grid-cols-2 gap-1"
               style={{
@@ -208,7 +208,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
                     {this.inputWrapper("is_active")}
                     <FormInput title="Tags">
                       <InputTags2
-                        {...this.getInputProps()}
+                        {...this.getInputProps('color_tags')}
                         value={this.state.record.TAGS}
                         model="HubletoApp/Community/Settings/Models/Tag"
                         targetColumn="id_customer"
@@ -230,7 +230,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
 
               {showAdditional ?
               <div className="card" style={{ gridArea: "contacts" }}>
-                <div className="card-header">{globalThis.main.translate('Contact Persons')}</div>
+                <div className="card-header">{this.translate('Contacts')}</div>
                 <div className="card-body">
                   <TablePersons
                     uid={this.props.uid + "_table_persons"}
@@ -242,17 +242,17 @@ export default class FormCustomer<P, S> extends HubletoForm<
                     parentForm={this}
                     description={{
                       ui: {
-                        addButtonText: globalThis.main.translate('Add contact person'),
+                        addButtonText: this.translate('Add contact'),
                       },
                       columns: {
-                        first_name: { type: "varchar", title: globalThis.main.translate("First name") },
-                        last_name: { type: "varchar", title: globalThis.main.translate("Last name") },
-                        is_main: { type: "boolean", title: globalThis.main.translate("Main Contact") },
+                        first_name: { type: "varchar", title: this.translate("First name") },
+                        last_name: { type: "varchar", title: this.translate("Last name") },
+                        is_main: { type: "boolean", title: this.translate("Main Contact") },
                       },
                       inputs: {
-                        first_name: { type: "varchar", title: globalThis.main.translate("First name") },
-                        last_name: { type: "varchar", title: globalThis.main.translate("Last name") },
-                        is_main: { type: "boolean", title: globalThis.main.translate("Main Contact") },
+                        first_name: { type: "varchar", title: this.translate("First name") },
+                        last_name: { type: "varchar", title: this.translate("Last name") },
+                        is_main: { type: "boolean", title: this.translate("Main Contact") },
                       },
                     }}
                     isUsedAsInput={true}
@@ -274,7 +274,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
                         if (!R.PERSONS) R.PERSONS = [];
                         this.setState({createNewPerson: true} as FormCustomerState);
                       }}>
-                      + {globalThis.main.translate('Add contact person')}
+                      + {this.translate('Add contact')}
                     </a>
                   ) : null}
                   {this.state.createNewPerson ?
@@ -286,7 +286,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
             </div>
           </TabPanel>
           {showAdditional ? (
-            <TabPanel header={globalThis.main.translate('Calendar')}>
+            <TabPanel header={this.translate('Calendar')}>
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
@@ -336,7 +336,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header={globalThis.main.translate('Leads')}>
+            <TabPanel header={this.translate('Leads')}>
               <TableLeads
                 uid={this.props.uid + "_table_leads"}
                 data={{ data: R.LEADS }}
@@ -402,7 +402,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header={globalThis.main.translate('Deals')}>
+            <TabPanel header={this.translate('Deals')}>
               <TableDeals
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DEALS }}
@@ -469,10 +469,10 @@ export default class FormCustomer<P, S> extends HubletoForm<
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header={globalThis.main.translate('Documents')}>
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Shared documents')}</span></div></div></div>
+            <TabPanel header={this.translate('Documents')}>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
               {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-              <div className="divider"><div><div><div></div></div><div><span>{globalThis.main.translate('Local documents')}</span></div></div></div>
+              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               <TableCustomerDocuments
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DOCUMENTS }}
@@ -488,7 +488,7 @@ export default class FormCustomer<P, S> extends HubletoForm<
                     hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableCustomerDocuments, data: any, options: any): JSX.Element => {
                       return (
                         <FormInput>
-                          <Hyperlink {...this.getInputProps()}
+                          <Hyperlink {...this.getInputProps('document_link')}
                             value={data.DOCUMENT.hyperlink}
                             readonly={true}
                           ></Hyperlink>

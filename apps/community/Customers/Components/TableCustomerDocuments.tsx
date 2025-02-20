@@ -15,7 +15,7 @@ export default class TableCustomerDocuments extends Table<TableCustomerDocuments
   props: TableCustomerDocumentsProps;
   state: TableCustomerDocumentsState;
 
-  translationContext: string = 'hubleto.app.customers.tableCustomerDocuments';
+  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableCustomerDocuments';
 
   constructor(props: TableCustomerDocumentsProps) {
     super(props);

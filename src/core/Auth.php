@@ -30,6 +30,9 @@ class Auth extends \ADIOS\Auth\Providers\DefaultProvider {
       $this->user['language'] = $setLanguage;
       $this->updateUserInSession($this->user);
 
+      $date = date("D, d M Y H:i:s", strtotime('+1 year')) . 'GMT';
+      header("Set-Cookie: language={$setLanguage}; EXPIRES{$date};");
+
       $this->main->router->redirectTo('');
     }
 

@@ -20,7 +20,6 @@
         "Upgrade to PRO": "Upgrade auf PRO"
     },
     "loader": {
-        "Customers": "Kunden",
         "Customers": "Unternehmen",
         "Contact Persons": "Kontaktpersonen"
     },
@@ -65,11 +64,14 @@
         "Value": "Wert"
     },
     "controllers.customers": {
-        "Customers": "Kunden",
         "Customers": "Firmen"
     },
     "controllers.persons": {
         "Customers": "Kunden",
         "Contact Persons": "Kontaktpersonen"
+    },
+    "manifest": {
+        "Customers": "",
+        "Default customer management and addressbook.": ""
     }
 }

@@ -148,5 +148,37 @@
     "controllers.users": {
         "Settings": "",
         "Users": ""
+    },
+    "manifest": {
+        "Settings": "",
+        "...": ""
+    },
+    "root": {
+        "Users": "",
+        "User roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions": "",
+        "Tags": "",
+        "Activity types": "",
+        "Contact types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Pipelines": "",
+        "Invoice profiles": "",
+        "Platform config": ""
+    },
+    "Models\\UserRole": {
+        "Role": "",
+        "Grant all permissions (admin role)": ""
+    },
+    "Models\\UserHasRole": {
+        "User": "",
+        "Role": ""
+    },
+    "Controllers\\Dashboard": {
+        "Settings": "",
+        "Manage installed apps": "",
+        "Open": ""
     }
 }

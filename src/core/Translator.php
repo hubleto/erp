@@ -133,7 +133,6 @@ class Translator extends \ADIOS\Core\Translator {
   public function translate(string $string, array $vars = [], string $context = "HubletoMain::root", string $toLanguage = ""): string
   {
     if (empty($toLanguage)) $toLanguage = $this->main->getLanguage();
-
     if (strpos($context, '::')) {
       list($contextClass, $contextInner) = explode('::', $context);
     } else {

@@ -13,7 +13,7 @@ class Installer {
   public string $adminFamilyName = '';
   public string $adminEmail = '';
   public string $adminPassword = '';
-  public string $companyName = '';
+  public string $accountFullName = '';
   public string $accountRewriteBase = '';
   public string $accountFolder = '';
   public string $accountUrl = '';
@@ -68,7 +68,7 @@ class Installer {
     \HubletoMain $main,
     string $env,
     string $uid,
-    string $companyName,
+    string $accountFullName,
     string $adminName,
     string $adminFamilyName,
     string $adminEmail,
@@ -88,7 +88,7 @@ class Installer {
     $this->main = $main;
     $this->env = $env;
     $this->uid = $uid;
-    $this->companyName = $companyName;
+    $this->accountFullName = $accountFullName;
     $this->adminName = $adminName;
     $this->adminFamilyName = $adminFamilyName;
     $this->adminEmail = $adminEmail;
@@ -156,7 +156,7 @@ class Installer {
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
 
-    $idProfile = $mProfile->eloquent->create(['company' => $this->companyName])->id;
+    $idProfile = $mProfile->eloquent->create(['company' => $this->accountFullName])->id;
 
     $idUserAdministrator = $mUser->eloquent->create([
       'login' => $this->adminEmail,
@@ -183,6 +183,7 @@ class Installer {
     $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);
     $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configEnv);
     $configEnv = str_replace('{{ accountUrl }}', $this->accountUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
+    $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
 
     $configEnv .= '' . "\n";
     $configEnv .= '$config[\'apps\'] = [' . "\n";

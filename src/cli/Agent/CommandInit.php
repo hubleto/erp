@@ -27,7 +27,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $dbPassword = null;
     $dbName = null;
     $dbCodepage = null;
-    $companyName = null;
+    $accountFullName = null;
     $adminName = null;
     $adminFamilyName = null;
     $adminEmail = null;
@@ -54,7 +54,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['dbPassword'])) $dbPassword = $config['dbPassword'];
     if (isset($config['dbName'])) $dbName = $config['dbName'];
     if (isset($config['dbCodepage'])) $dbCodepage = $config['dbCodepage'];
-    if (isset($config['companyName'])) $companyName = $config['companyName'];
+    if (isset($config['accountFullName'])) $accountFullName = $config['accountFullName'];
     if (isset($config['adminName'])) $adminName = $config['adminName'];
     if (isset($config['adminFamilyName'])) $adminFamilyName = $config['adminFamilyName'];
     if (isset($config['adminEmail'])) $adminEmail = $config['adminEmail'];
@@ -81,7 +81,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($dbPassword === null) $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
     if ($dbName === null) $dbName = $this->cli->read('ConfigEnv.dbName (database will be created)', 'my_hubleto');
     if ($dbCodepage === null) $dbCodepage = $this->cli->read('ConfigEnv.dbCodepage', 'utf8mb4');
-    if ($companyName === null) $companyName = $this->cli->read('Account.companyName', 'My Company');
+    if ($accountFullName === null) $accountFullName = $this->cli->read('Account.accountFullName', 'My Company');
     if ($adminName === null) $adminName = $this->cli->read('Account.adminName', 'John');
     if ($adminFamilyName === null) $adminFamilyName = $this->cli->read('Account.adminFamilyName', 'Smith');
     if ($adminEmail === null) $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
@@ -110,7 +110,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan('  -> dbPassword = ***' . "\n");
     $this->cli->cyan('  -> dbName = ' . (string) $dbName . "\n");
     $this->cli->cyan('  -> dbCodepage = ' . (string) $dbCodepage . "\n");
-    $this->cli->cyan('  -> companyName = ' . (string) $companyName . "\n");
+    $this->cli->cyan('  -> accountFullName = ' . (string) $accountFullName . "\n");
     $this->cli->cyan('  -> adminName = ' . (string) $adminName . "\n");
     $this->cli->cyan('  -> adminFamilyName = ' . (string) $adminFamilyName . "\n");
     $this->cli->cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
@@ -132,7 +132,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $this->main,
       'local-env',
       '', // uid
-      (string) $companyName,
+      (string) $accountFullName,
       (string) $adminName,
       (string) $adminFamilyName,
       (string) $adminEmail,

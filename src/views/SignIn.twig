@@ -37,6 +37,8 @@
           <input type="hidden" name="set-language" id="set-language" value="{{ app.getLanguage() }}">
           <input type="hidden" name="authUser" id="authUser" value="1">
 
+          <div class="text-xl text-primary text-center pt-8 pb-4">{{ config.accountFullName }}</div>
+
           <input
             type="text" name="login" value="{{ login }}" placeholder="{{ translate("Your email") }}" autofocus
             onkeypress='if (event.keyCode == 13) { document.getElementById("login_form").submit(); }'

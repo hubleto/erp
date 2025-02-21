@@ -180,5 +180,9 @@
         "Settings": "",
         "Manage installed apps": "",
         "Open": ""
+    },
+    "Models\\RolePermission": {
+        "Permission": "",
+        "Role": ""
     }
 }

@@ -57,7 +57,7 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
 
         />
       case "doughnut":
-        return <div className="w-[35vh]">
+        return (<div className="w-[35vh]">
           <Doughnut
             options={{
               plugins: {
@@ -76,6 +76,7 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
               ]
             }}
           />
+          </div>
         );
       case "doughnut":
         return (

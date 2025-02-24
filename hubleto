@@ -46,6 +46,8 @@ if (!empty($action)) {
           case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($cli, $argv); break;
           case 'test': $command = new \HubletoMain\Cli\Agent\App\Test($cli, $argv); break;
           case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($cli, $argv); break;
+          case 'create': $command = new \HubletoMain\Cli\Agent\App\Create($cli, $argv); break;
+          case 'add-repository': $command = new \HubletoMain\Cli\Agent\App\AddRepository($cli, $argv); break;
         }
       break;
       case 'code':

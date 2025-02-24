@@ -161,4 +161,25 @@ class AppManager
     $app->test($test);
   }
 
+  public function createApp(string $appNamespace, string $appFolder): void
+  {
+    if (empty($appFolder)) throw new \Exception('App repository for \'' . $appNamespace . '\' not configured.');
+    if (!is_dir($appFolder)) throw new \Exception('App repository for \'' . $appNamespace . '\' is not a folder.');
+
+    $appNamespace = trim($appNamespace, '\\');
+    $appNamespaceParts = explode('\\', $appNamespace);
+    $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
+
+    $tplVars = [
+      'appNamespace' => $appNamespace,
+      'appName' => $appName,
+      'appRootUrlSlug' => \ADIOS\Core\Helper::str2url($appName),
+    ];
+
+    $this->main->twigLoader->addPath(__DIR__ . '/../code_templates/app', 'appTemplate');
+
+    file_put_contents($appFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
+    file_put_contents($appFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml', $tplVars));
+  }
+
 }

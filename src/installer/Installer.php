@@ -174,7 +174,7 @@ class Installer {
 
   public function getConfigEnvContent(): string
   {
-    $configEnv = (string) file_get_contents(__DIR__ . '/template/ConfigEnv.php.tpl');
+    $configEnv = (string) file_get_contents(__DIR__ . '/../code_templates/project/ConfigEnv.php.tpl');
     $configEnv = str_replace('{{ mainFolder }}', $this->mainFolder, $configEnv);
     $configEnv = str_replace('{{ mainUrl }}', $this->mainUrl, $configEnv);
     $configEnv = str_replace('{{ dbHost }}', $this->main->configAsString('db_host'), $configEnv);
@@ -222,7 +222,7 @@ class Installer {
     file_put_contents($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigEnv.php', $this->getConfigEnvContent());
 
     // index.php
-    $index = (string) file_get_contents(__DIR__ . '/template/index.php.tpl');
+    $index = (string) file_get_contents(__DIR__ . '/code_templates/project/index.php.tpl');
     $index = str_replace('{{ uid }}', $this->uid, $index);
     $index = str_replace('{{ mainFolder }}', $this->mainFolder, $index);
     file_put_contents($this->accountFolder . '/' . $this->uid . '/index.php', $index);
@@ -230,14 +230,14 @@ class Installer {
     // hubleto cli agent
     $hubletoCliAgentFile = $this->accountFolder . '/' . $this->uid . '/hubleto';
     if (!is_file($hubletoCliAgentFile)) {
-      $hubleto = (string) file_get_contents(__DIR__ . '/template/hubleto.tpl');
+      $hubleto = (string) file_get_contents(__DIR__ . '/code_templates/project/hubleto.tpl');
       $hubleto = str_replace('{{ mainFolder }}', $this->mainFolder, $hubleto);
       file_put_contents($hubletoCliAgentFile, $hubleto);
     }
 
     // .htaccess
     copy(
-      __DIR__ . '/template/.htaccess.tpl',
+      __DIR__ . '/code_templates/project/.htaccess.tpl',
       $this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/.htaccess'
     );
   }

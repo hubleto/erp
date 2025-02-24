@@ -1,0 +1,23 @@
+<?php
+
+namespace {{ appNamespace }};
+
+class Loader extends \HubletoMain\Core\App
+{
+
+  public function init(): void
+  {
+    parent::init();
+
+    $this->main->router->httpGet([
+      '/^{{ appRootUrlSlug }}\/?$/' => Controllers\Dashboard::class,
+    ]);
+
+  }
+
+  public function installTables(): void
+  {
+    $mContacts = new Models\Contact($this->main);
+    $mContacts->dropTableIfExists()->install();
+  }
+}

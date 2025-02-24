@@ -14,26 +14,30 @@ class Create extends \HubletoMain\Cli\Agent\Command
     $this->validateAppNamespace($appNamespace);
 
     $appManager = new \HubletoMain\Core\AppManager($this->main);
-    
+    $appName = $appNamespaceParts[2];
+
     switch ($appNamespaceParts[1]) {
       case 'Community':
-        $appName = $appNamespaceParts[2];
-        $appRepositoryFolder = realpath(__DIR__ . '/../../../../apps/community') . '/' . $appName;
+        $appRepositoryFolder = realpath(__DIR__ . '/../../../../apps/community');
       break;
       case 'Enterprise':
         throw new \Exception('Creation of enterprise apps is not implemented yet.');
       break;
       case 'External':
         $externalAppsRepositories = $this->main->configAsArray('externalAppsRepositories');
-        $vendor = $appNamespaceParts[2];
-        $appName = $appNamespaceParts[3];
-        $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]] . '/' . $vendor . '/' . $appName;
+        $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
       break;
     }
 
-    $appManager->createApp($appNamespace, $appRepositoryFolder);
+    if (empty($appRepositoryFolder)) throw new \Exception('App repository for \'' . $appNamespace . '\' not configured.');
+    if (!is_dir($appRepositoryFolder)) throw new \Exception('App repository for \'' . $appNamespace . '\' is not a folder.');
+
+    if (!is_dir($appRepositoryFolder . '/' . $appName)) mkdir($appRepositoryFolder . '/' . $appName);
+
+    $appManager->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
 
     $this->cli->cyan("App {$appNamespace} created successfully.\n");
+    $this->cli->cyan("Run 'php hubleto app install {$appNamespace}\Loader force' to install your new app.\n");
   }
 
   public function validateAppNamespace(string $appNamespace): void

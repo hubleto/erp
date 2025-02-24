@@ -194,7 +194,7 @@ class AppManager
     file_put_contents($appFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
     file_put_contents($appFolder . '/Controllers/Dashboard.php', $this->main->twig->render('@appTemplate/Controllers/Dashboard.php.twig', $tplVars));
     file_put_contents($appFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
-    file_put_contents($appFolder . '/Views/Dashboard.twig', file_get_contents($tplFolder . '/Views/Dashboard.twig'));
+    file_put_contents($appFolder . '/Views/Dashboard.twig', $this->main->twig->render('@appTemplate/Views/Dashboard.twig.twig', $tplVars));
   }
 
 }

@@ -163,8 +163,8 @@ class AppManager
 
   public function createApp(string $appNamespace, string $appFolder): void
   {
-    if (empty($appFolder)) throw new \Exception('App repository for \'' . $appNamespace . '\' not configured.');
-    if (!is_dir($appFolder)) throw new \Exception('App repository for \'' . $appNamespace . '\' is not a folder.');
+    if (empty($appFolder)) throw new \Exception('App folder for \'' . $appNamespace . '\' not configured.');
+    if (!is_dir($appFolder)) throw new \Exception('App folder for \'' . $appNamespace . '\' is not a folder.');
 
     $appNamespace = trim($appNamespace, '\\');
     $appNamespaceParts = explode('\\', $appNamespace);
@@ -176,6 +176,7 @@ class AppManager
       'appRootUrlSlug' => \ADIOS\Core\Helper::str2url($appName),
       'appViewNamespace' => str_replace('\\', ':', $appNamespace),
       'appNamespaceForwardSlash' => str_replace('\\', '/', $appNamespace),
+      'now' => date('Y-m-d H:i:s'),
     ];
 
     $tplFolder = __DIR__ . '/../code_templates/app';

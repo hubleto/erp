@@ -44,6 +44,13 @@ spl_autoload_register(function(string $class) {
     @include($folder . '/' . $app . '.php');
   }
 
+  // community
+  if (str_starts_with($class, 'HubletoApp/Custom/')) {
+    $hubletoMain = $GLOBALS['hubletoMain'];
+    $dir = $hubletoMain->configAsString('accountDir') . '/apps';
+    @include($dir . '/' . str_replace('HubletoApp/Custom/', '', $class) . '.php');
+  }
+
   // installer
   if (str_starts_with($class, 'HubletoMain/Installer/')) {
     @include(__DIR__ . '/installer/' . str_replace('HubletoMain/Installer/', '', $class) . '.php');

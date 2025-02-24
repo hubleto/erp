@@ -14,7 +14,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
     $this->validateAppNamespace($appNamespace);
 
     $appManager = new \HubletoMain\Core\AppManager($this->main);
-    $appName = $appNamespaceParts[2];
+    $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
 
     switch ($appNamespaceParts[1]) {
       case 'Community':
@@ -26,6 +26,12 @@ class Create extends \HubletoMain\Cli\Agent\Command
       case 'External':
         $externalAppsRepositories = $this->main->configAsArray('externalAppsRepositories');
         $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
+      break;
+      case 'Custom':
+        $accountFolder = $this->main->configAsString('accountDir');
+        if (empty($accountFolder) || !is_dir($accountFolder)) throw new \Exception('AccountDir is not properly configured.');
+        if (!is_dir($accountFolder . '/apps')) mkdir($accountFolder . '/apps');
+        $appRepositoryFolder = realpath($accountFolder . '/apps');
       break;
     }
 
@@ -62,8 +68,11 @@ class Create extends \HubletoMain\Cli\Agent\Command
           throw new \Exception('No repository found for vendor \'' . $appNamespaceParts[2] . '\'. Run \'php hubleto app add repository\' to add the repository.');
         }
       break;
+      case 'Custom':
+        if (count($appNamespaceParts) != 3) throw new \Exception('Custom app namespace must have exactly 3 parts');
+      break;
       default:
-        throw new \Exception('Only following types of apps are available: Community, Enterprise or External.');
+        throw new \Exception('Only following types of apps are available: Community, Enterprise, External or Custom.');
       break;
     }
 

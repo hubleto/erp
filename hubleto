@@ -55,9 +55,9 @@ if (!empty($action)) {
           case 'list-templates': $command = new \HubletoMain\Cli\Agent\Code\ListTemplates($cli, $argv); break;
         }
       break;
-      case 'db':
+      case 'project':
         switch ($argv[2]) {
-          case 'generate-demo-data': $command = new \HubletoMain\Cli\Agent\Db\GenerateDemoData($cli, $argv); break;
+          case 'generate-demo-data': $command = new \HubletoMain\Cli\Agent\Project\GenerateDemoData($cli, $argv); break;
         }
       break;
     }

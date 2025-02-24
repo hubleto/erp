@@ -1,5 +1,5 @@
 import HubletoMain from "../../../App";
-import SalesTableDeals from "./Components/TableDeals"
+import SalesTableDeals from "./Components/TableDeals";
 
 export default class Loader {
   uid: string = 'deals';

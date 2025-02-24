@@ -52,6 +52,7 @@ class Installer {
       \HubletoApp\Community\Services\Loader::class => [ 'sidebarOrder' => 210, ],
       \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 220, ],
       \HubletoApp\Community\Deals\Loader::class => [ 'sidebarOrder' => 230, ],
+      \HubletoApp\Community\Goals\Loader::class => [ 'sidebarOrder' => 240, ],
     ],
     'shop' => [
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 310, ],

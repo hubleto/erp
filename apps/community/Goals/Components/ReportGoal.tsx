@@ -12,6 +12,7 @@ export interface ReportGoalProps {
   value: number;
   values: any;
   idGoal: number;
+  idPipeline: number;
 }
 
 export interface ReportGoalState {
@@ -45,7 +46,8 @@ export default class ReportGoal extends Component< ReportGoalProps, ReportGoalSt
         metric: this.props.metric,
         value: this.props.value,
         values: transformedValues,
-        idGoal: this.props.idGoal
+        idGoal: this.props.idGoal,
+        idPipeline: this.props.idPipeline,
       },
       (data: any) => {
         if (data.status == "success") {
@@ -56,7 +58,6 @@ export default class ReportGoal extends Component< ReportGoalProps, ReportGoalSt
   }
 
   render(): JSX.Element {
-
     return (
       <>
         <HubletoChart type={"goals"} data={this.state.data} />

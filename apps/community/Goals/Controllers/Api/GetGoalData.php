@@ -11,8 +11,9 @@ class GetGoalData extends \HubletoMain\Core\Controller
     $apiInterval = new GetIntervalData($this->main);
 
     $interval = $this->main->urlParamAsArray("interval");
-    $user =  $this->main->urlParamAsInteger("user");
+    $idUser =  $this->main->urlParamAsInteger("user");
     $frequency =  $this->main->urlParamAsInteger("frequency");
+    $idPipeline =  $this->main->urlParamAsInteger("idPipeline");
     $metric =  $this->main->urlParamAsInteger("metric");
     $goal =  $this->main->urlParamAsFloat("value");
     $goals =  $this->main->urlParamAsArray("values");
@@ -20,14 +21,21 @@ class GetGoalData extends \HubletoMain\Core\Controller
     switch ($frequency) {
       case 1:
         $weeks = $apiInterval->getWeeks($interval[0], $interval[1]);
-        $data = $this->getData($weeks, $metric, $user, $goal, $goals);
+        $data = $this->getData($weeks, $metric, $idPipeline, $idUser, $goal, $goals);
         return [
           "status" => "success",
           "data" => $data,
         ];
       case 2:
         $months = $apiInterval->getMonths($interval[0], $interval[1]);
-        $data = $this->getData($months, $metric, $user, $goal, $goals);
+        $data = $this->getData($months, $metric, $idPipeline, $idUser, $goal, $goals);
+        return [
+          "status" => "success",
+          "data" => $data,
+        ];
+      case 3:
+        $years = $apiInterval->getYears($interval[0], $interval[1]);
+        $data = $this->getData($years, $metric, $idPipeline, $idUser, $goal, $goals);
         return [
           "status" => "success",
           "data" => $data,
@@ -37,7 +45,7 @@ class GetGoalData extends \HubletoMain\Core\Controller
     }
   }
 
-  function getData(array $intervals, int $metric, int $user, float $goal, $goals) {
+  function getData(array $intervals, int $metric, int $idPipeline, int $idUser, float $goal, $goals) {
 
     $mDeal = new Deal($this->main);
     $dataArray = [
@@ -49,7 +57,8 @@ class GetGoalData extends \HubletoMain\Core\Controller
     foreach ($intervals as $interval) {
       $data = $mDeal->eloquent
         ->whereBetween("date_created", [$interval["date_start"], $interval["date_end"]])
-        ->where("id_user", $user)
+        ->where("id_pipeline", $idPipeline)
+        ->where("id_user", $idUser)
       ;
 
       if ($metric == 1) $data = $data->selectRaw("SUM(price) as value");

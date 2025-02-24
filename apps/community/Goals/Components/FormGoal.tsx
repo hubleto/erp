@@ -1,17 +1,16 @@
+import React, { Component } from 'react';
 import HubletoForm, {HubletoFormProps, HubletoFormState} from '@hubleto/src/core/Components/HubletoForm';
 import { getUrlParam } from 'adios/Helper';
-import React, { Component } from 'react';
 import ReportGoal from './ReportGoal';
 import TableGoalValues from './TableGoalValues';
-import { NonceProvider } from 'react-select';
 import request from 'adios/Request';
 import FormInput from 'adios/FormInput';
 import Boolean from 'adios/Inputs/Boolean';
-import DateTime from 'adios/Inputs/DateTime';
 
 export interface FormGoalProps extends HubletoFormProps {}
 
 export interface FormGoalState extends HubletoFormState {
+  showIntervals: boolean,
 }
 
 export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalState> {
@@ -29,6 +28,7 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
     super(props);
     this.state = {
       ...this.getStateFromProps(props),
+      showIntervals: true,
     }
   }
 
@@ -56,7 +56,8 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
       (data: any) => {
         if (data.status == "success") {
           data.data.map((item, index) => {
-            item.id_goal = { _useMasterRecordId_: true };
+            item.id_goal = { _useMasterRecordId_: true }
+            item.value = 0;
             item.frequency = 1;
           })
           record.VALUES = data.data;
@@ -80,6 +81,7 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
             <div>
               {this.inputWrapper("title")}
               {this.inputWrapper("id_user")}
+              {this.inputWrapper("id_pipeline")}
               <div className='flex flew-row gap-2'>
                 {this.inputWrapper("date_start", {onChange: () => {
                   if (this.state.record.is_indiviual_vals == 1) this.getIntervalData(this.state.record);
@@ -90,7 +92,6 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
               </div>
             </div>
             <div>
-              {this.inputWrapper("id_pipeline")}
               {this.inputWrapper("frequency", {onChange: () => {
                 if (this.state.record.is_indiviual_vals == 1) this.getIntervalData(this.state.record);
               }})}
@@ -116,7 +117,15 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
         </div>
         {R.is_indiviual_vals == 1 ?
           <div className='card'>
-            <div className='card-body flex flex-row justify-center'>
+            <div className='card-header flex flex-row justify-between cursor-pointer'
+              onClick={(e) => this.setState({showIntervals: !this.state.showIntervals} as FormGoalState)}
+            >
+              <span className='text'>Individual intervals</span>
+              <span className='icon'>
+                <i className="fa-solid fa-chevron-down"></i>
+              </span>
+            </div>
+            <div className={`card-body flex flex-row justify-center ${this.state.showIntervals ? "" : "hidden"}`}>
               <TableGoalValues
                 uid={this.props.uid + "_table_goal_values"}
                 data={{ data: R.VALUES }}
@@ -158,7 +167,7 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
         : <></>}
         {showAdditional ?
           <div className='card'>
-            <div className='card-body flex flex-row justify-center'>
+            <div className='card-body flex flex-row justify-center max-h-[35vh]'>
               <ReportGoal
                 interval={[R.date_start, R.date_end]}
                 user={R.id_user}
@@ -167,6 +176,7 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
                 value={R.value}
                 values={R.VALUES.length > 0 ? R.VALUES : null}
                 idGoal={R.id}
+                idPipeline={R.id_pipeline}
               />
             </div>
           </div>

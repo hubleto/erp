@@ -24,6 +24,12 @@ class GetIntervalData extends \HubletoMain\Core\Controller
           "status" => "success",
           "data" => $data,
         ];
+      case 3:
+        $data = $this->getYears($interval[0], $interval[1]);
+        return [
+          "status" => "success",
+          "data" => $data,
+        ];
       default:
         return [];
     }
@@ -31,8 +37,8 @@ class GetIntervalData extends \HubletoMain\Core\Controller
 
   function getWeeks($startDate, $endDate)
   {
-    $start = strtotime($startDate);
-    $end = strtotime($endDate);
+    $start = strtotime("monday this week", strtotime($startDate));
+    $end = strtotime("monday this week", strtotime($endDate));
 
     $weeks = [];
 
@@ -47,17 +53,14 @@ class GetIntervalData extends \HubletoMain\Core\Controller
       $weekEnd = strtotime("sunday this week", $weekStart);
       $weekEndFormatted = date('Y-m-d', $weekEnd);
 
-      // Store unique weeks
-      if (!isset($weeks[$weekNumber])) {
-        $weeks[$weekNumber] = [
-          'key' => "Week ".$weekNumber,
-          'date_start' => $weekStartFormatted,
-          'date_end' => $weekEndFormatted
-        ];
-      }
+      $weeks[] = [
+        'key' => "Week " . $weekNumber,
+        'date_start' => $weekStartFormatted,
+        'date_end' => $weekEndFormatted
+      ];
 
-      // Move to the next day
-      $start = strtotime("+1 days", $start);
+      // Move to the next week
+      $start = strtotime("+1 week", $start);
     }
 
     // Replace the first week's start date with the initial start date
@@ -74,17 +77,15 @@ class GetIntervalData extends \HubletoMain\Core\Controller
     $start = strtotime(date("Y-m-01", strtotime($startDate)));
     $end = strtotime(date("Y-m-01", strtotime($endDate)));
 
-    $year = date("Y", $start);
-
     $months = [];
 
     while ($start <= $end) {
-      $monthNumber = date("n", $start);
-      $month = date("F", $start);
+      $year = date("Y", $start);
+      $monthFullString = date("F", $start);
       $monthStartFormatted  = date("Y-m-01", $start);
       $monthEndFormatted  = date("Y-m-t", $start);
       $months[] = [
-        'key' => $month." ".$year,
+        'key' => $monthFullString . " " . $year,
         'date_start' => $monthStartFormatted,
         'date_end' => $monthEndFormatted
       ];
@@ -99,5 +100,34 @@ class GetIntervalData extends \HubletoMain\Core\Controller
     $months[array_key_last($months)]['date_end'] = $endDate;
 
     return $months;
+  }
+
+  function getYears($startDate, $endDate)
+  {
+    $start = strtotime(date("Y-01-01", strtotime($startDate)));
+    $end = strtotime(date("Y-01-01", strtotime($endDate)));
+
+    $years = [];
+
+    while ($start <= $end) {
+      $year = date("Y", $start);
+      $yearStartFormatted  = date("Y-01-01", $start);
+      $yearEndFormatted  = date("Y-12-t", $start);
+      $years[] = [
+        'key' => "Year " . $year,
+        'date_start' => $yearStartFormatted,
+        'date_end' => $yearEndFormatted
+      ];
+
+      $start = strtotime("+1 year", $start);
+    }
+
+    // Replace the first year's start date with the initial start date
+    $years[array_key_first($years)]['date_start'] = $startDate;
+
+    // Replace the last year's end date with the initial end date
+    $years[array_key_last($years)]['date_end'] = $endDate;
+
+    return $years;
   }
 }

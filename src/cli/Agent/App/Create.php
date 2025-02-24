@@ -16,13 +16,18 @@ class Create extends \HubletoMain\Cli\Agent\Command
     $appManager = new \HubletoMain\Core\AppManager($this->main);
     
     switch ($appNamespaceParts[1]) {
-      case 'Community': $appRepositoryFolder = realpath(__DIR__ . '/../../../..'); break;
+      case 'Community':
+        $appName = $appNamespaceParts[2];
+        $appRepositoryFolder = realpath(__DIR__ . '/../../../../apps/community') . '/' . $appName;
+      break;
       case 'Enterprise':
         throw new \Exception('Creation of enterprise apps is not implemented yet.');
       break;
       case 'External':
         $externalAppsRepositories = $this->main->configAsArray('externalAppsRepositories');
-        $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
+        $vendor = $appNamespaceParts[2];
+        $appName = $appNamespaceParts[3];
+        $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]] . '/' . $vendor . '/' . $appName;
       break;
     }
 

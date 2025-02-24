@@ -174,12 +174,27 @@ class AppManager
       'appNamespace' => $appNamespace,
       'appName' => $appName,
       'appRootUrlSlug' => \ADIOS\Core\Helper::str2url($appName),
+      'appViewNamespace' => str_replace('\\', ':', $appNamespace),
+      'appNamespaceForwardSlash' => str_replace('\\', '/', $appNamespace),
     ];
 
-    $this->main->twigLoader->addPath(__DIR__ . '/../code_templates/app', 'appTemplate');
+    $tplFolder = __DIR__ . '/../code_templates/app';
+
+    $this->main->addTwigViewNamespace($tplFolder, 'appTemplate');
+
+    if (!is_dir($appFolder . '/Controllers')) mkdir($appFolder . '/Controllers');
+    if (!is_dir($appFolder . '/Models')) mkdir($appFolder . '/Models');
+    if (!is_dir($appFolder . '/Models/Eloquent')) mkdir($appFolder . '/Models/Eloquent');
+    if (!is_dir($appFolder . '/Views')) mkdir($appFolder . '/Views');
 
     file_put_contents($appFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
-    file_put_contents($appFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml', $tplVars));
+    file_put_contents($appFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml.twig', $tplVars));
+    file_put_contents($appFolder . '/Models/Contact.php', $this->main->twig->render('@appTemplate/Models/Contact.php.twig', $tplVars));
+    file_put_contents($appFolder . '/Models/Eloquent/Contact.php', $this->main->twig->render('@appTemplate/Models/Eloquent/Contact.php.twig', $tplVars));
+    file_put_contents($appFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
+    file_put_contents($appFolder . '/Controllers/Dashboard.php', $this->main->twig->render('@appTemplate/Controllers/Dashboard.php.twig', $tplVars));
+    file_put_contents($appFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
+    file_put_contents($appFolder . '/Views/Dashboard.twig', file_get_contents($tplFolder . '/Views/Dashboard.twig'));
   }
 
 }

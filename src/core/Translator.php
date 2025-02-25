@@ -39,7 +39,7 @@ class Translator extends \ADIOS\Core\Translator {
 //     if ($class == \HubletoMain\Core::class) {
 //       $dictionaryFilename = __DIR__ . '/../../lang/' . $language . '.json';
 //     } else if (str_starts_with($class, 'HubletoApp')) {
-//       $app = $this->main->appManager->getApp($class);
+//       $app = $this->main->appManager->getAppInstance($class);
 //       $dictionaryFilename = $app->rootFolder . '/lang/' . $language . '.json';
 //     }
 
@@ -113,7 +113,7 @@ class Translator extends \ADIOS\Core\Translator {
     } else if (str_starts_with($contextFileRef, 'HubletoApp')) {
       $appClass = str_replace('/', '\\', $contextFileRef);
   
-      $app = $this->main->appManager->getApp($appClass);
+      $app = $this->main->appManager->getAppInstance($appClass);
       if ($app) {
         $dictionaryFilename = $app->rootFolder . '/Lang/' . $language . '.json';
       }

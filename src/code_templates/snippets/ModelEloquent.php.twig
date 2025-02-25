@@ -5,10 +5,10 @@ namespace {{ appNamespace }}\Models\Eloquent;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use \HubletoApp\Community\Settings\Models\Eloquent\User;
 
-class Contact extends \ADIOS\Core\Model\Eloquent
+class {{ model }} extends \ADIOS\Core\Model\Eloquent
 {
 
-  public $table = 'my_app_contacts';
+  public $table = '{{ sqlTable }}';
 
   public function RESPONSIBLE(): BelongsTo {
     return $this->belongsTo(User::class, 'id_responsible', 'id');

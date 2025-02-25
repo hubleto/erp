@@ -110,21 +110,10 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->reportManager = new \HubletoMain\Core\ReportManager($this);
 
     $this->appManager = new \HubletoMain\Core\AppManager($this);
-
-    foreach ($this->appManager->getInstalledAppClasses() as $appClass => $appConfig) {
-      $appClass = (string) $appClass;
-      if (is_array($appConfig) && $appClass::canBeAdded($this)) {
-        $this->appManager->registerApp($appClass);
-      }
-    }
-
     $this->help = new \HubletoMain\Core\Help($this);
     $this->sidebar = new \HubletoMain\Core\Sidebar($this);
 
-    $apps = $this->appManager->getRegisteredApps();
-    array_walk($apps, function($app) {
-      $app->init();
-    });
+    $this->appManager->init();
 
   }
 

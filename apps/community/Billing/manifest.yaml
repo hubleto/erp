@@ -15,4 +15,4 @@ tags:
   - account
   - currency
 requires:
-  - HubletoApp\Community\Customers\Loader
+  - HubletoApp\Community\Customers

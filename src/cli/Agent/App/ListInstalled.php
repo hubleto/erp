@@ -8,9 +8,9 @@ class ListInstalled extends \HubletoMain\Cli\Agent\Command
   {
     $appManager = new \HubletoMain\Core\AppManager($this->main);
 
-    $apps = $appManager->getInstalledAppClasses();
+    $appNamespaces = $appManager->getInstalledAppNamespaces();
 
     $this->cli->cyan("You have following apps installed:\n");
-    foreach ($apps as $appClass => $appConfig) $this->cli->cyan("  {$appClass}: " . json_encode($appConfig) . "\n");
+    foreach ($appNamespaces as $appNamespace => $appConfig) $this->cli->cyan("  {$appNamespace}: " . json_encode($appConfig) . "\n");
   }
 }

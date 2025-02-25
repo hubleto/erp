@@ -3,7 +3,7 @@
 ## Release v0.8 (not released yet)
 
   * new `<HubletoChart>` React component
-  * `php hubleto app create` command
+  * new `php hubleto app create` and `php hubleto debug router` commands
   * improved translation and language support
 
 ## Release v0.7

@@ -177,7 +177,7 @@ class App {
 
   public function getFullConfigPath(string $path): string
   {
-    return 'apps/' . $this->main->appManager->getAppNameForConfig($this->fullName) . '/' . $path;
+    return 'apps/' . $this->main->appManager->getAppNameForConfig($this->namespace) . '/' . $path;
   }
 
   public function configAsString(string $path, string $defaultValue = ''): string

@@ -145,8 +145,8 @@ class Installer {
   {
     (new \ADIOS\Models\Config($this->main))->install();
 
-    foreach ($this->appsToInstall as $appClass => $appConfig) {
-      $this->main->appManager->installApp($appClass, $appConfig, true);
+    foreach ($this->appsToInstall as $appNamespace => $appConfig) {
+      $this->main->appManager->installApp($appNamespace, $appConfig, true);
     }
   }
 
@@ -184,14 +184,6 @@ class Installer {
     $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configEnv);
     $configEnv = str_replace('{{ accountUrl }}', $this->accountUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
-
-    $configEnv .= '' . "\n";
-    $configEnv .= '$config[\'apps\'] = [' . "\n";
-    foreach ($this->appsToInstall as $appClass => $appConfig) {
-      $configEnv .= '  \\' . $appClass . '::class => ' . var_export($appConfig, true) . ',' . "\n";
-    }
-    $configEnv .= '];' . "\n";
-
 
     if (count($this->externalAppsRepositories) > 0) {
       $configEnv .= '' . "\n";

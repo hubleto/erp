@@ -115,10 +115,19 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
               },
               {
                 type: 'bar',
-                label: 'Value',
+                label: 'Won Deals',
                 backgroundColor: "#66c24f",
-                data: this.props.data ? [...this.props.data.values] : [],
+                data: this.props.data ? [...this.props.data.won] : [],
+                stack: "stack"
               },
+              {
+                type: 'bar',
+                label: 'Pending Deals',
+                backgroundColor: "#cfcecc",
+                data: this.props.data ? [...this.props.data.pending] : [],
+                stack: "stack"
+              },
+
             ],
             labels: this.props.data ? [...this.props.data.labels] : [],
           }}

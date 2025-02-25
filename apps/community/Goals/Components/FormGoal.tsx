@@ -11,6 +11,7 @@ export interface FormGoalProps extends HubletoFormProps {}
 
 export interface FormGoalState extends HubletoFormState {
   showIntervals: boolean,
+  deleteIntervals: boolean,
 }
 
 export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalState> {
@@ -29,6 +30,15 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
     this.state = {
       ...this.getStateFromProps(props),
       showIntervals: true,
+      deleteIntervals: false,
+      customEndpointParams: {deleteIntervals: this.state.deleteIntervals},
+    }
+  }
+
+  getEndpointParams(): object {
+    return {
+      ...super.getEndpointParams(),
+      deleteIntervals: this.state.deleteIntervals,
     }
   }
 
@@ -57,10 +67,10 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
         if (data.status == "success") {
           data.data.map((item, index) => {
             item.id_goal = { _useMasterRecordId_: true }
-            item.value = 0;
+            item.goal = 0;
             item.frequency = 1;
           })
-          record.VALUES = data.data;
+          record.GOALS = data.data;
           this.setState({record: record});
         }
       }
@@ -84,29 +94,42 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
               {this.inputWrapper("id_pipeline")}
               <div className='flex flew-row gap-2'>
                 {this.inputWrapper("date_start", {onChange: () => {
-                  if (this.state.record.is_indiviual_vals == 1) this.getIntervalData(this.state.record);
+                  if (this.state.record.is_individual_goals == 1) {
+                    this.setState({deleteIntervals: true} as FormGoalState);
+                    this.getIntervalData(this.state.record);
+                  }
                 }})}
                 {this.inputWrapper("date_end", {onChange: () => {
-                  if (this.state.record.is_indiviual_vals == 1) this.getIntervalData(this.state.record);
+                  if (this.state.record.is_individual_goals == 1) {
+                    this.setState({deleteIntervals: true} as FormGoalState);
+                    this.getIntervalData(this.state.record);
+                  }
                 }})}
               </div>
             </div>
             <div>
               {this.inputWrapper("frequency", {onChange: () => {
-                if (this.state.record.is_indiviual_vals == 1) this.getIntervalData(this.state.record);
+                if (this.state.record.is_individual_goals == 1) {
+                  this.setState({deleteIntervals: true} as FormGoalState);
+                  this.getIntervalData(this.state.record);
+                }
               }})}
               {this.inputWrapper("metric")}
-              {this.inputWrapper("value")}
-              <FormInput required={true} title={"Set values for individual intervals?"}>
+              {this.inputWrapper("goal")}
+              <FormInput required={true} title={"Set individual goals?"}>
                 <Boolean
-                  uid={this.props.uid + "_input_vals"}
-                  value={R.is_indiviual_vals}
+                  uid={this.props.uid + "_input_goals"}
+                  value={R.is_individual_goals}
                   isInlineEditing={this.state.isInlineEditing}
                   onChange={(value: any) => {
-                    this.updateRecord({is_indiviual_vals: value})
-                    if (value == 1) this.getIntervalData(R);
+                    this.updateRecord({is_individual_goals: value})
+                    if (value == 1) {
+                      this.setState({deleteIntervals: true} as FormGoalState);
+                      this.getIntervalData(R);
+                    }
                     else {
-                      R.VALUES = [];
+                      R.GOALS = [];
+                      this.setState({deleteIntervals: true} as FormGoalState);
                       this.setState({record: R});
                     }
                   }}
@@ -115,12 +138,12 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
             </div>
           </div>
         </div>
-        {R.is_indiviual_vals == 1 ?
+        {R.is_individual_goals == 1 ?
           <div className='card'>
             <div className='card-header flex flex-row justify-between cursor-pointer'
               onClick={(e) => this.setState({showIntervals: !this.state.showIntervals} as FormGoalState)}
             >
-              <span className='text'>Individual intervals</span>
+              <span className='text'>Individual Goals</span>
               <span className='icon'>
                 <i className="fa-solid fa-chevron-down"></i>
               </span>
@@ -128,7 +151,7 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
             <div className={`card-body flex flex-row justify-center ${this.state.showIntervals ? "" : "hidden"}`}>
               <TableGoalValues
                 uid={this.props.uid + "_table_goal_values"}
-                data={{ data: R.VALUES }}
+                data={{ data: R.GOALS }}
                 descriptionSource='props'
                 description={{
                   ui: {
@@ -149,17 +172,17 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
                         return (<>{data.key}</>)
                       }
                     },
-                    value: {type: "float", title: "Value"},
+                    value: {type: "float", title: this.state.record.metric == 1 ? "Value" : "Count"},
                   }
                 }}
                 isUsedAsInput={true}
                 isInlineEditing={this.state.isInlineEditing}
                 onRowClick={() => this.setState({isInlineEditing: true})}
                 onChange={(table: TableGoalValues) => {
-                  this.updateRecord({ VALUES: table.state.data?.data });
+                  this.updateRecord({ GOALS: table.state.data?.data });
                 }}
                 onDeleteSelectionChange={(table: TableGoalValues) => {
-                  this.updateRecord({ VALUES: table.state.data?.data ?? [] });
+                  this.updateRecord({ GOALS: table.state.data?.data ?? [] });
                 }}
               />
             </div>
@@ -173,8 +196,8 @@ export default class FormGoal<P, S> extends HubletoForm<FormGoalProps,FormGoalSt
                 user={R.id_user}
                 frequency={R.frequency}
                 metric={R.metric}
-                value={R.value}
-                values={R.VALUES.length > 0 ? R.VALUES : null}
+                goal={R.goal}
+                goals={R.GOALS.length > 0 ? R.GOALS : null}
                 idGoal={R.id}
                 idPipeline={R.id_pipeline}
               />

@@ -9,8 +9,8 @@ export interface ReportGoalProps {
   user: number;
   frequency: number;
   metric: number;
-  value: number;
-  values: any;
+  goal: number;
+  goals: any;
   idGoal: number;
   idPipeline: number;
 }
@@ -31,9 +31,9 @@ export default class ReportGoal extends Component< ReportGoalProps, ReportGoalSt
   componentDidMount(): void {
     let transformedValues = [];
 
-    if (this.props.values && this.props.values.length > 0) {
-      this.props.values.map((item, index) => {
-        transformedValues.push(item.value);
+    if (this.props.goals && this.props.goals.length > 0) {
+      this.props.goals.map((item, index) => {
+        transformedValues.push(item.goal);
       })
     }
 
@@ -44,8 +44,8 @@ export default class ReportGoal extends Component< ReportGoalProps, ReportGoalSt
         user: this.props.user,
         frequency: this.props.frequency,
         metric: this.props.metric,
-        value: this.props.value,
-        values: transformedValues,
+        goal: this.props.goal,
+        goals: transformedValues,
         idGoal: this.props.idGoal,
         idPipeline: this.props.idPipeline,
       },

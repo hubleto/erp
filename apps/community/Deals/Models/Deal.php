@@ -19,6 +19,8 @@ use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\Integer;
 use Illuminate\Database\Eloquent\Builder;
 
 class Deal extends \HubletoMain\Core\Model
@@ -55,7 +57,7 @@ class Deal extends \HubletoMain\Core\Model
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setRequired()->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
-      'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
+      'date_created' => (new DateTime($this, $this->translate('Date created')))->setRequired()->setReadonly(),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
@@ -63,6 +65,9 @@ class Deal extends \HubletoMain\Core\Model
       'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
       'id_deal_status' => (new Lookup($this, $this->translate('Status'), DealStatus::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'deal_progress' => (new Integer($this, $this->translate('Deal Progress')))
+        ->setEnumValues([0 => "Lost", 1 => "Won", 2 => "Pending"])->setDefaultValue(2),
+      'date_progress_update' => (new DateTime($this, $this->translate('Date of progress update')))->setReadonly(),
     ]);
   }
 
@@ -105,6 +110,7 @@ class Deal extends \HubletoMain\Core\Model
     unset($description->columns['id_lead']);
     unset($description->columns['id_pipeline']);
     unset($description->columns['shared_folder']);
+    unset($description->columns['date_progress_update']);
 
     if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [

@@ -11,7 +11,7 @@ class Goal extends \HubletoMain\Core\ModelEloquent
   public $table = 'goals';
 
   /** @return HasMany<GoalValue, covariant Goal> */
-  public function VALUES(): HasMany {
+  public function GOALS(): HasMany {
     return $this->hasMany(GoalValue::class, 'id_goal', 'id');
   }
 }

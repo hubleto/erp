@@ -13,6 +13,7 @@ import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Docume
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import ModalSimple from 'adios/ModalSimple';
 import Hyperlink from 'adios/Inputs/Hyperlink';
+import moment from 'moment';
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
@@ -66,6 +67,32 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
   renderSubTitle(): JSX.Element {
     return <small>{this.translate('Lead')}</small>;
+  }
+
+  renderHeaderLeft(): JSX.Element {
+    return <>
+      {super.renderHeaderLeft()}
+      <div onClick={() => {
+        let now = moment().unix();
+        let progress_date = moment.unix(now).format('YYYY-MM-DD HH:mm:ss');
+        this.updateRecord({deal_progress: 1, date_progress_update: progress_date});
+        this.saveRecord();
+      }}
+        className={`btn ${this.state.record.deal_progress == 0 ? "!bg-gray-500" : ""}`}
+      >
+        <span className='text'>Won</span>
+      </div>
+      <div onClick={() => {
+          let now = moment().unix();
+          let progress_date = moment.unix(now).format('YYYY-MM-DD HH:mm:ss');
+          this.updateRecord({deal_progress: 0, date_progress_update: progress_date});
+          this.saveRecord();
+        }}
+        className={`btn ${this.state.record.deal_progress == 1 ? "!bg-gray-500" : "!bg-red-500"}`}
+      >
+        <span className='text'>Lost</span>
+      </div>
+    </>
   }
 
   changeDealStatus(idStep: number, R: any) {

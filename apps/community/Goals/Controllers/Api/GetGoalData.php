@@ -15,8 +15,8 @@ class GetGoalData extends \HubletoMain\Core\Controller
     $frequency =  $this->main->urlParamAsInteger("frequency");
     $idPipeline =  $this->main->urlParamAsInteger("idPipeline");
     $metric =  $this->main->urlParamAsInteger("metric");
-    $goal =  $this->main->urlParamAsFloat("value");
-    $goals =  $this->main->urlParamAsArray("values");
+    $goal =  $this->main->urlParamAsFloat("goal");
+    $goals =  $this->main->urlParamAsArray("goals");
 
     switch ($frequency) {
       case 1:
@@ -50,25 +50,45 @@ class GetGoalData extends \HubletoMain\Core\Controller
     $mDeal = new Deal($this->main);
     $dataArray = [
       "labels" => [],
-      "values" => [],
+      "pending" => [],
+      "won" => [],
       "goals" => [],
     ];
 
     foreach ($intervals as $interval) {
-      $data = $mDeal->eloquent
-        ->whereBetween("date_created", [$interval["date_start"], $interval["date_end"]])
+
+      //search for deals that are pending until the end interval
+      //var_dump($interval); exit;
+      $pendingValues = $mDeal->eloquent
+        ->where("deal_progress", 2)
+        ->where("date_created", "<", $interval["date_end"])
         ->where("id_pipeline", $idPipeline)
         ->where("id_user", $idUser)
       ;
 
-      if ($metric == 1) $data = $data->selectRaw("SUM(price) as value");
-      else if ($metric == 2) $data = $data->selectRaw("COUNT(id) as value");
+      if ($metric == 1) $pendingValues = $pendingValues->selectRaw("SUM(price) as value");
+      else if ($metric == 2) $pendingValues = $pendingValues->selectRaw("COUNT(id) as value");
 
-      $data = $data->get()->toArray();
-      $data = reset($data);
+      $pendingValues = $pendingValues->get()->toArray();
+      $pendingValues = reset($pendingValues);
+
+      //search for deals that were won within the interval
+      $wonValues = $mDeal->eloquent
+        ->where("deal_progress", 1)
+        ->whereBetween("date_progress_update", [$interval["date_start"], $interval["date_end"]])
+        ->where("id_pipeline", $idPipeline)
+        ->where("id_user", $idUser)
+      ;
+
+      if ($metric == 1) $wonValues = $wonValues->selectRaw("SUM(price) as value");
+      else if ($metric == 2) $wonValues = $wonValues->selectRaw("COUNT(id) as value");
+
+      $wonValues = $wonValues->get()->toArray();
+      $wonValues = reset($wonValues);
 
       array_push($dataArray["labels"], $interval["key"]);
-      array_push($dataArray["values"], $data["value"]);
+      array_push($dataArray["pending"], $pendingValues["value"] ?? 0) ;
+      array_push($dataArray["won"], $wonValues["value"] ?? 0) ;
       array_push($dataArray["goals"], $goal);
     }
     if (isset($goals) && !empty($goals)) {

@@ -21,7 +21,7 @@ class Goal extends \HubletoMain\Core\Model
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
-    'VALUES' => [ self::HAS_MANY, GoalValue::class, 'id_goal', 'id'],
+    'GOALS' => [ self::HAS_MANY, GoalValue::class, 'id_goal', 'id'],
   ];
 
   public function describeColumns(): array
@@ -36,8 +36,8 @@ class Goal extends \HubletoMain\Core\Model
       'date_end' => (new Date($this, $this->translate('End Date')))->setRequired(),
       'metric' => (new Integer($this, $this->translate('Metric')))->setRequired()
         ->setEnumValues([1 => "Value", 2 => "Count"])->setDefaultValue(1),
-      'value' => (new Decimal($this, $this->translate('Value')))->setDefaultValue(0),
-      'is_indiviual_vals' => (new Boolean($this, $this->translate('Set values for individual intervals?')))->setDefaultValue(0),
+      'goal' => (new Decimal($this, $this->translate('Goal')))->setDefaultValue(0),
+      'is_individual_goals' => (new Boolean($this, $this->translate('Set individual goals?')))->setDefaultValue(0),
     ]);
   }
 
@@ -56,7 +56,7 @@ class Goal extends \HubletoMain\Core\Model
 
   public function onBeforeUpdate(array $record): array
   {
-    if ($record["id"] > 0) {
+    if ($record["id"] > 0 && $this->main->urlParamAsBool('deleteIntervals') == true) {
       $mGoalValue = new GoalValue($this->main);
       $mGoalValue->eloquent
         ->where("id_goal", $record["id"])

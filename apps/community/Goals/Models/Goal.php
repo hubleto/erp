@@ -44,6 +44,11 @@ class Goal extends \HubletoMain\Core\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
+
+    unset($description->columns['id_pipeline']);
+    unset($description->columns['goal']);
+    unset($description->columns['is_individual_goals']);
+
     return $description;
   }
 

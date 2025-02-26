@@ -4,5 +4,9 @@
     },
     "loader": {
         "Calendar": "Kalender"
+    },
+    "manifest": {
+        "Calendar": "",
+        "Default calendar app. Display calendars and events from other apps.": ""
     }
 }

@@ -11,5 +11,12 @@
         "Sales": "Geschäft",
         "Leads": "Leads",
         "Archive": "Archiv"
+    },
+    "manifest": {
+        "Leads": "",
+        "Management of leads, cold contacts. Convert leads to deals.": ""
+    },
+    "root": {
+        "Lead statuses": ""
     }
 }

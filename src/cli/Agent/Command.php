@@ -23,4 +23,5 @@ class Command
   {
     // to be implemented in sub-classes
   }
+
 }

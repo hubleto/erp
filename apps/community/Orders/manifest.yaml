@@ -10,8 +10,8 @@ author:
   linkedin: "https://www.linkedin.com/in/richard-ondrejka/"
 highlight: Default order managment.
 requires:
- - HubletoApp\Community\Products\Loader
- - HubletoApp\Community\Customers\Loader
+ - HubletoApp\Community\Products
+ - HubletoApp\Community\Customers
 tags:
   - e-commerce
   - products

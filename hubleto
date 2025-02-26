@@ -28,12 +28,8 @@ if (!empty($action)) {
   try {
     $command = null;
     switch ($action) {
-      case 'help':
-        $command = new \HubletoMain\Cli\Agent\CommandHelp($cli, $argv);
-      break;
-      case 'init':
-        $command = new \HubletoMain\Cli\Agent\CommandInit($cli, $argv);
-      break;
+      case 'help': $command = new \HubletoMain\Cli\Agent\CommandHelp($cli, $argv); break;
+      case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($cli, $argv); break;
       case 'release':
         switch ($argv[2]) {
           case 'create': $command = new \HubletoMain\Cli\Agent\Release\Create($cli, $argv); break;
@@ -46,16 +42,24 @@ if (!empty($action)) {
           case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($cli, $argv); break;
           case 'test': $command = new \HubletoMain\Cli\Agent\App\Test($cli, $argv); break;
           case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($cli, $argv); break;
+          case 'create': $command = new \HubletoMain\Cli\Agent\App\Create($cli, $argv); break;
+          case 'add-repository': $command = new \HubletoMain\Cli\Agent\App\AddRepository($cli, $argv); break;
         }
       break;
-      case 'code':
+      case 'debug':
         switch ($argv[2]) {
-          case 'list-templates': $command = new \HubletoMain\Cli\Agent\Code\ListTemplates($cli, $argv); break;
+          case 'router': $command = new \HubletoMain\Cli\Agent\Debug\Router($cli, $argv); break;
         }
       break;
-      case 'db':
+      case 'create':
         switch ($argv[2]) {
-          case 'generate-demo-data': $command = new \HubletoMain\Cli\Agent\Db\GenerateDemoData($cli, $argv); break;
+          case 'model': $command = new \HubletoMain\Cli\Agent\Create\Model($cli, $argv); break;
+        }
+      break;
+      case 'project':
+        switch ($argv[2]) {
+          case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($cli, $argv); break;
+          case 'generate-demo-data': $command = new \HubletoMain\Cli\Agent\Project\GenerateDemoData($cli, $argv); break;
         }
       break;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoMain\Cli\Agent\Db;
+namespace HubletoMain\Cli\Agent\Project;
 
 use HubletoApp\Community\Settings\Models\Country;
 use HubletoApp\Community\Settings\Models\Permission;

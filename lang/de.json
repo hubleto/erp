@@ -34,5 +34,18 @@
         "Delete": "Löschen",
         "Start typing to search...": "Suchen...",
         "No data.": "Keine Daten"
+    },
+    "Desktop": {
+        "Upgrade to PRO": "",
+        "Your messages": "",
+        "Help center": "",
+        "Search knowledgebase...": "",
+        "Browse knowledgebase": "",
+        "Hot tips & tricks": "",
+        "No hot tips for this screen": "",
+        "Need more help?": "",
+        "Contact us": "",
+        "Manage your account": "",
+        "Sign out": ""
     }
 }

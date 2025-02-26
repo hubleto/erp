@@ -4,5 +4,9 @@
     },
     "loader": {
         "Sales": ""
+    },
+    "manifest": {
+        "Pipeline": "",
+        "...": ""
     }
 }

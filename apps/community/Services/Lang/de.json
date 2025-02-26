@@ -4,5 +4,9 @@
     },
     "loader": {
         "Services": ""
+    },
+    "manifest": {
+        "Services": "",
+        "...": ""
     }
 }

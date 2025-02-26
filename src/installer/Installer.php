@@ -184,6 +184,8 @@ class Installer {
     $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configEnv);
     $configEnv = str_replace('{{ accountUrl }}', $this->accountUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
+    $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $configEnv);
+    $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $configEnv);
 
     if (count($this->externalAppsRepositories) > 0) {
       $configEnv .= '' . "\n";
@@ -215,7 +217,7 @@ class Installer {
 
     // index.php
     $index = (string) file_get_contents(__DIR__ . '/../code_templates/project/index.php.tpl');
-    $index = str_replace('{{ uid }}', $this->uid, $index);
+    $index = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ mainFolder }}', $this->mainFolder, $index);
     file_put_contents($this->accountFolder . '/' . $this->uid . '/index.php', $index);
 

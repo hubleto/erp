@@ -3,7 +3,7 @@
 namespace {{ appNamespace }}\Models;
 
 use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Number;
+use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Lookup;
 
@@ -24,7 +24,7 @@ class {{ model }} extends \HubletoMain\Core\Model
     return array_merge(parent::describeColumns(), [
       'id_responsible' => (new Lookup($this, $this->translate('Lookup'), User::class)),
       'column_varchar' => (new Varchar($this, $this->translate('Varchar')))->setRequired(),
-      'column_number' => (new Number($this, $this->translate('Number'))),
+      'column_decimal' => (new Decimal($this, $this->translate('Number'))),
       'column_date' => (new Date($this, $this->translate('Date'))),
     ]);
   }

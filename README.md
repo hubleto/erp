@@ -1,3 +1,7 @@
+![](https://img.shields.io/github/v/tag/wai-blue/hubleto)
+![](https://img.shields.io/github/license/wai-blue/hubleto)
+
+
 # Hubleto
 ## Business Application Hub
 
@@ -6,7 +10,7 @@ Hubleto is a `PHP-based opensource CRM and ERP development framework` with lots 
 ```
        ###            | Free community apps (contacts, calendar, leads, deals, orders, ...)
       ###        ##   | Download & install in just few minutes
-     #####      ###   | Uses React, TailwindCSS or Symfony's Twig
+     #####      ###   | Uses React, TailwindCSS, Adios or Symfony's Twig
     ###  ####  ###    | Built-in User management, App management, Settings management
    ###      #####     | Foundation for MVC, Routing, Translations, Authentication, Permissions
    ##        ###      | CLI automation tools
@@ -28,21 +32,29 @@ php hubleto create model "HubletoApp\Custom\HelloWorldApp" "TodoItem"
 
 You can use **models and API of free community apps** available in [apps/community](apps/community) folder, e.g.:
 
-  * [Contacts](apps/community/Contacts) or [Customers](apps/community/Customers) as a full-features addressbook
+  * [Contacts](apps/community/Contacts) or [Customers](apps/community/Customers) as a full-featured addressbook
   * [Settings](apps/community/Settings) for management of your app's settings
   * [Reports](apps/community/Reports) as a centralized report visualizer
   * [Products](apps/community/Products) for your e-commerce project
+  * and more...
 
 ## Developer's guide
 
-https://developer.hubleto.com
-
-Tutorials on how to:
-  * download & install
-  * create your own app
-  * and more...
+Visit https://developer.hubleto.com with tutorials on how to download & install, create your own app, and more.
 
 <img src="https://developer.hubleto.com/book/content/assets/images/create-simple-addressbook.gif" alt="Create simple addressbook CRM" />
+
+## Contribute ![](https://img.shields.io/badge/contributions-welcome-green)
+
+You can contribute in many areas:
+
+  * report [bugs](https://github.com/wai-blue/hubleto/issues) or submit [issues](https://github.com/wai-blue/hubleto/issues)
+  * improve or create new [community apps](apps/community)
+  * review [pull requests](https://github.com/wai-blue/hubleto/pulls)
+  * start [discussions](https://github.com/wai-blue/hubleto/discussions/categories/general)
+  * improve [Hubleto Core](src)
+  * translate [language packs](apps/community/Customers/Lang)
+  * improve [developer's guide](https://developer.hubleto.com)
 
 ## Follow us
 

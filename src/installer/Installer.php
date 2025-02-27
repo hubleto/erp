@@ -146,8 +146,8 @@ class Installer {
   {
     (new \ADIOS\Models\Config($this->main))->install();
 
-    foreach ($this->appsToInstall as $appClass => $appConfig) {
-      $this->main->appManager->installApp($appClass, $appConfig, true);
+    foreach ($this->appsToInstall as $appNamespace => $appConfig) {
+      $this->main->appManager->installApp($appNamespace, $appConfig, true);
     }
   }
 
@@ -175,7 +175,7 @@ class Installer {
 
   public function getConfigEnvContent(): string
   {
-    $configEnv = (string) file_get_contents(__DIR__ . '/template/ConfigEnv.php.tpl');
+    $configEnv = (string) file_get_contents(__DIR__ . '/../code_templates/project/ConfigEnv.php.tpl');
     $configEnv = str_replace('{{ mainFolder }}', $this->mainFolder, $configEnv);
     $configEnv = str_replace('{{ mainUrl }}', $this->mainUrl, $configEnv);
     $configEnv = str_replace('{{ dbHost }}', $this->main->configAsString('db_host'), $configEnv);
@@ -185,14 +185,8 @@ class Installer {
     $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configEnv);
     $configEnv = str_replace('{{ accountUrl }}', $this->accountUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
-
-    $configEnv .= '' . "\n";
-    $configEnv .= '$config[\'apps\'] = [' . "\n";
-    foreach ($this->appsToInstall as $appClass => $appConfig) {
-      $configEnv .= '  \\' . $appClass . '::class => ' . var_export($appConfig, true) . ',' . "\n";
-    }
-    $configEnv .= '];' . "\n";
-
+    $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $configEnv);
+    $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $configEnv);
 
     if (count($this->externalAppsRepositories) > 0) {
       $configEnv .= '' . "\n";
@@ -223,22 +217,22 @@ class Installer {
     file_put_contents($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigEnv.php', $this->getConfigEnvContent());
 
     // index.php
-    $index = (string) file_get_contents(__DIR__ . '/template/index.php.tpl');
-    $index = str_replace('{{ uid }}', $this->uid, $index);
+    $index = (string) file_get_contents(__DIR__ . '/../code_templates/project/index.php.tpl');
+    $index = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ mainFolder }}', $this->mainFolder, $index);
     file_put_contents($this->accountFolder . '/' . $this->uid . '/index.php', $index);
 
     // hubleto cli agent
     $hubletoCliAgentFile = $this->accountFolder . '/' . $this->uid . '/hubleto';
     if (!is_file($hubletoCliAgentFile)) {
-      $hubleto = (string) file_get_contents(__DIR__ . '/template/hubleto.tpl');
+      $hubleto = (string) file_get_contents(__DIR__ . '/../code_templates/project/hubleto.tpl');
       $hubleto = str_replace('{{ mainFolder }}', $this->mainFolder, $hubleto);
       file_put_contents($hubletoCliAgentFile, $hubleto);
     }
 
     // .htaccess
     copy(
-      __DIR__ . '/template/.htaccess.tpl',
+      __DIR__ . '/../code_templates/project/.htaccess.tpl',
       $this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/.htaccess'
     );
   }

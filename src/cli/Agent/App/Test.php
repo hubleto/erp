@@ -6,21 +6,21 @@ class Test extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appClass = (string) ($this->arguments[3] ?? '');
+    $appNamespace = (string) ($this->arguments[3] ?? '');
     $test = (string) ($this->arguments[4] ?? '');
 
     $appManager = new \HubletoMain\Core\AppManager($this->main);
     $appManager->setCli($this->cli);
 
-    if (empty($appClass)) {
+    if (empty($appappNamespaceClass)) {
       $this->cli->white("Usage:\n");
-      $this->cli->white("  Run a specific test: php hubleto app test <appClass> <testName>\n");
-      $this->cli->white("  Run all tests in app: php hubleto app test <appClass>\n");
+      $this->cli->white("  Run a specific test: php hubleto app test <appNamespace> <testName>\n");
+      $this->cli->white("  Run all tests in app: php hubleto app test <appNamespace>\n");
       return;
     }
     
     if (empty($test)) {
-      $app = $appManager->createAppInstance($appClass);
+      $app = $appManager->createAppInstance($appNamespace);
       $tests = $app->getAllTests();
     } else {
       $tests = [$test];
@@ -31,12 +31,12 @@ class Test extends \HubletoMain\Cli\Agent\Command
     try {
 
       foreach ($tests as $test) {
-        $appManager->testApp($appClass, $test);
-        $this->cli->cyan("✓ {$appClass} passed successfully test '{$test}'.\n");
+        $appManager->testApp($appNamespace, $test);
+        $this->cli->cyan("✓ {$appNamespace} passed successfully test '{$test}'.\n");
       }
 
     } catch (\Throwable $e) {
-      $this->cli->red("✕ {$appClass} test '{$test}' failed.\n");
+      $this->cli->red("✕ {$appNamespace} test '{$test}' failed.\n");
       $this->cli->red($e->getMessage() . "\n");
       $this->cli->red($e->getTraceAsString() . "\n");
     }

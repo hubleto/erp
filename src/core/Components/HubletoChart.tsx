@@ -37,6 +37,30 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
   render(): JSX.Element {
     switch (this.state.type) {
       case "bar":
+        return (
+          <Bar
+            width={0}
+            height={0}
+            options={{
+              scales: {
+                x: {
+                  ticks: {
+                    display: false,
+                  },
+                },
+                y: {
+                  beginAtZero: true,
+                },
+              },
+            }}
+            data={{
+              labels: this.state.data != null ? [...this.state.data.labels] : [],
+              datasets: [
+                {
+                  data: this.state.data != null ? [...this.state.data.values] : [],
+                  backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
+                },
+              ],
         return <Bar
           options={{
             scales: {
@@ -136,5 +160,4 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
         return <></>;
     }
   }
-
 }

@@ -13,6 +13,7 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
     3 => ">",
     4 => "<",
     5 => "LIKE",
+    6 => "BETWEEN",
   ];
 
   public function renderJson(): ?array
@@ -44,6 +45,7 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
       $query = $model->eloquent->selectRaw($function." as function, ".$groupBy);
       foreach ($config["searchGroups"] as $searchGroup) {
         if ($searchGroup["option"] == 5) $query = $query->where($searchGroup["fieldName"], GetTemplateChartData::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
+        else if ($searchGroup["option"] == 6) $query = $query->whereBetween($searchGroup["fieldName"], [$searchGroup["value"], $searchGroup["value2"]]);
         else $query = $query->where($searchGroup["fieldName"], GetTemplateChartData::OPERATIONS[$searchGroup["option"]], $searchGroup["value"]);
       }
 

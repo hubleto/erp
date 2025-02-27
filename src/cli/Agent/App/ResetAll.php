@@ -14,15 +14,15 @@ class ResetAll extends \HubletoMain\Cli\Agent\Command
     require_once($this->main->configAsString('dir', __DIR__) . "/ConfigApp.php");
     require_once($this->main->configAsString('accountDir', __DIR__) . "/ConfigEnv.php");
 
-    foreach ($appManager->getInstalledAppClasses() as $appClass => $appConfig) {
+    foreach ($appManager->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
       try {
-        if (!$appManager->isAppInstalled($appClass)) {
-          $appManager->installApp($appClass, []);
+        if (!$appManager->isAppInstalled($appNamespace)) {
+          $appManager->installApp($appNamespace, []);
         }
       } catch (\Throwable $e) {
         $this->cli->red($e->getMessage() . "\n");
         $this->cli->red($e->getTraceAsString() . "\n");
-        $this->cli->red("\n\nThe error was caused by: " . $appClass . "\n");
+        $this->cli->red("\n\nThe error was caused by: " . $appNamespace . "\n");
         $this->cli->red("Verify, whether all your apps have correct dependencies or contact the developers.\n");
       }
     }

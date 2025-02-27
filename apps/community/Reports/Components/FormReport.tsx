@@ -21,7 +21,7 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
     super(props);
 
     this.state = {
-      selectedGraph: "doughnut",
+      selectedGraph: "bar",
       data: null,
     };
   }
@@ -39,6 +39,7 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
           2: "Is Not",
           3: "More Than",
           4: "Less Than",
+          6: "Between",
         };
       case "varchar":
       case "text":
@@ -67,19 +68,26 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
     }
   }
 
-  renderInputElement(field: any, value: any): JSX.Element {
-
+  renderInputElement(field: any, value: any, value2?: any): JSX.Element {
     switch (field.type) {
       case "int":
       case "float":
         return <div className="input-wrapper">
-          <label className="input-label">Search</label>
+          <label className="input-label">{value2 ? "Search Between": "Search"}</label>
           <input
             readOnly={this.props.readonly ?? false}
             value={value ?? null}
             className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
             type="number"
           />
+          {value2 ?
+            <input
+              readOnly={this.props.readonly ?? false}
+              value={value2 ?? null}
+              className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+              type="number"
+            />
+          : <></>}
         </div>
       case "varchar":
       case "text":
@@ -96,13 +104,21 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
       case "datetime":
       case "time":
         return <div className="input-wrapper">
-          <label className="input-label">Search</label>
+          <label className="input-label">{value2 ? "Search Between": "Search"}</label>
           <input
             readOnly={this.props.readonly ?? false}
             value={value ?? null}
             className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
             type={field.type}
           />
+          {value2 ?
+            <input
+              readOnly={this.props.readonly ?? false}
+              value={value2 ?? null}
+              className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
+              type={field.type}
+            />
+          : <></>}
         </div>
       case "lookup":
         return <div className="input-wrapper">
@@ -140,18 +156,6 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
         this.setState({data: chartData.data});
       }
     );
-    // fetch(globalThis.main.config.rewriteBase
-    //   + '/api/get-chart-data?'
-    //   + 'config=' + JSON.stringify(this.props.config)
-    // )
-    // .then(response => {
-    //   if (!response.ok) {
-    //     throw new Error('Network response was not ok ' + response.statusText);
-    //   }
-    //   return response.json();
-    // }).then(returnData => {
-    //   this.setState({data: returnData.data})
-    // })
   }
 
   render(): JSX.Element {
@@ -195,10 +199,9 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
                 </select>
               </div>
               {/* --- SEARCH INPUT --- */}
-              {this.renderInputElement(searchGroups[key].field, searchGroups[key].value)}
+              {this.renderInputElement(searchGroups[key].field, searchGroups[key].value, searchGroups[key].value2 ?? null)}
             </div>
           ))}
-
 
           {/* RESULT TO RETURN */}
           <div className="flex flex-row items-end gap-2">
@@ -230,8 +233,9 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
             </div>
           </div>
         </div>
+
+        {/* --- BUTTONS --- */}
         <div className="card card-body">
-          {/* --- BUTTONS --- */}
           <div className="flex flex-row gap-1">
             {this.props.readonly ? <></> :
               <button onClick={() => this.requestData()} className="btn btn-primary"><span className="icon"><i className="fas fa-search"></i></span><span className="text">Search</span></button>

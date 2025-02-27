@@ -15,5 +15,5 @@ tags:
   - leads
   - deals
 requires:
-  - HubletoApp\Community\Customers\Loader
-  - HubletoApp\Community\Calendar\Loader
+  - HubletoApp\Community\Customers
+  - HubletoApp\Community\Calendar

@@ -25,7 +25,7 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
     $this->main->calendarManager->addCalendar(Calendar::class);
-    $this->main->reportManager->addReport(Reports\TodayRevenue::class);
+    $this->main->reportManager->addReport(Reports\MonthlyRevenue::class);
   }
 
   public function installTables(): void

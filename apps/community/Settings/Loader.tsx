@@ -1,13 +1,12 @@
-import HubletoMain from "../../../App";
-import CoreSettingsFormUser from "./Components/FormUser"
-import CoreSettingsTablePipelines from "./Components/TablePipelines"
-import CoreSettingsTableUserRoles from "./Components/TableUserRoles"
+// import HubletoMain from "@hubleto/src/Main";
+import SettingsFormUser from "./Components/FormUser"
+import SettingsTablePipelines from "./Components/TablePipelines"
+import SettingsTableUserRoles from "./Components/TableUserRoles"
 
 export default class Loader {
-  uid: string = 'settings';
-  constructor(app: HubletoMain) {
-    app.registerReactComponent('CoreSettingsFormUser', CoreSettingsFormUser);
-    app.registerReactComponent('CoreSettingsTablePipelines', CoreSettingsTablePipelines);
-    app.registerReactComponent('CoreSettingsTableUserRoles', CoreSettingsTableUserRoles);
+  constructor() {
+    globalThis.main.registerReactComponent('SettingsFormUser', SettingsFormUser);
+    globalThis.main.registerReactComponent('SettingsTablePipelines', SettingsTablePipelines);
+    globalThis.main.registerReactComponent('SettingsTableUserRoles', SettingsTableUserRoles);
   }
 }

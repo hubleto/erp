@@ -4,17 +4,16 @@ module.exports = (env, arg) => {
   return {
     // stats: 'verbose',
     entry: {
-      adios: ['./vendor/wai-blue/adios/src/Components/Loader.tsx'],
-      app: ['./index.tsx'],
+      hubleto: ['./index.tsx'],
     },
     output: {
       path: path.resolve(__dirname, 'assets/compiled/js'),
       filename: '[name].js',
       clean: true
     },
-    optimization: {
-      minimize: true,
-    },
+    // optimization: {
+    //   minimize: true,
+    // },
     module: {
       rules: [
         {
@@ -27,6 +26,22 @@ module.exports = (env, arg) => {
           use: ['style-loader', 'css-loader', 'sass-loader'],
         }
       ],
+    },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          },
+          adios: {
+            test: /[\\/](ADIOS|adios)[\\/]/,
+            name: 'adios',
+            chunks: 'all'
+          }
+        }
+      }
     },
     resolve: {
       modules: [ path.resolve(__dirname, './node_modules') ],

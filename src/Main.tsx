@@ -57,7 +57,7 @@ export default class HubletoMain extends ADIOS {
     const contextClass = tmp[0];
     const contextInner = tmp[1];
 
-    console.log('translate', contextClass, contextInner, orig, this.dictionary);
+    // console.log('translate', contextClass, contextInner, orig, this.dictionary);
 
     if (this.dictionary === null) return orig;
 
@@ -94,9 +94,8 @@ export default class HubletoMain extends ADIOS {
     );
   }
 
-  registerApp(appClass) {
-    const app = new appClass(this);
-    if (!app.uid || app.uid == '') console.error(appClass + ': app\'s UID is empty.');
-    this.apps[app.uid] = app
+  registerApp(appUid, appClass) {
+    // console.log('registeringApp', appUid, appClass);
+    this.apps[appUid] = new appClass(this);
   }
 }

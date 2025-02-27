@@ -1,9 +1,8 @@
-import HubletoMain from "../../../App";
+// import HubletoMain from "@hubleto/src/Main";
 import FormReport from "../../community/Reports/Components/FormReport";
 
 export default class Loader {
-  uid: string = 'report';
-  constructor(app: HubletoMain) {
-    app.registerReactComponent('FormReport', FormReport);
+  constructor() {
+    globalThis.main.registerReactComponent('FormReport', FormReport);
   }
 }

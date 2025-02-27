@@ -61,46 +61,8 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
                   backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
                 },
               ],
-        return <Bar
-          options={{
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          }}
-          data={{
-            labels: this.state.data != null ? [...this.state.data.labels] : [],
-            datasets: [
-              {
-                data: this.state.data != null ? [...this.state.data.values] : [],
-                backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
-              }
-            ]
-          }}
-
-        />
-      case "doughnut":
-        return (<div className="w-[35vh]">
-          <Doughnut
-            options={{
-              plugins: {
-                legend: {
-                  position: "left",
-                }
-              }
-            }}
-            data={ {
-              labels: this.state.data ? [...this.state.data.labels] : [],
-              datasets: [
-                {
-                  data: this.state.data ? [...this.state.data.values] : [],
-                  backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
-                }
-              ]
             }}
           />
-          </div>
         );
       case "doughnut":
         return (

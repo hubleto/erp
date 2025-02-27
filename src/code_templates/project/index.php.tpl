@@ -10,7 +10,6 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE ^ E_WARNING);
 define('_ADIOS_ID', 'HubletoMain-{{ accountUid }}');
 
 // load configs
-require_once("{{ mainFolder }}/ConfigApp.php");
 require_once(__DIR__ . "/ConfigEnv.php");
 
 // load autoloaders

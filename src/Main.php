@@ -2,9 +2,6 @@
 
 use \ADIOS\Core\Helper;
 
-// load configs
-require_once(__DIR__ . "/../ConfigApp.php");
-
 // autoloader pre HubletoMain
 spl_autoload_register(function(string $class) {
   $class = str_replace('\\', '/', $class);
@@ -85,6 +82,9 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     parent::__construct($config, $mode);
 
+    $this->config['defaultSignInView'] = '@hubleto/SignIn.twig';
+    $this->config['defaultDesktopView'] = '@hubleto/Desktop.twig';
+
     $tmp =  strpos($this->requestedUri, '/');
     if ($tmp === false) $this->requestedUriFirstPart = $this->requestedUri;
     else $this->requestedUriFirstPart = substr($this->requestedUri, 0, (int) strpos($this->requestedUri, '/'));
@@ -142,6 +142,21 @@ class HubletoMain extends \ADIOS\Core\Loader
   public function getSidebar(): \HubletoMain\Core\Sidebar
   {
     return $this->sidebar;
+  }
+
+  public function createAuthProvider(): \ADIOS\Core\Auth
+  {
+    return new \HubletoMain\Core\AuthProvider($this, []);
+  }
+
+  public function createRouter(): \ADIOS\Core\Router
+  {
+    return new \HubletoMain\Core\Router($this);
+  }
+
+  public function createPermissionsManager(): \ADIOS\Core\Permissions
+  {
+    return new \HubletoMain\Core\Permissions($this);
   }
 
   public function createTranslator(): \HubletoMain\Core\Translator

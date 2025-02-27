@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Core;
 
-class Auth extends \ADIOS\Auth\Providers\DefaultProvider {
+class AuthProvider extends \ADIOS\Auth\Providers\DefaultProvider {
 
   public \HubletoMain $main;
 
@@ -10,6 +10,10 @@ class Auth extends \ADIOS\Auth\Providers\DefaultProvider {
   {
     parent::__construct($main);
     $this->main = $main;
+
+    $this->app->registerModel(\HubletoApp\Community\Settings\Models\User::class);
+    $this->app->registerModel(\HubletoApp\Community\Settings\Models\UserRole::class);
+    $this->app->registerModel(\HubletoApp\Community\Settings\Models\UserHasRole::class);
   }
 
   public function auth(): void

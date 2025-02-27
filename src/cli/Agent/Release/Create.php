@@ -47,7 +47,6 @@ class Create extends \HubletoMain\Cli\Agent\Command
     $zip->addFile($hubletoRootFolder . '/hubleto', 'hubleto');
     $zip->addFile($hubletoRootFolder . '/LICENSE', 'LICENSE');
     $zip->addFile($hubletoRootFolder . '/README.md', 'README.md');
-    $zip->addFile($hubletoRootFolder . '/ConfigApp.php', 'ConfigApp.php');
     $zip->addFile($hubletoRootFolder . '/index.php', 'index.php');
 
     // Zip archive will be created only after closing object

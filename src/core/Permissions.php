@@ -15,12 +15,13 @@ class Permissions extends \ADIOS\Core\Permissions {
   function __construct(\HubletoMain $main)
   {
     $this->main = $main;
-
     parent::__construct($main);
+  }
 
-    if ($this->main->configAsString('db_name') !== '') {
-      $this->administratorRoles = $this->loadAdministratorRoles();
-    }
+  public function init(): void
+  {
+    parent::init();
+    $this->administratorRoles = $this->loadAdministratorRoles();
   }
 
   public function DANGEROUS__grantAllPermissions() {
@@ -33,13 +34,9 @@ class Permissions extends \ADIOS\Core\Permissions {
 
   public function loadAdministratorRoles(): array
   {
+    if (!isset($this->app->pdo) || !$this->app->pdo->isConnected) return [];
     $mUserRole = new UserRole($this->main);
-    $administratorRoles = (array) $mUserRole->eloquent
-      ->where("grant_all", 1)
-      ->pluck("id")
-      ->toArray()
-    ;
-
+    $administratorRoles = \ADIOS\Core\Helper::pluck('id', $this->app->pdo->fetchAll("select id from `{$mUserRole->table}` where grant_all = 1"));
     return $administratorRoles;
   }
 
@@ -50,15 +47,10 @@ class Permissions extends \ADIOS\Core\Permissions {
   {
     $permissions = parent::loadPermissions();
 
-    if ($this->main->configAsString('db_name') !== '') {
+    if (isset($this->app->pdo) && $this->app->pdo->isConnected) {
       $mUserRole = new UserRole($this->main);
 
-      /** @var array<int, string> */
-      $idCommonUserRoles = (array) $mUserRole->eloquent
-        ->where("grant_all", 0)
-        ->pluck("id")
-        ->toArray()
-      ;
+      $idCommonUserRoles = \ADIOS\Core\Helper::pluck('id', $this->app->pdo->fetchAll("select id from `{$mUserRole->table}` where grant_all = 0"));
 
       foreach ($idCommonUserRoles as $idCommonRole) {
         $idCommonRole = (int) $idCommonRole;

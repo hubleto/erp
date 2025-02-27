@@ -27,7 +27,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $dbPassword = null;
     $dbName = null;
     $dbCodepage = null;
-    $companyName = null;
+    $accountFullName = null;
     $adminName = null;
     $adminFamilyName = null;
     $adminEmail = null;
@@ -54,7 +54,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['dbPassword'])) $dbPassword = $config['dbPassword'];
     if (isset($config['dbName'])) $dbName = $config['dbName'];
     if (isset($config['dbCodepage'])) $dbCodepage = $config['dbCodepage'];
-    if (isset($config['companyName'])) $companyName = $config['companyName'];
+    if (isset($config['accountFullName'])) $accountFullName = $config['accountFullName'];
     if (isset($config['adminName'])) $adminName = $config['adminName'];
     if (isset($config['adminFamilyName'])) $adminFamilyName = $config['adminFamilyName'];
     if (isset($config['adminEmail'])) $adminEmail = $config['adminEmail'];
@@ -81,11 +81,26 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($dbPassword === null) $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
     if ($dbName === null) $dbName = $this->cli->read('ConfigEnv.dbName (database will be created)', 'my_hubleto');
     if ($dbCodepage === null) $dbCodepage = $this->cli->read('ConfigEnv.dbCodepage', 'utf8mb4');
-    if ($companyName === null) $companyName = $this->cli->read('Account.companyName', 'My Company');
+    if ($accountFullName === null) $accountFullName = $this->cli->read('Account.accountFullName', 'My Company');
     if ($adminName === null) $adminName = $this->cli->read('Account.adminName', 'John');
     if ($adminFamilyName === null) $adminFamilyName = $this->cli->read('Account.adminFamilyName', 'Smith');
     if ($adminEmail === null) $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
     if ($adminPassword === null) $adminPassword = $this->cli->read('Account.adminPassword (leave empty to generate random password)');
+
+    $errors = [];
+    $errorColumns = [];
+    if (!filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+      $errorColumns[] = 'adminEmail';
+      $errors[] = 'Invalid admin email.';
+    }
+    if (!filter_var($accountUrl, FILTER_VALIDATE_URL)) {
+      $errorColumns[] = 'accountUrl';
+      $errors[] = 'Invalid account url.';
+    }
+    if (!filter_var($mainUrl, FILTER_VALIDATE_URL)) {
+      $errorColumns[] = 'mainUrl';
+      $errors[] = 'Invalid main url.';
+    }
 
     if (empty($packagesToInstall)) $packagesToInstall = 'core,sales';
     if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
@@ -101,6 +116,13 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->green("Hubleto, release " . \HubletoMain::RELEASE . "\n");
     $this->cli->cyan("\n");
 
+    if (sizeof($errors) > 0) {
+      $this->cli->red("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
+      $this->cli->red(join("\n", $errors));
+      $this->cli->white("\n");
+      throw new \ErrorException("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
+    }
+
     $this->cli->cyan("Initializing with following config:\n");
     $this->cli->cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
     $this->cli->cyan('  -> accountFolder = ' . (string) $accountFolder . "\n");
@@ -110,7 +132,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan('  -> dbPassword = ***' . "\n");
     $this->cli->cyan('  -> dbName = ' . (string) $dbName . "\n");
     $this->cli->cyan('  -> dbCodepage = ' . (string) $dbCodepage . "\n");
-    $this->cli->cyan('  -> companyName = ' . (string) $companyName . "\n");
+    $this->cli->cyan('  -> accountFullName = ' . (string) $accountFullName . "\n");
     $this->cli->cyan('  -> adminName = ' . (string) $adminName . "\n");
     $this->cli->cyan('  -> adminFamilyName = ' . (string) $adminFamilyName . "\n");
     $this->cli->cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
@@ -132,7 +154,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $this->main,
       'local-env',
       '', // uid
-      (string) $companyName,
+      (string) $accountFullName,
       (string) $adminName,
       (string) $adminFamilyName,
       (string) $adminEmail,

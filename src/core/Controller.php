@@ -67,11 +67,13 @@ class Controller extends \ADIOS\Core\Controller
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
 
     $appsInSidebar = $this->main->appManager->getRegisteredApps();
-    foreach ($appsInSidebar as $appClass => $app) {
+
+    foreach ($appsInSidebar as $appNamespace => $app) {
       if ($app->configAsInteger('sidebarOrder') <= 0) {
-        unset($appsInSidebar[$appClass]);
+        unset($appsInSidebar[$appNamespace]);
       }
     }
+
     uasort($appsInSidebar, function($a, $b) {
       $aOrder = $a->configAsInteger('sidebarOrder');
       $bOrder = $b->configAsInteger('sidebarOrder');

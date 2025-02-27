@@ -1,5 +1,9 @@
 {
     "loader": {
         "Upgrade": ""
+    },
+    "manifest": {
+        "Upgrade": "",
+        "...": ""
     }
 }

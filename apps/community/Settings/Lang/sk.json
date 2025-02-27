@@ -90,7 +90,8 @@
     },
     "Models\\UserRole": {
         "Role": "Rola",
-        "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)"
+        "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)",
+        "Grant all permissions (admin role)": ""
     },
     "Models\\RolePermission": {
         "Permission": "Povolenie",
@@ -158,5 +159,9 @@
         "Pipelines": "",
         "Invoice profiles": "",
         "Platform config": ""
+    },
+    "Models\\UserHasRole": {
+        "User": "",
+        "Role": ""
     }
 }

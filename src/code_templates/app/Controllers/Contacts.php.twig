@@ -1,0 +1,22 @@
+<?php
+
+namespace {{ appNamespace }}\Controllers;
+
+class Contacts extends \HubletoMain\Core\Controller
+{
+
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => '{{ appRootUrlSlug }}', 'content' => '{{ appName }}' ],
+      [ 'url' => '{{ appRootUrlSlug }}/contacts', 'content' => 'Contacts' ],
+    ]);
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@{{ appViewNamespace }}/Contacts.twig');
+  }
+
+}

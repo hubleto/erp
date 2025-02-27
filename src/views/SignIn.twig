@@ -34,33 +34,45 @@
       </div>
       <div class="form">
         <form class="content" id="login_form" action="" method="POST">
-          <input type=hidden name="language" id="language" value="{{ config.language }}">
-          <input type=hidden name="authUser" id="authUser" value="1">
+          <input type="hidden" name="set-language" id="set-language" value="{{ app.getLanguage() }}">
+          <input type="hidden" name="authUser" id="authUser" value="1">
+
+          <div class="text-xl text-primary text-center pt-8 pb-4">{{ config.accountFullName }}</div>
 
           <input
-            type="text" name="login" value="{{ login }}" placeholder="Your email" autofocus
+            type="text" name="login" value="{{ login }}" placeholder="{{ translate("Your email") }}" autofocus
             onkeypress='if (event.keyCode == 13) { document.getElementById("login_form").submit(); }'
           />
 
           <input
-            type="password" name="password" placeholder="Password"
+            type="password" name="password" placeholder="{{ translate("Password") }}"
             onkeypress='if (event.keyCode == 13) { document.getElementById("login_form").submit(); }'
           />
 
-          <div class="mt-2">
+          <div class="my-2">
             <input type="checkbox" id="keep_logged_in" name="keep_logged_in" value="1" checked>
-            <label for="keep_logged_in">Keep signed in</label>
+            <label for="keep_logged_in">{{ translate("Keep signed in") }}</label>
           </div>
 
-          <button type="submit" class="btn btn-large mt-4">
-            <span class="icon"><i class="fas fa-arrow-right"></i></span>
-            <span class="text">Sign in</span>
-          </button>
+          <div class="flex justify-between">
+            <div>
+              <button type="submit" class="btn btn-large mt-4">
+                <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                <span class="text">{{ translate("Sign in") }}</span>
+              </button>
+            </div>
+            <div>
+              <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+              <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+              <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+              <a href="?set-language=cz" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cz.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+            </div>
+          </div>
 
         </form>
         {% if viewParams.login != "" %}
           <div class="small mt-8 text-red-400 text-center">
-            Invalid email or password.
+            {{ translate("Invalid email or password.") }}
           </div>
         {% endif %}
       </div>

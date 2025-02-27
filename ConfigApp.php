@@ -1,7 +1,6 @@
 <?php
 
-$config['appNamespace'] = 'HubletoMain';
-$config['sessionSalt'] = 'HubletoMain';
+// $config['appNamespace'] = 'HubletoMain';
 
 $config['defaultSignInView'] = '@hubleto/SignIn.twig';
 $config['defaultDesktopView'] = '@hubleto/Desktop.twig';

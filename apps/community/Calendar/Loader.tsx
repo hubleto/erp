@@ -1,11 +1,10 @@
-import HubletoMain from "../../../App";
+// import HubletoMain from "@hubleto/src/Main";
 import CalendarComponent from "./Components/CalendarComponent";
 import CalendarMain from "./Components/CalendarMain";
 
 export default class Loader {
-  uid: string = 'calendar';
-  constructor(app: HubletoMain) {
-    app.registerReactComponent('CalendarComponent', CalendarComponent);
-    app.registerReactComponent('CalendarMain', CalendarMain);
+  constructor() {
+    globalThis.main.registerReactComponent('CalendarComponent', CalendarComponent);
+    globalThis.main.registerReactComponent('CalendarMain', CalendarMain);
   }
 }

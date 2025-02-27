@@ -1,9 +1,8 @@
-import HubletoMain from "../../../App";
-import CoreDocumentsTableDocuments from "./Components/TableDocuments"
+// import HubletoMain from "@hubleto/src/Main";
+import DocumentsTableDocuments from "./Components/TableDocuments"
 
 export default class Loader {
-  uid: string = 'calendar';
-  constructor(app: HubletoMain) {
-    app.registerReactComponent('CoreDocumentsTableDocuments', CoreDocumentsTableDocuments);
+  constructor() {
+    globalThis.main.registerReactComponent('DocumentsTableDocuments', DocumentsTableDocuments);
   }
 }

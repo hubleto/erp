@@ -22,8 +22,10 @@
   </script>
 
   <script src='{{ config.accountUrl }}/adios/cache.js'></script>
+  <script defer src='{{ config.url }}/assets/compiled/js/vendors.js'></script>
   <script defer src='{{ config.url }}/assets/compiled/js/adios.js'></script>
-  <script defer src='{{ config.url }}/assets/compiled/js/app.js'></script>
+  {# <script defer src='{{ config.url }}/assets/compiled/js/main.js'></script> #}
+  <script defer src='{{ config.url }}/assets/compiled/js/hubleto.js'></script>
 
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/fontawesome-6.6.css">
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/css/main.css">
@@ -193,7 +195,7 @@
       bool:is-open="false"
       string:type="centered"
     >
-      <app-core-settings-form-user
+      <app-settings-form-user
         int:id="{{ user.id }}"
         bool:show-in-modal="true"
         bool:show-in-modal-simple="true"
@@ -202,7 +204,7 @@
           let modal = globalThis.main.reactElements['user-profile-modal'];
           modal.setState({isOpen: false});
         "
-      ></app-core-settings-form-user>
+      ></app-settings-form-user>
     </app-modal>
 
     <div

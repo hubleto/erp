@@ -1,9 +1,8 @@
-import HubletoMain from "../../../App";
-import CoreBillingTableBillingAccountService from "./Components/TableBillingAccountServices"
+// import HubletoMain from "@hubleto/src/Main";
+import BillingTableBillingAccountService from "./Components/TableBillingAccountServices"
 
 export default class Loader {
-  uid: string = 'billing';
-  constructor(app: HubletoMain) {
-    app.registerReactComponent('CoreBillingTableBillingAccountService', CoreBillingTableBillingAccountService);
+  constructor() {
+    globalThis.main.registerReactComponent('BillingTableBillingAccountService', BillingTableBillingAccountService);
   }
 }

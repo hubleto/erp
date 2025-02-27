@@ -1,9 +1,8 @@
-import HubletoMain from "../../../App";
-import CoreContactsTablePersons from "./Components/TablePersons"
+// import HubletoMain from "@hubleto/src/Main";
+import ContactsTablePersons from "./Components/TablePersons"
 
 export default class Loader {
-  uid: string = 'contacts';
-  constructor(app: HubletoMain) {
-    app.registerReactComponent('CoreContactsTablePersons', CoreContactsTablePersons);
+  constructor() {
+    globalThis.main.registerReactComponent('ContactsTablePersons', ContactsTablePersons);
   }
 }

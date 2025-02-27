@@ -1,11 +1,10 @@
-import HubletoMain from "../../../App";
-import CoreCustomersTableCustomers from "./Components/TableCustomers"
-import CoreCustomersTableActivities from "./Components/TableActivities"
+// import HubletoMain from "@hubleto/src/Main";
+import CustomersTableCustomers from "./Components/TableCustomers"
+import CustomersTableActivities from "./Components/TableActivities"
 
 export default class Loader {
-  uid: string = 'customers';
-  constructor(app: HubletoMain) {
-    app.registerReactComponent('CoreCustomersTableCustomers', CoreCustomersTableCustomers);
-    app.registerReactComponent('CoreCustomersTableActivities', CoreCustomersTableActivities);
+  constructor() {
+    globalThis.main.registerReactComponent('CustomersTableCustomers', CustomersTableCustomers);
+    globalThis.main.registerReactComponent('CustomersTableActivities', CustomersTableActivities);
   }
 }

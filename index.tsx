@@ -12,6 +12,7 @@ import Products from './apps/community/Products/Loader'
 import Orders from './apps/community/Orders/Loader'
 import Report from './apps/community/Reports/Loader'
 import CalendarSync from './apps/community/CalendarSync/Loader'
+import Goals from './apps/community/Goals/Loader'
 
 
 //@ts-ignore
@@ -33,6 +34,7 @@ globalThis.main.registerApp('Products', Products);
 globalThis.main.registerApp('Orders', Orders);
 globalThis.main.registerApp('Report', Report);
 globalThis.main.registerApp('CalendarSync', CalendarSync);
+globalThis.main.registerApp('Goals', Goals);
 
 console.log('apps', globalThis.main.apps);
 

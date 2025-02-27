@@ -658,12 +658,13 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     foreach ($leads as $lead) { // @phpstan-ignore-line
       $pipeline = rand(1,2);
+      $progress = rand(0,2);
       if ($pipeline === 1) $pipelineStep = rand(1,3);
       else $pipelineStep = rand(4,7);
 
-      $dealDateCreatedTs = (int) rand(strtotime("-1 month"), strtotime("+1 month"));
-      $dealDateCreated = date("Y-m-d", $dealDateCreatedTs);
-      $dealDateClose = date("Y-m-d", $dealDateCreatedTs + rand(4, 6)*24*3600);
+      $dealDateCreatedTs = rand(strtotime("-1 month"), strtotime("+1 month"));
+      $dealDateCreated = date("Y-m-d H:i:s", $dealDateCreatedTs);
+      $dealDateClose = date("Y-m-d H:i:s", strtotime("+1 month", $dealDateCreatedTs));
 
       $idDeal = $mDeal->recordManager->create([
         "identifier" => $lead->identifier,
@@ -680,7 +681,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_pipeline_step" => $pipelineStep,
         "id_lead" => $lead->id,
         "id_deal_status" => rand(1,4),
+        "deal_progress" => $progress,
         "date_created" => $dealDateCreated,
+        "date_progress_update" => $progress != 2 ? $dealDateClose : null,
       ])['id'];
 
       $mLeadHistory->recordManager->create([

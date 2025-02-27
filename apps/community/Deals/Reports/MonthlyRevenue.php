@@ -4,10 +4,10 @@ namespace HubletoApp\Community\Deals\Reports;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class TodayRevenue extends \HubletoMain\Core\Report {
+class MonthlyRevenue extends \HubletoMain\Core\Report {
 
-  protected string $urlSlug = 'deals-my-today-revenue';
-  public string $name = 'My today\'s revenue';
+  protected string $urlSlug = 'month-revenue';
+  public string $name = 'My revenue this month';
   public string $modelClass = Deal::class;
 
   public function getReportConfig(): array
@@ -15,8 +15,6 @@ class TodayRevenue extends \HubletoMain\Core\Report {
     $config = [];
 
     $model = new Deal($this->main);
-    // $config["model"] = $this->model->fullName;
-    // $config["name"] = $this->name;
     $config['groupsBy'] = [
       ["field" => "id_customer", "title" => "Customer"],
     ];
@@ -28,7 +26,7 @@ class TodayRevenue extends \HubletoMain\Core\Report {
 
     $config["searchGroups"] = [
       ["fieldName" => "id_user", "field" => $model->getColumn("id_user"), "option" => 1,  "value" => $this->main->auth->getUser()["id"],],
-      ["fieldName" => "date_created", "field" => $model->getColumn("date_created"), "option" => 1,  "value" => date("2025-02-11")],
+      ["fieldName" => "date_created", "field" => $model->getColumn("date_created"), "option" => 6,  "value" => date("Y-m-01"), "value2" => date('Y-m-t')],
     ];
 
     return $config;

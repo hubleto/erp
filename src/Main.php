@@ -62,19 +62,15 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
-
   public \HubletoMain\Core\Sidebar $sidebar;
   public \HubletoMain\Core\Help $help;
   public \HubletoMain\Core\CalendarManager $calendarManager;
   public \HubletoMain\Core\ReportManager $reportManager;
   public \HubletoMain\Core\AppManager $appManager;
 
-  public string $requestedUriFirstPart = '';
   public bool $isPro = false;
 
   private array $settings = [];
-
-  public string $twigNamespaceCore = 'hubleto';
 
   public function __construct(array $config = [], int $mode = self::ADIOS_MODE_FULL)
   {
@@ -82,34 +78,17 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     parent::__construct($config, $mode);
 
-    $tmp =  strpos($this->requestedUri, '/');
-    if ($tmp === false) $this->requestedUriFirstPart = $this->requestedUri;
-    else $this->requestedUriFirstPart = substr($this->requestedUri, 0, (int) strpos($this->requestedUri, '/'));
-
-    $userLanguage = $this->auth->getUserLanguage();
-    if (empty($userLanguage)) $userLanguage = 'en';
-    $this->config->set('language', $userLanguage);
-
     if (is_file($this->config->getAsString('accountDir', '') . '/pro')) {
       $this->isPro = (string) file_get_contents($this->config->getAsString('accountDir', '') . '/pro') == '1';
     }
 
-    if ($mode == self::ADIOS_MODE_FULL) {
-      $this->twig->addFunction(new \Twig\TwigFunction(
-        'number',
-        function (string $amount) {
-          return number_format((float) $amount, 2, ",", " ");
-        }
-      ));
-    }
-
     $this->calendarManager = new \HubletoMain\Core\CalendarManager($this);
     $this->reportManager = new \HubletoMain\Core\ReportManager($this);
-
     $this->appManager = new \HubletoMain\Core\AppManager($this);
     $this->help = new \HubletoMain\Core\Help($this);
     $this->sidebar = new \HubletoMain\Core\Sidebar($this);
 
+    $this->permissions->init();
     $this->appManager->init();
 
   }
@@ -118,8 +97,9 @@ class HubletoMain extends \ADIOS\Core\Loader
     $GLOBALS['hubletoMain'] = $this;
   }
 
-  public function initTwig(): void
+  public function createTwig(): void
   {
+  
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
     $this->twigLoader->addPath(__DIR__ . '/views', 'hubleto');
     $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
@@ -128,6 +108,15 @@ class HubletoMain extends \ADIOS\Core\Loader
       'cache' => FALSE,
       'debug' => TRUE,
     ));
+
+    $this->twig->addFunction(new \Twig\TwigFunction(
+      'number',
+      function (string $amount) {
+        return number_format((float) $amount, 2, ",", " ");
+      }
+    ));
+
+    $this->configureTwig();
   }
 
   public function addTwigViewNamespace(string $folder, string $namespace) {

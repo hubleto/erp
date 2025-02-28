@@ -23,6 +23,7 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^settings\/?$/' => Controllers\Dashboard::class,
+      '/^settings\/profile\/?$/' => Controllers\Profile::class,
       '/^settings\/users\/?$/' => Controllers\Users::class,
       '/^settings\/user-roles\/?$/' => Controllers\UserRoles::class,
       '/^settings\/profiles\/?$/' => Controllers\Profiles::class,

@@ -21,7 +21,7 @@ import HubletoTable from "./core/Components/HubletoTable";
 // Primereact
 import { Tooltip } from "primereact/tooltip";
 
-export default class HubletoMain extends ADIOS {
+class HubletoMain extends ADIOS {
   language: string = 'en';
   idUser: number = 0;
   user: any;
@@ -99,3 +99,9 @@ export default class HubletoMain extends ADIOS {
     this.apps[appUid] = new appClass(this);
   }
 }
+
+//@ts-ignore
+const main: HubletoMain = new HubletoMain(window.ConfigEnv);
+
+globalThis.app = main; // ADIOS requires 'app' property
+globalThis.main = main;

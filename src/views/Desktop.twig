@@ -35,7 +35,7 @@
       font-family: 'Fredoka-Regular';
       font-style: normal;
       font-weight: 500;
-      src: url({{ config.url }}/assets/Fredoka/static/Fredoka-Regular.ttf) format('truetype');
+      src: url({{ config.url }}/assets/fonts/Fredoka/static/Fredoka-Regular.ttf) format('truetype');
     }
   </style>
   <script>
@@ -136,7 +136,7 @@
                 <div class="list" style="margin-left:-13.4em;width:15em;">
                   <div class="text-center text-primary text-sm p-2">{{ user.email }}</div>
                   <div class="text-center text-gray-700 text-xs">{{ user.first_name }}</div>
-                  <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/my-account">
+                  <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/settings/profile">
                     <span class="icon"><i class='fas fa-user-tie'></i></span>
                     <span class="text">{{ translate('Manage your account') }}</span>
                   </a>
@@ -189,23 +189,6 @@
         </div>
       {% endif %}
     </aside>
-
-    <app-modal
-      string:uid="user-profile-modal"
-      bool:is-open="false"
-      string:type="centered"
-    >
-      <app-settings-form-user
-        int:id="{{ user.id }}"
-        bool:show-in-modal="true"
-        bool:show-in-modal-simple="true"
-        bool:is-inline-editing="true"
-        function:on-close="
-          let modal = globalThis.main.reactElements['user-profile-modal'];
-          modal.setState({isOpen: false});
-        "
-      ></app-settings-form-user>
-    </app-modal>
 
     <div
       id="app-main-content"

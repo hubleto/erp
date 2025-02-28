@@ -163,5 +163,9 @@
     "Models\\UserHasRole": {
         "User": "",
         "Role": ""
+    },
+    "Controllers\\Profile": {
+        "Settings": "Nastavenia",
+        "Profile": "Profil"
     }
 }

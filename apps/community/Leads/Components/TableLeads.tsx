@@ -77,7 +77,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
       return (
         <>
           {data.TAGS.map((tag, key) => {
-            return <div style={{backgroundColor: tag.TAG.color}} className='badge'>{tag.TAG.name}</div>;
+            return <div style={{backgroundColor: tag.TAG.color}} className='badge' key={data.id + '-tags-' + key}>{tag.TAG.name}</div>;
           })}
         </>
       );

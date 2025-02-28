@@ -41,7 +41,7 @@ export default class TableCustomers extends Table<TableCustomersProps, TableCust
       return (
         <>
           {data.TAGS.map((tag, key) => {
-            return <div style={{backgroundColor: tag.TAG.color}} className='badge'>{tag.TAG.name}</div>;
+            return <div style={{backgroundColor: tag.TAG.color}} className='badge' key={'tag-' + data.id + '-' + key}>{tag.TAG.name}</div>;
           })}
         </>
       );

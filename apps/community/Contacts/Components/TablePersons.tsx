@@ -67,7 +67,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
               if (contact.type == "email" && contactsRendered < 2) {
                 contactsRendered += 1;
                 return (
-                  <div className='border border-gray-400 rounded px-1'>
+                  <div className='border border-gray-400 rounded px-1' key={data.id + '-email-' + key}>
                     {contact.value} ({contact.CONTACT_TYPE.name})
                   </div>
                 );
@@ -83,8 +83,8 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
               if (contact.type == "number" && contactsRendered < 2) {
                 contactsRendered += 1;
                 return (
-                  <div className='border border-gray-400 rounded px-1'>
-                    {contact.value}  ({contact.CONTACT_TYPE.name})
+                  <div className='border border-gray-400 rounded px-1' key={data.id + '-number-' + key}>
+                    {contact.value} ({contact.CONTACT_TYPE.name})
                   </div>
                 );
               } else return null;

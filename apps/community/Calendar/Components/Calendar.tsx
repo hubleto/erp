@@ -45,7 +45,6 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
   }
 
   render(): JSX.Element {
-    console.log('lead cal render', this.state);
     return (
       <div>
         <FullCalendar

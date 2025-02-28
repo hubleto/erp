@@ -100,8 +100,8 @@ class Document extends \HubletoMain\Core\Model
     if (!isset($document["file"])) return $record;
 
     $prevFilename = ltrim((string) $document["file"],"./");
-    if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
-      unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);
+    if (file_exists($this->main->config->getAsString('uploadDir') . "/" . $prevFilename)) {
+      unlink($this->main->config->getAsString('uploadDir') . "/" . $prevFilename);
     }
 
     return $record;
@@ -114,8 +114,8 @@ class Document extends \HubletoMain\Core\Model
     if (!isset($document["file"])) return $id;
 
     $prevFilename = ltrim((string) $document["file"],"./");
-    if (file_exists($this->main->configAsString('uploadDir') . "/" . $prevFilename)) {
-      unlink($this->main->configAsString('uploadDir') . "/" . $prevFilename);
+    if (file_exists($this->main->config->getAsString('uploadDir') . "/" . $prevFilename)) {
+      unlink($this->main->config->getAsString('uploadDir') . "/" . $prevFilename);
     }
 
     return $id;

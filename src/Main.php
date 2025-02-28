@@ -35,7 +35,7 @@ spl_autoload_register(function(string $class) {
     $vendor = substr($tmp, 0, strpos($tmp, '/'));
     $app = substr($tmp, strpos($tmp, '/') + 1);
     $hubletoMain = $GLOBALS['hubletoMain'];
-    $externalAppsRepositories = $hubletoMain->configAsArray('externalAppsRepositories');
+    $externalAppsRepositories = $hubletoMain->config->getAsArray('externalAppsRepositories');
     $folder = $externalAppsRepositories[$vendor] ?? '';
 
     @include($folder . '/' . $app . '.php');
@@ -44,7 +44,7 @@ spl_autoload_register(function(string $class) {
   // community
   if (str_starts_with($class, 'HubletoApp/Custom/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
-    $dir = $hubletoMain->configAsString('accountDir') . '/apps/custom';
+    $dir = $hubletoMain->config->getAsString('accountDir') . '/apps/custom';
     @include($dir . '/' . str_replace('HubletoApp/Custom/', '', $class) . '.php');
   }
 
@@ -82,19 +82,16 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     parent::__construct($config, $mode);
 
-    $this->config['defaultSignInView'] = '@hubleto/SignIn.twig';
-    $this->config['defaultDesktopView'] = '@hubleto/Desktop.twig';
-
     $tmp =  strpos($this->requestedUri, '/');
     if ($tmp === false) $this->requestedUriFirstPart = $this->requestedUri;
     else $this->requestedUriFirstPart = substr($this->requestedUri, 0, (int) strpos($this->requestedUri, '/'));
 
     $userLanguage = $this->auth->getUserLanguage();
     if (empty($userLanguage)) $userLanguage = 'en';
-    $this->config['language'] = $userLanguage;
+    $this->config->set('language', $userLanguage);
 
-    if (is_file($this->configAsString('accountDir', '') . '/pro')) {
-      $this->isPro = (string) file_get_contents($this->configAsString('accountDir', '') . '/pro') == '1';
+    if (is_file($this->config->getAsString('accountDir', '') . '/pro')) {
+      $this->isPro = (string) file_get_contents($this->config->getAsString('accountDir', '') . '/pro') == '1';
     }
 
     if ($mode == self::ADIOS_MODE_FULL) {

@@ -29,7 +29,9 @@
         "Source channel": "Zdroj",
         "Archived": "Archivovaný",
         "Status": "Stav",
-        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný dokument"
+        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný dokument",
+        "Deal Progress": "",
+        "Date of progress update": ""
     },
     "Models\\DealStatus": {
         "Name": "",

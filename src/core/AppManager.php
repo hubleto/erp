@@ -50,7 +50,7 @@ class AppManager
 
   public function getInstalledAppNamespaces(): array
   {
-    $tmp = $this->main->configAsArray('apps');
+    $tmp = $this->main->config->getAsArray('apps');
     ksort($tmp);
 
     $appNamespaces = [];
@@ -157,15 +157,15 @@ class AppManager
     $appNameForConfig = $this->getAppNameForConfig($appNamespace);
 
     if (!in_array($appNamespace, $this->getInstalledAppNamespaces())) {
-      $this->main->setConfig('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
-      $this->main->setConfig('apps/' . $appNameForConfig . "/enabled", true);
-      $this->main->saveConfigByPath('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
-      $this->main->saveConfigByPath('apps/' . $appNameForConfig . "/enabled", '1');
+      $this->main->config->set('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+      $this->main->config->set('apps/' . $appNameForConfig . "/enabled", true);
+      $this->main->config->save('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+      $this->main->config->save('apps/' . $appNameForConfig . "/enabled", '1');
     }
 
     foreach ($appConfig as $cPath => $cValue) {
-      $this->main->setConfig('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
-      $this->main->saveConfigByPath('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
+      $this->main->config->set('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
+      $this->main->config->save('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
     }
 
     return true;
@@ -173,7 +173,7 @@ class AppManager
 
   public function disableApp(string $appNamespace): void
   {
-    $this->main->saveConfigByPath('apps/' . $this->getAppNameForConfig($appNamespace) . '/enabled', '0');
+    $this->main->config->save('apps/' . $this->getAppNameForConfig($appNamespace) . '/enabled', '0');
   }
 
   public function testApp(string $appNamespace, string $test): void

@@ -9,7 +9,7 @@ class YouArePro extends \HubletoMain\Core\Controller {
     parent::prepareView();
 
     if ($this->main->urlParamAsString('simulate') == 'down') {
-      @unlink($this->main->configAsString('accountDir') . '/pro');
+      @unlink($this->main->config->getAsString('accountDir') . '/pro');
       $this->main->router->redirectTo('');
     }
 

@@ -24,11 +24,11 @@ class Create extends \HubletoMain\Cli\Agent\Command
         throw new \Exception('Creation of enterprise apps is not implemented yet.');
       break;
       case 'External':
-        $externalAppsRepositories = $this->main->configAsArray('externalAppsRepositories');
+        $externalAppsRepositories = $this->main->config->getAsArray('externalAppsRepositories');
         $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
       break;
       case 'Custom':
-        $accountFolder = $this->main->configAsString('accountDir');
+        $accountFolder = $this->main->config->getAsString('accountDir');
         if (empty($accountFolder) || !is_dir($accountFolder)) throw new \Exception('AccountDir is not properly configured.');
         if (!is_dir($accountFolder . '/apps')) mkdir($accountFolder . '/apps');
         if (!is_dir($accountFolder . '/apps/custom')) mkdir($accountFolder . '/apps/custom');
@@ -64,7 +64,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
       case 'External':
         if (count($appNamespaceParts) != 4) throw new \Exception('External app namespace must have exactly 4 parts');
 
-        $externalAppsRepositories = $this->main->configAsArray('externalAppsRepositories');
+        $externalAppsRepositories = $this->main->config->getAsArray('externalAppsRepositories');
         if (!isset($externalAppsRepositories[$appNamespaceParts[2]])) {
           throw new \Exception('No repository found for vendor \'' . $appNamespaceParts[2] . '\'. Run \'php hubleto app add repository\' to add the repository.');
         }

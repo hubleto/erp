@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Core;
 
-class AuthProvider extends \ADIOS\Auth\Providers\DefaultProvider {
+class AuthProvider extends \ADIOS\Auth\DefaultProvider {
 
   public \HubletoMain $main;
 

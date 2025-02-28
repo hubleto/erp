@@ -182,52 +182,52 @@ class App {
 
   public function configAsString(string $path, string $defaultValue = ''): string
   {
-    return (string) $this->main->getConfig($this->getFullConfigPath($path), $defaultValue);
+    return (string) $this->main->config->get($this->getFullConfigPath($path), $defaultValue);
   }
 
   public function configAsInteger(string $path, int $defaultValue = 0): int
   {
-    return (int) $this->main->getConfig($this->getFullConfigPath($path), $defaultValue);
+    return (int) $this->main->config->get($this->getFullConfigPath($path), $defaultValue);
   }
 
   public function configAsFloat(string $path, float $defaultValue = 0): float
   {
-    return (float) $this->main->getConfig($this->getFullConfigPath($path), $defaultValue);
+    return (float) $this->main->config->get($this->getFullConfigPath($path), $defaultValue);
   }
 
   public function configAsBool(string $path, bool $defaultValue = false): bool
   {
-    return (bool) $this->main->getConfig($this->getFullConfigPath($path), $defaultValue);
+    return (bool) $this->main->config->get($this->getFullConfigPath($path), $defaultValue);
   }
 
   public function configAsArray(string $path, array $defaultValue = []): array
   {
-    return (array) $this->getConfig($path, $defaultValue);
+    return (array) $this->main->config->get($path, $defaultValue);
   }
 
   public function setConfigAsString(string $path, string $value = ''): void
   {
-    $this->main->setConfig($this->getFullConfigPath($path), $value);
+    $this->main->config->set($this->getFullConfigPath($path), $value);
   }
 
   public function setConfigAsInteger(string $path, int $value = 0): void
   {
-    $this->main->setConfig($this->getFullConfigPath($path), $value);
+    $this->main->config->set($this->getFullConfigPath($path), $value);
   }
 
   public function setConfigAsFloat(string $path, float $value = 0): void
   {
-    $this->main->setConfig($this->getFullConfigPath($path), $value);
+    $this->main->config->set($this->getFullConfigPath($path), $value);
   }
 
   public function setConfigAsBool(string $path, bool $value = false): void
   {
-    $this->main->setConfig($this->getFullConfigPath($path), $value);
+    $this->main->config->set($this->getFullConfigPath($path), $value);
   }
 
   public function setConfigAsArray(string $path, array $value = []): void
   {
-    $this->main->setConfig($this->getFullConfigPath($path), $value);
+    $this->main->config->set($this->getFullConfigPath($path), $value);
   }
 
 }

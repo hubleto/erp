@@ -130,14 +130,14 @@ class Installer {
   public function createDatabase(): void
   {
 
-    $this->main->setConfig('db_name', '');
+    $this->main->config->set('db_name', '');
     $this->main->initDatabaseConnections();
 
     $this->main->pdo->execute("drop database if exists `{$this->dbName}`");
     $this->main->pdo->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
 
-    $this->main->setConfig('db_name', $this->dbName);
-    $this->main->setConfig('db_codepage', "utf8mb4");
+    $this->main->config->set('db_name', $this->dbName);
+    $this->main->config->set('db_codepage', "utf8mb4");
     $this->main->initDatabaseConnections();
 
   }
@@ -178,7 +178,7 @@ class Installer {
     $configEnv = (string) file_get_contents(__DIR__ . '/../code_templates/project/ConfigEnv.php.tpl');
     $configEnv = str_replace('{{ mainFolder }}', $this->mainFolder, $configEnv);
     $configEnv = str_replace('{{ mainUrl }}', $this->mainUrl, $configEnv);
-    $configEnv = str_replace('{{ dbHost }}', $this->main->configAsString('db_host'), $configEnv);
+    $configEnv = str_replace('{{ dbHost }}', $this->main->config->getAsString('db_host'), $configEnv);
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
     $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);
     $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);

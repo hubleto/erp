@@ -5,13 +5,15 @@
   * new `<HubletoChart>` React component
   * new `php hubleto app create`, `php hubleto debug router` and `php hubleto create model` commands
   * improved translation and language support
+  * new community app Goals
+  * cleaned-up code base
 
 ## Release v0.7
 
   * improved unit testing
   * deals and leads are now linked to an online shared folder (document storage)
   * started to use `value objects` (see why: https://stevegrunwell.com/blog/php-value-objects)
-  * RecordManager extracted from the Model
+  * Record management extracted from the Model class
   * `columns()` renamed to `describeColumns()`
   * more flexible CSS skin (thanks to TailwindCSS v4)
   * color scales in tables

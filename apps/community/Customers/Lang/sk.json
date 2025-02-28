@@ -4,7 +4,7 @@
         "Default customer management and addressbook.": "Adresár a manažment zákazníkov."
     },
     "Models\\Customer": {
-        "Add Customer": "Pridať firmu",
+        "Add Customer": "Pridať zákazníka",
         "Name": "Názov",
         "Street Line 1": "Ulica, riadok č. 1",
         "Street Line 2": "Ulica, riadok č. 2",
@@ -19,32 +19,32 @@
         "Date Created": "Vytvorený",
         "Active": "Aktívny",
         "Assigned User": "Vlastník",
-        "Customers": "Firmy",
-        "Link to shared folder (online storage) with related documents": ""
+        "Customers": "Zákazníci",
+        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok"
     },
     "Controllers\\Customers": {
-        "Customers": "Firmy"
+        "Customers": "Zákazníci"
     },
     "Models\\CustomerActivity": {
-        "Customer": "",
-        "Contact Person": "",
-        "Activity type": "",
-        "Subject": "",
-        "Start Date": "",
-        "Start Time": "",
-        "End Date": "",
-        "End Time": "",
-        "All day": "",
-        "Completed": "",
-        "Created by": ""
+        "Customer": "Zákazník",
+        "Contact Person": "Kontaktná osoba",
+        "Activity type": "Typ aktivity",
+        "Subject": "Predmet",
+        "Start Date": "Začiatok",
+        "Start Time": "Čas",
+        "End Date": "Koniec",
+        "End Time": "Čas",
+        "All day": "Celodenná",
+        "Completed": "Ukončená",
+        "Created by": "Vytvoril"
     },
     "Models\\CustomerDocument": {
-        "Customer": "",
-        "Document": ""
+        "Customer": "Zákazník",
+        "Document": "Dokument"
     },
     "Models\\CustomerTag": {
-        "Customer": "",
-        "Tag": ""
+        "Customer": "Zákazník",
+        "Tag": "Značka"
     },
     "Components\\FormCustomer": {
         "Contacts": "Kontakty",

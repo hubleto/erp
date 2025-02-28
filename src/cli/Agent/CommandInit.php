@@ -139,10 +139,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
     $this->cli->cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
-    $this->main->setConfig('db_host', $dbHost);
-    $this->main->setConfig('db_user', $dbUser);
-    $this->main->setConfig('db_password', $dbPassword);
-    $this->main->setConfig('db_name', $dbName);
+    $this->main->config->set('db_host', $dbHost);
+    $this->main->config->set('db_user', $dbUser);
+    $this->main->config->set('db_password', $dbPassword);
+    $this->main->config->set('db_name', $dbName);
 
     $this->main->appManager->setCli($this->cli);
 

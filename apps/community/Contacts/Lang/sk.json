@@ -31,25 +31,22 @@
         "Add Contact": "Pridať kontakt",
         "Emails": "Emaily",
         "Phone Numbers": "Telefóny",
-        "Add": "Pridať",
-        "Save": "",
-        "Copy": "",
-        "Delete": ""
+        "Add": "Pridať"
     },
     "Controllers\\Persons": {
         "Contacts": "Kontakty"
     },
     "Models\\Contact": {
-        "Person": "",
-        "Contact Category": "",
-        "Type": "",
-        "Email": "",
-        "Phone Number": "",
-        "Other": "",
-        "Value": ""
+        "Person": "Kontakt",
+        "Contact Category": "Kategória",
+        "Type": "Typ",
+        "Email": "Email",
+        "Phone Number": "Telefón",
+        "Other": "Iné",
+        "Value": "Hodnota"
     },
     "Models\\PersonTag": {
-        "Person": "",
-        "Tag": ""
+        "Person": "Kontakt",
+        "Tag": "Značka"
     }
 }

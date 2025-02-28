@@ -9,7 +9,7 @@ class Upgrade extends \HubletoMain\Core\Controller {
     parent::prepareView();
 
     if ($this->main->urlParamAsString('simulate') == 'up') {
-      file_put_contents($this->main->configAsString('accountDir') . '/pro', '1');
+      file_put_contents($this->main->config->getAsString('accountDir') . '/pro', '1');
       $this->main->router->redirectTo('');
     }
 

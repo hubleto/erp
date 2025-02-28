@@ -72,6 +72,10 @@ class Controller extends \ADIOS\Core\Controller
       if ($app->configAsInteger('sidebarOrder') <= 0) {
         unset($appsInSidebar[$appNamespace]);
       }
+
+      if (str_starts_with($this->main->requestedUri, $app->manifest['rootUrlSlug'])) {
+        $appsInSidebar[$appNamespace]->isActivated = true;
+      }
     }
 
     uasort($appsInSidebar, function($a, $b) {
@@ -82,10 +86,10 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
 
-    $this->viewParams['activatedApp'] = $this->main->appManager->getActivatedApp();
-    if ($this->viewParams['activatedApp']) {
-      $this->viewParams['activatedApppSidebar'] = $this->viewParams['activatedApp']->sidebar->getItems();
-    }
+    // $this->viewParams['activatedApp'] = $this->main->appManager->getActivatedApp();
+    // if ($this->viewParams['activatedApp']) {
+    //   $this->viewParams['activatedAppSidebar'] = $this->viewParams['activatedApp']->sidebar->getItems();
+    // }
 
     $tmp = strpos($this->main->requestedUri, '/');
     if ($tmp === false) $this->viewParams['requestedUriFirstPart'] = $this->main->requestedUri;

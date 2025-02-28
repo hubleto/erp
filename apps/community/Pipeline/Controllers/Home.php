@@ -107,7 +107,6 @@ class Home extends \HubletoMain\Core\Controller {
       unset($deals[$key]["TAGS"]);
     }
 
-    //var_dump($deals); exit;
     $this->viewParams["pipelines"] = $pipelines;
     $this->viewParams["pipeline"] = $searchPipeline;
     $this->viewParams["pipeline"]["currency_groups"] = $currencyGroups;

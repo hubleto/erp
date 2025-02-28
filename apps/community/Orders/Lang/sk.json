@@ -18,17 +18,18 @@
         "Add order": "Pridať objednávku"
     },
     "Models\\OrderProduct": {
-        "Product": "",
-        "Order": "",
-        "Unit price": "",
-        "Amount": "",
-        "Discount (%)": "",
-        "Tax (%)": ""
+        "Product": "Produkt",
+        "Order": "Objednávka",
+        "Unit price": "Jednotková cena",
+        "Amount": "Množstvo",
+        "Discount (%)": "Zľava",
+        "Tax (%)": "Daň",
+        "Add product": "Pridať podukt"
     },
     "Models\\History": {
-        "Order": "",
-        "Short Description": "",
-        "Long Description": "",
-        "Date Time": ""
+        "Order": "Objednávka",
+        "Short Description": "Stručný popis",
+        "Long Description": "Popis",
+        "Date Time": "Čas"
     }
 }

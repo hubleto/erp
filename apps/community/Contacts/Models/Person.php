@@ -27,7 +27,6 @@ class Person extends \HubletoMain\Core\Model
 
   public function translate(string $string, array $vars = []): string
   {
-    // var_dump($string);
     return parent::translate($string, $vars);
   }
 

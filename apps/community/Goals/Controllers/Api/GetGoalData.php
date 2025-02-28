@@ -58,7 +58,6 @@ class GetGoalData extends \HubletoMain\Core\Controller
     foreach ($intervals as $interval) {
 
       //search for deals that are pending until the end interval
-      //var_dump($interval); exit;
       $pendingValues = $mDeal->eloquent
         ->where("deal_progress", 2)
         ->where("date_created", "<", $interval["date_end"])

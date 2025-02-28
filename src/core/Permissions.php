@@ -24,6 +24,11 @@ class Permissions extends \ADIOS\Core\Permissions {
     $this->administratorRoles = $this->loadAdministratorRoles();
   }
 
+  public function createUserRoleModel(): \ADIOS\Core\Model
+  {
+    return new \HubletoApp\Community\Settings\Models\UserRole($this->app);
+  }
+
   public function DANGEROUS__grantAllPermissions() {
     $this->grantAllPermissions = true;
   }

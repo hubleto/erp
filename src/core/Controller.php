@@ -59,6 +59,22 @@ class Controller extends \ADIOS\Core\Controller
    */
   public function prepareView(): void
   {
+
+    $logDir = $this->app->config->getAsString('logDir');
+
+    if ($this->main->auth->isUserInSession()) {
+      $user = $this->main->auth->getUserFromSession();
+
+      if (!empty($logDir) && is_dir($logDir)) {
+        if (!is_dir($logDir . '/usage')) mkdir($logDir . '/usage');
+        file_put_contents(
+          $logDir . '/usage/' . date('Y-m-d') . '.log',
+          date('H:i:s') . ' ' . $user['id'] . ' ' . get_class($this) . ' '. json_encode(array_keys($this->main->getUrlParams()), true) . "\n",
+          FILE_APPEND
+        );
+      }
+    }
+
     parent::prepareView();
 
     $this->viewParams['main'] = $this->main;
@@ -86,26 +102,14 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
 
-    // $this->viewParams['activatedApp'] = $this->main->appManager->getActivatedApp();
-    // if ($this->viewParams['activatedApp']) {
-    //   $this->viewParams['activatedAppSidebar'] = $this->viewParams['activatedApp']->sidebar->getItems();
-    // }
-
     $tmp = strpos($this->main->requestedUri, '/');
     if ($tmp === false) $this->viewParams['requestedUriFirstPart'] = $this->main->requestedUri;
     else $this->viewParams['requestedUriFirstPart'] = substr($this->main->requestedUri, 0, (int) $tmp);
-
-    // $this->viewParams['sidebar'] = [
-    //   'level1Items' => $this->main->getSidebar()->getItems(1),
-    //   'level2Items' => $this->main->getSidebar()->getItems(2),
-    // ];
   }
 
   public function getBreadcrumbs(): array
   {
     return [];
-    //   [ 'url' => '', 'content' => '<i class="fas fa-home"></i>' ]
-    // ];
   }
 
 }

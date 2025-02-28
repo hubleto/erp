@@ -16,6 +16,11 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
     $this->app->registerModel(\HubletoApp\Community\Settings\Models\UserHasRole::class);
   }
 
+  public function createUserModel(): \ADIOS\Core\Model
+  {
+    return new \HubletoApp\Community\Settings\Models\User($this->app);
+  }
+
   public function auth(): void
   {
     parent::auth();

@@ -84,4 +84,19 @@ class Deal extends \HubletoMain\Core\ModelEloquent
     return $this->hasMany(DealDocument::class, 'id_deal', 'id' );
   }
 
+  public function prepareReadQuery(): mixed
+  {
+    $query = parent::prepareReadQuery();
+
+    $main = \ADIOS\Core\Helper::getGlobalApp();
+
+    if ($main->urlParamAsBool("showArchive")) {
+      $query = $query->where("deals.is_archived", 1);
+    } else {
+      $query = $query->where("deals.is_archived", 0);
+    }
+
+    return $query;
+  }
+
 }

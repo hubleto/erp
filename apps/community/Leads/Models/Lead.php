@@ -137,19 +137,6 @@ class Lead extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(): mixed
-  {
-    $query = parent::prepareLoadRecordQuery();
-
-    if ($this->main->urlParamAsBool("showArchive")) {
-      $query = $query->where("leads.is_archived", 1);
-    } else {
-      $query = $query->where("leads.is_archived", 0);
-    }
-
-    return $query;
-  }
-
   public function checkOwnership(array $record): void
   {
     if ($record["id_customer"] && !isset($record["checkOwnership"])) {

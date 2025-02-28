@@ -54,9 +54,9 @@ class Contact extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
-  {
-    $query = parent::prepareLoadRecordQuery($includeRelations, 3, $query, $level);
-    return $query;
-  }
+  // public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
+  // {
+  //   $query = parent::prepareLoadRecordQuery($includeRelations, 3, $query, $level);
+  //   return $query;
+  // }
 }

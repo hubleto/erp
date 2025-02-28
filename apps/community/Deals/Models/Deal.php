@@ -153,19 +153,6 @@ class Deal extends \HubletoMain\Core\Model
     return $description;
   }
 
-  public function prepareLoadRecordQuery(): Builder
-  {
-    $query = parent::prepareLoadRecordQuery();
-
-    if ($this->main->urlParamAsBool("showArchive")) {
-      $query = $query->where("deals.is_archived", 1);
-    } else {
-      $query = $query->where("deals.is_archived", 0);
-    }
-
-    return $query;
-  }
-
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
     $mDealHistory = new DealHistory($this->main);

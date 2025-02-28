@@ -2,6 +2,7 @@
 import './src/Main'
 
 // Import Hubleto Community Apps
+// Mostly, these loaders run `registerReactComponent()`
 import './apps/community/Loader'
 
 // Render react elements into HTML body

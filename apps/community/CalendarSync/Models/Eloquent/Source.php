@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\CalendarSync\Models\Eloquent;
 
-class Source extends \ADIOS\Core\Model\Eloquent
+class Source extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'source';
 

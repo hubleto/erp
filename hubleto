@@ -13,8 +13,7 @@ if (!is_array($config)) $config = [];
 $main = new \HubletoMain($config, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
 $main->initDatabaseConnections();
 $main->loadConfigFromDB();
-$main->initTwig();
-$main->configureTwig();
+$main->createTwig();
 
 $cli = new \HubletoMain\Cli\Agent\Loader($main);
 

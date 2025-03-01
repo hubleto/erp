@@ -47,5 +47,19 @@
         "Item": "",
         "Unit price": "",
         "Amount": ""
+    },
+    "Models\\Invoice": {
+        "Profile": "",
+        "Issued by": "",
+        "Customer": "",
+        "Number": "",
+        "Variable symbol": "",
+        "Constant symbol": "",
+        "Specific symbol": "",
+        "Issued": "",
+        "Delivered": "",
+        "Due": "",
+        "Payment": "",
+        "Notes": ""
     }
 }

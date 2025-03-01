@@ -102,9 +102,6 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
 
-    $tmp = strpos($this->main->requestedUri, '/');
-    if ($tmp === false) $this->viewParams['requestedUriFirstPart'] = $this->main->requestedUri;
-    else $this->viewParams['requestedUriFirstPart'] = substr($this->main->requestedUri, 0, (int) $tmp);
   }
 
   public function getBreadcrumbs(): array

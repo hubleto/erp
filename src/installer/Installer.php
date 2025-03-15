@@ -131,6 +131,9 @@ class Installer {
   {
 
     $this->main->config->set('db_name', '');
+    $this->main->config->set('db_host', $this->dbHost);
+    $this->main->config->set('db_user', $this->dbUser);
+    $this->main->config->set('db_password', $this->dbPassword);
     $this->main->initDatabaseConnections();
 
     $this->main->pdo->execute("drop database if exists `{$this->dbName}`");

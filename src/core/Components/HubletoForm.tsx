@@ -18,12 +18,17 @@ export default class HubletoForm<P, S> extends Form<HubletoFormProps,HubletoForm
     this.state = this.getStateFromProps(props);
   }
 
-  renderHeaderLeft(): JSX.Element {
+  renderFooter(): JSX.Element {
     return <>
       <div className="pr-4">
         {this.renderPrevRecordButton()}
         {this.renderNextRecordButton()}
       </div>
+    </>;
+  }
+
+  renderHeaderLeft(): JSX.Element {
+    return <>
       {this.state.isInlineEditing ? this.renderSaveButton() : this.renderEditButton()}
     </>;
   }

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Upgrade;
+namespace HubletoApp\Community\Premium;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -21,8 +21,9 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^upgrade\/?$/' => Controllers\Upgrade::class,
-      '/^you-are-pro\/?$/' => Controllers\YouArePro::class,
+      '/^premium\/?$/' => Controllers\Premium::class,
+      '/^premium\/upgrade\/?$/' => Controllers\Upgrade::class,
+      '/^premium\/you-are-upgraded\/?$/' => Controllers\PremiumActivated::class,
     ]);
 
   }
@@ -32,11 +33,12 @@ class Loader extends \HubletoMain\Core\App
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
 
-      "HubletoApp/Community/Upgrade/Controllers/Upgrade",
-      "HubletoApp/Community/Upgrade/Controllers/YouArePro",
+      "HubletoApp/Community/Premium/Controllers/Premium",
+      "HubletoApp/Community/Premium/Controllers/Upgrade",
+      "HubletoApp/Community/Premium/Controllers/PremiumActivated",
 
-      "HubletoApp/Community/Upgrade/Upgrade",
-      "HubletoApp/Community/Upgrade/YouArePro",
+      "HubletoApp/Community/Premium/Premium",
+      "HubletoApp/Community/Premium/PremiumActivated",
     ];
 
     foreach ($permissions as $permission) {

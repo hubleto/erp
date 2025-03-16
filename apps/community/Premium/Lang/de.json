@@ -1,9 +1,9 @@
 {
     "loader": {
-        "Upgrade": ""
+        "Premium": "Premium"
     },
     "manifest": {
-        "Upgrade": "",
+        "Premium": "Premium",
         "...": ""
     }
 }

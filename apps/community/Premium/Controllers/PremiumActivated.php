@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Upgrade\Controllers;
+namespace HubletoApp\Community\Premium\Controllers;
 
-class YouArePro extends \HubletoMain\Core\Controller {
+class PremiumActivated extends \HubletoMain\Core\Controller {
 
   public function prepareView(): void
   {
@@ -13,7 +13,7 @@ class YouArePro extends \HubletoMain\Core\Controller {
       $this->main->router->redirectTo('');
     }
 
-    $this->setView('@HubletoApp:Community:Upgrade/YouArePro.twig');
+    $this->setView('@HubletoApp:Community:Premium/PremiumActivated.twig');
   }
 
 }

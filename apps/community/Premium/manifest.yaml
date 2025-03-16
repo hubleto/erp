@@ -1,0 +1,11 @@
+namespace: HubletoApp\Community\Premium
+rootUrlSlug: premium
+name: Premium
+icon: fas fa-arrow-up
+author:
+  name: "wai.blue"
+  nick: "wai.blue"
+  company: "wai.blue"
+  github: "https://github.com/wai-blue"
+  linkedin: "https://www.linkedin.com/company/wai-blue"
+highlight: ...

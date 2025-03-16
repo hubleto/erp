@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Upgrade\Controllers;
+namespace HubletoApp\Community\Premium\Controllers;
 
 class Upgrade extends \HubletoMain\Core\Controller {
 
@@ -13,7 +13,7 @@ class Upgrade extends \HubletoMain\Core\Controller {
       $this->main->router->redirectTo('');
     }
 
-    $this->setView('@HubletoApp:Community:Upgrade/Upgrade.twig');
+    $this->setView('@HubletoApp:Community:Premium/Upgrade.twig');
   }
 
 }

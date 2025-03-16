@@ -36,7 +36,6 @@ class Person extends \HubletoMain\Core\Model
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE'))->setRequired(),
-      'is_main' => new Boolean($this, $this->translate('Main Contact')),
       'note' => (new Text($this, $this->translate('Notes'))),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
@@ -52,7 +51,6 @@ class Person extends \HubletoMain\Core\Model
     $description->ui['showFooter'] = false;
     $description->columns['virt_email'] = ["title" => $this->translate("Emails")];
     $description->columns['virt_number'] = ["title" => $this->translate("Phone Numbers")];
-    unset($description->columns['is_main']);
     unset($description->columns['note']);
 
     //nadstavit aby boli tieto stĺpce posledné
@@ -82,7 +80,6 @@ class Person extends \HubletoMain\Core\Model
   {
     $description = parent::describeForm();
     $description->defaultValues['is_active'] = 1;
-    $description->defaultValues['is_main'] = 0;
     return $description;
   }
 

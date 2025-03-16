@@ -26,7 +26,7 @@ class DealActivity extends \HubletoMain\Core\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setReadonly(),
-      'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class)),
+      'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_activity_type' => (new Lookup($this, $this->translate('Activity type'), ActivityType::class, 'SET NULL')),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),
       'date_start' => (new Date($this, $this->translate('Start date')))->setRequired(),

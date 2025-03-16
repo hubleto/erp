@@ -247,12 +247,12 @@ export default class FormCustomer<P, S> extends HubletoForm<
                       columns: {
                         first_name: { type: "varchar", title: this.translate("First name") },
                         last_name: { type: "varchar", title: this.translate("Last name") },
-                        is_main: { type: "boolean", title: this.translate("Main Contact") },
+                        virt_email: { type: "varchar", title: this.translate("Email"), },
+                        virt_number: { type: "varchar", title: this.translate("Phone number") },
                       },
                       inputs: {
                         first_name: { type: "varchar", title: this.translate("First name") },
                         last_name: { type: "varchar", title: this.translate("Last name") },
-                        is_main: { type: "boolean", title: this.translate("Main Contact") },
                       },
                     }}
                     isUsedAsInput={true}

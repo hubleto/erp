@@ -28,10 +28,6 @@ class Customer extends \HubletoMain\Core\ModelEloquent
     return $this->hasOne(Country::class, 'id', 'id_country' );
   }
 
-  public function FIRST_CONTACT(): HasOne { //@phpstan-ignore-line
-    return $this->hasOne(Person::class, 'id_customer')->where('is_main', true); //@phpstan-ignore-line
-  }
-
   /** @return HasMany<CustomerActivity, covariant Customer> */
   public function ACTIVITIES(): HasMany {
     return $this->hasMany(CustomerActivity::class, 'id_customer', 'id' );

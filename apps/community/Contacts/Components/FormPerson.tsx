@@ -80,9 +80,6 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
   }
 
   onBeforeSaveRecord(record: any) {
-    if (!record.is_main) {
-      record.is_main = 0;
-    }
     if (record.id == -1) {
       record.date_created = moment().format("YYYY-MM-DD");
     }
@@ -107,7 +104,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                 <div className="w-1/2">
                   {this.inputWrapper('first_name')}
                   {this.inputWrapper('last_name')}
-                  <FormInput title={this.translate("Customer")}>
+                  <FormInput title={this.translate("Customer")} required={true}>
                     <Lookup {...this.getInputProps('id_customer')}
                       model='HubletoApp/Community/Contacts/Models/Customer'
                       endpoint={`customers/get-customer`}
@@ -133,7 +130,6 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className="w-1/2">
-                  {this.inputWrapper('is_main')}
                   {showAdditional ? this.inputWrapper('is_active') : null}
                   {showAdditional ? this.inputWrapper('date_created') : null}
                 </div>
@@ -143,43 +139,42 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
             <div className='card mt-4' style={{gridArea: 'contacts'}}>
               <div className='card-header'>Contacts</div>
               <div className='card-body'>
-                <InputTable
-                  uid={this.props.uid + '_table_contacts_input'}
-                  {...this.getInputProps('contacts')}
-                  value={R.CONTACTS}
-                  onChange={(value: any) => {
-                    this.updateRecord({ CONTACTS: value });
+                <TableContacts
+                  uid={this.props.uid + '_table_contacts'}
+                  context="Hello World"
+                  data={{data: R.CONTACTS}}
+                  isInlineEditing={this.state.isInlineEditing}
+                  isUsedAsInput={true}
+                  descriptionSource="both"
+                  onRowClick={() => this.setState({isInlineEditing: true})}
+                  onChange={(table: TableContacts) => {
+                    this.updateRecord({ CONTACTS: table.state.data.data });
                   }}
-                >
-                  <TableContacts
-                    uid={this.props.uid + '_table_contacts'}
-                    context="Hello World"
-                    descriptionSource="both"
-                    customEndpointParams={{inForm: true}}
-                    description={{
-                      columns: {
-                        type: {
-                          type: 'varchar',
-                          title: this.translate('Type'),
-                          enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
-                          //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
-                        },
-                        value: { type: 'varchar', title: this.translate('Value')},
-                        id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                  onDeleteSelectionChange={(table: TableContacts) => {
+                    this.updateRecord({ CONTACTS: table.state.data.data ?? [] });
+                  }}
+                  customEndpointParams={{inForm: true}}
+                  description={{
+                    columns: {
+                      type: {
+                        type: 'varchar',
+                        title: this.translate('Type'),
+                        enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
                       },
-                      inputs: {
-                        type: {
-                          type: 'varchar',
-                          title: this.translate('Type'),
-                          enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
-                          //enumCssClasses: {'email' : 'bg-yellow-200', 'number' : 'bg-blue-200'},
-                        },
-                        value: { type: 'varchar', title: this.translate('Value')},
-                        id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Settings/Models/ContactType' },
-                      }
-                    }}
-                  ></TableContacts>
-                </InputTable>
+                      value: { type: 'varchar', title: this.translate('Value')},
+                      id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                    },
+                    inputs: {
+                      type: {
+                        type: 'varchar',
+                        title: this.translate('Type'),
+                        enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
+                      },
+                      value: { type: 'varchar', title: this.translate('Value')},
+                      id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                    }
+                  }}
+                />
                 {this.state.isInlineEditing ? (
                   <a
                     role='button'
@@ -190,7 +185,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                         id_person: { _useMasterRecordId_: true },
                         type: 'email',
                       });
-                      this.setState({ record: R });
+                      this.updateRecord({ CONTACTS: R.CONTACTS });
                       this.setState({ newEntryId: this.state.newEntryId - 1 } as FormPersonState);
                     }}
                   >

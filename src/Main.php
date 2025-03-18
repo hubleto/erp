@@ -58,7 +58,7 @@ spl_autoload_register(function(string $class) {
 class HubletoMain extends \ADIOS\Core\Loader
 {
 
-  const RELEASE = 'v0.8';
+  const RELEASE = 'v0.10';
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 

@@ -27,8 +27,6 @@ class Customer extends \HubletoMain\Core\Model
     'PERSONS' => [ self::HAS_MANY, Person::class, 'id_customer' ],
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
-    'FIRST_CONTACT' => [ self::HAS_ONE, Person::class, 'id_customer' ],
-    //'BILLING_ACCOUNTS' => [ self::HAS_MANY, BillingAccount::class, 'id_customer', ],
     'ACTIVITIES' => [ self::HAS_MANY, CustomerActivity::class, 'id_customer', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, CustomerDocument::class, 'id_customer', 'id'],
     'TAGS' => [ self::HAS_MANY, CustomerTag::class, 'id_customer', 'id' ],

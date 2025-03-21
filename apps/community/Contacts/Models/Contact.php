@@ -21,7 +21,7 @@ class Contact extends \HubletoMain\Core\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_person' => (new Lookup($this, $this->translate('Person'), Person::class))->setRequired(),
+      'id_person' => (new Lookup($this, $this->translate('Person'), Person::class, "CASCADE"))->setRequired(),
       'id_contact_category' => (new Lookup($this, $this->translate('Contact Category'), ContactType::class))->setRequired(),
       'type' => (new Varchar($this, $this->translate('Type')))
         ->setEnumValues(['email' => $this->translate('Email'), 'number' => $this->translate('Phone Number'), 'other' => $this->translate('Other')])

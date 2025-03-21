@@ -29,12 +29,12 @@
 
   .app-launcher-show-btn { @apply cursor-pointer bg-white/20 text-white text-xs m-1 p-1 flex items-center gap-2 justify-center rounded hover:bg-white/40; }
 
-  #app-launcher { @apply hidden fixed w-full h-full bg-white/80; z-index: 10000; top: 0; left: 0; overflow: auto; }
+  #app-launcher { @apply hidden fixed w-full h-full bg-white/90; z-index: 10000; top: 0; left: 0; overflow: auto; }
   #app-launcher.visible { @apply block; }
   #app-launcher > div { @apply m-auto p-10 flex flex-wrap gap-4; width: 75%; }
   #app-launcher > div .app-launcher-header { @apply w-full; }
   #app-launcher > div .app-launcher-header input { @apply bg-white w-1/2 mr-2 text-lg border border-primary rounded p-2; }
-  #app-launcher > div .app-launcher-app-button { @apply text-slate-800 cursor-pointer w-1/6 bg-slate-50 shadow-sm flex flex-col border border-primary hover:bg-primary hover:text-white; }
+  #app-launcher > div .app-launcher-app-button { @apply text-slate-800 cursor-pointer w-1/6 bg-white shadow-sm flex flex-col border border-primary hover:bg-primary hover:text-white; }
   #app-launcher > div .app-launcher-app-button .icon { @apply p-4 text-center text-4xl; }
   #app-launcher > div .app-launcher-app-button .text { @apply p-4 text-center; }
 }

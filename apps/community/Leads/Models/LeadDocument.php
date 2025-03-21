@@ -13,14 +13,14 @@ class LeadDocument extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\LeadDocument::class;
 
   public array $relations = [
-    'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id' ],
+    'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lookup', 'id' ],
     'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
+      'id_lookup' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
       'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
     ]);
   }

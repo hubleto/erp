@@ -33,24 +33,24 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
     }
   }
 
-  onBeforeSaveRecord(record: any) {
-    if (record.id == -1) {
-      record.completed = 0;
-    }
-
-    return record;
-  }
-
   renderContent(): JSX.Element {
     const R = this.state.record;
-
     const showAdditional: boolean = R.id > 0 ? true : false;
 
     return (
       <>
-        {this.inputWrapper('id_customer')}
+        <FormInput title={this.translate("Customer")} required={true}>
+          <Lookup {...this.getInputProps('id_customer')}
+            model='HubletoApp/Community/Contacts/Models/Customer'
+            endpoint={`customers/get-customer`}
+            value={R.id_customer}
+            onChange={(value: any) => {
+              this.updateRecord({ id_customer: value});
+            }}
+          ></Lookup>
+        </FormInput>
         <FormInput title={"Contact Person"}>
-          <Lookup {...this.getInputProps()}
+          <Lookup {...this.getInputProps("id_person")}
             model='HubletoApp/Community/Customers/Models/Person'
             endpoint={`contacts/get-customer-contacts`}
             customEndpointParams={{id_customer: R.id_customer}}

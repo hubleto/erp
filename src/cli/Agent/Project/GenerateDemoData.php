@@ -59,7 +59,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mPerson             = new \HubletoApp\Community\Contacts\Models\Person($this->main);
     $mPersonTag          = new \HubletoApp\Community\Contacts\Models\PersonTag($this->main);
     $mContact            = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
-    $mAddress            = new \HubletoApp\Community\Contacts\Models\Address($this->main);
     $mCustomerActivity    = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
     $mCustomerDocument    = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
     $mCustomerTag         = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
@@ -90,7 +89,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
 
     $this->generateCustomers($mCustomer, $mCustomerTag);
-    $this->generatePersons($mPerson, $mPersonTag, $mContact, $mAddress);
+    $this->generatePersons($mPerson, $mPersonTag, $mContact);
     //$this->generateActivities($mCustomer, $mActivity, $mCustomerActivity);
     $this->generateServices($mCustomer, $mService);
     $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
@@ -271,7 +270,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     \HubletoApp\Community\Contacts\Models\Person $mPerson,
     \HubletoApp\Community\Contacts\Models\PersonTag $mPersonTag,
     \HubletoApp\Community\Contacts\Models\Contact $mContact,
-    \HubletoApp\Community\Contacts\Models\Address $mAddress,
   ): void {
 
     $persons = [
@@ -461,16 +459,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
           "id_tag" => rand(1, 3)
         ]);
       }
-
-      $mAddress->record->create([
-        "id_person" => $idPerson,
-        "street_line_1" => $streets[rand(0, 9)],
-        "street_line_2" => "",
-        "postal_code" => $postalCodes[rand(0, 9)],
-        "city" => $cities[rand(0, 9)],
-        "region" => $regions[rand(0, 9)],
-        "id_country" => rand(1, 100)
-      ]);
     }
   }
 

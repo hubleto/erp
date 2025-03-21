@@ -34,14 +34,6 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
     }
   }
 
-  onBeforeSaveRecord(record: any) {
-    if (record.id == -1) {
-      record.completed = 0;
-    }
-
-    return record;
-  }
-
   renderContent(): JSX.Element {
     const R = this.state.record;
 
@@ -51,7 +43,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
       <>
         {this.inputWrapper('id_deal')}
         <FormInput title={"Contact Person"}>
-          <Lookup {...this.getInputProps()}
+          <Lookup {...this.getInputProps("id_person")}
             model='HubletoApp/Community/Customers/Models/Person'
             endpoint={`contacts/get-customer-contacts`}
             customEndpointParams={{id_customer: this.props.idCustomer}}

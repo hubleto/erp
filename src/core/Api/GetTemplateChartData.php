@@ -42,11 +42,11 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
           break;
       }
 
-      $query = $model->eloquent->selectRaw($function." as function, ".$groupBy);
+      $query = $model->eloquent->selectRaw($function." as result, ".$groupBy);
       foreach ($config["searchGroups"] as $searchGroup) {
-        if ($searchGroup["option"] == 5) $query = $query->where($searchGroup["fieldName"], GetTemplateChartData::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
+        if ($searchGroup["option"] == 5) $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
         else if ($searchGroup["option"] == 6) $query = $query->whereBetween($searchGroup["fieldName"], [$searchGroup["value"], $searchGroup["value2"]]);
-        else $query = $query->where($searchGroup["fieldName"], GetTemplateChartData::OPERATIONS[$searchGroup["option"]], $searchGroup["value"]);
+        else $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], $searchGroup["value"]);
       }
 
       $data = $query->groupBy($groupBy)->get()->toArray();
@@ -68,7 +68,7 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
             ->toArray()[$groupByModelLookupSqlValue]
           ;
           $returnData["labels"][] = $label;
-          $returnData["values"][] = $value["function"];
+          $returnData["values"][] = $value["result"];
           $returnData["colors"][] = $this->generateRandomColor();
         }
       }

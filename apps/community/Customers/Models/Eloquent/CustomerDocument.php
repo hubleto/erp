@@ -17,6 +17,6 @@ class CustomerDocument extends \HubletoMain\Core\ModelEloquent
 
   /** @return BelongsTo<Customer, covariant CustomerDocument> */
   public function CUSTOMER(): BelongsTo {
-    return $this->belongsTo(Customer::class, 'id_customer', 'id');
+    return $this->belongsTo(Customer::class, 'id_lookup', 'id');
   }
 }

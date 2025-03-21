@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
-import InputTable from 'adios/Inputs/Table';
 import FormInput from 'adios/FormInput';
 /* import TableAddresses from './TableAddresses'; */
 import TableContacts from './TableContacts';
@@ -43,48 +42,20 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
     };
   }
 
-  normalizeRecord(record) {
-    /* if (record.ADDRESSES) record.ADDRESSES.map((item: any, key: number) => {
-      record.ADDRESSES[key].id_person = {_useMasterRecordId_: true};
-    }); */
-    if (record.CONTACTS) record.CONTACTS.map((item: any, key: number) => {
-      record.CONTACTS[key].id_person = {_useMasterRecordId_: true};
-    });
-    if (record.TAGS) record.TAGS.map((item: any, key: number) => {
-      record.TAGS[key].id_person = {_useMasterRecordId_: true};
-    });
-
-    return record;
-  }
-
   renderTitle(): JSX.Element {
     if (getUrlParam('recordId') == -1) {
       return(
-        <>
-          <h2>
-            {'New Person'}
-          </h2>
-        </>
+        <h2>{'New Contact'}</h2>
       );
     } else {
       return (
-        <>
-          <h2>
-            {this.state.record.last_name
-              ? this.state.record.first_name + ' ' + this.state.record.last_name
-              : '[Undefined Name]'}
-          </h2>
-        </>
+        <h2>
+          {this.state.record.first_name && this.state.record.last_name
+            ? this.state.record.first_name + " " + this.state.record.last_name
+            : "[Undefined Contact Name]"}
+        </h2>
       );
     }
-  }
-
-  onBeforeSaveRecord(record: any) {
-    if (record.id == -1) {
-      record.date_created = moment().format("YYYY-MM-DD");
-    }
-
-    return record;
   }
 
   renderContent(): JSX.Element {
@@ -104,7 +75,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                 <div className="w-1/2">
                   {this.inputWrapper('first_name')}
                   {this.inputWrapper('last_name')}
-                  <FormInput title={this.translate("Customer")} required={true}>
+                  <FormInput title={this.translate("Customer")}>
                     <Lookup {...this.getInputProps('id_customer')}
                       model='HubletoApp/Community/Contacts/Models/Customer'
                       endpoint={`customers/get-customer`}
@@ -130,6 +101,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className="w-1/2">
+                  {this.inputWrapper('note')}
                   {showAdditional ? this.inputWrapper('is_active') : null}
                   {showAdditional ? this.inputWrapper('date_created') : null}
                 </div>
@@ -139,12 +111,30 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
             <div className='card mt-4' style={{gridArea: 'contacts'}}>
               <div className='card-header'>Contacts</div>
               <div className='card-body'>
+                {this.state.isInlineEditing ? (
+                  <a
+                    role='button'
+                    onClick={() => {
+                      if (!R.CONTACTS) R.CONTACTS = [];
+                      R.CONTACTS.push({
+                        id: this.state.newEntryId,
+                        id_person: { _useMasterRecordId_: true },
+                        type: 'email',
+                      });
+                      this.updateRecord({ CONTACTS: R.CONTACTS });
+                      this.setState({ newEntryId: this.state.newEntryId - 1 } as FormPersonState);
+                    }}
+                  >
+                    + Add Contact
+                  </a>
+                ) : null}
                 <TableContacts
                   uid={this.props.uid + '_table_contacts'}
                   context="Hello World"
                   data={{data: R.CONTACTS}}
                   isInlineEditing={this.state.isInlineEditing}
                   isUsedAsInput={true}
+                  readonly={!this.state.isInlineEditing}
                   descriptionSource="both"
                   onRowClick={() => this.setState({isInlineEditing: true})}
                   onChange={(table: TableContacts) => {
@@ -175,23 +165,6 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                     }
                   }}
                 />
-                {this.state.isInlineEditing ? (
-                  <a
-                    role='button'
-                    onClick={() => {
-                      if (!R.CONTACTS) R.CONTACTS = [];
-                      R.CONTACTS.push({
-                        id: this.state.newEntryId,
-                        id_person: { _useMasterRecordId_: true },
-                        type: 'email',
-                      });
-                      this.updateRecord({ CONTACTS: R.CONTACTS });
-                      this.setState({ newEntryId: this.state.newEntryId - 1 } as FormPersonState);
-                    }}
-                  >
-                    + Add Contact
-                  </a>
-                ) : null}
               </div>
             </div>
         </div>

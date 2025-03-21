@@ -36,7 +36,7 @@ class Lead extends \HubletoMain\Core\Model
     'TAGS' => [ self::HAS_MANY, LeadTag::class, 'id_lead', 'id' ],
     'SERVICES' => [ self::HAS_MANY, LeadService::class, 'id_lead', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, LeadActivity::class, 'id_lead', 'id' ],
-    'DOCUMENTS' => [ self::HAS_MANY, LeadDocument::class, 'id_lead', 'id'],
+    'DOCUMENTS' => [ self::HAS_MANY, LeadDocument::class, 'id_lookup', 'id'],
   ];
 
   public function describeColumns(): array
@@ -132,7 +132,7 @@ class Lead extends \HubletoMain\Core\Model
     $description->defaultValues['id_lead_status'] = 1;
     $description->defaultValues['id_user'] = $this->main->auth->getUserId();
 
-    $description->ui['addButtonText'] = $this->translate('Add lead');
+    $description->ui['addButtonText'] = $this->translate('Add Lead');
 
     return $description;
   }

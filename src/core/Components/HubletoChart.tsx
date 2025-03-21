@@ -12,10 +12,7 @@ export interface HubletoChartProps {
   data: any,
 }
 
-export interface HubletoChartState {
-  type: HubletoChartType,
-  data: any,
-}
+export interface HubletoChartState {}
 
 export default class HubletoChart<P, S> extends Component<HubletoChartProps,HubletoChartState> {
   props: HubletoChartProps;
@@ -23,19 +20,10 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
 
   constructor(props: HubletoChartProps) {
     super(props);
-
-    this.state = this.getStateFromProps(props);
-  }
-
-  getStateFromProps(props: HubletoChartProps) {
-    return {
-      type: props.type,
-      data: props.data,
-    }
   }
 
   render(): JSX.Element {
-    switch (this.state.type) {
+    switch (this.props.type) {
       case "bar":
         return (
           <Bar
@@ -54,11 +42,11 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
               },
             }}
             data={{
-              labels: this.state.data != null ? [...this.state.data.labels] : [],
+              labels: this.props.data != null ? [...this.props.data.labels] : [],
               datasets: [
                 {
-                  data: this.state.data != null ? [...this.state.data.values] : [],
-                  backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
+                  data: this.props.data != null ? [...this.props.data.values] : [],
+                  backgroundColor: this.props.data != null ? [...this.props.data.colors] : [],
                 },
               ],
             }}
@@ -77,11 +65,11 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
                 },
               }}
               data={{
-                labels: this.state.data ? [...this.state.data.labels] : [],
+                labels: this.props.data ? [...this.props.data.labels] : [],
                 datasets: [
                   {
-                    data: this.state.data ? [...this.state.data.values] : [],
-                    backgroundColor: this.state.data != null ? [...this.state.data.colors] : [],
+                    data: this.props.data ? [...this.props.data.values] : [],
+                    backgroundColor: this.props.data != null ? [...this.props.data.colors] : [],
                   },
                 ],
               }}

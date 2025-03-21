@@ -17,7 +17,7 @@ class DealDocument extends \HubletoMain\Core\ModelEloquent
 
   /** @return BelongsTo<Deal, covariant DealDocument> */
   public function DEAL(): BelongsTo {
-    return $this->belongsTo(Deal::class, 'id_deal', 'id');
+    return $this->belongsTo(Deal::class, 'id_lookup', 'id');
   }
 
 }

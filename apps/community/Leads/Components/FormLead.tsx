@@ -280,18 +280,20 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                                       cssClass='min-w-44'
                                       value={data.id_service}
                                       onChange={(value: any) => {
-                                        fetch(globalThis.main.config.rewriteBase + '/services/get-service-price?serviceId='+value)
-                                        .then(response => {
-                                          if (!response.ok) {
-                                            throw new Error('Network response was not ok ' + response.statusText);
+                                        request.get(
+                                          'services/get-service-price',
+                                          {serviceId: value},
+                                          (returnData: any) => {
+                                            if (returnData.status == "success") {
+                                              data.id_service = value;
+                                              data.unit_price = returnData.unit_price;
+                                              this.updateRecord({ SERVICES: table.state.data?.data });
+                                              this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
+                                            } else {
+                                              throw new Error('Something went wrong: ' + returnData.error);
+                                            }
                                           }
-                                          return response.json();
-                                        }).then(returnData => {
-                                          data.id_service = value;
-                                          data.unit_price = returnData.unit_price;
-                                          this.updateRecord({ SERVICES: table.state.data?.data });
-                                          this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
-                                        })
+                                        )
                                       }}
                                     ></Lookup>
                                   </FormInput>
@@ -516,12 +518,11 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     id={-1}
                     descriptionSource="both"
                     isInlineEditing={true}
-                    creatingForModel="Lead"
-                    creatingForId={this.state.id}
                     description={{
                       defaultValues: {
-                        creatingForModel: "Lead",
+                        creatingForModel: "HubletoApp/Community/Leads/Models/LeadDocument",
                         creatingForId: this.state.record.id,
+                        origin_link: window.location.pathname + "?recordId=" + this.state.record.id,
                       }
                     }}
                     showInModal={true}

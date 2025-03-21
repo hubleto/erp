@@ -6,7 +6,6 @@ use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Products\Models\Product;
 
 use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Integer;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Varchar;

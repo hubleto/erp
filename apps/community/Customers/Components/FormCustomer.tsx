@@ -18,7 +18,6 @@ import Calendar from '../../Calendar/Components/Calendar'
 import Hyperlink from "adios/Inputs/Hyperlink";
 
 interface FormCustomerProps extends HubletoFormProps {
-  highlightIdBussinessAccounts: number,
   highlightIdActivity: number,
   createNewLead: boolean,
   createNewDeal: boolean,
@@ -26,24 +25,18 @@ interface FormCustomerProps extends HubletoFormProps {
 }
 
 interface FormCustomerState extends HubletoFormState {
-  //highlightIdBussinessAccounts: number,
   highlightIdActivity: number,
   createNewLead: boolean,
   createNewDeal: boolean,
-  createNewDocument: boolean,
   createNewPerson: boolean,
   newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
   activityCalendarTimeClicked: string,
   activityCalendarDateClicked: string,
-  //isInlineEditingBillingAccounts: boolean
 }
 
-export default class FormCustomer<P, S> extends HubletoForm<
-  FormCustomerProps,
-  FormCustomerState
-> {
+export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, FormCustomerState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
     model: "HubletoApp/Community/Customers/Models/Customer",
@@ -59,18 +52,15 @@ export default class FormCustomer<P, S> extends HubletoForm<
 
     this.state = {
       ...this.getStateFromProps(props),
-      //highlightIdBussinessAccounts: this.props.highlightIdBussinessAccounts ?? 0,
       highlightIdActivity: this.props.highlightIdActivity ?? 0,
       createNewLead: false,
       createNewDeal: false,
-      createNewDocument: false,
       createNewPerson: false,
       showIdDocument: 0,
       newEntryId: this.props.newEntryId ?? -1,
       showIdActivity: 0,
       activityCalendarTimeClicked: '',
       activityCalendarDateClicked: '',
-      //isInlineEditingBillingAccounts: false,
     }
   }
 
@@ -78,33 +68,6 @@ export default class FormCustomer<P, S> extends HubletoForm<
     return {
       ...super.getStateFromProps(props),
     };
-  }
-
-  normalizeRecord(record) {
-    if (record.PERSONS)
-      record.PERSONS.map((item: any, key: number) => {
-        record.PERSONS[key].id_customer = { _useMasterRecordId_: true };
-      });
-    if (record.ACTIVITIES)
-      record.ACTIVITIES.map((item: any, key: number) => {
-        record.ACTIVITIES[key].id_customer = { _useMasterRecordId_: true };
-      });
-    /* if (record.BILLING_ACCOUNTS) {
-      record.BILLING_ACCOUNTS.map((item: any, key: number) => {
-        record.BILLING_ACCOUNTS[key].id_customer = { _useMasterRecordId_: true };
-        if (record.BILLING_ACCOUNTS[key].SERVICES) {
-          record.BILLING_ACCOUNTS[key].SERVICES.map((item2: any, key2: number) => {
-            record.BILLING_ACCOUNTS[key].SERVICES[key2].id_billing_account  = { _useMasterRecordId_: true };
-          })
-        }
-      });
-    } */
-    if (record.TAGS)
-      record.TAGS.map((item: any, key: number) => {
-        record.TAGS[key].id_customer = { _useMasterRecordId_: true };
-      });
-
-    return record;
   }
 
   onBeforeSaveRecord(record: any) {
@@ -120,11 +83,11 @@ export default class FormCustomer<P, S> extends HubletoForm<
     if (getUrlParam("recordId") == -1) {
       return <h2>New Customer</h2>;
     } else {
-      return <h2>{this.state.record.name ? this.state.record.name : "[Undefined Name]"}</h2>;
+      return <h2>{this.state.record.name ? this.state.record.name : "[Undefined Customer Name]"}</h2>;
     }
   }
 
-  renderNewPersonForm(R: any) {
+  renderNewPersonForm(R: any): JSX.Element {
     return (
       <ModalSimple
         uid='person_form'
@@ -154,6 +117,137 @@ export default class FormCustomer<P, S> extends HubletoForm<
         </FormPerson>
       </ModalSimple>
     )
+  }
+
+  renderActivityForm(R: any): JSX.Element {
+    return (
+      <ModalSimple
+        uid='activity_form'
+        isOpen={true}
+        type='right'
+      >
+        <FormActivity
+          id={this.state.showIdActivity}
+          isInlineEditing={true}
+          description={{
+            defaultValues: {
+              id_customer: R.id,
+              date_start: this.state.activityCalendarDateClicked,
+              time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
+              date_end: this.state.activityCalendarDateClicked,
+            }
+          }}
+          showInModal={true}
+          showInModalSimple={true}
+          onClose={() => { this.setState({ showIdActivity: 0 } as FormCustomerState) }}
+          onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+            if (saveResponse.status == "success") {
+              this.setState({ showIdActivity: 0 } as FormCustomerState);
+            }
+          }}
+        ></FormActivity>
+      </ModalSimple>
+     )
+  }
+
+  renderNewLeadForm(R: any): JSX.Element {
+    return (
+      <ModalSimple
+        uid='lead_form'
+        isOpen={true}
+        type='right'
+      >
+        <FormLead
+          id={-1}
+          isInlineEditing={true}
+          descriptionSource="both"
+          description={{
+            defaultValues: {
+              id_customer: R.id,
+            }
+          }}
+          showInModal={true}
+          showInModalSimple={true}
+          onClose={() => { this.setState({ createNewLead: false } as FormCustomerState); }}
+          onSaveCallback={(form: FormLead<FormLeadProps, FormLeadState>, saveResponse: any) => {
+            if (saveResponse.status = "success") {
+              console.log("hihi");
+
+              this.loadRecord();
+              this.setState({createNewLead: false} as FormCustomerState)
+            }
+          }}
+        />
+      </ModalSimple>
+    )
+  }
+
+  renderNewDealForm(R: any): JSX.Element{
+  return (
+    <ModalSimple
+      uid='deal_form'
+      isOpen={true}
+      type='right'
+    >
+      <FormDeal
+        id={-1}
+        isInlineEditing={true}
+        descriptionSource="both"
+        description={{
+          defaultValues: {
+            id_customer: R.id,
+          }
+        }}
+        showInModal={true}
+        showInModalSimple={true}
+        onClose={() => { this.setState({ createNewDeal: false } as FormCustomerState); }}
+        onSaveCallback={(form: FormDeal<FormDealProps, FormDealState>, saveResponse: any) => {
+          if (saveResponse.status = "success") {
+            this.loadRecord();
+            this.setState({createNewDeal: false} as FormCustomerState)
+          }
+        }}
+      />
+    </ModalSimple>
+  )
+  }
+
+  renderDocumentForm(): JSX.Element{
+    return (
+      <ModalSimple
+        uid='document_form'
+        isOpen={true}
+        type='right'
+      >
+        <FormDocument
+          id={this.state.showIdDocument}
+          onClose={() => this.setState({showIdDocument: 0} as FormCustomerState)}
+          showInModal={true}
+          descriptionSource="both"
+          description={{
+            defaultValues: {
+              creatingForModel: "HubletoApp/Community/Customers/Models/CustomerDocument",
+              creatingForId: this.state.record.id,
+              origin_link: window.location.pathname + "?recordId=" + this.state.record.id,
+            }
+          }}
+          isInlineEditing={this.state.showIdDocument < 0 ? true : false}
+          showInModalSimple={true}
+          onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+            if (saveResponse.status = "success") {
+              this.loadRecord();
+              this.setState({ showIdDocument: 0 } as FormCustomerState)
+            }
+          }}
+          onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+            if (saveResponse.status = "success") {
+              this.loadRecord();
+              this.setState({ showIdDocument: 0 } as FormCustomerState)
+            }
+          }}
+        />
+      </ModalSimple>
+    );
   }
 
   renderContent(): JSX.Element {
@@ -229,59 +323,58 @@ export default class FormCustomer<P, S> extends HubletoForm<
               </div>
 
               {showAdditional ?
-              <div className="card" style={{ gridArea: "contacts" }}>
-                <div className="card-header">{this.translate('Contacts')}</div>
-                <div className="card-body">
-                  <TablePersons
-                    uid={this.props.uid + "_table_persons"}
-                    showHeader={false}
-                    showFooter={false}
-                    descriptionSource="both"
-                    customEndpointParams={{idCustomer: R.id}}
-                    data={{ data: R.PERSONS }}
-                    parentForm={this}
-                    description={{
-                      ui: {
-                        addButtonText: this.translate('Add contact'),
-                      },
-                      columns: {
-                        first_name: { type: "varchar", title: this.translate("First name") },
-                        last_name: { type: "varchar", title: this.translate("Last name") },
-                        virt_email: { type: "varchar", title: this.translate("Email"), },
-                        virt_number: { type: "varchar", title: this.translate("Phone number") },
-                      },
-                      inputs: {
-                        first_name: { type: "varchar", title: this.translate("First name") },
-                        last_name: { type: "varchar", title: this.translate("Last name") },
-                      },
-                    }}
-                    isUsedAsInput={true}
-                    readonly={false}
-                    onRowClick={(table: TablePersons, row: any) => {
-                      table.openForm(row.id);
-                    }}
-                    onChange={(table: TablePersons) => {
-                      this.updateRecord({ PERSONS: table.state.data?.data });
-                    }}
-                    onDeleteSelectionChange={(table: TablePersons) => {
-                      this.updateRecord({ PERSONS: table.state.data?.data ?? [] });
-                    }}
-                  ></TablePersons>
-                  {this.state.isInlineEditing ? (
-                    <a
-                      role="button"
-                      onClick={() => {
-                        if (!R.PERSONS) R.PERSONS = [];
-                        this.setState({createNewPerson: true} as FormCustomerState);
-                      }}>
-                      + {this.translate('Add contact')}
-                    </a>
-                  ) : null}
-                  {this.state.createNewPerson ?
-                    this.renderNewPersonForm(R)
-                  : null}
+                <div className="card" style={{ gridArea: "contacts" }}>
+                  <div className="card-header">{this.translate('Contacts')}</div>
+                  <div className="card-body">
+                    {this.state.isInlineEditing ? (
+                      <a
+                        role="button"
+                        onClick={() => {
+                          if (!R.PERSONS) R.PERSONS = [];
+                          this.setState({createNewPerson: true} as FormCustomerState);
+                        }}>
+                        + {this.translate('Add contact')}
+                      </a>
+                    ) : null}
+                    <TablePersons
+                      uid={this.props.uid + "_table_persons"}
+                      parentForm={this}
+                      isUsedAsInput={true}
+                      readonly={!this.state.isInlineEditing}
+                      customEndpointParams={{idCustomer: R.id}}
+                      data={{ data: R.PERSONS }}
+                      descriptionSource="both"
+                      description={{
+                        ui: {
+                          addButtonText: this.translate('Add contact'),
+                        },
+                        columns: {
+                          first_name: { type: "varchar", title: this.translate("First name") },
+                          last_name: { type: "varchar", title: this.translate("Last name") },
+                          virt_email: { type: "varchar", title: this.translate("Email"), },
+                          virt_number: { type: "varchar", title: this.translate("Phone number") },
+                        },
+                        inputs: {
+                          first_name: { type: "varchar", title: this.translate("First name") },
+                          last_name: { type: "varchar", title: this.translate("Last name") },
+                        },
+                      }}
+                      onRowClick={(table: TablePersons, row: any) => {
+                        table.openForm(row.id);
+                      }}
+                      onChange={(table: TablePersons) => {
+                        this.updateRecord({ PERSONS: table.state.data?.data });
+                      }}
+                      onDeleteSelectionChange={(table: TablePersons) => {
+                        this.updateRecord({ PERSONS: table.state.data?.data ?? [] });
+                      }}
+                    ></TablePersons>
+
+                    {this.state.createNewPerson ?
+                      this.renderNewPersonForm(R)
+                    : null}
+                  </div>
                 </div>
-              </div>
               : null}
             </div>
           </TabPanel>
@@ -306,65 +399,12 @@ export default class FormCustomer<P, S> extends HubletoForm<
                 }}
               ></Calendar>
               {this.state.showIdActivity == 0 ? <></> :
-                <ModalSimple
-                  uid='activity_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormActivity
-                    id={this.state.showIdActivity}
-                    isInlineEditing={true}
-                    description={{
-                      defaultValues: {
-                        id_customer: R.id,
-                        date_start: this.state.activityCalendarDateClicked,
-                        time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
-                        date_end: this.state.activityCalendarDateClicked,
-                      }
-                    }}
-                    showInModal={true}
-                    showInModalSimple={true}
-                    onClose={() => { this.setState({ showIdActivity: 0 } as FormCustomerState) }}
-                    onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
-                      if (saveResponse.status == "success") {
-                        this.setState({ showIdActivity: 0 } as FormCustomerState);
-                      }
-                    }}
-                  ></FormActivity>
-                </ModalSimple>
+                this.renderActivityForm(R)
               }
             </TabPanel>
           ) : null}
           {showAdditional ? (
             <TabPanel header={this.translate('Leads')}>
-              <TableLeads
-                uid={this.props.uid + "_table_leads"}
-                data={{ data: R.LEADS }}
-                descriptionSource="both"
-                customEndpointParams={{idCustomer: R.id}}
-                description={{
-                  columns: {
-                    title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
-                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
-                    date_expected_close: { type: "date", title: "Expected Close Date" },
-                  },
-                  inputs: {
-                    title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
-                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
-                    date_expected_close: { type: "date", title: "Expected Close Date" },
-                  },
-                }}
-                isUsedAsInput={false}
-                readonly={false}
-                onRowClick={(table: TableLeads, row: any) => {
-                  table.openForm(row.id);
-                }}
-                onDeleteSelectionChange={(table: TableLeads) => {
-                  this.updateRecord({ LEADS: table.state.data?.data ?? [] });
-                }}
-              />
               {this.state.isInlineEditing ? (
                 <a
                   role="button"
@@ -372,42 +412,13 @@ export default class FormCustomer<P, S> extends HubletoForm<
                   + Add Lead
                 </a>
               ) : <></>}
-              {this.state.createNewLead == true ? (
-                <ModalSimple
-                  uid='lead_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormLead
-                    id={-1}
-                    isInlineEditing={true}
-                    descriptionSource="both"
-                    description={{
-                      defaultValues: {
-                        id_customer: R.id,
-                      }
-                    }}
-                    showInModal={true}
-                    showInModalSimple={true}
-                    onClose={() => { this.setState({ createNewLead: false } as FormCustomerState); }}
-                    onSaveCallback={(form: FormLead<FormLeadProps, FormLeadState>, saveResponse: any) => {
-                      if (saveResponse.status = "success") {
-                        this.loadRecord();
-                        this.setState({createNewLead: false} as FormCustomerState)
-                      }
-                    }}
-                  />
-                </ModalSimple>
-              ): null}
-            </TabPanel>
-          ) : null}
-          {showAdditional ? (
-            <TabPanel header={this.translate('Deals')}>
-              <TableDeals
-                uid={this.props.uid + "_table_deals"}
-                data={{ data: R.DEALS }}
+              <TableLeads
+                uid={this.props.uid + "_table_leads"}
+                data={{ data: R.LEADS }}
                 descriptionSource="both"
                 customEndpointParams={{idCustomer: R.id}}
+                isUsedAsInput={false}
+                readonly={!this.state.isInlineEditing}
                 description={{
                   columns: {
                     title: { type: "varchar", title: "Title" },
@@ -422,16 +433,20 @@ export default class FormCustomer<P, S> extends HubletoForm<
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                 }}
-                isUsedAsInput={false}
-                //isInlineEditing={this.state.isInlineEditing}
-                readonly={false}
-                onRowClick={(table: TableDeals, row: any) => {
+                onRowClick={(table: TableLeads, row: any) => {
                   table.openForm(row.id);
                 }}
-                onDeleteSelectionChange={(table: TableDeals) => {
-                  this.updateRecord({ DEALS: table.state.data?.data ?? [] });
+                onDeleteSelectionChange={(table: TableLeads) => {
+                  this.updateRecord({ LEADS: table.state.data?.data ?? [] });
                 }}
               />
+              {this.state.createNewLead == true ? (
+                this.renderNewLeadForm(R)
+              ): null}
+            </TabPanel>
+          ) : null}
+          {showAdditional ? (
+            <TabPanel header={this.translate('Deals')}>
               {this.state.isInlineEditing ? (
                 <a
                   role="button"
@@ -439,32 +454,36 @@ export default class FormCustomer<P, S> extends HubletoForm<
                   + Add Deal
                 </a>
               ) : <></>}
+              <TableDeals
+                uid={this.props.uid + "_table_deals"}
+                data={{ data: R.DEALS }}
+                descriptionSource="both"
+                customEndpointParams={{idCustomer: R.id}}
+                isUsedAsInput={false}
+                readonly={!this.state.isInlineEditing}
+                description={{
+                  columns: {
+                    title: { type: "varchar", title: "Title" },
+                    price: { type: "float", title: "Amount" },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    date_expected_close: { type: "date", title: "Expected Close Date" },
+                  },
+                  inputs: {
+                    title: { type: "varchar", title: "Title" },
+                    price: { type: "float", title: "Amount" },
+                    id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
+                    date_expected_close: { type: "date", title: "Expected Close Date" },
+                  },
+                }}
+                onRowClick={(table: TableDeals, row: any) => {
+                  table.openForm(row.id);
+                }}
+                onDeleteSelectionChange={(table: TableDeals) => {
+                  this.updateRecord({ DEALS: table.state.data?.data ?? [] });
+                }}
+              />
               {this.state.createNewDeal == true ? (
-                <ModalSimple
-                  uid='deal_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormDeal
-                    id={-1}
-                    isInlineEditing={true}
-                    descriptionSource="both"
-                    description={{
-                      defaultValues: {
-                        id_customer: R.id,
-                      }
-                    }}
-                    showInModal={true}
-                    showInModalSimple={true}
-                    onClose={() => { this.setState({ createNewDeal: false } as FormCustomerState); }}
-                    onSaveCallback={(form: FormDeal<FormDealProps, FormDealState>, saveResponse: any) => {
-                      if (saveResponse.status = "success") {
-                        this.loadRecord();
-                        this.setState({createNewDeal: false} as FormCustomerState)
-                      }
-                    }}
-                  />
-                </ModalSimple>
+                this.renderNewDealForm(R)
               ): null}
             </TabPanel>
           ) : null}
@@ -473,11 +492,21 @@ export default class FormCustomer<P, S> extends HubletoForm<
               <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
               {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
               <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
+              {this.state.isInlineEditing ? (
+                <a
+                  role="button"
+                  onClick={() => this.setState({showIdDocument: -1} as FormCustomerState)}
+                >
+                  + Add Document
+                </a>
+              ) : <></>}
               <TableCustomerDocuments
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DOCUMENTS }}
                 descriptionSource="both"
                 customEndpointParams={{idCustomer: R.id}}
+                isUsedAsInput={true}
+                readonly={!this.state.isInlineEditing}
                 description={{
                   ui: {
                     showFooter: false,
@@ -501,100 +530,16 @@ export default class FormCustomer<P, S> extends HubletoForm<
                     hyperlink: { type: "varchar", title: "Link", readonly: true},
                   },
                 }}
-                isUsedAsInput={true}
-                //isInlineEditing={this.state.isInlineEditing}
-                readonly={!this.state.isInlineEditing}
                 onRowClick={(table: TableCustomerDocuments, row: any) => {
                   this.setState({showIdDocument: row.id_document} as FormCustomerState);
                 }}
               />
-              {this.state.isInlineEditing ? (
-                <a
-                  role="button"
-                  onClick={() => this.setState({createNewDocument: true} as FormCustomerState)}
-                >
-                  + Add Document
-                </a>
-              ) : <></>}
-              {this.state.createNewDocument == true ?
-                <ModalSimple
-                  uid='document_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormDocument
-                    id={-1}
-                    descriptionSource="both"
-                    isInlineEditing={true}
-                    creatingForModel="Customer"
-                    creatingForId={this.state.id}
-                    description={{
-                      defaultValues: {
-                        creatingForModel: "Customer",
-                        creatingForId: this.state.record.id,
-                      }
-                    }}
-                    showInModal={true}
-                    showInModalSimple={true}
-                    onClose={() => { this.setState({ createNewDocument: false } as FormCustomerState) }}
-                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-                      if (saveResponse.status = "success") {
-                        this.loadRecord();
-                        this.setState({ createNewDocument: false } as FormCustomerState)
-                      }
-                    }}
-                  ></FormDocument>
-                </ModalSimple>
-              : null}
-              {this.state.showIdDocument > 0 ?
-                <ModalSimple
-                  uid='document_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormDocument
-                    id={this.state.showIdDocument}
-                    onClose={() => this.setState({showIdDocument: 0} as FormCustomerState)}
-                    creatingForModel="Customer"
-                    showInModal={true}
-                    showInModalSimple={true}
-                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-                      if (saveResponse.status = "success") {
-                        this.loadRecord();
-                        this.setState({ showIdDocument: 0 } as FormCustomerState)
-                      }
-                    }}
-                    onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-                      if (saveResponse.status = "success") {
-                        this.loadRecord();
-                        this.setState({ showIdDocument: 0 } as FormCustomerState)
-                      }
-                    }}
-                  />
-                </ModalSimple>
+              {this.state.showIdDocument != 0 ?
+                this.renderDocumentForm()
               : null}
             </TabPanel>
           ) : null}
         </TabView>
-
-          {/* <div>
-            <div className="card">
-              <div className="card-header">this.state.record</div>
-              <div className="card-body">
-                <pre
-                  style={{
-                    color: "blue",
-                    width: "100%",
-                    fontFamily: "Courier New",
-                    fontSize: "10px",
-                  }}
-                >
-                  {JSON.stringify(R.PERSONS, null, 2)}
-                </pre>
-              </div>
-            </div>
-          </div> */}
-        {/* </div> */}
       </>
     );
   }

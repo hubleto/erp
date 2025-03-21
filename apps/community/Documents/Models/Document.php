@@ -17,18 +17,13 @@ class Document extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\Document::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
-  public array $relations = [
-    'CUSTOMER_DOCUMENT' => [ self::HAS_ONE, CustomerDocument::class, 'id_document', 'id' ],
-    'LEAD_DOCUMENT' => [ self::HAS_ONE, LeadDocument::class, 'id_document', 'id' ],
-    'DEAL_DOCUMENT' => [ self::HAS_ONE, DealDocument::class, 'id_document', 'id' ],
-  ];
-
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired(),
       'file' => (new File($this, $this->translate('File'))),
-      'hyperlink' => (new Varchar($this, $this->translate('Link'))),
+      'hyperlink' => (new Varchar($this, $this->translate('File Link'))),
+      'origin_link' => (new Varchar($this, $this->translate('Origin Link'))),
     ]);
   }
 
@@ -38,6 +33,9 @@ class Document extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Documents';
     $description->ui['addButtonText'] = 'Add Document';
     $description->ui['showHeader'] = true;
+
+    unset($description->columns["origin_link"]);
+
     return $description;
   }
 
@@ -54,42 +52,14 @@ class Document extends \HubletoMain\Core\Model
 
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
-    $mCustomerDocument = new CustomerDocument($this->main);
-    $mLead = new Lead($this->main);
-    $mDeal = new Deal($this->main);
-    $mLeadDocument = new LeadDocument($this->main);
-    $mDealDocument = new DealDocument($this->main);
-
-    if (isset($savedRecord["creatingForModel"])) {
-      if ($savedRecord["creatingForModel"] == "Customer") {
-        $mCustomerDocument->eloquent->create([
-          "id_document" => $savedRecord["id"],
-          "id_customer" => $savedRecord["creatingForId"]
-        ]);
-      } else if ($savedRecord["creatingForModel"] == "Lead") {
-
-        $lead = $mLead->eloquent->find($savedRecord["creatingForId"]);
-        $mCustomerDocument->eloquent->create([
-          "id_document" => $savedRecord["id"],
-          "id_customer" => $savedRecord["creatingForId"]
-        ]);
-        $mLeadDocument->eloquent->create([
-          "id_document" => $savedRecord["id"],
-          "id_lead" => $lead->id
-        ]);
-      } else if ($savedRecord["creatingForModel"] == "Deal") {
-
-        $deal = $mDeal->eloquent->find($savedRecord["creatingForId"]);
-        $mCustomerDocument->eloquent->create([
-          "id_document" => $savedRecord["id"],
-          "id_customer" => $savedRecord["creatingForId"]
-        ]);
-        $mDealDocument->eloquent->create([
-          "id_document" => $savedRecord["id"],
-          "id_deal" => $deal->id
-        ]);
-      }
+    if (isset($originalRecord["creatingForModel"]) && isset($originalRecord["creatingForId"])) {
+      $mCrossDocument = $this->main->getModel($originalRecord["creatingForModel"]);
+      $mCrossDocument->eloquent->create([
+        "id_lookup" => $originalRecord["creatingForId"],
+        "id_document" => $savedRecord["id"]
+      ]);
     }
+
     return $savedRecord;
   }
 

@@ -401,18 +401,20 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                           cssClass='min-w-44'
                                           value={data.id_service}
                                           onChange={(value: any) => {
-                                            fetch(globalThis.main.config.rewriteBase + '/services/get-service-price?serviceId='+value)
-                                            .then(response => {
-                                              if (!response.ok) {
-                                                throw new Error('Network response was not ok ' + response.statusText);
+                                            request.get(
+                                              'services/get-service-price',
+                                              {serviceId: value},
+                                              (returnData: any) => {
+                                                if (returnData.status == "success") {
+                                                  data.id_service = value;
+                                                  data.unit_price = returnData.unit_price;
+                                                  this.updateRecord({ SERVICES: table.state.data?.data });
+                                                  this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
+                                                } else {
+                                                  throw new Error('Something went wrong: ' + returnData.error);
+                                                }
                                               }
-                                              return response.json();
-                                            }).then(returnData => {
-                                              data.id_service = value;
-                                              data.unit_price = returnData.unit_price;
-                                              this.updateRecord({ SERVICES: table.state.data?.data });
-                                              this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
-                                            })
+                                            )
                                           }}
                                         ></Lookup>
                                       </FormInput>

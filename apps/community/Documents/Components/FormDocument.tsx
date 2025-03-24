@@ -4,10 +4,7 @@ import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
 import { getUrlParam } from 'adios/Helper';
 
-export interface FormDocumentProps extends HubletoFormProps {
-  creatingForModel?: string,
-  creatingForId?: number,
-}
+export interface FormDocumentProps extends HubletoFormProps {}
 
 export interface FormDocumentState extends HubletoFormState {}
 
@@ -68,18 +65,7 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
     const R = this.state.record;
     const showAdditional: boolean = R.id > 0 ? true : false;
 
-    if (R.CUSTOMER_DOCUMENT) {
-      var customerEntryURL = globalThis.main.config.rewriteBase+"customers/customers?recordId="+R.CUSTOMER_DOCUMENT.id_customer;
-      var customerEntryType = "Customer"
-    }
-    if (R.LEAD_DOCUMENT) {
-      var leadEntryURL = globalThis.main.config.rewriteBase+"leads?recordId="+R.LEAD_DOCUMENT.id_lead;
-      var leadEntryType = "Lead"
-    }
-    if (R.DEAL_DOCUMENT) {
-      var dealEntryURL = globalThis.main.config.rewriteBase+"deals?recordId="+R.DEAL_DOCUMENT.id_deal;
-      var dealEntryType = "Deal"
-    }
+    const linkExists = this.state.description.defaultValues?.creatingForModel ? false : true
 
     return (
       <>
@@ -88,34 +74,17 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
               {this.inputWrapper('name', {readonly: this.props.readonly})}
               {this.inputWrapper('file', {readonly: this.props.readonly})}
               {this.inputWrapper('hyperlink', {readonly: this.props.readonly})}
-              {(this.props.creatingForModel == "Lead" || this.props.creatingForModel == "Deal" || !this.props.creatingForModel) && showAdditional && customerEntryType ?
-                <>
-                  <a href={customerEntryURL} className='btn btn-primary'>
-                    <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                    <span className='text'>Go to linked {customerEntryType}</span>
-                  </a>
-                  <br></br>
-                </>
-              : null}
-              {(this.props.creatingForModel == "Customer" || !this.props.creatingForModel) && showAdditional && leadEntryType ?
-                <>
-                  <a href={leadEntryURL} className='btn btn-primary mt-2'>
-                    <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                    <span className='text'>Go to linked {leadEntryType}</span>
-                  </a>
-                  <br></br>
-                </>
-              : null}
-              {(this.props.creatingForModel == "Customer" || !this.props.creatingForModel) && showAdditional && dealEntryType ?
-                <a href={dealEntryURL} className='btn btn-primary mt-2'>
-                  <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                  <span className='text'>Go to linked {dealEntryType}</span>
+              {R.origin_link && linkExists ?
+                <a href={this.state.record.origin_link} className='btn brn-primary mt-2'>
+                  <span className='icon'><i className='fas fa-link'></i></span>
+                  <span className='text'>Go to origin entry</span>
                 </a>
-              : null}
+              : <></>
+              }
           </div>
         </div>
       </>
     );
   }
-
 }
+

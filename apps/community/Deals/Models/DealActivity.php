@@ -12,6 +12,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Time;
 use \ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Description\Form;
 
 class DealActivity extends \HubletoMain\Core\Model
 {
@@ -37,5 +38,14 @@ class DealActivity extends \HubletoMain\Core\Model
       'completed' => (new Boolean($this, $this->translate('Completed'))),
       'id_user' => (new Lookup($this, $this->translate('Created by'), User::class)),
     ]);
+  }
+
+  public function describeForm(): Form
+  {
+    $description = parent::describeForm();
+    $description->defaultValues = [
+      "complete" => 0
+    ];
+    return $description;
   }
 }

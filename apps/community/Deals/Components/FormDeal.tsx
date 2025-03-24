@@ -191,7 +191,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       {this.inputWrapper('identifier', {readonly: R.is_archived})}
                       {this.inputWrapper('title', {readonly: R.is_archived})}
                       <FormInput title={"Customer"} required={true}>
-                        <Lookup {...this.getInputProps()}
+                        <Lookup {...this.getInputProps("id_customer")}
                           model='HubletoApp/Community/Customers/Models/Customer'
                           endpoint={`customers/get-customer`}
                           value={R.id_customer}
@@ -206,7 +206,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                         ></Lookup>
                       </FormInput>
                       <FormInput title={"Contact Person"}>
-                        <Lookup {...this.getInputProps()}
+                        <Lookup {...this.getInputProps("id_person")}
                           model='HubletoApp/Community/Customers/Models/Person'
                           customEndpointParams={{id_customer: R.id_customer}}
                           endpoint={`contacts/get-customer-contacts`}
@@ -266,7 +266,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       <div className='card-header'>Deal Progress</div>
                       <div className='card-body'>
                         <FormInput title={"Pipeline"}>
-                          <Lookup {...this.getInputProps()}
+                          <Lookup {...this.getInputProps("id_pipeline")}
                             readonly={R.is_archived}
                             model='HubletoApp/Community/Settings/Models/Pipeline'
                             value={R.id_pipeline}
@@ -289,7 +289,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                     onClick={R.is_archived ? null : ()=>{this.changeDealStatus(s.id, R)}}
                                     className={`flex px-3 h-[50px] justify-center btn ${statusColor}`}
                                   >
-                                    <span className='text text-center self-center'>{s.name}</span>
+                                    <span className='text text-center self-center !h-auto'>{s.name}</span>
                                   </button>
                                   {i+1 == R.PIPELINE.PIPELINE_STEPS.length ? null
                                   : <span className='icon flex'><i className='fas fa-angles-right self-center'></i></span>
@@ -310,6 +310,22 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                         <div className='card-header'>Services</div>
                         <div className='card-body flex flex-col gap-2'>
                           <div className='w-full h-full overflow-x-auto'>
+                          {this.state.isInlineEditing && !R.is_archived ?
+                            <a
+                              role="button"
+                              onClick={() => {
+                                if (!R.SERVICES) R.SERVICES = [];
+                                R.SERVICES.push({
+                                  id: this.state.newEntryId,
+                                  id_deal: { _useMasterRecordId_: true },
+                                  amount: 1
+                                });
+                                this.setState({ record: R });
+                                this.setState({ newEntryId: this.state.newEntryId - 1 } as FormDealState);
+                              }}>
+                              + Add service
+                            </a>
+                          : <></>}
                             <TableDealServices
                               uid={this.props.uid + "_table_deal_services"}
                               data={{ data: R.SERVICES }}
@@ -332,18 +348,20 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                           cssClass='min-w-44'
                                           value={data.id_service}
                                           onChange={(value: any) => {
-                                            fetch(globalThis.main.config.rewriteBase + '/services/get-service-price?serviceId='+value)
-                                            .then(response => {
-                                              if (!response.ok) {
-                                                throw new Error('Network response was not ok ' + response.statusText);
+                                            request.get(
+                                              'services/get-service-price',
+                                              {serviceId: value},
+                                              (returnData: any) => {
+                                                if (returnData.status == "success") {
+                                                  data.id_service = value;
+                                                  data.unit_price = returnData.unit_price;
+                                                  this.updateRecord({ SERVICES: table.state.data?.data });
+                                                  this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
+                                                } else {
+                                                  throw new Error('Something went wrong: ' + returnData.error);
+                                                }
                                               }
-                                              return response.json();
-                                            }).then(returnData => {
-                                              data.id_service = value;
-                                              data.unit_price = returnData.unit_price;
-                                              this.updateRecord({ SERVICES: table.state.data?.data });
-                                              this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
-                                            })
+                                            )
                                           }}
                                         ></Lookup>
                                       </FormInput>
@@ -383,18 +401,20 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                           cssClass='min-w-44'
                                           value={data.id_service}
                                           onChange={(value: any) => {
-                                            fetch(globalThis.main.config.rewriteBase + '/services/get-service-price?serviceId='+value)
-                                            .then(response => {
-                                              if (!response.ok) {
-                                                throw new Error('Network response was not ok ' + response.statusText);
+                                            request.get(
+                                              'services/get-service-price',
+                                              {serviceId: value},
+                                              (returnData: any) => {
+                                                if (returnData.status == "success") {
+                                                  data.id_service = value;
+                                                  data.unit_price = returnData.unit_price;
+                                                  this.updateRecord({ SERVICES: table.state.data?.data });
+                                                  this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
+                                                } else {
+                                                  throw new Error('Something went wrong: ' + returnData.error);
+                                                }
                                               }
-                                              return response.json();
-                                            }).then(returnData => {
-                                              data.id_service = value;
-                                              data.unit_price = returnData.unit_price;
-                                              this.updateRecord({ SERVICES: table.state.data?.data });
-                                              this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
-                                            })
+                                            )
                                           }}
                                         ></Lookup>
                                       </FormInput>
@@ -439,22 +459,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                             ></TableDealServices>
                           </div>
                         </div>
-                          {this.state.isInlineEditing && !R.is_archived ? (
-                            <a
-                              role="button"
-                              onClick={() => {
-                                if (!R.SERVICES) R.SERVICES = [];
-                                R.SERVICES.push({
-                                  id: this.state.newEntryId,
-                                  id_deal: { _useMasterRecordId_: true },
-                                  amount: 1
-                                });
-                                this.setState({ record: R });
-                                this.setState({ newEntryId: this.state.newEntryId - 1 } as FormDealState);
-                              }}>
-                              + Add service
-                            </a>
-                          ) : null}
                       </div>
                     : null}
                   </>
@@ -518,6 +522,14 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
               {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
               <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
+              {this.state.isInlineEditing  && !R.is_archived ?
+                <a
+                  role="button"
+                  onClick={() => this.setState({showIdDocument: -1} as FormDealState)}
+                >
+                  + Add Document
+                </a>
+              : null}
               <TableDealDocuments
                 uid={this.props.uid + "_table_deal_documents"}
                 data={{ data: R.DOCUMENTS }}
@@ -547,51 +559,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                   }
                 }}
                 isUsedAsInput={true}
-                //isInlineEditing={this.state.isInlineEditing}
                 readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                 onRowClick={(table: TableDealDocuments, row: any) => {
                   this.setState({showIdDocument: row.id_document} as FormDealState);
                 }}
               />
-              {this.state.isInlineEditing  && !R.is_archived ?
-                <a
-                  role="button"
-                  onClick={() => this.setState({showIdDocument: -1} as FormDealState)}
-                >
-                  + Add Document
-                </a>
-              : null}
-              {this.state.showIdDocument < 0 ?
-                <ModalSimple
-                  uid='document_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormDocument
-                    id={-1}
-                    descriptionSource="both"
-                    isInlineEditing={true}
-                    creatingForModel="Deal"
-                    creatingForId={this.state.id}
-                    description={{
-                      defaultValues: {
-                        creatingForModel: "Deal",
-                        creatingForId: this.state.record.id,
-                      }
-                    }}
-                    showInModal={true}
-                    showInModalSimple={true}
-                    onClose={() => { this.setState({ showIdDocument: 0 } as FormDealState) }}
-                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-                      if (saveResponse.status = "success") {
-                        this.loadRecord();
-                        this.setState({ showIdDocument: 0 } as FormDealState)
-                      }
-                    }}
-                  ></FormDocument>
-                </ModalSimple>
-              : null}
-              {this.state.showIdDocument > 0 ?
+              {this.state.showIdDocument != 0 ?
                 <ModalSimple
                   uid='document_form'
                   isOpen={true}
@@ -600,10 +573,17 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                   <FormDocument
                     id={this.state.showIdDocument}
                     onClose={() => this.setState({showIdDocument: 0} as FormDealState)}
-                    creatingForModel="Deal"
                     showInModal={true}
+                    descriptionSource="both"
+                    description={{
+                      defaultValues: {
+                        creatingForModel: "HubletoApp/Community/Deals/Models/DealDocument",
+                        creatingForId: this.state.record.id,
+                        origin_link: window.location.pathname + "?recordId=" + this.state.record.id,
+                      }
+                    }}
+                    isInlineEditing={this.state.showIdDocument < 0 ? true : false}
                     showInModalSimple={true}
-                    readonly={R.is_archived}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();

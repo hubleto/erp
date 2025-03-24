@@ -69,7 +69,7 @@ class Lead extends \HubletoMain\Core\ModelEloquent
 
   /** @return hasMany<LeadDocument, covariant Lead> */
   public function DOCUMENTS(): HasMany {
-    return $this->hasMany(LeadDocument::class, 'id_lead', 'id' );
+    return $this->hasMany(LeadDocument::class, 'id_lookup', 'id' );
   }
 
   public function prepareReadQuery(): mixed

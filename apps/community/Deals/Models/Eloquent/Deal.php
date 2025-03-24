@@ -81,7 +81,7 @@ class Deal extends \HubletoMain\Core\ModelEloquent
 
   /** @return HasMany<DealDocument, covariant Deal> */
   public function DOCUMENTS(): HasMany {
-    return $this->hasMany(DealDocument::class, 'id_deal', 'id' );
+    return $this->hasMany(DealDocument::class, 'id_lookup', 'id' );
   }
 
   public function prepareReadQuery(): mixed

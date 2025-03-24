@@ -42,7 +42,7 @@ class Deal extends \HubletoMain\Core\Model
     'TAGS' => [ self::HAS_MANY, DealTag::class, 'id_deal', 'id' ],
     'SERVICES' => [ self::HAS_MANY, DealService::class, 'id_deal', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, DealActivity::class, 'id_deal', 'id' ],
-    'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_deal', 'id'],
+    'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_lookup', 'id'],
   ];
 
   public function describeColumns(): array

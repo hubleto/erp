@@ -17,7 +17,7 @@ class LeadDocument extends \HubletoMain\Core\ModelEloquent
 
   /** @return BelongsTo<Lead, covariant LeadDocument> */
   public function LEAD(): BelongsTo {
-    return $this->belongsTo(Lead::class, 'id_lead', 'id');
+    return $this->belongsTo(Lead::class, 'id_lookup', 'id');
   }
 
 }

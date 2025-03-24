@@ -4,10 +4,7 @@ import FormPerson, { FormPersonProps, FormPersonState } from './FormPerson';
 import { getUrlParam } from 'adios/Helper';
 import { FormProps } from 'adios/Form';
 
-interface TablePersonsProps extends TableProps {
-  showHeader: boolean,
-  showFooter: boolean
-}
+interface TablePersonsProps extends TableProps {}
 
 interface TablePersonsState extends TableState {
 }
@@ -22,7 +19,6 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     },
     formUseModalSimple: true,
     model: 'HubletoApp/Community/Contacts/Models/Person',
-    // className: 'header-style-1',
   }
 
   props: TablePersonsProps;

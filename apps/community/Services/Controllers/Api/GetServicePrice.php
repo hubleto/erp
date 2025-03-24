@@ -33,8 +33,8 @@ class GetServicePrice extends \HubletoMain\Core\Controller {
     }
 
     return [
-      "unit_price" => $service["price"],
-      "status" => "success"
+      "status" => "success",
+      "unit_price" => $service["price"]
     ];
   }
 

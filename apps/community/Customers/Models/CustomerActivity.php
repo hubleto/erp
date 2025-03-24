@@ -42,9 +42,12 @@ class CustomerActivity extends \HubletoMain\Core\Model
   }
 
   public function describeForm(): \ADIOS\Core\Description\Form {
-    $describe = parent::describeForm();
 
-    $describe->defaultValues = ["id_user" => $this->main->auth->getUserId()];
+    $describe = parent::describeForm();
+    $describe->defaultValues = [
+      "id_user" => $this->main->auth->getUserId(),
+      "completed" => 0
+    ];
 
     return $describe;
   }

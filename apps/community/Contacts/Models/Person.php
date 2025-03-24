@@ -21,7 +21,6 @@ class Person extends \HubletoMain\Core\Model
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer' ],
     'CONTACTS' => [ self::HAS_MANY, Contact::class, 'id_person', 'id' ],
-    //'ADDRESSES' => [ self::HAS_MANY, Address::class, 'id_person', 'id' ],
     'TAGS' => [ self::HAS_MANY, PersonTag::class, 'id_person', 'id' ],
   ];
 
@@ -35,10 +34,11 @@ class Person extends \HubletoMain\Core\Model
     return array_merge(parent::describeColumns(), [
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE'))->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE')),
       'note' => (new Text($this, $this->translate('Notes'))),
-      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
+      'is_active' => (new Boolean($this, $this->translate('Active'))),
+      'note' => (new Text($this, $this->translate('Notes'))),
     ]);
   }
 
@@ -80,6 +80,7 @@ class Person extends \HubletoMain\Core\Model
   {
     $description = parent::describeForm();
     $description->defaultValues['is_active'] = 1;
+    $description->defaultValues['date_created'] = date("Y-m-d");
     return $description;
   }
 
@@ -91,7 +92,6 @@ class Person extends \HubletoMain\Core\Model
       (Select value from contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,
       (Select value from contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email
     ");
-      //(Select concat(street_line_1,', ', street_line_2, ', ', city) from addresses where id_person = persons.id LIMIT 1) virt_address
 
     return $query;
   }

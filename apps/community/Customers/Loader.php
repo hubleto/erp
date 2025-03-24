@@ -23,7 +23,6 @@ class Loader extends \HubletoMain\Core\App
   {
     $mPerson = new \HubletoApp\Community\Contacts\Models\Person($this->main);
     $mContact = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
-    $mAddress = new \HubletoApp\Community\Contacts\Models\Address($this->main);
     $mPersonTag = new \HubletoApp\Community\Contacts\Models\PersonTag($this->main);
 
     $mCustomer = new \HubletoApp\Community\Customers\Models\Customer($this->main);
@@ -38,7 +37,6 @@ class Loader extends \HubletoMain\Core\App
     $mCustomerActivity->dropTableIfExists()->install();
     $mCustomerDocument->dropTableIfExists()->install();
 
-    $mAddress->dropTableIfExists()->install();
     $mContact->dropTableIfExists()->install();
     $mPersonTag->dropTableIfExists()->install();
 
@@ -52,11 +50,6 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Customers/Models/CustomerActivity:Read",
       "HubletoApp/Community/Customers/Models/CustomerActivity:Update",
       "HubletoApp/Community/Customers/Models/CustomerActivity:Delete",
-
-      "HubletoApp/Community/Customers/Models/Address:Create",
-      "HubletoApp/Community/Customers/Models/Address:Read",
-      "HubletoApp/Community/Customers/Models/Address:Update",
-      "HubletoApp/Community/Customers/Models/Address:Delete",
 
       "HubletoApp/Community/Customers/Models/Customer:Create",
       "HubletoApp/Community/Customers/Models/Customer:Read",

@@ -28,7 +28,7 @@ class Customer extends \HubletoMain\Core\Model
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, CustomerActivity::class, 'id_customer', 'id' ],
-    'DOCUMENTS' => [ self::HAS_MANY, CustomerDocument::class, 'id_customer', 'id'],
+    'DOCUMENTS' => [ self::HAS_MANY, CustomerDocument::class, 'id_lookup', 'id'],
     'TAGS' => [ self::HAS_MANY, CustomerTag::class, 'id_customer', 'id' ],
     'LEADS' => [ self::HAS_MANY, Lead::class, 'id_customer', 'id'],
     'DEALS' => [ self::HAS_MANY, Deal::class, 'id_customer', 'id'],
@@ -142,11 +142,5 @@ class Customer extends \HubletoMain\Core\Model
       'name' => $text,
     ];
   }
-
-  // public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
-  // {
-  //   $query = parent::prepareLoadRecordQuery($includeRelations, 3);
-  //   return $query;
-  // }
 
 }

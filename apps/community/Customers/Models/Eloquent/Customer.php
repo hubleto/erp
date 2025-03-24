@@ -35,7 +35,7 @@ class Customer extends \HubletoMain\Core\ModelEloquent
 
   /** @return HasMany<CustomerDocument, covariant Customer> */
   public function DOCUMENTS(): HasMany {
-    return $this->hasMany(CustomerDocument::class, 'id_customer', 'id' );
+    return $this->hasMany(CustomerDocument::class, 'id_lookup', 'id' );
   }
 
   /** @return HasMany<CustomerTag, covariant Customer> */

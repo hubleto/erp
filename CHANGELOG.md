@@ -2,6 +2,8 @@
 
 ## Release v0.10 (not released yet)
 
+  * new app launcher
+
 ## Release v0.9
 
   * easier app creation (`php hubleto app create HubletoApp\Custom\MyFirstApp`)

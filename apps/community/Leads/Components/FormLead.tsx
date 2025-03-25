@@ -471,7 +471,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 uid={this.props.uid + "_table_lead_document"}
                 data={{ data: R.DOCUMENTS }}
                 descriptionSource="both"
-                customEndpointParams={{idLead: R.id}}
                 description={{
                   ui: {
                     showFooter: false,
@@ -496,7 +495,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   },
                 }}
                 isUsedAsInput={true}
-                //isInlineEditing={this.state.isInlineEditing}
                 readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                 onRowClick={(table: TableLeadDocuments, row: any) => {
                   this.setState({showIdDocument: row.id_document} as FormLeadState);
@@ -510,36 +508,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   + Add Document
                 </a>
               : null}
-              {this.state.showIdDocument < 0 ?
-                <ModalSimple
-                  uid='document_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormDocument
-                    id={-1}
-                    descriptionSource="both"
-                    isInlineEditing={true}
-                    description={{
-                      defaultValues: {
-                        creatingForModel: "HubletoApp/Community/Leads/Models/LeadDocument",
-                        creatingForId: this.state.record.id,
-                        origin_link: window.location.pathname + "?recordId=" + this.state.record.id,
-                      }
-                    }}
-                    showInModal={true}
-                    showInModalSimple={true}
-                    onClose={() => { this.setState({ showIdDocument: 0 } as FormLeadState) }}
-                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-                      if (saveResponse.status = "success") {
-                        this.loadRecord();
-                        this.setState({ showIdDocument: 0 } as FormLeadState)
-                      }
-                    }}
-                  ></FormDocument>
-                </ModalSimple>
-              : null}
-              {this.state.showIdDocument > 0 ?
+              {this.state.showIdDocument != 0 ?
                 <ModalSimple
                   uid='document_form'
                   isOpen={true}
@@ -548,10 +517,17 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   <FormDocument
                     id={this.state.showIdDocument}
                     onClose={() => this.setState({showIdDocument: 0} as FormLeadState)}
-                    creatingForModel="Lead"
                     showInModal={true}
+                    descriptionSource="both"
+                    description={{
+                      defaultValues: {
+                        creatingForModel: "HubletoApp/Community/Leads/Models/LeadDocument",
+                        creatingForId: this.state.record.id,
+                        origin_link: window.location.pathname + "?recordId=" + this.state.record.id,
+                      }
+                    }}
+                    isInlineEditing={this.state.showIdDocument < 0 ? true : false}
                     showInModalSimple={true}
-                    readonly={R.is_archived}
                     onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
                       if (saveResponse.status = "success") {
                         this.loadRecord();

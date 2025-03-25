@@ -4,6 +4,9 @@ namespace HubletoApp\Community\Contacts;
 
 class Loader extends \HubletoMain\Core\App
 {
+  const DEFAULT_INSTALLATION_CONFIG = [
+    'sidebarOrder' => 0,
+  ];
 
   public function init(): void
   {
@@ -14,7 +17,9 @@ class Loader extends \HubletoMain\Core\App
       '/^contacts\/get-customer-contacts\/?$/' => Controllers\Api\GetCustomerContacts::class,
     ]);
 
+    $this->setConfigAsInteger('sidebarOrder', 0);
   }
+
 
   public function installTables(): void
   {

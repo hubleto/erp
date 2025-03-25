@@ -87,6 +87,7 @@ class Controller extends \ADIOS\Core\Controller
     foreach ($appsInSidebar as $appNamespace => $app) {
       if ($app->configAsInteger('sidebarOrder') <= 0) {
         unset($appsInSidebar[$appNamespace]);
+        continue;
       }
 
       if (str_starts_with($this->main->requestedUri, $app->manifest['rootUrlSlug'])) {

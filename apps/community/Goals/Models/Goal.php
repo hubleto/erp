@@ -45,6 +45,11 @@ class Goal extends \HubletoMain\Core\Model
   {
     $description = parent::describeTable();
 
+    $description->ui["addButtonText"] = $this->translate('Add Goal');
+    $description->ui["title"] = $this->translate('Goals');
+    $description->ui['showHeader'] = true;
+    $description->ui['showFooter'] = false;
+
     unset($description->columns['id_pipeline']);
     unset($description->columns['goal']);
     unset($description->columns['is_individual_goals']);

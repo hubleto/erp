@@ -60,7 +60,7 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
                 responsive: true,
                 plugins: {
                   legend: {
-                    position: "left",
+                    display: false
                   },
                 },
               }}

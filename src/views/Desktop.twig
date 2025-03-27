@@ -80,11 +80,11 @@
             <img id="logo" src="{{ config.url }}/assets/images/logo-hubleto.png" class="h-8 m-auto">
           </button>
         </div>
-        <div class="ml-4">
-          {{ include('@hubleto/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
-        </div>
       </div>
-      <div class="hidden w-full md:block md:w-auto" id="default-navbar-mobile">
+      <div class="hidden sm:block">
+        {{ include('@hubleto/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
+      </div>
+      <div id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
           <li>
             {% if app.isPro %}
@@ -120,7 +120,7 @@
             <button class="btn btn-white btn-small btn-dropdown">
               <span class="icon"><i class="fas fa-life-ring"></i></span>
               <div class="menu">
-                <div class="list !bg-yellow-50 p-4" style="position:fixed;right:0;top:0;width:30em;max-width:50%;height:100vh;margin:0;border-radius:0;border:none;">
+                <div class="list !bg-yellow-50 p-4" style="position:fixed;right:0;top:0;width:30em;max-width:50%;height:100vh;margin:0;border-radius:0;border:none;overflow-y:auto;">
                   {{ include('@app/community/Help/Views/HelpCenterInner.twig') }}
                 </div>
               </div>

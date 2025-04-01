@@ -6,6 +6,7 @@ use \ADIOS\Core\Helper;
 
 class Dictionary extends \ADIOS\Core\Controller
 {
+  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 
   public \HubletoMain $main;
 

@@ -3,6 +3,8 @@
 ## Release v0.10 (not released yet)
 
   * new app launcher
+  * many new features to community apps
+  * new CLI commands `php hubleto create controller` and `php hubleto create view`
 
 ## Release v0.9
 

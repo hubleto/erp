@@ -87,7 +87,10 @@ class Controller extends \ADIOS\Core\Controller
     foreach ($appsInSidebar as $appNamespace => $app) {
       if ($app->configAsInteger('sidebarOrder') <= 0) {
         unset($appsInSidebar[$appNamespace]);
-      } else if (str_starts_with($this->main->requestedUri, $app->manifest['rootUrlSlug'])) {
+      } else if (
+        $this->main->requestedUri == $app->manifest['rootUrlSlug']
+        || str_starts_with($this->main->requestedUri, $app->manifest['rootUrlSlug'] . '/')
+      ) {
         $appsInSidebar[$appNamespace]->isActivated = true;
       }
     }

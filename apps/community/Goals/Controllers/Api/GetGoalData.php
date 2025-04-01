@@ -6,6 +6,8 @@ use HubletoApp\Community\Deals\Models\Deal;
 
 class GetGoalData extends \HubletoMain\Core\Controller
 {
+  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
+
   public function renderJson(): ?array
   {
     $apiInterval = new GetIntervalData($this->main);

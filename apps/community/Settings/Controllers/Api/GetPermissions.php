@@ -8,6 +8,7 @@ use HubletoApp\Community\Settings\Models\RolePermission;
 
 class GetPermissions extends \HubletoMain\Core\Controller
 {
+  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 
   private array $MVCNamespaces = [
     "Models",

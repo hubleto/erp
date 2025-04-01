@@ -7,6 +7,8 @@ use HubletoMain\Core\Model;
 
 class GetTemplateChartData extends \HubletoMain\Core\Controller
 {
+  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
+
   const OPERATIONS = [
     1 => "=",
     2 => "!=",
@@ -22,7 +24,7 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
     $model = $this->main->getModel($this->main->urlParamAsString("model"));
 
     $groupBy = $config["groupsBy"][0]["field"];
-    $typeOptions = $config["returnWith"];
+    $typeOptions = (array) $config["returnWith"];
 
     $returnData = [];
 
@@ -43,7 +45,7 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
       }
 
       $query = $model->eloquent->selectRaw($function." as result, ".$groupBy);
-      foreach ($config["searchGroups"] as $searchGroup) {
+      foreach ((array) $config["searchGroups"] as $searchGroup) {
         if ($searchGroup["option"] == 5) $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
         else if ($searchGroup["option"] == 6) $query = $query->whereBetween($searchGroup["fieldName"], [$searchGroup["value"], $searchGroup["value2"]]);
         else $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], $searchGroup["value"]);

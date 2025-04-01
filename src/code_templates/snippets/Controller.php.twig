@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ appNamespace }}\Controllers;
+
+class {{ controller }} extends \HubletoMain\Core\Controller
+{
+
+  /* uncomment this if you want to return JSON string
+  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
+
+  public function renderJson(): array
+  {
+    return [];
+  }
+  */
+
+  public function prepareView(): void
+  {
+    $this->viewParams['now'] = date('Y-m-d H:i:s');
+    $this->viewParams['randomNumber'] = rand(1, 1000);
+
+    $this->setView('@{{ appViewNamespace }}/{{ controller }}.twig');
+  }
+
+}

@@ -44,7 +44,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
     $appManager->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
 
     $this->cli->cyan("App {$appNamespace} created successfully.\n");
-    $this->cli->yellow("TIP: Run 'php hubleto app install {$appNamespace} force' to install your new app.\n");
+    $this->cli->yellow("💡 TIP: Run 'php hubleto app install {$appNamespace} force' to install your new app or run 'php hubleto help' to list other usefull commands.\n");
   }
 
   public function validateAppNamespace(string $appNamespace): void
@@ -52,7 +52,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
     $appNamespace = trim($appNamespace, '\\');
     $appNamespaceParts = explode('\\', $appNamespace);
 
-    if ($appNamespaceParts[0] != 'HubletoApp') throw new \Exception('Application namespace must start with \'HubletoApp\'.');
+    if ($appNamespaceParts[0] != 'HubletoApp') throw new \Exception('Application namespace must start with \'HubletoApp\'. See https://developer.hubleto.com/apps for more details.');
 
     switch ($appNamespaceParts[1]) {
       case 'Community':

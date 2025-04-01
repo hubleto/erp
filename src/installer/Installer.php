@@ -41,11 +41,13 @@ class Installer {
       \HubletoApp\Community\Dashboard\Loader::class => [ ],
       \HubletoApp\Community\Premium\Loader::class => [ 'sidebarOrder' => 99999, ],
       \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110, ],
-      \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
       \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 101, ],
       \HubletoApp\Community\Contacts\Loader::class => [ ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],
+    ],
+    'documents' => [
+      \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
     ],
     'sales' => [
       \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 200, ],

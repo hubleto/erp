@@ -10,7 +10,6 @@ class Model extends \HubletoMain\Cli\Agent\Command
     $appNamespace = (string) ($this->arguments[3] ?? '');
     $model = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
-    $appClass = $appNamespace . '\\Loader';
 
     $this->main->appManager->init();
 
@@ -43,7 +42,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
     file_put_contents($appFolder . '/Models/Eloquent/' . $model . '.php', $this->main->twig->render('@snippets/ModelEloquent.php.twig', $tplVars));
 
     $this->cli->cyan("Model '{$model}' in '{$appNamespace}' created successfully.\n");
-    $this->cli->yellow("TIP: Update `installTables()` method in your app's loader and reinstall the app.\n");
+    $this->cli->yellow("💡 TIP: Update `installTables()` method in your app's loader and reinstall the app.\n");
   }
 
 }

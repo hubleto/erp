@@ -19,9 +19,7 @@ class MonthlyRevenue extends \HubletoMain\Core\Report {
       ["field" => "id_customer", "title" => "Customer"],
     ];
     $config['returnWith'] = [
-      "total" => [
-        ["field" => "price", "title" => "Total price of deals"],
-      ],
+      ["type" => "total", "field" => "price", "title" => "Total price of deals"]
     ];
 
     $config["searchGroups"] = [

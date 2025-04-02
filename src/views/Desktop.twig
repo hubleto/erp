@@ -236,6 +236,7 @@
       let r = new RegExp(q, "i");
       b.each(function() { if ($(this).find('.text').text().match(r)) $(this).slideDown(100); else $(this).slideUp(100); });
     }
+    if (e.keyCode == 27) { lchr(false); return; }
     if (e.keyCode == 13) { b.filter(':visible').get(0).click(); return; }
   }
 

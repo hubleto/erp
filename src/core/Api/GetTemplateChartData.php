@@ -24,23 +24,23 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
     $model = $this->main->getModel($this->main->urlParamAsString("model"));
 
     $groupBy = $config["groupsBy"][0]["field"];
-    $typeOptions = (array) $config["returnWith"];
+    $returnWith = (array) $config["returnWith"];
 
     $returnData = [];
 
     try {
-      $operation = array_key_first($typeOptions);
+      $operation = $returnWith[0]["type"];
 
       $function = "";
       switch ($operation) {
         case "count":
-          $function = "COUNT(".$typeOptions[$operation][0]["field"].")";
+          $function = "COUNT(".$returnWith[0]["field"].")";
           break;
         case "average":
-          $function = "AVG(".$typeOptions[$operation][0]["field"].")";
+          $function = "AVG(".$returnWith[0]["field"].")";
           break;
         case "total":
-          $function = "SUM(".$typeOptions[$operation][0]["field"].")";
+          $function = "SUM(".$returnWith[0]["field"].")";
           break;
       }
 

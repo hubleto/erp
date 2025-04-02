@@ -9,7 +9,10 @@ interface TableCustomersProps extends TableProps {
 }
 
 interface TableCustomersState extends TableState {
-  tablePersonsDescription: any
+  tablePersonsDescription?: any,
+  tableLeadsDescription?: any,
+  tableDealsDescription?: any,
+  tableDocumentsDescription?: any,
 }
 
 export default class TableCustomers extends Table<TableCustomersProps, TableCustomersState> {
@@ -63,6 +66,36 @@ export default class TableCustomers extends Table<TableCustomersProps, TableCust
         this.setState({tablePersonsDescription: description} as TableCustomersState);
       }
     );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Leads/Models/Lead',
+        idCustomer: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableLeadsDescription: description} as TableCustomersState);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Deals/Models/Deal',
+        idCustomer: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableDealsDescription: description} as TableCustomersState);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Customers/Models/CustomerDocument',
+        idCustomer: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableDocumentsDescription: description} as TableCustomersState);
+      }
+    );
 
     return description;
   }
@@ -70,6 +103,9 @@ export default class TableCustomers extends Table<TableCustomersProps, TableCust
   renderForm(): JSX.Element {
     let formProps: FormCustomerProps = this.getFormProps() as FormCustomerProps;
     formProps.tablePersonsDescription = this.state.tablePersonsDescription;
+    formProps.tableLeadsDescription = this.state.tableLeadsDescription;
+    formProps.tableDealsDescription = this.state.tableDealsDescription;
+    formProps.tableDocumentsDescription = this.state.tableDocumentsDescription;
     return <FormCustomer {...formProps}/>;
   }
 }

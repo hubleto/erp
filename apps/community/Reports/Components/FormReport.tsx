@@ -212,10 +212,10 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
                 name="types"
                 id="types"
                 className="border p-2 mb-2 mt-2 rounded-md border-gray-200"
-                value={this.props.config.returnWith[Object.keys(this.props.config.returnWith)[0]][0].field}
+                value={this.props.config.returnWith[Object.keys(this.props.config.returnWith)[0]].field}
               >
-                <option value={this.props.config.returnWith[Object.keys(this.props.config.returnWith)[0]][0].field}>
-                  {this.props.config.returnWith[Object.keys(this.props.config.returnWith)[0]][0].title}
+                <option value={this.props.config.returnWith[Object.keys(this.props.config.returnWith)[0]].field}>
+                  {this.props.config.returnWith[Object.keys(this.props.config.returnWith)[0]].title}
                 </option>
               </select>
             </div>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormLead from './FormLead';
+import FormLead, { FormLeadProps } from './FormLead';
 import InputTags2 from 'adios/Inputs/Tags2';
+import request from 'adios/Request';
 
 interface TableLeadsProps extends TableProps {
   showArchive?: boolean,
@@ -9,6 +10,8 @@ interface TableLeadsProps extends TableProps {
 
 interface TableLeadsState extends TableState {
   showArchive: boolean,
+  tableLeadServicesDescription?: any,
+  tableLeadDocumentsDescription?: any,
 }
 
 export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> {
@@ -86,8 +89,34 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
     }
   }
 
+  onAfterLoadTableDescription(description: any) {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Leads/Models/LeadService',
+        idLead: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableLeadServicesDescription: description} as TableLeadsState);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Leads/Models/LeadDocument',
+        idLead: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableLeadDocumentsDescription: description} as TableLeadsState);
+      }
+    );
+    return description;
+  }
+
   renderForm(): JSX.Element {
-    let formProps = this.getFormProps();
+    let formProps = this.getFormProps() as FormLeadProps;
+    formProps.tableLeadServicesDescription = this.state.tableLeadServicesDescription;
+    formProps.tableLeadDocumentsDescription = this.state.tableLeadDocumentsDescription;
     return <FormLead {...formProps}/>;
   }
 }

@@ -17,6 +17,8 @@ import moment from 'moment';
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
+  tableDealServicesDescription: any,
+  tableDealDocumentsDescription: any,
 }
 
 export interface FormDealState extends HubletoFormState {
@@ -330,9 +332,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               uid={this.props.uid + "_table_deal_services"}
                               data={{ data: R.SERVICES }}
                               dealTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
-                              descriptionSource='both'
+                              descriptionSource='props'
                               customEndpointParams={{idDeal: R.id}}
                               description={{
+                                permissions: this.props.tableDealServicesDescription.permissions,
                                 ui: {
                                   showHeader: false,
                                   showFooter: true
@@ -534,8 +537,9 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 uid={this.props.uid + "_table_deal_documents"}
                 data={{ data: R.DOCUMENTS }}
                 customEndpointParams={{idDeal: R.id}}
-                descriptionSource="both"
+                descriptionSource="props"
                 description={{
+                  permissions: this.props.tableDealDocumentsDescription.permissions,
                   ui: {
                     showFooter: false,
                     showHeader: false,

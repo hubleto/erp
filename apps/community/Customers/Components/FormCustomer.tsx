@@ -23,6 +23,9 @@ export interface FormCustomerProps extends HubletoFormProps {
   createNewDeal: boolean,
   newEntryId?: number,
   tablePersonsDescription?: any,
+  tableLeadsDescription?: any,
+  tableDealsDescription?: any,
+  tableDocumentsDescription?: any,
 }
 
 interface FormCustomerState extends HubletoFormState {
@@ -362,6 +365,9 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                         },
                       }}
                       onRowClick={(table: TablePersons, row: any) => {
+                        var tableProps = this.props.tablePersonsDescription
+                        tableProps.idPerson = row.id;
+                        table.onAfterLoadTableDescription(tableProps)
                         table.openForm(row.id);
                       }}
                       onChange={(table: TablePersons) => {
@@ -417,11 +423,12 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               <TableLeads
                 uid={this.props.uid + "_table_leads"}
                 data={{ data: R.LEADS }}
-                descriptionSource="both"
+                descriptionSource="props"
                 customEndpointParams={{idCustomer: R.id}}
                 isUsedAsInput={false}
                 readonly={!this.state.isInlineEditing}
                 description={{
+                  permissions: this.props.tableLeadsDescription.permissions,
                   columns: {
                     title: { type: "varchar", title: "Title" },
                     price: { type: "float", title: "Amount" },
@@ -459,11 +466,12 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               <TableDeals
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DEALS }}
-                descriptionSource="both"
+                descriptionSource="props"
                 customEndpointParams={{idCustomer: R.id}}
                 isUsedAsInput={false}
                 readonly={!this.state.isInlineEditing}
                 description={{
+                  permissions: this.props.tableDealsDescription.permissions,
                   columns: {
                     title: { type: "varchar", title: "Title" },
                     price: { type: "float", title: "Amount" },
@@ -505,11 +513,12 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               <TableCustomerDocuments
                 uid={this.props.uid + "_table_deals"}
                 data={{ data: R.DOCUMENTS }}
-                descriptionSource="both"
+                descriptionSource="props"
                 customEndpointParams={{idCustomer: R.id}}
                 isUsedAsInput={true}
                 readonly={!this.state.isInlineEditing}
                 description={{
+                  permissions: this.props.tableDocumentsDescription.permissions,
                   ui: {
                     showFooter: false,
                     showHeader: false,

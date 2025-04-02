@@ -39,7 +39,7 @@ class Contact extends \HubletoMain\Core\Model
     $description->ui['showHeader'] = true;
     $description->ui['showFooter'] = false;
 
-    if ($this->main->urlParamAsBool('inForm') == true) {
+    if ($this->main->urlParamAsInteger('idPerson') > 0) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
@@ -53,10 +53,4 @@ class Contact extends \HubletoMain\Core\Model
 
     return $description;
   }
-
-  // public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
-  // {
-  //   $query = parent::prepareLoadRecordQuery($includeRelations, 3, $query, $level);
-  //   return $query;
-  // }
 }

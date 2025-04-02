@@ -16,6 +16,8 @@ import Hyperlink from 'adios/Inputs/Hyperlink';
 
 export interface FormLeadProps extends HubletoFormProps {
   newEntryId?: number,
+  tableLeadServicesDescription?: any,
+  tableLeadDocumentsDescription?: any,
 }
 
 export interface FormLeadState extends HubletoFormState {
@@ -262,9 +264,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         uid={this.props.uid + "_table_lead_services"}
                         data={{ data: R.SERVICES }}
                         leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : "Total: 0 " + R.CURRENCY.code }
-                        descriptionSource='both'
+                        descriptionSource='props'
                         customEndpointParams={{'idLead': R.id}}
                         description={{
+                          permissions: this.props.tableLeadServicesDescription.permissions,
                           ui: {
                             showHeader: false,
                             showFooter: true
@@ -471,7 +474,9 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 uid={this.props.uid + "_table_lead_document"}
                 data={{ data: R.DOCUMENTS }}
                 descriptionSource="both"
+                customEndpointParams={{idLead: R.id}}
                 description={{
+                  permissions: this.props.tableLeadDocumentsDescription.permissions,
                   ui: {
                     showFooter: false,
                     showHeader: false,

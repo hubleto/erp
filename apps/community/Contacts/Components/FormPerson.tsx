@@ -3,14 +3,13 @@ import { deepObjectMerge, getUrlParam } from 'adios/Helper';
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
-/* import TableAddresses from './TableAddresses'; */
 import TableContacts from './TableContacts';
-import moment from 'moment';
 import Lookup from 'adios/Inputs/Lookup';
 
 export interface FormPersonProps extends HubletoFormProps {
   newEntryId?: number,
-  creatingNew: boolean
+  creatingNew: boolean,
+  tableContactsDescription: any
 }
 
 export interface FormPersonState extends HubletoFormState {
@@ -102,7 +101,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                 <div className='border-l border-gray-200'></div>
                 <div className="w-1/2">
                   {this.inputWrapper('note')}
-                  {showAdditional ? this.inputWrapper('is_active') : null}
+                  {this.inputWrapper('is_active')}
                   {showAdditional ? this.inputWrapper('date_created') : null}
                 </div>
               </div>
@@ -135,7 +134,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                   isInlineEditing={this.state.isInlineEditing}
                   isUsedAsInput={true}
                   readonly={!this.state.isInlineEditing}
-                  descriptionSource="both"
+                  descriptionSource="props"
                   onRowClick={() => this.setState({isInlineEditing: true})}
                   onChange={(table: TableContacts) => {
                     this.updateRecord({ CONTACTS: table.state.data.data });
@@ -143,8 +142,9 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                   onDeleteSelectionChange={(table: TableContacts) => {
                     this.updateRecord({ CONTACTS: table.state.data.data ?? [] });
                   }}
-                  customEndpointParams={{inForm: true}}
+                  customEndpointParams={{idPerson: R.id}}
                   description={{
+                    permissions: this.props.tableContactsDescription.permissions,
                     columns: {
                       type: {
                         type: 'varchar',

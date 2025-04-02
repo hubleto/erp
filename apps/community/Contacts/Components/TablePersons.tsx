@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import FormPerson, { FormPersonProps, FormPersonState } from './FormPerson';
 import { getUrlParam } from 'adios/Helper';
-import { FormProps } from 'adios/Form';
+import request from 'adios/Request';
 
 interface TablePersonsProps extends TableProps {}
 
 interface TablePersonsState extends TableState {
+  tableContactsDescription?: any,
 }
 
 export default class TablePersons extends Table<TablePersonsProps, TablePersonsState> {
@@ -53,6 +54,20 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
     }
   }
 
+  onAfterLoadTableDescription(description: any) {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Contacts/Models/Contact',
+        idPerson: this.props.recordId ?? description.idPerson,
+      },
+      (description: any) => {
+        this.setState({tableContactsDescription: description} as TablePersonsState);
+      }
+    );
+    return description;
+  }
+
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (data.CONTACTS && data.CONTACTS.length > 0) {
       if (columnName == "virt_email") {
@@ -92,7 +107,8 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   }
 
   renderForm(): JSX.Element {
-    let formProps: FormProps = this.getFormProps();
+    let formProps: FormPersonProps = this.getFormProps();
+    formProps.tableContactsDescription = this.state.tableContactsDescription as TablePersonsState;
     return <FormPerson {...formProps}/>;
   }
 }

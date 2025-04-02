@@ -49,9 +49,9 @@ class Person extends \HubletoMain\Core\Model
     $description->ui['addButtonText'] = $this->translate('Add Contact');
     $description->ui['showHeader'] = true;
     $description->ui['showFooter'] = false;
+
     $description->columns['virt_email'] = ["title" => $this->translate("Emails")];
     $description->columns['virt_number'] = ["title" => $this->translate("Phone Numbers")];
-    unset($description->columns['note']);
 
     //nadstavit aby boli tieto stĺpce posledné
     $tempColumn = $description->columns['date_created'];
@@ -60,6 +60,8 @@ class Person extends \HubletoMain\Core\Model
     $tempColumn = $description->columns['is_active'];
     unset($description->columns['is_active']);
     $description->columns['is_active'] = $tempColumn;
+
+    unset($description->columns['note']);
 
     if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [

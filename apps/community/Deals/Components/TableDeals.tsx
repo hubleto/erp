@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormDeal from './FormDeal';
+import FormDeal, { FormDealProps } from './FormDeal';
+import request from 'adios/Request';
 
 interface TableDealsProps extends TableProps {
   showArchive?: boolean,
@@ -8,6 +9,8 @@ interface TableDealsProps extends TableProps {
 
 interface TableDealsState extends TableState {
   showArchive: boolean,
+  tableDealServicesDescription?: any,
+  tableDealDocumentsDescription?: any,
 }
 
 export default class TableDeals extends Table<TableDealsProps, TableDealsState> {
@@ -81,8 +84,35 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
     }
   }
 
+  onAfterLoadTableDescription(description: any) {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Deals/Models/DealService',
+        idDeal: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableDealServicesDescription: description} as TableDealsState);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Deals/Models/DealDocument',
+        idDeal: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableDealDocumentsDescription: description} as TableDealsState);
+      }
+    );
+
+    return description;
+  }
+
   renderForm(): JSX.Element {
-    let formProps = this.getFormProps();
+    let formProps = this.getFormProps() as FormDealProps;
+    formProps.tableDealServicesDescription = this.state.tableDealServicesDescription;
+    formProps.tableDealDocumentsDescription = this.state.tableDealDocumentsDescription;
     return <FormDeal {...formProps}/>;
   }
 }

@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormOrder from './FormOrder';
+import FormOrder, { FormOrderProps } from './FormOrder';
+import request from 'adios/Request';
 
 interface TableOrdersProps extends TableProps {}
 
-interface TableOrdersState extends TableState {}
+interface TableOrdersState extends TableState {
+  tableOrderProductsDescription?: any,
+}
 
 export default class TableOrders extends Table<TableOrdersProps, TableOrdersState> {
   static defaultProps = {
@@ -52,8 +55,25 @@ export default class TableOrders extends Table<TableOrdersProps, TableOrdersStat
     return elements;
   }
 
+  onAfterLoadTableDescription(description: any) {
+
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Orders/Models/OrderProduct',
+        idOrder: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableOrderProductsDescription: description} as TableOrdersState);
+      }
+    );
+
+    return description;
+  }
+
   renderForm(): JSX.Element {
-    let formProps = this.getFormProps();
+    let formProps = this.getFormProps() as FormOrderProps;
+    formProps.tableOrderProductsDescription = this.state.tableOrderProductsDescription;
     return <FormOrder {...formProps}/>;
   }
 }

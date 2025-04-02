@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Customers\Models\Eloquent;
 
 use HubletoApp\Community\Documents\Models\Eloquent\Document;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CustomerDocument extends \HubletoMain\Core\ModelEloquent
 {

@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormCustomer from './FormCustomer';
+import FormCustomer, { FormCustomerProps } from './FormCustomer';
 import { getUrlParam } from 'adios/Helper';
 import { FormProps } from 'adios/Form';
+import request from 'adios/Request';
 
 interface TableCustomersProps extends TableProps {
 }
 
 interface TableCustomersState extends TableState {
+  tablePersonsDescription: any
 }
 
 export default class TableCustomers extends Table<TableCustomersProps, TableCustomersState> {
@@ -50,8 +52,24 @@ export default class TableCustomers extends Table<TableCustomersProps, TableCust
     }
   }
 
+  onAfterLoadTableDescription(description: any): any {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Contacts/Models/Person',
+        idCustomer: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tablePersonsDescription: description} as TableCustomersState);
+      }
+    );
+
+    return description;
+  }
+
   renderForm(): JSX.Element {
-    let formProps: FormProps = this.getFormProps();
+    let formProps: FormCustomerProps = this.getFormProps() as FormCustomerProps;
+    formProps.tablePersonsDescription = this.state.tablePersonsDescription;
     return <FormCustomer {...formProps}/>;
   }
 }

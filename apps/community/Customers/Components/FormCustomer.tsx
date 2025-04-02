@@ -17,11 +17,12 @@ import FormPerson, {FormPersonProps, FormPersonState} from "../../Contacts/Compo
 import Calendar from '../../Calendar/Components/Calendar'
 import Hyperlink from "adios/Inputs/Hyperlink";
 
-interface FormCustomerProps extends HubletoFormProps {
+export interface FormCustomerProps extends HubletoFormProps {
   highlightIdActivity: number,
   createNewLead: boolean,
   createNewDeal: boolean,
   newEntryId?: number,
+  tablePersonsDescription?: any,
 }
 
 interface FormCustomerState extends HubletoFormState {
@@ -343,11 +344,12 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                       readonly={!this.state.isInlineEditing}
                       customEndpointParams={{idCustomer: R.id}}
                       data={{ data: R.PERSONS }}
-                      descriptionSource="both"
+                      descriptionSource="props"
                       description={{
                         ui: {
                           addButtonText: this.translate('Add contact'),
                         },
+                        permissions: this.props.tablePersonsDescription?.permissions ?? {},
                         columns: {
                           first_name: { type: "varchar", title: this.translate("First name") },
                           last_name: { type: "varchar", title: this.translate("Last name") },

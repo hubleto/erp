@@ -101,7 +101,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                 <div className='border-l border-gray-200'></div>
                 <div className="w-1/2">
                   {this.inputWrapper('note')}
-                  {showAdditional ? this.inputWrapper('is_active') : null}
+                  {this.inputWrapper('is_active')}
                   {showAdditional ? this.inputWrapper('date_created') : null}
                 </div>
               </div>

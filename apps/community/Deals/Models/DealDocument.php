@@ -12,15 +12,15 @@ class DealDocument extends \HubletoMain\Core\Model
   public string $eloquentClass = Eloquent\DealDocument::class;
 
   public array $relations = [
-    'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_deal', 'id' ],
-    'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_lookup', 'id' ],
+    'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_lookup', 'id' ],
+    'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
-      'id_lookup' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
+      'id_lookup' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
+      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
     ]);
   }
 

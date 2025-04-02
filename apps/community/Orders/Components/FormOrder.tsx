@@ -7,10 +7,12 @@ import Lookup from 'adios/Inputs/Lookup';
 import { TabPanel, TabView } from 'primereact/tabview';
 import TableHistories from './TableHistories';
 
-export interface FormOrderProps extends HubletoFormProps {}
+export interface FormOrderProps extends HubletoFormProps {
+  tableOrderProductsDescription?: any,
+}
 
 export interface FormOrderState extends HubletoFormState {
-  newEntryId: number
+  newEntryId: number,
 }
 
 export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrderState> {
@@ -122,10 +124,14 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                     <TableOrderProducts
                       sum={"Total: " + R.price + " " + R.CURRENCY.code}
                       uid={this.props.uid + "_table_order_products"}
+                      readonly={!this.state.isInlineEditing}
+                      isUsedAsInput={true}
+                      isInlineEditing={this.state.isInlineEditing}
                       data={{ data: R.PRODUCTS }}
                       customEndpointParams={{idOrder: R.id}}
-                      descriptionSource='both'
+                      descriptionSource='props'
                       description={{
+                        permissions: this.props.tableOrderProductsDescription.permissions,
                         ui: {
                           showHeader: false,
                           showFooter: true,
@@ -216,8 +222,6 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                           },
                         }
                       }}
-                      isUsedAsInput={true}
-                      isInlineEditing={this.state.isInlineEditing}
                       onRowClick={() => this.setState({isInlineEditing: true})}
                       onChange={(table: TableOrderProducts) => {
                         this.updateRecord({ price: this.getSumPrice( R.PRODUCTS ), PRODUCTS: table.state.data?.data });

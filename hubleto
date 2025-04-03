@@ -16,7 +16,7 @@ $cli = new \HubletoMain\Cli\Agent\Loader($main);
 
 // MAIN code
 
-$cli->green("Hubleto " . \HubletoMain::RELEASE . " CLI agent.\n");
+$cli->green("Hubleto " . $main->release->getVersion() . " CLI agent.\n");
 
 $action = (string) ($argv[1] ?? '');
 

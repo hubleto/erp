@@ -1,3 +1,25 @@
-<div class="list !bg-yellow-50 p-4 w-1/2 m-auto">
-  {{ include('@app/community/Help/Views/HelpCenterInner.twig') }}
+<div class="grid grid-cols-2 gap-2">
+  <div class="card">
+    <div class="card-header">
+      {{ translate('Help center') }}
+    </div>
+    <div class="card-body">
+      {{ include('@app/community/Help/Views/HelpCenterInner.twig') }}
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      {{ translate('About your Hubleto') }}
+    </div>
+    <div class="card-body">
+      <table class="table-default dense">
+        <tbody>
+          <tr>
+            <td>Release</td>
+            <td>[{{ app.release.getVersion() }}] {{ app.release.getCodename() }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

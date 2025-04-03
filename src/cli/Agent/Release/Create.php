@@ -31,7 +31,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
     $this->cli->red("!!! WARNING !!! Script does not support symbolic links. Check your composer libraries ('vendor' folder).\n");
     $this->cli->red("\n");
 
-    $zipFilePath = pathinfo(get_included_files()[0], PATHINFO_DIRNAME) . '/hubleto-' . \HubletoMain::RELEASE . '-ce.zip';
+    $zipFilePath = pathinfo(get_included_files()[0], PATHINFO_DIRNAME) . '/hubleto-' . $this->main->release->getVersion() . '-ce.zip';
     $zipFilePath = $this->cli->read('Full path to .zip file (File will be overwritten !!!)', $zipFilePath);
 
     $zip = new \ZipArchive();

@@ -9,7 +9,7 @@
     "analyse-php": "vendor/bim/phpstan analyse",
     "build-js": "npx webpack --mode development",
     "watch-js": "npx webpack --watch --mode development",
-    "build": "npx webpack --mode development && npx @tailwindcss/cli -i ./src/Main.twcss -o ./assets/compiled/css/main.css",
+    "build": "npx webpack --mode development && npx @tailwindcss/cli -m -i ./src/Main.twcss -o ./assets/compiled/css/main.css",
     "build:prod": "npx webpack --mode production"
   },
   "dependencies": {

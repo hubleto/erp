@@ -50,6 +50,7 @@ class ConvertLead extends \HubletoMain\Core\Controller
       $lead = $mLead->eloquent->where("id", $leadId)->first();
 
       $deal = $mDeal->eloquent->create([
+        "identifier" => $lead->identifier,
         "title" => $lead->title,
         "id_customer" => $lead->id_customer,
         "id_person" => $lead->id_person,
@@ -79,7 +80,7 @@ class ConvertLead extends \HubletoMain\Core\Controller
         ]);
       }
 
-      $leadDocuments = $mLeadDocument->eloquent->where("id_lead", $leadId)->get();
+      $leadDocuments = $mLeadDocument->eloquent->where("id_lookup", $leadId)->get();
 
       foreach ($leadDocuments as $leadDocument) { //@phpstan-ignore-line
         $mDealDocument->eloquent->create([

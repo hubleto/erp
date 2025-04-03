@@ -37,6 +37,7 @@ class LeadHistory extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Leads';
     $description->ui['addButtonText'] = 'Add Lead';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     unset($description->columns['note']);
     return $description;

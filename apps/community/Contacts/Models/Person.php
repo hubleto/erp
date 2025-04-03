@@ -48,6 +48,7 @@ class Person extends \HubletoMain\Core\Model
     $description->ui['title'] = $this->translate('Contacts');
     $description->ui['addButtonText'] = $this->translate('Add Contact');
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     $description->columns['virt_email'] = ["title" => $this->translate("Emails")];

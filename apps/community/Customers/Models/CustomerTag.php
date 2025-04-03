@@ -30,6 +30,7 @@ class CustomerTag extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Customer Categories';
     $description->ui['addButtonText'] = 'Add Customer';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     return $description;
   }

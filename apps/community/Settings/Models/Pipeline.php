@@ -29,6 +29,7 @@ class Pipeline extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Pipelines';
     $description->ui['addButtonText'] = 'Add Pipeline';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

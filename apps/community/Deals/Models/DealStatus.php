@@ -27,6 +27,7 @@ class DealStatus extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Deal Statuses';
     $description->ui['addButtonText'] = 'Add Deal Status';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     return $description;
   }

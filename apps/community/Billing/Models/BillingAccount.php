@@ -32,6 +32,7 @@ class BillingAccount extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Billing Account';
     $description->ui['addButtonText'] = 'Add Billing Account';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     return $description;
   }

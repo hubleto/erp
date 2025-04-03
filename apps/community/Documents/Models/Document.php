@@ -33,6 +33,7 @@ class Document extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Documents';
     $description->ui['addButtonText'] = 'Add Document';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
 
     unset($description->columns["origin_link"]);
 

@@ -24,6 +24,7 @@ class ContactType extends \HubletoMain\Core\Model
     $description->ui['title'] = $this->translate('Contact Types');
     $description->ui['addButtonText'] = 'Add Contact Type';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

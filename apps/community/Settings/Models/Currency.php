@@ -25,6 +25,7 @@ class Currency extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Currencies';
     $description->ui['addButtonText'] = 'Add currency';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

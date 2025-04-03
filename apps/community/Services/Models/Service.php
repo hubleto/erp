@@ -37,6 +37,7 @@ class Service extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Services';
     $description->ui['addButtonText'] = 'Add Service';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     unset($description->columns['description']);

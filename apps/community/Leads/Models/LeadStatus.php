@@ -27,6 +27,7 @@ class LeadStatus extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Lead Statuses';
     $description->ui['addButtonText'] = 'Add Lead Status';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     return $description;
   }

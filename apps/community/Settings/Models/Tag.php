@@ -26,6 +26,7 @@ class Tag extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Tags';
     $description->ui['addButtonText'] = 'Add Tag';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

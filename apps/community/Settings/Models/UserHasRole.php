@@ -24,6 +24,7 @@ class UserHasRole extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Role Assigments';
     $description->ui['addButtonText'] = 'Assign Roles';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

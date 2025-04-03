@@ -40,6 +40,7 @@ class Installer {
       \HubletoApp\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997, ],
       \HubletoApp\Community\Dashboard\Loader::class => [ ],
       \HubletoApp\Community\Premium\Loader::class => [ 'sidebarOrder' => 99999, ],
+      \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
       \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110, ],
       \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 101, ],
       \HubletoApp\Community\Contacts\Loader::class => [ ],

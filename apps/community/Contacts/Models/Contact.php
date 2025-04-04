@@ -37,6 +37,7 @@ class Contact extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Contacts';
     $description->ui['addButtonText'] = 'Add Customer';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     if ($this->main->urlParamAsInteger('idPerson') > 0) {

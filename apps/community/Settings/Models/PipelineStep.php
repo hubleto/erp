@@ -32,6 +32,7 @@ class PipelineStep extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Pipeline Steps';
     $description->ui['addButtonText'] = 'Add Pipeline Step';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

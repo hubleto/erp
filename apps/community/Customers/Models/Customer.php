@@ -105,6 +105,7 @@ class Customer extends \HubletoMain\Core\Model
     $description->ui['title'] = $this->translate('Customers');
     $description->ui['addButtonText'] = $this->translate('Add Customer');
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     $description->columns['tags'] = ["title" => "Tags"];
 

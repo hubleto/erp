@@ -82,6 +82,9 @@ class HubletoMain extends \ADIOS\Core\Loader
       $this->isPro = (string) file_get_contents($this->config->getAsString('accountDir', '') . '/pro') == '1';
     }
 
+    $this->release = new \HubletoMain\Core\ReleaseManager($this);
+    $this->release->load();
+
     $this->calendarManager = new \HubletoMain\Core\CalendarManager($this);
     $this->reportManager = new \HubletoMain\Core\ReportManager($this);
     $this->appManager = new \HubletoMain\Core\AppManager($this);

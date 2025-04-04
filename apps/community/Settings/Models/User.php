@@ -72,6 +72,7 @@ class User extends \ADIOS\Models\User
     $description->ui['title'] = 'Users';
     $description->ui['addButtonText'] = 'Add User';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

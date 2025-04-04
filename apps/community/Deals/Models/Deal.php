@@ -101,6 +101,7 @@ class Deal extends \HubletoMain\Core\Model
       $description->ui['addButtonText'] = 'Add Deal';
     }
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     $description->columns['tags'] = ["title" => "Tags"];
     unset($description->columns['note']);

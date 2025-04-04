@@ -24,6 +24,7 @@ class Profile extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Profiles';
     $description->ui['addButtonText'] = 'Add Profile';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

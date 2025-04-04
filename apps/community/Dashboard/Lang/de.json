@@ -4,9 +4,9 @@
     },
     "controllers.home": {
         "Welcome": "",
-        "Upgrade to PRO and get exciting rewards.": "",
+        "Upgrade to Premium and get exciting rewards.": "",
         "You are using free version of Hubleto. Certain features are unavailable.": "",
-        "Upgrade to PRO": ""
+        "Upgrade to Premium": ""
     },
     "manifest": {
         "Dashboard": "",

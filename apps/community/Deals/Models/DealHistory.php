@@ -37,6 +37,7 @@ class DealHistory extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Deals';
     $description->ui['addButtonText'] = 'Add Deal';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     unset($description->columns['note']);
     return $description;

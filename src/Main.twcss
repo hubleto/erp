@@ -37,4 +37,7 @@
   #app-launcher > div .app-launcher-app-button { @apply text-slate-800 cursor-pointer w-1/6 bg-white shadow-sm flex flex-col border border-primary hover:bg-primary hover:text-white; }
   #app-launcher > div .app-launcher-app-button .icon { @apply p-4 text-center text-4xl; }
   #app-launcher > div .app-launcher-app-button .text { @apply p-4 text-center; }
+
+  .btn-add { @apply bg-amber-600; }
+  .btn-close { @apply bg-gray-200 text-gray-800; }
 }

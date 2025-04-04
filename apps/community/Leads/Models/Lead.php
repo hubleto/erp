@@ -77,7 +77,9 @@ class Lead extends \HubletoMain\Core\Model
   {
     $description = parent::describeTable();
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
+    $description->ui['showFulltextSearch'] = true;
     $description->columns['tags'] = ["title" => "Tags"];
 
     unset($description->columns['note']);

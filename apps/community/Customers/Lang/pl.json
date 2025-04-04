@@ -15,13 +15,12 @@
     },
     "dashboard.home": {
         "Welcome": "Witamy",
-        "Upgrade to PRO and get exciting rewards.": "Przejdź na wersję PRO i zdobądź wspaniałe nagrody.",
+        "Upgrade to Premium and get exciting rewards.": "Przejdź na wersję Premium i zdobądź wspaniałe nagrody.",
         "You are using free version of Hubleto. Certain features are unavailable.": "Korzystasz z darmowej wersji Hubleto. Niektóre funkcje nie są dostępne.",
-        "Upgrade to PRO": "Przejdź do PRO"
+        "Upgrade to Premium": "Przejdź do Premium"
     },
     "loader": {
         "Customers": "Klienci",
-        "Customers": "Firmy",
         "Contact Persons": "Osoby kontaktowe"
     },
     "models.customer": {

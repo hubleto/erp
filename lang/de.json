@@ -1,6 +1,6 @@
 {
     "desktop": {
-        "Upgrade to PRO": "Upgrade auf PRO",
+        "Upgrade to Premium": "Upgrade auf Premium",
         "Your messages": "Ihre Nachrichten",
         "Help center": "Hilfszentrum",
         "Browse knowledgebase": "Wissensbasis durchsuchen",
@@ -36,7 +36,7 @@
         "No data.": "Keine Daten"
     },
     "Desktop": {
-        "Upgrade to PRO": "",
+        "Upgrade to Premium": "",
         "Your messages": "",
         "Help center": "",
         "Search knowledgebase...": "",

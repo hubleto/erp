@@ -113,7 +113,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->green("   ##        ###   \n");
     $this->cli->green("            ###    \n");
     $this->cli->cyan("\n");
-    $this->cli->green("Hubleto, release " . \HubletoMain::RELEASE . "\n");
+    $this->cli->green("Hubleto, release " . $this->main->release->getVersion() . "\n");
     $this->cli->cyan("\n");
 
     if (sizeof($errors) > 0) {
@@ -201,14 +201,17 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $installer->createDatabase();
 
     $this->cli->cyan("  -> Installing apps.\n");
+    $this->cli->cyan("\n");
     $installer->installApps();
+    $this->cli->cyan("\n");
 
     $this->cli->cyan("  -> Adding default company profile and admin user.\n");
     $installer->addCompanyProfileAndAdminUser();
 
     $this->cli->cyan("\n");
     $this->cli->cyan("All done! You're a fantastic CRM developer. Now you can:\n");
-    $this->cli->cyan("  -> Open " . (string) $accountUrl . " and sign in with '" . (string) $adminEmail . "' and '" . (string) $adminPassword . "'.\n");
+    $this->cli->cyan("  -> Open " . (string) $accountUrl . "?user={$adminEmail}\n");
+    $this->cli->cyan("     and use this password: " . (string) $adminPassword . "\n");
     $this->cli->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
     $this->cli->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
     $this->cli->cyan("\n");

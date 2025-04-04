@@ -20,9 +20,7 @@ class Loader extends \HubletoMain\Core\App
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-
       "HubletoApp/Community/Help/Controllers/Help",
-
       "HubletoApp/Community/Help/Help",
     ];
 

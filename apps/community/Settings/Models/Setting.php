@@ -41,6 +41,7 @@ class Setting extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Settings';
     $description->ui['addButtonText'] = 'Add Setting';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

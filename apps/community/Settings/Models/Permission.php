@@ -23,6 +23,7 @@ class Permission extends \HubletoMain\Core\Model
 
     $description->ui['title'] = 'Permissions';
     $description->ui['showHeader'] = false;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     $description->permissions['canCreate'] = false;

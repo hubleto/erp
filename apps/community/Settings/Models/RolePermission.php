@@ -28,6 +28,7 @@ class RolePermission extends \HubletoMain\Core\Model
 
     $description->ui['title'] = 'Role Permissions';
     $description->ui['showHeader'] = false;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

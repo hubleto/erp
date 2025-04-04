@@ -29,6 +29,7 @@ class ActivityType extends \HubletoMain\Core\Model
     $description->ui['title'] = 'Activity Types';
     $description->ui['addButtonText'] = 'Add Activity Type';
     $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

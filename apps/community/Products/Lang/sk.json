@@ -31,7 +31,8 @@
         "Needs reordering?": "",
         "Storage rules": "",
         "Table": "",
-        "Add product": ""
+        "Add product": "",
+        "Product Group": ""
     },
     "Models\\Group": {
         "Title": ""

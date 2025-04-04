@@ -13,7 +13,7 @@ class Loader extends \HubletoMain\Core\App
       '/^leads\/?$/' => Controllers\Leads::class,
       '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
       '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
-      '/^leads\/convert-to-Lead\/?$/' => Controllers\Api\ConvertLead::class,
+      '/^leads\/convert-to-deal\/?$/' => Controllers\Api\ConvertLead::class,
       '/^settings\/lead-statuses\/?$/' => Controllers\LeadStatuses::class,
     ]);
 

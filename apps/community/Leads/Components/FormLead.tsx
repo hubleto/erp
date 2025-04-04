@@ -92,7 +92,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       {recordId: recordId},
       (data: any) => {
         if (data.status == "success") {
-          location.assign(`../deals?recordId=${data.idDeal}&recordTitle=${data.title}`)
+          location.assign(globalThis.main.config.rewriteBase + `deals?recordId=${data.idDeal}&recordTitle=${data.title}`)
         }
       }
     );

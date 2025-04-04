@@ -26,7 +26,7 @@ class Product extends \HubletoMain\Core\Model
   {
     return array_merge(parent::describeColumns(), [
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'id_product_group' => (new Lookup($this, $this->translate('Assigned User'), Group::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_product_group' => (new Lookup($this, $this->translate('Product Group'), Group::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'is_on_sale' => new Boolean($this, $this->translate('On sale')),
       'image' => new Image($this, $this->translate('Image') . ' [540x600px]'),

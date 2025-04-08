@@ -13,7 +13,7 @@ class GetCalendarEvents extends \HubletoMain\Core\Controller {
       $calEvents = (array) $calendar->loadEvents();
       foreach ($calEvents as $key => $value) {
         $calEvents[$key]['SOURCE'] = $calendarClass;
-        $calEvents[$key]['SOURCEFORM'] = $calendar->formComponent["form"] ?? null;
+        $calEvents[$key]['SOURCEFORM'] = $calendar->activitySelectorConfig["formComponent"] ?? null;
       }
       $events = array_merge($events, $calEvents);
     }

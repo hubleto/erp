@@ -6,9 +6,9 @@ use HubletoApp\Community\Customers\Models\CustomerActivity;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 
-  public array $formComponent = [
+  public array $activitySelectorConfig = [
     "title" => "Customer",
-    "form" => "CustomersFormActivity",
+    "formComponent" => "CustomersFormActivity",
   ];
 
   public function loadEvents(): array

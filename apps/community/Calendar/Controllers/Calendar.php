@@ -17,7 +17,7 @@ class Calendar extends \HubletoMain\Core\Controller {
     parent::prepareView();
     foreach ($this->main->calendarManager->getCalendars() as $calendarClass => $calendar) {
       if ($calendarClass == "HubletoApp\Community\CalendarSync\Calendar") continue;
-      $this->viewParams["calendarConfigs"][] = $calendar->formComponent;
+      $this->viewParams["calendarConfigs"][] = $calendar->activitySelectorConfig;
     }
     $this->setView('@HubletoApp:Community:Calendar/Calendar.twig');
   }

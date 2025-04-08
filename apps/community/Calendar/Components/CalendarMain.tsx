@@ -66,7 +66,8 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
               id: info.event.id,
               showInModal: true,
               showInModalSimple: true,
-              onClose:() => {this.setState({activityFormComponent: null})}
+              onClose:() => {this.setState({activityFormComponent: null})},
+              onSaveCallback:() => {this.setState({activityFormComponent: null})}
             })
           });
         }}

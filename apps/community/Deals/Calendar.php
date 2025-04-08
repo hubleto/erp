@@ -4,9 +4,9 @@ namespace HubletoApp\Community\Deals;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 
-  public array $formComponent = [
+  public array $activitySelectorConfig = [
     "title" => "Deal",
-    "form" => "SalesDealsFormActivity"
+    "formComponent" => "SalesDealsFormActivity"
   ];
 
   public function loadEvents(): array

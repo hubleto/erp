@@ -50,10 +50,10 @@ class Loader extends \HubletoMain\Core\App
     $mDealActivity->dropTableIfExists()->install();
     $mDealDocument->dropTableIfExists()->install();
 
-    $mDealStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
-    $mDealStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
-    $mDealStatus->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'color' => '#42ddf5' ]);
-    $mDealStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
+    $mDealStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#0000A0' ]);
+    $mDealStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A0A000' ]);
+    $mDealStatus->eloquent->create([ 'name' => 'Won', 'order' => 3, 'color' => '#00A000' ]);
+    $mDealStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#A00000' ]);
 
   }
 

@@ -1,57 +1,90 @@
-<div>
-  <form class="inline-block mr-2" action="" method="post">
-    <select class="border p-2 mb-2 mt-2 rounded-md border-gray-200 text-2xl font-bold text-green-700" name="id_pipeline" onchange="submit()">
-      {% for pipeline in viewParams.pipelines %}
-        <option value="{{ pipeline.id }}"
-        {% if pipeline.id == viewParams.pipeline.id %} selected {% endif %}
-        >{{ pipeline.name }}</option>
-      {% endfor %}
-    </select>
-  </form>
-  <div class="inline text-gray-400 mb-2 mt-0">
-    <span style="font-size: 11pt;" class="font-normal pt-1">Potential Pipeline Profit: {{viewParams.pipeline.price}} {{viewParams.currency}}</span>
-  </div>
-</div>
-
-<div class="flex flex-col md:flex-row justify-start gap-2">
-  {% for step in viewParams.pipeline.PIPELINE_STEPS %}
-
-    {# Step Containter #}
-    <div class="card min-h-0 md:min-h-[85vh] w-full md:w-[280px]">
-
-      <div class="card-header flex flex-col gap-1">
-        <span>{{ step.name }}</span>
-
-        <div class="flex flex-row gap-2 align-items-center text-gray-400">
-          <span style="font-size: 9pt;" class="font-normal pt-1">Potential Step Profit: {{step.sum_price}} {{viewParams.currency}}</span>
-        </div>
-      </div>
-
-      <div class="card-body flex flex-row flex-wrap md:block">
-        {# Deal Card #}
-        {% for deal in viewParams.deals %}
-          {% if deal.id_pipeline_step == step.id %}
-            <div class="card w-1/2 sm:w-1/3 md:w-auto" style="border-color: {{deal.TAG.color}};">
-              <div class="card-header rounded flex flex-col p-2 text-sm">
-                <div class="grid grid-cols-3">
-                  <div class="flex flex-col col-span-2">
-                    <span class="truncate">{{deal.CUSTOMER.name}}</span>
-                    <span style="font-size: 8pt;" class="text-gray-400 truncate">{{deal.title}}</span>
-                  </div>
-                  <span class="font-normal col-span-1 text-right md:text-wrap truncate md:text-clip" style="color: {{deal.TAG.color}};">{{deal.TAG.name}}</span>
-                </div>
-              </div>
-              <div class="card-body flex flex-row justify-between">
-                <span>{{deal.price}} {{deal.CURRENCY.code}}</span>
-                <span class="icon">
-                  <a href="./deals?recordId={{deal.id}}" target="_blank">
-                    <i class="fas fa-circle-right text-gray-300 hover:text-gray-500"></i>
-                  </a></span>
-              </div>
-            </div>
-          {% endif %}
+<div class="flex gap-2">
+  <div class="flex flex-col gap-2" style="width:140px">
+    {# <form action="" method="get" style="min-width: 30%">
+      <select class="border p-2 mb-2 ounded-md border-gray-200 text-2xl font-bold text-green-700 w-full" name="id_pipeline" onchange="submit()">
+        {% for pipeline in viewParams.pipelines %}
+          <option value="{{ pipeline.id }}"
+          {% if pipeline.id == viewParams.pipeline.id %} selected {% endif %}
+          >{{ pipeline.name }}</option>
         {% endfor %}
-      </div>
+      </select>
+    </form> #}
+
+    {% for pipeline in viewParams.pipelines %}
+      <a href="?id_pipeline={{ pipeline.id }}"
+        class="btn {% if pipeline.id == viewParams.pipeline.id %} btn-primary {% else %} btn-transparent {% endif %}"
+      >
+        <span class="icon"><i class="fas fa-timeline"></i></span>
+        <span class="text">{{ pipeline.name }}</span>
+      </a>
+    {% endfor %}
+    <a class="btn btn-transparent" href="settings/pipelines" target="_blank">
+      <span class="icon"><i class="fas fa-add"></i></span>
+      <span class="text">{{ translate('Manage pipelines') }}</span>
+    </a>
+  </div>
+
+  <div>
+
+    <div class="text-primary text-2xl">{{ viewParams.pipeline.name }}</div>
+
+    <div class="alert alert-primary mt-2">
+      Potential Pipeline Profit: {{ viewParams.main.locale.formatCurrency(viewParams.pipeline.price) }}
     </div>
-  {% endfor %}
+
+    <div class="flex flex-col md:flex-row justify-start gap-2">
+      {% for step in viewParams.pipeline.PIPELINE_STEPS %}
+
+        {# Step Containter #}
+        <div class="card min-h-0 md:min-h-[85vh] w-full md:w-[280px]">
+
+          <div class="card-header flex flex-col gap-1">
+            <span style="border-left: 1em solid {{ step.color }};padding-left:1em;">{{ step.name }}</span>
+
+            <div class="flex flex-row gap-2 align-items-center text-gray-400">
+              <span style="font-size: 9pt;" class="font-normal pt-1">Potential Profit: {{ viewParams.main.locale.formatCurrency(step.sum_price) }}</span>
+            </div>
+          </div>
+
+          <div class="card-body flex flex-row flex-wrap md:block">
+            {# Deal Card #}
+            {% for deal in viewParams.deals %}
+              {% if deal.id_pipeline_step == step.id %}
+                <div class="card w-1/2 sm:w-1/3 md:w-auto hover:border-primary"><a class="hover:no-underline" href="./deals?recordId={{deal.id}}" target="_blank">
+                  <div class="card-header rounded flex flex-col p-2 text-sm">
+                    <div class="flex justify-between">
+                      <div class="flex flex-col col-span-2">
+                        <span class="truncate">{{deal.identifier}}</span>
+                        <span class="truncate">{{deal.CUSTOMER.name}}</span>
+                        <span style="font-size: 8pt;" class="text-gray-400 truncate">{{deal.title}}</span>
+                      </div>
+                      <div class="mt-1">
+                        <div class="mb-3 pr-2 text-right font-normal" style="border-right: 0.5em solid {{ deal.STATUS.color }}">{{ deal.STATUS.name }}</div>
+                        <div class="badge bg-white font-normal" style="border: 1px solid {{deal.TAG.color}}; color: {{deal.TAG.color}};">{{deal.TAG.name}}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body text-sm">
+                    <div>Value: {{deal.price}} {{deal.CURRENCY.code}}</div>
+                    <div>Closes on: {{ viewParams.main.locale.formatDateShort(deal.date_expected_close) }}</div>
+                    <div>Responsible: {{ deal.USER.email }}</div>
+                  </div>
+                </a></div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+
+        {# Step Containter #}
+        <div class="card min-h-0 md:min-h-[85vh] w-full md:w-[280px]">
+          <div class="card-body flex flex-row flex-wrap md:block">
+            <a class="btn btn-transparent" href="settings/pipelines?recordId={{viewParams.pipeline.id}}" target="_blank">
+              <span class="icon"><i class="fas fa-add"></i></span>
+              <span class="text">{{ translate('Manage pipeline steps') }}</span>
+            </a>
+          </div>
+        </div>
+    </div>
+  </div>
 </div>

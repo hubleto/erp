@@ -5,6 +5,7 @@ namespace HubletoApp\Community\Settings\Models;
 use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Integer;
 use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Color;
 
 class PipelineStep extends \HubletoMain\Core\Model
 {
@@ -21,6 +22,7 @@ class PipelineStep extends \HubletoMain\Core\Model
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'order' => (new Integer($this, $this->translate('Order')))->setRequired(),
+      'color' => (new Color($this, $this->translate('Color')))->setRequired(),
       'id_pipeline' => (new Lookup($this, $this->translate("Pipeline"), Pipeline::class, 'CASCADE'))->setRequired(),
     ]);
   }

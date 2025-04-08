@@ -78,6 +78,8 @@ class Home extends \HubletoMain\Core\Controller {
       ->with("CURRENCY")
       ->with("CUSTOMER")
       ->with("TAGS")
+      ->with("USER")
+      ->with("STATUS")
       ->get()
       ->toArray()
     ;

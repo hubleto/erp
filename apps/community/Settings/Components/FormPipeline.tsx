@@ -100,10 +100,12 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
                   columns: {
                     name: { type: "varchar", title: "Name" },
                     order: { type: "int", title: "Order" },
+                    color: { type: "color", title: "Color" },
                   },
                   inputs: {
                     name: { type: "varchar", title: "Name" },
                     order: { type: "int", title: "Order" },
+                    color: { type: "color", title: "Color" },
                   },
                 }}
               ></TablePipelineSteps>

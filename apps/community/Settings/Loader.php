@@ -106,16 +106,16 @@ class Loader extends \HubletoMain\Core\App
     $mCurrency->eloquent->create([ 'name' => 'Dollar', 'code' => 'USD' ]);
     $mCurrency->eloquent->create([ 'name' => 'Koruny', 'code' => 'CZK' ]);
 
-    $mPipeline->eloquent->create([ "name" => "Test Pipeline" ]);
-    $mPipelineStep->eloquent->create([ 'name' => 'New', 'order' => 1, 'id_pipeline' => 1 ]);
-    $mPipelineStep->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'id_pipeline' => 1 ]);
-    $mPipelineStep->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'id_pipeline' => 1 ]);
+    $mPipeline->eloquent->create([ "name" => "New customer" ]);
+    $mPipelineStep->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#4080A0', 'id_pipeline' => 1 ]);
+    $mPipelineStep->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A04020', 'id_pipeline' => 1 ]);
+    $mPipelineStep->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'color' => '#006060', 'id_pipeline' => 1 ]);
 
-    $mPipeline->eloquent->create([ "name" => "Test Pipeline 2" ]);
-    $mPipelineStep->eloquent->create([ 'name' => 'Start', 'order' => 1, 'id_pipeline' => 2 ]);
-    $mPipelineStep->eloquent->create([ 'name' => 'Client Contacted', 'order' => 2, 'id_pipeline' => 2 ]);
-    $mPipelineStep->eloquent->create([ 'name' => 'In Progress', 'order' => 3, 'id_pipeline' => 2 ]);
-    $mPipelineStep->eloquent->create([ 'name' => 'Ended', 'order' => 4, 'id_pipeline' => 2 ]);
+    $mPipeline->eloquent->create([ "name" => "Existing customer" ]);
+    $mPipelineStep->eloquent->create([ 'name' => 'Start', 'order' => 1, 'color' => '#405060', 'id_pipeline' => 2 ]);
+    $mPipelineStep->eloquent->create([ 'name' => 'Client Contacted', 'order' => 2, 'color' => '#800000', 'id_pipeline' => 2 ]);
+    $mPipelineStep->eloquent->create([ 'name' => 'In Progress', 'order' => 3, 'color' => '#808000', 'id_pipeline' => 2 ]);
+    $mPipelineStep->eloquent->create([ 'name' => 'Ended', 'order' => 4, 'color' => '#002080', 'id_pipeline' => 2 ]);
 
     $mActivityTypes->eloquent->create([ 'name' => 'Meeting', 'color' => '#607d8b', 'calendar_visibility' => true ]);
     $mActivityTypes->eloquent->create([ 'name' => 'Bussiness Trip', 'color' => '#673ab7', 'calendar_visibility' => true ]);

@@ -1,5 +1,5 @@
 @config "../tailwind.config.js";
-@layer theme, base, components, utilities, primereact, adios, app;
+@layer theme, base, components, primereact, adios, utilities, app;
 
 @theme {
   --font-sans: 'Fredoka-Regular', 'sans-serif';

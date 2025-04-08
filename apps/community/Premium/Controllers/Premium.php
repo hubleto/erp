@@ -18,7 +18,7 @@ class Premium extends \HubletoMain\Core\Controller {
       $this->main->router->redirectTo('premium');
     }
 
-    if ($this->app->isPro) {
+    if ($this->app->isPremium) {
       $this->setView('@HubletoApp:Community:Premium/PremiumActivated.twig');
     } else {
       $this->setView('@HubletoApp:Community:Premium/Upgrade.twig');

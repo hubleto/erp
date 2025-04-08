@@ -8,7 +8,7 @@ class Loader extends \HubletoMain\Core\App
 
   // public static function canBeAdded(\HubletoMain $main): bool
   // {
-  //   return !$main->isPro;
+  //   return !$main->isPremium;
   // }
 
   public function __construct(\HubletoMain $main)

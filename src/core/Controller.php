@@ -103,6 +103,14 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
 
+    $contextHelpUrls = $this->main->help->getCurrentContextHelpUrls($this->main->route);
+    $user = $this->main->auth->getUser();
+
+    if (isset($contextHelpUrls[$user['language']])) $contextHelpUrl = $contextHelpUrls[$user['language']];
+    else if (isset($contextHelpUrls['en'])) $contextHelpUrl = $contextHelpUrls['en'];
+    else $contextHelpUrl = '';
+
+    $this->viewParams['contextHelpUrl'] = $contextHelpUrl;
   }
 
   public function getBreadcrumbs(): array

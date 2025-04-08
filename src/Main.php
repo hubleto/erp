@@ -68,7 +68,7 @@ class HubletoMain extends \ADIOS\Core\Loader
   public \HubletoMain\Core\ReportManager $reportManager;
   public \HubletoMain\Core\AppManager $appManager;
 
-  public bool $isPro = false;
+  public bool $isPremium = false;
 
   private array $settings = [];
 
@@ -79,7 +79,7 @@ class HubletoMain extends \ADIOS\Core\Loader
     parent::__construct($config, $mode);
 
     if (is_file($this->config->getAsString('accountDir', '') . '/pro')) {
-      $this->isPro = (string) file_get_contents($this->config->getAsString('accountDir', '') . '/pro') == '1';
+      $this->isPremium = (string) file_get_contents($this->config->getAsString('accountDir', '') . '/pro') == '1';
     }
 
     $this->release = new \HubletoMain\Core\ReleaseManager($this);

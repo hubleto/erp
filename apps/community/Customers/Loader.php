@@ -17,6 +17,10 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
     $this->main->calendarManager->addCalendar(Calendar::class);
+
+    $this->main->help->addContextHelpUrls('/^customers\/?$/', [
+      'en' => 'en/apps/community/customers',
+    ]);
   }
 
   public function installTables(): void

@@ -86,14 +86,33 @@
       </div>
       <div id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
+          {% if viewParams.contextHelpUrl %}
+            <li class="mr-2">
+              <a
+                class="btn btn-small btn-transparent"
+                href="https://help.hubleto.com/{{ viewParams.contextHelpUrl }}"
+                target="_blank"
+              >
+                <span class="icon bg-blue-50 text-blue-500"><i class="fas fa-life-ring"></i></span>
+                <span class="text">{{ translate('Help') }}</span>
+                {# <div class="menu">
+                  <div class="list !bg-yellow-50 p-4" style="position:fixed;right:0;top:0;width:30em;max-width:50%;height:100vh;margin:0;border-radius:0;border:none;overflow-y:auto;">
+                    {{ include('@app/community/Help/Views/HelpCenterInner.twig') }}
+                  </div>
+                </div> #}
+              </a>
+            </li>
+          {% endif %}
           <li>
-            {% if app.isPro %}
-              <a href="{{ config.accountUrl }}/premium">
-                <i class="fas fa-trophy text-yellow-500 text-xs mr-4 shadow-sm bg-yellow-50 shadow-yellow-200" style="border-radius:100px;padding:5px"></i>
+            {% if app.isPremium %}
+              <a class="btn btn-small btn-transparent" href="{{ config.accountUrl }}/premium">
+                <span class="icon bg-yellow-50 text-yellow-500"><i class="fas fa-trophy"></i></span>
+                <span class="text">{{ translate('Premium') }}</span>
               </a>
             {% else %}
-              <a href="{{ config.accountUrl }}/premium">
-                <i class="fas fa-trophy text-red-500 text-xs mr-4 shadow-sm bg-red-50 shadow-red-200" style="border-radius:100px;padding:5px"></i>
+              <a class="btn btn-small btn-transparent" href="{{ config.accountUrl }}/premium">
+                <span class="icon bg-green-50 text-green-500"><i class="fas fa-trophy"></i></span>
+                <span class="text">{{ translate('Get premium') }}</span>
               </a>
             {% endif %}
           </li>
@@ -118,17 +137,8 @@
           </li> #}
           <li>
             <button class="btn btn-white btn-small btn-dropdown">
-              <span class="icon"><i class="fas fa-life-ring"></i></span>
-              <div class="menu">
-                <div class="list !bg-yellow-50 p-4" style="position:fixed;right:0;top:0;width:30em;max-width:50%;height:100vh;margin:0;border-radius:0;border:none;overflow-y:auto;">
-                  {{ include('@app/community/Help/Views/HelpCenterInner.twig') }}
-                </div>
-              </div>
-            </button>
-          </li>
-          <li>
-            <button class="btn btn-white btn-small btn-dropdown">
-              <span class="text">{{ user.language ?: 'en' }}</span>
+              <span class="icon"><i class="fas fa-language"></i></span>
+              <span class="text">{{ (user.language ?: 'en')|upper }}</span>
               <div class="menu">
                 <div class="list" style="margin-left:-6.2em;width:8em;">
                   <a href="?set-language=en" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">English</span></a>
@@ -145,7 +155,8 @@
           </li>
           <li>
             <button class="btn btn-white btn-small btn-dropdown">
-              <span class="icon text-primary"><i class='fas fa-user-tie'></i></span>
+              <span class="icon"><i class='fas fa-user-tie'></i></span>
+              <span class="text">{{ user.email }}</span>
               <div class="menu">
                 <div class="list" style="margin-left:-13.4em;width:15em;">
                   <div class="text-center text-primary text-sm p-2">{{ user.email }}</div>

@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\Calendar;
 
+use HubletoApp\Community\Calendar\Models\Activity;
+
 class Loader extends \HubletoMain\Core\App
 {
 
@@ -15,14 +17,18 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
+  public function installTables(): void
+  {
+    $mActivity = new Activity($this->main);
+    $mActivity->install();
+  }
+
   public function installDefaultPermissions(): void
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
       "HubletoApp/Community/Calendar/Calendar",
-
       "HubletoApp/Community/Calendar/Controllers/Calendar",
-
       "HubletoApp/Community/Calendar/Api/GetCalendarEvents",
     ];
 

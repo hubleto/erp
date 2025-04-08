@@ -5,6 +5,7 @@ namespace HubletoMain\Core;
 class Calendar implements \ADIOS\Core\Testable {
 
   public \HubletoMain $main;
+  public array $formComponent = [];
 
   public function __construct(\HubletoMain $main) {
     $this->main = $main;

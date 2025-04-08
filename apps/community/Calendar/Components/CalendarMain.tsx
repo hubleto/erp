@@ -1,5 +1,9 @@
 import React, { Component, useState } from "react";
 import Calendar from "./Calendar";
+import ModalSimple from "adios/ModalSimple";
+import FormActivitySelector from "./FormActivitySelector";
+import { log } from "console";
+
 
 interface CalendarMainProps {
   children: any,
@@ -10,6 +14,7 @@ interface CalendarMainProps {
   onCreateCallback?: any
   onDateClick: any,
   onEventClick: any,
+  configs?: any,
 }
 
 interface CalendarMainState {
@@ -17,6 +22,8 @@ interface CalendarMainState {
   showIdActivity?: number,
   dateClicked?: string,
   timeClicked?: string,
+  activityFormComponent?: JSX.Element,
+  newActivity: boolean,
 }
 
 export default class CalendarComponent extends Component<CalendarMainProps, CalendarMainState> {
@@ -28,6 +35,7 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
       showIdActivity: 0,
       dateClicked: "",
       timeClicked: "",
+      newActivity: false,
     };
   }
 
@@ -40,18 +48,55 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
   }
 
   render(): JSX.Element {
-    return (
+    return (<>
       <Calendar
         readonly={false}
         views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
         eventsEndpoint={globalThis.main.config.rewriteBase + '/calendar/get-calendar-events'}
         onDateClick={(date, time, info) => {
-          console.log('Zobrazit formular na vyber a) customera, b) leadu alebo c) dealu. Ak si jedno z toho zvoli, otvori sa prislusny form. Ak si nezvoli nic, otvori sa form, ktory bude ukladat do noveho modelu Calendar/Models/Activity');
+          this.setState({
+            newActivity: true,
+            dateClicked: date,
+            timeClicked: info.view.type == "dayGridMonth" ? null : time
+          });
         }}
         onEventClick={(info) => {
-          console.log('event click', info);
+          this.setState({activityFormComponent: globalThis.main.renderReactElement(info.event.extendedProps.SOURCEFORM,
+            {
+              id: info.event.id,
+              showInModal: true,
+              showInModalSimple: true,
+              onClose:() => {this.setState({activityFormComponent: null})}
+            })
+          });
         }}
       ></Calendar>
+      {this.state.activityFormComponent ?
+        <ModalSimple
+          uid='activity_form'
+          isOpen={true}
+          type='right'
+        >
+          {this.state.activityFormComponent}
+        </ModalSimple>
+      : <></>}
+      {this.state.newActivity ?
+        <ModalSimple
+          uid='activity_new_form'
+          isOpen={true}
+          type='right'
+        >
+          <FormActivitySelector
+            onCallback={() => this.setState({newActivity: false})}
+            calendarConfigs={this.props.configs}
+            clickConfig={{
+              date: this.state.dateClicked,
+              time: this.state.timeClicked
+            }}
+          />
+        </ModalSimple>
+      : <></>}
+    </>
     )
   }
 }

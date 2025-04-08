@@ -27,7 +27,7 @@ class CustomerActivity extends \HubletoMain\Core\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE'))->setRequired()->setReadonly(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE'))->setRequired(),
       'id_person' => (new Lookup($this, $this->translate('Contact Person'), Person::class, 'CASCADE')),
       'id_activity_type' => (new Lookup($this, $this->translate('Activity type'), ActivityType::class, 'SET NULL'))->setRequired(),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),

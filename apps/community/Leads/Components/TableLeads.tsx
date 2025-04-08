@@ -52,7 +52,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      showArchive: this.state.showArchive ? 1 : 0,
+      showArchive: this.props.showArchive ? 1 : 0,
     }
   }
 
@@ -117,6 +117,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
     let formProps = this.getFormProps() as FormLeadProps;
     formProps.tableLeadServicesDescription = this.state.tableLeadServicesDescription;
     formProps.tableLeadDocumentsDescription = this.state.tableLeadDocumentsDescription;
+    formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormLead {...formProps}/>;
   }
 }

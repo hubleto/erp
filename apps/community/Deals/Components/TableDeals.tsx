@@ -51,7 +51,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      showArchive: this.state.showArchive ? 1 : 0,
+      showArchive: this.props.showArchive ? 1 : 0,
     }
   }
 
@@ -113,6 +113,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
     let formProps = this.getFormProps() as FormDealProps;
     formProps.tableDealServicesDescription = this.state.tableDealServicesDescription;
     formProps.tableDealDocumentsDescription = this.state.tableDealDocumentsDescription;
+    formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormDeal {...formProps}/>;
   }
 }

@@ -57,6 +57,20 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     };
   }
 
+  onAfterSaveRecord(saveResponse: any): void {
+    let params = this.getEndpointParams()
+    let isArchived = saveResponse.savedRecord.is_archived;
+
+    if (params.showArchive == false && isArchived == true) {
+      this.props.onClose();
+      this.props.parentTable.loadData();
+    }
+    else if (params.showArchive == true && isArchived == false) {
+      this.props.onClose();
+      this.props.parentTable.loadData();
+    } else super.onAfterSaveRecord(saveResponse);
+  }
+
   renderTitle(): JSX.Element {
     if (getUrlParam('recordId') == -1) {
       return <h2>{this.translate('New Lead')}</h2>;

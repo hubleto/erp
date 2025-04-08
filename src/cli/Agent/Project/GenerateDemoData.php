@@ -84,9 +84,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
     //Shop
-    $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
-    $mGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
-    $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
+    // $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
+    // $mGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
+    // $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
 
     $this->generateCustomers($mCustomer, $mCustomerTag);
     $this->generatePersons($mPerson, $mPersonTag, $mContact);
@@ -94,7 +94,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $this->generateServices($mCustomer, $mService);
     $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
     $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity);
-    $this->generateProducts($mProduct,$mGroup, $mSupplier);
+    // $this->generateProducts($mProduct,$mGroup, $mSupplier);
 
     $this->cli->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 

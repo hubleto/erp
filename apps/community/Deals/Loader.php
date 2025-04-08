@@ -26,6 +26,10 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->calendarManager->addCalendar(Calendar::class);
     $this->main->reportManager->addReport(Reports\MonthlyRevenue::class);
+
+    $this->main->help->addContextHelpUrls('/^deals\/?$/', [
+      'en' => 'en/apps/community/deals',
+    ]);
   }
 
   public function installTables(): void

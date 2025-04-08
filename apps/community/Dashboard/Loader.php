@@ -20,7 +20,7 @@ class Loader extends \HubletoMain\Core\App
     $this->setConfigAsInteger('sidebarOrder', 0);
 
     $this->main->help->addContextHelpUrls('/^\/?$/', [
-      'en' => 'en',
+      'en' => '',
     ]);
   }
 

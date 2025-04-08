@@ -1,3 +1,16 @@
+<script>
+  function onFilterChange() {
+    const fDealStatus = globalThis.app.reactElements['fDealStatus'].state.value;
+    const fResponsible = globalThis.app.reactElements['fResponsible'].state.value;
+
+    let url = '?';
+    if (fDealStatus) url += '&fDealStatus=' + fDealStatus;
+    if (fResponsible) url += '&fResponsible=' + fResponsible;
+
+    window.location.href = url;
+  }
+</script>
+
 <div class="flex gap-2">
   <div class="flex flex-col gap-2" style="width:140px">
     {# <form action="" method="get" style="min-width: 30%">
@@ -30,6 +43,38 @@
 
     <div class="alert alert-primary mt-2">
       Potential Pipeline Profit: {{ viewParams.main.locale.formatCurrency(viewParams.pipeline.price) }}
+    </div>
+
+    <div class="card card-horizontal">
+      <div class="card-header">
+        <i class="fas fa-magnifying-glass"></i>
+      </div>
+      <div class="card-body flex gap-2">
+        <div class="input-wrapper flex-1">
+          <div class="input-label">Status</div>
+          <div class="input-body">
+            <app-input-lookup
+              uid="fDealStatus"
+              model="HubletoApp/Community/Deals/Models/DealStatus"
+              class="w-full"
+              value="{{ viewParams.fDealStatus }}"
+              function:on-change="onFilterChange();"
+            />
+          </div>
+        </div>
+        <div class="input-wrapper flex-1">
+          <div class="input-label">Responsible</div>
+          <div class="input-body">
+            <app-input-lookup
+              uid="fResponsible"
+              model="HubletoApp/Community/Settings/Models/User"
+              class="w-full"
+              value="{{ viewParams.fResponsible }}"
+              function:on-change="onFilterChange();"
+            />
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="flex flex-col md:flex-row justify-start gap-2">
@@ -73,18 +118,29 @@
               {% endif %}
             {% endfor %}
           </div>
-        </div>
-      {% endfor %}
 
-        {# Step Containter #}
-        <div class="card min-h-0 md:min-h-[85vh] w-full md:w-[280px]">
-          <div class="card-body flex flex-row flex-wrap md:block">
-            <a class="btn btn-transparent" href="settings/pipelines?recordId={{viewParams.pipeline.id}}" target="_blank">
+          <div class="card-footer">
+            <a
+              class="btn btn-transparent"
+              href="deals?recordId=-1&id_pipeline={{ viewParams.pipeline.id }}&id_pipeline_step={{ step.id }}"
+              target="_blank"
+            >
               <span class="icon"><i class="fas fa-add"></i></span>
-              <span class="text">{{ translate('Manage pipeline steps') }}</span>
+              <span class="text">Add deal</span>
             </a>
           </div>
         </div>
+      {% endfor %}
+
+      {# Step Containter #}
+      <div class="card min-h-0 md:min-h-[85vh] w-full md:w-[280px]">
+        <div class="card-body flex flex-row flex-wrap md:block">
+          <a class="btn btn-transparent" href="settings/pipelines?recordId={{viewParams.pipeline.id}}" target="_blank">
+            <span class="icon"><i class="fas fa-add"></i></span>
+            <span class="text">{{ translate('Manage pipeline steps') }}</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

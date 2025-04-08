@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\Calendar;
 
+use HubletoApp\Community\Calendar\Models\Activity;
+
 class Loader extends \HubletoMain\Core\App
 {
 
@@ -17,6 +19,12 @@ class Loader extends \HubletoMain\Core\App
     $this->main->help->addContextHelpUrls('/^calendar\/?$/', [
       'en' => 'en/apps/community/calendar',
     ]);
+  }
+
+  public function installTables(): void
+  {
+    $mActivity = new Activity($this->main);
+    $mActivity->install();
   }
 
   public function installDefaultPermissions(): void

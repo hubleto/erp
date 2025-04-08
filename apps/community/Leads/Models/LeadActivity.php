@@ -25,7 +25,7 @@ class LeadActivity extends \HubletoMain\Core\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired()->setReadonly(),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired(),
       'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_activity_type' => (new Lookup($this, $this->translate('Activity type'), ActivityType::class, 'SET NULL')),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),

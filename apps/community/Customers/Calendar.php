@@ -6,6 +6,11 @@ use HubletoApp\Community\Customers\Models\CustomerActivity;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 
+  public array $activitySelectorConfig = [
+    "title" => "Customer",
+    "formComponent" => "CustomersFormActivity",
+  ];
+
   public function loadEvents(): array
   {
     $idCustomer = $this->main->urlParamAsInteger('idCustomer');
@@ -51,6 +56,11 @@ class Calendar extends \HubletoMain\Core\Calendar {
         else $events[$key]['end'] = $dEnd;
       } else if ($tEnd != '') {
         $events[$key]['end'] = $dStart . " " . $tEnd;
+      }
+
+      //fix for fullCalendar not showing the last date of an event longer than one day
+      if ((!empty($dStart) && !empty($dEnd) && (strtotime($dEnd) > strtotime($dStart)))) {
+        if (empty($tEnd) || empty($tStart)) $events[$key]['end'] = date("Y-m-d", strtotime("+ 1 day", strtotime($dEnd)));
       }
 
       $events[$key]['allDay'] = $activity->all_day == 1 || $tStart == null ? true : false;

@@ -191,8 +191,8 @@ class Installer {
     $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configEnv);
     $configEnv = str_replace('{{ accountUrl }}', $this->accountUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
-    $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $configEnv);
-    $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $configEnv);
+    $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
+    $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
 
     if (count($this->externalAppsRepositories) > 0) {
       $configEnv .= '' . "\n";

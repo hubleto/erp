@@ -153,7 +153,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $installer = new \HubletoMain\Installer\Installer(
       $this->main,
       'local-env',
-      '', // uid
+      trim(\ADIOS\Core\Helper::str2url((string) $rewriteBase), '/-'), // uid
       (string) $accountFullName,
       (string) $adminName,
       (string) $adminFamilyName,

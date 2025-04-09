@@ -84,17 +84,31 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
     //Shop
-    // $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
-    // $mGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
-    // $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
+    $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
+    $mGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
+    $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
 
-    $this->generateCustomers($mCustomer, $mCustomerTag);
-    $this->generatePersons($mPerson, $mPersonTag, $mContact);
+    if (
+      $this->main->appManager->isAppInstalled("HubletoApp\Community\Customers") &&
+      $this->main->appManager->isAppInstalled("HubletoApp\Community\Contacts")
+    ) {
+      $this->generateCustomers($mCustomer, $mCustomerTag);
+      $this->generatePersons($mPerson, $mPersonTag, $mContact);
+    }
     //$this->generateActivities($mCustomer, $mActivity, $mCustomerActivity);
-    $this->generateServices($mCustomer, $mService);
-    $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
-    $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity);
-    // $this->generateProducts($mProduct,$mGroup, $mSupplier);
+    if (
+      $this->main->appManager->isAppInstalled("HubletoApp\Community\Customers") &&
+      $this->main->appManager->isAppInstalled("HubletoApp\Community\Services") &&
+      $this->main->appManager->isAppInstalled("HubletoApp\Community\Deals") &&
+      $this->main->appManager->isAppInstalled("HubletoApp\Community\Leads")
+    ) {
+      $this->generateServices($mCustomer, $mService);
+      $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
+      $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity);
+    }
+    if ($this->main->appManager->isAppInstalled("HubletoApp\Community\Products")) {
+      $this->generateProducts($mProduct,$mGroup, $mSupplier);
+    }
 
     $this->cli->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 

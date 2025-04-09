@@ -12,6 +12,8 @@
   --spacing-9x': 128rem;
 
   --radius-4xl: 2rem;
+
+  --nav-height: 3rem;
 }
 
 @import "tailwindcss";
@@ -23,8 +25,11 @@
 @import "../vendor/wai-blue/adios/src/Assets/Css/color-scales.css";
 
 @layer app {
+
+  nav#default-navbar { @apply bg-white; height: var(--nav-height); }
+
   /* add your custom css here */
-  #app-main-content { @apply ml-0 md:ml-36; }
+  #app-main-content { @apply ml-0 p-2 md:ml-36; }
   #app-main-content.sidebar-two-levels { @apply ml-0 md:ml-68; }
 
   .app-launcher-show-btn { @apply cursor-pointer bg-white/20 text-white text-xs m-1 p-1 flex items-center gap-2 justify-center rounded hover:bg-white/40; }

@@ -262,7 +262,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                         <InputTags2 {...this.getInputProps()}
                           value={this.state.record.TAGS}
                           readonly={R.is_archived}
-                          model='HubletoApp/Community/Settings/Models/Tag'
+                          model='HubletoApp/Community/Deals/Models/Tag'
                           targetColumn='id_deal'
                           sourceColumn='id_tag'
                           colorColumn='color'

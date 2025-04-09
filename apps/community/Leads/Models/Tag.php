@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Models;
+namespace HubletoApp\Community\Leads\Models;
 
 use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Color;
 
 class Tag extends \HubletoMain\Core\Model
 {
-  public string $table = 'tags';
+  public string $table = 'lead_tags';
   public string $eloquentClass = Eloquent\Tag::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
@@ -23,8 +23,8 @@ class Tag extends \HubletoMain\Core\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Tags';
-    $description->ui['addButtonText'] = 'Add Tag';
+    $description->ui['title'] = 'Lead Tags';
+    $description->ui['addButtonText'] = 'Add Lead Tag';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

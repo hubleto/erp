@@ -2,14 +2,14 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Community\Settings\Models\Tag;
+use HubletoApp\Community\Leads\Models\Tag;
 use HubletoApp\Community\Leads\Models\Lead;
 
 use \ADIOS\Core\Db\Column\Lookup;
 
 class LeadTag extends \HubletoMain\Core\Model
 {
-  public string $table = 'lead_tags';
+  public string $table = 'cross_lead_tags';
   public string $eloquentClass = Eloquent\LeadTag::class;
 
   public array $relations = [

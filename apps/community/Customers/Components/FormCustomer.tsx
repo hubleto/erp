@@ -322,9 +322,9 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                     {this.inputWrapper("is_active")}
                     <FormInput title="Tags">
                       <InputTags2
-                        {...this.getInputProps('color_tags')}
+                        {...this.getInputProps()}
                         value={this.state.record.TAGS}
-                        model="HubletoApp/Community/Settings/Models/Tag"
+                        model="HubletoApp/Community/Customers/Models/Tag"
                         targetColumn="id_customer"
                         sourceColumn="id_tag"
                         colorColumn="color"
@@ -374,6 +374,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                           last_name: { type: "varchar", title: this.translate("Last name") },
                           virt_email: { type: "varchar", title: this.translate("Email"), },
                           virt_number: { type: "varchar", title: this.translate("Phone number") },
+                          tags: { type: "none", title: this.translate("Tags") },
                         },
                         inputs: {
                           first_name: { type: "varchar", title: this.translate("First name") },

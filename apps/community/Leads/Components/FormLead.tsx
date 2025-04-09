@@ -252,7 +252,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       <InputTags2 {...this.getInputProps('tags_input')}
                         value={this.state.record.TAGS}
                         readonly={R.is_archived}
-                        model='HubletoApp/Community/Settings/Models/Tag'
+                        model='HubletoApp/Community/Leads/Models/Tag'
                         targetColumn='id_lead'
                         sourceColumn='id_tag'
                         colorColumn='color'

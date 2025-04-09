@@ -59,7 +59,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
                 key={index}
                 className='btn btn-primary w-full !text-center h-[50px] flex justify-center'
                 onClick={() => {
-                  this.setState({formSelected: globalThis.main.renderReactElement(item.form,
+                  this.setState({formSelected: globalThis.main.renderReactElement(item.formComponent,
                     {
                       description: {
                         defaultValues: {

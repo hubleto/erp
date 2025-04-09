@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers;
+namespace HubletoApp\Community\Contacts\Controllers;
 
 class Tags extends \HubletoMain\Core\Controller {
 
@@ -9,14 +9,14 @@ class Tags extends \HubletoMain\Core\Controller {
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
-      [ 'url' => 'tags', 'content' => $this->translate('Tags') ],
+      [ 'url' => '', 'content' => $this->translate('Contact Tags') ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Settings/Tags.twig');
+    $this->setView('@HubletoApp:Community:Contacts/Tags.twig');
   }
 
 }

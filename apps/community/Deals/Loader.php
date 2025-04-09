@@ -16,12 +16,18 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/change-pipeline\/?$/' => Controllers\Api\ChangePipeline::class,
       '/^deals\/change-pipeline-step\/?$/' => Controllers\Api\ChangePipelineStep::class,
       '/^settings\/deal-statuses\/?$/' => Controllers\DealStatuses::class,
+      '/^settings\/deal-tags\/?$/' => Controllers\Tags::class,
     ]);
 
     $this->main->addSetting([
       'title' => $this->translate('Deal statuses'),
       'icon' => 'fas fa-arrow-up-short-wide',
       'url' => 'settings/deal-statuses',
+    ]);
+    $this->main->addSetting([
+      'title' => $this->translate('Deal Tags'),
+      'icon' => 'fas fa-tags',
+      'url' => 'settings/deal-tags',
     ]);
 
     $this->main->calendarManager->addCalendar(Calendar::class);
@@ -38,7 +44,8 @@ class Loader extends \HubletoMain\Core\App
       $mDealStatus = new Models\DealStatus($this->main);
       $mDeal = new \HubletoApp\Community\Deals\Models\Deal($this->main);
       $mDealHistory = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
-      $mDealTag = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
+      $mDealTag = new \HubletoApp\Community\Deals\Models\Tag($this->main);
+      $mCrossDealTag = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
       $mDealService = new \HubletoApp\Community\Deals\Models\DealService($this->main);
       $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
       $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
@@ -47,9 +54,14 @@ class Loader extends \HubletoMain\Core\App
       $mDeal->dropTableIfExists()->install();
       $mDealHistory->dropTableIfExists()->install();
       $mDealTag->dropTableIfExists()->install();
+      $mCrossDealTag->dropTableIfExists()->install();
       $mDealService->dropTableIfExists()->install();
       $mDealActivity->dropTableIfExists()->install();
       $mDealDocument->dropTableIfExists()->install();
+
+      $mDealTag->eloquent->create([ 'name' => "Important", 'color' => '#fc2c03' ]);
+      $mDealTag->eloquent->create([ 'name' => "ASAP", 'color' => '#62fc03' ]);
+      $mDealTag->eloquent->create([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
 
       $mDealStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#0000A0' ]);
       $mDealStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A0A000' ]);

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Customers\Models\Eloquent;
 
-use HubletoApp\Community\Settings\Models\Eloquent\Tag;
+use HubletoApp\Community\Customers\Models\Eloquent\Tag;
 use HubletoApp\Community\Settings\Models\Eloquent\User;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CustomerTag extends \HubletoMain\Core\ModelEloquent
 {
-  public $table = 'customer_tags';
+  public $table = 'cross_customer_tags';
 
   /** @return BelongsTo<Tag, covariant CustomerTag> */
   public function TAG(): BelongsTo {

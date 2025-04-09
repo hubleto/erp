@@ -79,7 +79,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
                 contactsRendered += 1;
                 return (
                   <div className='border border-gray-400 rounded px-1' key={data.id + '-email-' + key}>
-                    {contact.value} ({contact.CONTACT_TYPE.name})
+                    {contact.value} {contact.CONTACT_CATEGORY ? <>({contact.CONTACT_CATEGORY.name})</> : null}
                   </div>
                 );
               } else return null;
@@ -95,7 +95,7 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
                 contactsRendered += 1;
                 return (
                   <div className='border border-gray-400 rounded px-1' key={data.id + '-number-' + key}>
-                    {contact.value} ({contact.CONTACT_TYPE.name})
+                    {contact.value} {contact.CONTACT_CATEGORY ? <>({contact.CONTACT_CATEGORY.name})</> : null}
                   </div>
                 );
               } else return null;

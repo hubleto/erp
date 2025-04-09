@@ -2,7 +2,6 @@
 
 namespace HubletoApp\Community\Contacts\Models\Eloquent;
 
-use HubletoApp\Community\Settings\Models\Eloquent\ContactType;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -15,9 +14,9 @@ class Contact extends \HubletoMain\Core\ModelEloquent
     return $this->belongsTo(Person::class, 'id_person');
   }
 
-  /** @return BelongsTo<ContactType, covariant Contact> */
-  public function CONTACT_TYPE(): BelongsTo {
-    return $this->belongsTo(ContactType::class, 'id_contact_category', 'id');
+  /** @return BelongsTo<ContactCategory, covariant Contact> */
+  public function CONTACT_CATEGORY(): BelongsTo {
+    return $this->belongsTo(ContactCategory::class, 'id_contact_category', 'id');
   }
 
 }

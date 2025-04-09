@@ -30,7 +30,6 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/general\/?$/' => Controllers\General::class,
       '/^settings\/tags\/?$/' => Controllers\Tags::class,
       '/^settings\/activity-types\/?$/' => Controllers\ActivityTypes::class,
-      '/^settings\/contact-types\/?$/' => Controllers\ContactTypes::class,
       '/^settings\/countries\/?$/' => Controllers\Countries::class,
       '/^settings\/currencies\/?$/' => Controllers\Currencies::class,
       '/^settings\/pipelines\/?$/' => Controllers\Pipelines::class,
@@ -48,7 +47,6 @@ class Loader extends \HubletoMain\Core\App
     $this->main->addSetting(['title' => $this->translate('Permissions'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
     $this->main->addSetting(['title' => $this->translate('Tags'), 'icon' => 'fas fa-tags', 'url' => 'settings/tags']);
     $this->main->addSetting(['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
-    $this->main->addSetting(['title' => $this->translate('Contact types'), 'icon' => 'fas fa-phone', 'url' => 'settings/contact-types']);
     $this->main->addSetting(['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
     $this->main->addSetting(['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
     $this->main->addSetting(['title' => $this->translate('Pipelines'), 'icon' => 'fas fa-bars-progress', 'url' => 'settings/pipelines']);
@@ -68,7 +66,7 @@ class Loader extends \HubletoMain\Core\App
     $mSetting = new Models\Setting($this->main);
     $mTag = new Models\Tag($this->main);
     $mActivityTypes = new Models\ActivityType($this->main);
-    $mContactType = new Models\ContactType($this->main);
+    $mContactCategory = new Models\ContactCategory($this->main);
     $mCurrency = new Models\Currency($this->main);
     $mTag = new Models\Tag($this->main);
     $mPipeline = new Models\Pipeline($this->main);
@@ -85,7 +83,7 @@ class Loader extends \HubletoMain\Core\App
     $mSetting->dropTableIfExists()->install();
     $mTag->dropTableIfExists()->install();
     $mActivityTypes->dropTableIfExists()->install();
-    $mContactType->dropTableIfExists()->install();
+    $mContactCategory->dropTableIfExists()->install();
     $mCurrency->dropTableIfExists()->install();
     $mPipeline->dropTableIfExists()->install();
     $mPipelineStep->dropTableIfExists()->install();
@@ -123,9 +121,9 @@ class Loader extends \HubletoMain\Core\App
     $mActivityTypes->eloquent->create([ 'name' => 'Email', 'color' => '#3f51b5', 'calendar_visibility' => true ]);
     $mActivityTypes->eloquent->create([ 'name' => 'Other', 'color' => '#91133e', 'calendar_visibility' => true ]);
 
-    $mContactType->eloquent->create([ 'name' => 'Work' ]);
-    $mContactType->eloquent->create([ 'name' => 'Home' ]);
-    $mContactType->eloquent->create([ 'name' => 'Other' ]);
+    $mContactCategory->eloquent->create([ 'name' => 'Work' ]);
+    $mContactCategory->eloquent->create([ 'name' => 'Home' ]);
+    $mContactCategory->eloquent->create([ 'name' => 'Other' ]);
 
     $mTag->eloquent->create([ 'name' => "Important", 'color' => '#008f7a' ]);
     $mTag->eloquent->create([ 'name' => "Partner", 'color' => '#845ec2' ]);

@@ -14,7 +14,9 @@
         "Phone Number": "Telefón",
         "Customer": "Zákazník",
         "Tags": "Tagy",
-        "Value": "Hodnota"
+        "Value": "Hodnota",
+        "Add contact": "Pridať kontakt",
+        "No contacts for this person yet.": "Ešte nemáte žiadne kontakty na túto osobu"
     },
     "Components\\TablePersons": {
         "Start typing to search...": "Hľadať..."
@@ -57,5 +59,11 @@
         "City": "",
         "Postal Code": "",
         "Country": ""
+    },
+    "root": {
+        "Contact Categories": ""
+    },
+    "Models\\ContactCategory": {
+        "Type": ""
     }
 }

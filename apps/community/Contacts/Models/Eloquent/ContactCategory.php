@@ -1,14 +1,14 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Models\Eloquent;
+namespace HubletoApp\Community\Contacts\Models\Eloquent;
 
 use HubletoApp\Community\Settings\Models\Eloquent\User;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class ContactType extends \HubletoMain\Core\ModelEloquent
+class ContactCategory extends \HubletoMain\Core\ModelEloquent
 {
-  public $table = 'contact_types';
+  public $table = 'contact_categories';
 
 }

@@ -15,7 +15,7 @@ class RenderAllRoutes extends \HubletoMain\Core\AppTest
       'settings/general',
       'settings/tags',
       'settings/activity-types',
-      'settings/contact-types',
+      'settings/contact-categories',
       'settings/countries',
       'settings/currencies',
       'settings/pipelines',

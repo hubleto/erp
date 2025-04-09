@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Customers": "Zákazníci",
-        "Default customer management and addressbook.": "Adresár a manažment zákazníkov."
+        "Free customer management and addressbook.": "Adresár a manažment zákazníkov."
     },
     "Models\\Customer": {
         "Add Customer": "Pridať zákazníka",
@@ -58,6 +58,10 @@
         "Calendar": "Kalendár",
         "Shared documents": "Zdieľané dokumenty",
         "Local documents": "Dokumenty",
-        "Documents": "Dokumenty"
+        "Documents": "Dokumenty",
+        "Contact persons": "Kontaktné osoby",
+        "Add contact person": "Pridať kontaktnú osobu",
+        "Phone number": "Tel. č.",
+        "Email": "Email"
     }
 }

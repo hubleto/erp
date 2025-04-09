@@ -89,11 +89,11 @@
     "models.permission": {
         "Permission": "Berechtigung"
     },
-    "models.contactType": {
+    "models.contactCategory": {
         "Name": "Name",
         "Contact Types": "Kontakttyp"
     },
-    "controllers.contactTypes": {
+    "controllers.contactCategories": {
         "Settings": "Einstellungen",
         "Contact Types": "Kontakttypen"
     },

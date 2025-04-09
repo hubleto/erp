@@ -112,7 +112,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
               <div className='card-body'>
                 {this.state.isInlineEditing ? (
                   <a
-                    role='button'
+                    className="btn btn-add mb-2"
                     onClick={() => {
                       if (!R.CONTACTS) R.CONTACTS = [];
                       R.CONTACTS.push({
@@ -124,7 +124,8 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                       this.setState({ newEntryId: this.state.newEntryId - 1 } as FormPersonState);
                     }}
                   >
-                    + Add Contact
+                    <span className="icon"><i className="fas fa-add"></i></span>
+                    <span className="text">{this.translate('Add contact')}</span>
                   </a>
                 ) : null}
                 <TableContacts
@@ -145,6 +146,9 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                   customEndpointParams={{idPerson: R.id}}
                   description={{
                     permissions: this.props.tableContactsDescription.permissions,
+                    ui: {
+                      emptyMessage: <div className="p-2">{this.translate('No contacts for this person yet.')}</div>
+                    },
                     columns: {
                       type: {
                         type: 'varchar',
@@ -152,7 +156,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                         enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
                       },
                       value: { type: 'varchar', title: this.translate('Value')},
-                      id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                      id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/ContactCategory' },
                     },
                     inputs: {
                       type: {
@@ -161,7 +165,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                         enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
                       },
                       value: { type: 'varchar', title: this.translate('Value')},
-                      id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Settings/Models/ContactType' },
+                      id_contact_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/ContactCategory' },
                     }
                   }}
                 />

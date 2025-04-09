@@ -1,9 +1,11 @@
 {
     "manifest": {
         "Pipeline": "Pipeline",
-        "...": ""
+        "Free sales pipeline management.": "Bezplatný manažment predajných kanálov"
     },
     "Controllers\\Home": {
-        "Pipeline": "Pipeline"
+        "Pipeline": "Pipeline",
+        "Add pipeline": "",
+        "Manage pipeline steps": ""
     }
 }

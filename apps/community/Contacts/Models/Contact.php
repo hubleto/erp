@@ -2,8 +2,6 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use HubletoApp\Community\Settings\Models\ContactType;
-
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Varchar;
 
@@ -15,14 +13,14 @@ class Contact extends \HubletoMain\Core\Model
 
   public array $relations = [
     'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],
-    'CONTACT_TYPE' => [ self::HAS_ONE, ContactType::class, 'id_contact_category', 'id'],
+    'CONTACT_CATEGORY' => [ self::HAS_ONE, ContactCategory::class, 'id_contact_category', 'id'],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
       'id_person' => (new Lookup($this, $this->translate('Person'), Person::class, "CASCADE"))->setRequired(),
-      'id_contact_category' => (new Lookup($this, $this->translate('Contact Category'), ContactType::class))->setRequired(),
+      'id_contact_category' => (new Lookup($this, $this->translate('Contact Category'), ContactCategory::class)),
       'type' => (new Varchar($this, $this->translate('Type')))
         ->setEnumValues(['email' => $this->translate('Email'), 'number' => $this->translate('Phone Number'), 'other' => $this->translate('Other')])
         ->setRequired()

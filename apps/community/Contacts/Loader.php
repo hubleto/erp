@@ -15,9 +15,13 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^contacts\/?$/' => Controllers\Persons::class,
       '/^contacts\/get-customer-contacts\/?$/' => Controllers\Api\GetCustomerContacts::class,
+
+      '/^settings\/contact-categories\/?$/' => Controllers\ContactCategories::class,
     ]);
 
     $this->setConfigAsInteger('sidebarOrder', 0);
+
+    $this->main->addSetting(['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/contact-categories']);
   }
 
 

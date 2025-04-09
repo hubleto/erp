@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Models;
+namespace HubletoApp\Community\Contacts\Models;
 
 use \ADIOS\Core\Db\Column\Varchar;
 
-class ContactType extends \HubletoMain\Core\Model
+class ContactCategory extends \HubletoMain\Core\Model
 {
-  public string $table = 'contact_types';
-  public string $eloquentClass = Eloquent\ContactType::class;
+  public string $table = 'contact_categories';
+  public string $eloquentClass = Eloquent\ContactCategory::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array
@@ -21,8 +21,8 @@ class ContactType extends \HubletoMain\Core\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = $this->translate('Contact Types');
-    $description->ui['addButtonText'] = 'Add Contact Type';
+    $description->ui['title'] = $this->translate('Contact Categories');
+    $description->ui['addButtonText'] = 'Add Contact Category';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

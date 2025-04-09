@@ -1,12 +1,14 @@
 {
     "manifest": {
         "Documents": "Dokumenty",
-        "...": ""
+        "Free document management.": "Bezplatný manažment dokumentov."
     },
     "Models\\Document": {
         "Document name": "Názov dokumentu",
         "File": "Súbor",
-        "Link": "Odkaz na online verziu"
+        "Link": "Odkaz na online verziu",
+        "File Link": "Odkaz na dokument",
+        "Origin Link": ""
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"

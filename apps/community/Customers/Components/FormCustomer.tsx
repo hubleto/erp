@@ -344,15 +344,17 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
 
               {showAdditional ?
                 <div className="card" style={{ gridArea: "contacts" }}>
-                  <div className="card-header">{this.translate('Contacts')}</div>
+                  <div className="card-header">{this.translate('Contact persons')}</div>
                   <div className="card-body">
                     <a
-                      role="button"
+                      className="btn btn-add mb-2"
                       onClick={() => {
                         if (!R.PERSONS) R.PERSONS = [];
                         this.setState({createNewPerson: true} as FormCustomerState);
-                      }}>
-                      + {this.translate('Add contact')}
+                      }}
+                    >
+                      <span className="icon"><i className="fas fa-add"></i></span>
+                      <span className="text">{this.translate('Add contact person')}</span>
                     </a>
                     <TablePersons
                       uid={this.props.uid + "_table_persons"}
@@ -364,7 +366,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                       descriptionSource="props"
                       description={{
                         ui: {
-                          addButtonText: this.translate('Add contact'),
+                          addButtonText: this.translate('Add person'),
                         },
                         permissions: this.props.tablePersonsDescription?.permissions ?? {},
                         columns: {

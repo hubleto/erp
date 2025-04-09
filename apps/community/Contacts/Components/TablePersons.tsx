@@ -69,7 +69,15 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
-    if (data.CONTACTS && data.CONTACTS.length > 0) {
+    if (columnName == "tags") {
+      return (
+        <>
+          {data.TAGS.map((tag, key) => {
+            return <div style={{backgroundColor: tag.TAG.color}} className='badge'>{tag.TAG.name}</div>;
+          })}
+        </>
+      );
+    } else if (data.CONTACTS && data.CONTACTS.length > 0) {
       if (columnName == "virt_email") {
         let contactsRendered = 0;
         return (

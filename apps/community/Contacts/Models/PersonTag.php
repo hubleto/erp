@@ -2,13 +2,13 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use HubletoApp\Community\Settings\Models\Tag;
+use HubletoApp\Community\Contacts\Models\Tag;
 
 use \ADIOS\Core\Db\Column\Lookup;
 
 class PersonTag extends \HubletoMain\Core\Model
 {
-  public string $table = 'person_tags';
+  public string $table = 'cross_person_tags';
   public string $eloquentClass = Eloquent\PersonTag::class;
 
   public array $relations = [

@@ -126,22 +126,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ]);
   }
 
-  public function generateTags(): void
-  {
-
-    $mTag = new \HubletoApp\Community\Settings\Models\Tag($this->main);
-
-    $mTag->record->create([
-      'name' => "Category 1",
-    ]);
-    $mTag->record->create([
-      'name' => "Category 2",
-    ]);
-    $mTag->record->create([
-      'name' => "Category 3",
-    ]);
-  }
-
   public function generateCustomers(
     \HubletoApp\Community\Customers\Models\Customer $mCustomer,
     \HubletoApp\Community\Customers\Models\CustomerTag $mCustomerTag,
@@ -472,7 +456,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       for ($i = 0; $i < $tagCount; $i++) {
         $mPersonTag->record->create([
           "id_person" => $idPerson,
-          "id_tag" => rand(1, 3)
+          "id_tag" => rand(1, 6)
         ]);
       }
     }

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Models\Eloquent;
 
-use HubletoApp\Community\Settings\Models\Eloquent\Tag;
+use HubletoApp\Community\Leads\Models\Eloquent\Tag;
 use HubletoApp\Community\Leads\Models\Eloquent\Lead;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class LeadTag extends \HubletoMain\Core\ModelEloquent
 {
-  public $table = 'lead_tags';
+  public $table = 'cross_lead_tags';
 
   /** @return BelongsTo<Lead, covariant LeadTag> */
   public function LEAD(): BelongsTo {

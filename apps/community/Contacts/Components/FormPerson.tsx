@@ -86,9 +86,9 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                     ></Lookup>
                   </FormInput>
                   <FormInput title={this.translate('Tags')}>
-                    <InputTags2 {...this.getInputProps('id_person')}
+                    <InputTags2 {...this.getInputProps()}
                       value={this.state.record.TAGS}
-                      model='HubletoApp/Community/Settings/Models/Tag'
+                      model='HubletoApp/Community/Contacts/Models/Tag'
                       targetColumn='id_person'
                       sourceColumn='id_tag'
                       colorColumn='color'
@@ -110,24 +110,22 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
             <div className='card mt-4' style={{gridArea: 'contacts'}}>
               <div className='card-header'>Contacts</div>
               <div className='card-body'>
-                {this.state.isInlineEditing ? (
-                  <a
-                    className="btn btn-add mb-2"
-                    onClick={() => {
-                      if (!R.CONTACTS) R.CONTACTS = [];
-                      R.CONTACTS.push({
-                        id: this.state.newEntryId,
-                        id_person: { _useMasterRecordId_: true },
-                        type: 'email',
-                      });
-                      this.updateRecord({ CONTACTS: R.CONTACTS });
-                      this.setState({ newEntryId: this.state.newEntryId - 1 } as FormPersonState);
-                    }}
-                  >
-                    <span className="icon"><i className="fas fa-add"></i></span>
-                    <span className="text">{this.translate('Add contact')}</span>
-                  </a>
-                ) : null}
+                <a
+                  className="btn btn-add mb-2"
+                  onClick={() => {
+                    if (!R.CONTACTS) R.CONTACTS = [];
+                    R.CONTACTS.push({
+                      id: this.state.newEntryId,
+                      id_person: { _useMasterRecordId_: true },
+                      type: 'email',
+                    });
+                    this.updateRecord({ CONTACTS: R.CONTACTS });
+                    this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormPersonState);
+                  }}
+                >
+                  <span className="icon"><i className="fas fa-add"></i></span>
+                  <span className="text">{this.translate('Add contact')}</span>
+                </a>
                 <TableContacts
                   uid={this.props.uid + '_table_contacts'}
                   context="Hello World"

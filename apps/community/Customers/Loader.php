@@ -14,12 +14,19 @@ class Loader extends \HubletoMain\Core\App
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
       '/^customers\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
       '/^customers\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
+      '/^settings\/customer-tags\/?$/' => Controllers\Tags::class,
     ]);
 
     $this->main->calendarManager->addCalendar(Calendar::class);
 
     $this->main->help->addContextHelpUrls('/^customers\/?$/', [
       'en' => 'en/apps/community/customers',
+    ]);
+
+    $this->main->addSetting([
+      'title' => $this->translate('Customer Tags'),
+      'icon' => 'fas fa-tags',
+      'url' => 'settings/customer-tags',
     ]);
   }
 
@@ -28,12 +35,18 @@ class Loader extends \HubletoMain\Core\App
 
     if ($round == 1) {
       $mCustomer = new \HubletoApp\Community\Customers\Models\Customer($this->main);
-      $mCustomerTag = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
       $mCustomerDocument = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
+      $mCustomerTag = new \HubletoApp\Community\Customers\Models\Tag($this->main);
+      $mCrossCustomerTag = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
 
       $mCustomer->dropTableIfExists()->install();
       $mCustomerTag->dropTableIfExists()->install();
+      $mCrossCustomerTag->dropTableIfExists()->install();
       $mCustomerDocument->dropTableIfExists()->install();
+
+      $mCustomerTag->eloquent->create([ 'name' => "VIP", 'color' => '#fc2c03' ]);
+      $mCustomerTag->eloquent->create([ 'name' => "Partner", 'color' => '#62fc03' ]);
+      $mCustomerTag->eloquent->create([ 'name' => "Public", 'color' => '#033dfc' ]);
     }
 
     if ($round == 2) {

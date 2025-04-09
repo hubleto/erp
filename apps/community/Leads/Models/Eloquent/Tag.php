@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Models\Eloquent;
+namespace HubletoApp\Community\Leads\Models\Eloquent;
 
 use HubletoApp\Community\Settings\Models\Eloquent\User;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
@@ -9,6 +9,5 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Tag extends \HubletoMain\Core\ModelEloquent
 {
-  public $table = 'tags';
-
+  public $table = 'lead_tags';
 }

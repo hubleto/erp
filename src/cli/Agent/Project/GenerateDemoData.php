@@ -89,6 +89,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
 
     if (
+      $this->main->appManager->isAppInstalled("HubletoApp\Community\Documents") &&
       $this->main->appManager->isAppInstalled("HubletoApp\Community\Customers") &&
       $this->main->appManager->isAppInstalled("HubletoApp\Community\Contacts")
     ) {
@@ -98,6 +99,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     //$this->generateActivities($mCustomer, $mActivity, $mCustomerActivity);
     if (
       $this->main->appManager->isAppInstalled("HubletoApp\Community\Customers") &&
+      $this->main->appManager->isAppInstalled("HubletoApp\Community\Documents") &&
       $this->main->appManager->isAppInstalled("HubletoApp\Community\Services") &&
       $this->main->appManager->isAppInstalled("HubletoApp\Community\Deals") &&
       $this->main->appManager->isAppInstalled("HubletoApp\Community\Leads")

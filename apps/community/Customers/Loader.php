@@ -14,6 +14,7 @@ class Loader extends \HubletoMain\Core\App
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
       '/^customers\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
       '/^customers\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
+      '/^settings\/customer-tags\/?$/' => Controllers\Tags::class,
     ]);
 
     $this->main->calendarManager->addCalendar(Calendar::class);
@@ -21,28 +22,49 @@ class Loader extends \HubletoMain\Core\App
     $this->main->help->addContextHelpUrls('/^customers\/?$/', [
       'en' => 'en/apps/community/customers',
     ]);
+
+    $this->main->addSetting([
+      'title' => $this->translate('Customer Tags'),
+      'icon' => 'fas fa-tags',
+      'url' => 'settings/customer-tags',
+    ]);
   }
 
   public function installTables(): void
   {
     $mPerson = new \HubletoApp\Community\Contacts\Models\Person($this->main);
     $mContact = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
-    $mPersonTag = new \HubletoApp\Community\Contacts\Models\PersonTag($this->main);
+    $mPersonTag = new \HubletoApp\Community\Contacts\Models\Tag($this->main);
+    $mCrossPersonTag = new \HubletoApp\Community\Contacts\Models\PersonTag($this->main);
 
     $mCustomer = new \HubletoApp\Community\Customers\Models\Customer($this->main);
     $mCustomerActivity = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
     $mCustomerDocument = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
-    $mCustomerTag = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
+    $mCustomerTag = new \HubletoApp\Community\Customers\Models\Tag($this->main);
+    $mCrossCustomerTag = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
 
     $mCustomer->dropTableIfExists()->install();
     $mPerson->dropTableIfExists()->install();
 
     $mCustomerTag->dropTableIfExists()->install();
+    $mCrossCustomerTag->dropTableIfExists()->install();
     $mCustomerActivity->dropTableIfExists()->install();
     $mCustomerDocument->dropTableIfExists()->install();
 
     $mContact->dropTableIfExists()->install();
     $mPersonTag->dropTableIfExists()->install();
+    $mCrossPersonTag->dropTableIfExists()->install();
+
+    $mCustomerTag->eloquent->create([ 'name' => "VIP", 'color' => '#fc2c03' ]);
+    $mCustomerTag->eloquent->create([ 'name' => "Partner", 'color' => '#62fc03' ]);
+    $mCustomerTag->eloquent->create([ 'name' => "Public", 'color' => '#033dfc' ]);
+
+    $mPersonTag->eloquent->create([ 'name' => "Technical user", 'color' => '#fc2c03' ]);
+    $mPersonTag->eloquent->create([ 'name' => "Business user", 'color' => '#fc7b03' ]);
+    $mPersonTag->eloquent->create([ 'name' => "Desicion Maker", 'color' => '#fcc203' ]);
+    $mPersonTag->eloquent->create([ 'name' => "Partner", 'color' => '#62fc03' ]);
+    $mPersonTag->eloquent->create([ 'name' => "Billing user", 'color' => '#03fc8c' ]);
+    $mPersonTag->eloquent->create([ 'name' => "Other", 'color' => '#033dfc' ]);
 
   }
 

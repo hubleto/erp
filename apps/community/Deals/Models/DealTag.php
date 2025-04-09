@@ -2,14 +2,14 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Community\Settings\Models\Tag;
+use HubletoApp\Community\Deals\Models\Tag;
 use HubletoApp\Community\Deals\Models\Deal;
 
 use \ADIOS\Core\Db\Column\Lookup;
 
 class DealTag extends \HubletoMain\Core\Model
 {
-  public string $table = 'deal_tags';
+  public string $table = 'cross_deal_tags';
   public string $eloquentClass = Eloquent\DealTag::class;
 
   public array $relations = [

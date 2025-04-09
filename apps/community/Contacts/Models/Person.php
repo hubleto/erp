@@ -60,6 +60,7 @@ class Person extends \HubletoMain\Core\Model
     $description->columns['date_created'] = $tempColumn;
     $tempColumn = $description->columns['is_active'];
     unset($description->columns['is_active']);
+    $description->columns['tags'] = ["title" => "Tags"];
     $description->columns['is_active'] = $tempColumn;
 
     unset($description->columns['note']);

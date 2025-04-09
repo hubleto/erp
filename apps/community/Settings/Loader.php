@@ -28,7 +28,6 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/user-roles\/?$/' => Controllers\UserRoles::class,
       '/^settings\/profiles\/?$/' => Controllers\Profiles::class,
       '/^settings\/general\/?$/' => Controllers\General::class,
-      '/^settings\/tags\/?$/' => Controllers\Tags::class,
       '/^settings\/activity-types\/?$/' => Controllers\ActivityTypes::class,
       '/^settings\/countries\/?$/' => Controllers\Countries::class,
       '/^settings\/currencies\/?$/' => Controllers\Currencies::class,
@@ -45,7 +44,6 @@ class Loader extends \HubletoMain\Core\App
     $this->main->addSetting(['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/profiles']);
     $this->main->addSetting(['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
     $this->main->addSetting(['title' => $this->translate('Permissions'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
-    $this->main->addSetting(['title' => $this->translate('Tags'), 'icon' => 'fas fa-tags', 'url' => 'settings/tags']);
     $this->main->addSetting(['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
     $this->main->addSetting(['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
     $this->main->addSetting(['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
@@ -64,11 +62,9 @@ class Loader extends \HubletoMain\Core\App
     $mRolePermission = new Models\RolePermission($this->main);
     $mCountry = new Models\Country($this->main);
     $mSetting = new Models\Setting($this->main);
-    $mTag = new Models\Tag($this->main);
     $mActivityTypes = new Models\ActivityType($this->main);
-    $mContactCategory = new Models\ContactCategory($this->main);
+    $mContactCategory = new \HubletoApp\Community\Contacts\Models\ContactCategory($this->main);
     $mCurrency = new Models\Currency($this->main);
-    $mTag = new Models\Tag($this->main);
     $mPipeline = new Models\Pipeline($this->main);
     $mPipelineStep = new Models\PipelineStep($this->main);
     $mInvoiceProfile = new Models\InvoiceProfile($this->main);
@@ -81,7 +77,6 @@ class Loader extends \HubletoMain\Core\App
     $mRolePermission->dropTableIfExists()->install();
     $mCountry->dropTableIfExists()->install();
     $mSetting->dropTableIfExists()->install();
-    $mTag->dropTableIfExists()->install();
     $mActivityTypes->dropTableIfExists()->install();
     $mContactCategory->dropTableIfExists()->install();
     $mCurrency->dropTableIfExists()->install();
@@ -124,10 +119,6 @@ class Loader extends \HubletoMain\Core\App
     $mContactCategory->eloquent->create([ 'name' => 'Work' ]);
     $mContactCategory->eloquent->create([ 'name' => 'Home' ]);
     $mContactCategory->eloquent->create([ 'name' => 'Other' ]);
-
-    $mTag->eloquent->create([ 'name' => "Important", 'color' => '#008f7a' ]);
-    $mTag->eloquent->create([ 'name' => "Partner", 'color' => '#845ec2' ]);
-    $mTag->eloquent->create([ 'name' => "Needs review", 'color' => '#2c73d2' ]);
 
     $countries = [
       [1, 'Aruba', 'ABW'],

@@ -17,13 +17,15 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mGoal = new Models\Goal($this->main);
-    $mGoalValue = new Models\GoalValue($this->main);
+    if ($round == 1) {
+      $mGoal = new Models\Goal($this->main);
+      $mGoalValue = new Models\GoalValue($this->main);
 
-    $mGoal->dropTableIfExists()->install();
-    $mGoalValue->dropTableIfExists()->install();
+      $mGoal->dropTableIfExists()->install();
+      $mGoalValue->dropTableIfExists()->install();
+    }
   }
 
   public function installDefaultPermissions(): void

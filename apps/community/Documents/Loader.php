@@ -14,10 +14,12 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mDocuments = new \HubletoApp\Community\Documents\Models\Document($this->main);
-    $mDocuments->dropTableIfExists()->install();
+    if ($round == 1) {
+      $mDocuments = new \HubletoApp\Community\Documents\Models\Document($this->main);
+      $mDocuments->dropTableIfExists()->install();
+    }
   }
 
   public function installDefaultPermissions(): void

@@ -15,13 +15,15 @@ class Loader extends \HubletoMain\Core\App
 
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mInvoice = new \HubletoApp\Community\Invoices\Models\Invoice($this->main);
-    $mInvoiceItem = new \HubletoApp\Community\Invoices\Models\InvoiceItem($this->main);
+    if ($round == 1) {
+      $mInvoice = new \HubletoApp\Community\Invoices\Models\Invoice($this->main);
+      $mInvoiceItem = new \HubletoApp\Community\Invoices\Models\InvoiceItem($this->main);
 
-    $mInvoice->dropTableIfExists()->install();
-    $mInvoiceItem->dropTableIfExists()->install();
+      $mInvoice->dropTableIfExists()->install();
+      $mInvoiceItem->dropTableIfExists()->install();
+    }
   }
 
   public function installDefaultPermissions(): void

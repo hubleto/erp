@@ -30,29 +30,30 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mLeadStatus = new Models\LeadStatus($this->main);
-    $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
-    $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
-    $mLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
-    $mLeadService = new \HubletoApp\Community\Leads\Models\LeadService($this->main);
-    $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
-    $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
+    if ($round == 1) {
+      $mLeadStatus = new Models\LeadStatus($this->main);
+      $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
+      $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
+      $mLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
+      $mLeadService = new \HubletoApp\Community\Leads\Models\LeadService($this->main);
+      $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
+      $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
 
-    $mLeadStatus->dropTableIfExists()->install();
-    $mLead->dropTableIfExists()->install();
-    $mLeadHistory->dropTableIfExists()->install();
-    $mLeadTag->dropTableIfExists()->install();
-    $mLeadService->dropTableIfExists()->install();
-    $mLeadActivity->dropTableIfExists()->install();
-    $mLeadDocument->dropTableIfExists()->install();
+      $mLeadStatus->dropTableIfExists()->install();
+      $mLead->dropTableIfExists()->install();
+      $mLeadHistory->dropTableIfExists()->install();
+      $mLeadTag->dropTableIfExists()->install();
+      $mLeadService->dropTableIfExists()->install();
+      $mLeadActivity->dropTableIfExists()->install();
+      $mLeadDocument->dropTableIfExists()->install();
 
-    $mLeadStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
-    $mLeadStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
-    $mLeadStatus->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'color' => '#42ddf5' ]);
-    $mLeadStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
-
+      $mLeadStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
+      $mLeadStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
+      $mLeadStatus->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'color' => '#42ddf5' ]);
+      $mLeadStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
+    }
   }
 
   public function installDefaultPermissions(): void

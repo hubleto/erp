@@ -200,10 +200,17 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("  -> Creating database.\n");
     $installer->createDatabase();
 
-    $this->cli->cyan("  -> Installing apps.\n");
-    $this->cli->cyan("\n");
-    $installer->installApps();
-    $this->cli->cyan("\n");
+    $this->cli->cyan("  -> Creating base tables.\n");
+    $installer->installConfigModel();
+
+    $this->cli->cyan("  -> Installing apps, round #1.\n");
+    $installer->installApps(1);
+
+    $this->cli->cyan("  -> Installing apps, round #2.\n");
+    $installer->installApps(2);
+
+    $this->cli->cyan("  -> Installing apps, round #3.\n");
+    $installer->installApps(3);
 
     $this->cli->cyan("  -> Adding default company profile and admin user.\n");
     $installer->addCompanyProfileAndAdminUser();

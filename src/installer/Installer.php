@@ -148,12 +148,15 @@ class Installer {
 
   }
 
-  public function installApps(): void
+  public function installConfigModel(): void
   {
     (new \ADIOS\Models\Config($this->main))->install();
+  }
 
+  public function installApps(int $round): void
+  {
     foreach ($this->appsToInstall as $appNamespace => $appConfig) {
-      $this->main->appManager->installApp($appNamespace, $appConfig, true);
+      $this->main->appManager->installApp($round, $appNamespace, $appConfig, true);
     }
   }
 

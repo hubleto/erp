@@ -165,9 +165,11 @@ class App {
     return $this->registeredModels;
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    // to be overriden
+    if ($round == 1) {
+      // to be overriden
+    }
   }
 
   public function installDefaultPermissions(): void

@@ -23,27 +23,23 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mPerson = new \HubletoApp\Community\Contacts\Models\Person($this->main);
-    $mContact = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
-    $mPersonTag = new \HubletoApp\Community\Contacts\Models\PersonTag($this->main);
 
-    $mCustomer = new \HubletoApp\Community\Customers\Models\Customer($this->main);
-    $mCustomerActivity = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
-    $mCustomerDocument = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
-    $mCustomerTag = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
+    if ($round == 1) {
+      $mCustomer = new \HubletoApp\Community\Customers\Models\Customer($this->main);
+      $mCustomerTag = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
+      $mCustomerDocument = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
 
-    $mCustomer->dropTableIfExists()->install();
-    $mPerson->dropTableIfExists()->install();
+      $mCustomer->dropTableIfExists()->install();
+      $mCustomerTag->dropTableIfExists()->install();
+      $mCustomerDocument->dropTableIfExists()->install();
+    }
 
-    $mCustomerTag->dropTableIfExists()->install();
-    $mCustomerActivity->dropTableIfExists()->install();
-    $mCustomerDocument->dropTableIfExists()->install();
-
-    $mContact->dropTableIfExists()->install();
-    $mPersonTag->dropTableIfExists()->install();
-
+    if ($round == 2) {
+      $mCustomerActivity = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
+      $mCustomerActivity->dropTableIfExists()->install();
+    }
   }
 
   public function installDefaultPermissions(): void

@@ -121,12 +121,12 @@ class AppManager
   }
 
   /** @param array<string, mixed> $appConfig */
-  public function installApp(string $appNamespace, array $appConfig, bool $forceInstall = false): bool
+  public function installApp(int $round, string $appNamespace, array $appConfig, bool $forceInstall = false): bool
   {
 
     if (str_ends_with($appNamespace, '\\Loader')) $appNamespace = substr($appNamespace, 0, -7);
 
-    if ($this->cli) $this->cli->cyan("Installing {$appNamespace}.\n");
+    // if ($this->cli) $this->cli->cyan("Installing {$appNamespace}, round {$round}.\n");
 
     if ($this->isAppInstalled($appNamespace) && !$forceInstall) {
       throw new \Exception("{$appNamespace} already installed. Set forceInstall to true if you want to reinstall.");
@@ -137,35 +137,38 @@ class AppManager
     $app = $this->createAppInstance($appNamespace);
     if (!file_exists($app->rootFolder . '/manifest.yaml')) throw new \Exception("{$appNamespace} does not provide manifest.yaml file.");
 
-    $appConfig = array_merge($app::DEFAULT_INSTALLATION_CONFIG, $appConfig);
+    // $manifestFile = (string) file_get_contents($app->rootFolder . '/manifest.yaml');
+    // $manifest = (array) \Symfony\Component\Yaml\Yaml::parse($manifestFile);
+    // $dependencies = (array) ($manifest['requires'] ?? []);
 
-    $manifestFile = (string) file_get_contents($app->rootFolder . '/manifest.yaml');
-    $manifest = (array) \Symfony\Component\Yaml\Yaml::parse($manifestFile);
-    $dependencies = (array) ($manifest['requires'] ?? []);
+    // foreach ($dependencies as $dependencyAppNamespace) {
+    //   $dependencyAppNamespace = (string) $dependencyAppNamespace;
+    //   if (!$this->isAppInstalled($dependencyAppNamespace)) {
+    //     if ($this->cli) $this->cli->cyan("Installing dependency {$dependencyAppNamespace}.\n");
+    //     $this->installApp($dependencyAppNamespace, [], $forceInstall);
+    //   }
+    // }
 
-    foreach ($dependencies as $dependencyAppNamespace) {
-      $dependencyAppNamespace = (string) $dependencyAppNamespace;
-      if (!$this->isAppInstalled($dependencyAppNamespace)) {
-        if ($this->cli) $this->cli->cyan("Installing dependency {$dependencyAppNamespace}.\n");
-        $this->installApp($dependencyAppNamespace, [], $forceInstall);
+    $app->installTables($round);
+
+    if ($round == 1) {
+      $appConfig = array_merge($app::DEFAULT_INSTALLATION_CONFIG, $appConfig);
+
+      $app->installDefaultPermissions();
+
+      $appNameForConfig = $this->getAppNameForConfig($appNamespace);
+
+      if (!in_array($appNamespace, $this->getInstalledAppNamespaces())) {
+        $this->main->config->set('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+        $this->main->config->set('apps/' . $appNameForConfig . "/enabled", true);
+        $this->main->config->save('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+        $this->main->config->save('apps/' . $appNameForConfig . "/enabled", '1');
       }
-    }
 
-    $app->installTables();
-    $app->installDefaultPermissions();
-
-    $appNameForConfig = $this->getAppNameForConfig($appNamespace);
-
-    if (!in_array($appNamespace, $this->getInstalledAppNamespaces())) {
-      $this->main->config->set('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
-      $this->main->config->set('apps/' . $appNameForConfig . "/enabled", true);
-      $this->main->config->save('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
-      $this->main->config->save('apps/' . $appNameForConfig . "/enabled", '1');
-    }
-
-    foreach ($appConfig as $cPath => $cValue) {
-      $this->main->config->set('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
-      $this->main->config->save('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
+      foreach ($appConfig as $cPath => $cValue) {
+        $this->main->config->set('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
+        $this->main->config->save('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
+      }
     }
 
     return true;

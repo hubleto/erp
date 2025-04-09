@@ -25,9 +25,23 @@ class Loader extends \HubletoMain\Core\App
   }
 
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
+    if ($round == 1) {
+      $mContactCategory = new Models\ContactCategory($this->main);
+      $mPerson = new Models\Person($this->main);
+      $mContact = new Models\Contact($this->main);
+      $mPersonTag = new Models\PersonTag($this->main);
 
+      $mContactCategory->dropTableIfExists()->install();
+      $mPerson->dropTableIfExists()->install();
+      $mContact->dropTableIfExists()->install();
+      $mPersonTag->dropTableIfExists()->install();
+
+      $mContactCategory->eloquent->create([ 'name' => 'Work' ]);
+      $mContactCategory->eloquent->create([ 'name' => 'Home' ]);
+      $mContactCategory->eloquent->create([ 'name' => 'Other' ]);
+    }
   }
 
   public function installDefaultPermissions(): void

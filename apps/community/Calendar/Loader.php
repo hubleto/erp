@@ -21,10 +21,12 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mActivity = new Activity($this->main);
-    $mActivity->install();
+    if ($round == 1) {
+      $mActivity = new Activity($this->main);
+      $mActivity->install();
+    }
   }
 
   public function installDefaultPermissions(): void

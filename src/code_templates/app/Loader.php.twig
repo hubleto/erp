@@ -16,8 +16,10 @@ class Loader extends \HubletoMain\Core\App
 
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    (new Models\Contact($this->main))->dropTableIfExists()->install();
+    if ($round == 1) {
+      (new Models\Contact($this->main))->dropTableIfExists()->install();
+    }
   }
 }

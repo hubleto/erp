@@ -17,13 +17,15 @@ class Loader extends \HubletoMain\Core\App
 
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mBillingAccount = new \HubletoApp\Community\Billing\Models\BillingAccount($this->main);
-    $mBillingAccountService = new \HubletoApp\Community\Billing\Models\BillingAccountService($this->main);
+    if ($round == 1) {
+      $mBillingAccount = new \HubletoApp\Community\Billing\Models\BillingAccount($this->main);
+      $mBillingAccountService = new \HubletoApp\Community\Billing\Models\BillingAccountService($this->main);
 
-    $mBillingAccount->dropTableIfExists()->install();
-    $mBillingAccountService->dropTableIfExists()->install();
+      $mBillingAccount->dropTableIfExists()->install();
+      $mBillingAccountService->dropTableIfExists()->install();
+    }
   }
 
   public function installDefaultPermissions(): void

@@ -22,15 +22,17 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
-    $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
-    $mProductGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
+    if ($round == 1) {
+      $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
+      $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
+      $mProductGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
 
-    $mSupplier->dropTableIfExists()->install();
-    $mProductGroup->dropTableIfExists()->install();
-    $mProduct->dropTableIfExists()->install();
+      $mSupplier->dropTableIfExists()->install();
+      $mProductGroup->dropTableIfExists()->install();
+      $mProduct->dropTableIfExists()->install();
+    }
   }
 
   public function installDefaultPermissions(): void

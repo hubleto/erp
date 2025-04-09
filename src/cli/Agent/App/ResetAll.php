@@ -16,7 +16,7 @@ class ResetAll extends \HubletoMain\Cli\Agent\Command
     foreach ($appManager->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
       try {
         if (!$appManager->isAppInstalled($appNamespace)) {
-          $appManager->installApp($appNamespace, []);
+          $appManager->installApp(1, $appNamespace, []);
         }
       } catch (\Throwable $e) {
         $this->cli->red($e->getMessage() . "\n");

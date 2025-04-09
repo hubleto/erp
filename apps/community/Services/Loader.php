@@ -20,10 +20,12 @@ class Loader extends \HubletoMain\Core\App
 
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mService = new Models\Service($this->main);
-    $mService->install();
+    if ($round == 1) {
+      $mService = new Models\Service($this->main);
+      $mService->install();
+    }
   }
 
   public function installDefaultPermissions(): void

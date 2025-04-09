@@ -32,29 +32,30 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mDealStatus = new Models\DealStatus($this->main);
-    $mDeal = new \HubletoApp\Community\Deals\Models\Deal($this->main);
-    $mDealHistory = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
-    $mDealTag = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
-    $mDealService = new \HubletoApp\Community\Deals\Models\DealService($this->main);
-    $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
-    $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
+    if ($round == 1) {
+      $mDealStatus = new Models\DealStatus($this->main);
+      $mDeal = new \HubletoApp\Community\Deals\Models\Deal($this->main);
+      $mDealHistory = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
+      $mDealTag = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
+      $mDealService = new \HubletoApp\Community\Deals\Models\DealService($this->main);
+      $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
+      $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
-    $mDealStatus->dropTableIfExists()->install();
-    $mDeal->dropTableIfExists()->install();
-    $mDealHistory->dropTableIfExists()->install();
-    $mDealTag->dropTableIfExists()->install();
-    $mDealService->dropTableIfExists()->install();
-    $mDealActivity->dropTableIfExists()->install();
-    $mDealDocument->dropTableIfExists()->install();
+      $mDealStatus->dropTableIfExists()->install();
+      $mDeal->dropTableIfExists()->install();
+      $mDealHistory->dropTableIfExists()->install();
+      $mDealTag->dropTableIfExists()->install();
+      $mDealService->dropTableIfExists()->install();
+      $mDealActivity->dropTableIfExists()->install();
+      $mDealDocument->dropTableIfExists()->install();
 
-    $mDealStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#0000A0' ]);
-    $mDealStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A0A000' ]);
-    $mDealStatus->eloquent->create([ 'name' => 'Won', 'order' => 3, 'color' => '#00A000' ]);
-    $mDealStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#A00000' ]);
-
+      $mDealStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#0000A0' ]);
+      $mDealStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A0A000' ]);
+      $mDealStatus->eloquent->create([ 'name' => 'Won', 'order' => 3, 'color' => '#00A000' ]);
+      $mDealStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#A00000' ]);
+    }
   }
 
   public function installDefaultPermissions(): void

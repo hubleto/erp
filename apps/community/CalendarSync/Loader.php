@@ -34,11 +34,12 @@ class Loader extends \HubletoMain\Core\App
     $this->main->calendarManager->addCalendar(Calendar::class);
   }
 
-  public function installTables(): void
+  public function installTables(int $round): void
   {
-    $mSource = new \HubletoApp\Community\CalendarSync\Models\Source($this->main);
-
-    $mSource->dropTableIfExists()->install();
+    if ($round == 1) {
+      $mSource = new \HubletoApp\Community\CalendarSync\Models\Source($this->main);
+      $mSource->dropTableIfExists()->install();
+    }
   }
 
   public function installDefaultPermissions(): void

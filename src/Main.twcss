@@ -1,6 +1,8 @@
 @config "../tailwind.config.js";
 @layer theme, base, components, primereact, adios, utilities, app;
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: 'Fredoka-Regular', 'sans-serif';
   --font-serif: 'Merriweather', 'serif';

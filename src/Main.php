@@ -62,6 +62,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
+  public \HubletoMain\Core\ReleaseManager $release;
   public \HubletoMain\Core\Sidebar $sidebar;
   public \HubletoMain\Core\Help $help;
   public \HubletoMain\Core\CalendarManager $calendarManager;

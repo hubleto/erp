@@ -123,8 +123,8 @@ class Installer {
     }
 
     if (
-      is_file($this->accountFolder . '/' . $this->uid)
-      || is_dir($this->accountFolder . '/' . $this->uid)
+      is_file($this->accountFolder)
+      || is_dir($this->accountFolder)
     ) {
       throw new \HubletoMain\Exceptions\AccountAlreadyExists('Account folder already exists');
     }
@@ -191,8 +191,8 @@ class Installer {
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
     $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);
     $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);
-    $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase . (empty($this->uid) ? '' : $this->uid . '/'), $configEnv);
-    $configEnv = str_replace('{{ accountUrl }}', $this->accountUrl . (empty($this->uid) ? '' : '/' . $this->uid), $configEnv);
+    $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase, $configEnv);
+    $configEnv = str_replace('{{ accountUrl }}', $this->accountUrl, $configEnv);
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
     $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
     $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
@@ -216,23 +216,23 @@ class Installer {
   {
 
     // folders
-    @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid));
-    @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/log');
-    @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/tmp');
-    @mkdir($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/upload');
+    @mkdir($this->accountFolder);
+    @mkdir($this->accountFolder . '/log');
+    @mkdir($this->accountFolder . '/tmp');
+    @mkdir($this->accountFolder . '/upload');
 
     // ConfigEnv.php
 
-    file_put_contents($this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/ConfigEnv.php', $this->getConfigEnvContent());
+    file_put_contents($this->accountFolder . '/ConfigEnv.php', $this->getConfigEnvContent());
 
     // index.php
     $index = (string) file_get_contents(__DIR__ . '/../code_templates/project/index.php.tpl');
     $index = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ mainFolder }}', $this->mainFolder, $index);
-    file_put_contents($this->accountFolder . '/' . $this->uid . '/index.php', $index);
+    file_put_contents($this->accountFolder . '/index.php', $index);
 
     // hubleto cli agent
-    $hubletoCliAgentFile = $this->accountFolder . '/' . $this->uid . '/hubleto';
+    $hubletoCliAgentFile = $this->accountFolder . '/hubleto';
     if (!is_file($hubletoCliAgentFile)) {
       $hubleto = (string) file_get_contents(__DIR__ . '/../code_templates/project/hubleto.tpl');
       $hubleto = str_replace('{{ mainFolder }}', $this->mainFolder, $hubleto);
@@ -242,7 +242,7 @@ class Installer {
     // .htaccess
     copy(
       __DIR__ . '/../code_templates/project/.htaccess.tpl',
-      $this->accountFolder . (empty($this->uid) ? '' : '/' . $this->uid) . '/.htaccess'
+      $this->accountFolder . '/.htaccess'
     );
   }
 

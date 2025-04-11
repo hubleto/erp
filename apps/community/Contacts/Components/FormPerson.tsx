@@ -5,6 +5,8 @@ import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
 import TableContacts from './TableContacts';
 import Lookup from 'adios/Inputs/Lookup';
+import Boolean from 'adios/Inputs/Boolean';
+import request from 'adios/Request';
 
 export interface FormPersonProps extends HubletoFormProps {
   newEntryId?: number,
@@ -14,6 +16,7 @@ export interface FormPersonProps extends HubletoFormProps {
 
 export interface FormPersonState extends HubletoFormState {
   newEntryId?: number,
+  primaryContactMessage: boolean
 }
 
 export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPersonState> {
@@ -32,6 +35,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
     this.state = {
       ...this.getStateFromProps(props),
       newEntryId: this.props.newEntryId ?? -1,
+      primaryContactMessage: false
     }
   }
 
@@ -55,6 +59,35 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
         </h2>
       );
     }
+  }
+
+  checkPrimaryContact(R) {
+    var tagIds = [];
+
+    for (const [key, value] of Object.entries(R.TAGS)) {
+        tagIds.push(value.id_tag);
+    }
+
+    request.get(
+      "contacts/check-primary-contact",
+      {
+        idPerson: this.state.record.id ?? -1,
+        idCustomer: R.id_customer,
+        tags: tagIds
+      },
+      (response: any) => {
+        if (response.result == true) {
+          this.updateRecord({is_primary: 1})
+        } else {
+          globalThis.main.showDialogDanger(<>
+            <p className='text'>{response.error ?? "Unknown error"}</p>
+            <p className='text'>{response.names != null ? response.names : ""}</p>
+          </>,
+          {}
+          )
+        }
+      }
+    )
   }
 
   renderContent(): JSX.Element {
@@ -81,7 +114,10 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                       value={R.id_customer}
                       readonly={this.props.creatingNew}
                       onChange={(value: any) => {
-                        this.updateRecord({ id_customer: value});
+                        if (this.state.record.is_primary == 1) {
+                          this.setState({primaryContactMessage: true} as FormPersonState);
+                        }
+                        this.updateRecord({ id_customer: value, is_primary: 0});
                       }}
                     ></Lookup>
                   </FormInput>
@@ -93,13 +129,43 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                       sourceColumn='id_tag'
                       colorColumn='color'
                       onChange={(value: any) => {
-                        this.updateRecord({TAGS: value});
+                        if (this.state.record.is_primary == 1) {
+                          this.setState({primaryContactMessage: true} as FormPersonState);
+                        }
+                        this.updateRecord({TAGS: value, is_primary: 0});
                       }}
                     ></InputTags2>
                   </FormInput>
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className="w-1/2">
+                  {this.state.record?.id_customer > 0 ?
+                    <>
+                      {this.state.primaryContactMessage == true ?
+                        <div className='text-yellow-500 block'>
+                          <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
+                          <span className='text'>
+                            Due to some changes the Primary Contact has to be checked again
+                          </span>
+                        </div>
+                      : <></>}
+                      <FormInput title={this.translate("Primary Contact")}>
+                        <>
+                          <Boolean {...this.getInputProps("is_primary")}
+                            value={this.state.record.is_primary}
+                            onChange={(value: number) => {
+                              this.setState({isInlineEditing: true});
+                              if (value == 1) {
+                                this.setState({primaryContactMessage: false} as FormPersonState)
+                                this.checkPrimaryContact(R);
+                              } else this.updateRecord({is_primary: value})
+                            }}
+                          ></Boolean>
+                        </>
+                      </FormInput>
+
+                    </>
+                  : <></>}
                   {this.inputWrapper('note')}
                   {this.inputWrapper('is_active')}
                   {showAdditional ? this.inputWrapper('date_created') : null}

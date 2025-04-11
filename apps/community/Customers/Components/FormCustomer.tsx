@@ -374,11 +374,13 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                           last_name: { type: "varchar", title: this.translate("Last name") },
                           virt_email: { type: "varchar", title: this.translate("Email"), },
                           virt_number: { type: "varchar", title: this.translate("Phone number") },
+                          is_primary: { type: "boolean", title: this.translate("Primary Contact") },
                           tags: { type: "none", title: this.translate("Tags") },
                         },
                         inputs: {
                           first_name: { type: "varchar", title: this.translate("First name") },
                           last_name: { type: "varchar", title: this.translate("Last name") },
+                          is_primary: { type: "boolean", title: this.translate("Primary Contact") },
                         },
                       }}
                       onRowClick={(table: TablePersons, row: any) => {

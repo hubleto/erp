@@ -433,6 +433,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "first_name" => $person[2],
         "last_name" => $person[3],
         "note" => $person[4],
+        "is_primary" => rand(0,1),
         "is_active" => 1,
         "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
       ])['id'];
@@ -590,8 +591,8 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $person = $customer->PERSONS->first();
 
       $leadDateCreatedTs = (int) rand(strtotime("-1 month"), strtotime("+1 month"));
-      $leadDateCreated = date("Y-m-d", $leadDateCreatedTs);
-      $leadDateClose = date("Y-m-d", $leadDateCreatedTs + rand(4, 6)*24*3600);
+      $leadDateCreated = date("Y-m-d H:i:s", $leadDateCreatedTs);
+      $leadDateClose = date("Y-m-d H:i:s", $leadDateCreatedTs + rand(4, 6)*24*3600);
 
       $idLead = $mLead->record->create([
         "identifier" => $identifierPrefixes[rand(0,2)] . rand(1,3000),

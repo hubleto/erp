@@ -35,6 +35,7 @@ class Person extends \HubletoMain\Core\Model
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE')),
+      'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0),
       'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
       'is_active' => (new Boolean($this, $this->translate('Active'))),
@@ -64,6 +65,8 @@ class Person extends \HubletoMain\Core\Model
     $description->columns['is_active'] = $tempColumn;
 
     unset($description->columns['note']);
+    unset($description->columns['is_primary']);
+
 
     if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [

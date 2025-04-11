@@ -15,6 +15,7 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^contacts\/?$/' => Controllers\Persons::class,
       '/^contacts\/get-customer-contacts\/?$/' => Controllers\Api\GetCustomerContacts::class,
+      '/^contacts\/check-primary-contact\/?$/' => Controllers\Api\CheckPrimaryContact::class,
       '/^settings\/contact-tags\/?$/' => Controllers\Tags::class,
       '/^settings\/contact-categories\/?$/' => Controllers\ContactCategories::class,
     ]);

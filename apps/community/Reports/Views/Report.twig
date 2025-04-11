@@ -4,6 +4,8 @@
     height: 350px;
   }
 </style>
+
+<h1>Reports &raquo; {{ viewParams.report.name }}</h1>
 <app-form-report
   config="{{ viewParams.report.getReportConfig()|json_encode }}"
   string:model="{{ viewParams.report.modelClass }}"

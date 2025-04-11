@@ -163,8 +163,7 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
 
     return (
       <>
-        <h2>{this.props.name}</h2>
-        <div className="card card-body">
+        <div className="mt-2 card card-body">
           {Object.keys(searchGroups).map( ( key ) => (
             <div className="flex flex-row items-end gap-2">
               {/* --- FIELDS --- */}
@@ -235,7 +234,7 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
         </div>
 
         {/* --- BUTTONS --- */}
-        <div className="card card-body">
+        <div className="card card-body bg-white/80">
           <div className="flex flex-row gap-1">
             {this.props.readonly ? <></> :
               <button onClick={() => this.requestData()} className="btn btn-primary"><span className="icon"><i className="fas fa-search"></i></span><span className="text">Search</span></button>

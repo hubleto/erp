@@ -5,6 +5,10 @@
   * new app launcher
   * many new features to community apps
   * new CLI commands `php hubleto create controller` and `php hubleto create view`
+  * added dark theme
+  * added context-based user guide, check https://help.hubleto.com
+  * improved report manager
+  * many bugfixes and performance improvements
 
 ## Release v0.9
 

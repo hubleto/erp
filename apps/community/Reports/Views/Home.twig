@@ -1,5 +1,13 @@
-<h2>Reports</h2>
+<h1>{{ translate('Reports') }}</h1>
 
-{% for key, report in viewParams.reports %}
-  <a class="btn" href="reports/{{ report.urlSlug }}"><span class="text">{{ report.name }}</span></a>
-{% endfor %}
+<div class="mt-2 grid md:grid-cols-4">
+  {% for key, report in viewParams.reports %}
+    <a
+      class="btn btn-large card"
+      href="reports/{{ report.urlSlug }}"
+    >
+      <span class="icon text-xl"><i class="fas fa-chart-pie"></i></span>
+      <span class="text">{{ report.name }}</span>
+    </a>
+  {% endfor %}
+</div>

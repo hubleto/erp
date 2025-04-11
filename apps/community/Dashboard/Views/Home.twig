@@ -1,28 +1,26 @@
-<div class="grid md:grid-cols-2 gap-2">
-  <div class="card">
-    <div class="card-header">
-      {{ translate('Welcome') }}, {{ user.email }}
-    </div>
-    <div class="card-body p-4">
-      <img src="{{ config.url }}/assets/images/logo-hubleto-s-textom.png">
-    </div>
+<div class="w-[50%] mx-auto text-center mt-20 p-20 rounded bg-white/60">
+  <div class="text-xl">
+    {{ translate('Welcome') }}, {{ user.email }}
   </div>
-  {# <div>
-    {% if not app.isPremium %}
-      <div class="card border-yellow-100">
-        <div class="card-header text-yellow-900 bg-yellow-100 border-yellow-200">
-          {{ translate('Upgrade to Premium and get exciting rewards.') }}
-          <i class="fas fa-cloud-arrow-up"></i>
-        </div>
-        <div class="card-body bg-yellow-50 border-yellow-100">
-          {{ translate('You are using free version of Hubleto. Certain features are unavailable.') }}<br/>
-          <br/>
-          <a href="{{ config.accountUrl }}/upgrade" class="btn btn-primary btn-large">
-            <span class="icon"><i class="fas fa-cloud-arrow-up"></i></span>
-            <span class="text">{{ translate('Upgrade to Premium') }}</span>
-          </a>
-        </div>
-      </div>
-    {% endif %}
-  </div> #}
+  <div class="mt-20">
+    <img src="{{ config.url }}/assets/images/logo-hubleto-s-textom.png" class="max-w-90 m-auto">
+  </div>
 </div>
+{# <div>
+  {% if not app.isPremium %}
+    <div class="card border-yellow-100">
+      <div class="card-header text-yellow-900 bg-yellow-100 border-yellow-200">
+        {{ translate('Upgrade to Premium and get exciting rewards.') }}
+        <i class="fas fa-cloud-arrow-up"></i>
+      </div>
+      <div class="card-body bg-yellow-50 border-yellow-100">
+        {{ translate('You are using free version of Hubleto. Certain features are unavailable.') }}<br/>
+        <br/>
+        <a href="{{ config.accountUrl }}/upgrade" class="btn btn-primary btn-large">
+          <span class="icon"><i class="fas fa-cloud-arrow-up"></i></span>
+          <span class="text">{{ translate('Upgrade to Premium') }}</span>
+        </a>
+      </div>
+    </div>
+  {% endif %}
+</div> #}

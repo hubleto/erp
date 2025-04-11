@@ -161,8 +161,6 @@
           </li> #}
           <li>
             <button class="btn btn-transparent btn-small btn-dropdown">
-              <span class="icon"><i class="fas fa-language"></i></span>
-              <span class="text">{{ (user.language ?: 'en')|upper }}</span>
               <div class="menu">
                 <div class="list" style="margin-left:-6.2em;width:8em;">
                   <a href="?set-language=en" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">English</span></a>
@@ -175,12 +173,12 @@
                   <a href="?set-language=sk" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Slovensky</span></a>
                 </div>
               </div>
+              <span class="text">{{ (user.language ?: 'en')|upper }}</span>
+              <span class="icon"><i class="fas fa-language"></i></span>
             </button>
           </li>
           <li>
             <button class="btn btn-transparent btn-small btn-dropdown">
-              <span class="icon"><i class='fas fa-user-tie'></i></span>
-              <span class="text">{{ user.email }}</span>
               <div class="menu">
                 <div class="list" style="margin-left:-13.4em;width:15em;">
                   <div class="text-center text-primary text-sm p-2">{{ user.email }}</div>
@@ -195,6 +193,8 @@
                   </a>
                 </div>
               </div>
+              <span class="text">{{ user.email }}</span>
+              <span class="icon"><i class='fas fa-user-tie'></i></span>
             </button>
           </li>
         </ul>
@@ -210,7 +210,7 @@
         {% set i = 0 %}
         {% for app in viewParams.appsInSidebar %}
           <a
-            class="btn {% if app.isActivated %} btn-primary {% endif %} "
+            class="btn {% if app.isActivated %} btn-active {% endif %} "
             id="sidebar-item-level1-{{ i }}"
             href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
           >

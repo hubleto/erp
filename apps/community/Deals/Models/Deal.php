@@ -21,6 +21,7 @@ use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
 use ADIOS\Core\Db\Column\DateTime;
 use ADIOS\Core\Db\Column\Integer;
+use HubletoMain\Core\Helper;
 use Illuminate\Database\Eloquent\Builder;
 
 class Deal extends \HubletoMain\Core\Model
@@ -164,6 +165,20 @@ class Deal extends \HubletoMain\Core\Model
     ]);
 
     return parent::onAfterCreate($originalRecord, $savedRecord);
+  }
+
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    if (isset($originalRecord["TAGS"])) {
+      $helper = new Helper($this->main, $this->app);
+      $helper->deleteTags(
+        array_column($originalRecord["TAGS"], "id"),
+        "HubletoApp/Community/Deals/Models/DealTag",
+        "id_deal",
+        $originalRecord["id"]
+      );
+    }
+    return $savedRecord;
   }
 
   public function getOwnership(array $record): void

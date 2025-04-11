@@ -17,6 +17,7 @@ use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
+use HubletoMain\Core\Helper;
 use Illuminate\Database\Eloquent\Builder;
 
 class Lead extends \HubletoMain\Core\Model
@@ -204,5 +205,19 @@ class Lead extends \HubletoMain\Core\Model
     ]);
 
     return parent::onAfterCreate($originalRecord, $savedRecord);
+  }
+
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    if (isset($originalRecord["TAGS"])) {
+      $helper = new Helper($this->main, $this->app);
+      $helper->deleteTags(
+        array_column($originalRecord["TAGS"], "id"),
+        "HubletoApp/Community/Leads/Models/LeadTag",
+        "id_lead",
+        $originalRecord["id"]
+      );
+    }
+    return $savedRecord;
   }
 }

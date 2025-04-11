@@ -257,7 +257,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         sourceColumn='id_tag'
                         colorColumn='color'
                         onChange={(value: any) => {
-                          this.updateRecord({TAGS: value});
+                          R.TAGS = value;
+                          this.setState({record: R});
                         }}
                       ></InputTags2>
                     </FormInput>

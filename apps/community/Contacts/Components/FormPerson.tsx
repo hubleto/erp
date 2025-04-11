@@ -132,7 +132,9 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                         if (this.state.record.is_primary == 1) {
                           this.setState({primaryContactMessage: true} as FormPersonState);
                         }
-                        this.updateRecord({TAGS: value, is_primary: 0});
+                        R.TAGS = value;
+                        this.setState({record: R});
+                        this.updateRecord({is_primary: 0});
                       }}
                     ></InputTags2>
                   </FormInput>

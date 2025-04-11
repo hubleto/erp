@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Pipeline\Controllers;
 
-use HubletoApp\Community\Settings\Models\Tag;
 use HubletoApp\Community\Settings\Models\Pipeline;
 use HubletoApp\Community\Settings\Models\Setting;
+use HubletoApp\Community\Deals\Models\Tag;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Settings\Models\Currency;
 

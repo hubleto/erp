@@ -145,7 +145,7 @@ class Deal extends \HubletoMain\Core\Model
     $description = parent::describeForm();
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['id_deal_status'] = 1;
-    $description->defaultValues['date_created'] = date("Y-m-d");
+    $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_currency'] = $defaultCurrency;
     $description->defaultValues['id_pipeline'] = $defaultPipeline;
     $description->defaultValues['id_pipeline_step'] = null;

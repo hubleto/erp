@@ -127,7 +127,7 @@ class Lead extends \HubletoMain\Core\Model
     ;
 
     $description->defaultValues['id_customer'] = null;
-    $description->defaultValues['date_created'] = date("Y-m-d");
+    $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_person'] = null;
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['id_currency'] = $defaultCurrency;

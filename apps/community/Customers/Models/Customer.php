@@ -16,6 +16,7 @@ use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Date;
 
 use HubletoApp\Community\Contacts\Models\Person;
+use HubletoMain\Core\Helper;
 
 class Customer extends \HubletoMain\Core\Model
 {
@@ -136,6 +137,20 @@ class Customer extends \HubletoMain\Core\Model
     $description->defaultValues['date_created'] = date("Y-m-d");
 
     return $description;
+  }
+
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    if (isset($originalRecord["TAGS"])) {
+      $helper = new Helper($this->main, $this->app);
+      $helper->deleteTags(
+        array_column($originalRecord["TAGS"], "id"),
+        "HubletoApp/Community/Customers/Models/CustomerTag",
+        "id_customer",
+        $originalRecord["id"]
+      );
+    }
+    return $savedRecord;
   }
 
   public function getNewRecordDataFromString(string $text): array {

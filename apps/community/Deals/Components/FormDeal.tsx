@@ -267,7 +267,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                           sourceColumn='id_tag'
                           colorColumn='color'
                           onChange={(value: any) => {
-                            this.updateRecord({TAGS: value});
+                            R.TAGS = value;
+                            this.setState({record: R});
                           }}
                         ></InputTags2>
                       </FormInput>

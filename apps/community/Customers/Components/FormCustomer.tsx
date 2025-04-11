@@ -329,7 +329,8 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                         sourceColumn="id_tag"
                         colorColumn="color"
                         onChange={(value: any) => {
-                          this.updateRecord({ TAGS: value });
+                          R.TAGS = value;
+                          this.setState({record: R});
                         }}
                       />
                     </FormInput>

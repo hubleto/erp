@@ -34,6 +34,12 @@ export default class TableDocuments extends Table<TableDocumentsProps, TableDocu
     }
   }
 
+  getFormModalProps(): any {
+    let params = super.getFormModalProps();
+    params.type = 'centered small';
+    return params;
+  }
+
   renderForm(): JSX.Element {
     let formProps: FormProps = this.getFormProps();
     return <FormDocument {...formProps}/>;

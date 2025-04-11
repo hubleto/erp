@@ -48,21 +48,19 @@
     });
 
     function applyTheme() {
-      if (localStorage.theme == "dark") $('*').addClass('dark');
-      else $('*').removeClass('dark');
-    }
-
-    function toggleTheme(btn) {
       if (localStorage.theme == "dark") {
-        localStorage.theme = "light";
-        $(btn).find('.icon i').removeClass('fa-moon').addClass('fa-sun');
+        $('*').addClass('dark');
+        $('#theme-toggle-btn').find('.icon i').removeClass('fa-sun').addClass('fa-moon');
       } else {
-        localStorage.theme = "dark";
-        $(btn).find('.icon i').removeClass('fa-sun').addClass('fa-moon');
+        $('*').removeClass('dark');
+        $('#theme-toggle-btn').find('.icon i').removeClass('fa-moon').addClass('fa-sun');
       }
     }
 
-    applyTheme();
+    function toggleTheme() {
+      localStorage.theme = (localStorage.theme == "dark" ? "light" : "dark");
+      applyTheme();
+    }
 
   </script>
 
@@ -95,7 +93,7 @@
 
     <nav id="default-navbar"><div>
       <div class="flex items-center">
-        <div class="w-28 flex flex-row justify-around">
+        <div class="flex flex-row justify-around">
           <button onclick="showSidebar()" class="sm:block md:hidden"><span class="icon"><i id="menuButton" class="fas fa-chevron-right"></i></span></button>
           <a class="flex" href="{{ config.accountUrl }}">
             <img id="logo" src="{{ config.url }}/assets/images/logo-hubleto.png" class="h-8 m-auto">
@@ -138,7 +136,7 @@
             {% endif %}
           </li>
           <li>
-            <button class="btn btn-small btn-transparent" onclick="toggleTheme(this);">
+            <button id="theme-toggle-btn" class="btn btn-small btn-transparent" onclick="toggleTheme();">
               <span class="icon"><i class="fas fa-sun"></i></span>
             </a>
           </li>
@@ -292,6 +290,8 @@
       sidebarState = false;
     }
   }
+
+  applyTheme();
 
 </script>
 

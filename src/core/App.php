@@ -141,7 +141,7 @@ class App {
     if (is_file($dictFilename)) {
       $dict = static::loadDictionary($language);
       $dict[$contextInner][$string] = '';
-      file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+      @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
   }
 

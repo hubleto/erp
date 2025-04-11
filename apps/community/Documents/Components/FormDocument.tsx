@@ -32,32 +32,22 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
 
   renderTitle(): JSX.Element {
     if (getUrlParam('recordId') == -1) {
-      return(
-        <>
-          <h2>
-            {'New Document'}
-          </h2>
-        </>
-      );
+      return <h2>{this.translate('New Document')}</h2>;
     } else {
-      return (
-        <>
-          <h2>
-            {this.state.record.name
-              ?
-              <div className='flex flex-col justify-center'>
-                <span>{this.state.record.name}</span>
-                <span className='text-xs text-gray-400 font-normal'>Document</span>
-              </div>
-              :
-              <div className='flex flex-col justify-center'>
-                <span>'[Undefined Name]'</span>
-                <span className='text-xs text-gray-400 font-normal'>Document</span>
-              </div>
-              }
-          </h2>
-        </>
-      );
+      return <h2>
+        {this.state.record.name
+          ?
+          <div className='flex flex-col justify-center'>
+            <span>{this.state.record.name}</span>
+            <span className='text-xs text-gray-400 font-normal'>Document</span>
+          </div>
+          :
+          <div className='flex flex-col justify-center'>
+            <span>'[Undefined Name]'</span>
+            <span className='text-xs text-gray-400 font-normal'>Document</span>
+          </div>
+          }
+      </h2>;
     }
   }
 

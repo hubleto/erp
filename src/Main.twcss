@@ -45,8 +45,8 @@
   #app-launcher > div .app-launcher-app-button .icon { @apply p-4 text-center text-4xl; }
   #app-launcher > div .app-launcher-app-button .text { @apply p-4 text-center; }
 
-  .btn-add { @apply bg-amber-600; }
-  .x-btn-close { @apply bg-gray-200 text-gray-800; }
+  .btn-add { @apply bg-amber-600 hover:bg-amber-400; }
+  .btn-edit { @apply bg-amber-600 hover:bg-amber-400; }
 
   .modal-header-title h2 { @apply dark:text-white; }
 }

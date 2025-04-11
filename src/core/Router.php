@@ -9,6 +9,7 @@ class Router extends \ADIOS\Core\Router {
     parent::__construct($app);
 
     $this->httpGet([
+      '/^api\/log-javascript-error\/?$/' => LogJavascriptError::class,
       '/^api\/dictionary\/?$/' => Dictionary::class,
       '/^api\/get-chart-data\/?$/' =>  \HubletoMain\Core\Api\GetTemplateChartData::class,
     ]);

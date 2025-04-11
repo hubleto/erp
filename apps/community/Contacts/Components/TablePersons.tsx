@@ -73,7 +73,11 @@ export default class TablePersons extends Table<TablePersonsProps, TablePersonsS
       return (
         <>
           {data.TAGS.map((tag, key) => {
-            return <div style={{backgroundColor: tag.TAG.color}} className='badge'>{tag.TAG.name}</div>;
+            return <div
+              key={key}
+              style={{backgroundColor: tag.TAG.color}}
+              className='badge'
+            >{tag.TAG.name}</div>;
           })}
         </>
       );

@@ -98,6 +98,35 @@ class HubletoMain extends ADIOS {
     // console.log('registeringApp', appUid, appClass);
     this.apps[appUid] = new appClass(this);
   }
+
+  createThemeObserver() {
+    // MutationObserver looks for changes in DOM. Anytime a change is detected,
+    // a light or dark theme is applied to changed or newly created DOM elements.
+    (new MutationObserver((mutations, observer) => {
+      if (localStorage.theme == "dark") {
+        // Whenever the user explicitly chooses light mode
+        $('*').addClass('dark');
+      } else {
+        // Whenever the user explicitly chooses dark mode
+        $('*').removeClass('dark');
+      }
+    })).observe(document, { subtree: true, attributes: true });
+  }
+
+  startConsoleErrorLogger() {
+    console.log('Hubleto: Starting console.error debugger.');
+    if (window.console && console.error) {
+      const ce = console.error;
+      console.error = function() {
+        request.post(
+          'api/log-javascript-error',
+          {},
+          { errorRoute: '{{ route }}', errors: arguments }
+        );
+        ce.apply(this, arguments)
+      }
+    }
+  }
 }
 
 //@ts-ignore

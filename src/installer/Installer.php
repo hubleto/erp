@@ -35,6 +35,9 @@ class Installer {
   /** @property array<string, string> */
   public array $externalAppsRepositories = [];
 
+  /** @property array<string, mixed> */
+  public array $extraConfigEnv = [];
+
   public array $packages = [
     'core' => [
       \HubletoApp\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997, ],
@@ -208,6 +211,18 @@ class Installer {
 
     $configEnv .= '' . "\n";
     $configEnv .= '$config[\'env\'] = \'' . $this->env . '\';' . "\n";
+
+    if (count($this->extraConfigEnv) > 0) {
+      foreach ($this->extraConfigEnv as $cfgParam => $cfgValue) {
+        if (is_string($cfgValue)) {
+          $configEnv .= '$config[\'' . $cfgParam . '\'] = \'' . $cfgValue . '\';' . "\n";
+        } else if (is_bool($cfgValue)) {
+          $configEnv .= '$config[\'' . $cfgParam . '\'] = ' . ($cfgValue ? 'true' : 'false') . ';' . "\n";
+        } else if (is_numeric($cfgValue)) {
+          $configEnv .= '$config[\'' . $cfgParam . '\'] = ' . (int) $cfgValue . ';' . "\n";
+        }
+      }
+    }
 
     return $configEnv;
   }

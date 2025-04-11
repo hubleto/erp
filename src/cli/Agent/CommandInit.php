@@ -193,6 +193,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
 
     $installer->externalAppsRepositories = $externalAppsRepositories;
+    
+    if (isset($config['extraConfigEnv'])) {
+      $installer->extraConfigEnv = $config['extraConfigEnv'];
+    }
 
     $this->cli->cyan("  -> Creating folders and files.\n");
     $installer->createFoldersAndFiles();

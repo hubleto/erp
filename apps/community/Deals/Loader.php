@@ -16,7 +16,6 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
       '/^deals\/change-pipeline\/?$/' => Controllers\Api\ChangePipeline::class,
       '/^deals\/change-pipeline-step\/?$/' => Controllers\Api\ChangePipelineStep::class,
-      '/^settings\/deal-statuses\/?$/' => Controllers\DealStatuses::class,
       '/^settings\/deal-tags\/?$/' => Controllers\Tags::class,
       '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,
       '/^deals\/boards\/deal-value-by-status\/?$/' => Controllers\Boards\DealValueByStatus::class,
@@ -63,7 +62,6 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mDealStatus = new Models\DealStatus($this->main);
       $mDeal = new \HubletoApp\Community\Deals\Models\Deal($this->main);
       $mDealHistory = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
       $mDealTag = new \HubletoApp\Community\Deals\Models\Tag($this->main);
@@ -72,7 +70,6 @@ class Loader extends \HubletoMain\Core\App
       $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
       $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
-      $mDealStatus->dropTableIfExists()->install();
       $mDeal->dropTableIfExists()->install();
       $mDealHistory->dropTableIfExists()->install();
       $mDealTag->dropTableIfExists()->install();
@@ -84,11 +81,8 @@ class Loader extends \HubletoMain\Core\App
       $mDealTag->eloquent->create([ 'name' => "Important", 'color' => '#fc2c03' ]);
       $mDealTag->eloquent->create([ 'name' => "ASAP", 'color' => '#62fc03' ]);
       $mDealTag->eloquent->create([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
-
-      $mDealStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#0000A0' ]);
-      $mDealStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A0A000' ]);
-      $mDealStatus->eloquent->create([ 'name' => 'Won', 'order' => 3, 'color' => '#00A000' ]);
-      $mDealStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#A00000' ]);
+      $mDealTag->eloquent->create([ 'name' => "New Customer", 'color' => '#fcdb03' ]);
+      $mDealTag->eloquent->create([ 'name' => "Existing Customer", 'color' => '#5203fc' ]);
     }
   }
 
@@ -121,11 +115,6 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Deals/Models/DealService:Update",
       "HubletoApp/Community/Deals/Models/DealService:Delete",
 
-      "HubletoApp/Community/Deals/Models/DealStatus:Create",
-      "HubletoApp/Community/Deals/Models/DealStatus:Read",
-      "HubletoApp/Community/Deals/Models/DealStatus:Update",
-      "HubletoApp/Community/Deals/Models/DealStatus:Delete",
-
       "HubletoApp/Community/Deals/Models/DealTag:Create",
       "HubletoApp/Community/Deals/Models/DealTag:Read",
       "HubletoApp/Community/Deals/Models/DealTag:Update",
@@ -133,7 +122,6 @@ class Loader extends \HubletoMain\Core\App
 
       "HubletoApp/Community/Deals/Controllers/Deals",
       "HubletoApp/Community/Deals/Controllers/DealsArchive",
-      "HubletoApp/Community/Deals/Controllers/DealStatuses",
 
       "HubletoApp/Community/Deals/Api/ChangePipelineStep",
       "HubletoApp/Community/Deals/Api/GetCalendarEvents",

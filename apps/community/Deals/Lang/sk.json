@@ -33,11 +33,6 @@
         "Deal Progress": "",
         "Date of progress update": ""
     },
-    "Models\\DealStatus": {
-        "Name": "",
-        "Order": "",
-        "Color": ""
-    },
     "Models\\DealHistory": {
         "Change Date": "",
         "Deal": "",

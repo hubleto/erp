@@ -1,15 +1,26 @@
 <script>
   function onFilterChange() {
-    const fDealStatus = globalThis.app.reactElements['fDealStatus'].state.value;
+    const fDealResult = document.getElementById("fDealResult").value;
     const fResponsible = globalThis.app.reactElements['fResponsible'].state.value;
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const idPipeline = urlParams.get('id_pipeline');
+
     let url = '?';
-    if (fDealStatus) url += '&fDealStatus=' + fDealStatus;
+    if (idPipeline) url += 'id_pipeline=' + idPipeline;
+    if (fDealResult) url += '&fDealResult=' + fDealResult;
     if (fResponsible) url += '&fResponsible=' + fResponsible;
 
     window.location.href = url;
   }
 </script>
+
+{% set resultEnumValues = {
+  1: {"color":"#c42202","title":"Lost"},
+  2: {"color":"#14ab0c","title":"Won"},
+  3: {"color":"#a8aba7","title":"Pending"},
+} %}
 
 <div class="flex gap-2 flex-col md:flex-row" style="height:calc(100vh - var(--nav-height) - 1rem)">
   <div class="flex flex-row md:flex-col gap-2 border-r border-gray-200 pr-2" style="width:10rem">
@@ -51,15 +62,14 @@
       </div>
       <div class="card-body flex gap-2">
         <div class="input-wrapper flex-1">
-          <div class="input-label">Status</div>
+          <div class="input-label">Result</div>
           <div class="input-body">
-            <app-input-lookup
-              uid="fDealStatus"
-              model="HubletoApp/Community/Deals/Models/DealStatus"
-              class="w-full"
-              value="{{ viewParams.fDealStatus }}"
-              function:on-change="onFilterChange();"
-            />
+            <select class="w-full" name="fDealResult" id="fDealResult" onchange="onFilterChange();">
+              <option value="0"></option>
+              <option {% if viewParams.fDealResult == 3 %} selected {% endif %} value="3">Pending</option>
+              <option {% if viewParams.fDealResult == 1 %} selected {% endif %} value="1">Lost</option>
+              <option {% if viewParams.fDealResult == 2 %} selected {% endif %} value="2">Won</option>
+            </select>
           </div>
         </div>
         <div class="input-wrapper flex-1">
@@ -104,7 +114,7 @@
                         <div class="text-gray-400">{{deal.title}}</div>
                       </div>
                       <div class="mt-1">
-                        <div class="mb-3 pr-2 text-right font-normal" style="border-right: 0.5em solid {{ deal.STATUS.color }}">{{ deal.STATUS.name }}</div>
+                        <div class="mb-3 pr-2 text-right font-normal" style="border-right: 0.5em solid {{ resultEnumValues[deal.deal_result]["color"] }}">{{ resultEnumValues[deal.deal_result]["title"] }}</div>
                         <div class="badge bg-white font-normal" style="border: 1px solid {{deal.TAG.color}}; color: {{deal.TAG.color}};">{{deal.TAG.name}}</div>
                       </div>
                     </div>

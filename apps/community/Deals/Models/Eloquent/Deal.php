@@ -49,11 +49,6 @@ class Deal extends \HubletoMain\Core\ModelEloquent
     return $this->hasOne(Person::class, 'id', 'id_person');
   }
 
-  /** @return HasOne<DealStatus, covariant Deal> */
-  public function STATUS(): HasOne {
-    return $this->hasOne(DealStatus::class, 'id', 'id_deal_status');
-  }
-
   /** @return HasOne<Currency, covariant Deal> */
   public function CURRENCY(): HasOne {
     return $this->hasOne(Currency::class, 'id', 'id_currency');

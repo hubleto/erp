@@ -12,6 +12,7 @@ use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Leads\Models\LeadService;
 use Exception;
+use HubletoApp\Community\Settings\Models\PipelineStep;
 
 class ConvertLead extends \HubletoMain\Core\Controller
 {
@@ -40,10 +41,17 @@ class ConvertLead extends \HubletoMain\Core\Controller
     $deal = null;
 
     $mSettings = new Setting($this->main);
+    $mPipepelineStep = new PipelineStep($this->main);
     $defaultPipeline =(int) $mSettings->eloquent
       ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
       ->first()
       ->value
+    ;
+    $defaultPipelineFirstStep =(int) $mPipepelineStep->eloquent
+      ->where("id_pipeline", $defaultPipeline)
+      ->orderBy("id", "asc")
+      ->first()
+      ->id
     ;
 
     try {
@@ -62,9 +70,9 @@ class ConvertLead extends \HubletoMain\Core\Controller
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
         "id_lead" => $lead->id,
-        "id_pipeline" => $defaultPipeline,
-        "id_pipeline_step" => null,
-        "id_deal_status" => 1,
+        "deal_result" => 3,
+        "id_pipeline" => $defaultPipeline ?? null,
+        "id_pipeline_step" => $defaultPipelineFirstStep ?? null,
       ]);
 
       $leadServices = $mLeadService->eloquent->where("id_lead", $leadId)->get();

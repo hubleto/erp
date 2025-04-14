@@ -22,7 +22,7 @@ class Home extends \HubletoMain\Core\Controller {
   {
     parent::prepareView();
 
-    $fDealStatus = $this->main->urlParamAsInteger('fDealStatus');
+    $fDealResult = $this->main->urlParamAsInteger('fDealResult');
     $fResponsible = $this->main->urlParamAsInteger('fResponsible');
 
     $mSetting = new Setting($this->main);
@@ -82,10 +82,9 @@ class Home extends \HubletoMain\Core\Controller {
       ->with("CUSTOMER")
       ->with("TAGS")
       ->with("USER")
-      ->with("STATUS")
     ;
 
-    if ($fDealStatus > 0) $deals = $deals->where('id_deal_status', $fDealStatus);
+    if ($fDealResult > 0) $deals = $deals->where('deal_result', $fDealResult ?? true);
     if ($fResponsible > 0) $deals = $deals->where('id_user', $fResponsible);
 
     $deals = $deals

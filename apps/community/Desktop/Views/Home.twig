@@ -1,7 +1,12 @@
-<div class="w-[50%] mx-auto text-center mt-20 p-20 rounded bg-white/60">
-  <div class="text-xl">
-    {{ translate('Welcome') }}, {{ user.email }}
-  </div>
+{% set boards = viewParams.app.dashboardManager.getBoards() %}
+
+<h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.email }}</h1>
+
+<div class="mt-2">
+  <app-desktop-dashboard json:boards='{{ boards|json_encode|raw }}'></app-desktop-dashboard>
+</div>
+
+<div class="w-[50%] mx-auto text-center rounded bg-white/60">
   <div class="mt-20">
     <img src="{{ config.url }}/assets/images/logo-hubleto-s-textom.png" class="max-w-90 m-auto">
   </div>

@@ -17,6 +17,7 @@ import InputHyperlink from "adios/Inputs/Hyperlink";
 // Hubleto
 import HubletoForm from "./core/Components/HubletoForm";
 import HubletoTable from "./core/Components/HubletoTable";
+import HubletoChart from "./core/Components/HubletoChart";
 
 // Primereact
 import { Tooltip } from "primereact/tooltip";
@@ -45,6 +46,7 @@ class HubletoMain extends ADIOS {
     // Hubleto components
     this.registerReactComponent('Form', HubletoForm);
     this.registerReactComponent('Table', HubletoTable);
+    this.registerReactComponent('Chart', HubletoChart);
 
     // Primereact
     this.registerReactComponent('Tooltip', Tooltip);

@@ -1,0 +1,42 @@
+<h1 class="app-main-title">Deals: Settings</h1>
+
+<script>
+  function saveSettings() {
+    $("#settings-form").submit();
+  }
+</script>
+
+{% if viewParams.settingsSaved %}
+  <div class="alert alert-info mt-2">Settings has been saved.</div>
+{% endif %}
+
+<form id="settings-form" action="" method="POST">
+  <input type="hidden" name="settingsChanged" value="1">
+  <div class="input-wrapper">
+    <label class="input-label" for="showMostValuableDealsInDashboard">
+      Show 'Most valuable deals' in dashboard
+    </label>
+    <input
+      type="checkbox"
+      id="showMostValuableDealsInDashboard"
+      name="showMostValuableDealsInDashboard"
+      style="zoom:2"
+      {% if viewParams.app.configAsBool('showMostValuableDealsInDashboard') %} checked {% endif %}
+      onchange="saveSettings();"
+    />
+  </div>
+
+  <div class="input-wrapper">
+    <label class="input-label" for="showDealValueByStatusInDashboard">
+      Show 'Deal value by status' in dashboard
+    </label>
+    <input
+      type="checkbox"
+      id="showDealValueByStatusInDashboard"
+      name="showDealValueByStatusInDashboard"
+      style="zoom:2"
+      {% if viewParams.app.configAsBool('showDealValueByStatusInDashboard') %} checked {% endif %}
+      onchange="saveSettings();"
+    />
+  </div>
+</form>

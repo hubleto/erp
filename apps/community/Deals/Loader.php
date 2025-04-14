@@ -11,12 +11,15 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^deals\/?$/' => Controllers\Deals::class,
+      '/^deals\/settings\/?$/' => Controllers\Settings::class,
       '/^deals\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
       '/^deals\/change-pipeline\/?$/' => Controllers\Api\ChangePipeline::class,
       '/^deals\/change-pipeline-step\/?$/' => Controllers\Api\ChangePipelineStep::class,
       '/^settings\/deal-statuses\/?$/' => Controllers\DealStatuses::class,
       '/^settings\/deal-tags\/?$/' => Controllers\Tags::class,
+      '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,
+      '/^deals\/boards\/deal-value-by-status\/?$/' => Controllers\Boards\DealValueByStatus::class,
     ]);
 
     $this->main->addSetting([
@@ -35,6 +38,22 @@ class Loader extends \HubletoMain\Core\App
 
     $reportManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Reports::class)->reportManager;
     $reportManager->addReport(Reports\MonthlyRevenue::class);
+
+    $dashboardManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Desktop::class)->dashboardManager;
+
+    if ($this->configAsBool('showMostValuableDealsInDashboard')) {
+      $dashboardManager->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
+        'Most valuable deals',
+        'deals/boards/most-valuable-deals',
+      ));
+    }
+
+    if ($this->configAsBool('showDealValueByStatusInDashboard')) {
+      $dashboardManager->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
+        'Deal value by status',
+        'deals/boards/deal-value-by-status',
+      ));
+    }
 
     $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class)->addContextHelpUrls('/^deals\/?$/', [
       'en' => 'en/apps/community/deals',

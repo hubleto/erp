@@ -3,6 +3,7 @@
 
 // Mostly, these loaders run `registerReactComponent()`
 
+import './Desktop/Loader'
 import './Billing/Loader'
 import './Calendar/Loader'
 import './CalendarSync/Loader'

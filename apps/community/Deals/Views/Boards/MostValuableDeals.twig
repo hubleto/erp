@@ -1,0 +1,15 @@
+{% if viewParams.mostValuableDeals|length > 0 %}
+  <table class="table-default-dense w-full">
+    {% for deal in viewParams.mostValuableDeals %}
+      <tr>
+        <td>{{ deal.title }}</td>
+        <td>{{ viewParams.main.locale.formatCurrency(deal.price, deal.CURRENCY.code ?? '') }}</td>
+        <td class="text-right">
+          <a href="deals?recordId={{ deal.id }}" class="btn btn-transparent">
+            <span class="icon"><i class="fas fa-arrow-right"></i></span>
+            <span class="text">{{ translate('Open deal') }}</span>
+          </a>
+      </tr>
+    {% endfor %}
+  </table>
+{% endif %}

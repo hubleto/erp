@@ -10,11 +10,13 @@ class Loader extends \HubletoMain\Core\App
   ];
 
   public SidebarManager $sidebar;
+  public DashboardManager $dashboardManager;
 
   public function __construct(\HubletoMain $main)
   {
     parent::__construct($main);
     $this->sidebar = new SidebarManager($main);
+    $this->dashboardManager = new DashboardManager($main);
   }
 
   public function init(): void

@@ -9,6 +9,9 @@ class Controller extends \ADIOS\Core\Controller
 
   public \HubletoMain $main;
 
+  public string $appNamespace = '';
+  public \HubletoMain\Core\App $hubletoApp;
+
   function __construct(\HubletoMain $main)
   {
     $this->main = $main;
@@ -16,10 +19,15 @@ class Controller extends \ADIOS\Core\Controller
     $reflection = new \ReflectionClass($this);
     preg_match('/^(.*?)\\\Controllers\\\(.*?)$/', $reflection->getName(), $m);
     if (isset($m[1]) && isset($m[2])) {
+      $this->appNamespace = $m[1];
       $this->translationContext = $m[1] . '\\Loader::Controllers\\' . $m[2];
     }
 
     parent::__construct($main);
+
+    if ($this->main->apps->getAppInstance($this->appNamespace)) {
+      $this->hubletoApp = $this->main->apps->getAppInstance($this->appNamespace);
+    }
 
   }
 
@@ -78,6 +86,7 @@ class Controller extends \ADIOS\Core\Controller
     parent::prepareView();
 
     $this->viewParams['main'] = $this->main;
+    $this->viewParams['app'] = $this->hubletoApp;
     // $this->viewParams['help'] = $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class);
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;

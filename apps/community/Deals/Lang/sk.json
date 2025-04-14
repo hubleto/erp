@@ -87,5 +87,8 @@
     "Models\\Tag": {
         "Name": "",
         "Color": ""
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": ""
     }
 }

@@ -73,7 +73,7 @@
       <div class="app-launcher-header">
         <input placeholder="Search app..." onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
       </div>
-      {% for app in viewParams.main.appManager.getRegisteredApps() %}
+      {% for app in viewParams.main.apps.getRegisteredApps() %}
         <a
           class='btn app-launcher-app-button'
           href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"

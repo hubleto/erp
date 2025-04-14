@@ -178,6 +178,12 @@ class App {
     return 'apps/' . $this->main->apps->getAppNameForConfig($this->namespace) . '/' . $path;
   }
 
+  public function saveConfig(string $path, string $value = ''): void
+  {
+    $this->main->config->save($this->getFullConfigPath($path), $value);
+  }
+
+
   public function configAsString(string $path, string $defaultValue = ''): string
   {
     return (string) $this->main->config->get($this->getFullConfigPath($path), $defaultValue);

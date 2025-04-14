@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import Form, { FormDescription, FormProps, FormState } from "adios/Form";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { Bar, Doughnut, Pie, Line } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarController, BarElement, CategoryScale, LinearScale, PointElement, LineElement, LineController } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend, BarController, BarElement, CategoryScale, LinearScale, PointElement, LineElement, LineController);
 
-export type HubletoChartType = 'bar' | 'doughnut' | 'goals';
+export type HubletoChartType = 'bar' | 'doughnut' | 'pie' | 'goals';
 
 export interface HubletoChartProps {
   type: HubletoChartType,
   data: any,
+  legend?: any,
 }
 
 export interface HubletoChartState {}
@@ -23,6 +24,7 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
   }
 
   render(): JSX.Element {
+    console.log('hubletoChart data', this.props.data);
     switch (this.props.type) {
       case "bar":
         return (
@@ -54,13 +56,38 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
         );
       case "doughnut":
         return (
-          <div className="w-[35vh]">
+          <div className="h-full m-auto relative">
             <Doughnut
               options={{
                 responsive: true,
                 plugins: {
-                  legend: {
-                    display: false
+                  legend: this.props.legend ? this.props.legend : {
+                    display: false,
+                  },
+                },
+              }}
+              data={{
+                labels: this.props.data ? [...this.props.data.labels] : [],
+                datasets: [
+                  {
+                    data: this.props.data ? [...this.props.data.values] : [],
+                    backgroundColor: this.props.data != null ? [...this.props.data.colors] : [],
+                  },
+                ],
+              }}
+            />
+          </div>
+        );
+      case "pie":
+        return (
+          <div className="h-full w-full m-auto relative">
+            <Pie
+              options={{
+                responsive: true,
+                aspectRatio: 2,
+                plugins: {
+                  legend: this.props.legend ? this.props.legend : {
+                    display: false,
                   },
                 },
               }}

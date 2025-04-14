@@ -56,11 +56,6 @@
         "Pipeline": "Kanál",
         "Color": "Farba"
     },
-    "Models\\DealStatus": {
-        "Name": "Názov",
-        "Order": "Poradie",
-        "Color": "Farba"
-    },
     "Models\\Tag": {
         "Name": "Názov",
         "Color": "Farba"

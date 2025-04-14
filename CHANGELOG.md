@@ -9,6 +9,7 @@
   * added context-based user guide, check https://help.hubleto.com
   * improved report manager
   * many bugfixes and performance improvements
+  * new `DashboardManager` in the Community/Desktop app
 
 ## Release v0.9
 

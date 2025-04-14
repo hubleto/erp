@@ -36,7 +36,6 @@ class Deal extends \HubletoMain\Core\Model
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
-    'STATUS' => [ self::HAS_ONE, DealStatus::class, 'id', 'id_deal_status'],
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
@@ -65,10 +64,9 @@ class Deal extends \HubletoMain\Core\Model
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
-      'id_deal_status' => (new Lookup($this, $this->translate('Status'), DealStatus::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
-      'deal_progress' => (new Integer($this, $this->translate('Deal Progress')))
-        ->setEnumValues([0 => "Lost", 1 => "Won", 2 => "Pending"])->setDefaultValue(2),
-      'date_progress_update' => (new DateTime($this, $this->translate('Date of progress update')))->setReadonly(),
+      'deal_result' => (new Integer($this, $this->translate('Deal Result')))
+        ->setEnumValues([1 => "Lost", 2 => "Won", 3 => "Pending"])->setDefaultValue(3),
+      'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
     ]);
   }
 
@@ -112,7 +110,7 @@ class Deal extends \HubletoMain\Core\Model
     unset($description->columns['id_lead']);
     unset($description->columns['id_pipeline']);
     unset($description->columns['shared_folder']);
-    unset($description->columns['date_progress_update']);
+    unset($description->columns['date_result_update']);
 
     if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [
@@ -145,7 +143,6 @@ class Deal extends \HubletoMain\Core\Model
 
     $description = parent::describeForm();
     $description->defaultValues['is_archived'] = 0;
-    $description->defaultValues['id_deal_status'] = 1;
     $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_currency'] = $defaultCurrency;
     $description->defaultValues['id_pipeline'] = $defaultPipeline;

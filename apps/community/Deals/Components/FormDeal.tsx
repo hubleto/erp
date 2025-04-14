@@ -91,27 +91,27 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <div onClick={() => {
         let now = moment().unix();
         let progress_date = moment.unix(now).format('YYYY-MM-DD HH:mm:ss');
-        this.updateRecord({deal_progress: 1, date_progress_update: progress_date});
+        this.updateRecord({deal_result: 1, date_result_update: progress_date});
         this.saveRecord();
       }}
-        className={`btn ${this.state.record.deal_progress == 0 ? "!bg-gray-500" : ""}`}
+        className={`btn ${this.state.record.deal_result == 0 ? "!bg-gray-500" : ""}`}
       >
         <span className='text'>Won</span>
       </div>
       <div onClick={() => {
           let now = moment().unix();
           let progress_date = moment.unix(now).format('YYYY-MM-DD HH:mm:ss');
-          this.updateRecord({deal_progress: 0, date_progress_update: progress_date});
+          this.updateRecord({deal_result: 0, date_result_update: progress_date});
           this.saveRecord();
         }}
-        className={`btn ${this.state.record.deal_progress == 1 ? "!bg-gray-500" : "!bg-red-500"}`}
+        className={`btn ${this.state.record.deal_result == 1 ? "!bg-gray-500" : "!bg-red-500"}`}
       >
         <span className='text'>Lost</span>
       </div>
     </>
   }
 
-  changeDealStatus(idStep: number, R: any) {
+  changeDealStep(idStep: number, R: any) {
     if (idStep == R.id_pipeline_step) return;
     request.get(
       'deals/change-pipeline-step',
@@ -243,7 +243,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                         })}
                         {this.inputWrapper('id_currency')}
                       </div>
-                      {this.inputWrapper('id_deal_status', {readonly: R.is_archived})}
                       {showAdditional && R.id_lead != null ?
                         <div className='mt-2'>
                           <a className='btn btn-primary self-center' href={`leads?recordId=${R.id_lead}`}>
@@ -303,7 +302,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               return (
                                 <>
                                   <button
-                                    onClick={R.is_archived ? null : ()=>{this.changeDealStatus(s.id, R)}}
+                                    onClick={R.is_archived ? null : ()=>{this.changeDealStep(s.id, R)}}
                                     className={`flex px-3 h-[50px] justify-center btn ${statusColor}`}
                                   >
                                     <span className='text text-center self-center !h-auto'>{s.name}</span>

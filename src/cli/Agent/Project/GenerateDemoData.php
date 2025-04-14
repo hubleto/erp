@@ -646,7 +646,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     foreach ($leads as $lead) { // @phpstan-ignore-line
       $pipeline = rand(1,2);
-      $progress = rand(0,2);
+      $result = rand(1,3);
       if ($pipeline === 1) $pipelineStep = rand(1,3);
       else $pipelineStep = rand(4,7);
 
@@ -668,10 +668,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_pipeline" => $pipeline,
         "id_pipeline_step" => $pipelineStep,
         "id_lead" => $lead->id,
-        "id_deal_status" => rand(1, 4),
-        "deal_progress" => $progress,
+        "deal_result" => $result,
         "date_created" => $dealDateCreated,
-        "date_progress_update" => $progress != 2 ? $dealDateClose : null,
+        "date_result_update" => $result != 2 ? $dealDateClose : null,
       ])['id'];
 
       $mLeadHistory->record->create([
@@ -693,11 +692,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         ]);
       }
 
-      $leadTag = $mLeadTag->eloquent
-        ->where("id_lead", $lead->id)
-        ->first()
-      ;
-
       $mDealActivity->record->create([
         "subject" => "Follow-up call",
         "date_start" => $dealDateCreated,
@@ -709,7 +703,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
       $mDealTag->record->create([
         "id_deal" => $idDeal,
-        "id_tag" => $leadTag->id_tag
+        "id_tag" => rand(1,5)
       ]);
     }
   }

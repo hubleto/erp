@@ -1,19 +1,10 @@
-<div class="grid grid-cols-3 gap-4">
-  <div class="card">
-    <div class="card-header">
-      <h3>Value of Deals</h3>
-    </div>
-    <div class="flex flex-row justify-around">
-      <div>
-          <p>Number of open deals</p>
-          <h2>{{ viewParams.result.count }}</h2>
-        </div>
-      <div>
-          <p>Value of opened deals</p>
-          <h2>{{ viewParams.result.price }}</h2>
-        </div>
-      </div>
-    </div>
+<div class="flex gap-2">
+  <div class="card card-header">
+    Open deals: {{ viewParams.result.count }}
+  </div>
+  <div class="card card-header">
+    Total value: {{ viewParams.main.locale.formatCurrency(viewParams.result.price) }}
+  </div>
 </div>
 
 <app-sales-table-deals int:record-id="{{ viewParams.recordId }}"></app-sales-table-deals>

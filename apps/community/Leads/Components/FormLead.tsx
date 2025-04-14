@@ -276,7 +276,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   <div className='card-body flex flex-col gap-2'>
                     {!R.is_archived ? (
                       <a
-                        role="button"
+                        className="btn btn-add-outline mb-2"
                         onClick={() => {
                           if (!R.SERVICES) R.SERVICES = [];
                           R.SERVICES.push({
@@ -285,8 +285,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                             amount: 1,
                           });
                           this.setState({ record: R, isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormLeadState);
-                        }}>
-                        + Add service
+                        }}
+                      >
+                        <span className="icon"><i className="fas fa-add"></i></span>
+                        <span className="text">Add service</span>
                       </a>
                     ) : null}
                     <div className='w-full h-full overflow-x-auto'>
@@ -486,10 +488,11 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
               <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               {!R.is_archived ?
                 <a
-                  role="button"
+                  className="btn btn-add-outline mb-2"
                   onClick={() => this.setState({showIdDocument: -1} as FormLeadState)}
                 >
-                  + Add Document
+                  <span className="icon"><i className="fas fa-add"></i></span>
+                  <span className="text">Add document</span>
                 </a>
               : null}
               <TableLeadDocuments

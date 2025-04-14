@@ -49,6 +49,7 @@
   #app-launcher > div .app-launcher-app-button .text { @apply p-4 text-center; }
 
   .btn-add { @apply bg-amber-600 hover:bg-amber-400; }
+  .btn-add-outline { @apply border-amber-600 text-amber-600 border-solid hover:bg-amber-600/20; }
   .btn-edit { @apply bg-amber-600 hover:bg-amber-400; }
 
   .modal-header-title h2 { @apply dark:text-white; }

@@ -328,7 +328,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                           <div className='w-full h-full overflow-x-auto'>
                           {!R.is_archived ?
                             <a
-                              role="button"
+                              className="btn btn-add-outline mb-2"
                               onClick={() => {
                                 if (!R.SERVICES) R.SERVICES = [];
                                 R.SERVICES.push({
@@ -337,8 +337,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                   amount: 1
                                 });
                                 this.setState({ record: R, isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormDealState);
-                              }}>
-                              + Add service
+                              }}
+                            >
+                            <span className="icon"><i className="fas fa-add"></i></span>
+                            <span className="text">Add service</span>
                             </a>
                           : <></>}
                             <TableDealServices
@@ -540,10 +542,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               {!R.is_archived ?
                 <a
-                  role="button"
+                  className="btn btn-add-outline mb-2"
                   onClick={() => this.setState({showIdDocument: -1} as FormDealState)}
                 >
-                  + Add Document
+                  <span className="icon"><i className="fas fa-add"></i></span>
+                  <span className="text">Add document</span>
                 </a>
               : null}
               <TableDealDocuments

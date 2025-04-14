@@ -348,7 +348,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   <div className="card-header">{this.translate('Contact persons')}</div>
                   <div className="card-body">
                     <a
-                      className="btn btn-add mb-2"
+                      className="btn btn-add-outline mb-2"
                       onClick={() => {
                         if (!R.PERSONS) R.PERSONS = [];
                         this.setState({createNewPerson: true} as FormCustomerState);
@@ -434,9 +434,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           {showAdditional ? (
             <TabPanel header={this.translate('Leads')}>
               <a
-                role="button"
-                onClick={() => {this.setState({ createNewLead: true } as FormCustomerState);}}>
-                + Add Lead
+                className="btn btn-add-outline mb-2"
+                onClick={() => {this.setState({ createNewLead: true } as FormCustomerState);}}
+              >
+                <span className="icon"><i className="fas fa-add"></i></span>
+                <span className="text">Add lead</span>
               </a>
               <TableLeads
                 uid={this.props.uid + "_table_leads"}
@@ -478,9 +480,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           {showAdditional ? (
             <TabPanel header={this.translate('Deals')}>
               <a
-                role="button"
-                onClick={() => {this.setState({ createNewDeal: true } as FormCustomerState);}}>
-                + Add Deal
+                className="btn btn-add-outline mb-2"
+                onClick={() => {this.setState({ createNewDeal: true } as FormCustomerState);}}
+              >
+                <span className="icon"><i className="fas fa-add"></i></span>
+                <span className="text">Add deal</span>
               </a>
               <TableDeals
                 uid={this.props.uid + "_table_deals"}
@@ -525,10 +529,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
               <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               <a
-                role="button"
+                className="btn btn-add-outline mb-2"
                 onClick={() => this.setState({showIdDocument: -1} as FormCustomerState)}
               >
-                + Add Document
+                <span className="icon"><i className="fas fa-add"></i></span>
+                <span className="text">Add document</span>
               </a>
               <TableCustomerDocuments
                 uid={this.props.uid + "_table_deals"}

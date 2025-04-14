@@ -5,7 +5,7 @@
         <td>{{ deal.title }}</td>
         <td>{{ viewParams.main.locale.formatCurrency(deal.price, deal.CURRENCY.code ?? '') }}</td>
         <td class="text-right">
-          <a href="deals?recordId={{ deal.id }}" class="btn btn-transparent">
+          <a href="deals/{{ deal.id }}" class="btn btn-transparent">
             <span class="icon"><i class="fas fa-arrow-right"></i></span>
             <span class="text">{{ translate('Open deal') }}</span>
           </a>

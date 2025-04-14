@@ -111,7 +111,7 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
               ></TablePipelineSteps>
               {this.state.isInlineEditing ? (
                 <a
-                  role="button"
+                  className="btn btn-add-outline"
                   onClick={() => {
                     if (!R.PIPELINE_STEPS) R.PIPELINE_STEPS = [];
                     R.PIPELINE_STEPS.push({
@@ -120,7 +120,8 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
                     this.setState({ record: R });
                   }}
                 >
-                  + Add Pipeline Step
+                  <span className="icon"><i className="fas fa-add"></i></span>
+                  <span className="text">Add step</span>
                 </a>
               ) : null}
             </div>

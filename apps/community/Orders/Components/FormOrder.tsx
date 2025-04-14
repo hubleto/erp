@@ -102,8 +102,8 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
             {R.id > 0 ?
               <>
                 <div className='card-body border-t border-gray-200'>
-                  <a className='ml-2 mb-2 block'
-                    role="button"
+                  <a
+                    className="btn btn-add-outline mb-2"
                     onClick={() => {
                       this.setState({ isInlineEditing: true});
                       if (!R.PRODUCTS) R.PRODUCTS = [];
@@ -117,8 +117,10 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                       });
                       this.setState({ record: R });
                       this.setState({ newEntryId: this.state.newEntryId - 1 } as FormOrderState);
-                    }}>
-                    + Add product
+                    }}
+                  >
+                    <span className="icon"><i className="fas fa-add"></i></span>
+                    <span className="text">Add product</span>
                   </a>
                   <div className='w-full h-full overflow-x-auto'>
                     <TableOrderProducts

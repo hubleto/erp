@@ -10,7 +10,7 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^deals\/?$/' => Controllers\Deals::class,
+      '/^deals(\/(?<recordId>\d+))?\/?$/' => Controllers\Deals::class,
       '/^deals\/settings\/?$/' => Controllers\Settings::class,
       '/^deals\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,

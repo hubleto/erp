@@ -73,7 +73,8 @@
         "Document": ""
     },
     "root": {
-        "Deal statuses": ""
+        "Deal statuses": "",
+        "Deal Tags": ""
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendár",
@@ -82,5 +83,9 @@
         "History": "História",
         "Go to original lead": "Prejsť na pôvodný lead",
         "Documents": "Dokumenty"
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
     }
 }

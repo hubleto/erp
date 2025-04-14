@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Dashboard\Controllers;
+namespace HubletoApp\Community\Desktop\Controllers;
 
 class Home extends \HubletoMain\Core\Controller {
 
@@ -16,7 +16,7 @@ class Home extends \HubletoMain\Core\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Dashboard/Home.twig');
+    $this->setView('@HubletoApp:Community:Desktop/Home.twig');
   }
 
 }

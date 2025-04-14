@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Dashboard\Tests;
+namespace HubletoApp\Community\Desktop\Tests;
 
 class RenderAllRoutes extends \HubletoMain\Core\AppTest
 {

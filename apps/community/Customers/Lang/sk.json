@@ -63,5 +63,12 @@
         "Add contact person": "Pridať kontaktnú osobu",
         "Phone number": "Tel. č.",
         "Email": "Email"
+    },
+    "root": {
+        "Customer Tags": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
     }
 }

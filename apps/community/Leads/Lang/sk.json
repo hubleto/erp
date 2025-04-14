@@ -52,7 +52,8 @@
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok"
     },
     "root": {
-        "Lead statuses": ""
+        "Lead statuses": "",
+        "Lead Tags": ""
     },
     "Models\\LeadHistory": {
         "Change Date": "",
@@ -83,5 +84,9 @@
         "History": "História",
         "Local documents": "Dokumenty",
         "Go to deal": "Prejsť na deal"
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
     }
 }

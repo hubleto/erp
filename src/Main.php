@@ -63,8 +63,6 @@ class HubletoMain extends \ADIOS\Core\Loader
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
   public \HubletoMain\Core\ReleaseManager $release;
-  public \HubletoMain\Core\Sidebar $sidebar;
-  public \HubletoMain\Core\Help $help;
   public \HubletoMain\Core\AppManager $apps;
 
   public bool $isPremium = false;
@@ -85,7 +83,6 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->release->load();
 
     $this->apps = new \HubletoMain\Core\AppManager($this);
-    $this->sidebar = new \HubletoMain\Core\Sidebar($this);
 
     $this->permissions->init();
     $this->apps->init();
@@ -122,11 +119,6 @@ class HubletoMain extends \ADIOS\Core\Loader
     if (isset($this->twigLoader) && is_dir($folder)) {
       $this->twigLoader->addPath($folder, $namespace);
     }
-  }
-
-  public function getSidebar(): \HubletoMain\Core\Sidebar
-  {
-    return $this->sidebar;
   }
 
   public function createAuthProvider(): \ADIOS\Core\Auth

@@ -23,8 +23,6 @@ class App {
   public string $namespace = '';
   public string $fullName = '';
 
-  public \HubletoMain\Core\Sidebar $sidebar;
-
   public string $translationContext = '';
 
   public static function canBeAdded(\HubletoMain $main): bool
@@ -45,8 +43,6 @@ class App {
 
     $this->viewNamespace = $this->namespace;
     $this->viewNamespace = str_replace('\\', ':', $this->viewNamespace);
-
-    $this->sidebar = new \HubletoMain\Core\Sidebar($this->main);
 
     $manifestFile = $this->rootFolder . '/manifest.yaml';
     if (is_file($manifestFile)) $this->manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($manifestFile));

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Dashboard;
+namespace HubletoApp\Community\Desktop;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -8,6 +8,14 @@ class Loader extends \HubletoMain\Core\App
   const DEFAULT_INSTALLATION_CONFIG = [
     'sidebarOrder' => 0,
   ];
+
+  public SidebarManager $sidebar;
+
+  public function __construct(\HubletoMain $main)
+  {
+    parent::__construct($main);
+    $this->sidebar = new SidebarManager($main);
+  }
 
   public function init(): void
   {
@@ -28,8 +36,8 @@ class Loader extends \HubletoMain\Core\App
   {
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
-      "HubletoApp/Community/Dashboard/Home",
-      "HubletoApp/Community/Dashboard/Controllers/Home",
+      "HubletoApp/Community/Desktop/Home",
+      "HubletoApp/Community/Desktop/Controllers/Home",
     ];
 
     foreach ($permissions as $permission) {

@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoMain\Core;
+namespace HubletoApp\Community\Desktop;
 
-class Sidebar {
+class SidebarManager {
   const ITEM_LINK = 'link';
   const ITEM_DIVIDER = 'divider';
   const ITEM_HEADING_1 = 'heading_1';

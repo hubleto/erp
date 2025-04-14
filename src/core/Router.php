@@ -22,7 +22,8 @@ class Router extends \ADIOS\Core\Router {
 
   public function createDesktopController(): \ADIOS\Core\Controller
   {
-    return new \HubletoMain\Core\ControllerDesktop($this->app);
+    // return new \HubletoMain\Core\ControllerDesktop($this->app);
+    return new \HubletoApp\Community\Desktop\Controllers\Desktop($this->app);
   }
 
 }

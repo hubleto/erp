@@ -45,11 +45,6 @@
         "Order": "Ordre",
         "Company": "Entreprise"
     },
-    "models.dealStatus": {
-        "Name": "Nom",
-        "Order": "Ordre",
-        "Color": "Couleur"
-    },
     "models.tag": {
         "Name": "Nom",
         "Color": "Couleur"

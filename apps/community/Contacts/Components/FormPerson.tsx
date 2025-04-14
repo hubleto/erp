@@ -79,15 +79,43 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
         if (response.result == true) {
           this.updateRecord({is_primary: 1})
         } else {
-          globalThis.main.showDialogDanger(<>
-            <p className='text'>{response.error ?? "Unknown error"}</p>
-            <p className='text'>{response.names != null ? response.names : ""}</p>
-          </>,
-          {}
+          globalThis.main.showDialogDanger(
+            <>
+              <p className='text'>{response.error ?? "Unknown error"}</p>
+              <p className='text'>{response.names != null ? response.names : ""}</p>
+            </>,
+            {}
           )
         }
       }
     )
+  }
+
+  onBeforeSaveRecord(record: any) {
+    var willExistOne = false;
+    //check if there is any contacts set
+    if (record.CONTACTS == null || record.CONTACTS.length < 1) {
+      globalThis.main.showDialogDanger(
+        <p>You need to have at least one contact set.</p>,
+        {}
+      )
+      throw new Error("You need to have at least one contact set!");
+    } else {
+      //check if there is going to be at least one contact that is going to be
+      //saved after update
+      for (const [key, value] of Object.entries(record.CONTACTS)) {
+        if (value._toBeDeleted_ == null) willExistOne = true;
+      }
+      if (willExistOne == false) {
+        globalThis.main.showDialogDanger(
+          <p>You need to have at least one contact set before deleting all the others</p>,
+          {}
+        )
+        throw new Error("You need to have at least one contact set before deleting all the others");
+      }
+    }
+
+    return record;
   }
 
   renderContent(): JSX.Element {

@@ -64,7 +64,7 @@ class Loader extends \HubletoMain\Core\App
 
       $mLeadStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
       $mLeadStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
-      $mLeadStatus->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'color' => '#42ddf5' ]);
+      $mLeadStatus->eloquent->create([ 'name' => 'Completed', 'order' => 3, 'color' => '#42ddf5' ]);
       $mLeadStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
     }
   }

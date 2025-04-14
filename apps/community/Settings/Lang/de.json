@@ -45,11 +45,6 @@
         "Order": "Reihenfolge",
         "Company": "Farbe"
     },
-    "models.dealStatus": {
-        "Name": "Titel",
-        "Order": "Reihenfolge",
-        "Color": "Farbe"
-    },
     "models.tag": {
         "Name": "Titel",
         "Color": "Farbe"
@@ -139,11 +134,6 @@
         "Name": "",
         "Order": "",
         "Company": ""
-    },
-    "models.dealstatus": {
-        "Name": "",
-        "Order": "",
-        "Color": ""
     },
     "controllers.users": {
         "Settings": "",

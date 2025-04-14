@@ -18,7 +18,7 @@ class Translator extends \ADIOS\Core\Translator {
 
   //   $language = $this->main->getLanguage();
 
-  //   foreach ($this->main->appManager->getRegisteredApps() as $app) {
+  //   foreach ($this->main->apps->getRegisteredApps() as $app) {
   //     if (str_starts_with($context, $app->fullName)) {
   //       $dictionaryFilename = $app->rootFolder . '/Lang/' . $language . '.json';
   //     }
@@ -39,7 +39,7 @@ class Translator extends \ADIOS\Core\Translator {
 //     if ($class == \HubletoMain\Core::class) {
 //       $dictionaryFilename = __DIR__ . '/../../lang/' . $language . '.json';
 //     } else if (str_starts_with($class, 'HubletoApp')) {
-//       $app = $this->main->appManager->getAppInstance($class);
+//       $app = $this->main->apps->getAppInstance($class);
 //       $dictionaryFilename = $app->rootFolder . '/lang/' . $language . '.json';
 //     }
 
@@ -90,8 +90,8 @@ class Translator extends \ADIOS\Core\Translator {
       }
     }
 
-    if (isset($this->main->appManager)) {
-      foreach ($this->main->appManager->getRegisteredApps() as $app) {
+    if (isset($this->main->apps)) {
+      foreach ($this->main->apps->getRegisteredApps() as $app) {
         $appDict = $app->loadDictionary($language);
         foreach ($appDict as $key => $value) {
           $dictionary[$app->fullName][(string) $key] = $value;
@@ -113,7 +113,7 @@ class Translator extends \ADIOS\Core\Translator {
     } else if (str_starts_with($contextFileRef, 'HubletoApp')) {
       $appClass = str_replace('/', '\\', $contextFileRef);
   
-      $app = $this->main->appManager->getAppInstance($appClass);
+      $app = $this->main->apps->getAppInstance($appClass);
       if ($app) {
         $dictionaryFilename = $app->rootFolder . '/Lang/' . $language . '.json';
       }

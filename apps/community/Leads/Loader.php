@@ -29,9 +29,10 @@ class Loader extends \HubletoMain\Core\App
       'url' => 'settings/lead-tags',
     ]);
 
-    $this->main->calendarManager->addCalendar(Calendar::class);
+    $calendarManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Calendar::class)->calendarManager;
+    $calendarManager->addCalendar(Calendar::class);
 
-    $this->main->help->addContextHelpUrls('/^leads\/?$/', [
+    $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class)->addContextHelpUrls('/^leads\/?$/', [
       'en' => 'en/apps/community/leads',
     ]);
   }

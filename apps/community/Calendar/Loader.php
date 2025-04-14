@@ -7,6 +7,14 @@ use HubletoApp\Community\Calendar\Models\Activity;
 class Loader extends \HubletoMain\Core\App
 {
 
+  public CalendarManager $calendarManager;
+
+  public function __construct(\HubletoMain $main)
+  {
+    parent::__construct($main);
+    $this->calendarManager = new CalendarManager($main);
+  }
+
   public function init(): void
   {
     parent::init();
@@ -16,7 +24,7 @@ class Loader extends \HubletoMain\Core\App
       '/^calendar\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
-    $this->main->help->addContextHelpUrls('/^calendar\/?$/', [
+    $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class)->addContextHelpUrls('/^calendar\/?$/', [
       'en' => 'en/apps/community/calendar',
     ]);
   }

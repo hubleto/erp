@@ -31,7 +31,8 @@ class Loader extends \HubletoMain\Core\App
 
     $this->setConfigAsInteger('sidebarOrder', 0);
 
-    $this->main->calendarManager->addCalendar(Calendar::class);
+    $calendarManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Calendar::class)->calendarManager;
+    $calendarManager->addCalendar(Calendar::class);
   }
 
   public function installTables(int $round): void

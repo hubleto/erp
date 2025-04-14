@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoMain\Core;
+namespace HubletoApp\Community\Calendar;
 
 class CalendarManager
 {

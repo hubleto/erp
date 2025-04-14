@@ -159,7 +159,7 @@ class Installer {
   public function installApps(int $round): void
   {
     foreach ($this->appsToInstall as $appNamespace => $appConfig) {
-      $this->main->appManager->installApp($round, $appNamespace, $appConfig, true);
+      $this->main->apps->installApp($round, $appNamespace, $appConfig, true);
     }
   }
 
@@ -263,7 +263,7 @@ class Installer {
 
   public function installDefaultPermissions(): void
   {
-    $apps = $this->main->appManager->getRegisteredApps();
+    $apps = $this->main->apps->getRegisteredApps();
     array_walk($apps, function($apps) {
       $apps->installDefaultPermissions();
     });

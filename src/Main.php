@@ -65,9 +65,7 @@ class HubletoMain extends \ADIOS\Core\Loader
   public \HubletoMain\Core\ReleaseManager $release;
   public \HubletoMain\Core\Sidebar $sidebar;
   public \HubletoMain\Core\Help $help;
-  public \HubletoMain\Core\CalendarManager $calendarManager;
-  public \HubletoMain\Core\ReportManager $reportManager;
-  public \HubletoMain\Core\AppManager $appManager;
+  public \HubletoMain\Core\AppManager $apps;
 
   public bool $isPremium = false;
 
@@ -86,14 +84,11 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->release = new \HubletoMain\Core\ReleaseManager($this);
     $this->release->load();
 
-    $this->calendarManager = new \HubletoMain\Core\CalendarManager($this);
-    $this->reportManager = new \HubletoMain\Core\ReportManager($this);
-    $this->appManager = new \HubletoMain\Core\AppManager($this);
-    $this->help = new \HubletoMain\Core\Help($this);
+    $this->apps = new \HubletoMain\Core\AppManager($this);
     $this->sidebar = new \HubletoMain\Core\Sidebar($this);
 
     $this->permissions->init();
-    $this->appManager->init();
+    $this->apps->init();
 
   }
 

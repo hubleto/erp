@@ -5,6 +5,14 @@ namespace HubletoApp\Community\Reports;
 class Loader extends \HubletoMain\Core\App
 {
 
+  public ReportManager $reportManager;
+
+  public function __construct(\HubletoMain $main)
+  {
+    parent::__construct($main);
+    $this->reportManager = new ReportManager($main);
+  }
+
   public function init(): void
   {
     parent::init();

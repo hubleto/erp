@@ -15,7 +15,7 @@ class Home extends \HubletoMain\Core\Controller {
   {
     parent::prepareView();
 
-    $reports = $this->main->reportManager->getReports();
+    $reports = $this->main->apps->getAppInstance(\HubletoApp\Community\Reports::class)->reportManager->getReports();
     $this->viewParams['reports'] = $reports;
 
     $this->setView('@HubletoApp:Community:Reports/Home.twig');

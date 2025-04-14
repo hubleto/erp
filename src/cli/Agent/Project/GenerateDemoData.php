@@ -89,26 +89,26 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
 
     if (
-      $this->main->appManager->isAppInstalled("HubletoApp\Community\Documents") &&
-      $this->main->appManager->isAppInstalled("HubletoApp\Community\Customers") &&
-      $this->main->appManager->isAppInstalled("HubletoApp\Community\Contacts")
+      $this->main->apps->isAppInstalled("HubletoApp\Community\Documents") &&
+      $this->main->apps->isAppInstalled("HubletoApp\Community\Customers") &&
+      $this->main->apps->isAppInstalled("HubletoApp\Community\Contacts")
     ) {
       $this->generateCustomers($mCustomer, $mCustomerTag);
       $this->generatePersons($mPerson, $mPersonTag, $mContact);
     }
     //$this->generateActivities($mCustomer, $mActivity, $mCustomerActivity);
     if (
-      $this->main->appManager->isAppInstalled("HubletoApp\Community\Customers") &&
-      $this->main->appManager->isAppInstalled("HubletoApp\Community\Documents") &&
-      $this->main->appManager->isAppInstalled("HubletoApp\Community\Services") &&
-      $this->main->appManager->isAppInstalled("HubletoApp\Community\Deals") &&
-      $this->main->appManager->isAppInstalled("HubletoApp\Community\Leads")
+      $this->main->apps->isAppInstalled("HubletoApp\Community\Customers") &&
+      $this->main->apps->isAppInstalled("HubletoApp\Community\Documents") &&
+      $this->main->apps->isAppInstalled("HubletoApp\Community\Services") &&
+      $this->main->apps->isAppInstalled("HubletoApp\Community\Deals") &&
+      $this->main->apps->isAppInstalled("HubletoApp\Community\Leads")
     ) {
       $this->generateServices($mCustomer, $mService);
       $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
       $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity);
     }
-    if ($this->main->appManager->isAppInstalled("HubletoApp\Community\Products")) {
+    if ($this->main->apps->isAppInstalled("HubletoApp\Community\Products")) {
       $this->generateProducts($mProduct,$mGroup, $mSupplier);
     }
 

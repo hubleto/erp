@@ -30,10 +30,13 @@ class Loader extends \HubletoMain\Core\App
       'url' => 'settings/deal-tags',
     ]);
 
-    $this->main->calendarManager->addCalendar(Calendar::class);
-    $this->main->reportManager->addReport(Reports\MonthlyRevenue::class);
+    $calendarManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Calendar::class)->calendarManager;
+    $calendarManager->addCalendar(Calendar::class);
 
-    $this->main->help->addContextHelpUrls('/^deals\/?$/', [
+    $reportManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Reports::class)->reportManager;
+    $reportManager->addReport(Reports\MonthlyRevenue::class);
+
+    $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class)->addContextHelpUrls('/^deals\/?$/', [
       'en' => 'en/apps/community/deals',
     ]);
   }

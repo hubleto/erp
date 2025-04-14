@@ -11,13 +11,13 @@ class Controller extends \HubletoMain\Cli\Agent\Command
     $controller = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
 
-    $this->main->appManager->init();
+    $this->main->apps->init();
 
     if (empty($appNamespace)) throw new \Exception("<appNamespace> not provided.");
     if (empty($controller)) throw new \Exception("<controller> not provided.");
 
     // $appManager = new \HubletoMain\Core\AppManager($this->main);
-    $app = $this->main->appManager->getAppInstance($appNamespace);
+    $app = $this->main->apps->getAppInstance($appNamespace);
 
     if (!$app) throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
 

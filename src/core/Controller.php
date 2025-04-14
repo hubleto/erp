@@ -78,11 +78,11 @@ class Controller extends \ADIOS\Core\Controller
     parent::prepareView();
 
     $this->viewParams['main'] = $this->main;
-    $this->viewParams['help'] = $this->main->help;
+    // $this->viewParams['help'] = $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class);
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
 
-    $appsInSidebar = $this->main->appManager->getRegisteredApps();
+    $appsInSidebar = $this->main->apps->getRegisteredApps();
 
     foreach ($appsInSidebar as $appNamespace => $app) {
       if ($app->configAsInteger('sidebarOrder') <= 0) {
@@ -103,7 +103,7 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
 
-    $contextHelpUrls = $this->main->help->getCurrentContextHelpUrls($this->main->route);
+    $contextHelpUrls = $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class)->getCurrentContextHelpUrls($this->main->route);
     $user = $this->main->auth->getUser();
 
     if (isset($contextHelpUrls[$user['language']])) $contextHelpUrl = $contextHelpUrls[$user['language']];

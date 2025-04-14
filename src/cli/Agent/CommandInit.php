@@ -144,7 +144,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->main->config->set('db_password', $dbPassword);
     $this->main->config->set('db_name', $dbName);
 
-    $this->main->appManager->setCli($this->cli);
+    $this->main->apps->setCli($this->cli);
 
     $this->cli->cyan("\n");
     $this->cli->cyan("Hurray. Installing your Hubleto packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");

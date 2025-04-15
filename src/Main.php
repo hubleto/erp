@@ -1,6 +1,7 @@
 <?php
 
 use \ADIOS\Core\Helper;
+use HubletoMain\Core\Token;
 
 // autoloader pre HubletoMain
 spl_autoload_register(function(string $class) {

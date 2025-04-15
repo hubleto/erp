@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel='shortcut icon' href='{{ config.url }}/assets/images/logo-hubleto.png'>
+  <title>Hubleto</title>
+
+  <script src='{{ config.accountUrl }}/adios/cache.js'></script>
+
+  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/fontawesome-6.6.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/css/main.css">
+
+  <style>
+    @font-face {
+      font-family: 'Fredoka-Regular';
+      font-style: normal;
+      font-weight: 500;
+      src: url({{ config.url }}/assets/fonts/Fredoka/static/Fredoka-Regular.ttf) format('truetype');
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="sign-in-screen">
+    <div class="inner">
+      <div class="logo">
+        <img src="{{ config.url }}/assets/images/logo-hubleto-s-textom.png" style="height:5em;margin-bottom:1em; width: auto;" />
+      </div>
+      <div class="form">
+        <form class="content" id="login_form" action="" method="POST">
+          <input type="hidden" name="set-language" id="set-language" value="{{ app.getLanguage() }}">
+          <input type="hidden" name="authUser" id="authUser" value="1">
+
+          <div class="text-xl text-primary text-center pt-8 pb-4">{{ config.accountFullName }}</div>
+
+          {% block error %}
+            {% if viewParams.status %}
+              <div class="alert alert-danger">Email or password invalid. Try again.</div>
+            {% endif %}
+          {% endblock %}
+
+          {% block inputs %}
+            <input
+              type="text" name="login" value="{{ login }}" placeholder="{{ translate("Your email") }}" autofocus
+              onkeypress='if (event.keyCode == 13) { document.getElementById("login_form").submit(); }'
+            />
+
+            <input
+              type="password" name="password" placeholder="{{ translate("Password") }}"
+              onkeypress='if (event.keyCode == 13) { document.getElementById("login_form").submit(); }'
+            />
+
+            <div class="my-2">
+              <input type="checkbox" id="keep_logged_in" name="keep_logged_in" value="1" checked>
+              <label for="keep_logged_in">{{ translate("Keep signed in") }}</label>
+            </div>
+          {% endblock %}
+
+          <div class="flex justify-between">
+            <div>
+              {% block button %}
+              <button type="submit" class="btn btn-large mt-4">
+                <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                <span class="text">{{ translate("Sign in") }}</span>
+              </button>
+              {% endblock %}
+            </div>
+            <div>
+              <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+              <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+              <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+              <a href="?set-language=cz" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cz.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="text-xs text-gray-400 text-right" style="position:fixed;right:0;bottom:0;padding:0.5em">
+    Release<br/>
+    [{{ app.release.getVersion() }}] {{ app.release.getCodename() }}
+  </div>
+</body>
+</html>

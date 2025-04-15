@@ -151,8 +151,9 @@ class Installer {
 
   }
 
-  public function installConfigModel(): void
+  public function installBaseModels(): void
   {
+    (new \HubletoMain\Core\Token($this->main))->install();
     (new \ADIOS\Models\Config($this->main))->install();
   }
 

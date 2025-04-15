@@ -21,6 +21,17 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
     return new \HubletoApp\Community\Settings\Models\User($this->app);
   }
 
+  public function forgotPassword(): void
+  {
+    $login = $this->app->urlParamAsString('login');
+
+    $mToken = new Token($this->app);
+    $mToken->eloquent->create([
+      'login' => $login,
+      'token' => bin2hex(random_bytes(16)),
+    ]);
+  }
+
   public function auth(): void
   {
     parent::auth();

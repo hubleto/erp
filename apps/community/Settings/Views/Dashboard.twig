@@ -74,10 +74,12 @@
           </div>
         </div>
         <div>
-          <a class="btn btn-transparent" href="{{ app.manifest.rootUrlSlug }}/settings">
-            <span class="icon"><i class="fas fa-cog"></i></span>
-            <span class="text">{{ translate('Settings') }}</span>
-          </a>
+          {% if app.hasCustomSettings %}
+            <a class="btn btn-transparent" href="{{ app.manifest.rootUrlSlug }}/settings">
+              <span class="icon"><i class="fas fa-cog"></i></span>
+              <span class="text">{{ translate('Settings') }}</span>
+            </a>
+          {% endif %}
           <a class="btn btn-transparent" href="{{ app.manifest.rootUrlSlug }}">
             <span class="icon"><i class="fas fa-arrow-right"></i></span>
             <span class="text">{{ translate('Open') }}</span>

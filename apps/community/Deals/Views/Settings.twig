@@ -27,15 +27,15 @@
   </div>
 
   <div class="input-wrapper">
-    <label class="input-label" for="showDealValueByStatusInDashboard">
-      Show 'Deal value by status' in dashboard
+    <label class="input-label" for="showDealValueByResultInDashboard">
+      Show 'Deal value by result' in dashboard
     </label>
     <input
       type="checkbox"
-      id="showDealValueByStatusInDashboard"
-      name="showDealValueByStatusInDashboard"
+      id="showDealValueByResultInDashboard"
+      name="showDealValueByResultInDashboard"
       style="zoom:2"
-      {% if viewParams.app.configAsBool('showDealValueByStatusInDashboard') %} checked {% endif %}
+      {% if viewParams.app.configAsBool('showDealValueByResultInDashboard') %} checked {% endif %}
       onchange="saveSettings();"
     />
   </div>

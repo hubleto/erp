@@ -1,6 +1,10 @@
 # Hubleto CHANGELOG
 
-## Release v0.10 (not released yet)
+## Release v0.11 (not released yet)
+
+  * `app.hasCustomSettings` property
+
+## Release v0.10
 
   * new app launcher
   * many new features to community apps
@@ -8,9 +12,11 @@
   * added dark theme
   * added context-based user guide, check https://help.hubleto.com
   * improved report manager
+  * added context help for some apps (Customers, Leads and Deals)
   * many bugfixes and performance improvements
   * new `DashboardManager` in the Community/Desktop app
   * shortcut `$this->main->apps->community($appName)` to get instance of community app
+  * added app-related settings
 
 ## Release v0.9
 

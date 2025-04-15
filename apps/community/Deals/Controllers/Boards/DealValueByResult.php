@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Deals\Controllers\Boards;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class DealValueByStatus extends \HubletoMain\Core\Controller {
+class DealValueByResult extends \HubletoMain\Core\Controller {
 
   public bool $hideDefaultDesktop = true;
 
@@ -15,12 +15,11 @@ class DealValueByStatus extends \HubletoMain\Core\Controller {
     $mDeal = new Deal($this->main);
 
     $deals = $mDeal->eloquent
-      ->selectRaw("id_deal_status, SUM(price) as price")
+      ->selectRaw("deal_result, SUM(price) as price")
       ->where("is_archived", 0)
       ->where("id_user", $this->main->auth->getUserId())
       ->with('CURRENCY')
-      ->with('STATUS')
-      ->groupBy('id_deal_status')
+      ->groupBy('deal_result')
       ->get()
       ->toArray()
     ;
@@ -31,15 +30,21 @@ class DealValueByStatus extends \HubletoMain\Core\Controller {
       'colors' => [],
     ];
 
+    $results = [
+      1 => ['name' => 'Lost', 'color' => 'red'],
+      2 => ['name' => 'Won', 'color' => 'green'],
+      3 => ['name' => 'Pending', 'color' => 'gray'],
+    ];
+
     foreach ($deals as $deal) {
-      $chartData['labels'][] = $deal['STATUS']['name'];
+      $chartData['labels'][] = $results[$deal['deal_result']]['name'];
       $chartData['values'][] = $deal['price'];
-      $chartData['colors'][] = $deal['STATUS']['color'];
+      $chartData['colors'][] = $results[$deal['deal_result']]['color'];
     }
 
     $this->viewParams['chartData'] = $chartData;
 
-    $this->setView('@HubletoApp:Community:Deals/Boards/DealValueByStatus.twig');
+    $this->setView('@HubletoApp:Community:Deals/Boards/DealValueByResult.twig');
   }
 
 }

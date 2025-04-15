@@ -25,6 +25,9 @@ class App {
 
   public string $translationContext = '';
 
+  public bool $isActivated = false;
+  public bool $hasCustomSettings = false;
+
   public static function canBeAdded(\HubletoMain $main): bool
   {
     return true;

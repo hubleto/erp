@@ -502,6 +502,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                   this.setState({
                     showIdActivity: parseInt(info.event.id),
                   } as FormDealState);
+                  info.jsEvent.preventDefault();
                 }}
               ></Calendar>
               {this.state.showIdActivity == 0 ? <></> :

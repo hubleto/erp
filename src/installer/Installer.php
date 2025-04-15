@@ -57,7 +57,7 @@ class Installer {
       \HubletoApp\Community\Services\Loader::class => [ 'sidebarOrder' => 200, ],
       \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210, 'calendarColor' => '#C63994' ],
       \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220, ],
-      \HubletoApp\Community\Deals\Loader::class => [ 'sidebarOrder' => 230, 'calendarColor' => '#D7B628', 'showMostValuableDealsInDashboard' => true ],
+      \HubletoApp\Community\Deals\Loader::class => [ 'sidebarOrder' => 230, 'calendarColor' => '#D7B628', 'showMostValuableDealsInDashboard' => true, 'showDealValueByResultInDashboard' => true ],
       \HubletoApp\Community\Goals\Loader::class => [ 'sidebarOrder' => 240, ],
     ],
     'shop' => [

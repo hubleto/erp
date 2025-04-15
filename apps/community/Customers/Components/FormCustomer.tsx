@@ -424,6 +424,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   this.setState({
                     showIdActivity: parseInt(info.event.id),
                   } as FormCustomerState);
+                  info.jsEvent.preventDefault();
                 }}
               ></Calendar>
               {this.state.showIdActivity == 0 ? <></> :

@@ -448,6 +448,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   this.setState({
                     showIdActivity: parseInt(info.event.id),
                   } as FormLeadState);
+                  info.jsEvent.preventDefault();
                 }}
               ></Calendar>
               {this.state.showIdActivity == 0 ? <></> :

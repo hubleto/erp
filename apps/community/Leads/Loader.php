@@ -5,12 +5,15 @@ namespace HubletoApp\Community\Leads;
 class Loader extends \HubletoMain\Core\App
 {
 
+  public bool $hasCustomSettings = true;
+
   public function init(): void
   {
     parent::init();
 
     $this->main->router->httpGet([
-      '/^leads\/?$/' => Controllers\Leads::class,
+      '/^leads(\/(?<recordId>\d+))?\/?$/' => Controllers\Leads::class,
+      '/^leads\/settings\/?$/' => Controllers\Settings::class,
       '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
       '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^leads\/convert-to-deal\/?$/' => Controllers\Api\ConvertLead::class,

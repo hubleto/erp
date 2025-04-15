@@ -7,10 +7,21 @@ class GetCalendarEvents extends \HubletoMain\Core\Controller {
 
   public function renderJson(): array
   {
+
+    if ($this->main->isUrlParam("start") && $this->main->isUrlParam("end")) {
+      $dateStart = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("start")));
+      $dateEnd = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("end")));
+    } else {
+      $dateStart = date("Y-m-d H:i:s");
+      $dateEnd = date("Y-m-d H:i:s", strtotime("+1 day"));
+    }
+
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
+
     return (array) $calendarManager
       ->getCalendar(\HubletoApp\Community\Deals\Calendar::class)
-      ->loadEvents()
+      ->loadEvents($dateStart, $dateEnd)
     ;
+
   }
 }

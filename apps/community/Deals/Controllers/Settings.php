@@ -28,6 +28,10 @@ class Settings extends \HubletoMain\Core\Controller
       $this->hubletoApp->setConfigAsBool('showDealValueByResultInDashboard', $showDealValueByResultInDashboard);
       $this->hubletoApp->saveConfig('showDealValueByResultInDashboard', $showDealValueByResultInDashboard ? '1' : '0');
 
+      $calendarColor = $this->main->urlParamAsString('calendarColor');
+      $this->hubletoApp->setConfigAsString('calendarColor', $calendarColor);
+      $this->hubletoApp->saveConfig('calendarColor', $calendarColor);
+
       $this->viewParams['settingsSaved'] = true;
     }
 

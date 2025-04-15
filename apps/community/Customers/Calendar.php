@@ -11,19 +11,9 @@ class Calendar extends \HubletoMain\Core\Calendar {
     "formComponent" => "CustomersFormActivity",
   ];
 
-  public function loadEvents(): array
+  public function loadEvents(string $dateStart, string $dateEnd): array
   {
     $idCustomer = $this->main->urlParamAsInteger('idCustomer');
-    $dateStart = '';
-    $dateEnd = '';
-
-    if ($this->main->isUrlParam("start") && $this->main->isUrlParam("end")) {
-      $dateStart = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("start")));
-      $dateEnd = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("end")));
-    } else {
-      $dateStart = date("Y-m-d H:i:s");
-      $dateEnd = date("Y-m-d H:i:s", strtotime("+1 day"));
-    }
 
     $mCustomerActivity = new CustomerActivity($this->main);
 
@@ -66,8 +56,10 @@ class Calendar extends \HubletoMain\Core\Calendar {
       $events[$key]['allDay'] = $activity->all_day == 1 || $tStart == null ? true : false;
       $events[$key]['title'] = $activity->subject;
       $events[$key]['backColor'] = $activity->color;
-      $events[$key]['color'] = $activity->color;
+      $events[$key]['color'] = $this->main->apps->community('Customers')->configAsString('calendarColor');
       $events[$key]['type'] = $activity->activity_type;
+      $events[$key]['url'] = 'customers/' . $activity->id_customer;
+      $events[$key]['category'] = 'customer';
     }
 
     return $events;

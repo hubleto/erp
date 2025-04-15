@@ -618,6 +618,8 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $mLeadActivity->record->create([
         "subject" => "Follow-up call",
         "date_start" => $leadDateCreated,
+        "time_start" => rand(10, 15) . ':00',
+        "all_day" => rand(1, 5) == 1,
         "id_lead" => $idLead,
         "id_person" => 1,
         "id_activity_type" => 1,
@@ -695,6 +697,8 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $mDealActivity->record->create([
         "subject" => "Follow-up call",
         "date_start" => $dealDateCreated,
+        "time_start" => rand(10, 15) . ':00',
+        "all_day" => rand(1, 5) == 1,
         "id_deal" => $idDeal,
         "id_person" => 1,
         "id_activity_type" => 1,

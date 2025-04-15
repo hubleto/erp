@@ -1,0 +1,34 @@
+<div class="flex">
+  <h1 class="app-main-title">Leads: Settings</h1>
+  {% if viewParams.settingsSaved %}
+    <div class="badge badge-info text-sm ml-4">Settings saved.</div>
+  {% endif %}
+</div>
+
+<script>
+  function saveSettings() {
+    $("#settings-form").submit();
+  }
+</script>
+
+<div class="card mt-10 w-1/2 m-auto">
+  <form id="settings-form" action="" method="POST">
+    <input type="hidden" name="settingsChanged" value="1">
+    <table class="table-default">
+      <tbody>
+        <tr>
+          <td>Calendar color</td>
+          <td>
+            <input
+              type="text" name="calendarColor"
+              class="adios component input"
+              value="{{ viewParams.app.configAsString('calendarColor') }}"
+              onchange="saveSettings();"
+              style="border-left: 2em solid {{ viewParams.app.configAsString('calendarColor') }}"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

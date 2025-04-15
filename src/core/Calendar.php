@@ -19,7 +19,7 @@ class Calendar implements \ADIOS\Core\Testable {
     $this->main = $main;
   }
 
-  public function loadEvents(): array
+  public function loadEvents(string $dateStart, string $dateEnd): array
   {
     return [];
   }

@@ -9,25 +9,15 @@ class Calendar extends \HubletoMain\Core\Calendar {
     "formComponent" => "SalesDealsFormActivity"
   ];
 
-  public function loadEvents(): array
+  public function loadEvents(string $dateStart, string $dateEnd): array
   {
-
     $idDeal = $this->main->urlParamAsInteger('idDeal');
-    $dateStart = '';
-    $dateEnd = '';
-
-    if ($this->main->isUrlParam("start") && $this->main->isUrlParam("end")) {
-      $dateStart = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("start")));
-      $dateEnd = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("end")));
-    } else {
-      $dateStart = date("Y-m-d H:i:s");
-      $dateEnd = date("Y-m-d H:i:s", strtotime("+1 day"));
-    }
 
     $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
 
     $activities = $mDealActivity->eloquent
       ->select("deal_activities.*", "activity_types.color", "activity_types.name as activity_type")
+      ->with('DEAL.CUSTOMER')
       ->leftJoin("activity_types", "activity_types.id", "=", "deal_activities.id_activity_type")
       ->where("date_start", ">=", $dateStart)
       ->where("date_start", "<=", $dateEnd)
@@ -65,8 +55,11 @@ class Calendar extends \HubletoMain\Core\Calendar {
       $events[$key]['allDay'] = $activity->all_day == 1 || $tStart == '' ? true : false;
       $events[$key]['title'] = $activity->subject;
       $events[$key]['backColor'] = $activity->color;
-      $events[$key]['color'] = $activity->color;
+      $events[$key]['color'] = $this->main->apps->community('Deals')->configAsString('calendarColor');
       $events[$key]['type'] = $activity->activity_type;
+      $events[$key]['url'] = 'deals/' . $activity->id_lead;
+      $events[$key]['category'] = 'deal';
+      $events[$key]['details'] = 'Deal #' . $activity->DEAL->identifier . ' for ' . $activity->DEAL->CUSTOMER->name;
     }
 
     return $events;

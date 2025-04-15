@@ -1,4 +1,9 @@
-<h1 class="app-main-title">Deals: Settings</h1>
+<div class="flex">
+  <h1 class="app-main-title">Deals: Settings</h1>
+  {% if viewParams.settingsSaved %}
+    <div class="badge badge-info text-sm ml-4">Settings saved.</div>
+  {% endif %}
+</div>
 
 <script>
   function saveSettings() {
@@ -6,37 +11,58 @@
   }
 </script>
 
-{% if viewParams.settingsSaved %}
-  <div class="alert alert-info mt-2">Settings has been saved.</div>
-{% endif %}
-
-<form id="settings-form" action="" method="POST">
-  <input type="hidden" name="settingsChanged" value="1">
-  <div class="input-wrapper">
-    <label class="input-label" for="showMostValuableDealsInDashboard">
-      Show 'Most valuable deals' in dashboard
-    </label>
-    <input
-      type="checkbox"
-      id="showMostValuableDealsInDashboard"
-      name="showMostValuableDealsInDashboard"
-      style="zoom:2"
-      {% if viewParams.app.configAsBool('showMostValuableDealsInDashboard') %} checked {% endif %}
-      onchange="saveSettings();"
-    />
-  </div>
-
-  <div class="input-wrapper">
-    <label class="input-label" for="showDealValueByResultInDashboard">
-      Show 'Deal value by result' in dashboard
-    </label>
-    <input
-      type="checkbox"
-      id="showDealValueByResultInDashboard"
-      name="showDealValueByResultInDashboard"
-      style="zoom:2"
-      {% if viewParams.app.configAsBool('showDealValueByResultInDashboard') %} checked {% endif %}
-      onchange="saveSettings();"
-    />
-  </div>
-</form>
+<div class="card mt-10 w-1/2 m-auto">
+  <form id="settings-form" action="" method="POST">
+    <input type="hidden" name="settingsChanged" value="1">
+    <table class="table-default">
+      <tbody>
+        <tr>
+          <td>
+            <label class="input-label" for="showMostValuableDealsInDashboard">
+              Show 'Most valuable deals' in dashboard
+            </label>
+          </td>
+          <td>
+            <input
+              type="checkbox"
+              id="showMostValuableDealsInDashboard"
+              name="showMostValuableDealsInDashboard"
+              style="zoom:2"
+              {% if viewParams.app.configAsBool('showMostValuableDealsInDashboard') %} checked {% endif %}
+              onchange="saveSettings();"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="input-label" for="showDealValueByResultInDashboard">
+              Show 'Deal value by result' in dashboard
+            </label>
+          </td>
+          <td>
+            <input
+              type="checkbox"
+              id="showDealValueByResultInDashboard"
+              name="showDealValueByResultInDashboard"
+              style="zoom:2"
+              {% if viewParams.app.configAsBool('showDealValueByResultInDashboard') %} checked {% endif %}
+              onchange="saveSettings();"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Calendar color</td>
+          <td>
+            <input
+              type="text" name="calendarColor"
+              class="adios component input"
+              value="{{ viewParams.app.configAsString('calendarColor') }}"
+              onchange="saveSettings();"
+              style="border-left: 2em solid {{ viewParams.app.configAsString('calendarColor') }}"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

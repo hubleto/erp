@@ -39,6 +39,9 @@
 
   .app-launcher-show-btn { @apply cursor-pointer bg-white/20 text-white text-xs m-1 p-1 flex items-center gap-2 justify-center rounded hover:bg-white/40; }
 
+  aside#default-sidebar > nav { @apply w-48; }
+  div#app-main-content { @apply md:ml-48; }
+
   #app-launcher { @apply hidden fixed w-full h-full bg-white/90; z-index: 10000; top: 0; left: 0; overflow: auto; }
   #app-launcher.visible { @apply block; }
   #app-launcher > div { @apply m-auto p-10 flex flex-wrap gap-4; width: 75%; }

@@ -5,12 +5,15 @@ namespace HubletoApp\Community\Customers;
 class Loader extends \HubletoMain\Core\App
 {
 
+  public bool $hasCustomSettings = true;
+
   public function init(): void
   {
     parent::init();
 
     $this->main->router->httpGet([
-      '/^customers\/?$/' => Controllers\Customers::class,
+      '/^customers(\/(?<recordId>\d+))?\/?$/' => Controllers\Customers::class,
+      '/^customers\/settings\/?$/' => Controllers\Settings::class,
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
       '/^customers\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
       '/^customers\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,

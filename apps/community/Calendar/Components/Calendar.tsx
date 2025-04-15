@@ -35,13 +35,11 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
   }
 
   renderCell = (eventInfo) => {
-    return (
-      <>
-        <b>{eventInfo.timeText}</b>
-        <span style={{marginLeft: 4}}>{eventInfo.event.title}</span>
-        {eventInfo.event.extendedProps.type !== null ? <i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.type})</i> : null}
-      </>
-    )
+    return <>
+      <b>{eventInfo.timeText}</b>
+      <span style={{marginLeft: 4}}>{eventInfo.event.title}</span>
+      {eventInfo.event.extendedProps.category !== null ? <i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.category})</i> : null}
+    </>
   }
 
   render(): JSX.Element {

@@ -3,6 +3,8 @@
 ## Release v0.11 (not released yet)
 
   * `app.hasCustomSettings` property
+  * new `Events for today` board
+  * customizable calendar colors for Customers, Deals and Leads
 
 ## Release v0.10
 

@@ -1,0 +1,24 @@
+{% if viewParams.events|length > 0 %}
+  <table class="table-default dense w-full">
+    {% for event in viewParams.events %}
+      <tr>
+        <td style="border-left:1em solid {{ event.color }}">{{ event.category }}</td>
+        <td>{{ event.title }}</td>
+        <td>{{ event.details }}</td>
+        <td>{% if event.allDay %} All-day {% else %} {{ viewParams.main.locale.formatTime(event.start ?? '', false) }} {% endif %}</td>
+        <td class="text-right">
+          {% if event.url %}
+            <a href="{{ event.url }}" class="btn btn-transparent">
+              <span class="icon"><i class="fas fa-arrow-right"></i></span>
+              <span class="text">{{ translate('Open event details') }}</span>
+            </a>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <div class="alert alert-info">
+    Let's have a break. You have nothing to do for today. 🎉<br/>
+  </div>
+{% endif %}

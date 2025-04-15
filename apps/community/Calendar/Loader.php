@@ -9,6 +9,8 @@ class Loader extends \HubletoMain\Core\App
 
   public CalendarManager $calendarManager;
 
+  public bool $hasCustomSettings = true;
+
   public function __construct(\HubletoMain $main)
   {
     parent::__construct($main);
@@ -21,12 +23,23 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^calendar\/?$/' => Controllers\Calendar::class,
+      '/^calendar\/settings\/?$/' => Controllers\Settings::class,
+      '/^calendar\/boards\/events-for-today\/?$/' => Controllers\Boards\EventsForToday::class,
       '/^calendar\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
     $this->main->apps->community('Help')->addContextHelpUrls('/^calendar\/?$/', [
       'en' => 'en/apps/community/calendar',
     ]);
+
+    $dashboardManager = $this->main->apps->community('Desktop')->dashboardManager;
+
+    if ($this->configAsBool('showEventsForTodayInDashboard')) {
+      $dashboardManager->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
+        'Events for today',
+        'calendar/boards/events-for-today',
+      ));
+    }
   }
 
   public function installTables(int $round): void

@@ -32,13 +32,13 @@ class Loader extends \HubletoMain\Core\App
       'url' => 'settings/deal-tags',
     ]);
 
-    $calendarManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Calendar::class)->calendarManager;
+    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
     $calendarManager->addCalendar(Calendar::class);
 
-    $reportManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Reports::class)->reportManager;
+    $reportManager = $this->main->apps->community('Reports')->reportManager;
     $reportManager->addReport(Reports\MonthlyRevenue::class);
 
-    $dashboardManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Desktop::class)->dashboardManager;
+    $dashboardManager = $this->main->apps->community('Desktop')->dashboardManager;
 
     if ($this->configAsBool('showMostValuableDealsInDashboard')) {
       $dashboardManager->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
@@ -54,7 +54,7 @@ class Loader extends \HubletoMain\Core\App
       ));
     }
 
-    $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class)->addContextHelpUrls('/^deals\/?$/', [
+    $this->main->apps->community('Help')->addContextHelpUrls('/^deals\/?$/', [
       'en' => 'en/apps/community/deals',
     ]);
   }

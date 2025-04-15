@@ -17,10 +17,10 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/customer-tags\/?$/' => Controllers\Tags::class,
     ]);
 
-    $calendarManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Calendar::class)->calendarManager;
+    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
     $calendarManager->addCalendar(Calendar::class);
 
-    $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class)->addContextHelpUrls('/^customers\/?$/', [
+    $this->main->apps->community('Help')->addContextHelpUrls('/^customers\/?$/', [
       'en' => 'en/apps/community/customers',
     ]);
 

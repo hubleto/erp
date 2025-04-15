@@ -15,7 +15,7 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
     if (str_starts_with($this->main->requestedUri, 'products')) {
-      $sidebar = $this->main->apps->getAppInstance(\HubletoApp\Community\Desktop::class)->sidebar;
+      $sidebar = $this->main->apps->community('Desktop')->sidebar;
       $sidebar->addHeading1($this->translate('Products'));
       $sidebar->addLink('products', $this->translate('Products'), 'fas fa-cart-shopping');
       $sidebar->addLink('products/product-groups', $this->translate('Product Groups'), 'fas fa-burger');

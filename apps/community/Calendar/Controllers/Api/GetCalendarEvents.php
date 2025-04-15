@@ -9,7 +9,7 @@ class GetCalendarEvents extends \HubletoMain\Core\Controller {
   {
     $events = [];
 
-    $calendarManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Calendar::class)->calendarManager;
+    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
     foreach ($calendarManager->getCalendars() as $calendarClass => $calendar) {
       $calEvents = (array) $calendar->loadEvents();
       foreach ($calEvents as $key => $value) {

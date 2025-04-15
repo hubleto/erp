@@ -120,6 +120,11 @@ class AppManager
     return isset($apps[$appNamespace]) && is_array($apps[$appNamespace]) && isset($apps[$appNamespace]['installedOn']);
   }
 
+  public function community(string $appName): null|\HubletoMain\Core\App
+  {
+    return $this->getAppInstance('HubletoApp\\Community\\' . $appName);
+  }
+
   /** @param array<string, mixed> $appConfig */
   public function installApp(int $round, string $appNamespace, array $appConfig, bool $forceInstall = false): bool
   {

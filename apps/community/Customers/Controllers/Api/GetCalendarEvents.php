@@ -7,7 +7,7 @@ class GetCalendarEvents extends \HubletoMain\Core\Controller {
 
   public function renderJson(): array
   {
-    $calendarManager = $this->main->apps->getAppInstance(\HubletoApp\Community\Calendar::class)->calendarManager;
+    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
     return (array) $calendarManager
       ->getCalendar(\HubletoApp\Community\Customers\Calendar::class)
       ->loadEvents()

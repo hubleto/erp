@@ -7,7 +7,7 @@ class Report extends \HubletoMain\Core\Controller {
   public function getBreadcrumbs(): array
   {
     $reportUrlSlug = $this->main->router->routeVarAsString('reportUrlSlug');
-    $report = $this->main->apps->getAppInstance(\HubletoApp\Community\Reports::class)->reportManager->getReportByUrlSlug($reportUrlSlug);
+    $report = $this->main->apps->community('Reports')->reportManager->getReportByUrlSlug($reportUrlSlug);
 
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'reports', 'content' => $this->translate('Reports') ],
@@ -20,7 +20,7 @@ class Report extends \HubletoMain\Core\Controller {
     parent::prepareView();
 
     $reportUrlSlug = $this->main->router->routeVarAsString('reportUrlSlug');
-    $report = $this->main->apps->getAppInstance(\HubletoApp\Community\Reports::class)->reportManager->getReportByUrlSlug($reportUrlSlug);
+    $report = $this->main->apps->community('Reports')->reportManager->getReportByUrlSlug($reportUrlSlug);
     // $reportConfig = $report->getReportConfig();
 
     $this->viewParams['report'] = $report;

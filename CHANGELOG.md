@@ -10,6 +10,7 @@
   * improved report manager
   * many bugfixes and performance improvements
   * new `DashboardManager` in the Community/Desktop app
+  * shortcut `$this->main->apps->community($appName)` to get instance of community app
 
 ## Release v0.9
 

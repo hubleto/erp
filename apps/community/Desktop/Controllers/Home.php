@@ -8,7 +8,7 @@ class Home extends \HubletoMain\Core\Controller {
   {
     switch ($this->main->auth->getUserLanguage()) {
       case 'sk':
-        $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class)->addHotTip('sk/zakaznici/vytvorenie-noveho-kontaktu', 'Pridať nový kontakt');
+        $this->main->apps->community('Help')->addHotTip('sk/zakaznici/vytvorenie-noveho-kontaktu', 'Pridať nový kontakt');
       break;
     }
   }

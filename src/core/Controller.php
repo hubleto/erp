@@ -87,7 +87,7 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->viewParams['main'] = $this->main;
     $this->viewParams['app'] = $this->hubletoApp;
-    // $this->viewParams['help'] = $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class);
+    // $this->viewParams['help'] = $this->main->apps->community('Help');
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
 
@@ -112,7 +112,7 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
 
-    $contextHelpUrls = $this->main->apps->getAppInstance(\HubletoApp\Community\Help::class)->getCurrentContextHelpUrls($this->main->route);
+    $contextHelpUrls = $this->main->apps->community('Help')->getCurrentContextHelpUrls($this->main->route);
     $user = $this->main->auth->getUser();
 
     if (isset($contextHelpUrls[$user['language']])) $contextHelpUrl = $contextHelpUrls[$user['language']];

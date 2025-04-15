@@ -45,7 +45,7 @@ class Loader extends \HubletoMain\Core\App
       $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
       $mLeadTag = new \HubletoApp\Community\Leads\Models\Tag($this->main);
       $mCrossLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
-      $mLeadService = new \HubletoApp\Community\Leads\Models\LeadService($this->main);
+      $mLeadProduct = new \HubletoApp\Community\Leads\Models\LeadProduct($this->main);
       $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
       $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
 
@@ -54,7 +54,7 @@ class Loader extends \HubletoMain\Core\App
       $mLeadHistory->dropTableIfExists()->install();
       $mLeadTag->dropTableIfExists()->install();
       $mCrossLeadTag->dropTableIfExists()->install();
-      $mLeadService->dropTableIfExists()->install();
+      $mLeadProduct->dropTableIfExists()->install();
       $mLeadActivity->dropTableIfExists()->install();
       $mLeadDocument->dropTableIfExists()->install();
 
@@ -93,10 +93,10 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Leads/Models/LeadHistory:Update",
       "HubletoApp/Community/Leads/Models/LeadHistory:Delete",
 
-      "HubletoApp/Community/Leads/Models/LeadService:Create",
-      "HubletoApp/Community/Leads/Models/LeadService:Read",
-      "HubletoApp/Community/Leads/Models/LeadService:Update",
-      "HubletoApp/Community/Leads/Models/LeadService:Delete",
+      "HubletoApp/Community/Leads/Models/LeadProduct:Create",
+      "HubletoApp/Community/Leads/Models/LeadProduct:Read",
+      "HubletoApp/Community/Leads/Models/LeadProduct:Update",
+      "HubletoApp/Community/Leads/Models/LeadProduct:Delete",
 
       "HubletoApp/Community/Leads/Models/LeadStatus:Create",
       "HubletoApp/Community/Leads/Models/LeadStatus:Read",

@@ -51,9 +51,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     //Documents
     $mDocuments = new \HubletoApp\Community\Documents\Models\Document($this->main);
 
-    //Services
-    $mService = new \HubletoApp\Community\Services\Models\Service($this->main);
-
     //Customers & Contacts
     $mCustomer            = new \HubletoApp\Community\Customers\Models\Customer($this->main);
     $mPerson             = new \HubletoApp\Community\Contacts\Models\Person($this->main);
@@ -71,7 +68,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
     $mLeadHistory  = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
     $mLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
-    $mLeadServices = new \HubletoApp\Community\Leads\Models\LeadService($this->main);
+    $mLeadProducts = new \HubletoApp\Community\Leads\Models\LeadProduct($this->main);
     $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
     $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
 
@@ -79,7 +76,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mDeal         = new \HubletoApp\Community\Deals\Models\Deal($this->main);
     $mDealHistory  = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
     $mDealTag      = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
-    $mDealServices = new \HubletoApp\Community\Deals\Models\DealService($this->main);
     $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
     $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
@@ -100,11 +96,10 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     if (
       $this->main->apps->isAppInstalled("HubletoApp\Community\Customers") &&
       $this->main->apps->isAppInstalled("HubletoApp\Community\Documents") &&
-      $this->main->apps->isAppInstalled("HubletoApp\Community\Services") &&
+      $this->main->apps->isAppInstalled("HubletoApp\Community\Products") &&
       $this->main->apps->isAppInstalled("HubletoApp\Community\Deals") &&
       $this->main->apps->isAppInstalled("HubletoApp\Community\Leads")
     ) {
-      $this->generateServices($mCustomer, $mService);
       $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
       $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity);
     }
@@ -519,54 +514,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   //   }
   // }
 
-  public function generateServices(
-    \HubletoApp\Community\Customers\Models\Customer $mCustomer,
-    \HubletoApp\Community\Services\Models\Service $mService
-  ): void {
-
-    $customers = $mCustomer->eloquent->all();
-    $serviceNames = ["Cloud Storage", "Plugins", "Subscription", "Virtual Server", "Marketing", "Premium Package"];
-
-    //Create all services
-    foreach ($serviceNames as $serviceName) {
-      $mService->record->create([
-        "name" => $serviceName,
-        "price" => rand(10,100),
-        "id_currency" => 1,
-      ]);
-    }
-
-    //Generate Billing Accounts and connect Services to them
-    /* foreach ($customers as $customer) {
-      $NOServices = rand(1, count($serviceNames));
-      $idBillingAccount = $mBillingAccount->record->create([
-        "id_customer" => $customer->id,
-        "description" => "Fakturácia",
-      ]);
-
-      for ($i = 0; $i < $NOServices; $i++) {
-        $mBillingAccountService->record->create([
-          "id_billing_account" => $idBillingAccount,
-          "id_service" => rand(1, count($serviceNames) - 1)
-        ]);
-      }
-    }
-    foreach ($customers as $customer) {
-      $NOServices = rand(1, count($serviceNames));
-      $idBillingAccount = $mBillingAccount->record->create([
-        "id_customer" => $customer->id,
-        "description" => "Objednávky",
-      ]);
-
-      for ($i = 0; $i < $NOServices; $i++) {
-        $mBillingAccountService->record->create([
-          "id_billing_account" => $idBillingAccount,
-          "id_service" => rand(1, count($serviceNames) - 1)
-        ]);
-      }
-    } */
-  }
-
   public function generateLeads(
     \HubletoApp\Community\Customers\Models\Customer $mCustomer,
     \HubletoApp\Community\Leads\Models\Lead $mLead,
@@ -726,6 +673,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mGroup->record->create([
       "title" => "Liquids"
     ]);
+    $mGroup->record->create([
+      "title" => "Service"
+    ]);
 
     $mCountry = new Country($this->main);
 
@@ -777,7 +727,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ];
 
     foreach ($products as $product) {
-      $idProduct = $mProduct->record->create([
+      $mProduct->record->create([
         "title" => $product[0],
         "unit_price" => $product[1],
         "margin" => $product[2],
@@ -785,7 +735,23 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "unit" => $product[4],
         "id_product_group" => rand(1,4),
         "id_supplier" => rand(1,3),
-      ])['id'];
+        "type" => 1,
+      ]);
+    }
+
+    $serviceNames = ["Cloud Storage", "Plugins", "Subscription", "Virtual Server", "Marketing", "Premium Package"];
+
+    //Create all services
+    foreach ($serviceNames as $serviceName) {
+      $mProduct->record->create([
+        "title" => $serviceName,
+        "unit_price" => rand(10,100),
+        "margin" => rand(10,40),
+        "tax" => 25,
+        "id_product_group" => 5,
+        "id_supplier" => rand(1,3),
+        "type" => 2,
+      ]);
     }
   }
 }

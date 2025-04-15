@@ -58,8 +58,8 @@ class Lead extends \HubletoMain\Core\ModelEloquent
   }
 
   /** @return hasMany<LeadService, covariant Lead> */
-  public function SERVICES(): HasMany {
-    return $this->hasMany(LeadService::class, 'id_lead', 'id');
+  public function PRODUCTS(): HasMany {
+    return $this->hasMany(LeadProduct::class, 'id_lead', 'id');
   }
 
   /** @return hasMany<LeadActivity, covariant Lead> */

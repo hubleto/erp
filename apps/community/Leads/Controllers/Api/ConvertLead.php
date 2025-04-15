@@ -6,11 +6,11 @@ use HubletoApp\Community\Settings\Models\Setting;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Deals\Models\DealDocument;
 use HubletoApp\Community\Deals\Models\DealHistory;
-use HubletoApp\Community\Deals\Models\DealService;
+use HubletoApp\Community\Deals\Models\DealProduct;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Leads\Models\LeadHistory;
-use HubletoApp\Community\Leads\Models\LeadService;
+use HubletoApp\Community\Leads\Models\LeadProduct;
 use Exception;
 use HubletoApp\Community\Settings\Models\PipelineStep;
 
@@ -31,12 +31,12 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
     $mLead = new Lead($this->main);
     $mLeadHistory = new LeadHistory($this->main);
-    $mLeadService = new LeadService($this->main);
+    $mLeadProduct = new LeadProduct($this->main);
     $mLeadDocument = new LeadDocument($this->main);
 
     $mDeal = new Deal($this->main);
     $mDealHistory = new DealHistory($this->main);
-    $mDealService = new DealService($this->main);
+    $mDealProduct = new DealProduct($this->main);
     $mDealDocument = new DealDocument($this->main);
     $deal = null;
 
@@ -75,16 +75,16 @@ class ConvertLead extends \HubletoMain\Core\Controller
         "id_pipeline_step" => $defaultPipelineFirstStep ?? null,
       ]);
 
-      $leadServices = $mLeadService->eloquent->where("id_lead", $leadId)->get();
+      $leadProducts = $mLeadProduct->eloquent->where("id_lead", $leadId)->get();
 
-      foreach ($leadServices as $leadService) { //@phpstan-ignore-line
-        $mDealService->eloquent->create([
-          "id_service" => $leadService->id_service,
+      foreach ($leadProducts as $leadProduct) { //@phpstan-ignore-line
+        $mDealProduct->eloquent->create([
+          "id_product" => $leadProduct->id_product,
           "id_deal" => $deal->id,
-          "unit_price" => $leadService->unit_price,
-          "amount" => $leadService->amount,
-          "discount" => $leadService->discount,
-          "tax" => $leadService->tax,
+          "unit_price" => $leadProduct->unit_price,
+          "amount" => $leadProduct->amount,
+          "discount" => $leadProduct->discount,
+          "tax" => $leadProduct->tax,
         ]);
       }
 

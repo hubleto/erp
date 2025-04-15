@@ -66,7 +66,7 @@ class Loader extends \HubletoMain\Core\App
       $mDealHistory = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
       $mDealTag = new \HubletoApp\Community\Deals\Models\Tag($this->main);
       $mCrossDealTag = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
-      $mDealService = new \HubletoApp\Community\Deals\Models\DealService($this->main);
+      $mDealProduct = new \HubletoApp\Community\Deals\Models\DealProduct($this->main);
       $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
       $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
@@ -74,7 +74,7 @@ class Loader extends \HubletoMain\Core\App
       $mDealHistory->dropTableIfExists()->install();
       $mDealTag->dropTableIfExists()->install();
       $mCrossDealTag->dropTableIfExists()->install();
-      $mDealService->dropTableIfExists()->install();
+      $mDealProduct->dropTableIfExists()->install();
       $mDealActivity->dropTableIfExists()->install();
       $mDealDocument->dropTableIfExists()->install();
 
@@ -110,10 +110,10 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Deals/Models/DealHistory:Update",
       "HubletoApp/Community/Deals/Models/DealHistory:Delete",
 
-      "HubletoApp/Community/Deals/Models/DealService:Create",
-      "HubletoApp/Community/Deals/Models/DealService:Read",
-      "HubletoApp/Community/Deals/Models/DealService:Update",
-      "HubletoApp/Community/Deals/Models/DealService:Delete",
+      "HubletoApp/Community/Deals/Models/DealProduct:Create",
+      "HubletoApp/Community/Deals/Models/DealProduct:Read",
+      "HubletoApp/Community/Deals/Models/DealProduct:Update",
+      "HubletoApp/Community/Deals/Models/DealProduct:Delete",
 
       "HubletoApp/Community/Deals/Models/DealTag:Create",
       "HubletoApp/Community/Deals/Models/DealTag:Read",

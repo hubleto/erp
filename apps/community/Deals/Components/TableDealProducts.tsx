@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 
-interface TableDealServicesProps extends TableProps {
+interface TableDealProductsProps extends TableProps {
   dealTotal?: any
 }
 
-interface TableDealServicesState extends TableState {
+interface TableDealProductsState extends TableState {
 }
 
-export default class TableDealServices extends Table<TableDealServicesProps, TableDealServicesState> {
+export default class TableDealProducts extends Table<TableDealProductsProps, TableDealProductsState> {
   static defaultProps = {
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Deals/Models/DealService',
+    model: 'HubletoApp/Community/Deals/Models/DealProduct',
   }
 
-  props: TableDealServicesProps;
-  state: TableDealServicesState;
+  props: TableDealProductsProps;
+  state: TableDealProductsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\TableDealServices';
+  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\TableDealProducts';
 
-  constructor(props: TableDealServicesProps) {
+  constructor(props: TableDealProductsProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }

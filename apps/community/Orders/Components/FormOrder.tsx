@@ -49,16 +49,16 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
   }
 
   getSumPrice(recordProducts: any) {
-    var sumLeadPrice = 0;
+    var sumPrice = 0;
     recordProducts.map((product, index) => {
-      if (product.unit_price && product.amount) {
+      if (product.unit_price && product.amount && product._toBeDeleted_ != true) {
         var sum = product.unit_price * product.amount;
         if (product.tax) sum = sum + (sum * (product.tax / 100));
         if (product.discount) sum = sum - (sum * (product.discount / 100));
-        sumLeadPrice += sum;
+        sumPrice += sum;
       }
     });
-    return Number(sumLeadPrice.toFixed(2));
+    return Number(sumPrice.toFixed(2));
   }
 
 
@@ -211,17 +211,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                           unit_price: { type: "float", title: "Unit Price"},
                           tax: { type: "float", title: "Tax (%)"},
                           discount: { type: "float", title: "Discount (%)" },
-                          __sum: { type: "none", title: "Sum after tax",
-                            cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
-                              if (data.unit_price && data.amount) {
-                                let sum = data.unit_price * data.amount;
-                                if (data.tax) sum = sum + (sum * (data.tax / 100));
-                                if (data.discount) sum = sum - (sum * (data.discount / 100));
-                                sum = Number(sum.toFixed(2));
-                                return (<><span>{sum}</span></>);
-                              }
-                            }
-                          },
+                          __sum: { type: "none", title: "Sum after tax" },
                         }
                       }}
                       onRowClick={() => this.setState({isInlineEditing: true})}
@@ -229,7 +219,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                         this.updateRecord({ price: this.getSumPrice( R.PRODUCTS ), PRODUCTS: table.state.data?.data });
                       }}
                       onDeleteSelectionChange={(table: TableOrderProducts) => {
-                        this.updateRecord({ PRODUCTS: table.state.data?.data ?? [] });
+                        this.updateRecord({ PRODUCTS: table.state.data?.data ?? [], price: this.getSumPrice(R.PRODUCTS) });
                       }}
                     />
                   </div>

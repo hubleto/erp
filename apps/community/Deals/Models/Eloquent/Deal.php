@@ -11,6 +11,7 @@ use HubletoApp\Community\Settings\Models\Eloquent\User;
 use HubletoApp\Community\Deals\Models\Eloquent\DealHistory;
 use HubletoApp\Community\Deals\Models\Eloquent\DealTag;
 use HubletoApp\Community\Leads\Models\Eloquent\Lead;
+
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -64,9 +65,9 @@ class Deal extends \HubletoMain\Core\ModelEloquent
     return $this->hasMany(DealTag::class, 'id_deal', 'id');
   }
 
-  /** @return HasMany<DealService, covariant Deal> */
-  public function SERVICES(): HasMany {
-    return $this->hasMany(DealService::class, 'id_deal', 'id');
+  /** @return HasMany<DealProduct, covariant Deal> */
+  public function PRODUCTS(): HasMany {
+    return $this->hasMany(DealProduct::class, 'id_deal', 'id');
   }
 
   /** @return HasMany<DealActivity, covariant Deal> */

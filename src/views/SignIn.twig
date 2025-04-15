@@ -79,8 +79,13 @@
             {{ translate("Invalid email or password.") }}
           </div>
         {% endif %}
+
       </div>
     </div>
+  </div>
+  <div class="text-xs text-gray-400 text-right" style="position:fixed;right:0;bottom:0;padding:0.5em">
+    Release<br/>
+    [{{ app.release.getVersion() }}] {{ app.release.getCodename() }}
   </div>
 </body>
 </html>

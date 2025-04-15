@@ -12,4 +12,13 @@
       </tr>
     {% endfor %}
   </table>
+{% else %}
+  <div class="alert alert-info">
+    No deals found.<br/>
+    <br/>
+    <a href="deals?add" class="btn btn-transparent">
+      <span class="icon"><i class="fas fa-add"></i></span>
+      <span class="text">Add deal</span>
+    </a>
+  </div>
 {% endif %}

@@ -3,7 +3,7 @@
     Open deals: {{ viewParams.result.count }}
   </div>
   <div class="card card-header">
-    Total value: {{ viewParams.main.locale.formatCurrency(viewParams.result.price) }}
+    Total value: {{ viewParams.main.locale.formatCurrency(viewParams.result.price ?? '') }}
   </div>
 </div>
 

@@ -23,12 +23,13 @@ class Deals extends \HubletoMain\Core\Controller {
       ->selectRaw("COUNT(id) as count, SUM(price) as price")
       ->where("is_archived", 0)
       ->where("id_user", $this->main->auth->getUserId())
-      ->get()
+      ->first()
       ->toArray()
     ;
 
     parent::prepareView();
-    $this->viewParams["result"] = reset($result);
+    $this->viewParams['result'] = $result;
+    if ($this->main->isUrlParam('add')) $this->viewParams['recordId'] = -1;
     $this->setView('@HubletoApp:Community:Deals/Deals.twig');
   }
 

@@ -6,7 +6,7 @@ use ADIOS\Core\Db\Column\Boolean;
 use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\Varchar;
 
-class Source extends \HubletoMain\Core\Model
+class Source extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'calendar_sync_sources';
   public string $recordManagerClass = RecordManagers\Source::class;

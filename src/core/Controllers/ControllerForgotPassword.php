@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoMain\Core;
+namespace HubletoMain\Core\Controllers;
 
 class ControllerForgotPassword extends \ADIOS\Core\Controller {
 
@@ -14,10 +14,10 @@ class ControllerForgotPassword extends \ADIOS\Core\Controller {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
       $this->app->auth->forgotPassword();
-      $this->app->router->redirectTo('');
+      $this->setView('@hubleto/ForgotPassword.twig', ['status' => 1]);
+    } else {
+      $this->setView('@hubleto/ForgotPassword.twig', ['status' => 0]);
     }
-
-    $this->setView('@hubleto/ForgotPassword.twig');
   }
 
 }

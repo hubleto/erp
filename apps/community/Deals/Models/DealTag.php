@@ -2,12 +2,9 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Community\Deals\Models\Tag;
-use HubletoApp\Community\Deals\Models\Deal;
+use ADIOS\Core\Db\Column\Lookup;
 
-use \ADIOS\Core\Db\Column\Lookup;
-
-class DealTag extends \HubletoMain\Core\Model
+class DealTag extends \HubletoMain\CoreModels\Model
 {
   public string $table = 'cross_deal_tags';
   public string $recordManagerClass = RecordManagers\DealTag::class;

@@ -2,26 +2,22 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Community\Customers\Models\Customer;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
 use HubletoApp\Community\Contacts\Models\Person;
-use HubletoApp\Community\Settings\Models\Currency;
-use HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Leads\Models\LeadHistory;
-use HubletoApp\Community\Leads\Models\LeadTag;
+use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Setting;
-use HubletoApp\Community\Leads\Models\LeadProduct;
-
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\DateTime;
+use HubletoApp\Community\Settings\Models\User;
 use HubletoMain\Core\Helper;
 
-class Lead extends \HubletoMain\Core\Model
+class Lead extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'leads';
   public string $recordManagerClass = RecordManagers\Lead::class;

@@ -2,15 +2,13 @@
 
 namespace HubletoApp\Community\Goals\Models;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Decimal;
 use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Varchar;
 
-class GoalValue extends \HubletoMain\Core\Model
+class GoalValue extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'goal_values';
   public string $recordManagerClass = RecordManagers\GoalValue::class;

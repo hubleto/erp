@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Varchar;
 
-class Profile extends \HubletoMain\Core\Model
+class Profile extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'profiles';
   public string $recordManagerClass = RecordManagers\Profile::class;

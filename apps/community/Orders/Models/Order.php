@@ -2,18 +2,17 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Products\Models\Product;
-
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Text;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Setting;
 
-class Order extends \HubletoMain\Core\Model
+class Order extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'orders';
   public string $recordManagerClass = RecordManagers\Order::class;

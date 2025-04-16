@@ -2,6 +2,10 @@
 
 namespace HubletoMain\Core;
 
+use WaiBlue\src\core\Controllers\ControllerForgotPassword;
+use WaiBlue\src\core\Controllers\ControllerResetPassword;
+use WaiBlue\src\core\Controllers\ControllerSignIn;
+
 class Router extends \ADIOS\Core\Router {
 
   public function __construct(\ADIOS\Core\Loader $app)

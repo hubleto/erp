@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Controllers\Api;
 
-use HubletoApp\Community\Settings\Models\Setting;
+use Exception;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Deals\Models\DealDocument;
 use HubletoApp\Community\Deals\Models\DealHistory;
@@ -11,10 +11,10 @@ use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Leads\Models\LeadProduct;
-use Exception;
 use HubletoApp\Community\Settings\Models\PipelineStep;
+use HubletoApp\Community\Settings\Models\Setting;
 
-class ConvertLead extends \HubletoMain\Core\Controller
+class ConvertLead extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

@@ -2,22 +2,19 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Community\Billing\Models\BillingAccount;
-use HubletoApp\Community\Settings\Models\Country;
-use HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
+use HubletoApp\Community\Contacts\Models\Person;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\Lead;
-
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\Date;
-
-use HubletoApp\Community\Contacts\Models\Person;
+use HubletoApp\Community\Settings\Models\Country;
+use HubletoApp\Community\Settings\Models\User;
 use HubletoMain\Core\Helper;
 
-class Customer extends \HubletoMain\Core\Model
+class Customer extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'customers';
   public string $recordManagerClass = RecordManagers\Customer::class;

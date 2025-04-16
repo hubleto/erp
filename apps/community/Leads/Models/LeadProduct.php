@@ -2,14 +2,12 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Community\Leads\Models\Lead;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Lookup;
 use HubletoApp\Community\Products\Models\Product;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Decimal;
-
-class LeadProduct extends \HubletoMain\Core\Model
+class LeadProduct extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'lead_products';
   public string $recordManagerClass = RecordManagers\LeadProduct::class;

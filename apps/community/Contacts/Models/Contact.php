@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Varchar;
 
-class Contact extends \HubletoMain\Core\Model
+class Contact extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'contacts';
   public string $recordManagerClass = RecordManagers\Contact::class;

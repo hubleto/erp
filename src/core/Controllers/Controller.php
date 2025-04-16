@@ -1,8 +1,6 @@
 <?php
 
-namespace HubletoMain\Core;
-
-use \ADIOS\Core\Helper;
+namespace HubletoMain\Core\Controllers;
 
 class Controller extends \ADIOS\Core\Controller
 {

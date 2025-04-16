@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Varchar;
 
-class Tag extends \HubletoMain\Core\Model
+class Tag extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'customer_tags';
   public string $recordManagerClass = RecordManagers\Tag::class;

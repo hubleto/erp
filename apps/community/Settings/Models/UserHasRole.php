@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Lookup;
 
-class UserHasRole extends \HubletoMain\Core\Model
+class UserHasRole extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'user_has_roles';
   public string $recordManagerClass = RecordManagers\UserHasRole::class;

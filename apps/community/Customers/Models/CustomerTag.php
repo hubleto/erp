@@ -2,11 +2,9 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Community\Customers\Models\Tag;
+use ADIOS\Core\Db\Column\Lookup;
 
-use \ADIOS\Core\Db\Column\Lookup;
-
-class CustomerTag extends \HubletoMain\Core\Model
+class CustomerTag extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'cross_customer_tags';
   public string $recordManagerClass = RecordManagers\CustomerTag::class;

@@ -2,13 +2,12 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Lookup;
 use HubletoApp\Community\Products\Models\Product;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Integer;
-
-class OrderProduct extends \HubletoMain\Core\Model
+class OrderProduct extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'order_products';
   public string $recordManagerClass = RecordManagers\OrderProduct::class;

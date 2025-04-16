@@ -2,19 +2,18 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Community\Customers\Models\Activity;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Time;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Description\Form;
 use HubletoApp\Community\Contacts\Models\Person;
+use HubletoApp\Community\Customers\Models\Activity;
 use HubletoApp\Community\Settings\Models\ActivityType;
 use HubletoApp\Community\Settings\Models\User;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\Time;
-use \ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Description\Form;
-
-class DealActivity extends \HubletoMain\Core\Model
+class DealActivity extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'deal_activities';
   public string $recordManagerClass = RecordManagers\DealActivity::class;

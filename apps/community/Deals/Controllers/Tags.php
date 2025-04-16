@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Deals\Controllers;
 
-class Tags extends \HubletoMain\Core\Controller {
+class Tags extends \HubletoMain\Core\Controllers\Controller {
 
 
   public function getBreadcrumbs(): array

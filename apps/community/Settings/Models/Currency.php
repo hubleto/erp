@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Varchar;
 
-class Currency extends \HubletoMain\Core\Model
+class Currency extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'currencies';
   public string $recordManagerClass = RecordManagers\Currency::class;

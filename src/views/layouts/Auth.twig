@@ -39,7 +39,7 @@
 
           <div class="text-xl text-primary text-center pt-8 pb-4">{{ config.accountFullName }}</div>
 
-          {% block error %}
+          {% block status %}
             {% if viewParams.status %}
               <div class="alert alert-danger">Email or password invalid. Try again.</div>
             {% endif %}
@@ -56,9 +56,16 @@
               onkeypress='if (event.keyCode == 13) { document.getElementById("login_form").submit(); }'
             />
 
-            <div class="my-2">
-              <input type="checkbox" id="keep_logged_in" name="keep_logged_in" value="1" checked>
-              <label for="keep_logged_in">{{ translate("Keep signed in") }}</label>
+            <div class="flex justify-between my-2">
+              <div>
+                <input type="checkbox" id="keep_logged_in" name="keep_logged_in" value="1" checked>
+                <label for="keep_logged_in">{{ translate("Keep signed in") }}</label>
+              </div>
+              <div>
+                {% block links %}
+                  <a href="{{ config.url }}/forgot-password">Forgot password?</a>
+                {% endblock %}
+              </div>
             </div>
           {% endblock %}
 

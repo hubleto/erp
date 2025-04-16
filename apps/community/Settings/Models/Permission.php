@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Varchar;
 
-class Permission extends \HubletoMain\Core\Model
+class Permission extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'permissions';
   public string $recordManagerClass = RecordManagers\Permission::class;

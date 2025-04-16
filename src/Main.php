@@ -1,8 +1,5 @@
 <?php
 
-use \ADIOS\Core\Helper;
-use HubletoMain\Core\Token;
-
 // autoloader pre HubletoMain
 spl_autoload_register(function(string $class) {
   $class = str_replace('\\', '/', $class);
@@ -143,9 +140,9 @@ class HubletoMain extends \ADIOS\Core\Loader
     return new \HubletoMain\Core\Translator($this);
   }
 
-  public function createDesktopController(): \HubletoMain\Core\Controller
+  public function createDesktopController(): \HubletoMain\Core\Controllers\Controller
   {
-    return new \HubletoMain\Core\Controller($this);
+    return new \HubletoMain\Core\Controllers\Controller($this);
   }
 
   public function addSetting(\HubletoMain\Core\App $app, array $setting): void

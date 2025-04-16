@@ -2,11 +2,10 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
+use ADIOS\Core\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
 
-use \ADIOS\Core\Db\Column\Lookup;
-
-class DealDocument extends \HubletoMain\Core\Model
+class DealDocument extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'deal_documents';
   public string $recordManagerClass = RecordManagers\DealDocument::class;

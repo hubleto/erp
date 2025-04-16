@@ -68,7 +68,7 @@ class Installer {
     'invoices' => [
       \HubletoApp\Community\Billing\Loader::class => [ 'sidebarOrder' => 400, ],
       \HubletoApp\Community\Invoices\Loader::class => [ 'sidebarOrder' => 410, ],
-      \HubletoApp\Community\Services\Loader::class => [ 'sidebarOrder' => 420, ],
+      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 420, ],
     ],
   ];
 

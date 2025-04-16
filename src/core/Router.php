@@ -2,9 +2,9 @@
 
 namespace HubletoMain\Core;
 
-use WaiBlue\src\core\Controllers\ControllerForgotPassword;
-use WaiBlue\src\core\Controllers\ControllerResetPassword;
-use WaiBlue\src\core\Controllers\ControllerSignIn;
+use HubletoMain\Core\Controllers\ControllerForgotPassword;
+use HubletoMain\Core\Controllers\ControllerResetPassword;
+use HubletoMain\Core\Controllers\ControllerSignIn;
 
 class Router extends \ADIOS\Core\Router {
 

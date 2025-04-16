@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Core\Controllers;
 
-use WaiBlue\src\core\Models\Token;
+use HubletoMain\Core\Models\Token;
 
 class ControllerResetPassword extends \ADIOS\Core\Controller {
 

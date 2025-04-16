@@ -6,7 +6,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
 
   public array $activitySelectorConfig = [
     "title" => "Deal",
-    "formComponent" => "SalesDealsFormActivity"
+    "formComponent" => "DealsFormActivity"
   ];
 
   public function loadEvents(string $dateStart, string $dateEnd): array

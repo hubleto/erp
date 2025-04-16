@@ -13,7 +13,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Lead extends \HubletoMain\Core\ModelEloquent
+class Lead extends \ADIOS\Core\ModelEloquentRecord
 {
   public $table = 'leads';
 
@@ -72,9 +72,9 @@ class Lead extends \HubletoMain\Core\ModelEloquent
     return $this->hasMany(LeadDocument::class, 'id_lookup', 'id' );
   }
 
-  public function prepareReadQuery(): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    $query = parent::prepareReadQuery();
+    $query = parent::prepareReadQuery($query, $level);
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
 
@@ -87,4 +87,16 @@ class Lead extends \HubletoMain\Core\ModelEloquent
     return $query;
   }
 
+  public function addOrderByToQuery(mixed $query, array $orderBy): mixed
+  {
+    if ($orderBy['field'] == 'DEAL') {
+      $query
+        ->join('deals', 'deals.id_lead', '=', 'leads.id')
+        ->orderBy('deals.identifier', $orderBy['direction'])
+      ;
+      return $query;
+    } else {
+      return parent::addOrderByToQuery($query, $orderBy);
+    }
+  }
 }

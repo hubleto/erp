@@ -2,4 +2,4 @@
 
 namespace HubletoMain\Core;
 
-class ModelEloquent extends \ADIOS\Core\ModelEloquent { }
+class ModelEloquent extends \ADIOS\Core\ModelEloquentRecord { }

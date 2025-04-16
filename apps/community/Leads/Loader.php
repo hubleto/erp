@@ -21,12 +21,12 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
     ]);
 
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Lead statuses'),
       'icon' => 'fas fa-arrow-up-short-wide',
       'url' => 'settings/lead-statuses',
     ]);
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Lead Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/lead-tags',

@@ -23,12 +23,12 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
     ]);
 
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Deal statuses'),
       'icon' => 'fas fa-arrow-up-short-wide',
       'url' => 'settings/deal-statuses',
     ]);
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Deal Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/deal-tags',

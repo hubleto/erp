@@ -37,5 +37,11 @@ class User extends \HubletoMain\Core\ModelEloquent
     );
   }
 
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+    $query = $query->with('ROLES');
+    return $query;
+  }
 
 }

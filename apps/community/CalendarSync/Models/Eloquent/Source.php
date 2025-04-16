@@ -6,12 +6,12 @@ class Source extends \HubletoMain\Core\ModelEloquent
 {
   public $table = 'source';
 
-  public function prepareReadQuery(): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
 
-    $query = parent::prepareReadQuery();
+    $query = parent::prepareReadQuery($query, $level);
     $type = $main->urlParamAsString('type') ?? "";
 
     if ($type == 'google') {

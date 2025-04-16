@@ -43,6 +43,7 @@ class Installer {
       \HubletoApp\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997, ],
       \HubletoApp\Community\Desktop\Loader::class => [ ],
       \HubletoApp\Community\Premium\Loader::class => [ 'sidebarOrder' => 99999, ],
+      \HubletoApp\Community\Messages\Loader::class => [ 'sidebarOrder' => 125, ],
       \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
       \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 101, 'calendarColor' => '#3DC266' ],
       \HubletoApp\Community\Contacts\Loader::class => [ ],

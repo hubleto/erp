@@ -322,7 +322,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                     {this.inputWrapper("is_active")}
                     <FormInput title="Tags">
                       <InputTags2
-                        {...this.getInputProps()}
+                        {...this.getInputProps('tags')}
                         value={this.state.record.TAGS}
                         model="HubletoApp/Community/Customers/Models/Tag"
                         targetColumn="id_customer"

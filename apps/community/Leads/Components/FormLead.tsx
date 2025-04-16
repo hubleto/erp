@@ -191,7 +191,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     {this.inputWrapper('identifier', {readonly: R.is_archived})}
                     {this.inputWrapper('title', {readonly: R.is_archived})}
                     <FormInput title={"Customer"}>
-                      <Lookup {...this.getInputProps()}
+                      <Lookup {...this.getInputProps('id-customer')}
                         model='HubletoApp/Community/Customers/Models/Customer'
                         endpoint={`customers/get-customer`}
                         readonly={R.is_archived}
@@ -206,7 +206,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       ></Lookup>
                     </FormInput>
                     <FormInput title={"Contact Person"}>
-                      <Lookup {...this.getInputProps()}
+                      <Lookup {...this.getInputProps('id-person')}
                         model='HubletoApp/Community/Customers/Models/Person'
                         customEndpointParams={{id_customer: R.id_customer}}
                         readonly={R.is_archived}
@@ -273,7 +273,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
               {showAdditional ?
                 <div className='card mt-2' style={{gridArea: 'services'}}>
                   <div className='card-header'>Services</div>
-                  <div className='card-body flex flex-col gap-2'>
+                  <div className='card-body'>
                     {!R.is_archived ? (
                       <a
                         className="btn btn-add-outline mb-2"
@@ -291,140 +291,138 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         <span className="text">Add service</span>
                       </a>
                     ) : null}
-                    <div className='w-full h-full overflow-x-auto'>
-                      <TableLeadServices
-                        uid={this.props.uid + "_table_lead_services"}
-                        data={{ data: R.SERVICES }}
-                        leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : "Total: 0 " + R.CURRENCY.code }
-                        descriptionSource='props'
-                        customEndpointParams={{'idLead': R.id}}
-                        description={{
-                          permissions: this.props.tableLeadServicesDescription.permissions,
-                          ui: {
-                            showHeader: false,
-                            showFooter: true
-                          },
-                          columns: {
-                            id_service: { type: "lookup", title: "Service",
-                              model: "HubletoApp/Community/Services/Models/Service",
-                              cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
-                                return (
-                                  <FormInput>
-                                    <Lookup {...this.getInputProps()}
-                                      model='HubletoApp/Community/Services/Models/Service'
-                                      cssClass='min-w-44'
-                                      value={data.id_service}
-                                      onChange={(value: any) => {
-                                        request.get(
-                                          'services/get-service-price',
-                                          {serviceId: value},
-                                          (returnData: any) => {
-                                            if (returnData.status == "success") {
-                                              data.id_service = value;
-                                              data.unit_price = returnData.unit_price;
-                                              this.updateRecord({ SERVICES: table.state.data?.data });
-                                              this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
-                                            } else {
-                                              throw new Error('Something went wrong: ' + returnData.error);
-                                            }
+                    <TableLeadServices
+                      uid={this.props.uid + "_table_lead_services"}
+                      data={{ data: R.SERVICES }}
+                      leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : "Total: 0 " + R.CURRENCY.code }
+                      descriptionSource='props'
+                      customEndpointParams={{'idLead': R.id}}
+                      description={{
+                        permissions: this.props.tableLeadServicesDescription.permissions,
+                        ui: {
+                          showHeader: false,
+                          showFooter: true
+                        },
+                        columns: {
+                          id_service: { type: "lookup", title: "Service",
+                            model: "HubletoApp/Community/Services/Models/Service",
+                            cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
+                              return (
+                                <FormInput>
+                                  <Lookup {...this.getInputProps('lookup-service-1')}
+                                    model='HubletoApp/Community/Services/Models/Service'
+                                    cssClass='min-w-44'
+                                    value={data.id_service}
+                                    onChange={(value: any) => {
+                                      request.get(
+                                        'services/get-service-price',
+                                        {serviceId: value},
+                                        (returnData: any) => {
+                                          if (returnData.status == "success") {
+                                            data.id_service = value;
+                                            data.unit_price = returnData.unit_price;
+                                            this.updateRecord({ SERVICES: table.state.data?.data });
+                                            this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
+                                          } else {
+                                            throw new Error('Something went wrong: ' + returnData.error);
                                           }
-                                        )
-                                      }}
-                                    ></Lookup>
-                                  </FormInput>
-                                )
-                              },
+                                        }
+                                      )
+                                    }}
+                                  ></Lookup>
+                                </FormInput>
+                              )
                             },
-                            unit_price: { type: "float", title: "Unit Price" },
-                            amount: { type: "int", title: "Amount" },
-                            discount: { type: "float", title: "Discount (%)" },
-                            tax: { type: "float", title: "Tax (%)" },
-                            __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
-                              if (data.unit_price && data.amount) {
-                                var sum = data.unit_price * data.amount
-                                if (data.discount) {
-                                  sum = sum - (sum * (data.discount / 100))
-                                }
-                                if (data.tax) {
-                                  sum = sum - (sum * (data.tax / 100))
-                                }
-                                sum = Number(sum.toFixed(2));
-                                return (<>
-                                    <span>{sum} {R.CURRENCY.code}</span>
-                                  </>
-                                );
+                          },
+                          unit_price: { type: "float", title: "Unit Price" },
+                          amount: { type: "int", title: "Amount" },
+                          discount: { type: "float", title: "Discount (%)" },
+                          tax: { type: "float", title: "Tax (%)" },
+                          __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
+                            if (data.unit_price && data.amount) {
+                              var sum = data.unit_price * data.amount
+                              if (data.discount) {
+                                sum = sum - (sum * (data.discount / 100))
                               }
-                            },
+                              if (data.tax) {
+                                sum = sum - (sum * (data.tax / 100))
+                              }
+                              sum = Number(sum.toFixed(2));
+                              return (<>
+                                  <span>{sum} {R.CURRENCY.code}</span>
+                                </>
+                              );
+                            }
                           },
-                          },
-                          inputs: {
-                            id_service: { type: "lookup", title: "Service",
-                              model: "HubletoApp/Community/Services/Models/Service",
-                              cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
-                                return (
-                                  <FormInput>
-                                    <Lookup {...this.getInputProps()}
-                                      model='HubletoApp/Community/Services/Models/Service'
-                                      cssClass='min-w-44'
-                                      value={data.id_service}
-                                      onChange={(value: any) => {
-                                        request.get(
-                                          'services/get-service-price',
-                                          {serviceId: value},
-                                          (returnData: any) => {
-                                            if (returnData.status == "success") {
-                                              data.id_service = value;
-                                              data.unit_price = returnData.unit_price;
-                                              this.updateRecord({ SERVICES: table.state.data?.data });
-                                              this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
-                                            } else {
-                                              throw new Error('Something went wrong: ' + returnData.error);
-                                            }
+                        },
+                        },
+                        inputs: {
+                          id_service: { type: "lookup", title: "Service",
+                            model: "HubletoApp/Community/Services/Models/Service",
+                            cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
+                              return (
+                                <FormInput>
+                                  <Lookup {...this.getInputProps('lookup-service-2')}
+                                    model='HubletoApp/Community/Services/Models/Service'
+                                    cssClass='min-w-44'
+                                    value={data.id_service}
+                                    onChange={(value: any) => {
+                                      request.get(
+                                        'services/get-service-price',
+                                        {serviceId: value},
+                                        (returnData: any) => {
+                                          if (returnData.status == "success") {
+                                            data.id_service = value;
+                                            data.unit_price = returnData.unit_price;
+                                            this.updateRecord({ SERVICES: table.state.data?.data });
+                                            this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
+                                          } else {
+                                            throw new Error('Something went wrong: ' + returnData.error);
                                           }
-                                        )
-                                      }}
-                                    ></Lookup>
-                                  </FormInput>
-                                )
-                              },
+                                        }
+                                      )
+                                    }}
+                                  ></Lookup>
+                                </FormInput>
+                              )
                             },
-                            unit_price: { type: "float", title: "Unit Price" },
-                            amount: { type: "int", title: "Amount" },
-                            discount: { type: "float", title: "Discount (%)" },
-                            tax: { type: "float", title: "Tax (%)" },
-                            __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
-                              if (data.unit_price && data.amount) {
-                                var sum = data.unit_price * data.amount
-                                if (data.discount) {
-                                  sum = sum - (sum * (data.discount / 100))
-                                }
-                                if (data.tax) {
-                                  sum = sum - (sum * (data.tax / 100))
-                                }
-                                sum = Number(sum.toFixed(2));
-                                return (<>
-                                    <span>{sum} {R.CURRENCY.code}</span>
-                                  </>
-                                );
+                          },
+                          unit_price: { type: "float", title: "Unit Price" },
+                          amount: { type: "int", title: "Amount" },
+                          discount: { type: "float", title: "Discount (%)" },
+                          tax: { type: "float", title: "Tax (%)" },
+                          __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
+                            if (data.unit_price && data.amount) {
+                              var sum = data.unit_price * data.amount
+                              if (data.discount) {
+                                sum = sum - (sum * (data.discount / 100))
                               }
-                            },
+                              if (data.tax) {
+                                sum = sum - (sum * (data.tax / 100))
+                              }
+                              sum = Number(sum.toFixed(2));
+                              return (<>
+                                  <span>{sum} {R.CURRENCY.code}</span>
+                                </>
+                              );
+                            }
                           },
-                          },
-                        }}
-                        isUsedAsInput={true}
-                        isInlineEditing={this.state.isInlineEditing}
-                        readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
-                        onRowClick={() => this.setState({isInlineEditing: true})}
-                        onChange={(table: TableLeadServices) => {
-                          this.updateRecord({ SERVICES: table.state.data?.data });
-                          R.price = this.getLeadSumPrice(R.SERVICES);
-                          this.setState({record: R});
-                        }}
-                        onDeleteSelectionChange={(table: TableLeadServices) => {
-                          this.updateRecord({ SERVICES: table.state.data?.data ?? [] });
-                        }}
-                      ></TableLeadServices>
-                    </div>
+                        },
+                        },
+                      }}
+                      isUsedAsInput={true}
+                      isInlineEditing={this.state.isInlineEditing}
+                      readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+                      onRowClick={() => this.setState({isInlineEditing: true})}
+                      onChange={(table: TableLeadServices) => {
+                        this.updateRecord({ SERVICES: table.state.data?.data });
+                        R.price = this.getLeadSumPrice(R.SERVICES);
+                        this.setState({record: R});
+                      }}
+                      onDeleteSelectionChange={(table: TableLeadServices) => {
+                        this.updateRecord({ SERVICES: table.state.data?.data ?? [] });
+                      }}
+                    ></TableLeadServices>
                   </div>
                 </div>
               : null}

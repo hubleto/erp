@@ -33,13 +33,6 @@ class User extends \ADIOS\Models\User
     ]);
   }
 
-  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
-  {
-    return parent::prepareLoadRecordQuery($includeRelations, $maxRelationLevel, $query, $level)
-      ->with('ROLES')
-    ;
-  }
-
   public function getQueryForUser(int $idUser): mixed
   {
     return $this->eloquent

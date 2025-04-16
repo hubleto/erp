@@ -25,4 +25,16 @@ class Person extends \HubletoMain\Core\ModelEloquent
   public function TAGS(): HasMany {
      return $this->hasMany(PersonTag::class, 'id_person', 'id');
   }
+
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    $query = $query->selectRaw("
+      (Select value from contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,
+      (Select value from contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email
+    ");
+
+    return $query;
+  }
 }

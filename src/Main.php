@@ -67,6 +67,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   public bool $isPremium = false;
 
+  /** @var array<int, array<\HubletoMain\Core\App, array>> */
   private array $settings = [];
 
   public function __construct(array $config = [], int $mode = self::ADIOS_MODE_FULL)
@@ -146,15 +147,20 @@ class HubletoMain extends \ADIOS\Core\Loader
     return new \HubletoMain\Core\Controller($this);
   }
 
-  public function addSetting(array $setting): void
+  public function addSetting(\HubletoMain\Core\App $app, array $setting): void
   {
-    $this->settings[] = $setting;
+    $this->settings[] = [$app, $setting];
   }
 
   public function getSettings(): array
   {
-    $settings = $this->settings;
-    $titles = array_column($this->settings, 'title');
+    $settings = [];
+    
+    foreach ($this->settings as $setting) {
+      $settings[] = $setting[1];
+    }
+
+    $titles = array_column($settings, 'title');
     array_multisort($titles, SORT_ASC, $settings);
     return $settings;
   }

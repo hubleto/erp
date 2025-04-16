@@ -1,5 +1,5 @@
-import SalesTableLeads from "./Components/TableLeads"
-import SalesTableLeadActivity from "./Components/FormActivity"
+import TableLeads from "./Components/TableLeads"
+import FormActivity from "./Components/FormActivity"
 
-globalThis.main.registerReactComponent('SalesTableLeads', SalesTableLeads);
-globalThis.main.registerReactComponent('SalesTableLeadActivity', SalesTableLeadActivity);
+globalThis.main.registerReactComponent('LeadsTableLeads', TableLeads);
+globalThis.main.registerReactComponent('LeadsFormActivity', FormActivity);

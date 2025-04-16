@@ -79,9 +79,9 @@ class Deal extends \HubletoMain\Core\ModelEloquent
     return $this->hasMany(DealDocument::class, 'id_lookup', 'id' );
   }
 
-  public function prepareReadQuery(): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    $query = parent::prepareReadQuery();
+    $query = parent::prepareReadQuery($query, $level);
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
 

@@ -62,6 +62,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   public \HubletoMain\Core\ReleaseManager $release;
   public \HubletoMain\Core\AppManager $apps;
+  public \HubletoMain\Core\Emails\EmailWrapper $emails;
 
   public bool $isPremium = false;
 
@@ -80,6 +81,17 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     $this->release = new \HubletoMain\Core\ReleaseManager($this);
     $this->release->load();
+
+    $this->emails = new \HubletoMain\Core\Emails\EmailWrapper(
+      $this,
+      new \HubletoMain\Core\Emails\EmailProvider(
+        $this->config->getAsString('smtp_host', ''),
+        $this->config->getAsString('smtp_port', ''),
+        $this->config->getAsString('smtp_encryption', 'ssl'),
+        $this->config->getAsString('smtp_login', ''),
+        $this->config->getAsString('smtp_password', ''),
+      )
+    );
 
     $this->apps = new \HubletoMain\Core\AppManager($this);
 

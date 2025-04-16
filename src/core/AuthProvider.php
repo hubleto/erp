@@ -3,7 +3,7 @@
 namespace HubletoMain\Core;
 
 use HubletoApp\Community\Settings\Models\User;
-use WaiBlue\src\core\Models\Token;
+use HubletoMain\Core\Models\Token;
 
 class AuthProvider extends \ADIOS\Auth\DefaultProvider {
 
@@ -30,13 +30,24 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
 
     $mUser = new User($this->app);
     if ($mUser->record->where('login', $login)->count() > 0) {
+      $user = $mUser->record->where('login', $login)->first();
+
       $mToken = new Token($this->app); // todo: token creation should be done withing the token itself
+      $tokenValue = bin2hex(random_bytes(16));
       $mToken->record->create([
         'login' => $login,
-        'token' => bin2hex(random_bytes(16)),
+        'token' => $tokenValue,
         'valid_to' => date('Y-m-d H:i:s', strtotime('+15 minutes')),
         'type' => 'reset-password'
       ]);
+
+      if ($user['middle_name'] != '') {
+        $name = $user['first_name'] . ' ' . $user['middle_name'] . ' '. $user['last_name'];
+      } else {
+        $name = $user['first_name'] . ' ' . $user['last_name'];
+      }
+
+      $this->main->emails->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
     }
   }
 

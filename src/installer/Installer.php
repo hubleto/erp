@@ -43,10 +43,11 @@ class Installer {
       \HubletoApp\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997, ],
       \HubletoApp\Community\Desktop\Loader::class => [ ],
       \HubletoApp\Community\Premium\Loader::class => [ 'sidebarOrder' => 99999, ],
+      \HubletoApp\Community\Messages\Loader::class => [ 'sidebarOrder' => 125, ],
       \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
-      \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 101, ],
+      \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 101, 'calendarColor' => '#3DC266' ],
       \HubletoApp\Community\Contacts\Loader::class => [ ],
-      \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110, ],
+      \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110, 'showEventsForTodayInDashboard' => true ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],
     ],
@@ -57,7 +58,7 @@ class Installer {
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200, ],
       \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210, ],
       \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220, ],
-      \HubletoApp\Community\Deals\Loader::class => [ 'sidebarOrder' => 230, 'showMostValuableDealsInDashboard' => true, ],
+      \HubletoApp\Community\Deals\Loader::class => [ 'sidebarOrder' => 230, 'calendarColor' => '#D7B628', 'showMostValuableDealsInDashboard' => true, 'showDealValueByResultInDashboard' => true ],
       \HubletoApp\Community\Goals\Loader::class => [ 'sidebarOrder' => 240, ],
     ],
     'shop' => [
@@ -169,20 +170,20 @@ class Installer {
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
 
-    $idProfile = $mProfile->eloquent->create(['company' => $this->accountFullName])->id;
+    $idProfile = $mProfile->record->recordCreate(['company' => $this->accountFullName])['id'];
 
-    $idUserAdministrator = $mUser->eloquent->create([
+    $idUserAdministrator = $mUser->record->recordCreate([
       'login' => $this->adminEmail,
       'password' => $mUser->hashPassword($this->adminPassword),
       'email' => $this->adminEmail,
       'is_active' => true,
       'id_active_profile' => $idProfile,
-    ])->id;
+    ])['id'];
 
-    $mUserHasRole->eloquent->create([
+    $mUserHasRole->record->recordCreate([
       'id_user' => $idUserAdministrator,
       'id_role' => \HubletoApp\Community\Settings\Models\UserRole::ROLE_ADMINISTRATOR,
-    ])->id;
+    ])['id'];
   }
 
   public function getConfigEnvContent(): string

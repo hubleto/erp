@@ -9,7 +9,7 @@ use \ADIOS\Core\Db\Column\Text;
 class Setting extends \HubletoMain\Core\Model
 {
   public string $table = 'settings';
-  public string $eloquentClass = Eloquent\Setting::class;
+  public string $recordManagerClass = RecordManagers\Setting::class;
 
   public function describeColumns(): array
   {

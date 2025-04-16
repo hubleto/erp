@@ -25,7 +25,7 @@ class GetPermissions extends \HubletoMain\Core\Controller
 
     try {
       $mPermission = new Permission($this->main);
-      $allPermissions = $mPermission->eloquent->orderBy("permission", "asc")->get()->toArray();
+      $allPermissions = $mPermission->record->orderBy("permission", "asc")->get()->toArray();
 
       foreach ($allPermissions as $permission) { //@phpstan-ignore-line
         /*
@@ -58,7 +58,7 @@ class GetPermissions extends \HubletoMain\Core\Controller
 
       if ($roleId > 0) {
         $mRolePermission = new RolePermission($this->main);
-        $rolePermissions = $mRolePermission->eloquent->where("id_role", $roleId)->pluck("id_permission")->toArray();
+        $rolePermissions = $mRolePermission->record->where("id_role", $roleId)->pluck("id_permission")->toArray();
       } else $rolePermissions = [];
     } catch (Exception $e) {
       return [

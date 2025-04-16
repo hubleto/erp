@@ -7,7 +7,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class Pipeline extends \HubletoMain\Core\Model
 {
   public string $table = 'pipelines';
-  public string $eloquentClass = Eloquent\Pipeline::class;
+  public string $recordManagerClass = RecordManagers\Pipeline::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [

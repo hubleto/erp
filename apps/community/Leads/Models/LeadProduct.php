@@ -12,7 +12,7 @@ use \ADIOS\Core\Db\Column\Decimal;
 class LeadProduct extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_products';
-  public string $eloquentClass = Eloquent\LeadProduct::class;
+  public string $eloquentClass = RecordManagers\LeadProduct::class;
   public ?string $lookupSqlValue = '{%TABLE%}.id_product';
 
   public array $relations = [

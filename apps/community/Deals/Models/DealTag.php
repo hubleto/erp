@@ -10,7 +10,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 class DealTag extends \HubletoMain\Core\Model
 {
   public string $table = 'cross_deal_tags';
-  public string $eloquentClass = Eloquent\DealTag::class;
+  public string $recordManagerClass = RecordManagers\DealTag::class;
 
   public array $relations = [
     'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_deal', 'id' ],

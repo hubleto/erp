@@ -7,25 +7,6 @@ class GetCalendarEvents extends \HubletoMain\Core\Controller {
 
   public function renderJson(): array
   {
-    $events = [];
-
-    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    foreach ($calendarManager->getCalendars() as $calendarClass => $calendar) {
-      $calEvents = (array) $calendar->loadEvents();
-      foreach ($calEvents as $key => $value) {
-        $calEvents[$key]['SOURCE'] = $calendarClass;
-        $calEvents[$key]['SOURCEFORM'] = $calendar->activitySelectorConfig["formComponent"] ?? null;
-      }
-      $events = array_merge($events, $calEvents);
-    }
-
-    $events = array_merge($events, $this->loadEvents());
-
-    return $events;
-  }
-
-  public function loadEvents(): array
-  {
     $dateStart = '';
     $dateEnd = '';
 
@@ -37,9 +18,34 @@ class GetCalendarEvents extends \HubletoMain\Core\Controller {
       $dateEnd = date("Y-m-d H:i:s", strtotime("+1 day"));
     }
 
+    return $this->loadEventsFromAllCalendars($dateStart, $dateEnd);
+  }
+
+  public function loadEventsFromAllCalendars(string $dateStart, string $dateEnd): array
+  {
+
+    $events = [];
+
+    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
+    foreach ($calendarManager->getCalendars() as $calendarClass => $calendar) {
+      $calEvents = (array) $calendar->loadEvents($dateStart, $dateEnd);
+      foreach ($calEvents as $key => $value) {
+        $calEvents[$key]['SOURCE'] = $calendarClass;
+        $calEvents[$key]['SOURCEFORM'] = $calendar->activitySelectorConfig["formComponent"] ?? null;
+      }
+      $events = array_merge($events, $calEvents);
+    }
+
+    $events = array_merge($events, $this->loadEvents($dateStart, $dateEnd));
+
+    return $events;
+  }
+
+  public function loadEvents(string $dateStart, string $dateEnd): array
+  {
     $mActivity = new \HubletoApp\Community\Calendar\Models\Activity($this->main);
 
-    $activities = $mActivity->eloquent
+    $activities = $mActivity->record
       ->select("activities.*", "activity_types.color", "activity_types.name as activity_type")
       ->leftJoin("activity_types", "activity_types.id", "=", "activities.id_activity_type")
       ->where("date_start", ">=", $dateStart)

@@ -14,7 +14,7 @@ use \ADIOS\Core\Db\Column\Date;
 class Invoice extends \HubletoMain\Core\Model {
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '{%TABLE%}.number';
-  public string $eloquentClass = Eloquent\Invoice::class;
+  public string $recordManagerClass = RecordManagers\Invoice::class;
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, "id_customer" ],
@@ -46,8 +46,8 @@ class Invoice extends \HubletoMain\Core\Model {
 
     $mInvoiceProfile = new InvoiceProfile($this->main);
 
-    $invoicesThisYear = (array) $this->eloquent->whereYear('date_delivery', date('Y'))->get()->toArray();
-    $profil = $mInvoiceProfile->eloquent->where('id', $record['id_profile'])->first()->toArray();
+    $invoicesThisYear = (array) $this->record->whereYear('date_delivery', date('Y'))->get()->toArray();
+    $profil = $mInvoiceProfile->record->where('id', $record['id_profile'])->first()->toArray();
 
     $record['number'] = (string) ($profil['numbering_pattern'] ?? '{YYYY}{NNNN}');
     $record['number'] = str_replace('{YY}', date('y'), $record['number']);

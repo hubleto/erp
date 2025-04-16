@@ -16,7 +16,7 @@ use \ADIOS\Core\Db\Column\Boolean;
 class LeadActivity extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_activities';
-  public string $eloquentClass = Eloquent\LeadActivity::class;
+  public string $recordManagerClass = RecordManagers\LeadActivity::class;
 
   public array $relations = [
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id' ],

@@ -20,12 +20,11 @@ use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\DateTime;
 use HubletoMain\Core\Helper;
-use Illuminate\Database\Eloquent\Builder;
 
 class Lead extends \HubletoMain\Core\Model
 {
   public string $table = 'leads';
-  public string $eloquentClass = Eloquent\Lead::class;
+  public string $recordManagerClass = RecordManagers\Lead::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
@@ -103,7 +102,7 @@ class Lead extends \HubletoMain\Core\Model
       $description->ui = [];
     }
     if ($this->main->urlParamAsBool("showArchive")) {
-      $description->ui['title'] = "Leads Archive";
+      $description->ui['title'] = "Archived leads";
       $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,
@@ -123,7 +122,7 @@ class Lead extends \HubletoMain\Core\Model
     $description = parent::describeForm();
 
     $mSettings = new Setting($this->main);
-    $defaultCurrency = (int) $mSettings->eloquent
+    $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
       ->value
@@ -146,7 +145,7 @@ class Lead extends \HubletoMain\Core\Model
   {
     if ($record["id_customer"] && !isset($record["checkOwnership"])) {
       $mCustomer = new Customer($this->main);
-      $customer = $mCustomer->eloquent
+      $customer = $mCustomer->record
         ->where("id", (int) $record["id_customer"])
         ->first()
       ;
@@ -167,27 +166,27 @@ class Lead extends \HubletoMain\Core\Model
   {
     $this->checkOwnership($record);
 
-    $lead = $this->eloquent->find($record["id"])->toArray();
+    $lead = $this->record->find($record["id"])->toArray();
     $mLeadHistory = new LeadHistory($this->main);
     $mLeadStatus = new LeadStatus($this->main);
 
     if ($lead["id_lead_status"] != (int) $record["id_lead_status"]) {
-      $status = (string) $mLeadStatus->eloquent->find((int) $record["id_lead_status"])->name;
-      $mLeadHistory->eloquent->create([
+      $status = (string) $mLeadStatus->record->find((int) $record["id_lead_status"])->name;
+      $mLeadHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
         "description" => "Status changed to " . $status
       ]);
     }
     if ((float) $lead["price"] != (float) $record["price"]) {
-      $mLeadHistory->eloquent->create([
+      $mLeadHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
         "description" => "Price changed to " . (string) $record["price"],
       ]);
     }
     if ((string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {
-      $mLeadHistory->eloquent->create([
+      $mLeadHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
         "description" => "Expected Close Date changed to " . date("d.m.Y", (int) strtotime((string) $record["date_expected_close"])),
@@ -200,7 +199,7 @@ class Lead extends \HubletoMain\Core\Model
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
     $mLeadHistory = new LeadHistory($this->main);
-    $mLeadHistory->eloquent->create([
+    $mLeadHistory->record->recordCreate([
       "change_date" => date("Y-m-d"),
       "id_lead" => $savedRecord["id"],
       "description" => "Lead created"

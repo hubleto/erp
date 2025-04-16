@@ -122,6 +122,18 @@
               </a>
             </li>
           {% endif %}
+          {% if viewParams.main.appManager.isAppInstalled('HubletoApp\Community\Messages') %}
+            <li class="mr-2">
+              <a
+                class="btn btn-small btn-transparent"
+                href="https://help.hubleto.com/{{ viewParams.contextHelpUrl }}"
+                target="_blank"
+              >
+                <span class="icon text-blue-500"><i class="fas fa-life-ring"></i></span>
+                <span class="text">{{ translate('Messages') }}</span>
+              </a>
+            </li>
+          {% endif %}
           <li>
             {% if app.isPremium %}
               <a class="btn btn-small btn-transparent" href="{{ config.accountUrl }}/premium">
@@ -208,13 +220,25 @@
         </button>
         {% set i = 0 %}
         {% for app in viewParams.appsInSidebar %}
-          <a
-            class="btn {% if app.isActivated %} btn-active {% endif %} "
-            id="sidebar-item-level1-{{ i }}"
-            href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
-          >
-            <span class="icon"><i class="{{ app.manifest.icon }}"></i></span><span class="text">{{ app.manifest.nameTranslated }}</span>
-          </a>
+          <div class="flex gap-1">
+            <a
+              class="btn {% if app.isActivated %} btn-active {% endif %} flex-10 truncate"
+              id="sidebar-item-level1-{{ i }}"
+              href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
+              title="{{ app.manifest.nameTranslated }}"
+            >
+              <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
+              <span class="text">{{ app.manifest.nameTranslated }}</span>
+            </a>
+            {% if app.isActivated and app.hasCustomSettings %}
+              <a
+                class="btn btn-transparent p-0 m-0 border-none text-white flex-1"
+                href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}/settings"
+              >
+                <span class="icon text-xs p-0 m-0"><i class="fas fa-cog"></i></span>
+              </a>
+            {% endif %}
+          </div>
           {% set i = i + 1 %}
         {% endfor %}
       </nav>

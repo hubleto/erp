@@ -9,7 +9,7 @@ use \ADIOS\Core\Db\Column\Color;
 class LeadStatus extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_statuses';
-  public string $eloquentClass = Eloquent\LeadStatus::class;
+  public string $recordManagerClass = RecordManagers\LeadStatus::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array

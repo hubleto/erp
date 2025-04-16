@@ -39,6 +39,9 @@
 
   .app-launcher-show-btn { @apply cursor-pointer bg-white/20 text-white text-xs m-1 p-1 flex items-center gap-2 justify-center rounded hover:bg-white/40; }
 
+  aside#default-sidebar > nav { @apply w-48; }
+  div#app-main-content { @apply md:ml-48; }
+
   #app-launcher { @apply hidden fixed w-full h-full bg-white/90; z-index: 10000; top: 0; left: 0; overflow: auto; }
   #app-launcher.visible { @apply block; }
   #app-launcher > div { @apply m-auto p-10 flex flex-wrap gap-4; width: 75%; }
@@ -51,6 +54,10 @@
   .btn-add { @apply bg-amber-600 hover:bg-amber-400; }
   .btn-add-outline { @apply border-amber-600 text-amber-600 border-solid hover:bg-amber-600/20; }
   .btn-edit { @apply bg-amber-600 hover:bg-amber-400; }
+
+  .btn-square { @apply flex-col text-center; }
+  .btn-square .icon { @apply flex justify-center h-12; }
+  .btn-square .text { @apply h-auto; }
 
   .modal-header-title h2 { @apply dark:text-white; }
 }

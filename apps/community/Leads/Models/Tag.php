@@ -8,7 +8,7 @@ use \ADIOS\Core\Db\Column\Color;
 class Tag extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_tags';
-  public string $eloquentClass = Eloquent\Tag::class;
+  public string $recordManagerClass = RecordManagers\Tag::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array

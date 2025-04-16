@@ -5,12 +5,15 @@ namespace HubletoApp\Community\Leads;
 class Loader extends \HubletoMain\Core\App
 {
 
+  public bool $hasCustomSettings = true;
+
   public function init(): void
   {
     parent::init();
 
     $this->main->router->httpGet([
-      '/^leads\/?$/' => Controllers\Leads::class,
+      '/^leads(\/(?<recordId>\d+))?\/?$/' => Controllers\Leads::class,
+      '/^leads\/settings\/?$/' => Controllers\Settings::class,
       '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
       '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^leads\/convert-to-deal\/?$/' => Controllers\Api\ConvertLead::class,
@@ -18,12 +21,12 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
     ]);
 
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Lead statuses'),
       'icon' => 'fas fa-arrow-up-short-wide',
       'url' => 'settings/lead-statuses',
     ]);
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Lead Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/lead-tags',
@@ -58,14 +61,14 @@ class Loader extends \HubletoMain\Core\App
       $mLeadActivity->dropTableIfExists()->install();
       $mLeadDocument->dropTableIfExists()->install();
 
-      $mLeadTag->eloquent->create([ 'name' => "Important", 'color' => '#fc2c03' ]);
-      $mLeadTag->eloquent->create([ 'name' => "ASAP", 'color' => '#62fc03' ]);
-      $mLeadTag->eloquent->create([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Important", 'color' => '#fc2c03' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "ASAP", 'color' => '#62fc03' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
 
-      $mLeadStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
-      $mLeadStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
-      $mLeadStatus->eloquent->create([ 'name' => 'Completed', 'order' => 3, 'color' => '#42ddf5' ]);
-      $mLeadStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
+      $mLeadStatus->record->recordCreate([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
+      $mLeadStatus->record->recordCreate([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
+      $mLeadStatus->record->recordCreate([ 'name' => 'Completed', 'order' => 3, 'color' => '#42ddf5' ]);
+      $mLeadStatus->record->recordCreate([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
     }
   }
 
@@ -119,7 +122,7 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

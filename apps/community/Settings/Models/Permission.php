@@ -7,7 +7,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class Permission extends \HubletoMain\Core\Model
 {
   public string $table = 'permissions';
-  public string $eloquentClass = Eloquent\Permission::class;
+  public string $recordManagerClass = RecordManagers\Permission::class;
   public ?string $lookupSqlValue = '{%TABLE%}.permission';
 
   public function describeColumns(): array

@@ -22,16 +22,16 @@ class ChangePipelineStep extends \HubletoMain\Core\Controller
 
     if ($this->main->isUrlParam("idDeal") && $this->main->isUrlParam("idStep")) {
       try {
-        $deal = $mDeal->eloquent->find($this->main->urlParamAsInteger("idDeal"));
+        $deal = $mDeal->record->find($this->main->urlParamAsInteger("idDeal"));
         $deal->id_pipeline_step = $this->main->urlParamAsInteger("idStep");
-        $deal->save();
+        $deal->recordSave();
 
-        $step = $mPipelineStep->eloquent
+        $step = $mPipelineStep->record
           ->where("id_pipeline", $this->main->urlParamAsInteger("idPipeline"))
           ->where("id", $this->main->urlParamAsInteger("idStep"))
           ->first()
         ;
-        $mDealHistory->eloquent->create([
+        $mDealHistory->record->recordCreate([
           "change_date" => date("Y-m-d"),
           "id_deal" => $deal->id,
           "description" => "Pipeline step changed to " . (string) $step->name
@@ -49,7 +49,7 @@ class ChangePipelineStep extends \HubletoMain\Core\Controller
       ];
     }
 
-    $dealHistory = $mDealHistory->eloquent->where("id_deal", $deal->id)->get();
+    $dealHistory = $mDealHistory->record->where("id_deal", $deal->id)->get();
 
     return [
       "status" => "success",

@@ -18,7 +18,7 @@ class User extends \ADIOS\Models\User
   ];
 
   public string $table = 'users';
-  public string $eloquentClass = Eloquent\User::class;
+  public string $recordManagerClass = RecordManagers\User::class;
   public ?string $lookupSqlValue = '{%TABLE%}.email';
 
   public function describeColumns(): array
@@ -33,16 +33,9 @@ class User extends \ADIOS\Models\User
     ]);
   }
 
-  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
-  {
-    return parent::prepareLoadRecordQuery($includeRelations, $maxRelationLevel, $query, $level)
-      ->with('ROLES')
-    ;
-  }
-
   public function getQueryForUser(int $idUser): mixed
   {
-    return $this->eloquent
+    return $this->record
       ->with('ROLES')
       ->with('PROFILE')
       ->where('id', $idUser)

@@ -65,7 +65,7 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

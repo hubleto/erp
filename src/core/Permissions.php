@@ -63,7 +63,7 @@ class Permissions extends \ADIOS\Core\Permissions {
         $mRolePermission = new RolePermission($this->main);
 
         /** @var array<int, array> */
-        $rolePermissions = (array) $mRolePermission->eloquent
+        $rolePermissions = (array) $mRolePermission->record
           ->selectRaw("role_permissions.*,permissions.permission")
           ->where("id_role", $idCommonRole)
           ->join("permissions", "role_permissions.id_permission", "permissions.id")

@@ -42,12 +42,12 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
     $mSettings = new Setting($this->main);
     $mPipepelineStep = new PipelineStep($this->main);
-    $defaultPipeline =(int) $mSettings->eloquent
+    $defaultPipeline =(int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
       ->first()
       ->value
     ;
-    $defaultPipelineFirstStep =(int) $mPipepelineStep->eloquent
+    $defaultPipelineFirstStep =(int) $mPipepelineStep->record
       ->where("id_pipeline", $defaultPipeline)
       ->orderBy("id", "asc")
       ->first()
@@ -55,9 +55,9 @@ class ConvertLead extends \HubletoMain\Core\Controller
     ;
 
     try {
-      $lead = $mLead->eloquent->where("id", $leadId)->first();
+      $lead = $mLead->record->where("id", $leadId)->first();
 
-      $deal = $mDeal->eloquent->create([
+      $deal = $mDeal->record->recordCreate([
         "identifier" => $lead->identifier,
         "title" => $lead->title,
         "id_customer" => $lead->id_customer,
@@ -75,10 +75,10 @@ class ConvertLead extends \HubletoMain\Core\Controller
         "id_pipeline_step" => $defaultPipelineFirstStep ?? null,
       ]);
 
-      $leadProducts = $mLeadProduct->eloquent->where("id_lead", $leadId)->get();
+      $leadProducts = $mLeadProduct->record->where("id_lead", $leadId)->get();
 
       foreach ($leadProducts as $leadProduct) { //@phpstan-ignore-line
-        $mDealProduct->eloquent->create([
+        $mDealProduct->record->create([
           "id_product" => $leadProduct->id_product,
           "id_deal" => $deal->id,
           "unit_price" => $leadProduct->unit_price,
@@ -88,39 +88,39 @@ class ConvertLead extends \HubletoMain\Core\Controller
         ]);
       }
 
-      $leadDocuments = $mLeadDocument->eloquent->where("id_lookup", $leadId)->get();
+      $leadDocuments = $mLeadDocument->record->where("id_lookup", $leadId)->get();
 
       foreach ($leadDocuments as $leadDocument) { //@phpstan-ignore-line
-        $mDealDocument->eloquent->create([
+        $mDealDocument->record->recordCreate([
           "id_document" => $leadDocument->id_document,
           "id_deal" => $deal->id
         ]);
       }
 
-      $leadHistories = $mLeadHistory->eloquent->where("id_lead", $leadId)->get();
+      $leadHistories = $mLeadHistory->record->where("id_lead", $leadId)->get();
 
       foreach ($leadHistories as $leadHistory) { //@phpstan-ignore-line
-        $mDealHistory->eloquent->create([
+        $mDealHistory->record->recordCreate([
           "description" => $leadHistory->description,
           "change_date" => $leadHistory->change_date,
           "id_deal" => $deal->id
         ]);
       }
 
-      $mLeadHistory->eloquent->create([
+      $mLeadHistory->record->recordCreate([
         "description" => "Converted to a Deal",
         "change_date" => date("Y-m-d"),
         "id_lead" => $leadId
       ]);
 
-      $mDealHistory->eloquent->create([
+      $mDealHistory->record->recordCreate([
         "description" => "Converted to a Deal",
         "change_date" => date("Y-m-d"),
         "id_deal" => $deal->id
       ]);
 
       $lead->is_archived = 1;
-      $lead->save();
+      $lead->recordSave();
     } catch (Exception $e) {
       return [
         "status" => "failed",

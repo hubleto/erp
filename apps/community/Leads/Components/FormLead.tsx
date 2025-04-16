@@ -198,7 +198,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     {this.inputWrapper('identifier', {readonly: R.is_archived})}
                     {this.inputWrapper('title', {readonly: R.is_archived})}
                     <FormInput title={"Customer"}>
-                      <Lookup {...this.getInputProps()}
+                      <Lookup {...this.getInputProps('id-customer')}
                         model='HubletoApp/Community/Customers/Models/Customer'
                         endpoint={`customers/get-customer`}
                         readonly={R.is_archived}
@@ -213,7 +213,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       ></Lookup>
                     </FormInput>
                     <FormInput title={"Contact Person"}>
-                      <Lookup {...this.getInputProps()}
+                      <Lookup {...this.getInputProps('id-person')}
                         model='HubletoApp/Community/Customers/Models/Person'
                         customEndpointParams={{id_customer: R.id_customer}}
                         readonly={R.is_archived}
@@ -423,6 +423,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   this.setState({
                     showIdActivity: parseInt(info.event.id),
                   } as FormLeadState);
+                  info.jsEvent.preventDefault();
                 }}
               ></Calendar>
               {this.state.showIdActivity == 0 ? <></> :

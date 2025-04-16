@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Orders\Models;
 class History extends \HubletoMain\Core\Model
 {
   public string $table = 'order_histories';
-  public string $eloquentClass = Eloquent\History::class;
+  public string $recordManagerClass = RecordManagers\History::class;
   public ?string $lookupSqlValue = '{%TABLE%}.id';
 
   public array $relations = [

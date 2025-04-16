@@ -7,7 +7,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 class UserHasRole extends \HubletoMain\Core\Model
 {
   public string $table = 'user_has_roles';
-  public string $eloquentClass = Eloquent\UserHasRole::class;
+  public string $recordManagerClass = RecordManagers\UserHasRole::class;
 
   public function describeColumns(): array
   {

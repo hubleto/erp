@@ -5,6 +5,8 @@ namespace HubletoApp\Community\Deals;
 class Loader extends \HubletoMain\Core\App
 {
 
+  public bool $hasCustomSettings = true;
+
   public function init(): void
   {
     parent::init();
@@ -18,15 +20,15 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/change-pipeline-step\/?$/' => Controllers\Api\ChangePipelineStep::class,
       '/^settings\/deal-tags\/?$/' => Controllers\Tags::class,
       '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,
-      '/^deals\/boards\/deal-value-by-status\/?$/' => Controllers\Boards\DealValueByStatus::class,
+      '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
     ]);
 
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Deal statuses'),
       'icon' => 'fas fa-arrow-up-short-wide',
       'url' => 'settings/deal-statuses',
     ]);
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Deal Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/deal-tags',
@@ -47,10 +49,10 @@ class Loader extends \HubletoMain\Core\App
       ));
     }
 
-    if ($this->configAsBool('showDealValueByStatusInDashboard')) {
+    if ($this->configAsBool('showDealValueByResultInDashboard')) {
       $dashboardManager->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
-        'Deal value by status',
-        'deals/boards/deal-value-by-status',
+        'Deal value by result',
+        'deals/boards/deal-value-by-result',
       ));
     }
 
@@ -78,11 +80,11 @@ class Loader extends \HubletoMain\Core\App
       $mDealActivity->dropTableIfExists()->install();
       $mDealDocument->dropTableIfExists()->install();
 
-      $mDealTag->eloquent->create([ 'name' => "Important", 'color' => '#fc2c03' ]);
-      $mDealTag->eloquent->create([ 'name' => "ASAP", 'color' => '#62fc03' ]);
-      $mDealTag->eloquent->create([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
-      $mDealTag->eloquent->create([ 'name' => "New Customer", 'color' => '#fcdb03' ]);
-      $mDealTag->eloquent->create([ 'name' => "Existing Customer", 'color' => '#5203fc' ]);
+      $mDealTag->record->recordCreate([ 'name' => "Important", 'color' => '#fc2c03' ]);
+      $mDealTag->record->recordCreate([ 'name' => "ASAP", 'color' => '#62fc03' ]);
+      $mDealTag->record->recordCreate([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
+      $mDealTag->record->recordCreate([ 'name' => "New Customer", 'color' => '#fcdb03' ]);
+      $mDealTag->record->recordCreate([ 'name' => "Existing Customer", 'color' => '#5203fc' ]);
     }
   }
 
@@ -130,7 +132,7 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

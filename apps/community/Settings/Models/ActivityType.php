@@ -9,7 +9,7 @@ use \ADIOS\Core\Db\Column\Boolean;
 class ActivityType extends \HubletoMain\Core\Model
 {
   public string $table = 'activity_types';
-  public string $eloquentClass = Eloquent\ActivityType::class;
+  public string $recordManagerClass = RecordManagers\ActivityType::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array

@@ -60,7 +60,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   }
 
   onAfterSaveRecord(saveResponse: any): void {
-    let params = this.getEndpointParams()
+    let params = this.getEndpointParams();
     let isArchived = saveResponse.savedRecord.is_archived;
 
     if (params.showArchive == false && isArchived == true) {
@@ -263,7 +263,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                       {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                       <FormInput title='Tags'>
-                        <InputTags2 {...this.getInputProps()}
+                        <InputTags2 {...this.getInputProps('tags')}
                           value={this.state.record.TAGS}
                           readonly={R.is_archived}
                           model='HubletoApp/Community/Deals/Models/Tag'
@@ -475,6 +475,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                   this.setState({
                     showIdActivity: parseInt(info.event.id),
                   } as FormDealState);
+                  info.jsEvent.preventDefault();
                 }}
               ></Calendar>
               {this.state.showIdActivity == 0 ? <></> :
@@ -538,7 +539,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableDealDocuments, data: any, options: any): JSX.Element => {
                       return (
                         <FormInput>
-                          <Hyperlink {...this.getInputProps()}
+                          <Hyperlink {...this.getInputProps('document-link')}
                             value={data.DOCUMENT.hyperlink}
                             readonly={true}
                           ></Hyperlink>

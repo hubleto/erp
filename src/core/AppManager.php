@@ -214,13 +214,13 @@ class AppManager
 
     if (!is_dir($appFolder . '/Controllers')) mkdir($appFolder . '/Controllers');
     if (!is_dir($appFolder . '/Models')) mkdir($appFolder . '/Models');
-    if (!is_dir($appFolder . '/Models/Eloquent')) mkdir($appFolder . '/Models/Eloquent');
+    if (!is_dir($appFolder . '/Models/RecordManagers')) mkdir($appFolder . '/Models/RecordManagers');
     if (!is_dir($appFolder . '/Views')) mkdir($appFolder . '/Views');
 
     file_put_contents($appFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
     file_put_contents($appFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml.twig', $tplVars));
     file_put_contents($appFolder . '/Models/Contact.php', $this->main->twig->render('@appTemplate/Models/Contact.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Models/Eloquent/Contact.php', $this->main->twig->render('@appTemplate/Models/Eloquent/Contact.php.twig', $tplVars));
+    file_put_contents($appFolder . '/Models/RecordManagers/Contact.php', $this->main->twig->render('@appTemplate/Models/RecordManagers/Contact.php.twig', $tplVars));
     file_put_contents($appFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
     file_put_contents($appFolder . '/Controllers/Dashboard.php', $this->main->twig->render('@appTemplate/Controllers/Dashboard.php.twig', $tplVars));
     file_put_contents($appFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));

@@ -62,7 +62,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
       elements.push(
         <a className="btn btn-transparent" href="leads/archive">
           <span className="icon"><i className="fas fa-box-archive"></i></span>
-          <span className="text">Archive</span>
+          <span className="text">Show archived leads</span>
         </a>
       );
     }
@@ -83,6 +83,21 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
           })}
         </>
       );
+    } else if (columnName == "DEAL") {
+      if (data.DEAL) {
+        return <>
+          <a
+            className="btn btn-transparent btn-small"
+            href={"deals/" + data.DEAL.id}
+            target="_blank"
+          >
+            <span className="icon"><i className="fas fa-arrow-right"></i></span>
+            <span className="text">{data.DEAL.identifier}</span>
+          </a>
+        </>
+      } else {
+        return null;
+      }
     } else {
       return super.renderCell(columnName, column, data, options);
     }
@@ -109,6 +124,12 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
         this.setState({tableLeadDocumentsDescription: description} as TableLeadsState);
       }
     );
+
+    description.columns['DEAL'] = {
+      type: 'varchar',
+      title: globalThis.main.translate('Deal'),
+    };
+
     return description;
   }
 

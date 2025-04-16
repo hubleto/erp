@@ -9,7 +9,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 class CustomerTag extends \HubletoMain\Core\Model
 {
   public string $table = 'cross_customer_tags';
-  public string $eloquentClass = Eloquent\CustomerTag::class;
+  public string $recordManagerClass = RecordManagers\CustomerTag::class;
 
   public array $relations = [
     'TAG' => [ self::BELONGS_TO, Tag::class, 'id_tag', 'id' ],

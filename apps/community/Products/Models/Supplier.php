@@ -10,7 +10,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 class Supplier extends \HubletoMain\Core\Model
 {
   public string $table = 'product_suppliers';
-  public string $eloquentClass = Eloquent\Supplier::class;
+  public string $recordManagerClass = RecordManagers\Supplier::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public function describeColumns(): array

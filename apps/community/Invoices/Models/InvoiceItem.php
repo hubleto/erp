@@ -12,7 +12,7 @@ use \ADIOS\Core\Db\Column\Decimal;
 class InvoiceItem extends \ADIOS\Core\Model {
   public string $table = 'invoice_items';
   public ?string $lookupSqlValue = '{%TABLE%}.id_invoice';
-  public string $eloquentClass = Eloquent\InvoiceItem::class;
+  public string $recordManagerClass = RecordManagers\InvoiceItem::class;
 
   public array $relations = [
     'INVOICE' => [ self::BELONGS_TO, Invoice::class, "id_invoice" ],

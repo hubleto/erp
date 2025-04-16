@@ -7,7 +7,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class Currency extends \HubletoMain\Core\Model
 {
   public string $table = 'currencies';
-  public string $eloquentClass = Eloquent\Currency::class;
+  public string $recordManagerClass = RecordManagers\Currency::class;
   public ?string $lookupSqlValue = 'CONCAT({%TABLE%}.name ," ","(",{%TABLE%}.code,")")';
 
   public function describeColumns(): array

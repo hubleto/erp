@@ -70,6 +70,7 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
               onSaveCallback:() => {this.setState({activityFormComponent: null})}
             })
           });
+          info.jsEvent.preventDefault();
         }}
       ></Calendar>
       {this.state.activityFormComponent ?

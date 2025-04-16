@@ -39,17 +39,17 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/save-permissions\/?$/' => Controllers\Api\SavePermissions::class,
     ]);
 
-    $this->main->addSetting(['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
-    $this->main->addSetting(['title' => $this->translate('User roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
-    $this->main->addSetting(['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/profiles']);
-    $this->main->addSetting(['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
-    $this->main->addSetting(['title' => $this->translate('Permissions'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
-    $this->main->addSetting(['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
-    $this->main->addSetting(['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
-    $this->main->addSetting(['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
-    $this->main->addSetting(['title' => $this->translate('Pipelines'), 'icon' => 'fas fa-bars-progress', 'url' => 'settings/pipelines']);
-    $this->main->addSetting(['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
-    $this->main->addSetting(['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
+    $this->main->addSetting($this, ['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
+    $this->main->addSetting($this, ['title' => $this->translate('User roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
+    $this->main->addSetting($this, ['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/profiles']);
+    $this->main->addSetting($this, ['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
+    $this->main->addSetting($this, ['title' => $this->translate('Permissions'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
+    $this->main->addSetting($this, ['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
+    $this->main->addSetting($this, ['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
+    $this->main->addSetting($this, ['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
+    $this->main->addSetting($this, ['title' => $this->translate('Pipelines'), 'icon' => 'fas fa-bars-progress', 'url' => 'settings/pipelines']);
+    $this->main->addSetting($this, ['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
+    $this->main->addSetting($this, ['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
   }
 
   public function installTables(int $round): void
@@ -83,37 +83,37 @@ class Loader extends \HubletoMain\Core\App
       $mPipelineStep->dropTableIfExists()->install();
       $mInvoiceProfile->dropTableIfExists()->install();
 
-      $mSetting->eloquent->create([
+      $mSetting->record->recordCreate([
         'key' => 'Apps\Community\Settings\Pipeline\DefaultPipeline',
         'value' => '2',
         'id_user' => null
       ]);
-      $mSetting->eloquent->create([
+      $mSetting->record->recordCreate([
         'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',
         'value' => '1',
         'id_user' => null
       ]);
 
-      $mCurrency->eloquent->create([ 'name' => 'Euro', 'code' => 'EUR' ]);
-      $mCurrency->eloquent->create([ 'name' => 'Dollar', 'code' => 'USD' ]);
-      $mCurrency->eloquent->create([ 'name' => 'Koruny', 'code' => 'CZK' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Euro', 'code' => 'EUR' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Dollar', 'code' => 'USD' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Koruny', 'code' => 'CZK' ]);
 
-      $mPipeline->eloquent->create([ "name" => "New customer" ]);
-      $mPipelineStep->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#4080A0', 'id_pipeline' => 1 ]);
-      $mPipelineStep->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A04020', 'id_pipeline' => 1 ]);
-      $mPipelineStep->eloquent->create([ 'name' => 'Closed', 'order' => 3, 'color' => '#006060', 'id_pipeline' => 1 ]);
+      $mPipeline->record->recordCreate([ "name" => "New customer" ]);
+      $mPipelineStep->record->recordCreate([ 'name' => 'New', 'order' => 1, 'color' => '#4080A0', 'id_pipeline' => 1 ]);
+      $mPipelineStep->record->recordCreate([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A04020', 'id_pipeline' => 1 ]);
+      $mPipelineStep->record->recordCreate([ 'name' => 'Closed', 'order' => 3, 'color' => '#006060', 'id_pipeline' => 1 ]);
 
-      $mPipeline->eloquent->create([ "name" => "Existing customer" ]);
-      $mPipelineStep->eloquent->create([ 'name' => 'Start', 'order' => 1, 'color' => '#405060', 'id_pipeline' => 2 ]);
-      $mPipelineStep->eloquent->create([ 'name' => 'Client Contacted', 'order' => 2, 'color' => '#800000', 'id_pipeline' => 2 ]);
-      $mPipelineStep->eloquent->create([ 'name' => 'In Progress', 'order' => 3, 'color' => '#808000', 'id_pipeline' => 2 ]);
-      $mPipelineStep->eloquent->create([ 'name' => 'Ended', 'order' => 4, 'color' => '#002080', 'id_pipeline' => 2 ]);
+      $mPipeline->record->recordCreate([ "name" => "Existing customer" ]);
+      $mPipelineStep->record->recordCreate([ 'name' => 'Start', 'order' => 1, 'color' => '#405060', 'id_pipeline' => 2 ]);
+      $mPipelineStep->record->recordCreate([ 'name' => 'Client Contacted', 'order' => 2, 'color' => '#800000', 'id_pipeline' => 2 ]);
+      $mPipelineStep->record->recordCreate([ 'name' => 'In Progress', 'order' => 3, 'color' => '#808000', 'id_pipeline' => 2 ]);
+      $mPipelineStep->record->recordCreate([ 'name' => 'Ended', 'order' => 4, 'color' => '#002080', 'id_pipeline' => 2 ]);
 
-      $mActivityTypes->eloquent->create([ 'name' => 'Meeting', 'color' => '#607d8b', 'calendar_visibility' => true ]);
-      $mActivityTypes->eloquent->create([ 'name' => 'Bussiness Trip', 'color' => '#673ab7', 'calendar_visibility' => true ]);
-      $mActivityTypes->eloquent->create([ 'name' => 'Call', 'color' => '#348789', 'calendar_visibility' => true ]);
-      $mActivityTypes->eloquent->create([ 'name' => 'Email', 'color' => '#3f51b5', 'calendar_visibility' => true ]);
-      $mActivityTypes->eloquent->create([ 'name' => 'Other', 'color' => '#91133e', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => 'Meeting', 'color' => '#607d8b', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => 'Bussiness Trip', 'color' => '#673ab7', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => 'Call', 'color' => '#348789', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => 'Email', 'color' => '#3f51b5', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => 'Other', 'color' => '#91133e', 'calendar_visibility' => true ]);
 
       $countries = [
         [1, 'Aruba', 'ABW'],
@@ -368,7 +368,7 @@ class Loader extends \HubletoMain\Core\App
       ];
 
       foreach ($countries as $country) {
-        $mCountry->eloquent->create([
+        $mCountry->record->recordCreate([
           "id" => $country[0],
           "name" => $country[1],
           "code" => $country[2],
@@ -474,12 +474,12 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     $idRoles = [];
-    $idRoles[Models\UserRole::ROLE_ADMINISTRATOR] = $mUserRole->eloquent->create(['id' => Models\UserRole::ROLE_ADMINISTRATOR, 'role' => 'Administrator', 'grant_all' => 1])->id;
-    $idRoles[Models\UserRole::ROLE_SALES_MANAGER] = $mUserRole->eloquent->create(['id' => Models\UserRole::ROLE_SALES_MANAGER, 'role' => 'Sales manager', 'grant_all' => 0])->id;
-    $idRoles[Models\UserRole::ROLE_ACCOUNTANT] = $mUserRole->eloquent->create(['id' => Models\UserRole::ROLE_ACCOUNTANT, 'role' => 'Accountant', 'grant_all' => 0])->id;
+    $idRoles[Models\UserRole::ROLE_ADMINISTRATOR] = $mUserRole->record->recordCreate(['id' => Models\UserRole::ROLE_ADMINISTRATOR, 'role' => 'Administrator', 'grant_all' => 1])['id'];
+    $idRoles[Models\UserRole::ROLE_SALES_MANAGER] = $mUserRole->record->recordCreate(['id' => Models\UserRole::ROLE_SALES_MANAGER, 'role' => 'Sales manager', 'grant_all' => 0])['id'];
+    $idRoles[Models\UserRole::ROLE_ACCOUNTANT] = $mUserRole->record->recordCreate(['id' => Models\UserRole::ROLE_ACCOUNTANT, 'role' => 'Accountant', 'grant_all' => 0])['id'];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

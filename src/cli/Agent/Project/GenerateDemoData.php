@@ -246,16 +246,22 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "tax_id" => $customer[8],
         "vat_id" => $customer[9],
         "note" => $customer[10],
-        "is_active" => 1,
+        "is_active" => rand(0, 1),
         "id_user" => 1,
         "date_created" => date("Y-m-d", rand(1722456000, strtotime("now"))),
       ])['id'];
 
-      $tagCount = rand(0, 3);
-      for ($i = 0; $i < $tagCount; $i++) {
+      $tags = [];
+      $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
+      while (count($tags) < $tagsCount) {
+        $idTag = rand(1, 3);
+        if (!in_array($idTag, $tags)) $tags[] = $idTag;
+      }
+
+      foreach ($tags as $idTag) {
         $mCustomerTag->record->recordCreate([
           "id_customer" => $idCustomer,
-          "id_tag" => rand(1, 3)
+          "id_tag" => $idTag,
         ]);
       }
     }
@@ -573,10 +579,19 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_user" => 1,
       ]);
 
-      $mLeadTag->record->recordCreate([
-        "id_lead" => $idLead,
-        "id_tag" => rand(1,3)
-      ]);
+      $tags = [];
+      $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
+      while (count($tags) < $tagsCount) {
+        $idTag = rand(1, 4);
+        if (!in_array($idTag, $tags)) $tags[] = $idTag;
+      }
+
+      foreach ($tags as $idTag) {
+        $mLeadTag->record->recordCreate([
+          "id_lead" => $idLead,
+          "id_tag" => $idTag,
+        ]);
+      }
     }
 
   }

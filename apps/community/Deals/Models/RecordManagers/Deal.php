@@ -85,10 +85,12 @@ class Deal extends \HubletoMain\Core\RecordManager
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
 
-    if ($main->urlParamAsBool("showArchive")) {
-      $query = $query->where("deals.is_archived", 1);
-    } else {
-      $query = $query->where("deals.is_archived", 0);
+    if ($main->urlParamAsInteger("id") <= 0) {
+      if ($main->urlParamAsBool("showArchive")) {
+        $query = $query->where("deals.is_archived", 1);
+      } else {
+        $query = $query->where("deals.is_archived", 0);
+      }
     }
 
     return $query;

@@ -61,9 +61,10 @@ class Loader extends \HubletoMain\Core\App
       $mLeadActivity->dropTableIfExists()->install();
       $mLeadDocument->dropTableIfExists()->install();
 
-      $mLeadTag->record->recordCreate([ 'name' => "Important", 'color' => '#fc2c03' ]);
-      $mLeadTag->record->recordCreate([ 'name' => "ASAP", 'color' => '#62fc03' ]);
-      $mLeadTag->record->recordCreate([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Quite complex", 'color' => '#2196f3' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Great opportunity", 'color' => '#4caf50' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Duplicate", 'color' => '#9e9e9e' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Needs attention", 'color' => '#795548' ]);
 
       $mLeadStatus->record->recordCreate([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
       $mLeadStatus->record->recordCreate([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);

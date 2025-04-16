@@ -31,6 +31,7 @@ class DealValueByResult extends \HubletoMain\Core\Controller {
     ];
 
     $results = [
+      0 => ['name' => 'Unknown', 'color' => 'black'],
       1 => ['name' => 'Lost', 'color' => 'red'],
       2 => ['name' => 'Won', 'color' => 'green'],
       3 => ['name' => 'Pending', 'color' => 'gray'],

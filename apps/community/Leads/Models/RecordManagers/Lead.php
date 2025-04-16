@@ -77,11 +77,12 @@ class Lead extends \HubletoMain\Core\RecordManager
     $query = parent::prepareReadQuery($query, $level);
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
-
-    if ($main->urlParamAsBool("showArchive")) {
-      $query = $query->where("leads.is_archived", 1);
-    } else {
-      $query = $query->where("leads.is_archived", 0);
+    if ($main->urlParamAsInteger("id") <= 0) {
+      if ($main->urlParamAsBool("showArchive")) {
+        $query = $query->where("leads.is_archived", 1);
+      } else {
+        $query = $query->where("leads.is_archived", 0);
+      }
     }
 
     return $query;
@@ -89,7 +90,7 @@ class Lead extends \HubletoMain\Core\RecordManager
 
   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
   {
-    if ($orderBy['field'] == 'DEAL') {
+    if (isset($orderBy['field']) && $orderBy['field'] == 'DEAL') {
       $query
         ->join('deals', 'deals.id_lead', '=', 'leads.id')
         ->orderBy('deals.identifier', $orderBy['direction'])

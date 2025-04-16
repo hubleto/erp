@@ -48,9 +48,9 @@ class Loader extends \HubletoMain\Core\App
       $mCrossCustomerTag->dropTableIfExists()->install();
       $mCustomerDocument->dropTableIfExists()->install();
 
-      $mCustomerTag->record->recordCreate([ 'name' => "VIP", 'color' => '#fc2c03' ]);
-      $mCustomerTag->record->recordCreate([ 'name' => "Partner", 'color' => '#62fc03' ]);
-      $mCustomerTag->record->recordCreate([ 'name' => "Public", 'color' => '#033dfc' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "VIP", 'color' => '#D33115' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "Partner", 'color' => '#4caf50' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "Public", 'color' => '#2196f3' ]);
     }
 
     if ($round == 2) {

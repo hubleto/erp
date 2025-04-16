@@ -77,14 +77,14 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
       $leadProducts = $mLeadProduct->record->where("id_lead", $leadId)->get();
 
-      foreach ($leadProducts as $leadProduct) { //@phpstan-ignore-line
-        $mDealProduct->record->create([
-          "id_product" => $leadProduct->id_product,
-          "id_deal" => $deal->id,
-          "unit_price" => $leadProduct->unit_price,
-          "amount" => $leadProduct->amount,
-          "discount" => $leadProduct->discount,
-          "tax" => $leadProduct->tax,
+      foreach ($leadServices as $leadService) { //@phpstan-ignore-line
+        $mDealService->record->recordCreate([
+          "id_service" => $leadService->id_service,
+          "id_deal" => $deal['id'],
+          "unit_price" => $leadService->unit_price,
+          "amount" => $leadService->amount,
+          "discount" => $leadService->discount,
+          "tax" => $leadService->tax,
         ]);
       }
 
@@ -93,7 +93,7 @@ class ConvertLead extends \HubletoMain\Core\Controller
       foreach ($leadDocuments as $leadDocument) { //@phpstan-ignore-line
         $mDealDocument->record->recordCreate([
           "id_document" => $leadDocument->id_document,
-          "id_deal" => $deal->id
+          "id_deal" => $deal['id']
         ]);
       }
 
@@ -103,7 +103,7 @@ class ConvertLead extends \HubletoMain\Core\Controller
         $mDealHistory->record->recordCreate([
           "description" => $leadHistory->description,
           "change_date" => $leadHistory->change_date,
-          "id_deal" => $deal->id
+          "id_deal" => $deal['id']
         ]);
       }
 
@@ -116,11 +116,11 @@ class ConvertLead extends \HubletoMain\Core\Controller
       $mDealHistory->record->recordCreate([
         "description" => "Converted to a Deal",
         "change_date" => date("Y-m-d"),
-        "id_deal" => $deal->id
+        "id_deal" => $deal['id']
       ]);
 
       $lead->is_archived = 1;
-      $lead->recordSave();
+      $lead->save();
     } catch (Exception $e) {
       return [
         "status" => "failed",
@@ -130,8 +130,8 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
     return [
       "status" => "success",
-      "idDeal" => $deal->id,
-      "title" => str_replace(" ", "+", (string) $deal->title)
+      "idDeal" => $deal['id'],
+      "title" => str_replace(" ", "+", (string) $deal['title'])
     ];
   }
 

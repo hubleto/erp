@@ -306,6 +306,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 <div className="card-body flex flex-row gap-2">
                   <div className="w-1/2">
                     {this.inputWrapper("name")}
+                    {this.inputWrapper("customer_id")}
                     {this.inputWrapper("street_line_1")}
                     {this.inputWrapper("street_line_2")}
                     {this.inputWrapper("city")}
@@ -316,7 +317,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   <div className='border-l border-gray-200'></div>
                   <div className="w-1/2">
                     {this.inputWrapper("vat_id")}
-                    {this.inputWrapper("customer_id")}
                     {this.inputWrapper("tax_id")}
                     {showAdditional ? this.inputWrapper("date_created") : null}
                     {this.inputWrapper("is_active")}
@@ -444,7 +444,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               <TableLeads
                 uid={this.props.uid + "_table_leads"}
                 data={{ data: R.LEADS }}
-                descriptionSource="props"
+                descriptionSource="both"
                 customEndpointParams={{idCustomer: R.id}}
                 isUsedAsInput={false}
                 readonly={!this.state.isInlineEditing}
@@ -452,13 +452,13 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   permissions: this.props.tableLeadsDescription.permissions,
                   columns: {
                     title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
+                    price: { type: "float", title: "Price" },
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                   inputs: {
                     title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
+                    price: { type: "float", title: "Price" },
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
@@ -466,7 +466,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 onRowClick={(table: TableLeads, row: any) => {
                   var tableProps = this.props.tableLeadsDescription
                   tableProps.idLead = row.id;
-                  table.onAfterLoadTableDescription(tableProps)
                   table.openForm(row.id);
                 }}
                 onDeleteSelectionChange={(table: TableLeads) => {
@@ -498,13 +497,13 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   permissions: this.props.tableDealsDescription.permissions,
                   columns: {
                     title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
+                    price: { type: "float", title: "Price" },
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                   inputs: {
                     title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
+                    price: { type: "float", title: "Price" },
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },

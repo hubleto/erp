@@ -16,8 +16,6 @@ import Hyperlink from 'adios/Inputs/Hyperlink';
 
 export interface FormLeadProps extends HubletoFormProps {
   newEntryId?: number,
-  tableLeadProductsDescription?: any,
-  tableLeadDocumentsDescription?: any,
 }
 
 export interface FormLeadState extends HubletoFormState {
@@ -26,6 +24,8 @@ export interface FormLeadState extends HubletoFormState {
   showIdActivity: number,
   activityCalendarTimeClicked: string,
   activityCalendarDateClicked: string,
+  tableLeadProductsDescription: any,
+  tableLeadDocumentsDescription: any,
 }
 
 export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadState> {
@@ -48,6 +48,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       showIdActivity: 0,
       activityCalendarTimeClicked: '',
       activityCalendarDateClicked: '',
+      tableLeadProductsDescription: null,
+      tableLeadDocumentsDescription: null,
     };
   }
 
@@ -57,8 +59,33 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     };
   }
 
+  onAfterLoadFormDescription(description: any) {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Leads/Models/LeadProduct',
+        idLead: this.state.id,
+      },
+      (description: any) => {
+        this.setState({tableLeadProductsDescription: description} as any);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Leads/Models/LeadDocument',
+        idLead: this.state.id,
+      },
+      (description: any) => {
+        this.setState({tableLeadDocumentsDescription: description} as any);
+      }
+    );
+
+    return description;
+  }
+
   onAfterSaveRecord(saveResponse: any): void {
-    let params = this.getEndpointParams()
+    let params = this.getEndpointParams() as any;
     let isArchived = saveResponse.savedRecord.is_archived;
 
     if (params.showArchive == false && isArchived == true) {
@@ -178,10 +205,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       <>
         <TabView>
           <TabPanel header={this.translate('Lead')}>
-            {R.DEAL && R.is_archived == 1 ?
+            {R.is_archived == 1 ?
               <div className='alert-warning mt-2 mb-1'>
                 <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
-                <span className='text'>This lead was converted to a deal and cannot be edited</span>
+                <span className='text'>This lead is archived.</span>
               </div>
             : null}
             <div className='grid grid-cols-2 gap-1' style=
@@ -238,7 +265,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     {showAdditional ?
                       <div className='w-full mt-2'>
                         {R.DEAL != null ?
-                        <a className='btn btn-primary' href={`../deals?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
+                        <a className='btn btn-primary' href={`${globalThis.app.config.url}/deals/${R.DEAL.id}`}>
                           <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
                           <span className='text'>{this.translate('Go to deal')}</span>
                         </a>
@@ -306,7 +333,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         descriptionSource='props'
                         customEndpointParams={{'idLead': R.id}}
                         description={{
-                          permissions: this.props.tableLeadProductsDescription.permissions,
+                          permissions: this.state.tableLeadProductsDescription?.permissions,
                           ui: {
                             showHeader: false,
                             showFooter: true
@@ -316,7 +343,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                               cellRenderer: ( table: TableLeadProducts, data: any, options: any): JSX.Element => {
                                 return (
                                   <FormInput>
-                                    <Lookup {...this.getInputProps()}
+                                    <Lookup {...this.getInputProps('lookup-product-1')}
                                       ref={lookupElement}
                                       model='HubletoApp/Community/Products/Models/Product'
                                       cssClass='min-w-44'
@@ -358,7 +385,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                               cellRenderer: ( table: TableLeadProducts, data: any, options: any): JSX.Element => {
                                 return (
                                   <FormInput>
-                                    <Lookup {...this.getInputProps()}
+                                    <Lookup {...this.getInputProps('lookup-product-2')}
                                       ref={lookupElement}
                                       model='HubletoApp/Community/Products/Models/Product'
                                       cssClass='min-w-44'
@@ -477,7 +504,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 descriptionSource="both"
                 customEndpointParams={{idLead: R.id}}
                 description={{
-                  permissions: this.props.tableLeadDocumentsDescription.permissions,
+                  permissions: this.state.tableLeadDocumentsDescription?.permissions,
                   ui: {
                     showFooter: false,
                     showHeader: false,
@@ -547,7 +574,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             <TabPanel header={this.translate('History')}>
               {R.HISTORY.length > 0 ?
                 R.HISTORY.map((history, key) => (
-                  <div className='w-full flex flex-row justify-between'>
+                  <div key={key} className='w-full flex flex-row justify-between'>
                     <div className='w-1/3'>
                         <p className='font-bold self-center text-sm text-left'>
                           {history.description}

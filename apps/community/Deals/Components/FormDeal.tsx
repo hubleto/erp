@@ -17,8 +17,6 @@ import moment from 'moment';
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
-  tableDealProductsDescription: any,
-  tableDealDocumentsDescription: any,
 }
 
 export interface FormDealState extends HubletoFormState {
@@ -27,6 +25,8 @@ export interface FormDealState extends HubletoFormState {
   showIdActivity: number,
   activityCalendarTimeClicked: string,
   activityCalendarDateClicked: string,
+  tableDealProductsDescription: any,
+  tableDealDocumentsDescription: any,
 }
 
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
@@ -49,6 +49,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       showIdActivity: 0,
       activityCalendarTimeClicked: '',
       activityCalendarDateClicked: '',
+      tableDealProductsDescription: null,
+      tableDealDocumentsDescription: null,
     };
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
@@ -59,8 +61,33 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     };
   }
 
+  onAfterLoadFormDescription(description: any) {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Deals/Models/DealProduct',
+        idDeal: this.state.id,
+      },
+      (description: any) => {
+        this.setState({tableDealProductsDescription: description} as any);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Deals/Models/DealDocument',
+        idDeal: this.state.id,
+      },
+      (description: any) => {
+        this.setState({tableDealDocumentsDescription: description} as any);
+      }
+    );
+
+    return description;
+  }
+
   onAfterSaveRecord(saveResponse: any): void {
-    let params = this.getEndpointParams();
+    let params = this.getEndpointParams() as any;
     let isArchived = saveResponse.savedRecord.is_archived;
 
     if (params.showArchive == false && isArchived == true) {
@@ -198,6 +225,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <>
         <TabView>
           <TabPanel header="Deal">
+            {R.is_archived == 1 ?
+              <div className='alert-warning mt-2 mb-1'>
+                <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
+                <span className='text'>This deal is archived.</span>
+              </div>
+            : null}
             <div className='grid grid-cols-2 gap-1' style=
               {{gridTemplateAreas:`
                 'info info'
@@ -250,7 +283,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       </div>
                       {showAdditional && R.id_lead != null ?
                         <div className='mt-2'>
-                          <a className='btn btn-primary self-center' href={`leads?recordId=${R.id_lead}`}>
+                          <a className='btn btn-primary self-center' href={`${globalThis.app.config.url}/leads/${R.id_lead}`}>
                             <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
                             <span className='text'>{this.translate('Go to original lead')}</span>
                           </a>
@@ -355,7 +388,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               descriptionSource='props'
                               customEndpointParams={{idDeal: R.id}}
                               description={{
-                                permissions: this.props.tableDealProductsDescription.permissions,
+                                permissions: this.state.tableDealProductsDescription?.permissions,
                                 ui: {
                                   showHeader: false,
                                   showFooter: true
@@ -365,7 +398,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                     cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
                                       return (
                                         <FormInput>
-                                          <Lookup {...this.getInputProps()}
+                                          <Lookup {...this.getInputProps('lookup-product-1')}
                                             ref={lookupElement}
                                             model='HubletoApp/Community/Products/Models/Product'
                                             cssClass='min-w-44'
@@ -407,7 +440,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                     cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
                                       return (
                                         <FormInput>
-                                          <Lookup {...this.getInputProps()}
+                                          <Lookup {...this.getInputProps('lookup-product-2')}
                                             ref={lookupElement}
                                             model='HubletoApp/Community/Products/Models/Product'
                                             cssClass='min-w-44'
@@ -529,7 +562,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 customEndpointParams={{idDeal: R.id}}
                 descriptionSource="props"
                 description={{
-                  permissions: this.props.tableDealDocumentsDescription.permissions,
+                  permissions: this.state.tableDealDocumentsDescription?.permissions,
                   ui: {
                     showFooter: false,
                     showHeader: false,

@@ -88,7 +88,7 @@ class Deal extends \HubletoMain\Core\Model
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsBool("showArchive")) {
-      $description->ui['title'] = "Deals Archive";
+      $description->ui['title'] = "Archived deals";
       $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,

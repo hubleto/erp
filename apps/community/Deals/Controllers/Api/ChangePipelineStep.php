@@ -24,7 +24,7 @@ class ChangePipelineStep extends \HubletoMain\Core\Controller
       try {
         $deal = $mDeal->record->find($this->main->urlParamAsInteger("idDeal"));
         $deal->id_pipeline_step = $this->main->urlParamAsInteger("idStep");
-        $deal->recordSave();
+        $deal->save();
 
         $step = $mPipelineStep->record
           ->where("id_pipeline", $this->main->urlParamAsInteger("idPipeline"))

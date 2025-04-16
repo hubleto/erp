@@ -7,7 +7,6 @@ use HubletoApp\Community\Settings\Models\Country;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\Lead;
-use Illuminate\Database\Eloquent\Builder;
 
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Varchar;

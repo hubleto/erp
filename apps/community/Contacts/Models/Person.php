@@ -2,8 +2,6 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Text;

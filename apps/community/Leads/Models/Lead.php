@@ -18,7 +18,6 @@ use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
 use HubletoMain\Core\Helper;
-use Illuminate\Database\Eloquent\Builder;
 
 class Lead extends \HubletoMain\Core\Model
 {

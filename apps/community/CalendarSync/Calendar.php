@@ -11,7 +11,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
     $formattedEvents = [];
     $mSources = new Source($this->main);
 
-    foreach ($mSources->eloquent->where('active', true)->get() as $key => $source) {
+    foreach ($mSources->record->where('active', true)->get() as $key => $source) {
       if ($source->type === 'google') {
         $url = "https://www.googleapis.com/calendar/v3/calendars/{$source->link}/events?orderBy=startTime&singleEvents=true&timeMin=" . urlencode(date('c')) . "&key={$this->main->config->getAsString('google-api-key')}";
 

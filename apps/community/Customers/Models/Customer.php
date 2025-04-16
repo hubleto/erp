@@ -21,7 +21,7 @@ use HubletoMain\Core\Helper;
 class Customer extends \HubletoMain\Core\Model
 {
   public string $table = 'customers';
-  public string $eloquentClass = Eloquent\Customer::class;
+  public string $recordManagerClass = RecordManagers\Customer::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [

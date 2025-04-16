@@ -7,7 +7,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class Country extends \HubletoMain\Core\Model
 {
   public string $table = 'countries';
-  public string $eloquentClass = Eloquent\Country::class;
+  public string $recordManagerClass = RecordManagers\Country::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array

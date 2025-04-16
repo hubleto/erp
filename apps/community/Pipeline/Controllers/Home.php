@@ -31,9 +31,9 @@ class Home extends \HubletoMain\Core\Controller {
     $mTag = new Tag($this->main);
     $sumPipelinePrice = 0;
 
-    $pipelines = $mPipeline->eloquent->get();
+    $pipelines = $mPipeline->record->get();
 
-    $defaultPipeline = $mSetting->eloquent
+    $defaultPipeline = $mSetting->record
       ->select("value")
       ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
       ->first()
@@ -43,7 +43,7 @@ class Home extends \HubletoMain\Core\Controller {
     $searchPipeline = null;
 
     if ($this->main->isUrlParam("id_pipeline")) {
-      $searchPipeline = (array) $mPipeline->eloquent
+      $searchPipeline = (array) $mPipeline->record
         ->where("id", (int) $this->main->urlParamAsInteger("id_pipeline"))
         ->with("PIPELINE_STEPS")
         ->first()
@@ -51,7 +51,7 @@ class Home extends \HubletoMain\Core\Controller {
       ;
     }
     else {
-      $searchPipeline = (array) $mPipeline->eloquent
+      $searchPipeline = (array) $mPipeline->record
         ->where("id", $defaultPipelineId)
         ->with("PIPELINE_STEPS")
         ->first()
@@ -62,7 +62,7 @@ class Home extends \HubletoMain\Core\Controller {
     foreach ((array) $searchPipeline["PIPELINE_STEPS"] as $key => $step) {
       $step = (array) $step;
 
-      $sumPrice = (float) $mDeal->eloquent
+      $sumPrice = (float) $mDeal->record
         ->selectRaw("SUM(price) as price")
         ->where("id_pipeline", $searchPipeline["id"])
         ->where("id_pipeline_step", $step["id"])
@@ -76,7 +76,7 @@ class Home extends \HubletoMain\Core\Controller {
 
     $searchPipeline["price"] = $sumPipelinePrice;
 
-    $deals = $mDeal->eloquent
+    $deals = $mDeal->record
       ->where("id_pipeline", (int) $searchPipeline["id"])
       ->with("CURRENCY")
       ->with("CUSTOMER")
@@ -94,19 +94,19 @@ class Home extends \HubletoMain\Core\Controller {
 
     foreach ((array) $deals as $key => $deal) {
       if (empty($deal["TAGS"])) continue;
-      $tag = $mTag->eloquent->find($deal["TAGS"][0]["id_tag"])?->toArray();
+      $tag = $mTag->record->find($deal["TAGS"][0]["id_tag"])?->toArray();
       $deals[$key]["TAG"] = $tag;
       unset($deals[$key]["TAGS"]);
     }
 
     $mSettings = new Setting($this->main);
-    $defaultCurrencyId = (int) $mSettings->eloquent
+    $defaultCurrencyId = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
       ->value
     ?? 1;
     $mCurrency = new Currency($this->main);
-    $defaultCurrency = (string) $mCurrency->eloquent->find($defaultCurrencyId)->code ?? "";
+    $defaultCurrency = (string) $mCurrency->record->find($defaultCurrencyId)->code ?? "";
 
     $this->viewParams["currency"] = $defaultCurrency;
     $this->viewParams["pipelines"] = $pipelines;

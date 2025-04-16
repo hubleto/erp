@@ -13,7 +13,7 @@ class {{ model }} extends \HubletoMain\Core\Model
 {
 
   public string $table = '{{ sqlTable }}';
-  public string $eloquentClass = Eloquent\{{ model }}::class;
+  public string $recordManagerClass = RecordManagers\{{ model }}::class;
 
   public array $relations = [ 
     'PARENT' => [ self::BELONGS_TO, User::class, 'id_parent', 'id' ]

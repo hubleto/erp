@@ -11,7 +11,7 @@ class Contact extends \HubletoMain\Core\Model
 {
 
   public string $table = 'my_app_contacts';
-  public string $eloquentClass = Eloquent\Contact::class;
+  public string $recordManagerClass = RecordManagers\Contact::class;
 
   public array $relations = [ 
     'RESPONSIBLE' => [ self::BELONGS_TO, User::class, 'id_responsible', 'id' ]

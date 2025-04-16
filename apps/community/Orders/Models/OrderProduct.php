@@ -11,7 +11,7 @@ use \ADIOS\Core\Db\Column\Integer;
 class OrderProduct extends \HubletoMain\Core\Model
 {
   public string $table = 'order_products';
-  public string $eloquentClass = Eloquent\OrderProduct::class;
+  public string $recordManagerClass = RecordManagers\OrderProduct::class;
   public ?string $lookupSqlValue = '{%TABLE%}.id';
 
   public array $relations = [

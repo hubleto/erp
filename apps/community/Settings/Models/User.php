@@ -18,7 +18,7 @@ class User extends \ADIOS\Models\User
   ];
 
   public string $table = 'users';
-  public string $eloquentClass = Eloquent\User::class;
+  public string $recordManagerClass = RecordManagers\User::class;
   public ?string $lookupSqlValue = '{%TABLE%}.email';
 
   public function describeColumns(): array
@@ -35,7 +35,7 @@ class User extends \ADIOS\Models\User
 
   public function getQueryForUser(int $idUser): mixed
   {
-    return $this->eloquent
+    return $this->record
       ->with('ROLES')
       ->with('PROFILE')
       ->where('id', $idUser)

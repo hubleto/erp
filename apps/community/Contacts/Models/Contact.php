@@ -8,7 +8,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class Contact extends \HubletoMain\Core\Model
 {
   public string $table = 'contacts';
-  public string $eloquentClass = Eloquent\Contact::class;
+  public string $recordManagerClass = RecordManagers\Contact::class;
   public ?string $lookupSqlValue = '{%TABLE%}.value';
 
   public array $relations = [

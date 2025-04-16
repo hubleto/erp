@@ -21,7 +21,7 @@ class GetServicePrice extends \HubletoMain\Core\Controller {
     }
 
     try {
-      $service = (array) $mService->eloquent
+      $service = (array) $mService->record
         ->where("id", $this->main->urlParamAsInteger("serviceId"))
         ->first()
         ->toArray()

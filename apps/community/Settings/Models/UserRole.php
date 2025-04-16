@@ -18,7 +18,7 @@ class UserRole extends \HubletoMain\Core\Model
   ];
 
   public string $table = 'user_roles';
-  public string $eloquentClass = Eloquent\UserRole::class;
+  public string $recordManagerClass = RecordManagers\UserRole::class;
   public ?string $lookupSqlValue = '{%TABLE%}.role';
 
   public array $relations = [

@@ -26,13 +26,13 @@ class Helper
     int $lookupId
   ): void {
     $mCrossTag = $this->app->getModel($crossTagModelName);
-    $existingTagsIds = $mCrossTag->eloquent
+    $existingTagsIds = $mCrossTag->record
       ->where($lookupColumnName, $lookupId)
       ->pluck("id")
       ->toArray()
     ;
     $differences = array_diff($existingTagsIds, $recordTagsIds);
-    $mCrossTag->eloquent
+    $mCrossTag->record
       ->whereIn("id", $differences)
       ->where($lookupColumnName, $lookupId)
       ->delete()

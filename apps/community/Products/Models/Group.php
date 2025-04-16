@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Products\Models;
 class Group extends \HubletoMain\Core\Model
 {
   public string $table = 'product_groups';
-  public string $eloquentClass = Eloquent\Group::class;
+  public string $recordManagerClass = RecordManagers\Group::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public function describeColumns(): array

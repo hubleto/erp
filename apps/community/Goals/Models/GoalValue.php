@@ -13,7 +13,7 @@ use ADIOS\Core\Db\Column\Integer;
 class GoalValue extends \HubletoMain\Core\Model
 {
   public string $table = 'goal_values';
-  public string $eloquentClass = Eloquent\GoalValue::class;
+  public string $recordManagerClass = RecordManagers\GoalValue::class;
   public ?string $lookupSqlValue = '{%TABLE%}.value';
 
   public function describeColumns(): array

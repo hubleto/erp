@@ -170,20 +170,20 @@ class Installer {
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
 
-    $idProfile = $mProfile->eloquent->create(['company' => $this->accountFullName])->id;
+    $idProfile = $mProfile->record->recordCreate(['company' => $this->accountFullName])['id'];
 
-    $idUserAdministrator = $mUser->eloquent->create([
+    $idUserAdministrator = $mUser->record->recordCreate([
       'login' => $this->adminEmail,
       'password' => $mUser->hashPassword($this->adminPassword),
       'email' => $this->adminEmail,
       'is_active' => true,
       'id_active_profile' => $idProfile,
-    ])->id;
+    ])['id'];
 
-    $mUserHasRole->eloquent->create([
+    $mUserHasRole->record->recordCreate([
       'id_user' => $idUserAdministrator,
       'id_role' => \HubletoApp\Community\Settings\Models\UserRole::ROLE_ADMINISTRATOR,
-    ])->id;
+    ])['id'];
   }
 
   public function getConfigEnvContent(): string

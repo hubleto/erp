@@ -19,7 +19,7 @@ class Deals extends \HubletoMain\Core\Controller {
 
     $mDeal = new Deal($this->main);
 
-    $result = $mDeal->eloquent
+    $result = $mDeal->record
       ->selectRaw("COUNT(id) as count, SUM(price) as price")
       ->where("is_archived", 0)
       ->where("id_user", $this->main->auth->getUserId())

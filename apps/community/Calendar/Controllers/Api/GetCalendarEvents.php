@@ -45,7 +45,7 @@ class GetCalendarEvents extends \HubletoMain\Core\Controller {
   {
     $mActivity = new \HubletoApp\Community\Calendar\Models\Activity($this->main);
 
-    $activities = $mActivity->eloquent
+    $activities = $mActivity->record
       ->select("activities.*", "activity_types.color", "activity_types.name as activity_type")
       ->leftJoin("activity_types", "activity_types.id", "=", "activities.id_activity_type")
       ->where("date_start", ">=", $dateStart)

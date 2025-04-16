@@ -16,7 +16,7 @@ use HubletoApp\Community\Settings\Models\Setting;
 class Order extends \HubletoMain\Core\Model
 {
   public string $table = 'orders';
-  public string $eloquentClass = Eloquent\Order::class;
+  public string $recordManagerClass = RecordManagers\Order::class;
   public ?string $lookupSqlValue = '{%TABLE%}.order_number';
 
   public array $relations = [
@@ -77,7 +77,7 @@ class Order extends \HubletoMain\Core\Model
   public function describeForm(): \ADIOS\Core\Description\Form
   {
     $mSettings = new Setting($this->main);
-    $defaultCurrency = (int) $mSettings->eloquent
+    $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
       ->value
@@ -99,7 +99,7 @@ class Order extends \HubletoMain\Core\Model
     if (isset($originalRecord["PRODUCTS"])) {
       foreach ($originalRecord["PRODUCTS"] as $product) {
         if (isset($product["_toBeDeleted_"])) continue;
-        $productTitle = (string) $mProduct->eloquent->find((int) $product["id_product"])->title;
+        $productTitle = (string) $mProduct->record->find((int) $product["id_product"])->title;
         $longDescription .=  "{$productTitle} - Amount: ".(string) $product["amount"]." - Unit Price: ".(string) $product["unit_price"]." - Tax: ".(string) $product["tax"]." - Discount: ".(string) $product["discount"]." \n\n";
       }
     }
@@ -107,7 +107,7 @@ class Order extends \HubletoMain\Core\Model
     if ($longDescription == "") $longDescription = "The order had no products or all products were deleted";
 
     $mHistory = new History($this->main);
-    $mHistory->eloquent->create([
+    $mHistory->record->recordCreate([
       "id_order" => $savedRecord["id"],
       "short_description" => "Order has been updated",
       "long_description" => $longDescription,
@@ -119,12 +119,12 @@ class Order extends \HubletoMain\Core\Model
 
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
-    $order = $this->eloquent->find($savedRecord["id"]);
+    $order = $this->record->find($savedRecord["id"]);
     $order->order_number = $order->id;
-    $order->save();
+    $order->recordSave();
 
     $mHistory = new History($this->main);
-    $mHistory->eloquent->create([
+    $mHistory->record->recordCreate([
       "id_order" => $order->id,
       "short_description" => "Order created",
       "date_time" => date("Y-m-d H:i:s"),

@@ -9,7 +9,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 class BillingAccountService extends \HubletoMain\Core\Model
 {
   public string $table = 'billing_accounts_services';
-  public string $eloquentClass = Eloquent\BillingAccountService::class;
+  public string $recordManagerClass = RecordManagers\BillingAccountService::class;
 
   public array $relations = [
     'SERVICE' => [ self::BELONGS_TO, Service::class, 'id_service', 'id' ],

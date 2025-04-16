@@ -80,11 +80,11 @@ class Loader extends \HubletoMain\Core\App
       $mDealActivity->dropTableIfExists()->install();
       $mDealDocument->dropTableIfExists()->install();
 
-      $mDealTag->eloquent->create([ 'name' => "Important", 'color' => '#fc2c03' ]);
-      $mDealTag->eloquent->create([ 'name' => "ASAP", 'color' => '#62fc03' ]);
-      $mDealTag->eloquent->create([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
-      $mDealTag->eloquent->create([ 'name' => "New Customer", 'color' => '#fcdb03' ]);
-      $mDealTag->eloquent->create([ 'name' => "Existing Customer", 'color' => '#5203fc' ]);
+      $mDealTag->record->recordCreate([ 'name' => "Important", 'color' => '#fc2c03' ]);
+      $mDealTag->record->recordCreate([ 'name' => "ASAP", 'color' => '#62fc03' ]);
+      $mDealTag->record->recordCreate([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
+      $mDealTag->record->recordCreate([ 'name' => "New Customer", 'color' => '#fcdb03' ]);
+      $mDealTag->record->recordCreate([ 'name' => "Existing Customer", 'color' => '#5203fc' ]);
     }
   }
 
@@ -132,7 +132,7 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

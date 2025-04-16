@@ -15,7 +15,7 @@ use \ADIOS\Core\Db\Column\Date;
 class DealHistory extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_histories';
-  public string $eloquentClass = Eloquent\DealHistory::class;
+  public string $recordManagerClass = RecordManagers\DealHistory::class;
   public ?string $lookupSqlValue = '{%TABLE%}.description';
 
   public array $relations = [

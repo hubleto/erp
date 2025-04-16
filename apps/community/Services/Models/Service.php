@@ -12,7 +12,7 @@ use \ADIOS\Core\Db\Column\Text;
 class Service extends \HubletoMain\Core\Model
 {
   public string $table = 'services';
-  public string $eloquentClass = Eloquent\Service::class;
+  public string $recordManagerClass = RecordManagers\Service::class;
   public ?string $lookupSqlValue = "{%TABLE%}.name";
 
   public array $relations = [

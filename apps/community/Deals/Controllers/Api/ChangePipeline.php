@@ -18,7 +18,7 @@ class ChangePipeline extends \HubletoMain\Core\Controller
 
     if ($this->main->isUrlParam('idPipeline')) {
       try {
-        $newPipeline = $mPipeline->eloquent
+        $newPipeline = $mPipeline->record
           ->where("id", $this->main->urlParamAsInteger('idPipeline'))
           ->with("PIPELINE_STEPS")
           ->first()

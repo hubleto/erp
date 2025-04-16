@@ -17,7 +17,7 @@ class Goal extends \HubletoMain\Core\Model
 {
 
   public string $table = 'goals';
-  public string $eloquentClass = Eloquent\Goal::class;
+  public string $recordManagerClass = RecordManagers\Goal::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
@@ -69,9 +69,9 @@ class Goal extends \HubletoMain\Core\Model
   {
     if ($record["id"] > 0 && $this->main->urlParamAsBool('deleteIntervals') == true) {
       $mGoalValue = new GoalValue($this->main);
-      $mGoalValue->eloquent
+      $mGoalValue->record
         ->where("id_goal", $record["id"])
-        ->delete()
+        ->recordDelete()
       ;
     }
 

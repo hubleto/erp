@@ -17,7 +17,7 @@ use ADIOS\Core\Description\Form;
 class DealActivity extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_activities';
-  public string $eloquentClass = Eloquent\DealActivity::class;
+  public string $recordManagerClass = RecordManagers\DealActivity::class;
 
   public array $relations = [
     'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_deal', 'id' ],

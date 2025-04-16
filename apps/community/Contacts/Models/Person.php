@@ -16,7 +16,7 @@ use HubletoMain\Core\Helper;
 class Person extends \HubletoMain\Core\Model
 {
   public string $table = 'persons';
-  public string $eloquentClass = Eloquent\Person::class;
+  public string $recordManagerClass = RecordManagers\Person::class;
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
 
   public array $relations = [

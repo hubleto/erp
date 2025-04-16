@@ -37,9 +37,9 @@ class Model extends \HubletoMain\Cli\Agent\Command
     ];
 
     if (!is_dir($appFolder . '/Models')) mkdir($appFolder . '/Models');
-    if (!is_dir($appFolder . '/Models/Eloquent')) mkdir($appFolder . '/Models/Eloquent');
+    if (!is_dir($appFolder . '/Models/RecordManagers')) mkdir($appFolder . '/Models/RecordManagers');
     file_put_contents($appFolder . '/Models/' . $model . '.php', $this->main->twig->render('@snippets/Model.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Models/Eloquent/' . $model . '.php', $this->main->twig->render('@snippets/ModelEloquent.php.twig', $tplVars));
+    file_put_contents($appFolder . '/Models/RecordManagers/' . $model . '.php', $this->main->twig->render('@snippets/ModelRecordManager.php.twig', $tplVars));
 
     $this->cli->cyan("Model '{$model}' in '{$appNamespace}' created successfully.\n");
     $this->cli->yellow("💡 TIP: Update `installTables()` method in your app's loader and reinstall the app.\n");

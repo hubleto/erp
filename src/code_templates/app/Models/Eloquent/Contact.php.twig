@@ -1,11 +1,11 @@
 <?php
 
-namespace {{ appNamespace }}\Models\Eloquent;
+namespace {{ appNamespace }}\Models\RecordManagers;
 
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-use \HubletoApp\Community\Settings\Models\Eloquent\User;
+use \HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class Contact extends \HubletoMain\Core\ModelEloquent
+class Contact extends \HubletoMain\Core\RecordManager
 {
 
   public $table = 'my_app_contacts';

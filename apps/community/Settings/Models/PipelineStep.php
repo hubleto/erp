@@ -10,7 +10,7 @@ use \ADIOS\Core\Db\Column\Color;
 class PipelineStep extends \HubletoMain\Core\Model
 {
   public string $table = 'pipeline_steps';
-  public string $eloquentClass = Eloquent\PipelineStep::class;
+  public string $recordManagerClass = RecordManagers\PipelineStep::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [

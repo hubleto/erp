@@ -16,7 +16,7 @@ use HubletoApp\Community\Settings\Models\User;
 class Activity extends \HubletoMain\Core\Model
 {
   public string $table = 'activities';
-  public string $eloquentClass = Eloquent\Activity::class;
+  public string $recordManagerClass = RecordManagers\Activity::class;
 
   public array $relations = [];
 

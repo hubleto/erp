@@ -7,7 +7,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class InvoiceProfile extends \ADIOS\Core\Model {
   public string $table = 'invoice_profiles';
   public ?string $lookupSqlValue = '{%TABLE%}.name';
-  public string $eloquentClass = Eloquent\InvoiceProfile::class;
+  public string $recordManagerClass = RecordManagers\InvoiceProfile::class;
 
   public function describeColumns(): array
   {

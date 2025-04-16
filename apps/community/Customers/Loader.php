@@ -48,9 +48,9 @@ class Loader extends \HubletoMain\Core\App
       $mCrossCustomerTag->dropTableIfExists()->install();
       $mCustomerDocument->dropTableIfExists()->install();
 
-      $mCustomerTag->eloquent->create([ 'name' => "VIP", 'color' => '#fc2c03' ]);
-      $mCustomerTag->eloquent->create([ 'name' => "Partner", 'color' => '#62fc03' ]);
-      $mCustomerTag->eloquent->create([ 'name' => "Public", 'color' => '#033dfc' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "VIP", 'color' => '#fc2c03' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "Partner", 'color' => '#62fc03' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "Public", 'color' => '#033dfc' ]);
     }
 
     if ($round == 2) {
@@ -112,7 +112,7 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

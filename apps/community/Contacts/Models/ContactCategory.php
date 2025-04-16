@@ -7,7 +7,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class ContactCategory extends \HubletoMain\Core\Model
 {
   public string $table = 'contact_categories';
-  public string $eloquentClass = Eloquent\ContactCategory::class;
+  public string $recordManagerClass = RecordManagers\ContactCategory::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array

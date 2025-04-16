@@ -12,7 +12,7 @@ use \ADIOS\Core\Db\Column\Decimal;
 class DealService extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_services';
-  public string $eloquentClass = Eloquent\DealService::class;
+  public string $recordManagerClass = RecordManagers\DealService::class;
   public ?string $lookupSqlValue = '{%TABLE%}.id_service';
 
   public array $relations = [

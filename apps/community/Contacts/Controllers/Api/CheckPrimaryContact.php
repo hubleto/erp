@@ -27,7 +27,7 @@ class CheckPrimaryContact extends \HubletoMain\Core\Controller {
     $mCrossPersonTag = new PersonTag($this->main);
 
     // get the tags of the primary contacts in the customer
-    $primaryPersonTagIds = $mPerson->eloquent
+    $primaryPersonTagIds = $mPerson->record
       ->where("is_primary", 1)
       ->where("id_customer", $idCustomer)
       ->join($mCrossPersonTag->table, "{$mCrossPersonTag->table}.id_person", "=", "{$mPerson->table}.id")
@@ -48,7 +48,7 @@ class CheckPrimaryContact extends \HubletoMain\Core\Controller {
     if ($matches == null) return [ "result" => true ];
     else {
       // return the names of the matching tags
-      $matchesNames = $mPersonTag->eloquent
+      $matchesNames = $mPersonTag->record
         ->whereIn("id", $matches)
         ->pluck("name")
         ->toArray()

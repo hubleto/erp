@@ -7,7 +7,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class Profile extends \HubletoMain\Core\Model
 {
   public string $table = 'profiles';
-  public string $eloquentClass = Eloquent\Profile::class;
+  public string $recordManagerClass = RecordManagers\Profile::class;
   public ?string $lookupSqlValue = '{%TABLE%}.company';
 
   public function describeColumns(): array

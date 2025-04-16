@@ -14,7 +14,7 @@ use HubletoApp\Community\Settings\Models\Setting;
 class Product extends \HubletoMain\Core\Model
 {
   public string $table = 'products';
-  public string $eloquentClass = Eloquent\Product::class;
+  public string $recordManagerClass = RecordManagers\Product::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [

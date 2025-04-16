@@ -60,7 +60,7 @@ class GetGoalData extends \HubletoMain\Core\Controller
     foreach ($intervals as $interval) {
 
       //search for deals that are pending until the end interval
-      $pendingValues = $mDeal->eloquent
+      $pendingValues = $mDeal->record
         ->where("deal_result", 2)
         ->where("date_created", "<", $interval["date_end"])
         ->where("id_pipeline", $idPipeline)
@@ -74,7 +74,7 @@ class GetGoalData extends \HubletoMain\Core\Controller
       $pendingValues = reset($pendingValues);
 
       //search for deals that were won within the interval
-      $wonValues = $mDeal->eloquent
+      $wonValues = $mDeal->record
         ->where("deal_result", 1)
         ->whereBetween("date_result_update", [$interval["date_start"], $interval["date_end"]])
         ->where("id_pipeline", $idPipeline)

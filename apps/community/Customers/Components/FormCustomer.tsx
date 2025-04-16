@@ -89,7 +89,10 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     if (getUrlParam("recordId") == -1) {
       return <h2>New Customer</h2>;
     } else {
-      return <h2>{this.state.record.name ? this.state.record.name : "[Undefined Customer Name]"}</h2>;
+      return <>
+        <h2>{this.state.record.name ? this.state.record.name : ''}</h2>
+        <small>Customer</small>
+      </>;
     }
   }
 

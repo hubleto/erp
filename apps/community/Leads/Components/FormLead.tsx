@@ -102,7 +102,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     if (getUrlParam('recordId') == -1) {
       return <h2>{this.translate('New Lead')}</h2>;
     } else {
-      return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Lead Name]'}</h2>
+      return <>
+        <h2>{this.state.record.title ? this.state.record.title : ''}</h2>
+        <small>Lead</small>
+      </>;
     }
   }
 

@@ -14,7 +14,7 @@ class DealValueByResult extends \HubletoMain\Core\Controller {
 
     $mDeal = new Deal($this->main);
 
-    $deals = $mDeal->eloquent
+    $deals = $mDeal->record
       ->selectRaw("deal_result, SUM(price) as price")
       ->where("is_archived", 0)
       ->where("id_user", $this->main->auth->getUserId())
@@ -31,6 +31,7 @@ class DealValueByResult extends \HubletoMain\Core\Controller {
     ];
 
     $results = [
+      0 => ['name' => 'Unknown', 'color' => 'black'],
       1 => ['name' => 'Lost', 'color' => 'red'],
       2 => ['name' => 'Won', 'color' => 'green'],
       3 => ['name' => 'Pending', 'color' => 'gray'],

@@ -14,7 +14,7 @@ use \ADIOS\Core\Db\Column\File;
 class Document extends \HubletoMain\Core\Model
 {
   public string $table = 'documents';
-  public string $eloquentClass = Eloquent\Document::class;
+  public string $recordManagerClass = RecordManagers\Document::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array
@@ -55,7 +55,7 @@ class Document extends \HubletoMain\Core\Model
   {
     if (isset($originalRecord["creatingForModel"]) && isset($originalRecord["creatingForId"])) {
       $mCrossDocument = $this->main->getModel($originalRecord["creatingForModel"]);
-      $mCrossDocument->eloquent->create([
+      $mCrossDocument->record->recordCreate([
         "id_lookup" => $originalRecord["creatingForId"],
         "id_document" => $savedRecord["id"]
       ]);
@@ -66,7 +66,7 @@ class Document extends \HubletoMain\Core\Model
 
   public function onBeforeUpdate(array $record): array
   {
-    $document = (array) $this->eloquent->find($record["id"])->toArray();
+    $document = (array) $this->record->find($record["id"])->toArray();
 
     if (!isset($document["file"])) return $record;
 
@@ -80,7 +80,7 @@ class Document extends \HubletoMain\Core\Model
 
   public function onBeforeDelete(int $id): int
   {
-    $document = (array) $this->eloquent->find($id)->toArray();
+    $document = (array) $this->record->find($id)->toArray();
 
     if (!isset($document["file"])) return $id;
 

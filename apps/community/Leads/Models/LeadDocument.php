@@ -10,7 +10,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 class LeadDocument extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_documents';
-  public string $eloquentClass = Eloquent\LeadDocument::class;
+  public string $recordManagerClass = RecordManagers\LeadDocument::class;
 
   public array $relations = [
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lookup', 'id' ],

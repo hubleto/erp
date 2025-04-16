@@ -6,7 +6,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
 
   public array $activitySelectorConfig = [
     "title" => "Deal",
-    "formComponent" => "SalesDealsFormActivity"
+    "formComponent" => "DealsFormActivity"
   ];
 
   public function loadEvents(string $dateStart, string $dateEnd): array
@@ -15,7 +15,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
 
     $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
 
-    $activities = $mDealActivity->eloquent
+    $activities = $mDealActivity->record
       ->select("deal_activities.*", "activity_types.color", "activity_types.name as activity_type")
       ->with('DEAL.CUSTOMER')
       ->leftJoin("activity_types", "activity_types.id", "=", "deal_activities.id_activity_type")

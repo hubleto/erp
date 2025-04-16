@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
 import request from 'adios/Request';
-import TableLeadServices from './TableLeadServices';
+import TableLeadProducts from './TableLeadProducts';
 import { TabPanel, TabView } from 'primereact/tabview';
 import Calendar from '../../Calendar/Components/Calendar';
 import Lookup from 'adios/Inputs/Lookup';
@@ -16,8 +16,6 @@ import Hyperlink from 'adios/Inputs/Hyperlink';
 
 export interface FormLeadProps extends HubletoFormProps {
   newEntryId?: number,
-  tableLeadServicesDescription?: any,
-  tableLeadDocumentsDescription?: any,
 }
 
 export interface FormLeadState extends HubletoFormState {
@@ -26,6 +24,8 @@ export interface FormLeadState extends HubletoFormState {
   showIdActivity: number,
   activityCalendarTimeClicked: string,
   activityCalendarDateClicked: string,
+  tableLeadProductsDescription: any,
+  tableLeadDocumentsDescription: any,
 }
 
 export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadState> {
@@ -48,6 +48,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       showIdActivity: 0,
       activityCalendarTimeClicked: '',
       activityCalendarDateClicked: '',
+      tableLeadProductsDescription: null,
+      tableLeadDocumentsDescription: null,
     };
   }
 
@@ -57,8 +59,33 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     };
   }
 
+  onAfterLoadFormDescription(description: any) {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Leads/Models/LeadProduct',
+        idLead: this.state.id,
+      },
+      (description: any) => {
+        this.setState({tableLeadProductsDescription: description} as any);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Leads/Models/LeadDocument',
+        idLead: this.state.id,
+      },
+      (description: any) => {
+        this.setState({tableLeadDocumentsDescription: description} as any);
+      }
+    );
+
+    return description;
+  }
+
   onAfterSaveRecord(saveResponse: any): void {
-    let params = this.getEndpointParams()
+    let params = this.getEndpointParams() as any;
     let isArchived = saveResponse.savedRecord.is_archived;
 
     if (params.showArchive == false && isArchived == true) {
@@ -75,7 +102,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     if (getUrlParam('recordId') == -1) {
       return <h2>{this.translate('New Lead')}</h2>;
     } else {
-      return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Lead Name]'}</h2>
+      return <>
+        <h2>{this.state.record.title ? this.state.record.title : ''}</h2>
+        <small>Lead</small>
+      </>;
     }
   }
 
@@ -83,21 +113,18 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     return <small>{this.translate('Lead')}</small>;
   }
 
-  getLeadSumPrice(recordServices: any) {
-    var sumLeadPrice = 0;
-    recordServices.map((service, index) => {
-      if (service.unit_price && service.amount) {
-        var sum = service.unit_price * service.amount
-        if (service.discount) {
-          sum = sum - (sum * (service.discount / 100))
-        }
-        if (service.tax) {
-          sum = sum - (sum * (service.tax / 100))
-        }
-        sumLeadPrice += sum;
+  getSumPrice(recordProducts: any) {
+    var sumPrice = 0;
+
+    recordProducts.map((product, index) => {
+      if (product.unit_price && product.amount && product._toBeDeleted_ != true) {
+        var sum = product.unit_price * product.amount;
+        if (product.tax) sum = sum + (sum * (product.tax / 100));
+        if (product.discount) sum = sum - (sum * (product.discount / 100));
+        sumPrice += sum;
       }
     });
-    return Number(sumLeadPrice.toFixed(2));
+    return Number(sumPrice.toFixed(2));
   }
 
   convertLead(recordId: number) {
@@ -148,8 +175,18 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   }
 
   renderContent(): JSX.Element {
+    const lookupElement = createRef();
+    var lookupData;
+
+    const getLookupData = () => {
+      if (lookupElement.current) {
+        lookupData = lookupElement.current.state.data;
+      }
+    }
+
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
+
     if (R.HISTORY && R.HISTORY.length > 0) {
       if (R.HISTORY.length > 1 && (R.HISTORY[0].id < R.HISTORY[R.HISTORY.length-1].id))
         R.HISTORY = this.state.record.HISTORY.reverse();
@@ -171,115 +208,137 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       <>
         <TabView>
           <TabPanel header={this.translate('Lead')}>
-            {R.DEAL && R.is_archived == 1 ?
+            {R.is_archived == 1 ?
               <div className='alert-warning mt-2 mb-1'>
                 <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
-                <span className='text'>This lead was converted to a deal and cannot be edited</span>
+                <span className='text'>This lead is archived.</span>
               </div>
             : null}
-            <div className='grid grid-cols-2 gap-1' style=
-              {{gridTemplateAreas:`
-                'notification notification'
-                'info info'
-                'notes notes'
-                'services services'
-                'history history'
-              `}}>
-              <div className='card mt-2' style={{gridArea: 'info'}}>
-                <div className='card-body flex flex-row gap-2'>
-                  <div className='grow'>
-                    {this.inputWrapper('identifier', {readonly: R.is_archived})}
-                    {this.inputWrapper('title', {readonly: R.is_archived})}
-                    <FormInput title={"Customer"}>
-                      <Lookup {...this.getInputProps()}
-                        model='HubletoApp/Community/Customers/Models/Customer'
-                        endpoint={`customers/get-customer`}
-                        readonly={R.is_archived}
-                        value={R.id_customer}
-                        onChange={(value: any) => {
-                          this.updateRecord({ id_customer: value, id_person: null });
-                          if (R.id_customer == 0) {
-                            R.id_customer = null;
-                            this.setState({record: R});
-                          }
-                        }}
-                      ></Lookup>
-                    </FormInput>
-                    <FormInput title={"Contact Person"}>
-                      <Lookup {...this.getInputProps()}
-                        model='HubletoApp/Community/Customers/Models/Person'
-                        customEndpointParams={{id_customer: R.id_customer}}
-                        readonly={R.is_archived}
-                        endpoint={`contacts/get-customer-contacts`}
-                        value={R.id_person}
-                        onChange={(value: any) => {
-                          this.updateRecord({ id_person: value })
-                          if (R.id_person == 0) {
-                            R.id_person = null;
-                            this.setState({record: R})
-                          }
-                        }}
-                      ></Lookup>
-                    </FormInput>
-                    <div className='flex flex-row *:w-1/2'>
-                      {this.inputWrapper('price', {
-                        readonly: (R.SERVICES && R.SERVICES.length) > 0 || R.is_archived ? true : false,
-                      })}
-                      {this.inputWrapper('id_currency')}
-                    </div>
-                    {showAdditional ? this.inputWrapper('id_lead_status', {readonly: R.is_archived}) : null}
-                    {showAdditional ?
-                      <div className='w-full mt-2'>
-                        {R.DEAL != null ?
-                        <a className='btn btn-primary' href={`../deals?recordId=${R.DEAL.id}&recordTitle=${R.DEAL.title}`}>
-                          <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                          <span className='text'>{this.translate('Go to deal')}</span>
-                        </a>
-                        :
-                        <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
-                          <span className='icon'><i className='fas fa-rotate-right'></i></span>
-                          <span className='text'>Convert to Deal</span>
-                        </a>}
+            <div className='gap-1'>
+              <div className='flex gap-1 mt-2'>
+                <div className='flex-2 card'>
+                  <div className='card-body flex flex-row gap-2'>
+                    <div className='grow'>
+                      {this.inputWrapper('identifier', {readonly: R.is_archived})}
+                      {this.inputWrapper('title', {readonly: R.is_archived})}
+                      <FormInput title={"Customer"}>
+                        <Lookup {...this.getInputProps('id-customer')}
+                          model='HubletoApp/Community/Customers/Models/Customer'
+                          endpoint={`customers/get-customer`}
+                          readonly={R.is_archived}
+                          value={R.id_customer}
+                          onChange={(value: any) => {
+                            this.updateRecord({ id_customer: value, id_person: null });
+                            if (R.id_customer == 0) {
+                              R.id_customer = null;
+                              this.setState({record: R});
+                            }
+                          }}
+                        ></Lookup>
+                      </FormInput>
+                      <FormInput title={"Contact Person"}>
+                        <Lookup {...this.getInputProps('id-person')}
+                          model='HubletoApp/Community/Customers/Models/Person'
+                          customEndpointParams={{id_customer: R.id_customer}}
+                          readonly={R.is_archived}
+                          endpoint={`contacts/get-customer-contacts`}
+                          value={R.id_person}
+                          onChange={(value: any) => {
+                            this.updateRecord({ id_person: value })
+                            if (R.id_person == 0) {
+                              R.id_person = null;
+                              this.setState({record: R})
+                            }
+                          }}
+                        ></Lookup>
+                      </FormInput>
+                      <div className='flex flex-row *:w-1/2'>
+                        {this.inputWrapper('price', {
+                          readonly: (R.PRODUCTS && R.PRODUCTS.length) > 0 || R.is_archived ? true : false,
+                        })}
+                        {this.inputWrapper('id_currency')}
                       </div>
-                    : null}
+                      {showAdditional ? this.inputWrapper('id_lead_status', {readonly: R.is_archived}) : null}
+                      {showAdditional ?
+                        <div className='w-full mt-2'>
+                          {R.DEAL != null ?
+                          <a className='btn btn-primary' href={`${globalThis.app.config.url}/deals/${R.DEAL.id}`}>
+                            <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+                            <span className='text'>{this.translate('Go to deal')}</span>
+                          </a>
+                          :
+                          <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
+                            <span className='icon'><i className='fas fa-rotate-right'></i></span>
+                            <span className='text'>Convert to Deal</span>
+                          </a>}
+                        </div>
+                      : null}
+                    </div>
+                    <div className='border-l border-gray-200'></div>
+                    <div className='grow'>
+                      {this.inputWrapper('id_user', {readonly: R.is_archived})}
+                      {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
+                      {this.inputWrapper('source_channel', {readonly: R.is_archived})}
+                      <FormInput title='Tags'>
+                        <InputTags2 {...this.getInputProps('tags_input')}
+                          value={this.state.record.TAGS}
+                          readonly={R.is_archived}
+                          model='HubletoApp/Community/Leads/Models/Tag'
+                          targetColumn='id_lead'
+                          sourceColumn='id_tag'
+                          colorColumn='color'
+                          onChange={(value: any) => {
+                            R.TAGS = value;
+                            this.setState({record: R});
+                          }}
+                        ></InputTags2>
+                      </FormInput>
+                      {showAdditional ? this.inputWrapper('date_created') : null}
+                      {showAdditional ? this.inputWrapper('is_archived') : null}
+                    </div>
                   </div>
-                  <div className='border-l border-gray-200'></div>
-                  <div className='grow'>
-                    {this.inputWrapper('id_user', {readonly: R.is_archived})}
-                    {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
-                    {this.inputWrapper('source_channel', {readonly: R.is_archived})}
-                    <FormInput title='Tags'>
-                      <InputTags2 {...this.getInputProps('tags_input')}
-                        value={this.state.record.TAGS}
-                        readonly={R.is_archived}
-                        model='HubletoApp/Community/Leads/Models/Tag'
-                        targetColumn='id_lead'
-                        sourceColumn='id_tag'
-                        colorColumn='color'
-                        onChange={(value: any) => {
-                          R.TAGS = value;
-                          this.setState({record: R});
-                        }}
-                      ></InputTags2>
-                    </FormInput>
-                    {showAdditional ? this.inputWrapper('date_created') : null}
-                    {showAdditional ? this.inputWrapper('is_archived') : null}
+                </div>
+                <div className='flex-1 card'>
+                  <div className="card-body">
+                    <Calendar
+                      onCreateCallback={() => this.loadRecord()}
+                      readonly={R.is_archived}
+                      eventsEndpoint={globalThis.main.config.rewriteBase + 'leads/get-calendar-events?idLead=' + R.id}
+                      onDateClick={(date, time, info) => {
+                        this.setState({
+                          activityCalendarDateClicked: date,
+                          activityCalendarTimeClicked: time,
+                          showIdActivity: -1,
+                        } as FormLeadState);
+                      }}
+                      onEventClick={(info) => {
+                        this.setState({
+                          showIdActivity: parseInt(info.event.id),
+                        } as FormLeadState);
+                        info.jsEvent.preventDefault();
+                      }}
+                      headerToolbar={{
+                        left: 'prev,next',
+                        center: 'title',
+                        right: 'timeGridDay,timeGridWeek,dayGridMonth'
+                      }}
+                    ></Calendar>
                   </div>
                 </div>
               </div>
-              <div className='card card-body' style={{gridArea: 'notes'}}>
+              <div className='card card-body'>
                 {this.inputWrapper('note', {readonly: R.is_archived})}
               </div>
               {showAdditional ?
-                <div className='card mt-2' style={{gridArea: 'services'}}>
-                  <div className='card-header'>Services</div>
-                  <div className='card-body flex flex-col gap-2'>
+                <div className='card'>
+                  <div className='card-header'>Products</div>
+                  <div className='card-body'>
                     {!R.is_archived ? (
                       <a
                         className="btn btn-add-outline mb-2"
                         onClick={() => {
-                          if (!R.SERVICES) R.SERVICES = [];
-                          R.SERVICES.push({
+                          if (!R.PRODUCTS) R.PRODUCTS = [];
+                          R.PRODUCTS.push({
                             id: this.state.newEntryId,
                             id_lead: { _useMasterRecordId_: true },
                             amount: 1,
@@ -288,142 +347,110 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         }}
                       >
                         <span className="icon"><i className="fas fa-add"></i></span>
-                        <span className="text">Add service</span>
+                        <span className="text">Add product</span>
                       </a>
                     ) : null}
                     <div className='w-full h-full overflow-x-auto'>
-                      <TableLeadServices
-                        uid={this.props.uid + "_table_lead_services"}
-                        data={{ data: R.SERVICES }}
-                        leadTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : "Total: 0 " + R.CURRENCY.code }
+                      <TableLeadProducts
+                        uid={this.props.uid + "_table_lead_products"}
+                        data={{ data: R.PRODUCTS }}
+                        leadTotal={R.PRODUCTS && R.PRODUCTS.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : "Total: 0 " + R.CURRENCY.code }
                         descriptionSource='props'
                         customEndpointParams={{'idLead': R.id}}
                         description={{
-                          permissions: this.props.tableLeadServicesDescription.permissions,
+                          permissions: this.state.tableLeadProductsDescription?.permissions,
                           ui: {
                             showHeader: false,
                             showFooter: true
                           },
                           columns: {
-                            id_service: { type: "lookup", title: "Service",
-                              model: "HubletoApp/Community/Services/Models/Service",
-                              cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
+                            id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                              cellRenderer: ( table: TableLeadProducts, data: any, options: any): JSX.Element => {
                                 return (
                                   <FormInput>
-                                    <Lookup {...this.getInputProps()}
-                                      model='HubletoApp/Community/Services/Models/Service'
+                                    <Lookup {...this.getInputProps('lookup-product-1')}
+                                      ref={lookupElement}
+                                      model='HubletoApp/Community/Products/Models/Product'
                                       cssClass='min-w-44'
-                                      value={data.id_service}
+                                      value={data.id_product}
                                       onChange={(value: any) => {
-                                        request.get(
-                                          'services/get-service-price',
-                                          {serviceId: value},
-                                          (returnData: any) => {
-                                            if (returnData.status == "success") {
-                                              data.id_service = value;
-                                              data.unit_price = returnData.unit_price;
-                                              this.updateRecord({ SERVICES: table.state.data?.data });
-                                              this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
-                                            } else {
-                                              throw new Error('Something went wrong: ' + returnData.error);
-                                            }
-                                          }
-                                        )
+                                        getLookupData();
+
+                                        if (lookupData[value]) {
+                                          data.id_product = value;
+                                          data.unit_price = lookupData[value].unit_price;
+                                          data.tax = lookupData[value].tax;
+                                          this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                          this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
+                                        }
                                       }}
                                     ></Lookup>
                                   </FormInput>
                                 )
                               },
                             },
-                            unit_price: { type: "float", title: "Unit Price" },
+                            unit_price: { type: "float", title: "Unit Price", readonly: true  },
                             amount: { type: "int", title: "Amount" },
                             discount: { type: "float", title: "Discount (%)" },
                             tax: { type: "float", title: "Tax (%)" },
-                            __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
-                              if (data.unit_price && data.amount) {
-                                var sum = data.unit_price * data.amount
-                                if (data.discount) {
-                                  sum = sum - (sum * (data.discount / 100))
+                            __sum: { type: "none", title: "Sum after tax",
+                              cellRenderer: ( table: TableLeadProducts, data: any, options: any): JSX.Element => {
+                                if (data.unit_price && data.amount) {
+                                  let sum = data.unit_price * data.amount;
+                                  if (data.discount) sum = sum - (sum * (data.discount / 100));
+                                  if (data.tax) sum = sum + (sum * (data.tax / 100));
+                                  sum = Number(sum.toFixed(2));
+                                  return (<><span>{sum + " " + R.CURRENCY.code}</span></>);
                                 }
-                                if (data.tax) {
-                                  sum = sum - (sum * (data.tax / 100))
-                                }
-                                sum = Number(sum.toFixed(2));
-                                return (<>
-                                    <span>{sum} {R.CURRENCY.code}</span>
-                                  </>
-                                );
-                              }
+                              },
                             },
-                          },
                           },
                           inputs: {
-                            id_service: { type: "lookup", title: "Service",
-                              model: "HubletoApp/Community/Services/Models/Service",
-                              cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
+                            id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                              cellRenderer: ( table: TableLeadProducts, data: any, options: any): JSX.Element => {
                                 return (
                                   <FormInput>
-                                    <Lookup {...this.getInputProps()}
-                                      model='HubletoApp/Community/Services/Models/Service'
+                                    <Lookup {...this.getInputProps('lookup-product-2')}
+                                      ref={lookupElement}
+                                      model='HubletoApp/Community/Products/Models/Product'
                                       cssClass='min-w-44'
-                                      value={data.id_service}
+                                      value={data.id_product}
                                       onChange={(value: any) => {
-                                        request.get(
-                                          'services/get-service-price',
-                                          {serviceId: value},
-                                          (returnData: any) => {
-                                            if (returnData.status == "success") {
-                                              data.id_service = value;
-                                              data.unit_price = returnData.unit_price;
-                                              this.updateRecord({ SERVICES: table.state.data?.data });
-                                              this.updateRecord({ price: this.getLeadSumPrice(R.SERVICES)});
-                                            } else {
-                                              throw new Error('Something went wrong: ' + returnData.error);
-                                            }
-                                          }
-                                        )
+                                        getLookupData();
+
+                                        if (lookupData[value]) {
+                                          data.id_product = value;
+                                          data.unit_price = lookupData[value].unit_price;
+                                          data.tax = lookupData[value].tax;
+                                          this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                          this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
+                                        }
                                       }}
                                     ></Lookup>
                                   </FormInput>
                                 )
                               },
                             },
-                            unit_price: { type: "float", title: "Unit Price" },
+                            unit_price: { type: "float", title: "Unit Price", readonly: true },
                             amount: { type: "int", title: "Amount" },
                             discount: { type: "float", title: "Discount (%)" },
                             tax: { type: "float", title: "Tax (%)" },
-                            __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableLeadServices, data: any, options: any): JSX.Element => {
-                              if (data.unit_price && data.amount) {
-                                var sum = data.unit_price * data.amount
-                                if (data.discount) {
-                                  sum = sum - (sum * (data.discount / 100))
-                                }
-                                if (data.tax) {
-                                  sum = sum - (sum * (data.tax / 100))
-                                }
-                                sum = Number(sum.toFixed(2));
-                                return (<>
-                                    <span>{sum} {R.CURRENCY.code}</span>
-                                  </>
-                                );
-                              }
-                            },
-                          },
+                            __sum: { type: "none", title: "Sum after tax" },
                           },
                         }}
                         isUsedAsInput={true}
                         isInlineEditing={this.state.isInlineEditing}
                         readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                         onRowClick={() => this.setState({isInlineEditing: true})}
-                        onChange={(table: TableLeadServices) => {
-                          this.updateRecord({ SERVICES: table.state.data?.data });
-                          R.price = this.getLeadSumPrice(R.SERVICES);
+                        onChange={(table: TableLeadProducts) => {
+                          this.updateRecord({ PRODUCTS: table.state.data?.data });
+                          R.price = this.getSumPrice(R.PRODUCTS);
                           this.setState({record: R});
                         }}
-                        onDeleteSelectionChange={(table: TableLeadServices) => {
-                          this.updateRecord({ SERVICES: table.state.data?.data ?? [] });
+                        onDeleteSelectionChange={(table: TableLeadProducts) => {
+                          this.updateRecord({ PRODUCTS: table.state.data?.data ?? [], price: this.getSumPrice(R.PRODUCTS)});
                         }}
-                      ></TableLeadServices>
+                      ></TableLeadProducts>
                     </div>
                   </div>
                 </div>
@@ -451,35 +478,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   info.jsEvent.preventDefault();
                 }}
               ></Calendar>
-              {this.state.showIdActivity == 0 ? <></> :
-                <ModalSimple
-                  uid='activity_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormActivity
-                    id={this.state.showIdActivity}
-                    isInlineEditing={true}
-                    description={{
-                      defaultValues: {
-                        id_lead: R.id,
-                        date_start: this.state.activityCalendarDateClicked,
-                        time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
-                        date_end: this.state.activityCalendarDateClicked,
-                      }
-                    }}
-                    idCustomer={R.id_customer}
-                    showInModal={true}
-                    showInModalSimple={true}
-                    onClose={() => { this.setState({ showIdActivity: 0 } as FormLeadState) }}
-                    onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
-                      if (saveResponse.status == "success") {
-                        this.setState({ showIdActivity: 0 } as FormLeadState);
-                      }
-                    }}
-                  ></FormActivity>
-                </ModalSimple>
-              }
             </TabPanel>
           : null}
           {showAdditional ? (
@@ -502,7 +500,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 descriptionSource="both"
                 customEndpointParams={{idLead: R.id}}
                 description={{
-                  permissions: this.props.tableLeadDocumentsDescription.permissions,
+                  permissions: this.state.tableLeadDocumentsDescription?.permissions,
                   ui: {
                     showFooter: false,
                     showHeader: false,
@@ -572,7 +570,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             <TabPanel header={this.translate('History')}>
               {R.HISTORY.length > 0 ?
                 R.HISTORY.map((history, key) => (
-                  <div className='w-full flex flex-row justify-between'>
+                  <div key={key} className='w-full flex flex-row justify-between'>
                     <div className='w-1/3'>
                         <p className='font-bold self-center text-sm text-left'>
                           {history.description}
@@ -594,6 +592,35 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             </TabPanel>
           : null}
         </TabView>
+        {this.state.showIdActivity == 0 ? <></> :
+          <ModalSimple
+            uid='activity_form'
+            isOpen={true}
+            type='right'
+          >
+            <FormActivity
+              id={this.state.showIdActivity}
+              isInlineEditing={true}
+              description={{
+                defaultValues: {
+                  id_lead: R.id,
+                  date_start: this.state.activityCalendarDateClicked,
+                  time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
+                  date_end: this.state.activityCalendarDateClicked,
+                }
+              }}
+              idCustomer={R.id_customer}
+              showInModal={true}
+              showInModalSimple={true}
+              onClose={() => { this.setState({ showIdActivity: 0 } as FormLeadState) }}
+              onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+                if (saveResponse.status == "success") {
+                  this.setState({ showIdActivity: 0 } as FormLeadState);
+                }
+              }}
+            ></FormActivity>
+          </ModalSimple>
+        }
       </>
     );
   }

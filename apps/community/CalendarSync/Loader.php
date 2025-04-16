@@ -23,7 +23,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/calendar-sources\/ics\/?$/' => Ics::class,
     ]);
 
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Calendar sources'),
       'icon' => 'fas fa-calendar',
       'url' => 'settings/calendar-sources',
@@ -38,7 +38,7 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mSource = new \HubletoApp\Community\CalendarSync\Models\Source($this->main);
+      $mSource = new Models\Source($this->main);
       $mSource->dropTableIfExists()->install();
     }
   }
@@ -53,7 +53,7 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

@@ -9,7 +9,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 class DealDocument extends \HubletoMain\Core\Model
 {
   public string $table = 'deal_documents';
-  public string $eloquentClass = Eloquent\DealDocument::class;
+  public string $recordManagerClass = RecordManagers\DealDocument::class;
 
   public array $relations = [
     'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_lookup', 'id' ],

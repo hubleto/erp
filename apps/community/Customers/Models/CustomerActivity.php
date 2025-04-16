@@ -18,7 +18,7 @@ use ADIOS\Core\Description\Input;
 class CustomerActivity extends \HubletoMain\Core\Model
 {
   public string $table = 'customer_activities';
-  public string $eloquentClass = Eloquent\CustomerActivity::class;
+  public string $recordManagerClass = RecordManagers\CustomerActivity::class;
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],

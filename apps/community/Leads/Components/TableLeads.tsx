@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import FormLead, { FormLeadProps } from './FormLead';
-import InputTags2 from 'adios/Inputs/Tags2';
 import request from 'adios/Request';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 interface TableLeadsProps extends TableProps {
   showArchive?: boolean,
@@ -10,8 +10,6 @@ interface TableLeadsProps extends TableProps {
 
 interface TableLeadsState extends TableState {
   showArchive: boolean,
-  tableLeadServicesDescription?: any,
-  tableLeadDocumentsDescription?: any,
 }
 
 export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> {
@@ -61,9 +59,9 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
 
     if (!this.state.showArchive) {
       elements.push(
-        <a className="btn btn-transparent" href="leads/archive">
+        <a className="btn btn-transparent" href={globalThis.app.config.url + "/leads/archive"}>
           <span className="icon"><i className="fas fa-box-archive"></i></span>
-          <span className="text">Archive</span>
+          <span className="text">Show archived leads</span>
         </a>
       );
     }
@@ -84,39 +82,38 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
           })}
         </>
       );
+    } else if (columnName == "DEAL") {
+    console.log('deal col', data);
+      if (data.DEAL) {
+        return <>
+          <a
+            className="btn btn-transparent btn-small"
+            href={"deals/" + data.DEAL.id}
+            target="_blank"
+          >
+            <span className="icon"><i className="fas fa-arrow-right"></i></span>
+            <span className="text">{data.DEAL.identifier}</span>
+          </a>
+        </>
+      } else {
+        return null;
+      }
     } else {
       return super.renderCell(columnName, column, data, options);
     }
   }
 
   onAfterLoadTableDescription(description: any) {
-    request.get(
-      'api/table/describe',
-      {
-        model: 'HubletoApp/Community/Leads/Models/LeadService',
-        idLead: this.props.recordId ?? description.idLead,
-      },
-      (description: any) => {
-        this.setState({tableLeadServicesDescription: description} as TableLeadsState);
-      }
-    );
-    request.get(
-      'api/table/describe',
-      {
-        model: 'HubletoApp/Community/Leads/Models/LeadDocument',
-        idLead: this.props.recordId ?? description.idLead,
-      },
-      (description: any) => {
-        this.setState({tableLeadDocumentsDescription: description} as TableLeadsState);
-      }
-    );
+    description.columns['DEAL'] = {
+      type: 'varchar',
+      title: globalThis.main.translate('Deal'),
+    };
+
     return description;
   }
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormLeadProps;
-    formProps.tableLeadServicesDescription = this.state.tableLeadServicesDescription;
-    formProps.tableLeadDocumentsDescription = this.state.tableLeadDocumentsDescription;
     formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormLead {...formProps}/>;
   }

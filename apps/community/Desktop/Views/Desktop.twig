@@ -122,6 +122,18 @@
               </a>
             </li>
           {% endif %}
+          {% if viewParams.main.appManager.isAppInstalled('HubletoApp\Community\Messages') %}
+            <li class="mr-2">
+              <a
+                class="btn btn-small btn-transparent"
+                href="https://help.hubleto.com/{{ viewParams.contextHelpUrl }}"
+                target="_blank"
+              >
+                <span class="icon text-blue-500"><i class="fas fa-life-ring"></i></span>
+                <span class="text">{{ translate('Messages') }}</span>
+              </a>
+            </li>
+          {% endif %}
           <li>
             {% if app.isPremium %}
               <a class="btn btn-small btn-transparent" href="{{ config.accountUrl }}/premium">

@@ -2,8 +2,6 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Text;
@@ -16,7 +14,7 @@ use HubletoMain\Core\Helper;
 class Person extends \HubletoMain\Core\Model
 {
   public string $table = 'persons';
-  public string $eloquentClass = Eloquent\Person::class;
+  public string $recordManagerClass = RecordManagers\Person::class;
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
 
   public array $relations = [
@@ -106,15 +104,4 @@ class Person extends \HubletoMain\Core\Model
     return $savedRecord;
   }
 
-  public function prepareLoadRecordQuery(array $includeRelations = [], int $maxRelationLevel = 0, mixed $query = null, int $level = 0): mixed
-  {
-    $query = parent::prepareLoadRecordQuery($includeRelations, 1);
-
-    $query = $query->selectRaw("
-      (Select value from contacts where id_person = persons.id and type = 'number' LIMIT 1) virt_number,
-      (Select value from contacts where id_person = persons.id and type = 'email' LIMIT 1) virt_email
-    ");
-
-    return $query;
-  }
 }

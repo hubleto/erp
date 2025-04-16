@@ -10,7 +10,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 class LeadTag extends \HubletoMain\Core\Model
 {
   public string $table = 'cross_lead_tags';
-  public string $eloquentClass = Eloquent\LeadTag::class;
+  public string $recordManagerClass = RecordManagers\LeadTag::class;
 
   public array $relations = [
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id' ],

@@ -10,7 +10,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class BillingAccount extends \HubletoMain\Core\Model
 {
   public string $table = 'billing_accounts';
-  public string $eloquentClass = Eloquent\BillingAccount::class;
+  public string $recordManagerClass = RecordManagers\BillingAccount::class;
   public ?string $lookupSqlValue = '{%TABLE%}.description';
 
   public array $relations = [

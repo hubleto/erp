@@ -23,12 +23,12 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
     ]);
 
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Deal statuses'),
       'icon' => 'fas fa-arrow-up-short-wide',
       'url' => 'settings/deal-statuses',
     ]);
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Deal Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/deal-tags',
@@ -68,7 +68,7 @@ class Loader extends \HubletoMain\Core\App
       $mDealHistory = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
       $mDealTag = new \HubletoApp\Community\Deals\Models\Tag($this->main);
       $mCrossDealTag = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
-      $mDealService = new \HubletoApp\Community\Deals\Models\DealService($this->main);
+      $mDealProduct = new \HubletoApp\Community\Deals\Models\DealProduct($this->main);
       $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
       $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
 
@@ -76,15 +76,15 @@ class Loader extends \HubletoMain\Core\App
       $mDealHistory->dropTableIfExists()->install();
       $mDealTag->dropTableIfExists()->install();
       $mCrossDealTag->dropTableIfExists()->install();
-      $mDealService->dropTableIfExists()->install();
+      $mDealProduct->dropTableIfExists()->install();
       $mDealActivity->dropTableIfExists()->install();
       $mDealDocument->dropTableIfExists()->install();
 
-      $mDealTag->eloquent->create([ 'name' => "Important", 'color' => '#fc2c03' ]);
-      $mDealTag->eloquent->create([ 'name' => "ASAP", 'color' => '#62fc03' ]);
-      $mDealTag->eloquent->create([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
-      $mDealTag->eloquent->create([ 'name' => "New Customer", 'color' => '#fcdb03' ]);
-      $mDealTag->eloquent->create([ 'name' => "Existing Customer", 'color' => '#5203fc' ]);
+      $mDealTag->record->recordCreate([ 'name' => "Important", 'color' => '#fc2c03' ]);
+      $mDealTag->record->recordCreate([ 'name' => "ASAP", 'color' => '#62fc03' ]);
+      $mDealTag->record->recordCreate([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
+      $mDealTag->record->recordCreate([ 'name' => "New Customer", 'color' => '#fcdb03' ]);
+      $mDealTag->record->recordCreate([ 'name' => "Existing Customer", 'color' => '#5203fc' ]);
     }
   }
 
@@ -112,10 +112,10 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Deals/Models/DealHistory:Update",
       "HubletoApp/Community/Deals/Models/DealHistory:Delete",
 
-      "HubletoApp/Community/Deals/Models/DealService:Create",
-      "HubletoApp/Community/Deals/Models/DealService:Read",
-      "HubletoApp/Community/Deals/Models/DealService:Update",
-      "HubletoApp/Community/Deals/Models/DealService:Delete",
+      "HubletoApp/Community/Deals/Models/DealProduct:Create",
+      "HubletoApp/Community/Deals/Models/DealProduct:Read",
+      "HubletoApp/Community/Deals/Models/DealProduct:Update",
+      "HubletoApp/Community/Deals/Models/DealProduct:Delete",
 
       "HubletoApp/Community/Deals/Models/DealTag:Create",
       "HubletoApp/Community/Deals/Models/DealTag:Read",
@@ -132,7 +132,7 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

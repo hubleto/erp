@@ -15,7 +15,7 @@ class GetCustomerContacts extends \HubletoMain\Core\Controller {
     $personArray = [];
 
     try {
-      $persons = $mPerson->eloquent->selectRaw("*, CONCAT(first_name, ' ', last_name) as _LOOKUP");
+      $persons = $mPerson->record->selectRaw("*, CONCAT(first_name, ' ', last_name) as _LOOKUP");
       if ($this->main->urlParamAsInteger("id_customer") > 0) {
         $persons = $persons->where("id_customer", (int) $this->main->urlParamAsInteger("id_customer"));
       }

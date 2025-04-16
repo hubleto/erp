@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
 import request from 'adios/Request';
-import TableDealServices from './TableDealServices';
+import TableDealProducts from './TableDealProducts';
 import Lookup from 'adios/Inputs/Lookup';
 import { TabPanel, TabView } from 'primereact/tabview';
 import Calendar from '../../Calendar/Components/Calendar';
@@ -17,8 +17,6 @@ import moment from 'moment';
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
-  tableDealServicesDescription: any,
-  tableDealDocumentsDescription: any,
 }
 
 export interface FormDealState extends HubletoFormState {
@@ -27,6 +25,8 @@ export interface FormDealState extends HubletoFormState {
   showIdActivity: number,
   activityCalendarTimeClicked: string,
   activityCalendarDateClicked: string,
+  tableDealProductsDescription: any,
+  tableDealDocumentsDescription: any,
 }
 
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
@@ -49,6 +49,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       showIdActivity: 0,
       activityCalendarTimeClicked: '',
       activityCalendarDateClicked: '',
+      tableDealProductsDescription: null,
+      tableDealDocumentsDescription: null,
     };
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
@@ -59,8 +61,33 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     };
   }
 
+  onAfterLoadFormDescription(description: any) {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Deals/Models/DealProduct',
+        idDeal: this.state.id,
+      },
+      (description: any) => {
+        this.setState({tableDealProductsDescription: description} as any);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Deals/Models/DealDocument',
+        idDeal: this.state.id,
+      },
+      (description: any) => {
+        this.setState({tableDealDocumentsDescription: description} as any);
+      }
+    );
+
+    return description;
+  }
+
   onAfterSaveRecord(saveResponse: any): void {
-    let params = this.getEndpointParams()
+    let params = this.getEndpointParams() as any;
     let isArchived = saveResponse.savedRecord.is_archived;
 
     if (params.showArchive == false && isArchived == true) {
@@ -77,7 +104,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     if (getUrlParam('recordId') == -1) {
       return <h2>{this.translate('New Deal')}</h2>;
     } else {
-      return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Deal Name]'}</h2>
+      return <>
+        <h2>{this.state.record.title ? this.state.record.title : ''}</h2>
+        <small>Deal</small>
+      </>;
     }
   }
 
@@ -131,21 +161,17 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     );
   }
 
-  getDealSumPrice(recordServices: any) {
-    var dealSumPrice = 0;
-    recordServices.map((service, index) => {
-      if (service.unit_price && service.amount) {
-        var sum = service.unit_price * service.amount
-        if (service.discount) {
-          sum = sum - (sum * (service.discount / 100))
-        }
-        if (service.tax) {
-          sum = sum - (sum * (service.tax / 100))
-        }
-        dealSumPrice += sum;
+  getSumPrice(recordProducts: any) {
+    var sumPrice = 0;
+    recordProducts.map((product, index) => {
+      if (product.unit_price && product.amount && product._toBeDeleted_ != true) {
+        var sum = product.unit_price * product.amount;
+        if (product.tax) sum = sum + (sum * (product.tax / 100));
+        if (product.discount) sum = sum - (sum * (product.discount / 100));
+        sumPrice += sum;
       }
     });
-    return Number(dealSumPrice.toFixed(2));
+    return Number(sumPrice.toFixed(2));
   }
 
   pipelineChange(newRecord) {
@@ -172,6 +198,15 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
+    const lookupElement = createRef();
+    var lookupData;
+
+    const getLookupData = () => {
+      if (lookupElement.current) {
+        lookupData = lookupElement.current.state.data;
+      }
+    }
+
     if (R.LEAD) R.LEAD.checkOwnership = false;
 
     if (R.HISTORY && R.HISTORY.length > 0) {
@@ -193,12 +228,18 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <>
         <TabView>
           <TabPanel header="Deal">
+            {R.is_archived == 1 ?
+              <div className='alert-warning mt-2 mb-1'>
+                <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
+                <span className='text'>This deal is archived.</span>
+              </div>
+            : null}
             <div className='grid grid-cols-2 gap-1' style=
               {{gridTemplateAreas:`
                 'info info'
                 'notes notes'
                 'status status'
-                'services services'
+                'products products'
                 'history history'
               `}}>
                 <div className='card mt-2' style={{gridArea: 'info'}}>
@@ -239,13 +280,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       </FormInput>
                       <div className='flex flex-row *:w-1/2'>
                         {this.inputWrapper('price', {
-                          readonly: (R.SERVICES && R.SERVICES.length > 0) || R.is_archived ? true : false,
+                          readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
                         })}
                         {this.inputWrapper('id_currency')}
                       </div>
                       {showAdditional && R.id_lead != null ?
                         <div className='mt-2'>
-                          <a className='btn btn-primary self-center' href={`leads?recordId=${R.id_lead}`}>
+                          <a className='btn btn-primary self-center' href={`${globalThis.app.config.url}/leads/${R.id_lead}`}>
                             <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
                             <span className='text'>{this.translate('Go to original lead')}</span>
                           </a>
@@ -258,7 +299,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                       {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                       <FormInput title='Tags'>
-                        <InputTags2 {...this.getInputProps()}
+                        <InputTags2 {...this.getInputProps('tags')}
                           value={this.state.record.TAGS}
                           readonly={R.is_archived}
                           model='HubletoApp/Community/Deals/Models/Tag'
@@ -322,16 +363,16 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       {this.inputWrapper('note', {readonly: R.is_archived})}
                     </div>
                     {showAdditional ?
-                      <div className='card mt-2' style={{gridArea: 'services'}}>
-                        <div className='card-header'>Services</div>
+                      <div className='card mt-2' style={{gridArea: 'products'}}>
+                        <div className='card-header'>Products</div>
                         <div className='card-body flex flex-col gap-2'>
                           <div className='w-full h-full overflow-x-auto'>
                           {!R.is_archived ?
                             <a
                               className="btn btn-add-outline mb-2"
                               onClick={() => {
-                                if (!R.SERVICES) R.SERVICES = [];
-                                R.SERVICES.push({
+                                if (!R.PRODUCTS) R.PRODUCTS = [];
+                                R.PRODUCTS.push({
                                   id: this.state.newEntryId,
                                   id_deal: { _useMasterRecordId_: true },
                                   amount: 1
@@ -340,141 +381,109 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               }}
                             >
                             <span className="icon"><i className="fas fa-add"></i></span>
-                            <span className="text">Add service</span>
+                            <span className="text">Add product</span>
                             </a>
                           : <></>}
-                            <TableDealServices
-                              uid={this.props.uid + "_table_deal_services"}
-                              data={{ data: R.SERVICES }}
-                              dealTotal={R.SERVICES && R.SERVICES.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
+                            <TableDealProducts
+                              uid={this.props.uid + "_table_deal_products"}
+                              data={{ data: R.PRODUCTS }}
+                              dealTotal={R.PRODUCTS && R.PRODUCTS.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
                               descriptionSource='props'
                               customEndpointParams={{idDeal: R.id}}
                               description={{
-                                permissions: this.props.tableDealServicesDescription.permissions,
+                                permissions: this.state.tableDealProductsDescription?.permissions,
                                 ui: {
                                   showHeader: false,
                                   showFooter: true
                                 },
                                 columns: {
-                                  id_service: { type: "lookup", title: "Service",
-                                  model: "HubletoApp/Community/Services/Models/Service",
-                                  cellRenderer: ( table: TableDealServices, data: any, options: any): JSX.Element => {
-                                    return (
-                                      <FormInput>
-                                        <Lookup {...this.getInputProps()}
-                                          model='HubletoApp/Community/Services/Models/Service'
-                                          cssClass='min-w-44'
-                                          value={data.id_service}
-                                          onChange={(value: any) => {
-                                            request.get(
-                                              'services/get-service-price',
-                                              {serviceId: value},
-                                              (returnData: any) => {
-                                                if (returnData.status == "success") {
-                                                  data.id_service = value;
-                                                  data.unit_price = returnData.unit_price;
-                                                  this.updateRecord({ SERVICES: table.state.data?.data });
-                                                  this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
-                                                } else {
-                                                  throw new Error('Something went wrong: ' + returnData.error);
-                                                }
+                                  id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                                    cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
+                                      return (
+                                        <FormInput>
+                                          <Lookup {...this.getInputProps('lookup-product-1')}
+                                            ref={lookupElement}
+                                            model='HubletoApp/Community/Products/Models/Product'
+                                            cssClass='min-w-44'
+                                            value={data.id_product}
+                                            onChange={(value: any) => {
+                                              getLookupData();
+
+                                              if (lookupData[value]) {
+                                                data.id_product = value;
+                                                data.unit_price = lookupData[value].unit_price;
+                                                data.tax = lookupData[value].tax;
+                                                this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                                this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
                                               }
-                                            )
-                                          }}
-                                        ></Lookup>
-                                      </FormInput>
-                                    )
+                                            }}
+                                          ></Lookup>
+                                        </FormInput>
+                                      )
+                                    },
                                   },
-                                  },
-                                  unit_price: { type: "float", title: "Unit Price" },
+                                  unit_price: { type: "float", title: "Unit Price", readonly: true },
                                   amount: { type: "int", title: "Amount" },
                                   discount: { type: "float", title: "Discount (%)" },
                                   tax: { type: "float", title: "Tax (%)" },
-                                  __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableDealServices, data: any, options: any): JSX.Element => {
-                                    if (data.unit_price && data.amount) {
-                                      var sum = data.unit_price * data.amount
-                                      if (data.discount) {
-                                        sum = sum - (sum * (data.discount / 100))
+                                  __sum: { type: "none", title: "Sum after tax",
+                                    cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
+                                      if (data.unit_price && data.amount) {
+                                        let sum = data.unit_price * data.amount;
+                                        if (data.discount) sum = sum - (sum * (data.discount / 100));
+                                        if (data.tax) sum = sum + (sum * (data.tax / 100));
+                                        sum = Number(sum.toFixed(2));
+                                        return (<><span>{sum + " " + R.CURRENCY.code}</span></>);
                                       }
-                                      if (data.tax) {
-                                        sum = sum - (sum * (data.tax / 100))
-                                      }
-                                      sum = Number(sum.toFixed(2));
-                                      return (<>
-                                          <span>{sum} {R.CURRENCY.code}</span>
-                                        </>
-                                      );
-                                    }
+                                    },
                                   },
-                                },
                                 },
                                 inputs: {
-                                  id_service: { type: "lookup", title: "Service",
-                                  model: "HubletoApp/Community/Services/Models/Service",
-                                  cellRenderer: ( table: TableDealServices, data: any, options: any): JSX.Element => {
-                                    return (
-                                      <FormInput>
-                                        <Lookup {...this.getInputProps()}
-                                          model='HubletoApp/Community/Services/Models/Service'
-                                          cssClass='min-w-44'
-                                          value={data.id_service}
-                                          onChange={(value: any) => {
-                                            request.get(
-                                              'services/get-service-price',
-                                              {serviceId: value},
-                                              (returnData: any) => {
-                                                if (returnData.status == "success") {
-                                                  data.id_service = value;
-                                                  data.unit_price = returnData.unit_price;
-                                                  this.updateRecord({ SERVICES: table.state.data?.data });
-                                                  this.updateRecord({ price: this.getDealSumPrice(R.SERVICES)});
-                                                } else {
-                                                  throw new Error('Something went wrong: ' + returnData.error);
-                                                }
+                                  id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                                    cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
+                                      return (
+                                        <FormInput>
+                                          <Lookup {...this.getInputProps('lookup-product-2')}
+                                            ref={lookupElement}
+                                            model='HubletoApp/Community/Products/Models/Product'
+                                            cssClass='min-w-44'
+                                            value={data.id_product}
+                                            onChange={(value: any) => {
+                                              getLookupData();
+
+                                              if (lookupData[value]) {
+                                                data.id_product = value;
+                                                data.unit_price = lookupData[value].unit_price;
+                                                data.tax = lookupData[value].tax;
+                                                this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                                this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
                                               }
-                                            )
-                                          }}
-                                        ></Lookup>
-                                      </FormInput>
-                                    )
+                                            }}
+                                          ></Lookup>
+                                        </FormInput>
+                                      )
+                                    },
                                   },
-                                  },
-                                  unit_price: { type: "float", title: "Unit Price" },
+                                  unit_price: { type: "float", title: "Unit Price", readonly: true },
                                   amount: { type: "int", title: "Amount" },
                                   discount: { type: "float", title: "Discount (%)" },
                                   tax: { type: "float", title: "Tax (%)" },
-                                  __sum: { type: "none", title: "Sum", cellRenderer: ( table: TableDealServices, data: any, options: any): JSX.Element => {
-                                    if (data.unit_price && data.amount) {
-                                      var sum = data.unit_price * data.amount
-                                      if (data.discount) {
-                                        sum = sum - (sum * (data.discount / 100))
-                                      }
-                                      if (data.tax) {
-                                        sum = sum - (sum * (data.tax / 100))
-                                      }
-                                      sum = Number(sum.toFixed(2));
-                                      return (<>
-                                          <span>{sum} {R.CURRENCY.code}</span>
-                                        </>
-                                      );
-                                    }
-                                  },
-                                },
+                                  __sum: { type: "none", title: "Sum after tax"},
                                 },
                               }}
                               isUsedAsInput={true}
                               isInlineEditing={this.state.isInlineEditing}
                               readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                               onRowClick={() => this.setState({isInlineEditing: true})}
-                              onChange={(table: TableDealServices) => {
-                                this.updateRecord({ SERVICES: table.state.data?.data });
-                                R.price = this.getDealSumPrice(R.SERVICES);
+                              onChange={(table: TableDealProducts) => {
+                                this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                R.price = this.getSumPrice(R.PRODUCTS);
                                 this.setState({record: R});
                               }}
-                              onDeleteSelectionChange={(table: TableDealServices) => {
-                                this.updateRecord({ SERVICES: table.state.data?.data ?? [] });
+                              onDeleteSelectionChange={(table: TableDealProducts) => {
+                                this.updateRecord({ PRODUCTS: table.state.data?.data ?? [], price: this.getSumPrice(R.PRODUCTS) });
                               }}
-                            ></TableDealServices>
+                            ></TableDealProducts>
                           </div>
                         </div>
                       </div>
@@ -556,7 +565,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 customEndpointParams={{idDeal: R.id}}
                 descriptionSource="props"
                 description={{
-                  permissions: this.props.tableDealDocumentsDescription.permissions,
+                  permissions: this.state.tableDealDocumentsDescription?.permissions,
                   ui: {
                     showFooter: false,
                     showHeader: false,
@@ -566,7 +575,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableDealDocuments, data: any, options: any): JSX.Element => {
                       return (
                         <FormInput>
-                          <Hyperlink {...this.getInputProps()}
+                          <Hyperlink {...this.getInputProps('document-link')}
                             value={data.DOCUMENT.hyperlink}
                             readonly={true}
                           ></Hyperlink>

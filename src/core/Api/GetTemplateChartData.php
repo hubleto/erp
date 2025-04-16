@@ -44,7 +44,7 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
           break;
       }
 
-      $query = $model->eloquent->selectRaw($function." as result, ".$groupBy);
+      $query = $model->record->selectRaw($function." as result, ".$groupBy);
       foreach ((array) $config["searchGroups"] as $searchGroup) {
         if ($searchGroup["option"] == 5) $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
         else if ($searchGroup["option"] == 6) $query = $query->whereBetween($searchGroup["fieldName"], [$searchGroup["value"], $searchGroup["value2"]]);
@@ -63,7 +63,7 @@ class GetTemplateChartData extends \HubletoMain\Core\Controller
         $returnData["colors"] = [];
       } else {
         foreach ($data as $value) {
-          $label = $groupByModel->eloquent
+          $label = $groupByModel->record
             ->selectRaw($groupByModelLookupSqlValue)
             ->where("id", $value[$groupBy])
             ->first()

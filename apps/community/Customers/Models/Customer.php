@@ -7,7 +7,6 @@ use HubletoApp\Community\Settings\Models\Country;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\Lead;
-use Illuminate\Database\Eloquent\Builder;
 
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Varchar;
@@ -21,7 +20,7 @@ use HubletoMain\Core\Helper;
 class Customer extends \HubletoMain\Core\Model
 {
   public string $table = 'customers';
-  public string $eloquentClass = Eloquent\Customer::class;
+  public string $recordManagerClass = RecordManagers\Customer::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
@@ -46,8 +45,8 @@ class Customer extends \HubletoMain\Core\Model
       'postal_code' => (new Varchar($this, $this->translate('Postal Code'))),
       'id_country' => (new Lookup($this, $this->translate('Country'), Country::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
-      'customer_id' => (new Varchar($this, $this->translate('Customer ID'))),
-      'tax_id' => (new Varchar($this, $this->translate('Tax ID')))->setRequired(),
+      'customer_id' => (new Varchar($this, $this->translate('Customer ID')))->setRequired(),
+      'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),

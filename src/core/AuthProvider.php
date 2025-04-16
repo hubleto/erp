@@ -43,7 +43,7 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
       && !empty(\HubletoApp\Community\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
       $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
-      $mUser->eloquent
+      $mUser->record
         ->where('id', $this->getUserId())
         ->update(['language' => $setLanguage])
       ;

@@ -7,7 +7,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 class RolePermission extends \HubletoMain\Core\Model
 {
   public string $table = 'role_permissions';
-  public string $eloquentClass = Eloquent\RolePermission::class;
+  public string $recordManagerClass = RecordManagers\RolePermission::class;
 
   public array $relations = [
     'ROLE' => [ self::BELONGS_TO, UserRole::class, 'id_role', 'id' ],

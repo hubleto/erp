@@ -15,7 +15,7 @@ class GetCustomer extends \HubletoMain\Core\Controller
     $customerArray = [];
 
     try {
-      $customers = $mCustomer->eloquent->selectRaw("*, name as _LOOKUP");
+      $customers = $mCustomer->record->selectRaw("*, name as _LOOKUP");
       /**
        * The string needs to be at least two characters long for the search to activate
        * due to the lookup inputs not clearing the search parameter when empty

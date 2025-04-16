@@ -6,11 +6,11 @@ use HubletoApp\Community\Settings\Models\Setting;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Deals\Models\DealDocument;
 use HubletoApp\Community\Deals\Models\DealHistory;
-use HubletoApp\Community\Deals\Models\DealService;
+use HubletoApp\Community\Deals\Models\DealProduct;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Leads\Models\LeadHistory;
-use HubletoApp\Community\Leads\Models\LeadService;
+use HubletoApp\Community\Leads\Models\LeadProduct;
 use Exception;
 use HubletoApp\Community\Settings\Models\PipelineStep;
 
@@ -31,23 +31,23 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
     $mLead = new Lead($this->main);
     $mLeadHistory = new LeadHistory($this->main);
-    $mLeadService = new LeadService($this->main);
+    $mLeadProduct = new LeadProduct($this->main);
     $mLeadDocument = new LeadDocument($this->main);
 
     $mDeal = new Deal($this->main);
     $mDealHistory = new DealHistory($this->main);
-    $mDealService = new DealService($this->main);
+    $mDealProduct = new DealProduct($this->main);
     $mDealDocument = new DealDocument($this->main);
     $deal = null;
 
     $mSettings = new Setting($this->main);
     $mPipepelineStep = new PipelineStep($this->main);
-    $defaultPipeline =(int) $mSettings->eloquent
+    $defaultPipeline =(int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
       ->first()
       ->value
     ;
-    $defaultPipelineFirstStep =(int) $mPipepelineStep->eloquent
+    $defaultPipelineFirstStep =(int) $mPipepelineStep->record
       ->where("id_pipeline", $defaultPipeline)
       ->orderBy("id", "asc")
       ->first()
@@ -55,9 +55,9 @@ class ConvertLead extends \HubletoMain\Core\Controller
     ;
 
     try {
-      $lead = $mLead->eloquent->where("id", $leadId)->first();
+      $lead = $mLead->record->where("id", $leadId)->first();
 
-      $deal = $mDeal->eloquent->create([
+      $deal = $mDeal->record->recordCreate([
         "identifier" => $lead->identifier,
         "title" => $lead->title,
         "id_customer" => $lead->id_customer,
@@ -75,12 +75,12 @@ class ConvertLead extends \HubletoMain\Core\Controller
         "id_pipeline_step" => $defaultPipelineFirstStep ?? null,
       ]);
 
-      $leadServices = $mLeadService->eloquent->where("id_lead", $leadId)->get();
+      $leadProducts = $mLeadProduct->record->where("id_lead", $leadId)->get();
 
       foreach ($leadServices as $leadService) { //@phpstan-ignore-line
-        $mDealService->eloquent->create([
+        $mDealService->record->recordCreate([
           "id_service" => $leadService->id_service,
-          "id_deal" => $deal->id,
+          "id_deal" => $deal['id'],
           "unit_price" => $leadService->unit_price,
           "amount" => $leadService->amount,
           "discount" => $leadService->discount,
@@ -88,35 +88,35 @@ class ConvertLead extends \HubletoMain\Core\Controller
         ]);
       }
 
-      $leadDocuments = $mLeadDocument->eloquent->where("id_lookup", $leadId)->get();
+      $leadDocuments = $mLeadDocument->record->where("id_lookup", $leadId)->get();
 
       foreach ($leadDocuments as $leadDocument) { //@phpstan-ignore-line
-        $mDealDocument->eloquent->create([
+        $mDealDocument->record->recordCreate([
           "id_document" => $leadDocument->id_document,
-          "id_deal" => $deal->id
+          "id_deal" => $deal['id']
         ]);
       }
 
-      $leadHistories = $mLeadHistory->eloquent->where("id_lead", $leadId)->get();
+      $leadHistories = $mLeadHistory->record->where("id_lead", $leadId)->get();
 
       foreach ($leadHistories as $leadHistory) { //@phpstan-ignore-line
-        $mDealHistory->eloquent->create([
+        $mDealHistory->record->recordCreate([
           "description" => $leadHistory->description,
           "change_date" => $leadHistory->change_date,
-          "id_deal" => $deal->id
+          "id_deal" => $deal['id']
         ]);
       }
 
-      $mLeadHistory->eloquent->create([
+      $mLeadHistory->record->recordCreate([
         "description" => "Converted to a Deal",
         "change_date" => date("Y-m-d"),
         "id_lead" => $leadId
       ]);
 
-      $mDealHistory->eloquent->create([
+      $mDealHistory->record->recordCreate([
         "description" => "Converted to a Deal",
         "change_date" => date("Y-m-d"),
-        "id_deal" => $deal->id
+        "id_deal" => $deal['id']
       ]);
 
       $lead->is_archived = 1;
@@ -130,8 +130,8 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
     return [
       "status" => "success",
-      "idDeal" => $deal->id,
-      "title" => str_replace(" ", "+", (string) $deal->title)
+      "idDeal" => $deal['id'],
+      "title" => str_replace(" ", "+", (string) $deal['title'])
     ];
   }
 

@@ -21,12 +21,12 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
     ]);
 
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Lead statuses'),
       'icon' => 'fas fa-arrow-up-short-wide',
       'url' => 'settings/lead-statuses',
     ]);
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Lead Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/lead-tags',
@@ -48,7 +48,7 @@ class Loader extends \HubletoMain\Core\App
       $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
       $mLeadTag = new \HubletoApp\Community\Leads\Models\Tag($this->main);
       $mCrossLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
-      $mLeadService = new \HubletoApp\Community\Leads\Models\LeadService($this->main);
+      $mLeadProduct = new \HubletoApp\Community\Leads\Models\LeadProduct($this->main);
       $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
       $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
 
@@ -57,18 +57,19 @@ class Loader extends \HubletoMain\Core\App
       $mLeadHistory->dropTableIfExists()->install();
       $mLeadTag->dropTableIfExists()->install();
       $mCrossLeadTag->dropTableIfExists()->install();
-      $mLeadService->dropTableIfExists()->install();
+      $mLeadProduct->dropTableIfExists()->install();
       $mLeadActivity->dropTableIfExists()->install();
       $mLeadDocument->dropTableIfExists()->install();
 
-      $mLeadTag->eloquent->create([ 'name' => "Important", 'color' => '#fc2c03' ]);
-      $mLeadTag->eloquent->create([ 'name' => "ASAP", 'color' => '#62fc03' ]);
-      $mLeadTag->eloquent->create([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Quite complex", 'color' => '#2196f3' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Great opportunity", 'color' => '#4caf50' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Duplicate", 'color' => '#9e9e9e' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Needs attention", 'color' => '#795548' ]);
 
-      $mLeadStatus->eloquent->create([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
-      $mLeadStatus->eloquent->create([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
-      $mLeadStatus->eloquent->create([ 'name' => 'Completed', 'order' => 3, 'color' => '#42ddf5' ]);
-      $mLeadStatus->eloquent->create([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
+      $mLeadStatus->record->recordCreate([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
+      $mLeadStatus->record->recordCreate([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
+      $mLeadStatus->record->recordCreate([ 'name' => 'Completed', 'order' => 3, 'color' => '#42ddf5' ]);
+      $mLeadStatus->record->recordCreate([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
     }
   }
 
@@ -96,10 +97,10 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Leads/Models/LeadHistory:Update",
       "HubletoApp/Community/Leads/Models/LeadHistory:Delete",
 
-      "HubletoApp/Community/Leads/Models/LeadService:Create",
-      "HubletoApp/Community/Leads/Models/LeadService:Read",
-      "HubletoApp/Community/Leads/Models/LeadService:Update",
-      "HubletoApp/Community/Leads/Models/LeadService:Delete",
+      "HubletoApp/Community/Leads/Models/LeadProduct:Create",
+      "HubletoApp/Community/Leads/Models/LeadProduct:Read",
+      "HubletoApp/Community/Leads/Models/LeadProduct:Update",
+      "HubletoApp/Community/Leads/Models/LeadProduct:Delete",
 
       "HubletoApp/Community/Leads/Models/LeadStatus:Create",
       "HubletoApp/Community/Leads/Models/LeadStatus:Read",
@@ -122,7 +123,7 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

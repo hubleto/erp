@@ -9,8 +9,6 @@ interface TableDealsProps extends TableProps {
 
 interface TableDealsState extends TableState {
   showArchive: boolean,
-  tableDealServicesDescription?: any,
-  tableDealDocumentsDescription?: any,
 }
 
 export default class TableDeals extends Table<TableDealsProps, TableDealsState> {
@@ -60,9 +58,9 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
 
     if (!this.state.showArchive) {
       elements.push(
-        <a className="btn btn-transparent" href="deals/archive">
+        <a className="btn btn-transparent" href={globalThis.app.config.url + "/deals/archive"}>
           <span className="icon"><i className="fas fa-box-archive"></i></span>
-          <span className="text">Show</span>
+          <span className="text">Show archived deals</span>
         </a>
       );
     }
@@ -84,35 +82,8 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
     }
   }
 
-  onAfterLoadTableDescription(description: any) {
-    request.get(
-      'api/table/describe',
-      {
-        model: 'HubletoApp/Community/Deals/Models/DealService',
-        idDeal: this.props.recordId ?? description.idDeal,
-      },
-      (description: any) => {
-        this.setState({tableDealServicesDescription: description} as TableDealsState);
-      }
-    );
-    request.get(
-      'api/table/describe',
-      {
-        model: 'HubletoApp/Community/Deals/Models/DealDocument',
-        idDeal: this.props.recordId ?? description.idDeal,
-      },
-      (description: any) => {
-        this.setState({tableDealDocumentsDescription: description} as TableDealsState);
-      }
-    );
-
-    return description;
-  }
-
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormDealProps;
-    formProps.tableDealServicesDescription = this.state.tableDealServicesDescription;
-    formProps.tableDealDocumentsDescription = this.state.tableDealDocumentsDescription;
     formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormDeal {...formProps}/>;
   }

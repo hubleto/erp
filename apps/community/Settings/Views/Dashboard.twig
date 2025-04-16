@@ -17,44 +17,22 @@
   }
 </script>
 
-<div class="flex flex-col sm:flex-row">
-  <div class="basis-8/12 order-2 sm:order-1">
-    <div class="text-lg m-auto w-1/2">
-      <input
-        class="w-full p-2 border border-gray"
-        placeholder="Search settings..."
-        onkeyup="searchSetting(this.value);"
-      />
-    </div>
+<div class="card">
+  <div class="card-body">
+    <input
+      class="w-full p-2 border border-gray text-lg"
+      placeholder="Search settings..."
+      onkeyup="searchSetting(this.value);"
+    />
 
-    <div id="setting-buttons" class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+    <div id="setting-buttons" class="mt-4 flex flex-wrap gap-2">
       {% for setting in viewParams.settings %}
-        <a class="btn btn-transparent" href="{{ setting.url }}">
+        <a class="btn btn-transparent btn-square w-32" href="{{ setting.url }}">
           <span class="icon"><i class="{{ setting.icon }}"></i></span>
           <span class="text">{{ setting.title }}</span>
         </a>
       {% endfor %}
     </div>
-  </div>
-
-  <div class="basis-4/12 ml-2  order-1 sm:order-2">
-    {% if viewParams.main.isPremium %}
-      <div class="alert alert-success mt-2">
-        Your Premium features are already activated.
-      </div>
-    {% else %}
-      <div class="card mt-2">
-        <div class="card-header">
-          Premium features are not availabe.
-        </div>
-        <div class="card-body">
-          <a class="btn btn-large btn-primary" href="{{ config.accountUrl }}/premium">
-            <span class="icon"><i class="fas fa-trophy"></i></span>
-            <span class="text">Upgrade to Premium</span>
-          </a>
-        </div>
-      </div>
-    {% endif %}
   </div>
 </div>
 

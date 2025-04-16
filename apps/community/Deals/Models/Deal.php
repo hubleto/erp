@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Deal extends \HubletoMain\Core\Model
 {
   public string $table = 'deals';
-  public string $eloquentClass = Eloquent\Deal::class;
+  public string $recordManagerClass = RecordManagers\Deal::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
@@ -40,7 +40,7 @@ class Deal extends \HubletoMain\Core\Model
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
     'TAGS' => [ self::HAS_MANY, DealTag::class, 'id_deal', 'id' ],
-    'SERVICES' => [ self::HAS_MANY, DealService::class, 'id_deal', 'id' ],
+    'PRODUCTS' => [ self::HAS_MANY, DealProduct::class, 'id_deal', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, DealActivity::class, 'id_deal', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_lookup', 'id'],
   ];
@@ -88,7 +88,7 @@ class Deal extends \HubletoMain\Core\Model
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsBool("showArchive")) {
-      $description->ui['title'] = "Deals Archive";
+      $description->ui['title'] = "Archived deals";
       $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,
@@ -130,12 +130,12 @@ class Deal extends \HubletoMain\Core\Model
   public function describeForm(): \ADIOS\Core\Description\Form
   {
     $mSettings = new Setting($this->main);
-    $defaultPipeline = (int) $mSettings->eloquent
+    $defaultPipeline = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
       ->first()
       ->value
     ;
-    $defaultCurrency = (int) $mSettings->eloquent
+    $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
       ->value
@@ -155,7 +155,7 @@ class Deal extends \HubletoMain\Core\Model
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
     $mDealHistory = new DealHistory($this->main);
-    $mDealHistory->eloquent->create([
+    $mDealHistory->record->recordCreate([
       "change_date" => date("Y-m-d"),
       "id_deal" => $savedRecord["id"],
       "description" => "Deal created"
@@ -182,7 +182,7 @@ class Deal extends \HubletoMain\Core\Model
   {
     if ($record["id_customer"] && !isset($record["checkOwnership"])) {
       $mCustomer = new Customer($this->main);
-      $customer = $mCustomer->eloquent
+      $customer = $mCustomer->record
         ->where("id", $record["id_customer"])
         ->first()
       ;
@@ -203,18 +203,18 @@ class Deal extends \HubletoMain\Core\Model
   {
     $this->getOwnership($record);
 
-    $deal = $this->eloquent->find($record["id"])->toArray();
+    $deal = $this->record->find($record["id"])->toArray();
     $mDealHistory = new DealHistory($this->main);
 
     if ((float) $deal["price"] != (float) $record["price"]) {
-      $mDealHistory->eloquent->create([
+      $mDealHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_deal" => (int) ($record["id"] ?? 0),
         "description" => "Price changed to " . (string) ($record["price"] ?? '')
       ]);
     }
     if ((string) $deal["date_expected_close"] != (string) $record["date_expected_close"]) {
-      $mDealHistory->eloquent->create([
+      $mDealHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_deal" => $record["id"],
         "description" => "Expected Close Date changed to ".date("d.m.Y", (int) strtotime((string) $record["date_expected_close"]))

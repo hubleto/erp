@@ -8,8 +8,8 @@ use ADIOS\Core\Db\Column\Varchar;
 
 class Source extends \HubletoMain\Core\Model
 {
-  public string $table = 'sources';
-  public string $eloquentClass = \HubletoApp\Community\CalendarSync\Models\Eloquent\Source::class;
+  public string $table = 'calendar_sync_sources';
+  public string $recordManagerClass = RecordManagers\Source::class;
 
   public function describeColumns(): array
   {

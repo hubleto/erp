@@ -1,0 +1,34 @@
+import React, { Component } from 'react'
+import Table, { TableProps, TableState } from 'adios/Table';
+
+interface TableLeadProductsProps extends TableProps {
+  leadTotal?: any
+}
+
+interface TableLeadProductsState extends TableState {
+}
+
+export default class TableLeadProducts extends Table<TableLeadProductsProps, TableLeadProductsState> {
+  static defaultProps = {
+    ...Table.defaultProps,
+    itemsPerPage: 15,
+    formUseModalSimple: true,
+    model: 'HubletoApp/Community/Leads/Models/LeadProduct',
+  }
+
+  props: TableLeadProductsProps;
+  state: TableLeadProductsState;
+
+  translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\TableLeadProducts';
+
+  constructor(props: TableLeadProductsProps) {
+    super(props);
+    this.state = this.getStateFromProps(props);
+  }
+
+  renderFooter(): JSX.Element {
+    return <>
+      <div className='flex flex-row justify-start md:justify-end'><strong className='mr-4'>{this.props.leadTotal}</strong></div>
+    </>;
+  }
+}

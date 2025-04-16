@@ -27,7 +27,7 @@ class Loader extends \HubletoMain\Core\App
       'en' => 'en/apps/community/customers',
     ]);
 
-    $this->main->addSetting([
+    $this->main->addSetting($this, [
       'title' => $this->translate('Customer Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/customer-tags',
@@ -48,9 +48,9 @@ class Loader extends \HubletoMain\Core\App
       $mCrossCustomerTag->dropTableIfExists()->install();
       $mCustomerDocument->dropTableIfExists()->install();
 
-      $mCustomerTag->eloquent->create([ 'name' => "VIP", 'color' => '#fc2c03' ]);
-      $mCustomerTag->eloquent->create([ 'name' => "Partner", 'color' => '#62fc03' ]);
-      $mCustomerTag->eloquent->create([ 'name' => "Public", 'color' => '#033dfc' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "VIP", 'color' => '#D33115' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "Partner", 'color' => '#4caf50' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "Public", 'color' => '#2196f3' ]);
     }
 
     if ($round == 2) {
@@ -112,7 +112,7 @@ class Loader extends \HubletoMain\Core\App
     ];
 
     foreach ($permissions as $permission) {
-      $mPermission->eloquent->create([
+      $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
     }

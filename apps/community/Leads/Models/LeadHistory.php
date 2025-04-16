@@ -15,7 +15,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 class LeadHistory extends \HubletoMain\Core\Model
 {
   public string $table = 'lead_histories';
-  public string $eloquentClass = Eloquent\LeadHistory::class;
+  public string $recordManagerClass = RecordManagers\LeadHistory::class;
   public ?string $lookupSqlValue = '{%TABLE%}.description';
 
   public array $relations = [

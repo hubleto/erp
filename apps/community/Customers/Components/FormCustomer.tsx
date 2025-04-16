@@ -89,7 +89,10 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     if (getUrlParam("recordId") == -1) {
       return <h2>New Customer</h2>;
     } else {
-      return <h2>{this.state.record.name ? this.state.record.name : "[Undefined Customer Name]"}</h2>;
+      return <>
+        <h2>{this.state.record.name ? this.state.record.name : ''}</h2>
+        <small>Customer</small>
+      </>;
     }
   }
 
@@ -291,60 +294,77 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       <>
         <TabView>
           <TabPanel header={this.translate('Customer')}>
-            <div
-              className="grid grid-cols-2 gap-1"
-              style={{
-                gridTemplateAreas: `
-                  'customer customer'
-                  'notes notes'
-                  'contacts contacts'
-                  'activities activities'
-                `,
-              }}
-            >
-              <div className="card" style={{ gridArea: "customer" }}>
-                <div className="card-body flex flex-row gap-2">
-                  <div className="w-1/2">
-                    {this.inputWrapper("name")}
-                    {this.inputWrapper("street_line_1")}
-                    {this.inputWrapper("street_line_2")}
-                    {this.inputWrapper("city")}
-                    {this.inputWrapper("region")}
-                    {this.inputWrapper("id_country")}
-                    {this.inputWrapper("postal_code")}
+            <div className="gap-1">
+              <div className='flex gap-1 mt-2'>
+                <div className='flex-2 card'>
+                  <div className="card-body flex flex-row gap-2">
+                    <div className="w-1/2">
+                      {this.inputWrapper("name")}
+                      {this.inputWrapper("customer_id")}
+                      {this.inputWrapper("street_line_1")}
+                      {this.inputWrapper("street_line_2")}
+                      {this.inputWrapper("city")}
+                      {this.inputWrapper("region")}
+                      {this.inputWrapper("id_country")}
+                      {this.inputWrapper("postal_code")}
+                    </div>
+                    <div className='border-l border-gray-200'></div>
+                    <div className="w-1/2">
+                      {this.inputWrapper("vat_id")}
+                      {this.inputWrapper("tax_id")}
+                      {showAdditional ? this.inputWrapper("date_created") : null}
+                      {this.inputWrapper("is_active")}
+                      <FormInput title="Tags">
+                        <InputTags2
+                          {...this.getInputProps('tags')}
+                          value={this.state.record.TAGS}
+                          model="HubletoApp/Community/Customers/Models/Tag"
+                          targetColumn="id_customer"
+                          sourceColumn="id_tag"
+                          colorColumn="color"
+                          onChange={(value: any) => {
+                            R.TAGS = value;
+                            this.setState({record: R});
+                          }}
+                        />
+                      </FormInput>
+                      {this.inputWrapper("id_user")}
+                    </div>
                   </div>
-                  <div className='border-l border-gray-200'></div>
-                  <div className="w-1/2">
-                    {this.inputWrapper("vat_id")}
-                    {this.inputWrapper("customer_id")}
-                    {this.inputWrapper("tax_id")}
-                    {showAdditional ? this.inputWrapper("date_created") : null}
-                    {this.inputWrapper("is_active")}
-                    <FormInput title="Tags">
-                      <InputTags2
-                        {...this.getInputProps()}
-                        value={this.state.record.TAGS}
-                        model="HubletoApp/Community/Customers/Models/Tag"
-                        targetColumn="id_customer"
-                        sourceColumn="id_tag"
-                        colorColumn="color"
-                        onChange={(value: any) => {
-                          R.TAGS = value;
-                          this.setState({record: R});
-                        }}
-                      />
-                    </FormInput>
-                    {this.inputWrapper("id_user")}
+                </div>
+                <div className='flex-1 card'>
+                  <div className='card-body '>
+                    <Calendar
+                      onCreateCallback={() => this.loadRecord()}
+                      readonly={R.is_archived}
+                      eventsEndpoint={globalThis.main.config.rewriteBase + 'customers/get-calendar-events?idCustomer=' + R.id}
+                      onDateClick={(date, time, info) => {
+                        this.setState({
+                          activityCalendarDateClicked: date,
+                          activityCalendarTimeClicked: time,
+                          showIdActivity: -1,
+                        } as FormCustomerState);
+                      }}
+                      onEventClick={(info) => {
+                        this.setState({
+                          showIdActivity: parseInt(info.event.id),
+                        } as FormCustomerState);
+                        info.jsEvent.preventDefault();
+                      }}
+                      headerToolbar={{
+                        left: 'prev,next',
+                        center: 'title',
+                        right: 'timeGridDay,timeGridWeek,dayGridMonth'
+                      }}
+                    ></Calendar>
                   </div>
                 </div>
               </div>
-
-              <div className="card card-body"  style={{ gridArea: "notes" }}>
+              <div className="card card-body">
                 {this.inputWrapper("note")}
               </div>
-
               {showAdditional ?
-                <div className="card" style={{ gridArea: "contacts" }}>
+                <div className="card">
                   <div className="card-header">{this.translate('Contact persons')}</div>
                   <div className="card-body">
                     <a
@@ -427,9 +447,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   info.jsEvent.preventDefault();
                 }}
               ></Calendar>
-              {this.state.showIdActivity == 0 ? <></> :
-                this.renderActivityForm(R)
-              }
             </TabPanel>
           ) : null}
           {showAdditional ? (
@@ -444,7 +461,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               <TableLeads
                 uid={this.props.uid + "_table_leads"}
                 data={{ data: R.LEADS }}
-                descriptionSource="props"
+                descriptionSource="both"
                 customEndpointParams={{idCustomer: R.id}}
                 isUsedAsInput={false}
                 readonly={!this.state.isInlineEditing}
@@ -452,13 +469,13 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   permissions: this.props.tableLeadsDescription.permissions,
                   columns: {
                     title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
+                    price: { type: "float", title: "Price" },
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                   inputs: {
                     title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
+                    price: { type: "float", title: "Price" },
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
@@ -466,7 +483,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 onRowClick={(table: TableLeads, row: any) => {
                   var tableProps = this.props.tableLeadsDescription
                   tableProps.idLead = row.id;
-                  table.onAfterLoadTableDescription(tableProps)
                   table.openForm(row.id);
                 }}
                 onDeleteSelectionChange={(table: TableLeads) => {
@@ -498,13 +514,13 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   permissions: this.props.tableDealsDescription.permissions,
                   columns: {
                     title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
+                    price: { type: "float", title: "Price" },
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
                   inputs: {
                     title: { type: "varchar", title: "Title" },
-                    price: { type: "float", title: "Amount" },
+                    price: { type: "float", title: "Price" },
                     id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
                     date_expected_close: { type: "date", title: "Expected Close Date" },
                   },
@@ -577,6 +593,9 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
             </TabPanel>
           ) : null}
         </TabView>
+        {this.state.showIdActivity == 0 ? <></> :
+          this.renderActivityForm(R)
+        }
       </>
     );
   }

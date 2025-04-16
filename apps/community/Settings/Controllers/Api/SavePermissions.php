@@ -20,17 +20,17 @@ class SavePermissions extends \HubletoMain\Core\Controller
     if ($roleId > 0) {
       try {
         $mUserRole = new UserRole($this->main);
-        $userRole = $mUserRole->eloquent->find($roleId);
+        $userRole = $mUserRole->record->find($roleId);
         $userRole->update([
           "role" => $roleTitle,
           "grant_all" => $grantAll
         ]);
 
         $mRolePermission = new RolePermission($this->main);
-        $mRolePermission->eloquent->where("id_role", $roleId)->delete();
+        $mRolePermission->record->where("id_role", $roleId)->delete();
 
         foreach ($rolePermissions as $key => $permissionId) {
-          $mRolePermission->eloquent->create([
+          $mRolePermission->record->recordCreate([
             "id_role" => $roleId,
             "id_permission" => (int) $permissionId
           ]);

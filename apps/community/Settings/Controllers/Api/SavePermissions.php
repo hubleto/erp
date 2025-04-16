@@ -21,7 +21,7 @@ class SavePermissions extends \HubletoMain\Core\Controller
       try {
         $mUserRole = new UserRole($this->main);
         $userRole = $mUserRole->record->find($roleId);
-        $userRole->recordUpdate([
+        $userRole->update([
           "role" => $roleTitle,
           "grant_all" => $grantAll
         ]);

@@ -38,7 +38,7 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mSource = new \HubletoApp\Community\CalendarSync\Models\Source($this->main);
+      $mSource = new Models\Source($this->main);
       $mSource->dropTableIfExists()->install();
     }
   }

@@ -100,7 +100,7 @@ class Lead extends \HubletoMain\Core\Model
       $description->ui = [];
     }
     if ($this->main->urlParamAsBool("showArchive")) {
-      $description->ui['title'] = "Leads Archive";
+      $description->ui['title'] = "Archived leads";
       $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,

@@ -4,7 +4,7 @@ namespace HubletoApp\Community\CalendarSync\Models\RecordManagers;
 
 class Source extends \HubletoMain\Core\RecordManager
 {
-  public $table = 'source';
+  public $table = 'calendar_sync_sources';
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {

@@ -647,6 +647,8 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $leads = $mLead->record->get();
 
     foreach ($leads as $lead) { // @phpstan-ignore-line
+      if (rand(1, 3) != 1) continue; // negenerujem deal pre vsetky leads
+
       $pipeline = rand(1,2);
       $result = rand(1,3);
       if ($pipeline === 1) $pipelineStep = rand(1,3);

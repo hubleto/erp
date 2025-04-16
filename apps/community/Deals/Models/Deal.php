@@ -40,7 +40,7 @@ class Deal extends \HubletoMain\Core\Model
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
     'TAGS' => [ self::HAS_MANY, DealTag::class, 'id_deal', 'id' ],
-    'SERVICES' => [ self::HAS_MANY, DealService::class, 'id_deal', 'id' ],
+    'PRODUCTS' => [ self::HAS_MANY, DealProduct::class, 'id_deal', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, DealActivity::class, 'id_deal', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_lookup', 'id'],
   ];

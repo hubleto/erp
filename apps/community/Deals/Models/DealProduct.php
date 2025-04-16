@@ -1,30 +1,30 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Models;
+namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Community\Services\Models\Service;
-use HubletoApp\Community\Leads\Models\Lead;
+use HubletoApp\Community\Products\Models\Product;
+use HubletoApp\Community\Deals\Models\Deal;
 
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Integer;
 use \ADIOS\Core\Db\Column\Decimal;
 
-class LeadService extends \HubletoMain\Core\Model
+class DealProduct extends \HubletoMain\Core\Model
 {
-  public string $table = 'lead_services';
-  public string $recordManagerClass = RecordManagers\LeadService::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.id_service';
+  public string $table = 'deal_products';
+  public string $eloquentClass = RecordManagers\DealProduct::class;
+  public ?string $lookupSqlValue = '{%TABLE%}.id_product';
 
   public array $relations = [
-    'SERVICE' => [ self::BELONGS_TO, Service::class, 'id_service', 'id' ],
-    'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id' ],
+    'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id' ],
+    'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_deal', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired(),
-      'id_service' => (new Lookup($this, $this->translate('Service'), Service::class, 'CASCADE'))->setRequired(),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class, 'CASCADE'))->setRequired(),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
       'discount' => new Decimal($this, $this->translate('Dicount (%)')),
@@ -35,7 +35,7 @@ class LeadService extends \HubletoMain\Core\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    if ($this->main->urlParamAsInteger('idLead') > 0){
+    if ($this->main->urlParamAsInteger('idDeal') > 0) {
       $description->permissions = [
         'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
         'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),

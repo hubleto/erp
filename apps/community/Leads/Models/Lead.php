@@ -10,6 +10,7 @@ use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Leads\Models\LeadTag;
 use HubletoApp\Community\Settings\Models\Setting;
+use HubletoApp\Community\Leads\Models\LeadProduct;
 
 use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Varchar;
@@ -17,6 +18,7 @@ use \ADIOS\Core\Db\Column\Date;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Decimal;
 use \ADIOS\Core\Db\Column\Boolean;
+use \ADIOS\Core\Db\Column\DateTime;
 use HubletoMain\Core\Helper;
 
 class Lead extends \HubletoMain\Core\Model
@@ -34,7 +36,7 @@ class Lead extends \HubletoMain\Core\Model
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
     'TAGS' => [ self::HAS_MANY, LeadTag::class, 'id_lead', 'id' ],
-    'SERVICES' => [ self::HAS_MANY, LeadService::class, 'id_lead', 'id' ],
+    'PRODUCTS' => [ self::HAS_MANY, LeadProduct::class, 'id_lead', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, LeadActivity::class, 'id_lead', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, LeadDocument::class, 'id_lookup', 'id'],
   ];
@@ -50,7 +52,7 @@ class Lead extends \HubletoMain\Core\Model
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
-      'date_created' => (new Date($this, $this->translate('Date created')))->setRequired()->setReadonly(),
+      'date_created' => (new DateTime($this, $this->translate('Date created')))->setRequired()->setReadonly(),
       'id_lead_status' => (new Lookup($this, $this->translate('Status'), LeadStatus::class))->setRequired(),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),

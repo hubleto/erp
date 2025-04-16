@@ -9,7 +9,7 @@ interface TableDealsProps extends TableProps {
 
 interface TableDealsState extends TableState {
   showArchive: boolean,
-  tableDealServicesDescription?: any,
+  tableDealProductsDescription?: any,
   tableDealDocumentsDescription?: any,
 }
 
@@ -88,11 +88,11 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Deals/Models/DealService',
+        model: 'HubletoApp/Community/Deals/Models/DealProduct',
         idDeal: this.props.recordId ?? description.idDeal,
       },
       (description: any) => {
-        this.setState({tableDealServicesDescription: description} as TableDealsState);
+        this.setState({tableDealProductsDescription: description} as TableDealsState);
       }
     );
     request.get(
@@ -111,7 +111,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormDealProps;
-    formProps.tableDealServicesDescription = this.state.tableDealServicesDescription;
+    formProps.tableDealProductsDescription = this.state.tableDealProductsDescription;
     formProps.tableDealDocumentsDescription = this.state.tableDealDocumentsDescription;
     formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormDeal {...formProps}/>;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import FormLead, { FormLeadProps } from './FormLead';
-import InputTags2 from 'adios/Inputs/Tags2';
 import request from 'adios/Request';
 
 interface TableLeadsProps extends TableProps {
@@ -10,7 +9,7 @@ interface TableLeadsProps extends TableProps {
 
 interface TableLeadsState extends TableState {
   showArchive: boolean,
-  tableLeadServicesDescription?: any,
+  tableLeadProductsDescription?: any,
   tableLeadDocumentsDescription?: any,
 }
 
@@ -108,11 +107,11 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Leads/Models/LeadService',
+        model: 'HubletoApp/Community/Leads/Models/LeadProduct',
         idLead: this.props.recordId ?? description.idLead,
       },
       (description: any) => {
-        this.setState({tableLeadServicesDescription: description} as TableLeadsState);
+        this.setState({tableLeadProductsDescription: description} as TableLeadsState);
       }
     );
     request.get(
@@ -136,7 +135,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormLeadProps;
-    formProps.tableLeadServicesDescription = this.state.tableLeadServicesDescription;
+    formProps.tableLeadProductsDescription = this.state.tableLeadProductsDescription;
     formProps.tableLeadDocumentsDescription = this.state.tableLeadDocumentsDescription;
     formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormLead {...formProps}/>;

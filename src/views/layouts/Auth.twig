@@ -28,6 +28,14 @@
 <body>
 
   <div id="sign-in-screen">
+    {% block languages %}
+      <div class="languages">
+        <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=cz" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cz.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+      </div>
+    {% endblock %}
     <div class="inner">
       <div class="logo">
         <img src="{{ config.url }}/assets/images/logo-hubleto-s-textom.png" style="height:5em;margin-bottom:1em; width: auto;" />
@@ -61,28 +69,25 @@
                 <input type="checkbox" id="keep_logged_in" name="keep_logged_in" value="1" checked>
                 <label for="keep_logged_in">{{ translate("Keep signed in") }}</label>
               </div>
-              <div>
-                {% block links %}
-                  <a href="{{ config.url }}/forgot-password">Forgot password?</a>
-                {% endblock %}
-              </div>
             </div>
           {% endblock %}
 
-          <div class="flex justify-between">
+          <div class="gap-2 flex justify-between items-center">
             <div>
               {% block button %}
-              <button type="submit" class="btn btn-large mt-4">
-                <span class="icon"><i class="fas fa-arrow-right"></i></span>
-                <span class="text">{{ translate("Sign in") }}</span>
-              </button>
+                <button type="submit" class="btn btn-large">
+                  <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                  <span class="text">{{ translate("Sign in") }}</span>
+                </button>
               {% endblock %}
             </div>
             <div>
-              <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-              <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-              <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-              <a href="?set-language=cz" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cz.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+              {% block links %}
+                <a class="btn btn-transparent" href="{{ config.accountUrl }}/forgot-password">
+                  <span class="icon"><i class="fas fa-life-ring"></i></span>
+                  <span class="text">{{ translate("Forgot password?") }}</span>
+                </a>
+              {% endblock %}
             </div>
           </div>
         </form>

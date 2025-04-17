@@ -17,6 +17,7 @@
         "Deal management. From deal to purchase.": ""
     },
     "root": {
-        "Deal statuses": ""
+        "Deal statuses": "",
+        "Deal Tags": ""
     }
 }

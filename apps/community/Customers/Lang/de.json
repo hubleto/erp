@@ -73,5 +73,8 @@
     "manifest": {
         "Customers": "",
         "Free customer management and addressbook.": ""
+    },
+    "root": {
+        "Customer Tags": ""
     }
 }

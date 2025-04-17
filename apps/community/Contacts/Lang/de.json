@@ -73,5 +73,9 @@
     "manifest": {
         "Contacts": "",
         "Default customer management and addressbook.": ""
+    },
+    "root": {
+        "Contact Categories": "",
+        "Contact Tags": ""
     }
 }

@@ -10,7 +10,9 @@
     },
     "manifest": {
         "Dashboard": "",
-        "...": ""
+        "...": "",
+        "Desktop": "",
+        "Default Hubleto desktop implementation": ""
     },
     "Controllers\\Home": {
         "Welcome": ""

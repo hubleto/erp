@@ -17,7 +17,7 @@
         "snipworks/php-smtp": "^2",
         "symfony/yaml": "^7",
         "twig/twig": "^3",
-        "wai-blue/adios": "^1"
+        "wai-blue/adios": "^1",
         "phpmailer/phpmailer": "^6.9"
     },
     "autoload": {

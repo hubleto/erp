@@ -17,6 +17,7 @@
         "Management of leads, cold contacts. Convert leads to deals.": ""
     },
     "root": {
-        "Lead statuses": ""
+        "Lead statuses": "",
+        "Lead Tags": ""
     }
 }

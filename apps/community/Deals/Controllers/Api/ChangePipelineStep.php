@@ -2,13 +2,12 @@
 
 namespace HubletoApp\Community\Deals\Controllers\Api;
 
-use HubletoApp\Community\Settings\Models\Pipeline;
-use HubletoApp\Community\Settings\Models\PipelineStep;
+use Exception;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Deals\Models\DealHistory;
-use Exception;
+use HubletoApp\Community\Settings\Models\PipelineStep;
 
-class ChangePipelineStep extends \HubletoMain\Core\Controller
+class ChangePipelineStep extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

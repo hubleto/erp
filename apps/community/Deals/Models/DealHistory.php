@@ -2,17 +2,11 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Community\Customers\Models\Customer;
-use HubletoApp\Community\Contacts\Models\Person;
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Settings\Models\Currency;
-use HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Varchar;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Date;
-
-class DealHistory extends \HubletoMain\Core\Model
+class DealHistory extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'deal_histories';
   public string $recordManagerClass = RecordManagers\DealHistory::class;

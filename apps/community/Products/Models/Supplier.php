@@ -2,12 +2,11 @@
 
 namespace HubletoApp\Community\Products\Models;
 
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\Country;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Lookup;
-
-class Supplier extends \HubletoMain\Core\Model
+class Supplier extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'product_suppliers';
   public string $recordManagerClass = RecordManagers\Supplier::class;

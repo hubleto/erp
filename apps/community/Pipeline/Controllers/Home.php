@@ -2,13 +2,13 @@
 
 namespace HubletoApp\Community\Pipeline\Controllers;
 
+use HubletoApp\Community\Deals\Models\Deal;
+use HubletoApp\Community\Deals\Models\Tag;
+use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Pipeline;
 use HubletoApp\Community\Settings\Models\Setting;
-use HubletoApp\Community\Deals\Models\Tag;
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Settings\Models\Currency;
 
-class Home extends \HubletoMain\Core\Controller {
+class Home extends \HubletoMain\Core\Controllers\Controller {
 
 
   public function getBreadcrumbs(): array

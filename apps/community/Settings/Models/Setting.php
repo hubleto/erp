@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
 
-class Setting extends \HubletoMain\Core\Model
+class Setting extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'settings';
   public string $recordManagerClass = RecordManagers\Setting::class;

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Boards;
 
-class EventsForToday extends \HubletoMain\Core\Controller {
+class EventsForToday extends \HubletoMain\Core\Controllers\Controller {
 
   public bool $hideDefaultDesktop = true;
 

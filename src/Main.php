@@ -1,7 +1,5 @@
 <?php
 
-use \ADIOS\Core\Helper;
-
 // autoloader pre HubletoMain
 spl_autoload_register(function(string $class) {
   $class = str_replace('\\', '/', $class);
@@ -64,6 +62,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   public \HubletoMain\Core\ReleaseManager $release;
   public \HubletoMain\Core\AppManager $apps;
+  public \HubletoMain\Core\Emails\EmailWrapper $emails;
 
   public bool $isPremium = false;
 
@@ -82,6 +81,17 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     $this->release = new \HubletoMain\Core\ReleaseManager($this);
     $this->release->load();
+
+    $this->emails = new \HubletoMain\Core\Emails\EmailWrapper(
+      $this,
+      new \HubletoMain\Core\Emails\EmailProvider(
+        $this->config->getAsString('smtp_host', ''),
+        $this->config->getAsString('smtp_port', ''),
+        $this->config->getAsString('smtp_encryption', 'ssl'),
+        $this->config->getAsString('smtp_login', ''),
+        $this->config->getAsString('smtp_password', ''),
+      )
+    );
 
     $this->apps = new \HubletoMain\Core\AppManager($this);
 
@@ -142,9 +152,9 @@ class HubletoMain extends \ADIOS\Core\Loader
     return new \HubletoMain\Core\Translator($this);
   }
 
-  public function createDesktopController(): \HubletoMain\Core\Controller
+  public function createDesktopController(): \HubletoMain\Core\Controllers\Controller
   {
-    return new \HubletoMain\Core\Controller($this);
+    return new \HubletoMain\Core\Controllers\Controller($this);
   }
 
   public function addSetting(\HubletoMain\Core\App $app, array $setting): void

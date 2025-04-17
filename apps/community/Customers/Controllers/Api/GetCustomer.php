@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Customers\Controllers\Api;
 
 use HubletoApp\Community\Customers\Models\Customer;
 
-class GetCustomer extends \HubletoMain\Core\Controller
+class GetCustomer extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

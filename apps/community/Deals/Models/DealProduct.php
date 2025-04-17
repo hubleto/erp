@@ -2,14 +2,12 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Lookup;
 use HubletoApp\Community\Products\Models\Product;
-use HubletoApp\Community\Deals\Models\Deal;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Decimal;
-
-class DealProduct extends \HubletoMain\Core\Model
+class DealProduct extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'deal_products';
   public string $recordManagerClass = RecordManagers\DealProduct::class;

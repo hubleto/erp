@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Goals\Controllers\Api;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class GetGoalData extends \HubletoMain\Core\Controller
+class GetGoalData extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Api;
 
-class GetCalendarEvents extends \HubletoMain\Core\Controller {
+class GetCalendarEvents extends \HubletoMain\Core\Controllers\Controller {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 
   public function renderJson(): array

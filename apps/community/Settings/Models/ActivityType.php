@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Color;
-use \ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Varchar;
 
-class ActivityType extends \HubletoMain\Core\Model
+class ActivityType extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'activity_types';
   public string $recordManagerClass = RecordManagers\ActivityType::class;

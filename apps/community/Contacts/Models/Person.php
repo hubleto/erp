@@ -2,16 +2,15 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\Date;
-
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoMain\Core\Helper;
 
-class Person extends \HubletoMain\Core\Model
+class Person extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'persons';
   public string $recordManagerClass = RecordManagers\Person::class;

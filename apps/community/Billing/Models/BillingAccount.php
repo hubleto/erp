@@ -2,12 +2,11 @@
 
 namespace HubletoApp\Community\Billing\Models;
 
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Varchar;
 use HubletoApp\Community\Customers\Models\Customer;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-
-class BillingAccount extends \HubletoMain\Core\Model
+class BillingAccount extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'billing_accounts';
   public string $recordManagerClass = RecordManagers\BillingAccount::class;

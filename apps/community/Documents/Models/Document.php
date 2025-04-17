@@ -2,16 +2,10 @@
 
 namespace HubletoApp\Community\Documents\Models;
 
-use HubletoApp\Community\Customers\Models\CustomerDocument;
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Leads\Models\LeadDocument;
-use HubletoApp\Community\Deals\Models\DealDocument;
-use HubletoApp\Community\Leads\Models\Lead;
+use ADIOS\Core\Db\Column\File;
+use ADIOS\Core\Db\Column\Varchar;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\File;
-
-class Document extends \HubletoMain\Core\Model
+class Document extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'documents';
   public string $recordManagerClass = RecordManagers\Document::class;

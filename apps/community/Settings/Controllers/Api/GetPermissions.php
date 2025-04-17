@@ -6,7 +6,7 @@ use Exception;
 use HubletoApp\Community\Settings\Models\Permission;
 use HubletoApp\Community\Settings\Models\RolePermission;
 
-class GetPermissions extends \HubletoMain\Core\Controller
+class GetPermissions extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

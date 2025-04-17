@@ -2,16 +2,15 @@
 
 namespace HubletoApp\Community\Invoices\Models;
 
-use \HubletoApp\Community\Customers\Models\Customer;
-use \HubletoApp\Community\Settings\Models\User;
-use \HubletoApp\Community\Settings\Models\InvoiceProfile;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
+use HubletoApp\Community\Customers\Models\Customer;
+use HubletoApp\Community\Settings\Models\InvoiceProfile;
+use HubletoApp\Community\Settings\Models\User;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Date;
-
-class Invoice extends \HubletoMain\Core\Model {
+class Invoice extends \HubletoMain\Core\Models\Model {
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '{%TABLE%}.number';
   public string $recordManagerClass = RecordManagers\Invoice::class;

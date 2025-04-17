@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\CalendarSync\Controllers;
 
-class Home extends \HubletoMain\Core\Controller {
+class Home extends \HubletoMain\Core\Controllers\Controller {
   public function prepareView(): void {
     parent::prepareView();
     $this->viewParams['now'] = date('Y-m-d H:i:s');

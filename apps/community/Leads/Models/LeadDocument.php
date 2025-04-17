@@ -2,12 +2,10 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
+use ADIOS\Core\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
-use HubletoApp\Community\Leads\Models\Lead;
 
-use \ADIOS\Core\Db\Column\Lookup;
-
-class LeadDocument extends \HubletoMain\Core\Model
+class LeadDocument extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'lead_documents';
   public string $recordManagerClass = RecordManagers\LeadDocument::class;

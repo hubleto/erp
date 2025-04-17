@@ -205,7 +205,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $installer->createDatabase();
 
     $this->cli->cyan("  -> Creating base tables.\n");
-    $installer->installConfigModel();
+    $installer->installBaseModels();
 
     $this->cli->cyan("  -> Installing apps, round #1.\n");
     $installer->installApps(1);

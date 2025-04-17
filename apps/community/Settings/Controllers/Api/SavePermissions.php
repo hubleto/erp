@@ -3,11 +3,10 @@
 namespace HubletoApp\Community\Settings\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Settings\Models\Permission;
 use HubletoApp\Community\Settings\Models\RolePermission;
 use HubletoApp\Community\Settings\Models\UserRole;
 
-class SavePermissions extends \HubletoMain\Core\Controller
+class SavePermissions extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
   public function renderJson(): ?array

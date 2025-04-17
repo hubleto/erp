@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Premium\Controllers;
 
-class Premium extends \HubletoMain\Core\Controller {
+class Premium extends \HubletoMain\Core\Controllers\Controller {
 
   public function prepareView(): void
   {

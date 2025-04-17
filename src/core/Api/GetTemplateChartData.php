@@ -3,9 +3,8 @@
 namespace HubletoMain\Core\Api;
 
 use Exception;
-use HubletoMain\Core\Model;
 
-class GetTemplateChartData extends \HubletoMain\Core\Controller
+class GetTemplateChartData extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

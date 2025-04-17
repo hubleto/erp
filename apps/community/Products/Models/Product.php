@@ -2,17 +2,16 @@
 
 namespace HubletoApp\Community\Products\Models;
 
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\Image;
-use \ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Image;
 use ADIOS\Core\Db\Column\Integer;
-use HubletoApp\Community\Settings\Models\Setting;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
 
-class Product extends \HubletoMain\Core\Model
+class Product extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'products';
   public string $recordManagerClass = RecordManagers\Product::class;

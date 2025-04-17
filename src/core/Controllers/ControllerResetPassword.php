@@ -21,12 +21,21 @@ class ControllerResetPassword extends \ADIOS\Core\Controller {
         ->count() <= 0)
       $this->app->router->redirectTo('');
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST'
-      && $this->app->urlParamAsString('password') != ''
-      && $this->app->urlParamAsString('password_confirm') != '')
-    {
-      if ($this->app->urlParamAsString('password') !== $this->app->urlParamAsString('password_confirm')) {
-        $this->setView('@hubleto/ResetPassword.twig', ['status' => true]);
+    $password = $this->app->urlParamAsString('password');
+    $passwordConfirm = $this->app->urlParamAsString('password_confirm');
+
+    if (
+      $_SERVER['REQUEST_METHOD'] === 'POST'
+      && !empty($password)
+      && !empty($passwordConfirm)
+    ) {
+      
+      if ($password !== $passwordConfirm) {
+        $this->setView('@hubleto/ResetPassword.twig', ['error' => 'Passwords do not match.']);
+        return;
+      } else if (strlen($password) < 8 || !preg_match('~[0-9]+~', $password)) {
+        $this->setView('@hubleto/ResetPassword.twig', ['error' => 'Password must be at least 8 characters long and must contain at least one numeric character.']);
+        return;
       } else {
         $this->app->auth->resetPassword();
 

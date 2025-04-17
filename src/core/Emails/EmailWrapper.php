@@ -20,7 +20,7 @@ class EmailWrapper
     We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:
     
     <p style="text-align: center;">
-      <a href="'. $this->main->config->getAsString('url') .'/reset-password?token='. $token .'" class="btn--theme">Reset password</a>
+      <a href="'. $this->main->config->getAsString('accountUrl') .'/reset-password?token='. $token .'" class="btn--theme">Reset password</a>
     </p>
     
     If you did not request a password reset, please ignore this email. Your password will remain unchanged. <br><br><br>

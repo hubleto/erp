@@ -85,11 +85,11 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->emails = new \HubletoMain\Core\Emails\EmailWrapper(
       $this,
       new \HubletoMain\Core\Emails\EmailProvider(
-        $this->config->getAsString('smtp_host', ''),
-        $this->config->getAsString('smtp_port', ''),
-        $this->config->getAsString('smtp_encryption', 'ssl'),
-        $this->config->getAsString('smtp_login', ''),
-        $this->config->getAsString('smtp_password', ''),
+        $this->config->getAsString('smtpHost', ''),
+        $this->config->getAsString('smtpPort', ''),
+        $this->config->getAsString('smtpEncryption', 'ssl'),
+        $this->config->getAsString('smtpLogin', ''),
+        $this->config->getAsString('smtpPassword', ''),
       )
     );
 

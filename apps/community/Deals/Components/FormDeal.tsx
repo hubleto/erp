@@ -145,9 +145,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             R.PIPELINE = data.newPipeline;
             R.PIPELINE_STEP = data.newPipeline.PIPELINE_STEPS[0];
 
-            console.log(R);
-
-
             this.setState({ record: R });
           } else {
             R.id_pipeline = data.newPipeline.id;

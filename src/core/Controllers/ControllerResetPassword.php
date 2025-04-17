@@ -18,6 +18,7 @@ class ControllerResetPassword extends \ADIOS\Core\Controller {
     if ($this->app->urlParamAsString('token') == '' || $mToken->record
         ->where('token', $_GET['token'])
         ->where('valid_to', '>', date('Y-m-d H:i:s'))
+        ->where('type', 'reset-password')
         ->count() <= 0)
       $this->app->router->redirectTo('');
 
@@ -26,8 +27,8 @@ class ControllerResetPassword extends \ADIOS\Core\Controller {
 
     if (
       $_SERVER['REQUEST_METHOD'] === 'POST'
-      && !empty($password)
-      && !empty($passwordConfirm)
+      && (!empty($password)
+      || !empty($passwordConfirm))
     ) {
       
       if ($password !== $passwordConfirm) {

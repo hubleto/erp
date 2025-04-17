@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Controllers\Api;
 
-use HubletoApp\Community\Settings\Models\Setting;
+use Exception;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Deals\Models\DealDocument;
 use HubletoApp\Community\Deals\Models\DealHistory;
@@ -11,10 +11,10 @@ use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Leads\Models\LeadProduct;
-use Exception;
 use HubletoApp\Community\Settings\Models\PipelineStep;
+use HubletoApp\Community\Settings\Models\Setting;
 
-class ConvertLead extends \HubletoMain\Core\Controller
+class ConvertLead extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 
@@ -77,14 +77,14 @@ class ConvertLead extends \HubletoMain\Core\Controller
 
       $leadProducts = $mLeadProduct->record->where("id_lead", $leadId)->get();
 
-      foreach ($leadProducts as $leadProduct) { //@phpstan-ignore-line
-        $mDealProduct->record->create([
-          "id_product" => $leadProduct->id_product,
-          "id_deal" => $deal["id"],
-          "unit_price" => $leadProduct->unit_price,
-          "amount" => $leadProduct->amount,
-          "discount" => $leadProduct->discount,
-          "tax" => $leadProduct->tax,
+      foreach ($leadProducts as $leadProducts) { //@phpstan-ignore-line
+        $mDealService->record->recordCreate([
+          "id_service" => $leadService->id_service,
+          "id_deal" => $deal['id'],
+          "unit_price" => $leadService->unit_price,
+          "amount" => $leadService->amount,
+          "discount" => $leadService->discount,
+          "tax" => $leadService->tax,
         ]);
       }
 

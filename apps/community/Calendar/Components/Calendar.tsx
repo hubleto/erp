@@ -14,6 +14,7 @@ interface CalendarProps {
   onCreateCallback?: any
   onDateClick: any,
   onEventClick: any,
+  headerToolbar?: any,
 }
 
 interface CalendarState {
@@ -21,6 +22,7 @@ interface CalendarState {
   newFormDateTime?: string,
   dateClicked?: string,
   timeClicked?: string,
+  headerToolbar: any,
 }
 
 export default class CalendarComponent extends Component<CalendarProps, CalendarState> {
@@ -31,6 +33,11 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
       events: [],
       dateClicked: "",
       timeClicked: "",
+      headerToolbar: this.props.headerToolbar ?? {
+        left: 'prev,next today',
+        center: 'title',
+        right: this.props.views ?? 'timeGridDay,timeGridWeek,dayGridMonth'
+      },
     };
   }
 
@@ -50,11 +57,7 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
           height={this.props.height}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
           firstDay={1}
-          headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: this.props.views ?? 'timeGridDay,timeGridWeek,dayGridMonth'
-          }}
+          headerToolbar={this.state.headerToolbar}
           initialView='dayGridMonth'
           eventTimeFormat={{
             hour: '2-digit',

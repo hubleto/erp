@@ -129,6 +129,31 @@ class HubletoMain extends ADIOS {
       }
     }
   }
+
+  numberFormat(
+    value: string,
+    decimals: number = 2,
+    decimalSeparator: string = ',',
+    thousandsSeparator: string = ' '
+  ): string {
+    value = value.toString().replace(/[^0-9+\-Ee.]/g, '');
+
+    let n = parseFloat(value);
+
+    n = Math.round(n * Math.pow(10, decimals)) / Math.pow(10, decimals);
+    let [integerPart, fractionalPart] = n.toString().split('.');
+    integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);
+
+    if (fractionalPart === undefined) {
+      fractionalPart = '';
+    }
+    while (fractionalPart.length < decimals) {
+      fractionalPart += '0';
+    }
+
+    return integerPart + (decimals > 0 ? decimalSeparator + fractionalPart : '');
+  }
+
 }
 
 //@ts-ignore

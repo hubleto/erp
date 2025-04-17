@@ -2,10 +2,6 @@
 
 namespace HubletoMain\Installer;
 
-use HubletoApp\Community\Settings\Models\ {
-  Permission, Profile, RolePermission, User, UserRole, UserHasRole
-};
-
 class Installer {
   public \HubletoMain $main;
 
@@ -152,8 +148,9 @@ class Installer {
 
   }
 
-  public function installConfigModel(): void
+  public function installBaseModels(): void
   {
+    (new \HubletoMain\Core\Models\Token($this->main))->install();
     (new \ADIOS\Models\Config($this->main))->install();
   }
 

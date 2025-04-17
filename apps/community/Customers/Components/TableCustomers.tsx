@@ -33,12 +33,10 @@ export default class TableCustomers extends Table<TableCustomersProps, TableCust
   translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableCustomers';
 
   getFormModalProps() {
-    if (getUrlParam('recordId') > 0) {
-      return {
-        ...super.getFormModalProps(),
-        type: 'right wide'
-      }
-    } else return {...super.getFormModalProps()}
+    return {
+      ...super.getFormModalProps(),
+      type: 'right wide'
+    }
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {

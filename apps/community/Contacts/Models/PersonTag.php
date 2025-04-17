@@ -2,11 +2,9 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use HubletoApp\Community\Contacts\Models\Tag;
+use ADIOS\Core\Db\Column\Lookup;
 
-use \ADIOS\Core\Db\Column\Lookup;
-
-class PersonTag extends \HubletoMain\Core\Model
+class PersonTag extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'cross_person_tags';
   public string $recordManagerClass = RecordManagers\PersonTag::class;

@@ -428,13 +428,15 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       "Shanghai Municipality",
     ];
 
+    $isPrimary = true;
+
     foreach ($persons as $person) {
       $idPerson = $mPerson->record->recordCreate([
         "id_customer" => rand(1, 100),
         "first_name" => $person[2],
         "last_name" => $person[3],
         "note" => $person[4],
-        "is_primary" => rand(0,1),
+        "is_primary" => $isPrimary,
         "is_active" => 1,
         "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
       ])['id'];
@@ -454,13 +456,21 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_contact_category" => rand(1,2),
       ]);
 
-      $tagCount = rand(0, 3);
-      for ($i = 0; $i < $tagCount; $i++) {
+      $tags = [];
+      $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
+      while (count($tags) < $tagsCount) {
+        $idTag = rand(1, 6);
+        if (!in_array($idTag, $tags)) $tags[] = $idTag;
+      }
+
+      foreach ($tags as $idTag) {
         $mPersonTag->record->recordCreate([
           "id_person" => $idPerson,
-          "id_tag" => rand(1, 6)
+          "id_tag" => $idTag,
         ]);
       }
+
+      $isPrimary = false;
     }
   }
 

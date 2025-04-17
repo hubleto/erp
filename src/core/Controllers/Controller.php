@@ -1,8 +1,6 @@
 <?php
 
-namespace HubletoMain\Core;
-
-use \ADIOS\Core\Helper;
+namespace HubletoMain\Core\Controllers;
 
 class Controller extends \ADIOS\Core\Controller
 {
@@ -90,27 +88,6 @@ class Controller extends \ADIOS\Core\Controller
     // $this->viewParams['help'] = $this->main->apps->community('Help');
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
-
-    $appsInSidebar = $this->main->apps->getRegisteredApps();
-
-    foreach ($appsInSidebar as $appNamespace => $app) {
-      if ($app->configAsInteger('sidebarOrder') <= 0) {
-        unset($appsInSidebar[$appNamespace]);
-      } else if (
-        $this->main->requestedUri == $app->manifest['rootUrlSlug']
-        || str_starts_with($this->main->requestedUri, $app->manifest['rootUrlSlug'] . '/')
-      ) {
-        $appsInSidebar[$appNamespace]->isActivated = true;
-      }
-    }
-
-    uasort($appsInSidebar, function($a, $b) {
-      $aOrder = $a->configAsInteger('sidebarOrder');
-      $bOrder = $b->configAsInteger('sidebarOrder');
-      return $aOrder <=> $bOrder;
-    });
-
-    $this->viewParams['appsInSidebar'] = $appsInSidebar;
 
     $contextHelpUrls = $this->main->apps->community('Help')->getCurrentContextHelpUrls($this->main->route);
     $user = $this->main->auth->getUser();

@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Varchar;
 
-class Pipeline extends \HubletoMain\Core\Model
+class Pipeline extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'pipelines';
   public string $recordManagerClass = RecordManagers\Pipeline::class;

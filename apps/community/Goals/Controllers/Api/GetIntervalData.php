@@ -2,9 +2,7 @@
 
 namespace HubletoApp\Community\Goals\Controllers\Api;
 
-use HubletoApp\Community\Deals\Models\Deal;
-
-class GetIntervalData extends \HubletoMain\Core\Controller
+class GetIntervalData extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

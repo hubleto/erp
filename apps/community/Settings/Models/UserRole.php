@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Varchar;
 
-class UserRole extends \HubletoMain\Core\Model
+class UserRole extends \HubletoMain\Core\Models\Model
 {
   const ROLE_ADMINISTRATOR = 1;
   const ROLE_SALES_MANAGER = 2;

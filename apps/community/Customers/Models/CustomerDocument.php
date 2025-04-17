@@ -2,11 +2,10 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
+use ADIOS\Core\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
 
-use \ADIOS\Core\Db\Column\Lookup;
-
-class CustomerDocument extends \HubletoMain\Core\Model
+class CustomerDocument extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'customer_documents';
   public string $recordManagerClass = RecordManagers\CustomerDocument::class;

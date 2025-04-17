@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoMain\Core;
+namespace HubletoMain\Core\Controllers;
 
 class ControllerSignIn extends \ADIOS\Core\Controller {
 

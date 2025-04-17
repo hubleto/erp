@@ -59,7 +59,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
 
     if (!this.state.showArchive) {
       elements.push(
-        <a className="btn btn-transparent" href={globalThis.app.config.url + "/leads/archive"}>
+        <a className="btn btn-transparent" href={globalThis.main.config.url + "/leads/archive"}>
           <span className="icon"><i className="fas fa-box-archive"></i></span>
           <span className="text">Show archived leads</span>
         </a>

@@ -32,10 +32,10 @@ class Loader extends \HubletoMain\Core\App
       'en' => 'en/apps/community/calendar',
     ]);
 
-    $dashboardManager = $this->main->apps->community('Desktop')->dashboardManager;
+    $dashboard = $this->main->apps->community('Desktop')->dashboard;
 
     if ($this->configAsBool('showEventsForTodayInDashboard')) {
-      $dashboardManager->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
+      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
         'Events for today',
         'calendar/boards/events-for-today',
       ));

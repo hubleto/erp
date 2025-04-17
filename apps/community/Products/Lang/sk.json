@@ -32,7 +32,8 @@
         "Storage rules": "",
         "Table": "",
         "Add product": "",
-        "Product Group": ""
+        "Product Group": "",
+        "Product Type": ""
     },
     "Models\\Group": {
         "Title": ""

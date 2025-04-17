@@ -102,7 +102,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     if (getUrlParam('recordId') == -1) {
       return <h2>{this.translate('New Lead')}</h2>;
     } else {
-      return <h2>{this.state.record.title ? this.state.record.title : '[Undefined Lead Name]'}</h2>
+      return <>
+        <h2>{this.state.record.title ? this.state.record.title : ''}</h2>
+        <small>Lead</small>
+      </>;
     }
   }
 
@@ -203,6 +206,13 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
     return (
       <>
+        {this.state.id > 0 ?
+          <div className="h-0 w-full text-right">
+            <div className="badge badge-secondary badge-large">
+              Lead value:&nbsp;{globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
+            </div>
+          </div>
+        : null}
         <TabView>
           <TabPanel header={this.translate('Lead')}>
             {R.is_archived == 1 ?
@@ -211,103 +221,127 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 <span className='text'>This lead is archived.</span>
               </div>
             : null}
-            <div className='grid grid-cols-2 gap-1' style=
-              {{gridTemplateAreas:`
-                'notification notification'
-                'info info'
-                'notes notes'
-                'products products'
-                'history history'
-              `}}>
-              <div className='card mt-2' style={{gridArea: 'info'}}>
-                <div className='card-body flex flex-row gap-2'>
-                  <div className='grow'>
-                    {this.inputWrapper('identifier', {readonly: R.is_archived})}
-                    {this.inputWrapper('title', {readonly: R.is_archived})}
-                    <FormInput title={"Customer"}>
-                      <Lookup {...this.getInputProps('id-customer')}
-                        model='HubletoApp/Community/Customers/Models/Customer'
-                        endpoint={`customers/get-customer`}
-                        readonly={R.is_archived}
-                        value={R.id_customer}
-                        onChange={(value: any) => {
-                          this.updateRecord({ id_customer: value, id_person: null });
-                          if (R.id_customer == 0) {
-                            R.id_customer = null;
-                            this.setState({record: R});
-                          }
-                        }}
-                      ></Lookup>
-                    </FormInput>
-                    <FormInput title={"Contact Person"}>
-                      <Lookup {...this.getInputProps('id-person')}
-                        model='HubletoApp/Community/Customers/Models/Person'
-                        customEndpointParams={{id_customer: R.id_customer}}
-                        readonly={R.is_archived}
-                        endpoint={`contacts/get-customer-contacts`}
-                        value={R.id_person}
-                        onChange={(value: any) => {
-                          this.updateRecord({ id_person: value })
-                          if (R.id_person == 0) {
-                            R.id_person = null;
-                            this.setState({record: R})
-                          }
-                        }}
-                      ></Lookup>
-                    </FormInput>
-                    <div className='flex flex-row *:w-1/2'>
-                      {this.inputWrapper('price', {
-                        readonly: (R.PRODUCTS && R.PRODUCTS.length) > 0 || R.is_archived ? true : false,
-                      })}
-                      {this.inputWrapper('id_currency')}
-                    </div>
-                    {showAdditional ? this.inputWrapper('id_lead_status', {readonly: R.is_archived}) : null}
-                    {showAdditional ?
-                      <div className='w-full mt-2'>
-                        {R.DEAL != null ?
-                        <a className='btn btn-primary' href={`${globalThis.app.config.url}/deals/${R.DEAL.id}`}>
-                          <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                          <span className='text'>{this.translate('Go to deal')}</span>
-                        </a>
-                        :
-                        <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
-                          <span className='icon'><i className='fas fa-rotate-right'></i></span>
-                          <span className='text'>Convert to Deal</span>
-                        </a>}
+            <div className='gap-1'>
+              <div className='flex gap-1 mt-2'>
+                <div className='flex-2 card'>
+                  <div className='card-body flex flex-row gap-2'>
+                    <div className='grow'>
+                      {this.inputWrapper('identifier', {readonly: R.is_archived})}
+                      {this.inputWrapper('title', {readonly: R.is_archived})}
+                      <FormInput title={"Customer"}>
+                        <Lookup {...this.getInputProps('id-customer')}
+                          model='HubletoApp/Community/Customers/Models/Customer'
+                          endpoint={`customers/get-customer`}
+                          readonly={R.is_archived}
+                          value={R.id_customer}
+                          onChange={(value: any) => {
+                            this.updateRecord({ id_customer: value, id_person: null });
+                            if (R.id_customer == 0) {
+                              R.id_customer = null;
+                              this.setState({record: R});
+                            }
+                          }}
+                        ></Lookup>
+                      </FormInput>
+                      <FormInput title={"Contact Person"}>
+                        <Lookup {...this.getInputProps('id-person')}
+                          model='HubletoApp/Community/Customers/Models/Person'
+                          customEndpointParams={{id_customer: R.id_customer}}
+                          readonly={R.is_archived}
+                          endpoint={`contacts/get-customer-contacts`}
+                          value={R.id_person}
+                          onChange={(value: any) => {
+                            this.updateRecord({ id_person: value })
+                            if (R.id_person == 0) {
+                              R.id_person = null;
+                              this.setState({record: R})
+                            }
+                          }}
+                        ></Lookup>
+                      </FormInput>
+                      <div className='flex flex-row *:w-1/2'>
+                        {this.inputWrapper('price', {
+                          readonly: (R.PRODUCTS && R.PRODUCTS.length) > 0 || R.is_archived ? true : false,
+                        })}
+                        {this.inputWrapper('id_currency')}
                       </div>
-                    : null}
-                  </div>
-                  <div className='border-l border-gray-200'></div>
-                  <div className='grow'>
-                    {this.inputWrapper('id_user', {readonly: R.is_archived})}
-                    {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
-                    {this.inputWrapper('source_channel', {readonly: R.is_archived})}
-                    <FormInput title='Tags'>
-                      <InputTags2 {...this.getInputProps('tags_input')}
-                        value={this.state.record.TAGS}
-                        readonly={R.is_archived}
-                        model='HubletoApp/Community/Leads/Models/Tag'
-                        targetColumn='id_lead'
-                        sourceColumn='id_tag'
-                        colorColumn='color'
-                        onChange={(value: any) => {
-                          R.TAGS = value;
-                          this.setState({record: R});
-                        }}
-                      ></InputTags2>
-                    </FormInput>
-                    {showAdditional ? this.inputWrapper('date_created') : null}
-                    {showAdditional ? this.inputWrapper('is_archived') : null}
+                      {showAdditional ? this.inputWrapper('id_lead_status', {readonly: R.is_archived}) : null}
+                      {showAdditional ?
+                        <div className='w-full mt-2'>
+                          {R.DEAL != null ?
+                          <a className='btn btn-primary' href={`${globalThis.main.config.url}/deals/${R.DEAL.id}`}>
+                            <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+                            <span className='text'>{this.translate('Go to deal')}</span>
+                          </a>
+                          :
+                          <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
+                            <span className='icon'><i className='fas fa-rotate-right'></i></span>
+                            <span className='text'>Convert to Deal</span>
+                          </a>}
+                        </div>
+                      : null}
+                    </div>
+                    <div className='border-l border-gray-200'></div>
+                    <div className='grow'>
+                      {this.inputWrapper('id_user', {readonly: R.is_archived})}
+                      {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
+                      {this.inputWrapper('source_channel', {readonly: R.is_archived})}
+                      <FormInput title='Tags'>
+                        <InputTags2 {...this.getInputProps('tags_input')}
+                          value={this.state.record.TAGS}
+                          readonly={R.is_archived}
+                          model='HubletoApp/Community/Leads/Models/Tag'
+                          targetColumn='id_lead'
+                          sourceColumn='id_tag'
+                          colorColumn='color'
+                          onChange={(value: any) => {
+                            R.TAGS = value;
+                            this.setState({record: R});
+                          }}
+                        ></InputTags2>
+                      </FormInput>
+                      {showAdditional ? this.inputWrapper('date_created') : null}
+                      {showAdditional ? this.inputWrapper('is_archived') : null}
+                    </div>
                   </div>
                 </div>
+                {this.state.id > 0 ?
+                  <div className='flex-1 card'>
+                    <div className="card-body">
+                      <Calendar
+                        onCreateCallback={() => this.loadRecord()}
+                        readonly={R.is_archived}
+                        eventsEndpoint={globalThis.main.config.rewriteBase + 'leads/get-calendar-events?idLead=' + R.id}
+                        onDateClick={(date, time, info) => {
+                          this.setState({
+                            activityCalendarDateClicked: date,
+                            activityCalendarTimeClicked: time,
+                            showIdActivity: -1,
+                          } as FormLeadState);
+                        }}
+                        onEventClick={(info) => {
+                          this.setState({
+                            showIdActivity: parseInt(info.event.id),
+                          } as FormLeadState);
+                          info.jsEvent.preventDefault();
+                        }}
+                        headerToolbar={{
+                          left: 'prev,next',
+                          center: 'title',
+                          right: 'timeGridDay,timeGridWeek,dayGridMonth'
+                        }}
+                      ></Calendar>
+                    </div>
+                  </div>
+                : null}
               </div>
-              <div className='card card-body' style={{gridArea: 'notes'}}>
+              <div className='card card-body'>
                 {this.inputWrapper('note', {readonly: R.is_archived})}
               </div>
               {showAdditional ?
-                <div className='card mt-2' style={{gridArea: 'products'}}>
+                <div className='card'>
                   <div className='card-header'>Products</div>
-                  <div className='card-body flex flex-col gap-2'>
+                  <div className='card-body'>
                     {!R.is_archived ? (
                       <a
                         className="btn btn-add-outline mb-2"
@@ -453,35 +487,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   info.jsEvent.preventDefault();
                 }}
               ></Calendar>
-              {this.state.showIdActivity == 0 ? <></> :
-                <ModalSimple
-                  uid='activity_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormActivity
-                    id={this.state.showIdActivity}
-                    isInlineEditing={true}
-                    description={{
-                      defaultValues: {
-                        id_lead: R.id,
-                        date_start: this.state.activityCalendarDateClicked,
-                        time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
-                        date_end: this.state.activityCalendarDateClicked,
-                      }
-                    }}
-                    idCustomer={R.id_customer}
-                    showInModal={true}
-                    showInModalSimple={true}
-                    onClose={() => { this.setState({ showIdActivity: 0 } as FormLeadState) }}
-                    onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
-                      if (saveResponse.status == "success") {
-                        this.setState({ showIdActivity: 0 } as FormLeadState);
-                      }
-                    }}
-                  ></FormActivity>
-                </ModalSimple>
-              }
             </TabPanel>
           : null}
           {showAdditional ? (
@@ -596,6 +601,35 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             </TabPanel>
           : null}
         </TabView>
+        {this.state.showIdActivity == 0 ? <></> :
+          <ModalSimple
+            uid='activity_form'
+            isOpen={true}
+            type='right'
+          >
+            <FormActivity
+              id={this.state.showIdActivity}
+              isInlineEditing={true}
+              description={{
+                defaultValues: {
+                  id_lead: R.id,
+                  date_start: this.state.activityCalendarDateClicked,
+                  time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
+                  date_end: this.state.activityCalendarDateClicked,
+                }
+              }}
+              idCustomer={R.id_customer}
+              showInModal={true}
+              showInModalSimple={true}
+              onClose={() => { this.setState({ showIdActivity: 0 } as FormLeadState) }}
+              onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+                if (saveResponse.status == "success") {
+                  this.setState({ showIdActivity: 0 } as FormLeadState);
+                }
+              }}
+            ></FormActivity>
+          </ModalSimple>
+        }
       </>
     );
   }

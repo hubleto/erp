@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Varchar;
 
-class LeadStatus extends \HubletoMain\Core\Model
+class LeadStatus extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'lead_statuses';
   public string $recordManagerClass = RecordManagers\LeadStatus::class;

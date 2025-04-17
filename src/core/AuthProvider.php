@@ -2,6 +2,9 @@
 
 namespace HubletoMain\Core;
 
+use HubletoApp\Community\Settings\Models\User;
+use HubletoMain\Core\Models\Token;
+
 class AuthProvider extends \ADIOS\Auth\DefaultProvider {
 
   public \HubletoMain $main;
@@ -19,6 +22,55 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
   public function createUserModel(): \ADIOS\Core\Model
   {
     return new \HubletoApp\Community\Settings\Models\User($this->app);
+  }
+
+  public function forgotPassword(): void
+  {
+    $login = $this->app->urlParamAsString('login');
+
+    $mUser = new User($this->app);
+    if ($mUser->record->where('login', $login)->count() > 0) {
+      $user = $mUser->record->where('login', $login)->first();
+
+      $mToken = new Token($this->app); // todo: token creation should be done withing the token itself
+      $tokenValue = bin2hex(random_bytes(16));
+      $mToken->record->create([
+        'login' => $login,
+        'token' => $tokenValue,
+        'valid_to' => date('Y-m-d H:i:s', strtotime('+15 minutes')),
+        'type' => 'reset-password'
+      ]);
+
+      if ($user['middle_name'] != '') {
+        $name = $user['first_name'] . ' ' . $user['middle_name'] . ' '. $user['last_name'];
+      } else {
+        $name = $user['first_name'] . ' ' . $user['last_name'];
+      }
+
+      $this->main->emails->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
+    }
+  }
+
+  public function resetPassword(): void {
+    $mToken = new Token($this->app);
+    $mUser = new User($this->app);
+
+    $token = $mToken->record->where('token', $this->main->urlParamAsString('token'))->first();
+    $user = $mUser->record->where('login', $token->login)->first();
+    $oldPassword = $user->password;
+
+    // this logic also does not belong here todo
+    $user->update(['password' => password_hash($this->main->urlParamAsString('password'), PASSWORD_DEFAULT)]);
+
+    if ($oldPassword == "") {
+      $this->app->setUrlParam('login', $token->login);
+      $token->delete();
+      $this->app->setUrlParam('password', $this->main->urlParamAsString('password'));
+
+      $this->app->auth->auth();
+    } else {
+      $token->delete();
+    }
   }
 
   public function auth(): void

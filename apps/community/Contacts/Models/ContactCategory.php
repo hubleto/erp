@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Varchar;
 
-class ContactCategory extends \HubletoMain\Core\Model
+class ContactCategory extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'contact_categories';
   public string $recordManagerClass = RecordManagers\ContactCategory::class;

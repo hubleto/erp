@@ -2,12 +2,12 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Varchar;
 
-class PipelineStep extends \HubletoMain\Core\Model
+class PipelineStep extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'pipeline_steps';
   public string $recordManagerClass = RecordManagers\PipelineStep::class;

@@ -88,5 +88,13 @@
     "Models\\Tag": {
         "Name": "",
         "Color": ""
+    },
+    "Models\\LeadProduct": {
+        "Lead": "",
+        "Product": "",
+        "Unit Price": "",
+        "Amount": "",
+        "Dicount (%)": "",
+        "Tax (%)": ""
     }
 }

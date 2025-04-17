@@ -2,9 +2,7 @@
 
 namespace HubletoMain\Core;
 
-use \ADIOS\Core\Helper;
-
-class LogJavascriptError extends \HubletoMain\Core\Controller
+class LogJavascriptError extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

@@ -2,29 +2,25 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use HubletoApp\Community\Customers\Models\Customer;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
 use HubletoApp\Community\Contacts\Models\Person;
+use HubletoApp\Community\Customers\Models\Customer;
+use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Pipeline;
 use HubletoApp\Community\Settings\Models\PipelineStep;
 use HubletoApp\Community\Settings\Models\Setting;
 use HubletoApp\Community\Settings\Models\User;
-use HubletoApp\Community\Deals\Models\DealHistory;
-use HubletoApp\Community\Deals\Models\DealTag;
-use HubletoApp\Community\Leads\Models\Lead;
-
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Integer;
 use HubletoMain\Core\Helper;
-use Illuminate\Database\Eloquent\Builder;
 
-class Deal extends \HubletoMain\Core\Model
+class Deal extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'deals';
   public string $recordManagerClass = RecordManagers\Deal::class;

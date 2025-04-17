@@ -2,17 +2,11 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use HubletoApp\Community\Customers\Models\Customer;
-use HubletoApp\Community\Contacts\Models\Person;
-use HubletoApp\Community\Leads\Models\Lead;
-use HubletoApp\Community\Settings\Models\Currency;
-use HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Varchar;
 
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-
-class LeadHistory extends \HubletoMain\Core\Model
+class LeadHistory extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'lead_histories';
   public string $recordManagerClass = RecordManagers\LeadHistory::class;

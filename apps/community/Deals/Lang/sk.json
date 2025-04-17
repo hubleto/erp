@@ -31,7 +31,11 @@
         "Status": "Stav",
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný dokument",
         "Deal Progress": "",
-        "Date of progress update": ""
+        "Date of progress update": "",
+        "Deal Result": "",
+        "Date of result update": "",
+        "New Customer": "",
+        "Business type": ""
     },
     "Models\\DealHistory": {
         "Change Date": "",
@@ -85,5 +89,13 @@
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": ""
+    },
+    "Models\\DealProduct": {
+        "Deal": "",
+        "Product": "",
+        "Unit Price": "",
+        "Amount": "",
+        "Dicount (%)": "",
+        "Tax (%)": ""
     }
 }

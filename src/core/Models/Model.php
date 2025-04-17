@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoMain\Core;
+namespace HubletoMain\Core\Models;
 
 class Model extends \ADIOS\Core\Model {
   public \HubletoMain $main;

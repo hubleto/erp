@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Contacts\Controllers\Api;
 
-use HubletoApp\Community\Contacts\Models\Person;
 use Exception;
+use HubletoApp\Community\Contacts\Models\Person;
 
-class GetCustomerContacts extends \HubletoMain\Core\Controller {
+class GetCustomerContacts extends \HubletoMain\Core\Controllers\Controller {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 
   public function renderJson(): ?array

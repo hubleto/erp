@@ -2,11 +2,10 @@
 
 namespace HubletoApp\Community\Billing\Models;
 
+use ADIOS\Core\Db\Column\Lookup;
 use HubletoApp\Community\Services\Models\Service;
 
-use \ADIOS\Core\Db\Column\Lookup;
-
-class BillingAccountService extends \HubletoMain\Core\Model
+class BillingAccountService extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'billing_accounts_services';
   public string $recordManagerClass = RecordManagers\BillingAccountService::class;

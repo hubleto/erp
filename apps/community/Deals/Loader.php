@@ -39,17 +39,17 @@ class Loader extends \HubletoMain\Core\App
     $reportManager = $this->main->apps->community('Reports')->reportManager;
     $reportManager->addReport(Reports\MonthlyRevenue::class);
 
-    $dashboardManager = $this->main->apps->community('Desktop')->dashboardManager;
+    $dashboard = $this->main->apps->community('Desktop')->dashboard;
 
     if ($this->configAsBool('showMostValuableDealsInDashboard')) {
-      $dashboardManager->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
+      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
         'Most valuable deals',
         'deals/boards/most-valuable-deals',
       ));
     }
 
     if ($this->configAsBool('showDealValueByResultInDashboard')) {
-      $dashboardManager->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
+      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
         'Deal value by result',
         'deals/boards/deal-value-by-result',
       ));

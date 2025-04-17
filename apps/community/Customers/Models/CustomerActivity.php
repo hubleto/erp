@@ -2,20 +2,16 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
-use HubletoApp\Community\Customers\Models\Customer;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Time;
+use ADIOS\Core\Db\Column\Varchar;
 use HubletoApp\Community\Contacts\Models\Person;
 use HubletoApp\Community\Settings\Models\ActivityType;
 use HubletoApp\Community\Settings\Models\User;
 
-use \ADIOS\Core\Db\Column\Time;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Description\Input;
-
-class CustomerActivity extends \HubletoMain\Core\Model
+class CustomerActivity extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'customer_activities';
   public string $recordManagerClass = RecordManagers\CustomerActivity::class;

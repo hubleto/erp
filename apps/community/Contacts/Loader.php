@@ -50,12 +50,12 @@ class Loader extends \HubletoMain\Core\App
       $mContactCategory->record->recordCreate([ 'name' => 'Home' ]);
       $mContactCategory->record->recordCreate([ 'name' => 'Other' ]);
 
-      $mPersonTag->record->recordCreate([ 'name' => "Technical user", 'color' => '#fc2c03' ]);
-      $mPersonTag->record->recordCreate([ 'name' => "Business user", 'color' => '#fc7b03' ]);
+      $mPersonTag->record->recordCreate([ 'name' => "IT manager", 'color' => '#D33115' ]);
+      $mPersonTag->record->recordCreate([ 'name' => "CEO", 'color' => '#4caf50' ]);
       $mPersonTag->record->recordCreate([ 'name' => "Desicion Maker", 'color' => '#fcc203' ]);
-      $mPersonTag->record->recordCreate([ 'name' => "Partner", 'color' => '#62fc03' ]);
-      $mPersonTag->record->recordCreate([ 'name' => "Billing user", 'color' => '#03fc8c' ]);
-      $mPersonTag->record->recordCreate([ 'name' => "Other", 'color' => '#033dfc' ]);
+      $mPersonTag->record->recordCreate([ 'name' => "Sales", 'color' => '#2196f3' ]);
+      $mPersonTag->record->recordCreate([ 'name' => "Support", 'color' => '#03fc8c' ]);
+      $mPersonTag->record->recordCreate([ 'name' => "Other", 'color' => '#383838' ]);
     }
   }
 

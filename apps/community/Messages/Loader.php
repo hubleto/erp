@@ -22,6 +22,15 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
+
+  public function installTables(int $round): void
+  {
+    if ($round == 1) {
+      $mMessage = new Models\Message($this->main);
+      $mMessage->dropTableIfExists()->install();
+    }
+  }
+
   public function installDefaultPermissions(): void
   {
   }

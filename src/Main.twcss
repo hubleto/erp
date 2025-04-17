@@ -35,7 +35,7 @@
   /* add your custom css here */
   #app-main-content { @apply ml-0 p-2 md:ml-36; }
   #app-main-content.sidebar-two-levels { @apply ml-0 md:ml-68; }
-  #app-main-content > h1, h1.app-main-title { @apply p-0 m-0 text-primary dark:text-white; }
+  #app-main-content > h1, h1.app-main-title { @apply w-full p-0 pb-2 m-0 border-b border-b-primary/20 mb-2 text-primary dark:text-white; }
 
   .app-launcher-show-btn { @apply cursor-pointer bg-white/20 text-white text-xs m-1 p-1 flex items-center gap-2 justify-center rounded hover:bg-white/40; }
 

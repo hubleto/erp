@@ -312,6 +312,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                           }}
                         ></InputTags2>
                       </FormInput>
+                    </div>
+                    <div className='border-l border-gray-200'></div>
+                    <div className='grow'>
+                      {this.inputWrapper('is_new_customer')}
+                      {this.inputWrapper('business_type')}
                       {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>

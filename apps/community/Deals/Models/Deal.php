@@ -63,6 +63,10 @@ class Deal extends \HubletoMain\Core\Models\Model
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues([1 => "Lost", 2 => "Won", 3 => "Pending"])->setDefaultValue(3),
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
+      'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
+      'business_type' => (new Integer($this, $this->translate('Business type')))->setEnumValues(
+        [0 => "", 1 => "New", 2 => "Existing"]
+      ),
     ]);
   }
 

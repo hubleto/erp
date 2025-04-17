@@ -24,6 +24,8 @@ class PipelineStep extends \HubletoMain\Core\Models\Model
       'order' => (new Integer($this, $this->translate('Order')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color')))->setRequired(),
       'id_pipeline' => (new Lookup($this, $this->translate("Pipeline"), Pipeline::class, 'CASCADE'))->setRequired(),
+      'set_result' => (new Integer($this, $this->translate('Set result of a deal to')))->setRequired()
+        ->setEnumValues([1 => "Lost", 2 => "Won", 3 => "Pending"])
     ]);
   }
 

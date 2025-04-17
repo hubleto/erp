@@ -10,7 +10,7 @@
     "build-js": "npx webpack --mode development",
     "watch-js": "npx webpack --watch --mode development",
     "build": "npx webpack --mode development && npx @tailwindcss/cli -m -i ./src/Main.twcss -o ./assets/compiled/css/main.css",
-    "build:prod": "npx webpack --mode production"
+    "build:prod": "npx webpack --mode production && npx @tailwindcss/cli -m -i ./src/Main.twcss -o ./assets/compiled/css/main.css"
   },
   "dependencies": {
     "@babel/core": "^7.0",

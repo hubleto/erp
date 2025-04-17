@@ -103,6 +103,24 @@
       <div class="hidden sm:block flex-1">
         {{ include('@hubleto/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
       </div>
+      {% if viewParams.appMenu|length > 0 %}
+        <div class="hidden sm:block flex-1">
+          <button class="btn btn-transparent btn-dropdown btn-primary-outline">
+            <span class="icon"><i class="{{ viewParams.activatedApp.manifest.icon }}"></i></span>
+            <span class="text">{{ viewParams.activatedApp.manifest.nameTranslated }}</span>
+            <div class="menu">
+              <div class="list">
+                {% for item in viewParams.appMenu %}
+                  <a href="{{ config.accountUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
+                    <span class="icon"><i class="{{ item.icon }}"></i></span>
+                    <span class="text">{{ item.title }}</span>
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
+          </button>
+        </div>
+      {% endif %}
       <div id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
           {% if viewParams.contextHelpUrl %}

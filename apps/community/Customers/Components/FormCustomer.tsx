@@ -290,6 +290,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       })
     }
 
+    let mapAddress = '';
+    if (R.street_line_1 != '' && R.city != '' && R.COUNTRY.name != '') {
+      mapAddress = R.street_line_1 + ', ' + R.postal_code + ' ' + R.city + ', ' + (R.region ? R.region + ', ' : '') + R.COUNTRY.name;
+    }
+
     return (
       <>
         <TabView>
@@ -306,7 +311,21 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                       {this.inputWrapper("city")}
                       {this.inputWrapper("region")}
                       {this.inputWrapper("id_country")}
-                      {this.inputWrapper("postal_code")}
+                      <div className="flex justify-between">
+                        {this.inputWrapper("postal_code")}
+                        {mapAddress == '' ? null :
+                          <div>
+                            <a
+                              href={"https://maps.google.com/?q=" + encodeURIComponent(mapAddress)}
+                              target="_blank"
+                              className="btn btn-transparent"
+                            >
+                              <span className="icon"><i className="fas fa-map"></i></span>
+                              <span className="text">{this.translate("Show on map")}</span>
+                            </a>
+                          </div>
+                        }
+                      </div>
                     </div>
                     <div className='border-l border-gray-200'></div>
                     <div className="w-1/2">
@@ -329,6 +348,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                         />
                       </FormInput>
                       {this.inputWrapper("id_user")}
+                      {this.inputWrapper("note")}
                     </div>
                   </div>
                 </div>
@@ -361,9 +381,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                     </div>
                   </div>
                 : null}
-              </div>
-              <div className="card card-body">
-                {this.inputWrapper("note")}
               </div>
               {showAdditional ?
                 <div className="card">

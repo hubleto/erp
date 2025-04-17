@@ -17,7 +17,6 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
       '/^deals\/change-pipeline\/?$/' => Controllers\Api\ChangePipeline::class,
-      '/^deals\/change-pipeline-step\/?$/' => Controllers\Api\ChangePipelineStep::class,
       '/^settings\/deal-tags\/?$/' => Controllers\Tags::class,
       '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,
       '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
@@ -125,7 +124,6 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Deals/Controllers/Deals",
       "HubletoApp/Community/Deals/Controllers/DealsArchive",
 
-      "HubletoApp/Community/Deals/Api/ChangePipelineStep",
       "HubletoApp/Community/Deals/Api/GetCalendarEvents",
 
       "HubletoApp/Community/Deals/Deals",

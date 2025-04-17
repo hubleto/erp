@@ -27,6 +27,7 @@ export interface FormDealState extends HubletoFormState {
   activityCalendarDateClicked: string,
   tableDealProductsDescription: any,
   tableDealDocumentsDescription: any,
+
 }
 
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
@@ -112,52 +113,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     return <small>{this.translate('Lead')}</small>;
   }
 
-  renderHeaderLeft(): JSX.Element {
-    return <>
-      {super.renderHeaderLeft()}
-      <div onClick={() => {
-        let now = moment().unix();
-        let progress_date = moment.unix(now).format('YYYY-MM-DD HH:mm:ss');
-        this.updateRecord({deal_result: 2, date_result_update: progress_date});
-        this.saveRecord();
-      }}
-        className={`btn ${this.state.record.deal_result == 2 ? "" : "!bg-gray-500"}`}
-      >
-        <span className='text'>Won</span>
-      </div>
-      <div onClick={() => {
-          let now = moment().unix();
-          let progress_date = moment.unix(now).format('YYYY-MM-DD HH:mm:ss');
-          this.updateRecord({deal_result: 1, date_result_update: progress_date});
-          this.saveRecord();
-        }}
-        className={`btn ${this.state.record.deal_result == 1 ? "!bg-red-500" : "!bg-gray-500"}`}
-      >
-        <span className='text'>Lost</span>
-      </div>
-    </>
-  }
-
-  changeDealStep(idStep: number, R: any) {
-    if (idStep == R.id_pipeline_step) return;
-    request.get(
-      'deals/change-pipeline-step',
-      {
-        idStep: idStep,
-        idPipeline: R.id_pipeline,
-        idDeal: R.id
-      },
-      (data: any) => {
-        if (data.status == "success") {
-          R.id_pipeline_step = data.returnStep.id;
-          R.HISTORY = data.dealHistory.reverse();
-          R.PIPELINE_STEP = data.returnStep;
-          this.setState({record: R});
-        }
-      }
-    );
-  }
-
   getSumPrice(recordProducts: any) {
     var sumPrice = 0;
     recordProducts.map((product, index) => {
@@ -171,17 +126,34 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     return Number(sumPrice.toFixed(2));
   }
 
-  pipelineChange(newRecord) {
+  pipelineChange(idPipeline: number) {
     request.get(
       'deals/change-pipeline',
       {
-        idPipeline: newRecord.id_pipeline
+        idPipeline: idPipeline
       },
       (data: any) => {
         if (data.status == "success") {
-          newRecord.PIPELINE = data.newPipeline;
-          newRecord.PIPELINE_STEP.order = 0;
-          this.setState({record: newRecord});
+          var R = this.state.record;
+          if (data.newPipeline.PIPELINE_STEPS?.length > 0) {
+            R.id_pipeline = data.newPipeline.id;
+            R.id_pipeline_step = data.newPipeline.PIPELINE_STEPS[0].id;
+            R.deal_result = data.newPipeline.PIPELINE_STEPS[0].set_result;
+            R.PIPELINE = data.newPipeline;
+            R.PIPELINE_STEP = data.newPipeline.PIPELINE_STEPS[0];
+
+            console.log(R);
+
+
+            this.setState({ record: R });
+          } else {
+            R.id_pipeline = data.newPipeline.id;
+            R.id_pipeline_step = null;
+            R.PIPELINE = data.newPipeline;
+            R.PIPELINE_STEP = null;
+
+            this.setState({ record: R });
+          }
         }
       }
     );
@@ -312,8 +284,9 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     </div>
                     <div className='border-l border-gray-200'></div>
                     <div className='grow'>
+                      {this.inputWrapper("deal_result", {uiStyle: 'buttons'})}
                       {this.inputWrapper('is_new_customer')}
-                      {this.inputWrapper('business_type')}
+                      {this.inputWrapper('business_type', {uiStyle: 'buttons'})}
                       {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
@@ -330,22 +303,27 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                             model='HubletoApp/Community/Settings/Models/Pipeline'
                             value={R.id_pipeline}
                             onChange={(value: any) => {
-                              this.updateRecord({ id_pipeline: value });
-                              this.pipelineChange(R);
+                              this.pipelineChange(value);
                             }}
                           ></Lookup>
                         </FormInput>
                         <div className='flex flex-row gap-2 flex-wrap justify-center'>
-                          {R.PIPELINE != null
-                            && R.PIPELINE.PIPELINE_STEPS
-                            && R.PIPELINE.PIPELINE_STEPS.length > 0 ?
+                          {R.PIPELINE != null &&
+                          R.PIPELINE.PIPELINE_STEPS &&
+                          R.PIPELINE.PIPELINE_STEPS.length > 0 ?
                             R.PIPELINE.PIPELINE_STEPS.map((s, i) => {
                               var statusColor: string = null;
                               {R.PIPELINE_STEP && s.order <= R.PIPELINE_STEP.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
                               return (
                                 <>
                                   <button
-                                    onClick={R.is_archived ? null : ()=>{this.changeDealStep(s.id, R)}}
+                                    onClick={R.is_archived ? null : ()=>{
+                                      if (this.state.isInlineEditing == false) this.setState({isInlineEditing: true});
+                                      R.id_pipeline_step = s.id;
+                                      R.deal_result = s.set_result;
+                                      R.PIPELINE_STEP = s;
+                                      this.setState({record: R});
+                                    }}
                                     className={`flex px-3 h-[50px] justify-center btn ${statusColor}`}
                                   >
                                     <span className='text text-center self-center !h-auto'>{s.name}</span>
@@ -356,8 +334,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                 </>
                               )
                             })
-                          : null}
-
+                          : <p className='w-full text-center'>No steps exist for this pipeline</p>}
                         </div>
                       </div>
                     </div>

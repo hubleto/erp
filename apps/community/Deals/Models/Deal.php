@@ -69,7 +69,7 @@ class Deal extends \HubletoMain\Core\Model
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
       'business_type' => (new Integer($this, $this->translate('Business type')))->setEnumValues(
-        [0 => "", 1 => "New", 2 => "Existing"]
+        [1 => "New", 2 => "Existing"]
       ),
     ]);
   }
@@ -83,7 +83,16 @@ class Deal extends \HubletoMain\Core\Model
           ->setReactComponent('InputHyperlink')
           ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
-      break;
+        break;
+      case 'deal_result':
+          $description->setEnumCssClasses([
+            1 => "!text-red-500",
+            2 => "!text-green-500",
+            3 => "!text-white-500",
+          ]);
+        break;
+      default:
+        break;
     }
     return $description;
   }
@@ -146,6 +155,8 @@ class Deal extends \HubletoMain\Core\Model
     ;
 
     $description = parent::describeForm();
+    $description->defaultValues['is_new_customer'] = 0;
+    $description->defaultValues['business_type'] = 1;
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_currency'] = $defaultCurrency;

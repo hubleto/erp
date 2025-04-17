@@ -13,7 +13,6 @@ class ChangePipeline extends \HubletoMain\Core\Controller
   public function renderJson(): ?array
   {
     $mPipeline = new Pipeline($this->main);
-    $mPipelineStep = new PipelineStep($this->main);
     $newPipeline = null;
 
     if ($this->main->isUrlParam('idPipeline')) {
@@ -36,7 +35,6 @@ class ChangePipeline extends \HubletoMain\Core\Controller
         "error" => "Pipeline parameter was not defined",
       ];
     }
-
 
     return [
       "newPipeline" => $newPipeline,

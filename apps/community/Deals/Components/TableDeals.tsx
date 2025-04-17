@@ -58,7 +58,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
 
     if (!this.state.showArchive) {
       elements.push(
-        <a className="btn btn-transparent" href={globalThis.app.config.url + "/deals/archive"}>
+        <a className="btn btn-transparent" href={globalThis.main.config.url + "/deals/archive"}>
           <span className="icon"><i className="fas fa-box-archive"></i></span>
           <span className="text">Show archived deals</span>
         </a>

@@ -332,33 +332,35 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                     </div>
                   </div>
                 </div>
-                <div className='flex-1 card'>
-                  <div className='card-body '>
-                    <Calendar
-                      onCreateCallback={() => this.loadRecord()}
-                      readonly={R.is_archived}
-                      eventsEndpoint={globalThis.main.config.rewriteBase + 'customers/get-calendar-events?idCustomer=' + R.id}
-                      onDateClick={(date, time, info) => {
-                        this.setState({
-                          activityCalendarDateClicked: date,
-                          activityCalendarTimeClicked: time,
-                          showIdActivity: -1,
-                        } as FormCustomerState);
-                      }}
-                      onEventClick={(info) => {
-                        this.setState({
-                          showIdActivity: parseInt(info.event.id),
-                        } as FormCustomerState);
-                        info.jsEvent.preventDefault();
-                      }}
-                      headerToolbar={{
-                        left: 'prev,next',
-                        center: 'title',
-                        right: 'timeGridDay,timeGridWeek,dayGridMonth'
-                      }}
-                    ></Calendar>
+                {this.state.id > 0 ?
+                  <div className='flex-1 card'>
+                    <div className='card-body '>
+                      <Calendar
+                        onCreateCallback={() => this.loadRecord()}
+                        readonly={R.is_archived}
+                        eventsEndpoint={globalThis.main.config.rewriteBase + 'customers/get-calendar-events?idCustomer=' + R.id}
+                        onDateClick={(date, time, info) => {
+                          this.setState({
+                            activityCalendarDateClicked: date,
+                            activityCalendarTimeClicked: time,
+                            showIdActivity: -1,
+                          } as FormCustomerState);
+                        }}
+                        onEventClick={(info) => {
+                          this.setState({
+                            showIdActivity: parseInt(info.event.id),
+                          } as FormCustomerState);
+                          info.jsEvent.preventDefault();
+                        }}
+                        headerToolbar={{
+                          left: 'prev,next',
+                          center: 'title',
+                          right: 'timeGridDay,timeGridWeek,dayGridMonth'
+                        }}
+                      ></Calendar>
+                    </div>
                   </div>
-                </div>
+                : null}
               </div>
               <div className="card card-body">
                 {this.inputWrapper("note")}
@@ -450,7 +452,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header={this.translate('Leads')}>
+            <TabPanel header={this.translate('Leads') + (R.LEADS ? ' (' + R.LEADS.length + ')' : '')}>
               <a
                 className="btn btn-add-outline mb-2"
                 onClick={() => {this.setState({ createNewLead: true } as FormCustomerState);}}
@@ -495,7 +497,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
             </TabPanel>
           ) : null}
           {showAdditional ? (
-            <TabPanel header={this.translate('Deals')}>
+            <TabPanel header={this.translate('Deals') + (R.DEALS ? ' (' + R.DEALS.length + ')' : '')}>
               <a
                 className="btn btn-add-outline mb-2"
                 onClick={() => {this.setState({ createNewDeal: true } as FormCustomerState);}}

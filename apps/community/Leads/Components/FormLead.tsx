@@ -206,6 +206,13 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
     return (
       <>
+        {this.state.id > 0 ?
+          <div className="h-0 w-full text-right">
+            <div className="badge badge-secondary badge-large">
+              Lead value:&nbsp;{globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
+            </div>
+          </div>
+        : null}
         <TabView>
           <TabPanel header={this.translate('Lead')}>
             {R.is_archived == 1 ?
@@ -262,7 +269,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       {showAdditional ?
                         <div className='w-full mt-2'>
                           {R.DEAL != null ?
-                          <a className='btn btn-primary' href={`${globalThis.app.config.url}/deals/${R.DEAL.id}`}>
+                          <a className='btn btn-primary' href={`${globalThis.main.config.url}/deals/${R.DEAL.id}`}>
                             <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
                             <span className='text'>{this.translate('Go to deal')}</span>
                           </a>
@@ -298,33 +305,35 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     </div>
                   </div>
                 </div>
-                <div className='flex-1 card'>
-                  <div className="card-body">
-                    <Calendar
-                      onCreateCallback={() => this.loadRecord()}
-                      readonly={R.is_archived}
-                      eventsEndpoint={globalThis.main.config.rewriteBase + 'leads/get-calendar-events?idLead=' + R.id}
-                      onDateClick={(date, time, info) => {
-                        this.setState({
-                          activityCalendarDateClicked: date,
-                          activityCalendarTimeClicked: time,
-                          showIdActivity: -1,
-                        } as FormLeadState);
-                      }}
-                      onEventClick={(info) => {
-                        this.setState({
-                          showIdActivity: parseInt(info.event.id),
-                        } as FormLeadState);
-                        info.jsEvent.preventDefault();
-                      }}
-                      headerToolbar={{
-                        left: 'prev,next',
-                        center: 'title',
-                        right: 'timeGridDay,timeGridWeek,dayGridMonth'
-                      }}
-                    ></Calendar>
+                {this.state.id > 0 ?
+                  <div className='flex-1 card'>
+                    <div className="card-body">
+                      <Calendar
+                        onCreateCallback={() => this.loadRecord()}
+                        readonly={R.is_archived}
+                        eventsEndpoint={globalThis.main.config.rewriteBase + 'leads/get-calendar-events?idLead=' + R.id}
+                        onDateClick={(date, time, info) => {
+                          this.setState({
+                            activityCalendarDateClicked: date,
+                            activityCalendarTimeClicked: time,
+                            showIdActivity: -1,
+                          } as FormLeadState);
+                        }}
+                        onEventClick={(info) => {
+                          this.setState({
+                            showIdActivity: parseInt(info.event.id),
+                          } as FormLeadState);
+                          info.jsEvent.preventDefault();
+                        }}
+                        headerToolbar={{
+                          left: 'prev,next',
+                          center: 'title',
+                          right: 'timeGridDay,timeGridWeek,dayGridMonth'
+                        }}
+                      ></Calendar>
+                    </div>
                   </div>
-                </div>
+                : null}
               </div>
               <div className='card card-body'>
                 {this.inputWrapper('note', {readonly: R.is_archived})}

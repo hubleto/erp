@@ -8,7 +8,7 @@
   --font-serif: 'Merriweather', 'serif';
 
   --color-primary: #008000;
-  --color-secondary: #7FB562;
+  --color-secondary: #7F0062;
   
   --spacing-8xl: 96rem;
   --spacing-9x': 128rem;
@@ -60,4 +60,6 @@
   .btn-square .text { @apply h-auto; }
 
   .modal-header-title h2 { @apply dark:text-white; }
+
+  .fc .fc-toolbar-title { @apply !text-base; }
 }

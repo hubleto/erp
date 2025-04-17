@@ -226,6 +226,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
     return (
       <>
+        {this.state.id > 0 ?
+          <div className="h-0 w-full text-right">
+            <div className="badge badge-secondary badge-large">
+              Deal value:&nbsp;{globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
+            </div>
+          </div>
+        : null}
         <TabView>
           <TabPanel header="Deal">
             {R.is_archived == 1 ?
@@ -286,7 +293,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       </div>
                       {showAdditional && R.id_lead != null ?
                         <div className='mt-2'>
-                          <a className='btn btn-primary self-center' href={`${globalThis.app.config.url}/leads/${R.id_lead}`}>
+                          <a className='btn btn-primary self-center' href={`${globalThis.main.config.url}/leads/${R.id_lead}`}>
                             <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
                             <span className='text'>{this.translate('Go to original lead')}</span>
                           </a>

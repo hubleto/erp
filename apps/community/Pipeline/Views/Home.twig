@@ -1,7 +1,7 @@
 <script>
   function onFilterChange() {
     const fDealResult = document.getElementById("fDealResult").value;
-    const fResponsible = globalThis.app.reactElements['fResponsible'].state.value;
+    const fResponsible = globalThis.main.reactElements['fResponsible'].state.value;
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);

@@ -34,6 +34,7 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
 
       $mToken = new Token($this->app); // todo: token creation should be done withing the token itself
       $tokenValue = bin2hex(random_bytes(16));
+      $mToken->record->where('login', $login)->where('type', 'reset-password')->delete();
       $mToken->record->create([
         'login' => $login,
         'token' => $tokenValue,
@@ -59,7 +60,6 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
     $user = $mUser->record->where('login', $token->login)->first();
     $oldPassword = $user->password;
 
-    // this logic also does not belong here todo
     $user->update(['password' => password_hash($this->main->urlParamAsString('password'), PASSWORD_DEFAULT)]);
 
     if ($oldPassword == "") {

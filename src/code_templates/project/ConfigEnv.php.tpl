@@ -9,10 +9,6 @@ $config['accountFullName'] = '{{ accountFullName }}';
 
 // dirs
 
-const HUBLETO_COMMUNITY_REPO = '{{ mainFolder }}/apps/community';
-const HUBLETO_EXTERNAL_REPO = '{{ mainFolder }}/apps/external';
-const HUBLETO_ENTERPRISE_REPO = '{{ mainFolder }}/apps/enterprise';
-
 $config['dir'] = '{{ mainFolder }}';
 $config['accountDir'] = __DIR__;
 $config['logDir'] = __DIR__ . '/log';
@@ -36,6 +32,7 @@ $config['global_table_prefix'] = '';
 // misc
 $config['develMode'] = TRUE;
 $config['language'] = 'en';
+$config['enterpriseRepoFolder'] = '{{ enterpriseRepoFolder }}';
 $config['externalAppsRepositories'] = [
   'MyCompany' => __DIR__ . '/apps/external/MyCompany'
 ];

@@ -1,9 +1,11 @@
 // Import Hubleto Core (Hubleto Main).
 import './src/Main'
 
-// Import Hubleto Community Apps
-// Mostly, these loaders run `registerReactComponent()`
+// Import community apps.
 import './apps/community/Loader'
+
+// Import all other app repositories required to build project.
+import './repositories.tsx';
 
 // Render react elements into HTML body
 // This method parses the DOM and tries to find all "<app-*" elements.

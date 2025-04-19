@@ -15,8 +15,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
   public function run(): void
   {
-    // define('HUBLETO_COMMUNITY_REPO', __DIR__ . '/../../apps/community');
-
     $rewriteBase = null;
     $accountFolder = null;
     $accountUrl = null;
@@ -35,6 +33,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $packagesToInstall = null;
     $appsToInstall = null;
     $externalAppsRepositories = [];
+    $enterpriseRepoFolder = null;
 
     $configFile = (string) ($this->arguments[2] ?? '');
 
@@ -62,6 +61,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['packagesToInstall'])) $packagesToInstall = $config['packagesToInstall'];
     if (isset($config['appsToInstall'])) $appsToInstall = $config['appsToInstall'];
     if (isset($config['externalAppsRepositories'])) $externalAppsRepositories = $config['externalAppsRepositories'];
+    if (isset($config['enterpriseRepoFolder'])) $enterpriseRepoFolder = $config['enterpriseRepoFolder'];
 
     $rewriteBases = [];
     $lastRewriteBase = '';
@@ -192,6 +192,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       }
     }
 
+    $installer->enterpriseRepoFolder = $enterpriseRepoFolder;
     $installer->externalAppsRepositories = $externalAppsRepositories;
     
     if (isset($config['extraConfigEnv'])) {

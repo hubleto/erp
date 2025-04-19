@@ -16,6 +16,8 @@ class Installer {
   public string $mainFolder = '';
   public string $mainUrl = '';
 
+  public string $enterpriseRepoFolder = '';
+
   public string $env = '';
   public string $uid = '';
   public string $dbHost = '';
@@ -156,6 +158,7 @@ class Installer {
 
   public function installApps(int $round): void
   {
+    $this->main->config->set('enterpriseRepoFolder', $this->enterpriseRepoFolder);
     foreach ($this->appsToInstall as $appNamespace => $appConfig) {
       $this->main->apps->installApp($round, $appNamespace, $appConfig, true);
     }
@@ -197,6 +200,7 @@ class Installer {
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
     $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
     $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
+    $configEnv = str_replace('{{ enterpriseRepoFolder }}', $this->enterpriseRepoFolder, $configEnv);
 
     if (count($this->externalAppsRepositories) > 0) {
       $configEnv .= '' . "\n";

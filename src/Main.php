@@ -11,7 +11,7 @@ spl_autoload_register(function(string $class) {
 
   // community
   if (str_starts_with($class, 'HubletoApp/Community/')) {
-    $dir = (string) (defined('HUBLETO_COMMUNITY_REPO') ? HUBLETO_COMMUNITY_REPO : realpath(__DIR__ . '/../apps/community'));
+    $dir = (string) realpath(__DIR__ . '/../apps/community');
     @include($dir . '/' . str_replace('HubletoApp/Community/', '', $class) . '.php');
   }
 
@@ -22,13 +22,15 @@ spl_autoload_register(function(string $class) {
 
   // enterprise
   if (str_starts_with($class, 'HubletoApp/Enterprise/')) {
-    $dir = (string) (defined('HUBLETO_ENTERPRISE_REPO') ? HUBLETO_ENTERPRISE_REPO : realpath(__DIR__ . '/../apps/enterprise'));
-    @include($dir . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
+    $hubletoMain = $GLOBALS['hubletoMain'];
+    $dir = (string) $hubletoMain->config->getAsString('enterpriseRepoFolder');
+    if (!empty($dir)) {
+      @include($dir . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
+    }
   }
 
   // external
   if (str_starts_with($class, 'HubletoApp/External/')) {
-    // $dir = (string) (defined('HUBLETO_EXTERNAL_REPO') ? HUBLETO_EXTERNAL_REPO : realpath(__DIR__ . '/../apps/external'));
     $tmp = str_replace('HubletoApp/External/', '', $class);
     $vendor = substr($tmp, 0, strpos($tmp, '/'));
     $app = substr($tmp, strpos($tmp, '/') + 1);

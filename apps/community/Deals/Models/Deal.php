@@ -13,6 +13,7 @@ use ADIOS\Core\Db\Column\Varchar;
 use HubletoApp\Community\Contacts\Models\Person;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Leads\Models\Lead;
+use HubletoApp\Community\Products\Controllers\API\CalculatePrice;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Pipeline;
 use HubletoApp\Community\Settings\Models\PipelineStep;
@@ -37,6 +38,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
     'TAGS' => [ self::HAS_MANY, DealTag::class, 'id_deal', 'id' ],
     'PRODUCTS' => [ self::HAS_MANY, DealProduct::class, 'id_deal', 'id' ],
+    'SERVICES' => [ self::HAS_MANY, DealProduct::class, 'id_deal', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, DealActivity::class, 'id_deal', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_lookup', 'id'],
   ];
@@ -186,6 +188,24 @@ class Deal extends \HubletoMain\Core\Models\Model
         $originalRecord["id"]
       );
     }
+
+    $sums = 0;
+    $calculator = new CalculatePrice();
+    $allProducts = array_merge($originalRecord["PRODUCTS"], $originalRecord["SERVICES"]);
+
+    foreach ($allProducts as $product) {
+      if (!isset($product["_toBeDeleted_"])) {
+        $sums += $calculator->calculatePriceAfterTax(
+          $product["unit_price"],
+          $product["amount"],
+          $product["tax"] ?? 0,
+          $product["discount"] ?? 0
+        );
+      }
+    }
+
+    $this->record->find($savedRecord["id"])->update(["price" => $sums]);
+
     return $savedRecord;
   }
 

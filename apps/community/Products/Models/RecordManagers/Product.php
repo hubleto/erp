@@ -19,4 +19,15 @@ class Product extends \HubletoMain\Core\RecordManager
   {
     return $this->hasOne(Supplier::class, 'id','id_supplier');
   }
+
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    $main = \ADIOS\Core\Helper::getGlobalApp();
+    if ($main->urlParamAsBool("getServices") == true) $query = $query->where("type", 2);
+    else if ($main->urlParamAsBool("getProducts") == true) $query = $query->where("type", 1);
+
+    return $query;
+  }
 }

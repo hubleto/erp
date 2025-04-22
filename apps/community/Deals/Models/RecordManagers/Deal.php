@@ -66,7 +66,20 @@ class Deal extends \HubletoMain\Core\RecordManager
 
   /** @return HasMany<DealProduct, covariant Deal> */
   public function PRODUCTS(): HasMany {
-    return $this->hasMany(DealProduct::class, 'id_deal', 'id');
+    return $this->hasMany(DealProduct::class, 'id_deal', 'id')
+        ->whereHas("PRODUCT", function ($query) {
+          $query->where('type', 1);
+      });
+    ;
+  }
+
+  /** @return HasMany<DealProduct, covariant Deal> */
+  public function SERVICES(): HasMany {
+    return $this->hasMany(DealProduct::class, 'id_deal', 'id')
+        ->whereHas("PRODUCT", function ($query) {
+          $query->where('type', 2);
+      });
+    ;
   }
 
   /** @return HasMany<DealActivity, covariant Deal> */

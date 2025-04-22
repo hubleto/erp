@@ -83,7 +83,6 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
         </>
       );
     } else if (columnName == "DEAL") {
-    console.log('deal col', data);
       if (data.DEAL) {
         return <>
           <a

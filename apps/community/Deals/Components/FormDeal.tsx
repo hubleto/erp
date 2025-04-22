@@ -13,7 +13,6 @@ import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Docume
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import ModalSimple from 'adios/ModalSimple';
 import Hyperlink from 'adios/Inputs/Hyperlink';
-import moment from 'moment';
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
@@ -167,10 +166,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
-    const lookupElement = createRef();
+    const servicesLookup = createRef();
+    const productsLookup = createRef();
     var lookupData;
 
-    const getLookupData = () => {
+    const getLookupData = (lookupElement) => {
       if (lookupElement.current) {
         lookupData = lookupElement.current.state.data;
       }
@@ -216,7 +216,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 'notes notes'
                 'status status'
                 'products products'
-                'history history'
               `}}>
                 <div className='card mt-2' style={{gridArea: 'info'}}>
                   <div className='card-body flex flex-row gap-2'>
@@ -349,11 +348,33 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       {this.inputWrapper('note', {readonly: R.is_archived})}
                     </div>
                     {showAdditional ?
-                      <div className='card mt-2' style={{gridArea: 'products'}}>
-                        <div className='card-header'>Products</div>
-                        <div className='card-body flex flex-col gap-2'>
-                          <div className='w-full h-full overflow-x-auto'>
-                          {!R.is_archived ?
+                      <div className='card' style={{gridArea: 'products'}}>
+                        <div className='card-header'>Products & Services</div>
+                        <div className='card-body'>
+                          {this.state.isInlineEditing ?
+                            <div className='text-yellow-500 mb-3'>
+                              <span className='icon mr-2'><i className='fas fa-warning'></i></span>
+                              <span className='text'>The sums of product and services prices will be updated after saving</span>
+                            </div>
+                          : <></>}
+                          {!R.is_archived ? (
+                            <a
+                              className="btn btn-add-outline mb-2 mr-2"
+                              onClick={() => {
+                                if (!R.SERVICES) R.SERVICES = [];
+                                R.SERVICES.push({
+                                  id: this.state.newEntryId,
+                                  id_deal: { _useMasterRecordId_: true },
+                                  amount: 1,
+                                });
+                                this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormDealState);
+                              }}
+                            >
+                              <span className="icon"><i className="fas fa-add"></i></span>
+                              <span className="text">Add service</span>
+                            </a>
+                          ) : null}
+                          {!R.is_archived ? (
                             <a
                               className="btn btn-add-outline mb-2"
                               onClick={() => {
@@ -361,46 +382,42 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                 R.PRODUCTS.push({
                                   id: this.state.newEntryId,
                                   id_deal: { _useMasterRecordId_: true },
-                                  amount: 1
+                                  amount: 1,
                                 });
-                                this.setState({ record: R, isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormDealState);
+                                this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormDealState);
                               }}
                             >
-                            <span className="icon"><i className="fas fa-add"></i></span>
-                            <span className="text">Add product</span>
+                              <span className="icon"><i className="fas fa-add"></i></span>
+                              <span className="text">Add product</span>
                             </a>
-                          : <></>}
+                          ) : null}
+                          <div className='w-full h-full overflow-x-auto'>
                             <TableDealProducts
-                              uid={this.props.uid + "_table_deal_products"}
-                              data={{ data: R.PRODUCTS }}
-                              dealTotal={R.PRODUCTS && R.PRODUCTS.length > 0 ? "Total: " + R.price + " " + R.CURRENCY.code : null}
+                              uid={this.props.uid + "_table_deal_services"}
+                              className='mb-4'
+                              data={{ data: R.SERVICES }}
                               descriptionSource='props'
-                              customEndpointParams={{idDeal: R.id}}
+                              customEndpointParams={{'idDeal': R.id}}
                               description={{
                                 permissions: this.state.tableDealProductsDescription?.permissions,
-                                ui: {
-                                  showHeader: false,
-                                  showFooter: true
-                                },
                                 columns: {
-                                  id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                                  id_product: { type: "lookup", title: "Service", model: "HubletoApp/Community/Products/Models/Product",
                                     cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
                                       return (
                                         <FormInput>
-                                          <Lookup {...this.getInputProps('lookup-product-1')}
-                                            ref={lookupElement}
+                                          <Lookup {...this.getInputProps()}
+                                            ref={servicesLookup}
                                             model='HubletoApp/Community/Products/Models/Product'
+                                            customEndpointParams={{'getServices': true}}
                                             cssClass='min-w-44'
                                             value={data.id_product}
                                             onChange={(value: any) => {
-                                              getLookupData();
-
+                                              getLookupData(servicesLookup);
                                               if (lookupData[value]) {
                                                 data.id_product = value;
                                                 data.unit_price = lookupData[value].unit_price;
                                                 data.tax = lookupData[value].tax;
-                                                this.updateRecord({ PRODUCTS: table.state.data?.data });
-                                                this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
+                                                this.updateRecord({ SERVICES: table.state.data?.data });
                                               }
                                             }}
                                           ></Lookup>
@@ -408,53 +425,19 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                       )
                                     },
                                   },
-                                  unit_price: { type: "float", title: "Unit Price", readonly: true },
-                                  amount: { type: "int", title: "Amount" },
-                                  discount: { type: "float", title: "Discount (%)" },
-                                  tax: { type: "float", title: "Tax (%)" },
-                                  __sum: { type: "none", title: "Sum after tax",
-                                    cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
-                                      if (data.unit_price && data.amount) {
-                                        let sum = data.unit_price * data.amount;
-                                        if (data.discount) sum = sum - (sum * (data.discount / 100));
-                                        if (data.tax) sum = sum + (sum * (data.tax / 100));
-                                        sum = Number(sum.toFixed(2));
-                                        return (<><span>{sum + " " + R.CURRENCY.code}</span></>);
-                                      }
-                                    },
-                                  },
+                                  unit_price: { type: "float", title: "Service Price",},
+                                  amount: { type: "int", title: "Commitment" },
+                                  discount: { type: "float", title: "Discount (%)"},
+                                  tax: { type: "float", title: "Tax (%)"},
+                                  sum: { type: "float", title: "Sum"},
                                 },
                                 inputs: {
-                                  id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
-                                    cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
-                                      return (
-                                        <FormInput>
-                                          <Lookup {...this.getInputProps('lookup-product-2')}
-                                            ref={lookupElement}
-                                            model='HubletoApp/Community/Products/Models/Product'
-                                            cssClass='min-w-44'
-                                            value={data.id_product}
-                                            onChange={(value: any) => {
-                                              getLookupData();
-
-                                              if (lookupData[value]) {
-                                                data.id_product = value;
-                                                data.unit_price = lookupData[value].unit_price;
-                                                data.tax = lookupData[value].tax;
-                                                this.updateRecord({ PRODUCTS: table.state.data?.data });
-                                                this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
-                                              }
-                                            }}
-                                          ></Lookup>
-                                        </FormInput>
-                                      )
-                                    },
-                                  },
-                                  unit_price: { type: "float", title: "Unit Price", readonly: true },
-                                  amount: { type: "int", title: "Amount" },
-                                  discount: { type: "float", title: "Discount (%)" },
-                                  tax: { type: "float", title: "Tax (%)" },
-                                  __sum: { type: "none", title: "Sum after tax"},
+                                  id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
+                                  unit_price: { type: "float", title: "Unit Price"},
+                                  amount: { type: "int", title: "Amount"},
+                                  tax: { type: "float", title: "Tax (%)"},
+                                  discount: { type: "float", title: "Discount (%)"},
+                                  sum: { type: "float", title: "Sum"},
                                 },
                               }}
                               isUsedAsInput={true}
@@ -462,20 +445,75 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                               onRowClick={() => this.setState({isInlineEditing: true})}
                               onChange={(table: TableDealProducts) => {
-                                this.updateRecord({ PRODUCTS: table.state.data?.data });
-                                R.price = this.getSumPrice(R.PRODUCTS);
-                                this.setState({record: R});
+                                this.updateRecord({ SERVICES: table.state.data?.data ?? [] });
                               }}
                               onDeleteSelectionChange={(table: TableDealProducts) => {
-                                this.updateRecord({ PRODUCTS: table.state.data?.data ?? [], price: this.getSumPrice(R.PRODUCTS) });
+                                this.updateRecord({ SERVICES: table.state.data?.data ?? []});
+                              }}
+                            ></TableDealProducts>
+                            <TableDealProducts
+                              uid={this.props.uid + "_table_deal_products"}
+                              data={{ data: R.PRODUCTS }}
+                              descriptionSource='props'
+                              customEndpointParams={{'idLead': R.id}}
+                              description={{
+                                permissions: this.state.tableDealProductsDescription?.permissions,
+                                columns: {
+                                  id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                                    cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
+                                      return (
+                                        <FormInput>
+                                          <Lookup {...this.getInputProps()}
+                                            ref={productsLookup}
+                                            model='HubletoApp/Community/Products/Models/Product'
+                                            customEndpointParams={{'getProducts': true}}
+                                            cssClass='min-w-44'
+                                            value={data.id_product}
+                                            onChange={(value: any) => {
+                                              getLookupData(productsLookup);
+                                              if (lookupData[value]) {
+                                                data.id_product = value;
+                                                data.unit_price = lookupData[value].unit_price;
+                                                data.tax = lookupData[value].tax;
+                                                this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                              }
+                                            }}
+                                          ></Lookup>
+                                        </FormInput>
+                                      )
+                                    },
+                                  },
+                                  unit_price: { type: "float", title: "Unit Price",},
+                                  amount: { type: "int", title: "Amount" },
+                                  discount: { type: "float", title: "Discount (%)"},
+                                  tax: { type: "float", title: "Tax (%)"},
+                                  sum: { type: "float", title: "Sum"},
+                                },
+                                inputs: {
+                                  id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
+                                  unit_price: { type: "float", title: "Unit Price"},
+                                  amount: { type: "int", title: "Amount"},
+                                  tax: { type: "float", title: "Tax (%)"},
+                                  discount: { type: "float", title: "Discount (%)"},
+                                  sum: { type: "float", title: "Sum"},
+                                },
+                              }}
+                              isUsedAsInput={true}
+                              isInlineEditing={this.state.isInlineEditing}
+                              readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+                              onRowClick={() => this.setState({isInlineEditing: true})}
+                              onChange={(table: TableDealProducts) => {
+                                this.updateRecord({ PRODUCTS: table.state.data?.data ?? []});
+                              }}
+                              onDeleteSelectionChange={(table: TableDealProducts) => {
+                                this.updateRecord({ PRODUCTS: table.state.data?.data ?? []});
                               }}
                             ></TableDealProducts>
                           </div>
                         </div>
                       </div>
-                    : null}
+                    : <></>}
                   </>
-
                 : null}
             </div>
           </TabPanel>

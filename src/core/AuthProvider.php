@@ -38,7 +38,7 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
       $mToken->record->create([
         'login' => $login,
         'token' => $tokenValue,
-        'valid_to' => date('Y-m-d H:i:s', strtotime('+15 minutes')),
+        'valid_to' => $user->password != '' ? date('Y-m-d H:i:s', strtotime('+15 minutes')) : date('Y-m-d H:i:s', strtotime('+14 days')),
         'type' => 'reset-password'
       ]);
 
@@ -48,7 +48,11 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
         $name = $user['first_name'] . ' ' . $user['last_name'];
       }
 
-      $this->main->emails->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
+      if ($user->password != '') {
+        $this->main->emails->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
+      } else {
+        $this->main->emails->sendWelcomeEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
+      }
     }
   }
 

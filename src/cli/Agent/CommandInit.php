@@ -25,6 +25,11 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $dbPassword = null;
     $dbName = null;
     $dbCodepage = null;
+    $smtpHost = null;
+    $smtpPort = null;
+    $smtpEncryption = null;
+    $smtpLogin = null;
+    $smtpPassword = null;
     $accountFullName = null;
     $adminName = null;
     $adminFamilyName = null;
@@ -63,6 +68,12 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['externalAppsRepositories'])) $externalAppsRepositories = $config['externalAppsRepositories'];
     if (isset($config['enterpriseRepoFolder'])) $enterpriseRepoFolder = $config['enterpriseRepoFolder'];
 
+    if (isset($config['smtpHost'])) $smtpHost = $config['smtpHost'];
+    if (isset($config['smtpPort'])) $smtpPort = $config['smtpPort'];
+    if (isset($config['smtpEncryption'])) $smtpEncryption = $config['smtpEncryption'];
+    if (isset($config['smtpLogin'])) $smtpLogin = $config['smtpLogin'];
+    if (isset($config['smtpPassword'])) $smtpPassword = $config['smtpPassword'];
+
     $rewriteBases = [];
     $lastRewriteBase = '';
 
@@ -87,6 +98,12 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($adminEmail === null) $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
     if ($adminPassword === null) $adminPassword = $this->cli->read('Account.adminPassword (leave empty to generate random password)');
 
+//    if ($smtpHost === null) $smtpHost = $this->cli->read('ConfigEnv.smtpHost');
+//    if ($smtpHost != null && $smtpPort === null) $smtpPort = $this->cli->read('ConfigEnv.smtpPort');
+//    if ($smtpHost != null && $smtpEncryption === null) $smtpEncryption = $this->cli->choose(['ssl', 'tls'], 'ConfigEnv.smtpEncryption', 'ssl');
+//    if ($smtpHost != null && $smtpLogin === null) $smtpLogin = $this->cli->read('ConfigEnv.smtpLogin');
+//    if ($smtpHost != null && $smtpPassword === null) $smtpPassword = $this->cli->read('ConfigEnv.smtpPassword');
+
     $errors = [];
     $errorColumns = [];
     if (!filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
@@ -103,7 +120,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
 
     if (empty($packagesToInstall)) $packagesToInstall = 'core,sales';
-    if (empty($adminPassword)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
+    if (empty($adminPassword) && !isset($smtpHost)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
     $this->cli->green("       ###         \n");
     $this->cli->green("      ###        ##\n");
@@ -168,6 +185,11 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       (string) $dbName,
       (string) $dbUser,
       (string) $dbPassword,
+      (string) $smtpHost,
+      (string) $smtpPort,
+      (string) $smtpEncryption,
+      (string) $smtpLogin,
+      (string) $smtpPassword,
       false, // randomize (deprecated)
     );
 
@@ -192,7 +214,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       }
     }
 
-    $installer->enterpriseRepoFolder = $enterpriseRepoFolder;
+//    $installer->enterpriseRepoFolder = $enterpriseRepoFolder;
     $installer->externalAppsRepositories = $externalAppsRepositories;
     
     if (isset($config['extraConfigEnv'])) {
@@ -204,6 +226,11 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->cyan("  -> Creating database.\n");
     $installer->createDatabase();
+
+    if ($smtpHost != '') {
+      $this->cli->cyan("  -> Initializing SMTP.\n");
+      $installer->initSmtp();
+    }
 
     $this->cli->cyan("  -> Creating base tables.\n");
     $installer->installBaseModels();

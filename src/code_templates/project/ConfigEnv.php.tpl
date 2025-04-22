@@ -29,6 +29,13 @@ $config['db_name'] = '{{ dbName }}';
 $config['db_codepage'] = 'utf8mb4';
 $config['global_table_prefix'] = '';
 
+// smtp
+$config['smtpHost'] = '{{ smtpHost }}';
+$config['smtpPort'] = '{{ smtpPort }}';
+$config['smtpEncryption'] = '{{ smtpEncryption }}';
+$config['smtpLogin'] = '{{ smtpLogin }}';
+$config['smtpPassword'] = '{{ smtpPassword }}';
+
 // misc
 $config['develMode'] = TRUE;
 $config['language'] = 'en';

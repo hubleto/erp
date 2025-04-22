@@ -25,6 +25,12 @@ class Installer {
   public string $dbUser = '';
   public string $dbPassword = '';
 
+  public string $smtpHost = '';
+  public string $smtpPort = '';
+  public string $smtpEncryption = '';
+  public string $smtpLogin = '';
+  public string $smtpPassword = '';
+
   public bool $randomize = false;
 
   /** @property array<string, array<string, mixed>> */
@@ -88,6 +94,11 @@ class Installer {
     string $dbName,
     string $dbUser,
     string $dbPassword,
+    string $smtpHost,
+    string $smtpPort,
+    string $smtpEncryption,
+    string $smtpLogin,
+    string $smtpPassword,
     bool $randomize = false
   )
   {
@@ -109,6 +120,12 @@ class Installer {
     $this->dbName = $dbName;
     $this->dbUser = $dbUser;
     $this->dbPassword = $dbPassword;
+
+    $this->smtpHost = $smtpHost;
+    $this->smtpPort = $smtpPort;
+    $this->smtpEncryption = $smtpEncryption;
+    $this->smtpLogin = $smtpLogin;
+    $this->smtpPassword = $smtpPassword;
 
     $this->randomize = $randomize;
 
@@ -150,6 +167,14 @@ class Installer {
 
   }
 
+  public function initSmtp(): void {
+    $this->main->config->set('smtp_host', $this->smtpHost);
+    $this->main->config->set('smtp_port', $this->smtpPort);
+    $this->main->config->set('smtp_encryption', $this->smtpEncryption);
+    $this->main->config->set('smtp_login', $this->smtpLogin);
+    $this->main->config->set('smtp_password', $this->smtpPassword);
+  }
+
   public function installBaseModels(): void
   {
     (new \HubletoMain\Core\Models\Token($this->main))->install();
@@ -174,7 +199,7 @@ class Installer {
 
     $idUserAdministrator = $mUser->record->recordCreate([
       'login' => $this->adminEmail,
-      'password' => $mUser->hashPassword($this->adminPassword),
+      'password' => $this->adminPassword == '' ? '' : $mUser->hashPassword($this->adminPassword),
       'email' => $this->adminEmail,
       'is_active' => true,
       'id_active_profile' => $idProfile,
@@ -184,6 +209,11 @@ class Installer {
       'id_user' => $idUserAdministrator,
       'id_role' => \HubletoApp\Community\Settings\Models\UserRole::ROLE_ADMINISTRATOR,
     ])['id'];
+
+    if ($this->adminPassword == '' && $this->smtpHost != '') {
+      $this->main->setUrlParam('login', $this->adminEmail);
+      $this->main->auth->forgotPassword();
+    }
   }
 
   public function getConfigEnvContent(): string
@@ -201,6 +231,12 @@ class Installer {
     $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
     $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
     $configEnv = str_replace('{{ enterpriseRepoFolder }}', $this->enterpriseRepoFolder, $configEnv);
+
+    $configEnv = str_replace('{{ smtpHost }}', $this->smtpHost, $configEnv);
+    $configEnv = str_replace('{{ smtpPort }}', $this->smtpPort, $configEnv);
+    $configEnv = str_replace('{{ smtpEncryption }}', $this->smtpEncryption, $configEnv);
+    $configEnv = str_replace('{{ smtpLogin }}', $this->smtpLogin, $configEnv);
+    $configEnv = str_replace('{{ smtpPassword }}', $this->smtpPassword, $configEnv);
 
     if (count($this->externalAppsRepositories) > 0) {
       $configEnv .= '' . "\n";

@@ -52,7 +52,7 @@
         "Unit Price": "",
         "Amount": "",
         "Dicount (%)": "",
-        "Tax (%)": ""
+        "Vat (%)": ""
     },
     "Models\\DealActivity": {
         "Deal": "",
@@ -96,6 +96,6 @@
         "Unit Price": "",
         "Amount": "",
         "Dicount (%)": "",
-        "Tax (%)": ""
+        "Vat (%)": ""
     }
 }

@@ -26,7 +26,7 @@ class OrderProduct extends \HubletoMain\Core\Models\Model
       'unit_price' => (new Decimal($this, $this->translate('Unit price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
       'discount' => (new Integer($this, $this->translate('Discount (%)'))),
-      'tax' => (new Integer($this, $this->translate('Tax (%)')))->setRequired(),
+      'vat' => (new Integer($this, $this->translate('Vat (%)')))->setRequired(),
     ]);
   }
 

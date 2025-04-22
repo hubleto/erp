@@ -70,7 +70,7 @@
         "Unit Price": "",
         "Amount": "",
         "Dicount (%)": "",
-        "Tax (%)": ""
+        "Vat (%)": ""
     },
     "Models\\LeadDocument": {
         "Lead": "",
@@ -95,6 +95,6 @@
         "Unit Price": "",
         "Amount": "",
         "Dicount (%)": "",
-        "Tax (%)": ""
+        "Vat (%)": ""
     }
 }

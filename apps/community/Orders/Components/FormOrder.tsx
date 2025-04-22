@@ -53,7 +53,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     recordProducts.map((product, index) => {
       if (product.unit_price && product.amount && product._toBeDeleted_ != true) {
         var sum = product.unit_price * product.amount;
-        if (product.tax) sum = sum + (sum * (product.tax / 100));
+        if (product.vat) sum = sum + (sum * (product.vat / 100));
         if (product.discount) sum = sum - (sum * (product.discount / 100));
         sumPrice += sum;
       }
@@ -112,7 +112,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                         id_order: { _useMasterRecordId_: true },
                         amount: 1,
                         unit_price: 0,
-                        tax: 0,
+                        vat: 0,
                         discount: 0,
                       });
                       this.setState({ record: R });
@@ -155,7 +155,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                                       if (lookupData[value]) {
                                         data.id_product = value;
                                         data.unit_price = lookupData[value].unit_price;
-                                        data.tax = lookupData[value].tax;
+                                        data.vat = lookupData[value].vat;
                                         this.updateRecord({ PRODUCTS: table.state.data?.data });
                                         this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
                                       }
@@ -167,13 +167,13 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                           },
                           amount: { type: "int", title: "Amount" },
                           unit_price: { type: "float", title: "Unit Price"},
-                          tax: { type: "float", title: "Tax (%)"},
+                          vat: { type: "float", title: "Vat (%)"},
                           discount: { type: "float", title: "Discount (%)" },
-                          __sum: { type: "none", title: "Sum after tax",
+                          __sum: { type: "none", title: "Sum after vat",
                             cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
                               if (data.unit_price && data.amount) {
                                 let sum = data.unit_price * data.amount;
-                                if (data.tax) sum = sum + (sum * (data.tax / 100));
+                                if (data.vat) sum = sum + (sum * (data.vat / 100));
                                 if (data.discount) sum = sum - (sum * (data.discount / 100));
                                 sum = Number(sum.toFixed(2));
                                 return (<><span>{sum + " " + R.CURRENCY.code}</span></>);
@@ -197,7 +197,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                                       if (lookupData[value]) {
                                         data.id_product = value;
                                         data.unit_price = lookupData[value].unit_price;
-                                        data.tax = lookupData[value].tax;
+                                        data.vat = lookupData[value].vat;
                                         this.updateRecord({ PRODUCTS: table.state.data?.data });
                                         this.updateRecord({ price: this.getSumPrice( R.PRODUCTS )});
                                       }
@@ -209,9 +209,9 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                           },
                           amount: { type: "int", title: "Amount" },
                           unit_price: { type: "float", title: "Unit Price"},
-                          tax: { type: "float", title: "Tax (%)"},
+                          vat: { type: "float", title: "Vat (%)"},
                           discount: { type: "float", title: "Discount (%)" },
-                          __sum: { type: "none", title: "Sum after tax" },
+                          __sum: { type: "none", title: "Sum after vat" },
                         }
                       }}
                       onRowClick={() => this.setState({isInlineEditing: true})}

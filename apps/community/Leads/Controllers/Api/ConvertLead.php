@@ -77,14 +77,14 @@ class ConvertLead extends \HubletoMain\Core\Controllers\Controller
 
       $leadProducts = $mLeadProduct->record->where("id_lead", $leadId)->get();
 
-      foreach ($leadProducts as $leadProducts) { //@phpstan-ignore-line
-        $mDealService->record->recordCreate([
-          "id_service" => $leadService->id_service,
+      foreach ($leadProducts as $leadProduct) { //@phpstan-ignore-line
+        $mDealProduct->record->recordCreate([
+          "id_service" => $leadProduct->id_service,
           "id_deal" => $deal['id'],
-          "unit_price" => $leadService->unit_price,
-          "amount" => $leadService->amount,
-          "discount" => $leadService->discount,
-          "tax" => $leadService->tax,
+          "unit_price" => $leadProduct->unit_price,
+          "amount" => $leadProduct->amount,
+          "discount" => $leadProduct->discount,
+          "vat" => $leadProduct->vat,
         ]);
       }
 

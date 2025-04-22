@@ -7,6 +7,7 @@ interface TableProductsProps extends TableProps {}
 interface TableProductsState extends TableState {}
 
 export default class TableProducts extends Table<TableProductsProps, TableProductsState> {
+
   static defaultProps = {
     ...Table.defaultProps,
     itemsPerPage: 15,

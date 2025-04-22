@@ -214,7 +214,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       }
     }
 
-//    $installer->enterpriseRepoFolder = $enterpriseRepoFolder;
+    $installer->enterpriseRepoFolder = $enterpriseRepoFolder;
     $installer->externalAppsRepositories = $externalAppsRepositories;
     
     if (isset($config['extraConfigEnv'])) {

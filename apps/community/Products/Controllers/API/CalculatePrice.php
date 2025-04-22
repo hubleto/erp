@@ -1,35 +1,34 @@
 <?php
 
-namespace HubletoApp\Community\Products\Controllers\API;
+namespace HubletoApp\Community\Products\Controllers\Api;
 
 class CalculatePrice {
 
   // SINGLE PRODUCT FUNCTIONS
-  public function calculatePriceWithAmount(float $unitPrice, float $amount): float {
+  public function calculateFullPrice(float $unitPrice, float $amount): float {
     return $unitPrice * $amount;
   }
 
-  public function calculateTax(float $sumPrice, float $tax): float {
-    return $sumPrice * (1 + $tax / 100);
+  public function calculateVat(float $fullPrice, float $vat): float {
+    return $fullPrice * $vat / 100;
   }
 
-  public function calculateDiscount(float $sumPrice, float $discount): float {
-    return $sumPrice * (1 - $discount / 100);
+  public function calculateDiscountedPrice(float $fullPrice, float $discount): float {
+    return $fullPrice * (1 - $discount / 100);
   }
 
-  public function calculatePriceBeforeTax(float $unitPrice, float $amount, float $discount = 0): float {
-    $sumPrice = $this->calculatePriceWithAmount($unitPrice, $amount);
-    if ($discount > 0) $sumPrice = $this->calculateDiscount($sumPrice, $discount);
+  public function calculatePriceExcludingVat(float $unitPrice, float $amount, float $discount = 0): float {
+    $fullPrice = $this->calculateFullPrice($unitPrice, $amount);
+    $finalPrice = $this->calculateDiscountedPrice($fullPrice, $discount);
 
-    return $sumPrice;
+    return $finalPrice;
   }
 
-  public function calculatePriceAfterTax(float $unitPrice, float $amount, float $tax = 0, float $discount = 0): float {
-    $sumPrice = $this->calculatePriceWithAmount($unitPrice, $amount);
-    if ($discount > 0) $sumPrice = $this->calculateDiscount($sumPrice, $discount);
-    if ($tax > 0) $sumPrice = $this->calculateTax($sumPrice, $tax);
+  public function calculatePriceIncludingVat(float $unitPrice, float $amount, float $vat = 0, float $discount = 0): float {
+    $discountedPrice = $this->calculatePriceExcludingVat($unitPrice, $amount, $discount);
+    $finalPrice = $discountedPrice + $this->calculateVat($discountedPrice, $vat);
 
-    return $sumPrice;
+    return $finalPrice;
   }
 
   //MULTI-PRODUCT FUNCTIONS

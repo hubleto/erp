@@ -61,7 +61,7 @@ class Lead extends \HubletoMain\Core\RecordManager
   public function PRODUCTS(): HasMany {
     return $this->hasMany(LeadProduct::class, 'id_lead', 'id')
         ->whereHas("PRODUCT", function ($query) {
-          $query->where('type', 1);
+          $query->where('type', \HubletoApp\Community\Products\Models\Product::TYPE_PRODUCT);
       });
     ;
   }
@@ -70,7 +70,7 @@ class Lead extends \HubletoMain\Core\RecordManager
   public function SERVICES(): HasMany {
     return $this->hasMany(LeadProduct::class, 'id_lead', 'id')
         ->whereHas("PRODUCT", function ($query) {
-          $query->where('type', 2);
+          $query->where('type', \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
       });
     ;
   }

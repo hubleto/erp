@@ -13,7 +13,7 @@ use ADIOS\Core\Db\Column\Varchar;
 use HubletoApp\Community\Contacts\Models\Person;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Products\Controllers\API\CalculatePrice;
+use HubletoApp\Community\Products\Controllers\Api\CalculatePrice;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Setting;
 use HubletoApp\Community\Settings\Models\User;
@@ -226,10 +226,10 @@ class Lead extends \HubletoMain\Core\Models\Model
 
     foreach ($allProducts as $product) {
       if (!isset($product["_toBeDeleted_"])) {
-        $sums += $calculator->calculatePriceAfterTax(
+        $sums += $calculator->calculatePriceIncludingVat(
           $product["unit_price"],
           $product["amount"],
-          $product["tax"] ?? 0,
+          $product["vat"] ?? 0,
           $product["discount"] ?? 0
         );
       }

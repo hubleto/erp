@@ -13,6 +13,9 @@ use ADIOS\Core\Db\Column\Varchar;
 
 class Product extends \HubletoMain\Core\Models\Model
 {
+  const TYPE_PRODUCT = 1;
+  const TYPE_SERVICE = 2;
+
   public string $table = 'products';
   public string $recordManagerClass = RecordManagers\Product::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
@@ -28,7 +31,7 @@ class Product extends \HubletoMain\Core\Models\Model
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_product_group' => (new Lookup($this, $this->translate('Product Group'), Group::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'type' => (new Integer($this, $this->translate('Product Type')))->setRequired()->setEnumValues(
-        [1 => "Single Item", 2 => "Service"]
+        [$this::TYPE_PRODUCT => "Single Item", $this::TYPE_SERVICE => "Service"]
       ),
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'is_on_sale' => new Boolean($this, $this->translate('On sale')),
@@ -37,7 +40,7 @@ class Product extends \HubletoMain\Core\Models\Model
       'count_in_package' => new Decimal($this, $this->translate('Number of items in package')),
       'unit_price' => (new Decimal($this, $this->translate('Single unit price')))->setRequired(),
       'margin' => (new Decimal($this, $this->translate('Margin')))->setUnit("%"),
-      'tax' => (new Decimal($this, $this->translate('Tax')))->setUnit("%")->setRequired(),
+      'vat' => (new Decimal($this, $this->translate('Vat')))->setUnit("%")->setRequired(),
       'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
       'unit' => new Varchar($this, $this->translate('Unit')),
       'packaging' => new Varchar($this, $this->translate('Packaging')),

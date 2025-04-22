@@ -6,7 +6,7 @@ use ADIOS\Core\Db\Column\Decimal;
 use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\Lookup;
 use HubletoApp\Community\Products\Models\Product;
-use HubletoApp\Community\Products\Controllers\API\CalculatePrice;
+use HubletoApp\Community\Products\Controllers\Api\CalculatePrice;
 
 class LeadProduct extends \HubletoMain\Core\Models\Model
 {
@@ -26,7 +26,7 @@ class LeadProduct extends \HubletoMain\Core\Models\Model
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate("CASCADE")->setFkOnDelete("SET NULL")->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
-      'tax' => (new Decimal($this, $this->translate('Tax')))->setUnit("%"),
+      'vat' => (new Decimal($this, $this->translate('Vat')))->setUnit("%"),
       'discount' => (new Decimal($this, $this->translate('Discount')))->setUnit("%"),
       'sum' => new Decimal($this, $this->translate('Sum')),
     ]);
@@ -52,15 +52,15 @@ class LeadProduct extends \HubletoMain\Core\Models\Model
 
   public function onBeforeCreate(array $record): array
   {
-    $record["sum"] = (new CalculatePrice())->calculatePriceAfterTax(
-      $record["unit_price"], $record["amount"], $record["tax"] ?? 0, $record["discount"] ?? 0
+    $record["sum"] = (new CalculatePrice())->calculatePriceIncludingVat(
+      $record["unit_price"], $record["amount"], $record["vat"] ?? 0, $record["discount"] ?? 0
     );
     return $record;
   }
   public function onBeforeUpdate(array $record): array
   {
-    $record["sum"] = (new CalculatePrice())->calculatePriceAfterTax(
-      $record["unit_price"], $record["amount"], $record["tax"] ?? 0, $record["discount"] ?? 0
+    $record["sum"] = (new CalculatePrice())->calculatePriceIncludingVat(
+      $record["unit_price"], $record["amount"], $record["vat"] ?? 0, $record["discount"] ?? 0
     );
     return $record;
   }

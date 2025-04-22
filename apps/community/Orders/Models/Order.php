@@ -99,7 +99,7 @@ class Order extends \HubletoMain\Core\Models\Model
       foreach ($originalRecord["PRODUCTS"] as $product) {
         if (isset($product["_toBeDeleted_"])) continue;
         $productTitle = (string) $mProduct->record->find((int) $product["id_product"])->title;
-        $longDescription .=  "{$productTitle} - Amount: ".(string) $product["amount"]." - Unit Price: ".(string) $product["unit_price"]." - Tax: ".(string) $product["tax"]." - Discount: ".(string) $product["discount"]." \n\n";
+        $longDescription .=  "{$productTitle} - Amount: ".(string) $product["amount"]." - Unit Price: ".(string) $product["unit_price"]." - Vat: ".(string) $product["vat"]." - Discount: ".(string) $product["discount"]." \n\n";
       }
     }
 

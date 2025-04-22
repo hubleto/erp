@@ -115,19 +115,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     return <small>{this.translate('Lead')}</small>;
   }
 
-  getSumPrice(recordProducts: any) {
-    var sumPrice = 0;
-    recordProducts.map((product, index) => {
-      if (product.unit_price && product.amount && product._toBeDeleted_ != true) {
-        var sum = product.unit_price * product.amount;
-        if (product.tax) sum = sum + (sum * (product.tax / 100));
-        if (product.discount) sum = sum - (sum * (product.discount / 100));
-        sumPrice += sum;
-      }
-    });
-    return Number(sumPrice.toFixed(2));
-  }
-
   pipelineChange(idPipeline: number) {
     request.get(
       'deals/change-pipeline',
@@ -416,7 +403,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                               if (lookupData[value]) {
                                                 data.id_product = value;
                                                 data.unit_price = lookupData[value].unit_price;
-                                                data.tax = lookupData[value].tax;
+                                                data.vat = lookupData[value].vat;
                                                 this.updateRecord({ SERVICES: table.state.data?.data });
                                               }
                                             }}
@@ -428,14 +415,14 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                   unit_price: { type: "float", title: "Service Price",},
                                   amount: { type: "int", title: "Commitment" },
                                   discount: { type: "float", title: "Discount (%)"},
-                                  tax: { type: "float", title: "Tax (%)"},
+                                  vat: { type: "float", title: "Vat (%)"},
                                   sum: { type: "float", title: "Sum"},
                                 },
                                 inputs: {
                                   id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
                                   unit_price: { type: "float", title: "Unit Price"},
                                   amount: { type: "int", title: "Amount"},
-                                  tax: { type: "float", title: "Tax (%)"},
+                                  vat: { type: "float", title: "Vat (%)"},
                                   discount: { type: "float", title: "Discount (%)"},
                                   sum: { type: "float", title: "Sum"},
                                 },
@@ -474,7 +461,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                               if (lookupData[value]) {
                                                 data.id_product = value;
                                                 data.unit_price = lookupData[value].unit_price;
-                                                data.tax = lookupData[value].tax;
+                                                data.vat = lookupData[value].vat;
                                                 this.updateRecord({ PRODUCTS: table.state.data?.data });
                                               }
                                             }}
@@ -486,14 +473,14 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                   unit_price: { type: "float", title: "Unit Price",},
                                   amount: { type: "int", title: "Amount" },
                                   discount: { type: "float", title: "Discount (%)"},
-                                  tax: { type: "float", title: "Tax (%)"},
+                                  vat: { type: "float", title: "Vat (%)"},
                                   sum: { type: "float", title: "Sum"},
                                 },
                                 inputs: {
                                   id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
                                   unit_price: { type: "float", title: "Unit Price"},
                                   amount: { type: "int", title: "Amount"},
-                                  tax: { type: "float", title: "Tax (%)"},
+                                  vat: { type: "float", title: "Vat (%)"},
                                   discount: { type: "float", title: "Discount (%)"},
                                   sum: { type: "float", title: "Sum"},
                                 },

@@ -25,8 +25,8 @@ class Product extends \HubletoMain\Core\RecordManager
     $query = parent::prepareReadQuery($query, $level);
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
-    if ($main->urlParamAsBool("getServices") == true) $query = $query->where("type", 2);
-    else if ($main->urlParamAsBool("getProducts") == true) $query = $query->where("type", 1);
+    if ($main->urlParamAsBool("getServices") == true) $query = $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
+    else if ($main->urlParamAsBool("getProducts") == true) $query = $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_PRODUCT);
 
     return $query;
   }

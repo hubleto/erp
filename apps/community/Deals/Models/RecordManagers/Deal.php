@@ -68,7 +68,7 @@ class Deal extends \HubletoMain\Core\RecordManager
   public function PRODUCTS(): HasMany {
     return $this->hasMany(DealProduct::class, 'id_deal', 'id')
         ->whereHas("PRODUCT", function ($query) {
-          $query->where('type', 1);
+          $query->where('type', \HubletoApp\Community\Products\Models\Product::TYPE_PRODUCT);
       });
     ;
   }
@@ -77,7 +77,7 @@ class Deal extends \HubletoMain\Core\RecordManager
   public function SERVICES(): HasMany {
     return $this->hasMany(DealProduct::class, 'id_deal', 'id')
         ->whereHas("PRODUCT", function ($query) {
-          $query->where('type', 2);
+          $query->where('type', \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
       });
     ;
   }

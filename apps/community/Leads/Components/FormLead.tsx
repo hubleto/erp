@@ -13,7 +13,6 @@ import ModalSimple from 'adios/ModalSimple';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import Hyperlink from 'adios/Inputs/Hyperlink';
-import Int from 'adios/Inputs/Int';
 
 export interface FormLeadProps extends HubletoFormProps {
   newEntryId?: number,
@@ -395,7 +394,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                                         if (lookupData[value]) {
                                           data.id_product = value;
                                           data.unit_price = lookupData[value].unit_price;
-                                          data.tax = lookupData[value].tax;
+                                          data.vat = lookupData[value].vat;
                                           this.updateRecord({ SERVICES: table.state.data?.data });
                                         }
                                       }}
@@ -407,14 +406,14 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                             unit_price: { type: "float", title: "Service Price",},
                             amount: { type: "int", title: "Commitment" },
                             discount: { type: "float", title: "Discount (%)"},
-                            tax: { type: "float", title: "Tax (%)"},
+                            vat: { type: "float", title: "Vat (%)"},
                             sum: { type: "float", title: "Sum"},
                           },
                           inputs: {
                             id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
                             unit_price: { type: "float", title: "Unit Price"},
                             amount: { type: "int", title: "Amount"},
-                            tax: { type: "float", title: "Tax (%)"},
+                            vat: { type: "float", title: "Vat (%)"},
                             discount: { type: "float", title: "Discount (%)"},
                             sum: { type: "float", title: "Sum"},
                           },
@@ -453,7 +452,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                                         if (lookupData[value]) {
                                           data.id_product = value;
                                           data.unit_price = lookupData[value].unit_price;
-                                          data.tax = lookupData[value].tax;
+                                          data.vat = lookupData[value].vat;
                                           this.updateRecord({ PRODUCTS: table.state.data?.data });
                                         }
                                       }}
@@ -465,14 +464,14 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                             unit_price: { type: "float", title: "Unit Price",},
                             amount: { type: "int", title: "Amount" },
                             discount: { type: "float", title: "Discount (%)"},
-                            tax: { type: "float", title: "Tax (%)"},
+                            vat: { type: "float", title: "Vat (%)"},
                             sum: { type: "float", title: "Sum"},
                           },
                           inputs: {
                             id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
                             unit_price: { type: "float", title: "Unit Price"},
                             amount: { type: "int", title: "Amount"},
-                            tax: { type: "float", title: "Tax (%)"},
+                            vat: { type: "float", title: "Vat (%)"},
                             discount: { type: "float", title: "Discount (%)"},
                             sum: { type: "float", title: "Sum"},
                           },

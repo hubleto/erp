@@ -23,7 +23,7 @@
         "Unit price": "Jednotková cena",
         "Amount": "Množstvo",
         "Discount (%)": "Zľava",
-        "Tax (%)": "Daň",
+        "Vat (%)": "Daň",
         "Add product": "Pridať podukt"
     },
     "Models\\History": {

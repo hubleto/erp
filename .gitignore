@@ -12,3 +12,4 @@
 /apps/external/*
 !/apps/external/README.md
 /repositories.tsx
+/.vscode

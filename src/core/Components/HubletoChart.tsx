@@ -24,7 +24,18 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
   }
 
   render(): JSX.Element {
+    let labels: any = [];
+    let dataset: any = {};
+
+    labels = this.props.data ? [...this.props.data.labels] : [];
+
+    dataset.data = this.props.data != null ? [...this.props.data.values] : [];
+    if (this.props.data.colors) dataset.backgroundColor = this.props.data.colors;
+
     console.log('hubletoChart data', this.props.data);
+    console.log('hubletoChart labels', labels);
+    console.log('hubletoChart dataset', dataset);
+
     switch (this.props.type) {
       case "bar":
         return (
@@ -44,13 +55,8 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
               },
             }}
             data={{
-              labels: this.props.data != null ? [...this.props.data.labels] : [],
-              datasets: [
-                {
-                  data: this.props.data != null ? [...this.props.data.values] : [],
-                  backgroundColor: this.props.data != null ? [...this.props.data.colors] : [],
-                },
-              ],
+              labels: labels,
+              datasets: [ dataset ],
             }}
           />
         );
@@ -67,13 +73,8 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
                 },
               }}
               data={{
-                labels: this.props.data ? [...this.props.data.labels] : [],
-                datasets: [
-                  {
-                    data: this.props.data ? [...this.props.data.values] : [],
-                    backgroundColor: this.props.data != null ? [...this.props.data.colors] : [],
-                  },
-                ],
+                labels: labels,
+                datasets: [ dataset ],
               }}
             />
           </div>
@@ -92,13 +93,8 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
                 },
               }}
               data={{
-                labels: this.props.data ? [...this.props.data.labels] : [],
-                datasets: [
-                  {
-                    data: this.props.data ? [...this.props.data.values] : [],
-                    backgroundColor: this.props.data != null ? [...this.props.data.colors] : [],
-                  },
-                ],
+                labels: labels,
+                datasets: [ dataset ],
               }}
             />
           </div>

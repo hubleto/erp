@@ -3,6 +3,7 @@
 namespace HubletoApp\Community\Leads\Models;
 
 use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\Date;
 use ADIOS\Core\Db\Column\DateTime;
 use ADIOS\Core\Db\Column\Decimal;
@@ -46,6 +47,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'price' => (new Decimal($this, $this->translate('Price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
+      'score' => (new Integer($this, $this->translate('Score')))->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
       'date_created' => (new DateTime($this, $this->translate('Date created')))->setRequired()->setReadonly(),

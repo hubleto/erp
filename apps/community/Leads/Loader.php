@@ -19,6 +19,7 @@ class Loader extends \HubletoMain\Core\App
       '/^leads\/convert-to-deal\/?$/' => Controllers\Api\ConvertLead::class,
       '/^settings\/lead-statuses\/?$/' => Controllers\LeadStatuses::class,
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
+      '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
     ]);
 
     $this->main->addSetting($this, [
@@ -34,6 +35,15 @@ class Loader extends \HubletoMain\Core\App
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
     $calendarManager->addCalendar(Calendar::class);
+
+    $dashboard = $this->main->apps->community('Desktop')->dashboard;
+
+    if ($this->configAsBool('showLeadValueByScoreInDashboard')) {
+      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
+        'Lead value by score',
+        'leads/boards/lead-value-by-score',
+      ));
+    }
 
     $this->main->apps->community('Help')->addContextHelpUrls('/^leads\/?$/', [
       'en' => 'en/apps/community/leads',

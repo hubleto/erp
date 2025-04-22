@@ -570,6 +570,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "is_archived" => false,
         "id_lead_status" => rand(1,4),
         "date_created" => $leadDateCreated,
+        "score" => rand(1, 10),
       ])['id'];
 
       $mLeadHistory->record->recordCreate([

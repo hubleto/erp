@@ -12,10 +12,6 @@
         "Leads": "Leady",
         "Archive": "Archív"
     },
-    "Controllers\\LeadStatuses": {
-        "Settings": "",
-        "Lead Statuses": ""
-    },
     "Models\\LeadActivity": {
         "Activity type": "",
         "Subject": "",
@@ -28,11 +24,6 @@
         "All day": "",
         "Completed": "",
         "Created by": ""
-    },
-    "Models\\LeadStatus": {
-        "Name": "Stav",
-        "Order": "Poradie",
-        "Color": "Farba"
     },
     "Models\\Lead": {
         "Add Lead": "Pridať lead",

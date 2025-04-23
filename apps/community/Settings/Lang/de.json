@@ -31,11 +31,6 @@
         "Currency Name": "Währung",
         "Currency Code": "Code"
     },
-    "models.leadStatus": {
-        "Name": "Titel",
-        "Order": "Reihenfolge",
-        "Color": "Farbe"
-    },
     "models.pipeline": {
         "Name": "Titel",
         "Description": "Beschreibung"
@@ -124,11 +119,6 @@
         "Color": "",
         "Shown in Calendar": "",
         "Icon": ""
-    },
-    "models.leadstatus": {
-        "Name": "",
-        "Order": "",
-        "Color": ""
     },
     "models.pipelinestep": {
         "Name": "",

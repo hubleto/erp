@@ -75,6 +75,9 @@ class ConvertLead extends \HubletoMain\Core\Controllers\Controller
         "id_pipeline_step" => $defaultPipelineFirstStep ?? null,
       ]);
 
+      $lead->status = $mLead::STATUS_COMPLETED;
+      $lead->save();
+
       $leadProducts = $mLeadProduct->record->where("id_lead", $leadId)->get();
 
       foreach ($leadProducts as $leadProduct) { //@phpstan-ignore-line

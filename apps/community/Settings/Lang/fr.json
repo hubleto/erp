@@ -31,11 +31,6 @@
         "Currency Name": "Nom de devise",
         "Currency Code": "Code de devise"
     },
-    "models.leadStatus": {
-        "Name": "Nom",
-        "Order": "Ordre",
-        "Color": "Couleur"
-    },
     "models.pipeline": {
         "Name": "Nom",
         "Description": "Description"

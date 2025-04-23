@@ -31,11 +31,6 @@
         "Currency Name": "Waluta",
         "Currency Code": "Kod"
     },
-    "models.leadStatus": {
-        "Name": "Nazwa",
-        "Order": "Zamówienie",
-        "Color": "Kolor"
-    },
     "models.pipeline": {
         "Name": "Nazwa",
         "Description": "Opis"

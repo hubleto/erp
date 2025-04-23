@@ -17,16 +17,10 @@ class Loader extends \HubletoMain\Core\App
       '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
       '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^leads\/convert-to-deal\/?$/' => Controllers\Api\ConvertLead::class,
-      '/^settings\/lead-statuses\/?$/' => Controllers\LeadStatuses::class,
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
     ]);
 
-    $this->main->addSetting($this, [
-      'title' => $this->translate('Lead statuses'),
-      'icon' => 'fas fa-arrow-up-short-wide',
-      'url' => 'settings/lead-statuses',
-    ]);
     $this->main->addSetting($this, [
       'title' => $this->translate('Lead Tags'),
       'icon' => 'fas fa-tags',
@@ -53,7 +47,6 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mLeadStatus = new Models\LeadStatus($this->main);
       $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
       $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
       $mLeadTag = new \HubletoApp\Community\Leads\Models\Tag($this->main);
@@ -62,7 +55,6 @@ class Loader extends \HubletoMain\Core\App
       $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
       $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
 
-      $mLeadStatus->dropTableIfExists()->install();
       $mLead->dropTableIfExists()->install();
       $mLeadHistory->dropTableIfExists()->install();
       $mLeadTag->dropTableIfExists()->install();
@@ -75,11 +67,6 @@ class Loader extends \HubletoMain\Core\App
       $mLeadTag->record->recordCreate([ 'name' => "Great opportunity", 'color' => '#4caf50' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Duplicate", 'color' => '#9e9e9e' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Needs attention", 'color' => '#795548' ]);
-
-      $mLeadStatus->record->recordCreate([ 'name' => 'New', 'order' => 1, 'color' => '#f55442' ]);
-      $mLeadStatus->record->recordCreate([ 'name' => 'In Progress', 'order' => 2, 'color' => '#f5bc42' ]);
-      $mLeadStatus->record->recordCreate([ 'name' => 'Completed', 'order' => 3, 'color' => '#42ddf5' ]);
-      $mLeadStatus->record->recordCreate([ 'name' => 'Lost', 'order' => 4, 'color' => '#f55442' ]);
     }
   }
 
@@ -112,11 +99,6 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Leads/Models/LeadProduct:Update",
       "HubletoApp/Community/Leads/Models/LeadProduct:Delete",
 
-      "HubletoApp/Community/Leads/Models/LeadStatus:Create",
-      "HubletoApp/Community/Leads/Models/LeadStatus:Read",
-      "HubletoApp/Community/Leads/Models/LeadStatus:Update",
-      "HubletoApp/Community/Leads/Models/LeadStatus:Delete",
-
       "HubletoApp/Community/Leads/Models/LeadTag:Create",
       "HubletoApp/Community/Leads/Models/LeadTag:Read",
       "HubletoApp/Community/Leads/Models/LeadTag:Update",
@@ -124,7 +106,6 @@ class Loader extends \HubletoMain\Core\App
 
       "HubletoApp/Community/Leads/Controllers/Leads",
       "HubletoApp/Community/Leads/Controllers/LeadsArchive",
-      "HubletoApp/Community/Leads/Controllers/LeadStatuses",
 
       "HubletoApp/Community/Leads/Api/ConvertLead",
       "HubletoApp/Community/Leads/Api/GetCalendarEvents",

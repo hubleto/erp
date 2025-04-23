@@ -2,6 +2,7 @@
 
 namespace HubletoMain\Core\Controllers;
 
+use HubletoApp\Community\Settings\Models\User;
 use HubletoMain\Core\Models\Token;
 
 class ControllerResetPassword extends \ADIOS\Core\Controller {
@@ -44,7 +45,15 @@ class ControllerResetPassword extends \ADIOS\Core\Controller {
       }
     }
 
-    $this->setView('@hubleto/ResetPassword.twig', ['status' => false]);
+    $login = $mToken->record
+      ->where('token', $_GET['token'])
+      ->where('valid_to', '>', date('Y-m-d H:i:s'))
+      ->where('type', 'reset-password')->first()->login;
+
+    $mUser = new User($this->app);
+    $passwordHash = $mUser->record->where('login', $login)->first()->password;
+
+    $this->setView('@hubleto/ResetPassword.twig', ['status' => false, 'welcome' => $passwordHash == '']);
   }
 
 }

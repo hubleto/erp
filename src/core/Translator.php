@@ -18,7 +18,7 @@ class Translator extends \ADIOS\Core\Translator {
 
   //   $language = $this->main->getLanguage();
 
-  //   foreach ($this->main->apps->getRegisteredApps() as $app) {
+  //   foreach ($this->main->apps->getEnabledApps() as $app) {
   //     if (str_starts_with($context, $app->fullName)) {
   //       $dictionaryFilename = $app->rootFolder . '/Lang/' . $language . '.json';
   //     }
@@ -91,7 +91,7 @@ class Translator extends \ADIOS\Core\Translator {
     }
 
     if (isset($this->main->apps)) {
-      foreach ($this->main->apps->getRegisteredApps() as $app) {
+      foreach ($this->main->apps->getEnabledApps() as $app) {
         $appDict = $app->loadDictionary($language);
         foreach ($appDict as $key => $value) {
           $dictionary[$app->fullName][(string) $key] = $value;

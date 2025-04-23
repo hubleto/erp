@@ -5,6 +5,8 @@ namespace HubletoApp\Community\Help;
 class Loader extends \HubletoMain\Core\App
 {
 
+  public bool $canBeDisabled = false;
+
   /** @var array<string, string> */
   public array $hotTips = [];
 

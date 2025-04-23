@@ -9,7 +9,10 @@ class AppManager
   public \HubletoMain\Cli\Agent\Loader|null $cli;
 
   /** @var array<\HubletoMain\Core\App> */
-  public array $apps = [];
+  protected array $apps = [];
+
+  /** @var array<\HubletoMain\Core\App> */
+  protected array $disabledApps = [];
 
   /** @var array<string> */
   public array $registeredAppNamespaces = [];
@@ -26,12 +29,21 @@ class AppManager
     foreach ($this->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
       $appNamespace = (string) $appNamespace;
       $appClass = $appNamespace . '\\Loader';
-      if (is_array($appConfig) && $appClass::canBeAdded($this->main)) {
-        $this->registerApp($appNamespace);
+      if (
+        is_array($appConfig)
+        && $appClass::canBeAdded($this->main)
+      ) {
+        // $this->registerApp($appNamespace);
+        if ($appConfig['enabled'] ?? false) {
+          $this->apps[$appNamespace] = $this->createAppInstance($appNamespace);
+          $this->apps[$appNamespace]->enabled = true;
+        } else {
+          $this->disabledApps[$appNamespace] = $this->createAppInstance($appNamespace);
+        }
       }
     }
 
-    $apps = $this->getRegisteredApps();
+    $apps = $this->getEnabledApps();
     array_walk($apps, function($app) {
       $app->init();
     });
@@ -43,9 +55,41 @@ class AppManager
     $this->cli = $cli;
   }
 
-  public function getAppNameForConfig(string $appNamespace): string
+  public function getAppNamespaceForConfig(string $appNamespace): string
   {
     return trim($appNamespace, '\\');
+  }
+
+  public function getAvailableApps(): array
+  {
+    $appNamespaces = [];
+
+    // community apps
+    $communityRepoFolder = $this->main->config->getAsString('dir') . '/apps/community';
+    if (!empty($communityRepoFolder)) {
+
+      foreach (scandir($communityRepoFolder) as $appFolder) {
+        $manifestFile = $communityRepoFolder . '/' . $appFolder . '/manifest.yaml';
+        if (is_file($manifestFile)) {
+          $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
+          $appNamespaces['HubletoApp\\Community\\' . $appFolder] = $manifest;
+        }
+      }
+    }
+
+    // enterprise apps
+    $enterpriseRepoFolder = $this->main->config->getAsString('enterpriseRepoFolder');
+    if (!empty($enterpriseRepoFolder)) {
+      foreach (scandir($enterpriseRepoFolder) as $appFolder) {
+        $manifestFile = $enterpriseRepoFolder . '/' . $appFolder . '/manifest.yaml';
+        if (is_file($manifestFile)) {
+          $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
+          $appNamespaces['HubletoApp\\Enterprise\\' . $appFolder] = $manifest;
+        }
+      }
+    }
+
+    return $appNamespaces;
   }
 
   public function getInstalledAppNamespaces(): array
@@ -64,7 +108,7 @@ class AppManager
   public function getAppConfig(string $appNamespace): array
   {
     $appNamespaces = $this->getInstalledAppNamespaces();
-    $key = $this->getAppNameForConfig($appNamespace);
+    $key = $this->getAppNamespaceForConfig($appNamespace);
     if (isset($apps[$key]) && is_array($appNamespaces[$key])) return $appNamespaces[$key];
     else return [];
   }
@@ -77,29 +121,37 @@ class AppManager
     return $app; // @phpstan-ignore-line
   }
 
-  public function isAppRegistered(string $appNamespace): bool
-  {
-    return in_array($appNamespace, $this->registeredAppNamespaces);
-  }
+  // public function isAppInstalled(string $appNamespace): bool
+  // {
+  //   return in_array($appNamespace, $this->registeredAppNamespaces);
+  // }
 
-  public function registerApp(string $appNamespace, bool $force = true): void
+  // public function registerApp(string $appNamespace, bool $force = true): void
+  // {
+  //   if ($force || !$this->isAppInstalled($appNamespace)) {
+  //     $this->apps[$appNamespace] = $this->createAppInstance($appNamespace);
+  //   }
+  // }
+
+  /**
+  * @return array<\HubletoMain\Core\App>
+  */
+  public function getEnabledApps(): array
   {
-    if ($force || !$this->isAppRegistered($appNamespace)) {
-      $this->apps[$appNamespace] = $this->createAppInstance($appNamespace);
-    }
+    return $this->apps;
   }
 
   /**
   * @return array<\HubletoMain\Core\App>
   */
-  public function getRegisteredApps(): array
+  public function getDisabledApps(): array
   {
-    return $this->apps;
+    return $this->disabledApps;
   }
 
   public function getActivatedApp(): \HubletoMain\Core\App|null
   {
-    $apps = $this->getRegisteredApps();
+    $apps = $this->getEnabledApps();
     foreach ($apps as $app) {
       if (str_starts_with($this->main->requestedUri, $app->getRootUrlSlug())) {
         return $app;
@@ -126,7 +178,7 @@ class AppManager
   }
 
   /** @param array<string, mixed> $appConfig */
-  public function installApp(int $round, string $appNamespace, array $appConfig, bool $forceInstall = false): bool
+  public function installApp(int $round, string $appNamespace, array $appConfig = [], bool $forceInstall = false): bool
   {
 
     if (str_ends_with($appNamespace, '\\Loader')) $appNamespace = substr($appNamespace, 0, -7);
@@ -142,17 +194,17 @@ class AppManager
     $app = $this->createAppInstance($appNamespace);
     if (!file_exists($app->rootFolder . '/manifest.yaml')) throw new \Exception("{$appNamespace} does not provide manifest.yaml file.");
 
-    // $manifestFile = (string) file_get_contents($app->rootFolder . '/manifest.yaml');
-    // $manifest = (array) \Symfony\Component\Yaml\Yaml::parse($manifestFile);
-    // $dependencies = (array) ($manifest['requires'] ?? []);
+    $manifestFile = (string) file_get_contents($app->rootFolder . '/manifest.yaml');
+    $manifest = (array) \Symfony\Component\Yaml\Yaml::parse($manifestFile);
+    $dependencies = (array) ($manifest['requires'] ?? []);
 
-    // foreach ($dependencies as $dependencyAppNamespace) {
-    //   $dependencyAppNamespace = (string) $dependencyAppNamespace;
-    //   if (!$this->isAppInstalled($dependencyAppNamespace)) {
-    //     if ($this->cli) $this->cli->cyan("Installing dependency {$dependencyAppNamespace}.\n");
-    //     $this->installApp($dependencyAppNamespace, [], $forceInstall);
-    //   }
-    // }
+    foreach ($dependencies as $dependencyAppNamespace) {
+      $dependencyAppNamespace = (string) $dependencyAppNamespace;
+      if (!$this->isAppInstalled($dependencyAppNamespace)) {
+        if ($this->cli) $this->cli->cyan("    -> Installing dependency {$dependencyAppNamespace}.\n");
+        $this->installApp($round, $dependencyAppNamespace, [], $forceInstall);
+      }
+    }
 
     $app->installTables($round);
 
@@ -161,7 +213,7 @@ class AppManager
 
       $app->installDefaultPermissions();
 
-      $appNameForConfig = $this->getAppNameForConfig($appNamespace);
+      $appNameForConfig = $this->getAppNamespaceForConfig($appNamespace);
 
       if (!in_array($appNamespace, $this->getInstalledAppNamespaces())) {
         $this->main->config->set('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
@@ -181,7 +233,12 @@ class AppManager
 
   public function disableApp(string $appNamespace): void
   {
-    $this->main->config->save('apps/' . $this->getAppNameForConfig($appNamespace) . '/enabled', '0');
+    $this->main->config->save('apps/' . $this->getAppNamespaceForConfig($appNamespace) . '/enabled', '0');
+  }
+
+  public function enableApp(string $appNamespace): void
+  {
+    $this->main->config->save('apps/' . $this->getAppNamespaceForConfig($appNamespace) . '/enabled', '1');
   }
 
   public function testApp(string $appNamespace, string $test): void

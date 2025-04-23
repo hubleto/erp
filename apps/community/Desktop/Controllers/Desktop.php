@@ -9,7 +9,7 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
 
-    $appsInSidebar = $this->main->apps->getRegisteredApps();
+    $appsInSidebar = $this->main->apps->getEnabledApps();
     $activatedApp = null;
 
     foreach ($appsInSidebar as $appNamespace => $app) {

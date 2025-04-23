@@ -9,6 +9,8 @@ class Loader extends \HubletoMain\Core\App
     'sidebarOrder' => 0,
   ];
 
+  public bool $canBeDisabled = false;
+
   public SidebarManager $sidebar;
   public AppMenuManager $appMenu;
   public DashboardManager $dashboardManager;

@@ -301,7 +301,7 @@ class Installer {
 
   public function installDefaultPermissions(): void
   {
-    $apps = $this->main->apps->getRegisteredApps();
+    $apps = $this->main->apps->getEnabledApps();
     array_walk($apps, function($apps) {
       $apps->installDefaultPermissions();
     });

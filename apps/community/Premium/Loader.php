@@ -5,11 +5,7 @@ namespace HubletoApp\Community\Premium;
 class Loader extends \HubletoMain\Core\App
 {
 
-
-  // public static function canBeAdded(\HubletoMain $main): bool
-  // {
-  //   return !$main->isPremium;
-  // }
+  public bool $canBeDisabled = false;
 
   public function __construct(\HubletoMain $main)
   {

@@ -18,6 +18,9 @@ class App {
 
   public array $manifest = [];
 
+  public bool $enabled = false;
+  public bool $canBeDisabled = true;
+
   public string $rootFolder = '';
   public string $viewNamespace = '';
   public string $namespace = '';
@@ -183,7 +186,7 @@ class App {
 
   public function getFullConfigPath(string $path): string
   {
-    return 'apps/' . $this->main->apps->getAppNameForConfig($this->namespace) . '/' . $path;
+    return 'apps/' . $this->main->apps->getAppNamespaceForConfig($this->namespace) . '/' . $path;
   }
 
   public function saveConfig(string $path, string $value = ''): void

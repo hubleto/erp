@@ -8,6 +8,10 @@ class App {
     'sidebarOrder' => 500,
   ];
 
+  const APP_TYPE_COMMUNITY = 1;
+  const APP_TYPE_ENTERPRISE = 2;
+  const APP_TYPE_EXTERNAL = 3;
+
   public \HubletoMain $main;
   public \HubletoMain\Cli\Agent\Loader|null $cli;
 
@@ -46,13 +50,18 @@ class App {
     $this->namespace = $reflection->getNamespaceName();
     $this->fullName = $reflection->getName();
     $this->translationContext = trim(str_replace('\\', '/', $this->fullName), '/');
-
+    
     $this->viewNamespace = $this->namespace;
     $this->viewNamespace = str_replace('\\', ':', $this->viewNamespace);
 
     $manifestFile = $this->rootFolder . '/manifest.yaml';
     if (is_file($manifestFile)) $this->manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($manifestFile));
     else $this->manifest = [];
+
+    if (str_starts_with($this->namespace, 'HubletoApp\\Community')) $this->manifest['appType'] = self::APP_TYPE_COMMUNITY;
+    if (str_starts_with($this->namespace, 'HubletoApp\\Enterprise')) $this->manifest['appType'] = self::APP_TYPE_ENTERPRISE;
+    if (str_starts_with($this->namespace, 'HubletoApp\\External')) $this->manifest['appType'] = self::APP_TYPE_EXTERNAL;
+
 
     $this->validateManifest();
 

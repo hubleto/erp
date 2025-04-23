@@ -47,6 +47,7 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
         $appsToShow[$appNamespace] = [
           'manifest' => $app->manifest,
           'instance' => $app,
+            'type' => $app->manifest['appType'],
         ];
       }
     } else {
@@ -59,11 +60,13 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
           $appsToShow[$appNamespace] = [
             'manifest' => $installedApps[$appNamespace]->manifest,
             'instance' => $installedApps[$appNamespace],
+            'type' => $installedApps[$appNamespace]->manifest['appType'],
           ];
         } else {
           $appsToShow[$appNamespace] = [
             'manifest' => $appManifest,
             'instance' => null,
+            'type' => $appManifest['appType'],
           ];
         }
       }

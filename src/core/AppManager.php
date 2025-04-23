@@ -72,6 +72,7 @@ class AppManager
         $manifestFile = $communityRepoFolder . '/' . $appFolder . '/manifest.yaml';
         if (is_file($manifestFile)) {
           $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
+          $manifest['appType'] = \HubletoMain\Core\App::APP_TYPE_COMMUNITY;
           $appNamespaces['HubletoApp\\Community\\' . $appFolder] = $manifest;
         }
       }
@@ -84,6 +85,7 @@ class AppManager
         $manifestFile = $enterpriseRepoFolder . '/' . $appFolder . '/manifest.yaml';
         if (is_file($manifestFile)) {
           $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
+          $manifest['appType'] = \HubletoMain\Core\App::APP_TYPE_ENTERPRISE;
           $appNamespaces['HubletoApp\\Enterprise\\' . $appFolder] = $manifest;
         }
       }

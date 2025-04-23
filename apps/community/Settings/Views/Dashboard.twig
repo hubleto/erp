@@ -50,7 +50,7 @@
     <form action="" method="get">
       <input
         name="findApp"
-        class="w-full p-2 border border-gray text-lg"
+        class="w-full p-2 border border-gray text-lg {{ viewParams.findApp == "" ? "" : "bg-yellow-100 border-yellow-300" }}"
         placeholder="Search app..."
         value="{{ viewParams.findApp }}"
       />
@@ -60,7 +60,12 @@
       {% for appNamespace, app in viewParams.appsToShow %}
         <div class="card">
           <div class="card-header">
-            {{ app.manifest.nameTranslated ?? app.manifest.name }}
+            <div>
+              {{ app.manifest.nameTranslated ?? app.manifest.name }}
+              {% if app.type == 1 %} <div class="badge badge-violet">Community</div> {% endif %}
+              {% if app.type == 2 %} <div class="badge badge-lime">Enterprise</div> {% endif %}
+              {% if app.type == 3 %} <div class="badge badge-yellow">External</div> {% endif %}
+            </div>
             <i class="{{ app.manifest.icon }}"></i>
           </div>
           <div class="card-body">

@@ -252,7 +252,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         })}
                         {this.inputWrapper('id_currency')}
                       </div>
-                      {showAdditional ? this.inputWrapper('id_lead_status', {readonly: R.is_archived}) : null}
+                      {showAdditional ? this.inputWrapper('status', {readonly: R.is_archived}) : null}
                       {showAdditional ?
                         <div className='w-full mt-2'>
                           {R.DEAL != null ?

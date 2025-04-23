@@ -40,11 +40,6 @@
         "Currency": "",
         "Code": ""
     },
-    "Models\\LeadStatus": {
-        "Name": "Názov",
-        "Order": "Poradie",
-        "Color": "Farba"
-    },
     "Models\\Pipeline": {
         "Name": "Názov",
         "Description": "Popis"

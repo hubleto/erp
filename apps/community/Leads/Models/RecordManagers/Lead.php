@@ -42,11 +42,6 @@ class Lead extends \HubletoMain\Core\RecordManager
     return $this->hasOne(Currency::class, 'id', 'id_currency');
   }
 
-  /** @return hasOne<LeadStatus, covariant Lead> */
-  public function STATUS(): HasOne {
-    return $this->hasOne(LeadStatus::class, 'id', 'id_lead_status');
-  }
-
   /** @return hasMany<LeadHistory, covariant Lead> */
   public function HISTORY(): HasMany {
     return $this->hasMany(LeadHistory::class, 'id_lead', 'id');

@@ -25,12 +25,16 @@ class Lead extends \HubletoMain\Core\Models\Model
   public string $recordManagerClass = RecordManagers\Lead::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
+  const STATUS_NEW = 1;
+  const STATUS_IN_PROGRESS = 2;
+  const STATUS_COMPLETED = 3;
+  const STATUS_LOST = 4;
+
   public array $relations = [
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
     'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
-    'STATUS' => [ self::HAS_ONE, LeadStatus::class, 'id', 'id_lead_status'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
     'TAGS' => [ self::HAS_MANY, LeadTag::class, 'id_lead', 'id' ],
@@ -53,7 +57,9 @@ class Lead extends \HubletoMain\Core\Models\Model
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
       'date_created' => (new DateTime($this, $this->translate('Date created')))->setRequired()->setReadonly(),
-      'id_lead_status' => (new Lookup($this, $this->translate('Status'), LeadStatus::class))->setRequired(),
+      'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setEnumValues(
+        [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
+      ),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
@@ -133,7 +139,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     $description->defaultValues['id_person'] = null;
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['id_currency'] = $defaultCurrency;
-    $description->defaultValues['id_lead_status'] = 1;
+    $description->defaultValues['status'] = $this::STATUS_NEW;
     $description->defaultValues['id_user'] = $this->main->auth->getUserId();
 
     $description->ui['addButtonText'] = $this->translate('Add Lead');
@@ -168,16 +174,7 @@ class Lead extends \HubletoMain\Core\Models\Model
 
     $lead = $this->record->find($record["id"])->toArray();
     $mLeadHistory = new LeadHistory($this->main);
-    $mLeadStatus = new LeadStatus($this->main);
 
-    if ($lead["id_lead_status"] != (int) $record["id_lead_status"]) {
-      $status = (string) $mLeadStatus->record->find((int) $record["id_lead_status"])->name;
-      $mLeadHistory->record->recordCreate([
-        "change_date" => date("Y-m-d"),
-        "id_lead" => $record["id"],
-        "description" => "Status changed to " . $status
-      ]);
-    }
     if ((float) $lead["price"] != (float) $record["price"]) {
       $mLeadHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),

@@ -107,6 +107,10 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $this->generateProducts($mProduct,$mGroup, $mSupplier);
     }
 
+    foreach ($this->main->apps->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
+      $this->main->apps->getAppInstance($appNamespace)->generateDemoData();
+    }
+
     $this->cli->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 
     $this->main->permissions->revokeGrantAllPermissions();

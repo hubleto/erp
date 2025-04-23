@@ -13,7 +13,6 @@ class Create extends \HubletoMain\Cli\Agent\Command
 
     $this->validateAppNamespace($appNamespace);
 
-    $appManager = new \HubletoMain\Core\AppManager($this->main);
     $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
 
     switch ($appNamespaceParts[1]) {
@@ -41,7 +40,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
 
     if (!is_dir($appRepositoryFolder . '/' . $appName)) mkdir($appRepositoryFolder . '/' . $appName);
 
-    $appManager->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
+    $this->main->apps->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
 
     $this->cli->cyan("App {$appNamespace} created successfully.\n");
     $this->cli->yellow("💡 TIP: Run 'php hubleto app install {$appNamespace} force' to install your new app or run 'php hubleto help' to list other usefull commands.\n");

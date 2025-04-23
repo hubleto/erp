@@ -176,6 +176,11 @@ class App {
     // to be overriden
   }
 
+  public function generateDemoData(): void
+  {
+    // to be overriden
+  }
+
   public function getFullConfigPath(string $path): string
   {
     return 'apps/' . $this->main->apps->getAppNameForConfig($this->namespace) . '/' . $path;

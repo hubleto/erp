@@ -16,7 +16,6 @@ class Model extends \HubletoMain\Cli\Agent\Command
     if (empty($appNamespace)) throw new \Exception("<appNamespace> not provided.");
     if (empty($model)) throw new \Exception("<model> not provided.");
 
-    // $appManager = new \HubletoMain\Core\AppManager($this->main);
     $app = $this->main->apps->getAppInstance($appNamespace);
 
     if (!$app) throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");

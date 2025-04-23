@@ -8,15 +8,14 @@ class ResetAll extends \HubletoMain\Cli\Agent\Command
   {
     $this->cli->cyan("Reinstalling all apps...\n");
 
-    $appManager = new \HubletoMain\Core\AppManager($this->main);
-    $appManager->setCli($this->cli);
+    $this->main->apps->setCli($this->cli);
 
     require_once($this->main->config->getAsString('accountDir', __DIR__) . "/ConfigEnv.php");
 
-    foreach ($appManager->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
+    foreach ($this->main->apps->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
       try {
-        if (!$appManager->isAppInstalled($appNamespace)) {
-          $appManager->installApp(1, $appNamespace, []);
+        if (!$this->main->apps->isAppInstalled($appNamespace)) {
+          $this->main->apps->installApp(1, $appNamespace, []);
         }
       } catch (\Throwable $e) {
         $this->cli->red($e->getMessage() . "\n");

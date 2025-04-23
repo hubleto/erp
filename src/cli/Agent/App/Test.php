@@ -9,8 +9,7 @@ class Test extends \HubletoMain\Cli\Agent\Command
     $appNamespace = (string) ($this->arguments[3] ?? '');
     $test = (string) ($this->arguments[4] ?? '');
 
-    $appManager = new \HubletoMain\Core\AppManager($this->main);
-    $appManager->setCli($this->cli);
+    $this->main->apps->setCli($this->cli);
 
     if (empty($appappNamespaceClass)) {
       $this->cli->white("Usage:\n");
@@ -20,7 +19,7 @@ class Test extends \HubletoMain\Cli\Agent\Command
     }
     
     if (empty($test)) {
-      $app = $appManager->createAppInstance($appNamespace);
+      $app = $this->main->apps->createAppInstance($appNamespace);
       $tests = $app->getAllTests();
     } else {
       $tests = [$test];
@@ -31,7 +30,7 @@ class Test extends \HubletoMain\Cli\Agent\Command
     try {
 
       foreach ($tests as $test) {
-        $appManager->testApp($appNamespace, $test);
+        $this->main->apps->testApp($appNamespace, $test);
         $this->cli->cyan("✓ {$appNamespace} passed successfully test '{$test}'.\n");
       }
 

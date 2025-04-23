@@ -6,8 +6,6 @@ class Install extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appManager = new \HubletoMain\Core\AppManager($this->main);
-
     $appNamespace = (string) ($this->arguments[3] ?? '');
     $forceInstall = (bool) ($this->arguments[4] ?? false);
 
@@ -17,7 +15,7 @@ class Install extends \HubletoMain\Cli\Agent\Command
 
     require_once($this->main->config->getAsString('accountDir', __DIR__) . "/ConfigEnv.php");
 
-    $appManager->installApp(1, $appNamespace, [], $forceInstall);
+    $this->main->apps->installApp(1, $appNamespace, [], $forceInstall);
     $this->cli->cyan("{$appNamespace} installed successfully.\n");
   }
 }

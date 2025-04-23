@@ -291,7 +291,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     }
 
     let mapAddress = '';
-    if (R.street_line_1 != '' && R.city != '' && R.COUNTRY.name != '') {
+    if (R.street_line_1 != '' && R.city != '' && R.COUNTRY && R.COUNTRY.name != '') {
       mapAddress = R.street_line_1 + ', ' + R.postal_code + ' ' + R.city + ', ' + (R.region ? R.region + ', ' : '') + R.COUNTRY.name;
     }
 

@@ -13,7 +13,7 @@ class Loader extends \HubletoMain\Core\App
 
   public SidebarManager $sidebar;
   public AppMenuManager $appMenu;
-  public DashboardManager $dashboardManager;
+  public DashboardManager $dashboard;
 
   public function __construct(\HubletoMain $main)
   {

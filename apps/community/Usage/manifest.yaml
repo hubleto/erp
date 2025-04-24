@@ -1,0 +1,5 @@
+namespace: HubletoApp\Community\Usage
+rootUrlSlug: usage
+name: Usage
+icon: fas fa-chart-bar
+highlight: Usage statistics

@@ -5,6 +5,8 @@ namespace HubletoApp\Community\Desktop\Controllers;
 class Desktop extends \HubletoMain\Core\Controllers\Controller
 {
 
+  public bool $disableLogUsage = true;
+
   public function prepareView(): void
   {
     parent::prepareView();

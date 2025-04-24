@@ -85,6 +85,10 @@ class App {
     $this->main->addTwigViewNamespace($this->rootFolder . '/Views', $this->viewNamespace);
   }
 
+  public function hook(string $hook): void
+  {
+  }
+
   public function getRootUrlSlug(): string {
     return $this->manifest['rootUrlSlug'] ?? '';
   }

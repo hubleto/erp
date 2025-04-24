@@ -7,6 +7,8 @@ class Controller extends \ADIOS\Core\Controller
 
   public \HubletoMain $main;
 
+  public bool $disableLogUsage = false;
+
   public string $appNamespace = '';
   public \HubletoMain\Core\App $hubletoApp;
 
@@ -26,7 +28,16 @@ class Controller extends \ADIOS\Core\Controller
     if ($this->main->apps->getAppInstance($this->appNamespace)) {
       $this->hubletoApp = $this->main->apps->getAppInstance($this->appNamespace);
     }
+  }
 
+  public function logUsage(): void
+  {
+    if (!$this->disableLogUsage) {
+      $usageApp = $this->main->apps->getAppInstance('HubletoApp\\Community\\Usage');
+      if (is_object($usageApp)) {
+        $usageApp->logUsage();
+      }
+    }
   }
 
   /**
@@ -50,6 +61,8 @@ class Controller extends \ADIOS\Core\Controller
    */
   public function init(): void
   {
+    $this->logUsage();
+
     // Put your controller's initialization code here. See example below.
     // Throw an exception on error.
 

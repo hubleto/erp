@@ -62,7 +62,10 @@
         "Contact persons": "Kontaktné osoby",
         "Add contact person": "Pridať kontaktnú osobu",
         "Phone number": "Tel. č.",
-        "Email": "Email"
+        "Email": "Email",
+        "Primary Contact": "Primárny kontakt",
+        "Tags": "Značky",
+        "Show on map": "Zobraziť na mape"
     },
     "root": {
         "Customer Tags": "Značky zákazníkov"

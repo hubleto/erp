@@ -28,35 +28,16 @@ class Order extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'order_number' => (new Varchar($this, $this->translate('Order number')))->setReadonly(),
+      'order_number' => (new Varchar($this, $this->translate('Order number')))->setCssClass('badge badge-info'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold'),
+      'id_state' => (new Lookup($this, $this->translate('State'), State::class, 'CASCADE')),
       'price' => (new Decimal($this, $this->translate('Price')))->setReadonly()->setRequired(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_order' => (new Date($this, $this->translate('Order date')))->setRequired(),
       'required_delivery_date' => (new Date($this, $this->translate('Required delivery date'))),
       'shipping_info' => (new Varchar($this, $this->translate('Shipping information'))),
       'note' => (new Text($this, $this->translate('Notes'))),
-
-      /* "zakaznicke_objednavacie_cislo" => [
-        "type" => "varchar",
-        "title" => "Zákaznícke objednávacie číslo",
-        "show_column" => TRUE,
-      ], */
-
-      /* "status" => [
-        "type" => "lookup",
-        "enum_values" => $this->enum_objednavky_stavy,
-        "title" => "Stav",
-        "show_column" => true
-      ], */
-
-      /* "id_faktura" => [
-        "type" => "lookup",
-        "title" => "Faktúra",
-        "model" => "Widgets/Faktury/Models/Faktura",
-        "show_column" => TRUE,
-      ], */
-
     ]);
   }
 
@@ -120,7 +101,7 @@ class Order extends \HubletoMain\Core\Models\Model
   {
     $order = $this->record->find($savedRecord["id"]);
     $order->order_number = $order->id;
-    $order->recordSave();
+    $order->save();
 
     $mHistory = new History($this->main);
     $mHistory->record->recordCreate([

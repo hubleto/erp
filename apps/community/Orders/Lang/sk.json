@@ -1,14 +1,19 @@
 {
     "manifest": {
-        "Orders": "Objednávky",
+        "Orders": "",
         "Default order managment.": ""
     },
+    "root": {
+        "Order states": ""
+    },
     "Controllers\\Orders": {
-        "Orders": "Objednávky"
+        "Orders": ""
     },
     "Models\\Order": {
         "Order number": "Číslo objednávky",
         "Customer": "Zákazník",
+        "Title": "Názov",
+        "State": "Stav",
         "Price": "Cena",
         "Currency": "Mena",
         "Order date": "Dátum objednania",
@@ -17,19 +22,30 @@
         "Notes": "Poznámky",
         "Add order": "Pridať objednávku"
     },
+    "Models\\State": {
+        "Title": "",
+        "Code": "",
+        "Color": ""
+    },
     "Models\\OrderProduct": {
-        "Product": "Produkt",
-        "Order": "Objednávka",
-        "Unit price": "Jednotková cena",
-        "Amount": "Množstvo",
-        "Discount (%)": "Zľava",
-        "Vat (%)": "Daň",
-        "Add product": "Pridať podukt"
+        "Order": "",
+        "Title": "",
+        "Product": "",
+        "Unit price": "",
+        "Amount": "",
+        "Discount": "",
+        "Vat": "",
+        "Add product": ""
     },
     "Models\\History": {
+        "Order": "",
+        "Short Description": "",
+        "Long Description": "",
+        "Date Time": ""
+    },
+    "Components\\FormOrder": {
         "Order": "Objednávka",
-        "Short Description": "Stručný popis",
-        "Long Description": "Popis",
-        "Date Time": "Čas"
+        "History": "História",
+        "Title": "Názov"
     }
 }

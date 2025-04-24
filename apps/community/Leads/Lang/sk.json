@@ -40,7 +40,8 @@
         "Notes": "Poznámky",
         "Source channel": "Zdroj",
         "Archived": "Archivovaný",
-        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok"
+        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok",
+        "Score": ""
     },
     "root": {
         "Lead statuses": "",
@@ -86,6 +87,9 @@
         "Unit Price": "",
         "Amount": "",
         "Dicount (%)": "",
-        "Vat (%)": ""
+        "Vat (%)": "",
+        "Vat": "",
+        "Discount": "",
+        "Sum": ""
     }
 }

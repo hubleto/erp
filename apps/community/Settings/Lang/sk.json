@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Settings": "Nastavenia",
-        "...": ""
+        "...": "",
+        "Settings and control panel for your Hubleto.": ""
     },
     "Models\\User": {
         "First name": "Meno",
@@ -49,7 +50,8 @@
         "Order": "Poradie",
         "Company": "Farba",
         "Pipeline": "Kanál",
-        "Color": "Farba"
+        "Color": "Farba",
+        "Set result of a deal to": ""
     },
     "Models\\Tag": {
         "Name": "Názov",

@@ -16,5 +16,8 @@
         "All day": "",
         "Completed": "",
         "Created by": ""
+    },
+    "Controllers\\Boards\\EventsForToday": {
+        "Open event details": ""
     }
 }

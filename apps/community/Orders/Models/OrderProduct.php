@@ -2,6 +2,7 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
+use ADIOS\Core\Db\Column\Varchar;
 use ADIOS\Core\Db\Column\Decimal;
 use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\Lookup;
@@ -21,12 +22,13 @@ class OrderProduct extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class, 'CASCADE'))->setRequired(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
-      'discount' => (new Integer($this, $this->translate('Discount (%)'))),
-      'vat' => (new Integer($this, $this->translate('Vat (%)')))->setRequired(),
+      'discount' => (new Integer($this, $this->translate('Discount')))->setUnit('%'),
+      'vat' => (new Integer($this, $this->translate('Vat')))->setUnit('%')->setRequired(),
     ]);
   }
 

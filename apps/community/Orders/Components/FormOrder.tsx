@@ -77,7 +77,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
 
     return (<>
       <TabView>
-        <TabPanel header={globalThis.main.translate('Basic')}>
+        <TabPanel header={this.translate('Order')}>
           <div className='card'>
             <div className='card-body flex flex-row gap-2'>
               <div className='grow'>
@@ -140,6 +140,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                           addButtonText: "Add Product"
                         },
                         columns: {
+                          title: { type: "varchar", title: this.translate('Title') },
                           id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
                             cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
                               return (
@@ -229,7 +230,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           </div>
         </TabPanel>
         {showAdditional ?
-          <TabPanel header={globalThis.main.translate('History')}>
+          <TabPanel header={this.translate('History')}>
             <TableHistories
               uid={this.props.uid + "_table_order_history"}
               data={{ data: R.HISTORY }}

@@ -95,7 +95,8 @@
         "Product": "",
         "Unit Price": "",
         "Amount": "",
-        "Dicount (%)": "",
-        "Vat (%)": ""
+        "Vat": "",
+        "Discount": "",
+        "Sum": ""
     }
 }

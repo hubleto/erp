@@ -1,5 +1,5 @@
-![](https://img.shields.io/github/v/tag/wai-blue/hubleto)
-![](https://img.shields.io/github/license/wai-blue/hubleto)
+![](https://img.shields.io/github/v/tag/hubleto/main)
+![](https://img.shields.io/github/license/hubleto/main)
 
 
 # Hubleto
@@ -48,10 +48,10 @@ Visit https://developer.hubleto.com with tutorials on how to download & install,
 
 You can contribute in many areas:
 
-  * report [bugs](https://github.com/wai-blue/hubleto/issues) or submit [issues](https://github.com/wai-blue/hubleto/issues)
+  * report [bugs](https://github.com/hubleto/main/issues) or submit [issues](https://github.com/hubleto/main/issues)
   * improve or create new [community apps](apps/community)
-  * review [pull requests](https://github.com/wai-blue/hubleto/pulls)
-  * start [discussions](https://github.com/wai-blue/hubleto/discussions/categories/general)
+  * review [pull requests](https://github.com/hubleto/main/pulls)
+  * start [discussions](https://github.com/hubleto/main/discussions/categories/general)
   * improve [Hubleto Core](src)
   * translate [language packs](apps/community/Customers/Lang)
   * improve [developer's guide](https://developer.hubleto.com)

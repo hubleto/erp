@@ -1,10 +1,10 @@
 {
-    "name": "wai-blue/hubleto",
+    "name": "hubleto/main",
     "description": "Business Application Hub. Opensource ERP and CRM.",
     "homepage": "https://www.hubleto.com",
     "support": {
-        "issues": "https://github.com/wai-blue/hubleto/issues",
-        "source": "https://github.com/wai-blue/hubleto"
+        "issues": "https://github.com/hubleto/main/issues",
+        "source": "https://github.com/hubleto/main"
     },
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "require": {

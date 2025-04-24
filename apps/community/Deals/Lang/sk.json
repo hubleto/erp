@@ -72,8 +72,8 @@
         "Document": ""
     },
     "root": {
-        "Deal statuses": "",
-        "Deal Tags": ""
+        "Deal statuses": "Stavy dealov",
+        "Deal Tags": "Značky dealov"
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendár",

@@ -53,23 +53,23 @@
         "Tag": "Značka"
     },
     "Models\\Address": {
-        "Person": "",
-        "Street Line 1": "",
-        "Street Line 2": "",
-        "Region": "",
-        "City": "",
-        "Postal Code": "",
-        "Country": ""
+        "Person": "Osoba",
+        "Street Line 1": "Adresa, riadok 1",
+        "Street Line 2": "Adresa, riadok 2",
+        "Region": "Región",
+        "City": "Mesto",
+        "Postal Code": "PSČ",
+        "Country": "Štát"
     },
     "root": {
-        "Contact Categories": "",
-        "Contact Tags": ""
+        "Contact Categories": "Kategórie kontaktov",
+        "Contact Tags": "Značky kontaktov"
     },
     "Models\\ContactCategory": {
-        "Type": ""
+        "Type": "Typ"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": ""
+        "Name": "Značka",
+        "Color": "Farba"
     }
 }

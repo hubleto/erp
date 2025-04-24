@@ -65,10 +65,10 @@
         "Email": "Email"
     },
     "root": {
-        "Customer Tags": ""
+        "Customer Tags": "Značky zákazníkov"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": ""
+        "Name": "Značka",
+        "Color": "Farba"
     }
 }

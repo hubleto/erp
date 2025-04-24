@@ -1,8 +1,7 @@
 {
     "manifest": {
         "Settings": "Nastavenia",
-        "...": "",
-        "Settings and control panel for your Hubleto.": ""
+        "Settings and control panel for your Hubleto.": "Nastavenia Hubleto účtu."
     },
     "Models\\User": {
         "First name": "Meno",
@@ -139,18 +138,18 @@
         "Activity Types": ""
     },
     "root": {
-        "Users": "",
-        "User roles": "",
-        "Your companies": "",
-        "General settings": "",
-        "Permissions": "",
-        "Tags": "",
-        "Activity types": "",
-        "Contact types": "",
-        "Countries": "",
-        "Currencies": "",
-        "Pipelines": "",
-        "Invoice profiles": "",
+        "Users": "Používatelia",
+        "User roles": "Používateľské role",
+        "Your companies": "Moje firmy",
+        "General settings": "Všeobecné nastavenia",
+        "Permissions": "Právomocu",
+        "Tags": "Značky",
+        "Activity types": "Typy aktivít",
+        "Contact types": "Typy kontaktov",
+        "Countries": "Štáty",
+        "Currencies": "Meny",
+        "Pipelines": "Pipelines",
+        "Invoice profiles": "Fakturačné profily",
         "Platform config": "Konfigurácia platformy",
         "Contact Categories": "Kategórie kontaktov"
     },

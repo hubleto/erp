@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Leads": "Leady",
-        "Management of leads, cold contacts. Convert leads to deals.": ""
+        "Management of leads, cold contacts. Convert leads to deals.": "Správa leadov. Konverzia do dealov."
     },
     "Controllers\\Leads": {
         "Sales": "Obchod",
@@ -41,11 +41,11 @@
         "Source channel": "Zdroj",
         "Archived": "Archivovaný",
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok",
-        "Score": ""
+        "Score": "Skóre"
     },
     "root": {
-        "Lead statuses": "",
-        "Lead Tags": ""
+        "Lead statuses": "Stavy leadov",
+        "Lead Tags": "Značky leadov"
     },
     "Models\\LeadHistory": {
         "Change Date": "",

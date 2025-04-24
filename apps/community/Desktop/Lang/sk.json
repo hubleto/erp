@@ -1,10 +1,8 @@
 {
     "manifest": {
         "Dashboard": "Úvod",
-        "...": "",
-        "Desktop": "",
-        "Default Hubleto desktop implementation": "",
-        "Default Hubleto desktop implementation.": ""
+        "Desktop": "Pracovná plocha",
+        "Default Hubleto desktop implementation.": "Hubleto pracovná plocha"
     },
     "Controllers\\Home": {
         "Welcome": "Vitajte",

@@ -1,13 +1,13 @@
 {
     "manifest": {
-        "Orders": "",
-        "Default order managment.": ""
+        "Orders": "Objednávky",
+        "Free order managment.": "Správa objednávok zdarma."
     },
     "root": {
-        "Order states": ""
+        "Order states": "Stavy objednávok"
     },
     "Controllers\\Orders": {
-        "Orders": ""
+        "Orders": "Objednávky"
     },
     "Models\\Order": {
         "Order number": "Číslo objednávky",

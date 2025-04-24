@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Products": "Produkty",
-        "Default product managment.": ""
+        "Free product portfolio managment.": "Správa produktového portfólia zdarma."
     },
     "root": {
         "Products": "Produkty",
@@ -12,45 +12,45 @@
         "Products": "Produkty"
     },
     "Models\\Product": {
-        "Title": "",
-        "Assigned User": "",
-        "Supplier": "",
-        "On sale": "",
-        "Image": "",
-        "Description": "",
-        "Number of items in package": "",
-        "Single unit price": "",
-        "Margin": "",
-        "Vat": "",
-        "Single unit order possible": "",
-        "Unit": "",
-        "Packaging": "",
-        "Sale ended": "",
-        "Show price to customer": "",
-        "Set price after reweight?": "",
-        "Needs reordering?": "",
-        "Storage rules": "",
-        "Table": "",
-        "Add product": "",
-        "Product Group": "",
-        "Product Type": ""
+        "Title": "Názov",
+        "Assigned User": "Zodpovedný",
+        "Supplier": "Dodávateľ",
+        "On sale": "V predaji",
+        "Image": "Obrázok",
+        "Description": "Popis",
+        "Number of items in package": "Počet položiek v balíku",
+        "Single unit price": "Jednotková cena",
+        "Margin": "Marža",
+        "Vat": "DPH",
+        "Single unit order possible": "Single unit order possible",
+        "Unit": "Jednotka",
+        "Packaging": "Balenie",
+        "Sale ended": "Predaj ukončený",
+        "Show price to customer": "Show price to customer",
+        "Set price after reweight?": "Set price after reweight",
+        "Needs reordering?": "Needs reordering",
+        "Storage rules": "Storage rules",
+        "Table": "Table",
+        "Add product": "Pridať produkt",
+        "Product Group": "Skupina",
+        "Product Type": "Typ"
     },
     "Models\\Group": {
         "Title": ""
     },
     "Models\\Supplier": {
-        "Title": "",
-        "Address": "",
-        "City": "",
-        "Postal code": "",
-        "Country": "",
-        "Contact person": "",
-        "Phone number": "",
-        "Supplier email": "",
+        "Title": "Názov",
+        "Address": "Adresa",
+        "City": "Mesto",
+        "Postal code": "PSČ",
+        "Country": "Štát",
+        "Contact person": "Kontaktná osoba",
+        "Phone number": "Telefónne číslo",
+        "Supplier email": "Email na dodávateľa",
         "Order email": "",
-        "Tax ID": "",
-        "Company ID": "",
-        "VAT ID": "",
+        "Tax ID": "DIČ",
+        "Company ID": "IČO",
+        "VAT ID": "IČDPH",
         "Payment account number": ""
     }
 }

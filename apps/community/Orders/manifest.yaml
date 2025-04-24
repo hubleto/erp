@@ -8,7 +8,7 @@ author:
   company: "wai.blue"
   github: "https://github.com/rindo789"
   linkedin: "https://www.linkedin.com/in/richard-ondrejka/"
-highlight: Default order managment.
+highlight: Free order managment.
 requires:
  - HubletoApp\Community\Products
  - HubletoApp\Community\Customers

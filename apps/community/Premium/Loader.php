@@ -18,6 +18,7 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^premium\/?$/' => Controllers\Premium::class,
+      '/^premium\/payment\/?$/' => Controllers\Payment::class,
       '/^premium\/upgrade\/?$/' => Controllers\Upgrade::class,
       '/^premium\/you-are-upgraded\/?$/' => Controllers\PremiumActivated::class,
     ]);
@@ -29,6 +30,8 @@ class Loader extends \HubletoMain\Core\App
       $year = (int) date('Y');
 
       $mLog = new Models\Log($this->main);
+      $mPayment = new Models\Payment($this->main);
+      $mCredit = new Models\Credit($this->main);
 
       $thisMonthLog = $mLog->record
         ->selectRaw('
@@ -69,6 +72,8 @@ class Loader extends \HubletoMain\Core\App
       $this->saveConfig('lastCheckDate', date('Y-m-d'));
       $this->setConfigAsString('lastCheckDate', date('Y-m-d'));
 
+      // calculate credit
+      $this->recalculateCredit();
     }
 
   }
@@ -77,6 +82,8 @@ class Loader extends \HubletoMain\Core\App
   {
     if ($round == 1) {
       (new Models\Log($this->main))->dropTableIfExists()->install();
+      (new Models\Credit($this->main))->dropTableIfExists()->install();
+      (new Models\Payment($this->main))->dropTableIfExists()->install();
     }
   }
 
@@ -175,6 +182,49 @@ class Loader extends \HubletoMain\Core\App
     }
 
     return '';
+  }
+
+  public function generateDemoData(): void
+  {
+    $mPayment = new Models\Payment($this->main);
+    $mCredit = new Models\Credit($this->main);
+
+    for ($i = 1; $i <= 9; $i++) {
+      $mPayment->record->recordCreate([
+        'datetime_charged' => date('Y-m-d ' . rand(13, 16) . ':' . rand(10, 50) . ':' . rand(25, 45), strtotime('-' . rand(3, 30) . ' days')),
+        'amount' => rand(-100, 100) / rand(3, 7),
+      ]);
+    }
+
+    $mCredit->record->recordCreate([ 'datetime_recalculated' => date('Y-m-d H:i:s', strtotime('-5 days')), 'credit' => 10.5 ]);
+
+  }
+
+  public function recalculateCredit(): float
+  {
+    $mPayment = new Models\Payment($this->main);
+    $mCredit = new Models\Credit($this->main);
+
+    $lastCreditData = $mCredit->record->orderBy('id', 'desc')->first()?->toArray();
+    $lastCreditDatetime = (string) ($lastCreditData['datetime_recalculated'] ?? '');
+    $currentCredit = (float) ($lastCreditData['credit'] ?? 0);
+// var_dump($currentCredit);
+
+    $payments = $mPayment->record;
+    if (!empty($lastCreditDatetime)) $payments = $payments->whereRaw('datetime_charged > "' . date('Y-m-d H:i:s', strtotime($lastCreditDatetime)) . '"');
+
+    foreach ($payments->get()?->toArray() as $payment) {
+      $currentCredit += (float) ($payment['amount'] ?? 0);
+    }
+
+//     var_dump($lastCreditDatetime);
+// var_dump($payments->get()?->toArray());
+// var_dump($currentCredit);
+// exit;
+
+    $mCredit->record->recordCreate(['datetime_recalculated' => date('Y-m-d H:i:s'), 'credit' => $currentCredit]);
+
+    return (float) $currentCredit;
   }
 
 }

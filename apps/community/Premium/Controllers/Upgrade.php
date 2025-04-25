@@ -13,6 +13,9 @@ class Upgrade extends \HubletoMain\Core\Controllers\Controller {
       $this->main->router->redirectTo('');
     }
 
+    $currentCredit = $this->hubletoApp->recalculateCredit();
+    $this->viewParams['currentCredit'] = $currentCredit;
+
     $this->setView('@HubletoApp:Community:Premium/Upgrade.twig');
   }
 

@@ -1,8 +1,21 @@
 <h1>Upgrade to Premium</h1>
 
-<div class="grid grid-cols-2 gap-2 mt-4">
+<div class="grid grid-cols-2 gap-2 mt-2">
   <div>
-    <div class="card">
+    <div class="block badge badge-info text-2xl p-4">
+      <div>
+        Your current credit is:
+        {{ viewParams.main.locale.formatCurrency(viewParams.currentCredit, '€') }}
+      </div>
+      <div class="mt-2">
+        <a href="premium/payment" class="btn btn-large btn-primary">
+          <span class="icon"><i class="fas fa-euro"></i></span>
+          <span class="text">{{ translate('Make payment') }}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card mt-2">
       <div class="card-header">
         Upgrade to Premium and you'll get
       </div>

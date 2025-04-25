@@ -18,6 +18,9 @@ class Premium extends \HubletoMain\Core\Controllers\Controller {
       $this->main->router->redirectTo('premium');
     }
 
+    $currentCredit = $this->hubletoApp->recalculateCredit();
+    $this->viewParams['currentCredit'] = $currentCredit;
+
     if ($this->main->isPremium) {
       $this->setView('@HubletoApp:Community:Premium/PremiumActivated.twig');
     } else {

@@ -286,4 +286,15 @@ class AppManager
     file_put_contents($appFolder . '/Views/Dashboard.twig', $this->main->twig->render('@appTemplate/Views/Dashboard.twig.twig', $tplVars));
   }
 
+
+
+  public function canAppDangerouslyInjectDesktopHtmlContent(string $appNamespace): bool
+  {
+    $safeApps = [
+      'HubletoApp\\Community\\Premium',
+    ];
+
+    return in_array($appNamespace, $safeApps);
+  }
+
 }

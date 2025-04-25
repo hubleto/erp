@@ -153,7 +153,7 @@
             </li>
           {% endif %}
           <li>
-            {% if app.isPremium %}
+            {% if viewParams.main.isPremium %}
               <a class="btn btn-small btn-transparent" href="{{ config.accountUrl }}/premium">
                 <span class="icon text-yellow-500"><i class="fas fa-trophy"></i></span>
                 <span class="text">{{ translate('Premium') }}</span>
@@ -233,6 +233,12 @@
 
     <aside id="default-sidebar">
       <nav>
+        {% for app in viewParams.main.apps.getEnabledApps() %}
+          {% if viewParams.main.apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
+            {{ app.dangerouslyInjectDesktopHtmlContent('beforeSidebar')|raw }}
+          {% endif %}
+        {% endfor %}
+
         <button class="app-launcher-show-btn" onclick="lchr(true);">
           <i class="fas fa-magnifying-glass"></i> Search app
         </button>
@@ -293,48 +299,54 @@
 
   {% endif %}
 
-<script>
-  var sidebarState = false;
-  function lchr(show) {
-    if (show) {
-      $('#app-launcher').addClass('visible');
-      $('#app-launcher > div .app-launcher-header input').focus();
-    } else {
-      $('#app-launcher').removeClass('visible');
-    }
-  }
-  function smis(e, q, b) {
-    if (q == '') b.slideDown(100); else {
-      let r = new RegExp(q, "i");
-      b.each(function() { if ($(this).find('.text').text().match(r)) $(this).slideDown(100); else $(this).slideUp(100); });
-    }
-    if (e.keyCode == 27) { lchr(false); return; }
-    if (e.keyCode == 13) { b.filter(':visible').get(0).click(); return; }
-  }
+  {% for app in viewParams.main.apps.getEnabledApps() %}
+    {% if viewParams.main.apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
+      {{ app.dangerouslyInjectDesktopHtmlContent('footer')|raw }}
+    {% endif %}
+  {% endfor %}
 
-  $(window).on('resize', function() {
-    if ($(window).width() > 768) {
-      $('#default-sidebar').css('translate', '');
-      $("#menuButton").attr('class', 'fas fa-chevron-right');
-      sidebarState = false;
+  <script>
+    var sidebarState = false;
+    function lchr(show) {
+      if (show) {
+        $('#app-launcher').addClass('visible');
+        $('#app-launcher > div .app-launcher-header input').focus();
+      } else {
+        $('#app-launcher').removeClass('visible');
+      }
     }
-  });
-
-  function showSidebar() {
-    if (sidebarState == false) {
-      $("#default-sidebar").css("translate", 0,0)
-      $("#menuButton").attr('class', 'fas fa-chevron-left');
-      sidebarState = true;
-    } else {
-      $("#default-sidebar").css("translate", "-100%",0)
-      $("#menuButton").attr('class', 'fas fa-chevron-right');
-      sidebarState = false;
+    function smis(e, q, b) {
+      if (q == '') b.slideDown(100); else {
+        let r = new RegExp(q, "i");
+        b.each(function() { if ($(this).find('.text').text().match(r)) $(this).slideDown(100); else $(this).slideUp(100); });
+      }
+      if (e.keyCode == 27) { lchr(false); return; }
+      if (e.keyCode == 13) { b.filter(':visible').get(0).click(); return; }
     }
-  }
 
-  applyTheme();
+    $(window).on('resize', function() {
+      if ($(window).width() > 768) {
+        $('#default-sidebar').css('translate', '');
+        $("#menuButton").attr('class', 'fas fa-chevron-right');
+        sidebarState = false;
+      }
+    });
 
-</script>
+    function showSidebar() {
+      if (sidebarState == false) {
+        $("#default-sidebar").css("translate", 0,0)
+        $("#menuButton").attr('class', 'fas fa-chevron-left');
+        sidebarState = true;
+      } else {
+        $("#default-sidebar").css("translate", "-100%",0)
+        $("#menuButton").attr('class', 'fas fa-chevron-right');
+        sidebarState = false;
+      }
+    }
+
+    applyTheme();
+
+  </script>
 
 </body>
 

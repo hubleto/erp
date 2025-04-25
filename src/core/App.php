@@ -258,4 +258,11 @@ class App {
     $this->main->config->set($this->getFullConfigPath($path), $value);
   }
 
+
+
+  public function dangerouslyInjectDesktopHtmlContent(string $where): string
+  {
+    return '';
+  }
+
 }

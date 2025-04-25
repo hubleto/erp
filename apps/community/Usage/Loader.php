@@ -37,7 +37,7 @@ class Loader extends \HubletoMain\Core\App
         'datetime' => date('Y-m-d H:i:s'),
         'ip' => $_SERVER['REMOTE_ADDR'] ?? '',
         'route' => trim($this->main->route, '/'),
-        // 'params' => count($urlParams) == 0 ? '' : json_encode($urlParams),
+        'params' => count($urlParams) == 0 ? '' : json_encode($urlParams),
         'message' => $message,
         'id_user' => $this->main->auth->getUserId(),
       ]);

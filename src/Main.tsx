@@ -14,6 +14,8 @@ import InputBoolean from "adios/Inputs/Boolean";
 import InputColor from "adios/Inputs/Color";
 import InputHyperlink from "adios/Inputs/Hyperlink";
 
+import TableCellRendererHyperlink from "adios/TableCellRenderers/Hyperlink";
+
 // Hubleto
 import HubletoForm from "./core/Components/HubletoForm";
 import HubletoTable from "./core/Components/HubletoTable";
@@ -42,6 +44,8 @@ class HubletoMain extends ADIOS {
     this.registerReactComponent('InputImage', InputImage);
     this.registerReactComponent('InputColor', InputColor);
     this.registerReactComponent('InputHyperlink', InputHyperlink);
+
+    this.registerReactComponent('TableCellRendererHyperlink', TableCellRendererHyperlink);
 
     // Hubleto components
     this.registerReactComponent('Form', HubletoForm);

@@ -27,6 +27,13 @@ class Deal extends \HubletoMain\Core\Models\Model
   public string $recordManagerClass = RecordManagers\Deal::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
+  const RESULT_LOST = 1;
+  const RESULT_WON = 2;
+  const RESULT_PENDING = 3;
+
+  const BUSINESS_TYPE_NEW = 1;
+  const BUSINESS_TYPE_EXISTING = 2;
+
   public array $relations = [
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
@@ -63,11 +70,11 @@ class Deal extends \HubletoMain\Core\Models\Model
       'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues([1 => "Lost", 2 => "Won", 3 => "Pending"])->setDefaultValue(3),
+        ->setEnumValues([$this::RESULT_LOST => "Lost", $this::RESULT_WON => "Won", $this::RESULT_PENDING => "Pending"])->setDefaultValue(3),
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
       'business_type' => (new Integer($this, $this->translate('Business type')))->setEnumValues(
-        [1 => "New", 2 => "Existing"]
+        [$this::BUSINESS_TYPE_NEW => "New", $this::BUSINESS_TYPE_EXISTING => "Existing"]
       ),
     ]);
   }
@@ -154,7 +161,8 @@ class Deal extends \HubletoMain\Core\Models\Model
 
     $description = parent::describeForm();
     $description->defaultValues['is_new_customer'] = 0;
-    $description->defaultValues['business_type'] = 1;
+    $description->defaultValues['deal_result'] = $this::RESULT_PENDING;
+    $description->defaultValues['business_type'] = $this::BUSINESS_TYPE_NEW;
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_currency'] = $defaultCurrency;
@@ -173,6 +181,10 @@ class Deal extends \HubletoMain\Core\Models\Model
       "id_deal" => $savedRecord["id"],
       "description" => "Deal created"
     ]);
+
+    $newDeal = $savedRecord;
+    $newDeal["identifier"] = $this->main->apps->community('Deals')->configAsString('dealPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
+    $this->record->recordUpdate($newDeal);
 
     return parent::onAfterCreate($originalRecord, $savedRecord);
   }

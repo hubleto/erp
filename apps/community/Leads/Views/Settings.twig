@@ -55,6 +55,17 @@
             />
           </td>
         </tr>
+        <tr>
+          <td>Lead Prefix</td>
+          <td>
+            <input
+              type="text" name="leadPrefix"
+              class="adios component input"
+              value="{{ viewParams.app.configAsString('leadPrefix') }}"
+              onchange="saveSettings();"
+            />
+          </td>
+        </tr>
       </tbody>
     </table>
   </form>

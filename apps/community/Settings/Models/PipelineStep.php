@@ -6,6 +6,7 @@ use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Varchar;
+use HubletoApp\Community\Deals\Models\Deal;
 
 class PipelineStep extends \HubletoMain\Core\Models\Model
 {
@@ -25,7 +26,7 @@ class PipelineStep extends \HubletoMain\Core\Models\Model
       'color' => (new Color($this, $this->translate('Color')))->setRequired(),
       'id_pipeline' => (new Lookup($this, $this->translate("Pipeline"), Pipeline::class, 'CASCADE'))->setRequired(),
       'set_result' => (new Integer($this, $this->translate('Set result of a deal to')))->setRequired()
-        ->setEnumValues([1 => "Lost", 2 => "Won", 3 => "Pending"])
+        ->setEnumValues([Deal::RESULT_LOST => "Lost", Deal::RESULT_WON => "Won", Deal::RESULT_PENDING => "Pending"])
     ]);
   }
 

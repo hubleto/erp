@@ -33,11 +33,13 @@ class Loader extends \HubletoMain\Core\App
     if ((bool) $this->main->auth->getUserId()) {
       $urlParams = $this->main->getUrlParams();
       $mLog = new Models\Log($this->main);
+
+      $paramsStr = count($urlParams) == 0 ? '' : json_encode($urlParams);
       $mLog->record->recordCreate([
         'datetime' => date('Y-m-d H:i:s'),
         'ip' => $_SERVER['REMOTE_ADDR'] ?? '',
         'route' => trim($this->main->route, '/'),
-        'params' => count($urlParams) == 0 ? '' : json_encode($urlParams),
+        'params' => strlen($paramsStr) < 255 ? $paramsStr : '',
         'message' => $message,
         'id_user' => $this->main->auth->getUserId(),
       ]);

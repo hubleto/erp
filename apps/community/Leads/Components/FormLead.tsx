@@ -196,7 +196,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
         {this.state.id > 0 ?
           <div className="h-0 w-full text-right">
             <div className="badge badge-secondary badge-large">
-              Lead value:&nbsp;{globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
+              Lead value:&nbsp;{globalThis.main.numberFormat(R.price ?? 0, 2, ",", " ")} {R.CURRENCY.code}
             </div>
           </div>
         : null}

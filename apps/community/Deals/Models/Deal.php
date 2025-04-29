@@ -67,7 +67,15 @@ class Deal extends \HubletoMain\Core\Models\Model
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
-      'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
+      'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
+        1 => "Advertissment",
+        2 => "Partner",
+        3 => "Web",
+        4 => "Cold call",
+        5 => "E-mail",
+        6 => "Refferal",
+        7 => "Other",
+      ]),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues([$this::RESULT_LOST => "Lost", $this::RESULT_WON => "Won", $this::RESULT_PENDING => "Pending"])->setDefaultValue(3),

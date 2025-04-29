@@ -23,6 +23,7 @@ interface CalendarMainState {
   dateClicked?: string,
   timeClicked?: string,
   activityFormComponent?: JSX.Element,
+  activityFormModalProps?: any,
   newActivity: boolean,
 }
 
@@ -48,6 +49,13 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
   }
 
   render(): JSX.Element {
+    let activityFormModalProps = {
+      uid: 'activity_form',
+      isOpen: true,
+      type: 'right',
+      ...this.state.activityFormModalProps
+    };
+
     return (<>
       <Calendar
         readonly={false}
@@ -61,24 +69,23 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
           });
         }}
         onEventClick={(info) => {
-          this.setState({activityFormComponent: globalThis.main.renderReactElement(info.event.extendedProps.SOURCEFORM,
-            {
-              id: info.event.id,
-              showInModal: true,
-              showInModalSimple: true,
-              onClose:() => {this.setState({activityFormComponent: null})},
-              onSaveCallback:() => {this.setState({activityFormComponent: null})}
-            })
+          this.setState({
+            activityFormModalProps: info.event.extendedProps.SOURCEFORM_MODALPROPS,
+            activityFormComponent: globalThis.main.renderReactElement(info.event.extendedProps.SOURCEFORM,
+              {
+                id: info.event.id,
+                showInModal: true,
+                showInModalSimple: true,
+                onClose:() => {this.setState({activityFormComponent: null})},
+                onSaveCallback:() => {this.setState({activityFormComponent: null})}
+              }
+            )
           });
           info.jsEvent.preventDefault();
         }}
       ></Calendar>
       {this.state.activityFormComponent ?
-        <ModalSimple
-          uid='activity_form'
-          isOpen={true}
-          type='right'
-        >
+        <ModalSimple {...activityFormModalProps}>
           {this.state.activityFormComponent}
         </ModalSimple>
       : <></>}

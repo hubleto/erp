@@ -63,6 +63,7 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
         eventsEndpoint={globalThis.main.config.rewriteBase + '/calendar/get-calendar-events'}
         onDateClick={(date, time, info) => {
           this.setState({
+            activityFormComponent: null,
             newActivity: true,
             dateClicked: date,
             timeClicked: info.view.type == "dayGridMonth" ? null : time
@@ -70,6 +71,7 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
         }}
         onEventClick={(info) => {
           this.setState({
+            newActivity: false,
             activityFormModalProps: info.event.extendedProps.SOURCEFORM_MODALPROPS,
             activityFormComponent: globalThis.main.renderReactElement(info.event.extendedProps.SOURCEFORM,
               {

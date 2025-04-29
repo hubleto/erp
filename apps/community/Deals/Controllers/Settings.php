@@ -32,6 +32,10 @@ class Settings extends \HubletoMain\Core\Controllers\Controller
       $this->hubletoApp->setConfigAsString('calendarColor', $calendarColor);
       $this->hubletoApp->saveConfig('calendarColor', $calendarColor);
 
+      $dealPrefix = $this->main->urlParamAsString('dealPrefix');
+      $this->hubletoApp->setConfigAsString('dealPrefix', $dealPrefix);
+      $this->hubletoApp->saveConfig('dealPrefix', $dealPrefix);
+
       $this->viewParams['settingsSaved'] = true;
     }
 

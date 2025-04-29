@@ -62,6 +62,17 @@
             />
           </td>
         </tr>
+        <tr>
+          <td>Deals Prefix</td>
+          <td>
+            <input
+              type="text" name="dealPrefix"
+              class="adios component input"
+              value="{{ viewParams.app.configAsString('dealPrefix') }}"
+              onchange="saveSettings();"
+            />
+          </td>
+        </tr>
       </tbody>
     </table>
   </form>

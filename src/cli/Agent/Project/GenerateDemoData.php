@@ -60,10 +60,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mCustomerDocument    = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
     $mCustomerTag         = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
 
-    //Invoices
-    $mInvoice = new \HubletoApp\Community\Invoices\Models\Invoice($this->main);
-    $mInvoiceItem = new \HubletoApp\Community\Invoices\Models\InvoiceItem($this->main);
-
     //Leads
     $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
     $mLeadHistory  = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);

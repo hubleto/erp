@@ -36,7 +36,7 @@ class Loader extends \HubletoMain\Core\App
 
     if ($this->configAsBool('showEventsForTodayInDashboard')) {
       $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
-        'Events for today',
+        $this->translate('Events for today'),
         'calendar/boards/events-for-today',
       ));
     }

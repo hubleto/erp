@@ -2,5 +2,19 @@
     "manifest": {
         "Premium": "Premium",
         "Management of premium Hubleto account.": "Manažment prémiového účtu Hubleto."
+    },
+    "Models\\Log": {
+        "Date": "",
+        "Active users": "",
+        "Paid apps": "",
+        "Premium expected": ""
+    },
+    "Models\\Credit": {
+        "Recalculated": "",
+        "Credit": ""
+    },
+    "Models\\Payment": {
+        "Charged": "",
+        "Amount": ""
     }
 }

@@ -383,7 +383,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 : null}
               </div>
               {showAdditional ?
-                <div className="card">
+                <div className="card mt-2">
                   <div className="card-header">{this.translate('Contact persons')}</div>
                   <div className="card-body">
                     <a

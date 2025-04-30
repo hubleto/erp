@@ -5,7 +5,7 @@
         <td style="border-left:1em solid {{ event.color }}">{{ event.category }}</td>
         <td>{{ event.title }}</td>
         <td>{{ event.details }}</td>
-        <td>{% if event.allDay %} All-day {% else %} {{ viewParams.main.locale.formatTime(event.start ?? '', false) }} {% endif %}</td>
+        <td>{% if event.allDay %} {{ translate('All-day') }} {% else %} {{ viewParams.main.locale.formatTime(event.start ?? '', false) }} {% endif %}</td>
         <td class="text-right">
           {% if event.url %}
             <a href="{{ event.url }}" class="btn btn-transparent">

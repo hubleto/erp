@@ -73,7 +73,9 @@
     },
     "root": {
         "Deal statuses": "Stavy dealov",
-        "Deal Tags": "Značky dealov"
+        "Deal Tags": "Značky dealov",
+        "Deal value by result": "Hodnota dealov podľa výsledku",
+        "Most valuable deals": "Najhodnotnejšie dealy"
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendár",
@@ -88,7 +90,7 @@
         "Color": ""
     },
     "Controllers\\Boards\\MostValuableDeals": {
-        "Open deal": ""
+        "Open deal": "Otvoriť deal"
     },
     "Models\\DealProduct": {
         "Deal": "",

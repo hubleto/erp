@@ -7,17 +7,21 @@
         "Calendar": "Kalendár"
     },
     "Models\\Activity": {
-        "Subject": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Created by": ""
+        "Subject": "Predmet",
+        "Activity type": "Typ",
+        "Start date": "Začiatok",
+        "Start time": "Čas začiatku",
+        "End date": "Koniec",
+        "End time": "Čas konca",
+        "All day": "Celodenná",
+        "Completed": "Ukončená",
+        "Created by": "Vytvoril"
     },
     "Controllers\\Boards\\EventsForToday": {
-        "Open event details": ""
+        "Open event details": "Zobraziť podrobnosti",
+        "All-day": "Celodenná"
+    },
+    "root": {
+        "Events for today": "Dnešné udalosti"
     }
 }

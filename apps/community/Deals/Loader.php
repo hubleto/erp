@@ -38,14 +38,14 @@ class Loader extends \HubletoMain\Core\App
 
     if ($this->configAsBool('showMostValuableDealsInDashboard')) {
       $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
-        'Most valuable deals',
+        $this->translate('Most valuable deals'),
         'deals/boards/most-valuable-deals',
       ));
     }
 
     if ($this->configAsBool('showDealValueByResultInDashboard')) {
       $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
-        'Deal value by result',
+        $this->translate('Deal value by result'),
         'deals/boards/deal-value-by-result',
       ));
     }

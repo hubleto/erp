@@ -79,6 +79,8 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
 
   public function auth(): void
   {
+    setcookie('incorrectLogin', '', time() - 3600);
+
     parent::auth();
 
     $setLanguage = $this->main->urlParamAsString('set-language');
@@ -100,8 +102,8 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
 
       $date = date("D, d M Y H:i:s", strtotime('+1 year')) . 'GMT';
       header("Set-Cookie: language={$setLanguage}; EXPIRES{$date};");
-
-      $this->main->router->redirectTo($_SERVER['REQUEST_METHOD'] == 'POST' ? '?incorrectLogin=1' : '');
+      setcookie('incorrectLogin', '1');
+      $this->main->router->redirectTo('');
     }
 
     if (strlen((string) ($this->user['language'] ?? '')) != 2) $this->user['language'] = 'en';

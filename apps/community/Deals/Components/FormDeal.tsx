@@ -13,6 +13,7 @@ import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Docume
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import ModalSimple from 'adios/ModalSimple';
 import Hyperlink from 'adios/Inputs/Hyperlink';
+import { FormProps, FormState } from 'adios/Form';
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
@@ -26,7 +27,7 @@ export interface FormDealState extends HubletoFormState {
   activityCalendarDateClicked: string,
   tableDealProductsDescription: any,
   tableDealDocumentsDescription: any,
-
+  tablesKey: number,
 }
 
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
@@ -51,6 +52,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       activityCalendarDateClicked: '',
       tableDealProductsDescription: null,
       tableDealDocumentsDescription: null,
+      tablesKey: 0,
     };
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
@@ -147,6 +149,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
   onCreateActivityCallback() {
     this.loadRecord();
+  }
+
+  componentDidUpdate(prevProps: FormProps, prevState: FormState): void {
+    if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({tablesKey: Math.random()} as FormDealState)
   }
 
   renderContent(): JSX.Element {
@@ -380,6 +386,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                           ) : null}
                           <div className='w-full h-full overflow-x-auto'>
                             <TableDealProducts
+                              key={"services_"+this.state.tablesKey}
                               uid={this.props.uid + "_table_deal_services"}
                               className='mb-4'
                               data={{ data: R.SERVICES }}
@@ -405,6 +412,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                                 data.unit_price = lookupData[value].unit_price;
                                                 data.vat = lookupData[value].vat;
                                                 this.updateRecord({ SERVICES: table.state.data?.data });
+                                                this.setState({tablesKey: Math.random()} as FormDealState)
                                               }
                                             }}
                                           ></Lookup>
@@ -436,9 +444,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               }}
                               onDeleteSelectionChange={(table: TableDealProducts) => {
                                 this.updateRecord({ SERVICES: table.state.data?.data ?? []});
+                                this.setState({tablesKey: Math.random()} as FormDealState)
                               }}
                             ></TableDealProducts>
                             <TableDealProducts
+                              key={"products_"+this.state.tablesKey}
                               uid={this.props.uid + "_table_deal_products"}
                               data={{ data: R.PRODUCTS }}
                               descriptionSource='props'
@@ -463,6 +473,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                                 data.unit_price = lookupData[value].unit_price;
                                                 data.vat = lookupData[value].vat;
                                                 this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                                this.setState({tablesKey: Math.random()} as FormDealState)
                                               }
                                             }}
                                           ></Lookup>
@@ -494,6 +505,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               }}
                               onDeleteSelectionChange={(table: TableDealProducts) => {
                                 this.updateRecord({ PRODUCTS: table.state.data?.data ?? []});
+                                this.setState({tablesKey: Math.random()} as FormDealState)
                               }}
                             ></TableDealProducts>
                           </div>

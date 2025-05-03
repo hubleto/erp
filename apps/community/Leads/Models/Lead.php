@@ -62,7 +62,15 @@ class Lead extends \HubletoMain\Core\Models\Model
       ),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
-      'source_channel' => (new Varchar($this, $this->translate('Source channel'))),
+      'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
+        1 => "Advertissment",
+        2 => "Partner",
+        3 => "Web",
+        4 => "Cold call",
+        5 => "E-mail",
+        6 => "Refferal",
+        7 => "Other",
+      ]),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
     ]);
   }
@@ -137,6 +145,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     $description->defaultValues['id_customer'] = null;
     $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_person'] = null;
+    $description->defaultValues['price'] = 0;
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['id_currency'] = $defaultCurrency;
     $description->defaultValues['status'] = $this::STATUS_NEW;

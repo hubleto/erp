@@ -7,6 +7,7 @@ import TableContacts from './TableContacts';
 import Lookup from 'adios/Inputs/Lookup';
 import Boolean from 'adios/Inputs/Boolean';
 import request from 'adios/Request';
+import { FormProps, FormState } from 'adios/Form';
 
 export interface FormPersonProps extends HubletoFormProps {
   newEntryId?: number,
@@ -16,7 +17,8 @@ export interface FormPersonProps extends HubletoFormProps {
 
 export interface FormPersonState extends HubletoFormState {
   newEntryId?: number,
-  primaryContactMessage: boolean
+  primaryContactMessage: boolean,
+  contactsTableKey: number,
 }
 
 export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPersonState> {
@@ -35,7 +37,8 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
     this.state = {
       ...this.getStateFromProps(props),
       newEntryId: this.props.newEntryId ?? -1,
-      primaryContactMessage: false
+      primaryContactMessage: false,
+      contactsTableKey: 0,
     }
   }
 
@@ -116,6 +119,10 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
     }
 
     return record;
+  }
+
+  componentDidUpdate(prevProps: FormProps, prevState: FormState): void {
+    if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({contactsTableKey: Math.random()} as FormPersonState)
   }
 
   renderContent(): JSX.Element {
@@ -215,7 +222,6 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                       id_person: { _useMasterRecordId_: true },
                       type: 'email',
                     });
-                    this.updateRecord({ CONTACTS: R.CONTACTS });
                     this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormPersonState);
                   }}
                 >
@@ -223,6 +229,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                   <span className="text">{this.translate('Add contact')}</span>
                 </a>
                 <TableContacts
+                  key={"contacts_"+this.state.contactsTableKey}
                   uid={this.props.uid + '_table_contacts'}
                   context="Hello World"
                   data={{data: R.CONTACTS}}
@@ -236,6 +243,7 @@ export default class FormPerson<P, S> extends HubletoForm<FormPersonProps,FormPe
                   }}
                   onDeleteSelectionChange={(table: TableContacts) => {
                     this.updateRecord({ CONTACTS: table.state.data.data ?? [] });
+                    this.setState({contactsTableKey: Math.random()} as FormPersonState)
                   }}
                   customEndpointParams={{idPerson: R.id}}
                   description={{

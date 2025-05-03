@@ -13,6 +13,7 @@ import ModalSimple from 'adios/ModalSimple';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import Hyperlink from 'adios/Inputs/Hyperlink';
+import { FormProps, FormState } from 'adios/Form';
 
 export interface FormLeadProps extends HubletoFormProps {
   newEntryId?: number,
@@ -26,6 +27,7 @@ export interface FormLeadState extends HubletoFormState {
   activityCalendarDateClicked: string,
   tableLeadProductsDescription: any,
   tableLeadDocumentsDescription: any,
+  tablesKey: number;
 }
 
 export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadState> {
@@ -50,7 +52,12 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       activityCalendarDateClicked: '',
       tableLeadProductsDescription: null,
       tableLeadDocumentsDescription: null,
+      tablesKey: 0,
     };
+  }
+
+  componentDidUpdate(prevProps: FormProps, prevState: FormState): void {
+    if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({tablesKey: Math.random()} as FormLeadState)
   }
 
   getStateFromProps(props: FormLeadProps) {
@@ -196,7 +203,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
         {this.state.id > 0 ?
           <div className="h-0 w-full text-right">
             <div className="badge badge-secondary badge-large">
-              Lead value:&nbsp;{globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
+              Lead value:&nbsp;{globalThis.main.numberFormat(R.price ?? 0, 2, ",", " ")} {R.CURRENCY.code}
             </div>
           </div>
         : null}
@@ -371,6 +378,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     ) : null}
                     <div className='w-full h-full overflow-x-auto'>
                       <TableLeadProducts
+                        key={"services_"+this.state.tablesKey}
                         uid={this.props.uid + "_table_lead_services"}
                         className='mb-4'
                         data={{ data: R.SERVICES }}
@@ -396,6 +404,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                                           data.unit_price = lookupData[value].unit_price;
                                           data.vat = lookupData[value].vat;
                                           this.updateRecord({ SERVICES: table.state.data?.data });
+                                          this.setState({tablesKey: Math.random()} as FormLeadState)
                                         }
                                       }}
                                     ></Lookup>
@@ -427,9 +436,11 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         }}
                         onDeleteSelectionChange={(table: TableLeadProducts) => {
                           this.updateRecord({ SERVICES: table.state.data?.data ?? []});
+                          this.setState({tablesKey: Math.random()} as FormLeadState)
                         }}
                       ></TableLeadProducts>
                       <TableLeadProducts
+                        key={"products_"+this.state.tablesKey}
                         uid={this.props.uid + "_table_lead_products"}
                         data={{ data: R.PRODUCTS }}
                         descriptionSource='props'
@@ -454,6 +465,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                                           data.unit_price = lookupData[value].unit_price;
                                           data.vat = lookupData[value].vat;
                                           this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                          this.setState({tablesKey: Math.random()} as FormLeadState)
                                         }
                                       }}
                                     ></Lookup>
@@ -485,6 +497,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         }}
                         onDeleteSelectionChange={(table: TableLeadProducts) => {
                           this.updateRecord({ PRODUCTS: table.state.data?.data ?? []});
+                          this.setState({tablesKey: Math.random()} as FormLeadState)
                         }}
                       ></TableLeadProducts>
                     </div>

@@ -545,7 +545,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ;
 
     $titles = ["TV", "Internet", "Fiber", "Landline", "Marketing", "Virtual Server"];
-    $sources = ["Advertisement", "Phone Call", "Email", "Newsletter"];
     $identifierPrefixes = ["US", "EU", "AS"];
 
     foreach ($customers as $customer) {
@@ -566,7 +565,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_currency" => 1,
         "date_expected_close" => $leadDateClose,
         "id_user" => 1,
-        "source_channel" => $sources[rand(0, count($sources)-1)],
+        "source_channel" => rand(1,7),
         "is_archived" => false,
         "status" => rand($mLead::STATUS_NEW,$mLead::STATUS_LOST),
         "date_created" => $leadDateCreated,

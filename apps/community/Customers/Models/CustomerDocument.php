@@ -52,4 +52,13 @@ class CustomerDocument extends \HubletoMain\Core\Models\Model
 
     return $description;
   }
+
+  public function onBeforeDelete(int $id): int
+  {
+    $idDocument = (int) $this->record->find($id)->toArray()["id_document"];
+    (new Document($this->main))->onBeforeDelete($idDocument);
+    (new Document($this->main))->record->where("id", $idDocument)->delete();
+
+    return $id;
+  }
 }

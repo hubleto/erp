@@ -17,6 +17,7 @@ import FormPerson, {FormPersonProps, FormPersonState} from "../../Contacts/Compo
 import Calendar from '../../Calendar/Components/Calendar'
 import Hyperlink from "adios/Inputs/Hyperlink";
 import request from "adios/Request";
+import { FormProps, FormState } from "adios/Form";
 
 export interface FormCustomerProps extends HubletoFormProps {
   highlightIdActivity: number,
@@ -40,6 +41,7 @@ interface FormCustomerState extends HubletoFormState {
   activityCalendarTimeClicked: string,
   activityCalendarDateClicked: string,
   tableContactsDescription?: any,
+  tablesKey: number,
 }
 
 export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, FormCustomerState> {
@@ -67,7 +69,12 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       showIdActivity: 0,
       activityCalendarTimeClicked: '',
       activityCalendarDateClicked: '',
+      tablesKey: 0,
     }
+  }
+
+  componentDidUpdate(prevProps: FormProps, prevState: FormState): void {
+    if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({tablesKey: Math.random()} as FormCustomerState)
   }
 
   getStateFromProps(props: FormCustomerProps) {
@@ -572,7 +579,8 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 <span className="text">Add document</span>
               </a>
               <TableCustomerDocuments
-                uid={this.props.uid + "_table_deals"}
+                key={this.state.tablesKey + "_table_documents"}
+                uid={this.props.uid + "_table_documents"}
                 data={{ data: R.DOCUMENTS }}
                 descriptionSource="props"
                 customEndpointParams={{idCustomer: R.id}}
@@ -604,6 +612,10 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 }}
                 onRowClick={(table: TableCustomerDocuments, row: any) => {
                   this.setState({showIdDocument: row.id_document} as FormCustomerState);
+                }}
+                onDeleteSelectionChange={(table) => {
+                  this.updateRecord({ DOCUMENTS: table.state.data?.data ?? []});
+                  this.setState({tablesKey: Math.random()} as FormCustomerState)
                 }}
               />
               {this.state.showIdDocument != 0 ?

@@ -583,6 +583,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 </a>
               : null}
               <TableDealDocuments
+                key={this.state.tablesKey + "_table_deal_document"}
                 uid={this.props.uid + "_table_deal_documents"}
                 data={{ data: R.DOCUMENTS }}
                 customEndpointParams={{idDeal: R.id}}
@@ -615,6 +616,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                 onRowClick={(table: TableDealDocuments, row: any) => {
                   this.setState({showIdDocument: row.id_document} as FormDealState);
+                }}
+                onDeleteSelectionChange={(table) => {
+                  this.updateRecord({ DOCUMENTS: table.state.data?.data ?? []});
+                  this.setState({tablesKey: Math.random()} as FormDealState)
                 }}
               />
               {this.state.showIdDocument != 0 ?

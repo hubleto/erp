@@ -14,6 +14,7 @@ import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Docume
 import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 import { FormProps, FormState } from 'adios/Form';
+import { table } from 'console';
 
 export interface FormLeadProps extends HubletoFormProps {
   newEntryId?: number,
@@ -544,6 +545,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 </a>
               : null}
               <TableLeadDocuments
+                key={this.state.tablesKey + "_table_lead_document"}
                 uid={this.props.uid + "_table_lead_document"}
                 data={{ data: R.DOCUMENTS }}
                 descriptionSource="both"
@@ -576,6 +578,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
                 onRowClick={(table: TableLeadDocuments, row: any) => {
                   this.setState({showIdDocument: row.id_document} as FormLeadState);
+                }}
+                onDeleteSelectionChange={(table) => {
+                  this.updateRecord({ DOCUMENTS: table.state.data?.data ?? []});
+                  this.setState({tablesKey: Math.random()} as FormLeadState)
                 }}
               />
               {this.state.showIdDocument != 0 ?

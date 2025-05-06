@@ -266,6 +266,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       {this.inputWrapper('id_user', {readonly: R.is_archived})}
                       {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                       {this.inputWrapper('source_channel', {readonly: R.is_archived})}
+                      {this.inputWrapper('is_new_customer', {readonly: R.is_archived})}
+                      {this.inputWrapper('business_type', {uiStyle: 'buttons', readonly: R.is_archived})}
                       <FormInput title='Tags'>
                         <InputTags2 {...this.getInputProps('tags')}
                           value={this.state.record.TAGS}
@@ -283,9 +285,9 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     </div>
                     <div className='border-l border-gray-200'></div>
                     <div className='grow'>
-                      {this.inputWrapper("deal_result", {uiStyle: 'buttons'})}
-                      {this.inputWrapper('is_new_customer')}
-                      {this.inputWrapper('business_type', {uiStyle: 'buttons'})}
+                      {this.inputWrapper("deal_result", {uiStyle: 'buttons', readonly: R.is_archived, onChange: () => {this.updateRecord({lost_reason: null})}})}
+                      {this.state.record.deal_result == 3 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
+                      {showAdditional ? this.inputWrapper('date_result_update') : null}
                       {showAdditional ? this.inputWrapper('date_created') : null}
                       {showAdditional ? this.inputWrapper('is_archived') : null}
                     </div>
@@ -316,7 +318,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               return (
                                 <>
                                   <button
-                                    onClick={R.is_archived ? null : ()=>{
+                                    onClick={R.is_archived ? null : () => {
                                       if (this.state.isInlineEditing == false) this.setState({isInlineEditing: true});
                                       R.id_pipeline_step = s.id;
                                       R.deal_result = s.set_result;

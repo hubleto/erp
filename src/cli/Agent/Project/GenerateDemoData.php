@@ -622,7 +622,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       if (rand(1, 3) != 1) continue; // negenerujem deal pre vsetky leads
 
       $pipeline = rand(1,2);
-      $result = rand(1,3);
+      $result = rand($mDeal::RESULT_PENDING,$mDeal::RESULT_LOST);
       if ($pipeline === 1) $pipelineStep = rand(1,3);
       else $pipelineStep = rand(4,7);
 

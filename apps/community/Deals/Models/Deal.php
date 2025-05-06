@@ -27,9 +27,9 @@ class Deal extends \HubletoMain\Core\Models\Model
   public string $recordManagerClass = RecordManagers\Deal::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
-  const RESULT_LOST = 1;
+  const RESULT_PENDING = 1;
   const RESULT_WON = 2;
-  const RESULT_PENDING = 3;
+  const RESULT_LOST = 3;
 
   const BUSINESS_TYPE_NEW = 1;
   const BUSINESS_TYPE_EXISTING = 2;
@@ -78,7 +78,8 @@ class Deal extends \HubletoMain\Core\Models\Model
       ]),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues([$this::RESULT_LOST => "Lost", $this::RESULT_WON => "Won", $this::RESULT_PENDING => "Pending"])->setDefaultValue(3),
+        ->setEnumValues([$this::RESULT_PENDING => "Pending", $this::RESULT_WON => "Won", $this::RESULT_LOST => "Lost"])->setDefaultValue(3),
+      'lost_reason' => new Text($this, "Reason for Lost"),
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
       'business_type' => (new Integer($this, $this->translate('Business type')))->setEnumValues(
@@ -99,9 +100,9 @@ class Deal extends \HubletoMain\Core\Models\Model
         break;
       case 'deal_result':
           $description->setEnumCssClasses([
-            1 => "!text-red-500",
+            1 => "!text-white-500",
             2 => "!text-green-500",
-            3 => "!text-white-500",
+            3 => "!text-red-500",
           ]);
         break;
       default:
@@ -137,6 +138,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     unset($description->columns['id_pipeline']);
     unset($description->columns['shared_folder']);
     unset($description->columns['date_result_update']);
+    unset($description->columns['lost_reason']);
 
     if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [
@@ -213,18 +215,19 @@ class Deal extends \HubletoMain\Core\Models\Model
     $calculator = new CalculatePrice();
     $allProducts = array_merge($originalRecord["PRODUCTS"], $originalRecord["SERVICES"]);
 
-    foreach ($allProducts as $product) {
-      if (!isset($product["_toBeDeleted_"])) {
-        $sums += $calculator->calculatePriceIncludingVat(
-          $product["unit_price"],
-          $product["amount"],
-          $product["vat"] ?? 0,
-          $product["discount"] ?? 0
-        );
+    if (!empty($allProducts)) {
+      foreach ($allProducts as $product) {
+        if (!isset($product["_toBeDeleted_"])) {
+          $sums += $calculator->calculatePriceIncludingVat(
+            $product["unit_price"],
+            $product["amount"],
+            $product["vat"] ?? 0,
+            $product["discount"] ?? 0
+          );
+        }
       }
+      $this->record->find($savedRecord["id"])->update(["price" => $sums]);
     }
-
-    $this->record->find($savedRecord["id"])->update(["price" => $sums]);
 
     return $savedRecord;
   }
@@ -254,17 +257,21 @@ class Deal extends \HubletoMain\Core\Models\Model
   {
     $this->getOwnership($record);
 
-    $deal = $this->record->find($record["id"])->toArray();
+    $deal = $this->record->find($record["id"]);
     $mDealHistory = new DealHistory($this->main);
 
-    if ((float) $deal["price"] != (float) $record["price"]) {
+    if ($record["deal_result"] != $deal->deal_result) {
+      $record["date_result_update"] = date("Y-m-d H:i:s");
+    }
+
+    if ((float) $deal->price != (float) $record["price"]) {
       $mDealHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_deal" => (int) ($record["id"] ?? 0),
         "description" => "Price changed to " . (string) ($record["price"] ?? '')
       ]);
     }
-    if ((string) $deal["date_expected_close"] != (string) $record["date_expected_close"]) {
+    if ((string) $deal->date_expected_close != (string) $record["date_expected_close"]) {
       $mDealHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_deal" => $record["id"],

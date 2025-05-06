@@ -60,6 +60,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setEnumValues(
         [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
       ),
+      'lost_reason' => new Text($this, "Reason for Lost"),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
@@ -103,6 +104,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
     unset($description->columns['shared_folder']);
+    unset($description->columns['lost_reason']);
 
     if ($this->main->urlParamAsInteger('idCustomer') > 0) {
       $description->permissions = [
@@ -234,18 +236,19 @@ class Lead extends \HubletoMain\Core\Models\Model
     $calculator = new CalculatePrice();
     $allProducts = array_merge($originalRecord["PRODUCTS"], $originalRecord["SERVICES"]);
 
-    foreach ($allProducts as $product) {
-      if (!isset($product["_toBeDeleted_"])) {
-        $sums += $calculator->calculatePriceIncludingVat(
-          $product["unit_price"],
-          $product["amount"],
-          $product["vat"] ?? 0,
-          $product["discount"] ?? 0
-        );
+    if (!empty($allProducts)) {
+      foreach ($allProducts as $product) {
+        if (!isset($product["_toBeDeleted_"])) {
+          $sums += $calculator->calculatePriceIncludingVat(
+            $product["unit_price"],
+            $product["amount"],
+            $product["vat"] ?? 0,
+            $product["discount"] ?? 0
+          );
+        }
       }
+      $this->record->find($savedRecord["id"])->update(["price" => $sums]);
     }
-
-    $this->record->find($savedRecord["id"])->update(["price" => $sums]);
 
     return $savedRecord;
   }

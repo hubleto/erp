@@ -58,4 +58,60 @@ class Customer extends \HubletoMain\Core\RecordManager
     return $this->belongsTo(User::class, 'id_user', 'id');
   }
 
+  public function addOrderByToQuery(mixed $query, array $orderBy): mixed
+  {
+    if (isset($orderBy['field']) && $orderBy['field'] == 'tags') {
+      if (empty($this->joinManager["tags"])) {
+        $this->joinManager["tags"]["order"] = true;
+        $query
+          ->addSelect("customer_tags.name")
+          ->join('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
+          ->join('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
+        ;
+      }
+      $query->orderBy('customer_tags.name', $orderBy['direction']);
+
+      return $query;
+    } else {
+      return parent::addOrderByToQuery($query, $orderBy);
+    }
+  }
+
+  public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
+  {
+    if (!empty($fulltextSearch)) {
+      $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
+
+      if (empty($this->joinManager["tags"])) {
+        $this->joinManager["tags"]["fullText"] = true;
+        $query
+          ->addSelect("customer_tags.name as customerTag")
+          ->join('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
+          ->join('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
+        ;
+      }
+      $query->orHaving('customerTag', 'like', "%{$fulltextSearch}%");
+
+    }
+    return $query;
+  }
+
+  public function addColumnSearchToQuery(mixed $query, array $columnSearch): mixed
+  {
+    $query = parent::addColumnSearchToQuery($query, $columnSearch);
+
+    if (!empty($columnSearch) && !empty($columnSearch['tags'])) {
+      if (empty($this->joinManager["tags"])) {
+        $this->joinManager["tags"]["column"] = true;
+        $query
+          ->addSelect("customer_tags.name as customerTag")
+          ->join('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
+          ->join('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
+        ;
+      }
+      $query->having('customerTag', 'like', "%{$columnSearch['tags']}%");
+    }
+    return $query;
+  }
+
 }

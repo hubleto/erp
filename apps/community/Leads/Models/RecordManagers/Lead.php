@@ -99,13 +99,82 @@ class Lead extends \HubletoMain\Core\RecordManager
   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
   {
     if (isset($orderBy['field']) && $orderBy['field'] == 'DEAL') {
-      $query
-        ->join('deals', 'deals.id_lead', '=', 'leads.id')
-        ->orderBy('deals.identifier', $orderBy['direction'])
-      ;
+      if (empty($this->joinManager["DEAL"])) {
+        $this->joinManager["DEAL"]["order"] = true;
+        $query->join('deals', 'deals.id_lead', '=', 'leads.id');
+      }
+      $query->orderBy('deals.identifier', $orderBy['direction']);
+
+      return $query;
+    } else if (isset($orderBy['field']) && $orderBy['field'] == 'tags') {
+      if (empty($this->joinManager["tags"])) {
+        $this->joinManager["tags"]["order"] = true;
+        $query
+          ->addSelect("lead_tags.name")
+          ->join('cross_lead_tags', 'cross_lead_tags.id_lead', '=', 'leads.id')
+          ->join('lead_tags', 'cross_lead_tags.id_tag', '=', 'lead_tags.id')
+        ;
+      }
+      $query->orderBy('lead_tags.name', $orderBy['direction']);
+
       return $query;
     } else {
       return parent::addOrderByToQuery($query, $orderBy);
     }
+  }
+
+  public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
+  {
+    if (!empty($fulltextSearch)) {
+      $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
+
+      if (empty($this->joinManager["DEAL"])) {
+        $this->joinManager["DEAL"]["fullText"] = true;
+        $query
+          ->addSelect("deals.identifier as idDeal")
+          ->join('deals', 'deals.id_lead', '=', 'leads.id')
+        ;
+      }
+      $query->orHaving('idDeal', 'like', "%{$fulltextSearch}%");
+
+      if (empty($this->joinManager["tags"])) {
+        $this->joinManager["tags"]["fullText"] = true;
+        $query
+          ->addSelect("lead_tags.name")
+          ->join('cross_lead_tags', 'cross_lead_tags.id_lead', '=', 'leads.id')
+          ->join('lead_tags', 'cross_lead_tags.id_tag', '=', 'lead_tags.id')
+        ;
+      }
+      $query->orHaving('lead_tags.name', 'like', "%{$fulltextSearch}%");
+    }
+    return $query;
+  }
+
+  public function addColumnSearchToQuery(mixed $query, array $columnSearch): mixed
+  {
+    $query = parent::addColumnSearchToQuery($query, $columnSearch);
+    if (!empty($columnSearch) && !empty($columnSearch['DEAL'])) {
+      if (empty($this->joinManager["DEAL"])) {
+        $this->joinManager["DEAL"]["column"] = true;
+        $query
+          ->addSelect("deals.identifier as idDeal")
+          ->join('deals', 'deals.id_lead', '=', 'leads.id')
+        ;
+      }
+      $query->having('idDeal', 'like', "%{$columnSearch['DEAL']}%");
+    }
+
+    if (!empty($columnSearch) && !empty($columnSearch['tags'])) {
+      if (empty($this->joinManager["tags"])) {
+        $this->joinManager["tags"]["column"] = true;
+        $query
+          ->addSelect("lead_tags.name")
+          ->join('cross_lead_tags', 'cross_lead_tags.id_lead', '=', 'leads.id')
+          ->join('lead_tags', 'cross_lead_tags.id_tag', '=', 'lead_tags.id')
+        ;
+      }
+      $query->having('lead_tags.name', 'like', "%{$columnSearch['tags']}%");
+    }
+    return $query;
   }
 }

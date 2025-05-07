@@ -109,4 +109,60 @@ class Deal extends \HubletoMain\Core\RecordManager
     return $query;
   }
 
+  public function addOrderByToQuery(mixed $query, array $orderBy): mixed
+  {
+    if (isset($orderBy['field']) && $orderBy['field'] == 'tags') {
+      if (empty($this->joinManager["tags"])) {
+        $this->joinManager["tags"]["order"] = true;
+        $query
+          ->addSelect("deal_tags.name")
+          ->join('cross_deal_tags', 'cross_deal_tags.id_deal', '=', 'deals.id')
+          ->join('deal_tags', 'cross_deal_tags.id_tag', '=', 'deal_tags.id')
+        ;
+      }
+      $query->orderBy('deal_tags.name', $orderBy['direction']);
+
+      return $query;
+    } else {
+      return parent::addOrderByToQuery($query, $orderBy);
+    }
+  }
+
+  public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
+  {
+    if (!empty($fulltextSearch)) {
+      $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
+
+      if (empty($this->joinManager["tags"])) {
+        $this->joinManager["tags"]["fullText"] = true;
+        $query
+          ->addSelect("deal_tags.name")
+          ->join('cross_deal_tags', 'cross_deal_tags.id_deal', '=', 'deals.id')
+          ->join('deal_tags', 'cross_deal_tags.id_tag', '=', 'deal_tags.id')
+        ;
+      }
+      $query->orHaving('deal_tags.name', 'like', "%{$fulltextSearch}%");
+
+    }
+    return $query;
+  }
+
+  public function addColumnSearchToQuery(mixed $query, array $columnSearch): mixed
+  {
+    $query = parent::addColumnSearchToQuery($query, $columnSearch);
+
+    if (!empty($columnSearch) && !empty($columnSearch['tags'])) {
+      if (empty($this->joinManager["tags"])) {
+        $this->joinManager["tags"]["column"] = true;
+        $query
+          ->addSelect("deal_tags.name")
+          ->join('cross_deal_tags', 'cross_deal_tags.id_deal', '=', 'deals.id')
+          ->join('deal_tags', 'cross_deal_tags.id_tag', '=', 'deal_tags.id')
+        ;
+      }
+      $query->having('deal_tags.name', 'like', "%{$columnSearch['tags']}%");
+    }
+    return $query;
+  }
+
 }

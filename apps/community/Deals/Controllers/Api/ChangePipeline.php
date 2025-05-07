@@ -3,8 +3,8 @@
 namespace HubletoApp\Community\Deals\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Settings\Models\Pipeline;
-use HubletoApp\Community\Settings\Models\PipelineStep;
+use HubletoApp\Community\Pipeline\Models\Pipeline;
+use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
 class ChangePipeline extends \HubletoMain\Core\Controllers\Controller
 {

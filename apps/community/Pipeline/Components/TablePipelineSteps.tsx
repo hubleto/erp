@@ -12,13 +12,13 @@ export default class TablePipelineSteps extends Table<TablePipelineStepsProps, T
     ...Table.defaultProps,
     itemsPerPage: 15,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Settings/Models/PipelineStep',
+    model: 'HubletoApp/Community/Pipeline/Models/PipelineStep',
   }
 
   props: TablePipelineStepsProps;
   state: TablePipelineStepsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Settings\\Loader::Components\\TablePipelineSteps';
+  translationContext: string = 'HubletoApp\\Community\\Pipeline\\Loader::Components\\TablePipelineSteps';
 
   constructor(props: TablePipelineStepsProps) {
     super(props);

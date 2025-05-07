@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Models;
+namespace HubletoApp\Community\Pipeline\Models;
 
 use ADIOS\Core\Db\Column\Varchar;
 

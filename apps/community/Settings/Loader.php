@@ -2,9 +2,6 @@
 
 namespace HubletoApp\Community\Settings;
 
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Settings\Models\Permission;
-
 class Loader extends \HubletoMain\Core\App
 {
 
@@ -24,7 +21,6 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/activity-types\/?$/' => Controllers\ActivityTypes::class,
       '/^settings\/countries\/?$/' => Controllers\Countries::class,
       '/^settings\/currencies\/?$/' => Controllers\Currencies::class,
-      '/^settings\/pipelines\/?$/' => Controllers\Pipelines::class,
       '/^settings\/permissions\/?$/' => Controllers\Permissions::class,
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
       '/^settings\/config\/?$/' => Controllers\Config::class,
@@ -40,7 +36,6 @@ class Loader extends \HubletoMain\Core\App
     $this->main->addSetting($this, ['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
     $this->main->addSetting($this, ['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
     $this->main->addSetting($this, ['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
-    $this->main->addSetting($this, ['title' => $this->translate('Pipelines'), 'icon' => 'fas fa-bars-progress', 'url' => 'settings/pipelines']);
     $this->main->addSetting($this, ['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
     $this->main->addSetting($this, ['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
   }
@@ -58,8 +53,6 @@ class Loader extends \HubletoMain\Core\App
       $mSetting = new Models\Setting($this->main);
       $mActivityTypes = new Models\ActivityType($this->main);
       $mCurrency = new Models\Currency($this->main);
-      $mPipeline = new Models\Pipeline($this->main);
-      $mPipelineStep = new Models\PipelineStep($this->main);
       $mInvoiceProfile = new Models\InvoiceProfile($this->main);
 
       $mProfile->dropTableIfExists()->install();
@@ -72,12 +65,10 @@ class Loader extends \HubletoMain\Core\App
       $mSetting->dropTableIfExists()->install();
       $mActivityTypes->dropTableIfExists()->install();
       $mCurrency->dropTableIfExists()->install();
-      $mPipeline->dropTableIfExists()->install();
-      $mPipelineStep->dropTableIfExists()->install();
       $mInvoiceProfile->dropTableIfExists()->install();
 
       $mSetting->record->recordCreate([
-        'key' => 'Apps\Community\Settings\Pipeline\DefaultPipeline',
+        'key' => 'Apps\Community\Pipeline\DefaultPipeline',
         'value' => '2',
         'id_user' => null
       ]);
@@ -90,19 +81,6 @@ class Loader extends \HubletoMain\Core\App
       $mCurrency->record->recordCreate([ 'name' => 'Euro', 'code' => 'EUR' ]);
       $mCurrency->record->recordCreate([ 'name' => 'Dollar', 'code' => 'USD' ]);
       $mCurrency->record->recordCreate([ 'name' => 'Koruny', 'code' => 'CZK' ]);
-
-      $mPipeline->record->recordCreate([ "name" => "New customer" ]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'New', 'order' => 1, 'color' => '#4080A0', 'id_pipeline' => 1 , "set_result" => Deal::RESULT_PENDING]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A04020', 'id_pipeline' => 1, "set_result" => Deal::RESULT_PENDING]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'Closed', 'order' => 3, 'color' => '#006060', 'id_pipeline' => 1, "set_result" => Deal::RESULT_WON ]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'Lost', 'order' => 4, 'color' => '#f50c0c', 'id_pipeline' => 1, "set_result" => Deal::RESULT_LOST ]);
-
-      $mPipeline->record->recordCreate([ "name" => "Existing customer" ]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'Start', 'order' => 1, 'color' => '#405060', 'id_pipeline' => 2, "set_result" => Deal::RESULT_PENDING ]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'Client Contacted', 'order' => 2, 'color' => '#800000', 'id_pipeline' => 2, "set_result" => Deal::RESULT_PENDING ]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'In Progress', 'order' => 3, 'color' => '#808000', 'id_pipeline' => 2, "set_result" => Deal::RESULT_PENDING ]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'Ended', 'order' => 4, 'color' => '#002080', 'id_pipeline' => 2, "set_result" => Deal::RESULT_WON ]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'Lost', 'order' => 5, 'color' => '#f50c0c', 'id_pipeline' => 2, "set_result" => Deal::RESULT_LOST ]);
 
       $mActivityTypes->record->recordCreate([ 'name' => 'Meeting', 'color' => '#607d8b', 'calendar_visibility' => true ]);
       $mActivityTypes->record->recordCreate([ 'name' => 'Bussiness Trip', 'color' => '#673ab7', 'calendar_visibility' => true ]);
@@ -398,16 +376,6 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Settings/Models/Tag:Update",
       "HubletoApp/Community/Settings/Models/Tag:Delete",
 
-      "HubletoApp/Community/Settings/Models/Pipeline:Create",
-      "HubletoApp/Community/Settings/Models/Pipeline:Read",
-      "HubletoApp/Community/Settings/Models/Pipeline:Update",
-      "HubletoApp/Community/Settings/Models/Pipeline:Delete",
-
-      "HubletoApp/Community/Settings/Models/PipelineStep:Create",
-      "HubletoApp/Community/Settings/Models/PipelineStep:Read",
-      "HubletoApp/Community/Settings/Models/PipelineStep:Update",
-      "HubletoApp/Community/Settings/Models/PipelineStep:Delete",
-
       "HubletoApp/Community/Settings/Models/Profile:Create",
       "HubletoApp/Community/Settings/Models/Profile:Read",
       "HubletoApp/Community/Settings/Models/Profile:Update",
@@ -442,8 +410,6 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Settings/Controllers/ActivityType",
       "HubletoApp/Community/Settings/Controllers/Country",
       "HubletoApp/Community/Settings/Controllers/Currency",
-      "HubletoApp/Community/Settings/Controllers/Pipeline",
-      "HubletoApp/Community/Settings/Controllers/PipelineStep",
       "HubletoApp/Community/Settings/Controllers/Profile",
       "HubletoApp/Community/Settings/Controllers/Setting",
       "HubletoApp/Community/Settings/Controllers/Tag",
@@ -457,8 +423,6 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Settings/ActivityType",
       "HubletoApp/Community/Settings/Country",
       "HubletoApp/Community/Settings/Currency",
-      "HubletoApp/Community/Settings/Pipeline",
-      "HubletoApp/Community/Settings/PipelineStep",
       "HubletoApp/Community/Settings/Profile",
       "HubletoApp/Community/Settings/Setting",
       "HubletoApp/Community/Settings/Tag",

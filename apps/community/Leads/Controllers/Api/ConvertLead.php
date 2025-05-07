@@ -11,7 +11,7 @@ use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Leads\Models\LeadProduct;
-use HubletoApp\Community\Settings\Models\PipelineStep;
+use HubletoApp\Community\Pipeline\Models\PipelineStep;
 use HubletoApp\Community\Settings\Models\Setting;
 
 class ConvertLead extends \HubletoMain\Core\Controllers\Controller
@@ -43,7 +43,7 @@ class ConvertLead extends \HubletoMain\Core\Controllers\Controller
     $mSettings = new Setting($this->main);
     $mPipepelineStep = new PipelineStep($this->main);
     $defaultPipeline =(int) $mSettings->record
-      ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
+      ->where("key", "Apps\Community\Pipeline\DefaultPipeline")
       ->first()
       ->value
     ;

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Models;
+namespace HubletoApp\Community\Pipeline\Models;
 
 use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\Integer;
@@ -26,7 +26,7 @@ class PipelineStep extends \HubletoMain\Core\Models\Model
       'color' => (new Color($this, $this->translate('Color')))->setRequired(),
       'id_pipeline' => (new Lookup($this, $this->translate("Pipeline"), Pipeline::class, 'CASCADE'))->setRequired(),
       'set_result' => (new Integer($this, $this->translate('Set result of a deal to')))->setRequired()
-        ->setEnumValues([Deal::RESULT_LOST => "Lost", Deal::RESULT_WON => "Won", Deal::RESULT_PENDING => "Pending"])
+        ->setEnumValues([Deal::RESULT_PENDING => "Pending", Deal::RESULT_WON => "Won",  Deal::RESULT_LOST => "Lost"])
     ]);
   }
 

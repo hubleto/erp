@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Documents\Controllers;
 
-class Documents extends \HubletoMain\Core\Controllers\Controller {
+class Browse extends \HubletoMain\Core\Controllers\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -13,7 +13,7 @@ class Documents extends \HubletoMain\Core\Controllers\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Documents/Documents.twig');
+    $this->setView('@HubletoApp:Community:Documents/Browse.twig');
   }
 
 }

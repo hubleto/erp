@@ -10,13 +10,14 @@ use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Text;
 use ADIOS\Core\Db\Column\Varchar;
+
 use HubletoApp\Community\Contacts\Models\Person;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Products\Controllers\Api\CalculatePrice;
 use HubletoApp\Community\Settings\Models\Currency;
-use HubletoApp\Community\Settings\Models\Pipeline;
-use HubletoApp\Community\Settings\Models\PipelineStep;
+use HubletoApp\Community\Pipeline\Models\Pipeline;
+use HubletoApp\Community\Pipeline\Models\PipelineStep;
 use HubletoApp\Community\Settings\Models\Setting;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoMain\Core\Helper;
@@ -159,7 +160,7 @@ class Deal extends \HubletoMain\Core\Models\Model
   {
     $mSettings = new Setting($this->main);
     $defaultPipeline = (int) $mSettings->record
-      ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
+      ->where("key", "Apps\Community\Pipeline\DefaultPipeline")
       ->first()
       ->value
     ;

@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Pipeline\Controllers;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Deals\Models\Tag;
 use HubletoApp\Community\Settings\Models\Currency;
-use HubletoApp\Community\Settings\Models\Pipeline;
+use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Settings\Models\Setting;
 
 class Home extends \HubletoMain\Core\Controllers\Controller {
@@ -35,7 +35,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
 
     $defaultPipeline = $mSetting->record
       ->select("value")
-      ->where("key", "Apps\Community\Settings\Pipeline\DefaultPipeline")
+      ->where("key", "Apps\Community\Pipeline\DefaultPipeline")
       ->first()
     ;
     $defaultPipelineId = (int) $defaultPipeline->value;

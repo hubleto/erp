@@ -2,25 +2,31 @@ import React, { Component } from "react";
 import { deepObjectMerge, getUrlParam } from "adios/Helper";
 import HubletoForm, { HubletoFormProps, HubletoFormState, } from "../../../../src/core/Components/HubletoForm";
 import TablePipelineSteps from "./TablePipelineSteps";
+import { FormProps, FormState } from "adios/Form";
 
 interface FormPipelineProps extends HubletoFormProps {}
 
-interface FormPipelineState extends HubletoFormState {}
+interface FormPipelineState extends HubletoFormState {
+  tablesKey: number,
+}
 
 export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, FormPipelineState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: "HubletoApp/Community/Settings/Models/Pipeline",
+    model: "HubletoApp/Community/Pipeline/Models/Pipeline",
   };
 
   props: FormPipelineProps;
   state: FormPipelineState;
 
-  translationContext: string = "HubletoApp\\Community\\Settings\\Loader::Components\\FormPipeline";
+  translationContext: string = "HubletoApp\\Community\\Pipeline\\Loader::Components\\FormPipeline";
 
   constructor(props: FormPipelineProps) {
     super(props);
-    this.state = this.getStateFromProps(props);
+    this.state = {
+      ...this.getStateFromProps(props),
+      tablesKey: 0,
+    };
   }
 
   getStateFromProps(props: FormPipelineProps) {
@@ -49,6 +55,10 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
     }
   }
 
+  componentDidUpdate(prevProps: FormProps, prevState: FormState): void {
+    if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({tablesKey: Math.random()} as FormPipelineState)
+  }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
@@ -75,7 +85,22 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
           <div className="card mt-4" style={{ gridArea: "steps" }}>
             <div className="card-header">Pipeline Steps</div>
             <div className="card-body">
+
+              <a
+                className="btn btn-add-outline"
+                onClick={() => {
+                  if (!R.PIPELINE_STEPS) R.PIPELINE_STEPS = [];
+                  R.PIPELINE_STEPS.push({
+                    id_pipeline: { _useMasterRecordId_: true },
+                  });
+                  this.setState({ record: R, isInlineEditing: true});
+                }}
+              >
+                <span className="icon"><i className="fas fa-add"></i></span>
+                <span className="text">Add step</span>
+              </a>
               <TablePipelineSteps
+                key={this.state.tablesKey}
                 uid={this.props.uid + "_table_pipeline_steps_input"}
                 context="Hello World"
                 descriptionSource="props"
@@ -101,31 +126,16 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
                     name: { type: "varchar", title: "Name" },
                     order: { type: "int", title: "Order" },
                     color: { type: "color", title: "Color" },
-                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Lost", 2: "Won", 3: "Pending"} },
+                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
                   },
                   inputs: {
                     name: { type: "varchar", title: "Name" },
                     order: { type: "int", title: "Order" },
                     color: { type: "color", title: "Color" },
-                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Lost", 2: "Won", 3: "Pending"} },
+                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
                   },
                 }}
               ></TablePipelineSteps>
-              {this.state.isInlineEditing ? (
-                <a
-                  className="btn btn-add-outline"
-                  onClick={() => {
-                    if (!R.PIPELINE_STEPS) R.PIPELINE_STEPS = [];
-                    R.PIPELINE_STEPS.push({
-                      id_pipeline: { _useMasterRecordId_: true },
-                    });
-                    this.setState({ record: R });
-                  }}
-                >
-                  <span className="icon"><i className="fas fa-add"></i></span>
-                  <span className="text">Add step</span>
-                </a>
-              ) : null}
             </div>
           </div>
         </div>

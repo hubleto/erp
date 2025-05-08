@@ -1,11 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Models\RecordManagers;
+namespace HubletoApp\Community\Pipeline\Models\RecordManagers;
 
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
-use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PipelineStep extends \HubletoMain\Core\RecordManager
 {

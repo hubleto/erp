@@ -301,7 +301,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                         <FormInput title={"Pipeline"}>
                           <Lookup {...this.getInputProps("id_pipeline")}
                             readonly={R.is_archived}
-                            model='HubletoApp/Community/Settings/Models/Pipeline'
+                            model='HubletoApp/Community/Pipeline/Models/Pipeline'
                             value={R.id_pipeline}
                             onChange={(value: any) => {
                               this.pipelineChange(value);

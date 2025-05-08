@@ -11,14 +11,31 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^documents\/?$/' => Controllers\Documents::class,
+      '/^documents\/api\/get-folder-content\/?$/' => Controllers\Api\GetFolderContent::class,
     ]);
+  }
+
+  public function getRootFolderId(): int|null
+  {
+    $mFolder = new Models\Folder($this->main);
+    $rootFolder = $mFolder->record->where('uid', '_ROOT_')->first()->toArray();
+    if (!isset($rootFolder['id'])) return null;
+    else return (int) $rootFolder['id'];
   }
 
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mDocuments = new \HubletoApp\Community\Documents\Models\Document($this->main);
-      $mDocuments->dropTableIfExists()->install();
+      $mFolder = new Models\Folder($this->main);
+      $mFolder->dropTableIfExists()->install();
+      (new Models\Document($this->main))->dropTableIfExists()->install();
+
+      $mFolder->record->recordCreate([
+        'id_parent_folder' => null,
+        'uid' => '_ROOT_',
+        'name' => '_ROOT_',
+      ]);
+
     }
   }
 
@@ -42,4 +59,32 @@ class Loader extends \HubletoMain\Core\App
       ]);
     }
   }
+
+  public function generateDemoData(): void
+  {
+    $mFolder = new Models\Folder($this->main);
+    $mDocument = new Models\Document($this->main);
+
+    $mDocument->record->recordCreate([
+      'id_folder' => $this->getRootFolderId(),
+      'name' => 'bid_template.docx',
+      'hyperlink' => 'https://www.google.com',
+    ]);
+
+    $idFolderMM = $mFolder->record->recordCreate([ 'id_parent_folder' => $this->getRootFolderId(), 'name' => 'Marketing materials' ])['id'];
+    $idFolderMM1 = $mFolder->record->recordCreate(['id_parent_folder' => $idFolderMM, 'name' => 'LinkedIn'])['id'];
+    $idFolderMM2 = $mFolder->record->recordCreate(['id_parent_folder' => $idFolderMM, 'name' => 'GoogleAds'])['id'];
+
+    $idFolderCU = $mFolder->record->recordCreate([ 'id_parent_folder' => $this->getRootFolderId(), 'name' => 'Customer profiles' ])['id'];
+
+    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM, 'name' => 'logo.png', 'hyperlink' => 'https://www.google.com' ]);
+    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM1, 'name' => 'post_image_1.png', 'hyperlink' => 'https://www.google.com' ]);
+    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM1, 'name' => 'post_image_2.png', 'hyperlink' => 'https://www.google.com' ]);
+    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM2, 'name' => 'analytics_report_1.pdf', 'hyperlink' => 'https://www.google.com' ]);
+    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM2, 'name' => 'analytics_report_2.pdf', 'hyperlink' => 'https://www.google.com' ]);
+
+    $mDocument->record->recordCreate([ 'id_folder' => $idFolderCU, 'name' => 'customer_profile_1.pdf', 'hyperlink' => 'https://www.google.com' ]);
+    $mDocument->record->recordCreate([ 'id_folder' => $idFolderCU, 'name' => 'customer_profile_2.pdf', 'hyperlink' => 'https://www.google.com' ]);
+  }
+
 }

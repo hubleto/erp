@@ -5,6 +5,11 @@
   * `app.hasCustomSettings` property
   * new `Events for today` board
   * customizable calendar colors for Customers, Deals and Leads
+  * new file browser in the documents app
+  * column search in tables
+  * improved forms for deals and leads
+  * various bugfixes and other improvements
+  * added some translations
 
 ## Release v0.10
 

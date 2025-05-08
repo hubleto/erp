@@ -4,13 +4,13 @@ namespace HubletoApp\Community\Documents\Models\RecordManagers;
 
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Document extends \HubletoMain\Core\RecordManager
+class Folder extends \HubletoMain\Core\RecordManager
 {
-  public $table = 'documents';
+  public $table = 'folders';
 
   /** @return BelongsTo<Customer, covariant BillingAccount> */
-  public function FOLDER(): BelongsTo {
-    return $this->belongsTo(Folder::class, 'id_folder', 'id');
+  public function PARENT_FOLDER(): BelongsTo {
+    return $this->belongsTo(Folder::class, 'id_parent_folder', 'id' );
   }
 
   public function recordCreate(array $record): array

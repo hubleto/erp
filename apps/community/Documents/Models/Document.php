@@ -4,6 +4,7 @@ namespace HubletoApp\Community\Documents\Models;
 
 use ADIOS\Core\Db\Column\File;
 use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Lookup;
 
 class Document extends \HubletoMain\Core\Models\Model
 {
@@ -14,6 +15,8 @@ class Document extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'uid' => (new Varchar($this, $this->translate('Uid'))),
+      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class, 'CASCADE')),
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired(),
       'file' => (new File($this, $this->translate('File'))),
       'hyperlink' => (new Varchar($this, $this->translate('File Link'))),

@@ -7,8 +7,8 @@
   --font-sans: 'Fredoka-Regular', 'sans-serif';
   --font-serif: 'Merriweather', 'serif';
 
-  --color-primary: #008000;
-  --color-secondary: #7F0062;
+  --color-primary: #6F006F;
+  --color-secondary: #008000;
   
   --spacing-8xl: 96rem;
   --spacing-9x': 128rem;

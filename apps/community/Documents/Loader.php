@@ -16,8 +16,8 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
     $appMenu = $this->main->apps->community('Desktop')->appMenu;
-    $appMenu->addItem('documents', $this->translate('Browse'), 'fas fa-table');
-    $appMenu->addItem('documents/list', $this->translate('List'), 'fas fa-list');
+    $appMenu->addItem($this, 'documents', $this->translate('Browse'), 'fas fa-table');
+    $appMenu->addItem($this, 'documents/list', $this->translate('List'), 'fas fa-list');
   }
 
   public function getRootFolderId(): int|null

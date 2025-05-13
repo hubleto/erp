@@ -14,19 +14,10 @@ class Loader extends \HubletoMain\Core\App
       '/^products\/suppliers\/?$/' => Controllers\Suppliers::class,
     ]);
 
-    if (str_starts_with($this->main->requestedUri, 'products')) {
-      // $sidebar = $this->main->apps->community('Desktop')->sidebar;
-      // $sidebar->addHeading1($this->translate('Products'));
-      // $sidebar->addLink('products', $this->translate('Products'), 'fas fa-cart-shopping');
-      // $sidebar->addLink('products/product-groups', $this->translate('Product Groups'), 'fas fa-burger');
-      // $sidebar->addLink('products/suppliers', $this->translate('Suppliers'), 'fas fa-truck');
-
-      $appMenu = $this->main->apps->community('Desktop')->appMenu;
-      $appMenu->addItem('products', $this->translate('Products'), 'fas fa-cart-shopping');
-      $appMenu->addItem('products/product-groups', $this->translate('Product Groups'), 'fas fa-burger');
-      $appMenu->addItem('products/suppliers', $this->translate('Suppliers'), 'fas fa-truck');
-
-    }
+    $appMenu = $this->main->apps->community('Desktop')->appMenu;
+    $appMenu->addItem($this, 'products', $this->translate('Products'), 'fas fa-cart-shopping');
+    $appMenu->addItem($this, 'products/product-groups', $this->translate('Product Groups'), 'fas fa-burger');
+    $appMenu->addItem($this, 'products/suppliers', $this->translate('Suppliers'), 'fas fa-truck');
   }
 
   public function installTables(int $round): void

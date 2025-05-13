@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel='shortcut icon' href='{{ config.url }}/assets/images/logo-hubleto.png'>
+  <link rel='shortcut icon' href='{{ config.url }}/assets/images/hubleto-logo-v2.png'>
   <title>{{ user.PROFILE.company }} | Hubleto | Business Application Hub</title>
 
   <script>
@@ -96,31 +96,13 @@
         <div class="flex flex-row justify-around">
           <button onclick="showSidebar()" class="sm:block md:hidden"><span class="icon"><i id="menuButton" class="fas fa-chevron-right"></i></span></button>
           <a class="flex" href="{{ config.accountUrl }}">
-            <img id="logo" src="{{ config.url }}/assets/images/logo-hubleto.png" class="h-8 m-auto">
+            <img id="logo" src="{{ config.url }}/assets/images/hubleto-logo-v2.png" class="h-8 m-auto">
           </button>
         </div>
       </div>
       <div class="hidden sm:block flex-1">
         {{ include('@hubleto/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
       </div>
-      {% if viewParams.appMenu|length > 0 %}
-        <div class="hidden sm:block flex-1">
-          <button class="btn btn-transparent btn-dropdown btn-primary-outline">
-            <span class="icon"><i class="{{ viewParams.activatedApp.manifest.icon }}"></i></span>
-            <span class="text">{{ viewParams.activatedApp.manifest.nameTranslated }}</span>
-            <div class="menu">
-              <div class="list">
-                {% for item in viewParams.appMenu %}
-                  <a href="{{ config.accountUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
-                    <span class="icon"><i class="{{ item.icon }}"></i></span>
-                    <span class="text">{{ item.title }}</span>
-                  </a>
-                {% endfor %}
-              </div>
-            </div>
-          </button>
-        </div>
-      {% endif %}
       <div id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
           {% if viewParams.contextHelpUrl %}

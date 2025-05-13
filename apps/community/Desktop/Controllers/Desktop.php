@@ -17,12 +17,6 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
     foreach ($appsInSidebar as $appNamespace => $app) {
       if ($app->configAsInteger('sidebarOrder') <= 0) {
         unset($appsInSidebar[$appNamespace]);
-      } else if (
-        $this->main->requestedUri == $app->manifest['rootUrlSlug']
-        || str_starts_with($this->main->requestedUri, $app->manifest['rootUrlSlug'] . '/')
-      ) {
-        $appsInSidebar[$appNamespace]->isActivated = true;
-        $activatedApp = $app;
       }
     }
 

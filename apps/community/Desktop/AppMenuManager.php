@@ -13,13 +13,15 @@ class AppMenuManager {
     $this->main = $main;
   }
 
-  public function addItem(string $url, string $title, string $icon): void
+  public function addItem(\HubletoMain\Core\App $app, string $url, string $title, string $icon): void
   {
-    $this->items[] = [
-      'url' => $url,
-      'title' => $title,
-      'icon' => $icon,
-    ];
+    if ($app->isActivated) {
+      $this->items[] = [
+        'url' => $url,
+        'title' => $title,
+        'icon' => $icon,
+      ];
+    }
   }
 
   public function getItems(): array

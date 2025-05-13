@@ -7,6 +7,7 @@ class AppManager
 
   public \HubletoMain $main;
   public \HubletoMain\Cli\Agent\Loader|null $cli;
+  public \HubletoMain\Core\App $activatedApp;
 
   /** @var array<\HubletoMain\Core\App> */
   protected array $apps = [];
@@ -45,6 +46,14 @@ class AppManager
 
     $apps = $this->getEnabledApps();
     array_walk($apps, function($app) {
+      if (
+        $this->main->requestedUri == $app->manifest['rootUrlSlug']
+        || str_starts_with($this->main->requestedUri, $app->manifest['rootUrlSlug'] . '/')
+      ) {
+        $app->isActivated = true;
+        $this->activatedApp = $app;
+      }
+      
       $app->init();
     });
 

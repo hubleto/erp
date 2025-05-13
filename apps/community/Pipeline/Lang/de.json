@@ -8,5 +8,8 @@
     "manifest": {
         "Pipeline": "",
         "Free sales pipeline management.": ""
+    },
+    "root": {
+        "Pipelines": ""
     }
 }

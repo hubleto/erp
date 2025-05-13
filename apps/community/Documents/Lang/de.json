@@ -5,5 +5,9 @@
     "manifest": {
         "Documents": "",
         "Free document management.": ""
+    },
+    "root": {
+        "Browse": "",
+        "List": ""
     }
 }

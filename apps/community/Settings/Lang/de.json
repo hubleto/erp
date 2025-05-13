@@ -131,7 +131,8 @@
     },
     "manifest": {
         "Settings": "",
-        "...": ""
+        "...": "",
+        "Settings and control panel for your Hubleto.": ""
     },
     "root": {
         "Users": "",

@@ -8,5 +8,8 @@
     "manifest": {
         "Calendar": "",
         "Free calendar app.": ""
+    },
+    "root": {
+        "Events for today": ""
     }
 }

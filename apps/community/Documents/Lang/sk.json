@@ -12,5 +12,9 @@
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"
+    },
+    "root": {
+        "Browse": "",
+        "List": ""
     }
 }

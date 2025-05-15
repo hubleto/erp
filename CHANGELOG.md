@@ -10,6 +10,8 @@
   * improved forms for deals and leads
   * various bugfixes and other improvements
   * added some translations
+  * added probability to the Deal form and Pipeline view and added weighted price
+  * massive rebranding and UI updates
 
 ## Release v0.10
 

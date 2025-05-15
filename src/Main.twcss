@@ -4,11 +4,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: 'Fredoka-Regular', 'sans-serif';
+  --font-sans: 'Gabarito', 'sans-serif';
   --font-serif: 'Merriweather', 'serif';
 
-  --color-primary: #6F006F;
-  --color-secondary: #008000;
+  --color-primary: #274a71;
+  --color-secondary: #f5a336;
   
   --spacing-8xl: 96rem;
   --spacing-9x': 128rem;
@@ -27,6 +27,18 @@
 @import "../vendor/wai-blue/adios/src/Assets/Css/color-scales.css";
 
 @layer app {
+  @font-face {
+    font-family: 'Gabarito';
+    font-style: normal;
+    font-weight: 500;
+    src: url(../../fonts/Gabarito/static/Gabarito-Regular.ttf) format('truetype');
+  }
+
+  :root {
+    --font-family: 'Gabarito' !important;
+  }
+
+  html { font-size: 10pt; }
 
   .dark::placeholder { @apply text-white; }
 

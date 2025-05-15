@@ -1,11 +1,12 @@
 <script>
   function onFilterChange() {
     const fDealResult = document.getElementById("fDealResult").value;
+    const fIdPipeline = document.getElementById("fIdPipeline").value;
     const fResponsible = globalThis.main.reactElements['fResponsible'].state.value;
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const idPipeline = urlParams.get('id_pipeline');
+    const idPipeline = fIdPipeline ?? urlParams.get('id_pipeline');
 
     let url = '?';
     if (idPipeline) url += 'id_pipeline=' + idPipeline;
@@ -23,40 +24,35 @@
 } %}
 
 <div class="flex gap-2 flex-col md:flex-row" style="height:calc(100vh - var(--nav-height) - 1rem)">
-  <div class="flex flex-row md:flex-col gap-2 border-r border-gray-200 pr-2" style="width:10rem">
-    {# <form action="" method="get" style="min-width: 30%">
-      <select class="border p-2 mb-2 ounded-md border-gray-200 text-2xl font-bold text-green-700 w-full" name="id_pipeline" onchange="submit()">
-        {% for pipeline in viewParams.pipelines %}
-          <option value="{{ pipeline.id }}"
-          {% if pipeline.id == viewParams.pipeline.id %} selected {% endif %}
-          >{{ pipeline.name }}</option>
-        {% endfor %}
-      </select>
-    </form> #}
-
-    {% for pipeline in viewParams.pipelines %}
-      <a href="?id_pipeline={{ pipeline.id }}"
-        class="btn {% if pipeline.id == viewParams.pipeline.id %} btn-primary {% else %} btn-transparent {% endif %}"
-      >
-        <span class="icon"><i class="fas fa-timeline"></i></span>
-        <span class="text">{{ pipeline.name }}</span>
-      </a>
-    {% endfor %}
-    <a class="btn btn-add" href="settings/pipelines?recordId=-1" target="_blank">
-      <span class="icon"><i class="fas fa-add"></i></span>
-      <span class="text">{{ translate('Add pipeline') }}</span>
-    </a>
-  </div>
-
   <div class="flex flex-col flex-grow overflow-auto">
+    <h1 class="app-main-title">Pipeline</h1>
 
-    <h1 class="app-main-title">{{ viewParams.pipeline.name }}</h1>
-
-    <div class="alert alert-primary mt-2">
-      Potential Pipeline Profit: {{ viewParams.main.locale.formatCurrency(viewParams.pipeline.price) }}
+    <div class="flex flex-row gap-4 mb-2 justify-between">
+      <div class="flex flex-row gap-2">
+        <select
+          class="border p-2 rounded-md border-gray-100 text-2xl text-black"
+          name="id_pipeline"
+          id="fIdPipeline"
+          onchange="onFilterChange()"
+        >
+          {% for pipeline in viewParams.pipelines %}
+            <option value="{{ pipeline.id }}"
+            {% if pipeline.id == viewParams.pipeline.id %} selected {% endif %}
+            >{{ pipeline.name }}</option>
+          {% endfor %}
+        </select>
+        <a class="btn btn-transparent flex items-center gap-2" href="settings/pipelines?recordId={{viewParams.pipeline.id}}" target="_blank">
+          <span class="icon flex items-center"><i class="fas fa-cog"></i></span>
+          <span class="text flex items-center">{{ translate('Manage pipeline steps') }}</span>
+        </a>
+      </div>
+      <a class="btn btn-add flex items-center gap-2" href="settings/pipelines?recordId=-1" target="_blank">
+        <span class="icon flex items-center"><i class="fas fa-add"></i></span>
+        <span class="text flex items-center">{{ translate('Add pipeline') }}</span>
+      </a>
     </div>
 
-    <div class="card card-horizontal">
+    <div class="card card-horizontal mb-2">
       <div class="card-header">
         <i class="fas fa-magnifying-glass"></i>
       </div>
@@ -64,7 +60,7 @@
         <div class="input-wrapper flex-1">
           <div class="input-label">Result</div>
           <div class="input-body">
-            <select class="w-full" name="fDealResult" id="fDealResult" onchange="onFilterChange();">
+            <select class="w-full border-gray-200 h-[30px]" name="fDealResult" id="fDealResult" onchange="onFilterChange();">
               <option value="0"></option>
               <option {% if viewParams.fDealResult == 3 %} selected {% endif %} value="3">Pending</option>
               <option {% if viewParams.fDealResult == 1 %} selected {% endif %} value="1">Lost</option>
@@ -97,7 +93,7 @@
             <span style="border-left: 1em solid {{ step.color }};padding-left:1em;">{{ step.name }}</span>
 
             <div class="flex flex-row gap-2 align-items-center text-gray-400">
-              <span style="font-size: 9pt;" class="font-normal pt-1">Potential Profit: {{ viewParams.main.locale.formatCurrency(step.sum_price) }}</span>
+              <span style="font-size: 9pt;" class="font-normal pt-1">Weighted Profit ({{step.probability}} %): {{ viewParams.main.locale.formatCurrency(step.sum_price) }}</span>
             </div>
           </div>
 
@@ -107,7 +103,7 @@
               {% if deal.id_pipeline_step == step.id %}
                 <div class="card w-full md:w-auto hover:border-primary"><a class="hover:no-underline" href="./deals?recordId={{deal.id}}" target="_blank">
                   <div class="card-header rounded flex flex-col p-2 text-sm font-normal">
-                    <div class="flex justify-between">
+                    <div class="flex justify-between w-full">
                       <div class="flex flex-col truncate">
                         <div>{{deal.identifier}}</div>
                         <div class="font-bold">{{deal.CUSTOMER.name}}</div>
@@ -141,16 +137,6 @@
           </div>
         </div>
       {% endfor %}
-
-      {# Step Containter #}
-      <div class="card">
-        <div class="card-body flex flex-row flex-wrap md:block">
-          <a class="btn btn-transparent" href="settings/pipelines?recordId={{viewParams.pipeline.id}}" target="_blank">
-            <span class="icon"><i class="fas fa-add"></i></span>
-            <span class="text">{{ translate('Manage pipeline steps') }}</span>
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </div>

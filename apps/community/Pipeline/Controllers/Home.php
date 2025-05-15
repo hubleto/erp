@@ -70,7 +70,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
         ->price
       ;
 
-      $searchPipeline["PIPELINE_STEPS"][$key]["sum_price"] = $sumPrice;
+      $searchPipeline["PIPELINE_STEPS"][$key]["sum_price"] = ($step["probability"] / 100) * $sumPrice;
       $sumPipelinePrice += $sumPrice;
     }
 

@@ -147,6 +147,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     );
   }
 
+  calculateProbabilityPrice(probability: number, price: number) {
+    return (probability / 100) * price;
+  }
+
   onCreateActivityCallback() {
     this.loadRecord();
   }
@@ -298,17 +302,24 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     <div className='card mt-2' style={{gridArea: 'status'}}>
                       <div className='card-header'>Deal Progress</div>
                       <div className='card-body'>
-                        <FormInput title={"Pipeline"}>
-                          <Lookup {...this.getInputProps("id_pipeline")}
-                            readonly={R.is_archived}
-                            model='HubletoApp/Community/Pipeline/Models/Pipeline'
-                            value={R.id_pipeline}
-                            onChange={(value: any) => {
-                              this.pipelineChange(value);
-                            }}
-                          ></Lookup>
-                        </FormInput>
-                        <div className='flex flex-row gap-2 flex-wrap justify-center'>
+                        <div className='flex flex-row justify-between'>
+                          <FormInput title={"Pipeline"}>
+                            <Lookup {...this.getInputProps("id_pipeline")}
+                              readonly={R.is_archived}
+                              model='HubletoApp/Community/Pipeline/Models/Pipeline'
+                              value={R.id_pipeline}
+                              onChange={(value: any) => {
+                                this.pipelineChange(value);
+                              }}
+                            ></Lookup>
+                          </FormInput>
+                          <div className='self-center'>
+                            <p>Price based on the probability of current step ({R.PIPELINE_STEP.probability} %):
+                              <strong> {this.calculateProbabilityPrice(R.PIPELINE_STEP.probability, R.price)} {R.CURRENCY.code}</strong>
+                            </p>
+                          </div>
+                        </div>
+                        <div className='flex flex-row gap-2 mt-2 flex-wrap justify-center'>
                           {R.PIPELINE != null &&
                           R.PIPELINE.PIPELINE_STEPS &&
                           R.PIPELINE.PIPELINE_STEPS.length > 0 ?
@@ -325,7 +336,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                       R.PIPELINE_STEP = s;
                                       this.setState({record: R});
                                     }}
-                                    className={`flex px-3 h-[50px] justify-center btn ${statusColor}`}
+                                    className={`flex flex-col px-3 h-[50px] justify-center btn ${statusColor}`}
                                   >
                                     <span className='text text-center self-center !h-auto'>{s.name}</span>
                                   </button>

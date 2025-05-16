@@ -19,6 +19,7 @@ class Customer extends \HubletoMain\Core\Models\Model
   public string $table = 'customers';
   public string $recordManagerClass = RecordManagers\Customer::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupUrlDetail = 'customers/{%ID%}';
 
   public array $relations = [
     'PERSONS' => [ self::HAS_MANY, Person::class, 'id_customer' ],

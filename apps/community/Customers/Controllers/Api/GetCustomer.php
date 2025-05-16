@@ -40,6 +40,7 @@ class GetCustomer extends \HubletoMain\Core\Controllers\Controller
     }
 
     foreach ($customers as $customer) { //@phpstan-ignore-line
+      $customer['_URL_DETAIL'] = 'customers/' . $customer['id'];
       $customerArray[$customer["id"]] = $customer;
     }
 

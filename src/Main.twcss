@@ -7,8 +7,8 @@
   --font-sans: 'Gabarito', 'sans-serif';
   --font-serif: 'Merriweather', 'serif';
 
-  --color-primary: #274a71;
-  --color-secondary: #f5a336;
+  --color-primary: #4780bf;
+  --color-secondary: #41c50d;
   
   --spacing-8xl: 96rem;
   --spacing-9x': 128rem;

@@ -221,7 +221,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 <div className='flex-2 card'>
                   <div className='card-body flex flex-row gap-2'>
                     <div className='grow'>
-                      {showAdditional ? this.inputWrapper('identifier', {readonly: R.is_archived}) : <></>}
+                      {showAdditional ? this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived}) : <></>}
                       {this.inputWrapper('title', {readonly: R.is_archived})}
                       <FormInput title={"Customer"}>
                         <Lookup {...this.getInputProps('id-customer')}
@@ -331,11 +331,11 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   </div>
                 : null}
               </div>
-              <div className='card card-body'>
+              <div className='card card-body mt-2'>
                 {this.inputWrapper('note', {readonly: R.is_archived})}
               </div>
               {showAdditional ?
-                <div className='card'>
+                <div className='card mt-2'>
                   <div className='card-header'>Products & Services</div>
                   <div className='card-body'>
                     {this.state.isInlineEditing ?
@@ -393,7 +393,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                               cellRenderer: ( table: TableLeadProducts, data: any, options: any): JSX.Element => {
                                 return (
                                   <FormInput>
-                                    <Lookup {...this.getInputProps()}
+                                    <Lookup {...this.getInputProps('id_product_input_1')}
                                       ref={servicesLookup}
                                       model='HubletoApp/Community/Products/Models/Product'
                                       customEndpointParams={{'getServices': true}}
@@ -454,7 +454,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                               cellRenderer: ( table: TableLeadProducts, data: any, options: any): JSX.Element => {
                                 return (
                                   <FormInput>
-                                    <Lookup {...this.getInputProps()}
+                                    <Lookup {...this.getInputProps('id_product_input_2')}
                                       ref={productsLookup}
                                       model='HubletoApp/Community/Products/Models/Product'
                                       customEndpointParams={{'getProducts': true}}

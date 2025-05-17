@@ -116,7 +116,6 @@ class Deal extends \HubletoMain\Core\Models\Model
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsBool("showArchive")) {
-      $description->ui['title'] = "Archived deals";
       $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,
@@ -124,7 +123,6 @@ class Deal extends \HubletoMain\Core\Models\Model
         "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
       ];
     } else {
-      $description->ui['title'] = 'Deal';
       $description->ui['addButtonText'] = 'Add Deal';
     }
     $description->ui['showHeader'] = true;

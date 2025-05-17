@@ -13,6 +13,7 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^deals(\/(?<recordId>\d+))?\/?$/' => Controllers\Deals::class,
+      '/^deals\/add\/?$/' => ['controller' => Controllers\Deals::class, 'vars' => ['recordId' => -1]],
       '/^deals\/settings\/?$/' => Controllers\Settings::class,
       '/^deals\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
@@ -53,6 +54,10 @@ class Loader extends \HubletoMain\Core\App
     $this->main->apps->community('Help')->addContextHelpUrls('/^deals\/?$/', [
       'en' => 'en/apps/community/deals',
     ]);
+
+    $appMenu = $this->main->apps->community('Desktop')->appMenu;
+    $appMenu->addItem($this, 'deals', $this->translate('Active deals'), 'fas fa-handshake');
+    $appMenu->addItem($this, 'deals/archive', $this->translate('Archived deals'), 'fas fa-box-archive');
   }
 
   public function installTables(int $round): void

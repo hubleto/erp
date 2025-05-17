@@ -1,12 +1,14 @@
-<h1 class="app-main-title">Deals</h1>
+<h1 class="app-main-title flex">
+  Deals
 
-<div class="flex gap-2">
-  <div class="card card-header">
-    Open deals: {{ viewParams.result.count }}
+  <div class="flex gap-2 items-center ml-2">
+    <div class="badge badge-green text-nowrap">
+      Open deals: {{ viewParams.result.count }}
+    </div>
+    <div class="badge badge-green text-nowrap">
+      Total value: {{ viewParams.main.locale.formatCurrency(viewParams.result.price ?? '') }}
+    </div>
   </div>
-  <div class="card card-header">
-    Total value: {{ viewParams.main.locale.formatCurrency(viewParams.result.price ?? '') }}
-  </div>
-</div>
+</h1>
 
 <app-deals-table-deals int:record-id="{{ viewParams.recordId }}"></app-deals-table-deals>

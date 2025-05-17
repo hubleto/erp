@@ -54,13 +54,10 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
         <h2>{'New Contact'}</h2>
       );
     } else {
-      return (
-        <h2>
-          {this.state.record.first_name && this.state.record.last_name
-            ? this.state.record.first_name + " " + this.state.record.last_name
-            : "[Undefined Contact Name]"}
-        </h2>
-      );
+      return <>
+        <h2>{this.state.record.first_name ?? ''}&nbsp;{this.state.record.last_name ?? ''}</h2>
+        <small>Contact</small>
+      </>;
     }
   }
 
@@ -68,7 +65,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
     var tagIds = [];
 
     for (const [key, value] of Object.entries(R.TAGS)) {
-        tagIds.push(value.id_tag);
+        tagIds.push(value['id_tag'] ?? 0);
     }
 
     request.get(
@@ -128,8 +125,13 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
       <div className='card'>
         <div className='card-body flex flex-row gap-2'>
           <div className="w-1/2">
-            {this.inputWrapper('first_name', {cssClass: 'text-2xl text-primary'})}
-            {this.inputWrapper('last_name', {cssClass: 'text-2xl text-primary'})}
+            {this.inputWrapper('salutation')}
+
+            <div className="flex gap-2">
+              <div className="flex-1">{this.inputWrapper('first_name', {cssClass: 'text-2xl text-primary'})}</div>
+              <div className="flex-1">{this.inputWrapper('middle_name', {cssClass: 'text-2xl text-primary'})}</div>
+              <div className="flex-1">{this.inputWrapper('last_name', {cssClass: 'text-2xl text-primary'})}</div>
+            </div>
 
             {this.divider('Contacts')}
             <TableValues
@@ -211,7 +213,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
               ></Lookup>
             </FormInput>
             <FormInput title={this.translate('Tags')}>
-              <InputTags2 {...this.getInputProps()}
+              <InputTags2 {...this.getInputProps('id_tag')}
                 value={this.state.record.TAGS}
                 model='HubletoApp/Community/Contacts/Models/Tag'
                 targetColumn='id_contact'
@@ -254,7 +256,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
 
               </>
             : <></>}
-            {this.inputWrapper('note')}
+            {this.inputWrapper('note', {cssClass: 'bg-yellow-50'})}
             {this.inputWrapper('is_active')}
             {showAdditional ? this.inputWrapper('date_created') : null}
           </div>

@@ -217,7 +217,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 <div className='card mt-2' style={{gridArea: 'info'}}>
                   <div className='card-body flex flex-row gap-2'>
                     <div className='grow'>
-                      {showAdditional ? this.inputWrapper('identifier', {readonly: R.is_archived}) : <></>}
+                      {showAdditional ? this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived}) : <></>}
                       {this.inputWrapper('title', {readonly: R.is_archived})}
                       <FormInput title={"Customer"} required={true}>
                         <Lookup {...this.getInputProps("id_customer")}
@@ -234,7 +234,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                           }}
                         ></Lookup>
                       </FormInput>
-                      <FormInput title={"Contacts"}>
+                      <FormInput title={"Contact"}>
                         <Lookup {...this.getInputProps("id_contact")}
                           model='HubletoApp/Community/Contacts/Models/Contact'
                           customEndpointParams={{id_customer: R.id_customer}}

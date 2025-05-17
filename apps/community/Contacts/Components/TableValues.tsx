@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import { ProgressBar } from 'primereact/progressbar';
+import FormInput from 'adios/FormInput';
+import Lookup from 'adios/Inputs/Lookup';
 
 interface TableValuesProps extends TableProps {
 }
@@ -63,32 +65,44 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
       <div className="flex flex-col gap-2">
         {Object.keys(this.state.data?.data).map((key) => {
           const item = this.state.data.data[key];
-          return <>
+          return <div key={key} className="flex gap-2 items-center">
             <button
-              key={key}
-              className="btn btn-transparent w-full"
+              className="btn btn-transparent w-3/4"
               onClick={() => this.props.parentForm.setState({isInlineEditing: true}) }
             >
               <span className="icon"><i className={"fas fa-" + this.getIcon(item.value)}></i></span>
               <span className="text w-full" style={{maxHeight: "10em"}}>
-                {this.props.parentForm.state.isInlineEditing ?
+                {this.props.parentForm.state.isInlineEditing ? <>
                   <div className="adios component input w-full"><div className="input-element w-full">
                     <input
-                      className="w-full"
+                      className="w-full bg-blue-50"
                       onChange={(e) => {
                         let newValues = this.state.data.data;
                         newValues[key].value = e.currentTarget.value;
                         newValues[key].type = this.getType(e.currentTarget.value);
-                        console.log(newValues, this.props.parentForm);
                         this.props.parentForm.updateRecord({ VALUES: newValues });
                       }}
                       value={item.value}
                     />
                   </div></div>
-                : item.value ?? ''}
+                </> : item.value ?? ''}
               </span>
             </button>
-          </>;
+            <div className="w-1/4">
+              {this.props.parentForm.state.isInlineEditing ?
+                <Lookup
+                  uid={'value_' + item.id + '_id_category'}
+                  model='HubletoApp/Community/Contacts/Models/Category'
+                  value={item.id_category}
+                  onChange={(value: any) => {
+                    let newValues = this.state.data.data;
+                    newValues[key].id_category = value;
+                    this.props.parentForm.updateRecord({ VALUES: newValues });
+                  }}
+                ></Lookup>
+              : item.CATEGORY?.name ?? ''}
+            </div>
+          </div>;
         })}
       </div>
     </>;

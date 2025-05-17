@@ -29,12 +29,10 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
   translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableContacts';
 
   getFormModalProps() {
-    if (getUrlParam('recordId') > 0) {
-      return {
-        ...super.getFormModalProps(),
-        type: 'right wide'
-      }
-    } else return {...super.getFormModalProps()}
+    return {
+      ...super.getFormModalProps(),
+      type: (this.props.customEndpointParams?.idCustomer ? 'inside-parent theme-secondary' : 'right wide'),
+    };
   }
 
   getFormProps(): any {
@@ -148,6 +146,8 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
               >
                 <span className="icon"><i className="fas fa-user"></i></span>
                 <span className="text" style={{maxHeight: "10em"}}>
+                  {item.salutation ?? ''}
+                  &nbsp;
                   <b>{item.first_name ?? ''}
                   &nbsp;
                   {item.last_name ?? ''}</b>

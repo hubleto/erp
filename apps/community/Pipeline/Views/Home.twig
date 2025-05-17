@@ -101,7 +101,7 @@
             {# Deal Card #}
             {% for deal in viewParams.deals %}
               {% if deal.id_pipeline_step == step.id %}
-                <div class="card w-full md:w-auto hover:border-primary"><a class="hover:no-underline" href="./deals?recordId={{deal.id}}" target="_blank">
+                <div class="card w-full md:w-auto hover:border-primary"><a class="hover:no-underline" href="./deals/{{deal.id}}" target="_blank">
                   <div class="card-header rounded flex flex-col p-2 text-sm font-normal">
                     <div class="flex justify-between w-full">
                       <div class="flex flex-col truncate">
@@ -128,7 +128,7 @@
           <div class="card-footer">
             <a
               class="btn btn-transparent"
-              href="deals?recordId=-1&id_pipeline={{ viewParams.pipeline.id }}&id_pipeline_step={{ step.id }}"
+              href="deals/add?id_pipeline={{ viewParams.pipeline.id }}&id_pipeline_step={{ step.id }}"
               target="_blank"
             >
               <span class="icon"><i class="fas fa-add"></i></span>

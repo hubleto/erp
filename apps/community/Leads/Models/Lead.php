@@ -118,7 +118,6 @@ class Lead extends \HubletoMain\Core\Models\Model
       $description->ui = [];
     }
     if ($this->main->urlParamAsBool("showArchive")) {
-      $description->ui['title'] = "Archived leads";
       $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,
@@ -126,8 +125,7 @@ class Lead extends \HubletoMain\Core\Models\Model
         "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
       ];
     } else {
-      $description->ui['title'] = 'Leads';
-      $description->ui['addButtonText'] = 'Add Lead';
+      $description->ui['addButtonText'] = $this->translate('Add lead');
     }
 
     return $description;

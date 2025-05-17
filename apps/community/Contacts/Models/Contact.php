@@ -31,7 +31,9 @@ class Contact extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'salutation' => (new Varchar($this, $this->translate('Salutation'))),
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
+      'middle_name' => (new Varchar($this, $this->translate('Middle name'))),
       'last_name' => (new Varchar($this, $this->translate('Last name'))),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE')),
       'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0),
@@ -85,6 +87,11 @@ class Contact extends \HubletoMain\Core\Models\Model
   public function describeForm(): \ADIOS\Core\Description\Form
   {
     $description = parent::describeForm();
+
+    $description->inputs['salutation']->setPredefinedValues([
+      $this->translate('Mr.'),
+      $this->translate('Mrs.'),
+    ]);
     $description->defaultValues['is_active'] = 1;
     $description->defaultValues['date_created'] = date("Y-m-d");
     return $description;

@@ -53,21 +53,6 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
     }
   }
 
-  renderHeaderRight(): Array<JSX.Element> {
-    let elements: Array<JSX.Element> = super.renderHeaderRight();
-
-    if (!this.state.showArchive) {
-      elements.push(
-        <a className="btn btn-transparent" href={globalThis.main.config.url + "/deals/archive"}>
-          <span className="icon"><i className="fas fa-box-archive"></i></span>
-          <span className="text">Show archived deals</span>
-        </a>
-      );
-    }
-
-    return elements;
-  }
-
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "tags") {
       return (

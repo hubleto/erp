@@ -54,21 +54,6 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
     }
   }
 
-  renderHeaderRight(): Array<JSX.Element> {
-    let elements: Array<JSX.Element> = super.renderHeaderRight();
-
-    if (!this.state.showArchive) {
-      elements.push(
-        <a className="btn btn-transparent" href={globalThis.main.config.url + "/leads/archive"}>
-          <span className="icon"><i className="fas fa-box-archive"></i></span>
-          <span className="text">Show archived leads</span>
-        </a>
-      );
-    }
-
-    return elements;
-  }
-
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "tags") {
       return (

@@ -42,6 +42,10 @@ class Loader extends \HubletoMain\Core\App
     $this->main->apps->community('Help')->addContextHelpUrls('/^leads\/?$/', [
       'en' => 'en/apps/community/leads',
     ]);
+
+    $appMenu = $this->main->apps->community('Desktop')->appMenu;
+    $appMenu->addItem($this, 'leads', $this->translate('Active leads'), 'fas fa-people-arrows');
+    $appMenu->addItem($this, 'leads/archive', $this->translate('Archived leads'), 'fas fa-box-archive');
   }
 
   public function installTables(int $round): void

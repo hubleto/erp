@@ -3,7 +3,7 @@
 namespace HubletoApp\Community\Leads\Models\RecordManagers;
 
 use HubletoApp\Community\Customers\Models\RecordManagers\Customer;
-use HubletoApp\Community\Contacts\Models\RecordManagers\Person;
+use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
 use HubletoApp\Community\Settings\Models\RecordManagers\Currency;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
@@ -32,9 +32,9 @@ class Lead extends \HubletoMain\Core\RecordManager
     return $this->belongsTo(User::class, 'id_user','id' );
   }
 
-  /** @return hasOne<Person, covariant Lead> */
-  public function PERSON(): HasOne {
-    return $this->hasOne(Person::class, 'id', 'id_person');
+  /** @return hasOne<Contact, covariant Lead> */
+  public function CONTACT(): HasOne {
+    return $this->hasOne(Contact::class, 'id', 'id_contact');
   }
 
   /** @return hasOne<Currency, covariant Lead> */

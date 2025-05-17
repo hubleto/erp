@@ -10,7 +10,7 @@ use ADIOS\Core\Db\Column\Decimal;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Text;
 use ADIOS\Core\Db\Column\Varchar;
-use HubletoApp\Community\Contacts\Models\Person;
+use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Products\Controllers\Api\CalculatePrice;
@@ -34,7 +34,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
-    'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
+    'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
     'TAGS' => [ self::HAS_MANY, LeadTag::class, 'id_lead', 'id' ],
@@ -50,7 +50,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
-      'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'price' => (new Decimal($this, $this->translate('Price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setColorScale('bg-light-blue-to-dark-blue'),
@@ -100,7 +100,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     $description->columns['tags'] = ["title" => "Tags"];
 
     unset($description->columns['note']);
-    unset($description->columns['id_person']);
+    unset($description->columns['id_contact']);
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
     unset($description->columns['shared_folder']);
@@ -146,7 +146,7 @@ class Lead extends \HubletoMain\Core\Models\Model
 
     $description->defaultValues['id_customer'] = null;
     $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
-    $description->defaultValues['id_person'] = null;
+    $description->defaultValues['id_contact'] = null;
     $description->defaultValues['price'] = 0;
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['id_currency'] = $defaultCurrency;

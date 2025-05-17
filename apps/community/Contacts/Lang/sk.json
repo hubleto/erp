@@ -39,7 +39,7 @@
     "Controllers\\Persons": {
         "Contacts": "Kontakty"
     },
-    "Models\\Contact": {
+    "Models\\Value": {
         "Person": "Kontakt",
         "Contact Category": "Kategória",
         "Type": "Typ",
@@ -65,7 +65,7 @@
         "Contact Categories": "Kategórie kontaktov",
         "Contact Tags": "Značky kontaktov"
     },
-    "Models\\ContactCategory": {
+    "Models\\Category": {
         "Type": "Typ"
     },
     "Models\\Tag": {

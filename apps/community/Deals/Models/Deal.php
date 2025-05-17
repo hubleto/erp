@@ -11,7 +11,7 @@ use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Text;
 use ADIOS\Core\Db\Column\Varchar;
 
-use HubletoApp\Community\Contacts\Models\Person;
+use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Products\Controllers\Api\CalculatePrice;
@@ -39,7 +39,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
-    'PERSON' => [ self::HAS_ONE, Person::class, 'id', 'id_person'],
+    'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
@@ -57,7 +57,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'identifier' => (new Varchar($this, $this->translate('Deal Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
-      'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'price' => (new Decimal($this, $this->translate('Price')))->setRequired(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setRequired()->setReadonly(),
@@ -132,7 +132,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     $description->ui['showFooter'] = false;
     $description->columns['tags'] = ["title" => "Tags"];
     unset($description->columns['note']);
-    unset($description->columns['id_person']);
+    unset($description->columns['id_contact']);
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
     unset($description->columns['id_lead']);

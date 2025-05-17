@@ -10,13 +10,15 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^products\/?$/' => Controllers\Products::class,
-      '/^products\/product-groups\/?$/' => Controllers\Groups::class,
+      '/^products\/groups\/?$/' => Controllers\Groups::class,
+      '/^products\/groups(\/(?<recordId>\d+))?\/?$/' => Controllers\Suppliers::class,
       '/^products\/suppliers\/?$/' => Controllers\Suppliers::class,
+      '/^products\/suppliers(\/(?<recordId>\d+))?\/?$/' => Controllers\Suppliers::class,
     ]);
 
     $appMenu = $this->main->apps->community('Desktop')->appMenu;
     $appMenu->addItem($this, 'products', $this->translate('Products'), 'fas fa-cart-shopping');
-    $appMenu->addItem($this, 'products/product-groups', $this->translate('Product Groups'), 'fas fa-burger');
+    $appMenu->addItem($this, 'products/groups', $this->translate('Groups'), 'fas fa-burger');
     $appMenu->addItem($this, 'products/suppliers', $this->translate('Suppliers'), 'fas fa-truck');
   }
 

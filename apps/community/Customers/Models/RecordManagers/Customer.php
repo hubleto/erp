@@ -3,7 +3,7 @@
 namespace HubletoApp\Community\Customers\Models\RecordManagers;
 
 use \HubletoApp\Community\Billing\Models\RecordManagers\BillingAccount;
-use HubletoApp\Community\Contacts\Models\RecordManagers\Person;
+use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
 use \HubletoApp\Community\Customers\Models\RecordManagers\CustomerDocument;
 use \HubletoApp\Community\Settings\Models\RecordManagers\Country;
 use \HubletoApp\Community\Settings\Models\RecordManagers\User;
@@ -18,9 +18,9 @@ class Customer extends \HubletoMain\Core\RecordManager
 {
   public $table = 'customers';
 
-  /** @return HasMany<Person, covariant Customer> */
-  public function PERSONS(): HasMany {
-    return $this->hasMany(Person::class, 'id_customer');
+  /** @return HasMany<Contact, covariant Customer> */
+  public function CONTACTS(): HasMany {
+    return $this->hasMany(Contact::class, 'id_customer');
   }
 
   /** @return HasOne<Country, covariant Customer> */

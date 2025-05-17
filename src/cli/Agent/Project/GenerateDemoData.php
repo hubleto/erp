@@ -53,9 +53,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     //Customers & Contacts
     $mCustomer            = new \HubletoApp\Community\Customers\Models\Customer($this->main);
-    $mPerson             = new \HubletoApp\Community\Contacts\Models\Person($this->main);
-    $mPersonTag          = new \HubletoApp\Community\Contacts\Models\PersonTag($this->main);
-    $mContact            = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
+    $mContact             = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
+    $mContactTag          = new \HubletoApp\Community\Contacts\Models\ContactTag($this->main);
+    $mValue               = new \HubletoApp\Community\Contacts\Models\Value($this->main);
     $mCustomerActivity    = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
     $mCustomerDocument    = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
     $mCustomerTag         = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
@@ -86,7 +86,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $this->main->apps->isAppInstalled("HubletoApp\Community\Contacts")
     ) {
       $this->generateCustomers($mCustomer, $mCustomerTag);
-      $this->generatePersons($mPerson, $mPersonTag, $mContact);
+      $this->generateContacts($mContact, $mContactTag, $mValue);
     }
     //$this->generateActivities($mCustomer, $mActivity, $mCustomerActivity);
     if (
@@ -267,13 +267,13 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     }
   }
 
-  public function generatePersons(
-    \HubletoApp\Community\Contacts\Models\Person $mPerson,
-    \HubletoApp\Community\Contacts\Models\PersonTag $mPersonTag,
+  public function generateContacts(
     \HubletoApp\Community\Contacts\Models\Contact $mContact,
+    \HubletoApp\Community\Contacts\Models\ContactTag $mContactTag,
+    \HubletoApp\Community\Contacts\Models\Value $mValue,
   ): void {
 
-    $persons = [
+    $contacts = [
       [ 1, 100, "Ján", "Novák", "", true, true, "ján.novák@gmail.com" ],
       [ 2, 99, "Mária", "Kováčová", "", false, true, "mária.kováčová@gmail.com" ],
       [ 3, 98, "Peter", "Horváth", "", true, false, "peter.horváth@gmail.com" ],
@@ -430,30 +430,37 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $isPrimary = true;
 
-    foreach ($persons as $person) {
-      $idPerson = $mPerson->record->recordCreate([
+    foreach ($contacts as $contact) {
+      $idContact = $mContact->record->recordCreate([
         "id_customer" => rand(1, 100),
-        "first_name" => $person[2],
-        "last_name" => $person[3],
-        "note" => $person[4],
+        "first_name" => $contact[2],
+        "last_name" => $contact[3],
+        "note" => $contact[4],
         "is_primary" => $isPrimary,
         "is_active" => 1,
         "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
       ])['id'];
 
-      $mContact->record->recordCreate([
-        "id_person" => $idPerson,
+      $mValue->record->recordCreate([
+        "id_contact" => $idContact,
         "type" => "email",
-        "value" => str_replace("'", "", (string) iconv('UTF-8', 'ASCII//TRANSLIT', $person[7])),
-        "id_contact_category" => rand(1,2),
+        "value" => str_replace("'", "", (string) iconv('UTF-8', 'ASCII//TRANSLIT', $contact[7])),
+        "id_category" => rand(1,2),
+      ]);
+
+      $mValue->record->recordCreate([
+        "id_contact" => $idContact,
+        "type" => "url",
+        "value" => 'https://www.example.com',
+        "id_category" => rand(1,2),
       ]);
 
       $phoneNumber = "+421 9" . rand(0, 3) . rand(4, 8) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9);
-      $mContact->record->recordCreate([
-        "id_person" => $idPerson,
+      $mValue->record->recordCreate([
+        "id_contact" => $idContact,
         "type" => "number",
         "value" => $phoneNumber,
-        "id_contact_category" => rand(1,2),
+        "id_category" => rand(1,2),
       ]);
 
       $tags = [];
@@ -464,8 +471,8 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       }
 
       foreach ($tags as $idTag) {
-        $mPersonTag->record->recordCreate([
-          "id_person" => $idPerson,
+        $mContactTag->record->recordCreate([
+          "id_contact" => $idContact,
           "id_tag" => $idTag,
         ]);
       }
@@ -519,7 +526,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   //         "completed" => rand(0, 1),
   //         "id_user" => 1,
   //         "id_customer" => $customer->id,
-  //         "id_person" => null,
+  //         "id_contact" => null,
   //       ]);
 
   //       $mCustomerActivity->record->recordCreate([
@@ -540,7 +547,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
 
     $customers = $mCustomer->record
-      ->with("PERSONS")
+      ->with("CONTACTS")
       ->get()
     ;
 
@@ -548,9 +555,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $identifierPrefixes = ["US", "EU", "AS"];
 
     foreach ($customers as $customer) {
-      if ($customer->PERSONS->count() < 1) continue;
+      if ($customer->CONTACTS->count() < 1) continue;
 
-      $person = $customer->PERSONS->first();
+      $contact = $customer->CONTACTS->first();
 
       $leadDateCreatedTs = (int) rand(strtotime("-1 month"), strtotime("+1 month"));
       $leadDateCreated = date("Y-m-d H:i:s", $leadDateCreatedTs);
@@ -560,7 +567,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "identifier" => $identifierPrefixes[rand(0,2)] . rand(1,3000),
         "title" => $titles[rand(0, count($titles)-1)],
         "id_customer" => $customer->id,
-        "id_person" => $person->id,
+        "id_contact" => $contact->id,
         "price" => rand(10, 100) * rand(1, 5) * 1.12,
         "id_currency" => 1,
         "date_expected_close" => $leadDateClose,
@@ -584,7 +591,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "time_start" => rand(10, 15) . ':00',
         "all_day" => rand(1, 5) == 1,
         "id_lead" => $idLead,
-        "id_person" => 1,
+        "id_contact" => 1,
         "id_activity_type" => 1,
         "id_user" => 1,
       ]);
@@ -634,7 +641,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "identifier" => $lead->identifier,
         "title" => $lead->title,
         "id_customer" => $lead->id_customer,
-        "id_person" => $lead->id_person,
+        "id_contact" => $lead->id_contact,
         "price" => $lead->price,
         "id_currency" => $lead->id_currency,
         "date_expected_close" => $dealDateClose,
@@ -674,7 +681,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "time_start" => rand(10, 15) . ':00',
         "all_day" => rand(1, 5) == 1,
         "id_deal" => $idDeal,
-        "id_person" => 1,
+        "id_contact" => 1,
         "id_activity_type" => 1,
         "id_user" => 1,
       ]);

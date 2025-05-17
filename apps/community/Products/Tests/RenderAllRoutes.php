@@ -9,7 +9,7 @@ class RenderAllRoutes extends \HubletoMain\Core\AppTest
   {
     $routes = [
       'products',
-      'products/product-groups',
+      'products/groups',
       'products/suppliers',
     ];
 

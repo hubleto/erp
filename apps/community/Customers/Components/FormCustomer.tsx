@@ -3,7 +3,7 @@ import { deepObjectMerge, getUrlParam } from "adios/Helper";
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from "adios/Inputs/Tags2";
 import FormInput from "adios/FormInput";
-import TablePersons from "../../Contacts/Components/TablePersons";
+import TableContacts from "../../Contacts/Components/TableContacts";
 import { TabPanel, TabView } from "primereact/tabview";
 import FormActivity, {FormActivityProps, FormActivityState} from "./FormActivity";
 import TableLeads from "../../Leads/Components/TableLeads";
@@ -13,7 +13,7 @@ import TableDeals from "../../Deals/Components/TableDeals";
 import FormDeal, {FormDealProps, FormDealState} from "../../Deals/Components/FormDeal";
 import TableCustomerDocuments from "./TableCustomerDocuments";
 import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
-import FormPerson, {FormPersonProps, FormPersonState} from "../../Contacts/Components/FormPerson";
+import FormContact, {FormContactProps, FormContactState} from "../../Contacts/Components/FormContact";
 import Calendar from '../../Calendar/Components/Calendar'
 import Hyperlink from "adios/Inputs/Hyperlink";
 import request from "adios/Request";
@@ -24,7 +24,7 @@ export interface FormCustomerProps extends HubletoFormProps {
   createNewLead: boolean,
   createNewDeal: boolean,
   newEntryId?: number,
-  tablePersonsDescription?: any,
+  tableContactsDescription?: any,
   tableLeadsDescription?: any,
   tableDealsDescription?: any,
   tableDocumentsDescription?: any,
@@ -34,13 +34,13 @@ interface FormCustomerState extends HubletoFormState {
   highlightIdActivity: number,
   createNewLead: boolean,
   createNewDeal: boolean,
-  createNewPerson: boolean,
+  createNewContact: boolean,
   newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
   activityCalendarTimeClicked: string,
   activityCalendarDateClicked: string,
-  tableContactsDescription?: any,
+  tableValuesDescription?: any,
   tablesKey: number,
 }
 
@@ -63,7 +63,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       highlightIdActivity: this.props.highlightIdActivity ?? 0,
       createNewLead: false,
       createNewDeal: false,
-      createNewPerson: false,
+      createNewContact: false,
       showIdDocument: 0,
       newEntryId: this.props.newEntryId ?? -1,
       showIdActivity: 0,
@@ -107,28 +107,28 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Contacts/Models/Contact',
-        idPerson: -1,
+        model: 'HubletoApp/Community/Contacts/Models/Value',
+        idContact: -1,
       },
       (description: any) => {
-        this.setState({tableContactsDescription: description} as FormCustomerState);
+        this.setState({tableValuesDescription: description} as FormCustomerState);
       }
     );
   }
 
-  renderNewPersonForm(R: any): JSX.Element {
+  renderNewContactForm(R: any): JSX.Element {
     return (
       <ModalSimple
-        uid='person_form'
+        uid='contact_form'
         isOpen={true}
         type='right wide'
       >
-        <FormPerson
+        <FormContact
           id={-1}
           creatingNew={true}
           isInlineEditing={true}
           descriptionSource="both"
-          tableContactsDescription={this.state.tableContactsDescription}
+          tableValuesDescription={this.state.tableValuesDescription}
           description={{
             defaultValues: {
               id_customer: R.id
@@ -136,15 +136,15 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           }}
           showInModal={true}
           showInModalSimple={true}
-          onClose={() => { this.setState({ createNewPerson: false } as FormCustomerState); }}
-          onSaveCallback={(form: FormPerson<FormPersonProps, FormPersonState>, saveResponse: any) => {
+          onClose={() => { this.setState({ createNewContact: false } as FormCustomerState); }}
+          onSaveCallback={(form: FormContact<FormContactProps, FormContactState>, saveResponse: any) => {
             if (saveResponse.status = "success") {
-              this.setState({createNewPerson: false} as FormCustomerState)
+              this.setState({createNewContact: false} as FormCustomerState)
               this.loadRecord()
             }
           }}
         >
-        </FormPerson>
+        </FormContact>
       </ModalSimple>
     )
   }
@@ -391,31 +391,31 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               </div>
               {showAdditional ?
                 <div className="card mt-2">
-                  <div className="card-header">{this.translate('Contact persons')}</div>
+                  <div className="card-header">{this.translate('Contacts')}</div>
                   <div className="card-body">
                     <a
-                      className="btn btn-add-outline mb-2"
+                      className="btn btn-add-outline mr-2"
                       onClick={() => {
-                        if (!R.PERSONS) R.PERSONS = [];
-                        this.setState({createNewPerson: true} as FormCustomerState);
+                        if (!R.CONTACTS) R.CONTACTS = [];
+                        this.setState({createNewContact: true} as FormCustomerState);
                       }}
                     >
                       <span className="icon"><i className="fas fa-add"></i></span>
-                      <span className="text">{this.translate('Add contact person')}</span>
+                      <span className="text">{this.translate('Add contact')}</span>
                     </a>
-                    <TablePersons
-                      uid={this.props.uid + "_table_persons"}
+                    <TableContacts
+                      uid={this.props.uid + "_table_contacts"}
                       parentForm={this}
                       isUsedAsInput={true}
                       readonly={!this.state.isInlineEditing}
                       customEndpointParams={{idCustomer: R.id}}
-                      data={{ data: R.PERSONS }}
+                      // data={{ data: R.CONTACTS }}
                       descriptionSource="props"
                       description={{
                         ui: {
-                          addButtonText: this.translate('Add person'),
+                          showFulltextSearch: true,
                         },
-                        permissions: this.props.tablePersonsDescription?.permissions ?? {},
+                        permissions: this.props.tableContactsDescription?.permissions ?? {},
                         columns: {
                           first_name: { type: "varchar", title: this.translate("First name") },
                           last_name: { type: "varchar", title: this.translate("Last name") },
@@ -430,22 +430,22 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                           is_primary: { type: "boolean", title: this.translate("Primary Contact") },
                         },
                       }}
-                      onRowClick={(table: TablePersons, row: any) => {
-                        var tableProps = this.props.tablePersonsDescription
-                        tableProps.idPerson = row.id;
+                      onRowClick={(table: TableContacts, row: any) => {
+                        var tableProps = this.props.tableContactsDescription
+                        tableProps.idContact = row.id;
                         table.onAfterLoadTableDescription(tableProps)
                         table.openForm(row.id);
                       }}
-                      onChange={(table: TablePersons) => {
-                        this.updateRecord({ PERSONS: table.state.data?.data });
+                      onChange={(table: TableContacts) => {
+                        this.updateRecord({ CONTACTS: table.state.data?.data });
                       }}
-                      onDeleteSelectionChange={(table: TablePersons) => {
-                        this.updateRecord({ PERSONS: table.state.data?.data ?? [] });
+                      onDeleteSelectionChange={(table: TableContacts) => {
+                        this.updateRecord({ CONTACTS: table.state.data?.data ?? [] });
                       }}
-                    ></TablePersons>
+                    ></TableContacts>
 
-                    {this.state.createNewPerson ?
-                      this.renderNewPersonForm(R)
+                    {this.state.createNewContact ?
+                      this.renderNewContactForm(R)
                     : null}
                   </div>
                 </div>

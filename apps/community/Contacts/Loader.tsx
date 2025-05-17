@@ -1,3 +1,3 @@
-import ContactsTablePersons from "./Components/TablePersons"
+import TableContacts from "./Components/TableContacts"
 
-globalThis.main.registerReactComponent('ContactsTablePersons', ContactsTablePersons);
+globalThis.main.registerReactComponent('ContactsTableContacts', TableContacts);

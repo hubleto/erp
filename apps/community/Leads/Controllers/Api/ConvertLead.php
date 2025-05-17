@@ -61,7 +61,7 @@ class ConvertLead extends \HubletoMain\Core\Controllers\Controller
         "identifier" => $lead->identifier,
         "title" => $lead->title,
         "id_customer" => $lead->id_customer,
-        "id_person" => $lead->id_person,
+        "id_contact" => $lead->id_contact,
         "price" => $lead->price,
         "id_currency" => $lead->id_currency,
         "date_expected_close" => $lead->date_expected_close,

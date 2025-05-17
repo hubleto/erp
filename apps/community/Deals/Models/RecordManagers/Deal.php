@@ -3,7 +3,7 @@
 namespace HubletoApp\Community\Deals\Models\RecordManagers;
 
 use HubletoApp\Community\Customers\Models\RecordManagers\Customer;
-use HubletoApp\Community\Contacts\Models\RecordManagers\Person;
+use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
 use HubletoApp\Community\Settings\Models\RecordManagers\Currency;
 use HubletoApp\Community\Pipeline\Models\RecordManagers\Pipeline;
 use HubletoApp\Community\Pipeline\Models\RecordManagers\PipelineStep;
@@ -44,9 +44,9 @@ class Deal extends \HubletoMain\Core\RecordManager
     return $this->belongsTo(User::class, 'id_user','id' );
   }
 
-  /** @return HasOne<Person, covariant Deal> */
-  public function PERSON(): HasOne {
-    return $this->hasOne(Person::class, 'id', 'id_person');
+  /** @return HasOne<Contact, covariant Deal> */
+  public function CONTACT(): HasOne {
+    return $this->hasOne(Contact::class, 'id', 'id_contact');
   }
 
   /** @return HasOne<Currency, covariant Deal> */

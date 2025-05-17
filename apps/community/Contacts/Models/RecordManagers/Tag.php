@@ -9,5 +9,5 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Tag extends \HubletoMain\Core\RecordManager
 {
-  public $table = 'person_tags';
+  public $table = 'contact_tags';
 }

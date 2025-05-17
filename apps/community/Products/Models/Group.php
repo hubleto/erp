@@ -7,6 +7,7 @@ class Group extends \HubletoMain\Core\Models\Model
   public string $table = 'product_groups';
   public string $recordManagerClass = RecordManagers\Group::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
+  public ?string $lookupUrlDetail = 'products/groups/{%ID%}';
 
   public function describeColumns(): array
   {

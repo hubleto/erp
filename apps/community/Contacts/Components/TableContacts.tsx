@@ -1,16 +1,24 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
+import FormContact, { FormContactProps, FormContactState } from './FormContact';
+import { getUrlParam } from 'adios/Helper';
+import request from 'adios/Request';
+import { ProgressBar } from 'primereact/progressbar';
 
-interface TableContactsProps extends TableProps {
-}
+interface TableContactsProps extends TableProps {}
 
 interface TableContactsState extends TableState {
+  tableValuesDescription?: any,
 }
 
 export default class TableContacts extends Table<TableContactsProps, TableContactsState> {
   static defaultProps = {
     ...Table.defaultProps,
     itemsPerPage: 15,
+    orderBy: {
+      field: "id",
+      direction: "desc"
+    },
     formUseModalSimple: true,
     model: 'HubletoApp/Community/Contacts/Models/Contact',
   }
@@ -20,8 +28,140 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
 
   translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableContacts';
 
-  constructor(props: TableContactsProps) {
-    super(props);
-    this.state = this.getStateFromProps(props);
+  getFormModalProps() {
+    if (getUrlParam('recordId') > 0) {
+      return {
+        ...super.getFormModalProps(),
+        type: 'right wide'
+      }
+    } else return {...super.getFormModalProps()}
+  }
+
+  getFormProps(): any {
+    var formProps = super.getFormProps();
+    return {
+      ...super.getFormProps(),
+      onSaveCallback: (form: FormContact<FormContactProps, FormContactState>, saveResponse: any) => {
+        formProps.onSaveCallback(form, saveResponse);
+        if (this.props.parentForm) {
+          this.props.parentForm.reload();
+        }
+      },
+      onDeleteCallback: (form: FormContact<FormContactProps, FormContactState>, saveResponse: any) => {
+        formProps.onDeleteCallback(form, saveResponse);
+        if (this.props.parentForm) {
+          this.props.parentForm.reload();
+        }
+      }
+    }
+  }
+
+  onAfterLoadTableDescription(description: any) {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'HubletoApp/Community/Contacts/Models/Value',
+        idContact: this.props.recordId ?? description.idContact,
+      },
+      (description: any) => {
+        this.setState({tableValuesDescription: description} as TableContactsState);
+      }
+    );
+    return description;
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "tags") {
+      return (
+        <>
+          {data.TAGS.map((tag, key) => {
+            return <div
+              key={key}
+              style={{backgroundColor: tag.TAG.color}}
+              className='badge'
+            >{tag.TAG.name}</div>;
+          })}
+        </>
+      );
+    } else if (data.VALUES && data.VALUES.length > 0) {
+      if (columnName == "virt_email") {
+        let contactsRendered = 0;
+        return (
+          <div className='flex flex-row gap-2 flex-wrap max-w-lg'>
+            {data.VALUES.map((value, key) => {
+              if (value.type == "email" && contactsRendered < 2) {
+                contactsRendered += 1;
+                return (
+                  <div className='border border-gray-400 rounded px-1' key={data.id + '-email-' + key}>
+                    {value.value} {value.CATEGORY ? <>({value.CATEGORY.name})</> : null}
+                  </div>
+                );
+              } else return null;
+            })}
+          </div>
+        );
+      } else if (columnName == "virt_number") {
+        let contactsRendered = 0;
+        return (
+          <div className='flex flex-row gap-2 flex-wrap max-w-lg'>
+            {data.VALUES.map((value, key) => {
+              if (value.type == "number" && contactsRendered < 2) {
+                contactsRendered += 1;
+                return (
+                  <div className='border border-gray-400 rounded px-1' key={data.id + '-number-' + key}>
+                    {value.value} {value.CATEGORY ? <>({value.CATEGORY.name})</> : null}
+                  </div>
+                );
+              } else return null;
+            })}
+          </div>
+        );
+      } else return super.renderCell(columnName, column, data, options);
+    } else return super.renderCell(columnName, column, data, options);
+  }
+
+  renderForm(): JSX.Element {
+    let formProps: FormContactProps = this.getFormProps();
+    formProps.tableValuesDescription = this.state.tableValuesDescription;
+    return <FormContact {...formProps}/>;
+  }
+
+  render(): JSX.Element {
+    if (this.props.parentForm) {
+      if (!this.state.data) {
+        return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
+      }
+
+      return <>
+        {this.renderHeaderButtons()}
+        {this.renderFulltextSearch()}
+        {this.renderFormModal()}
+        <div className="flex gap-2 flex-wrap mt-2">
+          {Object.keys(this.state.data?.data).map((key) => {
+            const item = this.state.data.data[key];
+            return <div key={key}>
+              <button
+                className="btn btn-transparent"
+                onClick={() => {
+                  this.setState({recordId: item.id})
+                }}
+              >
+                <span className="icon"><i className="fas fa-user"></i></span>
+                <span className="text" style={{maxHeight: "10em"}}>
+                  <b>{item.first_name ?? ''}
+                  &nbsp;
+                  {item.last_name ?? ''}</b>
+                  {item.VALUES.map((value, index) => {
+                    return <div key={index}><small>{value.value}</small></div>
+                  })}
+                </span>
+              </button>
+            </div>;
+          })}
+        </div>
+      </>;
+    } else {
+      return super.render();
+    }
   }
 }

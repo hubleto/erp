@@ -230,7 +230,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                           readonly={R.is_archived}
                           value={R.id_customer}
                           onChange={(value: any) => {
-                            this.updateRecord({ id_customer: value, id_person: null });
+                            this.updateRecord({ id_customer: value, id_contact: null });
                             if (R.id_customer == 0) {
                               R.id_customer = null;
                               this.setState({record: R});
@@ -238,17 +238,17 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                           }}
                         ></Lookup>
                       </FormInput>
-                      <FormInput title={"Contact Person"}>
-                        <Lookup {...this.getInputProps('id-person')}
-                          model='HubletoApp/Community/Customers/Models/Person'
+                      <FormInput title={"Contact"}>
+                        <Lookup {...this.getInputProps('id-contact')}
+                          model='HubletoApp/Community/Contacts/Models/Contact'
                           customEndpointParams={{id_customer: R.id_customer}}
                           readonly={R.is_archived}
                           endpoint={`contacts/get-customer-contacts`}
-                          value={R.id_person}
+                          value={R.id_contact}
                           onChange={(value: any) => {
-                            this.updateRecord({ id_person: value })
-                            if (R.id_person == 0) {
-                              R.id_person = null;
+                            this.updateRecord({ id_contact: value })
+                            if (R.id_contact == 0) {
+                              R.id_contact = null;
                               this.setState({record: R})
                             }
                           }}

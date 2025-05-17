@@ -4,20 +4,20 @@ namespace HubletoApp\Community\Contacts\Models;
 
 use ADIOS\Core\Db\Column\Lookup;
 
-class PersonTag extends \HubletoMain\Core\Models\Model
+class ContactTag extends \HubletoMain\Core\Models\Model
 {
-  public string $table = 'cross_person_tags';
-  public string $recordManagerClass = RecordManagers\PersonTag::class;
+  public string $table = 'contact_contact_tags';
+  public string $recordManagerClass = RecordManagers\ContactTag::class;
 
   public array $relations = [
     'TAG' => [ self::BELONGS_TO, Tag::class, 'id_tag', 'id' ],
-    'PERSON' => [ self::BELONGS_TO, Person::class, 'id_person', 'id' ],
+    'CONTACT' => [ self::BELONGS_TO, Contact::class, 'id_contact', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_person' => (new Lookup($this, $this->translate('Person'), Person::class, 'CASCADE'))->setRequired(),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class, 'CASCADE'))->setRequired(),
       'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class, 'CASCADE'))->setRequired(),
     ]);
   }
@@ -25,7 +25,7 @@ class PersonTag extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Person Categories';
+    $description->ui['title'] = 'Contact tags';
     return $description;
   }
 

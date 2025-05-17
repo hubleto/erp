@@ -11,6 +11,7 @@ class Supplier extends \HubletoMain\Core\Models\Model
   public string $table = 'product_suppliers';
   public string $recordManagerClass = RecordManagers\Supplier::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
+  public ?string $lookupUrlDetail = 'products/suppliers/{%ID%}';
 
   public function describeColumns(): array
   {

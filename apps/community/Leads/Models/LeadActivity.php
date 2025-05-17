@@ -7,7 +7,7 @@ use ADIOS\Core\Db\Column\Date;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Time;
 use ADIOS\Core\Db\Column\Varchar;
-use HubletoApp\Community\Contacts\Models\Person;
+use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Customers\Models\Activity;
 use HubletoApp\Community\Settings\Models\ActivityType;
 use HubletoApp\Community\Settings\Models\User;
@@ -25,7 +25,7 @@ class LeadActivity extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired(),
-      'id_person' => (new Lookup($this, $this->translate('Contact person'), Person::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_activity_type' => (new Lookup($this, $this->translate('Activity type'), ActivityType::class, 'SET NULL')),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),
       'date_start' => (new Date($this, $this->translate('Start date')))->setRequired(),

@@ -92,15 +92,6 @@
     "Models\\Permission": {
         "Permission": "Povolenie"
     },
-    "Models\\ContactCategory": {
-        "Name": "Názov",
-        "Contact Types": "Typy kontaktov",
-        "Type": ""
-    },
-    "Controllers\\ContactCategories": {
-        "Settings": "Nastavenia",
-        "Contact Types": "Typy kontaktov"
-    },
     "Controllers\\Dashboard": {
         "Settings": "Nastavenia",
         "Users": "Používatelia",

@@ -1,0 +1,262 @@
+import React, { Component } from 'react';
+import { deepObjectMerge, getUrlParam } from 'adios/Helper';
+import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import InputTags2 from 'adios/Inputs/Tags2';
+import FormInput from 'adios/FormInput';
+import TableValues from './TableValues';
+import Lookup from 'adios/Inputs/Lookup';
+import Boolean from 'adios/Inputs/Boolean';
+import request from 'adios/Request';
+import { FormProps, FormState } from 'adios/Form';
+
+export interface FormContactProps extends HubletoFormProps {
+  newEntryId?: number,
+  creatingNew: boolean,
+  tableValuesDescription: any
+}
+
+export interface FormContactState extends HubletoFormState {
+  newEntryId?: number,
+  primaryContactMessage: boolean,
+  contactsTableKey: number,
+}
+
+export default class FormContact<P, S> extends HubletoForm<FormContactProps,FormContactState> {
+  static defaultProps: any = {
+    ...HubletoForm.defaultProps,
+    model: 'HubletoApp/Community/Contacts/Models/Contact',
+  };
+
+  props: FormContactProps;
+  state: FormContactState;
+
+  translationContext: string = 'HubletoApp\\Community\\Contacts\\Loader::Components\\FormContact';
+
+  constructor(props: FormContactProps) {
+    super(props);
+    this.state = {
+      ...this.getStateFromProps(props),
+      newEntryId: this.props.newEntryId ?? -1,
+      primaryContactMessage: false,
+      contactsTableKey: 0,
+    }
+  }
+
+  getStateFromProps(props: FormContactProps) {
+    return {
+      ...super.getStateFromProps(props),
+    };
+  }
+
+  renderTitle(): JSX.Element {
+    if (getUrlParam('recordId') == -1) {
+      return(
+        <h2>{'New Contact'}</h2>
+      );
+    } else {
+      return (
+        <h2>
+          {this.state.record.first_name && this.state.record.last_name
+            ? this.state.record.first_name + " " + this.state.record.last_name
+            : "[Undefined Contact Name]"}
+        </h2>
+      );
+    }
+  }
+
+  checkPrimaryContact(R) {
+    var tagIds = [];
+
+    for (const [key, value] of Object.entries(R.TAGS)) {
+        tagIds.push(value.id_tag);
+    }
+
+    request.get(
+      "contacts/check-primary-contact",
+      {
+        idContact: this.state.record.id ?? -1,
+        idCustomer: R.id_customer,
+        tags: tagIds
+      },
+      (response: any) => {
+        if (response.result == true) {
+          this.updateRecord({is_primary: 1})
+        } else {
+          globalThis.main.showDialogDanger(
+            <>
+              <p className='text'>{response.error ?? "Unknown error"}</p>
+              <p className='text'>{response.names != null ? response.names : ""}</p>
+            </>,
+            {}
+          )
+        }
+      }
+    )
+  }
+
+  onBeforeSaveRecord(record: any) {
+    var willExistOne = false;
+
+    //check if there is going to be at least one contact that is going to be
+    //saved after update
+    // if (record.CONTACTS) {
+    //   for (const [key, value] of Object.entries(record.CONTACTS)) {
+    //     if (value._toBeDeleted_ == null) willExistOne = true;
+    //   }
+    // }
+
+    // if (willExistOne == false) {
+    //   globalThis.main.showDialogDanger(
+    //     <p>You need to have at least one contact set before deleting all the others</p>,
+    //     {}
+    //   )
+    //   throw new Error("You need to have at least one contact set before deleting all the others");
+    // }
+
+    return record;
+  }
+
+  componentDidUpdate(prevProps: FormProps, prevState: FormState): void {
+    if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({contactsTableKey: Math.random()} as FormContactState)
+  }
+
+  renderContent(): JSX.Element {
+    const R = this.state.record;
+    const showAdditional = R.id > 0 ? true : false;
+
+    return <>
+      <div className='card'>
+        <div className='card-body flex flex-row gap-2'>
+          <div className="w-1/2">
+            {this.inputWrapper('first_name')}
+            {this.inputWrapper('last_name')}
+            <FormInput title={this.translate("Customer")}>
+              <Lookup {...this.getInputProps('id_customer')}
+                model='HubletoApp/Community/Contacts/Models/Customer'
+                endpoint={`customers/get-customer`}
+                value={R.id_customer}
+                readonly={this.props.creatingNew}
+                onChange={(value: any) => {
+                  if (this.state.record.is_primary == 1) {
+                    this.setState({primaryContactMessage: true} as FormContactState);
+                  }
+                  this.updateRecord({ id_customer: value, is_primary: 0});
+                }}
+              ></Lookup>
+            </FormInput>
+            <FormInput title={this.translate('Tags')}>
+              <InputTags2 {...this.getInputProps()}
+                value={this.state.record.TAGS}
+                model='HubletoApp/Community/Contacts/Models/Tag'
+                targetColumn='id_contact'
+                sourceColumn='id_tag'
+                colorColumn='color'
+                onChange={(value: any) => {
+                  if (this.state.record.is_primary == 1) {
+                    this.setState({primaryContactMessage: true} as FormContactState);
+                  }
+                  R.TAGS = value;
+                  this.setState({record: R});
+                  this.updateRecord({is_primary: 0});
+                }}
+              ></InputTags2>
+            </FormInput>
+            {this.state.record?.id_customer > 0 ?
+              <>
+                {this.state.primaryContactMessage == true ?
+                  <div className='text-yellow-500 block'>
+                    <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
+                    <span className='text'>
+                      Due to some changes the Primary Contact has to be checked again
+                    </span>
+                  </div>
+                : <></>}
+                <FormInput title={this.translate("Primary Contact")}>
+                  <>
+                    <Boolean {...this.getInputProps("is_primary")}
+                      value={this.state.record.is_primary}
+                      onChange={(value: number) => {
+                        this.setState({isInlineEditing: true});
+                        if (value == 1) {
+                          this.setState({primaryContactMessage: false} as FormContactState)
+                          this.checkPrimaryContact(R);
+                        } else this.updateRecord({is_primary: value})
+                      }}
+                    ></Boolean>
+                  </>
+                </FormInput>
+
+              </>
+            : <></>}
+            {this.inputWrapper('note')}
+            {this.inputWrapper('is_active')}
+            {showAdditional ? this.inputWrapper('date_created') : null}
+          </div>
+          <div className='border-l border-gray-200'></div>
+          <div className="w-1/2">
+            <a
+              className="btn btn-add-outline mb-2"
+              onClick={() => {
+                if (!R.CONTACTS) R.CONTACTS = [];
+                R.VALUES.push({
+                  id: this.state.newEntryId,
+                  id_contact: { _useMasterRecordId_: true },
+                  type: 'email',
+                });
+                this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormContactState);
+              }}
+            >
+              <span className="icon"><i className="fas fa-add"></i></span>
+              <span className="text">{this.translate('Add contact')}</span>
+            </a>
+            <TableValues
+              key={"contacts_"+this.state.contactsTableKey}
+              uid={this.props.uid + '_table_contacts'}
+              parentForm={this}
+              context="Hello World"
+              // customEndpointParams={{idContact: R.id}}
+              data={{data: R.VALUES}}
+              isInlineEditing={this.state.isInlineEditing}
+              isUsedAsInput={true}
+              readonly={!this.state.isInlineEditing}
+              descriptionSource="props"
+              onRowClick={() => this.setState({isInlineEditing: true})}
+              onChange={(table: TableValues) => {
+                this.updateRecord({ VALUES: table.state.data.data });
+              }}
+              onDeleteSelectionChange={(table: TableValues) => {
+                this.updateRecord({ VALUES: table.state.data.data ?? [] });
+                this.setState({contactsTableKey: Math.random()} as FormContactState)
+              }}
+              customEndpointParams={{idContact: R.id}}
+              description={{
+                permissions: this.props.tableValuesDescription?.permissions ?? {},
+                ui: {
+                  emptyMessage: <div className="p-2">{this.translate('No contacts yet.')}</div>
+                },
+                columns: {
+                  type: {
+                    type: 'varchar',
+                    title: this.translate('Type'),
+                    enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
+                  },
+                  value: { type: 'varchar', title: this.translate('Value')},
+                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/Category' },
+                },
+                inputs: {
+                  type: {
+                    type: 'varchar',
+                    title: this.translate('Type'),
+                    enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
+                  },
+                  value: { type: 'varchar', title: this.translate('Value')},
+                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/Category' },
+                }
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </>;
+  }
+}

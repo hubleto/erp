@@ -7,7 +7,7 @@ use ADIOS\Core\Db\Column\Date;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Text;
 use ADIOS\Core\Db\Column\Varchar;
-use HubletoApp\Community\Contacts\Models\Person;
+use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Settings\Models\Country;
@@ -22,7 +22,7 @@ class Customer extends \HubletoMain\Core\Models\Model
   public ?string $lookupUrlDetail = 'customers/{%ID%}';
 
   public array $relations = [
-    'PERSONS' => [ self::HAS_MANY, Person::class, 'id_customer' ],
+    'CONTACTS' => [ self::HAS_MANY, Contact::class, 'id_customer' ],
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, CustomerActivity::class, 'id_customer', 'id' ],

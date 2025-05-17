@@ -79,14 +79,6 @@
     "models.permission": {
         "Permission": "Autorisation"
     },
-    "models.contactCategory": {
-        "Name": "Nom",
-        "Contact Types": "Types de contacts"
-    },
-    "controllers.contactCategories": {
-        "Settings": "Paramètres",
-        "Contact Types": "Types de contacts"
-    },
     "controllers.dashboard": {
         "Settings": "Paramètres",
         "Users": "Utilisateurs",

@@ -7,7 +7,7 @@ use ADIOS\Core\Db\Column\Varchar;
 
 class Tag extends \HubletoMain\Core\Models\Model
 {
-  public string $table = 'person_tags';
+  public string $table = 'contact_tags';
   public string $recordManagerClass = RecordManagers\Tag::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 

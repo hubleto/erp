@@ -9,7 +9,7 @@ interface TableCustomersProps extends TableProps {
 }
 
 interface TableCustomersState extends TableState {
-  tablePersonsDescription?: any,
+  tableContactsDescription?: any,
   tableLeadsDescription?: any,
   tableDealsDescription?: any,
   tableDocumentsDescription?: any,
@@ -57,11 +57,11 @@ export default class TableCustomers extends Table<TableCustomersProps, TableCust
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Contacts/Models/Person',
+        model: 'HubletoApp/Community/Contacts/Models/Contact',
         idCustomer: this.props.recordId,
       },
       (description: any) => {
-        this.setState({tablePersonsDescription: description} as TableCustomersState);
+        this.setState({tableContactsDescription: description} as TableCustomersState);
       }
     );
     request.get(
@@ -100,7 +100,7 @@ export default class TableCustomers extends Table<TableCustomersProps, TableCust
 
   renderForm(): JSX.Element {
     let formProps: FormCustomerProps = this.getFormProps() as FormCustomerProps;
-    formProps.tablePersonsDescription = this.state.tablePersonsDescription;
+    formProps.tableContactsDescription = this.state.tableContactsDescription;
     formProps.tableLeadsDescription = this.state.tableLeadsDescription;
     formProps.tableDealsDescription = this.state.tableDealsDescription;
     formProps.tableDocumentsDescription = this.state.tableDocumentsDescription;

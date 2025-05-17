@@ -1,2 +1,4 @@
-{# {% include "@HubletoApp:Community:Products/ProductsHeader.twig" %} #}
-<app-table string:model="\HubletoApp\Community\Products\Models\Supplier"></app-table>
+<app-table
+  string:model="\HubletoApp\Community\Products\Models\Supplier"
+  int:record-id="{{ viewParams.recordId }}"
+></app-table>

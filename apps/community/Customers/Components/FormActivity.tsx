@@ -49,16 +49,16 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
             }}
           ></Lookup>
         </FormInput>
-        <FormInput title={"Contact Person"}>
-          <Lookup {...this.getInputProps("id_person")}
-            model='HubletoApp/Community/Customers/Models/Person'
+        <FormInput title={"Contact"}>
+          <Lookup {...this.getInputProps("id_contact")}
+            model='HubletoApp/Community/Contacts/Models/Contact'
             endpoint={`contacts/get-customer-contacts`}
             customEndpointParams={{id_customer: R.id_customer}}
-            value={R.id_person}
+            value={R.id_contact}
             onChange={(value: any) => {
-              this.updateRecord({ id_person: value })
-              if (R.id_person == 0) {
-                R.id_person = null;
+              this.updateRecord({ id_contact: value })
+              if (R.id_contact == 0) {
+                R.id_contact = null;
                 this.setState({record: R})
               }
             }}

@@ -4,10 +4,10 @@ namespace HubletoApp\Community\Contacts\Models;
 
 use ADIOS\Core\Db\Column\Varchar;
 
-class ContactCategory extends \HubletoMain\Core\Models\Model
+class Category extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'contact_categories';
-  public string $recordManagerClass = RecordManagers\ContactCategory::class;
+  public string $recordManagerClass = RecordManagers\Category::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array

@@ -78,28 +78,27 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Customers/Models/CustomerTag:Update",
       "HubletoApp/Community/Customers/Models/CustomerTag:Delete",
 
+      "HubletoApp/Community/Customers/Models/Value:Create",
+      "HubletoApp/Community/Customers/Models/Value:Read",
+      "HubletoApp/Community/Customers/Models/Value:Update",
+      "HubletoApp/Community/Customers/Models/Value:Delete",
+
       "HubletoApp/Community/Customers/Models/Contact:Create",
       "HubletoApp/Community/Customers/Models/Contact:Read",
       "HubletoApp/Community/Customers/Models/Contact:Update",
       "HubletoApp/Community/Customers/Models/Contact:Delete",
 
-      "HubletoApp/Community/Customers/Models/Person:Create",
-      "HubletoApp/Community/Customers/Models/Person:Read",
-      "HubletoApp/Community/Customers/Models/Person:Update",
-      "HubletoApp/Community/Customers/Models/Person:Delete",
-
-      "HubletoApp/Community/Customers/Models/PersonTag:Create",
-      "HubletoApp/Community/Customers/Models/PersonTag:Read",
-      "HubletoApp/Community/Customers/Models/PersonTag:Update",
-      "HubletoApp/Community/Customers/Models/PersonTag:Delete",
+      "HubletoApp/Community/Customers/Models/Tag:Create",
+      "HubletoApp/Community/Customers/Models/Tag:Read",
+      "HubletoApp/Community/Customers/Models/Tag:Update",
+      "HubletoApp/Community/Customers/Models/Tag:Delete",
 
       "HubletoApp/Community/Customers/Controllers/Customer",
       "HubletoApp/Community/Customers/Controllers/CustomerActivity",
       "HubletoApp/Community/Customers/Controllers/Address",
       "HubletoApp/Community/Customers/Controllers/CustomerTag",
       "HubletoApp/Community/Customers/Controllers/Contact",
-      "HubletoApp/Community/Customers/Controllers/Person",
-      "HubletoApp/Community/Customers/Controllers/PersonTag",
+      "HubletoApp/Community/Customers/Controllers/ContactTag",
       "HubletoApp/Community/Customers/Controllers/CustomerActivity",
       "HubletoApp/Community/Customers/Controllers/Customer",
 
@@ -108,7 +107,7 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Customers/Api/GetCustomerContacts",
 
       "HubletoApp/Community/Customers/Customers",
-      "HubletoApp/Community/Customers/Persons",
+      "HubletoApp/Community/Customers/Contacts",
     ];
 
     foreach ($permissions as $permission) {

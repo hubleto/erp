@@ -8,18 +8,18 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class PersonTag extends \HubletoMain\Core\RecordManager
+class ContactTag extends \HubletoMain\Core\RecordManager
 {
-  public $table = 'cross_person_tags';
+  public $table = 'contact_contact_tags';
 
-  /** @return BelongsTo<Tag, covariant PersonTag> */
+  /** @return BelongsTo<Tag, covariant ContactTag> */
   public function TAG() {
     return $this->belongsTo(Tag::class, 'id_tag', 'id');
   }
 
-  /** @return BelongsTo<Person, covariant PersonTag> */
-  public function PERSON(): BelongsTo {
-    return $this->belongsTo(Person::class, 'id_person', 'id');
+  /** @return BelongsTo<Contact, covariant ContactTag> */
+  public function CONTACT(): BelongsTo {
+    return $this->belongsTo(Contact::class, 'id_contact', 'id');
   }
 
 }

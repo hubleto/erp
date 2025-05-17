@@ -13,16 +13,17 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^contacts\/?$/' => Controllers\Persons::class,
+      '/^contacts\/?$/' => Controllers\Contacts::class,
+      '/^contacts(\/(?<recordId>\d+))?\/?$/' => Controllers\Contacts::class,
       '/^contacts\/get-customer-contacts\/?$/' => Controllers\Api\GetCustomerContacts::class,
       '/^contacts\/check-primary-contact\/?$/' => Controllers\Api\CheckPrimaryContact::class,
       '/^settings\/contact-tags\/?$/' => Controllers\Tags::class,
-      '/^settings\/contact-categories\/?$/' => Controllers\ContactCategories::class,
+      '/^contacts\/categories\/?$/' => Controllers\Categories::class,
     ]);
 
     $this->setConfigAsInteger('sidebarOrder', 0);
 
-    $this->main->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/contact-categories']);
+    $this->main->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/categories']);
     $this->main->addSetting($this, [
       'title' => $this->translate('Contact Tags'),
       'icon' => 'fas fa-tags',
@@ -34,28 +35,28 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mContactCategory = new Models\ContactCategory($this->main);
-      $mPerson = new Models\Person($this->main);
+      $mCategory = new Models\Category($this->main);
       $mContact = new Models\Contact($this->main);
-      $mPersonTag = new Models\Tag($this->main);
-      $mCrossPersonTag = new Models\PersonTag($this->main);
+      $mValue = new Models\Value($this->main);
+      $mTag = new Models\Tag($this->main);
+      $mContactTag = new Models\ContactTag($this->main);
 
-      $mContactCategory->dropTableIfExists()->install();
-      $mPerson->dropTableIfExists()->install();
+      $mCategory->dropTableIfExists()->install();
       $mContact->dropTableIfExists()->install();
-      $mPersonTag->dropTableIfExists()->install();
-      $mCrossPersonTag->dropTableIfExists()->install();
+      $mValue->dropTableIfExists()->install();
+      $mTag->dropTableIfExists()->install();
+      $mContactTag->dropTableIfExists()->install();
 
-      $mContactCategory->record->recordCreate([ 'name' => 'Work' ]);
-      $mContactCategory->record->recordCreate([ 'name' => 'Home' ]);
-      $mContactCategory->record->recordCreate([ 'name' => 'Other' ]);
+      $mCategory->record->recordCreate([ 'name' => 'Work' ]);
+      $mCategory->record->recordCreate([ 'name' => 'Home' ]);
+      $mCategory->record->recordCreate([ 'name' => 'Other' ]);
 
-      $mPersonTag->record->recordCreate([ 'name' => "IT manager", 'color' => '#D33115' ]);
-      $mPersonTag->record->recordCreate([ 'name' => "CEO", 'color' => '#4caf50' ]);
-      $mPersonTag->record->recordCreate([ 'name' => "Desicion Maker", 'color' => '#fcc203' ]);
-      $mPersonTag->record->recordCreate([ 'name' => "Sales", 'color' => '#2196f3' ]);
-      $mPersonTag->record->recordCreate([ 'name' => "Support", 'color' => '#03fc8c' ]);
-      $mPersonTag->record->recordCreate([ 'name' => "Other", 'color' => '#383838' ]);
+      $mTag->record->recordCreate([ 'name' => "IT manager", 'color' => '#D33115' ]);
+      $mTag->record->recordCreate([ 'name' => "CEO", 'color' => '#4caf50' ]);
+      $mTag->record->recordCreate([ 'name' => "Desicion Maker", 'color' => '#fcc203' ]);
+      $mTag->record->recordCreate([ 'name' => "Sales", 'color' => '#2196f3' ]);
+      $mTag->record->recordCreate([ 'name' => "Support", 'color' => '#03fc8c' ]);
+      $mTag->record->recordCreate([ 'name' => "Other", 'color' => '#383838' ]);
     }
   }
 

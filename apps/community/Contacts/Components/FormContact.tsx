@@ -128,8 +128,74 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
       <div className='card'>
         <div className='card-body flex flex-row gap-2'>
           <div className="w-1/2">
-            {this.inputWrapper('first_name')}
-            {this.inputWrapper('last_name')}
+            {this.inputWrapper('first_name', {cssClass: 'text-2xl text-primary'})}
+            {this.inputWrapper('last_name', {cssClass: 'text-2xl text-primary'})}
+
+            {this.divider('Contacts')}
+            <TableValues
+              key={"contacts_"+this.state.contactsTableKey}
+              uid={this.props.uid + '_table_contacts'}
+              parentForm={this}
+              context="Hello World"
+              // customEndpointParams={{idContact: R.id}}
+              data={{data: R.VALUES}}
+              isInlineEditing={this.state.isInlineEditing}
+              isUsedAsInput={true}
+              readonly={!this.state.isInlineEditing}
+              descriptionSource="props"
+              onRowClick={() => this.setState({isInlineEditing: true})}
+              onChange={(table: TableValues) => {
+                this.updateRecord({ VALUES: table.state.data.data });
+              }}
+              onDeleteSelectionChange={(table: TableValues) => {
+                this.updateRecord({ VALUES: table.state.data.data ?? [] });
+                this.setState({contactsTableKey: Math.random()} as FormContactState)
+              }}
+              customEndpointParams={{idContact: R.id}}
+              description={{
+                permissions: this.props.tableValuesDescription?.permissions ?? {},
+                ui: {
+                  emptyMessage: <div className="p-2">{this.translate('No contacts yet.')}</div>
+                },
+                columns: {
+                  type: {
+                    type: 'varchar',
+                    title: this.translate('Type'),
+                    enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
+                  },
+                  value: { type: 'varchar', title: this.translate('Value')},
+                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/Category' },
+                },
+                inputs: {
+                  type: {
+                    type: 'varchar',
+                    title: this.translate('Type'),
+                    enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
+                  },
+                  value: { type: 'varchar', title: this.translate('Value')},
+                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/Category' },
+                }
+              }}
+            />
+            <a
+              className="btn btn-add-outline mt-2"
+              onClick={() => {
+                if (!R.CONTACTS) R.CONTACTS = [];
+                R.VALUES.push({
+                  id: this.state.newEntryId,
+                  id_contact: { _useMasterRecordId_: true },
+                  type: 'email',
+                });
+                this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormContactState);
+              }}
+            >
+              <span className="icon"><i className="fas fa-add"></i></span>
+              <span className="text">{this.translate('Add contact')}</span>
+            </a>
+
+          </div>
+          <div className='border-l border-gray-200'></div>
+          <div className="w-1/2">
             <FormInput title={this.translate("Customer")}>
               <Lookup {...this.getInputProps('id_customer')}
                 model='HubletoApp/Community/Contacts/Models/Customer'
@@ -191,69 +257,6 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
             {this.inputWrapper('note')}
             {this.inputWrapper('is_active')}
             {showAdditional ? this.inputWrapper('date_created') : null}
-          </div>
-          <div className='border-l border-gray-200'></div>
-          <div className="w-1/2">
-            <a
-              className="btn btn-add-outline mb-2"
-              onClick={() => {
-                if (!R.CONTACTS) R.CONTACTS = [];
-                R.VALUES.push({
-                  id: this.state.newEntryId,
-                  id_contact: { _useMasterRecordId_: true },
-                  type: 'email',
-                });
-                this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormContactState);
-              }}
-            >
-              <span className="icon"><i className="fas fa-add"></i></span>
-              <span className="text">{this.translate('Add contact')}</span>
-            </a>
-            <TableValues
-              key={"contacts_"+this.state.contactsTableKey}
-              uid={this.props.uid + '_table_contacts'}
-              parentForm={this}
-              context="Hello World"
-              // customEndpointParams={{idContact: R.id}}
-              data={{data: R.VALUES}}
-              isInlineEditing={this.state.isInlineEditing}
-              isUsedAsInput={true}
-              readonly={!this.state.isInlineEditing}
-              descriptionSource="props"
-              onRowClick={() => this.setState({isInlineEditing: true})}
-              onChange={(table: TableValues) => {
-                this.updateRecord({ VALUES: table.state.data.data });
-              }}
-              onDeleteSelectionChange={(table: TableValues) => {
-                this.updateRecord({ VALUES: table.state.data.data ?? [] });
-                this.setState({contactsTableKey: Math.random()} as FormContactState)
-              }}
-              customEndpointParams={{idContact: R.id}}
-              description={{
-                permissions: this.props.tableValuesDescription?.permissions ?? {},
-                ui: {
-                  emptyMessage: <div className="p-2">{this.translate('No contacts yet.')}</div>
-                },
-                columns: {
-                  type: {
-                    type: 'varchar',
-                    title: this.translate('Type'),
-                    enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
-                  },
-                  value: { type: 'varchar', title: this.translate('Value')},
-                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/Category' },
-                },
-                inputs: {
-                  type: {
-                    type: 'varchar',
-                    title: this.translate('Type'),
-                    enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
-                  },
-                  value: { type: 'varchar', title: this.translate('Value')},
-                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/Category' },
-                }
-              }}
-            />
           </div>
         </div>
       </div>

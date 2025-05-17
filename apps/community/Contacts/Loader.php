@@ -4,9 +4,9 @@ namespace HubletoApp\Community\Contacts;
 
 class Loader extends \HubletoMain\Core\App
 {
-  const DEFAULT_INSTALLATION_CONFIG = [
-    'sidebarOrder' => 0,
-  ];
+  // const DEFAULT_INSTALLATION_CONFIG = [
+  //   'sidebarOrder' => 0,
+  // ];
 
   public function init(): void
   {
@@ -20,8 +20,6 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/contact-tags\/?$/' => Controllers\Tags::class,
       '/^contacts\/categories\/?$/' => Controllers\Categories::class,
     ]);
-
-    $this->setConfigAsInteger('sidebarOrder', 0);
 
     $this->main->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/categories']);
     $this->main->addSetting($this, [

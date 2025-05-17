@@ -311,7 +311,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 <div className='flex-2 card'>
                   <div className="card-body flex flex-row gap-2">
                     <div className="w-1/2">
-                      {this.inputWrapper("name")}
+                      {this.inputWrapper("name", {cssClass: 'text-2xl text-primary'})}
                       {this.inputWrapper("customer_id")}
                       {this.inputWrapper("street_line_1")}
                       {this.inputWrapper("street_line_2")}

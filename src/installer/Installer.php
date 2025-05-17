@@ -51,7 +51,7 @@ class Installer {
       // \HubletoApp\Community\Messages\Loader::class => [ 'sidebarOrder' => 125, ],
       \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
       \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 101, 'calendarColor' => '#3DC266' ],
-      \HubletoApp\Community\Contacts\Loader::class => [ ],
+      \HubletoApp\Community\Contacts\Loader::class => [ 'sidebarOrder' => 102, ],
       \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110, 'showEventsForTodayInDashboard' => true ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],

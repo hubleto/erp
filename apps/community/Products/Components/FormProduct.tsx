@@ -46,7 +46,7 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
       <div className='card'>
         <div className='card-body grid grid-cols-2 gap-2'>
           <div className='border-r border-gray-200'>
-            {this.inputWrapper('title')}
+            {this.inputWrapper('title', {cssClass: 'text-2xl text-primary'})}
             {this.inputWrapper('unit_price')}
             {this.inputWrapper('vat')}
             {this.inputWrapper('margin')}

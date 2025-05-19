@@ -21,7 +21,11 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    $calendarManager->addCalendar(Calendar::class);
+    $calendarManager->addCalendar(
+      'customers',
+      $this->configAsString('calendarColor'),
+      Calendar::class
+    );
 
     $this->main->apps->community('Help')->addContextHelpUrls('/^customers\/?$/', [
       'en' => 'en/apps/community/customers',

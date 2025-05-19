@@ -11,12 +11,24 @@ class Calendar implements \ADIOS\Core\Testable {
  * @var array{"title": string, "formComponent": string}
  * */
   public array $activitySelectorConfig = [
-    "title" => "",
+    "addNewActivityButtonText" => "",
     "formComponent" => ""
   ];
 
+  protected string $color = 'blue';
+
   public function __construct(\HubletoMain $main) {
     $this->main = $main;
+  }
+
+  public function setColor(string $color): void
+  {
+    $this->color = $color;
+  }
+
+  public function getColor(): string
+  {
+    return $this->color;
   }
 
   public function loadEvents(string $dateStart, string $dateEnd): array

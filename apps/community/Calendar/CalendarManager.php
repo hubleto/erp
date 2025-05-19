@@ -15,11 +15,12 @@ class CalendarManager
     $this->main = $main;
   }
 
-  public function addCalendar(string $calendarClass): void
+  public function addCalendar(string $source, string $color, string $calendarClass): void
   {
     $calendar = new $calendarClass($this->main);
+    $calendar->setColor($color);
     if ($calendar instanceof \HubletoMain\Core\Calendar) {
-      $this->calendars[$calendarClass] = $calendar;
+      $this->calendars[$source] = $calendar;
     }
   }
 

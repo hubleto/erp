@@ -182,7 +182,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
             <a
               className="btn btn-add-outline mt-2"
               onClick={() => {
-                if (!R.CONTACTS) R.CONTACTS = [];
+                if (!R.VALUES) R.VALUES = [];
                 R.VALUES.push({
                   id: this.state.newEntryId,
                   id_contact: { _useMasterRecordId_: true },

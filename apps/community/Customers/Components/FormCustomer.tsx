@@ -154,7 +154,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       <ModalSimple
         uid='activity_form'
         isOpen={true}
-        type='right'
+        type='inside-parent theme-secondary'
       >
         <FormActivity
           id={this.state.showIdActivity}

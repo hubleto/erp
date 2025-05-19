@@ -40,6 +40,14 @@ class Loader extends \HubletoMain\Core\App
         'calendar/boards/events-for-today',
       ));
     }
+
+    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
+    $calendarManager->addCalendar(
+      'events',
+      'blue',
+      Calendar::class
+    );
+
   }
 
   public function installTables(int $round): void

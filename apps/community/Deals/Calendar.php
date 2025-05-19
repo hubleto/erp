@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Deals;
 class Calendar extends \HubletoMain\Core\Calendar {
 
   public array $activitySelectorConfig = [
-    "title" => "Deal",
+    "addNewActivityButtonText" => "Add new activity linked to deal",
     "formComponent" => "DealsFormActivity"
   ];
 
@@ -55,10 +55,9 @@ class Calendar extends \HubletoMain\Core\Calendar {
       $events[$key]['allDay'] = $activity->all_day == 1 || $tStart == '' ? true : false;
       $events[$key]['title'] = $activity->subject;
       $events[$key]['backColor'] = $activity->color;
-      $events[$key]['color'] = $this->main->apps->community('Deals')->configAsString('calendarColor');
+      $events[$key]['color'] = $this->color;
       $events[$key]['type'] = $activity->activity_type;
-      $events[$key]['url'] = 'deals/' . $activity->id_lead;
-      $events[$key]['category'] = 'deal';
+      $events[$key]['source'] = 'deals';
       $events[$key]['details'] = 'Deal #' . $activity->DEAL->identifier . ' for ' . $activity->DEAL->CUSTOMER->name;
     }
 

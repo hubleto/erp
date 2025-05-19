@@ -1,4 +1,5 @@
 import React, { Component, useState } from "react";
+import { setUrlParam, deleteUrlParam } from "adios/Helper";
 import Calendar from "./Calendar";
 import ModalSimple from "adios/ModalSimple";
 import FormActivitySelector from "./FormActivitySelector";
@@ -6,6 +7,8 @@ import { log } from "console";
 
 
 interface CalendarMainProps {
+  eventSource?: string,
+  eventId?: number,
   children: any,
   eventsEndpoint: string,
   views?: string,
@@ -18,6 +21,8 @@ interface CalendarMainProps {
 }
 
 interface CalendarMainState {
+  eventSource?: string,
+  eventId?: number,
   events: Array<any>,
   showIdActivity?: number,
   dateClicked?: string,
@@ -32,6 +37,8 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
     super(props);
 
     this.state = {
+      eventSource: this.props.eventSource ?? '',
+      eventId: this.props.eventId ?? 0,
       events: [],
       showIdActivity: 0,
       dateClicked: "",
@@ -61,7 +68,34 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
         readonly={false}
         views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
         eventsEndpoint={globalThis.main.config.rewriteBase + '/calendar/get-calendar-events'}
+        onEventsLoaded={(events) => {
+          for (let i in events) {
+            if (
+              !this.state.activityFormComponent
+              && events[i].extendedProps?.source == this.state.eventSource
+              && events[i].id == this.state.eventId
+            ) {
+
+              this.setState({
+                eventSource: '',
+                eventId: 0,
+                activityFormComponent: globalThis.main.renderReactElement(events[i].extendedProps.SOURCEFORM,
+                  {
+                    id: events[i].id,
+                    showInModal: true,
+                    showInModalSimple: true,
+                    onClose:() => {this.setState({activityFormComponent: null})},
+                    onSaveCallback:() => {this.setState({activityFormComponent: null})}
+                  }
+                )
+              });
+            }
+          }
+        }}
         onDateClick={(date, time, info) => {
+          deleteUrlParam('eventSource');
+          deleteUrlParam('eventId');
+
           this.setState({
             activityFormComponent: null,
             newActivity: true,
@@ -70,9 +104,12 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
           });
         }}
         onEventClick={(info) => {
+          setUrlParam('eventSource', info.event.extendedProps.source);
+          setUrlParam('eventId', info.event.id);
+
           this.setState({
             newActivity: false,
-            activityFormModalProps: info.event.extendedProps.SOURCEFORM_MODALPROPS,
+            // activityFormModalProps: info.event.extendedProps.SOURCEFORM_MODALPROPS,
             activityFormComponent: globalThis.main.renderReactElement(info.event.extendedProps.SOURCEFORM,
               {
                 id: info.event.id,

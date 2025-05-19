@@ -12,6 +12,7 @@ interface CalendarProps {
   height?: any,
   readonly?: boolean,
   onCreateCallback?: any
+  onEventsLoaded?: any,
   onDateClick: any,
   onEventClick: any,
   headerToolbar?: any,
@@ -45,7 +46,11 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
     return <>
       <b>{eventInfo.timeText}</b>
       <span style={{marginLeft: 4}}>{eventInfo.event.title}</span>
-      {eventInfo.event.extendedProps.category !== null ? <i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.category})</i> : null}
+      {eventInfo.event.extendedProps.details ? 
+        <div style={{marginLeft: 4}}><small>
+          <i>{eventInfo.event.extendedProps.details}</i>
+        </small></div>
+      : null}
     </>
   }
 
@@ -71,6 +76,9 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
           dayMaxEvents={true}
           weekends={true}
           events={{url: this.props.eventsEndpoint}}
+          eventsSet={(events) => {
+            if (this.props.onEventsLoaded) this.props.onEventsLoaded(events);
+          }}
           //initialEvents={this.state.events} // alternatively, use the `events` setting to fetch from a feed
           //select={handleDateSelect}
           dateClick={(info) => {

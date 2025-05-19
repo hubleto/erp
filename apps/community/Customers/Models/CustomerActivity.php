@@ -18,6 +18,7 @@ class CustomerActivity extends \HubletoMain\Core\Models\Model
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
+    'CONTACT' => [ self::BELONGS_TO, Contact::class, 'id_contact', 'id' ],
   ];
 
   public function describeColumns(): array
@@ -25,7 +26,7 @@ class CustomerActivity extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE'))->setRequired(),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class, 'CASCADE')),
-      'id_activity_type' => (new Lookup($this, $this->translate('Activity type'), ActivityType::class, 'SET NULL'))->setRequired(),
+      'id_activity_type' => (new Lookup($this, $this->translate('Activity type'), ActivityType::class, 'SET NULL')),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),
       'date_start' => (new Date($this, $this->translate('Start Date')))->setRequired(),
       'time_start' => (new Time($this, $this->translate('Start Time'))),

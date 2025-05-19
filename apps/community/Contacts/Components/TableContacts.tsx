@@ -154,6 +154,17 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
                   {item.VALUES.map((value, index) => {
                     return <div key={index}><small>{value.value}</small></div>
                   })}
+                  <div className="flex gap-2">
+                    {item.TAGS.map((tag, index) => {
+                      return <div
+                        key={index}
+                        className="rounded"
+                        style={{color: tag.TAG.color, border: '1px solid ' + tag.TAG.color, padding: '0 3px'}}
+                      >
+                        <small>{tag.TAG.name}</small>
+                      </div>
+                    })}
+                  </div>
                 </span>
               </button>
             </div>;

@@ -28,7 +28,11 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    $calendarManager->addCalendar(Calendar::class);
+    $calendarManager->addCalendar(
+      'leads',
+      $this->configAsString('calendarColor'),
+      Calendar::class
+    );
 
     $dashboard = $this->main->apps->community('Desktop')->dashboard;
 

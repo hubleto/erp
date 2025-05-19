@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Leads;
 class Calendar extends \HubletoMain\Core\Calendar {
 
   public array $activitySelectorConfig = [
-    "title" => "Lead",
+    "addNewActivityButtonText" => "Add new activity linked to lead",
     "formComponent" => "LeadsFormActivity"
   ];
 
@@ -56,10 +56,9 @@ class Calendar extends \HubletoMain\Core\Calendar {
       $events[$key]['allDay'] = $activity->all_day == 1 || $tStart == '' ? true : false;
       $events[$key]['title'] = $activity->subject;
       $events[$key]['backColor'] = $activity->color;
-      $events[$key]['color'] = $this->main->apps->community('Leads')->configAsString('calendarColor');
+      $events[$key]['color'] = $this->color;
       $events[$key]['type'] = $activity->activity_type;
-      $events[$key]['url'] = 'leads/' . $activity->id_lead;
-      $events[$key]['category'] = 'lead';
+      $events[$key]['source'] = 'leads';
       $events[$key]['details'] = 'Lead #' . $activity->LEAD->identifier . ' for ' . $activity->LEAD->CUSTOMER->name;
       
     }

@@ -1,32 +1,26 @@
 <?php
 
-namespace HubletoApp\Community\Customers;
+namespace HubletoApp\Community\Calendar;
 
-use HubletoApp\Community\Customers\Models\CustomerActivity;
+use HubletoApp\Community\Calendar\Models\Activity;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 
   public array $activitySelectorConfig = [
-    "addNewActivityButtonText" => "Add new activity linked to customer",
-    "formComponent" => "CustomersFormActivity",
+    "addNewActivityButtonText" => "Add a simple event",
+    "formComponent" => "CalendarActivityForm",
   ];
 
   public function loadEvents(string $dateStart, string $dateEnd): array
   {
-    $idCustomer = $this->main->urlParamAsInteger('idCustomer');
+    $mActivity = new Activity($this->main);
 
-    $mCustomerActivity = new CustomerActivity($this->main);
-
-    $activities = $mCustomerActivity->record
-      ->select("customer_activities.*", "activity_types.color", "activity_types.name as activity_type")
-      ->leftJoin("activity_types", "activity_types.id", "=", "customer_activities.id_activity_type")
+    $activities = $mActivity->record
+      ->select("activities.*", "activity_types.color", "activity_types.name as activity_type")
+      ->leftJoin("activity_types", "activity_types.id", "=", "activities.id_activity_type")
       ->where("date_start", ">=", $dateStart)
       ->where("date_start", "<=", $dateEnd)
-      ->with('CUSTOMER')
-      ->with('CONTACT')
     ;
-
-    if ($idCustomer > 0) $activities = $activities->where("id_customer", $idCustomer);
 
     $activities = $activities->get();
     $events = [];
@@ -55,13 +49,13 @@ class Calendar extends \HubletoMain\Core\Calendar {
         if (empty($tEnd) || empty($tStart)) $events[$key]['end'] = date("Y-m-d", strtotime("+ 1 day", strtotime($dEnd)));
       }
 
-      $events[$key]['allDay'] = $activity->all_day == 1 || $tStart == null ? true : false;
+      $events[$key]['allDay'] = $activity->all_day == 1 || $tStart == '' ? true : false;
       $events[$key]['title'] = $activity->subject;
       $events[$key]['backColor'] = $activity->color;
       $events[$key]['color'] = $this->color;
       $events[$key]['type'] = $activity->activity_type;
-      $events[$key]['source'] = 'customers';
-      $events[$key]['details'] = $activity->CUSTOMER->name . ($activity->CONTACT ? ', ' . $activity->CONTACT->first_name . ' ' . $activity->CONTACT->last_name : '');
+      $events[$key]['source'] = 'events';
+      // $events[$key]['SOURCEFORM'] = "CalendarActivityForm";
     }
 
     return $events;

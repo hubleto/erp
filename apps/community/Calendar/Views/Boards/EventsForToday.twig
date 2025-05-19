@@ -1,18 +1,16 @@
-{% if viewParams.events|length > 0 %}
+{% if viewParams.eventsToday|length > 0 %}
   <table class="table-default dense w-full">
-    {% for event in viewParams.events %}
+    {% for event in viewParams.eventsToday %}
       <tr>
         <td style="border-left:1em solid {{ event.color }}">{{ event.category }}</td>
         <td>{{ event.title }}</td>
         <td>{{ event.details }}</td>
         <td>{% if event.allDay %} {{ translate('All-day') }} {% else %} {{ viewParams.main.locale.formatTime(event.start ?? '', false) }} {% endif %}</td>
         <td class="text-right">
-          {% if event.url %}
-            <a href="{{ event.url }}" class="btn btn-transparent">
-              <span class="icon"><i class="fas fa-arrow-right"></i></span>
-              <span class="text">{{ translate('Open event details') }}</span>
-            </a>
-          {% endif %}
+          <a href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}" class="btn btn-transparent">
+            <span class="icon"><i class="fas fa-arrow-right"></i></span>
+            <span class="text">{{ translate('Open event details') }}</span>
+          </a>
         </td>
       </tr>
     {% endfor %}
@@ -20,5 +18,33 @@
 {% else %}
   <div class="alert alert-info">
     Let's have a break. You have nothing to do for today. 🎉<br/>
+  </div>
+{% endif %}
+
+{% if viewParams.eventsTomorrow|length > 0 %}
+  <div class="flex gap-2 mt-2 items-center">
+    Plan for tomorrow:
+    {% for event in viewParams.eventsTomorrow %}
+      <a class="btn btn-transparent" href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}">
+        <span class="text">
+          {{ event.title }}
+          {% if event.details %}<i>({{ event.details }})</i>{% endif %}
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if viewParams.eventsLater|length > 0 %}
+  <div class="flex gap-2 mt-2 items-center">
+    Plan for later:
+    {% for event in viewParams.eventsLater %}
+      <a class="btn btn-transparent" href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}">
+        <span class="text">
+          {{ event.title }}
+          {% if event.details %}<i>({{ event.details }})</i>{% endif %}
+        </span>
+      </a>
+    {% endfor %}
   </div>
 {% endif %}

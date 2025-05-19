@@ -20,7 +20,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
 
   renderTitle(): JSX.Element {
     if (this.state.creatingRecord) {
-      return <h2>{globalThis.main.translate('New regular activity')}</h2>;
+      return <h2>{globalThis.main.translate('New event')}</h2>;
     } else {
       return (
         <>

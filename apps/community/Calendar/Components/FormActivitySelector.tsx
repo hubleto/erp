@@ -23,42 +23,29 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
       <>
         <div className='modal-header'>
           <div className="modal-header-left"></div>
-          <div className="modal-header-title">Choose the assigment of the activity</div>
+          <div className="modal-header-title">New event</div>
           <div className="modal-header-right">
             <button className="btn btn-close" onClick={() => this.props.onCallback()}>
               <span className="text !py-2">&times;</span>
             </button>
           </div>
         </div>
+        <div className="badge m-4 px-4 text-2xl">
+          {this.props.clickConfig?.date}
+          &nbsp;
+          {this.props.clickConfig?.time}
+        </div>
+        <div className="badge badge-info m-4 px-4 text-xl">
+          Choose calendar to which the event should be created.
+        </div>
         <div className='flex gap-2 flex-col px-4 mt-4'>
-          <button
-            className='btn btn-primary w-full !text-center h-[50px] flex justify-center'
-            onClick={() => {
-              this.setState({formSelected: globalThis.main.renderReactElement("CalendarActivityForm",
-                {
-                  description: {
-                    defaultValues: {
-                      date_start: this.props.clickConfig?.date,
-                      time_start: this.props.clickConfig?.time
-                    }
-                  },
-                  id: -1,
-                  showInModal: true,
-                  showInModalSimple: true,
-                  onClose:() => {this.setState({formSelected: null}), this.props.onCallback()},
-                  onSaveCallback:() => {this.setState({formSelected: null}), this.props.onCallback()},
-                })
-              });
-            }}
-          >
-            <span className='text text-center self-center !h-auto text-lg'>Regular Activity</span>
-          </button>
           {this.props.calendarConfigs.map((item, index) => {
-            if (item.title) {
+            if (item.addNewActivityButtonText) {
               return <>
                 <button
                   key={index}
-                  className='btn btn-primary w-full !text-center h-[50px] flex justify-center'
+                  className='btn btn-transparent btn-large'
+                  style={{borderLeft: '3em solid ' + item.color}}
                   onClick={() => {
                     this.setState({formSelected: globalThis.main.renderReactElement(item.formComponent,
                       {
@@ -77,7 +64,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
                     });
                   }}
                 >
-                  <span className='text text-center self-center !h-auto text-lg'>{item.title}</span>
+                  <span className='text text-center self-center !h-auto text-lg'>{item.addNewActivityButtonText}</span>
                 </button>
               </>
             } else {
@@ -89,7 +76,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
           <ModalSimple
             uid='activity_form'
             isOpen={true}
-            type='right'
+            type='inside-parent'
           >
             {this.state.formSelected}
           </ModalSimple>

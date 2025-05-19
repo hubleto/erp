@@ -22,7 +22,7 @@
 {% endif %}
 
 {% if viewParams.eventsTomorrow|length > 0 %}
-  <div class="flex gap-2 mt-2 items-center">
+  <div class="flex gap-2 mt-2 items-center flex-wrap">
     Plan for tomorrow:
     {% for event in viewParams.eventsTomorrow %}
       <a class="btn btn-transparent" href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}">
@@ -36,7 +36,7 @@
 {% endif %}
 
 {% if viewParams.eventsLater|length > 0 %}
-  <div class="flex gap-2 mt-2 items-center">
+  <div class="flex gap-2 mt-2 items-center flex-wrap">
     Plan for later:
     {% for event in viewParams.eventsLater %}
       <a class="btn btn-transparent" href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}">

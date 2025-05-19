@@ -24,6 +24,7 @@ class Lead extends \HubletoMain\Core\Models\Model
   public string $table = 'leads';
   public string $recordManagerClass = RecordManagers\Lead::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
+  public ?string $lookupUrlDetail = 'leads/{%ID%}';
 
   const STATUS_NEW = 1;
   const STATUS_IN_PROGRESS = 2;

@@ -27,6 +27,7 @@ class Deal extends \HubletoMain\Core\Models\Model
   public string $table = 'deals';
   public string $recordManagerClass = RecordManagers\Deal::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
+  public ?string $lookupUrlDetail = 'deals/{%ID%}';
 
   const RESULT_PENDING = 1;
   const RESULT_WON = 2;

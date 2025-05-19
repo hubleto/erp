@@ -51,6 +51,7 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
       <>
         <div className='card mt-4'>
           <div className='card-body'>
+              {this.inputWrapper('id_folder', {readonly: this.props.readonly})}
               {this.inputWrapper('name', {readonly: this.props.readonly})}
               {this.inputWrapper('file', {readonly: this.props.readonly})}
               {this.inputWrapper('hyperlink', {readonly: this.props.readonly})}

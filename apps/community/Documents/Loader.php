@@ -10,13 +10,14 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^documents\/?$/' => Controllers\Browse::class,
+      '/^documents\/?$/' => Controllers\Table::class,
+      '/^documents\/browse\/?$/' => Controllers\Browse::class,
       '/^documents\/list\/?$/' => Controllers\Table::class,
       '/^documents\/api\/get-folder-content\/?$/' => Controllers\Api\GetFolderContent::class,
     ]);
 
     $appMenu = $this->main->apps->community('Desktop')->appMenu;
-    $appMenu->addItem($this, 'documents', $this->translate('Browse'), 'fas fa-table');
+    $appMenu->addItem($this, 'documents/browse', $this->translate('Browse'), 'fas fa-table');
     $appMenu->addItem($this, 'documents/list', $this->translate('List'), 'fas fa-list');
   }
 

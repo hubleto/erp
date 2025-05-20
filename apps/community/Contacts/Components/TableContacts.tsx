@@ -146,11 +146,11 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
               >
                 <span className="icon"><i className="fas fa-user"></i></span>
                 <span className="text" style={{maxHeight: "10em"}}>
-                  {item.salutation ?? ''}
-                  &nbsp;
-                  <b>{item.first_name ?? ''}
-                  &nbsp;
-                  {item.last_name ?? ''}</b>
+                  <div className="flex gap-2">
+                    {item.salutation ?? ''}
+                    <b>{item.first_name ?? ''}</b>
+                    <b>{item.last_name ?? ''}</b>
+                  </div>
                   {item.VALUES.map((value, index) => {
                     return <div key={index}><small>{value.value}</small></div>
                   })}

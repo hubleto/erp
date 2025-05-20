@@ -21,9 +21,29 @@
   </div>
 {% endif %}
 
+<div class="flex gap-2 mt-2 items-center flex-wrap">
+  {% if viewParams.eventsTomorrow|length > 0 %}
+    <button
+      class="btn btn-transparent"
+      onclick="$('#events-tomorrow').slideToggle();"
+    >
+      <span class="icon"><i class="fas fa-ellipsis"></i></span>
+      <span class="text">{{ viewParams.eventsTomorrow|length }} events for tomorrow</span>
+    </button>
+  {% endif %}
+  {% if viewParams.eventsLater|length > 0 %}
+    <button
+      class="btn btn-transparent"
+      onclick="$('#events-later').slideToggle();"
+    >
+      <span class="icon"><i class="fas fa-ellipsis"></i></span>
+      <span class="text">{{ viewParams.eventsLater|length }} events later</span>
+    </button>
+  {% endif %}
+</div>
+
 {% if viewParams.eventsTomorrow|length > 0 %}
-  <div class="flex gap-2 mt-2 items-center flex-wrap">
-    Plan for tomorrow:
+  <div id="events-tomorrow" style="display:none" class="flex gap-2 mt-2 items-center flex-wrap">
     {% for event in viewParams.eventsTomorrow %}
       <a class="btn btn-transparent" href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}">
         <span class="text">
@@ -36,8 +56,7 @@
 {% endif %}
 
 {% if viewParams.eventsLater|length > 0 %}
-  <div class="flex gap-2 mt-2 items-center flex-wrap">
-    Plan for later:
+  <div id="events-later" style="display:none" class="flex gap-2 mt-2 items-center flex-wrap">
     {% for event in viewParams.eventsLater %}
       <a class="btn btn-transparent" href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}">
         <span class="text">

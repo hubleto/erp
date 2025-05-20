@@ -221,6 +221,7 @@
         {% for app in viewParams.appsInSidebar %}
           <div class="flex gap-1">
             <a
+              type="button"
               class="btn {% if app.isActivated %} btn-active {% endif %} flex-10 truncate"
               id="sidebar-item-level1-{{ i }}"
               href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"

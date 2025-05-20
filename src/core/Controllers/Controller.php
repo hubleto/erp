@@ -97,7 +97,8 @@ class Controller extends \ADIOS\Core\Controller
     parent::prepareView();
 
     $this->viewParams['main'] = $this->main;
-    $this->viewParams['app'] = $this->hubletoApp;
+
+    if (isset($this->hubletoApp)) $this->viewParams['app'] = $this->hubletoApp;
     // $this->viewParams['help'] = $this->main->apps->community('Help');
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;

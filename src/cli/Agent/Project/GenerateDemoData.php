@@ -88,7 +88,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $this->generateCustomers($mCustomer, $mCustomerTag);
       $this->generateContacts($mContact, $mContactTag, $mValue);
     }
-    //$this->generateActivities($mCustomer, $mActivity, $mCustomerActivity);
+
+    $this->generateActivities($mCustomer, $mCustomerActivity);
+
     if (
       $this->main->apps->isAppInstalled("HubletoApp\Community\Customers") &&
       $this->main->apps->isAppInstalled("HubletoApp\Community\Documents") &&
@@ -274,106 +276,270 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   ): void {
 
     $contacts = [
-      [ 1, 100, "Ján", "Novák", "", true, true, "ján.novák@gmail.com" ],
-      [ 2, 99, "Mária", "Kováčová", "", false, true, "mária.kováčová@gmail.com" ],
-      [ 3, 98, "Peter", "Horváth", "", true, false, "peter.horváth@gmail.com" ],
-      [ 4, 97, "Katarína", "Varga", "", false, true, "katarína.varga@gmail.com" ],
-      [ 5, 96, "Michal", "Tóth", "", true, true, "michal.tóth@gmail.com" ],
-      [ 6, 95, "Tomáš", "László", "", true, false, "tomáš.lászló@gmail.com" ],
-      [ 7, 94, "Robert", "Marek", "", false, true, "robert.marek@gmail.com" ],
-      [ 8, 93, "Lucia", "Králová", "", true, true, "lucia.králová@gmail.com" ],
-      [ 9, 92, "Pavel", "Filo", "", true, false, "pavel.filo@gmail.com" ],
-      [ 10, 91, "Sofia", "Urbanová", "", false, true, "sofia.urbanová@gmail.com" ],
-      [ 11, 90, "Martin", "Kováč", "", true, true, "martin.kováč@gmail.com" ],
-      [ 12, 89, "Ivana", "Szabóová", "", false, true, "ivana.szabóová@gmail.com" ],
-      [ 13, 88, "Jakub", "Molnár", "", true, false, "jakub.molnár@gmail.com" ],
-      [ 14, 87, "Natália", "Holubová", "", false, true, "natália.holubová@gmail.com" ],
-      [ 15, 86, "Samuel", "Bíro", "", true, true, "samuel.bíro@gmail.com" ],
-      [ 16, 85, "Veronika", "Poláková", "", false, false, "veronika.poláková@gmail.com" ],
-      [ 17, 84, "Lukáš", "Papp", "", true, true, "lukáš.papp@gmail.com" ],
-      [ 18, 83, "Andrej", "Nagy", "", false, true, "andrej.nagy@gmail.com" ],
-      [ 19, 82, "Petra", "Ráczová", "", true, false, "petra.ráczová@gmail.com" ],
-      [ 20, 81, "Alžbeta", "Kocsisová", "", false, true, "alžbeta.kocsisová@gmail.com" ],
-      [ 21, 80, "Nina", "Szarková", "", true, true, "nina.szarková@gmail.com" ],
-      [ 22, 79, "Patrik", "Baláž", "", false, false, "patrik.baláž@gmail.com" ],
-      [ 23, 78, "Iveta", "Molnárová", "", true, true, "iveta.molnárová@gmail.com" ],
-      [ 24, 77, "Roman", "Tóth", "", false, true, "roman.tóth@gmail.com" ],
-      [ 25, 76, "Filip", "Vojtko", "", true, false, "filip.vojtko@gmail.com" ],
-      [ 26, 75, "Dávid", "Csicsai", "", false, true, "dávid.csicsai@gmail.com" ],
-      [ 27, 74, "Viktor", "Kováč", "", true, true, "viktor.kováč@gmail.com" ],
-      [ 28, 73, "Silvia", "Palkovičová", "", false, false, "silvia.palkovičová@gmail.com" ],
-      [ 29, 72, "Jaroslav", "Kočiš", "", true, true, "jaroslav.kočiš@gmail.com" ],
-      [ 30, 71, "Tereza", "Farkašová", "", false, true, "tereza.farkašová@gmail.com" ],
-      [ 31, 70, "Adrián", "Ondruš", "", true, false, "adrián.ondruš@gmail.com" ],
-      [ 32, 69, "Zuzana", "Kurucová", "", false, true, "zuzana.kurucová@gmail.com" ],
-      [ 33, 68, "Richard", "Bartók", "", true, true, "richard.bartók@gmail.com" ],
-      [ 34, 67, "Stanislav", "Nemec", "", false, false, "stanislav.nemec@gmail.com" ],
-      [ 35, 66, "Lenka", "Varga", "", true, true, "lenka.varga@gmail.com" ],
-      [ 36, 65, "Erika", "Cibulková", "", false, true, "erika.cibulková@gmail.com" ],
-      [ 37, 64, "Vladimír", "Takáč", "", true, false, "vladimír.takáč@gmail.com" ],
-      [ 38, 63, "Nikola", "Král", "", false, true, "nikola.král@gmail.com" ],
-      [ 39, 62, "Dušan", "Papp", "", true, true, "dušan.papp@gmail.com" ],
-      [ 40, 61, "Radka", "Horváthová", "", false, false, "radka.horváthová@gmail.com" ],
-      [ 41, 60, "Peter", "Balog", "", true, true, "peter.balog@gmail.com" ],
-      [ 42, 59, "Michal", "Urban", "", false, true, "michal.urban@gmail.com" ],
-      [ 43, 58, "Marian", "Filo", "", true, false, "marian.filo@gmail.com" ],
-      [ 44, 57, "Ivana", "Nagyová", "", false, true, "ivana.nagyová@gmail.com" ],
-      [ 45, 56, "Štefan", "Kovács", "", true, true, "štefan.kovács@gmail.com" ],
-      [ 46, 55, "Lucia", "Bírová", "", false, false, "lucia.bírová@gmail.com" ],
-      [ 47, 54, "Jozef", "Tóth", "", true, true, "jozef.tóth@gmail.com" ],
-      [ 48, 53, "Kristína", "Ráczová", "", false, true, "kristína.ráczová@gmail.com" ],
-      [ 49, 52, "Ondrej", "Vojtko", "", true, false, "ondrej.vojtko@gmail.com" ],
-      [ 50, 51, "Dominika", "Molnárová", "", false, true, "dominika.molnárová@gmail.com" ],
-      [ 51, 50, "Erik", "Kováč", "", true, true, "erik.kováč@gmail.com" ],
-      [ 52, 49, "Martina", "Szabóová", "", false, false, "martina.szabóová@gmail.com" ],
-      [ 53, 48, "Monika", "Králová", "", true, true, "monika.králová@gmail.com" ],
-      [ 54, 47, "Pavol", "Nagy", "", false, true, "pavol.nagy@gmail.com" ],
-      [ 55, 46, "Adriana", "Mareková", "", true, false, "adriana.mareková@gmail.com" ],
-      [ 56, 45, "Filip", "László", "", false, true, "filip.lászló@gmail.com" ],
-      [ 57, 44, "Peter", "Csicsai", "", true, true, "peter.csicsai@gmail.com" ],
-      [ 58, 43, "Andrea", "Urbanová", "", false, false, "andrea.urbanová@gmail.com" ],
-      [ 59, 42, "Dominik", "Bartók", "", true, true, "dominik.bartók@gmail.com" ],
-      [ 60, 41, "Katarína", "Balážová", "", false, true, "katarína.balážová@gmail.com" ],
-      [ 61, 40, "Veronika", "Horváthová", "", true, false, "veronika.horváthová@gmail.com" ],
-      [ 62, 39, "Marek", "Varga", "", false, true, "marek.varga@gmail.com" ],
-      [ 63, 38, "Michal", "Szarka", "", true, true, "michal.szarka@gmail.com" ],
-      [ 64, 37, "Anna", "Nagyová", "", false, false, "anna.nagyová@gmail.com" ],
-      [ 65, 36, "Tomáš", "Molnár", "", true, true, "tomáš.molnár@gmail.com" ],
-      [ 66, 35, "Peter", "Tóth", "", false, true, "peter.tóth@gmail.com" ],
-      [ 67, 34, "Ján", "Nemec", "", true, false, "ján.nemec@gmail.com" ],
-      [ 68, 33, "Iveta", "Kovácsová", "", false, true, "iveta.kovácsová@gmail.com" ],
-      [ 69, 32, "Zuzana", "Balážová", "", true, true, "zuzana.balážová@gmail.com" ],
-      [ 70, 31, "Martin", "Varga", "", false, false, "martin.varga@gmail.com" ],
-      [ 71, 30, "Zuzana", "Urbanová", "", true, true, "zuzana.urbanová@gmail.com" ],
-      [ 72, 29, "Silvia", "Szabóová", "", false, true, "silvia.szabóová@gmail.com" ],
-      [ 73, 28, "Martin", "Takáč", "", true, false, "martin.takáč@gmail.com" ],
-      [ 74, 27, "Mária", "Bartók", "", false, true, "mária.bartók@gmail.com" ],
-      [ 75, 26, "Daniel", "Kováč", "", true, true, "daniel.kováč@gmail.com" ],
-      [ 76, 25, "Jakub", "Szarka", "", false, false, "jakub.szarka@gmail.com" ],
-      [ 77, 24, "Jozef", "Marek", "", true, true, "jozef.marek@gmail.com" ],
-      [ 78, 23, "Pavol", "Filo", "", false, true, "pavol.filo@gmail.com" ],
-      [ 79, 22, "Michal", "László", "", true, false, "michal.lászló@gmail.com" ],
-      [ 80, 21, "Roman", "Nemec", "", false, true, "roman.nemec@gmail.com" ],
-      [ 81, 20, "Katarína", "Králová", "", true, true, "katarína.králová@gmail.com" ],
-      [ 82, 19, "Lucia", "Tóthová", "", false, false, "lucia.tóthová@gmail.com" ],
-      [ 83, 18, "Ján", "Horváth", "", true, true, "ján.horváth@gmail.com" ],
-      [ 84, 17, "Anna", "Kovácsová", "", false, true, "anna.kovácsová@gmail.com" ],
-      [ 85, 16, "Filip", "Molnár", "", true, false, "filip.molnár@gmail.com" ],
-      [ 86, 15, "Michal", "Varga", "", false, true, "michal.varga@gmail.com" ],
-      [ 87, 14, "Peter", "Kováč", "", true, true, "peter.kováč@gmail.com" ],
-      [ 88, 13, "Martin", "Bartók", "", false, false, "martin.bartók@gmail.com" ],
-      [ 89, 12, "Marek", "Nagy", "", true, true, "marek.nagy@gmail.com" ],
-      [ 90, 11, "Andrej", "Rácz", "", false, true, "andrej.rácz@gmail.com" ],
-      [ 91, 10, "Tereza", "Horváthová", "", true, false, "tereza.horváthová@gmail.com" ],
-      [ 92, 9, "Richard", "Bíro", "", false, true, "richard.bíro@gmail.com" ],
-      [ 93, 8, "Vladimír", "Papp", "", true, true, "vladimír.papp@gmail.com" ],
-      [ 94, 7, "Erik", "Vojtko", "", false, false, "erik.vojtko@gmail.com" ],
-      [ 95, 6, "Pavol", "Král", "", true, true, "pavol.král@gmail.com" ],
-      [ 96, 5, "Michal", "Nagy", "", false, true, "michal.nagy@gmail.com" ],
-      [ 97, 4, "Ivana", "Szarka", "", true, false, "ivana.szarka@gmail.com" ],
-      [ 98, 3, "Adrián", "Takáč", "", false, true, "adrián.takáč@gmail.com" ],
-      [ 99, 2, "Jozef", "Nagy", "", true, true, "jozef.nagy@gmail.com" ],
-      [ 100, 1, "Kristína", "Mareková", "", false, false, "kristína.mareková@gmail.com" ],
+      ["Mechelle", "Stoneman", "Mechelle.Stoneman@dummy.example.com" ],
+      ["Tyesha", "Freitag", "Tyesha.Freitag@dummy.example.com" ],
+      ["Dean", "Stoecker", "Dean.Stoecker@dummy.example.com" ],
+      ["Annelle", "Pickney", "Annelle.Pickney@dummy.example.com" ],
+      ["Margareta", "Tacy", "Margareta.Tacy@dummy.example.com" ],
+      ["Meghann", "Placencia", "Meghann.Placencia@dummy.example.com" ],
+      ["Kendrick", "Cieslak", "Kendrick.Cieslak@dummy.example.com" ],
+      ["Polly", "Isenberg", "Polly.Isenberg@dummy.example.com" ],
+      ["Evelyne", "Racicot", "Evelyne.Racicot@dummy.example.com" ],
+      ["Augustus", "Delaune", "Augustus.Delaune@dummy.example.com" ],
+      ["Shawanda", "Client", "Shawanda.Client@dummy.example.com" ],
+      ["Loura", "Coffield", "Loura.Coffield@dummy.example.com" ],
+      ["Lorriane", "Machin", "Lorriane.Machin@dummy.example.com" ],
+      ["Lacey", "Osier", "Lacey.Osier@dummy.example.com" ],
+      ["Nicki", "Malchow", "Nicki.Malchow@dummy.example.com" ],
+      ["Sidney", "Bodiford", "Sidney.Bodiford@dummy.example.com" ],
+      ["Barbie", "Cun", "Barbie.Cun@dummy.example.com" ],
+      ["Elden", "Hanshaw", "Elden.Hanshaw@dummy.example.com" ],
+      ["Blossom", "Loggins", "Blossom.Loggins@dummy.example.com" ],
+      ["Joseph", "Dennie", "Joseph.Dennie@dummy.example.com" ],
+      ["Pattie", "Markley", "Pattie.Markley@dummy.example.com" ],
+      ["Genevieve", "Spahn", "Genevieve.Spahn@dummy.example.com" ],
+      ["Luciano", "Jaworski", "Luciano.Jaworski@dummy.example.com" ],
+      ["Noe", "Mahler", "Noe.Mahler@dummy.example.com" ],
+      ["Karri", "Bransford", "Karri.Bransford@dummy.example.com" ],
+      ["Larae", "Bonney", "Larae.Bonney@dummy.example.com" ],
+      ["Sharita", "Fierros", "Sharita.Fierros@dummy.example.com" ],
+      ["Frederica", "Perla", "Frederica.Perla@dummy.example.com" ],
+      ["Mara", "Elder", "Mara.Elder@dummy.example.com" ],
+      ["Enola", "Volz", "Enola.Volz@dummy.example.com" ],
+      ["Leslie", "Mccardell", "Leslie.Mccardell@dummy.example.com" ],
+      ["Gina", "Coria", "Gina.Coria@dummy.example.com" ],
+      ["Marietta", "Taing", "Marietta.Taing@dummy.example.com" ],
+      ["Karlyn", "Buchholtz", "Karlyn.Buchholtz@dummy.example.com" ],
+      ["Herma", "Renken", "Herma.Renken@dummy.example.com" ],
+      ["Gertrud", "Gillispie", "Gertrud.Gillispie@dummy.example.com" ],
+      ["Kelsie", "Lavoie", "Kelsie.Lavoie@dummy.example.com" ],
+      ["Selena", "Jenney", "Selena.Jenney@dummy.example.com" ],
+      ["Teri", "Schooley", "Teri.Schooley@dummy.example.com" ],
+      ["Lizette", "Campana", "Lizette.Campana@dummy.example.com" ],
+      ["Mayra", "Luby", "Mayra.Luby@dummy.example.com" ],
+      ["Luisa", "Finneran", "Luisa.Finneran@dummy.example.com" ],
+      ["Genoveva", "Herrod", "Genoveva.Herrod@dummy.example.com" ],
+      ["Tandra", "Toon", "Tandra.Toon@dummy.example.com" ],
+      ["Zoe", "Mangrum", "Zoe.Mangrum@dummy.example.com" ],
+      ["Marquerite", "Salaam", "Marquerite.Salaam@dummy.example.com" ],
+      ["Alva", "Fonte", "Alva.Fonte@dummy.example.com" ],
+      ["Maudie", "Cage", "Maudie.Cage@dummy.example.com" ],
+      ["Hilde", "Greaves", "Hilde.Greaves@dummy.example.com" ],
+      ["Christiana", "Rippe", "Christiana.Rippe@dummy.example.com" ],
+      ["Bulah", "Warr", "Bulah.Warr@dummy.example.com" ],
+      ["Azzie", "Stolte", "Azzie.Stolte@dummy.example.com" ],
+      ["Sharri", "Whistler", "Sharri.Whistler@dummy.example.com" ],
+      ["Rebecka", "Holliman", "Rebecka.Holliman@dummy.example.com" ],
+      ["Bryce", "Muse", "Bryce.Muse@dummy.example.com" ],
+      ["Merideth", "Marcus", "Merideth.Marcus@dummy.example.com" ],
+      ["Nova", "Boden", "Nova.Boden@dummy.example.com" ],
+      ["Granville", "Watchman", "Granville.Watchman@dummy.example.com" ],
+      ["Marquerite", "Dearborn", "Marquerite.Dearborn@dummy.example.com" ],
+      ["Arielle", "Ketcham", "Arielle.Ketcham@dummy.example.com" ],
+      ["Shona", "Buggs", "Shona.Buggs@dummy.example.com" ],
+      ["Aleta", "Ciesla", "Aleta.Ciesla@dummy.example.com" ],
+      ["Jenni", "Wichman", "Jenni.Wichman@dummy.example.com" ],
+      ["Cuc", "Phinney", "Cuc.Phinney@dummy.example.com" ],
+      ["Danica", "Fleig", "Danica.Fleig@dummy.example.com" ],
+      ["Shaquana", "Emigh", "Shaquana.Emigh@dummy.example.com" ],
+      ["Brinda", "Master", "Brinda.Master@dummy.example.com" ],
+      ["Janell", "Hinojos", "Janell.Hinojos@dummy.example.com" ],
+      ["Karri", "Celestin", "Karri.Celestin@dummy.example.com" ],
+      ["Enid", "Bouley", "Enid.Bouley@dummy.example.com" ],
+      ["Desire", "Klenke", "Desire.Klenke@dummy.example.com" ],
+      ["Brian", "Chamberlain", "Brian.Chamberlain@dummy.example.com" ],
+      ["Kristeen", "Farabaugh", "Kristeen.Farabaugh@dummy.example.com" ],
+      ["Gilda", "Vanatta", "Gilda.Vanatta@dummy.example.com" ],
+      ["Princess", "Bumbrey", "Princess.Bumbrey@dummy.example.com" ],
+      ["Earlie", "Townson", "Earlie.Townson@dummy.example.com" ],
+      ["Fumiko", "Laliberte", "Fumiko.Laliberte@dummy.example.com" ],
+      ["Sherie", "Chason", "Sherie.Chason@dummy.example.com" ],
+      ["Gricelda", "Maravilla", "Gricelda.Maravilla@dummy.example.com" ],
+      ["Serafina", "Knoll", "Serafina.Knoll@dummy.example.com" ],
+      ["Sachiko", "Younkin", "Sachiko.Younkin@dummy.example.com" ],
+      ["Jena", "Noles", "Jena.Noles@dummy.example.com" ],
+      ["Shelby", "Wiser", "Shelby.Wiser@dummy.example.com" ],
+      ["Margareta", "Spies", "Margareta.Spies@dummy.example.com" ],
+      ["Dinorah", "Furey", "Dinorah.Furey@dummy.example.com" ],
+      ["Kiyoko", "Lechuga", "Kiyoko.Lechuga@dummy.example.com" ],
+      ["Danny", "Kreger", "Danny.Kreger@dummy.example.com" ],
+      ["Nolan", "Fenwick", "Nolan.Fenwick@dummy.example.com" ],
+      ["Lesli", "Unrein", "Lesli.Unrein@dummy.example.com" ],
+      ["Donya", "Bartle", "Donya.Bartle@dummy.example.com" ],
+      ["Palma", "Flanery", "Palma.Flanery@dummy.example.com" ],
+      ["Kenny", "Clothier", "Kenny.Clothier@dummy.example.com" ],
+      ["Kristen", "Lossing", "Kristen.Lossing@dummy.example.com" ],
+      ["Karoline", "Felix", "Karoline.Felix@dummy.example.com" ],
+      ["Alan", "Voll", "Alan.Voll@dummy.example.com" ],
+      ["Glenda", "Woolfolk", "Glenda.Woolfolk@dummy.example.com" ],
+      ["Alyson", "Hosack", "Alyson.Hosack@dummy.example.com" ],
+      ["Francis", "Sines", "Francis.Sines@dummy.example.com" ],
+      ["Riley", "Bagnall", "Riley.Bagnall@dummy.example.com" ],
+      ["Carmina", "Camp", "Carmina.Camp@dummy.example.com" ],
+      ["Alethia", "Tiemann", "Alethia.Tiemann@dummy.example.com" ],
+      ["Deborah", "Molinar", "Deborah.Molinar@dummy.example.com" ],
+      ["Marvella", "Huckstep", "Marvella.Huckstep@dummy.example.com" ],
+      ["Sallie", "Briley", "Sallie.Briley@dummy.example.com" ],
+      ["Scottie", "Backer", "Scottie.Backer@dummy.example.com" ],
+      ["Beatriz", "Kinsey", "Beatriz.Kinsey@dummy.example.com" ],
+      ["Mason", "Carrow", "Mason.Carrow@dummy.example.com" ],
+      ["Regenia", "Blish", "Regenia.Blish@dummy.example.com" ],
+      ["Necole", "Faria", "Necole.Faria@dummy.example.com" ],
+      ["Samantha", "Hadfield", "Samantha.Hadfield@dummy.example.com" ],
+      ["Lida", "Sing", "Lida.Sing@dummy.example.com" ],
+      ["Bette", "Church", "Bette.Church@dummy.example.com" ],
+      ["Illa", "Friscia", "Illa.Friscia@dummy.example.com" ],
+      ["Magdalena", "Clabaugh", "Magdalena.Clabaugh@dummy.example.com" ],
+      ["Sol", "Lemley", "Sol.Lemley@dummy.example.com" ],
+      ["Angelyn", "Nave", "Angelyn.Nave@dummy.example.com" ],
+      ["Lorie", "Hempstead", "Lorie.Hempstead@dummy.example.com" ],
+      ["Darlena", "Brubaker", "Darlena.Brubaker@dummy.example.com" ],
+      ["Ivory", "Almonte", "Ivory.Almonte@dummy.example.com" ],
+      ["Keva", "Sauage", "Keva.Sauage@dummy.example.com" ],
+      ["Krystin", "Morita", "Krystin.Morita@dummy.example.com" ],
+      ["Margarito", "Hintzen", "Margarito.Hintzen@dummy.example.com" ],
+      ["Alanna", "Gillispie", "Alanna.Gillispie@dummy.example.com" ],
+      ["Alayna", "Rosenblatt", "Alayna.Rosenblatt@dummy.example.com" ],
+      ["Deeann", "Thomsen", "Deeann.Thomsen@dummy.example.com" ],
+      ["Guy", "Moulton", "Guy.Moulton@dummy.example.com" ],
+      ["Ming", "Scudder", "Ming.Scudder@dummy.example.com" ],
+      ["Mickey", "Espino", "Mickey.Espino@dummy.example.com" ],
+      ["Mellissa", "Mortimore", "Mellissa.Mortimore@dummy.example.com" ],
+      ["Lesia", "Stoute", "Lesia.Stoute@dummy.example.com" ],
+      ["Pauletta", "Murton", "Pauletta.Murton@dummy.example.com" ],
+      ["Solomon", "Chamberlin", "Solomon.Chamberlin@dummy.example.com" ],
+      ["Neville", "Yocom", "Neville.Yocom@dummy.example.com" ],
+      ["Vera", "Edmiston", "Vera.Edmiston@dummy.example.com" ],
+      ["Lawerence", "Amburn", "Lawerence.Amburn@dummy.example.com" ],
+      ["Cedrick", "Agnew", "Cedrick.Agnew@dummy.example.com" ],
+      ["Melinda", "Kuchta", "Melinda.Kuchta@dummy.example.com" ],
+      ["Alma", "Gelinas", "Alma.Gelinas@dummy.example.com" ],
+      ["Francis", "Sikes", "Francis.Sikes@dummy.example.com" ],
+      ["Minerva", "Giles", "Minerva.Giles@dummy.example.com" ],
+      ["Nikki", "Iskra", "Nikki.Iskra@dummy.example.com" ],
+      ["Lore", "Coil", "Lore.Coil@dummy.example.com" ],
+      ["Marlena", "Craner", "Marlena.Craner@dummy.example.com" ],
+      ["Darius", "Trojacek", "Darius.Trojacek@dummy.example.com" ],
+      ["Sade", "Gasaway", "Sade.Gasaway@dummy.example.com" ],
+      ["Sybil", "Rahman", "Sybil.Rahman@dummy.example.com" ],
+      ["Zoraida", "Sumner", "Zoraida.Sumner@dummy.example.com" ],
+      ["Raina", "Mccrae", "Raina.Mccrae@dummy.example.com" ],
+      ["Elsa", "Mcspadden", "Elsa.Mcspadden@dummy.example.com" ],
+      ["Bernadine", "Chung", "Bernadine.Chung@dummy.example.com" ],
+      ["Francie", "Frase", "Francie.Frase@dummy.example.com" ],
+      ["Mariana", "Vavra", "Mariana.Vavra@dummy.example.com" ],
+      ["Nakita", "Primer", "Nakita.Primer@dummy.example.com" ],
+      ["Aletha", "Hardesty", "Aletha.Hardesty@dummy.example.com" ],
+      ["Dwain", "Sargeant", "Dwain.Sargeant@dummy.example.com" ],
+      ["Thea", "Hubbs", "Thea.Hubbs@dummy.example.com" ],
+      ["Caleb", "Peters", "Caleb.Peters@dummy.example.com" ],
+      ["Sparkle", "Kaestner", "Sparkle.Kaestner@dummy.example.com" ],
+      ["Narcisa", "Hsieh", "Narcisa.Hsieh@dummy.example.com" ],
+      ["Sherwood", "Vanalstyne", "Sherwood.Vanalstyne@dummy.example.com" ],
+      ["Jeanice", "Joy", "Jeanice.Joy@dummy.example.com" ],
+      ["Bert", "Riter", "Bert.Riter@dummy.example.com" ],
+      ["Dorotha", "Aldinger", "Dorotha.Aldinger@dummy.example.com" ],
+      ["Anisha", "Thomson", "Anisha.Thomson@dummy.example.com" ],
+      ["Rufus", "Amerine", "Rufus.Amerine@dummy.example.com" ],
+      ["Roslyn", "Alaimo", "Roslyn.Alaimo@dummy.example.com" ],
+      ["Noelle", "Raybon", "Noelle.Raybon@dummy.example.com" ],
+      ["Shanae", "Hanger", "Shanae.Hanger@dummy.example.com" ],
+      ["William", "Hopf", "William.Hopf@dummy.example.com" ],
+      ["Adolfo", "Bella", "Adolfo.Bella@dummy.example.com" ],
+      ["Xenia", "Schubert", "Xenia.Schubert@dummy.example.com" ],
+      ["Brenton", "Tokarski", "Brenton.Tokarski@dummy.example.com" ],
+      ["Hal", "Bender", "Hal.Bender@dummy.example.com" ],
+      ["Geraldine", "Border", "Geraldine.Border@dummy.example.com" ],
+      ["Setsuko", "Pardo", "Setsuko.Pardo@dummy.example.com" ],
+      ["Meghan", "Sydnor", "Meghan.Sydnor@dummy.example.com" ],
+      ["Lavern", "Gard", "Lavern.Gard@dummy.example.com" ],
+      ["Cyrus", "Beckham", "Cyrus.Beckham@dummy.example.com" ],
+      ["Leeanne", "Fortunato", "Leeanne.Fortunato@dummy.example.com" ],
+      ["Nilda", "Deyoung", "Nilda.Deyoung@dummy.example.com" ],
+      ["Marylee", "Greenburg", "Marylee.Greenburg@dummy.example.com" ],
+      ["Gay", "Aubert", "Gay.Aubert@dummy.example.com" ],
+      ["Janel", "Carley", "Janel.Carley@dummy.example.com" ],
+      ["Damaris", "Nestle", "Damaris.Nestle@dummy.example.com" ],
+      ["Jeanine", "Hoerr", "Jeanine.Hoerr@dummy.example.com" ],
+      ["Wiley", "Scotto", "Wiley.Scotto@dummy.example.com" ],
+      ["Dian", "Cobian", "Dian.Cobian@dummy.example.com" ],
+      ["Brendan", "Zilnicki", "Brendan.Zilnicki@dummy.example.com" ],
+      ["Mana", "Seegmiller", "Mana.Seegmiller@dummy.example.com" ],
+      ["Flavia", "Nitta", "Flavia.Nitta@dummy.example.com" ],
+      ["Humberto", "Ware", "Humberto.Ware@dummy.example.com" ],
+      ["Ned", "Permenter", "Ned.Permenter@dummy.example.com" ],
+      ["Albertina", "Junkin", "Albertina.Junkin@dummy.example.com" ],
+      ["Rosia", "Duron", "Rosia.Duron@dummy.example.com" ],
+      ["Kena", "Stallings", "Kena.Stallings@dummy.example.com" ],
+      ["Lolita", "Pringle", "Lolita.Pringle@dummy.example.com" ],
+      ["Kristen", "Gilley", "Kristen.Gilley@dummy.example.com" ],
+      ["Genaro", "Koga", "Genaro.Koga@dummy.example.com" ],
+      ["Suzanna", "Putman", "Suzanna.Putman@dummy.example.com" ],
+      ["Candy", "Konieczny", "Candy.Konieczny@dummy.example.com" ],
+      ["Ozella", "Conner", "Ozella.Conner@dummy.example.com" ],
+      ["Leonel", "Hock", "Leonel.Hock@dummy.example.com" ],
+      ["Vannesa", "Millard", "Vannesa.Millard@dummy.example.com" ],
+      ["Melonie", "Villacorta", "Melonie.Villacorta@dummy.example.com" ],
+      ["Dorine", "Zeitler", "Dorine.Zeitler@dummy.example.com" ],
+      ["Bridget", "Conyers", "Bridget.Conyers@dummy.example.com" ],
+      ["Jacklyn", "Dyment", "Jacklyn.Dyment@dummy.example.com" ],
+      ["Felicita", "Maclachlan", "Felicita.Maclachlan@dummy.example.com" ],
+      ["Herbert", "Gamache", "Herbert.Gamache@dummy.example.com" ],
+      ["Antonietta", "Llewellyn", "Antonietta.Llewellyn@dummy.example.com" ],
+      ["Pennie", "Alling", "Pennie.Alling@dummy.example.com" ],
+      ["Laree", "Kay", "Laree.Kay@dummy.example.com" ],
+      ["Antonio", "Navarette", "Antonio.Navarette@dummy.example.com" ],
+      ["Steve", "Mainor", "Steve.Mainor@dummy.example.com" ],
+      ["Gertrud", "Sather", "Gertrud.Sather@dummy.example.com" ],
+      ["Nan", "Beverley", "Nan.Beverley@dummy.example.com" ],
+      ["Walter", "Belford", "Walter.Belford@dummy.example.com" ],
+      ["Colby", "Hobart", "Colby.Hobart@dummy.example.com" ],
+      ["Patrick", "Nocera", "Patrick.Nocera@dummy.example.com" ],
+      ["Hilary", "Modeste", "Hilary.Modeste@dummy.example.com" ],
+      ["Elke", "Licht", "Elke.Licht@dummy.example.com" ],
+      ["Faustina", "Dunson", "Faustina.Dunson@dummy.example.com" ],
+      ["Tara", "Clingman", "Tara.Clingman@dummy.example.com" ],
+      ["Elva", "Hochmuth", "Elva.Hochmuth@dummy.example.com" ],
+      ["Opal", "Groover", "Opal.Groover@dummy.example.com" ],
+      ["Maryln", "Ferris", "Maryln.Ferris@dummy.example.com" ],
+      ["Katrina", "Almon", "Katrina.Almon@dummy.example.com" ],
+      ["Stephane", "Labelle", "Stephane.Labelle@dummy.example.com" ],
+      ["Christene", "Gloria", "Christene.Gloria@dummy.example.com" ],
+      ["Araceli", "Majewski", "Araceli.Majewski@dummy.example.com" ],
+      ["Marilou", "Funderburg", "Marilou.Funderburg@dummy.example.com" ],
+      ["America", "Tocci", "America.Tocci@dummy.example.com" ],
+      ["Erich", "Ragin", "Erich.Ragin@dummy.example.com" ],
+      ["Neoma", "Pellegrino", "Neoma.Pellegrino@dummy.example.com" ],
+      ["Sid", "Lamore", "Sid.Lamore@dummy.example.com" ],
+      ["Stella", "Morman", "Stella.Morman@dummy.example.com" ],
+      ["Ha", "Durrah", "Ha.Durrah@dummy.example.com" ],
+      ["Chantel", "Absher", "Chantel.Absher@dummy.example.com" ],
+      ["Torri", "Wert", "Torri.Wert@dummy.example.com" ],
+      ["Michelina", "Holscher", "Michelina.Holscher@dummy.example.com" ],
+      ["Verlene", "Arviso", "Verlene.Arviso@dummy.example.com" ],
+      ["Lois", "Tew", "Lois.Tew@dummy.example.com" ],
+      ["Miguelina", "Hoyte", "Miguelina.Hoyte@dummy.example.com" ],
+      ["Evelina", "Willaert", "Evelina.Willaert@dummy.example.com" ],
+      ["Ranae", "Topp", "Ranae.Topp@dummy.example.com" ],
+      ["Carolann", "Veasley", "Carolann.Veasley@dummy.example.com" ],
+      ["Jeannette", "Gravelle", "Jeannette.Gravelle@dummy.example.com" ],
+      ["Lenita", "Slevin", "Lenita.Slevin@dummy.example.com" ],
+      ["Valentina", "Quinby", "Valentina.Quinby@dummy.example.com" ],
+      ["Latoyia", "Bushway", "Latoyia.Bushway@dummy.example.com" ],
+      ["Keitha", "Wold", "Keitha.Wold@dummy.example.com" ],
+      ["Flora", "Plascencia", "Flora.Plascencia@dummy.example.com" ],
+      ["Azucena", "Herder", "Azucena.Herder@dummy.example.com" ],
+      ["Kathi", "Lilienthal", "Kathi.Lilienthal@dummy.example.com" ],
+      ["Andrea", "Saine", "Andrea.Saine@dummy.example.com" ],
+      ["Shawna", "Riviera", "Shawna.Riviera@dummy.example.com" ],
+      ["Nolan", "Harwell", "Nolan.Harwell@dummy.example.com" ],
+      ["Jennell", "Leverich", "Jennell.Leverich@dummy.example.com" ],
+      ["Birgit", "Puente", "Birgit.Puente@dummy.example.com" ],
+      ["Gerry", "Medal", "Gerry.Medal@dummy.example.com" ],
+      ["Palma", "Sample", "Palma.Sample@dummy.example.com" ],
+      ["Annalisa", "Rotolo", "Annalisa.Rotolo@dummy.example.com" ],
+      ["Eilene", "Jolly", "Eilene.Jolly@dummy.example.com" ],
+      ["Kathey", "Keep", "Kathey.Keep@dummy.example.com" ],
     ];
 
     $cities = [
@@ -430,37 +596,39 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $isPrimary = true;
 
+    $salutations = ["Mr.", "Mrs.", "Miss"];
+
     foreach ($contacts as $contact) {
       $idContact = $mContact->record->recordCreate([
         "id_customer" => rand(1, 100),
-        "first_name" => $contact[2],
-        "last_name" => $contact[3],
-        "note" => $contact[4],
-        "is_primary" => $isPrimary,
-        "is_active" => 1,
+        "salutation" => $salutations[rand(0, 2)],
+        "first_name" => $contact[0],
+        "last_name" => $contact[1],
+        "is_primary" => true,
+        "is_active" => true,
         "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
       ])['id'];
 
       $mValue->record->recordCreate([
         "id_contact" => $idContact,
         "type" => "email",
-        "value" => str_replace("'", "", (string) iconv('UTF-8', 'ASCII//TRANSLIT', $contact[7])),
-        "id_category" => rand(1,2),
+        "value" => $contact[2],
+        "id_category" => rand(1, 2),
       ]);
 
       $mValue->record->recordCreate([
         "id_contact" => $idContact,
         "type" => "url",
         "value" => 'https://www.example.com',
-        "id_category" => rand(1,2),
+        "id_category" => rand(1, 2),
       ]);
 
-      $phoneNumber = "+421 9" . rand(0, 3) . rand(4, 8) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9);
+      $phoneNumber = "+1 1" . rand(0, 3) . rand(4, 8) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9);
       $mValue->record->recordCreate([
         "id_contact" => $idContact,
         "type" => "number",
         "value" => $phoneNumber,
-        "id_category" => rand(1,2),
+        "id_category" => rand(1, 2),
       ]);
 
       $tags = [];
@@ -481,61 +649,55 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     }
   }
 
-  // public function generateActivities(
-  //   \HubletoApp\Community\Customers\Models\Customer $mCustomer,
-  //   \HubletoApp\Community\Customers\Models\Activity $mActivity,
-  //   \HubletoApp\Community\Customers\Models\CustomerActivity $mCustomerActivity,
-  // ): void {
+  public function generateActivities(
+    \HubletoApp\Community\Customers\Models\Customer $mCustomer,
+    \HubletoApp\Community\Customers\Models\CustomerActivity $mCustomerActivity,
+  ): void {
 
-  //   $activityTypes = ["Meeting", "Bussiness Trip", "Call", "Email"];
-  //   $minutes = ["00", "15", "30", "45"];
-  //   $customers = $mCustomer->record->all();
+    $activityTypes = ["Meeting", "Bussiness Trip", "Call", "Email"];
+    $minutes = ["00", "15", "30", "45"];
+    $customers = $mCustomer->record->all();
 
-  //   foreach ($customers as $customer) {
-  //     $activityCount = rand(1, 5);
+    foreach ($customers as $customer) {
+      $activityCount = rand(0, 2);
 
-  //     for ($i = 0; $i < $activityCount; $i++) {
-  //       $date = date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month")));
-  //       $randomHour = str_pad((string) rand(6,18), 2, "0", STR_PAD_LEFT);
-  //       $randomMinute = $minutes[rand(0,3)];
-  //       $timeString = $date." ".$randomHour.":".$randomMinute.":00";
-  //       $time = date("H:i:s", strtotime($timeString));
+      for ($i = 0; $i < $activityCount; $i++) {
+        $date = date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month")));
+        $randomHour = str_pad((string) rand(6,18), 2, "0", STR_PAD_LEFT);
+        $randomMinute = $minutes[rand(0,3)];
+        $timeString = $date." ".$randomHour.":".$randomMinute.":00";
+        $time = date("H:i:s", strtotime($timeString));
 
-  //       $randomSubject = $activityTypes[rand(0, 3)];
-  //       $activityType = null;
+        $randomSubject = $activityTypes[rand(0, 3)];
+        $activityType = null;
 
-  //       switch ($randomSubject) {
-  //         case $activityTypes[0]:
-  //           $activityType = 1;
-  //           break;
-  //         case $activityTypes[1]:
-  //           $activityType = 2;
-  //           break;
-  //         case $activityTypes[2]:
-  //           $activityType = 3;
-  //           break;
-  //         case $activityTypes[3]:
-  //           $activityType = 4;
-  //           break;
-  //       }
+        switch ($randomSubject) {
+          case $activityTypes[0]:
+            $activityType = 1;
+            break;
+          case $activityTypes[1]:
+            $activityType = 2;
+            break;
+          case $activityTypes[2]:
+            $activityType = 3;
+            break;
+          case $activityTypes[3]:
+            $activityType = 4;
+            break;
+        }
 
-  //       $activityId = $mActivity->record->recordCreate([
-  //         "id_activity_type" => $activityType,
-  //         "subject" => $randomSubject,
-  //         "date_start" => $date,
-  //         "completed" => rand(0, 1),
-  //         "id_user" => 1,
-  //         "id_customer" => $customer->id,
-  //         "id_contact" => null,
-  //       ]);
-
-  //       $mCustomerActivity->record->recordCreate([
-  //         "id_customer" => $customer->id,
-  //         "id_activity" => $activityId
-  //       ]);
-  //     }
-  //   }
-  // }
+        $activityId = $mCustomerActivity->record->recordCreate([
+          "id_activity_type" => $activityType,
+          "subject" => $randomSubject,
+          "date_start" => $date,
+          "completed" => rand(0, 1),
+          "id_user" => 1,
+          "id_customer" => $customer->id,
+          "id_contact" => null,
+        ]);
+      }
+    }
+  }
 
   public function generateLeads(
     \HubletoApp\Community\Customers\Models\Customer $mCustomer,
@@ -574,7 +736,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_user" => 1,
         "source_channel" => rand(1,7),
         "is_archived" => false,
-        "status" => rand($mLead::STATUS_NEW,$mLead::STATUS_LOST),
+        "status" => (rand(0, 10) == 5 ? $mLead::STATUS_LOST : $mLead::STATUS_NEW),
         "date_created" => $leadDateCreated,
         "score" => rand(1, 10),
       ])['id'];
@@ -629,7 +791,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       if (rand(1, 3) != 1) continue; // negenerujem deal pre vsetky leads
 
       $pipeline = rand(1,2);
-      $result = rand($mDeal::RESULT_PENDING,$mDeal::RESULT_LOST);
+      $result = (rand(0, 10) == 5 ? $mDeal::RESULT_LOST : $mDeal::RESULT_WON);
       if ($pipeline === 1) $pipelineStep = rand(1,3);
       else $pipelineStep = rand(4,7);
 

@@ -11,7 +11,7 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^products\/?$/' => Controllers\Products::class,
       '/^products\/groups\/?$/' => Controllers\Groups::class,
-      '/^products\/groups(\/(?<recordId>\d+))?\/?$/' => Controllers\Suppliers::class,
+      '/^products\/groups(\/(?<recordId>\d+))?\/?$/' => Controllers\Groups::class,
       '/^products\/suppliers\/?$/' => Controllers\Suppliers::class,
       '/^products\/suppliers(\/(?<recordId>\d+))?\/?$/' => Controllers\Suppliers::class,
     ]);

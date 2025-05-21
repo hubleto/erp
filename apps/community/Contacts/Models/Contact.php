@@ -47,7 +47,7 @@ class Contact extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = $this->translate('Contacts');
+    $description->ui['title'] = ''; // $this->translate('Contacts');
     $description->ui['addButtonText'] = $this->translate('Add contact');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;

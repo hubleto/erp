@@ -100,7 +100,7 @@ class Customer extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = $this->translate('Customers');
+    $description->ui['title'] = ''; //$this->translate('Customers');
     $description->ui['addButtonText'] = $this->translate('Add Customer');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;

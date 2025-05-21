@@ -27,7 +27,7 @@ class Document extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Documents';
+    $description->ui['title'] = ''; // 'Documents';
     $description->ui['addButtonText'] = 'Add Document';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;

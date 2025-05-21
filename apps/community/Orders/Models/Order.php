@@ -45,7 +45,7 @@ class Order extends \HubletoMain\Core\Models\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Orders';
+    $description->ui['title'] = ''; // 'Orders';
     $description->ui['addButtonText'] = $this->translate("Add order");
 
     unset($description->columns["shipping_info"]);

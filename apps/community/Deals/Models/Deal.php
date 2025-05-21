@@ -81,7 +81,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues([$this::RESULT_PENDING => "Pending", $this::RESULT_WON => "Won", $this::RESULT_LOST => "Lost"])->setDefaultValue(3),
-      'lost_reason' => new Text($this, "Reason for Lost"),
+      'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
       'business_type' => (new Integer($this, $this->translate('Business type')))->setEnumValues(

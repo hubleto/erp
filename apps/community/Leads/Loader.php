@@ -18,6 +18,7 @@ class Loader extends \HubletoMain\Core\App
       '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^leads\/convert-to-deal\/?$/' => Controllers\Api\ConvertLead::class,
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
+      '/^settings\/lead-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
     ]);
 
@@ -25,6 +26,11 @@ class Loader extends \HubletoMain\Core\App
       'title' => $this->translate('Lead Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/lead-tags',
+    ]);
+    $this->main->addSetting($this, [
+      'title' => $this->translate('Lead Lost Reasons'),
+      'icon' => 'fas fa-tags',
+      'url' => 'settings/lead-lost-reasons',
     ]);
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
@@ -62,7 +68,9 @@ class Loader extends \HubletoMain\Core\App
       $mLeadProduct = new \HubletoApp\Community\Leads\Models\LeadProduct($this->main);
       $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
       $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
+      $mLostReasons = new \HubletoApp\Community\Leads\Models\LostReason($this->main);
 
+      $mLostReasons->dropTableIfExists()->install();
       $mLead->dropTableIfExists()->install();
       $mLeadHistory->dropTableIfExists()->install();
       $mLeadTag->dropTableIfExists()->install();
@@ -75,6 +83,11 @@ class Loader extends \HubletoMain\Core\App
       $mLeadTag->record->recordCreate([ 'name' => "Great opportunity", 'color' => '#4caf50' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Duplicate", 'color' => '#9e9e9e' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Needs attention", 'color' => '#795548' ]);
+
+      $mLostReasons->record->recordCreate(["reason" => "Price"]);
+      $mLostReasons->record->recordCreate(["reason" => "Solution"]);
+      $mLostReasons->record->recordCreate(["reason" => "Demand canceled by customer"]);
+      $mLostReasons->record->recordCreate(["reason" => "Other"]);
     }
   }
 

@@ -19,6 +19,7 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
       '/^deals\/change-pipeline\/?$/' => Controllers\Api\ChangePipeline::class,
       '/^settings\/deal-tags\/?$/' => Controllers\Tags::class,
+      '/^settings\/deal-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,
       '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
     ]);
@@ -27,6 +28,11 @@ class Loader extends \HubletoMain\Core\App
       'title' => $this->translate('Deal Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/deal-tags',
+    ]);
+    $this->main->addSetting($this, [
+      'title' => $this->translate('Deal Lost Reasons'),
+      'icon' => 'fas fa-tags',
+      'url' => 'settings/deal-lost-reasons',
     ]);
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
@@ -74,7 +80,9 @@ class Loader extends \HubletoMain\Core\App
       $mDealProduct = new \HubletoApp\Community\Deals\Models\DealProduct($this->main);
       $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
       $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
+      $mLostReasons = new \HubletoApp\Community\Deals\Models\LostReason($this->main);
 
+      $mLostReasons->dropTableIfExists()->install();
       $mDeal->dropTableIfExists()->install();
       $mDealHistory->dropTableIfExists()->install();
       $mDealTag->dropTableIfExists()->install();
@@ -88,6 +96,11 @@ class Loader extends \HubletoMain\Core\App
       $mDealTag->record->recordCreate([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
       $mDealTag->record->recordCreate([ 'name' => "New Customer", 'color' => '#fcdb03' ]);
       $mDealTag->record->recordCreate([ 'name' => "Existing Customer", 'color' => '#5203fc' ]);
+
+      $mLostReasons->record->recordCreate(["reason" => "Price"]);
+      $mLostReasons->record->recordCreate(["reason" => "Solution"]);
+      $mLostReasons->record->recordCreate(["reason" => "Demand canceled by customer"]);
+      $mLostReasons->record->recordCreate(["reason" => "Other"]);
     }
   }
 

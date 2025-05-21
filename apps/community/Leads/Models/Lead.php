@@ -61,7 +61,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setEnumValues(
         [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
       ),
-      'lost_reason' => new Text($this, "Reason for Lost"),
+      'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([

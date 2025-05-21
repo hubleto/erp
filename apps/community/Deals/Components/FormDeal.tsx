@@ -151,6 +151,20 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     return (probability / 100) * price;
   }
 
+  changePipelineStepFromResult() {
+    if (this.state.record.PIPELINE.PIPELINE_STEPS.length > 0) {
+      this.state.record.PIPELINE.PIPELINE_STEPS.some(step => {
+        if (step.set_result == this.state.record.deal_result) {
+          let R = this.state.record;
+          R.id_pipeline_step = step.id;
+          R.PIPELINE_STEP = step;
+          this.setState({record: R});
+          return true;
+        } else return false;
+      })
+    }
+  }
+
   onCreateActivityCallback() {
     this.loadRecord();
   }
@@ -289,7 +303,16 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     </div>
                     <div className='border-l border-gray-200'></div>
                     <div className='grow'>
-                      {this.inputWrapper("deal_result", {uiStyle: 'buttons', readonly: R.is_archived, onChange: () => {this.updateRecord({lost_reason: null})}})}
+                      {this.inputWrapper("deal_result",
+                        {
+                          uiStyle: 'buttons',
+                          readonly: R.is_archived,
+                          onChange: () => {
+                            this.updateRecord({lost_reason: null});
+                            this.changePipelineStepFromResult();
+                          }
+                        }
+                      )}
                       {this.state.record.deal_result == 3 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
                       {showAdditional ? this.inputWrapper('date_result_update') : null}
                       {showAdditional ? this.inputWrapper('date_created') : null}
@@ -313,11 +336,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               }}
                             ></Lookup>
                           </FormInput>
-                          <div className='self-center'>
-                            <p>Price based on the probability of current step ({R.PIPELINE_STEP.probability} %):
-                              <strong> {this.calculateProbabilityPrice(R.PIPELINE_STEP.probability, R.price)} {R.CURRENCY.code}</strong>
-                            </p>
-                          </div>
+                          {R.PIPELINE_STEP && R.PIPELINE_STEP.probability ?
+                            <div className='self-center'>
+                              <p>Price based on the probability of current step ({R.PIPELINE_STEP.probability} %):
+                                <strong> {this.calculateProbabilityPrice(R.PIPELINE_STEP.probability, R.price)} {R.CURRENCY.code}</strong>
+                              </p>
+                            </div>
+                          : <></>}
                         </div>
                         <div className='flex flex-row gap-2 mt-2 flex-wrap justify-center'>
                           {R.PIPELINE != null &&

@@ -51,6 +51,7 @@ class Contact extends \HubletoMain\Core\Models\Model
     $description->ui['addButtonText'] = $this->translate('Add contact');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
+    $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
 
     $description->columns['virt_email'] = ["title" => $this->translate("Emails")];

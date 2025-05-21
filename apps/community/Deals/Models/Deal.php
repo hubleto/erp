@@ -60,8 +60,8 @@ class Deal extends \HubletoMain\Core\Models\Model
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
-      'price' => (new Decimal($this, $this->translate('Price')))->setRequired(),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setRequired()->setReadonly(),
+      'price' => (new Decimal($this, $this->translate('Price'))),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
       'date_created' => (new DateTime($this, $this->translate('Date created')))->setRequired()->setReadonly(),
@@ -128,6 +128,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     }
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
+    $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
     $description->columns['tags'] = ["title" => "Tags"];
     unset($description->columns['note']);
@@ -260,18 +261,18 @@ class Deal extends \HubletoMain\Core\Models\Model
     $deal = $this->record->find($record["id"]);
     $mDealHistory = new DealHistory($this->main);
 
-    if ($record["deal_result"] != $deal->deal_result) {
+    if (isset($record["deal_result"]) && $record["deal_result"] != $deal->deal_result) {
       $record["date_result_update"] = date("Y-m-d H:i:s");
     }
 
-    if ((float) $deal->price != (float) $record["price"]) {
+    if (isset($record["price"]) && (float) $deal->price != (float) $record["price"]) {
       $mDealHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_deal" => (int) ($record["id"] ?? 0),
         "description" => "Price changed to " . (string) ($record["price"] ?? '')
       ]);
     }
-    if ((string) $deal->date_expected_close != (string) $record["date_expected_close"]) {
+    if (isset($record["date_expected_close"]) && (string) $deal->date_expected_close != (string) $record["date_expected_close"]) {
       $mDealHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_deal" => $record["id"],

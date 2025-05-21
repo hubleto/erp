@@ -21,10 +21,11 @@ class UserHasRole extends \HubletoMain\Core\Models\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Role Assigments';
+    // $description->ui['title'] = 'Role Assigments';
     $description->ui['addButtonText'] = 'Assign Roles';
     $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
+    $description->ui['showFulltextSearch'] = false;
+    $description->ui['showColumnSearch'] = false;
     $description->ui['showFooter'] = false;
 
     return $description;

@@ -35,7 +35,8 @@
         "Deal Result": "",
         "Date of result update": "",
         "New Customer": "",
-        "Business type": ""
+        "Business type": "",
+        "Contact": ""
     },
     "Models\\DealHistory": {
         "Change Date": "",
@@ -65,7 +66,8 @@
         "End time": "",
         "All day": "",
         "Completed": "",
-        "Created by": ""
+        "Created by": "",
+        "Contact": ""
     },
     "Models\\DealDocument": {
         "Deal": "",
@@ -75,7 +77,9 @@
         "Deal statuses": "Stavy dealov",
         "Deal Tags": "Značky dealov",
         "Deal value by result": "Hodnota dealov podľa výsledku",
-        "Most valuable deals": "Najhodnotnejšie dealy"
+        "Most valuable deals": "Najhodnotnejšie dealy",
+        "Active deals": "",
+        "Archived deals": ""
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendár",

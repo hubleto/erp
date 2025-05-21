@@ -6,7 +6,8 @@
     "root": {
         "Products": "Produkty",
         "Product Groups": "Skupiny produktov",
-        "Suppliers": "Dodávatelia"
+        "Suppliers": "Dodávatelia",
+        "Groups": ""
     },
     "Controllers\\Products": {
         "Products": "Produkty"

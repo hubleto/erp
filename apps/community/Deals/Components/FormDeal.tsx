@@ -217,8 +217,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 <div className='card mt-2' style={{gridArea: 'info'}}>
                   <div className='card-body flex flex-row gap-2'>
                     <div className='grow'>
-                      {showAdditional ? this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived}) : <></>}
-                      {this.inputWrapper('title', {readonly: R.is_archived})}
+                      {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
+                      {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
                       <FormInput title={"Customer"} required={true}>
                         <Lookup {...this.getInputProps("id_customer")}
                           model='HubletoApp/Community/Customers/Models/Customer'
@@ -314,8 +314,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                             ></Lookup>
                           </FormInput>
                           <div className='self-center'>
-                            <p>Price based on the probability of current step ({R.PIPELINE_STEP.probability} %):
-                              <strong> {this.calculateProbabilityPrice(R.PIPELINE_STEP.probability, R.price)} {R.CURRENCY.code}</strong>
+                            <p>Price based on the probability of current step ({R.PIPELINE_STEP?.probability} %):
+                              <strong> {this.calculateProbabilityPrice(R.PIPELINE_STEP?.probability, R.price)} {R.CURRENCY.code}</strong>
                             </p>
                           </div>
                         </div>
@@ -329,6 +329,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                               return (
                                 <>
                                   <button
+                                    key={i}
                                     onClick={R.is_archived ? null : () => {
                                       if (this.state.isInlineEditing == false) this.setState({isInlineEditing: true});
                                       R.id_pipeline_step = s.id;
@@ -350,8 +351,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                         </div>
                       </div>
                     </div>
-                    <div className='card card-body' style={{gridArea: 'notes'}}>
-                      {this.inputWrapper('note', {readonly: R.is_archived})}
+                    <div className='card mt-2' style={{gridArea: 'notes'}}>
+                      <div className='card-header'>Documents and other notes</div>
+                      <div className='card-body flex gap-2'>
+                        {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+                        {this.inputWrapper('note', {readonly: R.is_archived})}
+                      </div>
                     </div>
                     {showAdditional ?
                       <div className='card' style={{gridArea: 'products'}}>
@@ -583,8 +588,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           : null}
           {showAdditional ? (
             <TabPanel header={this.translate("Documents")}>
-              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
-              {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
               <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               {!R.is_archived ?
                 <a
@@ -676,7 +679,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             <TabPanel header={this.translate('History')}>
               {R.HISTORY.length > 0 ?
                 R.HISTORY.map((history, key) => (
-                  <div className='w-full flex flex-row justify-between'>
+                  <div key={key} className='w-full flex flex-row justify-between'>
                     <div className='w-1/3'>
                         <p className='font-bold self-center text-sm text-left'>
                           {history.description}

@@ -23,7 +23,8 @@
         "End time": "",
         "All day": "",
         "Completed": "",
-        "Created by": ""
+        "Created by": "",
+        "Contact": ""
     },
     "Models\\Lead": {
         "Add Lead": "Pridať lead",
@@ -45,7 +46,9 @@
     },
     "root": {
         "Lead statuses": "Stavy leadov",
-        "Lead Tags": "Značky leadov"
+        "Lead Tags": "Značky leadov",
+        "Active leads": "",
+        "Archived leads": ""
     },
     "Models\\LeadHistory": {
         "Change Date": "",

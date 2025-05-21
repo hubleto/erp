@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { deepObjectMerge } from "adios/Helper";
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import Table, { TableProps, TableState } from 'adios/Table';
 
 interface FormUserProps extends HubletoFormProps {
 }
@@ -26,34 +27,42 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
   renderTitle(): JSX.Element {
     return <>
       <h2>{this.state.record.first_name ?? ''} {this.state.record.middle_name ?? ''} {this.state.record.last_name ?? ''}</h2>
-      <small>My account</small>
+      <small>User profile</small>
     </>;
   }
 
   renderContent(): JSX.Element {
-    const languages = {
-      'cz': 'Česky',
-      'de': 'Deutsch',
-      'en': 'English',
-      'es': 'Español',
-      'fr': 'Francais',
-      'pl': 'Polski',
-      'sk': 'Slovensky',
-    };
+    // const languages = {
+    //   'cz': 'Česky',
+    //   'de': 'Deutsch',
+    //   'en': 'English',
+    //   'es': 'Español',
+    //   'fr': 'Francais',
+    //   'pl': 'Polski',
+    //   'sk': 'Slovensky',
+    // };
     return <>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        height: '100%',
-      }}>
-        <div>
-          {this.inputWrapper('first_name')}
-          {this.inputWrapper('middle_name')}
-          {this.inputWrapper('last_name')}
-          {this.inputWrapper('email')}
+      <div className='w-full'>
+        {this.divider('About user')}
+        {this.inputWrapper('first_name')}
+        {this.inputWrapper('last_name')}
+        {this.inputWrapper('nick')}
+        {this.inputWrapper('email')}
+
+        {this.divider('Access to Hubleto')}
+        {this.inputWrapper('is_active')}
+        {this.inputWrapper('password')}
+        <div className='card'>
+          <div className='card-body'>
+            <Table
+              uid='user_roles'
+              model='HubletoApp/Community/Settings/Models/UserHasRole'
+              customEndpointParams={{idUser: this.state.id}}
+            ></Table>
+          </div>
         </div>
-        <div className="p-2">
+      </div>
+        {/* <div className="p-2">
           {Object.keys(languages).map((symbol) => {
             const lang = languages[symbol];
 
@@ -64,8 +73,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
               ><span className="text">{lang}</span></a>
             </>;
           })}
-        </div>
-      </div>
+        </div> */}
     </>;
   }
 }

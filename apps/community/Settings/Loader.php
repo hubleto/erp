@@ -21,6 +21,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/activity-types\/?$/' => Controllers\ActivityTypes::class,
       '/^settings\/countries\/?$/' => Controllers\Countries::class,
       '/^settings\/currencies\/?$/' => Controllers\Currencies::class,
+      '/^settings\/sidebar\/?$/' => Controllers\Sidebar::class,
       '/^settings\/permissions\/?$/' => Controllers\Permissions::class,
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
       '/^settings\/config\/?$/' => Controllers\Config::class,
@@ -38,6 +39,7 @@ class Loader extends \HubletoMain\Core\App
     $this->main->addSetting($this, ['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
     $this->main->addSetting($this, ['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
     $this->main->addSetting($this, ['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
+    $this->main->addSetting($this, ['title' => $this->translate('Sidebar'), 'icon' => 'fas fa-bars', 'url' => 'settings/sidebar']);
   }
 
   public function installTables(int $round): void

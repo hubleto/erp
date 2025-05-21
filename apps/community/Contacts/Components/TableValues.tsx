@@ -66,10 +66,29 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
         {this.state.data?.data ?
           Object.keys(this.state.data?.data).map((key) => {
             const item = this.state.data.data[key];
+            const itemType = this.getType(item.value);
             return <div key={key} className="flex gap-2 items-center">
               <button
                 className="btn btn-transparent w-3/4"
-                onClick={() => this.props.parentForm.setState({isInlineEditing: true}) }
+                onClick={(e) => {
+                  if (this.props.parentForm.state.isInlineEditing) {
+                    e.stopPropagation();
+                  } else {
+                    switch (itemType) {
+                      case 'url':
+                        window.open(item.value);
+                        e.stopPropagation();
+                      break;
+                      case 'email':
+                        window.open('mailto://' + item.value);
+                        e.stopPropagation();
+                      break;
+                      default:
+                        this.props.parentForm.setState({isInlineEditing: true});
+                      break;
+                    }
+                  }
+                }}
               >
                 <span className="icon"><i className={"fas fa-" + this.getIcon(item.value)}></i></span>
                 <span className="text w-full" style={{maxHeight: "10em"}}>
@@ -103,6 +122,14 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                   ></Lookup>
                 : item.CATEGORY?.name ?? ''}
               </div>
+              {this.props.parentForm.state.isInlineEditing ? null : <div>
+                <button
+                  className="btn btn-transparent"
+                  onClick={() => { this.props.parentForm.setState({isInlineEditing: true}); }}
+                >
+                  <span className="icon"><i className="fas fa-pencil"></i></span>
+                </button>
+              </div>}
               {this.props.parentForm.state.isInlineEditing ?
                 <button
                   className="btn btn-danger"

@@ -597,13 +597,17 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $isPrimary = true;
 
     $salutations = ["Mr.", "Mrs.", "Miss"];
+    $titlesBefore = ["", "Dr.", "MSc."];
+    $titlesAfter = ["", "MBA", "PhD."];
 
     foreach ($contacts as $contact) {
       $idContact = $mContact->record->recordCreate([
         "id_customer" => rand(1, 100),
         "salutation" => $salutations[rand(0, 2)],
+        "title_before" => $titlesBefore[rand(0, 2)],
         "first_name" => $contact[0],
         "last_name" => $contact[1],
+        "title_after" => $titlesAfter[rand(0, 2)],
         "is_primary" => true,
         "is_active" => true,
         "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),

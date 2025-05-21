@@ -32,9 +32,11 @@ class Contact extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'salutation' => (new Varchar($this, $this->translate('Salutation'))),
+      'title_before' => (new Varchar($this, $this->translate('Title before'))),
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
       'middle_name' => (new Varchar($this, $this->translate('Middle name'))),
       'last_name' => (new Varchar($this, $this->translate('Last name'))),
+      'title_after' => (new Varchar($this, $this->translate('Title after'))),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE')),
       'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0),
       'note' => (new Text($this, $this->translate('Notes'))),
@@ -58,6 +60,10 @@ class Contact extends \HubletoMain\Core\Models\Model
     $description->columns['virt_number'] = ["title" => $this->translate("Phone Numbers")];
 
     //nadstavit aby boli tieto stĺpce posledné
+    unset($description->columns['salutation']);
+    unset($description->columns['title_before']);
+    unset($description->columns['title_after']);
+    unset($description->columns['middle_name']);
     $tempColumn = $description->columns['date_created'];
     unset($description->columns['date_created']);
     $description->columns['date_created'] = $tempColumn;

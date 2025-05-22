@@ -98,10 +98,12 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($adminEmail === null) $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
     if ($adminPassword === null) $adminPassword = $this->cli->read('Account.adminPassword (leave empty to generate random password)');
 
-    $confirm = '';
-    while ($confirm != 'yes') {
-      $confirm = $this->cli->read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel.');
-      if ($confirm == 'exit') exit;
+    if ($this->cli->isLaunchedFromTerminal()) {
+      $confirm = '';
+      while ($confirm != 'yes') {
+        $confirm = $this->cli->read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel.');
+        if ($confirm == 'exit') exit;
+      }
     }
 
 //    if ($smtpHost === null) $smtpHost = $this->cli->read('ConfigEnv.smtpHost');

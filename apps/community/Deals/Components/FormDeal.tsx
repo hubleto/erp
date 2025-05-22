@@ -284,8 +284,16 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       {this.inputWrapper('id_user', {readonly: R.is_archived})}
                       {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                       {this.inputWrapper('source_channel', {readonly: R.is_archived})}
-                      {this.inputWrapper('is_new_customer', {readonly: R.is_archived})}
-                      {this.inputWrapper('business_type', {uiStyle: 'buttons', readonly: R.is_archived})}
+                      {this.inputWrapper('is_new_customer', {readonly: R.is_archived, onChange: () => {
+                        if (this.state.record.is_new_customer) {
+                          this.updateRecord({business_type: 1 /* New */});
+                        }
+                      }})}
+                      {this.inputWrapper('business_type', {uiStyle: 'buttons', readonly: R.is_archived, onChange: () => {
+                        if (this.state.record.business_type == 2 /* Existing */) {
+                          this.updateRecord({is_new_customer: false});
+                        }
+                      }})}
                       <FormInput title='Tags'>
                         <InputTags2 {...this.getInputProps('tags')}
                           value={this.state.record.TAGS}
@@ -378,9 +386,9 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     </div>
                     <div className='card mt-2' style={{gridArea: 'notes'}}>
                       <div className='card-header'>Documents and other notes</div>
-                      <div className='card-body flex gap-2'>
-                        {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-                        {this.inputWrapper('note', {readonly: R.is_archived})}
+                      <div className='card-body flex gap-2 justify-between'>
+                        <div className="flex-1 w-full">{this.inputWrapper('shared_folder', {readonly: R.is_archived})}</div>
+                        <div className="flex-1 w-full">{this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}</div>
                       </div>
                     </div>
                     {showAdditional ?
@@ -565,7 +573,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.main.config.rewriteBase + 'deals/get-calendar-events?idDeal=' + R.id}
+                eventsEndpoint={globalThis.main.config.accountUrl + '/deals/get-calendar-events?idDeal=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityCalendarDateClicked: date,

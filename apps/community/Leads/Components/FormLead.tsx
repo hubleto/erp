@@ -121,13 +121,27 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     return <small>{this.translate('Lead')}</small>;
   }
 
-  convertLead(recordId: number) {
+  convertToDeal(recordId: number) {
     request.get(
-      'leads/convert-to-deal',
+      'leads/api/convert-to-deal',
       {recordId: recordId},
       (data: any) => {
         if (data.status == "success") {
-          location.assign(globalThis.main.config.rewriteBase + `deals?recordId=${data.idDeal}&recordTitle=${data.title}`)
+          location.assign(globalThis.main.config.accountUrl + `/deals?recordId=${data.idDeal}&recordTitle=${data.title}`)
+        }
+      }
+    );
+  }
+
+  moveToArchive(recordId: number) {
+    request.get(
+      'leads/api/move-to-archive',
+      {recordId: recordId},
+      (data: any) => {
+        if (data.status == "success") {
+          this.props.parentTable.setState({recordId: null}, () => {
+            this.props.parentTable.loadData();
+          });
         }
       }
     );
@@ -149,7 +163,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
         footer: <>
           <button
             className="btn btn-yellow"
-            onClick={() => {this.convertLead(recordId)}}
+            onClick={() => {this.convertToDeal(recordId)}}
           >
             <span className="icon"><i className="fas fa-forward"></i></span>
             <span className="text">Yes, convert to a Deal</span>
@@ -164,6 +178,19 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             <span className="text">No, do not convert to a Deal</span>
           </button>
         </>
+      }
+    );
+  }
+
+  moveToArchiveConfirm(recordId: number) {
+    globalThis.main.showDialogConfirm(
+      <div> Are you sure you want to move this lead to archive?</div>,
+      {
+        header: "Move to archive",
+        yesText: "Yes, move to archive",
+        onYes: () => this.moveToArchive(recordId),
+        noText: "No, do not move to archive",
+        onNo: () => {},
       }
     );
   }
@@ -222,9 +249,9 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   <div className='card-body flex flex-row gap-2'>
                     <div className='grow'>
                       {showAdditional ? this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived}) : <></>}
-                      {this.inputWrapper('title', {readonly: R.is_archived})}
+                      {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
                       <FormInput title={"Customer"}>
-                        <Lookup {...this.getInputProps('id-customer')}
+                        <Lookup {...this.getInputProps('id_customer')}
                           model='HubletoApp/Community/Customers/Models/Customer'
                           endpoint={`customers/get-customer`}
                           readonly={R.is_archived}
@@ -239,7 +266,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         ></Lookup>
                       </FormInput>
                       <FormInput title={"Contact"}>
-                        <Lookup {...this.getInputProps('id-contact')}
+                        <Lookup {...this.getInputProps('id_contact')}
                           model='HubletoApp/Community/Contacts/Models/Contact'
                           customEndpointParams={{id_customer: R.id_customer}}
                           readonly={R.is_archived}
@@ -263,7 +290,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       {this.inputWrapper('status', {readonly: R.is_archived, onChange: () => {this.updateRecord({lost_reason: null})}})}
                       {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
                       {showAdditional ?
-                        <div className='w-full mt-2'>
+                        <div className='w-full mt-2 gap-2 flex'>
                           {R.DEAL != null ?
                           <a className='btn btn-primary' href={`${globalThis.main.config.url}/deals/${R.DEAL.id}`}>
                             <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
@@ -274,6 +301,12 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                             <span className='icon'><i className='fas fa-rotate-right'></i></span>
                             <span className='text'>Convert to Deal</span>
                           </a>}
+                          {R.is_archived ? null : <>
+                            <a className='btn btn-transparent' onClick={() => this.moveToArchiveConfirm(R.id)}>
+                              <span className='icon'><i className='fas fa-box-archive'></i></span>
+                              <span className='text'>Move to archive</span>
+                            </a>
+                          </>}
                         </div>
                       : null}
                     </div>
@@ -307,7 +340,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       <Calendar
                         onCreateCallback={() => this.loadRecord()}
                         readonly={R.is_archived}
-                        eventsEndpoint={globalThis.main.config.rewriteBase + 'leads/get-calendar-events?idLead=' + R.id}
+                        eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
                         onDateClick={(date, time, info) => {
                           this.setState({
                             activityCalendarDateClicked: date,
@@ -332,7 +365,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 : null}
               </div>
               <div className='card card-body mt-2'>
-                {this.inputWrapper('note', {readonly: R.is_archived})}
+                <div className='card-body flex gap-2 justify-between'>
+                  <div className="flex-1 w-full">{this.inputWrapper('shared_folder', {readonly: R.is_archived})}</div>
+                  <div className="flex-1 w-full">{this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}</div>
+                </div>
               </div>
               {showAdditional ?
                 <div className='card mt-2'>
@@ -514,7 +550,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.main.config.rewriteBase + 'leads/get-calendar-events?idLead=' + R.id}
+                eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityCalendarDateClicked: date,
@@ -533,8 +569,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           : null}
           {showAdditional ? (
             <TabPanel header={this.translate("Documents")}>
-              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
-              {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
               <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
               {!R.is_archived ?
                 <a

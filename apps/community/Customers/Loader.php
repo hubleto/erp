@@ -13,6 +13,7 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^customers(\/(?<recordId>\d+))?\/?$/' => Controllers\Customers::class,
+      '/^customers\/add\/?$/' => ['controller' => Controllers\Customers::class, 'vars' => ['recordId' => -1]],
       '/^customers\/settings\/?$/' => Controllers\Settings::class,
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
       '/^customers\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,

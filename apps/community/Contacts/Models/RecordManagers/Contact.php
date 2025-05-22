@@ -30,6 +30,8 @@ class Contact extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
+    $query = $query->orderBy('is_primary', 'desc');
+
     $main = \ADIOS\Core\Helper::getGlobalApp();
 
     if ($main->urlParamAsInteger("idCustomer") > 0) {

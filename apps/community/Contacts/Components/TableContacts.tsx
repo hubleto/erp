@@ -144,16 +144,16 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
                   this.setState({recordId: item.id})
                 }}
               >
-                <span className="icon"><i className="fas fa-user"></i></span>
+                <span className="icon flex flex-col gap-2">
+                  <i className="fas fa-user text-2xl"></i>
+                  {item.is_primary ? <div className="badge badge-violet">Primary</div> : null}
+                </span>
                 <span className="text" style={{maxHeight: "10em"}}>
                   <div className="flex gap-2">
                     {item.salutation ?? ''}
                     <b>{item.first_name ?? ''}</b>
                     <b>{item.last_name ?? ''}</b>
                   </div>
-                  {item.VALUES.map((value, index) => {
-                    return <div key={index}><small>{value.value}</small></div>
-                  })}
                   <div className="flex gap-2">
                     {item.TAGS.map((tag, index) => {
                       return <div
@@ -165,6 +165,9 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
                       </div>
                     })}
                   </div>
+                  {item.VALUES.map((value, index) => {
+                    return <div key={index}><small>{value.value}</small></div>
+                  })}
                 </span>
               </button>
             </div>;

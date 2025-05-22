@@ -11,7 +11,7 @@ class RenderAllRoutes extends \HubletoMain\Core\AppTest
       'leads',
       'leads/get-calendar-events',
       'leads/archive',
-      'leads/convert-to-deal',
+      'leads/api/convert-to-deal',
       'settings/lead-statuses',
     ];
 

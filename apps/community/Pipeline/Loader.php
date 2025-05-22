@@ -32,18 +32,28 @@ class Loader extends \HubletoMain\Core\App
     $mPipeline->dropTableIfExists()->install();
     $mPipelineStep->dropTableIfExists()->install();
 
-    $mPipeline->record->recordCreate([ "name" => "New customer" ]);
-    $mPipelineStep->record->recordCreate([ 'name' => 'New', 'order' => 1, 'color' => '#4080A0', 'id_pipeline' => 1 , "set_result" => Deal::RESULT_PENDING, "probability" => 20]);
-    $mPipelineStep->record->recordCreate([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A04020', 'id_pipeline' => 1, "set_result" => Deal::RESULT_PENDING, "probability" => 50]);
-    $mPipelineStep->record->recordCreate([ 'name' => 'Closed', 'order' => 3, 'color' => '#006060', 'id_pipeline' => 1, "set_result" => Deal::RESULT_WON , "probability" => 100]);
-    $mPipelineStep->record->recordCreate([ 'name' => 'Lost', 'order' => 4, 'color' => '#f50c0c', 'id_pipeline' => 1, "set_result" => Deal::RESULT_LOST , "probability" => 0]);
+    // $mPipeline->record->recordCreate([ "name" => "New customer" ]);
+    // $mPipelineStep->record->recordCreate([ 'name' => 'New', 'order' => 1, 'color' => '#4080A0', 'id_pipeline' => 1 , "set_result" => Deal::RESULT_PENDING, "probability" => 20]);
+    // $mPipelineStep->record->recordCreate([ 'name' => 'In Progress', 'order' => 2, 'color' => '#A04020', 'id_pipeline' => 1, "set_result" => Deal::RESULT_PENDING, "probability" => 50]);
+    // $mPipelineStep->record->recordCreate([ 'name' => 'Closed', 'order' => 3, 'color' => '#006060', 'id_pipeline' => 1, "set_result" => Deal::RESULT_WON , "probability" => 100]);
+    // $mPipelineStep->record->recordCreate([ 'name' => 'Lost', 'order' => 4, 'color' => '#f50c0c', 'id_pipeline' => 1, "set_result" => Deal::RESULT_LOST , "probability" => 0]);
 
-    $mPipeline->record->recordCreate([ "name" => "Existing customer" ]);
-    $mPipelineStep->record->recordCreate([ 'name' => 'Start', 'order' => 1, 'color' => '#405060', 'id_pipeline' => 2, "set_result" => Deal::RESULT_PENDING, "probability" => 1]);
-    $mPipelineStep->record->recordCreate([ 'name' => 'Client Contacted', 'order' => 2, 'color' => '#800000', 'id_pipeline' => 2, "set_result" => Deal::RESULT_PENDING, "probability" => 15]);
-    $mPipelineStep->record->recordCreate([ 'name' => 'In Progress', 'order' => 3, 'color' => '#808000', 'id_pipeline' => 2, "set_result" => Deal::RESULT_PENDING, "probability" => 50 ]);
-    $mPipelineStep->record->recordCreate([ 'name' => 'Ended', 'order' => 4, 'color' => '#002080', 'id_pipeline' => 2, "set_result" => Deal::RESULT_WON, "probability" => 100 ]);
-    $mPipelineStep->record->recordCreate([ 'name' => 'Lost', 'order' => 5, 'color' => '#f50c0c', 'id_pipeline' => 2, "set_result" => Deal::RESULT_LOST, "probability" => 0 ]);
+    // $mPipeline->record->recordCreate([ "name" => "Existing customer" ]);
+    // $mPipelineStep->record->recordCreate([ 'name' => 'Start', 'order' => 1, 'color' => '#405060', 'id_pipeline' => 2, "set_result" => Deal::RESULT_PENDING, "probability" => 1]);
+    // $mPipelineStep->record->recordCreate([ 'name' => 'Client Contacted', 'order' => 2, 'color' => '#800000', 'id_pipeline' => 2, "set_result" => Deal::RESULT_PENDING, "probability" => 15]);
+    // $mPipelineStep->record->recordCreate([ 'name' => 'In Progress', 'order' => 3, 'color' => '#808000', 'id_pipeline' => 2, "set_result" => Deal::RESULT_PENDING, "probability" => 50 ]);
+    // $mPipelineStep->record->recordCreate([ 'name' => 'Ended', 'order' => 4, 'color' => '#002080', 'id_pipeline' => 2, "set_result" => Deal::RESULT_WON, "probability" => 100 ]);
+    // $mPipelineStep->record->recordCreate([ 'name' => 'Lost', 'order' => 5, 'color' => '#f50c0c', 'id_pipeline' => 2, "set_result" => Deal::RESULT_LOST, "probability" => 0 ]);
+
+    $mPipeline->record->recordCreate([ "name" => "Default pipeline" ]);
+    $mPipelineStep->record->recordCreate([ 'name' => 'Prospecting', 'order' => 1, 'color' => '#4080A0', 'id_pipeline' => 1 , "set_result" => Deal::RESULT_PENDING, "probability" => 1]);
+    $mPipelineStep->record->recordCreate([ 'name' => 'Qualified to buy', 'order' => 2, 'color' => '#A04020', 'id_pipeline' => 1, "set_result" => Deal::RESULT_PENDING, "probability" => 10]);
+    $mPipelineStep->record->recordCreate([ 'name' => 'Proposal & Quote Sent', 'order' => 3, 'color' => '#006060', 'id_pipeline' => 1, "set_result" => Deal::RESULT_PENDING , "probability" => 30]);
+    $mPipelineStep->record->recordCreate([ 'name' => 'Negotiation & Adjustments', 'order' => 4, 'color' => '#006060', 'id_pipeline' => 1, "set_result" => Deal::RESULT_PENDING , "probability" => 50]);
+    $mPipelineStep->record->recordCreate([ 'name' => 'Decision-Making Phase', 'order' => 5, 'color' => '#006060', 'id_pipeline' => 1, "set_result" => Deal::RESULT_PENDING , "probability" => 70]);
+    $mPipelineStep->record->recordCreate([ 'name' => 'Contract Sent', 'order' => 6, 'color' => '#002080', 'id_pipeline' => 1, "set_result" => Deal::RESULT_PENDING , "probability" => 85]);
+    $mPipelineStep->record->recordCreate([ 'name' => 'Closed WON', 'order' => 6, 'color' => '#008000', 'id_pipeline' => 1, "set_result" => Deal::RESULT_WON , "probability" => 100]);
+    $mPipelineStep->record->recordCreate([ 'name' => 'Closed LOST', 'order' => 4, 'color' => '#f50c0c', 'id_pipeline' => 1, "set_result" => Deal::RESULT_LOST , "probability" => 0]);
 
   }
 

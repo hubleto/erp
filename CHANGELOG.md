@@ -13,6 +13,7 @@
   * added probability to the Deal form and Pipeline view and added weighted price
   * massive rebranding and UI updates
   * new sidebar configuration feature in settings panel
+  * improved default pipeline
 
 ## Release v0.10
 

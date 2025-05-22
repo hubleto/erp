@@ -58,6 +58,8 @@ class Product extends \HubletoMain\Core\Models\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = 'Products';
+    $description->ui['showFulltextSearch'] = true;
+    $description->ui['showColumnSearch'] = true;
     $description->ui["addButtonText"] = $this->translate("Add product");
     $description->ui['title'] = '';
 

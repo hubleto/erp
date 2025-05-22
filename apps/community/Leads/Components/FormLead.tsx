@@ -283,6 +283,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       </FormInput>
                       <div className='flex flex-row *:w-1/2'>
                         {this.inputWrapper('price', {
+                          cssClass: 'text-2xl',
                           readonly: (R.PRODUCTS && R.PRODUCTS.length) > 0 || R.is_archived ? true : false,
                         })}
                         {this.inputWrapper('id_currency')}

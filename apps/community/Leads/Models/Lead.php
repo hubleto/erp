@@ -188,14 +188,14 @@ class Lead extends \HubletoMain\Core\Models\Model
     $lead = $this->record->find($record["id"])->toArray();
     $mLeadHistory = new LeadHistory($this->main);
 
-    if (isset($lead['price']) && (float) $lead["price"] != (float) $record["price"]) {
+    if (isset($record['price']) && (float) $lead["price"] != (float) $record["price"]) {
       $mLeadHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
         "description" => "Price changed to " . (string) $record["price"],
       ]);
     }
-    if (isset($lead['date_expected_close']) && (string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {
+    if (isset($record['date_expected_close']) && (string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {
       $mLeadHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],

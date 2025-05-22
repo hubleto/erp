@@ -338,20 +338,17 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 </div>
               </div>
               <div className='card mt-2'>
-                <div className='card-header'>Deal Progress</div>
+                <div className='card-header'>
+                  <Lookup {...this.getInputProps("id_pipeline")}
+                    readonly={R.is_archived}
+                    model='HubletoApp/Community/Pipeline/Models/Pipeline'
+                    value={R.id_pipeline}
+                    onChange={(value: any) => {
+                      this.pipelineChange(value);
+                    }}
+                  ></Lookup>
+                </div>
                 <div className='card-body'>
-                  <div className='flex flex-row justify-between'>
-                    <FormInput title={"Pipeline"}>
-                      <Lookup {...this.getInputProps("id_pipeline")}
-                        readonly={R.is_archived}
-                        model='HubletoApp/Community/Pipeline/Models/Pipeline'
-                        value={R.id_pipeline}
-                        onChange={(value: any) => {
-                          this.pipelineChange(value);
-                        }}
-                      ></Lookup>
-                    </FormInput>
-                  </div>
                   <div className='flex flex-row gap-2 mt-2 flex-wrap justify-center'>
                     {R.PIPELINE != null &&
                     R.PIPELINE.PIPELINE_STEPS &&
@@ -368,14 +365,18 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                 R.id_pipeline_step = s.id;
                                 R.deal_result = s.set_result;
                                 R.PIPELINE_STEP = s;
-                                this.setState({record: R});
+                                this.updateRecord(R);
                               }}
-                              className={`flex flex-col px-3 h-[50px] justify-center btn ${statusColor}`}
+                              className={`btn ${statusColor}`}
+                              style={{borderLeft: '1em solid ' + s.color}}
                             >
-                              <span className='text text-center self-center !h-auto'>{s.name}</span>
+                              <div className='text text-center flex flex-col'>
+                                {s.name}
+                                <small>({s.probability} %)</small>
+                              </div>
                             </button>
                             {i+1 == R.PIPELINE.PIPELINE_STEPS.length ? null
-                            : <span className='icon flex'><i className='fas fa-angles-right self-center'></i></span>
+                            : <i className='fas fa-angles-right self-center'></i>
                             }
                           </>
                         )

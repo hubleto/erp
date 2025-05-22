@@ -87,7 +87,7 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
             <div className="card-body">
 
               <a
-                className="btn btn-add-outline"
+                className="btn btn-add-outline mb-2"
                 onClick={() => {
                   if (!R.PIPELINE_STEPS) R.PIPELINE_STEPS = [];
                   R.PIPELINE_STEPS.push({
@@ -99,6 +99,7 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
                 <span className="icon"><i className="fas fa-add"></i></span>
                 <span className="text">Add step</span>
               </a>
+
               <TablePipelineSteps
                 key={this.state.tablesKey}
                 uid={this.props.uid + "_table_pipeline_steps_input"}
@@ -126,12 +127,14 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
                     name: { type: "varchar", title: "Name" },
                     order: { type: "int", title: "Order" },
                     color: { type: "color", title: "Color" },
+                    probability: { type: "int", title: "Probability", unit: "%" },
                     set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
                   },
                   inputs: {
                     name: { type: "varchar", title: "Name" },
                     order: { type: "int", title: "Order" },
                     color: { type: "color", title: "Color" },
+                    probability: { type: "int", title: "Probability", unit: "%" },
                     set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
                   },
                 }}

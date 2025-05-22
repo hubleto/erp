@@ -24,4 +24,11 @@ export default class TablePipelineSteps extends Table<TablePipelineStepsProps, T
     super(props);
     this.state = this.getStateFromProps(props);
   }
+
+  getFormModalProps() {
+    return {
+      ...super.getFormModalProps(),
+      type: 'right wide',
+    };
+  }
 }

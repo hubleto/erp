@@ -23,6 +23,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/currencies\/?$/' => Controllers\Currencies::class,
       '/^settings\/sidebar\/?$/' => Controllers\Sidebar::class,
       '/^settings\/permissions\/?$/' => Controllers\Permissions::class,
+      '/^settings\/role-permissions\/?$/' => Controllers\RolePermissions::class,
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
       '/^settings\/config\/?$/' => Controllers\Config::class,
       '/^settings\/get-permissions\/?$/' => Controllers\Api\GetPermissions::class,
@@ -33,7 +34,8 @@ class Loader extends \HubletoMain\Core\App
     $this->main->addSetting($this, ['title' => $this->translate('User roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
     $this->main->addSetting($this, ['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/profiles']);
     $this->main->addSetting($this, ['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
-    $this->main->addSetting($this, ['title' => $this->translate('Permissions'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
+    $this->main->addSetting($this, ['title' => $this->translate('Permissions list'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
+    $this->main->addSetting($this, ['title' => $this->translate('Role permissions'), 'icon' => 'fas fa-user-shield', 'url' => 'settings/role-permissions']);
     $this->main->addSetting($this, ['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
     $this->main->addSetting($this, ['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
     $this->main->addSetting($this, ['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);

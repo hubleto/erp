@@ -41,14 +41,10 @@
             >{{ pipeline.name }}</option>
           {% endfor %}
         </select>
-        <a class="btn btn-transparent flex items-center gap-2" href="settings/pipelines?recordId={{viewParams.pipeline.id}}" target="_blank">
-          <span class="icon flex items-center"><i class="fas fa-cog"></i></span>
-          <span class="text flex items-center">{{ translate('Manage pipeline steps') }}</span>
-        </a>
       </div>
-      <a class="btn btn-add flex items-center gap-2" href="settings/pipelines?recordId=-1" target="_blank">
-        <span class="icon flex items-center"><i class="fas fa-add"></i></span>
-        <span class="text flex items-center">{{ translate('Add pipeline') }}</span>
+      <a class="btn btn-transparent flex items-center gap-2" href="settings/pipelines" target="_blank">
+        <span class="icon flex items-center"><i class="fas fa-cog"></i></span>
+        <span class="text flex items-center">{{ translate('Manage pipelines') }}</span>
       </a>
     </div>
 

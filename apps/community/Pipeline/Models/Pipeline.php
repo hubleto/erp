@@ -26,7 +26,7 @@ class Pipeline extends \HubletoMain\Core\Models\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Pipelines';
+    // $description->ui['title'] = 'Pipelines';
     $description->ui['addButtonText'] = 'Add Pipeline';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;

@@ -42,24 +42,32 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
     //   'sk': 'Slovensky',
     // };
     return <>
-      <div className='w-full'>
-        {this.divider('About user')}
-        {this.inputWrapper('first_name')}
-        {this.inputWrapper('last_name')}
-        {this.inputWrapper('nick')}
-        {this.inputWrapper('email')}
+      <div className='w-full flex gap-2'>
+        <div className="p-4">
+          <i className="fas fa-user text-primary" style={{fontSize: '8em'}}></i>
+        </div>
+        <div className="flex-1">
+          {this.divider('About the user')}
+          {this.inputWrapper('first_name')}
+          {this.inputWrapper('last_name')}
+          {this.inputWrapper('nick')}
+          {this.inputWrapper('email')}
+          {this.inputWrapper('language')}
 
-        {this.divider('Access to Hubleto')}
-        {this.inputWrapper('is_active')}
-        {this.inputWrapper('password')}
-        <div className='card'>
-          <div className='card-body'>
+          {this.divider('Access to Hubleto')}
+          {this.inputWrapper('is_active')}
+          {this.inputWrapper('password')}
+
+          {this.divider('Permissions')}
+          {this.state.id < 0 ?
+            <div className="badge badge-info">First create user, then you will be prompted to assign roles.</div>
+          :
             <Table
               uid='user_roles'
               model='HubletoApp/Community/Settings/Models/UserHasRole'
               customEndpointParams={{idUser: this.state.id}}
             ></Table>
-          </div>
+          }
         </div>
       </div>
         {/* <div className="p-2">

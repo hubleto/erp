@@ -64,6 +64,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
                     });
                   }}
                 >
+                  {item.icon ? <span className='icon'><i className={item.icon}></i></span> : null}
                   <span className='text text-center self-center !h-auto text-lg'>{item.addNewActivityButtonText}</span>
                 </button>
               </>

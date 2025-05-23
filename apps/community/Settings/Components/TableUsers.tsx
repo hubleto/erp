@@ -28,7 +28,7 @@ export default class TableUsers extends Table<TableUsersProps, TableUsersState> 
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'centered large theme-secondary';
+    params.type = 'centered';
     return params;
   }
 

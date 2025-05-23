@@ -15,7 +15,7 @@ class UserHasRole extends \HubletoMain\Core\RecordManager
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
 
-    if ($main->urlParamAsInteger("idUser") > 0) {
+    if ($main->isUrlParam("idUser")) {
       $query = $query->where($this->table . '.id_user', $main->urlParamAsInteger("idUser"));
     }
 

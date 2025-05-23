@@ -25,7 +25,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
       return (
         <>
           <h2>{this.state.record.subject ?? ''}</h2>
-          <small>Activity</small>
+          <small>Event</small>
         </>
       );
     }

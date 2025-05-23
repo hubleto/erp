@@ -8,13 +8,13 @@ use \ADIOS\Core\Db\Column\Lookup;
 class User extends \ADIOS\Models\User
 {
   const ENUM_LANGUAGES = [
-    'cz' => 'Česky',
-    'de' => 'Deutsch',
     'en' => 'English',
-    'es' => 'Español',
+    'de' => 'Deutsch',
     'fr' => 'Francais',
-    'pl' => 'Polski',
+    'es' => 'Español',
     'sk' => 'Slovensky',
+    'cz' => 'Česky',
+    'pl' => 'Polski',
   ];
 
   public string $table = 'users';
@@ -24,11 +24,11 @@ class User extends \ADIOS\Models\User
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'first_name' => (new Varchar($this, $this->translate('First name'))),
-      'last_name' => (new Varchar($this, $this->translate('Last name'))),
+      'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
+      'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
       'nick' => (new Varchar($this, $this->translate('Nick'))),
-      'email' => (new Varchar($this, $this->translate('Email'))),
-      'language' => (new Varchar($this, $this->translate('Language')))->setEnumValues(self::ENUM_LANGUAGES),
+      'email' => (new Varchar($this, $this->translate('Email')))->setRequired(),
+      'language' => (new Varchar($this, $this->translate('Language')))->setEnumValues(self::ENUM_LANGUAGES)->setRequired(),
       'id_active_profile' => (new Lookup($this, $this->translate("Active profile"), Profile::class)),
     ]);
   }

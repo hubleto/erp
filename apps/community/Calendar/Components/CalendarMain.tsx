@@ -48,11 +48,11 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
   }
 
   renderCell = (eventInfo) => {
-    return (
-      <>
-        <b>{eventInfo.timeText}</b><span style={{marginLeft: 4}}>{eventInfo.event.title}</span><i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.type})</i>
-      </>
-    )
+    return <>
+      <b>{eventInfo.timeText}</b>
+      <span style={{marginLeft: 4}}>{eventInfo.event.title}</span>
+      <i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.type})</i>
+    </>;
   }
 
   render(): JSX.Element {

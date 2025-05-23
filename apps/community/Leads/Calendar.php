@@ -6,6 +6,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
 
   public array $activitySelectorConfig = [
     "addNewActivityButtonText" => "Add new activity linked to lead",
+    "icon" => "fas fa-people-arrows",
     "formComponent" => "LeadsFormActivity"
   ];
 

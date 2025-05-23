@@ -91,28 +91,6 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
     )
   }
 
-  onBeforeSaveRecord(record: any) {
-    var willExistOne = false;
-
-    //check if there is going to be at least one contact that is going to be
-    //saved after update
-    // if (record.CONTACTS) {
-    //   for (const [key, value] of Object.entries(record.CONTACTS)) {
-    //     if (value._toBeDeleted_ == null) willExistOne = true;
-    //   }
-    // }
-
-    // if (willExistOne == false) {
-    //   globalThis.main.showDialogDanger(
-    //     <p>You need to have at least one contact set before deleting all the others</p>,
-    //     {}
-    //   )
-    //   throw new Error("You need to have at least one contact set before deleting all the others");
-    // }
-
-    return record;
-  }
-
   componentDidUpdate(prevProps: FormProps, prevState: FormState): void {
     if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({contactsTableKey: Math.random()} as FormContactState)
   }

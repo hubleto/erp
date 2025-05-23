@@ -16,7 +16,8 @@ class Loader extends \HubletoMain\Core\App
       '/^leads\/settings\/?$/' => Controllers\Settings::class,
       '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
       '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
-      '/^leads\/convert-to-deal\/?$/' => Controllers\Api\ConvertLead::class,
+      '/^leads\/api\/convert-to-deal\/?$/' => Controllers\Api\ConvertToDeal::class,
+      '/^leads\/api\/move-to-archive\/?$/' => Controllers\Api\MoveToArchive::class,
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
       '/^settings\/lead-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
@@ -128,7 +129,7 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Leads/Controllers/Leads",
       "HubletoApp/Community/Leads/Controllers/LeadsArchive",
 
-      "HubletoApp/Community/Leads/Api/ConvertLead",
+      "HubletoApp/Community/Leads/Api/ConvertToDeal",
       "HubletoApp/Community/Leads/Api/GetCalendarEvents",
 
       "HubletoApp/Community/Leads/Leads"

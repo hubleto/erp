@@ -140,7 +140,7 @@ class HubletoMain extends ADIOS {
     decimalSeparator: string = ',',
     thousandsSeparator: string = ' '
   ): string {
-    value = value.toString().replace(/[^0-9+\-Ee.]/g, '');
+    value = (value ?? '').toString().replace(/[^0-9+\-Ee.]/g, '');
 
     let n = parseFloat(value);
 

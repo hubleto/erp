@@ -15,6 +15,11 @@ class Loader {
     $this->clih = fopen("php://stdin", "r");
   }
 
+  public function isLaunchedFromTerminal(): bool
+  {
+    return (php_sapi_name() === 'cli');
+  }
+
   public function color(string $colorName): void
   {
     if (php_sapi_name() !== 'cli') return;

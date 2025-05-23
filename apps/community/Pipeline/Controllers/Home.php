@@ -33,12 +33,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
 
     $pipelines = $mPipeline->record->get();
 
-    $defaultPipeline = $mSetting->record
-      ->select("value")
-      ->where("key", "Apps\Community\Pipeline\DefaultPipeline")
-      ->first()
-    ;
-    $defaultPipelineId = (int) $defaultPipeline->value;
+    $defaultPipelineId = 1;
 
     $searchPipeline = null;
 

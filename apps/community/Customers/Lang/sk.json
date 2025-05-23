@@ -36,7 +36,8 @@
         "End Time": "Čas",
         "All day": "Celodenná",
         "Completed": "Ukončená",
-        "Created by": "Vytvoril"
+        "Created by": "Vytvoril",
+        "Contact": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",

@@ -54,7 +54,7 @@ class Loader extends \HubletoMain\Core\App
       $mTag->record->recordCreate([ 'name' => "Desicion Maker", 'color' => '#fcc203' ]);
       $mTag->record->recordCreate([ 'name' => "Sales", 'color' => '#2196f3' ]);
       $mTag->record->recordCreate([ 'name' => "Support", 'color' => '#03fc8c' ]);
-      $mTag->record->recordCreate([ 'name' => "Other", 'color' => '#383838' ]);
+      $mTag->record->recordCreate([ 'name' => "Other", 'color' => '#b3b3b3' ]);
     }
   }
 

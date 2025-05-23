@@ -90,13 +90,21 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($dbHost === null) $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
     if ($dbUser === null) $dbUser = $this->cli->read('ConfigEnv.dbUser (user must exist)', 'root');
     if ($dbPassword === null) $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
-    if ($dbName === null) $dbName = $this->cli->read('ConfigEnv.dbName (database will be created)', 'my_hubleto');
+    if ($dbName === null) $dbName = $this->cli->read('ConfigEnv.dbName (database will be created, if it not exist)', 'my_hubleto');
     if ($dbCodepage === null) $dbCodepage = $this->cli->read('ConfigEnv.dbCodepage', 'utf8mb4');
     if ($accountFullName === null) $accountFullName = $this->cli->read('Account.accountFullName', 'My Company');
     if ($adminName === null) $adminName = $this->cli->read('Account.adminName', 'John');
     if ($adminFamilyName === null) $adminFamilyName = $this->cli->read('Account.adminFamilyName', 'Smith');
     if ($adminEmail === null) $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
     if ($adminPassword === null) $adminPassword = $this->cli->read('Account.adminPassword (leave empty to generate random password)');
+
+    if ($this->cli->isLaunchedFromTerminal()) {
+      $confirm = '';
+      while ($confirm != 'yes') {
+        $confirm = $this->cli->read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel.');
+        if ($confirm == 'exit') exit;
+      }
+    }
 
 //    if ($smtpHost === null) $smtpHost = $this->cli->read('ConfigEnv.smtpHost');
 //    if ($smtpHost != null && $smtpPort === null) $smtpPort = $this->cli->read('ConfigEnv.smtpPort');

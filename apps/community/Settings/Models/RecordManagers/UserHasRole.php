@@ -9,9 +9,16 @@ class UserHasRole extends \HubletoMain\Core\RecordManager
 {
   public $table = 'user_has_roles';
 
-  // public function REPORT(): BelongsTo
-  // {
-  //   return $this->belongsTo(\EMonitorApp\Models\RecordManagers\Report::class, 'id_report', 'id')->orderBy('name', 'asc');
-  // }
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
 
+    $main = \ADIOS\Core\Helper::getGlobalApp();
+
+    if ($main->urlParamAsInteger("idUser") > 0) {
+      $query = $query->where($this->table . '.id_user', $main->urlParamAsInteger("idUser"));
+    }
+
+    return $query;
+  }
 }

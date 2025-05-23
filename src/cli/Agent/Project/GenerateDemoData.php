@@ -597,13 +597,17 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $isPrimary = true;
 
     $salutations = ["Mr.", "Mrs.", "Miss"];
+    $titlesBefore = ["", "Dr.", "MSc."];
+    $titlesAfter = ["", "MBA", "PhD."];
 
     foreach ($contacts as $contact) {
       $idContact = $mContact->record->recordCreate([
         "id_customer" => rand(1, 100),
         "salutation" => $salutations[rand(0, 2)],
+        "title_before" => $titlesBefore[rand(0, 2)],
         "first_name" => $contact[0],
         "last_name" => $contact[1],
+        "title_after" => $titlesAfter[rand(0, 2)],
         "is_primary" => true,
         "is_active" => true,
         "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
@@ -790,7 +794,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     foreach ($leads as $lead) { // @phpstan-ignore-line
       if (rand(1, 3) != 1) continue; // negenerujem deal pre vsetky leads
 
-      $pipeline = rand(1,2);
+      $pipeline = 1;
       $result = (rand(0, 10) == 5 ? $mDeal::RESULT_LOST : $mDeal::RESULT_WON);
       if ($pipeline === 1) $pipelineStep = rand(1,3);
       else $pipelineStep = rand(4,7);

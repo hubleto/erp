@@ -16,7 +16,6 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^usage\/?$/' => Controllers\Home::class,
       '/^usage\/log\/?$/' => Controllers\Log::class,
-      '/^usage\/statistics\/?$/' => Controllers\Statistics::class,
     ]);
 
     $this->main->addSetting($this, [
@@ -25,7 +24,6 @@ class Loader extends \HubletoMain\Core\App
       'url' => 'usage/log',
     ]);
 
-    $this->setConfigAsInteger('sidebarOrder', 0);
   }
 
   public function logUsage(string $message = ''): void

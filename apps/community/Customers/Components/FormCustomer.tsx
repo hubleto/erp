@@ -365,7 +365,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                       <Calendar
                         onCreateCallback={() => this.loadRecord()}
                         readonly={R.is_archived}
-                        eventsEndpoint={globalThis.main.config.rewriteBase + 'customers/get-calendar-events?idCustomer=' + R.id}
+                        eventsEndpoint={globalThis.main.config.accountUrl + '/customers/get-calendar-events?idCustomer=' + R.id}
                         onDateClick={(date, time, info) => {
                           this.setState({
                             activityCalendarDateClicked: date,
@@ -458,7 +458,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.main.config.rewriteBase + 'customers/get-calendar-events?idCustomer=' + R.id}
+                eventsEndpoint={globalThis.main.config.accountUrl + '/customers/get-calendar-events?idCustomer=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityCalendarDateClicked: date,

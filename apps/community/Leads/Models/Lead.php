@@ -87,6 +87,9 @@ class Lead extends \HubletoMain\Core\Models\Model
           ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
       break;
+      case 'id_customer':
+        $description ->setExtendedProps(['urlAdd' => 'customers/add']);
+      break;
     }
     return $description;
   }
@@ -95,9 +98,9 @@ class Lead extends \HubletoMain\Core\Models\Model
   {
     $description = parent::describeTable();
     $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     $description->ui['showFulltextSearch'] = true;
+    $description->ui['showColumnSearch'] = true;
     $description->columns['tags'] = ["title" => "Tags"];
 
     unset($description->columns['note']);
@@ -159,7 +162,7 @@ class Lead extends \HubletoMain\Core\Models\Model
 
   public function checkOwnership(array $record): void
   {
-    if ($record["id_customer"] && !isset($record["checkOwnership"])) {
+    if (isset($record['id_customer']) && $record['id_customer'] && !isset($record['checkOwnership'])) {
       $mCustomer = new Customer($this->main);
       $customer = $mCustomer->record
         ->where("id", (int) $record["id_customer"])
@@ -185,14 +188,14 @@ class Lead extends \HubletoMain\Core\Models\Model
     $lead = $this->record->find($record["id"])->toArray();
     $mLeadHistory = new LeadHistory($this->main);
 
-    if ((float) $lead["price"] != (float) $record["price"]) {
+    if (isset($record['price']) && (float) $lead["price"] != (float) $record["price"]) {
       $mLeadHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],
         "description" => "Price changed to " . (string) $record["price"],
       ]);
     }
-    if ((string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {
+    if (isset($record['date_expected_close']) && (string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {
       $mLeadHistory->record->recordCreate([
         "change_date" => date("Y-m-d"),
         "id_lead" => $record["id"],

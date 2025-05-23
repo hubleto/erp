@@ -24,6 +24,17 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
     return new \HubletoApp\Community\Settings\Models\User($this->app);
   }
 
+  public function findUsersByLogin(string $login): array
+  {
+    return $this->createUserModel()->record
+      ->where('email', $login)
+      ->where($this->activeAttribute, '<>', 0)
+      ->get()
+      ->makeVisible([$this->passwordAttribute])
+      ->toArray()
+    ;
+  }
+
   public function forgotPassword(): void
   {
     $login = $this->app->urlParamAsString('login');

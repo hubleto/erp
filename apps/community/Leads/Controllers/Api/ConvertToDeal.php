@@ -14,7 +14,7 @@ use HubletoApp\Community\Leads\Models\LeadProduct;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 use HubletoApp\Community\Settings\Models\Setting;
 
-class ConvertLead extends \HubletoMain\Core\Controllers\Controller
+class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

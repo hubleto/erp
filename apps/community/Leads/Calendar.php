@@ -59,7 +59,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
       $events[$key]['color'] = $this->color;
       $events[$key]['type'] = $activity->activity_type;
       $events[$key]['source'] = 'leads';
-      $events[$key]['details'] = 'Lead #' . $activity->LEAD->identifier . ' for ' . $activity->LEAD->CUSTOMER->name;
+      $events[$key]['details'] = 'Lead #' . $activity->LEAD->identifier . ($activity->LEAD->CUSTOMER ? ' for ' . $activity->LEAD->CUSTOMER->name : '');
       
     }
 

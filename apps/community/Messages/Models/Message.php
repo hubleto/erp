@@ -33,6 +33,7 @@ class Message extends \HubletoMain\Core\Models\Model
     $description->ui['addButtonText'] = 'Add Message';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
+    $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
 
     return $description;

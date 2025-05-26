@@ -10,7 +10,6 @@ export default class TableProducts extends Table<TableProductsProps, TableProduc
 
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     orderBy: {
       field: "id",
       direction: "asc"

@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel='shortcut icon' href='{{ config.url }}/assets/images/logo-hubleto.png'>
-  <title>{{ user.PROFILE.company }} | Hubleto | Business Application Hub</title>
+  <title>{{ user.DEFAULT_COMPANY.name }} | Hubleto | Business Application Hub</title>
 
   <script>
     window.ConfigEnv = {
@@ -143,12 +143,12 @@
             {% if viewParams.main.isPremium %}
               <a class="btn btn-small btn-transparent" href="{{ config.accountUrl }}/premium">
                 <span class="icon text-yellow-500"><i class="fas fa-trophy"></i></span>
-                <span class="text">Premium</span>
+                <span class="text">{{ translate('Premium account') }}</span>
               </a>
             {% else %}
               <a class="btn btn-small btn-transparent" href="{{ config.accountUrl }}/premium">
-                <span class="icon text-green-500"><i class="fas fa-trophy"></i></span>
-                <span class="text">{{ translate('Get premium') }}</span>
+                <span class="icon text-green-500"><i class="fas fa-user"></i></span>
+                <span class="text">{{ translate('Personal account') }}</span>
               </a>
             {% endif %}
           </li>
@@ -200,7 +200,7 @@
                 <div class="list" style="margin-left:-13.4em;width:15em;">
                   <div class="text-center text-primary text-sm p-2">{{ user.email }}</div>
                   <div class="text-center text-gray-700 text-xs">{{ user.first_name }}</div>
-                  <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/settings/profile">
+                  <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/settings/my-account">
                     <span class="icon"><i class='fas fa-user-tie'></i></span>
                     <span class="text">{{ translate('Manage your account') }}</span>
                   </a>

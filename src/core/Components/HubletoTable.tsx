@@ -14,7 +14,6 @@ interface HubletoTableState extends TableState {
 export default class HubletoTable extends Table<HubletoTableProps, HubletoTableState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
   }
 

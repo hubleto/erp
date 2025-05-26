@@ -29,7 +29,7 @@ class User extends \ADIOS\Models\User
       'nick' => (new Varchar($this, $this->translate('Nick'))),
       'email' => (new Varchar($this, $this->translate('Email')))->setRequired(),
       'language' => (new Varchar($this, $this->translate('Language')))->setEnumValues(self::ENUM_LANGUAGES)->setRequired(),
-      'id_active_profile' => (new Lookup($this, $this->translate("Active profile"), Profile::class)),
+      'id_default_company' => (new Lookup($this, $this->translate("Default company"), Company::class)),
     ]);
   }
 
@@ -37,7 +37,7 @@ class User extends \ADIOS\Models\User
   {
     return $this->record
       ->with('ROLES')
-      ->with('PROFILE')
+      ->with('DEFAULT_COMPANY')
       ->where('id', $idUser)
       ->where('is_active', '<>', 0)
     ;
@@ -76,11 +76,21 @@ class User extends \ADIOS\Models\User
       'nick' => $description->columns['nick'],
       'email' => $description->columns['email'],
       'language' => $description->columns['language'],
-      'id_active_profile' => $description->columns['id_active_profile'],
+      'id_default_company' => $description->columns['id_default_company'],
       'is_active' => $description->columns['is_active'],
       'roles' => (new Varchar($this, $this->translate('Roles'))),
     ];
 
+    return $description;
+  }
+
+  public function describeForm(): \ADIOS\Core\Description\Form
+  {
+    $description = parent::describeForm();
+    $description->permissions = [
+      'canDelete' => false,
+      'canUpdate' => true,
+    ];
     return $description;
   }
 

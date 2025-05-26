@@ -14,16 +14,10 @@ class User extends \HubletoMain\Core\RecordManager
    */
   public $table = 'users';
 
-  /** @return BelongsTo<Profile, covariant User> */
-  public function id_active_profile(): BelongsTo
+  /** @return BelongsTo<Company, covariant User> */
+  public function DEFAULT_COMPANY(): BelongsTo
   {
-    return $this->belongsTo(Profile::class, 'id_active_profile', 'id');
-  }
-
-  /** @return BelongsTo<Profile, covariant User> */
-  public function PROFILE(): BelongsTo
-  {
-    return $this->id_active_profile();
+    return $this->belongsTo(Company::class, 'id_default_company', 'id');
   }
 
   /** @return BelongsToMany<UserRole, covariant User> */

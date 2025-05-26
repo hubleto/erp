@@ -12,7 +12,6 @@ interface TableBillingAccountServicesState extends TableState {
 export default class TableBillingAccountServices extends Table<TableBillingAccountServicesProps, TableBillingAccountServicesState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'HubletoApp/Community/Billing/Models/BillingAccountService',
   }

@@ -11,7 +11,6 @@ interface TableUserRolesState extends TableState {
 export default class TableUserRoles extends Table<TableUserRolesProps, TableUserRolesState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'HubletoApp/Community/Settings/Models/UserRole',
   }

@@ -15,7 +15,6 @@ interface TableDealsState extends TableState {
 export default class TableDeals extends Table<TableDealsProps, TableDealsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     orderBy: {
       field: "id",
       direction: "desc"

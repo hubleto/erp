@@ -15,6 +15,7 @@ class Currency extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Currency'))),
       'code' => (new Varchar($this, $this->translate('Code'))),
+      'symbol' => (new Varchar($this, $this->translate('Symbol'))),
     ]);
   }
 

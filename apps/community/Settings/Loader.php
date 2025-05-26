@@ -13,10 +13,10 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^settings\/?$/' => Controllers\Dashboard::class,
-      '/^settings\/profile\/?$/' => Controllers\Profile::class,
+      '/^settings\/my-account\/?$/' => Controllers\MyAccount::class,
       '/^settings\/users\/?$/' => Controllers\Users::class,
       '/^settings\/user-roles\/?$/' => Controllers\UserRoles::class,
-      '/^settings\/profiles\/?$/' => Controllers\Profiles::class,
+      '/^settings\/companies\/?$/' => Controllers\Companies::class,
       '/^settings\/general\/?$/' => Controllers\General::class,
       '/^settings\/activity-types\/?$/' => Controllers\ActivityTypes::class,
       '/^settings\/countries\/?$/' => Controllers\Countries::class,
@@ -32,7 +32,7 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->addSetting($this, ['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
     $this->main->addSetting($this, ['title' => $this->translate('User roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
-    $this->main->addSetting($this, ['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/profiles']);
+    $this->main->addSetting($this, ['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/companies']);
     $this->main->addSetting($this, ['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
     $this->main->addSetting($this, ['title' => $this->translate('Permissions list'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
     $this->main->addSetting($this, ['title' => $this->translate('Role permissions'), 'icon' => 'fas fa-user-shield', 'url' => 'settings/role-permissions']);
@@ -47,7 +47,7 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mProfile = new Models\Profile($this->main);
+      $mCompany = new Models\Company($this->main);
       $mUser = new Models\User($this->main);
       $mUserRole = new Models\UserRole($this->main);
       $mUserHasRole = new Models\UserHasRole($this->main);
@@ -59,7 +59,7 @@ class Loader extends \HubletoMain\Core\App
       $mCurrency = new Models\Currency($this->main);
       $mInvoiceProfile = new Models\InvoiceProfile($this->main);
 
-      $mProfile->dropTableIfExists()->install();
+      $mCompany->dropTableIfExists()->install();
       $mUser->dropTableIfExists()->install();
       $mUserRole->dropTableIfExists()->install();
       $mUserHasRole->dropTableIfExists()->install();
@@ -82,9 +82,31 @@ class Loader extends \HubletoMain\Core\App
         'id_user' => null
       ]);
 
-      $mCurrency->record->recordCreate([ 'name' => 'Euro', 'code' => 'EUR' ]);
-      $mCurrency->record->recordCreate([ 'name' => 'Dollar', 'code' => 'USD' ]);
-      $mCurrency->record->recordCreate([ 'name' => 'Koruny', 'code' => 'CZK' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'EURO', 'code' => 'EUR', 'symbol' => '€' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Pound Sterling', 'code' => 'GBP', 'symbol' => '£' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'US Dollar', 'code' => 'USD', 'symbol' => '$' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Canadian Dollar', 'code' => 'CAD', 'symbol' => 'CA$' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Mexican Peso', 'code' => 'MXN', 'symbol' => 'MX$' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Brazilian Real', 'code' => 'BRL', 'symbol' => 'R$' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Japanese Yen', 'code' => 'JPY', 'symbol' => '¥' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Chinese Yuan', 'code' => 'CNY', 'symbol' => 'CN¥' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Australian Dollar', 'code' => 'AUD', 'symbol' => 'AU$' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Saudi Riyal', 'code' => 'SAR', 'symbol' => 'SAR' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Polish Złoty', 'code' => 'PLZ', 'symbol' => 'zł' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Czech Koruna', 'code' => 'CZK', 'symbol' => 'Kč' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Hungarian Forint', 'code' => 'HUF', 'symbol' => 'Ft' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Swiss Franc', 'code' => 'CHF', 'symbol' => 'SFr.' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Danish Krone', 'code' => 'DKK', 'symbol' => 'kr.' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Serbian Dinar', 'code' => 'RSD', 'symbol' => 'РСД' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Norwegian Krone', 'code' => 'NOK', 'symbol' => 'kr' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Swedish Krona', 'code' => 'SEK', 'symbol' => 'kr' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Belarusian Ruble', 'code' => 'BYN ', 'symbol' => '₽' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Russian Ruble', 'code' => 'RUB', 'symbol' => '₽' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Romanian Leu', 'code' => 'RON', 'symbol' => 'lei' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Turkish Lira', 'code' => 'TRY', 'symbol' => '₺' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Bosnia-Herzegovina Convertible Marka', 'code' => 'BAM', 'symbol' => 'KM' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'Argentine Peso', 'code' => 'ARS', 'symbol' => '$' ]);
+      $mCurrency->record->recordCreate([ 'name' => 'New Zealand Dollar', 'code' => 'NZD', 'symbol' => 'NZ$' ]);
 
       $mActivityTypes->record->recordCreate([ 'name' => 'Meeting', 'color' => '#607d8b', 'calendar_visibility' => true ]);
       $mActivityTypes->record->recordCreate([ 'name' => 'Bussiness Trip', 'color' => '#673ab7', 'calendar_visibility' => true ]);
@@ -380,10 +402,10 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Settings/Models/Tag:Update",
       "HubletoApp/Community/Settings/Models/Tag:Delete",
 
-      "HubletoApp/Community/Settings/Models/Profile:Create",
-      "HubletoApp/Community/Settings/Models/Profile:Read",
-      "HubletoApp/Community/Settings/Models/Profile:Update",
-      "HubletoApp/Community/Settings/Models/Profile:Delete",
+      "HubletoApp/Community/Settings/Models/Company:Create",
+      "HubletoApp/Community/Settings/Models/Company:Read",
+      "HubletoApp/Community/Settings/Models/Company:Update",
+      "HubletoApp/Community/Settings/Models/Company:Delete",
 
       "HubletoApp/Community/Settings/Models/Setting:Create",
       "HubletoApp/Community/Settings/Models/Setting:Read",
@@ -414,7 +436,7 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Settings/Controllers/ActivityType",
       "HubletoApp/Community/Settings/Controllers/Country",
       "HubletoApp/Community/Settings/Controllers/Currency",
-      "HubletoApp/Community/Settings/Controllers/Profile",
+      "HubletoApp/Community/Settings/Controllers/Company",
       "HubletoApp/Community/Settings/Controllers/Setting",
       "HubletoApp/Community/Settings/Controllers/Tag",
       "HubletoApp/Community/Settings/Controllers/User",
@@ -427,7 +449,7 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Settings/ActivityType",
       "HubletoApp/Community/Settings/Country",
       "HubletoApp/Community/Settings/Currency",
-      "HubletoApp/Community/Settings/Profile",
+      "HubletoApp/Community/Settings/Company",
       "HubletoApp/Community/Settings/Setting",
       "HubletoApp/Community/Settings/Tag",
       "HubletoApp/Community/Settings/User",

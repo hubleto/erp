@@ -7,7 +7,6 @@ interface TableDealDocumentsState extends TableState {}
 export default class TableDealDocuments extends Table<TableDealDocumentsProps, TableDealDocumentsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'HubletoApp/Community/Deals/Models/DealDocument',
   }

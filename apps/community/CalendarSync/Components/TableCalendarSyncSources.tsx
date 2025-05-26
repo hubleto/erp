@@ -13,7 +13,6 @@ interface TableSourcesState extends TableState {
 export default class TableCalendarSyncSources extends Table<TableSourcesProps, TableSourcesState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'HubletoApp/Community/CalendarSync/Models/Source',
   }

@@ -77,10 +77,6 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     parent::__construct($config, $mode);
 
-    if (is_file($this->config->getAsString('accountDir', '') . '/pro')) {
-      $this->isPremium = (string) file_get_contents($this->config->getAsString('accountDir', '') . '/pro') == '1';
-    }
-
     $this->release = new \HubletoMain\Core\ReleaseManager($this);
     $this->release->load();
 

@@ -9,7 +9,6 @@ interface TableDocumentsState extends TableState {}
 export default class TableDocuments extends Table<TableDocumentsProps, TableDocumentsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     orderBy: {
       field: "id",

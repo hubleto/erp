@@ -20,7 +20,6 @@ interface BrowserState extends TableState {
 export default class Browser extends Table<BrowserProps, BrowserState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     orderBy: {
       field: "id",

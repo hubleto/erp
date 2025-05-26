@@ -252,8 +252,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("  -> Installing apps, round #3.\n");
     $installer->installApps(3);
 
-    $this->cli->cyan("  -> Adding default company profile and admin user.\n");
-    $installer->addCompanyProfileAndAdminUser();
+    $this->cli->cyan("  -> Adding default company and admin user.\n");
+    $installer->addCompanyAndAdminUser();
 
     $this->cli->cyan("\n");
     $this->cli->cyan("All done! You're a fantastic CRM developer. Now you can:\n");

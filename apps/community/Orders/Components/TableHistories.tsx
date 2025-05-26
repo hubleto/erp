@@ -10,7 +10,6 @@ interface TableHistoriesState extends TableState {}
 export default class TableHistories extends Table<TableHistoriesProps, TableHistoriesState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     orderBy: {
       field: "date",
       direction: "desc"

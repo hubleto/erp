@@ -2,21 +2,21 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class Profile extends \HubletoMain\Core\Controllers\Controller {
-
+class Companies extends \HubletoMain\Core\Controllers\Controller
+{
 
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
-      [ 'url' => 'profiles', 'content' => $this->translate('Profile') ],
+      [ 'url' => 'companies', 'content' => $this->translate('Companies') ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Settings/Profile.twig');
+    $this->setView('@HubletoApp:Community:Settings/Companies.twig');
   }
 
 }

@@ -1,20 +1,24 @@
-<h1>Upgrade to Premium</h1>
+<h1>You are using personal account</h1>
 
 <div class="grid grid-cols-2 gap-2 mt-2">
   <div>
-    <div class="block badge badge-info text-2xl p-4">
-      <div>
-        Your current credit is:
-        {{ viewParams.main.locale.formatCurrency(viewParams.currentCredit, '€') }}
-      </div>
-      <div class="mt-2">
-        <a href="premium/payment" class="btn btn-large btn-primary">
-          <span class="icon"><i class="fas fa-euro"></i></span>
-          <span class="text">{{ translate('Make payment') }}</span>
+    <div class="card mt-2">
+      <div class="card-body bg-yellow-50">
+        Your account will be upgraded to premium automatically when you:
+        <ul>
+          <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> add new users</li>
+          <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> install or enable premium apps</li>
+        </ul>
+        <a href="{{ config.accountUrl }}/settings" class="btn btn-transparent">
+          <span class="icon"><i class="fas fa-plus"></i></span>
+          <span class="text">Add new user</span>
+        </a>
+        <a href="{{ config.accountUrl }}/settings" class="btn btn-transparent">
+          <span class="icon"><i class="fas fa-cog"></i></span>
+          <span class="text">Manage apps</span>
         </a>
       </div>
     </div>
-
     <div class="card mt-2">
       <div class="card-header">
         Upgrade to Premium and you'll get
@@ -23,54 +27,10 @@
         <ul>
           <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited storage</li>
           <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
-          <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> premium apps</li>
-          <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more features</li>
+          <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features </li>
           <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
         </ul>
       </div>
     </div>
-
-    {# <div class="alert-warning">
-      Tu dat CTA button, aby sa zacal proces nastavenia pravidelnych platieb cez kartu.<br/>
-      <br/>
-      Napr. Stripe, GoPay a pod.
-    </div> #}
-
-    <div class="mt-2">
-      <a href="?simulate=up" class="btn btn-primary btn-large">
-        <span class="icon"><i class="fas fa-arrow-up"></i></span>
-        <span class="text">Simulate upgrade</span>
-      </a>
-    </div>
   </div>
-  <div class="text-center">
-    <span class="icon text-amber-500"><i class="fas fa-trophy shadow-sm bg-amber-50 shadow-amber-200" style="font-size:20em;border-radius:100em;padding:50px"></i></span>
-  </div>
-    {# <div class="card">
-      <div class="card-header text-indigo-800">
-        Don't miss this special offer
-        <i class="fas fa-percent"></i>
-      </div>
-      <div class="card-body">
-        ...
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header text-teal-800">
-        Need help?
-        <i class="fas fa-life-ring"></i>
-      </div>
-      <div class="card-body">
-        ...
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        What others say about Hubleto
-        <i class="fas fa-thumbs-up"></i>
-      </div>
-      <div class="card-body">
-        ...
-      </div>
-    </div> #}
 </div>

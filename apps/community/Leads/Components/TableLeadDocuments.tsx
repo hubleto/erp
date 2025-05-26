@@ -7,7 +7,6 @@ interface TableLeadDocumentsState extends TableState {}
 export default class TableLeadDocuments extends Table<TableLeadDocumentsProps, TableLeadDocumentsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'HubletoApp/Community/Leads/Models/LeadDocument',
   }

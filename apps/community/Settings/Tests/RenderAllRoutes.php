@@ -11,7 +11,7 @@ class RenderAllRoutes extends \HubletoMain\Core\AppTest
       'settings',
       'settings/users',
       'settings/user-roles',
-      'settings/profiles',
+      'settings/companies',
       'settings/general',
       'settings/customer-tags',
       'settings/deal-tags',

@@ -16,7 +16,6 @@ export interface TableLeadsState extends TableState {
 export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     orderBy: {
       field: "id",
       direction: "desc"

@@ -10,7 +10,6 @@ interface TableOrderProductsState extends TableState {}
 export default class TableOrderProducts extends Table<TableOrderProductsProps, TableOrderProductsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     orderBy: {
       field: "id",
       direction: "desc"

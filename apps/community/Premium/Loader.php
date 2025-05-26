@@ -16,6 +16,13 @@ class Loader extends \HubletoMain\Core\App
   {
     parent::init();
 
+    $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+    $activeUsersCount = $mUser->record->where('is_active', true)->count();
+
+    if ($activeUsersCount > 1) {
+      $this->main->isPremium = true;
+    }
+
     $this->main->router->httpGet([
       '/^premium\/?$/' => Controllers\Premium::class,
       '/^premium\/payment\/?$/' => Controllers\Payment::class,

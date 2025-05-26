@@ -46,7 +46,6 @@ class Installer {
     'core' => [
       \HubletoApp\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997, ],
       \HubletoApp\Community\Desktop\Loader::class => [ ],
-      \HubletoApp\Community\Premium\Loader::class => [ 'sidebarOrder' => 99999, ],
       \HubletoApp\Community\Usage\Loader::class => [ ],
       // \HubletoApp\Community\Messages\Loader::class => [ 'sidebarOrder' => 125, ],
       \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
@@ -55,6 +54,7 @@ class Installer {
       \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110, 'showEventsForTodayInDashboard' => true ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],
+      \HubletoApp\Community\Premium\Loader::class => [ 'sidebarOrder' => 99999, ],
     ],
     'documents' => [
       \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
@@ -189,20 +189,20 @@ class Installer {
     }
   }
 
-  public function addCompanyProfileAndAdminUser(): void
+  public function addCompanyAndAdminUser(): void
   {
-    $mProfile = new \HubletoApp\Community\Settings\Models\Profile($this->main);
+    $mCompany = new \HubletoApp\Community\Settings\Models\Company($this->main);
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
 
-    $idProfile = $mProfile->record->recordCreate(['company' => $this->accountFullName])['id'];
+    $idCompany = $mCompany->record->recordCreate(['name' => $this->accountFullName])['id'];
 
     $idUserAdministrator = $mUser->record->recordCreate([
       'login' => $this->adminEmail,
       'password' => $this->adminPassword == '' ? '' : $mUser->hashPassword($this->adminPassword),
       'email' => $this->adminEmail,
       'is_active' => true,
-      'id_active_profile' => $idProfile,
+      'id_default_company' => $idCompany,
     ])['id'];
 
     $mUserHasRole->record->recordCreate([

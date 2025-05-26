@@ -13,7 +13,6 @@ interface TableValuesState extends TableState {
 export default class TableValues extends Table<TableValuesProps, TableValuesState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'HubletoApp/Community/Contacts/Models/Value',
   }

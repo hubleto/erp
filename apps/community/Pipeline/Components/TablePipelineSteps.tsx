@@ -10,7 +10,6 @@ interface TablePipelineStepsState extends TableState {
 export default class TablePipelineSteps extends Table<TablePipelineStepsProps, TablePipelineStepsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'HubletoApp/Community/Pipeline/Models/PipelineStep',
   }

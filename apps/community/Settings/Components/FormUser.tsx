@@ -25,9 +25,10 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
   }
 
   renderTitle(): JSX.Element {
+    let title = ((this.state.record.first_name ?? '') + ' ' + (this.state.record.middle_name ?? '') + ' ' + (this.state.record.last_name ?? '')).trim();
     return <>
-      <h2>{this.state.record.first_name ?? ''} {this.state.record.middle_name ?? ''} {this.state.record.last_name ?? ''}</h2>
-      <small>User profile</small>
+      <h2>{title == '' ? '-' : title}</h2>
+      <small>User</small>
     </>;
   }
 
@@ -47,18 +48,27 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
           <i className="fas fa-user text-primary" style={{fontSize: '8em'}}></i>
         </div>
         <div className="flex-1">
+          {this.state.id < 0 ?
+            <div className="badge badge-warning flex gap-2 items-center text-xl p-4">
+              <i className="fas fa-triangle-exclamation"></i>
+              <div>By adding a new user, your account will be updated from <u>personal</u> to <u>premium</u>. Additional charges may apply.</div>
+            </div>
+          : null}
+
           {this.divider('About the user')}
           {this.inputWrapper('first_name')}
           {this.inputWrapper('last_name')}
           {this.inputWrapper('nick')}
           {this.inputWrapper('email')}
           {this.inputWrapper('language')}
+          {this.inputWrapper('id_default_company')}
 
           {this.divider('Access to Hubleto')}
           {this.inputWrapper('is_active')}
           {this.inputWrapper('password')}
 
           {this.divider('Permissions')}
+
           {this.state.id < 0 ?
             <div className="badge badge-info">First create user, then you will be prompted to assign roles.</div>
           :

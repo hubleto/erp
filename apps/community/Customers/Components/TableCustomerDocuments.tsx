@@ -7,7 +7,6 @@ interface TableCustomerDocumentsState extends TableState {}
 export default class TableCustomerDocuments extends Table<TableCustomerDocumentsProps, TableCustomerDocumentsState> {
   static defaultProps = {
     ...Table.defaultProps,
-    itemsPerPage: 15,
     formUseModalSimple: true,
     model: 'HubletoApp/Community/Customers/Models/CustomerDocument',
   }

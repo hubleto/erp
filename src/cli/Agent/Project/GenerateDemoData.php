@@ -4,7 +4,7 @@ namespace HubletoMain\Cli\Agent\Project;
 
 use HubletoApp\Community\Settings\Models\Country;
 use HubletoApp\Community\Settings\Models\Permission;
-use HubletoApp\Community\Settings\Models\Profile;
+use HubletoApp\Community\Settings\Models\Company;
 use HubletoApp\Community\Settings\Models\RolePermission;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Settings\Models\UserRole;
@@ -21,19 +21,19 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->cyan("Generating demo data...\n");
 
-    $mProfile = new \HubletoApp\Community\Settings\Models\Profile($this->main);
+    $mCompany = new \HubletoApp\Community\Settings\Models\Company($this->main);
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
     $mUserRole = new \HubletoApp\Community\Settings\Models\UserRole($this->main);
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
 
-    $idProfile = 1; // plati za predpokladu, ze tento command sa spusta hned po CommandInit
+    $idCompany = 1; // plati za predpokladu, ze tento command sa spusta hned po CommandInit
 
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
     $idUserSalesManager = $mUser->record->recordCreate([
       "first_name" => "Sales",
       "last_name" => "Manager",
       "email" => "test@user.sk",
-      "id_active_profile" => $idProfile,
+      "id_default_company" => $idCompany,
       "is_active" => true,
       "login" => "sales.manager",
       "password" => password_hash("sales.manager", PASSWORD_DEFAULT),

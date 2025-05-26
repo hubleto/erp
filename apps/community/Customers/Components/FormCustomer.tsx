@@ -356,7 +356,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                       />
                     </FormInput>
                     {this.inputWrapper("id_user")}
-                    {this.inputWrapper("note")}
                   </div>
                 </div>
               </div>
@@ -390,6 +389,13 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   </div>
                 </div>
               </> : null}
+            </div>
+            <div className='card mt-2'>
+              <div className='card-header'>Documents and other notes</div>
+              <div className='card-body flex gap-2 justify-between'>
+                <div className="flex-1 w-full">{this.inputWrapper('shared_folder', {readonly: R.is_archived})}</div>
+                <div className="flex-1 w-full">{this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}</div>
+              </div>
             </div>
             {showAdditional ?
               <div className="card mt-2">
@@ -570,8 +576,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
         ) : null} */}
         {showAdditional ? (
           <TabPanel header={this.translate('Documents')}>
-            <div className="divider"><div><div><div></div></div><div><span>{this.translate('Shared documents')}</span></div></div></div>
-            {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
             <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
             <a
               className="btn btn-add-outline mb-2"

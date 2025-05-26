@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormCustomer, { FormCustomerProps, FormCustomerState } from '@hubleto/apps/customers/Components/FormCustomer'
+import FormCustomer, { FormCustomerProps, FormCustomerState } from '@hubleto/apps/community/Customers/Components/FormCustomer'
 import TableLeads from './TableLeads';
 import ModalSimple from "adios/ModalSimple";
 

@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import 'primereact/resources/themes/lara-light-teal/theme.css';
 
 import { ADIOS } from "adios/Loader";
@@ -23,12 +24,14 @@ import HubletoChart from "./core/Components/HubletoChart";
 
 // Primereact
 import { Tooltip } from "primereact/tooltip";
+import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
 
 class HubletoMain extends ADIOS {
   language: string = 'en';
   idUser: number = 0;
   user: any;
   apps: any = {};
+  dynamicContentInjectors: any = {};
 
   constructor(config: object) {
     super(config);
@@ -156,6 +159,31 @@ class HubletoMain extends ADIOS {
     }
 
     return integerPart + (decimals > 0 ? decimalSeparator + fractionalPart : '');
+  }
+
+  registerDynamicContentInjector(contentGroup: string, injector: any) {
+    if (!this.dynamicContentInjectors[contentGroup]) {
+      this.dynamicContentInjectors[contentGroup] = [];
+    }
+
+    this.dynamicContentInjectors[contentGroup].push(injector);
+  }
+
+  injectDynamicContent(contentGroup: string, injectorProps: any): Array<JSX.Element>|null {
+    if (this.dynamicContentInjectors && this.dynamicContentInjectors[contentGroup]) {
+      let dynamicContent: Array<JSX.Element> = [];
+      for (let i in this.dynamicContentInjectors[contentGroup]) {
+        dynamicContent.push(
+          React.createElement(
+            this.dynamicContentInjectors[contentGroup][i],
+            injectorProps
+          )
+        );
+      }
+      return dynamicContent.map((content, key) => <div key={key}>{content}</div>);
+    } else {
+      return null;
+    }
   }
 
 }

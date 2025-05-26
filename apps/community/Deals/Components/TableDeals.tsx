@@ -4,6 +4,7 @@ import FormDeal, { FormDealProps } from './FormDeal';
 import request from 'adios/Request';
 
 interface TableDealsProps extends TableProps {
+  idCustomer?: number,
   showArchive?: boolean,
 }
 
@@ -42,7 +43,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'right wide';
+    params.type = (this.props.idCustomer ? 'inside-parent' : 'right wide');
     return params;
   }
 
@@ -50,6 +51,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
     return {
       ...super.getEndpointParams(),
       showArchive: this.props.showArchive ? 1 : 0,
+      idCustomer: this.props.idCustomer,
     }
   }
 
@@ -69,6 +71,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormDealProps;
+    formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormDeal {...formProps}/>;
   }

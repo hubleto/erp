@@ -110,17 +110,17 @@ class Lead extends \HubletoMain\Core\Models\Model
     unset($description->columns['shared_folder']);
     unset($description->columns['lost_reason']);
 
-    if ($this->main->urlParamAsInteger('idCustomer') > 0) {
-      $description->permissions = [
-        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
-        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
-        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
-        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
-      ];
-      $description->columns = [];
-      $description->inputs = [];
-      $description->ui = [];
-    }
+    // if ($this->main->urlParamAsInteger('idCustomer') > 0) {
+    //   $description->permissions = [
+    //     'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+    //     'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+    //     'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+    //     'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
+    //   ];
+    //   // $description->columns = [];
+    //   // $description->inputs = [];
+    //   // $description->ui = [];
+    // }
     if ($this->main->urlParamAsBool("showArchive")) {
       $description->permissions = [
         "canCreate" => false,
@@ -146,7 +146,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       ->value
     ;
 
-    $description->defaultValues['id_customer'] = null;
+    $description->defaultValues['id_customer'] = $this->main->urlParamAsInteger('idCustomer');
     $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_contact'] = null;
     $description->defaultValues['price'] = 0;

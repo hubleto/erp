@@ -103,14 +103,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   }
 
   renderTitle(): JSX.Element {
-    if (getUrlParam('recordId') == -1) {
-      return <h2>{this.translate('New Deal')}</h2>;
-    } else {
-      return <>
-        <h2>{this.state.record.title ? this.state.record.title : ''}</h2>
-        <small>Deal</small>
-      </>;
-    }
+    return <>
+      <h2>{this.state.record.title ? this.state.record.title : '-'}</h2>
+      <small>Deal</small>
+    </>;
   }
 
   renderSubTitle(): JSX.Element {

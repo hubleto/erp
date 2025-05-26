@@ -4,11 +4,12 @@ import FormLead, { FormLeadProps } from './FormLead';
 import request from 'adios/Request';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
-interface TableLeadsProps extends TableProps {
+export interface TableLeadsProps extends TableProps {
+  idCustomer?: number,
   showArchive?: boolean,
 }
 
-interface TableLeadsState extends TableState {
+export interface TableLeadsState extends TableState {
   showArchive: boolean,
 }
 
@@ -43,13 +44,14 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'right wide';
+    params.type = (this.props.idCustomer ? 'inside-parent' : 'right wide');
     return params;
   }
 
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
+      idCustomer: this.props.idCustomer,
       showArchive: this.props.showArchive ? 1 : 0,
     }
   }
@@ -94,6 +96,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormLeadProps;
+    formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormLead {...formProps}/>;
   }

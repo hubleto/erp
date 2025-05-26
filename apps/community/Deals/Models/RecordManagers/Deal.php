@@ -106,6 +106,10 @@ class Deal extends \HubletoMain\Core\RecordManager
       }
     }
 
+    if ($main->urlParamAsInteger("idCustomer") > 0) {
+      $query = $query->where("deals.id_customer", $main->urlParamAsInteger("idCustomer"));
+    }
+
     return $query;
   }
 

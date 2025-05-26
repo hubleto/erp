@@ -141,17 +141,17 @@ class Deal extends \HubletoMain\Core\Models\Model
     unset($description->columns['date_result_update']);
     unset($description->columns['lost_reason']);
 
-    if ($this->main->urlParamAsInteger('idCustomer') > 0) {
-      $description->permissions = [
-        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
-        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
-        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
-        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
-      ];
-      $description->columns = [];
-      $description->inputs = [];
-      $description->ui = [];
-    }
+    // if ($this->main->urlParamAsInteger('idCustomer') > 0) {
+    //   $description->permissions = [
+    //     'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+    //     'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+    //     'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+    //     'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
+    //   ];
+    //   $description->columns = [];
+    //   $description->inputs = [];
+    //   $description->ui = [];
+    // }
 
     return $description;
   }
@@ -171,7 +171,8 @@ class Deal extends \HubletoMain\Core\Models\Model
     ;
 
     $description = parent::describeForm();
-    $description->defaultValues['is_new_customer'] = 0;
+    // $description->defaultValues['is_new_customer'] = 0;
+    $description->defaultValues['id_customer'] = $this->main->urlParamAsInteger('idCustomer');
     $description->defaultValues['deal_result'] = $this::RESULT_PENDING;
     $description->defaultValues['business_type'] = $this::BUSINESS_TYPE_NEW;
     $description->defaultValues['is_archived'] = 0;

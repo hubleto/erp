@@ -93,6 +93,10 @@ class Lead extends \HubletoMain\Core\RecordManager
       }
     }
 
+    if ($main->urlParamAsInteger("idCustomer") > 0) {
+      $query = $query->where("leads.id_customer", $main->urlParamAsInteger("idCustomer"));
+    }
+
     return $query;
   }
 

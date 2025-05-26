@@ -59,6 +59,12 @@ class AppManager
 
   }
 
+  public function onBeforeRender(): void
+  {
+    $apps = $this->getEnabledApps();
+    array_walk($apps, function($app) { $app->onBeforeRender(); });
+  }
+
   public function setCli(\HubletoMain\Cli\Agent\Loader $cli): void
   {
     $this->cli = $cli;

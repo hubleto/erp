@@ -183,4 +183,9 @@ class HubletoMain extends \ADIOS\Core\Loader
     return $dict;
   }
 
+  public function onBeforeRender(): void
+  {
+    $this->apps->onBeforeRender();
+  }
+
 }

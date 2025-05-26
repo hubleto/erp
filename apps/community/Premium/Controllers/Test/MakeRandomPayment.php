@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Premium\Controllers;
+namespace HubletoApp\Community\Premium\Controllers\Test;
 
-class Payment extends \HubletoMain\Core\Controllers\Controller {
+class MakeRandomPayment extends \HubletoMain\Core\Controllers\Controller {
 
   public function prepareView(): void
   {
@@ -16,7 +16,7 @@ class Payment extends \HubletoMain\Core\Controllers\Controller {
     $this->viewParams['amount'] = $amount;
     $this->hubletoApp->recalculateCredit();
 
-    $this->setView('@HubletoApp:Community:Premium/Payment.twig');
+    $this->setView('@HubletoApp:Community:Premium/Test/MakeRandomPayment.twig');
   }
 
 }

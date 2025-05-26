@@ -20,12 +20,26 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^premium\/?$/' => Controllers\Premium::class,
-      '/^premium\/payment\/?$/' => Controllers\Payment::class,
+      '/^premium\/log\/?$/' => Controllers\Log::class,
+      '/^premium\/test\/make-random-payment\/?$/' => Controllers\Test\MakeRandomPayment::class,
+      '/^premium\/test\/clear-credit\/?$/' => Controllers\Test\ClearCredit::class,
       '/^premium\/upgrade\/?$/' => Controllers\Upgrade::class,
+      '/^premium\/make-payment\/?$/' => Controllers\MakePayment::class,
     ]);
 
-    $premiumInfo = $this->getPremiumInfo();
+    $this->updatePremiumInfo();
 
+  }
+
+  public function onBeforeRender(): void
+  {
+    if ($this->main->isPremium && $this->main->route != 'premium/make-payment' && $this->main->route != 'premium/test/make-random-payment') {
+      $currentCredit = $this->getCurrentCredit();
+      $freeTrialInfo = $this->getFreeTrialInfo();
+      if (!$freeTrialInfo['isTrialPeriod'] && $currentCredit <= 0) {
+        $this->main->router->redirectTo('premium/make-payment');
+      }
+    }
   }
 
   public function installTables(int $round): void
@@ -55,28 +69,42 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function dangerouslyInjectDesktopHtmlContent(string $where): string
+  public function getFreeTrialInfo(): array
   {
     $daysOfFreeTrial = 0;
-    $shouldHavePremium = false;
+    $isTrialPeriod = false;
 
-    if (!$this->main->isPremium) {
-      $mLog = new Models\Log($this->main);
-      $shouldHavePremiumFrom = $mLog->record
-        ->where('premium_expected', true)
-        ->first()
-        ?->toArray()
-      ;
+    $mLog = new Models\Log($this->main);
+    $shouldHavePremiumFrom = $mLog->record
+      ->where('premium_expected', true)
+      ->first()
+      ?->toArray()
+    ;
 
-      if ($shouldHavePremiumFrom !== null) {
+    if ($shouldHavePremiumFrom !== null) {
+      $mPayment = new Models\Payment($this->main);
+      $alreadyMadePayment = $mPayment->record->count() > 0;
+      if (!$alreadyMadePayment) {
         $date = $shouldHavePremiumFrom['date'];
-        $shouldHavePremium = true;
         $daysOfFreeTrial = ceil((time() - strtotime($date))/3600/24);
+        $isTrialPeriod = ($daysOfFreeTrial <= 30);
       }
     }
 
+    return [
+      'isTrialPeriod' => $isTrialPeriod,
+      'daysOfFreeTrial' => $daysOfFreeTrial,
+    ];
+  }
+
+  public function dangerouslyInjectDesktopHtmlContent(string $where): string
+  {
+    $freeTrialInfo = $this->getFreeTrialInfo();
+    $isTrialPeriod = $freeTrialInfo['isTrialPeriod'];
+    $daysOfFreeTrial = $freeTrialInfo['daysOfFreeTrial'];
+
     if ($where == 'beforeSidebar') {
-      if ($shouldHavePremium && !$this->main->isPremium) {
+      if ($isTrialPeriod) {
         return '
           <a
             class="badge badge-info text-center no-underline items-center flex justify-around"
@@ -90,31 +118,31 @@ class Loader extends \HubletoMain\Core\App
     }
 
     if ($where == 'footer') {
-      if ($shouldHavePremium && !$this->main->isPremium) {
-        if ($daysOfFreeTrial < 20) {
+      if ($isTrialPeriod) {
+        if ($daysOfFreeTrial <= 20) {
           $freeTrialMessageHtml = '
-            <a class="btn btn-info btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium?freeTrialMessage=1">
+            <a class="btn btn-info btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
               <span class="text">Free trial activated for ' . $daysOfFreeTrial . ' days. Configure your payment method.</span>
             </a>
           ';
-        } else if ($daysOfFreeTrial < 25) {
+        } else if ($daysOfFreeTrial <= 25) {
           $freeTrialMessageHtml = '
-            <a class="btn btn-warning btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium?freeTrialMessage=2">
+            <a class="btn btn-warning btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
               <span class="text">Free trial expires in ' . (30 - $daysOfFreeTrial) . ' days. Configure your payment method.</span>
             </a>
           ';
-        } else if ($daysOfFreeTrial < 30) {
+        } else if ($daysOfFreeTrial <= 30) {
           $freeTrialMessageHtml = '
-            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium?freeTrialMessage=3">
+            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
               <span class="text">Free trial expires in ' . (30 - $daysOfFreeTrial) . ' days. Configure your payment method.</span>
             </div>
           ';
         } else {
           $freeTrialMessageHtml = '
-            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium?freeTrialMessage=4">
+            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
               <span class="text">Free trial expired. Configure your payment method.</span>
             </a>
@@ -132,29 +160,50 @@ class Loader extends \HubletoMain\Core\App
     return '';
   }
 
-  public function generateDemoData(): void
-  {
-    $mPayment = new Models\Payment($this->main);
-    $mCredit = new Models\Credit($this->main);
+  // public function generateDemoData(): void
+  // {
+  //   $mPayment = new Models\Payment($this->main);
+  //   $mCredit = new Models\Credit($this->main);
 
-    for ($i = 1; $i <= 9; $i++) {
-      $mPayment->record->recordCreate([
-        'datetime_charged' => date('Y-m-d ' . rand(13, 16) . ':' . rand(10, 50) . ':' . rand(25, 45), strtotime('-' . rand(3, 30) . ' days')),
-        'amount' => rand(-100, 100) / rand(3, 7),
-      ]);
-    }
+  //   for ($i = 1; $i <= 9; $i++) {
+  //     $mPayment->record->recordCreate([
+  //       'datetime_charged' => date('Y-m-d ' . rand(13, 16) . ':' . rand(10, 50) . ':' . rand(25, 45), strtotime('-' . rand(3, 30) . ' days')),
+  //       'amount' => rand(-100, 100) / rand(3, 7),
+  //     ]);
+  //   }
 
-    $mCredit->record->recordCreate([ 'datetime_recalculated' => date('Y-m-d H:i:s', strtotime('-5 days')), 'credit' => 10.5 ]);
+  //   $mCredit->record->recordCreate([ 'datetime_recalculated' => date('Y-m-d H:i:s', strtotime('-5 days')), 'credit' => 10.5 ]);
 
-  }
+  // }
 
   public function getPremiumInfo(): array
   {
     $mLog = new \HubletoApp\Community\Premium\Models\Log($this->main);
-    $premiumInfo = $mLog->record->orderBy('id', 'desc')->first()?->toArray();
+
+    $premiumInfo = $mLog->record
+      ->selectRaw('
+        max(ifnull(active_users, 0)) as max_active_users,
+        max(ifnull(paid_apps, 0)) as max_paid_apps
+      ')
+      ->whereMonth('date', date('m'))
+      ->whereYear('date', date('Y'))
+      ->first()
+      ?->toArray()
+    ;
+
     if (!is_array($premiumInfo)) {
       $this->updatePremiumInfo();
-      $premiumInfo = $mLog->record->orderBy('id', 'desc')->first()?->toArray();
+
+      $premiumInfo = $mLog->record
+        ->selectRaw('
+          max(ifnull(active_users, 0)) as max_active_users,
+          max(ifnull(paid_apps, 0)) as max_paid_apps
+        ')
+        ->whereMonth('date', date('m'))
+        ->whereYear('date', date('Y'))
+        ->first()
+        ?->toArray()
+      ;
     }
 
     return $premiumInfo;
@@ -163,7 +212,7 @@ class Loader extends \HubletoMain\Core\App
   public function shouldHavePremium(): bool
   {
     $premiumInfo = $this->getPremiumInfo();
-    return $premiumInfo['active_users'] > 1 || $premiumInfo['paid_apps'] > 1;
+    return $premiumInfo['max_active_users'] > 1 || $premiumInfo['max_paid_apps'] > 1;
   }
 
   public function updatePremiumInfo() {
@@ -214,7 +263,6 @@ class Loader extends \HubletoMain\Core\App
     $lastCreditData = $mCredit->record->orderBy('id', 'desc')->first()?->toArray();
     $lastCreditDatetime = (string) ($lastCreditData['datetime_recalculated'] ?? '');
     $currentCredit = (float) ($lastCreditData['credit'] ?? 0);
-// var_dump($currentCredit);
 
     $payments = $mPayment->record;
     if (!empty($lastCreditDatetime)) $payments = $payments->whereRaw('datetime_charged > "' . date('Y-m-d H:i:s', strtotime($lastCreditDatetime)) . '"');
@@ -223,14 +271,17 @@ class Loader extends \HubletoMain\Core\App
       $currentCredit += (float) ($payment['amount'] ?? 0);
     }
 
-//     var_dump($lastCreditDatetime);
-// var_dump($payments->get()?->toArray());
-// var_dump($currentCredit);
-// exit;
-
     $mCredit->record->recordCreate(['datetime_recalculated' => date('Y-m-d H:i:s'), 'credit' => $currentCredit]);
 
     return (float) $currentCredit;
+  }
+
+  public function getCurrentCredit(): float
+  {
+    $mCredit = new Models\Credit($this->main);
+    $tmp = $mCredit->record->orderBy('id', 'desc')->first()?->toArray();
+
+    return (float) ($tmp['credit'] ?? 0);
   }
 
 }

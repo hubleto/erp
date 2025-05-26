@@ -85,6 +85,10 @@ class App {
     $this->main->addTwigViewNamespace($this->rootFolder . '/Views', $this->viewNamespace);
   }
 
+  public function onBeforeRender(): void
+  {
+  }
+
   public function hook(string $hook): void
   {
   }

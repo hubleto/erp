@@ -5,15 +5,20 @@
   <div>
     {% if viewParams.main.isPremium %}
       <div class="badge badge-success text-2xl p-4 block">You are already upgraded to Premium</div>
+      <div class="badge block mt-2">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
       <div class="block badge badge-info text-2xl p-4 mt-2">
         <div>
           Your current credit is:
           {{ viewParams.main.locale.formatCurrency(viewParams.currentCredit, '€') }}
         </div>
         <div class="mt-2">
-          <a href="premium/payment" class="btn btn-large btn-primary">
+          <a href="premium/test/make-random-payment" class="btn btn-large btn-primary">
             <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">{{ translate('Make payment') }}</span>
+            <span class="text">TEST: Make random payment</span>
+          </a>
+          <a href="premium/test/clear-credit" class="btn btn-large btn-primary">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">TEST: Clear credit</span>
           </a>
         </div>
       </div>
@@ -32,6 +37,7 @@
       </div>
     {% else %}
       <div class="badge badge-warning text-2xl p-4 block">You are using free personal account.</div>
+      <div class="badge block mt-2">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
       <div class="card mt-2">
         <div class="card-body">
           Your account will be automatically upgraded to premium when you:
@@ -66,27 +72,34 @@
   </div>
 
   <div>
-    <div class="card mt-2">
+    <div class="card">
       <div class="card-header">Usage info</div>
       <div class="card-body">
         <table class="table-default dense">
           <thead>
             <tr>
               <th>Month</th>
-              <th>Active users</th>
-              <th>Paid apps</th>
+              <th>Max active users</th>
+              <th>Max paid apps</th>
+              <th>Charged for premium</th>
             </tr>
           </thead>
           <tbody>
             {% for log in viewParams.log %}
               <tr>
-                <td>{{ log.date }}</td>
-                <td>{{ log.active_users }}</td>
-                <td>{{ log.paid_apps }}</td>
+                <td>{{ log.year }}-{{ log.month }}</td>
+                <td>{{ log.max_active_users }}</td>
+                <td>{{ log.max_paid_apps }}</td>
+                <td>{% if log.max_active_users > 1 or log.max_paid_apps > 1 %} yes {% else %} no {% endif %}</td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
+        <div class="mt-2">
+          <a class="btn btn-transparent" href="premium/log">
+            <span class="text">Show details</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

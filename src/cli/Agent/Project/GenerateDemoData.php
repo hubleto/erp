@@ -32,9 +32,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $idUserSalesManager = $mUser->record->recordCreate([
       "first_name" => "Sales",
       "last_name" => "Manager",
-      "email" => "test@user.sk",
+      "email" => "test@example.com",
       "id_default_company" => $idCompany,
-      "is_active" => true,
+      "is_active" => false,
       "login" => "sales.manager",
       "password" => password_hash("sales.manager", PASSWORD_DEFAULT),
     ])['id'];

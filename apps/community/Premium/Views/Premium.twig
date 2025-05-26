@@ -1,0 +1,93 @@
+
+<h1 class="app-main-title">Premium</h1>
+
+<div class="grid grid-cols-2 gap-2 mt-2">
+  <div>
+    {% if viewParams.main.isPremium %}
+      <div class="badge badge-success text-2xl p-4 block">You are already upgraded to Premium</div>
+      <div class="block badge badge-info text-2xl p-4 mt-2">
+        <div>
+          Your current credit is:
+          {{ viewParams.main.locale.formatCurrency(viewParams.currentCredit, '€') }}
+        </div>
+        <div class="mt-2">
+          <a href="premium/payment" class="btn btn-large btn-primary">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">{{ translate('Make payment') }}</span>
+          </a>
+        </div>
+      </div>
+      <div class="card mt-2">
+        <div class="card-header">
+          Your Premium benefits
+        </div>
+        <div class="card-body">
+          <ul>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited storage</li>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features</li>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
+          </ul>
+        </div>
+      </div>
+    {% else %}
+      <div class="badge badge-warning text-2xl p-4 block">You are using free personal account.</div>
+      <div class="card mt-2">
+        <div class="card-body">
+          Your account will be automatically upgraded to premium when you:
+          <ul>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> add new users or activate existing</li>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> install or enable premium apps</li>
+          </ul>
+          <a href="{{ config.accountUrl }}/settings" class="btn btn-transparent">
+            <span class="icon"><i class="fas fa-users"></i></span>
+            <span class="text">Manage users</span>
+          </a>
+          <a href="{{ config.accountUrl }}/settings" class="btn btn-transparent">
+            <span class="icon"><i class="fas fa-puzzle-piece"></i></span>
+            <span class="text">Manage apps</span>
+          </a>
+        </div>
+      </div>
+      <div class="card mt-2">
+        <div class="card-header">
+          Upgrade to Premium and you'll get
+        </div>
+        <div class="card-body">
+          <ul>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited storage</li>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features </li>
+            <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <div>
+    <div class="card mt-2">
+      <div class="card-header">Usage info</div>
+      <div class="card-body">
+        <table class="table-default dense">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Active users</th>
+              <th>Paid apps</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for log in viewParams.log %}
+              <tr>
+                <td>{{ log.date }}</td>
+                <td>{{ log.active_users }}</td>
+                <td>{{ log.paid_apps }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

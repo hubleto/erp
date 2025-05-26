@@ -8,24 +8,17 @@ class Premium extends \HubletoMain\Core\Controllers\Controller {
   {
     parent::prepareView();
 
-    if ($this->main->urlParamAsString('simulate') == 'up') {
-      file_put_contents($this->main->config->getAsString('accountDir') . '/pro', '1');
-      $this->main->router->redirectTo('premium');
-    }
-
-    if ($this->main->urlParamAsString('simulate') == 'down') {
-      @unlink($this->main->config->getAsString('accountDir') . '/pro');
-      $this->main->router->redirectTo('premium');
-    }
+    $this->hubletoApp->updatePremiumInfo();
 
     $currentCredit = $this->hubletoApp->recalculateCredit();
     $this->viewParams['currentCredit'] = $currentCredit;
 
-    if ($this->main->isPremium) {
-      $this->setView('@HubletoApp:Community:Premium/PremiumActivated.twig');
-    } else {
-      $this->setView('@HubletoApp:Community:Premium/Upgrade.twig');
-    }
+    $this->viewParams['usageInfo'] = $this->hubletoApp->getPremiumInfo();
+
+    $mLog = new \HubletoApp\Community\Premium\Models\Log($this->main);
+    $this->viewParams['log'] = $mLog->record->orderBy('date', 'desc')->get()->toArray();
+
+    $this->setView('@HubletoApp:Community:Premium/Premium.twig');
   }
 
 }

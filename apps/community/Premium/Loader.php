@@ -16,72 +16,15 @@ class Loader extends \HubletoMain\Core\App
   {
     parent::init();
 
-    $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
-    $activeUsersCount = $mUser->record->where('is_active', true)->count();
-
-    if ($activeUsersCount > 1) {
-      $this->main->isPremium = true;
-    }
+    $this->main->isPremium = $this->shouldHavePremium();
 
     $this->main->router->httpGet([
       '/^premium\/?$/' => Controllers\Premium::class,
       '/^premium\/payment\/?$/' => Controllers\Payment::class,
       '/^premium\/upgrade\/?$/' => Controllers\Upgrade::class,
-      '/^premium\/you-are-upgraded\/?$/' => Controllers\PremiumActivated::class,
     ]);
 
-    $lastCheckDate = $this->configAsString('lastCheckDate');
-
-    if ($lastCheckDate != date('Y-m-d')) {
-      $month = (int) date('m');
-      $year = (int) date('Y');
-
-      $mLog = new Models\Log($this->main);
-      $mPayment = new Models\Payment($this->main);
-      $mCredit = new Models\Credit($this->main);
-
-      $thisMonthLog = $mLog->record
-        ->selectRaw('
-          ifnull(max(active_users), 0) as active_users,
-          ifnull(max(paid_apps), 0) as paid_apps
-        ')
-        ->whereYear('date', $year)
-        ->whereMonth('date', $month)
-        ->first()
-        ?->toArray()
-      ;
-
-      $thisMonthActiveUsers = (int) $thisMonthLog['active_users'];
-      $thisMonthPaidApps = (int) $thisMonthLog['paid_apps'];
-
-      // count enabled non-community apps
-      $paidApps = 0;
-      foreach ($this->main->apps->getEnabledApps() as $app) {
-        if ($app->manifest['appType'] != \HubletoMain\Core\App::APP_TYPE_COMMUNITY) {
-          $paidApps++;
-        }
-      }
-
-      // count active users
-      $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
-      $activeUsers = $mUser->record->where('is_active', 1)->count();
-
-      if ($activeUsers > $thisMonthActiveUsers || $paidApps > $thisMonthPaidApps) {
-        $mLog->record->recordCreate([
-          'date' => date('Y-m-d'),
-          'active_users' => $activeUsers,
-          'paid_apps' => $paidApps,
-          'premium_expected' => ($activeUsers > 1 || $paidApps > 0),
-        ]);
-      }
-
-      // save current status
-      $this->saveConfig('lastCheckDate', date('Y-m-d'));
-      $this->setConfigAsString('lastCheckDate', date('Y-m-d'));
-
-      // calculate credit
-      $this->recalculateCredit();
-    }
+    $premiumInfo = $this->getPremiumInfo();
 
   }
 
@@ -101,10 +44,8 @@ class Loader extends \HubletoMain\Core\App
 
       "HubletoApp/Community/Premium/Controllers/Premium",
       "HubletoApp/Community/Premium/Controllers/Upgrade",
-      "HubletoApp/Community/Premium/Controllers/PremiumActivated",
 
       "HubletoApp/Community/Premium/Premium",
-      "HubletoApp/Community/Premium/PremiumActivated",
     ];
 
     foreach ($permissions as $permission) {
@@ -205,6 +146,64 @@ class Loader extends \HubletoMain\Core\App
 
     $mCredit->record->recordCreate([ 'datetime_recalculated' => date('Y-m-d H:i:s', strtotime('-5 days')), 'credit' => 10.5 ]);
 
+  }
+
+  public function getPremiumInfo(): array
+  {
+    $mLog = new \HubletoApp\Community\Premium\Models\Log($this->main);
+    $premiumInfo = $mLog->record->orderBy('id', 'desc')->first()?->toArray();
+    if (!is_array($premiumInfo)) {
+      $this->updatePremiumInfo();
+      $premiumInfo = $mLog->record->orderBy('id', 'desc')->first()?->toArray();
+    }
+
+    return $premiumInfo;
+  }
+
+  public function shouldHavePremium(): bool
+  {
+    $premiumInfo = $this->getPremiumInfo();
+    return $premiumInfo['active_users'] > 1 || $premiumInfo['paid_apps'] > 1;
+  }
+
+  public function updatePremiumInfo() {
+    $month = (int) date('m');
+    $year = (int) date('Y');
+
+    $mLog = new Models\Log($this->main);
+    $mPayment = new Models\Payment($this->main);
+    $mCredit = new Models\Credit($this->main);
+
+    $lastLog = $mLog->record
+      ->orderBy('date', 'desc')
+      ->first()
+      ?->toArray()
+    ;
+
+    $lastKnownActiveUsers = (int) ($lastLog['active_users'] ?? 0);
+    $lastKnownPaidApps = (int) ($lastLog['paid_apps'] ?? 0);
+
+    // count enabled non-community apps
+    $paidApps = 0;
+    foreach ($this->main->apps->getEnabledApps() as $app) {
+      if ($app->manifest['appType'] != \HubletoMain\Core\App::APP_TYPE_COMMUNITY) {
+        $paidApps++;
+      }
+    }
+
+    // count active users
+    $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+    $activeUsers = $mUser->record->where('is_active', 1)->count();
+
+    // log change in number of users or paid apps
+    if ($activeUsers != $lastKnownActiveUsers || $paidApps != $lastKnownPaidApps) {
+      $mLog->record->recordCreate([
+        'date' => date('Y-m-d'),
+        'active_users' => $activeUsers,
+        'paid_apps' => $paidApps,
+        'premium_expected' => ($activeUsers > 1 || $paidApps > 0),
+      ]);
+    }
   }
 
   public function recalculateCredit(): float

@@ -11,7 +11,7 @@ class ClearCredit extends \HubletoMain\Core\Controllers\Controller {
     $currentCredit = $this->hubletoApp->getCurrentCredit();
 
     $mPayment = new \HubletoApp\Community\Premium\Models\Payment($this->main);
-    $mPayment->record->recordCreate(['datetime_charged' => date('Y-m-d H:i:s'), 'amount' => -$currentCredit]);
+    $mPayment->record->recordCreate(['datetime_charged' => date('Y-m-d H:i:s'), 'amount' => -$currentCredit - 1]);
 
     $this->hubletoApp->recalculateCredit();
 

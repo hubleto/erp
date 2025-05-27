@@ -1,33 +1,6 @@
 # Hubleto CHANGELOG
 
-## Release v0.11 (not released yet)
-
-  * `app.hasCustomSettings` property
-  * new `Events for today` board
-  * customizable calendar colors for Customers, Deals and Leads
-  * new file browser in the documents app
-  * column search in tables
-  * improved forms for deals and leads
-  * various bugfixes and other improvements
-  * added some translations
-  * added probability to the Deal form and Pipeline view and added weighted profit
-  * massive rebranding and UI updates
-  * new sidebar configuration feature in settings panel
-  * improved default pipeline
-
-## Release v0.10
-
-  * new app launcher
-  * many new features to community apps
-  * new CLI commands `php hubleto create controller` and `php hubleto create view`
-  * added dark theme
-  * added context-based user guide, check https://help.hubleto.com
-  * improved report manager
-  * added context help for some apps (Customers, Leads and Deals)
-  * many bugfixes and performance improvements
-  * new `DashboardManager` in the Community/Desktop app
-  * shortcut `$this->main->apps->community($appName)` to get instance of community app
-  * added app-related settings
+For releases v0.10 and later, check release notes at https://github.com/hubleto/main/releases.
 
 ## Release v0.9
 

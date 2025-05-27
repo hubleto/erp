@@ -26,6 +26,8 @@ class Premium extends \HubletoMain\Core\Controllers\Controller {
       ->get()->toArray()
     ;
 
+    $this->viewParams['freeTrialInfo'] = $this->hubletoApp->getFreeTrialInfo();
+
     $this->setView('@HubletoApp:Community:Premium/Premium.twig');
   }
 

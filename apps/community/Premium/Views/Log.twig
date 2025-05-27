@@ -1,4 +1,21 @@
 
-<h1 class="app-main-title">Premium usage log</h1>
+<h1 class="app-main-title">Premium > Usage log</h1>
 
-<app-table model="HubletoApp/Community/Premium/Models/Log"></app-table>
+<table class="table-default dense">
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Max active users</th>
+      <th>Max paid apps</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for log in viewParams.log %}
+      <tr>
+        <td>{{ log.date }}</td>
+        <td>{{ log.active_users }}</td>
+        <td>{{ log.paid_apps }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

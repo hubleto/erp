@@ -4,23 +4,52 @@
 <div class="grid grid-cols-2 gap-2 mt-2">
   <div>
     {% if viewParams.main.isPremium %}
-      <div class="badge badge-success text-2xl p-4 block">You are already upgraded to Premium</div>
-      <div class="badge block mt-2">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
-      <div class="block badge badge-info text-2xl p-4 mt-2">
-        <div>
-          Your current credit is:
-          {{ viewParams.main.locale.formatCurrency(viewParams.currentCredit, '€') }}
+      <div class="badge badge-success text-center text-2xl p-4 block">You are already upgraded to Premium</div>
+      <div class="badge badge-success text-center block">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
+      {% if viewParams.freeTrialInfo.isTrialPeriod %}
+        <div class="badge badge-info block text-center text-2xl p-4 mt-2">
+          Free trial expires in <b>{{ viewParams.freeTrialInfo.trialPeriodExpiresIn }} days</b>.<br/>
+          Make a payment or configure recurring payments.
         </div>
-        <div class="mt-2">
-          <a href="premium/test/make-random-payment" class="btn btn-large btn-primary">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">TEST: Make random payment</span>
-          </a>
-          <a href="premium/test/clear-credit" class="btn btn-large btn-primary">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">TEST: Clear credit</span>
-          </a>
-        </div>
+      {% endif %}
+      <div class="block badge text-center {% if viewParams.currentCredit <= 0 %} badge-danger {% else %} badge-success {% endif %} text-2xl p-4 mt-2 ">
+        Your current credit is<br/>
+        <br/>
+        <b style="font-size:3em">{{ viewParams.main.locale.formatCurrency(viewParams.currentCredit, '€') }}</b>
+      </div>
+      {% if viewParams.currentCredit <= 0 %}
+        {% set creditExhaustedOn = viewParams.app.configAsString('creditExhaustedOn') %}
+        {% if creditExhaustedOn != '' %}
+          <div class="badge badge-danger block text-center">
+            Credit was exchausted on {{ creditExhaustedOn }}.
+          </div>
+        {% endif %}
+      {% endif %}
+      <div class="mt-2 list">
+        <a href="premium/payments" class="btn btn-transparent btn-bold btn-list-item">
+          <span class="icon"><i class="fas fa-euro"></i></span>
+          <span class="text">Make a single payment</span>
+        </a>
+        <a href="premium/payments" class="btn btn-transparent btn-bold btn-list-item">
+          <span class="icon"><i class="fas fa-euro"></i></span>
+          <span class="text">Configure recurring payments</span>
+        </a>
+        <a href="premium/payments" class="btn btn-transparent btn-list-item">
+          <span class="icon"><i class="fas fa-euro"></i></span>
+          <span class="text">Show payments</span>
+        </a>
+        <a href="settings" class="btn btn-transparent btn-list-item">
+          <span class="icon"><i class="fas fa-cog"></i></span>
+          <span class="text">Manage users and apps</span>
+        </a>
+        <a href="premium/test/make-random-payment" class="btn btn-transparent btn-list-item">
+          <span class="icon"><i class="fas fa-euro"></i></span>
+          <span class="text">TEST: Simulate random payment</span>
+        </a>
+        <a href="premium/test/clear-credit" class="btn btn-transparent btn-list-item">
+          <span class="icon"><i class="fas fa-euro"></i></span>
+          <span class="text">TEST: Clear credit</span>
+        </a>
       </div>
       <div class="card mt-2">
         <div class="card-header">
@@ -36,8 +65,8 @@
         </div>
       </div>
     {% else %}
-      <div class="badge badge-warning text-2xl p-4 block">You are using free personal account.</div>
-      <div class="badge block mt-2">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
+      <div class="badge badge-warning text-2xl p-4 block text-center">You are using free personal account.</div>
+      <div class="badge badge-warning block text-center">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
       <div class="card mt-2">
         <div class="card-body">
           Your account will be automatically upgraded to premium when you:

@@ -33,11 +33,11 @@ class Loader extends \HubletoMain\Core\App
 
   public function onBeforeRender(): void
   {
-    if ($this->main->isPremium && $this->main->route != 'premium/make-payment' && $this->main->route != 'premium/test/make-random-payment') {
+    if ($this->main->isPremium && !str_starts_with($this->main->route, 'premium')) {
       $currentCredit = $this->getCurrentCredit();
       $freeTrialInfo = $this->getFreeTrialInfo();
       if (!$freeTrialInfo['isTrialPeriod'] && $currentCredit <= 0) {
-        $this->main->router->redirectTo('premium/make-payment');
+        $this->main->router->redirectTo('premium');
       }
     }
   }
@@ -73,6 +73,7 @@ class Loader extends \HubletoMain\Core\App
   {
     $daysOfFreeTrial = 0;
     $isTrialPeriod = false;
+    $trialPeriodExpiresIn = 0;
 
     $mLog = new Models\Log($this->main);
     $shouldHavePremiumFrom = $mLog->record
@@ -87,13 +88,15 @@ class Loader extends \HubletoMain\Core\App
       if (!$alreadyMadePayment) {
         $date = $shouldHavePremiumFrom['date'];
         $daysOfFreeTrial = ceil((time() - strtotime($date))/3600/24);
-        $isTrialPeriod = ($daysOfFreeTrial <= 30);
+        $trialPeriodExpiresIn = 30 - $daysOfFreeTrial;
+        $isTrialPeriod = $trialPeriodExpiresIn > 0;
       }
     }
 
     return [
       'isTrialPeriod' => $isTrialPeriod,
       'daysOfFreeTrial' => $daysOfFreeTrial,
+      'trialPeriodExpiresIn' => $trialPeriodExpiresIn,
     ];
   }
 
@@ -102,6 +105,7 @@ class Loader extends \HubletoMain\Core\App
     $freeTrialInfo = $this->getFreeTrialInfo();
     $isTrialPeriod = $freeTrialInfo['isTrialPeriod'];
     $daysOfFreeTrial = $freeTrialInfo['daysOfFreeTrial'];
+    $trialPeriodExpiresIn = $freeTrialInfo['trialPeriodExpiresIn'];
 
     if ($where == 'beforeSidebar') {
       if ($isTrialPeriod) {
@@ -123,21 +127,21 @@ class Loader extends \HubletoMain\Core\App
           $freeTrialMessageHtml = '
             <a class="btn btn-info btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
-              <span class="text">Free trial activated for ' . $daysOfFreeTrial . ' days. Configure your payment method.</span>
+              <span class="text">Free trial expires in ' .$trialPeriodExpiresIn . ' days. Configure your payment method.</span>
             </a>
           ';
         } else if ($daysOfFreeTrial <= 25) {
           $freeTrialMessageHtml = '
             <a class="btn btn-warning btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
-              <span class="text">Free trial expires in ' . (30 - $daysOfFreeTrial) . ' days. Configure your payment method.</span>
+              <span class="text">Free trial expires in ' .$trialPeriodExpiresIn . ' days. Configure your payment method.</span>
             </a>
           ';
         } else if ($daysOfFreeTrial <= 30) {
           $freeTrialMessageHtml = '
             <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
-              <span class="text">Free trial expires in ' . (30 - $daysOfFreeTrial) . ' days. Configure your payment method.</span>
+              <span class="text">Free trial expires in ' . $trialPeriodExpiresIn . ' days. Configure your payment method.</span>
             </div>
           ';
         } else {
@@ -269,6 +273,10 @@ class Loader extends \HubletoMain\Core\App
 
     foreach ($payments->get()?->toArray() as $payment) {
       $currentCredit += (float) ($payment['amount'] ?? 0);
+    }
+
+    if ($lastCreditData['credit'] > 0 && $currentCredit <= 0) {
+      $this->saveConfig('creditExhaustedOn', date('Y-m-d'));
     }
 
     $mCredit->record->recordCreate(['datetime_recalculated' => date('Y-m-d H:i:s'), 'credit' => $currentCredit]);

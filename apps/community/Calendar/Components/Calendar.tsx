@@ -43,7 +43,6 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
   }
 
   renderCell = (eventInfo) => {
-    console.log(eventInfo);
     return <>
       {eventInfo.event.extendedProps.icon ? <i className={"ml-2 " + eventInfo.event.extendedProps.icon}></i> : null}
       <b className="ml-2">{eventInfo.timeText}</b>

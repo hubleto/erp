@@ -15,4 +15,9 @@ class DealActivity extends \HubletoMain\Core\RecordManager
     return $this->belongsTo(Deal::class, 'id_deal', 'id');
   }
 
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    return parent::prepareReadQuery($query, $level)->orderBy('date_start');
+  }
+
 }

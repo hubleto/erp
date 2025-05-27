@@ -18,6 +18,7 @@ class Loader extends \HubletoMain\Core\App
       '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^leads\/api\/convert-to-deal\/?$/' => Controllers\Api\ConvertToDeal::class,
       '/^leads\/api\/move-to-archive\/?$/' => Controllers\Api\MoveToArchive::class,
+      '/^leads\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
       '/^settings\/lead-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,

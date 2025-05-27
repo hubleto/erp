@@ -216,8 +216,10 @@ class Lead extends \HubletoMain\Core\Models\Model
     ]);
 
     $newLead = $savedRecord;
-    $newLead["identifier"] = $this->main->apps->community('Leads')->configAsString('leadPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
-    $this->record->recordUpdate($newLead);
+    if ($newLead['identifier'] == '') {
+      $newLead["identifier"] = $this->main->apps->community('Leads')->configAsString('leadPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
+      $this->record->recordUpdate($newLead);
+    }
 
     return parent::onAfterCreate($originalRecord, $savedRecord);
   }

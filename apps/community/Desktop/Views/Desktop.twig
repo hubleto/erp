@@ -219,7 +219,7 @@
     </div></nav>
 
     <aside id="default-sidebar">
-      <nav>
+      <nav style="margin-bottom:1.5em;overflow-y:auto">
         {% for app in viewParams.main.apps.getEnabledApps() %}
           {% if viewParams.main.apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
             {{ app.dangerouslyInjectDesktopHtmlContent('beforeSidebar')|raw }}

@@ -14,4 +14,9 @@ class LeadActivity extends \HubletoMain\Core\RecordManager
   public function LEAD(): BelongsTo {
     return $this->belongsTo(Lead::class, 'id_lead', 'id');
   }
+
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    return parent::prepareReadQuery($query, $level)->orderBy('date_start');
+  }
 }

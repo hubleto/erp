@@ -16,14 +16,17 @@ class Loader extends \HubletoMain\Core\App
   {
     parent::init();
 
-    $this->main->isPremium = $this->shouldHavePremium();
+    $this->main->isPremium = $this->premiumAccountActivated();
 
     $this->main->router->httpGet([
       '/^cloud\/?$/' => Controllers\Dashboard::class,
-      '/^cloud\/accept-legal-documents\/?$/' => Controllers\AcceptLegalDocuments::class,
+      '/^cloud\/api\/accept-legal-documents\/?$/' => Controllers\Api\AcceptLegalDocuments::class,
+      '/^cloud\/api\/activate-premium-account\/?$/' => Controllers\Api\ActivatePremiumAccount::class,
       '/^cloud\/log\/?$/' => Controllers\Log::class,
       '/^cloud\/test\/make-random-payment\/?$/' => Controllers\Test\MakeRandomPayment::class,
       '/^cloud\/test\/clear-credit\/?$/' => Controllers\Test\ClearCredit::class,
+      '/^cloud\/payments\/?$/' => Controllers\Payments::class,
+      '/^cloud\/billing-accounts\/?$/' => Controllers\BillingAccounts::class,
       '/^cloud\/upgrade\/?$/' => Controllers\Upgrade::class,
       '/^cloud\/make-payment\/?$/' => Controllers\MakePayment::class,
     ]);
@@ -50,6 +53,7 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
+      (new Models\BillingAccount($this->main))->dropTableIfExists()->install();
       (new Models\Log($this->main))->dropTableIfExists()->install();
       (new Models\Credit($this->main))->dropTableIfExists()->install();
       (new Models\Payment($this->main))->dropTableIfExists()->install();
@@ -74,10 +78,10 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function getPrice(int $activeUsers, int $paidApps, bool $isTrialPeriod): float
+  public function getPrice(int $activeUsers, int $paidApps): float
   {
     $pricePerUser = 9.9;
-    if (!$isTrialPeriod && ($activeUsers > 1 || $paidApps > 0)) {
+    if ($activeUsers > 1 || $paidApps > 0) {
       return $activeUsers * $pricePerUser;
     } else {
       return 0;
@@ -90,24 +94,17 @@ class Loader extends \HubletoMain\Core\App
     $isTrialPeriod = false;
     $trialPeriodExpiresIn = 0;
 
-    $mLog = new Models\Log($this->main);
-    $shouldHavePremiumFrom = $mLog->record
-      ->where('is_premium_expected', true)
-      ->first()
-      ?->toArray()
-    ;
+    $premiumAccountSince = $this->configAsString('premiumAccountSince');
 
-    if ($shouldHavePremiumFrom !== null) {
+    if (empty($premiumAccountSince)) {
+    } else {
       $mPayment = new Models\Payment($this->main);
       $alreadyMadePayment = $mPayment->record->count() > 0;
       if (!$alreadyMadePayment) {
-        $date = $shouldHavePremiumFrom['date'];
-        $daysOfFreeTrial = ceil((time() - strtotime($date))/3600/24);
+        $daysOfFreeTrial = ceil((time() - strtotime($premiumAccountSince))/3600/24);
         $trialPeriodExpiresIn = 30 - $daysOfFreeTrial;
         $isTrialPeriod = $trialPeriodExpiresIn > 0;
       }
-    } else {
-      $isTrialPeriod = $this->main->isPremium;
     }
 
     return [
@@ -205,9 +202,9 @@ class Loader extends \HubletoMain\Core\App
     $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
 
     $premiumInfo = $mLog->record
-      ->whereMonth('date', $month)
-      ->whereYear('date', $year)
-      ->orderBy('price', 'desc')
+      ->whereMonth('log_datetime', $month)
+      ->whereYear('log_datetime', $year)
+      ->orderBy('log_datetime', 'desc')
       ->first()
       ?->toArray()
     ;
@@ -216,8 +213,8 @@ class Loader extends \HubletoMain\Core\App
       $this->updatePremiumInfo();
 
       $premiumInfo = $mLog->record
-        ->whereMonth('date', $month)
-        ->whereYear('date', $year)
+        ->whereMonth('log_datetime', $month)
+        ->whereYear('log_datetime', $year)
         ->orderBy('price', 'desc')
         ->first()
         ?->toArray()
@@ -227,10 +224,19 @@ class Loader extends \HubletoMain\Core\App
     return $premiumInfo;
   }
 
-  public function shouldHavePremium(): bool
+  public function premiumAccountActivated(): bool
   {
-    $premiumInfo = $this->getPremiumInfo();
-    return $premiumInfo['active_users'] > 1 || $premiumInfo['paid_apps'] > 0;
+    $activated = !empty($this->configAsString('premiumAccountSince'));
+    if (!$activated) {
+      $premiumInfo = $this->getPremiumInfo();
+      $activated = $premiumInfo['active_users'] > 1 || $premiumInfo['paid_apps'] > 0;
+
+      if ($activated) {
+        $this->saveConfig('premiumAccountSince', date('Y-m-d'));
+      }
+    }
+
+    return $activated;
   }
 
   public function updatePremiumInfo() {
@@ -242,7 +248,7 @@ class Loader extends \HubletoMain\Core\App
     $mCredit = new Models\Credit($this->main);
 
     $lastLog = $mLog->record
-      ->orderBy('date', 'desc')
+      ->orderBy('log_datetime', 'desc')
       ->first()
       ?->toArray()
     ;
@@ -265,13 +271,13 @@ class Loader extends \HubletoMain\Core\App
     // log change in number of users or paid apps
     if ($activeUsers != $lastKnownActiveUsers || $paidApps != $lastKnownPaidApps) {
       $freeTrialInfo = $this->getFreeTrialInfo();
+      $price = ($freeTrialInfo['isTrialPeriod'] ? 0.1 : $this->getPrice($activeUsers, $paidApps));
       $mLog->record->recordCreate([
-        'date' => date('Y-m-d'),
+        'log_datetime' => date('Y-m-d H:i:s'),
         'active_users' => $activeUsers,
         'paid_apps' => $paidApps,
         'is_premium_expected' => ($activeUsers > 1 || $paidApps > 0),
-        'is_trial_period' => $freeTrialInfo['isTrialPeriod'],
-        'price' => $this->getPrice($activeUsers, $paidApps, $freeTrialInfo['isTrialPeriod']),
+        'price' => $price,
       ]);
     }
   }

@@ -35,6 +35,7 @@
         globalThis.main.startConsoleErrorLogger();
       {% endif %}
       globalThis.main.idUser = {{ user.id ?? 0 }};
+      globalThis.main.isPremium = {% if viewParams.main.isPremium %} true {% else %} false {% endif %};
       globalThis.main.loadDictionary('{{ user.language ?: "en" }}');
     });
 

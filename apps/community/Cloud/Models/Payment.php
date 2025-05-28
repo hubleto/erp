@@ -4,10 +4,12 @@ namespace HubletoApp\Community\Cloud\Models;
 
 use ADIOS\Core\Db\Column\Decimal;
 use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Lookup;
 
 class Payment extends \HubletoMain\Core\Models\Model
 {
-  public string $table = 'premium_payments';
+  public string $table = 'cloud_payments';
   public string $recordManagerClass = RecordManagers\Payment::class;
 
   public function describeColumns(): array
@@ -15,6 +17,8 @@ class Payment extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'datetime_charged' => (new DateTime($this, $this->translate('Charged')))->setRequired(),
       'amount' => (new Decimal($this, $this->translate('Amount')))->setRequired(),
+      'notes' => (new Varchar($this, $this->translate('Notes'))),
+      'id_billing_account' => (new Lookup($this, $this->translate("Billing account"), BillingAccount::class, 'CASCADE')),
     ]);
   }
 

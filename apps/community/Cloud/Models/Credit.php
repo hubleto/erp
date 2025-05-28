@@ -7,7 +7,7 @@ use ADIOS\Core\Db\Column\DateTime;
 
 class Credit extends \HubletoMain\Core\Models\Model
 {
-  public string $table = 'premium_credit';
+  public string $table = 'cloud_credit';
   public string $recordManagerClass = RecordManagers\Credit::class;
 
   public function describeColumns(): array

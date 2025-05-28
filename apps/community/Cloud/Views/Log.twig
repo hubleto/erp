@@ -4,19 +4,17 @@
 <table class="table-default dense">
   <thead>
     <tr>
-      <th>Month</th>
+      <th>Datetime</th>
       <th>Active users</th>
       <th>Paid apps</th>
-      <th>Is trial period</th>
     </tr>
   </thead>
   <tbody>
     {% for log in viewParams.log %}
       <tr>
-        <td>{{ log.date }}</td>
+        <td>{{ log.log_datetime }}</td>
         <td>{{ log.active_users }}</td>
         <td>{{ log.paid_apps }}</td>
-        <td>{{ log.is_trial_period }}</td>
       </tr>
     {% endfor %}
   </tbody>

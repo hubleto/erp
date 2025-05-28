@@ -9,7 +9,7 @@
     function acceptLegalDocuments() {
       let chk = $('#accept-legal-documents');
       if (chk.is(':checked')) {
-        window.location.href = '{{ config.accountUrl }}/cloud/accept-legal-documents';
+        window.location.href = '{{ config.accountUrl }}/cloud/api/accept-legal-documents';
       } else {
         $('#accept-legal-documents-wrapper').addClass('bg-red-200');
       }
@@ -44,12 +44,15 @@
   <div class="grid grid-cols-2 gap-2 mt-2">
     <div>
       {% if viewParams.main.isPremium %}
-        <div class="badge badge-success text-center text-2xl p-4 block">You are already upgraded to Premium</div>
-        <div class="badge badge-success text-center block">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
+        <div class="badge badge-success text-center text-2xl p-4 block">
+          <i class="fas fa-medal mr-2"></i>
+          You are already upgraded to Premium
+        </div>
+        <div class="badge badge-success text-center block">Your Premium account is activated since <b>{{ viewParams.app.configAsString('premiumAccountSince') }}</b>.</div>
         {% if viewParams.freeTrialInfo.isTrialPeriod %}
           <div class="badge badge-warning block text-center text-2xl p-4 mt-2">
             Free trial expires in <b>{{ viewParams.freeTrialInfo.trialPeriodExpiresIn }} days</b>.<br/>
-            Make a payment or configure recurring payments.
+            Make a single payment or configure recurring payments.
           </div>
         {% endif %}
         <div class="block badge text-center {% if viewParams.currentCredit <= 0 %} badge-danger {% else %} badge-success {% endif %} text-2xl p-4 mt-2 ">
@@ -65,39 +68,12 @@
             </div>
           {% endif %}
         {% endif %}
-        <div class="mt-2 list">
-          <a href="cloud/payments" class="btn btn-transparent btn-bold btn-list-item">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">Make a single payment</span>
-          </a>
-          <a href="cloud/payments" class="btn btn-transparent btn-bold btn-list-item">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">Configure recurring payments</span>
-          </a>
-          <a href="cloud/payments" class="btn btn-transparent btn-list-item">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">Show payments</span>
-          </a>
-          <a href="settings" class="btn btn-transparent btn-list-item">
-            <span class="icon"><i class="fas fa-cog"></i></span>
-            <span class="text">Manage users and apps</span>
-          </a>
-          <a href="cloud/test/make-random-payment" class="btn btn-transparent btn-list-item">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">TEST: Simulate random payment</span>
-          </a>
-          <a href="cloud/test/clear-credit" class="btn btn-transparent btn-list-item">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">TEST: Clear credit</span>
-          </a>
-        </div>
         <div class="card mt-2">
           <div class="card-header">
             Your Premium benefits
           </div>
           <div class="card-body">
             <ul>
-              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited storage</li>
               <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
               <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features</li>
               <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
@@ -105,9 +81,58 @@
           </div>
         </div>
       {% else %}
-        <div class="badge badge-warning text-2xl p-4 block text-center">You are using free personal account.</div>
-        <div class="badge badge-warning block text-center">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
+        <div class="badge badge-warning text-2xl p-4 block text-center">You are using free personal account</div>
         <div class="card mt-2">
+          <div class="card-header">
+            Upgrade to Premium and you'll get
+          </div>
+          <div class="card-body">
+            <ul>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features </li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card mt-2">
+          <div class="card-header">Activate Premium account</div>
+          <div class="card-body text-center">
+            <button
+              class="btn btn-success btn-square p-8 w-full"
+              onclick="$(this).slideUp(); $('#activate-premium-step-2').slideDown();"
+            >
+              <span class="icon" style="font-size:2em"><i class="fas fa-medal"></i></span>
+              <span class="text" style="font-size:2em;max-height:40em">Activate premium account now</span>
+            </button>
+            <div id="activate-premium-step-2" class="text-left" style="display:none">
+              <div>
+                You will be given <span class="badge badge-info text-base">30 days of free
+                trial period</span> to configure payment method.
+                Please type your account's email address below
+                to confirm that you realy want to activate Premium account.<br/>
+                <br/>
+                <input id="activate-premium-confirm-email" class="w-full" placeholder="To confirm, type your email address here." />
+              </div>
+              <div class="mt-2">
+                <button
+                  onclick="
+                    let input = $('#activate-premium-confirm-email');
+                    if (input.val() == '{{ user.email }}') {
+                      window.location.href = '{{ config.accountUrl }}/cloud/api/activate-premium-account';
+                    } else {
+                      input.addClass('bg-red-200');
+                    }
+                  "
+                  class="btn btn-success btn-square p-2 w-full"
+                >
+                  <span class="icon" style="font-size:2em"><i class="fas fa-medal"></i></span>
+                  <span class="text" style="font-size:2em;max-height:40em">Go! Activate premium account now.</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {# <div class="card mt-2">
           <div class="card-body">
             Your account will be automatically upgraded to premium when you:
             <ul>
@@ -123,25 +148,42 @@
               <span class="text">Manage apps</span>
             </a>
           </div>
-        </div>
-        <div class="card mt-2">
-          <div class="card-header">
-            Upgrade to Premium and you'll get
-          </div>
-          <div class="card-body">
-            <ul>
-              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited storage</li>
-              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
-              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features </li>
-              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
-            </ul>
-          </div>
-        </div>
+        </div> #}
       {% endif %}
     </div>
 
     <div>
-      <div class="card">
+        <div class="mt-2 list">
+          <a href="cloud/payments" class="btn btn-transparent btn-bold btn-list-item">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">Make a single payment</span>
+          </a>
+          <a href="cloud/payments" class="btn btn-transparent btn-bold btn-list-item">
+            <span class="icon"><i class="fas fa-credit-card"></i></span>
+            <span class="text">Configure recurring payments</span>
+          </a>
+          <a href="cloud/payments" class="btn btn-transparent btn-list-item">
+            <span class="icon"><i class="fas fa-receipt"></i></span>
+            <span class="text">Show payments</span>
+          </a>
+          <a href="cloud/billing-accounts" class="btn btn-transparent btn-list-item">
+            <span class="icon"><i class="fas fa-coins"></i></span>
+            <span class="text">Manage billing accounts</span>
+          </a>
+          <a href="settings" class="btn btn-transparent btn-list-item">
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="text">Manage users and apps</span>
+          </a>
+          <a href="cloud/test/make-random-payment" class="btn btn-transparent btn-list-item">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">TEST: Simulate random payment</span>
+          </a>
+          <a href="cloud/test/clear-credit" class="btn btn-transparent btn-list-item">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">TEST: Clear credit</span>
+          </a>
+        </div>
+      <div class="card mt-2">
         <div class="card-header">Usage info</div>
         <div class="card-body">
           <table class="table-default dense">
@@ -150,7 +192,6 @@
                 <th>Month</th>
                 <th>Max active users</th>
                 <th>Max paid apps</th>
-                <th>Is trial period</th>
                 <th>Charged for premium</th>
               </tr>
             </thead>
@@ -160,7 +201,6 @@
                   <td>{{ log.year }}-{{ log.month }}</td>
                   <td>{{ log.max_active_users }}</td>
                   <td>{{ log.max_paid_apps }}</td>
-                  <td>{{ log.max_is_trial_period }}</td>
                   <td>{{ log.max_price }} €</td>
                 </tr>
               {% endfor %}

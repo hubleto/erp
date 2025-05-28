@@ -16,15 +16,14 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
     $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
     $this->viewParams['log'] = $mLog->record
       ->selectRaw('
-        month(date) as month,
-        year(date) as year,
+        month(log_datetime) as month,
+        year(log_datetime) as year,
         max(ifnull(active_users, 0)) as max_active_users,
         max(ifnull(paid_apps, 0)) as max_paid_apps,
-        max(ifnull(is_trial_period, 0)) as max_is_trial_period,
         max(ifnull(price, 0)) as max_price
       ')
-      ->orderBy('date', 'desc')
-      ->groupByRaw('concat(year(date), month(date))')
+      ->orderBy('log_datetime', 'desc')
+      ->groupByRaw('concat(year(log_datetime), month(log_datetime))')
       ->get()->toArray()
     ;
 

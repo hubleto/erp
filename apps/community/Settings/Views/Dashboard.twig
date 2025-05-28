@@ -105,10 +105,18 @@
                 </a>
               {% endif %}
             {% else %}
-              <a class="btn btn-primary" href="?installApp={{ appNamespace }}">
-                <span class="icon"><i class="fas fa-add"></i></span>
-                <span class="text">{{ translate('Install') }}</span>
-              </a>
+              {% if app.type == 1 or viewParams.main.isPremium %}
+                <a class="btn btn-primary" href="?installApp={{ appNamespace }}">
+                  <span class="icon"><i class="fas fa-add"></i></span>
+                  <span class="text">{{ translate('Install') }}</span>
+                </a>
+              {% elseif not viewParams.main.isPremium %}
+                <div class="badge badge-warning">You can install Enterprise apps only in Premium account.</div>
+                <a class="btn btn-primary" href="{{ config.accountUrl }}/cloud">
+                  <span class="icon"><i class="fas fa-medal"></i></span>
+                  <span class="text">{{ translate('Activate Premium account') }}</span>
+                </a>
+              {% endif %}
             {% endif %}
             {# <a class="btn btn-red" href="{{ app.url }}">
               <span class="text">{{ translate('Uninstall') }}</span>

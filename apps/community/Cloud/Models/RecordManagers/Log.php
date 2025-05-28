@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Cloud\Models\RecordManagers;
 
 class Log extends \HubletoMain\Core\RecordManager
 {
-  public $table = 'premium_log';
+  public $table = 'cloud_log';
 
   public function recordDelete(int|string $id): int
   {

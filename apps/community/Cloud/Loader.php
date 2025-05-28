@@ -74,6 +74,16 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
+  public function getPrice(int $activeUsers, int $paidApps, bool $isTrialPeriod): float
+  {
+    $pricePerUser = 9.9;
+    if (!$isTrialPeriod && ($activeUsers > 1 || $paidApps > 0)) {
+      return $activeUsers * $pricePerUser;
+    } else {
+      return 0;
+    }
+  }
+
   public function getFreeTrialInfo(): array
   {
     $daysOfFreeTrial = 0;
@@ -82,7 +92,7 @@ class Loader extends \HubletoMain\Core\App
 
     $mLog = new Models\Log($this->main);
     $shouldHavePremiumFrom = $mLog->record
-      ->where('premium_expected', true)
+      ->where('is_premium_expected', true)
       ->first()
       ?->toArray()
     ;
@@ -96,6 +106,8 @@ class Loader extends \HubletoMain\Core\App
         $trialPeriodExpiresIn = 30 - $daysOfFreeTrial;
         $isTrialPeriod = $trialPeriodExpiresIn > 0;
       }
+    } else {
+      $isTrialPeriod = $this->main->isPremium;
     }
 
     return [
@@ -185,17 +197,17 @@ class Loader extends \HubletoMain\Core\App
 
   // }
 
-  public function getPremiumInfo(): array
+  public function getPremiumInfo(int $month = 0, int $year = 0): array
   {
+    if ($month == 0) $month = date('m');
+    if ($year == 0) $year = date('Y');
+
     $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
 
     $premiumInfo = $mLog->record
-      ->selectRaw('
-        max(ifnull(active_users, 0)) as max_active_users,
-        max(ifnull(paid_apps, 0)) as max_paid_apps
-      ')
-      ->whereMonth('date', date('m'))
-      ->whereYear('date', date('Y'))
+      ->whereMonth('date', $month)
+      ->whereYear('date', $year)
+      ->orderBy('price', 'desc')
       ->first()
       ?->toArray()
     ;
@@ -204,12 +216,9 @@ class Loader extends \HubletoMain\Core\App
       $this->updatePremiumInfo();
 
       $premiumInfo = $mLog->record
-        ->selectRaw('
-          max(ifnull(active_users, 0)) as max_active_users,
-          max(ifnull(paid_apps, 0)) as max_paid_apps
-        ')
-        ->whereMonth('date', date('m'))
-        ->whereYear('date', date('Y'))
+        ->whereMonth('date', $month)
+        ->whereYear('date', $year)
+        ->orderBy('price', 'desc')
         ->first()
         ?->toArray()
       ;
@@ -221,7 +230,7 @@ class Loader extends \HubletoMain\Core\App
   public function shouldHavePremium(): bool
   {
     $premiumInfo = $this->getPremiumInfo();
-    return $premiumInfo['max_active_users'] > 1 || $premiumInfo['max_paid_apps'] > 1;
+    return $premiumInfo['active_users'] > 1 || $premiumInfo['paid_apps'] > 0;
   }
 
   public function updatePremiumInfo() {
@@ -255,11 +264,14 @@ class Loader extends \HubletoMain\Core\App
 
     // log change in number of users or paid apps
     if ($activeUsers != $lastKnownActiveUsers || $paidApps != $lastKnownPaidApps) {
+      $freeTrialInfo = $this->getFreeTrialInfo();
       $mLog->record->recordCreate([
         'date' => date('Y-m-d'),
         'active_users' => $activeUsers,
         'paid_apps' => $paidApps,
-        'premium_expected' => ($activeUsers > 1 || $paidApps > 0),
+        'is_premium_expected' => ($activeUsers > 1 || $paidApps > 0),
+        'is_trial_period' => $freeTrialInfo['isTrialPeriod'],
+        'price' => $this->getPrice($activeUsers, $paidApps, $freeTrialInfo['isTrialPeriod']),
       ]);
     }
   }

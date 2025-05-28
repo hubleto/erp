@@ -47,7 +47,7 @@
         <div class="badge badge-success text-center text-2xl p-4 block">You are already upgraded to Premium</div>
         <div class="badge badge-success text-center block">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
         {% if viewParams.freeTrialInfo.isTrialPeriod %}
-          <div class="badge badge-info block text-center text-2xl p-4 mt-2">
+          <div class="badge badge-warning block text-center text-2xl p-4 mt-2">
             Free trial expires in <b>{{ viewParams.freeTrialInfo.trialPeriodExpiresIn }} days</b>.<br/>
             Make a payment or configure recurring payments.
           </div>
@@ -150,6 +150,7 @@
                 <th>Month</th>
                 <th>Max active users</th>
                 <th>Max paid apps</th>
+                <th>Is trial period</th>
                 <th>Charged for premium</th>
               </tr>
             </thead>
@@ -159,7 +160,8 @@
                   <td>{{ log.year }}-{{ log.month }}</td>
                   <td>{{ log.max_active_users }}</td>
                   <td>{{ log.max_paid_apps }}</td>
-                  <td>{% if log.max_active_users > 1 or log.max_paid_apps > 1 %} yes {% else %} no {% endif %}</td>
+                  <td>{{ log.max_is_trial_period }}</td>
+                  <td>{{ log.max_price }} €</td>
                 </tr>
               {% endfor %}
             </tbody>

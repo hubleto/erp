@@ -5,6 +5,7 @@ namespace HubletoApp\Community\Cloud\Models;
 use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\Date;
 use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Decimal;
 
 use HubletoApp\Community\Settings\Models\User;
 
@@ -19,7 +20,9 @@ class Log extends \HubletoMain\Core\Models\Model
       'date' => (new Date($this, $this->translate('Date')))->setRequired(),
       'active_users' => (new Integer($this, $this->translate('Active users')))->setRequired(),
       'paid_apps' => (new Integer($this, $this->translate('Paid apps')))->setRequired(),
-      'premium_expected' => (new Boolean($this, $this->translate('Premium expected')))->setRequired(),
+      'is_premium_expected' => (new Boolean($this, $this->translate('Premium expected')))->setRequired(),
+      'is_trial_period' => (new Boolean($this, $this->translate('Is trial period')))->setRequired(),
+      'price' => (new Decimal($this, $this->translate('Price'))),
     ]);
   }
 

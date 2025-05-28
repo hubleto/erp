@@ -19,7 +19,9 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
         month(date) as month,
         year(date) as year,
         max(ifnull(active_users, 0)) as max_active_users,
-        max(ifnull(paid_apps, 0)) as max_paid_apps
+        max(ifnull(paid_apps, 0)) as max_paid_apps,
+        max(ifnull(is_trial_period, 0)) as max_is_trial_period,
+        max(ifnull(price, 0)) as max_price
       ')
       ->orderBy('date', 'desc')
       ->groupByRaw('concat(year(date), month(date))')

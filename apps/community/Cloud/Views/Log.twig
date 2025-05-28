@@ -5,8 +5,9 @@
   <thead>
     <tr>
       <th>Month</th>
-      <th>Max active users</th>
-      <th>Max paid apps</th>
+      <th>Active users</th>
+      <th>Paid apps</th>
+      <th>Is trial period</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,7 @@
         <td>{{ log.date }}</td>
         <td>{{ log.active_users }}</td>
         <td>{{ log.paid_apps }}</td>
+        <td>{{ log.is_trial_period }}</td>
       </tr>
     {% endfor %}
   </tbody>

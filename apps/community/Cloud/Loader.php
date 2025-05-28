@@ -91,7 +91,7 @@ class Loader extends \HubletoMain\Core\App
   public function getPaymentVariableSymbol() {
     $paymentVariableSymbol = $this->configAsString('paymentVariableSymbol');
     if (empty($accountUid)) {
-      $accountUid = date('y') . str_pad(rand(0, 9999), 4, STR_PAD_LEFT) . str_pad(rand(0, 9999), 4, STR_PAD_LEFT);
+      $accountUid = '3' . date('y') . str_pad(rand(0, 999), 3, STR_PAD_LEFT) . str_pad(rand(0, 9999), 4, STR_PAD_LEFT);
       $this->saveConfig('paymentVariableSymbol', $paymentVariableSymbol);
     }
     return $accountUid;

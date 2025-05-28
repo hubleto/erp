@@ -198,9 +198,8 @@
             <thead>
               <tr>
                 <th>Month</th>
-                <th>Max active users</th>
-                <th>Max paid apps</th>
-                <th>Charged for premium</th>
+                <th>Active users</th>
+                <th>Paid apps</th>
               </tr>
             </thead>
             <tbody>
@@ -209,7 +208,6 @@
                   <td>{{ log.year }}-{{ log.month }}</td>
                   <td>{{ log.max_active_users }}</td>
                   <td>{{ log.max_paid_apps }}</td>
-                  <td>{{ log.max_price }} €</td>
                 </tr>
               {% endfor %}
             </tbody>

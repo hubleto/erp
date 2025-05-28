@@ -9,11 +9,12 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
     parent::prepareView();
 
     $this->hubletoApp->updatePremiumInfo();
-
     $this->hubletoApp->recalculateCredit();
 
     $currentCredit = $this->hubletoApp->getCurrentCredit();
     $this->viewParams['currentCredit'] = $currentCredit;
+
+    $premiumInfo = $this->hubletoApp->getPremiumInfo();
 
     $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
     $this->viewParams['log'] = $mLog->record
@@ -21,8 +22,7 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
         month(log_datetime) as month,
         year(log_datetime) as year,
         max(ifnull(active_users, 0)) as max_active_users,
-        max(ifnull(paid_apps, 0)) as max_paid_apps,
-        max(ifnull(price, 0)) as max_price
+        max(ifnull(paid_apps, 0)) as max_paid_apps
       ')
       ->orderBy('log_datetime', 'desc')
       ->groupByRaw('concat(year(log_datetime), month(log_datetime))')
@@ -30,6 +30,7 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
     ;
 
     $this->viewParams['freeTrialInfo'] = $this->hubletoApp->getFreeTrialInfo();
+    $this->viewParams['priceForThisMonth'] = $this->hubletoApp->getPrice($premiumInfo['activeUsers'], $premiumInfo['paidApps'], 0);
 
     $this->setView('@HubletoApp:Community:Cloud/Dashboard.twig');
   }

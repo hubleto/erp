@@ -26,7 +26,7 @@ class Loader extends \HubletoMain\Core\App
       '/^cloud\/log\/?$/' => Controllers\Log::class,
       '/^cloud\/test\/make-random-payment\/?$/' => Controllers\Test\MakeRandomPayment::class,
       '/^cloud\/test\/clear-credit\/?$/' => Controllers\Test\ClearCredit::class,
-      '/^cloud\/payments\/?$/' => Controllers\Payments::class,
+      '/^cloud\/payments-and-invoices\/?$/' => Controllers\PaymentsAndInvoices::class,
       '/^cloud\/billing-accounts\/?$/' => Controllers\BillingAccounts::class,
       '/^cloud\/upgrade\/?$/' => Controllers\Upgrade::class,
       '/^cloud\/make-payment\/?$/' => Controllers\MakePayment::class,
@@ -58,6 +58,7 @@ class Loader extends \HubletoMain\Core\App
       (new Models\Log($this->main))->dropTableIfExists()->install();
       (new Models\Credit($this->main))->dropTableIfExists()->install();
       (new Models\Payment($this->main))->dropTableIfExists()->install();
+      (new Models\Discount($this->main))->dropTableIfExists()->install();
     }
   }
 
@@ -90,18 +91,19 @@ class Loader extends \HubletoMain\Core\App
 
   public function getPaymentVariableSymbol() {
     $paymentVariableSymbol = $this->configAsString('paymentVariableSymbol');
-    if (empty($accountUid)) {
-      $accountUid = '3' . date('y') . str_pad(rand(0, 999), 3, STR_PAD_LEFT) . str_pad(rand(0, 9999), 4, STR_PAD_LEFT);
+    if (empty($paymentVariableSymbol)) {
+      $paymentVariableSymbol = '3' . date('y') . str_pad(rand(0, 999), 3, STR_PAD_LEFT) . str_pad(rand(0, 9999), 4, STR_PAD_LEFT);
       $this->saveConfig('paymentVariableSymbol', $paymentVariableSymbol);
     }
-    return $accountUid;
+    return $paymentVariableSymbol;
   }
 
-  public function getPrice(int $activeUsers, int $paidApps): float
+  public function getPrice(int $activeUsers, int $paidApps, int $discountPercent): float
   {
     $pricePerUser = 9.9;
     if ($this->premiumAccountActivated()) {
-      return $activeUsers * $pricePerUser;
+      if ($discountPercent > 100) $discountPercent = 0;
+      return $activeUsers * $pricePerUser * (100 - $discountPercent) / 100;
     } else {
       return 0;
     }
@@ -169,22 +171,6 @@ class Loader extends \HubletoMain\Core\App
     return '';
   }
 
-  // public function generateDemoData(): void
-  // {
-  //   $mPayment = new Models\Payment($this->main);
-  //   $mCredit = new Models\Credit($this->main);
-
-  //   for ($i = 1; $i <= 9; $i++) {
-  //     $mPayment->record->recordCreate([
-  //       'datetime_charged' => date('Y-m-d ' . rand(13, 16) . ':' . rand(10, 50) . ':' . rand(25, 45), strtotime('-' . rand(3, 30) . ' days')),
-  //       'amount' => rand(-100, 100) / rand(3, 7),
-  //     ]);
-  //   }
-
-  //   $mCredit->record->recordCreate([ 'datetime_recalculated' => date('Y-m-d H:i:s', strtotime('-5 days')), 'credit' => 10.5 ]);
-
-  // }
-
   public function getPremiumInfo(int $month = 0, int $year = 0): array
   {
     if ($month == 0) $month = date('m');
@@ -202,18 +188,6 @@ class Loader extends \HubletoMain\Core\App
       ->first()
       ?->toArray()
     ;
-
-    // if (!is_array($premiumInfo)) {
-    //   $this->updatePremiumInfo();
-
-    //   $premiumInfo = $mLog->record
-    //     ->whereMonth('log_datetime', $month)
-    //     ->whereYear('log_datetime', $year)
-    //     ->orderBy('price', 'desc')
-    //     ->first()
-    //     ?->toArray()
-    //   ;
-    // }
 
     if (is_array($premiumInfo)) {
       return [
@@ -275,13 +249,11 @@ class Loader extends \HubletoMain\Core\App
     // log change in number of users or paid apps
     if ($activeUsers != $lastKnownActiveUsers || $paidApps != $lastKnownPaidApps) {
       $freeTrialInfo = $this->getFreeTrialInfo();
-      $price = ($freeTrialInfo['isTrialPeriod'] ? 0 : $this->getPrice($activeUsers, $paidApps));
       $mLog->record->recordCreate([
         'log_datetime' => date('Y-m-d H:i:s'),
         'active_users' => $activeUsers,
         'paid_apps' => $paidApps,
         'is_premium_expected' => ($activeUsers > 1 || $paidApps > 0),
-        'price' => $price,
       ]);
     }
   }
@@ -297,7 +269,16 @@ class Loader extends \HubletoMain\Core\App
     $payments = $mPayment->record;
 
     foreach ($payments->get()?->toArray() as $payment) {
-      $currentCredit += (float) ($payment['amount'] ?? 0);
+      $fullAmount = (float) ($payment['full_amount'] ?? 0);
+      $discountedAmount = (float) ($payment['discounted_amount'] ?? 0);
+
+      if ($fullAmount > 0) {
+        // ide o navysenie kreditu, nepouzivam zlavu
+        $currentCredit += $fullAmount;
+      } else {
+        // ide o platbu za pouzitie, pouzivam zlavu
+        $currentCredit += $discountedAmount;
+      }
     }
 
     if (is_array($lastCreditData) && $lastCreditData['credit'] > 0 && $currentCredit <= 0) {

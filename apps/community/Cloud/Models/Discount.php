@@ -3,22 +3,21 @@
 namespace HubletoApp\Community\Cloud\Models;
 
 use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\Varchar;
 use ADIOS\Core\Db\Column\Lookup;
 
-class Payment extends \HubletoMain\Core\Models\Model
+class Discount extends \HubletoMain\Core\Models\Model
 {
-  public string $table = 'cloud_payments';
-  public string $recordManagerClass = RecordManagers\Payment::class;
+  public string $table = 'cloud_discounts';
+  public string $recordManagerClass = RecordManagers\Discount::class;
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'datetime_charged' => (new DateTime($this, $this->translate('Charged')))->setRequired(),
-      'discount_percent' => (new Decimal($this, $this->translate('Discount')))->setUnit('%'),
-      'full_amount' => (new Decimal($this, $this->translate('Full amount')))->setUnit('€')->setDecimals(2),
-      'discounted_amount' => (new Decimal($this, $this->translate('Discounted amount')))->setUnit('€')->setDecimals(2),
+      'year' => (new Integer($this, $this->translate('Year')))->setRequired(),
+      'month' => (new Integer($this, $this->translate('Month')))->setRequired(),
+      'discount_percent' => (new Integer($this, $this->translate('Discount')))->setUnit('%'),
       'notes' => (new Varchar($this, $this->translate('Notes'))),
       'id_billing_account' => (new Lookup($this, $this->translate("Billing account"), BillingAccount::class, 'CASCADE')),
     ]);

@@ -10,12 +10,20 @@ class ChargeCredit extends \HubletoMain\Core\Controllers\Controller {
 
   public function renderJson(): ?array
   {
+    $mDiscount = new \HubletoApp\Community\Cloud\Models\Discount($this->main);
     $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
+
+    $discountThisMonth = $mDiscount->record
+      ->where('month', date('m'))
+      ->where('year', date('Y'))
+      ->first()
+      ?->toArray()
+    ;
 
     $paymentThisMonth = $mPayment->record
       ->whereMonth('datetime_charged', date('m'))
       ->whereYear('datetime_charged', date('Y'))
-      ->where('amount', '<', 0)
+      ->where('full_amount', '<', 0)
       ->first()
       ?->toArray()
     ;
@@ -24,17 +32,36 @@ class ChargeCredit extends \HubletoMain\Core\Controllers\Controller {
 
     $amountThisMonth = 0;
     if (is_array($paymentThisMonth)) {
-      $amountThisMonth = (float) ($paymentThisMonth['amount'] ?? 0);
+      $amountThisMonth = (float) ($paymentThisMonth['full_amount'] ?? 0);
     }
 
-    $price = $this->hubletoApp->getPrice($premiumInfo['activeUsers'], $premiumInfo['paidApps']);
+    $discountPercent = $discountThisMonth['discount_percent'] ?? 0;
 
-    if ($price > $amountThisMonth) {
-      $paymentNotes = $premiumInfo['activeUsers'] . ' active users, ' . $premiumInfo['paidApps'] . ' paid apps';
+    $fullAmount = $this->hubletoApp->getPrice(
+      $premiumInfo['activeUsers'],
+      $premiumInfo['paidApps'],
+      0
+    );
+
+    $discountedAmount = $this->hubletoApp->getPrice(
+      $premiumInfo['activeUsers'],
+      $premiumInfo['paidApps'],
+      $discountPercent
+    );
+
+    if ($fullAmount > $amountThisMonth) {
+      $paymentData = [
+        'datetime_charged' => date('Y-m-d H:i:s'),
+        'full_amount' => -$fullAmount,
+        'discounted_amount' => -$discountedAmount,
+        'discount_percent' => $discountPercent,
+        'notes' => $premiumInfo['activeUsers'] . ' active users, ' . $premiumInfo['paidApps'] . ' paid apps'
+      ];
       if ($paymentThisMonth === null) {
-        $mPayment->record->recordCreate(['datetime_charged' => date('Y-m-d H:i:s'), 'amount' => -$price, 'notes' => $paymentNotes]);
+        $mPayment->record->recordCreate($paymentData);
       } else {
-        $mPayment->record->recordUpdate(['id' => $paymentThisMonth['id'], 'amount' => -$price, 'notes' => $paymentNotes]);
+        $paymentData['id'] = $paymentThisMonth['id'];
+        $mPayment->record->recordUpdate($paymentData);
       }
     }
 

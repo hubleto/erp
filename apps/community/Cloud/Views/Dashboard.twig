@@ -1,6 +1,6 @@
 <h1 class="app-main-title text-center" style="font-size:3em">
   <i class="fas fa-cloud"></i><br/>
-  Hubleto cloud
+  Hubleto Cloud
 </h1>
 
 {% if viewParams.app.configAsString('legalDocumentsAccepted') == '' %}
@@ -170,9 +170,9 @@
         </a>
       </div>
       <div class="mt-2 list">
-        <a href="cloud/payments" class="btn btn-transparent btn-list-item">
+        <a href="cloud/payments-and-invoices" class="btn btn-transparent btn-list-item">
           <span class="icon"><i class="fas fa-receipt"></i></span>
-          <span class="text">Show payments</span>
+          <span class="text">Show payments and download invoices</span>
         </a>
         <a href="cloud/billing-accounts" class="btn btn-transparent btn-list-item">
           <span class="icon"><i class="fas fa-coins"></i></span>
@@ -221,6 +221,10 @@
         <div class="card-body">
           <table class="table-default dense">
             <tr>
+              <td>Price for this month</td>
+              <td><b>{{ viewParams.priceForThisMonth|number_format(2, ",", " ") }} €</b> <sup>(*)</sup></td>
+            </tr>
+            <tr>
               <td>Terms of use and privacy policy accepted</td>
               <td><b>{{ viewParams.app.configAsString('legalDocumentsAccepted') }}</b></td>
             </tr>
@@ -237,6 +241,7 @@
               <td><b>{{ viewParams.app.getPaymentVariableSymbol() }}</b></td>
             </tr>
           </table>
+          <small class="text-gray-500">(*) Price is calculated based on maximum number of active users or paid apps during this month.</small>
         </div>
       </div>
     </div>

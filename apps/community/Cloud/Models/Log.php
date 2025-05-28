@@ -21,7 +21,6 @@ class Log extends \HubletoMain\Core\Models\Model
       'active_users' => (new Integer($this, $this->translate('Active users')))->setRequired(),
       'paid_apps' => (new Integer($this, $this->translate('Paid apps')))->setRequired(),
       'is_premium_expected' => (new Boolean($this, $this->translate('Premium expected')))->setRequired(),
-      'price' => (new Decimal($this, $this->translate('Price'))),
     ]);
   }
 

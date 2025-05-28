@@ -9,7 +9,7 @@ class ActivatePremiumAccount extends \HubletoMain\Core\Controllers\Controller {
   public function renderJson(): ?array
   {
     $this->hubletoApp->saveConfig('premiumAccountSince', date('Y-m-d H:i:s'));
-    $this->main->router->redirectTo('');
+    $this->main->router->redirectTo('cloud');
   }
 
 }

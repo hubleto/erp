@@ -49,7 +49,7 @@
       {% if viewParams.main.isPremium %}
         <div class="badge badge-success text-center text-2xl p-4 block">
           <i class="fas fa-medal mr-2"></i>
-          You are already upgraded to Premium
+          You are upgraded to Premium
         </div>
         <div class="badge badge-success text-center block">
           Your Premium account is activated since <b>{{ viewParams.app.configAsString('premiumAccountSince') }}</b>.
@@ -71,8 +71,8 @@
           {% set creditExhaustedOn = viewParams.app.configAsString('creditExhaustedOn') %}
           {% if creditExhaustedOn != '' %}
             <div class="badge badge-danger block text-center">
-              Credit was exchausted on {{ creditExhaustedOn }}.<br/>
-              Do not want to get blocked? Configure payment with card.
+              Credit was exhausted on {{ creditExhaustedOn }}.<br/>
+              Do not want to get blocked? Configure payment with card or charge enough credit.
             </div>
           {% endif %}
         {% endif %}
@@ -80,12 +80,18 @@
           <div class="card-header">
             Your Premium benefits
           </div>
-          <div class="card-body">
-            <ul>
+          <div class="card-body flex gap-2 w-full">
+            <ul class="grow">
               <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
               <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features</li>
-              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> premium support</li>
             </ul>
+            <div class="grow text-right">
+              <a href="settings" class="btn btn-primary-outline">
+                <span class="icon"><i class="fas fa-cog"></i></span>
+                <span class="text">Add new users or install new apps</span>
+              </a>
+            </div>
           </div>
         </div>
       {% else %}
@@ -98,7 +104,7 @@
             <ul>
               <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
               <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features </li>
-              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> premium support</li>
             </ul>
           </div>
         </div>
@@ -180,10 +186,6 @@
         <a href="cloud/billing-accounts" class="btn btn-transparent btn-list-item">
           <span class="icon"><i class="fas fa-coins"></i></span>
           <span class="text">Manage billing accounts</span>
-        </a>
-        <a href="settings" class="btn btn-transparent btn-list-item">
-          <span class="icon"><i class="fas fa-cog"></i></span>
-          <span class="text">Manage users and apps</span>
         </a>
         <a href="cloud/test/make-random-payment" class="btn btn-transparent btn-list-item">
           <span class="icon"><i class="fas fa-euro"></i></span>

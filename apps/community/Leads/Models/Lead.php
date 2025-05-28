@@ -62,7 +62,7 @@ class Lead extends \HubletoMain\Core\Models\Model
         [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
       ),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
-      'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
+      'shared_folder' => new Varchar($this, "Online document folder"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
         1 => "Advertissment",
@@ -84,7 +84,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       case 'shared_folder':
         $description
           ->setReactComponent('InputHyperlink')
-          ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
+          // ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
       break;
       case 'id_customer':
@@ -216,7 +216,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     ]);
 
     $newLead = $savedRecord;
-    if ($newLead['identifier'] == '') {
+    if (empty($newLead['identifier'])) {
       $newLead["identifier"] = $this->main->apps->community('Leads')->configAsString('leadPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
       $this->record->recordUpdate($newLead);
     }

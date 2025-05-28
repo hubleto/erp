@@ -17,6 +17,6 @@ class LeadActivity extends \HubletoMain\Core\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    return parent::prepareReadQuery($query, $level)->orderBy('date_start');
+    return parent::prepareReadQuery($query, $level)->orderBy('date_start')->orderBy('time_start');
   }
 }

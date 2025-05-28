@@ -79,6 +79,24 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
+  public function getAccountUid() {
+    $accountUid = $this->configAsString('accountUid');
+    if (empty($accountUid)) {
+      $accountUid = \ADIOS\Core\Helper::generateUuidV4();
+      $this->saveConfig('accountUid', $accountUid);
+    }
+    return $accountUid;
+  }
+
+  public function getPaymentVariableSymbol() {
+    $paymentVariableSymbol = $this->configAsString('paymentVariableSymbol');
+    if (empty($accountUid)) {
+      $accountUid = date('y') . str_pad(rand(0, 9999), 4, STR_PAD_LEFT) . str_pad(rand(0, 9999), 4, STR_PAD_LEFT);
+      $this->saveConfig('paymentVariableSymbol', $paymentVariableSymbol);
+    }
+    return $accountUid;
+  }
+
   public function getPrice(int $activeUsers, int $paidApps): float
   {
     $pricePerUser = 9.9;
@@ -218,7 +236,7 @@ class Loader extends \HubletoMain\Core\App
       $activated = $premiumInfo['activeUsers'] > 1 || $premiumInfo['paidApps'] > 0;
 
       if ($activated) {
-        $this->saveConfig('premiumAccountSince', date('Y-m-d'));
+        $this->saveConfig('premiumAccountSince', date('Y-m-d H:i:s'));
       }
     }
 

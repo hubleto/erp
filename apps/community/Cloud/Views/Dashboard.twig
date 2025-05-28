@@ -221,7 +221,24 @@
           </div>
         </div>
         <div class="card-body">
-          You have accepted our terms of use and privacy policy on {{ viewParams.app.configAsString('legalDocumentsAccepted') }}.
+          <table class="table-default dense">
+            <tr>
+              <td>Terms of use and privacy policy accepted</td>
+              <td><b>{{ viewParams.app.configAsString('legalDocumentsAccepted') }}</b></td>
+            </tr>
+            <tr>
+              <td>Premium account activated</td>
+              <td><b>{{ viewParams.app.configAsString('premiumAccountSince') }}</b></td>
+            </tr>
+            <tr>
+              <td>Account UID</td>
+              <td><b>{{ viewParams.app.getAccountUid() }}</b></td>
+            </tr>
+            <tr>
+              <td>Variable symbol for payments</td>
+              <td><b>{{ viewParams.app.getPaymentVariableSymbol() }}</b></td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>

@@ -4,6 +4,8 @@ namespace HubletoApp\Community\Cloud\Controllers\Api;
 
 class ChargeCredit extends \HubletoMain\Core\Controllers\Controller {
 
+  public bool $requiresUserAuthentication = false;
+
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 
   public function renderJson(): ?array
@@ -38,11 +40,19 @@ class ChargeCredit extends \HubletoMain\Core\Controllers\Controller {
 
     $this->hubletoApp->recalculateCredit();
 
+    $currentCredit = $this->hubletoApp->getCurrentCredit();
+
+    if ($currentCredit <= 0) {
+      // ak je nastavena platba kartou, stiahnut prislusnu sumu a dorovnat kredit na 0
+    }
+
     return [
-      'premiumInfo' => $premiumInfo,
-      'paymentThisMonth' => $paymentThisMonth,
-      'amountThisMonth' => $amountThisMonth,
-      'price' => $price,
+      'success' => true,
+      // 'premiumInfo' => $premiumInfo,
+      // 'paymentThisMonth' => $paymentThisMonth,
+      // 'amountThisMonth' => $amountThisMonth,
+      // 'price' => $price,
+      // 'currentCredit' => $currentCredit,
     ];
 
   }

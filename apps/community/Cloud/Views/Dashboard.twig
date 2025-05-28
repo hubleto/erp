@@ -68,7 +68,8 @@
           {% set creditExhaustedOn = viewParams.app.configAsString('creditExhaustedOn') %}
           {% if creditExhaustedOn != '' %}
             <div class="badge badge-danger block text-center">
-              Credit was exchausted on {{ creditExhaustedOn }}.
+              Credit was exchausted on {{ creditExhaustedOn }}.<br/>
+              Do not want to get blocked? Configure payment with card.
             </div>
           {% endif %}
         {% endif %}
@@ -158,36 +159,38 @@
     </div>
 
     <div>
-        <div class="mt-2 list">
-          <a href="cloud/payments" class="btn btn-transparent btn-bold btn-list-item">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">Make a single payment</span>
-          </a>
-          <a href="cloud/payments" class="btn btn-transparent btn-bold btn-list-item">
-            <span class="icon"><i class="fas fa-credit-card"></i></span>
-            <span class="text">Configure recurring payments</span>
-          </a>
-          <a href="cloud/payments" class="btn btn-transparent btn-list-item">
-            <span class="icon"><i class="fas fa-receipt"></i></span>
-            <span class="text">Show payments</span>
-          </a>
-          <a href="cloud/billing-accounts" class="btn btn-transparent btn-list-item">
-            <span class="icon"><i class="fas fa-coins"></i></span>
-            <span class="text">Manage billing accounts</span>
-          </a>
-          <a href="settings" class="btn btn-transparent btn-list-item">
-            <span class="icon"><i class="fas fa-cog"></i></span>
-            <span class="text">Manage users and apps</span>
-          </a>
-          <a href="cloud/test/make-random-payment" class="btn btn-transparent btn-list-item">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">TEST: Simulate random payment</span>
-          </a>
-          <a href="cloud/test/clear-credit" class="btn btn-transparent btn-list-item">
-            <span class="icon"><i class="fas fa-euro"></i></span>
-            <span class="text">TEST: Clear credit</span>
-          </a>
-        </div>
+      <div class="flex gap-2 w-full">
+        <a href="cloud/payments" class="flex-1 btn btn-primary-outline btn-square btn-large">
+          <span class="icon"><i class="fas fa-credit-card"></i></span>
+          <span class="text">Configure payment with card</span>
+        </a>
+        <a href="cloud/payments" class="flex-1 btn btn-primary-outline btn-square btn-large">
+          <span class="icon"><i class="fas fa-building-columns"></i></span>
+          <span class="text">Charge credit via bank transfer</span>
+        </a>
+      </div>
+      <div class="mt-2 list">
+        <a href="cloud/payments" class="btn btn-transparent btn-list-item">
+          <span class="icon"><i class="fas fa-receipt"></i></span>
+          <span class="text">Show payments</span>
+        </a>
+        <a href="cloud/billing-accounts" class="btn btn-transparent btn-list-item">
+          <span class="icon"><i class="fas fa-coins"></i></span>
+          <span class="text">Manage billing accounts</span>
+        </a>
+        <a href="settings" class="btn btn-transparent btn-list-item">
+          <span class="icon"><i class="fas fa-cog"></i></span>
+          <span class="text">Manage users and apps</span>
+        </a>
+        <a href="cloud/test/make-random-payment" class="btn btn-transparent btn-list-item">
+          <span class="icon"><i class="fas fa-euro"></i></span>
+          <span class="text">TEST: Simulate random payment</span>
+        </a>
+        <a href="cloud/test/clear-credit" class="btn btn-transparent btn-list-item">
+          <span class="icon"><i class="fas fa-euro"></i></span>
+          <span class="text">TEST: Clear credit</span>
+        </a>
+      </div>
       <div class="card mt-2">
         <div class="card-header">Usage info</div>
         <div class="card-body">

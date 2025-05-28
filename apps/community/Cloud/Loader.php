@@ -125,10 +125,9 @@ class Loader extends \HubletoMain\Core\App
       if ($isTrialPeriod) {
         return '
           <a
-            class="badge badge-info text-center no-underline items-center flex justify-around"
+            class="badge badge-warning text-center no-underline items-center flex justify-around"
             href="' . $this->main->config->getAsString('accountUrl') . '/cloud?freeTrialMessage=1"
           >
-            <i class="fas fa-warning"></i>
             <span>Free trial activated</span>
           </a>
         ';
@@ -137,39 +136,12 @@ class Loader extends \HubletoMain\Core\App
 
     if ($where == 'footer') {
       if ($isTrialPeriod) {
-        if ($daysOfFreeTrial <= 20) {
-          $freeTrialMessageHtml = '
-            <a class="btn btn-info btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud/configure-payment">
-              <span class="icon"><i class="fas fa-warning"></i></span>
-              <span class="text">Free trial expires in ' .$trialPeriodExpiresIn . ' days. Configure your payment method.</span>
-            </a>
-          ';
-        } else if ($daysOfFreeTrial <= 25) {
-          $freeTrialMessageHtml = '
-            <a class="btn btn-warning btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud/configure-payment">
-              <span class="icon"><i class="fas fa-warning"></i></span>
-              <span class="text">Free trial expires in ' .$trialPeriodExpiresIn . ' days. Configure your payment method.</span>
-            </a>
-          ';
-        } else if ($daysOfFreeTrial <= 30) {
-          $freeTrialMessageHtml = '
-            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud/configure-payment">
-              <span class="icon"><i class="fas fa-warning"></i></span>
-              <span class="text">Free trial expires in ' . $trialPeriodExpiresIn . ' days. Configure your payment method.</span>
-            </div>
-          ';
-        } else {
-          $freeTrialMessageHtml = '
-            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud/configure-payment">
-              <span class="icon"><i class="fas fa-warning"></i></span>
-              <span class="text">Free trial expired. Configure your payment method.</span>
-            </a>
-          ';
-        }
-
         return '
-          <div class="fixed left-0 bottom-0 m-2" style="z-index:9999">
-            ' . $freeTrialMessageHtml . '
+          <div class="fixed left-0 bottom-0 m-2 shadow-lg" style="z-index:9999">
+            <a class="btn btn-warning btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud">
+              <span class="icon"><i class="fas fa-warning"></i></span>
+              <span class="text">Free trial expires in ' .$trialPeriodExpiresIn . ' days. Configure your payment method.</span>
+            </a>
           </div>
         ';
       }
@@ -271,7 +243,7 @@ class Loader extends \HubletoMain\Core\App
     // log change in number of users or paid apps
     if ($activeUsers != $lastKnownActiveUsers || $paidApps != $lastKnownPaidApps) {
       $freeTrialInfo = $this->getFreeTrialInfo();
-      $price = ($freeTrialInfo['isTrialPeriod'] ? 0.1 : $this->getPrice($activeUsers, $paidApps));
+      $price = ($freeTrialInfo['isTrialPeriod'] ? 0 : $this->getPrice($activeUsers, $paidApps));
       $mLog->record->recordCreate([
         'log_datetime' => date('Y-m-d H:i:s'),
         'active_users' => $activeUsers,

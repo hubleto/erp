@@ -52,7 +52,7 @@
         {% if viewParams.freeTrialInfo.isTrialPeriod %}
           <div class="badge badge-warning block text-center text-2xl p-4 mt-2">
             Free trial expires in <b>{{ viewParams.freeTrialInfo.trialPeriodExpiresIn }} days</b>.<br/>
-            Make a single payment or configure recurring payments.
+            Configure your payment method.
           </div>
         {% endif %}
         <div class="block badge text-center {% if viewParams.currentCredit <= 0 %} badge-danger {% else %} badge-success {% endif %} text-2xl p-4 mt-2 ">
@@ -102,7 +102,7 @@
               onclick="$(this).slideUp(); $('#activate-premium-step-2').slideDown();"
             >
               <span class="icon" style="font-size:2em"><i class="fas fa-medal"></i></span>
-              <span class="text" style="font-size:2em;max-height:40em">Activate premium account now</span>
+              <span class="text" style="font-size:2em;max-height:40em">Activate Premium account</span>
             </button>
             <div id="activate-premium-step-2" class="text-left" style="display:none">
               <div>
@@ -121,6 +121,7 @@
                       window.location.href = '{{ config.accountUrl }}/cloud/api/activate-premium-account';
                     } else {
                       input.addClass('bg-red-200');
+                      setTimeout(function() { input.removeClass('bg-red-200'); }, 500);
                     }
                   "
                   class="btn btn-success btn-square p-2 w-full"

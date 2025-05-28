@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Premium\Controllers;
+namespace HubletoApp\Community\Cloud\Controllers;
 
 class Upgrade extends \HubletoMain\Core\Controllers\Controller {
 
@@ -16,7 +16,7 @@ class Upgrade extends \HubletoMain\Core\Controllers\Controller {
     $currentCredit = $this->hubletoApp->recalculateCredit();
     $this->viewParams['currentCredit'] = $currentCredit;
 
-    $this->setView('@HubletoApp:Community:Premium/Upgrade.twig');
+    $this->setView('@HubletoApp:Community:Cloud/Upgrade.twig');
   }
 
 }

@@ -1,7 +1,7 @@
 {
     "manifest": {
-        "Premium": "Premium",
-        "Management of premium Hubleto account.": "Manažment prémiového účtu Hubleto."
+        "Cloud": "Cloud",
+        "Management of cloud Hubleto account.": "Manažment cloud účtu Hubleto."
     },
     "Models\\Log": {
         "Date": "",

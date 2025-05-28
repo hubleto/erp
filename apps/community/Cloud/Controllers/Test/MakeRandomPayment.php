@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Premium\Controllers\Test;
+namespace HubletoApp\Community\Cloud\Controllers\Test;
 
 class MakeRandomPayment extends \HubletoMain\Core\Controllers\Controller {
 
@@ -8,7 +8,7 @@ class MakeRandomPayment extends \HubletoMain\Core\Controllers\Controller {
   {
     parent::prepareView();
 
-    $mPayment = new \HubletoApp\Community\Premium\Models\Payment($this->main);
+    $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
     $amount = rand(5, 10) * 10;
 
     $mPayment->record->recordCreate(['datetime_charged' => date('Y-m-d H:i:s'), 'amount' => $amount]);
@@ -16,7 +16,7 @@ class MakeRandomPayment extends \HubletoMain\Core\Controllers\Controller {
     $this->viewParams['amount'] = $amount;
     $this->hubletoApp->recalculateCredit();
 
-    $this->setView('@HubletoApp:Community:Premium/Test/MakeRandomPayment.twig');
+    $this->setView('@HubletoApp:Community:Cloud/Test/MakeRandomPayment.twig');
   }
 
 }

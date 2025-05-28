@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Premium;
+namespace HubletoApp\Community\Cloud;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -19,12 +19,13 @@ class Loader extends \HubletoMain\Core\App
     $this->main->isPremium = $this->shouldHavePremium();
 
     $this->main->router->httpGet([
-      '/^premium\/?$/' => Controllers\Premium::class,
-      '/^premium\/log\/?$/' => Controllers\Log::class,
-      '/^premium\/test\/make-random-payment\/?$/' => Controllers\Test\MakeRandomPayment::class,
-      '/^premium\/test\/clear-credit\/?$/' => Controllers\Test\ClearCredit::class,
-      '/^premium\/upgrade\/?$/' => Controllers\Upgrade::class,
-      '/^premium\/make-payment\/?$/' => Controllers\MakePayment::class,
+      '/^cloud\/?$/' => Controllers\Dashboard::class,
+      '/^cloud\/accept-legal-documents\/?$/' => Controllers\AcceptLegalDocuments::class,
+      '/^cloud\/log\/?$/' => Controllers\Log::class,
+      '/^cloud\/test\/make-random-payment\/?$/' => Controllers\Test\MakeRandomPayment::class,
+      '/^cloud\/test\/clear-credit\/?$/' => Controllers\Test\ClearCredit::class,
+      '/^cloud\/upgrade\/?$/' => Controllers\Upgrade::class,
+      '/^cloud\/make-payment\/?$/' => Controllers\MakePayment::class,
     ]);
 
     $this->updatePremiumInfo();
@@ -33,11 +34,15 @@ class Loader extends \HubletoMain\Core\App
 
   public function onBeforeRender(): void
   {
-    if ($this->main->isPremium && !str_starts_with($this->main->route, 'premium')) {
-      $currentCredit = $this->getCurrentCredit();
-      $freeTrialInfo = $this->getFreeTrialInfo();
-      if (!$freeTrialInfo['isTrialPeriod'] && $currentCredit <= 0) {
-        $this->main->router->redirectTo('premium');
+    if (!str_starts_with($this->main->route, 'cloud')) {
+      if (!$this->configAsBool('legalDocumentsAccepted')) {
+        $this->main->router->redirectTo('cloud');
+      } else if ($this->main->isPremium) {
+        $currentCredit = $this->getCurrentCredit();
+        $freeTrialInfo = $this->getFreeTrialInfo();
+        if (!$freeTrialInfo['isTrialPeriod'] && $currentCredit <= 0) {
+          $this->main->router->redirectTo('cloud');
+        }
       }
     }
   }
@@ -56,10 +61,10 @@ class Loader extends \HubletoMain\Core\App
     $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
     $permissions = [
 
-      "HubletoApp/Community/Premium/Controllers/Premium",
-      "HubletoApp/Community/Premium/Controllers/Upgrade",
+      "HubletoApp/Community/Cloud/Controllers/Cloud",
+      "HubletoApp/Community/Cloud/Controllers/Upgrade",
 
-      "HubletoApp/Community/Premium/Premium",
+      "HubletoApp/Community/Cloud/Cloud",
     ];
 
     foreach ($permissions as $permission) {
@@ -112,7 +117,7 @@ class Loader extends \HubletoMain\Core\App
         return '
           <a
             class="badge badge-info text-center no-underline items-center flex justify-around"
-            href="' . $this->main->config->getAsString('accountUrl') . '/premium?freeTrialMessage=1"
+            href="' . $this->main->config->getAsString('accountUrl') . '/cloud?freeTrialMessage=1"
           >
             <i class="fas fa-warning"></i>
             <span>Free trial activated</span>
@@ -125,28 +130,28 @@ class Loader extends \HubletoMain\Core\App
       if ($isTrialPeriod) {
         if ($daysOfFreeTrial <= 20) {
           $freeTrialMessageHtml = '
-            <a class="btn btn-info btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
+            <a class="btn btn-info btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
               <span class="text">Free trial expires in ' .$trialPeriodExpiresIn . ' days. Configure your payment method.</span>
             </a>
           ';
         } else if ($daysOfFreeTrial <= 25) {
           $freeTrialMessageHtml = '
-            <a class="btn btn-warning btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
+            <a class="btn btn-warning btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
               <span class="text">Free trial expires in ' .$trialPeriodExpiresIn . ' days. Configure your payment method.</span>
             </a>
           ';
         } else if ($daysOfFreeTrial <= 30) {
           $freeTrialMessageHtml = '
-            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
+            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
               <span class="text">Free trial expires in ' . $trialPeriodExpiresIn . ' days. Configure your payment method.</span>
             </div>
           ';
         } else {
           $freeTrialMessageHtml = '
-            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/premium/configure-payment">
+            <a class="btn btn-danger btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud/configure-payment">
               <span class="icon"><i class="fas fa-warning"></i></span>
               <span class="text">Free trial expired. Configure your payment method.</span>
             </a>
@@ -182,7 +187,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function getPremiumInfo(): array
   {
-    $mLog = new \HubletoApp\Community\Premium\Models\Log($this->main);
+    $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
 
     $premiumInfo = $mLog->record
       ->selectRaw('

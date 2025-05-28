@@ -211,6 +211,11 @@ class App {
     $this->main->config->save($this->getFullConfigPath($path), $value);
   }
 
+  public function saveConfigForUser(string $path, string $value = ''): void
+  {
+    $this->main->config->saveForUser($this->getFullConfigPath($path), $value);
+  }
+
 
   public function configAsString(string $path, string $defaultValue = ''): string
   {

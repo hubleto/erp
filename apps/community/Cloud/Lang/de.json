@@ -1,0 +1,10 @@
+{
+    "loader": {
+        "Cloud": "Cloud"
+    },
+    "manifest": {
+        "Cloud": "Cloud",
+        "...": "",
+        "Management of cloud Hubleto account.": ""
+    }
+}

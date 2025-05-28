@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Premium\Controllers;
+namespace HubletoApp\Community\Cloud\Controllers;
 
 class Log extends \HubletoMain\Core\Controllers\Controller {
 
@@ -8,10 +8,10 @@ class Log extends \HubletoMain\Core\Controllers\Controller {
   {
     parent::prepareView();
 
-    $mLog = new \HubletoApp\Community\Premium\Models\Log($this->main);
+    $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
     $this->viewParams['log'] = $mLog->record->orderBy('date', 'asc')->get()?->toArray();
 
-    $this->setView('@HubletoApp:Community:Premium/Log.twig');
+    $this->setView('@HubletoApp:Community:Cloud/Log.twig');
   }
 
 }

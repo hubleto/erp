@@ -54,7 +54,7 @@ class Installer {
       \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110, 'showEventsForTodayInDashboard' => true ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],
-      \HubletoApp\Community\Premium\Loader::class => [ 'sidebarOrder' => 99999, ],
+      \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99999, ],
     ],
     'documents' => [
       \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],

@@ -7,6 +7,7 @@ interface FormUserProps extends HubletoFormProps {
 }
 
 interface FormUserState extends HubletoFormState {
+  showPremiumAccountWarning: boolean;
 }
 
 export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserState> {
@@ -22,6 +23,11 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
 
   constructor(props: FormUserProps) {
     super(props);
+
+    this.state = {
+      ...this.state,
+      showPremiumAccountWarning: (this.state.id < 0)
+    }
   }
 
   renderTitle(): JSX.Element {
@@ -44,17 +50,25 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
     // };
     return <>
       <div className='w-full flex gap-2'>
-        <div className="p-4">
+        <div className="p-4 flex-1 text-center">
           <i className="fas fa-user text-primary" style={{fontSize: '8em'}}></i>
-        </div>
-        <div className="flex-1">
-          {this.state.id < 0 ?
-            <div className="badge badge-warning flex gap-2 items-center text-xl p-4">
-              <i className="fas fa-triangle-exclamation"></i>
-              <div>By adding a new user, your account will be updated from <u>personal</u> to <u>premium</u>. Additional charges may apply.</div>
+
+          {this.state.showPremiumAccountWarning ?
+            <div className="block badge badge-warning p-4 mt-4 text-left">
+              <i className="fas fa-triangle-exclamation mb-4 text-2xl"></i>
+              <div>
+                By adding or activating a new user, <b>your account may get automatically updated from Premium</b> and
+                additional charges may be applied.<br/>
+                <br/>
+                <a href="https://www.hubleto.com/premium" target="_blank" className="btn btn-white btn-square">
+                  <span className="icon"><i className="fas fa-arrow-up-right-from-square"></i></span>
+                  <span className="text">Learn more about Premium accounts.</span>
+                </a>
+              </div>
             </div>
           : null}
-
+        </div>
+        <div className="flex-6">
           {this.divider('About the user')}
           {this.inputWrapper('first_name')}
           {this.inputWrapper('last_name')}
@@ -64,7 +78,10 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
           {this.inputWrapper('id_default_company')}
 
           {this.divider('Access to Hubleto')}
-          {this.inputWrapper('is_active')}
+          {this.inputWrapper('is_active', {
+            readonly: this.state.id == globalThis.main.idUser,
+            onChange: () => { this.setState({showPremiumAccountWarning: true} as FormUserState); },
+          })}
           {this.inputWrapper('password')}
 
           {this.divider('Permissions')}

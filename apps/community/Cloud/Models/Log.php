@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Premium\Models;
+namespace HubletoApp\Community\Cloud\Models;
 
 use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\Date;

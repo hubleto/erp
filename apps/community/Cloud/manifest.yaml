@@ -1,11 +1,11 @@
-namespace: HubletoApp\Community\Premium
-rootUrlSlug: premium
-name: Premium
-icon: fas fa-arrow-up
+namespace: HubletoApp\Community\Cloud
+rootUrlSlug: cloud
+name: Cloud
+icon: fas fa-cloud
 author:
   name: "wai.blue"
   nick: "wai.blue"
   company: "wai.blue"
   github: "https://github.com/wai-blue"
   linkedin: "https://www.linkedin.com/company/wai-blue"
-highlight: Management of premium Hubleto account.
+highlight: Management of cloud Hubleto account.

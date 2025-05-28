@@ -1,0 +1,179 @@
+<h1 class="app-main-title text-center" style="font-size:3em">
+  <i class="fas fa-cloud"></i><br/>
+  Hubleto cloud
+</h1>
+
+{% if viewParams.app.configAsString('legalDocumentsAccepted') == '' %}
+
+  <script>
+    function acceptLegalDocuments() {
+      let chk = $('#accept-legal-documents');
+      if (chk.is(':checked')) {
+        window.location.href = '{{ config.accountUrl }}/cloud/accept-legal-documents';
+      } else {
+        $('#accept-legal-documents-wrapper').addClass('bg-red-200');
+      }
+    }
+  </script>
+  <div class="md:w-1/2 m-auto">
+    <div class="card card-body block text-xl">
+      {{ user.first_name ?? user.email }}, welcome to Hubleto cloud. 👍
+    </div>
+    <div class="card card-body block mt-2">
+      We are happy you decided to use Hubleto.<br/>
+      Before you start, you should first read, understand and accept our
+      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.com/en/terms-of-use" target="_blank"><span class="text">Terms of use</span></a> and
+      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.com/en/privacy-policy" target="_blank"><span class="text">Privacy policy</span></a>.<br/>
+      <br/>
+      Therefore, we kindly ask you to go through these documents and appoint your consent
+      by ticking the checkbox below.
+    </div>
+    <div class="card card-body mt-2 text-left block" id="accept-legal-documents-wrapper">
+      <div class="flex items-center gap-2">
+        <input id="accept-legal-documents" type="checkbox" style="zoom:2">
+        <label for="accept-legal-documents">I have read, undestrood and agree to the <i>Terms of use</i> and <i>Privacy policy</i> of Hubleto cloud.
+      </div>
+    </div>
+    <button id="accept-btn" class="btn btn-primary btn-large mt-2" onclick="acceptLegalDocuments();">
+      <span class="icon"><i class="fas fa-arrow-right"></i></span>
+      <span class="text">Continue to the dashboard</span>
+    </button>
+  </div>
+
+{% else %}
+  <div class="grid grid-cols-2 gap-2 mt-2">
+    <div>
+      {% if viewParams.main.isPremium %}
+        <div class="badge badge-success text-center text-2xl p-4 block">You are already upgraded to Premium</div>
+        <div class="badge badge-success text-center block">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
+        {% if viewParams.freeTrialInfo.isTrialPeriod %}
+          <div class="badge badge-info block text-center text-2xl p-4 mt-2">
+            Free trial expires in <b>{{ viewParams.freeTrialInfo.trialPeriodExpiresIn }} days</b>.<br/>
+            Make a payment or configure recurring payments.
+          </div>
+        {% endif %}
+        <div class="block badge text-center {% if viewParams.currentCredit <= 0 %} badge-danger {% else %} badge-success {% endif %} text-2xl p-4 mt-2 ">
+          Your current credit is<br/>
+          <br/>
+          <b style="font-size:3em">{{ viewParams.main.locale.formatCurrency(viewParams.currentCredit, '€') }}</b>
+        </div>
+        {% if viewParams.currentCredit <= 0 %}
+          {% set creditExhaustedOn = viewParams.app.configAsString('creditExhaustedOn') %}
+          {% if creditExhaustedOn != '' %}
+            <div class="badge badge-danger block text-center">
+              Credit was exchausted on {{ creditExhaustedOn }}.
+            </div>
+          {% endif %}
+        {% endif %}
+        <div class="mt-2 list">
+          <a href="cloud/payments" class="btn btn-transparent btn-bold btn-list-item">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">Make a single payment</span>
+          </a>
+          <a href="cloud/payments" class="btn btn-transparent btn-bold btn-list-item">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">Configure recurring payments</span>
+          </a>
+          <a href="cloud/payments" class="btn btn-transparent btn-list-item">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">Show payments</span>
+          </a>
+          <a href="settings" class="btn btn-transparent btn-list-item">
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="text">Manage users and apps</span>
+          </a>
+          <a href="cloud/test/make-random-payment" class="btn btn-transparent btn-list-item">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">TEST: Simulate random payment</span>
+          </a>
+          <a href="cloud/test/clear-credit" class="btn btn-transparent btn-list-item">
+            <span class="icon"><i class="fas fa-euro"></i></span>
+            <span class="text">TEST: Clear credit</span>
+          </a>
+        </div>
+        <div class="card mt-2">
+          <div class="card-header">
+            Your Premium benefits
+          </div>
+          <div class="card-body">
+            <ul>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited storage</li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features</li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
+            </ul>
+          </div>
+        </div>
+      {% else %}
+        <div class="badge badge-warning text-2xl p-4 block text-center">You are using free personal account.</div>
+        <div class="badge badge-warning block text-center">Note: Activation of premium account is automatically  updated on a monthly basis.</div>
+        <div class="card mt-2">
+          <div class="card-body">
+            Your account will be automatically upgraded to premium when you:
+            <ul>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> add new users or activate existing</li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> install or enable premium apps</li>
+            </ul>
+            <a href="{{ config.accountUrl }}/settings" class="btn btn-transparent">
+              <span class="icon"><i class="fas fa-users"></i></span>
+              <span class="text">Manage users</span>
+            </a>
+            <a href="{{ config.accountUrl }}/settings" class="btn btn-transparent">
+              <span class="icon"><i class="fas fa-puzzle-piece"></i></span>
+              <span class="text">Manage apps</span>
+            </a>
+          </div>
+        </div>
+        <div class="card mt-2">
+          <div class="card-header">
+            Upgrade to Premium and you'll get
+          </div>
+          <div class="card-body">
+            <ul>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited storage</li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> unlimited users</li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> more apps & features </li>
+              <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> 24/7 support</li>
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-header">Usage info</div>
+        <div class="card-body">
+          <table class="table-default dense">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Max active users</th>
+                <th>Max paid apps</th>
+                <th>Charged for premium</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for log in viewParams.log %}
+                <tr>
+                  <td>{{ log.year }}-{{ log.month }}</td>
+                  <td>{{ log.max_active_users }}</td>
+                  <td>{{ log.max_paid_apps }}</td>
+                  <td>{% if log.max_active_users > 1 or log.max_paid_apps > 1 %} yes {% else %} no {% endif %}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="mt-2">
+            <a class="btn btn-transparent" href="cloud/log">
+              <span class="text">Show details</span>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          You have accepted our terms of use and privacy policy on {{ viewParams.app.configAsString('legalDocumentsAccepted') }}.
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

@@ -1,20 +1,20 @@
 <?php
 
-namespace HubletoApp\Community\Premium\Models;
+namespace HubletoApp\Community\Cloud\Models;
 
 use ADIOS\Core\Db\Column\Decimal;
 use ADIOS\Core\Db\Column\DateTime;
 
-class Credit extends \HubletoMain\Core\Models\Model
+class Payment extends \HubletoMain\Core\Models\Model
 {
-  public string $table = 'premium_credit';
-  public string $recordManagerClass = RecordManagers\Credit::class;
+  public string $table = 'premium_payments';
+  public string $recordManagerClass = RecordManagers\Payment::class;
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'datetime_recalculated' => (new DateTime($this, $this->translate('Recalculated')))->setRequired(),
-      'credit' => (new Decimal($this, $this->translate('Credit')))->setRequired(),
+      'datetime_charged' => (new DateTime($this, $this->translate('Charged')))->setRequired(),
+      'amount' => (new Decimal($this, $this->translate('Amount')))->setRequired(),
     ]);
   }
 

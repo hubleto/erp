@@ -306,7 +306,7 @@ class AppManager
   public function canAppDangerouslyInjectDesktopHtmlContent(string $appNamespace): bool
   {
     $safeApps = [
-      'HubletoApp\\Community\\Premium',
+      'HubletoApp\\Community\\Cloud',
     ];
 
     return in_array($appNamespace, $safeApps);

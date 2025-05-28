@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Premium\Controllers;
+namespace HubletoApp\Community\Cloud\Controllers;
 
-class Premium extends \HubletoMain\Core\Controllers\Controller {
+class Dashboard extends \HubletoMain\Core\Controllers\Controller {
 
   public function prepareView(): void
   {
@@ -13,7 +13,7 @@ class Premium extends \HubletoMain\Core\Controllers\Controller {
     $currentCredit = $this->hubletoApp->getCurrentCredit();
     $this->viewParams['currentCredit'] = $currentCredit;
 
-    $mLog = new \HubletoApp\Community\Premium\Models\Log($this->main);
+    $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
     $this->viewParams['log'] = $mLog->record
       ->selectRaw('
         month(date) as month,
@@ -28,7 +28,7 @@ class Premium extends \HubletoMain\Core\Controllers\Controller {
 
     $this->viewParams['freeTrialInfo'] = $this->hubletoApp->getFreeTrialInfo();
 
-    $this->setView('@HubletoApp:Community:Premium/Premium.twig');
+    $this->setView('@HubletoApp:Community:Cloud/Dashboard.twig');
   }
 
 }

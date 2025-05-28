@@ -48,10 +48,14 @@
           <i class="fas fa-medal mr-2"></i>
           You are already upgraded to Premium
         </div>
-        <div class="badge badge-success text-center block">Your Premium account is activated since <b>{{ viewParams.app.configAsString('premiumAccountSince') }}</b>.</div>
+        <div class="badge badge-success text-center block">
+          Your Premium account is activated since <b>{{ viewParams.app.configAsString('premiumAccountSince') }}</b>.
+        </div>
         {% if viewParams.freeTrialInfo.isTrialPeriod %}
           <div class="badge badge-warning block text-center text-2xl p-4 mt-2">
             Free trial expires in <b>{{ viewParams.freeTrialInfo.trialPeriodExpiresIn }} days</b>.<br/>
+          </div>
+          <div class="badge badge-warning text-center block">
             Configure your payment method.
           </div>
         {% endif %}

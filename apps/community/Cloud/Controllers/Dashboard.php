@@ -10,6 +10,8 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
 
     $this->hubletoApp->updatePremiumInfo();
 
+    $this->hubletoApp->recalculateCredit();
+
     $currentCredit = $this->hubletoApp->getCurrentCredit();
     $this->viewParams['currentCredit'] = $currentCredit;
 

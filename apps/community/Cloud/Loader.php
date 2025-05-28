@@ -22,6 +22,7 @@ class Loader extends \HubletoMain\Core\App
       '/^cloud\/?$/' => Controllers\Dashboard::class,
       '/^cloud\/api\/accept-legal-documents\/?$/' => Controllers\Api\AcceptLegalDocuments::class,
       '/^cloud\/api\/activate-premium-account\/?$/' => Controllers\Api\ActivatePremiumAccount::class,
+      '/^cloud\/api\/charge-credit\/?$/' => Controllers\Api\ChargeCredit::class,
       '/^cloud\/log\/?$/' => Controllers\Log::class,
       '/^cloud\/test\/make-random-payment\/?$/' => Controllers\Test\MakeRandomPayment::class,
       '/^cloud\/test\/clear-credit\/?$/' => Controllers\Test\ClearCredit::class,
@@ -81,7 +82,7 @@ class Loader extends \HubletoMain\Core\App
   public function getPrice(int $activeUsers, int $paidApps): float
   {
     $pricePerUser = 9.9;
-    if ($activeUsers > 1 || $paidApps > 0) {
+    if ($this->premiumAccountActivated()) {
       return $activeUsers * $pricePerUser;
     } else {
       return 0;
@@ -174,26 +175,39 @@ class Loader extends \HubletoMain\Core\App
     $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
 
     $premiumInfo = $mLog->record
+      ->selectRaw('
+        max(ifnull(active_users, 0)) as max_active_users,
+        max(ifnull(paid_apps, 0)) as max_paid_apps
+      ')
       ->whereMonth('log_datetime', $month)
       ->whereYear('log_datetime', $year)
-      ->orderBy('log_datetime', 'desc')
       ->first()
       ?->toArray()
     ;
 
-    if (!is_array($premiumInfo)) {
-      $this->updatePremiumInfo();
+    // if (!is_array($premiumInfo)) {
+    //   $this->updatePremiumInfo();
 
-      $premiumInfo = $mLog->record
-        ->whereMonth('log_datetime', $month)
-        ->whereYear('log_datetime', $year)
-        ->orderBy('price', 'desc')
-        ->first()
-        ?->toArray()
-      ;
+    //   $premiumInfo = $mLog->record
+    //     ->whereMonth('log_datetime', $month)
+    //     ->whereYear('log_datetime', $year)
+    //     ->orderBy('price', 'desc')
+    //     ->first()
+    //     ?->toArray()
+    //   ;
+    // }
+
+    if (is_array($premiumInfo)) {
+      return [
+        'activeUsers' => $premiumInfo['max_active_users'] ?? 0,
+        'paidApps' => $premiumInfo['max_paid_apps'] ?? 0,
+      ];
+    } else {
+      return [
+        'activeUsers' => 0,
+        'paidApps' => 0,
+      ];
     }
-
-    return $premiumInfo;
   }
 
   public function premiumAccountActivated(): bool
@@ -201,7 +215,7 @@ class Loader extends \HubletoMain\Core\App
     $activated = !empty($this->configAsString('premiumAccountSince'));
     if (!$activated) {
       $premiumInfo = $this->getPremiumInfo();
-      $activated = $premiumInfo['active_users'] > 1 || $premiumInfo['paid_apps'] > 0;
+      $activated = $premiumInfo['activeUsers'] > 1 || $premiumInfo['paidApps'] > 0;
 
       if ($activated) {
         $this->saveConfig('premiumAccountSince', date('Y-m-d'));
@@ -260,17 +274,15 @@ class Loader extends \HubletoMain\Core\App
     $mCredit = new Models\Credit($this->main);
 
     $lastCreditData = $mCredit->record->orderBy('id', 'desc')->first()?->toArray();
-    $lastCreditDatetime = (string) ($lastCreditData['datetime_recalculated'] ?? '');
-    $currentCredit = (float) ($lastCreditData['credit'] ?? 0);
+    $currentCredit = 0;
 
     $payments = $mPayment->record;
-    if (!empty($lastCreditDatetime)) $payments = $payments->whereRaw('datetime_charged > "' . date('Y-m-d H:i:s', strtotime($lastCreditDatetime)) . '"');
 
     foreach ($payments->get()?->toArray() as $payment) {
       $currentCredit += (float) ($payment['amount'] ?? 0);
     }
 
-    if ($lastCreditData['credit'] > 0 && $currentCredit <= 0) {
+    if (is_array($lastCreditData) && $lastCreditData['credit'] > 0 && $currentCredit <= 0) {
       $this->saveConfig('creditExhaustedOn', date('Y-m-d'));
     }
 

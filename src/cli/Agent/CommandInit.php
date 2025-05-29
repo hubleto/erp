@@ -102,7 +102,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $confirm = '';
       if (isset($config['confirm'])) $confirm = $config['confirm'];
       while ($confirm != 'yes') {
-        $confirm = $this->cli->read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel.');
+        $confirm = $this->cli->read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel');
         if ($confirm == 'exit') exit;
       }
     }

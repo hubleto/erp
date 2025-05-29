@@ -56,8 +56,8 @@ class Lead extends \HubletoMain\Core\Models\Model
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
-      'date_created' => (new DateTime($this, $this->translate('Date created')))->setRequired()->setReadonly(),
+      'id_user' => (new Lookup($this, $this->translate('Responsible'), User::class))->setRequired(),
+      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
       'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setEnumValues(
         [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
       ),

@@ -72,11 +72,6 @@ class Loader extends \HubletoMain\Core\App
       $mInvoiceProfile->dropTableIfExists()->install();
 
       $mSetting->record->recordCreate([
-        'key' => 'Apps\Community\Pipeline\DefaultPipeline',
-        'value' => '2',
-        'id_user' => null
-      ]);
-      $mSetting->record->recordCreate([
         'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',
         'value' => '1',
         'id_user' => null

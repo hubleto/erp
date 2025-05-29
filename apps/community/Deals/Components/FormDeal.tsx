@@ -40,6 +40,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   state: FormDealState;
 
   refLogActivityInput: any;
+  refServicesLookup: any;
+  refProductsLookup: any;
 
   translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormDeal';
 
@@ -47,6 +49,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     super(props);
 
     this.refLogActivityInput = React.createRef();
+    this.refServicesLookup = React.createRef();
+    this.refProductsLookup = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -178,8 +182,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
-    const servicesLookup = createRef();
-    const productsLookup = createRef();
     var lookupData;
 
     const getLookupData = (lookupElement) => {
@@ -282,7 +284,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       this.updateRecord({is_new_customer: false});
                     }
                   }})}
-                  <FormInput title='Tags'>
+                  {/* <FormInput title='Tags'> // 29.5.2025: Zakomentovane, pretoze podla Davida je to zbytocne
                     <InputTags2 {...this.getInputProps('tags')}
                       value={this.state.record.TAGS}
                       readonly={R.is_archived}
@@ -295,7 +297,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                         this.setState({record: R});
                       }}
                     ></InputTags2>
-                  </FormInput>
+                  </FormInput> */}
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className='grow'>
@@ -310,34 +312,43 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     }
                   )}
                   {this.state.record.deal_result == 3 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
-                  {showAdditional ? this.inputWrapper('date_result_update') : null}
+                  {/* {showAdditional ? this.inputWrapper('date_result_update') : null} // 29.5.2025: Zakomentovane, nerozumel tomu ani David. */}
                   {showAdditional ? this.inputWrapper('date_created') : null}
                   {showAdditional ? this.inputWrapper('is_archived') : null}
                 </div>
               </div>
             </div>
-            {showAdditional ? <>
-              {this.state.id > 0 ?
-                <div className="flex gap-2 mt-2">
-                  <div className="badge badge-violet badge-large">
-                    Deal value:&nbsp;{globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
-                  </div>
-                  {R.PIPELINE_STEP && R.PIPELINE_STEP.probability ?
-                    <div className="badge badge-violet badge-large">
-                      <p>Weighted profit ({R.PIPELINE_STEP?.probability} %):
-                        <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.PIPELINE_STEP?.probability, R.price), 2, ',', ' ')} {R.CURRENCY.code}</strong>
-                      </p>
-                    </div>
-                  : null}
+
+            {this.state.id > 0 ?
+              <div className="flex gap-2 mt-2">
+                <div className="badge badge-violet badge-large">
+                  Deal value:&nbsp;{globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
                 </div>
-              : null}
-              <div className='card mt-2'>
-                <div className='card-header'>Documents and other notes</div>
-                <div className='card-body flex gap-2 justify-between'>
-                  <div className="flex-1 w-full">{this.inputWrapper('shared_folder', {readonly: R.is_archived})}</div>
-                  <div className="flex-1 w-full">{this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}</div>
+                {R.PIPELINE_STEP && R.PIPELINE_STEP.probability ?
+                  <div className="badge badge-violet badge-large">
+                    <p>Weighted profit ({R.PIPELINE_STEP?.probability} %):
+                      <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.PIPELINE_STEP?.probability, R.price), 2, ',', ' ')} {R.CURRENCY.code}</strong>
+                    </p>
+                  </div>
+                : null}
+              </div>
+            : null}
+            <div className='flex gap-2 mt-2 w-full'>
+              <div className='card grow'>
+                <div className='card-header'>Documents</div>
+                <div className='card-body'>
+                  {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
                 </div>
               </div>
+              <div className='card grow'>
+                <div className='card-header'>Notes</div>
+                <div className='card-body'>
+                  {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+                </div>
+              </div>
+            </div>
+
+            {showAdditional ? <>
               <div className='card mt-2'>
                 <div className='card-header'>
                   <Lookup {...this.getInputProps("id_pipeline")}
@@ -446,13 +457,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                 return (
                                   <FormInput>
                                     <Lookup {...this.getInputProps('services_input')}
-                                      ref={servicesLookup}
+                                      ref={this.refServicesLookup}
                                       model='HubletoApp/Community/Products/Models/Product'
                                       customEndpointParams={{'getServices': true}}
                                       cssClass='min-w-44'
                                       value={data.id_product}
                                       onChange={(value: any) => {
-                                        getLookupData(servicesLookup);
+                                        getLookupData(this.refServicesLookup);
                                         if (lookupData[value]) {
                                           data.id_product = value;
                                           data.unit_price = lookupData[value].unit_price;
@@ -507,13 +518,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                 return (
                                   <FormInput>
                                     <Lookup {...this.getInputProps('products_input')}
-                                      ref={productsLookup}
+                                      ref={this.refProductsLookup}
                                       model='HubletoApp/Community/Products/Models/Product'
                                       customEndpointParams={{'getProducts': true}}
                                       cssClass='min-w-44'
                                       value={data.id_product}
                                       onChange={(value: any) => {
-                                        getLookupData(productsLookup);
+                                        getLookupData(this.refProductsLookup);
                                         if (lookupData[value]) {
                                           data.id_product = value;
                                           data.unit_price = lookupData[value].unit_price;

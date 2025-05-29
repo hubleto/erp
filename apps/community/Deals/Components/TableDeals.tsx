@@ -54,19 +54,19 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
     }
   }
 
-  renderCell(columnName: string, column: any, data: any, options: any) {
-    if (columnName == "tags") {
-      return (
-        <>
-          {data.TAGS.map((tag, key) => {
-            return <div style={{backgroundColor: tag.TAG.color}} className='badge'>{tag.TAG.name}</div>;
-          })}
-        </>
-      );
-    } else {
-      return super.renderCell(columnName, column, data, options);
-    }
-  }
+  // renderCell(columnName: string, column: any, data: any, options: any) {
+  //   if (columnName == "tags") {
+  //     return (
+  //       <>
+  //         {data.TAGS.map((tag, key) => {
+  //           return <div style={{backgroundColor: tag.TAG.color}} className='badge'>{tag.TAG.name}</div>;
+  //         })}
+  //       </>
+  //     );
+  //   } else {
+  //     return super.renderCell(columnName, column, data, options);
+  //   }
+  // }
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormDealProps;

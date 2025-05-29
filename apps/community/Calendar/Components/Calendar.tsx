@@ -9,6 +9,7 @@ import listPlugin from '@fullcalendar/list';
 interface CalendarProps {
   eventsEndpoint: string,
   views?: string,
+  initialView: string,
   height?: any,
   readonly?: boolean,
   onCreateCallback?: any
@@ -63,8 +64,9 @@ export default class CalendarComponent extends Component<CalendarProps, Calendar
           height={this.props.height}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
           firstDay={1}
+          scrollTime='10:30:00'
           headerToolbar={this.state.headerToolbar}
-          initialView='dayGridMonth'
+          initialView={this.props.initialView}
           eventTimeFormat={{
             hour: '2-digit',
             minute: '2-digit',

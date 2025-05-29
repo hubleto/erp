@@ -62,9 +62,9 @@ class Deal extends \HubletoMain\Core\Models\Model
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'price' => (new Decimal($this, $this->translate('Price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
-      'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_user' => (new Lookup($this, $this->translate('Assigned user'), User::class))->setRequired(),
-      'date_created' => (new DateTime($this, $this->translate('Date created')))->setRequired()->setReadonly(),
+      'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
+      'id_user' => (new Lookup($this, $this->translate('Responsible'), User::class))->setRequired(),
+      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
@@ -130,7 +130,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
-    $description->columns['tags'] = ["title" => "Tags"];
+    // $description->columns['tags'] = ["title" => "Tags"];
     unset($description->columns['note']);
     unset($description->columns['id_contact']);
     unset($description->columns['source_channel']);
@@ -159,11 +159,7 @@ class Deal extends \HubletoMain\Core\Models\Model
   public function describeForm(): \ADIOS\Core\Description\Form
   {
     $mSettings = new Setting($this->main);
-    $defaultPipeline = (int) $mSettings->record
-      ->where("key", "Apps\Community\Pipeline\DefaultPipeline")
-      ->first()
-      ->value
-    ;
+    $defaultPipeline = 1;
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
@@ -195,8 +191,10 @@ class Deal extends \HubletoMain\Core\Models\Model
     ]);
 
     $newDeal = $savedRecord;
-    $newDeal["identifier"] = $this->main->apps->community('Deals')->configAsString('dealPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
-    $this->record->recordUpdate($newDeal);
+    if (empty($newDeal['identifier'])) {
+      $newDeal["identifier"] = $this->main->apps->community('Deals')->configAsString('dealPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
+      $this->record->recordUpdate($newDeal);
+    }
 
     return parent::onAfterCreate($originalRecord, $savedRecord);
   }
@@ -236,7 +234,7 @@ class Deal extends \HubletoMain\Core\Models\Model
 
   public function getOwnership(array $record): void
   {
-    if ($record["id_customer"] && !isset($record["checkOwnership"])) {
+    if (isset($record["id_customer"]) && !isset($record["checkOwnership"])) {
       $mCustomer = new Customer($this->main);
       $customer = $mCustomer->record
         ->where("id", $record["id_customer"])

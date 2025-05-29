@@ -8,7 +8,7 @@ class Currency extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'currencies';
   public string $recordManagerClass = RecordManagers\Currency::class;
-  public ?string $lookupSqlValue = 'CONCAT({%TABLE%}.name ," ","(",{%TABLE%}.code,")")';
+  public ?string $lookupSqlValue = '{%TABLE%}.code';
 
   public function describeColumns(): array
   {

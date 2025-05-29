@@ -42,6 +42,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   state: FormLeadState;
 
   refLogActivityInput: any;
+  refServicesLookup: any;
+  refProductsLookup: any;
 
   translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\FormLead';
 
@@ -49,6 +51,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     super(props);
 
     this.refLogActivityInput = React.createRef();
+    this.refServicesLookup = React.createRef();
+    this.refProductsLookup = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -198,8 +202,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   }
 
   renderContent(): JSX.Element {
-    const servicesLookup = createRef();
-    const productsLookup = createRef();
     var lookupData;
 
     const getLookupData = (lookupElement) => {
@@ -335,9 +337,19 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     </> : null}
                   </div>
                 </div>
-                <div className='card card-body mt-2'>
-                  <div className="w-full">{this.inputWrapper('shared_folder', {readonly: R.is_archived})}</div>
-                  <div className="w-full mt-2">{this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}</div>
+                <div className='flex gap-2 mt-2 w-full'>
+                  <div className='card grow'>
+                    <div className='card-header'>Documents</div>
+                    <div className='card-body'>
+                      {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+                    </div>
+                  </div>
+                  <div className='card grow'>
+                    <div className='card-header'>Notes</div>
+                    <div className='card-body'>
+                      {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+                    </div>
+                  </div>
                 </div>
                 {showAdditional ?
                   <div className='card mt-2'>
@@ -399,13 +411,13 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                                   return (
                                     <FormInput>
                                       <Lookup {...this.getInputProps('id_product_input_1')}
-                                        ref={servicesLookup}
+                                        ref={this.refServicesLookup}
                                         model='HubletoApp/Community/Products/Models/Product'
                                         customEndpointParams={{'getServices': true}}
                                         cssClass='min-w-44'
                                         value={data.id_product}
                                         onChange={(value: any) => {
-                                          getLookupData(servicesLookup);
+                                          getLookupData(this.refServicesLookup);
                                           if (lookupData[value]) {
                                             data.id_product = value;
                                             data.unit_price = lookupData[value].unit_price;
@@ -460,13 +472,13 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                                   return (
                                     <FormInput>
                                       <Lookup {...this.getInputProps('id_product_input_2')}
-                                        ref={productsLookup}
+                                        ref={this.refProductsLookup}
                                         model='HubletoApp/Community/Products/Models/Product'
                                         customEndpointParams={{'getProducts': true}}
                                         cssClass='min-w-44'
                                         value={data.id_product}
                                         onChange={(value: any) => {
-                                          getLookupData(productsLookup);
+                                          getLookupData(this.refProductsLookup);
                                           if (lookupData[value]) {
                                             data.id_product = value;
                                             data.unit_price = lookupData[value].unit_price;

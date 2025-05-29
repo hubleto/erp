@@ -42,11 +42,7 @@ class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
 
     $mSettings = new Setting($this->main);
     $mPipepelineStep = new PipelineStep($this->main);
-    $defaultPipeline =(int) $mSettings->record
-      ->where("key", "Apps\Community\Pipeline\DefaultPipeline")
-      ->first()
-      ->value
-    ;
+    $defaultPipeline = 1;
     $defaultPipelineFirstStep =(int) $mPipepelineStep->record
       ->where("id_pipeline", $defaultPipeline)
       ->orderBy("id", "asc")

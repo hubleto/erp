@@ -31,7 +31,7 @@ export default class FormCustomerExtraButtons extends Component<P, S> {
           onClick={() => { this.setState({showDeals: true}); }}
         >
           <span className="icon"><i className="fas fa-handshake"></i></span>
-          <span className="text">Show deals for {R?.name ?? '---'}</span>
+          <span className="text">Show deals</span>
         </button>
         {this.state.showDeals ?
           <ModalSimple

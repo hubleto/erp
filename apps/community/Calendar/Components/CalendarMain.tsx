@@ -67,6 +67,7 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
       <Calendar
         readonly={false}
         views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+        initialView="timeGridWeek"
         eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/get-calendar-events'}
         onEventsLoaded={(events) => {
           for (let i in events) {

@@ -20,11 +20,11 @@ class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
       return [ 'result' => self::THIS_IS_NOT_PREMIUM_ACCOUNT ];
     }
 
-    $subscriptioRenewalActive = $this->hubletoApp->configAsBool('subscriptioRenewalActive');
+    $subscriptionRenewalActive = $this->hubletoApp->configAsBool('subscriptionRenewalActive');
     $subscriptionActiveUntil = $this->hubletoApp->configAsString('subscriptionActiveUntil');
     $subscriptionActive = strtotime($subscriptionActiveUntil) > time();
 
-    if (!$subscriptionActive) {
+    if (!$subscriptionActive && !$subscriptionRenewalActive) {
       return [ 'result' => self::SUBSCRIPTION_NOT_ACTIVE ];
     }
 
@@ -124,8 +124,8 @@ class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
       $this->hubletoApp->recalculateCredit();
 
       // ak vsetko prebehlo v poriadku a ma nastaveny subscription renewal, predlzim subscription
-      if ($subscriptioRenewalActive) {
-        $this->saveConfig('subscriptioActiveUntil', date('Y-m-d H:i:s', strtotime('+1 month', $subscriptionActiveUntil)));
+      if ($subscriptionRenewalActive) {
+        $this->hubletoApp->saveConfig('subscriptionActiveUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
       }
 
       return [

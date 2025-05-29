@@ -55,8 +55,8 @@ class ChargeCredit extends \HubletoMain\Core\Controllers\Controller {
         'full_amount' => -$fullAmount,
         'discounted_amount' => -$discountedAmount,
         'discount_percent' => $discountPercent,
-        'notes' => $premiumInfo['activeUsers'] . ' active users, ' . $premiumInfo['paidApps'] . ' paid apps'
       ];
+
       if ($paymentThisMonth === null) {
         $mPayment->record->recordCreate($paymentData);
       } else {

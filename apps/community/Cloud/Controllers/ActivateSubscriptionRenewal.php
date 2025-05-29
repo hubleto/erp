@@ -17,7 +17,7 @@ class ActivateSubscriptionRenewal extends \HubletoMain\Core\Controllers\Controll
     $mPayment->record->recordCreate([
       'datetime_charged' => date('Y-m-d H:i:s'),
       'full_amount' => -$currentCredit,
-      'notes' => 'reactivation of subscription'
+      'type' => $mPayment::TYPE_SUBSCRIPTION_RENEWAL_ACTIVATED,
     ]);
 
     $this->main->router->redirectTo('cloud');

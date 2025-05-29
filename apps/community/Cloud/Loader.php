@@ -218,7 +218,22 @@ class Loader extends \HubletoMain\Core\App
       ?->toArray()
     ;
 
-    if (is_array($log)) {
+    if ($log['max_active_users'] === null || $log['max_paid_apps'] === null) {
+      // count enabled non-community apps
+      $paidApps = 0;
+      foreach ($this->main->apps->getEnabledApps() as $app) {
+        if ($app->manifest['appType'] != \HubletoMain\Core\App::APP_TYPE_COMMUNITY) {
+          $paidApps++;
+        }
+      }
+
+      // count active users
+      $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+      $activeUsers = $mUser->record->where('is_active', 1)->count();
+
+      $premiumInfo['activeUsers'] = $activeUsers;
+      $premiumInfo['paidApps'] = $paidApps;
+    } else {
       $premiumInfo['activeUsers'] = $log['max_active_users'] ?? 0;
       $premiumInfo['paidApps'] = $log['max_paid_apps'] ?? 0;
     }
@@ -270,9 +285,9 @@ class Loader extends \HubletoMain\Core\App
     return $activated;
   }
 
-  public function updatePremiumInfo() {
-    $month = (int) date('m');
-    $year = (int) date('Y');
+  public function updatePremiumInfo(int $month = 0, int $year = 0) {
+    if ($month == 0) $month = (int) date('m');
+    if ($year == 0) $year = (int) date('Y');
 
     $mLog = new Models\Log($this->main);
     $mPayment = new Models\Payment($this->main);

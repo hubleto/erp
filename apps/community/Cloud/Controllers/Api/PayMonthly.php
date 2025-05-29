@@ -16,6 +16,12 @@ class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
 
   public function renderJson(): ?array
   {
+    if ($this->main->isUrlParam('today')) {
+      $today = date('Y-m-d', strtotime($this->main->urlParamAsString('today')));
+    } else {
+      $today = date('Y-m-d');
+    }
+
     if (!$this->hubletoApp->premiumAccountActivated() > 0) {
       return [ 'result' => self::THIS_IS_NOT_PREMIUM_ACCOUNT ];
     }
@@ -37,25 +43,53 @@ class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
 
     $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
 
-    $prevPrevMonth = date('m', strtotime('-2 month'));
-    $prevPrevYear = date('Y', strtotime('-2 month'));
+    // $prevPrevMonth = date('m', strtotime('-2 month', strtotime($today)));
+    // $prevPrevYear = date('Y', strtotime('-2 month', strtotime($today)));
 
-    $prevMonth = date('m', strtotime('-1 month'));
-    $prevYear = date('Y', strtotime('-1 month'));
+    $prevMonth = date('m', strtotime('-1 month', strtotime($today)));
+    $prevYear = date('Y', strtotime('-1 month', strtotime($today)));
 
-    $thisMonth = date('m');
-    $thisYear = date('Y');
+    $thisMonth = date('m', strtotime($today));
+    $thisYear = date('Y', strtotime($today));
 
-    $paymentThisMonth = $mPayment->record->whereMonth('datetime_charged', $thisMonth)->whereYear('datetime_charged', $thisYear)->count();
+    $paymentPrevMonth = $mPayment->record
+      ->where('type', $mPayment::TYPE_SUBSCRIPTION_FEE)
+      ->whereMonth('datetime_charged', $prevMonth)
+      ->whereYear('datetime_charged', $prevYear)
+      ->first()
+      ?->toArray()
+    ;
 
-    if ($paymentThisMonth > 0) {
+    $paymentThisMonth = $mPayment->record
+      ->where('type', $mPayment::TYPE_SUBSCRIPTION_FEE)
+      ->whereMonth('datetime_charged', $thisMonth)
+      ->whereYear('datetime_charged', $thisYear)
+      ->first()
+      ?->toArray()
+    ;
+
+    // var_dump($prevMonth);var_dump($prevYear);
+    // var_dump($thisMonth);var_dump($thisYear);
+    // var_dump($paymentPrevMonth);var_dump($paymentThisMonth);
+    // exit;
+
+    if ($paymentThisMonth !== null) {
       return [
         'result' => self::THIS_MONTH_ALREADY_PAID,
       ];
     } else {
-      $premiumInfoPrevPrevMonth = $this->hubletoApp->getPremiumInfo($prevPrevMonth, $prevPrevYear);
+
+      $paymentThisMonthDetails = @json_decode($paymentThisMonth['details'], true) ?? [];
+      $paymentPrevMonthDetails = @json_decode($paymentPrevMonth['details'], true) ?? [];
+
+      $this->hubletoApp->updatePremiumInfo($thisMonth, $thisYear);
+
       $premiumInfoPrevMonth = $this->hubletoApp->getPremiumInfo($prevMonth, $prevYear);
       $premiumInfoThisMonth = $this->hubletoApp->getPremiumInfo($thisMonth, $thisYear);
+
+    // var_dump($premiumInfoPrevMonth);
+    // var_dump($premiumInfoThisMonth);
+    // exit;
 
       // suma za pouzivatelov tento mesiac
 
@@ -73,19 +107,21 @@ class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
 
       if ($discountedPriceForCurrentlyActiveUsers > 0) {
         $mPayment->record->recordCreate([
-          'datetime_charged' => date('Y-m-d H:i:s'),
+          'datetime_charged' => date('Y-m-d H:i:s', strtotime($today)),
           'full_amount' => -$fullPriceForCurrentlyActiveUsers,
           'discounted_amount' => -$discountedPriceForCurrentlyActiveUsers,
           'discount_percent' => $premiumInfoThisMonth['discount'],
-          'notes' => 'currently active ' . $premiumInfoThisMonth['activeUsers'] . ' active users + ' . $premiumInfoThisMonth['paidApps'] . ' paid apps',
+          'details' => '{"activeUsers":' . $premiumInfoThisMonth['activeUsers'] . ',"paidApps":' . $premiumInfoThisMonth['paidApps'] . '}',
           'has_invoice' => true,
+          'type' => $mPayment::TYPE_SUBSCRIPTION_FEE,
+          'uuid' => \ADIOS\Core\Helper::generateUuidV4(),
         ]);
       }
 
       // suma za pouzivatelov pridanych minuly mesiac
 
-      $usersAddedPrevMonth = $premiumInfoPrevMonth['activeUsers'] - $premiumInfoPrevPrevMonth['activeUsers'];
-      $paidAppsAddedPrevMonth = $premiumInfoPrevMonth['paidApps'] - $premiumInfoPrevPrevMonth['paidApps'];
+      $usersAddedPrevMonth = $premiumInfoPrevMonth['activeUsers'] - ($paymentPrevMonthDetails['activeUsers'] ?? 0);
+      $paidAppsAddedPrevMonth = $premiumInfoPrevMonth['paidApps'] - ($paymentPrevMonthDetails['paidApps'] ?? 0);
 
       $fullPriceForActiveUsersAddedPrevMonth = $this->hubletoApp->getPrice(
         $usersAddedPrevMonth,
@@ -101,12 +137,14 @@ class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
 
       if ($discountedPriceForActiveUsersAddedPrevMonth > 0) {
         $mPayment->record->recordCreate([
-          'datetime_charged' => date('Y-m-d H:i:s'),
+          'datetime_charged' => date('Y-m-d 23:59:59', strtotime('last day of previous month', strtotime($today))),
           'full_amount' => -$fullPriceForActiveUsersAddedPrevMonth,
           'discounted_amount' => -$discountedPriceForActiveUsersAddedPrevMonth,
           'discount_percent' => $premiumInfoPrevMonth['discount'],
-          'notes' => 'last month added ' . $premiumInfoPrevMonth['activeUsers'] . ' active users + ' . $premiumInfoPrevMonth['paidApps'] . ' paid apps',
+          'details' => '{"newActiveUsers":' . $usersAddedPrevMonth . ',"newPaidApps":' . $paidAppsAddedPrevMonth . '}',
           'has_invoice' => true,
+          'type' => $mPayment::TYPE_BACK_PAY,
+          'uuid' => \ADIOS\Core\Helper::generateUuidV4(),
         ]);
       }
 
@@ -115,9 +153,11 @@ class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
 
       if ($toPay > 0) {
         $mPayment->record->recordCreate([
-          'datetime_charged' => date('Y-m-d H:i:s'),
+          'datetime_charged' => date('Y-m-d H:i:s', strtotime($today)),
           'full_amount' => $toPay,
-          'notes' => 'simulated payment with card'
+          'details' => '{"reason":"simulated payment with card"}',
+          'type' => $mPayment::TYPE_PAYMENT_BY_CARD,
+          'uuid' => \ADIOS\Core\Helper::generateUuidV4(),
         ]);
       }
 
@@ -130,7 +170,8 @@ class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
 
       return [
         'result' => self::PAYMENT_SUCCESS,
-        'premiumInfoPrevPrevMonth' => $premiumInfoPrevPrevMonth,
+        'paymentPrevMonth' => $paymentPrevMonth,
+        'paymentThisMonth' => $paymentThisMonth,
         'premiumInfoPrevMonth' => $premiumInfoPrevMonth,
         'premiumInfoThisMonth' => $premiumInfoThisMonth,
       ];

@@ -51,9 +51,6 @@
           <i class="fas fa-medal mr-2"></i>
           You are upgraded to Premium
         </div>
-        <div class="badge badge-success text-center block">
-          Your Premium account is activated since <b>{{ viewParams.app.configAsString('premiumAccountSince') }}</b>.
-        </div>
         {% if viewParams.freeTrialInfo.isTrialPeriod %}
           <div class="badge badge-warning block text-center text-2xl p-4 mt-2">
             Free trial expires in <b>{{ viewParams.freeTrialInfo.trialPeriodExpiresIn }} days</b>.<br/>
@@ -62,7 +59,49 @@
             Configure your payment method.
           </div>
         {% endif %}
-        <div class="block badge text-center {% if viewParams.currentCredit <= 0 %} badge-danger {% else %} badge-success {% endif %} text-2xl p-4 mt-2 ">
+        {% if not viewParams.subscriptionInfo.isActive %}
+          <div class="block badge text-center badge-danger p-4 mt-2">
+            <div class="text-2xl">Your Premium account is blocked</div>
+            <div class="mt-2">
+              <a class="btn btn-white" href="{{ config.accountUrl }}/cloud/activate-subscription-renewal">
+                <span class="icon"><i class="fas fa-arrow-up"></i></span>
+                <span class="text">Activate subscription again</span>
+              </a>
+              or
+              <a class="btn btn-white" href="{{ config.accountUrl }}/cloud">
+                <span class="icon"><i class="fas fa-arrow-down"></i></span>
+                <span class="text">Downgrade to Personal account</span>
+              </a>
+            </div>
+          </div>
+        {% else %}
+          {% if viewParams.app.configAsBool('subscriptionRenewalActive') %}
+            <div class="block badge text-center badge-success p-4 mt-2">
+              <div class="text-2xl">
+                <i class="fas fa-rotate mr-2"></i> Automatic subscription renewal is active
+              </div>
+              <div>
+                Access to your Premium account will be automaticaly renewed next month.
+              </div>
+            </div>
+          {% else %}
+            <div class="block badge text-center badge-danger p-4 mt-2">
+              <div class="text-2xl">
+                <i class="fas fa-times mr-2"></i> Automatic subscription renewal is deactivated
+              </div>
+              <div>
+                Access to your Premium account will be blocked next month.
+              </div>
+              <div class="mt-8">
+                <a class="btn btn-square btn-large btn-warning" href="{{ config.accountUrl }}/cloud/activate-subscription-renewal">
+                  <span class="icon"><i class="fas fa-arrow-up"></i></span>
+                  <span class="text">Activate subscription renewal again</span>
+                </a>
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+        {# <div class="block badge text-center {% if viewParams.currentCredit <= 0 %} badge-danger {% else %} badge-success {% endif %} text-2xl p-4 mt-2 ">
           Your current credit is<br/>
           <br/>
           <b style="font-size:3em">{{ viewParams.main.locale.formatCurrency(viewParams.currentCredit, '€') }}</b>
@@ -75,7 +114,7 @@
               Do not want to get blocked? Configure payment with card or charge enough credit.
             </div>
           {% endif %}
-        {% endif %}
+        {% endif %} #}
         <div class="card mt-2">
           <div class="card-header">
             Your Premium benefits
@@ -187,14 +226,14 @@
           <span class="icon"><i class="fas fa-coins"></i></span>
           <span class="text">Manage billing accounts</span>
         </a>
-        <a href="cloud/test/make-random-payment" class="btn btn-transparent btn-list-item">
+        {# <a href="cloud/test/make-random-payment" class="btn btn-transparent btn-list-item">
           <span class="icon"><i class="fas fa-euro"></i></span>
           <span class="text">TEST: Simulate random payment</span>
         </a>
         <a href="cloud/test/clear-credit" class="btn btn-transparent btn-list-item">
           <span class="icon"><i class="fas fa-euro"></i></span>
           <span class="text">TEST: Clear credit</span>
-        </a>
+        </a> #}
       </div>
       <div class="card mt-2">
         <div class="card-header">Usage info</div>
@@ -231,11 +270,19 @@
             </tr>
             <tr>
               <td>Terms of use and privacy policy accepted</td>
-              <td><b>{{ viewParams.app.configAsString('legalDocumentsAccepted') }}</b></td>
+              <td><b>{{ viewParams.app.configAsString('legalDocumentsAccepted')|date('l, F jS Y') }}</b></td>
+            </tr>
+            <tr>
+              <td>Subscription active until</td>
+              <td><b>{{ viewParams.app.configAsString('subscriptionActiveUntil')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>Premium account activated</td>
-              <td><b>{{ viewParams.app.configAsString('premiumAccountSince') }}</b></td>
+              <td><b>{{ viewParams.app.configAsString('premiumAccountSince')|date('l, F jS Y') }}</b></td>
+            </tr>
+            <tr>
+              <td>Free trial until</td>
+              <td><b>{{ viewParams.app.configAsString('freeTrialPeriodUntil')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>Account UID</td>
@@ -247,6 +294,12 @@
             </tr>
           </table>
           <small class="text-gray-500">(*) Price is calculated based on maximum number of active users or paid apps during this month.</small>
+          <div class="mt-2">
+            <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud/deactivate-subscription-renewal">
+              <span class="icon"><i class="fas fa-stop"></i></span>
+              <span class="text">Deactivate subscription renewal</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

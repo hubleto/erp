@@ -11,7 +11,7 @@ class ActivatePremiumAccount extends \HubletoMain\Core\Controllers\Controller {
     $this->hubletoApp->saveConfig('premiumAccountSince', date('Y-m-d H:i:s'));
     $this->hubletoApp->saveConfig('subscriptionRenewalActive', '1');
     $this->hubletoApp->saveConfig('subscriptionActiveUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
-    $this->hubletoApp->saveConfig('freeTrialPeriodSince', date('Y-m-d H:i:s'));
+    $this->hubletoApp->saveConfig('freeTrialPeriodUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
     $this->main->router->redirectTo('cloud');
   }
 

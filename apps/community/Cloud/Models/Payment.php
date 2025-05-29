@@ -6,6 +6,7 @@ use ADIOS\Core\Db\Column\Decimal;
 use ADIOS\Core\Db\Column\DateTime;
 use ADIOS\Core\Db\Column\Varchar;
 use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Boolean;
 
 class Payment extends \HubletoMain\Core\Models\Model
 {
@@ -20,6 +21,7 @@ class Payment extends \HubletoMain\Core\Models\Model
       'full_amount' => (new Decimal($this, $this->translate('Full amount')))->setUnit('€')->setDecimals(2),
       'discounted_amount' => (new Decimal($this, $this->translate('Discounted amount')))->setUnit('€')->setDecimals(2),
       'notes' => (new Varchar($this, $this->translate('Notes'))),
+      'has_invoice' => (new Boolean($this, $this->translate('Has invoice'))),
       'id_billing_account' => (new Lookup($this, $this->translate("Billing account"), BillingAccount::class, 'CASCADE')),
     ]);
   }

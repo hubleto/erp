@@ -23,9 +23,12 @@ class Loader extends \HubletoMain\Core\App
       '/^cloud\/api\/accept-legal-documents\/?$/' => Controllers\Api\AcceptLegalDocuments::class,
       '/^cloud\/api\/activate-premium-account\/?$/' => Controllers\Api\ActivatePremiumAccount::class,
       '/^cloud\/api\/charge-credit\/?$/' => Controllers\Api\ChargeCredit::class,
+      '/^cloud\/api\/pay-monthly\/?$/' => Controllers\Api\PayMonthly::class,
       '/^cloud\/log\/?$/' => Controllers\Log::class,
       '/^cloud\/test\/make-random-payment\/?$/' => Controllers\Test\MakeRandomPayment::class,
       '/^cloud\/test\/clear-credit\/?$/' => Controllers\Test\ClearCredit::class,
+      '/^cloud\/activate-subscription-renewal\/?$/' => Controllers\ActivateSubscriptionRenewal::class,
+      '/^cloud\/deactivate-subscription-renewal\/?$/' => Controllers\DeactivateSubscriptionRenewal::class,
       '/^cloud\/payments-and-invoices\/?$/' => Controllers\PaymentsAndInvoices::class,
       '/^cloud\/billing-accounts\/?$/' => Controllers\BillingAccounts::class,
       '/^cloud\/upgrade\/?$/' => Controllers\Upgrade::class,
@@ -42,9 +45,8 @@ class Loader extends \HubletoMain\Core\App
       if (!$this->configAsBool('legalDocumentsAccepted')) {
         $this->main->router->redirectTo('cloud');
       } else if ($this->main->isPremium) {
-        $currentCredit = $this->getCurrentCredit();
-        $freeTrialInfo = $this->getFreeTrialInfo();
-        if (!$freeTrialInfo['isTrialPeriod'] && $currentCredit <= 0) {
+        $subscriptionInfo = $this->getSubscriptionInfo();
+        if (!$subscriptionInfo['isActive']) {
           $this->main->router->redirectTo('cloud');
         }
       }
@@ -111,27 +113,44 @@ class Loader extends \HubletoMain\Core\App
 
   public function getFreeTrialInfo(): array
   {
-    $daysOfFreeTrial = 0;
     $isTrialPeriod = false;
     $trialPeriodExpiresIn = 0;
 
     $premiumAccountSince = $this->configAsString('premiumAccountSince');
+    $freeTrialPeriodUntil = $this->configAsString('freeTrialPeriodUntil');
 
-    if (empty($premiumAccountSince)) {
-    } else {
-      $mPayment = new Models\Payment($this->main);
-      $alreadyMadePayment = $mPayment->record->count() > 0;
-      if (!$alreadyMadePayment) {
-        $daysOfFreeTrial = ceil((time() - strtotime($premiumAccountSince))/3600/24);
-        $trialPeriodExpiresIn = 30 - $daysOfFreeTrial;
-        $isTrialPeriod = $trialPeriodExpiresIn > 0;
-      }
+    // if (empty($premiumAccountSince)) {
+    // } else {
+    //   $mPayment = new Models\Payment($this->main);
+    //   $alreadyMadePayment = $mPayment->record->count() > 0;
+    //   if (!$alreadyMadePayment) {
+    //     $daysOfFreeTrial = ceil((time() - strtotime($premiumAccountSince))/3600/24);
+    //     $trialPeriodExpiresIn = 30 - $daysOfFreeTrial;
+    //     $isTrialPeriod = $trialPeriodExpiresIn > 0;
+    //   }
+    // }
+
+    if (!empty($premiumAccountSince)) {
+      $trialPeriodExpiresIn = floor((strtotime($freeTrialPeriodUntil) - time())/3600/24);
+      $isTrialPeriod = $trialPeriodExpiresIn > 0;
     }
 
     return [
       'isTrialPeriod' => $isTrialPeriod,
-      'daysOfFreeTrial' => $daysOfFreeTrial,
       'trialPeriodExpiresIn' => $trialPeriodExpiresIn,
+    ];
+  }
+
+  public function getSubscriptionInfo(): array
+  {
+    $subscriptionRenewalActive = $this->configAsBool('subscriptionRenewalActive');
+    $subscriptionActiveUntil = $this->configAsString('subscriptionActiveUntil');
+    $subscriptionActive = strtotime($subscriptionActiveUntil) > time();
+
+    return [
+      'renewalActive' => $subscriptionRenewalActive,
+      'activeUntil' => $subscriptionActiveUntil,
+      'isActive' => $subscriptionActive,
     ];
   }
 
@@ -139,7 +158,6 @@ class Loader extends \HubletoMain\Core\App
   {
     $freeTrialInfo = $this->getFreeTrialInfo();
     $isTrialPeriod = $freeTrialInfo['isTrialPeriod'];
-    $daysOfFreeTrial = $freeTrialInfo['daysOfFreeTrial'];
     $trialPeriodExpiresIn = $freeTrialInfo['trialPeriodExpiresIn'];
 
     if ($where == 'beforeSidebar') {
@@ -173,12 +191,23 @@ class Loader extends \HubletoMain\Core\App
 
   public function getPremiumInfo(int $month = 0, int $year = 0): array
   {
+    $mDiscount = new \HubletoApp\Community\Cloud\Models\Discount($this->main);
+    $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
+    $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
+
     if ($month == 0) $month = date('m');
     if ($year == 0) $year = date('Y');
 
-    $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
+    $premiumInfo = [
+      'activeUsers' => 0,
+      'paidApps' => 0,
+      'discount' => 0,
+      'paymentBase' => 0,
+      'paymentWithDiscount' => 0,
+    ];
 
-    $premiumInfo = $mLog->record
+
+    $log = $mLog->record
       ->selectRaw('
         max(ifnull(active_users, 0)) as max_active_users,
         max(ifnull(paid_apps, 0)) as max_paid_apps
@@ -189,17 +218,41 @@ class Loader extends \HubletoMain\Core\App
       ?->toArray()
     ;
 
-    if (is_array($premiumInfo)) {
-      return [
-        'activeUsers' => $premiumInfo['max_active_users'] ?? 0,
-        'paidApps' => $premiumInfo['max_paid_apps'] ?? 0,
-      ];
-    } else {
-      return [
-        'activeUsers' => 0,
-        'paidApps' => 0,
-      ];
+    if (is_array($log)) {
+      $premiumInfo['activeUsers'] = $log['max_active_users'] ?? 0;
+      $premiumInfo['paidApps'] = $log['max_paid_apps'] ?? 0;
     }
+
+    $discount = $mDiscount->record
+      ->where('month', $month)
+      ->where('year', $year)
+      ->first()
+      ?->toArray()
+    ;
+
+    if (is_array($discount)) {
+      $premiumInfo['discount'] = $discount['discount_percent'] ?? 0;
+    }
+
+    $payment = $mPayment->record
+      ->selectRaw('
+        sum(ifnull(full_amount, 0)) as full_amount_total,
+        sum(ifnull(discounted_amount, 0)) as discounted_amount_total
+      ')
+      ->whereMonth('datetime_charged', $month)
+      ->whereYear('datetime_charged', $year)
+      ->where('full_amount', '<', 0)
+      ->first()
+      ?->toArray()
+    ;
+
+    if (is_array($discount)) {
+      $premiumInfo['paymentBase'] = $discount['full_amount_total'] ?? 0;
+      $premiumInfo['paymentWithDiscount'] = $discount['discounted_amount_total'] ?? 0;
+    }
+
+    return $premiumInfo;
+
   }
 
   public function premiumAccountActivated(): bool

@@ -30,6 +30,7 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
     ;
 
     $this->viewParams['freeTrialInfo'] = $this->hubletoApp->getFreeTrialInfo();
+    $this->viewParams['subscriptionInfo'] = $this->hubletoApp->getSubscriptionInfo();
     $this->viewParams['priceForThisMonth'] = $this->hubletoApp->getPrice($premiumInfo['activeUsers'], $premiumInfo['paidApps'], 0);
 
     $this->setView('@HubletoApp:Community:Cloud/Dashboard.twig');

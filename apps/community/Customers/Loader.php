@@ -64,61 +64,61 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
-      "HubletoApp/Community/Customers/Models/CustomerActivity:Create",
-      "HubletoApp/Community/Customers/Models/CustomerActivity:Read",
-      "HubletoApp/Community/Customers/Models/CustomerActivity:Update",
-      "HubletoApp/Community/Customers/Models/CustomerActivity:Delete",
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
+  //     "HubletoApp/Community/Customers/Models/CustomerActivity:Create",
+  //     "HubletoApp/Community/Customers/Models/CustomerActivity:Read",
+  //     "HubletoApp/Community/Customers/Models/CustomerActivity:Update",
+  //     "HubletoApp/Community/Customers/Models/CustomerActivity:Delete",
 
-      "HubletoApp/Community/Customers/Models/Customer:Create",
-      "HubletoApp/Community/Customers/Models/Customer:Read",
-      "HubletoApp/Community/Customers/Models/Customer:Update",
-      "HubletoApp/Community/Customers/Models/Customer:Delete",
+  //     "HubletoApp/Community/Customers/Models/Customer:Create",
+  //     "HubletoApp/Community/Customers/Models/Customer:Read",
+  //     "HubletoApp/Community/Customers/Models/Customer:Update",
+  //     "HubletoApp/Community/Customers/Models/Customer:Delete",
 
-      "HubletoApp/Community/Customers/Models/CustomerTag:Create",
-      "HubletoApp/Community/Customers/Models/CustomerTag:Read",
-      "HubletoApp/Community/Customers/Models/CustomerTag:Update",
-      "HubletoApp/Community/Customers/Models/CustomerTag:Delete",
+  //     "HubletoApp/Community/Customers/Models/CustomerTag:Create",
+  //     "HubletoApp/Community/Customers/Models/CustomerTag:Read",
+  //     "HubletoApp/Community/Customers/Models/CustomerTag:Update",
+  //     "HubletoApp/Community/Customers/Models/CustomerTag:Delete",
 
-      "HubletoApp/Community/Customers/Models/Value:Create",
-      "HubletoApp/Community/Customers/Models/Value:Read",
-      "HubletoApp/Community/Customers/Models/Value:Update",
-      "HubletoApp/Community/Customers/Models/Value:Delete",
+  //     "HubletoApp/Community/Customers/Models/Value:Create",
+  //     "HubletoApp/Community/Customers/Models/Value:Read",
+  //     "HubletoApp/Community/Customers/Models/Value:Update",
+  //     "HubletoApp/Community/Customers/Models/Value:Delete",
 
-      "HubletoApp/Community/Customers/Models/Contact:Create",
-      "HubletoApp/Community/Customers/Models/Contact:Read",
-      "HubletoApp/Community/Customers/Models/Contact:Update",
-      "HubletoApp/Community/Customers/Models/Contact:Delete",
+  //     "HubletoApp/Community/Customers/Models/Contact:Create",
+  //     "HubletoApp/Community/Customers/Models/Contact:Read",
+  //     "HubletoApp/Community/Customers/Models/Contact:Update",
+  //     "HubletoApp/Community/Customers/Models/Contact:Delete",
 
-      "HubletoApp/Community/Customers/Models/Tag:Create",
-      "HubletoApp/Community/Customers/Models/Tag:Read",
-      "HubletoApp/Community/Customers/Models/Tag:Update",
-      "HubletoApp/Community/Customers/Models/Tag:Delete",
+  //     "HubletoApp/Community/Customers/Models/Tag:Create",
+  //     "HubletoApp/Community/Customers/Models/Tag:Read",
+  //     "HubletoApp/Community/Customers/Models/Tag:Update",
+  //     "HubletoApp/Community/Customers/Models/Tag:Delete",
 
-      "HubletoApp/Community/Customers/Controllers/Customer",
-      "HubletoApp/Community/Customers/Controllers/CustomerActivity",
-      "HubletoApp/Community/Customers/Controllers/Address",
-      "HubletoApp/Community/Customers/Controllers/CustomerTag",
-      "HubletoApp/Community/Customers/Controllers/Contact",
-      "HubletoApp/Community/Customers/Controllers/ContactTag",
-      "HubletoApp/Community/Customers/Controllers/CustomerActivity",
-      "HubletoApp/Community/Customers/Controllers/Customer",
+  //     "HubletoApp/Community/Customers/Controllers/Customer",
+  //     "HubletoApp/Community/Customers/Controllers/CustomerActivity",
+  //     "HubletoApp/Community/Customers/Controllers/Address",
+  //     "HubletoApp/Community/Customers/Controllers/CustomerTag",
+  //     "HubletoApp/Community/Customers/Controllers/Contact",
+  //     "HubletoApp/Community/Customers/Controllers/ContactTag",
+  //     "HubletoApp/Community/Customers/Controllers/CustomerActivity",
+  //     "HubletoApp/Community/Customers/Controllers/Customer",
 
-      "HubletoApp/Community/Customers/Api/GetCalendarEvents",
-      "HubletoApp/Community/Customers/Api/GetCustomer",
-      "HubletoApp/Community/Customers/Api/GetCustomerContacts",
+  //     "HubletoApp/Community/Customers/Api/GetCalendarEvents",
+  //     "HubletoApp/Community/Customers/Api/GetCustomer",
+  //     "HubletoApp/Community/Customers/Api/GetCustomerContacts",
 
-      "HubletoApp/Community/Customers/Customers",
-      "HubletoApp/Community/Customers/Contacts",
-    ];
+  //     "HubletoApp/Community/Customers/Customers",
+  //     "HubletoApp/Community/Customers/Contacts",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 }

@@ -375,102 +375,52 @@ class Loader extends \HubletoMain\Core\App
         ]);
       }
     }
-  }
 
-  public function installDefaultPermissions(): void
-  {
     $mUserRole = new Models\UserRole($this->main);
     $mPermission = new Models\Permission($this->main);
 
-    $permissions = [
-      "HubletoApp/Community/Settings/Models/ActivityType:Create",
-      "HubletoApp/Community/Settings/Models/ActivityType:Read",
-      "HubletoApp/Community/Settings/Models/ActivityType:Update",
-      "HubletoApp/Community/Settings/Models/ActivityType:Delete",
-
-      "HubletoApp/Community/Settings/Models/Country:Create",
-      "HubletoApp/Community/Settings/Models/Country:Read",
-      "HubletoApp/Community/Settings/Models/Country:Update",
-      "HubletoApp/Community/Settings/Models/Country:Delete",
-
-      "HubletoApp/Community/Settings/Models/Currency:Create",
-      "HubletoApp/Community/Settings/Models/Currency:Read",
-      "HubletoApp/Community/Settings/Models/Currency:Update",
-      "HubletoApp/Community/Settings/Models/Currency:Delete",
-
-      "HubletoApp/Community/Settings/Models/Tag:Create",
-      "HubletoApp/Community/Settings/Models/Tag:Read",
-      "HubletoApp/Community/Settings/Models/Tag:Update",
-      "HubletoApp/Community/Settings/Models/Tag:Delete",
-
-      "HubletoApp/Community/Settings/Models/Company:Create",
-      "HubletoApp/Community/Settings/Models/Company:Read",
-      "HubletoApp/Community/Settings/Models/Company:Update",
-      "HubletoApp/Community/Settings/Models/Company:Delete",
-
-      "HubletoApp/Community/Settings/Models/Setting:Create",
-      "HubletoApp/Community/Settings/Models/Setting:Read",
-      "HubletoApp/Community/Settings/Models/Setting:Update",
-      "HubletoApp/Community/Settings/Models/Setting:Delete",
-
-      "HubletoApp/Community/Settings/Models/User:Create",
-      "HubletoApp/Community/Settings/Models/User:Read",
-      "HubletoApp/Community/Settings/Models/User:Update",
-      "HubletoApp/Community/Settings/Models/User:Delete",
-
-      "HubletoApp/Community/Settings/Models/UserRole:Create",
-      "HubletoApp/Community/Settings/Models/UserRole:Read",
-      "HubletoApp/Community/Settings/Models/UserRole:Update",
-      "HubletoApp/Community/Settings/Models/UserRole:Delete",
-
-      "HubletoApp/Community/Settings/Models/UserHasRole:Create",
-      "HubletoApp/Community/Settings/Models/UserHasRole:Read",
-      "HubletoApp/Community/Settings/Models/UserHasRole:Update",
-      "HubletoApp/Community/Settings/Models/UserHasRole:Delete",
-
-      "HubletoApp/Community/Settings/Models/Permission:Create",
-      "HubletoApp/Community/Settings/Models/Permission:Read",
-      "HubletoApp/Community/Settings/Models/Permission:Update",
-      "HubletoApp/Community/Settings/Models/Permission:Delete",
-
-      "HubletoApp/Community/Settings/Controllers/Dashboard",
-      "HubletoApp/Community/Settings/Controllers/ActivityType",
-      "HubletoApp/Community/Settings/Controllers/Country",
-      "HubletoApp/Community/Settings/Controllers/Currency",
-      "HubletoApp/Community/Settings/Controllers/Company",
-      "HubletoApp/Community/Settings/Controllers/Setting",
-      "HubletoApp/Community/Settings/Controllers/Tag",
-      "HubletoApp/Community/Settings/Controllers/User",
-      "HubletoApp/Community/Settings/Controllers/UserRole",
-      "HubletoApp/Community/Settings/Controllers/UserHasRole",
-      "HubletoApp/Community/Settings/Controllers/Permissions",
-      "HubletoApp/Community/Settings/Controllers/Dashboard",
-
-      "HubletoApp/Community/Settings/Dashboard",
-      "HubletoApp/Community/Settings/ActivityType",
-      "HubletoApp/Community/Settings/Country",
-      "HubletoApp/Community/Settings/Currency",
-      "HubletoApp/Community/Settings/Company",
-      "HubletoApp/Community/Settings/Setting",
-      "HubletoApp/Community/Settings/Tag",
-      "HubletoApp/Community/Settings/User",
-      "HubletoApp/Community/Settings/UserRole",
-      "HubletoApp/Community/Settings/UserHasRole",
-      "HubletoApp/Community/Settings/Permissions",
-    ];
-
-    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_ADMINISTRATOR, 'role' => 'Administrator', 'grant_all' => true, 'is_default' => true ])['id'];
-    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_CHIEF_OFFICER, 'role' => 'Chief Officer', 'grant_all' => false, 'is_default' => true ])['id'];
-    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_MANAGER, 'role' => 'Manager', 'grant_all' => false, 'is_default' => true ])['id'];
-    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_EMPLOYEE, 'role' => 'Employee', 'grant_all' => false, 'is_default' => true ])['id'];
-    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_ASSISTANT, 'role' => 'Assistant', 'grant_all' => false, 'is_default' => true ])['id'];
-    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_EXTERNAL, 'role' => 'External', 'grant_all' => false, 'is_default' => true ])['id'];
-
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
+    $mUserRole->record->recordCreate([
+      'id' => Models\UserRole::ROLE_ADMINISTRATOR,
+      'role' => 'Administrator',
+      'description' => 'Can do anything.',
+      'grant_all' => true,
+      'is_default' => true,
+    ])['id'];
+    $mUserRole->record->recordCreate([
+      'id' => Models\UserRole::ROLE_CHIEF_OFFICER,
+      'role' => 'Chief Officer (CEO, CFO, CTO, ...)',
+      'description' => 'Can read all data and can modify most of the data. Does not have access to settings.',
+      'grant_all' => false,
+      'is_default' => true,
+    ])['id'];
+    $mUserRole->record->recordCreate([
+      'id' => Models\UserRole::ROLE_MANAGER,
+      'role' => 'Manager (Sales, Project, ...)',
+      'description' => 'Very similar to chief officer, but limited to his/her teams.',
+      'grant_all' => false,
+      'is_default' => true,
+    ])['id'];
+    $mUserRole->record->recordCreate([
+      'id' => Models\UserRole::ROLE_EMPLOYEE,
+      'role' => 'Employee',
+      'description' => 'In general, can see or modify only data where he/she is appointed as the responsible person.',
+      'grant_all' => false,
+      'is_default' => true,
+    ])['id'];
+    $mUserRole->record->recordCreate([
+      'id' => Models\UserRole::ROLE_ASSISTANT,
+      'role' => 'Assistant',
+      'description' => 'Very similar to employee, but may be more limited in some certain situations.',
+      'grant_all' => false,
+      'is_default' => true,
+    ])['id'];
+    $mUserRole->record->recordCreate([
+      'id' => Models\UserRole::ROLE_EXTERNAL,
+      'role' => 'External', 
+      'description' => 'By default should not have access to anything. Access permissions must be enabled in settings by administrator.',
+      'grant_all' => false,
+      'is_default' => true,
+    ])['id'];
   }
 }
 

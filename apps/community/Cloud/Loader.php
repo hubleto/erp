@@ -64,23 +64,23 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
 
-      "HubletoApp/Community/Cloud/Controllers/Cloud",
-      "HubletoApp/Community/Cloud/Controllers/Upgrade",
+  //     "HubletoApp/Community/Cloud/Controllers/Cloud",
+  //     "HubletoApp/Community/Cloud/Controllers/Upgrade",
 
-      "HubletoApp/Community/Cloud/Cloud",
-    ];
+  //     "HubletoApp/Community/Cloud/Cloud",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 
   public function getAccountUid() {
     $accountUid = $this->configAsString('accountUid');

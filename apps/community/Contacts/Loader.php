@@ -58,15 +58,15 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [];
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 }

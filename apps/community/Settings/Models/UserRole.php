@@ -36,6 +36,7 @@ class UserRole extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'role' => (new Varchar($this, $this->translate("Role")))->setRequired(),
       'grant_all' => (new Boolean($this, $this->translate("Grant all permissions (administrator role)"))),
+      'description' => (new Varchar($this, $this->translate("Description"))),
       'is_default' => (new Boolean($this, $this->translate("Is default role (cannot be modified)"))),
     ]);
   }

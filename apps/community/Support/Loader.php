@@ -15,21 +15,21 @@ class Loader extends \HubletoMain\Core\App
 
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
 
-      "HubletoApp/Community/Support/Controllers/Dashboard",
+  //     "HubletoApp/Community/Support/Controllers/Dashboard",
 
-      "HubletoApp/Community/Support/Dashboard",
-    ];
+  //     "HubletoApp/Community/Support/Dashboard",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 
 }

@@ -4,7 +4,9 @@ namespace HubletoApp\Community\Settings\Models;
 
 use \ADIOS\Core\Db\Column\Varchar;
 
-class InvoiceProfile extends \ADIOS\Core\Model {
+class InvoiceProfile extends \HubletoMain\Core\Models\Model
+{
+
   public string $table = 'invoice_profiles';
   public ?string $lookupSqlValue = '{%TABLE%}.name';
   public string $recordManagerClass = RecordManagers\InvoiceProfile::class;

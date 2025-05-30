@@ -193,7 +193,47 @@ class App {
 
   public function installDefaultPermissions(): void
   {
-    // to be overriden
+    $controllersFolder = $this->rootFolder . '/Controllers';
+    if (is_dir($controllersFolder)) {
+      $controllers = \ADIOS\Core\Helper::scanDirRecursively($controllersFolder);
+      foreach ($controllers as $controller) {
+        $cClass = $this->namespace . '/Controllers/' . $controller;
+        $cClass = str_replace('/', '\\', $cClass);
+        $cClass = str_replace('.php', '', $cClass);
+        if (class_exists($cClass)) {
+          $cObj = new $cClass($this->main);
+          $permissions[] = $cObj->permission;
+        }
+      }
+    }
+
+    $modelsFolder = $this->rootFolder . '/Models';
+    if (is_dir($modelsFolder)) {
+      $models = \ADIOS\Core\Helper::scanDirRecursively($modelsFolder);
+      foreach ($models as $model) {
+        $mClass = $this->namespace . '/Models/' . $model;
+        $mClass = str_replace('/', '\\', $mClass);
+        $mClass = str_replace('.php', '', $mClass);
+        if (class_exists($mClass)) {
+          try {
+            $mObj = new $mClass($this->main);
+            $permissions[] = $mObj->permission . ':Create';
+            $permissions[] = $mObj->permission . ':Read';
+            $permissions[] = $mObj->permission . ':Update';
+            $permissions[] = $mObj->permission . ':Delete';
+          } catch (\Throwable) {
+          }
+        }
+      }
+    }
+
+    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+
+    foreach ($permissions as $permission) {
+      $mPermission->record->recordCreate([
+        "permission" => $permission
+      ]);
+    }
   }
 
   public function generateDemoData(): void

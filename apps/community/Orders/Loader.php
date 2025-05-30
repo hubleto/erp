@@ -42,36 +42,36 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
-      "HubletoApp/Community/Orders/Models/Order:Create",
-      "HubletoApp/Community/Orders/Models/Order:Read",
-      "HubletoApp/Community/Orders/Models/Order:Update",
-      "HubletoApp/Community/Orders/Models/Order:Delete",
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
+  //     "HubletoApp/Community/Orders/Models/Order:Create",
+  //     "HubletoApp/Community/Orders/Models/Order:Read",
+  //     "HubletoApp/Community/Orders/Models/Order:Update",
+  //     "HubletoApp/Community/Orders/Models/Order:Delete",
 
-      "HubletoApp/Community/Orders/Models/History:Create",
-      "HubletoApp/Community/Orders/Models/History:Read",
-      "HubletoApp/Community/Orders/Models/History:Update",
-      "HubletoApp/Community/Orders/Models/History:Delete",
+  //     "HubletoApp/Community/Orders/Models/History:Create",
+  //     "HubletoApp/Community/Orders/Models/History:Read",
+  //     "HubletoApp/Community/Orders/Models/History:Update",
+  //     "HubletoApp/Community/Orders/Models/History:Delete",
 
-      "HubletoApp/Community/Orders/Models/OrderProduct:Create",
-      "HubletoApp/Community/Orders/Models/OrderProduct:Read",
-      "HubletoApp/Community/Orders/Models/OrderProduct:Update",
-      "HubletoApp/Community/Orders/Models/OrderProduct:Delete",
+  //     "HubletoApp/Community/Orders/Models/OrderProduct:Create",
+  //     "HubletoApp/Community/Orders/Models/OrderProduct:Read",
+  //     "HubletoApp/Community/Orders/Models/OrderProduct:Update",
+  //     "HubletoApp/Community/Orders/Models/OrderProduct:Delete",
 
-      "HubletoApp/Community/Orders/Controllers/Orders",
+  //     "HubletoApp/Community/Orders/Controllers/Orders",
 
-      "HubletoApp/Community/Orders/Orders",
-    ];
+  //     "HubletoApp/Community/Orders/Orders",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 
   public function generateDemoData(): void
   {

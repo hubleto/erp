@@ -31,7 +31,7 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installDefaultPermissions(): void
-  {
-  }
+  // public function installDefaultPermissions(): void
+  // {
+  // }
 }

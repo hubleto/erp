@@ -16,14 +16,15 @@ class Controller extends \ADIOS\Core\Controller
   {
     $this->main = $main;
 
+    parent::__construct($main);
+
     $reflection = new \ReflectionClass($this);
     preg_match('/^(.*?)\\\Controllers\\\(.*?)$/', $reflection->getName(), $m);
     if (isset($m[1]) && isset($m[2])) {
       $this->appNamespace = $m[1];
       $this->translationContext = $m[1] . '\\Loader::Controllers\\' . $m[2];
+      $this->permission = $this->translationContext;
     }
-
-    parent::__construct($main);
 
     if ($this->main->apps->getAppInstance($this->appNamespace)) {
       $this->hubletoApp = $this->main->apps->getAppInstance($this->appNamespace);

@@ -38,18 +38,18 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
-      "HubletoApp/Community/Desktop/Home",
-      "HubletoApp/Community/Desktop/Controllers/Home",
-    ];
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
+  //     "HubletoApp/Community/Desktop/Home",
+  //     "HubletoApp/Community/Desktop/Controllers/Home",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 }

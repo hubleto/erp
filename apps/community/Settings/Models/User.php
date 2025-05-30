@@ -21,6 +21,9 @@ class User extends \ADIOS\Models\User
   public string $recordManagerClass = RecordManagers\User::class;
   public ?string $lookupSqlValue = '{%TABLE%}.email';
 
+  public string $translationContext = 'HubletoApp/Community/Settings/Loader::Models/User';
+  public string $permission = 'HubletoApp/Community/Settings/Loader::Models/User';
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [

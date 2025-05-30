@@ -58,20 +58,20 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
-      "HubletoApp/Community/Calendar/Calendar",
-      "HubletoApp/Community/Calendar/Controllers/Calendar",
-      "HubletoApp/Community/Calendar/Api/GetCalendarEvents",
-    ];
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
+  //     "HubletoApp/Community/Calendar/Calendar",
+  //     "HubletoApp/Community/Calendar/Controllers/Calendar",
+  //     "HubletoApp/Community/Calendar/Api/GetCalendarEvents",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 
 }

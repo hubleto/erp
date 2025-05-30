@@ -22,20 +22,20 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
-      "HubletoApp/Community/Help/Controllers/Help",
-      "HubletoApp/Community/Help/Help",
-    ];
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
+  //     "HubletoApp/Community/Help/Controllers/Help",
+  //     "HubletoApp/Community/Help/Help",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 
   public function addHotTip(string $slugRegExp, string $title): void
   {

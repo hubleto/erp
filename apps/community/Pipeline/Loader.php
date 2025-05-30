@@ -58,35 +58,35 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
-      "HubletoApp/Community/Pipeline/Controllers/Home",
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
+  //     "HubletoApp/Community/Pipeline/Controllers/Home",
 
-      "HubletoApp/Community/Pipeline/Home",
+  //     "HubletoApp/Community/Pipeline/Home",
 
-      "HubletoApp/Community/Pipeline/Models/Pipeline:Create",
-      "HubletoApp/Community/Pipeline/Models/Pipeline:Read",
-      "HubletoApp/Community/Pipeline/Models/Pipeline:Update",
-      "HubletoApp/Community/Pipeline/Models/Pipeline:Delete",
+  //     "HubletoApp/Community/Pipeline/Models/Pipeline:Create",
+  //     "HubletoApp/Community/Pipeline/Models/Pipeline:Read",
+  //     "HubletoApp/Community/Pipeline/Models/Pipeline:Update",
+  //     "HubletoApp/Community/Pipeline/Models/Pipeline:Delete",
 
-      "HubletoApp/Community/Pipeline/Models/PipelineStep:Create",
-      "HubletoApp/Community/Pipeline/Models/PipelineStep:Read",
-      "HubletoApp/Community/Pipeline/Models/PipelineStep:Update",
-      "HubletoApp/Community/Pipeline/Models/PipelineStep:Delete",
+  //     "HubletoApp/Community/Pipeline/Models/PipelineStep:Create",
+  //     "HubletoApp/Community/Pipeline/Models/PipelineStep:Read",
+  //     "HubletoApp/Community/Pipeline/Models/PipelineStep:Update",
+  //     "HubletoApp/Community/Pipeline/Models/PipelineStep:Delete",
 
-      "HubletoApp/Community/Pipeline/Controllers/Pipeline",
-      "HubletoApp/Community/Pipeline/Controllers/PipelineStep",
+  //     "HubletoApp/Community/Pipeline/Controllers/Pipeline",
+  //     "HubletoApp/Community/Pipeline/Controllers/PipelineStep",
 
-      "HubletoApp/Community/Pipeline/Pipeline",
-      "HubletoApp/Community/Pipeline/PipelineStep",
-    ];
+  //     "HubletoApp/Community/Pipeline/Pipeline",
+  //     "HubletoApp/Community/Pipeline/PipelineStep",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 }

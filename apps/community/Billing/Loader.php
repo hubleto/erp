@@ -28,31 +28,31 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installDefaultPermissions(): void
-  {
+  // public function installDefaultPermissions(): void
+  // {
 
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
-      "HubletoApp/Community/Billing/Models/BillingAccount:Create",
-      "HubletoApp/Community/Billing/Models/BillingAccount:Read",
-      "HubletoApp/Community/Billing/Models/BillingAccount:Update",
-      "HubletoApp/Community/Billing/Models/BillingAccount:Delete",
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
+  //     "HubletoApp/Community/Billing/Models/BillingAccount:Create",
+  //     "HubletoApp/Community/Billing/Models/BillingAccount:Read",
+  //     "HubletoApp/Community/Billing/Models/BillingAccount:Update",
+  //     "HubletoApp/Community/Billing/Models/BillingAccount:Delete",
 
-      "HubletoApp/Community/Billing/Models/BillingAccountService:Create",
-      "HubletoApp/Community/Billing/Models/BillingAccountService:Read",
-      "HubletoApp/Community/Billing/Models/BillingAccountService:Update",
-      "HubletoApp/Community/Billing/Models/BillingAccountService:Delete",
+  //     "HubletoApp/Community/Billing/Models/BillingAccountService:Create",
+  //     "HubletoApp/Community/Billing/Models/BillingAccountService:Read",
+  //     "HubletoApp/Community/Billing/Models/BillingAccountService:Update",
+  //     "HubletoApp/Community/Billing/Models/BillingAccountService:Delete",
 
-      "HubletoApp/Community/Billing/Controllers/BillingAccount",
-      "HubletoApp/Community/Billing/Controllers/BillingAccountService",
+  //     "HubletoApp/Community/Billing/Controllers/BillingAccount",
+  //     "HubletoApp/Community/Billing/Controllers/BillingAccountService",
 
-      "HubletoApp/Community/Billing/BillingAccount",
-    ];
+  //     "HubletoApp/Community/Billing/BillingAccount",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 }

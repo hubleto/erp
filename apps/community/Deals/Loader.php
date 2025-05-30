@@ -105,52 +105,52 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function installDefaultPermissions(): void
-  {
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-    $permissions = [
-      "HubletoApp/Community/Deals/Models/Deal:Create",
-      "HubletoApp/Community/Deals/Models/Deal:Read",
-      "HubletoApp/Community/Deals/Models/Deal:Update",
-      "HubletoApp/Community/Deals/Models/Deal:Delete",
+  // public function installDefaultPermissions(): void
+  // {
+  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $permissions = [
+  //     "HubletoApp/Community/Deals/Models/Deal:Create",
+  //     "HubletoApp/Community/Deals/Models/Deal:Read",
+  //     "HubletoApp/Community/Deals/Models/Deal:Update",
+  //     "HubletoApp/Community/Deals/Models/Deal:Delete",
 
-      "HubletoApp/Community/Deals/Models/DealActivity:Create",
-      "HubletoApp/Community/Deals/Models/DealActivity:Read",
-      "HubletoApp/Community/Deals/Models/DealActivity:Update",
-      "HubletoApp/Community/Deals/Models/DealActivity:Delete",
+  //     "HubletoApp/Community/Deals/Models/DealActivity:Create",
+  //     "HubletoApp/Community/Deals/Models/DealActivity:Read",
+  //     "HubletoApp/Community/Deals/Models/DealActivity:Update",
+  //     "HubletoApp/Community/Deals/Models/DealActivity:Delete",
 
-      "HubletoApp/Community/Deals/Models/DealDocument:Create",
-      "HubletoApp/Community/Deals/Models/DealDocument:Read",
-      "HubletoApp/Community/Deals/Models/DealDocument:Update",
-      "HubletoApp/Community/Deals/Models/DealDocument:Delete",
+  //     "HubletoApp/Community/Deals/Models/DealDocument:Create",
+  //     "HubletoApp/Community/Deals/Models/DealDocument:Read",
+  //     "HubletoApp/Community/Deals/Models/DealDocument:Update",
+  //     "HubletoApp/Community/Deals/Models/DealDocument:Delete",
 
-      "HubletoApp/Community/Deals/Models/DealHistory:Create",
-      "HubletoApp/Community/Deals/Models/DealHistory:Read",
-      "HubletoApp/Community/Deals/Models/DealHistory:Update",
-      "HubletoApp/Community/Deals/Models/DealHistory:Delete",
+  //     "HubletoApp/Community/Deals/Models/DealHistory:Create",
+  //     "HubletoApp/Community/Deals/Models/DealHistory:Read",
+  //     "HubletoApp/Community/Deals/Models/DealHistory:Update",
+  //     "HubletoApp/Community/Deals/Models/DealHistory:Delete",
 
-      "HubletoApp/Community/Deals/Models/DealProduct:Create",
-      "HubletoApp/Community/Deals/Models/DealProduct:Read",
-      "HubletoApp/Community/Deals/Models/DealProduct:Update",
-      "HubletoApp/Community/Deals/Models/DealProduct:Delete",
+  //     "HubletoApp/Community/Deals/Models/DealProduct:Create",
+  //     "HubletoApp/Community/Deals/Models/DealProduct:Read",
+  //     "HubletoApp/Community/Deals/Models/DealProduct:Update",
+  //     "HubletoApp/Community/Deals/Models/DealProduct:Delete",
 
-      "HubletoApp/Community/Deals/Models/DealTag:Create",
-      "HubletoApp/Community/Deals/Models/DealTag:Read",
-      "HubletoApp/Community/Deals/Models/DealTag:Update",
-      "HubletoApp/Community/Deals/Models/DealTag:Delete",
+  //     "HubletoApp/Community/Deals/Models/DealTag:Create",
+  //     "HubletoApp/Community/Deals/Models/DealTag:Read",
+  //     "HubletoApp/Community/Deals/Models/DealTag:Update",
+  //     "HubletoApp/Community/Deals/Models/DealTag:Delete",
 
-      "HubletoApp/Community/Deals/Controllers/Deals",
-      "HubletoApp/Community/Deals/Controllers/DealsArchive",
+  //     "HubletoApp/Community/Deals/Controllers/Deals",
+  //     "HubletoApp/Community/Deals/Controllers/DealsArchive",
 
-      "HubletoApp/Community/Deals/Api/GetCalendarEvents",
+  //     "HubletoApp/Community/Deals/Api/GetCalendarEvents",
 
-      "HubletoApp/Community/Deals/Deals",
-    ];
+  //     "HubletoApp/Community/Deals/Deals",
+  //   ];
 
-    foreach ($permissions as $permission) {
-      $mPermission->record->recordCreate([
-        "permission" => $permission
-      ]);
-    }
-  }
+  //   foreach ($permissions as $permission) {
+  //     $mPermission->record->recordCreate([
+  //       "permission" => $permission
+  //     ]);
+  //   }
+  // }
 }

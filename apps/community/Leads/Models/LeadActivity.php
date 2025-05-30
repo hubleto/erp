@@ -34,7 +34,7 @@ class LeadActivity extends \HubletoMain\Core\Models\Model
       'time_end' => (new Time($this, $this->translate('End time'))),
       'all_day' => (new Boolean($this, $this->translate('All day'))),
       'completed' => (new Boolean($this, $this->translate('Completed'))),
-      'id_user' => (new Lookup($this, $this->translate('Created by'), User::class, 'CASCADE')),
+      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class, 'CASCADE')),
     ]);
   }
 }

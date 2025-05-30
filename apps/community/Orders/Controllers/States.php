@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Enterprise\Bids\Controllers;
+namespace HubletoApp\Community\Orders\Controllers;
 
 class States extends \HubletoMain\Core\Controllers\Controller
 {

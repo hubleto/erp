@@ -26,6 +26,14 @@ class Lead extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = '{%TABLE%}.title';
   public ?string $lookupUrlDetail = 'leads/{%ID%}';
 
+  public array $rolePermissions = [
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
+  ];
+
   const STATUS_NEW = 1;
   const STATUS_IN_PROGRESS = 2;
   const STATUS_COMPLETED = 3;
@@ -34,7 +42,7 @@ class Lead extends \HubletoMain\Core\Models\Model
   public array $relations = [
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
-    'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
@@ -56,7 +64,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_user' => (new Lookup($this, $this->translate('Responsible'), User::class))->setRequired(),
+      'id_owner' => (new Lookup($this, $this->translate('Responsible'), User::class))->setRequired(),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
       'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setEnumValues(
         [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
@@ -153,7 +161,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['id_currency'] = $defaultCurrency;
     $description->defaultValues['status'] = $this::STATUS_NEW;
-    $description->defaultValues['id_user'] = $this->main->auth->getUserId();
+    $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
 
     $description->ui['addButtonText'] = $this->translate('Add Lead');
 
@@ -169,9 +177,10 @@ class Lead extends \HubletoMain\Core\Models\Model
         ->first()
       ;
 
-      if ($customer->id_user != (int) $record["id_user"]) {
-        throw new \Exception("This lead cannot be assigned to the selected user,\nbecause they are not assigned to the selected customer.");
-      }
+      // Dusan 30.5.2025: Toto robilo problemy, ked som pri testovani rucne zmenil ownera zaznamu.
+      // if ($customer->id_owner != (int) $record["id_owner"]) {
+      //   throw new \Exception("This lead cannot be assigned to the selected user,\nbecause they are not assigned to the selected customer.");
+      // }
     }
   }
 
@@ -237,7 +246,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     }
 
     $sums = 0;
-    $calculator = new CalculatePrice();
+    $calculator = new CalculatePrice($this->main);
     $allProducts = array_merge($originalRecord["PRODUCTS"], $originalRecord["SERVICES"]);
 
     if (!empty($allProducts)) {

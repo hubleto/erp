@@ -7,6 +7,7 @@ class Model extends \ADIOS\Core\Model {
 
   public array $conversionRelations = [];
   public string $permission = '';
+  public array $rolePermissions = []; // CRUD permissions; example: [ROLE_ADMINISTRATOR => [true, true, true, true]]
 
   function __construct(\HubletoMain $main)
   {
@@ -15,7 +16,6 @@ class Model extends \ADIOS\Core\Model {
     $reflection = new \ReflectionClass($this);
     preg_match('/^(.*?)\\\Models\\\(.*?)$/', $reflection->getName(), $m);
     $this->translationContext = $m[1] . '\\Loader::Models\\' . $m[2];
-    $this->permission = $this->translationContext;
 
     parent::__construct($main);
 

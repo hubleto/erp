@@ -72,7 +72,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
         {this.inputWrapper('date_end')}
         {this.inputWrapper('time_end')}
         {this.inputWrapper('all_day')}
-        {this.inputWrapper('id_user', {readonly: true})}
+        {this.inputWrapper('id_owner', {readonly: true})}
       </>
     );
   }

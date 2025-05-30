@@ -17,6 +17,14 @@ class Contact extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
   public ?string $lookupUrlDetail = 'contacts/{%ID%}';
 
+  public array $rolePermissions = [
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
+  ];
+
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer' ],
     'VALUES' => [ self::HAS_MANY, Value::class, 'id_contact', 'id' ],

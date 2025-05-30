@@ -26,7 +26,7 @@ class LogActivity extends \HubletoMain\Core\Controllers\Controller
           'time_start' => date('H:i:s'),
           'all_day' => true,
           'completed' => true,
-          'id_user' => $this->main->auth->getUserId(),
+          'id_owner' => $this->main->auth->getUserId(),
         ]);
       }
     }

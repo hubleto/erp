@@ -366,4 +366,11 @@ class Loader extends \HubletoMain\Core\App
     return (float) ($tmp['credit'] ?? 0);
   }
 
+  public function generateDemoData(): void
+  {
+    $this->saveConfig('premiumAccountSince', date('Y-m-d H:i:s'));
+    $this->saveConfig('subscriptionRenewalActive', '1');
+    $this->saveConfig('subscriptionActiveUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
+    $this->saveConfig('freeTrialPeriodUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
+  }
 }

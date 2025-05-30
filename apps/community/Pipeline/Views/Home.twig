@@ -114,7 +114,7 @@
                   <div class="card-body text-sm">
                     <div>Value: {{deal.price}} {{deal.CURRENCY.code}}</div>
                     <div>Closes on: {{ deal.date_expected_close ? viewParams.main.locale.formatDateShort(deal.date_expected_close) : "N/A" }}</div>
-                    <div>Responsible: {{ deal.USER.email }}</div>
+                    <div>Responsible: {{ deal.OWNER.email }}</div>
                   </div>
                 </a></div>
               {% endif %}

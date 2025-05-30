@@ -16,11 +16,10 @@ class TeamMember extends \HubletoMain\Core\RecordManager
   }
 
   /** @return BelongsTo<User, covariant User> */
-  public function USER(): BelongsTo
+  public function MEMBER(): BelongsTo
   {
-    return $this->belongsTo(User::class, 'id_user', 'id');
+    return $this->belongsTo(User::class, 'id_member', 'id');
   }
-
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {

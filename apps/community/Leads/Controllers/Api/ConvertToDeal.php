@@ -62,7 +62,7 @@ class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
         "id_currency" => $lead->id_currency,
         "date_expected_close" => $lead->date_expected_close,
         "date_created" => date("Y-m-d"),
-        "id_user" => $lead->id_user,
+        "id_owner" => $lead->id_owner,
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
         "id_lead" => $lead->id,

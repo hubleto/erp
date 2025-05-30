@@ -80,7 +80,7 @@ class Loader extends \HubletoMain\Core\App
       $mSetting->record->recordCreate([
         'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',
         'value' => '1',
-        'id_user' => null
+        'id_owner' => null
       ]);
 
       $mCurrency->record->recordCreate([ 'name' => 'EURO', 'code' => 'EUR', 'symbol' => '€' ]);
@@ -374,53 +374,54 @@ class Loader extends \HubletoMain\Core\App
           "code" => $country[2],
         ]);
       }
+
+      $mUserRole = new Models\UserRole($this->main);
+      $mPermission = new Models\Permission($this->main);
+
+      $mUserRole->record->recordCreate([
+        'id' => Models\UserRole::ROLE_ADMINISTRATOR,
+        'role' => 'Administrator',
+        'description' => 'Can do anything.',
+        'grant_all' => true,
+        'is_default' => true,
+      ])['id'];
+      $mUserRole->record->recordCreate([
+        'id' => Models\UserRole::ROLE_CHIEF_OFFICER,
+        'role' => 'Chief Officer (CEO, CFO, CTO, ...)',
+        'description' => 'Can read all data and can modify most of the data. Does not have access to settings.',
+        'grant_all' => false,
+        'is_default' => true,
+      ])['id'];
+      $mUserRole->record->recordCreate([
+        'id' => Models\UserRole::ROLE_MANAGER,
+        'role' => 'Manager (Sales, Project, ...)',
+        'description' => 'Can read and modify all data that he/she owns or is responsible for.',
+        'grant_all' => false,
+        'is_default' => true,
+      ])['id'];
+      $mUserRole->record->recordCreate([
+        'id' => Models\UserRole::ROLE_EMPLOYEE,
+        'role' => 'Employee',
+        'description' => 'In general, can read or modify only data that he/she owns.',
+        'grant_all' => false,
+        'is_default' => true,
+      ])['id'];
+      $mUserRole->record->recordCreate([
+        'id' => Models\UserRole::ROLE_ASSISTANT,
+        'role' => 'Assistant',
+        'description' => 'Very similar to employee, but may be more limited in some certain situations.',
+        'grant_all' => false,
+        'is_default' => true,
+      ])['id'];
+      $mUserRole->record->recordCreate([
+        'id' => Models\UserRole::ROLE_EXTERNAL,
+        'role' => 'External', 
+        'description' => 'By default should not have access to anything. Access permissions must be enabled in settings by administrator.',
+        'grant_all' => false,
+        'is_default' => true,
+      ])['id'];
+
     }
-
-    $mUserRole = new Models\UserRole($this->main);
-    $mPermission = new Models\Permission($this->main);
-
-    $mUserRole->record->recordCreate([
-      'id' => Models\UserRole::ROLE_ADMINISTRATOR,
-      'role' => 'Administrator',
-      'description' => 'Can do anything.',
-      'grant_all' => true,
-      'is_default' => true,
-    ])['id'];
-    $mUserRole->record->recordCreate([
-      'id' => Models\UserRole::ROLE_CHIEF_OFFICER,
-      'role' => 'Chief Officer (CEO, CFO, CTO, ...)',
-      'description' => 'Can read all data and can modify most of the data. Does not have access to settings.',
-      'grant_all' => false,
-      'is_default' => true,
-    ])['id'];
-    $mUserRole->record->recordCreate([
-      'id' => Models\UserRole::ROLE_MANAGER,
-      'role' => 'Manager (Sales, Project, ...)',
-      'description' => 'Very similar to chief officer, but limited to his/her teams.',
-      'grant_all' => false,
-      'is_default' => true,
-    ])['id'];
-    $mUserRole->record->recordCreate([
-      'id' => Models\UserRole::ROLE_EMPLOYEE,
-      'role' => 'Employee',
-      'description' => 'In general, can see or modify only data where he/she is appointed as the responsible person.',
-      'grant_all' => false,
-      'is_default' => true,
-    ])['id'];
-    $mUserRole->record->recordCreate([
-      'id' => Models\UserRole::ROLE_ASSISTANT,
-      'role' => 'Assistant',
-      'description' => 'Very similar to employee, but may be more limited in some certain situations.',
-      'grant_all' => false,
-      'is_default' => true,
-    ])['id'];
-    $mUserRole->record->recordCreate([
-      'id' => Models\UserRole::ROLE_EXTERNAL,
-      'role' => 'External', 
-      'description' => 'By default should not have access to anything. Access permissions must be enabled in settings by administrator.',
-      'grant_all' => false,
-      'is_default' => true,
-    ])['id'];
   }
 }
 

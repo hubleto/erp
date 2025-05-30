@@ -17,7 +17,7 @@ class LeadValueByScore extends \HubletoMain\Core\Controllers\Controller {
     $leads = $mLead->record
       ->selectRaw("score, SUM(price) as price")
       ->where("is_archived", 0)
-      ->where("id_user", $this->main->auth->getUserId())
+      ->where("id_owner", $this->main->auth->getUserId())
       ->with('CURRENCY')
       ->groupBy('score')
       ->get()

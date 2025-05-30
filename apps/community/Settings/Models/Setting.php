@@ -16,7 +16,7 @@ class Setting extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'key' => (new Varchar($this, $this->translate("Key")))->setRequired(),
       'value' => (new Text($this, $this->translate("Value"))),
-      'id_user' => (new Lookup($this, $this->translate("Only for user"), User::class)),
+      'id_owner' => (new Lookup($this, $this->translate("Only for user"), User::class)),
     ]);
   }
 

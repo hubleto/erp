@@ -32,34 +32,34 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $idUserChiefOfficer = $mUser->record->recordCreate([
       "first_name" => "Chief officer",
-      "email" => "chief.officer@example.com",
+      "email" => "chief.officer@hubleto.com",
       "id_default_company" => $idCompany,
-      "is_active" => false,
+      "is_active" => true,
       "login" => "chief.officer",
       "password" => password_hash("chief.officer", PASSWORD_DEFAULT),
     ])['id'];
 
     $idUserManager = $mUser->record->recordCreate([
       "first_name" => "Manager",
-      "email" => "manager@example.com",
+      "email" => "manager@hubleto.com",
       "id_default_company" => $idCompany,
-      "is_active" => false,
+      "is_active" => true,
       "login" => "manager",
       "password" => password_hash("manager", PASSWORD_DEFAULT),
     ])['id'];
 
     $idUserEmployee = $mUser->record->recordCreate([
       "first_name" => "Employee",
-      "email" => "employee@example.com",
+      "email" => "employee@hubleto.com",
       "id_default_company" => $idCompany,
-      "is_active" => false,
+      "is_active" => true,
       "login" => "employee",
       "password" => password_hash("employee", PASSWORD_DEFAULT),
     ])['id'];
 
     $idUserAssistant = $mUser->record->recordCreate([
       "first_name" => "Assistant",
-      "email" => "assistant@example.com",
+      "email" => "assistant@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => false,
       "login" => "assistant",
@@ -68,7 +68,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $idUserExternal = $mUser->record->recordCreate([
       "first_name" => "External",
-      "email" => "external@example.com",
+      "email" => "external@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => false,
       "login" => "external",
@@ -309,7 +309,8 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "vat_id" => $customer[9],
         "note" => $customer[10],
         "is_active" => rand(0, 1),
-        "id_user" => 1,
+        "id_owner" => rand(1, 4),
+        "id_responsible" => rand(1, 4),
         "date_created" => date("Y-m-d", rand(1722456000, strtotime("now"))),
       ])['id'];
 
@@ -755,7 +756,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
           "subject" => $randomSubject,
           "date_start" => $date,
           "completed" => rand(0, 1),
-          "id_user" => 1,
+          "id_owner" => rand(1, 4),
           "id_customer" => $customer->id,
           "id_contact" => null,
         ]);
@@ -797,7 +798,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "price" => rand(10, 100) * rand(1, 5) * 1.12,
         "id_currency" => 1,
         "date_expected_close" => $leadDateClose,
-        "id_user" => 1,
+        "id_owner" => rand(1, 4),
         "source_channel" => rand(1,7),
         "is_archived" => false,
         "status" => (rand(0, 10) == 5 ? $mLead::STATUS_LOST : $mLead::STATUS_NEW),
@@ -819,7 +820,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_lead" => $idLead,
         "id_contact" => 1,
         "id_activity_type" => 1,
-        "id_user" => 1,
+        "id_owner" => rand(1, 4),
       ]);
 
       $tags = [];
@@ -871,7 +872,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "price" => $lead->price,
         "id_currency" => $lead->id_currency,
         "date_expected_close" => $dealDateClose,
-        "id_user" => $lead->id_user,
+        "id_owner" => $lead->id_owner,
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
         "id_pipeline" => $pipeline,
@@ -909,7 +910,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_deal" => $idDeal,
         "id_contact" => 1,
         "id_activity_type" => 1,
-        "id_user" => 1,
+        "id_owner" => rand(1, 4),
       ]);
 
       $mDealTag->record->recordCreate([

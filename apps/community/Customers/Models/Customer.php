@@ -21,10 +21,19 @@ class Customer extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = '{%TABLE%}.name';
   public ?string $lookupUrlDetail = 'customers/{%ID%}';
 
+  public array $rolePermissions = [
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
+  ];
+
   public array $relations = [
     'CONTACTS' => [ self::HAS_MANY, Contact::class, 'id_customer' ],
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
-    'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
+    'RESPONSIBLE' => [ self::BELONGS_TO, User::class, 'id_responsible', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, CustomerActivity::class, 'id_customer', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, CustomerDocument::class, 'id_lookup', 'id'],
     'TAGS' => [ self::HAS_MANY, CustomerTag::class, 'id_customer', 'id' ],
@@ -48,7 +57,8 @@ class Customer extends \HubletoMain\Core\Models\Model
       'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
-      'id_user' => (new Lookup($this, $this->translate('Assigned User'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
+      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
     ]);
   }
@@ -131,7 +141,8 @@ class Customer extends \HubletoMain\Core\Models\Model
     $description = parent::describeForm();
 
     $description->defaultValues['is_active'] = 0;
-    $description->defaultValues['id_user'] = $this->main->auth->getUserId();
+    $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
+    $description->defaultValues['id_responsible'] = $this->main->auth->getUserId();
     $description->defaultValues['date_created'] = date("Y-m-d");
 
     return $description;

@@ -34,4 +34,56 @@ class RolePermission extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
+  public function findPermissionByString(string $permission): array
+  {
+    $mPermission = new Permission($this->main);
+    $pData = $mPermission->record->where('permission', $permission)->first()?->toArray();
+    return is_array($pData) ? $pData : [];
+  }
+
+  public function grantPermissionByString(int $idRole, string $permission): void
+  {
+    $idPermission = $this->findPermissionByString($permission)['id'] ?? 0;
+    $this->grantPermissionById($idRole, $idPermission);
+  }
+
+  public function denyPermissionByString(int $idRole, string $permission): void
+  {
+    $idPermission = $this->findPermissionByString($permission)['id'] ?? 0;
+    $this->record->where('id_permission', $idPermission)->where('id_role', $idRole)->delete();
+  }
+
+  public function grantPermissionById(int $idRole, int $idPermission): void
+  {
+    if (
+      $idPermission > 0
+      && $this->record->where('id_permission', $idPermission)->where('id_role', $idRole)->count() == 0
+    ) {
+      $this->record->recordCreate(['id_permission' => $idPermission, 'id_role' => $idRole]);
+    }
+  }
+
+  public function grantPermissionsLike(int $idRole, string $permission): void
+  {
+    $mPermission = new Permission($this->main);
+    $permissions = $mPermission->record->where('permission', 'like', $permission)->get()?->toArray();
+
+    foreach ($permissions as $prm) {
+      $this->grantPermissionById($idRole, $prm['id'] ?? 0);
+    }
+  }
+
+
+  public function grantPermissionsForModel(
+    int $idRole,
+    string $modelPermission,
+    array $permissions // example: [true, true, true, true]
+  ): void
+  {
+    if ($permissions[0]) $this->grantPermissionByString($idRole, $modelPermission . ':Create');
+    if ($permissions[1]) $this->grantPermissionByString($idRole, $modelPermission . ':Read');
+    if ($permissions[2]) $this->grantPermissionByString($idRole, $modelPermission . ':Update');
+    if ($permissions[3]) $this->grantPermissionByString($idRole, $modelPermission . ':Delete');
+  }
+
 }

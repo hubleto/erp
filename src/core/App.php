@@ -191,6 +191,51 @@ class App {
     }
   }
 
+  public function getAvailableControllerClasses(): array
+  {
+    $controllerClasses = [];
+
+    $controllersFolder = $this->rootFolder . '/Controllers';
+    if (is_dir($controllersFolder)) {
+      $controllers = \ADIOS\Core\Helper::scanDirRecursively($controllersFolder);
+      foreach ($controllers as $controller) {
+        $cClass = $this->namespace . '/Controllers/' . $controller;
+        $cClass = str_replace('/', '\\', $cClass);
+        $cClass = str_replace('.php', '', $cClass);
+        if (class_exists($cClass)) {
+          $controllerClasses[] = $cClass;
+        }
+      }
+    }
+
+    return $controllerClasses;
+  }
+
+  public function getAvailableModelClasses(): array
+  {
+    $modelClasses = [];
+
+    $modelsFolder = $this->rootFolder . '/Models';
+    if (is_dir($modelsFolder)) {
+      $models = \ADIOS\Core\Helper::scanDirRecursively($modelsFolder);
+      foreach ($models as $model) {
+        $mClass = $this->namespace . '/Models/' . $model;
+        $mClass = str_replace('/', '\\', $mClass);
+        $mClass = str_replace('.php', '', $mClass);
+        if (class_exists($mClass)) {
+          try {
+            $mObj = new $mClass($this->main);
+            $modelClasses[] = $mClass;
+          } catch (\Throwable) {
+          }
+        }
+      }
+    }
+
+    return $modelClasses;
+
+  }
+
   public function installDefaultPermissions(): void
   {
     $controllersFolder = $this->rootFolder . '/Controllers';
@@ -217,10 +262,10 @@ class App {
         if (class_exists($mClass)) {
           try {
             $mObj = new $mClass($this->main);
-            $permissions[] = $mObj->permission . ':Create';
-            $permissions[] = $mObj->permission . ':Read';
-            $permissions[] = $mObj->permission . ':Update';
-            $permissions[] = $mObj->permission . ':Delete';
+            $permissions[] = $mObj->fullName . ':Create';
+            $permissions[] = $mObj->fullName . ':Read';
+            $permissions[] = $mObj->fullName . ':Update';
+            $permissions[] = $mObj->fullName . ':Delete';
           } catch (\Throwable) {
           }
         }
@@ -233,6 +278,30 @@ class App {
       $mPermission->record->recordCreate([
         "permission" => $permission
       ]);
+    }
+  }
+
+  public function assignPermissionsToRoles(): void
+  {
+    $mUserRole = new \HubletoApp\Community\Settings\Models\UserRole($this->main);
+    $mRolePermission = new \HubletoApp\Community\Settings\Models\RolePermission($this->main);
+
+    $userRoles = $mUserRole->record->get()->toArray();
+
+    $controllerClasses = $this->getAvailableControllerClasses();
+    foreach ($controllerClasses as $controllerClass) {
+      $cObj = new $controllerClass($this->main);
+      foreach ($userRoles as $role) {
+        $mRolePermission->grantPermissionByString($role['id'], $cObj->permission);
+      }
+    }
+
+    $modelClasses = $this->getAvailableModelClasses();
+    foreach ($modelClasses as $modelClass) {
+      $mObj = new $modelClass($this->main);
+      foreach ($mObj->rolePermissions as $idRole => $rolePermissions) {
+        $mRolePermission->grantPermissionsForModel($idRole, $mObj->fullName, $rolePermissions);
+      }
     }
   }
 

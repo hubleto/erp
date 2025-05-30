@@ -10,6 +10,14 @@ class CustomerDocument extends \HubletoMain\Core\Models\Model
   public string $table = 'customer_documents';
   public string $recordManagerClass = RecordManagers\CustomerDocument::class;
 
+  public array $rolePermissions = [
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
+  ];
+
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_lookup', 'id' ],
     'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id' ],

@@ -76,11 +76,11 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
       ->with("CURRENCY")
       ->with("CUSTOMER")
       ->with("TAGS")
-      ->with("USER")
+      ->with("OWNER")
     ;
 
     if ($fDealResult > 0) $deals = $deals->where('deal_result', $fDealResult ?? true);
-    if ($fResponsible > 0) $deals = $deals->where('id_user', $fResponsible);
+    if ($fResponsible > 0) $deals = $deals->where('id_owner', $fResponsible);
 
     $deals = $deals
       ->get()

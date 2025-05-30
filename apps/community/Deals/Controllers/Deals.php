@@ -22,7 +22,7 @@ class Deals extends \HubletoMain\Core\Controllers\Controller {
     $result = $mDeal->record
       ->selectRaw("COUNT(id) as count, SUM(price) as price")
       ->where("is_archived", 0)
-      ->where("id_user", $this->main->auth->getUserId())
+      ->where("id_owner", $this->main->auth->getUserId())
       ->first()
       ->toArray()
     ;

@@ -16,7 +16,7 @@ class MostValuableDeals extends \HubletoMain\Core\Controllers\Controller {
 
     $mostValuableDeals = $mDeal->record
       ->where("is_archived", 0)
-      ->where("id_user", $this->main->auth->getUserId())
+      ->where("id_owner", $this->main->auth->getUserId())
       ->with('CURRENCY')
       ->orderBy("price", "desc")
       ->offset(0)

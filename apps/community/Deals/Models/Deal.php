@@ -29,6 +29,14 @@ class Deal extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = '{%TABLE%}.title';
   public ?string $lookupUrlDetail = 'deals/{%ID%}';
 
+  public array $rolePermissions = [
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
+    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
+  ];
+
   const RESULT_PENDING = 1;
   const RESULT_WON = 2;
   const RESULT_LOST = 3;
@@ -39,7 +47,7 @@ class Deal extends \HubletoMain\Core\Models\Model
   public array $relations = [
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
-    'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id'],
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
@@ -63,7 +71,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'price' => (new Decimal($this, $this->translate('Price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
-      'id_user' => (new Lookup($this, $this->translate('Responsible'), User::class))->setRequired(),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setRequired(),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
@@ -176,7 +184,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     $description->defaultValues['id_currency'] = $defaultCurrency;
     $description->defaultValues['id_pipeline'] = $defaultPipeline;
     $description->defaultValues['id_pipeline_step'] = null;
-    $description->defaultValues['id_user'] = $this->main->auth->getUserId();
+    $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
 
     return $description;
   }
@@ -212,7 +220,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     }
 
     $sums = 0;
-    $calculator = new CalculatePrice();
+    $calculator = new CalculatePrice($this->main);
     $allProducts = array_merge($originalRecord["PRODUCTS"], $originalRecord["SERVICES"]);
 
     if (!empty($allProducts)) {
@@ -241,7 +249,7 @@ class Deal extends \HubletoMain\Core\Models\Model
         ->first()
       ;
 
-      if ($customer->id_user != $record["id_user"]) {
+      if ($customer->id_owner != $record["id_owner"]) {
         throw new \Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected customer.");
       }
     }

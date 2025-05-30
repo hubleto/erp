@@ -220,7 +220,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
     if (R.DEAL) R.DEAL.checkOwnership = false;
 
-    if (R.id > 0 && globalThis.main.idUser != R.id_user && !this.state.recordChanged) {
+    if (R.id > 0 && globalThis.main.idUser != R.id_owner && !this.state.recordChanged) {
       return <>
         <div className='w-full h-full flex flex-col justify-center'>
           <span className='text-center'>This lead belongs to a different user</span>
@@ -314,7 +314,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   </div>
                   <div className='border-l border-gray-200'></div>
                   <div className='grow'>
-                    {this.inputWrapper('id_user', {readonly: R.is_archived})}
+                    {this.inputWrapper('id_owner', {readonly: R.is_archived})}
                     {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                     {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                     <FormInput title='Tags'>
@@ -560,7 +560,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       <button key={index} className="btn btn-small btn-transparent btn-list-item"
                         onClick={() => this.setState({showIdActivity: item.id} as FormLeadState)}
                       >
-                        <span className="icon">{item.date_start} {item.time_start}<br/>{item['_LOOKUP[id_user]']}</span>
+                        <span className="icon">{item.date_start} {item.time_start}<br/>{item['_LOOKUP[id_owner]']}</span>
                         <span className="text">
                           {item.subject}
                           {item.completed ? null : <div className="text-red-800">Not completed yet</div>}

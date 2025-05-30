@@ -28,8 +28,8 @@ class Lead extends \HubletoMain\Core\RecordManager
   }
 
   /** @return BelongsTo<User, covariant Lead> */
-  public function USER(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_user','id' );
+  public function OWNER(): BelongsTo {
+    return $this->belongsTo(User::class, 'id_owner','id' );
   }
 
   /** @return hasOne<Contact, covariant Lead> */

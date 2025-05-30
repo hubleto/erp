@@ -228,8 +228,6 @@ class AppManager
     if ($round == 1) {
       $appConfig = array_merge($app::DEFAULT_INSTALLATION_CONFIG, $appConfig);
 
-      $app->installDefaultPermissions();
-
       $appNameForConfig = $this->getAppNamespaceForConfig($appNamespace);
 
       if (!in_array($appNamespace, $this->getInstalledAppNamespaces())) {
@@ -243,6 +241,11 @@ class AppManager
         $this->main->config->set('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
         $this->main->config->save('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
       }
+    }
+
+    if ($round == 3) {
+      $app->installDefaultPermissions();
+      $app->assignPermissionsToRoles();
     }
 
     return true;

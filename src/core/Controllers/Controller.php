@@ -23,7 +23,6 @@ class Controller extends \ADIOS\Core\Controller
     if (isset($m[1]) && isset($m[2])) {
       $this->appNamespace = $m[1];
       $this->translationContext = $m[1] . '\\Loader::Controllers\\' . $m[2];
-      $this->permission = $this->translationContext;
     }
 
     if ($this->main->apps->getAppInstance($this->appNamespace)) {

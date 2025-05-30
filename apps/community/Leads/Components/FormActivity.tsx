@@ -85,7 +85,7 @@ console.log(R, R.all_day);
           {R.all_day ? null : this.input('time_end')}
         </div>
       </div>
-      {this.inputWrapper('id_user', {readonly: true, value: globalThis.main.idUser})}
+      {this.inputWrapper('id_owner', {readonly: true, value: globalThis.main.idUser})}
     </>;
   }
 }

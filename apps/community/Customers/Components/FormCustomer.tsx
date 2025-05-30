@@ -355,7 +355,8 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                         }}
                       />
                     </FormInput>
-                    {this.inputWrapper("id_user")}
+                    {this.inputWrapper("id_owner")}
+                    {this.inputWrapper("id_responsible")}
                   </div>
                 </div>
               </div>

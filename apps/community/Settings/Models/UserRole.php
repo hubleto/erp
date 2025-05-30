@@ -8,13 +8,19 @@ use ADIOS\Core\Db\Column\Varchar;
 class UserRole extends \HubletoMain\Core\Models\Model
 {
   const ROLE_ADMINISTRATOR = 1;
-  const ROLE_SALES_MANAGER = 2;
-  const ROLE_ACCOUNTANT = 3;
+  const ROLE_CHIEF_OFFICER = 2;
+  const ROLE_MANAGER = 3;
+  const ROLE_EMPLOYEE = 4;
+  const ROLE_ASSISTANT = 5;
+  const ROLE_EXTERNAL = 6;
 
   const USER_ROLES = [
     self::ROLE_ADMINISTRATOR => 'ADMINISTRATOR',
-    self::ROLE_SALES_MANAGER => 'SALES_MANAGER',
-    self::ROLE_ACCOUNTANT => 'ACCOUNTANT',
+    self::ROLE_CHIEF_OFFICER => 'CHIEF_OFFICER',
+    self::ROLE_MANAGER => 'MANAGER',
+    self::ROLE_EMPLOYEE => 'EMPLOYEE',
+    self::ROLE_ASSISTANT => 'ASSISTANT',
+    self::ROLE_EXTERNAL => 'EXTERNAL',
   ];
 
   public string $table = 'user_roles';
@@ -29,7 +35,8 @@ class UserRole extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'role' => (new Varchar($this, $this->translate("Role")))->setRequired(),
-      'grant_all' => (new Boolean($this, $this->translate("Grant all permissions (admin role)"))),
+      'grant_all' => (new Boolean($this, $this->translate("Grant all permissions (administrator role)"))),
+      'is_default' => (new Boolean($this, $this->translate("Is default role (cannot be modified)"))),
     ]);
   }
 

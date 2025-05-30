@@ -24,6 +24,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/sidebar\/?$/' => Controllers\Sidebar::class,
       '/^settings\/permissions\/?$/' => Controllers\Permissions::class,
       '/^settings\/role-permissions\/?$/' => Controllers\RolePermissions::class,
+      '/^settings\/teams\/?$/' => Controllers\Teams::class,
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
       '/^settings\/config\/?$/' => Controllers\Config::class,
       '/^settings\/get-permissions\/?$/' => Controllers\Api\GetPermissions::class,
@@ -42,6 +43,7 @@ class Loader extends \HubletoMain\Core\App
     $this->main->addSetting($this, ['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
     $this->main->addSetting($this, ['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
     $this->main->addSetting($this, ['title' => $this->translate('Sidebar'), 'icon' => 'fas fa-bars', 'url' => 'settings/sidebar']);
+    $this->main->addSetting($this, ['title' => $this->translate('Teams'), 'icon' => 'fas fa-users', 'url' => 'settings/teams']);
   }
 
   public function installTables(int $round): void
@@ -58,6 +60,8 @@ class Loader extends \HubletoMain\Core\App
       $mActivityTypes = new Models\ActivityType($this->main);
       $mCurrency = new Models\Currency($this->main);
       $mInvoiceProfile = new Models\InvoiceProfile($this->main);
+      $mTeam = new Models\Team($this->main);
+      $mTeamMember = new Models\TeamMember($this->main);
 
       $mCompany->dropTableIfExists()->install();
       $mUser->dropTableIfExists()->install();
@@ -70,6 +74,8 @@ class Loader extends \HubletoMain\Core\App
       $mActivityTypes->dropTableIfExists()->install();
       $mCurrency->dropTableIfExists()->install();
       $mInvoiceProfile->dropTableIfExists()->install();
+      $mTeam->dropTableIfExists()->install();
+      $mTeamMember->dropTableIfExists()->install();
 
       $mSetting->record->recordCreate([
         'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',
@@ -453,10 +459,12 @@ class Loader extends \HubletoMain\Core\App
       "HubletoApp/Community/Settings/Permissions",
     ];
 
-    $idRoles = [];
-    $idRoles[Models\UserRole::ROLE_ADMINISTRATOR] = $mUserRole->record->recordCreate(['id' => Models\UserRole::ROLE_ADMINISTRATOR, 'role' => 'Administrator', 'grant_all' => 1])['id'];
-    $idRoles[Models\UserRole::ROLE_SALES_MANAGER] = $mUserRole->record->recordCreate(['id' => Models\UserRole::ROLE_SALES_MANAGER, 'role' => 'Sales manager', 'grant_all' => 0])['id'];
-    $idRoles[Models\UserRole::ROLE_ACCOUNTANT] = $mUserRole->record->recordCreate(['id' => Models\UserRole::ROLE_ACCOUNTANT, 'role' => 'Accountant', 'grant_all' => 0])['id'];
+    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_ADMINISTRATOR, 'role' => 'Administrator', 'grant_all' => true, 'is_default' => true ])['id'];
+    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_CHIEF_OFFICER, 'role' => 'Chief Officer', 'grant_all' => false, 'is_default' => true ])['id'];
+    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_MANAGER, 'role' => 'Manager', 'grant_all' => false, 'is_default' => true ])['id'];
+    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_EMPLOYEE, 'role' => 'Employee', 'grant_all' => false, 'is_default' => true ])['id'];
+    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_ASSISTANT, 'role' => 'Assistant', 'grant_all' => false, 'is_default' => true ])['id'];
+    $mUserRole->record->recordCreate([ 'id' => Models\UserRole::ROLE_EXTERNAL, 'role' => 'External', 'grant_all' => false, 'is_default' => true ])['id'];
 
     foreach ($permissions as $permission) {
       $mPermission->record->recordCreate([

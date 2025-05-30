@@ -29,20 +29,80 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $idCompany = 1; // plati za predpokladu, ze tento command sa spusta hned po CommandInit
 
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
-    $idUserSalesManager = $mUser->record->recordCreate([
-      "first_name" => "Sales",
-      "last_name" => "Manager",
-      "email" => "test@example.com",
+
+    $idUserChiefOfficer = $mUser->record->recordCreate([
+      "first_name" => "Chief officer",
+      "email" => "chief.officer@example.com",
       "id_default_company" => $idCompany,
       "is_active" => false,
-      "login" => "sales.manager",
-      "password" => password_hash("sales.manager", PASSWORD_DEFAULT),
+      "login" => "chief.officer",
+      "password" => password_hash("chief.officer", PASSWORD_DEFAULT),
+    ])['id'];
+
+    $idUserManager = $mUser->record->recordCreate([
+      "first_name" => "Manager",
+      "email" => "manager@example.com",
+      "id_default_company" => $idCompany,
+      "is_active" => false,
+      "login" => "manager",
+      "password" => password_hash("manager", PASSWORD_DEFAULT),
+    ])['id'];
+
+    $idUserEmployee = $mUser->record->recordCreate([
+      "first_name" => "Employee",
+      "email" => "employee@example.com",
+      "id_default_company" => $idCompany,
+      "is_active" => false,
+      "login" => "employee",
+      "password" => password_hash("employee", PASSWORD_DEFAULT),
+    ])['id'];
+
+    $idUserAssistant = $mUser->record->recordCreate([
+      "first_name" => "Assistant",
+      "email" => "assistant@example.com",
+      "id_default_company" => $idCompany,
+      "is_active" => false,
+      "login" => "assistant",
+      "password" => password_hash("assistant", PASSWORD_DEFAULT),
+    ])['id'];
+
+    $idUserExternal = $mUser->record->recordCreate([
+      "first_name" => "External",
+      "email" => "external@example.com",
+      "id_default_company" => $idCompany,
+      "is_active" => false,
+      "login" => "external",
+      "password" => password_hash("external", PASSWORD_DEFAULT),
     ])['id'];
 
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
     $mUserHasRole->record->recordCreate([
-      "id_user" => $idUserSalesManager,
-      "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_SALES_MANAGER,
+      "id_user" => $idUserChiefOfficer,
+      "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER,
+    ]);
+
+    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mUserHasRole->record->recordCreate([
+      "id_user" => $idUserManager,
+      "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER,
+    ]);
+
+    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mUserHasRole->record->recordCreate([
+      "id_user" => $idUserEmployee,
+      "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE,
+    ]);
+
+    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mUserHasRole->record->recordCreate([
+      "id_user" => $idUserAssistant,
+      "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT,
+    ]);
+
+    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mUserHasRole->record->recordCreate([
+      "id_user" => $idUserExternal,
+      "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL,
     ]);
 
     $mInvoiceProfile = new \HubletoApp\Community\Settings\Models\InvoiceProfile($this->main);

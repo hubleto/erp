@@ -2,21 +2,21 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class UserRoles extends \HubletoMain\Core\Controllers\Controller
+class Teams extends \HubletoMain\Core\Controllers\Controller
 {
 
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
-      [ 'url' => 'user-roles', 'content' => $this->translate('User Roles') ],
+      [ 'url' => 'teams', 'content' => $this->translate('Teams') ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Settings/UserRoles.twig');
+    $this->setView('@HubletoApp:Community:Settings/Teams.twig');
   }
 
 }

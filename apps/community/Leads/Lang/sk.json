@@ -59,14 +59,6 @@
         "Lead": "",
         "Tag": ""
     },
-    "Models\\LeadService": {
-        "Lead": "",
-        "Service": "",
-        "Unit Price": "",
-        "Amount": "",
-        "Dicount (%)": "",
-        "Vat (%)": ""
-    },
     "Models\\LeadDocument": {
         "Lead": "",
         "Document": ""

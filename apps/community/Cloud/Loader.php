@@ -160,28 +160,26 @@ class Loader extends \HubletoMain\Core\App
     $isTrialPeriod = $freeTrialInfo['isTrialPeriod'];
     $trialPeriodExpiresIn = $freeTrialInfo['trialPeriodExpiresIn'];
 
+    // if ($where == 'beforeSidebar') {
+    //   if ($isTrialPeriod) {
+    //     return '
+    //       <a
+    //         class="badge badge-warning text-center no-underline items-center flex justify-around"
+    //         href="' . $this->main->config->getAsString('accountUrl') . '/cloud?freeTrialMessage=1"
+    //       >
+    //         <span>Free trial activated</span>
+    //       </a>
+    //     ';
+    //   }
+    // }
+
     if ($where == 'beforeSidebar') {
       if ($isTrialPeriod) {
         return '
-          <a
-            class="badge badge-warning text-center no-underline items-center flex justify-around"
-            href="' . $this->main->config->getAsString('accountUrl') . '/cloud?freeTrialMessage=1"
-          >
-            <span>Free trial activated</span>
+          <a class="btn btn-square bg-red-50 text-red-800" href="' . $this->main->config->getAsString('accountUrl') . '/cloud">
+            <span class="icon"><i class="fas fa-warning"></i></span>
+            <span class="text">Free trial expires in ' .$trialPeriodExpiresIn . ' days.</span>
           </a>
-        ';
-      }
-    }
-
-    if ($where == 'footer') {
-      if ($isTrialPeriod) {
-        return '
-          <div class="fixed left-0 bottom-0 m-2 shadow-lg" style="z-index:9999">
-            <a class="btn btn-warning btn-large" href="' . $this->main->config->getAsString('accountUrl') . '/cloud">
-              <span class="icon"><i class="fas fa-warning"></i></span>
-              <span class="text">Free trial expires in ' .$trialPeriodExpiresIn . ' days. Configure your payment method.</span>
-            </a>
-          </div>
         ';
       }
     }

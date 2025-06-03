@@ -23,7 +23,7 @@ class Team extends \HubletoMain\Core\RecordManager
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
     $query = parent::prepareReadQuery($query, $level);
-    $query = $query->with('MEMBERS.USER');
+    $query = $query->with('MEMBERS.MEMBER');
     return $query;
   }
 

@@ -32,7 +32,7 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
     $this->main->addSetting($this, ['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
-    $this->main->addSetting($this, ['title' => $this->translate('User roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
+    $this->main->addSetting($this, ['title' => $this->translate('Roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
     $this->main->addSetting($this, ['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/companies']);
     $this->main->addSetting($this, ['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
     $this->main->addSetting($this, ['title' => $this->translate('Permissions list'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);

@@ -98,7 +98,7 @@ class AppManager
     if (!empty($enterpriseRepoFolder)) {
       foreach (scandir($enterpriseRepoFolder) as $appFolder) {
         $manifestFile = $enterpriseRepoFolder . '/' . $appFolder . '/manifest.yaml';
-        if (is_file($manifestFile)) {
+        if (@is_file($manifestFile)) {
           $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
           $manifest['appType'] = \HubletoMain\Core\App::APP_TYPE_ENTERPRISE;
           $appNamespaces['HubletoApp\\Enterprise\\' . $appFolder] = $manifest;

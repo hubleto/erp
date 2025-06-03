@@ -36,7 +36,7 @@ export default class TableTeams extends Table<TableTeamsProps, TableTeamsState> 
       console.log(data);
       return <>
         {data.MEMBERS.map((member, key) => {
-          return <div className='badge' key={data.id + '-members-' + key}>{member.USER.email}</div>;
+          return <div className='badge' key={data.id + '-members-' + key}>{member.MEMBER.email}</div>;
         })}
       </>;
     } else {

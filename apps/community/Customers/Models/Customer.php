@@ -66,10 +66,10 @@ class Customer extends \HubletoMain\Core\Models\Model
   public function indexes(array $indexes = []): array
   {
     return parent::indexes([
-      /* "vat_id" => [
+      "name" => [
         "type" => "unique",
         "columns" => [
-          "vat_id" => [
+          "name" => [
             "order" => "asc",
           ],
         ],
@@ -78,14 +78,6 @@ class Customer extends \HubletoMain\Core\Models\Model
         "type" => "unique",
         "columns" => [
           "customer_id" => [
-            "order" => "asc",
-          ],
-        ],
-      ], */
-      "tax_id" => [
-        "type" => "unique",
-        "columns" => [
-          "tax_id" => [
             "order" => "asc",
           ],
         ],

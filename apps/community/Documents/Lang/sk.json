@@ -8,7 +8,9 @@
         "File": "Súbor",
         "Link": "Odkaz na online verziu",
         "File Link": "Odkaz na dokument",
-        "Origin Link": ""
+        "Origin Link": "",
+        "Uid": "",
+        "Folder": ""
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"

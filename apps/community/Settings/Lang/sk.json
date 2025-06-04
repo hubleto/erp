@@ -38,7 +38,8 @@
         "Currency Name": "Mena",
         "Currency Code": "Kód",
         "Currency": "",
-        "Code": ""
+        "Code": "",
+        "Symbol": ""
     },
     "Models\\Pipeline": {
         "Name": "Názov",
@@ -83,7 +84,10 @@
     "Models\\UserRole": {
         "Role": "Rola",
         "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)",
-        "Grant all permissions (admin role)": ""
+        "Grant all permissions (admin role)": "",
+        "Grant all permissions (administrator role)": "",
+        "Description": "",
+        "Is default role (cannot be modified)": ""
     },
     "Models\\RolePermission": {
         "Permission": "Povolenie",
@@ -142,7 +146,12 @@
         "Pipelines": "Pipelines",
         "Invoice profiles": "Fakturačné profily",
         "Platform config": "Konfigurácia platformy",
-        "Contact Categories": "Kategórie kontaktov"
+        "Contact Categories": "Kategórie kontaktov",
+        "Roles": "",
+        "Permissions list": "",
+        "Role permissions": "",
+        "Sidebar": "",
+        "Teams": ""
     },
     "Models\\UserHasRole": {
         "User": "",
@@ -151,5 +160,15 @@
     "Controllers\\Profile": {
         "Settings": "Nastavenia",
         "Profile": "Profil"
+    },
+    "Models\\Company": {
+        "Company": "",
+        "Tax ID": "",
+        "VAT ID": "",
+        "Street, line 1": "",
+        "Street, line 2": "",
+        "ZIP": "",
+        "City": "",
+        "Country": ""
     }
 }

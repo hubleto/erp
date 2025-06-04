@@ -36,7 +36,10 @@
         "Date of result update": "",
         "New Customer": "",
         "Business type": "",
-        "Contact": ""
+        "Contact": "",
+        "Owner": "",
+        "Created": "",
+        "Reason for Lost": ""
     },
     "Models\\DealHistory": {
         "Change Date": "",
@@ -79,7 +82,8 @@
         "Deal value by result": "Hodnota dealov podľa výsledku",
         "Most valuable deals": "Najhodnotnejšie dealy",
         "Active deals": "",
-        "Archived deals": ""
+        "Archived deals": "",
+        "Deal Lost Reasons": ""
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendár",
@@ -104,5 +108,8 @@
         "Vat": "",
         "Discount": "",
         "Sum": ""
+    },
+    "Models\\LostReason": {
+        "Lost Reason": ""
     }
 }

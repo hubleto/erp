@@ -42,13 +42,19 @@
         "Source channel": "Zdroj",
         "Archived": "Archivovaný",
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok",
-        "Score": "Skóre"
+        "Score": "Skóre",
+        "Contact": "",
+        "Responsible": "",
+        "Created": "",
+        "Reason for Lost": "",
+        "Add lead": ""
     },
     "root": {
         "Lead statuses": "Stavy leadov",
         "Lead Tags": "Značky leadov",
         "Active leads": "",
-        "Archived leads": ""
+        "Archived leads": "",
+        "Lead Lost Reasons": ""
     },
     "Models\\LeadHistory": {
         "Change Date": "",
@@ -86,5 +92,8 @@
         "Vat": "",
         "Discount": "",
         "Sum": ""
+    },
+    "Models\\LostReason": {
+        "Lost Reason": ""
     }
 }

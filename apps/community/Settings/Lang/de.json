@@ -139,11 +139,19 @@
         "Currencies": "",
         "Pipelines": "",
         "Invoice profiles": "",
-        "Platform config": ""
+        "Platform config": "",
+        "Roles": "",
+        "Permissions list": "",
+        "Role permissions": "",
+        "Sidebar": "",
+        "Teams": ""
     },
     "Models\\UserRole": {
         "Role": "",
-        "Grant all permissions (admin role)": ""
+        "Grant all permissions (admin role)": "",
+        "Grant all permissions (administrator role)": "",
+        "Description": "",
+        "Is default role (cannot be modified)": ""
     },
     "Models\\UserHasRole": {
         "User": "",

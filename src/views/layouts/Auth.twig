@@ -29,14 +29,14 @@
     {% endblock %}
     <div class="inner">
       <div class="logo">
-        <img src="{{ config.url }}/assets/images/logo-hubleto-text-horizontal.png" style="max-height:7em;margin-bottom:1em; width: auto;" />
+        <img src="{{ config.url }}/assets/images/logo-hubleto-text-horizontal.png" style="max-height:4em;margin-bottom:1em; width: auto;" />
       </div>
       <div class="form">
         <form class="content" id="login_form" action="" method="POST">
           <input type="hidden" name="set-language" id="set-language" value="{{ app.getLanguage() }}">
           <input type="hidden" name="authUser" id="authUser" value="1">
 
-          <div class="text-xl text-primary text-center pt-8 pb-4">{{ config.accountFullName }}</div>
+          <div class="text-2xl text-primary text-center pt-8 pb-4">{{ config.accountFullName }}</div>
 
           {% block status %}
             {% if viewParams.status %}

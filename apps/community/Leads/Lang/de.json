@@ -18,6 +18,9 @@
     },
     "root": {
         "Lead statuses": "",
-        "Lead Tags": ""
+        "Lead Tags": "",
+        "Lead Lost Reasons": "",
+        "Active leads": "",
+        "Archived leads": ""
     }
 }

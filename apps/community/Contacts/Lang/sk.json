@@ -46,7 +46,11 @@
         "Email": "Email",
         "Phone Number": "Telefón",
         "Other": "Iné",
-        "Value": "Hodnota"
+        "Value": "Hodnota",
+        "Contact": "",
+        "Category": "",
+        "Number": "",
+        "URL": ""
     },
     "Models\\PersonTag": {
         "Person": "Kontakt",
@@ -71,5 +75,28 @@
     "Models\\Tag": {
         "Name": "Značka",
         "Color": "Farba"
+    },
+    "Models\\Contact": {
+        "Salutation": "",
+        "Title before": "",
+        "First name": "",
+        "Middle name": "",
+        "Last name": "",
+        "Title after": "",
+        "Customer": "",
+        "Primary Contact": "",
+        "Notes": "",
+        "Date Created": "",
+        "Active": "",
+        "Add contact": "",
+        "Emails": "",
+        "Phone Numbers": ""
+    },
+    "Models\\ContactTag": {
+        "Contact": "",
+        "Tag": ""
+    },
+    "Controllers\\Contacts": {
+        "Contacts": ""
     }
 }

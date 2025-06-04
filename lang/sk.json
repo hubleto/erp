@@ -11,9 +11,11 @@
         "Sign out": "Odhlásiť sa",
         "Search knowledgebase...": "Prehľadávať bázu znalostí...",
         "No hot tips for this screen": "Žiadne horúce tipy pre túto obrazovku",
-        "Get premium": "Prejsť na premium",
+        "Get premium": "Prejsť na Premium",
         "Help": "Pomocník",
-        "Premium": ""
+        "Premium": "Premium",
+        "Manage your user account": "Môj profil",
+        "Manage cloud account": "Spravovať cloud účet"
     },
     "form": {
         "Add": "Pridať",
@@ -28,7 +30,7 @@
         "New record": "Nový záznam"
     },
     "input": {
-        "Upload file": ""
+        "Upload file": "Nahrať súbor"
     },
     "table": {
         "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
@@ -36,5 +38,8 @@
         "No, do not delete": "Nie, zavrieť okno",
         "Delete": "",
         "Start typing to search...": ""
+    },
+    "Controllers\\ControllerSignIn": {
+        "Keep signed in": "Zostať prihlásený"
     }
 }

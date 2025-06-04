@@ -70,8 +70,8 @@ class Customer extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["order"] = true;
         $query
           ->addSelect("customer_tags.name")
-          ->join('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
-          ->join('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
+          ->leftJoin('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
+          ->leftJoin('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
         ;
       }
       $query->orderBy('customer_tags.name', $orderBy['direction']);
@@ -91,8 +91,8 @@ class Customer extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["fullText"] = true;
         $query
           ->addSelect("customer_tags.name as customerTag")
-          ->join('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
-          ->join('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
+          ->leftJoin('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
+          ->leftJoin('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
         ;
       }
       $query->orHaving('customerTag', 'like', "%{$fulltextSearch}%");
@@ -110,8 +110,8 @@ class Customer extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["column"] = true;
         $query
           ->addSelect("customer_tags.name as customerTag")
-          ->join('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
-          ->join('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
+          ->leftJoin('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
+          ->leftJoin('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
         ;
       }
       $query->having('customerTag', 'like', "%{$columnSearch['tags']}%");

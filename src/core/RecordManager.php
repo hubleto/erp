@@ -75,7 +75,7 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
       // Externals cannot do anything by default
     }
 
-    $permissions = [$canModify, $canRead, $canModify, $canModify];
+    $permissions = [true, $canRead, $canModify, $canModify];
 
     // merge default permissions with user configured
 

@@ -23,6 +23,22 @@ class Model extends \ADIOS\Core\Model {
 
   }
 
+  public function describeForm(): \ADIOS\Core\Description\Form
+  {
+    $description = parent::describeForm();
+
+    // model-based permissions sa uz nepouzivaju
+    // pouzivaju sa record-based permissions, vid recordManager->getPermissions()
+    $description->permissions = [
+      'canRead' => true,
+      'canCreate' => true,
+      'canUpdate' => true,
+      'canDelete' => true,
+    ];
+
+    return $description;
+  }
+
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();

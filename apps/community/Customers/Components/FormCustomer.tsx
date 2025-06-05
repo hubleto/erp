@@ -403,7 +403,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 <div className="card-header">{this.translate('Contacts')}</div>
                 <div className="card-body">
                   <a
-                    className="btn btn-add-outline mr-2"
+                    className="btn btn-add-outline mr-2 float-left"
                     onClick={() => {
                       if (!R.CONTACTS) R.CONTACTS = [];
                       this.setState({createNewContact: true} as FormCustomerState);

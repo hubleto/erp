@@ -72,8 +72,8 @@ class Deal extends \HubletoMain\Core\Models\Model
       'price' => (new Decimal($this, $this->translate('Price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setRequired(),
-      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setRequired(),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class)),
+      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
@@ -252,9 +252,9 @@ class Deal extends \HubletoMain\Core\Models\Model
         ->first()
       ;
 
-      if ($customer->id_owner != $record["id_owner"]) {
-        throw new \Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected customer.");
-      }
+      // if (isset($record['id_owner']) && $customer->id_owner != $record["id_owner"]) {
+      //   throw new \Exception("This deal cannot be assigned to the selected user,\nbecause they are not assigned to the selected customer.");
+      // }
     }
   }
 

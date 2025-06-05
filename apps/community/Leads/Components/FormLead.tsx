@@ -220,13 +220,13 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
     if (R.DEAL) R.DEAL.checkOwnership = false;
 
-    if (R.id > 0 && globalThis.main.idUser != R.id_owner && !this.state.recordChanged) {
-      return <>
-        <div className='w-full h-full flex flex-col justify-center'>
-          <span className='text-center'>This lead belongs to a different user</span>
-        </div>
-      </>;
-    }
+    // if (R.id > 0 && globalThis.main.idUser != R.id_owner && !this.state.recordChanged) {
+    //   return <>
+    //     <div className='w-full h-full flex flex-col justify-center'>
+    //       <span className='text-center'>This lead belongs to a different user</span>
+    //     </div>
+    //   </>;
+    // }
 
     return (
       <>

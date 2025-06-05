@@ -196,16 +196,16 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       if (R.HISTORY.length > 1 && (R.HISTORY[0].id < R.HISTORY[R.HISTORY.length-1].id))
         R.HISTORY = this.state.record.HISTORY.reverse();
     }
-
-    if (R.id > 0 && globalThis.main.idUser != R.id_owner && !this.state.recordChanged) {
-      return (
-        <>
-          <div className='w-full h-full flex flex-col justify-center'>
-            <span className='text-center'>This deal belongs to a different user</span>
-          </div>
-        </>
-      )
-    }
+    console.log(R);
+    // if (R.id > 0 && globalThis.main.idUser != R.id_owner && !this.state.recordChanged) {
+    //   return (
+    //     <>
+    //       <div className='w-full h-full flex flex-col justify-center'>
+    //         <span className='text-center'>This deal belongs to a different user</span>
+    //       </div>
+    //     </>
+    //   )
+    // }
 
     return (
       <>

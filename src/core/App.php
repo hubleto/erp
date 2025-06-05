@@ -244,6 +244,7 @@ class App {
       'Api/Record/Get',
       'Api/Record/GetList',
       'Api/Record/Lookup',
+      'Api/Record/Save',
     ];
 
     $controllersFolder = $this->rootFolder . '/Controllers';
@@ -301,6 +302,7 @@ class App {
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Get');
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/GetList');
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Lookup');
+      $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Save');
     }
 
     $controllerClasses = $this->getAvailableControllerClasses();

@@ -32,6 +32,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $idUserChiefOfficer = $mUser->record->recordCreate([
       "first_name" => "Chief officer",
+      "nick" => "CEO",
       "email" => "chief.officer@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -41,6 +42,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $idUserManager = $mUser->record->recordCreate([
       "first_name" => "Manager",
+      "nick" => "MGR",
       "email" => "manager@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -50,6 +52,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $idUserEmployee = $mUser->record->recordCreate([
       "first_name" => "Employee",
+      "nick" => "EMP",
       "email" => "employee@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -59,6 +62,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $idUserAssistant = $mUser->record->recordCreate([
       "first_name" => "Assistant",
+      "nick" => "ASS",
       "email" => "assistant@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => false,
@@ -68,6 +72,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $idUserExternal = $mUser->record->recordCreate([
       "first_name" => "External",
+      "nick" => "EXT",
       "email" => "external@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => false,

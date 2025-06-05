@@ -10,13 +10,13 @@ class CustomerDocument extends \HubletoMain\Core\Models\Model
   public string $table = 'customer_documents';
   public string $recordManagerClass = RecordManagers\CustomerDocument::class;
 
-  public array $rolePermissions = [
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
-  ];
+  // public array $rolePermissions = [
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
+  // ];
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_lookup', 'id' ],
@@ -47,12 +47,12 @@ class CustomerDocument extends \HubletoMain\Core\Models\Model
     $description = parent::describeTable();
 
     if ($this->main->urlParamAsInteger('idCustomer') > 0) {
-      $description->permissions = [
-        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
-        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
-        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
-        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
-      ];
+      // $description->permissions = [
+      //   'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+      //   'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+      //   'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+      //   'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
+      // ];
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

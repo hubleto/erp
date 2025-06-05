@@ -238,6 +238,14 @@ class App {
 
   public function installDefaultPermissions(): void
   {
+    $permissions = [
+      'Api/Table/Describe',
+      'Api/Form/Describe',
+      'Api/Record/Get',
+      'Api/Record/GetList',
+      'Api/Record/Lookup',
+    ];
+
     $controllersFolder = $this->rootFolder . '/Controllers';
     if (is_dir($controllersFolder)) {
       $controllers = \ADIOS\Core\Helper::scanDirRecursively($controllersFolder);
@@ -287,6 +295,13 @@ class App {
     $mRolePermission = new \HubletoApp\Community\Settings\Models\RolePermission($this->main);
 
     $userRoles = $mUserRole->record->get()->toArray();
+    foreach ($userRoles as $role) {
+      $mRolePermission->grantPermissionByString($role['id'], 'Api/Table/Describe');
+      $mRolePermission->grantPermissionByString($role['id'], 'Api/Form/Describe');
+      $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Get');
+      $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/GetList');
+      $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Lookup');
+    }
 
     $controllerClasses = $this->getAvailableControllerClasses();
     foreach ($controllerClasses as $controllerClass) {
@@ -296,13 +311,13 @@ class App {
       }
     }
 
-    $modelClasses = $this->getAvailableModelClasses();
-    foreach ($modelClasses as $modelClass) {
-      $mObj = new $modelClass($this->main);
-      foreach ($mObj->rolePermissions as $idRole => $rolePermissions) {
-        $mRolePermission->grantPermissionsForModel($idRole, $mObj->fullName, $rolePermissions);
-      }
-    }
+    // $modelClasses = $this->getAvailableModelClasses();
+    // foreach ($modelClasses as $modelClass) {
+    //   $mObj = new $modelClass($this->main);
+    //   foreach ($mObj->rolePermissions as $idRole => $rolePermissions) {
+    //     $mRolePermission->grantPermissionsForModel($idRole, $mObj->fullName, $rolePermissions);
+    //   }
+    // }
   }
 
   public function generateDemoData(): void

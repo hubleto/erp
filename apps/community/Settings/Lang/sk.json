@@ -16,7 +16,10 @@
         "Time of last login": "Čas posledného prihlásenia",
         "Last login IP": "IP adresa posledného prihlásenia",
         "Time of last access": "Čas posledného prístupu",
-        "Last access IP": "IP adresa posledného prístupu"
+        "Last access IP": "IP adresa posledného prístupu",
+        "Nick": "Prezývka",
+        "Default company": "Firma",
+        "Roles": "Role"
     },
     "Models\\Country": {
         "Country Name": "Štát",
@@ -170,5 +173,15 @@
         "ZIP": "",
         "City": "",
         "Country": ""
+    },
+    "Controllers\\Sidebar": {
+        "Settings": "",
+        "Sidebar": ""
+    },
+    "Components\\FormUserRole": {
+        "Save": ""
+    },
+    "Components\\FormUser": {
+        "About the user": "O používateľovi"
     }
 }

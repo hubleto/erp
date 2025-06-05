@@ -282,6 +282,11 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         }}
                       ></Lookup>
                     </FormInput>
+                    {R.CONTACT && R.CONTACT.VALUES ? <div className="ml-4 text-sm p-2 bg-gray-100 mb-2">
+                      {R.CONTACT.VALUES.map((item, key) => {
+                        return <div key={key}>{item.value}</div>;
+                      })}
+                    </div> : null}
                     <div className='flex flex-row *:w-1/2'>
                       {this.inputWrapper('price', {
                         cssClass: 'text-2xl',
@@ -315,6 +320,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   <div className='border-l border-gray-200'></div>
                   <div className='grow'>
                     {this.inputWrapper('id_owner', {readonly: R.is_archived})}
+                    {this.inputWrapper('id_responsible', {readonly: R.is_archived})}
                     {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                     {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                     <FormInput title='Tags'>
@@ -573,6 +579,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   <Calendar
                     onCreateCallback={() => this.loadRecord()}
                     readonly={R.is_archived}
+                    initialView='timeGridWeek'
                     eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
                     onDateClick={(date, time, info) => {
                       this.setState({
@@ -602,6 +609,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
+                initialView='timeGridWeek'
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
                 eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
                 onDateClick={(date, time, info) => {

@@ -198,6 +198,8 @@ class Installer {
     $idCompany = $mCompany->record->recordCreate(['name' => $this->accountFullName])['id'];
 
     $idUserAdministrator = $mUser->record->recordCreate([
+      'first_name' => $this->adminName,
+      'last_name' => $this->adminFamilyName,
       'login' => $this->adminEmail,
       'password' => $this->adminPassword == '' ? '' : $mUser->hashPassword($this->adminPassword),
       'email' => $this->adminEmail,

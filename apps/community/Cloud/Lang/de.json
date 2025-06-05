@@ -27,5 +27,9 @@
     "Models\\Credit": {
         "Recalculated": "",
         "Credit": ""
+    },
+    "root": {
+        "Free trial expires in": "",
+        "days": ""
     }
 }

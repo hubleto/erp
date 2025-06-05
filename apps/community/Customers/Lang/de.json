@@ -76,5 +76,52 @@
     },
     "root": {
         "Customer Tags": ""
+    },
+    "Models\\CustomerActivity": {
+        "Customer": "",
+        "Contact": "",
+        "Activity type": "",
+        "Subject": "",
+        "Start Date": "",
+        "Start Time": "",
+        "End Date": "",
+        "End Time": "",
+        "All day": "",
+        "Completed": "",
+        "Created by": ""
+    },
+    "Controllers\\Customers": {
+        "Customers": ""
+    },
+    "Models\\Customer": {
+        "Name": "",
+        "Street Line 1": "",
+        "Street Line 2": "",
+        "Region": "",
+        "City": "",
+        "Postal Code": "",
+        "Country": "",
+        "VAT ID": "",
+        "Customer ID": "",
+        "Tax ID": "",
+        "Notes": "",
+        "Date Created": "",
+        "Active": "",
+        "Owner": "",
+        "Responsible": "",
+        "Link to shared folder (online storage) with related documents": "",
+        "Add Customer": ""
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "",
+        "Document": ""
+    },
+    "Models\\CustomerTag": {
+        "Customer": "",
+        "Tag": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
     }
 }

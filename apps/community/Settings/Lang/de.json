@@ -165,5 +165,38 @@
     "Models\\RolePermission": {
         "Permission": "",
         "Role": ""
+    },
+    "Models\\User": {
+        "First name": "",
+        "Last name": "",
+        "Nick": "",
+        "Email": "",
+        "Language": "",
+        "Default company": ""
+    },
+    "Models\\Country": {
+        "Country": "",
+        "Code": ""
+    },
+    "Models\\Company": {
+        "Company": "",
+        "Tax ID": "",
+        "VAT ID": "",
+        "Street, line 1": "",
+        "Street, line 2": "",
+        "ZIP": "",
+        "City": "",
+        "Country": ""
+    },
+    "Models\\ActivityType": {
+        "Type": "",
+        "Color": "",
+        "Show in calendar": "",
+        "Icon": ""
+    },
+    "Models\\Currency": {
+        "Currency": "",
+        "Code": "",
+        "Symbol": ""
     }
 }

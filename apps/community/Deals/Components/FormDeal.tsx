@@ -272,6 +272,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 <div className='border-l border-gray-200'></div>
                 <div className='grow'>
                   {this.inputWrapper('id_owner', {readonly: R.is_archived})}
+                  {this.inputWrapper('id_responsible', {readonly: R.is_archived})}
                   {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                   {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                   {this.inputWrapper('is_new_customer', {readonly: R.is_archived, onChange: () => {
@@ -620,6 +621,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
+                initialView='timeGridWeek'
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
                 eventsEndpoint={globalThis.main.config.accountUrl + '/deals/get-calendar-events?idDeal=' + R.id}
                 onDateClick={(date, time, info) => {

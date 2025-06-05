@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FormCustomer, { FormCustomerProps, FormCustomerState } from '@hubleto/apps/community/Customers/Components/FormCustomer'
 import TableDeals from './TableDeals';
 import ModalSimple from "adios/ModalSimple";
+import TranslatedComponent from "adios/TranslatedComponent";
 
 interface P {
   formCustomer: FormCustomer<FormCustomerProps, FormCustomerState>
@@ -11,9 +12,11 @@ interface S {
   showDeals: boolean;
 }
 
-export default class FormCustomerExtraButtons extends Component<P, S> {
+export default class FormCustomerExtraButtons extends TranslatedComponent<P, S> {
   props: P;
   state: S;
+
+  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormDeal';
 
   constructor(props: P) {
     super(props);
@@ -31,7 +34,7 @@ export default class FormCustomerExtraButtons extends Component<P, S> {
           onClick={() => { this.setState({showDeals: true}); }}
         >
           <span className="icon"><i className="fas fa-handshake"></i></span>
-          <span className="text">Show deals</span>
+          <span className="text">{this.translate('Show deals')}</span>
         </button>
         {this.state.showDeals ?
           <ModalSimple

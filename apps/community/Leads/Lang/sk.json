@@ -76,7 +76,8 @@
         "Shared documents": "Zdieľané dokumenty",
         "History": "História",
         "Local documents": "Dokumenty",
-        "Go to deal": "Prejsť na deal"
+        "Go to deal": "Prejsť na deal",
+        "Show leads": "Zobraziť leady"
     },
     "Models\\Tag": {
         "Name": "",

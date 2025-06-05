@@ -177,7 +177,6 @@ class Loader extends \HubletoMain\Core\App
       if ($isTrialPeriod) {
         return '
           <a class="btn btn-square bg-red-50 text-red-800" href="' . $this->main->config->getAsString('accountUrl') . '/cloud">
-            <span class="icon"><i class="fas fa-warning"></i></span>
             <span class="text">' . $this->translate('Free trial expires in') . ' ' .$trialPeriodExpiresIn . ' ' . $this->translate('days') . '.</span>
           </a>
         ';

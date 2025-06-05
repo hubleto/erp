@@ -38,12 +38,12 @@ class LeadDocument extends \HubletoMain\Core\Models\Model
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsInteger('idLead') > 0){
-      $description->permissions = [
-        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
-        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
-        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
-        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
-      ];
+      // $description->permissions = [
+      //   'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+      //   'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+      //   'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+      //   'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
+      // ];
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

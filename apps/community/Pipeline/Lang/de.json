@@ -11,5 +11,17 @@
     },
     "root": {
         "Pipelines": ""
+    },
+    "Models\\Pipeline": {
+        "Name": "",
+        "Description": ""
+    },
+    "Models\\PipelineStep": {
+        "Name": "",
+        "Order": "",
+        "Color": "",
+        "Probability": "",
+        "Pipeline": "",
+        "Set result of a deal to": ""
     }
 }

@@ -10,13 +10,13 @@ class Country extends \HubletoMain\Core\Models\Model
   public string $recordManagerClass = RecordManagers\Country::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
-  public array $rolePermissions = [
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, true ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, true, true ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ true, true, true, true ],
-  ];
+  // public array $rolePermissions = [
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, true ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, true, true ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ true, true, true, true ],
+  // ];
 
   public function describeColumns(): array
   {

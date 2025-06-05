@@ -91,7 +91,8 @@
         "Shared documents": "Zdieľané dokumenty",
         "History": "História",
         "Go to original lead": "Prejsť na pôvodný lead",
-        "Documents": "Dokumenty"
+        "Documents": "Dokumenty",
+        "Show deals": "Zobraziť dealy"
     },
     "Models\\Tag": {
         "Name": "",

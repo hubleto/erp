@@ -562,7 +562,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 <div className="card card-body border border-blue-200 shadow-blue-200">
                   <div className="adios component input"><div className="input-element w-full flex gap-2">
                     <input
-                      className="w-full"
+                      className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
                       placeholder="Type recent activity here"
                       ref={this.refLogActivityInput}
                       onKeyUp={(event: any) => {
@@ -579,7 +579,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       }}
                     />
                   </div></div>
-                  <div>
+                  <div className='mt-2'>
                     <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
                       <span className="icon"><i className="fas fa-check"></i></span>
                       <span className="text">Enter = Log completed activity</span>
@@ -609,6 +609,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     onCreateCallback={() => this.loadRecord()}
                     readonly={R.is_archived}
                     initialView='dayGridMonth'
+                    headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
                     eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
                     onDateClick={(date, time, info) => {
                       this.setState({
@@ -624,11 +625,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       } as FormLeadState);
                       info.jsEvent.preventDefault();
                     }}
-                    headerToolbar={{
-                      left: 'prev,next',
-                      center: 'title',
-                      right: 'timeGridDay,timeGridWeek,dayGridMonth'
-                    }}
                   ></Calendar>
                 </div>
               </div> : null}
@@ -643,7 +639,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
                 eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
                 onDateClick={(date, time, info) => {
-                  console.log('blabla1', date, time);
                   this.setState({
                     activityDate: date,
                     activityTime: time,

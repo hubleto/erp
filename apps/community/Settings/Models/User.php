@@ -47,6 +47,7 @@ class User extends \ADIOS\Models\User
   {
     return $this->record
       ->with('ROLES')
+      ->with('TEAMS')
       ->with('DEFAULT_COMPANY')
       ->where('id', $idUser)
       ->where('is_active', '<>', 0)
@@ -89,6 +90,7 @@ class User extends \ADIOS\Models\User
       'id_default_company' => $description->columns['id_default_company'],
       'is_active' => $description->columns['is_active'],
       'roles' => (new Varchar($this, $this->translate('Roles'))),
+      'teams' => (new Varchar($this, $this->translate('Teams'))),
     ];
 
     return $description;

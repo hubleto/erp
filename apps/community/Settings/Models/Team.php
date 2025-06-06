@@ -4,6 +4,7 @@ namespace HubletoApp\Community\Settings\Models;
 
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\Varchar;
 
 class Team extends \HubletoMain\Core\Models\Model
@@ -16,6 +17,7 @@ class Team extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate("Team name")))->setRequired(),
+      'color' => (new Color($this, $this->translate("Team color"))),
       'description' => (new Text($this, $this->translate("Description"))),
       'id_manager' => (new Lookup($this, $this->translate("Team manager"), User::class))->setRequired(),
     ]);
@@ -34,9 +36,10 @@ class Team extends \HubletoMain\Core\Models\Model
 
     $description->columns = [
       'name' => $description->columns['name'],
+      'color' => $description->columns['color'],
       'description' => $description->columns['description'],
       'id_manager' => $description->columns['id_manager'],
-      'users' => (new Varchar($this, $this->translate('Members'))),
+      'members' => (new Varchar($this, $this->translate('Members'))),
     ];
 
     return $description;

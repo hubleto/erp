@@ -33,11 +33,16 @@ export default class TableUsers extends Table<TableUsersProps, TableUsersState> 
 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "roles") {
-      return <>
-        {data.ROLES.map((role, key) => {
-          return <div className='badge' key={data.id + '-roles-' + key}>{role.role}</div>;
-        })}
-      </>;
+      return data.ROLES.map((role, key) => {
+        return <div className='badge' key={data.id + '-roles-' + key}>{role.role}</div>;
+      });
+    } else if (columnName == "teams") {
+      return data.TEAMS.map((team, key) => {
+        return <div
+          className='badge' key={data.id + '-roles-' + key}
+          style={{borderLeft: '1em solid ' + team.color}}
+        >{team.name}</div>;
+      });
     } else {
       return super.renderCell(columnName, column, data, options);
     }

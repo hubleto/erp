@@ -38,6 +38,14 @@ class RolePermission extends \HubletoMain\Core\Models\Model
   {
     $mPermission = new Permission($this->main);
     $pData = $mPermission->record->where('permission', $permission)->first()?->toArray();
+
+    if (!is_array($pData)) {
+      $mPermission = new Permission($this->main);
+      $mPermission->record->recordCreate(['permission' => $permission]);
+
+      $pData = $mPermission->record->where('permission', $permission)->first()?->toArray();
+    }
+
     return is_array($pData) ? $pData : [];
   }
 

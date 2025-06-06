@@ -9,5 +9,13 @@
     "root": {
         "Browse": "",
         "List": ""
+    },
+    "Models\\Document": {
+        "Uid": "",
+        "Folder": "",
+        "Document name": "",
+        "File": "",
+        "File Link": "",
+        "Origin Link": ""
     }
 }

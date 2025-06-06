@@ -16,7 +16,10 @@ class Activity extends \HubletoMain\Core\Models\Model
   public string $table = 'activities';
   public string $recordManagerClass = RecordManagers\Activity::class;
 
-  public array $relations = [];
+  public array $relations = [
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
+    'ACTIVITY_TYPE' => [ self::BELONGS_TO, ActivityType::class, 'id_activity_type', 'id' ],
+  ];
 
   public function describeColumns(): array
   {
@@ -33,12 +36,14 @@ class Activity extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeForm(): Form
-  {
-    $description = parent::describeForm();
-    $description->defaultValues = [
-      "complete" => 0
+  public function describeForm(): \ADIOS\Core\Description\Form {
+
+    $describe = parent::describeForm();
+    $describe->defaultValues = [
+      "id_owner" => $this->main->auth->getUserId(),
+      "completed" => 0
     ];
-    return $description;
+
+    return $describe;
   }
 }

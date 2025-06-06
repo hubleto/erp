@@ -24,5 +24,66 @@
         "Deal Lost Reasons": "",
         "Active deals": "",
         "Archived deals": ""
+    },
+    "Models\\Deal": {
+        "Deal Identifier": "",
+        "Title": "",
+        "Customer": "",
+        "Contact": "",
+        "Lead": "",
+        "Price": "",
+        "Currency": "",
+        "Expected close date": "",
+        "Owner": "",
+        "Created": "",
+        "Pipeline": "",
+        "Pipeline step": "",
+        "Notes": "",
+        "Source channel": "",
+        "Archived": "",
+        "Deal Result": "",
+        "Reason for Lost": "",
+        "Date of result update": "",
+        "New Customer": "",
+        "Business type": "",
+        "Link to shared folder (online storage) with related documents": ""
+    },
+    "Models\\DealActivity": {
+        "Deal": "",
+        "Contact": "",
+        "Activity type": "",
+        "Subject": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Created by": ""
+    },
+    "Models\\LostReason": {
+        "Lost Reason": ""
+    },
+    "Models\\DealHistory": {
+        "Change Date": "",
+        "Deal": "",
+        "Description": ""
+    },
+    "Models\\DealTag": {
+        "Deal": "",
+        "Tag": ""
+    },
+    "Models\\DealProduct": {
+        "Deal": "",
+        "Product": "",
+        "Unit Price": "",
+        "Amount": "",
+        "Vat": "",
+        "Discount": "",
+        "Sum": ""
+    },
+    "Models\\DealDocument": {
+        "Deal": "",
+        "Document": ""
     }
 }

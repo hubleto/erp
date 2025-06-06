@@ -10,7 +10,7 @@ import { TabPanel, TabView } from 'primereact/tabview';
 import Calendar from '../../Calendar/Components/Calendar';
 import TableDealDocuments from './TableDealDocuments';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
-import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
+import DealFormActivity, { DealFormActivityProps, DealFormActivityState } from './DealFormActivity';
 import ModalForm from 'adios/ModalForm';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 import { FormProps, FormState } from 'adios/Form';
@@ -196,16 +196,16 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       if (R.HISTORY.length > 1 && (R.HISTORY[0].id < R.HISTORY[R.HISTORY.length-1].id))
         R.HISTORY = this.state.record.HISTORY.reverse();
     }
-
-    if (R.id > 0 && globalThis.main.idUser != R.id_owner && !this.state.recordChanged) {
-      return (
-        <>
-          <div className='w-full h-full flex flex-col justify-center'>
-            <span className='text-center'>This deal belongs to a different user</span>
-          </div>
-        </>
-      )
-    }
+    console.log(R);
+    // if (R.id > 0 && globalThis.main.idUser != R.id_owner && !this.state.recordChanged) {
+    //   return (
+    //     <>
+    //       <div className='w-full h-full flex flex-col justify-center'>
+    //         <span className='text-center'>This deal belongs to a different user</span>
+    //       </div>
+    //     </>
+    //   )
+    // }
 
     return (
       <>
@@ -272,6 +272,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 <div className='border-l border-gray-200'></div>
                 <div className='grow'>
                   {this.inputWrapper('id_owner', {readonly: R.is_archived})}
+                  {this.inputWrapper('id_responsible', {readonly: R.is_archived})}
                   {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                   {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                   {this.inputWrapper('is_new_customer', {readonly: R.is_archived, onChange: () => {
@@ -620,6 +621,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               <Calendar
                 onCreateCallback={() => this.loadRecord()}
                 readonly={R.is_archived}
+                initialView='timeGridWeek'
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
                 eventsEndpoint={globalThis.main.config.accountUrl + '/deals/get-calendar-events?idDeal=' + R.id}
                 onDateClick={(date, time, info) => {
@@ -759,7 +761,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             isOpen={true}
             type='right'
           >
-            <FormActivity
+            <DealFormActivity
               id={this.state.showIdActivity}
               isInlineEditing={true}
               description={{
@@ -774,12 +776,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               showInModal={true}
               showInModalSimple={true}
               onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}
-              onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+              onSaveCallback={(form: DealFormActivity<DealFormActivityProps, DealFormActivityState>, saveResponse: any) => {
                 if (saveResponse.status == "success") {
                   this.setState({ showIdActivity: 0 } as FormDealState);
                 }
               }}
-            ></FormActivity>
+            ></DealFormActivity>
           </ModalForm>
         }
       </>

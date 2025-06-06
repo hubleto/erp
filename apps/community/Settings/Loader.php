@@ -29,6 +29,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/config\/?$/' => Controllers\Config::class,
       '/^settings\/get-permissions\/?$/' => Controllers\Api\GetPermissions::class,
       '/^settings\/save-permissions\/?$/' => Controllers\Api\SavePermissions::class,
+      '/^settings\/update-default-permissions\/?$/' => Controllers\UpdateDefaultPermissions::class,
     ]);
 
     $this->main->addSetting($this, ['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);

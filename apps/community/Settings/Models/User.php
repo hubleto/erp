@@ -19,16 +19,16 @@ class User extends \ADIOS\Models\User
 
   public string $table = 'users';
   public string $recordManagerClass = RecordManagers\User::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.email';
+  public ?string $lookupSqlValue = 'ifnull({%TABLE%}.nick, {%TABLE%}.email)';
 
-  public string $translationContext = 'HubletoApp/Community/Settings/Loader::Models/User';
+  public string $translationContext = 'HubletoApp\\Community\\Settings\\Loader::Models\\User';
   public string $permission = 'HubletoApp/Community/Settings/Loader::Models/User';
   public array $rolePermissions = [
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ false, true, false, false ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ false, true, false, false ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ false, true, false, false ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ false, true, false, false ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, true, false, false ],
+    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ false, true, false, false ],
+    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ false, true, false, false ],
+    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ false, true, false, false ],
+    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ false, true, false, false ],
+    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, true, false, false ],
   ];
 
   public function describeColumns(): array

@@ -367,6 +367,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                     <Calendar
                       onCreateCallback={() => this.loadRecord()}
                       readonly={R.is_archived}
+                      initialView='dayGridMonth'
                       eventsEndpoint={globalThis.main.config.accountUrl + '/customers/get-calendar-events?idCustomer=' + R.id}
                       onDateClick={(date, time, info) => {
                         this.setState({
@@ -466,6 +467,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
             <Calendar
               onCreateCallback={() => this.loadRecord()}
               readonly={R.is_archived}
+              initialView='timeGridWeek'
               views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
               eventsEndpoint={globalThis.main.config.accountUrl + '/customers/get-calendar-events?idCustomer=' + R.id}
               onDateClick={(date, time, info) => {

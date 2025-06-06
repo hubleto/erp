@@ -36,9 +36,6 @@
         "Add": "Pridať",
         "Primary Contact": ""
     },
-    "Controllers\\Persons": {
-        "Contacts": "Kontakty"
-    },
     "Models\\Value": {
         "Person": "Kontakt",
         "Contact Category": "Kategória",
@@ -77,26 +74,41 @@
         "Color": "Farba"
     },
     "Models\\Contact": {
-        "Salutation": "",
-        "Title before": "",
-        "First name": "",
-        "Middle name": "",
-        "Last name": "",
-        "Title after": "",
-        "Customer": "",
-        "Primary Contact": "",
-        "Notes": "",
-        "Date Created": "",
-        "Active": "",
-        "Add contact": "",
-        "Emails": "",
-        "Phone Numbers": ""
+        "Salutation": "Oslovenie",
+        "Title before": "Titul pred",
+        "First name": "Meno",
+        "Middle name": "Prostredné meno",
+        "Last name": "Priezvisko",
+        "Title after": "Titul za",
+        "Customer": "Zákazník",
+        "Primary Contact": "Primárny kontakt",
+        "Notes": "Poznámky",
+        "Date Created": "Vytvorený",
+        "Active": "Aktívny",
+        "Add contact": "Pridať kontakt",
+        "Emails": "Emaily",
+        "Phone Numbers": "Telefónne čísla",
+        "Mr.": "",
+        "Mrs.": ""
     },
     "Models\\ContactTag": {
-        "Contact": "",
-        "Tag": ""
+        "Contact": "Kontakt",
+        "Tag": "Značka"
     },
     "Controllers\\Contacts": {
-        "Contacts": ""
+        "Contacts": "Kontakty"
+    },
+    "Components\\FormContact": {
+        "No contacts yet.": "Žiadne kontakty.",
+        "Email": "Email",
+        "Type": "Typ",
+        "Phone Number": "Telefón",
+        "Other": "Iné",
+        "Value": "Hodnota",
+        "Category": "Kategória",
+        "Add contact": "Pridať kontakt",
+        "Customer": "Zákazník",
+        "Tags": "Značky",
+        "Primary Contact": "Primárny kontakt"
     }
 }

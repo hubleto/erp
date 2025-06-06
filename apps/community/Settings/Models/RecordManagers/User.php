@@ -38,4 +38,30 @@ class User extends \HubletoMain\Core\RecordManager
     return $query;
   }
 
+  public function prepareLookupQuery(string $search): mixed
+  {
+    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $idUser = $main->auth->getUserId();
+
+    $query = $this;
+
+    if (!empty($search)) {
+      $query->where(function($q) use ($search) {
+        foreach ($this->model->columnNames() as $columnName) {
+          $q->orWhere($this->model->table . '.' . $columnName, 'LIKE', '%' . $search . '%');
+        }
+      });
+    }
+
+    $query = $query->selectRaw('
+      *,
+      concat(
+        ifnull(' . $this->table . '.nick, ' . $this->table . '.email),
+        if(' . $this->table . '.id = ' . $idUser .  ', " (you)", "")
+      ) as _LOOKUP,
+      if(' . $this->table . '.id = ' . $idUser .  ', "text-orange-500", "") as _LOOKUP_CLASS
+    ');
+
+    return $query;
+  }
 }

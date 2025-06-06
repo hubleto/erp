@@ -32,6 +32,11 @@ class Lead extends \HubletoMain\Core\RecordManager
     return $this->belongsTo(User::class, 'id_owner','id' );
   }
 
+  /** @return BelongsTo<User, covariant Lead> */
+  public function RESPONSIBLE(): BelongsTo {
+    return $this->belongsTo(User::class, 'id_responsible','id' );
+  }
+
   /** @return hasOne<Contact, covariant Lead> */
   public function CONTACT(): HasOne {
     return $this->hasOne(Contact::class, 'id', 'id_contact');

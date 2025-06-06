@@ -11,13 +11,13 @@ class Value extends \HubletoMain\Core\Models\Model
   public string $recordManagerClass = RecordManagers\Value::class;
   public ?string $lookupSqlValue = '{%TABLE%}.value';
 
-  public array $rolePermissions = [
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
-    \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
-  ];
+  // public array $rolePermissions = [
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
+  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
+  // ];
 
   public array $relations = [
     'CONTACT' => [ self::BELONGS_TO, Contact::class, 'id_contact', 'id' ],
@@ -52,12 +52,12 @@ class Value extends \HubletoMain\Core\Models\Model
     $description->ui['showFooter'] = false;
 
     if ($this->main->urlParamAsInteger('idContact') != 0) {
-      $description->permissions = [
-        'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
-        'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
-        'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
-        'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
-      ];
+      // $description->permissions = [
+      //   'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
+      //   'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
+      //   'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
+      //   'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
+      // ];
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

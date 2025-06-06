@@ -58,7 +58,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
               </a>
             </div>
           : <>
-            {this.divider('About the user')}
+            {this.divider(this.translate('About the user'))}
             {this.inputWrapper('first_name')}
             {this.inputWrapper('last_name')}
             {this.inputWrapper('nick')}

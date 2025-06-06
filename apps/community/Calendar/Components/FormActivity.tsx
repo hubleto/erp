@@ -31,23 +31,42 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
     }
   }
 
+  renderCustomInputs(): JSX.Element {
+    return null;
+  }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
-
     const showAdditional: boolean = R.id > 0 ? true : false;
 
-    return (
-      <>
-        {this.inputWrapper('subject')}
-        {this.inputWrapper('id_activity_type')}
-        {showAdditional ? this.inputWrapper('completed') : null}
-        {this.inputWrapper('date_start')}
-        {this.inputWrapper('time_start')}
-        {this.inputWrapper('date_end')}
-        {this.inputWrapper('time_end')}
-        {this.inputWrapper('all_day')}
-        {this.inputWrapper('id_owner', {readonly: true, value: globalThis.main.idUser})}
-      </>
-    );
+    const customInputs = this.renderCustomInputs();
+
+    return <>
+      {customInputs ? <div className="p-2 mb-2 bg-blue-50">{customInputs}</div> : null}
+
+      {this.inputWrapper('subject', {cssClass: 'text-primary text-2xl'})}
+      {this.inputWrapper('id_activity_type')}
+      <div className='flex gap-2 w-full'>
+        <div className='w-full'>
+          {this.inputWrapper('all_day')}
+        </div>
+        <div className='w-full'>
+          {this.inputWrapper('completed')}
+        </div>
+      </div>
+      <div className='flex gap-2 w-full'>
+        <div>
+          {this.divider('Start')}
+          {this.input('date_start')}
+          {R.all_day ? null : this.input('time_start')}
+        </div>
+        <div>
+          {this.divider('End')}
+          {this.input('date_end')}
+          {R.all_day ? null : this.input('time_end')}
+        </div>
+      </div>
+      {this.inputWrapper('id_owner', {readonly: true, value: globalThis.main.idUser})}
+    </>;
   }
 }

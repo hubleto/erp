@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Deals\Models\RecordManagers;
 
-use HubletoApp\Community\Customers\Models\RecordManagers\Activity;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
 
-class DealActivity extends \HubletoMain\Core\RecordManager
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class DealActivity extends \HubletoApp\Community\Calendar\Models\RecordManagers\Activity
 {
   public $table = 'deal_activities';
 
@@ -15,9 +15,9 @@ class DealActivity extends \HubletoMain\Core\RecordManager
     return $this->belongsTo(Deal::class, 'id_deal', 'id');
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
-  {
-    return parent::prepareReadQuery($query, $level)->orderBy('date_start');
+  /** @return BelongsTo<Lead, covariant LeadActivity> */
+  public function CONTACT(): BelongsTo {
+    return $this->belongsTo(Contact::class, 'id_lead', 'id');
   }
 
 }

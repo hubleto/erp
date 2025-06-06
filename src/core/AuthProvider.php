@@ -82,17 +82,17 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
       $token->delete();
       $this->app->setUrlParam('password', $this->main->urlParamAsString('password'));
 
-      $this->app->auth->auth();
+      $this->app->auth->auth(false);
     } else {
       $token->delete();
     }
   }
 
-  public function auth(): void
+  public function auth(bool $persist): void
   {
     setcookie('incorrectLogin', '', time() - 3600);
 
-    parent::auth();
+    parent::auth($persist);
 
     $setLanguage = $this->main->urlParamAsString('set-language');
 

@@ -11,7 +11,7 @@ import Lookup from 'adios/Inputs/Lookup';
 import TableLeadDocuments from './TableLeadDocuments';
 import ModalForm from 'adios/ModalForm';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
-import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
+import LeadFormActivity, { LeadFormActivityProps, LeadFormActivityState } from './LeadFormActivity';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 import { FormProps, FormState } from 'adios/Form';
 import { table } from 'console';
@@ -25,8 +25,10 @@ export interface FormLeadState extends HubletoFormState {
   newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
-  activityCalendarTimeClicked: string,
-  activityCalendarDateClicked: string,
+  activityTime: string,
+  activityDate: string,
+  activitySubject: string,
+  activityAllDay: boolean,
   tableLeadProductsDescription: any,
   tableLeadDocumentsDescription: any,
   tablesKey: number,
@@ -59,8 +61,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       newEntryId: this.props.newEntryId ?? -1,
       showIdDocument: 0,
       showIdActivity: 0,
-      activityCalendarTimeClicked: '',
-      activityCalendarDateClicked: '',
+      activityTime: '',
+      activityDate: '',
+      activitySubject: '',
+      activityAllDay: false,
       tableLeadProductsDescription: null,
       tableLeadDocumentsDescription: null,
       tablesKey: 0,
@@ -199,6 +203,30 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
         onNo: () => {},
       }
     );
+  }
+
+  logCompletedActivity() {
+    request.get(
+      'leads/api/log-activity',
+      {
+        idLead: this.state.record.id,
+        activity: this.refLogActivityInput.current.value,
+      },
+      (result: any) => {
+        this.loadRecord();
+        this.refLogActivityInput.current.value = '';
+      }
+    );
+  }
+
+  scheduleActivity() {
+    this.setState({
+      showIdActivity: -1,
+      activityDate: moment().add(1, 'week').format('YYYY-MM-DD'),
+      activityTime: moment().add(1, 'week').format('H:00:00'),
+      activitySubject: this.refLogActivityInput.current.value,
+      activityAllDay: false,
+    } as FormLeadState);
   }
 
   renderContent(): JSX.Element {
@@ -535,31 +563,32 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   <div className="adios component input"><div className="input-element w-full flex gap-2">
                     <input
                       className="w-full"
-                      placeholder="Type recent activity and press Enter to log it instantly"
+                      placeholder="Type recent activity here"
                       ref={this.refLogActivityInput}
                       onKeyUp={(event: any) => {
                         if (event.keyCode == 13) {
-                          request.get(
-                            'leads/api/log-activity',
-                            {
-                              idLead: R.id,
-                              activity: this.refLogActivityInput.current.value,
-                            },
-                            (result: any) => {
-                              this.loadRecord();
-                              this.refLogActivityInput.current.value = '';
-                            }
-                          );
+                          if (event.shiftKey) {
+                            this.scheduleActivity();
+                          } else {
+                            this.logCompletedActivity();
+                          }
                         }
                       }}
                       onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         this.refLogActivityInput.current.value = event.target.value;
                       }}
                     />
-                    <button onClick={() => {}} className="btn btn-transparent">
-                      <span className="icon"><i className="fas fa-check"></i></span>
-                    </button>
                   </div></div>
+                  <div>
+                    <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
+                      <span className="icon"><i className="fas fa-check"></i></span>
+                      <span className="text">Enter = Log completed activity</span>
+                    </button>
+                    <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
+                      <span className="icon"><i className="fas fa-clock"></i></span>
+                      <span className="text">Shift+Enter = Schedule</span>
+                    </button>
+                  </div>
                   {this.divider('Most recent activities')}
                   {R.ACTIVITIES && R.ACTIVITIES.length > 0 ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 10).map((item, index) => {
                     return <>
@@ -579,12 +608,13 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   <Calendar
                     onCreateCallback={() => this.loadRecord()}
                     readonly={R.is_archived}
-                    initialView='timeGridWeek'
+                    initialView='dayGridMonth'
                     eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
                     onDateClick={(date, time, info) => {
                       this.setState({
-                        activityCalendarDateClicked: date,
-                        activityCalendarTimeClicked: time,
+                        activityDate: date,
+                        activityTime: time,
+                        activityAllDay: false,
                         showIdActivity: -1,
                       } as FormLeadState);
                     }}
@@ -613,9 +643,11 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
                 eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
                 onDateClick={(date, time, info) => {
+                  console.log('blabla1', date, time);
                   this.setState({
-                    activityCalendarDateClicked: date,
-                    activityCalendarTimeClicked: time,
+                    activityDate: date,
+                    activityTime: time,
+                    activityAllDay: false,
                     showIdActivity: -1,
                   } as FormLeadState);
                 }}
@@ -749,27 +781,30 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             isOpen={true}
             type='right'
           >
-            <FormActivity
+            <LeadFormActivity
               id={this.state.showIdActivity}
               isInlineEditing={true}
               description={{
                 defaultValues: {
                   id_lead: R.id,
-                  date_start: this.state.activityCalendarDateClicked,
-                  time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
-                  date_end: this.state.activityCalendarDateClicked,
+                  id_contact: R.id_contact,
+                  date_start: this.state.activityDate,
+                  time_start: this.state.activityTime == "00:00:00" ? null : this.state.activityTime,
+                  date_end: this.state.activityDate,
+                  all_day: this.state.activityAllDay,
+                  subject: this.state.activitySubject,
                 }
               }}
               idCustomer={R.id_customer}
               showInModal={true}
               showInModalSimple={true}
               onClose={() => { this.setState({ showIdActivity: 0 } as FormLeadState) }}
-              onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+              onSaveCallback={(form: LeadFormActivity<LeadFormActivityProps, LeadFormActivityState>, saveResponse: any) => {
                 if (saveResponse.status == "success") {
                   this.setState({ showIdActivity: 0 } as FormLeadState);
                 }
               }}
-            ></FormActivity>
+            ></LeadFormActivity>
           </ModalForm>
         }
       </>

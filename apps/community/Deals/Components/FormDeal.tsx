@@ -10,7 +10,7 @@ import { TabPanel, TabView } from 'primereact/tabview';
 import Calendar from '../../Calendar/Components/Calendar';
 import TableDealDocuments from './TableDealDocuments';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
-import FormActivity, { FormActivityProps, FormActivityState } from './FormActivity';
+import DealFormActivity, { DealFormActivityProps, DealFormActivityState } from './DealFormActivity';
 import ModalForm from 'adios/ModalForm';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 import { FormProps, FormState } from 'adios/Form';
@@ -761,7 +761,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             isOpen={true}
             type='right'
           >
-            <FormActivity
+            <DealFormActivity
               id={this.state.showIdActivity}
               isInlineEditing={true}
               description={{
@@ -776,12 +776,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               showInModal={true}
               showInModalSimple={true}
               onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}
-              onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+              onSaveCallback={(form: DealFormActivity<DealFormActivityProps, DealFormActivityState>, saveResponse: any) => {
                 if (saveResponse.status == "success") {
                   this.setState({ showIdActivity: 0 } as FormDealState);
                 }
               }}
-            ></FormActivity>
+            ></DealFormActivity>
           </ModalForm>
         }
       </>

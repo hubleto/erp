@@ -367,7 +367,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                     <Calendar
                       onCreateCallback={() => this.loadRecord()}
                       readonly={R.is_archived}
-                      initialView='timeGridWeek'
+                      initialView='dayGridMonth'
                       eventsEndpoint={globalThis.main.config.accountUrl + '/customers/get-calendar-events?idCustomer=' + R.id}
                       onDateClick={(date, time, info) => {
                         this.setState({

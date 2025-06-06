@@ -2,12 +2,10 @@
 
 namespace HubletoApp\Community\Customers\Models\RecordManagers;
 
-use HubletoApp\Community\Customers\Models\RecordManagers\Customer;
 use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class CustomerActivity extends \HubletoMain\Core\RecordManager
+class CustomerActivity extends \HubletoApp\Community\Calendar\Models\RecordManagers\Activity
 {
   public $table = 'customer_activities';
 

@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { setUrlParam, deleteUrlParam } from "adios/Helper";
 import Calendar from "./Calendar";
-import ModalSimple from "adios/ModalSimple";
+import ModalForm from "adios/ModalForm";
 import FormActivitySelector from "./FormActivitySelector";
 import { log } from "console";
 
@@ -125,12 +125,12 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
         }}
       ></Calendar>
       {this.state.activityFormComponent ?
-        <ModalSimple {...activityFormModalProps}>
+        <ModalForm {...activityFormModalProps}>
           {this.state.activityFormComponent}
-        </ModalSimple>
+        </ModalForm>
       : <></>}
       {this.state.newActivity ?
-        <ModalSimple
+        <ModalForm
           uid='activity_new_form'
           isOpen={true}
           type='right'
@@ -143,7 +143,7 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
               time: this.state.timeClicked
             }}
           />
-        </ModalSimple>
+        </ModalForm>
       : <></>}
     </>
     )

@@ -1,0 +1,11 @@
+{
+    "manifest": {
+        "Products": "Produkty",
+        "Free product portfolio managment.": "Správa portfolia produktů zdarma."
+    },
+    "root": {
+        "Products": "Produkty",
+        "Groups": "Skupiny",
+        "Suppliers": "Dodavatelé"
+    }
+}

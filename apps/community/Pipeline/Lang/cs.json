@@ -1,0 +1,9 @@
+{
+    "manifest": {
+        "Pipeline": "Potrubí",
+        "Free sales pipeline management.": "Správa potrubí zdarma."
+    },
+    "root": {
+        "Pipelines": "Potrubí"
+    }
+}

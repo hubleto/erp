@@ -1,0 +1,9 @@
+{
+    "manifest": {
+        "Desktop": "Desktop",
+        "Default Hubleto desktop implementation.": "Výchozí implementace stolních počítačů Hubteto."
+    },
+    "Controllers\\Home": {
+        "Welcome": "Vítejte"
+    }
+}

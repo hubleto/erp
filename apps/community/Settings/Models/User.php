@@ -13,7 +13,7 @@ class User extends \ADIOS\Models\User
     'fr' => 'Francais',
     'es' => 'Español',
     'sk' => 'Slovensky',
-    'cz' => 'Česky',
+    'cs' => 'Česky',
     'pl' => 'Polski',
   ];
 

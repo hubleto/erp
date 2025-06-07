@@ -1,0 +1,9 @@
+{
+    "manifest": {
+        "Orders": "Objednávky",
+        "Free order managment.": "Správa objednávek zdarma."
+    },
+    "root": {
+        "Order states": "Objednejte státy"
+    }
+}

@@ -1,0 +1,53 @@
+{
+    "manifest": {
+        "Deals": "Obchody",
+        "Deal management. From deal to purchase.": "Správa obchodů. Od dohody k nákupu."
+    },
+    "root": {
+        "Deal Tags": "Značky obchodu",
+        "Deal Lost Reasons": "Deal ztracené důvody",
+        "Most valuable deals": "Nejcennější obchody",
+        "Deal value by result": "Výsledek na základě výsledku",
+        "Active deals": "Aktivní obchody",
+        "Archived deals": "Archivované obchody"
+    },
+    "Models\\DealActivity": {
+        "Subject": "Podrobit",
+        "Activity type": "Typ aktivity",
+        "Start date": "Datum zahájení",
+        "Start time": "Čas zahájení",
+        "End date": "Datum ukončení",
+        "End time": "Ukončený čas",
+        "All day": "Celý den",
+        "Completed": "Dokončeno",
+        "Created by": "Vytvořeno",
+        "Deal": "Jednat",
+        "Contact": "Kontakt"
+    },
+    "Models\\Deal": {
+        "Deal Identifier": "Identifikátor obchodu",
+        "Title": "Titul",
+        "Customer": "Zákazník",
+        "Contact": "Kontakt",
+        "Lead": "Vést",
+        "Price": "Cena",
+        "Currency": "Měna",
+        "Expected close date": "Očekávané datum uzavření",
+        "Owner": "Majitel",
+        "Responsible": "Odpovědný",
+        "Created": "Vytvořené",
+        "Pipeline": "Potrubí",
+        "Pipeline step": "Krok potrubí",
+        "Notes": "Poznámky",
+        "Source channel": "Zdrojový kanál",
+        "Archived": "Archivovaný",
+        "Deal Result": "Výsledek řešení",
+        "Reason for Lost": "Důvod pro ztracení",
+        "Date of result update": "Datum aktualizace výsledku",
+        "New Customer": "Nový zákazník",
+        "Business type": "Typ podnikání"
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": "Otevřená dohoda"
+    }
+}

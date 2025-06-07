@@ -1,0 +1,51 @@
+{
+    "manifest": {
+        "Customers": "Zákazníci",
+        "Free customer management and addressbook.": "Správa zákazníků zdarma a adresář."
+    },
+    "root": {
+        "Customer Tags": "Značky zákazníků"
+    },
+    "Models\\CustomerActivity": {
+        "Subject": "Podrobit",
+        "Activity type": "Typ aktivity",
+        "Start date": "Datum zahájení",
+        "Start time": "Čas zahájení",
+        "End date": "Datum ukončení",
+        "End time": "Ukončený čas",
+        "All day": "Celý den",
+        "Completed": "Dokončeno",
+        "Created by": "Vytvořeno",
+        "Customer": "Zákazník",
+        "Contact": "Kontakt"
+    },
+    "Models\\Customer": {
+        "Name": "Jméno",
+        "Street Line 1": "Street Line 1",
+        "Street Line 2": "Street Line 2",
+        "Region": "Kraj",
+        "City": "Město",
+        "Postal Code": "Poštovní kód",
+        "Country": "Země",
+        "VAT ID": "DPH ID",
+        "Customer ID": "ID zákazníka",
+        "Tax ID": "ID daně",
+        "Notes": "Poznámky",
+        "Date Created": "Datum vytvořené",
+        "Active": "Aktivní",
+        "Owner": "Majitel",
+        "Responsible": "Odpovědný"
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "Zákazník",
+        "Document": "Dokument"
+    },
+    "Models\\CustomerTag": {
+        "Customer": "Zákazník",
+        "Tag": "Štítek"
+    },
+    "Models\\Tag": {
+        "Name": "Jméno",
+        "Color": "Barva"
+    }
+}

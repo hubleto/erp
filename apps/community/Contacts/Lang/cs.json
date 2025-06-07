@@ -1,0 +1,47 @@
+{
+    "manifest": {
+        "Contacts": "Kontakty",
+        "Default customer management and addressbook.": "Výchozí správa zákazníků a adresář."
+    },
+    "root": {
+        "Contact Categories": "Kontaktní kategorie",
+        "Contact Tags": "Kontaktní značky"
+    },
+    "Controllers\\Contacts": {
+        "Contacts": "Kontakty"
+    },
+    "Models\\Contact": {
+        "Salutation": "Oslovení",
+        "Title before": "Titul dříve",
+        "First name": "Křestní jméno",
+        "Middle name": "Druhé jméno",
+        "Last name": "Příjmení",
+        "Title after": "Název po",
+        "Customer": "Zákazník",
+        "Primary Contact": "Primární kontakt",
+        "Notes": "Poznámky",
+        "Date Created": "Datum vytvořené",
+        "Active": "Aktivní"
+    },
+    "Models\\Value": {
+        "Contact": "Kontakt",
+        "Category": "Kategorie",
+        "Type": "Typ",
+        "Email": "E-mail",
+        "Number": "Číslo",
+        "URL": "URL",
+        "Other": "Ostatní",
+        "Value": "Hodnota"
+    },
+    "Models\\ContactTag": {
+        "Contact": "Kontakt",
+        "Tag": "Štítek"
+    },
+    "Models\\Category": {
+        "Type": "Typ"
+    },
+    "Models\\Tag": {
+        "Name": "Jméno",
+        "Color": "Barva"
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "Models\\User": {
+        "First name": "Křestní jméno",
+        "Last name": "Příjmení",
+        "Nick": "Nick",
+        "Email": "E-mail",
+        "Language": "Jazyk",
+        "Default company": "Výchozí společnost"
+    },
+    "Models\\UserRole": {
+        "Role": "Role",
+        "Grant all permissions (administrator role)": "Udělejte všechna povolení (role správce)",
+        "Description": "Popis",
+        "Is default role (cannot be modified)": "Je výchozí role (nelze upravit)"
+    },
+    "Models\\UserHasRole": {
+        "User": "Uživatel",
+        "Role": "Role"
+    },
+    "Models\\RolePermission": {
+        "Permission": "Povolení",
+        "Role": "Role"
+    },
+    "manifest": {
+        "Settings": "Nastavení",
+        "Settings and control panel for your Hubleto.": "Nastavení a ovládací panel pro váš Hubteto."
+    },
+    "root": {
+        "Users": "Uživatelé",
+        "Roles": "Role",
+        "Your companies": "Vaše společnosti",
+        "General settings": "Obecná nastavení",
+        "Permissions list": "Seznam oprávnění",
+        "Role permissions": "Oprávnění role",
+        "Activity types": "Typy aktivity",
+        "Countries": "Země",
+        "Currencies": "Měny",
+        "Invoice profiles": "Profily faktury",
+        "Platform config": "Konfigurace platformy",
+        "Sidebar": "Postranní panel",
+        "Teams": "Týmy"
+    },
+    "Models\\Country": {
+        "Country": "Země",
+        "Code": "Kód"
+    },
+    "Models\\Company": {
+        "Company": "Společnost",
+        "Tax ID": "ID daně",
+        "VAT ID": "DPH ID",
+        "Street, line 1": "Ulice, řádek 1",
+        "Street, line 2": "Street, řádek 2",
+        "ZIP": "Zip",
+        "City": "Město",
+        "Country": "Země"
+    },
+    "Models\\ActivityType": {
+        "Type": "Typ",
+        "Color": "Barva",
+        "Show in calendar": "Zobrazit v kalendáři",
+        "Icon": "Ikona"
+    }
+}

@@ -34,7 +34,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
 
   renderContent(): JSX.Element {
     // const languages = {
-    //   'cz': 'Česky',
+    //   'cs': 'Česky',
     //   'de': 'Deutsch',
     //   'en': 'English',
     //   'es': 'Español',

@@ -1,0 +1,18 @@
+{
+    "manifest": {
+        "Documents": "Dokumenty",
+        "Free document management.": "Správa dokumentů zdarma."
+    },
+    "root": {
+        "Browse": "Prohlížet",
+        "List": "Seznam"
+    },
+    "Models\\Document": {
+        "Uid": "Uid",
+        "Folder": "Složka",
+        "Document name": "Název dokumentu",
+        "File": "Soubor",
+        "File Link": "Odkaz souboru",
+        "Origin Link": "Původ odkaz"
+    }
+}

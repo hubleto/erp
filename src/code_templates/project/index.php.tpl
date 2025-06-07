@@ -1,5 +1,7 @@
 <?php
 
+set_time_limit(600);
+
 ini_set('html_errors', "1");
 ini_set('error_prepend_string', "<pre style='color: #333; font-face:monospace; font-size:8pt;'>");
 ini_set('error_append_string', "</pre>");

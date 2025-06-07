@@ -310,7 +310,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         }}
                       ></Lookup>
                     </FormInput>
-                    {R.CONTACT && R.CONTACT.VALUES ? <div className="ml-4 text-sm p-2 bg-gray-100 mb-2">
+                    {R.CONTACT && R.CONTACT.VALUES ? <div className="ml-4 text-sm p-2 bg-lime-100 text-lime-900 mb-2">
                       {R.CONTACT.VALUES.map((item, key) => {
                         return <div key={key}>{item.value}</div>;
                       })}

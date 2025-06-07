@@ -31,10 +31,10 @@ class Contact extends \HubletoMain\Core\Models\Model
     'TAGS' => [ self::HAS_MANY, ContactTag::class, 'id_contact', 'id' ],
   ];
 
-  public function translate(string $string, array $vars = []): string
-  {
-    return parent::translate($string, $vars);
-  }
+  // public function translate(string $string, array $vars = []): string
+  // {
+  //   return parent::translate($string, $vars);
+  // }
 
   public function describeColumns(): array
   {

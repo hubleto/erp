@@ -159,7 +159,12 @@ class App {
     $dictFilename = static::getDictionaryFilename($language);
     if (is_file($dictFilename)) {
       $dict = static::loadDictionary($language);
-      $dict[$contextInner][$string] = '';
+
+      $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
+      $tr->setSource('en'); // Translate from
+      $tr->setTarget($language); // Translate to
+
+      $dict[$contextInner][$string] = $tr->translate($string);
       @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
   }

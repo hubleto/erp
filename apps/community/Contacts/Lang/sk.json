@@ -44,10 +44,10 @@
         "Phone Number": "Telefón",
         "Other": "Iné",
         "Value": "Hodnota",
-        "Contact": "",
-        "Category": "",
-        "Number": "",
-        "URL": ""
+        "Contact": "Kontakt",
+        "Category": "Kategória",
+        "Number": "Počet",
+        "URL": "Adresa URL"
     },
     "Models\\PersonTag": {
         "Person": "Kontakt",

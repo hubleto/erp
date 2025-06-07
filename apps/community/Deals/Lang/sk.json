@@ -32,14 +32,15 @@
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný dokument",
         "Deal Progress": "",
         "Date of progress update": "",
-        "Deal Result": "",
-        "Date of result update": "",
-        "New Customer": "",
-        "Business type": "",
-        "Contact": "",
-        "Owner": "",
-        "Created": "",
-        "Reason for Lost": ""
+        "Deal Result": "Výsledok obchodu",
+        "Date of result update": "Dátum aktualizácie výsledku",
+        "New Customer": "Nový zákazník",
+        "Business type": "Obchodný typ",
+        "Contact": "Kontakt",
+        "Owner": "Majiteľ",
+        "Created": "Vytvorený",
+        "Reason for Lost": "Dôvod pre stratu",
+        "Responsible": "Zodpovedný"
     },
     "Models\\DealHistory": {
         "Change Date": "",
@@ -81,9 +82,9 @@
         "Deal Tags": "Značky dealov",
         "Deal value by result": "Hodnota dealov podľa výsledku",
         "Most valuable deals": "Najhodnotnejšie dealy",
-        "Active deals": "",
-        "Archived deals": "",
-        "Deal Lost Reasons": ""
+        "Active deals": "Aktívne obchody",
+        "Archived deals": "Archivované obchody",
+        "Deal Lost Reasons": "Dohoda stratená dôvody"
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendár",

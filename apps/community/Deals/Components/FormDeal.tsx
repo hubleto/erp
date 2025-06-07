@@ -388,6 +388,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           }}
         ></Lookup>
       </FormInput>
+      {R.CONTACT && R.CONTACT.VALUES ? <div className="ml-4 text-sm p-2 bg-lime-100 text-lime-900 mb-2">
+        {R.CONTACT.VALUES.map((item, key) => {
+          return <div key={key}>{item.value}</div>;
+        })}
+      </div> : null}
       <div className='flex flex-row *:w-1/2'>
         {this.inputWrapper('price', {
           cssClass: 'text-2xl',

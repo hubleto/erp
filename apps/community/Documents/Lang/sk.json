@@ -8,15 +8,15 @@
         "File": "Súbor",
         "Link": "Odkaz na online verziu",
         "File Link": "Odkaz na dokument",
-        "Origin Link": "",
-        "Uid": "",
-        "Folder": ""
+        "Origin Link": "Pôvodný odkaz",
+        "Uid": "Uid",
+        "Folder": "Priečinok"
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"
     },
     "root": {
-        "Browse": "",
-        "List": ""
+        "Browse": "Prehliadať",
+        "List": "Zoznam"
     }
 }

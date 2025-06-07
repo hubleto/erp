@@ -18,7 +18,8 @@
         "symfony/yaml": "^7",
         "twig/twig": "^3",
         "wai-blue/adios": "^1",
-        "phpmailer/phpmailer": "^6.9"
+        "phpmailer/phpmailer": "^6.9",
+        "stichoza/google-translate-php": "^5.3"
     },
     "autoload": {
         "psr-4": {

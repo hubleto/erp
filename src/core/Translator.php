@@ -149,14 +149,14 @@ class Translator extends \ADIOS\Core\Translator {
 
       $translated = '';
 
-      if (isset($this->dictionary[$contextClass][$contextInner][$string])) { // @phpstan-ignore-line
+      if (!empty($this->dictionary[$contextClass][$contextInner][$string])) { // @phpstan-ignore-line
         $translated = (string) $this->dictionary[$contextClass][$contextInner][$string];
       } else if (class_exists($contextClass)) {
         $contextClass::addToDictionary($toLanguage, $contextInner, $string);
       }
 
-      if (empty($translated) && $toLanguage != 'en') {
-        $translated = 'translate(' . $context . '; ' . $string . ')';
+      if (empty($translated)) {
+        $translated = 'translate(' . $contextClass . '-' . class_exists($contextClass) . '; ' . $string . ')';
       }
     }
 

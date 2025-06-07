@@ -9,18 +9,18 @@
         "Manage pipeline steps": ""
     },
     "root": {
-        "Pipelines": ""
+        "Pipelines": "Potrubia"
     },
     "Models\\Pipeline": {
-        "Name": "",
-        "Description": ""
+        "Name": "Pomenovať",
+        "Description": "Opis"
     },
     "Models\\PipelineStep": {
-        "Name": "",
-        "Order": "",
-        "Color": "",
-        "Probability": "",
-        "Pipeline": "",
+        "Name": "Pomenovať",
+        "Order": "Objednávka",
+        "Color": "Farba",
+        "Probability": "Pravdepodobnosť",
+        "Pipeline": "Potrubie",
         "Set result of a deal to": ""
     }
 }

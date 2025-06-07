@@ -40,7 +40,11 @@
         "All day": "Celodenná",
         "Completed": "Ukončená",
         "Created by": "Vytvoril",
-        "Contact": ""
+        "Contact": "Kontakt",
+        "Start date": "Dátum začiatku",
+        "Start time": "Začiatok",
+        "End date": "Dátum",
+        "End time": "Čas"
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",

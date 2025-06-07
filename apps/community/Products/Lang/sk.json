@@ -7,7 +7,7 @@
         "Products": "Produkty",
         "Product Groups": "Skupiny produktov",
         "Suppliers": "Dodávatelia",
-        "Groups": ""
+        "Groups": "Zoskupovať"
     },
     "Controllers\\Products": {
         "Products": "Produkty"

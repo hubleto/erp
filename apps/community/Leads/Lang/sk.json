@@ -13,18 +13,18 @@
         "Archive": "Archív"
     },
     "Models\\LeadActivity": {
-        "Activity type": "",
-        "Subject": "",
-        "Lead": "",
+        "Activity type": "Typ aktivity",
+        "Subject": "Predmet",
+        "Lead": "Vedenie",
         "Contact person": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Created by": "",
-        "Contact": ""
+        "Start date": "Dátum začiatku",
+        "Start time": "Začiatok",
+        "End date": "Dátum",
+        "End time": "Čas",
+        "All day": "Celý deň",
+        "Completed": "Dokončený",
+        "Created by": "Vytvorené",
+        "Contact": "Kontakt"
     },
     "Models\\Lead": {
         "Add Lead": "Pridať lead",
@@ -43,31 +43,32 @@
         "Archived": "Archivovaný",
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok",
         "Score": "Skóre",
-        "Contact": "",
-        "Responsible": "",
-        "Created": "",
-        "Reason for Lost": "",
-        "Add lead": ""
+        "Contact": "Kontakt",
+        "Responsible": "Zodpovedný",
+        "Created": "Vytvorený",
+        "Reason for Lost": "Dôvod pre stratu",
+        "Add lead": "Pridať olovo",
+        "Owner": "Majiteľ"
     },
     "root": {
         "Lead statuses": "Stavy leadov",
         "Lead Tags": "Značky leadov",
-        "Active leads": "",
-        "Archived leads": "",
-        "Lead Lost Reasons": ""
+        "Active leads": "Aktívne zvody",
+        "Archived leads": "Archivované vodiče",
+        "Lead Lost Reasons": "Olovo stratené dôvody"
     },
     "Models\\LeadHistory": {
-        "Change Date": "",
-        "Lead": "",
-        "Description": ""
+        "Change Date": "Dátum zmeny",
+        "Lead": "Vedenie",
+        "Description": "Opis"
     },
     "Models\\LeadTag": {
-        "Lead": "",
-        "Tag": ""
+        "Lead": "Vedenie",
+        "Tag": "Označenie"
     },
     "Models\\LeadDocument": {
-        "Lead": "",
-        "Document": ""
+        "Lead": "Vedenie",
+        "Document": "Dokument"
     },
     "Components\\FormLead": {
         "Lead": "Lead",
@@ -84,17 +85,17 @@
         "Color": ""
     },
     "Models\\LeadProduct": {
-        "Lead": "",
-        "Product": "",
-        "Unit Price": "",
-        "Amount": "",
+        "Lead": "Vedenie",
+        "Product": "Produkt",
+        "Unit Price": "Jednotková cena",
+        "Amount": "Výška",
         "Dicount (%)": "",
         "Vat (%)": "",
-        "Vat": "",
-        "Discount": "",
-        "Sum": ""
+        "Vat": "Kov",
+        "Discount": "Zľavu",
+        "Sum": "Súčet"
     },
     "Models\\LostReason": {
-        "Lost Reason": ""
+        "Lost Reason": "Stratený dôvod"
     }
 }

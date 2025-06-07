@@ -1,6 +1,6 @@
 import CustomersTableCustomers from "./Components/TableCustomers"
 import CustomersTableActivities from "./Components/TableActivities"
-import CustomersFormActivity from "./Components/FormActivity"
+import CustomersFormActivity from "./Components/CustomerFormActivity"
 
 globalThis.main.registerReactComponent('CustomersTableCustomers', CustomersTableCustomers);
 globalThis.main.registerReactComponent('CustomersTableActivities', CustomersTableActivities);

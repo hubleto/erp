@@ -256,6 +256,76 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     //   </>;
     // }
 
+    const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
+      <div className="adios component input"><div className="input-element w-full flex gap-2">
+        <input
+          className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
+          placeholder={this.translate('Type recent activity here')}
+          ref={this.refLogActivityInput}
+          onKeyUp={(event: any) => {
+            if (event.keyCode == 13) {
+              if (event.shiftKey) {
+                this.scheduleActivity();
+              } else {
+                this.logCompletedActivity();
+              }
+            }
+          }}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            this.refLogActivityInput.current.value = event.target.value;
+          }}
+        />
+      </div></div>
+      <div className='mt-2'>
+        <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
+          <span className="icon"><i className="fas fa-check"></i></span>
+          <span className="text">{this.translate('Enter = Log completed activity')}</span>
+        </button>
+        <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
+          <span className="icon"><i className="fas fa-clock"></i></span>
+          <span className="text">{this.translate('Shift+Enter = Schedule')}</span>
+        </button>
+      </div>
+      {this.divider(this.translate('Most recent activities'))}
+      {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
+        return <>
+          <button key={index} className="btn btn-small btn-transparent btn-list-item"
+            onClick={() => this.setState({showIdActivity: item.id} as FormLeadState)}
+          >
+            <span className="icon">{item.date_start} {item.time_start}<br/>{item['_LOOKUP[id_owner]']}</span>
+            <span className="text">
+              {item.subject}
+              {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
+            </span>
+          </button>
+        </>
+      })}</div> : null}
+
+      <div className='mt-2'>
+        <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_archived}
+          initialView='dayGridMonth'
+          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormLeadState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormLeadState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>
+      </div>
+    </div>;
+
     return (
       <>
         {this.state.id > 0 ?
@@ -282,7 +352,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     <FormInput title={"Customer"}>
                       <Lookup {...this.getInputProps('id_customer')}
                         model='HubletoApp/Community/Customers/Models/Customer'
-                        endpoint={`customers/get-customer`}
+                        endpoint={`customers/api/get-customer`}
                         readonly={R.is_archived}
                         value={R.id_customer}
                         onChange={(value: any) => {
@@ -347,6 +417,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   </div>
                   <div className='border-l border-gray-200'></div>
                   <div className='grow'>
+                    {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
                     {this.inputWrapper('id_owner', {readonly: R.is_archived})}
                     {this.inputWrapper('id_responsible', {readonly: R.is_archived})}
                     {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
@@ -365,24 +436,11 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         }}
                       ></InputTags2>
                     </FormInput>
+                    {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
                     {showAdditional ? <>
                       {this.inputWrapper('date_created')}
                       {this.inputWrapper('is_archived')}
                     </> : null}
-                  </div>
-                </div>
-                <div className='flex gap-2 mt-2 w-full'>
-                  <div className='card grow'>
-                    <div className='card-header'>Documents</div>
-                    <div className='card-body'>
-                      {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-                    </div>
-                  </div>
-                  <div className='card grow'>
-                    <div className='card-header'>Notes</div>
-                    <div className='card-body'>
-                      {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
-                    </div>
                   </div>
                 </div>
                 {showAdditional ?
@@ -559,74 +617,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   : <></>}
               </div>
               {showAdditional ? <div className='flex-1'>
-                <div className="card card-body border border-blue-200 shadow-blue-200">
-                  <div className="adios component input"><div className="input-element w-full flex gap-2">
-                    <input
-                      className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
-                      placeholder="Type recent activity here"
-                      ref={this.refLogActivityInput}
-                      onKeyUp={(event: any) => {
-                        if (event.keyCode == 13) {
-                          if (event.shiftKey) {
-                            this.scheduleActivity();
-                          } else {
-                            this.logCompletedActivity();
-                          }
-                        }
-                      }}
-                      onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                        this.refLogActivityInput.current.value = event.target.value;
-                      }}
-                    />
-                  </div></div>
-                  <div className='mt-2'>
-                    <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
-                      <span className="icon"><i className="fas fa-check"></i></span>
-                      <span className="text">Enter = Log completed activity</span>
-                    </button>
-                    <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
-                      <span className="icon"><i className="fas fa-clock"></i></span>
-                      <span className="text">Shift+Enter = Schedule</span>
-                    </button>
-                  </div>
-                  {this.divider('Most recent activities')}
-                  {R.ACTIVITIES && R.ACTIVITIES.length > 0 ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 10).map((item, index) => {
-                    return <>
-                      <button key={index} className="btn btn-small btn-transparent btn-list-item"
-                        onClick={() => this.setState({showIdActivity: item.id} as FormLeadState)}
-                      >
-                        <span className="icon">{item.date_start} {item.time_start}<br/>{item['_LOOKUP[id_owner]']}</span>
-                        <span className="text">
-                          {item.subject}
-                          {item.completed ? null : <div className="text-red-800">Not completed yet</div>}
-                        </span>
-                      </button>
-                    </>
-                  })}</div> : <>No activities for this lead yet.</>}
-                </div>
-                <div className="card card-body mt-2">
-                  <Calendar
-                    onCreateCallback={() => this.loadRecord()}
-                    readonly={R.is_archived}
-                    initialView='dayGridMonth'
-                    headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-                    eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
-                    onDateClick={(date, time, info) => {
-                      this.setState({
-                        activityDate: date,
-                        activityTime: time,
-                        activityAllDay: false,
-                        showIdActivity: -1,
-                      } as FormLeadState);
-                    }}
-                    onEventClick={(info) => {
-                      this.setState({
-                        showIdActivity: parseInt(info.event.id),
-                      } as FormLeadState);
-                      info.jsEvent.preventDefault();
-                    }}
-                  ></Calendar>
-                </div>
+                {recentActivitiesAndCalendar}
               </div> : null}
             </div>
           </TabPanel>

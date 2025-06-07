@@ -93,7 +93,12 @@
         "History": "História",
         "Go to original lead": "Prejsť na pôvodný lead",
         "Documents": "Dokumenty",
-        "Show deals": "Zobraziť dealy"
+        "Show deals": "Zobraziť dealy",
+        "Shift+Enter = Schedule": "Shift+Enter = harmonogram",
+        "Enter = Log completed activity": "Enter = protokol dokončená aktivita",
+        "Type recent activity here": "Zadajte poslednú aktivitu tu",
+        "Not completed yet": "Zatiaľ nie sú dokončené",
+        "Most recent activities": "Najnovšie aktivity"
     },
     "Models\\Tag": {
         "Name": "Pomenovať",

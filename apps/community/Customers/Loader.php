@@ -16,9 +16,11 @@ class Loader extends \HubletoMain\Core\App
       '/^customers\/add\/?$/' => ['controller' => Controllers\Customers::class, 'vars' => ['recordId' => -1]],
       '/^customers\/settings\/?$/' => Controllers\Settings::class,
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
-      '/^customers\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
-      '/^customers\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^settings\/customer-tags\/?$/' => Controllers\Tags::class,
+
+      '/^customers\/api\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
+      '/^customers\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
+      '/^customers\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
     ]);
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;

@@ -187,7 +187,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
             <FormInput title={this.translate("Customer")}>
               <Lookup {...this.getInputProps('id_customer')}
                 model='HubletoApp/Community/Contacts/Models/Customer'
-                endpoint={`customers/get-customer`}
+                endpoint={`customers/api/get-customer`}
                 value={R.id_customer}
                 readonly={this.props.creatingNew}
                 onChange={(value: any) => {

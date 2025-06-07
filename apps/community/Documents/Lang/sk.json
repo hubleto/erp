@@ -18,5 +18,13 @@
     "root": {
         "Browse": "Prehliadať",
         "List": "Zoznam"
+    },
+    "Controllers\\Table": {
+        "Documents": "Dokumenty"
+    },
+    "Models\\Folder": {
+        "Uid": "Uid",
+        "Parent folder": "Priečinok",
+        "Folder name": "Názov priečinka"
     }
 }

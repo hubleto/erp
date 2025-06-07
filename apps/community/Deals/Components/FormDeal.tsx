@@ -185,9 +185,9 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
   logCompletedActivity() {
     request.get(
-      'leads/api/log-activity',
+      'deals/api/log-activity',
       {
-        idLead: this.state.record.id,
+        idDeal: this.state.record.id,
         activity: this.refLogActivityInput.current.value,
       },
       (result: any) => {
@@ -206,6 +206,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       activityAllDay: false,
     } as FormDealState);
   }
+
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
@@ -288,7 +289,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <div className="adios component input"><div className="input-element w-full flex gap-2">
         <input
           className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
-          placeholder="Type recent activity here"
+          placeholder={this.translate('Type recent activity here')}
           ref={this.refLogActivityInput}
           onKeyUp={(event: any) => {
             if (event.keyCode == 13) {
@@ -307,14 +308,14 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <div className='mt-2'>
         <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
           <span className="icon"><i className="fas fa-check"></i></span>
-          <span className="text">Enter = Log completed activity</span>
+          <span className="text">{this.translate('Enter = Log completed activity')}</span>
         </button>
         <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
           <span className="icon"><i className="fas fa-clock"></i></span>
-          <span className="text">Shift+Enter = Schedule</span>
+          <span className="text">{this.translate('Shift+Enter = Schedule')}</span>
         </button>
       </div>
-      {this.divider('Most recent activities')}
+      {this.divider(this.translate('Most recent activities'))}
       {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
         return <>
           <button key={index} className="btn btn-small btn-transparent btn-list-item"
@@ -323,7 +324,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             <span className="icon">{item.date_start} {item.time_start}<br/>{item['_LOOKUP[id_owner]']}</span>
             <span className="text">
               {item.subject}
-              {item.completed ? null : <div className="text-red-800">Not completed yet</div>}
+              {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
             </span>
           </button>
         </>
@@ -335,7 +336,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           readonly={R.is_archived}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.accountUrl + '/leads/get-calendar-events?idLead=' + R.id}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/deals/get-calendar-events?idDeal=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -360,7 +361,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <FormInput title={"Customer"} required={true}>
         <Lookup {...this.getInputProps("id_customer")}
           model='HubletoApp/Community/Customers/Models/Customer'
-          endpoint={`customers/get-customer`}
+          endpoint={`customers/api/get-customer`}
           value={R.id_customer}
           readonly={R.is_archived}
           onChange={(value: any) => {

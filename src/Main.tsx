@@ -66,7 +66,7 @@ class HubletoMain extends ADIOS {
     const contextClass = tmp[0];
     const contextInner = tmp[1];
 
-    console.log('translate', contextClass, contextInner, orig, this.dictionary, this.dictionary[contextClass], this.dictionary[contextClass][contextInner]);
+    // console.log('translate', contextClass, contextInner, orig, this.dictionary, this.dictionary[contextClass], this.dictionary[contextClass][contextInner]);
 
     if (this.dictionary === null) return orig;
 

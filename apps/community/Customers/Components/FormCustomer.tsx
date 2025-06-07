@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, ChangeEvent } from "react";
 import { deepObjectMerge, getUrlParam } from "adios/Helper";
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from "adios/Inputs/Tags2";
 import FormInput from "adios/FormInput";
 import TableContacts from "../../Contacts/Components/TableContacts";
 import { TabPanel, TabView } from "primereact/tabview";
-import FormActivity, {FormActivityProps, FormActivityState} from "./FormActivity";
+import CustomerFormActivity, {CustomerFormActivityProps, CustomerFormActivityState} from "./CustomerFormActivity";
 import TableLeads from "../../Leads/Components/TableLeads";
 import FormLead, {FormLeadProps, FormLeadState} from "../../Leads/Components/FormLead";
-import ModalSimple from "adios/ModalSimple";
+import ModalForm from "adios/ModalForm";
 import TableDeals from "../../Deals/Components/TableDeals";
 import FormDeal, {FormDealProps, FormDealState} from "../../Deals/Components/FormDeal";
 import TableCustomerDocuments from "./TableCustomerDocuments";
@@ -18,6 +18,7 @@ import Calendar from '../../Calendar/Components/Calendar'
 import Hyperlink from "adios/Inputs/Hyperlink";
 import request from "adios/Request";
 import { FormProps, FormState } from "adios/Form";
+import moment, { Moment } from "moment";
 
 export interface FormCustomerProps extends HubletoFormProps {
   highlightIdActivity: number,
@@ -53,10 +54,14 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
   props: FormCustomerProps;
   state: FormCustomerState;
 
+  refLogActivityInput: any;
+
   translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\FormCustomer';
 
   constructor(props: FormCustomerProps) {
     super(props);
+
+    this.refLogActivityInput = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -118,7 +123,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
 
   renderNewContactForm(R: any): JSX.Element {
     return (
-      <ModalSimple
+      <ModalForm
         uid='contact_form'
         isOpen={true}
         type='right wide'
@@ -145,18 +150,18 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           }}
         >
         </FormContact>
-      </ModalSimple>
+      </ModalForm>
     )
   }
 
   renderActivityForm(R: any): JSX.Element {
     return (
-      <ModalSimple
+      <ModalForm
         uid='activity_form'
         isOpen={true}
         type='inside-parent theme-secondary'
       >
-        <FormActivity
+        <CustomerFormActivity
           id={this.state.showIdActivity}
           isInlineEditing={true}
           description={{
@@ -170,81 +175,81 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           showInModal={true}
           showInModalSimple={true}
           onClose={() => { this.setState({ showIdActivity: 0 } as FormCustomerState) }}
-          onSaveCallback={(form: FormActivity<FormActivityProps, FormActivityState>, saveResponse: any) => {
+          onSaveCallback={(form: CustomerFormActivity<CustomerFormActivityProps, CustomerFormActivityState>, saveResponse: any) => {
             if (saveResponse.status == "success") {
               this.setState({ showIdActivity: 0 } as FormCustomerState);
             }
           }}
-        ></FormActivity>
-      </ModalSimple>
+        ></CustomerFormActivity>
+      </ModalForm>
      )
   }
 
-  renderNewLeadForm(R: any): JSX.Element {
-    return (
-      <ModalSimple
-        uid='lead_form'
-        isOpen={true}
-        type='right'
-      >
-        <FormLead
-          id={-1}
-          isInlineEditing={true}
-          descriptionSource="both"
-          description={{
-            defaultValues: {
-              id_customer: R.id,
-            }
-          }}
-          showInModal={true}
-          showInModalSimple={true}
-          onClose={() => { this.setState({ createNewLead: false } as FormCustomerState); }}
-          onSaveCallback={(form: FormLead<FormLeadProps, FormLeadState>, saveResponse: any) => {
-            if (saveResponse.status = "success") {
-              console.log("hihi");
+  // renderNewLeadForm(R: any): JSX.Element {
+  //   return (
+  //     <ModalForm
+  //       uid='lead_form'
+  //       isOpen={true}
+  //       type='right'
+  //     >
+  //       <FormLead
+  //         id={-1}
+  //         isInlineEditing={true}
+  //         descriptionSource="both"
+  //         description={{
+  //           defaultValues: {
+  //             id_customer: R.id,
+  //           }
+  //         }}
+  //         showInModal={true}
+  //         showInModalSimple={true}
+  //         onClose={() => { this.setState({ createNewLead: false } as FormCustomerState); }}
+  //         onSaveCallback={(form: FormLead<FormLeadProps, FormLeadState>, saveResponse: any) => {
+  //           if (saveResponse.status = "success") {
+  //             console.log("hihi");
 
-              this.loadRecord();
-              this.setState({createNewLead: false} as FormCustomerState)
-            }
-          }}
-        />
-      </ModalSimple>
-    )
-  }
+  //             this.loadRecord();
+  //             this.setState({createNewLead: false} as FormCustomerState)
+  //           }
+  //         }}
+  //       />
+  //     </ModalForm>
+  //   )
+  // }
 
-  renderNewDealForm(R: any): JSX.Element{
-  return (
-    <ModalSimple
-      uid='deal_form'
-      isOpen={true}
-      type='right'
-    >
-      <FormDeal
-        id={-1}
-        isInlineEditing={true}
-        descriptionSource="both"
-        description={{
-          defaultValues: {
-            id_customer: R.id,
-          }
-        }}
-        showInModal={true}
-        showInModalSimple={true}
-        onClose={() => { this.setState({ createNewDeal: false } as FormCustomerState); }}
-        onSaveCallback={(form: FormDeal<FormDealProps, FormDealState>, saveResponse: any) => {
-          if (saveResponse.status = "success") {
-            this.loadRecord();
-            this.setState({createNewDeal: false} as FormCustomerState)
-          }
-        }}
-      />
-    </ModalSimple>
-  )
-  }
+  // renderNewDealForm(R: any): JSX.Element{
+  // return (
+  //   <ModalForm
+  //     uid='deal_form'
+  //     isOpen={true}
+  //     type='right'
+  //   >
+  //     <FormDeal
+  //       id={-1}
+  //       isInlineEditing={true}
+  //       descriptionSource="both"
+  //       description={{
+  //         defaultValues: {
+  //           id_customer: R.id,
+  //         }
+  //       }}
+  //       showInModal={true}
+  //       showInModalSimple={true}
+  //       onClose={() => { this.setState({ createNewDeal: false } as FormCustomerState); }}
+  //       onSaveCallback={(form: FormDeal<FormDealProps, FormDealState>, saveResponse: any) => {
+  //         if (saveResponse.status = "success") {
+  //           this.loadRecord();
+  //           this.setState({createNewDeal: false} as FormCustomerState)
+  //         }
+  //       }}
+  //     />
+  //   </ModalForm>
+  // )
+  // }
 
   renderDocumentForm(): JSX.Element{
     return (
-      <ModalSimple
+      <ModalForm
         uid='document_form'
         isOpen={true}
         type='right'
@@ -276,8 +281,32 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
             }
           }}
         />
-      </ModalSimple>
+      </ModalForm>
     );
+  }
+
+  logCompletedActivity() {
+    request.get(
+      'customers/api/log-activity',
+      {
+        idCustomer: this.state.record.id,
+        activity: this.refLogActivityInput.current.value,
+      },
+      (result: any) => {
+        this.loadRecord();
+        this.refLogActivityInput.current.value = '';
+      }
+    );
+  }
+
+  scheduleActivity() {
+    this.setState({
+      showIdActivity: -1,
+      activityDate: moment().add(1, 'week').format('YYYY-MM-DD'),
+      activityTime: moment().add(1, 'week').format('H:00:00'),
+      activitySubject: this.refLogActivityInput.current.value,
+      activityAllDay: false,
+    } as FormDealState);
   }
 
   renderContent(): JSX.Element {
@@ -303,6 +332,76 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     }
 
     let extraButtons = globalThis.main.injectDynamicContent('HubletoApp/Community/Customers/FormCustomer:ExtraButtons', {formCustomer: this});
+
+    const recentActivitiesAndCalendar = <div className='card card-body mt-2 shadow-blue-200'>
+      <div className="adios component input"><div className="input-element w-full flex gap-2">
+        <input
+          className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
+          placeholder={this.translate('Type recent activity here')}
+          ref={this.refLogActivityInput}
+          onKeyUp={(event: any) => {
+            if (event.keyCode == 13) {
+              if (event.shiftKey) {
+                this.scheduleActivity();
+              } else {
+                this.logCompletedActivity();
+              }
+            }
+          }}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            this.refLogActivityInput.current.value = event.target.value;
+          }}
+        />
+      </div></div>
+      <div className='mt-2'>
+        <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
+          <span className="icon"><i className="fas fa-check"></i></span>
+          <span className="text">{this.translate('Enter = Log completed activity')}</span>
+        </button>
+        <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
+          <span className="icon"><i className="fas fa-clock"></i></span>
+          <span className="text">{this.translate('Shift+Enter = Schedule')}</span>
+        </button>
+      </div>
+      {this.divider(this.translate('Most recent activities'))}
+      {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
+        return <>
+          <button key={index} className="btn btn-small btn-transparent btn-list-item"
+            onClick={() => this.setState({showIdActivity: item.id} as FormDealState)}
+          >
+            <span className="icon">{item.date_start} {item.time_start}<br/>{item['_LOOKUP[id_owner]']}</span>
+            <span className="text">
+              {item.subject}
+              {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
+            </span>
+          </button>
+        </>
+      })}</div> : null}
+
+      <div className='mt-2'>
+        <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_archived}
+          initialView='dayGridMonth'
+          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/deals/get-calendar-events?idCustomer=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormDealState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormDealState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>
+      </div>
+    </div>;
 
     return <>
       <TabView>
@@ -334,9 +433,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                         </div>
                       }
                     </div>
+                    {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
                   </div>
                   <div className='border-l border-gray-200'></div>
                   <div className="w-1/2">
+                    {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
                     {this.inputWrapper("vat_id")}
                     {this.inputWrapper("tax_id")}
                     {showAdditional ? this.inputWrapper("date_created") : null}
@@ -361,44 +462,12 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 </div>
               </div>
               {this.state.id > 0 ? <>
-                {extraButtons ? <div className="m-2 flex flex-col gap-2">{extraButtons}</div> : null}
-                <div className='flex-1 card'>
-                  <div className='card-body '>
-                    <Calendar
-                      onCreateCallback={() => this.loadRecord()}
-                      readonly={R.is_archived}
-                      initialView='dayGridMonth'
-                      eventsEndpoint={globalThis.main.config.accountUrl + '/customers/get-calendar-events?idCustomer=' + R.id}
-                      onDateClick={(date, time, info) => {
-                        this.setState({
-                          activityCalendarDateClicked: date,
-                          activityCalendarTimeClicked: time,
-                          showIdActivity: -1,
-                        } as FormCustomerState);
-                      }}
-                      onEventClick={(info) => {
-                        this.setState({
-                          showIdActivity: parseInt(info.event.id),
-                        } as FormCustomerState);
-                        info.jsEvent.preventDefault();
-                      }}
-                      headerToolbar={{
-                        left: 'prev,next',
-                        center: 'title',
-                        right: 'timeGridDay,timeGridWeek,dayGridMonth'
-                      }}
-                    ></Calendar>
-                  </div>
+                <div className='flex-1'>
+                  {recentActivitiesAndCalendar}
                 </div>
               </> : null}
             </div>
-            <div className='card mt-2'>
-              <div className='card-header'>Documents and other notes</div>
-              <div className='card-body flex gap-2 justify-between'>
-                <div className="flex-1 w-full">{this.inputWrapper('shared_folder', {readonly: R.is_archived})}</div>
-                <div className="flex-1 w-full">{this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}</div>
-              </div>
-            </div>
+            {extraButtons ? <div className="mt-2 p-2 bg-blue-50 flex gap-2">{extraButtons}</div> : null}
             {showAdditional ?
               <div className="card mt-2">
                 <div className="card-header">{this.translate('Contacts')}</div>
@@ -423,7 +492,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                     descriptionSource="props"
                     description={{
                       ui: {
-                        showFulltextSearch: true,
+                        showFulltextSearch: false,
                       },
                       permissions: this.props.tableContactsDescription?.permissions ?? {},
                       columns: {
@@ -469,7 +538,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               readonly={R.is_archived}
               initialView='timeGridWeek'
               views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-              eventsEndpoint={globalThis.main.config.accountUrl + '/customers/get-calendar-events?idCustomer=' + R.id}
+              eventsEndpoint={globalThis.main.config.accountUrl + '/customers/api/get-calendar-events?idCustomer=' + R.id}
               onDateClick={(date, time, info) => {
                 this.setState({
                   activityCalendarDateClicked: date,

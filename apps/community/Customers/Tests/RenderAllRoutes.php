@@ -13,9 +13,9 @@ class RenderAllRoutes extends \HubletoMain\Core\AppTest
       'customers/address',
       'customers/contacts',
       'customers/activities',
-      'customers/get-customer',
+      'customers/api/get-customer',
       'contacts/get-customer-contacts',
-      'customers/get-calendar-events',
+      'customers/api/get-calendar-events',
     ];
 
     foreach ($routes as $route) {

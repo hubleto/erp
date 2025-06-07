@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormActivity from './FormActivity';
+import CustomerFormActivity from './CustomerFormActivity';
 
 interface TableActivitiesProps extends TableProps {
 }
@@ -33,6 +33,6 @@ export default class TableActivities extends Table<TableActivitiesProps, TableAc
 
   renderForm(): JSX.Element {
     let formDescription = this.getFormProps();
-    return <FormActivity {...formDescription}/>;
+    return <CustomerFormActivity {...formDescription}/>;
   }
 }

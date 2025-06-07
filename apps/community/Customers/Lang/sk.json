@@ -73,7 +73,12 @@
         "Email": "Email",
         "Primary Contact": "Primárny kontakt",
         "Tags": "Značky",
-        "Show on map": "Zobraziť na mape"
+        "Show on map": "Zobraziť na mape",
+        "Enter = Log completed activity": "Enter = protokol dokončená aktivita",
+        "Shift+Enter = Schedule": "Shift+Enter = harmonogram",
+        "Type recent activity here": "Zadajte poslednú aktivitu tu",
+        "Not completed yet": "Zatiaľ nie sú dokončené",
+        "Most recent activities": "Najnovšie aktivity"
     },
     "root": {
         "Customer Tags": "Značky zákazníkov"
@@ -81,5 +86,8 @@
     "Models\\Tag": {
         "Name": "Značka",
         "Color": "Farba"
+    },
+    "Components\\FormActivity": {
+        "Customer": "Zákazník"
     }
 }

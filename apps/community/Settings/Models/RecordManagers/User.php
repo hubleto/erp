@@ -65,7 +65,7 @@ class User extends \HubletoMain\Core\RecordManager
     }
 
     $query = $query->selectRaw('
-      *,
+      ' . $this->table . '.id,
       concat(
         ifnull(' . $this->table . '.nick, ' . $this->table . '.email),
         if(' . $this->table . '.id = ' . $idUser .  ', " (you)", "")

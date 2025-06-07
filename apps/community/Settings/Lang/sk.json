@@ -193,5 +193,15 @@
     "Controllers\\InvoiceProfiles": {
         "Settings": "Nastavenia",
         "Invoice profiles": "Faktúra"
+    },
+    "Models\\Team": {
+        "Team name": "Názov tímu",
+        "Team color": "Farebný tím",
+        "Description": "Opis",
+        "Team manager": "Manažér tímu"
+    },
+    "Models\\TeamMember": {
+        "Team": "Tím",
+        "Member": "Člen"
     }
 }

@@ -23,25 +23,25 @@
         "Add order": "Pridať objednávku"
     },
     "Models\\State": {
-        "Title": "",
-        "Code": "",
-        "Color": ""
+        "Title": "Názov",
+        "Code": "Kódovať",
+        "Color": "Farba"
     },
     "Models\\OrderProduct": {
-        "Order": "",
-        "Title": "",
-        "Product": "",
-        "Unit price": "",
-        "Amount": "",
-        "Discount": "",
-        "Vat": "",
+        "Order": "Objednávka",
+        "Title": "Názov",
+        "Product": "Produkt",
+        "Unit price": "Jednotková cena",
+        "Amount": "Výška",
+        "Discount": "Zľavu",
+        "Vat": "Kov",
         "Add product": ""
     },
     "Models\\History": {
-        "Order": "",
-        "Short Description": "",
-        "Long Description": "",
-        "Date Time": ""
+        "Order": "Objednávka",
+        "Short Description": "Krátky popis",
+        "Long Description": "Dlhý popis",
+        "Date Time": "Čas"
     },
     "Components\\FormOrder": {
         "Order": "Objednávka",

@@ -298,39 +298,41 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $customers = explode("\n", $customersCsv);
 
-    foreach ($customers as $customerCsvData) {
-      $customer = explode(",", trim($customerCsvData));
+    for ($i = 0; $i < 10; $i++) {
+      foreach ($customers as $customerCsvData) {
+        $customer = explode(",", trim($customerCsvData));
 
-      $idCustomer = $mCustomer->record->recordCreate([
-        "id_country" => $customer[0],
-        "customer_id" => $customer[1],
-        "name" => $customer[2],
-        "postal_code" => $customer[3],
-        "street_line_1" => $customer[4],
-        "street_line_2" => $customer[5],
-        "city" => $customer[6],
-        "region" => $customer[7],
-        "tax_id" => $customer[8],
-        "vat_id" => $customer[9],
-        "note" => $customer[10],
-        "is_active" => rand(0, 1),
-        "id_owner" => rand(1, 4),
-        "id_responsible" => rand(1, 4),
-        "date_created" => date("Y-m-d", rand(1722456000, strtotime("now"))),
-      ])['id'];
+        $idCustomer = $mCustomer->record->recordCreate([
+          "id_country" => $customer[0],
+          "customer_id" => $customer[1] . $i,
+          "name" => $customer[2] . '(' . $i . ')',
+          "postal_code" => $customer[3],
+          "street_line_1" => $customer[4],
+          "street_line_2" => $customer[5],
+          "city" => $customer[6],
+          "region" => $customer[7],
+          "tax_id" => $customer[8] . $i,
+          "vat_id" => $customer[9],
+          "note" => $customer[10],
+          "is_active" => rand(0, 1),
+          "id_owner" => rand(1, 4),
+          "id_responsible" => rand(1, 4),
+          "date_created" => date("Y-m-d", rand(1722456000, strtotime("now"))),
+        ])['id'];
 
-      $tags = [];
-      $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
-      while (count($tags) < $tagsCount) {
-        $idTag = rand(1, 3);
-        if (!in_array($idTag, $tags)) $tags[] = $idTag;
-      }
+        $tags = [];
+        $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
+        while (count($tags) < $tagsCount) {
+          $idTag = rand(1, 3);
+          if (!in_array($idTag, $tags)) $tags[] = $idTag;
+        }
 
-      foreach ($tags as $idTag) {
-        $mCustomerTag->record->recordCreate([
-          "id_customer" => $idCustomer,
-          "id_tag" => $idTag,
-        ]);
+        foreach ($tags as $idTag) {
+          $mCustomerTag->record->recordCreate([
+            "id_customer" => $idCustomer,
+            "id_tag" => $idTag,
+          ]);
+        }
       }
     }
   }
@@ -666,56 +668,58 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $titlesBefore = ["", "Dr.", "MSc."];
     $titlesAfter = ["", "MBA", "PhD."];
 
-    foreach ($contacts as $contact) {
-      $idContact = $mContact->record->recordCreate([
-        "id_customer" => rand(1, 100),
-        "salutation" => $salutations[rand(0, 2)],
-        "title_before" => $titlesBefore[rand(0, 2)],
-        "first_name" => $contact[0],
-        "last_name" => $contact[1],
-        "title_after" => $titlesAfter[rand(0, 2)],
-        "is_primary" => true,
-        "is_active" => true,
-        "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
-      ])['id'];
+    for ($i = 0; $i < 10; $i++) {
+      foreach ($contacts as $contact) {
+        $idContact = $mContact->record->recordCreate([
+          "id_customer" => rand(1, 100),
+          "salutation" => $salutations[rand(0, 2)],
+          "title_before" => $titlesBefore[rand(0, 2)] . ' (' . $i . ')',
+          "first_name" => $contact[0],
+          "last_name" => $contact[1],
+          "title_after" => $titlesAfter[rand(0, 2)],
+          "is_primary" => true,
+          "is_active" => true,
+          "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
+        ])['id'];
 
-      $mValue->record->recordCreate([
-        "id_contact" => $idContact,
-        "type" => "email",
-        "value" => $contact[2],
-        "id_category" => rand(1, 2),
-      ]);
-
-      $mValue->record->recordCreate([
-        "id_contact" => $idContact,
-        "type" => "url",
-        "value" => 'https://www.example.com',
-        "id_category" => rand(1, 2),
-      ]);
-
-      $phoneNumber = "+1 1" . rand(0, 3) . rand(4, 8) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9);
-      $mValue->record->recordCreate([
-        "id_contact" => $idContact,
-        "type" => "number",
-        "value" => $phoneNumber,
-        "id_category" => rand(1, 2),
-      ]);
-
-      $tags = [];
-      $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
-      while (count($tags) < $tagsCount) {
-        $idTag = rand(1, 6);
-        if (!in_array($idTag, $tags)) $tags[] = $idTag;
-      }
-
-      foreach ($tags as $idTag) {
-        $mContactTag->record->recordCreate([
+        $mValue->record->recordCreate([
           "id_contact" => $idContact,
-          "id_tag" => $idTag,
+          "type" => "email",
+          "value" => $contact[2],
+          "id_category" => rand(1, 2),
         ]);
-      }
 
-      $isPrimary = false;
+        $mValue->record->recordCreate([
+          "id_contact" => $idContact,
+          "type" => "url",
+          "value" => 'https://www.example.com',
+          "id_category" => rand(1, 2),
+        ]);
+
+        $phoneNumber = "+1 1" . rand(0, 3) . rand(4, 8) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9) . " " . rand(0, 9) . rand(0, 9) . rand(0, 9);
+        $mValue->record->recordCreate([
+          "id_contact" => $idContact,
+          "type" => "number",
+          "value" => $phoneNumber,
+          "id_category" => rand(1, 2),
+        ]);
+
+        $tags = [];
+        $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
+        while (count($tags) < $tagsCount) {
+          $idTag = rand(1, 6);
+          if (!in_array($idTag, $tags)) $tags[] = $idTag;
+        }
+
+        foreach ($tags as $idTag) {
+          $mContactTag->record->recordCreate([
+            "id_contact" => $idContact,
+            "id_tag" => $idTag,
+          ]);
+        }
+
+        $isPrimary = false;
+      }
     }
   }
 

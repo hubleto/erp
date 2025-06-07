@@ -81,8 +81,8 @@
         "Show leads": "Zobraziť leady"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": ""
+        "Name": "Pomenovať",
+        "Color": "Farba"
     },
     "Models\\LeadProduct": {
         "Lead": "Vedenie",

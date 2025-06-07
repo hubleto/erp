@@ -83,7 +83,8 @@
         "Account number": "Číslo účtu",
         "Account IBAN": "IBAN",
         "SWIFT": "SWIFT",
-        "Numbering pattern": "Vzorec pre číslovanie"
+        "Numbering pattern": "Vzorec pre číslovanie",
+        "Customer ID": "ID zákazníka"
     },
     "Models\\UserRole": {
         "Role": "Rola",
@@ -119,10 +120,10 @@
         "Disable": "Deaktivovať",
         "Uninstall": "Odinštalovať",
         "Open": "Otvoriť",
-        "Most common settings": "",
-        "Manage users": "",
-        "Manage apps": "",
-        "All settings": ""
+        "Most common settings": "Najbežnejšie nastavenia",
+        "Manage users": "Spravujte používateľov",
+        "Manage apps": "Spravovať aplikácie",
+        "All settings": "Všetky nastavenia"
     },
     "Controllers\\UserRoles": {
         "Settings": "Nastavenia",
@@ -180,13 +181,17 @@
         "Country": "Krajina"
     },
     "Controllers\\Sidebar": {
-        "Settings": "",
-        "Sidebar": ""
+        "Settings": "Nastavenia",
+        "Sidebar": "Bočný panel"
     },
     "Components\\FormUserRole": {
         "Save": ""
     },
     "Components\\FormUser": {
         "About the user": "O používateľovi"
+    },
+    "Controllers\\InvoiceProfiles": {
+        "Settings": "Nastavenia",
+        "Invoice profiles": "Faktúra"
     }
 }

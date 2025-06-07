@@ -88,8 +88,8 @@
         "Add contact": "Pridať kontakt",
         "Emails": "Emaily",
         "Phone Numbers": "Telefónne čísla",
-        "Mr.": "",
-        "Mrs.": ""
+        "Mr.": "Pán",
+        "Mrs.": "Pani"
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",

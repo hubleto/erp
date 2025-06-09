@@ -1,7 +1,7 @@
 <div class="flex">
-  <h1 class="app-main-title">Deals: Settings</h1>
+  <h1 class="app-main-title">{{ translate('Deals') }} > {{ translate('Settings') }}</h1>
   {% if viewParams.settingsSaved %}
-    <div class="badge badge-info text-sm ml-4">Settings saved.</div>
+    <div class="badge badge-info text-sm ml-4">{{ translate('Settings saved.') }}</div>
   {% endif %}
 </div>
 
@@ -19,7 +19,7 @@
         <tr>
           <td>
             <label class="input-label" for="showDealWarningsInDashboard">
-              Show 'Deal notifications' in dashboard
+              {{ translate("Show 'Deal warnings' in dashboard") }}
             </label>
           </td>
           <td>
@@ -36,7 +36,7 @@
         <tr>
           <td>
             <label class="input-label" for="showMostValuableDealsInDashboard">
-              Show 'Most valuable deals' in dashboard
+              {{ translate("Show 'Most valuable deals' in dashboard") }}
             </label>
           </td>
           <td>
@@ -53,7 +53,7 @@
         <tr>
           <td>
             <label class="input-label" for="showDealValueByResultInDashboard">
-              Show 'Deal value by result' in dashboard
+              {{ translate("Show 'Deal value by result' in dashboard") }}
             </label>
           </td>
           <td>
@@ -68,7 +68,7 @@
           </td>
         </tr>
         <tr>
-          <td>Calendar color</td>
+          <td>{{ translate("Calendar color") }}</td>
           <td>
             <input
               type="text" name="calendarColor"

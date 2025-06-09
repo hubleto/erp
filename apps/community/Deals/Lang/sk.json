@@ -89,8 +89,7 @@
         "Active deals": "Aktívne obchody",
         "Archived deals": "Archivované obchody",
         "Deal Lost Reasons": "Dohoda stratená dôvody",
-        "Deal notifications": "Upozornenia",
-        "Deal warnings": "Výstrahy"
+        "Deal warnings": "Upozornenia"
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendár",
@@ -131,7 +130,11 @@
     },
     "Controllers\\Settings": {
         "Deals": "Obchody",
-        "Settings": "Nastavenia"
+        "Settings": "Nastavenia",
+        "Show 'Deal warnings' in dashboard": "Ukážte „Deal Warnings“ na prístrojovej doske",
+        "Show 'Most valuable deals' in dashboard": "Zobraziť „najcennejšie ponuky“ na prístrojovej doske",
+        "Show 'Deal value by result' in dashboard": "Zobraziť „hodnotu obchodu podľa výsledku“ na prístrojovej doske",
+        "Calendar color": "Kalendár"
     },
     "Controllers\\Boards\\DealWarnings": {
         "Pending deals without future plan": "Čakajúce obchody bez budúceho plánu",

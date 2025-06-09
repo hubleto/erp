@@ -203,5 +203,12 @@
     "Models\\TeamMember": {
         "Team": "Tím",
         "Member": "Člen"
+    },
+    "Controllers\\Apps": {
+        "Settings": "Nastavenia",
+        "Apps": "Aplikácia",
+        "Open": "OTVORENÉ",
+        "Disable": "Zakázať",
+        "Install": "Inštalovať"
     }
 }

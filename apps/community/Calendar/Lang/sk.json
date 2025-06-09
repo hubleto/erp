@@ -15,7 +15,8 @@
         "End time": "Čas konca",
         "All day": "Celodenná",
         "Completed": "Ukončená",
-        "Created by": "Vytvoril"
+        "Created by": "Vytvoril",
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
     },
     "Controllers\\Boards\\EventsForToday": {
         "Open event details": "Zobraziť podrobnosti",

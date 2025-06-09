@@ -32,8 +32,22 @@ class Activity extends \HubletoMain\Core\Models\Model
       'time_end' => (new Time($this, $this->translate('End time'))),
       'all_day' => (new Boolean($this, $this->translate('All day'))),
       'completed' => (new Boolean($this, $this->translate('Completed'))),
+      'meeting_minutes_link' => (new Varchar($this, $this->translate('Meeting minutes (link)'))),
       'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class)),
     ]);
+  }
+
+  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  {
+    $description = parent::describeInput($columnName);
+    switch ($columnName) {
+      case 'meeting_minutes_link':
+        $description
+          ->setReactComponent('InputHyperlink')
+        ;
+      break;
+    }
+    return $description;
   }
 
   public function describeForm(): \ADIOS\Core\Description\Form {

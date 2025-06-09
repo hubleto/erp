@@ -72,9 +72,10 @@
         "End date": "Dátum",
         "End time": "Čas",
         "All day": "Celý deň",
-        "Completed": "Dokončený",
+        "Completed": "Dokončená",
         "Created by": "Vytvorené",
-        "Contact": "Kontakt"
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
     },
     "Models\\DealDocument": {
         "Deal": "Obchod",
@@ -97,8 +98,8 @@
         "Go to original lead": "Prejsť na pôvodný lead",
         "Documents": "Dokumenty",
         "Show deals": "Zobraziť dealy",
-        "Shift+Enter = Schedule": "Shift+Enter = harmonogram",
-        "Enter = Log completed activity": "Enter = protokol dokončená aktivita",
+        "Enter = Log completed activity": "Enter = zapísať ukončenú aktivitu",
+        "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
         "Type recent activity here": "Zadajte poslednú aktivitu tu",
         "Not completed yet": "Zatiaľ nie sú dokončené",
         "Most recent activities": "Najnovšie aktivity"

@@ -307,7 +307,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           readonly={R.is_archived}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/get-calendar-events?source=leads&idLead=' + R.id}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -628,7 +628,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 readonly={R.is_archived}
                 initialView='timeGridWeek'
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/get-calendar-events?source=leads&idLead=' + R.id}
+                eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityDate: date,

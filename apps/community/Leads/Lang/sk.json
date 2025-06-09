@@ -22,9 +22,10 @@
         "End date": "Dátum",
         "End time": "Čas",
         "All day": "Celý deň",
-        "Completed": "Dokončený",
+        "Completed": "Dokončená",
         "Created by": "Vytvorené",
-        "Contact": "Kontakt"
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
     },
     "Models\\Lead": {
         "Add Lead": "Pridať lead",
@@ -80,10 +81,10 @@
         "Go to deal": "Prejsť na deal",
         "Show leads": "Zobraziť leady",
         "Type recent activity here": "Zadajte poslednú aktivitu tu",
-        "Enter = Log completed activity": "Enter = protokol dokončená aktivita",
-        "Shift+Enter = Schedule": "Shift+Enter = harmonogram",
+        "Enter = Log completed activity": "Enter = zapísať ukončenú aktivitu",
+        "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
         "Most recent activities": "Najnovšie aktivity",
-        "Not completed yet": "Zatiaľ nie sú dokončené"
+        "Not completed yet": "Nedokončená"
     },
     "Models\\Tag": {
         "Name": "Pomenovať",
@@ -102,5 +103,9 @@
     },
     "Models\\LostReason": {
         "Lost Reason": "Stratený dôvod"
+    },
+    "Components\\FormActivity": {
+        "End": "Koniec",
+        "Start": "Začiatok"
     }
 }

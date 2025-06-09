@@ -33,8 +33,13 @@ interface CalendarMainState {
 }
 
 export default class CalendarComponent extends Component<CalendarMainProps, CalendarMainState> {
+
+  refCalendar: any;
+
   constructor(props) {
     super(props);
+
+    this.refCalendar = React.createRef();
 
     this.state = {
       eventSource: this.props.eventSource ?? '',
@@ -63,10 +68,12 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
       ...this.state.activityFormModalProps
     };
 
-    return (<>
+    return <>
       <Calendar
+        ref={this.refCalendar}
         readonly={false}
         views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+        height={this.props.height}
         initialView="timeGridWeek"
         eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events'}
         onEventsLoaded={(events) => {
@@ -145,7 +152,6 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
           />
         </ModalForm>
       : <></>}
-    </>
-    )
+    </>;
   }
 }

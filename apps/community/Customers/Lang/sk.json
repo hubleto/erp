@@ -44,7 +44,8 @@
         "Start date": "Dátum začiatku",
         "Start time": "Začiatok",
         "End date": "Dátum",
-        "End time": "Čas"
+        "End time": "Čas",
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",
@@ -74,8 +75,8 @@
         "Primary Contact": "Primárny kontakt",
         "Tags": "Značky",
         "Show on map": "Zobraziť na mape",
-        "Enter = Log completed activity": "Enter = protokol dokončená aktivita",
-        "Shift+Enter = Schedule": "Shift+Enter = harmonogram",
+        "Enter = Log completed activity": "Enter = zapísať ukončenú aktivitu",
+        "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
         "Type recent activity here": "Zadajte poslednú aktivitu tu",
         "Not completed yet": "Zatiaľ nie sú dokončené",
         "Most recent activities": "Najnovšie aktivity"

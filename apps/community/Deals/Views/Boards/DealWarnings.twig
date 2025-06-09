@@ -4,26 +4,20 @@
 
   <b>{{ title }}</b>
   {% if items|length > 0 %}
-    <table class="table-default dense w-full">
+    <div class="grid gap-2 md:grid-cols-3">
       {% for item in items %}
-        <tr>
-          <td>
-            {{ item.identifier }}
+        <a href="deals/{{ item.id }}" class="card btn btn-transparent items-start p-1">
+          <div>
+            <b>{{ item.identifier }}</b>
             {{ item.title }}
-            <div>
-              <div class="badge badge-small badge-blue">@{{ item['_LOOKUP[id_owner]'] }}</div>
-              <div class="badge badge-small badge-lime">{{ item.CUSTOMER.name }}</div>
-            </div>
-          </td>
-          <td>{{ viewParams.main.locale.formatCurrency(item.price, item.CURRENCY.code ?? '') }}</td>
-          <td class="text-right">
-            <a href="deals/{{ item.id }}" class="btn btn-transparent btn-small">
-              <span class="icon"><i class="fas fa-arrow-right"></i></span>
-              <span class="text">{{ translate('Open deal') }}</span>
-            </a>
-        </tr>
+          </div>
+          <div>
+            <div class="badge badge-small badge-blue">@{{ item['_LOOKUP[id_owner]'] }}</div>
+            <div class="badge badge-small badge-lime">{{ item.CUSTOMER.name }}</div>
+          </div>
+        </a>
       {% endfor %}
-    </table>
+    </div>
   {% endif %}
 {% endmacro %}
 

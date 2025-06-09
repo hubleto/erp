@@ -133,7 +133,7 @@
           <li>
             <button class="btn btn-transparent btn-small btn-dropdown">
               <div class="menu">
-                <div class="grid grid-cols-2" style="margin-left:-13.9em;margin-top:0.2em;width:16em;">
+                <div class="bg-white p-2 shadow-lg grid grid-cols-2" style="margin-left:-13.9em;margin-top:0.2em;width:16em;">
                   <div class="list mr-2">
                     <a href="?set-language=en" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">English</span></a>
                     <a href="?set-language=de" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Deutsch</span></a>
@@ -205,11 +205,16 @@
             </a>
           </li>
           <li>
-            <button class="btn btn-transparent btn-small btn-dropdown">
-              <div class="menu">
-                <div class="list">
-                  <div class="text-center text-primary text-sm p-2">{{ user.email }}</div>
-                  <div class="text-center text-gray-700 text-xs">{{ user.first_name }}</div>
+            <button class="btn btn-transparent btn-small btn-dropdown mr-2">
+              <span class="text">{{ user.email }}</span>
+              <span class="icon"><i class='fas fa-user-tie'></i></span>
+              <div class="menu relative">
+                <div class="list bg-primary" style="position:absolute;right:7em;top:0.3em;width:20em;">
+                  <div class="text-center text-white text-lg p-2">
+                    {{ user.email }}<br/>
+                    {{ user.DEFAULT_COMPANY.name }}
+                  </div>
+                  <div class="text-center text-white text-xs">{{ user.first_name }}</div>
                   <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/settings/my-account">
                     <span class="icon"><i class='fas fa-user-tie'></i></span>
                     <span class="text">{{ translate('Manage your user account') }}</span>
@@ -224,8 +229,6 @@
                   </a>
                 </div>
               </div>
-              <span class="text">{{ user.email }}</span>
-              <span class="icon"><i class='fas fa-user-tie'></i></span>
             </button>
           </li>
         </ul>

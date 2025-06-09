@@ -21,4 +21,17 @@ class RolePermission extends \HubletoMain\Core\RecordManager
   {
     return $this->belongsTo(Permission::class, 'id_permission', 'id');
   }
+
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    $main = \ADIOS\Core\Helper::getGlobalApp();
+
+    if ($main->isUrlParam("idRole")) {
+      $query = $query->where($this->table . '.id_role', $main->urlParamAsInteger("idRole"));
+    }
+
+    return $query;
+  }
 }

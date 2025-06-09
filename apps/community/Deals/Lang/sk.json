@@ -102,7 +102,7 @@
         "Enter = Log completed activity": "Enter = zapísať ukončenú aktivitu",
         "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
         "Type recent activity here": "Zadajte poslednú aktivitu tu",
-        "Not completed yet": "Zatiaľ nie sú dokončené",
+        "Not completed yet": "Nedokončená",
         "Most recent activities": "Najnovšie aktivity"
     },
     "Models\\Tag": {

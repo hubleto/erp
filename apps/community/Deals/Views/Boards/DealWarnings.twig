@@ -10,7 +10,10 @@
           <td>
             {{ item.identifier }}
             {{ item.title }}
-            <small>{{ item.CUSTOMER.name }}</small>
+            <div>
+              <div class="badge badge-small badge-blue">@{{ item['_LOOKUP[id_owner]'] }}</div>
+              <div class="badge badge-small badge-lime">{{ item.CUSTOMER.name }}</div>
+            </div>
           </td>
           <td>{{ viewParams.main.locale.formatCurrency(item.price, item.CURRENCY.code ?? '') }}</td>
           <td class="text-right">

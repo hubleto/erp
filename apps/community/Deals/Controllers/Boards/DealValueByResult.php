@@ -14,12 +14,12 @@ class DealValueByResult extends \HubletoMain\Core\Controllers\Controller {
 
     $mDeal = new Deal($this->main);
 
-    $deals = $mDeal->record
-      ->selectRaw("deal_result, SUM(price) as price")
-      ->where("is_archived", 0)
-      ->where("id_owner", $this->main->auth->getUserId())
+    $deals = $mDeal->record->prepareReadQuery()
+      ->selectRaw("`{$mDeal->table}`.`deal_result`, SUM(`{$mDeal->table}`.`price`) as price")
+      ->where($mDeal->table . ".is_archived", 0)
+      ->where($mDeal->table . ".id_owner", $this->main->auth->getUserId())
       ->with('CURRENCY')
-      ->groupBy('deal_result')
+      ->groupBy($mDeal->table . '.deal_result')
       ->get()
       ->toArray()
     ;
@@ -32,9 +32,9 @@ class DealValueByResult extends \HubletoMain\Core\Controllers\Controller {
 
     $results = [
       0 => ['name' => 'Unknown', 'color' => 'black'],
-      1 => ['name' => 'Lost', 'color' => 'red'],
+      1 => ['name' => 'Pending', 'color' => 'gray'],
       2 => ['name' => 'Won', 'color' => 'green'],
-      3 => ['name' => 'Pending', 'color' => 'gray'],
+      3 => ['name' => 'Lost', 'color' => 'red'],
     ];
 
     foreach ($deals as $deal) {

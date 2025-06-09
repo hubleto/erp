@@ -66,7 +66,7 @@ class Installer {
       \HubletoApp\Community\Deals\Loader::class => [
         'sidebarOrder' => 230,
         'calendarColor' => '#D7B628',
-        'showMostValuableDealsInDashboard' => true,
+        // 'showMostValuableDealsInDashboard' => true,
         'showDealWarningsInDashboard' => true,
         'showDealValueByResultInDashboard' => true,
       ],

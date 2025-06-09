@@ -1,0 +1,31 @@
+{
+    "manifest": {
+        "Cloud": "",
+        "Management of cloud Hubleto account.": ""
+    },
+    "Models\\Log": {
+        "Log datetime": "",
+        "Active users": "",
+        "Paid apps": "",
+        "Premium expected": ""
+    },
+    "Models\\Payment": {
+        "Charged": "",
+        "Discount": "",
+        "Full amount": "",
+        "Discounted amount": "",
+        "Type": "",
+        "Details": "",
+        "Has invoice": "",
+        "Billing account": "",
+        "UUID": ""
+    },
+    "Models\\Credit": {
+        "Recalculated": "",
+        "Credit": ""
+    },
+    "root": {
+        "Free trial expires in": "",
+        "days": ""
+    }
+}

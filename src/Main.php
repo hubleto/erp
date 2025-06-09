@@ -198,11 +198,17 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     $dict = static::loadDictionary($language);
 
-    $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
-    $tr->setSource('en'); // Translate from
-    $tr->setTarget($language); // Translate to
+    $main = \ADIOS\Core\Helper::getGlobalApp();
 
-    $dict[$contextInner][$string] = $tr->translate($string);
+    if ($main->config->getAsBool('autoTranslate')) {
+      $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
+      $tr->setSource('en'); // Translate from
+      $tr->setTarget($language); // Translate to
+      $dict[$contextInner][$string] = $tr->translate($string);
+    } else {
+      $dict[$contextInner][$string] = '';
+    }
+
 
     @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 

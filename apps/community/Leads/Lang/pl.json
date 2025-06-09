@@ -83,5 +83,8 @@
     "Models\\Tag": {
         "Name": "Nazwa",
         "Color": "Kolor"
+    },
+    "Controllers\\Leads": {
+        "Leads": "Wskazówki"
     }
 }

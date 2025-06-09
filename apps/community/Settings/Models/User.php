@@ -15,6 +15,7 @@ class User extends \ADIOS\Models\User
     'sk' => 'Slovensky',
     'cs' => 'Česky',
     'pl' => 'Polski',
+    'ro' => 'Română',
   ];
 
   public string $table = 'users';

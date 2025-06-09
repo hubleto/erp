@@ -19,7 +19,7 @@ class ChangePipeline extends \HubletoMain\Core\Controllers\Controller
       try {
         $newPipeline = $mPipeline->record
           ->where("id", $this->main->urlParamAsInteger('idPipeline'))
-          ->with("PIPELINE_STEPS")
+          ->with("STEPS")
           ->first()
           ->toArray()
         ;

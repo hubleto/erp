@@ -20,6 +20,10 @@ class Settings extends \HubletoMain\Core\Controllers\Controller
     $settingsChanged = $this->main->urlParamAsBool('settingsChanged');
 
     if ($settingsChanged) {
+      $showDealWarningsInDashboard = $this->main->urlParamAsBool('showDealWarningsInDashboard');
+      $this->hubletoApp->setConfigAsBool('showDealWarningsInDashboard', $showDealWarningsInDashboard);
+      $this->hubletoApp->saveConfig('showDealWarningsInDashboard', $showDealWarningsInDashboard ? '1' : '0');
+
       $showMostValuableDealsInDashboard = $this->main->urlParamAsBool('showMostValuableDealsInDashboard');
       $this->hubletoApp->setConfigAsBool('showMostValuableDealsInDashboard', $showMostValuableDealsInDashboard);
       $this->hubletoApp->saveConfig('showMostValuableDealsInDashboard', $showMostValuableDealsInDashboard ? '1' : '0');

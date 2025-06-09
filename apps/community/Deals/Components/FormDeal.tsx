@@ -136,12 +136,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       (data: any) => {
         if (data.status == "success") {
           var R = this.state.record;
-          if (data.newPipeline.PIPELINE_STEPS?.length > 0) {
+          if (data.newPipeline.STEPS?.length > 0) {
             R.id_pipeline = data.newPipeline.id;
-            R.id_pipeline_step = data.newPipeline.PIPELINE_STEPS[0].id;
-            R.deal_result = data.newPipeline.PIPELINE_STEPS[0].set_result;
+            R.id_pipeline_step = data.newPipeline.STEPS[0].id;
+            R.deal_result = data.newPipeline.STEPS[0].set_result;
             R.PIPELINE = data.newPipeline;
-            R.PIPELINE_STEP = data.newPipeline.PIPELINE_STEPS[0];
+            R.PIPELINE_STEP = data.newPipeline.STEPS[0];
 
             this.setState({ record: R });
           } else {
@@ -162,8 +162,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   }
 
   changePipelineStepFromResult() {
-    if (this.state.record.PIPELINE.PIPELINE_STEPS.length > 0) {
-      this.state.record.PIPELINE.PIPELINE_STEPS.some(step => {
+    if (this.state.record.PIPELINE.STEPS.length > 0) {
+      this.state.record.PIPELINE.STEPS.some(step => {
         if (step.set_result == this.state.record.deal_result) {
           let R = this.state.record;
           R.id_pipeline_step = step.id;
@@ -250,9 +250,9 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <div className='card-body'>
         <div className='flex flex-row gap-2 mt-2 flex-wrap justify-center'>
           {R.PIPELINE != null &&
-          R.PIPELINE.PIPELINE_STEPS &&
-          R.PIPELINE.PIPELINE_STEPS.length > 0 ?
-            R.PIPELINE.PIPELINE_STEPS.map((s, i) => {
+          R.PIPELINE.STEPS &&
+          R.PIPELINE.STEPS.length > 0 ?
+            R.PIPELINE.STEPS.map((s, i) => {
               var statusColor: string = null;
               {R.PIPELINE_STEP && s.order <= R.PIPELINE_STEP.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
               return (
@@ -274,7 +274,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       <small>({s.probability} %)</small>
                     </div>
                   </button>
-                  {i+1 == R.PIPELINE.PIPELINE_STEPS.length ? null
+                  {i+1 == R.PIPELINE.STEPS.length ? null
                   : <i className='fas fa-angles-right self-center'></i>
                   }
                 </>

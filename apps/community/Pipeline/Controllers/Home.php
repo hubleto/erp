@@ -40,7 +40,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
     if ($this->main->isUrlParam("id_pipeline")) {
       $searchPipeline = (array) $mPipeline->record
         ->where("id", (int) $this->main->urlParamAsInteger("id_pipeline"))
-        ->with("PIPELINE_STEPS")
+        ->with("STEPS")
         ->first()
         ->toArray()
       ;
@@ -48,13 +48,13 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
     else {
       $searchPipeline = (array) $mPipeline->record
         ->where("id", $defaultPipelineId)
-        ->with("PIPELINE_STEPS")
+        ->with("STEPS")
         ->first()
         ->toArray()
       ;
     }
 
-    foreach ((array) $searchPipeline["PIPELINE_STEPS"] as $key => $step) {
+    foreach ((array) $searchPipeline["STEPS"] as $key => $step) {
       $step = (array) $step;
 
       $sumPrice = (float) $mDeal->record
@@ -65,7 +65,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
         ->price
       ;
 
-      $searchPipeline["PIPELINE_STEPS"][$key]["sum_price"] = ($step["probability"] / 100) * $sumPrice;
+      $searchPipeline["STEPS"][$key]["sum_price"] = ($step["probability"] / 100) * $sumPrice;
       $sumPipelinePrice += $sumPrice;
     }
 

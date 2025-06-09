@@ -17,7 +17,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
 
     $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
 
-    $activities = $mLeadActivity->record
+    $activities = $mLeadActivity->record->prepareReadQuery()
       ->select("lead_activities.*", "activity_types.color", "activity_types.name as activity_type")
       ->with('LEAD.CUSTOMER')
       ->leftJoin("activity_types", "activity_types.id", "=", "lead_activities.id_activity_type")

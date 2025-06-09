@@ -92,6 +92,8 @@
         "Customer": "Zákazník"
     },
     "Components\\CustomerFormActivity": {
-        "Customer": "Zákazník"
+        "Customer": "Zákazník",
+        "End": "Ukončiť",
+        "Start": "Štart"
     }
 }

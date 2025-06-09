@@ -298,7 +298,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $customers = explode("\n", $customersCsv);
 
-    for ($i = 0; $i < 10; $i++) {
+    for ($i = 0; $i < 1; $i++) {
       foreach ($customers as $customerCsvData) {
         $customer = explode(",", trim($customerCsvData));
 
@@ -668,7 +668,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $titlesBefore = ["", "Dr.", "MSc."];
     $titlesAfter = ["", "MBA", "PhD."];
 
-    for ($i = 0; $i < 10; $i++) {
+    for ($i = 0; $i < 1; $i++) {
       foreach ($contacts as $contact) {
         $idContact = $mContact->record->recordCreate([
           "id_customer" => rand(1, 100),
@@ -861,17 +861,21 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $leads = $mLead->record->get();
 
+    $mPipeline = new \HubletoApp\Community\Pipeline\Models\Pipeline($this->main);
+    $pipeline = $mPipeline->record->prepareReadQuery()->where('id', 1)->first()->toArray();
+
     foreach ($leads as $lead) { // @phpstan-ignore-line
       if (rand(1, 3) != 1) continue; // negenerujem deal pre vsetky leads
 
-      $pipeline = 1;
-      $result = (rand(0, 10) == 5 ? $mDeal::RESULT_LOST : $mDeal::RESULT_WON);
-      if ($pipeline === 1) $pipelineStep = rand(1,3);
-      else $pipelineStep = rand(4,7);
+      $pStepsRandom = $pipeline['STEPS'];
+      shuffle($pStepsRandom);
+      $pStep = reset($pStepsRandom);
 
-      $dealDateCreatedTs = rand(strtotime("-1 month"), strtotime("+1 month"));
+      $dealDateCreatedTs = rand(strtotime("-1 month"), strtotime("-1 day"));
       $dealDateCreated = date("Y-m-d H:i:s", $dealDateCreatedTs);
       $dealDateClose = date("Y-m-d H:i:s", strtotime("+1 month", $dealDateCreatedTs));
+
+      echo "dealres = " . $pStep['set_result'] . "\n";
 
       $idDeal = $mDeal->record->recordCreate([
         "identifier" => $lead->identifier,
@@ -884,12 +888,12 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_owner" => $lead->id_owner,
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
-        "id_pipeline" => $pipeline,
-        "id_pipeline_step" => $pipelineStep,
+        "id_pipeline" => $pipeline['id'],
+        "id_pipeline_step" => $pStep['id'],
         "id_lead" => $lead->id,
-        "deal_result" => $result,
+        "deal_result" => $pStep['set_result'] ?? 0,
         "date_created" => $dealDateCreated,
-        "date_result_update" => $result != 2 ? $dealDateClose : null,
+        "date_result_update" => $pStep['set_result'] != \HubletoApp\Community\Deals\Models\Deal::RESULT_PENDING ? $dealDateClose : null,
       ])['id'];
 
       $mLeadHistory->record->recordCreate([

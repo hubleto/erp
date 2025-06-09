@@ -88,7 +88,9 @@
         "Most valuable deals": "Najhodnotnejšie dealy",
         "Active deals": "Aktívne obchody",
         "Archived deals": "Archivované obchody",
-        "Deal Lost Reasons": "Dohoda stratená dôvody"
+        "Deal Lost Reasons": "Dohoda stratená dôvody",
+        "Deal notifications": "Upozornenia",
+        "Deal warnings": "Výstrahy"
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendár",
@@ -126,5 +128,14 @@
     "Controllers\\LostReasons": {
         "Settings": "Nastavenia",
         "Deal Lost Reasons": "Dohoda stratená dôvody"
+    },
+    "Controllers\\Settings": {
+        "Deals": "Obchody",
+        "Settings": "Nastavenia"
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": "Čakajúce obchody bez budúceho plánu",
+        "No notifications for deals.": "Žiadne oznámenia o obchodoch.",
+        "Open deal": "Obchod"
     }
 }

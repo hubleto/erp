@@ -21,6 +21,7 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^settings\/deal-tags\/?$/' => Controllers\Tags::class,
       '/^settings\/deal-lost-reasons\/?$/' => Controllers\LostReasons::class,
+      '/^deals\/boards\/deal-warnings\/?$/' => Controllers\Boards\DealWarnings::class,
       '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,
       '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
     ]);
@@ -47,6 +48,13 @@ class Loader extends \HubletoMain\Core\App
     $reportManager->addReport(Reports\MonthlyRevenue::class);
 
     $dashboard = $this->main->apps->community('Desktop')->dashboard;
+
+    if ($this->configAsBool('showDealWarningsInDashboard')) {
+      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
+        $this->translate('Deal warnings'),
+        'deals/boards/deal-warnings',
+      ));
+    }
 
     if ($this->configAsBool('showMostValuableDealsInDashboard')) {
       $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(

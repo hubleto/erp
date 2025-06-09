@@ -1,0 +1,35 @@
+{% macro showwarnings(warnings) %}
+  {% set title = warnings.title %}
+  {% set items = warnings.items %}
+
+  <b>{{ title }}</b>
+  {% if items|length > 0 %}
+    <table class="table-default dense w-full">
+      {% for item in items %}
+        <tr>
+          <td>
+            {{ item.identifier }}
+            {{ item.title }}
+            <small>{{ item.CUSTOMER.name }}</small>
+          </td>
+          <td>{{ viewParams.main.locale.formatCurrency(item.price, item.CURRENCY.code ?? '') }}</td>
+          <td class="text-right">
+            <a href="deals/{{ item.id }}" class="btn btn-transparent btn-small">
+              <span class="icon"><i class="fas fa-arrow-right"></i></span>
+              <span class="text">{{ translate('Open deal') }}</span>
+            </a>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+{% endmacro %}
+
+{% if viewParams.warningsTotal == 0 %}
+  <div class="alert alert-info">
+    {{ translate('No warnings for deals.') }}<br/>
+  </div>
+{% else %}
+  {% for warnings in viewParams.warnings %}
+    {{ _self.showwarnings(warnings) }}
+  {% endfor %}
+{% endif %}

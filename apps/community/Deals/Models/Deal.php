@@ -134,7 +134,7 @@ class Deal extends \HubletoMain\Core\Models\Model
         "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
       ];
     } else {
-      $description->ui['addButtonText'] = 'Add Deal';
+      $description->ui['addButtonText'] = $this->translate('Add Deal');
     }
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;

@@ -40,7 +40,7 @@ export default class FormCustomerExtraButtons extends TranslatedComponent<P, S> 
           <ModalSimple
             uid='customer_table_leads_modal'
             isOpen={true}
-            type='inside-parent'
+            type='right theme-secondary'
             showHeader={true}
             title="Leads"
             onClose={(modal: ModalSimple) => { this.setState({showLeads: false}); }}

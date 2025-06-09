@@ -49,5 +49,34 @@
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otevřená dohoda"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Ztracený důvod"
+    },
+    "Models\\DealHistory": {
+        "Change Date": "Datum změny",
+        "Deal": "Jednat",
+        "Description": "Popis"
+    },
+    "Models\\DealTag": {
+        "Deal": "Jednat",
+        "Tag": "Štítek"
+    },
+    "Models\\DealProduct": {
+        "Deal": "Jednat",
+        "Product": "Produkt",
+        "Unit Price": "Jednotková cena",
+        "Amount": "Množství",
+        "Vat": "DPH",
+        "Discount": "Sleva",
+        "Sum": "Součet"
+    },
+    "Models\\DealDocument": {
+        "Deal": "Jednat",
+        "Document": "Dokument"
+    },
+    "Models\\Tag": {
+        "Name": "Jméno",
+        "Color": "Barva"
     }
 }

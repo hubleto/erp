@@ -43,7 +43,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = (this.props.idCustomer ? 'inside-parent' : 'right wide');
+    params.type = 'right wide';
     return params;
   }
 

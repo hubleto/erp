@@ -15,7 +15,7 @@ class Loader extends \HubletoMain\Core\App
       '/^deals(\/(?<recordId>\d+))?\/?$/' => Controllers\Deals::class,
       '/^deals\/add\/?$/' => ['controller' => Controllers\Deals::class, 'vars' => ['recordId' => -1]],
       '/^deals\/settings\/?$/' => Controllers\Settings::class,
-      '/^deals\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
+      // '/^deals\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
       '/^deals\/change-pipeline\/?$/' => Controllers\Api\ChangePipeline::class,
       '/^deals\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,

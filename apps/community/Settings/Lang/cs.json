@@ -59,5 +59,10 @@
         "Color": "Barva",
         "Show in calendar": "Zobrazit v kalendáři",
         "Icon": "Ikona"
+    },
+    "Models\\Currency": {
+        "Currency": "Měna",
+        "Code": "Kód",
+        "Symbol": "Symbol"
     }
 }

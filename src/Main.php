@@ -188,4 +188,24 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->apps->onBeforeRender();
   }
 
+  /**
+  * @return array|array<string, array<string, string>>
+  */
+  public static function addToDictionary(string $language, string $contextInner, string $string): void
+  {
+
+    $dictFilename = static::getDictionaryFilename($language);
+
+    $dict = static::loadDictionary($language);
+
+    $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
+    $tr->setSource('en'); // Translate from
+    $tr->setTarget($language); // Translate to
+
+    $dict[$contextInner][$string] = $tr->translate($string);
+
+    @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+  }
+
 }

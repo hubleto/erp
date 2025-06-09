@@ -1,0 +1,11 @@
+{
+    "manifest": {
+        "Products": "Produkty",
+        "Free product portfolio managment.": "Darmowe zarządzanie portfelem produktów."
+    },
+    "root": {
+        "Products": "Produkty",
+        "Groups": "Grupy",
+        "Suppliers": "Dostawcy"
+    }
+}

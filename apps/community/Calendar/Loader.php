@@ -25,7 +25,7 @@ class Loader extends \HubletoMain\Core\App
       '/^calendar\/?$/' => Controllers\Calendar::class,
       '/^calendar\/settings\/?$/' => Controllers\Settings::class,
       '/^calendar\/boards\/events-for-today\/?$/' => Controllers\Boards\EventsForToday::class,
-      '/^calendar\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
+      '/^calendar\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
     $this->main->apps->community('Help')->addContextHelpUrls('/^calendar\/?$/', [

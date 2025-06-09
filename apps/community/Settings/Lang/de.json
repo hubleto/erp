@@ -122,81 +122,102 @@
         "Users": ""
     },
     "manifest": {
-        "Settings": "",
+        "Settings": "Einstellungen",
         "...": "",
-        "Settings and control panel for your Hubleto.": ""
+        "Settings and control panel for your Hubleto.": "Einstellungen und Bedienfeld für Ihr Hubleto."
     },
     "root": {
-        "Users": "",
+        "Users": "Benutzer",
         "User roles": "",
-        "Your companies": "",
-        "General settings": "",
+        "Your companies": "Ihre Unternehmen",
+        "General settings": "Allgemeine Einstellungen",
         "Permissions": "",
         "Tags": "",
-        "Activity types": "",
+        "Activity types": "Aktivitätstypen",
         "Contact types": "",
-        "Countries": "",
-        "Currencies": "",
+        "Countries": "Länder",
+        "Currencies": "Währungen",
         "Pipelines": "",
-        "Invoice profiles": "",
-        "Platform config": "",
-        "Roles": "",
-        "Permissions list": "",
-        "Role permissions": "",
-        "Sidebar": "",
-        "Teams": ""
+        "Invoice profiles": "Rechnungsprofile",
+        "Platform config": "Plattformkonfiguration",
+        "Roles": "Rollen",
+        "Permissions list": "Berechtigungsliste",
+        "Role permissions": "Rollenberechtigungen",
+        "Sidebar": "Seitenleiste",
+        "Teams": "Teams"
     },
     "Models\\UserRole": {
-        "Role": "",
+        "Role": "Rolle",
         "Grant all permissions (admin role)": "",
-        "Grant all permissions (administrator role)": "",
-        "Description": "",
-        "Is default role (cannot be modified)": ""
+        "Grant all permissions (administrator role)": "Gewähren Sie alle Berechtigungen (Administratorrolle)",
+        "Description": "Beschreibung",
+        "Is default role (cannot be modified)": "Ist Standardrolle (kann nicht geändert werden)"
     },
     "Models\\UserHasRole": {
-        "User": "",
-        "Role": ""
+        "User": "Benutzer",
+        "Role": "Rolle"
     },
     "Controllers\\Dashboard": {
-        "Settings": "",
+        "Settings": "Einstellungen",
         "Manage installed apps": "",
-        "Open": ""
+        "Open": "",
+        "Most common settings": "Die häufigsten Einstellungen",
+        "Manage users": "Benutzer verwalten",
+        "Manage apps": "Apps verwalten",
+        "All settings": "Alle Einstellungen"
     },
     "Models\\RolePermission": {
-        "Permission": "",
-        "Role": ""
+        "Permission": "Erlaubnis",
+        "Role": "Rolle"
     },
     "Models\\User": {
-        "First name": "",
-        "Last name": "",
-        "Nick": "",
-        "Email": "",
-        "Language": "",
-        "Default company": ""
+        "First name": "Vorname",
+        "Last name": "Nachname",
+        "Nick": "Nick",
+        "Email": "E-Mail",
+        "Language": "Sprache",
+        "Default company": "Standardfirma",
+        "Roles": "Rollen",
+        "Teams": "Teams"
     },
     "Models\\Country": {
-        "Country": "",
-        "Code": ""
+        "Country": "Land",
+        "Code": "Code"
     },
     "Models\\Company": {
-        "Company": "",
-        "Tax ID": "",
-        "VAT ID": "",
-        "Street, line 1": "",
-        "Street, line 2": "",
-        "ZIP": "",
-        "City": "",
-        "Country": ""
+        "Company": "Unternehmen",
+        "Tax ID": "Steuer -ID",
+        "VAT ID": "Mehrwertsteuer id",
+        "Street, line 1": "Straße, Zeile 1",
+        "Street, line 2": "Straße, Zeile 2",
+        "ZIP": "REISSVERSCHLUSS",
+        "City": "Stadt",
+        "Country": "Land"
     },
     "Models\\ActivityType": {
-        "Type": "",
-        "Color": "",
-        "Show in calendar": "",
-        "Icon": ""
+        "Type": "Typ",
+        "Color": "Farbe",
+        "Show in calendar": "Im Kalender zeigen",
+        "Icon": "Symbol"
     },
     "Models\\Currency": {
-        "Currency": "",
-        "Code": "",
-        "Symbol": ""
+        "Currency": "Währung",
+        "Code": "Code",
+        "Symbol": "Symbol"
+    },
+    "Models\\Setting": {
+        "Key": "Schlüssel",
+        "Value": "Wert",
+        "Only for user": "Nur für den Benutzer"
+    },
+    "Controllers\\Users": {
+        "Settings": "Einstellungen",
+        "Users": "Benutzer"
+    },
+    "Controllers\\Apps": {
+        "Settings": "Einstellungen",
+        "Apps": "Apps",
+        "Open": "Offen",
+        "Disable": "Deaktivieren"
     }
 }

@@ -336,7 +336,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           readonly={R.is_archived}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.accountUrl + '/deals/get-calendar-events?idDeal=' + R.id}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/get-calendar-events?source=deals&idDeal=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -669,7 +669,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               readonly={R.is_archived}
               initialView='timeGridWeek'
               views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-              eventsEndpoint={globalThis.main.config.accountUrl + '/deals/get-calendar-events?idDeal=' + R.id}
+              eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/get-calendar-events?source=deals&idDeal=' + R.id}
               onDateClick={(date, time, info) => {
                 this.setState({
                   activityDate: date,

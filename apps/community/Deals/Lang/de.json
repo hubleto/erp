@@ -13,77 +13,104 @@
         "Archive": "Archiv"
     },
     "manifest": {
-        "Deals": "",
-        "Deal management. From deal to purchase.": ""
+        "Deals": "Angebote",
+        "Deal management. From deal to purchase.": "Deal Management. Vom Deal zum Kauf."
     },
     "root": {
         "Deal statuses": "",
-        "Deal Tags": "",
-        "Most valuable deals": "",
-        "Deal value by result": "",
-        "Deal Lost Reasons": "",
-        "Active deals": "",
-        "Archived deals": ""
+        "Deal Tags": "Deal -Tags",
+        "Most valuable deals": "Wertvollste Angebote",
+        "Deal value by result": "Dealwert nach Ergebnis",
+        "Deal Lost Reasons": "Verlorene Gründe",
+        "Active deals": "Aktive Angebote",
+        "Archived deals": "Archivierte Geschäfte"
     },
     "Models\\Deal": {
-        "Deal Identifier": "",
-        "Title": "",
-        "Customer": "",
-        "Contact": "",
-        "Lead": "",
-        "Price": "",
-        "Currency": "",
-        "Expected close date": "",
-        "Owner": "",
-        "Created": "",
-        "Pipeline": "",
-        "Pipeline step": "",
-        "Notes": "",
-        "Source channel": "",
-        "Archived": "",
-        "Deal Result": "",
-        "Reason for Lost": "",
-        "Date of result update": "",
-        "New Customer": "",
-        "Business type": "",
-        "Link to shared folder (online storage) with related documents": ""
+        "Deal Identifier": "Deal Identifier",
+        "Title": "Titel",
+        "Customer": "Kunde",
+        "Contact": "Kontakt",
+        "Lead": "Führen",
+        "Price": "Preis",
+        "Currency": "Währung",
+        "Expected close date": "Erwartete Schließungsdatum",
+        "Owner": "Eigentümer",
+        "Created": "Erstellt",
+        "Pipeline": "Pipeline",
+        "Pipeline step": "Pipeline -Schritt",
+        "Notes": "Notizen",
+        "Source channel": "Quellkanal",
+        "Archived": "Archiviert",
+        "Deal Result": "Deal Ergebnis",
+        "Reason for Lost": "Grund für verlorene",
+        "Date of result update": "Datum des Ergebnis Update",
+        "New Customer": "Neuer Kunde",
+        "Business type": "Geschäftstyp",
+        "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
+        "Responsible": "Verantwortlich",
+        "Add Deal": "Deal hinzufügen"
     },
     "Models\\DealActivity": {
-        "Deal": "",
-        "Contact": "",
-        "Activity type": "",
-        "Subject": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Created by": ""
+        "Deal": "Handeln",
+        "Contact": "Kontakt",
+        "Activity type": "Aktivitätstyp",
+        "Subject": "Thema",
+        "Start date": "Startdatum",
+        "Start time": "Startzeit",
+        "End date": "Enddatum",
+        "End time": "Endzeit",
+        "All day": "Den ganzen Tag",
+        "Completed": "Vollendet",
+        "Created by": "Erstellt von"
     },
     "Models\\LostReason": {
-        "Lost Reason": ""
+        "Lost Reason": "Verlorener Vernunft"
     },
     "Models\\DealHistory": {
-        "Change Date": "",
-        "Deal": "",
-        "Description": ""
+        "Change Date": "Datum ändern",
+        "Deal": "Handeln",
+        "Description": "Beschreibung"
     },
     "Models\\DealTag": {
-        "Deal": "",
-        "Tag": ""
+        "Deal": "Handeln",
+        "Tag": "Etikett"
     },
     "Models\\DealProduct": {
-        "Deal": "",
-        "Product": "",
-        "Unit Price": "",
-        "Amount": "",
-        "Vat": "",
-        "Discount": "",
-        "Sum": ""
+        "Deal": "Handeln",
+        "Product": "Produkt",
+        "Unit Price": "Stückpreis",
+        "Amount": "Menge",
+        "Vat": "Mehrwertsteuer",
+        "Discount": "Rabatt",
+        "Sum": "Summe"
     },
     "Models\\DealDocument": {
-        "Deal": "",
-        "Document": ""
+        "Deal": "Handeln",
+        "Document": "Dokumentieren"
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": "Offenes Geschäft"
+    },
+    "Components\\FormDeal": {
+        "Show deals": "Showgeschäfte",
+        "Type recent activity here": "Geben Sie hier die aktuelle Aktivität ein",
+        "Enter = Log completed activity": "Geben Sie = log abgeschlossene Aktivität ein",
+        "Shift+Enter = Schedule": "Shift+ENTER = Zeitplan",
+        "Most recent activities": "Letzte Aktivitäten",
+        "Not completed yet": "Noch nicht fertig",
+        "Go to original lead": "Zu Originalführung gehen",
+        "Calendar": "Kalender",
+        "Documents": "Unterlagen",
+        "Local documents": "Lokale Dokumente",
+        "History": "Geschichte"
+    },
+    "Models\\Tag": {
+        "Name": "Name",
+        "Color": "Farbe"
+    },
+    "Controllers\\Deals": {
+        "Deals": "Angebote",
+        "Open deals": "Offene Angebote",
+        "Total value": "Gesamtwert"
     }
 }

@@ -46,11 +46,11 @@
         "Need more help?": "",
         "Contact us": "",
         "Manage your account": "",
-        "Sign out": "",
+        "Sign out": "Abmelden",
         "Get premium": "",
-        "Premium": "",
-        "Manage your user account": "",
-        "Manage cloud account": "",
-        "Help": ""
+        "Premium": "Prämie",
+        "Manage your user account": "Verwalten Sie Ihr Benutzerkonto",
+        "Manage cloud account": "Cloud -Konto verwalten",
+        "Help": "Helfen"
     }
 }

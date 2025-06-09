@@ -5,10 +5,18 @@ namespace HubletoApp\Community\Calendar\Controllers\Api;
 class GetCalendarEvents extends \HubletoMain\Core\Controllers\Controller {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 
-  public function renderJson(): array
+  public string $dateStart = '';
+  public string $dateEnd = '';
+
+  public \HubletoApp\Community\Calendar\CalendarManager $calendarManager;
+  
+  public function __construct(\HubletoMain $main)
   {
-    $dateStart = '';
-    $dateEnd = '';
+    parent::__construct($main);
+
+    if ($this->main->apps->community('Calendar')) {
+      $this->calendarManager = $this->main->apps->community('Calendar')->calendarManager;
+    }
 
     if ($this->main->isUrlParam("start") && $this->main->isUrlParam("end")) {
       $dateStart = date("Y-m-d H:i:s", (int) strtotime($this->main->urlParamAsString("start")));
@@ -18,7 +26,21 @@ class GetCalendarEvents extends \HubletoMain\Core\Controllers\Controller {
       $dateEnd = date("Y-m-d H:i:s", strtotime("+1 day"));
     }
 
-    return $this->loadEventsFromAllCalendars($dateStart, $dateEnd);
+    $this->dateStart = $dateStart;
+    $this->dateEnd = $dateEnd;
+
+  }
+
+  public function renderJson(): array
+  {
+    if ($this->main->isUrlParam('source')) {
+      return (array) $this->calendarManager
+        ->getCalendar($this->main->urlParamAsString('source'))
+        ->loadEvents($this->dateStart, $this->dateEnd)
+      ;
+    } else {
+      return $this->loadEventsFromAllCalendars($this->dateStart, $this->dateEnd);
+    }
   }
 
   public function loadEventsFromAllCalendars(string $dateStart, string $dateEnd): array

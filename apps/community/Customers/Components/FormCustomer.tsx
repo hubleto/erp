@@ -98,14 +98,10 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
   }
 
   renderTitle(): JSX.Element {
-    if (getUrlParam("recordId") == -1) {
-      return <h2>New Customer</h2>;
-    } else {
-      return <>
-        <h2>{this.state.record.name ? this.state.record.name : ''}</h2>
-        <small>Customer</small>
-      </>;
-    }
+    return <>
+      <h2>{this.state.record.name ? this.state.record.name : ''}</h2>
+      <small>{this.translate('Customer')}</small>
+    </>;
   }
 
   onAfterFormInitialized(): void {
@@ -159,7 +155,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       <ModalForm
         uid='activity_form'
         isOpen={true}
-        type='inside-parent theme-secondary'
+        type='right theme-secondary'
       >
         <CustomerFormActivity
           id={this.state.showIdActivity}
@@ -384,7 +380,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           readonly={R.is_archived}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.accountUrl + '/deals/get-calendar-events?idCustomer=' + R.id}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -538,7 +534,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               readonly={R.is_archived}
               initialView='timeGridWeek'
               views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-              eventsEndpoint={globalThis.main.config.accountUrl + '/customers/api/get-calendar-events?idCustomer=' + R.id}
+              eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=customers&?idCustomer=' + R.id}
               onDateClick={(date, time, info) => {
                 this.setState({
                   activityCalendarDateClicked: date,
@@ -665,7 +661,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               isUsedAsInput={true}
               readonly={!this.state.isInlineEditing}
               description={{
-                permissions: this.props.tableDocumentsDescription.permissions,
+                permissions: this.props.tableDocumentsDescription?.permissions,
                 ui: {
                   showFooter: false,
                   showHeader: false,

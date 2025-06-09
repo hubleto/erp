@@ -7,5 +7,27 @@
         "Products": "Produkty",
         "Groups": "Skupiny",
         "Suppliers": "Dodavatelé"
+    },
+    "Models\\Product": {
+        "Title": "Titul",
+        "Product Group": "Skupina produktů",
+        "Product Type": "Typ produktu",
+        "Supplier": "Dodavatel",
+        "On sale": "Na prodej",
+        "Image": "Obraz",
+        "Description": "Popis",
+        "Number of items in package": "Počet položek v balíčku",
+        "Single unit price": "Jediná jednotková cena",
+        "Unit": "Jednotka",
+        "Margin": "Okraj",
+        "Vat": "DPH",
+        "Single unit order possible": "Jednotlivé objednávky možné",
+        "Packaging": "Obal",
+        "Sale ended": "Prodej skončil",
+        "Show price to customer": "Zobrazit cenu zákazníkovi",
+        "Set price after reweight?": "Nastavit cenu po opětovné předvádění?",
+        "Needs reordering?": "Potřebujete přehodnocení?",
+        "Storage rules": "Pravidla skladování",
+        "Table": "Tabulka"
     }
 }

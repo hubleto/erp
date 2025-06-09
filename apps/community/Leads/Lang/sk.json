@@ -47,7 +47,7 @@
         "Responsible": "Zodpovedný",
         "Created": "Vytvorený",
         "Reason for Lost": "Dôvod pre stratu",
-        "Add lead": "Pridať olovo",
+        "Add lead": "Pridať lead",
         "Owner": "Majiteľ"
     },
     "root": {
@@ -55,7 +55,7 @@
         "Lead Tags": "Značky leadov",
         "Active leads": "Aktívne zvody",
         "Archived leads": "Archivované vodiče",
-        "Lead Lost Reasons": "Olovo stratené dôvody"
+        "Lead Lost Reasons": "Dôvody pre stratu leadu"
     },
     "Models\\LeadHistory": {
         "Change Date": "Dátum zmeny",

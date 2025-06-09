@@ -6,28 +6,30 @@
         "Calendar": "Kalender"
     },
     "manifest": {
-        "Calendar": "",
-        "Free calendar app.": ""
+        "Calendar": "Kalender",
+        "Free calendar app.": "Kostenlose Kalender -App."
     },
     "root": {
-        "Events for today": ""
+        "Events for today": "Ereignisse für heute"
     },
     "Models\\Activity": {
-        "Subject": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Created by": ""
+        "Subject": "Thema",
+        "Activity type": "Aktivitätstyp",
+        "Start date": "Startdatum",
+        "Start time": "Startzeit",
+        "End date": "Enddatum",
+        "End time": "Endzeit",
+        "All day": "Den ganzen Tag",
+        "Completed": "Vollendet",
+        "Created by": "Erstellt von"
     },
     "Controllers\\Boards\\EventsForToday": {
-        "All-day": "",
-        "Open event details": ""
+        "All-day": "Ganztägig",
+        "Open event details": "Offene Ereignisdetails",
+        "events for tomorrow": "Ereignisse für morgen",
+        "events later": "Ereignisse später"
     },
     "Controllers\\Calendar": {
-        "Calendar": ""
+        "Calendar": "Kalender"
     }
 }

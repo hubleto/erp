@@ -89,5 +89,8 @@
     },
     "Components\\FormActivity": {
         "Customer": "Zákazník"
+    },
+    "Components\\CustomerFormActivity": {
+        "Customer": "Zákazník"
     }
 }

@@ -5,7 +5,9 @@
     },
     "Controllers\\Deals": {
         "Sales": "Obchod",
-        "Deals": "Dealy"
+        "Deals": "Dealy",
+        "Open deals": "Otvorené ponuky",
+        "Total value": "Celková hodnota"
     },
     "Controllers\\DealsArchive": {
         "Sales": "Obchod",
@@ -40,7 +42,8 @@
         "Owner": "Majiteľ",
         "Created": "Vytvorený",
         "Reason for Lost": "Dôvod pre stratu",
-        "Responsible": "Zodpovedný"
+        "Responsible": "Zodpovedný",
+        "Add Deal": "Pridať obchod"
     },
     "Models\\DealHistory": {
         "Change Date": "Dátum zmeny",

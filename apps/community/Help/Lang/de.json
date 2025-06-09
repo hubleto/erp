@@ -1,0 +1,10 @@
+{
+    "manifest": {
+        "Help": "Helfen",
+        "Help and user guide for Hubleto.": "Hilfe und Benutzerhandbuch für Hubleto."
+    },
+    "Controllers\\Help": {
+        "Help center": "Hilfezentrum",
+        "About your Hubleto": "Über Ihren Hubleto"
+    }
+}

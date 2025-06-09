@@ -18,12 +18,12 @@ class RenderInvalidRoutes extends \HubletoMain\Core\AppTest
       foreach ($this->sqlInjectionExpressions() as $expr) {
         $routes[] = 'customers/api/get-customer?search=' . $expr;
         $routes[] = 'contacts/get-customer-contacts?search=' . $expr;
-        $routes[] = 'customers/api/get-calendar-events?start=' . $expr;
-        $routes[] = 'customers/api/get-calendar-events?end=' . $expr;
+        // $routes[] = 'customers/api/get-calendar-events?start=' . $expr;
+        // $routes[] = 'customers/api/get-calendar-events?end=' . $expr;
       }
 
       $routes[] = 'contacts/get-customer-contacts?id_customer=' . (string) rand(1, 9999);
-      $routes[] = 'customers/api/get-calendar-events?idCustomer=' . (string) rand(1, 9999);
+      // $routes[] = 'customers/api/get-calendar-events?idCustomer=' . (string) rand(1, 9999);
     }
 
     foreach ($routes as $route) {

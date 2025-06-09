@@ -42,7 +42,7 @@ export default class TableDeals extends Table<TableDealsProps, TableDealsState> 
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = (this.props.idCustomer ? 'inside-parent' : 'right wide');
+    params.type = 'right wide';
     return params;
   }
 

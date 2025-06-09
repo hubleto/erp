@@ -11,11 +11,11 @@
     "manifest": {
         "Dashboard": "",
         "...": "",
-        "Desktop": "",
+        "Desktop": "Desktop",
         "Default Hubleto desktop implementation": "",
-        "Default Hubleto desktop implementation.": ""
+        "Default Hubleto desktop implementation.": "Standard -Hubleto -Desktop -Implementierung."
     },
     "Controllers\\Home": {
-        "Welcome": ""
+        "Welcome": "Willkommen"
     }
 }

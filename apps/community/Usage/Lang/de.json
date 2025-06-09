@@ -1,0 +1,17 @@
+{
+    "manifest": {
+        "Usage": "Verwendung",
+        "Usage statistics": "Nutzungsstatistik"
+    },
+    "root": {
+        "Usage log": "Nutzungsprotokoll"
+    },
+    "Models\\Log": {
+        "Time": "Zeit",
+        "IP": "IP",
+        "Route": "Route",
+        "Params": "Parameter",
+        "Message": "Nachricht",
+        "User": "Benutzer"
+    }
+}

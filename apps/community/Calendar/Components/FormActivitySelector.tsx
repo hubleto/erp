@@ -1,4 +1,4 @@
-import ModalSimple from 'adios/ModalSimple';
+import ModalForm from 'adios/ModalForm';
 import React, { Component } from 'react';
 
 export interface FormActivitySelectorProps {
@@ -74,13 +74,13 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
           })}
         </div>
         {this.state?.formSelected ?
-          <ModalSimple
+          <ModalForm
             uid='activity_form'
             isOpen={true}
             type='inside-parent'
           >
             {this.state.formSelected}
-          </ModalSimple>
+          </ModalForm>
         : <></>}
       </>
     );

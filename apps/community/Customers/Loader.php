@@ -19,7 +19,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/customer-tags\/?$/' => Controllers\Tags::class,
 
       '/^customers\/api\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
-      '/^customers\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
+      // '/^customers\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^customers\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
     ]);
 

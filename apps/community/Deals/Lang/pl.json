@@ -22,7 +22,8 @@
         "Most valuable deals": "Najcenniejsze oferty",
         "Deal value by result": "Wartość transakcji według wyniku",
         "Active deals": "Aktywne oferty",
-        "Archived deals": "Zarchiwizowane oferty"
+        "Archived deals": "Zarchiwizowane oferty",
+        "Deal warnings": "Ostrzeżenia o transakcji"
     },
     "Models\\Deal": {
         "Deal Identifier": "Identyfikator transakcji",
@@ -63,7 +64,8 @@
         "Completed": "Zakończony",
         "Created by": "Stworzone przez",
         "Deal": "Umowa",
-        "Contact": "Kontakt"
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Minuty spotkań (link)"
     },
     "Models\\LostReason": {
         "Lost Reason": "Utracony rozum"
@@ -89,5 +91,12 @@
     "Models\\DealDocument": {
         "Deal": "Umowa",
         "Document": "Dokument"
+    },
+    "Models\\Tag": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": "Oczekiwane oferty bez przyszłego planu"
     }
 }

@@ -111,6 +111,52 @@
       </div>
       <div id="default-navbar-mobile">
         <ul class="flex font-sm gap-1">
+          {# <li>
+            <button class="btn btn-white btn-small btn-dropdown">
+              <span class="icon"><i class="fas fa-envelope"></i></span>
+              <span class="text">3</span>
+              <div class="menu">
+                <div class="list" style="margin-left:-16.2em;width:18em;">
+                  <div class="text-center">
+                    <i class="fas fa-envelope text-primary text-2xl p-4"></i>
+                  </div>
+                  <h1 class="text-center p-6 m-0">{{ translate('Your messages') }}</h1>
+                  <div>
+                    <a href="#" class="btn btn-white btn-list-item m-1"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Využite špeciálnu zľavu</span></a>
+                    <a href="#" class="btn btn-white btn-list-item m-1"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Vydali sme novú verziu</span></a>
+                    <a href="#" class="btn btn-white btn-list-item m-1"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Príďte nás navštíviť na CODECON</span></a>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </li> #}
+          <li>
+            <button class="btn btn-transparent btn-small btn-dropdown">
+              <div class="menu">
+                <div class="grid grid-cols-2" style="margin-left:-13.9em;margin-top:0.2em;width:16em;">
+                  <div class="list mr-2">
+                    <a href="?set-language=en" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">English</span></a>
+                    <a href="?set-language=de" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Deutsch</span></a>
+                    <a href="?set-language=es" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/es.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Español</span></a>
+                    <a href="?set-language=fr" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/fr.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Francais</span></a>
+                  </div>
+                  <div class="list">
+                    <a href="?set-language=it" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/it.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Italiano</span></a>
+                    <a href="?set-language=pl" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/pl.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Polski</span></a>
+                    <a href="?set-language=ro" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/ro.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Română</span></a>
+                    <a href="?set-language=cs" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cs.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Česky</span></a>
+                    <a href="?set-language=sk" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Slovensky</span></a>
+                  </div>
+                </div>
+              </div>
+              <span class="text">
+                {{ (user.language ?: 'en')|upper }}
+              </span>
+              <span class="icon">
+                <img src="{{ config.url }}/assets/images/flags/{{ (user.language ?: 'en')|lower }}.jpg" style="max-height:1em;max-width:1em;" />
+              </span>
+            </button>
+          </li>
           {% if viewParams.contextHelpUrl %}
             <li class="mr-2 hidden md:block">
               <a
@@ -158,47 +204,10 @@
               <span class="icon"><i class="fas fa-sun"></i></span>
             </a>
           </li>
-          {# <li>
-            <button class="btn btn-white btn-small btn-dropdown">
-              <span class="icon"><i class="fas fa-envelope"></i></span>
-              <span class="text">3</span>
-              <div class="menu">
-                <div class="list" style="margin-left:-16.2em;width:18em;">
-                  <div class="text-center">
-                    <i class="fas fa-envelope text-primary text-2xl p-4"></i>
-                  </div>
-                  <h1 class="text-center p-6 m-0">{{ translate('Your messages') }}</h1>
-                  <div>
-                    <a href="#" class="btn btn-white btn-list-item m-1"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Využite špeciálnu zľavu</span></a>
-                    <a href="#" class="btn btn-white btn-list-item m-1"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Vydali sme novú verziu</span></a>
-                    <a href="#" class="btn btn-white btn-list-item m-1"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Príďte nás navštíviť na CODECON</span></a>
-                  </div>
-                </div>
-              </div>
-            </button>
-          </li> #}
           <li>
             <button class="btn btn-transparent btn-small btn-dropdown">
               <div class="menu">
-                <div class="list" style="margin-left:-6.2em;width:8em;">
-                  <a href="?set-language=en" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">English</span></a>
-                  <a href="?set-language=de" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Deutsch</span></a>
-                  <a href="?set-language=es" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/es.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Español</span></a>
-                  <a href="?set-language=fr" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/fr.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Francais</span></a>
-                  <a href="?set-language=it" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/it.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Italiano</span></a>
-                  <a href="?set-language=pl" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/pl.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Polski</span></a>
-                  <a href="?set-language=cs" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cs.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Česky</span></a>
-                  <a href="?set-language=sk" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Slovensky</span></a>
-                </div>
-              </div>
-              <span class="text">{{ (user.language ?: 'en')|upper }}</span>
-              <span class="icon"><i class="fas fa-language"></i></span>
-            </button>
-          </li>
-          <li>
-            <button class="btn btn-transparent btn-small btn-dropdown">
-              <div class="menu">
-                <div class="list" style="margin-left:-13.4em;width:15em;">
+                <div class="list">
                   <div class="text-center text-primary text-sm p-2">{{ user.email }}</div>
                   <div class="text-center text-gray-700 text-xs">{{ user.first_name }}</div>
                   <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/settings/my-account">

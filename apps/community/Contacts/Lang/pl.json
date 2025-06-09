@@ -107,5 +107,12 @@
     "Models\\ContactTag": {
         "Contact": "Kontakt",
         "Tag": "Etykietka"
+    },
+    "Models\\Category": {
+        "Type": "Typ"
+    },
+    "Models\\Tag": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
     }
 }

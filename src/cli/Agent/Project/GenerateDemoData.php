@@ -875,8 +875,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $dealDateCreated = date("Y-m-d H:i:s", $dealDateCreatedTs);
       $dealDateClose = date("Y-m-d H:i:s", strtotime("+1 month", $dealDateCreatedTs));
 
-      echo "dealres = " . $pStep['set_result'] . "\n";
-
       $idDeal = $mDeal->record->recordCreate([
         "identifier" => $lead->identifier,
         "title" => $lead->title,

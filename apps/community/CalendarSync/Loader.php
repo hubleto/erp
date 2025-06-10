@@ -23,7 +23,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/calendar-sources\/ics\/?$/' => Ics::class,
     ]);
 
-    $this->main->addSetting($this, [
+    $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Calendar sources'),
       'icon' => 'fas fa-calendar',
       'url' => 'settings/calendar-sources',

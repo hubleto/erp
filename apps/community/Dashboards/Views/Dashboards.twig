@@ -1,0 +1,24 @@
+<h1 class="app-main-title">{{ translate('Dashboards') }}</h1>
+
+<div class="grid grid-cols-4 gap-2">
+  {% for d in viewParams.dashboards %}
+    <a
+      class="btn btn-primary-outline"
+      href="{{ config.accountUrl }}/dashboards/{{ d.slug }}"
+      style="border-left:1em solid {{ d.color }}"
+    >
+      <span class="text text-center w-full">{{ d.title }}</span>
+    </a>
+  {% endfor %}
+</div>
+
+{% if viewParams.dashboardSlug != '' %}
+  <div class="mt-2">
+    {% for d in viewParams.dashboards %}
+      {% if d.slug == viewParams.dashboardSlug %}
+        <h2>{{ d.title }}</h2>
+        <app-desktop-dashboard json:panels='{{ d.PANELS|json_encode|raw }}'></app-desktop-dashboard>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

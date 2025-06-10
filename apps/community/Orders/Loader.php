@@ -14,7 +14,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/order-states\/?$/' => Controllers\States::class,
     ]);
 
-    $this->main->addSetting($this, [
+    $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Order states'),
       'icon' => 'fas fa-file-lines',
       'url' => 'settings/order-states',

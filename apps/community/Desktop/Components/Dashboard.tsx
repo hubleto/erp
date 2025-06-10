@@ -2,19 +2,20 @@ import React, { Component } from 'react'
 import request from "adios/Request";
 import { ProgressBar } from 'primereact/progressbar';
 
-export interface Board {
+export interface Panel {
   title: string,
-  rendererUrlSlug: string,
+  boardUrlSlug: string,
+  configuration: any,
   contentLoaded?: boolean,
   content?: string,
 }
 
 export interface DesktopDashboardProps {
-  boards: Array<Board>
+  panels: Array<Panel>
 }
 
 export interface DesktopDashboardState {
-  boards: Array<Board>,
+  panels: Array<Panel>,
 }
 
 export default class DesktopDashboard extends Component<DesktopDashboardProps, DesktopDashboardState> {
@@ -23,27 +24,35 @@ export default class DesktopDashboard extends Component<DesktopDashboardProps, D
     super(props);
 
     this.state = {
-      boards: this.props.boards,
+      panels: this.props.panels,
     }
   }
 
   componentDidMount() {
-    this.loadBoardContents();
+    this.loadPanelContents();
   }
 
-  loadBoardContents() {
-    let boards = this.state.boards;
+  loadPanelContents() {
+    let panels = this.state.panels;
 
-    for (let i in boards) {
-      if (!boards[i].contentLoaded) {
+    for (let i in panels) {
+      let configuration = {};
+
+      try {
+        configuration = JSON.parse(panels[i].configuration ?? '');
+      } catch (ex) {
+        configuration = {};
+      }
+
+      if (!panels[i].contentLoaded) {
         request.get(
-          boards[i].rendererUrlSlug,
-          {},
+          panels[i].boardUrlSlug,
+          configuration ?? {},
           (html: any) => {
             try {
-              this.state.boards[i].contentLoaded = true;
-              this.state.boards[i].content = html;
-              this.setState({boards: boards});
+              this.state.panels[i].contentLoaded = true;
+              this.state.panels[i].content = html;
+              this.setState({panels: panels});
             } catch (err) {
               console.error(err);
             }
@@ -59,11 +68,11 @@ export default class DesktopDashboard extends Component<DesktopDashboardProps, D
     }, 100);
     return <>
       <div className="grid md:grid-cols-2 gap-2">
-        {this.props.boards.map((board: Board, index: any) => {
+        {this.props.panels.map((panel: Panel, index: any) => {
           return <div key={index} className="card">
-            <div className="card-header">{board.title}</div>
-            {board.contentLoaded ? 
-              <div className="card-body" dangerouslySetInnerHTML={{__html: board.content}}></div>
+            <div className="card-header">{panel.title}</div>
+            {panel.contentLoaded ? 
+              <div className="card-body" dangerouslySetInnerHTML={{__html: panel.content}}></div>
             :
               <div className="card-body">
                 <ProgressBar mode="indeterminate" style={{ height: '2em' }}></ProgressBar>

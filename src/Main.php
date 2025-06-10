@@ -68,9 +68,6 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   public bool $isPremium = false;
 
-  /** @var array<int, array<\HubletoMain\Core\App, array>> */
-  private array $settings = [];
-
   public function __construct(array $config = [], int $mode = self::ADIOS_MODE_FULL)
   {
     $this->setAsGlobal();
@@ -153,24 +150,6 @@ class HubletoMain extends \ADIOS\Core\Loader
   public function createDesktopController(): \HubletoMain\Core\Controllers\Controller
   {
     return new \HubletoMain\Core\Controllers\Controller($this);
-  }
-
-  public function addSetting(\HubletoMain\Core\App $app, array $setting): void
-  {
-    $this->settings[] = [$app, $setting];
-  }
-
-  public function getSettings(): array
-  {
-    $settings = [];
-    
-    foreach ($this->settings as $setting) {
-      $settings[] = $setting[1];
-    }
-
-    $titles = array_column($settings, 'title');
-    array_multisort($titles, SORT_ASC, $settings);
-    return $settings;
   }
 
   public static function loadDictionary(string $language): array

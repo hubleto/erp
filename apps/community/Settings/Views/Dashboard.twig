@@ -1,16 +1,29 @@
 <h1>{{ translate('Settings') }}</h1>
 
-<div class="card">
-  <div class="card-header">{{ translate('Most common settings') }}</div>
-  <div class="card-body flex gap-2">
-    <a class="btn btn-square btn-primary" href="settings/users">
-      <span class="icon"><i class="fas fa-users"></i></span>
-      <span class="text">{{ translate('Manage users') }}</span>
-    </a>
-    <a class="btn btn-square btn-primary" href="settings/apps">
-      <span class="icon"><i class="fas fa-puzzle-piece"></i></span>
-      <span class="text">{{ translate('Manage apps') }}</span>
-    </a>
+<div class="flex gap-2">
+  <div class="card">
+    <div class="card-header">{{ translate('Most common settings') }}</div>
+    <div class="card-body flex gap-2">
+      <a class="btn btn-square btn-primary" href="settings/users">
+        <span class="icon"><i class="fas fa-users"></i></span>
+        <span class="text">{{ translate('Manage users') }}</span>
+      </a>
+      <a class="btn btn-square btn-primary" href="settings/apps">
+        <span class="icon"><i class="fas fa-puzzle-piece"></i></span>
+        <span class="text">{{ translate('Manage apps') }}</span>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">{{ translate('Tools') }}</div>
+    <div class="card-body flex gap-2">
+      {% for tool in viewParams.tools %}
+        <a class="btn btn-square btn-transparent" href="{{ tool.url }}">
+          <span class="icon"><i class="{{ tool.icon }}"></i></span>
+          <span class="text">{{ tool.title }}</span>
+        </a>
+      {% endfor %}
+    </div>
   </div>
 </div>
 

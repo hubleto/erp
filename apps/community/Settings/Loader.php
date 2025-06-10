@@ -7,6 +7,12 @@ class Loader extends \HubletoMain\Core\App
 
   public bool $canBeDisabled = false;
 
+  /** @var array<int, array<\HubletoMain\Core\App, array>> */
+  private array $settings = [];
+
+  /** @var array<int, array<\HubletoMain\Core\App, array>> */
+  private array $tools = [];
+
   public function init(): void
   {
     parent::init();
@@ -33,19 +39,19 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/update-default-permissions\/?$/' => Controllers\UpdateDefaultPermissions::class,
     ]);
 
-    $this->main->addSetting($this, ['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
-    $this->main->addSetting($this, ['title' => $this->translate('Roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
-    $this->main->addSetting($this, ['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/companies']);
-    $this->main->addSetting($this, ['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
-    $this->main->addSetting($this, ['title' => $this->translate('Permissions list'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
-    $this->main->addSetting($this, ['title' => $this->translate('Role permissions'), 'icon' => 'fas fa-user-shield', 'url' => 'settings/role-permissions']);
-    $this->main->addSetting($this, ['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
-    $this->main->addSetting($this, ['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
-    $this->main->addSetting($this, ['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
-    $this->main->addSetting($this, ['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
-    $this->main->addSetting($this, ['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
-    $this->main->addSetting($this, ['title' => $this->translate('Sidebar'), 'icon' => 'fas fa-bars', 'url' => 'settings/sidebar']);
-    $this->main->addSetting($this, ['title' => $this->translate('Teams'), 'icon' => 'fas fa-users', 'url' => 'settings/teams']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/companies']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Permissions list'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Role permissions'), 'icon' => 'fas fa-user-shield', 'url' => 'settings/role-permissions']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Sidebar'), 'icon' => 'fas fa-bars', 'url' => 'settings/sidebar']);
+    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Teams'), 'icon' => 'fas fa-users', 'url' => 'settings/teams']);
   }
 
   public function installTables(int $round): void
@@ -424,6 +430,37 @@ class Loader extends \HubletoMain\Core\App
       ])['id'];
 
     }
+  }
+
+  public function addSetting(\HubletoMain\Core\App $app, array $setting): void
+  {
+    $this->settings[] = [$app, $setting];
+  }
+
+  public function getSettings(): array
+  {
+    $settings = [];
+    foreach ($this->settings as $setting) $settings[] = $setting[1];
+
+    $titles = array_column($settings, 'title');
+    array_multisort($titles, SORT_ASC, $settings);
+    return $settings;
+  }
+
+
+  public function addTool(\HubletoMain\Core\App $app, array $tool): void
+  {
+    $this->tools[] = [$app, $tool];
+  }
+
+  public function getTools(): array
+  {
+    $tools = [];
+    foreach ($this->tools as $tool) $tools[] = $tool[1];
+
+    $titles = array_column($tools, 'title');
+    array_multisort($titles, SORT_ASC, $tools);
+    return $tools;
   }
 }
 

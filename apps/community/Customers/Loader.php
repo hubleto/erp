@@ -34,7 +34,7 @@ class Loader extends \HubletoMain\Core\App
       'en' => 'en/apps/community/customers',
     ]);
 
-    $this->main->addSetting($this, [
+    $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Customer Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/customer-tags',

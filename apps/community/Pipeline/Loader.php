@@ -17,7 +17,7 @@ class Loader extends \HubletoMain\Core\App
     ]);
 
 
-    $this->main->addSetting($this, [
+    $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Pipelines'),
       'icon' => 'fas fa-bars-progress',
       'url' => 'settings/pipelines'

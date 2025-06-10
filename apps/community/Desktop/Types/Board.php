@@ -5,12 +5,12 @@ namespace HubletoApp\Community\Desktop\Types;
 class Board {
 
   public string $title = '';
-  public string $rendererUrlSlug = '';
+  public string $boardUrlSlug = '';
 
-  public function __construct(string $title, string $rendererUrlSlug)
+  public function __construct(string $title, string $boardUrlSlug)
   {
     $this->title = $title;
-    $this->rendererUrlSlug = $rendererUrlSlug;
+    $this->boardUrlSlug = $boardUrlSlug;
   }
 
 }

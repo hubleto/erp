@@ -24,12 +24,12 @@ class Loader extends \HubletoMain\Core\App
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
     ]);
 
-    $this->main->addSetting($this, [
+    $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Lead Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/lead-tags',
     ]);
-    $this->main->addSetting($this, [
+    $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Lead Lost Reasons'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/lead-lost-reasons',
@@ -41,6 +41,15 @@ class Loader extends \HubletoMain\Core\App
       $this->configAsString('calendarColor'),
       Calendar::class
     );
+
+    $dashboardsApp = $this->main->apps->community('Dashboards');
+    if ($dashboardsApp) {
+      $dashboardsApp->addPanel(
+        $this,
+        'Lead value by score',
+        'leads/boards/lead-value-by-score'
+      );
+    }
 
     $dashboard = $this->main->apps->community('Desktop')->dashboard;
 

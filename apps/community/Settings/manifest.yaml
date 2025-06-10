@@ -1,6 +1,6 @@
 namespace: HubletoApp\Community\Settings
 rootUrlSlug: settings
-name: Settings
+name: Settings and tools
 icon: fas fa-cog
 author:
   name: "Richard Ondrejka"

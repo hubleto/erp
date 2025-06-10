@@ -26,12 +26,12 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
     ]);
 
-    $this->main->addSetting($this, [
+    $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Deal Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/deal-tags',
     ]);
-    $this->main->addSetting($this, [
+    $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Deal Lost Reasons'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/deal-lost-reasons',
@@ -46,6 +46,33 @@ class Loader extends \HubletoMain\Core\App
 
     $reportManager = $this->main->apps->community('Reports')->reportManager;
     $reportManager->addReport(Reports\MonthlyRevenue::class);
+
+    $dashboardsApp = $this->main->apps->community('Dashboards');
+    if ($dashboardsApp) {
+      $dashboardsApp->addPanel(
+        $this,
+        'Deal warnings',
+        'deals/boards/deal-warnings'
+      );
+    }
+
+    $dashboardsApp = $this->main->apps->community('Dashboards');
+    if ($dashboardsApp) {
+      $dashboardsApp->addPanel(
+        $this,
+        'Most valuable deals',
+        'deals/boards/most-valuable-deals'
+      );
+    }
+
+    $dashboardsApp = $this->main->apps->community('Dashboards');
+    if ($dashboardsApp) {
+      $dashboardsApp->addPanel(
+        $this,
+        'Deal value by result',
+        'deals/boards/deal-value-by-result'
+      );
+    }
 
     $dashboard = $this->main->apps->community('Desktop')->dashboard;
 

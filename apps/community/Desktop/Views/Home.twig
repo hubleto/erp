@@ -3,7 +3,7 @@
 <h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.email }}</h1>
 
 <div class="mt-2">
-  <app-desktop-dashboard json:boards='{{ boards|json_encode|raw }}'></app-desktop-dashboard>
+  <app-desktop-dashboard json:panels='{{ boards|json_encode|raw }}'></app-desktop-dashboard>
 </div>
 
 <div class="mx-auto pt-20">

@@ -32,9 +32,9 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
     dataset.data = this.props.data != null ? [...this.props.data.values] : [];
     if (this.props.data.colors) dataset.backgroundColor = this.props.data.colors;
 
-    console.log('hubletoChart data', this.props.data);
-    console.log('hubletoChart labels', labels);
-    console.log('hubletoChart dataset', dataset);
+    // console.log('hubletoChart data', this.props.data);
+    // console.log('hubletoChart labels', labels);
+    // console.log('hubletoChart dataset', dataset);
 
     switch (this.props.type) {
       case "bar":

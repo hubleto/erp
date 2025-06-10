@@ -18,7 +18,7 @@ class Loader extends \HubletoMain\Core\App
       '/^usage\/log\/?$/' => Controllers\Log::class,
     ]);
 
-    $this->main->addSetting($this, [
+    $this->main->apps->community('Settings')->addTool($this, [
       'title' => $this->translate('Usage log'),
       'icon' => 'fas fa-chart-bar',
       'url' => 'usage/log',

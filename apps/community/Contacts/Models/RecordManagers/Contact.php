@@ -53,8 +53,8 @@ class Contact extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["order"] = true;
         $query
           ->addSelect("contact_tags.name")
-          ->join('contact_contact_tags', 'contact_contact_tags.id_contact', '=', 'contacts.id')
-          ->join('contact_tags', 'contact_contact_tags.id_tag', '=', 'contact_tags.id')
+          ->leftJoin('contact_contact_tags', 'contact_contact_tags.id_contact', '=', 'contacts.id')
+          ->leftJoin('contact_tags', 'contact_contact_tags.id_tag', '=', 'contact_tags.id')
         ;
       }
       $query->orderBy('contact_tags.name', $orderBy['direction']);
@@ -74,8 +74,8 @@ class Contact extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["fullText"] = true;
         $query
           ->addSelect("contact_tags.name as contactTag")
-          ->join('contact_contact_tags', 'contact_contact_tags.id_contact', '=', 'contacts.id')
-          ->join('contact_tags', 'contact_contact_tags.id_tag', '=', 'contact_tags.id')
+          ->leftJoin('contact_contact_tags', 'contact_contact_tags.id_contact', '=', 'contacts.id')
+          ->leftJoin('contact_tags', 'contact_contact_tags.id_tag', '=', 'contact_tags.id')
         ;
       }
       $query->orHaving('contactTag', 'like', "%{$fulltextSearch}%");
@@ -84,7 +84,7 @@ class Contact extends \HubletoMain\Core\RecordManager
         $this->joinManager["virt_contact"]["fullText"] = true;
         $query
           ->addSelect("contact_values.value")
-          ->join('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
+          ->leftJoin('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
         ;
       }
       $query->orHaving('contact_values.value', 'like', "%{$fulltextSearch}%");
@@ -102,8 +102,8 @@ class Contact extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["column"] = true;
         $query
           ->addSelect("contact_tags.name as contactTag")
-          ->join('contact_contact_tags', 'contact_contact_tags.id_contact', '=', 'contacts.id')
-          ->join('contact_tags', 'contact_contact_tags.id_tag', '=', 'contact_tags.id')
+          ->leftJoin('contact_contact_tags', 'contact_contact_tags.id_contact', '=', 'contacts.id')
+          ->leftJoin('contact_tags', 'contact_contact_tags.id_tag', '=', 'contact_tags.id')
         ;
       }
       $query->having('contactTag', 'like', "%{$columnSearch['tags']}%");
@@ -114,7 +114,7 @@ class Contact extends \HubletoMain\Core\RecordManager
         $this->joinManager["virt_contact"]["email"] = true;
         $query
           ->addSelect("contact_values.value")
-          ->join('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
+          ->leftJoin('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
         ;
       }
       $query
@@ -128,7 +128,7 @@ class Contact extends \HubletoMain\Core\RecordManager
         $this->joinManager["virt_contact"]["number"] = true;
         $query
           ->addSelect("contact_values.value")
-          ->join('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
+          ->leftJoin('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
         ;
       }
       $query

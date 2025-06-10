@@ -125,8 +125,8 @@ class Deal extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["order"] = true;
         $query
           ->addSelect("deal_tags.name")
-          ->join('cross_deal_tags', 'cross_deal_tags.id_deal', '=', 'deals.id')
-          ->join('deal_tags', 'cross_deal_tags.id_tag', '=', 'deal_tags.id')
+          ->leftJoin('cross_deal_tags', 'cross_deal_tags.id_deal', '=', 'deals.id')
+          ->leftJoin('deal_tags', 'cross_deal_tags.id_tag', '=', 'deal_tags.id')
         ;
       }
       $query->orderBy('deal_tags.name', $orderBy['direction']);
@@ -146,8 +146,8 @@ class Deal extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["fullText"] = true;
         $query
           ->addSelect("deal_tags.name")
-          ->join('cross_deal_tags', 'cross_deal_tags.id_deal', '=', 'deals.id')
-          ->join('deal_tags', 'cross_deal_tags.id_tag', '=', 'deal_tags.id')
+          ->leftJoin('cross_deal_tags', 'cross_deal_tags.id_deal', '=', 'deals.id')
+          ->leftJoin('deal_tags', 'cross_deal_tags.id_tag', '=', 'deal_tags.id')
         ;
       }
       $query->orHaving('deal_tags.name', 'like', "%{$fulltextSearch}%");
@@ -165,8 +165,8 @@ class Deal extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["column"] = true;
         $query
           ->addSelect("deal_tags.name")
-          ->join('cross_deal_tags', 'cross_deal_tags.id_deal', '=', 'deals.id')
-          ->join('deal_tags', 'cross_deal_tags.id_tag', '=', 'deal_tags.id')
+          ->leftJoin('cross_deal_tags', 'cross_deal_tags.id_deal', '=', 'deals.id')
+          ->leftJoin('deal_tags', 'cross_deal_tags.id_tag', '=', 'deal_tags.id')
         ;
       }
       $query->having('deal_tags.name', 'like', "%{$columnSearch['tags']}%");

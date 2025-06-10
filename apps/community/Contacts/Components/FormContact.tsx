@@ -62,33 +62,39 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
   }
 
   checkPrimaryContact(R) {
-    var tagIds = [];
+    console.log(R.TAGS);
 
-    for (const [key, value] of Object.entries(R.TAGS)) {
-        tagIds.push(value['id_tag'] ?? 0);
-    }
+    if (R.TAGS && R.TAGS.length > 0) {
+      var tagIds = [];
 
-    request.get(
-      "contacts/check-primary-contact",
-      {
-        idContact: this.state.record.id ?? -1,
-        idCustomer: R.id_customer,
-        tags: tagIds
-      },
-      (response: any) => {
-        if (response.result == true) {
-          this.updateRecord({is_primary: 1})
-        } else {
-          globalThis.main.showDialogDanger(
-            <>
-              <p className='text'>{response.error ?? "Unknown error"}</p>
-              <p className='text'>{response.names != null ? response.names : ""}</p>
-            </>,
-            {}
-          )
-        }
+      for (const [key, value] of Object.entries(R.TAGS)) {
+          tagIds.push(value['id_tag'] ?? 0);
       }
-    )
+
+      request.get(
+        "contacts/check-primary-contact",
+        {
+          idContact: this.state.record.id ?? -1,
+          idCustomer: R.id_customer,
+          tags: tagIds
+        },
+        (response: any) => {
+          if (response.result == true) {
+            this.updateRecord({is_primary: 1})
+          } else {
+            globalThis.main.showDialogDanger(
+              <>
+                <p className='text'>{response.error ?? "Unknown error"}</p>
+                <p className='text'>{response.names != null ? response.names : ""}</p>
+              </>,
+              {}
+            )
+          }
+        }
+      )
+    } else {
+      this.updateRecord({is_primary: 1});
+    }
   }
 
   componentDidUpdate(prevProps: FormProps, prevState: FormState): void {
@@ -110,11 +116,11 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
               <div className="w-full">
                 {this.inputWrapper('salutation')}
                 <div className="flex gap-2">
-                  <div className="flex-1">{this.inputWrapper('title_before')}</div>
+                  <div className="flex-1">{this.inputWrapper('title_before', {cssClass: 'text-2xl'})}</div>
                   <div className="flex-2">{this.inputWrapper('first_name', {cssClass: 'text-2xl text-primary'})}</div>
                   <div className="flex-2">{this.inputWrapper('middle_name', {cssClass: 'text-2xl text-primary'})}</div>
                   <div className="flex-2">{this.inputWrapper('last_name', {cssClass: 'text-2xl text-primary'})}</div>
-                  <div className="flex-1">{this.inputWrapper('title_after')}</div>
+                  <div className="flex-1">{this.inputWrapper('title_after', {cssClass: 'text-2xl'})}</div>
                 </div>
               </div>
             </div>
@@ -233,7 +239,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
                         this.setState({isInlineEditing: true});
                         if (value == 1) {
                           this.setState({primaryContactMessage: false} as FormContactState)
-                          this.checkPrimaryContact(R);
+                          this.checkPrimaryContact(this.state.record);
                         } else this.updateRecord({is_primary: value})
                       }}
                     ></Boolean>

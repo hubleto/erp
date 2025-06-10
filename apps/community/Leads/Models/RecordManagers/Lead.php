@@ -110,7 +110,7 @@ class Lead extends \HubletoMain\Core\RecordManager
     if (isset($orderBy['field']) && $orderBy['field'] == 'DEAL') {
       if (empty($this->joinManager["DEAL"])) {
         $this->joinManager["DEAL"]["order"] = true;
-        $query->join('deals', 'deals.id_lead', '=', 'leads.id');
+        $query->leftJoin('deals', 'deals.id_lead', '=', 'leads.id');
       }
       $query->orderBy('deals.identifier', $orderBy['direction']);
 
@@ -120,8 +120,8 @@ class Lead extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["order"] = true;
         $query
           ->addSelect("lead_tags.name")
-          ->join('cross_lead_tags', 'cross_lead_tags.id_lead', '=', 'leads.id')
-          ->join('lead_tags', 'cross_lead_tags.id_tag', '=', 'lead_tags.id')
+          ->leftJoin('cross_lead_tags', 'cross_lead_tags.id_lead', '=', 'leads.id')
+          ->leftJoin('lead_tags', 'cross_lead_tags.id_tag', '=', 'lead_tags.id')
         ;
       }
       $query->orderBy('lead_tags.name', $orderBy['direction']);
@@ -141,7 +141,7 @@ class Lead extends \HubletoMain\Core\RecordManager
         $this->joinManager["DEAL"]["fullText"] = true;
         $query
           ->addSelect("deals.identifier as idDeal")
-          ->join('deals', 'deals.id_lead', '=', 'leads.id')
+          ->leftJoin('deals', 'deals.id_lead', '=', 'leads.id')
         ;
       }
       $query->orHaving('idDeal', 'like', "%{$fulltextSearch}%");
@@ -150,8 +150,8 @@ class Lead extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["fullText"] = true;
         $query
           ->addSelect("lead_tags.name")
-          ->join('cross_lead_tags', 'cross_lead_tags.id_lead', '=', 'leads.id')
-          ->join('lead_tags', 'cross_lead_tags.id_tag', '=', 'lead_tags.id')
+          ->leftJoin('cross_lead_tags', 'cross_lead_tags.id_lead', '=', 'leads.id')
+          ->leftJoin('lead_tags', 'cross_lead_tags.id_tag', '=', 'lead_tags.id')
         ;
       }
       $query->orHaving('lead_tags.name', 'like', "%{$fulltextSearch}%");
@@ -167,7 +167,7 @@ class Lead extends \HubletoMain\Core\RecordManager
         $this->joinManager["DEAL"]["column"] = true;
         $query
           ->addSelect("deals.identifier as idDeal")
-          ->join('deals', 'deals.id_lead', '=', 'leads.id')
+          ->leftJoin('deals', 'deals.id_lead', '=', 'leads.id')
         ;
       }
       $query->having('idDeal', 'like', "%{$columnSearch['DEAL']}%");
@@ -178,8 +178,8 @@ class Lead extends \HubletoMain\Core\RecordManager
         $this->joinManager["tags"]["column"] = true;
         $query
           ->addSelect("lead_tags.name")
-          ->join('cross_lead_tags', 'cross_lead_tags.id_lead', '=', 'leads.id')
-          ->join('lead_tags', 'cross_lead_tags.id_tag', '=', 'lead_tags.id')
+          ->leftJoin('cross_lead_tags', 'cross_lead_tags.id_lead', '=', 'leads.id')
+          ->leftJoin('lead_tags', 'cross_lead_tags.id_tag', '=', 'lead_tags.id')
         ;
       }
       $query->having('lead_tags.name', 'like', "%{$columnSearch['tags']}%");

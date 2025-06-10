@@ -1,16 +1,12 @@
 import React, { Component, ChangeEvent } from "react";
-import { deepObjectMerge, getUrlParam } from "adios/Helper";
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import InputTags2 from "adios/Inputs/Tags2";
 import FormInput from "adios/FormInput";
 import TableContacts from "../../Contacts/Components/TableContacts";
 import { TabPanel, TabView } from "primereact/tabview";
 import CustomerFormActivity, {CustomerFormActivityProps, CustomerFormActivityState} from "./CustomerFormActivity";
-import TableLeads from "../../Leads/Components/TableLeads";
-import FormLead, {FormLeadProps, FormLeadState} from "../../Leads/Components/FormLead";
 import ModalForm from "adios/ModalForm";
-import TableDeals from "../../Deals/Components/TableDeals";
-import FormDeal, {FormDealProps, FormDealState} from "../../Deals/Components/FormDeal";
+import { FormDealState } from "../../Deals/Components/FormDeal";
 import TableCustomerDocuments from "./TableCustomerDocuments";
 import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
 import FormContact, {FormContactProps, FormContactState} from "../../Contacts/Components/FormContact";
@@ -18,7 +14,7 @@ import Calendar from '../../Calendar/Components/Calendar'
 import Hyperlink from "adios/Inputs/Hyperlink";
 import request from "adios/Request";
 import { FormProps, FormState } from "adios/Form";
-import moment, { Moment } from "moment";
+import moment from "moment";
 
 export interface FormCustomerProps extends HubletoFormProps {
   highlightIdActivity: number,
@@ -469,7 +465,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 <div className="card-header">{this.translate('Contacts')}</div>
                 <div className="card-body">
                   <a
-                    className="btn btn-add-outline mr-2"
+                    className="btn btn-add-outline mr-2 float-left"
                     onClick={() => {
                       if (!R.CONTACTS) R.CONTACTS = [];
                       this.setState({createNewContact: true} as FormCustomerState);

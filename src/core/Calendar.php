@@ -59,12 +59,14 @@ class Calendar implements \ADIOS\Core\Testable {
         $events[$key]['end'] = $dStart . " " . $tEnd;
       }
 
-      //fix for fullCalendar not showing the last date of an event longer than one day
-      if ((!empty($dStart) && !empty($dEnd) && (strtotime($dEnd) > strtotime($dStart)))) {
-        if (empty($tEnd) || empty($tStart)) $events[$key]['end'] = date("Y-m-d", strtotime("+ 1 day", strtotime($dEnd)));
+      $longerThanDay = (!empty($dStart) && !empty($dEnd) && ($dStart != $dEnd));
+
+      // fix for fullCalendar not showing the last date of an event longer than one day
+      if ((!empty($dStart) && !empty($dEnd) && $longerThanDay)) {
+        $events[$key]['end'] = date("Y-m-d", strtotime("+ 1 day", strtotime($dEnd)));
       }
 
-      $events[$key]['allDay'] = ($activity['all_day'] ?? 0) == 1 || $tStart == null ? true : false;
+      $events[$key]['allDay'] = ($activity['all_day'] ?? 0) == 1 || $tStart == null ? true : false || $longerThanDay;
       $events[$key]['title'] = (string) ($activity['subject'] ?? '');
       $events[$key]['backColor'] = (string) ($activity['color'] ?? '');
       $events[$key]['color'] = $this->color;

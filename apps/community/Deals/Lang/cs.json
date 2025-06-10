@@ -9,7 +9,8 @@
         "Most valuable deals": "Nejcennější obchody",
         "Deal value by result": "Výsledek na základě výsledku",
         "Active deals": "Aktivní obchody",
-        "Archived deals": "Archivované obchody"
+        "Archived deals": "Archivované obchody",
+        "Deal warnings": "Varování"
     },
     "Models\\DealActivity": {
         "Subject": "Podrobit",
@@ -22,7 +23,8 @@
         "Completed": "Dokončeno",
         "Created by": "Vytvořeno",
         "Deal": "Jednat",
-        "Contact": "Kontakt"
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
     },
     "Models\\Deal": {
         "Deal Identifier": "Identifikátor obchodu",
@@ -78,5 +80,8 @@
     "Models\\Tag": {
         "Name": "Jméno",
         "Color": "Barva"
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": "Čekající nabídky bez budoucího plánu"
     }
 }

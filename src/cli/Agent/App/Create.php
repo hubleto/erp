@@ -19,8 +19,8 @@ class Create extends \HubletoMain\Cli\Agent\Command
       case 'Community':
         $appRepositoryFolder = realpath(__DIR__ . '/../../../../apps/community');
       break;
-      case 'Enterprise':
-        throw new \Exception('Creation of enterprise apps is not implemented yet.');
+      case 'Premium':
+        throw new \Exception('Creation of premium apps is not implemented yet.');
       break;
       case 'External':
         $externalAppsRepositories = $this->main->config->getAsArray('externalAppsRepositories');
@@ -57,8 +57,8 @@ class Create extends \HubletoMain\Cli\Agent\Command
       case 'Community':
         if (count($appNamespaceParts) != 3) throw new \Exception('Community app namespace must have exactly 3 parts');
       break;
-      case 'Enterprise':
-        if (count($appNamespaceParts) != 3) throw new \Exception('Enterprise app namespace must have exactly 3 parts');
+      case 'Premium':
+        if (count($appNamespaceParts) != 3) throw new \Exception('Premium app namespace must have exactly 3 parts');
       break;
       case 'External':
         if (count($appNamespaceParts) != 4) throw new \Exception('External app namespace must have exactly 4 parts');
@@ -72,7 +72,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
         if (count($appNamespaceParts) != 3) throw new \Exception('Custom app namespace must have exactly 3 parts');
       break;
       default:
-        throw new \Exception('Only following types of apps are available: Community, Enterprise, External or Custom.');
+        throw new \Exception('Only following types of apps are available: Community, Premium, External or Custom.');
       break;
     }
 

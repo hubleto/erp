@@ -26,14 +26,6 @@ class Lead extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'leads/{%ID%}';
 
-  // public array $rolePermissions = [
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
-  // ];
-
   const STATUS_NEW = 1;
   const STATUS_IN_PROGRESS = 2;
   const STATUS_COMPLETED = 3;
@@ -97,9 +89,9 @@ class Lead extends \HubletoMain\Core\Models\Model
           // ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
       break;
-      case 'id_customer':
-        $description ->setExtendedProps(['urlAdd' => 'customers/add']);
-      break;
+      // case 'id_customer':
+      //   $description ->setExtendedProps(['urlAdd' => 'customers/add']);
+      // break;
     }
     return $description;
   }

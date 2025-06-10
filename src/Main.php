@@ -20,12 +20,12 @@ spl_autoload_register(function(string $class) {
     @include(__DIR__ . '/core/' . str_replace('HubletoMain/Core/', '', $class) . '.php');
   }
 
-  // enterprise
-  if (str_starts_with($class, 'HubletoApp/Enterprise/')) {
+  // premium
+  if (str_starts_with($class, 'HubletoApp/Premium/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
-    $dir = (string) $hubletoMain->config->getAsString('enterpriseRepoFolder');
+    $dir = (string) $hubletoMain->config->getAsString('premiumRepoFolder');
     if (!empty($dir)) {
-      @include($dir . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
+      @include($dir . '/' . str_replace('HubletoApp/Premium/', '', $class) . '.php');
     }
   }
 

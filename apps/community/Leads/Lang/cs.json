@@ -20,7 +20,8 @@
         "Completed": "Dokončeno",
         "Created by": "Vytvořeno",
         "Lead": "Vést",
-        "Contact": "Kontakt"
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
     },
     "Models\\Lead": {
         "Lead Identifier": "Identifikátor olova",

@@ -15,7 +15,8 @@
         "End time": "Ukončený čas",
         "All day": "Celý den",
         "Completed": "Dokončeno",
-        "Created by": "Vytvořeno"
+        "Created by": "Vytvořeno",
+        "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
     },
     "Controllers\\Boards\\EventsForToday": {
         "All-day": "Celý den",

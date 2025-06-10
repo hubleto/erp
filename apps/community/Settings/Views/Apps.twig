@@ -24,7 +24,7 @@
             <div>
               {{ app.manifest.nameTranslated ?? app.manifest.name }}
               {% if app.type == 1 %} <div class="badge badge-violet">Community</div> {% endif %}
-              {% if app.type == 2 %} <div class="badge badge-lime">Enterprise</div> {% endif %}
+              {% if app.type == 2 %} <div class="badge badge-lime">Premium</div> {% endif %}
               {% if app.type == 3 %} <div class="badge badge-yellow">External</div> {% endif %}
             </div>
             <i class="{{ app.manifest.icon }}"></i>
@@ -65,7 +65,7 @@
                   <span class="text">{{ translate('Install') }}</span>
                 </a>
               {% elseif not viewParams.main.isPremium %}
-                <div class="badge badge-warning">You can install Enterprise apps only in Premium account.</div>
+                <div class="badge badge-warning">You can install Premium apps only in Premium account.</div>
                 <a class="btn btn-primary" href="{{ config.accountUrl }}/cloud">
                   <span class="icon"><i class="fas fa-medal"></i></span>
                   <span class="text">{{ translate('Activate Premium account') }}</span>

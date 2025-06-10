@@ -9,7 +9,7 @@ class App {
   ];
 
   const APP_TYPE_COMMUNITY = 1;
-  const APP_TYPE_ENTERPRISE = 2;
+  const APP_TYPE_PREMIUM = 2;
   const APP_TYPE_EXTERNAL = 3;
 
   public \HubletoMain $main;
@@ -59,7 +59,7 @@ class App {
     else $this->manifest = [];
 
     if (str_starts_with($this->namespace, 'HubletoApp\\Community')) $this->manifest['appType'] = self::APP_TYPE_COMMUNITY;
-    if (str_starts_with($this->namespace, 'HubletoApp\\Enterprise')) $this->manifest['appType'] = self::APP_TYPE_ENTERPRISE;
+    if (str_starts_with($this->namespace, 'HubletoApp\\Premium')) $this->manifest['appType'] = self::APP_TYPE_PREMIUM;
     if (str_starts_with($this->namespace, 'HubletoApp\\External')) $this->manifest['appType'] = self::APP_TYPE_EXTERNAL;
 
 

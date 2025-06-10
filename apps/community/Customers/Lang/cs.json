@@ -17,7 +17,8 @@
         "Completed": "Dokončeno",
         "Created by": "Vytvořeno",
         "Customer": "Zákazník",
-        "Contact": "Kontakt"
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
     },
     "Models\\Customer": {
         "Name": "Jméno",

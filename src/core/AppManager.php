@@ -93,15 +93,15 @@ class AppManager
       }
     }
 
-    // enterprise apps
-    $enterpriseRepoFolder = $this->main->config->getAsString('enterpriseRepoFolder');
-    if (!empty($enterpriseRepoFolder)) {
-      foreach (scandir($enterpriseRepoFolder) as $appFolder) {
-        $manifestFile = $enterpriseRepoFolder . '/' . $appFolder . '/manifest.yaml';
+    // premium apps
+    $premiumRepoFolder = $this->main->config->getAsString('premiumRepoFolder');
+    if (!empty($premiumRepoFolder)) {
+      foreach (scandir($premiumRepoFolder) as $appFolder) {
+        $manifestFile = $premiumRepoFolder . '/' . $appFolder . '/manifest.yaml';
         if (@is_file($manifestFile)) {
           $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
-          $manifest['appType'] = \HubletoMain\Core\App::APP_TYPE_ENTERPRISE;
-          $appNamespaces['HubletoApp\\Enterprise\\' . $appFolder] = $manifest;
+          $manifest['appType'] = \HubletoMain\Core\App::APP_TYPE_PREMIUM;
+          $appNamespaces['HubletoApp\\Premium\\' . $appFolder] = $manifest;
         }
       }
     }

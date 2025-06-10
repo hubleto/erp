@@ -30,7 +30,7 @@ export default class FormCustomerExtraButtons extends TranslatedComponent<P, S> 
     if (R.id > 0) {
       return <>
         <button
-          className="btn btn-transparent"
+          className="btn btn-transparent w-full"
           onClick={() => { this.setState({showDeals: true}); }}
         >
           <span className="icon"><i className="fas fa-handshake"></i></span>

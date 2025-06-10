@@ -49,7 +49,7 @@ class Customer extends \HubletoMain\Core\Models\Model
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
-      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(0),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
       'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),

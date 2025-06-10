@@ -3,6 +3,7 @@
 namespace HubletoApp\Community\Dashboards\Models;
 
 use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Boolean;
 use ADIOS\Core\Db\Column\Varchar;
 use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\Lookup;
@@ -23,10 +24,11 @@ class Dashboard extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_owner' => (new Lookup($this, $this->translate("Owner"), User::class, 'CASCADE'))->setRequired(),
+      'id_owner' => (new Lookup($this, $this->translate("Owner"), User::class))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color')))->setRequired(),
+      'is_default' => (new Boolean($this, $this->translate('Is default'))),
     ]);
   }
 

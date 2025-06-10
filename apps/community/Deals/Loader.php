@@ -49,7 +49,7 @@ class Loader extends \HubletoMain\Core\App
 
     $dashboardsApp = $this->main->apps->community('Dashboards');
     if ($dashboardsApp) {
-      $dashboardsApp->addPanel(
+      $dashboardsApp->addBoard(
         $this,
         'Deal warnings',
         'deals/boards/deal-warnings'
@@ -58,7 +58,7 @@ class Loader extends \HubletoMain\Core\App
 
     $dashboardsApp = $this->main->apps->community('Dashboards');
     if ($dashboardsApp) {
-      $dashboardsApp->addPanel(
+      $dashboardsApp->addBoard(
         $this,
         'Most valuable deals',
         'deals/boards/most-valuable-deals'
@@ -67,7 +67,7 @@ class Loader extends \HubletoMain\Core\App
 
     $dashboardsApp = $this->main->apps->community('Dashboards');
     if ($dashboardsApp) {
-      $dashboardsApp->addPanel(
+      $dashboardsApp->addBoard(
         $this,
         'Deal value by result',
         'deals/boards/deal-value-by-result'

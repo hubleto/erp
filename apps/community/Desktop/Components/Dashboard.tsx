@@ -62,24 +62,36 @@ export default class DesktopDashboard extends Component<DesktopDashboardProps, D
     }
   }
 
+  renderPanel(panel: any, index: any) {
+    return <div key={index} className="card">
+      <div className="card-header">{panel.title}</div>
+      {panel.contentLoaded ? 
+        <div className="card-body" dangerouslySetInnerHTML={{__html: panel.content}}></div>
+      :
+        <div className="card-body">
+          <ProgressBar mode="indeterminate" style={{ height: '2em' }}></ProgressBar>
+        </div>
+      }
+    </div>
+  }
+
   render() {
     setTimeout(() => {
       globalThis.main.renderReactElements();
     }, 100);
+
+    const panels = this.props.panels;
+    const panelsLeft = Array.from(panels.slice(0, Math.ceil(panels.length / 2)));
+    const panelsRight = Array.from(panels.slice(Math.ceil(panels.length / 2)));
+
     return <>
-      <div className="grid md:grid-cols-2 gap-2">
-        {this.props.panels.map((panel: Panel, index: any) => {
-          return <div key={index} className="card">
-            <div className="card-header">{panel.title}</div>
-            {panel.contentLoaded ? 
-              <div className="card-body" dangerouslySetInnerHTML={{__html: panel.content}}></div>
-            :
-              <div className="card-body">
-                <ProgressBar mode="indeterminate" style={{ height: '2em' }}></ProgressBar>
-              </div>
-            }
-          </div>
-        })}
+      <div className="flex gap-2">
+        <div className="flex flex-col gap-2">
+          {panelsLeft.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
+        </div>
+        <div className="flex flex-col gap-2">
+          {panelsRight.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
+        </div>
       </div>
     </>
   }

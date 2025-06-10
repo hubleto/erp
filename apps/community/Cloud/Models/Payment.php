@@ -45,7 +45,7 @@ class Payment extends \HubletoMain\Core\Models\Model
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPE_ENUM_VALUES),
       'details' => (new Json($this, $this->translate('Details'))),
       'has_invoice' => (new Boolean($this, $this->translate('Has invoice'))),
-      'id_billing_account' => (new Lookup($this, $this->translate("Billing account"), BillingAccount::class, 'CASCADE')),
+      'id_billing_account' => (new Lookup($this, $this->translate("Billing account"), BillingAccount::class)),
       'uuid' => (new Varchar($this, $this->translate('UUID'))),
     ]);
   }

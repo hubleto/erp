@@ -17,8 +17,8 @@ class CustomerTag extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE'))->setRequired(),
-      'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class, 'CASCADE'))->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired(),
+      'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class))->setRequired(),
     ]);
   }
 

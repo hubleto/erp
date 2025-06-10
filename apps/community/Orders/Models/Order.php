@@ -31,7 +31,7 @@ class Order extends \HubletoMain\Core\Models\Model
       'order_number' => (new Varchar($this, $this->translate('Order number')))->setCssClass('badge badge-info'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold'),
-      'id_state' => (new Lookup($this, $this->translate('State'), State::class, 'CASCADE')),
+      'id_state' => (new Lookup($this, $this->translate('State'), State::class)),
       'price' => (new Decimal($this, $this->translate('Price')))->setReadonly()->setRequired(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_order' => (new Date($this, $this->translate('Order date')))->setRequired(),

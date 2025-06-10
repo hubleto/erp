@@ -17,7 +17,7 @@ class DealTag extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class, 'CASCADE'))->setRequired(),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setRequired(),
       'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class))->setRequired(),
     ]);
   }

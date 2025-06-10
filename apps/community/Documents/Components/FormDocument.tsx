@@ -47,25 +47,23 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
 
     const linkExists = this.state.description.defaultValues?.creatingForModel ? false : true
 
-    return (
-      <>
-        <div className='card mt-4'>
-          <div className='card-body'>
-              {this.inputWrapper('id_folder', {readonly: this.props.readonly})}
-              {this.inputWrapper('name', {readonly: this.props.readonly})}
-              {this.inputWrapper('file', {readonly: this.props.readonly})}
-              {this.inputWrapper('hyperlink', {readonly: this.props.readonly})}
-              {R.origin_link && linkExists ?
-                <a href={this.state.record.origin_link} className='btn brn-primary mt-2'>
-                  <span className='icon'><i className='fas fa-link'></i></span>
-                  <span className='text'>Go to origin entry</span>
-                </a>
-              : <></>
-              }
-          </div>
+    return <>
+      <div className='card mt-4'>
+        <div className='card-body'>
+          {this.inputWrapper('id_folder')}
+          {this.inputWrapper('name', {cssClass: 'text-2xl text-primary'})}
+          {this.inputWrapper('file')}
+          {this.inputWrapper('hyperlink')}
+          {R.origin_link && linkExists ?
+            <a href={this.state.record.origin_link} className='btn brn-primary mt-2'>
+              <span className='icon'><i className='fas fa-link'></i></span>
+              <span className='text'>Go to origin entry</span>
+            </a>
+          : <></>
+          }
         </div>
-      </>
-    );
+      </div>
+    </>;
   }
 }
 

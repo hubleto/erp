@@ -22,7 +22,7 @@ class LeadProduct extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired(),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate("CASCADE")->setFkOnDelete("SET NULL")->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),

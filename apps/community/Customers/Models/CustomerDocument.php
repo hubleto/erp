@@ -19,7 +19,7 @@ class CustomerDocument extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_lookup' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
-      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, 'CASCADE'))->setRequired(),
+      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class))->setRequired(),
     ]);
   }
 

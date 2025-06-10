@@ -20,7 +20,7 @@ class BillingAccount extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_customer' => (new Lookup($this, $this->translate("Customer"), Customer::class, 'CASCADE'))->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate("Customer"), Customer::class))->setRequired(),
       'description' => (new Varchar($this, $this->translate("Description")))->setRequired(),
     ]);
   }

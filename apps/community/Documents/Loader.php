@@ -10,7 +10,7 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^documents\/?$/' => Controllers\Table::class,
+      '/^documents\/?$/' => Controllers\Browse::class,
       '/^documents\/browse\/?$/' => Controllers\Browse::class,
       '/^documents\/list\/?$/' => Controllers\Table::class,
       '/^documents\/api\/get-folder-content\/?$/' => Controllers\Api\GetFolderContent::class,

@@ -22,7 +22,7 @@ class DealProduct extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class, 'CASCADE'))->setRequired(),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setRequired(),
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate("CASCADE")->setFkOnDelete("SET NULL")->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit Price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),

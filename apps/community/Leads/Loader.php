@@ -44,7 +44,7 @@ class Loader extends \HubletoMain\Core\App
 
     $dashboardsApp = $this->main->apps->community('Dashboards');
     if ($dashboardsApp) {
-      $dashboardsApp->addPanel(
+      $dashboardsApp->addBoard(
         $this,
         'Lead value by score',
         'leads/boards/lead-value-by-score'

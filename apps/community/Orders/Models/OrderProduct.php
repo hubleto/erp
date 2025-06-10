@@ -22,7 +22,7 @@ class OrderProduct extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class, 'CASCADE'))->setRequired(),
+      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'unit_price' => (new Decimal($this, $this->translate('Unit price')))->setRequired(),

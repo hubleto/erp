@@ -19,7 +19,7 @@ class Panel extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class, 'CASCADE'))->setRequired(),
+      'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'board_url_slug' => (new Varchar($this, $this->translate('Board')))->setRequired(),
       'configuration' => (new Json($this, $this->translate('Configuration'))),

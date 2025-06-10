@@ -18,8 +18,8 @@ class CustomerActivity extends \HubletoApp\Community\Calendar\Models\Activity
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class, 'CASCADE'))->setRequired(),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class, 'CASCADE')),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired(),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
     ]);
   }
 

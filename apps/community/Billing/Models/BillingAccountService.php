@@ -18,8 +18,8 @@ class BillingAccountService extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_billing_account' => (new Lookup($this, $this->translate("Billing Account"), BillingAccount::class, 'CASCADE'))->setRequired(),
-      'id_service' => (new Lookup($this, $this->translate("Service"), Service::class, 'CASCADE'))->setRequired(),
+      'id_billing_account' => (new Lookup($this, $this->translate("Billing Account"), BillingAccount::class))->setRequired(),
+      'id_service' => (new Lookup($this, $this->translate("Service"), Service::class))->setRequired(),
     ]);
   }
 

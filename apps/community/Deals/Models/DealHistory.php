@@ -20,7 +20,7 @@ class DealHistory extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'change_date' => (new Date($this, $this->translate('Change Date')))->setRequired(),
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class, 'CASCADE'))->setRequired(),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setRequired(),
       'description' => (new Varchar($this, $this->translate('Description')))->setRequired(),
     ]);
   }

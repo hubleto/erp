@@ -20,7 +20,7 @@ class LeadHistory extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'change_date' => (new Date($this, $this->translate('Change Date')))->setRequired(),
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class, 'CASCADE'))->setRequired(),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
       'description' => (new Varchar($this, $this->translate('Description')))->setRequired(),
     ]);
   }

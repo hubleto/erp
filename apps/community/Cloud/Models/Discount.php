@@ -19,7 +19,7 @@ class Discount extends \HubletoMain\Core\Models\Model
       'month' => (new Integer($this, $this->translate('Month')))->setRequired(),
       'discount_percent' => (new Integer($this, $this->translate('Discount')))->setUnit('%'),
       'notes' => (new Varchar($this, $this->translate('Notes'))),
-      'id_billing_account' => (new Lookup($this, $this->translate("Billing account"), BillingAccount::class, 'CASCADE')),
+      'id_billing_account' => (new Lookup($this, $this->translate("Billing account"), BillingAccount::class)),
     ]);
   }
 

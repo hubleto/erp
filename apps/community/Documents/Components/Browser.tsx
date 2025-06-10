@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import request from "adios/Request";
 import Table, { TableProps, TableState } from 'adios/Table';
-import { FormProps } from 'adios/Form';
+import Form, { FormProps } from 'adios/Form';
 import FormDocument from './FormDocument';
 import { ProgressBar } from 'primereact/progressbar';
+import ModalForm from "adios/ModalForm";
 
 interface BrowserProps extends TableProps {
   folderUid?: string,
@@ -15,6 +16,7 @@ interface BrowserState extends TableState {
   documentUid?: string,
   folderContent: any,
   path: Array<any>,
+  showFolderProperties: number,
 }
 
 export default class Browser extends Table<BrowserProps, BrowserState> {
@@ -41,6 +43,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
       documentUid: this.props.documentUid,
       folderContent: null,
       path: this.props.path ?? [],
+      showFolderProperties: 0,
     };
   }
 
@@ -55,7 +58,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
       request.get(
         '',
         {
-          route: 'documents/api/get-folder-content',
+        route: 'documents/api/get-folder-content',
           folderUid: this.state.folderUid,
           fulltextSearch: this.state.fulltextSearch,
         },
@@ -77,6 +80,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
 
   renderForm(): JSX.Element {
     let formProps: FormProps = this.getFormProps();
+    formProps.customEndpointParams = {idFolder: this.state.folderContent.folder.id};
     return <FormDocument {...formProps}/>;
   }
 
@@ -85,7 +89,14 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
       recordId: 0,
       folderUid: newFolderUid,
       path: newPath,
+      showFolderProperties: 0,
     } as BrowserState, () => { this.loadData(); });
+  }
+
+  createSubFolder() {
+    this.setState({
+      showFolderProperties: -1
+    });
   }
 
   render(): JSX.Element {
@@ -103,37 +114,37 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
           <span className="icon"><i className="fas fa-home"></i></span>
         </button>
         {this.state.path.map((item, index) => {
+          const isLast = index == this.state.path.length - 1;
+
           return <button
             key={index}
-            className="btn btn-info text-xl"
+            className={"btn text-xl " + (isLast ? "btn-info" : "btn-cancel")}
             onClick={() => {
-              let newPath: Array<any> = [];
-              for (let i = 0; i <= index; i++) newPath.push(this.state.path[i]);
-              this.changeFolder(item.uid, newPath);
+              if (isLast) {
+                this.setState({showFolderProperties: this.state.folderContent.folder.id});
+              } else {
+                let newPath: Array<any> = [];
+                for (let i = 0; i <= index; i++) newPath.push(this.state.path[i]);
+                this.changeFolder(item.uid, newPath);
+              }
             }}
           >
             <span className="text">{item.name}</span>
           </button>;
         })}
+        <button
+          className="btn btn-transparent text-xl"
+          onClick={() => { this.createSubFolder(); }}
+        >
+          <span className="icon"><i className="fas fa-plus"></i></span>
+          <span className="text">{this.translate('Add folder')}</span>
+        </button>
       </div>
       <div className="flex gap-2 mt-2">
-        {/* {this.state.folderUid == '_ROOT_' ? null : <button
-          className="btn btn-square btn-transparent btn-yellow-outline w-32"
-          onClick={() => {
-            let newFolderUid = this.state.folderContent.folder.PARENT_FOLDER.uid;
-            let newPath = this.state.path;
-            newPath.pop();
-            newPath.push(newFolderUid);
-              this.changeFolder(newFolderUid, newPath);
-          }}
-        >
-          <span className="icon"><i className="fas fa-folder"></i></span>
-          <span className="text">..</span>
-        </button>} */}
         {this.state.folderContent.subFolders ? this.state.folderContent.subFolders.map((item, index) => {
           return <button
             key={index}
-            className="btn btn-square btn-transparent btn-yellow-outline w-32"
+            className="btn btn-square btn-light w-32"
             onClick={() => {
               let newFolderUid = item.uid;
               let newPath = this.state.path;
@@ -148,7 +159,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
         {this.state.folderContent.documents ? this.state.folderContent.documents.map((item, index) => {
           return <button
             key={index}
-            className="btn btn-square btn-transparent"
+            className="btn btn-square btn-primary-outline"
             onClick={() => {
               this.setState({ recordId: item.id });
             }}
@@ -157,8 +168,34 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
             <span className="text">{item.name ?? ''}</span>
           </button>
         }) : null}
+        <button
+          className="btn btn-square btn-transparent"
+          onClick={() => {
+            this.setState({ recordId: -1 });
+          }}
+        >
+          <span className="icon"><i className="fas fa-plus"></i></span>
+          <span className="text">{this.translate('Add document')}</span>
+        </button>
       </div>
       {this.renderFormModal()}
+      {this.state.showFolderProperties ?
+        <ModalForm
+          uid='create_sub_folder_modal'
+          isOpen={true}
+          type='right'
+        >
+          <Form
+            uid='create_sub_folder_form'
+            model='HubletoApp/Community/Documents/Models/Folder'
+            customEndpointParams={{idParentFolder: this.state.folderContent.folder.id}}
+            id={this.state.showFolderProperties}
+            showInModal={true}
+            showInModalSimple={true}
+            onClose={() => { this.setState({showFolderProperties: 0}); }}
+          />
+        </ModalForm>
+      : null}
     </>
   }
 }

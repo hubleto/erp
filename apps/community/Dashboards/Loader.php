@@ -7,7 +7,7 @@ class Loader extends \HubletoMain\Core\App
 
   // public bool $hasCustomSettings = true;
 
-  protected array $panels = [];
+  protected array $boards = [];
 
   public function __construct(\HubletoMain $main)
   {
@@ -39,14 +39,14 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function getPanels(): array
+  public function getBoards(): array
   {
-    return $this->panels;
+    return $this->boards;
   }
 
-  public function addPanel(\HubletoMain\Core\App $app, string $title, string $boardUrlSlug): void
+  public function addBoard(\HubletoMain\Core\App $app, string $title, string $boardUrlSlug): void
   {
-    $this->panels[$boardUrlSlug] = [
+    $this->boards[$boardUrlSlug] = [
       'app' => $app,
       'title' => $title,
       'boardUrlSlug' => $boardUrlSlug,
@@ -58,12 +58,17 @@ class Loader extends \HubletoMain\Core\App
     $mDashboard = new Models\Dashboard($this->main);
     $mPanel = new Models\Panel($this->main);
 
-    $dashboard = $mDashboard->record->recordCreate([ 'id_owner' => 1, 'title' => 'All panels', 'slug' => 'all-panels' ]);
-    foreach ($this->panels as $panel) {
+    $dashboard = $mDashboard->record->recordCreate([
+      'id_owner' => 1,
+      'title' => 'All boards',
+      'slug' => 'all-boards',
+      'is_default' => true,
+    ]);
+    foreach ($this->boards as $board) {
       $mPanel->record->recordCreate([
         'id_dashboard' => $dashboard['id'],
-        'title' => $panel['title'],
-        'board_url_slug' => $panel['boardUrlSlug'],
+        'title' => $board['title'],
+        'board_url_slug' => $board['boardUrlSlug'],
         'configuration' => '',
       ]);
     }

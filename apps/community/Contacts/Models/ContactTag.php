@@ -17,8 +17,8 @@ class ContactTag extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class, 'CASCADE'))->setRequired(),
-      'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class, 'CASCADE'))->setRequired(),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setRequired(),
+      'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class))->setRequired(),
     ]);
   }
 

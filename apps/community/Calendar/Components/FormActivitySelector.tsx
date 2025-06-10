@@ -1,4 +1,5 @@
 import ModalForm from 'adios/ModalForm';
+import moment from 'moment';
 import React, { Component } from 'react';
 
 export interface FormActivitySelectorProps {
@@ -47,12 +48,20 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
                   className='btn btn-transparent btn-large'
                   style={{borderLeft: '3em solid ' + item.color}}
                   onClick={() => {
+                    //calculate half an hour from time_start
+                    if (this.props.clickConfig?.time && this.props.clickConfig?.date) {
+                      var momentDateTime = moment(`${this.props.clickConfig?.date} ${this.props.clickConfig?.time}`, "YYYY-MM-DD HH:mm:ss");
+                      var newMoment = momentDateTime.add(30, 'minutes');
+                    }
+
                     this.setState({formSelected: globalThis.main.renderReactElement(item.formComponent,
                       {
                         description: {
                           defaultValues: {
                             date_start: this.props.clickConfig?.date,
-                            time_start: this.props.clickConfig?.time
+                            time_start: this.props.clickConfig?.time,
+                            date_end: this.props.clickConfig?.date,
+                            time_end: newMoment?.format("HH:mm:ss"),
                           }
                         },
                         id: -1,

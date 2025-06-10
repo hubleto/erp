@@ -71,57 +71,81 @@
         "Contact Persons": "Kontaktpersonen"
     },
     "manifest": {
-        "Customers": "",
-        "Free customer management and addressbook.": ""
+        "Customers": "Kunden",
+        "Free customer management and addressbook.": "Kostenloses Kundenmanagement und Adressbuch."
     },
     "root": {
-        "Customer Tags": ""
+        "Customer Tags": "Kunden -Tags"
     },
     "Models\\CustomerActivity": {
-        "Customer": "",
-        "Contact": "",
-        "Activity type": "",
-        "Subject": "",
+        "Customer": "Kunde",
+        "Contact": "Kontakt",
+        "Activity type": "Aktivitätstyp",
+        "Subject": "Thema",
         "Start Date": "",
         "Start Time": "",
         "End Date": "",
         "End Time": "",
-        "All day": "",
-        "Completed": "",
-        "Created by": ""
+        "All day": "Den ganzen Tag",
+        "Completed": "Vollendet",
+        "Created by": "Erstellt von",
+        "Start date": "Startdatum",
+        "Start time": "Startzeit",
+        "End date": "Enddatum",
+        "End time": "Endzeit"
     },
     "Controllers\\Customers": {
-        "Customers": ""
+        "Customers": "Kunden"
     },
     "Models\\Customer": {
-        "Name": "",
-        "Street Line 1": "",
-        "Street Line 2": "",
-        "Region": "",
-        "City": "",
-        "Postal Code": "",
-        "Country": "",
-        "VAT ID": "",
-        "Customer ID": "",
-        "Tax ID": "",
-        "Notes": "",
-        "Date Created": "",
-        "Active": "",
-        "Owner": "",
-        "Responsible": "",
-        "Link to shared folder (online storage) with related documents": "",
-        "Add Customer": ""
+        "Name": "Name",
+        "Street Line 1": "Straßenlinie 1",
+        "Street Line 2": "Street Line 2",
+        "Region": "Region",
+        "City": "Stadt",
+        "Postal Code": "Postleitzahl",
+        "Country": "Land",
+        "VAT ID": "Mehrwertsteuer id",
+        "Customer ID": "Kundenausweis",
+        "Tax ID": "Steuer -ID",
+        "Notes": "Notizen",
+        "Date Created": "Datum erstellt",
+        "Active": "Aktiv",
+        "Owner": "Eigentümer",
+        "Responsible": "Verantwortlich",
+        "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
+        "Add Customer": "Kunden hinzufügen"
     },
     "Models\\CustomerDocument": {
-        "Customer": "",
-        "Document": ""
+        "Customer": "Kunde",
+        "Document": "Dokumentieren"
     },
     "Models\\CustomerTag": {
-        "Customer": "",
-        "Tag": ""
+        "Customer": "Kunde",
+        "Tag": "Etikett"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": ""
+        "Name": "Name",
+        "Color": "Farbe"
+    },
+    "Components\\FormCustomer": {
+        "Enter = Log completed activity": "Geben Sie = log abgeschlossene Aktivität ein",
+        "Type recent activity here": "Geben Sie hier die aktuelle Aktivität ein",
+        "Shift+Enter = Schedule": "Shift+ENTER = Zeitplan",
+        "Not completed yet": "Noch nicht fertig",
+        "Most recent activities": "Letzte Aktivitäten",
+        "Customer": "Kunde",
+        "Contacts": "Kontakte",
+        "Show on map": "Auf Karte anzeigen",
+        "Add contact": "Kontakt hinzufügen",
+        "First name": "Vorname",
+        "Last name": "Nachname",
+        "Phone number": "Telefonnummer",
+        "Email": "E-Mail",
+        "Primary Contact": "Hauptkontakt",
+        "Calendar": "Kalender",
+        "Tags": "Tags",
+        "Documents": "Unterlagen",
+        "Local documents": "Lokale Dokumente"
     }
 }

@@ -15,11 +15,14 @@
         "End time": "Čas konca",
         "All day": "Celodenná",
         "Completed": "Ukončená",
-        "Created by": "Vytvoril"
+        "Created by": "Vytvoril",
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
     },
     "Controllers\\Boards\\EventsForToday": {
         "Open event details": "Zobraziť podrobnosti",
-        "All-day": "Celodenná"
+        "All-day": "Celodenná",
+        "events for tomorrow": "Udalosti na zajtra",
+        "events later": "Udalosti neskôr"
     },
     "root": {
         "Events for today": "Dnešné udalosti"

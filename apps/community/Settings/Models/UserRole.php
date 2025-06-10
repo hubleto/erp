@@ -27,9 +27,9 @@ class UserRole extends \HubletoMain\Core\Models\Model
   public string $recordManagerClass = RecordManagers\UserRole::class;
   public ?string $lookupSqlValue = '{%TABLE%}.role';
 
-  public array $relations = [
-    'PERMISSIONS' => [ self::HAS_MANY, RolePermission::class, 'id_role', 'id'],
-  ];
+  // public array $relations = [
+  //   'PERMISSIONS' => [ self::HAS_MANY, RolePermission::class, 'id_role', 'id'],
+  // ];
 
   public function describeColumns(): array
   {

@@ -13,8 +13,9 @@ class User extends \ADIOS\Models\User
     'fr' => 'Francais',
     'es' => 'Español',
     'sk' => 'Slovensky',
-    'cz' => 'Česky',
+    'cs' => 'Česky',
     'pl' => 'Polski',
+    'ro' => 'Română',
   ];
 
   public string $table = 'users';
@@ -23,13 +24,7 @@ class User extends \ADIOS\Models\User
 
   public string $translationContext = 'HubletoApp\\Community\\Settings\\Loader::Models\\User';
   public string $permission = 'HubletoApp/Community/Settings/Loader::Models/User';
-  public array $rolePermissions = [
-    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ false, true, false, false ],
-    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ false, true, false, false ],
-    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ false, true, false, false ],
-    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ false, true, false, false ],
-    // \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, true, false, false ],
-  ];
+  public array $rolePermissions = [ ];
 
   public function describeColumns(): array
   {
@@ -47,6 +42,7 @@ class User extends \ADIOS\Models\User
   {
     return $this->record
       ->with('ROLES')
+      ->with('TEAMS')
       ->with('DEFAULT_COMPANY')
       ->where('id', $idUser)
       ->where('is_active', '<>', 0)
@@ -89,6 +85,7 @@ class User extends \ADIOS\Models\User
       'id_default_company' => $description->columns['id_default_company'],
       'is_active' => $description->columns['is_active'],
       'roles' => (new Varchar($this, $this->translate('Roles'))),
+      'teams' => (new Varchar($this, $this->translate('Teams'))),
     ];
 
     return $description;

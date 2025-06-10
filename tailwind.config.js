@@ -6,7 +6,7 @@ module.exports = {
     "./apps/**/*.{php,html,js,twig,tsx}",
     "./vendor/wai-blue/adios/**/*.{tsx,twig}",
     "./vendor/wai-blue/adios/node_modules/primereact/**/*.{js,ts,jsx,tsx}",
-    "../enterprise/**/*.{php,html,js,twig,tsx}",
+    "../premium/**/*.{php,html,js,twig,tsx}",
   ],
   safelist: [
     'adios-lookup__indicator',

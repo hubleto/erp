@@ -8,7 +8,7 @@
         "Active users": "Aktívni používatelia",
         "Paid apps": "Platené aplikácie",
         "Premium expected": "Premium účet vyžadovaný",
-        "Log datetime": ""
+        "Log datetime": "Denník DateTime"
     },
     "Models\\Credit": {
         "Recalculated": "Dátum",
@@ -66,5 +66,19 @@
     "root": {
         "Free trial expires in": "Skúšobná prevádzka skončí o",
         "days": "dní"
+    },
+    "Models\\BillingAccount": {
+        "Name": "Pomenovať",
+        "Phone": "Telefonovať",
+        "E-mail": "E-mail",
+        "Tax ID": "Daňový ID",
+        "VAT ID": "ID DPH",
+        "Street, line 1": "Ulica, riadok 1",
+        "Street, line 2": "Ulica, riadok 2",
+        "ZIP": "Zips",
+        "City": "Mesto",
+        "Country": "Krajina",
+        "Is active": "Je aktívny",
+        "Created": "Vytvorený"
     }
 }

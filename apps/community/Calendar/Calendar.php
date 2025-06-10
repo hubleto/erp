@@ -15,7 +15,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
   {
     $mActivity = new Activity($this->main);
 
-    $activities = $mActivity->record
+    $activities = $mActivity->record->prepareReadQuery()
       ->select("activities.*", "activity_types.color", "activity_types.name as activity_type")
       ->leftJoin("activity_types", "activity_types.id", "=", "activities.id_activity_type")
       ->where("date_start", ">=", $dateStart)

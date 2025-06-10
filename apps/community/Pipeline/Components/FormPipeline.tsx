@@ -89,8 +89,8 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
               <a
                 className="btn btn-add-outline mb-2"
                 onClick={() => {
-                  if (!R.PIPELINE_STEPS) R.PIPELINE_STEPS = [];
-                  R.PIPELINE_STEPS.push({
+                  if (!R.STEPS) R.STEPS = [];
+                  R.STEPS.push({
                     id_pipeline: { _useMasterRecordId_: true },
                   });
                   this.setState({ record: R, isInlineEditing: true});
@@ -105,12 +105,12 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
                 uid={this.props.uid + "_table_pipeline_steps_input"}
                 context="Hello World"
                 descriptionSource="props"
-                data={{ data: R.PIPELINE_STEPS }}
+                data={{ data: R.STEPS }}
                 isUsedAsInput={true}
                 isInlineEditing={this.state.isInlineEditing}
                 onRowClick={() => this.setState({isInlineEditing: true})}
                 onChange={(table: TablePipelineSteps) => {
-                  this.updateRecord({ PIPELINE_STEPS: table.state.data?.data });
+                  this.updateRecord({ STEPS: table.state.data?.data });
                 }}
                 description={{
                   ui: {

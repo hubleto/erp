@@ -11,7 +11,7 @@ class Pipeline extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
-    'PIPELINE_STEPS' => [ self::HAS_MANY, PipelineStep::class, 'id_pipeline', 'id' ]
+    'STEPS' => [ self::HAS_MANY, PipelineStep::class, 'id_pipeline', 'id' ]
   ];
 
   public function describeColumns(): array

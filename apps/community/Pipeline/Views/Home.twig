@@ -80,7 +80,7 @@
     </div>
 
     <div class="flex flex-col items-stretch md:flex-row justify-start gap-2 overflow-auto">
-      {% for step in viewParams.pipeline.PIPELINE_STEPS %}
+      {% for step in viewParams.pipeline.STEPS %}
 
         {# Step Containter #}
         <div class="card w-full min-w-[280px]">
@@ -128,7 +128,7 @@
               target="_blank"
             >
               <span class="icon"><i class="fas fa-add"></i></span>
-              <span class="text">Add deal</span>
+              <span class="text">{{ translate('Add deal') }}</span>
             </a>
           </div>
         </div>

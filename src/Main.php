@@ -20,12 +20,12 @@ spl_autoload_register(function(string $class) {
     @include(__DIR__ . '/core/' . str_replace('HubletoMain/Core/', '', $class) . '.php');
   }
 
-  // enterprise
-  if (str_starts_with($class, 'HubletoApp/Enterprise/')) {
+  // premium
+  if (str_starts_with($class, 'HubletoApp/Premium/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
-    $dir = (string) $hubletoMain->config->getAsString('enterpriseRepoFolder');
+    $dir = (string) $hubletoMain->config->getAsString('premiumRepoFolder');
     if (!empty($dir)) {
-      @include($dir . '/' . str_replace('HubletoApp/Enterprise/', '', $class) . '.php');
+      @include($dir . '/' . str_replace('HubletoApp/Premium/', '', $class) . '.php');
     }
   }
 
@@ -186,6 +186,32 @@ class HubletoMain extends \ADIOS\Core\Loader
   public function onBeforeRender(): void
   {
     $this->apps->onBeforeRender();
+  }
+
+  /**
+  * @return array|array<string, array<string, string>>
+  */
+  public static function addToDictionary(string $language, string $contextInner, string $string): void
+  {
+
+    $dictFilename = static::getDictionaryFilename($language);
+
+    $dict = static::loadDictionary($language);
+
+    $main = \ADIOS\Core\Helper::getGlobalApp();
+
+    if ($main->config->getAsBool('autoTranslate')) {
+      $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
+      $tr->setSource('en'); // Translate from
+      $tr->setTarget($language); // Translate to
+      $dict[$contextInner][$string] = $tr->translate($string);
+    } else {
+      $dict[$contextInner][$string] = '';
+    }
+
+
+    @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
   }
 
 }

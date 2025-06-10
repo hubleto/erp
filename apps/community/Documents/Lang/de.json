@@ -3,19 +3,27 @@
         "Documents": "Dokumente"
     },
     "manifest": {
-        "Documents": "",
-        "Free document management.": ""
+        "Documents": "Unterlagen",
+        "Free document management.": "Kostenlose Dokumentverwaltung."
     },
     "root": {
-        "Browse": "",
-        "List": ""
+        "Browse": "Durchsuchen",
+        "List": "Liste"
     },
     "Models\\Document": {
-        "Uid": "",
-        "Folder": "",
-        "Document name": "",
-        "File": "",
-        "File Link": "",
-        "Origin Link": ""
+        "Uid": "Uid",
+        "Folder": "Ordner",
+        "Document name": "Dokumentname",
+        "File": "Datei",
+        "File Link": "Dateilink",
+        "Origin Link": "Ursprungslink"
+    },
+    "Controllers\\Table": {
+        "Documents": "Unterlagen"
+    },
+    "Models\\Folder": {
+        "Uid": "Uid",
+        "Parent folder": "Elternordner",
+        "Folder name": "Ordner Name"
     }
 }

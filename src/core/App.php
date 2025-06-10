@@ -9,7 +9,7 @@ class App {
   ];
 
   const APP_TYPE_COMMUNITY = 1;
-  const APP_TYPE_ENTERPRISE = 2;
+  const APP_TYPE_PREMIUM = 2;
   const APP_TYPE_EXTERNAL = 3;
 
   public \HubletoMain $main;
@@ -59,7 +59,7 @@ class App {
     else $this->manifest = [];
 
     if (str_starts_with($this->namespace, 'HubletoApp\\Community')) $this->manifest['appType'] = self::APP_TYPE_COMMUNITY;
-    if (str_starts_with($this->namespace, 'HubletoApp\\Enterprise')) $this->manifest['appType'] = self::APP_TYPE_ENTERPRISE;
+    if (str_starts_with($this->namespace, 'HubletoApp\\Premium')) $this->manifest['appType'] = self::APP_TYPE_PREMIUM;
     if (str_starts_with($this->namespace, 'HubletoApp\\External')) $this->manifest['appType'] = self::APP_TYPE_EXTERNAL;
 
 
@@ -157,11 +157,21 @@ class App {
   public static function addToDictionary(string $language, string $contextInner, string $string): void
   {
     $dictFilename = static::getDictionaryFilename($language);
-    if (is_file($dictFilename)) {
-      $dict = static::loadDictionary($language);
+
+    $dict = static::loadDictionary($language);
+
+    $main = \ADIOS\Core\Helper::getGlobalApp();
+
+    if ($main->config->getAsBool('autoTranslate')) {
+      $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
+      $tr->setSource('en'); // Translate from
+      $tr->setTarget($language); // Translate to
+      $dict[$contextInner][$string] = $tr->translate($string);
+    } else {
       $dict[$contextInner][$string] = '';
-      @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
+
+    @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
   }
 
   public function translate(string $string, array $vars = [], string $context = 'root'): string

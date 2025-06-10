@@ -32,13 +32,10 @@ export default class TableTeams extends Table<TableTeamsProps, TableTeamsState> 
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
-    if (columnName == "users") {
-      console.log(data);
-      return <>
-        {data.MEMBERS.map((member, key) => {
-          return <div className='badge' key={data.id + '-members-' + key}>{member.MEMBER.email}</div>;
-        })}
-      </>;
+    if (columnName == "members") {
+      return data.MEMBERS.map((member, key) => {
+        return <div className='badge' key={data.id + '-members-' + key}>{member.MEMBER.email}</div>;
+      });
     } else {
       return super.renderCell(columnName, column, data, options);
     }

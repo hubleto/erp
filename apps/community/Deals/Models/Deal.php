@@ -26,16 +26,8 @@ class Deal extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'deals';
   public string $recordManagerClass = RecordManagers\Deal::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.title';
+  public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'deals/{%ID%}';
-
-  // public array $rolePermissions = [
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER => [ true, true, true, true ],
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER => [ true, true, true, true ],
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE => [ true, true, true, false ],
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT => [ true, true, false, false ],
-  //   \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL => [ false, false, false, false ],
-  // ];
 
   const RESULT_PENDING = 1;
   const RESULT_WON = 2;
@@ -68,8 +60,8 @@ class Deal extends \HubletoMain\Core\Models\Model
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
-      'price' => (new Decimal($this, $this->translate('Price'))),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'price' => (new Decimal($this, $this->translate('Price')))->setDecimals(2),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class)),
@@ -134,7 +126,7 @@ class Deal extends \HubletoMain\Core\Models\Model
         "canDelete" => $this->main->permissions->granted($this->fullName . ':Delete')
       ];
     } else {
-      $description->ui['addButtonText'] = 'Add Deal';
+      $description->ui['addButtonText'] = $this->translate('Add Deal');
     }
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;

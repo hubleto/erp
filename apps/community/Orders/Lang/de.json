@@ -1,0 +1,51 @@
+{
+    "manifest": {
+        "Orders": "Bestellungen",
+        "Free order managment.": "Kostenloses Bestellmanagement."
+    },
+    "root": {
+        "Order states": "Bestellstaaten"
+    },
+    "Controllers\\Orders": {
+        "Orders": "Bestellungen"
+    },
+    "Models\\Order": {
+        "Order number": "Bestellnummer",
+        "Customer": "Kunde",
+        "Title": "Titel",
+        "State": "Zustand",
+        "Price": "Preis",
+        "Currency": "Währung",
+        "Order date": "Bestelldatum",
+        "Required delivery date": "Erforderlicher Liefertermin",
+        "Shipping information": "Versandinformationen",
+        "Notes": "Notizen",
+        "Add order": "Bestellung hinzufügen"
+    },
+    "Models\\State": {
+        "Title": "Titel",
+        "Code": "Code",
+        "Color": "Farbe"
+    },
+    "Models\\OrderProduct": {
+        "Order": "Befehl",
+        "Title": "Titel",
+        "Product": "Produkt",
+        "Unit price": "Stückpreis",
+        "Amount": "Menge",
+        "Discount": "Rabatt",
+        "Vat": "Mehrwertsteuer",
+        "Add product": "Produkt hinzufügen"
+    },
+    "Models\\History": {
+        "Order": "Befehl",
+        "Short Description": "Kurzbeschreibung",
+        "Long Description": "Lange Beschreibung",
+        "Date Time": "Datum Uhrzeit"
+    },
+    "Components\\FormOrder": {
+        "Order": "Befehl",
+        "Title": "Titel",
+        "History": "Geschichte"
+    }
+}

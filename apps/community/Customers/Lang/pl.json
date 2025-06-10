@@ -64,11 +64,65 @@
         "Value": "Wartość"
     },
     "controllers.customers": {
-        "Customers": "Klienci",
         "Customers": "Firmy"
     },
     "controllers.persons": {
         "Customers": "Klienci",
         "Contact Persons": "Osoby kontaktowe"
+    },
+    "manifest": {
+        "Customers": "Klienci",
+        "Free customer management and addressbook.": "Bezpłatne zarządzanie klientami i książka adresowa."
+    },
+    "root": {
+        "Customer Tags": "Tagi klienta"
+    },
+    "Models\\CustomerActivity": {
+        "Subject": "Temat",
+        "Activity type": "Typ aktywności",
+        "Start date": "Data rozpoczęcia",
+        "Start time": "Czas rozpoczęcia",
+        "End date": "Data zakończenia",
+        "End time": "Czas zakończenia",
+        "All day": "Cały dzień",
+        "Completed": "Zakończony",
+        "Created by": "Stworzone przez",
+        "Customer": "Klient",
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Minuty spotkań (link)"
+    },
+    "Controllers\\Customers": {
+        "Customers": "Klienci"
+    },
+    "Models\\Customer": {
+        "Name": "Nazwa",
+        "Street Line 1": "Linia uliczna 1",
+        "Street Line 2": "Linia uliczna 2",
+        "Region": "Region",
+        "City": "Miasto",
+        "Postal Code": "Kod pocztowy",
+        "Country": "Kraj",
+        "VAT ID": "VAT ID",
+        "Customer ID": "Identyfikator klienta",
+        "Tax ID": "Identyfikator podatkowy",
+        "Notes": "Notatki",
+        "Date Created": "Utworzona data",
+        "Active": "Aktywny",
+        "Owner": "Właściciel",
+        "Responsible": "Odpowiedzialny",
+        "Link to shared folder (online storage) with related documents": "Link do folderu udostępnionego (przechowywanie online) z powiązanymi dokumentami",
+        "Add Customer": "Dodaj klienta"
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "Klient",
+        "Document": "Dokument"
+    },
+    "Models\\CustomerTag": {
+        "Customer": "Klient",
+        "Tag": "Etykietka"
+    },
+    "Models\\Tag": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
     }
 }

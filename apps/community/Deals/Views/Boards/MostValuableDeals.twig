@@ -2,10 +2,14 @@
   <table class="table-default dense w-full">
     {% for deal in viewParams.mostValuableDeals %}
       <tr>
-        <td>{{ deal.title }}</td>
+        <td>
+          {{ deal.identifier }}
+          {{ deal.title }}
+          <small>{{ deal.CUSTOMER.name }}</small>
+        </td>
         <td>{{ viewParams.main.locale.formatCurrency(deal.price, deal.CURRENCY.code ?? '') }}</td>
         <td class="text-right">
-          <a href="deals/{{ deal.id }}" class="btn btn-transparent">
+          <a href="deals/{{ deal.id }}" class="btn btn-transparent btn-small">
             <span class="icon"><i class="fas fa-arrow-right"></i></span>
             <span class="text">{{ translate('Open deal') }}</span>
           </a>
@@ -14,11 +18,11 @@
   </table>
 {% else %}
   <div class="alert alert-info">
-    No deals found.<br/>
+    {{ translate('No deals found.') }}<br/>
     <br/>
     <a href="deals?add" class="btn btn-transparent">
       <span class="icon"><i class="fas fa-add"></i></span>
-      <span class="text">Add deal</span>
+      <span class="text">{{ translate('Add deal') }}</span>
     </a>
   </div>
 {% endif %}

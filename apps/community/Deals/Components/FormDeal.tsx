@@ -14,6 +14,7 @@ import DealFormActivity, { DealFormActivityProps, DealFormActivityState } from '
 import ModalForm from 'adios/ModalForm';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 import { FormProps, FormState } from 'adios/Form';
+import moment, { Moment } from "moment";
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
@@ -23,8 +24,10 @@ export interface FormDealState extends HubletoFormState {
   newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
-  activityCalendarTimeClicked: string,
-  activityCalendarDateClicked: string,
+  activityTime: string,
+  activityDate: string,
+  activitySubject: string,
+  activityAllDay: boolean,
   tableDealProductsDescription: any,
   tableDealDocumentsDescription: any,
   tablesKey: number,
@@ -57,8 +60,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       newEntryId: this.props.newEntryId ?? -1,
       showIdDocument: 0,
       showIdActivity: 0,
-      activityCalendarTimeClicked: '',
-      activityCalendarDateClicked: '',
+      activityTime: '',
+      activityDate: '',
+      activitySubject: '',
+      activityAllDay: false,
       tableDealProductsDescription: null,
       tableDealDocumentsDescription: null,
       tablesKey: 0,
@@ -131,12 +136,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       (data: any) => {
         if (data.status == "success") {
           var R = this.state.record;
-          if (data.newPipeline.PIPELINE_STEPS?.length > 0) {
+          if (data.newPipeline.STEPS?.length > 0) {
             R.id_pipeline = data.newPipeline.id;
-            R.id_pipeline_step = data.newPipeline.PIPELINE_STEPS[0].id;
-            R.deal_result = data.newPipeline.PIPELINE_STEPS[0].set_result;
+            R.id_pipeline_step = data.newPipeline.STEPS[0].id;
+            R.deal_result = data.newPipeline.STEPS[0].set_result;
             R.PIPELINE = data.newPipeline;
-            R.PIPELINE_STEP = data.newPipeline.PIPELINE_STEPS[0];
+            R.PIPELINE_STEP = data.newPipeline.STEPS[0];
 
             this.setState({ record: R });
           } else {
@@ -157,8 +162,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   }
 
   changePipelineStepFromResult() {
-    if (this.state.record.PIPELINE.PIPELINE_STEPS.length > 0) {
-      this.state.record.PIPELINE.PIPELINE_STEPS.some(step => {
+    if (this.state.record.PIPELINE.STEPS.length > 0) {
+      this.state.record.PIPELINE.STEPS.some(step => {
         if (step.set_result == this.state.record.deal_result) {
           let R = this.state.record;
           R.id_pipeline_step = step.id;
@@ -176,6 +181,30 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
   componentDidUpdate(prevProps: FormProps, prevState: FormState): void {
     if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({tablesKey: Math.random()} as FormDealState)
+  }
+
+  logCompletedActivity() {
+    request.get(
+      'deals/api/log-activity',
+      {
+        idDeal: this.state.record.id,
+        activity: this.refLogActivityInput.current.value,
+      },
+      (result: any) => {
+        this.loadRecord();
+        this.refLogActivityInput.current.value = '';
+      }
+    );
+  }
+
+  scheduleActivity() {
+    this.setState({
+      showIdActivity: -1,
+      activityDate: moment().add(1, 'week').format('YYYY-MM-DD'),
+      activityTime: moment().add(1, 'week').format('H:00:00'),
+      activitySubject: this.refLogActivityInput.current.value,
+      activityAllDay: false,
+    } as FormDealState);
   }
 
   renderContent(): JSX.Element {
@@ -207,121 +236,242 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     //   )
     // }
 
-    return (
-      <>
-        <TabView>
-          <TabPanel header="Deal">
-            {R.is_archived == 1 ?
-              <div className='alert-warning mt-2 mb-1'>
-                <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
-                <span className='text'>This deal is archived.</span>
-              </div>
-            : null}
-            <div className='card mt-2'>
-              <div className='card-body flex flex-row gap-2'>
-                <div className='grow'>
-                  {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
-                  {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
-                  <FormInput title={"Customer"} required={true}>
-                    <Lookup {...this.getInputProps("id_customer")}
-                      model='HubletoApp/Community/Customers/Models/Customer'
-                      endpoint={`customers/get-customer`}
-                      value={R.id_customer}
-                      readonly={R.is_archived}
-                      onChange={(value: any) => {
-                        this.updateRecord({ id_customer: value, id_contact: null });
-                        if (R.id_customer == 0) {
-                          R.id_customer = null;
-                          this.setState({record: R});
-                        }
-                      }}
-                    ></Lookup>
-                  </FormInput>
-                  <FormInput title={"Contact"}>
-                    <Lookup {...this.getInputProps("id_contact")}
-                      model='HubletoApp/Community/Contacts/Models/Contact'
-                      customEndpointParams={{id_customer: R.id_customer}}
-                      endpoint={`contacts/get-customer-contacts`}
-                      value={R.id_contact}
-                      readonly={R.is_archived}
-                      onChange={(value: any) => {
-                        this.updateRecord({ id_contact: value })
-                        if (R.id_contact == 0) {
-                          R.id_contact = null;
-                          this.setState({record: R})
-                        }
-                      }}
-                    ></Lookup>
-                  </FormInput>
-                  <div className='flex flex-row *:w-1/2'>
-                    {this.inputWrapper('price', {
-                      cssClass: 'text-2xl',
-                      readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
-                    })}
-                    {this.inputWrapper('id_currency')}
-                  </div>
-                  {showAdditional && R.id_lead != null ?
-                    <div className='mt-2'>
-                      <a className='btn btn-primary self-center' href={`${globalThis.main.config.url}/leads/${R.id_lead}`}>
-                        <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                        <span className='text'>{this.translate('Go to original lead')}</span>
-                      </a>
+    const pipeline = <div className='card mt-2'>
+      <div className='card-header'>
+        <Lookup {...this.getInputProps("id_pipeline")}
+          readonly={R.is_archived}
+          model='HubletoApp/Community/Pipeline/Models/Pipeline'
+          value={R.id_pipeline}
+          onChange={(value: any) => {
+            this.pipelineChange(value);
+          }}
+        ></Lookup>
+      </div>
+      <div className='card-body'>
+        <div className='flex flex-row gap-2 mt-2 flex-wrap justify-center'>
+          {R.PIPELINE != null &&
+          R.PIPELINE.STEPS &&
+          R.PIPELINE.STEPS.length > 0 ?
+            R.PIPELINE.STEPS.map((s, i) => {
+              var statusColor: string = null;
+              {R.PIPELINE_STEP && s.order <= R.PIPELINE_STEP.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
+              return (
+                <>
+                  <button
+                    key={i}
+                    onClick={R.is_archived ? null : () => {
+                      if (this.state.isInlineEditing == false) this.setState({isInlineEditing: true});
+                      R.id_pipeline_step = s.id;
+                      R.deal_result = s.set_result;
+                      R.PIPELINE_STEP = s;
+                      this.updateRecord(R);
+                    }}
+                    className={`btn ${statusColor}`}
+                    style={{borderLeft: '1em solid ' + s.color}}
+                  >
+                    <div className='text text-center flex flex-col'>
+                      {s.name}
+                      <small>({s.probability} %)</small>
                     </div>
-                  : null}
-                </div>
-                <div className='border-l border-gray-200'></div>
-                <div className='grow'>
-                  {this.inputWrapper('id_owner', {readonly: R.is_archived})}
-                  {this.inputWrapper('id_responsible', {readonly: R.is_archived})}
-                  {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
-                  {this.inputWrapper('source_channel', {readonly: R.is_archived})}
-                  {this.inputWrapper('is_new_customer', {readonly: R.is_archived, onChange: () => {
-                    if (this.state.record.is_new_customer) {
-                      this.updateRecord({business_type: 1 /* New */});
-                    }
-                  }})}
-                  {this.inputWrapper('business_type', {uiStyle: 'buttons', readonly: R.is_archived, onChange: () => {
-                    if (this.state.record.business_type == 2 /* Existing */) {
-                      this.updateRecord({is_new_customer: false});
-                    }
-                  }})}
-                  {/* <FormInput title='Tags'> // 29.5.2025: Zakomentovane, pretoze podla Davida je to zbytocne
-                    <InputTags2 {...this.getInputProps('tags')}
-                      value={this.state.record.TAGS}
-                      readonly={R.is_archived}
-                      model='HubletoApp/Community/Deals/Models/Tag'
-                      targetColumn='id_deal'
-                      sourceColumn='id_tag'
-                      colorColumn='color'
-                      onChange={(value: any) => {
-                        R.TAGS = value;
-                        this.setState({record: R});
-                      }}
-                    ></InputTags2>
-                  </FormInput> */}
-                </div>
-                <div className='border-l border-gray-200'></div>
-                <div className='grow'>
-                  {this.inputWrapper("deal_result",
-                    {
-                      uiStyle: 'buttons',
-                      readonly: R.is_archived,
-                      onChange: () => {
-                        this.updateRecord({lost_reason: null});
-                        this.changePipelineStepFromResult();
-                      }
-                    }
-                  )}
-                  {this.state.record.deal_result == 3 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
-                  {/* {showAdditional ? this.inputWrapper('date_result_update') : null} // 29.5.2025: Zakomentovane, nerozumel tomu ani David. */}
-                  {showAdditional ? this.inputWrapper('date_created') : null}
-                  {showAdditional ? this.inputWrapper('is_archived') : null}
-                </div>
-              </div>
-            </div>
+                  </button>
+                  {i+1 == R.PIPELINE.STEPS.length ? null
+                  : <i className='fas fa-angles-right self-center'></i>
+                  }
+                </>
+              )
+            })
+          : <p className='w-full text-center'>No steps exist for this pipeline</p>}
+        </div>
+      </div>
+    </div>;
 
-            {this.state.id > 0 ?
-              <div className="flex gap-2 mt-2">
+    const recentActivitiesAndCalendar = <div className='card card-body mt-2 shadow-blue-200'>
+      <div className="adios component input"><div className="input-element w-full flex gap-2">
+        <input
+          className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
+          placeholder={this.translate('Type recent activity here')}
+          ref={this.refLogActivityInput}
+          onKeyUp={(event: any) => {
+            if (event.keyCode == 13) {
+              if (event.shiftKey) {
+                this.scheduleActivity();
+              } else {
+                this.logCompletedActivity();
+              }
+            }
+          }}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            this.refLogActivityInput.current.value = event.target.value;
+          }}
+        />
+      </div></div>
+      <div className='mt-2'>
+        <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
+          <span className="icon"><i className="fas fa-check"></i></span>
+          <span className="text">{this.translate('Enter = Log completed activity')}</span>
+        </button>
+        <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
+          <span className="icon"><i className="fas fa-clock"></i></span>
+          <span className="text">{this.translate('Shift+Enter = Schedule')}</span>
+        </button>
+      </div>
+      {this.divider(this.translate('Most recent activities'))}
+      {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
+        return <>
+          <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
+            onClick={() => this.setState({showIdActivity: item.id} as FormDealState)}
+          >
+            <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
+            <span className="text">
+              {item.subject}
+              {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
+            </span>
+          </button>
+        </>
+      })}</div> : null}
+
+      <div className='mt-2'>
+        <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_archived}
+          initialView='dayGridMonth'
+          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormDealState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormDealState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>
+      </div>
+    </div>;
+
+    const inputsColumnLeft = <>
+      {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
+      {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
+      <FormInput title={"Customer"} required={true}>
+        <Lookup {...this.getInputProps("id_customer")}
+          model='HubletoApp/Community/Customers/Models/Customer'
+          endpoint={`customers/api/get-customer`}
+          value={R.id_customer}
+          readonly={R.is_archived}
+          onChange={(value: any) => {
+            this.updateRecord({ id_customer: value, id_contact: null });
+            if (R.id_customer == 0) {
+              R.id_customer = null;
+              this.setState({record: R});
+            }
+          }}
+        ></Lookup>
+      </FormInput>
+      <FormInput title={"Contact"}>
+        <Lookup {...this.getInputProps("id_contact")}
+          model='HubletoApp/Community/Contacts/Models/Contact'
+          customEndpointParams={{id_customer: R.id_customer}}
+          endpoint={`contacts/get-customer-contacts`}
+          value={R.id_contact}
+          readonly={R.is_archived}
+          onChange={(value: any) => {
+            this.updateRecord({ id_contact: value })
+            if (R.id_contact == 0) {
+              R.id_contact = null;
+              this.setState({record: R})
+            }
+          }}
+        ></Lookup>
+      </FormInput>
+      {R.CONTACT && R.CONTACT.VALUES ? <div className="ml-4 text-sm p-2 bg-lime-100 text-lime-900 mb-2">
+        {R.CONTACT.VALUES.map((item, key) => {
+          return <div key={key}>{item.value}</div>;
+        })}
+      </div> : null}
+      <div className='flex flex-row *:w-1/2'>
+        {this.inputWrapper('price', {
+          cssClass: 'text-2xl',
+          readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
+        })}
+        {this.inputWrapper('id_currency')}
+      </div>
+      {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+      {showAdditional && R.id_lead != null ?
+        <div className='mt-2'>
+          <a className='btn btn-primary self-center' href={`${globalThis.main.config.url}/leads/${R.id_lead}`}>
+            <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
+            <span className='text'>{this.translate('Go to original lead')}</span>
+          </a>
+        </div>
+      : null}
+    </>;
+
+    const inputsColumnRight = <>
+      <div className="flex gap-2">
+        {this.inputWrapper('id_owner', {readonly: R.is_archived})}
+        {this.inputWrapper('id_responsible', {readonly: R.is_archived})}
+      </div>
+      {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
+      <div className="flex gap-2">
+        {this.inputWrapper('source_channel', {readonly: R.is_archived})}
+        {this.inputWrapper('is_new_customer', {readonly: R.is_archived, onChange: () => {
+          if (this.state.record.is_new_customer) {
+            this.updateRecord({business_type: 1 /* New */});
+          }
+        }})}
+      </div>
+      <div className="flex gap-2">
+        {this.inputWrapper('business_type', {uiStyle: 'buttons', readonly: R.is_archived, onChange: () => {
+          if (this.state.record.business_type == 2 /* Existing */) {
+            this.updateRecord({is_new_customer: false});
+          }
+        }})}
+        {this.inputWrapper("deal_result",
+          {
+            uiStyle: 'buttons',
+            readonly: R.is_archived,
+            onChange: () => {
+              this.updateRecord({lost_reason: null});
+              this.changePipelineStepFromResult();
+            }
+          }
+        )}
+      </div>
+      <div className="flex gap-2">
+        {showAdditional ? this.inputWrapper('date_created') : null}
+        {showAdditional ? this.inputWrapper('is_archived') : null}
+      </div>
+      {this.inputWrapper('id_lead')}
+      {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+      {this.state.record.deal_result == 3 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
+    </>;
+
+    return <>
+      <TabView>
+        <TabPanel header="Deal">
+          {R.is_archived == 1 ?
+            <div className='alert-warning mt-2 mb-1'>
+              <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
+              <span className='text'>This deal is archived.</span>
+            </div>
+          : null}
+          <div className='flex gap-2'>
+            <div className='flex-2'>
+              <div className='card card-body flex flex-row gap-2'>
+                <div className='grow'>{inputsColumnLeft}</div>
+                <div className='border-l border-gray-200'></div>
+                <div className='grow'>{inputsColumnRight}</div>
+              </div>
+              {pipeline}
+            </div>
+            <div className='flex-1'>
+              {this.state.id > 0 ? <div className='flex flex-col'>
                 <div className="badge badge-violet badge-large">
                   Deal value:&nbsp;{globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
                 </div>
@@ -332,459 +482,359 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     </p>
                   </div>
                 : null}
-              </div>
-            : null}
-            <div className='flex gap-2 mt-2 w-full'>
-              <div className='card grow'>
-                <div className='card-header'>Documents</div>
+              </div> : null}
+
+              {recentActivitiesAndCalendar}
+            </div>
+          </div>
+
+          {showAdditional ? <>
+            <div className='flex gap-2 mt-2'>
+              <div className='card flex-2'>
+                <div className='card-header'>Products & Services</div>
                 <div className='card-body'>
-                  {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-                </div>
-              </div>
-              <div className='card grow'>
-                <div className='card-header'>Notes</div>
-                <div className='card-body'>
-                  {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+                  {this.state.isInlineEditing ?
+                    <div className='text-yellow-500 mb-3'>
+                      <span className='icon mr-2'><i className='fas fa-warning'></i></span>
+                      <span className='text'>The sums of product and services prices will be updated after saving</span>
+                    </div>
+                  : <></>}
+                  {!R.is_archived ? (
+                    <a
+                      className="btn btn-add-outline mb-2 mr-2"
+                      onClick={() => {
+                        if (!R.SERVICES) R.SERVICES = [];
+                        R.SERVICES.push({
+                          id: this.state.newEntryId,
+                          id_deal: { _useMasterRecordId_: true },
+                          amount: 1,
+                        });
+                        this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormDealState);
+                      }}
+                    >
+                      <span className="icon"><i className="fas fa-add"></i></span>
+                      <span className="text">Add service</span>
+                    </a>
+                  ) : null}
+                  {!R.is_archived ? (
+                    <a
+                      className="btn btn-add-outline mb-2"
+                      onClick={() => {
+                        if (!R.PRODUCTS) R.PRODUCTS = [];
+                        R.PRODUCTS.push({
+                          id: this.state.newEntryId,
+                          id_deal: { _useMasterRecordId_: true },
+                          amount: 1,
+                        });
+                        this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormDealState);
+                      }}
+                    >
+                      <span className="icon"><i className="fas fa-add"></i></span>
+                      <span className="text">Add product</span>
+                    </a>
+                  ) : null}
+                  <div className='w-full h-full overflow-x-auto'>
+                    <TableDealProducts
+                      key={"services_"+this.state.tablesKey}
+                      uid={this.props.uid + "_table_deal_services"}
+                      className='mb-4'
+                      data={{ data: R.SERVICES }}
+                      descriptionSource='props'
+                      customEndpointParams={{'idDeal': R.id}}
+                      description={{
+                        permissions: this.state.tableDealProductsDescription?.permissions,
+                        columns: {
+                          id_product: { type: "lookup", title: "Service", model: "HubletoApp/Community/Products/Models/Product",
+                            cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
+                              return (
+                                <FormInput>
+                                  <Lookup {...this.getInputProps('services_input')}
+                                    ref={this.refServicesLookup}
+                                    model='HubletoApp/Community/Products/Models/Product'
+                                    customEndpointParams={{'getServices': true}}
+                                    cssClass='min-w-44'
+                                    value={data.id_product}
+                                    onChange={(value: any) => {
+                                      getLookupData(this.refServicesLookup);
+                                      if (lookupData[value]) {
+                                        data.id_product = value;
+                                        data.unit_price = lookupData[value].unit_price;
+                                        data.vat = lookupData[value].vat;
+                                        this.updateRecord({ SERVICES: table.state.data?.data });
+                                        this.setState({tablesKey: Math.random()} as FormDealState)
+                                      }
+                                    }}
+                                  ></Lookup>
+                                </FormInput>
+                              )
+                            },
+                          },
+                          unit_price: { type: "float", title: "Service Price",},
+                          amount: { type: "int", title: "Commitment" },
+                          discount: { type: "float", title: "Discount (%)"},
+                          vat: { type: "float", title: "Vat (%)"},
+                          sum: { type: "float", title: "Sum"},
+                        },
+                        inputs: {
+                          id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
+                          unit_price: { type: "float", title: "Unit Price"},
+                          amount: { type: "int", title: "Amount"},
+                          vat: { type: "float", title: "Vat (%)"},
+                          discount: { type: "float", title: "Discount (%)"},
+                          sum: { type: "float", title: "Sum"},
+                        },
+                      }}
+                      isUsedAsInput={true}
+                      isInlineEditing={this.state.isInlineEditing}
+                      readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+                      onRowClick={() => this.setState({isInlineEditing: true})}
+                      onChange={(table: TableDealProducts) => {
+                        this.updateRecord({ SERVICES: table.state.data?.data ?? [] });
+                      }}
+                      onDeleteSelectionChange={(table: TableDealProducts) => {
+                        this.updateRecord({ SERVICES: table.state.data?.data ?? []});
+                        this.setState({tablesKey: Math.random()} as FormDealState)
+                      }}
+                    ></TableDealProducts>
+                    <TableDealProducts
+                      key={"products_"+this.state.tablesKey}
+                      uid={this.props.uid + "_table_deal_products"}
+                      data={{ data: R.PRODUCTS }}
+                      descriptionSource='props'
+                      customEndpointParams={{'idLead': R.id}}
+                      description={{
+                        permissions: this.state.tableDealProductsDescription?.permissions,
+                        columns: {
+                          id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                            cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
+                              return (
+                                <FormInput>
+                                  <Lookup {...this.getInputProps('products_input')}
+                                    ref={this.refProductsLookup}
+                                    model='HubletoApp/Community/Products/Models/Product'
+                                    customEndpointParams={{'getProducts': true}}
+                                    cssClass='min-w-44'
+                                    value={data.id_product}
+                                    onChange={(value: any) => {
+                                      getLookupData(this.refProductsLookup);
+                                      if (lookupData[value]) {
+                                        data.id_product = value;
+                                        data.unit_price = lookupData[value].unit_price;
+                                        data.vat = lookupData[value].vat;
+                                        this.updateRecord({ PRODUCTS: table.state.data?.data });
+                                        this.setState({tablesKey: Math.random()} as FormDealState)
+                                      }
+                                    }}
+                                  ></Lookup>
+                                </FormInput>
+                              )
+                            },
+                          },
+                          unit_price: { type: "float", title: "Unit Price",},
+                          amount: { type: "int", title: "Amount" },
+                          discount: { type: "float", title: "Discount (%)"},
+                          vat: { type: "float", title: "Vat (%)"},
+                          sum: { type: "float", title: "Sum"},
+                        },
+                        inputs: {
+                          id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
+                          unit_price: { type: "float", title: "Unit Price"},
+                          amount: { type: "int", title: "Amount"},
+                          vat: { type: "float", title: "Vat (%)"},
+                          discount: { type: "float", title: "Discount (%)"},
+                          sum: { type: "float", title: "Sum"},
+                        },
+                      }}
+                      isUsedAsInput={true}
+                      isInlineEditing={this.state.isInlineEditing}
+                      readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+                      onRowClick={() => this.setState({isInlineEditing: true})}
+                      onChange={(table: TableDealProducts) => {
+                        this.updateRecord({ PRODUCTS: table.state.data?.data ?? []});
+                      }}
+                      onDeleteSelectionChange={(table: TableDealProducts) => {
+                        this.updateRecord({ PRODUCTS: table.state.data?.data ?? []});
+                        this.setState({tablesKey: Math.random()} as FormDealState)
+                      }}
+                    ></TableDealProducts>
+                  </div>
                 </div>
               </div>
             </div>
-
-            {showAdditional ? <>
-              <div className='card mt-2'>
-                <div className='card-header'>
-                  <Lookup {...this.getInputProps("id_pipeline")}
-                    readonly={R.is_archived}
-                    model='HubletoApp/Community/Pipeline/Models/Pipeline'
-                    value={R.id_pipeline}
-                    onChange={(value: any) => {
-                      this.pipelineChange(value);
-                    }}
-                  ></Lookup>
-                </div>
-                <div className='card-body'>
-                  <div className='flex flex-row gap-2 mt-2 flex-wrap justify-center'>
-                    {R.PIPELINE != null &&
-                    R.PIPELINE.PIPELINE_STEPS &&
-                    R.PIPELINE.PIPELINE_STEPS.length > 0 ?
-                      R.PIPELINE.PIPELINE_STEPS.map((s, i) => {
-                        var statusColor: string = null;
-                        {R.PIPELINE_STEP && s.order <= R.PIPELINE_STEP.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
-                        return (
-                          <>
-                            <button
-                              key={i}
-                              onClick={R.is_archived ? null : () => {
-                                if (this.state.isInlineEditing == false) this.setState({isInlineEditing: true});
-                                R.id_pipeline_step = s.id;
-                                R.deal_result = s.set_result;
-                                R.PIPELINE_STEP = s;
-                                this.updateRecord(R);
-                              }}
-                              className={`btn ${statusColor}`}
-                              style={{borderLeft: '1em solid ' + s.color}}
-                            >
-                              <div className='text text-center flex flex-col'>
-                                {s.name}
-                                <small>({s.probability} %)</small>
-                              </div>
-                            </button>
-                            {i+1 == R.PIPELINE.PIPELINE_STEPS.length ? null
-                            : <i className='fas fa-angles-right self-center'></i>
-                            }
-                          </>
-                        )
-                      })
-                    : <p className='w-full text-center'>No steps exist for this pipeline</p>}
-                  </div>
-                </div>
-              </div>
-              <div className='flex gap-2 mt-2'>
-                <div className='card flex-2'>
-                  <div className='card-header'>Products & Services</div>
-                  <div className='card-body'>
-                    {this.state.isInlineEditing ?
-                      <div className='text-yellow-500 mb-3'>
-                        <span className='icon mr-2'><i className='fas fa-warning'></i></span>
-                        <span className='text'>The sums of product and services prices will be updated after saving</span>
-                      </div>
-                    : <></>}
-                    {!R.is_archived ? (
-                      <a
-                        className="btn btn-add-outline mb-2 mr-2"
-                        onClick={() => {
-                          if (!R.SERVICES) R.SERVICES = [];
-                          R.SERVICES.push({
-                            id: this.state.newEntryId,
-                            id_deal: { _useMasterRecordId_: true },
-                            amount: 1,
-                          });
-                          this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormDealState);
-                        }}
-                      >
-                        <span className="icon"><i className="fas fa-add"></i></span>
-                        <span className="text">Add service</span>
-                      </a>
-                    ) : null}
-                    {!R.is_archived ? (
-                      <a
-                        className="btn btn-add-outline mb-2"
-                        onClick={() => {
-                          if (!R.PRODUCTS) R.PRODUCTS = [];
-                          R.PRODUCTS.push({
-                            id: this.state.newEntryId,
-                            id_deal: { _useMasterRecordId_: true },
-                            amount: 1,
-                          });
-                          this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormDealState);
-                        }}
-                      >
-                        <span className="icon"><i className="fas fa-add"></i></span>
-                        <span className="text">Add product</span>
-                      </a>
-                    ) : null}
-                    <div className='w-full h-full overflow-x-auto'>
-                      <TableDealProducts
-                        key={"services_"+this.state.tablesKey}
-                        uid={this.props.uid + "_table_deal_services"}
-                        className='mb-4'
-                        data={{ data: R.SERVICES }}
-                        descriptionSource='props'
-                        customEndpointParams={{'idDeal': R.id}}
-                        description={{
-                          permissions: this.state.tableDealProductsDescription?.permissions,
-                          columns: {
-                            id_product: { type: "lookup", title: "Service", model: "HubletoApp/Community/Products/Models/Product",
-                              cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
-                                return (
-                                  <FormInput>
-                                    <Lookup {...this.getInputProps('services_input')}
-                                      ref={this.refServicesLookup}
-                                      model='HubletoApp/Community/Products/Models/Product'
-                                      customEndpointParams={{'getServices': true}}
-                                      cssClass='min-w-44'
-                                      value={data.id_product}
-                                      onChange={(value: any) => {
-                                        getLookupData(this.refServicesLookup);
-                                        if (lookupData[value]) {
-                                          data.id_product = value;
-                                          data.unit_price = lookupData[value].unit_price;
-                                          data.vat = lookupData[value].vat;
-                                          this.updateRecord({ SERVICES: table.state.data?.data });
-                                          this.setState({tablesKey: Math.random()} as FormDealState)
-                                        }
-                                      }}
-                                    ></Lookup>
-                                  </FormInput>
-                                )
-                              },
-                            },
-                            unit_price: { type: "float", title: "Service Price",},
-                            amount: { type: "int", title: "Commitment" },
-                            discount: { type: "float", title: "Discount (%)"},
-                            vat: { type: "float", title: "Vat (%)"},
-                            sum: { type: "float", title: "Sum"},
-                          },
-                          inputs: {
-                            id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
-                            unit_price: { type: "float", title: "Unit Price"},
-                            amount: { type: "int", title: "Amount"},
-                            vat: { type: "float", title: "Vat (%)"},
-                            discount: { type: "float", title: "Discount (%)"},
-                            sum: { type: "float", title: "Sum"},
-                          },
-                        }}
-                        isUsedAsInput={true}
-                        isInlineEditing={this.state.isInlineEditing}
-                        readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
-                        onRowClick={() => this.setState({isInlineEditing: true})}
-                        onChange={(table: TableDealProducts) => {
-                          this.updateRecord({ SERVICES: table.state.data?.data ?? [] });
-                        }}
-                        onDeleteSelectionChange={(table: TableDealProducts) => {
-                          this.updateRecord({ SERVICES: table.state.data?.data ?? []});
-                          this.setState({tablesKey: Math.random()} as FormDealState)
-                        }}
-                      ></TableDealProducts>
-                      <TableDealProducts
-                        key={"products_"+this.state.tablesKey}
-                        uid={this.props.uid + "_table_deal_products"}
-                        data={{ data: R.PRODUCTS }}
-                        descriptionSource='props'
-                        customEndpointParams={{'idLead': R.id}}
-                        description={{
-                          permissions: this.state.tableDealProductsDescription?.permissions,
-                          columns: {
-                            id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
-                              cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
-                                return (
-                                  <FormInput>
-                                    <Lookup {...this.getInputProps('products_input')}
-                                      ref={this.refProductsLookup}
-                                      model='HubletoApp/Community/Products/Models/Product'
-                                      customEndpointParams={{'getProducts': true}}
-                                      cssClass='min-w-44'
-                                      value={data.id_product}
-                                      onChange={(value: any) => {
-                                        getLookupData(this.refProductsLookup);
-                                        if (lookupData[value]) {
-                                          data.id_product = value;
-                                          data.unit_price = lookupData[value].unit_price;
-                                          data.vat = lookupData[value].vat;
-                                          this.updateRecord({ PRODUCTS: table.state.data?.data });
-                                          this.setState({tablesKey: Math.random()} as FormDealState)
-                                        }
-                                      }}
-                                    ></Lookup>
-                                  </FormInput>
-                                )
-                              },
-                            },
-                            unit_price: { type: "float", title: "Unit Price",},
-                            amount: { type: "int", title: "Amount" },
-                            discount: { type: "float", title: "Discount (%)"},
-                            vat: { type: "float", title: "Vat (%)"},
-                            sum: { type: "float", title: "Sum"},
-                          },
-                          inputs: {
-                            id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
-                            unit_price: { type: "float", title: "Unit Price"},
-                            amount: { type: "int", title: "Amount"},
-                            vat: { type: "float", title: "Vat (%)"},
-                            discount: { type: "float", title: "Discount (%)"},
-                            sum: { type: "float", title: "Sum"},
-                          },
-                        }}
-                        isUsedAsInput={true}
-                        isInlineEditing={this.state.isInlineEditing}
-                        readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
-                        onRowClick={() => this.setState({isInlineEditing: true})}
-                        onChange={(table: TableDealProducts) => {
-                          this.updateRecord({ PRODUCTS: table.state.data?.data ?? []});
-                        }}
-                        onDeleteSelectionChange={(table: TableDealProducts) => {
-                          this.updateRecord({ PRODUCTS: table.state.data?.data ?? []});
-                          this.setState({tablesKey: Math.random()} as FormDealState)
-                        }}
-                      ></TableDealProducts>
-                    </div>
-                  </div>
-                </div>
-                <div className='card card-body flex-1'>
-                  <div className="adios component input"><div className="input-element w-full flex gap-2">
-                    <input
-                      className="w-full"
-                      placeholder="Type recent activity and press Enter to log it instantly"
-                      ref={this.refLogActivityInput}
-                      onKeyUp={(event: any) => {
-                        if (event.keyCode == 13) {
-                          request.get(
-                            'deals/api/log-activity',
-                            {
-                              idDeal: R.id,
-                              activity: this.refLogActivityInput.current.value,
-                            },
-                            (result: any) => {
-                              this.loadRecord();
-                              this.refLogActivityInput.current.value = '';
-                            }
-                          );
-                        }
-                      }}
-                      onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                        this.refLogActivityInput.current.value = event.target.value;
-                      }}
-                    />
-                    <button onClick={() => {}} className="btn btn-transparent">
-                      <span className="icon"><i className="fas fa-check"></i></span>
-                    </button>
-                  </div></div>
-                  {this.divider('Most recent activities')}
-                  {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
-                    return <>
-                      <button key={index} className="btn btn-small btn-transparent btn-list-item"
-                        onClick={() => this.setState({showIdActivity: item.id} as FormDealState)}
-                      >
-                        <span className="icon">{item.date_start} {item.time_start}<br/>{item['_LOOKUP[id_owner]']}</span>
-                        <span className="text">
-                          {item.subject}
-                          {item.completed ? null : <div className="text-red-800">Not completed yet</div>}
-                        </span>
-                      </button>
-                    </>
-                  })}</div> : null}
-                </div>
-              </div>
-            </> : null}
+          </> : null}
+        </TabPanel>
+        {showAdditional ?
+          <TabPanel header={this.translate('Calendar')}>
+            <Calendar
+              onCreateCallback={() => this.loadRecord()}
+              readonly={R.is_archived}
+              initialView='timeGridWeek'
+              views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+              eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
+              onDateClick={(date, time, info) => {
+                this.setState({
+                  activityDate: date,
+                  activityTime: time,
+                  activityAllDay: false,
+                  showIdActivity: -1,
+                } as FormDealState);
+              }}
+              onEventClick={(info) => {
+                this.setState({
+                  showIdActivity: parseInt(info.event.id),
+                } as FormDealState);
+                info.jsEvent.preventDefault();
+              }}
+            ></Calendar>
           </TabPanel>
-          {showAdditional ?
-            <TabPanel header={this.translate('Calendar')}>
-              <Calendar
-                onCreateCallback={() => this.loadRecord()}
-                readonly={R.is_archived}
-                initialView='timeGridWeek'
-                views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.main.config.accountUrl + '/deals/get-calendar-events?idDeal=' + R.id}
-                onDateClick={(date, time, info) => {
-                  this.setState({
-                    activityCalendarDateClicked: date,
-                    activityCalendarTimeClicked: time,
-                    showIdActivity: -1,
-                  } as FormDealState);
-                }}
-                onEventClick={(info) => {
-                  this.setState({
-                    showIdActivity: parseInt(info.event.id),
-                  } as FormDealState);
-                  info.jsEvent.preventDefault();
-                }}
-              ></Calendar>
-            </TabPanel>
-          : null}
-          {showAdditional ? (
-            <TabPanel header={this.translate("Documents")}>
-              <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
-              {!R.is_archived ?
-                <a
-                  className="btn btn-add-outline mb-2"
-                  onClick={() => this.setState({showIdDocument: -1} as FormDealState)}
-                >
-                  <span className="icon"><i className="fas fa-add"></i></span>
-                  <span className="text">Add document</span>
-                </a>
-              : null}
-              <TableDealDocuments
-                key={this.state.tablesKey + "_table_deal_document"}
-                uid={this.props.uid + "_table_deal_documents"}
-                data={{ data: R.DOCUMENTS }}
-                customEndpointParams={{idDeal: R.id}}
-                descriptionSource="props"
-                description={{
-                  permissions: this.state.tableDealDocumentsDescription?.permissions,
-                  ui: {
-                    showFooter: false,
-                    showHeader: false,
-                  },
-                  columns: {
-                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                    hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableDealDocuments, data: any, options: any): JSX.Element => {
-                      return (
-                        <FormInput>
-                          <Hyperlink {...this.getInputProps('document-link')}
-                            value={data.DOCUMENT.hyperlink}
-                            readonly={true}
-                          ></Hyperlink>
-                        </FormInput>
-                      )
-                    },},
-                  },
-                  inputs: {
-                    id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                    hyperlink: { type: "varchar", title: "Link", readonly: true},
-                  }
-                }}
-                isUsedAsInput={true}
-                readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
-                onRowClick={(table: TableDealDocuments, row: any) => {
-                  this.setState({showIdDocument: row.id_document} as FormDealState);
-                }}
-                onDeleteSelectionChange={(table) => {
-                  this.updateRecord({ DOCUMENTS: table.state.data?.data ?? []});
-                  this.setState({tablesKey: Math.random()} as FormDealState)
-                }}
-              />
-              {this.state.showIdDocument != 0 ?
-                <ModalForm
-                  uid='document_form'
-                  isOpen={true}
-                  type='right'
-                >
-                  <FormDocument
-                    id={this.state.showIdDocument}
-                    onClose={() => this.setState({showIdDocument: 0} as FormDealState)}
-                    showInModal={true}
-                    descriptionSource="both"
-                    description={{
-                      defaultValues: {
-                        creatingForModel: "HubletoApp/Community/Deals/Models/DealDocument",
-                        creatingForId: this.state.record.id,
-                        origin_link: window.location.pathname + "?recordId=" + this.state.record.id,
-                      }
-                    }}
-                    isInlineEditing={this.state.showIdDocument < 0 ? true : false}
-                    showInModalSimple={true}
-                    onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-                      if (saveResponse.status = "success") {
-                        this.loadRecord();
-                        this.setState({ showIdDocument: 0 } as FormDealState)
-                      }
-                    }}
-                    onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-                      if (saveResponse.status = "success") {
-                        this.loadRecord();
-                        this.setState({ showIdDocument: 0 } as FormDealState)
-                      }
-                    }}
-                  />
-                </ModalForm>
-              : null}
-            </TabPanel>
-          ) : null}
-          {showAdditional ?
-            <TabPanel header={this.translate('History')}>
-              {R.HISTORY.length > 0 ?
-                R.HISTORY.map((history, key) => (
-                  <div key={key} className='w-full flex flex-row justify-between'>
-                    <div className='w-1/3'>
-                        <p className='font-bold self-center text-sm text-left'>
-                          {history.description}
-                        </p>
-                      </div>
-                    <div className='w-1/3' style={{alignContent: "center"}}>
-                      <hr style={{width: "100%", alignSelf: "center"}}/>
-                    </div>
-                    <div className='w-1/3 justify-center'>
-                      <p className='self-center text-sm text-center'>
-                        {history.change_date}
+        : null}
+        {showAdditional ? (
+          <TabPanel header={this.translate("Documents")}>
+            <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
+            {!R.is_archived ?
+              <a
+                className="btn btn-add-outline mb-2"
+                onClick={() => this.setState({showIdDocument: -1} as FormDealState)}
+              >
+                <span className="icon"><i className="fas fa-add"></i></span>
+                <span className="text">Add document</span>
+              </a>
+            : null}
+            <TableDealDocuments
+              key={this.state.tablesKey + "_table_deal_document"}
+              uid={this.props.uid + "_table_deal_documents"}
+              data={{ data: R.DOCUMENTS }}
+              customEndpointParams={{idDeal: R.id}}
+              descriptionSource="props"
+              description={{
+                permissions: this.state.tableDealDocumentsDescription?.permissions,
+                ui: {
+                  showFooter: false,
+                  showHeader: false,
+                },
+                columns: {
+                  id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                  hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableDealDocuments, data: any, options: any): JSX.Element => {
+                    return (
+                      <FormInput>
+                        <Hyperlink {...this.getInputProps('document-link')}
+                          value={data.DOCUMENT.hyperlink}
+                          readonly={true}
+                        ></Hyperlink>
+                      </FormInput>
+                    )
+                  },},
+                },
+                inputs: {
+                  id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                  hyperlink: { type: "varchar", title: "Link", readonly: true},
+                }
+              }}
+              isUsedAsInput={true}
+              readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+              onRowClick={(table: TableDealDocuments, row: any) => {
+                this.setState({showIdDocument: row.id_document} as FormDealState);
+              }}
+              onDeleteSelectionChange={(table) => {
+                this.updateRecord({ DOCUMENTS: table.state.data?.data ?? []});
+                this.setState({tablesKey: Math.random()} as FormDealState)
+              }}
+            />
+            {this.state.showIdDocument != 0 ?
+              <ModalForm
+                uid='document_form'
+                isOpen={true}
+                type='right'
+              >
+                <FormDocument
+                  id={this.state.showIdDocument}
+                  onClose={() => this.setState({showIdDocument: 0} as FormDealState)}
+                  showInModal={true}
+                  descriptionSource="both"
+                  description={{
+                    defaultValues: {
+                      creatingForModel: "HubletoApp/Community/Deals/Models/DealDocument",
+                      creatingForId: this.state.record.id,
+                      origin_link: window.location.pathname + "?recordId=" + this.state.record.id,
+                    }
+                  }}
+                  isInlineEditing={this.state.showIdDocument < 0 ? true : false}
+                  showInModalSimple={true}
+                  onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                    if (saveResponse.status = "success") {
+                      this.loadRecord();
+                      this.setState({ showIdDocument: 0 } as FormDealState)
+                    }
+                  }}
+                  onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
+                    if (saveResponse.status = "success") {
+                      this.loadRecord();
+                      this.setState({ showIdDocument: 0 } as FormDealState)
+                    }
+                  }}
+                />
+              </ModalForm>
+            : null}
+          </TabPanel>
+        ) : null}
+        {showAdditional ?
+          <TabPanel header={this.translate('History')}>
+            {R.HISTORY.length > 0 ?
+              R.HISTORY.map((history, key) => (
+                <div key={key} className='w-full flex flex-row justify-between'>
+                  <div className='w-1/3'>
+                      <p className='font-bold self-center text-sm text-left'>
+                        {history.description}
                       </p>
                     </div>
+                  <div className='w-1/3' style={{alignContent: "center"}}>
+                    <hr style={{width: "100%", alignSelf: "center"}}/>
                   </div>
-                ))
-                :
-                <p className='text-gray-400'>Deal has no history</p>
+                  <div className='w-1/3 justify-center'>
+                    <p className='self-center text-sm text-center'>
+                      {history.change_date}
+                    </p>
+                  </div>
+                </div>
+              ))
+              :
+              <p className='text-gray-400'>Deal has no history</p>
+            }
+          </TabPanel>
+        : null}
+      </TabView>
+      {this.state.showIdActivity == 0 ? <></> :
+        <ModalForm
+          uid='activity_form'
+          isOpen={true}
+          type='right'
+        >
+          <DealFormActivity
+            id={this.state.showIdActivity}
+            isInlineEditing={true}
+            description={{
+              defaultValues: {
+                id_deal: R.id,
+                id_contact: R.id_contact,
+                date_start: this.state.activityDate,
+                time_start: this.state.activityTime == "00:00:00" ? null : this.state.activityTime,
+                date_end: this.state.activityDate,
+                all_day: this.state.activityAllDay,
+                subject: this.state.activitySubject,
               }
-            </TabPanel>
-          : null}
-        </TabView>
-        {this.state.showIdActivity == 0 ? <></> :
-          <ModalForm
-            uid='activity_form'
-            isOpen={true}
-            type='right'
-          >
-            <DealFormActivity
-              id={this.state.showIdActivity}
-              isInlineEditing={true}
-              description={{
-                defaultValues: {
-                  id_deal: R.id,
-                  date_start: this.state.activityCalendarDateClicked,
-                  time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
-                  date_end: this.state.activityCalendarDateClicked,
-                }
-              }}
-              idCustomer={R.id_customer}
-              showInModal={true}
-              showInModalSimple={true}
-              onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}
-              onSaveCallback={(form: DealFormActivity<DealFormActivityProps, DealFormActivityState>, saveResponse: any) => {
-                if (saveResponse.status == "success") {
-                  this.setState({ showIdActivity: 0 } as FormDealState);
-                }
-              }}
-            ></DealFormActivity>
-          </ModalForm>
-        }
-      </>
-    );
+            }}
+            idCustomer={R.id_customer}
+            showInModal={true}
+            showInModalSimple={true}
+            onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}
+            onSaveCallback={(form: DealFormActivity<DealFormActivityProps, DealFormActivityState>, saveResponse: any) => {
+              if (saveResponse.status == "success") {
+                this.setState({ showIdActivity: 0 } as FormDealState);
+              }
+            }}
+          ></DealFormActivity>
+        </ModalForm>
+      }
+    </>;
   }
 }

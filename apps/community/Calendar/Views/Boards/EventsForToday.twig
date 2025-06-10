@@ -28,7 +28,7 @@
       onclick="$('#events-tomorrow').slideToggle();"
     >
       <span class="icon"><i class="fas fa-ellipsis"></i></span>
-      <span class="text">{{ viewParams.eventsTomorrow|length }} events for tomorrow</span>
+      <span class="text">{{ viewParams.eventsTomorrow|length }} {{ translate('events for tomorrow') }}</span>
     </button>
   {% endif %}
   {% if viewParams.eventsLater|length > 0 %}
@@ -37,7 +37,7 @@
       onclick="$('#events-later').slideToggle();"
     >
       <span class="icon"><i class="fas fa-ellipsis"></i></span>
-      <span class="text">{{ viewParams.eventsLater|length }} events later</span>
+      <span class="text">{{ viewParams.eventsLater|length }} {{ translate('events later') }}</span>
     </button>
   {% endif %}
 </div>

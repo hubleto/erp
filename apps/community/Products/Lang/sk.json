@@ -7,7 +7,7 @@
         "Products": "Produkty",
         "Product Groups": "Skupiny produktov",
         "Suppliers": "Dodávatelia",
-        "Groups": ""
+        "Groups": "Zoskupovať"
     },
     "Controllers\\Products": {
         "Products": "Produkty"
@@ -37,7 +37,7 @@
         "Product Type": "Typ"
     },
     "Models\\Group": {
-        "Title": ""
+        "Title": "Názov"
     },
     "Models\\Supplier": {
         "Title": "Názov",
@@ -48,10 +48,10 @@
         "Contact person": "Kontaktná osoba",
         "Phone number": "Telefónne číslo",
         "Supplier email": "Email na dodávateľa",
-        "Order email": "",
+        "Order email": "Objednať e -mail",
         "Tax ID": "DIČ",
         "Company ID": "IČO",
         "VAT ID": "IČDPH",
-        "Payment account number": ""
+        "Payment account number": "Číslo platobného účtu"
     }
 }

@@ -19,12 +19,13 @@
         "Last access IP": "IP adresa posledného prístupu",
         "Nick": "Prezývka",
         "Default company": "Firma",
-        "Roles": "Role"
+        "Roles": "Role",
+        "Teams": "Tímy"
     },
     "Models\\Country": {
         "Country Name": "Štát",
         "Code": "Kód",
-        "Country": ""
+        "Country": "Krajina"
     },
     "Models\\Profile": {
         "Company": "Firma"
@@ -34,15 +35,15 @@
         "Color": "Farba",
         "Shown in Calendar": "Zobraziť v kalendári",
         "Icon": "Ikonka",
-        "Type": "",
-        "Show in calendar": ""
+        "Type": "Typ",
+        "Show in calendar": "Show v kalendári"
     },
     "Models\\Currency": {
         "Currency Name": "Mena",
         "Currency Code": "Kód",
-        "Currency": "",
-        "Code": "",
-        "Symbol": ""
+        "Currency": "Mena",
+        "Code": "Kódovať",
+        "Symbol": "Symbol"
     },
     "Models\\Pipeline": {
         "Name": "Názov",
@@ -82,15 +83,16 @@
         "Account number": "Číslo účtu",
         "Account IBAN": "IBAN",
         "SWIFT": "SWIFT",
-        "Numbering pattern": "Vzorec pre číslovanie"
+        "Numbering pattern": "Vzorec pre číslovanie",
+        "Customer ID": "ID zákazníka"
     },
     "Models\\UserRole": {
         "Role": "Rola",
         "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)",
         "Grant all permissions (admin role)": "",
-        "Grant all permissions (administrator role)": "",
-        "Description": "",
-        "Is default role (cannot be modified)": ""
+        "Grant all permissions (administrator role)": "Udeliť všetky povolenia (úloha správcu)",
+        "Description": "Opis",
+        "Is default role (cannot be modified)": "Je predvolená úloha (nedá sa upraviť)"
     },
     "Models\\RolePermission": {
         "Permission": "Povolenie",
@@ -117,7 +119,11 @@
         "Manage installed apps": "Spravovať nainštalované aplikácie",
         "Disable": "Deaktivovať",
         "Uninstall": "Odinštalovať",
-        "Open": "Otvoriť"
+        "Open": "Otvoriť",
+        "Most common settings": "Najbežnejšie nastavenia",
+        "Manage users": "Spravujte používateľov",
+        "Manage apps": "Spravovať aplikácie",
+        "All settings": "Všetky nastavenia"
     },
     "Controllers\\UserRoles": {
         "Settings": "Nastavenia",
@@ -128,8 +134,8 @@
         "Countries": "Štáty"
     },
     "Controllers\\Users": {
-        "Settings": "",
-        "Users": ""
+        "Settings": "Nastavenia",
+        "Users": "Užívatelia"
     },
     "Controllers\\Activitytypes": {
         "Settings": "",
@@ -150,38 +156,59 @@
         "Invoice profiles": "Fakturačné profily",
         "Platform config": "Konfigurácia platformy",
         "Contact Categories": "Kategórie kontaktov",
-        "Roles": "",
-        "Permissions list": "",
-        "Role permissions": "",
-        "Sidebar": "",
-        "Teams": ""
+        "Roles": "Úloha",
+        "Permissions list": "Zoznam povolení",
+        "Role permissions": "Povolenie",
+        "Sidebar": "Bočný panel",
+        "Teams": "Tímy"
     },
     "Models\\UserHasRole": {
-        "User": "",
-        "Role": ""
+        "User": "Užívateľ",
+        "Role": "Úloha"
     },
     "Controllers\\Profile": {
         "Settings": "Nastavenia",
         "Profile": "Profil"
     },
     "Models\\Company": {
-        "Company": "",
-        "Tax ID": "",
-        "VAT ID": "",
-        "Street, line 1": "",
-        "Street, line 2": "",
-        "ZIP": "",
-        "City": "",
-        "Country": ""
+        "Company": "Spoločnosť",
+        "Tax ID": "Daňový ID",
+        "VAT ID": "ID DPH",
+        "Street, line 1": "Ulica, riadok 1",
+        "Street, line 2": "Ulica, riadok 2",
+        "ZIP": "Zips",
+        "City": "Mesto",
+        "Country": "Krajina"
     },
     "Controllers\\Sidebar": {
-        "Settings": "",
-        "Sidebar": ""
+        "Settings": "Nastavenia",
+        "Sidebar": "Bočný panel"
     },
     "Components\\FormUserRole": {
         "Save": ""
     },
     "Components\\FormUser": {
         "About the user": "O používateľovi"
+    },
+    "Controllers\\InvoiceProfiles": {
+        "Settings": "Nastavenia",
+        "Invoice profiles": "Faktúra"
+    },
+    "Models\\Team": {
+        "Team name": "Názov tímu",
+        "Team color": "Farebný tím",
+        "Description": "Opis",
+        "Team manager": "Manažér tímu"
+    },
+    "Models\\TeamMember": {
+        "Team": "Tím",
+        "Member": "Člen"
+    },
+    "Controllers\\Apps": {
+        "Settings": "Nastavenia",
+        "Apps": "Aplikácia",
+        "Open": "OTVORENÉ",
+        "Disable": "Zakázať",
+        "Install": "Inštalovať"
     }
 }

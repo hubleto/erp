@@ -56,7 +56,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
     } else {
       return <>
         <h2>{this.state.record.first_name ?? ''}&nbsp;{this.state.record.last_name ?? ''}</h2>
-        <small>Contact</small>
+        <small>{this.translate('Contact')}</small>
       </>;
     }
   }
@@ -125,7 +125,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
               </div>
             </div>
 
-            {this.divider('Contacts')}
+            {this.divider(this.translate('Contacts'))}
             <TableValues
               key={"contacts_"+this.state.contactsTableKey}
               uid={this.props.uid + '_table_contacts'}
@@ -193,7 +193,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
             <FormInput title={this.translate("Customer")}>
               <Lookup {...this.getInputProps('id_customer')}
                 model='HubletoApp/Community/Contacts/Models/Customer'
-                endpoint={`customers/get-customer`}
+                endpoint={`customers/api/get-customer`}
                 value={R.id_customer}
                 readonly={this.props.creatingNew}
                 onChange={(value: any) => {

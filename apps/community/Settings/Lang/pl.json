@@ -108,5 +108,71 @@
     },
     "input": {
         "Upload file": ""
+    },
+    "Models\\User": {
+        "First name": "Imię",
+        "Last name": "Nazwisko",
+        "Nick": "Nacięcie",
+        "Email": "E-mail",
+        "Language": "Język",
+        "Default company": "Firma domyślna"
+    },
+    "Models\\UserRole": {
+        "Role": "Rola",
+        "Grant all permissions (administrator role)": "Przyznać wszystkie uprawnienia (rola administratora)",
+        "Description": "Opis",
+        "Is default role (cannot be modified)": "Jest domyślną rolą (nie można zmodyfikować)"
+    },
+    "Models\\UserHasRole": {
+        "User": "Użytkownik",
+        "Role": "Rola"
+    },
+    "Models\\RolePermission": {
+        "Permission": "Pozwolenie",
+        "Role": "Rola"
+    },
+    "manifest": {
+        "Settings": "Ustawienia",
+        "Settings and control panel for your Hubleto.": "Ustawienia i panel sterowania dla twojego Hubleto."
+    },
+    "root": {
+        "Users": "Użytkownicy",
+        "Roles": "Role",
+        "Your companies": "Twoje firmy",
+        "General settings": "Ustawienia ogólne",
+        "Permissions list": "Lista uprawnień",
+        "Role permissions": "Uprawnienia do ról",
+        "Activity types": "Typy aktywności",
+        "Countries": "Kraje",
+        "Currencies": "Waluty",
+        "Invoice profiles": "Profile faktury",
+        "Platform config": "Konfiguracja platformy",
+        "Sidebar": "Pasek boczny",
+        "Teams": "Zespoły"
+    },
+    "Models\\Country": {
+        "Country": "Kraj",
+        "Code": "Kod"
+    },
+    "Models\\Company": {
+        "Company": "Firma",
+        "Tax ID": "Identyfikator podatkowy",
+        "VAT ID": "VAT ID",
+        "Street, line 1": "Ulica, linia 1",
+        "Street, line 2": "Ulica, linia 2",
+        "ZIP": "ZAMEK BŁYSKAWICZNY",
+        "City": "Miasto",
+        "Country": "Kraj"
+    },
+    "Models\\ActivityType": {
+        "Type": "Typ",
+        "Color": "Kolor",
+        "Show in calendar": "Pokaż w kalendarzu",
+        "Icon": "Ikona"
+    },
+    "Models\\Currency": {
+        "Currency": "Waluta",
+        "Code": "Kod",
+        "Symbol": "Symbol"
     }
 }

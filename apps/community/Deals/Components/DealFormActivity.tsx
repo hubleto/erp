@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
 import FormInput from 'adios/FormInput';
 import Lookup from 'adios/Inputs/Lookup';
 import FormActivity, { FormActivityProps, FormActivityState } from '@hubleto/apps/community/Calendar/Components/FormActivity'
@@ -14,7 +13,7 @@ export interface DealFormActivityState extends FormActivityState {
 
 export default class DealFormActivity<P, S> extends FormActivity<DealFormActivityProps, DealFormActivityState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormActivity.defaultProps,
     model: 'HubletoApp/Community/Deals/Models/DealActivity',
   };
 
@@ -22,10 +21,6 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
   state: DealFormActivityState;
 
   translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormActivity';
-
-  constructor(props: DealFormActivityProps) {
-    super(props);
-  }
 
   renderCustomInputs(): JSX.Element {
     const R = this.state.record;

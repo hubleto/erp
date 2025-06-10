@@ -13,18 +13,19 @@
         "Archive": "Archív"
     },
     "Models\\LeadActivity": {
-        "Activity type": "",
-        "Subject": "",
-        "Lead": "",
+        "Activity type": "Typ aktivity",
+        "Subject": "Predmet",
+        "Lead": "Vedenie",
         "Contact person": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Created by": "",
-        "Contact": ""
+        "Start date": "Dátum začiatku",
+        "Start time": "Začiatok",
+        "End date": "Dátum",
+        "End time": "Čas",
+        "All day": "Celý deň",
+        "Completed": "Dokončená",
+        "Created by": "Vytvorené",
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
     },
     "Models\\Lead": {
         "Add Lead": "Pridať lead",
@@ -43,31 +44,32 @@
         "Archived": "Archivovaný",
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok",
         "Score": "Skóre",
-        "Contact": "",
-        "Responsible": "",
-        "Created": "",
-        "Reason for Lost": "",
-        "Add lead": ""
+        "Contact": "Kontakt",
+        "Responsible": "Zodpovedný",
+        "Created": "Vytvorený",
+        "Reason for Lost": "Dôvod pre stratu",
+        "Add lead": "Pridať lead",
+        "Owner": "Majiteľ"
     },
     "root": {
         "Lead statuses": "Stavy leadov",
         "Lead Tags": "Značky leadov",
-        "Active leads": "",
-        "Archived leads": "",
-        "Lead Lost Reasons": ""
+        "Active leads": "Aktívne zvody",
+        "Archived leads": "Archivované vodiče",
+        "Lead Lost Reasons": "Dôvody pre stratu leadu"
     },
     "Models\\LeadHistory": {
-        "Change Date": "",
-        "Lead": "",
-        "Description": ""
+        "Change Date": "Dátum zmeny",
+        "Lead": "Vedenie",
+        "Description": "Opis"
     },
     "Models\\LeadTag": {
-        "Lead": "",
-        "Tag": ""
+        "Lead": "Vedenie",
+        "Tag": "Označenie"
     },
     "Models\\LeadDocument": {
-        "Lead": "",
-        "Document": ""
+        "Lead": "Vedenie",
+        "Document": "Dokument"
     },
     "Components\\FormLead": {
         "Lead": "Lead",
@@ -77,24 +79,33 @@
         "History": "História",
         "Local documents": "Dokumenty",
         "Go to deal": "Prejsť na deal",
-        "Show leads": "Zobraziť leady"
+        "Show leads": "Zobraziť leady",
+        "Type recent activity here": "Zadajte poslednú aktivitu tu",
+        "Enter = Log completed activity": "Enter = zapísať ukončenú aktivitu",
+        "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
+        "Most recent activities": "Najnovšie aktivity",
+        "Not completed yet": "Nedokončená"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": ""
+        "Name": "Pomenovať",
+        "Color": "Farba"
     },
     "Models\\LeadProduct": {
-        "Lead": "",
-        "Product": "",
-        "Unit Price": "",
-        "Amount": "",
+        "Lead": "Vedenie",
+        "Product": "Produkt",
+        "Unit Price": "Jednotková cena",
+        "Amount": "Výška",
         "Dicount (%)": "",
         "Vat (%)": "",
-        "Vat": "",
-        "Discount": "",
-        "Sum": ""
+        "Vat": "Kov",
+        "Discount": "Zľavu",
+        "Sum": "Súčet"
     },
     "Models\\LostReason": {
-        "Lost Reason": ""
+        "Lost Reason": "Stratený dôvod"
+    },
+    "Components\\FormActivity": {
+        "End": "Koniec",
+        "Start": "Začiatok"
     }
 }

@@ -1,0 +1,9 @@
+{
+    "manifest": {
+        "Desktop": "",
+        "Default Hubleto desktop implementation.": ""
+    },
+    "Controllers\\Home": {
+        "Welcome": ""
+    }
+}

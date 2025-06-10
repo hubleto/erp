@@ -44,10 +44,10 @@
         "Phone Number": "Telefón",
         "Other": "Iné",
         "Value": "Hodnota",
-        "Contact": "",
-        "Category": "",
-        "Number": "",
-        "URL": ""
+        "Contact": "Kontakt",
+        "Category": "Kategória",
+        "Number": "Počet",
+        "URL": "Adresa URL"
     },
     "Models\\PersonTag": {
         "Person": "Kontakt",
@@ -88,8 +88,8 @@
         "Add contact": "Pridať kontakt",
         "Emails": "Emaily",
         "Phone Numbers": "Telefónne čísla",
-        "Mr.": "",
-        "Mrs.": ""
+        "Mr.": "Pán",
+        "Mrs.": "Pani"
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
@@ -109,6 +109,8 @@
         "Add contact": "Pridať kontakt",
         "Customer": "Zákazník",
         "Tags": "Značky",
-        "Primary Contact": "Primárny kontakt"
+        "Primary Contact": "Primárny kontakt",
+        "Contact": "Kontakt",
+        "Contacts": "Kontakty"
     }
 }

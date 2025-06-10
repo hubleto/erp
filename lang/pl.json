@@ -33,5 +33,12 @@
         "No, do not delete": "Nie, zamknij okno",
         "Delete": "Usuwać",
         "Start typing to search...": "Aby wyszukać, zacznij pisać..."
+    },
+    "Desktop": {
+        "Premium": "Premia",
+        "Manage your user account": "Zarządzaj swoim kontem użytkownika",
+        "Manage cloud account": "Zarządzaj kontem w chmurze",
+        "Sign out": "Wyloguj się",
+        "Help": "Pomoc"
     }
 }

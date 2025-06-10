@@ -39,6 +39,7 @@ export default class FormTeam<P, S> extends HubletoForm<FormTeamProps, FormTeamS
         </div>
         <div className="flex-6">
           {this.inputWrapper('name')}
+          {this.inputWrapper('color')}
           {this.inputWrapper('description')}
           {this.inputWrapper('id_manager')}
           {this.divider('Team members')}

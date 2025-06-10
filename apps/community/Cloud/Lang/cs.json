@@ -1,0 +1,31 @@
+{
+    "manifest": {
+        "Cloud": "Mrak",
+        "Management of cloud Hubleto account.": "Správa účtu Cloud Hublesto."
+    },
+    "Models\\Log": {
+        "Log datetime": "Log DateTime",
+        "Active users": "Aktivní uživatelé",
+        "Paid apps": "Placené aplikace",
+        "Premium expected": "Očekává se prémie"
+    },
+    "Models\\Payment": {
+        "Charged": "Nabitý",
+        "Discount": "Sleva",
+        "Full amount": "Plná částka",
+        "Discounted amount": "Diskontovaná částka",
+        "Type": "Typ",
+        "Details": "Podrobnosti",
+        "Has invoice": "Má fakturu",
+        "Billing account": "Fakturační účet",
+        "UUID": "Uuid"
+    },
+    "Models\\Credit": {
+        "Recalculated": "Přepočítávání",
+        "Credit": "Kredit"
+    },
+    "root": {
+        "Free trial expires in": "Zkušební zkouška vyprší",
+        "days": "dny"
+    }
+}

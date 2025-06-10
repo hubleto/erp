@@ -9,7 +9,7 @@ class RenderAllRoutes extends \HubletoMain\Core\AppTest
   {
     $routes = [
       'calendar',
-      'calendar/get-calendar-events',
+      'calendar/api/get-calendar-events',
     ];
 
     foreach ($routes as $route) {

@@ -38,7 +38,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $packagesToInstall = null;
     $appsToInstall = null;
     $externalAppsRepositories = [];
-    $enterpriseRepoFolder = null;
+    $premiumRepoFolder = null;
 
     $configFile = (string) ($this->arguments[2] ?? '');
 
@@ -66,7 +66,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['packagesToInstall'])) $packagesToInstall = $config['packagesToInstall'];
     if (isset($config['appsToInstall'])) $appsToInstall = $config['appsToInstall'];
     if (isset($config['externalAppsRepositories'])) $externalAppsRepositories = $config['externalAppsRepositories'];
-    if (isset($config['enterpriseRepoFolder'])) $enterpriseRepoFolder = $config['enterpriseRepoFolder'];
+    if (isset($config['premiumRepoFolder'])) $premiumRepoFolder = $config['premiumRepoFolder'];
 
     if (isset($config['smtpHost'])) $smtpHost = $config['smtpHost'];
     if (isset($config['smtpPort'])) $smtpPort = $config['smtpPort'];
@@ -223,7 +223,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       }
     }
 
-    $installer->enterpriseRepoFolder = (string) ($enterpriseRepoFolder ?? '');
+    $installer->premiumRepoFolder = (string) ($premiumRepoFolder ?? '');
     $installer->externalAppsRepositories = $externalAppsRepositories;
     
     if (isset($config['extraConfigEnv'])) {

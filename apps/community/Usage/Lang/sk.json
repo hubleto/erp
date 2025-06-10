@@ -7,11 +7,11 @@
         "Usage log": "Záznamy používania"
     },
     "Models\\Log": {
-        "Time": "",
-        "IP": "",
-        "Route": "",
-        "Params": "",
-        "Message": "",
-        "User": ""
+        "Time": "Čas",
+        "IP": "Ip",
+        "Route": "Cesta",
+        "Params": "Parametre",
+        "Message": "Správa",
+        "User": "Užívateľ"
     }
 }

@@ -9,7 +9,7 @@ class RenderAllRoutes extends \HubletoMain\Core\AppTest
   {
     $routes = [
       'leads',
-      'leads/get-calendar-events',
+      // 'leads/get-calendar-events',
       'leads/archive',
       'leads/api/convert-to-deal',
       'settings/lead-statuses',

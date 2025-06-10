@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
-import FormUserRoles from './FormUserRoles';
+import FormUserRole from './FormUserRole';
 
 interface TableUserRolesProps extends TableProps {
 }
@@ -33,6 +33,6 @@ export default class TableUserRoles extends Table<TableUserRolesProps, TableUser
 
   renderForm(): JSX.Element {
     let formDescription = this.getFormProps();
-    return <FormUserRoles {...formDescription}/>;
+    return <FormUserRole {...formDescription}/>;
   }
 }

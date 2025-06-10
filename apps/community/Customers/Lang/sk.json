@@ -40,7 +40,12 @@
         "All day": "Celodenná",
         "Completed": "Ukončená",
         "Created by": "Vytvoril",
-        "Contact": ""
+        "Contact": "Kontakt",
+        "Start date": "Dátum začiatku",
+        "Start time": "Začiatok",
+        "End date": "Dátum",
+        "End time": "Čas",
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",
@@ -69,7 +74,12 @@
         "Email": "Email",
         "Primary Contact": "Primárny kontakt",
         "Tags": "Značky",
-        "Show on map": "Zobraziť na mape"
+        "Show on map": "Zobraziť na mape",
+        "Enter = Log completed activity": "Enter = zapísať ukončenú aktivitu",
+        "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
+        "Type recent activity here": "Zadajte poslednú aktivitu tu",
+        "Not completed yet": "Nedokončená",
+        "Most recent activities": "Najnovšie aktivity"
     },
     "root": {
         "Customer Tags": "Značky zákazníkov"
@@ -77,5 +87,13 @@
     "Models\\Tag": {
         "Name": "Značka",
         "Color": "Farba"
+    },
+    "Components\\FormActivity": {
+        "Customer": "Zákazník"
+    },
+    "Components\\CustomerFormActivity": {
+        "Customer": "Zákazník",
+        "End": "Ukončiť",
+        "Start": "Štart"
     }
 }

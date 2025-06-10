@@ -22,13 +22,13 @@ class Permission extends \HubletoMain\Core\Models\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = 'Permissions';
-    $description->ui['showHeader'] = false;
+    $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    $description->permissions['canCreate'] = false;
-    $description->permissions['canUpdate'] = false;
-    $description->permissions['canDelete'] = false;
+    // $description->permissions['canCreate'] = false;
+    // $description->permissions['canUpdate'] = false;
+    // $description->permissions['canDelete'] = false;
 
     return $description;
   }

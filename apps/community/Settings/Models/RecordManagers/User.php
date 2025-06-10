@@ -31,10 +31,21 @@ class User extends \HubletoMain\Core\RecordManager
     );
   }
 
+  /** @return BelongsToMany<UserRole, covariant User> */
+  public function TEAMS(): BelongsToMany
+  {
+    return $this->belongsToMany(
+      Team::class,
+      'teams_members',
+      'id_member',
+      'id_team'
+    );
+  }
+
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
     $query = parent::prepareReadQuery($query, $level);
-    $query = $query->with('ROLES');
+    $query = $query->with('ROLES')->with('TEAMS')->with('DEFAULT_COMPANY');
     return $query;
   }
 
@@ -54,7 +65,7 @@ class User extends \HubletoMain\Core\RecordManager
     }
 
     $query = $query->selectRaw('
-      *,
+      ' . $this->table . '.id,
       concat(
         ifnull(' . $this->table . '.nick, ' . $this->table . '.email),
         if(' . $this->table . '.id = ' . $idUser .  ', " (you)", "")

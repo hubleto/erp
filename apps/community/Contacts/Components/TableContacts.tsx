@@ -30,7 +30,7 @@ export default class TableContacts extends Table<TableContactsProps, TableContac
   getFormModalProps() {
     return {
       ...super.getFormModalProps(),
-      type: (this.props.customEndpointParams?.idCustomer ? 'inside-parent theme-secondary' : 'right wide'),
+      type: (this.props.customEndpointParams?.idCustomer ? 'right theme-secondary' : 'right wide'),
     };
   }
 

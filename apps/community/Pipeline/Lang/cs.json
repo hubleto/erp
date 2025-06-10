@@ -1,0 +1,21 @@
+{
+    "manifest": {
+        "Pipeline": "Potrubí",
+        "Free sales pipeline management.": "Správa potrubí zdarma."
+    },
+    "root": {
+        "Pipelines": "Potrubí"
+    },
+    "Models\\Pipeline": {
+        "Name": "Jméno",
+        "Description": "Popis"
+    },
+    "Models\\PipelineStep": {
+        "Name": "Jméno",
+        "Order": "Objednávka",
+        "Color": "Barva",
+        "Probability": "Pravděpodobnost",
+        "Pipeline": "Potrubí",
+        "Set result of a deal to": "Stanovit výsledek dohody"
+    }
+}

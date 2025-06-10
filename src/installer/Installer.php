@@ -16,7 +16,7 @@ class Installer {
   public string $mainFolder = '';
   public string $mainUrl = '';
 
-  public string $enterpriseRepoFolder = '';
+  public string $premiumRepoFolder = '';
 
   public string $env = '';
   public string $uid = '';
@@ -63,7 +63,13 @@ class Installer {
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200, ],
       \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210, 'calendarColor' => '#C00994', ],
       \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220, ],
-      \HubletoApp\Community\Deals\Loader::class => [ 'sidebarOrder' => 230, 'calendarColor' => '#D7B628', 'showMostValuableDealsInDashboard' => true, 'showDealValueByResultInDashboard' => true ],
+      \HubletoApp\Community\Deals\Loader::class => [
+        'sidebarOrder' => 230,
+        'calendarColor' => '#D7B628',
+        // 'showMostValuableDealsInDashboard' => true,
+        'showDealWarningsInDashboard' => true,
+        'showDealValueByResultInDashboard' => true,
+      ],
     ],
     'shop' => [
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 310, ],
@@ -183,7 +189,7 @@ class Installer {
 
   public function installApps(int $round): void
   {
-    $this->main->config->set('enterpriseRepoFolder', $this->enterpriseRepoFolder);
+    $this->main->config->set('premiumRepoFolder', $this->premiumRepoFolder);
     foreach ($this->appsToInstall as $appNamespace => $appConfig) {
       $this->main->apps->installApp($round, $appNamespace, $appConfig, true);
     }
@@ -232,7 +238,7 @@ class Installer {
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
     $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
     $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
-    $configEnv = str_replace('{{ enterpriseRepoFolder }}', $this->enterpriseRepoFolder, $configEnv);
+    $configEnv = str_replace('{{ premiumRepoFolder }}', $this->premiumRepoFolder, $configEnv);
 
     $configEnv = str_replace('{{ smtpHost }}', $this->smtpHost, $configEnv);
     $configEnv = str_replace('{{ smtpPort }}', $this->smtpPort, $configEnv);

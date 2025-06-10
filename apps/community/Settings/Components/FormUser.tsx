@@ -33,15 +33,6 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
   }
 
   renderContent(): JSX.Element {
-    // const languages = {
-    //   'cz': 'Česky',
-    //   'de': 'Deutsch',
-    //   'en': 'English',
-    //   'es': 'Español',
-    //   'fr': 'Francais',
-    //   'pl': 'Polski',
-    //   'sk': 'Slovensky',
-    // };
     return <>
       <div className='w-full flex gap-2'>
         <div className="p-4 flex-1 text-center">
@@ -86,18 +77,6 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
           </>}
         </div>
       </div>
-        {/* <div className="p-2">
-          {Object.keys(languages).map((symbol) => {
-            const lang = languages[symbol];
-
-            return <>
-              <a
-                href={"?set-language=" + symbol}
-                className={"btn btn-" + (symbol == this.state.record?.language ? "primary" : "transparent") + " mr-2"}
-              ><span className="text">{lang}</span></a>
-            </>;
-          })}
-        </div> */}
     </>;
   }
 }

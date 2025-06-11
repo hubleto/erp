@@ -33,6 +33,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $accountFullName = null;
     $adminName = null;
     $adminFamilyName = null;
+    $adminNick = null;
+    $adminNick = null;
     $adminEmail = null;
     $adminPassword = null;
     $packagesToInstall = null;
@@ -61,6 +63,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['accountFullName'])) $accountFullName = $config['accountFullName'];
     if (isset($config['adminName'])) $adminName = $config['adminName'];
     if (isset($config['adminFamilyName'])) $adminFamilyName = $config['adminFamilyName'];
+    if (isset($config['adminNick'])) $adminNick = $config['adminNick'];
     if (isset($config['adminEmail'])) $adminEmail = $config['adminEmail'];
     if (isset($config['adminPassword'])) $adminPassword = $config['adminPassword'];
     if (isset($config['packagesToInstall'])) $packagesToInstall = $config['packagesToInstall'];
@@ -95,6 +98,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($accountFullName === null) $accountFullName = $this->cli->read('Account.accountFullName', 'My Company');
     if ($adminName === null) $adminName = $this->cli->read('Account.adminName', 'John');
     if ($adminFamilyName === null) $adminFamilyName = $this->cli->read('Account.adminFamilyName', 'Smith');
+    if ($adminNick === null) $adminNick = $this->cli->read('Account.adminNick', 'johny');
     if ($adminEmail === null) $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
     if ($adminPassword === null) $adminPassword = $this->cli->read('Account.adminPassword (leave empty to generate random password)');
 
@@ -161,6 +165,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan('  -> accountFullName = ' . (string) $accountFullName . "\n");
     $this->cli->cyan('  -> adminName = ' . (string) $adminName . "\n");
     $this->cli->cyan('  -> adminFamilyName = ' . (string) $adminFamilyName . "\n");
+    $this->cli->cyan('  -> adminNick = ' . (string) $adminNick . "\n");
     $this->cli->cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
     $this->cli->cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
     $this->cli->cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
@@ -183,6 +188,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       (string) $accountFullName,
       (string) $adminName,
       (string) $adminFamilyName,
+      (string) $adminNick,
       (string) $adminEmail,
       (string) $adminPassword,
       (string) $rewriteBase,

@@ -1,6 +1,6 @@
 {% set dashboard = viewParams.defaultDashboard %}
 
-<h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.email }}</h1>
+<h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.first_name ?? user.email }}</h1>
 
 <div class="mt-2">
   <app-dashboards-dashboard

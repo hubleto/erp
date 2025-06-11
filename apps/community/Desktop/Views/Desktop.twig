@@ -206,15 +206,15 @@
           </li>
           <li>
             <button class="btn btn-transparent btn-dropdown mr-2">
-              <span class="text">{{ user.email }}</span>
+              <span class="text">{{ user.first_name }} {{ user.last_name }}</span>
               <span class="icon"><i class='fas fa-user-tie'></i></span>
               <div class="menu relative">
                 <div class="list bg-primary" style="position:absolute;right:7em;top:0.3em;width:20em;">
                   <div class="text-center text-white text-lg p-2">
+                    {{ user.first_name }} {{ user.last_name }}<br/>
                     {{ user.email }}<br/>
                     {{ user.DEFAULT_COMPANY.name }}
                   </div>
-                  <div class="text-center text-white text-xs">{{ user.first_name }}</div>
                   <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/settings/my-account">
                     <span class="icon"><i class='fas fa-user-tie'></i></span>
                     <span class="text">{{ translate('Manage your user account') }}</span>

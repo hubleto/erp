@@ -7,6 +7,7 @@ class Installer {
 
   public string $adminName = '';
   public string $adminFamilyName = '';
+  public string $adminNick = '';
   public string $adminEmail = '';
   public string $adminPassword = '';
   public string $accountFullName = '';
@@ -87,6 +88,7 @@ class Installer {
     string $accountFullName,
     string $adminName,
     string $adminFamilyName,
+    string $adminNick,
     string $adminEmail,
     string $adminPassword,
     string $accountRewriteBase,
@@ -112,6 +114,7 @@ class Installer {
     $this->accountFullName = $accountFullName;
     $this->adminName = $adminName;
     $this->adminFamilyName = $adminFamilyName;
+    $this->adminNick = $adminNick;
     $this->adminEmail = $adminEmail;
     $this->adminPassword = $adminPassword;
     $this->accountRewriteBase = $accountRewriteBase;
@@ -204,11 +207,13 @@ class Installer {
     $idUserAdministrator = $mUser->record->recordCreate([
       'first_name' => $this->adminName,
       'last_name' => $this->adminFamilyName,
+      'nick' => $this->adminNick,
       'login' => $this->adminEmail,
       'password' => $this->adminPassword == '' ? '' : $mUser->hashPassword($this->adminPassword),
       'email' => $this->adminEmail,
       'is_active' => true,
       'id_default_company' => $idCompany,
+      'language' => 'en',
     ])['id'];
 
     $mUserHasRole->record->recordCreate([

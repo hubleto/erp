@@ -55,20 +55,35 @@ class Model extends \ADIOS\Core\Model {
     return $description;
   }
 
+  public function diffRecords(array $record1, array $record2): array
+  {
+    $diff = [];
+    foreach ($this->getColumns() as $colName => $column) {
+      $v1 = $record1[$colName] ?? null;
+      $v2 = $record2[$colName] ?? null;
+      if ($v1 != $v2) $diff[$colName] = [ $v1, $v2 ];
+    }
+
+    return $diff;
+
+  }
+
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
     $messagesApp = $this->main->apps->community('Messages');
+    $diff = $this->diffRecords($originalRecord, $savedRecord);
 
-    if ($messagesApp) {
+    if ($messagesApp && count($diff) > 0) {
 
       $user = $this->main->auth->getUser();
 
       if (isset($savedRecord['id_owner'])) {
         $ownerEmail = $savedRecord['id_owner'];
         $body =
-          'User ' . $user['email'] . ' updated ' . $this->shortName . "\n"
+          'User ' . $user['email'] . ' updated ' . $this->shortName . ":\n"
+          . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
         ;
 
         $messagesApp->send(

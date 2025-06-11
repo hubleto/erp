@@ -234,33 +234,33 @@ class Lead extends \HubletoMain\Core\Models\Model
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-    if (isset($originalRecord["TAGS"])) {
+    if (isset($savedRecord["TAGS"])) {
       $helper = new Helper($this->main, $this->app);
       $helper->deleteTags(
-        array_column($originalRecord["TAGS"], "id"),
+        array_column($savedRecord["TAGS"], "id"),
         "HubletoApp/Community/Leads/Models/LeadTag",
         "id_lead",
-        $originalRecord["id"]
+        $savedRecord["id"]
       );
     }
 
-    $sums = 0;
-    $calculator = new CalculatePrice($this->main);
-    $allProducts = array_merge($originalRecord["PRODUCTS"], $originalRecord["SERVICES"]);
+    // $sums = 0;
+    // $calculator = new CalculatePrice($this->main);
+    // $allProducts = array_merge($savedRecord["PRODUCTS"], $savedRecord["SERVICES"]);
 
-    if (!empty($allProducts)) {
-      foreach ($allProducts as $product) {
-        if (!isset($product["_toBeDeleted_"])) {
-          $sums += $calculator->calculatePriceIncludingVat(
-            $product["unit_price"],
-            $product["amount"],
-            $product["vat"] ?? 0,
-            $product["discount"] ?? 0
-          );
-        }
-      }
-      $this->record->find($savedRecord["id"])->update(["price" => $sums]);
-    }
+    // if (!empty($allProducts)) {
+    //   foreach ($allProducts as $product) {
+    //     if (!isset($product["_toBeDeleted_"])) {
+    //       $sums += $calculator->calculatePriceIncludingVat(
+    //         $product["unit_price"],
+    //         $product["amount"],
+    //         $product["vat"] ?? 0,
+    //         $product["discount"] ?? 0
+    //       );
+    //     }
+    //   }
+    //   $this->record->find($savedRecord["id"])->update(["price" => $sums]);
+    // }
 
     return $savedRecord;
   }

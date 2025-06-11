@@ -137,13 +137,13 @@ class Customer extends \HubletoMain\Core\Models\Model
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-    if (isset($originalRecord["TAGS"])) {
+    if (isset($savedRecord["TAGS"])) {
       $helper = new Helper($this->main, $this->app);
       $helper->deleteTags(
-        array_column($originalRecord["TAGS"], "id"),
+        array_column($savedRecord["TAGS"], "id"),
         "HubletoApp/Community/Customers/Models/CustomerTag",
         "id_customer",
-        $originalRecord["id"]
+        $savedRecord["id"]
       );
     }
     return $savedRecord;

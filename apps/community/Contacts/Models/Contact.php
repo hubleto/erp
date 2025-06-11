@@ -108,13 +108,13 @@ class Contact extends \HubletoMain\Core\Models\Model
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-    if (isset($originalRecord["TAGS"])) {
+    if (isset($savedRecord["TAGS"])) {
       $helper = new Helper($this->main, $this->app);
       $helper->deleteTags(
-        array_column($originalRecord["TAGS"], "id"),
+        array_column($savedRecord["TAGS"], "id"),
         "HubletoApp/Community/Contacts/Models/ContactTag",
         "id_contact",
-        $originalRecord["id"]
+        $savedRecord["id"]
       );
     }
 

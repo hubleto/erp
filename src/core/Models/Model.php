@@ -61,9 +61,7 @@ class Model extends \ADIOS\Core\Model {
 
     $messagesApp = $this->main->apps->community('Messages');
 
-    $diff = \ADIOS\Core\Helper::arrayDiffRecursive($originalRecord, $savedRecord);
-
-    if ($messagesApp && count($diff) > 0) {
+    if ($messagesApp) {
 
       $user = $this->main->auth->getUser();
 

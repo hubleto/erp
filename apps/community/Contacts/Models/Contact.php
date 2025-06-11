@@ -99,7 +99,7 @@ class Contact extends \HubletoMain\Core\Models\Model
       $this->translate('Mr.'),
       $this->translate('Mrs.'),
     ]);
-    $description->defaultValues['is_active'] = 0;
+    $description->defaultValues['is_active'] = 1;
     $description->defaultValues['date_created'] = date("Y-m-d");
     return $description;
   }

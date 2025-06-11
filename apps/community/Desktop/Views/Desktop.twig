@@ -131,7 +131,7 @@
             </button>
           </li> #}
           <li>
-            <button class="btn btn-transparent btn-small btn-dropdown">
+            <button class="btn btn-transparent btn-dropdown">
               <div class="menu">
                 <div class="bg-white p-2 shadow-lg grid grid-cols-2" style="margin-left:-13.9em;margin-top:0.2em;width:16em;">
                   <div class="list mr-2">
@@ -160,7 +160,7 @@
           {% if viewParams.contextHelpUrl %}
             <li class="mr-2 hidden md:block">
               <a
-                class="btn btn-small btn-transparent"
+                class="btn btn-transparent"
                 href="https://help.hubleto.com/{{ viewParams.contextHelpUrl }}"
                 target="_blank"
               >
@@ -177,7 +177,7 @@
           {% if viewParams.main.apps.isAppInstalled('HubletoApp\Community\Messages') %}
             <li class="mr-2 hidden md:block">
               <a
-                class="btn btn-small btn-transparent"
+                class="btn btn-transparent"
                 href="https://help.hubleto.com/{{ viewParams.contextHelpUrl }}"
                 target="_blank"
               >
@@ -188,24 +188,24 @@
           {% endif %}
           <li class="mr-2 hidden md:block">
             {% if viewParams.main.isPremium %}
-              <a class="btn btn-small btn-transparent" href="{{ config.accountUrl }}/cloud">
+              <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud">
                 <span class="icon text-primary"><i class="fas fa-medal"></i></span>
                 <span class="text">{{ translate('Premium') }}</span>
               </a>
             {% else %}
-              <a class="btn btn-small btn-transparent" href="{{ config.accountUrl }}/cloud">
+              <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud">
                 <span class="icon text-primary"><i class="fas fa-cloud"></i></span>
                 <span class="text">{{ translate('Personal') }}</span>
               </a>
             {% endif %}
           </li>
           <li class="mr-2 hidden md:block">
-            <button id="theme-toggle-btn" class="btn btn-small btn-transparent" onclick="toggleTheme();">
+            <button id="theme-toggle-btn" class="btn btn-transparent" onclick="toggleTheme();">
               <span class="icon"><i class="fas fa-sun"></i></span>
             </a>
           </li>
           <li>
-            <button class="btn btn-transparent btn-small btn-dropdown mr-2">
+            <button class="btn btn-transparent btn-dropdown mr-2">
               <span class="text">{{ user.email }}</span>
               <span class="icon"><i class='fas fa-user-tie'></i></span>
               <div class="menu relative">

@@ -23,7 +23,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
     parent::prepareView();
 
     $fDealResult = $this->main->urlParamAsInteger('fDealResult');
-    $fResponsible = $this->main->urlParamAsInteger('fResponsible');
+    $fOwner = $this->main->urlParamAsInteger('fOwner');
 
     $mSetting = new Setting($this->main);
     $mPipeline = new Pipeline($this->main);
@@ -80,7 +80,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
     ;
 
     if ($fDealResult > 0) $deals = $deals->where('deal_result', $fDealResult ?? true);
-    if ($fResponsible > 0) $deals = $deals->where('id_owner', $fResponsible);
+    if ($fOwner > 0) $deals = $deals->where('id_owner', $fOwner);
 
     $deals = $deals
       ->get()

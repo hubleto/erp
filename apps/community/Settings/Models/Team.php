@@ -19,7 +19,7 @@ class Team extends \HubletoMain\Core\Models\Model
       'name' => (new Varchar($this, $this->translate("Team name")))->setRequired(),
       'color' => (new Color($this, $this->translate("Team color"))),
       'description' => (new Text($this, $this->translate("Description"))),
-      'id_manager' => (new Lookup($this, $this->translate("Team manager"), User::class))->setRequired(),
+      'id_manager' => (new Lookup($this, $this->translate("Manager"), User::class))->setRequired(),
     ]);
   }
 

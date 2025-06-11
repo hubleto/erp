@@ -35,7 +35,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
-    'RESPONSIBLE' => [ self::BELONGS_TO, User::class, 'id_responsible', 'id'],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
@@ -58,7 +58,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       'score' => (new Integer($this, $this->translate('Score')))->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class)),
-      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class)),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
       'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setEnumValues(
         [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
@@ -156,7 +156,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     $description->defaultValues['id_currency'] = $defaultCurrency;
     $description->defaultValues['status'] = $this::STATUS_NEW;
     $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
-    $description->defaultValues['id_responsible'] = $this->main->auth->getUserId();
+    $description->defaultValues['id_manager'] = $this->main->auth->getUserId();
 
     $description->ui['addButtonText'] = $this->translate('Add Lead');
 

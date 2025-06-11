@@ -42,7 +42,6 @@
         "Owner": "Majiteľ",
         "Created": "Vytvorený",
         "Reason for Lost": "Dôvod pre stratu",
-        "Responsible": "Zodpovedný",
         "Add Deal": "Pridať obchod"
     },
     "Models\\DealHistory": {

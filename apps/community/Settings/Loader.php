@@ -403,7 +403,7 @@ class Loader extends \HubletoMain\Core\App
       $mUserRole->record->recordCreate([
         'id' => Models\UserRole::ROLE_MANAGER,
         'role' => 'Manager (Sales, Project, ...)',
-        'description' => 'Can read and modify all data that he/she owns or is responsible for.',
+        'description' => 'Can read and modify all data that he/she owns or is manager.',
         'grant_all' => false,
         'is_default' => true,
       ])['id'];

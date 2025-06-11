@@ -45,8 +45,8 @@ class Deal extends \HubletoMain\Core\RecordManager
   }
 
   /** @return BelongsTo<User, covariant Lead> */
-  public function RESPONSIBLE(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_responsible','id' );
+  public function MANAGER(): BelongsTo {
+    return $this->belongsTo(User::class, 'id_manager','id' );
   }
 
   /** @return HasOne<Contact, covariant Deal> */

@@ -242,7 +242,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           readonly={R.is_archived}
           model='HubletoApp/Community/Pipeline/Models/Pipeline'
           value={R.id_pipeline}
-          onChange={(value: any) => {
+          onChange={(input: any, value: any) => {
             this.pipelineChange(value);
           }}
         ></Lookup>
@@ -364,7 +364,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           endpoint={`customers/api/get-customer`}
           value={R.id_customer}
           readonly={R.is_archived}
-          onChange={(value: any) => {
+          onChange={(input: any, value: any) => {
             this.updateRecord({ id_customer: value, id_contact: null });
             if (R.id_customer == 0) {
               R.id_customer = null;
@@ -380,7 +380,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           endpoint={`contacts/get-customer-contacts`}
           value={R.id_contact}
           readonly={R.is_archived}
-          onChange={(value: any) => {
+          onChange={(input: any, value: any) => {
             this.updateRecord({ id_contact: value })
             if (R.id_contact == 0) {
               R.id_contact = null;
@@ -415,19 +415,19 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     const inputsColumnRight = <>
       <div className="flex gap-2">
         {this.inputWrapper('id_owner', {readonly: R.is_archived})}
-        {this.inputWrapper('id_responsible', {readonly: R.is_archived})}
+        {this.inputWrapper('id_manager', {readonly: R.is_archived})}
       </div>
       {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
       <div className="flex gap-2">
         {this.inputWrapper('source_channel', {readonly: R.is_archived})}
-        {this.inputWrapper('is_new_customer', {readonly: R.is_archived, onChange: () => {
+        {this.inputWrapper('is_new_customer', {readonly: R.is_archived, onChange: (input: any, value: any) => {
           if (this.state.record.is_new_customer) {
             this.updateRecord({business_type: 1 /* New */});
           }
         }})}
       </div>
       <div className="flex gap-2">
-        {this.inputWrapper('business_type', {uiStyle: 'buttons', readonly: R.is_archived, onChange: () => {
+        {this.inputWrapper('business_type', {uiStyle: 'buttons', readonly: R.is_archived, onChange: (input: any, value: any) => {
           if (this.state.record.business_type == 2 /* Existing */) {
             this.updateRecord({is_new_customer: false});
           }
@@ -436,7 +436,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           {
             uiStyle: 'buttons',
             readonly: R.is_archived,
-            onChange: () => {
+            onChange: (input: any, value: any) => {
               this.updateRecord({lost_reason: null});
               this.changePipelineStepFromResult();
             }
@@ -554,7 +554,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                     customEndpointParams={{'getServices': true}}
                                     cssClass='min-w-44'
                                     value={data.id_product}
-                                    onChange={(value: any) => {
+                                    onChange={(input: any, value: any) => {
                                       getLookupData(this.refServicesLookup);
                                       if (lookupData[value]) {
                                         data.id_product = value;
@@ -615,7 +615,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                                     customEndpointParams={{'getProducts': true}}
                                     cssClass='min-w-44'
                                     value={data.id_product}
-                                    onChange={(value: any) => {
+                                    onChange={(input: any, value: any) => {
                                       getLookupData(this.refProductsLookup);
                                       if (lookupData[value]) {
                                         data.id_product = value;

@@ -42,6 +42,7 @@ export default class FormDashboard<P, S> extends HubletoForm<FormDashboardProps,
           {this.inputWrapper("title")}
           {this.inputWrapper("slug")}
           {this.inputWrapper("color")}
+          {this.inputWrapper("is_default")}
         </div>
       </div>
       {R.id <= 0 ? null :

@@ -21,6 +21,7 @@ class Dashboards extends \HubletoMain\Core\Controllers\Controller
     $dashboardSlug = $this->main->urlParamAsString('dashboardSlug');
 
     $dashboards = $mDashboard->record->prepareReadQuery()
+      ->where('id_owner', $this->main->auth->getUserId())
       ->with('PANELS')
       ->get()
       ?->toArray();

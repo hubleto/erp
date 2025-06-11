@@ -47,7 +47,6 @@
         "New Customer": "Neuer Kunde",
         "Business type": "Geschäftstyp",
         "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
-        "Responsible": "Verantwortlich",
         "Add Deal": "Deal hinzufügen"
     },
     "Models\\DealActivity": {

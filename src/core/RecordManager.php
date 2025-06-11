@@ -20,13 +20,13 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
     $idUser = $main->auth->getUserId();
 
     $hasIdOwner = isset($record['id_owner']);
-    $hasIdResponsible = isset($record['id_responsible']);
+    $hasIdManager = isset($record['id_manager']);
 
     $isOwner = false;
     if ($hasIdOwner) $isOwner = $record['id_owner'] == $idUser;
 
-    $isResponsible = false;
-    if ($hasIdResponsible) $isResponsible = $record['id_responsible'] == $idUser;
+    $isManager = false;
+    if ($hasIdManager) $isManager = $record['id_manager'] == $idUser;
 
     // enable permissions by certain criteria
     $canRead = false;
@@ -46,10 +46,10 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
       }
     } else if ($main->auth->userHasRole(UserRole::ROLE_MANAGER)) {
       // Manager can:
-      //   - read only records where he/she is owner or responsible
+      //   - read only records where he/she is owner or manager
       //   - modify only records where he/she is owner
 
-      if ($hasIdResponsible && $isResponsible || !$hasIdResponsible) $canRead = true;
+      if ($hasIdManager && $isManager || !$hasIdManager) $canRead = true;
 
       if ($hasIdOwner && $isOwner || !$hasIdOwner) {
         $canRead = true;
@@ -96,21 +96,21 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
     $query = parent::prepareReadQuery($query, $level);
 
     $hasIdOwner = $this->model->hasColumn('id_owner');
-    $hasIdResponsible = $this->model->hasColumn('id_responsible');
+    $hasIdManager = $this->model->hasColumn('id_manager');
 
     $idUser = $main->auth->getUserId();
 
     if ($main->auth->userHasRole(UserRole::ROLE_MANAGER)) {
-      if ($hasIdOwner && $hasIdResponsible) {
+      if ($hasIdOwner && $hasIdManager) {
         $query = $query->where(function($q) use ($idUser) {
           $q
             ->where($this->table . '.id_owner', $idUser)
-            ->orWhere($this->table . '.id_responsible', $idUser);
+            ->orWhere($this->table . '.id_manager', $idUser);
         });
       } else if ($hasIdOwner) {
         $query = $query->where($this->table . '.id_owner', $idUser);
-      } else if ($hasIdResponsible) {
-        $query = $query->where($this->table . '.id_responsible', $idUser);
+      } else if ($hasIdManager) {
+        $query = $query->where($this->table . '.id_manager', $idUser);
       }
     } else if ($main->auth->userHasRole(UserRole::ROLE_EMPLOYEE) && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);

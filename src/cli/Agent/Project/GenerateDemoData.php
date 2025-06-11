@@ -316,7 +316,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
           "note" => $customer[10],
           "is_active" => rand(0, 1),
           "id_owner" => rand(1, 4),
-          "id_responsible" => rand(1, 4),
+          "id_manager" => rand(1, 4),
           "date_created" => date("Y-m-d", rand(1722456000, strtotime("now"))),
         ])['id'];
 

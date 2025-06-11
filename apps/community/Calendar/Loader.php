@@ -9,7 +9,7 @@ class Loader extends \HubletoMain\Core\App
 
   public CalendarManager $calendarManager;
 
-  public bool $hasCustomSettings = true;
+  // public bool $hasCustomSettings = true;
 
   public function __construct(\HubletoMain $main)
   {
@@ -32,13 +32,13 @@ class Loader extends \HubletoMain\Core\App
       'en' => 'en/apps/community/calendar',
     ]);
 
-    $dashboard = $this->main->apps->community('Desktop')->dashboard;
-
-    if ($this->configAsBool('showEventsForTodayInDashboard')) {
-      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
+    $dashboardsApp = $this->main->apps->community('Dashboards');
+    if ($dashboardsApp) {
+      $dashboardsApp->addBoard(
+        $this,
         $this->translate('Events for today'),
-        'calendar/boards/events-for-today',
-      ));
+        'calendar/boards/events-for-today'
+      );
     }
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;

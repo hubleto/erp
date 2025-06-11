@@ -53,13 +53,6 @@ class Loader extends \HubletoMain\Core\App
 
     $dashboard = $this->main->apps->community('Desktop')->dashboard;
 
-    if ($this->configAsBool('showLeadValueByScoreInDashboard')) {
-      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
-        'Lead value by score',
-        'leads/boards/lead-value-by-score',
-      ));
-    }
-
     $this->main->apps->community('Help')->addContextHelpUrls('/^leads\/?$/', [
       'en' => 'en/apps/community/leads',
     ]);

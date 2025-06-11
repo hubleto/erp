@@ -17,16 +17,6 @@ class Settings extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
 
-    $settingsChanged = $this->main->urlParamAsBool('settingsChanged');
-
-    if ($settingsChanged) {
-      $showEventsForTodayInDashboard = $this->main->urlParamAsBool('showEventsForTodayInDashboard');
-      $this->hubletoApp->setConfigAsBool('showEventsForTodayInDashboard', $showEventsForTodayInDashboard);
-      $this->hubletoApp->saveConfig('showEventsForTodayInDashboard', $showEventsForTodayInDashboard ? '1' : '0');
-
-      $this->viewParams['settingsSaved'] = true;
-    }
-
     $this->setView('@HubletoApp:Community:Calendar/Settings.twig');
   }
 

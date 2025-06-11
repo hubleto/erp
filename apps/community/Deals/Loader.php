@@ -74,29 +74,6 @@ class Loader extends \HubletoMain\Core\App
       );
     }
 
-    $dashboard = $this->main->apps->community('Desktop')->dashboard;
-
-    if ($this->configAsBool('showDealWarningsInDashboard')) {
-      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
-        $this->translate('Deal warnings'),
-        'deals/boards/deal-warnings',
-      ));
-    }
-
-    if ($this->configAsBool('showMostValuableDealsInDashboard')) {
-      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
-        $this->translate('Most valuable deals'),
-        'deals/boards/most-valuable-deals',
-      ));
-    }
-
-    if ($this->configAsBool('showDealValueByResultInDashboard')) {
-      $dashboard->addBoard(new \HubletoApp\Community\Desktop\Types\Board(
-        $this->translate('Deal value by result'),
-        'deals/boards/deal-value-by-result',
-      ));
-    }
-
     $this->main->apps->community('Help')->addContextHelpUrls('/^deals\/?$/', [
       'en' => 'en/apps/community/deals',
     ]);

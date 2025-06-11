@@ -20,10 +20,6 @@ class Settings extends \HubletoMain\Core\Controllers\Controller
     $settingsChanged = $this->main->urlParamAsBool('settingsChanged');
 
     if ($settingsChanged) {
-      $showLeadValueByScoreInDashboard = $this->main->urlParamAsBool('showLeadValueByScoreInDashboard');
-      $this->hubletoApp->setConfigAsBool('showLeadValueByScoreInDashboard', $showLeadValueByScoreInDashboard);
-      $this->hubletoApp->saveConfig('showLeadValueByScoreInDashboard', $showLeadValueByScoreInDashboard ? '1' : '0');
-
       $calendarColor = $this->main->urlParamAsString('calendarColor');
       $this->hubletoApp->setConfigAsString('calendarColor', $calendarColor);
       $this->hubletoApp->saveConfig('calendarColor', $calendarColor);

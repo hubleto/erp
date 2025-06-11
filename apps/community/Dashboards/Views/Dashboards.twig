@@ -1,23 +1,37 @@
 <h1 class="app-main-title">{{ translate('Dashboards') }}</h1>
 
-<div class="grid grid-cols-4 gap-2">
-  {% for d in viewParams.dashboards %}
-    <a
-      class="btn btn-primary-outline"
-      href="{{ config.accountUrl }}/dashboards/{{ d.slug }}"
-      style="border-left:1em solid {{ d.color }}"
-    >
-      <span class="text text-center w-full">{{ d.title }}</span>
-    </a>
-  {% endfor %}
+<div class="flex gap-2 justify-between card card-body flex-row">
+  <div class="flex gap-2">
+    {% for d in viewParams.dashboards %}
+      <a
+        class="btn btn-primary-outline"
+        href="{{ config.accountUrl }}/dashboards/{{ d.slug }}"
+        style="border: 1px solid {{ d.color }};border-left-width:1em"
+      >
+        <span class="text">{{ d.title }}</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  <a
+    class="btn btn-add-outline"
+    href="{{ config.accountUrl }}/settings/dashboards"
+  >
+    <span class="icon"><i class="fas fa-cog"></i></span>
+    <span class="text">{{ translate('Manage dashboards') }}</span>
+  </a>
+
 </div>
 
 {% if viewParams.dashboardSlug != '' %}
-  <div class="mt-2">
+  <div class="mt-4">
     {% for d in viewParams.dashboards %}
       {% if d.slug == viewParams.dashboardSlug %}
         <h2>{{ d.title }}</h2>
-        <app-desktop-dashboard json:panels='{{ d.PANELS|json_encode|raw }}'></app-desktop-dashboard>
+        <app-dashboards-dashboard
+          int:id-dashboard='{{ d.id }}'
+          json:panels='{{ d.PANELS|json_encode|raw }}'
+        ></app-dashboards-dashboard>
       {% endif %}
     {% endfor %}
   </div>

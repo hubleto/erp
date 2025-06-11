@@ -88,11 +88,11 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
     }
   }
 
-  public function auth(bool $persist): void
+  public function auth(): void
   {
     setcookie('incorrectLogin', '', time() - 3600);
 
-    parent::auth($persist);
+    parent::auth();
 
     $setLanguage = $this->main->urlParamAsString('set-language');
 

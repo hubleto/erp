@@ -7,7 +7,7 @@
         <td>{{ event.details }}</td>
         <td>{% if event.allDay %} {{ translate('All-day') }} {% else %} {{ viewParams.main.locale.formatTime(event.start ?? '', false) }} {% endif %}</td>
         <td class="text-right">
-          <a href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}" class="btn btn-transparent">
+          <a href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}" class="btn btn-transparent btn-small">
             <span class="icon"><i class="fas fa-arrow-right"></i></span>
             <span class="text">{{ translate('Open event details') }}</span>
           </a>

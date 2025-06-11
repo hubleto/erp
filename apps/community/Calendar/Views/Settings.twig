@@ -16,23 +16,6 @@
     <input type="hidden" name="settingsChanged" value="1">
     <table class="table-default">
       <tbody>
-        <tr>
-          <td>
-            <label class="input-label" for="showEventsForTodayInDashboard">
-              Show 'Events for today' in dashboard
-            </label>
-          </td>
-          <td>
-            <input
-              type="checkbox"
-              id="showEventsForTodayInDashboard"
-              name="showEventsForTodayInDashboard"
-              style="zoom:2"
-              {% if viewParams.app.configAsBool('showEventsForTodayInDashboard') %} checked {% endif %}
-              onchange="saveSettings();"
-            />
-          </td>
-        </tr>
       </tbody>
     </table>
   </form>

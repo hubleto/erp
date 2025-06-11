@@ -49,8 +49,8 @@ class Document extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form {
-
+  public function describeForm(): \ADIOS\Core\Description\Form
+  {
     $description = parent::describeForm();
     $description->defaultValues = [
       "uid" => \ADIOS\Core\Helper::generateUuidV4(),

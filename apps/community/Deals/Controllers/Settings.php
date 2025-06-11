@@ -20,18 +20,6 @@ class Settings extends \HubletoMain\Core\Controllers\Controller
     $settingsChanged = $this->main->urlParamAsBool('settingsChanged');
 
     if ($settingsChanged) {
-      $showDealWarningsInDashboard = $this->main->urlParamAsBool('showDealWarningsInDashboard');
-      $this->hubletoApp->setConfigAsBool('showDealWarningsInDashboard', $showDealWarningsInDashboard);
-      $this->hubletoApp->saveConfig('showDealWarningsInDashboard', $showDealWarningsInDashboard ? '1' : '0');
-
-      $showMostValuableDealsInDashboard = $this->main->urlParamAsBool('showMostValuableDealsInDashboard');
-      $this->hubletoApp->setConfigAsBool('showMostValuableDealsInDashboard', $showMostValuableDealsInDashboard);
-      $this->hubletoApp->saveConfig('showMostValuableDealsInDashboard', $showMostValuableDealsInDashboard ? '1' : '0');
-
-      $showDealValueByResultInDashboard = $this->main->urlParamAsBool('showDealValueByResultInDashboard');
-      $this->hubletoApp->setConfigAsBool('showDealValueByResultInDashboard', $showDealValueByResultInDashboard);
-      $this->hubletoApp->saveConfig('showDealValueByResultInDashboard', $showDealValueByResultInDashboard ? '1' : '0');
-
       $calendarColor = $this->main->urlParamAsString('calendarColor');
       $this->hubletoApp->setConfigAsString('calendarColor', $calendarColor);
       $this->hubletoApp->saveConfig('calendarColor', $calendarColor);

@@ -17,57 +17,6 @@
     <table class="table-default">
       <tbody>
         <tr>
-          <td>
-            <label class="input-label" for="showDealWarningsInDashboard">
-              {{ translate("Show 'Deal warnings' in dashboard") }}
-            </label>
-          </td>
-          <td>
-            <input
-              type="checkbox"
-              id="showDealWarningsInDashboard"
-              name="showDealWarningsInDashboard"
-              style="zoom:2"
-              {% if viewParams.app.configAsBool('showDealWarningsInDashboard') %} checked {% endif %}
-              onchange="saveSettings();"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label class="input-label" for="showMostValuableDealsInDashboard">
-              {{ translate("Show 'Most valuable deals' in dashboard") }}
-            </label>
-          </td>
-          <td>
-            <input
-              type="checkbox"
-              id="showMostValuableDealsInDashboard"
-              name="showMostValuableDealsInDashboard"
-              style="zoom:2"
-              {% if viewParams.app.configAsBool('showMostValuableDealsInDashboard') %} checked {% endif %}
-              onchange="saveSettings();"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label class="input-label" for="showDealValueByResultInDashboard">
-              {{ translate("Show 'Deal value by result' in dashboard") }}
-            </label>
-          </td>
-          <td>
-            <input
-              type="checkbox"
-              id="showDealValueByResultInDashboard"
-              name="showDealValueByResultInDashboard"
-              style="zoom:2"
-              {% if viewParams.app.configAsBool('showDealValueByResultInDashboard') %} checked {% endif %}
-              onchange="saveSettings();"
-            />
-          </td>
-        </tr>
-        <tr>
           <td>{{ translate("Calendar color") }}</td>
           <td>
             <input

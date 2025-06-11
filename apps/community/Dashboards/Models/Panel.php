@@ -19,9 +19,9 @@ class Panel extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class))->setRequired(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class))->setRequired()->setReadonly(),
       'board_url_slug' => (new Varchar($this, $this->translate('Board')))->setRequired(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'configuration' => (new Json($this, $this->translate('Configuration'))),
     ]);
   }
@@ -48,14 +48,26 @@ class Panel extends \HubletoMain\Core\Models\Model
     switch ($columnName) {
       case 'board_url_slug':
         $dashboardsApp = $this->main->apps->community('Dashboards');
-        $panels = $dashboardsApp->getPanels();
-        $enumValues = [];
-        foreach ($panels as $panel) {
-          $enumValues[$panel['boardUrlSlug']] = $panel['app']->manifest['name'] . ': ' . $panel['title'];
+        $boards = $dashboardsApp->getBoards();
+        $enumValues = [
+          '' => '-- Select board to be displayed in panel --',
+        ];
+        foreach ($boards as $board) {
+          $enumValues[$board['boardUrlSlug']] = $board['app']->manifest['name'] . ': ' . $board['title'];
         }
         $description->setEnumValues($enumValues);
       break;
     }
+    return $description;
+  }
+
+  public function describeForm(): \ADIOS\Core\Description\Form {
+
+    $description = parent::describeForm();
+    $description->defaultValues = [
+      "id_dashboard" => $this->main->urlParamAsInteger('idDashboard'),
+    ];
+
     return $description;
   }
 

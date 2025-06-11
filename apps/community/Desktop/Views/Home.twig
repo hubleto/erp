@@ -1,29 +1,14 @@
-{% set boards = viewParams.app.dashboard.getBoards() %}
+{% set dashboard = viewParams.defaultDashboard %}
 
 <h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.email }}</h1>
 
 <div class="mt-2">
-  <app-desktop-dashboard json:panels='{{ boards|json_encode|raw }}'></app-desktop-dashboard>
+  <app-dashboards-dashboard
+    int:id-dashboard='{{ dashboard.id }}'
+    json:panels='{{ dashboard.PANELS|json_encode|raw }}'>
+  </app-dashboards-dashboard>
 </div>
 
 <div class="mx-auto pt-20">
   <img src="{{ config.url }}/assets/images/logo-hubleto-text-horizontal.png" class="max-w-90 m-auto">
 </div>
-{# <div>
-  {% if not viewParams.main.isPremium %}
-    <div class="card border-yellow-100">
-      <div class="card-header text-yellow-900 bg-yellow-100 border-yellow-200">
-        {{ translate('Upgrade to Premium and get exciting rewards.') }}
-        <i class="fas fa-cloud-arrow-up"></i>
-      </div>
-      <div class="card-body bg-yellow-50 border-yellow-100">
-        {{ translate('You are using free version of Hubleto. Certain features are unavailable.') }}<br/>
-        <br/>
-        <a href="{{ config.accountUrl }}/upgrade" class="btn btn-primary btn-large">
-          <span class="icon"><i class="fas fa-cloud-arrow-up"></i></span>
-          <span class="text">{{ translate('Upgrade to Premium') }}</span>
-        </a>
-      </div>
-    </div>
-  {% endif %}
-</div> #}

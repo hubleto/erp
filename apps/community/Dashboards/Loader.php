@@ -60,7 +60,7 @@ class Loader extends \HubletoMain\Core\App
 
     $dashboard = $mDashboard->record->recordCreate([
       'id_owner' => 1,
-      'title' => 'All boards',
+      'title' => 'Default dashboard',
       'slug' => 'all-boards',
       'is_default' => true,
     ]);

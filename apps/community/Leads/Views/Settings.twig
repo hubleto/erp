@@ -27,23 +27,6 @@
     <table class="table-default">
       <tbody>
         <tr>
-          <td>
-            <label class="input-label" for="showLeadValueByScoreInDashboard">
-              Show 'Lead value by score' in dashboard
-            </label>
-          </td>
-          <td>
-            <input
-              type="checkbox"
-              id="showLeadValueByScoreInDashboard"
-              name="showLeadValueByScoreInDashboard"
-              style="zoom:2"
-              {% if viewParams.app.configAsBool('showLeadValueByScoreInDashboard') %} checked {% endif %}
-              onchange="saveSettings();"
-            />
-          </td>
-        </tr>
-        <tr>
           <td>Calendar color</td>
           <td>
             <input

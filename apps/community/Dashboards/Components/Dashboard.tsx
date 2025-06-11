@@ -1,30 +1,39 @@
 import React, { Component } from 'react'
 import request from "adios/Request";
 import { ProgressBar } from 'primereact/progressbar';
+import TranslatedComponent from "adios/TranslatedComponent";
+import ModalForm from "adios/ModalForm";
+import FormPanel from "./FormPanel";
 
 export interface Panel {
   title: string,
-  boardUrlSlug: string,
+  board_url_slug: string,
   configuration: any,
   contentLoaded?: boolean,
   content?: string,
 }
 
 export interface DesktopDashboardProps {
+  idDashboard: number,
   panels: Array<Panel>
 }
 
 export interface DesktopDashboardState {
   panels: Array<Panel>,
+  showIdPanel: number,
 }
 
-export default class DesktopDashboard extends Component<DesktopDashboardProps, DesktopDashboardState> {
+export default class DesktopDashboard extends TranslatedComponent<DesktopDashboardProps, DesktopDashboardState> {
+
+  props: DesktopDashboardProps;
+  state: DesktopDashboardState;
 
   constructor(props: DesktopDashboardProps) {
     super(props);
 
     this.state = {
       panels: this.props.panels,
+      showIdPanel: 0,
     }
   }
 
@@ -46,7 +55,7 @@ export default class DesktopDashboard extends Component<DesktopDashboardProps, D
 
       if (!panels[i].contentLoaded) {
         request.get(
-          panels[i].boardUrlSlug,
+          panels[i].board_url_slug,
           configuration ?? {},
           (html: any) => {
             try {
@@ -64,7 +73,15 @@ export default class DesktopDashboard extends Component<DesktopDashboardProps, D
 
   renderPanel(panel: any, index: any) {
     return <div key={index} className="card">
-      <div className="card-header">{panel.title}</div>
+      <div className="card-header">
+        {panel.title}
+        <button
+          className='btn btn-transparent btn-small'
+          onClick={() => { this.setState({showIdPanel: panel.id}); }}
+        >
+          <span className='icon'><i className='fas fa-cog'></i></span>
+        </button>
+      </div>
       {panel.contentLoaded ? 
         <div className="card-body" dangerouslySetInnerHTML={{__html: panel.content}}></div>
       :
@@ -93,6 +110,29 @@ export default class DesktopDashboard extends Component<DesktopDashboardProps, D
           {panelsRight.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
         </div>
       </div>
+      <button
+        className='btn btn-add mt-2'
+        onClick={() => { this.setState({showIdPanel: -1}); }}
+      >
+        <span className='icon'><i className='fas fa-plus'></i></span>
+        <span className='text'>{this.translate('Add new panel')}</span>
+      </button>
+      {this.state.showIdPanel != 0 ?
+        <ModalForm
+          uid='add_new_panel_modal'
+          isOpen={true}
+          type='right'
+        >
+          <FormPanel
+            uid='add_new_panel_form'
+            customEndpointParams={{idDashboard: this.props.idDashboard}}
+            id={this.state.showIdPanel}
+            showInModal={true}
+            showInModalSimple={true}
+            onClose={() => { this.setState({showIdPanel: 0}); }}
+          />
+        </ModalForm>
+      : <></>}
     </>
   }
 

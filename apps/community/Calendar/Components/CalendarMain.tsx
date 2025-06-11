@@ -3,7 +3,6 @@ import { setUrlParam, deleteUrlParam } from "adios/Helper";
 import Calendar from "./Calendar";
 import ModalForm from "adios/ModalForm";
 import FormActivitySelector from "./FormActivitySelector";
-import { log } from "console";
 
 
 interface CalendarMainProps {

@@ -248,7 +248,13 @@
         </button>
         {% set i = 0 %}
         {% for app in viewParams.appsInSidebar %}
+          {% set notificationsCount = app.getNotificationsCount() %}
           <div class="flex gap-1">
+            {% if notificationsCount > 0 %}
+              <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
+                <div class="badge badge-small badge-red px-1">{{ notificationsCount }}</div>
+              </div>
+            {% endif %}
             <a
               type="button"
               class="btn {% if app.isActivated %} btn-active {% endif %} flex-10 truncate"

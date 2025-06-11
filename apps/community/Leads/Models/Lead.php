@@ -212,6 +212,8 @@ class Lead extends \HubletoMain\Core\Models\Model
 
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
+    $savedRecord = parent::onAfterCreate($originalRecord, $savedRecord);
+
     $mLeadHistory = new LeadHistory($this->main);
     $mLeadHistory->record->recordCreate([
       "change_date" => date("Y-m-d"),
@@ -225,11 +227,13 @@ class Lead extends \HubletoMain\Core\Models\Model
       $this->record->recordUpdate($newLead);
     }
 
-    return parent::onAfterCreate($originalRecord, $savedRecord);
+    return $savedRecord;
   }
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
     if (isset($originalRecord["TAGS"])) {
       $helper = new Helper($this->main, $this->app);
       $helper->deleteTags(

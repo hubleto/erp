@@ -55,4 +55,35 @@ class Model extends \ADIOS\Core\Model {
     return $description;
   }
 
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
+    $messagesApp = $this->main->apps->community('Messages');
+
+    $diff = \ADIOS\Core\Helper::arrayDiffRecursive($originalRecord, $savedRecord);
+
+    if ($messagesApp && count($diff) > 0) {
+
+      $user = $this->main->auth->getUser();
+
+      if (isset($savedRecord['id_owner'])) {
+        $ownerEmail = $savedRecord['id_owner'];
+        $body =
+          'User ' . $user['email'] . ' updated ' . $this->shortName . "\n"
+        ;
+
+        $messagesApp->send(
+          $ownerEmail, // to
+          '', // cc
+          '', // bcc
+          $this->shortName . ' updated', // subject
+          $body
+        );
+      }
+    }
+
+    return $savedRecord;
+  }
+
 }

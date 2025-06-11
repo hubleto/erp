@@ -73,6 +73,8 @@ class Order extends \HubletoMain\Core\Models\Model
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
     $mProduct = new Product($this->main);
     $longDescription = "";
 
@@ -99,6 +101,8 @@ class Order extends \HubletoMain\Core\Models\Model
 
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
+    $savedRecord = parent::onAfterCreate($originalRecord, $savedRecord);
+
     $order = $this->record->find($savedRecord["id"]);
     $order->order_number = $order->id;
     $order->save();
@@ -110,6 +114,6 @@ class Order extends \HubletoMain\Core\Models\Model
       "date_time" => date("Y-m-d H:i:s"),
     ]);
 
-    return parent::onAfterCreate($originalRecord, $savedRecord);
+    return $savedRecord;
   }
 }

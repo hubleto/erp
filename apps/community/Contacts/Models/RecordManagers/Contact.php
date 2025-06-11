@@ -87,8 +87,10 @@ class Contact extends \HubletoMain\Core\RecordManager
           ->leftJoin('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
         ;
       }
-      $query->orHaving('contact_values.value', 'like', "%{$fulltextSearch}%");
-
+      $query
+        ->orHaving('contact_values.value', 'like', "%{$fulltextSearch}%")
+        ->groupBy("contacts.id")
+      ;
     }
     return $query;
   }

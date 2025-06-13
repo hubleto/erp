@@ -41,13 +41,15 @@ class Loader extends \HubletoMain\Core\App
 
   public function onBeforeRender(): void
   {
-    if (!str_starts_with($this->main->route, 'cloud')) {
-      if (!$this->configAsBool('legalDocumentsAccepted')) {
-        $this->main->router->redirectTo('cloud');
-      } else if ($this->main->isPremium) {
-        $subscriptionInfo = $this->getSubscriptionInfo();
-        if (!$subscriptionInfo['isActive']) {
+    if ($this->main->auth->getUserId() > 0) {
+      if (!str_starts_with($this->main->route, 'cloud')) {
+        if (!$this->configAsBool('legalDocumentsAccepted')) {
           $this->main->router->redirectTo('cloud');
+        } else if ($this->main->isPremium) {
+          $subscriptionInfo = $this->getSubscriptionInfo();
+          if (!$subscriptionInfo['isActive']) {
+            $this->main->router->redirectTo('cloud');
+          }
         }
       }
     }

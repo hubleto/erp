@@ -56,10 +56,9 @@ class Installer {
       \HubletoApp\Community\Dashboards\Loader::class => [ 'sidebarOrder' => 99995, ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],
-      \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99999, ],
     ],
-    'documents' => [
-      \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
+    'cloud' => [
+      \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99999, ],
     ],
     'sales' => [
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200, ],

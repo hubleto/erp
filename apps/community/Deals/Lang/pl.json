@@ -47,7 +47,8 @@
         "New Customer": "Nowy klient",
         "Business type": "Typ biznesu",
         "Link to shared folder (online storage) with related documents": "Link do folderu udostępnionego (przechowywanie online) z powiązanymi dokumentami",
-        "Add Deal": "Dodaj ofertę"
+        "Add Deal": "Dodaj ofertę",
+        "Manager": "Menedżer"
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otwarta umowa"

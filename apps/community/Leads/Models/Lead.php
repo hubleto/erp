@@ -110,7 +110,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
     unset($description->columns['shared_folder']);
-    unset($description->columns['lost_reason']);
+    // unset($description->columns['lost_reason']);
 
     // if ($this->main->urlParamAsInteger('idCustomer') > 0) {
     //   $description->permissions = [

@@ -6,7 +6,7 @@ use HubletoApp\Community\CalendarSync\Models\Source;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 
-  public function loadEvents(string $dateStart, string $dateEnd): array
+  public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
     $formattedEvents = [];
     $mSources = new Source($this->main);

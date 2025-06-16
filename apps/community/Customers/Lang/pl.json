@@ -110,7 +110,8 @@
         "Active": "Aktywny",
         "Owner": "Właściciel",
         "Link to shared folder (online storage) with related documents": "Link do folderu udostępnionego (przechowywanie online) z powiązanymi dokumentami",
-        "Add Customer": "Dodaj klienta"
+        "Add Customer": "Dodaj klienta",
+        "Manager": "Menedżer"
     },
     "Models\\CustomerDocument": {
         "Customer": "Klient",

@@ -74,6 +74,7 @@ class Loader extends \HubletoMain\Core\App
     }
 
     if (!empty($fromEmail)) {
+
       if (is_string($to)) $toEmails = $this->parseEmailsFromString($to);
       else $toEmails = [ $emailsByUserId[$to] ];
 

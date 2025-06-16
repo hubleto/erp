@@ -33,18 +33,18 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $idUserChiefOfficer = $mUser->record->recordCreate([
       "first_name" => "Richard",
       "last_name" => "Manstall",
-      "nick" => "richie",
-      "email" => "chief.officer@hubleto.com",
+      "nick" => "chief",
+      "email" => "chief@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => true,
-      "login" => "chief.officer",
-      "password" => password_hash("chief.officer", PASSWORD_DEFAULT),
+      "login" => "chief",
+      "password" => password_hash("chief", PASSWORD_DEFAULT),
     ])['id'];
 
     $idUserManager = $mUser->record->recordCreate([
       "first_name" => "Jeeve",
       "last_name" => "Stobs",
-      "nick" => "visio",
+      "nick" => "manager",
       "email" => "manager@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -55,7 +55,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $idUserEmployee = $mUser->record->recordCreate([
       "first_name" => "Fedora",
       "last_name" => "Debian",
-      "nick" => "fedebi",
+      "nick" => "employee",
       "email" => "employee@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -66,7 +66,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $idUserAssistant = $mUser->record->recordCreate([
       "first_name" => "Hop",
       "last_name" => "Gracer",
-      "nick" => "lady",
+      "nick" => "assistant",
       "email" => "assistant@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => false,
@@ -77,7 +77,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $idUserExternal = $mUser->record->recordCreate([
       "first_name" => "Chaplie",
       "last_name" => "Charlin",
-      "nick" => "funyguy",
+      "nick" => "external",
       "email" => "external@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => false,

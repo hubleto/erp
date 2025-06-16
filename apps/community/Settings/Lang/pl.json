@@ -133,7 +133,8 @@
     },
     "manifest": {
         "Settings": "Ustawienia",
-        "Settings and control panel for your Hubleto.": "Ustawienia i panel sterowania dla twojego Hubleto."
+        "Settings and control panel for your Hubleto.": "Ustawienia i panel sterowania dla twojego Hubleto.",
+        "Settings and tools": "Ustawienia i narzędzia"
     },
     "root": {
         "Users": "Użytkownicy",

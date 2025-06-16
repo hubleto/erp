@@ -80,14 +80,13 @@ class Model extends \ADIOS\Core\Model {
       $user = $this->main->auth->getUser();
 
       if (isset($savedRecord['id_owner'])) {
-        $ownerEmail = $savedRecord['id_owner'];
         $body =
           'User ' . $user['email'] . ' updated ' . $this->shortName . ":\n"
           . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
         ;
 
         $messagesApp->send(
-          $ownerEmail, // to
+          (int) $savedRecord['id_owner'], // to
           '', // cc
           '', // bcc
           $this->shortName . ' updated', // subject

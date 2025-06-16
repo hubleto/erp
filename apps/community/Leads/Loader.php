@@ -69,7 +69,6 @@ class Loader extends \HubletoMain\Core\App
       $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
       $mLeadTag = new \HubletoApp\Community\Leads\Models\Tag($this->main);
       $mCrossLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
-      $mLeadProduct = new \HubletoApp\Community\Leads\Models\LeadProduct($this->main);
       $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
       $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
       $mLostReasons = new \HubletoApp\Community\Leads\Models\LostReason($this->main);
@@ -79,7 +78,6 @@ class Loader extends \HubletoMain\Core\App
       $mLeadHistory->dropTableIfExists()->install();
       $mLeadTag->dropTableIfExists()->install();
       $mCrossLeadTag->dropTableIfExists()->install();
-      $mLeadProduct->dropTableIfExists()->install();
       $mLeadActivity->dropTableIfExists()->install();
       $mLeadDocument->dropTableIfExists()->install();
 

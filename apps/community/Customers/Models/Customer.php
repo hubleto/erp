@@ -26,7 +26,7 @@ class Customer extends \HubletoMain\Core\Models\Model
     'CONTACTS' => [ self::HAS_MANY, Contact::class, 'id_customer' ],
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
-    'RESPONSIBLE' => [ self::BELONGS_TO, User::class, 'id_responsible', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, CustomerActivity::class, 'id_customer', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, CustomerDocument::class, 'id_lookup', 'id'],
     'TAGS' => [ self::HAS_MANY, CustomerTag::class, 'id_customer', 'id' ],
@@ -51,7 +51,7 @@ class Customer extends \HubletoMain\Core\Models\Model
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(0),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
-      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
     ]);
   }
@@ -127,7 +127,7 @@ class Customer extends \HubletoMain\Core\Models\Model
 
     $description->defaultValues['is_active'] = 0;
     $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
-    $description->defaultValues['id_responsible'] = $this->main->auth->getUserId();
+    $description->defaultValues['id_manager'] = $this->main->auth->getUserId();
     $description->defaultValues['date_created'] = date("Y-m-d");
 
     return $description;
@@ -135,13 +135,15 @@ class Customer extends \HubletoMain\Core\Models\Model
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
-    if (isset($originalRecord["TAGS"])) {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
+    if (isset($savedRecord["TAGS"])) {
       $helper = new Helper($this->main, $this->app);
       $helper->deleteTags(
-        array_column($originalRecord["TAGS"], "id"),
+        array_column($savedRecord["TAGS"], "id"),
         "HubletoApp/Community/Customers/Models/CustomerTag",
         "id_customer",
-        $originalRecord["id"]
+        $savedRecord["id"]
       );
     }
     return $savedRecord;

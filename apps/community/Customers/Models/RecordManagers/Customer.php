@@ -59,8 +59,8 @@ class Customer extends \HubletoMain\Core\RecordManager
   }
 
   /** @return BelongsTo<User, covariant Customer> */
-  public function RESPONSIBLE(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_responsible', 'id');
+  public function MANAGER(): BelongsTo {
+    return $this->belongsTo(User::class, 'id_manager', 'id');
   }
 
   public function addOrderByToQuery(mixed $query, array $orderBy): mixed

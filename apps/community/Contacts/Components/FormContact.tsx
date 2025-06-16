@@ -196,7 +196,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
                 endpoint={`customers/api/get-customer`}
                 value={R.id_customer}
                 readonly={this.props.creatingNew}
-                onChange={(value: any) => {
+                onChange={(input: any, value: any) => {
                   if (this.state.record.is_primary == 1) {
                     this.setState({primaryContactMessage: true} as FormContactState);
                   }
@@ -211,7 +211,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
                 targetColumn='id_contact'
                 sourceColumn='id_tag'
                 colorColumn='color'
-                onChange={(value: any) => {
+                onChange={(input: any, value: any) => {
                   if (this.state.record.is_primary == 1) {
                     this.setState({primaryContactMessage: true} as FormContactState);
                   }
@@ -232,18 +232,16 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
                   </div>
                 : <></>}
                 <FormInput title={this.translate("Primary Contact")}>
-                  <>
-                    <Boolean {...this.getInputProps("is_primary")}
-                      value={this.state.record.is_primary}
-                      onChange={(value: number) => {
-                        this.setState({isInlineEditing: true});
-                        if (value == 1) {
-                          this.setState({primaryContactMessage: false} as FormContactState)
-                          this.checkPrimaryContact(this.state.record);
-                        } else this.updateRecord({is_primary: value})
-                      }}
-                    ></Boolean>
-                  </>
+                  <Boolean {...this.getInputProps("is_primary")}
+                    value={this.state.record.is_primary}
+                    onChange={(input: any, value: any) => {
+                      this.setState({isInlineEditing: true});
+                      if (value == 1) {
+                        this.setState({primaryContactMessage: false} as FormContactState)
+                        this.checkPrimaryContact(this.state.record);
+                      } else this.updateRecord({is_primary: value})
+                    }}
+                  ></Boolean>
                 </FormInput>
 
               </>

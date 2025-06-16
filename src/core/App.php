@@ -102,6 +102,11 @@ class App {
     $this->cli = $cli;
   }
 
+  public function getNotificationsCount(): int
+  {
+    return 0;
+  }
+
   public function createTestInstance(string $test): \HubletoMain\Core\AppTest
   {
     $reflection = new \ReflectionClass($this);

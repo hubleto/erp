@@ -40,7 +40,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
-    'RESPONSIBLE' => [ self::BELONGS_TO, User::class, 'id_responsible', 'id'],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
@@ -65,7 +65,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class)),
-      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class)),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
@@ -179,13 +179,15 @@ class Deal extends \HubletoMain\Core\Models\Model
     $description->defaultValues['id_pipeline'] = $defaultPipeline;
     $description->defaultValues['id_pipeline_step'] = null;
     $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
-    $description->defaultValues['id_responsible'] = $this->main->auth->getUserId();
+    $description->defaultValues['id_manager'] = $this->main->auth->getUserId();
 
     return $description;
   }
 
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
+    $savedRecord = parent::onAfterCreate($originalRecord, $savedRecord);
+
     $mDealHistory = new DealHistory($this->main);
     $mDealHistory->record->recordCreate([
       "change_date" => date("Y-m-d"),
@@ -199,24 +201,26 @@ class Deal extends \HubletoMain\Core\Models\Model
       $this->record->recordUpdate($newDeal);
     }
 
-    return parent::onAfterCreate($originalRecord, $savedRecord);
+    return $savedRecord;
   }
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
-    if (isset($originalRecord["TAGS"])) {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
+    if (isset($savedRecord["TAGS"])) {
       $helper = new Helper($this->main, $this->app);
       $helper->deleteTags(
-        array_column($originalRecord["TAGS"], "id"),
+        array_column($savedRecord["TAGS"], "id"),
         "HubletoApp/Community/Deals/Models/DealTag",
         "id_deal",
-        $originalRecord["id"]
+        $savedRecord["id"]
       );
     }
 
     $sums = 0;
     $calculator = new CalculatePrice($this->main);
-    $allProducts = array_merge($originalRecord["PRODUCTS"], $originalRecord["SERVICES"]);
+    $allProducts = array_merge($savedRecord["PRODUCTS"], $savedRecord["SERVICES"]);
 
     if (!empty($allProducts)) {
       foreach ($allProducts as $product) {

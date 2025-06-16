@@ -27,7 +27,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
       ->with('CONTACT')
     ;
 
-    if ($idCustomer > 0) $activities = $activities->where("id_customer", $idCustomer);
+    if ($idCustomer > 0) $activities = $activities->where("customer_activities.id_customer", $idCustomer);
 
     $activities = $activities->get()?->toArray();
 

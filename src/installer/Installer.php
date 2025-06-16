@@ -7,6 +7,7 @@ class Installer {
 
   public string $adminName = '';
   public string $adminFamilyName = '';
+  public string $adminNick = '';
   public string $adminEmail = '';
   public string $adminPassword = '';
   public string $accountFullName = '';
@@ -47,7 +48,7 @@ class Installer {
       \HubletoApp\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997, ],
       \HubletoApp\Community\Desktop\Loader::class => [ ],
       \HubletoApp\Community\Usage\Loader::class => [ ],
-      // \HubletoApp\Community\Messages\Loader::class => [ 'sidebarOrder' => 125, ],
+      \HubletoApp\Community\Messages\Loader::class => [ 'sidebarOrder' => 125, ],
       \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
       \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 101, 'calendarColor' => '#3DC266' ],
       \HubletoApp\Community\Contacts\Loader::class => [ 'sidebarOrder' => 102, ],
@@ -55,10 +56,9 @@ class Installer {
       \HubletoApp\Community\Dashboards\Loader::class => [ 'sidebarOrder' => 99995, ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],
-      \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99999, ],
     ],
-    'documents' => [
-      \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
+    'cloud' => [
+      \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99999, ],
     ],
     'sales' => [
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200, ],
@@ -87,6 +87,7 @@ class Installer {
     string $accountFullName,
     string $adminName,
     string $adminFamilyName,
+    string $adminNick,
     string $adminEmail,
     string $adminPassword,
     string $accountRewriteBase,
@@ -112,6 +113,7 @@ class Installer {
     $this->accountFullName = $accountFullName;
     $this->adminName = $adminName;
     $this->adminFamilyName = $adminFamilyName;
+    $this->adminNick = $adminNick;
     $this->adminEmail = $adminEmail;
     $this->adminPassword = $adminPassword;
     $this->accountRewriteBase = $accountRewriteBase;
@@ -204,11 +206,13 @@ class Installer {
     $idUserAdministrator = $mUser->record->recordCreate([
       'first_name' => $this->adminName,
       'last_name' => $this->adminFamilyName,
+      'nick' => $this->adminNick,
       'login' => $this->adminEmail,
       'password' => $this->adminPassword == '' ? '' : $mUser->hashPassword($this->adminPassword),
       'email' => $this->adminEmail,
       'is_active' => true,
       'id_default_company' => $idCompany,
+      'language' => 'en',
     ])['id'];
 
     $mUserHasRole->record->recordCreate([

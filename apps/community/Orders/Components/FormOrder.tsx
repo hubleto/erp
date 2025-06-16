@@ -150,7 +150,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                                     model='HubletoApp/Community/Products/Models/Product'
                                     cssClass='min-w-44'
                                     value={data.id_product}
-                                    onChange={(value: any) => {
+                                    onChange={(input: any, value: any) => {
                                       getLookupData();
 
                                       if (lookupData[value]) {
@@ -187,12 +187,12 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                             cellRenderer: ( table: TableOrderProducts, data: any, options: any): JSX.Element => {
                               return (
                                 <FormInput>
-                                  <Lookup {...this.getInputProps()}
+                                  <Lookup {...this.getInputProps('product_lookup')}
                                     ref={lookupElement}
                                     model='HubletoApp/Community/Products/Models/Product'
                                     cssClass='min-w-44'
                                     value={data.id_product}
-                                    onChange={(value: any) => {
+                                    onChange={(input: any, value: any) => {
                                       getLookupData();
 
                                       if (lookupData[value]) {

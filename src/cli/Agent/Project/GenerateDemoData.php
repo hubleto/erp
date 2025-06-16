@@ -31,8 +31,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
 
     $idUserChiefOfficer = $mUser->record->recordCreate([
-      "first_name" => "Chief officer",
-      "nick" => "CEO",
+      "first_name" => "Richard",
+      "last_name" => "Manstall",
+      "nick" => "richie",
       "email" => "chief.officer@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -41,8 +42,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ])['id'];
 
     $idUserManager = $mUser->record->recordCreate([
-      "first_name" => "Manager",
-      "nick" => "MGR",
+      "first_name" => "Jeeve",
+      "last_name" => "Stobs",
+      "nick" => "visio",
       "email" => "manager@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -51,8 +53,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ])['id'];
 
     $idUserEmployee = $mUser->record->recordCreate([
-      "first_name" => "Employee",
-      "nick" => "EMP",
+      "first_name" => "Fedora",
+      "last_name" => "Debian",
+      "nick" => "fedebi",
       "email" => "employee@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -61,8 +64,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ])['id'];
 
     $idUserAssistant = $mUser->record->recordCreate([
-      "first_name" => "Assistant",
-      "nick" => "ASS",
+      "first_name" => "Hop",
+      "last_name" => "Gracer",
+      "nick" => "lady",
       "email" => "assistant@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => false,
@@ -71,13 +75,15 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ])['id'];
 
     $idUserExternal = $mUser->record->recordCreate([
-      "first_name" => "External",
-      "nick" => "EXT",
+      "first_name" => "Chaplie",
+      "last_name" => "Charlin",
+      "nick" => "funyguy",
       "email" => "external@hubleto.com",
       "id_default_company" => $idCompany,
       "is_active" => false,
       "login" => "external",
       "password" => password_hash("external", PASSWORD_DEFAULT),
+      "language" => "en",
     ])['id'];
 
     $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
@@ -316,7 +322,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
           "note" => $customer[10],
           "is_active" => rand(0, 1),
           "id_owner" => rand(1, 4),
-          "id_responsible" => rand(1, 4),
+          "id_manager" => rand(1, 4),
           "date_created" => date("Y-m-d", rand(1722456000, strtotime("now"))),
         ])['id'];
 

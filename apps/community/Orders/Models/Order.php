@@ -73,11 +73,13 @@ class Order extends \HubletoMain\Core\Models\Model
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
     $mProduct = new Product($this->main);
     $longDescription = "";
 
-    if (isset($originalRecord["PRODUCTS"])) {
-      foreach ($originalRecord["PRODUCTS"] as $product) {
+    if (isset($savedRecord["PRODUCTS"])) {
+      foreach ($savedRecord["PRODUCTS"] as $product) {
         if (isset($product["_toBeDeleted_"])) continue;
         $productTitle = (string) $mProduct->record->find((int) $product["id_product"])->title;
         $longDescription .=  "{$productTitle} - Amount: ".(string) $product["amount"]." - Unit Price: ".(string) $product["unit_price"]." - Vat: ".(string) $product["vat"]." - Discount: ".(string) $product["discount"]." \n\n";
@@ -94,11 +96,13 @@ class Order extends \HubletoMain\Core\Models\Model
       "date_time" => date("Y-m-d H:i:s"),
     ]);
 
-    return parent::onAfterUpdate($originalRecord, $savedRecord);
+    return $savedRecord;
   }
 
   public function onAfterCreate(array $originalRecord, array $savedRecord): array
   {
+    $savedRecord = parent::onAfterCreate($originalRecord, $savedRecord);
+
     $order = $this->record->find($savedRecord["id"]);
     $order->order_number = $order->id;
     $order->save();
@@ -110,6 +114,6 @@ class Order extends \HubletoMain\Core\Models\Model
       "date_time" => date("Y-m-d H:i:s"),
     ]);
 
-    return parent::onAfterCreate($originalRecord, $savedRecord);
+    return $savedRecord;
   }
 }

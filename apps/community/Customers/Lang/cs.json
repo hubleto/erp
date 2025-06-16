@@ -34,8 +34,7 @@
         "Notes": "Poznámky",
         "Date Created": "Datum vytvořené",
         "Active": "Aktivní",
-        "Owner": "Majitel",
-        "Responsible": "Odpovědný"
+        "Owner": "Majitel"
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",

@@ -33,7 +33,7 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
           endpoint={`contacts/get-customer-contacts`}
           customEndpointParams={{id_customer: this.props.idCustomer}}
           value={R.id_contact}
-          onChange={(value: any) => {
+          onChange={(input: any, value: any) => {
             this.updateRecord({ id_contact: value })
             if (R.id_contact == 0) {
               R.id_contact = null;

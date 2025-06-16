@@ -22,8 +22,7 @@
         "Customers": "Zákazníci",
         "Shared folder (online document storage)": "Zdieľaný priečinok",
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok",
-        "Owner": "Vlastník",
-        "Responsible": "Zodpovedný"
+        "Owner": "Vlastník"
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"

@@ -29,7 +29,7 @@ export default class CustomerFormActivity<P, S> extends FormActivity<CustomerFor
           model='HubletoApp/Community/Contacts/Models/Customer'
           endpoint={`customers/api/get-customer`}
           value={R.id_customer}
-          onChange={(value: any) => {
+          onChange={(input: any, value: any) => {
             this.updateRecord({ id_customer: value});
           }}
         ></Lookup>
@@ -40,7 +40,7 @@ export default class CustomerFormActivity<P, S> extends FormActivity<CustomerFor
           endpoint={`contacts/get-customer-contacts`}
           customEndpointParams={{id_customer: R.id_customer}}
           value={R.id_contact}
-          onChange={(value: any) => {
+          onChange={(input: any, value: any) => {
             this.updateRecord({ id_contact: value })
             if (R.id_contact == 0) {
               R.id_contact = null;

@@ -113,7 +113,7 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                     uid={'value_' + item.id + '_id_category'}
                     model='HubletoApp/Community/Contacts/Models/Category'
                     value={item.id_category}
-                    onChange={(value: any) => {
+                    onChange={(input: any, value: any) => {
                       let newValues = this.state.data.data;
                       newValues[key].id_category = value;
                       this.props.parentForm.updateRecord({ VALUES: newValues });

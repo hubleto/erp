@@ -2,7 +2,7 @@
   function onFilterChange() {
     const fDealResult = document.getElementById("fDealResult").value;
     const fIdPipeline = document.getElementById("fIdPipeline").value;
-    const fResponsible = globalThis.main.reactElements['fResponsible'].state.value;
+    const fOwner = globalThis.main.reactElements['fOwner'].state.value;
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -11,7 +11,7 @@
     let url = '?';
     if (idPipeline) url += 'id_pipeline=' + idPipeline;
     if (fDealResult) url += '&fDealResult=' + fDealResult;
-    if (fResponsible) url += '&fResponsible=' + fResponsible;
+    if (fOwner) url += '&fOwner=' + fOwner;
 
     window.location.href = url;
   }
@@ -65,13 +65,13 @@
           </div>
         </div>
         <div class="input-wrapper flex-1">
-          <div class="input-label">Responsible</div>
+          <div class="input-label">Owner</div>
           <div class="input-body">
             <app-input-lookup
-              uid="fResponsible"
+              uid="fOwner"
               model="HubletoApp/Community/Settings/Models/User"
               class="w-full"
-              value="{{ viewParams.fResponsible }}"
+              value="{{ viewParams.fOwner }}"
               function:on-change="onFilterChange();"
             />
           </div>
@@ -114,7 +114,7 @@
                   <div class="card-body text-sm">
                     <div>Value: {{deal.price}} {{deal.CURRENCY.code}}</div>
                     <div>Closes on: {{ deal.date_expected_close ? viewParams.main.locale.formatDateShort(deal.date_expected_close) : "N/A" }}</div>
-                    <div>Responsible: {{ deal.OWNER.email }}</div>
+                    <div>Owner: {{ deal.OWNER.email }}</div>
                   </div>
                 </a></div>
               {% endif %}

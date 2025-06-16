@@ -10,8 +10,8 @@ class Contact extends \HubletoMain\Core\RecordManager
 
   public $table = 'my_app_contacts';
 
-  public function RESPONSIBLE(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_responsible', 'id');
+  public function MANAGER(): BelongsTo {
+    return $this->belongsTo(User::class, 'id_manager', 'id');
   }
 
 }

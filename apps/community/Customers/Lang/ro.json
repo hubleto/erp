@@ -34,8 +34,7 @@
         "Notes": "",
         "Date Created": "",
         "Active": "",
-        "Owner": "",
-        "Responsible": ""
+        "Owner": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "",

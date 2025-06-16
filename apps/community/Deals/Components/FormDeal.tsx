@@ -393,10 +393,16 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           return <div key={key}>{item.value}</div>;
         })}
       </div> : null}
+      {this.state.isInlineEditing && (R.PRODUCTS && R.PRODUCTS.length > 0) || (R.SERVICES && R.SERVICES.length > 0) ?
+        <div className='text-yellow-500 mb-3'>
+          <span className='icon mr-2'><i className='fas fa-warning'></i></span>
+          <span className='text'>The price is locked because the deal has some products or services</span>
+        </div>
+      : <></>}
       <div className='flex flex-row *:w-1/2'>
         {this.inputWrapper('price', {
           cssClass: 'text-2xl',
-          readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
+          readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || (R.SERVICES && R.SERVICES.length > 0) || R.is_archived ? true : false,
         })}
         {this.inputWrapper('id_currency')}
       </div>

@@ -14,7 +14,12 @@ class Contact extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'contacts';
   public string $recordManagerClass = RecordManagers\Contact::class;
-  public ?string $lookupSqlValue = "concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)";
+  public ?string $lookupSqlValue = "
+    concat(
+      {%TABLE%}.first_name, ' ', {%TABLE%}.last_name,
+      ' (', (select group_concat(value separator ', ') from contact_values where id_contact = {%TABLE%}.id), ')'
+    )
+  ";
   public ?string $lookupUrlDetail = 'contacts/{%ID%}';
 
   public array $relations = [

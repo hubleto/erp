@@ -106,7 +106,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     $description->columns['tags'] = ["title" => "Tags"];
 
     unset($description->columns['note']);
-    unset($description->columns['id_contact']);
+    unset($description->columns['id_customer']);
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
     unset($description->columns['shared_folder']);

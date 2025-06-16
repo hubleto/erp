@@ -238,6 +238,29 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     // }
 
     const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
+      <div className='mb-2'>
+        <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_archived}
+          initialView='dayGridMonth'
+          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormLeadState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormLeadState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>
+      </div>
       <div className="adios component input"><div className="input-element w-full flex gap-2">
         <input
           className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
@@ -281,30 +304,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           </button>
         </>
       })}</div> : null}
-
-      <div className='mt-2'>
-        <Calendar
-          onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
-          initialView='dayGridMonth'
-          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
-          onDateClick={(date, time, info) => {
-            this.setState({
-              activityDate: date,
-              activityTime: time,
-              activityAllDay: false,
-              showIdActivity: -1,
-            } as FormLeadState);
-          }}
-          onEventClick={(info) => {
-            this.setState({
-              showIdActivity: parseInt(info.event.id),
-            } as FormLeadState);
-            info.jsEvent.preventDefault();
-          }}
-        ></Calendar>
-      </div>
     </div>;
 
     return (

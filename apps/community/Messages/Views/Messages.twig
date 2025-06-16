@@ -1,3 +1,11 @@
 <h1 class="app-main-title">Messages</h1>
 
-<app-table string:model="HubletoApp/Community/Messages/Models/Message"></app-table>
+<div class="flex gap-2 w-full">
+  {% include '@HubletoApp:Community:Messages/FolderSelector.twig' %}
+  <div>
+    <div class="badge badge-extra-large ml-0">Inbox</div>
+    <div class="mt-4">
+      <app-messages-list-folder string:folder="inbox"></app-messages-list-folder>
+    </div>
+  </div>
+</div>

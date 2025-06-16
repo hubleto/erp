@@ -17,7 +17,10 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^messages(\/(?<recordId>\d+))?\/?$/' => Controllers\Messages::class,
+      '/^messages\/?$/' => Controllers\Messages::class,
+      '/^messages\/inbox\/?$/' => Controllers\Inbox::class,
+      '/^messages\/sent\/?$/' => Controllers\Sent::class,
+      '/^messages\/all\/?$/' => Controllers\All::class,
       '/^messages\/settings\/?$/' => Controllers\Settings::class,
     ]);
   }
@@ -25,8 +28,8 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mMessage = new Models\Message($this->main);
-      $mMessage->dropTableIfExists()->install();
+      (new Models\Message($this->main))->dropTableIfExists()->install();
+      (new Models\Index($this->main))->dropTableIfExists()->install();
     }
   }
 
@@ -34,7 +37,11 @@ class Loader extends \HubletoMain\Core\App
   {
     $mMessage = new \HubletoApp\Community\Messages\Models\Message($this->main);
     return $mMessage->record->prepareReadQuery()
-      ->where('id_owner', $this->main->auth->getUserId())
+      ->where(function($q) {
+        $q->where('midx.id_to', $this->main->auth->getUserId());
+        $q->orWhere('midx.id_cc', $this->main->auth->getUserId());
+        $q->orWhere('midx.id_bcc', $this->main->auth->getUserId());
+      })
       ->whereNull('read')
       ->count()
     ;
@@ -59,9 +66,10 @@ class Loader extends \HubletoMain\Core\App
     string $subject, string $body,
     string $color = '',
     int $priority = 0
-  ): void
+  ): array
   {
     $user = $this->main->auth->getUser();
+    $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 
     $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
@@ -72,6 +80,8 @@ class Loader extends \HubletoMain\Core\App
       $usersByEmail[$user['email']] = $user['id'];
       $emailsByUserId[$user['id']] = $user['email'];
     }
+
+    $message = [];
 
     if (!empty($fromEmail)) {
 
@@ -84,7 +94,8 @@ class Loader extends \HubletoMain\Core\App
       if (is_string($bcc)) $bccEmails = $this->parseEmailsFromString($bcc);
       else $bccEmails = [ $emailsByUserId[$bcc] ];
 
-      $mMessage = new \HubletoApp\Community\Messages\Models\Message($this->main);
+      $mMessage = new Models\Message($this->main);
+      $mIndex = new Models\Index($this->main);
 
       $messageData = [
         'priority' => $priority,
@@ -97,14 +108,33 @@ class Loader extends \HubletoMain\Core\App
         'color' => $color,
       ];
 
-      foreach ($toEmails as $email) {
-        $tmpIdOwner = $usersByEmail[$email] ?? 0;
-        if ($tmpIdOwner > 0) {
-          $mMessage->record->recordCreate(array_merge($messageData, [
-            'id_owner' => $tmpIdOwner,
-          ]));
+      $message = $mMessage->record->create(array_merge($messageData, [
+        'id_owner' => $idUser,
+      ]))->toArray();
+      $idMessage = $message['id'] ?? 0;
+
+      if ($idMessage > 0) {
+        foreach ($toEmails as $email) {
+          $idUserTo = $usersByEmail[$email] ?? 0;
+          if ($idUserTo > 0) {
+            $mIndex->record->create(['id_message' => $idMessage, 'id_from' => $idUser, 'id_to' => $idUserTo]);
+          }
+        }
+        foreach ($ccEmails as $email) {
+          $idUserCc = $usersByEmail[$email] ?? 0;
+          if ($idUserCc > 0) {
+            $mIndex->record->create(['id_message' => $idMessage, 'id_from' => $idUser, 'id_cc' => $idUserCc]);
+          }
+        }
+        foreach ($bccEmails as $email) {
+          $idUserTo = $usersByEmail[$email] ?? 0;
+          if ($idUserBcc > 0) {
+            $mIndex->record->create(['id_message' => $idMessage, 'id_from' => $idUser, 'id_bcc' => $idUserBcc]);
+          }
         }
       }
     }
+
+    return $message;
   }
 }

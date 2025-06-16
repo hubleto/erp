@@ -10,7 +10,6 @@ use HubletoApp\Community\Deals\Models\DealProduct;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Leads\Models\LeadHistory;
-use HubletoApp\Community\Leads\Models\LeadProduct;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 use HubletoApp\Community\Settings\Models\Setting;
 
@@ -31,7 +30,6 @@ class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
 
     $mLead = new Lead($this->main);
     $mLeadHistory = new LeadHistory($this->main);
-    $mLeadProduct = new LeadProduct($this->main);
     $mLeadDocument = new LeadDocument($this->main);
 
     $mDeal = new Deal($this->main);
@@ -40,7 +38,6 @@ class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
     $mDealDocument = new DealDocument($this->main);
     $deal = null;
 
-    $mSettings = new Setting($this->main);
     $mPipepelineStep = new PipelineStep($this->main);
     $defaultPipeline = 1;
     $defaultPipelineFirstStep =(int) $mPipepelineStep->record
@@ -73,19 +70,6 @@ class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
 
       $lead->status = $mLead::STATUS_COMPLETED;
       $lead->save();
-
-      $leadProducts = $mLeadProduct->record->where("id_lead", $leadId)->get();
-
-      foreach ($leadProducts as $leadProduct) { //@phpstan-ignore-line
-        $mDealProduct->record->recordCreate([
-          "id_service" => $leadProduct->id_service,
-          "id_deal" => $deal['id'],
-          "unit_price" => $leadProduct->unit_price,
-          "amount" => $leadProduct->amount,
-          "discount" => $leadProduct->discount,
-          "vat" => $leadProduct->vat,
-        ]);
-      }
 
       $leadDocuments = $mLeadDocument->record->where("id_lookup", $leadId)->get();
 

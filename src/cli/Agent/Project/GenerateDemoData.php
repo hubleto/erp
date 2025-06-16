@@ -135,7 +135,6 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
     $mLeadHistory  = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
     $mLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
-    $mLeadProducts = new \HubletoApp\Community\Leads\Models\LeadProduct($this->main);
     $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
     $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
 

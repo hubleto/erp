@@ -40,8 +40,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   state: FormLeadState;
 
   refLogActivityInput: any;
-  refServicesLookup: any;
-  refProductsLookup: any;
 
   translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\FormLead';
 
@@ -49,8 +47,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     super(props);
 
     this.refLogActivityInput = React.createRef();
-    this.refServicesLookup = React.createRef();
-    this.refProductsLookup = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -373,7 +369,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     <div className='flex flex-row *:w-1/2'>
                       {this.inputWrapper('price', {
                         cssClass: 'text-2xl',
-                        readonly: (R.PRODUCTS && R.PRODUCTS.length) > 0 || R.is_archived ? true : false,
+                        readonly: R.is_archived ? true : false,
                       })}
                       {this.inputWrapper('id_currency')}
                     </div>

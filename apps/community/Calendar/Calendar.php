@@ -11,28 +11,32 @@ class Calendar extends \HubletoMain\Core\Calendar {
     "formComponent" => "CalendarActivityForm",
   ];
 
-  public function loadEvents(string $dateStart, string $dateEnd): array
+  public function prepareLoadActivitiesQuery(\HubletoApp\Community\Calendar\Models\Activity $mActivity, string $dateStart, string $dateEnd, array $filter = []): mixed
   {
-    $mActivity = new Activity($this->main);
-
-    $activities = $mActivity->record->prepareReadQuery()
-      ->select("activities.*", "activity_types.color", "activity_types.name as activity_type")
-      ->leftJoin("activity_types", "activity_types.id", "=", "activities.id_activity_type")
-      ->where("date_start", ">=", $dateStart)
-      ->where("date_start", "<=", $dateEnd)
+    $query = $mActivity->record->prepareReadQuery()
+      ->with('ACTIVITY_TYPE')
+      ->where($mActivity->table.".date_start", ">=", $dateStart)
+      ->where($mActivity->table.".date_start", "<=", $dateEnd)
     ;
 
-    $activities = $activities->get();
+    if (isset($filter['completed'])) $query = $query->where('completed', $filter['completed']);
+    if (isset($filter['all_day'])) $query = $query->where('all_day', $filter['all_day']);
+
+    return $query;
+  }
+
+  public function convertActivitiesToEvents(string $source, array $activities, \Closure $detailsCallback): array
+  {
     $events = [];
 
     foreach ($activities as $key => $activity) { //@phpstan-ignore-line
 
-      $dStart = (string) $activity->date_start;
-      $tStart = (string) $activity->time_start;
-      $dEnd = (string) $activity->date_end;
-      $tEnd = (string) $activity->time_end;
+      $dStart = (string) ($activity['date_start'] ?? '');
+      $tStart = (string) ($activity['time_start'] ?? '');
+      $dEnd = (string) ($activity['date_end'] ?? '');
+      $tEnd = (string) ($activity['time_end'] ?? '');
 
-      $events[$key]['id'] = $activity->id;
+      $events[$key]['id'] = (int) ($activity['id'] ?? 0);
 
       if ($tStart != '') $events[$key]['start'] = $dStart . " " . $tStart;
       else $events[$key]['start'] = $dStart;
@@ -44,21 +48,33 @@ class Calendar extends \HubletoMain\Core\Calendar {
         $events[$key]['end'] = $dStart . " " . $tEnd;
       }
 
-      //fix for fullCalendar not showing the last date of an event longer than one day
-      if ((!empty($dStart) && !empty($dEnd) && (strtotime($dEnd) > strtotime($dStart)))) {
-        if (empty($tEnd) || empty($tStart)) $events[$key]['end'] = date("Y-m-d", strtotime("+ 1 day", strtotime($dEnd)));
+      $longerThanDay = (!empty($dStart) && !empty($dEnd) && ($dStart != $dEnd));
+
+      // fix for fullCalendar not showing the last date of an event longer than one day
+      if ((!empty($dStart) && !empty($dEnd) && $longerThanDay)) {
+        $events[$key]['end'] = date("Y-m-d", strtotime("+ 1 day", strtotime($dEnd)));
       }
 
-      $events[$key]['allDay'] = $activity->all_day == 1 || $tStart == '' ? true : false;
-      $events[$key]['title'] = $activity->subject;
-      $events[$key]['backColor'] = $activity->color;
+      $events[$key]['allDay'] = ($activity['all_day'] ?? 0) == 1 || $tStart == null ? true : false || $longerThanDay;
+      $events[$key]['title'] = (string) ($activity['subject'] ?? '');
+      $events[$key]['backColor'] = (string) ($activity['color'] ?? '');
       $events[$key]['color'] = $this->color;
-      $events[$key]['type'] = $activity->activity_type;
-      $events[$key]['source'] = 'events';
-      // $events[$key]['SOURCEFORM'] = "CalendarActivityForm";
+      $events[$key]['type'] = (int) ($activity['activity_type'] ?? 0);
+      $events[$key]['source'] = $source; //'customers';
+      $events[$key]['details'] = $detailsCallback($activity);
+      $events[$key]['owner'] = $activity['_LOOKUP[id_owner]'] ?? '';
     }
 
     return $events;
+  }
+
+  public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
+  {
+    return $this->convertActivitiesToEvents(
+      'calendar',
+      $this->prepareLoadActivitiesQuery(new Activity($this->main), $dateStart, $dateEnd, $filter)->get()?->toArray(),
+      function(array $activity) { return ''; }
+    );
   }
 
 }

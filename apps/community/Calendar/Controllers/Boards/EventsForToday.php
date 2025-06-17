@@ -12,16 +12,16 @@ class EventsForToday extends \HubletoMain\Core\Controllers\Controller {
 
     $getCalendarEvents = new \HubletoApp\Community\Calendar\Controllers\Api\GetCalendarEvents($this->main);
 
-    $eventsToday = $getCalendarEvents->loadEventsFromAllCalendars(date("Y-m-d"), date("Y-m-d"));
+    $eventsToday = $getCalendarEvents->loadEventsFromAllCalendars(date("Y-m-d"), date("Y-m-d"), ['completed' => false]);
     $this->viewParams['eventsToday'] = $eventsToday;
  
     $dateTomorrow = date("Y-m-d", time() + 24*3600);
-    $eventsTomorrow = $getCalendarEvents->loadEventsFromAllCalendars($dateTomorrow, $dateTomorrow);
+    $eventsTomorrow = $getCalendarEvents->loadEventsFromAllCalendars($dateTomorrow, $dateTomorrow, ['completed' => false]);
     $this->viewParams['eventsTomorrow'] = $eventsTomorrow;
  
     $dateLaterStart = date("Y-m-d", time() + 24*3600 * 2);
     $dateLaterEnd = date("Y-m-d", time() + 24*3600 * 7);
-    $eventsLater = $getCalendarEvents->loadEventsFromAllCalendars($dateLaterStart, $dateLaterEnd);
+    $eventsLater = $getCalendarEvents->loadEventsFromAllCalendars($dateLaterStart, $dateLaterEnd, ['completed' => false]);
     $this->viewParams['eventsLater'] = $eventsLater;
  
     $this->setView('@HubletoApp:Community:Calendar/Boards/EventsForToday.twig');

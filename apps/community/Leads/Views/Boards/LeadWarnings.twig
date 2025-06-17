@@ -1,0 +1,32 @@
+{% macro showwarnings(warnings) %}
+  {% set title = warnings.title %}
+  {% set items = warnings.items %}
+
+  <b>{{ title }}</b>
+  {% if items|length > 0 %}
+    <div class="grid gap-2 md:grid-cols-3">
+      {% for item in items %}
+        <a href="leads/{{ item.id }}" class="card btn btn-transparent items-start p-1">
+          <div>
+            <b>{{ item.identifier }}</b>
+            {{ item.title }}
+          </div>
+          <div>
+            <div class="badge badge-small badge-blue">@{{ item['_LOOKUP[id_owner]'] }}</div>
+            <div class="badge badge-small badge-lime">{{ item.CUSTOMER.name }} {{ item['_LOOKUP[id_contact]'] }}</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+{% if viewParams.warningsTotal == 0 %}
+  <div class="alert alert-info">
+    {{ translate('No warnings for leads.') }}<br/>
+  </div>
+{% else %}
+  {% for warnings in viewParams.warnings %}
+    {{ _self.showwarnings(warnings) }}
+  {% endfor %}
+{% endif %}

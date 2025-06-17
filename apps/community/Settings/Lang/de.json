@@ -124,7 +124,8 @@
     "manifest": {
         "Settings": "Einstellungen",
         "...": "",
-        "Settings and control panel for your Hubleto.": "Einstellungen und Bedienfeld für Ihr Hubleto."
+        "Settings and control panel for your Hubleto.": "Einstellungen und Bedienfeld für Ihr Hubleto.",
+        "Settings and tools": "Einstellungen und Werkzeuge"
     },
     "root": {
         "Users": "Benutzer",

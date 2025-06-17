@@ -54,19 +54,13 @@ class Loader extends \HubletoMain\Core\App
         'Deal warnings',
         'deals/boards/deal-warnings'
       );
-    }
 
-    $dashboardsApp = $this->main->apps->community('Dashboards');
-    if ($dashboardsApp) {
       $dashboardsApp->addBoard(
         $this,
         'Most valuable deals',
         'deals/boards/most-valuable-deals'
       );
-    }
 
-    $dashboardsApp = $this->main->apps->community('Dashboards');
-    if ($dashboardsApp) {
       $dashboardsApp->addBoard(
         $this,
         'Deal value by result',

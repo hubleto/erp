@@ -1,3 +1,3 @@
-import DesktopDashboard from "./Components/Dashboard"
+import ListFolder from "./Components/ListFolder"
 
-globalThis.main.registerReactComponent('DesktopDashboard', DesktopDashboard);
+globalThis.main.registerReactComponent('MessagesListFolder', ListFolder);

@@ -3,9 +3,12 @@
     {% for event in viewParams.eventsToday %}
       <tr>
         <td style="border-left:1em solid {{ event.color }}">{{ event.category }}</td>
-        <td>{{ event.title }}</td>
-        <td>{{ event.details }}</td>
-        <td>{% if event.allDay %} {{ translate('All-day') }} {% else %} {{ viewParams.main.locale.formatTime(event.start ?? '', false) }} {% endif %}</td>
+        <td>@{{ event.owner }}</td>
+        <td>{% if not event.allDay %} {{ viewParams.main.locale.formatTime(event.start ?? '', false) }} {% endif %}</td>
+        <td>
+          <b>{{ event.title }}</b>
+          {{ event.details }}
+        </td>
         <td class="text-right">
           <a href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}" class="btn btn-transparent btn-small">
             <span class="icon"><i class="fas fa-arrow-right"></i></span>
@@ -28,7 +31,7 @@
       onclick="$('#events-tomorrow').slideToggle();"
     >
       <span class="icon"><i class="fas fa-ellipsis"></i></span>
-      <span class="text">{{ viewParams.eventsTomorrow|length }} {{ translate('events for tomorrow') }}</span>
+      <span class="text">{{ viewParams.eventsTomorrow|length }} {{ translate('events tomorrow') }}</span>
     </button>
   {% endif %}
   {% if viewParams.eventsLater|length > 0 %}
@@ -44,26 +47,50 @@
 
 {% if viewParams.eventsTomorrow|length > 0 %}
   <div id="events-tomorrow" style="display:none" class="flex gap-2 mt-2 items-center flex-wrap">
-    {% for event in viewParams.eventsTomorrow %}
-      <a class="btn btn-transparent" href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}">
-        <span class="text">
-          {{ event.title }}
-          {% if event.details %}<i>({{ event.details }})</i>{% endif %}
-        </span>
-      </a>
-    {% endfor %}
+    <b>Events tomorrow</b>
+    <table class="table-default dense w-full">
+      {% for event in viewParams.eventsTomorrow %}
+        <tr>
+          <td style="border-left:1em solid {{ event.color }}">{{ event.category }}</td>
+          <td>@{{ event.owner }}</td>
+          <td>{{ viewParams.main.locale.formatDateShort(event.start ?? '', false) }}</td>
+          <td>
+            <b>{{ event.title }}</b>
+            {{ event.details }}
+          </td>
+          <td class="text-right">
+            <a href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}" class="btn btn-transparent btn-small">
+              <span class="icon"><i class="fas fa-arrow-right"></i></span>
+              <span class="text">{{ translate('Open event details') }}</span>
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
   </div>
 {% endif %}
 
 {% if viewParams.eventsLater|length > 0 %}
   <div id="events-later" style="display:none" class="flex gap-2 mt-2 items-center flex-wrap">
-    {% for event in viewParams.eventsLater %}
-      <a class="btn btn-transparent" href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}">
-        <span class="text">
-          {{ event.title }}
-          {% if event.details %}<i>({{ event.details }})</i>{% endif %}
-        </span>
-      </a>
-    {% endfor %}
+    <b>Events later</b>
+    <table class="table-default dense w-full">
+      {% for event in viewParams.eventsLater %}
+        <tr>
+          <td style="border-left:1em solid {{ event.color }}">{{ event.category }}</td>
+          <td>@{{ event.owner }}</td>
+          <td>{{ viewParams.main.locale.formatDateShort(event.start ?? '', false) }}</td>
+          <td>
+            <b>{{ event.title }}</b>
+            {{ event.details }}
+          </td>
+          <td class="text-right">
+            <a href="calendar?eventSource={{ event.source }}&eventId={{ event.id }}" class="btn btn-transparent btn-small">
+              <span class="icon"><i class="fas fa-arrow-right"></i></span>
+              <span class="text">{{ translate('Open event details') }}</span>
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
   </div>
 {% endif %}

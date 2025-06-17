@@ -21,7 +21,8 @@
         "End time": "Endzeit",
         "All day": "Den ganzen Tag",
         "Completed": "Vollendet",
-        "Created by": "Erstellt von"
+        "Created by": "Erstellt von",
+        "Meeting minutes (link)": "Besprechungsminuten (Link)"
     },
     "Controllers\\Boards\\EventsForToday": {
         "All-day": "Ganztägig",

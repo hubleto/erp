@@ -372,11 +372,13 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       <div className='mt-2'>
         <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
           <span className="icon"><i className="fas fa-check"></i></span>
-          <span className="text">{this.translate('Enter = Log completed activity')}</span>
+          <span className="text">{this.translate('Log completed activity')}</span>
+          <span className="shortcut">{this.translate('Enter')}</span>
         </button>
         <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
           <span className="icon"><i className="fas fa-clock"></i></span>
-          <span className="text">{this.translate('Shift+Enter = Schedule')}</span>
+          <span className="text">{this.translate('Schedule activity')}</span>
+          <span className="shortcut">{this.translate('Shift+Enter')}</span>
         </button>
       </div>
       {this.divider(this.translate('Most recent activities'))}

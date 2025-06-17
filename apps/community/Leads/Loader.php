@@ -22,6 +22,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
       '/^settings\/lead-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
+      '/^leads\/boards\/lead-warnings\/?$/' => Controllers\Boards\LeadWarnings::class,
     ]);
 
     $this->main->apps->community('Settings')->addSetting($this, [
@@ -48,6 +49,12 @@ class Loader extends \HubletoMain\Core\App
         $this,
         'Lead value by score',
         'leads/boards/lead-value-by-score'
+      );
+
+      $dashboardsApp->addBoard(
+        $this,
+        'Lead warnings',
+        'leads/boards/lead-warnings'
       );
     }
 

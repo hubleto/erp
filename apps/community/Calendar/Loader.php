@@ -43,7 +43,7 @@ class Loader extends \HubletoMain\Core\App
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
     $calendarManager->addCalendar(
-      'events',
+      'calendar',
       'blue',
       Calendar::class
     );

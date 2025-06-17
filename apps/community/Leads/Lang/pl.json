@@ -52,7 +52,8 @@
         "Notes": "Notatki",
         "Source channel": "Kanał źródłowy",
         "Archived": "Zarchiwizowane",
-        "Add lead": "Dodaj ołów"
+        "Add lead": "Dodaj ołów",
+        "Manager": "Menedżer"
     },
     "Models\\LostReason": {
         "Lost Reason": "Utracony rozum"

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Deals;
 
-class Calendar extends \HubletoMain\Core\Calendar {
+class Calendar extends \HubletoApp\Community\Calendar\Calendar {
 
   public array $activitySelectorConfig = [
     "addNewActivityButtonText" => "Add new activity linked to deal",
@@ -10,31 +10,21 @@ class Calendar extends \HubletoMain\Core\Calendar {
     "formComponent" => "DealsFormActivity"
   ];
 
-  public function loadEvents(string $dateStart, string $dateEnd): array
+  public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
     $idDeal = $this->main->urlParamAsInteger('idDeal');
-
-    $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
-
-    $activities = $mDealActivity->record->prepareReadQuery()
-      ->select("deal_activities.*", "activity_types.color", "activity_types.name as activity_type")
-      ->with('DEAL.CUSTOMER')
-      ->leftJoin("activity_types", "activity_types.id", "=", "deal_activities.id_activity_type")
-      ->where("date_start", ">=", $dateStart)
-      ->where("date_start", "<=", $dateEnd)
-    ;
-
+    $mDealActivity = new Models\DealActivity($this->main);
+    $activities = $this->prepareLoadActivitiesQuery($mDealActivity, $dateStart, $dateEnd, $filter)->with('DEAL.CUSTOMER');
     if ($idDeal > 0) $activities = $activities->where("id_deal", $idDeal);
-
-    $activities = $activities->get()?->toArray();
 
     $events = $this->convertActivitiesToEvents(
       'deals',
-      $activities,
+      $activities->get()?->toArray(),
       function(array $activity) {
         if (isset($activity['DEAL'])) {
           $deal = $activity['DEAL'];
-          return 'Deal #' . $deal['identifier'];
+          $customer = $deal['CUSTOMER'] ?? [];
+          return 'Deal ' . $deal['identifier'] . ' ' . $deal['title'] . (isset($customer['name']) ? ', ' . $customer['name'] : '');
         } else {
           return '';
         }

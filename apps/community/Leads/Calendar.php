@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads;
 
-class Calendar extends \HubletoMain\Core\Calendar {
+class Calendar extends \HubletoApp\Community\Calendar\Calendar {
 
   public array $activitySelectorConfig = [
     "addNewActivityButtonText" => "Add new activity linked to lead",
@@ -10,32 +10,21 @@ class Calendar extends \HubletoMain\Core\Calendar {
     "formComponent" => "LeadsFormActivity"
   ];
 
-  public function loadEvents(string $dateStart, string $dateEnd): array
+  public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
-
     $idLead = $this->main->urlParamAsInteger('idLead');
-
-    $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
-
-    $activities = $mLeadActivity->record->prepareReadQuery()
-      ->select("lead_activities.*", "activity_types.color", "activity_types.name as activity_type")
-      ->with('LEAD.CUSTOMER')
-      ->leftJoin("activity_types", "activity_types.id", "=", "lead_activities.id_activity_type")
-      ->where("date_start", ">=", $dateStart)
-      ->where("date_start", "<=", $dateEnd)
-    ;
-
+    $mLeadActivity = new Models\LeadActivity($this->main);
+    $activities = $this->prepareLoadActivitiesQuery($mLeadActivity, $dateStart, $dateEnd, $filter)->with('LEAD.CUSTOMER');
     if ($idLead > 0) $activities = $activities->where("id_lead", $idLead);
-
-    $activities = $activities->get()?->toArray();
 
     $events = $this->convertActivitiesToEvents(
       'leads',
-      $activities,
+      $activities->get()?->toArray(),
       function(array $activity) {
         if (isset($activity['LEAD'])) {
           $lead = $activity['LEAD'];
-          return 'Lead #' . $lead['identifier'];
+          $customer = $lead['CUSTOMER'] ?? [];
+          return 'Lead ' . $lead['identifier'] . ' ' . $lead['title'] . (isset($customer['name']) ? ', ' . $customer['name'] : '');
         } else {
           return '';
         }

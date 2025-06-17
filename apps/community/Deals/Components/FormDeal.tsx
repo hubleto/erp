@@ -331,11 +331,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <div className='mt-2'>
         <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
           <span className="icon"><i className="fas fa-check"></i></span>
-          <span className="text">{this.translate('Enter = Log completed activity')}</span>
+          <span className="text">{this.translate('Log completed activity')}</span>
+          <span className="shortcut">{this.translate('Enter')}</span>
         </button>
         <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
           <span className="icon"><i className="fas fa-clock"></i></span>
-          <span className="text">{this.translate('Shift+Enter = Schedule')}</span>
+          <span className="text">{this.translate('Schedule activity')}</span>
+          <span className="shortcut">{this.translate('Shift+Enter')}</span>
         </button>
       </div>
       {this.divider(this.translate('Most recent activities'))}
@@ -360,7 +362,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <FormInput title={"Customer"} required={true}>
         <Lookup {...this.getInputProps("id_customer")}
           model='HubletoApp/Community/Customers/Models/Customer'
-          endpoint={`customers/api/get-customer`}
+          urlAdd='customers/add'
           value={R.id_customer}
           readonly={R.is_archived}
           onChange={(input: any, value: any) => {
@@ -375,9 +377,9 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       <FormInput title={"Contact"}>
         <Lookup {...this.getInputProps("id_contact")}
           model='HubletoApp/Community/Contacts/Models/Contact'
-          customEndpointParams={{id_customer: R.id_customer}}
-          endpoint={`contacts/get-customer-contacts`}
+          customEndpointParams={{idCustomer: R.id_customer}}
           value={R.id_contact}
+          urlAdd='contacts/add'
           readonly={R.is_archived}
           onChange={(input: any, value: any) => {
             this.updateRecord({ id_contact: value })

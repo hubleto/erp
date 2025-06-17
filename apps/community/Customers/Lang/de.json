@@ -92,7 +92,8 @@
         "Start date": "Startdatum",
         "Start time": "Startzeit",
         "End date": "Enddatum",
-        "End time": "Endzeit"
+        "End time": "Endzeit",
+        "Meeting minutes (link)": "Besprechungsminuten (Link)"
     },
     "Controllers\\Customers": {
         "Customers": "Kunden"
@@ -113,7 +114,8 @@
         "Active": "Aktiv",
         "Owner": "Eigentümer",
         "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
-        "Add Customer": "Kunden hinzufügen"
+        "Add Customer": "Kunden hinzufügen",
+        "Manager": "Manager"
     },
     "Models\\CustomerDocument": {
         "Customer": "Kunde",

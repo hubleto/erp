@@ -30,4 +30,16 @@ class Product extends \HubletoMain\Core\RecordManager
 
     return $query;
   }
+
+  public function prepareLookupData(array $dataRaw): array
+  {
+    $data = parent::prepareLookupData($dataRaw);
+
+    foreach ($dataRaw as $key => $value) {
+      $data[$key]['_TEST'] = $value['title'];
+    }
+
+    return $data;
+  }
+
 }

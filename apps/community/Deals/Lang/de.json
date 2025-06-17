@@ -47,7 +47,8 @@
         "New Customer": "Neuer Kunde",
         "Business type": "Geschäftstyp",
         "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
-        "Add Deal": "Deal hinzufügen"
+        "Add Deal": "Deal hinzufügen",
+        "Manager": "Manager"
     },
     "Models\\DealActivity": {
         "Deal": "Handeln",
@@ -60,7 +61,8 @@
         "End time": "Endzeit",
         "All day": "Den ganzen Tag",
         "Completed": "Vollendet",
-        "Created by": "Erstellt von"
+        "Created by": "Erstellt von",
+        "Meeting minutes (link)": "Besprechungsminuten (Link)"
     },
     "Models\\LostReason": {
         "Lost Reason": "Verlorener Vernunft"
@@ -111,5 +113,8 @@
         "Deals": "Angebote",
         "Open deals": "Offene Angebote",
         "Total value": "Gesamtwert"
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": "Ausstehende Geschäfte ohne zukünftige Plan"
     }
 }

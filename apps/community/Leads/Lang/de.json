@@ -34,7 +34,8 @@
         "End time": "Endzeit",
         "All day": "Den ganzen Tag",
         "Completed": "Vollendet",
-        "Created by": "Erstellt von"
+        "Created by": "Erstellt von",
+        "Meeting minutes (link)": "Besprechungsminuten (Link)"
     },
     "Models\\Lead": {
         "Lead Identifier": "Lead -Kennung",
@@ -53,7 +54,8 @@
         "Archived": "Archiviert",
         "Add lead": "Blei hinzufügen",
         "Owner": "Eigentümer",
-        "Add Lead": "Blei hinzufügen"
+        "Add Lead": "Blei hinzufügen",
+        "Manager": "Manager"
     },
     "Models\\LostReason": {
         "Lost Reason": "Verlorener Vernunft"
@@ -100,5 +102,8 @@
     },
     "Controllers\\Leads": {
         "Leads": "Leads"
+    },
+    "Controllers\\Boards\\LeadWarnings": {
+        "Pending leads without future plan": "Ausstehende Leads ohne zukünftige Plan"
     }
 }

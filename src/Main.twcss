@@ -11,7 +11,7 @@
   --color-secondary: #41c50d;
   
   --spacing-8xl: 96rem;
-  --spacing-9x': 128rem;
+  --spacing-9xl: 128rem;
 
   --radius-4xl: 2rem;
 

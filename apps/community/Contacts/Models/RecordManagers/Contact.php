@@ -138,4 +138,29 @@ class Contact extends \HubletoMain\Core\RecordManager
     }
     return $query;
   }
+
+  public function prepareLookupQuery(string $search): mixed
+  {
+    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $idCustomer = $main->urlParamAsInteger('idCustomer');
+
+    $query = parent::prepareLookupQuery($search);
+    if ($idCustomer > 0) {
+      $query->where($this->table . '.id_customer', $idCustomer);
+    }
+
+    return $query;
+  }
+  
+  public function prepareLookupData(array $dataRaw): array
+  {
+    $data = parent::prepareLookupData($dataRaw);
+
+    foreach ($dataRaw as $key => $value) {
+      $data[$key]['_URL_DETAILS'] = 'contacts/' . $value['id'];
+    }
+
+    return $data;
+  }
+
 }

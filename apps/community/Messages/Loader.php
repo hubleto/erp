@@ -108,9 +108,7 @@ class Loader extends \HubletoMain\Core\App
         'color' => $color,
       ];
 
-      $message = $mMessage->record->create(array_merge($messageData, [
-        'id_owner' => $idUser,
-      ]))->toArray();
+      $message = $mMessage->record->create($messageData)->toArray();
       $idMessage = $message['id'] ?? 0;
 
       if ($idMessage > 0) {

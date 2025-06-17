@@ -48,10 +48,10 @@ class Customer extends \HubletoMain\Core\Models\Model
       'customer_id' => (new Varchar($this, $this->translate('Customer ID')))->setRequired(),
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'note' => (new Text($this, $this->translate('Notes'))),
-      'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
-      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(0),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(1),
+      'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue($this->main->auth->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue($this->main->auth->getUserId()),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
     ]);
   }
@@ -121,17 +121,17 @@ class Customer extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
-  {
-    $description = parent::describeForm();
+  // public function describeForm(): \ADIOS\Core\Description\Form
+  // {
+  //   $description = parent::describeForm();
 
-    $description->defaultValues['is_active'] = 0;
-    $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
-    $description->defaultValues['id_manager'] = $this->main->auth->getUserId();
-    $description->defaultValues['date_created'] = date("Y-m-d");
+  //   // $description->defaultValues['is_active'] = 0;
+  //   // $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
+  //   // $description->defaultValues['id_manager'] = $this->main->auth->getUserId();
+  //   // $description->defaultValues['date_created'] = date("Y-m-d");
 
-    return $description;
-  }
+  //   return $description;
+  // }
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {

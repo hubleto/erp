@@ -20,14 +20,13 @@ class Product extends \HubletoMain\Core\RecordManager
     return $this->hasOne(Supplier::class, 'id','id_supplier');
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareLookupQuery(string $search): mixed
   {
-    $query = parent::prepareReadQuery($query, $level);
+    $query = parent::prepareLookupQuery($search);
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
-    if ($main->urlParamAsBool("getServices") == true) $query = $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
-    else if ($main->urlParamAsBool("getProducts") == true) $query = $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_PRODUCT);
-
+    if ($main->urlParamAsBool("getServices") == true) $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
+    else if ($main->urlParamAsBool("getProducts") == true) $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_PRODUCT);
     return $query;
   }
 
@@ -36,7 +35,8 @@ class Product extends \HubletoMain\Core\RecordManager
     $data = parent::prepareLookupData($dataRaw);
 
     foreach ($dataRaw as $key => $value) {
-      $data[$key]['_TEST'] = $value['title'];
+      $data[$key]['unit_price'] = $value['unit_price'];
+      $data[$key]['vat'] = $value['vat'];
     }
 
     return $data;

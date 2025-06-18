@@ -5,6 +5,7 @@ namespace HubletoMain\Core;
 use HubletoMain\Core\Controllers\ControllerForgotPassword;
 use HubletoMain\Core\Controllers\ControllerResetPassword;
 use HubletoMain\Core\Controllers\ControllerSignIn;
+use HubletoMain\Core\Controllers\ControllerNotFound;
 
 class Router extends \ADIOS\Core\Router {
 
@@ -24,6 +25,11 @@ class Router extends \ADIOS\Core\Router {
   public function createSignInController(): \ADIOS\Core\Controller
   {
     return new ControllerSignIn($this->app);
+  }
+
+  public function createNotFoundController(): \ADIOS\Core\Controller
+  {
+    return new ControllerNotFound($this->app);
   }
 
   public function createResetPasswordController(): \ADIOS\Core\Controller

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel='shortcut icon' href='{{ config.url }}/assets/images/logo-hubleto.png'>
+  <title>Hubleto</title>
+
+  <script src='{{ config.accountUrl }}/adios/cache.js'></script>
+
+  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/fontawesome-6.6.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/css/main.css">
+</head>
+
+<body>
+
+<div id="sign-in-screen">
+  {% block languages %}
+    <div class="languages">
+      <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+      <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+      <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+      <a href="?set-language=cs" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cs.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+      <a href="?set-language=ro" class="btn btn-white"><span class="icon"><img src="{{ config.url }}/assets/images/flags/ro.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+    </div>
+  {% endblock %}
+  <div class="inner">
+    <div class="text-center">
+      <h1>{{ translate("Page Not Found") }}</h1>
+      <p class="mb-4">{{ translate("Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.") }}</p>
+      <a href="{{ config.accountUrl }}/" class="btn btn-large">
+        <span class="icon"><i class="fas fa-home"></i></span>
+        <span class="text">{{ translate("Home") }}</span>
+      </a>
+    </div>
+  </div>
+  <div class="logo">
+    <img src="{{ config.url }}/assets/images/logo-hubleto-text-horizontal.png" style="max-height:4em;margin-top:5em; width: auto;" />
+  </div>
+</div>
+<div class="text-xs text-gray-400 text-right" style="position:fixed;right:0;bottom:0;padding:0.5em">
+  Release<br/>
+  [{{ app.release.getVersion() }}] {{ app.release.getCodename() }}
+</div>
+</body>
+</html>

@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Settings": "Nastavenia",
-        "Settings and control panel for your Hubleto.": "Nastavenia Hubleto účtu."
+        "Settings and control panel for your Hubleto.": "Nastavenia Hubleto účtu.",
+        "Settings and tools": ""
     },
     "Models\\User": {
         "First name": "Meno",

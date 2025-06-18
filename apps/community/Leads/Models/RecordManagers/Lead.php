@@ -17,6 +17,11 @@ class Lead extends \HubletoMain\Core\RecordManager
 {
   public $table = 'leads';
 
+  /** @return belongsTo<Campaign, covariant Lead> */
+  public function CAMPAIGN(): BelongsTo {
+    return $this->belongsTo(Campaign::class, 'id_campaign', 'id' );
+  }
+
   /** @return hasOne<Deal, covariant Lead> */
   public function DEAL(): HasOne {
     return $this->hasOne(Deal::class, 'id_lead', 'id' );

@@ -13,6 +13,7 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^leads(\/(?<recordId>\d+))?\/?$/' => Controllers\Leads::class,
+      '/^leads\/campaigns\/?$/' => Controllers\Campaigns::class,
       '/^leads\/settings\/?$/' => Controllers\Settings::class,
       '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
       // '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
@@ -72,6 +73,7 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
+      $mCampaign = new \HubletoApp\Community\Leads\Models\Campaign($this->main);
       $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
       $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
       $mLeadTag = new \HubletoApp\Community\Leads\Models\Tag($this->main);
@@ -82,6 +84,7 @@ class Loader extends \HubletoMain\Core\App
       $mLostReasons = new \HubletoApp\Community\Leads\Models\LostReason($this->main);
 
       $mLostReasons->dropTableIfExists()->install();
+      $mCampaign->dropTableIfExists()->install();
       $mLead->dropTableIfExists()->install();
       $mLeadHistory->dropTableIfExists()->install();
       $mLeadTag->dropTableIfExists()->install();
@@ -90,7 +93,7 @@ class Loader extends \HubletoMain\Core\App
       $mLeadActivity->dropTableIfExists()->install();
       $mLeadDocument->dropTableIfExists()->install();
 
-      $mLeadTag->record->recordCreate([ 'name' => "Quite complex", 'color' => '#2196f3' ]);
+      $mLeadTag->record->recordCreate([ 'name' => "Complex", 'color' => '#2196f3' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Great opportunity", 'color' => '#4caf50' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Duplicate", 'color' => '#9e9e9e' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Needs attention", 'color' => '#795548' ]);

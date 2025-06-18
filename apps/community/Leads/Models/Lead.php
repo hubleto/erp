@@ -33,6 +33,7 @@ class Lead extends \HubletoMain\Core\Models\Model
 
   public array $relations = [
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
+    'CAMPAIGN' => [ self::BELONGS_TO, Campaign::class, 'id_campaign', 'id' ],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
@@ -51,8 +52,17 @@ class Lead extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
+      'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setEnumValues(
+        [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
+      )->setEnumCssClasses([
+        self::STATUS_NEW => 'bg-blue-100 text-blue-800',
+        self::STATUS_IN_PROGRESS => 'bg-yellow-100 text-yellow-800',
+        self::STATUS_COMPLETED => 'bg-green-100 text-green-800',
+        self::STATUS_LOST => 'bg-red-100 text-red-800',
+      ]),
       'price' => (new Decimal($this, $this->translate('Price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setColorScale('bg-light-blue-to-dark-blue'),
@@ -60,14 +70,11 @@ class Lead extends \HubletoMain\Core\Models\Model
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class)),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
-      'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setEnumValues(
-        [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
-      ),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, "Online document folder"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
-        1 => "Advertissment",
+        1 => "Advertisement",
         2 => "Partner",
         3 => "Web",
         4 => "Cold call",
@@ -89,6 +96,14 @@ class Lead extends \HubletoMain\Core\Models\Model
           // ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
       break;
+      case 'status':
+        $description->setEnumCssClasses([
+          self::STATUS_NEW => 'bg-yellow-50',
+          self::STATUS_IN_PROGRESS => 'bg-yellow-50',
+          self::STATUS_COMPLETED => 'bg-yellow-50',
+          self::STATUS_LOST => 'bg-yellow-50',
+        ]);
+      break;
       // case 'id_customer':
       //   $description ->setExtendedProps(['urlAdd' => 'customers/add']);
       // break;
@@ -106,6 +121,9 @@ class Lead extends \HubletoMain\Core\Models\Model
     $description->columns['tags'] = ["title" => "Tags"];
 
     unset($description->columns['note']);
+    unset($description->columns['price']);
+    unset($description->columns['id_currency']);
+    unset($description->columns['date_created']);
     unset($description->columns['id_customer']);
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);

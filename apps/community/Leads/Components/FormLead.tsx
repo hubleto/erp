@@ -349,7 +349,14 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
               <div className='flex-2'>
                 <div className='card card-body flex flex-row gap-2'>
                   <div className='grow'>
-                    {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
+                    <div className='flex gap-2'>
+                      <div className='w-full'>
+                        {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
+                      </div>
+                      <div className='w-full'>
+                        {this.inputWrapper('id_campaign', {readonly: R.is_archived})}
+                      </div>
+                    </div>
                     {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
                     <FormInput title={"Customer"}>
                       <Lookup {...this.getInputProps('id_customer')}
@@ -366,7 +373,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         }}
                       ></Lookup>
                     </FormInput>
-                    <FormInput title={"Contact"}>
+                    <FormInput title={"Contact"} required={true}>
                       <Lookup {...this.getInputProps('id_contact')}
                         model='HubletoApp/Community/Contacts/Models/Contact'
                         customEndpointParams={{idCustomer: R.id_customer}}

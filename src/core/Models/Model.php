@@ -72,14 +72,14 @@ class Model extends \ADIOS\Core\Model {
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-    $messagesApp = $this->main->apps->community('Messages');
-    $diff = $this->diffRecords($originalRecord, $savedRecord);
+    $user = $this->main->auth->getUser();
 
-    if ($messagesApp && count($diff) > 0) {
+    if (isset($savedRecord['id_owner']) && $savedRecord['id_owner'] != $user['id']) {
+      $messagesApp = $this->main->apps->community('Messages');
+      $diff = $this->diffRecords($originalRecord, $savedRecord);
 
-      $user = $this->main->auth->getUser();
+      if ($messagesApp && count($diff) > 0) {
 
-      if (isset($savedRecord['id_owner'])) {
         $body =
           'User ' . $user['email'] . ' updated ' . $this->shortName . ":\n"
           . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)

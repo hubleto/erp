@@ -18,9 +18,9 @@
 </script>
 
 {% set resultEnumValues = {
-  1: {"color":"#c42202","title":"Lost"},
+  1: {"color":"#a8aba7","title":"Pending"},
   2: {"color":"#14ab0c","title":"Won"},
-  3: {"color":"#a8aba7","title":"Pending"},
+  3: {"color":"#c42202","title":"Lost"},
 } %}
 
 <div class="flex gap-2 flex-col md:flex-row" style="height:calc(100vh - var(--nav-height) - 1rem)">
@@ -58,9 +58,9 @@
           <div class="input-body">
             <select class="w-full border-gray-200 h-[30px]" name="fDealResult" id="fDealResult" onchange="onFilterChange();">
               <option value="0"></option>
-              <option {% if viewParams.fDealResult == 3 %} selected {% endif %} value="3">Pending</option>
-              <option {% if viewParams.fDealResult == 1 %} selected {% endif %} value="1">Lost</option>
+              <option {% if viewParams.fDealResult == 1 %} selected {% endif %} value="1">Pending</option>
               <option {% if viewParams.fDealResult == 2 %} selected {% endif %} value="2">Won</option>
+              <option {% if viewParams.fDealResult == 3 %} selected {% endif %} value="3">Lost</option>
             </select>
           </div>
         </div>
@@ -82,15 +82,19 @@
     <div class="flex flex-col items-stretch md:flex-row justify-start gap-2 overflow-auto">
       {% for step in viewParams.pipeline.STEPS %}
 
+        {% set dealsInStep = 0 %}
+        {% for deal in viewParams.deals %}
+          {% if deal.id_pipeline_step == step.id %} {% set dealsInStep = dealsInStep + 1 %} {% endif %}
+        {% endfor %}
+
         {# Step Containter #}
-        <div class="card w-full min-w-[280px]">
+        <div class="card {{ dealsInStep == 0 ? "flex-2 shrink" : "flex-3" }}">
 
-          <div class="card-header flex flex-col gap-1">
-            <span style="border-left: 1em solid {{ step.color }};padding-left:1em;">{{ step.name }}</span>
-
-            <div class="flex flex-row gap-2 align-items-center text-gray-400">
+          <div class="card-header flex flex-col gap-1" style="border-top: 0.5em solid {{ step.color }}">
+            <span class="text-base text-nowrap">{{ step.name }}</span>
+            {# <div class="flex flex-row gap-2 align-items-center text-gray-400">
               <span style="font-size: 9pt;" class="font-normal pt-1">Weighted Profit ({{step.probability}} %): {{ viewParams.main.locale.formatCurrency(step.sum_price) }}</span>
-            </div>
+            </div> #}
           </div>
 
           <div class="card-body overflow-auto flex flex-row flex-wrap md:block">
@@ -107,14 +111,15 @@
                       </div>
                       <div class="mt-1">
                         <div class="mb-3 pr-2 text-right font-normal" style="border-right: 0.5em solid {{ resultEnumValues[deal.deal_result]["color"] }}">{{ resultEnumValues[deal.deal_result]["title"] }}</div>
-                        <div class="badge bg-white font-normal" style="border: 1px solid {{deal.TAG.color}}; color: {{deal.TAG.color}};">{{deal.TAG.name}}</div>
+                        {# <div class="badge bg-white font-normal" style="border: 1px solid {{deal.TAG.color}}; color: {{deal.TAG.color}};">{{deal.TAG.name}}</div> #}
                       </div>
                     </div>
                   </div>
                   <div class="card-body text-sm">
-                    <div>Value: {{deal.price}} {{deal.CURRENCY.code}}</div>
+                    <div class="font-bold text-blue-800">Value: {{deal.price}} {{deal.CURRENCY.code}}</div>
                     <div>Closes on: {{ deal.date_expected_close ? viewParams.main.locale.formatDateShort(deal.date_expected_close) : "N/A" }}</div>
                     <div>Owner: {{ deal.OWNER.email }}</div>
+                    {% if deal.note %} <div class="bg-yellow-50 p-2 text-yellow-800 whitespace-pre">{{ deal.note }}</div> {% endif %}
                   </div>
                 </a></div>
               {% endif %}
@@ -128,7 +133,7 @@
               target="_blank"
             >
               <span class="icon"><i class="fas fa-add"></i></span>
-              <span class="text">{{ translate('Add deal') }}</span>
+              <span class="text text-nowrap">{{ translate('Add deal') }}</span>
             </a>
           </div>
         </div>

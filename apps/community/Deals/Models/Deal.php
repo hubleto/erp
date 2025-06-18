@@ -72,7 +72,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
-        1 => "Advertissment",
+        1 => "Advertisement",
         2 => "Partner",
         3 => "Web",
         4 => "Cold call",

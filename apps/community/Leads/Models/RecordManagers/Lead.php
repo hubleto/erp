@@ -72,16 +72,22 @@ class Lead extends \HubletoMain\Core\RecordManager
     $query = parent::prepareReadQuery($query, $level);
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
-    if ($main->urlParamAsInteger("id") <= 0) {
-      if ($main->urlParamAsBool("showArchive")) {
-        $query = $query->where("leads.is_archived", 1);
-      } else {
-        $query = $query->where("leads.is_archived", 0);
-      }
-    }
 
     if ($main->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where("leads.id_customer", $main->urlParamAsInteger("idCustomer"));
+    }
+
+    if ($main->urlParamAsInteger("fArchive") > 0) {
+      $query = $query->where("leads.is_archived", $main->urlParamAsInteger("fArchive"));
+    }
+
+    if ($main->urlParamAsInteger("fStatus") > 0) {
+      $query = $query->where("leads.status", $main->urlParamAsInteger("fStatus"));
+    }
+
+    switch ($main->urlParamAsInteger("fOwnership")) {
+      case 1: $query = $query->where("leads.id_owner", $main->auth->getUserId()); break;
+      case 2: $query = $query->where("leads.id_manager", $main->auth->getUserId()); break;
     }
 
     return $query;

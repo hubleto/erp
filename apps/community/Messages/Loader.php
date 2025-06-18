@@ -22,6 +22,8 @@ class Loader extends \HubletoMain\Core\App
       '/^messages\/sent\/?$/' => Controllers\Sent::class,
       '/^messages\/all\/?$/' => Controllers\All::class,
       '/^messages\/settings\/?$/' => Controllers\Settings::class,
+      '/^messages\/api\/mark-as-read\/?$/' => Controllers\Api\MarkAsRead::class,
+      '/^messages\/api\/mark-as-unread\/?$/' => Controllers\Api\MarkAsUnread::class,
     ]);
   }
 

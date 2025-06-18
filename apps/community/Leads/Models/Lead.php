@@ -49,7 +49,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
       'price' => (new Decimal($this, $this->translate('Price'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setColorScale('bg-light-blue-to-dark-blue'),

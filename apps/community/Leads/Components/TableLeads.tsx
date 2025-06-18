@@ -6,11 +6,12 @@ import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 export interface TableLeadsProps extends TableProps {
   idCustomer?: number,
-  showArchive?: boolean,
 }
 
 export interface TableLeadsState extends TableState {
-  showArchive: boolean,
+  fArchive: number,
+  fStatus: number,
+  fOwnership: number,
 }
 
 export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> {
@@ -37,7 +38,9 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   getStateFromProps(props: TableLeadsProps) {
     return {
       ...super.getStateFromProps(props),
-      showArchive: props.showArchive ?? false,
+      fArchive: 0,
+      fStatus: 0,
+      fOwnership: 0,
     }
   }
 
@@ -51,8 +54,46 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
     return {
       ...super.getEndpointParams(),
       idCustomer: this.props.idCustomer,
-      showArchive: this.props.showArchive ? 1 : 0,
+      fStatus: this.state.fStatus,
+      fOwnership: this.state.fOwnership,
+      fArchive: this.state.fArchive,
     }
+  }
+
+  renderSidebarFilter(): JSX.Element {
+    const fStatusOptions = {0: 'All', 1: 'New', 2: 'In progress', 3: 'Completed', 4: 'Lost'};
+    const fOwnershipOptions = {0: 'All', 1: 'Owned by me', 2: 'Managed by me'};
+    const fArchiveOptions = {0: 'Active', 1: 'Archived'};
+
+    return <div className="flex flex-col gap-2 text-nowrap">
+      <b>Status</b>
+      <div className="list">
+        {Object.keys(fStatusOptions).map((key: any) => {
+          return <button
+            className={"btn btn-small btn-list-item " + (this.state.fStatus == key ? "btn-primary" : "btn-transparent")}
+            onClick={() => this.setState({fStatus: key}, () => this.loadData())}
+          ><span className="text">{fStatusOptions[key]}</span></button>;
+        })}
+      </div>
+      <b>Ownership</b>
+      <div className="list">
+        {Object.keys(fOwnershipOptions).map((key: any) => {
+          return <button
+            className={"btn btn-small btn-list-item " + (this.state.fOwnership == key ? "btn-primary" : "btn-transparent")}
+            onClick={() => this.setState({fOwnership: key}, () => this.loadData())}
+          ><span className="text">{fOwnershipOptions[key]}</span></button>;
+        })}
+      </div>
+      <b>Archive</b>
+      <div className="list">
+        {Object.keys(fArchiveOptions).map((key: any) => {
+          return <button
+            className={"btn btn-small btn-list-item " + (this.state.fArchive == key ? "btn-primary" : "btn-transparent")}
+            onClick={() => this.setState({fArchive: key}, () => this.loadData())}
+          ><span className="text">{fArchiveOptions[key]}</span></button>;
+        })}
+      </div>
+    </div>;
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
@@ -96,7 +137,7 @@ export default class TableLeads extends Table<TableLeadsProps, TableLeadsState> 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormLeadProps;
     formProps.customEndpointParams.idCustomer = this.props.idCustomer;
-    formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
+    // formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormLead {...formProps}/>;
   }
 }

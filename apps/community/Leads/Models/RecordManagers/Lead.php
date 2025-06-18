@@ -62,24 +62,6 @@ class Lead extends \HubletoMain\Core\RecordManager
     return $this->hasMany(LeadTag::class, 'id_lead', 'id');
   }
 
-  /** @return hasMany<LeadProduct, covariant Lead> */
-  public function PRODUCTS(): HasMany {
-    return $this->hasMany(LeadProduct::class, 'id_lead', 'id')
-        ->whereHas("PRODUCT", function ($query) {
-          $query->where('type', \HubletoApp\Community\Products\Models\Product::TYPE_PRODUCT);
-      });
-    ;
-  }
-
-  /** @return hasMany<LeadProduct, covariant Lead> */
-  public function SERVICES(): HasMany {
-    return $this->hasMany(LeadProduct::class, 'id_lead', 'id')
-        ->whereHas("PRODUCT", function ($query) {
-          $query->where('type', \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
-      });
-    ;
-  }
-
   /** @return hasMany<LeadActivity, covariant Lead> */
   public function ACTIVITIES(): HasMany {
     return $this->hasMany(LeadActivity::class, 'id_lead', 'id' );

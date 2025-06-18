@@ -28,11 +28,11 @@ class Message extends \HubletoMain\Core\Models\Model
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired(),
       'sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly(),
       'read' => (new DateTime($this, $this->translate('Read'))),
+      'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
       'from' => (new Varchar($this, $this->translate('From')))->setRequired()->setReadonly(),
       'to' => (new Varchar($this, $this->translate('To')))->setRequired(),
       'cc' => (new Varchar($this, $this->translate('Cc'))),
       'bcc' => (new Varchar($this, $this->translate('Bcc'))),
-      'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),
       'body' => (new Text($this, $this->translate('Body')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color'))),
     ]);
@@ -40,6 +40,8 @@ class Message extends \HubletoMain\Core\Models\Model
 
   public function describeTable(): \ADIOS\Core\Description\Table
   {
+    $folder = $this->main->urlParamAsString('folder');
+
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
@@ -48,6 +50,25 @@ class Message extends \HubletoMain\Core\Models\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
+
+    unset($description->columns['body']);
+    unset($description->columns['color']);
+    unset($description->columns['priority']);
+    unset($description->columns['read']);
+
+    switch ($folder) {
+      case 'inbox':
+        unset($description->columns['to']);
+        unset($description->columns['cc']);
+        unset($description->columns['bcc']);
+      break;
+      case 'sent':
+        unset($description->columns['from']);
+      break;
+    }
+
+    $description->permissions['canDelete'] = false;
+    $description->permissions['canUpdate'] = false;
 
     return $description;
   }
@@ -62,6 +83,9 @@ class Message extends \HubletoMain\Core\Models\Model
     $description->defaultValues['priority'] = 1;
     $description->defaultValues['sent'] = date('Y-m-d H:i:s');
     $description->defaultValues['from'] = $user['email'];
+
+    $description->permissions['canDelete'] = false;
+    $description->permissions['canUpdate'] = false;
 
     return $description;
   }

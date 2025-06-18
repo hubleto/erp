@@ -325,7 +325,31 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
 
     let extraButtons = globalThis.main.injectDynamicContent('HubletoApp/Community/Customers/FormCustomer:ExtraButtons', {formCustomer: this});
 
-    const recentActivitiesAndCalendar = <div className='card card-body mt-2 shadow-blue-200'>
+    const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
+      <div className='mb-2'>
+        <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_archived}
+          initialView='dayGridMonth'
+          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormDealState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormDealState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>
+      </div>
+
       <div className="adios component input"><div className="input-element w-full flex gap-2">
         <input
           className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
@@ -371,30 +395,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           </button>
         </>
       })}</div> : null}
-
-      <div className='mt-2'>
-        <Calendar
-          onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
-          initialView='dayGridMonth'
-          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
-          onDateClick={(date, time, info) => {
-            this.setState({
-              activityDate: date,
-              activityTime: time,
-              activityAllDay: false,
-              showIdActivity: -1,
-            } as FormDealState);
-          }}
-          onEventClick={(info) => {
-            this.setState({
-              showIdActivity: parseInt(info.event.id),
-            } as FormDealState);
-            info.jsEvent.preventDefault();
-          }}
-        ></Calendar>
-      </div>
     </div>;
 
     return <>

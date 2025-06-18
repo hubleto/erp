@@ -285,7 +285,30 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       </div>
     </div>;
 
-    const recentActivitiesAndCalendar = <div className='card card-body mt-2 shadow-blue-200'>
+    const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
+      <div className='mb-2'>
+        <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_archived}
+          initialView='dayGridMonth'
+          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
+          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormDealState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormDealState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>
+      </div>
       <div className="adios component input"><div className="input-element w-full flex gap-2">
         <input
           className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
@@ -331,30 +354,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           </button>
         </>
       })}</div> : null}
-
-      <div className='mt-2'>
-        <Calendar
-          onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
-          initialView='dayGridMonth'
-          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
-          onDateClick={(date, time, info) => {
-            this.setState({
-              activityDate: date,
-              activityTime: time,
-              activityAllDay: false,
-              showIdActivity: -1,
-            } as FormDealState);
-          }}
-          onEventClick={(info) => {
-            this.setState({
-              showIdActivity: parseInt(info.event.id),
-            } as FormDealState);
-            info.jsEvent.preventDefault();
-          }}
-        ></Calendar>
-      </div>
     </div>;
 
     const inputsColumnLeft = <>
@@ -396,10 +395,16 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           return <div key={key}>{item.value}</div>;
         })}
       </div> : null}
+      {this.state.isInlineEditing && (R.PRODUCTS && R.PRODUCTS.length > 0) || (R.SERVICES && R.SERVICES.length > 0) ?
+        <div className='text-yellow-500 mb-3'>
+          <span className='icon mr-2'><i className='fas fa-warning'></i></span>
+          <span className='text'>The price is locked because the deal has some products or services</span>
+        </div>
+      : <></>}
       <div className='flex flex-row *:w-1/2'>
         {this.inputWrapper('price', {
           cssClass: 'text-2xl',
-          readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
+          readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || (R.SERVICES && R.SERVICES.length > 0) || R.is_archived ? true : false,
         })}
         {this.inputWrapper('id_currency')}
       </div>

@@ -70,7 +70,8 @@ class User extends \HubletoMain\Core\RecordManager
         ifnull(' . $this->table . '.nick, ' . $this->table . '.email),
         if(' . $this->table . '.id = ' . $idUser .  ', " (you)", "")
       ) as _LOOKUP,
-      if(' . $this->table . '.id = ' . $idUser .  ', "text-orange-500", "") as _LOOKUP_CLASS
+      concat("rounded inline-block px-1 ", if(' . $this->table . '.id = ' . $idUser .  ', "bg-blue-100 text-blue-800", "bg-slate-100 text-slate-800")) as _LOOKUP_CLASS,
+      "" as _LOOKUP_COLOR
     ');
 
     return $query;

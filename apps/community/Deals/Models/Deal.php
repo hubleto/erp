@@ -66,7 +66,6 @@ class Deal extends \HubletoMain\Core\Models\Model
       'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class)),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
-      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
@@ -101,6 +100,7 @@ class Deal extends \HubletoMain\Core\Models\Model
         ])
         ->setDefaultValue(self::BUSINESS_TYPE_NEW)
       ,
+      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
     ]);
   }
 
@@ -145,6 +145,8 @@ class Deal extends \HubletoMain\Core\Models\Model
     unset($description->columns['shared_folder']);
     unset($description->columns['date_result_update']);
     unset($description->columns['lost_reason']);
+    unset($description->columns['is_new_customer']);
+    unset($description->columns['business_type']);
 
     // if ($this->main->urlParamAsInteger('idCustomer') > 0) {
     //   $description->permissions = [

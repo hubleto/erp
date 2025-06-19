@@ -82,13 +82,25 @@ class Deal extends \HubletoMain\Core\Models\Model
       ]),
       'is_archived' => (new Boolean($this, $this->translate('Archived'))),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues([$this::RESULT_PENDING => "Pending", $this::RESULT_WON => "Won", $this::RESULT_LOST => "Lost"])->setDefaultValue(3),
+        ->setEnumValues([self::RESULT_PENDING => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost"])
+        ->setEnumCssClasses([
+          self::RESULT_PENDING => 'bg-yellow-100 text-yellow-800',
+          self::RESULT_WON => 'bg-green-100 text-green-800',
+          self::RESULT_LOST => 'bg-red-100 text-red-800',
+        ])
+        ->setDefaultValue(self::RESULT_PENDING)
+      ,
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
-      'business_type' => (new Integer($this, $this->translate('Business type')))->setEnumValues(
-        [$this::BUSINESS_TYPE_NEW => "New", $this::BUSINESS_TYPE_EXISTING => "Existing"]
-      ),
+      'business_type' => (new Integer($this, $this->translate('Business type')))
+        ->setEnumValues([self::BUSINESS_TYPE_NEW => "New", self::BUSINESS_TYPE_EXISTING => "Existing"])
+        ->setEnumCssClasses([
+          self::BUSINESS_TYPE_NEW => 'bg-yellow-100 text-yellow-800',
+          self::BUSINESS_TYPE_EXISTING => 'bg-blue-100 text-blue-800',
+        ])
+        ->setDefaultValue(self::BUSINESS_TYPE_NEW)
+      ,
     ]);
   }
 
@@ -101,15 +113,6 @@ class Deal extends \HubletoMain\Core\Models\Model
           ->setReactComponent('InputHyperlink')
           ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
-        break;
-      case 'deal_result':
-          $description->setEnumCssClasses([
-            1 => "!text-white-500",
-            2 => "!text-green-500",
-            3 => "!text-red-500",
-          ]);
-        break;
-      default:
         break;
     }
     return $description;
@@ -171,8 +174,8 @@ class Deal extends \HubletoMain\Core\Models\Model
     $description = parent::describeForm();
     // $description->defaultValues['is_new_customer'] = 0;
     $description->defaultValues['id_customer'] = $this->main->urlParamAsInteger('idCustomer');
-    $description->defaultValues['deal_result'] = $this::RESULT_PENDING;
-    $description->defaultValues['business_type'] = $this::BUSINESS_TYPE_NEW;
+    $description->defaultValues['deal_result'] = self::RESULT_PENDING;
+    $description->defaultValues['business_type'] = self::BUSINESS_TYPE_NEW;
     $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_currency'] = $defaultCurrency;

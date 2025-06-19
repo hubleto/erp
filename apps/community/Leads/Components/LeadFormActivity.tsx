@@ -27,6 +27,11 @@ export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivit
     super(props);
   }
 
+  getActivitySourceReadable(): string
+  {
+    return 'Lead';
+  }
+
   renderCustomInputs(): JSX.Element {
     const R = this.state.record;
 

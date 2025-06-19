@@ -99,6 +99,7 @@ class Controller extends \ADIOS\Core\Controller
     parent::prepareView();
 
     $this->viewParams['main'] = $this->main;
+    $this->viewParams['currentTheme'] = $this->main->config->getAsString('uiTheme', 'default');
 
     if (isset($this->hubletoApp)) $this->viewParams['app'] = $this->hubletoApp;
     // $this->viewParams['help'] = $this->main->apps->community('Help');

@@ -22,6 +22,11 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
 
   translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormActivity';
 
+  getActivitySourceReadable(): string
+  {
+    return 'Deal';
+  }
+
   renderCustomInputs(): JSX.Element {
     const R = this.state.record;
 

@@ -1,0 +1,9 @@
+<h1 class='app-main-title'>{{ translate('Settings') }} > {{ translate('Theme') }}</h1>
+
+<div class="list">
+  {% for theme in viewParams.themes %}
+    <a href="?set={{ theme }}" class="btn btn-list-item {{ theme == viewParams.currentTheme ? "btn-primary" : "btn-transparent" }}">
+      <span class="text">{{ theme }}</span>
+    </a>
+  {% endfor %}
+</div>

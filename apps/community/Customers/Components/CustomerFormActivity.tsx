@@ -20,6 +20,11 @@ export default class CustomerFormActivity<P, S> extends FormActivity<CustomerFor
 
   translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\CustomerFormActivity';
 
+  getActivitySourceReadable(): string
+  {
+    return 'Customer';
+  }
+
   renderCustomInputs(): JSX.Element {
     const R = this.state.record;
 

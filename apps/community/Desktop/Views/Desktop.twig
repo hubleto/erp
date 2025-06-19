@@ -28,6 +28,7 @@
 
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/fontawesome-6.6.css">
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/themes/{{ viewParams.currentTheme }}.css">
   <script>
     ADIOS.onAppLoaded(() => {
       globalThis.main.createThemeObserver();
@@ -166,11 +167,6 @@
               >
                 <span class="icon text-blue-500"><i class="fas fa-life-ring"></i></span>
                 <span class="text">{{ translate('Help') }}</span>
-                {# <div class="menu">
-                  <div class="list !bg-yellow-50 p-4" style="position:fixed;right:0;top:0;width:30em;max-width:50%;height:100vh;margin:0;border-radius:0;border:none;overflow-y:auto;">
-                    {{ include('@app/community/Help/Views/HelpCenterInner.twig') }}
-                  </div>
-                </div> #}
               </a>
             </li>
           {% endif %}

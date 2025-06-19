@@ -13,6 +13,9 @@ import LeadFormActivity, { LeadFormActivityProps, LeadFormActivityState } from '
 import Hyperlink from 'adios/Inputs/Hyperlink';
 import { FormProps, FormState } from 'adios/Form';
 import moment, { Moment } from "moment";
+import Table from 'adios/Table';
+import HubletoTable from '@hubleto/src/core/Components/HubletoTable';
+import TableLeadHistory from './TableLeadHistory';
 
 export interface FormLeadProps extends HubletoFormProps {
   newEntryId?: number,
@@ -383,7 +386,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     </div>
                     {this.inputWrapper('status', {readonly: R.is_archived, onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})}
                     {this.inputWrapper('score', {readonly: R.is_archived})}
-                    {this.inputWrapper('id_deal', {readonly: R.is_archived})}
                     {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
                     {showAdditional ?
                       <div className='w-full mt-2 gap-2 flex'>
@@ -556,27 +558,38 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           ) : null}
           {showAdditional ?
             <TabPanel header={this.translate('History')}>
-              {R.HISTORY.length > 0 ?
-                R.HISTORY.map((history, key) => (
-                  <div key={key} className='w-full flex flex-row justify-between'>
-                    <div className='w-1/3'>
-                        <p className='font-bold self-center text-sm text-left'>
-                          {history.description}
-                        </p>
-                      </div>
-                    <div className='w-1/3' style={{alignContent: "center"}}>
-                      <hr style={{width: "100%", alignSelf: "center"}}/>
-                    </div>
-                    <div className='w-1/3 justify-center'>
-                      <p className='self-center text-sm text-center'>
-                        {history.change_date}
-                      </p>
-                    </div>
-                  </div>
-                ))
-                :
-                <p className='text-gray-400'>Lead has no history</p>
-              }
+              <div className='card'>
+                <div className='card-body [&_*]:whitespace-normal'>
+                  <TableLeadHistory
+                    uid={this.props.uid + "_table_lead_history"}
+                    data={{ data: R.HISTORY }}
+                    descriptionSource="props"
+                    onRowClick={(table) => {}}
+                    description={{
+                      permissions: {
+                        canCreate: false,
+                        canDelete: false,
+                        canRead: true,
+                        canUpdate: false,
+                      },
+                      ui: {
+                        showFooter: false,
+                        showHeader: false,
+                      },
+                      columns: {
+                        description: { type: "varchar", title: "Description"},
+                        change_date: { type: "date", title: "Change Date"},
+                      },
+                      inputs: {
+                        description: { type: "varchar", title: "Description", readonly: true},
+                        change_date: { type: "date", title: "Change Date"},
+                      },
+                    }}
+                    readonly={true}
+                  >
+                  </TableLeadHistory>
+                </div>
+              </div>
             </TabPanel>
           : null}
         </TabView>

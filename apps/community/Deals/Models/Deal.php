@@ -262,28 +262,57 @@ class Deal extends \HubletoMain\Core\Models\Model
 
   public function onBeforeUpdate(array $record): array
   {
-    $this->getOwnership($record);
-
-    $deal = $this->record->find($record["id"]);
+    $oldRecord = $this->record->find($record["id"])->toArray();
     $mDealHistory = new DealHistory($this->main);
 
-    if (isset($record["deal_result"]) && $record["deal_result"] != $deal->deal_result) {
-      $record["date_result_update"] = date("Y-m-d H:i:s");
-    }
+    $diff = $this->diffRecords($oldRecord, $record);
+    $columns = $this->getColumns();
+    foreach ($diff as $columnName => $values) {
+      $oldValue = $values[0] ?? "None";
+      $newValue = $values[1] ?? "None";
 
-    if (isset($record["price"]) && (float) $deal->price != (float) $record["price"]) {
-      $mDealHistory->record->recordCreate([
-        "change_date" => date("Y-m-d"),
-        "id_deal" => (int) ($record["id"] ?? 0),
-        "description" => "Price changed to " . (string) ($record["price"] ?? '')
-      ]);
-    }
-    if (isset($record["date_expected_close"]) && (string) $deal->date_expected_close != (string) $record["date_expected_close"]) {
-      $mDealHistory->record->recordCreate([
-        "change_date" => date("Y-m-d"),
-        "id_deal" => $record["id"],
-        "description" => "Expected Close Date changed to ".date("d.m.Y", (int) strtotime((string) $record["date_expected_close"]))
-      ]);
+      if ($columns[$columnName]->getType() == "lookup") {
+        $lookupModel = $this->main->getModel($columns[$columnName]->getLookupModel());
+        $lookupSqlValue = $lookupModel->getLookupSqlValue($lookupModel->table);
+
+        if ($oldValue != "None") {
+          $oldValue = $lookupModel->record
+            ->selectRaw($lookupSqlValue)
+            ->where("id", $values[0])
+            ->first()->toArray()
+          ;
+          $oldValue = reset($oldValue);
+        }
+
+        if ($newValue != "None") {
+          $newValue = $lookupModel->record
+            ->selectRaw($lookupSqlValue)
+            ->where("id", $values[1])
+            ->first()->toArray()
+          ;
+          $newValue = reset($newValue);
+        }
+
+        $mDealHistory->record->recordCreate([
+          "change_date" => date("Y-m-d"),
+          "id_deal" => $record["id"],
+          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+        ]);
+      } else {
+        if ($columns[$columnName]->getType() == "boolean") {
+          $oldValue = $values[0] ? "Yes" : "No";
+          $newValue = $values[1] ? "Yes" : "No";
+        } else if (!empty($columns[$columnName]->getEnumValues())) {
+          $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? "None";
+          $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? "None";
+        }
+
+        $mDealHistory->record->recordCreate([
+          "change_date" => date("Y-m-d"),
+          "id_deal" => $record["id"],
+          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+        ]);
+      }
     }
 
     return $record;

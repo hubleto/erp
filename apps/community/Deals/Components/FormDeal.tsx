@@ -15,6 +15,7 @@ import ModalForm from 'adios/ModalForm';
 import Hyperlink from 'adios/Inputs/Hyperlink';
 import { FormProps, FormState } from 'adios/Form';
 import moment, { Moment } from "moment";
+import TableDealHistory from './TableDealHistory';
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
@@ -786,27 +787,38 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         ) : null}
         {showAdditional ?
           <TabPanel header={this.translate('History')}>
-            {R.HISTORY.length > 0 ?
-              R.HISTORY.map((history, key) => (
-                <div key={key} className='w-full flex flex-row justify-between'>
-                  <div className='w-1/3'>
-                      <p className='font-bold self-center text-sm text-left'>
-                        {history.description}
-                      </p>
-                    </div>
-                  <div className='w-1/3' style={{alignContent: "center"}}>
-                    <hr style={{width: "100%", alignSelf: "center"}}/>
-                  </div>
-                  <div className='w-1/3 justify-center'>
-                    <p className='self-center text-sm text-center'>
-                      {history.change_date}
-                    </p>
-                  </div>
-                </div>
-              ))
-              :
-              <p className='text-gray-400'>Deal has no history</p>
-            }
+            <div className='card'>
+              <div className='card-body [&_*]:whitespace-normal'>
+                <TableDealHistory
+                  uid={this.props.uid + "_table_deal_history"}
+                  data={{ data: R.HISTORY }}
+                  descriptionSource="props"
+                  onRowClick={(table) => {}}
+                  description={{
+                    permissions: {
+                      canCreate: false,
+                      canDelete: false,
+                      canRead: true,
+                      canUpdate: false,
+                    },
+                    ui: {
+                      showFooter: false,
+                      showHeader: false,
+                    },
+                    columns: {
+                      description: { type: "varchar", title: "Description"},
+                      change_date: { type: "date", title: "Change Date"},
+                    },
+                    inputs: {
+                      description: { type: "varchar", title: "Description", readonly: true},
+                      change_date: { type: "date", title: "Change Date"},
+                    },
+                  }}
+                  readonly={true}
+                >
+                </TableDealHistory>
+              </div>
+            </div>
           </TabPanel>
         : null}
       </TabView>

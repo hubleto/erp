@@ -204,22 +204,57 @@ class Lead extends \HubletoMain\Core\Models\Model
   {
     $this->checkOwnership($record);
 
-    $lead = $this->record->find($record["id"])->toArray();
+    $oldRecord = $this->record->find($record["id"])->toArray();
     $mLeadHistory = new LeadHistory($this->main);
 
-    if (isset($record['price']) && (float) $lead["price"] != (float) $record["price"]) {
-      $mLeadHistory->record->recordCreate([
-        "change_date" => date("Y-m-d"),
-        "id_lead" => $record["id"],
-        "description" => "Price changed to " . (string) $record["price"],
-      ]);
-    }
-    if (isset($record['date_expected_close']) && (string) $lead["date_expected_close"] != (string) $record["date_expected_close"]) {
-      $mLeadHistory->record->recordCreate([
-        "change_date" => date("Y-m-d"),
-        "id_lead" => $record["id"],
-        "description" => "Expected Close Date changed to " . date("d.m.Y", (int) strtotime((string) $record["date_expected_close"])),
-      ]);
+    $diff = $this->diffRecords($oldRecord, $record);
+    $columns = $this->getColumns();
+    foreach ($diff as $columnName => $values) {
+      $oldValue = $values[0] ?? "None";
+      $newValue = $values[1] ?? "None";
+
+      if ($columns[$columnName]->getType() == "lookup") {
+        $lookupModel = $this->main->getModel($columns[$columnName]->getLookupModel());
+        $lookupSqlValue = $lookupModel->getLookupSqlValue($lookupModel->table);
+
+       if ($oldValue != "None") {
+          $oldValue = $lookupModel->record
+            ->selectRaw($lookupSqlValue)
+            ->where("id", $values[0])
+            ->first()->toArray()
+          ;
+          $oldValue = reset($oldValue);
+        }
+
+        if ($newValue != "None") {
+          $newValue = $lookupModel->record
+            ->selectRaw($lookupSqlValue)
+            ->where("id", $values[1])
+            ->first()->toArray()
+          ;
+          $newValue = reset($newValue);
+        }
+
+        $mLeadHistory->record->recordCreate([
+          "change_date" => date("Y-m-d"),
+          "id_lead" => $record["id"],
+          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+        ]);
+      } else {
+        if ($columns[$columnName]->getType() == "boolean") {
+          $oldValue = $values[0] ? "Yes" : "No";
+          $newValue = $values[1] ? "Yes" : "No";
+        } else if (!empty($columns[$columnName]->getEnumValues())) {
+          $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? "None";
+          $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? "None";
+        }
+
+        $mLeadHistory->record->recordCreate([
+          "change_date" => date("Y-m-d"),
+          "id_lead" => $record["id"],
+          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+        ]);
+      }
     }
 
     return $record;

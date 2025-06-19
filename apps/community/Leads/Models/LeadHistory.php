@@ -28,12 +28,10 @@ class LeadHistory extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Leads';
-    $description->ui['addButtonText'] = 'Add Lead';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
+    $description->ui['showHeader'] = false;
+    $description->ui['showFulltextSearch'] = false;
     $description->ui['showFooter'] = false;
-    unset($description->columns['note']);
+    unset($description->columns['id_lead']);
     return $description;
   }
 

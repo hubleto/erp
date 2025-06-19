@@ -15,5 +15,4 @@ class LeadHistory extends \HubletoMain\Core\RecordManager
   public function LEAD(): BelongsTo {
     return $this->belongsTo(Lead::class, 'id_lead', 'id');
   }
-
 }

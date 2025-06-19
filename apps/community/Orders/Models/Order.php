@@ -32,9 +32,9 @@ class Order extends \HubletoMain\Core\Models\Model
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold'),
       'id_state' => (new Lookup($this, $this->translate('State'), State::class)),
-      'price' => (new Decimal($this, $this->translate('Price')))->setReadonly()->setRequired(),
+      'price' => (new Decimal($this, $this->translate('Price')))->setReadonly()->setRequired()->setDefaultValue(0),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
-      'date_order' => (new Date($this, $this->translate('Order date')))->setRequired(),
+      'date_order' => (new Date($this, $this->translate('Order date')))->setRequired()->setDefaultValue(date("Y-m-d")),
       'required_delivery_date' => (new Date($this, $this->translate('Required delivery date'))),
       'shipping_info' => (new Varchar($this, $this->translate('Shipping information'))),
       'note' => (new Text($this, $this->translate('Notes'))),
@@ -64,9 +64,7 @@ class Order extends \HubletoMain\Core\Models\Model
     ;
 
     $description = parent::describeForm();
-    $description->defaultValues["date_order"] = date("Y-m-d");
     $description->defaultValues["id_currency"] = $defaultCurrency;
-    $description->defaultValues["price"] = 0;
 
     return $description;
   }

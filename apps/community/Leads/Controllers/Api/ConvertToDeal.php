@@ -47,6 +47,14 @@ class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
       ->id
     ;
 
+    $resultQualifiedStep = (int) $mPipepelineStep->record
+      ->where("id_pipeline", $defaultPipeline)
+      ->where("set_result", $mDeal::RESULT_QUALIFIED)
+      ->orderBy("id", "asc")
+      ->first()
+      ->id
+    ;
+
     try {
       $lead = $mLead->record->where("id", $leadId)->first();
 
@@ -58,14 +66,15 @@ class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
         "price" => $lead->price,
         "id_currency" => $lead->id_currency,
         "date_expected_close" => $lead->date_expected_close,
-        "date_created" => date("Y-m-d"),
+        "date_created" => date("Y-m-d H:i:s"),
         "id_owner" => $lead->id_owner,
+        "shared_folder" => $lead->shared_folder,
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
         "id_lead" => $lead->id,
-        "deal_result" => 3,
+        "deal_result" => $resultQualifiedStep ? $mDeal::RESULT_QUALIFIED : $mDeal::RESULT_PENDING,
         "id_pipeline" => $defaultPipeline ?? null,
-        "id_pipeline_step" => $defaultPipelineFirstStep ?? null,
+        "id_pipeline_step" =>  $resultQualifiedStep ? $resultQualifiedStep : $defaultPipelineFirstStep ?? null,
       ]);
 
       $lead->status = $mLead::STATUS_COMPLETED;

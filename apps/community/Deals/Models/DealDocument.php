@@ -18,8 +18,8 @@ class DealDocument extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_lookup' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
-      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class))->setRequired(),
+      'id_lookup' => (new Lookup($this, $this->translate('Deal'), Deal::class, "CASCADE"))->setRequired(),
+      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, "CASCADE"))->setRequired(),
     ]);
   }
 

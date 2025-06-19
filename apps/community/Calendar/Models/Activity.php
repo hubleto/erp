@@ -31,9 +31,9 @@ class Activity extends \HubletoMain\Core\Models\Model
       'date_end' => (new Date($this, $this->translate('End date'))),
       'time_end' => (new Time($this, $this->translate('End time'))),
       'all_day' => (new Boolean($this, $this->translate('All day'))),
-      'completed' => (new Boolean($this, $this->translate('Completed'))),
+      'completed' => (new Boolean($this, $this->translate('Completed')))->setDefaultValue(0),
       'meeting_minutes_link' => (new Varchar($this, $this->translate('Meeting minutes (link)'))),
-      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class)),
+      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setDefaultValue($this->main->auth->getUserId()),
     ]);
   }
 
@@ -48,16 +48,5 @@ class Activity extends \HubletoMain\Core\Models\Model
       break;
     }
     return $description;
-  }
-
-  public function describeForm(): \ADIOS\Core\Description\Form {
-
-    $describe = parent::describeForm();
-    $describe->defaultValues = [
-      "id_owner" => $this->main->auth->getUserId(),
-      "completed" => 0
-    ];
-
-    return $describe;
   }
 }

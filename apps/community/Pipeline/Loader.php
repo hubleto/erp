@@ -48,7 +48,7 @@ class Loader extends \HubletoMain\Core\App
 
       $idPipeline = $mPipeline->record->recordCreate([ "name" => "Default pipeline" ])['id'];
       $mPipelineStep->record->recordCreate([ 'name' => 'Prospecting', 'order' => 1, 'color' => '#838383', 'id_pipeline' => $idPipeline , "set_result" => Deal::RESULT_PENDING, "probability" => 1]);
-      $mPipelineStep->record->recordCreate([ 'name' => 'Qualified to buy', 'order' => 2, 'color' => '#d8a082', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_PENDING, "probability" => 10]);
+      $mPipelineStep->record->recordCreate([ 'name' => 'Qualified to buy', 'order' => 2, 'color' => '#d8a082', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_QUALIFIED, "probability" => 10]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Proposal & Quote Sent', 'order' => 3, 'color' => '#d1cf79', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_PENDING , "probability" => 30]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Negotiation & Adjustments', 'order' => 4, 'color' => '#79d1a5', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_PENDING , "probability" => 50]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Decision-Making Phase', 'order' => 5, 'color' => '#82b3d8', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_PENDING , "probability" => 70]);

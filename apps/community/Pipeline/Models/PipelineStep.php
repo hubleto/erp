@@ -27,7 +27,7 @@ class PipelineStep extends \HubletoMain\Core\Models\Model
       'probability' => (new Integer($this, $this->translate('Probability')))->setRequired()->setUnit("%"),
       'id_pipeline' => (new Lookup($this, $this->translate("Pipeline"), Pipeline::class))->setRequired(),
       'set_result' => (new Integer($this, $this->translate('Set result of a deal to')))->setRequired()
-        ->setEnumValues([Deal::RESULT_PENDING => "Pending", Deal::RESULT_WON => "Won",  Deal::RESULT_LOST => "Lost"])
+        ->setEnumValues([Deal::RESULT_QUALIFIED => "Qualified to buy", Deal::RESULT_PENDING => "Pending", Deal::RESULT_WON => "Won",  Deal::RESULT_LOST => "Lost"])
     ]);
   }
 

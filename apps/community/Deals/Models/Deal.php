@@ -29,7 +29,6 @@ class Deal extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'deals/{%ID%}';
 
-  const RESULT_QUALIFIED = 0;
   const RESULT_PENDING = 1;
   const RESULT_WON = 2;
   const RESULT_LOST = 3;
@@ -83,9 +82,8 @@ class Deal extends \HubletoMain\Core\Models\Model
       ]),
       'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues([self::RESULT_QUALIFIED => "Qualify for buy", self::RESULT_PENDING => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost"])
+        ->setEnumValues([self::RESULT_PENDING => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost"])
         ->setEnumCssClasses([
-          self::RESULT_QUALIFIED => 'bg-orange-100 text-orange-800',
           self::RESULT_PENDING => 'bg-yellow-100 text-yellow-800',
           self::RESULT_WON => 'bg-green-100 text-green-800',
           self::RESULT_LOST => 'bg-red-100 text-red-800',

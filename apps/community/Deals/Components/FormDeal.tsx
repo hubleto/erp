@@ -32,6 +32,7 @@ export interface FormDealState extends HubletoFormState {
   tableDealProductsDescription: any,
   tableDealDocumentsDescription: any,
   tablesKey: number,
+  pipelineFirstLoad: boolean;
 }
 
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
@@ -68,6 +69,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       tableDealProductsDescription: null,
       tableDealDocumentsDescription: null,
       tablesKey: 0,
+      pipelineFirstLoad: false,
     };
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
@@ -226,16 +228,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       if (R.HISTORY.length > 1 && (R.HISTORY[0].id < R.HISTORY[R.HISTORY.length-1].id))
         R.HISTORY = this.state.record.HISTORY.reverse();
     }
-    console.log(R);
-    // if (R.id > 0 && globalThis.main.idUser != R.id_owner && !this.state.recordChanged) {
-    //   return (
-    //     <>
-    //       <div className='w-full h-full flex flex-col justify-center'>
-    //         <span className='text-center'>This deal belongs to a different user</span>
-    //       </div>
-    //     </>
-    //   )
-    // }
+
+    if (R.id == undefined && this.state.pipelineFirstLoad == false) {
+      this.pipelineChange(this.state.record.id_pipeline);
+      this.setState({pipelineFirstLoad: true});
+    }
 
     const pipeline = <div className='card mt-2'>
       <div className='card-header'>
@@ -445,7 +442,9 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             readonly: R.is_archived,
             onChange: (input: any, value: any) => {
               this.updateRecord({lost_reason: null});
-              this.changePipelineStepFromResult();
+              if (this.state.record.PIPELINE && this.state.record.PIPELINE.STEPS?.length > 0) {
+                this.changePipelineStepFromResult();
+              }
             }
           }
         )}

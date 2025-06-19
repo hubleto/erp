@@ -267,12 +267,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                       R.PIPELINE_STEP = s;
                       this.updateRecord(R);
                     }}
-                    className={`btn ${statusColor}`}
+                    className={`btn ${statusColor} w-[150px] h-[48px]`}
                     style={{borderLeft: '1em solid ' + s.color}}
                   >
-                    <div className='text text-center flex flex-col'>
-                      {s.name}
-                      <small>({s.probability} %)</small>
+                    <div className='text text-center w-full flex'>
+                      <span className='align-self-center grow'>{s.name} <small className='whitespace-nowrap'>({s.probability} %)</small></span>
                     </div>
                   </button>
                   {i+1 == R.PIPELINE.STEPS.length ? null
@@ -726,7 +725,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     return (
                       <FormInput>
                         <Hyperlink {...this.getInputProps('document-link')}
-                          value={data.DOCUMENT.hyperlink}
+                          value={data.DOCUMENT.hyperlink ? data.DOCUMENT.hyperlink : null}
                           readonly={true}
                         ></Hyperlink>
                       </FormInput>

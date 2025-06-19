@@ -29,6 +29,7 @@ class Deal extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'deals/{%ID%}';
 
+  const RESULT_QUALIFIED = 0;
   const RESULT_PENDING = 1;
   const RESULT_WON = 2;
   const RESULT_LOST = 3;
@@ -61,7 +62,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))
         ->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired()->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'price' => (new Decimal($this, $this->translate('Price')))->setDecimals(2),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
@@ -83,7 +84,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       ]),
       'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues([$this::RESULT_PENDING => "Pending", $this::RESULT_WON => "Won", $this::RESULT_LOST => "Lost"])->setDefaultValue($this::RESULT_PENDING),
+        ->setEnumValues([$this::RESULT_QUALIFIED => "Qualified to buy", $this::RESULT_PENDING => "Pending", $this::RESULT_WON => "Won", $this::RESULT_LOST => "Lost"])->setDefaultValue($this::RESULT_PENDING),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
@@ -104,6 +105,7 @@ class Deal extends \HubletoMain\Core\Models\Model
         break;
       case 'deal_result':
           $description->setEnumCssClasses([
+            0 => "!text-orange-500",
             1 => "!text-white-500",
             2 => "!text-green-500",
             3 => "!text-red-500",

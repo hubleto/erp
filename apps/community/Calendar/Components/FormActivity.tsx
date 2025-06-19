@@ -18,17 +18,16 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
 
   translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormActivity';
 
+  getActivitySourceReadable(): string
+  {
+    return 'Event';
+  }
+
   renderTitle(): JSX.Element {
-    if (this.state.creatingRecord) {
-      return <h2>{globalThis.main.translate('New event')}</h2>;
-    } else {
-      return (
-        <>
-          <h2>{this.state.record.subject ?? ''}</h2>
-          <small>Event</small>
-        </>
-      );
-    }
+    return <>
+      <h2>{this.state.record.subject ?? ''}</h2>
+      <small>{this.getActivitySourceReadable()}</small>
+    </>;
   }
 
   renderCustomInputs(): JSX.Element {

@@ -35,8 +35,10 @@ export interface FormCustomerState extends HubletoFormState {
   newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
-  activityCalendarTimeClicked: string,
-  activityCalendarDateClicked: string,
+  activityTime: string,
+  activityDate: string,
+  activitySubject: string,
+  activityAllDay: boolean,
   tableValuesDescription?: any,
   tablesKey: number,
 }
@@ -68,8 +70,10 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       showIdDocument: 0,
       newEntryId: this.props.newEntryId ?? -1,
       showIdActivity: 0,
-      activityCalendarTimeClicked: '',
-      activityCalendarDateClicked: '',
+      activityTime: '',
+      activityDate: '',
+      activitySubject: '',
+      activityAllDay: false,
       tablesKey: 0,
     }
   }
@@ -159,9 +163,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           description={{
             defaultValues: {
               id_customer: R.id,
-              date_start: this.state.activityCalendarDateClicked,
-              time_start: this.state.activityCalendarTimeClicked == "00:00:00" ? null : this.state.activityCalendarTimeClicked,
-              date_end: this.state.activityCalendarDateClicked,
+              date_start: this.state.activityDate,
+              time_start: this.state.activityTime == "00:00:00" ? null : this.state.activityTime,
+              date_end: this.state.activityDate,
+              subject: this.state.activitySubject,
+              all_day: this.state.activityAllDay,
             }
           }}
           showInModal={true}
@@ -532,11 +538,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               readonly={R.is_archived}
               initialView='timeGridWeek'
               views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-              eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=customers&?idCustomer=' + R.id}
+              eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
               onDateClick={(date, time, info) => {
                 this.setState({
-                  activityCalendarDateClicked: date,
-                  activityCalendarTimeClicked: time,
+                  activityDate: date,
+                  activityTime: time,
                   showIdActivity: -1,
                 } as FormCustomerState);
               }}

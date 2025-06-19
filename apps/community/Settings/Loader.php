@@ -33,6 +33,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/role-permissions\/?$/' => Controllers\RolePermissions::class,
       '/^settings\/teams\/?$/' => Controllers\Teams::class,
       '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
+      '/^settings\/theme\/?$/' => Controllers\Theme::class,
       '/^settings\/config\/?$/' => Controllers\Config::class,
       '/^settings\/get-permissions\/?$/' => Controllers\Api\GetPermissions::class,
       '/^settings\/save-permissions\/?$/' => Controllers\Api\SavePermissions::class,

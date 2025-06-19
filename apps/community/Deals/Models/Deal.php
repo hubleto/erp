@@ -84,12 +84,26 @@ class Deal extends \HubletoMain\Core\Models\Model
       ]),
       'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues([$this::RESULT_QUALIFIED => "Qualified to buy", $this::RESULT_PENDING => "Pending", $this::RESULT_WON => "Won", $this::RESULT_LOST => "Lost"])->setDefaultValue($this::RESULT_PENDING),
+        ->setEnumValues([self::RESULT_QUALIFIED, self::RESULT_PENDING => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost"])
+        ->setEnumCssClasses([
+          self::RESULT_QUALIFIED => 'bg-orange-100 text-orange-800',
+          self::RESULT_PENDING => 'bg-yellow-100 text-yellow-800',
+          self::RESULT_WON => 'bg-green-100 text-green-800',
+          self::RESULT_LOST => 'bg-red-100 text-red-800',
+        ])
+        ->setDefaultValue(self::RESULT_PENDING)
+      ,
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
       'business_type' => (new Integer($this, $this->translate('Business type')))
-        ->setEnumValues([$this::BUSINESS_TYPE_NEW => "New", $this::BUSINESS_TYPE_EXISTING => "Existing"])->setDefaultValue($this::BUSINESS_TYPE_NEW),
+        ->setEnumValues([self::BUSINESS_TYPE_NEW => "New", self::BUSINESS_TYPE_EXISTING => "Existing"])
+        ->setEnumCssClasses([
+          self::BUSINESS_TYPE_NEW => 'bg-yellow-100 text-yellow-800',
+          self::BUSINESS_TYPE_EXISTING => 'bg-blue-100 text-blue-800',
+        ])
+        ->setDefaultValue(self::BUSINESS_TYPE_NEW)
+      ,
     ]);
   }
 
@@ -102,16 +116,6 @@ class Deal extends \HubletoMain\Core\Models\Model
           ->setReactComponent('InputHyperlink')
           ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
-        break;
-      case 'deal_result':
-          $description->setEnumCssClasses([
-            0 => "!text-orange-500",
-            1 => "!text-white-500",
-            2 => "!text-green-500",
-            3 => "!text-red-500",
-          ]);
-        break;
-      default:
         break;
     }
     return $description;

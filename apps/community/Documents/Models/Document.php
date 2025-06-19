@@ -16,7 +16,7 @@ class Document extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\ADIOS\Core\Helper::generateUuidV4()),
-      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setReadonly()->setDefaultValue($this->main->urlParamAsInteger('idFolder')),
+      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setDefaultValue($this->main->urlParamAsInteger('idFolder')),
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired(),
       'file' => (new File($this, $this->translate('File'))),
       'hyperlink' => (new Varchar($this, $this->translate('File Link'))),
@@ -53,10 +53,10 @@ class Document extends \HubletoMain\Core\Models\Model
   {
     $savedRecord = parent::onAfterCreate($originalRecord, $savedRecord);
 
-    if (isset($originalRecord["creatingForModel"]) && isset($originalRecord["creatingForId"])) {
-      $mCrossDocument = $this->main->getModel($originalRecord["creatingForModel"]);
+    if (isset($savedRecord["creatingForModel"]) && isset($savedRecord["creatingForId"])) {
+      $mCrossDocument = $this->main->getModel($savedRecord["creatingForModel"]);
       $mCrossDocument->record->recordCreate([
-        "id_lookup" => $originalRecord["creatingForId"],
+        "id_lookup" => $savedRecord["creatingForId"],
         "id_document" => $savedRecord["id"]
       ]);
     }

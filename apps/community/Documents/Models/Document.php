@@ -15,8 +15,8 @@ class Document extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly(),
-      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setReadonly(),
+      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\ADIOS\Core\Helper::generateUuidV4()),
+      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setReadonly()->setDefaultValue($this->main->urlParamAsInteger('idFolder')),
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired(),
       'file' => (new File($this, $this->translate('File'))),
       'hyperlink' => (new Varchar($this, $this->translate('File Link'))),
@@ -46,17 +46,6 @@ class Document extends \HubletoMain\Core\Models\Model
         $description->setReactComponent('InputHyperlink');
       break;
     }
-    return $description;
-  }
-
-  public function describeForm(): \ADIOS\Core\Description\Form
-  {
-    $description = parent::describeForm();
-    $description->defaultValues = [
-      "uid" => \ADIOS\Core\Helper::generateUuidV4(),
-      "id_folder" => $this->main->urlParamAsInteger('idFolder'),
-    ];
-
     return $description;
   }
 

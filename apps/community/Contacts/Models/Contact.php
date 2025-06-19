@@ -45,8 +45,8 @@ class Contact extends \HubletoMain\Core\Models\Model
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
       'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0),
       'note' => (new Text($this, $this->translate('Notes'))),
-      'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired(),
-      'is_active' => (new Boolean($this, $this->translate('Active'))),
+      'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
       'note' => (new Text($this, $this->translate('Notes'))),
     ]);
   }
@@ -104,8 +104,6 @@ class Contact extends \HubletoMain\Core\Models\Model
       $this->translate('Mr.'),
       $this->translate('Mrs.'),
     ]);
-    $description->defaultValues['is_active'] = 1;
-    $description->defaultValues['date_created'] = date("Y-m-d");
     return $description;
   }
 

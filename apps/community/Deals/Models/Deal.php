@@ -58,17 +58,18 @@ class Deal extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Deal Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))
+        ->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired()->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
       'price' => (new Decimal($this, $this->translate('Price')))->setDecimals(2),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class)),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
-      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setDefaultValue($this->main->auth->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setDefaultValue($this->main->auth->getUserId()),
+      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
+      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setDefaultValue(1),
+      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setDefaultValue(null),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
@@ -80,15 +81,14 @@ class Deal extends \HubletoMain\Core\Models\Model
         6 => "Refferal",
         7 => "Other",
       ]),
-      'is_archived' => (new Boolean($this, $this->translate('Archived'))),
+      'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues([$this::RESULT_PENDING => "Pending", $this::RESULT_WON => "Won", $this::RESULT_LOST => "Lost"])->setDefaultValue(3),
+        ->setEnumValues([$this::RESULT_PENDING => "Pending", $this::RESULT_WON => "Won", $this::RESULT_LOST => "Lost"])->setDefaultValue($this::RESULT_PENDING),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
-      'business_type' => (new Integer($this, $this->translate('Business type')))->setEnumValues(
-        [$this::BUSINESS_TYPE_NEW => "New", $this::BUSINESS_TYPE_EXISTING => "Existing"]
-      ),
+      'business_type' => (new Integer($this, $this->translate('Business type')))
+        ->setEnumValues([$this::BUSINESS_TYPE_NEW => "New", $this::BUSINESS_TYPE_EXISTING => "Existing"])->setDefaultValue($this::BUSINESS_TYPE_NEW),
     ]);
   }
 
@@ -161,7 +161,6 @@ class Deal extends \HubletoMain\Core\Models\Model
   public function describeForm(): \ADIOS\Core\Description\Form
   {
     $mSettings = new Setting($this->main);
-    $defaultPipeline = 1;
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
@@ -169,17 +168,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     ;
 
     $description = parent::describeForm();
-    // $description->defaultValues['is_new_customer'] = 0;
-    $description->defaultValues['id_customer'] = $this->main->urlParamAsInteger('idCustomer');
-    $description->defaultValues['deal_result'] = $this::RESULT_PENDING;
-    $description->defaultValues['business_type'] = $this::BUSINESS_TYPE_NEW;
-    $description->defaultValues['is_archived'] = 0;
-    $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_currency'] = $defaultCurrency;
-    $description->defaultValues['id_pipeline'] = $defaultPipeline;
-    $description->defaultValues['id_pipeline_step'] = null;
-    $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
-    $description->defaultValues['id_manager'] = $this->main->auth->getUserId();
 
     return $description;
   }

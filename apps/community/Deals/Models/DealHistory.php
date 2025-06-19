@@ -33,7 +33,7 @@ class DealHistory extends \HubletoMain\Core\Models\Model
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
-    unset($description->columns['note']);
+    unset($description->columns['id_deal']);
     return $description;
   }
 

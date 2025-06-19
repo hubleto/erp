@@ -50,9 +50,9 @@ class Lead extends \HubletoMain\Core\Models\Model
       'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
-      'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setEnumValues(
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(null),
+      'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setDefaultValue($this::STATUS_NEW)->setEnumValues(
         [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
       )->setEnumCssClasses([
         self::STATUS_NEW => 'bg-blue-100 text-blue-800',
@@ -60,13 +60,13 @@ class Lead extends \HubletoMain\Core\Models\Model
         self::STATUS_COMPLETED => 'bg-green-100 text-green-800',
         self::STATUS_LOST => 'bg-red-100 text-red-800',
       ]),
-      'price' => (new Decimal($this, $this->translate('Price'))),
+      'price' => (new Decimal($this, $this->translate('Price')))->setDefaultValue(0),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class)),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
-      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setDefaultValue($this->main->auth->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setDefaultValue($this->main->auth->getUserId()),
+      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, "Online document folder"),
       'note' => (new Text($this, $this->translate('Notes'))),
@@ -79,7 +79,7 @@ class Lead extends \HubletoMain\Core\Models\Model
         6 => "Refferal",
         7 => "Other",
       ]),
-      'is_archived' => (new Boolean($this, $this->translate('Archived'))),
+      'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
     ]);
   }
 
@@ -162,16 +162,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       ->first()
       ->value
     ;
-
-    $description->defaultValues['id_customer'] = $this->main->urlParamAsInteger('idCustomer');
-    $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
-    $description->defaultValues['id_contact'] = null;
-    $description->defaultValues['price'] = 0;
-    $description->defaultValues['is_archived'] = 0;
     $description->defaultValues['id_currency'] = $defaultCurrency;
-    $description->defaultValues['status'] = $this::STATUS_NEW;
-    $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
-    $description->defaultValues['id_manager'] = $this->main->auth->getUserId();
 
     $description->ui['addButtonText'] = $this->translate('Add Lead');
 

@@ -121,18 +121,6 @@ class Customer extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  // public function describeForm(): \ADIOS\Core\Description\Form
-  // {
-  //   $description = parent::describeForm();
-
-  //   // $description->defaultValues['is_active'] = 0;
-  //   // $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
-  //   // $description->defaultValues['id_manager'] = $this->main->auth->getUserId();
-  //   // $description->defaultValues['date_created'] = date("Y-m-d");
-
-  //   return $description;
-  // }
-
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);

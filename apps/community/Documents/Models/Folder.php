@@ -14,8 +14,8 @@ class Folder extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly(),
-      'id_parent_folder' => (new Lookup($this, $this->translate("Parent folder"), Folder::class))->setRequired()->setReadonly(),
+      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\ADIOS\Core\Helper::generateUuidV4()),
+      'id_parent_folder' => (new Lookup($this, $this->translate("Parent folder"), Folder::class))->setRequired()->setReadonly()->setDefaultValue($this->main->urlParamAsInteger('idParentFolder')),
       'name' => (new Varchar($this, $this->translate('Folder name')))->setRequired()->setCssClass('text-2xl text-primary'),
     ]);
   }
@@ -32,17 +32,6 @@ class Folder extends \HubletoMain\Core\Models\Model
         ],
       ],
     ]);
-  }
-
-  public function describeForm(): \ADIOS\Core\Description\Form {
-
-    $description = parent::describeForm();
-    $description->defaultValues = [
-      "uid" => \ADIOS\Core\Helper::generateUuidV4(),
-      "id_parent_folder" => $this->main->urlParamAsInteger('idParentFolder'),
-    ];
-
-    return $description;
   }
 
 }

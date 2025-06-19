@@ -19,7 +19,8 @@ class Panel extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class))->setRequired()->setReadonly(),
+      'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class))
+        ->setRequired()->setReadonly()->setDefaultValue($this->main->urlParamAsInteger('idDashboard')),
       'board_url_slug' => (new Varchar($this, $this->translate('Board')))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'configuration' => (new Json($this, $this->translate('Configuration'))),
@@ -58,16 +59,6 @@ class Panel extends \HubletoMain\Core\Models\Model
         $description->setEnumValues($enumValues);
       break;
     }
-    return $description;
-  }
-
-  public function describeForm(): \ADIOS\Core\Description\Form {
-
-    $description = parent::describeForm();
-    $description->defaultValues = [
-      "id_dashboard" => $this->main->urlParamAsInteger('idDashboard'),
-    ];
-
     return $description;
   }
 

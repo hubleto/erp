@@ -29,6 +29,7 @@ class Deal extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'deals/{%ID%}';
 
+  const RESULT_QUALIFIED = 0;
   const RESULT_PENDING = 1;
   const RESULT_WON = 2;
   const RESULT_LOST = 3;
@@ -58,16 +59,17 @@ class Deal extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Deal Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))
+        ->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired()->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
-      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
       'price' => (new Decimal($this, $this->translate('Price')))->setDecimals(2),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class)),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setDefaultValue($this->main->auth->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setDefaultValue($this->main->auth->getUserId()),
+      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setDefaultValue(1),
+      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setDefaultValue(null),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
@@ -79,10 +81,11 @@ class Deal extends \HubletoMain\Core\Models\Model
         6 => "Refferal",
         7 => "Other",
       ]),
-      'is_archived' => (new Boolean($this, $this->translate('Archived'))),
+      'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues([self::RESULT_PENDING => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost"])
+        ->setEnumValues([self::RESULT_QUALIFIED => "Qualify for buy", self::RESULT_PENDING => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost"])
         ->setEnumCssClasses([
+          self::RESULT_QUALIFIED => 'bg-orange-100 text-orange-800',
           self::RESULT_PENDING => 'bg-yellow-100 text-yellow-800',
           self::RESULT_WON => 'bg-green-100 text-green-800',
           self::RESULT_LOST => 'bg-red-100 text-red-800',
@@ -100,7 +103,7 @@ class Deal extends \HubletoMain\Core\Models\Model
         ])
         ->setDefaultValue(self::BUSINESS_TYPE_NEW)
       ,
-      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly(),
+      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
     ]);
   }
 
@@ -166,7 +169,6 @@ class Deal extends \HubletoMain\Core\Models\Model
   public function describeForm(): \ADIOS\Core\Description\Form
   {
     $mSettings = new Setting($this->main);
-    $defaultPipeline = 1;
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
@@ -174,17 +176,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     ;
 
     $description = parent::describeForm();
-    // $description->defaultValues['is_new_customer'] = 0;
-    $description->defaultValues['id_customer'] = $this->main->urlParamAsInteger('idCustomer');
-    $description->defaultValues['deal_result'] = self::RESULT_PENDING;
-    $description->defaultValues['business_type'] = self::BUSINESS_TYPE_NEW;
-    $description->defaultValues['is_archived'] = 0;
-    $description->defaultValues['date_created'] = date("Y-m-d H:i:s");
     $description->defaultValues['id_currency'] = $defaultCurrency;
-    $description->defaultValues['id_pipeline'] = $defaultPipeline;
-    $description->defaultValues['id_pipeline_step'] = null;
-    $description->defaultValues['id_owner'] = $this->main->auth->getUserId();
-    $description->defaultValues['id_manager'] = $this->main->auth->getUserId();
 
     return $description;
   }
@@ -267,28 +259,57 @@ class Deal extends \HubletoMain\Core\Models\Model
 
   public function onBeforeUpdate(array $record): array
   {
-    $this->getOwnership($record);
-
-    $deal = $this->record->find($record["id"]);
+    $oldRecord = $this->record->find($record["id"])->toArray();
     $mDealHistory = new DealHistory($this->main);
 
-    if (isset($record["deal_result"]) && $record["deal_result"] != $deal->deal_result) {
-      $record["date_result_update"] = date("Y-m-d H:i:s");
-    }
+    $diff = $this->diffRecords($oldRecord, $record);
+    $columns = $this->getColumns();
+    foreach ($diff as $columnName => $values) {
+      $oldValue = $values[0] ?? "None";
+      $newValue = $values[1] ?? "None";
 
-    if (isset($record["price"]) && (float) $deal->price != (float) $record["price"]) {
-      $mDealHistory->record->recordCreate([
-        "change_date" => date("Y-m-d"),
-        "id_deal" => (int) ($record["id"] ?? 0),
-        "description" => "Price changed to " . (string) ($record["price"] ?? '')
-      ]);
-    }
-    if (isset($record["date_expected_close"]) && (string) $deal->date_expected_close != (string) $record["date_expected_close"]) {
-      $mDealHistory->record->recordCreate([
-        "change_date" => date("Y-m-d"),
-        "id_deal" => $record["id"],
-        "description" => "Expected Close Date changed to ".date("d.m.Y", (int) strtotime((string) $record["date_expected_close"]))
-      ]);
+      if ($columns[$columnName]->getType() == "lookup") {
+        $lookupModel = $this->main->getModel($columns[$columnName]->getLookupModel());
+        $lookupSqlValue = $lookupModel->getLookupSqlValue($lookupModel->table);
+
+        if ($oldValue != "None") {
+          $oldValue = $lookupModel->record
+            ->selectRaw($lookupSqlValue)
+            ->where("id", $values[0])
+            ->first()->toArray()
+          ;
+          $oldValue = reset($oldValue);
+        }
+
+        if ($newValue != "None") {
+          $newValue = $lookupModel->record
+            ->selectRaw($lookupSqlValue)
+            ->where("id", $values[1])
+            ->first()->toArray()
+          ;
+          $newValue = reset($newValue);
+        }
+
+        $mDealHistory->record->recordCreate([
+          "change_date" => date("Y-m-d"),
+          "id_deal" => $record["id"],
+          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+        ]);
+      } else {
+        if ($columns[$columnName]->getType() == "boolean") {
+          $oldValue = $values[0] ? "Yes" : "No";
+          $newValue = $values[1] ? "Yes" : "No";
+        } else if (!empty($columns[$columnName]->getEnumValues())) {
+          $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? "None";
+          $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? "None";
+        }
+
+        $mDealHistory->record->recordCreate([
+          "change_date" => date("Y-m-d"),
+          "id_deal" => $record["id"],
+          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+        ]);
+      }
     }
 
     return $record;

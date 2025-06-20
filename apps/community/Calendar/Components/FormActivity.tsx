@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
-import Lookup from 'adios/Inputs/Lookup';
-import FormInput from 'adios/FormInput';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 
 export interface FormActivityProps extends HubletoFormProps {}
-
 export interface FormActivityState extends HubletoFormState {}
 
 export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,FormActivityState> {

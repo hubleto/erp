@@ -49,9 +49,9 @@ class Document extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function onAfterCreate(array $originalRecord, array $savedRecord): array
+  public function onAfterCreate(array $savedRecord): array
   {
-    $savedRecord = parent::onAfterCreate($originalRecord, $savedRecord);
+    $savedRecord = parent::onAfterCreate($savedRecord);
 
     if (isset($savedRecord["creatingForModel"]) && isset($savedRecord["creatingForId"])) {
       $mCrossDocument = $this->main->getModel($savedRecord["creatingForModel"]);

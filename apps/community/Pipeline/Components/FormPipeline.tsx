@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { deepObjectMerge, getUrlParam } from "adios/Helper";
-import HubletoForm, { HubletoFormProps, HubletoFormState, } from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import TablePipelineSteps from "./TablePipelineSteps";
 import { FormProps, FormState } from "adios/Form";
 

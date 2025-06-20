@@ -1,6 +1,6 @@
 import React, { Component, createRef, useRef } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import TableOrderProducts from './TableOrderProducts';
 import FormInput from 'adios/FormInput';
 import Lookup from 'adios/Inputs/Lookup';

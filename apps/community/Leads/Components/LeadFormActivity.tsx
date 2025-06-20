@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
+import FormActivity, { FormActivityProps, FormActivityState } from '@hubleto/apps/community/Calendar/Components/FormActivity'
 import FormInput from 'adios/FormInput';
 import Lookup from 'adios/Inputs/Lookup';
-import FormActivity, { FormActivityProps, FormActivityState } from '@hubleto/apps/community/Calendar/Components/FormActivity'
 
 export interface LeadFormActivityProps extends FormActivityProps {
   idLead: number,

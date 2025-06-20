@@ -20,6 +20,7 @@ class Loader extends \HubletoMain\Core\App
       '/^contacts\/check-primary-contact\/?$/' => Controllers\Api\CheckPrimaryContact::class,
       '/^settings\/contact-tags\/?$/' => Controllers\Tags::class,
       '/^contacts\/categories\/?$/' => Controllers\Categories::class,
+      '/^contacts\/import\/?$/' => Controllers\Import::class,
     ]);
 
     $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/categories']);

@@ -107,6 +107,12 @@ class Contact extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
+  public function onBeforeCreate(array $record): array
+  {
+    $record['date_created'] = date('Y-m-d');
+    return $record;
+  }
+
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);

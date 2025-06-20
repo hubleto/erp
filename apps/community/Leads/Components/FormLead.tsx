@@ -1,5 +1,5 @@
 import React, { Component, createRef, ChangeEvent } from 'react';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
 import request from 'adios/Request';
@@ -13,8 +13,6 @@ import LeadFormActivity, { LeadFormActivityProps, LeadFormActivityState } from '
 import Hyperlink from 'adios/Inputs/Hyperlink';
 import { FormProps, FormState } from 'adios/Form';
 import moment, { Moment } from "moment";
-import Table from 'adios/Table';
-import HubletoTable from '@hubleto/src/core/Components/HubletoTable';
 import TableLeadHistory from './TableLeadHistory';
 
 export interface FormLeadProps extends HubletoFormProps {

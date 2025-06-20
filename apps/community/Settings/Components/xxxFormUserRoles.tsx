@@ -1,6 +1,6 @@
 import React, { Component, createRef, RefObject } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import request from 'adios/Request';
 
 interface FormUserRolesProps extends HubletoFormProps {}

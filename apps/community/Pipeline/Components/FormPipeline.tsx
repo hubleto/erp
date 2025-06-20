@@ -128,14 +128,14 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
                     order: { type: "int", title: "Order" },
                     color: { type: "color", title: "Color" },
                     probability: { type: "int", title: "Probability", unit: "%" },
-                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: { 0: "Qualified to buy", 1: "Pending", 2: "Won", 3: "Lost"} },
+                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
                   },
                   inputs: {
                     name: { type: "varchar", title: "Name" },
                     order: { type: "int", title: "Order" },
                     color: { type: "color", title: "Color" },
                     probability: { type: "int", title: "Probability", unit: "%" },
-                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: { 0: "Qualified to buy", 1: "Pending", 2: "Won", 3: "Lost"} },
+                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
                   },
                 }}
               ></TablePipelineSteps>

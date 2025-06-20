@@ -18,6 +18,21 @@ export default class HubletoForm<P, S> extends Form<HubletoFormProps,HubletoForm
     this.state = this.getStateFromProps(props);
   }
 
+  renderCustomInputs(): Array<JSX.Element> {
+    let customInputs: any = [];
+
+    if (this.state?.description?.inputs) {
+      Object.keys(this.state.description.inputs).map((inputName) => {
+        const inputDesc = this.state.description.inputs[inputName];
+        if (inputDesc.isCustom) {
+          customInputs.push(this.inputWrapper(inputName));
+        }
+      });
+    }
+
+    return customInputs;
+  }
+
   renderFooter(): JSX.Element {
     return <>
       <div className="pr-4">

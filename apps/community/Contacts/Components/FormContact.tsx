@@ -102,6 +102,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
+    const customInputs = this.renderCustomInputs();
 
     return <>
       <div className='card'>
@@ -250,6 +251,9 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
           </div>
         </div>
       </div>
+      <div className="card mt-2"><div className="card-header">Custom data</div><div className="card-body">
+        {showAdditional && customInputs.length > 0 ? customInputs : null}
+      </div></div>
     </>;
   }
 }

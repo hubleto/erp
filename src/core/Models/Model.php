@@ -7,6 +7,8 @@ use \HubletoApp\Community\Settings\Models\UserRole;
 class Model extends \ADIOS\Core\Model {
   public \HubletoMain $main;
 
+  public bool $isExtendableByCustomColumns = false;
+
   public array $conversionRelations = [];
   public string $permission = '';
   public array $rolePermissions = []; // example: [ [UserRole::ROLE_CHIEF_OFFICER => [true, true, true, true]] ]
@@ -21,6 +23,22 @@ class Model extends \ADIOS\Core\Model {
 
     parent::__construct($main);
 
+  }
+
+  public function describeColumns(): array
+  {
+    $customColumns = [];
+    if ($this->isExtendableByCustomColumns) {
+      $customColumnsCfg = $this->getConfigAsArray('customColumns');
+      foreach ($customColumnsCfg as $colName => $colCfg) {
+        $customColumn = null;
+        $colClass = $colCfg['class'] ?? '';
+        if (class_exists($colClass)) {
+          $customColumns[$colName] = (new $colClass($this, ''))->loadFromArray($colCfg)->setProperty('isCustom', true);
+        }
+      }
+    }
+    return array_merge(parent::describeColumns(), $customColumns);
   }
 
   public function describeForm(): \ADIOS\Core\Description\Form

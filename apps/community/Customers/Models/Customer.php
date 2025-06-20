@@ -16,6 +16,8 @@ use HubletoMain\Core\Helper;
 
 class Customer extends \HubletoMain\Core\Models\Model
 {
+  public bool $isExtendableByCustomColumns = true;
+
   public string $table = 'customers';
   public string $recordManagerClass = RecordManagers\Customer::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
@@ -36,7 +38,7 @@ class Customer extends \HubletoMain\Core\Models\Model
 
   public function describeColumns(): array
   {
-    return array_merge(parent::describeColumns(), [
+    return array_merge([
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
       'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),
@@ -53,7 +55,7 @@ class Customer extends \HubletoMain\Core\Models\Model
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue($this->main->auth->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue($this->main->auth->getUserId()),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
-    ]);
+    ], parent::describeColumns());
   }
 
   public function indexes(array $indexes = []): array

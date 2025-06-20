@@ -310,6 +310,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
   renderContent(): JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
+    const customInputs = this.renderCustomInputs();
 
     if (R.LEADS && R.LEADS.length > 0) {
       R.LEADS.map((lead, index) => {
@@ -530,6 +531,9 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               </div>
             : null}
           </div>
+          <div className="card mt-2"><div className="card-header">Custom data</div><div className="card-body">
+            {showAdditional && customInputs.length > 0 ? customInputs : null}
+          </div></div>
         </TabPanel>
         {showAdditional ? (
           <TabPanel header={this.translate('Calendar')}>

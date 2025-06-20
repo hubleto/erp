@@ -12,6 +12,9 @@ use HubletoMain\Core\Helper;
 
 class Contact extends \HubletoMain\Core\Models\Model
 {
+
+  public bool $isExtendableByCustomColumns = true;
+
   public string $table = 'contacts';
   public string $recordManagerClass = RecordManagers\Contact::class;
   public ?string $lookupSqlValue = "
@@ -35,7 +38,7 @@ class Contact extends \HubletoMain\Core\Models\Model
 
   public function describeColumns(): array
   {
-    return array_merge(parent::describeColumns(), [
+    return array_merge([
       'salutation' => (new Varchar($this, $this->translate('Salutation'))),
       'title_before' => (new Varchar($this, $this->translate('Title before'))),
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
@@ -48,7 +51,7 @@ class Contact extends \HubletoMain\Core\Models\Model
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
       'note' => (new Text($this, $this->translate('Notes'))),
-    ]);
+    ], parent::describeColumns());
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table

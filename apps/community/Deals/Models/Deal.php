@@ -181,9 +181,9 @@ class Deal extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function onAfterCreate(array $originalRecord, array $savedRecord): array
+  public function onAfterCreate(array $savedRecord): array
   {
-    $savedRecord = parent::onAfterCreate($originalRecord, $savedRecord);
+    $savedRecord = parent::onAfterCreate($savedRecord);
 
     $mDealHistory = new DealHistory($this->main);
     $mDealHistory->record->recordCreate([

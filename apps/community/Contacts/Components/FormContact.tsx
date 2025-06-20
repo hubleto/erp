@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from 'adios/Helper';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import InputTags2 from 'adios/Inputs/Tags2';
 import FormInput from 'adios/FormInput';
 import TableValues from './TableValues';
@@ -62,8 +62,6 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
   }
 
   checkPrimaryContact(R) {
-    console.log(R.TAGS);
-
     if (R.TAGS && R.TAGS.length > 0) {
       var tagIds = [];
 

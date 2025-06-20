@@ -1,5 +1,5 @@
 import React, { Component, ChangeEvent } from "react";
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import InputTags2 from "adios/Inputs/Tags2";
 import FormInput from "adios/FormInput";
 import TableContacts from "../../Contacts/Components/TableContacts";

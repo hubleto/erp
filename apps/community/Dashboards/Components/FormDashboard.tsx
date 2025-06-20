@@ -1,5 +1,5 @@
 import React, { Component, createRef, RefObject } from 'react';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import Table, { TableProps, TableState } from 'adios/Table';
 
 interface FormDashboardProps extends HubletoFormProps {}

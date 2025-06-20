@@ -251,9 +251,9 @@ class Lead extends \HubletoMain\Core\Models\Model
     return $record;
   }
 
-  public function onAfterCreate(array $originalRecord, array $savedRecord): array
+  public function onAfterCreate(array $savedRecord): array
   {
-    $savedRecord = parent::onAfterCreate($originalRecord, $savedRecord);
+    $savedRecord = parent::onAfterCreate($savedRecord);
 
     $mLeadHistory = new LeadHistory($this->main);
     $mLeadHistory->record->recordCreate([

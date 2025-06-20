@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
-import InputTags2 from 'adios/Inputs/Tags2';
-import FormInput from 'adios/FormInput';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import { getUrlParam } from 'adios/Helper';
 
 export interface FormDocumentProps extends HubletoFormProps {}
-
 export interface FormDocumentState extends HubletoFormState {}
 
 export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,FormDocumentState> {

@@ -97,9 +97,9 @@ class Order extends \HubletoMain\Core\Models\Model
     return $savedRecord;
   }
 
-  public function onAfterCreate(array $originalRecord, array $savedRecord): array
+  public function onAfterCreate(array $savedRecord): array
   {
-    $savedRecord = parent::onAfterCreate($originalRecord, $savedRecord);
+    $savedRecord = parent::onAfterCreate($savedRecord);
 
     $order = $this->record->find($savedRecord["id"]);
     $order->order_number = $order->id;

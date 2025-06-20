@@ -12,6 +12,10 @@ class Campaign extends \HubletoMain\Core\Models\Model
   public string $recordManagerClass = RecordManagers\Campaign::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
+  public array $relations = [
+    'LEADS' => [ self::HAS_MANY, Lead::class, 'id_campaign', 'id' ],
+  ];
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [

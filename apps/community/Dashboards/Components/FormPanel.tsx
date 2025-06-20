@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 
 export interface FormPanelProps extends HubletoFormProps {}
-
 export interface FormPanelState extends HubletoFormState {}
 
 export default class FormPanel<P, S> extends HubletoForm<FormPanelProps,FormPanelState> {

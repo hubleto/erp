@@ -57,4 +57,26 @@ class Value extends \HubletoMain\Core\Models\Model
 
     return $description;
   }
+
+  public function getTypeFromValue(string $value): string
+  {
+    $type = 'other';
+    if (filter_var($value, FILTER_VALIDATE_EMAIL)) $type = 'email';
+    elseif (str_starts_with(strtolower($value), 'http')) $type = 'url';
+    elseif (preg_match('/^[\+|0-9| ]+$/', $value)) $type = 'number';
+    return $type;
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    $record['type'] = $this->getTypeFromValue($record['value']);
+    return $record;
+  }
+
+  public function onBeforeUpdate(array $record): array
+  {
+    $record['type'] = $this->getTypeFromValue($record['value']);
+    return $record;
+  }
+
 }

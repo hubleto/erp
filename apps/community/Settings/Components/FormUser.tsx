@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { deepObjectMerge } from "adios/Helper";
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "../../../../src/core/Components/HubletoForm";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import Table, { TableProps, TableState } from 'adios/Table';
 
-interface FormUserProps extends HubletoFormProps {
-}
-
-interface FormUserState extends HubletoFormState {
-}
+interface FormUserProps extends HubletoFormProps { }
+interface FormUserState extends HubletoFormState { }
 
 export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserState> {
   static defaultProps: any = {

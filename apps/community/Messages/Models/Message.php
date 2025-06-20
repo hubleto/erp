@@ -23,13 +23,14 @@ class Message extends \HubletoMain\Core\Models\Model
 
   public function describeColumns(): array
   {
+    $user = $this->main->auth->getUser();
     return array_merge(parent::describeColumns(), [
       // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReadonly(),
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
       'sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
       'read' => (new DateTime($this, $this->translate('Read'))),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
-      'from' => (new Varchar($this, $this->translate('From')))->setRequired()->setReadonly()->setDefaultValue($this->main->auth->getUser()['email']),
+      'from' => (new Varchar($this, $this->translate('From')))->setRequired()->setReadonly()->setDefaultValue($user['email'] ?? ''),
       'to' => (new Varchar($this, $this->translate('To')))->setRequired(),
       'cc' => (new Varchar($this, $this->translate('Cc'))),
       'bcc' => (new Varchar($this, $this->translate('Bcc'))),

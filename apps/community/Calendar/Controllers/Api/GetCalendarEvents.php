@@ -33,13 +33,17 @@ class GetCalendarEvents extends \HubletoMain\Core\Controllers\Controller {
 
   public function renderJson(): array
   {
+    $filter = [
+      'fOwnership' => $this->main->urlParamAsInteger('fOwnership'),
+    ];
+
     if ($this->main->isUrlParam('source')) {
       return (array) $this->calendarManager
         ->getCalendar($this->main->urlParamAsString('source'))
-        ->loadEvents($this->dateStart, $this->dateEnd)
+        ->loadEvents($this->dateStart, $this->dateEnd, $filter)
       ;
     } else {
-      return $this->loadEventsFromMultipleCalendars($this->dateStart, $this->dateEnd, [], $this->main->urlParamAsArray('fSources'));
+      return $this->loadEventsFromMultipleCalendars($this->dateStart, $this->dateEnd, $filter, $this->main->urlParamAsArray('fSources'));
     }
   }
 

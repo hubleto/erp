@@ -36,6 +36,19 @@ class Deal extends \HubletoMain\Core\Models\Model
   const BUSINESS_TYPE_NEW = 1;
   const BUSINESS_TYPE_EXISTING = 2;
 
+  const ENUM_SOURCE_CHANNELS = [
+    1 => "Advertisement",
+    2 => "Partner",
+    3 => "Web",
+    4 => "Cold call",
+    5 => "E-mail",
+    6 => "Refferal",
+    7 => "Other",
+  ];
+
+  const ENUM_DEAL_RESULTS = [ self::RESULT_PENDING => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost" ];
+  const ENUM_BUSINESS_TYPES = [ self::BUSINESS_TYPE_NEW => "New", self::BUSINESS_TYPE_EXISTING => "Existing" ];
+
   public array $relations = [
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
@@ -71,18 +84,10 @@ class Deal extends \HubletoMain\Core\Models\Model
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setDefaultValue(null),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
-      'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
-        1 => "Advertisement",
-        2 => "Partner",
-        3 => "Web",
-        4 => "Cold call",
-        5 => "E-mail",
-        6 => "Refferal",
-        7 => "Other",
-      ]),
+      'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(self::ENUM_SOURCE_CHANNELS),
       'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues([self::RESULT_PENDING => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost"])
+        ->setEnumValues(self::ENUM_DEAL_RESULTS)
         ->setEnumCssClasses([
           self::RESULT_PENDING => 'bg-yellow-100 text-yellow-800',
           self::RESULT_WON => 'bg-green-100 text-green-800',
@@ -94,7 +99,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
       'business_type' => (new Integer($this, $this->translate('Business type')))
-        ->setEnumValues([self::BUSINESS_TYPE_NEW => "New", self::BUSINESS_TYPE_EXISTING => "Existing"])
+        ->setEnumValues(self::ENUM_BUSINESS_TYPES)
         ->setEnumCssClasses([
           self::BUSINESS_TYPE_NEW => 'bg-yellow-100 text-yellow-800',
           self::BUSINESS_TYPE_EXISTING => 'bg-blue-100 text-blue-800',
@@ -136,7 +141,14 @@ class Deal extends \HubletoMain\Core\Models\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
-    // $description->columns['tags'] = ["title" => "Tags"];
+    $description->ui['defaultFilters'] = [
+      'fSourceChannel' => [ 'title' => 'Source channel', 'options' => array_merge([ 0 => 'All'], self::ENUM_SOURCE_CHANNELS) ],
+      'fDealResult' => [ 'title' => 'Result', 'options' => array_merge([ 0 => 'All'], self::ENUM_DEAL_RESULTS) ],
+      'fBusinessType' => [ 'title' => 'Business type', 'options' => array_merge([ 0 => 'All'], self::ENUM_BUSINESS_TYPES) ],
+      'fOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
+      'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+    ];
+
     unset($description->columns['note']);
     unset($description->columns['id_contact']);
     unset($description->columns['source_channel']);
@@ -148,18 +160,6 @@ class Deal extends \HubletoMain\Core\Models\Model
     unset($description->columns['lost_reason']);
     unset($description->columns['is_new_customer']);
     unset($description->columns['business_type']);
-
-    // if ($this->main->urlParamAsInteger('idCustomer') > 0) {
-    //   $description->permissions = [
-    //     'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
-    //     'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
-    //     'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
-    //     'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
-    //   ];
-    //   $description->columns = [];
-    //   $description->inputs = [];
-    //   $description->ui = [];
-    // }
 
     return $description;
   }

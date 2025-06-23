@@ -113,10 +113,6 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
             className={"btn btn-small btn-list-item " + (this.state.fOwnership == 1 ? "btn-primary" : "btn-transparent")}
             onClick={() => { this.setState({fOwnership: 1}); }}
           ><span className="text">My activities</span></button>
-          <button
-            className={"btn btn-small btn-list-item " + (this.state.fOwnership == 2 ? "btn-primary" : "btn-transparent")}
-            onClick={() => { this.setState({fOwnership: 2}); }}
-          ><span className="text">Activities managed by me</span></button>
         </div>
       </div>
       <div className="w-full">

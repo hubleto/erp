@@ -24,8 +24,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
     if (isset($filter['all_day'])) $query = $query->where('all_day', $filter['all_day']);
     if (isset($filter['fOwnership'])) {
       switch ($filter["fOwnership"]) {
-        case 1: $query = $query->where($mActivity->table.".id_owner", $main->auth->getUserId()); break;
-        case 2: $query = $query->where($mActivity->table.".id_manager", $main->auth->getUserId()); break;
+        case 1: $query = $query->where($mActivity->table.".id_owner", $this->main->auth->getUserId()); break;
       }
     }
 

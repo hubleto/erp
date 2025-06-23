@@ -75,7 +75,7 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
         }
       </div>;
     } else {
-      return <>d</>;
+      return <></>;
     }
   }
   

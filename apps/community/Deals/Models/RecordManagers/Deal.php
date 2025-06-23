@@ -115,6 +115,20 @@ class Deal extends \HubletoMain\Core\RecordManager
       $query = $query->where("deals.id_customer", $main->urlParamAsInteger("idCustomer"));
     }
 
+    $defaultFilters = $main->urlParamAsArray("defaultFilters");
+    if (isset($defaultFilters["fSourceChannel"]) && $defaultFilters["fSourceChannel"] > 0) $query = $query->where("deals.source_channel", $defaultFilters["fSourceChannel"]);
+    if (isset($defaultFilters["fDealResult"]) && $defaultFilters["fDealResult"] > 0) $query = $query->where("deals.deal_result", $defaultFilters["fDealResult"]);
+    if (isset($defaultFilters["fBusinessType"]) && $defaultFilters["fBusinessType"] > 0) $query = $query->where("deals.business_type", $defaultFilters["fBusinessType"]);
+    if (isset($defaultFilters["fBusinessType"]) && $defaultFilters["fBusinessType"] > 0) $query = $query->where("deals.business_type", $defaultFilters["fBusinessType"]);
+    if (isset($defaultFilters["fStatus"]) && $defaultFilters["fStatus"] > 0) $query = $query->where("deals.status", $defaultFilters["fStatus"]);
+
+    if (isset($defaultFilters["fOwnership"])) {
+      switch ($defaultFilters["fOwnership"]) {
+        case 1: $query = $query->where("deals.id_owner", $main->auth->getUserId()); break;
+        case 2: $query = $query->where("deals.id_manager", $main->auth->getUserId()); break;
+      }
+    }
+
     return $query;
   }
 

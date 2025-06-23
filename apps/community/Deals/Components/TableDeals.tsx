@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from 'adios/Table';
+import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src/core/Components/HubletoTable';
 import FormDeal, { FormDealProps } from './FormDeal';
 import request from 'adios/Request';
 
-interface TableDealsProps extends TableProps {
+interface TableDealsProps extends HubletoTableProps {
   idCustomer?: number,
   showArchive?: boolean,
 }
 
-interface TableDealsState extends TableState {
+interface TableDealsState extends HubletoTableState {
   showArchive: boolean,
 }
 
-export default class TableDeals extends Table<TableDealsProps, TableDealsState> {
+export default class TableDeals extends HubletoTable<TableDealsProps, TableDealsState> {
   static defaultProps = {
-    ...Table.defaultProps,
+    ...HubletoTable.defaultProps,
     orderBy: {
       field: "id",
       direction: "desc"

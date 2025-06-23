@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ appNamespace }};
+namespace HubletoApp\Community\CalendarActivities;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -14,23 +14,23 @@ class Loader extends \HubletoMain\Core\App
     // By default, each app should have a welcome dashboard.
     // Ifyour app will have own settings panel, it should be under the `settings/your-app` slug.
     $this->main->router->httpGet([
-      '/^{{ appRootUrlSlug }}\/?$/' => Controllers\Dashboard::class,
-      '/^{{ appRootUrlSlug }}\/contacts\/?$/' => Controllers\Contacts::class,
-      '/^settings\/{{ appRootUrlSlug }}\/?$/' => Controllers\Settings::class,
+      '/^calendaractivities\/?$/' => Controllers\Dashboard::class,
+      '/^calendaractivities\/contacts\/?$/' => Controllers\Contacts::class,
+      '/^settings\/calendaractivities\/?$/' => Controllers\Settings::class,
     ]);
 
     // Add placeholder for custom settings.
     // This will be displayed in the Settings app, under the "All settings" card.
     $this->main->apps->community('Settings')->addSetting($this, [
-      'title' => '{{ appName }}', // or $this->translate('{{ appName }}')
+      'title' => 'CalendarActivities', // or $this->translate('CalendarActivities')
       'icon' => 'fas fa-table',
-      'url' => 'settings/{{ appRootUrlSlug }}',
+      'url' => 'settings/calendaractivities',
     ]);
 
     // Add placeholder for your app's calendar.
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
     $calendarManager->addCalendar(
-      '{{ appName }}-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
+      'CalendarActivities-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
       '#008000', // your app's calendar color
       Calendar::class // your app's Calendar class
     );

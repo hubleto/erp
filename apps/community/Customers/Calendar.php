@@ -4,7 +4,8 @@ namespace HubletoApp\Community\Customers;
 
 class Calendar extends \HubletoApp\Community\Calendar\Calendar {
 
-  public array $activitySelectorConfig = [
+  public array $calendarConfig = [
+    "title" => "Customers",
     "addNewActivityButtonText" => "Add new activity linked to customer",
     "icon" => "fas fa-address-card",
     "formComponent" => "CustomersFormActivity",

@@ -16,11 +16,10 @@ class Calendar extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    foreach ($calendarManager->getCalendars() as $calendarClass => $calendar) {
-      if ($calendarClass == "HubletoApp\Community\CalendarSync\Calendar") continue;
-      $calendarConfig = $calendar->activitySelectorConfig;
+    foreach ($calendarManager->getCalendars() as $source => $calendar) {
+      $calendarConfig = $calendar->calendarConfig;
       $calendarConfig['color'] = $calendar->getColor();
-      $this->viewParams["calendarConfigs"][] = $calendarConfig;
+      $this->viewParams["calendarConfigs"][$source] = $calendarConfig;
     }
     $this->setView('@HubletoApp:Community:Calendar/Calendar.twig');
   }

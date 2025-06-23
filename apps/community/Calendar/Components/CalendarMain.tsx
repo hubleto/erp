@@ -29,6 +29,8 @@ interface CalendarMainState {
   activityFormComponent?: JSX.Element,
   activityFormModalProps?: any,
   newActivity: boolean,
+  fSources: Array<string>,
+  fOwnership: number,
 }
 
 export default class CalendarComponent extends Component<CalendarMainProps, CalendarMainState> {
@@ -48,6 +50,8 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
       dateClicked: "",
       timeClicked: "",
       newActivity: false,
+      fSources: Object.keys(this.props.configs),
+      fOwnership: 0,
     };
   }
 
@@ -67,69 +71,118 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
       ...this.state.activityFormModalProps
     };
 
-    return <>
-      <Calendar
-        ref={this.refCalendar}
-        readonly={false}
-        views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-        height={this.props.height}
-        initialView="timeGridWeek"
-        eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events'}
-        onEventsLoaded={(events) => {
-          for (let i in events) {
-            if (
-              !this.state.activityFormComponent
-              && events[i].extendedProps?.source == this.state.eventSource
-              && events[i].id == this.state.eventId
-            ) {
+    console.log(this.state.fSources);
 
-              this.setState({
-                eventSource: '',
-                eventId: 0,
-                activityFormComponent: globalThis.main.renderReactElement(events[i].extendedProps.SOURCEFORM,
-                  {
-                    id: events[i].id,
-                    showInModal: true,
-                    showInModalSimple: true,
-                    onClose:() => {this.setState({activityFormComponent: null})},
-                    onSaveCallback:() => {this.setState({activityFormComponent: null})}
+    return <div className="flex gap-2">
+      <div className="flex flex-col gap-2 text-nowrap mt-2">
+        <b>Calendars</b>
+        <div className="list">
+          {Object.keys(this.props.configs).map((source: any) => {
+            const calendar = this.props.configs[source];
+
+            return <button
+              className="btn btn-small btn-list-item btn-transparent"
+              style={{"borderLeft": "1em solid " + calendar.color}}
+              onClick={() => {
+                let fSources: Array<string> = [];
+                if (this.state.fSources.includes(source)) {
+                  for (let i in this.state.fSources) {
+                    if (this.state.fSources[i] != source) fSources.push(this.state.fSources[i]);
                   }
-                )
-              });
-            }
-          }
-        }}
-        onDateClick={(date, time, info) => {
-          deleteUrlParam('eventSource');
-          deleteUrlParam('eventId');
+                } else {
+                  fSources = this.state.fSources;
+                  fSources.push(source);
+                }
 
-          this.setState({
-            activityFormComponent: null,
-            newActivity: true,
-            dateClicked: date,
-            timeClicked: info.view.type == "dayGridMonth" ? null : time
-          });
-        }}
-        onEventClick={(info) => {
-          setUrlParam('eventSource', info.event.extendedProps.source);
-          setUrlParam('eventId', info.event.id);
+                this.setState({fSources: fSources});
+              }}
+            >
+              <span className="icon"><input type="checkbox" checked={this.state.fSources.includes(source)}></input></span>
+              <span className="text">{calendar.title}</span>
+            </button>;
+          })}
+        </div>
 
-          this.setState({
-            newActivity: false,
-            // activityFormModalProps: info.event.extendedProps.SOURCEFORM_MODALPROPS,
-            activityFormComponent: globalThis.main.renderReactElement(info.event.extendedProps.SOURCEFORM,
-              {
-                id: info.event.id,
-                showInModal: true,
-                showInModalSimple: true,
-                onClose:() => {this.setState({activityFormComponent: null})},
-                onSaveCallback:() => {this.setState({activityFormComponent: null})}
+        <b>Ownership</b>
+        <div className="list">
+          <button
+            className={"btn btn-small btn-list-item " + (this.state.fOwnership == 0 ? "btn-primary" : "btn-transparent")}
+            onClick={() => { this.setState({fOwnership: 0}); }}
+          ><span className="text">All</span></button>
+          <button
+            className={"btn btn-small btn-list-item " + (this.state.fOwnership == 1 ? "btn-primary" : "btn-transparent")}
+            onClick={() => { this.setState({fOwnership: 1}); }}
+          ><span className="text">My activities</span></button>
+          <button
+            className={"btn btn-small btn-list-item " + (this.state.fOwnership == 2 ? "btn-primary" : "btn-transparent")}
+            onClick={() => { this.setState({fOwnership: 2}); }}
+          ><span className="text">Activities managed by me</span></button>
+        </div>
+      </div>
+      <div className="w-full">
+        <Calendar
+          ref={this.refCalendar}
+          readonly={false}
+          views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+          height={this.props.height}
+          initialView="timeGridWeek"
+          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?fOwnership=' + this.state.fOwnership + '&' + this.state.fSources.map((item) => 'fSources[]=' + item).join('&')}
+          onEventsLoaded={(events) => {
+            for (let i in events) {
+              if (
+                !this.state.activityFormComponent
+                && events[i].extendedProps?.source == this.state.eventSource
+                && events[i].id == this.state.eventId
+              ) {
+
+                this.setState({
+                  eventSource: '',
+                  eventId: 0,
+                  activityFormComponent: globalThis.main.renderReactElement(events[i].extendedProps.SOURCEFORM,
+                    {
+                      id: events[i].id,
+                      showInModal: true,
+                      showInModalSimple: true,
+                      onClose:() => {this.setState({activityFormComponent: null})},
+                      onSaveCallback:() => {this.setState({activityFormComponent: null})}
+                    }
+                  )
+                });
               }
-            )
-          });
-          info.jsEvent.preventDefault();
-        }}
-      ></Calendar>
+            }
+          }}
+          onDateClick={(date, time, info) => {
+            deleteUrlParam('eventSource');
+            deleteUrlParam('eventId');
+
+            this.setState({
+              activityFormComponent: null,
+              newActivity: true,
+              dateClicked: date,
+              timeClicked: info.view.type == "dayGridMonth" ? null : time
+            });
+          }}
+          onEventClick={(info) => {
+            setUrlParam('eventSource', info.event.extendedProps.source);
+            setUrlParam('eventId', info.event.id);
+
+            this.setState({
+              newActivity: false,
+              // activityFormModalProps: info.event.extendedProps.SOURCEFORM_MODALPROPS,
+              activityFormComponent: globalThis.main.renderReactElement(info.event.extendedProps.SOURCEFORM,
+                {
+                  id: info.event.id,
+                  showInModal: true,
+                  showInModalSimple: true,
+                  onClose:() => {this.setState({activityFormComponent: null})},
+                  onSaveCallback:() => {this.setState({activityFormComponent: null})}
+                }
+              )
+            });
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>
+      </div>
       {this.state.activityFormComponent ?
         <ModalForm {...activityFormModalProps}>
           {this.state.activityFormComponent}
@@ -151,6 +204,6 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
           />
         </ModalForm>
       : <></>}
-    </>;
+    </div>;
   }
 }

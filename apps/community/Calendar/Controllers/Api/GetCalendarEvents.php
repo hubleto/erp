@@ -39,22 +39,24 @@ class GetCalendarEvents extends \HubletoMain\Core\Controllers\Controller {
         ->loadEvents($this->dateStart, $this->dateEnd)
       ;
     } else {
-      return $this->loadEventsFromAllCalendars($this->dateStart, $this->dateEnd);
+      return $this->loadEventsFromMultipleCalendars($this->dateStart, $this->dateEnd, [], $this->main->urlParamAsArray('fSources'));
     }
   }
 
-  public function loadEventsFromAllCalendars(string $dateStart, string $dateEnd, array $filter = []): array
+  public function loadEventsFromMultipleCalendars(string $dateStart, string $dateEnd, array $filter = [], array|null $sources = null): array
   {
 
     $events = [];
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
 
-    foreach ($calendarManager->getCalendars() as $calendarClass => $calendar) {
+    foreach ($calendarManager->getCalendars() as $source => $calendar) {
+      if ($sources !== null && !in_array($source, $sources)) continue;
+
       $calEvents = (array) $calendar->loadEvents($dateStart, $dateEnd, $filter);
       foreach ($calEvents as $key => $value) {
-        $calEvents[$key]['SOURCEFORM'] = $calendar->activitySelectorConfig["formComponent"] ?? null;
-        $calEvents[$key]['icon'] = $calendar->activitySelectorConfig["icon"] ?? null;
+        $calEvents[$key]['SOURCEFORM'] = $calendar->calendarConfig["formComponent"] ?? null;
+        $calEvents[$key]['icon'] = $calendar->calendarConfig["icon"] ?? null;
       }
       $events = array_merge($events, $calEvents);
     }

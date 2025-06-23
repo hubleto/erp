@@ -6,7 +6,8 @@ use HubletoApp\Community\Calendar\Models\Activity;
 
 class Calendar extends \HubletoMain\Core\Calendar {
 
-  public array $activitySelectorConfig = [
+  public array $calendarConfig = [
+    "title" => "Default calendar",
     "addNewActivityButtonText" => "Add a simple event",
     "formComponent" => "CalendarActivityForm",
   ];
@@ -21,6 +22,12 @@ class Calendar extends \HubletoMain\Core\Calendar {
 
     if (isset($filter['completed'])) $query = $query->where('completed', $filter['completed']);
     if (isset($filter['all_day'])) $query = $query->where('all_day', $filter['all_day']);
+    if (isset($filter['fOwnership'])) {
+      switch ($filter["fOwnership"]) {
+        case 1: $query = $query->where($mActivity->table.".id_owner", $main->auth->getUserId()); break;
+        case 2: $query = $query->where($mActivity->table.".id_manager", $main->auth->getUserId()); break;
+      }
+    }
 
     return $query;
   }

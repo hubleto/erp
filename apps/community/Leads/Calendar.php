@@ -4,7 +4,8 @@ namespace HubletoApp\Community\Leads;
 
 class Calendar extends \HubletoApp\Community\Calendar\Calendar {
 
-  public array $activitySelectorConfig = [
+  public array $calendarConfig = [
+    "title" => "Leads",
     "addNewActivityButtonText" => "Add new activity linked to lead",
     "icon" => "fas fa-people-arrows",
     "formComponent" => "LeadsFormActivity"

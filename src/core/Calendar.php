@@ -10,7 +10,8 @@ class Calendar implements \ADIOS\Core\Testable {
  * Specifies what Activity Form component will be opened and what title should be used for a new button in the `FormActivitySelector.tsx` component
  * @var array{"title": string, "formComponent": string}
  * */
-  public array $activitySelectorConfig = [
+  public array $calendarConfig = [
+    "title" => "",
     "addNewActivityButtonText" => "",
     "formComponent" => ""
   ];

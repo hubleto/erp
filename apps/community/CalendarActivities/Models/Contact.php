@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ appNamespace }}\Models;
+namespace HubletoApp\Community\CalendarActivities\Models;
 
 use \HubletoApp\Community\Settings\Models\User;
 

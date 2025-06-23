@@ -4,7 +4,8 @@ namespace HubletoApp\Community\Deals;
 
 class Calendar extends \HubletoApp\Community\Calendar\Calendar {
 
-  public array $activitySelectorConfig = [
+  public array $calendarConfig = [
+    "title" => "Deals",
     "addNewActivityButtonText" => "Add new activity linked to deal",
     "icon" => "fas fa-handshake",
     "formComponent" => "DealsFormActivity"

@@ -2,21 +2,21 @@
 
 namespace {{ appNamespace }}\Controllers;
 
-class Dashboard extends \HubletoMain\Core\Controllers\Controller
+class Settings extends \HubletoMain\Core\Controllers\Controller
 {
 
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => '{{ appRootUrlSlug }}', 'content' => '{{ appName }}' ],
+      [ 'url' => 'settings', 'content' => 'Settings' ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->viewParams['now'] = date('Y-m-d H:i:s');
-    $this->setView('@{{ appViewNamespace }}/Dashboard.twig');
+    $this->setView('@{{ appViewNamespace }}/Settings.twig');
   }
 
 }

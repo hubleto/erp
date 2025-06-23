@@ -138,18 +138,6 @@ class AppManager
     return $app; // @phpstan-ignore-line
   }
 
-  // public function isAppInstalled(string $appNamespace): bool
-  // {
-  //   return in_array($appNamespace, $this->registeredAppNamespaces);
-  // }
-
-  // public function registerApp(string $appNamespace, bool $force = true): void
-  // {
-  //   if ($force || !$this->isAppInstalled($appNamespace)) {
-  //     $this->apps[$appNamespace] = $this->createAppInstance($appNamespace);
-  //   }
-  // }
-
   /**
   * @return array<\HubletoMain\Core\App>
   */
@@ -295,13 +283,16 @@ class AppManager
     if (!is_dir($appFolder . '/Views')) mkdir($appFolder . '/Views');
 
     file_put_contents($appFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
+    file_put_contents($appFolder . '/Calendar.php', $this->main->twig->render('@appTemplate/Calendar.php.twig', $tplVars));
     file_put_contents($appFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml.twig', $tplVars));
     file_put_contents($appFolder . '/Models/Contact.php', $this->main->twig->render('@appTemplate/Models/Contact.php.twig', $tplVars));
     file_put_contents($appFolder . '/Models/RecordManagers/Contact.php', $this->main->twig->render('@appTemplate/Models/RecordManagers/Contact.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
     file_put_contents($appFolder . '/Controllers/Dashboard.php', $this->main->twig->render('@appTemplate/Controllers/Dashboard.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
+    file_put_contents($appFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
+    file_put_contents($appFolder . '/Controllers/Settings.php', $this->main->twig->render('@appTemplate/Controllers/Settings.php.twig', $tplVars));
     file_put_contents($appFolder . '/Views/Dashboard.twig', $this->main->twig->render('@appTemplate/Views/Dashboard.twig.twig', $tplVars));
+    file_put_contents($appFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
+    file_put_contents($appFolder . '/Views/Settings.twig', $this->main->twig->render('@appTemplate/Views/Settings.twig.twig', $tplVars));
   }
 
 

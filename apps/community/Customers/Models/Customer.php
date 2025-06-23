@@ -114,6 +114,10 @@ class Customer extends \HubletoMain\Core\Models\Model
     unset($description->columns['note']);
     unset($description->columns['shared_folder']);
 
+    $description->ui['defaultFilters'] = [
+      'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+    ];
+
     //nadstavit aby bol is_active posledný
     $tempColumn = $description->columns['is_active'];
     unset($description->columns['is_active']);

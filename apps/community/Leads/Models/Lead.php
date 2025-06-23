@@ -114,7 +114,13 @@ class Lead extends \HubletoMain\Core\Models\Model
     $description->ui['showHeader'] = true;
     $description->ui['showFooter'] = false;
     $description->ui['showFulltextSearch'] = true;
+    $description->ui['showSidebarFilter'] = true;
     $description->ui['showColumnSearch'] = true;
+    $description->ui['defaultFilters'] = [
+      'fStatus' => [ 'title' => 'Status', 'options' => [ 0 => 'All', 1 => 'New', 2 => 'In progress', 3 => 'Completed', 4 => 'Lost' ] ],
+      'fOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
+      'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+    ];
     $description->columns['tags'] = ["title" => "Tags"];
 
     unset($description->columns['note']);
@@ -125,19 +131,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
     unset($description->columns['shared_folder']);
-    // unset($description->columns['lost_reason']);
 
-    // if ($this->main->urlParamAsInteger('idCustomer') > 0) {
-    //   $description->permissions = [
-    //     'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
-    //     'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
-    //     'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
-    //     'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
-    //   ];
-    //   // $description->columns = [];
-    //   // $description->inputs = [];
-    //   // $description->ui = [];
-    // }
     if ($this->main->urlParamAsBool("showArchive")) {
       $description->permissions = [
         "canCreate" => false,

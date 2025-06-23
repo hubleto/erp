@@ -63,6 +63,19 @@ class Customer extends \HubletoMain\Core\RecordManager
     return $this->belongsTo(User::class, 'id_manager', 'id');
   }
 
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    $main = \ADIOS\Core\Helper::getGlobalApp();
+
+    $defaultFilters = $main->urlParamAsArray("defaultFilters");
+    if (isset($defaultFilters["fArchive"]) && $defaultFilters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
+    else $query = $query->where("customers.is_active", true);
+
+    return $query;
+  }
+
   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
   {
     if (isset($orderBy['field']) && $orderBy['field'] == 'tags') {

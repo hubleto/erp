@@ -82,17 +82,15 @@ class Lead extends \HubletoMain\Core\RecordManager
       $query = $query->where("leads.id_customer", $main->urlParamAsInteger("idCustomer"));
     }
 
-    if ($main->urlParamAsInteger("fArchive") > 0) {
-      $query = $query->where("leads.is_archived", $main->urlParamAsInteger("fArchive"));
-    }
+    $defaultFilters = $main->urlParamAsArray("defaultFilters");
+    if (isset($defaultFilters["fArchive"]) && $defaultFilters["fArchive"] > 0) $query = $query->where("leads.is_archived", $defaultFilters["fArchive"]);
+    if (isset($defaultFilters["fStatus"]) && $defaultFilters["fStatus"] > 0) $query = $query->where("leads.status", $defaultFilters["fStatus"]);
 
-    if ($main->urlParamAsInteger("fStatus") > 0) {
-      $query = $query->where("leads.status", $main->urlParamAsInteger("fStatus"));
-    }
-
-    switch ($main->urlParamAsInteger("fOwnership")) {
-      case 1: $query = $query->where("leads.id_owner", $main->auth->getUserId()); break;
-      case 2: $query = $query->where("leads.id_manager", $main->auth->getUserId()); break;
+    if (isset($defaultFilters["fOwnership"])) {
+      switch ($defaultFilters["fOwnership"]) {
+        case 1: $query = $query->where("leads.id_owner", $main->auth->getUserId()); break;
+        case 2: $query = $query->where("leads.id_manager", $main->auth->getUserId()); break;
+      }
     }
 
     return $query;

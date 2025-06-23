@@ -70,6 +70,10 @@ class Model extends \ADIOS\Core\Model {
       'canDelete' => true,
     ];
 
+    $description->ui['moreActions'] = [
+      [ 'title' => 'Export to CSV', 'type' => 'stateChange', 'state' => 'showExportCsvScreen', 'value' => true ],
+    ];
+
     return $description;
   }
 

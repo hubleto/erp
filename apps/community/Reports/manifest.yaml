@@ -1,4 +1,5 @@
 namespace: HubletoApp\Community\Reports
+sidebarGroup: reporting
 rootUrlSlug: reports
 name: Reports
 icon: fas fa-square-poll-vertical

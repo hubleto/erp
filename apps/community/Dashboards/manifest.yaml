@@ -1,4 +1,5 @@
 namespace: HubletoApp\Community\Dashboards
+sidebarGroup: reporting
 rootUrlSlug: dashboards
 name: Dashboards
 icon: fas fa-table

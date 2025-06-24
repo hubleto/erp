@@ -1,4 +1,5 @@
 namespace: HubletoApp\Community\Products
+sidebarGroup: supply-chain
 rootUrlSlug: products
 name: Products
 icon: fas fa-cart-shopping

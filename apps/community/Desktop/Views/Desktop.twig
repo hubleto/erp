@@ -1,5 +1,38 @@
 {{ setTranslationContext('HubletoMain::Desktop') }}
 
+{% macro appBtn(app, inGroup) %}
+  {% set notificationsCount = app.getNotificationsCount() %}
+  <div class="flex gap-1">
+    {% if notificationsCount > 0 %}
+      <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
+        <div class="badge badge-small badge-yellow px-1">{{ notificationsCount }}</div>
+      </div>
+    {% endif %}
+    <a
+      type="button"
+      class="
+        btn
+        {% if app.isActivated %} btn-active {% else %}
+        {% if notificationsCount > 0 %} text-yellow-100 {% endif %} {% endif %} flex-10 truncate
+        {% if inGroup %} bg-white/10 pl-2 hover:bg-white/20 mt-0.5 {% endif %}
+      "
+      href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
+      title="{{ app.manifest.nameTranslated }}"
+    >
+      <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
+      <span class="text">{{ app.manifest.nameTranslated }}</span>
+    </a>
+    {% if app.isActivated and app.hasCustomSettings %}
+      <a
+        class="btn btn-active flex-1"
+        href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}/settings"
+      >
+        <span class="icon text-xs p-0 m-0"><i class="fas fa-cog"></i></span>
+      </a>
+    {% endif %}
+  </div>
+{% endmacro %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -242,34 +275,41 @@
         <button class="app-launcher-show-btn" onclick="lchr(true);">
           <i class="fas fa-magnifying-glass"></i> Search app
         </button>
+        {% for sidebarGroup, sidebarGroupData in viewParams.sidebarGroups %}
+          {% set appBtns = '' %}
+          {% set hasActivatedApp = false %}
+          {% for app in viewParams.appsInSidebar %}
+            {% if app.manifest.sidebarGroup == sidebarGroup %}
+              {% set appBtns = appBtns ~ _self.appBtn(app, true) %}
+              {% if app.isActivated %}
+                {% set hasActivatedApp = true %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          <div>
+            <button
+              class="btn flex-10 truncate"
+              id="sg_{{ sidebarGroup }}_btn"
+              onclick="
+                $('.sidebar-group-btns').not('#sg_{{ sidebarGroup }}_btns').slideUp();
+                $('#sg_{{ sidebarGroup }}_btns').slideDown();
+              "
+            >
+              <span class="icon"><i class="{{ sidebarGroupData.icon }}"></i></span>
+              <span class="text">{{ sidebarGroupData.title }}</span>
+            </button>
+            <div
+              id="sg_{{ sidebarGroup }}_btns"
+              {% if not hasActivatedApp %} style="display:none" {% endif %}
+              class="sidebar-group-btns ml-2"
+            >
+              {{ appBtns|raw }}
+            </div>
+          </div>
+        {% endfor %}
         {% set i = 0 %}
         {% for app in viewParams.appsInSidebar %}
-          {% set notificationsCount = app.getNotificationsCount() %}
-          <div class="flex gap-1">
-            {% if notificationsCount > 0 %}
-              <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
-                <div class="badge badge-small badge-yellow px-1">{{ notificationsCount }}</div>
-              </div>
-            {% endif %}
-            <a
-              type="button"
-              class="btn {% if app.isActivated %} btn-active {% else %} {% if notificationsCount > 0 %} text-yellow-100 {% endif %} {% endif %} flex-10 truncate"
-              id="sidebar-item-level1-{{ i }}"
-              href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
-              title="{{ app.manifest.nameTranslated }}"
-            >
-              <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
-              <span class="text">{{ app.manifest.nameTranslated }}</span>
-            </a>
-            {% if app.isActivated and app.hasCustomSettings %}
-              <a
-                class="btn btn-active flex-1"
-                href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}/settings"
-              >
-                <span class="icon text-xs p-0 m-0"><i class="fas fa-cog"></i></span>
-              </a>
-            {% endif %}
-          </div>
+          {% if app.manifest.sidebarGroup is empty %} {{ _self.appBtn(app, false) }} {% endif %}
           {% set i = i + 1 %}
         {% endfor %}
       </nav>

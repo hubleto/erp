@@ -1,7 +1,8 @@
 namespace: HubletoApp\Community\Inventory
+sidebarGroup: supply-chain
 rootUrlSlug: inventory
 name: Inventory
-icon: fas fa-home
+icon: fas fa-boxes-stacked
 author:
   name: "WAI.blue"
   nick: "wai.blue"

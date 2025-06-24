@@ -1,4 +1,5 @@
 namespace: HubletoApp\Community\Billing
+sidebarGroup: finance
 rootUrlSlug: billing
 name: Billing
 icon: fas fa-file-invoice-dollar

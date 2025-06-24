@@ -1,4 +1,5 @@
 namespace: HubletoApp\Community\Deals
+sidebarGroup: crm
 rootUrlSlug: deals
 name: Deals
 icon: fas fa-handshake

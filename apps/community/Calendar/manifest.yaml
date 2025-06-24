@@ -1,4 +1,5 @@
 namespace: HubletoApp\Community\Calendar
+sidebarGroup: basic
 rootUrlSlug: calendar
 name: Calendar
 icon: fas fa-calendar-days

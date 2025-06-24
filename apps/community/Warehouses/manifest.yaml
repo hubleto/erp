@@ -1,7 +1,8 @@
 namespace: HubletoApp\Community\Warehouses
+sidebarGroup: supply-chain
 rootUrlSlug: warehouses
 name: Warehouses
-icon: fas fa-home
+icon: fas fa-warehouse
 author:
   name: "WAI.blue"
   nick: "wai.blue"

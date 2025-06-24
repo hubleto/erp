@@ -1,4 +1,5 @@
 namespace: HubletoApp\Community\Messages
+sidebarGroup: communication
 rootUrlSlug: messages
 name: Messages
 icon: fas fa-envelope

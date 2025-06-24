@@ -1,4 +1,5 @@
 namespace: HubletoApp\Community\Settings
+sidebarGroup: settings
 rootUrlSlug: settings
 name: Settings and tools
 icon: fas fa-cog

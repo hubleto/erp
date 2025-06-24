@@ -1,4 +1,5 @@
 namespace: HubletoApp\Community\Help
+sidebarGroup: help
 rootUrlSlug: help
 name: Help
 icon: fas fa-life-ring

@@ -47,8 +47,11 @@ export default class FormCustomerExtraButtons extends TranslatedComponent<P, S> 
           >
             <TableLeads
               uid={form.props.uid + "_table_leads"}
+              tag="CustomerLeads"
               parentForm={form}
               idCustomer={R.id}
+              showHeader={false}
+              showFooter={false}
             />
           </ModalSimple>
         : null}

@@ -99,6 +99,7 @@ export default class TableCustomers extends HubletoTable<TableCustomersProps, Ta
 
   renderForm(): JSX.Element {
     let formProps: FormCustomerProps = this.getFormProps() as FormCustomerProps;
+    formProps.uid = 'form_customer';
     formProps.tableContactsDescription = this.state.tableContactsDescription;
     formProps.tableLeadsDescription = this.state.tableLeadsDescription;
     formProps.tableDealsDescription = this.state.tableDealsDescription;

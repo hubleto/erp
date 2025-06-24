@@ -61,6 +61,8 @@ class Model extends \ADIOS\Core\Model {
   {
     $description = parent::describeTable();
 
+    $tag = $this->main->urlParamAsString('tag');
+
     // model-based permissions sa uz nepouzivaju
     // pouzivaju sa record-based permissions, vid recordManager->getPermissions()
     $description->permissions = [
@@ -73,6 +75,31 @@ class Model extends \ADIOS\Core\Model {
     $description->ui['moreActions'] = [
       [ 'title' => 'Export to CSV', 'type' => 'stateChange', 'state' => 'showExportCsvScreen', 'value' => true ],
     ];
+
+    if (!empty($tag)) {
+      $description->ui['moreActions'][] = [ 'title' => 'Columns', 'type' => 'stateChange', 'state' => 'showColumnConfigScreen', 'value' => true ];
+    }
+
+    // getConfig - zistit, ake stlpce sa maju zobrazit / skryt
+    // + vypocitat $description->columns (v principe asi unset() pre stlpce, ktore sa maju skryt)
+
+    if (!empty($tag)) {
+      $allColumnsConfig = @json_decode($this->getConfigAsString('tableColumns'), true);
+
+      if (isset($allColumnsConfig[$tag])) {
+        foreach ($allColumnsConfig[$tag] as $colName => $colConfig) {
+          if (isset($description->columns[$colName])) {
+            if (!($colConfig['visible'] ?? false)) {
+              unset($description->columns[$colName]);
+            }
+          }
+        }
+      } else {
+        foreach ($description->columns as $colName => $column) {
+          if (!$column->getProperty('defaultVisibility')) unset($description->columns[$colName]);
+        }
+      }
+    }
 
     return $description;
   }

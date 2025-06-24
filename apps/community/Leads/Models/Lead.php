@@ -48,7 +48,7 @@ class Lead extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true),
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(null),

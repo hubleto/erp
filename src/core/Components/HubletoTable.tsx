@@ -13,6 +13,7 @@ export interface HubletoTableProps extends TableProps {
 export interface HubletoTableState extends TableState {
   sidebarFilterHidden: boolean,
   showExportCsvScreen: boolean,
+  showColumnConfigScreen: boolean,
 }
 
 export default class HubletoTable<P, S> extends Table<HubletoTableProps, HubletoTableState> {
@@ -29,6 +30,7 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
       ...super.getStateFromProps(props),
       sidebarFilterHidden: false,
       showExportCsvScreen: false,
+      showColumnConfigScreen: false,
     };
   }
 
@@ -100,6 +102,15 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
             showInModalSimple={true}
             onClose={() => { this.setState({showExportCsvScreen: false}); }}
           ></HubletoTableExportCsvForm>
+        </ModalForm>
+      : null}
+      {this.state.showColumnConfigScreen ?
+        <ModalForm
+          uid={this.props.uid + '_columns_config_modal'}
+          isOpen={true}
+          type='centered large'
+        >
+          ...
         </ModalForm>
       : null}
     </>;

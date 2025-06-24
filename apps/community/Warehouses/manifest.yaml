@@ -1,0 +1,8 @@
+namespace: HubletoApp\Community\Warehouses
+rootUrlSlug: warehouses
+name: Warehouses
+icon: fas fa-home
+author:
+  name: "WAI.blue"
+  nick: "wai.blue"
+highlight: Management of individual warehouses or storage facilities.

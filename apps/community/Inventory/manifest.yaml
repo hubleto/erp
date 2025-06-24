@@ -1,0 +1,9 @@
+namespace: HubletoApp\Community\Inventory
+rootUrlSlug: inventory
+name: Inventory
+icon: fas fa-home
+author:
+  name: "WAI.blue"
+  nick: "wai.blue"
+highlight: This is a crucial table that links products to their specific locations and quantities. 
+created: 2025-06-24 13:30:23

@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\Products\Models;
 
+use \HubletoApp\Community\Suppliers\Models\Supplier;
+
 use ADIOS\Core\Db\Column\Boolean;
 use ADIOS\Core\Db\Column\Date;
 use ADIOS\Core\Db\Column\Decimal;
@@ -21,8 +23,8 @@ class Product extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
-    'GROUP' => [ self::HAS_ONE, Group::class, 'id','id_product_group'],
-    'SUPPLIER' => [ self::HAS_ONE, Supplier::class, 'id','id_supplier'],
+    'GROUP' => [ self::HAS_ONE, Group::class, 'id', 'id_product_group'],
+    'SUPPLIER' => [ self::HAS_ONE, Supplier::class, 'id', 'id_supplier'],
   ];
 
   public function describeColumns(): array
@@ -33,7 +35,7 @@ class Product extends \HubletoMain\Core\Models\Model
       'type' => (new Integer($this, $this->translate('Product Type')))->setRequired()->setEnumValues(
         [$this::TYPE_PRODUCT => "Single Item", $this::TYPE_SERVICE => "Service"]
       ),
-      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class)),
       'is_on_sale' => new Boolean($this, $this->translate('On sale')),
       'image' => new Image($this, $this->translate('Image') . ' [540x600px]'),
       'description' => new Text($this, $this->translate('Description')),
@@ -62,18 +64,6 @@ class Product extends \HubletoMain\Core\Models\Model
     $description->ui['showColumnSearch'] = true;
     $description->ui["addButtonText"] = $this->translate("Add product");
     $description->ui['title'] = '';
-
-    unset($description->columns["is_on_sale"]);
-    unset($description->columns["image"]);
-    unset($description->columns["count_in_package"]);
-    unset($description->columns["is_single_order_possible"]);
-    unset($description->columns["packaging"]);
-    unset($description->columns["show_price"]);
-    unset($description->columns["price_after_reweight"]);
-    unset($description->columns["needs_reordering"]);
-    unset($description->columns["storage_rules"]);
-    unset($description->columns["table"]);
-    unset($description->columns["description"]);
 
     return $description;
   }

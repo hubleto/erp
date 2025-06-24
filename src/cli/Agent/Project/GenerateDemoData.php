@@ -148,7 +148,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     //Shop
     $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
     $mGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
-    $mSupplier = new \HubletoApp\Community\Products\Models\Supplier($this->main);
+    $mSupplier = new \HubletoApp\Community\Suppliers\Models\Supplier($this->main);
 
     if (
       $this->main->apps->isAppInstalled("HubletoApp\Community\Documents") &&
@@ -172,7 +172,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity);
     }
     if ($this->main->apps->isAppInstalled("HubletoApp\Community\Products")) {
-      $this->generateProducts($mProduct,$mGroup, $mSupplier);
+      $this->generateProducts($mProduct, $mGroup, $mSupplier);
     }
 
     foreach ($this->main->apps->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
@@ -646,7 +646,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   public function generateProducts(
     \HubletoApp\Community\Products\Models\Product $mProduct,
     \HubletoApp\Community\Products\Models\Group $mGroup,
-    \HubletoApp\Community\Products\Models\Supplier $mSupplier,
+    \HubletoApp\Community\Suppliers\Models\Supplier $mSupplier,
   ): void {
 
     $mGroup->record->recordCreate([

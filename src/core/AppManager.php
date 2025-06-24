@@ -188,7 +188,7 @@ class AppManager
 
     if (str_ends_with($appNamespace, '\\Loader')) $appNamespace = substr($appNamespace, 0, -7);
 
-    // if ($this->cli) $this->cli->cyan("Installing {$appNamespace}, round {$round}.\n");
+    if ($this->cli) $this->cli->cyan("    -> Installing {$appNamespace}, round {$round}.\n");
 
     if ($this->isAppInstalled($appNamespace) && !$forceInstall) {
       throw new \Exception("{$appNamespace} already installed. Set forceInstall to true if you want to reinstall.");

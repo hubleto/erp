@@ -60,7 +60,14 @@ class Installer {
     'cloud' => [
       \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99999, ],
     ],
+    'stock' => [
+      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 210, ],
+      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 220, ],
+      \HubletoApp\Community\Warehouses\Loader::class => [ 'sidebarOrder' => 230, ],
+      \HubletoApp\Community\Inventory\Loader::class => [ 'sidebarOrder' => 240, ],
+    ],
     'sales' => [
+      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200, ],
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200, ],
       \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210, 'calendarColor' => '#C00994', ],
       \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220, ],
@@ -70,6 +77,7 @@ class Installer {
       ],
     ],
     'shop' => [
+      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200, ],
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 310, ],
       \HubletoApp\Community\Orders\Loader::class => [ 'sidebarOrder' => 320, ],
     ],

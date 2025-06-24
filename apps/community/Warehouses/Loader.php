@@ -5,6 +5,8 @@ namespace HubletoApp\Community\Warehouses;
 class Loader extends \HubletoMain\Core\App
 {
 
+  public bool $hasCustomSettings = true;
+
   // init
   public function init(): void
   {
@@ -13,7 +15,14 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^warehouses\/?$/' => Controllers\Warehouses::class,
       '/^warehouses\/locations\/?$/' => Controllers\Locations::class,
+      '/^warehouses\/settings\/?$/' => Controllers\Settings::class,
+      '/^warehouses\/settings\/warehouse-types\/?$/' => Controllers\WarehouseTypes::class,
+      '/^warehouses\/settings\/warehouse-location-types\/?$/' => Controllers\LocationTypes::class,
     ]);
+
+    $appMenu = $this->main->apps->community('Desktop')->appMenu;
+    $appMenu->addItem($this, 'warehouses', $this->translate('Warehouses'), 'fas fa-warehouse');
+    $appMenu->addItem($this, 'warehouses/locations', $this->translate('Locations'), 'fas fa-pallet');
 
   }
 
@@ -21,6 +30,8 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
+      (new Models\WarehouseType($this->main))->dropTableIfExists()->install();
+      (new Models\LocationType($this->main))->dropTableIfExists()->install();
       (new Models\Warehouse($this->main))->dropTableIfExists()->install();
       (new Models\Location($this->main))->dropTableIfExists()->install();
     }
@@ -29,25 +40,66 @@ class Loader extends \HubletoMain\Core\App
   // generateDemoData
   public function generateDemoData(): void
   {
-    // WarehouseID,WarehouseName,AddressLine1,AddressLine2,City,StateProvince,PostalCode,Country,ContactPerson,ContactPhone,IsActive,CreatedAt,UpdatedAt
-    // 1,Main Distribution Center,123 Warehouse St,,Anytown,CA,90210,USA,John Doe,555-111-2222,TRUE,2023-01-01 10:00:00,2023-01-01 10:00:00
-    // 2,Regional Hub East,456 Industrial Rd,,Eastville,NY,10001,USA,Jane Smith,555-333-4444,TRUE,2023-02-15 11:30:00,2023-02-15 11:30:00
-    // 3,Satellite Storage A,789 Storage Ln,,Smallville,TX,75001,USA,Robert Johnson,555-555-6666,TRUE,2023-03-20 09:00:00,2023-03-20 09:00:00
-    // 4,West Coast Fulfillment,999 Port Ave,,Seaport,WA,98101,USA,Maria Garcia,555-666-7777,TRUE,2024-01-10 08:00:00,2024-01-10 08:00:00
-    // 5,Central Returns Facility,500 Return Rd,,Center City,IL,60601,USA,Chris Lee,555-888-9999,TRUE,2024-02-01 13:00:00,2024-02-01 13:00:00
+    $mWarehouseType = new Models\WarehouseType($this->main);
+    $mLocationType = new Models\LocationType($this->main);
+    $mWarehouse = new Models\Warehouse($this->main);
+    $mLocation = new Models\Location($this->main);
 
-    // LocationID,WarehouseID,ParentLocationID,LocationCode,LocationType,Description,CapacityUnit,MaxCapacity,CurrentOccupancy,IsAvailable,CreatedAt,UpdatedAt
-    // 101,1,,A1,Aisle,Main aisle in Warehouse 1,Cubic Feet,10000.00,2500.00,TRUE,2023-01-01 10:15:00,2024-06-24 13:26:00
-    // 102,1,101,A1R1,Rack,Rack 1 in Aisle 1,Cubic Feet,500.00,120.00,TRUE,2023-01-01 10:20:00,2024-06-24 13:26:00
-    // 103,1,102,A1R1S1,Shelf,Shelf 1 on Rack 1,Cubic Feet,50.00,10.00,TRUE,2023-01-01 10:25:00,2024-06-24 13:26:00
-    // 104,1,103,A1R1S1B1,Bin,Bin 1 on Shelf 1,Pcs,100.00,25.00,TRUE,2023-01-01 10:30:00,2024-06-24 13:26:00
-    // 105,1,,Q-ZONE,Quarantine Area,Area for damaged or returned goods,Pcs,500.00,0.00,TRUE,2023-04-01 10:00:00,2024-06-24 13:26:00
-    // 201,2,,R-ZONE,Receiving Area,Dedicated area for inbound goods,Cubic Feet,2000.00,500.00,TRUE,2023-02-15 11:45:00,2024-06-24 13:26:00
-    // 202,2,,S-ZONE,Shipping Area,Dedicated area for outbound goods,Cubic Feet,2000.00,300.00,TRUE,2023-02-15 11:50:00,2024-06-24 13:26:00
-    // 203,2,,P-ZONE,Picking Zone,Main picking area for small items,Pcs,1500.00,700.00,TRUE,2023-03-01 09:00:00,2024-06-24 13:26:00
-    // 301,3,,BULK-A,Bulk Storage A,Large item bulk storage,Cubic Feet,5000.00,1000.00,TRUE,2023-03-20 09:30:00,2024-06-24 13:26:00
-    // 401,4,,S1A1,Shelf,Shelf 1 in Aisle 1,Pcs,200.00,50.00,TRUE,2024-01-10 08:30:00,2024-06-24 13:26:00
-    // 501,5,,RETURN-BIN,Returns Processing Bin,Temporary bin for returned items,Pcs,50.00,5.00,TRUE,2024-02-01 13:15:00,2024-06-24 13:26:00
+    $idWarehouseTypeMain = $mWarehouseType->record->recordCreate(['name' => 'Main'])['id'];
+    $idWarehouseTypeRegional = $mWarehouseType->record->recordCreate(['name' => 'Regional'])['id'];
+
+    $idLocationTypeArea = $mLocationType->record->recordCreate(['name' => 'Area'])['id'];
+    $idLocationTypeAisle = $mLocationType->record->recordCreate(['name' => 'Aisle'])['id'];
+    $idLocationTypeRack = $mLocationType->record->recordCreate(['name' => 'Rack'])['id'];
+    $idLocationTypeShelf = $mLocationType->record->recordCreate(['name' => 'Shelf'])['id'];
+    $idLocationTypeBin = $mLocationType->record->recordCreate(['name' => 'Bin'])['id'];
+
+    $idWarehouseMain = $mWarehouse->record->recordCreate([
+      'name' => 'Main Distribution Center',
+      'id_type' => $idWarehouseTypeMain,
+      'operational_status' => Models\Warehouse::OPERATIONAL_STATUS_ACTIVE,
+      'address' => '123 Warehouse St, Anytown, CA, 90210, USA',
+      'address_plus_code' => 'JCJF+4CG',
+      'contact_person' => 'John Doe',
+      'contact_email' => 'john.doe@warehouse.example.com',
+      'contacct_phone' => '+1 555-123-4562',
+      'description' => 'Main warehouse used for supplying the most important customers.',
+      'capacity' => 5400,
+      'capacity_unit' => 'm2',
+      'current_occupancy' => 1240,
+      'id_operational_manager' => 1,
+    ])['id'];
+
+    $idWarehouseRegional = $mWarehouse->record->recordCreate([
+      'name' => 'Regional Hub East',
+      'id_type' => $idWarehouseTypeRegional,
+      'operational_status' => Models\Warehouse::OPERATIONAL_STATUS_ACTIVE,
+      'address' => '456 Industrial Rd, Eastville, NY, 10001, USA',
+      'address_plus_code' => '7XWG+MMR',
+      'contact_person' => 'Jane Smith',
+      'contact_email' => 'jane.smith@warehouse.example.com',
+      'contacct_phone' => '+1 435-332-4332',
+      'description' => 'Regional warehouse used for supplying the regional customers.',
+      'id_operational_manager' => 1,
+    ])['id'];
+
+    $mLocation->record->recordCreate([
+      'id_warehouse' => $idWarehouseMain,
+      'code' => 'A1.1',
+      'id_type' => $idLocationTypeAisle,
+      'capacity' => 230,
+      'current_occupancy' => 15,
+      'id_operational_manager' => 1,
+    ]);
+
+    $mLocation->record->recordCreate([
+      'id_warehouse' => $idWarehouseMain,
+      'code' => 'A1.2',
+      'id_type' => $idLocationTypeAisle,
+      'capacity' => 340,
+      'current_occupancy' => 156,
+      'id_operational_manager' => 1,
+    ]);
   }
 
 }

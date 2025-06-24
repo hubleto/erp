@@ -5,6 +5,10 @@ namespace {{ appNamespace }};
 class Loader extends \HubletoMain\Core\App
 {
 
+  // Uncomment following if you want a button for app's settings
+  // to be rendered next in sidebar, right next to your app's button.
+  // public bool $hasCustomSettings = true;
+
   // init
   public function init(): void
   {
@@ -35,6 +39,10 @@ class Loader extends \HubletoMain\Core\App
       Calendar::class // your app's Calendar class
     );
 
+    // Uncomment following to configure your app's menu
+    // $appMenu = $this->main->apps->community('Desktop')->appMenu;
+    // $appMenu->addItem($this, '{{ appRootUrlSlug }}/item-1', $this->translate('Item 1'), 'fas fa-table');
+    // $appMenu->addItem($this, '{{ appRootUrlSlug }}/item-2', $this->translate('Item 2'), 'fas fa-list');
   }
 
   // installTables

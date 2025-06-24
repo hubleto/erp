@@ -10,8 +10,12 @@ class Location extends \HubletoMain\Core\RecordManager
 
   public $table = 'warehouses_locations';
 
-  public function MANAGER(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_manager', 'id');
+  public function OPERATION_MANAGER(): BelongsTo {
+    return $this->belongsTo(User::class, 'id_operation_manager', 'id');
+  }
+
+  public function TYPE(): BelongsTo {
+    return $this->belongsTo(LocationType::class, 'id_type', 'id');
   }
 
 }

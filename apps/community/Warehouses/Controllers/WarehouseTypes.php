@@ -2,21 +2,22 @@
 
 namespace HubletoApp\Community\Warehouses\Controllers;
 
-class Locations extends \HubletoMain\Core\Controllers\Controller
+class WarehouseTypes extends \HubletoMain\Core\Controllers\Controller
 {
 
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'warehouses', 'content' => 'Warehouses' ],
-      [ 'url' => 'locations', 'content' => 'Locations' ],
+      [ 'url' => 'settings', 'content' => 'Settings' ],
+      [ 'url' => 'warehouse-types', 'content' => 'Warehouse types' ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Warehouses/Locations.twig');
+    $this->setView('@HubletoApp:Community:Warehouses/WarehouseTypes.twig');
   }
 
 }

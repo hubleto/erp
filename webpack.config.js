@@ -1,10 +1,28 @@
 const path = require('path');
+const fs = require('fs');
+
+
+function loadEntriesFromRepository(folder) {
+  let entries = [];
+  fs.readdirSync(folder).forEach(function(app){
+    const stat = fs.statSync(folder + '/' + app);
+    const loaderEntry = './apps/community/' + app + '/Loader';
+    if (stat && stat.isDirectory() && fs.existsSync(loaderEntry + '.tsx')) {
+      entries.push(loaderEntry);
+    }
+  });
+  return entries;
+}
 
 module.exports = (env, arg) => {
   return {
     // stats: 'verbose',
     entry: {
-      hubleto: ['./index.tsx'],
+      hubleto: [
+        './src/Main',
+        './repositories.tsx',
+        ...loadEntriesFromRepository(path.resolve(__dirname, 'apps/community'))
+      ],
     },
     output: {
       path: path.resolve(__dirname, 'assets/compiled/js'),

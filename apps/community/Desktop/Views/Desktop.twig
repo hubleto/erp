@@ -63,6 +63,7 @@
   <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/themes/{{ viewParams.currentTheme }}.css">
   <script>
     ADIOS.onAppLoaded(() => {
+      globalThis.main.renderReactElements();
       globalThis.main.createThemeObserver();
       {% if config.debugConsoleErrors %}
         globalThis.main.startConsoleErrorLogger();

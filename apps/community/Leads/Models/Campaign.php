@@ -2,9 +2,12 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
+use HubletoApp\Community\Settings\Models\User;
+
 use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\Varchar;
 use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Lookup;
 
 class Campaign extends \HubletoMain\Core\Models\Model
 {
@@ -14,6 +17,7 @@ class Campaign extends \HubletoMain\Core\Models\Model
 
   public array $relations = [
     'LEADS' => [ self::HAS_MANY, Lead::class, 'id_campaign', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
   ];
 
   public function describeColumns(): array
@@ -23,6 +27,7 @@ class Campaign extends \HubletoMain\Core\Models\Model
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setRequired(),
       'goal' => (new Text($this, $this->translate('Goal')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color'))),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->main->auth->getUserId()),
     ]);
   }
 

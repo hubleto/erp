@@ -41,6 +41,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps,Fo
 
     return <>
       {this.inputWrapper('name')}
+      {this.inputWrapper('id_manager')}
       {this.inputWrapper('target_audience')}
       {this.inputWrapper('goal')}
       {this.inputWrapper('color')}

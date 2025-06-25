@@ -49,10 +49,10 @@ class Lead extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Lead Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true),
-      'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(null),
-      'status' => (new Integer($this, $this->translate('Status')))->setRequired()->setDefaultValue($this::STATUS_NEW)->setEnumValues(
+      'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(null),
+      'status' => (new Integer($this, $this->translate('Status')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this::STATUS_NEW)->setEnumValues(
         [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
       )->setEnumCssClasses([
         self::STATUS_NEW => 'bg-blue-100 text-blue-800',
@@ -62,14 +62,14 @@ class Lead extends \HubletoMain\Core\Models\Model
       ]),
       'price' => (new Decimal($this, $this->translate('Price')))->setDefaultValue(0),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
-      'score' => (new Integer($this, $this->translate('Score')))->setColorScale('bg-light-blue-to-dark-blue'),
+      'score' => (new Integer($this, $this->translate('Score')))->setProperty('defaultVisibility', true)->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setDefaultValue($this->main->auth->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setDefaultValue($this->main->auth->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->main->auth->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->main->auth->getUserId()),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, "Online document folder"),
-      'note' => (new Text($this, $this->translate('Notes'))),
+      'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
         1 => "Advertisement",
         2 => "Partner",
@@ -122,15 +122,6 @@ class Lead extends \HubletoMain\Core\Models\Model
       'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
     ];
     $description->columns['tags'] = ["title" => "Tags"];
-
-    unset($description->columns['note']);
-    unset($description->columns['price']);
-    unset($description->columns['id_currency']);
-    unset($description->columns['date_created']);
-    unset($description->columns['id_customer']);
-    unset($description->columns['source_channel']);
-    unset($description->columns['is_archived']);
-    unset($description->columns['shared_folder']);
 
     if ($this->main->urlParamAsBool("showArchive")) {
       $description->permissions = [

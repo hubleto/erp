@@ -16,6 +16,7 @@ class Warehouse extends \HubletoMain\Core\Models\Model
 
   public string $table = 'warehouses';
   public string $recordManagerClass = RecordManagers\Warehouse::class;
+  public ?string $lookupSqlValue = 'concat("Warehouse #", {%TABLE%}.id)';
 
   public array $relations = [ 
     'TYPE' => [ self::BELONGS_TO, WarehouseType::class, 'id_type', 'id' ],

@@ -2,32 +2,32 @@ import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src/core/Components/HubletoTable';
 import Form{{ modelSingularForm }} from './Form{{ modelSingularForm }}';
 
-interface Form{{ modelPluralForm }}Props extends HubletoTableProps {
+interface Table{{ modelSingularForm }}Props extends HubletoTableProps {
+  // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
 interface Table{{ modelPluralForm }}State extends HubletoTableState {
-  // idCustomer: number,
 }
 
-export default class Form{{ modelPluralForm }} extends HubletoTable<Form{{ modelPluralForm }}Props, Form{{ modelPluralForm }}State> {
+export default class Table{{ modelSingularForm }} extends HubletoTable<Table{{ modelSingularForm }}Props, Table{{ modelSingularForm }}State> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
     model: '{{ appNamespaceForwardSlash }}/Models/{{ model }}',
   }
 
-  props: Form{{ modelPluralForm }}Props;
-  state: Form{{ modelPluralForm }}State;
+  props: Table{{ modelSingularForm }}Props;
+  state: Table{{ modelSingularForm }}State;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Form{{ modelPluralForm }}';
+  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Table{{ modelSingularForm }}';
 
-  constructor(props: Form{{ modelPluralForm }}Props) {
+  constructor(props: Table{{ modelSingularForm }}Props) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: Form{{ modelPluralForm }}Props) {
+  getStateFromProps(props: Table{{ modelSingularForm }}Props) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -42,7 +42,8 @@ export default class Form{{ modelPluralForm }} extends HubletoTable<Form{{ model
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      idCustomer: this.props.idCustomer,
+      // Uncomment and modify these lines if you want to create URL-based filtering for your model
+      // idCustomer: this.props.idCustomer,
     }
   }
 

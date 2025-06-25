@@ -6,8 +6,6 @@ import { getUrlParam } from 'adios/Helper';
 import ModalForm from "adios/ModalForm";
 
 export interface HubletoTableProps extends TableProps {
-  showHeader: boolean,
-  showFooter: boolean
 }
 
 export interface HubletoTableState extends TableState {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import Table, { TableProps, TableState } from 'adios/Table';
+import TableLocations from './TableLocations';
 
 interface FormWarehouseProps extends HubletoFormProps { }
 interface FormWarehouseState extends HubletoFormState { }
@@ -67,11 +68,10 @@ export default class FormWarehouse<P, S> extends HubletoForm<FormWarehouseProps,
           {this.state.id < 0 ?
             <div className="badge badge-info">First create warehouse, then you will be prompted to add its locations.</div>
           :
-            <Table
+            <TableLocations
               uid={this.props.uid + '_table_locations'}
-              model='HubletoApp/Community/Warehouses/Models/Location'
               customEndpointParams={ { idWarehouse: this.state.id } }
-            ></Table>
+            ></TableLocations>
           }
         </div>
       </div>

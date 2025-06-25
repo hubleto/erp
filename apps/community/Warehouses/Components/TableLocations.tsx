@@ -1,33 +1,32 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src/core/Components/HubletoTable';
-import FormWarehouse from './FormWarehouse';
+import FormLocation from './FormLocation';
 
-interface TableWarehousesProps extends HubletoTableProps {
-  // idCustomer?: number,
+interface TableLocationsProps extends HubletoTableProps {
+  idWarehouse?: number,
 }
 
-interface TableWarehousesState extends HubletoTableState {
-  // idCustomer: number,
+interface TableLocationsState extends HubletoTableState {
 }
 
-export default class FormWarehouses extends HubletoTable<TableWarehousesProps, TableWarehousesState> {
+export default class TableLocations extends HubletoTable<TableLocationsProps, TableLocationsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Warehouses/Models/Warehouse',
+    model: 'HubletoApp/Community/Warehouses/Models/Location',
   }
 
-  props: TableWarehousesProps;
-  state: TableWarehousesState;
+  props: TableLocationsProps;
+  state: TableLocationsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Warehouses::Components\\FormWarehouses';
+  translationContext: string = 'HubletoApp\\Community\\Warehouses::Components\\FormLocations';
 
-  constructor(props: TableWarehousesProps) {
+  constructor(props: TableLocationsProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: TableWarehousesProps) {
+  getStateFromProps(props: TableLocationsProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -42,7 +41,7 @@ export default class FormWarehouses extends HubletoTable<TableWarehousesProps, T
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      // idCustomer: this.props.idCustomer,
+      idWarehouse: this.props.idWarehouse,
     }
   }
 
@@ -51,6 +50,6 @@ export default class FormWarehouses extends HubletoTable<TableWarehousesProps, T
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
     // formProps.description.defaultValues = { idDashboard: this.state.recordId };
-    return <FormWarehouse {...formProps}/>;
+    return <FormLocation {...formProps}/>;
   }
 }

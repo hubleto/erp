@@ -67,7 +67,7 @@ class Loader extends \HubletoMain\Core\App
       'capacity' => 5400,
       'capacity_unit' => 'm2',
       'current_occupancy' => 1240,
-      'id_operational_manager' => 1,
+      'id_operation_manager' => 1,
     ])['id'];
 
     $idWarehouseRegional = $mWarehouse->record->recordCreate([
@@ -80,7 +80,7 @@ class Loader extends \HubletoMain\Core\App
       'contact_email' => 'jane.smith@warehouse.example.com',
       'contacct_phone' => '+1 435-332-4332',
       'description' => 'Regional warehouse used for supplying the regional customers.',
-      'id_operational_manager' => 1,
+      'id_operation_manager' => 1,
     ])['id'];
 
     $mLocation->record->recordCreate([
@@ -89,7 +89,7 @@ class Loader extends \HubletoMain\Core\App
       'id_type' => $idLocationTypeAisle,
       'capacity' => 230,
       'current_occupancy' => 15,
-      'id_operational_manager' => 1,
+      'id_operation_manager' => 1,
     ]);
 
     $mLocation->record->recordCreate([
@@ -98,7 +98,7 @@ class Loader extends \HubletoMain\Core\App
       'id_type' => $idLocationTypeAisle,
       'capacity' => 340,
       'current_occupancy' => 156,
-      'id_operational_manager' => 1,
+      'id_operation_manager' => 1,
     ]);
   }
 

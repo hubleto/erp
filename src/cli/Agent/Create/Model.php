@@ -43,9 +43,12 @@ class Model extends \HubletoMain\Cli\Agent\Command
     file_put_contents($appFolder . '/Models/' . $model . '.php', $this->main->twig->render('@snippets/Model.php.twig', $tplVars));
     file_put_contents($appFolder . '/Models/RecordManagers/' . $model . '.php', $this->main->twig->render('@snippets/ModelRecordManager.php.twig', $tplVars));
 
-    $this->cli->cyan("Model '{$model}' in '{$appNamespace}' created successfully.\n");
+    $this->cli->cyan("Model '{$model}' in '{$appNamespace}' with sample set of columns created successfully.\n");
     $this->cli->yellow("⚠ NEXT STEPS:\n");
+    $this->cli->yellow("⚠  -> Modify `describeColumns()` method in the model.\n");
     $this->cli->yellow("⚠  -> Modify `installTables()` method in your app's loader to install this model.\n");
+    $this->cli->yellow("        (new Models\{$model}(\$this->main))->dropTableIfExists()->install();'\n");
+    
   }
 
 }

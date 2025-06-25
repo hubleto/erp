@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src/core/Components/HubletoTable';
-import Form{{ modelSingularForm }} from './Form{{ modelSingularForm }}';
+import FormProject from './FormProject';
 
-interface Table{{ modelPluralForm }}Props extends HubletoTableProps {
+interface TableProjectsProps extends HubletoTableProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface Table{{ modelPluralForm }}State extends HubletoTableState {
+interface TableProjectsState extends HubletoTableState {
 }
 
-export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ modelPluralForm }}Props, Table{{ modelPluralForm }}State> {
+export default class TableProjects extends HubletoTable<TableProjectsProps, TableProjectsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: '{{ appNamespaceForwardSlash }}/Models/{{ model }}',
+    model: 'HubletoApp/Community/Projects/Models/Project',
   }
 
-  props: Table{{ modelPluralForm }}Props;
-  state: Table{{ modelPluralForm }}State;
+  props: TableProjectsProps;
+  state: TableProjectsState;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Table{{ modelPluralForm }}';
+  translationContext: string = 'HubletoApp\\Community\\Projects::Components\\TableProjects';
 
-  constructor(props: Table{{ modelPluralForm }}Props) {
+  constructor(props: TableProjectsProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: Table{{ modelPluralForm }}Props) {
+  getStateFromProps(props: TableProjectsProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -52,6 +52,6 @@ export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ mod
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
     // formProps.description.defaultValues = { idDashboard: this.props.idDashboard };
-    return <Form{{ modelSingularForm }} {...formProps}/>;
+    return <FormProject {...formProps}/>;
   }
 }

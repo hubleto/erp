@@ -23,6 +23,9 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/projects\/?$/' => Controllers\Settings::class,
     ]);
 
+    $this->main->router->httpGet([ '/^projects\/?$/' => Controllers\Projects::class ]);
+    $this->main->router->httpGet([ '/^projects\/phases\/?$/' => Controllers\Phases::class ]);
+
     // Add placeholder for custom settings.
     // This will be displayed in the Settings app, under the "All settings" card.
     $this->main->apps->community('Settings')->addSetting($this, [
@@ -49,10 +52,18 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
+      (new Models\Phase($this->main))->dropTableIfExists()->install();
       (new Models\Project($this->main))->dropTableIfExists()->install();
     }
     if ($round == 2) {
-      // do something in the 2nd round, if required
+      $mPhase = new Models\Phase($this->main);
+      $mPhase->record->recordCreate(['name' => 'Early preparation', 'order' => 1, 'color' => '#344556']);
+      $mPhase->record->recordCreate(['name' => 'Advanced preparation', 'order' => 2, 'color' => '#6830a5']);
+      $mPhase->record->recordCreate(['name' => 'Final preparation', 'order' => 3, 'color' => '#3068a5']);
+      $mPhase->record->recordCreate(['name' => 'Early implementation', 'order' => 4, 'color' => '#ae459f']);
+      $mPhase->record->recordCreate(['name' => 'Advanced implementation', 'order' => 5, 'color' => '#a38f9a']);
+      $mPhase->record->recordCreate(['name' => 'Final implementation', 'order' => 6, 'color' => '#44879a']);
+      $mPhase->record->recordCreate(['name' => 'Delivery', 'order' => 7, 'color' => '#74809a']);
     }
     if ($round == 3) {
       // do something in the 3rd round, if required
@@ -62,7 +73,17 @@ class Loader extends \HubletoMain\Core\App
   // generateDemoData
   public function generateDemoData(): void
   {
-    // Create any demo data to promote your app.
+    $mProject = new Models\Project($this->main);
+
+    $mProject->record->recordCreate([
+      'title' => 'Sample project',
+      'identifier' => 'SMP-1',
+      'description' => 'Sample project for demonstration purposes.',
+      'id_main_developer' => 1,
+      'id_account_manager' => 1,
+      'id_phase' => 3,
+      'color' => '#008000',
+    ]);
   }
 
 }

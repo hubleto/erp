@@ -74,8 +74,14 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("Table, form, view and controller for model '{$model}' in '{$appNamespace}' created successfully.\n");
     $this->cli->yellow("⚠ NEXT STEPS:\n");
     $this->cli->yellow("⚠  -> Add the Table component into Loader.tsx of your app.\n");
+    $this->cli->yellow("        import Table{$modelPluralForm} from './Components/Table{$modelPluralForm}'\n");
+    $this->cli->yellow("        globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});\n");
+    $this->cli->yellow("\n");
     $this->cli->yellow("⚠  -> Add the route in the `init()` method of your app's loader.\n");
-    $this->cli->yellow("⚠   > Run `npm run build-js` in your terminal to compile new Typescript.\n");
+    $this->cli->yellow("        \$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/{$modelPluralForm}\/?$/' => Controllers\\{$controller}::class ]);\n");
+    $this->cli->yellow("\n");
+    $this->cli->yellow("⚠   -> Run `npm run build-js` in your terminal to compile new Typescript.\n");
+
   }
 
 }

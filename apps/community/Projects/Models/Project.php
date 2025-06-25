@@ -29,47 +29,38 @@ class Project extends \HubletoMain\Core\Models\Model
     self::ENUM_ONE => 'One',
     self::ENUM_TWO => 'Two',
     self::ENUM_THREE => 'Three',
-  ]
+  ];
 
   public string $table = 'projects';
   public string $recordManagerClass = RecordManagers\Project::class;
   public ?string $lookupSqlValue = 'concat("Project #", {%TABLE%}.id)';
 
   public array $relations = [ 
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ]
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ]
+    'MAIN_DEVELOPER' => [ self::HAS_ONE, User::class, 'id_main_developer', 'id' ],
+    'ACCOUNT_MANAGER' => [ self::HAS_ONE, User::class, 'id_account_manager', 'id' ],
+    'PHASE' => [ self::HAS_ONE, Phase::class, 'id_phase', 'id' ],
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setProprty('defaultVisibility', true)->setReadonly()->setRequired(),
-      'decimal_example' => (new Decimal($this, $this->translate('Number')))->setProprty('defaultVisibility', true)->setReadonly()->setRequired()
-        ->setDecimals(4)
-      ,
-      'date_example' => (new Date($this, $this->translate('Date')))->setProprty('defaultVisibility', true)->setReadonly()->setRequired()
-        ->setDefaultValue(date("Y-m-d"))
-      ,
-      'datetime_example' => (new DateTime($this, $this->translate('DateTime')))->setProprty('defaultVisibility', true)->setReadonly()->setRequired()
-        ->setDefaultValue(date("Y-m-d H:i:s"))
-      ,
-      'integer_example' => (new Integer($this, $this->translate('Integer')))->setProprty('defaultVisibility', true)->setReadonly()->setRequired()
-        ->setEnumValues(self::INTEGER_ENUM_VALUES)
-        ->setEnumCssClasses([
-          self::ENUM_ONE => 'bg-blue-50',
-          self::ENUM_TWO => 'bg-yellow-50',
-          self::ENUM_THREE => 'bg-green-50',
-        ])
-        ->setDefaultValue(self::ENUM_ONE)
-      ,
-      'image_example' => (new Image($this, $this->translate('Image')))->setProprty('defaultVisibility', true)->setReadonly()->setRequired(),
-      'file_example' => (new File($this, $this->translate('File')))->setProprty('defaultVisibility', true)->setReadonly()->setRequired(),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setProprty('defaultVisibility', true)->setReadonly()->setRequired()
+      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
+      'description' => (new Text($this, $this->translate('Description'))),
+      'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->main->auth->getUserId())
       ,
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProprty('defaultVisibility', true)->setReadonly()->setRequired()
+      'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->main->auth->getUserId())
       ,
+      'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setProperty('defaultVisibility', true)->setRequired()
+        ->setDefaultValue($this->main->auth->getUserId())
+      ,
+      'color' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true),
+      'online_documentation_folder' => (new Varchar($this, "Online documentation folder")),
+      'notes' => (new Text($this, $this->translate('Notes'))),
     ]);
   }
 
@@ -81,10 +72,15 @@ class Project extends \HubletoMain\Core\Models\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    // Uncomment and modify these lines if you want to define defaultFilter for your model
-    // $description->ui['defaultFilters'] = [
-    //   'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
-    // ];
+    $mPhase = new Phase($this->main);
+    $fPhaseOptions = [ 0 => 'All' ];
+    foreach ($mPhase->record->orderBy('order', 'asc')->get()?->toArray() as $phase) {
+      $fPhaseOptions[$phase['id']] = $phase['name'];
+    }
+
+    $description->ui['defaultFilters'] = [
+      'fPhase' => [ 'title' => 'Phase', 'options' => $fPhaseOptions ],
+    ];
 
     return $description;
   }

@@ -9,3 +9,9 @@
 
 // 3. Use the component in any of your Twig views:
 // <app-projects-table-my-model string:some-property="some-value"></app-projects-table-my-model>
+
+import TableProjects from "./Components/TableProjects"
+import TablePhases from './Components/TablePhases'
+
+globalThis.main.registerReactComponent('ProjectsTableProjects', TableProjects);
+globalThis.main.registerReactComponent('ProjectsTablePhases', TablePhases);

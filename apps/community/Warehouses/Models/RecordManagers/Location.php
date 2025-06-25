@@ -18,4 +18,21 @@ class Location extends \HubletoMain\Core\RecordManager
     return $this->belongsTo(LocationType::class, 'id_type', 'id');
   }
 
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    if ($main->urlParamAsInteger("idWarehouse") > 0) {
+      $query = $query->where($this->table . '.id_warehouse', $main->urlParamAsInteger("idWarehouse"));
+    }
+
+    // Uncomment and modify these lines if you want to apply default filters to your model.
+    // $main = \ADIOS\Core\Helper::getGlobalApp();
+    // $defaultFilters = $main->urlParamAsArray("defaultFilters");
+    // if (isset($defaultFilters["fArchive"]) && $defaultFilters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
+    // else $query = $query->where("customers.is_active", true);
+
+    return $query;
+  }
+
 }

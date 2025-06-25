@@ -66,4 +66,19 @@ class Warehouse extends \HubletoMain\Core\Models\Model
     ]);
   }
 
+  public function describeTable(): \ADIOS\Core\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['addButtonText'] = 'Add warehouse';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
+    $description->ui['showFooter'] = false;
+
+    // $description->ui['defaultFilters'] = [
+    //   'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+    // ];
+
+    return $description;
+  }
+
 }

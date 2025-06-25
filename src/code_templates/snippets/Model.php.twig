@@ -29,4 +29,40 @@ class {{ model }} extends \HubletoMain\Core\Models\Model
     ]);
   }
 
+  public function describeTable(): \ADIOS\Core\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['addButtonText'] = 'Add {{ model }}';
+    $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
+    $description->ui['showFooter'] = false;
+
+    // Uncomment and modify these lines if you want to define defaultFilter for your model
+    // $description->ui['defaultFilters'] = [
+    //   'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+    // ];
+
+    return $description;
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    return parent::onBeforeCreate($record);
+  }
+
+  public function onBeforeUpdate(array $record): array
+  {
+    return parent::onBeforeUpdate($record);
+  }
+
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    return parent::onAfterUpdate($savedRecord);
+  }
+
+  public function onAfterCreate(array $savedRecord): array
+  {
+    return parent::onAfterCreate($savedRecord);
+  }
+
 }

@@ -3,11 +3,16 @@
 namespace HubletoApp\Community\Inventory\Models;
 
 use \HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Warehouses\Models\Location;
+use HubletoApp\Community\Products\Models\Product;
 
 use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Decimal;
+use \ADIOS\Core\Db\Column\DateTime;
 
 // This is a crucial table that links products to their specific locations and quantities.
+// This is crucial for tracking what items are where.
 class Inventory extends \HubletoMain\Core\Models\Model
 {
 
@@ -15,26 +20,24 @@ class Inventory extends \HubletoMain\Core\Models\Model
   public string $recordManagerClass = RecordManagers\Inventory::class;
 
   public array $relations = [ 
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ]
+    'PRODUCT' => [ self::HAS_ONE, Product::class, 'id_product', 'id' ],
+    'STATUS' => [ self::HAS_ONE, Status::class, 'id_status', 'id' ],
+    'LOCATION' => [ self::HAS_ONE, Location::class, 'id_location', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
   ];
-
-  // InventoryID (Primary Key, INT/UUID)
-  // ProductID (Foreign Key to Products.ProductID, NOT NULL)
-  // LocationID (Foreign Key to Locations.LocationID, NOT NULL)
-  // Quantity (DECIMAL(10, 2), NOT NULL, DEFAULT 0)
-  // BatchNumber (VARCHAR(100), NULLABLE - for batch-tracked items)
-  // SerialNumber (VARCHAR(100), UNIQUE, NULLABLE - for individually tracked items)
-  // ExpirationDate (DATE, NULLABLE)
-  // ReceivedDate (DATETIME, DEFAULT CURRENT_TIMESTAMP)
-  // LastMovedDate (DATETIME, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
-  // Status (VARCHAR(50), DEFAULT 'Available' - e.g., 'Available', 'Quarantined', 'Damaged', 'Reserved')
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
-      'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setProperty('defaultVisibility', true)->setRequired(),
+      'id_location' => (new Lookup($this, $this->translate('Location in warehouse'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
+      'id_status' => (new Lookup($this, $this->translate('Status'), Status::class))->setProperty('defaultVisibility', true),
+      'quantity' => (new Decimal($this, $this->translate('Quantity')))->setProperty('defaultVisibility', true),
+      'batch_number' => (new Varchar($this, $this->translate('Batch number'))),
+      'serial_number' => (new Varchar($this, $this->translate('Serial number'))),
+      'datetime_expiration' => (new DateTime($this, $this->translate('Expiration'))),
+      'datetime_received' => (new DateTime($this, $this->translate('Received'))),
+      'datetime_last_move' => (new DateTime($this, $this->translate('Last moved'))),
     ]);
   }
 

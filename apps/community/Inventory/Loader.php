@@ -21,8 +21,16 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
+      (new Models\Status($this->main))->dropTableIfExists()->install();
       (new Models\Inventory($this->main))->dropTableIfExists()->install();
       (new Models\Transaction($this->main))->dropTableIfExists()->install();
+    }
+    if ($round == 2) {
+      $mStatus = new Models\Status($this->main);
+      $mStatus->record->recordCreate(['name' => 'Available']);
+      $mStatus->record->recordCreate(['name' => 'Quarantined']);
+      $mStatus->record->recordCreate(['name' => 'Damaged']);
+      $mStatus->record->recordCreate(['name' => 'Reserved']);
     }
   }
 

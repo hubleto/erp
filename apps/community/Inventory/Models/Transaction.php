@@ -3,39 +3,67 @@
 namespace HubletoApp\Community\Inventory\Models;
 
 use \HubletoApp\Community\Settings\Models\User;
+use \HubletoApp\Community\Products\Models\Product;
+use \HubletoApp\Community\Warehouses\Models\Location;
 
 use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\DateTime;
+use \ADIOS\Core\Db\Column\Text;
+use \ADIOS\Core\Db\Column\File;
 
 // This table records all movements of inventory within the warehouse.
 class Transaction extends \HubletoMain\Core\Models\Model
 {
 
-  public string $table = 'inventory_transaction';
-  public string $recordManagerClass = RecordManagers\Inventory::class;
+  public string $table = 'inventory_transactions';
+  public string $recordManagerClass = RecordManagers\Transaction::class;
+  public ?string $lookupSqlValue = '{%TABLE%}.uid';
 
   public array $relations = [ 
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ]
+    'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id' ],
+    'LOCATION_SOURCE' => [ self::BELONGS_TO, Location::class, 'id_location_source', 'id' ],
+    'LOCATION_DESTINATION' => [ self::BELONGS_TO, Location::class, 'id_location_destination', 'id' ],
+    'USER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
   ];
 
+  const TYPE_RECEIPT = 1;
+  const TYPE_SHIPMENT = 2;
+  const TYPE_TRANSFER_IN = 3;
+  const TYPE_TRANSFER_OUT = 4;
+  const TYPE_ADJUSTMENT_IN = 5;
+  const TYPE_ADJUSTMENT_OUT = 6;
+  const TYPE_RETURN = 7;
 
-  // TransactionID (Primary Key, INT/UUID)
-  // TransactionType (VARCHAR(50), NOT NULL - e.g., 'Receipt', 'Shipment', 'Transfer In', 'Transfer Out', 'Adjustment In', 'Adjustment Out', 'Return')
-  // TransactionDate (DATETIME, DEFAULT CURRENT_TIMESTAMP)
-  // ProductID (Foreign Key to Products.ProductID, NOT NULL)
-  // Quantity (DECIMAL(10, 2), NOT NULL)
-  // SourceLocationID (Foreign Key to Locations.LocationID, NULLABLE - for transfers, adjustments, shipments)
-  // DestinationLocationID (Foreign Key to Locations.LocationID, NULLABLE - for receipts, transfers, adjustments)
-  // UserID (Foreign Key to Users.UserID, NOT NULL - who performed the transaction)
-  // ReferenceDocumentID (VARCHAR(100), NULLABLE - e.g., Purchase Order ID, Sales Order ID)
-  // Notes (TEXT, NULLABLE)
+  const TYPES = [
+    self::TYPE_RECEIPT => 'Receipt',
+    self::TYPE_SHIPMENT => 'Shipment',
+    self::TYPE_TRANSFER_IN => 'Transfer In',
+    self::TYPE_TRANSFER_OUT => 'Transfer Out',
+    self::TYPE_ADJUSTMENT_IN => 'Adjustment In',
+    self::TYPE_ADJUSTMENT_OUT => 'Adjustment Out',
+    self::TYPE_RETURN => 'Return',
+  ];
+
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
-      'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
+      'uid' => (new Varchar($this, $this->translate('Transaction UID')))->setRequired(),
+      'type' => (new Integer($this, $this->translate('Type')))->setProperty('defaultVisibility', true)
+        ->setEnumValues(self::TYPES)
+        ->setDefaultValue(self::TYPE_RECEIPT)
+      ,
+      'datetime_when' => (new DateTime($this, $this->translate('Date and time of transaction')))->setRequired(),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setProperty('defaultVisibility', true)->setRequired(),
+      'quantity' => (new Decimal($this, $this->translate('Quantity')))->setProperty('defaultVisibility', true),
+      'id_location_source' => (new Lookup($this, $this->translate('Source location'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
+      'id_location_destination' => (new Lookup($this, $this->translate('Destination location'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
+      'id_user' => (new Lookup($this, $this->translate('Who performed the trancation'), User::class))->setProperty('defaultVisibility', true),
+      'document_1' => (new File($this, $this->translate('Reference document #1')))->setProperty('defaultVisibility', true),
+      'document_2' => (new File($this, $this->translate('Reference document #2'))),
+      'document_3' => (new File($this, $this->translate('Reference document #3'))),
+      'notes' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
     ]);
   }
 

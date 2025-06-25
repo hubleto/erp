@@ -35,6 +35,14 @@ class Loader extends \HubletoMain\Core\App
       (new Models\Warehouse($this->main))->dropTableIfExists()->install();
       (new Models\Location($this->main))->dropTableIfExists()->install();
     }
+    if ($round == 2) {
+      $mLocationType = new Models\LocationType($this->main);
+      $mLocationType->record->recordCreate(['name' => 'Area']);
+      $mLocationType->record->recordCreate(['name' => 'Aisle']);
+      $mLocationType->record->recordCreate(['name' => 'Rack']);
+      $mLocationType->record->recordCreate(['name' => 'Shelf']);
+      $mLocationType->record->recordCreate(['name' => 'Bin']);
+    }
   }
 
   // generateDemoData
@@ -47,12 +55,6 @@ class Loader extends \HubletoMain\Core\App
 
     $idWarehouseTypeMain = $mWarehouseType->record->recordCreate(['name' => 'Main'])['id'];
     $idWarehouseTypeRegional = $mWarehouseType->record->recordCreate(['name' => 'Regional'])['id'];
-
-    $idLocationTypeArea = $mLocationType->record->recordCreate(['name' => 'Area'])['id'];
-    $idLocationTypeAisle = $mLocationType->record->recordCreate(['name' => 'Aisle'])['id'];
-    $idLocationTypeRack = $mLocationType->record->recordCreate(['name' => 'Rack'])['id'];
-    $idLocationTypeShelf = $mLocationType->record->recordCreate(['name' => 'Shelf'])['id'];
-    $idLocationTypeBin = $mLocationType->record->recordCreate(['name' => 'Bin'])['id'];
 
     $idWarehouseMain = $mWarehouse->record->recordCreate([
       'name' => 'Main Distribution Center',
@@ -86,7 +88,7 @@ class Loader extends \HubletoMain\Core\App
     $mLocation->record->recordCreate([
       'id_warehouse' => $idWarehouseMain,
       'code' => 'A1.1',
-      'id_type' => $idLocationTypeAisle,
+      'id_type' => 2,
       'capacity' => 230,
       'current_occupancy' => 15,
       'id_operation_manager' => 1,
@@ -95,7 +97,7 @@ class Loader extends \HubletoMain\Core\App
     $mLocation->record->recordCreate([
       'id_warehouse' => $idWarehouseMain,
       'code' => 'A1.2',
-      'id_type' => $idLocationTypeAisle,
+      'id_type' => 2,
       'capacity' => 340,
       'current_occupancy' => 156,
       'id_operation_manager' => 1,

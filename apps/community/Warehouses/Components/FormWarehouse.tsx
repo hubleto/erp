@@ -70,6 +70,8 @@ export default class FormWarehouse<P, S> extends HubletoForm<FormWarehouseProps,
           :
             <TableLocations
               uid={this.props.uid + '_table_locations'}
+              parentForm={this}
+              idWarehouse={this.state.id}
               customEndpointParams={ { idWarehouse: this.state.id } }
             ></TableLocations>
           }

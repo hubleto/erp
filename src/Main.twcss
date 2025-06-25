@@ -75,4 +75,6 @@
   .modal-header-title h2 { @apply dark:text-white; }
 
   .fc .fc-toolbar-title { @apply !text-base; }
+
+  .sidebar-group-btns { @apply ml-1 p-1 rounded my-1 bg-white/20; }
 }

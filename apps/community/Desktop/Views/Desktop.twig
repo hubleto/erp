@@ -14,7 +14,6 @@
         btn
         {% if app.isActivated %} btn-active {% else %}
         {% if notificationsCount > 0 %} text-yellow-100 {% endif %} {% endif %} flex-10 truncate
-        {% if inGroup %} bg-white/10 pl-2 hover:bg-white/20 mt-0.5 {% endif %}
       "
       href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
       title="{{ app.manifest.nameTranslated }}"
@@ -301,7 +300,7 @@
             <div
               id="sg_{{ sidebarGroup }}_btns"
               {% if not hasActivatedApp %} style="display:none" {% endif %}
-              class="sidebar-group-btns ml-2"
+              class="sidebar-group-btns"
             >
               {{ appBtns|raw }}
             </div>

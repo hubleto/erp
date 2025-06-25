@@ -47,9 +47,10 @@ export default class TableLocations extends HubletoTable<TableLocationsProps, Ta
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
-    // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
-    // if (!formProps.description) formProps.description = {};
-    // formProps.description.defaultValues = { idDashboard: this.state.recordId };
+    // formProps.customEndpointParams.idWarehouse = this.props.idWarehouse;
+    if (!formProps.description) formProps.description = {};
+    formProps.description.defaultValues = { id_warehouse: this.props.idWarehouse };
+    console.log(formProps.description);
     return <FormLocation {...formProps}/>;
   }
 }

@@ -14,7 +14,7 @@ class WarehouseType extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name'))),
+      'name' => (new Varchar($this, $this->translate('Name')))->setProperty('defaultVisibility', true),
     ]);
   }
 

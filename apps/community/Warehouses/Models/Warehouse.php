@@ -35,22 +35,22 @@ class Warehouse extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
-      'id_type' => (new Lookup($this, $this->translate('Warehouse type'), WarehouseType::class)),
-      'address' => (new Varchar($this, $this->translate('Address'))),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true),
+      'id_type' => (new Lookup($this, $this->translate('Warehouse type'), WarehouseType::class))->setProperty('defaultVisibility', true),
+      'address' => (new Varchar($this, $this->translate('Address')))->setProperty('defaultVisibility', true),
       'address_plus_code' => (new Varchar($this, $this->translate('Address Plus code'))),
       'contact_person' => (new Varchar($this, $this->translate('Contact person'))),
-      'contact_email' => (new Varchar($this, $this->translate('Contact email'))),
+      'contact_email' => (new Varchar($this, $this->translate('Contact email')))->setProperty('defaultVisibility', true),
       'contact_phone' => (new Varchar($this, $this->translate('Contact phone'))),
       'lng' => (new Decimal($this, $this->translate('Coordinates: longitude'))),
       'lat' => (new Decimal($this, $this->translate('Coordinates: latitude'))),
       'description' => (new Text($this, $this->translate('Description'))),
-      'capacity' => (new Decimal($this, $this->translate('Capacity')))->setReadonly()
+      'capacity' => (new Decimal($this, $this->translate('Capacity')))->setReadonly()->setProperty('defaultVisibility', true)
         ->setDescription('Automatically calculated as total capacity of all locations in warehouse.')
       ,
-      'capacity_unit' => (new Varchar($this, $this->translate('Capacity unit'))),
-      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy'))),
-      'operational_status' => (new Integer($this, $this->translate('Operational status')))
+      'capacity_unit' => (new Varchar($this, $this->translate('Capacity unit')))->setProperty('defaultVisibility', true),
+      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy')))->setProperty('defaultVisibility', true),
+      'operational_status' => (new Integer($this, $this->translate('Operational status')))->setProperty('defaultVisibility', true)
         ->setEnumValues(self::OPERATIONAL_STATUSES)
         ->setDefaultValue(self::OPERATIONAL_STATUS_ACTIVE)
         ->setEnumCssClasses([
@@ -62,7 +62,7 @@ class Warehouse extends \HubletoMain\Core\Models\Model
       'photo_1' => (new Image($this, $this->translate('Photo #1'))),
       'photo_2' => (new Image($this, $this->translate('Photo #2'))),
       'photo_3' => (new Image($this, $this->translate('Photo #3'))),
-      'id_operation_manager' => (new Lookup($this, $this->translate('Manager of operation'), User::class)),
+      'id_operation_manager' => (new Lookup($this, $this->translate('Manager of operation'), User::class))->setProperty('defaultVisibility', true),
     ]);
   }
 

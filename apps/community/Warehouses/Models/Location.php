@@ -38,12 +38,12 @@ class Location extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_warehouse' => (new Lookup($this, $this->translate('Warehouse'), Warehouse::class)),
-      'code' => (new Varchar($this, $this->translate('Location code')))->setExamples(['Aisle 1', 'Rack B', 'Shelf 2.3', 'Bin A1']),
-      'id_type' => (new Lookup($this, $this->translate('Location type'), LocationType::class)),
+      'code' => (new Varchar($this, $this->translate('Location code')))->setExamples(['Aisle 1', 'Rack B', 'Shelf 2.3', 'Bin A1'])->setProperty('defaultVisibility', true),
+      'id_type' => (new Lookup($this, $this->translate('Location type'), LocationType::class))->setProperty('defaultVisibility', true),
       'description' => (new Text($this, $this->translate('Description'))),
-      'capacity' => (new Decimal($this, $this->translate('Capacity'))),
-      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy'))),
-      'operational_status' => (new Integer($this, $this->translate('Operational status')))
+      'capacity' => (new Decimal($this, $this->translate('Capacity')))->setProperty('defaultVisibility', true),
+      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy')))->setProperty('defaultVisibility', true),
+      'operational_status' => (new Integer($this, $this->translate('Operational status')))->setProperty('defaultVisibility', true)
         ->setEnumValues(self::OPERATIONAL_STATUSES)
         ->setDefaultValue(self::OPERATIONAL_STATUS_ACTIVE)
         ->setEnumCssClasses([

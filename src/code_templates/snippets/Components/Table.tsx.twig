@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src/core/Components/HubletoTable';
-import Form{{ model }} from './Form{{ componentName }}';
+import Form{{ modelSingularForm }} from './Form{{ modelSingularForm }}';
 
-interface Table{{ model }}Props extends HubletoTableProps {
+interface Form{{ modelPluralForm }}Props extends HubletoTableProps {
   // idCustomer?: number,
 }
 
-interface Table{{ model }}State extends HubletoTableState {
+interface Table{{ modelPluralForm }}State extends HubletoTableState {
   // idCustomer: number,
 }
 
-export default class Table{{ model }} extends HubletoTable<Table{{ model }}Props, Table{{ model }}State> {
+export default class Form{{ modelPluralForm }} extends HubletoTable<Form{{ modelPluralForm }}Props, Form{{ modelPluralForm }}State> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
     model: '{{ appNamespaceForwardSlash }}/Models/{{ model }}',
   }
 
-  props: {{ model }}Props;
-  state: {{ model }}State;
+  props: Form{{ modelPluralForm }}Props;
+  state: Form{{ modelPluralForm }}State;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Table{{ model }}';
+  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Form{{ modelPluralForm }}';
 
-  constructor(props: Table{{ model }}Props) {
+  constructor(props: Form{{ modelPluralForm }}Props) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: BrowserProps) {
+  getStateFromProps(props: Form{{ modelPluralForm }}Props) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -51,6 +51,6 @@ export default class Table{{ model }} extends HubletoTable<Table{{ model }}Props
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
     // formProps.description.defaultValues = { idDashboard: this.state.recordId };
-    return <Form{{ model }} {...formProps}/>;
+    return <Form{{ modelSingularForm }} {...formProps}/>;
   }
 }

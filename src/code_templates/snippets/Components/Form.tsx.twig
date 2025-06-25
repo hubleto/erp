@@ -1,0 +1,57 @@
+import React, { Component } from 'react'
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
+import Table, { TableProps, TableState } from 'adios/Table';
+
+interface Form{{ modelSingularForm }}Props extends HubletoFormProps { }
+interface Form{{ modelSingularForm }}State extends HubletoFormState { }
+
+export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{{ modelSingularForm }}Props, Form{{ modelSingularForm }}State> {
+  static defaultProps: any = {
+    ...HubletoForm.defaultProps,
+    model: '{{ appNamespaceForwardSlash }}/Models/Team',
+  }
+
+  props: Form{{ modelSingularForm }}Props;
+  state: Form{{ modelSingularForm }}State;
+
+  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Form{{ modelSingularForm }}';
+
+  constructor(props: Form{{ modelSingularForm }}Props) {
+    super(props);
+  }
+
+  renderTitle(): JSX.Element {
+    return <>
+      <h2>Record #{this.state.record.id ?? '0'}</h2>
+      <small>{{ model }}</small>
+    </>;
+  }
+
+  // renderContent(): JSX.Element {
+  //   // This is an example code to render content of the form.
+  //   // You should develop your own render content.
+  //   return <>
+  //     <div className='w-full flex gap-2'>
+  //       <div className="p-4 flex-1 text-center">
+  //         <i className="fas fa-users text-primary"></i>
+  //       </div>
+  //       <div className="flex-6">
+  //         {this.inputWrapper('name')}
+  //         {this.inputWrapper('color')}
+  //         {this.inputWrapper('description')}
+  //         {this.inputWrapper('id_manager')}
+  //         {this.divider('Team members')}
+  //         {this.state.id < 0 ?
+  //           <div className="badge badge-info">First create team, then you will be prompted to add members.</div>
+  //         :
+  //           <Table
+  //             uid='teams_members'
+  //             model='HubletoApp/Community/Settings/Models/TeamMember'
+  //             customEndpointParams={ { idTeam: this.state.id } }
+  //           ></Table>
+  //         }
+  //       </div>
+  //     </div>
+  //   </>;
+  // }
+}

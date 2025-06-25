@@ -11,6 +11,9 @@ class Model extends \HubletoMain\Cli\Agent\Command
     $model = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
 
+    $modelSingularForm = $model;
+    $modelPluralForm = $model . 's';
+
     $this->main->apps->init();
 
     if (empty($appNamespace)) throw new \Exception("<appNamespace> not provided.");
@@ -32,7 +35,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
     $tplVars = [
       'appNamespace' => $appNamespace,
       'model' => $model,
-      'sqlTable' => strtolower($model),
+      'sqlTable' => strtolower($modelPluralForm),
     ];
 
     if (!is_dir($appFolder . '/Models')) mkdir($appFolder . '/Models');
@@ -41,7 +44,8 @@ class Model extends \HubletoMain\Cli\Agent\Command
     file_put_contents($appFolder . '/Models/RecordManagers/' . $model . '.php', $this->main->twig->render('@snippets/ModelRecordManager.php.twig', $tplVars));
 
     $this->cli->cyan("Model '{$model}' in '{$appNamespace}' created successfully.\n");
-    $this->cli->yellow("💡 TIP: Update `installTables()` method in your app's loader and reinstall the app.\n");
+    $this->cli->yellow("⚠ NEXT STEPS:\n");
+    $this->cli->yellow("⚠  -> Modify `installTables()` method in your app's loader to install this model.\n");
   }
 
 }

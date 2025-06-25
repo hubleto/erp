@@ -1,15 +1,15 @@
 <?php
 
-namespace {{ appNamespace }}\Models\RecordManagers;
+namespace HubletoApp\Community\Projects\Models\RecordManagers;
 
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use \HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class {{ model }} extends \HubletoMain\Core\RecordManager
+class Project extends \HubletoMain\Core\RecordManager
 {
 
-  public $table = '{{ sqlTable }}';
+  public $table = 'projects';
 
   public function OWNER(): BelongsTo {
     return $this->belongsTo(User::class, 'id_owner', 'id');

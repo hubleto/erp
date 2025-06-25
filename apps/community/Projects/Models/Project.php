@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ appNamespace }}\Models;
+namespace HubletoApp\Community\Projects\Models;
 
 use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Color;
@@ -18,7 +18,7 @@ use \ADIOS\Core\Db\Column\Varchar;
 
 use \HubletoApp\Community\Settings\Models\User;
 
-class {{ model }} extends \HubletoMain\Core\Models\Model
+class Project extends \HubletoMain\Core\Models\Model
 {
 
   const ENUM_ONE = 1;
@@ -31,9 +31,9 @@ class {{ model }} extends \HubletoMain\Core\Models\Model
     self::ENUM_THREE => 'Three',
   ]
 
-  public string $table = '{{ sqlTable }}';
-  public string $recordManagerClass = RecordManagers\{{ model }}::class;
-  public ?string $lookupSqlValue = 'concat("{{ model }} #", {{ '{%' }}TABLE{{ '%}' }}.id)';
+  public string $table = 'projects';
+  public string $recordManagerClass = RecordManagers\Project::class;
+  public ?string $lookupSqlValue = 'concat("Project #", {%TABLE%}.id)';
 
   public array $relations = [ 
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ]
@@ -76,7 +76,7 @@ class {{ model }} extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add {{ model }}';
+    $description->ui['addButtonText'] = 'Add Project';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

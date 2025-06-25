@@ -31,6 +31,7 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
     $this->viewParams['sidebarGroups'] = [
       'basic' => [ 'title' => $this->translate('Home'), 'icon' => 'fas fa-home' ],
       'crm' => [ 'title' => $this->translate('CRM'), 'icon' => 'fas fa-users-viewfinder' ],
+      'communication' => [ 'title' => $this->translate('Communication'), 'icon' => 'fas fa-comments' ],
       'finance' => [ 'title' => $this->translate('Finance'), 'icon' => 'fas fa-credit-card' ],
       'supply-chain' => [ 'title' => $this->translate('Supply chain'), 'icon' => 'fas fa-truck' ],
       'e-commerce' => [ 'title' => $this->translate('E-Commerce'), 'icon' => 'fas fa-cart-shopping' ],

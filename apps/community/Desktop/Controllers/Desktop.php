@@ -33,6 +33,7 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
       'crm' => [ 'title' => $this->translate('CRM'), 'icon' => 'fas fa-users-viewfinder' ],
       'finance' => [ 'title' => $this->translate('Finance'), 'icon' => 'fas fa-credit-card' ],
       'supply-chain' => [ 'title' => $this->translate('Supply chain'), 'icon' => 'fas fa-truck' ],
+      'e-commerce' => [ 'title' => $this->translate('E-Commerce'), 'icon' => 'fas fa-cart-shopping' ],
       'reporting' => [ 'title' => $this->translate('Reporting'), 'icon' => 'fas fa-chart-line' ],
       'settings' => [ 'title' => $this->translate('Settings'), 'icon' => 'fas fa-cog' ],
       'help' => [ 'title' => $this->translate('Help'), 'icon' => 'fas fa-life-ring' ],

@@ -302,7 +302,11 @@
               {% if not hasActivatedApp %} style="display:none" {% endif %}
               class="sidebar-group-btns"
             >
-              {{ appBtns|raw }}
+              {% if appBtns == '' %}
+                <div class="text-sm text-white">You have no apps in this group.</div>
+              {% else %}
+                {{ appBtns|raw }}
+              {% endif %}
             </div>
           </div>
         {% endfor %}

@@ -309,7 +309,7 @@
               class="sidebar-group-btns"
             >
               {% if appBtns == '' %}
-                <div class="text-sm text-white">You have no apps in this group.</div>
+                <div class="text-sm">You have no apps in this group.</div>
               {% else %}
                 {{ appBtns|raw }}
               {% endif %}
@@ -322,7 +322,7 @@
           {% set i = i + 1 %}
         {% endfor %}
       </nav>
-      {% if viewParams.activatedApppSidebar|length > 0 %}
+      {# {% if viewParams.activatedApppSidebar|length > 0 %}
         <div>
           <ul>
             {% for item in viewParams.activatedApppSidebar %}
@@ -341,12 +341,12 @@
             {% endfor %}
           </ul>
         </div>
-      {% endif %}
+      {% endif %} #}
     </aside>
 
     <div
       id="app-main-content"
-      class="{% if viewParams.activatedApppSidebar|length > 0 %} sidebar-two-levels {% endif %}"
+      {# class="{% if viewParams.activatedApppSidebar|length > 0 %} sidebar-two-levels {% endif %}" #}
     >
       {{ contentHtml|raw }}
     </div>

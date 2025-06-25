@@ -15,6 +15,10 @@ class Loader extends \HubletoMain\Core\App
       '/^inventory\/transactions\/?$/' => Controllers\Transactions::class,
     ]);
 
+    $appMenu = $this->main->apps->community('Desktop')->appMenu;
+    $appMenu->addItem($this, 'inventory', $this->translate('Warehouses'), 'fas fa-boxes-stacked');
+    $appMenu->addItem($this, 'inventory/transactions', $this->translate('Transactions'), 'fas fa-arrows-turn-to-dots');
+
   }
 
   // installTables

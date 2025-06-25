@@ -50,9 +50,15 @@
   #app-main-content > h1, h1.app-main-title { @apply flex justify-between w-full p-0 pb-2 m-0 border-b border-b-primary/20 mb-2 text-primary dark:text-white; }
   h1.app-main-title .app-main-title-buttons { @apply text-base }
 
-  .app-launcher-show-btn { @apply cursor-pointer bg-white/20 text-white text-xs m-1 p-1 flex items-center gap-2 justify-center rounded hover:bg-white/40; }
+  .app-launcher-show-btn { @apply cursor-pointer bg-primary/70 text-white text-xs m-1 p-1 flex items-center gap-2 justify-center rounded hover:bg-primary; }
 
-  aside#default-sidebar > nav { @apply w-48; }
+  aside#default-sidebar > nav { @apply w-48 !bg-white border-r border-primary/20; }
+  aside#default-sidebar > nav .btn { @apply hover:bg-primary/10 pl-1; }
+  aside#default-sidebar > nav .btn .icon { @apply text-gray-800; }
+  aside#default-sidebar > nav .btn .text { @apply text-gray-800; }
+  aside#default-sidebar > nav .btn.btn-active { @apply bg-primary; }
+  aside#default-sidebar > nav .btn.btn-active .icon { @apply text-white; }
+  aside#default-sidebar > nav .btn.btn-active .text { @apply text-white; }
   div#app-main-content { @apply md:ml-48; }
 
   #app-launcher { @apply hidden fixed w-full h-full bg-white/90; z-index: 10000; top: 0; left: 0; overflow: auto; }
@@ -72,9 +78,11 @@
   .btn-square .icon { @apply flex justify-center h-12; }
   .btn-square .text { @apply h-auto; }
 
+  .card-header { @apply bg-white; }
+
   .modal-header-title h2 { @apply dark:text-white; }
 
   .fc .fc-toolbar-title { @apply !text-base; }
 
-  .sidebar-group-btns { @apply ml-1 p-1 rounded my-1 bg-white/20; }
+  .sidebar-group-btns { @apply ml-1 p-1 rounded my-1 bg-primary/10; }
 }

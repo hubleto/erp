@@ -18,6 +18,9 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
       if ($app->configAsInteger('sidebarOrder') <= 0) {
         unset($appsInSidebar[$appNamespace]);
       }
+      if ($app->isActivated) {
+        $activatedApp = $app;
+      }
     }
 
     uasort($appsInSidebar, function($a, $b) {

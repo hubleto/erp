@@ -11,6 +11,8 @@ use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\DateTime;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\File;
+use \ADIOS\Core\Db\Column\Integer;
+use \ADIOS\Core\Db\Column\Decimal;
 
 // This table records all movements of inventory within the warehouse.
 class Transaction extends \HubletoMain\Core\Models\Model

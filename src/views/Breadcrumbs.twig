@@ -11,6 +11,24 @@
         <span class="text text">{{ user.DEFAULT_COMPANY.name }}</span>
       </a>
     </li>
+    <li>
+      <button class="btn btn-transparent {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %} btn-primary-outline">
+        <span class="text">{{ viewParams.activatedApp.manifest.nameTranslated }}</span>
+        {% if viewParams.appMenu|length > 0 %}
+          <span class="icon"><i class="fas fa-chevron-down"></i></span>
+          <div class="menu">
+            <div class="list">
+              {% for item in viewParams.appMenu %}
+                <a href="{{ config.accountUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
+                  <span class="icon"><i class="{{ item.icon }}"></i></span>
+                  <span class="text">{{ item.title }}</span>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </button>
+    </li>
     {% set i = 0 %}
     {% for item in items %}
       <li>
@@ -30,23 +48,6 @@
       </li>
       {% set i = i + 1 %}
     {% endfor %}
-    {% if viewParams.appMenu|length > 0 %}
-      <li>
-        <button class="btn btn-transparent btn-dropdown btn-primary-outline">
-          <span class="icon"><i class="fas fa-ellipsis"></i></span>
-          <div class="menu">
-            <div class="list">
-              {% for item in viewParams.appMenu %}
-                <a href="{{ config.accountUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
-                  <span class="icon"><i class="{{ item.icon }}"></i></span>
-                  <span class="text">{{ item.title }}</span>
-                </a>
-              {% endfor %}
-            </div>
-          </div>
-        </button>
-      </li>
-    {% endif %}
   </ol>
 </nav>
 

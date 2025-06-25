@@ -1,0 +1,28 @@
+<h1 class="app-main-title">Developer > Form designer</h1>
+
+<div class="flex gap-2 h-full">
+  <div class="flex-1">
+    <b>Template</b>
+    <div class="list">
+      <a href="?template=one-column" class="btn btn-small btn-list-item {% if viewParams.template == 'one-column' %} btn-primary {% else %} btn-transparent {% endif %}">
+        <span class="text">One column</span>
+      </a>
+      <a href="?template=two-columns" class="btn btn-small btn-list-item {% if viewParams.template == 'two-columns' %} btn-primary {% else %} btn-transparent {% endif %}">
+        <span class="text">Two columns</span>
+      </a>
+      <a href="?template=three-columns" class="btn btn-small btn-list-item {% if viewParams.template == 'three-columns' %} btn-primary {% else %} btn-transparent {% endif %}">
+        <span class="text">Three columns</span>
+      </a>
+    </div>
+  </div>
+  <div class="flex-10">
+    <div class="card">
+      <div class="card-header">Rendered Typescript code</div>
+      <div class="card-body">
+        Copy & paste following code into your <i>Form.tsx</i> file and then run <i>npm run build-js</i> in your terminal.<br/>
+        <br/>
+        <textarea class="w-full" style="font-family:courier new;font-size:8pt;height:calc(100vh - 20em);color:blue" spellcheck="false">{{ viewParams.renderContentCode }}</textarea>
+      </div>
+    </div>
+  </div>
+</div>

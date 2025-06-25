@@ -1,5 +1,5 @@
 namespace: HubletoApp\Community\Pipeline
-sidebarGroup: crm
+sidebarGroup: sales
 rootUrlSlug: pipeline
 name: Pipeline
 icon: fas fa-timeline

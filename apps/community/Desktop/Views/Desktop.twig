@@ -274,6 +274,12 @@
         <button class="app-launcher-show-btn" onclick="lchr(true);">
           <i class="fas fa-magnifying-glass"></i> Search app
         </button>
+
+        <a class="btn {% if viewParams.main.route == '' %} btn-active {% endif %}" href="{{ config.accountUrl }}">
+          <span class="icon"><i class="fas fa-home"></i></span>
+          <span class="text">{{ translate('Home') }}</span>
+        </a>
+
         {% for sidebarGroup, sidebarGroupData in viewParams.sidebarGroups %}
           {% set appBtns = '' %}
           {% set hasActivatedApp = false %}

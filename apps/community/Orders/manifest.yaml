@@ -1,5 +1,5 @@
 namespace: HubletoApp\Community\Orders
-sidebarGroup: crm
+sidebarGroup: sales
 rootUrlSlug: orders
 name: Orders
 icon: fas fa-file-lines

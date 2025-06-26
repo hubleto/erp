@@ -25,11 +25,14 @@ class Loader extends \HubletoMain\Core\App
     // $appMenu->addItem($this, 'developer/item-2', $this->translate('Item 2'), 'fas fa-list');
 
 
-    $this->main->apps->community('Tools')->addTool($this, [
-      'title' => $this->translate('Developer tools'),
-      'icon' => 'fas fa-screwdriver-wrench',
-      'url' => 'developer',
-    ]);
+    if ($this->main->apps->community('Tools')) {
+      $this->main->apps->community('Tools')->addTool($this, [
+        'title' => $this->translate('Developer tools'),
+        'icon' => 'fas fa-screwdriver-wrench',
+        'url' => 'developer',
+      ]);
+    }
+
   }
 
 }

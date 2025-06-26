@@ -1,0 +1,10 @@
+namespace: HubletoApp\Community\OAuth
+sidebarGroup: -
+rootUrlSlug: oauth
+name: OAuth
+icon: fas fa-key
+author:
+  name: "WAI.bluet"
+  nick: "wai.blue"
+highlight: OAuth authentication for Hubleto
+created: 2025-06-26 13:50:48

@@ -18,30 +18,35 @@ use \ADIOS\Core\Db\Column\Varchar;
 
 use \HubletoApp\Community\Settings\Models\User;
 
-class EventVenue extends \HubletoMain\Core\Models\Model
+class Attendee extends \HubletoMain\Core\Models\Model
 {
 
-  public string $table = 'events_has_venues';
-  public string $recordManagerClass = RecordManagers\EventVenue::class;
-  public ?string $lookupSqlValue = 'concat("EventVenue #", {%TABLE%}.id)';
-
-  public array $relations = [ 
-    'EVENT' => [ self::BELONGS_TO, Event::class, 'id_event', 'id' ],
-    'VENUE' => [ self::BELONGS_TO, Venue::class, 'id_venue', 'id' ],
-  ];
+  public string $table = 'events_attendees';
+  public string $recordManagerClass = RecordManagers\Attendee::class;
+  public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.full_name, ""), " ", ifnull({%TABLE%}.email, ""))';
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setProperty('defaultVisibility', true),
-      'id_venue' => (new Lookup($this, $this->translate('Venue'), Venue::class))->setProperty('defaultVisibility', true),
+      'salutation' => (new Varchar($this, $this->translate('Salutation')))->setProperty('defaultVisibility', true),
+      'title_before' => (new Varchar($this, $this->translate('Title before')))->setProperty('defaultVisibility', true),
+      'full_name' => (new Varchar($this, $this->translate('Full name')))->setProperty('defaultVisibility', true),
+      'title_after' => (new Varchar($this, $this->translate('Title after')))->setProperty('defaultVisibility', true),
+      'email' => (new Varchar($this, $this->translate('Email')))->setProperty('defaultVisibility', true),
+      'phone' => (new Varchar($this, $this->translate('Phone')))->setProperty('defaultVisibility', true),
+      'social_profile_url_1' => (new Varchar($this, $this->translate('Social profile URL #1'))),
+      'social_profile_url_2' => (new Varchar($this, $this->translate('Social profile URL #2'))),
+      'social_profile_url_3' => (new Varchar($this, $this->translate('Social profile URL #3'))),
+      'social_profile_url_4' => (new Varchar($this, $this->translate('Social profile URL #4'))),
+      'social_profile_url_5' => (new Varchar($this, $this->translate('Social profile URL #5'))),
+      'notes' => (new Varchar($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
     ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-  $description->ui['addButtonText'] = 'Add venue';
+    $description->ui['addButtonText'] = 'Add Attendee';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

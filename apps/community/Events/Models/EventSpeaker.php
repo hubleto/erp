@@ -18,30 +18,31 @@ use \ADIOS\Core\Db\Column\Varchar;
 
 use \HubletoApp\Community\Settings\Models\User;
 
-class EventVenue extends \HubletoMain\Core\Models\Model
+class EventSpeaker extends \HubletoMain\Core\Models\Model
 {
 
-  public string $table = 'events_has_venues';
-  public string $recordManagerClass = RecordManagers\EventVenue::class;
-  public ?string $lookupSqlValue = 'concat("EventVenue #", {%TABLE%}.id)';
+  public string $table = 'events_has_speakers';
+  public string $recordManagerClass = RecordManagers\EventSpeaker::class;
+  public ?string $lookupSqlValue = 'concat("EventSpeaker #", {%TABLE%}.id)';
 
   public array $relations = [ 
     'EVENT' => [ self::BELONGS_TO, Event::class, 'id_event', 'id' ],
-    'VENUE' => [ self::BELONGS_TO, Venue::class, 'id_venue', 'id' ],
+    'SPEAKER' => [ self::BELONGS_TO, Speaker::class, 'id_speaker', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
       'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setProperty('defaultVisibility', true),
-      'id_venue' => (new Lookup($this, $this->translate('Venue'), Venue::class))->setProperty('defaultVisibility', true),
+      'id_speaker' => (new Lookup($this, $this->translate('Speaker'), Speaker::class))->setProperty('defaultVisibility', true),
+      'is_attending_virtually' => (new Boolean($this, $this->translate('Is attending virtually')))->setProperty('defaultVisibility', true),
     ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-  $description->ui['addButtonText'] = 'Add venue';
+    $description->ui['addButtonText'] = 'Add EventSpeaker';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

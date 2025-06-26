@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src/core/Components/HubletoTable';
-import Form{{ modelSingularForm }} from './Form{{ modelSingularForm }}';
+import FormEventSpeaker from './FormEventSpeaker';
 
-interface Table{{ modelPluralForm }}Props extends HubletoTableProps {
+interface TableEventSpeakersProps extends HubletoTableProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface Table{{ modelPluralForm }}State extends HubletoTableState {
+interface TableEventSpeakersState extends HubletoTableState {
 }
 
-export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ modelPluralForm }}Props, Table{{ modelPluralForm }}State> {
+export default class TableEventSpeakers extends HubletoTable<TableEventSpeakersProps, TableEventSpeakersState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: '{{ appNamespaceForwardSlash }}/Models/{{ model }}',
+    model: 'HubletoApp/Community/Events/Models/EventSpeaker',
   }
 
-  props: Table{{ modelPluralForm }}Props;
-  state: Table{{ modelPluralForm }}State;
+  props: TableEventSpeakersProps;
+  state: TableEventSpeakersState;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Table{{ modelPluralForm }}';
+  translationContext: string = 'HubletoApp\\Community\\Events::Components\\TableEventSpeakers';
 
-  constructor(props: Table{{ modelPluralForm }}Props) {
+  constructor(props: TableEventSpeakersProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: Table{{ modelPluralForm }}Props) {
+  getStateFromProps(props: TableEventSpeakersProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -52,6 +52,6 @@ export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ mod
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
     // formProps.description.defaultValues = { id_customer: this.props.idCustomer };
-    return <Form{{ modelSingularForm }} {...formProps}/>;
+    return <FormEventSpeaker {...formProps}/>;
   }
 }

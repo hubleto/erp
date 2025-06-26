@@ -18,30 +18,35 @@ use \ADIOS\Core\Db\Column\Varchar;
 
 use \HubletoApp\Community\Settings\Models\User;
 
-class EventVenue extends \HubletoMain\Core\Models\Model
+class Agenda extends \HubletoMain\Core\Models\Model
 {
 
-  public string $table = 'events_has_venues';
-  public string $recordManagerClass = RecordManagers\EventVenue::class;
-  public ?string $lookupSqlValue = 'concat("EventVenue #", {%TABLE%}.id)';
+  public string $table = 'events_agendas';
+  public string $recordManagerClass = RecordManagers\Agenda::class;
+  public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [ 
     'EVENT' => [ self::BELONGS_TO, Event::class, 'id_event', 'id' ],
-    'VENUE' => [ self::BELONGS_TO, Venue::class, 'id_venue', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
       'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setProperty('defaultVisibility', true),
-      'id_venue' => (new Lookup($this, $this->translate('Venue'), Venue::class))->setProperty('defaultVisibility', true),
+      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true),
+      'topic' => (new Varchar($this, $this->translate('Topic')))->setProperty('defaultVisibility', true),
+      'description' => (new Text($this, $this->translate('Description'))),
+      'floor' => (new Varchar($this, $this->translate('Floor')))->setProperty('defaultVisibility', true),
+      'room' => (new Varchar($this, $this->translate('Room')))->setProperty('defaultVisibility', true),
+      'datetime_start' => (new DateTime($this, $this->translate('Start')))->setDefaultValue(date("Y-m-h H:i:s")),
+      'datetime_end' => (new DateTime($this, $this->translate('End')))->setDefaultValue(date("Y-m-h H:i:s")),
     ]);
   }
 
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-  $description->ui['addButtonText'] = 'Add venue';
+    $description->ui['addButtonText'] = 'Add Agenda';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

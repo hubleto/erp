@@ -13,6 +13,9 @@ class Loader extends \HubletoMain\Core\App
   public function init(): void
   {
     parent::init();
+    $this->main->router->httpGet([
+      '/^tools\/?$/' => Controllers\Dashboard::class,
+    ]);
   }
 
   public function addTool(\HubletoMain\Core\App $app, array $tool): void

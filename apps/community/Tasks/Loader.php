@@ -18,26 +18,24 @@ class Loader extends \HubletoMain\Core\App
     // By default, each app should have a welcome dashboard.
     // If your app will have own settings panel, it should be under the `settings/your-app` slug.
     $this->main->router->httpGet([
-      '/^tasks\/?$/' => Controllers\Dashboard::class,
-      '/^tasks\/contacts\/?$/' => Controllers\Contacts::class,
-      '/^settings\/tasks\/?$/' => Controllers\Settings::class,
+      '/^tasks\/?$/' => Controllers\Tasks::class,
     ]);
 
-    // Add placeholder for custom settings.
-    // This will be displayed in the Settings app, under the "All settings" card.
-    $this->main->apps->community('Settings')->addSetting($this, [
-      'title' => 'Tasks', // or $this->translate('Tasks')
-      'icon' => 'fas fa-table',
-      'url' => 'settings/tasks',
-    ]);
+    // // Add placeholder for custom settings.
+    // // This will be displayed in the Settings app, under the "All settings" card.
+    // $this->main->apps->community('Settings')->addSetting($this, [
+    //   'title' => 'Tasks', // or $this->translate('Tasks')
+    //   'icon' => 'fas fa-table',
+    //   'url' => 'settings/tasks',
+    // ]);
 
-    // Add placeholder for your app's calendar.
-    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    $calendarManager->addCalendar(
-      'Tasks-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
-      '#008000', // your app's calendar color
-      Calendar::class // your app's Calendar class
-    );
+    // // Add placeholder for your app's calendar.
+    // $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
+    // $calendarManager->addCalendar(
+    //   'Tasks-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
+    //   '#008000', // your app's calendar color
+    //   Calendar::class // your app's Calendar class
+    // );
 
     // Uncomment following to configure your app's menu
     // $appMenu = $this->main->apps->community('Desktop')->appMenu;
@@ -49,7 +47,7 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      (new Models\Contact($this->main))->dropTableIfExists()->install();
+      (new Models\Task($this->main))->dropTableIfExists()->install();
     }
     if ($round == 2) {
       // do something in the 2nd round, if required

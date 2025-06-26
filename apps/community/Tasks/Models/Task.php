@@ -16,6 +16,7 @@ use \ADIOS\Core\Db\Column\Password;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Varchar;
 
+use \HubletoApp\Community\Projects\Models\Project;
 use \HubletoApp\Community\Settings\Models\User;
 
 class Task extends \HubletoMain\Core\Models\Model
@@ -34,13 +35,13 @@ class Task extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
+      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->main->auth->getUserId())
       ,
-      'manhours_estimation' => (new Decimal($this, $this->translate('Number')))->setProperty('defaultVisibility', true)->setUnit('manhours'),
+      'manhours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setProperty('defaultVisibility', true)->setUnit('manhours'),
 
       // 'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
       // 'text_example' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),

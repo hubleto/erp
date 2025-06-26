@@ -9,3 +9,6 @@
 
 // 3. Use the component in any of your Twig views:
 // <app-tasks-table-my-model string:some-property="some-value"></app-tasks-table-my-model>
+
+import TableTasks from './Components/TableTasks'
+globalThis.main.registerReactComponent('TasksTableTasks', TableTasks);

@@ -23,6 +23,8 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
       }
     }
 
+    if ($activatedApp === null) $activatedApp = $this->main->apps->community('Desktop');
+
     uasort($appsInSidebar, function($a, $b) {
       $aOrder = $a->configAsInteger('sidebarOrder');
       $bOrder = $b->configAsInteger('sidebarOrder');
@@ -33,6 +35,7 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
     $this->viewParams['activatedApp'] = $activatedApp;
     $this->viewParams['sidebarGroups'] = [
       'crm' => [ 'title' => $this->translate('CRM'), 'icon' => 'fas fa-id-card-clip' ],
+      'documents' => [ 'title' => $this->translate('Documents'), 'icon' => 'fas fa-file' ],
       'sales' => [ 'title' => $this->translate('Sales'), 'icon' => 'fas fa-users-viewfinder' ],
       'communication' => [ 'title' => $this->translate('Communication'), 'icon' => 'fas fa-comments' ],
       'projects' => [ 'title' => $this->translate('Projects'), 'icon' => 'fas fa-diagram-project' ],

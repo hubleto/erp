@@ -31,7 +31,15 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
+      (new Models\AccessToken($this->main))->dropTableIfExists()->install();
       (new Models\AuthCode($this->main))->dropTableIfExists()->install();
+      (new Models\Client($this->main))->dropTableIfExists()->install();
+      (new Models\RefreshToken($this->main))->dropTableIfExists()->install();
+      (new Models\Scope($this->main))->dropTableIfExists()->install();
+    }
+    if ($round == 1) {
+      $mClient = new Models\Client($this->main);
+      $mClient->record->recordCreate(['client_id' => 'test_client_id', 'client_secret' => 'test_client_secret']);
     }
   }
 

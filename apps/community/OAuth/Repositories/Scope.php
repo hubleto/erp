@@ -4,10 +4,10 @@ namespace HubletoApp\Community\OAuth\Repositories;
 
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
 use League\OAuth2\Server\Entities\ScopeEntityInterface;
+use League\OAuth2\Server\Entities\ClientEntityInterface;
 use OAuth2ServerExamples\Entities\ScopeEntity;
 
-// MyScopeRepository
-class MyScopeRepository implements ScopeRepositoryInterface {
+class Scope implements ScopeRepositoryInterface {
 
   public \HubletoMain $main;
 

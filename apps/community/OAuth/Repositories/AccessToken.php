@@ -4,10 +4,10 @@ namespace HubletoApp\Community\OAuth\Repositories;
 
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
 use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
+use League\OAuth2\Server\Entities\ClientEntityInterface;
 use OAuth2ServerExamples\Entities\AccessTokenEntity;
 
-// MyAccessTokenRepository
-class MyAccessTokenRepository implements AccessTokenRepositoryInterface {
+class AccessToken implements AccessTokenRepositoryInterface {
 
   public \HubletoMain $main;
 

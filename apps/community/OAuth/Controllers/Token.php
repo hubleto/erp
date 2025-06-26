@@ -2,10 +2,11 @@
 
 namespace HubletoApp\Community\OAuth\Controllers;
 
-class Token extends \HubletoMain\Core\Controllers\Controller
+class Token extends Server
 {
 
   public bool $hideDefaultDesktop = true;
+  public bool $requiresUserAuthentication = false;
 
   public function prepareView(): void
   {
@@ -19,7 +20,7 @@ class Token extends \HubletoMain\Core\Controllers\Controller
             $response = (new ResponseFactory())->createResponse();
 
             // This method handles all grant types added to the server, including AuthCodeGrant with PKCE.
-            $response = $server->respondToAccessTokenRequest($request, $response);
+            $response = $this->server->respondToAccessTokenRequest($request, $response);
 
             // Send the JSON response with access/refresh token
             foreach ($response->getHeaders() as $name => $values) {

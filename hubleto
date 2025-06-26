@@ -44,6 +44,7 @@ if (!empty($action)) {
       break;
       case 'debug':
         switch ($argv[2]) {
+          case 'test-oauth': $command = new \HubletoMain\Cli\Agent\Debug\TestOauth($cli, $argv); break;
           case 'router': $command = new \HubletoMain\Cli\Agent\Debug\Router($cli, $argv); break;
         }
       break;

@@ -6,8 +6,7 @@ use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use OAuth2ServerExamples\Entities\AuthCodeEntity;
 
-// AuthCodeRepository
-class AuthCodeRepository implements AuthCodeRepositoryInterface
+class AuthCode implements AuthCodeRepositoryInterface
 {
 
   public \HubletoMain $main;

@@ -1,0 +1,55 @@
+<?php
+
+namespace HubletoApp\Community\OAuth\Controllers;
+
+use League\OAuth2\Server\AuthorizationServer;
+use League\OAuth2\Server\Grant\AuthCodeGrant;
+
+class Server extends \HubletoMain\Core\Controllers\Controller
+{
+
+  public AuthorizationServer $server;
+
+  function __construct(\HubletoMain $main)
+  {
+    parent::__construct($main);
+
+    $clientRepository = new \HubletoApp\Community\OAuth\Repositories\Client($this->main);
+    $userRepository = new \HubletoApp\Community\OAuth\Repositories\User($this->main);
+    $scopeRepository = new \HubletoApp\Community\OAuth\Repositories\Scope($this->main);
+    $accessTokenRepository = new \HubletoApp\Community\OAuth\Repositories\AccessToken($this->main);
+    $refreshTokenRepository = new \HubletoApp\Community\OAuth\Repositories\RefreshToken($this->main);
+    $authCodeRepository = new \HubletoApp\Community\OAuth\Repositories\AuthCode($this->main);
+
+    $privateKey = 'file://' . $this->main->config->getAsString('OAuthPrivateKey'); // Path to your private key for JWT signing
+    $publicKey = 'file://' . $this->main->config->getAsString('OAuthPublicKey'); // Path to your public key for JWT validation
+
+    // Setup the authorization server
+    $this->server = new AuthorizationServer(
+      $clientRepository,
+      $accessTokenRepository,
+      $scopeRepository,
+      $privateKey,
+      $publicKey // Used for validating JWT access tokens by resource servers
+    );
+
+    // Enable the Authorization Code Grant
+    $authCodeGrant = new AuthCodeGrant(
+      $authCodeRepository,
+      $refreshTokenRepository,
+      new \DateInterval('PT10M') // Authorization codes will expire in 10 minutes
+    );
+
+    // PKCE is automatically enabled when a client provides code_challenge parameters.
+    // However, you can enforce PKCE for public clients:
+    // $authCodeGrant->setRequireCodeChallengeForPublicClients(true); // Recommended for security
+
+    // $this->server->addGrantType($authCodeGrant);
+
+    // // Add the Refresh Token Grant (highly recommended with Authorization Code Grant)
+    // $refreshTokenGrant = new \League\OAuth2\Server\Grant\RefreshTokenGrant($refreshTokenRepository);
+    // $refreshTokenGrant->setRefreshTokenTTL(new \DateInterval('P1M')); // Refresh token expires in 1 month
+    // $this->server->addGrantType($refreshTokenGrant);
+  }
+
+}

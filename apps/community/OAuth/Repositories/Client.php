@@ -2,12 +2,11 @@
 
 namespace HubletoApp\Community\OAuth\Repositories;
 
-use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
+use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use OAuth2ServerExamples\Entities\ClientEntity;
 
-// MyClientRepository
-class MyClientRepository implements ClientRepositoryInterface {
+class Client implements ClientRepositoryInterface {
 
   public \HubletoMain $main;
 

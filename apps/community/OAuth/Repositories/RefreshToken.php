@@ -6,8 +6,7 @@ use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use OAuth2ServerExamples\Entities\RefreshTokenEntity;
 
-// MyRefreshTokenRepository
-class MyRefreshTokenRepository implements RefreshTokenRepositoryInterface {
+class RefreshToken implements RefreshTokenRepositoryInterface {
 
   public \HubletoMain $main;
 

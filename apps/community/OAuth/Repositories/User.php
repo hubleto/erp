@@ -5,7 +5,7 @@ namespace HubletoApp\Community\OAuth\Repositories;
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
 use League\OAuth2\Server\Entities\UserEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
-use OAuth2ServerExamples\Entities\UserEntity;
+use HubletoApp\Community\OAuth\Entities\UserEntity;
 
 class User implements UserRepositoryInterface {
 

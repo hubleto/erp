@@ -3,7 +3,7 @@
 namespace HubletoApp\Community\OAuth\Models;
 
 use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\VarcBooleanhar;
+use \ADIOS\Core\Db\Column\Boolean;
 
 class AccessToken extends \HubletoMain\Core\Models\Model
 {

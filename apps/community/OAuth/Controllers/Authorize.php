@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\OAuth\Controllers;
 
-class Authorize extends Server
+class Authorize extends \HubletoApp\Community\OAuth\ServerController
 {
 
   public bool $hideDefaultDesktop = true;
@@ -10,6 +10,8 @@ class Authorize extends Server
 
   public function render(array $params): string
   {
+    $server = $this->getServer();
+
     // --- Handling the Authorization Request (GET /oauth/authorize) ---
     // This is where the user interacts with your login/consent page.
     // This typically happens in a separate controller/route.
@@ -17,11 +19,12 @@ class Authorize extends Server
     // Example: In your authorization endpoint (e.g., /oauth/authorize)
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], '/oauth/authorize') !== false) {
       try {
+
         $request = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
         $response = (new \Laminas\Diactoros\ResponseFactory())->createResponse();
 
         // Validate the HTTP request and return an AuthorizationRequest object.
-        $authRequest = $this->server->validateAuthorizationRequest($request);
+        $authRequest = $server->validateAuthorizationRequest($request);
 
         // Your application's logic to authenticate the user and get their consent.
         // If the user is not logged in, redirect them to your login page.
@@ -39,7 +42,7 @@ class Authorize extends Server
 
         if ($userConsentApproved === true) {
           // Once the user approves the authorization, complete the flow.
-          $response = $this->server->completeAuthorizationRequest($authRequest, $response);
+          $response = $server->completeAuthorizationRequest($authRequest, $response);
         } else {
           // User denied the consent
           throw \League\OAuth2\Server\Exception\OAuthServerException::accessDenied($authRequest->getRedirectUri());

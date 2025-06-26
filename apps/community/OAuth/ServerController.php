@@ -1,19 +1,17 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Controllers;
+namespace HubletoApp\Community\OAuth;
 
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\AuthCodeGrant;
 
-class Server extends \HubletoMain\Core\Controllers\Controller
+class ServerController extends \HubletoMain\Core\Controllers\Controller
 {
 
   public AuthorizationServer $server;
 
-  function __construct(\HubletoMain $main)
+  function getServer(): AuthorizationServer
   {
-    parent::__construct($main);
-
     $clientRepository = new \HubletoApp\Community\OAuth\Repositories\Client($this->main);
     $userRepository = new \HubletoApp\Community\OAuth\Repositories\User($this->main);
     $scopeRepository = new \HubletoApp\Community\OAuth\Repositories\Scope($this->main);
@@ -25,7 +23,7 @@ class Server extends \HubletoMain\Core\Controllers\Controller
     $publicKey = 'file://' . $this->main->config->getAsString('OAuthPublicKey'); // Path to your public key for JWT validation
 
     // Setup the authorization server
-    $this->server = new AuthorizationServer(
+    $server = new AuthorizationServer(
       $clientRepository,
       $accessTokenRepository,
       $scopeRepository,
@@ -44,12 +42,14 @@ class Server extends \HubletoMain\Core\Controllers\Controller
     // However, you can enforce PKCE for public clients:
     // $authCodeGrant->setRequireCodeChallengeForPublicClients(true); // Recommended for security
 
-    // $this->server->addGrantType($authCodeGrant);
+    $server->enableGrantType($authCodeGrant);
 
-    // // Add the Refresh Token Grant (highly recommended with Authorization Code Grant)
-    // $refreshTokenGrant = new \League\OAuth2\Server\Grant\RefreshTokenGrant($refreshTokenRepository);
-    // $refreshTokenGrant->setRefreshTokenTTL(new \DateInterval('P1M')); // Refresh token expires in 1 month
-    // $this->server->addGrantType($refreshTokenGrant);
+    // Add the Refresh Token Grant (highly recommended with Authorization Code Grant)
+    $refreshTokenGrant = new \League\OAuth2\Server\Grant\RefreshTokenGrant($refreshTokenRepository);
+    $refreshTokenGrant->setRefreshTokenTTL(new \DateInterval('P1M')); // Refresh token expires in 1 month
+    $server->enableGrantType($refreshTokenGrant);
+
+    return $server;
   }
 
 }

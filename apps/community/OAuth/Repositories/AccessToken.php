@@ -5,7 +5,7 @@ namespace HubletoApp\Community\OAuth\Repositories;
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
 use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
-use OAuth2ServerExamples\Entities\AccessTokenEntity;
+use HubletoApp\Community\OAuth\Entities\AccessTokenEntity;
 
 class AccessToken implements AccessTokenRepositoryInterface {
 
@@ -31,19 +31,19 @@ class AccessToken implements AccessTokenRepositoryInterface {
       'revoked' => false,
     ];
 
-    $accessTokenModel = new \HubletoApp\Community\OAuth\Models\AccessToken();
+    $accessTokenModel = new \HubletoApp\Community\OAuth\Models\AccessToken($this->main);
     $accessTokenModel->record->recordCreate($dbData); // Assuming fillable properties
   }
 
   public function revokeAccessToken($tokenId): void
   {
-    $accessTokenModel = new \HubletoApp\Community\OAuth\Models\AuthCode();
+    $accessTokenModel = new \HubletoApp\Community\OAuth\Models\AccessToken($this->main);
     $accessTokenModel->record->where('access_token', $tokenId)->update(['revoked' => true]);
   }
 
   public function isAccessTokenRevoked($tokenId): bool
   {
-    $accessTokenModel = new \HubletoApp\Community\OAuth\Models\AuthCode();
+    $accessTokenModel = new \HubletoApp\Community\OAuth\Models\AccessToken($this->main);
     $accessToken = $accessTokenModel->record->find($tokenId);
     return $accessToken && $accessToken->revoked;
   }

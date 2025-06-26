@@ -4,7 +4,7 @@ namespace HubletoApp\Community\OAuth\Repositories;
 
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
-use OAuth2ServerExamples\Entities\RefreshTokenEntity;
+use HubletoApp\Community\OAuth\Entities\RefreshTokenEntity;
 
 class RefreshToken implements RefreshTokenRepositoryInterface {
 

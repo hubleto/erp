@@ -17,6 +17,8 @@ class Client extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'client_id' => (new Varchar($this, $this->translate('Client Id')))->setProperty('defaultVisibility', true),
       'client_secret' => (new Varchar($this, $this->translate('Client Secret')))->setProperty('defaultVisibility', true),
+      'name' => (new Varchar($this, $this->translate('Name')))->setProperty('defaultVisibility', true),
+      'redirect_uri' => (new Varchar($this, $this->translate('Redirect Uri')))->setProperty('defaultVisibility', true),
     ]);
   }
 

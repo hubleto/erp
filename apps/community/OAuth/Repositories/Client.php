@@ -4,7 +4,7 @@ namespace HubletoApp\Community\OAuth\Repositories;
 
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
-use OAuth2ServerExamples\Entities\ClientEntity;
+use HubletoApp\Community\OAuth\Entities\ClientEntity;
 
 class Client implements ClientRepositoryInterface {
 
@@ -17,12 +17,17 @@ class Client implements ClientRepositoryInterface {
 
   public function getClientEntity(string $clientIdentifier): ?ClientEntityInterface
   {
+
+
+    $mClient = new \HubletoApp\Community\OAuth\Models\Client($this->main);
+    $clientData = $mClient->record->where('client_id', $clientIdentifier)->first()?->toArray();
+
     $client = new ClientEntity();
 
     $client->setIdentifier($clientIdentifier);
-    $client->setName(self::CLIENT_NAME);
-    $client->setRedirectUri(self::REDIRECT_URI);
-    $client->setConfidential();
+    $client->setName($clientData['name'] ?? '');
+    $client->setRedirectUri($clientData['redirect_uri'] ?? '');
+    // $client->setConfidential();
 
     return $client;
   }

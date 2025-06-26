@@ -117,9 +117,9 @@ class Lead extends \HubletoMain\Core\Models\Model
     $description->ui['showSidebarFilter'] = true;
     $description->ui['showColumnSearch'] = true;
     $description->ui['defaultFilters'] = [
-      'fStatus' => [ 'title' => 'Status', 'options' => [ 0 => 'All', 1 => 'New', 2 => 'In progress', 3 => 'Completed', 4 => 'Lost' ] ],
-      'fOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
-      'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+      'fLeadStatus' => [ 'title' => 'Status', 'type' => 'multipleSelectButtons', 'options' => [ 1 => 'New', 2 => 'In progress', 3 => 'Completed', 4 => 'Lost' ] ],
+      'fLeadOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
+      'fLeadArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
     ];
     $description->columns['tags'] = ["title" => "Tags"];
 

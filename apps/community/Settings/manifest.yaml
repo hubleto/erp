@@ -1,12 +1,9 @@
 namespace: HubletoApp\Community\Settings
-sidebarGroup: settings
+sidebarGroup: maintenance
 rootUrlSlug: settings
-name: Settings and tools
-icon: fas fa-cog
+name: Settings
+icon: fas fa-sliders
 author:
-  name: "Richard Ondrejka"
-  nick: "rindo"
+  name: "WAI.blue"
   company: "wai.blue"
-  github: "https://github.com/rindo789"
-  linkedin: "https://www.linkedin.com/in/richard-ondrejka/"
 highlight: Settings and control panel for your Hubleto.

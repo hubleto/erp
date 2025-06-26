@@ -46,6 +46,7 @@ class Installer {
   public array $packages = [
     'core' => [
       \HubletoApp\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997, ],
+      \HubletoApp\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997, ],
       \HubletoApp\Community\Desktop\Loader::class => [ ],
       \HubletoApp\Community\Usage\Loader::class => [ ],
       \HubletoApp\Community\Messages\Loader::class => [ 'sidebarOrder' => 125, ],
@@ -56,6 +57,7 @@ class Installer {
       \HubletoApp\Community\Dashboards\Loader::class => [ 'sidebarOrder' => 99995, ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],
+      \HubletoApp\Community\About\Loader::class => [ 'sidebarOrder' => 99998, ],
     ],
     'cloud' => [
       \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99999, ],

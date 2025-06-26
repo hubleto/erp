@@ -1,0 +1,23 @@
+<h1 class="app-main-title">About</h1>
+
+<div class="flex gap-2">
+  <div class="card">
+    <div class="card-header">
+      {{ translate('About your Hubleto') }}
+    </div>
+    <div class="card-body">
+      <table class="table-default dense">
+        <tbody>
+          <tr>
+            <td>Release</td>
+            <td>[{{ app.release.getVersion() }}] {{ app.release.getCodename() }}</td>
+          </tr>
+          <tr>
+            <td>Environment</td>
+            <td>{{ config.env }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

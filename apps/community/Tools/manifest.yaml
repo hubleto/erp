@@ -1,0 +1,9 @@
+namespace: HubletoApp\Community\Tools
+sidebarGroup: maintenance
+rootUrlSlug: tools
+name: Tools
+icon: fas fa-screwdriver-wrench
+author:
+  name: "WAI.blue"
+  company: "wai.blue"
+highlight: Interface to access various maintenance tools.

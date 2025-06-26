@@ -16,20 +16,11 @@ use \ADIOS\Core\Db\Column\Password;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Varchar;
 
+use \HubletoApp\Community\Deals\Models\Deal;
 use \HubletoApp\Community\Settings\Models\User;
 
 class Project extends \HubletoMain\Core\Models\Model
 {
-
-  const ENUM_ONE = 1;
-  const ENUM_TWO = 2;
-  const ENUM_THREE = 3;
-
-  const INTEGER_ENUM_VALUES = [
-    self::ENUM_ONE => 'One',
-    self::ENUM_TWO => 'Two',
-    self::ENUM_THREE => 'Three',
-  ];
 
   public string $table = 'projects';
   public string $recordManagerClass = RecordManagers\Project::class;
@@ -46,6 +37,7 @@ class Project extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setProperty('defaultVisibility', true),
       'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
       'description' => (new Text($this, $this->translate('Description'))),
@@ -59,7 +51,7 @@ class Project extends \HubletoMain\Core\Models\Model
         ->setDefaultValue($this->main->auth->getUserId())
       ,
       'color' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true),
-      'online_documentation_folder' => (new Varchar($this, "Online documentation folder")),
+      'online_documentation_folder' => (new Varchar($this, "Online documentation folder"))->setReactComponent('InputHyperlink'),
       'notes' => (new Text($this, $this->translate('Notes'))),
     ]);
   }
@@ -73,13 +65,13 @@ class Project extends \HubletoMain\Core\Models\Model
     $description->ui['showFooter'] = false;
 
     $mPhase = new Phase($this->main);
-    $fPhaseOptions = [ 0 => 'All' ];
+    $fPhaseOptions = [ ];//0 => 'All' ];
     foreach ($mPhase->record->orderBy('order', 'asc')->get()?->toArray() as $phase) {
       $fPhaseOptions[$phase['id']] = $phase['name'];
     }
 
     $description->ui['defaultFilters'] = [
-      'fPhase' => [ 'title' => 'Phase', 'options' => $fPhaseOptions ],
+      'fPhase' => [ 'title' => 'Phase', 'type' => 'multipleSelectButtons', 'options' => $fPhaseOptions ],
     ];
 
     return $description;
@@ -97,7 +89,7 @@ class Project extends \HubletoMain\Core\Models\Model
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
-    return parent::onAfterUpdate($savedRecord);
+    return parent::onAfterUpdate($originalRecord, $savedRecord);
   }
 
   public function onAfterCreate(array $savedRecord): array

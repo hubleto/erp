@@ -142,11 +142,11 @@ class Deal extends \HubletoMain\Core\Models\Model
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
     $description->ui['defaultFilters'] = [
-      'fSourceChannel' => [ 'title' => 'Source channel', 'options' => array_merge([ 0 => 'All'], self::ENUM_SOURCE_CHANNELS) ],
-      'fDealResult' => [ 'title' => 'Result', 'options' => array_merge([ 0 => 'All'], self::ENUM_DEAL_RESULTS) ],
-      'fBusinessType' => [ 'title' => 'Business type', 'options' => array_merge([ 0 => 'All'], self::ENUM_BUSINESS_TYPES) ],
-      'fOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
-      'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+      'fDealSourceChannel' => [ 'title' => 'Source channel', 'type' => 'multipleSelectButtons', 'options' => self::ENUM_SOURCE_CHANNELS ],
+      'fDealResult' => [ 'title' => 'Result', 'type' => 'multipleSelectButtons', 'options' =>self::ENUM_DEAL_RESULTS ],
+      'fDealBusinessType' => [ 'title' => 'Business type', 'options' => array_merge([ 0 => 'All'], self::ENUM_BUSINESS_TYPES) ],
+      'fDealOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
+      'fDealArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
     ];
 
     unset($description->columns['note']);

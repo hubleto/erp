@@ -1,5 +1,5 @@
 namespace: HubletoApp\Community\Cloud
-sidebarGroup: settings
+sidebarGroup: maintenance
 rootUrlSlug: cloud
 name: Cloud
 icon: fas fa-cloud

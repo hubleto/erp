@@ -83,11 +83,11 @@ class Lead extends \HubletoMain\Core\RecordManager
     }
 
     $defaultFilters = $main->urlParamAsArray("defaultFilters");
-    if (isset($defaultFilters["fArchive"]) && $defaultFilters["fArchive"] > 0) $query = $query->where("leads.is_archived", $defaultFilters["fArchive"]);
-    if (isset($defaultFilters["fStatus"]) && $defaultFilters["fStatus"] > 0) $query = $query->where("leads.status", $defaultFilters["fStatus"]);
+    if (isset($defaultFilters["fLeadArchive"]) && $defaultFilters["fLeadArchive"] > 0) $query = $query->where("leads.is_archived", $defaultFilters["fLeadArchive"]);
+    if (isset($defaultFilters["fLeadStatus"]) && count($defaultFilters["fLeadStatus"]) > 0) $query = $query->whereIn("leads.status", $defaultFilters["fLeadStatus"]);
 
-    if (isset($defaultFilters["fOwnership"])) {
-      switch ($defaultFilters["fOwnership"]) {
+    if (isset($defaultFilters["fLeadOwnership"])) {
+      switch ($defaultFilters["fLeadOwnership"]) {
         case 1: $query = $query->where("leads.id_owner", $main->auth->getUserId()); break;
         case 2: $query = $query->where("leads.id_manager", $main->auth->getUserId()); break;
       }

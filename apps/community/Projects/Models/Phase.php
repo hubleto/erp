@@ -72,7 +72,7 @@ class Phase extends \HubletoMain\Core\Models\Model
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
-    return parent::onAfterUpdate($savedRecord);
+    return parent::onAfterUpdate($originalRecord, $savedRecord);
   }
 
   public function onAfterCreate(array $savedRecord): array

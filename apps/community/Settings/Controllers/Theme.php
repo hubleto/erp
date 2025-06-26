@@ -17,7 +17,7 @@ class Theme extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
 
-    $themes = ['default', 'grayscale', 'pink-yellow'];
+    $themes = ['default', 'grayscale', 'pink'];
 
     $set = $this->main->urlParamAsString('set');
     if (!empty($set) && in_array($set, $themes)) {

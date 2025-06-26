@@ -37,10 +37,11 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
       'communication' => [ 'title' => $this->translate('Communication'), 'icon' => 'fas fa-comments' ],
       'projects' => [ 'title' => $this->translate('Projects'), 'icon' => 'fas fa-diagram-project' ],
       'supply-chain' => [ 'title' => $this->translate('Supply chain'), 'icon' => 'fas fa-truck' ],
+      'helpdesk' => [ 'title' => $this->translate('Helpdesk'), 'icon' => 'fas fa-headset' ],
       'e-commerce' => [ 'title' => $this->translate('E-Commerce'), 'icon' => 'fas fa-cart-shopping' ],
       'finance' => [ 'title' => $this->translate('Finance'), 'icon' => 'fas fa-credit-card' ],
       'reporting' => [ 'title' => $this->translate('Reporting'), 'icon' => 'fas fa-chart-line' ],
-      'settings' => [ 'title' => $this->translate('Settings'), 'icon' => 'fas fa-cog' ],
+      'maintenance' => [ 'title' => $this->translate('Maintenance'), 'icon' => 'fas fa-cog' ],
       'help' => [ 'title' => $this->translate('Help'), 'icon' => 'fas fa-life-ring' ],
       'custom' => [ 'title' => $this->translate('Custom'), 'icon' => 'fas fa-puzzle-piece' ],
     ];

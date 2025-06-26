@@ -14,15 +14,6 @@ class Loader extends \HubletoMain\Core\App
   {
     parent::init();
 
-    // Add app routes.
-    // By default, each app should have a welcome dashboard.
-    // If your app will have own settings panel, it should be under the `settings/your-app` slug.
-    $this->main->router->httpGet([
-      '/^projects\/?$/' => Controllers\Dashboard::class,
-      '/^projects\/contacts\/?$/' => Controllers\Contacts::class,
-      '/^settings\/projects\/?$/' => Controllers\Settings::class,
-    ]);
-
     $this->main->router->httpGet([ '/^projects\/?$/' => Controllers\Projects::class ]);
     $this->main->router->httpGet([ '/^projects\/phases\/?$/' => Controllers\Phases::class ]);
 
@@ -42,10 +33,9 @@ class Loader extends \HubletoMain\Core\App
       Calendar::class // your app's Calendar class
     );
 
-    // Uncomment following to configure your app's menu
-    // $appMenu = $this->main->apps->community('Desktop')->appMenu;
-    // $appMenu->addItem($this, 'projects/item-1', $this->translate('Item 1'), 'fas fa-table');
-    // $appMenu->addItem($this, 'projects/item-2', $this->translate('Item 2'), 'fas fa-list');
+    $appMenu = $this->main->apps->community('Desktop')->appMenu;
+    $appMenu->addItem($this, 'projects', $this->translate('Projects'), 'fas fa-diagram-project');
+    $appMenu->addItem($this, 'projects/phases', $this->translate('Phases'), 'fas fa-list');
   }
 
   // installTables
@@ -76,12 +66,24 @@ class Loader extends \HubletoMain\Core\App
     $mProject = new Models\Project($this->main);
 
     $mProject->record->recordCreate([
-      'title' => 'Sample project',
+      'id_deal' => 1,
+      'title' => 'Sample project #1',
       'identifier' => 'SMP-1',
-      'description' => 'Sample project for demonstration purposes.',
+      'description' => 'Sample project #1 for demonstration purposes.',
       'id_main_developer' => 1,
       'id_account_manager' => 1,
       'id_phase' => 3,
+      'color' => '#008000',
+    ]);
+
+    $mProject->record->recordCreate([
+      'id_deal' => 1,
+      'title' => 'Sample project #2',
+      'identifier' => 'SMP-2',
+      'description' => 'Sample project #2 for demonstration purposes.',
+      'id_main_developer' => 1,
+      'id_account_manager' => 1,
+      'id_phase' => 1,
       'color' => '#008000',
     ]);
   }

@@ -54,7 +54,8 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
           <div className="flex flex-col gap-2 text-nowrap mt-2">
             {Object.keys(this.state.description.ui.defaultFilters).map((filterName) => {
               const filter = this.state.description.ui.defaultFilters[filterName];
-              const filterValue = this.state.defaultFilters[filterName] ?? 0;
+              const filterValue = this.state.defaultFilters[filterName] ?? null;
+
               return <div key={filterName}>
                 <b>{filter.title}</b>
                 <div className="list">
@@ -63,10 +64,34 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
                       className={"btn btn-small btn-list-item " + (filterValue == key ? "btn-primary" : "btn-transparent")}
                       onClick={() => {
                         let defaultFilters = this.state.defaultFilters ?? {};
-                        defaultFilters[filterName] = key;
+
+                        if (filter.type == 'multipleSelectButtons') {
+                          if (filterValue) {
+                            if (filterValue.includes(key)) {
+                              defaultFilters[filterName] = [];
+                              for (let i in filterValue) {
+                                if (filterValue[i] != key) defaultFilters[filterName].push(filterValue[i]);
+                              }
+                            } else {
+                              console.log('b');
+                              defaultFilters[filterName] = filterValue;
+                              defaultFilters[filterName].push(key);
+                            }
+                          } else {
+                            defaultFilters[filterName] = [ key ];
+                          }
+                        } else {
+                          defaultFilters[filterName] = key;
+                        }
+
                         this.setState({defaultFilters: defaultFilters}, () => this.loadData());
                       }}
-                    ><span className="text">{filter.options[key]}</span></button>;
+                    >
+                      {filter.type == 'multipleSelectButtons' ?
+                        <span className="icon"><input type="checkbox" checked={filterValue && filterValue.includes(key)}></input></span>
+                      : null}
+                      <span className="text">{filter.options[key]}</span>
+                    </button>;
                   })}
                 </div>
               </div>;

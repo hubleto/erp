@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers;
+namespace HubletoApp\Community\Tools\Controllers;
 
 class Dashboard extends \HubletoMain\Core\Controllers\Controller {
 
@@ -8,14 +8,14 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
+      [ 'url' => 'tools', 'content' => $this->translate('Tools') ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->viewParams['settings'] = $this->main->apps->community('Settings')->getSettings();
+    $this->viewParams['tools'] = $this->hubletoApp->getTools();
     $this->setView('@HubletoApp:Community:Settings/Dashboard.twig');
   }
 

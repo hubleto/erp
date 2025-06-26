@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ appNamespace }}\Models;
+namespace HubletoApp\Community\Tasks\Models;
 
 use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Color;
@@ -18,31 +18,30 @@ use \ADIOS\Core\Db\Column\Varchar;
 
 use \HubletoApp\Community\Settings\Models\User;
 
-class {{ model }} extends \HubletoMain\Core\Models\Model
+class Task extends \HubletoMain\Core\Models\Model
 {
 
-  const ENUM_ONE = 1;
-  const ENUM_TWO = 2;
-  const ENUM_THREE = 3;
-
-  const INTEGER_ENUM_VALUES = [
-    self::ENUM_ONE => 'One',
-    self::ENUM_TWO => 'Two',
-    self::ENUM_THREE => 'Three',
-  ];
-
-  public string $table = '{{ sqlTable }}';
-  public string $recordManagerClass = RecordManagers\{{ model }}::class;
-  public ?string $lookupSqlValue = 'concat("{{ model }} #", {{ '{%' }}TABLE{{ '%}' }}.id)';
+  public string $table = 'tasks';
+  public string $recordManagerClass = RecordManagers\Task::class;
+  public ?string $lookupSqlValue = 'concat("Task #", {%TABLE%}.id)';
 
   public array $relations = [ 
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
+    'DEVELOPER' => [ self::BELONGS_TO, User::class, 'id_developer', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setProperty('defaultVisibility', true),
+      'title' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
+      'description' => (new Text($this, $this->translate('Description'))),
+      'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setProperty('defaultVisibility', true)->setRequired()
+        ->setDefaultValue($this->main->auth->getUserId())
+      ,
+      'manhours_estimation' => (new Decimal($this, $this->translate('Number')))->setProperty('defaultVisibility', true)->setUnit('manhours'),
+
       // 'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
       // 'text_example' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
       // 'decimal_example' => (new Decimal($this, $this->translate('Number')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary')
@@ -78,7 +77,7 @@ class {{ model }} extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add {{ model }}';
+    $description->ui['addButtonText'] = 'Add Task';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

@@ -116,14 +116,13 @@ class Deal extends \HubletoMain\Core\RecordManager
     }
 
     $defaultFilters = $main->urlParamAsArray("defaultFilters");
-    if (isset($defaultFilters["fSourceChannel"]) && $defaultFilters["fSourceChannel"] > 0) $query = $query->where("deals.source_channel", $defaultFilters["fSourceChannel"]);
+    if (isset($defaultFilters["fDealSourceChannel"]) && $defaultFilters["fDealSourceChannel"] > 0) $query = $query->where("deals.source_channel", $defaultFilters["fDealSourceChannel"]);
     if (isset($defaultFilters["fDealResult"]) && $defaultFilters["fDealResult"] > 0) $query = $query->where("deals.deal_result", $defaultFilters["fDealResult"]);
-    if (isset($defaultFilters["fBusinessType"]) && $defaultFilters["fBusinessType"] > 0) $query = $query->where("deals.business_type", $defaultFilters["fBusinessType"]);
-    if (isset($defaultFilters["fBusinessType"]) && $defaultFilters["fBusinessType"] > 0) $query = $query->where("deals.business_type", $defaultFilters["fBusinessType"]);
-    if (isset($defaultFilters["fStatus"]) && $defaultFilters["fStatus"] > 0) $query = $query->where("deals.status", $defaultFilters["fStatus"]);
+    if (isset($defaultFilters["fDealBusinessType"]) && $defaultFilters["fDealBusinessType"] > 0) $query = $query->where("deals.business_type", $defaultFilters["fDealBusinessType"]);
+    if (isset($defaultFilters["fDealBusinessType"]) && $defaultFilters["fDealBusinessType"] > 0) $query = $query->where("deals.business_type", $defaultFilters["fDealBusinessType"]);
 
-    if (isset($defaultFilters["fOwnership"])) {
-      switch ($defaultFilters["fOwnership"]) {
+    if (isset($defaultFilters["fDealOwnership"])) {
+      switch ($defaultFilters["fDealOwnership"]) {
         case 1: $query = $query->where("deals.id_owner", $main->auth->getUserId()); break;
         case 2: $query = $query->where("deals.id_manager", $main->auth->getUserId()); break;
       }

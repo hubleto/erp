@@ -43,7 +43,9 @@ class Project extends \HubletoMain\Core\RecordManager
     // }
 
     $defaultFilters = $main->urlParamAsArray("defaultFilters");
-    if (isset($defaultFilters["fPhase"]) && $defaultFilters["fPhase"] > 0) $query = $query->where("{$this->table}.id_phase", $defaultFilters["fPhase"]);
+    if (isset($defaultFilters["fPhase"]) && count($defaultFilters["fPhase"]) > 0) {
+      $query = $query->whereIn("{$this->table}.id_phase", $defaultFilters["fPhase"]);
+    }
 
     return $query;
   }

@@ -21,15 +21,21 @@ class Loader extends \HubletoMain\Core\App
       '/^leads\/api\/move-to-archive\/?$/' => Controllers\Api\MoveToArchive::class,
       '/^leads\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
+      '/^settings\/lead-levels\/?$/' => Controllers\Levels::class,
       '/^settings\/lead-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
       '/^leads\/boards\/lead-warnings\/?$/' => Controllers\Boards\LeadWarnings::class,
     ]);
 
     $this->main->apps->community('Settings')->addSetting($this, [
-      'title' => $this->translate('Lead Tags'),
-      'icon' => 'fas fa-tags',
+      'title' => $this->translate('Lead Levels'),
+      'icon' => 'fas fa-layer',
       'url' => 'settings/lead-tags',
+    ]);
+    $this->main->apps->community('Settings')->addSetting($this, [
+      'title' => $this->translate('Lead Tags'),
+      'icon' => 'fas fa-levels',
+      'url' => 'settings/lead-levels',
     ]);
     $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Lead Lost Reasons'),
@@ -74,6 +80,7 @@ class Loader extends \HubletoMain\Core\App
   {
     if ($round == 1) {
       $mCampaign = new \HubletoApp\Community\Leads\Models\Campaign($this->main);
+      $mLevel = new \HubletoApp\Community\Leads\Models\Level($this->main);
       $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
       $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
       $mLeadTag = new \HubletoApp\Community\Leads\Models\Tag($this->main);
@@ -82,6 +89,7 @@ class Loader extends \HubletoMain\Core\App
       $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
       $mLostReasons = new \HubletoApp\Community\Leads\Models\LostReason($this->main);
 
+      $mLevel->dropTableIfExists()->install();
       $mLostReasons->dropTableIfExists()->install();
       $mCampaign->dropTableIfExists()->install();
       $mLead->dropTableIfExists()->install();
@@ -95,6 +103,12 @@ class Loader extends \HubletoMain\Core\App
       $mLeadTag->record->recordCreate([ 'name' => "Great opportunity", 'color' => '#4caf50' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Duplicate", 'color' => '#9e9e9e' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Needs attention", 'color' => '#795548' ]);
+
+      $mLevel->record->recordCreate([ 'name' => "Cold", 'color' => '#2196f3' ]);
+      $mLevel->record->recordCreate([ 'name' => "Warm", 'color' => '#4caf50' ]);
+      $mLevel->record->recordCreate([ 'name' => "Hot", 'color' => '#9e9e9e' ]);
+      $mLevel->record->recordCreate([ 'name' => "Marketing qualified", 'color' => '#795548' ]);
+      $mLevel->record->recordCreate([ 'name' => "Sales qualified", 'color' => '#795548' ]);
 
       $mLostReasons->record->recordCreate(["reason" => "Price"]);
       $mLostReasons->record->recordCreate(["reason" => "Solution"]);

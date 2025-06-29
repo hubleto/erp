@@ -3,6 +3,7 @@
 namespace HubletoApp\Community\OAuth;
 
 use League\OAuth2\Server\AuthorizationServer;
+use League\OAuth2\Server\Grant\PasswordGrant;
 use League\OAuth2\Server\Grant\AuthCodeGrant;
 
 class ServerController extends \HubletoMain\Core\Controllers\Controller
@@ -31,17 +32,20 @@ class ServerController extends \HubletoMain\Core\Controllers\Controller
       $publicKey // Used for validating JWT access tokens by resource servers
     );
 
+    // Enable the Resource Owner Password Credentials Grant
+    $passwordGrant = new PasswordGrant(
+      $userRepository,
+      $refreshTokenRepository // Pass null if you don't want refresh tokens for ROPC
+    );
+    // $passwordGrant->setAccessTokenTTL(new \DateInterval('PT1H')); // Access token will expire in 1 hour
+    $server->enableGrantType($passwordGrant);
+
     // Enable the Authorization Code Grant
     $authCodeGrant = new AuthCodeGrant(
       $authCodeRepository,
       $refreshTokenRepository,
       new \DateInterval('PT10M') // Authorization codes will expire in 10 minutes
     );
-
-    // PKCE is automatically enabled when a client provides code_challenge parameters.
-    // However, you can enforce PKCE for public clients:
-    // $authCodeGrant->setRequireCodeChallengeForPublicClients(true); // Recommended for security
-
     $server->enableGrantType($authCodeGrant);
 
     // Add the Refresh Token Grant (highly recommended with Authorization Code Grant)

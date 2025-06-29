@@ -338,7 +338,14 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         {this.inputWrapper('id_campaign', {readonly: R.is_archived})}
                       </div>
                     </div>
-                    {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
+                    <div className='flex gap-2'>
+                      <div className='w-full'>
+                        {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
+                      </div>
+                      <div className='w-full'>
+                        {this.inputWrapper('id_level', {readonly: R.is_archived})}
+                      </div>
+                    </div>
                     <FormInput title={"Customer"}>
                       <Lookup {...this.getInputProps('id_customer')}
                         model='HubletoApp/Community/Customers/Models/Customer'
@@ -584,8 +591,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       },
                     }}
                     readonly={true}
-                  >
-                  </TableLeadHistory>
+                  ></TableLeadHistory>
                 </div>
               </div>
             </TabPanel>

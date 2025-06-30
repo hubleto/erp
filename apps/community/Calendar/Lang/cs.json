@@ -18,7 +18,7 @@
         "Created by": "Vytvořeno",
         "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
     },
-    "Controllers\\Boards\\EventsForToday": {
+    "Controllers\\Boards\\Reminders": {
         "All-day": "Celý den",
         "Open event details": "Otevřené podrobnosti o události",
         "events for tomorrow": "Události pro zítřek",

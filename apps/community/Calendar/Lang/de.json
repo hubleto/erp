@@ -24,7 +24,7 @@
         "Created by": "Erstellt von",
         "Meeting minutes (link)": "Besprechungsminuten (Link)"
     },
-    "Controllers\\Boards\\EventsForToday": {
+    "Controllers\\Boards\\Reminders": {
         "All-day": "Ganztägig",
         "Open event details": "Offene Ereignisdetails",
         "events for tomorrow": "Ereignisse für morgen",

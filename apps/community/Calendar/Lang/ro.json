@@ -18,7 +18,7 @@
         "Meeting minutes (link)": "",
         "Created by": ""
     },
-    "Controllers\\Boards\\EventsForToday": {
+    "Controllers\\Boards\\Reminders": {
         "All-day": "",
         "Open event details": "",
         "events for tomorrow": "",

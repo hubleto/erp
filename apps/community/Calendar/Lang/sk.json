@@ -18,7 +18,7 @@
         "Created by": "Vytvoril",
         "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
     },
-    "Controllers\\Boards\\EventsForToday": {
+    "Controllers\\Boards\\Reminders": {
         "Open event details": "Zobraziť podrobnosti",
         "All-day": "Celodenná",
         "events for tomorrow": "Udalosti na zajtra",

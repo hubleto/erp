@@ -24,7 +24,7 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^calendar\/?$/' => Controllers\Calendar::class,
       '/^calendar\/settings\/?$/' => Controllers\Settings::class,
-      '/^calendar\/boards\/events-for-today\/?$/' => Controllers\Boards\EventsForToday::class,
+      '/^calendar\/boards\/reminders\/?$/' => Controllers\Boards\Reminders::class,
       '/^calendar\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
@@ -36,8 +36,8 @@ class Loader extends \HubletoMain\Core\App
     if ($dashboardsApp) {
       $dashboardsApp->addBoard(
         $this,
-        $this->translate('Events for today'),
-        'calendar/boards/events-for-today'
+        $this->translate('Reminders'),
+        'calendar/boards/reminders'
       );
     }
 

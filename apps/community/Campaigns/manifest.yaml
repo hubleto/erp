@@ -1,0 +1,16 @@
+namespace: HubletoApp\Community\Campaigns
+sidebarGroup: marketing
+rootUrlSlug: campaigns
+name: Campaigns
+icon: fas fa-signal
+author:
+  company: "wai.blue"
+highlight: Management of marketing campaigns
+tags:
+  - pipeline
+  - sales
+  - leads
+  - deals
+requires:
+  - HubletoApp\Community\Customers
+  - HubletoApp\Community\Calendar

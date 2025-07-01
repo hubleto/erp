@@ -16,6 +16,7 @@ use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Setting;
 use HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Campaigns\Models\Campaign;
 use HubletoMain\Core\Helper;
 
 class Lead extends \HubletoMain\Core\Models\Model
@@ -49,7 +50,7 @@ class Lead extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'title' => (new Varchar($this, $this->translate('Specific subject (if any)'))),
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(null),
@@ -150,6 +151,8 @@ class Lead extends \HubletoMain\Core\Models\Model
       ->value
     ;
     $description->defaultValues['id_currency'] = $defaultCurrency;
+
+    $description->defaultValues['id_campaign'] = $this->main->urlParamAsInteger('idCampaign');
 
     $description->ui['addButtonText'] = $this->translate('Add Lead');
 

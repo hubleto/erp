@@ -9,13 +9,13 @@ export default class TableCampaigns extends Table<TableCampaignsProps, TableCamp
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Leads/Models/Campaign',
+    model: 'HubletoApp/Community/Campaigns/Models/Campaign',
   }
 
   props: TableCampaignsProps;
   state: TableCampaignsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\TableCampaigns';
+  translationContext: string = 'HubletoApp\\Community\\Campaigns\\Loader::Components\\TableCampaigns';
 
   constructor(props: TableCampaignsProps) {
     super(props);

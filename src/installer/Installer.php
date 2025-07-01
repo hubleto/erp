@@ -71,6 +71,7 @@ class Installer {
     'sales' => [
       \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200, ],
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200, ],
+      \HubletoApp\Community\Campaigns\Loader::class => [ 'sidebarOrder' => 202, ],
       \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210, 'calendarColor' => '#C00994', ],
       \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220, ],
       \HubletoApp\Community\Deals\Loader::class => [

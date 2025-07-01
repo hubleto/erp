@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Models;
+namespace HubletoApp\Community\Campaigns\Models;
 
 use HubletoApp\Community\Settings\Models\User;
 
@@ -11,12 +11,11 @@ use ADIOS\Core\Db\Column\Lookup;
 
 class Campaign extends \HubletoMain\Core\Models\Model
 {
-  public string $table = 'lead_campaigns';
+  public string $table = 'campaigns';
   public string $recordManagerClass = RecordManagers\Campaign::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
-    'LEADS' => [ self::HAS_MANY, Lead::class, 'id_campaign', 'id' ],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
   ];
 
@@ -36,7 +35,7 @@ class Campaign extends \HubletoMain\Core\Models\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Add Lead Campaign';
+    $description->ui['addButtonText'] = 'Add Campaign';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

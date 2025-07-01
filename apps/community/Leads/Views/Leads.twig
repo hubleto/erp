@@ -1,6 +1,6 @@
 <h1 class="app-main-title">
   {{ translate('Leads') }}
-  <div class="app-main-title-buttons">
+  {# <div class="app-main-title-buttons">
     <a
       class="btn btn-add-outline"
       href="{{ config.accountUrl }}/leads/campaigns"
@@ -8,7 +8,7 @@
       <span class="icon"><i class="fas fa-cog"></i></span>
       <span class="text">{{ translate('Manage lead campaigns') }}</span>
     </a>
-  </div>
+  </div> #}
 </h1>
 
 <app-leads-table-leads string:tag="leads" int:record-id="{{ viewParams.recordId }}"></app-leads-table-leads>

@@ -6,6 +6,7 @@ use HubletoApp\Community\Customers\Models\RecordManagers\Customer;
 use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
 use HubletoApp\Community\Settings\Models\RecordManagers\Currency;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use HubletoApp\Community\Campaigns\Models\RecordManagers\Campaign;
 use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
 use HubletoApp\Community\Leads\Models\RecordManagers\LeadHistory;
 use HubletoApp\Community\Leads\Models\RecordManagers\LeadTag;
@@ -85,6 +86,10 @@ class Lead extends \HubletoMain\Core\RecordManager
 
     if ($main->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where("leads.id_customer", $main->urlParamAsInteger("idCustomer"));
+    }
+
+    if ($main->urlParamAsInteger("idCampaign") > 0) {
+      $query = $query->where("leads.id_campaign", $main->urlParamAsInteger("idCampaign"));
     }
 
     $defaultFilters = $main->urlParamAsArray("defaultFilters");

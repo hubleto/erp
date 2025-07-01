@@ -4,6 +4,7 @@ import FormLead, { FormLeadProps } from './FormLead';
 
 export interface TableLeadsProps extends HubletoTableProps {
   idCustomer?: number,
+  idCampaign?: number,
 }
 
 export interface TableLeadsState extends HubletoTableState {
@@ -40,6 +41,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
     return {
       ...super.getEndpointParams(),
       idCustomer: this.props.idCustomer,
+      idCampaign: this.props.idCampaign,
     }
   }
 
@@ -84,6 +86,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormLeadProps;
     formProps.customEndpointParams.idCustomer = this.props.idCustomer;
+    formProps.customEndpointParams.idCampaign = this.props.idCampaign;
     return <FormLead {...formProps}/>;
   }
 }

@@ -13,7 +13,6 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^leads(\/(?<recordId>\d+))?\/?$/' => Controllers\Leads::class,
-      '/^leads\/campaigns\/?$/' => Controllers\Campaigns::class,
       '/^leads\/settings\/?$/' => Controllers\Settings::class,
       '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
       // '/^leads\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
@@ -79,7 +78,6 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mCampaign = new \HubletoApp\Community\Leads\Models\Campaign($this->main);
       $mLevel = new \HubletoApp\Community\Leads\Models\Level($this->main);
       $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
       $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
@@ -91,7 +89,6 @@ class Loader extends \HubletoMain\Core\App
 
       $mLevel->dropTableIfExists()->install();
       $mLostReasons->dropTableIfExists()->install();
-      $mCampaign->dropTableIfExists()->install();
       $mLead->dropTableIfExists()->install();
       $mLeadHistory->dropTableIfExists()->install();
       $mLeadTag->dropTableIfExists()->install();

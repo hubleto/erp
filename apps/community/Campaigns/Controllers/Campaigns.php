@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers;
+namespace HubletoApp\Community\Campaigns\Controllers;
 
 class Campaigns extends \HubletoMain\Core\Controllers\Controller
 {
@@ -8,7 +8,6 @@ class Campaigns extends \HubletoMain\Core\Controllers\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'leads', 'content' => $this->translate('Leads') ],
       [ 'url' => 'campaigns', 'content' => $this->translate('Campaigns') ],
     ]);
   }
@@ -17,7 +16,7 @@ class Campaigns extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
 
-    $this->setView('@HubletoApp:Community:Leads/Campaigns.twig');
+    $this->setView('@HubletoApp:Community:Campaigns/Campaigns.twig');
   }
 
 }

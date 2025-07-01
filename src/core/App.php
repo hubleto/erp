@@ -318,6 +318,9 @@ class App {
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/GetList');
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Lookup');
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Save');
+      $mRolePermission->grantPermissionByString($role['id'], 'HubletoMain/Core/Api/GetTableColumnsCustomize');
+      $mRolePermission->grantPermissionByString($role['id'], 'HubletoMain/Core/Api/SaveTableColumnsCustomize');
+      $mRolePermission->grantPermissionByString($role['id'], 'HubletoMain/Core/Api/GetTemplateChartData');
     }
 
     $controllerClasses = $this->getAvailableControllerClasses();

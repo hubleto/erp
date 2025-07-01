@@ -21,6 +21,7 @@ import TableCellRendererHyperlink from "adios/TableCellRenderers/Hyperlink";
 import HubletoForm from "./core/Components/HubletoForm";
 import HubletoTable from "./core/Components/HubletoTable";
 import HubletoChart from "./core/Components/HubletoChart";
+import HubletoTableColumnCustomize from "./core/Components/HubletoTableColumnsCustomize";
 
 // Primereact
 import { Tooltip } from "primereact/tooltip";
@@ -53,6 +54,7 @@ class HubletoMain extends ADIOS {
     // Hubleto components
     this.registerReactComponent('Form', HubletoForm);
     this.registerReactComponent('Table', HubletoTable);
+    this.registerReactComponent('TableColumnsCustomize', HubletoTableColumnCustomize);
     this.registerReactComponent('Chart', HubletoChart);
 
     // Primereact

@@ -4,6 +4,7 @@ import HubletoForm, { HubletoFormProps, HubletoFormState } from './HubletoForm';
 import HubletoTableExportCsvForm from './HubletoTableExportCsvForm';
 import { getUrlParam } from 'adios/Helper';
 import ModalForm from "adios/ModalForm";
+import HubletoTableColumnsCustomize from './HubletoTableColumnsCustomize';
 
 export interface HubletoTableProps extends TableProps {
 }
@@ -103,7 +104,7 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
       return <></>;
     }
   }
-  
+
   renderForm(): JSX.Element {
     let formProps: HubletoFormProps = this.getFormProps();
     return <HubletoForm {...formProps}/>;
@@ -112,7 +113,7 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
   renderContent(): JSX.Element {
     return <>
       {super.renderContent()}
-      {this.state.showExportCsvScreen ? 
+      {this.state.showExportCsvScreen ?
         <ModalForm
           uid={this.props.uid + '_export_csv_modal'}
           isOpen={true}
@@ -131,9 +132,15 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
         <ModalForm
           uid={this.props.uid + '_columns_config_modal'}
           isOpen={true}
-          type='centered large'
+          type='right'
+          title='Customize Columns'
         >
-          ...
+          <HubletoTableColumnsCustomize
+            parentTable={this}
+            tableTag={this.props.tag}
+            tableModel={this.model}
+            onClose={() => this.setState({showColumnConfigScreen: false})}
+          ></HubletoTableColumnsCustomize>
         </ModalForm>
       : null}
     </>;

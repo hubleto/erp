@@ -103,13 +103,13 @@ class Deal extends \HubletoMain\Core\RecordManager
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
 
-    if ($main->urlParamAsInteger("id") <= 0) {
-      if ($main->urlParamAsBool("showArchive")) {
-        $query = $query->where("deals.is_archived", 1);
-      } else {
-        $query = $query->where("deals.is_archived", 0);
-      }
-    }
+    // if ($main->urlParamAsInteger("id") <= 0) {
+    //   if ($main->urlParamAsBool("showArchive")) {
+    //     $query = $query->where("deals.is_archived", 1);
+    //   } else {
+    //     $query = $query->where("deals.is_archived", 0);
+    //   }
+    // }
 
     if ($main->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where("deals.id_customer", $main->urlParamAsInteger("idCustomer"));
@@ -126,6 +126,11 @@ class Deal extends \HubletoMain\Core\RecordManager
         case 1: $query = $query->where("deals.id_owner", $main->auth->getUserId()); break;
         case 2: $query = $query->where("deals.id_manager", $main->auth->getUserId()); break;
       }
+    }
+
+    if (isset($defaultFilters["fDealArchive"])) {
+      if ($defaultFilters["fDealArchive"] == 1) $query = $query->where("deals.is_archived", 1);
+      else $query = $query->where("deals.is_archived", 0);
     }
 
     return $query;

@@ -164,7 +164,7 @@
               </div>
             </button>
           </li> #}
-          <li>
+          <li class="mr-2 hidden md:block">
             <button class="btn btn-transparent btn-dropdown">
               <div class="menu">
                 <div class="bg-white p-2 shadow-lg grid grid-cols-2" style="margin-left:-13.9em;margin-top:0.2em;width:16em;">
@@ -203,15 +203,19 @@
               </a>
             </li>
           {% endif %}
-          {% if viewParams.main.apps.isAppInstalled('HubletoApp\Community\Messages') %}
+          {% if viewParams.main.apps.isAppInstalled('HubletoApp\\Community\\Notifications') %}
+            {% set notificationsCount = viewParams.main.apps.community('Notifications').getNotificationsCount() %}
             <li class="mr-2 hidden md:block">
+              {% if notificationsCount > 0 %}
+                <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
+                  <div class="badge badge-small badge-yellow px-1">{{ notificationsCount }}</div>
+                </div>
+              {% endif %}
               <a
                 class="btn btn-transparent"
-                href="https://help.hubleto.com/{{ viewParams.contextHelpUrl }}"
-                target="_blank"
+                href="{{ config.accountUrl }}/notifications"
               >
-                <span class="icon text-blue-500"><i class="fas fa-life-ring"></i></span>
-                <span class="text">{{ translate('Messages') }}</span>
+                <span class="icon text-blue-500"><i class="fas fa-bell"></i></span>
               </a>
             </li>
           {% endif %}

@@ -1,0 +1,11 @@
+<h1 class="app-main-title">{{ translate('Notifications') }}</h1>
+
+<div class="flex gap-2 w-full">
+  {% include '@HubletoApp:Community:Notifications/FolderSelector.twig' %}
+  <div>
+    <div class="badge badge-extra-large ml-0">{{ viewParams.title }}</div>
+    <div class="mt-4">
+      <app-notifications-list-folder string:folder="{{ viewParams.folder }}"></app-notifications-list-folder>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,0 @@
-namespace: HubletoApp\Community\Messages
-sidebarGroup: communication
-rootUrlSlug: messages
-name: Messages
-icon: fas fa-envelope
-author:
-  name: "WAI.blue"
-  company: "wai.blue"
-highlight: Free messages app

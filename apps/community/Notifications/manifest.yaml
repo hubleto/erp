@@ -1,0 +1,9 @@
+namespace: HubletoApp\Community\Notifications
+sidebarGroup: communication
+rootUrlSlug: notifications
+name: Notifications
+icon: fas fa-bell
+author:
+  name: "WAI.blue"
+  company: "wai.blue"
+highlight: Internal team notifications

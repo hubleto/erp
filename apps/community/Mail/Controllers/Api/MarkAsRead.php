@@ -10,7 +10,7 @@ class MarkAsRead extends \HubletoMain\Core\Controllers\Controller {
   {
     $idMail = $this->main->urlParamAsInteger('idMail');
     $mMail = new \HubletoApp\Community\Mail\Models\Mail($this->main);
-    $mMail->record->find($idMail)->update(['read' => date('Y-m-d H:i:s')]);
+    $mMail->record->find($idMail)->update(['datetime_read' => date('Y-m-d H:i:s')]);
     return ['success' => true];
   }
 

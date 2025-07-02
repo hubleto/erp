@@ -79,7 +79,7 @@ class Import extends \HubletoMain\Core\Controllers\Controller
                 "first_name" => $firstName,
                 "middle_name" => $middleName,
                 "last_name" => $lastName,
-                "is_active" => true,
+                "is_valid" => true,
               ])['id'];
             }
             $log[] = "  Added contact: `{$firstName}, {$middleName}, {$lastName}`.";

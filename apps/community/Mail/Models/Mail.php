@@ -28,9 +28,9 @@ class Mail extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReadonly(),
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
-      'created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
-      'sent' => (new DateTime($this, $this->translate('Sent')))->setReadonly(),
-      'read' => (new DateTime($this, $this->translate('Read'))),
+      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
+      'datetime_sent' => (new DateTime($this, $this->translate('Sent')))->setReadonly(),
+      'datetime_read' => (new DateTime($this, $this->translate('Read'))),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
       'from' => (new Varchar($this, $this->translate('From')))->setRequired()->setReadonly()->setDefaultValue($user['email'] ?? ''),
       'to' => (new Varchar($this, $this->translate('To')))->setRequired(),

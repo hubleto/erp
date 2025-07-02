@@ -71,8 +71,8 @@ export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailSt
           {/* {this.inputWrapper('id_owner')} */}
           {this.inputWrapper('from')}
           {this.inputWrapper('priority')}
-          {this.inputWrapper('created')}
-          {this.inputWrapper('sent')}
+          {this.inputWrapper('datetime_created')}
+          {this.inputWrapper('datetime_sent')}
           {this.inputWrapper('color')}
           {this.inputWrapper('is_draft')}
           {this.inputWrapper('is_template')}

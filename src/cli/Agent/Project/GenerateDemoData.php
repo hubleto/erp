@@ -387,7 +387,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "last_name" => $contact[1],
         "title_after" => $titlesAfter[rand(0, 2)],
         "is_primary" => true,
-        "is_active" => true,
+        "is_valid" => true,
         "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
       ])['id'];
 

@@ -36,7 +36,7 @@ class Loader extends \HubletoMain\Core\App
     $mNotification = new \HubletoApp\Community\Notifications\Models\Notification($this->main);
     return $mNotification->record->prepareReadQuery()
       ->where('id_to', $this->main->auth->getUserId())
-      ->whereNull('read')
+      ->whereNull('datetime_read')
       ->count()
     ;
   }
@@ -60,7 +60,7 @@ class Loader extends \HubletoMain\Core\App
         'priority' => $priority,
         'category' => $category,
         'tags' => json_encode($tags),
-        'sent' => date('Y-m-d H:i:s'),
+        'datetime_sent' => date('Y-m-d H:i:s'),
         'id_from' => $idUser,
         'id_to' => $idTo,
         'subject' => $subject,

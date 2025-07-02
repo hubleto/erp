@@ -35,7 +35,7 @@ class Mail extends \HubletoMain\Core\RecordManager
         });
       break;
       case 'outbox':
-        $query->where('is_draft', false)->whereNull('sent');
+        $query->where('is_draft', false)->whereNull('datetime_sent');
       break;
       case 'drafts':
         $query->where('is_draft', true);

@@ -10,7 +10,7 @@ class MarkAsRead extends \HubletoMain\Core\Controllers\Controller {
   {
     $idNotification = $this->main->urlParamAsInteger('idNotification');
     $mNotification = new \HubletoApp\Community\Notifications\Models\Notification($this->main);
-    $mNotification->record->find($idNotification)->update(['read' => date('Y-m-d H:i:s')]);
+    $mNotification->record->find($idNotification)->update(['datetime_read' => date('Y-m-d H:i:s')]);
     return ['success' => true];
   }
 

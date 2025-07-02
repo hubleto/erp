@@ -54,8 +54,8 @@ class Notification extends \HubletoMain\Core\Models\Model
       'body' => (new Text($this, $this->translate('Body')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color'))),
       'tags' => (new Json($this, $this->translate('Tags'))),
-      'sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
-      'read' => (new DateTime($this, $this->translate('Read'))),
+      'datetime_sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
+      'datetime_read' => (new DateTime($this, $this->translate('Read'))),
     ]);
   }
 

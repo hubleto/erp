@@ -46,7 +46,7 @@ export default class FormNotification<P, S> extends HubletoForm<FormNotification
           {this.inputWrapper('priority')}
           {this.inputWrapper('category')}
           {this.inputWrapper('tags')}
-          {this.inputWrapper('sent')}
+          {this.inputWrapper('datetime_sent')}
           {this.inputWrapper('color')}
         </div>
       </div>

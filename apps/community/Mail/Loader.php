@@ -47,7 +47,7 @@ class Loader extends \HubletoMain\Core\App
         $q->orWhere('midx.id_cc', $this->main->auth->getUserId());
         $q->orWhere('midx.id_bcc', $this->main->auth->getUserId());
       })
-      ->whereNull('read')
+      ->whereNull('datetime_read')
       ->count()
     ;
   }

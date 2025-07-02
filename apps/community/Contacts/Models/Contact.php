@@ -49,7 +49,7 @@ class Contact extends \HubletoMain\Core\Models\Model
       'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0),
       'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
-      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(1),
+      'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1),
       'note' => (new Text($this, $this->translate('Notes'))),
     ], parent::describeColumns());
   }
@@ -75,10 +75,10 @@ class Contact extends \HubletoMain\Core\Models\Model
     $tempColumn = $description->columns['date_created'];
     unset($description->columns['date_created']);
     $description->columns['date_created'] = $tempColumn;
-    $tempColumn = $description->columns['is_active'];
-    unset($description->columns['is_active']);
+    $tempColumn = $description->columns['is_valid'];
+    unset($description->columns['is_valid']);
     $description->columns['tags'] = ["title" => "Tags"];
-    $description->columns['is_active'] = $tempColumn;
+    $description->columns['is_valid'] = $tempColumn;
 
     unset($description->columns['note']);
     unset($description->columns['is_primary']);

@@ -46,6 +46,9 @@ class Loader extends \HubletoMain\Core\App
       (new Models\Project($this->main))->dropTableIfExists()->install();
     }
     if ($round == 2) {
+
+    }
+    if ($round == 3) {
       $mPhase = new Models\Phase($this->main);
       $mPhase->record->recordCreate(['name' => 'Early preparation', 'order' => 1, 'color' => '#344556']);
       $mPhase->record->recordCreate(['name' => 'Advanced preparation', 'order' => 2, 'color' => '#6830a5']);
@@ -54,9 +57,6 @@ class Loader extends \HubletoMain\Core\App
       $mPhase->record->recordCreate(['name' => 'Advanced implementation', 'order' => 5, 'color' => '#a38f9a']);
       $mPhase->record->recordCreate(['name' => 'Final implementation', 'order' => 6, 'color' => '#44879a']);
       $mPhase->record->recordCreate(['name' => 'Delivery', 'order' => 7, 'color' => '#74809a']);
-    }
-    if ($round == 3) {
-      // do something in the 3rd round, if required
     }
   }
 

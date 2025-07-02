@@ -8,6 +8,7 @@ use ADIOS\Core\Db\Column\Varchar;
 use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\DateTime;
 use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Boolean;
 
 use HubletoApp\Community\Settings\Models\User;
 
@@ -27,7 +28,8 @@ class Mail extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReadonly(),
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
-      'sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
+      'created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
+      'sent' => (new DateTime($this, $this->translate('Sent')))->setReadonly(),
       'read' => (new DateTime($this, $this->translate('Read'))),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
       'from' => (new Varchar($this, $this->translate('From')))->setRequired()->setReadonly()->setDefaultValue($user['email'] ?? ''),
@@ -36,6 +38,8 @@ class Mail extends \HubletoMain\Core\Models\Model
       'bcc' => (new Varchar($this, $this->translate('Bcc'))),
       'body' => (new Text($this, $this->translate('Body')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color'))),
+      'is_draft' => (new Boolean($this, $this->translate('Draft')))->setDefaultValue(true),
+      'is_template' => (new Boolean($this, $this->translate('Template'))),
     ]);
   }
 
@@ -46,7 +50,7 @@ class Mail extends \HubletoMain\Core\Models\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Send message';
+    $description->ui['addButtonText'] = 'New message';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;
@@ -80,6 +84,8 @@ class Mail extends \HubletoMain\Core\Models\Model
 
     $description->permissions['canDelete'] = false;
     $description->permissions['canUpdate'] = false;
+    $description->ui['addButtonText'] = 'Save draft';
+    $description->ui['saveButtonText'] = 'Save draft';
 
     return $description;
   }

@@ -17,9 +17,12 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^mail\/?$/' => Controllers\Mail::class,
+      '/^mail\/?$/' => Controllers\Mails::class,
       '/^mail\/inbox\/?$/' => Controllers\Inbox::class,
       '/^mail\/sent\/?$/' => Controllers\Sent::class,
+      '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
+      '/^mail\/outbox\/?$/' => Controllers\Outbox::class,
+      '/^mail\/templates\/?$/' => Controllers\Templates::class,
       '/^mail\/all\/?$/' => Controllers\All::class,
       '/^mail\/settings\/?$/' => Controllers\Settings::class,
       '/^mail\/api\/mark-as-read\/?$/' => Controllers\Api\MarkAsRead::class,

@@ -3,16 +3,14 @@ import request from "adios/Request";
 import Table, { TableProps, TableState } from 'adios/Table';
 import Form, { FormProps } from 'adios/Form';
 import FormNotification from './FormNotification';
-import { ProgressBar } from 'primereact/progressbar';
-import ModalForm from "adios/ModalForm";
 
-interface ListFolderProps extends TableProps {
+interface TableNotificationsProps extends TableProps {
   folder?: string,
 }
-interface ListFolderState extends TableState {
+interface TableNotificationsState extends TableState {
 }
 
-export default class ListFolder extends Table<ListFolderProps, ListFolderState> {
+export default class TableNotifications extends Table<TableNotificationsProps, TableNotificationsState> {
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
@@ -23,12 +21,12 @@ export default class ListFolder extends Table<ListFolderProps, ListFolderState> 
     model: 'HubletoApp/Community/Notifications/Models/Notification',
   }
 
-  props: ListFolderProps;
-  state: ListFolderState;
+  props: TableNotificationsProps;
+  state: TableNotificationsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Notifications\\Loader::Components\\ListFolder';
+  translationContext: string = 'HubletoApp\\Community\\Notifications\\Loader::Components\\TableNotifications';
 
-  constructor(props: ListFolderProps) {
+  constructor(props: TableNotificationsProps) {
     super(props);
     this.state = {
       ...this.getStateFromProps(props),

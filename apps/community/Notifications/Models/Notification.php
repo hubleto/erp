@@ -48,14 +48,14 @@ class Notification extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
       'category' => (new Integer($this, $this->translate('Category')))->setRequired()->setEnumValues(self::getCategories()),
-      'sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
-      'read' => (new DateTime($this, $this->translate('Read'))),
       'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setRequired(),
       'id_to' => (new Lookup($this, $this->translate('To'), User::class))->setRequired(),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
       'body' => (new Text($this, $this->translate('Body')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color'))),
       'tags' => (new Json($this, $this->translate('Tags'))),
+      'sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
+      'read' => (new DateTime($this, $this->translate('Read'))),
     ]);
   }
 
@@ -67,9 +67,9 @@ class Notification extends \HubletoMain\Core\Models\Model
 
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = 'Send message';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
+    $description->ui['showHeader'] = false;
+    $description->ui['showFulltextSearch'] = false;
+    $description->ui['showColumnSearch'] = false;
     $description->ui['showFooter'] = false;
 
     unset($description->columns['body']);

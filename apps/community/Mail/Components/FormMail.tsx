@@ -29,7 +29,31 @@ export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailSt
   renderTitle(): JSX.Element {
     return <>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
-      <small>Mail</small>
+      <small>Mail {this.state.record.is_template ? 'Template' : null}</small>
+    </>;
+  }
+
+  sendMail() {
+  }
+
+  renderSaveButton(): JSX.Element {
+    return <>
+      <button onClick={() => this.saveRecord()} className="btn btn-add-outline">
+        <span className="icon"><i className={"fa-solid fa-" + (this.state.record.is_template ? 'file-lines' : 'file-pen')}></i></span>
+        <span className="text">{this.translate(this.state.record.is_template ? 'Save template' : 'Save draft')}</span>
+      </button>
+    </>;
+  }
+
+  renderHeaderLeft(): JSX.Element {
+    return <>
+      {super.renderHeaderLeft()}
+      {this.state.record.is_template ? null :
+        <button onClick={() => this.sendMail()} className="btn btn-add">
+          <span className="icon"><i className="fas fa-paper-plane"></i></span>
+          <span className="text">{this.translate('Send')}</span>
+        </button>
+      }
     </>;
   }
 
@@ -47,8 +71,11 @@ export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailSt
           {/* {this.inputWrapper('id_owner')} */}
           {this.inputWrapper('from')}
           {this.inputWrapper('priority')}
+          {this.inputWrapper('created')}
           {this.inputWrapper('sent')}
           {this.inputWrapper('color')}
+          {this.inputWrapper('is_draft')}
+          {this.inputWrapper('is_template')}
         </div>
       </div>
     </>;

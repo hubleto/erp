@@ -34,6 +34,15 @@ class Mail extends \HubletoMain\Core\RecordManager
           $q->orWhere('midx.id_bcc', $idUser);
         });
       break;
+      case 'outbox':
+        $query->where('is_draft', false)->whereNull('sent');
+      break;
+      case 'drafts':
+        $query->where('is_draft', true);
+      break;
+      case 'templates':
+        $query->where('is_template', true);
+      break;
       case 'sent':
         $query->where('midx.id_from', $idUser);
       break;
@@ -43,23 +52,4 @@ class Mail extends \HubletoMain\Core\RecordManager
     return $query;
   }
 
-  public function recordCreate(array $record): array
-  {
-    $main = \ADIOS\Core\Helper::getGlobalApp();
-    $mailApp = $main->apps->community('Mail');
-    
-    $message = $mailApp->send(
-      $record['to'] ?? '',
-      $record['cc'] ?? '',
-      $record['bcc'] ?? '',
-      $record['subject'] ?? '',
-      $record['body'] ?? '',
-      $record['color'] ?? '',
-      (int) ($record['priority'] ?? 0),
-    );
-
-    $record['id'] = $message['id'] ?? 0;
-
-    return $record;
-  }
 }

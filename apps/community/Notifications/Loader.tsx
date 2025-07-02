@@ -1,3 +1,3 @@
-import ListFolder from "./Components/ListFolder"
+import TableNotifications from "./Components/TableNotifications"
 
-globalThis.main.registerReactComponent('NotificationsListFolder', ListFolder);
+globalThis.main.registerReactComponent('NotificationsTableNotifications', TableNotifications);

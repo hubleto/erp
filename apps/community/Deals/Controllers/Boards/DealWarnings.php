@@ -22,7 +22,7 @@ class DealWarnings extends \HubletoMain\Core\Controllers\Controller {
       ->toArray()
     ;
 
-    // pending-deals-without-future-plan
+    // open-deals-without-future-plan
     $items = [];
 
     foreach ($myDeals as $deal) {
@@ -30,14 +30,14 @@ class DealWarnings extends \HubletoMain\Core\Controllers\Controller {
       foreach ($deal['ACTIVITIES'] as $activity) {
         if (strtotime($activity['date_start']) > time()) $futureActivities++;
       }
-      if ($deal['is_work_in_progress'] && $futureActivities == 0) {
+      if (!$deal['is_closed'] && $futureActivities == 0) {
         $items[] = $deal;
         $warningsTotal++;
       }
     }
 
-    $warnings['pending-deals-without-future-plan'] = [
-      "title" => $this->translate('Pending deals without future plan'),
+    $warnings['open-deals-without-future-plan'] = [
+      "title" => $this->translate('Open deals without future plan'),
       "items" => $items,
     ];
     //

@@ -128,6 +128,11 @@ class Deal extends \HubletoMain\Core\RecordManager
       }
     }
 
+    if (isset($defaultFilters["fDealClosed"])) {
+      if ($defaultFilters["fDealClosed"] == 1) $query = $query->where("deals.is_closed", true);
+      else $query = $query->where("deals.is_closed", false);
+    }
+
     if (isset($defaultFilters["fDealArchive"])) {
       if ($defaultFilters["fDealArchive"] == 1) $query = $query->where("deals.is_archived", 1);
       else $query = $query->where("deals.is_archived", 0);

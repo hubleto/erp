@@ -353,7 +353,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     </div>;
 
     const inputsColumnLeft = <>
-      {this.inputWrapper('is_work_in_progress', {readonly: R.is_archived})}
       {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
       {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
       <FormInput title={"Customer"} required={true}>
@@ -406,6 +405,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         {this.inputWrapper('id_currency')}
       </div>
       {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+      {this.inputWrapper('is_closed', {readonly: R.is_archived})}
       {showAdditional && R.id_lead != null ?
         <div className='mt-2'>
           <a className='btn btn-primary self-center' href={`${globalThis.main.config.url}/leads/${R.id_lead}`}>

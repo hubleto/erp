@@ -46,7 +46,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     7 => "Other",
   ];
 
-  const ENUM_DEAL_RESULTS = [ self::RESULT_UNKNOWN => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost" ];
+  const ENUM_DEAL_RESULTS = [ self::RESULT_UNKNOWN => "Unknown", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost" ];
   const ENUM_BUSINESS_TYPES = [ self::BUSINESS_TYPE_NEW => "New", self::BUSINESS_TYPE_EXISTING => "Existing" ];
 
   public array $relations = [
@@ -69,7 +69,6 @@ class Deal extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'is_work_in_progress' => (new Boolean($this, $this->translate('Work in progress')))->setDefaultValue(true),
       'identifier' => (new Varchar($this, $this->translate('Deal Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))
@@ -86,6 +85,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(self::ENUM_SOURCE_CHANNELS),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(true),
       'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(false),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues(self::ENUM_DEAL_RESULTS)
@@ -147,7 +147,8 @@ class Deal extends \HubletoMain\Core\Models\Model
       'fDealResult' => [ 'title' => 'Result', 'type' => 'multipleSelectButtons', 'options' =>self::ENUM_DEAL_RESULTS ],
       'fDealBusinessType' => [ 'title' => 'Business type', 'options' => array_merge([ 0 => 'All'], self::ENUM_BUSINESS_TYPES) ],
       'fDealOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
-      'fDealArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+      'fDealClosed' => [ 'title' => 'Open / Closed', 'options' => [ 0 => 'Open', 1 => 'Closed' ] ],
+      'fDealArchive' => [ 'title' => 'Archived', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
     ];
 
     unset($description->columns['note']);

@@ -10,6 +10,7 @@ use ADIOS\Core\Db\Column\Decimal;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Text;
 use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Virtual;
 use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Deals\Models\Deal;
@@ -53,7 +54,13 @@ class Lead extends \HubletoMain\Core\Models\Model
       'title' => (new Varchar($this, $this->translate('Specific subject (if any)'))),
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(null),
+      'virt_email' => (new Virtual($this, $this->translate('Email')))->setProperty('defaultVisibility', true)
+        ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1")
+      ,
+      'virt_phone_number' => (new Virtual($this, $this->translate('Phone number')))->setProperty('defaultVisibility', true)
+        ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'number' LIMIT 1")
+      ,
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(null),
       'id_level' => (new Lookup($this, $this->translate('Level'), Level::class)),
       'status' => (new Integer($this, $this->translate('Status')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this::STATUS_NEW)->setEnumValues(
         [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]

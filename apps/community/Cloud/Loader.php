@@ -115,26 +115,15 @@ class Loader extends \HubletoMain\Core\App
 
   public function getFreeTrialInfo(): array
   {
-    $isTrialPeriod = false;
     $trialPeriodExpiresIn = 0;
 
     $premiumAccountSince = $this->configAsString('premiumAccountSince');
     $freeTrialPeriodUntil = $this->configAsString('freeTrialPeriodUntil');
-
-    // if (empty($premiumAccountSince)) {
-    // } else {
-    //   $mPayment = new Models\Payment($this->main);
-    //   $alreadyMadePayment = $mPayment->record->count() > 0;
-    //   if (!$alreadyMadePayment) {
-    //     $daysOfFreeTrial = ceil((time() - strtotime($premiumAccountSince))/3600/24);
-    //     $trialPeriodExpiresIn = 30 - $daysOfFreeTrial;
-    //     $isTrialPeriod = $trialPeriodExpiresIn > 0;
-    //   }
-    // }
+    $isTrialPeriod = $this->configAsBool('isTrialPeriod');
 
     if (!empty($premiumAccountSince)) {
       $trialPeriodExpiresIn = floor((strtotime($freeTrialPeriodUntil) - time())/3600/24);
-      $isTrialPeriod = $trialPeriodExpiresIn > 0;
+      // $isTrialPeriod = $trialPeriodExpiresIn > 0;
     }
 
     return [
@@ -269,6 +258,15 @@ class Loader extends \HubletoMain\Core\App
 
   }
 
+  public function activatePremiumAccount(): void
+  {
+    $this->saveConfig('premiumAccountSince', date('Y-m-d H:i:s'));
+    $this->saveConfig('subscriptionRenewalActive', '1');
+    $this->saveConfig('subscriptionActiveUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
+    $this->saveConfig('isTrialPeriod', '1');
+    $this->saveConfig('freeTrialPeriodUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
+  }
+
   public function premiumAccountActivated(): bool
   {
     $activated = !empty($this->configAsString('premiumAccountSince'));
@@ -277,7 +275,7 @@ class Loader extends \HubletoMain\Core\App
       $activated = $premiumInfo['activeUsers'] > 1 || $premiumInfo['paidApps'] > 0;
 
       if ($activated) {
-        $this->saveConfig('premiumAccountSince', date('Y-m-d H:i:s'));
+        $this->activatePremiumAccount();
       }
     }
 

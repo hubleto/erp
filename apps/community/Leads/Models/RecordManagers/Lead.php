@@ -103,6 +103,11 @@ class Lead extends \HubletoMain\Core\RecordManager
       }
     }
 
+
+    // $query = $query->selectRaw("
+    //   (Select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1) virt_email
+    // ");
+
     return $query;
   }
 

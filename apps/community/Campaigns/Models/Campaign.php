@@ -8,6 +8,7 @@ use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\Varchar;
 use ADIOS\Core\Db\Column\Text;
 use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\DateTime;
 
 class Campaign extends \HubletoMain\Core\Models\Model
 {
@@ -27,6 +28,7 @@ class Campaign extends \HubletoMain\Core\Models\Model
       'goal' => (new Text($this, $this->translate('Goal')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color'))),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->main->auth->getUserId()),
+      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date('Y-m-d H:i:s')),
     ]);
   }
 

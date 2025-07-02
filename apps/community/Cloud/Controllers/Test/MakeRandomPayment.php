@@ -8,14 +8,10 @@ class MakeRandomPayment extends \HubletoMain\Core\Controllers\Controller {
   {
     parent::prepareView();
 
-    $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
     $amount = rand(15, 20) / 2;
 
-    $mPayment->record->recordCreate([
-      'datetime_charged' => date('Y-m-d H:i:s'),
-      'full_amount' => $amount,
-      'notes' => 'TEST: random payment',
-    ]);
+    $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
+    $mPayment->addPayment(date('Y-m-d H:i:s'), $amount, 'TEST: random payment');
 
     $this->viewParams['amount'] = $amount;
     $this->hubletoApp->recalculateCredit();

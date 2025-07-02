@@ -46,6 +46,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps,Fo
       {this.inputWrapper('target_audience')}
       {this.inputWrapper('goal')}
       {this.inputWrapper('color')}
+      {this.inputWrapper('datetime_created')}
       <div className="card mt-2">
         <div className="card-header">Leads</div>
         <div className="card-body">

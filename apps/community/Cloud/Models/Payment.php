@@ -35,6 +35,16 @@ class Payment extends \HubletoMain\Core\Models\Model
   public string $table = 'cloud_payments';
   public string $recordManagerClass = RecordManagers\Payment::class;
 
+  public function addPayment(string $datetime, float $amount, string $notes): void
+  {
+    $this->record->recordCreate([
+      'datetime_charged' => $datetime,
+      'full_amount' => $amount,
+      'notes' => $notes,
+    ]);
+
+  }
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [

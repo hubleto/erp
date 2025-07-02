@@ -493,7 +493,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                     descriptionSource="props"
                     description={{
                       ui: {
-                        showFulltextSearch: false,
+                        showFulltextSearch: true,
                       },
                       permissions: this.props.tableContactsDescription?.permissions ?? {},
                       columns: {
@@ -531,9 +531,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               </div>
             : null}
           </div>
-          <div className="card mt-2"><div className="card-header">Custom data</div><div className="card-body">
-            {showAdditional && customInputs.length > 0 ? customInputs : null}
-          </div></div>
+          {showAdditional && customInputs.length > 0 ?
+            <div className="card mt-2"><div className="card-header">Custom data</div><div className="card-body">
+              {customInputs}
+            </div></div>
+          : <></>}
         </TabPanel>
         {showAdditional ? (
           <TabPanel header={this.translate('Calendar')}>

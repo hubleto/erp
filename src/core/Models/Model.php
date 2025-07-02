@@ -87,9 +87,9 @@ class Model extends \ADIOS\Core\Model {
       $allColumnsConfig = @json_decode($this->getConfigAsString('tableColumns'), true);
 
       if (isset($allColumnsConfig[$tag])) {
-        foreach ($allColumnsConfig[$tag] as $colName => $colConfig) {
+        foreach ($allColumnsConfig[$tag] as $colName => $is_hidden) {
           if (isset($description->columns[$colName])) {
-            if (!($colConfig['visible'] ?? false)) {
+            if (($is_hidden ?? false)) {
               unset($description->columns[$colName]);
             }
           }

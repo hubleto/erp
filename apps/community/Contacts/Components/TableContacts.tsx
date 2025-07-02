@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from 'adios/Table';
+import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src/core/Components/HubletoTable';
 import FormContact, { FormContactProps, FormContactState } from './FormContact';
 import { getUrlParam } from 'adios/Helper';
 import request from 'adios/Request';
 import { ProgressBar } from 'primereact/progressbar';
 
-interface TableContactsProps extends TableProps {}
+interface TableContactsProps extends HubletoTableProps {}
 
-interface TableContactsState extends TableState {
+interface TableContactsState extends HubletoTableState {
   tableValuesDescription?: any,
 }
 
-export default class TableContacts extends Table<TableContactsProps, TableContactsState> {
+export default class TableContacts extends HubletoTable<TableContactsProps, TableContactsState> {
   static defaultProps = {
-    ...Table.defaultProps,
+    ...HubletoTable.defaultProps,
     orderBy: {
       field: "id",
       direction: "desc"

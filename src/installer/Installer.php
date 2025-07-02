@@ -49,7 +49,8 @@ class Installer {
       \HubletoApp\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997, ],
       \HubletoApp\Community\Desktop\Loader::class => [ ],
       \HubletoApp\Community\Usage\Loader::class => [ ],
-      \HubletoApp\Community\Messages\Loader::class => [ 'sidebarOrder' => 125, ],
+      \HubletoApp\Community\Mail\Loader::class => [ 'sidebarOrder' => 125, ],
+      \HubletoApp\Community\Notifications\Loader::class => [ 'sidebarOrder' => 125, ],
       \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
       \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 101, 'calendarColor' => '#3DC266' ],
       \HubletoApp\Community\Contacts\Loader::class => [ 'sidebarOrder' => 102, ],
@@ -71,6 +72,7 @@ class Installer {
     'sales' => [
       \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200, ],
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200, ],
+      \HubletoApp\Community\Campaigns\Loader::class => [ 'sidebarOrder' => 202, ],
       \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210, 'calendarColor' => '#C00994', ],
       \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220, ],
       \HubletoApp\Community\Deals\Loader::class => [

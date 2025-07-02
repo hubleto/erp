@@ -17,6 +17,7 @@ class Router extends \ADIOS\Core\Router {
       '/^api\/log-javascript-error\/?$/' => LogJavascriptError::class,
       '/^api\/dictionary\/?$/' => Dictionary::class,
       '/^api\/get-chart-data\/?$/' =>  \HubletoMain\Core\Api\GetTemplateChartData::class,
+      '/^api\/table-export-csv\/?$/' =>  \HubletoMain\Core\Api\TableExportCsv::class,
       '/^reset-password$/' => ControllerResetPassword::class,
       '/^forgot-password$/' => ControllerForgotPassword::class,
     ]);

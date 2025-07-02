@@ -122,22 +122,21 @@ class Model extends \ADIOS\Core\Model {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
     $user = $this->main->auth->getUser();
-
     if (isset($savedRecord['id_owner']) && $savedRecord['id_owner'] != $user['id']) {
-      $messagesApp = $this->main->apps->community('Messages');
+      $notificationsApp = $this->main->apps->community('Notifications');
       $diff = $this->diffRecords($originalRecord, $savedRecord);
 
-      if ($messagesApp && count($diff) > 0) {
+      if ($notificationsApp && count($diff) > 0) {
 
         $body =
           'User ' . $user['email'] . ' updated ' . $this->shortName . ":\n"
           . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
         ;
 
-        $messagesApp->send(
+        $notificationsApp->send(
+          \HubletoMain::NOTIFICATION_CATEGORY_RECORD_UPDATED, // category
+          [$this->shortName, $this->fullName],
           (int) $savedRecord['id_owner'], // to
-          '', // cc
-          '', // bcc
           $this->shortName . ' updated', // subject
           $body
         );

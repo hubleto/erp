@@ -332,35 +332,12 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   <div className='grow'>
                     <div className='flex gap-2'>
                       <div className='w-full'>
-                        {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
-                      </div>
-                      <div className='w-full'>
                         {this.inputWrapper('id_campaign', {readonly: R.is_archived})}
                       </div>
-                    </div>
-                    <div className='flex gap-2'>
                       <div className='w-full'>
-                        {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
-                      </div>
-                      <div className='w-full'>
-                        {this.inputWrapper('id_level', {readonly: R.is_archived})}
+                        {this.inputWrapper('identifier', {readonly: R.is_archived})}
                       </div>
                     </div>
-                    <FormInput title={"Customer"}>
-                      <Lookup {...this.getInputProps('id_customer')}
-                        model='HubletoApp/Community/Customers/Models/Customer'
-                        urlAdd='customers/add'
-                        readonly={R.is_archived}
-                        value={R.id_customer}
-                        onChange={(input: any, value: any) => {
-                          this.updateRecord({ id_customer: value, id_contact: null });
-                          if (R.id_customer == 0) {
-                            R.id_customer = null;
-                            this.setState({record: R});
-                          }
-                        }}
-                      ></Lookup>
-                    </FormInput>
                     <FormInput title={"Contact"} required={true}>
                       <Lookup {...this.getInputProps('id_contact')}
                         model='HubletoApp/Community/Contacts/Models/Contact'
@@ -382,15 +359,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         return <div key={key}>{item.value}</div>;
                       })}
                     </div> : null}
-                    <div className='flex flex-row *:w-1/2'>
-                      {this.inputWrapper('price', {
-                        cssClass: 'text-2xl',
-                        readonly: R.is_archived ? true : false,
-                      })}
-                      {this.inputWrapper('id_currency')}
-                    </div>
+                    {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
+                    {this.inputWrapper('id_level', {readonly: R.is_archived})}
                     {this.inputWrapper('status', {readonly: R.is_archived, onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})}
-                    {this.inputWrapper('score', {readonly: R.is_archived})}
+                    {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
                     {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
                     {showAdditional ?
                       <div className='w-full mt-2 gap-2 flex'>
@@ -415,7 +387,11 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   </div>
                   <div className='border-l border-gray-200'></div>
                   <div className='grow'>
-                    {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+                    <div className='flex flex-row *:w-1/2'>
+                      {this.inputWrapper('price', { cssClass: 'text-2xl', readonly: R.is_archived ? true : false })}
+                      {this.inputWrapper('id_currency')}
+                    </div>
+                    {this.inputWrapper('score', {readonly: R.is_archived})}
                     {this.inputWrapper('id_owner', {readonly: R.is_archived})}
                     {this.inputWrapper('id_manager', {readonly: R.is_archived})}
                     {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
@@ -433,6 +409,21 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                           this.setState({record: R});
                         }}
                       ></InputTags2>
+                    </FormInput>
+                    <FormInput title={"Customer"}>
+                      <Lookup {...this.getInputProps('id_customer')}
+                        model='HubletoApp/Community/Customers/Models/Customer'
+                        urlAdd='customers/add'
+                        readonly={R.is_archived}
+                        value={R.id_customer}
+                        onChange={(input: any, value: any) => {
+                          this.updateRecord({ id_customer: value, id_contact: null });
+                          if (R.id_customer == 0) {
+                            R.id_customer = null;
+                            this.setState({record: R});
+                          }
+                        }}
+                      ></Lookup>
                     </FormInput>
                     {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
                     {showAdditional ? <>

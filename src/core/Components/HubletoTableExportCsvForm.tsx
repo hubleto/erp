@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Form, { FormDescription, FormProps, FormState } from "adios/Form";
+import queryString from 'query-string';
 
 export interface HubletoTableExportCsvFormProps extends FormProps {}
 export interface HubletoTableExportCsvFormState extends FormState {}
@@ -64,7 +65,7 @@ export default class HubletoTableExportCsvForm<P, S> extends Form<HubletoTableEx
       </table>
       <a
         className="btn btn-large mt-2"
-        href={globalThis.main.config.accountUrl + "?export"}
+        href={globalThis.main.config.accountUrl + "/api/table-export-csv?" + queryString.stringify(this.props.parentTable.getEndpointParams())}
         target="_blank"
       >
         <span className="icon"><i className="fas fa-download"></i></span>

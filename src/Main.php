@@ -60,6 +60,8 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   const RELEASE = 'v0.10';
 
+  const NOTIFICATION_CATEGORY_RECORD_UPDATED = 1;
+
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
   public \HubletoMain\Core\ReleaseManager $release;
@@ -92,6 +94,12 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     $this->permissions->init();
     $this->apps->init();
+
+    // there are some system-level notification categories
+    $notificationsApp = $this->apps->community('Notifications');
+    if ($notificationsApp) {
+      \HubletoApp\Community\Notifications\Models\Notification::addCategory(self::NOTIFICATION_CATEGORY_RECORD_UPDATED, 'record-updated');
+    }
 
   }
 

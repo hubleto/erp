@@ -75,7 +75,12 @@ class Import extends \HubletoMain\Core\Controllers\Controller
             if ($checkImport) {
               //
             } else {
-              $idContact = $mContact->record->recordCreate(["first_name" => $firstName, "middle_name" => $middleName, "last_name" => $lastName])['id'];
+              $idContact = $mContact->record->recordCreate([
+                "first_name" => $firstName,
+                "middle_name" => $middleName,
+                "last_name" => $lastName,
+                "is_valid" => true,
+              ])['id'];
             }
             $log[] = "  Added contact: `{$firstName}, {$middleName}, {$lastName}`.";
           } else {

@@ -6,6 +6,7 @@ use HubletoApp\Community\Customers\Models\RecordManagers\Customer;
 use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
 use HubletoApp\Community\Settings\Models\RecordManagers\Currency;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use HubletoApp\Community\Campaigns\Models\RecordManagers\Campaign;
 use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
 use HubletoApp\Community\Leads\Models\RecordManagers\LeadHistory;
 use HubletoApp\Community\Leads\Models\RecordManagers\LeadTag;
@@ -87,6 +88,10 @@ class Lead extends \HubletoMain\Core\RecordManager
       $query = $query->where("leads.id_customer", $main->urlParamAsInteger("idCustomer"));
     }
 
+    if ($main->urlParamAsInteger("idCampaign") > 0) {
+      $query = $query->where("leads.id_campaign", $main->urlParamAsInteger("idCampaign"));
+    }
+
     $defaultFilters = $main->urlParamAsArray("defaultFilters");
     if (isset($defaultFilters["fLeadArchive"]) && $defaultFilters["fLeadArchive"] > 0) $query = $query->where("leads.is_archived", $defaultFilters["fLeadArchive"]);
     if (isset($defaultFilters["fLeadStatus"]) && count($defaultFilters["fLeadStatus"]) > 0) $query = $query->whereIn("leads.status", $defaultFilters["fLeadStatus"]);
@@ -97,6 +102,11 @@ class Lead extends \HubletoMain\Core\RecordManager
         case 2: $query = $query->where("leads.id_manager", $main->auth->getUserId()); break;
       }
     }
+
+
+    // $query = $query->selectRaw("
+    //   (Select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1) virt_email
+    // ");
 
     return $query;
   }

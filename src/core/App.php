@@ -315,6 +315,7 @@ class App {
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Table/Describe');
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Form/Describe');
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Get');
+      $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Delete');
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/GetList');
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Lookup');
       $mRolePermission->grantPermissionByString($role['id'], 'Api/Record/Save');

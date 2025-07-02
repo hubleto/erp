@@ -1,0 +1,11 @@
+<h1 class="app-main-title">{{ translate('Mail') }}</h1>
+
+<div class="flex gap-2 w-full">
+  {% include '@HubletoApp:Community:Mail/FolderSelector.twig' %}
+  <div>
+    <div class="badge badge-extra-large ml-0">{{ viewParams.title }}</div>
+    <div class="mt-4">
+      <app-mail-list-folder string:folder="{{ viewParams.folder }}"></app-mail-list-folder>
+    </div>
+  </div>
+</div>

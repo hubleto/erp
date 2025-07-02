@@ -387,7 +387,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "last_name" => $contact[1],
         "title_after" => $titlesAfter[rand(0, 2)],
         "is_primary" => true,
-        "is_active" => true,
+        "is_valid" => true,
         "date_created" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
       ])['id'];
 
@@ -489,7 +489,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     \HubletoApp\Community\Leads\Models\LeadActivity $mLeadActivity,
   ): void {
 
-    $mCampaign = new \HubletoApp\Community\Leads\Models\Campaign($this->main);
+    $mCampaign = new \HubletoApp\Community\Campaigns\Models\Campaign($this->main);
     $mCampaign->record->recordCreate(["name" => "Newsletter subscribers", "target_audience" => "Website visitors filling 'Subscribe to our newsletter'.", "color" => "#AB149E" ]);
     $mCampaign->record->recordCreate(["name" => "Cold calling - SMEs", "target_audience" => "SMEs reached out by cold calling.", "color" => "#68CCCA" ]);
 

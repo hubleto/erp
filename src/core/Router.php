@@ -19,6 +19,7 @@ class Router extends \ADIOS\Core\Router {
       '/^api\/get-chart-data\/?$/' =>  \HubletoMain\Core\Api\GetTemplateChartData::class,
       '/^api\/get-table-columns-customize\/?$/' =>  \HubletoMain\Core\Api\GetTableColumnsCustomize::class,
       '/^api\/save-table-columns-customize\/?$/' =>  \HubletoMain\Core\Api\SaveTableColumnsCustomize::class,
+      '/^api\/table-export-csv\/?$/' =>  \HubletoMain\Core\Api\TableExportCsv::class,
       '/^reset-password$/' => ControllerResetPassword::class,
       '/^forgot-password$/' => ControllerForgotPassword::class,
     ]);

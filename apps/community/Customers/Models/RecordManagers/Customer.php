@@ -70,8 +70,10 @@ class Customer extends \HubletoMain\Core\RecordManager
     $main = \ADIOS\Core\Helper::getGlobalApp();
 
     $defaultFilters = $main->urlParamAsArray("defaultFilters");
-    if (isset($defaultFilters["fArchive"]) && $defaultFilters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
-    else $query = $query->where("customers.is_active", true);
+    if (isset($defaultFilters["fArchive"])) {
+      if ($defaultFilters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
+      else $query = $query->where("customers.is_active", true);
+    }
 
     return $query;
   }

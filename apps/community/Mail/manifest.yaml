@@ -1,0 +1,9 @@
+namespace: HubletoApp\Community\Mail
+sidebarGroup: communication
+rootUrlSlug: mail
+name: Mail
+icon: fas fa-envelope
+author:
+  name: "WAI.blue"
+  company: "wai.blue"
+highlight: Email client

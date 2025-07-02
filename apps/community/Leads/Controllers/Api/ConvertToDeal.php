@@ -61,14 +61,14 @@ class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
         "id_owner" => $lead->id_owner,
         "shared_folder" => $lead->shared_folder,
         "source_channel" => $lead->source_channel,
-        "is_archived" => $lead->is_archived,
+        "is_archived" => false,
         "id_lead" => $lead->id,
-        "deal_result" => $mDeal::RESULT_PENDING,
+        "deal_result" => $mDeal::RESULT_UNKNOWN,
         "id_pipeline" => $defaultPipeline ?? null,
         "id_pipeline_step" => $defaultPipelineFirstStep ?? null,
       ]);
 
-      $lead->status = $mLead::STATUS_COMPLETED;
+      $lead->status = $mLead::STATUS_CONVERTED_TO_DEAL;
       $lead->save();
 
       $leadDocuments = $mLeadDocument->record->where("id_lookup", $leadId)->get();
@@ -102,7 +102,6 @@ class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
         "id_deal" => $deal['id']
       ]);
 
-      $lead->is_archived = 1;
       $lead->save();
     } catch (Exception $e) {
       return [

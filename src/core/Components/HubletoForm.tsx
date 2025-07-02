@@ -18,6 +18,13 @@ export default class HubletoForm<P, S> extends Form<HubletoFormProps,HubletoForm
     this.state = this.getStateFromProps(props);
   }
 
+  getStateFromProps(props: FormProps) {
+    return {
+      ...super.getStateFromProps(props),
+      isInlineEditing: true,
+    }
+  }
+
   renderCustomInputs(): Array<JSX.Element> {
     let customInputs: any = [];
 

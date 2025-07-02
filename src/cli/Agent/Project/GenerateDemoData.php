@@ -522,7 +522,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_owner" => rand(1, 4),
         "source_channel" => rand(1,7),
         "is_archived" => false,
-        "status" => (rand(0, 10) == 5 ? $mLead::STATUS_LOST : $mLead::STATUS_NEW),
+        "status" => (rand(0, 10) == 5 ? $mLead::STATUS_LOST : $mLead::STATUS_CONTACTED),
         "date_created" => $leadDateCreated,
         "score" => rand(1, 10),
       ])['id'];
@@ -603,7 +603,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_lead" => $lead->id,
         "deal_result" => $pStep['set_result'] ?? 0,
         "date_created" => $dealDateCreated,
-        "date_result_update" => $pStep['set_result'] != \HubletoApp\Community\Deals\Models\Deal::RESULT_PENDING ? $dealDateClose : null,
+        "date_result_update" => $pStep['set_result'] != \HubletoApp\Community\Deals\Models\Deal::RESULT_UNKNOWN ? $dealDateClose : null,
       ])['id'];
 
       $mLeadHistory->record->recordCreate([

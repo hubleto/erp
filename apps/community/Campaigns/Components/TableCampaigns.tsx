@@ -28,6 +28,13 @@ export default class TableCampaigns extends Table<TableCampaignsProps, TableCamp
     }
   }
 
+  getFormModalProps() {
+    return {
+      ...super.getFormModalProps(),
+      type: 'right wide',
+    };
+  }
+
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormCampaignProps;
     return <FormCampaign {...formProps}/>;

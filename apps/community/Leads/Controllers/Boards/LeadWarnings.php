@@ -30,7 +30,7 @@ class LeadWarnings extends \HubletoMain\Core\Controllers\Controller {
       foreach ($lead['ACTIVITIES'] as $activity) {
         if (strtotime($activity['date_start']) > time()) $futureActivities++;
       }
-      if (in_array($lead['status'], [Lead::STATUS_NEW, Lead::STATUS_IN_PROGRESS]) && $futureActivities == 0) {
+      if (in_array($lead['status'], [Lead::STATUS_IN_PROGRESS]) && $futureActivities == 0) {
         $items[] = $lead;
         $warningsTotal++;
       }

@@ -17,6 +17,7 @@ use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Setting;
 use HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Settings\Models\Team;
 use HubletoApp\Community\Campaigns\Models\Campaign;
 use HubletoMain\Core\Helper;
 
@@ -27,10 +28,11 @@ class Lead extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'leads/{%ID%}';
 
-  const STATUS_NEW = 1;
+  const STATUS_NO_INTERACTION_YET = 0;
+  const STATUS_CONTACTED = 1;
   const STATUS_IN_PROGRESS = 2;
-  const STATUS_COMPLETED = 3;
-  const STATUS_LOST = 4;
+  const STATUS_CLOSED = 3;
+  const STATUS_CONVERTED_TO_DEAL = 20;
 
   public array $relations = [
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
@@ -38,6 +40,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
+    'TEAM' => [ self::BELONGS_TO, Team::class, 'id_team', 'id'],
     'LEVEL' => [ self::BELONGS_TO, Level::class, 'id_level', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
@@ -53,22 +56,29 @@ class Lead extends \HubletoMain\Core\Models\Model
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true),
       'title' => (new Varchar($this, $this->translate('Specific subject (if any)'))),
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT'),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true)->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
       'virt_email' => (new Virtual($this, $this->translate('Email')))->setProperty('defaultVisibility', true)
         ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1")
       ,
-      'virt_phone_number' => (new Virtual($this, $this->translate('Phone number')))->setProperty('defaultVisibility', true)
+      'virt_phone_number' => (new Virtual($this, $this->translate('Phone number')))
         ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'number' LIMIT 1")
       ,
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue(null),
-      'id_level' => (new Lookup($this, $this->translate('Level'), Level::class)),
-      'status' => (new Integer($this, $this->translate('Status')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this::STATUS_NEW)->setEnumValues(
-        [ $this::STATUS_NEW => 'New', $this::STATUS_IN_PROGRESS => 'In Progress', $this::STATUS_COMPLETED => 'Completed', $this::STATUS_LOST => 'Lost' ]
+      'id_level' => (new Lookup($this, $this->translate('Level'), Level::class))->setProperty('defaultVisibility', true),
+      'status' => (new Integer($this, $this->translate('Status')))->setProperty('defaultVisibility', true)->setRequired()->setEnumValues(
+        [
+          $this::STATUS_NO_INTERACTION_YET => 'No interaction yet',
+          $this::STATUS_CONTACTED => 'Contacted',
+          $this::STATUS_IN_PROGRESS => 'In Progress',
+          $this::STATUS_CLOSED => 'Closed',
+          $this::STATUS_CONVERTED_TO_DEAL => 'Converted to deal',
+        ]
       )->setEnumCssClasses([
-        self::STATUS_NEW => 'bg-blue-100 text-blue-800',
+        self::STATUS_NO_INTERACTION_YET => 'bg-slate-100 text-slate-800',
+        self::STATUS_CONTACTED => 'bg-blue-100 text-blue-800',
         self::STATUS_IN_PROGRESS => 'bg-yellow-100 text-yellow-800',
-        self::STATUS_COMPLETED => 'bg-green-100 text-green-800',
-        self::STATUS_LOST => 'bg-red-100 text-red-800',
+        self::STATUS_CLOSED => 'bg-slate-100 text-slate-800',
+        self::STATUS_CONVERTED_TO_DEAL => 'bg-green-100 text-green-800',
       ]),
       'price' => (new Decimal($this, $this->translate('Price')))->setDefaultValue(0),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
@@ -76,6 +86,7 @@ class Lead extends \HubletoMain\Core\Models\Model
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->main->auth->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->main->auth->getUserId()),
+      'id_team' => (new Lookup($this, $this->translate('Team'), Team::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, "Online document folder"),
@@ -103,13 +114,6 @@ class Lead extends \HubletoMain\Core\Models\Model
           // ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
       break;
-      case 'status':
-        $description->setEnumCssClasses([
-          self::STATUS_NEW => 'bg-yellow-50',
-          self::STATUS_IN_PROGRESS => 'bg-yellow-50',
-          self::STATUS_COMPLETED => 'bg-yellow-50',
-          self::STATUS_LOST => 'bg-yellow-50',
-        ]);
       break;
       // case 'id_customer':
       //   $description ->setExtendedProps(['urlAdd' => 'customers/add']);

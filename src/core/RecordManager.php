@@ -21,12 +21,16 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
 
     $hasIdOwner = isset($record['id_owner']);
     $hasIdManager = isset($record['id_manager']);
+    $hasIdTeam = isset($record['id_team']);
 
     $isOwner = false;
     if ($hasIdOwner) $isOwner = $record['id_owner'] == $idUser;
 
     $isManager = false;
     if ($hasIdManager) $isManager = $record['id_manager'] == $idUser;
+
+    $isTeamMember = false;
+    if ($hasIdTeam) $isTeamMember = $main->auth->isUserMemberOfTeam($record['id_team']);
 
     // enable permissions by certain criteria
     $canRead = false;
@@ -49,11 +53,17 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
       //   - read only records where he/she is owner or manager
       //   - modify only records where he/she is owner
 
-      if ($hasIdManager && $isManager || !$hasIdManager) $canRead = true;
+      $canRead = false;
+      $canModify = false;
 
-      if ($hasIdOwner && $isOwner || !$hasIdOwner) {
+      if (!$hasIdManager && !$hasIdTeam && !$hasIdOwner) {
         $canRead = true;
         $canModify = true;
+      } else {
+        if ($hasIdManager && $isManager) $canRead = true;
+        if ($hasIdTeam && $isTeamMember) $canRead = true;
+
+        if ($hasIdOwner && $isOwner) { $canRead = true; $canModify = true; }
       }
 
       $permissions = [$canRead, $canModify, $canModify, $canModify];
@@ -97,11 +107,23 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
 
     $hasIdOwner = $this->model->hasColumn('id_owner');
     $hasIdManager = $this->model->hasColumn('id_manager');
+    $hasIdTeam = $this->model->hasColumn('id_team');
 
     $idUser = $main->auth->getUserId();
 
+    $userTeams = [];
+    foreach ($user['TEAMS'] ?? [] as $team) $userTeams[] = $team['id'] ?? 0;
+
     if ($main->auth->userHasRole(UserRole::ROLE_MANAGER)) {
-      if ($hasIdOwner && $hasIdManager) {
+      if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
+        $query = $query->where(function($q) use ($idUser, $userTeams) {
+          $q
+            ->where($this->table . '.id_owner', $idUser)
+            ->orWhere($this->table . '.id_manager', $idUser)
+            ->orWhereIn($this->table . '.id_team', $userTeams)
+          ;
+        });
+      } else if ($hasIdOwner && $hasIdManager) {
         $query = $query->where(function($q) use ($idUser) {
           $q
             ->where($this->table . '.id_owner', $idUser)
@@ -111,6 +133,8 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
         $query = $query->where($this->table . '.id_owner', $idUser);
       } else if ($hasIdManager) {
         $query = $query->where($this->table . '.id_manager', $idUser);
+      } else if ($hasIdTeam) {
+        $query = $query->whereIn($this->table . '.id_team', $userTeams);
       }
     } else if ($main->auth->userHasRole(UserRole::ROLE_EMPLOYEE) && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);

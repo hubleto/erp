@@ -28,12 +28,12 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Lead Levels'),
-      'icon' => 'fas fa-layer',
-      'url' => 'settings/lead-tags',
+      'icon' => 'fas fa-layer-group',
+      'url' => 'settings/lead-levels',
     ]);
     $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Lead Tags'),
-      'icon' => 'fas fa-levels',
+      'icon' => 'fas fa-tags',
       'url' => 'settings/lead-levels',
     ]);
     $this->main->apps->community('Settings')->addSetting($this, [

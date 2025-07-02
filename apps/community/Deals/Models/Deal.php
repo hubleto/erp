@@ -29,7 +29,7 @@ class Deal extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'deals/{%ID%}';
 
-  const RESULT_PENDING = 1;
+  const RESULT_UNKNOWN = 1;
   const RESULT_WON = 2;
   const RESULT_LOST = 3;
 
@@ -46,7 +46,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     7 => "Other",
   ];
 
-  const ENUM_DEAL_RESULTS = [ self::RESULT_PENDING => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost" ];
+  const ENUM_DEAL_RESULTS = [ self::RESULT_UNKNOWN => "Pending", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost" ];
   const ENUM_BUSINESS_TYPES = [ self::BUSINESS_TYPE_NEW => "New", self::BUSINESS_TYPE_EXISTING => "Existing" ];
 
   public array $relations = [
@@ -69,6 +69,7 @@ class Deal extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'is_work_in_progress' => (new Boolean($this, $this->translate('Work in progress')))->setDefaultValue(true),
       'identifier' => (new Varchar($this, $this->translate('Deal Identifier'))),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))
@@ -85,15 +86,15 @@ class Deal extends \HubletoMain\Core\Models\Model
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(self::ENUM_SOURCE_CHANNELS),
-      'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
+      'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(false),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues(self::ENUM_DEAL_RESULTS)
         ->setEnumCssClasses([
-          self::RESULT_PENDING => 'bg-yellow-100 text-yellow-800',
+          self::RESULT_UNKNOWN => 'bg-yellow-100 text-yellow-800',
           self::RESULT_WON => 'bg-green-100 text-green-800',
           self::RESULT_LOST => 'bg-red-100 text-red-800',
         ])
-        ->setDefaultValue(self::RESULT_PENDING)
+        ->setDefaultValue(self::RESULT_UNKNOWN)
       ,
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
@@ -215,7 +216,7 @@ class Deal extends \HubletoMain\Core\Models\Model
 
     $sums = 0;
     $calculator = new CalculatePrice($this->main);
-    $allProducts = array_merge($savedRecord["PRODUCTS"], $savedRecord["SERVICES"]);
+    $allProducts = array_merge($savedRecord["PRODUCTS"] ?? [], $savedRecord["SERVICES"] ?? []);
 
     if (!empty($allProducts)) {
       foreach ($allProducts as $product) {

@@ -24,8 +24,9 @@ class Campaign extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
-      'target_audience' => (new Text($this, $this->translate('Target audience')))->setRequired(),
-      'goal' => (new Text($this, $this->translate('Goal')))->setRequired(),
+      'target_audience' => (new Text($this, $this->translate('Target audience'))),
+      'goal' => (new Text($this, $this->translate('Goal'))),
+      'notes' => (new Text($this, $this->translate('Notes'))),
       'color' => (new Color($this, $this->translate('Color'))),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->main->auth->getUserId()),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date('Y-m-d H:i:s')),

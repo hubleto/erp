@@ -30,7 +30,7 @@ class DealWarnings extends \HubletoMain\Core\Controllers\Controller {
       foreach ($deal['ACTIVITIES'] as $activity) {
         if (strtotime($activity['date_start']) > time()) $futureActivities++;
       }
-      if ($deal['deal_result'] == Deal::RESULT_PENDING && $futureActivities == 0) {
+      if ($deal['is_work_in_progress'] && $futureActivities == 0) {
         $items[] = $deal;
         $warningsTotal++;
       }

@@ -41,7 +41,7 @@ class Contact extends \HubletoMain\Core\Models\Model
     return array_merge([
       'salutation' => (new Varchar($this, $this->translate('Salutation'))),
       'title_before' => (new Varchar($this, $this->translate('Title before'))),
-      'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
+      'first_name' => (new Varchar($this, $this->translate('First name'))),
       'middle_name' => (new Varchar($this, $this->translate('Middle name'))),
       'last_name' => (new Varchar($this, $this->translate('Last name'))),
       'title_after' => (new Varchar($this, $this->translate('Title after'))),

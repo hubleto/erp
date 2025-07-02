@@ -145,9 +145,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
         <div>
           Are you sure you want to convert this Lead to a Deal?<br/>
         </div>
-        <div className="alert-warning mt-4">
-          This lead will be moved to archive after conversion.<br/>
-        </div>
       </>,
       {
         headerClassName: "dialog-warning-header",
@@ -360,8 +357,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                       })}
                     </div> : null}
                     {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
-                    {this.inputWrapper('id_level', {readonly: R.is_archived})}
-                    {this.inputWrapper('status', {readonly: R.is_archived, onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})}
+                    {this.inputWrapper('id_level', {readonly: R.is_archived, uiStyle: 'buttons'})}
+                    {this.inputWrapper('status', {readonly: R.is_archived, uiStyle: 'buttons', onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})}
                     {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
                     {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
                     {showAdditional ?
@@ -394,6 +391,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     {this.inputWrapper('score', {readonly: R.is_archived})}
                     {this.inputWrapper('id_owner', {readonly: R.is_archived})}
                     {this.inputWrapper('id_manager', {readonly: R.is_archived})}
+                    {this.inputWrapper('id_team', {readonly: R.is_archived})}
                     {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
                     {this.inputWrapper('source_channel', {readonly: R.is_archived})}
                     <FormInput title='Tags'>

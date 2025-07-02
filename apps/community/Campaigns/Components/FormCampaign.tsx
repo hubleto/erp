@@ -41,40 +41,30 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps,Fo
     // const LEADS = R.LEADS ? R.LEADS : null;
 
     return <>
-      {this.inputWrapper('name')}
-      {this.inputWrapper('id_manager')}
-      {this.inputWrapper('target_audience')}
-      {this.inputWrapper('goal')}
-      {this.inputWrapper('color')}
-      {this.inputWrapper('datetime_created')}
-      <div className="card mt-2">
-        <div className="card-header">Leads</div>
-        <div className="card-body">
-          {/* {LEADS ? 
-            <div className="list">
-              {LEADS.map((lead, key) => {
-                return <a href={globalThis.main.config.accountUrl + "/leads?recordId=" + lead.id} target="_blank" key={key} className="btn btn-list-item btn-transparent">
-                  <span className="text flex gap-2">
-                    <div>{lead.identifier}</div>
-                    <div>{lead.title}</div>
-                    <div>
-                      {lead.CONTACT && lead.CONTACT.VALUES ? lead.CONTACT.VALUES.map((value, key) => {
-                        return value.type == 'email' ? <span key={key}>{value.value}</span> : null;
-                      }) : null}
-                    </div>
-                  </span>
-                </a>
-              })}
-            </div>
-          : <>No leads in this campaign.</>} */}
+      <div className='w-full flex gap-2'>
+        <div className='flex-1 border-r border-gray-100'>
+          {this.inputWrapper('name')}
+          {this.inputWrapper('target_audience')}
+          {this.inputWrapper('goal')}
+        </div>
+        <div className='flex-1'>
+          {this.inputWrapper('id_manager')}
+          {this.inputWrapper('notes')}
+          {this.inputWrapper('color')}
+          {this.inputWrapper('datetime_created')}
+        </div>
+      </div>
+      {this.divider(this.translate('Leads'))}
+      {this.state.id < 0 ?
+          <div className="badge badge-info">First create the campaign, then you will be prompted to create leads.</div>
+        :
           <TableLeads
             uid={this.props.uid + "_table_leads"}
             tag="CampaignLeads"
             parentForm={this}
             idCampaign={R.id}
           />
-        </div>
-      </div>
+      }
     </>;
   }
 }

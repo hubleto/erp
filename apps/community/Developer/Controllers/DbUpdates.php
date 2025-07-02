@@ -46,7 +46,8 @@ class DbUpdates extends \HubletoMain\Core\Controllers\Controller
         } else {
           foreach ($mObj->getColumns() as $colName => $column) {
             // column is missing
-            if (!isset($tables[$mObj->table][$colName])) {
+            $colDefinition = $column->toArray();
+            if (!isset($tables[$mObj->table][$colName]) && $colDefinition['type'] !== 'virtual') {
               $sql = [
                 'alter table `' . $mObj->table . '` add ' . $column->sqlCreateString($mObj->table, $colName)
               ];

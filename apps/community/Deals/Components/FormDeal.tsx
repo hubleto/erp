@@ -353,6 +353,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     </div>;
 
     const inputsColumnLeft = <>
+      {this.inputWrapper('is_work_in_progress', {readonly: R.is_archived})}
       {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
       {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
       <FormInput title={"Customer"} required={true}>
@@ -488,8 +489,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                   </div>
                 : null}
               </div> : null}
-
-              {recentActivitiesAndCalendar}
+              {this.state.id > 0 ? recentActivitiesAndCalendar : null}
             </div>
           </div>
 
@@ -812,8 +812,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     },
                   }}
                   readonly={true}
-                >
-                </TableDealHistory>
+                ></TableDealHistory>
               </div>
             </div>
           </TabPanel>

@@ -6,6 +6,7 @@ use HubletoApp\Community\Customers\Models\RecordManagers\Customer;
 use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
 use HubletoApp\Community\Settings\Models\RecordManagers\Currency;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use HubletoApp\Community\Settings\Models\RecordManagers\Team;
 use HubletoApp\Community\Campaigns\Models\RecordManagers\Campaign;
 use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
 use HubletoApp\Community\Leads\Models\RecordManagers\LeadHistory;
@@ -36,6 +37,11 @@ class Lead extends \HubletoMain\Core\RecordManager
   /** @return BelongsTo<User, covariant Lead> */
   public function OWNER(): BelongsTo {
     return $this->belongsTo(User::class, 'id_owner','id' );
+  }
+
+  /** @return BelongsTo<User, covariant Lead> */
+  public function TEAM(): BelongsTo {
+    return $this->belongsTo(Team::class, 'id_team','id' );
   }
 
   /** @return BelongsTo<User, covariant Lead> */

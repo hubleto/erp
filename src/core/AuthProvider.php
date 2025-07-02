@@ -24,6 +24,14 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
     return new \HubletoApp\Community\Settings\Models\User($this->app);
   }
 
+  public function isUserMemberOfTeam(int $idTeam): bool
+  {
+    foreach ($user['TEAMS'] ?? [] as $team) {
+      if ($team['id'] ?? 0 == $idTeam) return true;
+    }
+    return false;
+  }
+
   public function findUsersByLogin(string $login): array
   {
     return $this->createUserModel()->record

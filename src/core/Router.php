@@ -46,4 +46,10 @@ class Router extends \ADIOS\Core\Router {
     return new \HubletoApp\Community\Desktop\Controllers\Desktop($this->app);
   }
 
+  public function httpGet(array $routes)
+  {
+    parent::httpGet($routes);
+    $this->app->runHook('router:added-route', [$this]);
+  }
+
 }

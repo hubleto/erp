@@ -9,6 +9,11 @@ spl_autoload_register(function(string $class) {
     @include(__DIR__ . '/cli/' . str_replace('HubletoMain/Cli/', '', $class) . '.php');
   }
 
+  // hook
+  if (str_starts_with($class, 'HubletoMain/Hook/')) {
+    @include(__DIR__ . '/../hooks/' . str_replace('HubletoMain/Hook/', '', $class) . '.php');
+  }
+
   // community
   if (str_starts_with($class, 'HubletoApp/Community/')) {
     $dir = (string) realpath(__DIR__ . '/../apps/community');
@@ -67,6 +72,9 @@ class HubletoMain extends \ADIOS\Core\Loader
   public \HubletoMain\Core\ReleaseManager $release;
   public \HubletoMain\Core\AppManager $apps;
   public \HubletoMain\Core\Emails\EmailWrapper $emails;
+  public \HubletoMain\Cli\Agent\Loader $cli;
+
+  public array $hooks = [];
 
   public bool $isPremium = false;
 
@@ -75,6 +83,15 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->setAsGlobal();
 
     parent::__construct($config, $mode);
+
+    $this->cli = new \HubletoMain\Cli\Agent\Loader($this);
+
+    $hooks = \ADIOS\Core\Helper::scanDirRecursively(__DIR__ . '/../hooks');
+    foreach ($hooks as $hook) {
+      $hookClass = '\\HubletoMain\\Hook\\' . str_replace('/', '\\', $hook);
+      $hookClass = str_replace('.php', '', $hookClass);
+      $this->hooks[$hook] = new $hookClass($this, $this->cli);
+    }
 
     $this->release = new \HubletoMain\Core\ReleaseManager($this);
     $this->release->load();
@@ -93,7 +110,11 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->apps = new \HubletoMain\Core\AppManager($this);
 
     $this->permissions->init();
+    $this->runHook('core:permissions-initialized', [$this]);
+
     $this->apps->init();
+
+    $this->runHook('core:apps-initialized', [$this]);
 
     // there are some system-level notification categories
     $notificationsApp = $this->apps->community('Notifications');
@@ -109,7 +130,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   public function createTwig(): void
   {
-  
+
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
     $this->twigLoader->addPath(__DIR__ . '/views', 'hubleto');
     $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
@@ -199,6 +220,12 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
+  }
+
+  public function runHook(string $trigger, array $args) {
+    foreach ($this->hooks as $hook) {
+      $hook->run($trigger, $args);
+    }
   }
 
 }

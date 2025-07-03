@@ -32,16 +32,6 @@ class Controller extends \ADIOS\Core\Controller
     }
   }
 
-  public function logUsage(): void
-  {
-    if (!$this->disableLogUsage) {
-      $usageApp = $this->main->apps->getAppInstance('HubletoApp\\Community\\Usage');
-      if (is_object($usageApp)) {
-        $usageApp->logUsage();
-      }
-    }
-  }
-
   /**
     * Executed after the init() phase.
     * Validates inputs ($this->main->params) used for the TWIG template.
@@ -63,7 +53,7 @@ class Controller extends \ADIOS\Core\Controller
    */
   public function init(): void
   {
-    $this->logUsage();
+    $this->main->runHook('controller:init-start', [$this]);
 
     // Put your controller's initialization code here. See example below.
     // Throw an exception on error.
@@ -80,6 +70,7 @@ class Controller extends \ADIOS\Core\Controller
    */
   public function prepareView(): void
   {
+    $this->main->runHook('controller:prepare-view-start', [$this]);
 
     $logDir = $this->app->config->getAsString('logDir');
 

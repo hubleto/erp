@@ -120,29 +120,7 @@ class Model extends \ADIOS\Core\Model {
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
-
-    $user = $this->main->auth->getUser();
-    if (isset($savedRecord['id_owner']) && $savedRecord['id_owner'] != $user['id']) {
-      $notificationsApp = $this->main->apps->community('Notifications');
-      $diff = $this->diffRecords($originalRecord, $savedRecord);
-
-      if ($notificationsApp && count($diff) > 0) {
-
-        $body =
-          'User ' . $user['email'] . ' updated ' . $this->shortName . ":\n"
-          . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
-        ;
-
-        $notificationsApp->send(
-          \HubletoMain::NOTIFICATION_CATEGORY_RECORD_UPDATED, // category
-          [$this->shortName, $this->fullName],
-          (int) $savedRecord['id_owner'], // to
-          $this->shortName . ' updated', // subject
-          $body
-        );
-      }
-    }
-
+    $this->main->runHook('model:record-updated', [$this, $originalRecord, $savedRecord]);
     return $savedRecord;
   }
 

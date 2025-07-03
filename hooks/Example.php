@@ -18,14 +18,14 @@ class Example extends \HubletoMain\Core\Hook
     anywhere in the code.
   */
 
-  public function run(string $trigger, array $args): void
+  public function run(string $event, array $args): void
   {
-    if ($trigger == 'SEE-LIST-OF-AVAILABLE-TRIGGERS-IN-DEVELOPER-GUIDE') {
+    if ($event == 'SEE-LIST-OF-AVAILABLE-TRIGGERS-IN-DEVELOPER-GUIDE') {
       // Do anything you want here.
       // Notes:
       //   - $this->main == reference to Hubleto's main object
-      //   - structure of $args may vary depending on the trigger
-      //   - you can find available triggers on https://developer.hubleto.com
+      //   - structure of $args may vary depending on the event
+      //   - you can find available events on https://developer.hubleto.com
       //     or simply search in the source code where method "runHook()" is
       //     called
       //   - learn by examples - see sample default hooks in 'Default' folder

@@ -13,4 +13,9 @@ class Hook {
     $this->cli = $cli;
   }
 
+  public function run(string $event, array $args): void
+  {
+    // to be overriden
+  }
+
 }

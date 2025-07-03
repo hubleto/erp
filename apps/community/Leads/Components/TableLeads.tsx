@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src/core/Components/HubletoTable';
 import FormLead, { FormLeadProps } from './FormLead';
+import ModalSimple from "adios/ModalSimple";
 
 export interface TableLeadsProps extends HubletoTableProps {
   idCustomer?: number,
@@ -8,6 +9,7 @@ export interface TableLeadsProps extends HubletoTableProps {
 }
 
 export interface TableLeadsState extends HubletoTableState {
+  showSetStatusDialog: boolean,
 }
 
 export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeadsState> {
@@ -28,7 +30,10 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
 
   constructor(props: TableLeadsProps) {
     super(props);
-    this.state = this.getStateFromProps(props);
+    this.state = {
+      ...this.getStateFromProps(props),
+      showSetStatusDialog: false,
+    }
   }
 
   getFormModalProps(): any {
@@ -88,5 +93,22 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
     formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     formProps.customEndpointParams.idCampaign = this.props.idCampaign;
     return <FormLead {...formProps}/>;
+  }
+
+  renderContent(): JSX.Element {
+    return <>
+      {super.renderContent()}
+      {this.state.showSetStatusDialog ?
+        <ModalSimple
+          uid={this.props.uid + '_export_csv_modal'}
+          isOpen={true}
+          type='centered large'
+          showHeader={true}
+          onClose={() => { this.setState({showSetStatusDialog: false}); }}
+        >
+          {JSON.stringify(this.state.selection)}
+        </ModalSimple>
+      : null}
+    </>;
   }
 }

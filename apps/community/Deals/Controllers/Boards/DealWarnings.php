@@ -18,6 +18,7 @@ class DealWarnings extends \HubletoMain\Core\Controllers\Controller {
 
     $myDeals = $mDeal->record->prepareReadQuery()
       ->where($mDeal->table . ".is_archived", 0)
+      ->orderBy('price', 'desc')
       ->get()
       ->toArray()
     ;

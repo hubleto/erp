@@ -63,6 +63,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps,Fo
             tag="CampaignLeads"
             parentForm={this}
             idCampaign={R.id}
+            // selectionMode='multiple'
           />
       }
     </>;

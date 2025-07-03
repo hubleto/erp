@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src/core/Components/HubletoTable';
 import FormLead, { FormLeadProps } from './FormLead';
 import ModalSimple from "adios/ModalSimple";
+import request from 'adios/Request';
 
 export interface TableLeadsProps extends HubletoTableProps {
   idCustomer?: number,
@@ -10,6 +11,8 @@ export interface TableLeadsProps extends HubletoTableProps {
 
 export interface TableLeadsState extends HubletoTableState {
   showSetStatusDialog: boolean,
+  selectedBulkStatus: number,
+  rerenderKey: number,
 }
 
 export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeadsState> {
@@ -33,6 +36,8 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
     this.state = {
       ...this.getStateFromProps(props),
       showSetStatusDialog: false,
+      rerenderKey: Math.random(),
+      selectedBulkStatus: 0,
     }
   }
 
@@ -95,18 +100,117 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
     return <FormLead {...formProps}/>;
   }
 
+  saveBulkStatusChange() {
+    request.post(
+      "leads/save-bulk-status-change",
+      {
+        record: this.state.selection,
+      },
+      {},
+      (data: any) => {
+        if (data.status == "success") {
+          this.setState({showSetStatusDialog: false, selection: null})
+          this.loadData();
+        }
+      }
+    );
+  }
+
+  bulkStatusChange(newStatus: any) {
+    if (this.state.selection.length > 0) {
+      let data = this.state.selection;
+      Object.entries(data).map((item, index) => item[1].status = newStatus)
+      this.setState({selection: data, rerenderKey: Math.random()});
+    }
+  }
+
   renderContent(): JSX.Element {
+
+    let saveButton = <>
+      <button className='btn btn-edit' onClick={() => this.saveBulkStatusChange()}>
+        <span className="icon"><i className="fas fa-save"></i></span>
+        <span className="text">
+          Save
+        </span>
+      </button>
+    </>
+
     return <>
       {super.renderContent()}
       {this.state.showSetStatusDialog ?
         <ModalSimple
-          uid={this.props.uid + '_export_csv_modal'}
+          uid={this.props.uid + '_form_bulk_status_change'}
           isOpen={true}
-          type='centered large'
+          title='Bulk change Lead status'
+          type='centered'
           showHeader={true}
+          headerLeft={saveButton}
           onClose={() => { this.setState({showSetStatusDialog: false}); }}
         >
-          {JSON.stringify(this.state.selection)}
+          <>
+            <div className='w-[100%] flex flex-row justify-end items-center gap-2 mb-2'>
+              <span className='text font-bold'>Bulk change status:</span>
+              <select
+                className='w-1/4 mr-[15px]'
+                value={this.state.selectedBulkStatus}
+                onChange={(e) => {
+                  this.setState({selectedBulkStatus: e.target.value});
+                  this.bulkStatusChange(e.target.value);
+                }}
+              >
+                <option value={0}>No interaction yet</option>
+                <option value={1}>Contacted</option>
+                <option value={2}>In Progress</option>
+                <option value={3}>Closed</option>
+                <option value={20}>Converted to deal</option>
+              </select>
+            </div>
+            <HubletoTable
+              key={this.state.rerenderKey}
+              model={this.model}
+              data={{data: this.state.selection}}
+              readonly={true}
+              uid={this.props.uid + 'table_leads_mass_status_change'}
+              descriptionSource='props'
+              isInlineEditing={true}
+              onRowClick={() => null}
+              onChange={(table: TableLeads) => {this.setState({selection: table.state.data?.data})}}
+              description={{
+                columns: {
+                  identifier: {type: "varchar", title: "Identifier", readonly: true,
+                    cellRenderer: ( table: TableLeads, data: any, options: any): JSX.Element => (
+                      <>{data.identifier}</>
+                    )
+                  },
+                  title: {type: "varchar", title: "Title", readonly: true,
+                    cellRenderer: ( table: TableLeads, data: any, options: any): JSX.Element => (
+                      <>{data.title}</>
+                    )
+                  },
+                  company_name: {type: "varchar", title: "Company", readonly: true,
+                    cellRenderer: ( table: TableLeads, data: any, options: any): JSX.Element => (
+                      <>{data.CUSTOMER.name}</>
+                    )
+                  },
+                  status: {type: "interger", title: "Status", readonly: true},
+                },
+                inputs: {
+                  identifier: {type: "varchar", title: "Identifier", readonly: true},
+                  title: {type: "varchar", title: "Title", readonly: true},
+                  company_name: {type: "varchar", title: "Company",readonly: true},
+                  status: {type: "interger", title: "Statu", readonly: true,
+                    enumValues: {
+                      0: 'No interaction yet',
+                      1: 'Contacted',
+                      2: 'In Progress',
+                      3: 'Closed',
+                      20: 'Converted to deal',
+                    }},
+                }
+              }}
+            >
+            </HubletoTable>
+          </>
         </ModalSimple>
       : null}
     </>;

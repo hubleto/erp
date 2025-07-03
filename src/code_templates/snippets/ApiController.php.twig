@@ -1,0 +1,22 @@
+<?php
+
+namespace {{ appNamespace }}\Controllers\Api;
+
+class {{ endpointPascalCase }} extends \HubletoMain\Core\Controllers\Controller
+{
+
+  // Uncomment this if you want to make your API public
+  // public bool $requiresUserAuthentication = false;
+
+  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
+
+  public function renderJson(): array
+  {
+
+    // Uncomment this if you want your api be hookable
+    $this->runHook('api:render-json', [$this]);
+
+    return [];
+  }
+
+}

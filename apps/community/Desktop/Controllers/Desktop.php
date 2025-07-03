@@ -44,6 +44,7 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
       'helpdesk' => [ 'title' => $this->translate('Helpdesk'), 'icon' => 'fas fa-headset' ],
       'events' => [ 'title' => $this->translate('Events'), 'icon' => 'fas fa-people-group' ],
       'e-commerce' => [ 'title' => $this->translate('E-Commerce'), 'icon' => 'fas fa-cart-shopping' ],
+      'website' => [ 'title' => $this->translate('Website'), 'icon' => 'fas fa-globe' ],
       'finance' => [ 'title' => $this->translate('Finance'), 'icon' => 'fas fa-credit-card' ],
       'reporting' => [ 'title' => $this->translate('Reporting'), 'icon' => 'fas fa-chart-line' ],
       'maintenance' => [ 'title' => $this->translate('Maintenance'), 'icon' => 'fas fa-cog' ],

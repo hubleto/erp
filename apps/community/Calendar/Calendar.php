@@ -16,8 +16,11 @@ class Calendar extends \HubletoMain\Core\Calendar {
   {
     $query = $mActivity->record->prepareReadQuery()
       ->with('ACTIVITY_TYPE')
-      ->where($mActivity->table.".date_start", ">=", $dateStart)
-      ->where($mActivity->table.".date_start", "<=", $dateEnd)
+      ->whereRaw("
+        ({$mActivity->table}.date_start >= '{$dateStart}' AND {$mActivity->table}.date_start <= '{$dateEnd}')
+        OR ({$mActivity->table}.date_end >= '{$dateStart}' AND {$mActivity->table}.date_end <= '{$dateEnd}')
+        OR ({$mActivity->table}.date_start <= '{$dateStart}' AND {$mActivity->table}.date_end >= '{$dateEnd}')
+      ")
     ;
 
     if (isset($filter['completed'])) $query = $query->where('completed', $filter['completed']);

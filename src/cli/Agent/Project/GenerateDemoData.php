@@ -522,7 +522,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_owner" => rand(1, 4),
         "source_channel" => rand(1,7),
         "is_archived" => false,
-        "status" => (rand(0, 10) == 5 ? $mLead::STATUS_LOST : $mLead::STATUS_CONTACTED),
+        "status" => (rand(0, 10) == 5 ? $mLead::STATUS_CLOSED : $mLead::STATUS_CONTACTED),
         "date_created" => $leadDateCreated,
         "score" => rand(1, 10),
       ])['id'];

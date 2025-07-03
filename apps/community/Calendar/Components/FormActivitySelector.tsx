@@ -20,6 +20,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
   translationContext: string = 'HubletoApp\\Community\\Calendar\\Loader::Components\\FormActivitySelector';
 
   render(): JSX.Element {
+    var calendarConfigs = this.props.calendarConfigs;
     return (
       <>
         <div className='modal-header'>
@@ -40,13 +41,13 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
           Choose calendar to which the event should be created.
         </div>
         <div className='flex gap-2 flex-col px-4 mt-4'>
-          {this.props.calendarConfigs.map((item, index) => {
-            if (item.addNewActivityButtonText) {
+          {Object.keys(this.props.calendarConfigs).map((item, index) => {
+            if (calendarConfigs[item]["addNewActivityButtonText"]) {
               return <>
                 <button
                   key={index}
                   className='btn btn-transparent btn-large'
-                  style={{borderLeft: '3em solid ' + item.color}}
+                  style={{borderLeft: '3em solid ' + calendarConfigs[item]["color"]}}
                   onClick={() => {
                     //calculate half an hour from time_start
                     if (this.props.clickConfig?.time && this.props.clickConfig?.date) {
@@ -54,7 +55,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
                       var newMoment = momentDateTime.add(30, 'minutes');
                     }
 
-                    this.setState({formSelected: globalThis.main.renderReactElement(item.formComponent,
+                    this.setState({formSelected: globalThis.main.renderReactElement(calendarConfigs[item]["formComponent"],
                       {
                         description: {
                           defaultValues: {
@@ -73,8 +74,8 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
                     });
                   }}
                 >
-                  {item.icon ? <span className='icon'><i className={item.icon}></i></span> : null}
-                  <span className='text text-center self-center !h-auto text-lg'>{item.addNewActivityButtonText}</span>
+                  {item.icon ? <span className='icon'><i className={calendarConfigs[item]["icon"]}></i></span> : null}
+                  <span className='text text-center self-center !h-auto text-lg'>{calendarConfigs[item]["addNewActivityButtonText"]}</span>
                 </button>
               </>
             } else {

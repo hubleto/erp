@@ -24,6 +24,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/lead-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
       '/^leads\/boards\/lead-warnings\/?$/' => Controllers\Boards\LeadWarnings::class,
+      '/^leads\/save-bulk-status-change\/?$/' => Controllers\Api\SaveBulkStatusChange::class,
     ]);
 
     $this->main->apps->community('Settings')->addSetting($this, [

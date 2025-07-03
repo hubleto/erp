@@ -137,7 +137,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     ];
     $description->columns['tags'] = ["title" => "Tags"];
 
-    // $description->ui['moreActions'][] = [ 'title' => 'Set status', 'type' => 'stateChange', 'state' => 'showSetStatusDialog', 'value' => true ];
+    $description->ui['moreActions'][] = [ 'title' => 'Set status', 'type' => 'stateChange', 'state' => 'showSetStatusDialog', 'value' => true ];
 
     if ($this->main->urlParamAsBool("showArchive")) {
       $description->permissions = [

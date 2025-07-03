@@ -20,7 +20,8 @@
 | create model <appNamespace> <model>      | Creates an empty model into a specified app.                                 |
 | create controller <appNamespace> <model> | Creates an empty controller into a specified app.                            |
 | create view <appNamespace> <model>       | Creates an empty view into a specified app.                                  |
-| create MVC <appNamespace> <model>        | Creates a default MVC for a specified model.                                 |
+| create mvc <appNamespace> <model>        | Creates a default MVC for a specified model.                                 |
+| create api <appNamespace> <endpoint>     | Creates a sample REST API controller.                                        |
 |                                          |                                                                              |
 | debug router [routeToDebug]              | List all routes or print route information.                                  |
 

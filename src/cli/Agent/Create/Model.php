@@ -46,8 +46,8 @@ class Model extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("Model '{$model}' in '{$appNamespace}' with sample set of columns created successfully.\n");
     $this->cli->yellow("⚠ NEXT STEPS:\n");
     $this->cli->yellow("⚠  -> Modify `describeColumns()` method in the model.\n");
-    $this->cli->yellow("⚠  -> Modify `installTables()` method in your app's loader to install this model.\n");
-    $this->cli->yellow("        (new Models\\{$model}(\$this->main))->dropTableIfExists()->install();\n");
+    $this->cli->yellow("⚠  -> Add the model in `installTables()` method in  {$app->rootFolder}/Loader.php\n");
+    $this->cli->blue  ("      (new Models\\{$model}(\$this->main))->dropTableIfExists()->install();\n");
     
   }
 

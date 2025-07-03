@@ -53,7 +53,8 @@ if (!empty($action)) {
           case 'model': $command = new \HubletoMain\Cli\Agent\Create\Model($cli, $argv); break;
           case 'controller': $command = new \HubletoMain\Cli\Agent\Create\Controller($cli, $argv); break;
           case 'view': $command = new \HubletoMain\Cli\Agent\Create\View($cli, $argv); break;
-          case 'MVC': $command = new \HubletoMain\Cli\Agent\Create\TableFormViewAndController($cli, $argv); break;
+          case 'mvc': $command = new \HubletoMain\Cli\Agent\Create\TableFormViewAndController($cli, $argv); break;
+          case 'api': $command = new \HubletoMain\Cli\Agent\Create\ApiEndpoint($cli, $argv); break;
         }
       break;
       case 'project':

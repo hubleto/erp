@@ -105,6 +105,9 @@ class Controller extends \ADIOS\Core\Controller
     else $contextHelpUrl = '';
 
     $this->viewParams['contextHelpUrl'] = $contextHelpUrl;
+
+    $this->main->runHook('controller:prepare-view-end', [$this]);
+
   }
 
   public function getBreadcrumbs(): array

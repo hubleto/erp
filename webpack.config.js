@@ -6,7 +6,7 @@ function loadEntriesFromRepository(folder) {
   let entries = [];
   fs.readdirSync(folder).forEach(function(app){
     const stat = fs.statSync(folder + '/' + app);
-    const loaderEntry = './apps/community/' + app + '/Loader';
+    const loaderEntry = folder + '/' + app + '/Loader';
     if (stat && stat.isDirectory() && fs.existsSync(loaderEntry + '.tsx')) {
       entries.push(loaderEntry);
     }
@@ -20,8 +20,9 @@ module.exports = (env, arg) => {
     entry: {
       hubleto: [
         './src/Main',
-        './repositories.tsx',
-        ...loadEntriesFromRepository(path.resolve(__dirname, 'apps/community'))
+        // './repositories.tsx',
+        ...loadEntriesFromRepository(path.resolve(__dirname, 'apps/community')),
+        ...loadEntriesFromRepository(path.resolve(__dirname, 'apps/custom')),
       ],
     },
     output: {

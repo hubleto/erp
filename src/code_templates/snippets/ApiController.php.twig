@@ -14,7 +14,7 @@ class {{ endpointPascalCase }} extends \HubletoMain\Core\Controllers\Controller
   {
 
     // Uncomment this if you want your api be hookable
-    $this->runHook('api:render-json', [$this]);
+    $this->main->runHook('api:render-json', [$this]);
 
     return [];
   }

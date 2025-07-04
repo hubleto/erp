@@ -80,7 +80,8 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
     $this->cli->blue  ("      \$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/{$modelPluralForm}\/?$/' => Controllers\\{$controller}::class ]);\n");
     $this->cli->yellow("\n");
-    $this->cli->yellow("⚠   -> Run `npm run build-js` in your terminal to compile new Typescript.\n");
+    $this->cli->yellow("⚠   -> Run `npm i` in your terminal to install required node modules.\n");
+    $this->cli->yellow("⚠   -> Run `npm run build-js` in your terminal to compile.\n");
 
   }
 

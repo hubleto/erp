@@ -106,8 +106,8 @@
                     <div class="flex justify-between w-full">
                       <div class="flex flex-col truncate">
                         <div>{{deal.identifier}}</div>
-                        <div class="font-bold">{{deal.CUSTOMER.name}}</div>
-                        <div class="text-gray-400">{{deal.title}}</div>
+                        <div class="text-gray-400">{{deal.CUSTOMER.name}}</div>
+                        <div class="font-bold">{{deal.title}}</div>
                       </div>
                       <div class="mt-1">
                         <div class="mb-3 pr-2 text-right font-normal" style="border-right: 0.5em solid {{ resultEnumValues[deal.deal_result]["color"] }}">{{ resultEnumValues[deal.deal_result]["title"] }}</div>
@@ -116,7 +116,7 @@
                     </div>
                   </div>
                   <div class="card-body text-sm">
-                    <div class="font-bold text-blue-800">Value: {{deal.price}} {{deal.CURRENCY.code}}</div>
+                    {# <div class="font-bold text-blue-800">Value: {{deal.price}} {{deal.CURRENCY.code}}</div> #}
                     <div>Closes on: {{ deal.date_expected_close ? viewParams.main.locale.formatDateShort(deal.date_expected_close) : "N/A" }}</div>
                     <div>Owner: {{ deal.OWNER.email }}</div>
                     {% if deal.note %} <div class="bg-yellow-50 p-2 text-yellow-800 whitespace-pre">{{ deal.note }}</div> {% endif %}

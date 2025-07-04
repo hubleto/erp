@@ -22,7 +22,7 @@ class LeadWarnings extends \HubletoMain\Core\Controllers\Controller {
       ->toArray()
     ;
 
-    // pending-leads-without-future-plan
+    // open-leads-without-future-plan
     $items = [];
 
     foreach ($myLeads as $lead) {
@@ -36,8 +36,8 @@ class LeadWarnings extends \HubletoMain\Core\Controllers\Controller {
       }
     }
 
-    $warnings['pending-leads-without-future-plan'] = [
-      "title" => $this->translate('Pending leads without future plan'),
+    $warnings['open-leads-without-future-plan'] = [
+      "title" => $this->translate('Open leads without future plan'),
       "items" => $items,
     ];
     //

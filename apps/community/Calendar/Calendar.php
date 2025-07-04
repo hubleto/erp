@@ -12,15 +12,22 @@ class Calendar extends \HubletoMain\Core\Calendar {
     "formComponent" => "CalendarActivityForm",
   ];
 
+  public function prepareLoadActivityQuery(\HubletoApp\Community\Calendar\Models\Activity $mActivity, int $id): mixed
+  {
+    return $mActivity->record->prepareReadQuery()->where("{$mActivity->table}.id", $id);
+  }
+
   public function prepareLoadActivitiesQuery(\HubletoApp\Community\Calendar\Models\Activity $mActivity, string $dateStart, string $dateEnd, array $filter = []): mixed
   {
     $query = $mActivity->record->prepareReadQuery()
       ->with('ACTIVITY_TYPE')
-      ->whereRaw("
-        ({$mActivity->table}.date_start >= '{$dateStart}' AND {$mActivity->table}.date_start <= '{$dateEnd}')
-        OR ({$mActivity->table}.date_end >= '{$dateStart}' AND {$mActivity->table}.date_end <= '{$dateEnd}')
-        OR ({$mActivity->table}.date_start <= '{$dateStart}' AND {$mActivity->table}.date_end >= '{$dateEnd}')
-      ")
+      ->where(function($q) use ($mActivity, $dateStart, $dateEnd) {
+        $q->whereRaw("
+          ({$mActivity->table}.date_start >= '{$dateStart}' AND {$mActivity->table}.date_start <= '{$dateEnd}')
+          OR ({$mActivity->table}.date_end >= '{$dateStart}' AND {$mActivity->table}.date_end <= '{$dateEnd}')
+          OR ({$mActivity->table}.date_start <= '{$dateStart}' AND {$mActivity->table}.date_end >= '{$dateEnd}')
+        ");
+      })
     ;
 
     if (isset($filter['completed'])) $query = $query->where('completed', $filter['completed']);
@@ -75,6 +82,11 @@ class Calendar extends \HubletoMain\Core\Calendar {
     }
 
     return $events;
+  }
+
+  public function loadEvent(int $id): array
+  {
+    return $this->prepareLoadActivityQuery(new Models\Activity($this->main), $id)->first()?->toArray();
   }
 
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array

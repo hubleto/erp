@@ -102,7 +102,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
     const panelsRight = Array.from(panels.slice(Math.ceil(panels.length / 2)));
 
     return <>
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 md:flex-row">
         <div className="flex flex-col gap-2">
           {panelsLeft.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
         </div>

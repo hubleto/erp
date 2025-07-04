@@ -5,8 +5,8 @@ import request from "adios/Request";
 import HubletoChart, { HubletoChartType } from "@hubleto/src/core/Components/HubletoChart";
 
 export interface FormReportProps {
+  reportUrlSlug: string,
   config: any,
-  model: string,
   readonly?: boolean,
   name?: string,
 }
@@ -127,7 +127,7 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
             <Lookup
               readonly={this.props.readonly ?? false}
               value={value ?? null}
-              uid={"lookup_filter_"+this.props.model}
+              uid={"lookup_filter_"+field.model}
               model={field.model}
             ></Lookup>
           </FormInput>
@@ -149,8 +149,8 @@ export default class FormReport extends Component<FormReportProps,FormReportStat
 
   requestData(): any {
     request.post(
-      'api/get-chart-data',
-      {config: this.props.config, model: this.props.model},
+      'reports/' + this.props.reportUrlSlug + '/load-data',
+      {config: this.props.config},
       {},
       (chartData: any) => {
         this.setState({data: chartData.data});

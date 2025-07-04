@@ -11,6 +11,11 @@ class Calendar extends \HubletoApp\Community\Calendar\Calendar {
     "formComponent" => "CustomersFormActivity",
   ];
 
+  public function loadEvent(int $id): array
+  {
+    return $this->prepareLoadActivityQuery(new Models\CustomerActivity($this->main), $id)->first()?->toArray();
+  }
+
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
     $idCustomer = $this->main->urlParamAsString('idCustomer');

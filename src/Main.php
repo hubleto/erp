@@ -14,6 +14,11 @@ spl_autoload_register(function(string $class) {
     @include(__DIR__ . '/../hooks/' . str_replace('HubletoMain/Hook/', '', $class) . '.php');
   }
 
+  // report
+  if (str_starts_with($class, 'HubletoMain/Report/')) {
+    @include(__DIR__ . '/../reports/' . str_replace('HubletoMain/Report/', '', $class) . '.php');
+  }
+
   // community
   if (str_starts_with($class, 'HubletoApp/Community/')) {
     $dir = (string) realpath(__DIR__ . '/../apps/community');
@@ -46,7 +51,7 @@ spl_autoload_register(function(string $class) {
     @include($folder . '/' . $app . '.php');
   }
 
-  // community
+  // custom
   if (str_starts_with($class, 'HubletoApp/Custom/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
     $dir = $hubletoMain->config->getAsString('accountDir') . '/apps/custom';

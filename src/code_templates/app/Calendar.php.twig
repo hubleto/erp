@@ -11,10 +11,15 @@ class Calendar extends \HubletoApp\Community\Calendar\Calendar {
     "formComponent" => "{{ appName }}FormActivity"
   ];
 
+  public function loadEvent(int $id): array
+  {
+    // Implement your functionality for loading single calendar event.
+    return [];
+  }
+
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
-    // Implement your functionality for loading calendar events.
-
+    // Implement your functionality for loading multiple calendar events.
     return [];
   }
 

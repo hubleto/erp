@@ -38,10 +38,16 @@ class GetCalendarEvents extends \HubletoMain\Core\Controllers\Controller {
     ];
 
     if ($this->main->isUrlParam('source')) {
-      return (array) $this->calendarManager
-        ->getCalendar($this->main->urlParamAsString('source'))
-        ->loadEvents($this->dateStart, $this->dateEnd, $filter)
-      ;
+      $calendar = $this->calendarManager->getCalendar($this->main->urlParamAsString('source'));
+      if ($this->main->isUrlParam('id')) {
+        $event = (array) $calendar->loadEvent($this->main->urlParamAsInteger('id'));
+        $event['SOURCEFORM'] = $calendar->calendarConfig["formComponent"] ?? null;
+
+        return $event;
+
+      } else {
+        return $calendar->loadEvents($this->dateStart, $this->dateEnd, $filter);
+      }
     } else {
       return $this->loadEventsFromMultipleCalendars($this->dateStart, $this->dateEnd, $filter, $this->main->urlParamAsArray('fSources'));
     }

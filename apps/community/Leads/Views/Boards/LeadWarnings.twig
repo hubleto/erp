@@ -4,17 +4,17 @@
 
   <b>{{ title }}</b>
   {% if items|length > 0 %}
-    <div class="grid gap-2 md:grid-cols-3">
+    <div class="list">
       {% for item in items %}
-        <a href="leads/{{ item.id }}" class="card btn btn-transparent items-start p-1">
-          <div>
+        <a href="deals/{{ item.id }}" class="btn btn-list-item btn-transparent">
+          <span class="text">
             <b>{{ item.identifier }}</b>
             {{ item.title }}
-          </div>
-          <div>
+          </span>
+          <span class="text">
             <div class="badge badge-small badge-blue">@{{ item['_LOOKUP[id_owner]'] }}</div>
-            <div class="badge badge-small badge-lime">{{ item.CUSTOMER.name }} {{ item['_LOOKUP[id_contact]'] }}</div>
-          </div>
+            <div class="badge badge-small badge-lime">{{ item['_LOOKUP[id_contact]'] }}</div>
+          </span>
         </a>
       {% endfor %}
     </div>

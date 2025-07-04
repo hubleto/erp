@@ -7,8 +7,9 @@
 
 <h1>Reports &raquo; {{ viewParams.report.name }}</h1>
 <app-form-report
-  config="{{ viewParams.report.getReportConfig()|json_encode }}"
-  string:model="{{ viewParams.report.modelClass }}"
+  string:report-url-slug="{{ viewParams.report.urlSlug }}"
+  config="{{ viewParams.report.getConfig()|json_encode }}"
+  {# string:model="{{ viewParams.report.modelClass }}" #}
   string:name="{{ viewParams.report.name }}"
   bool:readonly="true"
 ></app-form-report>

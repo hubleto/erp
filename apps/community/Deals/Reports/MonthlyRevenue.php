@@ -8,9 +8,9 @@ class MonthlyRevenue extends \HubletoMain\Core\Report {
 
   protected string $urlSlug = 'month-revenue';
   public string $name = 'My revenue this month';
-  public string $modelClass = Deal::class;
+  // public string $modelClass = Deal::class;
 
-  public function getReportConfig(): array
+  public function getConfig(): array
   {
     $config = [];
 
@@ -29,4 +29,11 @@ class MonthlyRevenue extends \HubletoMain\Core\Report {
 
     return $config;
   }
+
+  public function loadData(): array
+  {
+    $model = new Deal($this->main);
+    return $this->loadDataDefault($model);
+  }
+
 }

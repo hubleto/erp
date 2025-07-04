@@ -32,6 +32,11 @@ class Calendar implements \ADIOS\Core\Testable {
     return $this->color;
   }
 
+  public function loadEvent(int $id): array
+  {
+    return [];
+  }
+
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
     return [];

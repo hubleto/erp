@@ -21,7 +21,7 @@ class Report extends \HubletoMain\Core\Controllers\Controller {
 
     $reportUrlSlug = $this->main->router->routeVarAsString('reportUrlSlug');
     $report = $this->main->apps->community('Reports')->reportManager->getReportByUrlSlug($reportUrlSlug);
-    // $reportConfig = $report->getReportConfig();
+    // $reportConfig = $report->getConfig();
 
     $this->viewParams['report'] = $report;
     // $this->viewParams['reportConfig'] = $reportConfig;

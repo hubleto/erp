@@ -1,3 +1,5 @@
-import FormReport from "../../community/Reports/Components/FormReport";
+import ReportBuilder from "./Components/ReportBuilder";
 
-globalThis.main.registerReactComponent('FormReport', FormReport);
+globalThis.main.registerReactComponent('ReportBuilder', ReportBuilder);
+
+// globalThis.main.registerReactComponent('FormReport', FormReport);

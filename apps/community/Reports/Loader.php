@@ -20,7 +20,8 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^reports\/?$/' => Controllers\Home::class,
       '/^reports\/(?<reportUrlSlug>.*?)\/?$/' => Controllers\Report::class,
-      '/^reports\/(?<reportUrlSlug>.*?)\/load-data\/?$/' => Controllers\ReportLoadData::class,
+      // '/^reports\/(?<reportUrlSlug>.*?)\/load-data\/?$/' => Controllers\ReportLoadData::class,
+      // '/^reports\/(?<reportUrlSlug>.*?)\/load-data\/?$/' => Controllers\ReportLoadData::class,
     ]);
 
   }

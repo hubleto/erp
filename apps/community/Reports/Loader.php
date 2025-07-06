@@ -18,12 +18,30 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^reports\/?$/' => Controllers\Home::class,
+      '/^reports\/?$/' => Controllers\Reports::class,
       '/^reports\/(?<reportUrlSlug>.*?)\/?$/' => Controllers\Report::class,
       // '/^reports\/(?<reportUrlSlug>.*?)\/load-data\/?$/' => Controllers\ReportLoadData::class,
       // '/^reports\/(?<reportUrlSlug>.*?)\/load-data\/?$/' => Controllers\ReportLoadData::class,
     ]);
 
+  }
+
+  public function installTables(int $round): void
+  {
+    if ($round == 1) {
+      (new Models\Report($this->main))->dropTableIfExists()->install();
+    }
+  }
+
+  public function generateDemoData(): void
+  {
+    $mReport = new Models\Report($this->main);
+
+    $mReport->record->recordCreate([
+      'title' => 'Test report for Customers',
+      'model' => \HubletoApp\Community\Customers\Models\Customer::class,
+      'query' => '{}',
+    ]);
   }
 
 }

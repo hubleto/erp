@@ -22,7 +22,7 @@ module.exports = (env, arg) => {
         './src/Main',
         // './repositories.tsx',
         ...loadEntriesFromRepository(path.resolve(__dirname, 'apps/community')),
-        ...loadEntriesFromRepository(path.resolve(__dirname, 'apps/custom')),
+        ...loadEntriesFromRepository(path.resolve(__dirname, '../apps')),
       ],
     },
     output: {

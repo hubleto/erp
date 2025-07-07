@@ -41,10 +41,11 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
     if (!is_dir($rootFolder . '/Controllers/Api')) mkdir($rootFolder . '/Controllers/Api');
     file_put_contents($rootFolder . '/Controllers/Api/' . $endpointPascalCase . '.php', $this->main->twig->render('@snippets/ApiController.php.twig', $tplVars));
 
+    $this->cli->white("\n");
     $this->cli->cyan("REST API endpoint '{$endpoint}' in '{$appNamespace}' created successfully.\n");
     $this->cli->yellow("⚠ NEXT STEPS:\n");
     $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
-    $this->cli->blue  ("      \$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);\n");
+    $this->cli->blue  ("\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);\n");
     $this->cli->yellow("\n");
     
   }

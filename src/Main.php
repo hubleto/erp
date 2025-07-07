@@ -66,7 +66,7 @@ spl_autoload_register(function(string $class) {
   // custom
   if (str_starts_with($class, 'HubletoApp/Custom/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
-    $dir = $hubletoMain->config->getAsString('accountDir') . '/apps/custom';
+    $dir = $hubletoMain->config->getAsString('accountDir') . '/apps';
     @include($dir . '/' . str_replace('HubletoApp/Custom/', '', $class) . '.php');
   }
 

@@ -80,7 +80,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $rewriteBases = [];
     $lastRewriteBase = '';
 
-    foreach (array_reverse(explode('/', str_replace('\\', '/', (string) realpath(__DIR__ . '/../../..')))) as $tmpDir) {
+    $paths = explode('/', str_replace('\\', '/', (string) realpath(__DIR__ . '/../../..')));
+    array_pop($paths);
+    foreach (array_reverse($paths) as $tmpDir) {
       $rewriteBases[] = $lastRewriteBase . '/';
       $lastRewriteBase = '/' . $tmpDir . $lastRewriteBase;
     }
@@ -169,6 +171,11 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
     $this->cli->cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
     $this->cli->cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
+
+    $this->main->config->set('dir', $mainFolder);
+    $this->main->config->set('url', $mainUrl);
+    $this->main->config->set('accountDir', $accountFolder);
+    $this->main->config->set('accountUrl', $accountUrl);
 
     $this->main->config->set('db_host', $dbHost);
     $this->main->config->set('db_user', $dbUser);

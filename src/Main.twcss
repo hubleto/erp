@@ -46,7 +46,7 @@
 
   /* add your custom css here */
   #app-main-content { @apply ml-0 p-2 md:ml-36; }
-  #app-main-content.sidebar-two-levels { @apply ml-0 md:ml-68; }
+  #app-main-content.sidebar-two-levels { @apply ml-0 md:ml-96; }
   #app-main-content > h1, h1.app-main-title { @apply flex justify-between w-full p-0 pb-2 m-0 border-b border-b-primary/20 mb-2 text-primary dark:text-white; }
   h1.app-main-title .app-main-title-buttons { @apply text-base }
 

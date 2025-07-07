@@ -34,7 +34,7 @@
   </div>
 {% endmacro %}
 
-{% set logoUrl = config.logoUrl ?? "assets/images/logo-hubleto.png" %}
+{% set logoUrl = config.logoUrl ?? config.url ~ "/assets/images/logo-hubleto.png" %}
 
 <!DOCTYPE html>
 <html lang="en">

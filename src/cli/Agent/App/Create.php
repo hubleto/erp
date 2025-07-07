@@ -30,8 +30,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
         $accountFolder = $this->main->config->getAsString('accountDir');
         if (empty($accountFolder) || !is_dir($accountFolder)) throw new \Exception('AccountDir is not properly configured.');
         if (!is_dir($accountFolder . '/apps')) mkdir($accountFolder . '/apps');
-        if (!is_dir($accountFolder . '/apps/custom')) mkdir($accountFolder . '/apps/custom');
-        $appRepositoryFolder = realpath($accountFolder . '/apps/custom');
+        $appRepositoryFolder = realpath($accountFolder . '/apps');
       break;
     }
 

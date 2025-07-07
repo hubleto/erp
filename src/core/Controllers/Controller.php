@@ -19,7 +19,7 @@ class Controller extends \ADIOS\Core\Controller
     if (empty($this->translationContext)) {
       $reflection = new \ReflectionClass($this);
       preg_match('/^(.*?)\\\Controllers\\\(.*?)$/', $reflection->getName(), $m);
-      if (is ($m[1]) && isset($m[2])) {
+      if (isset($m[1]) && isset($m[2])) {
         $this->appNamespace = $m[1];
         $this->translationContext = $m[1] . '\\Loader::Controllers\\' . $m[2];
       }

@@ -346,6 +346,11 @@ class App {
     // to be overriden
   }
 
+  public function renderSecondSidebar(): string
+  {
+    return '';
+  }
+
   public function getFullConfigPath(string $path): string
   {
     return 'apps/' . $this->main->apps->getAppNamespaceForConfig($this->namespace) . '/' . $path;

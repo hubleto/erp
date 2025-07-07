@@ -194,8 +194,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       (string) $rewriteBase,
       (string) $accountFolder,
       (string) $accountUrl,
-      (string) realpath(__DIR__ . '/../../..'), // mainFolder
-      (string) $mainUrl, // mainUrl
+      (string) $mainFolder,
+      (string) $mainUrl,
       (string) $dbHost,
       (string) $dbName,
       (string) $dbUser,

@@ -182,6 +182,11 @@ class AppManager
     return $this->getAppInstance('HubletoApp\\Community\\' . $appName);
   }
 
+  public function custom(string $appName): null|\HubletoMain\Core\App
+  {
+    return $this->getAppInstance('HubletoApp\\Custom\\' . $appName);
+  }
+
   /** @param array<string, mixed> $appConfig */
   public function installApp(int $round, string $appNamespace, array $appConfig = [], bool $forceInstall = false): bool
   {

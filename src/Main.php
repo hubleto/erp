@@ -9,14 +9,26 @@ spl_autoload_register(function(string $class) {
     @include(__DIR__ . '/cli/' . str_replace('HubletoMain/Cli/', '', $class) . '.php');
   }
 
-  // hook
+  // main/hook
   if (str_starts_with($class, 'HubletoMain/Hook/')) {
     @include(__DIR__ . '/../hooks/' . str_replace('HubletoMain/Hook/', '', $class) . '.php');
   }
 
-  // report
+  // main/report
   if (str_starts_with($class, 'HubletoMain/Report/')) {
     @include(__DIR__ . '/../reports/' . str_replace('HubletoMain/Report/', '', $class) . '.php');
+  }
+
+  // custom/hook
+  if (str_starts_with($class, 'HubletoCustom/Hook/')) {
+    $hubletoMain = $GLOBALS['hubletoMain'];
+    @include($hubletoMain->config->getAsString('accountDir') . '/hooks/' . str_replace('HubletoCustom/Hook/', '', $class) . '.php');
+  }
+
+  // custom/report
+  if (str_starts_with($class, 'HubletoCustom/Report/')) {
+    $hubletoMain = $GLOBALS['hubletoMain'];
+    @include($hubletoMain->config->getAsString('accountDir') . '/reports/' . str_replace('HubletoCustom/Report/', '', $class) . '.php');
   }
 
   // community
@@ -89,11 +101,18 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     $this->cli = new \HubletoMain\Cli\Agent\Loader($this);
 
-    $hooks = \ADIOS\Core\Helper::scanDirRecursively(__DIR__ . '/../hooks');
+    $hooks = @\ADIOS\Core\Helper::scanDirRecursively($this->config->getAsString('dir') . '/hooks');
     foreach ($hooks as $hook) {
       $hookClass = '\\HubletoMain\\Hook\\' . str_replace('/', '\\', $hook);
       $hookClass = str_replace('.php', '', $hookClass);
-      $this->hooks[$hook] = new $hookClass($this, $this->cli);
+      $this->hooks[$hookClass] = new $hookClass($this, $this->cli);
+    }
+
+    $hooks = @\ADIOS\Core\Helper::scanDirRecursively($this->config->getAsString('accountDir') . '/hooks');
+    foreach ($hooks as $hook) {
+      $hookClass = '\\HubletoCustom\\Hook\\' . str_replace('/', '\\', $hook);
+      $hookClass = str_replace('.php', '', $hookClass);
+      $this->hooks[$hookClass] = new $hookClass($this, $this->cli);
     }
 
     $this->release = new \HubletoMain\Core\ReleaseManager($this);

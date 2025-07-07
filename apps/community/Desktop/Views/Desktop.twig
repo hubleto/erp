@@ -1,5 +1,7 @@
 {{ setTranslationContext('HubletoMain::Desktop') }}
 
+{% set secondSidebar = viewParams.activatedApp.renderSecondSidebar() %}
+
 {% macro appBtn(app, inGroup) %}
   {% set notificationsCount = app.getNotificationsCount() %}
   <div class="flex gap-1">
@@ -331,31 +333,12 @@
           {% set i = i + 1 %}
         {% endfor %}
       </nav>
-      {# {% if viewParams.activatedApppSidebar|length > 0 %}
-        <div>
-          <ul>
-            {% for item in viewParams.activatedApppSidebar %}
-              {% if item.type == 'link' %}
-                <a class="btn btn-transparent w-full mb-1" href="{{ config.accountUrl }}/{{ item.url }}" title="{{ item.title }}">
-                  <span class="icon"><i class="{{ item.icon }}"></i></span>
-                  <span class="text">{{ item.title }}</span>
-                </a>
-              {% elseif item.type == 'heading_1' %}
-                <div class="text-primary text-sm m-2">{{ item.title }}</div>
-              {% elseif item.type == 'heading_2' %}
-                <h2>{{ item.title }}</h2>
-              {% elseif item.type == 'divider' %}
-                <div class="divider"></div>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %} #}
+      {% if secondSidebar != '' %} <div>{{ secondSidebar|raw }}</div> {% endif %}
     </aside>
 
     <div
       id="app-main-content"
-      {# class="{% if viewParams.activatedApppSidebar|length > 0 %} sidebar-two-levels {% endif %}" #}
+      class="{% if secondSidebar != '' %} sidebar-two-levels {% endif %}"
     >
       {{ contentHtml|raw }}
     </div>

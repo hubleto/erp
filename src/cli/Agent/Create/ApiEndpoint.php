@@ -11,12 +11,12 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
     $endpoint = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
 
-    $endpointPascalCase = \ADIOS\Core\Helper::kebabToPascal($endpoint);
-
     $this->main->apps->init();
 
     if (empty($appNamespace)) throw new \Exception("<appNamespace> not provided.");
     if (empty($endpoint)) throw new \Exception("<endpoint> not provided.");
+
+    $endpointPascalCase = \ADIOS\Core\Helper::kebabToPascal($endpoint);
 
     $app = $this->main->apps->getAppInstance($appNamespace);
 
@@ -43,9 +43,12 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->white("\n");
     $this->cli->cyan("REST API endpoint '{$endpoint}' in '{$appNamespace}' created successfully.\n");
-    $this->cli->yellow("⚠ NEXT STEPS:\n");
+    $this->cli->yellow("⚠  NEXT STEPS:\n");
     $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
-    $this->cli->blue  ("\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);\n");
+    $this->cli->colored("cyan", "black", "Add to Loader.php->init(): \$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);");
+    $this->cli->yellow("\n");
+    $this->cli->yellow("⚠  -> Check the endpoint\n");
+    $this->cli->colored("cyan", "black", "Open in browser: {$this->main->config->getAsString('rootUrl')}/{$app->manifest['rootUrlSlug']}/api/{$endpoint}");
     $this->cli->yellow("\n");
   }
 

@@ -91,7 +91,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($rootFolder === null) $rootFolder = realpath(__DIR__ . '/../../../..');
     if ($rootUrl === null) $rootUrl = $this->cli->read('ConfigEnv.rootUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
     if ($srcFolder === null) $srcFolder = realpath(__DIR__ . '/../../..');
-    if ($srcUrl === null) $srcUrl = $this->cli->read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/hblsrc');
+    if ($srcUrl === null) $srcUrl = $this->cli->read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/hbl');
     if ($dbHost === null) $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
     if ($dbUser === null) $dbUser = $this->cli->read('ConfigEnv.dbUser (user must exist)', 'root');
     if ($dbPassword === null) $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
@@ -277,5 +277,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
     $this->cli->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
     $this->cli->cyan("\n");
+    $this->cli->yellow("💡 TIP: Run command below to create your new app called 'Testapp'.\n");
+    $this->cli->colored("cyan", "black", "Run: php hubleto app create HubletoApp\\Custom\\Testapp");
   }
 }

@@ -17,7 +17,5 @@ class Install extends \HubletoMain\Cli\Agent\Command
 
     $this->main->apps->installApp(1, $appNamespace, [], $forceInstall);
     $this->cli->cyan("{$appNamespace} installed successfully.\n");
-    $this->cli->yellow("💡 TIP: Run command below to add your first model.\n");
-    $this->cli->blue("php hubleto create model {$appNamespace} Order");
   }
 }

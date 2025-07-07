@@ -293,10 +293,10 @@ class AppManager
     file_put_contents($rootFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml.twig', $tplVars));
     // file_put_contents($rootFolder . '/Models/Contact.php', $this->main->twig->render('@appTemplate/Models/Contact.php.twig', $tplVars));
     // file_put_contents($rootFolder . '/Models/RecordManagers/Contact.php', $this->main->twig->render('@appTemplate/Models/RecordManagers/Contact.php.twig', $tplVars));
-    file_put_contents($rootFolder . '/Controllers/Dashboard.php', $this->main->twig->render('@appTemplate/Controllers/Dashboard.php.twig', $tplVars));
+    file_put_contents($rootFolder . '/Controllers/Home.php', $this->main->twig->render('@appTemplate/Controllers/Home.php.twig', $tplVars));
     file_put_contents($rootFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
     file_put_contents($rootFolder . '/Controllers/Settings.php', $this->main->twig->render('@appTemplate/Controllers/Settings.php.twig', $tplVars));
-    file_put_contents($rootFolder . '/Views/Dashboard.twig', $this->main->twig->render('@appTemplate/Views/Dashboard.twig.twig', $tplVars));
+    file_put_contents($rootFolder . '/Views/Home.twig', $this->main->twig->render('@appTemplate/Views/Home.twig.twig', $tplVars));
     file_put_contents($rootFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
     file_put_contents($rootFolder . '/Views/Settings.twig', $this->main->twig->render('@appTemplate/Views/Settings.twig.twig', $tplVars));
   }

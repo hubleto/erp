@@ -42,8 +42,8 @@ class Create extends \HubletoMain\Cli\Agent\Command
     $this->main->apps->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
 
     $this->cli->cyan("App {$appNamespace} created successfully.\n");
-    $this->cli->yellow("💡 TIP: Run command below to install your new app.\n");
-    $this->cli->blue("php hubleto app install {$appNamespace} force");
+    $this->cli->yellow("💡 TIP: Run command below to add your first model.\n");
+    $this->cli->colored("cyan", "black", "Run: php hubleto create model {$appNamespace} Order");
   }
 
   public function validateAppNamespace(string $appNamespace): void

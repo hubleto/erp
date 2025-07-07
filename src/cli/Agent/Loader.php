@@ -20,24 +20,35 @@ class Loader {
     return (php_sapi_name() === 'cli');
   }
 
-  public function color(string $colorName): void
+  public function color(string $fgColor, string $bgColor = 'black'): void
   {
     if (php_sapi_name() !== 'cli') return;
 
-    $sequences = [
+    $bgSequences = [
+      'black' => "\033[40m",
+      'red' => "\033[41m",
+      'green' => "\033[42m",
+      'yellow' => "\033[43m",
+      'blue' => "\033[44m",
+      'purple' => "\033[45m",
+      'cyan' => "\033[46m",
+      'white' => "\033[47m",
+    ];
+
+    echo $bgSequences[$bgColor] ?? '';
+
+    $fgSequences = [
+      'black' => "\033[30m",
       'red' => "\033[31m",
       'green' => "\033[32m",
       'yellow' => "\033[33m",
       'blue' => "\033[34m",
+      'purple' => "\033[35m",
       'cyan' => "\033[36m",
       'white' => "\033[37m",
-      'bg-default' => "\033[49m",
-      'bg-cyan' => "\033[46m",
     ];
 
-    if (isset($sequences[$colorName])) {
-      echo $sequences[$colorName];
-    }
+    echo $fgSequences[$fgColor] ?? '';
   }
 
   public function readRaw(): string
@@ -86,5 +97,12 @@ class Loader {
   public function blue(string $message): void { $this->color('blue'); echo $message; $this->color('white'); }
   public function cyan(string $message): void { $this->color('cyan'); echo $message; $this->color('white'); }
   public function white(string $message): void { $this->color('white'); echo $message; $this->color('white'); }
+
+  public function colored(string $bgColor, string $fgColor, string $message): void {
+    $this->color($fgColor, $bgColor);
+    echo $message;
+    $this->color('white', 'black');
+    echo "\n";
+  }
 
 }

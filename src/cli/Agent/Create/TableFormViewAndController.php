@@ -75,18 +75,29 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->white("\n");
     $this->cli->cyan("Table, form, view and controller for model '{$model}' in '{$appNamespace}' created successfully.\n");
-    $this->cli->yellow("⚠ NEXT STEPS:\n");
+    $this->cli->yellow("⚠  NEXT STEPS:\n");
     $this->cli->yellow("⚠  -> Add the Table component into {$app->rootFolder}/Loader.tsx\n");
-    $this->cli->blue("import Table{$modelPluralForm} from './Components/Table{$modelPluralForm}'\n");
-    $this->cli->blue("globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});\n");
+    $this->cli->colored("cyan", "black", "Add to Loader.tsx:");
+    $this->cli->colored("cyan", "black", "import Table{$modelPluralForm} from './Components/Table{$modelPluralForm}';");
+    $this->cli->colored("cyan", "black", "globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});");
     $this->cli->yellow("\n");
     $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
-    $this->cli->blue("\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/{$modelPluralForm}\/?$/' => Controllers\\{$controller}::class ]);\n");
+    $this->cli->colored("cyan", "black", "Add to Loader.php->init(): \$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/" . strtolower($modelPluralForm) . "\/?$/' => Controllers\\{$controller}::class ]);");
+    $this->cli->yellow("\n");
+    $this->cli->yellow("⚠  -> Add button to any view in {$app->rootFolder}/Views, e.g. Home.twig\n");
+    $this->cli->colored("cyan", "black", "Add to {$app->rootFolder}/Views/Home.twig:");
+    $this->cli->colored("cyan", "black", "<a class='btn btn-large btn-square btn-transparent'>");
+    $this->cli->colored("cyan", "black", "  <span class='icon'><i class='fas fa-table'></i></span>");
+    $this->cli->colored("cyan", "black", "  <span class='text'}{$modelPluralForm}</span>");
+    $this->cli->colored("cyan", "black", "</a>");
+    $this->cli->white("\n");
+    $this->cli->yellow("⚠  -> Re-install the app.\n");
+    $this->cli->colored("cyan", "black", "Run: php hubleto app install {$appNamespace} force");
     $this->cli->yellow("\n");
     $this->cli->yellow("⚠   -> Run `npm i` in `{$this->main->config->getAsString('srcFolder')}` to install required node modules.\n");
     $this->cli->yellow("⚠   -> Run `npm run build-js` or `npm run watch-js` in `{$this->main->config->getAsString('srcFolder')}` to compile Javascript.\n");
-    $this->cli->blue("cd {$this->main->config->getAsString('srcFolder')}\n");
-    $this->cli->blue("npm run build-js\n");
+    $this->cli->colored("cyan", "black", "Run: npm run --prefix hbl build-js");
+    $this->cli->colored("cyan", "black", "And then open in browser: {$this->main->config->getAsString('rootUrl')}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
   }
 
 }

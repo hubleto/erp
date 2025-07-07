@@ -44,17 +44,17 @@ class {{ model }} extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)
-        ->setReadonly()
+        // ->setReadonly()
         // ->setRequired()
         ->setCssClass('text-2xl text-primary')
       ,
       'text_example' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true)
-        ->setReadonly()
+        // ->setReadonly()
         // ->setRequired()
         ->setCssClass('text-2xl text-primary')
       ,
       'decimal_example' => (new Decimal($this, $this->translate('Number')))->setProperty('defaultVisibility', true)
-        ->setReadonly()
+        // ->setReadonly()
         // ->setRequired()
         ->setCssClass('text-2xl text-primary')
         ->setDecimals(4)

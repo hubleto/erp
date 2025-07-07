@@ -48,8 +48,13 @@ class Model extends \HubletoMain\Cli\Agent\Command
     $this->cli->yellow("⚠ NEXT STEPS:\n");
     $this->cli->yellow("⚠  -> Modify `describeColumns()` method in the model.\n");
     $this->cli->yellow("⚠  -> Add the model in `installTables()` method in  {$app->rootFolder}/Loader.php\n");
-    $this->cli->blue  ("(new Models\\{$model}(\$this->main))->dropTableIfExists()->install();\n");
-    
+    $this->cli->blue("(new Models\\{$model}(\$this->main))->dropTableIfExists()->install();\n");
+    $this->cli->white("\n");
+    $this->cli->yellow("⚠  -> Re-install the app.\n");
+    $this->cli->blue("php hubleto app install {$appNamespace} force\n");
+    $this->cli->white("\n");
+    $this->cli->yellow("💡 TIP: Run command below to add controllers, views and some UI components to manage data in your model.\n");
+    $this->cli->blue("php hubleto create mvc {$appNamespace} Order\n");
   }
 
 }

@@ -47,7 +47,6 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
     $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
     $this->cli->blue  ("\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);\n");
     $this->cli->yellow("\n");
-    
   }
 
 }

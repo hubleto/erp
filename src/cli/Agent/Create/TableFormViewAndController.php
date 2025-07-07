@@ -77,18 +77,16 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("Table, form, view and controller for model '{$model}' in '{$appNamespace}' created successfully.\n");
     $this->cli->yellow("⚠ NEXT STEPS:\n");
     $this->cli->yellow("⚠  -> Add the Table component into {$app->rootFolder}/Loader.tsx\n");
-    $this->cli->blue  ("import Table{$modelPluralForm} from './Components/Table{$modelPluralForm}'\n");
-    $this->cli->blue  ("globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});\n");
+    $this->cli->blue("import Table{$modelPluralForm} from './Components/Table{$modelPluralForm}'\n");
+    $this->cli->blue("globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});\n");
     $this->cli->yellow("\n");
     $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
-    $this->cli->blue  ("\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/{$modelPluralForm}\/?$/' => Controllers\\{$controller}::class ]);\n");
+    $this->cli->blue("\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/{$modelPluralForm}\/?$/' => Controllers\\{$controller}::class ]);\n");
     $this->cli->yellow("\n");
     $this->cli->yellow("⚠   -> Run `npm i` in `{$this->main->config->getAsString('srcFolder')}` to install required node modules.\n");
     $this->cli->yellow("⚠   -> Run `npm run build-js` or `npm run watch-js` in `{$this->main->config->getAsString('srcFolder')}` to compile Javascript.\n");
-    $this->cli->blue  ("cd {$this->main->config->getAsString('srcFolder')}\n");
-    $this->cli->blue  ("npm i\n");
-    $this->cli->blue  ("npm run build-js\n");
-
+    $this->cli->blue("cd {$this->main->config->getAsString('srcFolder')}\n");
+    $this->cli->blue("npm run build-js\n");
   }
 
 }

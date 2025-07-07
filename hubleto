@@ -50,6 +50,7 @@ if (!empty($action)) {
       break;
       case 'create':
         switch ($argv[2]) {
+          case 'app': $command = new \HubletoMain\Cli\Agent\App\Create($cli, $argv); break;
           case 'model': $command = new \HubletoMain\Cli\Agent\Create\Model($cli, $argv); break;
           case 'controller': $command = new \HubletoMain\Cli\Agent\Create\Controller($cli, $argv); break;
           case 'view': $command = new \HubletoMain\Cli\Agent\Create\View($cli, $argv); break;

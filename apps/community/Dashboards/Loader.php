@@ -23,7 +23,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/dashboards\/?$/' => Controllers\Settings::class,
     ]);
 
-    $this->main->apps->community('Settings')->addSetting($this, [
+    $this->main->apps->community('Settings')?->addSetting($this, [
       'title' => $this->translate('Dashboards'),
       'icon' => 'fas fa-table',
       'url' => 'settings/dashboards',

@@ -32,6 +32,8 @@
   </div>
 {% endmacro %}
 
+{% set logoUrl = config.logoUrl ?? config.url ~ "/assets/images/logo-hubleto.png" %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,8 +43,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel='shortcut icon' href='{{ config.url }}/assets/images/logo-hubleto.png'>
-  <title>{{ user.DEFAULT_COMPANY.name }} | Hubleto | Business Application Hub</title>
+  <link rel='shortcut icon' href='{{ logoUrl }}'>
+  <title>{{ config.appTitle ?? user.DEFAULT_COMPANY.name ~ " | Hubleto | Business Application Hub" }}</title>
 
   <script>
     window.ConfigEnv = {
@@ -133,7 +135,7 @@
       <div class="flex items-center">
         <div class="flex flex-row justify-around">
           <a class="flex" href="{{ config.accountUrl }}">
-            <img id="logo" src="{{ config.url }}/assets/images/logo-hubleto.png" class="h-8 m-auto">
+            <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
           </a>
           <button onclick="showSidebar()" class="sm:block md:hidden ml-6">
             <span class="icon"><i id="menuButton" class="fas fa-bars"></i></span>
@@ -164,33 +166,31 @@
               </div>
             </button>
           </li> #}
-          <li class="mr-2 hidden md:block">
-            <button class="btn btn-transparent btn-dropdown">
-              <div class="menu">
-                <div class="bg-white p-2 shadow-lg grid grid-cols-2" style="margin-left:-13.9em;margin-top:0.2em;width:16em;">
+          {% if viewParams.availableLanguages|length > 0 %}
+            <li class="mr-2 hidden md:block">
+              <button class="btn btn-transparent btn-dropdown">
+                <div class="menu">
                   <div class="list mr-2">
-                    <a href="?set-language=en" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">English</span></a>
-                    <a href="?set-language=de" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Deutsch</span></a>
-                    <a href="?set-language=es" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/es.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Español</span></a>
-                    <a href="?set-language=fr" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/fr.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Francais</span></a>
-                  </div>
-                  <div class="list">
-                    <a href="?set-language=it" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/it.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Italiano</span></a>
-                    <a href="?set-language=pl" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/pl.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Polski</span></a>
-                    <a href="?set-language=ro" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/ro.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Română</span></a>
-                    <a href="?set-language=cs" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/cs.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Česky</span></a>
-                    <a href="?set-language=sk" class="btn btn-white btn-no-border btn-list-item"><span class="icon"><img src="{{ config.url }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span><span class="text">Slovensky</span></a>
+                    {% for langSymbol, lang in viewParams.availableLanguages %}
+                      <a
+                        href="?set-language={{ langSymbol }}"
+                        class="btn btn-white btn-no-border btn-list-item"
+                      >
+                        <span class="icon"><img src="{{ config.url }}/{{ lang.flagImage }}" style="max-height:1em;max-width:1em;" /></span>
+                        <span class="text">{{ lang.name }}</span>
+                      </a>
+                    {% endfor %}
                   </div>
                 </div>
-              </div>
-              <span class="text">
-                {{ (user.language ?: 'en')|upper }}
-              </span>
-              <span class="icon">
-                <img src="{{ config.url }}/assets/images/flags/{{ (user.language ?: 'en')|lower }}.jpg" style="max-height:1em;max-width:1em;" />
-              </span>
-            </button>
-          </li>
+                <span class="text">
+                  {{ (user.language ?: 'en')|upper }}
+                </span>
+                <span class="icon">
+                  <img src="{{ config.url }}/assets/images/flags/{{ (user.language ?: 'en')|lower }}.jpg" style="max-height:1em;max-width:1em;" />
+                </span>
+              </button>
+            </li>
+          {% endif %}
           {% if viewParams.contextHelpUrl %}
             <li class="mr-2 hidden md:block">
               <a
@@ -219,19 +219,21 @@
               </a>
             </li>
           {% endif %}
-          <li class="mr-2 hidden md:block">
-            {% if viewParams.main.isPremium %}
-              <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud">
-                <span class="icon text-primary"><i class="fas fa-medal"></i></span>
-                <span class="text">{{ translate('Premium') }}</span>
-              </a>
-            {% else %}
-              <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud">
-                <span class="icon text-primary"><i class="fas fa-cloud"></i></span>
-                <span class="text">{{ translate('Personal') }}</span>
-              </a>
-            {% endif %}
-          </li>
+          {% if viewParams.main.apps.isAppInstalled('HubletoApp\\Community\\Cloud') %}
+            <li class="mr-2 hidden md:block">
+              {% if viewParams.main.isPremium %}
+                <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud">
+                  <span class="icon text-primary"><i class="fas fa-medal"></i></span>
+                  <span class="text">{{ translate('Premium') }}</span>
+                </a>
+              {% else %}
+                <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud">
+                  <span class="icon text-primary"><i class="fas fa-cloud"></i></span>
+                  <span class="text">{{ translate('Personal') }}</span>
+                </a>
+              {% endif %}
+            </li>
+          {% endif %}
           <li class="mr-2 hidden md:block">
             <button id="theme-toggle-btn" class="btn btn-transparent" onclick="toggleTheme();">
               <span class="icon"><i class="fas fa-sun"></i></span>
@@ -252,10 +254,12 @@
                     <span class="icon"><i class='fas fa-user-tie'></i></span>
                     <span class="text">{{ translate('Manage your user account') }}</span>
                   </a>
-                  <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/cloud">
-                    <span class="icon"><i class='fas fa-cloud'></i></span>
-                    <span class="text">{{ translate('Manage cloud account') }}</span>
-                  </a>
+                  {% if viewParams.main.apps.isAppInstalled('HubletoApp\\Community\\Cloud') %}
+                    <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/cloud">
+                      <span class="icon"><i class='fas fa-cloud'></i></span>
+                      <span class="text">{{ translate('Manage cloud account') }}</span>
+                    </a>
+                  {% endif %}
                   <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/?sign-out">
                     <span class="icon"><i class='fas fa-sign-out-alt'></i></span>
                     <span class="text">{{ translate('Sign out') }}</span>

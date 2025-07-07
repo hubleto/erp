@@ -23,8 +23,8 @@ class Loader extends \HubletoMain\Core\App
       '/^contacts\/import\/?$/' => Controllers\Import::class,
     ]);
 
-    $this->main->apps->community('Settings')->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/categories']);
-    $this->main->apps->community('Settings')->addSetting($this, [
+    $this->main->apps->community('Settings')?->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/categories']);
+    $this->main->apps->community('Settings')?->addSetting($this, [
       'title' => $this->translate('Contact Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/contact-tags',

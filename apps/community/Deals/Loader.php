@@ -26,26 +26,24 @@ class Loader extends \HubletoMain\Core\App
       '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
     ]);
 
-    $this->main->apps->community('Settings')->addSetting($this, [
+    $this->main->apps->community('Settings')?->addSetting($this, [
       'title' => $this->translate('Deal Tags'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/deal-tags',
     ]);
-    $this->main->apps->community('Settings')->addSetting($this, [
+    $this->main->apps->community('Settings')?->addSetting($this, [
       'title' => $this->translate('Deal Lost Reasons'),
       'icon' => 'fas fa-tags',
       'url' => 'settings/deal-lost-reasons',
     ]);
 
-    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    $calendarManager->addCalendar(
+    $calendarManager = $this->main->apps->community('Calendar')?->calendarManager?->addCalendar(
       'deals',
       $this->configAsString('calendarColor'),
       Calendar::class,
     );
 
-    $reportManager = $this->main->apps->community('Reports')->reportManager;
-    $reportManager->addReport($this, Reports\MonthlyRevenue::class);
+    $reportManager = $this->main->apps->community('Reports')?->reportManager?->addReport($this, Reports\MonthlyRevenue::class);
 
     $dashboardsApp = $this->main->apps->community('Dashboards');
     if ($dashboardsApp) {
@@ -68,7 +66,7 @@ class Loader extends \HubletoMain\Core\App
       );
     }
 
-    $this->main->apps->community('Help')->addContextHelpUrls('/^deals\/?$/', [
+    $this->main->apps->community('Help')?->addContextHelpUrls('/^deals\/?$/', [
       'en' => 'en/apps/community/deals',
     ]);
 

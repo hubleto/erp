@@ -97,7 +97,7 @@ class Controller extends \ADIOS\Core\Controller
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
 
-    $contextHelpUrls = $this->main->apps->community('Help')->getCurrentContextHelpUrls($this->main->route);
+    $contextHelpUrls = $this->main->apps->community('Help')?->getCurrentContextHelpUrls($this->main->route);
     $user = $this->main->auth->getUser();
 
     if (isset($contextHelpUrls[$user['language']])) $contextHelpUrl = $contextHelpUrls[$user['language']];

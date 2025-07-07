@@ -17,9 +17,10 @@
 | app reset-all                            | Re-install all apps their 'factory' state.                                   |
 | app list                                 | List all installed apps.                                                     |
 |                                          |                                                                              |
+| create app <appNamespace>                | Synonym for `app create` command.                                            |
 | create model <appNamespace> <model>      | Creates an empty model into a specified app.                                 |
 | create controller <appNamespace> <model> | Creates an empty controller into a specified app.                            |
-| create view <appNamespace> <model>       | Creates an empty view into a specified app.                                  |
+| create view <appNamespace> <view>        | Creates an empty view into a specified app.                                  |
 | create mvc <appNamespace> <model>        | Creates a default MVC for a specified model.                                 |
 | create api <appNamespace> <endpoint>     | Creates a sample REST API controller.                                        |
 |                                          |                                                                              |

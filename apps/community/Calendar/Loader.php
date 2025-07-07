@@ -28,21 +28,17 @@ class Loader extends \HubletoMain\Core\App
       '/^calendar\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
     ]);
 
-    $this->main->apps->community('Help')->addContextHelpUrls('/^calendar\/?$/', [
+    $this->main->apps->community('Help')?->addContextHelpUrls('/^calendar\/?$/', [
       'en' => 'en/apps/community/calendar',
     ]);
 
-    $dashboardsApp = $this->main->apps->community('Dashboards');
-    if ($dashboardsApp) {
-      $dashboardsApp->addBoard(
-        $this,
-        $this->translate('Reminders'),
-        'calendar/boards/reminders'
-      );
-    }
+    $this->main->apps->community('Dashboards')?->addBoard(
+      $this,
+      $this->translate('Reminders'),
+      'calendar/boards/reminders'
+    );
 
-    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    $calendarManager->addCalendar(
+    $this->main->apps->community('Calendar')?->calendarManager?->addCalendar(
       'calendar',
       'blue',
       Calendar::class

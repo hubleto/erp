@@ -33,7 +33,7 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
 
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
     $this->viewParams['activatedApp'] = $activatedApp;
-    $this->viewParams['sidebarGroups'] = [
+    $this->viewParams['sidebarGroups'] = $this->main->config->getAsArray('sidebarGroups', [
       'crm' => [ 'title' => $this->translate('CRM'), 'icon' => 'fas fa-id-card-clip' ],
       'documents' => [ 'title' => $this->translate('Documents'), 'icon' => 'fas fa-file' ],
       'marketing' => [ 'title' => $this->translate('Marketing'), 'icon' => 'fas fa-bullseye' ],
@@ -50,7 +50,19 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
       'maintenance' => [ 'title' => $this->translate('Maintenance'), 'icon' => 'fas fa-cog' ],
       'help' => [ 'title' => $this->translate('Help'), 'icon' => 'fas fa-life-ring' ],
       'custom' => [ 'title' => $this->translate('Custom'), 'icon' => 'fas fa-puzzle-piece' ],
-    ];
+    ]);
+
+    $this->viewParams['availableLanguages'] = $this->main->config->getAsArray('availableLanguages', [
+      "en" => [ "flagImage" => "assets/images/flags/en.jpg", "name" => "English" ],
+      "de" => [ "flagImage" => "assets/images/flags/de.jpg", "name" => "Deutsch" ],
+      "es" => [ "flagImage" => "assets/images/flags/es.jpg", "name" => "Español" ],
+      "fr" => [ "flagImage" => "assets/images/flags/fr.jpg", "name" => "Francais" ],
+      "it" => [ "flagImage" => "assets/images/flags/it.jpg", "name" => "Italiano" ],
+      "pl" => [ "flagImage" => "assets/images/flags/pl.jpg", "name" => "Polski" ],
+      "ro" => [ "flagImage" => "assets/images/flags/ro.jpg", "name" => "Română" ],
+      "cs" => [ "flagImage" => "assets/images/flags/cs.jpg", "name" => "Česky" ],
+      "sk" => [ "flagImage" => "assets/images/flags/sk.jpg", "name" => "Slovensky" ],
+    ]);
 
     $appMenu = $this->main->apps->community('Desktop')->appMenu;
     $this->viewParams['appMenu'] = $appMenu->getItems();

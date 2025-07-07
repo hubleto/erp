@@ -93,7 +93,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($dbHost === null) $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
     if ($dbUser === null) $dbUser = $this->cli->read('ConfigEnv.dbUser (user must exist)', 'root');
     if ($dbPassword === null) $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
-    if ($dbName === null) $dbName = $this->cli->read('ConfigEnv.dbName (database will be created, if it not exist)', 'my_hubleto');
+    if ($dbName === null) $dbName = $this->cli->read('ConfigEnv.dbName (database will be created, if it not exists)', 'my_hubleto');
     if ($dbCodepage === null) $dbCodepage = $this->cli->read('ConfigEnv.dbCodepage', 'utf8mb4');
     if ($accountFullName === null) $accountFullName = $this->cli->read('Account.accountFullName', 'My Company');
     if ($adminName === null) $adminName = $this->cli->read('Account.adminName', 'John');
@@ -213,7 +213,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $package = trim((string) $package);
 
       /** @var array<string, array<string, mixed>> */
-      $appsInPackage = (is_array($installer->packages[$package]) ? $installer->packages[$package] : []);
+      $appsInPackage = (is_array($installer->packages[$package] ?? null) ? $installer->packages[$package] : []);
 
       $installer->appsToInstall = array_merge(
         $installer->appsToInstall,
@@ -224,6 +224,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (is_array($appsToInstall)) {
       foreach ($appsToInstall as $appToInstall => $appConfig) {
         if (!isset($installer->appsToInstall[$appToInstall])) {
+          if (!is_array($appConfig)) $appConfig = [];
           $installer->appsToInstall[$appToInstall] = $appConfig;
         }
       }

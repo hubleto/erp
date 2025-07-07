@@ -280,6 +280,8 @@ class Installer {
           $configEnv .= '$config[\'' . $cfgParam . '\'] = ' . ($cfgValue ? 'true' : 'false') . ';' . "\n";
         } else if (is_numeric($cfgValue)) {
           $configEnv .= '$config[\'' . $cfgParam . '\'] = ' . (int) $cfgValue . ';' . "\n";
+        } else if (is_array($cfgValue)) {
+          $configEnv .= '$config[\'' . $cfgParam . '\'] = ' . var_export($cfgValue, true) . ';' . "\n";
         }
       }
     }

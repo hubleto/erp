@@ -23,7 +23,7 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/calendar-sources\/ics\/?$/' => Ics::class,
     ]);
 
-    $this->main->apps->community('Settings')->addSetting($this, [
+    $this->main->apps->community('Settings')?->addSetting($this, [
       'title' => $this->translate('Calendar sources'),
       'icon' => 'fas fa-calendar',
       'url' => 'settings/calendar-sources',
@@ -31,8 +31,7 @@ class Loader extends \HubletoMain\Core\App
 
     $this->setConfigAsInteger('sidebarOrder', 0);
 
-    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    $calendarManager->addCalendar(
+    $calendarManager = $this->main->apps->community('Calendar')?->calendarManager?->addCalendar(
       'sync',
       'yellow',
       Calendar::class

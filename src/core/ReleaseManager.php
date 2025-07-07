@@ -17,7 +17,7 @@ class ReleaseManager
 
   public function load(): void
   {
-    $releaseInfoFile = $this->main->config->getAsString('dir') . '/release.json';
+    $releaseInfoFile = $this->main->config->getAsString('appFolder') . '/release.json';
 
     if (is_file($releaseInfoFile)) {
       $this->release = @json_decode(file_get_contents($releaseInfoFile), true) ?? [];

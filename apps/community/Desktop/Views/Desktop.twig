@@ -17,7 +17,7 @@
         {% if app.isActivated %} btn-active {% else %}
         {% if notificationsCount > 0 %} text-yellow-100 {% endif %} {% endif %} flex-10 truncate
       "
-      href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
+      href="{{ config.appUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
       title="{{ app.manifest.nameTranslated }}"
     >
       <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
@@ -26,7 +26,7 @@
     {% if app.isActivated and app.hasCustomSettings %}
       <a
         class="btn btn-active flex-1"
-        href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}/settings"
+        href="{{ config.appUrl }}/{{ app.manifest.rootUrlSlug }}/settings"
       >
         <span class="icon text-xs p-0 m-0"><i class="fas fa-cog"></i></span>
       </a>
@@ -34,7 +34,7 @@
   </div>
 {% endmacro %}
 
-{% set logoUrl = config.logoUrl ?? config.url ~ "/assets/images/logo-hubleto.png" %}
+{% set logoUrl = config.logoUrl ?? config.srcUrl ~ "/assets/images/logo-hubleto.png" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,26 +45,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel='shortcut icon' href='{{ config.url }}/{{ logoUrl }}'>
+  <link rel='shortcut icon' href='{{ logoUrl }}'>
   <title>{{ config.appTitle ?? user.DEFAULT_COMPANY.name ~ " | Hubleto | Business Application Hub" }}</title>
 
   <script>
     window.ConfigEnv = {
       'rewriteBase': '{{ config.rewriteBase }}',
-      'url': '{{ config.accountUrl }}',
-      'accountUrl': '{{ config.accountUrl }}',
+      'url': '{{ config.appUrl }}',
+      'appUrl': '{{ config.appUrl }}',
       'uploadUrl': '{{ config.uploadUrl }}',
     }
   </script>
 
-  <script src='{{ config.accountUrl }}/adios/cache.js'></script>
-  <script defer src='{{ config.url }}/assets/compiled/js/vendors.js'></script>
-  <script defer src='{{ config.url }}/assets/compiled/js/adios.js'></script>
-  <script defer src='{{ config.url }}/assets/compiled/js/hubleto.js'></script>
+  <script src='{{ config.appUrl }}/adios/cache.js'></script>
+  <script defer src='{{ config.srcUrl }}/assets/compiled/js/vendors.js'></script>
+  <script defer src='{{ config.srcUrl }}/assets/compiled/js/adios.js'></script>
+  <script defer src='{{ config.srcUrl }}/assets/compiled/js/hubleto.js'></script>
 
-  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/fontawesome-6.6.css">
-  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/compiled/css/main.css">
-  <link rel="stylesheet" type="text/css" href="{{ config.url }}/assets/css/themes/{{ viewParams.currentTheme }}.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/fontawesome-6.6.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/compiled/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/themes/{{ viewParams.currentTheme }}.css">
   <script>
     ADIOS.onAppLoaded(() => {
       globalThis.main.renderReactElements();
@@ -106,7 +106,7 @@
       {% for app in viewParams.main.apps.getEnabledApps() %}
         <a
           class='btn app-launcher-app-button'
-          href="{{ config.accountUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
+          href="{{ config.appUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
         >
           <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
           <span class="text">{{ app.manifest.nameTranslated }}</span>
@@ -126,18 +126,18 @@
         class="fixed left-0 bottom-0 w-48"
         style="
           overflow: hidden;
-          background:url({{ config.url }}/assets/images/logo-hubleto-stripe.png);
+          background:url({{ config.srcUrl }}/assets/images/logo-hubleto-stripe.png);
           background-position: 0 0;
           background-size: 20px 20px;
           height: 20px;
         "
       >
-        <img src="{{ config.url }}/assets/images/logo-hubleto-symbol.png" style="height:20px">
+        <img src="{{ config.srcUrl }}/assets/images/logo-hubleto-symbol.png" style="height:20px">
       </div>
       <div class="flex items-center">
         <div class="flex flex-row justify-around">
-          <a class="flex" href="{{ config.accountUrl }}">
-            <img id="logo" src="{{ config.url }}/{{ logoUrl }}" class="h-8 m-auto">
+          <a class="flex" href="{{ config.appUrl }}">
+            <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
           </a>
           <button onclick="showSidebar()" class="sm:block md:hidden ml-6">
             <span class="icon"><i id="menuButton" class="fas fa-bars"></i></span>
@@ -178,7 +178,7 @@
                         href="?set-language={{ langSymbol }}"
                         class="btn btn-white btn-no-border btn-list-item"
                       >
-                        <span class="icon"><img src="{{ config.url }}/{{ lang.flagImage }}" style="max-height:1em;max-width:1em;" /></span>
+                        <span class="icon"><img src="{{ config.srcUrl }}/{{ lang.flagImage }}" style="max-height:1em;max-width:1em;" /></span>
                         <span class="text">{{ lang.name }}</span>
                       </a>
                     {% endfor %}
@@ -188,7 +188,7 @@
                   {{ (user.language ?: 'en')|upper }}
                 </span>
                 <span class="icon">
-                  <img src="{{ config.url }}/assets/images/flags/{{ (user.language ?: 'en')|lower }}.jpg" style="max-height:1em;max-width:1em;" />
+                  <img src="{{ config.srcUrl }}/assets/images/flags/{{ (user.language ?: 'en')|lower }}.jpg" style="max-height:1em;max-width:1em;" />
                 </span>
               </button>
             </li>
@@ -215,7 +215,7 @@
               {% endif %}
               <a
                 class="btn btn-transparent"
-                href="{{ config.accountUrl }}/notifications"
+                href="{{ config.appUrl }}/notifications"
               >
                 <span class="icon text-blue-500"><i class="fas fa-bell"></i></span>
               </a>
@@ -224,12 +224,12 @@
           {% if viewParams.main.apps.isAppInstalled('HubletoApp\\Community\\Cloud') %}
             <li class="mr-2 hidden md:block">
               {% if viewParams.main.isPremium %}
-                <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud">
+                <a class="btn btn-transparent" href="{{ config.appUrl }}/cloud">
                   <span class="icon text-primary"><i class="fas fa-medal"></i></span>
                   <span class="text">{{ translate('Premium') }}</span>
                 </a>
               {% else %}
-                <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud">
+                <a class="btn btn-transparent" href="{{ config.appUrl }}/cloud">
                   <span class="icon text-primary"><i class="fas fa-cloud"></i></span>
                   <span class="text">{{ translate('Personal') }}</span>
                 </a>
@@ -252,17 +252,17 @@
                     {{ user.email }}<br/>
                     {{ user.DEFAULT_COMPANY.name }}
                   </div>
-                  <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/settings/my-account">
+                  <a class="btn btn-white btn-list-item p-2" href="{{ config.appUrl }}/settings/my-account">
                     <span class="icon"><i class='fas fa-user-tie'></i></span>
                     <span class="text">{{ translate('Manage your user account') }}</span>
                   </a>
                   {% if viewParams.main.apps.isAppInstalled('HubletoApp\\Community\\Cloud') %}
-                    <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/cloud">
+                    <a class="btn btn-white btn-list-item p-2" href="{{ config.appUrl }}/cloud">
                       <span class="icon"><i class='fas fa-cloud'></i></span>
                       <span class="text">{{ translate('Manage cloud account') }}</span>
                     </a>
                   {% endif %}
-                  <a class="btn btn-white btn-list-item p-2" href="{{ config.accountUrl }}/?sign-out">
+                  <a class="btn btn-white btn-list-item p-2" href="{{ config.appUrl }}/?sign-out">
                     <span class="icon"><i class='fas fa-sign-out-alt'></i></span>
                     <span class="text">{{ translate('Sign out') }}</span>
                   </a>
@@ -286,7 +286,7 @@
           <i class="fas fa-magnifying-glass"></i> Search app
         </button>
 
-        <a class="btn {% if viewParams.main.route == '' %} btn-active {% endif %}" href="{{ config.accountUrl }}">
+        <a class="btn {% if viewParams.main.route == '' %} btn-active {% endif %}" href="{{ config.appUrl }}">
           <span class="icon"><i class="fas fa-home"></i></span>
           <span class="text">{{ translate('Home') }}</span>
         </a>

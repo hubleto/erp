@@ -72,15 +72,15 @@ class Controller extends \ADIOS\Core\Controller
   {
     $this->main->runHook('controller:prepare-view-start', [$this]);
 
-    $logDir = $this->app->config->getAsString('logDir');
+    $logFolder = $this->app->config->getAsString('logFolder');
 
     if ($this->main->auth->isUserInSession()) {
       $user = $this->main->auth->getUserFromSession();
 
-      if (!empty($logDir) && is_dir($logDir)) {
-        if (!is_dir($logDir . '/usage')) mkdir($logDir . '/usage');
+      if (!empty($logFolder) && is_dir($logFolder)) {
+        if (!is_dir($logFolder . '/usage')) mkdir($logFolder . '/usage');
         file_put_contents(
-          $logDir . '/usage/' . date('Y-m-d') . '.log',
+          $logFolder . '/usage/' . date('Y-m-d') . '.log',
           date('H:i:s') . ' ' . $user['id'] . ' ' . get_class($this) . ' '. json_encode(array_keys($this->main->getUrlParams()), true) . "\n",
           FILE_APPEND
         );

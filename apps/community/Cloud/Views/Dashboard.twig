@@ -12,7 +12,7 @@
     function acceptLegalDocuments() {
       let chk = $('#accept-legal-documents');
       if (chk.is(':checked')) {
-        window.location.href = '{{ config.accountUrl }}/cloud/api/accept-legal-documents';
+        window.location.href = '{{ config.appUrl }}/cloud/api/accept-legal-documents';
       } else {
         $('#accept-legal-documents-wrapper').addClass('bg-red-200');
       }
@@ -63,12 +63,12 @@
           <div class="block badge text-center badge-danger p-4 mt-2">
             <div class="text-2xl">{{ translate('Your Premium account is blocked') }}</div>
             <div class="mt-2">
-              <a class="btn btn-white" href="{{ config.accountUrl }}/cloud/activate-subscription-renewal">
+              <a class="btn btn-white" href="{{ config.appUrl }}/cloud/activate-subscription-renewal">
                 <span class="icon"><i class="fas fa-arrow-up"></i></span>
                 <span class="text">{{ translate('Activate subscription again') }}</span>
               </a>
               or
-              <a class="btn btn-white" href="{{ config.accountUrl }}/cloud">
+              <a class="btn btn-white" href="{{ config.appUrl }}/cloud">
                 <span class="icon"><i class="fas fa-arrow-down"></i></span>
                 <span class="text">{{ translate('Downgrade to Personal account') }}</span>
               </a>
@@ -93,7 +93,7 @@
                 {{ translate('Access to your Premium account will be blocked next month.') }}
               </div>
               <div class="mt-8">
-                <a class="btn btn-square btn-large btn-warning" href="{{ config.accountUrl }}/cloud/activate-subscription-renewal">
+                <a class="btn btn-square btn-large btn-warning" href="{{ config.appUrl }}/cloud/activate-subscription-renewal">
                   <span class="icon"><i class="fas fa-arrow-up"></i></span>
                   <span class="text">{{ translate('Activate subscription renewal again') }}</span>
                 </a>
@@ -171,7 +171,7 @@
                   onclick="
                     let input = $('#activate-premium-confirm-email');
                     if (input.val() == '{{ user.email }}') {
-                      window.location.href = '{{ config.accountUrl }}/cloud/api/activate-premium-account';
+                      window.location.href = '{{ config.appUrl }}/cloud/api/activate-premium-account';
                     } else {
                       input.addClass('bg-red-200');
                       setTimeout(function() { input.removeClass('bg-red-200'); }, 500);
@@ -193,11 +193,11 @@
               <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> add new users or activate existing</li>
               <li class="my-2"><i class="mr-2 fas fa-check text-green-500"></i> install or enable premium apps</li>
             </ul>
-            <a href="{{ config.accountUrl }}/settings" class="btn btn-transparent">
+            <a href="{{ config.appUrl }}/settings" class="btn btn-transparent">
               <span class="icon"><i class="fas fa-users"></i></span>
               <span class="text">Manage users</span>
             </a>
-            <a href="{{ config.accountUrl }}/settings" class="btn btn-transparent">
+            <a href="{{ config.appUrl }}/settings" class="btn btn-transparent">
               <span class="icon"><i class="fas fa-puzzle-piece"></i></span>
               <span class="text">Manage apps</span>
             </a>
@@ -295,7 +295,7 @@
           </table>
           <small class="text-gray-500">(*) {{ translate('Price is calculated based on maximum number of active users or paid apps during this month.') }}</small>
           <div class="mt-2">
-            <a class="btn btn-transparent" href="{{ config.accountUrl }}/cloud/deactivate-subscription-renewal">
+            <a class="btn btn-transparent" href="{{ config.appUrl }}/cloud/deactivate-subscription-renewal">
               <span class="icon"><i class="fas fa-stop"></i></span>
               <span class="text">{{ translate('Deactivate subscription renewal') }}</span>
             </a>

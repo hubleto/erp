@@ -5,7 +5,7 @@
     {% for d in viewParams.dashboards %}
       <a
         class="btn btn-primary-outline"
-        href="{{ config.accountUrl }}/dashboards/{{ d.slug }}"
+        href="{{ config.appUrl }}/dashboards/{{ d.slug }}"
         style="border: 1px solid {{ d.color }};border-left-width:1em"
       >
         <span class="text">{{ d.title }}</span>
@@ -15,7 +15,7 @@
 
   <a
     class="btn btn-add-outline"
-    href="{{ config.accountUrl }}/settings/dashboards"
+    href="{{ config.appUrl }}/settings/dashboards"
   >
     <span class="icon"><i class="fas fa-cog"></i></span>
     <span class="text">{{ translate('Manage dashboards') }}</span>

@@ -1,5 +1,5 @@
 {% set dashboard = viewParams.defaultDashboard %}
-{% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? config.url ~ "/assets/images/logo-hubleto-text-horizontal.png" %}
+{% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? config.srcUrl ~ "/assets/images/logo-hubleto-text-horizontal.png" %}
 
 <h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.first_name ?? user.email }}</h1>
 
@@ -11,5 +11,5 @@
 </div>
 
 <div class="mx-auto pt-20">
-  <img src="{{ config.url }}/{{ welcomeSplashImageUrl }}" class="max-w-90 m-auto">
+  <img src="{{ welcomeSplashImageUrl }}" class="max-w-90 m-auto">
 </div>

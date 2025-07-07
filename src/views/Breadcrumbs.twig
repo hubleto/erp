@@ -5,7 +5,7 @@
   <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
     <li>
       <a
-        href="{{ config.accountUrl }}"
+        href="{{ config.appUrl }}"
         class=" btn btn-primary-outline"
       >
         <span class="text text">{{ user.DEFAULT_COMPANY.name }}</span>
@@ -19,7 +19,7 @@
           <div class="menu">
             <div class="list">
               {% for item in viewParams.appMenu %}
-                <a href="{{ config.accountUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
+                <a href="{{ config.appUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
                   <span class="icon"><i class="{{ item.icon }}"></i></span>
                   <span class="text">{{ item.title }}</span>
                 </a>
@@ -38,7 +38,7 @@
           </svg>
           {% if item.url %}
             <a
-              href="{{ config.accountUrl }}/{{ item.url }}"
+              href="{{ config.appUrl }}/{{ item.url }}"
               class="ms-1 text-sm dark:text-white"
             >{{ item.content|raw }}</a>
           {% else %}

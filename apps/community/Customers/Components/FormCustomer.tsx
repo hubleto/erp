@@ -339,7 +339,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           readonly={R.is_archived}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
+          eventsEndpoint={globalThis.main.config.appUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -544,7 +544,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               readonly={R.is_archived}
               initialView='timeGridWeek'
               views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-              eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
+              eventsEndpoint={globalThis.main.config.appUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
               onDateClick={(date, time, info) => {
                 this.setState({
                   activityDate: date,

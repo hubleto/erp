@@ -40,7 +40,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
             <div className="badge badge-warning text-lg w-full block p-8">
               You may add new users only in Premium account.<br/>
               <br/>
-              <a href={globalThis.main.config.accountUrl + '/cloud'} className="btn btn-primary">
+              <a href={globalThis.main.config.appUrl + '/cloud'} className="btn btn-primary">
                 <span className="icon"><i className="fas fa-medal"></i></span>
                 <span className="text">Activate Premium account</span>
               </a>

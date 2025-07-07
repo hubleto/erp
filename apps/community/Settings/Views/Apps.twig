@@ -66,7 +66,7 @@
                 </a>
               {% elseif not viewParams.main.isPremium %}
                 <div class="badge badge-warning">You can install Premium apps only in Premium account.</div>
-                <a class="btn btn-primary" href="{{ config.accountUrl }}/cloud">
+                <a class="btn btn-primary" href="{{ config.appUrl }}/cloud">
                   <span class="icon"><i class="fas fa-medal"></i></span>
                   <span class="text">{{ translate('Activate Premium account') }}</span>
                 </a>
@@ -80,7 +80,7 @@
       {% endfor %}
     </div>
 
-    <a class="btn btn-transparent mt-2" href="{{ config.accountUrl }}/settings/update-default-permissions">
+    <a class="btn btn-transparent mt-2" href="{{ config.appUrl }}/settings/update-default-permissions">
       <span class="icon"><i class="fas fa-refresh"></i></span>
       <span class="text">Update default permissions</span>
     </a>

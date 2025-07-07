@@ -27,10 +27,10 @@ class Create extends \HubletoMain\Cli\Agent\Command
         $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
       break;
       case 'Custom':
-        $accountFolder = $this->main->config->getAsString('accountDir');
-        if (empty($accountFolder) || !is_dir($accountFolder)) throw new \Exception('AccountDir is not properly configured.');
-        if (!is_dir($accountFolder . '/apps')) mkdir($accountFolder . '/apps');
-        $appRepositoryFolder = realpath($accountFolder . '/apps');
+        $appFolder = $this->main->config->getAsString('appFolder');
+        if (empty($appFolder) || !is_dir($appFolder)) throw new \Exception('appFolder is not properly configured.');
+        if (!is_dir($appFolder . '/apps')) mkdir($appFolder . '/apps');
+        $appRepositoryFolder = realpath($appFolder . '/apps');
       break;
     }
 

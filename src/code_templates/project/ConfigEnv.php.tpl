@@ -9,17 +9,16 @@ $config['accountFullName'] = '{{ accountFullName }}';
 
 // dirs
 
-$config['dir'] = '{{ mainFolder }}';
-$config['accountDir'] = __DIR__;
-$config['logDir'] = __DIR__ . '/log';
-$config['tmpDir'] = __DIR__ . '/tmp';
-$config['uploadDir'] = __DIR__ . '/upload';
+$config['srcFolder'] = '{{ srcFolder }}';
+$config['appFolder'] = '{{ appFolder }}';
+$config['logFolder'] = '{{ appFolder }}/log';
+$config['uploadFolder'] = '{{ appFolder }}/upload';
 
 // urls
 $config['rewriteBase'] = "{{ rewriteBase }}";
-$config['url'] = '{{ mainUrl }}';
-$config['accountUrl'] = '{{ accountUrl }}';
-$config['uploadUrl'] = '{{ accountUrl }}/upload';
+$config['srcUrl'] = '{{ srcUrl }}';
+$config['appUrl'] = '{{ appUrl }}';
+$config['uploadUrl'] = '{{ appUrl }}/upload';
 
 // db
 $config['db_host'] = '{{ dbHost }}';

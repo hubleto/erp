@@ -8,12 +8,12 @@ class LogJavascriptError extends \HubletoMain\Core\Controllers\Controller
 
   public function renderJson(): array
   {
-    $logDir = $this->main->config->getAsString('logDir');
+    $logFolder = $this->main->config->getAsString('logFolder');
     $errorRoute = $this->main->urlParamAsString('errorRoute');
     $errors = $this->main->urlParamAsArray('errors');
 
-    if (!is_dir($logDir)) {
-      @mkdir($logDir);
+    if (!is_dir($logFolder)) {
+      @mkdir($logFolder);
     }
 
     $msg = 
@@ -24,7 +24,7 @@ class LogJavascriptError extends \HubletoMain\Core\Controllers\Controller
       $msg .= "\n   " . trim($error);
     }
 
-    @file_put_contents($logDir . '/javascript-errors.log', $msg . "\n");
+    @file_put_contents($logFolder . '/javascript-errors.log', $msg . "\n");
 
     return [
       'errorRoute' => $errorRoute,

@@ -16,10 +16,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
   public function run(): void
   {
     $rewriteBase = null;
-    $accountFolder = null;
-    $accountUrl = null;
-    $mainFolder = null;
-    $mainUrl = null;
+    $appFolder = null;
+    $appUrl = null;
+    $srcFolder = null;
+    $srcUrl = null;
     $dbHost = null;
     $dbUser = null;
     $dbPassword = null;
@@ -51,10 +51,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
 
     if (isset($config['rewriteBase'])) $rewriteBase = $config['rewriteBase'];
-    if (isset($config['accountFolder'])) $accountFolder = $config['accountFolder'];
-    if (isset($config['accountUrl'])) $accountUrl = $config['accountUrl'];
-    if (isset($config['mainFolder'])) $mainFolder = $config['mainFolder'];
-    if (isset($config['mainUrl'])) $mainUrl = $config['mainUrl'];
+    if (isset($config['appFolder'])) $appFolder = $config['appFolder'];
+    if (isset($config['appUrl'])) $appUrl = $config['appUrl'];
+    if (isset($config['srcFolder'])) $srcFolder = $config['srcFolder'];
+    if (isset($config['srcUrl'])) $srcUrl = $config['srcUrl'];
     if (isset($config['dbHost'])) $dbHost = $config['dbHost'];
     if (isset($config['dbUser'])) $dbUser = $config['dbUser'];
     if (isset($config['dbPassword'])) $dbPassword = $config['dbPassword'];
@@ -82,16 +82,16 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     $paths = explode('/', str_replace('\\', '/', (string) realpath(__DIR__ . '/../../..')));
     array_pop($paths);
-    foreach (array_reverse($paths) as $tmpDir) {
+    foreach (array_reverse($paths) as $tmpFolder) {
       $rewriteBases[] = $lastRewriteBase . '/';
-      $lastRewriteBase = '/' . $tmpDir . $lastRewriteBase;
+      $lastRewriteBase = '/' . $tmpFolder . $lastRewriteBase;
     }
 
     if ($rewriteBase === null) $rewriteBase = $this->cli->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
-    if ($accountFolder === null) $accountFolder = realpath(__DIR__ . '/../../..');
-    if ($accountUrl === null) $accountUrl = $this->cli->read('ConfigEnv.accountUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
-    if ($mainFolder === null) $mainFolder = realpath(__DIR__ . '/../../..');
-    if ($mainUrl === null) $mainUrl = $accountUrl;
+    if ($appFolder === null) $appFolder = realpath(__DIR__ . '/../../../..');
+    if ($appUrl === null) $appUrl = $this->cli->read('ConfigEnv.appUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
+    if ($srcFolder === null) $srcFolder = realpath(__DIR__ . '/../../..');
+    if ($srcUrl === null) $srcUrl = $this->cli->read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/hblsrc');
     if ($dbHost === null) $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
     if ($dbUser === null) $dbUser = $this->cli->read('ConfigEnv.dbUser (user must exist)', 'root');
     if ($dbPassword === null) $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
@@ -125,12 +125,12 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $errorColumns[] = 'adminEmail';
       $errors[] = 'Invalid admin email.';
     }
-    if (!filter_var($accountUrl, FILTER_VALIDATE_URL)) {
-      $errorColumns[] = 'accountUrl';
+    if (!filter_var($appUrl, FILTER_VALIDATE_URL)) {
+      $errorColumns[] = 'appUrl';
       $errors[] = 'Invalid account url.';
     }
-    if (!filter_var($mainUrl, FILTER_VALIDATE_URL)) {
-      $errorColumns[] = 'mainUrl';
+    if (!filter_var($srcUrl, FILTER_VALIDATE_URL)) {
+      $errorColumns[] = 'srcUrl';
       $errors[] = 'Invalid main url.';
     }
 
@@ -157,8 +157,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->cyan("Initializing with following config:\n");
     $this->cli->cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
-    $this->cli->cyan('  -> accountFolder = ' . (string) $accountFolder . "\n");
-    $this->cli->cyan('  -> accountUrl = ' . (string) $accountUrl . "\n");
+    $this->cli->cyan('  -> appFolder = ' . (string) $appFolder . "\n");
+    $this->cli->cyan('  -> appUrl = ' . (string) $appUrl . "\n");
     $this->cli->cyan('  -> dbHost = ' . (string) $dbHost . "\n");
     $this->cli->cyan('  -> dbUser = ' . (string) $dbUser . "\n");
     $this->cli->cyan('  -> dbPassword = ***' . "\n");
@@ -172,10 +172,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
     $this->cli->cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
-    $this->main->config->set('dir', $mainFolder);
-    $this->main->config->set('url', $mainUrl);
-    $this->main->config->set('accountDir', $accountFolder);
-    $this->main->config->set('accountUrl', $accountUrl);
+    $this->main->config->set('srcFolder', $srcFolder);
+    $this->main->config->set('url', $srcUrl);
+    $this->main->config->set('appFolder', $appFolder);
+    $this->main->config->set('appUrl', $appUrl);
 
     $this->main->config->set('db_host', $dbHost);
     $this->main->config->set('db_user', $dbUser);
@@ -199,10 +199,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       (string) $adminEmail,
       (string) $adminPassword,
       (string) $rewriteBase,
-      (string) $accountFolder,
-      (string) $accountUrl,
-      (string) $mainFolder,
-      (string) $mainUrl,
+      (string) $appFolder,
+      (string) $appUrl,
+      (string) $srcFolder,
+      (string) $srcUrl,
       (string) $dbHost,
       (string) $dbName,
       (string) $dbUser,
@@ -272,7 +272,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->cyan("\n");
     $this->cli->cyan("All done! You're a fantastic CRM developer. Now you can:\n");
-    $this->cli->cyan("  -> Open " . (string) $accountUrl . "?user={$adminEmail}\n");
+    $this->cli->cyan("  -> Open " . (string) $appUrl . "?user={$adminEmail}\n");
     $this->cli->cyan("     and use this password: " . (string) $adminPassword . "\n");
     $this->cli->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
     $this->cli->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");

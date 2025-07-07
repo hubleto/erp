@@ -119,7 +119,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       {recordId: recordId},
       (data: any) => {
         if (data.status == "success") {
-          location.assign(globalThis.main.config.accountUrl + `/deals?recordId=${data.idDeal}&recordTitle=${data.title}`)
+          location.assign(globalThis.main.config.appUrl + `/deals?recordId=${data.idDeal}&recordTitle=${data.title}`)
         }
       }
     );
@@ -242,7 +242,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           readonly={R.is_archived}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
+          eventsEndpoint={globalThis.main.config.appUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -364,7 +364,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     {showAdditional ?
                       <div className='w-full mt-2 gap-2 flex'>
                         {R.DEAL != null ?
-                        <a className='btn btn-primary' href={`${globalThis.main.config.url}/deals/${R.DEAL.id}`}>
+                        <a className='btn btn-primary' href={`${globalThis.main.config.appUrl}/deals/${R.DEAL.id}`}>
                           <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
                           <span className='text'>{this.translate('Go to deal')}</span>
                         </a>
@@ -443,7 +443,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 readonly={R.is_archived}
                 initialView='timeGridWeek'
                 views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-                eventsEndpoint={globalThis.main.config.accountUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
+                eventsEndpoint={globalThis.main.config.appUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
                 onDateClick={(date, time, info) => {
                   this.setState({
                     activityDate: date,

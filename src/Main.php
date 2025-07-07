@@ -22,13 +22,13 @@ spl_autoload_register(function(string $class) {
   // custom/hook
   if (str_starts_with($class, 'HubletoCustom/Hook/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
-    @include($hubletoMain->config->getAsString('accountDir') . '/hooks/' . str_replace('HubletoCustom/Hook/', '', $class) . '.php');
+    @include($hubletoMain->config->getAsString('appFolder') . '/hooks/' . str_replace('HubletoCustom/Hook/', '', $class) . '.php');
   }
 
   // custom/report
   if (str_starts_with($class, 'HubletoCustom/Report/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
-    @include($hubletoMain->config->getAsString('accountDir') . '/reports/' . str_replace('HubletoCustom/Report/', '', $class) . '.php');
+    @include($hubletoMain->config->getAsString('appFolder') . '/reports/' . str_replace('HubletoCustom/Report/', '', $class) . '.php');
   }
 
   // community
@@ -66,7 +66,7 @@ spl_autoload_register(function(string $class) {
   // custom
   if (str_starts_with($class, 'HubletoApp/Custom/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
-    $dir = $hubletoMain->config->getAsString('accountDir') . '/apps';
+    $dir = $hubletoMain->config->getAsString('appFolder') . '/apps';
     @include($dir . '/' . str_replace('HubletoApp/Custom/', '', $class) . '.php');
   }
 
@@ -101,14 +101,14 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     $this->cli = new \HubletoMain\Cli\Agent\Loader($this);
 
-    $hooks = @\ADIOS\Core\Helper::scanDirRecursively($this->config->getAsString('dir') . '/hooks');
+    $hooks = @\ADIOS\Core\Helper::scanDirRecursively($this->config->getAsString('srcFolder') . '/hooks');
     foreach ($hooks as $hook) {
       $hookClass = '\\HubletoMain\\Hook\\' . str_replace('/', '\\', $hook);
       $hookClass = str_replace('.php', '', $hookClass);
       $this->hooks[$hookClass] = new $hookClass($this, $this->cli);
     }
 
-    $hooks = @\ADIOS\Core\Helper::scanDirRecursively($this->config->getAsString('accountDir') . '/hooks');
+    $hooks = @\ADIOS\Core\Helper::scanDirRecursively($this->config->getAsString('appFolder') . '/hooks');
     foreach ($hooks as $hook) {
       $hookClass = '\\HubletoCustom\\Hook\\' . str_replace('/', '\\', $hook);
       $hookClass = str_replace('.php', '', $hookClass);

@@ -80,7 +80,7 @@ class AppManager
     $appNamespaces = [];
 
     // community apps
-    $communityRepoFolder = $this->main->config->getAsString('dir') . '/apps/community';
+    $communityRepoFolder = $this->main->config->getAsString('srcFolder') . '/apps/community';
     if (!empty($communityRepoFolder)) {
 
       foreach (scandir($communityRepoFolder) as $appFolder) {

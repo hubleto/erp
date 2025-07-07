@@ -156,7 +156,7 @@ class Loader extends \HubletoMain\Core\App
     //     return '
     //       <a
     //         class="badge badge-warning text-center no-underline items-center flex justify-around"
-    //         href="' . $this->main->config->getAsString('accountUrl') . '/cloud?freeTrialMessage=1"
+    //         href="' . $this->main->config->getAsString('appUrl') . '/cloud?freeTrialMessage=1"
     //       >
     //         <span>Free trial activated</span>
     //       </a>
@@ -167,7 +167,7 @@ class Loader extends \HubletoMain\Core\App
     if ($where == 'beforeSidebar') {
       if ($isTrialPeriod) {
         return '
-          <a class="btn btn-square bg-red-50 text-red-800" href="' . $this->main->config->getAsString('accountUrl') . '/cloud">
+          <a class="btn btn-square bg-red-50 text-red-800" href="' . $this->main->config->getAsString('appUrl') . '/cloud">
             <span class="text">' . $this->translate('Free trial expires in') . ' ' .$trialPeriodExpiresIn . ' ' . $this->translate('days') . '.</span>
           </a>
         ';

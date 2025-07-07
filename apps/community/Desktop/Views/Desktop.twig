@@ -32,7 +32,7 @@
   </div>
 {% endmacro %}
 
-{% set logoUrl = config.logoUrl ?? config.url ~ "/assets/images/logo-hubleto.png" %}
+{% set logoUrl = config.logoUrl ?? "assets/images/logo-hubleto.png" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +43,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel='shortcut icon' href='{{ logoUrl }}'>
+  <link rel='shortcut icon' href='{{ config.url }}/{{ logoUrl }}'>
   <title>{{ config.appTitle ?? user.DEFAULT_COMPANY.name ~ " | Hubleto | Business Application Hub" }}</title>
 
   <script>
@@ -135,7 +135,7 @@
       <div class="flex items-center">
         <div class="flex flex-row justify-around">
           <a class="flex" href="{{ config.accountUrl }}">
-            <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
+            <img id="logo" src="{{ config.url }}/{{ logoUrl }}" class="h-8 m-auto">
           </a>
           <button onclick="showSidebar()" class="sm:block md:hidden ml-6">
             <span class="icon"><i id="menuButton" class="fas fa-bars"></i></span>

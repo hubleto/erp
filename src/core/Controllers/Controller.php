@@ -19,7 +19,7 @@ class Controller extends \ADIOS\Core\Controller
     if (empty($this->translationContext)) {
       $reflection = new \ReflectionClass($this);
       preg_match('/^(.*?)\\\Controllers\\\(.*?)$/', $reflection->getName(), $m);
-      if (isset($m[1]) && isset($m[2])) {
+      if (is ($m[1]) && isset($m[2])) {
         $this->appNamespace = $m[1];
         $this->translationContext = $m[1] . '\\Loader::Controllers\\' . $m[2];
       }
@@ -108,6 +108,12 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->main->runHook('controller:prepare-view-end', [$this]);
 
+  }
+
+  public function setView(null|string $view, array|null $viewParams = null)
+  {
+    parent::setView($view, $viewParams);
+    $this->main->runHook('controller:set-view', [$this, $view, $viewParams]);
   }
 
   public function getBreadcrumbs(): array

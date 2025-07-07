@@ -25,15 +25,14 @@ class Loader extends \HubletoMain\Core\App
 
     // Add placeholder for custom settings.
     // This will be displayed in the Settings app, under the "All settings" card.
-    $this->main->apps->community('Settings')->addSetting($this, [
+    $this->main->apps->community('Settings')?->addSetting($this, [
       'title' => '{{ appName }}', // or $this->translate('{{ appName }}')
       'icon' => 'fas fa-table',
       'url' => 'settings/{{ appRootUrlSlug }}',
     ]);
 
     // Add placeholder for your app's calendar.
-    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    $calendarManager->addCalendar(
+    $calendarManager = $this->main->apps->community('Calendar')?->calendarManager?->addCalendar(
       '{{ appName }}-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
       '#008000', // your app's calendar color
       Calendar::class // your app's Calendar class

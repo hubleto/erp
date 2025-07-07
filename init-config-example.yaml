@@ -1,0 +1,39 @@
+rewriteBase: /my-hubleto/
+accountUrl: http://localhost/my-hubleto
+dbHost: localhost
+dbUser: root
+dbPassword: ''
+dbName: my_hubleto
+dbCodepage: utf8mb4
+accountFullName: MyHubleto
+adminName: My
+adminFamilyName: Hubleto
+adminNick: my-hubleto
+adminEmail: my.hubleto@example.com
+adminPassword: my.hubleto
+
+# Uncomment following lines if you want to have full control over
+# what apps will be installed. Example below installs minimal set
+# of apps.
+# packagesToInstall: no-package
+# appsToInstall:
+#   HubletoApp\Community\Settings: []
+#   HubletoApp\Community\Tools: []
+#   HubletoApp\Community\Desktop: []
+#   HubletoApp\Community\Usage: []
+
+# Uncomment following lines if you want to customize look & feel
+# of your Hubleto
+# extraConfigEnv:
+#   uiTheme: green-orange
+#   logoUrl: assets/custom/images/my-hubleto.png
+#   welcomeSplashImageUrl: assets/custom/images/my-hubleto.png
+#   availableLanguages: []
+#   appTitle: My Hubleto - Fully customized Hubleto
+#   sidebarGroups:
+#     crm:
+#       title: CRM
+#       icon: fas fa-id-card-clip
+#     maintenance:
+#       title: Maintenance
+#       icon: fas fa-cog

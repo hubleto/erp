@@ -83,12 +83,12 @@ class AppManager
     $communityRepoFolder = $this->main->config->getAsString('srcFolder') . '/apps/community';
     if (!empty($communityRepoFolder)) {
 
-      foreach (scandir($communityRepoFolder) as $appFolder) {
-        $manifestFile = $communityRepoFolder . '/' . $appFolder . '/manifest.yaml';
+      foreach (scandir($communityRepoFolder) as $rootFolder) {
+        $manifestFile = $communityRepoFolder . '/' . $rootFolder . '/manifest.yaml';
         if (@is_file($manifestFile)) {
           $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
           $manifest['appType'] = \HubletoMain\Core\App::APP_TYPE_COMMUNITY;
-          $appNamespaces['HubletoApp\\Community\\' . $appFolder] = $manifest;
+          $appNamespaces['HubletoApp\\Community\\' . $rootFolder] = $manifest;
         }
       }
     }
@@ -96,12 +96,12 @@ class AppManager
     // premium apps
     $premiumRepoFolder = $this->main->config->getAsString('premiumRepoFolder');
     if (!empty($premiumRepoFolder)) {
-      foreach (scandir($premiumRepoFolder) as $appFolder) {
-        $manifestFile = $premiumRepoFolder . '/' . $appFolder . '/manifest.yaml';
+      foreach (scandir($premiumRepoFolder) as $rootFolder) {
+        $manifestFile = $premiumRepoFolder . '/' . $rootFolder . '/manifest.yaml';
         if (@is_file($manifestFile)) {
           $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
           $manifest['appType'] = \HubletoMain\Core\App::APP_TYPE_PREMIUM;
-          $appNamespaces['HubletoApp\\Premium\\' . $appFolder] = $manifest;
+          $appNamespaces['HubletoApp\\Premium\\' . $rootFolder] = $manifest;
         }
       }
     }
@@ -260,10 +260,10 @@ class AppManager
     $app->test($test);
   }
 
-  public function createApp(string $appNamespace, string $appFolder): void
+  public function createApp(string $appNamespace, string $rootFolder): void
   {
-    if (empty($appFolder)) throw new \Exception('App folder for \'' . $appNamespace . '\' not configured.');
-    if (!is_dir($appFolder)) throw new \Exception('App folder for \'' . $appNamespace . '\' is not a folder.');
+    if (empty($rootFolder)) throw new \Exception('App folder for \'' . $appNamespace . '\' not configured.');
+    if (!is_dir($rootFolder)) throw new \Exception('App folder for \'' . $appNamespace . '\' is not a folder.');
 
     $appNamespace = trim($appNamespace, '\\');
     $appNamespaceParts = explode('\\', $appNamespace);
@@ -282,23 +282,23 @@ class AppManager
 
     $this->main->addTwigViewNamespace($tplFolder, 'appTemplate');
 
-    if (!is_dir($appFolder . '/Controllers')) mkdir($appFolder . '/Controllers');
-    if (!is_dir($appFolder . '/Models')) mkdir($appFolder . '/Models');
-    if (!is_dir($appFolder . '/Models/RecordManagers')) mkdir($appFolder . '/Models/RecordManagers');
-    if (!is_dir($appFolder . '/Views')) mkdir($appFolder . '/Views');
+    if (!is_dir($rootFolder . '/Controllers')) mkdir($rootFolder . '/Controllers');
+    if (!is_dir($rootFolder . '/Models')) mkdir($rootFolder . '/Models');
+    if (!is_dir($rootFolder . '/Models/RecordManagers')) mkdir($rootFolder . '/Models/RecordManagers');
+    if (!is_dir($rootFolder . '/Views')) mkdir($rootFolder . '/Views');
 
-    file_put_contents($appFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Loader.tsx', $this->main->twig->render('@appTemplate/Loader.tsx.twig', $tplVars));
-    file_put_contents($appFolder . '/Calendar.php', $this->main->twig->render('@appTemplate/Calendar.php.twig', $tplVars));
-    file_put_contents($appFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml.twig', $tplVars));
-    file_put_contents($appFolder . '/Models/Contact.php', $this->main->twig->render('@appTemplate/Models/Contact.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Models/RecordManagers/Contact.php', $this->main->twig->render('@appTemplate/Models/RecordManagers/Contact.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Controllers/Dashboard.php', $this->main->twig->render('@appTemplate/Controllers/Dashboard.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Controllers/Settings.php', $this->main->twig->render('@appTemplate/Controllers/Settings.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Views/Dashboard.twig', $this->main->twig->render('@appTemplate/Views/Dashboard.twig.twig', $tplVars));
-    file_put_contents($appFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
-    file_put_contents($appFolder . '/Views/Settings.twig', $this->main->twig->render('@appTemplate/Views/Settings.twig.twig', $tplVars));
+    file_put_contents($rootFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
+    file_put_contents($rootFolder . '/Loader.tsx', $this->main->twig->render('@appTemplate/Loader.tsx.twig', $tplVars));
+    file_put_contents($rootFolder . '/Calendar.php', $this->main->twig->render('@appTemplate/Calendar.php.twig', $tplVars));
+    file_put_contents($rootFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml.twig', $tplVars));
+    file_put_contents($rootFolder . '/Models/Contact.php', $this->main->twig->render('@appTemplate/Models/Contact.php.twig', $tplVars));
+    file_put_contents($rootFolder . '/Models/RecordManagers/Contact.php', $this->main->twig->render('@appTemplate/Models/RecordManagers/Contact.php.twig', $tplVars));
+    file_put_contents($rootFolder . '/Controllers/Dashboard.php', $this->main->twig->render('@appTemplate/Controllers/Dashboard.php.twig', $tplVars));
+    file_put_contents($rootFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
+    file_put_contents($rootFolder . '/Controllers/Settings.php', $this->main->twig->render('@appTemplate/Controllers/Settings.php.twig', $tplVars));
+    file_put_contents($rootFolder . '/Views/Dashboard.twig', $this->main->twig->render('@appTemplate/Views/Dashboard.twig.twig', $tplVars));
+    file_put_contents($rootFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
+    file_put_contents($rootFolder . '/Views/Settings.twig', $this->main->twig->render('@appTemplate/Views/Settings.twig.twig', $tplVars));
   }
 
 

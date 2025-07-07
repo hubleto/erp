@@ -1,5 +1,5 @@
 rewriteBase: /my-hubleto/
-appUrl: http://localhost/my-hubleto
+rootUrl: http://localhost/my-hubleto
 dbHost: localhost
 dbUser: root
 dbPassword: ''

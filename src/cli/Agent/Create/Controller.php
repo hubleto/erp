@@ -20,9 +20,9 @@ class Controller extends \HubletoMain\Cli\Agent\Command
 
     if (!$app) throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
 
-    $appFolder = $app->rootFolder;
+    $rootFolder = $app->rootFolder;
 
-    if (is_file($appFolder . '/Controllers/' . $controller . '.php') && !$force) {
+    if (is_file($rootFolder . '/Controllers/' . $controller . '.php') && !$force) {
       throw new \Exception("Controller '{$controller}' already exists in app '{$appNamespace}'. Use 'force' to overwrite existing files.");
     }
 
@@ -35,8 +35,8 @@ class Controller extends \HubletoMain\Cli\Agent\Command
       'controller' => $controller,
     ];
 
-    if (!is_dir($appFolder . '/Controllers')) mkdir($appFolder . '/Controllers');
-    file_put_contents($appFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
+    if (!is_dir($rootFolder . '/Controllers')) mkdir($rootFolder . '/Controllers');
+    file_put_contents($rootFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
 
     $this->cli->cyan("Controller '{$controller}' in '{$appNamespace}' created successfully.\n");
     $this->cli->yellow("💡 TIP: Run 'php hubleto create view {$appNamespace} {$controller}' to create a view for this controler.\n");

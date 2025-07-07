@@ -288,7 +288,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           readonly={R.is_archived}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.appUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
+          eventsEndpoint={globalThis.main.config.rootUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -408,7 +408,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       {this.inputWrapper('is_closed', {readonly: R.is_archived})}
       {showAdditional && R.id_lead != null ?
         <div className='mt-2'>
-          <a className='btn btn-primary self-center' href={`${globalThis.main.config.appUrl}/leads/${R.id_lead}`}>
+          <a className='btn btn-primary self-center' href={`${globalThis.main.config.rootUrl}/leads/${R.id_lead}`}>
             <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
             <span className='text'>{this.translate('Go to original lead')}</span>
           </a>
@@ -675,7 +675,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               readonly={R.is_archived}
               initialView='timeGridWeek'
               views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-              eventsEndpoint={globalThis.main.config.appUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
+              eventsEndpoint={globalThis.main.config.rootUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
               onDateClick={(date, time, info) => {
                 this.setState({
                   activityDate: date,

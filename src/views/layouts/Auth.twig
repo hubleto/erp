@@ -10,7 +10,7 @@
   <link rel='shortcut icon' href='{{ config.srcUrl }}/assets/images/logo-hubleto.png'>
   <title>Hubleto</title>
 
-  <script src='{{ config.appUrl }}/adios/cache.js'></script>
+  <script src='{{ config.rootUrl }}/adios/cache.js'></script>
 
   <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/fontawesome-6.6.css">
   <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/compiled/css/main.css">
@@ -75,7 +75,7 @@
             </div>
             <div>
               {% block links %}
-                <a class="btn btn-transparent" href="{{ config.appUrl }}/forgot-password">
+                <a class="btn btn-transparent" href="{{ config.rootUrl }}/forgot-password">
                   <span class="icon"><i class="fas fa-life-ring"></i></span>
                   <span class="text">{{ translate("Forgot password?") }}</span>
                 </a>

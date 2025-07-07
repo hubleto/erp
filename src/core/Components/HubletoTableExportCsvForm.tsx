@@ -65,7 +65,7 @@ export default class HubletoTableExportCsvForm<P, S> extends Form<HubletoTableEx
       </table>
       <a
         className="btn btn-large mt-2"
-        href={globalThis.main.config.appUrl + "/api/table-export-csv?" + queryString.stringify(this.props.parentTable.getEndpointParams())}
+        href={globalThis.main.config.rootUrl + "/api/table-export-csv?" + queryString.stringify(this.props.parentTable.getEndpointParams())}
         target="_blank"
       >
         <span className="icon"><i className="fas fa-download"></i></span>

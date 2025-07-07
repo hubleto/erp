@@ -10,7 +10,7 @@
   <link rel='shortcut icon' href='{{ config.srcUrl }}/assets/images/logo-hubleto.png'>
   <title>Hubleto</title>
 
-  <script src='{{ config.appUrl }}/adios/cache.js'></script>
+  <script src='{{ config.rootUrl }}/adios/cache.js'></script>
 
   <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/fontawesome-6.6.css">
   <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/compiled/css/main.css">
@@ -32,7 +32,7 @@
     <div class="text-center">
       <h1>{{ translate("Page Not Found") }}</h1>
       <p class="mb-4">{{ translate("Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.") }}</p>
-      <a href="{{ config.appUrl }}/" class="btn btn-large">
+      <a href="{{ config.rootUrl }}/" class="btn btn-large">
         <span class="icon"><i class="fas fa-home"></i></span>
         <span class="text">{{ translate("Home") }}</span>
       </a>

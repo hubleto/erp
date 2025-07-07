@@ -12,8 +12,8 @@ class Installer {
   public string $adminPassword = '';
   public string $accountFullName = '';
   public string $accountRewriteBase = '';
-  public string $appFolder = '';
-  public string $appUrl = '';
+  public string $rootFolder = '';
+  public string $rootUrl = '';
   public string $srcFolder = '';
   public string $srcUrl = '';
 
@@ -103,8 +103,8 @@ class Installer {
     string $adminEmail,
     string $adminPassword,
     string $accountRewriteBase,
-    string $appFolder,
-    string $appUrl,
+    string $rootFolder,
+    string $rootUrl,
     string $srcFolder,
     string $srcUrl,
     string $dbHost,
@@ -129,8 +129,8 @@ class Installer {
     $this->adminEmail = $adminEmail;
     $this->adminPassword = $adminPassword;
     $this->accountRewriteBase = $accountRewriteBase;
-    $this->appFolder = str_replace('\\', '/', $appFolder);
-    $this->appUrl = $appUrl;
+    $this->rootFolder = str_replace('\\', '/', $rootFolder);
+    $this->rootUrl = $rootUrl;
     $this->srcFolder = str_replace('\\', '/', $srcFolder);
     $this->srcUrl = $srcUrl;
 
@@ -160,8 +160,8 @@ class Installer {
     }
 
     if (
-      is_file($this->appFolder)
-      || is_dir($this->appFolder)
+      is_file($this->rootFolder)
+      || is_dir($this->rootFolder)
     ) {
       throw new \HubletoMain\Exceptions\AccountAlreadyExists('Account folder already exists');
     }
@@ -242,13 +242,14 @@ class Installer {
   {
     $configEnv = (string) file_get_contents(__DIR__ . '/../code_templates/project/ConfigEnv.php.tpl');
     $configEnv = str_replace('{{ srcFolder }}', $this->srcFolder, $configEnv);
+    $configEnv = str_replace('{{ rootFolder }}', $this->rootFolder, $configEnv);
     $configEnv = str_replace('{{ srcUrl }}', $this->srcUrl, $configEnv);
     $configEnv = str_replace('{{ dbHost }}', $this->main->config->getAsString('db_host'), $configEnv);
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
     $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);
     $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);
     $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase, $configEnv);
-    $configEnv = str_replace('{{ appUrl }}', $this->appUrl, $configEnv);
+    $configEnv = str_replace('{{ rootUrl }}', $this->rootUrl, $configEnv);
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
     $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
     $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
@@ -293,22 +294,22 @@ class Installer {
   {
 
     // folders
-    @mkdir($this->appFolder);
-    @mkdir($this->appFolder . '/log');
-    @mkdir($this->appFolder . '/upload');
+    @mkdir($this->rootFolder);
+    @mkdir($this->rootFolder . '/log');
+    @mkdir($this->rootFolder . '/upload');
 
     // ConfigEnv.php
 
-    file_put_contents($this->appFolder . '/ConfigEnv.php', $this->getConfigEnvContent());
+    file_put_contents($this->rootFolder . '/ConfigEnv.php', $this->getConfigEnvContent());
 
     // index.php
     $index = (string) file_get_contents(__DIR__ . '/../code_templates/project/index.php.tpl');
     $index = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ srcFolder }}', $this->srcFolder, $index);
-    file_put_contents($this->appFolder . '/index.php', $index);
+    file_put_contents($this->rootFolder . '/index.php', $index);
 
     // hubleto cli agent
-    $hubletoCliAgentFile = $this->appFolder . '/hubleto';
+    $hubletoCliAgentFile = $this->rootFolder . '/hubleto';
     if (!is_file($hubletoCliAgentFile)) {
       $hubleto = (string) file_get_contents(__DIR__ . '/../code_templates/project/hubleto.tpl');
       $hubleto = str_replace('{{ srcFolder }}', $this->srcFolder, $hubleto);
@@ -318,7 +319,7 @@ class Installer {
     // .htaccess
     copy(
       __DIR__ . '/../code_templates/project/.htaccess.tpl',
-      $this->appFolder . '/.htaccess'
+      $this->rootFolder . '/.htaccess'
     );
   }
 

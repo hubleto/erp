@@ -25,14 +25,14 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
 
     if (!$app) throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
 
-    $appFolder = $app->rootFolder;
+    $rootFolder = $app->rootFolder;
 
     if (
       (
-        is_file($appFolder . '/Components/Table' . $modelPluralForm . '.tsx')
-        || is_file($appFolder . '/Components/Form' . $modelSingularForm . '.tsx')
-        || is_file($appFolder . '/Controllers/' . $controller . '.php')
-        || is_file($appFolder . '/Views/' . $view . '.php')
+        is_file($rootFolder . '/Components/Table' . $modelPluralForm . '.tsx')
+        || is_file($rootFolder . '/Components/Form' . $modelSingularForm . '.tsx')
+        || is_file($rootFolder . '/Controllers/' . $controller . '.php')
+        || is_file($rootFolder . '/Views/' . $view . '.php')
       )
       && !$force
     ) {
@@ -63,13 +63,13 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
       'view' => $view,
     ];
 
-    if (!is_dir($appFolder . '/Components')) mkdir($appFolder . '/Components');
-    if (!is_dir($appFolder . '/Controllers')) mkdir($appFolder . '/Controllers');
-    if (!is_dir($appFolder . '/Views')) mkdir($appFolder . '/Views');
-    file_put_contents($appFolder . '/Components/Table' . $modelPluralForm . '.tsx', $this->main->twig->render('@snippets/Components/Table.tsx.twig', $tplVars));
-    file_put_contents($appFolder . '/Components/Form' . $modelSingularForm . '.tsx', $this->main->twig->render('@snippets/Components/Form.tsx.twig', $tplVars));
-    file_put_contents($appFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
-    file_put_contents($appFolder . '/Views/' . $view . '.twig', $this->main->twig->render('@snippets/ViewWithTable.twig.twig', $tplVars));
+    if (!is_dir($rootFolder . '/Components')) mkdir($rootFolder . '/Components');
+    if (!is_dir($rootFolder . '/Controllers')) mkdir($rootFolder . '/Controllers');
+    if (!is_dir($rootFolder . '/Views')) mkdir($rootFolder . '/Views');
+    file_put_contents($rootFolder . '/Components/Table' . $modelPluralForm . '.tsx', $this->main->twig->render('@snippets/Components/Table.tsx.twig', $tplVars));
+    file_put_contents($rootFolder . '/Components/Form' . $modelSingularForm . '.tsx', $this->main->twig->render('@snippets/Components/Form.tsx.twig', $tplVars));
+    file_put_contents($rootFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
+    file_put_contents($rootFolder . '/Views/' . $view . '.twig', $this->main->twig->render('@snippets/ViewWithTable.twig.twig', $tplVars));
 
     $this->cli->cyan("Table, form, view and controller for model '{$model}' in '{$appNamespace}' created successfully.\n");
     $this->cli->yellow("⚠ NEXT STEPS:\n");

@@ -22,9 +22,9 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
 
     if (!$app) throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
 
-    $appFolder = $app->rootFolder;
+    $rootFolder = $app->rootFolder;
 
-    if (is_file($appFolder . '/Controllers/Api/' . $endpointPascalCase . '.php') && !$force) {
+    if (is_file($rootFolder . '/Controllers/Api/' . $endpointPascalCase . '.php') && !$force) {
       throw new \Exception("REST API endpoint '{$endpoint}' already exists in app '{$appNamespace}'. Use 'force' to overwrite existing files.");
     }
 
@@ -37,9 +37,9 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
       'endpointPascalCase' => $endpointPascalCase,
     ];
 
-    if (!is_dir($appFolder . '/Controllers')) mkdir($appFolder . '/Controllers');
-    if (!is_dir($appFolder . '/Controllers/Api')) mkdir($appFolder . '/Controllers/Api');
-    file_put_contents($appFolder . '/Controllers/Api/' . $endpointPascalCase . '.php', $this->main->twig->render('@snippets/ApiController.php.twig', $tplVars));
+    if (!is_dir($rootFolder . '/Controllers')) mkdir($rootFolder . '/Controllers');
+    if (!is_dir($rootFolder . '/Controllers/Api')) mkdir($rootFolder . '/Controllers/Api');
+    file_put_contents($rootFolder . '/Controllers/Api/' . $endpointPascalCase . '.php', $this->main->twig->render('@snippets/ApiController.php.twig', $tplVars));
 
     $this->cli->cyan("REST API endpoint '{$endpoint}' in '{$appNamespace}' created successfully.\n");
     $this->cli->yellow("⚠ NEXT STEPS:\n");

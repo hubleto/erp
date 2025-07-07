@@ -82,13 +82,14 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     $this->cli->colored("cyan", "black", "globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});");
     $this->cli->yellow("\n");
     $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
-    $this->cli->colored("cyan", "black", "Add to Loader.php->init(): \$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/" . strtolower($modelPluralForm) . "\/?$/' => Controllers\\{$controller}::class ]);");
+    $this->cli->colored("cyan", "black", "Add to Loader.php->init():");
+    $this->cli->colored("cyan", "black", "\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/" . strtolower($modelPluralForm) . "\/?$/' => Controllers\\{$controller}::class ]);");
     $this->cli->yellow("\n");
     $this->cli->yellow("⚠  -> Add button to any view in {$app->rootFolder}/Views, e.g. Home.twig\n");
     $this->cli->colored("cyan", "black", "Add to {$app->rootFolder}/Views/Home.twig:");
     $this->cli->colored("cyan", "black", "<a class='btn btn-large btn-square btn-transparent'>");
     $this->cli->colored("cyan", "black", "  <span class='icon'><i class='fas fa-table'></i></span>");
-    $this->cli->colored("cyan", "black", "  <span class='text'}{$modelPluralForm}</span>");
+    $this->cli->colored("cyan", "black", "  <span class='text'>{$modelPluralForm}</span>");
     $this->cli->colored("cyan", "black", "</a>");
     $this->cli->white("\n");
     $this->cli->yellow("⚠  -> Re-install the app.\n");

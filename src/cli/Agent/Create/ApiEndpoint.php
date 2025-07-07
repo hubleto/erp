@@ -45,7 +45,8 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("REST API endpoint '{$endpoint}' in '{$appNamespace}' created successfully.\n");
     $this->cli->yellow("⚠  NEXT STEPS:\n");
     $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
-    $this->cli->colored("cyan", "black", "Add to Loader.php->init(): \$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);");
+    $this->cli->colored("cyan", "black", "Add to Loader.php->init():");
+    $this->cli->colored("cyan", "black", "\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);");
     $this->cli->yellow("\n");
     $this->cli->yellow("⚠  -> Check the endpoint\n");
     $this->cli->colored("cyan", "black", "Open in browser: {$this->main->config->getAsString('rootUrl')}/{$app->manifest['rootUrlSlug']}/api/{$endpoint}");

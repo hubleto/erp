@@ -41,8 +41,11 @@ class Create extends \HubletoMain\Cli\Agent\Command
 
     $this->main->apps->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
 
-    $this->cli->cyan("App {$appNamespace} created successfully.\n");
+    (new \HubletoMain\Cli\Agent\App\Install($this->cli, $this->arguments))->run();
+
+    $this->cli->cyan("App {$appNamespace} created and installed successfully.\n");
     $this->cli->yellow("💡 TIP: Run command below to add your first model.\n");
+    $this->cli->colored("cyan", "black", "Open in browser: {$this->main->config->getAsString('rootUrl')}/" . strtolower($appName));
     $this->cli->colored("cyan", "black", "Run: php hubleto create model {$appNamespace} Order");
   }
 

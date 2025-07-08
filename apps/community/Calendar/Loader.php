@@ -9,7 +9,7 @@ class Loader extends \HubletoMain\Core\App
 
   public CalendarManager $calendarManager;
 
-  // public bool $hasCustomSettings = true;
+   public bool $hasCustomSettings = true;
 
   public function __construct(\HubletoMain $main)
   {
@@ -23,6 +23,7 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^calendar\/?$/' => Controllers\Calendar::class,
+      '/^calendar\/ics\/?$/' => Controllers\IcsCalendar::class,
       '/^calendar\/settings\/?$/' => Controllers\Settings::class,
       '/^calendar\/boards\/reminders\/?$/' => Controllers\Boards\Reminders::class,
       '/^calendar\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,

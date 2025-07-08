@@ -45,7 +45,10 @@ export default class FormDashboard<P, S> extends HubletoForm<FormDashboardProps,
           {this.inputWrapper("is_default")}
         </div>
       </div>
-      {R.id <= 0 ? null :
+      {this.divider(this.translate('Panels'))}
+      {this.state.id < 0 ?
+        <div className="badge badge-info">First create the dashboard, then you will be prompted to add panels.</div>
+      :
         <div className='mt-2'>
           <Table
             uid='dashboard_panels'

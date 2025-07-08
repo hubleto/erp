@@ -10,8 +10,7 @@ use HubletoApp\Community\Deals\Models\DealProduct;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Leads\Models\LeadHistory;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
-use HubletoApp\Community\Settings\Models\Setting;
+use HubletoApp\Community\Pipeline\Models\Pipeline;
 
 class ConvertLeadToDeal extends \HubletoMain\Core\Controllers\Controller
 {
@@ -37,14 +36,17 @@ class ConvertLeadToDeal extends \HubletoMain\Core\Controllers\Controller
     $mDealDocument = new DealDocument($this->main);
     $deal = null;
 
-    $mPipepelineStep = new PipelineStep($this->main);
-    $defaultPipeline = 1;
-    $defaultPipelineFirstStep =(int) $mPipepelineStep->record
-      ->where("id_pipeline", $defaultPipeline)
-      ->orderBy("id", "asc")
-      ->first()
-      ->id
-    ;
+    $mPipeline = new Pipeline($this->main);
+    $defaultPipeline = $mPipeline->getDefaultPipeline();
+
+    $idPipeline = 0;
+    $idPipelineStep = 0;
+    if (is_array($defaultPipeline)) {
+      $idPipeline = $defaultPipeline['id'] ?? 0;
+      if (is_array($defaultPipeline['STEPS'])) {
+        $idPipelineStep = reset($defaultPipeline['STEPS'])['id'] ?? 0;
+      }
+    }
 
     try {
       $lead = $mLead->record->where("id", $leadId)->first();
@@ -64,8 +66,8 @@ class ConvertLeadToDeal extends \HubletoMain\Core\Controllers\Controller
         "is_archived" => false,
         "id_lead" => $lead->id,
         "deal_result" => $mDeal::RESULT_UNKNOWN,
-        "id_pipeline" => $defaultPipeline ?? null,
-        "id_pipeline_step" => $defaultPipelineFirstStep ?? null,
+        "id_pipeline" => $idPipeline,
+        "id_pipeline_step" => $idPipelineStep,
       ]);
 
       $lead->status = $mLead::STATUS_CONVERTED_TO_DEAL;

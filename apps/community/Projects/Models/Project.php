@@ -18,6 +18,10 @@ use \ADIOS\Core\Db\Column\Varchar;
 
 use \HubletoApp\Community\Deals\Models\Deal;
 use \HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Pipeline\Models\Pipeline;
+use HubletoApp\Community\Pipeline\Models\PipelineStep;
+use HubletoApp\Community\Contacts\Models\Contact;
+use HubletoApp\Community\Customers\Models\Customer;
 
 class Project extends \HubletoMain\Core\Models\Model
 {
@@ -38,6 +42,8 @@ class Project extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setProperty('defaultVisibility', true),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
       'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
       'description' => (new Text($this, $this->translate('Description'))),
@@ -47,12 +53,16 @@ class Project extends \HubletoMain\Core\Models\Model
       'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->main->auth->getUserId())
       ,
-      'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->main->auth->getUserId())
-      ,
+      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setDefaultValue(1),
+      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setDefaultValue(null),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(true),
+      // 'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setProperty('defaultVisibility', true)->setRequired()
+      //   ->setDefaultValue($this->main->auth->getUserId())
+      // ,
       'color' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true),
       'online_documentation_folder' => (new Varchar($this, "Online documentation folder"))->setReactComponent('InputHyperlink'),
       'notes' => (new Text($this, $this->translate('Notes'))),
+      'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
     ]);
   }
 

@@ -3,6 +3,7 @@
 namespace HubletoApp\Community\Pipeline\Models;
 
 use ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Boolean;
 
 class Pipeline extends \HubletoMain\Core\Models\Model
 {
@@ -19,6 +20,7 @@ class Pipeline extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'description' => (new Varchar($this, $this->translate('Description'))),
+      'is_default' => (new Boolean($this, $this->translate('Is default'))),
     ]);
   }
 
@@ -33,6 +35,11 @@ class Pipeline extends \HubletoMain\Core\Models\Model
     $description->ui['showFooter'] = false;
 
     return $description;
+  }
+
+  public function getDefaultPipeline(): array|bool
+  {
+    return $this->record->where('is_default', true)->with('STEPS')->first()?->toArray();
   }
 
 }

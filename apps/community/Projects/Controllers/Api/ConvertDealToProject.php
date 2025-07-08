@@ -1,0 +1,72 @@
+<?php
+
+namespace HubletoApp\Community\Projects\Controllers\Api;
+
+use Exception;
+use HubletoApp\Community\Projects\Models\Project;
+use HubletoApp\Community\Deals\Models\Deal;
+use HubletoApp\Community\Pipeline\Models\Pipeline;
+
+class ConvertDealToProject extends \HubletoMain\Core\Controllers\Controller
+{
+  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
+
+  public function renderJson(): ?array
+  {
+    if (!$this->main->isUrlParam("idDeal")) {
+      return [
+        "status" => "failed",
+        "error" => "The deal for converting was not set"
+      ];
+    }
+
+    $idDeal = $this->main->urlParamAsInteger("idDeal");
+
+    $mDeal = new Deal($this->main);
+    $mProject = new Project($this->main);
+    $project = null;
+
+    try {
+      $deal = $mDeal->record->prepareReadQuery()->where($mDeal->table.".id", $idDeal)->first();
+      if (!$deal) throw new Exception("Deal was not found.");
+
+      $mPipeline = new Pipeline($this->main);
+      $defaultPipeline = $mPipeline->getDefaultPipeline();
+
+      $idPipeline = 0;
+      $idPipelineStep = 0;
+      if (is_array($defaultPipeline)) {
+        $idPipeline = $defaultPipeline['id'] ?? 0;
+        if (is_array($defaultPipeline['STEPS'])) {
+          $idPipelineStep = reset($defaultPipeline['STEPS'])['id'] ?? 0;
+        }
+      }
+
+      $project = $mProject->record->recordCreate([
+        "id_deal" => $deal->id,
+        "id_customer" => $deal->id_customer,
+        "id_contact" => $deal->id_contact,
+        "title" => $deal->title,
+        "identifier" => $deal->identifier,
+        "id_main_developer" => $this->main->auth->getUserId(),
+        "id_account_manager" => $this->main->auth->getUserId(),
+        "id_pipeline" => $idPipeline,
+        "id_pipeline_step" => $idPipelineStep,
+        "is_closed" => false,
+        "date_created" => date("Y-m-d H:i:s"),
+      ]);
+    } catch (Exception $e) {
+      return [
+        "status" => "failed",
+        "error" => $e
+      ];
+    }
+
+    return [
+      "status" => "success",
+      "idProject" => $project['id'],
+      "title" => str_replace(" ", "+", (string) $project['title'])
+    ];
+  }
+
+}

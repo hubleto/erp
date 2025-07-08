@@ -15,6 +15,7 @@ import Hyperlink from 'adios/Inputs/Hyperlink';
 import { FormProps, FormState } from 'adios/Form';
 import moment, { Moment } from "moment";
 import TableDealHistory from './TableDealHistory';
+import PipelineSelector from '../../Pipeline/Components/PipelineSelector';
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
@@ -233,53 +234,71 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       this.setState({pipelineFirstLoad: true});
     }
 
-    const pipeline = <div className='card mt-2'>
-      <div className='card-header'>
-        <Lookup {...this.getInputProps("id_pipeline")}
-          readonly={R.is_archived}
-          model='HubletoApp/Community/Pipeline/Models/Pipeline'
-          value={R.id_pipeline}
-          onChange={(input: any, value: any) => {
-            this.pipelineChange(value);
-          }}
-        ></Lookup>
-      </div>
-      <div className='card-body'>
-        <div className='flex flex-row gap-2 mt-2 flex-wrap justify-center'>
-          {R.PIPELINE != null &&
-          R.PIPELINE.STEPS &&
-          R.PIPELINE.STEPS.length > 0 ?
-            R.PIPELINE.STEPS.map((s, i) => {
-              var statusColor: string = null;
-              {R.PIPELINE_STEP && s.order <= R.PIPELINE_STEP.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
-              return (
-                <>
-                  <button
-                    key={i}
-                    onClick={R.is_archived ? null : () => {
-                      if (this.state.isInlineEditing == false) this.setState({isInlineEditing: true});
-                      R.id_pipeline_step = s.id;
-                      R.deal_result = s.set_result;
-                      R.PIPELINE_STEP = s;
-                      this.updateRecord(R);
-                    }}
-                    className={`btn ${statusColor} w-[150px] h-[48px]`}
-                    style={{borderLeft: '1em solid ' + s.color}}
-                  >
-                    <div className='text text-center w-full flex'>
-                      <span className='align-self-center grow'>{s.name} <small className='whitespace-nowrap'>({s.probability} %)</small></span>
-                    </div>
-                  </button>
-                  {i+1 == R.PIPELINE.STEPS.length ? null
-                  : <i className='fas fa-angles-right self-center'></i>
-                  }
-                </>
-              )
-            })
-          : <p className='w-full text-center'>No steps exist for this pipeline</p>}
-        </div>
-      </div>
-    </div>;
+    // const pipeline = <div className='card mt-2'>
+    //   <div className='card-header'>
+    //     <Lookup {...this.getInputProps("id_pipeline")}
+    //       readonly={R.is_archived}
+    //       model='HubletoApp/Community/Pipeline/Models/Pipeline'
+    //       value={R.id_pipeline}
+    //       onChange={(input: any, value: any) => {
+    //         this.pipelineChange(value);
+    //       }}
+    //     ></Lookup>
+    //   </div>
+    //   <div className='card-body'>
+    //     <div className='flex flex-row gap-2 mt-2 flex-wrap justify-center'>
+    //       {R.PIPELINE != null &&
+    //       R.PIPELINE.STEPS &&
+    //       R.PIPELINE.STEPS.length > 0 ?
+    //         R.PIPELINE.STEPS.map((s, i) => {
+    //           var statusColor: string = null;
+    //           {R.PIPELINE_STEP && s.order <= R.PIPELINE_STEP.order ? statusColor = "btn-primary" : statusColor = "btn-light"}
+    //           return (
+    //             <>
+    //               <button
+    //                 key={i}
+    //                 onClick={R.is_archived ? null : () => {
+    //                   if (this.state.isInlineEditing == false) this.setState({isInlineEditing: true});
+    //                   R.id_pipeline_step = s.id;
+    //                   R.deal_result = s.set_result;
+    //                   R.PIPELINE_STEP = s;
+    //                   this.updateRecord(R);
+    //                 }}
+    //                 className={`btn ${statusColor} w-[150px] h-[48px]`}
+    //                 style={{borderLeft: '1em solid ' + s.color}}
+    //               >
+    //                 <div className='text text-center w-full flex'>
+    //                   <span className='align-self-center grow'>{s.name} <small className='whitespace-nowrap'>({s.probability} %)</small></span>
+    //                 </div>
+    //               </button>
+    //               {i+1 == R.PIPELINE.STEPS.length ? null
+    //               : <i className='fas fa-angles-right self-center'></i>
+    //               }
+    //             </>
+    //           )
+    //         })
+    //       : <p className='w-full text-center'>No steps exist for this pipeline</p>}
+    //     </div>
+    //   </div>
+    // </div>;
+
+    const pipeline = <PipelineSelector
+      idPipeline={R.id_pipeline}
+      idPipelineStep={R.id_pipeline_step}
+      onPipelineChange={(idPipeline: number, idPipelineStep: number) => {
+        this.pipelineChange(idPipeline);
+      }}
+      onPipelineStepChange={(idPipelineStep: number, step: any) => {
+        if (!R.is_archived) {
+          if (this.state.isInlineEditing == false) this.setState({isInlineEditing: true});
+          R.id_pipeline_step = idPipelineStep;
+          R.deal_result = step.set_result;
+          R.PIPELINE_STEP = step;
+          this.updateRecord(R);
+        }
+      }}
+    ></PipelineSelector>;
+
 
     const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
       <div className='mb-2'>

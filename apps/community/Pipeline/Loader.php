@@ -13,9 +13,9 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^pipeline\/?$/' => Controllers\Home::class,
+      '/^pipeline\/api\/get-pipelines\/?$/' => Controllers\Api\GetPipelines::class,
       '/^settings\/pipelines\/?$/' => Controllers\Pipelines::class,
     ]);
-
 
     $this->main->apps->community('Settings')->addSetting($this, [
       'title' => $this->translate('Pipelines'),
@@ -33,7 +33,7 @@ class Loader extends \HubletoMain\Core\App
       $mPipeline->dropTableIfExists()->install();
       $mPipelineStep->dropTableIfExists()->install();
 
-      $idPipeline = $mPipeline->record->recordCreate([ "name" => "Default pipeline" ])['id'];
+      $idPipeline = $mPipeline->record->recordCreate([ "name" => "Sales pipeline", "is_default" => true ])['id'];
       $mPipelineStep->record->recordCreate([ 'name' => 'Prospecting', 'order' => 1, 'color' => '#838383', 'id_pipeline' => $idPipeline , "set_result" => Deal::RESULT_UNKNOWN, "probability" => 1]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Qualified to buy', 'order' => 2, 'color' => '#d8a082', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_UNKNOWN, "probability" => 10]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Proposal & Quote Sent', 'order' => 3, 'color' => '#d1cf79', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_UNKNOWN , "probability" => 30]);
@@ -42,38 +42,16 @@ class Loader extends \HubletoMain\Core\App
       $mPipelineStep->record->recordCreate([ 'name' => 'Contract Sent', 'order' => 6, 'color' => '#82d88b', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_UNKNOWN , "probability" => 85]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Closed WON', 'order' => 7, 'color' => '#008000', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_WON , "probability" => 100]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Closed LOST', 'order' => 8, 'color' => '#f50c0c', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_LOST , "probability" => 0]);
+
+      $idPipeline = $mPipeline->record->recordCreate([ "name" => "Project phases" ])['id'];
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Early preparation', 'order' => 1, 'color' => '#344556']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Advanced preparation', 'order' => 2, 'color' => '#6830a5']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Final preparation', 'order' => 3, 'color' => '#3068a5']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Early implementation', 'order' => 4, 'color' => '#ae459f']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Advanced implementation', 'order' => 5, 'color' => '#a38f9a']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Final implementation', 'order' => 6, 'color' => '#44879a']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Delivery', 'order' => 7, 'color' => '#74809a']);
     }
   }
 
-  // public function installDefaultPermissions(): void
-  // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-  //   $permissions = [
-  //     "HubletoApp/Community/Pipeline/Controllers/Home",
-
-  //     "HubletoApp/Community/Pipeline/Home",
-
-  //     "HubletoApp/Community/Pipeline/Models/Pipeline:Create",
-  //     "HubletoApp/Community/Pipeline/Models/Pipeline:Read",
-  //     "HubletoApp/Community/Pipeline/Models/Pipeline:Update",
-  //     "HubletoApp/Community/Pipeline/Models/Pipeline:Delete",
-
-  //     "HubletoApp/Community/Pipeline/Models/PipelineStep:Create",
-  //     "HubletoApp/Community/Pipeline/Models/PipelineStep:Read",
-  //     "HubletoApp/Community/Pipeline/Models/PipelineStep:Update",
-  //     "HubletoApp/Community/Pipeline/Models/PipelineStep:Delete",
-
-  //     "HubletoApp/Community/Pipeline/Controllers/Pipeline",
-  //     "HubletoApp/Community/Pipeline/Controllers/PipelineStep",
-
-  //     "HubletoApp/Community/Pipeline/Pipeline",
-  //     "HubletoApp/Community/Pipeline/PipelineStep",
-  //   ];
-
-  //   foreach ($permissions as $permission) {
-  //     $mPermission->record->recordCreate([
-  //       "permission" => $permission
-  //     ]);
-  //   }
-  // }
 }

@@ -14,8 +14,11 @@ class Loader extends \HubletoMain\Core\App
   {
     parent::init();
 
-    $this->main->router->httpGet([ '/^projects\/?$/' => Controllers\Projects::class ]);
-    $this->main->router->httpGet([ '/^projects\/phases\/?$/' => Controllers\Phases::class ]);
+    $this->main->router->httpGet([
+      '/^projects(\/(?<recordId>\d+))?\/?$/' => Controllers\Projects::class,
+      '/^projects\/phases\/?$/' => Controllers\Phases::class,
+      '/^projects\/api\/convert-deal-to-project\/?$/' => Controllers\Api\ConvertDealToProject::class,
+    ]);
 
     // Add placeholder for custom settings.
     // This will be displayed in the Settings app, under the "All settings" card.

@@ -283,8 +283,8 @@ class AppManager
     $this->main->addTwigViewNamespace($tplFolder, 'appTemplate');
 
     if (!is_dir($rootFolder . '/Controllers')) mkdir($rootFolder . '/Controllers');
-    if (!is_dir($rootFolder . '/Models')) mkdir($rootFolder . '/Models');
-    if (!is_dir($rootFolder . '/Models/RecordManagers')) mkdir($rootFolder . '/Models/RecordManagers');
+    // if (!is_dir($rootFolder . '/Models')) mkdir($rootFolder . '/Models');
+    // if (!is_dir($rootFolder . '/Models/RecordManagers')) mkdir($rootFolder . '/Models/RecordManagers');
     if (!is_dir($rootFolder . '/Views')) mkdir($rootFolder . '/Views');
 
     file_put_contents($rootFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
@@ -294,10 +294,10 @@ class AppManager
     // file_put_contents($rootFolder . '/Models/Contact.php', $this->main->twig->render('@appTemplate/Models/Contact.php.twig', $tplVars));
     // file_put_contents($rootFolder . '/Models/RecordManagers/Contact.php', $this->main->twig->render('@appTemplate/Models/RecordManagers/Contact.php.twig', $tplVars));
     file_put_contents($rootFolder . '/Controllers/Home.php', $this->main->twig->render('@appTemplate/Controllers/Home.php.twig', $tplVars));
-    file_put_contents($rootFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
+    // file_put_contents($rootFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
     file_put_contents($rootFolder . '/Controllers/Settings.php', $this->main->twig->render('@appTemplate/Controllers/Settings.php.twig', $tplVars));
     file_put_contents($rootFolder . '/Views/Home.twig', $this->main->twig->render('@appTemplate/Views/Home.twig.twig', $tplVars));
-    file_put_contents($rootFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
+    // file_put_contents($rootFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
     file_put_contents($rootFolder . '/Views/Settings.twig', $this->main->twig->render('@appTemplate/Views/Settings.twig.twig', $tplVars));
   }
 

@@ -1,5 +1,5 @@
 <h1 class="app-main-title">{{ appName }} > {{ modelPluralForm }}</h1>
 
-<app-{{ appName|lower }}-table-{{ modelPluralForm|lower }}
+<app-{{ appNameKebab|lower }}-table-{{ modelPluralFormKebab }}
   int:record-id="{{ '{{' }} viewParams.recordId {{ '}}' }}"
-></app-{{ appName|lower }}-table-{{ modelPluralForm|lower }}>
+></app-{{ appNameKebab|lower }}-table-{{ modelPluralFormKebab }}>

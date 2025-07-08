@@ -91,6 +91,12 @@ class Loader {
     return $input;
   }
 
+  public function confirm(string $question): bool
+  {
+    $answer = $this->read($question);
+    return in_array(strtolower($answer), ['yes', 'y', '1']);
+  }
+
   public function yellow(string $message): void { $this->color('yellow'); echo $message; $this->color('white'); }
   public function green(string $message): void { $this->color('green'); echo $message; $this->color('white'); }
   public function red(string $message): void { $this->color('red'); echo $message; $this->color('white'); }
@@ -103,6 +109,34 @@ class Loader {
     echo $message;
     $this->color('white', 'black');
     echo "\n";
+  }
+
+
+  public function insertCodeToFile(string $file, string $tag, array $codeLines): bool
+  {
+    $inserted = false;
+
+    if (!is_file($file)) return false;
+
+    $lines = file($file);
+    $newLines = [];
+    foreach ($lines as $line) {
+      $newLines[] = $line;
+      if (str_starts_with(trim($line), $tag)) {
+        $identSize = strlen($line) - strlen(ltrim($line));
+        foreach ($codeLines as $codeLine) {
+          $newLines[] = str_repeat(' ', $identSize) . trim($codeLine) . "\n";
+        }
+        $inserted = true;
+      }
+    }
+
+    if ($inserted) {
+      file_put_contents($file, join("", $newLines));
+      $this->yellow("Code inserted into '{$file}' under '{$tag}'.\n");
+    }
+
+    return $inserted;
   }
 
 }

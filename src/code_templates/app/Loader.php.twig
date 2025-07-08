@@ -22,6 +22,9 @@ class Loader extends \HubletoMain\Core\App
       '/^settings\/{{ appRootUrlSlug }}\/?$/' => Controllers\Settings::class,
     ]);
 
+    // DO NOT DELETE FOLLOWING LINE, OR `php hubleto` WILL NOT GENERATE CODE HERE
+    //@hubleto-cli:routes
+
     // Add placeholder for custom settings.
     // This will be displayed in the Settings app, under the "All settings" card.
     $this->main->apps->community('Settings')?->addSetting($this, [
@@ -49,6 +52,9 @@ class Loader extends \HubletoMain\Core\App
     if ($round == 1) {
       // install your models here
       // Example: (new Models\Contact($this->main))->dropTableIfExists()->install();
+
+      // DO NOT DELETE FOLLOWING LINE, OR `php hubleto` WILL NOT GENERATE CODE HERE
+      //@hubleto-cli:install-tables
     }
     if ($round == 2) {
       // do something in the 2nd round, if required

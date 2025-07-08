@@ -41,14 +41,22 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
     if (!is_dir($rootFolder . '/Controllers/Api')) mkdir($rootFolder . '/Controllers/Api');
     file_put_contents($rootFolder . '/Controllers/Api/' . $endpointPascalCase . '.php', $this->main->twig->render('@snippets/ApiController.php.twig', $tplVars));
 
+    $codeRoute = [ "\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);" ];
+    $codeRouteInserted = $this->cli->insertCodeToFile($rootFolder . '/Loader.php', '//@hubleto-cli:routes', $codeRoute);
+
     $this->cli->white("\n");
     $this->cli->cyan("REST API endpoint '{$endpoint}' in '{$appNamespace}' created successfully.\n");
-    $this->cli->yellow("⚠  NEXT STEPS:\n");
-    $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
-    $this->cli->colored("cyan", "black", "Add to Loader.php->init():");
-    $this->cli->colored("cyan", "black", "\$this->main->router->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);");
-    $this->cli->yellow("\n");
-    $this->cli->yellow("⚠  -> Check the endpoint\n");
+
+    if (!$codeRouteInserted) {
+      $this->cli->yellow("⚠ Failed to add some code automatically\n");
+      $this->cli->yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
+      $this->cli->colored("cyan", "black", "Add to Loader.php->init():");
+      $this->cli->colored("cyan", "black", join("\n", $codeRoute));
+      $this->cli->yellow("\n");
+    }
+
+    $this->cli->yellow("💡  TIPS:\n");
+    $this->cli->yellow("💡  -> Test the endpoint\n");
     $this->cli->colored("cyan", "black", "Open in browser: {$this->main->config->getAsString('rootUrl')}/{$app->manifest['rootUrlSlug']}/api/{$endpoint}");
     $this->cli->yellow("\n");
   }

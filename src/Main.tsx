@@ -170,7 +170,7 @@ class HubletoMain extends ADIOS {
     return integerPart + (decimals > 0 ? decimalSeparator + fractionalPart : '');
   }
 
-  registerDynamicContentInjector(contentGroup: string, injector: any) {
+  registerDynamicContent(contentGroup: string, injector: any) {
     if (!this.dynamicContentInjectors[contentGroup]) {
       this.dynamicContentInjectors[contentGroup] = [];
     }

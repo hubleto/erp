@@ -6,12 +6,5 @@ import FormLeadTopMenu from './Components/FormLeadTopMenu'
 globalThis.main.registerReactComponent('DealsTableDeals', TableDeals);
 globalThis.main.registerReactComponent('DealsFormActivity', DealFormActivity);
 
-globalThis.main.registerDynamicContentInjector(
-  'HubletoApp\\Community\\Customers\\Loader::Components\\FormCustomer:TopMenu',
-  FormCustomerTopMenu
-);
-
-globalThis.main.registerDynamicContentInjector(
-  'HubletoApp\\Community\\Leads\\Loader::Components\\FormLead:TopMenu',
-  FormLeadTopMenu
-);
+globalThis.main.registerDynamicContent('FormCustomer:TopMenu', FormCustomerTopMenu);
+globalThis.main.registerDynamicContent('FormLead:TopMenu', FormLeadTopMenu);

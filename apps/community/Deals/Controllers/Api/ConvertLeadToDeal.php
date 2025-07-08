@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers\Api;
+namespace HubletoApp\Community\Deals\Controllers\Api;
 
 use Exception;
 use HubletoApp\Community\Deals\Models\Deal;
@@ -13,7 +13,7 @@ use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 use HubletoApp\Community\Settings\Models\Setting;
 
-class ConvertToDeal extends \HubletoMain\Core\Controllers\Controller
+class ConvertLeadToDeal extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
 

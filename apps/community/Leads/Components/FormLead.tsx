@@ -113,18 +113,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     return <small>{this.translate('Lead')}</small>;
   }
 
-  convertToDeal(recordId: number) {
-    request.get(
-      'leads/api/convert-to-deal',
-      {recordId: recordId},
-      (data: any) => {
-        if (data.status == "success") {
-          location.assign(globalThis.main.config.rootUrl + `/deals?recordId=${data.idDeal}&recordTitle=${data.title}`)
-        }
-      }
-    );
-  }
-
   moveToArchive(recordId: number) {
     request.get(
       'leads/api/move-to-archive',
@@ -135,38 +123,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             this.props.parentTable.loadData();
           });
         }
-      }
-    );
-  }
-
-  convertDealWarning(recordId: number) {
-    globalThis.main.showDialogDanger(
-      <>
-        <div>
-          Are you sure you want to convert this Lead to a Deal?<br/>
-        </div>
-      </>,
-      {
-        headerClassName: "dialog-warning-header",
-        header: "Convert to a Deal",
-        footer: <>
-          <button
-            className="btn btn-yellow"
-            onClick={() => {this.convertToDeal(recordId)}}
-          >
-            <span className="icon"><i className="fas fa-forward"></i></span>
-            <span className="text">Yes, convert to a Deal</span>
-          </button>
-          <button
-            className="btn btn-transparent"
-            onClick={() => {
-              globalThis.main.lastShownDialogRef.current.hide();
-            }}
-          >
-            <span className="icon"><i className="fas fa-times"></i></span>
-            <span className="text">No, do not convert to a Deal</span>
-          </button>
-        </>
       }
     );
   }
@@ -208,6 +164,17 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     } as FormLeadState);
   }
 
+  renderTopMenu(): null|JSX.Element {
+    return <>
+      {super.renderTopMenu()}
+      {this.state.record.is_archived ? null :
+        <a className='btn' onClick={() => this.moveToArchiveConfirm(this.state.record.id)}>
+          <span className='icon'><i className='fas fa-box-archive'></i></span>
+          <span className='text'>Move to archive</span>
+        </a>
+      }
+    </>;
+  }
   renderContent(): JSX.Element {
     var lookupData;
 
@@ -225,15 +192,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
         R.HISTORY = this.state.record.HISTORY.reverse();
     }
 
-    if (R.DEAL) R.DEAL.checkOwnership = false;
-
-    // if (R.id > 0 && globalThis.main.idUser != R.id_owner && !this.state.recordChanged) {
-    //   return <>
-    //     <div className='w-full h-full flex flex-col justify-center'>
-    //       <span className='text-center'>This lead belongs to a different user</span>
-    //     </div>
-    //   </>;
-    // }
+    // if (R.DEAL) R.DEAL.checkOwnership = false;
 
     const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
       <div className='mb-2'>
@@ -361,26 +320,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     {this.inputWrapper('status', {readonly: R.is_archived, uiStyle: 'buttons', onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})}
                     {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
                     {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
-                    {showAdditional ?
-                      <div className='w-full mt-2 gap-2 flex'>
-                        {R.DEAL != null ?
-                        <a className='btn btn-primary' href={`${globalThis.main.config.rootUrl}/deals/${R.DEAL.id}`}>
-                          <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-                          <span className='text'>{this.translate('Go to deal')}</span>
-                        </a>
-                        :
-                        <a className='btn btn-primary cursor-pointer' onClick={() => this.convertDealWarning(R.id)}>
-                          <span className='icon'><i className='fas fa-rotate-right'></i></span>
-                          <span className='text'>Convert to Deal</span>
-                        </a>}
-                        {R.is_archived ? null : <>
-                          <a className='btn btn-transparent' onClick={() => this.moveToArchiveConfirm(R.id)}>
-                            <span className='icon'><i className='fas fa-box-archive'></i></span>
-                            <span className='text'>Move to archive</span>
-                          </a>
-                        </>}
-                      </div>
-                    : null}
                   </div>
                   <div className='border-l border-gray-200'></div>
                   <div className='grow'>

@@ -30,7 +30,7 @@ export default class FormCustomerTopMenu extends TranslatedComponent<P, S> {
     if (R.id > 0) {
       return <>
         <button
-          className="btn btn-transparent w-full"
+          className="btn"
           onClick={() => { this.setState({showDeals: !this.state.showDeals}); }}
         >
           <span className="icon"><i className="fas fa-handshake"></i></span>

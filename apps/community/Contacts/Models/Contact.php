@@ -50,7 +50,6 @@ class Contact extends \HubletoMain\Core\Models\Model
       'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
       'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1),
-      'note' => (new Text($this, $this->translate('Notes'))),
     ], parent::describeColumns());
   }
 

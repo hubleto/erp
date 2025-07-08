@@ -40,7 +40,7 @@ export default class HubletoForm<P, S> extends Form<HubletoFormProps,HubletoForm
     return customInputs;
   }
 
-  renderFooter(): JSX.Element {
+  renderFooter(): null|JSX.Element {
     return <>
       <div className="pr-4">
         {this.renderPrevRecordButton()}
@@ -48,5 +48,13 @@ export default class HubletoForm<P, S> extends Form<HubletoFormProps,HubletoForm
       </div>
     </>;
   }
+
+  renderTopMenu(): null|JSX.Element {
+    return globalThis.main.injectDynamicContent(
+      this.translationContext + ':TopMenu',
+      {form: this}
+    );
+  }
+
 
 }

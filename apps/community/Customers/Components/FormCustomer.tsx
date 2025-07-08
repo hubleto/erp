@@ -330,8 +330,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       mapAddress = R.street_line_1 + ', ' + R.postal_code + ' ' + R.city + ', ' + (R.region ? R.region + ', ' : '') + R.COUNTRY.name;
     }
 
-    let extraButtons = globalThis.main.injectDynamicContent('HubletoApp/Community/Customers/FormCustomer:ExtraButtons', {formCustomer: this});
-
     const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
       <div className='mb-2'>
         <Calendar
@@ -468,7 +466,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 </div>
               </> : null}
             </div>
-            {extraButtons ? <div className="mt-2 p-2 bg-blue-50 flex gap-2">{extraButtons}</div> : null}
             {showAdditional ?
               <div className="card mt-2">
                 <div className="card-header">{this.translate('Contacts')}</div>

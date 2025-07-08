@@ -5,14 +5,14 @@ import ModalSimple from "adios/ModalSimple";
 import TranslatedComponent from "adios/TranslatedComponent";
 
 interface P {
-  formCustomer: FormCustomer<FormCustomerProps, FormCustomerState>
+  form: FormCustomer<FormCustomerProps, FormCustomerState>
 }
 
 interface S {
   showLeads: boolean;
 }
 
-export default class FormCustomerExtraButtons extends TranslatedComponent<P, S> {
+export default class FormCustomerTopMenu extends TranslatedComponent<P, S> {
   props: P;
   state: S;
 
@@ -24,17 +24,17 @@ export default class FormCustomerExtraButtons extends TranslatedComponent<P, S> 
   }
 
   render() {
-    const form = this.props.formCustomer;
+    const form = this.props.form;
     const R = form.state.record;
 
     if (R.id > 0) {
       return <>
         <button
           className="btn btn-transparent w-full"
-          onClick={() => { this.setState({showLeads: true}); }}
+          onClick={() => { this.setState({showLeads: !this.state.showLeads}); }}
         >
           <span className="icon"><i className="fas fa-people-arrows"></i></span>
-          <span className="text">{this.translate('Show leads')}</span>
+          <span className="text">{this.translate('Leads')}</span>
         </button>
         {this.state.showLeads ?
           <ModalSimple
@@ -50,8 +50,6 @@ export default class FormCustomerExtraButtons extends TranslatedComponent<P, S> 
               tag="CustomerLeads"
               parentForm={form}
               idCustomer={R.id}
-              showHeader={false}
-              showFooter={false}
             />
           </ModalSimple>
         : null}

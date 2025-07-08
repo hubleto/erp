@@ -73,6 +73,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
 
     $deals = $mDeal->record
       ->where("id_pipeline", (int) $searchPipeline["id"])
+      ->where("is_closed", false)
       ->with("CURRENCY")
       ->with("CUSTOMER")
       ->with("TAGS")

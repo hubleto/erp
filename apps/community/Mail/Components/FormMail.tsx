@@ -26,7 +26,7 @@ export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailSt
     };
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): null|JSX.Element {
     return <>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
       <small>Mail {this.state.record.is_template ? 'Template' : null}</small>
@@ -36,7 +36,7 @@ export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailSt
   sendMail() {
   }
 
-  renderSaveButton(): JSX.Element {
+  renderSaveButton(): null|JSX.Element {
     return <>
       <button onClick={() => this.saveRecord()} className="btn btn-add-outline">
         <span className="icon"><i className={"fa-solid fa-" + (this.state.record.is_template ? 'file-lines' : 'file-pen')}></i></span>
@@ -45,7 +45,7 @@ export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailSt
     </>;
   }
 
-  renderHeaderLeft(): JSX.Element {
+  renderHeaderLeft(): null|JSX.Element {
     return <>
       {super.renderHeaderLeft()}
       {this.state.record.is_template ? null :

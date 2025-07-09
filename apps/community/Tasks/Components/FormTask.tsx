@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/core/Components/HubletoForm';
 import PipelineSelector from '@hubleto/apps/community/Pipeline/Components/PipelineSelector';
+import TableActivities from '@hubleto/apps/community/Worksheets/Components/TableActivities';
 
 interface FormTaskProps extends HubletoFormProps { }
 interface FormTaskState extends HubletoFormState { }
@@ -66,6 +67,20 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
             ></PipelineSelector>
           }
         </>
+      break;
+      case 'worksheet':
+        return <>
+          {this.state.id < 0 ?
+              <div className="badge badge-info">First create the campaign, then you will be prompted to create leads.</div>
+            :
+              <TableActivities
+                uid={this.props.uid + "_table_activities"}
+                tag="TaskActivities"
+                parentForm={this}
+                idTask={R.id}
+              />
+          }
+        </>;
       break;
     }
   }

@@ -21,7 +21,7 @@ export default class FormDealTopMenu extends TranslatedComponent<P, S> {
       {idDeal: idDeal},
       (data: any) => {
         if (data.status == "success") {
-          window.open(globalThis.main.config.rootUrl + `/projects/${data.idProject}`)
+          location.assign(globalThis.main.config.rootUrl + `/projects/${data.idProject}`)
         }
       }
     );

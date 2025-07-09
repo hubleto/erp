@@ -94,10 +94,10 @@ class User extends \ADIOS\Models\User
   public function describeForm(): \ADIOS\Core\Description\Form
   {
     $description = parent::describeForm();
-    $description->permissions = [
-      'canDelete' => false,
-      'canUpdate' => true,
-    ];
+    // $description->permissions = [
+    //   'canDelete' => false,
+    //   'canUpdate' => true,
+    // ];
     return $description;
   }
 

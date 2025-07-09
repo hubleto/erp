@@ -9,3 +9,9 @@
 
 // 3. Use the component in any of your Twig views:
 // <app-worksheets-table-my-model string:some-property="some-value"></app-worksheets-table-my-model>
+
+import TableActivities from './Components/TableActivities';
+import TableActivityTypes from './Components/TableActivityTypes';
+
+globalThis.main.registerReactComponent('WorksheetsTableActivities', TableActivities);
+globalThis.main.registerReactComponent('WorksheetsTableActivityTypes', TableActivityTypes);

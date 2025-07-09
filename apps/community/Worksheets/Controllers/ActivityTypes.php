@@ -1,8 +1,8 @@
 <?php
 
-namespace {{ appNamespace }}\Controllers;
+namespace HubletoApp\Community\Worksheets\Controllers;
 
-class {{ controller }} extends \HubletoMain\Core\Controllers\Controller
+class ActivityTypes extends \HubletoMain\Core\Controllers\Controller
 {
 
   // Uncomment this if you want to make your controller public
@@ -16,7 +16,7 @@ class {{ controller }} extends \HubletoMain\Core\Controllers\Controller
   {
 
     // Uncomment this if you want your controller be hookable
-    // $this->main->runHook('controller:prepare-view-start', [$this]);
+    $this->main->runHook('controller:prepare-view-start', [$this]);
 
     parent::prepareView();
 
@@ -24,10 +24,10 @@ class {{ controller }} extends \HubletoMain\Core\Controllers\Controller
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->viewParams['randomNumber'] = rand(1, 1000);
 
-    $this->setView('@{{ appViewNamespace }}/{{ controller }}.twig');
+    $this->setView('@HubletoApp:Community:Worksheets/ActivityTypes.twig');
 
     // Uncomment this if you want your controller be hookable
-    // $this->main->runHook('controller:prepare-view-end', [$this]);
+    $this->main->runHook('controller:prepare-view-end', [$this]);
   }
 
 }

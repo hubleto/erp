@@ -12,7 +12,7 @@ class PipelineStep extends \HubletoMain\Core\Models\Model
 {
   public string $table = 'pipeline_steps';
   public string $recordManagerClass = RecordManagers\PipelineStep::class;
-  public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.name, ""), " (", ifnull({%TABLE%}.probability, ""), "%)")';
+  public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
     'PIPELINE' => [ self::BELONGS_TO, Pipeline::class, 'id_pipeline', 'id' ]

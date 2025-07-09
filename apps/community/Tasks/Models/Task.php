@@ -26,7 +26,7 @@ class Task extends \HubletoMain\Core\Models\Model
 
   public string $table = 'tasks';
   public string $recordManagerClass = RecordManagers\Task::class;
-  public ?string $lookupSqlValue = 'concat("Task #", {%TABLE%}.id)';
+  public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
 
   public array $relations = [ 
     'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
@@ -37,9 +37,8 @@ class Task extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setProperty('defaultVisibility', true),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('badge badge-warning text-xl'),
       'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setCssClass('text-2xl text-primary'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->main->auth->getUserId())
@@ -51,6 +50,7 @@ class Task extends \HubletoMain\Core\Models\Model
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setDefaultValue(1),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setDefaultValue(null),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(true),
+      'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setProperty('defaultVisibility', true),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
 

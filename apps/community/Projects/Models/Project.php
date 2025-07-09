@@ -28,7 +28,7 @@ class Project extends \HubletoMain\Core\Models\Model
 
   public string $table = 'projects';
   public string $recordManagerClass = RecordManagers\Project::class;
-  public ?string $lookupSqlValue = 'concat("Project #", {%TABLE%}.id)';
+  public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
 
   public array $relations = [ 
     'MAIN_DEVELOPER' => [ self::HAS_ONE, User::class, 'id_main_developer', 'id' ],
@@ -41,11 +41,11 @@ class Project extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setProperty('defaultVisibility', true),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setProperty('defaultVisibility', false),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', false),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('badge badge-warning text-xl'),
       'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->main->auth->getUserId())
@@ -74,15 +74,15 @@ class Project extends \HubletoMain\Core\Models\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    $mPhase = new Phase($this->main);
-    $fPhaseOptions = [ ];//0 => 'All' ];
-    foreach ($mPhase->record->orderBy('order', 'asc')->get()?->toArray() as $phase) {
-      $fPhaseOptions[$phase['id']] = $phase['name'];
-    }
+    // $mPhase = new Phase($this->main);
+    // $fPhaseOptions = [ ];//0 => 'All' ];
+    // foreach ($mPhase->record->orderBy('order', 'asc')->get()?->toArray() as $phase) {
+    //   $fPhaseOptions[$phase['id']] = $phase['name'];
+    // }
 
-    $description->ui['defaultFilters'] = [
-      'fPhase' => [ 'title' => 'Phase', 'type' => 'multipleSelectButtons', 'options' => $fPhaseOptions ],
-    ];
+    // $description->ui['defaultFilters'] = [
+    //   'fPhase' => [ 'title' => 'Phase', 'type' => 'multipleSelectButtons', 'options' => $fPhaseOptions ],
+    // ];
 
     return $description;
   }

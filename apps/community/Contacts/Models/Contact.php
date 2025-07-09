@@ -41,15 +41,15 @@ class Contact extends \HubletoMain\Core\Models\Model
     return array_merge([
       'salutation' => (new Varchar($this, $this->translate('Salutation'))),
       'title_before' => (new Varchar($this, $this->translate('Title before'))),
-      'first_name' => (new Varchar($this, $this->translate('First name'))),
+      'first_name' => (new Varchar($this, $this->translate('First name')))->setProperty('defaultVisibility', true),
       'middle_name' => (new Varchar($this, $this->translate('Middle name'))),
-      'last_name' => (new Varchar($this, $this->translate('Last name'))),
+      'last_name' => (new Varchar($this, $this->translate('Last name')))->setProperty('defaultVisibility', true),
       'title_after' => (new Varchar($this, $this->translate('Title after'))),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true),
       'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0),
-      'note' => (new Text($this, $this->translate('Notes'))),
+      'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
-      'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1),
+      'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1)->setProperty('defaultVisibility', true),
     ], parent::describeColumns());
   }
 
@@ -66,30 +66,11 @@ class Contact extends \HubletoMain\Core\Models\Model
     $description->columns['virt_email'] = ["title" => $this->translate("Emails")];
     $description->columns['virt_number'] = ["title" => $this->translate("Phone Numbers")];
 
-    //nadstavit aby boli tieto stĺpce posledné
-    unset($description->columns['salutation']);
-    unset($description->columns['title_before']);
-    unset($description->columns['title_after']);
-    unset($description->columns['middle_name']);
-    $tempColumn = $description->columns['date_created'];
-    unset($description->columns['date_created']);
-    $description->columns['date_created'] = $tempColumn;
-    $tempColumn = $description->columns['is_valid'];
-    unset($description->columns['is_valid']);
-    $description->columns['tags'] = ["title" => "Tags"];
-    $description->columns['is_valid'] = $tempColumn;
-
     unset($description->columns['note']);
     unset($description->columns['is_primary']);
 
 
     if ($this->main->urlParamAsInteger('idCustomer') > 0) {
-      // $description->permissions = [
-      //   'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
-      //   'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),
-      //   'canUpdate' => $this->main->permissions->granted($this->fullName . ':Update'),
-      //   'canDelete' => $this->main->permissions->granted($this->fullName . ':Delete'),
-      // ];
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

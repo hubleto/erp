@@ -41,9 +41,8 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
         return <>
           <div className='w-full flex gap-2'>
             <div className='flex-1 border-r border-gray-100'>
-              {this.inputWrapper('id_deal')}
-              {this.inputWrapper('title')}
               {this.inputWrapper('identifier')}
+              {this.inputWrapper('title')}
               {this.inputWrapper('description')}
               {this.inputWrapper('id_main_developer')}
               {this.inputWrapper('id_account_manager')}
@@ -54,6 +53,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
               {this.inputWrapper('color')}
               {this.inputWrapper('online_documentation_folder')}
               {this.inputWrapper('notes')}
+              {this.inputWrapper('id_deal')}
             </div>
           </div>
           {this.state.id <= 0 ? null :

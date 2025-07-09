@@ -39,21 +39,21 @@ class Customer extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge([
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true),
       'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
       'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),
       'region' => (new Varchar($this, $this->translate('Region'))),
-      'city' => (new Varchar($this, $this->translate('City'))),
+      'city' => (new Varchar($this, $this->translate('City')))->setProperty('defaultVisibility', true),
       'postal_code' => (new Varchar($this, $this->translate('Postal Code'))),
-      'id_country' => (new Lookup($this, $this->translate('Country'), Country::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_country' => (new Lookup($this, $this->translate('Country'), Country::class)),
       'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
-      'customer_id' => (new Varchar($this, $this->translate('Customer ID')))->setRequired(),
+      'customer_id' => (new Varchar($this, $this->translate('Customer ID')))->setRequired()->setProperty('defaultVisibility', true),
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
-      'note' => (new Text($this, $this->translate('Notes'))),
+      'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
-      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue($this->main->auth->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired()->setDefaultValue($this->main->auth->getUserId()),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setProperty('defaultVisibility', true),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setRequired()->setDefaultValue($this->main->auth->getUserId())->setProperty('defaultVisibility', true),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setRequired()->setDefaultValue($this->main->auth->getUserId())->setProperty('defaultVisibility', true),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
     ], parent::describeColumns());
   }
@@ -105,24 +105,9 @@ class Customer extends \HubletoMain\Core\Models\Model
     $description->ui['showFooter'] = false;
     $description->columns['tags'] = ["title" => "Tags"];
 
-    unset($description->columns['street_line_1']);
-    unset($description->columns['street_line_2']);
-    unset($description->columns['city']);
-    unset($description->columns['postal_code']);
-    unset($description->columns['region']);
-    unset($description->columns['id_country']);
-    unset($description->columns['note']);
-    unset($description->columns['shared_folder']);
-
     $description->ui['defaultFilters'] = [
       'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
     ];
-
-    //nadstavit aby bol is_active posledný
-    $tempColumn = $description->columns['is_active'];
-    unset($description->columns['is_active']);
-    $description->columns['is_active'] = $tempColumn;
-
 
     return $description;
   }

@@ -28,9 +28,9 @@ class Pipeline extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
-      'description' => (new Varchar($this, $this->translate('Description'))),
-      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPE_ENUM_VALUES),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true),
+      'description' => (new Varchar($this, $this->translate('Description')))->setProperty('defaultVisibility', true),
+      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPE_ENUM_VALUES)->setProperty('defaultVisibility', true),
     ]);
   }
 

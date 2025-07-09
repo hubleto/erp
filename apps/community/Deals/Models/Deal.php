@@ -69,9 +69,9 @@ class Deal extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'identifier' => (new Varchar($this, $this->translate('Deal Identifier'))),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
+      'identifier' => (new Varchar($this, $this->translate('Deal Identifier')))->setProperty('defaultVisibility', true),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setDefaultValue($this->main->urlParamAsInteger('idCustomer'))->setProperty('defaultVisibility', true),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setReadonly(),
       'price' => (new Decimal($this, $this->translate('Price')))->setDecimals(2),

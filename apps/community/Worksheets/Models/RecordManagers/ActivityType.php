@@ -9,15 +9,7 @@ use \HubletoApp\Community\Settings\Models\RecordManagers\User;
 class ActivityType extends \HubletoMain\Core\RecordManager
 {
 
-  public $table = 'activitytypes';
-
-  public function OWNER(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_owner', 'id');
-  }
-
-  public function MANAGER(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_manager', 'id');
-  }
+  public $table = 'worksheet_activities_types';
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {

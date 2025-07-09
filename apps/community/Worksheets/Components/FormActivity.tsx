@@ -24,8 +24,8 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, F
 
   renderTitle(): JSX.Element {
     return <>
-      <h2>Record #{this.state.record.id ?? '0'}</h2>
-      <small>Worksheet</small>
+      <h2>Activity</h2>
+      <small></small>
     </>;
   }
 
@@ -39,8 +39,9 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, F
            <div className="flex-1 border-r border-gray-100">
              {this.inputWrapper('id_worker')}
              {this.inputWrapper('id_task')}
-             {this.inputWrapper('activity_description')}
+             {this.inputWrapper('description')}
              {this.inputWrapper('duration')}
+             {this.inputWrapper('id_type')}
              {this.inputWrapper('is_approved')}
              {this.inputWrapper('datetime_created')}
            </div>

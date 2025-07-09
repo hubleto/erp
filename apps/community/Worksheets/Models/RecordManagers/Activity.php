@@ -10,7 +10,7 @@ use \HubletoApp\Community\Tasks\Models\RecordManagers\Task;
 class Activity extends \HubletoMain\Core\RecordManager
 {
 
-  public $table = 'activities';
+  public $table = 'worksheet_activities';
 
   public function WORKER(): BelongsTo {
     return $this->belongsTo(User::class, 'id_worker', 'id');

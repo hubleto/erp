@@ -21,68 +21,15 @@ use \HubletoApp\Community\Settings\Models\User;
 class ActivityType extends \HubletoMain\Core\Models\Model
 {
 
-  const ENUM_ONE = 1;
-  const ENUM_TWO = 2;
-  const ENUM_THREE = 3;
-
-  const INTEGER_ENUM_VALUES = [
-    self::ENUM_ONE => 'One',
-    self::ENUM_TWO => 'Two',
-    self::ENUM_THREE => 'Three',
-  ];
-
-  public string $table = 'activitytypes';
+  public string $table = 'worksheet_activities_types';
   public string $recordManagerClass = RecordManagers\ActivityType::class;
   public ?string $lookupSqlValue = 'concat("ActivityType #", {%TABLE%}.id)';
-
-  public array $relations = [ 
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
-  ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)
-        // ->setReadonly()
-        // ->setRequired()
-        ->setCssClass('text-2xl text-primary')
-      ,
-      'text_example' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true)
-        // ->setReadonly()
-        // ->setRequired()
-        ->setCssClass('text-2xl text-primary')
-      ,
-      'decimal_example' => (new Decimal($this, $this->translate('Number')))->setProperty('defaultVisibility', true)
-        // ->setReadonly()
-        // ->setRequired()
-        ->setCssClass('text-2xl text-primary')
-        ->setDecimals(4)
-      // ,
-      // 'date_example' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue(date("Y-m-d"))
-      // ,
-      // 'datetime_example' => (new DateTime($this, $this->translate('DateTime')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue(date("Y-m-d H:i:s"))
-      // ,
-      // 'integer_example' => (new Integer($this, $this->translate('Integer')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setEnumValues(self::INTEGER_ENUM_VALUES)
-      //   ->setEnumCssClasses([
-      //     self::ENUM_ONE => 'bg-blue-50',
-      //     self::ENUM_TWO => 'bg-yellow-50',
-      //     self::ENUM_THREE => 'bg-green-50',
-      //   ])
-      //   ->setDefaultValue(self::ENUM_ONE)
-      // ,
-      // 'color_example' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'image_example' => (new Image($this, $this->translate('Image')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'file_example' => (new File($this, $this->translate('File')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->main->auth->getUserId())
-      // ,
-      // 'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->main->auth->getUserId())
-      // ,
+      'name' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true),
+      'color' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true),
     ]);
   }
 

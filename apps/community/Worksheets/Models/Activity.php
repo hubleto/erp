@@ -22,7 +22,7 @@ use \HubletoApp\Community\Tasks\Models\Task;
 class Activity extends \HubletoMain\Core\Models\Model
 {
 
-  public string $table = 'activities';
+  public string $table = 'worksheet_activities';
   public string $recordManagerClass = RecordManagers\Activity::class;
   public ?string $lookupSqlValue = 'concat("Activity #", {%TABLE%}.id)';
 
@@ -38,8 +38,8 @@ class Activity extends \HubletoMain\Core\Models\Model
       'id_worker' => (new Lookup($this, $this->translate('Worker'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->main->auth->getUserId()),
       'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setProperty('defaultVisibility', true),
       'id_type' => (new Lookup($this, $this->translate('Type'), ActivityType::class))->setProperty('defaultVisibility', true),
-      'activity_description' => (new Text($this, $this->translate('Activity description')))->setProperty('defaultVisibility', true),
-      'duration' => (new Decimal($this, $this->translate('Duration')))->setProperty('defaultVisibility', true)->setDecimals(2),
+      'description' => (new Text($this, $this->translate('Description')))->setProperty('defaultVisibility', true),
+      'duration' => (new Decimal($this, $this->translate('Duration')))->setProperty('defaultVisibility', true)->setDecimals(2)->setUnit('hours'),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       // 'date_example' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()

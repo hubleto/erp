@@ -28,7 +28,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
 
   renderTitle(): JSX.Element {
     return <>
-      <h2>{this.state.record.title ?? ''}</h2>
+      <h2>{(this.state.record.identifier ?? '') + ' ' + (this.state.record.title ?? '')}</h2>
       <small>Project</small>
     </>;
   }

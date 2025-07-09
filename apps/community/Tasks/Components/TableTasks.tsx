@@ -3,8 +3,7 @@ import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src
 import FormTask from './FormTask';
 
 interface TableTasksProps extends HubletoTableProps {
-  // Uncomment and modify these lines if you want to create URL-based filtering for your model
-  // idCustomer?: number,
+  idProject?: number,
 }
 
 interface TableTasksState extends HubletoTableState {
@@ -42,16 +41,15 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      // Uncomment and modify these lines if you want to create URL-based filtering for your model
-      // idCustomer: this.props.idCustomer,
+      idProject: this.props.idProject,
     }
   }
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
-    // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
-    // if (!formProps.description) formProps.description = {};
-    // formProps.description.defaultValues = { idDashboard: this.props.idDashboard };
+    formProps.customEndpointParams.idProject = this.props.idProject;
+    if (!formProps.description) formProps.description = {};
+    formProps.description.defaultValues = { id_project: this.props.idProject };
     return <FormTask {...formProps}/>;
   }
 }

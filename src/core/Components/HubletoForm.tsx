@@ -50,10 +50,16 @@ export default class HubletoForm<P, S> extends Form<HubletoFormProps,HubletoForm
   }
 
   renderTopMenu(): null|JSX.Element {
-    return globalThis.main.injectDynamicContent(
-      this.constructor.name + ':TopMenu',
-      {form: this}
-    );
+    const topMenu = super.renderTopMenu();
+    return <>
+      {topMenu}
+      <div className="flex border-l border-l-gray-100">
+        {globalThis.main.injectDynamicContent(
+          this.constructor.name + ':TopMenu',
+          {form: this}
+        )}
+      </div>
+    </>;
   }
 
 }

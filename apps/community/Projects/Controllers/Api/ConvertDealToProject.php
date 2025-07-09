@@ -31,16 +31,7 @@ class ConvertDealToProject extends \HubletoMain\Core\Controllers\Controller
       if (!$deal) throw new Exception("Deal was not found.");
 
       $mPipeline = new Pipeline($this->main);
-      $defaultPipeline = $mPipeline->getDefaultPipeline();
-
-      $idPipeline = 0;
-      $idPipelineStep = 0;
-      if (is_array($defaultPipeline)) {
-        $idPipeline = $defaultPipeline['id'] ?? 0;
-        if (is_array($defaultPipeline['STEPS'])) {
-          $idPipelineStep = reset($defaultPipeline['STEPS'])['id'] ?? 0;
-        }
-      }
+      list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInfo(Pipeline::TYPE_PROJECT_MANAGEMENT);
 
       $project = $mProject->record->recordCreate([
         "id_deal" => $deal->id,

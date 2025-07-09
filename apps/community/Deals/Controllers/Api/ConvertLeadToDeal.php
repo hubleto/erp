@@ -37,16 +37,7 @@ class ConvertLeadToDeal extends \HubletoMain\Core\Controllers\Controller
     $deal = null;
 
     $mPipeline = new Pipeline($this->main);
-    $defaultPipeline = $mPipeline->getDefaultPipeline();
-
-    $idPipeline = 0;
-    $idPipelineStep = 0;
-    if (is_array($defaultPipeline)) {
-      $idPipeline = $defaultPipeline['id'] ?? 0;
-      if (is_array($defaultPipeline['STEPS'])) {
-        $idPipelineStep = reset($defaultPipeline['STEPS'])['id'] ?? 0;
-      }
-    }
+    list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInfo(Pipeline::TYPE_DEAL_MANAGEMENT);
 
     try {
       $lead = $mLead->record->where("id", $leadId)->first();

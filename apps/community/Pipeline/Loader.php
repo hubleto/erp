@@ -33,7 +33,7 @@ class Loader extends \HubletoMain\Core\App
       $mPipeline->dropTableIfExists()->install();
       $mPipelineStep->dropTableIfExists()->install();
 
-      $idPipeline = $mPipeline->record->recordCreate([ "name" => "Sales pipeline", "is_default" => true ])['id'];
+      $idPipeline = $mPipeline->record->recordCreate([ "name" => "Deal stage", "type" => $mPipeline::TYPE_DEAL_MANAGEMENT ])['id'];
       $mPipelineStep->record->recordCreate([ 'name' => 'Prospecting', 'order' => 1, 'color' => '#838383', 'id_pipeline' => $idPipeline , "set_result" => Deal::RESULT_UNKNOWN, "probability" => 1]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Qualified to buy', 'order' => 2, 'color' => '#d8a082', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_UNKNOWN, "probability" => 10]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Proposal & Quote Sent', 'order' => 3, 'color' => '#d1cf79', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_UNKNOWN , "probability" => 30]);
@@ -43,7 +43,7 @@ class Loader extends \HubletoMain\Core\App
       $mPipelineStep->record->recordCreate([ 'name' => 'Closed WON', 'order' => 7, 'color' => '#008000', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_WON , "probability" => 100]);
       $mPipelineStep->record->recordCreate([ 'name' => 'Closed LOST', 'order' => 8, 'color' => '#f50c0c', 'id_pipeline' => $idPipeline, "set_result" => Deal::RESULT_LOST , "probability" => 0]);
 
-      $idPipeline = $mPipeline->record->recordCreate([ "name" => "Project phases" ])['id'];
+      $idPipeline = $mPipeline->record->recordCreate([ "name" => "Project phase", "type" => $mPipeline::TYPE_PROJECT_MANAGEMENT ])['id'];
       $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Early preparation', 'order' => 1, 'color' => '#344556']);
       $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Advanced preparation', 'order' => 2, 'color' => '#6830a5']);
       $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Final preparation', 'order' => 3, 'color' => '#3068a5']);
@@ -51,6 +51,15 @@ class Loader extends \HubletoMain\Core\App
       $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Advanced implementation', 'order' => 5, 'color' => '#a38f9a']);
       $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Final implementation', 'order' => 6, 'color' => '#44879a']);
       $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Delivery', 'order' => 7, 'color' => '#74809a']);
+
+      $idPipeline = $mPipeline->record->recordCreate([ "name" => "Task status", "type" => $mPipeline::TYPE_TASK_MANAGEMENT ])['id'];
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'In progress', 'order' => 1, 'color' => '#344556']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Ready to test', 'order' => 2, 'color' => '#6830a5']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Tested, working', 'order' => 3, 'color' => '#3068a5']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Tested, not working', 'order' => 4, 'color' => '#ae459f']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Ready to deploy', 'order' => 5, 'color' => '#a38f9a']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Deployed', 'order' => 6, 'color' => '#44879a']);
+      $mPipelineStep->record->recordCreate(['id_pipeline' => $idPipeline, 'name' => 'Confirmed', 'order' => 7, 'color' => '#74809a']);
     }
   }
 

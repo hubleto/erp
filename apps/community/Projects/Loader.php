@@ -71,7 +71,6 @@ class Loader extends \HubletoMain\Core\App
     $mProject->record->recordCreate([
       'id_deal' => 1,
       'title' => 'Sample project #1',
-      'identifier' => 'SMP-1',
       'description' => 'Sample project #1 for demonstration purposes.',
       'id_main_developer' => 1,
       'id_account_manager' => 1,
@@ -82,7 +81,6 @@ class Loader extends \HubletoMain\Core\App
     $mProject->record->recordCreate([
       'id_deal' => 1,
       'title' => 'Sample project #2',
-      'identifier' => 'SMP-2',
       'description' => 'Sample project #2 for demonstration purposes.',
       'id_main_developer' => 1,
       'id_account_manager' => 1,

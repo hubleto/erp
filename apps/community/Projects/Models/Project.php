@@ -104,6 +104,19 @@ class Project extends \HubletoMain\Core\Models\Model
 
   public function onAfterCreate(array $savedRecord): array
   {
+
+    $mPipeline = new Pipeline($this->main);
+    list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInfo(Pipeline::TYPE_PROJECT_MANAGEMENT);
+    $savedRecord['id_pipeline'] = $idPipeline;
+    $savedRecord['id_pipeline_step'] = $idPipelineStep;
+
+    if (empty($savedRecord['identifier'])) {
+      $savedRecord["identifier"] = 'P' . $savedRecord["id"];
+      $this->record->recordUpdate($savedRecord);
+    }
+
+    $this->record->recordUpdate($savedRecord);
+
     return parent::onAfterCreate($savedRecord);
   }
 

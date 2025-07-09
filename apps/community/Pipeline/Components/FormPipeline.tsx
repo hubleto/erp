@@ -78,6 +78,7 @@ export default class FormPipeline<P, S> extends HubletoForm<FormPipelineProps, F
             <div className="card-header">Pipeline Information</div>
             <div className="card-body flex flex-row justify-around">
               {this.inputWrapper("name")}
+              {this.inputWrapper("type")}
               {this.inputWrapper("description")}
             </div>
           </div>

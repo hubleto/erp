@@ -47,6 +47,12 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
     model: "HubletoApp/Community/Customers/Models/Customer",
+    tabs: {
+      'default': { title: 'Customer' },
+      'contacts': { title: 'Contacts' },
+      'calendar': { title: 'Calendar' },
+      'documents': { title: 'Documents' },
+    }
   };
 
   props: FormCustomerProps;
@@ -183,68 +189,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
      )
   }
 
-  // renderNewLeadForm(R: any): JSX.Element {
-  //   return (
-  //     <ModalForm
-  //       uid='lead_form'
-  //       isOpen={true}
-  //       type='right'
-  //     >
-  //       <FormLead
-  //         id={-1}
-  //         isInlineEditing={true}
-  //         descriptionSource="both"
-  //         description={{
-  //           defaultValues: {
-  //             id_customer: R.id,
-  //           }
-  //         }}
-  //         showInModal={true}
-  //         showInModalSimple={true}
-  //         onClose={() => { this.setState({ createNewLead: false } as FormCustomerState); }}
-  //         onSaveCallback={(form: FormLead<FormLeadProps, FormLeadState>, saveResponse: any) => {
-  //           if (saveResponse.status = "success") {
-  //             console.log("hihi");
-
-  //             this.loadRecord();
-  //             this.setState({createNewLead: false} as FormCustomerState)
-  //           }
-  //         }}
-  //       />
-  //     </ModalForm>
-  //   )
-  // }
-
-  // renderNewDealForm(R: any): JSX.Element{
-  // return (
-  //   <ModalForm
-  //     uid='deal_form'
-  //     isOpen={true}
-  //     type='right'
-  //   >
-  //     <FormDeal
-  //       id={-1}
-  //       isInlineEditing={true}
-  //       descriptionSource="both"
-  //       description={{
-  //         defaultValues: {
-  //           id_customer: R.id,
-  //         }
-  //       }}
-  //       showInModal={true}
-  //       showInModalSimple={true}
-  //       onClose={() => { this.setState({ createNewDeal: false } as FormCustomerState); }}
-  //       onSaveCallback={(form: FormDeal<FormDealProps, FormDealState>, saveResponse: any) => {
-  //         if (saveResponse.status = "success") {
-  //           this.loadRecord();
-  //           this.setState({createNewDeal: false} as FormCustomerState)
-  //         }
-  //       }}
-  //     />
-  //   </ModalForm>
-  // )
-  // }
-
   renderDocumentForm(): JSX.Element{
     return (
       <ModalForm
@@ -307,407 +251,318 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     } as FormDealState);
   }
 
-  renderContent(): JSX.Element {
+
+  renderTab(tab: string) {
     const R = this.state.record;
-    const showAdditional = R.id > 0 ? true : false;
-    const customInputs = this.renderCustomInputs();
 
-    if (R.LEADS && R.LEADS.length > 0) {
-      R.LEADS.map((lead, index) => {
-        lead.checkOwnership = false;
-        if (lead.DEAL) lead.DEAL.checkOwnership = false;
-      })
-    }
-    if (R.DEALS && R.DEALS.length > 0) {
-      R.DEALS.map((deal, index) => {
-        deal.checkOwnership = false;
-        if (deal.LEAD) deal.LEAD.checkOwnership = false;
-      })
-    }
+    switch (tab) {
+      case 'default':
+        const customInputs = this.renderCustomInputs();
 
-    let mapAddress = '';
-    if (R.street_line_1 != '' && R.city != '' && R.COUNTRY && R.COUNTRY.name != '') {
-      mapAddress = R.street_line_1 + ', ' + R.postal_code + ' ' + R.city + ', ' + (R.region ? R.region + ', ' : '') + R.COUNTRY.name;
-    }
+        let mapAddress = '';
+        if (R.street_line_1 != '' && R.city != '' && R.COUNTRY && R.COUNTRY.name != '') {
+          mapAddress = R.street_line_1 + ', ' + R.postal_code + ' ' + R.city + ', ' + (R.region ? R.region + ', ' : '') + R.COUNTRY.name;
+        }
 
-    const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
-      <div className='mb-2'>
-        <Calendar
-          onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
-          initialView='dayGridMonth'
-          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.rootUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
-          onDateClick={(date, time, info) => {
-            this.setState({
-              activityDate: date,
-              activityTime: time,
-              activityAllDay: false,
-              showIdActivity: -1,
-            } as FormDealState);
-          }}
-          onEventClick={(info) => {
-            this.setState({
-              showIdActivity: parseInt(info.event.id),
-            } as FormDealState);
-            info.jsEvent.preventDefault();
-          }}
-        ></Calendar>
-      </div>
-
-      <div className="adios component input"><div className="input-element w-full flex gap-2">
-        <input
-          className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
-          placeholder={this.translate('Type recent activity here')}
-          ref={this.refLogActivityInput}
-          onKeyUp={(event: any) => {
-            if (event.keyCode == 13) {
-              if (event.shiftKey) {
-                this.scheduleActivity();
-              } else {
-                this.logCompletedActivity();
-              }
-            }
-          }}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            this.refLogActivityInput.current.value = event.target.value;
-          }}
-        />
-      </div></div>
-      <div className='mt-2'>
-        <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
-          <span className="icon"><i className="fas fa-check"></i></span>
-          <span className="text">{this.translate('Log completed activity')}</span>
-          <span className="shortcut">{this.translate('Enter')}</span>
-        </button>
-        <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
-          <span className="icon"><i className="fas fa-clock"></i></span>
-          <span className="text">{this.translate('Schedule activity')}</span>
-          <span className="shortcut">{this.translate('Shift+Enter')}</span>
-        </button>
-      </div>
-      {this.divider(this.translate('Most recent activities'))}
-      {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
-        return <>
-          <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
-            onClick={() => this.setState({showIdActivity: item.id} as FormDealState)}
-          >
-            <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
-            <span className="text">
-              {item.subject}
-              {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
-            </span>
-          </button>
-        </>
-      })}</div> : null}
-    </div>;
-
-    return <>
-      <TabView>
-        <TabPanel header={this.translate('Customer')}>
-          <div className="gap-1">
-            <div className='flex gap-1 mt-2'>
-              <div className='flex-2 card'>
-                <div className="card-body flex flex-row gap-2">
-                  <div className="w-1/2">
-                    {this.inputWrapper("name", {cssClass: 'text-2xl text-primary'})}
-                    {this.inputWrapper("customer_id")}
-                    {this.inputWrapper("street_line_1")}
-                    {this.inputWrapper("street_line_2")}
-                    {this.inputWrapper("city")}
-                    {this.inputWrapper("region")}
-                    {this.inputWrapper("id_country")}
-                    <div className="flex justify-between">
-                      {this.inputWrapper("postal_code")}
-                      {mapAddress == '' ? null :
-                        <div>
-                          <a
-                            href={"https://maps.google.com/?q=" + encodeURIComponent(mapAddress)}
-                            target="_blank"
-                            className="btn btn-transparent"
-                          >
-                            <span className="icon"><i className="fas fa-map"></i></span>
-                            <span className="text">{this.translate("Show on map")}</span>
-                          </a>
-                        </div>
-                      }
-                    </div>
-                    {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-                  </div>
-                  <div className='border-l border-gray-200'></div>
-                  <div className="w-1/2">
-                    {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
-                    {this.inputWrapper("vat_id")}
-                    {this.inputWrapper("tax_id")}
-                    {showAdditional ? this.inputWrapper("date_created") : null}
-                    {this.inputWrapper("is_active")}
-                    <FormInput title="Tags">
-                      <InputTags2
-                        {...this.getInputProps('tags')}
-                        value={this.state.record.TAGS}
-                        model="HubletoApp/Community/Customers/Models/Tag"
-                        targetColumn="id_customer"
-                        sourceColumn="id_tag"
-                        colorColumn="color"
-                        onChange={(input: any, value: any) => {
-                          R.TAGS = value;
-                          this.setState({record: R});
-                        }}
-                      />
-                    </FormInput>
-                    {this.inputWrapper("id_owner")}
-                    {this.inputWrapper("id_manager")}
-                  </div>
-                </div>
-              </div>
-              {this.state.id > 0 ? <>
-                <div className='flex-1'>
-                  {recentActivitiesAndCalendar}
-                </div>
-              </> : null}
-            </div>
-            {showAdditional ?
-              <div className="card mt-2">
-                <div className="card-header">{this.translate('Contacts')}</div>
-                <div className="card-body">
-                  <a
-                    className="btn btn-add-outline mr-2 float-left"
-                    onClick={() => {
-                      if (!R.CONTACTS) R.CONTACTS = [];
-                      this.setState({createNewContact: true} as FormCustomerState);
-                    }}
-                  >
-                    <span className="icon"><i className="fas fa-add"></i></span>
-                    <span className="text">{this.translate('Add contact')}</span>
-                  </a>
-                  <TableContacts
-                    uid={this.props.uid + "_table_contacts"}
-                    parentForm={this}
-                    isUsedAsInput={true}
-                    readonly={!this.state.isInlineEditing}
-                    customEndpointParams={{idCustomer: R.id}}
-                    // data={{ data: R.CONTACTS }}
-                    descriptionSource="props"
-                    description={{
-                      ui: {
-                        showFulltextSearch: true,
-                      },
-                      permissions: this.props.tableContactsDescription?.permissions ?? {},
-                      columns: {
-                        first_name: { type: "varchar", title: this.translate("First name") },
-                        last_name: { type: "varchar", title: this.translate("Last name") },
-                        virt_email: { type: "varchar", title: this.translate("Email"), },
-                        virt_number: { type: "varchar", title: this.translate("Phone number") },
-                        is_primary: { type: "boolean", title: this.translate("Primary Contact") },
-                        tags: { type: "none", title: this.translate("Tags") },
-                      },
-                      inputs: {
-                        first_name: { type: "varchar", title: this.translate("First name") },
-                        last_name: { type: "varchar", title: this.translate("Last name") },
-                        is_primary: { type: "boolean", title: this.translate("Primary Contact") },
-                      },
-                    }}
-                    onRowClick={(table: TableContacts, row: any) => {
-                      var tableProps = this.props.tableContactsDescription
-                      tableProps.idContact = row.id;
-                      table.onAfterLoadTableDescription(tableProps)
-                      table.openForm(row.id);
-                    }}
-                    onChange={(table: TableContacts) => {
-                      this.updateRecord({ CONTACTS: table.state.data?.data });
-                    }}
-                    onDeleteSelectionChange={(table: TableContacts) => {
-                      this.updateRecord({ CONTACTS: table.state.data?.data ?? [] });
-                    }}
-                  ></TableContacts>
-
-                  {this.state.createNewContact ?
-                    this.renderNewContactForm(R)
-                  : null}
-                </div>
-              </div>
-            : null}
-          </div>
-          {showAdditional && customInputs.length > 0 ?
-            <div className="card mt-2"><div className="card-header">Custom data</div><div className="card-body">
-              {customInputs}
-            </div></div>
-          : <></>}
-        </TabPanel>
-        {showAdditional ? (
-          <TabPanel header={this.translate('Calendar')}>
+        const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
+          <div className='mb-2'>
             <Calendar
               onCreateCallback={() => this.loadRecord()}
               readonly={R.is_archived}
-              initialView='timeGridWeek'
-              views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+              initialView='dayGridMonth'
+              headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
               eventsEndpoint={globalThis.main.config.rootUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
               onDateClick={(date, time, info) => {
                 this.setState({
                   activityDate: date,
                   activityTime: time,
+                  activityAllDay: false,
                   showIdActivity: -1,
-                } as FormCustomerState);
+                } as FormDealState);
               }}
               onEventClick={(info) => {
                 this.setState({
                   showIdActivity: parseInt(info.event.id),
-                } as FormCustomerState);
+                } as FormDealState);
                 info.jsEvent.preventDefault();
               }}
             ></Calendar>
-          </TabPanel>
-        ) : null}
-        {/* {showAdditional ? (
-          <TabPanel header={this.translate('Leads') + (R.LEADS ? ' (' + R.LEADS.length + ')' : '')}>
-            <a
-              className="btn btn-add-outline mb-2"
-              onClick={() => {this.setState({ createNewLead: true } as FormCustomerState);}}
-            >
-              <span className="icon"><i className="fas fa-add"></i></span>
-              <span className="text">Add lead</span>
-            </a>
-            <TableLeads
-              uid={this.props.uid + "_table_leads"}
-              data={{ data: R.LEADS }}
-              descriptionSource="both"
-              customEndpointParams={{idCustomer: R.id}}
-              isUsedAsInput={false}
-              readonly={!this.state.isInlineEditing}
-              description={{
-                permissions: this.props.tableLeadsDescription.permissions,
-                columns: {
-                  title: { type: "varchar", title: "Title" },
-                  price: { type: "float", title: "Price" },
-                  id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
-                  date_expected_close: { type: "date", title: "Expected Close Date" },
-                },
-                inputs: {
-                  title: { type: "varchar", title: "Title" },
-                  price: { type: "float", title: "Price" },
-                  id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
-                  date_expected_close: { type: "date", title: "Expected Close Date" },
-                },
+          </div>
+
+          <div className="adios component input"><div className="input-element w-full flex gap-2">
+            <input
+              className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
+              placeholder={this.translate('Type recent activity here')}
+              ref={this.refLogActivityInput}
+              onKeyUp={(event: any) => {
+                if (event.keyCode == 13) {
+                  if (event.shiftKey) {
+                    this.scheduleActivity();
+                  } else {
+                    this.logCompletedActivity();
+                  }
+                }
               }}
-              onRowClick={(table: TableLeads, row: any) => {
-                var tableProps = this.props.tableLeadsDescription
-                tableProps.idLead = row.id;
-                table.openForm(row.id);
-              }}
-              onDeleteSelectionChange={(table: TableLeads) => {
-                this.updateRecord({ LEADS: table.state.data?.data ?? [] });
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                this.refLogActivityInput.current.value = event.target.value;
               }}
             />
-            {this.state.createNewLead == true ? (
-              this.renderNewLeadForm(R)
-            ): null}
-          </TabPanel>
-        ) : null} */}
-        {/* {showAdditional ? (
-          <TabPanel header={this.translate('Deals') + (R.DEALS ? ' (' + R.DEALS.length + ')' : '')}>
-            <a
-              className="btn btn-add-outline mb-2"
-              onClick={() => {this.setState({ createNewDeal: true } as FormCustomerState);}}
-            >
-              <span className="icon"><i className="fas fa-add"></i></span>
-              <span className="text">Add deal</span>
-            </a>
-            <TableDeals
-              uid={this.props.uid + "_table_deals"}
-              data={{ data: R.DEALS }}
-              descriptionSource="props"
-              customEndpointParams={{idCustomer: R.id}}
-              isUsedAsInput={false}
-              readonly={!this.state.isInlineEditing}
-              description={{
-                permissions: this.props.tableDealsDescription.permissions,
-                columns: {
-                  title: { type: "varchar", title: "Title" },
-                  price: { type: "float", title: "Price" },
-                  id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
-                  date_expected_close: { type: "date", title: "Expected Close Date" },
-                },
-                inputs: {
-                  title: { type: "varchar", title: "Title" },
-                  price: { type: "float", title: "Price" },
-                  id_currency: { type: "lookup", title: "Currency", model: 'HubletoApp/Community/Settings/Models/Currency' },
-                  date_expected_close: { type: "date", title: "Expected Close Date" },
-                },
-              }}
-              onRowClick={(table: TableDeals, row: any) => {
-                var tableProps = this.props.tableDealsDescription
-                tableProps.idLead = row.id;
-                table.onAfterLoadTableDescription(tableProps)
-                table.openForm(row.id);
-              }}
-              onDeleteSelectionChange={(table: TableDeals) => {
-                this.updateRecord({ DEALS: table.state.data?.data ?? [] });
-              }}
-            />
-            {this.state.createNewDeal == true ? (
-              this.renderNewDealForm(R)
-            ): null}
-          </TabPanel>
-        ) : null} */}
-        {showAdditional ? (
-          <TabPanel header={this.translate('Documents')}>
-            <div className="divider"><div><div><div></div></div><div><span>{this.translate('Local documents')}</span></div></div></div>
-            <a
-              className="btn btn-add-outline mb-2"
-              onClick={() => this.setState({showIdDocument: -1} as FormCustomerState)}
-            >
-              <span className="icon"><i className="fas fa-add"></i></span>
-              <span className="text">Add document</span>
-            </a>
-            <TableCustomerDocuments
-              key={this.state.tablesKey + "_table_documents"}
-              uid={this.props.uid + "_table_documents"}
-              data={{ data: R.DOCUMENTS }}
-              descriptionSource="props"
-              customEndpointParams={{idCustomer: R.id}}
-              isUsedAsInput={true}
-              readonly={!this.state.isInlineEditing}
-              description={{
-                permissions: this.props.tableDocumentsDescription?.permissions,
-                ui: {
-                  showFooter: false,
-                  showHeader: false,
-                },
-                columns: {
-                  id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                  hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableCustomerDocuments, data: any, options: any): JSX.Element => {
-                    return (
-                      <FormInput>
-                        <Hyperlink {...this.getInputProps('document_link')}
-                          value={data.DOCUMENT.hyperlink}
-                          readonly={true}
-                        ></Hyperlink>
-                      </FormInput>
-                    )
-                  },},
-                },
-                inputs: {
-                  id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                  hyperlink: { type: "varchar", title: "Link", readonly: true},
-                },
-              }}
-              onRowClick={(table: TableCustomerDocuments, row: any) => {
-                this.setState({showIdDocument: row.id_document} as FormCustomerState);
-              }}
-              onDeleteSelectionChange={(table) => {
-                this.updateRecord({ DOCUMENTS: table.state.data?.data ?? []});
-                this.setState({tablesKey: Math.random()} as FormCustomerState)
-              }}
-            />
-            {this.state.showIdDocument != 0 ?
-              this.renderDocumentForm()
-            : null}
-          </TabPanel>
-        ) : null}
-      </TabView>
-      {this.state.showIdActivity == 0 ? <></> :
-        this.renderActivityForm(R)
-      }
-    </>;
+          </div></div>
+          <div className='mt-2'>
+            <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
+              <span className="icon"><i className="fas fa-check"></i></span>
+              <span className="text">{this.translate('Log completed activity')}</span>
+              <span className="shortcut">{this.translate('Enter')}</span>
+            </button>
+            <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
+              <span className="icon"><i className="fas fa-clock"></i></span>
+              <span className="text">{this.translate('Schedule activity')}</span>
+              <span className="shortcut">{this.translate('Shift+Enter')}</span>
+            </button>
+          </div>
+          {this.divider(this.translate('Most recent activities'))}
+          {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
+            return <>
+              <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
+                onClick={() => this.setState({showIdActivity: item.id} as FormDealState)}
+              >
+                <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
+                <span className="text">
+                  {item.subject}
+                  {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
+                </span>
+              </button>
+            </>
+          })}</div> : null}
+        </div>;
+
+        return <>
+          <div className='flex gap-2'>
+            <div className='flex-2 card'>
+              <div className="card-body flex flex-row gap-2">
+                <div className="w-1/2">
+                  {this.inputWrapper("name", {cssClass: 'text-2xl text-primary'})}
+                  {this.inputWrapper("customer_id")}
+                  {this.inputWrapper("street_line_1")}
+                  {this.inputWrapper("street_line_2")}
+                  {this.inputWrapper("city")}
+                  {this.inputWrapper("region")}
+                  {this.inputWrapper("id_country")}
+                  <div className="flex justify-between">
+                    {this.inputWrapper("postal_code")}
+                    {mapAddress == '' ? null :
+                      <div>
+                        <a
+                          href={"https://maps.google.com/?q=" + encodeURIComponent(mapAddress)}
+                          target="_blank"
+                          className="btn btn-transparent"
+                        >
+                          <span className="icon"><i className="fas fa-map"></i></span>
+                          <span className="text">{this.translate("Show on map")}</span>
+                        </a>
+                      </div>
+                    }
+                  </div>
+                  {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+                </div>
+                <div className='border-l border-gray-200'></div>
+                <div className="w-1/2">
+                  {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+                  {this.inputWrapper("vat_id")}
+                  {this.inputWrapper("tax_id")}
+                  {this.inputWrapper("date_created")}
+                  {this.inputWrapper("is_active")}
+                  <FormInput title="Tags">
+                    <InputTags2
+                      {...this.getInputProps('tags')}
+                      value={this.state.record.TAGS}
+                      model="HubletoApp/Community/Customers/Models/Tag"
+                      targetColumn="id_customer"
+                      sourceColumn="id_tag"
+                      colorColumn="color"
+                      onChange={(input: any, value: any) => {
+                        R.TAGS = value;
+                        this.setState({record: R});
+                      }}
+                    />
+                  </FormInput>
+                  {this.inputWrapper("id_owner")}
+                  {this.inputWrapper("id_manager")}
+                </div>
+              </div>
+            </div>
+            {this.state.id > 0 ? <>
+              <div className='flex-1'>
+                {recentActivitiesAndCalendar}
+              </div>
+            </> : null}
+          </div>
+          {customInputs.length > 0 ?
+            <div className="card mt-2"><div className="card-header">Custom data</div><div className="card-body">
+              {customInputs}
+            </div></div>
+          : <></>}
+        </>
+
+      break;
+
+      case 'contacts':
+        return <>
+          <a
+            className="btn btn-add-outline mr-2 float-left"
+            onClick={() => {
+              if (!R.CONTACTS) R.CONTACTS = [];
+              this.setState({createNewContact: true} as FormCustomerState);
+            }}
+          >
+            <span className="icon"><i className="fas fa-add"></i></span>
+            <span className="text">{this.translate('Add contact')}</span>
+          </a>
+          <TableContacts
+            uid={this.props.uid + "_table_contacts"}
+            parentForm={this}
+            isUsedAsInput={true}
+            readonly={!this.state.isInlineEditing}
+            customEndpointParams={{idCustomer: R.id}}
+            // data={{ data: R.CONTACTS }}
+            descriptionSource="props"
+            description={{
+              ui: {
+                showFulltextSearch: true,
+              },
+              permissions: this.props.tableContactsDescription?.permissions ?? {},
+              columns: {
+                first_name: { type: "varchar", title: this.translate("First name") },
+                last_name: { type: "varchar", title: this.translate("Last name") },
+                virt_email: { type: "varchar", title: this.translate("Email"), },
+                virt_number: { type: "varchar", title: this.translate("Phone number") },
+                is_primary: { type: "boolean", title: this.translate("Primary Contact") },
+                tags: { type: "none", title: this.translate("Tags") },
+              },
+              inputs: {
+                first_name: { type: "varchar", title: this.translate("First name") },
+                last_name: { type: "varchar", title: this.translate("Last name") },
+                is_primary: { type: "boolean", title: this.translate("Primary Contact") },
+              },
+            }}
+            onRowClick={(table: TableContacts, row: any) => {
+              var tableProps = this.props.tableContactsDescription
+              tableProps.idContact = row.id;
+              table.onAfterLoadTableDescription(tableProps)
+              table.openForm(row.id);
+            }}
+            onChange={(table: TableContacts) => {
+              this.updateRecord({ CONTACTS: table.state.data?.data });
+            }}
+            onDeleteSelectionChange={(table: TableContacts) => {
+              this.updateRecord({ CONTACTS: table.state.data?.data ?? [] });
+            }}
+          ></TableContacts>
+
+          {this.state.createNewContact ?
+            this.renderNewContactForm(R)
+          : null}
+        </>;
+      break;
+
+      case 'calendar':
+        return <>
+          <Calendar
+            onCreateCallback={() => this.loadRecord()}
+            readonly={R.is_archived}
+            initialView='timeGridWeek'
+            views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+            eventsEndpoint={globalThis.main.config.rootUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
+            onDateClick={(date, time, info) => {
+              this.setState({
+                activityDate: date,
+                activityTime: time,
+                showIdActivity: -1,
+              } as FormCustomerState);
+            }}
+            onEventClick={(info) => {
+              this.setState({
+                showIdActivity: parseInt(info.event.id),
+              } as FormCustomerState);
+              info.jsEvent.preventDefault();
+            }}
+          ></Calendar>
+          {this.state.showIdActivity == 0 ? null : this.renderActivityForm(R)}
+        </>;
+      break;
+
+      case 'documents':
+        return <>
+          <a
+            className="btn btn-add-outline mb-2"
+            onClick={() => this.setState({showIdDocument: -1} as FormCustomerState)}
+          >
+            <span className="icon"><i className="fas fa-add"></i></span>
+            <span className="text">Add document</span>
+          </a>
+          <TableCustomerDocuments
+            key={this.state.tablesKey + "_table_documents"}
+            uid={this.props.uid + "_table_documents"}
+            data={{ data: R.DOCUMENTS }}
+            descriptionSource="props"
+            customEndpointParams={{idCustomer: R.id}}
+            isUsedAsInput={true}
+            readonly={!this.state.isInlineEditing}
+            description={{
+              permissions: this.props.tableDocumentsDescription?.permissions,
+              ui: {
+                showFooter: false,
+                showHeader: false,
+              },
+              columns: {
+                id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableCustomerDocuments, data: any, options: any): JSX.Element => {
+                  return (
+                    <FormInput>
+                      <Hyperlink {...this.getInputProps('document_link')}
+                        value={data.DOCUMENT.hyperlink}
+                        readonly={true}
+                      ></Hyperlink>
+                    </FormInput>
+                  )
+                },},
+              },
+              inputs: {
+                id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
+                hyperlink: { type: "varchar", title: "Link", readonly: true},
+              },
+            }}
+            onRowClick={(table: TableCustomerDocuments, row: any) => {
+              this.setState({showIdDocument: row.id_document} as FormCustomerState);
+            }}
+            onDeleteSelectionChange={(table) => {
+              this.updateRecord({ DOCUMENTS: table.state.data?.data ?? []});
+              this.setState({tablesKey: Math.random()} as FormCustomerState)
+            }}
+          />
+          {this.state.showIdDocument != 0 ? this.renderDocumentForm() : null}
+        </>
+      break;
+    }
+
   }
+
+  // renderContent(): JSX.Element {
+  //   const R = this.state.record;
+  //   const showAdditional = R.id > 0 ? true : false;
+
+  //   if (R.LEADS && R.LEADS.length > 0) {
+  //     R.LEADS.map((lead, index) => {
+  //       lead.checkOwnership = false;
+  //       if (lead.DEAL) lead.DEAL.checkOwnership = false;
+  //     })
+  //   }
+  //   if (R.DEALS && R.DEALS.length > 0) {
+  //     R.DEALS.map((deal, index) => {
+  //       deal.checkOwnership = false;
+  //       if (deal.LEAD) deal.LEAD.checkOwnership = false;
+  //     })
+  //   }
+
+  // }
 }

@@ -16,6 +16,7 @@ interface PipelineSelectorState {
   idPipeline: number,
   idPipelineStep: number,
   pipelines: Array<any>,
+  changePipeline: boolean,
 }
 
 export default class PipelineSelector<P, S> extends TranslatedComponent<PipelineSelectorProps, PipelineSelectorState> {
@@ -34,6 +35,7 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
       pipelines: null,
       idPipeline: this.props.idPipeline,
       idPipelineStep: this.props.idPipelineStep,
+      changePipeline: false,
     };
   }
 
@@ -78,20 +80,26 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
     return <>
       <div className='card mt-2'>
         <div className='card-header'>
-          <div className="input-body">
-            <div className="adios component input"><div className="inner">
-              <div className="input-element">
-                {Object.keys(pipelines).map((idPipeline: any, key: any) => {
-                  return <button
-                    key={key}
-                    className={"btn " + (this.state.idPipeline == idPipeline ? "btn-primary" : "btn-transparent")}
-                    onClick={() => { this.onPipelineChange(idPipeline); }}
-                  ><span className="text">{pipelines[idPipeline].name}</span></button>
-                })}
-              </div>
-            </div></div>
-          </div>
-          Pipeline
+          {this.state.changePipeline ?
+            <div className="input-body">
+              <div className="adios component input"><div className="inner">
+                <div className="input-element">
+                  {Object.keys(pipelines).map((idPipeline: any, key: any) => {
+                    return <button
+                      key={key}
+                      className={"btn " + (this.state.idPipeline == idPipeline ? "btn-primary" : "btn-transparent")}
+                      onClick={() => { this.onPipelineChange(idPipeline); }}
+                    ><span className="text">{pipelines[idPipeline].name}</span></button>
+                  })}
+                </div>
+              </div></div>
+            </div>
+          : <div>
+            {pipelines[this.state.idPipeline].name}
+            <button className="btn btn-transparent btn-small ml-2" onClick={() => { this.setState({changePipeline: true}); }}>
+              <span className="text">Change pipeline</span>
+            </button>
+          </div>}
         </div>
         <div className='card-body'>
           <div className='flex flex-row mt-2 flex-wrap'>

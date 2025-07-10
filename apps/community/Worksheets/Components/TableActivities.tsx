@@ -34,7 +34,7 @@ export default class TableActivities extends HubletoTable<TableActivitiesProps, 
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'right wide';
+    params.type = 'centered small theme-secondary';
     return params;
   }
 

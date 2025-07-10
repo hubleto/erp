@@ -35,19 +35,17 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, F
     switch (tab) {
       case 'default':
         return <>
-         <div className='w-full flex gap-2'>
-           <div className="flex-1 border-r border-gray-100">
-             {this.inputWrapper('id_worker')}
-             {this.inputWrapper('id_task')}
-             {this.inputWrapper('description')}
-             {this.inputWrapper('duration')}
-             {this.inputWrapper('id_type')}
-             {this.inputWrapper('is_approved')}
-             {this.inputWrapper('datetime_created')}
-           </div>
-           <div className="flex-1">
-           </div>
-         </div>
+          <div className="flex w-full gap-2">
+            <div className="w-full">{this.inputWrapper('id_worker')}</div>
+            <div className="w-full">{this.inputWrapper('id_task')}</div>
+          </div>
+          {this.inputWrapper('description')}
+          <div className="flex w-full gap-2">
+            <div className="w-full">{this.inputWrapper('duration')}</div>
+            <div className="w-full">{this.inputWrapper('id_type')}</div>
+          </div>
+          {this.inputWrapper('is_approved')}
+          {this.inputWrapper('datetime_created')}
         </>;
       break;
     }

@@ -54,8 +54,8 @@ class Task extends \HubletoMain\Core\Models\Model
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
 
-      'external_model' => (new Varchar($this, $this->translate('External Model')))->setProperty('defaultVisibility', true),
-      'external_id' => (new Integer($this, $this->translate('External ID'))),
+      'external_model' => (new Varchar($this, $this->translate('External Model')))->setProperty('defaultVisibility', true)->setReadonly(),
+      'external_id' => (new Integer($this, $this->translate('External ID')))->setReadonly(),
 
     ]);
   }

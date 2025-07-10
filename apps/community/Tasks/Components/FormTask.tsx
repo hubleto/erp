@@ -12,7 +12,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
     model: 'HubletoApp/Community/Tasks/Models/Team',
     tabs: {
       'default': { title: 'Task' },
-      'worksheet': { title: 'Worksheet' },
+      // 'worksheet': { title: 'Worksheet' },
     }
   }
 
@@ -45,34 +45,33 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
               {this.inputWrapper('description')}
               {this.inputWrapper('id_developer')}
               {this.inputWrapper('id_tester')}
-            </div>
-            <div className='flex-1'>
               {this.inputWrapper('manhours_estimation')}
               {this.inputWrapper('is_closed')}
+            </div>
+            <div className='flex-1'>
+              {this.state.id <= 0 ? null :
+                <PipelineSelector
+                  idPipeline={R.id_pipeline}
+                  idPipelineStep={R.id_pipeline_step}
+                  onPipelineChange={(idPipeline: number, idPipelineStep: number) => {
+                    this.updateRecord({id_pipeline: idPipeline, id_pipeline_step: idPipelineStep});
+                  }}
+                  onPipelineStepChange={(idPipelineStep: number) => {
+                    this.updateRecord({id_pipeline_step: idPipelineStep});
+                  }}
+                ></PipelineSelector>
+              }
               {this.inputWrapper('notes')}
               {this.inputWrapper('date_created')}
-              {this.inputWrapper('external_model')}
-              {this.inputWrapper('external_id')}
+              <div className="flex w-full gap-2">
+                {this.inputWrapper('external_model')}
+                {this.inputWrapper('external_id')}
+              </div>
             </div>
           </div>
-          {this.state.id <= 0 ? null :
-            <PipelineSelector
-              idPipeline={R.id_pipeline}
-              idPipelineStep={R.id_pipeline_step}
-              onPipelineChange={(idPipeline: number, idPipelineStep: number) => {
-                this.updateRecord({id_pipeline: idPipeline, id_pipeline_step: idPipelineStep});
-              }}
-              onPipelineStepChange={(idPipelineStep: number) => {
-                this.updateRecord({id_pipeline_step: idPipelineStep});
-              }}
-            ></PipelineSelector>
-          }
-        </>
-      break;
-      case 'worksheet':
-        return <>
+          {this.divider('Worksheet')}
           {this.state.id < 0 ?
-              <div className="badge badge-info">First create the campaign, then you will be prompted to create leads.</div>
+              <div className="badge badge-info">First create the task, then you will be prompted to create leads.</div>
             :
               <TableActivities
                 uid={this.props.uid + "_table_activities"}
@@ -81,7 +80,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                 idTask={R.id}
               />
           }
-        </>;
+        </>
       break;
     }
   }

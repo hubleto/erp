@@ -108,7 +108,7 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
       ...this.state.activityFormModalProps
     };
 
-    return <div className="flex gap-2">
+    return <div className="flex gap-2 flex-col md:flex-row">
       <div className="flex flex-col gap-2 text-nowrap mt-2">
         <b>Calendars</b>
         <div className="list">

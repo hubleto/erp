@@ -38,7 +38,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
     switch (tab) {
       case 'default':
         return <>
-          <div className='w-full flex gap-2'>
+          <div className='w-full flex gap-2 flex-col md:flex-row'>
             <div className='flex-1 border-r border-gray-100'>
               {this.inputWrapper('identifier')}
               {this.inputWrapper('title')}

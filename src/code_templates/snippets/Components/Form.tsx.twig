@@ -38,7 +38,7 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
     switch (tab) {
       case 'default':
         return <>
-         {/* <div className='w-full flex gap-2'>
+         {/* <div className='w-full flex gap-2 flex-col md:flex-row'>
            <div className="flex-1 border-r border-gray-100">
              {this.inputWrapper('name')}
              {this.inputWrapper('id_type')}
@@ -49,7 +49,7 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
              {this.inputWrapper('contact_email')}
              {this.inputWrapper('contact_phone')}
              {this.divider(this.translate('Capacity and occupancy'))}
-             <div className="flex gap-2">
+             <div className="flex gap-2 flex-col md:flex-row">
                <div className="w-full">{this.inputWrapper('capacity')}</div>
                <div className="w-full">{this.inputWrapper('capacity_unit')}</div>
              </div>

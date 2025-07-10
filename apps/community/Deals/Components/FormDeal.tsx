@@ -314,10 +314,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               }
             )}
           </div>
-          <div className="flex gap-2">
-            {this.inputWrapper('date_created')}
-            {this.inputWrapper('is_archived')}
-          </div>
+          {this.inputWrapper('date_created')}
+          {this.inputWrapper('is_archived')}
           {this.inputWrapper('id_lead')}
           {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
           {this.state.record.deal_result == 3 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
@@ -419,11 +417,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               <span className='text'>This deal is archived.</span>
             </div>
           : null}
-          <div className='flex gap-2'>
+          <div className='flex gap-2 flex-col md:flex-row'>
             <div className='flex-2'>
-              <div className='card card-body flex flex-row gap-2'>
+              <div className='card card-body flex flex-col md:flex-row gap-2'>
                 <div className='grow'>{inputsColumnLeft}</div>
-                <div className='border-l border-gray-200'></div>
+                <div className='border-t md:border-l border-gray-200'></div>
                 <div className='grow'>{inputsColumnRight}</div>
               </div>
               {pipeline}

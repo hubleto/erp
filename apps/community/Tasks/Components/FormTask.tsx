@@ -27,7 +27,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
 
   renderTitle(): JSX.Element {
     return <>
-      <h2>{(this.state.record.identifier ?? '') + ' ' + (this.state.record.title ?? '')}</h2>
+      <h2>{(this.state.record.identifier ?? '') + ' - ' + (this.state.record.title ?? '')}</h2>
       <small>Task</small>
     </>;
   }
@@ -43,6 +43,8 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
               {this.inputWrapper('identifier')}
               {this.inputWrapper('title')}
               {this.inputWrapper('id_project')}
+              {this.inputWrapper('external_model')}
+              {this.inputWrapper('external_id')}
               {this.inputWrapper('description')}
               {this.inputWrapper('id_developer')}
               {this.inputWrapper('id_tester')}

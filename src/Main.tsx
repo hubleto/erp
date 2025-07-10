@@ -189,7 +189,8 @@ class HubletoMain extends ADIOS {
           )
         );
       }
-      return dynamicContent.map((content, key) => <div key={key}>{content}</div>);
+      return dynamicContent;
+      // return dynamicContent.map((content, key) => <div key={key}>{content}</div>);
     } else {
       return null;
     }

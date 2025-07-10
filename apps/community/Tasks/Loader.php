@@ -5,42 +5,17 @@ namespace HubletoApp\Community\Tasks;
 class Loader extends \HubletoMain\Core\App
 {
 
-  // Uncomment following if you want a button for app's settings
-  // to be rendered next in sidebar, right next to your app's button.
-  // public bool $hasCustomSettings = true;
+  public array $externalModels = [];
 
   // init
   public function init(): void
   {
     parent::init();
 
-    // Add app routes.
-    // By default, each app should have a welcome dashboard.
-    // If your app will have own settings panel, it should be under the `settings/your-app` slug.
     $this->main->router->httpGet([
       '/^tasks\/?$/' => Controllers\Tasks::class,
     ]);
 
-    // // Add placeholder for custom settings.
-    // // This will be displayed in the Settings app, under the "All settings" card.
-    // $this->main->apps->community('Settings')->addSetting($this, [
-    //   'title' => 'Tasks', // or $this->translate('Tasks')
-    //   'icon' => 'fas fa-table',
-    //   'url' => 'settings/tasks',
-    // ]);
-
-    // // Add placeholder for your app's calendar.
-    // $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
-    // $calendarManager->addCalendar(
-    //   'Tasks-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
-    //   '#008000', // your app's calendar color
-    //   Calendar::class // your app's Calendar class
-    // );
-
-    // Uncomment following to configure your app's menu
-    // $appMenu = $this->main->apps->community('Desktop')->appMenu;
-    // $appMenu->addItem($this, 'tasks/item-1', $this->translate('Item 1'), 'fas fa-table');
-    // $appMenu->addItem($this, 'tasks/item-2', $this->translate('Item 2'), 'fas fa-list');
   }
 
   // installTables
@@ -57,10 +32,12 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  // generateDemoData
-  public function generateDemoData(): void
-  {
-    // Create any demo data to promote your app.
+  public function registerExternalModel(\HubletoMain\Core\App $app, string $modelClass) {
+    $this->externalModels[$modelClass] = $app;
+  }
+
+  public function getRegisteredExternalModels(): array {
+    return $this->externalModels;
   }
 
 }

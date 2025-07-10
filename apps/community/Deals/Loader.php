@@ -45,6 +45,8 @@ class Loader extends \HubletoMain\Core\App
 
     $reportManager = $this->main->apps->community('Reports')?->reportManager?->addReport($this, Reports\MonthlyRevenue::class);
 
+    $this->main->apps->community('Tasks')?->registerExternalModel($this, Models\Deal::class);
+
     $dashboardsApp = $this->main->apps->community('Dashboards');
     if ($dashboardsApp) {
       $dashboardsApp->addBoard(

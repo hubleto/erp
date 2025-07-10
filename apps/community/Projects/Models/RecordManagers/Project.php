@@ -37,10 +37,9 @@ class Project extends \HubletoMain\Core\RecordManager
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
 
-    // Uncomment and modify these lines if you want to apply filtering based on URL parameters
-    // if ($main->urlParamAsInteger("idCustomer") > 0) {
-    //   $query = $query->where($this->table . '.id_customer', $main->urlParamAsInteger("idCustomer"));
-    // }
+    if ($main->urlParamAsInteger("idDeal") > 0) {
+      $query = $query->where($this->table . '.id_deal', $main->urlParamAsInteger("idDeal"));
+    }
 
     $defaultFilters = $main->urlParamAsArray("defaultFilters");
     if (isset($defaultFilters["fPhase"]) && count($defaultFilters["fPhase"]) > 0) {

@@ -3,8 +3,7 @@ import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/src
 import FormProject from './FormProject';
 
 interface TableProjectsProps extends HubletoTableProps {
-  // Uncomment and modify these lines if you want to create URL-based filtering for your model
-  // idCustomer?: number,
+  idDeal?: number,
 }
 
 interface TableProjectsState extends HubletoTableState {
@@ -42,16 +41,15 @@ export default class TableProjects extends HubletoTable<TableProjectsProps, Tabl
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      // Uncomment and modify these lines if you want to create URL-based filtering for your model
-      // idCustomer: this.props.idCustomer,
+      idDeal: this.props.idDeal,
     }
   }
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
-    // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
-    // if (!formProps.description) formProps.description = {};
-    // formProps.description.defaultValues = { idDashboard: this.props.idDashboard };
+    formProps.customEndpointParams.idDeal = this.props.idDeal;
+    if (!formProps.description) formProps.description = {};
+    formProps.description.defaultValues = { id_deal: this.props.idDeal };
     return <FormProject {...formProps}/>;
   }
 }

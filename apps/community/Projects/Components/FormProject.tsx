@@ -3,8 +3,8 @@ import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/src/co
 import PipelineSelector from '@hubleto/apps/community/Pipeline/Components/PipelineSelector';
 import TableTasks from '@hubleto/apps/community/Tasks/Components/TableTasks';
 
-interface FormProjectProps extends HubletoFormProps { }
-interface FormProjectState extends HubletoFormState { }
+export interface FormProjectProps extends HubletoFormProps { }
+export interface FormProjectState extends HubletoFormState { }
 
 export default class FormProject<P, S> extends HubletoForm<FormProjectProps, FormProjectState> {
   static defaultProps: any = {
@@ -12,7 +12,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
     model: 'HubletoApp/Community/Projects/Models/Team',
     tabs: {
       'default': { title: 'Project' },
-      'tasks': { title: 'Tasks' },
+      // 'tasks': { title: 'Tasks' },
       'statistics': { title: 'Statistics' },
     }
   }
@@ -70,21 +70,22 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
           }
         </>;
       break;
-      case 'tasks':
-        return <>
-          {this.state.id < 0 ?
-              <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
-            :
-              <TableTasks
-                uid={this.props.uid + "_table_tasks"}
-                tag="ProjectTasks"
-                parentForm={this}
-                idProject={R.id}
-                selectionMode='multiple'
-              />
-          }
-        </>;
-      break;
+      // case 'tasks':
+      //   return <>
+      //     {this.state.id < 0 ?
+      //         <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
+      //       :
+      //         <TableTasks
+      //           uid={this.props.uid + "_table_tasks"}
+      //           tag="ProjectTasks"
+      //           parentForm={this}
+      //           externalModel='HubletoApp\Community\Projects\Models\Project'
+      //           externalId={R.id}
+      //           selectionMode='multiple'
+      //         />
+      //     }
+      //   </>;
+      // break;
     }
   }
 

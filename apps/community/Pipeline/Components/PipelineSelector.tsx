@@ -73,10 +73,6 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
       return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
     }
 
-    console.log('pipelines', pipelines);
-    console.log('steps', steps);
-    console.log('state', this.state);
-
     let stepBtnClass = "btn-light";
 
     return <>
@@ -85,8 +81,9 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
           <div className="input-body">
             <div className="adios component input"><div className="inner">
               <div className="input-element">
-                {Object.keys(pipelines).map((idPipeline: any) => {
+                {Object.keys(pipelines).map((idPipeline: any, key: any) => {
                   return <button
+                    key={key}
                     className={"btn " + (this.state.idPipeline == idPipeline ? "btn-primary" : "btn-transparent")}
                     onClick={() => { this.onPipelineChange(idPipeline); }}
                   ><span className="text">{pipelines[idPipeline].name}</span></button>
@@ -97,7 +94,7 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
           Pipeline
         </div>
         <div className='card-body'>
-          <div className='flex flex-row gap-2 mt-2 flex-wrap'>
+          <div className='flex flex-row mt-2 flex-wrap'>
             {steps && steps.length > 0 ?
               steps.map((s, i) => {
                 if (stepBtnClass == "btn-primary") stepBtnClass = "btn-transparent";
@@ -106,17 +103,23 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
                   <button
                     key={i}
                     onClick={() => this.onPipelineStepChange(s.id, s)}
-                    className={`btn ${stepBtnClass}`}
-                    style={{borderLeft: '1em solid ' + s.color}}
+                    className={`btn ${stepBtnClass} border-none rounded-none`}
                   >
-                    <div className='text text-center w-full flex'>
-                      <span className='align-self-center'>
-                        {s.name}
-                        {s.probability ? <small className='whitespace-nowrap ml-2'>({s.probability} %)</small> : null}
-                      </span>
+                    <div
+                      className="icon p-0"
+                      style={{
+                        borderTop: '1em solid transparent',
+                        borderBottom: '1em solid transparent',
+                        borderLeft: '1em solid ' + s.color
+                      }}
+                    >
+                    </div>
+                    <div className='text'>
+                      {s.name}
+                      {s.probability ? <small className='whitespace-nowrap ml-2'>({s.probability} %)</small> : null}
                     </div>
                   </button>
-                  {i+1 == steps.length ? null : <i className='fas fa-angles-right self-center text-gray-800 text-xs'></i>}
+                  {/* {i+1 == steps.length ? null : <i className='fas fa-angles-right self-center text-gray-800 text-xs'></i>} */}
                 </>;
               })
               : <p className='w-full text-center'>Pipeline has no steps.</p>

@@ -30,6 +30,8 @@ class ConvertDealToProject extends \HubletoMain\Core\Controllers\Controller
       $deal = $mDeal->record->prepareReadQuery()->where($mDeal->table.".id", $idDeal)->first();
       if (!$deal) throw new Exception("Deal was not found.");
 
+      $projectsCount = $mProject->record->where('id_deal', $deal->id)->count();
+
       $mPipeline = new Pipeline($this->main);
       list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInfo(Pipeline::TYPE_PROJECT_MANAGEMENT);
 
@@ -38,7 +40,7 @@ class ConvertDealToProject extends \HubletoMain\Core\Controllers\Controller
         "id_customer" => $deal->id_customer,
         "id_contact" => $deal->id_contact,
         "title" => $deal->title,
-        "identifier" => $deal->identifier,
+        "identifier" => $deal->identifier . ':' . ($projectsCount + 1),
         "id_main_developer" => $this->main->auth->getUserId(),
         "id_account_manager" => $this->main->auth->getUserId(),
         "id_pipeline" => $idPipeline,

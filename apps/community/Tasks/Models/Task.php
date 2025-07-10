@@ -37,7 +37,7 @@ class Task extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setCssClass('badge badge-warning text-xl'),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setCssClass('badge badge-warning text-xl')->setDescription('Leave empty to generate automatically.'),
       'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setProperty('defaultVisibility', true)->setRequired()
@@ -49,10 +49,13 @@ class Task extends \HubletoMain\Core\Models\Model
       'manhours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setProperty('defaultVisibility', true)->setUnit('manhours'),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setDefaultValue(1),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setDefaultValue(null),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(true),
-      'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setProperty('defaultVisibility', true),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
+      // 'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setProperty('defaultVisibility', true),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
+
+      'external_model' => (new Varchar($this, $this->translate('External Model')))->setProperty('defaultVisibility', true),
+      'external_id' => (new Integer($this, $this->translate('External ID'))),
 
     ]);
   }
@@ -63,12 +66,43 @@ class Task extends \HubletoMain\Core\Models\Model
     $description->ui['addButtonText'] = 'Add Task';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
+    $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    // Uncomment and modify these lines if you want to define defaultFilter for your model
-    // $description->ui['defaultFilters'] = [
-    //   'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
-    // ];
+    $tasksApp = $this->main->apps->community('Tasks');
+
+    if (isset($description->columns['external_model'])) {
+      $enumExternalModels = [];
+      foreach ($tasksApp->getRegisteredExternalModels() as $modelClass => $app) {
+        $enumExternalModels[$modelClass] = $app->manifest['nameTranslated'];
+      }
+
+      $description->columns['external_model']->setEnumValues($enumExternalModels);
+    }
+
+    $fExternalModels = [];
+    foreach ($tasksApp->getRegisteredExternalModels() as $modelClass => $app) {
+      $fExternalModels[$modelClass] = $app->manifest['name'];
+    }
+    $description->ui['defaultFilters'] = [
+      'fExternalModels' => [ 'title' => 'External models', 'type' => 'multipleSelectButtons', 'options' => $fExternalModels ],
+    ];
+
+    return $description;
+  }
+
+  public function describeForm(): \ADIOS\Core\Description\Form
+  {
+    $description = parent::describeForm();
+
+    $tasksApp = $this->main->apps->community('Tasks');
+
+    $enumExternalModels = [];
+    foreach ($tasksApp->getRegisteredExternalModels() as $modelClass => $app) {
+      $enumExternalModels[$modelClass] = $app->manifest['nameTranslated'];
+    }
+
+    $description->inputs['external_model']->setEnumValues($enumExternalModels);
 
     return $description;
   }
@@ -97,9 +131,21 @@ class Task extends \HubletoMain\Core\Models\Model
     $savedRecord['id_pipeline_step'] = $idPipelineStep;
 
     if (empty($savedRecord['identifier'])) {
-      $mProject = new \HubletoApp\Community\Projects\Models\Project($this->main);
-      $project = $mProject->record->find($savedRecord["id_project"])->first()?->toArray();
-      $savedRecord["identifier"] = ($project["identifier"] ?? 'T') . '#' . $savedRecord["id"];
+      // $mProject = new \HubletoApp\Community\Projects\Models\Project($this->main);
+      // $project = $mProject->record->where("id", $savedRecord["id_project"])->first()?->toArray();
+      // $savedRecord["identifier"] = ($project["identifier"] ?? 'T') . '#' . $savedRecord["id"];
+      $tasksApp = $this->main->apps->community('Tasks');
+      $externalModelApp = $tasksApp->getRegisteredExternalModels()[$savedRecord['external_model']] ?? null;
+      if ($externalModelApp) {
+        $externalModelClass = $savedRecord['external_model'];
+        $externalModel = new $externalModelClass($this->main);
+        $externalRecord = $externalModel->record->prepareReadQuery()->where($externalModel->table.'.id', $savedRecord['external_id'])->first()?->toArray();
+        $savedRecord["identifier"] =
+          ($externalModelApp->manifest['name'] ?? 'X')
+          . ':' . ($externalRecord['identifier'] ?? 'X')
+          . '#' . $savedRecord["id"]
+        ;
+      }
     }
 
     $this->record->recordUpdate($savedRecord);

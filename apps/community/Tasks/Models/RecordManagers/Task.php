@@ -28,18 +28,19 @@ class Task extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    // Uncomment this line if you are going to use $main.
-    // $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \ADIOS\Core\Helper::getGlobalApp();
 
-    // Uncomment and modify these lines if you want to apply filtering based on URL parameters
-    // if ($main->urlParamAsInteger("idCustomer") > 0) {
-    //   $query = $query->where($this->table . '.id_customer', $main->urlParamAsInteger("idCustomer"));
-    // }
+    $externalModel = $main->urlParamAsString("externalModel");
+    $externalId = $main->urlParamAsInteger("externalId");
+    if (!empty($externalModel) && $externalId > 0) {
+      $query = $query
+        ->where($this->table . '.external_model', $externalModel)
+        ->where($this->table . '.external_id', $externalId)
+      ;
+    }
 
-    // Uncomment and modify these lines if you want to apply default filters to your model.
-    // $defaultFilters = $main->urlParamAsArray("defaultFilters");
-    // if (isset($defaultFilters["fArchive"]) && $defaultFilters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
-    // else $query = $query->where("customers.is_active", true);
+    $defaultFilters = $main->urlParamAsArray("defaultFilters");
+    if (isset($defaultFilters["fExternalModels"]) && count($defaultFilters["fExternalModels"]) > 0) $query = $query->whereIn("tasks.external_model", $defaultFilters["fExternalModels"]);
 
     return $query;
   }

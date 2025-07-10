@@ -40,7 +40,7 @@ export default class FormCustomerTopMenu extends TranslatedComponent<P, S> {
           <ModalSimple
             uid='customer_table_leads_modal'
             isOpen={true}
-            type='right theme-secondary'
+            type='centered'
             showHeader={true}
             title="Leads"
             onClose={(modal: ModalSimple) => { this.setState({showLeads: false}); }}

@@ -65,6 +65,7 @@ class Contact extends \HubletoMain\Core\Models\Model
 
     $description->columns['virt_email'] = ["title" => $this->translate("Emails")];
     $description->columns['virt_number'] = ["title" => $this->translate("Phone Numbers")];
+    $description->columns['virt_tags'] = ["title" => $this->translate("Tags")];
 
     unset($description->columns['note']);
     unset($description->columns['is_primary']);

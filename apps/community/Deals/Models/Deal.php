@@ -71,7 +71,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Deal Identifier')))->setProperty('defaultVisibility', true),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setDefaultValue($this->main->urlParamAsInteger('idCustomer'))->setProperty('defaultVisibility', true),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->main->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setReadonly(),
       'price' => (new Decimal($this, $this->translate('Price')))->setDecimals(2),
@@ -84,7 +84,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(self::ENUM_SOURCE_CHANNELS),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(true),
+      'is_closed' => (new Boolean($this, $this->translate('Closed'))),
       'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(false),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues(self::ENUM_DEAL_RESULTS)

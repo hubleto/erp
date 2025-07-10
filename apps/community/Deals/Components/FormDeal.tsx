@@ -228,7 +228,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         const inputsColumnLeft = <>
           {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
           {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
-          <FormInput title={"Customer"} required={true}>
+          <FormInput title={"Customer"}>
             <Lookup {...this.getInputProps("id_customer")}
               model='HubletoApp/Community/Customers/Models/Customer'
               urlAdd='customers/add'
@@ -657,38 +657,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               info.jsEvent.preventDefault();
             }}
           ></Calendar>
-          {this.state.showIdActivity == 0 ? <></> :
-            <ModalForm
-              uid='activity_form'
-              isOpen={true}
-              type='right'
-            >
-              <DealFormActivity
-                id={this.state.showIdActivity}
-                isInlineEditing={true}
-                description={{
-                  defaultValues: {
-                    id_deal: R.id,
-                    id_contact: R.id_contact,
-                    date_start: this.state.activityDate,
-                    time_start: this.state.activityTime == "00:00:00" ? null : this.state.activityTime,
-                    date_end: this.state.activityDate,
-                    all_day: this.state.activityAllDay,
-                    subject: this.state.activitySubject,
-                  }
-                }}
-                idCustomer={R.id_customer}
-                showInModal={true}
-                showInModalSimple={true}
-                onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}
-                onSaveCallback={(form: DealFormActivity<DealFormActivityProps, DealFormActivityState>, saveResponse: any) => {
-                  if (saveResponse.status == "success") {
-                    this.setState({ showIdActivity: 0 } as FormDealState);
-                  }
-                }}
-              ></DealFormActivity>
-            </ModalForm>
-          }
         </>;
       break;
 
@@ -846,15 +814,42 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   }
 
 
-  // renderContent(): JSX.Element {
-  //   if (R.id == undefined && this.state.pipelineFirstLoad == false) {
-  //     this.pipelineChange(this.state.record.id_pipeline);
-  //     this.setState({pipelineFirstLoad: true});
-  //   }
-
-
-
-  //   return <>
-  //   </>;
-  // }
+  renderContent(): JSX.Element {
+    const R = this.state.record;
+    return <>
+      {super.renderContent()}
+      {this.state.showIdActivity == 0 ? <></> :
+        <ModalForm
+          uid='activity_form'
+          isOpen={true}
+          type='right'
+        >
+          <DealFormActivity
+            id={this.state.showIdActivity}
+            isInlineEditing={true}
+            description={{
+              defaultValues: {
+                id_deal: R.id,
+                id_contact: R.id_contact,
+                date_start: this.state.activityDate,
+                time_start: this.state.activityTime == "00:00:00" ? null : this.state.activityTime,
+                date_end: this.state.activityDate,
+                all_day: this.state.activityAllDay,
+                subject: this.state.activitySubject,
+              }
+            }}
+            idCustomer={R.id_customer}
+            showInModal={true}
+            showInModalSimple={true}
+            onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}
+            onSaveCallback={(form: DealFormActivity<DealFormActivityProps, DealFormActivityState>, saveResponse: any) => {
+              if (saveResponse.status == "success") {
+                this.setState({ showIdActivity: 0 } as FormDealState);
+              }
+            }}
+          ></DealFormActivity>
+        </ModalForm>
+      }
+    </>;
+  }
 }

@@ -68,7 +68,7 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
-    if (columnName == "tags") {
+    if (columnName == "virt_tags") {
       return (
         <>
           {data.TAGS.map((tag, key) => {

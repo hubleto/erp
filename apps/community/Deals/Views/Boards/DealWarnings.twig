@@ -6,7 +6,7 @@
   {% if items|length > 0 %}
     <div class="list">
       {% for item in items %}
-        <a href="deals/{{ item.id }}" class="btn btn-list-item btn-transparent">
+        <a href="deals/{{ item.id }}" class="btn btn-list-item btn-transparent flex-col items-start md:flex-row">
           <span class="text">
             <b>{{ item.identifier }}</b>
             {{ item.title }}

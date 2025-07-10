@@ -35,6 +35,7 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
     $this->viewParams['activatedApp'] = $activatedApp;
     $this->viewParams['sidebarGroups'] = $this->main->config->getAsArray('sidebarGroups', [
       'crm' => [ 'title' => $this->translate('CRM'), 'icon' => 'fas fa-id-card-clip' ],
+      'tasks' => [ 'title' => $this->translate('Tasks'), 'icon' => 'fas fa-list-check' ],
       'documents' => [ 'title' => $this->translate('Documents'), 'icon' => 'fas fa-file' ],
       'marketing' => [ 'title' => $this->translate('Marketing'), 'icon' => 'fas fa-bullseye' ],
       'sales' => [ 'title' => $this->translate('Sales'), 'icon' => 'fas fa-users-viewfinder' ],

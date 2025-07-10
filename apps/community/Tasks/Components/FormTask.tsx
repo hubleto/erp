@@ -42,9 +42,6 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
             <div className='flex-1 border-r border-gray-100'>
               {this.inputWrapper('identifier')}
               {this.inputWrapper('title')}
-              {this.inputWrapper('id_project')}
-              {this.inputWrapper('external_model')}
-              {this.inputWrapper('external_id')}
               {this.inputWrapper('description')}
               {this.inputWrapper('id_developer')}
               {this.inputWrapper('id_tester')}
@@ -54,6 +51,8 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
               {this.inputWrapper('is_closed')}
               {this.inputWrapper('notes')}
               {this.inputWrapper('date_created')}
+              {this.inputWrapper('external_model')}
+              {this.inputWrapper('external_id')}
             </div>
           </div>
           {this.state.id <= 0 ? null :

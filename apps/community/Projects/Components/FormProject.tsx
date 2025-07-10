@@ -12,7 +12,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
     model: 'HubletoApp/Community/Projects/Models/Team',
     tabs: {
       'default': { title: 'Project' },
-      // 'tasks': { title: 'Tasks' },
+      'tasks': { title: 'Tasks' },
       'statistics': { title: 'Statistics' },
     }
   }
@@ -70,22 +70,26 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
           }
         </>;
       break;
-      // case 'tasks':
-      //   return <>
-      //     {this.state.id < 0 ?
-      //         <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
-      //       :
-      //         <TableTasks
-      //           uid={this.props.uid + "_table_tasks"}
-      //           tag="ProjectTasks"
-      //           parentForm={this}
-      //           externalModel='HubletoApp\Community\Projects\Models\Project'
-      //           externalId={R.id}
-      //           selectionMode='multiple'
-      //         />
-      //     }
-      //   </>;
-      // break;
+      case 'tasks':
+        try {
+          return <>
+            {this.state.id < 0 ?
+                <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
+              :
+                <TableTasks
+                  uid={this.props.uid + "_table_tasks"}
+                  tag="ProjectTasks"
+                  parentForm={this}
+                  externalModel='HubletoApp\Community\Projects\Models\Project'
+                  externalId={R.id}
+                  selectionMode='multiple'
+                />
+            }
+          </>;
+        } catch (ex) {
+          return <div className="alert alert-error">Failed to display tasks. Check if you have 'Tasks' app installed.</div>
+        }
+      break;
     }
   }
 

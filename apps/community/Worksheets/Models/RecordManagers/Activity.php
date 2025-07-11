@@ -28,13 +28,11 @@ class Activity extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    // Uncomment this line if you are going to use $main.
-    // $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \ADIOS\Core\Helper::getGlobalApp();
 
-    // Uncomment and modify these lines if you want to apply filtering based on URL parameters
-    // if ($main->urlParamAsInteger("idCustomer") > 0) {
-    //   $query = $query->where($this->table . '.id_customer', $main->urlParamAsInteger("idCustomer"));
-    // }
+    if ($main->urlParamAsInteger("idTask") > 0) {
+      $query = $query->where($this->table . '.id_task', $main->urlParamAsInteger("idTask"));
+    }
 
     // Uncomment and modify these lines if you want to apply default filters to your model.
     // $defaultFilters = $main->urlParamAsArray("defaultFilters");

@@ -6,6 +6,7 @@ class Loader extends \HubletoMain\Core\App
 {
 
   public bool $canBeDisabled = false;
+  public bool $permittedForAllUsers = true;
 
   /** @var array<string, string> */
   public array $hotTips = [];

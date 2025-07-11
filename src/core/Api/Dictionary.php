@@ -1,12 +1,13 @@
 <?php
 
-namespace HubletoMain\Core;
+namespace HubletoMain\Core\Api;
 
 use \ADIOS\Core\Helper;
 
 class Dictionary extends \ADIOS\Core\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
+  public bool $permittedForAllUsers = true;
 
   public \HubletoMain $main;
 

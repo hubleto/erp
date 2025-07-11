@@ -14,12 +14,13 @@ class Router extends \ADIOS\Core\Router {
     parent::__construct($app);
 
     $this->httpGet([
-      '/^api\/log-javascript-error\/?$/' => LogJavascriptError::class,
-      '/^api\/dictionary\/?$/' => Dictionary::class,
-      '/^api\/get-chart-data\/?$/' =>  \HubletoMain\Core\Api\GetTemplateChartData::class,
-      '/^api\/get-table-columns-customize\/?$/' =>  \HubletoMain\Core\Api\GetTableColumnsCustomize::class,
-      '/^api\/save-table-columns-customize\/?$/' =>  \HubletoMain\Core\Api\SaveTableColumnsCustomize::class,
-      '/^api\/table-export-csv\/?$/' =>  \HubletoMain\Core\Api\TableExportCsv::class,
+      '/^api\/get-apps-info\/?$/' => Api\GetAppsInfo::class,
+      '/^api\/log-javascript-error\/?$/' => Api\LogJavascriptError::class,
+      '/^api\/dictionary\/?$/' => Api\Dictionary::class,
+      '/^api\/get-chart-data\/?$/' =>  Api\GetTemplateChartData::class,
+      '/^api\/get-table-columns-customize\/?$/' =>  Api\GetTableColumnsCustomize::class,
+      '/^api\/save-table-columns-customize\/?$/' =>  Api\SaveTableColumnsCustomize::class,
+      '/^api\/table-export-csv\/?$/' =>  Api\TableExportCsv::class,
       '/^reset-password$/' => ControllerResetPassword::class,
       '/^forgot-password$/' => ControllerForgotPassword::class,
     ]);

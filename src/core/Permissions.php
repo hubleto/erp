@@ -88,4 +88,19 @@ class Permissions extends \ADIOS\Core\Permissions {
       return parent::granted($permission, $userRoles);
     }
   }
+
+  public function isAppPermittedForActiveUser(\HubletoMain\Core\App $app) {
+    $userRoles = $this->app->auth->getUserRoles();
+
+    if (
+      $this->grantAllPermissions
+      || $app->permittedForAllUsers
+      || count(array_intersect($this->administratorRoles, $userRoles)) > 0
+    ) return true;
+
+    $user = $this->main->auth->getUser();
+    $userApps = @json_decode($user['apps'], true);
+
+    return is_array($userApps) && in_array($app->namespace, $userApps);
+  }
 }

@@ -5,6 +5,7 @@ namespace HubletoApp\Community\Notifications\Controllers\Api;
 class MarkAsUnread extends \HubletoMain\Core\Controllers\Controller {
 
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
+  public bool $permittedForAllUsers = true;
 
   public function renderJson(): ?array
   {

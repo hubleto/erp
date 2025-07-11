@@ -8,6 +8,7 @@ use HubletoApp\Community\Deals\Models\DealActivity;
 class LogActivity extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
+  public bool $permittedForAllUsers = true;
 
   public function renderJson(): ?array
   {

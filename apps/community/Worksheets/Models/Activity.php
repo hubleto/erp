@@ -75,6 +75,7 @@ class Activity extends \HubletoMain\Core\Models\Model
     $description->ui['addButtonText'] = 'Add Activity';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
+    $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
 
     // Uncomment and modify these lines if you want to define defaultFilter for your model

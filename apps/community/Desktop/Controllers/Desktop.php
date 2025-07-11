@@ -15,7 +15,10 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
     $activatedApp = null;
 
     foreach ($appsInSidebar as $appNamespace => $app) {
-      if ($app->configAsInteger('sidebarOrder') <= 0) {
+      if (
+        !$this->main->permissions->isAppPermittedForActiveUser($app)
+        || $app->configAsInteger('sidebarOrder') <= 0
+      ) {
         unset($appsInSidebar[$appNamespace]);
       }
       if ($app->isActivated) {

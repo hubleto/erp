@@ -8,6 +8,7 @@ class Controller extends \ADIOS\Core\Controller
   public \HubletoMain $main;
 
   public bool $disableLogUsage = false;
+  public bool $permittedForAllUsers = false;
 
   public string $appNamespace = '';
   public \HubletoMain\Core\App $hubletoApp;
@@ -30,6 +31,21 @@ class Controller extends \ADIOS\Core\Controller
     if ($this->main->apps->getAppInstance($this->appNamespace)) {
       $this->hubletoApp = $this->main->apps->getAppInstance($this->appNamespace);
     }
+  }
+
+  public function activeUserHasPermission(): bool
+  {
+    if (
+      isset($this->hubletoApp)
+      && $this->requiresUserAuthentication
+      && !$this->permittedForAllUsers
+      && !$this->main->permissions->isAppPermittedForActiveUser($this->hubletoApp)
+    ) {
+      // throw new \ADIOS\Core\Exceptions\NotEnoughPermissionsException("You have no access neither to {$this->hubletoApp->manifest['name']} nor {$this->shortName}.");
+      return false;
+    }
+
+    return true;
   }
 
   /**
@@ -70,6 +86,8 @@ class Controller extends \ADIOS\Core\Controller
    */
   public function prepareView(): void
   {
+    if (!$this->activeUserHasPermission()) return;
+
     $this->main->runHook('controller:prepare-view-start', [$this]);
 
     $logFolder = $this->app->config->getAsString('logFolder');
@@ -112,8 +130,14 @@ class Controller extends \ADIOS\Core\Controller
 
   public function setView(null|string $view, array|null $viewParams = null)
   {
-    parent::setView($view, $viewParams);
-    $this->main->runHook('controller:set-view', [$this, $view, $viewParams]);
+    if (!$this->activeUserHasPermission()) {
+      parent::setView('@hubleto/AccessForbidden.twig', [
+        'message' => "You have no access neither to {$this->hubletoApp->manifest['name']} nor {$this->shortName}."
+      ]);
+    } else {
+      parent::setView($view, $viewParams);
+      $this->main->runHook('controller:set-view', [$this, $view, $viewParams]);
+    }
   }
 
   public function getBreadcrumbs(): array

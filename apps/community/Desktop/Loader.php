@@ -10,6 +10,7 @@ class Loader extends \HubletoMain\Core\App
   ];
 
   public bool $canBeDisabled = false;
+  public bool $permittedForAllUsers = true;
 
   public SidebarManager $sidebar;
   public AppMenuManager $appMenu;

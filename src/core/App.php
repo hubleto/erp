@@ -25,6 +25,8 @@ class App {
   public bool $enabled = false;
   public bool $canBeDisabled = true;
 
+  public bool $permittedForAllUsers = false;
+
   public string $rootFolder = '';
   public string $viewNamespace = '';
   public string $namespace = '';

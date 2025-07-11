@@ -24,11 +24,11 @@ class Dashboard extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_owner' => (new Lookup($this, $this->translate("Owner"), User::class))->setRequired(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired(),
-      'color' => (new Color($this, $this->translate('Color')))->setRequired(),
-      'is_default' => (new Boolean($this, $this->translate('Is default'))),
+      'id_owner' => (new Lookup($this, $this->translate("Owner"), User::class))->setRequired()->setProperty('defaultVisibility', true),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true),
+      'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired()->setProperty('defaultVisibility', true),
+      'color' => (new Color($this, $this->translate('Color')))->setRequired()->setProperty('defaultVisibility', true),
+      'is_default' => (new Boolean($this, $this->translate('Is default')))->setProperty('defaultVisibility', true),
     ]);
   }
 

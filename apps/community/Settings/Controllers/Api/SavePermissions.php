@@ -9,6 +9,8 @@ use HubletoApp\Community\Settings\Models\UserRole;
 class SavePermissions extends \HubletoMain\Core\Controllers\Controller
 {
   public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
+  public bool $permittedForAllUsers = true;
+
   public function renderJson(): ?array
   {
     $roleId = $this->main->urlParamAsInteger("roleId");

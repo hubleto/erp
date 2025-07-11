@@ -8,6 +8,8 @@ class GetCalendarEvents extends \HubletoMain\Core\Controllers\Controller {
   public string $dateStart = '';
   public string $dateEnd = '';
 
+  public bool $permittedForAllUsers = true;
+
   public \HubletoApp\Community\Calendar\CalendarManager $calendarManager;
   
   public function __construct(\HubletoMain $main)

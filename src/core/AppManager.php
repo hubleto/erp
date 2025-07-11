@@ -154,6 +154,14 @@ class AppManager
     return $this->disabledApps;
   }
 
+  /**
+  * @return array<\HubletoMain\Core\App>
+  */
+  public function getInstalledApps(): array
+  {
+    return array_merge($this->apps, $this->disabledApps);
+  }
+
   public function getActivatedApp(): \HubletoMain\Core\App|null
   {
     $apps = $this->getEnabledApps();

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel='shortcut icon' href='{{ config.srcUrl }}/assets/images/logo-hubleto.png'>
+  <title>Hubleto</title>
+
+  <script src='{{ config.rootUrl }}/adios/cache.js'></script>
+
+  <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/fontawesome-6.6.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/compiled/css/main.css">
+</head>
+
+<body>
+
+<div id="sign-in-screen">
+  <div class="inner">
+    <div class="text-center">
+      <h1>{{ translate("Access Forbidden") }}</h1>
+      <p class="mb-4">
+        {{ viewParams.message }}
+      </p>
+      <a href="{{ config.rootUrl }}/" class="btn btn-large">
+        <span class="icon"><i class="fas fa-home"></i></span>
+        <span class="text">{{ translate("Home") }}</span>
+      </a>
+    </div>
+  </div>
+  <div class="logo">
+    <img src="{{ config.srcUrl }}/assets/images/logo-hubleto-text-horizontal.png" style="max-height:4em;margin-top:5em; width: auto;" />
+  </div>
+</div>
+<div class="text-xs text-gray-400 text-right" style="position:fixed;right:0;bottom:0;padding:0.5em">
+  Release<br/>
+  [{{ app.release.getVersion() }}] {{ app.release.getCodename() }}
+</div>
+</body>
+</html>

@@ -4,6 +4,7 @@ namespace HubletoApp\Community\Settings\Models;
 
 use \ADIOS\Core\Db\Column\Varchar;
 use \ADIOS\Core\Db\Column\Lookup;
+use \ADIOS\Core\Db\Column\Json;
 
 class User extends \ADIOS\Models\User
 {
@@ -35,6 +36,7 @@ class User extends \ADIOS\Models\User
       'email' => (new Varchar($this, $this->translate('Email')))->setRequired(),
       'language' => (new Varchar($this, $this->translate('Language')))->setEnumValues(self::ENUM_LANGUAGES)->setRequired(),
       'id_default_company' => (new Lookup($this, $this->translate("Default company"), Company::class)),
+      'apps' => (new Json($this, $this->translate('Apps'))),
     ]);
   }
 

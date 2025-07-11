@@ -8,26 +8,26 @@
 Hubleto is a `PHP-based opensource CRM and ERP development framework` with lots of features and free apps to develop your custom CRM or ERP.
 
 ```
-| ************************************ | Hubleto
-| ************************************ | 
-| ***+++++*******+++++********+++***** | Free community apps (contacts, calendar, leads, deals, orders, ...)
-| ***+   +*******+   +*******+   +**** | Download & install in just few minutes
-| ***+   +*+++***+   +*+++***+   +**** | Uses React, TailwindCSS, Adios or Symfony's Twig
-| ***+    +   +**+    +   +**+   +**** | Built-in User management, App management, Settings management
-| ***+         +*+         +*+   +**** | Foundation for MVC, Routing, Translations, Authentication, Permissions
-| ***+   +*+   +*+   ***   +*+   +**** | CLI automation tools
-| ***+   +*+   +*+   ***   +*+   +**** | Fast learning curve, comprehensive dev guide
-| ***+   +*+   +*+        +**+    +*** |
-| ***+++++*+++++*++++*++++****+++++*** |
-| ************************************ |
-| ************************************ |
-| *****************                    |
-| ***************                      |
-| ************     ................... |
-| *********     :::::::::::::::::::::: |
-| *******   :::::::::::::::::::::::::: |
-| ****   ::::::::::::::::::::::::::::: |
-| * :::::::::::::::::::::::::::::::::: |
+|                                          | Hubleto
+|                                          | 
+|       ###         ###         ###        | Free community apps (contacts, calendar, leads, deals, orders, ...)
+|       ###         ###         ###        | Download & install in just few minutes
+|       ### #####   ### #####   ###        | Uses React, TailwindCSS, Adios or Symfony's Twig
+|       ##########  ##########  ###        | Built-in User management, App management, Settings management
+|       ###    ###  ###     ### ###        | Foundation for MVC, Routing, Translations, Authentication, Permissions
+|       ###    ###  ###     ### ###        | CLI automation tools
+|       ###    ###  ##### ####  ####       | Fast learning curve, comprehensive dev guide
+|       ###    ###  ### #####    ###       |
+|                                          |
+|                                          |
+|                    ##################### |
+|                  ####################### |
+|               ########################## |
+|            #########++++++++++++++++++++ |
+|          #######++++++++++++++++++++++++ |
+|       #######+++++++++++++++++++++++++++ |
+|    ######+++++++++++++++++++++++++++++++ |
+|  ##+++++++++++++++++++++++++++++++++++++ |
 ```
 
 # Start developing your CRM in few minutes

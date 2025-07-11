@@ -15,6 +15,7 @@ use \ADIOS\Core\Db\Column\Lookup;
 use \ADIOS\Core\Db\Column\Password;
 use \ADIOS\Core\Db\Column\Text;
 use \ADIOS\Core\Db\Column\Varchar;
+use \ADIOS\Core\Db\Column\Virtual;
 
 use \HubletoApp\Community\Projects\Models\Project;
 use \HubletoApp\Community\Settings\Models\User;
@@ -54,8 +55,12 @@ class Task extends \HubletoMain\Core\Models\Model
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
 
-      'external_model' => (new Varchar($this, $this->translate('External Model')))->setProperty('defaultVisibility', true)->setReadonly(),
-      'external_id' => (new Integer($this, $this->translate('External ID')))->setReadonly(),
+      'external_model' => (new Varchar($this, $this->translate('External Model')))->setProperty('defaultVisibility', true),
+      'external_id' => (new Integer($this, $this->translate('External ID'))),
+
+      'virt_worked' => (new Virtual($this, $this->translate('Worked')))->setProperty('defaultVisibility', true)->setUnit("hours")
+        ->setProperty('sql', "select sum(ifnull(duration, 0)) from worksheet_activities where id_task = tasks.id")
+      ,
 
     ]);
   }
@@ -72,7 +77,7 @@ class Task extends \HubletoMain\Core\Models\Model
     $tasksApp = $this->main->apps->community('Tasks');
 
     if (isset($description->columns['external_model'])) {
-      $enumExternalModels = [];
+      $enumExternalModels = ['' => '-- No external relation --'];
       foreach ($tasksApp->getRegisteredExternalModels() as $modelClass => $app) {
         $enumExternalModels[$modelClass] = $app->manifest['nameTranslated'];
       }
@@ -97,7 +102,7 @@ class Task extends \HubletoMain\Core\Models\Model
 
     $tasksApp = $this->main->apps->community('Tasks');
 
-    $enumExternalModels = [];
+    $enumExternalModels = ['' => '-- No external relation --'];
     foreach ($tasksApp->getRegisteredExternalModels() as $modelClass => $app) {
       $enumExternalModels[$modelClass] = $app->manifest['nameTranslated'];
     }

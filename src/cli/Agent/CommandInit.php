@@ -137,15 +137,16 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (empty($packagesToInstall)) $packagesToInstall = 'core,sales';
     if (empty($adminPassword) && !isset($smtpHost)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
 
-    $this->cli->green("       ###         \n");
-    $this->cli->green("      ###        ##\n");
-    $this->cli->green("     #####      ###\n");
-    $this->cli->green("    ###  ####  ### \n");
-    $this->cli->green("   ###      #####  \n");
-    $this->cli->green("   ##        ###   \n");
-    $this->cli->green("            ###    \n");
+    $this->cli->green("  ###         ###         ###   \n");
+    $this->cli->green("  ###         ###         ###   \n");
+    $this->cli->green("  ### #####   ### #####   ###   \n");
+    $this->cli->green("  ##########  ##########  ###   \n");
+    $this->cli->green("  ###    ###  ###     ### ###   \n");
+    $this->cli->green("  ###    ###  ###     ### ###   \n");
+    $this->cli->green("  ###    ###  ##### ####  ####  \n");
+    $this->cli->green("  ###    ###  ### #####    ###  \n");
     $this->cli->cyan("\n");
-    $this->cli->green("Hubleto, release " . $this->main->release->getVersion() . "\n");
+    $this->cli->green("Hubleto, Business Application Hub & opensource CRM/ERP\n");
     $this->cli->cyan("\n");
 
     if (sizeof($errors) > 0) {
@@ -277,7 +278,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->cli->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
     $this->cli->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
     $this->cli->cyan("\n");
-    $this->cli->yellow("💡 TIP: Run command below to create your new app called 'Testapp'.\n");
-    $this->cli->colored("cyan", "black", "Run: php hubleto app create HubletoApp\\Custom\\Testapp");
+    $this->cli->yellow("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
+    $this->cli->colored("cyan", "black", "Run: php hubleto app create HubletoApp\\Custom\\MyFirstApp");
   }
 }

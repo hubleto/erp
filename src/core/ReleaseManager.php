@@ -19,7 +19,7 @@ class ReleaseManager
   {
     $releaseInfoFile = $this->main->config->getAsString('rootFolder') . '/release.json';
 
-    if (is_file($releaseInfoFile)) {
+    if (@is_file($releaseInfoFile)) {
       $this->release = @json_decode(file_get_contents($releaseInfoFile), true) ?? [];
     }
   }

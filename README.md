@@ -8,6 +8,7 @@
 Hubleto is a `PHP-based opensource CRM and ERP development framework` with lots of features and free apps to develop your custom CRM or ERP.
 
 ```
++------------------------------------------+
 |                                          | Hubleto
 |                                          | 
 |       ###         ###         ###        | Free community apps (contacts, calendar, leads, deals, orders, ...)
@@ -28,6 +29,7 @@ Hubleto is a `PHP-based opensource CRM and ERP development framework` with lots 
 |       #######+++++++++++++++++++++++++++ |
 |    ######+++++++++++++++++++++++++++++++ |
 |  ##+++++++++++++++++++++++++++++++++++++ |
++------------------------------------------+
 ```
 
 # Start developing your CRM in few minutes

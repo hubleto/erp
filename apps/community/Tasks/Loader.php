@@ -13,7 +13,7 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^tasks\/?$/' => Controllers\Tasks::class,
+      '/^tasks(\/(?<recordId>\d+))?\/?$/' => Controllers\Tasks::class,
     ]);
 
   }

@@ -34,6 +34,7 @@ class {{ model }} extends \HubletoMain\Core\Models\Model
   public string $table = '{{ sqlTable }}';
   public string $recordManagerClass = RecordManagers\{{ model }}::class;
   public ?string $lookupSqlValue = 'concat("{{ model }} #", {{ '{%' }}TABLE{{ '%}' }}.id)';
+  public ?string $lookupUrlDetail = '{{ modelPluralFormKebab }}/{%ID%}';
 
   public array $relations = [ 
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],

@@ -29,6 +29,7 @@ class Project extends \HubletoMain\Core\Models\Model
   public string $table = 'projects';
   public string $recordManagerClass = RecordManagers\Project::class;
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
+  public ?string $lookupUrlDetail = 'projects/{%ID%}';
 
   public array $relations = [ 
     'MAIN_DEVELOPER' => [ self::HAS_ONE, User::class, 'id_main_developer', 'id' ],
@@ -53,6 +54,10 @@ class Project extends \HubletoMain\Core\Models\Model
       'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->main->auth->getUserId())
       ,
+      'priority' => (new Integer($this, $this->translate('Priority'))),
+      'date_start' => (new Date($this, $this->translate('Start')))->setReadonly()->setDefaultValue(date("Y-m-d")),
+      'date_deadline' => (new Date($this, $this->translate('Deadline')))->setReadonly()->setDefaultValue(date("Y-m-d")),
+      'budget' => (new Integer($this, $this->translate('Budget')))->setProperty('defaultVisibility', true)->setUnit('€'),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setDefaultValue(1),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setDefaultValue(null),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(true),

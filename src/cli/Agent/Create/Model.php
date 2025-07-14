@@ -13,6 +13,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
 
     $modelSingularForm = $model;
     $modelPluralForm = $model . 's';
+    $modelPluralFormKebab = \ADIOS\Core\Helper::pascalToKebab($modelPluralForm);
 
     $this->main->apps->init();
 
@@ -36,6 +37,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
       'appNamespace' => $appNamespace,
       'model' => $model,
       'sqlTable' => strtolower($modelPluralForm),
+      'modelPluralFormKebab' => $modelPluralFormKebab,
     ];
 
     if (!is_dir($rootFolder . '/Models')) mkdir($rootFolder . '/Models');

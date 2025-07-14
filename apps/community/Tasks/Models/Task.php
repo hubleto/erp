@@ -28,6 +28,7 @@ class Task extends \HubletoMain\Core\Models\Model
   public string $table = 'tasks';
   public string $recordManagerClass = RecordManagers\Task::class;
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
+  public ?string $lookupUrlDetail = 'tasks/{%ID%}';
 
   public array $relations = [ 
     'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
@@ -47,9 +48,14 @@ class Task extends \HubletoMain\Core\Models\Model
       'id_tester' => (new Lookup($this, $this->translate('Tester'), User::class))->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->main->auth->getUserId())
       ,
-      'manhours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setProperty('defaultVisibility', true)->setUnit('manhours'),
+      'priority' => (new Integer($this, $this->translate('Priority'))),
+      'hours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setProperty('defaultVisibility', true)->setUnit('hours'),
+      'duration_days' => (new Integer($this, $this->translate('Duration')))->setProperty('defaultVisibility', true)->setUnit('days'),
+      'date_start' => (new Date($this, $this->translate('Start')))->setReadonly()->setDefaultValue(date("Y-m-d")),
+      'date_deadline' => (new Date($this, $this->translate('Deadline')))->setReadonly()->setDefaultValue(date("Y-m-d")),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setDefaultValue(1),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setDefaultValue(null),
+      'is_milestone' => (new Boolean($this, $this->translate('Is milestone')))->setDefaultValue(false),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
       // 'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setProperty('defaultVisibility', true),
       'notes' => (new Text($this, $this->translate('Notes'))),

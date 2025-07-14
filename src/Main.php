@@ -250,4 +250,32 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   }
 
+  public function renderExceptionHtml($exception, array $args = []): string
+  {
+    switch (get_class($exception)) {
+      case 'Illuminate\Database\QueryException':
+        $dbQuery = $exception->getSql();
+        $dbError = $exception->errorInfo[2];
+        $errorNo = $exception->errorInfo[1];
+
+        if (in_array($errorNo, [1216, 1451])) {
+          $model = $args[0];
+          $errorMessage =
+            "{$model->shortName} cannot be deleted because other data is linked to it."
+          ;
+        } else if (in_array($errorNo, [1062, 1217, 1452])) {
+          $errorMessage = "You are trying to save a record that is already existing.";
+        } else {
+          $errorMessage = $dbError;
+        }
+        $html = $this->translate($errorMessage);
+      break;
+      default:
+        $html = parent::renderExceptionHtml($exception);
+      break;
+    }
+
+    return $html;
+  }
+
 }

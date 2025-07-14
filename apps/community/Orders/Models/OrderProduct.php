@@ -24,7 +24,7 @@ class OrderProduct extends \HubletoMain\Core\Models\Model
     return array_merge(parent::describeColumns(), [
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class)),
       'unit_price' => (new Decimal($this, $this->translate('Unit price')))->setRequired(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired(),
       'discount' => (new Integer($this, $this->translate('Discount')))->setUnit('%'),

@@ -32,4 +32,29 @@ class Level extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
+  public function describeForm(): \ADIOS\Core\Description\Form
+  {
+    $description = parent::describeForm();
+
+    $description->ui['title'] = 'Lead level';
+    $description->ui['templateJson'] = json_encode([
+      'tabs' => [
+        'default' => [
+          'form.columns' => [ 'columns' => [
+            'form.column#left' => [ 'items' => [
+              'form.divider' => ['text' => 'Lead level'],
+              'form.input#name' => ['input' => 'name'],
+            ] ],
+            'form.column#right' => [ 'items' => [
+              'form.divider' => ['text' => 'Color'],
+              'form.input#color' => ['input' => 'color'],
+            ] ],
+          ] ],
+        ],
+      ],
+    ]);
+
+    return $description;
+  }
+
 }

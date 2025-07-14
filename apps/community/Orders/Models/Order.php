@@ -29,11 +29,11 @@ class Order extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'order_number' => (new Varchar($this, $this->translate('Order number')))->setCssClass('badge badge-info'),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('RESTRICT')->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold'),
       'id_state' => (new Lookup($this, $this->translate('State'), State::class)),
       'price' => (new Decimal($this, $this->translate('Price')))->setReadonly()->setRequired()->setDefaultValue(0),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setReadonly(),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
       'date_order' => (new Date($this, $this->translate('Order date')))->setRequired()->setDefaultValue(date("Y-m-d")),
       'required_delivery_date' => (new Date($this, $this->translate('Required delivery date'))),
       'shipping_info' => (new Varchar($this, $this->translate('Shipping information'))),

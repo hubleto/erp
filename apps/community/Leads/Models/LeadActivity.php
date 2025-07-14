@@ -19,7 +19,7 @@ class LeadActivity extends \HubletoApp\Community\Calendar\Models\Activity
   {
     return array_merge(parent::describeColumns(), [
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
     ]);
   }
 }

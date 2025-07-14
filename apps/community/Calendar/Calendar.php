@@ -78,6 +78,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
       $events[$key]['type'] = (int) ($activity['activity_type'] ?? 0);
       $events[$key]['source'] = $source; //'customers';
       $events[$key]['details'] = $detailsCallback($activity);
+      $events[$key]['id_owner'] = $activity['id_owner'] ?? 0;
       $events[$key]['owner'] = $activity['_LOOKUP[id_owner]'] ?? '';
     }
 

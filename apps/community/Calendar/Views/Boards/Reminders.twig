@@ -1,4 +1,4 @@
-{% macro reminders(reminders) %}
+{% macro reminders(reminders, viewParams) %}
   <div class="list">
     {% for reminder in reminders %}
       <a
@@ -8,21 +8,9 @@
       >
         <span class="text">
           <b>{{ reminder.title }}</b>
-          {# {% if reminder.start == viewParams.today %}
-            today
-          {% elseif reminder.start|date('U') < viewParams.today|date('U') %}
-            <span class="text-red-500">
-              {{ viewParams.main.locale.formatDateShort(reminder.start ?? '') }}
-            </span>
-          {% else %}
-            #2{{ viewParams.main.locale.formatDateShort(reminder.start ?? '') }}
-          {% endif %}
-          <span>
-            {% if not reminder.allDay %} {{ viewParams.main.locale.formatTime(reminder.start ?? '', false) }} {% endif %}
-          </span> #}
         </span>
         <span class="text">
-          <div class="badge badge-small badge-blue">@{{ reminder.owner }}</div>
+          <div class="badge badge-small {% if reminder['id_owner'] == viewParams.main.auth.getUserId() %} badge-blue {% endif %}">@{{ reminder.owner }}</div>
           <div class="badge badge-small badge-lime">{{ reminder.details }}</div>
         </span>
       </a>
@@ -33,7 +21,7 @@
 
 {% if viewParams.remindersToday|length > 0 %}
   <b>Today</b><br/>
-  {{ _self.reminders(viewParams.remindersToday) }}
+  {{ _self.reminders(viewParams.remindersToday, viewParams) }}
 {% else %}
   <div class="alert alert-info">
     Let's have a break. You have nothing to do for today. 🎉<br/>
@@ -64,54 +52,13 @@
 {% if viewParams.remindersTomorrow|length > 0 %}
   <div id="reminders-tomorrow" style="display:none" class="mt-2">
     <b>Tomorrow</b><br/>
-    {{ _self.reminders(viewParams.remindersTomorrow) }}
-    {# <table class="table-default dense w-full">
-      {% for reminder in viewParams.remindersTomorrow %}
-        {{ _self.reminder(reminder) }}
-      {% endfor %} #}
-      {# {% for reminder in viewParams.remindersTomorrow %}
-        <tr>
-          <td style="border-left:1em solid {{ reminder.color }}">{{ reminder.category }}</td>
-          <td>@{{ reminder.owner }}</td>
-          <td>{{ viewParams.main.locale.formatDateShort(reminder.start ?? '', false) }}</td>
-          <td>
-            <b>{{ reminder.title }}</b>
-            {{ reminder.details }}
-          </td>
-          <td class="text-right">
-            <a href="calendar?eventSource={{ reminder.source }}&eventId={{ reminder.id }}" class="btn btn-transparent btn-small">
-              <span class="icon"><i class="fas fa-arrow-right"></i></span>
-              <span class="text">{{ translate('Open reminder details') }}</span>
-            </a>
-          </td>
-        </tr>
-      {% endfor %} #}
-    {# </table>
-  </div> #}
+    {{ _self.reminders(viewParams.remindersTomorrow, viewParams) }}
+  </div>
 {% endif %}
 
 {% if viewParams.remindersLater|length > 0 %}
   <div id="reminders-later" style="display:none" class="mt-2">
     <b>Later</b><br/>
-    {{ _self.reminders(viewParams.remindersLater) }}
-    {# <table class="table-default dense w-full">
-      {% for reminder in viewParams.remindersLater %}
-        <tr>
-          <td style="border-left:1em solid {{ reminder.color }}">{{ reminder.category }}</td>
-          <td>@{{ reminder.owner }}</td>
-          <td>{{ viewParams.main.locale.formatDateShort(reminder.start ?? '', false) }}</td>
-          <td>
-            <b>{{ reminder.title }}</b>
-            {{ reminder.details }}
-          </td>
-          <td class="text-right">
-            <a href="calendar?eventSource={{ reminder.source }}&eventId={{ reminder.id }}" class="btn btn-transparent btn-small">
-              <span class="icon"><i class="fas fa-arrow-right"></i></span>
-              <span class="text">{{ translate('Open reminder details') }}</span>
-            </a>
-          </td>
-        </tr>
-      {% endfor %}
-    </table> #}
+    {{ _self.reminders(viewParams.remindersLater, viewParams) }}
   </div>
 {% endif %}

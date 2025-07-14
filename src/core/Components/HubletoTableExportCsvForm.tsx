@@ -43,7 +43,6 @@ export default class HubletoTableExportCsvForm<P, S> extends Form<HubletoTableEx
   }
 
   renderContent(): JSX.Element {
-    console.log(this.props.parentTable.state?.data);
     return <div className="p-2">
       <div className="alert alert-info">
         CSV file with following columns and approximately {this.props.parentTable.state?.data?.total} items will be generated

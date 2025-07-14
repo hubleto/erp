@@ -7,7 +7,7 @@ use HubletoApp\Community\Calendar\Models\Activity;
 class Calendar extends \HubletoMain\Core\Calendar {
 
   public array $calendarConfig = [
-    "title" => "Default calendar",
+    "title" => "Default",
     "addNewActivityButtonText" => "Add a simple event",
     "formComponent" => "CalendarActivityForm",
   ];

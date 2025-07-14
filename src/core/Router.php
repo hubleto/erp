@@ -21,6 +21,7 @@ class Router extends \ADIOS\Core\Router {
       '/^api\/get-table-columns-customize\/?$/' =>  Api\GetTableColumnsCustomize::class,
       '/^api\/save-table-columns-customize\/?$/' =>  Api\SaveTableColumnsCustomize::class,
       '/^api\/table-export-csv\/?$/' =>  Api\TableExportCsv::class,
+      '/^api\/table-import-csv\/?$/' =>  Api\TableImportCsv::class,
       '/^reset-password$/' => ControllerResetPassword::class,
       '/^forgot-password$/' => ControllerForgotPassword::class,
     ]);

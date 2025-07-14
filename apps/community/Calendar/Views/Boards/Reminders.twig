@@ -1,34 +1,39 @@
-{% if viewParams.remindersToday|length > 0 %}
-  <table class="table-default dense w-full">
-  {% for reminder in viewParams.remindersToday %}
-      <tr>
-        <td style="border-left:1em solid {{ reminder.color }}">{{ reminder.category }}</td>
-        <td>@{{ reminder.owner }}</td>
-        <td>
-          {% if reminder.start == viewParams.today %}
+{% macro reminders(reminders) %}
+  <div class="list">
+    {% for reminder in reminders %}
+      <a
+        href="calendar?eventSource={{ reminder.source }}&eventId={{ reminder.id }}"
+        class="btn btn-list-item btn-transparent flex-col items-start md:flex-row"
+        target="_blank"
+      >
+        <span class="text">
+          <b>{{ reminder.title }}</b>
+          {# {% if reminder.start == viewParams.today %}
             today
           {% elseif reminder.start|date('U') < viewParams.today|date('U') %}
             <span class="text-red-500">
-              {{ viewParams.main.locale.formatDateShort(reminder.start ?? '', false) }}
+              {{ viewParams.main.locale.formatDateShort(reminder.start ?? '') }}
             </span>
           {% else %}
-            {{ viewParams.main.locale.formatDateShort(reminder.start ?? '', false) }}
+            #2{{ viewParams.main.locale.formatDateShort(reminder.start ?? '') }}
           {% endif %}
-        </td>
-        <td>{% if not reminder.allDay %} {{ viewParams.main.locale.formatTime(reminder.start ?? '', false) }} {% endif %}</td>
-        <td>
-          <b>{{ reminder.title }}</b>
-          {{ reminder.details }}
-        </td>
-        <td class="text-right">
-          <a href="calendar?eventSource={{ reminder.source }}&eventId={{ reminder.id }}" class="btn btn-transparent btn-small">
-            <span class="icon"><i class="fas fa-arrow-right"></i></span>
-            <span class="text">{{ translate('Open reminder details') }}</span>
-          </a>
-        </td>
-      </tr>
+          <span>
+            {% if not reminder.allDay %} {{ viewParams.main.locale.formatTime(reminder.start ?? '', false) }} {% endif %}
+          </span> #}
+        </span>
+        <span class="text">
+          <div class="badge badge-small badge-blue">@{{ reminder.owner }}</div>
+          <div class="badge badge-small badge-lime">{{ reminder.details }}</div>
+        </span>
+      </a>
     {% endfor %}
-  </table>
+  </div>
+{% endmacro %}
+
+
+{% if viewParams.remindersToday|length > 0 %}
+  <b>Today</b><br/>
+  {{ _self.reminders(viewParams.remindersToday) }}
 {% else %}
   <div class="alert alert-info">
     Let's have a break. You have nothing to do for today. 🎉<br/>
@@ -57,10 +62,14 @@
 </div>
 
 {% if viewParams.remindersTomorrow|length > 0 %}
-  <div id="reminders-tomorrow" style="display:none" class="flex gap-2 mt-2 items-center flex-wrap">
-    <b>Reminders tomorrow</b>
-    <table class="table-default dense w-full">
+  <div id="reminders-tomorrow" style="display:none" class="mt-2">
+    <b>Tomorrow</b><br/>
+    {{ _self.reminders(viewParams.remindersTomorrow) }}
+    {# <table class="table-default dense w-full">
       {% for reminder in viewParams.remindersTomorrow %}
+        {{ _self.reminder(reminder) }}
+      {% endfor %} #}
+      {# {% for reminder in viewParams.remindersTomorrow %}
         <tr>
           <td style="border-left:1em solid {{ reminder.color }}">{{ reminder.category }}</td>
           <td>@{{ reminder.owner }}</td>
@@ -76,15 +85,16 @@
             </a>
           </td>
         </tr>
-      {% endfor %}
-    </table>
-  </div>
+      {% endfor %} #}
+    {# </table>
+  </div> #}
 {% endif %}
 
 {% if viewParams.remindersLater|length > 0 %}
-  <div id="reminders-later" style="display:none" class="flex gap-2 mt-2 items-center flex-wrap">
-    <b>Reminders later</b>
-    <table class="table-default dense w-full">
+  <div id="reminders-later" style="display:none" class="mt-2">
+    <b>Later</b><br/>
+    {{ _self.reminders(viewParams.remindersLater) }}
+    {# <table class="table-default dense w-full">
       {% for reminder in viewParams.remindersLater %}
         <tr>
           <td style="border-left:1em solid {{ reminder.color }}">{{ reminder.category }}</td>
@@ -102,6 +112,6 @@
           </td>
         </tr>
       {% endfor %}
-    </table>
+    </table> #}
   </div>
 {% endif %}

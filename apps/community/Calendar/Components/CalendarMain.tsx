@@ -4,7 +4,7 @@ import Calendar from "./Calendar";
 import ModalForm from "adios/ModalForm";
 import FormActivitySelector from "./FormActivitySelector";
 import request from "adios/Request";
-
+import moment from 'moment';
 
 interface CalendarMainProps {
   eventSource?: string,
@@ -109,7 +109,22 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
     };
 
     return <div className="flex gap-2 flex-col md:flex-row">
-      <div className="flex flex-col gap-2 text-nowrap mt-2">
+      <div className="flex flex-col gap-2 text-nowrap">
+        <button
+          className="btn btn-primary-outline mb-2"
+          onClick={() => {
+            this.setState({
+              activityFormComponent: null,
+              newActivity: true,
+              dateClicked: moment().format('YYYY-MM-DD'),
+              timeClicked: moment().format('HH:mm:ss'),
+            });
+          }}
+        >
+          <span className="icon"><i className="fas fa-plus"></i></span>
+          <span className="text">New activity</span>
+        </button>
+
         <b>Calendars</b>
         <div className="list">
           {Object.keys(this.props.configs).map((source: any) => {

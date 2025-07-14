@@ -74,6 +74,7 @@ class Model extends \ADIOS\Core\Model {
 
     $description->ui['moreActions'] = [
       [ 'title' => 'Export to CSV', 'type' => 'stateChange', 'state' => 'showExportCsvScreen', 'value' => true ],
+      [ 'title' => 'Import from CSV', 'type' => 'stateChange', 'state' => 'showImportCsvScreen', 'value' => true ],
     ];
 
     if (!empty($tag)) {

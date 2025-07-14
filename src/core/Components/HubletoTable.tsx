@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Table, { TableProps, TableState } from 'adios/Table';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from './HubletoForm';
 import HubletoTableExportCsvForm from './HubletoTableExportCsvForm';
+import HubletoTableImportCsvForm from './HubletoTableImportCsvForm';
 import { getUrlParam } from 'adios/Helper';
 import ModalForm from "adios/ModalForm";
 import HubletoTableColumnsCustomize from './HubletoTableColumnsCustomize';
@@ -12,6 +13,7 @@ export interface HubletoTableProps extends TableProps {
 export interface HubletoTableState extends TableState {
   sidebarFilterHidden: boolean,
   showExportCsvScreen: boolean,
+  showImportCsvScreen: boolean,
   showColumnConfigScreen: boolean,
 }
 
@@ -29,6 +31,7 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
       ...super.getStateFromProps(props),
       sidebarFilterHidden: false,
       showExportCsvScreen: false,
+      showImportCsvScreen: false,
       showColumnConfigScreen: false,
     };
   }
@@ -126,6 +129,21 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
             showInModalSimple={true}
             onClose={() => { this.setState({showExportCsvScreen: false}); }}
           ></HubletoTableExportCsvForm>
+        </ModalForm>
+      : null}
+      {this.state.showImportCsvScreen ?
+        <ModalForm
+          uid={this.props.uid + '_import_csv_modal'}
+          isOpen={true}
+          type='centered large'
+        >
+          <HubletoTableImportCsvForm
+            model={this.props.model}
+            parentTable={this}
+            showInModal={true}
+            showInModalSimple={true}
+            onClose={() => { this.setState({showImportCsvScreen: false}); }}
+          ></HubletoTableImportCsvForm>
         </ModalForm>
       : null}
       {this.state.showColumnConfigScreen ?

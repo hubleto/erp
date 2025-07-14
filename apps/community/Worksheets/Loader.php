@@ -15,10 +15,13 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^worksheets\/?$/' => Controllers\Home::class,
-      '/^worksheets\/activities\/?$/' => Controllers\Activities::class,
+      '/^worksheets\/?$/' => Controllers\Activities::class,
       '/^worksheets\/activity-types\/?$/' => Controllers\ActivityTypes::class,
     ]);
+
+    $appMenu = $this->main->apps->community('Desktop')->appMenu;
+    $appMenu->addItem($this, 'worksheets', $this->translate('Worksheets'), 'fas fa-user-clock');
+    $appMenu->addItem($this, 'worksheets/activity-types', $this->translate('Activity types'), 'fas fa-table');
   }
 
   // installTables

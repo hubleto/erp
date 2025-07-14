@@ -42,7 +42,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
         </div>
         <div className='flex gap-2 flex-col px-4 mt-4'>
           {Object.keys(this.props.calendarConfigs).map((item, index) => {
-            if (calendarConfigs[item]["addNewActivityButtonText"]) {
+            if (calendarConfigs[item]["title"]) {
               return <>
                 <button
                   key={index}
@@ -75,7 +75,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
                   }}
                 >
                   {item.icon ? <span className='icon'><i className={calendarConfigs[item]["icon"]}></i></span> : null}
-                  <span className='text text-center self-center !h-auto text-lg'>{calendarConfigs[item]["addNewActivityButtonText"]}</span>
+                  <span className='text text-center self-center !h-auto text-lg'>{calendarConfigs[item]["title"]}</span>
                 </button>
               </>
             } else {

@@ -34,7 +34,6 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
 
   renderContent(): JSX.Element {
     const R = this.state.record;
-    const showAdditional: boolean = R.id > 0 ? true : false;
 
     const customInputs = this.renderCustomInputs();
 
@@ -42,7 +41,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
     let minutesDuration = moment(R.date_end + ' ' + R.time_end).diff(moment(R.date_end + ' ' + R.time_start), 'minutes');
 
     if (isNaN(daysDuration)) daysDuration = 0;
-    if (isNaN(minutesDuration)) minutesDuration = 0;
+    if (isNaN(minutesDuration)) minutesDuration = 15;
 
     return <>
       {customInputs ? <div className="p-2 mb-2 bg-blue-50">{customInputs}</div> : null}

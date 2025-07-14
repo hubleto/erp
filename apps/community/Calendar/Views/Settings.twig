@@ -5,18 +5,6 @@
   {% endif %}
 </div>
 
-<script>
-  function saveSettings() {
-    $("#settings-form").submit();
-  }
-</script>
-
-<div class="card mt-10 w-1/2 m-auto">
-  <div>
-    some settings
-  </div>
-
-  <div>
-    list of shared calendars - model, objects table, with permissions and links for sharing
-  </div>
-</div>
+<app-calendar-share-table
+  configs='{{viewParams.calendarConfigs|json_encode|raw}}'
+></app-calendar-share-table>

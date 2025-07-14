@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\Calendar\Controllers;
 
+use _PHPStan_ac6dae9b0\Nette\Utils\DateTime;
+
 class IcsCalendar extends \HubletoMain\Core\Controllers\Controller
 {
   public bool $hideDefaultDesktop = TRUE;
@@ -23,7 +25,12 @@ class IcsCalendar extends \HubletoMain\Core\Controllers\Controller
       if ($calendarClass == "HubletoApp\Community\CalendarSync\Calendar") continue;
       foreach ($calendar->loadEvents((new \DateTime("now"))->format("Y-m-d H:i:s"), (new \DateTime("+1 year"))->format("Y-m-d H:i:s")) as $event) {
         $dtStart = (new \DateTime($event['start']))->setTimezone(new \DateTimeZone('UTC'))->format('Ymd\THis\Z');
-        $dtEnd = (new \DateTime($event['end']))->setTimezone(new \DateTimeZone('UTC'))->format('Ymd\THis\Z');
+        $dtEnd = (new \DateTime($event['end'] ?? $dtStart))->setTimezone(new \DateTimeZone('UTC'))->format('Ymd\THis\Z');
+
+        if ($event['allDay'] ?? false) {
+          $dtEnd = (new \DateTime(date('Y-m-d H:i:s', strtotime('tomorrow') - 1)))->setTimezone(new \DateTimeZone('UTC'))->format('Ymd\THis\Z');
+        }
+
         $uid = uniqid() . '@example.com';
 
         $ics .= "BEGIN:VEVENT\r\n";

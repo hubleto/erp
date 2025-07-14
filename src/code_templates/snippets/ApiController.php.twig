@@ -2,20 +2,17 @@
 
 namespace {{ appNamespace }}\Controllers\Api;
 
-class {{ endpointPascalCase }} extends \HubletoMain\Core\Controllers\Controller
+class {{ endpointPascalCase }} extends \HubletoMain\Core\Controllers\ApiController
 {
 
   // Uncomment this if you want to make your API public
   // public bool $requiresUserAuthentication = false;
 
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
-
   public function renderJson(): array
   {
 
     // Uncomment this if you want your api be hookable
-    // $this->main->runHook('api:render-json', [$this]);
+    // $this->main->hooks->run('api:render-json', [$this]);
 
     // Uncomment example below to provide data for a specific model
     // $mCountry = new \HubletoApp\Community\Settings\Models\Country($this->main);

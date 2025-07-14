@@ -15,7 +15,7 @@ class ReleaseManager
     $this->main = $main;
   }
 
-  public function load(): void
+  public function init(): void
   {
     $releaseInfoFile = $this->main->config->getAsString('rootFolder') . '/release.json';
 

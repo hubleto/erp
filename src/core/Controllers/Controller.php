@@ -69,7 +69,7 @@ class Controller extends \ADIOS\Core\Controller
    */
   public function init(): void
   {
-    $this->main->runHook('controller:init-start', [$this]);
+    $this->main->hooks->run('controller:init-start', [$this]);
 
     // Put your controller's initialization code here. See example below.
     // Throw an exception on error.
@@ -88,7 +88,7 @@ class Controller extends \ADIOS\Core\Controller
   {
     if (!$this->activeUserHasPermission()) return;
 
-    $this->main->runHook('controller:prepare-view-start', [$this]);
+    $this->main->hooks->run('controller:prepare-view-start', [$this]);
 
     $logFolder = $this->app->config->getAsString('logFolder');
 
@@ -124,7 +124,7 @@ class Controller extends \ADIOS\Core\Controller
 
     $this->viewParams['contextHelpUrl'] = $contextHelpUrl;
 
-    $this->main->runHook('controller:prepare-view-end', [$this]);
+    $this->main->hooks->run('controller:prepare-view-end', [$this]);
 
   }
 
@@ -136,7 +136,7 @@ class Controller extends \ADIOS\Core\Controller
       ]);
     } else {
       parent::setView($view, $viewParams);
-      $this->main->runHook('controller:set-view', [$this, $view, $viewParams]);
+      $this->main->hooks->run('controller:set-view', [$this, $view, $viewParams]);
     }
   }
 

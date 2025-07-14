@@ -121,7 +121,7 @@ class Model extends \ADIOS\Core\Model {
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
-    $this->main->runHook('model:record-updated', [$this, $originalRecord, $savedRecord]);
+    $this->main->hooks->run('model:record-updated', [$this, $originalRecord, $savedRecord]);
     return $savedRecord;
   }
 

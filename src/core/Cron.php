@@ -2,7 +2,10 @@
 
 namespace HubletoMain\Core;
 
-class Hook {
+class Cron {
+
+  // CRON-formatted string specifying the scheduling pattern
+  public string $schedulingPattern = '* * * * *';
 
   public \HubletoMain $main;
 
@@ -11,7 +14,7 @@ class Hook {
     $this->main = $main;
   }
 
-  public function run(string $event, array $args): void
+  public function run(): void
   {
     // to be overriden
   }

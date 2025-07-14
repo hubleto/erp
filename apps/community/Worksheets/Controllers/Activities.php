@@ -16,7 +16,7 @@ class Activities extends \HubletoMain\Core\Controllers\Controller
   {
 
     // Uncomment this if you want your controller be hookable
-    $this->main->runHook('controller:prepare-view-start', [$this]);
+    $this->main->hooks->run('controller:prepare-view-start', [$this]);
 
     parent::prepareView();
 
@@ -27,7 +27,7 @@ class Activities extends \HubletoMain\Core\Controllers\Controller
     $this->setView('@HubletoApp:Community:Worksheets/Activities.twig');
 
     // Uncomment this if you want your controller be hookable
-    $this->main->runHook('controller:prepare-view-end', [$this]);
+    $this->main->hooks->run('controller:prepare-view-end', [$this]);
   }
 
 }

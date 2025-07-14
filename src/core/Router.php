@@ -51,7 +51,6 @@ class Router extends \ADIOS\Core\Router {
   public function httpGet(array $routes)
   {
     parent::httpGet($routes);
-    $this->app->runHook('router:added-route', [$this]);
   }
 
 }

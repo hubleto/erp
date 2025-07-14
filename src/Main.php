@@ -14,6 +14,11 @@ spl_autoload_register(function(string $class) {
     @include(__DIR__ . '/../hooks/' . str_replace('HubletoMain/Hook/', '', $class) . '.php');
   }
 
+  // main/cron
+  if (str_starts_with($class, 'HubletoMain/Cron/')) {
+    @include(__DIR__ . '/../crons/' . str_replace('HubletoMain/Cron/', '', $class) . '.php');
+  }
+
   // main/report
   if (str_starts_with($class, 'HubletoMain/Report/')) {
     @include(__DIR__ . '/../reports/' . str_replace('HubletoMain/Report/', '', $class) . '.php');
@@ -23,6 +28,12 @@ spl_autoload_register(function(string $class) {
   if (str_starts_with($class, 'HubletoCustom/Hook/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
     @include($hubletoMain->config->getAsString('rootFolder') . '/hooks/' . str_replace('HubletoCustom/Hook/', '', $class) . '.php');
+  }
+
+  // custom/cron
+  if (str_starts_with($class, 'HubletoCustom/C5on/')) {
+    $hubletoMain = $GLOBALS['hubletoMain'];
+    @include($hubletoMain->config->getAsString('rootFolder') . '/crons/' . str_replace('HubletoCustom/Cron/', '', $class) . '.php');
   }
 
   // custom/report
@@ -88,8 +99,8 @@ class HubletoMain extends \ADIOS\Core\Loader
   public \HubletoMain\Core\AppManager $apps;
   public \HubletoMain\Core\Emails\EmailWrapper $emails;
   public \HubletoMain\Cli\Agent\Loader $cli;
-
-  public array $hooks = [];
+  public \HubletoMain\Core\HookManager $hooks;
+  public \HubletoMain\Core\CronManager $crons;
 
   public bool $isPremium = false;
 
@@ -99,25 +110,22 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     parent::__construct($config, $mode);
 
+    // CLI
     $this->cli = new \HubletoMain\Cli\Agent\Loader($this);
 
-    $hooks = @\ADIOS\Core\Helper::scanDirRecursively($this->config->getAsString('srcFolder') . '/hooks');
-    foreach ($hooks as $hook) {
-      $hookClass = '\\HubletoMain\\Hook\\' . str_replace('/', '\\', $hook);
-      $hookClass = str_replace('.php', '', $hookClass);
-      $this->hooks[$hookClass] = new $hookClass($this, $this->cli);
-    }
+    // Hooks
+    $this->hooks = new \HubletoMain\Core\HookManager($this);
+    $this->hooks->init();
 
-    $hooks = @\ADIOS\Core\Helper::scanDirRecursively($this->config->getAsString('rootFolder') . '/hooks');
-    foreach ($hooks as $hook) {
-      $hookClass = '\\HubletoCustom\\Hook\\' . str_replace('/', '\\', $hook);
-      $hookClass = str_replace('.php', '', $hookClass);
-      $this->hooks[$hookClass] = new $hookClass($this, $this->cli);
-    }
+    // Crons
+    $this->crons = new \HubletoMain\Core\CronManager($this);
+    // $this->crons->init();
 
+    // Release manager
     $this->release = new \HubletoMain\Core\ReleaseManager($this);
-    $this->release->load();
+    $this->release->init();
 
+    // Emails
     $this->emails = new \HubletoMain\Core\Emails\EmailWrapper(
       $this,
       new \HubletoMain\Core\Emails\EmailProvider(
@@ -129,14 +137,18 @@ class HubletoMain extends \ADIOS\Core\Loader
       )
     );
 
+    // App manager
     $this->apps = new \HubletoMain\Core\AppManager($this);
 
+
+    // Initialization
+
     $this->permissions->init();
-    $this->runHook('core:permissions-initialized', [$this]);
+    $this->hooks->run('core:permissions-initialized', [$this]);
 
     $this->apps->init();
 
-    $this->runHook('core:apps-initialized', [$this]);
+    $this->hooks->run('core:apps-initialized', [$this]);
 
   }
 
@@ -236,12 +248,6 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-  }
-
-  public function runHook(string $trigger, array $args) {
-    foreach ($this->hooks as $hook) {
-      $hook->run($trigger, $args);
-    }
   }
 
 }

@@ -14,7 +14,7 @@ class Example extends \HubletoMain\Core\Hook
 {
 
   /* run()
-    This method is invoked when a "runHook()" is called
+    This method is invoked when a "hooks->run()" is called
     anywhere in the code.
   */
 
@@ -26,7 +26,7 @@ class Example extends \HubletoMain\Core\Hook
       //   - $this->main == reference to Hubleto's main object
       //   - structure of $args may vary depending on the event
       //   - you can find available events on https://developer.hubleto.com
-      //     or simply search in the source code where method "runHook()" is
+      //     or simply search in the source code where method "hooks->run()" is
       //     called
       //   - learn by examples - see sample default hooks in 'Default' folder
       //   - you can create your own hooks in your app

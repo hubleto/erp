@@ -24,7 +24,7 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
 
   getActivitySourceReadable(): string
   {
-    return 'Deal';
+    return this.translate('Deal');
   }
 
   renderCustomInputs(): JSX.Element {
@@ -32,7 +32,7 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
 
     return <>
       {this.inputWrapper('id_deal')}
-      <FormInput title={"Contact"}>
+      <FormInput title={this.translate("Contact")}>
         <Lookup {...this.getInputProps('id_contact')}
           model='HubletoApp/Community/Contacts/Models/Contact'
           endpoint={`contacts/get-customer-contacts`}

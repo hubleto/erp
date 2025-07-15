@@ -29,7 +29,7 @@ export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivit
 
   getActivitySourceReadable(): string
   {
-    return 'Lead';
+    return this.translate('Lead');
   }
 
   renderCustomInputs(): JSX.Element {
@@ -37,7 +37,7 @@ export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivit
 
     return <>
       {this.inputWrapper('id_lead')}
-      <FormInput title={"Contact"}>
+      <FormInput title={this.translate("Contact")}>
         <Lookup {...this.getInputProps('id_contact')}
           model='HubletoApp/Community/Contacts/Models/Contact'
           endpoint={`contacts/get-customer-contacts`}

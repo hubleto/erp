@@ -31,10 +31,10 @@ class DealValueByResult extends \HubletoMain\Core\Controllers\Controller {
     ];
 
     $results = [
-      0 => ['name' => 'Unknown', 'color' => 'black'],
-      1 => ['name' => 'Pending', 'color' => 'gray'],
-      2 => ['name' => 'Won', 'color' => 'green'],
-      3 => ['name' => 'Lost', 'color' => 'red'],
+      0 => ['name' => $this->translate('Unknown'), 'color' => 'black'],
+      1 => ['name' => $this->translate('Pending'), 'color' => 'gray'],
+      2 => ['name' => $this->translate('Won'), 'color' => 'green'],
+      3 => ['name' => $this->translate('Lost'), 'color' => 'red'],
     ];
 
     foreach ($deals as $deal) {

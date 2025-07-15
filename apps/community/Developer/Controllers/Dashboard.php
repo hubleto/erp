@@ -8,7 +8,7 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'developer', 'content' => 'Developer' ],
+      [ 'url' => 'developer', 'content' => $this->translate('Developer') ],
     ]);
   }
 

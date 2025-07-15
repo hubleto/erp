@@ -6,7 +6,7 @@
       <div class="card-header">Test of import, see log below</div>
       <div class="card-body">
         <div class="alert alert-info">
-          This was only check of the import. Check the log and if you are satisfied, upload the CSV file again run the import now.<br/>
+          {{ translate("This was only check of the import. Check the log and if you are satisfied, upload the CSV file again run the import now.") }}<br/>
           <br/>
           <form action="" method="post" enctype="multipart/form-data">
             <input type="file" name="contactsFile" accept=".csv,.txt">
@@ -21,7 +21,7 @@
     </div>
   {% else %}
     <div class="card">
-      <div class="card-header">Import finished, see log below</div>
+      <div class="card-header">{{ translate("Import finished, see log below") }}</div>
       <div class="card-body">
         <pre>{{ viewParams.log|join("\n") }}</pre>
       </div>
@@ -30,32 +30,32 @@
 {% else %}
 
   <div class="card">
-    <div class="card-header">Step 1: Prepare list of contacts</div>
+    <div class="card-header">{{ translate("Step 1: Prepare list of contacts") }}</div>
     <div class="card-body">
-      Contacts can be imported from a <i>.csv</i> or <i>.txt</i> file. The file for import must comply with following rules:<br/>
+      {{ translate("Contacts can be imported from a ") }}<i>.csv</i>{{ translate(" or ") }}<i>.txt</i>{{ translate(" file. The file for import must comply with following rules") }}:<br/>
       <ul class="list-disc">
-        <li class="ml-8">The file can contain unlimited number of lines.</li>
-        <li class="ml-8">Values in file must be separated by semicolon (;).</li>
-        <li class="ml-8">First line of the file must be the header containig names of the columns.</li>
-        <li class="ml-8">Following lines contain <b>persons</b>.</li>
-        <li class="ml-8">First 3 columns must be <i>First name</i>, <i>Middle name</i> and <i>Last name</i> or the <b>person</b>.</li>
-        <li class="ml-8">Following columns contain contact information. Each column represents one contact information.</li>
-        <li class="ml-8">Each person can contain any number of contact information.</li>
-        <li class="ml-8">The import automatically detects <i>emails</i>, <i>phone numbers</i> and <i>links</i>.</li>
+        <li class="ml-8">{{ translate("The file can contain unlimited number of lines.") }}</li>
+        <li class="ml-8">{{ translate("Values in file must be separated by semicolon") }} (;).</li>
+        <li class="ml-8">{{ translate("First line of the file must be the header containig names of the columns.")}}</li>
+        <li class="ml-8">{{ translate("Following lines contain ") }}<b>{{ translate("persons") }}</b>.</li>
+        <li class="ml-8">{{ translate("First 3 columns must be ") }}<i>{{ translate("First name") }}</i>, <i>{{ translate("Middle name") }}</i>{{ translate(" and ") }}<i>{{ translate("Last name") }}</i>{{ translate(" or the ") }}<b>{{ translate("person") }}</b>.</li>
+        <li class="ml-8">{{ translate("Following columns contain contact information. Each column represents one contact information.") }}</li>
+        <li class="ml-8">{{ translate("Each person can contain any number of contact information.") }}</li>
+        <li class="ml-8">{{ translate("The import automatically detects ") }}<i>{{ translate("emails") }}</i>, <i>{{ translate("phone numbers") }}</i>{{ translate(" and ") }}<i>{{ translate("links") }}</i>.</li>
       </ul>
       <p>
-        Example CSV file:
+        {{ translate("Example CSV file") }}:
         <pre class="text-blue-800 border p-1 border-blue-800">First name;Middle name;Last name;Email 1;Email 2;Phone 1;Phone 2;Link 1;Link 2
 John;;Smith;john.smith@example.com;;+1 425 985 4523 74;+1 7748 56 22 133;;
 Barbara;Juplen;Greaves;bbaar@example.com;greavebar@example.com;;;;
 </pre>
         <br/>
-        You may also
+        {{ translate("You may also") }}
         <a href="export" class="btn btn-small btn-primary-outline">
           <span class="icon"><i class="fas fa-file-export"></i></span>
-          <span class="text">Export your addressbook</span>
+          <span class="text">{{ translate("Export your addressbook") }}</span>
         </a>,
-        modify it and re-import again.
+        {{ translate("modify it and re-import again") }}.
       </p>
     </div>
   </div>
@@ -63,14 +63,14 @@ Barbara;Juplen;Greaves;bbaar@example.com;greavebar@example.com;;;;
   <form action="" method="post" enctype="multipart/form-data">
     <input type="hidden" name="checkImport" value="1">
     <div class="card mt-2">
-      <div class="card-header">Step 2: Upload the file with contacts</div>
+      <div class="card-header">{{ translate("Step 2: Upload the file with contacts") }}</div>
       <div class="card-body">
         <input type="file" name="contactsFile" accept=".csv,.txt">
       </div>
     </div>
 
     <div class="card mt-2">
-      <div class="card-header">Step 3: Check the import</div>
+      <div class="card-header">{{ translate("Step 3: Check the import") }}</div>
       <div class="card-body">
         <button type="submit" class="btn btn-primary">
           <span class="icon"><i class="fas fa-file-import"></i></span>
@@ -81,9 +81,9 @@ Barbara;Juplen;Greaves;bbaar@example.com;greavebar@example.com;;;;
   </form>
 
   <div class="card mt-2">
-    <div class="card-header">Step 4: Run the import</div>
+    <div class="card-header">{{ translate("Step 4: Run the import") }}</div>
     <div class="card-body">
-      You will be able to run the import after its check.
+      {{ translate("You will be able to run the import after its check") }}.
     </div>
   </div>
 {% endif %}

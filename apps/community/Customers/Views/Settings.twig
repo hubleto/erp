@@ -1,7 +1,7 @@
 <div class="flex">
-  <h1 class="app-main-title">Customers: Settings</h1>
+  <h1 class="app-main-title">{{ translate(Customers: Settings) }}</h1>
   {% if viewParams.settingsSaved %}
-    <div class="badge badge-info text-sm ml-4">Settings saved.</div>
+    <div class="badge badge-info text-sm ml-4">{{ translate(Settings saved.) }}</div>
   {% endif %}
 </div>
 
@@ -23,7 +23,7 @@
     <table class="table-default">
       <tbody>
         <tr>
-          <td>Calendar color</td>
+          <td>{{ translate(Calendar color) }}</td>
           <td>
             <input
               type="text" name="calendarColor"

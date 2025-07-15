@@ -141,7 +141,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
         <ModalSimple
           uid={this.props.uid + '_form_bulk_status_change'}
           isOpen={true}
-          title='Bulk change Lead status'
+          title={this.translate('Bulk change Lead status')}
           type='centered'
           showHeader={true}
           headerLeft={saveButton}
@@ -149,7 +149,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
         >
           <>
             <div className='w-[100%] flex flex-row justify-end items-center gap-2 mb-2'>
-              <span className='text font-bold'>Bulk change status:</span>
+              <span className='text font-bold'>{this.translate("Bulk change status")}:</span>
               <select
                 className='w-1/4 mr-[15px]'
                 value={this.state.selectedBulkStatus}
@@ -158,11 +158,11 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
                   this.bulkStatusChange(e.target.value);
                 }}
               >
-                <option value={0}>No interaction yet</option>
-                <option value={1}>Contacted</option>
-                <option value={2}>In Progress</option>
-                <option value={3}>Closed</option>
-                <option value={20}>Converted to deal</option>
+                <option value={0}>{this.translate("No interaction yet")}</option>
+                <option value={1}>{this.translate("Contacted")}</option>
+                <option value={2}>{this.translate("In Progress")}</option>
+                <option value={3}>{this.translate("Closed")}</option>
+                <option value={20}>C{this.translate("onverted to deal")}</option>
               </select>
             </div>
             <HubletoTable
@@ -177,34 +177,34 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
               onChange={(table: TableLeads) => {this.setState({selection: table.state.data?.data})}}
               description={{
                 columns: {
-                  identifier: {type: "varchar", title: "Identifier", readonly: true,
+                  identifier: {type: "varchar", title: this.translate("Identifier"), readonly: true,
                     cellRenderer: ( table: TableLeads, data: any, options: any): JSX.Element => (
                       <>{data.identifier}</>
                     )
                   },
-                  title: {type: "varchar", title: "Title", readonly: true,
+                  title: {type: "varchar", title: this.translate("Title"), readonly: true,
                     cellRenderer: ( table: TableLeads, data: any, options: any): JSX.Element => (
                       <>{data.title}</>
                     )
                   },
-                  company_name: {type: "varchar", title: "Company", readonly: true,
+                  company_name: {type: "varchar", title: this.translate("Company"), readonly: true,
                     cellRenderer: ( table: TableLeads, data: any, options: any): JSX.Element => (
                       <>{data.CUSTOMER.name}</>
                     )
                   },
-                  status: {type: "interger", title: "Status", readonly: true},
+                  status: {type: "interger", title: this.translate("Status"), readonly: true},
                 },
                 inputs: {
-                  identifier: {type: "varchar", title: "Identifier", readonly: true},
-                  title: {type: "varchar", title: "Title", readonly: true},
-                  company_name: {type: "varchar", title: "Company",readonly: true},
-                  status: {type: "interger", title: "Statu", readonly: true,
+                  identifier: {type: "varchar", title: this.translate("Identifier"), readonly: true},
+                  title: {type: "varchar", title: this.translate("Title"), readonly: true},
+                  company_name: {type: "varchar", title: this.translate("Company"),readonly: true},
+                  status: {type: "interger", title: this.translate("Status"), readonly: true,
                     enumValues: {
-                      0: 'No interaction yet',
-                      1: 'Contacted',
-                      2: 'In Progress',
-                      3: 'Closed',
-                      20: 'Converted to deal',
+                      0: this.translate('No interaction yet'),
+                      1: this.translate('Contacted'),
+                      2: this.translate('In Progress'),
+                      3: this.translate('Closed'),
+                      20: this.translate('Converted to deal'),
                     }},
                 }
               }}

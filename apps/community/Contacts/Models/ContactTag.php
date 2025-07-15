@@ -25,7 +25,7 @@ class ContactTag extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Contact tags';
+    $description->ui['title'] = $this->translate('Contact tags');
     return $description;
   }
 

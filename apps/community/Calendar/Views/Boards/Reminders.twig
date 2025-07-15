@@ -24,7 +24,7 @@
   {{ _self.reminders(viewParams.remindersToday, viewParams) }}
 {% else %}
   <div class="alert alert-info">
-    Let's have a break. You have nothing to do for today. 🎉<br/>
+    {{ translate("Let's have a break. You have nothing to do for today.") }} 🎉<br/>
   </div>
 {% endif %}
 
@@ -51,14 +51,14 @@
 
 {% if viewParams.remindersTomorrow|length > 0 %}
   <div id="reminders-tomorrow" style="display:none" class="mt-2">
-    <b>Tomorrow</b><br/>
+    <b>{{translate("Tomorrow")}}</b><br/>
     {{ _self.reminders(viewParams.remindersTomorrow, viewParams) }}
   </div>
 {% endif %}
 
 {% if viewParams.remindersLater|length > 0 %}
   <div id="reminders-later" style="display:none" class="mt-2">
-    <b>Later</b><br/>
+    <b>{{translate("Later")}}</b><br/>
     {{ _self.reminders(viewParams.remindersLater, viewParams) }}
   </div>
 {% endif %}

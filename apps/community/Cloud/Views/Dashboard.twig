@@ -1,7 +1,7 @@
 <h1 class="app-main-title text-center">
   <i class="fas fa-cloud" style="font-size:30pt"></i><br/>
   <div style="font-size:30pt">Hubleto Cloud</div>
-  <div class="text-secondary" style="font-size:10pt">Your collaboration space</div>
+  <div class="text-secondary" style="font-size:10pt">{{ translate('Your collaboration space') }}</div>
 </h1>
 <br/>
 
@@ -20,26 +20,26 @@
   </script>
   <div class="md:w-1/2 m-auto">
     <div class="card card-body block text-xl">
-      {{ user.first_name ?? user.email }}, welcome to Hubleto cloud. 👍
+      {{ user.first_name ?? user.email }}, {{ translate('welcome to Hubleto cloud.') }} 👍
     </div>
     <div class="card card-body block mt-2">
-      We are happy you decided to use Hubleto.<br/>
-      Before you start, you should first read, understand and accept our
-      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.com/en/terms-of-use" target="_blank"><span class="text">Terms of use</span></a> and
-      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.com/en/privacy-policy" target="_blank"><span class="text">Privacy policy</span></a>.<br/>
+      {{ translate('We are happy you decided to use Hubleto.') }}<br/>
+      {{ translate('Before you start, you should first read, understand and accept our') }}
+      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.com/en/terms-of-use" target="_blank"><span class="text">{{ translate('Terms of use') }}</span></a> {{ translate('and') }}
+      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.com/en/privacy-policy" target="_blank"><span class="text">{{ translate('Privacy policy') }}</span></a>.<br/>
       <br/>
-      Therefore, we kindly ask you to go through these documents and appoint your consent
-      by ticking the checkbox below.
+      {{ translate('Therefore, we kindly ask you to go through these documents and appoint your consent') }}
+      {{ translate('by ticking the checkbox below.') }}
     </div>
     <div class="card card-body mt-2 text-left block" id="accept-legal-documents-wrapper">
       <div class="flex items-center gap-2">
         <input id="accept-legal-documents" type="checkbox" style="zoom:2">
-        <label for="accept-legal-documents">I have read, undestrood and agree to the <i>Terms of use</i> and <i>Privacy policy</i> of Hubleto cloud.
+        <label for="accept-legal-documents">{{ translate('I have read, undestrood and agree to the') }} <i>{{ translate('Terms of use') }}</i> {{ translate('and') }} <i>{{ translate('Privacy policy') }}</i> {{ translate('of Hubleto cloud') }}.
       </div>
     </div>
     <button id="accept-btn" class="btn btn-primary btn-large mt-2" onclick="acceptLegalDocuments();">
       <span class="icon"><i class="fas fa-arrow-right"></i></span>
-      <span class="text">Continue to the dashboard</span>
+      <span class="text">{{ translate('Continue to the dashboard') }}</span>
     </button>
   </div>
 
@@ -159,10 +159,10 @@
             </button>
             <div id="activate-premium-step-2" class="text-left" style="display:none">
               <div>
-                You will be given <span class="badge badge-info text-base">30 days of free
-                trial period</span> to configure payment method.
-                Please type your account's email address below
-                to confirm that you realy want to activate Premium account.<br/>
+                {{ translate('You will be given') }} <span class="badge badge-info text-base">{{ translate('30 days of free') }}
+                {{ translate('trial period') }}</span> {{ translate('to configure payment method.') }}
+                {{ translate("Please type your account's email address below") }}
+                {{ translate("to confirm that you realy want to activate Premium account") }}.<br/>
                 <br/>
                 <input id="activate-premium-confirm-email" class="w-full" placeholder="To confirm, type your email address here." />
               </div>

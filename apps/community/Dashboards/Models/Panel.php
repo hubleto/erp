@@ -32,7 +32,7 @@ class Panel extends \HubletoMain\Core\Models\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Add panel';
+    $description->ui['addButtonText'] = $this->translate('Add panel');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;
@@ -51,7 +51,7 @@ class Panel extends \HubletoMain\Core\Models\Model
         $dashboardsApp = $this->main->apps->community('Dashboards');
         $boards = $dashboardsApp->getBoards();
         $enumValues = [
-          '' => '-- Select board to be displayed in panel --',
+          '' => $this->translate('-- Select board to be displayed in panel --'),
         ];
         foreach ($boards as $board) {
           $enumValues[$board['boardUrlSlug']] = $board['app']->manifest['name'] . ': ' . $board['title'];

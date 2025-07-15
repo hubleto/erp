@@ -14,7 +14,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
   props: FormActivityProps;
   state: FormActivityState;
 
-  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormActivity';
+  translationContext: string = 'HubletoApp\\Community\\Calendar\\Loader::Components\\FormActivity';
 
   getActivitySourceReadable(): string
   {

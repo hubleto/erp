@@ -42,7 +42,7 @@ export default class FormCustomerTopMenu extends TranslatedComponent<P, S> {
             isOpen={true}
             type='centered'
             showHeader={true}
-            title="Deals"
+            title={this.translate("Deals")}
             onClose={(modal: ModalSimple) => { this.setState({showDeals: false}); }}
           >
             <TableDeals

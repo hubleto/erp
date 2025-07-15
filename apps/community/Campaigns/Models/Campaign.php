@@ -38,7 +38,7 @@ class Campaign extends \HubletoMain\Core\Models\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Add Campaign';
+    $description->ui['addButtonText'] = $this->translate('Add Campaign');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

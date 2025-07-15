@@ -51,19 +51,19 @@ class Loader extends \HubletoMain\Core\App
     if ($dashboardsApp) {
       $dashboardsApp->addBoard(
         $this,
-        'Deal warnings',
+        $this->translate('Deal warnings'),
         'deals/boards/deal-warnings'
       );
 
       $dashboardsApp->addBoard(
         $this,
-        'Most valuable deals',
+        $this->translate('Most valuable deals'),
         'deals/boards/most-valuable-deals'
       );
 
       $dashboardsApp->addBoard(
         $this,
-        'Deal value by result',
+        $this->translate('Deal value by result'),
         'deals/boards/deal-value-by-result'
       );
     }

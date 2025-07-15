@@ -30,7 +30,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps,Fo
   renderTitle(): JSX.Element {
     return <>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
-      <small>Campaign</small>
+      <small>{this.translate("Campaign")}</small>
     </>;
   }
 
@@ -56,7 +56,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps,Fo
       </div>
       {this.divider(this.translate('Leads'))}
       {this.state.id < 0 ?
-          <div className="badge badge-info">First create the campaign, then you will be prompted to create leads.</div>
+          <div className="badge badge-info">{this.translate("First create the campaign, then you will be prompted to create leads.")}</div>
         :
           <TableLeads
             uid={this.props.uid + "_table_leads"}

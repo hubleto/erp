@@ -28,7 +28,7 @@ class Document extends \HubletoMain\Core\Models\Model
   {
     $description = parent::describeTable();
     $description->ui['title'] = ''; // 'Documents';
-    $description->ui['addButtonText'] = 'Add Document';
+    $description->ui['addButtonText'] = $this->translate('Add Document');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;

@@ -28,8 +28,8 @@ class DealHistory extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Deals';
-    $description->ui['addButtonText'] = 'Add Deal';
+    $description->ui['title'] = $this->translate('Deals');
+    $description->ui['addButtonText'] = $this->translate('Add Deal');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

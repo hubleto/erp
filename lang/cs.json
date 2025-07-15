@@ -1,8 +1,50 @@
 {
     "Desktop": {
-        "Premium": "Pojistné",
-        "Manage your user account": "Spravujte svůj uživatelský účet",
-        "Manage cloud account": "Správa cloudového účtu",
-        "Sign out": "Odhlásit se"
+        "Upgrade to Premium": "Přejít na Premium",
+        "Your messages": "Vaše zprávy",
+        "Help center": "Centrum pomoci",
+        "Browse knowledgebase": "Přejít na bázi znalostí",
+        "Hot tips & tricks": "Horké tipy a triky",
+        "Need more help?": "Potřebujete pomoci?",
+        "Contact us": "Kontaktujte nás",
+        "Manage your account": "Spravovat účet",
+        "Sign out": "Odhlásit se",
+        "Search knowledgebase...": "Procházet bázi znalostí...",
+        "No hot tips for this screen": "Žádné horké tipy pro tuto obrazovku",
+        "Get premium": "Přejít na Premium",
+        "Help": "Nápověda",
+        "Premium": "Premium",
+        "Manage your user account": "Múj profil",
+        "Manage cloud account": "Spravovat cloud účet",
+        "Home": "Domov",
+        "Search app...": "Vyhledat aplikaci...",
+        "Open sidebar": "Otevřít boční panel",
+        "Search app": "Vyhledat aplikaci",
+        "You have no apps in this group.": "V této skupině nemáte žádné aplikace"
+    },
+    "form": {
+        "Add": "Přidat",
+        "Save": "Uložit",
+        "Copy": "Kopírovat",
+        "Delete": "Smazat",
+        "Confirm delete": "Potvrďte smazání",
+        "Edit": "Upravit",
+        "Adding record": "Přidat záznam",
+        "Editing record": "Úprava záznamu",
+        "Record": "Záznam",
+        "New record": "Nový záznam"
+    },
+    "input": {
+        "Upload file": "Nahrát soubor"
+    },
+    "table": {
+        "You are about to delete the record. Press OK to confirm.": "Chystáte se smazat záznam. Potvrďte stisknutím OK.",
+        "Yes, delete": "Ano, smazat",
+        "No, do not delete": "Ne, nesmazat",
+        "Delete": "Smazat",
+        "Start typing to search...": "Začnete psát pro vyhledávaní..."
+    },
+    "Controllers\\ControllerSignIn": {
+        "Keep signed in": "Zůstat přihlášen"
     }
 }

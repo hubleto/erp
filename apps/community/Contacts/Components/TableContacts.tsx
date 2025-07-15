@@ -145,7 +145,7 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
               >
                 <span className="icon flex flex-col gap-2">
                   <i className="fas fa-user text-2xl"></i>
-                  {item.is_primary ? <div className="badge badge-violet">Primary</div> : null}
+                  {item.is_primary ? <div className="badge badge-violet">{this.translate("Primary")}</div> : null}
                 </span>
                 <span className="text" style={{maxHeight: "10em"}}>
                   <div className="flex gap-2">

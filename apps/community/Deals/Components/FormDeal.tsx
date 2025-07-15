@@ -131,7 +131,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   renderTitle(): JSX.Element {
     return <>
       <h2>{this.state.record.title ? this.state.record.title : '-'}</h2>
-      <small>Deal</small>
+      <small>{this.translate("Deal")}</small>
     </>;
   }
 
@@ -414,7 +414,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           {R.is_archived == 1 ?
             <div className='alert-warning mt-2 mb-1'>
               <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
-              <span className='text'>This deal is archived.</span>
+              <span className='text'>{this.translate("This deal is archived")}</span>
             </div>
           : null}
           <div className='flex gap-2 flex-col md:flex-row'>
@@ -429,11 +429,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             <div className='flex-1'>
               {this.state.id > 0 ? <div className='flex flex-col'>
                 <div className="badge badge-violet badge-large">
-                  Deal value:&nbsp;{globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
+                  {this.translate("Deal value:")} &nbsp; {globalThis.main.numberFormat(R.price, 2, ",", " ")} {R.CURRENCY.code}
                 </div>
                 {R.PIPELINE_STEP && R.PIPELINE_STEP.probability ?
                   <div className="badge badge-violet badge-large">
-                    <p>Weighted profit ({R.PIPELINE_STEP?.probability} %):
+                    <p>{this.translate("Weighted profit")} ({R.PIPELINE_STEP?.probability} %):
                       <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.PIPELINE_STEP?.probability, R.price), 2, ',', ' ')} {R.CURRENCY.code}</strong>
                     </p>
                   </div>
@@ -458,12 +458,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         return <>
           <div className='flex gap-2 mt-2'>
             <div className='card flex-2'>
-              <div className='card-header'>Products & Services</div>
+              <div className='card-header'>{this.translate("Products & Services")}</div>
               <div className='card-body'>
                 {this.state.isInlineEditing ?
                   <div className='text-yellow-500 mb-3'>
                     <span className='icon mr-2'><i className='fas fa-warning'></i></span>
-                    <span className='text'>The sums of product and services prices will be updated after saving</span>
+                    <span className='text'>{this.translate("The sums of product and services prices will be updated after saving")}</span>
                   </div>
                 : <></>}
                 {!R.is_archived ? (
@@ -480,7 +480,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     }}
                   >
                     <span className="icon"><i className="fas fa-add"></i></span>
-                    <span className="text">Add service</span>
+                    <span className="text">{this.translate("Add service")}</span>
                   </a>
                 ) : null}
                 {!R.is_archived ? (
@@ -511,7 +511,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     description={{
                       permissions: this.state.tableDealProductsDescription?.permissions,
                       columns: {
-                        id_product: { type: "lookup", title: "Service", model: "HubletoApp/Community/Products/Models/Product",
+                        id_product: { type: "lookup", title: this.translate("Service"), model: "HubletoApp/Community/Products/Models/Product",
                           cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
                             return (
                               <FormInput>
@@ -536,19 +536,19 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                             )
                           },
                         },
-                        unit_price: { type: "float", title: "Service Price",},
-                        amount: { type: "int", title: "Commitment" },
-                        discount: { type: "float", title: "Discount (%)"},
-                        vat: { type: "float", title: "Vat (%)"},
-                        sum: { type: "float", title: "Sum"},
+                        unit_price: { type: "float", title: this.translate("Service Price"),},
+                        amount: { type: "int", title: this.translate("Commitment") },
+                        discount: { type: "float", title: this.translate("Discount (%)")},
+                        vat: { type: "float", title: this.translate("Vat (%)")},
+                        sum: { type: "float", title: this.translate("Sum")},
                       },
                       inputs: {
-                        id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
-                        unit_price: { type: "float", title: "Unit Price"},
-                        amount: { type: "int", title: "Amount"},
-                        vat: { type: "float", title: "Vat (%)"},
-                        discount: { type: "float", title: "Discount (%)"},
-                        sum: { type: "float", title: "Sum"},
+                        id_product: { type: "lookup", title: this.translate("Product"), model: "HubletoApp/Community/Products/Models/Product" },
+                        unit_price: { type: "float", title: this.translate("Unit Price")},
+                        amount: { type: "int", title: this.translate("Amount")},
+                        vat: { type: "float", title: this.translate("Vat (%)")},
+                        discount: { type: "float", title: this.translate("Discount (%)")},
+                        sum: { type: "float", title: this.translate("Sum")},
                       },
                     }}
                     isUsedAsInput={true}
@@ -572,7 +572,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     description={{
                       permissions: this.state.tableDealProductsDescription?.permissions,
                       columns: {
-                        id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product",
+                        id_product: { type: "lookup", title: this.translate("Product"), model: "HubletoApp/Community/Products/Models/Product",
                           cellRenderer: ( table: TableDealProducts, data: any, options: any): JSX.Element => {
                             return (
                               <FormInput>
@@ -597,19 +597,19 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                             )
                           },
                         },
-                        unit_price: { type: "float", title: "Unit Price",},
-                        amount: { type: "int", title: "Amount" },
-                        discount: { type: "float", title: "Discount (%)"},
-                        vat: { type: "float", title: "Vat (%)"},
-                        sum: { type: "float", title: "Sum"},
+                        unit_price: { type: "float", title: this.translate("Unit Price"),},
+                        amount: { type: "int", title: this.translate("Amount") },
+                        discount: { type: "float", title: this.translate("Discount (%)")},
+                        vat: { type: "float", title: this.translate("Vat (%)")},
+                        sum: { type: "float", title: this.translate("Sum")},
                       },
                       inputs: {
-                        id_product: { type: "lookup", title: "Product", model: "HubletoApp/Community/Products/Models/Product" },
-                        unit_price: { type: "float", title: "Unit Price"},
-                        amount: { type: "int", title: "Amount"},
-                        vat: { type: "float", title: "Vat (%)"},
-                        discount: { type: "float", title: "Discount (%)"},
-                        sum: { type: "float", title: "Sum"},
+                        id_product: { type: "lookup", title: this.translate("Product"), model: "HubletoApp/Community/Products/Models/Product" },
+                        unit_price: { type: "float", title: this.translate("Unit Price")},
+                        amount: { type: "int", title: this.translate("Amount")},
+                        vat: { type: "float", title: this.translate("Vat (%)")},
+                        discount: { type: "float", title: this.translate("Discount (%)")},
+                        sum: { type: "float", title: this.translate("Sum")},
                       },
                     }}
                     isUsedAsInput={true}
@@ -662,7 +662,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         try {
           return <>
             {this.state.id < 0 ?
-                <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
+                <div className="badge badge-info">{this.translate("First create the project, then you will be prompted to add tasks.")}</div>
               :
                 <TableTasks
                   uid={this.props.uid + "_table_tasks"}
@@ -674,7 +674,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             }
           </>;
         } catch (ex) {
-          return <div className="alert alert-error">Failed to display tasks. Check if you have 'Tasks' app installed.</div>
+          return <div className="alert alert-error">{this.translate("Failed to display tasks. Check if you have 'Tasks' app installed.")}</div>
         }
       break;
 
@@ -687,7 +687,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               onClick={() => this.setState({showIdDocument: -1} as FormDealState)}
             >
               <span className="icon"><i className="fas fa-add"></i></span>
-              <span className="text">Add document</span>
+              <span className="text">{this.translate("Add document")}</span>
             </a>
           : null}
           <TableDealDocuments
@@ -703,8 +703,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 showHeader: false,
               },
               columns: {
-                id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableDealDocuments, data: any, options: any): JSX.Element => {
+                id_document: { type: "lookup", title: this.translate("Document"), model: "HubletoApp/Community/Documents/Models/Document" },
+                hyperlink: { type: "varchar", title: this.translate("Link"), cellRenderer: ( table: TableDealDocuments, data: any, options: any): JSX.Element => {
                   return (
                     <FormInput>
                       <Hyperlink {...this.getInputProps('document-link')}
@@ -716,8 +716,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 },},
               },
               inputs: {
-                id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                hyperlink: { type: "varchar", title: "Link", readonly: true},
+                id_document: { type: "lookup", title: this.translate("Document"), model: "HubletoApp/Community/Documents/Models/Document" },
+                hyperlink: { type: "varchar", title: this.translate("Link"), readonly: true},
               }
             }}
             isUsedAsInput={true}
@@ -794,12 +794,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                     showHeader: false,
                   },
                   columns: {
-                    description: { type: "varchar", title: "Description"},
-                    change_date: { type: "date", title: "Change Date"},
+                    description: { type: "varchar", title: this.translate("Description")},
+                    change_date: { type: "date", title: this.translate("Change Date")},
                   },
                   inputs: {
-                    description: { type: "varchar", title: "Description", readonly: true},
-                    change_date: { type: "date", title: "Change Date"},
+                    description: { type: "varchar", title: this.translate("Description"), readonly: true},
+                    change_date: { type: "date", title: this.translate("Change Date")},
                   },
                 }}
                 readonly={true}

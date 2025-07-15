@@ -20,8 +20,8 @@ class LostReason extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Deal Lost Reasons';
-    $description->ui['addButtonText'] = 'Add Reason';
+    $description->ui['title'] = $this->translate('Deal Lost Reasons');
+    $description->ui['addButtonText'] = $this->translate('Add Reason');
     return $description;
   }
 

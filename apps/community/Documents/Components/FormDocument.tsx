@@ -33,7 +33,7 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
     } else {
       return <>
         <h2>{this.state.record.name ? this.state.record.name : ''}</h2>
-        <small>Document</small>
+        <small>{this.translate("Document")}</small>
       </>;
     }
   }
@@ -54,7 +54,7 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
           {R.origin_link && linkExists ?
             <a href={this.state.record.origin_link} className='btn brn-primary mt-2'>
               <span className='icon'><i className='fas fa-link'></i></span>
-              <span className='text'>Go to origin entry</span>
+              <span className='text'>{this.translate("Go to origin entry")}</span>
             </a>
           : <></>
           }

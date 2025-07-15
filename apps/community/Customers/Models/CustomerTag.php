@@ -25,8 +25,8 @@ class CustomerTag extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Customer Categories';
-    $description->ui['addButtonText'] = 'Add Customer';
+    $description->ui['title'] = $this->translate('Customer Categories');
+    $description->ui['addButtonText'] = $this->translate('Add Customer');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

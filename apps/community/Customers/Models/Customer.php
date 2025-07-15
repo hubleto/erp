@@ -54,7 +54,7 @@ class Customer extends \HubletoMain\Core\Models\Model
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setProperty('defaultVisibility', true),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setRequired()->setDefaultValue($this->main->auth->getUserId())->setProperty('defaultVisibility', true),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setRequired()->setDefaultValue($this->main->auth->getUserId())->setProperty('defaultVisibility', true),
-      'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
+      'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)")),
     ], parent::describeColumns());
   }
 
@@ -103,10 +103,10 @@ class Customer extends \HubletoMain\Core\Models\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
-    $description->columns['tags'] = ["title" => "Tags"];
+    $description->columns['tags'] = ["title" => $this->translate("Tags")];
 
     $description->ui['defaultFilters'] = [
-      'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+      'fArchive' => [ 'title' => $this->translate('Archive'), 'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Archived') ] ],
     ];
 
     return $description;

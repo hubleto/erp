@@ -1,21 +1,22 @@
 {
     "manifest": {
-        "Pipeline": "Potrubí",
-        "Free sales pipeline management.": "Správa potrubí zdarma."
+        "Pipeline": "Pipeline",
+        "Free sales pipeline management.": "Správa pipeline zdarma."
     },
     "root": {
-        "Pipelines": "Potrubí"
+        "Pipelines": "Pipeline"
     },
     "Models\\Pipeline": {
         "Name": "Jméno",
-        "Description": "Popis"
+        "Description": "Popis",
+        "Type": ""
     },
     "Models\\PipelineStep": {
         "Name": "Jméno",
         "Order": "Objednávka",
         "Color": "Barva",
         "Probability": "Pravděpodobnost",
-        "Pipeline": "Potrubí",
-        "Set result of a deal to": "Stanovit výsledek dohody"
+        "Pipeline": "Pipeline",
+        "Set result of a deal to": "Stanovit výsledek obchodu"
     }
 }

@@ -1,28 +1,28 @@
 {
     "manifest": {
         "Deals": "Obchody",
-        "Deal management. From deal to purchase.": "Správa obchodů. Od dohody k nákupu."
+        "Deal management. From deal to purchase.": "Správa obchodů. Od obchodu k nákupu."
     },
     "root": {
         "Deal Tags": "Značky obchodu",
-        "Deal Lost Reasons": "Deal ztracené důvody",
+        "Deal Lost Reasons": "Důvody ztraceného obchodu ",
         "Most valuable deals": "Nejcennější obchody",
-        "Deal value by result": "Výsledek na základě výsledku",
+        "Deal value by result": "Hodnota obchodu na základě výsledku",
         "Active deals": "Aktivní obchody",
         "Archived deals": "Archivované obchody",
-        "Deal warnings": "Varování"
+        "Deal warnings": "Varování pro obchody"
     },
     "Models\\DealActivity": {
-        "Subject": "Podrobit",
+        "Subject": "Předmět",
         "Activity type": "Typ aktivity",
         "Start date": "Datum zahájení",
         "Start time": "Čas zahájení",
         "End date": "Datum ukončení",
-        "End time": "Ukončený čas",
+        "End time": "Čas ukončení",
         "All day": "Celý den",
         "Completed": "Dokončeno",
         "Created by": "Vytvořeno",
-        "Deal": "Jednat",
+        "Deal": "Obchod",
         "Contact": "Kontakt",
         "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
     },
@@ -31,40 +31,55 @@
         "Title": "Titul",
         "Customer": "Zákazník",
         "Contact": "Kontakt",
-        "Lead": "Vést",
+        "Lead": "Potenciální obchod",
         "Price": "Cena",
         "Currency": "Měna",
         "Expected close date": "Očekávané datum uzavření",
         "Owner": "Majitel",
         "Created": "Vytvořené",
-        "Pipeline": "Potrubí",
-        "Pipeline step": "Krok potrubí",
+        "Pipeline": "Pipeline",
+        "Pipeline step": "Krok pipeline",
         "Notes": "Poznámky",
         "Source channel": "Zdrojový kanál",
-        "Archived": "Archivovaný",
-        "Deal Result": "Výsledek řešení",
+        "Archived": "Archivováno",
+        "Deal Result": "Výsledek obchodu",
         "Reason for Lost": "Důvod pro ztracení",
         "Date of result update": "Datum aktualizace výsledku",
         "New Customer": "Nový zákazník",
-        "Business type": "Typ podnikání"
+        "Business type": "Typ obchodu",
+        "Manager": "Manažér",
+        "Closed": "Uzavřené",
+        "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku (online úložiště) se souvisejícími dokumenty",
+        "Add Deal": "Přidat obchod",
+        "Result": "Výsledek",
+        "All": "Všechno",
+        "Ownership": "Vlastnictví",
+        "Owned by me": "Vlastněno mnou",
+        "Managed by me": "Spravováno mnou",
+        "Open \/ Closed": "Otevřené \/ Uzavřené",
+        "Open": "Otevřené",
+        "Active": "Aktivní",
+        "Deal created": "Obchod vytvořen",
+        " changed from ": " změnil z ",
+        " to ": " na "
     },
     "Controllers\\Boards\\MostValuableDeals": {
-        "Open deal": "Otevřená dohoda"
+        "Open deal": "Otevřený obchod"
     },
     "Models\\LostReason": {
-        "Lost Reason": "Ztracený důvod"
+        "Lost Reason": "Důvod ztracení"
     },
     "Models\\DealHistory": {
         "Change Date": "Datum změny",
-        "Deal": "Jednat",
+        "Deal": "Obchod",
         "Description": "Popis"
     },
     "Models\\DealTag": {
-        "Deal": "Jednat",
+        "Deal": "Obchod",
         "Tag": "Štítek"
     },
     "Models\\DealProduct": {
-        "Deal": "Jednat",
+        "Deal": "Obchod",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
         "Amount": "Množství",
@@ -73,7 +88,7 @@
         "Sum": "Součet"
     },
     "Models\\DealDocument": {
-        "Deal": "Jednat",
+        "Deal": "Obchod",
         "Document": "Dokument"
     },
     "Models\\Tag": {
@@ -81,6 +96,63 @@
         "Color": "Barva"
     },
     "Controllers\\Boards\\DealWarnings": {
-        "Pending deals without future plan": "Čekající nabídky bez budoucího plánu"
+        "Pending deals without future plan": "Čekající obchody bez budoucího plánu",
+        "Open deals without future plan": "Otevřené obchody bez budoucího plánu"
+    },
+    "Controllers\\Deals": {
+        "Deals": "Obchody",
+        "Open deals": "Otevřené obchody",
+        "Total value": "Celková hodnota"
+    },
+    "Components\\FormDeal": {
+        "Log completed activity": "Zaznamenat dokončenou aktivitu",
+        "Type recent activity here": "Zde napište nedávnou aktivitu",
+        "Enter": "Zadajte",
+        "Most recent activities": "Nedávné aktivity",
+        "Schedule activity": "Naplánovat aktivitu",
+        "Shift+Enter": "Shift+Enter",
+        "Go to original lead": "Přejít k původnímu potenciálnímu obchodu",
+        "Not completed yet": "Zatím nedokončeno",
+        "Calendar": "Kalendář",
+        "Local documents": "Lokální dokumenty",
+        "Documents": "Dokumenty",
+        "History": "Historie",
+        "Show deals": "Ukázat obchody",
+        "Deal": "Obchod",
+        "Deal value:": "Hodnota obchodu:",
+        "Products & Services": "Produkty a služby",
+        "The sums of product and services prices will be updated after saving": "Součty cen produktů a služeb budou aktualizovány po uložení",
+        "Add product": "Přidat produkt",
+        "Add service": "Přidat službu",
+        "Add document": "Přidat dokument",
+        "The price is locked because the deal has some products or services": "Cena je uzamčená, protože se v obchodu nachází produkt nebo služba",
+        "Customer": "Zákazník",
+        "Service Price": "Cena služby",
+        "Service": "Služba",
+        "Commitment": "Vázanost",
+        "Vat (%)": "DPH (%)",
+        "Discount (%)": "Sleva (%)",
+        "Sum": "Součet",
+        "Unit Price": "Jednotková cena",
+        "Product": "Produkt",
+        "Amount": "Množství",
+        "Link": "Odkaz",
+        "Document": "Dokument",
+        "Description": "Popis",
+        "Change Date": "Datum změny",
+        "No steps exist for this pipeline": "Neexistujú kroky pro tuto pipeline",
+        "Weighted profit": "Vážený zisk"
+    },
+    "Components\\FormActivity": {
+        "Start": "Začátek",
+        "End": "Konec",
+        "Deal": "Obchod",
+        "Contact": "Kontakt"
+    },
+    "Controllers\\Boards\\DealValueByResult": {
+        "Unknown": "",
+        "Pending": "",
+        "Won": "",
+        "Lost": ""
     }
 }

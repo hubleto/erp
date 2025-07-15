@@ -142,12 +142,12 @@ class Deal extends \HubletoMain\Core\Models\Model
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
     $description->ui['defaultFilters'] = [
-      'fDealSourceChannel' => [ 'title' => 'Source channel', 'type' => 'multipleSelectButtons', 'options' => self::ENUM_SOURCE_CHANNELS ],
-      'fDealResult' => [ 'title' => 'Result', 'type' => 'multipleSelectButtons', 'options' =>self::ENUM_DEAL_RESULTS ],
-      'fDealBusinessType' => [ 'title' => 'Business type', 'options' => array_merge([ 0 => 'All'], self::ENUM_BUSINESS_TYPES) ],
-      'fDealOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
-      'fDealClosed' => [ 'title' => 'Open / Closed', 'options' => [ 0 => 'Open', 1 => 'Closed' ] ],
-      'fDealArchive' => [ 'title' => 'Archived', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
+      'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => self::ENUM_SOURCE_CHANNELS ],
+      'fDealResult' => [ 'title' => $this->translate('Result'), 'type' => 'multipleSelectButtons', 'options' =>self::ENUM_DEAL_RESULTS ],
+      'fDealBusinessType' => [ 'title' => $this->translate('Business type'), 'options' => array_merge([ 0 => $this->translate('All')], self::ENUM_BUSINESS_TYPES) ],
+      'fDealOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
+      'fDealClosed' => [ 'title' => $this->translate('Open / Closed'), 'options' => [ 0 => $this->translate('Open'), 1 => $this->translate('Closed') ] ],
+      'fDealArchive' => [ 'title' => $this->translate('Archived'), 'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Archived') ] ],
     ];
 
     unset($description->columns['note']);
@@ -188,7 +188,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     $mDealHistory->record->recordCreate([
       "change_date" => date("Y-m-d"),
       "id_deal" => $savedRecord["id"],
-      "description" => "Deal created"
+      "description" => $this->translate("Deal created")
     ]);
 
     $newDeal = $savedRecord;
@@ -306,7 +306,7 @@ class Deal extends \HubletoMain\Core\Models\Model
         $mDealHistory->record->recordCreate([
           "change_date" => date("Y-m-d"),
           "id_deal" => $record["id"],
-          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+          "description" => $columns[$columnName]->getTitle() . $this->translate(" changed from ") . $oldValue . $this->translate(" to ") . $newValue,
         ]);
       }
     }

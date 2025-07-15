@@ -9,11 +9,11 @@
     <table class="table-default dense">
       <thead>
         <tr>
-          <th>UID</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>SQL</th>
-          <th>Run this update</th>
+          <th>{{ translate("UID") }}</th>
+          <th>{{ translate("Type") }}</th>
+          <th>{{ translate("Description")}}</th>
+          <th>{{ translate("SQL") }}</th>
+          <th>{{ translate("Run this update") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -35,11 +35,11 @@
     </table>
     <button class="btn btn-primary mt-2">
       <span class="icon"><i class="fas fa-check"></i></span>
-      <span class="text">Run the updates now!</span>
+      <span class="text">{{ translate("Run the updates now!") }}</span>
     </button>
   </form>
 {% else %}
   <div class="alert alert-success">
-    No necessary database updates found.
+    {{ translate("No necessary database updates found.") }}
   </div>
 {% endif %}

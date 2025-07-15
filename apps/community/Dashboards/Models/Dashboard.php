@@ -37,7 +37,7 @@ class Dashboard extends \HubletoMain\Core\Models\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Add dashboard';
+    $description->ui['addButtonText'] = $this->translate('Add dashboard');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;

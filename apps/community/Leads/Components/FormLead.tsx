@@ -135,12 +135,12 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
   moveToArchiveConfirm(recordId: number) {
     globalThis.main.showDialogConfirm(
-      <div> Are you sure you want to move this lead to archive?</div>,
+      <div>{this.translate("Are you sure you want to move this lead to archive?")}</div>,
       {
-        header: "Move to archive",
-        yesText: "Yes, move to archive",
+        header: this.translate("Move to archive"),
+        yesText: this.translate("Yes, move to archive"),
         onYes: () => this.moveToArchive(recordId),
-        noText: "No, do not move to archive",
+        noText: this.translate("No, do not move to archive"),
         onNo: () => {},
       }
     );
@@ -262,7 +262,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           {R.is_archived == 1 ?
             <div className='alert-warning mt-2 mb-1'>
               <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
-              <span className='text'>This lead is archived.</span>
+              <span className='text'>{this.translate("This lead is archived.")}</span>
             </div>
           : null}
           <div className='flex gap-2 mt-2'>
@@ -423,7 +423,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
               onClick={() => this.setState({showIdDocument: -1} as FormLeadState)}
             >
               <span className="icon"><i className="fas fa-add"></i></span>
-              <span className="text">Add document</span>
+              <span className="text">{this.translate("Add document")}</span>
             </a>
           : null}
           <TableLeadDocuments
@@ -439,8 +439,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 showHeader: false,
               },
               columns: {
-                id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                hyperlink: { type: "varchar", title: "Link", cellRenderer: ( table: TableLeadDocuments, data: any, options: any): JSX.Element => {
+                id_document: { type: "lookup", title: this.translate("Document"), model: "HubletoApp/Community/Documents/Models/Document" },
+                hyperlink: { type: "varchar", title: this.translate("Link"), cellRenderer: ( table: TableLeadDocuments, data: any, options: any): JSX.Element => {
                   return (
                     <FormInput>
                       <Hyperlink {...this.getInputProps('link_input')}
@@ -452,8 +452,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 }},
               },
               inputs: {
-                id_document: { type: "lookup", title: "Document", model: "HubletoApp/Community/Documents/Models/Document" },
-                hyperlink: { type: "varchar", title: "Link", readonly: true},
+                id_document: { type: "lookup", title: this.translate("Document"), model: "HubletoApp/Community/Documents/Models/Document" },
+                hyperlink: { type: "varchar", title: this.translate("Link"), readonly: true},
               },
             }}
             isUsedAsInput={true}
@@ -531,12 +531,12 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     showHeader: false,
                   },
                   columns: {
-                    description: { type: "varchar", title: "Description"},
-                    change_date: { type: "date", title: "Change Date"},
+                    description: { type: "varchar", title: this.translate("Description")},
+                    change_date: { type: "date", title: this.translate("Change Date")},
                   },
                   inputs: {
-                    description: { type: "varchar", title: "Description", readonly: true},
-                    change_date: { type: "date", title: "Change Date"},
+                    description: { type: "varchar", title: this.translate("Description"), readonly: true},
+                    change_date: { type: "date", title: this.translate("Change Date")},
                   },
                 }}
                 readonly={true}

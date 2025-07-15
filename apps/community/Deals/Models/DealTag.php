@@ -25,7 +25,7 @@ class DealTag extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Deal Tags';
+    $description->ui['title'] = $this->translate('Deal Tags');
     return $description;
   }
 

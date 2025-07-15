@@ -28,6 +28,18 @@
         "Set price after reweight?": "Nastavit cenu po opětovné předvádění?",
         "Needs reordering?": "Potřebujete přehodnocení?",
         "Storage rules": "Pravidla skladování",
-        "Table": "Tabulka"
+        "Table": "Tabulka",
+        "Add product": ""
+    },
+    "Controllers\\Products": {
+        "Products": ""
+    },
+    "Models\\Group": {
+        "Title": "",
+        "Add product group": ""
+    },
+    "Controllers\\Groups": {
+        "Products": "",
+        "Product Groups": ""
     }
 }

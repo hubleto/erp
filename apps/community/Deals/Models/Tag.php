@@ -23,8 +23,8 @@ class Tag extends \HubletoMain\Core\Models\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Deal Tags';
-    $description->ui['addButtonText'] = 'Add Deal Tag';
+    $description->ui['title'] = $this->translate('Deal Tags');
+    $description->ui['addButtonText'] = $this->translate('Add Deal Tag');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

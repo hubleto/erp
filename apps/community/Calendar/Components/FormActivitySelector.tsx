@@ -1,4 +1,5 @@
 import ModalForm from 'adios/ModalForm';
+import TranslatedComponent from 'adios/TranslatedComponent';
 import moment from 'moment';
 import React, { Component } from 'react';
 
@@ -12,7 +13,7 @@ export interface FormActivitySelectorState {
   formSelected?: JSX.Element;
 }
 
-export default class FormActivitySelector<P, S> extends Component<FormActivitySelectorProps, FormActivitySelectorState>{
+export default class FormActivitySelector<P, S> extends TranslatedComponent<FormActivitySelectorProps, FormActivitySelectorState>{
 
   props: FormActivitySelectorProps;
   state: FormActivitySelectorState;
@@ -25,7 +26,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
       <>
         <div className='modal-header'>
           <div className="modal-header-left"></div>
-          <div className="modal-header-title">New event</div>
+          <div className="modal-header-title">{this.translate("New event")}</div>
           <div className="modal-header-right">
             <button className="btn btn-close" onClick={() => this.props.onCallback()}>
               <span className="text !py-2">&times;</span>
@@ -38,7 +39,7 @@ export default class FormActivitySelector<P, S> extends Component<FormActivitySe
           {this.props.clickConfig?.time}
         </div>
         <div className="badge badge-info m-4 px-4 text-xl">
-          Choose calendar to which the event should be created.
+          {this.translate("Choose calendar to which the event should be created.")}
         </div>
         <div className='flex gap-2 flex-col px-4 mt-4'>
           {Object.keys(this.props.calendarConfigs).map((item, index) => {

@@ -5,5 +5,37 @@
     },
     "root": {
         "Order states": "Objednejte státy"
+    },
+    "Models\\History": {
+        "Order": "",
+        "Short Description": "",
+        "Long Description": "",
+        "Date Time": ""
+    },
+    "Models\\Order": {
+        "Order number": "",
+        "Customer": "",
+        "Title": "",
+        "State": "",
+        "Price": "",
+        "Currency": "",
+        "Order date": "",
+        "Required delivery date": "",
+        "Shipping information": "",
+        "Notes": ""
+    },
+    "Models\\OrderProduct": {
+        "Order": "",
+        "Title": "",
+        "Product": "",
+        "Unit price": "",
+        "Amount": "",
+        "Discount": "",
+        "Vat": ""
+    },
+    "Models\\State": {
+        "Title": "",
+        "Code": "",
+        "Color": ""
     }
 }

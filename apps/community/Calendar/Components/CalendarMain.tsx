@@ -5,6 +5,8 @@ import ModalForm from "adios/ModalForm";
 import FormActivitySelector from "./FormActivitySelector";
 import request from "adios/Request";
 import moment from 'moment';
+import TranslatedComponent from "adios/TranslatedComponent";
+
 
 interface CalendarMainProps {
   eventSource?: string,
@@ -34,7 +36,9 @@ interface CalendarMainState {
   fOwnership: number,
 }
 
-export default class CalendarComponent extends Component<CalendarMainProps, CalendarMainState> {
+export default class CalendarComponent extends TranslatedComponent<CalendarMainProps, CalendarMainState> {
+
+  translationContext: string = 'HubletoApp\\Community\\Calendar\\Loader::Components\\CalendarMain';
 
   refCalendar: any;
 
@@ -122,7 +126,7 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
           }}
         >
           <span className="icon"><i className="fas fa-plus"></i></span>
-          <span className="text">New activity</span>
+          <span className="text">{this.translate("New activity")}</span>
         </button>
 
         <b>Calendars</b>
@@ -153,16 +157,16 @@ export default class CalendarComponent extends Component<CalendarMainProps, Cale
           })}
         </div>
 
-        <b>Ownership</b>
+        <b>{this.translate("Ownership")}</b>
         <div className="list">
           <button
             className={"btn btn-small btn-list-item " + (this.state.fOwnership == 0 ? "btn-primary" : "btn-transparent")}
             onClick={() => { this.setState({fOwnership: 0}); }}
-          ><span className="text">All</span></button>
+          ><span className="text">{this.translate("All")}</span></button>
           <button
             className={"btn btn-small btn-list-item " + (this.state.fOwnership == 1 ? "btn-primary" : "btn-transparent")}
             onClick={() => { this.setState({fOwnership: 1}); }}
-          ><span className="text">My activities</span></button>
+          ><span className="text">{this.translate("My activities")}</span></button>
         </div>
       </div>
       <div className="w-full">

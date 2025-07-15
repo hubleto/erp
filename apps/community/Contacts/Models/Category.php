@@ -22,7 +22,7 @@ class Category extends \HubletoMain\Core\Models\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = $this->translate('Contact Categories');
-    $description->ui['addButtonText'] = 'Add Contact Category';
+    $description->ui['addButtonText'] = $this->translate('Add Contact Category');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

@@ -22,8 +22,8 @@ export default class FormLevel<P, S> extends HubletoForm<FormLevelProps, FormLev
 
   renderTitle(): JSX.Element {
     return <>
-      <h2>Record #{this.state.record.id ?? '0'}</h2>
-      <small>Level</small>
+      <h2>{this.translate("Record")} #{this.state.record.id ?? '0'}</h2>
+      <small>{this.translate("Level")}</small>
     </>;
   }
 

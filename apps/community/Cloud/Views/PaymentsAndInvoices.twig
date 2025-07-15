@@ -1,16 +1,16 @@
-<h1 class="app-main-title">Hubleto Cloud > Payments and invoices</h1>
+<h1 class="app-main-title">Hubleto Cloud > {{ translate("Payments and invoices") }}</h1>
 
 <table class="table-default dense">
   <thead>
     <tr>
-      <th>Charged</th>
-      <th>UUID</th>
-      <th>Type</th>
+      <th>{{ translate("Charged") }}</th>
+      <th>{{ translate("UUID") }}</th>
+      <th>{{ translate("Type") }}</th>
       {# <th>Discount</th> #}
-      <th>Amount</th>
+      <th>{{ translate("Amount") }}</th>
       {# <th>Discounted amount</th> #}
-      <th>Details</th>
-      <th>Invoice</th>
+      <th>{{ translate("Details") }}</th>
+      <th>{{ translate("Invoice") }}</th>
     </tr>
   </thead>
   <tbody>
@@ -30,7 +30,7 @@
             target="_blank"
           >
             <span class="icon"><i class="fas fa-arrow-down"></i></span>
-            <span class="text">Download invoice</span>
+            <span class="text">{{ translate("Download invoice") }}</span>
           </a>
         {% endif %}</td>
       </tr>

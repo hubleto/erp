@@ -5,7 +5,8 @@
         "Nick": "Nick",
         "Email": "E-mail",
         "Language": "Jazyk",
-        "Default company": "Výchozí společnost"
+        "Default company": "Výchozí společnost",
+        "Apps": ""
     },
     "Models\\UserRole": {
         "Role": "Role",
@@ -64,5 +65,61 @@
         "Currency": "Měna",
         "Code": "Kód",
         "Symbol": "Symbol"
+    },
+    "Models\\Team": {
+        "Team name": "",
+        "Team color": "",
+        "Description": "",
+        "Manager": ""
+    },
+    "Models\\Setting": {
+        "Key": "",
+        "Value": "",
+        "Only for user": ""
+    },
+    "Controllers\\MyAccount": {
+        "Settings": "",
+        "Company": ""
+    },
+    "Components\\FormUser": {
+        "About the user": ""
+    },
+    "Controllers\\Dashboard": {
+        "Settings": "",
+        "Most common settings": "",
+        "Change theme": "",
+        "Manage users": "",
+        "Manage apps": "",
+        "All settings": ""
+    },
+    "Models\\InvoiceProfile": {
+        "Name": "",
+        "Phone": "",
+        "E-mail": "",
+        "WWW": "",
+        "Customer ID": "",
+        "Tax ID": "",
+        "VAT ID": "",
+        "Street, line 1": "",
+        "Street, line 2": "",
+        "ZIP": "",
+        "City": "",
+        "Country": "",
+        "Bank name": "",
+        "Account number": "",
+        "Account IBAN": "",
+        "SWIFT": "",
+        "Numbering pattern": ""
+    },
+    "Models\\Permission": {
+        "Permission": ""
+    },
+    "Models\\TeamMember": {
+        "Team": "",
+        "Member": ""
+    },
+    "Controllers\\UserRoles": {
+        "Settings": "",
+        "User Roles": ""
     }
 }

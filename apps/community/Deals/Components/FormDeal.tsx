@@ -278,6 +278,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             {this.inputWrapper('id_currency')}
           </div>
           {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+          {this.inputWrapper('customer_order_number', {readonly: R.is_archived})}
           {this.inputWrapper('is_closed', {readonly: R.is_archived})}
         </>;
 

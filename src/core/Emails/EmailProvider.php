@@ -55,6 +55,7 @@ class EmailProvider
       $mail->Password = $this->smtpPassword;
       $mail->SMTPSecure = $this->smtpEncryption;
       $mail->Port = $this->smtpPort;
+      $mail->CharSet = "UTF-8";
 
       $mail->setFrom($this->smtpUsername, $fromName);
 

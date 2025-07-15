@@ -79,6 +79,7 @@ class Deal extends \HubletoMain\Core\Models\Model
       'date_expected_close' => (new Date($this, $this->translate('Expected close date')))->setRequired(),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setDefaultValue($this->main->auth->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setDefaultValue($this->main->auth->getUserId()),
+      'customer_order_number' => (new Varchar($this, $this->translate('Customer\' order number')))->setProperty('defaultVisibility', true),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setDefaultValue(1),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setDefaultValue(null),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),

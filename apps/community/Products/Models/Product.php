@@ -31,7 +31,7 @@ class Product extends \HubletoMain\Core\Models\Model
   {
     return array_merge(parent::describeColumns(), [
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'id_product_group' => (new Lookup($this, $this->translate('Product Group'), Group::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_product_group' => (new Lookup($this, $this->translate('Product Group'), Group::class)),
       'type' => (new Integer($this, $this->translate('Product Type')))->setRequired()->setEnumValues(
         [$this::TYPE_PRODUCT => "Single Item", $this::TYPE_SERVICE => "Service"]
       ),

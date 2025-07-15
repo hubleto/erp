@@ -4,13 +4,15 @@ const fs = require('fs');
 
 function loadEntriesFromRepository(folder) {
   let entries = [];
-  fs.readdirSync(folder).forEach(function(app){
-    const stat = fs.statSync(folder + '/' + app);
-    const loaderEntry = folder + '/' + app + '/Loader';
-    if (stat && stat.isDirectory() && fs.existsSync(loaderEntry + '.tsx')) {
-      entries.push(loaderEntry);
-    }
-  });
+  if (fs.lstatSync(folder).isDirectory()) {
+    fs.readdirSync(folder).forEach(function(app){
+      const stat = fs.statSync(folder + '/' + app);
+      const loaderEntry = folder + '/' + app + '/Loader';
+      if (stat && stat.isDirectory() && fs.existsSync(loaderEntry + '.tsx')) {
+        entries.push(loaderEntry);
+      }
+    });
+  }
   return entries;
 }
 

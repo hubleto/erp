@@ -18,8 +18,8 @@ class DealActivity extends \HubletoApp\Community\Calendar\Models\Activity
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL')->setRequired(),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setFkOnUpdate('CASCADE')->setFkOnDelete('SET NULL'),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setRequired(),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
     ]);
   }
 

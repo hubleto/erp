@@ -16,7 +16,12 @@ class Settings extends \HubletoMain\Core\Controllers\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-
+    $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
+    foreach ($calendarManager->getCalendars() as $source => $calendar) {
+      $calendarConfig = $calendar->calendarConfig;
+      $calendarConfig['color'] = $calendar->getColor();
+      $this->viewParams["calendarConfigs"][$source] = $calendarConfig;
+    }
     $this->setView('@HubletoApp:Community:Calendar/Settings.twig');
   }
 

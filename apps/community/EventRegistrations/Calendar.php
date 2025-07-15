@@ -11,7 +11,7 @@ class Calendar extends \HubletoApp\Community\Calendar\Calendar {
     "formComponent" => "EventRegistrationsFormActivity"
   ];
 
-  public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
+  public function loadEvents(string $dateStart, string $dateEnd, array $filter = [], $idUser = 0): array
   {
     // Implement your functionality for loading calendar events.
 

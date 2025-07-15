@@ -65,6 +65,7 @@ export default class HubletoTable<P, S> extends Table<HubletoTableProps, Hubleto
                 <div className="list">
                   {Object.keys(filter.options).map((key: any) => {
                     return <button
+                      key={key}
                       className={"btn btn-small btn-list-item " + (filterValue == key ? "btn-primary" : "btn-transparent")}
                       onClick={() => {
                         let defaultFilters = this.state.defaultFilters ?? {};

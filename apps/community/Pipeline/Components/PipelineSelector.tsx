@@ -107,28 +107,25 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
               steps.map((s, i) => {
                 if (stepBtnClass == "btn-primary") stepBtnClass = "btn-transparent";
                 else if (s.id == this.state.idPipelineStep) stepBtnClass = "btn-primary";
-                return <>
-                  <button
-                    key={i}
-                    onClick={() => this.onPipelineStepChange(s.id, s)}
-                    className={`btn ${stepBtnClass} border-none rounded-none`}
+              return <button
+                  key={i}
+                  onClick={() => this.onPipelineStepChange(s.id, s)}
+                  className={`btn ${stepBtnClass} border-none rounded-none`}
+                >
+                  <div
+                    className="icon p-0"
+                    style={{
+                      borderTop: '1em solid transparent',
+                      borderBottom: '1em solid transparent',
+                      borderLeft: '1em solid ' + s.color
+                    }}
                   >
-                    <div
-                      className="icon p-0"
-                      style={{
-                        borderTop: '1em solid transparent',
-                        borderBottom: '1em solid transparent',
-                        borderLeft: '1em solid ' + s.color
-                      }}
-                    >
-                    </div>
-                    <div className='text'>
-                      {s.name}
-                      {s.probability ? <small className='whitespace-nowrap ml-2'>({s.probability} %)</small> : null}
-                    </div>
-                  </button>
-                  {/* {i+1 == steps.length ? null : <i className='fas fa-angles-right self-center text-gray-800 text-xs'></i>} */}
-                </>;
+                  </div>
+                  <div className='text'>
+                    {s.name}
+                    {s.probability ? <small className='whitespace-nowrap ml-2'>({s.probability} %)</small> : null}
+                  </div>
+                </button>;
               })
               : <p className='w-full text-center'>Pipeline has no steps.</p>
             }

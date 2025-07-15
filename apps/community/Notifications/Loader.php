@@ -22,6 +22,8 @@ class Loader extends \HubletoMain\Core\App
       '/^notifications\/api\/mark-as-read\/?$/' => Controllers\Api\MarkAsRead::class,
       '/^notifications\/api\/mark-as-unread\/?$/' => Controllers\Api\MarkAsUnread::class,
     ]);
+
+    $this->main->crons->addCron(Crons\DailyDigest::class);
   }
 
   public function installTables(int $round): void
@@ -70,5 +72,34 @@ class Loader extends \HubletoMain\Core\App
     }
 
     return $notification;
+  }
+
+  public function getDailyDigestForUser(array $user) {
+    $dailyDigest = [];
+    $digestHtml = '';
+
+    $apps = $this->main->apps->getEnabledApps();
+    foreach ($apps as $appNamespace => $app) {
+      $dailyDigestClass = '\\' . $appNamespace . '\\Controllers\\Api\\DailyDigest';
+      if (class_exists($dailyDigestClass)) {
+        $dailyDigestController = new $dailyDigestClass($this->main);
+        $dailyDigestController->idUser = $user['id'] ?? 0;
+        $dailyDigest[$appNamespace] = $dailyDigestController->response();
+      }
+    }
+
+    if (count($dailyDigest) > 0) {
+      $digestHtml = '<h1>Hi ' . ($user['nick'] ?? ($user['first_name'] ?? '')) . ', here is your daily digest</h1>';
+      foreach ($dailyDigest as $appNamespace => $items) {
+        $digestHtml .= "<h2>{$appNamespace}</h2>";
+        foreach ($items as $item) {
+          $digestHtml .= "<div><a href='{$this->main->config->getAsString('rootUrl')}/{$item['url']}'>"
+           . htmlspecialchars($item['text'])
+          . "</a></div>";
+        }
+      }
+    }
+
+    return $digestHtml;
   }
 }

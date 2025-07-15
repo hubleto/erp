@@ -58,6 +58,7 @@ class Task extends \HubletoMain\Core\Models\Model
       'is_milestone' => (new Boolean($this, $this->translate('Is milestone')))->setDefaultValue(false),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
       // 'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setProperty('defaultVisibility', true),
+      'shared_folder' => (new Varchar($this, "Shared folder (online document storage)"))->setReactComponent('InputHyperlink'),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
 

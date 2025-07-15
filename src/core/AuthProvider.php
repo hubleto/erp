@@ -32,6 +32,15 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
     return false;
   }
 
+  public function getActiveUsers(): array
+  {
+    return $this->createUserModel()->record
+      ->where($this->activeAttribute, '<>', 0)
+      ->get()
+      ->toArray()
+    ;
+  }
+
   public function findUsersByLogin(string $login): array
   {
     return $this->createUserModel()->record

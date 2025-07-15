@@ -30,6 +30,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
       })
     ;
 
+    if (isset($filter['idUser']) && $filter['idUser'] > 0) $query = $query->where($mActivity->table . '.id_owner', $filter['idUser']);
     if (isset($filter['completed'])) $query = $query->where('completed', $filter['completed']);
     if (isset($filter['all_day'])) $query = $query->where('all_day', $filter['all_day']);
     if (isset($filter['fOwnership'])) {

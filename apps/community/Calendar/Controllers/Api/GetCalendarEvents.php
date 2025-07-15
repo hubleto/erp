@@ -51,11 +51,20 @@ class GetCalendarEvents extends \HubletoMain\Core\Controllers\Controller {
         return $calendar->loadEvents($this->dateStart, $this->dateEnd, $filter);
       }
     } else {
-      return $this->loadEventsFromMultipleCalendars($this->dateStart, $this->dateEnd, $filter, $this->main->urlParamAsArray('fSources'));
+      return $this->loadEventsFromMultipleCalendars(
+        $this->dateStart,
+        $this->dateEnd,
+        $filter,
+        $this->main->urlParamAsArray('fSources')
+      );
     }
   }
 
-  public function loadEventsFromMultipleCalendars(string $dateStart, string $dateEnd, array $filter = [], array|null $sources = null): array
+  public function loadEventsFromMultipleCalendars(
+    string $dateStart,
+    string $dateEnd,
+    array $filter = [],
+    array|null $sources = null): array
   {
 
     $events = [];

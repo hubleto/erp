@@ -45,12 +45,8 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
               {this.inputWrapper('description')}
               {this.inputWrapper('id_developer')}
               {this.inputWrapper('id_tester')}
-              {this.inputWrapper('priority')}
+              {this.inputWrapper('shared_folder')}
               {this.inputWrapper('hours_estimation')}
-              {this.inputWrapper('duration_days')}
-              {this.inputWrapper('date_start')}
-              {this.inputWrapper('date_deadline')}
-              {this.inputWrapper('is_milestone')}
               {this.inputWrapper('is_closed')}
             </div>
             <div className='flex-1'>
@@ -66,6 +62,11 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                   }}
                 ></PipelineSelector>
               }
+              {this.inputWrapper('priority')}
+              {this.inputWrapper('duration_days')}
+              {this.inputWrapper('date_start')}
+              {this.inputWrapper('date_deadline')}
+              {this.inputWrapper('is_milestone')}
               {this.inputWrapper('notes')}
               {this.inputWrapper('date_created')}
               <div className="flex w-full gap-2">

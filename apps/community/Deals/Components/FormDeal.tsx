@@ -395,17 +395,15 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           </div>
           {this.divider(this.translate('Most recent activities'))}
           {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
-            return <>
-              <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
-                onClick={() => this.setState({showIdActivity: item.id} as FormDealState)}
-              >
-                <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
-                <span className="text">
-                  {item.subject}
-                  {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
-                </span>
-              </button>
-            </>
+            return <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
+              onClick={() => this.setState({showIdActivity: item.id} as FormDealState)}
+            >
+              <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
+              <span className="text">
+                {item.subject}
+                {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
+              </span>
+            </button>;
           })}</div> : null}
         </div>;
 

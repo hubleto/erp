@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ appNamespace }}\Models;
+namespace HubletoApp\Community\Discussions\Models;
 
 use \ADIOS\Core\Db\Column\Boolean;
 use \ADIOS\Core\Db\Column\Color;
@@ -18,48 +18,26 @@ use \ADIOS\Core\Db\Column\Varchar;
 
 use \HubletoApp\Community\Settings\Models\User;
 
-class {{ model }} extends \HubletoMain\Core\Models\Model
+class Member extends \HubletoMain\Core\Models\Model
 {
 
-  const ENUM_ONE = 1;
-  const ENUM_TWO = 2;
-  const ENUM_THREE = 3;
-
-  const INTEGER_ENUM_VALUES = [
-    self::ENUM_ONE => 'One',
-    self::ENUM_TWO => 'Two',
-    self::ENUM_THREE => 'Three',
-  ];
-
-  public string $table = '{{ sqlTable }}';
-  public string $recordManagerClass = RecordManagers\{{ model }}::class;
-  public ?string $lookupSqlValue = 'concat("{{ model }} #", {{ '{%' }}TABLE{{ '%}' }}.id)';
-  public ?string $lookupUrlDetail = '{{ modelPluralFormKebab }}/{{ '{%' }}ID{{ '%}' }}';
+  public string $table = 'discussions_members';
+  public string $recordManagerClass = RecordManagers\Member::class;
+  public ?string $lookupSqlValue = 'concat("Member #", {%TABLE%}.id)';
+  public ?string $lookupUrlDetail = 'members/{%ID%}';
 
   public array $relations = [ 
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    'DISCUSSION' => [ self::BELONGS_TO, Discussion::class, 'id_discussion', 'id' ],
+    'MEMBER' => [ self::BELONGS_TO, User::class, 'id_member', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)
-        // ->setReadonly()
-        // ->setRequired()
-        ->setCssClass('text-2xl text-primary')
-      ,
-      'text_example' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true)
-        // ->setReadonly()
-        // ->setRequired()
-        ->setCssClass('text-2xl text-primary')
-      ,
-      'decimal_example' => (new Decimal($this, $this->translate('Number')))->setProperty('defaultVisibility', true)
-        // ->setReadonly()
-        // ->setRequired()
-        ->setCssClass('text-2xl text-primary')
-        ->setDecimals(4)
-      // ,
+      'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setProperty('defaultVisibility', true)->setRequired(),
+      'id_member' => (new Lookup($this, $this->translate('Member'), User::class))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->main->auth->getUserId()),
+      'permissions' => (new Json($this, $this->translate('Permissions')))->setProperty('defaultVisibility', true),
+
       // 'date_example' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
       //   ->setDefaultValue(date("Y-m-d"))
       // ,
@@ -90,7 +68,7 @@ class {{ model }} extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add {{ model }}';
+    $description->ui['addButtonText'] = 'Add Member';
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;

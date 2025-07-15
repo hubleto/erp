@@ -1,0 +1,10 @@
+namespace: HubletoApp\Community\Discussions
+sidebarGroup: communication
+rootUrlSlug: discussions
+name: Discussions
+icon: fas fa-list-check
+author:
+  name: "WAI.blue"
+  nick: "wai.blue"
+highlight: Discussion management app
+created: 2025-06-25 18:55:11

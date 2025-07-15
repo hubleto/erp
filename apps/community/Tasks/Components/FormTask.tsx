@@ -9,7 +9,7 @@ interface FormTaskState extends HubletoFormState { }
 export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Tasks/Models/Team',
+    model: 'HubletoApp/Community/Tasks/Models/Task',
     tabs: {
       'default': { title: 'Task' },
       // 'worksheet': { title: 'Worksheet' },

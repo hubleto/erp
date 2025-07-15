@@ -20,7 +20,6 @@ export default class CalendarShareTable extends Component<CalendarShareTableProp
   }
 
   shareCalendar(calendar: any) {
-    console.log(calendar);
     request.post(
       'calendar/api/share-calendar',
       {

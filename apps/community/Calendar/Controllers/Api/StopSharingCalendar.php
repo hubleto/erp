@@ -6,7 +6,7 @@ namespace HubletoApp\Community\Calendar\Controllers\Api;
 use ADIOS\Core\Controller;
 use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
-class ShareCalendar extends \HubletoMain\Core\Controllers\Controller
+class StopSharingCalendar extends \HubletoMain\Core\Controllers\Controller
 {
 
   public int $returnType = Controller::RETURN_TYPE_JSON;
@@ -20,13 +20,9 @@ class ShareCalendar extends \HubletoMain\Core\Controllers\Controller
     $calendar = $this->app->getUrlParams()['calendar'];
     $mSharedCalendar = new SharedCalendar();
 
-    SharedCalendar::create([
-      'calendar' => $calendar,
-      'share_key' => bin2hex(random_bytes(10)),
-      'id_owner' => $this->app->auth->getUserId(),
-    ]);
+    $mSharedCalendar->where('calendar', $calendar)->delete();
 
-    return $mSharedCalendar->get(['calendar', 'share_key'])->toArray();
+    return $mSharedCalendar->get('calendar', 'share_key')->toArray();
   }
 
 }

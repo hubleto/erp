@@ -3,6 +3,7 @@
 namespace HubletoApp\Community\Calendar;
 
 use HubletoApp\Community\Calendar\Models\Activity;
+use HubletoApp\Community\Calendar\Models\SharedCalendar;
 
 class Loader extends \HubletoMain\Core\App
 {
@@ -23,11 +24,12 @@ class Loader extends \HubletoMain\Core\App
 
     $this->main->router->httpGet([
       '/^calendar\/?$/' => Controllers\Calendar::class,
-      '/^calendar\/ics\/?$/' => Controllers\IcsCalendar::class,
+      '/^calendar(\/(?<key>\w+))?\/ics\/?$/' => Controllers\IcsCalendar::class,
       '/^calendar\/settings\/?$/' => Controllers\Settings::class,
       '/^calendar\/boards\/reminders\/?$/' => Controllers\Boards\Reminders::class,
       '/^calendar\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^calendar\/api\/share-calendar\/?$/' => Controllers\Api\ShareCalendar::class,
+      '/^calendar\/api\/stop-sharing-calendar\/?$/' => Controllers\Api\StopSharingCalendar::class,
     ]);
 
     $this->main->apps->community('Help')?->addContextHelpUrls('/^calendar\/?$/', [
@@ -53,6 +55,8 @@ class Loader extends \HubletoMain\Core\App
     if ($round == 1) {
       $mActivity = new Activity($this->main);
       $mActivity->install();
+      $mSharedCalendar = new SharedCalendar($this->main);
+      $mSharedCalendar->install();
     }
   }
 

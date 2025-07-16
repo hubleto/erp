@@ -2,6 +2,8 @@
 
 namespace HubletoApp\Community\Calendar\Controllers;
 
+use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
+
 class Settings extends \HubletoMain\Core\Controllers\Controller
 {
 
@@ -17,9 +19,12 @@ class Settings extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
+    $mSharedCalendar = new SharedCalendar();
     foreach ($calendarManager->getCalendars() as $source => $calendar) {
       $calendarConfig = $calendar->calendarConfig;
       $calendarConfig['color'] = $calendar->getColor();
+      $calendarConfig['shared'] = $mSharedCalendar->where('calendar', $source)->exists();
+      $calendarConfig['share_key'] = $mSharedCalendar->where('calendar', $source)->first()?->share_key;
       $this->viewParams["calendarConfigs"][$source] = $calendarConfig;
     }
     $this->setView('@HubletoApp:Community:Calendar/Settings.twig');

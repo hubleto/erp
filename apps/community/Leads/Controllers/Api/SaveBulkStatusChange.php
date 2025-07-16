@@ -5,10 +5,8 @@ namespace HubletoApp\Community\Leads\Controllers\Api;
 use Exception;
 use HubletoApp\Community\Leads\Models\Lead;
 
-class SaveBulkStatusChange extends \HubletoMain\Core\Controllers\Controller
+class SaveBulkStatusChange extends \HubletoMain\Core\Controllers\ApiController
 {
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
 
   public function renderJson(): ?array
   {

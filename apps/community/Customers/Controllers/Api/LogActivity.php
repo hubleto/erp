@@ -5,10 +5,8 @@ namespace HubletoApp\Community\Customers\Controllers\Api;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Customers\Models\CustomerActivity;
 
-class LogActivity extends \HubletoMain\Core\Controllers\Controller
+class LogActivity extends \HubletoMain\Core\Controllers\ApiController
 {
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
 
   public function renderJson(): ?array
   {

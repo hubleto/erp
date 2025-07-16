@@ -60,6 +60,7 @@ class Loader extends \HubletoMain\Core\App
     $usageLogs = $mLog->record
       ->where('id_user', $this->main->auth->getUserId())
       ->where('datetime', '>=', date("Y-m-d", strtotime("-7 days")))
+      ->orderBy('datetime', 'desc')
       ->get()
       ?->toArray()
     ;

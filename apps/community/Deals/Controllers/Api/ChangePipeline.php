@@ -6,10 +6,8 @@ use Exception;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
-class ChangePipeline extends \HubletoMain\Core\Controllers\Controller
+class ChangePipeline extends \HubletoMain\Core\Controllers\ApiController
 {
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
 
   public function renderJson(): ?array
   {

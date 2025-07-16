@@ -2,13 +2,9 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Api;
 
-class GetCalendarEvents extends \HubletoMain\Core\Controllers\Controller {
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-
+class GetCalendarEvents extends \HubletoMain\Core\Controllers\ApiController {
   public string $dateStart = '';
   public string $dateEnd = '';
-
-  public bool $permittedForAllUsers = true;
 
   public \HubletoApp\Community\Calendar\CalendarManager $calendarManager;
   

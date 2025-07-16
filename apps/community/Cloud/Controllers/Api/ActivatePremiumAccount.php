@@ -2,10 +2,8 @@
 
 namespace HubletoApp\Community\Cloud\Controllers\Api;
 
-class ActivatePremiumAccount extends \HubletoMain\Core\Controllers\Controller {
-
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
+class ActivatePremiumAccount extends \HubletoMain\Core\Controllers\ApiController
+{
 
   public function renderJson(): ?array
   {

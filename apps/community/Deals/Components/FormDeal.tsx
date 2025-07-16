@@ -44,7 +44,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       'default': { title: 'Deal' },
       'items': { title: 'Items' },
       'calendar': { title: 'Calendar' },
-      'tasks': { title: 'Tasks' },
       'documents': { title: 'Documents' },
       'history': { title: 'History' },
     }
@@ -657,25 +656,25 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         </>;
       break;
 
-      case 'tasks':
-        try {
-          return <>
-            {this.state.id < 0 ?
-                <div className="badge badge-info">{this.translate("First create the project, then you will be prompted to add tasks.")}</div>
-              :
-                <TableTasks
-                  uid={this.props.uid + "_table_tasks"}
-                  tag={"DealTasks"}
-                  parentForm={this}
-                  externalModel='HubletoApp\Community\Deals\Models\Deal'
-                  externalId={R.id}
-                />
-            }
-          </>;
-        } catch (ex) {
-          return <div className="alert alert-error">{this.translate("Failed to display tasks. Check if you have 'Tasks' app installed.")}</div>
-        }
-      break;
+      // case 'tasks':
+      //   try {
+      //     return <>
+      //       {this.state.id < 0 ?
+      //           <div className="badge badge-info">{this.translate("First create the deal, then you will be prompted to add tasks.")}</div>
+      //         :
+      //           <TableTasks
+      //             uid={this.props.uid + "_table_tasks"}
+      //             tag={"DealTasks"}
+      //             parentForm={this}
+      //             externalModel='HubletoApp\Community\Deals\Models\Deal'
+      //             externalId={R.id}
+      //           />
+      //       }
+      //     </>;
+      //   } catch (ex) {
+      //     return <div className="alert alert-error">{this.translate("Failed to display tasks. Check if you have 'Tasks' app installed.")}</div>
+      //   }
+      // break;
 
       case 'documents':
         return <>

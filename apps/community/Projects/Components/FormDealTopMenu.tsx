@@ -10,6 +10,7 @@ interface P {
 }
 
 interface S {
+  projects?: any,
   showProjects: boolean;
   showIdProject: number,
 }
@@ -26,6 +27,19 @@ export default class FormDealTopMenu extends TranslatedComponent<P, S> {
     super(props);
     this.refTableProjects = createRef();
     this.state = { showProjects: false, showIdProject: 0 };
+  }
+
+  componentDidMount() {
+    request.get(
+      'api/record/get-list',
+      {
+        model: 'HubletoApp\\Community\\Projects\\Models\\Project',
+        idDeal: this.props.form.state.record?.id,
+      },
+      (projects: any) => {
+        this.setState({projects: projects.data});
+      }
+    );
   }
 
   convertToProject(idDeal: number) {
@@ -79,7 +93,10 @@ export default class FormDealTopMenu extends TranslatedComponent<P, S> {
           onClick={() => { this.setState({showProjects: !this.state.showProjects}); }}
         >
           <span className="icon"><i className="fas fa-handshake"></i></span>
-          <span className="text">{this.translate('Projects')}</span>
+          <span className="text">
+            {this.translate('Projects')}
+            {this.state.projects ? ' (' + this.state.projects.length + ')' : null}
+          </span>
         </button>
         {this.state.showProjects ? <>
           <ModalSimple
@@ -107,24 +124,12 @@ export default class FormDealTopMenu extends TranslatedComponent<P, S> {
               idDeal={R.id}
               recordId={this.state.showIdProject}
               descriptionSource='both'
-              description={{permissions: {canCreate: false}}}
+              // description={{permissions: {canCreate: false}}}
             />
           </ModalSimple>
         </> : null}
       </>
     }
-
-    // return (R.PROJECT != null ?
-    //   <a className='btn btn-transparent' href={`${globalThis.main.config.rootUrl}/projects/${R.PROJECT.id}`}>
-    //     <span className='icon'><i className='fas fa-arrow-up-right-from-square'></i></span>
-    //     <span className='text'>{this.translate('Go to project')}</span>
-    //   </a>
-    //   :
-    //   <a className='btn btn-transparent' onClick={() => this.confirmConvertToProject(R.id)}>
-    //     <span className='icon'><i className='fas fa-rotate-right'></i></span>
-    //     <span className='text'>Convert to project</span>
-    //   </a>
-    // );
   }
 }
 

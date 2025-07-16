@@ -41,11 +41,16 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, F
           </div>
           {this.inputWrapper('description')}
           <div className="flex gap-2 flex-col md:flex-row">
-            <div className="w-full">{this.inputWrapper('duration')}</div>
-            <div className="w-full">{this.inputWrapper('id_type')}</div>
+            <div className="w-full">
+              {this.inputWrapper('date_worked')}
+              {this.inputWrapper('duration')}
+            </div>
+            <div className="w-full">
+              {this.inputWrapper('id_type')}
+              {this.inputWrapper('is_approved')}
+              {this.inputWrapper('datetime_created')}
+            </div>
           </div>
-          {this.inputWrapper('is_approved')}
-          {this.inputWrapper('datetime_created')}
         </>;
       break;
     }

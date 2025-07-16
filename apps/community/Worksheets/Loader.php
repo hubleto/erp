@@ -15,8 +15,11 @@ class Loader extends \HubletoMain\Core\App
     parent::init();
 
     $this->main->router->httpGet([
-      '/^worksheets\/?$/' => Controllers\Activities::class,
+      '/^worksheets\/?$/' => Controllers\Home::class,
+      '/^worksheets\/activities\/?$/' => Controllers\Activities::class,
       '/^worksheets\/activity-types\/?$/' => Controllers\ActivityTypes::class,
+
+      '/^worksheets\/api\/daily-activity-chart\/?$/' => Controllers\Api\DailyActivityChart::class,
     ]);
 
     $appMenu = $this->main->apps->community('Desktop')->appMenu;

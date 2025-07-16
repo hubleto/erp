@@ -1,19 +1,31 @@
 import React, { Component } from "react";
 import Form, { FormDescription, FormProps, FormState } from "adios/Form";
-import { Bar, Doughnut, Pie, Line } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarController, BarElement, CategoryScale, LinearScale, PointElement, LineElement, LineController } from "chart.js";
+import { Bar, Doughnut, Pie, Line, Scatter } from "react-chartjs-2";
+import 'chartjs-adapter-date-fns';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Filler, BarController, BarElement, CategoryScale, LinearScale, PointElement, LineElement, LineController, TimeScale } from "chart.js";
+import request from "adios/Request";
+import { ProgressBar } from 'primereact/progressbar';
 
-ChartJS.register(ArcElement, Tooltip, Legend, BarController, BarElement, CategoryScale, LinearScale, PointElement, LineElement, LineController);
+ChartJS.register(ArcElement, Tooltip, Legend, Filler, BarController, BarElement, CategoryScale, LinearScale, TimeScale, PointElement, LineElement, LineController);
 
-export type HubletoChartType = 'bar' | 'doughnut' | 'pie' | 'goals';
+export type HubletoChartType = 'bar' | 'doughnut' | 'pie' | 'goals' | 'scatter' | 'line';
 
 export interface HubletoChartProps {
   type: HubletoChartType,
-  data: any,
+  data?: any,
   legend?: any,
+  options?: any,
+  async?: boolean,
+  endpoint?: string,
+  endpointParams?: any,
 }
 
-export interface HubletoChartState {}
+export interface HubletoChartState {
+  data?: any,
+  legend?: any,
+  options?: any,
+  initialized: boolean,
+}
 
 export default class HubletoChart<P, S> extends Component<HubletoChartProps,HubletoChartState> {
   props: HubletoChartProps;
@@ -21,22 +33,59 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
 
   constructor(props: HubletoChartProps) {
     super(props);
+
+    this.state = {
+      data: this.props.data,
+      legend: this.props.legend,
+      options: this.props.options,
+      initialized: false,
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.async) this.loadChart();
+  }
+
+  loadChart() {
+    request.get(
+      this.props.endpoint,
+      this.props.endpointParams ?? {},
+      (chart: any) => {
+        try {
+          this.setState({
+            data: chart.data,
+            legend: chart.legend,
+            options: chart.options,
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    );
   }
 
   render(): JSX.Element {
+    if (!this.state.data) {
+      return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
+    }
+
+    const data = this.state.data;
+
     let labels: any = [];
     let dataset: any = {};
 
-    labels = this.props.data ? [...this.props.data.labels] : [];
+    labels = this.state.data.labels ?? [];
 
-    dataset.data = this.props.data != null ? [...this.props.data.values] : [];
-    if (this.props.data.colors) dataset.backgroundColor = this.props.data.colors;
-
-    // console.log('hubletoChart data', this.props.data);
-    // console.log('hubletoChart labels', labels);
-    // console.log('hubletoChart dataset', dataset);
+    dataset.data = this.state.data.values ?? [];
+    if (data.colors) dataset.backgroundColor = data.colors;
 
     switch (this.props.type) {
+      case "scatter":
+        return <Scatter options={this.state.options} data={this.state.data} />;
+      break;
+      case "line":
+        return <Line options={this.state.options} data={this.state.data} />;
+      break;
       case "bar":
         return (
           <Bar
@@ -44,14 +93,8 @@ export default class HubletoChart<P, S> extends Component<HubletoChartProps,Hubl
             height={0}
             options={{
               scales: {
-                x: {
-                  ticks: {
-                    display: false,
-                  },
-                },
-                y: {
-                  beginAtZero: true,
-                },
+                x: { ticks: { display: false } },
+                y: { beginAtZero: true },
               },
             }}
             data={{

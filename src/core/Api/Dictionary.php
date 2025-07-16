@@ -4,10 +4,8 @@ namespace HubletoMain\Core\Api;
 
 use \ADIOS\Core\Helper;
 
-class Dictionary extends \ADIOS\Core\Controller
+class Dictionary extends \HubletoMain\Core\Controllers\ApiController
 {
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
 
   public \HubletoMain $main;
 

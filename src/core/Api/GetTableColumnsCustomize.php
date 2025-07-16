@@ -4,10 +4,8 @@ namespace HubletoMain\Core\Api;
 
 use Exception;
 
-class GetTableColumnsCustomize extends \HubletoMain\Core\Controllers\Controller
+class GetTableColumnsCustomize extends \HubletoMain\Core\Controllers\ApiController
 {
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
 
   public function renderJson(): ?array
   {

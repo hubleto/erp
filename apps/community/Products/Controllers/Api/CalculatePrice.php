@@ -2,10 +2,8 @@
 
 namespace HubletoApp\Community\Products\Controllers\Api;
 
-class CalculatePrice extends \HubletoMain\Core\Controllers\Controller {
-
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
+class CalculatePrice extends \HubletoMain\Core\Controllers\ApiController
+{
 
   // SINGLE PRODUCT FUNCTIONS
   public function calculateFullPrice(float $unitPrice, float $amount): float {

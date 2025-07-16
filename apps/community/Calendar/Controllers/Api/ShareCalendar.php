@@ -6,10 +6,8 @@ namespace HubletoApp\Community\Calendar\Controllers\Api;
 use ADIOS\Core\Controller;
 use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
-class ShareCalendar extends \HubletoMain\Core\Controllers\Controller
+class ShareCalendar extends \HubletoMain\Core\Controllers\ApiController
 {
-
-  public int $returnType = Controller::RETURN_TYPE_JSON;
 
   public function renderJson(): ?array
   {

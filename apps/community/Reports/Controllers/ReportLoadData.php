@@ -2,9 +2,7 @@
 
 namespace HubletoApp\Community\Reports\Controllers;
 
-class ReportLoadData extends \HubletoMain\Core\Controllers\Controller {
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
+class ReportLoadData extends \HubletoMain\Core\Controllers\ApiController {
 
   public function renderJson(): array
   {

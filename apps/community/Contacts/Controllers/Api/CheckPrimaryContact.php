@@ -6,9 +6,8 @@ use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Contacts\Models\ContactTag;
 use HubletoApp\Community\Contacts\Models\Tag;
 
-class CheckPrimaryContact extends \HubletoMain\Core\Controllers\Controller {
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
+class CheckPrimaryContact extends \HubletoMain\Core\Controllers\ApiController
+{
 
   public function renderJson(): ?array
   {

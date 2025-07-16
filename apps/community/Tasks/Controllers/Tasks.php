@@ -5,16 +5,6 @@ namespace HubletoApp\Community\Tasks\Controllers;
 class Tasks extends \HubletoMain\Core\Controllers\Controller
 {
 
-  /* uncomment this if you want to return JSON string
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
-
-  public function renderJson(): array
-  {
-    return [];
-  }
-  */
-
   public function prepareView(): void
   {
     parent::prepareView();

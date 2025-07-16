@@ -2,10 +2,8 @@
 
 namespace HubletoApp\Community\Documents\Controllers\Api;
 
-class GetFolderContent extends \HubletoMain\Core\Controllers\Controller
+class GetFolderContent extends \HubletoMain\Core\Controllers\ApiController
 {
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
 
   public function renderJson(): ?array
   {

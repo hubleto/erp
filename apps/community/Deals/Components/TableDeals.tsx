@@ -58,7 +58,12 @@ export default class TableDeals extends HubletoTable<TableDealsProps, TableDeals
     if (columnName == "title") {
       return <>
         {super.renderCell(columnName, column, data, options)}
-        {data['note'] ? <div className="badge badge-extra-small badge-warning block whitespace-pre"><i className="fas fa-note-sticky mr-2"></i>{data['note']}</div> : null}
+        {data['note'] ?
+          <div
+            className="badge badge-extra-small badge-warning block whitespace-pre truncate"
+            style={{maxHeight: '2.7em', maxWidth: '20em', overflow: 'hidden'}}
+          ><i className="fas fa-note-sticky mr-2"></i>{data['note']}</div>
+        : null}
       </>;
     } else {
       return super.renderCell(columnName, column, data, options);

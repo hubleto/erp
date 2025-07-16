@@ -2,7 +2,8 @@
 
 namespace HubletoApp\Community\Cloud\Controllers\Api;
 
-class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
+class PayMonthly extends \HubletoMain\Core\Controllers\ApiController
+{
 
   const PAYMENT_SUCCESS = 1;
   const THIS_IS_NOT_PREMIUM_ACCOUNT = 2;
@@ -11,9 +12,6 @@ class PayMonthly extends \HubletoMain\Core\Controllers\Controller {
   const THIS_MONTH_ALREADY_PAID = 5;
 
   public bool $requiresUserAuthentication = false;
-
-  public int $returnType = \ADIOS\Core\Controller::RETURN_TYPE_JSON;
-  public bool $permittedForAllUsers = true;
 
   public function renderJson(): ?array
   {

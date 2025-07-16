@@ -1,0 +1,33 @@
+{
+    "manifest": {
+        "Dashboards": "Dashboards",
+        "Free dashboards app": "Kostenlose Dashboardsanwendung"
+    },
+    "root": {
+        "Dashboards": "Dashboards"
+    },
+    "Controllers\\Dashboards": {
+        "Dashboards": "Dashboards",
+        "Manage dashboards": "Dashboards verwalten"
+    },
+    "Models\\Dashboard": {
+        "Owner": "Eigentümer",
+        "Title": "Name",
+        "Slug": "Slug",
+        "Color": "Farbe",
+        "Is default": "Voreinstellung",
+        "Add dashboard": "Panel hinzufügen"
+    },
+    "Models\\Panel": {
+        "Dashboard": "Dashboard",
+        "Board": "Brett",
+        "Title": "Name",
+        "Configuration": "Konfiguration",
+        "-- Select board to be displayed in panel --": "Brett auswählen, die in dem Panel angezeigt wird",
+        "Add panel": "Panel hinzufügen"
+    },
+    "Controllers\\Settings": {
+        "Dashboards": "Dashboards",
+        "Settings": "Einstellungen"
+    }
+}

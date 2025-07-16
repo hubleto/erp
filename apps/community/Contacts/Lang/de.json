@@ -1,82 +1,13 @@
 {
-    "formCustomer": {
-        "Basic Information": "Über die Firma",
-        "Activities": "Aktivitäten",
-        "Leads": "Leads",
-        "Contact Persons": "Kontaktpersonen",
-        "Documents": "Dokumente",
-        "Customer Information": "Über die Firma",
-        "Deals": "Deals",
-        "Notes": "Notizen",
-        "Add contact": "Kontakt hinzufügen",
-        "Last name": "Nachname",
-        "First name": "Vorname",
-        "Main Contact": "Hauptkontakt"
-    },
-    "dashboard.home": {
-        "Welcome": "Willkommen",
-        "Upgrade to Premium and get exciting rewards.": "Upgrade auf Premium und tolle Prämien erhalten.",
-        "You are using free version of Hubleto. Certain features are unavailable.": "Sie verwenden die kostenlose Version von Hubleto. Manche Funktionen sind nicht verfügbar.",
-        "Upgrade to Premium": "Upgrade auf Premium"
-    },
-    "loader": {
-        "Customers": "Unternehmen",
-        "Contact Persons": "Kontaktpersonen"
-    },
-    "models.customer": {
-        "Add Customer": "Unternehmen hinzufügen",
-        "Name": "Name",
-        "Street Line 1": "Straße, erste Zeile",
-        "Street Line 2": "Straße, zweite Zeile",
-        "Region": "Region",
-        "City": "Stadt",
-        "Country": "Land",
-        "Postal Code": "PLZ",
-        "Customer ID": "Firmenkennung",
-        "Tax ID": "Steuer-IdNr.",
-        "VAT ID": "USt-IdNr.",
-        "Notes": "Notizen",
-        "Date Created": "Erstellt am",
-        "Active": "Aktiv",
-        "Assigned User": "Inhaber",
-        "Customers": "Unternehmen"
-    },
-    "models.person": {
-        "First name": "Vorname",
-        "Last name": "Nachname",
-        "Customer": "Firma",
-        "Main Contact": "Hauptkontakt",
-        "Notes": "Notizen",
-        "Active": "Aktiv",
-        "Date Created": "Erstellt am",
-        "Contact Persons": "Kontaktpersonen",
-        "Add Contact Person": "Kontaktperson hinzufügen",
-        "Emails": "E-Mails",
-        "Phone Numbers": "Telefonnummer"
-    },
-    "models.contact": {
-        "Person": "Person",
-        "Contact Category": "Kategorie",
-        "Type": "Typ",
-        "Email": "E-Mail",
-        "Phone Number": "Telefonnummer",
-        "Other": "Sonstiges",
-        "Value": "Wert"
-    },
-    "controllers.customers": {
-        "Customers": "Firmen"
-    },
-    "controllers.persons": {
-        "Customers": "Kunden",
-        "Contact Persons": "Kontaktpersonen"
-    },
     "manifest": {
         "Contacts": "Kontakte",
         "Default customer management and addressbook.": "Standard -Kundenmanagement und Adressbuch."
     },
     "root": {
         "Contact Categories": "Kontaktkategorien",
-        "Contact Tags": "Kontakt -Tags"
+        "Contact Tags": "Kontakt -Tags",
+        "Contacts": "Kontakte",
+        "Import contacts": "Kontakte importieren"
     },
     "Models\\Contact": {
         "Salutation": "Anrede",
@@ -94,7 +25,8 @@
         "Emails": "E -Mails",
         "Phone Numbers": "Telefonnummern",
         "Mr.": "Herr.",
-        "Mrs.": "Frau"
+        "Mrs.": "Frau",
+        "Valid": "Gültig"
     },
     "Models\\Value": {
         "Contact": "Kontakt",
@@ -104,7 +36,9 @@
         "Number": "Nummer",
         "URL": "URL",
         "Other": "Andere",
-        "Value": "Wert"
+        "Value": "Wert",
+        "Contacts": "Kontaktinformationen",
+        "Add Customer": "Kunde hinzufügen"
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
@@ -118,7 +52,8 @@
         "Color": "Farbe"
     },
     "Controllers\\Contacts": {
-        "Contacts": "Kontakte"
+        "Contacts": "Kontakte",
+        "Import contacts": "Kontakte importieren"
     },
     "Components\\FormContact": {
         "Contact": "Kontakt",
@@ -133,6 +68,42 @@
         "Add contact": "Kontakt hinzufügen",
         "Customer": "Kunde",
         "Tags": "Tags",
-        "Primary Contact": "Hauptkontakt"
+        "Primary Contact": "Hauptkontakt",
+        "Due to some changes the Primary Contact has to be checked again": "Aufgrund von Änderungen muss die primäre Kontaktperson erneut ausgewählt werden",
+    },
+    "Controllers\\Import": {
+        "Contacts": "Kontakte",
+        "Import": "Import",
+        "Check the import now": "Import überprüfen",
+        "Step 1: Prepare list of contacts": "Schritt 1: Kontaktliste vorbereiten",
+        "Contacts can be imported from a ": "Kontakte können von ",
+        " or ": " oder ",
+        " file. The file for import must comply with following rules": " Datei importiert werden. Die zu importierende Datei muss die folgenden Regeln einhalten:",
+        "The file can contain unlimited number of lines.": "Die Datei darf unendlich viele Zeilen enthalten.",
+        "Values in file must be separated by semicolon": "Die Werte in der Datei müssen durch ein Semikolon getrennt werden",
+        "First line of the file must be the header containig names of the columns.": "Die erste Zeile muss eine Kopfzeile sein, die die Namen der Spalten enthält.",
+        "Following lines contain ": "Die folgenden Zeilen enthalten ",
+        "persons": "Personen",
+        "First 3 columns must be ": "Erste 3 Zeilen müssen",
+        "First name": "Vorname",
+        "Middle name": "Zweiter Name",
+        " and ": " und ",
+        "Last name": "Nachname",
+        " or the ": " oder ",
+        "person": "Person sein.",
+        "Following columns contain contact information. Each column represents one contact information.": "Die folgenden Spalten enthalten Kontaktinformationen. Jede Spalte repräsentiert eine Kontaktinformation.",
+        "Each person can contain any number of contact information.": "Jede Person kann beliebige Anzahl an Kontaktinformationen enthalten.",
+        "The import automatically detects ": "Import erkennt automatisch ",
+        "emails": "E-Mails",
+        "phone numbers": "Telefonnummern",
+        "links": "Links",
+        "Example CSV file": "CSV-Datei Beispiel",
+        "You may also": "Sie können auch",
+        "Export your addressbook": "Adressbuch exportieren",
+        "modify it and re-import again": "es ändern oder erneut importieren",
+        "Step 2: Upload the file with contacts": "Schritt 2: Datei mit Kontakten hochladen",
+        "Step 3: Check the import": "Schritt 3: Überprüfen Sie den Import",
+        "Step 4: Run the import": "Schritt 4: Import starten",
+        "You will be able to run the import after its check": "Sie können den Import nach der Überprüfung starten"
     }
 }

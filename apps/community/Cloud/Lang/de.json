@@ -1,11 +1,7 @@
 {
-    "loader": {
-        "Cloud": "Cloud"
-    },
     "manifest": {
         "Cloud": "Cloud",
-        "...": "",
-        "Management of cloud Hubleto account.": "Verwaltung des Cloud -Hubleto -Kontos."
+        "Management of cloud Hubleto account.": "Verwaltung des Cloud-Hubleto-Kontos.",
     },
     "Models\\Log": {
         "Log datetime": "Protokolldatensätze",
@@ -68,6 +64,50 @@
         "Account UID": "Konto UID",
         "Variable symbol for payments": "Variabler Symbol für Zahlungen",
         "Price is calculated based on maximum number of active users or paid apps during this month.": "Der Preis wird in diesem Monat auf der Grundlage der maximalen Anzahl aktiver Benutzer oder bezahlten Apps berechnet.",
-        "Deactivate subscription renewal": "Abonnementverlängerung deaktivieren"
+        "Deactivate subscription renewal": "Abonnementverlängerung deaktivieren",
+        "Your collaboration space": "Ihr Kollaborationsraum",
+        "welcome to Hubleto cloud.": "willkommen bei Hubleto Cloud",
+        "We are happy you decided to use Hubleto.": "Wir freuen uns, dass Sie sich für Hubleto entschieden haben.",
+        "Before you start, you should first read, understand and accept our": "Bevor Sie beginnen, sollten Sie unsere AGB lesen, verstehen und akzeptieren.",
+        "Terms of use": "Allgemeine Geschäftsbedingungen",
+        "and": "und",
+        "Privacy policy": "Datenschutzerklärung",
+        "Therefore, we kindly ask you to go through these documents and appoint your consent": "Daher bitten wir Sie höflich, diese Dokumente durchzulesen und Ihre Einwilligung zu erteilen.",
+        "by ticking the checkbox below.": "durch das Ankreuzen des Kästchens unten.",
+        "I have read, undestrood and agree to the": "Ich habe gelesen, verstanden und stimme den",
+        "of Hubleto cloud": "von Hubleto Cloud zu",
+        "Continue to the dashboard": "Zum Dashboard fortfahren",
+        "Automatic subscription renewal is deactivated": "Automatische Erneuerung des Abonnements ist deaktiviert",
+        "Access to your Premium account will be blocked next month.": "Zugang zu Ihrem Premium-Konto wird nächsten Monat gesperrt.",
+        "Activate subscription renewal again": "Abonnementverlängerung wieder aktivieren"
+    },
+    "Models\\BillingAccount": {
+        "Name": "Name",
+        "Phone": "Handynummer",
+        "E-mail": "E-mail",
+        "Tax ID": "Unternehmensnummer",
+        "VAT ID": "USt-IdNr.",
+        "Street, line 1": "Straße und Hausnummer",
+        "Street, line 2": "Adresszusatz",
+        "ZIP": "PLZ",
+        "City": "Stadt",
+        "Country": "Land",
+        "Is active": "ist aktiv",
+        "Created": "Erstellt am"
+    },
+    "Controllers\\Log": {
+        "Usage log": "Nutzungsprotokoll",
+        "Datetime": "Datum und Zeit",
+        "Active users": "Aktive Nutzer",
+        "Paid apps": "Kostenpflichtige Apps"
+    },
+    "Controllers\\PaymentsAndInvoices": {
+        "Payments and invoices": "Zahlungen und Rechnungen",
+        "Charged": "Abgerechnet",
+        "UUID": "UUID",
+        "Type": "Typ",
+        "Amount": "Preis",
+        "Details": "Details",
+        "Invoice": "Rechnung"
     }
 }

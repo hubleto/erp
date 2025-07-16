@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Cloud": "Cloud",
-        "Management of cloud Hubleto account.": "Správa účtu Cloud Hublesto."
+        "Management of cloud Hubleto account.": "Správa účtu Cloud Hubleto."
     },
     "Models\\Log": {
         "Log datetime": "Zaznemenat datum a čas",

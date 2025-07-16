@@ -1,9 +1,10 @@
 {
+    "loader": {
+        "Billing": "Abrechnung",
+        "Billing Accounts": "Abrechnungskonten"
+    },
     "controllers.billingAccounts": {
         "Customers": "Kunden",
-        "Billing Accounts": "Abrechnungskontos"
-    },
-    "loader": {
-        "Billing": ""
+        "Billing Accounts": "Abrechnungskonten"
     }
 }

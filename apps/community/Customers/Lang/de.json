@@ -1,99 +1,28 @@
 {
-    "formCustomer": {
-        "Basic Information": "Über die Firma",
-        "Activities": "Aktivitäten",
-        "Leads": "Leads",
-        "Contact Persons": "Kontaktpersonen",
-        "Documents": "Dokumente",
-        "Customer Information": "Über die Firma",
-        "Deals": "Deals",
-        "Notes": "Notizen",
-        "Add contact": "Kontakt hinzufügen",
-        "Last name": "Nachname",
-        "First name": "Vorname",
-        "Main Contact": "Hauptkontakt"
-    },
-    "dashboard.home": {
-        "Welcome": "Willkommen",
-        "Upgrade to Premium and get exciting rewards.": "Upgrade auf Premium und tolle Prämien erhalten.",
-        "You are using free version of Hubleto. Certain features are unavailable.": "Sie verwenden die kostenlose Version von Hubleto. Manche Funktionen sind nicht verfügbar.",
-        "Upgrade to Premium": "Upgrade auf Premium"
-    },
-    "loader": {
-        "Customers": "Unternehmen",
-        "Contact Persons": "Kontaktpersonen"
-    },
-    "models.customer": {
-        "Add Customer": "Unternehmen hinzufügen",
-        "Name": "Name",
-        "Street Line 1": "Straße, erste Zeile",
-        "Street Line 2": "Straße, zweite Zeile",
-        "Region": "Region",
-        "City": "Stadt",
-        "Country": "Land",
-        "Postal Code": "PLZ",
-        "Customer ID": "Firmenkennung",
-        "Tax ID": "Steuer-IdNr.",
-        "VAT ID": "USt-IdNr.",
-        "Notes": "Notizen",
-        "Date Created": "Erstellt am",
-        "Active": "Aktiv",
-        "Assigned User": "Inhaber",
-        "Customers": "Unternehmen"
-    },
-    "models.person": {
-        "First name": "Vorname",
-        "Last name": "Nachname",
-        "Customer": "Firma",
-        "Main Contact": "Hauptkontakt",
-        "Notes": "Notizen",
-        "Active": "Aktiv",
-        "Date Created": "Erstellt am",
-        "Contact Persons": "Kontaktpersonen",
-        "Add Contact Person": "Kontaktperson hinzufügen",
-        "Emails": "E-Mails",
-        "Phone Numbers": "Telefonnummer"
-    },
-    "models.contact": {
-        "Person": "Person",
-        "Contact Category": "Kategorie",
-        "Type": "Typ",
-        "Email": "E-Mail",
-        "Phone Number": "Telefonnummer",
-        "Other": "Sonstiges",
-        "Value": "Wert"
-    },
-    "controllers.customers": {
-        "Customers": "Firmen"
-    },
-    "controllers.persons": {
-        "Customers": "Kunden",
-        "Contact Persons": "Kontaktpersonen"
-    },
     "manifest": {
         "Customers": "Kunden",
         "Free customer management and addressbook.": "Kostenloses Kundenmanagement und Adressbuch."
     },
     "root": {
-        "Customer Tags": "Kunden -Tags"
+        "Customer Tags": "Kunden-Tags"
     },
     "Models\\CustomerActivity": {
         "Customer": "Kunde",
         "Contact": "Kontakt",
         "Activity type": "Aktivitätstyp",
         "Subject": "Thema",
-        "Start Date": "",
-        "Start Time": "",
-        "End Date": "",
-        "End Time": "",
-        "All day": "Den ganzen Tag",
-        "Completed": "Vollendet",
+        "Start Date": "Anfangsdatum",
+        "Start Time": "Anfangszeit",
+        "End Date": "Enddatum",
+        "End Time": "Endzeit",
+        "All day": "Ganztägig",
+        "Completed": "Abgeschlossen",
         "Created by": "Erstellt von",
         "Start date": "Startdatum",
         "Start time": "Startzeit",
         "End date": "Enddatum",
         "End time": "Endzeit",
-        "Meeting minutes (link)": "Besprechungsminuten (Link)"
+        "Meeting minutes (link)": "Meeting minutes (Link)"
     },
     "Controllers\\Customers": {
         "Customers": "Kunden"
@@ -108,14 +37,16 @@
         "Country": "Land",
         "VAT ID": "Mehrwertsteuer id",
         "Customer ID": "Kundenausweis",
-        "Tax ID": "Steuer -ID",
+        "Tax ID": "Steuer-ID",
         "Notes": "Notizen",
-        "Date Created": "Datum erstellt",
+        "Date Created": "Erstellt am",
         "Active": "Aktiv",
         "Owner": "Eigentümer",
         "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
         "Add Customer": "Kunden hinzufügen",
-        "Manager": "Manager"
+        "Tags": "Tags",
+        "Archive": "Archiv",
+        "Archived": "Archiviert"
     },
     "Models\\CustomerDocument": {
         "Customer": "Kunde",
@@ -147,6 +78,22 @@
         "Calendar": "Kalender",
         "Tags": "Tags",
         "Documents": "Unterlagen",
-        "Local documents": "Lokale Dokumente"
+        "Local documents": "Lokale Dokumente",
+        "Log completed activity": "Abgeschlossene Aktivität erfassen",
+        "Enter": "Enter",
+        "Schedule activity": "Aktivität planen",
+        "Shift+Enter": "Shift+Enter",
+        "Document": "Dokument",
+        "Add document": "Dokument hinzufügen",
+        "Link": "Link"
+    },
+    "Components\\CustomerFormActivity": {
+        "Start": "Anfang",
+        "Customer": "Kunde",
+        "End": "Ende",
+        "Contact": "Kontakt"
+    },
+    "Components\\TableContacts": {
+        "Primary": "Primär"
     }
 }

@@ -84,7 +84,7 @@
         "First line of the file must be the header containig names of the columns.": "První řádek souboru musí být záhlaví obsahující názvy sloupců.",
         "Following lines contain ": "Nasledujíci řádky obsahují ",
         "persons": "osoby",
-        "First 3 columns must be ": "První tři sloupce mubí být",
+        "First 3 columns must be ": "První tři sloupce musí být",
         "First name": "Křestní jméno",
         "Middle name": "Střední jméno",
         " and ": " a ",
@@ -103,7 +103,7 @@
         "modify it and re-import again": "změnit ho nebo spustit import znova",
         "Step 2: Upload the file with contacts": "Krok 2: Nahrajte soubor s kontaktmy",
         "Step 3: Check the import": "Krok 3: Zkontrolujte import",
-        "Step 4: Run the import": "Krok 4: Stusťte import",
+        "Step 4: Run the import": "Krok 4: Spusťte import",
         "You will be able to run the import after its check": "Po kontrole budete moci spustit import"
     }
 }

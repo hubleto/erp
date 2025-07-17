@@ -17,11 +17,18 @@ class StopSharingCalendar extends \HubletoMain\Core\Controllers\Controller
       return [];
     }
 
+    if (isset($this->app->getUrlParams()['share_key'])) {
+      $shareKey = $this->app->getUrlParams()['share_key'];
+    }
+
     $calendar = $this->app->getUrlParams()['calendar'];
     $mSharedCalendar = new SharedCalendar();
 
-    $mSharedCalendar->where('calendar', $calendar)->delete();
-
+    $calendar = $mSharedCalendar->where('calendar', $calendar);
+    if (isset($this->app->getUrlParams()['share_key'])) {
+      $calendar = $calendar->where('share_key', $this->app->getUrlParams()['share_key']);
+    }
+    $calendar->delete();
     return $mSharedCalendar->get('calendar', 'share_key')->toArray();
   }
 

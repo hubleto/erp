@@ -28,7 +28,7 @@ class Loader extends \HubletoMain\Core\App
       '/^calendar\/settings\/?$/' => Controllers\Settings::class,
       '/^calendar\/boards\/reminders\/?$/' => Controllers\Boards\Reminders::class,
       '/^calendar\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
-      '/^calendar\/api\/share-calendar\/?$/' => Controllers\Api\ShareCalendar::class,
+      '/^calendar\/api\/get-shared-calendars\/?$/' => Controllers\Api\GetSharedCalendars::class,
       '/^calendar\/api\/stop-sharing-calendar\/?$/' => Controllers\Api\StopSharingCalendar::class,
     ]);
 

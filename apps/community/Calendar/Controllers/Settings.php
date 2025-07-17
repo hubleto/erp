@@ -23,8 +23,7 @@ class Settings extends \HubletoMain\Core\Controllers\Controller
     foreach ($calendarManager->getCalendars() as $source => $calendar) {
       $calendarConfig = $calendar->calendarConfig;
       $calendarConfig['color'] = $calendar->getColor();
-      $calendarConfig['shared'] = $mSharedCalendar->where('calendar', $source)->exists();
-      $calendarConfig['share_key'] = $mSharedCalendar->where('calendar', $source)->first()?->share_key;
+      $calendarConfig['shared'] = $mSharedCalendar->where('calendar', $source)->count();
       $this->viewParams["calendarConfigs"][$source] = $calendarConfig;
     }
     $this->setView('@HubletoApp:Community:Calendar/Settings.twig');

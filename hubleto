@@ -2,7 +2,9 @@
 
 if (php_sapi_name() !== 'cli') exit;
 
-require_once("vendor/autoload.php");
+if (is_file(__DIR__ . "/vendor/autoload.php")) require_once(__DIR__ . "/vendor/autoload.php");
+else if (is_file(__DIR__ . "/../vendor/autoload.php")) require_once(__DIR__ . "/../vendor/autoload.php");
+
 require_once("src/Main.php");
 
 if (is_file(__DIR__ . '/ConfigEnv.php')) require_once(__DIR__ . '/ConfigEnv.php');

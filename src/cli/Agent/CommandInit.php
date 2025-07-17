@@ -272,13 +272,12 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $installer->addCompanyAndAdminUser();
 
     $this->cli->cyan("\n");
-    $this->cli->cyan("All done! You're a fantastic CRM developer. Now you can:\n");
-    $this->cli->cyan("  -> Open " . (string) $rootUrl . "?user={$adminEmail}\n");
-    $this->cli->cyan("     and use this password: " . (string) $adminPassword . "\n");
+    $this->cli->cyan("All done! You're a fantastic CRM developer.\n");
+    $this->cli->colored("cyan", "black", "Now open " . (string) $rootUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword);
     $this->cli->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
     $this->cli->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
     $this->cli->cyan("\n");
-    $this->cli->yellow("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
-    $this->cli->colored("cyan", "black", "Run: php hubleto app create HubletoApp\\Custom\\MyFirstApp");
+    $this->cli->cyan("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
+    $this->cli->cyan("Run: php hubleto app create HubletoApp\\Custom\\MyFirstApp");
   }
 }

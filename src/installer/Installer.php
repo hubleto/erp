@@ -306,6 +306,7 @@ class Installer {
     $index = (string) file_get_contents(__DIR__ . '/../code_templates/project/index.php.tpl');
     $index = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ srcFolder }}', $this->srcFolder, $index);
+    $index = str_replace('{{ rootFolder }}', $this->rootFolder, $index);
     file_put_contents($this->rootFolder . '/index.php', $index);
 
     // hubleto cli agent

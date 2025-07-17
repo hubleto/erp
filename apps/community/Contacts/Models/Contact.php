@@ -20,7 +20,7 @@ class Contact extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = "
     concat(
       ifnull({%TABLE%}.first_name, ''), ' ', ifnull({%TABLE%}.last_name, ''),
-      ' (', (select group_concat(value separator ', ') from contact_values where id_contact = {%TABLE%}.id), ')'
+      ' (', ifnull((select group_concat(value separator ', ') from contact_values where id_contact = {%TABLE%}.id), '- no contact information -'), ')'
     )
   ";
   public ?string $lookupUrlDetail = 'contacts/{%ID%}';

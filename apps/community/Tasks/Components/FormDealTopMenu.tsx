@@ -10,6 +10,7 @@ interface P {
 }
 
 interface S {
+  tasks?: any;
   showTasks: boolean;
 }
 
@@ -24,6 +25,20 @@ export default class FormDealTopMenu extends TranslatedComponent<P, S> {
     this.state = { showTasks: false };
   }
 
+  componentDidMount() {
+    request.get(
+      'api/record/get-list',
+      {
+        model: 'HubletoApp\\Community\\Tasks\\Models\\Task',
+        externalModel: 'HubletoApp\\Community\\Deals\\Models\\Deal',
+        externalId: this.props.form.state.record?.id,
+      },
+      (tasks: any) => {
+        this.setState({tasks: tasks.data});
+      }
+    );
+  }
+
   render() {
     const form = this.props.form;
     const R = form.state.record;
@@ -35,7 +50,10 @@ export default class FormDealTopMenu extends TranslatedComponent<P, S> {
           onClick={() => { this.setState({showTasks: !this.state.showTasks}); }}
         >
           <span className="icon"><i className="fas fa-list-check"></i></span>
-          <span className="text">{this.translate('Tasks')}</span>
+          <span className="text">
+            {this.translate('Tasks')}
+            {this.state.tasks ? ' (' + this.state.tasks.length + ')' : null}
+          </span>
         </button>
         {this.state.showTasks ? <>
           <ModalSimple

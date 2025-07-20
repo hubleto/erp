@@ -2,7 +2,8 @@
 
 namespace HubletoMain\Installer;
 
-class Installer {
+class Installer
+{
   public \HubletoMain $main;
 
   public string $adminName = '';
@@ -117,8 +118,7 @@ class Installer {
     string $smtpLogin,
     string $smtpPassword,
     bool $randomize = false
-  )
-  {
+  ) {
     $this->main = $main;
     $this->env = $env;
     $this->uid = $uid;
@@ -185,7 +185,8 @@ class Installer {
 
   }
 
-  public function initSmtp(): void {
+  public function initSmtp(): void
+  {
     $this->main->config->set('smtp_host', $this->smtpHost);
     $this->main->config->set('smtp_port', $this->smtpPort);
     $this->main->config->set('smtp_encryption', $this->smtpEncryption);
@@ -277,11 +278,11 @@ class Installer {
       foreach ($this->extraConfigEnv as $cfgParam => $cfgValue) {
         if (is_string($cfgValue)) {
           $configEnv .= '$config[\'' . $cfgParam . '\'] = \'' . $cfgValue . '\';' . "\n";
-        } else if (is_bool($cfgValue)) {
+        } elseif (is_bool($cfgValue)) {
           $configEnv .= '$config[\'' . $cfgParam . '\'] = ' . ($cfgValue ? 'true' : 'false') . ';' . "\n";
-        } else if (is_numeric($cfgValue)) {
+        } elseif (is_numeric($cfgValue)) {
           $configEnv .= '$config[\'' . $cfgParam . '\'] = ' . (int) $cfgValue . ';' . "\n";
-        } else if (is_array($cfgValue)) {
+        } elseif (is_array($cfgValue)) {
           $configEnv .= '$config[\'' . $cfgParam . '\'] = ' . var_export($cfgValue, true) . ';' . "\n";
         }
       }
@@ -327,7 +328,7 @@ class Installer {
   public function installDefaultPermissions(): void
   {
     $apps = $this->main->apps->getEnabledApps();
-    array_walk($apps, function($apps) {
+    array_walk($apps, function ($apps) {
       $apps->installDefaultPermissions();
     });
   }

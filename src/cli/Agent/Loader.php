@@ -2,8 +2,8 @@
 
 namespace HubletoMain\Cli\Agent;
 
-class Loader {
-
+class Loader
+{
   public \HubletoMain $main;
 
   /** @var resource|false */
@@ -22,7 +22,9 @@ class Loader {
 
   public function color(string $fgColor, string $bgColor = 'black'): void
   {
-    if (php_sapi_name() !== 'cli') return;
+    if (php_sapi_name() !== 'cli') {
+      return;
+    }
 
     $bgSequences = [
       'black' => "\033[40m",
@@ -60,12 +62,16 @@ class Loader {
 
   public function read(string $message, string $default = ''): string
   {
-    if (!$this->clih) return $default;
+    if (!$this->clih) {
+      return $default;
+    }
 
     $this->yellow($message . (empty($default) ? '' : ' (press Enter for \'' . $default . '\')') . ': ');
 
     $input = $this->readRaw();
-    if (empty($input)) $input = $default;
+    if (empty($input)) {
+      $input = $default;
+    }
 
     $this->white('  -> ' . $input . "\n");
 
@@ -74,7 +80,9 @@ class Loader {
 
   public function choose(array $options, string $message, string $default = ''): string
   {
-    if (!$this->clih) return $default;
+    if (!$this->clih) {
+      return $default;
+    }
 
     $this->yellow($message . "\n");
     foreach ($options as $key => $option) {
@@ -83,8 +91,12 @@ class Loader {
     $this->yellow('Select one of the options, provide a value' . (empty($default) ? '' : ' or press Enter for \'' . $default . '\'') . ': ');
 
     $input = $this->readRaw();
-    if (is_numeric($input)) $input = (string) ($options[$input] ?? '');
-    if (empty($input)) $input = $default;
+    if (is_numeric($input)) {
+      $input = (string) ($options[$input] ?? '');
+    }
+    if (empty($input)) {
+      $input = $default;
+    }
 
     $this->white('  -> ' . $input . "\n");
 
@@ -97,14 +109,45 @@ class Loader {
     return in_array(strtolower($answer), ['yes', 'y', '1']);
   }
 
-  public function yellow(string $message): void { $this->color('yellow'); echo $message; $this->color('white'); }
-  public function green(string $message): void { $this->color('green'); echo $message; $this->color('white'); }
-  public function red(string $message): void { $this->color('red'); echo $message; $this->color('white'); }
-  public function blue(string $message): void { $this->color('blue'); echo $message; $this->color('white'); }
-  public function cyan(string $message): void { $this->color('cyan'); echo $message; $this->color('white'); }
-  public function white(string $message): void { $this->color('white'); echo $message; $this->color('white'); }
+  public function yellow(string $message): void
+  {
+    $this->color('yellow');
+    echo $message;
+    $this->color('white');
+  }
+  public function green(string $message): void
+  {
+    $this->color('green');
+    echo $message;
+    $this->color('white');
+  }
+  public function red(string $message): void
+  {
+    $this->color('red');
+    echo $message;
+    $this->color('white');
+  }
+  public function blue(string $message): void
+  {
+    $this->color('blue');
+    echo $message;
+    $this->color('white');
+  }
+  public function cyan(string $message): void
+  {
+    $this->color('cyan');
+    echo $message;
+    $this->color('white');
+  }
+  public function white(string $message): void
+  {
+    $this->color('white');
+    echo $message;
+    $this->color('white');
+  }
 
-  public function colored(string $bgColor, string $fgColor, string $message): void {
+  public function colored(string $bgColor, string $fgColor, string $message): void
+  {
     $this->color($fgColor, $bgColor);
     echo $message;
     $this->color('white', 'black');
@@ -116,7 +159,9 @@ class Loader {
   {
     $inserted = false;
 
-    if (!is_file($file)) return false;
+    if (!is_file($file)) {
+      return false;
+    }
 
     $lines = file($file);
     $newLines = [];

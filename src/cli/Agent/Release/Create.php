@@ -12,9 +12,15 @@ class Create extends \HubletoMain\Cli\Agent\Command
     $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::FOLLOW_SYMLINKS), \RecursiveIteratorIterator::LEAVES_ONLY);
 
     foreach ($files as $file) {
-      if ($file->isDir()) continue;
-      if (strpos($file, '.git') !== false) continue;
-      if (strpos($file, 'node_modules') !== false) continue;
+      if ($file->isDir()) {
+        continue;
+      }
+      if (strpos($file, '.git') !== false) {
+        continue;
+      }
+      if (strpos($file, 'node_modules') !== false) {
+        continue;
+      }
       $filePath = str_replace('\\', '/', $file->getRealPath());
       $relativePath = substr($filePath, strlen($path) + 1);
 

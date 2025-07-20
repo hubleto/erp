@@ -4,7 +4,6 @@ namespace HubletoMain\Cli\Agent\Create;
 
 class Controller extends \HubletoMain\Cli\Agent\Command
 {
-
   public function run(): void
   {
     $appNamespace = (string) ($this->arguments[3] ?? '');
@@ -13,12 +12,18 @@ class Controller extends \HubletoMain\Cli\Agent\Command
 
     $this->main->apps->init();
 
-    if (empty($appNamespace)) throw new \Exception("<appNamespace> not provided.");
-    if (empty($controller)) throw new \Exception("<controller> not provided.");
+    if (empty($appNamespace)) {
+      throw new \Exception("<appNamespace> not provided.");
+    }
+    if (empty($controller)) {
+      throw new \Exception("<controller> not provided.");
+    }
 
     $app = $this->main->apps->getAppInstance($appNamespace);
 
-    if (!$app) throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
+    if (!$app) {
+      throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
+    }
 
     $rootFolder = $app->rootFolder;
 
@@ -35,7 +40,9 @@ class Controller extends \HubletoMain\Cli\Agent\Command
       'controller' => $controller,
     ];
 
-    if (!is_dir($rootFolder . '/Controllers')) mkdir($rootFolder . '/Controllers');
+    if (!is_dir($rootFolder . '/Controllers')) {
+      mkdir($rootFolder . '/Controllers');
+    }
     file_put_contents($rootFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
 
     $this->cli->white("\n");

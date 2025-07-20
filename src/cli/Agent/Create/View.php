@@ -4,7 +4,6 @@ namespace HubletoMain\Cli\Agent\Create;
 
 class View extends \HubletoMain\Cli\Agent\Command
 {
-
   public function run(): void
   {
     $appNamespace = (string) ($this->arguments[3] ?? '');
@@ -13,12 +12,18 @@ class View extends \HubletoMain\Cli\Agent\Command
 
     $this->main->apps->init();
 
-    if (empty($appNamespace)) throw new \Exception("<appNamespace> not provided.");
-    if (empty($view)) throw new \Exception("<view> not provided.");
+    if (empty($appNamespace)) {
+      throw new \Exception("<appNamespace> not provided.");
+    }
+    if (empty($view)) {
+      throw new \Exception("<view> not provided.");
+    }
 
     $app = $this->main->apps->getAppInstance($appNamespace);
 
-    if (!$app) throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
+    if (!$app) {
+      throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
+    }
 
     $rootFolder = $app->rootFolder;
 
@@ -29,7 +34,9 @@ class View extends \HubletoMain\Cli\Agent\Command
     $tplFolder = __DIR__ . '/../../../code_templates/snippets';
     $this->main->addTwigViewNamespace($tplFolder, 'snippets');
 
-    if (!is_dir($rootFolder . '/Views')) mkdir($rootFolder . '/Viewss');
+    if (!is_dir($rootFolder . '/Views')) {
+      mkdir($rootFolder . '/Viewss');
+    }
     file_put_contents($rootFolder . '/Views/' . $view . '.twig', $this->main->twig->render('@snippets/View.twig.twig'));
 
     $this->cli->cyan("View '{$view}' in '{$appNamespace}' created successfully.\n");

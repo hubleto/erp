@@ -50,32 +50,82 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $config = $this->initConfig;
     }
 
-    if (isset($config['rewriteBase'])) $rewriteBase = $config['rewriteBase'];
-    if (isset($config['rootFolder'])) $rootFolder = $config['rootFolder'];
-    if (isset($config['rootUrl'])) $rootUrl = $config['rootUrl'];
-    if (isset($config['srcFolder'])) $srcFolder = $config['srcFolder'];
-    if (isset($config['srcUrl'])) $srcUrl = $config['srcUrl'];
-    if (isset($config['dbHost'])) $dbHost = $config['dbHost'];
-    if (isset($config['dbUser'])) $dbUser = $config['dbUser'];
-    if (isset($config['dbPassword'])) $dbPassword = $config['dbPassword'];
-    if (isset($config['dbName'])) $dbName = $config['dbName'];
-    if (isset($config['dbCodepage'])) $dbCodepage = $config['dbCodepage'];
-    if (isset($config['accountFullName'])) $accountFullName = $config['accountFullName'];
-    if (isset($config['adminName'])) $adminName = $config['adminName'];
-    if (isset($config['adminFamilyName'])) $adminFamilyName = $config['adminFamilyName'];
-    if (isset($config['adminNick'])) $adminNick = $config['adminNick'];
-    if (isset($config['adminEmail'])) $adminEmail = $config['adminEmail'];
-    if (isset($config['adminPassword'])) $adminPassword = $config['adminPassword'];
-    if (isset($config['packagesToInstall'])) $packagesToInstall = $config['packagesToInstall'];
-    if (isset($config['appsToInstall'])) $appsToInstall = $config['appsToInstall'];
-    if (isset($config['externalAppsRepositories'])) $externalAppsRepositories = $config['externalAppsRepositories'];
-    if (isset($config['premiumRepoFolder'])) $premiumRepoFolder = $config['premiumRepoFolder'];
+    if (isset($config['rewriteBase'])) {
+      $rewriteBase = $config['rewriteBase'];
+    }
+    if (isset($config['rootFolder'])) {
+      $rootFolder = $config['rootFolder'];
+    }
+    if (isset($config['rootUrl'])) {
+      $rootUrl = $config['rootUrl'];
+    }
+    if (isset($config['srcFolder'])) {
+      $srcFolder = $config['srcFolder'];
+    }
+    if (isset($config['srcUrl'])) {
+      $srcUrl = $config['srcUrl'];
+    }
+    if (isset($config['dbHost'])) {
+      $dbHost = $config['dbHost'];
+    }
+    if (isset($config['dbUser'])) {
+      $dbUser = $config['dbUser'];
+    }
+    if (isset($config['dbPassword'])) {
+      $dbPassword = $config['dbPassword'];
+    }
+    if (isset($config['dbName'])) {
+      $dbName = $config['dbName'];
+    }
+    if (isset($config['dbCodepage'])) {
+      $dbCodepage = $config['dbCodepage'];
+    }
+    if (isset($config['accountFullName'])) {
+      $accountFullName = $config['accountFullName'];
+    }
+    if (isset($config['adminName'])) {
+      $adminName = $config['adminName'];
+    }
+    if (isset($config['adminFamilyName'])) {
+      $adminFamilyName = $config['adminFamilyName'];
+    }
+    if (isset($config['adminNick'])) {
+      $adminNick = $config['adminNick'];
+    }
+    if (isset($config['adminEmail'])) {
+      $adminEmail = $config['adminEmail'];
+    }
+    if (isset($config['adminPassword'])) {
+      $adminPassword = $config['adminPassword'];
+    }
+    if (isset($config['packagesToInstall'])) {
+      $packagesToInstall = $config['packagesToInstall'];
+    }
+    if (isset($config['appsToInstall'])) {
+      $appsToInstall = $config['appsToInstall'];
+    }
+    if (isset($config['externalAppsRepositories'])) {
+      $externalAppsRepositories = $config['externalAppsRepositories'];
+    }
+    if (isset($config['premiumRepoFolder'])) {
+      $premiumRepoFolder = $config['premiumRepoFolder'];
+    }
 
-    if (isset($config['smtpHost'])) $smtpHost = $config['smtpHost'];
-    if (isset($config['smtpPort'])) $smtpPort = $config['smtpPort'];
-    if (isset($config['smtpEncryption'])) $smtpEncryption = $config['smtpEncryption'];
-    if (isset($config['smtpLogin'])) $smtpLogin = $config['smtpLogin'];
-    if (isset($config['smtpPassword'])) $smtpPassword = $config['smtpPassword'];
+    if (isset($config['smtpHost'])) {
+      $smtpHost = $config['smtpHost'];
+    }
+    if (isset($config['smtpPort'])) {
+      $smtpPort = $config['smtpPort'];
+    }
+    if (isset($config['smtpEncryption'])) {
+      $smtpEncryption = $config['smtpEncryption'];
+    }
+    if (isset($config['smtpLogin'])) {
+      $smtpLogin = $config['smtpLogin'];
+    }
+    if (isset($config['smtpPassword'])) {
+      $smtpPassword = $config['smtpPassword'];
+    }
 
     $rewriteBases = [];
     $lastRewriteBase = '';
@@ -87,37 +137,73 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $lastRewriteBase = '/' . $tmpFolder . $lastRewriteBase;
     }
 
-    if ($rewriteBase === null) $rewriteBase = $this->cli->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
-    if ($rootFolder === null) $rootFolder = realpath(__DIR__ . '/../../../..');
-    if ($rootUrl === null) $rootUrl = $this->cli->read('ConfigEnv.rootUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
-    if ($srcFolder === null) $srcFolder = realpath(__DIR__ . '/../../..');
-    if ($srcUrl === null) $srcUrl = $this->cli->read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/hbl');
-    if ($dbHost === null) $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
-    if ($dbUser === null) $dbUser = $this->cli->read('ConfigEnv.dbUser (user must exist)', 'root');
-    if ($dbPassword === null) $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
-    if ($dbName === null) $dbName = $this->cli->read('ConfigEnv.dbName (database will be created, if it not exists)', 'my_hubleto');
-    if ($dbCodepage === null) $dbCodepage = $this->cli->read('ConfigEnv.dbCodepage', 'utf8mb4');
-    if ($accountFullName === null) $accountFullName = $this->cli->read('Account.accountFullName', 'My Company');
-    if ($adminName === null) $adminName = $this->cli->read('Account.adminName', 'John');
-    if ($adminFamilyName === null) $adminFamilyName = $this->cli->read('Account.adminFamilyName', 'Smith');
-    if ($adminNick === null) $adminNick = $this->cli->read('Account.adminNick', 'johny');
-    if ($adminEmail === null) $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
-    if ($adminPassword === null) $adminPassword = $this->cli->read('Account.adminPassword (leave empty to generate random password)');
+    if ($rewriteBase === null) {
+      $rewriteBase = $this->cli->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
+    }
+    if ($rootFolder === null) {
+      $rootFolder = realpath(__DIR__ . '/../../../..');
+    }
+    if ($rootUrl === null) {
+      $rootUrl = $this->cli->read('ConfigEnv.rootUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
+    }
+    if ($srcFolder === null) {
+      $srcFolder = realpath(__DIR__ . '/../../..');
+    }
+    if ($srcUrl === null) {
+      $srcUrl = $this->cli->read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/hbl');
+    }
+    if ($dbHost === null) {
+      $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
+    }
+    if ($dbUser === null) {
+      $dbUser = $this->cli->read('ConfigEnv.dbUser (user must exist)', 'root');
+    }
+    if ($dbPassword === null) {
+      $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
+    }
+    if ($dbName === null) {
+      $dbName = $this->cli->read('ConfigEnv.dbName (database will be created, if it not exists)', 'my_hubleto');
+    }
+    if ($dbCodepage === null) {
+      $dbCodepage = $this->cli->read('ConfigEnv.dbCodepage', 'utf8mb4');
+    }
+    if ($accountFullName === null) {
+      $accountFullName = $this->cli->read('Account.accountFullName', 'My Company');
+    }
+    if ($adminName === null) {
+      $adminName = $this->cli->read('Account.adminName', 'John');
+    }
+    if ($adminFamilyName === null) {
+      $adminFamilyName = $this->cli->read('Account.adminFamilyName', 'Smith');
+    }
+    if ($adminNick === null) {
+      $adminNick = $this->cli->read('Account.adminNick', 'johny');
+    }
+    if ($adminEmail === null) {
+      $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
+    }
+    if ($adminPassword === null) {
+      $adminPassword = $this->cli->read('Account.adminPassword (leave empty to generate random password)');
+    }
 
     if ($this->cli->isLaunchedFromTerminal()) {
       $confirm = '';
-      if (isset($config['confirm'])) $confirm = $config['confirm'];
+      if (isset($config['confirm'])) {
+        $confirm = $config['confirm'];
+      }
       while ($confirm != 'yes') {
         $confirm = $this->cli->read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel');
-        if ($confirm == 'exit') exit;
+        if ($confirm == 'exit') {
+          exit;
+        }
       }
     }
 
-//    if ($smtpHost === null) $smtpHost = $this->cli->read('ConfigEnv.smtpHost');
-//    if ($smtpHost != null && $smtpPort === null) $smtpPort = $this->cli->read('ConfigEnv.smtpPort');
-//    if ($smtpHost != null && $smtpEncryption === null) $smtpEncryption = $this->cli->choose(['ssl', 'tls'], 'ConfigEnv.smtpEncryption', 'ssl');
-//    if ($smtpHost != null && $smtpLogin === null) $smtpLogin = $this->cli->read('ConfigEnv.smtpLogin');
-//    if ($smtpHost != null && $smtpPassword === null) $smtpPassword = $this->cli->read('ConfigEnv.smtpPassword');
+    //    if ($smtpHost === null) $smtpHost = $this->cli->read('ConfigEnv.smtpHost');
+    //    if ($smtpHost != null && $smtpPort === null) $smtpPort = $this->cli->read('ConfigEnv.smtpPort');
+    //    if ($smtpHost != null && $smtpEncryption === null) $smtpEncryption = $this->cli->choose(['ssl', 'tls'], 'ConfigEnv.smtpEncryption', 'ssl');
+    //    if ($smtpHost != null && $smtpLogin === null) $smtpLogin = $this->cli->read('ConfigEnv.smtpLogin');
+    //    if ($smtpHost != null && $smtpPassword === null) $smtpPassword = $this->cli->read('ConfigEnv.smtpPassword');
 
     $errors = [];
     $errorColumns = [];
@@ -134,8 +220,12 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $errors[] = 'Invalid main url.';
     }
 
-    if (empty($packagesToInstall)) $packagesToInstall = 'core,sales';
-    if (empty($adminPassword) && !isset($smtpHost)) $adminPassword = \ADIOS\Core\Helper::randomPassword();
+    if (empty($packagesToInstall)) {
+      $packagesToInstall = 'core,sales';
+    }
+    if (empty($adminPassword) && !isset($smtpHost)) {
+      $adminPassword = \ADIOS\Core\Helper::randomPassword();
+    }
 
     $this->cli->green("  ###         ###         ###   \n");
     $this->cli->green("  ###         ###         ###   \n");
@@ -232,7 +322,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (is_array($appsToInstall)) {
       foreach ($appsToInstall as $appToInstall => $appConfig) {
         if (!isset($installer->appsToInstall[$appToInstall])) {
-          if (!is_array($appConfig)) $appConfig = [];
+          if (!is_array($appConfig)) {
+            $appConfig = [];
+          }
           $installer->appsToInstall[$appToInstall] = $appConfig;
         }
       }
@@ -240,7 +332,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     $installer->premiumRepoFolder = (string) ($premiumRepoFolder ?? '');
     $installer->externalAppsRepositories = $externalAppsRepositories;
-    
+
     if (isset($config['extraConfigEnv'])) {
       $installer->extraConfigEnv = $config['extraConfigEnv'];
     }

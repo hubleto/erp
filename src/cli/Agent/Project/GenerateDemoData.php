@@ -13,7 +13,6 @@ use HubletoApp\Community\Settings\Models\Tag;
 
 class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 {
-
   public function run(): void
   {
 
@@ -241,7 +240,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
       while (count($tags) < $tagsCount) {
         $idTag = rand(1, 3);
-        if (!in_array($idTag, $tags)) $tags[] = $idTag;
+        if (!in_array($idTag, $tags)) {
+          $tags[] = $idTag;
+        }
       }
 
       foreach ($tags as $idTag) {
@@ -417,7 +418,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
       while (count($tags) < $tagsCount) {
         $idTag = rand(1, 6);
-        if (!in_array($idTag, $tags)) $tags[] = $idTag;
+        if (!in_array($idTag, $tags)) {
+          $tags[] = $idTag;
+        }
       }
 
       foreach ($tags as $idTag) {
@@ -445,8 +448,8 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
       for ($i = 0; $i < $activityCount; $i++) {
         $date = date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month")));
-        $randomHour = str_pad((string) rand(6,18), 2, "0", STR_PAD_LEFT);
-        $randomMinute = $minutes[rand(0,3)];
+        $randomHour = str_pad((string) rand(6, 18), 2, "0", STR_PAD_LEFT);
+        $randomMinute = $minutes[rand(0, 3)];
         $timeString = $date." ".$randomHour.":".$randomMinute.":00";
         $time = date("H:i:s", strtotime($timeString));
 
@@ -502,17 +505,19 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $identifierPrefixes = ["US", "EU", "AS"];
 
     foreach ($customers as $customer) {
-      if ($customer->CONTACTS->count() < 1) continue;
+      if ($customer->CONTACTS->count() < 1) {
+        continue;
+      }
 
       $contact = $customer->CONTACTS->first();
 
       $leadDateCreatedTs = (int) rand(strtotime("-1 month"), strtotime("+1 month"));
       $leadDateCreated = date("Y-m-d H:i:s", $leadDateCreatedTs);
-      $leadDateClose = date("Y-m-d H:i:s", $leadDateCreatedTs + rand(4, 6)*24*3600);
+      $leadDateClose = date("Y-m-d H:i:s", $leadDateCreatedTs + rand(4, 6) * 24 * 3600);
 
       $idLead = $mLead->record->recordCreate([
-        "identifier" => $identifierPrefixes[rand(0,2)] . rand(1,3000),
-        "title" => $titles[rand(0, count($titles)-1)],
+        "identifier" => $identifierPrefixes[rand(0, 2)] . rand(1, 3000),
+        "title" => $titles[rand(0, count($titles) - 1)],
         "id_campaign" => rand(1, 2),
         "id_customer" => $customer->id,
         "id_contact" => $contact->id,
@@ -520,7 +525,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_currency" => 1,
         "date_expected_close" => $leadDateClose,
         "id_owner" => rand(1, 4),
-        "source_channel" => rand(1,7),
+        "source_channel" => rand(1, 7),
         "is_archived" => false,
         "status" => (rand(0, 10) == 5 ? $mLead::STATUS_CLOSED : $mLead::STATUS_CONTACTED),
         "date_created" => $leadDateCreated,
@@ -548,7 +553,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $tagsCount = (rand(1, 3) == 1 ? rand(1, 2) : 1);
       while (count($tags) < $tagsCount) {
         $idTag = rand(1, 4);
-        if (!in_array($idTag, $tags)) $tags[] = $idTag;
+        if (!in_array($idTag, $tags)) {
+          $tags[] = $idTag;
+        }
       }
 
       foreach ($tags as $idTag) {
@@ -577,7 +584,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $pipeline = $mPipeline->record->prepareReadQuery()->where('id', 1)->first()->toArray();
 
     foreach ($leads as $lead) { // @phpstan-ignore-line
-      if (rand(1, 3) != 1) continue; // negenerujem deal pre vsetky leads
+      if (rand(1, 3) != 1) {
+        continue;
+      } // negenerujem deal pre vsetky leads
 
       $pStepsRandom = $pipeline['STEPS'];
       shuffle($pStepsRandom);
@@ -638,7 +647,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
       $mDealTag->record->recordCreate([
         "id_deal" => $idDeal,
-        "id_tag" => rand(1,5)
+        "id_tag" => rand(1, 5)
       ]);
     }
   }
@@ -721,8 +730,8 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "margin" => $product[2],
         "vat" => $product[3],
         "unit" => $product[4],
-        "id_product_group" => rand(1,4),
-        "id_supplier" => rand(1,3),
+        "id_product_group" => rand(1, 4),
+        "id_supplier" => rand(1, 3),
         "type" => 1,
       ]);
     }
@@ -733,11 +742,11 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     foreach ($serviceNames as $serviceName) {
       $mProduct->record->create([
         "title" => $serviceName,
-        "unit_price" => rand(10,100),
-        "margin" => rand(10,40),
+        "unit_price" => rand(10, 100),
+        "margin" => rand(10, 40),
         "vat" => 25,
         "id_product_group" => 5,
-        "id_supplier" => rand(1,3),
+        "id_supplier" => rand(1, 3),
         "type" => 2,
       ]);
     }

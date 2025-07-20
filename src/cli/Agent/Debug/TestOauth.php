@@ -2,16 +2,22 @@
 
 namespace HubletoMain\Cli\Agent\Debug;
 
-class MyProvider extends \League\OAuth2\Client\Provider\GenericProvider {
+class MyProvider extends \League\OAuth2\Client\Provider\GenericProvider
+{
   private $pkceMethod = 'S256';
 
-  protected function getPkceMethod() { return 'S256'; }
-  protected function getAccessTokenMethod() { return self::METHOD_GET; }
+  protected function getPkceMethod()
+  {
+    return 'S256';
+  }
+  protected function getAccessTokenMethod()
+  {
+    return self::METHOD_GET;
+  }
 }
 
 class TestOauth extends \HubletoMain\Cli\Agent\Command
 {
-
   public function run(): void
   {
     $clientId = (string) ($this->arguments[3] ?? '');
@@ -48,10 +54,10 @@ class TestOauth extends \HubletoMain\Cli\Agent\Command
     $uri = \Laminas\Uri\UriFactory::factory($redirectLocation);
     $scheme = $uri->getQueryAsArray();
 
-// var_dump($oauth2pkceCode);
-// var_dump($redirectLocation);
-// var_dump($scheme);
-// var_dump((string) $response->getBody());
+    // var_dump($oauth2pkceCode);
+    // var_dump($redirectLocation);
+    // var_dump($scheme);
+    // var_dump((string) $response->getBody());
     if (isset($scheme['error'])) {
       $this->cli->red("Error\n");
       $this->cli->red($scheme['error'] . "\n");

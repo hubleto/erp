@@ -4,7 +4,6 @@ namespace HubletoMain\Cli\Agent\Create;
 
 class Model extends \HubletoMain\Cli\Agent\Command
 {
-
   public function run(): void
   {
     $appNamespace = (string) ($this->arguments[3] ?? '');
@@ -17,12 +16,18 @@ class Model extends \HubletoMain\Cli\Agent\Command
 
     $this->main->apps->init();
 
-    if (empty($appNamespace)) throw new \Exception("<appNamespace> not provided.");
-    if (empty($model)) throw new \Exception("<model> not provided.");
+    if (empty($appNamespace)) {
+      throw new \Exception("<appNamespace> not provided.");
+    }
+    if (empty($model)) {
+      throw new \Exception("<model> not provided.");
+    }
 
     $app = $this->main->apps->getAppInstance($appNamespace);
 
-    if (!$app) throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
+    if (!$app) {
+      throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
+    }
 
     $rootFolder = $app->rootFolder;
 
@@ -40,8 +45,12 @@ class Model extends \HubletoMain\Cli\Agent\Command
       'modelPluralFormKebab' => $modelPluralFormKebab,
     ];
 
-    if (!is_dir($rootFolder . '/Models')) mkdir($rootFolder . '/Models');
-    if (!is_dir($rootFolder . '/Models/RecordManagers')) mkdir($rootFolder . '/Models/RecordManagers');
+    if (!is_dir($rootFolder . '/Models')) {
+      mkdir($rootFolder . '/Models');
+    }
+    if (!is_dir($rootFolder . '/Models/RecordManagers')) {
+      mkdir($rootFolder . '/Models/RecordManagers');
+    }
     file_put_contents($rootFolder . '/Models/' . $model . '.php', $this->main->twig->render('@snippets/Model.php.twig', $tplVars));
     file_put_contents($rootFolder . '/Models/RecordManagers/' . $model . '.php', $this->main->twig->render('@snippets/ModelRecordManager.php.twig', $tplVars));
 

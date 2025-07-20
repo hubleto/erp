@@ -4,7 +4,6 @@ namespace HubletoMain\Cli\Agent\Create;
 
 class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
 {
-
   public function run(): void
   {
 
@@ -21,12 +20,18 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
 
     $this->main->apps->init();
 
-    if (empty($appNamespace)) throw new \Exception("<appNamespace> not provided.");
-    if (empty($model)) throw new \Exception("<model> not provided.");
+    if (empty($appNamespace)) {
+      throw new \Exception("<appNamespace> not provided.");
+    }
+    if (empty($model)) {
+      throw new \Exception("<model> not provided.");
+    }
 
     $app = $this->main->apps->getAppInstance($appNamespace);
 
-    if (!$app) throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
+    if (!$app) {
+      throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
+    }
 
     $rootFolder = $app->rootFolder;
 
@@ -69,9 +74,15 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
       'view' => $view,
     ];
 
-    if (!is_dir($rootFolder . '/Components')) mkdir($rootFolder . '/Components');
-    if (!is_dir($rootFolder . '/Controllers')) mkdir($rootFolder . '/Controllers');
-    if (!is_dir($rootFolder . '/Views')) mkdir($rootFolder . '/Views');
+    if (!is_dir($rootFolder . '/Components')) {
+      mkdir($rootFolder . '/Components');
+    }
+    if (!is_dir($rootFolder . '/Controllers')) {
+      mkdir($rootFolder . '/Controllers');
+    }
+    if (!is_dir($rootFolder . '/Views')) {
+      mkdir($rootFolder . '/Views');
+    }
     file_put_contents($rootFolder . '/Components/Table' . $modelPluralForm . '.tsx', $this->main->twig->render('@snippets/Components/Table.tsx.twig', $tplVars));
     file_put_contents($rootFolder . '/Components/Form' . $modelSingularForm . '.tsx', $this->main->twig->render('@snippets/Components/Form.tsx.twig', $tplVars));
     file_put_contents($rootFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));

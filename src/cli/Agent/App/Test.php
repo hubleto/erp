@@ -17,7 +17,7 @@ class Test extends \HubletoMain\Cli\Agent\Command
       $this->cli->white("  Run all tests in app: php hubleto app test <appNamespace>\n");
       return;
     }
-    
+
     if (empty($test)) {
       $app = $this->main->apps->createAppInstance($appNamespace);
       $tests = $app->getAllTests();

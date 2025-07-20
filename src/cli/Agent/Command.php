@@ -6,7 +6,6 @@ namespace HubletoMain\Cli\Agent;
 
 class Command
 {
-
   public \HubletoMain\Cli\Agent\Loader $cli;
   public \HubletoMain $main;
 

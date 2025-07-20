@@ -2,14 +2,14 @@
 
 namespace HubletoMain\Core;
 
-class Calendar implements \ADIOS\Core\Testable {
-
+class Calendar implements \ADIOS\Core\Testable
+{
   public \HubletoMain $main;
 
-/**
- * Specifies what Activity Form component will be opened and what title should be used for a new button in the `FormActivitySelector.tsx` component
- * @var array{"title": string, "formComponent": string}
- * */
+  /**
+   * Specifies what Activity Form component will be opened and what title should be used for a new button in the `FormActivitySelector.tsx` component
+   * @var array{"title": string, "formComponent": string}
+   * */
   public array $calendarConfig = [
     "title" => "",
     "addNewActivityButtonText" => "",
@@ -18,7 +18,8 @@ class Calendar implements \ADIOS\Core\Testable {
 
   protected string $color = 'blue';
 
-  public function __construct(\HubletoMain $main) {
+  public function __construct(\HubletoMain $main)
+  {
     $this->main = $main;
   }
 

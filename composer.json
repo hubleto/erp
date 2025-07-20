@@ -9,8 +9,8 @@
     },
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "require": {
-        "illuminate/database": "^11",
-        "illuminate/pagination": "^11",
+        "illuminate/database": "^12",
+        "illuminate/pagination": "^12",
         "laravel/serializable-closure": "^2",
         "monolog/monolog": "^3",
         "php": "^8.2",
@@ -21,7 +21,7 @@
         "wai-blue/adios": "^1",
         "phpmailer/phpmailer": "^6.9",
         "stichoza/google-translate-php": "^5.3",
-        "league/oauth2-server": "^4.1",
+        "league/oauth2-server": "^9.1",
         "laminas/laminas-httphandlerrunner": "^2.12"
     },
     "autoload": {

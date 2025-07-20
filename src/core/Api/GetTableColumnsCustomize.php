@@ -6,7 +6,6 @@ use Exception;
 
 class GetTableColumnsCustomize extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     try {

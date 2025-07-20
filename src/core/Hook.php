@@ -2,8 +2,8 @@
 
 namespace HubletoMain\Core;
 
-class Hook {
-
+class Hook
+{
   public \HubletoMain $main;
 
   public function __construct(\HubletoMain $main)

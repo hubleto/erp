@@ -2,8 +2,8 @@
 
 namespace HubletoMain\Core\Controllers;
 
-class ControllerForgotPassword extends \ADIOS\Core\Controller {
-
+class ControllerForgotPassword extends \ADIOS\Core\Controller
+{
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;
   public string $translationContext = 'ADIOS\\Core\\Loader::Controllers\\ForgotPassword';

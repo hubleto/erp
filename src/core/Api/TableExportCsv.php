@@ -41,9 +41,13 @@ class TableExportCsv extends \HubletoMain\Core\Controllers\Controller
           $value = $row[$columnName] ?? '';
         }
 
-        if (is_array($value)) $valueStr = json_encode($value);
-        elseif (is_object($value)) $valueStr = json_encode($value);
-        else $valueStr = (string) $value;
+        if (is_array($value)) {
+          $valueStr = json_encode($value);
+        } elseif (is_object($value)) {
+          $valueStr = json_encode($value);
+        } else {
+          $valueStr = (string) $value;
+        }
 
         $cols[] = '"' . str_replace('"', '\\"', $valueStr) . '"';
       }

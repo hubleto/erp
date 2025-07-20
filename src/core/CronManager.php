@@ -4,7 +4,6 @@ namespace HubletoMain\Core;
 
 class CronManager
 {
-
   public \HubletoMain $main;
 
   /** @var array<\HubletoMain\Core\Cron> */
@@ -70,25 +69,45 @@ class CronManager
       $monthMatch = false;
       $dowMatch = false;
 
-      if ($minSchedule == '*') $minMatch = true;
-      else if (str_starts_with($minSchedule, '*/')) $minMatch = $minNow % ((int) str_replace('*/', '', $minSchedule)) == 0;
-      else $minMatch = $minNow == (int) $minSchedule;
+      if ($minSchedule == '*') {
+        $minMatch = true;
+      } elseif (str_starts_with($minSchedule, '*/')) {
+        $minMatch = $minNow % ((int) str_replace('*/', '', $minSchedule)) == 0;
+      } else {
+        $minMatch = $minNow == (int) $minSchedule;
+      }
 
-      if ($hourSchedule == '*') $hourMatch = true;
-      else if (str_starts_with($hourSchedule, '*/')) $hourMatch = $hourNow % ((int) str_replace('*/', '', $hourSchedule)) == 0;
-      else $hourMatch = $hourNow == (int) $hourSchedule;
+      if ($hourSchedule == '*') {
+        $hourMatch = true;
+      } elseif (str_starts_with($hourSchedule, '*/')) {
+        $hourMatch = $hourNow % ((int) str_replace('*/', '', $hourSchedule)) == 0;
+      } else {
+        $hourMatch = $hourNow == (int) $hourSchedule;
+      }
 
-      if ($daySchedule == '*') $dayMatch = true;
-      else if (str_starts_with($daySchedule, '*/')) $dayMatch = $dayNow % ((int) str_replace('*/', '', $daySchedule)) == 0;
-      else $dayMatch = $dayNow == (int) $daySchedule;
+      if ($daySchedule == '*') {
+        $dayMatch = true;
+      } elseif (str_starts_with($daySchedule, '*/')) {
+        $dayMatch = $dayNow % ((int) str_replace('*/', '', $daySchedule)) == 0;
+      } else {
+        $dayMatch = $dayNow == (int) $daySchedule;
+      }
 
-      if ($monthSchedule == '*') $monthMatch = true;
-      else if (str_starts_with($monthSchedule, '*/')) $monthMatch = $monthNow % ((int) str_replace('*/', '', $monthSchedule)) == 0;
-      else $monthMatch = $monthNow == (int) $monthSchedule;
+      if ($monthSchedule == '*') {
+        $monthMatch = true;
+      } elseif (str_starts_with($monthSchedule, '*/')) {
+        $monthMatch = $monthNow % ((int) str_replace('*/', '', $monthSchedule)) == 0;
+      } else {
+        $monthMatch = $monthNow == (int) $monthSchedule;
+      }
 
-      if ($dowSchedule == '*') $dowMatch = true;
-      else if (str_starts_with($dowSchedule, '*/')) $dowMatch = $dowNow % ((int) str_replace('*/', '', $dowSchedule)) == 0;
-      else $dowMatch = $dowNow == (int) $dowSchedule;
+      if ($dowSchedule == '*') {
+        $dowMatch = true;
+      } elseif (str_starts_with($dowSchedule, '*/')) {
+        $dowMatch = $dowNow % ((int) str_replace('*/', '', $dowSchedule)) == 0;
+      } else {
+        $dowMatch = $dowNow == (int) $dowSchedule;
+      }
 
       if ($minMatch && $hourMatch && $dayMatch && $monthMatch && $dowMatch) {
         $this->log('Starting `' . $cronClass . '`.');

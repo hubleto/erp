@@ -4,7 +4,6 @@ namespace HubletoMain\Core\Controllers;
 
 class Controller extends \ADIOS\Core\Controller
 {
-
   public \HubletoMain $main;
 
   public bool $disableLogUsage = false;
@@ -13,7 +12,7 @@ class Controller extends \ADIOS\Core\Controller
   public string $appNamespace = '';
   public \HubletoMain\Core\App $hubletoApp;
 
-  function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain $main)
   {
     $this->main = $main;
 
@@ -56,7 +55,7 @@ class Controller extends \ADIOS\Core\Controller
     */
   public function validateInputs(): bool
   {
-    $valid = TRUE;
+    $valid = true;
 
     return $valid;
 
@@ -86,7 +85,9 @@ class Controller extends \ADIOS\Core\Controller
    */
   public function prepareView(): void
   {
-    if (!$this->activeUserHasPermission()) return;
+    if (!$this->activeUserHasPermission()) {
+      return;
+    }
 
     $this->main->hooks->run('controller:prepare-view-start', [$this]);
 
@@ -96,7 +97,9 @@ class Controller extends \ADIOS\Core\Controller
       $user = $this->main->auth->getUserFromSession();
 
       if (!empty($logFolder) && is_dir($logFolder)) {
-        if (!is_dir($logFolder . '/usage')) mkdir($logFolder . '/usage');
+        if (!is_dir($logFolder . '/usage')) {
+          mkdir($logFolder . '/usage');
+        }
         file_put_contents(
           $logFolder . '/usage/' . date('Y-m-d') . '.log',
           date('H:i:s') . ' ' . $user['id'] . ' ' . get_class($this) . ' '. json_encode(array_keys($this->main->getUrlParams()), true) . "\n",
@@ -110,7 +113,9 @@ class Controller extends \ADIOS\Core\Controller
     $this->viewParams['main'] = $this->main;
     $this->viewParams['currentTheme'] = $this->main->config->getAsString('uiTheme', 'default');
 
-    if (isset($this->hubletoApp)) $this->viewParams['app'] = $this->hubletoApp;
+    if (isset($this->hubletoApp)) {
+      $this->viewParams['app'] = $this->hubletoApp;
+    }
     // $this->viewParams['help'] = $this->main->apps->community('Help');
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
@@ -118,9 +123,13 @@ class Controller extends \ADIOS\Core\Controller
     $contextHelpUrls = $this->main->apps->community('Help')?->getCurrentContextHelpUrls($this->main->route);
     $user = $this->main->auth->getUser();
 
-    if (isset($contextHelpUrls[$user['language']])) $contextHelpUrl = $contextHelpUrls[$user['language']];
-    else if (isset($contextHelpUrls['en'])) $contextHelpUrl = $contextHelpUrls['en'];
-    else $contextHelpUrl = '';
+    if (isset($contextHelpUrls[$user['language']])) {
+      $contextHelpUrl = $contextHelpUrls[$user['language']];
+    } elseif (isset($contextHelpUrls['en'])) {
+      $contextHelpUrl = $contextHelpUrls['en'];
+    } else {
+      $contextHelpUrl = '';
+    }
 
     $this->viewParams['contextHelpUrl'] = $contextHelpUrl;
 

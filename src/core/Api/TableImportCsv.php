@@ -6,7 +6,6 @@ use Exception;
 
 class TableImportCsv extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $csvData = $this->main->urlParamAsString('csvData');

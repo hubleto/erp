@@ -2,9 +2,10 @@
 
 namespace HubletoMain\Core;
 
-use \HubletoApp\Community\Settings\Models\UserRole;
+use HubletoApp\Community\Settings\Models\UserRole;
 
-class RecordManager extends \ADIOS\Core\EloquentRecordManager {
+class RecordManager extends \ADIOS\Core\EloquentRecordManager
+{
   public $joinManager = [];
 
   public function getPermissions(array $record): array
@@ -24,13 +25,19 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
     $hasIdTeam = isset($record['id_team']);
 
     $isOwner = false;
-    if ($hasIdOwner) $isOwner = $record['id_owner'] == $idUser;
+    if ($hasIdOwner) {
+      $isOwner = $record['id_owner'] == $idUser;
+    }
 
     $isManager = false;
-    if ($hasIdManager) $isManager = $record['id_manager'] == $idUser;
+    if ($hasIdManager) {
+      $isManager = $record['id_manager'] == $idUser;
+    }
 
     $isTeamMember = false;
-    if ($hasIdTeam) $isTeamMember = $main->auth->isUserMemberOfTeam($record['id_team']);
+    if ($hasIdTeam) {
+      $isTeamMember = $main->auth->isUserMemberOfTeam($record['id_team']);
+    }
 
     // enable permissions by certain criteria
     $canRead = false;
@@ -48,7 +55,7 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
       if (str_starts_with($this->model->fullName, 'ADIOS/Core/Config')) {
         $canModify = false;
       }
-    } else if ($main->auth->userHasRole(UserRole::ROLE_MANAGER)) {
+    } elseif ($main->auth->userHasRole(UserRole::ROLE_MANAGER)) {
       // Manager can:
       //   - read only records where he/she is owner or manager
       //   - modify only records where he/she is owner
@@ -60,14 +67,21 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
         $canRead = true;
         $canModify = true;
       } else {
-        if ($hasIdManager && $isManager) $canRead = true;
-        if ($hasIdTeam && $isTeamMember) $canRead = true;
+        if ($hasIdManager && $isManager) {
+          $canRead = true;
+        }
+        if ($hasIdTeam && $isTeamMember) {
+          $canRead = true;
+        }
 
-        if ($hasIdOwner && $isOwner) { $canRead = true; $canModify = true; }
+        if ($hasIdOwner && $isOwner) {
+          $canRead = true;
+          $canModify = true;
+        }
       }
 
       $permissions = [$canRead, $canModify, $canModify, $canModify];
-    } else if ($main->auth->userHasRole(UserRole::ROLE_EMPLOYEE)) {
+    } elseif ($main->auth->userHasRole(UserRole::ROLE_EMPLOYEE)) {
       // Employee can:
       //   - read/modify only records where he/she is owner
 
@@ -76,12 +90,14 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
         $canModify = true;
       }
 
-    } else if ($main->auth->userHasRole(UserRole::ROLE_ASSISTANT)) {
+    } elseif ($main->auth->userHasRole(UserRole::ROLE_ASSISTANT)) {
       // Assistant can:
       //   - read/modify only records where he/she is owner
 
-      if ($hasIdOwner && $isOwner || !$hasIdOwner) $canRead = true;
-    } else if ($main->auth->userHasRole(UserRole::ROLE_EXTERNAL)) {
+      if ($hasIdOwner && $isOwner || !$hasIdOwner) {
+        $canRead = true;
+      }
+    } elseif ($main->auth->userHasRole(UserRole::ROLE_EXTERNAL)) {
       // Externals cannot do anything by default
     }
 
@@ -112,33 +128,35 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager {
     $idUser = $main->auth->getUserId();
 
     $userTeams = [];
-    foreach ($user['TEAMS'] ?? [] as $team) $userTeams[] = $team['id'] ?? 0;
+    foreach ($user['TEAMS'] ?? [] as $team) {
+      $userTeams[] = $team['id'] ?? 0;
+    }
 
     if ($main->auth->userHasRole(UserRole::ROLE_MANAGER)) {
       if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
-        $query = $query->where(function($q) use ($idUser, $userTeams) {
+        $query = $query->where(function ($q) use ($idUser, $userTeams) {
           $q
             ->where($this->table . '.id_owner', $idUser)
             ->orWhere($this->table . '.id_manager', $idUser)
             ->orWhereIn($this->table . '.id_team', $userTeams)
           ;
         });
-      } else if ($hasIdOwner && $hasIdManager) {
-        $query = $query->where(function($q) use ($idUser) {
+      } elseif ($hasIdOwner && $hasIdManager) {
+        $query = $query->where(function ($q) use ($idUser) {
           $q
             ->where($this->table . '.id_owner', $idUser)
             ->orWhere($this->table . '.id_manager', $idUser);
         });
-      } else if ($hasIdOwner) {
+      } elseif ($hasIdOwner) {
         $query = $query->where($this->table . '.id_owner', $idUser);
-      } else if ($hasIdManager) {
+      } elseif ($hasIdManager) {
         $query = $query->where($this->table . '.id_manager', $idUser);
-      } else if ($hasIdTeam) {
+      } elseif ($hasIdTeam) {
         $query = $query->whereIn($this->table . '.id_team', $userTeams);
       }
-    } else if ($main->auth->userHasRole(UserRole::ROLE_EMPLOYEE) && $hasIdOwner) {
+    } elseif ($main->auth->userHasRole(UserRole::ROLE_EMPLOYEE) && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);
-    } else if ($main->auth->userHasRole(UserRole::ROLE_ASSISTANT) && $hasIdOwner) {
+    } elseif ($main->auth->userHasRole(UserRole::ROLE_ASSISTANT) && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);
     }
 

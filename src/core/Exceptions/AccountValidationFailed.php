@@ -2,4 +2,6 @@
 
 namespace HubletoMain\Exceptions;
 
-class AccountValidationFailed extends \Exception { }
+class AccountValidationFailed extends \Exception
+{
+}

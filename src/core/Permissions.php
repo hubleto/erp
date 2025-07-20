@@ -6,13 +6,13 @@ use HubletoApp\Community\Settings\Models\Permission;
 use HubletoApp\Community\Settings\Models\RolePermission;
 use HubletoApp\Community\Settings\Models\UserRole;
 
-class Permissions extends \ADIOS\Core\Permissions {
-
+class Permissions extends \ADIOS\Core\Permissions
+{
   public \HubletoMain $main;
 
   protected bool $grantAllPermissions = false;
 
-  function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain $main)
   {
     $this->main = $main;
     parent::__construct($main);
@@ -29,17 +29,21 @@ class Permissions extends \ADIOS\Core\Permissions {
     return new \HubletoApp\Community\Settings\Models\UserRole($this->app);
   }
 
-  public function DANGEROUS__grantAllPermissions() {
+  public function DANGEROUS__grantAllPermissions()
+  {
     $this->grantAllPermissions = true;
   }
 
-  public function revokeGrantAllPermissions() {
+  public function revokeGrantAllPermissions()
+  {
     $this->grantAllPermissions = false;
   }
 
   public function loadAdministratorRoles(): array
   {
-    if (!isset($this->app->pdo) || !$this->app->pdo->isConnected) return [];
+    if (!isset($this->app->pdo) || !$this->app->pdo->isConnected) {
+      return [];
+    }
     $mUserRole = new UserRole($this->main);
     $administratorRoles = \ADIOS\Core\Helper::pluck('id', $this->app->pdo->fetchAll("select id from `{$mUserRole->table}` where grant_all = 1"));
     return $administratorRoles;
@@ -80,7 +84,7 @@ class Permissions extends \ADIOS\Core\Permissions {
     return $permissions;
   }
 
-  public function granted(string $permission, array $userRoles = []) : bool
+  public function granted(string $permission, array $userRoles = []): bool
   {
     if ($this->grantAllPermissions) {
       return true;
@@ -89,14 +93,17 @@ class Permissions extends \ADIOS\Core\Permissions {
     }
   }
 
-  public function isAppPermittedForActiveUser(\HubletoMain\Core\App $app) {
+  public function isAppPermittedForActiveUser(\HubletoMain\Core\App $app)
+  {
     $userRoles = $this->app->auth->getUserRoles();
 
     if (
       $this->grantAllPermissions
       || $app->permittedForAllUsers
       || count(array_intersect($this->administratorRoles, $userRoles)) > 0
-    ) return true;
+    ) {
+      return true;
+    }
 
     $user = $this->main->auth->getUser();
     $userApps = @json_decode($user['apps'], true);

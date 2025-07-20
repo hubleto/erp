@@ -2,9 +2,10 @@
 
 namespace HubletoMain\Core\Models;
 
-use \HubletoApp\Community\Settings\Models\UserRole;
+use HubletoApp\Community\Settings\Models\UserRole;
 
-class Model extends \ADIOS\Core\Model {
+class Model extends \ADIOS\Core\Model
+{
   public \HubletoMain $main;
 
   public bool $isExtendableByCustomColumns = false;
@@ -13,7 +14,7 @@ class Model extends \ADIOS\Core\Model {
   public string $permission = '';
   public array $rolePermissions = []; // example: [ [UserRole::ROLE_CHIEF_OFFICER => [true, true, true, true]] ]
 
-  function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain $main)
   {
     $this->main = $main;
 
@@ -97,7 +98,9 @@ class Model extends \ADIOS\Core\Model {
         }
       } else {
         foreach ($description->columns as $colName => $column) {
-          if (!$column->getProperty('defaultVisibility')) unset($description->columns[$colName]);
+          if (!$column->getProperty('defaultVisibility')) {
+            unset($description->columns[$colName]);
+          }
         }
       }
     }
@@ -111,7 +114,9 @@ class Model extends \ADIOS\Core\Model {
     foreach ($this->getColumns() as $colName => $column) {
       $v1 = $record1[$colName] ?? null;
       $v2 = $record2[$colName] ?? null;
-      if ($v1 != $v2) $diff[$colName] = [ $v1, $v2 ];
+      if ($v1 != $v2) {
+        $diff[$colName] = [ $v1, $v2 ];
+      }
     }
 
     return $diff;

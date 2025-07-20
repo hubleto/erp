@@ -1,7 +1,7 @@
 <?php
 
 // autoloader pre HubletoMain
-spl_autoload_register(function(string $class) {
+spl_autoload_register(function (string $class) {
   $class = str_replace('\\', '/', $class);
 
   // cli
@@ -90,8 +90,7 @@ spl_autoload_register(function(string $class) {
 // create own ADIOS class
 class HubletoMain extends \ADIOS\Core\Loader
 {
-
-  const RELEASE = 'v0.10';
+  public const RELEASE = 'v0.10';
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
@@ -152,7 +151,8 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   }
 
-  public function setAsGlobal() {
+  public function setAsGlobal()
+  {
     $GLOBALS['hubletoMain'] = $this;
   }
 
@@ -164,8 +164,8 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
 
     $this->twig = new \Twig\Environment($this->twigLoader, array(
-      'cache' => FALSE,
-      'debug' => TRUE,
+      'cache' => false,
+      'debug' => true,
     ));
 
     $this->twig->addFunction(new \Twig\TwigFunction(
@@ -178,7 +178,8 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->configureTwig();
   }
 
-  public function addTwigViewNamespace(string $folder, string $namespace) {
+  public function addTwigViewNamespace(string $folder, string $namespace)
+  {
     if (isset($this->twigLoader) && is_dir($folder)) {
       $this->twigLoader->addPath($folder, $namespace);
     }
@@ -214,7 +215,9 @@ class HubletoMain extends \ADIOS\Core\Loader
     $dict = [];
     if (strlen($language) == 2) {
       $dictFilename = __DIR__ . '/../lang/' . $language . '.json';
-      if (is_file($dictFilename)) $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
+      if (is_file($dictFilename)) {
+        $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
+      }
     }
     return $dict;
   }
@@ -263,16 +266,16 @@ class HubletoMain extends \ADIOS\Core\Loader
           $errorMessage =
             "{$model->shortName} cannot be deleted because other data is linked to it."
           ;
-        } else if (in_array($errorNo, [1062, 1217, 1452])) {
+        } elseif (in_array($errorNo, [1062, 1217, 1452])) {
           $errorMessage = "You are trying to save a record that is already existing.";
         } else {
           $errorMessage = $dbError;
         }
         $html = $this->translate($errorMessage);
-      break;
+        break;
       default:
         $html = parent::renderExceptionHtml($exception);
-      break;
+        break;
     }
 
     return $html;

@@ -2,7 +2,8 @@
 
 namespace HubletoMain\Core\Controllers;
 
-class ApiController extends Controller {
+class ApiController extends Controller
+{
   public int $returnType = self::RETURN_TYPE_JSON;
   public bool $permittedForAllUsers = true;
   public bool $disableLogUsage = true;
@@ -12,7 +13,8 @@ class ApiController extends Controller {
     return [];
   }
 
-  public function renderJson(): ?array {
+  public function renderJson(): ?array
+  {
     try {
       return $this->response();
     } catch (\Throwable $e) {

@@ -4,7 +4,6 @@ namespace HubletoMain\Core;
 
 class HookManager
 {
-
   public \HubletoMain $main;
 
   /** @var array<\HubletoMain\Core\Controller\HookController> */
@@ -47,7 +46,8 @@ class HookManager
     return $this->hooks;
   }
 
-  public function run(string $trigger, array $args) {
+  public function run(string $trigger, array $args)
+  {
     foreach ($this->hooks as $hookClass => $hook) {
       $hook->run($trigger, $args);
     }

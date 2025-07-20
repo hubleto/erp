@@ -6,7 +6,6 @@ use Exception;
 
 class SaveTableColumnsCustomize extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     try {
@@ -21,7 +20,7 @@ class SaveTableColumnsCustomize extends \HubletoMain\Core\Controllers\ApiControl
       }
 
       foreach ($columnsConfig as $colName => $column) {
-       $allColumnsConfig[$tag][$colName] = $column["is_hidden"];
+        $allColumnsConfig[$tag][$colName] = $column["is_hidden"];
       }
 
       $this->main->config->save("user/".$this->main->auth->getUserId()."/models/".$model->fullName."/tableColumns", json_encode($allColumnsConfig));

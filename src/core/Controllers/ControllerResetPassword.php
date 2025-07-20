@@ -5,8 +5,8 @@ namespace HubletoMain\Core\Controllers;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoMain\Core\Models\Token;
 
-class ControllerResetPassword extends \ADIOS\Core\Controller {
-
+class ControllerResetPassword extends \ADIOS\Core\Controller
+{
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;
   public string $translationContext = 'ADIOS\\Core\\Loader::Controllers\\ResetPassword';
@@ -20,8 +20,9 @@ class ControllerResetPassword extends \ADIOS\Core\Controller {
         ->where('token', $_GET['token'])
         ->where('valid_to', '>', date('Y-m-d H:i:s'))
         ->where('type', 'reset-password')
-        ->count() <= 0)
+        ->count() <= 0) {
       $this->app->router->redirectTo('');
+    }
 
     $password = $this->app->urlParamAsString('password');
     $passwordConfirm = $this->app->urlParamAsString('password_confirm');
@@ -31,11 +32,11 @@ class ControllerResetPassword extends \ADIOS\Core\Controller {
       && (!empty($password)
       || !empty($passwordConfirm))
     ) {
-      
+
       if ($password !== $passwordConfirm) {
         $this->setView('@hubleto/ResetPassword.twig', ['error' => 'Passwords do not match.']);
         return;
-      } else if (strlen($password) < 8 || !preg_match('~[0-9]+~', $password)) {
+      } elseif (strlen($password) < 8 || !preg_match('~[0-9]+~', $password)) {
         $this->setView('@hubleto/ResetPassword.twig', ['error' => 'Password must be at least 8 characters long and must contain at least one numeric character.']);
         return;
       } else {

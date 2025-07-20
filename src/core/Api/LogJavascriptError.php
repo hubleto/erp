@@ -4,7 +4,6 @@ namespace HubletoMain\Core\Api;
 
 class LogJavascriptError extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): array
   {
     $logFolder = $this->main->config->getAsString('logFolder');
@@ -15,7 +14,7 @@ class LogJavascriptError extends \HubletoMain\Core\Controllers\ApiController
       @mkdir($logFolder);
     }
 
-    $msg = 
+    $msg =
       "---------------------------------------------------------\n"
       . date('Y-m-d H:i:s') . ' ' . $errorRoute
     ;

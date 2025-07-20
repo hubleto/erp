@@ -2,15 +2,15 @@
 
 namespace HubletoMain\Core;
 
-class App {
-
-  const DEFAULT_INSTALLATION_CONFIG = [
+class App
+{
+  public const DEFAULT_INSTALLATION_CONFIG = [
     'sidebarOrder' => 500,
   ];
 
-  const APP_TYPE_COMMUNITY = 1;
-  const APP_TYPE_PREMIUM = 2;
-  const APP_TYPE_EXTERNAL = 3;
+  public const APP_TYPE_COMMUNITY = 1;
+  public const APP_TYPE_PREMIUM = 2;
+  public const APP_TYPE_EXTERNAL = 3;
 
   public \HubletoMain $main;
   public \HubletoMain\Cli\Agent\Loader|null $cli;
@@ -52,31 +52,53 @@ class App {
     $this->namespace = $reflection->getNamespaceName();
     $this->fullName = $reflection->getName();
     $this->translationContext = trim(str_replace('\\', '/', $this->fullName), '/');
-    
+
     $this->viewNamespace = $this->namespace;
     $this->viewNamespace = str_replace('\\', ':', $this->viewNamespace);
 
     $manifestFile = $this->rootFolder . '/manifest.yaml';
-    if (is_file($manifestFile)) $this->manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($manifestFile));
-    else $this->manifest = [];
+    if (is_file($manifestFile)) {
+      $this->manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) file_get_contents($manifestFile));
+    } else {
+      $this->manifest = [];
+    }
 
-    if (str_starts_with($this->namespace, 'HubletoApp\\Community')) $this->manifest['appType'] = self::APP_TYPE_COMMUNITY;
-    if (str_starts_with($this->namespace, 'HubletoApp\\Premium')) $this->manifest['appType'] = self::APP_TYPE_PREMIUM;
-    if (str_starts_with($this->namespace, 'HubletoApp\\External')) $this->manifest['appType'] = self::APP_TYPE_EXTERNAL;
+    if (str_starts_with($this->namespace, 'HubletoApp\\Community')) {
+      $this->manifest['appType'] = self::APP_TYPE_COMMUNITY;
+    }
+    if (str_starts_with($this->namespace, 'HubletoApp\\Premium')) {
+      $this->manifest['appType'] = self::APP_TYPE_PREMIUM;
+    }
+    if (str_starts_with($this->namespace, 'HubletoApp\\External')) {
+      $this->manifest['appType'] = self::APP_TYPE_EXTERNAL;
+    }
 
 
     $this->validateManifest();
 
   }
 
-  public function validateManifest() {
+  public function validateManifest()
+  {
     $missing = [];
-    if (empty($this->manifest['namespace'])) $missing[] = 'namespace';
-    if (empty($this->manifest['rootUrlSlug'])) $missing[] = 'rootUrlSlug';
-    if (empty($this->manifest['name'])) $missing[] = 'name';
-    if (empty($this->manifest['highlight'])) $missing[] = 'highlight';
-    if (empty($this->manifest['icon'])) $missing[] = 'icon';
-    if (count($missing) > 0) throw new \Exception("{$this->fullName}: Some properties are missing in manifest (" . join(", ", $missing) . ").");
+    if (empty($this->manifest['namespace'])) {
+      $missing[] = 'namespace';
+    }
+    if (empty($this->manifest['rootUrlSlug'])) {
+      $missing[] = 'rootUrlSlug';
+    }
+    if (empty($this->manifest['name'])) {
+      $missing[] = 'name';
+    }
+    if (empty($this->manifest['highlight'])) {
+      $missing[] = 'highlight';
+    }
+    if (empty($this->manifest['icon'])) {
+      $missing[] = 'icon';
+    }
+    if (count($missing) > 0) {
+      throw new \Exception("{$this->fullName}: Some properties are missing in manifest (" . join(", ", $missing) . ").");
+    }
   }
 
   public function init(): void
@@ -95,7 +117,8 @@ class App {
   {
   }
 
-  public function getRootUrlSlug(): string {
+  public function getRootUrlSlug(): string
+  {
     return $this->manifest['rootUrlSlug'] ?? '';
   }
 
@@ -154,7 +177,9 @@ class App {
   {
     $dict = [];
     $dictFilename = static::getDictionaryFilename($language);
-    if (is_file($dictFilename)) $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
+    if (is_file($dictFilename)) {
+      $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
+    }
     return $dict;
   }
 

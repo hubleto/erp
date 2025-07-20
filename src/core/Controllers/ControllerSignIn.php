@@ -2,8 +2,8 @@
 
 namespace HubletoMain\Core\Controllers;
 
-class ControllerSignIn extends Controller {
-
+class ControllerSignIn extends Controller
+{
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;
   public string $translationContext = 'ADIOS\\Core\\Loader::Controllers\\SignIn';

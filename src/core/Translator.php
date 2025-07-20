@@ -2,7 +2,8 @@
 
 namespace HubletoMain\Core;
 
-class Translator extends \ADIOS\Core\Translator {
+class Translator extends \ADIOS\Core\Translator
+{
   public \HubletoMain $main;
 
   public function __construct(\HubletoMain $app)
@@ -29,41 +30,41 @@ class Translator extends \ADIOS\Core\Translator {
   //   return $dictionaryFilename;
   // }
 
-//   public function addToDictionary(string $string, string $context, string $toLanguage = ''): void
-//   {
-//     if (empty($toLanguage)) $toLanguage = $this->main->getLanguage();
-// var_dump($context);
-//     list($class, $classContext) = explode('::', $context);
+  //   public function addToDictionary(string $string, string $context, string $toLanguage = ''): void
+  //   {
+  //     if (empty($toLanguage)) $toLanguage = $this->main->getLanguage();
+  // var_dump($context);
+  //     list($class, $classContext) = explode('::', $context);
 
-//     $dictionaryFilename = '';
-//     if ($class == \HubletoMain\Core::class) {
-//       $dictionaryFilename = __DIR__ . '/../../lang/' . $language . '.json';
-//     } else if (str_starts_with($class, 'HubletoApp')) {
-//       $app = $this->main->apps->getAppInstance($class);
-//       $dictionaryFilename = $app->rootFolder . '/lang/' . $language . '.json';
-//     }
+  //     $dictionaryFilename = '';
+  //     if ($class == \HubletoMain\Core::class) {
+  //       $dictionaryFilename = __DIR__ . '/../../lang/' . $language . '.json';
+  //     } else if (str_starts_with($class, 'HubletoApp')) {
+  //       $app = $this->main->apps->getAppInstance($class);
+  //       $dictionaryFilename = $app->rootFolder . '/lang/' . $language . '.json';
+  //     }
 
-//     $this->dictionary[$context][$string] = ''; // @phpstan-ignore-line
+  //     $this->dictionary[$context][$string] = ''; // @phpstan-ignore-line
 
-//     if (!empty($dictionaryFilename) && is_file($dictionaryFilename)) {
-//       $dictionaryFiltered = [];
-//       foreach ($this->dictionary as $key => $value) {
-//         if (str_starts_with($key, $class . '.')) {
-//           $dictionaryFiltered[str_replace($class . '::', '', $key)] = $value;
-//         }
-//       }
+  //     if (!empty($dictionaryFilename) && is_file($dictionaryFilename)) {
+  //       $dictionaryFiltered = [];
+  //       foreach ($this->dictionary as $key => $value) {
+  //         if (str_starts_with($key, $class . '.')) {
+  //           $dictionaryFiltered[str_replace($class . '::', '', $key)] = $value;
+  //         }
+  //       }
 
-//       // var_dump($dictionaryFiltered);exit;
+  //       // var_dump($dictionaryFiltered);exit;
 
-//       file_put_contents(
-//         $dictionaryFilename,
-//         json_encode(
-//           $dictionaryFiltered,
-//           JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
-//         )
-//       );
-//     }
-//   }
+  //       file_put_contents(
+  //         $dictionaryFilename,
+  //         json_encode(
+  //           $dictionaryFiltered,
+  //           JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+  //         )
+  //       );
+  //     }
+  //   }
 
   /**
   * @return array|array<string, array<string, string>>
@@ -78,8 +79,12 @@ class Translator extends \ADIOS\Core\Translator {
   */
   public function loadDictionary(string $language = ""): array
   {
-    if (empty($language)) $language = $this->main->getLanguage();
-    if ($language == 'en') return [];
+    if (empty($language)) {
+      $language = $this->main->getLanguage();
+    }
+    if ($language == 'en') {
+      return [];
+    }
 
     $dictionary = ['lang' => $language];
 
@@ -110,9 +115,9 @@ class Translator extends \ADIOS\Core\Translator {
 
     if ($contextFileRef == 'HubletoMain') {
       $dictionaryFilename = __DIR__ . '/../../lang/' . $language . '.json';
-    } else if (str_starts_with($contextFileRef, 'HubletoApp')) {
+    } elseif (str_starts_with($contextFileRef, 'HubletoApp')) {
       $appClass = str_replace('/', '\\', $contextFileRef);
-  
+
       $app = $this->main->apps->getAppInstance($appClass);
       if ($app) {
         $dictionaryFilename = $app->rootFolder . '/Lang/' . $language . '.json';
@@ -132,7 +137,9 @@ class Translator extends \ADIOS\Core\Translator {
   */
   public function translate(string $string, array $vars = [], string $context = "HubletoMain::root", string $toLanguage = ""): string
   {
-    if (empty($toLanguage)) $toLanguage = $this->main->getLanguage();
+    if (empty($toLanguage)) {
+      $toLanguage = $this->main->getLanguage();
+    }
     if (strpos($context, '::')) {
       list($contextClass, $contextInner) = explode('::', $context);
     } else {
@@ -151,7 +158,7 @@ class Translator extends \ADIOS\Core\Translator {
 
       if (!empty($this->dictionary[$contextClass][$contextInner][$string])) { // @phpstan-ignore-line
         $translated = (string) $this->dictionary[$contextClass][$contextInner][$string];
-      } else if (class_exists($contextClass)) {
+      } elseif (class_exists($contextClass)) {
         $contextClass::addToDictionary($toLanguage, $contextInner, $string);
       }
 
@@ -160,7 +167,9 @@ class Translator extends \ADIOS\Core\Translator {
       }
     }
 
-    if (empty($translated)) $translated = $string;
+    if (empty($translated)) {
+      $translated = $string;
+    }
 
     foreach ($vars as $varName => $varValue) {
       $translated = str_replace('{{ ' . $varName . ' }}', $varValue, $translated);

@@ -2,7 +2,8 @@
 
 namespace HubletoMain\Core;
 
-class AppTest implements \ADIOS\Core\Testable {
+class AppTest implements \ADIOS\Core\Testable
+{
   public \HubletoMain $main;
   public \HubletoMain\Cli\Agent\Loader $cli;
   public \HubletoMain\Core\App $app;

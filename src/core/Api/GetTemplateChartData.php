@@ -6,8 +6,7 @@ use Exception;
 
 class GetTemplateChartData extends \HubletoMain\Core\Controllers\ApiController
 {
-
-  const OPERATIONS = [
+  public const OPERATIONS = [
     1 => "=",
     2 => "!=",
     3 => ">",
@@ -44,9 +43,13 @@ class GetTemplateChartData extends \HubletoMain\Core\Controllers\ApiController
 
       $query = $model->record->selectRaw($function." as result, ".$groupBy);
       foreach ((array) $config["searchGroups"] as $searchGroup) {
-        if ($searchGroup["option"] == 5) $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
-        else if ($searchGroup["option"] == 6) $query = $query->whereBetween($searchGroup["fieldName"], [$searchGroup["value"], $searchGroup["value2"]]);
-        else $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], $searchGroup["value"]);
+        if ($searchGroup["option"] == 5) {
+          $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
+        } elseif ($searchGroup["option"] == 6) {
+          $query = $query->whereBetween($searchGroup["fieldName"], [$searchGroup["value"], $searchGroup["value2"]]);
+        } else {
+          $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], $searchGroup["value"]);
+        }
       }
 
       $data = $query->groupBy($groupBy)->get()->toArray();
@@ -86,10 +89,11 @@ class GetTemplateChartData extends \HubletoMain\Core\Controllers\ApiController
     ];
   }
 
-  public function generateRandomColor(): string {
-    $r = rand(0,255);
-    $g = rand(0,255);
-    $b = rand(0,255);
+  public function generateRandomColor(): string
+  {
+    $r = rand(0, 255);
+    $g = rand(0, 255);
+    $b = rand(0, 255);
     return "rgb(" . $r . "," . $g . "," . $b . ")";
   }
 }

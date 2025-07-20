@@ -5,8 +5,8 @@ namespace HubletoMain\Core;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoMain\Core\Models\Token;
 
-class AuthProvider extends \ADIOS\Auth\DefaultProvider {
-
+class AuthProvider extends \ADIOS\Auth\DefaultProvider
+{
   public \HubletoMain $main;
 
   public function __construct(\HubletoMain $main)
@@ -27,7 +27,9 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
   public function isUserMemberOfTeam(int $idTeam): bool
   {
     foreach ($user['TEAMS'] ?? [] as $team) {
-      if ($team['id'] ?? 0 == $idTeam) return true;
+      if ($team['id'] ?? 0 == $idTeam) {
+        return true;
+      }
     }
     return false;
   }
@@ -84,7 +86,8 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
     }
   }
 
-  public function resetPassword(): void {
+  public function resetPassword(): void
+  {
     $mToken = new Token($this->app);
     $mUser = new User($this->app);
 
@@ -134,7 +137,9 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider {
       $this->main->router->redirectTo('');
     }
 
-    if (strlen((string) ($this->user['language'] ?? '')) != 2) $this->user['language'] = 'en';
+    if (strlen((string) ($this->user['language'] ?? '')) != 2) {
+      $this->user['language'] = 'en';
+    }
   }
 
 }

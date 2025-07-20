@@ -4,7 +4,6 @@ namespace HubletoMain\Core;
 
 class ReleaseManager
 {
-
   public \HubletoMain $main;
 
   /** @var array<string, mixed> */

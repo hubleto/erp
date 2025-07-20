@@ -2,14 +2,13 @@
 
 namespace HubletoMain\Core\Api;
 
-use \ADIOS\Core\Helper;
+use ADIOS\Core\Helper;
 
 class Dictionary extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public \HubletoMain $main;
 
-  function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain $main)
   {
     $this->main = $main;
   }
@@ -21,9 +20,15 @@ class Dictionary extends \HubletoMain\Core\Controllers\ApiController
 
     $dictFile = __DIR__ . '/../../lang/' . $language . '.json';
 
-    if ($language == 'en') return [];
-    if (!in_array($language, array_keys(\HubletoApp\Community\Settings\Models\User::ENUM_LANGUAGES))) return [];
-    if (!is_file($dictFile)) return [];
+    if ($language == 'en') {
+      return [];
+    }
+    if (!in_array($language, array_keys(\HubletoApp\Community\Settings\Models\User::ENUM_LANGUAGES))) {
+      return [];
+    }
+    if (!is_file($dictFile)) {
+      return [];
+    }
 
     $dict = $this->main->translator->loadDictionary($language);
 

@@ -4,12 +4,12 @@ namespace HubletoMain\Core\Emails;
 
 class EmailWrapper
 {
-
   private $emailProvider;
   private $main;
   private const EMAIL_TEMPLATE = "@hubleto/layouts/Email.twig";
 
-  public function __construct(\HubletoMain $main, EmailProvider $emailProvider) {
+  public function __construct(\HubletoMain $main, EmailProvider $emailProvider)
+  {
     $this->emailProvider = $emailProvider;
     $this->main = $main;
   }

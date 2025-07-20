@@ -4,7 +4,6 @@ namespace HubletoMain\Core\Api;
 
 class GetAppsInfo extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): array
   {
     $appsInfo = [];

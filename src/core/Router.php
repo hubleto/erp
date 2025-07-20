@@ -7,8 +7,8 @@ use HubletoMain\Core\Controllers\ControllerResetPassword;
 use HubletoMain\Core\Controllers\ControllerSignIn;
 use HubletoMain\Core\Controllers\ControllerNotFound;
 
-class Router extends \ADIOS\Core\Router {
-
+class Router extends \ADIOS\Core\Router
+{
   public function __construct(\ADIOS\Core\Loader $app)
   {
     parent::__construct($app);

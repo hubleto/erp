@@ -2,4 +2,6 @@
 
 namespace HubletoMain\Exceptions;
 
-class AccountAlreadyExists extends \Exception { }
+class AccountAlreadyExists extends \Exception
+{
+}

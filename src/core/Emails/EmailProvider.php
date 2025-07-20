@@ -8,7 +8,6 @@ use PHPMailer\PHPMailer\Exception;
 
 class EmailProvider
 {
-
   public \HubletoMain $main;
 
   private string $defaultEmailTemplate = "@hubleto/layouts/Email.twig";
@@ -32,7 +31,9 @@ class EmailProvider
 
   public function getFormattedBody(string $title, string $rawBody, string $template = ''): string
   {
-    if (empty($template)) $template = $this->defaultEmailTemplate;
+    if (empty($template)) {
+      $template = $this->defaultEmailTemplate;
+    }
     return $this->main->twig->render($template, ['title' => $title, 'body' => $rawBody]);
   }
 

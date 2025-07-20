@@ -4,11 +4,10 @@ namespace HubletoMain\Core;
 
 class Report
 {
-
   public \HubletoMain $main;
   public \HubletoMain\Core\App $hubletoApp;
 
-  const OPERATIONS = [
+  public const OPERATIONS = [
     1 => "=",
     2 => "!=",
     3 => ">",
@@ -31,7 +30,10 @@ class Report
     $this->main = $main;
   }
 
-  public function getUrlSlug(): string { return $this->urlSlug; }
+  public function getUrlSlug(): string
+  {
+    return $this->urlSlug;
+  }
 
   public function getConfig(): array
   {
@@ -71,9 +73,13 @@ class Report
 
       $query = $model->record->selectRaw($function." as result, ".$groupBy);
       foreach ((array) $config["searchGroups"] as $searchGroup) {
-        if ($searchGroup["option"] == 5) $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
-        else if ($searchGroup["option"] == 6) $query = $query->whereBetween($searchGroup["fieldName"], [$searchGroup["value"], $searchGroup["value2"]]);
-        else $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], $searchGroup["value"]);
+        if ($searchGroup["option"] == 5) {
+          $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], '%'.$searchGroup["value"].'%');
+        } elseif ($searchGroup["option"] == 6) {
+          $query = $query->whereBetween($searchGroup["fieldName"], [$searchGroup["value"], $searchGroup["value2"]]);
+        } else {
+          $query = $query->where($searchGroup["fieldName"], $this::OPERATIONS[$searchGroup["option"]], $searchGroup["value"]);
+        }
       }
 
       $data = $query->groupBy($groupBy)->get()->toArray();
@@ -113,10 +119,11 @@ class Report
     ];
   }
 
-  public function generateRandomColor(): string {
-    $r = rand(0,255);
-    $g = rand(0,255);
-    $b = rand(0,255);
+  public function generateRandomColor(): string
+  {
+    $r = rand(0, 255);
+    $g = rand(0, 255);
+    $b = rand(0, 255);
     return "rgb(" . $r . "," . $g . "," . $b . ")";
   }
 }

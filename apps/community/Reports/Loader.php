@@ -9,7 +9,7 @@ class Loader extends \HubletoMain\Core\App
   public function __construct(\HubletoMain $main)
   {
     parent::__construct($main);
-    $this->reportManager = new ReportManager($main);
+    $this->reportManager = $main->di->create(ReportManager::class);
   }
 
   public function init(): void
@@ -19,8 +19,6 @@ class Loader extends \HubletoMain\Core\App
     $this->main->router->httpGet([
       '/^reports\/?$/' => Controllers\Reports::class,
       '/^reports\/(?<reportUrlSlug>.*?)\/?$/' => Controllers\Report::class,
-      // '/^reports\/(?<reportUrlSlug>.*?)\/load-data\/?$/' => Controllers\ReportLoadData::class,
-      // '/^reports\/(?<reportUrlSlug>.*?)\/load-data\/?$/' => Controllers\ReportLoadData::class,
     ]);
 
   }

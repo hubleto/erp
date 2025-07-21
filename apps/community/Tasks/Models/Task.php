@@ -148,7 +148,7 @@ class Task extends \HubletoMain\Core\Models\Model
       $externalModelApp = $tasksApp->getRegisteredExternalModels()[$savedRecord['external_model']] ?? null;
       if ($externalModelApp) {
         $externalModelClass = $savedRecord['external_model'];
-        $externalModel = new $externalModelClass($this->main);
+        $externalModel = $this->main->di->create($externalModelClass);
         $externalRecord = $externalModel->record->prepareReadQuery()->where($externalModel->table.'.id', $savedRecord['external_id'])->first()?->toArray();
         $savedRecord["identifier"] =
           ($externalModelApp->manifest['name'] ?? 'X')

@@ -87,10 +87,12 @@ spl_autoload_register(function (string $class) {
   }
 });
 
-// create own ADIOS class
+/**
+ * Main Hubleto class. This class is always referenced
+ * as `$this->main` or `$main`.
+ */
 class HubletoMain extends \ADIOS\Core\Loader
 {
-  public const RELEASE = 'v0.10';
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
@@ -102,8 +104,20 @@ class HubletoMain extends \ADIOS\Core\Loader
   public \HubletoMain\Core\HookManager $hooks;
   public \HubletoMain\Core\CronManager $crons;
 
+  /**
+   * If set to true, this run is managed as premium.
+   *
+   * @var bool
+   */
   public bool $isPremium = false;
 
+  /**
+   * Class construtor.
+   *
+   * @param array $config
+   * @param int $mode
+   * 
+   */
   public function __construct(array $config = [], int $mode = self::ADIOS_MODE_FULL)
   {
     $this->setAsGlobal();
@@ -111,51 +125,81 @@ class HubletoMain extends \ADIOS\Core\Loader
     parent::__construct($config, $mode);
 
     // CLI
-    $this->cli = new \HubletoMain\Cli\Agent\Loader($this);
+    $this->cli = $this->di->create(\HubletoMain\Cli\Agent\Loader::class);
 
     // Hooks
-    $this->hooks = new \HubletoMain\Core\HookManager($this);
-    $this->hooks->init();
+    $this->hooks = $this->di->create(\HubletoMain\Core\HookManager::class);
 
     // Crons
-    $this->crons = new \HubletoMain\Core\CronManager($this);
-    // $this->crons->init();
+    $this->crons = $this->di->create(\HubletoMain\Core\CronManager::class);
 
     // Release manager
-    $this->release = new \HubletoMain\Core\ReleaseManager($this);
-    $this->release->init();
+    $this->release = $this->di->create(\HubletoMain\Core\ReleaseManager::class);
 
     // Emails
-    $this->email = new \HubletoMain\Core\Emails\EmailProvider(
-      $this,
-      $this->config->getAsString('smtpHost', ''),
-      $this->config->getAsString('smtpPort', ''),
-      $this->config->getAsString('smtpEncryption', 'ssl'),
-      $this->config->getAsString('smtpLogin', ''),
-      $this->config->getAsString('smtpPassword', ''),
-    );
-    $this->emails = new \HubletoMain\Core\Emails\EmailWrapper($this, $this->email);
+    $this->email = $this->di->create(\HubletoMain\Core\Emails\EmailProvider::class);
+
+    // DEPRECATED
+    $this->emails = $this->di->create(\HubletoMain\Core\Emails\EmailWrapper::class);
+    $this->emailProvider = $this->email;
 
     // App manager
-    $this->apps = new \HubletoMain\Core\AppManager($this);
+    $this->apps = $this->di->create(\HubletoMain\Core\AppManager::class);
 
-
-    // Initialization
-
-    $this->permissions->init();
-    $this->hooks->run('core:permissions-initialized', [$this]);
-
-    $this->apps->init();
-
-    $this->hooks->run('core:apps-initialized', [$this]);
+    // Finish
+    $this->hooks->run('core:bootstrap-end', [$this]);
 
   }
 
+  /**
+   * Init phase after constructing.
+   *
+   * @return void
+   * 
+   */
+  public function init(): void
+  {
+
+    try {
+
+      if ($this->mode == self::ADIOS_MODE_FULL) {
+        $this->session->start(true);
+        $this->initDatabaseConnections();
+        $this->config->loadFromDB();
+      }
+
+      $this->auth->init();
+      $this->hooks->init();
+      $this->release->init();
+      $this->email->init();
+      $this->apps->init();
+      $this->permissions->init();
+
+      $this->hooks->run('core:init-end', [$this]);
+    } catch (\Exception $e) {
+      echo "HUBLETO INIT failed: [".get_class($e)."] ".$e->getMessage() . "\n";
+      echo $e->getTraceAsString() . "\n";
+      exit;
+    }
+  }
+
+  /**
+   * Set $this as the global instance of Hubleto.
+   *
+   * @return void
+   * 
+   */
   public function setAsGlobal()
   {
     $GLOBALS['hubletoMain'] = $this;
   }
 
+  /**
+   * Creates object for HTML rendering (Twig).
+   *
+   * @return void
+   * 
+   */
   public function createTwig(): void
   {
 
@@ -178,6 +222,15 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->configureTwig();
   }
 
+  /**
+   * Adds namespace for Twig renderer
+   *
+   * @param string $folder
+   * @param string $namespace
+   * 
+   * @return void
+   * 
+   */
   public function addTwigViewNamespace(string $folder, string $namespace)
   {
     if (isset($this->twigLoader) && is_dir($folder)) {
@@ -185,36 +238,80 @@ class HubletoMain extends \ADIOS\Core\Loader
     }
   }
 
+  /**
+   * Create dependency injection service
+   *
+   * @return \ADIOS\Core\DependencyInjection
+   * 
+   */
   public function createDependencyInjection(): \ADIOS\Core\DependencyInjection
   {
     return new \HubletoMain\Core\DependencyInjection($this);
   }
 
+  /**
+   * Create authentication provider
+   *
+   * @return \ADIOS\Core\Auth
+   * 
+   */
   public function createAuthProvider(): \ADIOS\Core\Auth
   {
     return $this->di->create(\HubletoMain\Core\AuthProvider::class);
   }
 
+  /**
+   * Create router
+   *
+   * @return \ADIOS\Core\Router
+   * 
+   */
   public function createRouter(): \ADIOS\Core\Router
   {
     return $this->di->create(\HubletoMain\Core\Router::class);
   }
 
+  /**
+   * Create permission manager
+   *
+   * @return \ADIOS\Core\Permissions
+   * 
+   */
   public function createPermissionsManager(): \ADIOS\Core\Permissions
   {
     return $this->di->create(\HubletoMain\Core\Permissions::class);
   }
 
+  /**
+   * Create translator
+   *
+   * @return \HubletoMain\Core\Translator
+   * 
+   */
   public function createTranslator(): \HubletoMain\Core\Translator
   {
     return $this->di->create(\HubletoMain\Core\Translator::class);
   }
 
+  /**
+   * Create default controller for rendering desktop
+   *
+   * @return \HubletoMain\Core\Controllers\Controller
+   * 
+   */
   public function createDesktopController(): \HubletoMain\Core\Controllers\Controller
   {
     return $this->di->create(\HubletoMain\Core\Controllers\Controller::class);
   }
 
+  /**
+   * Load dictionary for the specified language
+   *
+   * @param string $language
+   * 
+   * @return array
+   * 
+   */
   public static function loadDictionary(string $language): array
   {
     $dict = [];
@@ -227,14 +324,27 @@ class HubletoMain extends \ADIOS\Core\Loader
     return $dict;
   }
 
+  /**
+   * Callback called before the rendering starts.
+   *
+   * @return void
+   * 
+   */
   public function onBeforeRender(): void
   {
     $this->apps->onBeforeRender();
   }
 
   /**
+   * Adds a string to the dictionary
+   *
+   * @param string $language
+   * @param string $contextInner
+   * @param string $string
+   * 
   * @return array|array<string, array<string, string>>
-  */
+   * 
+   */
   public static function addToDictionary(string $language, string $contextInner, string $string): void
   {
 
@@ -258,6 +368,15 @@ class HubletoMain extends \ADIOS\Core\Loader
 
   }
 
+  /**
+   * Renders nicely HTML-formatted strings for specific exceptions
+   *
+   * @param mixed $exception
+   * @param array $args
+   * 
+   * @return string
+   * 
+   */
   public function renderExceptionHtml($exception, array $args = []): string
   {
     switch (get_class($exception)) {

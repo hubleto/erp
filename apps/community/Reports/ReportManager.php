@@ -12,24 +12,32 @@ class ReportManager
   public function __construct(\HubletoMain $main)
   {
     $this->main = $main;
-
-    // $reports = \ADIOS\Core\Helper::scanDirRecursively(__DIR__ . '/../reports');
-    // foreach ($reports as $report) {
-    //   $reportClass = '\\HubletoMain\\Report\\' . str_replace('/', '\\', $report);
-    //   $reportClass = str_replace('.php', '', $reportClass);
-    //   $this->addReport($this->main->apps->community('Reports'), $reportClass);
-    // }
   }
 
+  /**
+   * Adds a report to the report manager
+   *
+   * @param \HubletoMain\Core\App $hubletoApp
+   * @param string $reportClass
+   * 
+   * @return void
+   * 
+   */
   public function addReport(\HubletoMain\Core\App $hubletoApp, string $reportClass): void
   {
-    $report = new $reportClass($hubletoApp, $this->main);
+    $report = $this->main->di->create($reportClass);
     if ($report instanceof \HubletoMain\Core\Report) {
+      $report->hubletoApp = $hubletoApp;
       $this->reports[$reportClass] = $report;
     }
   }
 
-  /** @return array<string, \HubletoMain\Core\Report> */
+  /**
+   * Get all reports registered in report manager.
+   *
+   * @return array<string, \HubletoMain\Core\Report>
+   * 
+   */
   public function getReports(): array
   {
     return $this->reports;

@@ -8,9 +8,8 @@ class EmailWrapper
   private $main;
   private const EMAIL_TEMPLATE = "@hubleto/layouts/Email.twig";
 
-  public function __construct(\HubletoMain $main, EmailProvider $emailProvider)
+  public function __construct(\HubletoMain $main)
   {
-    $this->emailProvider = $emailProvider;
     $this->main = $main;
   }
 

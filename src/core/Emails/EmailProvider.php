@@ -18,15 +18,18 @@ class EmailProvider
   private $smtpUsername;
   private $smtpPassword;
 
-  public function __construct(\HubletoMain $main, $host, $port, $encryption, $username, $password)
+  public function __construct(\HubletoMain $main)
   {
     $this->main = $main;
+  }
 
-    $this->smtpHost = $host;
-    $this->smtpPort = $port;
-    $this->smtpEncryption = $encryption;
-    $this->smtpUsername = $username;
-    $this->smtpPassword = $password;
+  public function init(): void
+  {
+    $this->smtpHost = $this->main->config->getAsString('smtpHost', '');
+    $this->smtpPort = $this->main->config->getAsString('smtpPort', '');
+    $this->smtpEncryption = $this->main->config->getAsString('smtpEncryption', 'ssl');
+    $this->smtpUsername = $this->main->config->getAsString('smtpLogin', '');
+    $this->smtpPassword = $this->main->config->getAsString('smtpPassword', '');
   }
 
   public function getFormattedBody(string $title, string $rawBody, string $template = ''): string

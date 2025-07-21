@@ -24,9 +24,8 @@ class Report
   protected string $urlSlug = '';
   protected string $name = '';
 
-  public function __construct(\HubletoMain\Core\App $hubletoApp, \HubletoMain $main)
+  public function __construct(\HubletoMain $main)
   {
-    $this->hubletoApp = $hubletoApp;
     $this->main = $main;
   }
 

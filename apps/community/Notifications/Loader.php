@@ -83,7 +83,7 @@ class Loader extends \HubletoMain\Core\App
 
       $dailyDigestClass = '\\' . $appNamespace . '\\Controllers\\Api\\DailyDigest';
       if (class_exists($dailyDigestClass)) {
-        $dailyDigestController = new $dailyDigestClass($this->main);
+        $dailyDigestController = $this->main->di->create($dailyDigestClass);
         $dailyDigestController->user = $user;
         $appDigest = $dailyDigestController->response();
       }

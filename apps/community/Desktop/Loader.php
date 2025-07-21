@@ -18,9 +18,9 @@ class Loader extends \HubletoMain\Core\App
   public function __construct(\HubletoMain $main)
   {
     parent::__construct($main);
-    $this->sidebar = new SidebarManager($main);
-    $this->appMenu = new AppMenuManager($main);
-    $this->dashboard = new DashboardManager($main);
+    $this->sidebar = $main->di->create(SidebarManager::class);
+    $this->appMenu = $main->di->create(AppMenuManager::class);
+    $this->dashboard = $main->di->create(DashboardManager::class);
   }
 
   public function init(): void

@@ -47,7 +47,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("Some of the MVC files for mode '{$model}' already exist in app '{$appNamespace}'. Use 'force' to overwrite existing files.");
     }
 
-    $tplFolder = __DIR__ . '/../../../code_templates/snippets';
+    $tplFolder = __DIR__ . '/../../Templates/snippets';
     $this->main->addTwigViewNamespace($tplFolder, 'snippets');
 
     $appNamespace = trim($appNamespace, '\\');

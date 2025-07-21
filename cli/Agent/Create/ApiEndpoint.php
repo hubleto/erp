@@ -33,7 +33,7 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("REST API endpoint '{$endpoint}' already exists in app '{$appNamespace}'. Use 'force' to overwrite existing files.");
     }
 
-    $tplFolder = __DIR__ . '/../../../code_templates/snippets';
+    $tplFolder = __DIR__ . '/../../Templates/snippets';
     $this->main->addTwigViewNamespace($tplFolder, 'snippets');
 
     $tplVars = [

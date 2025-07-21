@@ -241,7 +241,7 @@ class Installer
 
   public function getConfigEnvContent(): string
   {
-    $configEnv = (string) file_get_contents(__DIR__ . '/../code_templates/project/ConfigEnv.php.tpl');
+    $configEnv = (string) file_get_contents(__DIR__ . '/Templates/ConfigEnv.php.tpl');
     $configEnv = str_replace('{{ srcFolder }}', $this->srcFolder, $configEnv);
     $configEnv = str_replace('{{ rootFolder }}', $this->rootFolder, $configEnv);
     $configEnv = str_replace('{{ srcUrl }}', $this->srcUrl, $configEnv);
@@ -304,7 +304,7 @@ class Installer
     file_put_contents($this->rootFolder . '/ConfigEnv.php', $this->getConfigEnvContent());
 
     // index.php
-    $index = (string) file_get_contents(__DIR__ . '/../code_templates/project/index.php.tpl');
+    $index = (string) file_get_contents(__DIR__ . '/Templates/index.php.tpl');
     $index = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ srcFolder }}', $this->srcFolder, $index);
     $index = str_replace('{{ rootFolder }}', $this->rootFolder, $index);
@@ -313,14 +313,14 @@ class Installer
     // hubleto cli agent
     $hubletoCliAgentFile = $this->rootFolder . '/hubleto';
     if (!is_file($hubletoCliAgentFile)) {
-      $hubleto = (string) file_get_contents(__DIR__ . '/../code_templates/project/hubleto.tpl');
+      $hubleto = (string) file_get_contents(__DIR__ . '/Templates/hubleto.tpl');
       $hubleto = str_replace('{{ srcFolder }}', $this->srcFolder, $hubleto);
       file_put_contents($hubletoCliAgentFile, $hubleto);
     }
 
     // .htaccess
     copy(
-      __DIR__ . '/../code_templates/project/.htaccess.tpl',
+      __DIR__ . '/Templates/.htaccess.tpl',
       $this->rootFolder . '/.htaccess'
     );
   }

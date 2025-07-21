@@ -25,7 +25,7 @@ class HookManager
 
     $hooks = @\ADIOS\Core\Helper::scanDirRecursively($this->main->config->getAsString('rootFolder') . '/hooks');
     foreach ($hooks as $hook) {
-      $hookClass = '\\HubletoCustom\\Hook\\' . str_replace('/', '\\', $hook);
+      $hookClass = '\\HubletoProject\\Hook\\' . str_replace('/', '\\', $hook);
       $hookClass = str_replace('.php', '', $hookClass);
       $this->addHook($hookClass);
     }

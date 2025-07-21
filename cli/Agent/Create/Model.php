@@ -35,7 +35,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("Model '{$model}' already exists in app '{$appNamespace}'. Use 'force' to overwrite existing files.");
     }
 
-    $tplFolder = __DIR__ . '/../../../code_templates/snippets';
+    $tplFolder = __DIR__ . '/../../Templates/snippets';
     $this->main->addTwigViewNamespace($tplFolder, 'snippets');
 
     $tplVars = [

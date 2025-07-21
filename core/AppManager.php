@@ -307,7 +307,7 @@ class AppManager
       'now' => date('Y-m-d H:i:s'),
     ];
 
-    $tplFolder = __DIR__ . '/../code_templates/app';
+    $tplFolder = __DIR__ . '/../../cli/Templates/app';
 
     $this->main->addTwigViewNamespace($tplFolder, 'appTemplate');
 

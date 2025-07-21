@@ -10,6 +10,11 @@ class DependencyInjection extends \ADIOS\Core\DependencyInjection {
     parent::__construct($main);
     $this->main = $main;
 
+    $dependencies = $this->main->config->getAsArray('dependencies');
+    foreach ($dependencies as $service => $class) {
+      $this->setDependency($service, $class);
+    }
+
     // $this->setDependency('HubletoApp\\Community\\Settings\\Models\\User', \HubletoApp\Community\Settings\Models\User::class);
   }
   

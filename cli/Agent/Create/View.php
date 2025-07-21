@@ -31,7 +31,7 @@ class View extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("View '{$view}' already exists in app '{$appNamespace}'. Use 'force' to overwrite existing files.");
     }
 
-    $tplFolder = __DIR__ . '/../../../code_templates/snippets';
+    $tplFolder = __DIR__ . '/../../Templates/snippets';
     $this->main->addTwigViewNamespace($tplFolder, 'snippets');
 
     if (!is_dir($rootFolder . '/Views')) {

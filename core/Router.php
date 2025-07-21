@@ -49,7 +49,7 @@ class Router extends \ADIOS\Core\Router
 
   public function createDesktopController(): \ADIOS\Core\Controller
   {
-    return new \HubletoApp\Community\Desktop\Controllers\Desktop($this->main);
+    return $this->main->di->create(\HubletoApp\Community\Desktop\Controllers\Desktop::class);
   }
 
   public function httpGet(array $routes): void

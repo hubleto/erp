@@ -25,7 +25,7 @@ class CronManager
 
     $crons = @\ADIOS\Core\Helper::scanDirRecursively($this->main->config->getAsString('rootFolder') . '/crons');
     foreach ($crons as $cron) {
-      $cronClass = '\\HubletoCustom\\Cron\\' . str_replace('/', '\\', $cron);
+      $cronClass = '\\HubletoProject\\Cron\\' . str_replace('/', '\\', $cron);
       $cronClass = str_replace('.php', '', $cronClass);
       $this->addCron($cronClass);
     }

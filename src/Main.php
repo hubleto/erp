@@ -3,88 +3,47 @@
 // autoloader pre HubletoMain
 spl_autoload_register(function (string $class) {
   $class = str_replace('\\', '/', $class);
-
-  // cli
-  if (str_starts_with($class, 'HubletoMain/Cli/')) {
-    @include(__DIR__ . '/cli/' . str_replace('HubletoMain/Cli/', '', $class) . '.php');
+  
+  $hubletoMain = $GLOBALS['hubletoMain'] ?? null;
+  if ($hubletoMain) {
+    $rootFolder = $hubletoMain->config->getAsString('rootFolder');
+    $premiumAppsFolder = $hubletoMain->config->getAsString('premiumRepoFolder');
+    $externalAppsFolder = $hubletoMain->config->getAsString('externalRepoFolder');
+  } else {
+    $rootFolder = '';
+    $premiumAppsFolder = '';
+    $externalAppsFolder = '';
   }
 
-  // main/hook
-  if (str_starts_with($class, 'HubletoMain/Hook/')) {
-    @include(__DIR__ . '/../hooks/' . str_replace('HubletoMain/Hook/', '', $class) . '.php');
-  }
+  $classGroups = [
+    // main
+    'HubletoMain/Core/' => __DIR__ . '/../core/',
+    'HubletoMain/Cli/' => __DIR__ . '/../cli/',
+    'HubletoMain/Hook/' => __DIR__ . '/../hooks/',
+    'HubletoMain/Cron/' => __DIR__ . '/../crons/',
+    'HubletoMain/Report/' => __DIR__ . '/../reports/',
+    'HubletoMain/Installer/' => __DIR__ . '/../installer/',
 
-  // main/cron
-  if (str_starts_with($class, 'HubletoMain/Cron/')) {
-    @include(__DIR__ . '/../crons/' . str_replace('HubletoMain/Cron/', '', $class) . '.php');
-  }
+    // apps
+    'HubletoApp/Community/' => __DIR__ . '/../apps/community/',
+    'HubletoApp/Custom/' => $rootFolder . '/apps/',
+    'HubletoApp/Premium/' => $premiumAppsFolder . '/',
+    'HubletoApp/External/' => $externalAppsFolder . '/',
 
-  // main/report
-  if (str_starts_with($class, 'HubletoMain/Report/')) {
-    @include(__DIR__ . '/../reports/' . str_replace('HubletoMain/Report/', '', $class) . '.php');
-  }
+    // project
+    'HubletoProject/Hook/' => $rootFolder . '/hooks/',
+    'HubletoProject/Cron/' => $rootFolder . '/crons/',
+    'HubletoProject/Report/' => $rootFolder . '/reports/',
+    'HubletoProject/Dependency/' => $rootFolder . '/dependencies/',
+  ];
 
-  // custom/hook
-  if (str_starts_with($class, 'HubletoCustom/Hook/')) {
-    $hubletoMain = $GLOBALS['hubletoMain'];
-    @include($hubletoMain->config->getAsString('rootFolder') . '/hooks/' . str_replace('HubletoCustom/Hook/', '', $class) . '.php');
-  }
-
-  // custom/cron
-  if (str_starts_with($class, 'HubletoCustom/Cron/')) {
-    $hubletoMain = $GLOBALS['hubletoMain'];
-    @include($hubletoMain->config->getAsString('rootFolder') . '/crons/' . str_replace('HubletoCustom/Cron/', '', $class) . '.php');
-  }
-
-  // custom/report
-  if (str_starts_with($class, 'HubletoCustom/Report/')) {
-    $hubletoMain = $GLOBALS['hubletoMain'];
-    @include($hubletoMain->config->getAsString('rootFolder') . '/reports/' . str_replace('HubletoCustom/Report/', '', $class) . '.php');
-  }
-
-  // community
-  if (str_starts_with($class, 'HubletoApp/Community/')) {
-    $dir = (string) realpath(__DIR__ . '/../apps/community');
-    @include($dir . '/' . str_replace('HubletoApp/Community/', '', $class) . '.php');
-  }
-
-  // core
-  if (str_starts_with($class, 'HubletoMain/Core/')) {
-    @include(__DIR__ . '/core/' . str_replace('HubletoMain/Core/', '', $class) . '.php');
-  }
-
-  // premium
-  if (str_starts_with($class, 'HubletoApp/Premium/')) {
-    $hubletoMain = $GLOBALS['hubletoMain'];
-    $dir = (string) $hubletoMain->config->getAsString('premiumRepoFolder');
-    if (!empty($dir)) {
-      @include($dir . '/' . str_replace('HubletoApp/Premium/', '', $class) . '.php');
+  foreach ($classGroups as $group => $folder) {
+    if (str_starts_with($class, $group)) {
+      include($folder . str_replace($group, '', $class) . '.php');
+      break;
     }
   }
 
-  // external
-  if (str_starts_with($class, 'HubletoApp/External/')) {
-    $tmp = str_replace('HubletoApp/External/', '', $class);
-    $vendor = substr($tmp, 0, strpos($tmp, '/'));
-    $app = substr($tmp, strpos($tmp, '/') + 1);
-    $hubletoMain = $GLOBALS['hubletoMain'];
-    $externalAppsRepositories = $hubletoMain->config->getAsArray('externalAppsRepositories');
-    $folder = $externalAppsRepositories[$vendor] ?? '';
-
-    @include($folder . '/' . $app . '.php');
-  }
-
-  // custom
-  if (str_starts_with($class, 'HubletoApp/Custom/')) {
-    $hubletoMain = $GLOBALS['hubletoMain'];
-    $dir = $hubletoMain->config->getAsString('rootFolder') . '/apps';
-    @include($dir . '/' . str_replace('HubletoApp/Custom/', '', $class) . '.php');
-  }
-
-  // installer
-  if (str_starts_with($class, 'HubletoMain/Installer/')) {
-    @include(__DIR__ . '/installer/' . str_replace('HubletoMain/Installer/', '', $class) . '.php');
-  }
 });
 
 /**
@@ -204,8 +163,9 @@ class HubletoMain extends \ADIOS\Core\Loader
   {
 
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
-    $this->twigLoader->addPath(__DIR__ . '/views', 'hubleto');
+    $this->twigLoader->addPath(__DIR__ . '/../views', 'hubleto');
     $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
+    $this->twigLoader->addPath($this->config->getAsString('rootFolder') . '/views', 'project');
 
     $this->twig = new \Twig\Environment($this->twigLoader, array(
       'cache' => false,
@@ -293,16 +253,16 @@ class HubletoMain extends \ADIOS\Core\Loader
     return $this->di->create(\HubletoMain\Core\Translator::class);
   }
 
-  /**
-   * Create default controller for rendering desktop
-   *
-   * @return \HubletoMain\Core\Controllers\Controller
-   * 
-   */
-  public function createDesktopController(): \HubletoMain\Core\Controllers\Controller
-  {
-    return $this->di->create(\HubletoMain\Core\Controllers\Controller::class);
-  }
+  // /**
+  //  * Create default controller for rendering desktop
+  //  *
+  //  * @return \HubletoMain\Core\Controllers\Controller
+  //  * 
+  //  */
+  // public function createDesktopController(): \HubletoMain\Core\Controllers\Controller
+  // {
+  //   return $this->di->create(\HubletoMain\Core\Controllers\Controller::class);
+  // }
 
   /**
    * Load dictionary for the specified language

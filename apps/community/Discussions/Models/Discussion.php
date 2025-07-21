@@ -2,35 +2,33 @@
 
 namespace HubletoApp\Community\Discussions\Models;
 
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\Color;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\DateTime;
-use \ADIOS\Core\Db\Column\File;
-use \ADIOS\Core\Db\Column\Image;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Json;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Password;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Virtual;
-
-use \HubletoApp\Community\Projects\Models\Project;
-use \HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\File;
+use ADIOS\Core\Db\Column\Image;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Json;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Password;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Virtual;
+use HubletoApp\Community\Projects\Models\Project;
+use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
 class Discussion extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'discussions';
   public string $recordManagerClass = RecordManagers\Discussion::class;
   public ?string $lookupSqlValue = '{%TABLE%}.topic';
   public ?string $lookupUrlDetail = 'discussions/{%ID%}';
 
-  public array $relations = [ 
+  public array $relations = [
     'MAIN_MOD' => [ self::BELONGS_TO, User::class, 'id_main_mod', 'id' ],
   ];
 

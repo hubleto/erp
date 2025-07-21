@@ -2,9 +2,8 @@
 
 namespace HubletoApp\Community\Deals\Controllers;
 
-class Tags extends \HubletoMain\Core\Controllers\Controller {
-
-
+class Tags extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

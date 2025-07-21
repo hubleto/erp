@@ -8,7 +8,6 @@ use HubletoApp\Community\Settings\Models\RolePermission;
 
 class GetPermissions extends \HubletoMain\Core\Controllers\ApiController
 {
-
   private array $MVCNamespaces = [
     "Models",
     "Controllers",
@@ -41,24 +40,34 @@ class GetPermissions extends \HubletoMain\Core\Controllers\ApiController
         $explodedStrings = explode("/", (string) $permission["permission"]);
 
         //capture the namespace of the app
-        if (isset($explodedStrings[2])) $appNamespace = $explodedStrings[2];
+        if (isset($explodedStrings[2])) {
+          $appNamespace = $explodedStrings[2];
+        }
 
         //capture the Model, Controller or Api
-        if (isset($explodedStrings[3])) $MVCNamespace = $explodedStrings[3];
+        if (isset($explodedStrings[3])) {
+          $MVCNamespace = $explodedStrings[3];
+        }
 
         //capture the namespace after the MVC namespaces
         $modPermission = $permission;
-        if (isset($explodedStrings[4])) $modPermission["alias"] = $explodedStrings[4];
+        if (isset($explodedStrings[4])) {
+          $modPermission["alias"] = $explodedStrings[4];
+        }
 
         if (in_array($MVCNamespace, $this->MVCNamespaces)) {
           $sortedAllPermissions[$appNamespace][$MVCNamespace][] = $modPermission;
-        } else $sortedAllPermissions[$appNamespace]["Other"][] = $permission;
+        } else {
+          $sortedAllPermissions[$appNamespace]["Other"][] = $permission;
+        }
       }
 
       if ($roleId > 0) {
         $mRolePermission = new RolePermission($this->main);
         $rolePermissions = $mRolePermission->record->where("id_role", $roleId)->pluck("id_permission")->toArray();
-      } else $rolePermissions = [];
+      } else {
+        $rolePermissions = [];
+      }
     } catch (Exception $e) {
       return [
         "status" => "failed",

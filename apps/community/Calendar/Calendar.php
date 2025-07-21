@@ -4,8 +4,8 @@ namespace HubletoApp\Community\Calendar;
 
 use HubletoApp\Community\Calendar\Models\Activity;
 
-class Calendar extends \HubletoMain\Core\Calendar {
-
+class Calendar extends \HubletoMain\Core\Calendar
+{
   public array $calendarConfig = [
     "title" => "Default",
     "addNewActivityButtonText" => "Add a simple event",
@@ -21,7 +21,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
   {
     $query = $mActivity->record->prepareReadQuery()
       ->with('ACTIVITY_TYPE')
-      ->where(function($q) use ($mActivity, $dateStart, $dateEnd) {
+      ->where(function ($q) use ($mActivity, $dateStart, $dateEnd) {
         $q->whereRaw("
           ({$mActivity->table}.date_start >= '{$dateStart}' AND {$mActivity->table}.date_start <= '{$dateEnd}')
           OR ({$mActivity->table}.date_end >= '{$dateStart}' AND {$mActivity->table}.date_end <= '{$dateEnd}')
@@ -30,12 +30,20 @@ class Calendar extends \HubletoMain\Core\Calendar {
       })
     ;
 
-    if (isset($filter['idUser']) && $filter['idUser'] > 0) $query = $query->where($mActivity->table . '.id_owner', $filter['idUser']);
-    if (isset($filter['completed'])) $query = $query->where('completed', $filter['completed']);
-    if (isset($filter['all_day'])) $query = $query->where('all_day', $filter['all_day']);
+    if (isset($filter['idUser']) && $filter['idUser'] > 0) {
+      $query = $query->where($mActivity->table . '.id_owner', $filter['idUser']);
+    }
+    if (isset($filter['completed'])) {
+      $query = $query->where('completed', $filter['completed']);
+    }
+    if (isset($filter['all_day'])) {
+      $query = $query->where('all_day', $filter['all_day']);
+    }
     if (isset($filter['fOwnership'])) {
       switch ($filter["fOwnership"]) {
-        case 1: $query = $query->where($mActivity->table.".id_owner", $this->main->auth->getUserId()); break;
+        case 1:
+          $query = $query->where($mActivity->table.".id_owner", $this->main->auth->getUserId());
+          break;
       }
     }
 
@@ -55,13 +63,19 @@ class Calendar extends \HubletoMain\Core\Calendar {
 
       $events[$key]['id'] = (int) ($activity['id'] ?? 0);
 
-      if ($tStart != '') $events[$key]['start'] = $dStart . " " . $tStart;
-      else $events[$key]['start'] = $dStart;
+      if ($tStart != '') {
+        $events[$key]['start'] = $dStart . " " . $tStart;
+      } else {
+        $events[$key]['start'] = $dStart;
+      }
 
       if ($dEnd != '') {
-        if ($tEnd != '') $events[$key]['end'] = $dEnd . " " . $tEnd;
-        else $events[$key]['end'] = $dEnd;
-      } else if ($tEnd != '') {
+        if ($tEnd != '') {
+          $events[$key]['end'] = $dEnd . " " . $tEnd;
+        } else {
+          $events[$key]['end'] = $dEnd;
+        }
+      } elseif ($tEnd != '') {
         $events[$key]['end'] = $dStart . " " . $tEnd;
       }
 
@@ -96,7 +110,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
     return $this->convertActivitiesToEvents(
       'calendar',
       $this->prepareLoadActivitiesQuery(new Activity($this->main), $dateStart, $dateEnd, $filter)->get()?->toArray(),
-      function(array $activity) { return ''; }
+      function (array $activity) { return ''; }
     );
   }
 

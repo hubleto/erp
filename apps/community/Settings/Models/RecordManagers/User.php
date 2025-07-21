@@ -2,13 +2,12 @@
 
 namespace HubletoApp\Community\Settings\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\HasMany;
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-use \Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends \HubletoMain\Core\RecordManager
 {
-
   /**
    * @var string
    */
@@ -57,7 +56,7 @@ class User extends \HubletoMain\Core\RecordManager
     $query = $this;
 
     if (!empty($search)) {
-      $query->where(function($q) use ($search) {
+      $query->where(function ($q) use ($search) {
         foreach ($this->model->columnNames() as $columnName) {
           $q->orWhere($this->model->table . '.' . $columnName, 'LIKE', '%' . $search . '%');
         }

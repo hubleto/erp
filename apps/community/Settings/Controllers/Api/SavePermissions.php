@@ -8,7 +8,6 @@ use HubletoApp\Community\Settings\Models\UserRole;
 
 class SavePermissions extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $roleId = $this->main->urlParamAsInteger("roleId");

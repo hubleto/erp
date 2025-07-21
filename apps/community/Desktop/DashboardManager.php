@@ -2,14 +2,15 @@
 
 namespace HubletoApp\Community\Desktop;
 
-class DashboardManager {
-
+class DashboardManager
+{
   public \HubletoMain $main;
 
   /** @var array<int, \HubletoApp\Community\Desktop\Types\Board> */
   protected array $boards = [];
 
-  public function __construct(\HubletoMain $main) {
+  public function __construct(\HubletoMain $main)
+  {
     $this->main = $main;
   }
 

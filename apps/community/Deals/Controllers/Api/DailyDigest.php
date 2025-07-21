@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Deals\Controllers\Api;
 
 class DailyDigest extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function response(): array
   {
     $digest = [];
@@ -23,7 +22,9 @@ class DailyDigest extends \HubletoMain\Core\Controllers\ApiController
     foreach ($myDeals as $deal) {
       $futureActivities = 0;
       foreach ($deal['ACTIVITIES'] as $activity) {
-        if (strtotime($activity['date_start']) > time()) $futureActivities++;
+        if (strtotime($activity['date_start']) > time()) {
+          $futureActivities++;
+        }
       }
 
       if ($futureActivities == 0) {

@@ -2,11 +2,10 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Varchar;
 
 class Scope extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'oauth_scopes';
   public string $recordManagerClass = RecordManagers\Scope::class;
   public ?string $lookupSqlValue = 'concat("Scope #", {%TABLE%}.id)';

@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Desktop\Controllers;
 
 class Desktop extends \HubletoMain\Core\Controllers\Controller
 {
-
   public bool $disableLogUsage = true;
 
   public function prepareView(): void
@@ -26,9 +25,11 @@ class Desktop extends \HubletoMain\Core\Controllers\Controller
       }
     }
 
-    if ($activatedApp === null) $activatedApp = $this->main->apps->community('Desktop');
+    if ($activatedApp === null) {
+      $activatedApp = $this->main->apps->community('Desktop');
+    }
 
-    uasort($appsInSidebar, function($a, $b) {
+    uasort($appsInSidebar, function ($a, $b) {
       $aOrder = $a->configAsInteger('sidebarOrder');
       $bOrder = $b->configAsInteger('sidebarOrder');
       return $aOrder <=> $bOrder;

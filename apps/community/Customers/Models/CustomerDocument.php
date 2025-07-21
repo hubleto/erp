@@ -29,7 +29,7 @@ class CustomerDocument extends \HubletoMain\Core\Models\Model
     switch ($columnName) {
       case 'hyperlink':
         $description->setReactComponent('InputHyperlink');
-      break;
+        break;
     }
     return $description;
   }

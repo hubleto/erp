@@ -2,12 +2,11 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\VarcBooleanhar;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\VarcBooleanhar;
 
 class Client extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'oauth_clients';
   public string $recordManagerClass = RecordManagers\Client::class;
   public ?string $lookupSqlValue = 'concat("Client #", {%TABLE%}.id)';

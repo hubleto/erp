@@ -6,7 +6,6 @@ use Illuminate\Database\Capsule\Manager as DB;
 
 class DailyActivityChart extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function response(): array
   {
     // $randomData = [];
@@ -22,7 +21,7 @@ class DailyActivityChart extends \HubletoMain\Core\Controllers\ApiController
       ->selectRaw('sum(duration) as worked, date(datetime_created) as date')
       ->get()?->toArray()
     ;
-    
+
     $data = [];
     foreach ($worked as $item) {
       $data[] = ['x' => $item['date'], 'y' => $item['worked']];

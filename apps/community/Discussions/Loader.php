@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Discussions;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public array $externalModels = [];
 
   // init
@@ -42,11 +41,13 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function registerExternalModel(\HubletoMain\Core\App $app, string $modelClass) {
+  public function registerExternalModel(\HubletoMain\Core\App $app, string $modelClass)
+  {
     $this->externalModels[$modelClass] = $app;
   }
 
-  public function getRegisteredExternalModels(): array {
+  public function getRegisteredExternalModels(): array
+  {
     return $this->externalModels;
   }
 

@@ -8,7 +8,6 @@ use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
 class ChangePipeline extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $mPipeline = new Pipeline($this->main);

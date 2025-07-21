@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Deals;
 
-class Calendar extends \HubletoApp\Community\Calendar\Calendar {
-
+class Calendar extends \HubletoApp\Community\Calendar\Calendar
+{
   public array $calendarConfig = [
     "title" => "Deals",
     "addNewActivityButtonText" => "Add new activity linked to deal",
@@ -21,12 +21,14 @@ class Calendar extends \HubletoApp\Community\Calendar\Calendar {
     $idDeal = $this->main->urlParamAsInteger('idDeal');
     $mDealActivity = new Models\DealActivity($this->main);
     $activities = $this->prepareLoadActivitiesQuery($mDealActivity, $dateStart, $dateEnd, $filter)->with('DEAL.CUSTOMER');
-    if ($idDeal > 0) $activities = $activities->where("id_deal", $idDeal);
+    if ($idDeal > 0) {
+      $activities = $activities->where("id_deal", $idDeal);
+    }
 
     $events = $this->convertActivitiesToEvents(
       'deals',
       $activities->get()?->toArray(),
-      function(array $activity) {
+      function (array $activity) {
         if (isset($activity['DEAL'])) {
           $deal = $activity['DEAL'];
           $customer = $deal['CUSTOMER'] ?? [];

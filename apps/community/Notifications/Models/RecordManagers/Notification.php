@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Notifications\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
 class Notification extends \HubletoMain\Core\RecordManager
@@ -10,12 +10,14 @@ class Notification extends \HubletoMain\Core\RecordManager
   public $table = 'notifications';
 
   /** @return BelongsTo<User, covariant Customer> */
-  public function FROM(): BelongsTo {
+  public function FROM(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_from', 'id');
   }
 
   /** @return BelongsTo<User, covariant Customer> */
-  public function TO(): BelongsTo {
+  public function TO(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_to', 'id');
   }
 
@@ -24,13 +26,15 @@ class Notification extends \HubletoMain\Core\RecordManager
     $main = \ADIOS\Core\Helper::getGlobalApp();
 
     $query = parent::prepareReadQuery($query, $level);
-    
+
     $folder = $main->urlParamAsString('folder');
     $idUser = $main->auth->getUserId();
 
     switch ($folder) {
-      case 'inbox': $query->where('id_to', $idUser); break;
-      case 'sent': $query->where('id_from', $idUser); break;
+      case 'inbox': $query->where('id_to', $idUser);
+        break;
+      case 'sent': $query->where('id_from', $idUser);
+        break;
     };
 
     return $query;
@@ -40,7 +44,7 @@ class Notification extends \HubletoMain\Core\RecordManager
   {
     $main = \ADIOS\Core\Helper::getGlobalApp();
     $notificationsApp = $main->apps->community('Notifications');
-    
+
     $message = $notificationsApp->send(
       $record['id_to'] ?? '',
       $record['subject'] ?? '',

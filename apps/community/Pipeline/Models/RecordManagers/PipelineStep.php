@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Pipeline\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PipelineStep extends \HubletoMain\Core\RecordManager
 {
@@ -11,7 +11,7 @@ class PipelineStep extends \HubletoMain\Core\RecordManager
   /** @return BelongsTo<Pipeline, covariant PipelineStep> */
   public function PIPELINE(): BelongsTo
   {
-    return $this->belongsTo(Pipeline::class, 'id_pipeline','id' );
+    return $this->belongsTo(Pipeline::class, 'id_pipeline', 'id');
   }
 
 }

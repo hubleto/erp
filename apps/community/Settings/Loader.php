@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Settings;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public bool $canBeDisabled = false;
 
   /** @var array<int, array<\HubletoMain\Core\App, array>> */
@@ -424,7 +423,7 @@ class Loader extends \HubletoMain\Core\App
       ])['id'];
       $mUserRole->record->recordCreate([
         'id' => Models\UserRole::ROLE_EXTERNAL,
-        'role' => 'External', 
+        'role' => 'External',
         'description' => 'By default should not have access to anything. Access permissions must be enabled in settings by administrator.',
         'grant_all' => false,
         'is_default' => true,
@@ -441,7 +440,9 @@ class Loader extends \HubletoMain\Core\App
   public function getSettings(): array
   {
     $settings = [];
-    foreach ($this->settings as $setting) $settings[] = $setting[1];
+    foreach ($this->settings as $setting) {
+      $settings[] = $setting[1];
+    }
 
     $titles = array_column($settings, 'title');
     array_multisort($titles, SORT_ASC, $settings);
@@ -449,4 +450,3 @@ class Loader extends \HubletoMain\Core\App
   }
 
 }
-

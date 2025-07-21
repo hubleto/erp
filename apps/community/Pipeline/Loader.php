@@ -6,7 +6,6 @@ use HubletoApp\Community\Deals\Models\Deal;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public function init(): void
   {
     parent::init();

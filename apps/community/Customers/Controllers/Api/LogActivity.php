@@ -7,7 +7,6 @@ use HubletoApp\Community\Customers\Models\CustomerActivity;
 
 class LogActivity extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $idCustomer = $this->main->urlParamAsInteger("idCustomer");

@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Reports;
 
 class ReportManager
 {
-
   public \HubletoMain $main;
 
   /** @var array<string, \HubletoMain\Core\Report> */

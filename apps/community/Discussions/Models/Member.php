@@ -2,31 +2,29 @@
 
 namespace HubletoApp\Community\Discussions\Models;
 
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\Color;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\DateTime;
-use \ADIOS\Core\Db\Column\File;
-use \ADIOS\Core\Db\Column\Image;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Json;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Password;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Varchar;
-
-use \HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\File;
+use ADIOS\Core\Db\Column\Image;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Json;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Password;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
+use HubletoApp\Community\Settings\Models\User;
 
 class Member extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'discussions_members';
   public string $recordManagerClass = RecordManagers\Member::class;
   public ?string $lookupSqlValue = 'concat("Member #", {%TABLE%}.id)';
   public ?string $lookupUrlDetail = 'members/{%ID%}';
 
-  public array $relations = [ 
+  public array $relations = [
     'DISCUSSION' => [ self::BELONGS_TO, Discussion::class, 'id_discussion', 'id' ],
     'MEMBER' => [ self::BELONGS_TO, User::class, 'id_member', 'id' ],
   ];

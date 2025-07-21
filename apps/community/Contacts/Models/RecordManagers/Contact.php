@@ -3,8 +3,8 @@
 namespace HubletoApp\Community\Contacts\Models\RecordManagers;
 
 use HubletoApp\Community\Customers\Models\RecordManagers\Customer;
-use \Illuminate\Database\Eloquent\Relations\HasMany;
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Contact extends \HubletoMain\Core\RecordManager
@@ -12,18 +12,21 @@ class Contact extends \HubletoMain\Core\RecordManager
   public $table = 'contacts';
 
   /** @return BelongsTo<Customer, covariant Contact> */
-  public function CUSTOMER(): BelongsTo {
+  public function CUSTOMER(): BelongsTo
+  {
     return $this->belongsTo(Customer::class, 'id_customer');
   }
 
   /** @return HasMany<Contact, covariant Contact> */
-  public function VALUES(): HasMany {
-     return $this->hasMany(Value::class, 'id_contact', 'id');
+  public function VALUES(): HasMany
+  {
+    return $this->hasMany(Value::class, 'id_contact', 'id');
   }
 
   /** @return HasMany<ContactTag, covariant Contact> */
-  public function TAGS(): HasMany {
-     return $this->hasMany(ContactTag::class, 'id_contact', 'id');
+  public function TAGS(): HasMany
+  {
+    return $this->hasMany(ContactTag::class, 'id_contact', 'id');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
@@ -153,7 +156,7 @@ class Contact extends \HubletoMain\Core\RecordManager
 
     return $query;
   }
-  
+
   public function prepareLookupData(array $dataRaw): array
   {
     $data = parent::prepareLookupData($dataRaw);

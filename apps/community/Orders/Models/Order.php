@@ -78,13 +78,17 @@ class Order extends \HubletoMain\Core\Models\Model
 
     if (isset($savedRecord["PRODUCTS"])) {
       foreach ($savedRecord["PRODUCTS"] as $product) {
-        if (isset($product["_toBeDeleted_"])) continue;
+        if (isset($product["_toBeDeleted_"])) {
+          continue;
+        }
         $productTitle = (string) $mProduct->record->find((int) $product["id_product"])->title;
         $longDescription .=  "{$productTitle} - Amount: ".(string) $product["amount"]." - Unit Price: ".(string) $product["unit_price"]." - Vat: ".(string) $product["vat"]." - Discount: ".(string) $product["discount"]." \n\n";
       }
     }
 
-    if ($longDescription == "") $longDescription = "The order had no products or all products were deleted";
+    if ($longDescription == "") {
+      $longDescription = "The order had no products or all products were deleted";
+    }
 
     $mHistory = new History($this->main);
     $mHistory->record->recordCreate([

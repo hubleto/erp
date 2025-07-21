@@ -7,7 +7,6 @@ use ADIOS\Core\Db\Column\Boolean;
 use ADIOS\Core\Db\Column\Varchar;
 use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\Lookup;
-
 use HubletoApp\Community\Settings\Models\User;
 
 class Dashboard extends \HubletoMain\Core\Models\Model

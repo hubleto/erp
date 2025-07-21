@@ -9,7 +9,6 @@ use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\DateTime;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Json;
-
 use HubletoApp\Community\Settings\Models\User;
 
 class Notification extends \HubletoMain\Core\Models\Model
@@ -80,10 +79,10 @@ class Notification extends \HubletoMain\Core\Models\Model
     switch ($folder) {
       case 'inbox':
         unset($description->columns['id_to']);
-      break;
+        break;
       case 'sent':
         unset($description->columns['id_from']);
-      break;
+        break;
     }
 
     $description->permissions['canDelete'] = false;

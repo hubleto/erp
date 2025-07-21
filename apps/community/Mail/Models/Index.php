@@ -3,7 +3,6 @@
 namespace HubletoApp\Community\Mail\Models;
 
 use ADIOS\Core\Db\Column\Lookup;
-
 use HubletoApp\Community\Settings\Models\User;
 
 class Index extends \HubletoMain\Core\Models\Model

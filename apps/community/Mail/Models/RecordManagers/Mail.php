@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Mail\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
 class Mail extends \HubletoMain\Core\RecordManager
@@ -28,24 +28,24 @@ class Mail extends \HubletoMain\Core\RecordManager
 
     switch ($folder) {
       case 'inbox':
-        $query->where(function($q) use ($idUser) {
+        $query->where(function ($q) use ($idUser) {
           $q->where('midx.id_to', $idUser);
           $q->orWhere('midx.id_cc', $idUser);
           $q->orWhere('midx.id_bcc', $idUser);
         });
-      break;
+        break;
       case 'outbox':
         $query->where('is_draft', false)->whereNull('datetime_sent');
-      break;
+        break;
       case 'drafts':
         $query->where('is_draft', true);
-      break;
+        break;
       case 'templates':
         $query->where('is_template', true);
-      break;
+        break;
       case 'sent':
         $query->where('midx.id_from', $idUser);
-      break;
+        break;
     };
 
 

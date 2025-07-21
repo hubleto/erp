@@ -2,14 +2,12 @@
 
 namespace HubletoApp\Community\Reports\Models;
 
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Varchar;
-
-use \HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
+use HubletoApp\Community\Settings\Models\User;
 
 class Report extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'reports';
   public string $recordManagerClass = RecordManagers\Report::class;
   public ?string $lookupSqlValue = 'concat("Report #", {%TABLE%}.id)';

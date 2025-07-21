@@ -2,12 +2,13 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Api;
 
-class GetCalendarEvents extends \HubletoMain\Core\Controllers\ApiController {
+class GetCalendarEvents extends \HubletoMain\Core\Controllers\ApiController
+{
   public string $dateStart = '';
   public string $dateEnd = '';
 
   public \HubletoApp\Community\Calendar\CalendarManager $calendarManager;
-  
+
   public function __construct(\HubletoMain $main)
   {
     parent::__construct($main);
@@ -60,15 +61,17 @@ class GetCalendarEvents extends \HubletoMain\Core\Controllers\ApiController {
     string $dateStart,
     string $dateEnd,
     array $filter = [],
-    array|null $sources = null): array
-  {
+    array|null $sources = null
+  ): array {
 
     $events = [];
 
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
 
     foreach ($calendarManager->getCalendars() as $source => $calendar) {
-      if ($sources !== null && !in_array($source, $sources)) continue;
+      if ($sources !== null && !in_array($source, $sources)) {
+        continue;
+      }
 
       $calEvents = (array) $calendar->loadEvents($dateStart, $dateEnd, $filter);
       foreach ($calEvents as $key => $value) {

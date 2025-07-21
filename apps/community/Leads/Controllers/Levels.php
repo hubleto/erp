@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Leads\Controllers;
 
 class Levels extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function prepareView(): void
   {
     parent::prepareView();

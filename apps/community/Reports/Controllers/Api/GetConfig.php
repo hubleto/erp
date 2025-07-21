@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Reports\Controllers\Api;
 
 class GetConfig extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $model = $this->main->urlParamAsString("model");

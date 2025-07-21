@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Desktop\Types;
 
-class Board {
-
+class Board
+{
   public string $title = '';
   public string $boardUrlSlug = '';
 

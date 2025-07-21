@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Leads;
 
-class Calendar extends \HubletoApp\Community\Calendar\Calendar {
-
+class Calendar extends \HubletoApp\Community\Calendar\Calendar
+{
   public array $calendarConfig = [
     "title" => "Leads",
     "addNewActivityButtonText" => "Add new activity linked to lead",
@@ -21,12 +21,14 @@ class Calendar extends \HubletoApp\Community\Calendar\Calendar {
     $idLead = $this->main->urlParamAsInteger('idLead');
     $mLeadActivity = new Models\LeadActivity($this->main);
     $activities = $this->prepareLoadActivitiesQuery($mLeadActivity, $dateStart, $dateEnd, $filter)->with('LEAD.CUSTOMER');
-    if ($idLead > 0) $activities = $activities->where("id_lead", $idLead);
+    if ($idLead > 0) {
+      $activities = $activities->where("id_lead", $idLead);
+    }
 
     $events = $this->convertActivitiesToEvents(
       'leads',
       $activities->get()?->toArray(),
-      function(array $activity) {
+      function (array $activity) {
         if (isset($activity['LEAD'])) {
           $lead = $activity['LEAD'];
           $customer = $lead['CUSTOMER'] ?? [];

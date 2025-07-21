@@ -2,25 +2,23 @@
 
 namespace HubletoApp\Community\Events\Models;
 
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\Color;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\DateTime;
-use \ADIOS\Core\Db\Column\File;
-use \ADIOS\Core\Db\Column\Image;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Json;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Password;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Varchar;
-
-use \HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\File;
+use ADIOS\Core\Db\Column\Image;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Json;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Password;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
+use HubletoApp\Community\Settings\Models\User;
 
 class Speaker extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'events_speakers';
   public string $recordManagerClass = RecordManagers\Speaker::class;
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.full_name, ""), " ", ifnull({%TABLE%}.email, ""))';

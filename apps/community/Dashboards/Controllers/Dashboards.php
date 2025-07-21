@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Dashboards\Controllers;
 
 class Dashboards extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

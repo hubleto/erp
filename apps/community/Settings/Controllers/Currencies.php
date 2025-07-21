@@ -2,9 +2,8 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class Currencies extends \HubletoMain\Core\Controllers\Controller {
-
-
+class Currencies extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

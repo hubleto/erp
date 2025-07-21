@@ -7,10 +7,9 @@ use HubletoApp\Community\Calendar\Models\SharedCalendar;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public CalendarManager $calendarManager;
 
-   public bool $hasCustomSettings = true;
+  public bool $hasCustomSettings = true;
 
   public function __construct(\HubletoMain $main)
   {
@@ -69,16 +68,16 @@ class Loader extends \HubletoMain\Core\App
       date("Y-m-d"),
       ['completed' => false, 'idUser' => $idUser]
     );
- 
-    $dateTomorrow = date("Y-m-d", time() + 24*3600);
+
+    $dateTomorrow = date("Y-m-d", time() + 24 * 3600);
     $remindersTomorrow = $getCalendarEvents->loadEventsFromMultipleCalendars(
       $dateTomorrow,
       $dateTomorrow,
       ['completed' => false, 'idUser' => $idUser]
     );
 
-    $dateLaterStart = date("Y-m-d", time() + 24*3600 * 2);
-    $dateLaterEnd = date("Y-m-d", time() + 24*3600 * 7);
+    $dateLaterStart = date("Y-m-d", time() + 24 * 3600 * 2);
+    $dateLaterEnd = date("Y-m-d", time() + 24 * 3600 * 7);
     $remindersLater = $getCalendarEvents->loadEventsFromMultipleCalendars(
       $dateLaterStart,
       $dateLaterEnd,

@@ -7,14 +7,14 @@ use ADIOS\Core\Db\Column\Varchar;
 
 class UserRole extends \HubletoMain\Core\Models\Model
 {
-  const ROLE_ADMINISTRATOR = 1;
-  const ROLE_CHIEF_OFFICER = 2;
-  const ROLE_MANAGER = 3;
-  const ROLE_EMPLOYEE = 4;
-  const ROLE_ASSISTANT = 5;
-  const ROLE_EXTERNAL = 6;
+  public const ROLE_ADMINISTRATOR = 1;
+  public const ROLE_CHIEF_OFFICER = 2;
+  public const ROLE_MANAGER = 3;
+  public const ROLE_EMPLOYEE = 4;
+  public const ROLE_ASSISTANT = 5;
+  public const ROLE_EXTERNAL = 6;
 
-  const USER_ROLES = [
+  public const USER_ROLES = [
     self::ROLE_ADMINISTRATOR => 'ADMINISTRATOR',
     self::ROLE_CHIEF_OFFICER => 'CHIEF_OFFICER',
     self::ROLE_MANAGER => 'MANAGER',

@@ -5,7 +5,6 @@ namespace HubletoApp\Community\Usage\Models;
 use ADIOS\Core\Db\Column\DateTime;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Varchar;
-
 use HubletoApp\Community\Settings\Models\User;
 
 class Log extends \HubletoMain\Core\Models\Model

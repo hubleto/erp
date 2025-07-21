@@ -2,8 +2,7 @@
 
 namespace HubletoApp\Community\Products\Models;
 
-use \HubletoApp\Community\Suppliers\Models\Supplier;
-
+use HubletoApp\Community\Suppliers\Models\Supplier;
 use ADIOS\Core\Db\Column\Boolean;
 use ADIOS\Core\Db\Column\Date;
 use ADIOS\Core\Db\Column\Decimal;
@@ -15,8 +14,8 @@ use ADIOS\Core\Db\Column\Varchar;
 
 class Product extends \HubletoMain\Core\Models\Model
 {
-  const TYPE_PRODUCT = 1;
-  const TYPE_SERVICE = 2;
+  public const TYPE_PRODUCT = 1;
+  public const TYPE_SERVICE = 2;
 
   public string $table = 'products';
   public string $recordManagerClass = RecordManagers\Product::class;

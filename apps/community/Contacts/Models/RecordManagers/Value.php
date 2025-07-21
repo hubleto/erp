@@ -2,20 +2,22 @@
 
 namespace HubletoApp\Community\Contacts\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\HasMany;
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Value extends \HubletoMain\Core\RecordManager
 {
   public $table = 'contact_values';
 
   /** @return BelongsTo<Contact, covariant Contact> */
-  public function CONTACT(): BelongsTo {
+  public function CONTACT(): BelongsTo
+  {
     return $this->belongsTo(Contact::class, 'id_contact');
   }
 
   /** @return BelongsTo<Category, covariant Contact> */
-  public function CATEGORY(): BelongsTo {
+  public function CATEGORY(): BelongsTo
+  {
     return $this->belongsTo(Category::class, 'id_category', 'id');
   }
 

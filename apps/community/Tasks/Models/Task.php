@@ -2,35 +2,33 @@
 
 namespace HubletoApp\Community\Tasks\Models;
 
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\Color;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\DateTime;
-use \ADIOS\Core\Db\Column\File;
-use \ADIOS\Core\Db\Column\Image;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Json;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Password;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Virtual;
-
-use \HubletoApp\Community\Projects\Models\Project;
-use \HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\File;
+use ADIOS\Core\Db\Column\Image;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Json;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Password;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Virtual;
+use HubletoApp\Community\Projects\Models\Project;
+use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
 class Task extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'tasks';
   public string $recordManagerClass = RecordManagers\Task::class;
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'tasks/{%ID%}';
 
-  public array $relations = [ 
+  public array $relations = [
     'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
     'DEVELOPER' => [ self::BELONGS_TO, User::class, 'id_developer', 'id' ],
     'TESTER' => [ self::BELONGS_TO, User::class, 'id_tester', 'id' ],

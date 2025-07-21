@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Contacts\Controllers;
 
 class Import extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -26,12 +25,14 @@ class Import extends \HubletoMain\Core\Controllers\Controller
 
     $contactsFile = $this->main->uploadedFile('contactsFile');
     if (is_array($contactsFile) && is_file($contactsFile['tmp_name'])) {
-      if (($handle = fopen($contactsFile['tmp_name'], "r")) !== FALSE) {
+      if (($handle = fopen($contactsFile['tmp_name'], "r")) !== false) {
         $rowIdx = 0;
-        while (($row = fgetcsv($handle, 0, ",")) !== FALSE) {
-          if ($rowIdx++ == 0) continue;
+        while (($row = fgetcsv($handle, 0, ",")) !== false) {
+          if ($rowIdx++ == 0) {
+            continue;
+          }
 
-          $row = array_map( function ($str) { return iconv( "Windows-1250", "UTF-8", $str ); }, $row );
+          $row = array_map(function ($str) { return iconv("Windows-1250", "UTF-8", $str); }, $row);
 
           $firstName = '';
           $middleName = '';
@@ -39,11 +40,18 @@ class Import extends \HubletoMain\Core\Controllers\Controller
           $values = [];
           for ($i = 0; $i < count($row); $i++) {
             $v = trim($row[$i]);
-            if (empty($v)) continue;
-            if ($i == 0) $firstName = $v;
-            elseif ($i == 1) $middleName = $v;
-            elseif ($i == 2) $lastName = $v;
-            else $values[] = $v;
+            if (empty($v)) {
+              continue;
+            }
+            if ($i == 0) {
+              $firstName = $v;
+            } elseif ($i == 1) {
+              $middleName = $v;
+            } elseif ($i == 2) {
+              $lastName = $v;
+            } else {
+              $values[] = $v;
+            }
           }
 
           if (count($values) == 0 && empty($firstName) && empty($middleName) && empty($lastName)) {
@@ -60,9 +68,13 @@ class Import extends \HubletoMain\Core\Controllers\Controller
 
           $contact = $mContact->record
             ->with('VALUES')
-            ->whereHas('VALUES', function($q) use ($values) {
-              $q->where(function($qq) use ($values) {
-                foreach ($values as $value) if (!empty($value)) $qq->orWhere('value', $value);
+            ->whereHas('VALUES', function ($q) use ($values) {
+              $q->where(function ($qq) use ($values) {
+                foreach ($values as $value) {
+                  if (!empty($value)) {
+                    $qq->orWhere('value', $value);
+                  }
+                }
               });
             })
             ->first()
@@ -97,7 +109,7 @@ class Import extends \HubletoMain\Core\Controllers\Controller
                 }
                 $log[] = "  Added value for contact: {$value}";
               }
-            
+
             }
           }
 

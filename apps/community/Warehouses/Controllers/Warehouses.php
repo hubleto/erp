@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Warehouses\Controllers;
 
 class Warehouses extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function prepareView(): void
   {
     parent::prepareView();

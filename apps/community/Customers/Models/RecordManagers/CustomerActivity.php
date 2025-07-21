@@ -10,12 +10,14 @@ class CustomerActivity extends \HubletoApp\Community\Calendar\Models\RecordManag
   public $table = 'customer_activities';
 
   /** @return BelongsTo<Customer, covariant CustomerActivity> */
-  public function CUSTOMER(): BelongsTo {
+  public function CUSTOMER(): BelongsTo
+  {
     return $this->belongsTo(Customer::class, 'id_customer', 'id');
   }
 
   /** @return BelongsTo<Contact, covariant CustomerActivity> */
-  public function CONTACT(): BelongsTo {
+  public function CONTACT(): BelongsTo
+  {
     return $this->belongsTo(Contact::class, 'id_contact', 'id');
   }
 }

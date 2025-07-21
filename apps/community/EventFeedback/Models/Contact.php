@@ -2,18 +2,16 @@
 
 namespace HubletoApp\Community\EventFeedback\Models;
 
-use \HubletoApp\Community\Settings\Models\User;
-
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Lookup;
+use HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Lookup;
 
 class Contact extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'my_app_contacts';
   public string $recordManagerClass = RecordManagers\Contact::class;
 
-  public array $relations = [ 
+  public array $relations = [
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ]
   ];
 

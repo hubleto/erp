@@ -2,12 +2,11 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Boolean;
 
 class AccessToken extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'oauth_access_tokens';
   public string $recordManagerClass = RecordManagers\AccessToken::class;
   public ?string $lookupSqlValue = 'concat("AccessToken #", {%TABLE%}.id)';

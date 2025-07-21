@@ -9,7 +9,6 @@ use HubletoApp\Community\Pipeline\Models\Pipeline;
 
 class ConvertDealToProject extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     if (!$this->main->isUrlParam("idDeal")) {
@@ -27,7 +26,9 @@ class ConvertDealToProject extends \HubletoMain\Core\Controllers\ApiController
 
     try {
       $deal = $mDeal->record->prepareReadQuery()->where($mDeal->table.".id", $idDeal)->first();
-      if (!$deal) throw new Exception("Deal was not found.");
+      if (!$deal) {
+        throw new Exception("Deal was not found.");
+      }
 
       $projectsCount = $mProject->record->where('id_deal', $deal->id)->count();
 

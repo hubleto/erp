@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class UpdateDefaultPermissions extends \HubletoMain\Core\Controllers\Controller {
-
+class UpdateDefaultPermissions extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -18,7 +18,7 @@ class UpdateDefaultPermissions extends \HubletoMain\Core\Controllers\Controller 
 
     ob_start();
     $apps = $this->main->apps->getEnabledApps();
-    array_walk($apps, function($app) {
+    array_walk($apps, function ($app) {
       echo $app->manifest['namespace'] . "\n";
       $app->assignPermissionsToRoles();
     });

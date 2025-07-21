@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class Sidebar extends \HubletoMain\Core\Controllers\Controller {
-
+class Sidebar extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -37,7 +37,7 @@ class Sidebar extends \HubletoMain\Core\Controllers\Controller {
 
     $installedApps = array_merge($this->main->apps->getEnabledApps(), $this->main->apps->getDisabledApps());
 
-    uasort($installedApps, function($a, $b) {
+    uasort($installedApps, function ($a, $b) {
       $aOrder = $a->configAsInteger('sidebarOrder');
       $bOrder = $b->configAsInteger('sidebarOrder');
       return $aOrder <=> $bOrder;

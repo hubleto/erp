@@ -2,8 +2,7 @@
 
 namespace HubletoApp\Community\Calendar\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 use HubletoApp\Community\Settings\Models\RecordManagers\ActivityType;
 
@@ -12,12 +11,14 @@ class Activity extends \HubletoMain\Core\RecordManager
   public $table = 'activities';
 
   /** @return BelongsTo<User, covariant Customer> */
-  public function OWNER(): BelongsTo {
+  public function OWNER(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_owner', 'id');
   }
 
   /** @return BelongsTo<User, covariant Customer> */
-  public function ACTIVITY_TYPE(): BelongsTo {
+  public function ACTIVITY_TYPE(): BelongsTo
+  {
     return $this->belongsTo(ActivityType::class, 'id_activity_type', 'id');
   }
 

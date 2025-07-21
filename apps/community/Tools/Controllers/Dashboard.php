@@ -2,9 +2,8 @@
 
 namespace HubletoApp\Community\Tools\Controllers;
 
-class Dashboard extends \HubletoMain\Core\Controllers\Controller {
-
-
+class Dashboard extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

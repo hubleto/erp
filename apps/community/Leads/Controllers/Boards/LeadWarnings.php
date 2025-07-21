@@ -4,8 +4,8 @@ namespace HubletoApp\Community\Leads\Controllers\Boards;
 
 use HubletoApp\Community\Leads\Models\Lead;
 
-class LeadWarnings extends \HubletoMain\Core\Controllers\Controller {
-
+class LeadWarnings extends \HubletoMain\Core\Controllers\Controller
+{
   public bool $hideDefaultDesktop = true;
 
   public function prepareView(): void
@@ -28,7 +28,9 @@ class LeadWarnings extends \HubletoMain\Core\Controllers\Controller {
     foreach ($myLeads as $lead) {
       $futureActivities = 0;
       foreach ($lead['ACTIVITIES'] as $activity) {
-        if (strtotime($activity['date_start']) > time()) $futureActivities++;
+        if (strtotime($activity['date_start']) > time()) {
+          $futureActivities++;
+        }
       }
       if (in_array($lead['status'], [Lead::STATUS_IN_PROGRESS]) && $futureActivities == 0) {
         $items[] = $lead;

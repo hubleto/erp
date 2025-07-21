@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Dashboards;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   // public bool $hasCustomSettings = true;
 
   protected array $boards = [];

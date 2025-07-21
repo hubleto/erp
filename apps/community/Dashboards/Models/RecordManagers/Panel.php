@@ -2,15 +2,16 @@
 
 namespace HubletoApp\Community\Dashboards\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Panel extends \HubletoMain\Core\RecordManager
 {
   public $table = 'dashboards_panels';
 
   /** @return BelongsTo<Customer, covariant BillingAccount> */
-  public function DASHBOARD(): BelongsTo {
-    return $this->belongsTo(Dashboard::class, 'id_dashboard', 'id' );
+  public function DASHBOARD(): BelongsTo
+  {
+    return $this->belongsTo(Dashboard::class, 'id_dashboard', 'id');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed

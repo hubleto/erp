@@ -3,7 +3,6 @@
 namespace HubletoApp\Community\Campaigns\Models;
 
 use HubletoApp\Community\Settings\Models\User;
-
 use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\Varchar;
 use ADIOS\Core\Db\Column\Text;

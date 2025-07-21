@@ -4,8 +4,7 @@ namespace HubletoApp\Community\Usage;
 
 class Loader extends \HubletoMain\Core\App
 {
-
-  const DEFAULT_INSTALLATION_CONFIG = [
+  public const DEFAULT_INSTALLATION_CONFIG = [
     'sidebarOrder' => 0,
   ];
 
@@ -71,10 +70,15 @@ class Loader extends \HubletoMain\Core\App
     }
 
     foreach ($usageLogs as $log) {
-      if (strpos($log['route'], '/') === false) $rootUrlSlug = $log['route'];
-      else $rootUrlSlug = substr($log['route'], 0, strpos($log['route'], '/'));
+      if (strpos($log['route'], '/') === false) {
+        $rootUrlSlug = $log['route'];
+      } else {
+        $rootUrlSlug = substr($log['route'], 0, strpos($log['route'], '/'));
+      }
       $usedApp = $installedAppsByUrlSlug[$rootUrlSlug] ?? null;
-      if ($usedApp) $usedAppNamespaces[] = $usedApp->namespace;
+      if ($usedApp) {
+        $usedAppNamespaces[] = $usedApp->namespace;
+      }
     }
 
     return array_slice(array_unique($usedAppNamespaces), 0, 5);

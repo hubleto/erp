@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Settings\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\HasMany;
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Team extends \HubletoMain\Core\RecordManager
 {
@@ -16,8 +16,9 @@ class Team extends \HubletoMain\Core\RecordManager
   }
 
   /** @return HasMany<TeamMember, covariant TeamMember> */
-  public function MEMBERS(): HasMany {
-     return $this->hasMany(TeamMember::class, 'id_team', 'id');
+  public function MEMBERS(): HasMany
+  {
+    return $this->hasMany(TeamMember::class, 'id_team', 'id');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed

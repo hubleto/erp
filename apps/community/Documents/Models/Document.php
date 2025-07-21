@@ -44,7 +44,7 @@ class Document extends \HubletoMain\Core\Models\Model
     switch ($columnName) {
       case 'hyperlink':
         $description->setReactComponent('InputHyperlink');
-      break;
+        break;
     }
     return $description;
   }
@@ -68,9 +68,11 @@ class Document extends \HubletoMain\Core\Models\Model
   {
     $document = (array) $this->record->find($record["id"])->toArray();
 
-    if (!isset($document["file"])) return $record;
+    if (!isset($document["file"])) {
+      return $record;
+    }
 
-    $prevFilename = ltrim((string) $document["file"],"./");
+    $prevFilename = ltrim((string) $document["file"], "./");
     if (file_exists($this->main->config->getAsString('uploadFolder') . "/" . $prevFilename)) {
       unlink($this->main->config->getAsString('uploadFolder') . "/" . $prevFilename);
     }
@@ -82,9 +84,11 @@ class Document extends \HubletoMain\Core\Models\Model
   {
     $document = (array) $this->record->find($id)->toArray();
 
-    if (!isset($document["file"])) return $id;
+    if (!isset($document["file"])) {
+      return $id;
+    }
 
-    $prevFilename = ltrim((string) $document["file"],"./");
+    $prevFilename = ltrim((string) $document["file"], "./");
     if (file_exists($this->main->config->getAsString('uploadFolder') . "/" . $prevFilename)) {
       unlink($this->main->config->getAsString('uploadFolder') . "/" . $prevFilename);
     }

@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Cloud\Controllers\Api;
 
 class ChargeCredit extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public bool $requiresUserAuthentication = false;
 
   public function renderJson(): ?array

@@ -29,7 +29,7 @@ class DealDocument extends \HubletoMain\Core\Models\Model
     switch ($columnName) {
       case 'hyperlink':
         $description->setReactComponent('InputHyperlink');
-      break;
+        break;
     }
     return $description;
   }
@@ -37,7 +37,7 @@ class DealDocument extends \HubletoMain\Core\Models\Model
   public function describeTable(): \ADIOS\Core\Description\Table
   {
     $description = parent::describeTable();
-    if ($this->main->urlParamAsInteger('idDeal') > 0){
+    if ($this->main->urlParamAsInteger('idDeal') > 0) {
       // $description->permissions = [
       //   'canRead' => $this->main->permissions->granted($this->fullName . ':Read'),
       //   'canCreate' => $this->main->permissions->granted($this->fullName . ':Create'),

@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Events\Controllers;
 
 class Speakers extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function prepareView(): void
   {
     parent::prepareView();

@@ -10,12 +10,14 @@ class OrderProduct extends \HubletoMain\Core\RecordManager
   public $table = 'order_products';
 
   /** @return BelongsTo<Order, covariant OrderProduct> */
-  public function ORDER(): BelongsTo {
+  public function ORDER(): BelongsTo
+  {
     return $this->belongsTo(Order::class, 'id_order', 'id');
   }
 
   /** @return BelongsTo<Product, covariant OrderProduct> */
-  public function PRODUCT(): BelongsTo {
+  public function PRODUCT(): BelongsTo
+  {
     return $this->belongsTo(Product::class, 'id_product', 'id');
   }
 }

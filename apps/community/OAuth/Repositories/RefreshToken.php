@@ -6,8 +6,8 @@ use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use HubletoApp\Community\OAuth\Entities\RefreshTokenEntity;
 
-class RefreshToken implements RefreshTokenRepositoryInterface {
-
+class RefreshToken implements RefreshTokenRepositoryInterface
+{
   public \HubletoMain $main;
 
   public function __construct(\HubletoMain $main)

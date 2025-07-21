@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Cloud\Controllers\Test;
 
-class ClearCredit extends \HubletoMain\Core\Controllers\Controller {
-
+class ClearCredit extends \HubletoMain\Core\Controllers\Controller
+{
   public function prepareView(): void
   {
     parent::prepareView();

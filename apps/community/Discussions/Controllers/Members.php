@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Discussions\Controllers;
 
 class Members extends \HubletoMain\Core\Controllers\Controller
 {
-
   // Uncomment this if you want to make your controller public
   // public bool $requiresUserAuthentication = false;
 

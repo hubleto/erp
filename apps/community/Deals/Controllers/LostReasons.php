@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Deals\Controllers;
 
-class LostReasons extends \HubletoMain\Core\Controllers\Controller {
-
+class LostReasons extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

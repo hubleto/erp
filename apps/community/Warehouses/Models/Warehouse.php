@@ -2,32 +2,30 @@
 
 namespace HubletoApp\Community\Warehouses\Models;
 
-use \HubletoApp\Community\Settings\Models\User;
-
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Image;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Text;
+use HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Image;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Text;
 
 class Warehouse extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'warehouses';
   public string $recordManagerClass = RecordManagers\Warehouse::class;
   public ?string $lookupSqlValue = 'concat("Warehouse #", {%TABLE%}.id)';
 
-  public array $relations = [ 
+  public array $relations = [
     'TYPE' => [ self::BELONGS_TO, WarehouseType::class, 'id_type', 'id' ],
     'OPERATION_MANAGER' => [ self::BELONGS_TO, User::class, 'id_operaion_manager', 'id' ],
   ];
 
-  const OPERATIONAL_STATUS_ACTIVE = 1;
-  const OPERATIONAL_STATUS_INACTIVE = 2;
-  const OPERATIONAL_STATUS_MAINTENANCE = 3;
+  public const OPERATIONAL_STATUS_ACTIVE = 1;
+  public const OPERATIONAL_STATUS_INACTIVE = 2;
+  public const OPERATIONAL_STATUS_MAINTENANCE = 3;
 
-  const OPERATIONAL_STATUSES = [
+  public const OPERATIONAL_STATUSES = [
     self::OPERATIONAL_STATUS_ACTIVE => 'Active',
     self::OPERATIONAL_STATUS_INACTIVE => 'Inactive',
     self::OPERATIONAL_STATUS_MAINTENANCE => 'Maintenance',

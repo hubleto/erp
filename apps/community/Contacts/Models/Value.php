@@ -61,9 +61,13 @@ class Value extends \HubletoMain\Core\Models\Model
   public function getTypeFromValue(string $value): string
   {
     $type = 'other';
-    if (filter_var($value, FILTER_VALIDATE_EMAIL)) $type = 'email';
-    elseif (str_starts_with(strtolower($value), 'http')) $type = 'url';
-    elseif (preg_match('/^[\+|0-9| ]+$/', $value)) $type = 'number';
+    if (filter_var($value, FILTER_VALIDATE_EMAIL)) {
+      $type = 'email';
+    } elseif (str_starts_with(strtolower($value), 'http')) {
+      $type = 'url';
+    } elseif (preg_match('/^[\+|0-9| ]+$/', $value)) {
+      $type = 'number';
+    }
     return $type;
   }
 

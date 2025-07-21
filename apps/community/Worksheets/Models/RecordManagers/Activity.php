@@ -2,25 +2,26 @@
 
 namespace HubletoApp\Community\Worksheets\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-use \HubletoApp\Community\Settings\Models\RecordManagers\User;
-use \HubletoApp\Community\Tasks\Models\RecordManagers\Task;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use HubletoApp\Community\Tasks\Models\RecordManagers\Task;
 
 class Activity extends \HubletoMain\Core\RecordManager
 {
-
   public $table = 'worksheet_activities';
 
-  public function WORKER(): BelongsTo {
+  public function WORKER(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_worker', 'id');
   }
 
-  public function TASK(): BelongsTo {
+  public function TASK(): BelongsTo
+  {
     return $this->belongsTo(Task::class, 'id_task', 'id');
   }
 
-  public function TYPE(): BelongsTo {
+  public function TYPE(): BelongsTo
+  {
     return $this->belongsTo(ActivityType::class, 'id_type', 'id');
   }
 

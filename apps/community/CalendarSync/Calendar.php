@@ -4,8 +4,8 @@ namespace HubletoApp\Community\CalendarSync;
 
 use HubletoApp\Community\CalendarSync\Models\Source;
 
-class Calendar extends \HubletoMain\Core\Calendar {
-
+class Calendar extends \HubletoMain\Core\Calendar
+{
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
     $formattedEvents = [];
@@ -41,8 +41,7 @@ class Calendar extends \HubletoMain\Core\Calendar {
             ];
           }
         }
-      }
-      elseif ($source->type === 'ics') {
+      } elseif ($source->type === 'ics') {
         $icsData = @file_get_contents($source->link);
         if (!$icsData) {
           $formattedEvents[] = [

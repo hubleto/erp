@@ -2,12 +2,11 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Boolean;
 
 class AuthCode extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'oauth_auth_codes';
   public string $recordManagerClass = RecordManagers\AuthCode::class;
   public ?string $lookupSqlValue = 'concat("AuthCode #", {%TABLE%}.id)';

@@ -2,20 +2,20 @@
 
 namespace HubletoApp\Community\Discussions\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-use \HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
 class Member extends \HubletoMain\Core\RecordManager
 {
-
   public $table = 'discussions_members';
 
-  public function DISCUSSION(): BelongsTo {
+  public function DISCUSSION(): BelongsTo
+  {
     return $this->belongsTo(Discussion::class, 'id_discussion', 'id');
   }
 
-  public function MEMBER(): BelongsTo {
+  public function MEMBER(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_member', 'id');
   }
 

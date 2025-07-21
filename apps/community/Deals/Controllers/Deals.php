@@ -4,9 +4,8 @@ namespace HubletoApp\Community\Deals\Controllers;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class Deals extends \HubletoMain\Core\Controllers\Controller {
-
-
+class Deals extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -29,7 +28,9 @@ class Deals extends \HubletoMain\Core\Controllers\Controller {
 
     parent::prepareView();
     $this->viewParams['result'] = $result;
-    if ($this->main->isUrlParam('add')) $this->viewParams['recordId'] = -1;
+    if ($this->main->isUrlParam('add')) {
+      $this->viewParams['recordId'] = -1;
+    }
     $this->setView('@HubletoApp:Community:Deals/Deals.twig');
   }
 

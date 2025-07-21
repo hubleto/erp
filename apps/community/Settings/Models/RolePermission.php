@@ -86,12 +86,19 @@ class RolePermission extends \HubletoMain\Core\Models\Model
     int $idRole,
     string $modelPermission,
     array $permissions // example: [true, true, true, true]
-  ): void
-  {
-    if ($permissions[0]) $this->grantPermissionByString($idRole, $modelPermission . ':Create');
-    if ($permissions[1]) $this->grantPermissionByString($idRole, $modelPermission . ':Read');
-    if ($permissions[2]) $this->grantPermissionByString($idRole, $modelPermission . ':Update');
-    if ($permissions[3]) $this->grantPermissionByString($idRole, $modelPermission . ':Delete');
+  ): void {
+    if ($permissions[0]) {
+      $this->grantPermissionByString($idRole, $modelPermission . ':Create');
+    }
+    if ($permissions[1]) {
+      $this->grantPermissionByString($idRole, $modelPermission . ':Read');
+    }
+    if ($permissions[2]) {
+      $this->grantPermissionByString($idRole, $modelPermission . ':Update');
+    }
+    if ($permissions[3]) {
+      $this->grantPermissionByString($idRole, $modelPermission . ':Delete');
+    }
   }
 
 }

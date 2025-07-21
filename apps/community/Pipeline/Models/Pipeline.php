@@ -3,15 +3,15 @@
 namespace HubletoApp\Community\Pipeline\Models;
 
 use ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Integer;
 
 class Pipeline extends \HubletoMain\Core\Models\Model
 {
-  const TYPE_DEAL_MANAGEMENT = 1;
-  const TYPE_PROJECT_MANAGEMENT = 2;
-  const TYPE_TASK_MANAGEMENT = 3;
+  public const TYPE_DEAL_MANAGEMENT = 1;
+  public const TYPE_PROJECT_MANAGEMENT = 2;
+  public const TYPE_TASK_MANAGEMENT = 3;
 
-  const TYPE_ENUM_VALUES = [
+  public const TYPE_ENUM_VALUES = [
     self::TYPE_DEAL_MANAGEMENT => 'deal management',
     self::TYPE_PROJECT_MANAGEMENT => 'project management',
     self::TYPE_TASK_MANAGEMENT => 'task management',

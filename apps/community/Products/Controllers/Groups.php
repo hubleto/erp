@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Products\Controllers;
 
-class Groups extends \HubletoMain\Core\Controllers\Controller {
-
+class Groups extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

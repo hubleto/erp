@@ -7,7 +7,6 @@ use HubletoApp\Community\Pipeline\Models\Pipeline;
 
 class GetPipelines extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
 

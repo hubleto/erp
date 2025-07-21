@@ -7,8 +7,8 @@ use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
 class IcsCalendar extends \HubletoMain\Core\Controllers\Controller
 {
-  public bool $hideDefaultDesktop = TRUE;
-  public bool $requiresUserAuthentication = FALSE;
+  public bool $hideDefaultDesktop = true;
+  public bool $requiresUserAuthentication = false;
 
   public function getBreadcrumbs(): array
   {
@@ -28,7 +28,9 @@ class IcsCalendar extends \HubletoMain\Core\Controllers\Controller
     $mSharedCalendars = new SharedCalendar();
     $sharedCalendar = $mSharedCalendars->where('share_key', $calendarKey)->where('enabled', true)->first();
 
-    if ($sharedCalendar == null) $this->app->router->redirectTo('/404');
+    if ($sharedCalendar == null) {
+      $this->app->router->redirectTo('/404');
+    }
     $calendarSource = $sharedCalendar->get('calendar')[0]['calendar'];
 
     // permissions

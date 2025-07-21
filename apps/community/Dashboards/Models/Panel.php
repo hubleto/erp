@@ -57,7 +57,7 @@ class Panel extends \HubletoMain\Core\Models\Model
           $enumValues[$board['boardUrlSlug']] = $board['app']->manifest['name'] . ': ' . $board['title'];
         }
         $description->setEnumValues($enumValues);
-      break;
+        break;
     }
     return $description;
   }

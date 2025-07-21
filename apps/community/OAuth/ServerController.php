@@ -8,10 +8,9 @@ use League\OAuth2\Server\Grant\AuthCodeGrant;
 
 class ServerController extends \HubletoMain\Core\Controllers\Controller
 {
-
   public AuthorizationServer $server;
 
-  function getServer(): AuthorizationServer
+  public function getServer(): AuthorizationServer
   {
     $clientRepository = new \HubletoApp\Community\OAuth\Repositories\Client($this->main);
     $userRepository = new \HubletoApp\Community\OAuth\Repositories\User($this->main);

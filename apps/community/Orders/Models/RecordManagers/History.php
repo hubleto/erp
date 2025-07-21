@@ -9,7 +9,8 @@ class History extends \HubletoMain\Core\RecordManager
   public $table = 'order_histories';
 
   /** @return BelongsTo<Order, covariant History> */
-  public function ORDER(): BelongsTo {
+  public function ORDER(): BelongsTo
+  {
     return $this->belongsTo(Order::class, 'id_order', 'id');
   }
 

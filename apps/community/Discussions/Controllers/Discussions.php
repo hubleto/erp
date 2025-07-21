@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Discussions\Controllers;
 
 class Discussions extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function prepareView(): void
   {
     parent::prepareView();

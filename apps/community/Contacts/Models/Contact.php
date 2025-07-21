@@ -12,7 +12,6 @@ use HubletoMain\Core\Helper;
 
 class Contact extends \HubletoMain\Core\Models\Model
 {
-
   public bool $isExtendableByCustomColumns = true;
 
   public string $table = 'contacts';

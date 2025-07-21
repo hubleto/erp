@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Customers\Tests;
 
 class CalendarRequests extends \HubletoMain\Core\AppTest
 {
-
   public function run(): void
   {
     $this->main->setUrlParam('start', date('Y-m-d', strtotime('-' . (string) rand(5, 10) . ' days')));

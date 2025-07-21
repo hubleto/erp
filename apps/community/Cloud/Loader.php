@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Cloud;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public bool $canBeDisabled = false;
   public bool $permittedForAllUsers = true;
 
@@ -46,7 +45,7 @@ class Loader extends \HubletoMain\Core\App
       if (!str_starts_with($this->main->route, 'cloud')) {
         if (!$this->configAsBool('legalDocumentsAccepted')) {
           $this->main->router->redirectTo('cloud');
-        } else if ($this->main->isPremium) {
+        } elseif ($this->main->isPremium) {
           $subscriptionInfo = $this->getSubscriptionInfo();
           if (!$subscriptionInfo['isActive']) {
             $this->main->router->redirectTo('cloud');
@@ -85,7 +84,8 @@ class Loader extends \HubletoMain\Core\App
   //   }
   // }
 
-  public function getAccountUid() {
+  public function getAccountUid()
+  {
     $accountUid = $this->configAsString('accountUid');
     if (empty($accountUid)) {
       $accountUid = \ADIOS\Core\Helper::generateUuidV4();
@@ -94,7 +94,8 @@ class Loader extends \HubletoMain\Core\App
     return $accountUid;
   }
 
-  public function getPaymentVariableSymbol() {
+  public function getPaymentVariableSymbol()
+  {
     $paymentVariableSymbol = $this->configAsString('paymentVariableSymbol');
     if (empty($paymentVariableSymbol)) {
       $paymentVariableSymbol = '3' . date('y') . str_pad(rand(0, 999), 3, STR_PAD_LEFT) . str_pad(rand(0, 9999), 4, STR_PAD_LEFT);
@@ -107,7 +108,9 @@ class Loader extends \HubletoMain\Core\App
   {
     $pricePerUser = 9.9;
     if ($this->premiumAccountActivated()) {
-      if ($discountPercent > 100) $discountPercent = 0;
+      if ($discountPercent > 100) {
+        $discountPercent = 0;
+      }
       return $activeUsers * $pricePerUser * (100 - $discountPercent) / 100;
     } else {
       return 0;
@@ -123,7 +126,7 @@ class Loader extends \HubletoMain\Core\App
     $isTrialPeriod = $this->configAsBool('isTrialPeriod');
 
     if (!empty($premiumAccountSince)) {
-      $trialPeriodExpiresIn = floor((strtotime($freeTrialPeriodUntil) - time())/3600/24);
+      $trialPeriodExpiresIn = floor((strtotime($freeTrialPeriodUntil) - time()) / 3600 / 24);
       // $isTrialPeriod = $trialPeriodExpiresIn > 0;
     }
 
@@ -184,8 +187,12 @@ class Loader extends \HubletoMain\Core\App
     $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
     $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
 
-    if ($month == 0) $month = date('m');
-    if ($year == 0) $year = date('Y');
+    if ($month == 0) {
+      $month = date('m');
+    }
+    if ($year == 0) {
+      $year = date('Y');
+    }
 
     $premiumInfo = [
       'activeUsers' => 0,
@@ -283,9 +290,14 @@ class Loader extends \HubletoMain\Core\App
     return $activated;
   }
 
-  public function updatePremiumInfo(int $month = 0, int $year = 0) {
-    if ($month == 0) $month = (int) date('m');
-    if ($year == 0) $year = (int) date('Y');
+  public function updatePremiumInfo(int $month = 0, int $year = 0)
+  {
+    if ($month == 0) {
+      $month = (int) date('m');
+    }
+    if ($year == 0) {
+      $year = (int) date('Y');
+    }
 
     $mLog = new Models\Log($this->main);
     $mPayment = new Models\Payment($this->main);

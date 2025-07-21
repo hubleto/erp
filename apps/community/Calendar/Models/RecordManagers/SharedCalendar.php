@@ -11,7 +11,8 @@ class SharedCalendar extends \HubletoMain\Core\RecordManager
   public $table = 'shared_calendars';
 
   /** @return BelongsTo<User, covariant Customer> */
-  public function OWNER(): BelongsTo {
+  public function OWNER(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_owner', 'id');
   }
 

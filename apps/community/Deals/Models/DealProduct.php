@@ -53,14 +53,20 @@ class DealProduct extends \HubletoMain\Core\Models\Model
   public function onBeforeCreate(array $record): array
   {
     $record["sum"] = (new CalculatePrice($this->main))->calculatePriceIncludingVat(
-      $record["unit_price"], $record["amount"], $record["vat"] ?? 0, $record["discount"] ?? 0
+      $record["unit_price"],
+      $record["amount"],
+      $record["vat"] ?? 0,
+      $record["discount"] ?? 0
     );
     return $record;
   }
   public function onBeforeUpdate(array $record): array
   {
     $record["sum"] = (new CalculatePrice($this->main))->calculatePriceIncludingVat(
-      $record["unit_price"], $record["amount"], $record["vat"] ?? 0, $record["discount"] ?? 0
+      $record["unit_price"],
+      $record["amount"],
+      $record["vat"] ?? 0,
+      $record["discount"] ?? 0
     );
     return $record;
   }

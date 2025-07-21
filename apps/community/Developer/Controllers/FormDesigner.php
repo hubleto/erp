@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Developer\Controllers;
 
 class FormDesigner extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -37,7 +36,7 @@ class FormDesigner extends \HubletoMain\Core\Controllers\Controller
     </>;
   }
 EOL;
-      break;
+        break;
       case 'two-columns':
         $renderContentCode = <<<EOL
   renderContent(): JSX.Element {
@@ -69,7 +68,7 @@ EOL;
     </>;
   }
 EOL;
-      break;
+        break;
     }
 
     $this->viewParams['renderContentCode'] = $renderContentCode;

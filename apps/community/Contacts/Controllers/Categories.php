@@ -2,9 +2,8 @@
 
 namespace HubletoApp\Community\Contacts\Controllers;
 
-class Categories extends \HubletoMain\Core\Controllers\Controller {
-
-
+class Categories extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

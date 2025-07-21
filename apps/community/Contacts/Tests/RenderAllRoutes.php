@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Contacts\Tests;
 
 class RenderAllRoutes extends \HubletoMain\Core\AppTest
 {
-
   public function run(): void
   {
     $routes = [

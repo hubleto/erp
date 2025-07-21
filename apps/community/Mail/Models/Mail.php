@@ -9,7 +9,6 @@ use ADIOS\Core\Db\Column\Color;
 use ADIOS\Core\Db\Column\DateTime;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Boolean;
-
 use HubletoApp\Community\Settings\Models\User;
 
 class Mail extends \HubletoMain\Core\Models\Model
@@ -66,10 +65,10 @@ class Mail extends \HubletoMain\Core\Models\Model
         unset($description->columns['to']);
         unset($description->columns['cc']);
         unset($description->columns['bcc']);
-      break;
+        break;
       case 'sent':
         unset($description->columns['from']);
-      break;
+        break;
     }
 
     $description->permissions['canDelete'] = false;

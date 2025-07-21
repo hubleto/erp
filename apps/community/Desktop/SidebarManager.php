@@ -2,18 +2,20 @@
 
 namespace HubletoApp\Community\Desktop;
 
-class SidebarManager {
-  const ITEM_LINK = 'link';
-  const ITEM_DIVIDER = 'divider';
-  const ITEM_HEADING_1 = 'heading_1';
-  const ITEM_HEADING_2 = 'heading_2';
+class SidebarManager
+{
+  public const ITEM_LINK = 'link';
+  public const ITEM_DIVIDER = 'divider';
+  public const ITEM_HEADING_1 = 'heading_1';
+  public const ITEM_HEADING_2 = 'heading_2';
 
   public \HubletoMain $main;
 
   /** @var array<int, array<string, bool|string>> */
   public array $items = [];
 
-  public function __construct(\HubletoMain $main) {
+  public function __construct(\HubletoMain $main)
+  {
     $this->main = $main;
   }
 

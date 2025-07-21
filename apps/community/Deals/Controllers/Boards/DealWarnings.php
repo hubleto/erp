@@ -4,8 +4,8 @@ namespace HubletoApp\Community\Deals\Controllers\Boards;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class DealWarnings extends \HubletoMain\Core\Controllers\Controller {
-
+class DealWarnings extends \HubletoMain\Core\Controllers\Controller
+{
   public bool $hideDefaultDesktop = true;
 
   public function prepareView(): void
@@ -29,7 +29,9 @@ class DealWarnings extends \HubletoMain\Core\Controllers\Controller {
     foreach ($myDeals as $deal) {
       $futureActivities = 0;
       foreach ($deal['ACTIVITIES'] as $activity) {
-        if (strtotime($activity['date_start']) > time()) $futureActivities++;
+        if (strtotime($activity['date_start']) > time()) {
+          $futureActivities++;
+        }
       }
       if (!$deal['is_closed'] && $futureActivities == 0) {
         $items[] = $deal;

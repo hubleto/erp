@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Calendar;
 
 class CalendarManager
 {
-
   public \HubletoMain $main;
 
   /** @var array<string, \HubletoMain\Core\Calendar> */

@@ -2,9 +2,8 @@
 
 namespace HubletoApp\Community\Leads\Controllers;
 
-class LeadsArchive extends \HubletoMain\Core\Controllers\Controller {
-
-
+class LeadsArchive extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

@@ -7,8 +7,8 @@ use League\OAuth2\Server\Entities\ScopeEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use HubletoApp\Community\OAuth\Entities\ScopeEntity;
 
-class Scope implements ScopeRepositoryInterface {
-
+class Scope implements ScopeRepositoryInterface
+{
   public \HubletoMain $main;
 
   public function __construct(\HubletoMain $main)

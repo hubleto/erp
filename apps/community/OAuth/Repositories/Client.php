@@ -6,8 +6,8 @@ use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use HubletoApp\Community\OAuth\Entities\ClientEntity;
 
-class Client implements ClientRepositoryInterface {
-
+class Client implements ClientRepositoryInterface
+{
   public \HubletoMain $main;
 
   public function __construct(\HubletoMain $main)

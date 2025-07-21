@@ -2,30 +2,28 @@
 
 namespace HubletoApp\Community\Events\Models;
 
-use \ADIOS\Core\Db\Column\Boolean;
-use \ADIOS\Core\Db\Column\Color;
-use \ADIOS\Core\Db\Column\Decimal;
-use \ADIOS\Core\Db\Column\Date;
-use \ADIOS\Core\Db\Column\DateTime;
-use \ADIOS\Core\Db\Column\File;
-use \ADIOS\Core\Db\Column\Image;
-use \ADIOS\Core\Db\Column\Integer;
-use \ADIOS\Core\Db\Column\Json;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Password;
-use \ADIOS\Core\Db\Column\Text;
-use \ADIOS\Core\Db\Column\Varchar;
-
-use \HubletoApp\Community\Settings\Models\User;
+use ADIOS\Core\Db\Column\Boolean;
+use ADIOS\Core\Db\Column\Color;
+use ADIOS\Core\Db\Column\Decimal;
+use ADIOS\Core\Db\Column\Date;
+use ADIOS\Core\Db\Column\DateTime;
+use ADIOS\Core\Db\Column\File;
+use ADIOS\Core\Db\Column\Image;
+use ADIOS\Core\Db\Column\Integer;
+use ADIOS\Core\Db\Column\Json;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Password;
+use ADIOS\Core\Db\Column\Text;
+use ADIOS\Core\Db\Column\Varchar;
+use HubletoApp\Community\Settings\Models\User;
 
 class Event extends \HubletoMain\Core\Models\Model
 {
+  public const ENUM_ATTENDANCE_OPTION_IN_PERSON = 1;
+  public const ENUM_ATTENDANCE_OPTION_VIRTUAL = 2;
+  public const ENUM_ATTENDANCE_OPTION_HYBRID = 3;
 
-  const ENUM_ATTENDANCE_OPTION_IN_PERSON = 1;
-  const ENUM_ATTENDANCE_OPTION_VIRTUAL = 2;
-  const ENUM_ATTENDANCE_OPTION_HYBRID = 3;
-
-  const ENUM_ATTENDANCE_OPTIONS = [
+  public const ENUM_ATTENDANCE_OPTIONS = [
     self::ENUM_ATTENDANCE_OPTION_IN_PERSON => 'In-person',
     self::ENUM_ATTENDANCE_OPTION_VIRTUAL => 'Virtual',
     self::ENUM_ATTENDANCE_OPTION_HYBRID => 'Hybrid',
@@ -35,7 +33,7 @@ class Event extends \HubletoMain\Core\Models\Model
   public string $recordManagerClass = RecordManagers\Event::class;
   public ?string $lookupSqlValue = 'concat("Event #", {%TABLE%}.id)';
 
-  public array $relations = [ 
+  public array $relations = [
     'TYPE' => [ self::BELONGS_TO, Type::class, 'id_type', 'id' ],
     'ORGANIZER' => [ self::BELONGS_TO, User::class, 'id_organizer', 'id' ],
   ];

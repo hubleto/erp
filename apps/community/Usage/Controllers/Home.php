@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Usage\Controllers;
 
-class Home extends \HubletoMain\Core\Controllers\Controller {
-
+class Home extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -11,7 +11,8 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
     ]);
   }
 
-  public function prepareView(): void {
+  public function prepareView(): void
+  {
     parent::prepareView();
     $this->setView('@HubletoApp:Community:Usage/Home.twig');
   }

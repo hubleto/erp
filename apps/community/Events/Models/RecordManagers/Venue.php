@@ -2,13 +2,11 @@
 
 namespace HubletoApp\Community\Events\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-use \HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
 class Venue extends \HubletoMain\Core\RecordManager
 {
-
   public $table = 'events_venues';
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed

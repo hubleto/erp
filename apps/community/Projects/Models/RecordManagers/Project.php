@@ -2,32 +2,35 @@
 
 namespace HubletoApp\Community\Projects\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-use \HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
 class Project extends \HubletoMain\Core\RecordManager
 {
-
   public $table = 'projects';
 
-  public function MAIN_DEVELOPER(): BelongsTo {
+  public function MAIN_DEVELOPER(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_main_developer', 'id');
   }
 
-  public function ACCOUNT_MANAGER(): BelongsTo {
+  public function ACCOUNT_MANAGER(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_account_manager', 'id');
   }
 
-  public function PHASE(): BelongsTo {
+  public function PHASE(): BelongsTo
+  {
     return $this->belongsTo(Phase::class, 'id_phase', 'id');
   }
 
-  public function OWNER(): BelongsTo {
+  public function OWNER(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_owner', 'id');
   }
 
-  public function MANAGER(): BelongsTo {
+  public function MANAGER(): BelongsTo
+  {
     return $this->belongsTo(User::class, 'id_manager', 'id');
   }
 

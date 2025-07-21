@@ -4,8 +4,7 @@ namespace HubletoApp\Community\Desktop;
 
 class Loader extends \HubletoMain\Core\App
 {
-
-  const DEFAULT_INSTALLATION_CONFIG = [
+  public const DEFAULT_INSTALLATION_CONFIG = [
     'sidebarOrder' => 0,
   ];
 

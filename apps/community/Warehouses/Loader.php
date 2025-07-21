@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Warehouses;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public bool $hasCustomSettings = true;
 
   // init

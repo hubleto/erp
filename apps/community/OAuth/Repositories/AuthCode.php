@@ -8,7 +8,6 @@ use HubletoApp\Community\OAuth\Entities\AuthCodeEntity;
 
 class AuthCode implements AuthCodeRepositoryInterface
 {
-
   public \HubletoMain $main;
 
   public function __construct(\HubletoMain $main)
@@ -24,7 +23,7 @@ class AuthCode implements AuthCodeRepositoryInterface
       'expires_at' => $authCodeEntity->getExpiryDateTime(),
       'user_id' => $authCodeEntity->getUserIdentifier(), // Can be null if no user is involved (e.g., client credentials)
       'client_id' => $authCodeEntity->getClient()->getIdentifier(),
-      'scopes' => json_encode(array_map(fn($scope) => $scope->getIdentifier(), $authCodeEntity->getScopes())),
+      'scopes' => json_encode(array_map(fn ($scope) => $scope->getIdentifier(), $authCodeEntity->getScopes())),
       // 'code_challenge' => $authorizationRequest->getCodeChallenge(),
       // 'code_challenge_method' => $authorizationRequest->getCodeChallengeMethod(),
       // Add any other fields you need, like redirect_uri

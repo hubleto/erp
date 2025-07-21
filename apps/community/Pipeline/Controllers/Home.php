@@ -8,9 +8,8 @@ use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Settings\Models\Setting;
 
-class Home extends \HubletoMain\Core\Controllers\Controller {
-
-
+class Home extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -44,8 +43,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
         ->first()
         ->toArray()
       ;
-    }
-    else {
+    } else {
       $searchPipeline = (array) $mPipeline->record
         ->where("id", $defaultPipelineId)
         ->with("STEPS")
@@ -80,8 +78,12 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
       ->with("OWNER")
     ;
 
-    if ($fDealResult > 0) $deals = $deals->where('deal_result', $fDealResult ?? true);
-    if ($fOwner > 0) $deals = $deals->where('id_owner', $fOwner);
+    if ($fDealResult > 0) {
+      $deals = $deals->where('deal_result', $fDealResult ?? true);
+    }
+    if ($fOwner > 0) {
+      $deals = $deals->where('id_owner', $fOwner);
+    }
 
     $deals = $deals
       ->get()
@@ -89,7 +91,9 @@ class Home extends \HubletoMain\Core\Controllers\Controller {
     ;
 
     foreach ((array) $deals as $key => $deal) {
-      if (empty($deal["TAGS"])) continue;
+      if (empty($deal["TAGS"])) {
+        continue;
+      }
       $tag = $mTag->record->find($deal["TAGS"][0]["id_tag"])?->toArray();
       $deals[$key]["TAG"] = $tag;
       unset($deals[$key]["TAGS"]);

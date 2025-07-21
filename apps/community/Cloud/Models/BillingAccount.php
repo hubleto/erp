@@ -5,7 +5,6 @@ namespace HubletoApp\Community\Cloud\Models;
 use ADIOS\Core\Db\Column\DateTime;
 use ADIOS\Core\Db\Column\Boolean;
 use ADIOS\Core\Db\Column\Varchar;
-
 use HubletoApp\Community\Settings\Models\User;
 
 class BillingAccount extends \HubletoMain\Core\Models\Model

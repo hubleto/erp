@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Documents;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public function init(): void
   {
     parent::init();
@@ -25,8 +24,11 @@ class Loader extends \HubletoMain\Core\App
   {
     $mFolder = new Models\Folder($this->main);
     $rootFolder = $mFolder->record->where('uid', '_ROOT_')->first()->toArray();
-    if (!isset($rootFolder['id'])) return null;
-    else return (int) $rootFolder['id'];
+    if (!isset($rootFolder['id'])) {
+      return null;
+    } else {
+      return (int) $rootFolder['id'];
+    }
   }
 
   public function installTables(int $round): void

@@ -2,11 +2,10 @@
 
 namespace HubletoApp\Community\Inventory\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Varchar;
 
 class Status extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'inventory_status';
   public string $recordManagerClass = RecordManagers\Status::class;
 

@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Contacts\Controllers;
 
 class Contacts extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

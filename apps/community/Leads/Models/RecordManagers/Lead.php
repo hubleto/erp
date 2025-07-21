@@ -11,8 +11,8 @@ use HubletoApp\Community\Campaigns\Models\RecordManagers\Campaign;
 use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
 use HubletoApp\Community\Leads\Models\RecordManagers\LeadHistory;
 use HubletoApp\Community\Leads\Models\RecordManagers\LeadTag;
-use \Illuminate\Database\Eloquent\Relations\HasMany;
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Lead extends \HubletoMain\Core\RecordManager
@@ -20,68 +20,81 @@ class Lead extends \HubletoMain\Core\RecordManager
   public $table = 'leads';
 
   /** @return belongsTo<Campaign, covariant Lead> */
-  public function CAMPAIGN(): BelongsTo {
-    return $this->belongsTo(Campaign::class, 'id_campaign', 'id' );
+  public function CAMPAIGN(): BelongsTo
+  {
+    return $this->belongsTo(Campaign::class, 'id_campaign', 'id');
   }
 
   /** @return hasOne<Deal, covariant Lead> */
-  public function DEAL(): HasOne {
-    return $this->hasOne(Deal::class, 'id_lead', 'id' );
+  public function DEAL(): HasOne
+  {
+    return $this->hasOne(Deal::class, 'id_lead', 'id');
   }
 
   /** @return BelongsTo<Customer, covariant Lead> */
-  public function CUSTOMER(): BelongsTo {
-    return $this->belongsTo(Customer::class, 'id_customer', 'id' );
+  public function CUSTOMER(): BelongsTo
+  {
+    return $this->belongsTo(Customer::class, 'id_customer', 'id');
   }
 
   /** @return BelongsTo<User, covariant Lead> */
-  public function OWNER(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_owner','id' );
+  public function OWNER(): BelongsTo
+  {
+    return $this->belongsTo(User::class, 'id_owner', 'id');
   }
 
   /** @return BelongsTo<User, covariant Lead> */
-  public function TEAM(): BelongsTo {
-    return $this->belongsTo(Team::class, 'id_team','id' );
+  public function TEAM(): BelongsTo
+  {
+    return $this->belongsTo(Team::class, 'id_team', 'id');
   }
 
   /** @return BelongsTo<User, covariant Lead> */
-  public function LEVEL(): BelongsTo {
-    return $this->belongsTo(Level::class, 'id_level','id' );
+  public function LEVEL(): BelongsTo
+  {
+    return $this->belongsTo(Level::class, 'id_level', 'id');
   }
 
   /** @return BelongsTo<User, covariant Lead> */
-  public function MANAGER(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_manager','id' );
+  public function MANAGER(): BelongsTo
+  {
+    return $this->belongsTo(User::class, 'id_manager', 'id');
   }
 
   /** @return hasOne<Contact, covariant Lead> */
-  public function CONTACT(): HasOne {
+  public function CONTACT(): HasOne
+  {
     return $this->hasOne(Contact::class, 'id', 'id_contact');
   }
 
   /** @return hasOne<Currency, covariant Lead> */
-  public function CURRENCY(): HasOne {
+  public function CURRENCY(): HasOne
+  {
     return $this->hasOne(Currency::class, 'id', 'id_currency');
   }
 
   /** @return hasMany<LeadHistory, covariant Lead> */
-  public function HISTORY(): HasMany {
+  public function HISTORY(): HasMany
+  {
     return $this->hasMany(LeadHistory::class, 'id_lead', 'id');
   }
 
   /** @return hasMany<LeadTag, covariant Lead> */
-  public function TAGS(): HasMany {
+  public function TAGS(): HasMany
+  {
     return $this->hasMany(LeadTag::class, 'id_lead', 'id');
   }
 
   /** @return hasMany<LeadActivity, covariant Lead> */
-  public function ACTIVITIES(): HasMany {
-    return $this->hasMany(LeadActivity::class, 'id_lead', 'id' );
+  public function ACTIVITIES(): HasMany
+  {
+    return $this->hasMany(LeadActivity::class, 'id_lead', 'id');
   }
 
   /** @return hasMany<LeadDocument, covariant Lead> */
-  public function DOCUMENTS(): HasMany {
-    return $this->hasMany(LeadDocument::class, 'id_lookup', 'id' );
+  public function DOCUMENTS(): HasMany
+  {
+    return $this->hasMany(LeadDocument::class, 'id_lookup', 'id');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
@@ -99,13 +112,19 @@ class Lead extends \HubletoMain\Core\RecordManager
     }
 
     $defaultFilters = $main->urlParamAsArray("defaultFilters");
-    if (isset($defaultFilters["fLeadArchive"]) && $defaultFilters["fLeadArchive"] > 0) $query = $query->where("leads.is_archived", $defaultFilters["fLeadArchive"]);
-    if (isset($defaultFilters["fLeadStatus"]) && count($defaultFilters["fLeadStatus"]) > 0) $query = $query->whereIn("leads.status", $defaultFilters["fLeadStatus"]);
+    if (isset($defaultFilters["fLeadArchive"]) && $defaultFilters["fLeadArchive"] > 0) {
+      $query = $query->where("leads.is_archived", $defaultFilters["fLeadArchive"]);
+    }
+    if (isset($defaultFilters["fLeadStatus"]) && count($defaultFilters["fLeadStatus"]) > 0) {
+      $query = $query->whereIn("leads.status", $defaultFilters["fLeadStatus"]);
+    }
 
     if (isset($defaultFilters["fLeadOwnership"])) {
       switch ($defaultFilters["fLeadOwnership"]) {
-        case 1: $query = $query->where("leads.id_owner", $main->auth->getUserId()); break;
-        case 2: $query = $query->where("leads.id_manager", $main->auth->getUserId()); break;
+        case 1: $query = $query->where("leads.id_owner", $main->auth->getUserId());
+          break;
+        case 2: $query = $query->where("leads.id_manager", $main->auth->getUserId());
+          break;
       }
     }
 
@@ -127,7 +146,7 @@ class Lead extends \HubletoMain\Core\RecordManager
       $query->orderBy('deals.identifier', $orderBy['direction']);
 
       return $query;
-    } else if (isset($orderBy['field']) && $orderBy['field'] == 'tags') {
+    } elseif (isset($orderBy['field']) && $orderBy['field'] == 'tags') {
       if (empty($this->joinManager["tags"])) {
         $this->joinManager["tags"]["order"] = true;
         $query

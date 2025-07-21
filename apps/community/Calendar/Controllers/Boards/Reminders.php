@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Boards;
 
-class Reminders extends \HubletoMain\Core\Controllers\Controller {
-
+class Reminders extends \HubletoMain\Core\Controllers\Controller
+{
   public bool $hideDefaultDesktop = true;
 
   public function prepareView(): void
@@ -16,7 +16,7 @@ class Reminders extends \HubletoMain\Core\Controllers\Controller {
     $this->viewParams['remindersToday'] = $remindersToday;
     $this->viewParams['remindersTomorrow'] = $remindersTomorrow;
     $this->viewParams['remindersLater'] = $remindersLater;
- 
+
     $this->setView('@HubletoApp:Community:Calendar/Boards/Reminders.twig');
   }
 

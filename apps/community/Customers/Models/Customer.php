@@ -89,7 +89,7 @@ class Customer extends \HubletoMain\Core\Models\Model
           ->setReactComponent('InputHyperlink')
           ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
-      break;
+        break;
     }
     return $description;
   }
@@ -128,7 +128,8 @@ class Customer extends \HubletoMain\Core\Models\Model
     return $savedRecord;
   }
 
-  public function getNewRecordDataFromString(string $text): array {
+  public function getNewRecordDataFromString(string $text): array
+  {
     return [
       'name' => $text,
     ];

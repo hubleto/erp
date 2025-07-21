@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Events\Controllers;
 
 class Agendas extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function prepareView(): void
   {
     parent::prepareView();

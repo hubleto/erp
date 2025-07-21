@@ -2,20 +2,20 @@
 
 namespace HubletoApp\Community\Events\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-use \HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
 class EventAttendee extends \HubletoMain\Core\RecordManager
 {
-
   public $table = 'events_has_attendees';
 
-  public function EVENT(): BelongsTo {
+  public function EVENT(): BelongsTo
+  {
     return $this->belongsTo(Event::class, 'id_event', 'id');
   }
 
-  public function ATTENDEE(): BelongsTo {
+  public function ATTENDEE(): BelongsTo
+  {
     return $this->belongsTo(Attendee::class, 'id_attendee', 'id');
   }
 

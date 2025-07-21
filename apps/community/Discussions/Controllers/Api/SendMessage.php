@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Discussions\Controllers\Api;
 
 class SendMessage extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function response(): array
   {
     $idDiscussion = $this->main->urlParamAsInteger('idDiscussion');

@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Customers\Tests;
 
 class RenderInvalidRoutes extends \HubletoMain\Core\AppTest
 {
-
   public function run(): void
   {
     $routes = [];

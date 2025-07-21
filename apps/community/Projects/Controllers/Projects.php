@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Projects\Controllers;
 
 class Projects extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function prepareView(): void
   {
     parent::prepareView();

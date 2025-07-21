@@ -2,13 +2,11 @@
 
 namespace HubletoApp\Community\Projects\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-use \HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
 class Phase extends \HubletoMain\Core\RecordManager
 {
-
   public $table = 'projects_phases';
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed

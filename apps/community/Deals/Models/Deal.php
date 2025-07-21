@@ -10,7 +10,6 @@ use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\Lookup;
 use ADIOS\Core\Db\Column\Text;
 use ADIOS\Core\Db\Column\Varchar;
-
 use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Leads\Models\Lead;
@@ -29,14 +28,14 @@ class Deal extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'deals/{%ID%}';
 
-  const RESULT_UNKNOWN = 1;
-  const RESULT_WON = 2;
-  const RESULT_LOST = 3;
+  public const RESULT_UNKNOWN = 1;
+  public const RESULT_WON = 2;
+  public const RESULT_LOST = 3;
 
-  const BUSINESS_TYPE_NEW = 1;
-  const BUSINESS_TYPE_EXISTING = 2;
+  public const BUSINESS_TYPE_NEW = 1;
+  public const BUSINESS_TYPE_EXISTING = 2;
 
-  const ENUM_SOURCE_CHANNELS = [
+  public const ENUM_SOURCE_CHANNELS = [
     1 => "Advertisement",
     2 => "Partner",
     3 => "Web",
@@ -46,8 +45,8 @@ class Deal extends \HubletoMain\Core\Models\Model
     7 => "Other",
   ];
 
-  const ENUM_DEAL_RESULTS = [ self::RESULT_UNKNOWN => "Unknown", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost" ];
-  const ENUM_BUSINESS_TYPES = [ self::BUSINESS_TYPE_NEW => "New", self::BUSINESS_TYPE_EXISTING => "Existing" ];
+  public const ENUM_DEAL_RESULTS = [ self::RESULT_UNKNOWN => "Unknown", self::RESULT_WON => "Won", self::RESULT_LOST => "Lost" ];
+  public const ENUM_BUSINESS_TYPES = [ self::BUSINESS_TYPE_NEW => "New", self::BUSINESS_TYPE_EXISTING => "Existing" ];
 
   public array $relations = [
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id'],
@@ -144,7 +143,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     $description->ui['showFooter'] = false;
     $description->ui['defaultFilters'] = [
       'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => self::ENUM_SOURCE_CHANNELS ],
-      'fDealResult' => [ 'title' => $this->translate('Result'), 'type' => 'multipleSelectButtons', 'options' =>self::ENUM_DEAL_RESULTS ],
+      'fDealResult' => [ 'title' => $this->translate('Result'), 'type' => 'multipleSelectButtons', 'options' => self::ENUM_DEAL_RESULTS ],
       'fDealBusinessType' => [ 'title' => $this->translate('Business type'), 'options' => array_merge([ 0 => $this->translate('All')], self::ENUM_BUSINESS_TYPES) ],
       'fDealOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
       'fDealClosed' => [ 'title' => $this->translate('Open / Closed'), 'options' => [ 0 => $this->translate('Open'), 1 => $this->translate('Closed') ] ],
@@ -299,7 +298,7 @@ class Deal extends \HubletoMain\Core\Models\Model
         if ($columns[$columnName]->getType() == "boolean") {
           $oldValue = $values[0] ? "Yes" : "No";
           $newValue = $values[1] ? "Yes" : "No";
-        } else if (!empty($columns[$columnName]->getEnumValues())) {
+        } elseif (!empty($columns[$columnName]->getEnumValues())) {
           $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? "None";
           $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? "None";
         }

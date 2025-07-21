@@ -16,7 +16,6 @@ use HubletoApp\Community\Settings\Models\Setting;
 
 class MoveToArchive extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     if (!$this->main->isUrlParam("recordId")) {

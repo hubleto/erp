@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Mail;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public bool $hasCustomSettings = true;
 
   public function __construct(\HubletoMain $main)
@@ -42,7 +41,7 @@ class Loader extends \HubletoMain\Core\App
   {
     $mMail = new \HubletoApp\Community\Mail\Models\Mail($this->main);
     return $mMail->record->prepareReadQuery()
-      ->where(function($q) {
+      ->where(function ($q) {
         $q->where('midx.id_to', $this->main->auth->getUserId());
         $q->orWhere('midx.id_cc', $this->main->auth->getUserId());
         $q->orWhere('midx.id_bcc', $this->main->auth->getUserId());
@@ -67,12 +66,14 @@ class Loader extends \HubletoMain\Core\App
   }
 
   public function send(
-    int|string $to, int|string $cc, int|string $bcc,
-    string $subject, string $body,
+    int|string $to,
+    int|string $cc,
+    int|string $bcc,
+    string $subject,
+    string $body,
     string $color = '',
     int $priority = 0
-  ): array
-  {
+  ): array {
     $user = $this->main->auth->getUser();
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
@@ -90,14 +91,23 @@ class Loader extends \HubletoMain\Core\App
 
     if (!empty($fromEmail)) {
 
-      if (is_string($to)) $toEmails = $this->parseEmailsFromString($to);
-      else $toEmails = [ $emailsByUserId[$to] ];
+      if (is_string($to)) {
+        $toEmails = $this->parseEmailsFromString($to);
+      } else {
+        $toEmails = [ $emailsByUserId[$to] ];
+      }
 
-      if (is_string($cc)) $ccEmails = $this->parseEmailsFromString($cc);
-      else $ccEmails = [ $emailsByUserId[$cc] ];
+      if (is_string($cc)) {
+        $ccEmails = $this->parseEmailsFromString($cc);
+      } else {
+        $ccEmails = [ $emailsByUserId[$cc] ];
+      }
 
-      if (is_string($bcc)) $bccEmails = $this->parseEmailsFromString($bcc);
-      else $bccEmails = [ $emailsByUserId[$bcc] ];
+      if (is_string($bcc)) {
+        $bccEmails = $this->parseEmailsFromString($bcc);
+      } else {
+        $bccEmails = [ $emailsByUserId[$bcc] ];
+      }
 
       $mMail = new Models\Mail($this->main);
       $mIndex = new Models\Index($this->main);

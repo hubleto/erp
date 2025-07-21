@@ -4,12 +4,11 @@ namespace HubletoApp\Community\Cloud\Controllers\Api;
 
 class PayMonthly extends \HubletoMain\Core\Controllers\ApiController
 {
-
-  const PAYMENT_SUCCESS = 1;
-  const THIS_IS_NOT_PREMIUM_ACCOUNT = 2;
-  const SUBSCRIPTION_NOT_ACTIVE = 3;
-  const FREE_TRIAL_PERIOD = 4;
-  const THIS_MONTH_ALREADY_PAID = 5;
+  public const PAYMENT_SUCCESS = 1;
+  public const THIS_IS_NOT_PREMIUM_ACCOUNT = 2;
+  public const SUBSCRIPTION_NOT_ACTIVE = 3;
+  public const FREE_TRIAL_PERIOD = 4;
+  public const THIS_MONTH_ALREADY_PAID = 5;
 
   public bool $requiresUserAuthentication = false;
 
@@ -86,9 +85,9 @@ class PayMonthly extends \HubletoMain\Core\Controllers\ApiController
       $premiumInfoPrevMonth = $this->hubletoApp->getPremiumInfo($prevMonth, $prevYear);
       $premiumInfoThisMonth = $this->hubletoApp->getPremiumInfo($thisMonth, $thisYear);
 
-    // var_dump($premiumInfoPrevMonth);
-    // var_dump($premiumInfoThisMonth);
-    // exit;
+      // var_dump($premiumInfoPrevMonth);
+      // var_dump($premiumInfoThisMonth);
+      // exit;
 
       // suma za pouzivatelov tento mesiac
 

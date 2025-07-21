@@ -16,8 +16,7 @@ class Source extends \HubletoMain\Core\RecordManager
 
     if ($type == 'google') {
       $query = $query->where('type', 'google');
-    }
-    else if ($type == 'ics') {
+    } elseif ($type == 'ics') {
       $query = $query->where('type', 'ics');
     }
 

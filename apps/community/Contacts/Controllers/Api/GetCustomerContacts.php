@@ -7,7 +7,6 @@ use HubletoApp\Community\Contacts\Models\Contact;
 
 class GetCustomerContacts extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $mContact = new Contact($this->main);

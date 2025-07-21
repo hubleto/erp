@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Documents\Controllers\Api;
 
 class GetFolderContent extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $folderUid = $this->main->urlParamAsString('folderUid');

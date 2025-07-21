@@ -7,8 +7,8 @@ use League\OAuth2\Server\Entities\UserEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use HubletoApp\Community\OAuth\Entities\UserEntity;
 
-class User implements UserRepositoryInterface {
-
+class User implements UserRepositoryInterface
+{
   public \HubletoMain $main;
 
   public function __construct(\HubletoMain $main)

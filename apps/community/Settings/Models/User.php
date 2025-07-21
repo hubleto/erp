@@ -2,13 +2,13 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
-use \ADIOS\Core\Db\Column\Lookup;
-use \ADIOS\Core\Db\Column\Json;
+use ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Lookup;
+use ADIOS\Core\Db\Column\Json;
 
 class User extends \ADIOS\Models\User
 {
-  const ENUM_LANGUAGES = [
+  public const ENUM_LANGUAGES = [
     'en' => 'English',
     'de' => 'Deutsch',
     'fr' => 'Francais',

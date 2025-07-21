@@ -2,8 +2,7 @@
 
 namespace HubletoApp\Community\Products\Models\RecordManagers;
 
-use \HubletoApp\Community\Suppliers\Models\RecordManagers\Supplier;
-
+use HubletoApp\Community\Suppliers\Models\RecordManagers\Supplier;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends \HubletoMain\Core\RecordManager
@@ -13,13 +12,13 @@ class Product extends \HubletoMain\Core\RecordManager
   /** @return HasOne<Group, covariant Product> */
   public function GROUP(): HasOne
   {
-    return $this->hasOne(Group::class, 'id','id_product_group');
+    return $this->hasOne(Group::class, 'id', 'id_product_group');
   }
 
   /** @return HasOne<Supplier, covariant Product> */
   public function SUPPLIER(): HasOne
   {
-    return $this->hasOne(Supplier::class, 'id','id_supplier');
+    return $this->hasOne(Supplier::class, 'id', 'id_supplier');
   }
 
   public function prepareLookupQuery(string $search): mixed
@@ -27,8 +26,11 @@ class Product extends \HubletoMain\Core\RecordManager
     $query = parent::prepareLookupQuery($search);
 
     $main = \ADIOS\Core\Helper::getGlobalApp();
-    if ($main->urlParamAsBool("getServices") == true) $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
-    else if ($main->urlParamAsBool("getProducts") == true) $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_PRODUCT);
+    if ($main->urlParamAsBool("getServices") == true) {
+      $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
+    } elseif ($main->urlParamAsBool("getProducts") == true) {
+      $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_PRODUCT);
+    }
     return $query;
   }
 

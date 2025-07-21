@@ -2,7 +2,8 @@
 
 namespace HubletoApp\Community\Documents\Controllers;
 
-class Browse extends \HubletoMain\Core\Controllers\Controller {
+class Browse extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

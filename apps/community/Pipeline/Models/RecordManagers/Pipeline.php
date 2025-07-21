@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Pipeline\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Pipeline extends \HubletoMain\Core\RecordManager
 {

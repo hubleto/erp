@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Developer\Controllers;
 
 class DbUpdates extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
@@ -62,7 +61,7 @@ class DbUpdates extends \HubletoMain\Core\Controllers\Controller
                 'bgClass' => 'bg-blue-50',
               ];
 
-            // column has changed
+              // column has changed
             } else {
               // todo
             }

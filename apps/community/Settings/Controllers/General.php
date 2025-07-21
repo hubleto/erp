@@ -2,9 +2,8 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class General extends \HubletoMain\Core\Controllers\Controller {
-
-
+class General extends \HubletoMain\Core\Controllers\Controller
+{
   public function prepareView(): void
   {
     parent::prepareView();

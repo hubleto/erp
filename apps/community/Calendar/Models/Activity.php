@@ -45,7 +45,7 @@ class Activity extends \HubletoMain\Core\Models\Model
         $description
           ->setReactComponent('InputHyperlink')
         ;
-      break;
+        break;
     }
     return $description;
   }

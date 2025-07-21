@@ -7,7 +7,6 @@ use HubletoApp\Community\Leads\Models\LeadActivity;
 
 class LogActivity extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $idLead = $this->main->urlParamAsInteger("idLead");

@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Inventory\Controllers;
 
 class Transactions extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function prepareView(): void
   {
     parent::prepareView();

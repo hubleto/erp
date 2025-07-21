@@ -2,11 +2,10 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use \ADIOS\Core\Db\Column\Varchar;
+use ADIOS\Core\Db\Column\Varchar;
 
 class RefreshToken extends \HubletoMain\Core\Models\Model
 {
-
   public string $table = 'oauth_access_tokens';
   public string $recordManagerClass = RecordManagers\RefreshToken::class;
   public ?string $lookupSqlValue = 'concat("RefreshToken #", {%TABLE%}.id)';

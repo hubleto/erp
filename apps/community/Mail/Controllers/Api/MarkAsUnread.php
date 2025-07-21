@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Mail\Controllers\Api;
 
 class MarkAsUnread extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $idMail = $this->main->urlParamAsInteger('idMail');

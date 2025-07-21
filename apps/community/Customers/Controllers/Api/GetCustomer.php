@@ -6,7 +6,6 @@ use HubletoApp\Community\Customers\Models\Customer;
 
 class GetCustomer extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $mCustomer = new Customer($this->main);

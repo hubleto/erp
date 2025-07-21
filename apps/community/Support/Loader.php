@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Support;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public function init(): void
   {
     parent::init();

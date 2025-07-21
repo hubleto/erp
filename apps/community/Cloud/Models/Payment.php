@@ -12,20 +12,19 @@ use ADIOS\Core\Db\Column\Json;
 
 class Payment extends \HubletoMain\Core\Models\Model
 {
+  public const TYPE_SUBSCRIPTION_FEE = 1;
+  public const TYPE_BACK_PAY = 2;
+  public const TYPE_PAYMENT_BY_CARD = 3;
+  public const TYPE_SUBSCRIPTION_RENEWAL_ACTIVATED = 4;
 
-  const TYPE_SUBSCRIPTION_FEE = 1;
-  const TYPE_BACK_PAY = 2;
-  const TYPE_PAYMENT_BY_CARD = 3;
-  const TYPE_SUBSCRIPTION_RENEWAL_ACTIVATED = 4;
-
-  const TYPE_ENUM_VALUES = [
+  public const TYPE_ENUM_VALUES = [
     self::TYPE_SUBSCRIPTION_FEE => 'subscription fee',
     self::TYPE_BACK_PAY => 'back pay',
     self::TYPE_PAYMENT_BY_CARD => 'payment by card',
     self::TYPE_SUBSCRIPTION_RENEWAL_ACTIVATED => 'renewal activated',
   ];
 
-  const TYPE_BACKGROUND_CSS_CLASSES = [
+  public const TYPE_BACKGROUND_CSS_CLASSES = [
     self::TYPE_SUBSCRIPTION_FEE => 'bg-green-50',
     self::TYPE_BACK_PAY => 'bg-yellow-50',
     self::TYPE_PAYMENT_BY_CARD => 'bg-lime-50',

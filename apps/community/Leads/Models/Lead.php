@@ -28,11 +28,11 @@ class Lead extends \HubletoMain\Core\Models\Model
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
   public ?string $lookupUrlDetail = 'leads/{%ID%}';
 
-  const STATUS_NO_INTERACTION_YET = 0;
-  const STATUS_CONTACTED = 1;
-  const STATUS_IN_PROGRESS = 2;
-  const STATUS_CLOSED = 3;
-  const STATUS_CONVERTED_TO_DEAL = 20;
+  public const STATUS_NO_INTERACTION_YET = 0;
+  public const STATUS_CONTACTED = 1;
+  public const STATUS_IN_PROGRESS = 2;
+  public const STATUS_CLOSED = 3;
+  public const STATUS_CONVERTED_TO_DEAL = 20;
 
   public array $relations = [
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
@@ -113,11 +113,11 @@ class Lead extends \HubletoMain\Core\Models\Model
           ->setReactComponent('InputHyperlink')
           // ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
-      break;
-      break;
-      // case 'id_customer':
-      //   $description ->setExtendedProps(['urlAdd' => 'customers/add']);
-      // break;
+        break;
+        break;
+        // case 'id_customer':
+        //   $description ->setExtendedProps(['urlAdd' => 'customers/add']);
+        // break;
     }
     return $description;
   }
@@ -211,7 +211,7 @@ class Lead extends \HubletoMain\Core\Models\Model
         $lookupModel = $this->main->getModel($columns[$columnName]->getLookupModel());
         $lookupSqlValue = $lookupModel->getLookupSqlValue($lookupModel->table);
 
-       if ($oldValue != "None") {
+        if ($oldValue != "None") {
           $oldValue = $lookupModel->record
             ->selectRaw($lookupSqlValue)
             ->where("id", $values[0])
@@ -238,7 +238,7 @@ class Lead extends \HubletoMain\Core\Models\Model
         if ($columns[$columnName]->getType() == "boolean") {
           $oldValue = $values[0] ? "Yes" : "No";
           $newValue = $values[1] ? "Yes" : "No";
-        } else if (!empty($columns[$columnName]->getEnumValues())) {
+        } elseif (!empty($columns[$columnName]->getEnumValues())) {
           $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? "None";
           $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? "None";
         }

@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Notifications\Controllers\Api;
 
 class MarkAsRead extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     $idNotification = $this->main->urlParamAsInteger('idNotification');

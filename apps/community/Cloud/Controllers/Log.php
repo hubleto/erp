@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Cloud\Controllers;
 
-class Log extends \HubletoMain\Core\Controllers\Controller {
-
+class Log extends \HubletoMain\Core\Controllers\Controller
+{
   public function prepareView(): void
   {
     parent::prepareView();

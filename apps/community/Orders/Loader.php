@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Orders;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public function init(): void
   {
     parent::init();
@@ -29,7 +28,7 @@ class Loader extends \HubletoMain\Core\App
       (new Models\OrderProduct($this->main))->dropTableIfExists()->install();
       (new Models\History($this->main))->dropTableIfExists()->install();
     }
-  
+
     if ($round == 2) {
       $mState = new Models\State($this->main);
       $mState->record->recordCreate(['title' => 'New', 'code' => 'N', 'color' => '#444444']);
@@ -87,9 +86,9 @@ class Loader extends \HubletoMain\Core\App
     $mOrder = new Models\Order($this->main);
     $mHistory = new Models\History($this->main);
     $mOrderProduct = new Models\OrderProduct($this->main);
-    
+
     for ($i = 1; $i <= 9; $i++) {
-      
+
       $idOrder = $mOrder->record->recordCreate([
         'id_customer' => rand(1, $customerCount),
         'id_state' => rand(1, $stateCount),

@@ -7,7 +7,6 @@ use HubletoApp\Community\Leads\Models\Lead;
 
 class SaveBulkStatusChange extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
 

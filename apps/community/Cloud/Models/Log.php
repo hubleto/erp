@@ -6,7 +6,6 @@ use ADIOS\Core\Db\Column\Integer;
 use ADIOS\Core\Db\Column\DateTime;
 use ADIOS\Core\Db\Column\Boolean;
 use ADIOS\Core\Db\Column\Decimal;
-
 use HubletoApp\Community\Settings\Models\User;
 
 class Log extends \HubletoMain\Core\Models\Model

@@ -6,7 +6,6 @@ use HubletoApp\Community\Settings\Models\Permission;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public function init(): void
   {
     parent::init();

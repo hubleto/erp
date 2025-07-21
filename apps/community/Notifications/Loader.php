@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Notifications;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public function __construct(\HubletoMain $main)
   {
     parent::__construct($main);
@@ -51,8 +50,7 @@ class Loader extends \HubletoMain\Core\App
     string $body,
     string $color = '',
     int $priority = 0
-  ): array
-  {
+  ): array {
     $user = $this->main->auth->getUser();
     $idUser = $user['id'] ?? 0;
 
@@ -74,7 +72,8 @@ class Loader extends \HubletoMain\Core\App
     return $notification;
   }
 
-  public function getDailyDigestForUser(array $user) {
+  public function getDailyDigestForUser(array $user)
+  {
     $dailyDigest = [];
     $digestHtml = '';
 

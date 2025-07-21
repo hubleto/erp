@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Campaigns\Controllers;
 
 class Campaigns extends \HubletoMain\Core\Controllers\Controller
 {
-
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

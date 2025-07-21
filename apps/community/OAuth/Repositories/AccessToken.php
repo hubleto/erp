@@ -7,8 +7,8 @@ use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use HubletoApp\Community\OAuth\Entities\AccessTokenEntity;
 
-class AccessToken implements AccessTokenRepositoryInterface {
-
+class AccessToken implements AccessTokenRepositoryInterface
+{
   public \HubletoMain $main;
 
   public function __construct(\HubletoMain $main)
@@ -23,7 +23,7 @@ class AccessToken implements AccessTokenRepositoryInterface {
       'expires_at' => $accessTokenEntity->getExpiryDateTime(),
       'user_id' => $accessTokenEntity->getUserIdentifier(), // Can be null if no user is involved (e.g., client credentials)
       'client_id' => $accessTokenEntity->getClient()->getIdentifier(),
-      'scopes' => json_encode(array_map(fn($scope) => $scope->getIdentifier(), $accessTokenEntity->getScopes())),
+      'scopes' => json_encode(array_map(fn ($scope) => $scope->getIdentifier(), $accessTokenEntity->getScopes())),
       'code_challenge' => $accessTokenEntity->getCodeChallenge(),
       'code_challenge_method' => $accessTokenEntity->getCodeChallengeMethod(),
       // Add any other fields you need, like redirect_uri

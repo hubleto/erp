@@ -14,7 +14,6 @@ use HubletoApp\Community\Pipeline\Models\Pipeline;
 
 class ConvertLeadToDeal extends \HubletoMain\Core\Controllers\ApiController
 {
-
   public function renderJson(): ?array
   {
     if (!$this->main->isUrlParam("recordId")) {

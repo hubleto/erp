@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Reports\Controllers;
 
-class Report extends \HubletoMain\Core\Controllers\Controller {
-
+class Report extends \HubletoMain\Core\Controllers\Controller
+{
   public function getBreadcrumbs(): array
   {
     $reportUrlSlug = $this->main->router->routeVarAsString('reportUrlSlug');

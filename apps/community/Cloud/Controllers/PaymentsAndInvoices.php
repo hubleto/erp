@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Cloud\Controllers;
 
-class PaymentsAndInvoices extends \HubletoMain\Core\Controllers\Controller {
-
+class PaymentsAndInvoices extends \HubletoMain\Core\Controllers\Controller
+{
   public function prepareView(): void
   {
     parent::prepareView();

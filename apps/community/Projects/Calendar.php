@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Projects;
 
-class Calendar extends \HubletoApp\Community\Calendar\Calendar {
-
+class Calendar extends \HubletoApp\Community\Calendar\Calendar
+{
   public array $calendarConfig = [
     "title" => "Projects",
     "addNewActivityButtonText" => "Add new activity linked to Projects",

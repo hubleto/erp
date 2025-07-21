@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Help;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   public bool $canBeDisabled = false;
   public bool $permittedForAllUsers = true;
 

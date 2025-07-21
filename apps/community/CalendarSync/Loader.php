@@ -8,8 +8,7 @@ use HubletoApp\Community\CalendarSync\Controllers\Ics;
 
 class Loader extends \HubletoMain\Core\App
 {
-
-  const DEFAULT_INSTALLATION_CONFIG = [
+  public const DEFAULT_INSTALLATION_CONFIG = [
     'sidebarOrder' => 0,
   ];
 

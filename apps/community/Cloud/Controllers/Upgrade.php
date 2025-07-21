@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Cloud\Controllers;
 
-class Upgrade extends \HubletoMain\Core\Controllers\Controller {
-
+class Upgrade extends \HubletoMain\Core\Controllers\Controller
+{
   public function prepareView(): void
   {
     parent::prepareView();

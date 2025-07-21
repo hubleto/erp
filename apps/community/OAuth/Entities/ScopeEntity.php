@@ -8,6 +8,6 @@ use League\OAuth2\Server\Entities\Traits\ScopeTrait;
 
 class ScopeEntity implements ScopeEntityInterface
 {
-    use EntityTrait;
-    use ScopeTrait;
+  use EntityTrait;
+  use ScopeTrait;
 }

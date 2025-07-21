@@ -4,7 +4,6 @@ namespace HubletoApp\Community\Inventory;
 
 class Loader extends \HubletoMain\Core\App
 {
-
   // init
   public function init(): void
   {

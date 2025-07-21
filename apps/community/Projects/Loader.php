@@ -54,7 +54,7 @@ class Loader extends \HubletoMain\Core\App
 
     }
     if ($round == 3) {
-      $mPhase = new Models\Phase($this->main);
+      $mPhase = $this->main->di->create(Models\Phase::class);
       $mPhase->record->recordCreate(['name' => 'Early preparation', 'order' => 1, 'color' => '#344556']);
       $mPhase->record->recordCreate(['name' => 'Advanced preparation', 'order' => 2, 'color' => '#6830a5']);
       $mPhase->record->recordCreate(['name' => 'Final preparation', 'order' => 3, 'color' => '#3068a5']);
@@ -68,7 +68,7 @@ class Loader extends \HubletoMain\Core\App
   // generateDemoData
   public function generateDemoData(): void
   {
-    $mProject = new Models\Project($this->main);
+    $mProject = $this->main->di->create(Models\Project::class);
 
     $mProject->record->recordCreate([
       'id_deal' => 1,

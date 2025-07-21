@@ -27,7 +27,7 @@ class Example extends \HubletoMain\Core\Report
 
     // Sample implementation. Uncomment and modify to your needs.
 
-    // $model = new Deal($this->main);
+    // \$model = $this->main->di->create(Deal::class);
     // $config['groupsBy'] = [
     //   ["field" => "id_customer", "title" => "Customer"],
     // ];

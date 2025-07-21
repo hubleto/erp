@@ -7,7 +7,7 @@ class MarkAsUnread extends \HubletoMain\Core\Controllers\ApiController
   public function renderJson(): ?array
   {
     $idMail = $this->main->urlParamAsInteger('idMail');
-    $mMail = new \HubletoApp\Community\Mail\Models\Mail($this->main);
+    $mMail = $this->main->di->create(\HubletoApp\Community\Mail\Models\Mail::class);
     $mMail->record->find($idMail)->update(['datetime_read' => null]);
     return ['success' => true];
   }

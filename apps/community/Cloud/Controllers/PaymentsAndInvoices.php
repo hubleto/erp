@@ -7,7 +7,7 @@ class PaymentsAndInvoices extends \HubletoMain\Core\Controllers\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
+    $mPayment = $this->main->di->create(\HubletoApp\Community\Cloud\Models\Payment::class);
     $payments = $mPayment->record->get()?->toArray();
     foreach ($payments as $key => $payment) {
       $payments[$key]['_ENUM[type]'] = $mPayment::TYPE_ENUM_VALUES[$payment['type']] ?? '';

@@ -30,7 +30,7 @@ class Loader extends \HubletoMain\Core\App
     }
 
     if ($round == 2) {
-      $mState = new Models\State($this->main);
+      $mState = $this->main->di->create(Models\State::class);
       $mState->record->recordCreate(['title' => 'New', 'code' => 'N', 'color' => '#444444']);
       $mState->record->recordCreate(['title' => 'Sent to customer', 'code' => 'S', 'color' => '#444444']);
       $mState->record->recordCreate(['title' => 'Requires modification', 'code' => 'M', 'color' => '#444444']);
@@ -43,7 +43,7 @@ class Loader extends \HubletoMain\Core\App
 
   // public function installDefaultPermissions(): void
   // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $mPermission = $this->main->di->create(\HubletoApp\Community\Settings\Models\Permission::class);
   //   $permissions = [
   //     "HubletoApp/Community/Orders/Models/Order:Create",
   //     "HubletoApp/Community/Orders/Models/Order:Read",
@@ -74,18 +74,18 @@ class Loader extends \HubletoMain\Core\App
 
   public function generateDemoData(): void
   {
-    $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+    $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
     $userCount = $mUser->record->count();
 
-    $mCustomer = new \HubletoApp\Community\Customers\Models\Customer($this->main);
+    $mCustomer = $this->main->di->create(\HubletoApp\Community\Customers\Models\Customer::class);
     $customerCount = $mCustomer->record->count();
 
-    $mState = new Models\State($this->main);
+    $mState = $this->main->di->create(Models\State::class);
     $stateCount = $mState->record->count();
 
-    $mOrder = new Models\Order($this->main);
-    $mHistory = new Models\History($this->main);
-    $mOrderProduct = new Models\OrderProduct($this->main);
+    $mOrder = $this->main->di->create(Models\Order::class);
+    $mHistory = $this->main->di->create(Models\History::class);
+    $mOrderProduct = $this->main->di->create(Models\OrderProduct::class);
 
     for ($i = 1; $i <= 9; $i++) {
 

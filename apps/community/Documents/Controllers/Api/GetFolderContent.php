@@ -8,8 +8,8 @@ class GetFolderContent extends \HubletoMain\Core\Controllers\ApiController
   {
     $folderUid = $this->main->urlParamAsString('folderUid');
 
-    $mFolder = new \HubletoApp\Community\Documents\Models\Folder($this->main);
-    $mDocument = new \HubletoApp\Community\Documents\Models\Document($this->main);
+    $mFolder = $this->main->di->create(\HubletoApp\Community\Documents\Models\Folder::class);
+    $mDocument = $this->main->di->create(\HubletoApp\Community\Documents\Models\Document::class);
 
     $folder = $mFolder->record->with('PARENT_FOLDER')->where('uid', $folderUid)->first()->toArray();
     $subFolders = $mFolder->record

@@ -38,11 +38,11 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mCategory = new Models\Category($this->main);
-      $mContact = new Models\Contact($this->main);
-      $mValue = new Models\Value($this->main);
-      $mTag = new Models\Tag($this->main);
-      $mContactTag = new Models\ContactTag($this->main);
+      $mCategory = $this->main->di->create(Models\Category::class);
+      $mContact = $this->main->di->create(Models\Contact::class);
+      $mValue = $this->main->di->create(Models\Value::class);
+      $mTag = $this->main->di->create(Models\Tag::class);
+      $mContactTag = $this->main->di->create(Models\ContactTag::class);
 
       $mCategory->dropTableIfExists()->install();
       $mContact->dropTableIfExists()->install();
@@ -63,15 +63,4 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  // public function installDefaultPermissions(): void
-  // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-  //   $permissions = [];
-
-  //   foreach ($permissions as $permission) {
-  //     $mPermission->record->recordCreate([
-  //       "permission" => $permission
-  //     ]);
-  //   }
-  // }
 }

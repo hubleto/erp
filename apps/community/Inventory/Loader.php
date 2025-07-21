@@ -29,7 +29,7 @@ class Loader extends \HubletoMain\Core\App
       (new Models\Transaction($this->main))->dropTableIfExists()->install();
     }
     if ($round == 2) {
-      $mStatus = new Models\Status($this->main);
+      $mStatus = $this->main->di->create(Models\Status::class);
       $mStatus->record->recordCreate(['name' => 'Available']);
       $mStatus->record->recordCreate(['name' => 'Quarantined']);
       $mStatus->record->recordCreate(['name' => 'Damaged']);

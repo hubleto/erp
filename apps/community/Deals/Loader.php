@@ -79,14 +79,14 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mDeal = new \HubletoApp\Community\Deals\Models\Deal($this->main);
-      $mDealHistory = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
-      $mDealTag = new \HubletoApp\Community\Deals\Models\Tag($this->main);
-      $mCrossDealTag = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
-      $mDealProduct = new \HubletoApp\Community\Deals\Models\DealProduct($this->main);
-      $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
-      $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
-      $mLostReasons = new \HubletoApp\Community\Deals\Models\LostReason($this->main);
+      $mDeal = $this->main->di->create(\HubletoApp\Community\Deals\Models\Deal::class);
+      $mDealHistory = $this->main->di->create(\HubletoApp\Community\Deals\Models\DealHistory::class);
+      $mDealTag = $this->main->di->create(\HubletoApp\Community\Deals\Models\Tag::class);
+      $mCrossDealTag = $this->main->di->create(\HubletoApp\Community\Deals\Models\DealTag::class);
+      $mDealProduct = $this->main->di->create(\HubletoApp\Community\Deals\Models\DealProduct::class);
+      $mDealActivity = $this->main->di->create(\HubletoApp\Community\Deals\Models\DealActivity::class);
+      $mDealDocument = $this->main->di->create(\HubletoApp\Community\Deals\Models\DealDocument::class);
+      $mLostReasons = $this->main->di->create(\HubletoApp\Community\Deals\Models\LostReason::class);
 
       $mLostReasons->dropTableIfExists()->install();
       $mDeal->dropTableIfExists()->install();
@@ -112,7 +112,7 @@ class Loader extends \HubletoMain\Core\App
 
   // public function installDefaultPermissions(): void
   // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $mPermission = $this->main->di->create(\HubletoApp\Community\Settings\Models\Permission::class);
   //   $permissions = [
   //     "HubletoApp/Community/Deals/Models/Deal:Create",
   //     "HubletoApp/Community/Deals/Models/Deal:Read",

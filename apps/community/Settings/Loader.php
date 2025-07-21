@@ -57,19 +57,19 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mCompany = new Models\Company($this->main);
-      $mUser = new Models\User($this->main);
-      $mUserRole = new Models\UserRole($this->main);
-      $mUserHasRole = new Models\UserHasRole($this->main);
-      $mPermission = new Models\Permission($this->main);
-      $mRolePermission = new Models\RolePermission($this->main);
-      $mCountry = new Models\Country($this->main);
-      $mSetting = new Models\Setting($this->main);
-      $mActivityTypes = new Models\ActivityType($this->main);
-      $mCurrency = new Models\Currency($this->main);
-      $mInvoiceProfile = new Models\InvoiceProfile($this->main);
-      $mTeam = new Models\Team($this->main);
-      $mTeamMember = new Models\TeamMember($this->main);
+      $mCompany = $this->main->di->create(Models\Company::class);
+      $mUser = $this->main->di->create(Models\User::class);
+      $mUserRole = $this->main->di->create(Models\UserRole::class);
+      $mUserHasRole = $this->main->di->create(Models\UserHasRole::class);
+      $mPermission = $this->main->di->create(Models\Permission::class);
+      $mRolePermission = $this->main->di->create(Models\RolePermission::class);
+      $mCountry = $this->main->di->create(Models\Country::class);
+      $mSetting = $this->main->di->create(Models\Setting::class);
+      $mActivityTypes = $this->main->di->create(Models\ActivityType::class);
+      $mCurrency = $this->main->di->create(Models\Currency::class);
+      $mInvoiceProfile = $this->main->di->create(Models\InvoiceProfile::class);
+      $mTeam = $this->main->di->create(Models\Team::class);
+      $mTeamMember = $this->main->di->create(Models\TeamMember::class);
 
       $mCompany->dropTableIfExists()->install();
       $mUser->dropTableIfExists()->install();
@@ -383,8 +383,8 @@ class Loader extends \HubletoMain\Core\App
         ]);
       }
 
-      $mUserRole = new Models\UserRole($this->main);
-      $mPermission = new Models\Permission($this->main);
+      $mUserRole = $this->main->di->create(Models\UserRole::class);
+      $mPermission = $this->main->di->create(Models\Permission::class);
 
       $mUserRole->record->recordCreate([
         'id' => Models\UserRole::ROLE_ADMINISTRATOR,

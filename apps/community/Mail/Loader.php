@@ -39,7 +39,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function getNotificationsCount(): int
   {
-    $mMail = new \HubletoApp\Community\Mail\Models\Mail($this->main);
+    $mMail = $this->main->di->create(\HubletoApp\Community\Mail\Models\Mail::class);
     return $mMail->record->prepareReadQuery()
       ->where(function ($q) {
         $q->where('midx.id_to', $this->main->auth->getUserId());
@@ -78,7 +78,7 @@ class Loader extends \HubletoMain\Core\App
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 
-    $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+    $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
     $users = $mUser->record->get()->toArray();
     $usersByEmail = [];
     $emailsByUserId = [];
@@ -109,8 +109,8 @@ class Loader extends \HubletoMain\Core\App
         $bccEmails = [ $emailsByUserId[$bcc] ];
       }
 
-      $mMail = new Models\Mail($this->main);
-      $mIndex = new Models\Index($this->main);
+      $mMail = $this->main->di->create(Models\Mail::class);
+      $mIndex = $this->main->di->create(Models\Index::class);
 
       $mailData = [
         'priority' => $priority,

@@ -127,11 +127,11 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider
   {
     $login = $this->app->urlParamAsString('login');
 
-    $mUser = new User($this->app);
+    $mUser = $this->app->di->create(User::class);
     if ($mUser->record->where('login', $login)->count() > 0) {
       $user = $mUser->record->where('login', $login)->first();
 
-      $mToken = new Token($this->app); // todo: token creation should be done withing the token itself
+      $mToken = $this->app->di->create(Token::class); // todo: token creation should be done withing the token itself
       $tokenValue = bin2hex(random_bytes(16));
       $mToken->record->where('login', $login)->where('type', 'reset-password')->delete();
       $mToken->record->create([
@@ -157,8 +157,8 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider
 
   public function resetPassword(): void
   {
-    $mToken = new Token($this->app);
-    $mUser = new User($this->app);
+    $mToken = $this->app->di->create(Token::class);
+    $mUser = $this->app->di->create(User::class);
 
     $token = $mToken->record->where('token', $this->main->urlParamAsString('token'))->first();
     $user = $mUser->record->where('login', $token->login)->first();
@@ -189,7 +189,7 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider
       !empty($setLanguage)
       && !empty(\HubletoApp\Community\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
-      $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+      $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
       $mUser->record
         ->where('id', $this->getUserId())
         ->update(['language' => $setLanguage])

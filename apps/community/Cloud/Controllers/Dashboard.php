@@ -16,7 +16,7 @@ class Dashboard extends \HubletoMain\Core\Controllers\Controller
 
     $premiumInfo = $this->hubletoApp->getPremiumInfo();
 
-    $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
+    $mLog = $this->main->di->create(\HubletoApp\Community\Cloud\Models\Log::class);
     $this->viewParams['log'] = $mLog->record
       ->selectRaw('
         month(log_datetime) as month,

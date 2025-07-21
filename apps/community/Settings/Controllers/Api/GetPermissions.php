@@ -22,7 +22,7 @@ class GetPermissions extends \HubletoMain\Core\Controllers\ApiController
     $roleId = $this->main->urlParamAsInteger("roleId");
 
     try {
-      $mPermission = new Permission($this->main);
+      $mPermission = $this->main->di->create(Permission::class);
       $allPermissions = $mPermission->record->orderBy("permission", "asc")->get()->toArray();
 
       foreach ($allPermissions as $permission) { //@phpstan-ignore-line
@@ -63,7 +63,7 @@ class GetPermissions extends \HubletoMain\Core\Controllers\ApiController
       }
 
       if ($roleId > 0) {
-        $mRolePermission = new RolePermission($this->main);
+        $mRolePermission = $this->main->di->create(RolePermission::class);
         $rolePermissions = $mRolePermission->record->where("id_role", $roleId)->pluck("id_permission")->toArray();
       } else {
         $rolePermissions = [];

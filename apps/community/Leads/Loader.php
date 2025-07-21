@@ -76,14 +76,14 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mLevel = new \HubletoApp\Community\Leads\Models\Level($this->main);
-      $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
-      $mLeadHistory = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
-      $mLeadTag = new \HubletoApp\Community\Leads\Models\Tag($this->main);
-      $mCrossLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
-      $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
-      $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
-      $mLostReasons = new \HubletoApp\Community\Leads\Models\LostReason($this->main);
+      $mLevel = $this->main->di->create(\HubletoApp\Community\Leads\Models\Level::class);
+      $mLead = $this->main->di->create(\HubletoApp\Community\Leads\Models\Lead::class);
+      $mLeadHistory = $this->main->di->create(\HubletoApp\Community\Leads\Models\LeadHistory::class);
+      $mLeadTag = $this->main->di->create(\HubletoApp\Community\Leads\Models\Tag::class);
+      $mCrossLeadTag = $this->main->di->create(\HubletoApp\Community\Leads\Models\LeadTag::class);
+      $mLeadActivity = $this->main->di->create(\HubletoApp\Community\Leads\Models\LeadActivity::class);
+      $mLeadDocument = $this->main->di->create(\HubletoApp\Community\Leads\Models\LeadDocument::class);
+      $mLostReasons = $this->main->di->create(\HubletoApp\Community\Leads\Models\LostReason::class);
 
       $mLevel->dropTableIfExists()->install();
       $mLostReasons->dropTableIfExists()->install();
@@ -114,7 +114,7 @@ class Loader extends \HubletoMain\Core\App
 
   // public function installDefaultPermissions(): void
   // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $mPermission = $this->main->di->create(\HubletoApp\Community\Settings\Models\Permission::class);
   //   $permissions = [
   //     "HubletoApp/Community/Leads/Models/Lead:Create",
   //     "HubletoApp/Community/Leads/Models/Lead:Read",

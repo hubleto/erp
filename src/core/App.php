@@ -266,7 +266,7 @@ class App
         $mClass = str_replace('.php', '', $mClass);
         if (class_exists($mClass)) {
           try {
-            $mObj = new $mClass($this->main);
+            $mObj = $this->main->di->create($mClass::class);
             $modelClasses[] = $mClass;
           } catch (\Throwable) {
           }
@@ -312,7 +312,7 @@ class App
         $mClass = str_replace('.php', '', $mClass);
         if (class_exists($mClass)) {
           try {
-            $mObj = new $mClass($this->main);
+            $mObj = $this->main->di->create($mClass::class);
             $permissions[] = $mObj->fullName . ':Create';
             $permissions[] = $mObj->fullName . ':Read';
             $permissions[] = $mObj->fullName . ':Update';
@@ -323,7 +323,7 @@ class App
       }
     }
 
-    $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+    $mPermission = $this->main->di->create(\HubletoApp\Community\Settings\Models\Permission::class);
 
     foreach ($permissions as $permission) {
       $mPermission->record->recordCreate([
@@ -334,8 +334,8 @@ class App
 
   public function assignPermissionsToRoles(): void
   {
-    $mUserRole = new \HubletoApp\Community\Settings\Models\UserRole($this->main);
-    $mRolePermission = new \HubletoApp\Community\Settings\Models\RolePermission($this->main);
+    $mUserRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserRole::class);
+    $mRolePermission = $this->main->di->create(\HubletoApp\Community\Settings\Models\RolePermission::class);
 
     $userRoles = $mUserRole->record->get()->toArray();
     foreach ($userRoles as $role) {
@@ -361,7 +361,7 @@ class App
 
     // $modelClasses = $this->getAvailableModelClasses();
     // foreach ($modelClasses as $modelClass) {
-    //   $mObj = new $modelClass($this->main);
+    //   $mObj = $this->main->di->create($modelClass::class);
     //   foreach ($mObj->rolePermissions as $idRole => $rolePermissions) {
     //     $mRolePermission->grantPermissionsForModel($idRole, $mObj->fullName, $rolePermissions);
     //   }

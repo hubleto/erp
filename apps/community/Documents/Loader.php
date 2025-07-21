@@ -22,7 +22,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function getRootFolderId(): int|null
   {
-    $mFolder = new Models\Folder($this->main);
+    $mFolder = $this->main->di->create(Models\Folder::class);
     $rootFolder = $mFolder->record->where('uid', '_ROOT_')->first()->toArray();
     if (!isset($rootFolder['id'])) {
       return null;
@@ -34,7 +34,7 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mFolder = new Models\Folder($this->main);
+      $mFolder = $this->main->di->create(Models\Folder::class);
       $mFolder->dropTableIfExists()->install();
       (new Models\Document($this->main))->dropTableIfExists()->install();
 
@@ -49,7 +49,7 @@ class Loader extends \HubletoMain\Core\App
 
   // public function installDefaultPermissions(): void
   // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $mPermission = $this->main->di->create(\HubletoApp\Community\Settings\Models\Permission::class);
   //   $permissions = [
   //     "HubletoApp/Community/Documents/Models/Document:Create",
   //     "HubletoApp/Community/Documents/Models/Document:Read",
@@ -70,8 +70,8 @@ class Loader extends \HubletoMain\Core\App
 
   public function generateDemoData(): void
   {
-    $mFolder = new Models\Folder($this->main);
-    $mDocument = new Models\Document($this->main);
+    $mFolder = $this->main->di->create(Models\Folder::class);
+    $mDocument = $this->main->di->create(Models\Document::class);
 
     $mDocument->record->recordCreate([
       'id_folder' => $this->getRootFolderId(),

@@ -35,7 +35,7 @@ class Loader extends \HubletoMain\Core\App
       (new Models\Location($this->main))->dropTableIfExists()->install();
     }
     if ($round == 2) {
-      $mLocationType = new Models\LocationType($this->main);
+      $mLocationType = $this->main->di->create(Models\LocationType::class);
       $mLocationType->record->recordCreate(['name' => 'Area']);
       $mLocationType->record->recordCreate(['name' => 'Aisle']);
       $mLocationType->record->recordCreate(['name' => 'Rack']);
@@ -47,10 +47,10 @@ class Loader extends \HubletoMain\Core\App
   // generateDemoData
   public function generateDemoData(): void
   {
-    $mWarehouseType = new Models\WarehouseType($this->main);
-    $mLocationType = new Models\LocationType($this->main);
-    $mWarehouse = new Models\Warehouse($this->main);
-    $mLocation = new Models\Location($this->main);
+    $mWarehouseType = $this->main->di->create(Models\WarehouseType::class);
+    $mLocationType = $this->main->di->create(Models\LocationType::class);
+    $mWarehouse = $this->main->di->create(Models\Warehouse::class);
+    $mLocation = $this->main->di->create(Models\Location::class);
 
     $idWarehouseTypeMain = $mWarehouseType->record->recordCreate(['name' => 'Main'])['id'];
     $idWarehouseTypeRegional = $mWarehouseType->record->recordCreate(['name' => 'Regional'])['id'];

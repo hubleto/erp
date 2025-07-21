@@ -14,7 +14,7 @@ class DealWarnings extends \HubletoMain\Core\Controllers\Controller
 
     $warningsTotal = 0;
 
-    $mDeal = new Deal($this->main);
+    $mDeal = $this->main->di->create(Deal::class);
 
     $myDeals = $mDeal->record->prepareReadQuery()
       ->where($mDeal->table . ".is_archived", 0)

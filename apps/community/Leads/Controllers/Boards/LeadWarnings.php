@@ -14,7 +14,7 @@ class LeadWarnings extends \HubletoMain\Core\Controllers\Controller
 
     $warningsTotal = 0;
 
-    $mLead = new Lead($this->main);
+    $mLead = $this->main->di->create(Lead::class);
 
     $myLeads = $mLead->record->prepareReadQuery()
       ->where($mLead->table . ".is_archived", 0)

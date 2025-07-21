@@ -19,7 +19,7 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      (new Models\Campaign($this->main))->dropTableIfExists()->install();
+      $this->main->di->create(Models\Campaign::class)->dropTableIfExists()->install();
     }
   }
 

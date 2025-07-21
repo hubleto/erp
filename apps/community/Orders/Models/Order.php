@@ -56,7 +56,7 @@ class Order extends \HubletoMain\Core\Models\Model
 
   public function describeForm(): \ADIOS\Core\Description\Form
   {
-    $mSettings = new Setting($this->main);
+    $mSettings = $this->main->di->create(Setting::class);
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
@@ -73,7 +73,7 @@ class Order extends \HubletoMain\Core\Models\Model
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-    $mProduct = new Product($this->main);
+    $mProduct = $this->main->di->create(Product::class);
     $longDescription = "";
 
     if (isset($savedRecord["PRODUCTS"])) {
@@ -90,7 +90,7 @@ class Order extends \HubletoMain\Core\Models\Model
       $longDescription = "The order had no products or all products were deleted";
     }
 
-    $mHistory = new History($this->main);
+    $mHistory = $this->main->di->create(History::class);
     $mHistory->record->recordCreate([
       "id_order" => $savedRecord["id"],
       "short_description" => "Order has been updated",
@@ -109,7 +109,7 @@ class Order extends \HubletoMain\Core\Models\Model
     $order->order_number = $order->id;
     $order->save();
 
-    $mHistory = new History($this->main);
+    $mHistory = $this->main->di->create(History::class);
     $mHistory->record->recordCreate([
       "id_order" => $order->id,
       "short_description" => "Order created",

@@ -34,7 +34,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function getNotificationsCount(): int
   {
-    $mNotification = new \HubletoApp\Community\Notifications\Models\Notification($this->main);
+    $mNotification = $this->main->di->create(\HubletoApp\Community\Notifications\Models\Notification::class);
     return $mNotification->record->prepareReadQuery()
       ->where('id_to', $this->main->auth->getUserId())
       ->whereNull('datetime_read')
@@ -55,7 +55,7 @@ class Loader extends \HubletoMain\Core\App
     $idUser = $user['id'] ?? 0;
 
     if ($idTo > 0) {
-      $mNotification = new Models\Notification($this->main);
+      $mNotification = $this->main->di->create(Models\Notification::class);
       $notification = $mNotification->record->create([
         'priority' => $priority,
         'category' => $category,

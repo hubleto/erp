@@ -32,7 +32,7 @@ class DbUpdates extends \HubletoMain\Core\Controllers\Controller
     foreach ($apps as $app) {
       $mClasses = $app->getAvailableModelClasses();
       foreach ($mClasses as $mClass) {
-        $mObj = new $mClass($this->main);
+        $mObj = $this->main->di->create($mClass::class);
 
         // table is missing
         if (!isset($tables[$mObj->table])) {

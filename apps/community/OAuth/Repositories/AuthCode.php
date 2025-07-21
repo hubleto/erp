@@ -31,19 +31,19 @@ class AuthCode implements AuthCodeRepositoryInterface
       'revoked' => false,
     ];
 
-    $mAuthCode = new \HubletoApp\Community\OAuth\Models\AuthCode($this->main);
+    $mAuthCode = $this->main->di->create(\HubletoApp\Community\OAuth\Models\AuthCode::class);
     $mAuthCode->record->recordCreate($dbData);
   }
 
   public function revokeAuthCode($codeId): void
   {
-    $mAuthCode = new \HubletoApp\Community\OAuth\Models\AuthCode($this->main);
+    $mAuthCode = $this->main->di->create(\HubletoApp\Community\OAuth\Models\AuthCode::class);
     $mAuthCode->record->where('code', $codeId)->update(['revoked' => true]);
   }
 
   public function isAuthCodeRevoked($codeId): bool
   {
-    $mAuthCode = new \HubletoApp\Community\OAuth\Models\AuthCode($this->main);
+    $mAuthCode = $this->main->di->create(\HubletoApp\Community\OAuth\Models\AuthCode::class);
     $authCode = $mAuthCode->record->find($codeId);
     return $authCode && $authCode->revoked;
   }

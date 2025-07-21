@@ -15,7 +15,7 @@ class ControllerResetPassword extends \ADIOS\Core\Controller
   {
     parent::prepareView();
 
-    $mToken = new Token($this->app);
+    $mToken = $this->app->di->create(Token::class);
     if ($this->app->urlParamAsString('token') == '' || $mToken->record
         ->where('token', $_GET['token'])
         ->where('valid_to', '>', date('Y-m-d H:i:s'))
@@ -51,7 +51,7 @@ class ControllerResetPassword extends \ADIOS\Core\Controller
       ->where('valid_to', '>', date('Y-m-d H:i:s'))
       ->where('type', 'reset-password')->first()->login;
 
-    $mUser = new User($this->app);
+    $mUser = $this->app->di->create(User::class);
     $passwordHash = $mUser->record->where('login', $login)->first()->password;
 
     $this->setView('@hubleto/ResetPassword.twig', ['status' => false, 'welcome' => $passwordHash == '']);

@@ -39,10 +39,7 @@ class PayMonthly extends \HubletoMain\Core\Controllers\ApiController
     }
 
 
-    $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
-
-    // $prevPrevMonth = date('m', strtotime('-2 month', strtotime($today)));
-    // $prevPrevYear = date('Y', strtotime('-2 month', strtotime($today)));
+    $mPayment = $this->main->di->create(\HubletoApp\Community\Cloud\Models\Payment::class);
 
     $prevMonth = date('m', strtotime('-1 month', strtotime($today)));
     $prevYear = date('Y', strtotime('-1 month', strtotime($today)));

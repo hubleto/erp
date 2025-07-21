@@ -12,7 +12,7 @@ class LeadValueByScore extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
 
-    $mLead = new Lead($this->main);
+    $mLead = $this->main->di->create(Lead::class);
 
     $leads = $mLead->record
       ->selectRaw("score, SUM(price) as price")

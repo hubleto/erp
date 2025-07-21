@@ -24,10 +24,10 @@ class Home extends \HubletoMain\Core\Controllers\Controller
     $fDealResult = $this->main->urlParamAsInteger('fDealResult');
     $fOwner = $this->main->urlParamAsInteger('fOwner');
 
-    $mSetting = new Setting($this->main);
-    $mPipeline = new Pipeline($this->main);
-    $mDeal = new Deal($this->main);
-    $mTag = new Tag($this->main);
+    $mSetting = $this->main->di->create(Setting::class);
+    $mPipeline = $this->main->di->create(Pipeline::class);
+    $mDeal = $this->main->di->create(Deal::class);
+    $mTag = $this->main->di->create(Tag::class);
     $sumPipelinePrice = 0;
 
     $pipelines = $mPipeline->record->get();
@@ -99,13 +99,13 @@ class Home extends \HubletoMain\Core\Controllers\Controller
       unset($deals[$key]["TAGS"]);
     }
 
-    $mSettings = new Setting($this->main);
+    $mSettings = $this->main->di->create(Setting::class);
     $defaultCurrencyId = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
       ->value
     ?? 1;
-    $mCurrency = new Currency($this->main);
+    $mCurrency = $this->main->di->create(Currency::class);
     $defaultCurrency = (string) $mCurrency->record->find($defaultCurrencyId)->code ?? "";
 
     $this->viewParams["currency"] = $defaultCurrency;

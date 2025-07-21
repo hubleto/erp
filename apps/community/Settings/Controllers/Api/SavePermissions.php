@@ -17,14 +17,14 @@ class SavePermissions extends \HubletoMain\Core\Controllers\ApiController
 
     if ($roleId > 0) {
       try {
-        $mUserRole = new UserRole($this->main);
+        $mUserRole = $this->main->di->create(UserRole::class);
         $userRole = $mUserRole->record->find($roleId);
         $userRole->update([
           "role" => $roleTitle,
           "grant_all" => $grantAll
         ]);
 
-        $mRolePermission = new RolePermission($this->main);
+        $mRolePermission = $this->main->di->create(RolePermission::class);
         $mRolePermission->record->where("id_role", $roleId)->delete();
 
         foreach ($rolePermissions as $key => $permissionId) {

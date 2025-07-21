@@ -9,9 +9,6 @@ class Ics extends \HubletoMain\Core\Controllers\Controller
     parent::prepareView();
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->setView('@HubletoApp:Community:CalendarSync/ics.twig');
-
-    // $mSource = new Source($this->app);
-    // $mSource->install();
   }
 
   public function getBreadcrumbs(): array

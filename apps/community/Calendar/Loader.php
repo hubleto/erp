@@ -14,7 +14,7 @@ class Loader extends \HubletoMain\Core\App
   public function __construct(\HubletoMain $main)
   {
     parent::__construct($main);
-    $this->calendarManager = new CalendarManager($main);
+    $this->calendarManager = $main->di->create(CalendarManager::class);
   }
 
   public function init(): void
@@ -52,16 +52,16 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mActivity = new Activity($this->main);
+      $mActivity = $this->main->di->create(Activity::class);
       $mActivity->install();
-      $mSharedCalendar = new SharedCalendar($this->main);
+      $mSharedCalendar = $this->main->di->create(SharedCalendar::class);
       $mSharedCalendar->install();
     }
   }
 
   public function loadRemindersSummary(int $idUser = 0): array
   {
-    $getCalendarEvents = new \HubletoApp\Community\Calendar\Controllers\Api\GetCalendarEvents($this->main);
+    $getCalendarEvents = $this->main->di->create(Controllers\Api\GetCalendarEvents::class);
 
     $remindersToday = $getCalendarEvents->loadEventsFromMultipleCalendars(
       date("Y-m-d", strtotime("-1 year")),
@@ -86,21 +86,5 @@ class Loader extends \HubletoMain\Core\App
 
     return [$remindersToday, $remindersTomorrow, $remindersLater];
   }
-
-  // public function installDefaultPermissions(): void
-  // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-  //   $permissions = [
-  //     "HubletoApp/Community/Calendar/Calendar",
-  //     "HubletoApp/Community/Calendar/Controllers/Calendar",
-  //     "HubletoApp/Community/Calendar/Api/GetCalendarEvents",
-  //   ];
-
-  //   foreach ($permissions as $permission) {
-  //     $mPermission->record->recordCreate([
-  //       "permission" => $permission
-  //     ]);
-  //   }
-  // }
 
 }

@@ -30,7 +30,7 @@ class Loader extends \HubletoMain\Core\App
   {
     if ((bool) $this->main->auth->getUserId()) {
       $urlParams = $this->main->getUrlParams();
-      $mLog = new Models\Log($this->main);
+      $mLog = $this->main->di->create(Models\Log::class);
 
       $paramsStr = count($urlParams) == 0 ? '' : json_encode($urlParams);
       $mLog->record->recordCreate([
@@ -55,7 +55,7 @@ class Loader extends \HubletoMain\Core\App
   {
     $usedAppNamespaces = [];
 
-    $mLog = new Models\Log($this->main);
+    $mLog = $this->main->di->create(Models\Log::class);
     $usageLogs = $mLog->record
       ->where('id_user', $this->main->auth->getUserId())
       ->where('datetime', '>=', date("Y-m-d", strtotime("-7 days")))

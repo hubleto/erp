@@ -31,7 +31,7 @@ class Loader extends \HubletoMain\Core\App
     // 12,TravelGear Inc.,Emily White,555-123-4567,emily@travelgear.com,"200 Adventure Ave, Outdoor Town, OR"
     // 13,ComfortSeats Global,Mark Davis,555-789-0123,mark@comfortseats.com,"300 Chair Lane, Furniture City, NC"
     // 14,PowerUp Solutions,Laura Kim,555-321-7654,laura@powerupsolutions.com,"400 Battery Rd, Energy Town, PA"
-    $mSupplier = new Models\Supplier($this->main);
+    $mSupplier = $this->main->di->create(Models\Supplier::class);
     $mSupplier->record->recordCreate(['name' => 'ElectroCorp']);
   }
 

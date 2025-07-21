@@ -22,8 +22,8 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
-      $mProductGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
+      $mProduct = $this->main->di->create(\HubletoApp\Community\Products\Models\Product::class);
+      $mProductGroup = $this->main->di->create(\HubletoApp\Community\Products\Models\Group::class);
 
       $mProductGroup->dropTableIfExists()->install();
       $mProduct->dropTableIfExists()->install();

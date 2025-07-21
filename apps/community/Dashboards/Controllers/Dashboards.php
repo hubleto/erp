@@ -15,7 +15,7 @@ class Dashboards extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
 
-    $mDashboard = new \HubletoApp\Community\Dashboards\Models\Dashboard($this->main);
+    $mDashboard = $this->main->di->create(\HubletoApp\Community\Dashboards\Models\Dashboard::class);
 
     $dashboardSlug = $this->main->urlParamAsString('dashboardSlug');
 

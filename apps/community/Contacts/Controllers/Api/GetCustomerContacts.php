@@ -9,7 +9,7 @@ class GetCustomerContacts extends \HubletoMain\Core\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $mContact = new Contact($this->main);
+    $mContact = $this->main->di->create(Contact::class);
     $contacts = null;
     $contactArray = [];
 

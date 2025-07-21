@@ -58,31 +58,13 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      (new Models\BillingAccount($this->main))->dropTableIfExists()->install();
-      (new Models\Log($this->main))->dropTableIfExists()->install();
-      (new Models\Credit($this->main))->dropTableIfExists()->install();
-      (new Models\Payment($this->main))->dropTableIfExists()->install();
-      (new Models\Discount($this->main))->dropTableIfExists()->install();
+      $this->main->di->create(Models\BillingAccount::class)->dropTableIfExists()->install();
+      $this->main->di->create(Models\Log::class)->dropTableIfExists()->install();
+      $this->main->di->create(Models\Credit::class)->dropTableIfExists()->install();
+      $this->main->di->create(Models\Payment::class)->dropTableIfExists()->install();
+      $this->main->di->create(Models\Discount::class)->dropTableIfExists()->install();
     }
   }
-
-  // public function installDefaultPermissions(): void
-  // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-  //   $permissions = [
-
-  //     "HubletoApp/Community/Cloud/Controllers/Cloud",
-  //     "HubletoApp/Community/Cloud/Controllers/Upgrade",
-
-  //     "HubletoApp/Community/Cloud/Cloud",
-  //   ];
-
-  //   foreach ($permissions as $permission) {
-  //     $mPermission->record->recordCreate([
-  //       "permission" => $permission
-  //     ]);
-  //   }
-  // }
 
   public function getAccountUid()
   {
@@ -183,9 +165,9 @@ class Loader extends \HubletoMain\Core\App
 
   public function getPremiumInfo(int $month = 0, int $year = 0): array
   {
-    $mDiscount = new \HubletoApp\Community\Cloud\Models\Discount($this->main);
-    $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
-    $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
+    $mDiscount = $this->main->di->create(Models\Discount::class);
+    $mLog = $this->main->di->create(Models\Log::class);
+    $mPayment = $this->main->di->create(Models\Payment::class);
 
     if ($month == 0) {
       $month = date('m');
@@ -224,7 +206,7 @@ class Loader extends \HubletoMain\Core\App
       }
 
       // count active users
-      $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+      $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
       $activeUsers = $mUser->record->where('is_active', 1)->count();
 
       $premiumInfo['activeUsers'] = $activeUsers;
@@ -299,9 +281,9 @@ class Loader extends \HubletoMain\Core\App
       $year = (int) date('Y');
     }
 
-    $mLog = new Models\Log($this->main);
-    $mPayment = new Models\Payment($this->main);
-    $mCredit = new Models\Credit($this->main);
+    $mLog = $this->main->di->create(Models\Log::class);
+    $mPayment = $this->main->di->create(Models\Payment::class);
+    $mCredit = $this->main->di->create(Models\Credit::class);
 
     $lastLog = $mLog->record
       ->orderBy('log_datetime', 'desc')
@@ -321,7 +303,7 @@ class Loader extends \HubletoMain\Core\App
     }
 
     // count active users
-    $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+    $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
     $activeUsers = $mUser->record->where('is_active', 1)->count();
 
     // log change in number of users or paid apps
@@ -338,8 +320,8 @@ class Loader extends \HubletoMain\Core\App
 
   public function recalculateCredit(): float
   {
-    $mPayment = new Models\Payment($this->main);
-    $mCredit = new Models\Credit($this->main);
+    $mPayment = $this->main->di->create(Models\Payment::class);
+    $mCredit = $this->main->di->create(Models\Credit::class);
 
     $lastCreditData = $mCredit->record->orderBy('id', 'desc')->first()?->toArray();
     $currentCredit = 0;
@@ -370,7 +352,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function getCurrentCredit(): float
   {
-    $mCredit = new Models\Credit($this->main);
+    $mCredit = $this->main->di->create(Models\Credit::class);
     $tmp = $mCredit->record->orderBy('id', 'desc')->first()?->toArray();
 
     return (float) ($tmp['credit'] ?? 0);

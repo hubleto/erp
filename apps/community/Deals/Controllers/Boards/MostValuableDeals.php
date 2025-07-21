@@ -12,7 +12,7 @@ class MostValuableDeals extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
 
-    $mDeal = new Deal($this->main);
+    $mDeal = $this->main->di->create(Deal::class);
 
     $mostValuableDeals = $mDeal->record->prepareReadQuery()
       ->where($mDeal->table . ".is_archived", 0)

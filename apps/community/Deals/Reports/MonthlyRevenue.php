@@ -14,7 +14,7 @@ class MonthlyRevenue extends \HubletoMain\Core\Report
   {
     $config = [];
 
-    $model = new Deal($this->main);
+    $model = $this->main->di->create(Deal::class);
     $config['groupsBy'] = [
       ["field" => "id_customer", "title" => "Customer"],
     ];
@@ -32,7 +32,7 @@ class MonthlyRevenue extends \HubletoMain\Core\Report
 
   public function loadData(): array
   {
-    $model = new Deal($this->main);
+    $model = $this->main->di->create(Deal::class);
     return $this->loadDataDefault($model);
   }
 

@@ -40,25 +40,9 @@ class Loader extends \HubletoMain\Core\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mSource = new Models\Source($this->main);
+      $mSource = $this->main->di->create(Models\Source::class);
       $mSource->dropTableIfExists()->install();
     }
   }
-
-  // public function installDefaultPermissions(): void
-  // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
-  //   $permissions = [
-  //     "HubletoApp/Community/CalendarSync/Source",
-  //     "HubletoApp/Community/CalendarSync/Controllers/Home",
-  //     "HubletoApp/Community/CalendarSync/Controllers/Google",
-  //   ];
-
-  //   foreach ($permissions as $permission) {
-  //     $mPermission->record->recordCreate([
-  //       "permission" => $permission
-  //     ]);
-  //   }
-  // }
 
 }

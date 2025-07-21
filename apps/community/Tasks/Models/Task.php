@@ -135,13 +135,13 @@ class Task extends \HubletoMain\Core\Models\Model
   public function onAfterCreate(array $savedRecord): array
   {
 
-    $mPipeline = new Pipeline($this->main);
+    $mPipeline = $this->main->di->create(Pipeline::class);
     list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInfo(Pipeline::TYPE_TASK_MANAGEMENT);
     $savedRecord['id_pipeline'] = $idPipeline;
     $savedRecord['id_pipeline_step'] = $idPipelineStep;
 
     if (empty($savedRecord['identifier'])) {
-      // $mProject = new \HubletoApp\Community\Projects\Models\Project($this->main);
+      // \$mProject = $this->main->di->create(\HubletoApp\Community\Projects\Models\Project::class);
       // $project = $mProject->record->where("id", $savedRecord["id_project"])->first()?->toArray();
       // $savedRecord["identifier"] = ($project["identifier"] ?? 'T') . '#' . $savedRecord["id"];
       $tasksApp = $this->main->apps->community('Tasks');

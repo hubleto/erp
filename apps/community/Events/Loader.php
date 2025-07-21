@@ -63,7 +63,7 @@ class Loader extends \HubletoMain\Core\App
       (new Models\Agenda($this->main))->dropTableIfExists()->install();
     }
     if ($round == 2) {
-      $mType = new Models\Type($this->main);
+      $mType = $this->main->di->create(Models\Type::class);
       $mType->record->recordCreate(['name' => 'Seminar']);
       $mType->record->recordCreate(['name' => 'Workshop']);
       $mType->record->recordCreate(['name' => 'Team building']);

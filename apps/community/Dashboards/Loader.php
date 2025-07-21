@@ -54,8 +54,8 @@ class Loader extends \HubletoMain\Core\App
 
   public function generateDemoData(): void
   {
-    $mDashboard = new Models\Dashboard($this->main);
-    $mPanel = new Models\Panel($this->main);
+    $mDashboard = $this->main->di->create(Models\Dashboard::class);
+    $mPanel = $this->main->di->create(Models\Panel::class);
 
     $dashboard = $mDashboard->record->recordCreate([
       'id_owner' => 1,

@@ -8,7 +8,7 @@ class Log extends \HubletoMain\Core\Controllers\Controller
   {
     parent::prepareView();
 
-    $mLog = new \HubletoApp\Community\Cloud\Models\Log($this->main);
+    $mLog = $this->main->di->create(\HubletoApp\Community\Cloud\Models\Log::class);
     $this->viewParams['log'] = $mLog->record->orderBy('log_datetime', 'asc')->get()?->toArray();
 
     $this->setView('@HubletoApp:Community:Cloud/Log.twig');

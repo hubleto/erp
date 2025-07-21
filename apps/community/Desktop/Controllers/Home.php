@@ -19,7 +19,7 @@ class Home extends \HubletoMain\Core\Controllers\Controller
 
     $dashboardsApp = $this->main->apps->community('Dashboards');
     if ($dashboardsApp) {
-      $mDashboard = new \HubletoApp\Community\Dashboards\Models\Dashboard($this->main);
+      $mDashboard = $this->main->di->create(\HubletoApp\Community\Dashboards\Models\Dashboard::class);
 
       $defaultDashboard = $mDashboard->record->prepareReadQuery()
         ->where('is_default', true)

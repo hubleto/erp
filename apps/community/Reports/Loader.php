@@ -34,7 +34,7 @@ class Loader extends \HubletoMain\Core\App
 
   public function generateDemoData(): void
   {
-    $mReport = new Models\Report($this->main);
+    $mReport = $this->main->di->create(Models\Report::class);
 
     $mReport->record->recordCreate([
       'title' => 'Test report for Customers',

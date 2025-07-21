@@ -43,10 +43,10 @@ class Loader extends \HubletoMain\Core\App
   {
 
     if ($round == 1) {
-      $mCustomer = new \HubletoApp\Community\Customers\Models\Customer($this->main);
-      $mCustomerDocument = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
-      $mCustomerTag = new \HubletoApp\Community\Customers\Models\Tag($this->main);
-      $mCrossCustomerTag = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
+      $mCustomer = $this->main->di->create(\HubletoApp\Community\Customers\Models\Customer::class);
+      $mCustomerDocument = $this->main->di->create(\HubletoApp\Community\Customers\Models\CustomerDocument::class);
+      $mCustomerTag = $this->main->di->create(\HubletoApp\Community\Customers\Models\Tag::class);
+      $mCrossCustomerTag = $this->main->di->create(\HubletoApp\Community\Customers\Models\CustomerTag::class);
 
       $mCustomer->dropTableIfExists()->install();
       $mCustomerTag->dropTableIfExists()->install();
@@ -59,14 +59,14 @@ class Loader extends \HubletoMain\Core\App
     }
 
     if ($round == 2) {
-      $mCustomerActivity = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
+      $mCustomerActivity = $this->main->di->create(\HubletoApp\Community\Customers\Models\CustomerActivity::class);
       $mCustomerActivity->dropTableIfExists()->install();
     }
   }
 
   // public function installDefaultPermissions(): void
   // {
-  //   $mPermission = new \HubletoApp\Community\Settings\Models\Permission($this->main);
+  //   $mPermission = $this->main->di->create(\HubletoApp\Community\Settings\Models\Permission::class);
   //   $permissions = [
   //     "HubletoApp/Community/Customers/Models/CustomerActivity:Create",
   //     "HubletoApp/Community/Customers/Models/CustomerActivity:Read",

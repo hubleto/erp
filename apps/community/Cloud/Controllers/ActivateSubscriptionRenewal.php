@@ -13,7 +13,7 @@ class ActivateSubscriptionRenewal extends \HubletoMain\Core\Controllers\Controll
 
     $currentCredit = $this->hubletoApp->recalculateCredit();
 
-    $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
+    $mPayment = $this->main->di->create(\HubletoApp\Community\Cloud\Models\Payment::class);
     $mPayment->record->recordCreate([
       'datetime_charged' => date('Y-m-d H:i:s'),
       'full_amount' => -$currentCredit,

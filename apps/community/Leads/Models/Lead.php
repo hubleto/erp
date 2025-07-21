@@ -157,7 +157,7 @@ class Lead extends \HubletoMain\Core\Models\Model
   {
     $description = parent::describeForm();
 
-    $mSettings = new Setting($this->main);
+    $mSettings = $this->main->di->create(Setting::class);
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
@@ -175,7 +175,7 @@ class Lead extends \HubletoMain\Core\Models\Model
   public function checkOwnership(array $record): void
   {
     if (isset($record['id_customer']) && $record['id_customer'] && !isset($record['checkOwnership'])) {
-      $mCustomer = new Customer($this->main);
+      $mCustomer = $this->main->di->create(Customer::class);
       $customer = $mCustomer->record
         ->where("id", (int) $record["id_customer"])
         ->first()
@@ -199,7 +199,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     $this->checkOwnership($record);
 
     $oldRecord = $this->record->find($record["id"])->toArray();
-    $mLeadHistory = new LeadHistory($this->main);
+    $mLeadHistory = $this->main->di->create(LeadHistory::class);
 
     $diff = $this->diffRecords($oldRecord, $record);
     $columns = $this->getColumns();
@@ -258,7 +258,7 @@ class Lead extends \HubletoMain\Core\Models\Model
   {
     $savedRecord = parent::onAfterCreate($savedRecord);
 
-    $mLeadHistory = new LeadHistory($this->main);
+    $mLeadHistory = $this->main->di->create(LeadHistory::class);
     $mLeadHistory->record->recordCreate([
       "change_date" => date("Y-m-d"),
       "id_lead" => $savedRecord["id"],

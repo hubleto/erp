@@ -8,8 +8,8 @@ class ChargeCredit extends \HubletoMain\Core\Controllers\ApiController
 
   public function renderJson(): ?array
   {
-    $mDiscount = new \HubletoApp\Community\Cloud\Models\Discount($this->main);
-    $mPayment = new \HubletoApp\Community\Cloud\Models\Payment($this->main);
+    $mDiscount = $this->main->di->create(\HubletoApp\Community\Cloud\Models\Discount::class);
+    $mPayment = $this->main->di->create(\HubletoApp\Community\Cloud\Models\Payment::class);
 
     $discountThisMonth = $mDiscount->record
       ->where('month', date('m'))

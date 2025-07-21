@@ -44,7 +44,7 @@ class Permissions extends \ADIOS\Core\Permissions
     if (!isset($this->app->pdo) || !$this->app->pdo->isConnected) {
       return [];
     }
-    $mUserRole = new UserRole($this->main);
+    $mUserRole = $this->main->di->create(UserRole::class);
     $administratorRoles = \ADIOS\Core\Helper::pluck('id', $this->app->pdo->fetchAll("select id from `{$mUserRole->table}` where grant_all = 1"));
     return $administratorRoles;
   }
@@ -57,14 +57,14 @@ class Permissions extends \ADIOS\Core\Permissions
     $permissions = parent::loadPermissions();
 
     if (isset($this->app->pdo) && $this->app->pdo->isConnected) {
-      $mUserRole = new UserRole($this->main);
+      $mUserRole = $this->main->di->create(UserRole::class);
 
       $idCommonUserRoles = \ADIOS\Core\Helper::pluck('id', $this->app->pdo->fetchAll("select id from `{$mUserRole->table}` where grant_all = 0"));
 
       foreach ($idCommonUserRoles as $idCommonRole) {
         $idCommonRole = (int) $idCommonRole;
 
-        $mRolePermission = new RolePermission($this->main);
+        $mRolePermission = $this->main->di->create(RolePermission::class);
 
         /** @var array<int, array> */
         $rolePermissions = (array) $mRolePermission->record

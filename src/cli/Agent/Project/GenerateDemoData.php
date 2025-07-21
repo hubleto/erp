@@ -20,14 +20,14 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $this->cli->cyan("Generating demo data...\n");
 
-    $mCompany = new \HubletoApp\Community\Settings\Models\Company($this->main);
-    $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
-    $mUserRole = new \HubletoApp\Community\Settings\Models\UserRole($this->main);
-    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mCompany = $this->main->di->create(\HubletoApp\Community\Settings\Models\Company::class);
+    $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
+    $mUserRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserRole::class);
+    $mUserHasRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserHasRole::class);
 
     $idCompany = 1; // plati za predpokladu, ze tento command sa spusta hned po CommandInit
 
-    $mUser = new \HubletoApp\Community\Settings\Models\User($this->main);
+    $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
 
     $idUserChiefOfficer = $mUser->record->recordCreate([
       "first_name" => "Richard",
@@ -85,69 +85,69 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       "language" => "en",
     ])['id'];
 
-    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mUserHasRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserChiefOfficer,
       "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER,
     ]);
 
-    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mUserHasRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserManager,
       "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_MANAGER,
     ]);
 
-    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mUserHasRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserEmployee,
       "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_EMPLOYEE,
     ]);
 
-    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mUserHasRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserAssistant,
       "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_ASSISTANT,
     ]);
 
-    $mUserHasRole = new \HubletoApp\Community\Settings\Models\UserHasRole($this->main);
+    $mUserHasRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserExternal,
       "id_role" => \HubletoApp\Community\Settings\Models\UserRole::ROLE_EXTERNAL,
     ]);
 
-    $mInvoiceProfile = new \HubletoApp\Community\Settings\Models\InvoiceProfile($this->main);
+    $mInvoiceProfile = $this->main->di->create(\HubletoApp\Community\Settings\Models\InvoiceProfile::class);
     $mInvoiceProfile->record->recordCreate(['name' => 'Test Profile 1']);
 
     //Documents
-    $mDocuments = new \HubletoApp\Community\Documents\Models\Document($this->main);
+    $mDocuments = $this->main->di->create(\HubletoApp\Community\Documents\Models\Document::class);
 
     //Customers & Contacts
-    $mCustomer            = new \HubletoApp\Community\Customers\Models\Customer($this->main);
-    $mContact             = new \HubletoApp\Community\Contacts\Models\Contact($this->main);
-    $mContactTag          = new \HubletoApp\Community\Contacts\Models\ContactTag($this->main);
-    $mValue               = new \HubletoApp\Community\Contacts\Models\Value($this->main);
-    $mCustomerActivity    = new \HubletoApp\Community\Customers\Models\CustomerActivity($this->main);
-    $mCustomerDocument    = new \HubletoApp\Community\Customers\Models\CustomerDocument($this->main);
-    $mCustomerTag         = new \HubletoApp\Community\Customers\Models\CustomerTag($this->main);
+    $mCustomer            = $this->main->di->create(\HubletoApp\Community\Customers\Models\Customer::class);
+    $mContact             = $this->main->di->create(\HubletoApp\Community\Contacts\Models\Contact::class);
+    $mContactTag          = $this->main->di->create(\HubletoApp\Community\Contacts\Models\ContactTag::class);
+    $mValue               = $this->main->di->create(\HubletoApp\Community\Contacts\Models\Value::class);
+    $mCustomerActivity    = $this->main->di->create(\HubletoApp\Community\Customers\Models\CustomerActivity::class);
+    $mCustomerDocument    = $this->main->di->create(\HubletoApp\Community\Customers\Models\CustomerDocument::class);
+    $mCustomerTag         = $this->main->di->create(\HubletoApp\Community\Customers\Models\CustomerTag::class);
 
     //Leads
-    $mLead = new \HubletoApp\Community\Leads\Models\Lead($this->main);
-    $mLeadHistory  = new \HubletoApp\Community\Leads\Models\LeadHistory($this->main);
-    $mLeadTag = new \HubletoApp\Community\Leads\Models\LeadTag($this->main);
-    $mLeadActivity = new \HubletoApp\Community\Leads\Models\LeadActivity($this->main);
-    $mLeadDocument = new \HubletoApp\Community\Leads\Models\LeadDocument($this->main);
+    $mLead = $this->main->di->create(\HubletoApp\Community\Leads\Models\Lead::class);
+    $mLeadHistory  = $this->main->di->create(\HubletoApp\Community\Leads\Models\LeadHistory::class);
+    $mLeadTag = $this->main->di->create(\HubletoApp\Community\Leads\Models\LeadTag::class);
+    $mLeadActivity = $this->main->di->create(\HubletoApp\Community\Leads\Models\LeadActivity::class);
+    $mLeadDocument = $this->main->di->create(\HubletoApp\Community\Leads\Models\LeadDocument::class);
 
     //Deals
-    $mDeal         = new \HubletoApp\Community\Deals\Models\Deal($this->main);
-    $mDealHistory  = new \HubletoApp\Community\Deals\Models\DealHistory($this->main);
-    $mDealTag      = new \HubletoApp\Community\Deals\Models\DealTag($this->main);
-    $mDealActivity = new \HubletoApp\Community\Deals\Models\DealActivity($this->main);
-    $mDealDocument = new \HubletoApp\Community\Deals\Models\DealDocument($this->main);
+    $mDeal         = $this->main->di->create(\HubletoApp\Community\Deals\Models\Deal::class);
+    $mDealHistory  = $this->main->di->create(\HubletoApp\Community\Deals\Models\DealHistory::class);
+    $mDealTag      = $this->main->di->create(\HubletoApp\Community\Deals\Models\DealTag::class);
+    $mDealActivity = $this->main->di->create(\HubletoApp\Community\Deals\Models\DealActivity::class);
+    $mDealDocument = $this->main->di->create(\HubletoApp\Community\Deals\Models\DealDocument::class);
 
     //Shop
-    $mProduct = new \HubletoApp\Community\Products\Models\Product($this->main);
-    $mGroup = new \HubletoApp\Community\Products\Models\Group($this->main);
-    $mSupplier = new \HubletoApp\Community\Suppliers\Models\Supplier($this->main);
+    $mProduct = $this->main->di->create(\HubletoApp\Community\Products\Models\Product::class);
+    $mGroup = $this->main->di->create(\HubletoApp\Community\Products\Models\Group::class);
+    $mSupplier = $this->main->di->create(\HubletoApp\Community\Suppliers\Models\Supplier::class);
 
     if (
       $this->main->apps->isAppInstalled("HubletoApp\Community\Documents") &&
@@ -185,7 +185,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
   public function generateInvoiceProfiles(): void
   {
-    $mInvoiceProfile = new \HubletoApp\Community\Settings\Models\InvoiceProfile($this->main);
+    $mInvoiceProfile = $this->main->di->create(\HubletoApp\Community\Settings\Models\InvoiceProfile::class);
     $mInvoiceProfile->install();
     $mInvoiceProfile = $mInvoiceProfile->record->recordCreate([
       "name" => "Test Invoice Profile"
@@ -492,7 +492,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     \HubletoApp\Community\Leads\Models\LeadActivity $mLeadActivity,
   ): void {
 
-    $mCampaign = new \HubletoApp\Community\Campaigns\Models\Campaign($this->main);
+    $mCampaign = $this->main->di->create(\HubletoApp\Community\Campaigns\Models\Campaign::class);
     $mCampaign->record->recordCreate(["name" => "Newsletter subscribers", "target_audience" => "Website visitors filling 'Subscribe to our newsletter'.", "color" => "#AB149E" ]);
     $mCampaign->record->recordCreate(["name" => "Cold calling - SMEs", "target_audience" => "SMEs reached out by cold calling.", "color" => "#68CCCA" ]);
 
@@ -580,7 +580,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $leads = $mLead->record->get();
 
-    $mPipeline = new \HubletoApp\Community\Pipeline\Models\Pipeline($this->main);
+    $mPipeline = $this->main->di->create(\HubletoApp\Community\Pipeline\Models\Pipeline::class);
     $pipeline = $mPipeline->record->prepareReadQuery()->where('id', 1)->first()->toArray();
 
     foreach ($leads as $lead) { // @phpstan-ignore-line
@@ -674,7 +674,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       "title" => "Service"
     ]);
 
-    $mCountry = new Country($this->main);
+    $mCountry = $this->main->di->create(Country::class);
 
     $mSupplier->record->recordCreate([
       "vat_id" => "GB123562563",

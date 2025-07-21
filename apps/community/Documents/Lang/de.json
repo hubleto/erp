@@ -16,7 +16,8 @@
         "Document name": "Dokumentname",
         "File": "Datei",
         "File Link": "Dateilink",
-        "Origin Link": "Ursprungslink"
+        "Origin Link": "Ursprungslink",
+        "Add Document": "Dokument hinzufügen"
     },
     "Controllers\\Table": {
         "Documents": "Unterlagen"
@@ -25,5 +26,8 @@
         "Uid": "Uid",
         "Parent folder": "Elternordner",
         "Folder name": "Ordner Name"
+    },
+    "Controllers\\Browse": {
+        "Documents": "Dokumente"
     }
 }

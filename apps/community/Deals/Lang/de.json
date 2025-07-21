@@ -4,11 +4,11 @@
         "Deals Archive": "Archív dealov"
     },
     "controllers.deals": {
-        "Sales": "Geschäft",
+        "Sales": "Vertrieb",
         "Deals": "Deals"
     },
     "controllers.dealsArchive": {
-        "Sales": "Geschäft",
+        "Sales": "Vertrieb",
         "Deals": "Leads",
         "Archive": "Archiv"
     },
@@ -23,7 +23,8 @@
         "Deal value by result": "Dealwert nach Ergebnis",
         "Deal Lost Reasons": "Verlorene Gründe",
         "Active deals": "Aktive Angebote",
-        "Archived deals": "Archivierte Geschäfte"
+        "Archived deals": "Archivierte Geschäfte",
+        "Deal warnings": ""
     },
     "Models\\Deal": {
         "Deal Identifier": "Deal Identifier",
@@ -48,7 +49,17 @@
         "Business type": "Geschäftstyp",
         "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
         "Add Deal": "Deal hinzufügen",
-        "Manager": "Manager"
+        "Manager": "Manager",
+        "Customer' order number": "",
+        "Closed": "Geschlossen",
+        "Result": "Ergebnis",
+        "All": "Alle",
+        "Ownership": "Eigentum",
+        "Owned by me": "In meinem Besitz",
+        "Managed by me": "Von mir verwaltet",
+        "Open \/ Closed": "Offen \/ Geschlossen",
+        "Open": "Offen",
+        "Active": "Aktiv"
     },
     "Models\\DealActivity": {
         "Deal": "Handeln",
@@ -115,6 +126,13 @@
         "Total value": "Gesamtwert"
     },
     "Controllers\\Boards\\DealWarnings": {
-        "Pending deals without future plan": "Ausstehende Geschäfte ohne zukünftige Plan"
+        "Pending deals without future plan": "Ausstehende Geschäfte ohne zukünftige Plan",
+        "Open deals without future plan": "Offene Deals ohne zukünftige Pläne"
+    },
+    "Controllers\\Boards\\DealValueByResult": {
+        "Unknown": "Unbekannt",
+        "Pending": "Ausstehend",
+        "Won": "Gewonnen",
+        "Lost": "Verloren"
     }
 }

@@ -1,9 +1,9 @@
 {
     "controllers.home": {
-        "Sales": "Geschäft"
+        "Sales": "Vertrieb"
     },
     "loader": {
-        "Sales": ""
+        "Sales": "Vertrieb"
     },
     "manifest": {
         "Pipeline": "Pipeline",
@@ -14,7 +14,8 @@
     },
     "Models\\Pipeline": {
         "Name": "Name",
-        "Description": "Beschreibung"
+        "Description": "Beschreibung",
+        "Type": "Typ"
     },
     "Models\\PipelineStep": {
         "Name": "Name",
@@ -26,6 +27,7 @@
     },
     "Controllers\\Home": {
         "Pipeline": "Pipeline",
-        "Manage pipelines": "Pipelines verwalten"
+        "Manage pipelines": "Pipelines verwalten",
+        "Add deal": "Deal hinzufügen"
     }
 }

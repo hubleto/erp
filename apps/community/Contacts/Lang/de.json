@@ -1,11 +1,11 @@
 {
     "manifest": {
         "Contacts": "Kontakte",
-        "Default customer management and addressbook.": "Standard -Kundenmanagement und Adressbuch."
+        "Default customer management and addressbook.": "Standard-Kundenmanagement und Adressbuch."
     },
     "root": {
         "Contact Categories": "Kontaktkategorien",
-        "Contact Tags": "Kontakt -Tags",
+        "Contact Tags": "Kontakttags",
         "Contacts": "Kontakte",
         "Import contacts": "Kontakte importieren"
     },
@@ -42,7 +42,7 @@
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
-        "Tag": "Etikett"
+        "Tag": "Tag"
     },
     "Models\\Category": {
         "Type": "Typ"

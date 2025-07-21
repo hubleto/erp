@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Cloud": "Cloud",
-        "Management of cloud Hubleto account.": "Verwaltung des Cloud-Hubleto-Kontos.",
+        "Management of cloud Hubleto account.": "Verwaltung des Cloud-Hubleto-Kontos."
     },
     "Models\\Log": {
         "Log datetime": "Protokolldatensätze",

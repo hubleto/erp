@@ -107,23 +107,23 @@
         "Settings": "Einstellungen"
     },
     "models.activitytype": {
-        "Type Name": "",
-        "Color": "",
-        "Shown in Calendar": "",
-        "Icon": ""
+        "Type Name": "Typ Name",
+        "Color": "Farbe",
+        "Shown in Calendar": "Im Kalender anzeigen",
+        "Icon": "Symbol"
     },
     "models.pipelinestep": {
-        "Name": "",
-        "Order": "",
-        "Company": ""
+        "Name": "Name",
+        "Order": "Reihenfolge",
+        "Company": "Unternehmen"
     },
     "controllers.users": {
-        "Settings": "",
-        "Users": ""
+        "Settings": "Einstellungen",
+        "Users": "Nutzer"
     },
     "manifest": {
         "Settings": "Einstellungen",
-        "...": "",
+        "...": "...",
         "Settings and control panel for your Hubleto.": "Einstellungen und Bedienfeld für Ihr Hubleto.",
         "Settings and tools": "Einstellungen und Werkzeuge"
     },
@@ -132,13 +132,13 @@
         "User roles": "",
         "Your companies": "Ihre Unternehmen",
         "General settings": "Allgemeine Einstellungen",
-        "Permissions": "",
-        "Tags": "",
+        "Permissions": "Berechtigungen",
+        "Tags": "Markierungen",
         "Activity types": "Aktivitätstypen",
-        "Contact types": "",
+        "Contact types": "Kontakttypen",
         "Countries": "Länder",
         "Currencies": "Währungen",
-        "Pipelines": "",
+        "Pipelines": "Pipelines",
         "Invoice profiles": "Rechnungsprofile",
         "Platform config": "Plattformkonfiguration",
         "Roles": "Rollen",
@@ -149,8 +149,8 @@
     },
     "Models\\UserRole": {
         "Role": "Rolle",
-        "Grant all permissions (admin role)": "",
-        "Grant all permissions (administrator role)": "Gewähren Sie alle Berechtigungen (Administratorrolle)",
+        "Grant all permissions (admin role)": "Alle Berechtigungen gewähren (Adminrolle)",
+        "Grant all permissions (administrator role)": "Alle Berechtigungen gewähren (Administratorrolle)",
         "Description": "Beschreibung",
         "Is default role (cannot be modified)": "Ist Standardrolle (kann nicht geändert werden)"
     },
@@ -160,12 +160,13 @@
     },
     "Controllers\\Dashboard": {
         "Settings": "Einstellungen",
-        "Manage installed apps": "",
-        "Open": "",
+        "Manage installed apps": "Installierte Anwendungen verwalten",
+        "Open": "Offen",
         "Most common settings": "Die häufigsten Einstellungen",
         "Manage users": "Benutzer verwalten",
         "Manage apps": "Apps verwalten",
-        "All settings": "Alle Einstellungen"
+        "All settings": "Alle Einstellungen",
+        "Change theme": ""
     },
     "Models\\RolePermission": {
         "Permission": "Erlaubnis",
@@ -179,7 +180,8 @@
         "Language": "Sprache",
         "Default company": "Standardfirma",
         "Roles": "Rollen",
-        "Teams": "Teams"
+        "Teams": "Teams",
+        "Apps": "Anwendungen"
     },
     "Models\\Country": {
         "Country": "Land",
@@ -220,5 +222,11 @@
         "Apps": "Apps",
         "Open": "Offen",
         "Disable": "Deaktivieren"
+    },
+    "Models\\Team": {
+        "Team name": "Teamname",
+        "Team color": "Teamfarbe",
+        "Description": "Beschreibung",
+        "Manager": "Manager"
     }
 }

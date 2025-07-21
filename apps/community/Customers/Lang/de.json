@@ -46,7 +46,9 @@
         "Add Customer": "Kunden hinzufügen",
         "Tags": "Tags",
         "Archive": "Archiv",
-        "Archived": "Archiviert"
+        "Archived": "Archiviert",
+        "Manager": "Verwalter",
+        "Shared folder (online document storage)": "Geteilter Ordner"
     },
     "Models\\CustomerDocument": {
         "Customer": "Kunde",
@@ -61,7 +63,6 @@
         "Color": "Farbe"
     },
     "Components\\FormCustomer": {
-        "Enter = Log completed activity": "Geben Sie = log abgeschlossene Aktivität ein",
         "Type recent activity here": "Geben Sie hier die aktuelle Aktivität ein",
         "Shift+Enter = Schedule": "Shift+ENTER = Zeitplan",
         "Not completed yet": "Noch nicht fertig",

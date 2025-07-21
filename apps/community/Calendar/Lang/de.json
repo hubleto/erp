@@ -1,17 +1,9 @@
 {
-//    "controllers.calendar": {
-//        "Calendar": "Kalender",
-//        "Free calendar app.": "Kostenlose Kalenderanwendung."
-//    },
-//    "loader": {
-//        "Calendar": "Kalender"
-//    },
     "manifest": {
         "Calendar": "Kalender",
         "Free calendar app.": "Kostenlose Kalender -App."
     },
     "root": {
-        "Events for today": "Ereignisse für heute",
         "Reminders": "Erinnerungen"
     },
     "Models\\Activity": {
@@ -26,16 +18,27 @@
         "Created by": "Erstellt von",
         "Meeting minutes (link)": "Besprechungsminuten (Link)"
     },
+    "Controllers\\Calendar": {
+        "Calendar": "Kalender"
+    },
+    "Models\\SharedCalendar": {
+        "Created by": "Erstellt am",
+        "Calendar ID": "Kalender ID",
+        "Share key": "Kalenderschlüssel",
+        "Display details": "Details anzeigen",
+        "Enabled": "Aktiv",
+        "Date from": "Datum ab",
+        "Date to": "Datum bis"
+    },
     "Controllers\\Boards\\Reminders": {
         "All-day": "Ganztägig",
         "Open event details": "Offene Ereignisdetails",
         "events for tomorrow": "Ereignisse für morgen",
         "events later": "Ereignisse später",
         "Open reminder details": "Erinnerungsdetails öffnen",
-        "Let's have a break. You have nothing to do for today.": "Lass uns eine Pause machen. Heute hast du nichts zu tun."
-    },
-    "Controllers\\Calendar": {
-        "Calendar": "Kalender",
+        "Let's have a break. You have nothing to do for today.": "Lass uns eine Pause machen. Heute hast du nichts zu tun.",
+        "reminders later": "spätere Erinnerungen",
+        "Later": "Später"
     },
     "Components\\CalendarMain": {
         "Calendars": "Kalender",

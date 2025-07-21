@@ -3,6 +3,7 @@ module.exports = {
   darkMode: 'selector',
   content: [
     "./src/**/*.{html,js,twig,tsx}",
+    "./core/**/*.{html,js,twig,tsx}",
     "./apps/**/*.{php,html,js,twig,tsx}",
     "./vendor/wai-blue/adios/**/*.{tsx,twig}",
     "./vendor/wai-blue/adios/node_modules/primereact/**/*.{js,ts,jsx,tsx}",

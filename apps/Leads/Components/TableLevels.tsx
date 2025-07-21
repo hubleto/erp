@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/core/Components/HubletoTable';
-import Form{{ modelSingularForm }} from './Form{{ modelSingularForm }}';
+import FormLevel from './FormLevel';
 
-interface Table{{ modelPluralForm }}Props extends HubletoTableProps {
+interface TableLevelsProps extends HubletoTableProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface Table{{ modelPluralForm }}State extends HubletoTableState {
+interface TableLevelsState extends HubletoTableState {
 }
 
-export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ modelPluralForm }}Props, Table{{ modelPluralForm }}State> {
+export default class TableLevels extends HubletoTable<TableLevelsProps, TableLevelsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: '{{ appNamespaceForwardSlash }}/Models/{{ model }}',
+    model: 'HubletoApp/Community/Leads/Models/Level',
   }
 
-  props: Table{{ modelPluralForm }}Props;
-  state: Table{{ modelPluralForm }}State;
+  props: TableLevelsProps;
+  state: TableLevelsState;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Table{{ modelPluralForm }}';
+  translationContext: string = 'HubletoApp\\Community\\Leads::Components\\TableLevels';
 
-  constructor(props: Table{{ modelPluralForm }}Props) {
+  constructor(props: TableLevelsProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: Table{{ modelPluralForm }}Props) {
+  getStateFromProps(props: TableLevelsProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -52,6 +52,6 @@ export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ mod
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
     // formProps.description.defaultValues = { id_customer: this.props.idCustomer };
-    return <Form{{ modelSingularForm }} {...formProps}/>;
+    return <FormLevel {...formProps}/>;
   }
 }

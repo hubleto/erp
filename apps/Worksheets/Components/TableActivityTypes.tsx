@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/core/Components/HubletoTable';
-import Form{{ modelSingularForm }} from './Form{{ modelSingularForm }}';
+import FormActivityType from './FormActivityType';
 
-interface Table{{ modelPluralForm }}Props extends HubletoTableProps {
+interface TableActivityTypesProps extends HubletoTableProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface Table{{ modelPluralForm }}State extends HubletoTableState {
+interface TableActivityTypesState extends HubletoTableState {
 }
 
-export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ modelPluralForm }}Props, Table{{ modelPluralForm }}State> {
+export default class TableActivityTypes extends HubletoTable<TableActivityTypesProps, TableActivityTypesState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: '{{ appNamespaceForwardSlash }}/Models/{{ model }}',
+    model: 'HubletoApp/Community/Worksheets/Models/ActivityType',
   }
 
-  props: Table{{ modelPluralForm }}Props;
-  state: Table{{ modelPluralForm }}State;
+  props: TableActivityTypesProps;
+  state: TableActivityTypesState;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Table{{ modelPluralForm }}';
+  translationContext: string = 'HubletoApp\\Community\\Worksheets::Components\\TableActivityTypes';
 
-  constructor(props: Table{{ modelPluralForm }}Props) {
+  constructor(props: TableActivityTypesProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: Table{{ modelPluralForm }}Props) {
+  getStateFromProps(props: TableActivityTypesProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -52,6 +52,6 @@ export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ mod
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
     // formProps.description.defaultValues = { id_customer: this.props.idCustomer };
-    return <Form{{ modelSingularForm }} {...formProps}/>;
+    return <FormActivityType {...formProps}/>;
   }
 }

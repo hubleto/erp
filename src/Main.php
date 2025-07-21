@@ -25,7 +25,7 @@ spl_autoload_register(function (string $class) {
     'HubletoMain/Installer/' => __DIR__ . '/../installer/',
 
     // apps
-    'HubletoApp/Community/' => __DIR__ . '/../apps/community/',
+    'HubletoApp/Community/' => __DIR__ . '/../apps/',
     'HubletoApp/Custom/' => $rootFolder . '/apps/',
     'HubletoApp/Premium/' => $premiumAppsFolder . '/',
     'HubletoApp/External/' => $externalAppsFolder . '/',

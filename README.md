@@ -45,12 +45,12 @@ php hubleto app install "HubletoApp\Custom\HelloWorldApp"
 php hubleto create model "HubletoApp\Custom\HelloWorldApp" "TodoItem"
 ```
 
-You can use **models and API of free community apps** available in [apps/community](apps/community) folder, e.g.:
+You can use **models and API of free community apps** available in [apps](apps) folder, e.g.:
 
-  * [Contacts](apps/community/Contacts) or [Customers](apps/community/Customers) as a full-featured addressbook
-  * [Settings](apps/community/Settings) for management of your app's settings
-  * [Reports](apps/community/Reports) as a centralized report visualizer
-  * [Products](apps/community/Products) for your e-commerce project
+  * [Contacts](apps/Contacts) or [Customers](apps/Customers) as a full-featured addressbook
+  * [Settings](apps/Settings) for management of your app's settings
+  * [Reports](apps/Reports) as a centralized report visualizer
+  * [Products](apps/Products) for your e-commerce project
   * and more...
 
 ## Developer's guide
@@ -64,11 +64,11 @@ Visit https://developer.hubleto.com with tutorials on how to download & install,
 You can contribute in many areas:
 
   * report [bugs](https://github.com/hubleto/main/issues) or submit [issues](https://github.com/hubleto/main/issues)
-  * improve or create new [community apps](apps/community)
+  * improve or create new [community apps](apps)
   * review [pull requests](https://github.com/hubleto/main/pulls)
   * start [discussions](https://github.com/hubleto/main/discussions/categories/general)
   * improve [Hubleto Core](src)
-  * translate [language packs](apps/community/Customers/Lang)
+  * translate [language packs](apps/Customers/Lang)
   * improve [developer's guide](https://developer.hubleto.com)
 
 ## Follow us

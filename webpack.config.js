@@ -23,7 +23,7 @@ module.exports = (env, arg) => {
       hubleto: [
         './src/Main',
         // './repositories.tsx',
-        ...loadEntriesFromRepository(path.resolve(__dirname, 'apps/community')),
+        ...loadEntriesFromRepository(path.resolve(__dirname, 'apps')),
         ...loadEntriesFromRepository(path.resolve(__dirname, '../apps')),
       ],
     },

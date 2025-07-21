@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/core/Components/HubletoTable';
-import Form{{ modelSingularForm }} from './Form{{ modelSingularForm }}';
+import FormTransaction from './FormTransaction';
 
-interface Table{{ modelPluralForm }}Props extends HubletoTableProps {
+interface TableTransactionProps extends HubletoTableProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface Table{{ modelPluralForm }}State extends HubletoTableState {
+interface TableTransactionsState extends HubletoTableState {
 }
 
-export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ modelPluralForm }}Props, Table{{ modelPluralForm }}State> {
+export default class TableTransaction extends HubletoTable<TableTransactionProps, TableTransactionState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: '{{ appNamespaceForwardSlash }}/Models/{{ model }}',
+    model: 'HubletoApp/Community/Inventory/Models/Transaction',
   }
 
-  props: Table{{ modelPluralForm }}Props;
-  state: Table{{ modelPluralForm }}State;
+  props: TableTransactionProps;
+  state: TableTransactionState;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Table{{ modelPluralForm }}';
+  translationContext: string = 'HubletoApp\\Community\\Inventory::Components\\TableTransaction';
 
-  constructor(props: Table{{ modelPluralForm }}Props) {
+  constructor(props: TableTransactionProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: Table{{ modelPluralForm }}Props) {
+  getStateFromProps(props: TableTransactionProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -51,7 +51,7 @@ export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ mod
     let formProps = this.getFormProps();
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
-    // formProps.description.defaultValues = { id_customer: this.props.idCustomer };
-    return <Form{{ modelSingularForm }} {...formProps}/>;
+    // formProps.description.defaultValues = { idDashboard: this.props.idDashboard };
+    return <FormTransaction {...formProps}/>;
   }
 }

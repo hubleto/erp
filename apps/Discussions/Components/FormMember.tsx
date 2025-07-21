@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
 import Table, { TableProps, TableState } from 'adios/Table';
 
-interface Form{{ modelSingularForm }}Props extends HubletoFormProps { }
-interface Form{{ modelSingularForm }}State extends HubletoFormState { }
+interface FormMemberProps extends HubletoFormProps { }
+interface FormMemberState extends HubletoFormState { }
 
-export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{{ modelSingularForm }}Props, Form{{ modelSingularForm }}State> {
+export default class FormMember<P, S> extends HubletoForm<FormMemberProps, FormMemberState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: '{{ appNamespaceForwardSlash }}/Models/Team',
+    model: 'HubletoApp/Community/Discussions/Models/Team',
     tabs: {
       'default': { title: 'Task' },
       // Add your tabs here.
@@ -16,19 +16,19 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
     }
   }
 
-  props: Form{{ modelSingularForm }}Props;
-  state: Form{{ modelSingularForm }}State;
+  props: FormMemberProps;
+  state: FormMemberState;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Form{{ modelSingularForm }}';
+  translationContext: string = 'HubletoApp\\Community\\Discussions::Components\\FormMember';
 
-  constructor(props: Form{{ modelSingularForm }}Props) {
+  constructor(props: FormMemberProps) {
     super(props);
   }
 
   renderTitle(): JSX.Element {
     return <>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
-      <small>{{ model }}</small>
+      <small>Member</small>
     </>;
   }
 

@@ -14,19 +14,33 @@
         "laravel/serializable-closure": "^2",
         "monolog/monolog": "^3",
         "php": "^8.2",
-        "phpstan/phpstan": "^2",
         "snipworks/php-smtp": "^2",
         "symfony/yaml": "^7",
         "twig/twig": "^3",
-        "wai-blue/adios": "^1",
-        "phpmailer/phpmailer": "^6.9",
-        "stichoza/google-translate-php": "^5.3",
-        "league/oauth2-server": "^9.1",
-        "laminas/laminas-httphandlerrunner": "^2.12"
+        "phpmailer/phpmailer": "^6",
+        "wai-blue/adios": "@dev"
+    },
+    "require-dev": {
+        "wai-blue/adios": "@dev",
+        "phpstan/phpstan": "^2",
+        "phpstan/phpstan-deprecation-rules": "^2",
+        "friendsofphp/php-cs-fixer": "^3",
+        "stichoza/google-translate-php": "^5",
+        "lcobucci/jwt": "^5",
+        "league/oauth2-server": "^9",
+        "laminas/laminas-diactoros": "^3.6",
+        "laminas/laminas-httphandlerrunner": "^2",
+        "laminas/laminas-http": "^2"
     },
     "autoload": {
         "psr-4": {
             "WaiBlue\\": ""
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../github/adios"
+        }
+    ]
 }

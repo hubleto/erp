@@ -9,9 +9,14 @@ use HubletoMain\Core\Controllers\ControllerNotFound;
 
 class Router extends \ADIOS\Core\Router
 {
-  public function __construct(\ADIOS\Core\Loader $app)
+
+  public \HubletoMain $main;
+
+  public function __construct(\HubletoMain $app)
   {
     parent::__construct($app);
+
+    $this->main = $app;
 
     $this->httpGet([
       '/^api\/get-apps-info\/?$/' => Api\GetAppsInfo::class,
@@ -29,26 +34,25 @@ class Router extends \ADIOS\Core\Router
 
   public function createSignInController(): \ADIOS\Core\Controller
   {
-    return new ControllerSignIn($this->app);
+    return new ControllerSignIn($this->main);
   }
 
   public function createNotFoundController(): \ADIOS\Core\Controller
   {
-    return new ControllerNotFound($this->app);
+    return new ControllerNotFound($this->main);
   }
 
   public function createResetPasswordController(): \ADIOS\Core\Controller
   {
-    return new ControllerResetPassword($this->app);
+    return new ControllerResetPassword($this->main);
   }
 
   public function createDesktopController(): \ADIOS\Core\Controller
   {
-    // return new \HubletoMain\Core\ControllerDesktop($this->app);
-    return new \HubletoApp\Community\Desktop\Controllers\Desktop($this->app);
+    return new \HubletoApp\Community\Desktop\Controllers\Desktop($this->main);
   }
 
-  public function httpGet(array $routes)
+  public function httpGet(array $routes): void
   {
     parent::httpGet($routes);
   }

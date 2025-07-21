@@ -19,6 +19,11 @@ class User extends \ADIOS\Models\User
     'ro' => 'Română',
   ];
 
+  /**
+   * @var \Illuminate\Database\Eloquent\Model
+   */
+  public object $record;
+
   public string $table = 'users';
   public string $recordManagerClass = RecordManagers\User::class;
   public ?string $lookupSqlValue = 'ifnull({%TABLE%}.nick, {%TABLE%}.email)';

@@ -5,10 +5,32 @@ namespace HubletoMain\Core;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoMain\Core\Models\Token;
 
+/**
+ * Default authentication provider class.
+ *
+ * @phpstan-type UserProfile array{
+ *   id: int,
+ *   first_name: string,
+ *   last_name: string,
+ *   login: string,
+ *   email: string,
+ *   language: string,
+ *   ROLES: array<mixed>,
+ *   TEAMS: array<mixed>,
+ *   DEFAULT_COMPANY: array<mixed>,
+ * }
+ */
 class AuthProvider extends \ADIOS\Auth\DefaultProvider
 {
-  public \HubletoMain $main;
 
+  use \HubletoMain\Core\Traits\MainTrait;
+
+  /**
+   * Class constructor.
+   *
+   * @param \HubletoMain $main
+   * 
+   */
   public function __construct(\HubletoMain $main)
   {
     parent::__construct($main);
@@ -19,14 +41,56 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider
     $this->app->registerModel(\HubletoApp\Community\Settings\Models\UserHasRole::class);
   }
 
-  public function createUserModel(): \ADIOS\Core\Model
+  /**
+   * Get information about authenticated user.
+   *
+   * @return UserProfile
+   * 
+   */
+  public function getUser(): array
   {
-    return new \HubletoApp\Community\Settings\Models\User($this->app);
+    $tmp = is_array($this->user) ? $this->user : [];
+    return [
+      'id' => (int) ($tmp['id'] ?? 0),
+      'login' => (string) ($tmp['login'] ?? ''),
+      'email' => (string) ($tmp['email'] ?? ''),
+      'first_name' => (string) ($tmp['first_name'] ?? ''),
+      'last_name' => (string) ($tmp['last_name'] ?? ''),
+      'is_active' => (bool) ($tmp['is_active'] ?? false),
+      'language' => (string) ($tmp['language'] ?? false),
+      'ROLES' => (array) ($tmp['ROLES'] ?? []),
+      'TEAMS' => (array) ($tmp['TEAMS'] ?? []),
+      'DEFAULT_COMPANY' => (array) ($tmp['DEFAULT_COMPANY'] ?? []),
+    ];
+  }
+
+  /**
+   * Get user information from the session.
+   *
+   * @return UserProfile
+   * 
+   */
+  public function getUserFromSession(): array
+  {
+    $tmp = $this->app->session->get('userProfile') ?? [];
+    return [
+      'id' => (int) ($tmp['id'] ?? 0),
+      'login' => (string) ($tmp['login'] ?? ''),
+      'email' => (string) ($tmp['email'] ?? ''),
+      'first_name' => (string) ($tmp['first_name'] ?? ''),
+      'last_name' => (string) ($tmp['last_name'] ?? ''),
+      'is_active' => (bool) ($tmp['is_active'] ?? false),
+      'language' => (string) ($tmp['language'] ?? false),
+      'ROLES' => (array) ($tmp['ROLES'] ?? []),
+      'TEAMS' => (array) ($tmp['TEAMS'] ?? []),
+      'DEFAULT_COMPANY' => (array) ($tmp['DEFAULT_COMPANY'] ?? []),
+    ];
   }
 
   public function isUserMemberOfTeam(int $idTeam): bool
   {
-    foreach ($user['TEAMS'] ?? [] as $team) {
+    $user = $this->getUser();
+    foreach ($user['TEAMS'] as $team) {
       if ($team['id'] ?? 0 == $idTeam) {
         return true;
       }
@@ -36,11 +100,16 @@ class AuthProvider extends \ADIOS\Auth\DefaultProvider
 
   public function getActiveUsers(): array
   {
-    return $this->createUserModel()->record
+    return (array) $this->createUserModel()->record
       ->where($this->activeAttribute, '<>', 0)
       ->get()
       ->toArray()
     ;
+  }
+
+  public function createUserModel(): \HubletoApp\Community\Settings\Models\User
+  {
+    return $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
   }
 
   public function findUsersByLogin(string $login): array

@@ -13,59 +13,6 @@ class Translator extends \ADIOS\Core\Translator
     $this->dictionary = [];
   }
 
-  // public function getDictionaryFilename(string $context): string
-  // {
-  //   $dictionaryFilename = '';
-
-  //   $language = $this->main->getLanguage();
-
-  //   foreach ($this->main->apps->getEnabledApps() as $app) {
-  //     if (str_starts_with($context, $app->fullName)) {
-  //       $dictionaryFilename = $app->rootFolder . '/Lang/' . $language . '.json';
-  //     }
-  //   }
-
-  //   if (empty($dictionaryFilename)) $dictionaryFilename = parent::getDictionaryFilename($context, $language);
-
-  //   return $dictionaryFilename;
-  // }
-
-  //   public function addToDictionary(string $string, string $context, string $toLanguage = ''): void
-  //   {
-  //     if (empty($toLanguage)) $toLanguage = $this->main->getLanguage();
-  // var_dump($context);
-  //     list($class, $classContext) = explode('::', $context);
-
-  //     $dictionaryFilename = '';
-  //     if ($class == \HubletoMain\Core::class) {
-  //       $dictionaryFilename = __DIR__ . '/../../lang/' . $language . '.json';
-  //     } else if (str_starts_with($class, 'HubletoApp')) {
-  //       $app = $this->main->apps->getAppInstance($class);
-  //       $dictionaryFilename = $app->rootFolder . '/lang/' . $language . '.json';
-  //     }
-
-  //     $this->dictionary[$context][$string] = ''; // @phpstan-ignore-line
-
-  //     if (!empty($dictionaryFilename) && is_file($dictionaryFilename)) {
-  //       $dictionaryFiltered = [];
-  //       foreach ($this->dictionary as $key => $value) {
-  //         if (str_starts_with($key, $class . '.')) {
-  //           $dictionaryFiltered[str_replace($class . '::', '', $key)] = $value;
-  //         }
-  //       }
-
-  //       // var_dump($dictionaryFiltered);exit;
-
-  //       file_put_contents(
-  //         $dictionaryFilename,
-  //         json_encode(
-  //           $dictionaryFiltered,
-  //           JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
-  //         )
-  //       );
-  //     }
-  //   }
-
   /**
   * @return array|array<string, array<string, string>>
   */
@@ -86,7 +33,7 @@ class Translator extends \ADIOS\Core\Translator
       return [];
     }
 
-    $dictionary = ['lang' => $language];
+    $dictionary = [];
 
     if (strlen($language) == 2) {
       $dictFilename = __DIR__ . '/../../lang/' . $language . '.json';

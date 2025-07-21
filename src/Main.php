@@ -31,7 +31,7 @@ spl_autoload_register(function (string $class) {
   }
 
   // custom/cron
-  if (str_starts_with($class, 'HubletoCustom/C5on/')) {
+  if (str_starts_with($class, 'HubletoCustom/Cron/')) {
     $hubletoMain = $GLOBALS['hubletoMain'];
     @include($hubletoMain->config->getAsString('rootFolder') . '/crons/' . str_replace('HubletoCustom/Cron/', '', $class) . '.php');
   }
@@ -185,29 +185,34 @@ class HubletoMain extends \ADIOS\Core\Loader
     }
   }
 
+  public function createDependencyInjection(): \ADIOS\Core\DependencyInjection
+  {
+    return new \HubletoMain\Core\DependencyInjection($this);
+  }
+
   public function createAuthProvider(): \ADIOS\Core\Auth
   {
-    return new \HubletoMain\Core\AuthProvider($this, []);
+    return $this->di->create(\HubletoMain\Core\AuthProvider::class);
   }
 
   public function createRouter(): \ADIOS\Core\Router
   {
-    return new \HubletoMain\Core\Router($this);
+    return $this->di->create(\HubletoMain\Core\Router::class);
   }
 
   public function createPermissionsManager(): \ADIOS\Core\Permissions
   {
-    return new \HubletoMain\Core\Permissions($this);
+    return $this->di->create(\HubletoMain\Core\Permissions::class);
   }
 
   public function createTranslator(): \HubletoMain\Core\Translator
   {
-    return new \HubletoMain\Core\Translator($this);
+    return $this->di->create(\HubletoMain\Core\Translator::class);
   }
 
   public function createDesktopController(): \HubletoMain\Core\Controllers\Controller
   {
-    return new \HubletoMain\Core\Controllers\Controller($this);
+    return $this->di->create(\HubletoMain\Core\Controllers\Controller::class);
   }
 
   public static function loadDictionary(string $language): array

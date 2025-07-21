@@ -1,3 +1,5 @@
+# example usage: ./vendor/bin/phpstan analyse ./src/Core
+
 parameters:
 	level: 10
 	paths:
@@ -14,5 +16,5 @@ parameters:
 		- '#Cannot cast mixed to int.#'
 		- '#Cannot cast mixed to float.#'
 		- '#Cannot access offset#'
-includes:
-	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
+# includes:
+# 	- vendor/phpstan/phpstan-deprecation-rules/rules.neon

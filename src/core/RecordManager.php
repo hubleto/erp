@@ -6,7 +6,8 @@ use HubletoApp\Community\Settings\Models\UserRole;
 
 class RecordManager extends \ADIOS\Core\EloquentRecordManager
 {
-  public $joinManager = [];
+
+  public array $joinManager = [];
 
   public function getPermissions(array $record): array
   {
@@ -105,12 +106,12 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager
 
     // merge default permissions with user configured
 
-    $permissions = [
-      $permissions[0] || $main->permissions->granted($this->model->permission . ':Create'),
-      $permissions[1] || $main->permissions->granted($this->model->permission . ':Read'),
-      $permissions[2] || $main->permissions->granted($this->model->permission . ':Update'),
-      $permissions[3] || $main->permissions->granted($this->model->permission . ':Delete'),
-    ];
+    // $permissions = [
+    //   $permissions[0] || $main->permissions->granted($this->model->permission . ':Create'),
+    //   $permissions[1] || $main->permissions->granted($this->model->permission . ':Read'),
+    //   $permissions[2] || $main->permissions->granted($this->model->permission . ':Update'),
+    //   $permissions[3] || $main->permissions->granted($this->model->permission . ':Delete'),
+    // ];
 
     return $permissions;
   }
@@ -127,6 +128,7 @@ class RecordManager extends \ADIOS\Core\EloquentRecordManager
 
     $idUser = $main->auth->getUserId();
 
+    $user = $main->auth->getUser();
     $userTeams = [];
     foreach ($user['TEAMS'] ?? [] as $team) {
       $userTeams[] = $team['id'] ?? 0;

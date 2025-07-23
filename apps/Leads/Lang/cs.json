@@ -117,5 +117,9 @@
         "End": "Konec",
         "Lead": "Potenciální obchod",
         "Contact": "Kontakt"
+    },
+    "Controllers\\LostReasons": {
+        "Settings": "Nastavení",
+        "Lead Lost Reasons": "Důvody pro ztrátu potenciálních obchodů"
     }
 }

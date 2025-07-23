@@ -25,7 +25,7 @@
         "events for tomorrow": "Události pro zítřek",
         "events later": "Události později",
         "Open reminder details": "Otevřít podrobnosti o připomínkách",
-        "Let's have a break. You have nothing to do for today.": ""
+        "Let's have a break. You have nothing to do for today.": "Dájte si pauzu. Dneska nemáte co dělat."
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalendář"

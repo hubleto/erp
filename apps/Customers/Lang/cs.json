@@ -53,7 +53,9 @@
     },
     "Models\\Tag": {
         "Name": "Jméno",
-        "Color": "Barva"
+        "Color": "Barva",
+        "Customer Tags": "Značky zákazníků",
+        "Add Customer Tag": "Přidat značku zákazníka"
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"
@@ -91,5 +93,9 @@
     },
     "Components\\TableContacts": {
         "Primary": "Hlavní"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Nastavení",
+        "Customer Tags": "Značky zákazníků"
     }
 }

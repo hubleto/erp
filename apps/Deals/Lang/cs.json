@@ -68,7 +68,9 @@
         "Open deal": "Otevřený obchod"
     },
     "Models\\LostReason": {
-        "Lost Reason": "Důvod ztracení"
+        "Lost Reason": "Důvod ztracení",
+        "Deal Lost Reasons": "Důvod ztracení obchodů",
+        "Add Reason": "Přidat důvod"
     },
     "Models\\DealHistory": {
         "Change Date": "Datum změny",
@@ -94,7 +96,9 @@
     },
     "Models\\Tag": {
         "Name": "Jméno",
-        "Color": "Barva"
+        "Color": "Barva",
+        "Deal Tags": "Značky obchodů",
+        "Add Deal Tag": "Přidat značky obchodů"
     },
     "Controllers\\Boards\\DealWarnings": {
         "Pending deals without future plan": "Čekající obchody bez budoucího plánu",
@@ -157,5 +161,13 @@
         "Pending": "Čekající",
         "Won": "Vyhráto",
         "Lost": "Prohráto"
+    },
+    "Controllers\\LostReasons": {
+        "Settings": "Nastavení",
+        "Deal Lost Reasons": "Důvody ztraceného obchod"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Nastavení",
+        "Deal Tags": "Značky obchodů"
     }
 }

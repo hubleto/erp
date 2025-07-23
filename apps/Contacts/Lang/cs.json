@@ -6,8 +6,8 @@
     "root": {
         "Contact Categories": "Kontaktní kategorie",
         "Contact Tags": "Kontaktní značky",
-        "Contacts": "",
-        "Import contacts": ""
+        "Contacts": "Kontakty",
+        "Import contacts": "Importovat kontakty"
     },
     "Controllers\\Contacts": {
         "Contacts": "Kontakty",
@@ -30,7 +30,8 @@
         "Emails": "Emaily",
         "Phone Numbers": "Telefoní čísla",
         "Mr.": "Pan",
-        "Mrs.": "Pani"
+        "Mrs.": "Pani",
+        "Tags": "Značky"
     },
     "Models\\Value": {
         "Contact": "Kontakt",
@@ -53,7 +54,9 @@
     },
     "Models\\Tag": {
         "Name": "Jméno",
-        "Color": "Barva"
+        "Color": "Barva",
+        "Contact Tags": "Kontaktní značky",
+        "Add Contact Tag": "Přidat kontaktní značku"
     },
     "Components\\FormContact": {
         "Contact": "Kontaktní informace",
@@ -105,5 +108,9 @@
         "Step 3: Check the import": "Krok 3: Zkontrolujte import",
         "Step 4: Run the import": "Krok 4: Spusťte import",
         "You will be able to run the import after its check": "Po kontrole budete moci spustit import"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Nastavení",
+        "Contact Tags": "Kontaktní značky"
     }
 }

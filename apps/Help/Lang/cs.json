@@ -4,10 +4,10 @@
         "Help and user guide for Hubleto.": "Nápověda a uživatelská příručka pro HUBLETO."
     },
     "Controllers\\Help": {
-        "Help": "",
-        "Need help using Hubleto?": "",
-        "Found a bug?": "",
-        "Need help with development?": "",
-        "Just looking around?": ""
+        "Help": "Pomoc",
+        "Need help using Hubleto?": "Potřebujete pomoc při používaní Hubleto?",
+        "Found a bug?": "Našli jste chybu?",
+        "Need help with development?": "Potřebujete pomoc při vývoji?",
+        "Just looking around?": "Jen se rozhlížíte?"
     }
 }

@@ -34,7 +34,8 @@
         "Calendars": "Kalendáře",
         "Ownership": "Vlastík",
         "All": "Všichni",
-        "My activities": "Moje aktivity"
+        "My activities": "Moje aktivity",
+        "New activity": "Nová aktivita"
     },
     "Components\\FormActivity": {
         "Start": "Začátek",

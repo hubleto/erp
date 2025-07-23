@@ -61,7 +61,8 @@
         "Active": "Aktivní",
         "Deal created": "Obchod vytvořen",
         " changed from ": " změnil z ",
-        " to ": " na "
+        " to ": " na ",
+        "Customer' order number": "Číslo objednávky zákazníka"
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otevřený obchod"
@@ -141,7 +142,9 @@
         "Description": "Popis",
         "Change Date": "Datum změny",
         "No steps exist for this pipeline": "Neexistujú kroky pro tuto pipeline",
-        "Weighted profit": "Vážený zisk"
+        "Weighted profit": "Vážený zisk",
+        "Tasks": "Úlohy",
+        "Go to deal": "Přejít na obchod"
     },
     "Components\\FormActivity": {
         "Start": "Začátek",
@@ -150,9 +153,9 @@
         "Contact": "Kontakt"
     },
     "Controllers\\Boards\\DealValueByResult": {
-        "Unknown": "",
-        "Pending": "",
-        "Won": "",
-        "Lost": ""
+        "Unknown": "Neznámé",
+        "Pending": "Čekající",
+        "Won": "Vyhráto",
+        "Lost": "Prohráto"
     }
 }

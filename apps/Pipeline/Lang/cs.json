@@ -9,7 +9,7 @@
     "Models\\Pipeline": {
         "Name": "Jméno",
         "Description": "Popis",
-        "Type": ""
+        "Type": "Typ"
     },
     "Models\\PipelineStep": {
         "Name": "Jméno",

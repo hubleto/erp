@@ -27,5 +27,8 @@
     "Components\\Browser": {
         "Add document": "Přidat dokument",
         "Add folder": "Přidat soubor"
+    },
+    "Components\\FormDocument": {
+        "Document": "Dokument"
     }
 }

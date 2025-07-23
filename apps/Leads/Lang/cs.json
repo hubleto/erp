@@ -105,10 +105,17 @@
         "Documents": "Dokumenty",
         "Local documents": "Lokální dokumenty",
         "History": "Historie",
-        "Show leads": "Ukázat potenciální obchody"
+        "Show leads": "Ukázat potenciální obchody",
+        "Add document": "Přidat dokument",
+        "Link": "Odkaz",
+        "Document": "Dokument",
+        "Description": "Popis",
+        "Change Date": "Datum změny"
     },
     "Components\\FormActivity": {
         "Start": "Začátek",
-        "End": "Konec"
+        "End": "Konec",
+        "Lead": "Potenciální obchod",
+        "Contact": "Kontakt"
     }
 }

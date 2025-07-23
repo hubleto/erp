@@ -6,8 +6,8 @@
     "root": {
         "Contact Categories": "Kontaktní kategorie",
         "Contact Tags": "Kontaktní značky",
-        "Contacts": "",
-        "Import contacts": ""
+        "Contacts": "Kontakty",
+        "Import contacts": "Importovat kontakty"
     },
     "Controllers\\Contacts": {
         "Contacts": "Kontakty",
@@ -30,7 +30,8 @@
         "Emails": "Emaily",
         "Phone Numbers": "Telefoní čísla",
         "Mr.": "Pan",
-        "Mrs.": "Pani"
+        "Mrs.": "Pani",
+        "Tags": "Značky"
     },
     "Models\\Value": {
         "Contact": "Kontakt",

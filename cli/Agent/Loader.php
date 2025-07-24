@@ -4,12 +4,12 @@ namespace HubletoMain\Cli\Agent;
 
 class Loader
 {
-  public \HubletoMain $main;
+  public \HubletoMain\Loader $main;
 
   /** @var resource|false */
   public $clih;
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     $this->main = $main;
     $this->clih = fopen("php://stdin", "r");

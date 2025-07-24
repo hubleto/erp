@@ -2,19 +2,19 @@
 
 if (php_sapi_name() !== 'cli') exit;
 
-if (is_file(__DIR__ . "/vendor/autoload.php")) require_once(__DIR__ . "/vendor/autoload.php");
-else if (is_file(__DIR__ . "/../vendor/autoload.php")) require_once(__DIR__ . "/../vendor/autoload.php");
+// if (is_file(__DIR__ . "/vendor/autoload.php")) require_once(__DIR__ . "/vendor/autoload.php");
+// else if (is_file(__DIR__ . "/../vendor/autoload.php")) require_once(__DIR__ . "/../vendor/autoload.php");
 
-require_once("src/Main.php");
+// require_once("src/Main.php");
 
-if (is_file(__DIR__ . '/ConfigEnv.php')) require_once(__DIR__ . '/ConfigEnv.php');
+// if (is_file(__DIR__ . '/ConfigEnv.php')) require_once(__DIR__ . '/ConfigEnv.php');
 
 // cli agent is used also in 'Installer/template/hubleto'
 if (!isset($config) || !is_array($config)) $config = [];
 
 $config['sessionSalt'] = 'hubleto-cli-agent';
 
-$main = new \HubletoMain($config);
+$main = new \HubletoMain\Loader($config);
 
 $cli = new \HubletoMain\Cli\Agent\Loader($main);
 

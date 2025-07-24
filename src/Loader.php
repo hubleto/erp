@@ -1,5 +1,8 @@
 <?php
 
+namespace HubletoMain;
+
+/*
 // autoloader pre HubletoMain
 spl_autoload_register(function (string $class) {
   $class = str_replace('\\', '/', $class);
@@ -17,24 +20,24 @@ spl_autoload_register(function (string $class) {
 
   $classGroups = [
     // main
-    'HubletoMain/Core/' => __DIR__ . '/../core/',
-    'HubletoMain/Cli/' => __DIR__ . '/../cli/',
-    'HubletoMain/Hook/' => __DIR__ . '/../hooks/',
-    'HubletoMain/Cron/' => __DIR__ . '/../crons/',
-    'HubletoMain/Report/' => __DIR__ . '/../reports/',
-    'HubletoMain/Installer/' => __DIR__ . '/../installer/',
+    // 'HubletoMain/Core/' => __DIR__ . '/../core/',
+    // 'HubletoMain/Cli/' => __DIR__ . '/../cli/',
+    // 'HubletoMain/Hook/' => __DIR__ . '/../hooks/',
+    // 'HubletoMain/Cron/' => __DIR__ . '/../crons/',
+    // 'HubletoMain/Report/' => __DIR__ . '/../reports/',
+    // 'HubletoMain/Installer/' => __DIR__ . '/../installer/',
 
-    // apps
-    'HubletoApp/Community/' => __DIR__ . '/../apps/',
-    'HubletoApp/Custom/' => $rootFolder . '/apps/',
+    // // apps
+    // 'HubletoApp/Community/' => __DIR__ . '/../apps/',
+    // 'HubletoApp/Custom/' => $rootFolder . '/apps/',
     'HubletoApp/Premium/' => $premiumAppsFolder . '/',
     'HubletoApp/External/' => $externalAppsFolder . '/',
 
     // project
-    'HubletoProject/Hook/' => $rootFolder . '/hooks/',
-    'HubletoProject/Cron/' => $rootFolder . '/crons/',
-    'HubletoProject/Report/' => $rootFolder . '/reports/',
-    'HubletoProject/Dependency/' => $rootFolder . '/dependencies/',
+    // 'HubletoProject/Hook/' => $rootFolder . '/hooks/',
+    // 'HubletoProject/Cron/' => $rootFolder . '/crons/',
+    // 'HubletoProject/Report/' => $rootFolder . '/reports/',
+    // 'HubletoProject/Dependency/' => $rootFolder . '/dependencies/',
   ];
 
   foreach ($classGroups as $group => $folder) {
@@ -44,13 +47,13 @@ spl_autoload_register(function (string $class) {
     }
   }
 
-});
+});*/
 
 /**
  * Main Hubleto class. This class is always referenced
  * as `$this->main` or `$main`.
  */
-class HubletoMain extends \ADIOS\Core\Loader
+class Loader extends \ADIOS\Core\Loader
 {
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
@@ -100,7 +103,7 @@ class HubletoMain extends \ADIOS\Core\Loader
 
     // DEPRECATED
     $this->emails = $this->di->create(\HubletoMain\Core\Emails\EmailWrapper::class);
-    $this->emailProvider = $this->email;
+    $this->emails->emailProvider = $this->email;
 
     // App manager
     $this->apps = $this->di->create(\HubletoMain\Core\AppManager::class);
@@ -165,7 +168,11 @@ class HubletoMain extends \ADIOS\Core\Loader
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
     $this->twigLoader->addPath(__DIR__ . '/../views', 'hubleto');
     $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
-    $this->twigLoader->addPath($this->config->getAsString('rootFolder') . '/views', 'project');
+    try {
+      $this->twigLoader->addPath($this->config->getAsString('rootFolder') . '/views', 'project');
+    } catch (\Exception $e) {
+      //
+    }
 
     $this->twig = new \Twig\Environment($this->twigLoader, array(
       'cache' => false,

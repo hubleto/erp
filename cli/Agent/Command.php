@@ -7,7 +7,7 @@ namespace HubletoMain\Cli\Agent;
 class Command
 {
   public \HubletoMain\Cli\Agent\Loader $cli;
-  public \HubletoMain $main;
+  public \HubletoMain\Loader $main;
 
   public array $arguments = [];
 

@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Notifications;
 
 class Loader extends \HubletoMain\Core\App
 {
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     parent::__construct($main);
   }

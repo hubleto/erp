@@ -18,10 +18,10 @@ import InputHyperlink from "adios/Inputs/Hyperlink";
 import TableCellRendererHyperlink from "adios/TableCellRenderers/Hyperlink";
 
 // Hubleto
-import HubletoForm from "../core/Components/HubletoForm";
-import HubletoTable from "../core/Components/HubletoTable";
-import HubletoChart from "../core/Components/HubletoChart";
-import HubletoTableColumnCustomize from "../core/Components/HubletoTableColumnsCustomize";
+import HubletoForm from "@hubleto/core/Components/HubletoForm";
+import HubletoTable from "@hubleto/core/Components/HubletoTable";
+import HubletoChart from "@hubleto/core/Components/HubletoChart";
+import HubletoTableColumnCustomize from "@hubleto/core/Components/HubletoTableColumnsCustomize";
 
 // Primereact
 import { Tooltip } from "primereact/tooltip";

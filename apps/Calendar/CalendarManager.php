@@ -4,12 +4,12 @@ namespace HubletoApp\Community\Calendar;
 
 class CalendarManager
 {
-  public \HubletoMain $main;
+  public \HubletoMain\Loader $main;
 
   /** @var array<string, \HubletoMain\Core\Calendar> */
   protected array $calendars = [];
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     $this->main = $main;
   }

@@ -9,7 +9,7 @@ class GetCalendarEvents extends \HubletoMain\Core\Controllers\ApiController
 
   public \HubletoApp\Community\Calendar\CalendarManager $calendarManager;
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     parent::__construct($main);
 

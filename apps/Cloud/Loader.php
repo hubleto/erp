@@ -7,7 +7,7 @@ class Loader extends \HubletoMain\Core\App
   public bool $canBeDisabled = false;
   public bool $permittedForAllUsers = true;
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     parent::__construct($main);
   }

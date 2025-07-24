@@ -4,7 +4,7 @@ namespace HubletoMain\Installer;
 
 class Installer
 {
-  public \HubletoMain $main;
+  public \HubletoMain\Loader $main;
 
   public string $adminName = '';
   public string $adminFamilyName = '';
@@ -94,7 +94,7 @@ class Installer
   ];
 
   public function __construct(
-    \HubletoMain $main,
+    \HubletoMain\Loader $main,
     string $env,
     string $uid,
     string $accountFullName,

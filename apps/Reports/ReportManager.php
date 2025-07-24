@@ -4,12 +4,12 @@ namespace HubletoApp\Community\Reports;
 
 class ReportManager
 {
-  public \HubletoMain $main;
+  public \HubletoMain\Loader $main;
 
   /** @var array<string, \HubletoMain\Core\Report> */
   protected array $reports = [];
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     $this->main = $main;
   }

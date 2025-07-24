@@ -4,12 +4,12 @@ namespace HubletoApp\Community\Desktop;
 
 class AppMenuManager
 {
-  public \HubletoMain $main;
+  public \HubletoMain\Loader $main;
 
   /** @var array<int, array<string, bool|string>> */
   public array $items = [];
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     $this->main = $main;
   }

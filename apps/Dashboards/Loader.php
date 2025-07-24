@@ -8,7 +8,7 @@ class Loader extends \HubletoMain\Core\App
 
   protected array $boards = [];
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     parent::__construct($main);
   }

@@ -9,12 +9,12 @@ class SidebarManager
   public const ITEM_HEADING_1 = 'heading_1';
   public const ITEM_HEADING_2 = 'heading_2';
 
-  public \HubletoMain $main;
+  public \HubletoMain\Loader $main;
 
   /** @var array<int, array<string, bool|string>> */
   public array $items = [];
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     $this->main = $main;
   }

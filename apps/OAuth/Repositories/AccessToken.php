@@ -9,9 +9,9 @@ use HubletoApp\Community\OAuth\Entities\AccessTokenEntity;
 
 class AccessToken implements AccessTokenRepositoryInterface
 {
-  public \HubletoMain $main;
+  public \HubletoMain\Loader $main;
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     $this->main = $main;
   }

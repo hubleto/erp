@@ -8,9 +8,9 @@ use HubletoApp\Community\OAuth\Entities\RefreshTokenEntity;
 
 class RefreshToken implements RefreshTokenRepositoryInterface
 {
-  public \HubletoMain $main;
+  public \HubletoMain\Loader $main;
 
-  public function __construct(\HubletoMain $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     $this->main = $main;
   }

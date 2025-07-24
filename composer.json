@@ -17,11 +17,9 @@
         "snipworks/php-smtp": "^2",
         "symfony/yaml": "^7",
         "twig/twig": "^3",
-        "phpmailer/phpmailer": "^6",
-        "wai-blue/adios": "@dev"
+        "phpmailer/phpmailer": "^6"
     },
     "require-dev": {
-        "wai-blue/adios": "@dev",
         "phpstan/phpstan": "^2",
         "phpstan/phpstan-deprecation-rules": "^2",
         "friendsofphp/php-cs-fixer": "^3",
@@ -34,7 +32,13 @@
     },
     "autoload": {
         "psr-4": {
-            "WaiBlue\\": ""
+            "HubletoMain\\": "src",
+            "HubletoMain\\Cli\\": "cli",
+            "HubletoMain\\Hook\\": "hooks",
+            "HubletoMain\\Cron\\": "crons",
+            "HubletoMain\\Report\\": "reports",
+            "HubletoMain\\Installer\\": "installer",
+            "HubletoApp\\Community\\": "apps"
         }
     },
     "repositories": [

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { getUrlParam } from "adios/Helper";
-import TranslatedComponent from "adios/TranslatedComponent";
-import Lookup from 'adios/Inputs/Lookup';
+import { getUrlParam } from "@adios/Helper";
+import TranslatedComponent from "@adios/TranslatedComponent";
+import Lookup from '@adios/Inputs/Lookup';
 import { ProgressBar } from 'primereact/progressbar';
-import request from "adios/Request";
+import request from "@adios/Request";
 
 interface PipelineSelectorProps {
   idPipeline: number,

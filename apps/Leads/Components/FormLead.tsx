@@ -1,17 +1,17 @@
 import React, { Component, createRef, ChangeEvent } from 'react';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
-import InputTags2 from 'adios/Inputs/Tags2';
-import FormInput from 'adios/FormInput';
-import request from 'adios/Request';
+import InputTags2 from '@adios/Inputs/Tags2';
+import FormInput from '@adios/FormInput';
+import request from '@adios/Request';
 import { TabPanel, TabView } from 'primereact/tabview';
 import Calendar from '../../Calendar/Components/Calendar';
-import Lookup from 'adios/Inputs/Lookup';
+import Lookup from '@adios/Inputs/Lookup';
 import TableLeadDocuments from './TableLeadDocuments';
-import ModalForm from 'adios/ModalForm';
+import ModalForm from '@adios/ModalForm';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
 import LeadFormActivity, { LeadFormActivityProps, LeadFormActivityState } from './LeadFormActivity';
-import Hyperlink from 'adios/Inputs/Hyperlink';
-import { FormProps, FormState } from 'adios/Form';
+import Hyperlink from '@adios/Inputs/Hyperlink';
+import { FormProps, FormState } from '@adios/Form';
 import moment, { Moment } from "moment";
 import TableLeadHistory from './TableLeadHistory';
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from 'adios/Table';
+import Table, { TableProps, TableState } from '@adios/Table';
 import CustomerFormActivity from './CustomerFormActivity';
 
 interface TableActivitiesProps extends TableProps {

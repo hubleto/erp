@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/core/Components/HubletoTable';
 import { ProgressBar } from 'primereact/progressbar';
-import request from "adios/Request";
+import request from "@adios/Request";
 import Markdown from 'marked-react';
 
 interface MessagesProps extends HubletoTableProps {

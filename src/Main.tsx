@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import 'primereact/resources/themes/lara-light-teal/theme.css';
 
-import { ADIOS } from "adios/Loader";
-import request from "adios/Request";
+import { ADIOS } from "@adios/Loader";
+import request from "@adios/Request";
 
 // ADIOS
-// import Table from "adios/Table";
-import Modal from "adios/ModalSimple";
-import InputVarchar from "adios/Inputs/Varchar";
-import InputInt from "adios/Inputs/Int";
-import InputLookup from "adios/Inputs/Lookup";
-import InputImage from "adios/Inputs/Image";
-import InputBoolean from "adios/Inputs/Boolean";
-import InputColor from "adios/Inputs/Color";
-import InputHyperlink from "adios/Inputs/Hyperlink";
+// import Table from "@adios/Table";
+import Modal from "@adios/ModalSimple";
+import InputVarchar from "@adios/Inputs/Varchar";
+import InputInt from "@adios/Inputs/Int";
+import InputLookup from "@adios/Inputs/Lookup";
+import InputImage from "@adios/Inputs/Image";
+import InputBoolean from "@adios/Inputs/Boolean";
+import InputColor from "@adios/Inputs/Color";
+import InputHyperlink from "@adios/Inputs/Hyperlink";
 
-import TableCellRendererHyperlink from "adios/TableCellRenderers/Hyperlink";
+import TableCellRendererHyperlink from "@adios/TableCellRenderers/Hyperlink";
 
 // Hubleto
 import HubletoForm from "@hubleto/core/Components/HubletoForm";

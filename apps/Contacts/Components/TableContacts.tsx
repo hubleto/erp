@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/core/Components/HubletoTable';
 import FormContact, { FormContactProps, FormContactState } from './FormContact';
-import { getUrlParam } from 'adios/Helper';
-import request from 'adios/Request';
+import { getUrlParam } from '@adios/Helper';
+import request from '@adios/Request';
 import { ProgressBar } from 'primereact/progressbar';
 
 interface TableContactsProps extends HubletoTableProps {}

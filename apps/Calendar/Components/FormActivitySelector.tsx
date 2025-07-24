@@ -1,5 +1,5 @@
-import ModalForm from 'adios/ModalForm';
-import TranslatedComponent from 'adios/TranslatedComponent';
+import ModalForm from '@adios/ModalForm';
+import TranslatedComponent from '@adios/TranslatedComponent';
 import moment from 'moment';
 import React, { Component } from 'react';
 

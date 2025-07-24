@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { deepObjectMerge, getUrlParam } from 'adios/Helper';
+import { deepObjectMerge, getUrlParam } from '@adios/Helper';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
-import InputTags2 from 'adios/Inputs/Tags2';
-import FormInput from 'adios/FormInput';
+import InputTags2 from '@adios/Inputs/Tags2';
+import FormInput from '@adios/FormInput';
 import TableValues from './TableValues';
-import Lookup from 'adios/Inputs/Lookup';
-import Boolean from 'adios/Inputs/Boolean';
-import request from 'adios/Request';
-import { FormProps, FormState } from 'adios/Form';
+import Lookup from '@adios/Inputs/Lookup';
+import Boolean from '@adios/Inputs/Boolean';
+import request from '@adios/Request';
+import { FormProps, FormState } from '@adios/Form';
 
 export interface FormContactProps extends HubletoFormProps {
   newEntryId?: number,

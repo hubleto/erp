@@ -130,8 +130,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $rewriteBases = [];
     $lastRewriteBase = '';
 
-    $paths = explode('/', str_replace('\\', '/', (string) realpath(__DIR__ . '/../../..')));
-    array_pop($paths);
+    $paths = explode('/', str_replace('\\', '/', $this->main->config->getAsString('rootFolder')));
     foreach (array_reverse($paths) as $tmpFolder) {
       $rewriteBases[] = $lastRewriteBase . '/';
       $lastRewriteBase = '/' . $tmpFolder . $lastRewriteBase;
@@ -141,7 +140,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $rewriteBase = $this->cli->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
     }
     if ($rootFolder === null) {
-      $rootFolder = realpath(__DIR__ . '/../../../..');
+      $rootFolder = $this->main->config->getAsString('rootFolder');
     }
     if ($rootUrl === null) {
       $rootUrl = $this->cli->read('ConfigEnv.rootUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
@@ -150,7 +149,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $srcFolder = realpath(__DIR__ . '/../../..');
     }
     if ($srcUrl === null) {
-      $srcUrl = $this->cli->read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/hbl');
+      $srcUrl = $this->cli->read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/main');
     }
     if ($dbHost === null) {
       $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');

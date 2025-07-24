@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from 'adios/Table';
+import Table, { TableProps, TableState } from '@adios/Table';
 import FormOrder, { FormOrderProps } from './FormOrder';
-import request from 'adios/Request';
+import request from '@adios/Request';
 
 interface TableOrdersProps extends TableProps {}
 

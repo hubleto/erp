@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from 'adios/Table';
+import Table, { TableProps, TableState } from '@adios/Table';
 import FormPipeline from './FormPipeline';
 
 interface TablePipelinesProps extends TableProps {

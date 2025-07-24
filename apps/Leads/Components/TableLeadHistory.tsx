@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from 'adios/Table';
+import Table, { TableProps, TableState } from '@adios/Table';
 
 interface TableLeadHistoryProps extends TableProps {}
 interface TableLeadHistoryState extends TableState {}

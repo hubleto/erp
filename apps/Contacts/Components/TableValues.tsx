@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from 'adios/Table';
+import Table, { TableProps, TableState } from '@adios/Table';
 import { ProgressBar } from 'primereact/progressbar';
-import FormInput from 'adios/FormInput';
-import Lookup from 'adios/Inputs/Lookup';
+import FormInput from '@adios/FormInput';
+import Lookup from '@adios/Inputs/Lookup';
 
 interface TableValuesProps extends TableProps {
 }

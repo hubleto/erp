@@ -1,7 +1,7 @@
 import React from "react";
-import request from "adios/Request";
-import Table from "adios/Table";
-import TranslatedComponent from "adios/TranslatedComponent";
+import request from "@adios/Request";
+import Table from "@adios/Table";
+import TranslatedComponent from "@adios/TranslatedComponent";
 
 interface CalendarShareTableProps {
   configs?: any,

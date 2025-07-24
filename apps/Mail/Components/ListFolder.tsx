@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import request from "adios/Request";
-import Table, { TableProps, TableState } from 'adios/Table';
-import Form, { FormProps } from 'adios/Form';
+import request from "@adios/Request";
+import Table, { TableProps, TableState } from '@adios/Table';
+import Form, { FormProps } from '@adios/Form';
 import FormMail from './FormMail';
 import { ProgressBar } from 'primereact/progressbar';
-import ModalForm from "adios/ModalForm";
+import ModalForm from "@adios/ModalForm";
 
 interface ListFolderProps extends TableProps {
   folder?: string,

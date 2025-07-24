@@ -1,11 +1,11 @@
 import React, { Component, useState } from "react";
-import { setUrlParam, deleteUrlParam } from "adios/Helper";
+import { setUrlParam, deleteUrlParam } from "@adios/Helper";
 import Calendar from "./Calendar";
-import ModalForm from "adios/ModalForm";
+import ModalForm from "@adios/ModalForm";
 import FormActivitySelector from "./FormActivitySelector";
-import request from "adios/Request";
+import request from "@adios/Request";
 import moment from 'moment';
-import TranslatedComponent from "adios/TranslatedComponent";
+import TranslatedComponent from "@adios/TranslatedComponent";
 
 
 interface CalendarMainProps {

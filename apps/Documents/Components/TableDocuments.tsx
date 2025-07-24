@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from 'adios/Table';
-import { FormProps } from 'adios/Form';
+import Table, { TableProps, TableState } from '@adios/Table';
+import { FormProps } from '@adios/Form';
 import FormDocument from './FormDocument';
 
 interface TableDocumentsProps extends TableProps {}

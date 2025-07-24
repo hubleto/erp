@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Form, { FormProps, FormState } from 'adios/Form';
-import FormInput from 'adios/FormInput';
-import Lookup from 'adios/Inputs/Lookup';
+import Form, { FormProps, FormState } from '@adios/Form';
+import FormInput from '@adios/FormInput';
+import Lookup from '@adios/Inputs/Lookup';
 
 export default class FormCalendarSyncSource<P, S> extends Form<FormProps, FormState> {
   static defaultProps: any = {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import request from "adios/Request";
+import request from "@adios/Request";
 import { ProgressBar } from 'primereact/progressbar';
 
 import { Field, QueryBuilder, RuleGroupType, formatQuery, defaultOperators } from 'react-querybuilder';

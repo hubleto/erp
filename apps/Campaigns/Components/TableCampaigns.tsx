@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from 'adios/Table';
+import Table, { TableProps, TableState } from '@adios/Table';
 import FormCampaign, { FormCampaignProps } from './FormCampaign';
 
 interface TableCampaignsProps extends TableProps {}

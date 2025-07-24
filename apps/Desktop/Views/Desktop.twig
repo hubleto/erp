@@ -57,13 +57,20 @@
     }
   </script>
 
-  <script src='{{ config.rootUrl }}/adios/cache.js'></script>
-  <script defer src='{{ config.srcUrl }}/assets/compiled/js/vendors.js'></script>
-  <script defer src='{{ config.srcUrl }}/assets/compiled/js/adios.js'></script>
-  <script defer src='{{ config.srcUrl }}/assets/compiled/js/hubleto.js'></script>
+  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src-adios/Assets/Js/adios.js'></script>
+  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src-adios/Assets/Js/ajax_functions.js'></script>
+  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src-adios/Assets/Js/base64.js'></script>
+  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src-adios/Assets/Js/cookie.js'></script>
+  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src-adios/Assets/Js/desktop.js'></script>
+  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src-adios/Assets/Js/jquery-3.5.1.js'></script>
+  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src-adios/Assets/Js/md5.js'></script>
+  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src-adios/Assets/Js/moment.min.js'></script>
+
+  <script defer src='{{ config.rootUrl }}/assets/compiled/js/vendors.js'></script>
+  <script defer src='{{ config.rootUrl }}/assets/compiled/js/hubleto.js'></script>
 
   <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/fontawesome-6.6.css">
-  <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/compiled/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.rootUrl }}/assets/compiled/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/themes/{{ viewParams.currentTheme }}.css">
   <script>
     ADIOS.onAppLoaded(() => {

@@ -1,6 +1,6 @@
 import React, { Component, createRef, RefObject } from 'react';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
-import Table, { TableProps, TableState } from 'adios/Table';
+import Table, { TableProps, TableState } from '@adios/Table';
 
 interface FormUserRoleProps extends HubletoFormProps {}
 interface FormUserRoleState extends HubletoFormState {}

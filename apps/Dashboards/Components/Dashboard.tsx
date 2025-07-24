@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import request from "adios/Request";
+import request from "@adios/Request";
 import { ProgressBar } from 'primereact/progressbar';
-import TranslatedComponent from "adios/TranslatedComponent";
-import ModalForm from "adios/ModalForm";
+import TranslatedComponent from "@adios/TranslatedComponent";
+import ModalForm from "@adios/ModalForm";
 import FormPanel from "./FormPanel";
 
 export interface Panel {

@@ -6,8 +6,8 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
 import FormActivity, { FormActivityProps, FormActivityState } from "../../Customers/Components/FormActivity";
-import ModalSimple from "adios/ModalSimple";
-import { getUrlParam } from "adios/Helper";
+import ModalSimple from "@adios/ModalSimple";
+import { getUrlParam } from "@adios/Helper";
 
 interface CalendarProps {
   views?: string,

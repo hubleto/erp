@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Leads\Controllers\Api;
 use Exception;
 use HubletoApp\Community\Leads\Models\Lead;
 
-class SaveBulkStatusChange extends \HubletoMain\Core\Controllers\ApiController
+class SaveBulkStatusChange extends \Hubleto\Framework\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

@@ -2,15 +2,15 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 use HubletoApp\Community\Customers\Models\Customer;
-use HubletoMain\Core\Helper;
+use Hubleto\Framework\Helper;
 
-class Contact extends \HubletoMain\Core\Models\Model
+class Contact extends \Hubleto\Framework\Models\Model
 {
   public bool $isExtendableByCustomColumns = true;
 
@@ -52,7 +52,7 @@ class Contact extends \HubletoMain\Core\Models\Model
     ], parent::describeColumns());
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = ''; // $this->translate('Contacts');
@@ -79,7 +79,7 @@ class Contact extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $description = parent::describeForm();
 

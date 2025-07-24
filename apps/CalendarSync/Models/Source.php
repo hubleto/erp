@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\CalendarSync\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Color;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class Source extends \HubletoMain\Core\Models\Model
+class Source extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'calendar_sync_sources';
   public string $recordManagerClass = RecordManagers\Source::class;
@@ -22,7 +22,7 @@ class Source extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(array $description = []): \ADIOS\Core\Description\Table
+  public function describeTable(array $description = []): \Hubleto\Legacy\Core\Description\Table
   {
     $description["model"] = $this->fullName;
     $description = parent::describeTable($description);

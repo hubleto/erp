@@ -8,7 +8,7 @@
 
 namespace HubletoMain\Hook;
 
-class ViewRedirects extends \HubletoMain\Core\Hook
+class ViewRedirects extends \Hubleto\Framework\Hook
 {
 
   // Uncomment and modify the `run()` method to customize

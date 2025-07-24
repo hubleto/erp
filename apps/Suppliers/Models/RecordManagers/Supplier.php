@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Suppliers\Models\RecordManagers;
 
-class Supplier extends \HubletoMain\Core\RecordManager
+class Supplier extends \Hubleto\Framework\RecordManager
 {
   public $table = 'suppliers';
 }

@@ -14,7 +14,7 @@ class AppMenuManager
     $this->main = $main;
   }
 
-  public function addItem(\HubletoMain\Core\App $app, string $url, string $title, string $icon): void
+  public function addItem(\Hubleto\Framework\App $app, string $url, string $title, string $icon): void
   {
     if ($app->isActivated) {
       $this->items[] = [

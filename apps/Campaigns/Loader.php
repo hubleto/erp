@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Campaigns;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   public bool $hasCustomSettings = true;
 

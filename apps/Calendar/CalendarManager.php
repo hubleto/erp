@@ -6,7 +6,7 @@ class CalendarManager
 {
   public \HubletoMain\Loader $main;
 
-  /** @var array<string, \HubletoMain\Core\Calendar> */
+  /** @var array<string, \Hubleto\Framework\Calendar> */
   protected array $calendars = [];
 
   public function __construct(\HubletoMain\Loader $main)
@@ -18,18 +18,18 @@ class CalendarManager
   {
     $calendar = $this->main->di->create($calendarClass);
     $calendar->setColor($color);
-    if ($calendar instanceof \HubletoMain\Core\Calendar) {
+    if ($calendar instanceof \Hubleto\Framework\Calendar) {
       $this->calendars[$source] = $calendar;
     }
   }
 
-  /** @return array<string, \HubletoMain\Core\Calendar> */
+  /** @return array<string, \Hubleto\Framework\Calendar> */
   public function getCalendars(): array
   {
     return $this->calendars;
   }
 
-  public function getCalendar(string $calendarClass): \HubletoMain\Core\Calendar
+  public function getCalendar(string $calendarClass): \Hubleto\Framework\Calendar
   {
     return $this->calendars[$calendarClass];
   }

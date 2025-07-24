@@ -2,15 +2,15 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Virtual;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Virtual;
 use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Deals\Models\Deal;
@@ -19,9 +19,9 @@ use HubletoApp\Community\Settings\Models\Setting;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Settings\Models\Team;
 use HubletoApp\Community\Campaigns\Models\Campaign;
-use HubletoMain\Core\Helper;
+use Hubleto\Framework\Helper;
 
-class Lead extends \HubletoMain\Core\Models\Model
+class Lead extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'leads';
   public string $recordManagerClass = RecordManagers\Lead::class;
@@ -104,7 +104,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {
@@ -122,7 +122,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['showHeader'] = true;
@@ -153,7 +153,7 @@ class Lead extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $description = parent::describeForm();
 

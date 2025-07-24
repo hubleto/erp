@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Reports\Controllers;
 
-class Reports extends \HubletoMain\Core\Controllers\Controller
+class Reports extends \Hubleto\Framework\Controllers\Controller
 {
   // Uncomment this if you want to make your controller public
   // public bool $requiresUserAuthentication = false;

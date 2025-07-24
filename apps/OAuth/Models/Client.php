@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\VarcBooleanhar;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\VarcBooleanhar;
 
-class Client extends \HubletoMain\Core\Models\Model
+class Client extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'oauth_clients';
   public string $recordManagerClass = RecordManagers\Client::class;
@@ -21,7 +21,7 @@ class Client extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Client';

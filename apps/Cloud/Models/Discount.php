@@ -2,12 +2,12 @@
 
 namespace HubletoApp\Community\Cloud\Models;
 
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 
-class Discount extends \HubletoMain\Core\Models\Model
+class Discount extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'cloud_discounts';
   public string $recordManagerClass = RecordManagers\Discount::class;
@@ -23,7 +23,7 @@ class Discount extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->columns['id'] = $this->columns['id'];

@@ -10,7 +10,7 @@
 
 namespace HubletoMain\Hook;
 
-class Example extends \HubletoMain\Core\Hook
+class Example extends \Hubleto\Framework\Hook
 {
 
   /* run()

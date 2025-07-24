@@ -2,14 +2,14 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Leads\Models\Lead;
@@ -19,9 +19,9 @@ use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 use HubletoApp\Community\Settings\Models\Setting;
 use HubletoApp\Community\Settings\Models\User;
-use HubletoMain\Core\Helper;
+use Hubleto\Framework\Helper;
 
-class Deal extends \HubletoMain\Core\Models\Model
+class Deal extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'deals';
   public string $recordManagerClass = RecordManagers\Deal::class;
@@ -110,7 +110,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {
@@ -124,7 +124,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsBool("showArchive")) {
@@ -165,7 +165,7 @@ class Deal extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $mSettings = $this->main->di->create(Setting::class);
     $defaultCurrency = (int) $mSettings->record

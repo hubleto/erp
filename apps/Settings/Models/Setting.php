@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class Setting extends \HubletoMain\Core\Models\Model
+class Setting extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'settings';
   public string $recordManagerClass = RecordManagers\Setting::class;
@@ -34,7 +34,7 @@ class Setting extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

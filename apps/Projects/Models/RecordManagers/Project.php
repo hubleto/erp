@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Projects\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class Project extends \HubletoMain\Core\RecordManager
+class Project extends \Hubleto\Framework\RecordManager
 {
   public $table = 'projects';
 
@@ -38,7 +38,7 @@ class Project extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     if ($main->urlParamAsInteger("idDeal") > 0) {
       $query = $query->where($this->table . '.id_deal', $main->urlParamAsInteger("idDeal"));

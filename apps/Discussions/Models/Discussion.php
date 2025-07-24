@@ -2,26 +2,26 @@
 
 namespace HubletoApp\Community\Discussions\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Color;
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\File;
-use ADIOS\Core\Db\Column\Image;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Json;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Password;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Virtual;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\File;
+use Hubleto\Legacy\Core\Db\Column\Image;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Json;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Password;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Virtual;
 use HubletoApp\Community\Projects\Models\Project;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
-class Discussion extends \HubletoMain\Core\Models\Model
+class Discussion extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'discussions';
   public string $recordManagerClass = RecordManagers\Discussion::class;
@@ -46,7 +46,7 @@ class Discussion extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Discussion';
@@ -77,7 +77,7 @@ class Discussion extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $description = parent::describeForm();
 

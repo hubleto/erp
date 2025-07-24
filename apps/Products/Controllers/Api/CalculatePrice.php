@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Products\Controllers\Api;
 
-class CalculatePrice extends \HubletoMain\Core\Controllers\ApiController
+class CalculatePrice extends \Hubleto\Framework\Controllers\ApiController
 {
   // SINGLE PRODUCT FUNCTIONS
   public function calculateFullPrice(float $unitPrice, float $amount): float

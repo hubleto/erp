@@ -4,7 +4,7 @@ namespace HubletoApp\Community\CalendarSync;
 
 use HubletoApp\Community\CalendarSync\Models\Source;
 
-class Calendar extends \HubletoMain\Core\Calendar
+class Calendar extends \Hubleto\Framework\Calendar
 {
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {

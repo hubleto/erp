@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Mail\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class Mail extends \HubletoMain\Core\RecordManager
+class Mail extends \Hubleto\Framework\RecordManager
 {
   public $table = 'mails';
 
@@ -16,7 +16,7 @@ class Mail extends \HubletoMain\Core\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
     $folder = $main->urlParamAsString('folder');
     $idUser = $main->auth->getUserId();
 

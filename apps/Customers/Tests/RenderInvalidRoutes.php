@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Customers\Tests;
 
-class RenderInvalidRoutes extends \HubletoMain\Core\AppTest
+class RenderInvalidRoutes extends \Hubleto\Framework\AppTest
 {
   public function run(): void
   {

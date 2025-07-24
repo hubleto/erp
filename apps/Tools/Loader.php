@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Tools;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   public bool $canBeDisabled = false;
 
-  /** @var array<int, array<\HubletoMain\Core\App, array>> */
+  /** @var array<int, array<\Hubleto\Framework\App, array>> */
   private array $tools = [];
 
   public function init(): void
@@ -17,7 +17,7 @@ class Loader extends \HubletoMain\Core\App
     ]);
   }
 
-  public function addTool(\HubletoMain\Core\App $app, array $tool): void
+  public function addTool(\Hubleto\Framework\App $app, array $tool): void
   {
     $this->tools[] = [$app, $tool];
   }

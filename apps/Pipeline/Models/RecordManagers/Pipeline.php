@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Pipeline\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Pipeline extends \HubletoMain\Core\RecordManager
+class Pipeline extends \Hubleto\Framework\RecordManager
 {
   public $table = 'pipelines';
 

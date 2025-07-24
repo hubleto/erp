@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Lead extends \HubletoMain\Core\RecordManager
+class Lead extends \Hubleto\Framework\RecordManager
 {
   public $table = 'leads';
 
@@ -101,7 +101,7 @@ class Lead extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     if ($main->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where("leads.id_customer", $main->urlParamAsInteger("idCustomer"));

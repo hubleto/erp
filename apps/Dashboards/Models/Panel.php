@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Dashboards\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Json;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Json;
 
-class Panel extends \HubletoMain\Core\Models\Model
+class Panel extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'dashboards_panels';
   public string $recordManagerClass = RecordManagers\Panel::class;
@@ -27,7 +27,7 @@ class Panel extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 
@@ -43,7 +43,7 @@ class Panel extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {

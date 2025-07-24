@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Developer\Controllers;
 
-class FormDesigner extends \HubletoMain\Core\Controllers\Controller
+class FormDesigner extends \Hubleto\Framework\Controllers\Controller
 {
   public function getBreadcrumbs(): array
   {

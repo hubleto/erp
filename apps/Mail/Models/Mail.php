@@ -2,16 +2,16 @@
 
 namespace HubletoApp\Community\Mail\Models;
 
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Color;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
 use HubletoApp\Community\Settings\Models\User;
 
-class Mail extends \HubletoMain\Core\Models\Model
+class Mail extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'mails';
   public string $recordManagerClass = RecordManagers\Mail::class;
@@ -42,7 +42,7 @@ class Mail extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $folder = $this->main->urlParamAsString('folder');
 
@@ -77,7 +77,7 @@ class Mail extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $description = parent::describeForm();
 

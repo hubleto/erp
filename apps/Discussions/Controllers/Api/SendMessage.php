@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Discussions\Controllers\Api;
 
-class SendMessage extends \HubletoMain\Core\Controllers\ApiController
+class SendMessage extends \Hubleto\Framework\Controllers\ApiController
 {
   public function response(): array
   {

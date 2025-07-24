@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Documents\Controllers\Api;
 
-class GetFolderContent extends \HubletoMain\Core\Controllers\ApiController
+class GetFolderContent extends \Hubleto\Framework\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

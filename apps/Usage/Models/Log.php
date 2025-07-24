@@ -2,12 +2,12 @@
 
 namespace HubletoApp\Community\Usage\Models;
 
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class Log extends \HubletoMain\Core\Models\Model
+class Log extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'usage_log';
   public string $recordManagerClass = RecordManagers\Log::class;
@@ -24,7 +24,7 @@ class Log extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->columns['id'] = $this->columns['id'];

@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 
-class LeadTag extends \HubletoMain\Core\Models\Model
+class LeadTag extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'cross_lead_tags';
   public string $recordManagerClass = RecordManagers\LeadTag::class;
@@ -22,7 +22,7 @@ class LeadTag extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = 'Customer Categories';

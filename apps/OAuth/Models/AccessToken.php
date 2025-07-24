@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
 
-class AccessToken extends \HubletoMain\Core\Models\Model
+class AccessToken extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'oauth_access_tokens';
   public string $recordManagerClass = RecordManagers\AccessToken::class;
@@ -22,7 +22,7 @@ class AccessToken extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add AccessToken';

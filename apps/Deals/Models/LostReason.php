@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class LostReason extends \HubletoMain\Core\Models\Model
+class LostReason extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'deal_lost_reasons';
   public string $recordManagerClass = RecordManagers\LostReason::class;
@@ -17,7 +17,7 @@ class LostReason extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = $this->translate('Deal Lost Reasons');

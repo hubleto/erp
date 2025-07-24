@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 
-class ContactTag extends \HubletoMain\Core\Models\Model
+class ContactTag extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'contact_contact_tags';
   public string $recordManagerClass = RecordManagers\ContactTag::class;
@@ -22,7 +22,7 @@ class ContactTag extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = $this->translate('Contact tags');

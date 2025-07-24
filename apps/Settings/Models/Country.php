@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class Country extends \HubletoMain\Core\Models\Model
+class Country extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'countries';
   public string $recordManagerClass = RecordManagers\Country::class;
@@ -18,7 +18,7 @@ class Country extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

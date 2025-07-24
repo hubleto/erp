@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
 
-class AuthCode extends \HubletoMain\Core\Models\Model
+class AuthCode extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'oauth_auth_codes';
   public string $recordManagerClass = RecordManagers\AuthCode::class;
@@ -26,7 +26,7 @@ class AuthCode extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add AuthCode';

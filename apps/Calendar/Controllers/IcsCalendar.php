@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Calendar\Controllers;
 use _PHPStan_ac6dae9b0\Nette\Utils\DateTime;
 use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
-class IcsCalendar extends \HubletoMain\Core\Controllers\Controller
+class IcsCalendar extends \Hubleto\Framework\Controllers\Controller
 {
   public bool $hideDefaultDesktop = true;
   public bool $requiresUserAuthentication = false;

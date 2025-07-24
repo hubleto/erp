@@ -3,15 +3,15 @@
 namespace HubletoApp\Community\Warehouses\Models;
 
 use HubletoApp\Community\Settings\Models\User;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Json;
-use ADIOS\Core\Db\Column\Image;
-use ADIOS\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Json;
+use Hubleto\Legacy\Core\Db\Column\Image;
+use Hubleto\Legacy\Core\Db\Column\Text;
 
-class Location extends \HubletoMain\Core\Models\Model
+class Location extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'warehouses_locations';
   public string $recordManagerClass = RecordManagers\Location::class;

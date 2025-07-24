@@ -3,13 +3,13 @@
 namespace HubletoApp\Community\Campaigns\Models;
 
 use HubletoApp\Community\Settings\Models\User;
-use ADIOS\Core\Db\Column\Color;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
 
-class Campaign extends \HubletoMain\Core\Models\Model
+class Campaign extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'campaigns';
   public string $recordManagerClass = RecordManagers\Campaign::class;
@@ -32,7 +32,7 @@ class Campaign extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

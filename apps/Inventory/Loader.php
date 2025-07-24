@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Inventory;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   // init
   public function init(): void

@@ -7,7 +7,7 @@ use HubletoApp\Community\Settings\Models\RecordManagers\User;
 use HubletoApp\Community\Products\Models\RecordManagers\Product;
 use HubletoApp\Community\Warehouses\Models\RecordManagers\Location;
 
-class Transaction extends \HubletoMain\Core\RecordManager
+class Transaction extends \Hubleto\Framework\RecordManager
 {
   public $table = 'inventory_transactions';
 

@@ -2,15 +2,15 @@
 
 namespace HubletoApp\Community\Cloud\Models;
 
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Json;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Json;
 
-class Payment extends \HubletoMain\Core\Models\Model
+class Payment extends \Hubleto\Framework\Models\Model
 {
   public const TYPE_SUBSCRIPTION_FEE = 1;
   public const TYPE_BACK_PAY = 2;
@@ -59,7 +59,7 @@ class Payment extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->columns['id'] = $this->columns['id'];

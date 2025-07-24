@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Warehouses\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class WarehouseType extends \HubletoMain\Core\Models\Model
+class WarehouseType extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'warehouses_types';
   public string $recordManagerClass = RecordManagers\WarehouseType::class;

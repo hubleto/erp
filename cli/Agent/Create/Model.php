@@ -12,7 +12,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
 
     $modelSingularForm = $model;
     $modelPluralForm = $model . 's';
-    $modelPluralFormKebab = \ADIOS\Core\Helper::pascalToKebab($modelPluralForm);
+    $modelPluralFormKebab = \Hubleto\Legacy\Core\Helper::pascalToKebab($modelPluralForm);
 
     $this->main->apps->init();
 

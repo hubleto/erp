@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Campaigns\Controllers;
 
-class Campaigns extends \HubletoMain\Core\Controllers\Controller
+class Campaigns extends \Hubleto\Framework\Controllers\Controller
 {
   public function getBreadcrumbs(): array
   {

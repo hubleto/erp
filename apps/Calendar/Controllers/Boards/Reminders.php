@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Boards;
 
-class Reminders extends \HubletoMain\Core\Controllers\Controller
+class Reminders extends \Hubleto\Framework\Controllers\Controller
 {
   public bool $hideDefaultDesktop = true;
 

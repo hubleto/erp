@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Discussions\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class Message extends \HubletoMain\Core\RecordManager
+class Message extends \Hubleto\Framework\RecordManager
 {
   public $table = 'discussions_messages';
 
@@ -23,7 +23,7 @@ class Message extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     if ($main->urlParamAsInteger("idDiscussion") > 0) {
       $query = $query->where($this->table . '.id_discussion', $main->urlParamAsInteger("idDiscussion"));

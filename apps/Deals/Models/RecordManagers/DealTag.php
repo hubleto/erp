@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class DealTag extends \HubletoMain\Core\RecordManager
+class DealTag extends \Hubleto\Framework\RecordManager
 {
   public $table = 'cross_deal_tags';
 

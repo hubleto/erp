@@ -196,8 +196,8 @@ class Installer
 
   public function installBaseModels(): void
   {
-    (new \HubletoMain\Core\Models\Token($this->main))->install();
-    (new \ADIOS\Models\Config($this->main))->install();
+    (new \Hubleto\Framework\Models\Token($this->main))->install();
+    (new \Hubleto\Legacy\Models\Config($this->main))->install();
   }
 
   public function installApps(int $round): void
@@ -252,8 +252,8 @@ class Installer
     $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase, $configEnv);
     $configEnv = str_replace('{{ rootUrl }}', $this->rootUrl, $configEnv);
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
-    $configEnv = str_replace('{{ sessionSalt }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
-    $configEnv = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->uid), $configEnv);
+    $configEnv = str_replace('{{ sessionSalt }}', \Hubleto\Legacy\Core\Helper::str2url($this->uid), $configEnv);
+    $configEnv = str_replace('{{ accountUid }}', \Hubleto\Legacy\Core\Helper::str2url($this->uid), $configEnv);
     $configEnv = str_replace('{{ premiumRepoFolder }}', $this->premiumRepoFolder, $configEnv);
 
     $configEnv = str_replace('{{ smtpHost }}', $this->smtpHost, $configEnv);
@@ -296,7 +296,6 @@ class Installer
 
     // folders
     @mkdir($this->rootFolder);
-    @mkdir($this->rootFolder . '/public');
     @mkdir($this->rootFolder . '/log');
     @mkdir($this->rootFolder . '/upload');
 
@@ -306,10 +305,10 @@ class Installer
 
     // index.php
     $index = (string) file_get_contents(__DIR__ . '/Templates/index.php.tpl');
-    $index = str_replace('{{ accountUid }}', \ADIOS\Core\Helper::str2url($this->accountFullName), $index);
+    $index = str_replace('{{ accountUid }}', \Hubleto\Legacy\Core\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ srcFolder }}', $this->srcFolder, $index);
     $index = str_replace('{{ rootFolder }}', $this->rootFolder, $index);
-    file_put_contents($this->rootFolder . '/public/index.php', $index);
+    file_put_contents($this->rootFolder . '/index.php', $index);
 
     // hubleto cli agent
     $hubletoCliAgentFile = $this->rootFolder . '/hubleto';

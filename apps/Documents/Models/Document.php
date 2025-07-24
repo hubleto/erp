@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Documents\Models;
 
-use ADIOS\Core\Db\Column\File;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\File;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 
-class Document extends \HubletoMain\Core\Models\Model
+class Document extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'documents';
   public string $recordManagerClass = RecordManagers\Document::class;
@@ -15,7 +15,7 @@ class Document extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\ADIOS\Core\Helper::generateUuidV4()),
+      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Legacy\Core\Helper::generateUuidV4()),
       'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setDefaultValue($this->main->urlParamAsInteger('idFolder')),
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired(),
       'file' => (new File($this, $this->translate('File'))),
@@ -24,7 +24,7 @@ class Document extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = ''; // 'Documents';
@@ -38,7 +38,7 @@ class Document extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {

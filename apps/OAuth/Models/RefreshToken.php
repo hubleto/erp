@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class RefreshToken extends \HubletoMain\Core\Models\Model
+class RefreshToken extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'oauth_access_tokens';
   public string $recordManagerClass = RecordManagers\RefreshToken::class;
@@ -19,7 +19,7 @@ class RefreshToken extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add RefreshToken';

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Usage;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   public const DEFAULT_INSTALLATION_CONFIG = [
     'sidebarOrder' => 0,

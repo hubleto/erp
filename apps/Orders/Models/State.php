@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Color;
 
-class State extends \HubletoMain\Core\Models\Model
+class State extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'order_states';
   public string $recordManagerClass = RecordManagers\State::class;

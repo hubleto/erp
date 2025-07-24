@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Calendar\Controllers;
 
 use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
-class Settings extends \HubletoMain\Core\Controllers\Controller
+class Settings extends \Hubleto\Framework\Controllers\Controller
 {
   public function getBreadcrumbs(): array
   {

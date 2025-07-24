@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 
-class UserHasRole extends \HubletoMain\Core\Models\Model
+class UserHasRole extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'user_has_roles';
   public string $recordManagerClass = RecordManagers\UserHasRole::class;
@@ -17,7 +17,7 @@ class UserHasRole extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

@@ -6,7 +6,7 @@ use HubletoApp\Community\Settings\Models\RecordManagers\ActivityType;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class SharedCalendar extends \HubletoMain\Core\RecordManager
+class SharedCalendar extends \Hubleto\Framework\RecordManager
 {
   public $table = 'shared_calendars';
 

@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class Value extends \HubletoMain\Core\Models\Model
+class Value extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'contact_values';
   public string $recordManagerClass = RecordManagers\Value::class;
@@ -34,7 +34,7 @@ class Value extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = $this->translate('Contacts');

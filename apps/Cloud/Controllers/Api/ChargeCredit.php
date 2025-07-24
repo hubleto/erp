@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Controllers\Api;
 
-class ChargeCredit extends \HubletoMain\Core\Controllers\ApiController
+class ChargeCredit extends \Hubleto\Framework\Controllers\ApiController
 {
   public bool $requiresUserAuthentication = false;
 

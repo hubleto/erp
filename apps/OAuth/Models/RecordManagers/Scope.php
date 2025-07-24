@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\OAuth\Models\RecordManagers;
 
-class Scope extends \HubletoMain\Core\RecordManager
+class Scope extends \Hubleto\Framework\RecordManager
 {
   public $table = 'oauth_scopes';
 

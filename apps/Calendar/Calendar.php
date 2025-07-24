@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Calendar;
 
 use HubletoApp\Community\Calendar\Models\Activity;
 
-class Calendar extends \HubletoMain\Core\Calendar
+class Calendar extends \Hubleto\Framework\Calendar
 {
   public array $calendarConfig = [
     "title" => "Default",

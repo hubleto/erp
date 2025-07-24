@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Worksheets\Controllers;
 
-class Activities extends \HubletoMain\Core\Controllers\Controller
+class Activities extends \Hubleto\Framework\Controllers\Controller
 {
   // Uncomment this if you want to make your controller public
   // public bool $requiresUserAuthentication = false;

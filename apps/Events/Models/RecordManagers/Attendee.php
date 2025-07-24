@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Events\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class Attendee extends \HubletoMain\Core\RecordManager
+class Attendee extends \Hubleto\Framework\RecordManager
 {
   public $table = 'events_attendees';
 
@@ -14,7 +14,7 @@ class Attendee extends \HubletoMain\Core\RecordManager
     $query = parent::prepareReadQuery($query, $level);
 
     // Uncomment this line if you are going to use $main.
-    // $main = \ADIOS\Core\Helper::getGlobalApp();
+    // $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     // Uncomment and modify these lines if you want to apply filtering based on URL parameters
     // if ($main->urlParamAsInteger("idCustomer") > 0) {

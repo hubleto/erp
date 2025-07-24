@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
 
-class DealDocument extends \HubletoMain\Core\Models\Model
+class DealDocument extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'deal_documents';
   public string $recordManagerClass = RecordManagers\DealDocument::class;
@@ -23,7 +23,7 @@ class DealDocument extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {
@@ -34,7 +34,7 @@ class DealDocument extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsInteger('idDeal') > 0) {

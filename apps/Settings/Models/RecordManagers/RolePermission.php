@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class RolePermission extends \HubletoMain\Core\RecordManager
+class RolePermission extends \Hubleto\Framework\RecordManager
 {
   public $table = 'role_permissions';
 
@@ -26,7 +26,7 @@ class RolePermission extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     if ($main->isUrlParam("idRole")) {
       $query = $query->where($this->table . '.id_role', $main->urlParamAsInteger("idRole"));

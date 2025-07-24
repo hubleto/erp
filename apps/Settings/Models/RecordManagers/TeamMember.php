@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Settings\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class TeamMember extends \HubletoMain\Core\RecordManager
+class TeamMember extends \Hubleto\Framework\RecordManager
 {
   public $table = 'teams_members';
 
@@ -25,7 +25,7 @@ class TeamMember extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     if ($main->isUrlParam("idTeam")) {
       $query = $query->where($this->table . '.id_team', $main->urlParamAsInteger("idTeam"));

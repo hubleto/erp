@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Cloud\Models;
 
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
 
-class Credit extends \HubletoMain\Core\Models\Model
+class Credit extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'cloud_credit';
   public string $recordManagerClass = RecordManagers\Credit::class;
@@ -18,7 +18,7 @@ class Credit extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->columns['id'] = $this->columns['id'];

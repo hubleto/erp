@@ -2,69 +2,23 @@
 
 namespace HubletoMain;
 
-/*
-// autoloader pre HubletoMain
-spl_autoload_register(function (string $class) {
-  $class = str_replace('\\', '/', $class);
-  
-  $hubletoMain = $GLOBALS['hubletoMain'] ?? null;
-  if ($hubletoMain) {
-    $rootFolder = $hubletoMain->config->getAsString('rootFolder');
-    $premiumAppsFolder = $hubletoMain->config->getAsString('premiumRepoFolder');
-    $externalAppsFolder = $hubletoMain->config->getAsString('externalRepoFolder');
-  } else {
-    $rootFolder = '';
-    $premiumAppsFolder = '';
-    $externalAppsFolder = '';
-  }
-
-  $classGroups = [
-    // main
-    // 'HubletoMain/Core/' => __DIR__ . '/../core/',
-    // 'HubletoMain/Cli/' => __DIR__ . '/../cli/',
-    // 'HubletoMain/Hook/' => __DIR__ . '/../hooks/',
-    // 'HubletoMain/Cron/' => __DIR__ . '/../crons/',
-    // 'HubletoMain/Report/' => __DIR__ . '/../reports/',
-    // 'HubletoMain/Installer/' => __DIR__ . '/../installer/',
-
-    // // apps
-    // 'HubletoApp/Community/' => __DIR__ . '/../apps/',
-    // 'HubletoApp/Custom/' => $rootFolder . '/apps/',
-    'HubletoApp/Premium/' => $premiumAppsFolder . '/',
-    'HubletoApp/External/' => $externalAppsFolder . '/',
-
-    // project
-    // 'HubletoProject/Hook/' => $rootFolder . '/hooks/',
-    // 'HubletoProject/Cron/' => $rootFolder . '/crons/',
-    // 'HubletoProject/Report/' => $rootFolder . '/reports/',
-    // 'HubletoProject/Dependency/' => $rootFolder . '/dependencies/',
-  ];
-
-  foreach ($classGroups as $group => $folder) {
-    if (str_starts_with($class, $group)) {
-      include($folder . str_replace($group, '', $class) . '.php');
-      break;
-    }
-  }
-
-});*/
-
 /**
  * Main Hubleto class. This class is always referenced
  * as `$this->main` or `$main`.
  */
-class Loader extends \ADIOS\Core\Loader
+class Loader extends \Hubleto\Framework\Loader
 {
 
   protected \Twig\Loader\FilesystemLoader $twigLoader;
 
-  public \HubletoMain\Core\ReleaseManager $release;
-  public \HubletoMain\Core\AppManager $apps;
-  public \HubletoMain\Core\Emails\EmailProvider $email;
-  public \HubletoMain\Core\Emails\EmailWrapper $emails;
+  public \HubletoMain\ReleaseManager $release;
+  public \HubletoMain\AppManager $apps;
   public \HubletoMain\Cli\Agent\Loader $cli;
-  public \HubletoMain\Core\HookManager $hooks;
-  public \HubletoMain\Core\CronManager $crons;
+  public \HubletoMain\HookManager $hooks;
+  public \HubletoMain\CronManager $crons;
+
+  public \Hubleto\Framework\Emails\EmailProvider $email;
+  public \Hubleto\Framework\Emails\EmailWrapper $emails;
 
   /**
    * If set to true, this run is managed as premium.
@@ -90,23 +44,23 @@ class Loader extends \ADIOS\Core\Loader
     $this->cli = $this->di->create(\HubletoMain\Cli\Agent\Loader::class);
 
     // Hooks
-    $this->hooks = $this->di->create(\HubletoMain\Core\HookManager::class);
+    $this->hooks = $this->di->create(\HubletoMain\HookManager::class);
 
     // Crons
-    $this->crons = $this->di->create(\HubletoMain\Core\CronManager::class);
+    $this->crons = $this->di->create(\HubletoMain\CronManager::class);
 
     // Release manager
-    $this->release = $this->di->create(\HubletoMain\Core\ReleaseManager::class);
+    $this->release = $this->di->create(\HubletoMain\ReleaseManager::class);
 
     // Emails
-    $this->email = $this->di->create(\HubletoMain\Core\Emails\EmailProvider::class);
+    $this->email = $this->di->create(\Hubleto\Framework\Emails\EmailProvider::class);
 
     // DEPRECATED
-    $this->emails = $this->di->create(\HubletoMain\Core\Emails\EmailWrapper::class);
+    $this->emails = $this->di->create(\Hubleto\Framework\Emails\EmailWrapper::class);
     $this->emails->emailProvider = $this->email;
 
     // App manager
-    $this->apps = $this->di->create(\HubletoMain\Core\AppManager::class);
+    $this->apps = $this->di->create(\HubletoMain\AppManager::class);
 
     // Finish
     $this->hooks->run('core:bootstrap-end', [$this]);
@@ -208,67 +162,67 @@ class Loader extends \ADIOS\Core\Loader
   /**
    * Create dependency injection service
    *
-   * @return \ADIOS\Core\DependencyInjection
+   * @return \Hubleto\Legacy\Core\DependencyInjection
    * 
    */
-  public function createDependencyInjection(): \ADIOS\Core\DependencyInjection
+  public function createDependencyInjection(): \Hubleto\Legacy\Core\DependencyInjection
   {
-    return new \HubletoMain\Core\DependencyInjection($this);
+    return new \Hubleto\Framework\DependencyInjection($this);
   }
 
   /**
    * Create authentication provider
    *
-   * @return \ADIOS\Core\Auth
+   * @return \Hubleto\Legacy\Core\Auth
    * 
    */
-  public function createAuthProvider(): \ADIOS\Core\Auth
+  public function createAuthProvider(): \Hubleto\Legacy\Core\Auth
   {
-    return $this->di->create(\HubletoMain\Core\AuthProvider::class);
+    return $this->di->create(\Hubleto\Framework\AuthProvider::class);
   }
 
   /**
    * Create router
    *
-   * @return \ADIOS\Core\Router
+   * @return \Hubleto\Legacy\Core\Router
    * 
    */
-  public function createRouter(): \ADIOS\Core\Router
+  public function createRouter(): \Hubleto\Legacy\Core\Router
   {
-    return $this->di->create(\HubletoMain\Core\Router::class);
+    return $this->di->create(\HubletoMain\Router::class);
   }
 
   /**
    * Create permission manager
    *
-   * @return \ADIOS\Core\Permissions
+   * @return \Hubleto\Legacy\Core\Permissions
    * 
    */
-  public function createPermissionsManager(): \ADIOS\Core\Permissions
+  public function createPermissionsManager(): \Hubleto\Legacy\Core\Permissions
   {
-    return $this->di->create(\HubletoMain\Core\Permissions::class);
+    return $this->di->create(\Hubleto\Framework\Permissions::class);
   }
 
   /**
    * Create translator
    *
-   * @return \HubletoMain\Core\Translator
+   * @return \Hubleto\Framework\Translator
    * 
    */
-  public function createTranslator(): \HubletoMain\Core\Translator
+  public function createTranslator(): \Hubleto\Framework\Translator
   {
-    return $this->di->create(\HubletoMain\Core\Translator::class);
+    return $this->di->create(\Hubleto\Framework\Translator::class);
   }
 
   // /**
   //  * Create default controller for rendering desktop
   //  *
-  //  * @return \HubletoMain\Core\Controllers\Controller
+  //  * @return \Hubleto\Framework\Controllers\Controller
   //  * 
   //  */
-  // public function createDesktopController(): \HubletoMain\Core\Controllers\Controller
+  // public function createDesktopController(): \Hubleto\Framework\Controllers\Controller
   // {
-  //   return $this->di->create(\HubletoMain\Core\Controllers\Controller::class);
+  //   return $this->di->create(\Hubleto\Framework\Controllers\Controller::class);
   // }
 
   /**
@@ -319,7 +273,7 @@ class Loader extends \ADIOS\Core\Loader
 
     $dict = static::loadDictionary($language);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     if ($main->config->getAsBool('autoTranslate')) {
       $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();

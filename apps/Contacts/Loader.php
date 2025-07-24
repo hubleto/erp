@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Contacts;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   // const DEFAULT_INSTALLATION_CONFIG = [
   //   'sidebarOrder' => 0,

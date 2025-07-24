@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Notifications\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class Notification extends \HubletoMain\Core\RecordManager
+class Notification extends \Hubleto\Framework\RecordManager
 {
   public $table = 'notifications';
 
@@ -23,7 +23,7 @@ class Notification extends \HubletoMain\Core\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     $query = parent::prepareReadQuery($query, $level);
 
@@ -42,7 +42,7 @@ class Notification extends \HubletoMain\Core\RecordManager
 
   public function recordCreate(array $record): array
   {
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
     $notificationsApp = $main->apps->community('Notifications');
 
     $message = $notificationsApp->send(

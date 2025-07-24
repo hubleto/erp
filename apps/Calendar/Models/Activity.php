@@ -2,16 +2,16 @@
 
 namespace HubletoApp\Community\Calendar\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Time;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Description\Form;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Time;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Description\Form;
 use HubletoApp\Community\Settings\Models\ActivityType;
 use HubletoApp\Community\Settings\Models\User;
 
-class Activity extends \HubletoMain\Core\Models\Model
+class Activity extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'activities';
   public string $recordManagerClass = RecordManagers\Activity::class;
@@ -37,7 +37,7 @@ class Activity extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {

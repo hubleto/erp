@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Products\Models;
 
-class Group extends \HubletoMain\Core\Models\Model
+class Group extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'product_groups';
   public string $recordManagerClass = RecordManagers\Group::class;
@@ -12,11 +12,11 @@ class Group extends \HubletoMain\Core\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      "title" => (new \ADIOS\Core\Db\Column\Varchar($this, $this->translate("Title")))->setRequired()
+      "title" => (new \Hubleto\Legacy\Core\Db\Column\Varchar($this, $this->translate("Title")))->setRequired()
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Events\Controllers;
 
-class Speakers extends \HubletoMain\Core\Controllers\Controller
+class Speakers extends \Hubleto\Framework\Controllers\Controller
 {
   public function prepareView(): void
   {

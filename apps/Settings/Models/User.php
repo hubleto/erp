@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Json;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Json;
 
-class User extends \ADIOS\Models\User
+class User extends \Hubleto\Legacy\Models\User
 {
   public const ENUM_LANGUAGES = [
     'en' => 'English',
@@ -71,7 +71,7 @@ class User extends \ADIOS\Models\User
     return $user;
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 
@@ -98,7 +98,7 @@ class User extends \ADIOS\Models\User
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $description = parent::describeForm();
     // $description->permissions = [

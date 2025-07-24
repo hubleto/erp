@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Controllers;
 
-class LostReasons extends \HubletoMain\Core\Controllers\Controller
+class LostReasons extends \Hubleto\Framework\Controllers\Controller
 {
   public function getBreadcrumbs(): array
   {

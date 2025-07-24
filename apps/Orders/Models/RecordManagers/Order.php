@@ -7,7 +7,7 @@ use HubletoApp\Community\Settings\Models\RecordManagers\Currency;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Order extends \HubletoMain\Core\RecordManager
+class Order extends \Hubleto\Framework\RecordManager
 {
   public $table = 'orders';
 

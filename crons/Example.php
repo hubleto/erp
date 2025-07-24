@@ -7,7 +7,7 @@
 
 namespace HubletoMain\Cron;
 
-class Example extends \HubletoMain\Core\Cron
+class Example extends \Hubleto\Framework\Cron
 {
 
   // CRON-formatted string specifying the scheduling pattern

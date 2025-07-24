@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 use HubletoApp\Community\Projects\Models\RecordManagers\Project;
 
-class Discussion extends \HubletoMain\Core\RecordManager
+class Discussion extends \Hubleto\Framework\RecordManager
 {
   public $table = 'discussions';
 
@@ -19,7 +19,7 @@ class Discussion extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     $externalModel = $main->urlParamAsString("externalModel");
     $externalId = $main->urlParamAsInteger("externalId");

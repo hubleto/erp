@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Pipeline\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PipelineStep extends \HubletoMain\Core\RecordManager
+class PipelineStep extends \Hubleto\Framework\RecordManager
 {
   public $table = 'pipeline_steps';
 

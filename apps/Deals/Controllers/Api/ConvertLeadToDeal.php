@@ -12,7 +12,7 @@ use HubletoApp\Community\Leads\Models\LeadDocument;
 use HubletoApp\Community\Leads\Models\LeadHistory;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 
-class ConvertLeadToDeal extends \HubletoMain\Core\Controllers\ApiController
+class ConvertLeadToDeal extends \Hubleto\Framework\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

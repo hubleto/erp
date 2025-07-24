@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Events\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class EventVenue extends \HubletoMain\Core\RecordManager
+class EventVenue extends \Hubleto\Framework\RecordManager
 {
   public $table = 'events_has_venues';
 
@@ -23,7 +23,7 @@ class EventVenue extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     if ($main->urlParamAsInteger("idEvent") > 0) {
       $query = $query->where($this->table . '.id_event', $main->urlParamAsInteger("idEvent"));

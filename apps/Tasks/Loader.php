@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Tasks;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   public array $externalModels = [];
 
@@ -31,7 +31,7 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function registerExternalModel(\HubletoMain\Core\App $app, string $modelClass)
+  public function registerExternalModel(\Hubleto\Framework\App $app, string $modelClass)
   {
     $this->externalModels[$modelClass] = $app;
   }

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Usage\Models\RecordManagers;
 
-class Log extends \HubletoMain\Core\RecordManager
+class Log extends \Hubleto\Framework\RecordManager
 {
   public $table = 'usage_log';
 

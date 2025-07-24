@@ -12,7 +12,7 @@ class Router extends \HubletoMain\Cli\Agent\Command
     $routeToDebug = (string) ($this->arguments[3] ?? '');
 
     if (empty($routeToDebug)) {
-      $routes = $this->main->router->getRoutes(\ADIOS\Core\Router::HTTP_GET);
+      $routes = $this->main->router->getRoutes(\Hubleto\Legacy\Core\Router::HTTP_GET);
 
       $this->cli->cyan("Available routes (Route -> Controller):\n");
       foreach ($routes as $route => $controller) {
@@ -20,8 +20,8 @@ class Router extends \HubletoMain\Cli\Agent\Command
       }
     } else {
       $this->cli->cyan("Debugging route '" . $routeToDebug . "':\n");
-      $controller = $this->main->router->findController(\ADIOS\Core\Router::HTTP_GET, $routeToDebug);
-      $variables = $this->main->router->extractRouteVariables(\ADIOS\Core\Router::HTTP_GET, $routeToDebug);
+      $controller = $this->main->router->findController(\Hubleto\Legacy\Core\Router::HTTP_GET, $routeToDebug);
+      $variables = $this->main->router->extractRouteVariables(\Hubleto\Legacy\Core\Router::HTTP_GET, $routeToDebug);
       $this->cli->cyan("  - Controller: " . $controller . "\n");
       $this->cli->cyan("  - Variables:\n");
       foreach ($variables as $varName => $varValue) {

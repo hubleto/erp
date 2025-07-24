@@ -2,16 +2,16 @@
 
 namespace HubletoApp\Community\Notifications\Models;
 
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Color;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Json;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Json;
 use HubletoApp\Community\Settings\Models\User;
 
-class Notification extends \HubletoMain\Core\Models\Model
+class Notification extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'notifications';
   public string $recordManagerClass = RecordManagers\Notification::class;
@@ -58,7 +58,7 @@ class Notification extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $folder = $this->main->urlParamAsString('folder');
 
@@ -91,7 +91,7 @@ class Notification extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $description = parent::describeForm();
 

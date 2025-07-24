@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Products\Models\RecordManagers;
 use HubletoApp\Community\Suppliers\Models\RecordManagers\Supplier;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Product extends \HubletoMain\Core\RecordManager
+class Product extends \Hubleto\Framework\RecordManager
 {
   public $table = 'products';
 
@@ -25,7 +25,7 @@ class Product extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareLookupQuery($search);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
     if ($main->urlParamAsBool("getServices") == true) {
       $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
     } elseif ($main->urlParamAsBool("getProducts") == true) {

@@ -3,16 +3,16 @@
 namespace HubletoApp\Community\Products\Models;
 
 use HubletoApp\Community\Suppliers\Models\Supplier;
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Image;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Image;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class Product extends \HubletoMain\Core\Models\Model
+class Product extends \Hubleto\Framework\Models\Model
 {
   public const TYPE_PRODUCT = 1;
   public const TYPE_SERVICE = 2;
@@ -54,7 +54,7 @@ class Product extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

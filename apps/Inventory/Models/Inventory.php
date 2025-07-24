@@ -5,14 +5,14 @@ namespace HubletoApp\Community\Inventory\Models;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Warehouses\Models\Location;
 use HubletoApp\Community\Products\Models\Product;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
 
 // This is a crucial table that links products to their specific locations and quantities.
 // This is crucial for tracking what items are where.
-class Inventory extends \HubletoMain\Core\Models\Model
+class Inventory extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'inventory';
   public string $recordManagerClass = RecordManagers\Inventory::class;

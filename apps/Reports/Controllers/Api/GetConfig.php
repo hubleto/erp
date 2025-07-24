@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Reports\Controllers\Api;
 
-class GetConfig extends \HubletoMain\Core\Controllers\ApiController
+class GetConfig extends \Hubleto\Framework\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
@@ -17,14 +17,14 @@ class GetConfig extends \HubletoMain\Core\Controllers\ApiController
       ];
 
       if (
-        $column instanceof \ADIOS\Core\Db\Column\Decimal
-        || $column instanceof \ADIOS\Core\Db\Column\Integer
+        $column instanceof \Hubleto\Legacy\Core\Db\Column\Decimal
+        || $column instanceof \Hubleto\Legacy\Core\Db\Column\Integer
       ) {
         $fields['inputType'] = 'number';
       }
 
       if (
-        $column instanceof \ADIOS\Core\Db\Column\Boolean
+        $column instanceof \Hubleto\Legacy\Core\Db\Column\Boolean
       ) {
         $fields['valueEditorType'] = 'checkbox';
       }

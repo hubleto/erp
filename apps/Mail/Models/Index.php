@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Mail\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 use HubletoApp\Community\Settings\Models\User;
 
-class Index extends \HubletoMain\Core\Models\Model
+class Index extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'mails_index';
   public string $recordManagerClass = RecordManagers\Index::class;

@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class Permission extends \HubletoMain\Core\Models\Model
+class Permission extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'permissions';
   public string $recordManagerClass = RecordManagers\Permission::class;
@@ -17,7 +17,7 @@ class Permission extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 
@@ -33,7 +33,7 @@ class Permission extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $description = parent::describeForm();
 

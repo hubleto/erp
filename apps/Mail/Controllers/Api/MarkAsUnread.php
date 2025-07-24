@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Mail\Controllers\Api;
 
-class MarkAsUnread extends \HubletoMain\Core\Controllers\ApiController
+class MarkAsUnread extends \Hubleto\Framework\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

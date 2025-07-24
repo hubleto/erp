@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 
-class DealTag extends \HubletoMain\Core\Models\Model
+class DealTag extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'cross_deal_tags';
   public string $recordManagerClass = RecordManagers\DealTag::class;
@@ -22,7 +22,7 @@ class DealTag extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = $this->translate('Deal Tags');

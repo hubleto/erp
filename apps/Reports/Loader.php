@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Reports;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   public ReportManager $reportManager;
 

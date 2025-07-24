@@ -5,16 +5,16 @@ namespace HubletoApp\Community\Inventory\Models;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Products\Models\Product;
 use HubletoApp\Community\Warehouses\Models\Location;
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\File;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\File;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
 
 // This table records all movements of inventory within the warehouse.
-class Transaction extends \HubletoMain\Core\Models\Model
+class Transaction extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'inventory_transactions';
   public string $recordManagerClass = RecordManagers\Transaction::class;

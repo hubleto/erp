@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Notifications\Controllers;
 
-class Sent extends \HubletoMain\Core\Controllers\Controller
+class Sent extends \Hubleto\Framework\Controllers\Controller
 {
   public function getBreadcrumbs(): array
   {

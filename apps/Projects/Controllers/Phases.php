@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Projects\Controllers;
 
-class Phases extends \HubletoMain\Core\Controllers\Controller
+class Phases extends \Hubleto\Framework\Controllers\Controller
 {
   public function prepareView(): void
   {

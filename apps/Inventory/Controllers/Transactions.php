@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Inventory\Controllers;
 
-class Transactions extends \HubletoMain\Core\Controllers\Controller
+class Transactions extends \Hubleto\Framework\Controllers\Controller
 {
   public function prepareView(): void
   {

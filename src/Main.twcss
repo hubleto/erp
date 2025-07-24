@@ -1,5 +1,3 @@
-@layer theme, base, components, primereact, adios, utilities, app;
-
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -17,7 +15,7 @@
   --nav-height: 3rem;
 }
 
-@layer app {
+@layer hubleto-main {
   @font-face {
     font-family: 'Gabarito';
     font-style: normal;

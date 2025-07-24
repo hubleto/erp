@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Controllers\Api;
 
-class PayMonthly extends \HubletoMain\Core\Controllers\ApiController
+class PayMonthly extends \Hubleto\Framework\Controllers\ApiController
 {
   public const PAYMENT_SUCCESS = 1;
   public const THIS_IS_NOT_PREMIUM_ACCOUNT = 2;
@@ -109,7 +109,7 @@ class PayMonthly extends \HubletoMain\Core\Controllers\ApiController
           'details' => '{"activeUsers":' . $premiumInfoThisMonth['activeUsers'] . ',"paidApps":' . $premiumInfoThisMonth['paidApps'] . '}',
           'has_invoice' => true,
           'type' => $mPayment::TYPE_SUBSCRIPTION_FEE,
-          'uuid' => \ADIOS\Core\Helper::generateUuidV4(),
+          'uuid' => \Hubleto\Legacy\Core\Helper::generateUuidV4(),
         ]);
       }
 
@@ -139,7 +139,7 @@ class PayMonthly extends \HubletoMain\Core\Controllers\ApiController
           'details' => '{"newActiveUsers":' . $usersAddedPrevMonth . ',"newPaidApps":' . $paidAppsAddedPrevMonth . '}',
           'has_invoice' => true,
           'type' => $mPayment::TYPE_BACK_PAY,
-          'uuid' => \ADIOS\Core\Helper::generateUuidV4(),
+          'uuid' => \Hubleto\Legacy\Core\Helper::generateUuidV4(),
         ]);
       }
 
@@ -152,7 +152,7 @@ class PayMonthly extends \HubletoMain\Core\Controllers\ApiController
           'full_amount' => $toPay,
           'details' => '{"reason":"simulated payment with card"}',
           'type' => $mPayment::TYPE_PAYMENT_BY_CARD,
-          'uuid' => \ADIOS\Core\Helper::generateUuidV4(),
+          'uuid' => \Hubleto\Legacy\Core\Helper::generateUuidV4(),
         ]);
       }
 

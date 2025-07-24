@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class UpdateDefaultPermissions extends \HubletoMain\Core\Controllers\Controller
+class UpdateDefaultPermissions extends \Hubleto\Framework\Controllers\Controller
 {
   public function getBreadcrumbs(): array
   {

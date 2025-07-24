@@ -2,22 +2,22 @@
 
 namespace HubletoApp\Community\Projects\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Color;
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\File;
-use ADIOS\Core\Db\Column\Image;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Json;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Password;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\File;
+use Hubleto\Legacy\Core\Db\Column\Image;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Json;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Password;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class Phase extends \HubletoMain\Core\Models\Model
+class Phase extends \Hubleto\Framework\Models\Model
 {
   public const ENUM_ONE = 1;
   public const ENUM_TWO = 2;
@@ -42,7 +42,7 @@ class Phase extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Phase';

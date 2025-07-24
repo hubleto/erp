@@ -2,13 +2,13 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 use HubletoApp\Community\Products\Models\Product;
 
-class OrderProduct extends \HubletoMain\Core\Models\Model
+class OrderProduct extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'order_products';
   public string $recordManagerClass = RecordManagers\OrderProduct::class;
@@ -32,7 +32,7 @@ class OrderProduct extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

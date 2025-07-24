@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Contact extends \HubletoMain\Core\RecordManager
+class Contact extends \Hubleto\Framework\RecordManager
 {
   public $table = 'contacts';
 
@@ -35,7 +35,7 @@ class Contact extends \HubletoMain\Core\RecordManager
 
     $query = $query->orderBy('is_primary', 'desc');
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     if ($main->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where($this->table . '.id_customer', $main->urlParamAsInteger("idCustomer"));
@@ -146,7 +146,7 @@ class Contact extends \HubletoMain\Core\RecordManager
 
   public function prepareLookupQuery(string $search): mixed
   {
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
     $idCustomer = $main->urlParamAsInteger('idCustomer');
 
     $query = parent::prepareLookupQuery($search);

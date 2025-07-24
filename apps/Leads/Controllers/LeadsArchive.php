@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Controllers;
 
-class LeadsArchive extends \HubletoMain\Core\Controllers\Controller
+class LeadsArchive extends \Hubleto\Framework\Controllers\Controller
 {
   public function getBreadcrumbs(): array
   {

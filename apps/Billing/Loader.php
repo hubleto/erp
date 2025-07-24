@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Billing;
 
 use HubletoApp\Community\Settings\Models\Permission;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   public function init(): void
   {

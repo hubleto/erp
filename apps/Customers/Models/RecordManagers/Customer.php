@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Builder;
 
-class Customer extends \HubletoMain\Core\RecordManager
+class Customer extends \Hubleto\Framework\RecordManager
 {
   public $table = 'customers';
 
@@ -76,7 +76,7 @@ class Customer extends \HubletoMain\Core\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \ADIOS\Core\Helper::getGlobalApp();
+    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
 
     $defaultFilters = $main->urlParamAsArray("defaultFilters");
     if (isset($defaultFilters["fArchive"])) {

@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class LeadHistory extends \HubletoMain\Core\Models\Model
+class LeadHistory extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'lead_histories';
   public string $recordManagerClass = RecordManagers\LeadHistory::class;
@@ -25,7 +25,7 @@ class LeadHistory extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['showHeader'] = false;

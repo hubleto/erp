@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Models\RecordManagers;
 
-class LostReason extends \HubletoMain\Core\RecordManager
+class LostReason extends \Hubleto\Framework\RecordManager
 {
   public $table = 'lead_lost_reasons';
 

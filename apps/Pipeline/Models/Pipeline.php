@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Pipeline\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
-use ADIOS\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Integer;
 
-class Pipeline extends \HubletoMain\Core\Models\Model
+class Pipeline extends \Hubleto\Framework\Models\Model
 {
   public const TYPE_DEAL_MANAGEMENT = 1;
   public const TYPE_PROJECT_MANAGEMENT = 2;
@@ -34,7 +34,7 @@ class Pipeline extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

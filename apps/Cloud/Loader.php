@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   public bool $canBeDisabled = false;
   public bool $permittedForAllUsers = true;
@@ -70,7 +70,7 @@ class Loader extends \HubletoMain\Core\App
   {
     $accountUid = $this->configAsString('accountUid');
     if (empty($accountUid)) {
-      $accountUid = \ADIOS\Core\Helper::generateUuidV4();
+      $accountUid = \Hubleto\Legacy\Core\Helper::generateUuidV4();
       $this->saveConfig('accountUid', $accountUid);
     }
     return $accountUid;
@@ -200,7 +200,7 @@ class Loader extends \HubletoMain\Core\App
       // count enabled non-community apps
       $paidApps = 0;
       foreach ($this->main->apps->getEnabledApps() as $app) {
-        if ($app->manifest['appType'] != \HubletoMain\Core\App::APP_TYPE_COMMUNITY) {
+        if ($app->manifest['appType'] != \Hubleto\Framework\App::APP_TYPE_COMMUNITY) {
           $paidApps++;
         }
       }
@@ -297,7 +297,7 @@ class Loader extends \HubletoMain\Core\App
     // count enabled non-community apps
     $paidApps = 0;
     foreach ($this->main->apps->getEnabledApps() as $app) {
-      if ($app->manifest['appType'] != \HubletoMain\Core\App::APP_TYPE_COMMUNITY) {
+      if ($app->manifest['appType'] != \Hubleto\Framework\App::APP_TYPE_COMMUNITY) {
         $paidApps++;
       }
     }

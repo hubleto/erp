@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 
-class RolePermission extends \HubletoMain\Core\Models\Model
+class RolePermission extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'role_permissions';
   public string $recordManagerClass = RecordManagers\RolePermission::class;
@@ -22,7 +22,7 @@ class RolePermission extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

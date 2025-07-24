@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use ADIOS\Core\Db\Column\Color;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class Level extends \HubletoMain\Core\Models\Model
+class Level extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'lead_levels';
   public string $recordManagerClass = RecordManagers\Level::class;
@@ -19,7 +19,7 @@ class Level extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 
@@ -32,7 +32,7 @@ class Level extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $description = parent::describeForm();
 

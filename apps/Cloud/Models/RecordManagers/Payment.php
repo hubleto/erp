@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Models\RecordManagers;
 
-class Payment extends \HubletoMain\Core\RecordManager
+class Payment extends \Hubleto\Framework\RecordManager
 {
   public $table = 'cloud_payments';
 

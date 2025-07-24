@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Dashboards;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   // public bool $hasCustomSettings = true;
 
@@ -43,7 +43,7 @@ class Loader extends \HubletoMain\Core\App
     return $this->boards;
   }
 
-  public function addBoard(\HubletoMain\Core\App $app, string $title, string $boardUrlSlug): void
+  public function addBoard(\Hubleto\Framework\App $app, string $title, string $boardUrlSlug): void
   {
     $this->boards[$boardUrlSlug] = [
       'app' => $app,

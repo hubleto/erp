@@ -2,15 +2,15 @@
 
 namespace HubletoApp\Community\Calendar\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Time;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Time;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\ActivityType;
 use HubletoApp\Community\Settings\Models\User;
 
-class SharedCalendar extends \HubletoMain\Core\Models\Model
+class SharedCalendar extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'shared_calendars';
   public string $recordManagerClass = RecordManagers\SharedCalendar::class;

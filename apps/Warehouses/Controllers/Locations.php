@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Warehouses\Controllers;
 
-class Locations extends \HubletoMain\Core\Controllers\Controller
+class Locations extends \Hubleto\Framework\Controllers\Controller
 {
   public function prepareView(): void
   {

@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Customers\Controllers\Api;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Customers\Models\CustomerActivity;
 
-class LogActivity extends \HubletoMain\Core\Controllers\ApiController
+class LogActivity extends \Hubleto\Framework\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

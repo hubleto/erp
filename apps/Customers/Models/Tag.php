@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
-use ADIOS\Core\Db\Column\Color;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class Tag extends \HubletoMain\Core\Models\Model
+class Tag extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'customer_tags';
   public string $recordManagerClass = RecordManagers\Tag::class;
@@ -19,7 +19,7 @@ class Tag extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

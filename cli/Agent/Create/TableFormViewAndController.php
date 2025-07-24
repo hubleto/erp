@@ -14,7 +14,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
 
     $modelSingularForm = $model;
     $modelPluralForm = $model . 's';
-    $modelPluralFormKebab = \ADIOS\Core\Helper::pascalToKebab($modelPluralForm);
+    $modelPluralFormKebab = \Hubleto\Legacy\Core\Helper::pascalToKebab($modelPluralForm);
     $controller = $modelPluralForm; // using plural for controller managing the records in the model
     $view = $modelPluralForm; // using plural for view managing the records in the model
 
@@ -53,7 +53,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     $appNamespace = trim($appNamespace, '\\');
     $appNamespaceParts = explode('\\', $appNamespace);
     $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
-    $appNameKebab = \ADIOS\Core\Helper::pascalToKebab($appName);
+    $appNameKebab = \Hubleto\Legacy\Core\Helper::pascalToKebab($appName);
 
     $appNamespaceForwardSlash = str_replace('\\', '/', $appNamespace);
     $appNamespaceDoubleBackslash = str_replace('/', '\\\\', $appNamespaceForwardSlash);

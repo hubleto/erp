@@ -223,7 +223,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $packagesToInstall = 'core,sales';
     }
     if (empty($adminPassword) && !isset($smtpHost)) {
-      $adminPassword = \ADIOS\Core\Helper::randomPassword();
+      $adminPassword = \Hubleto\Legacy\Core\Helper::randomPassword();
     }
 
     $this->cli->green("  ###         ###         ###   \n");
@@ -281,7 +281,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $installer = new \HubletoMain\Installer\Installer(
       $this->main,
       'local-env',
-      trim(\ADIOS\Core\Helper::str2url((string) $rewriteBase), '/-'), // uid
+      trim(\Hubleto\Legacy\Core\Helper::str2url((string) $rewriteBase), '/-'), // uid
       (string) $accountFullName,
       (string) $adminName,
       (string) $adminFamilyName,

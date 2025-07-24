@@ -10,7 +10,7 @@
 
 namespace HubletoMain\Report;
 
-class Example extends \HubletoMain\Core\Report
+class Example extends \Hubleto\Framework\Report
 {
 
   // Sample report URL slug. This report will be accessible under HubletoAccount/reports/my-report

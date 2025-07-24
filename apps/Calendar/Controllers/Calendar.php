@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Calendar\Controllers;
 
-class Calendar extends \HubletoMain\Core\Controllers\Controller
+class Calendar extends \Hubleto\Framework\Controllers\Controller
 {
   public function getBreadcrumbs(): array
   {

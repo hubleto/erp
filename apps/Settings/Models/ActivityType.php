@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Color;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class ActivityType extends \HubletoMain\Core\Models\Model
+class ActivityType extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'activity_types';
   public string $recordManagerClass = RecordManagers\ActivityType::class;
@@ -22,7 +22,7 @@ class ActivityType extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

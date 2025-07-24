@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Deals\Controllers\Api;
 
-class DailyDigest extends \HubletoMain\Core\Controllers\ApiController
+class DailyDigest extends \Hubleto\Framework\Controllers\ApiController
 {
   public function response(): array
   {

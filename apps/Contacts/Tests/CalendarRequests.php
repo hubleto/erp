@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Customers\Tests;
 
-class CalendarRequests extends \HubletoMain\Core\AppTest
+class CalendarRequests extends \Hubleto\Framework\AppTest
 {
   public function run(): void
   {

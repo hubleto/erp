@@ -2,14 +2,14 @@
 
 namespace HubletoApp\Community\Settings;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   public bool $canBeDisabled = false;
 
-  /** @var array<int, array<\HubletoMain\Core\App, array>> */
+  /** @var array<int, array<\Hubleto\Framework\App, array>> */
   private array $settings = [];
 
-  /** @var array<int, array<\HubletoMain\Core\App, array>> */
+  /** @var array<int, array<\Hubleto\Framework\App, array>> */
   private array $tools = [];
 
   public function init(): void
@@ -432,7 +432,7 @@ class Loader extends \HubletoMain\Core\App
     }
   }
 
-  public function addSetting(\HubletoMain\Core\App $app, array $setting): void
+  public function addSetting(\Hubleto\Framework\App $app, array $setting): void
   {
     $this->settings[] = [$app, $setting];
   }

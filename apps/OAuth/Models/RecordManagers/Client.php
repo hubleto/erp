@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\OAuth\Models\RecordManagers;
 
-class Client extends \HubletoMain\Core\RecordManager
+class Client extends \Hubleto\Framework\RecordManager
 {
   public $table = 'oauth_clients';
 

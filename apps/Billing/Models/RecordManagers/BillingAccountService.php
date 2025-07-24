@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class BillingAccountService extends \HubletoMain\Core\RecordManager
+class BillingAccountService extends \Hubleto\Framework\RecordManager
 {
   public $table = 'billing_accounts_services';
 

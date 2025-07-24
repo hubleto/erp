@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Level extends \HubletoMain\Core\RecordManager
+class Level extends \Hubleto\Framework\RecordManager
 {
   public $table = 'lead_levels';
 }

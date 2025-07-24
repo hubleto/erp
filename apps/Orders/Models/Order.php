@@ -2,17 +2,17 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Products\Models\Product;
 use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Settings\Models\Setting;
 
-class Order extends \HubletoMain\Core\Models\Model
+class Order extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'orders';
   public string $recordManagerClass = RecordManagers\Order::class;
@@ -41,7 +41,7 @@ class Order extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 
@@ -54,7 +54,7 @@ class Order extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $mSettings = $this->main->di->create(Setting::class);
     $defaultCurrency = (int) $mSettings->record

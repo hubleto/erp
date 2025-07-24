@@ -2,13 +2,13 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use ADIOS\Core\Db\Column\Decimal;
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 use HubletoApp\Community\Products\Controllers\Api\CalculatePrice;
 use HubletoApp\Community\Products\Models\Product;
 
-class DealProduct extends \HubletoMain\Core\Models\Model
+class DealProduct extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'deal_products';
   public string $recordManagerClass = RecordManagers\DealProduct::class;
@@ -32,7 +32,7 @@ class DealProduct extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsInteger('idDeal') > 0) {

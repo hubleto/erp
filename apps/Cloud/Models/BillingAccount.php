@@ -2,12 +2,12 @@
 
 namespace HubletoApp\Community\Cloud\Models;
 
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class BillingAccount extends \HubletoMain\Core\Models\Model
+class BillingAccount extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'cloud_billing_accounts';
   public string $recordManagerClass = RecordManagers\BillingAccount::class;
@@ -30,7 +30,7 @@ class BillingAccount extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->columns['id'] = $this->columns['id'];

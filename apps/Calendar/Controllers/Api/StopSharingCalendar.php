@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Api;
 
-use ADIOS\Core\Controller;
+use Hubleto\Legacy\Core\Controller;
 use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
-class StopSharingCalendar extends \HubletoMain\Core\Controllers\Controller
+class StopSharingCalendar extends \Hubleto\Framework\Controllers\Controller
 {
   public int $returnType = Controller::RETURN_TYPE_JSON;
 

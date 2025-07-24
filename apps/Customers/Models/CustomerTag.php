@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
 
-class CustomerTag extends \HubletoMain\Core\Models\Model
+class CustomerTag extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'cross_customer_tags';
   public string $recordManagerClass = RecordManagers\CustomerTag::class;
@@ -22,7 +22,7 @@ class CustomerTag extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = $this->translate('Customer Categories');

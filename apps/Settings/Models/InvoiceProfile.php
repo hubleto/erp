@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 
-class InvoiceProfile extends \HubletoMain\Core\Models\Model
+class InvoiceProfile extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'invoice_profiles';
   public ?string $lookupSqlValue = '{%TABLE%}.name';
@@ -33,7 +33,7 @@ class InvoiceProfile extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 
@@ -56,7 +56,7 @@ class InvoiceProfile extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeForm(): \ADIOS\Core\Description\Form
+  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
   {
     $description = parent::describeForm();
 

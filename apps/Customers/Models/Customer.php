@@ -2,19 +2,19 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Date;
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Text;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Date;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Settings\Models\Country;
 use HubletoApp\Community\Settings\Models\User;
-use HubletoMain\Core\Helper;
+use Hubleto\Framework\Helper;
 
-class Customer extends \HubletoMain\Core\Models\Model
+class Customer extends \Hubleto\Framework\Models\Model
 {
   public bool $isExtendableByCustomColumns = true;
 
@@ -80,7 +80,7 @@ class Customer extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeInput(string $columnName): \ADIOS\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {
@@ -94,7 +94,7 @@ class Customer extends \HubletoMain\Core\Models\Model
     return $description;
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = ''; //$this->translate('Customers');

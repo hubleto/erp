@@ -6,7 +6,7 @@ use Exception;
 use HubletoApp\Community\Settings\Models\RolePermission;
 use HubletoApp\Community\Settings\Models\UserRole;
 
-class SavePermissions extends \HubletoMain\Core\Controllers\ApiController
+class SavePermissions extends \Hubleto\Framework\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

@@ -40,7 +40,7 @@ For releases v0.10 and later, check release notes at https://github.com/hubleto/
   * static code analysis checks (thanks to the PHPStan)
   * new features in community apps
   * improved routing featurs (using named groups in routes), see [Dynamic routes with variables](https://developer.hubleto.com/tutorial/advanced/dynamic-routes)
-  * new `\HubletoMain\Core\CalendarManager` class and `$this->main->calendarManager` object
+  * new `\Hubleto\Framework\CalendarManager` class and `$this->main->calendarManager` object
 
 New ASCII art logo :-)
 
@@ -62,7 +62,7 @@ New ASCII art logo :-)
   * platform config made available via Settings app
   * UI improvements
   * many bugfixes
-  * new class \HubletoMain\Core\ModelEloquent
+  * new class \Hubleto\Framework\ModelEloquent
   * app manifests
   * platform config available in settings app
 

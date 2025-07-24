@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Events\Controllers;
 
-class Venues extends \HubletoMain\Core\Controllers\Controller
+class Venues extends \Hubleto\Framework\Controllers\Controller
 {
   public function prepareView(): void
   {

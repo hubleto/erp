@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Tag extends \HubletoMain\Core\RecordManager
+class Tag extends \Hubleto\Framework\RecordManager
 {
   public $table = 'deal_tags';
 }

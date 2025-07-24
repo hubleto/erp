@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Events\Controllers;
 
-class Agendas extends \HubletoMain\Core\Controllers\Controller
+class Agendas extends \Hubleto\Framework\Controllers\Controller
 {
   public function prepareView(): void
   {

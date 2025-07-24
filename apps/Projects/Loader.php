@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Projects;
 
-class Loader extends \HubletoMain\Core\App
+class Loader extends \Hubleto\Framework\App
 {
   // Uncomment following if you want a button for app's settings
   // to be rendered next in sidebar, right next to your app's button.

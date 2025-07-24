@@ -2,13 +2,13 @@
 
 namespace HubletoApp\Community\Cloud\Models;
 
-use ADIOS\Core\Db\Column\Integer;
-use ADIOS\Core\Db\Column\DateTime;
-use ADIOS\Core\Db\Column\Boolean;
-use ADIOS\Core\Db\Column\Decimal;
+use Hubleto\Legacy\Core\Db\Column\Integer;
+use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Legacy\Core\Db\Column\Boolean;
+use Hubleto\Legacy\Core\Db\Column\Decimal;
 use HubletoApp\Community\Settings\Models\User;
 
-class Log extends \HubletoMain\Core\Models\Model
+class Log extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'cloud_log';
   public string $recordManagerClass = RecordManagers\Log::class;
@@ -23,7 +23,7 @@ class Log extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
     $description->columns['id'] = $this->columns['id'];

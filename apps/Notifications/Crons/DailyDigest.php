@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Notifications\Crons;
 
-class DailyDigest extends \HubletoMain\Core\Cron
+class DailyDigest extends \Hubleto\Framework\Cron
 {
   public string $schedulingPattern = '05 06 * * *';
 

@@ -2,12 +2,12 @@
 
 namespace HubletoApp\Community\Suppliers\Models;
 
-use ADIOS\Core\Db\Column\Lookup;
-use ADIOS\Core\Db\Column\Varchar;
+use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Legacy\Core\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\Country;
 use HubletoApp\Community\Contacts\Models\Contact;
 
-class Supplier extends \HubletoMain\Core\Models\Model
+class Supplier extends \Hubleto\Framework\Models\Model
 {
   public string $table = 'suppliers';
   public string $recordManagerClass = RecordManagers\Supplier::class;
@@ -31,7 +31,7 @@ class Supplier extends \HubletoMain\Core\Models\Model
     ]);
   }
 
-  public function describeTable(): \ADIOS\Core\Description\Table
+  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
   {
     $description = parent::describeTable();
 

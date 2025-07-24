@@ -29,5 +29,8 @@
     "Controllers\\Settings": {
         "Dashboards": "Panely",
         "Settings": "Nastavení"
+    },
+    "Components\\FormDashboard": {
+        "Panels": "Panely"
     }
 }

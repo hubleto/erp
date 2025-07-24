@@ -61,13 +61,16 @@
         "Active": "Aktivní",
         "Deal created": "Obchod vytvořen",
         " changed from ": " změnil z ",
-        " to ": " na "
+        " to ": " na ",
+        "Customer' order number": "Číslo objednávky zákazníka"
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otevřený obchod"
     },
     "Models\\LostReason": {
-        "Lost Reason": "Důvod ztracení"
+        "Lost Reason": "Důvod ztracení",
+        "Deal Lost Reasons": "Důvod ztracení obchodů",
+        "Add Reason": "Přidat důvod"
     },
     "Models\\DealHistory": {
         "Change Date": "Datum změny",
@@ -93,7 +96,9 @@
     },
     "Models\\Tag": {
         "Name": "Jméno",
-        "Color": "Barva"
+        "Color": "Barva",
+        "Deal Tags": "Značky obchodů",
+        "Add Deal Tag": "Přidat značky obchodů"
     },
     "Controllers\\Boards\\DealWarnings": {
         "Pending deals without future plan": "Čekající obchody bez budoucího plánu",
@@ -141,7 +146,9 @@
         "Description": "Popis",
         "Change Date": "Datum změny",
         "No steps exist for this pipeline": "Neexistujú kroky pro tuto pipeline",
-        "Weighted profit": "Vážený zisk"
+        "Weighted profit": "Vážený zisk",
+        "Tasks": "Úlohy",
+        "Go to deal": "Přejít na obchod"
     },
     "Components\\FormActivity": {
         "Start": "Začátek",
@@ -150,9 +157,17 @@
         "Contact": "Kontakt"
     },
     "Controllers\\Boards\\DealValueByResult": {
-        "Unknown": "",
-        "Pending": "",
-        "Won": "",
-        "Lost": ""
+        "Unknown": "Neznámé",
+        "Pending": "Čekající",
+        "Won": "Vyhráto",
+        "Lost": "Prohráto"
+    },
+    "Controllers\\LostReasons": {
+        "Settings": "Nastavení",
+        "Deal Lost Reasons": "Důvody ztraceného obchod"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Nastavení",
+        "Deal Tags": "Značky obchodů"
     }
 }

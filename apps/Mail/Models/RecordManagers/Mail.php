@@ -16,7 +16,7 @@ class Mail extends \Hubleto\Framework\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
     $folder = $main->urlParamAsString('folder');
     $idUser = $main->auth->getUserId();
 

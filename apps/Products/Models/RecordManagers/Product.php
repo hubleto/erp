@@ -25,7 +25,7 @@ class Product extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareLookupQuery($search);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
     if ($main->urlParamAsBool("getServices") == true) {
       $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
     } elseif ($main->urlParamAsBool("getProducts") == true) {

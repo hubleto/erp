@@ -18,7 +18,7 @@ class Panel extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->isUrlParam("idDashboard")) {
       $query = $query->where($this->table . '.id_dashboard', $main->urlParamAsInteger("idDashboard"));

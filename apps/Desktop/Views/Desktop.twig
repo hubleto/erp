@@ -214,7 +214,6 @@
             </li>
           {% endif %}
           {% if viewParams.main.apps.isAppInstalled('HubletoApp\\Community\\Notifications') %}
-            {% set notificationsCount = viewParams.main.apps.community('Notifications').getNotificationsCount() %}
             <li class="mr-2 hidden md:block">
               {% if notificationsCount > 0 %}
                 <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">

@@ -9,8 +9,6 @@ namespace HubletoMain;
 class Loader extends \Hubleto\Framework\Loader
 {
 
-  protected \Twig\Loader\FilesystemLoader $twigLoader;
-
   public \HubletoMain\ReleaseManager $release;
   public \HubletoMain\AppManager $apps;
   public \HubletoMain\Cli\Agent\Loader $cli;
@@ -38,7 +36,74 @@ class Loader extends \Hubleto\Framework\Loader
   {
     $this->setAsGlobal();
 
-    parent::__construct($config, $mode);
+    $this->params = $this->extractParamsFromRequest();
+
+    $this->mode = $mode;
+
+    try {
+
+      // Helper::setGlobalApp($this);
+
+      $this->config = $this->createConfigManager($config);
+
+      if (php_sapi_name() !== 'cli') {
+        if (!empty($_GET['route'])) {
+          $this->requestedUri = $_GET['route'];
+        } else if ($this->config->getAsString('rewriteBase') == "/") {
+          $this->requestedUri = ltrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), "/");
+        } else {
+          $this->requestedUri = str_replace(
+            $this->config->getAsString('rewriteBase'),
+            "",
+            parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+          );
+        }
+
+        // render static assets, if requested
+        $this->renderAssets();
+      }
+
+      // inicializacia dependency injection
+      $this->di = $this->createDependencyInjection();
+
+      // inicializacia session managementu
+      $this->session = $this->createSessionManager();
+
+      // inicializacia debug konzoly
+      $this->logger = $this->createLogger();
+
+      // translator
+      $this->translator = $this->createTranslator();
+
+      // inicializacia routera
+      $this->router = $this->createRouter();
+
+      // inicializacia locale objektu
+      $this->locale = $this->createLocale();
+
+      // object pre kontrolu permissions
+      $this->permissions = $this->createPermissionsManager();
+
+      // auth provider
+      $this->auth = $this->createAuthProvider();
+
+      // test provider
+      $this->test = $this->createTestProvider();
+
+      // Twig renderer
+      $this->createRenderer();
+
+      // PDO
+      $this->pdo = new \Hubleto\Legacy\Core\PDO($this);
+
+    } catch (\Exception $e) {
+      echo "ADIOS BOOT failed: [".get_class($e)."] ".$e->getMessage() . "\n";
+      echo $e->getTraceAsString() . "\n";
+      exit;
+    }
+
+
+
 
     // CLI
     $this->cli = $this->di->create(\HubletoMain\Cli\Agent\Loader::class);
@@ -99,15 +164,15 @@ class Loader extends \Hubleto\Framework\Loader
     }
   }
 
-  /**
-   * Set $this as the global instance of Hubleto.
-   *
-   * @return void
-   * 
-   */
-  public function setAsGlobal()
+  public function createRenderer()
   {
-    $GLOBALS['hubletoMain'] = $this;
+    $this->twigLoader = new \Twig\Loader\FilesystemLoader();
+    $this->twig = new \Twig\Environment($this->twigLoader, array(
+      'cache' => false,
+      'debug' => true,
+    ));
+
+    $this->configureRenderer();
   }
 
   /**
@@ -116,22 +181,51 @@ class Loader extends \Hubleto\Framework\Loader
    * @return void
    * 
    */
-  public function createTwig(): void
+  public function configureRenderer(): void
   {
 
-    $this->twigLoader = new \Twig\Loader\FilesystemLoader();
+    $this->twigLoader->addPath($this->config->getAsString('srcFolder'));
+    $this->twigLoader->addPath($this->config->getAsString('srcFolder'), 'app');
+
+    $this->twig->addGlobal('config', $this->config->get());
+    $this->twig->addExtension(new \Twig\Extension\StringLoaderExtension());
+    $this->twig->addExtension(new \Twig\Extension\DebugExtension());
+
+    $this->twig->addFunction(new \Twig\TwigFunction(
+      'str2url',
+      function ($string) {
+        return Helper::str2url($string ?? '');
+      }
+    ));
+    $this->twig->addFunction(new \Twig\TwigFunction(
+      'hasPermission',
+      function (string $permission, array $idUserRoles = []) {
+        return $this->permissions->granted($permission, $idUserRoles);
+      }
+    ));
+    $this->twig->addFunction(new \Twig\TwigFunction(
+      'hasRole',
+      function (int|string $role) {
+        return $this->permissions->hasRole($role);
+      }
+    ));
+    $this->twig->addFunction(new \Twig\TwigFunction(
+      'setTranslationContext',
+      function ($context) {
+        $this->translationContext = $context;
+      }
+    ));
+    $this->twig->addFunction(new \Twig\TwigFunction(
+      'translate',
+      function ($string, $context = '') {
+        if (empty($context)) $context = $this->translationContext;
+        return $this->translate($string, [], $context);
+      }
+    ));
+
     $this->twigLoader->addPath(__DIR__ . '/../views', 'hubleto');
     $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
-    try {
-      $this->twigLoader->addPath($this->config->getAsString('rootFolder') . '/views', 'project');
-    } catch (\Exception $e) {
-      //
-    }
-
-    $this->twig = new \Twig\Environment($this->twigLoader, array(
-      'cache' => false,
-      'debug' => true,
-    ));
+    $this->twigLoader->addPath($this->config->getAsString('rootFolder') . '/src/views', 'project');
 
     $this->twig->addFunction(new \Twig\TwigFunction(
       'number',
@@ -140,7 +234,6 @@ class Loader extends \Hubleto\Framework\Loader
       }
     ));
 
-    $this->configureTwig();
   }
 
   /**
@@ -273,7 +366,7 @@ class Loader extends \Hubleto\Framework\Loader
 
     $dict = static::loadDictionary($language);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->config->getAsBool('autoTranslate')) {
       $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();

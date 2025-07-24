@@ -23,7 +23,7 @@ class EventAttendee extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->urlParamAsInteger("idEvent") > 0) {
       $query = $query->where($this->table . '.id_event', $main->urlParamAsInteger("idEvent"));

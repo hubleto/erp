@@ -29,7 +29,7 @@ class Task extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     $externalModel = $main->urlParamAsString("externalModel");
     $externalId = $main->urlParamAsInteger("externalId");

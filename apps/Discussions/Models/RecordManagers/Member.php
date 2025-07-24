@@ -23,7 +23,7 @@ class Member extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->urlParamAsInteger("idDiscussion") > 0) {
       $query = $query->where($this->table . '.id_discussion', $main->urlParamAsInteger("idDiscussion"));

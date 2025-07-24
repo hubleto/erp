@@ -101,7 +101,7 @@ class Lead extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where("leads.id_customer", $main->urlParamAsInteger("idCustomer"));

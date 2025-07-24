@@ -13,7 +13,7 @@ class UserHasRole extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->isUrlParam("idUser")) {
       $query = $query->where($this->table . '.id_user', $main->urlParamAsInteger("idUser"));

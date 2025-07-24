@@ -26,7 +26,7 @@ class RolePermission extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->isUrlParam("idRole")) {
       $query = $query->where($this->table . '.id_role', $main->urlParamAsInteger("idRole"));

@@ -76,7 +76,7 @@ class Customer extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     $defaultFilters = $main->urlParamAsArray("defaultFilters");
     if (isset($defaultFilters["fArchive"])) {

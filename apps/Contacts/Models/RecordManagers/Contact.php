@@ -35,7 +35,7 @@ class Contact extends \Hubleto\Framework\RecordManager
 
     $query = $query->orderBy('is_primary', 'desc');
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where($this->table . '.id_customer', $main->urlParamAsInteger("idCustomer"));
@@ -146,7 +146,7 @@ class Contact extends \Hubleto\Framework\RecordManager
 
   public function prepareLookupQuery(string $search): mixed
   {
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
     $idCustomer = $main->urlParamAsInteger('idCustomer');
 
     $query = parent::prepareLookupQuery($search);

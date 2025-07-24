@@ -14,7 +14,7 @@ class Phase extends \Hubleto\Framework\RecordManager
     $query = parent::prepareReadQuery($query, $level);
 
     // Uncomment this line if you are going to use $main.
-    // $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    // $main = \HubletoMain\Loader::getGlobalApp();
 
     // Uncomment and modify these lines if you want to apply filtering based on URL parameters
     // if ($main->urlParamAsInteger("idCustomer") > 0) {

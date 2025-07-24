@@ -23,7 +23,7 @@ class Location extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->urlParamAsInteger("idWarehouse") > 0) {
       $query = $query->where($this->table . '.id_warehouse', $main->urlParamAsInteger("idWarehouse"));

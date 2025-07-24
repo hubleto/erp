@@ -50,7 +50,7 @@ class User extends \Hubleto\Framework\RecordManager
 
   public function prepareLookupQuery(string $search): mixed
   {
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
     $idUser = $main->auth->getUserId();
 
     $query = $this;

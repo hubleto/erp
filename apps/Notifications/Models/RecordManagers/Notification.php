@@ -23,7 +23,7 @@ class Notification extends \Hubleto\Framework\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     $query = parent::prepareReadQuery($query, $level);
 
@@ -42,7 +42,7 @@ class Notification extends \Hubleto\Framework\RecordManager
 
   public function recordCreate(array $record): array
   {
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
     $notificationsApp = $main->apps->community('Notifications');
 
     $message = $notificationsApp->send(

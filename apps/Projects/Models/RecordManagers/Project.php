@@ -38,7 +38,7 @@ class Project extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->urlParamAsInteger("idDeal") > 0) {
       $query = $query->where($this->table . '.id_deal', $main->urlParamAsInteger("idDeal"));

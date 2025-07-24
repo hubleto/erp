@@ -25,7 +25,7 @@ class TeamMember extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->isUrlParam("idTeam")) {
       $query = $query->where($this->table . '.id_team', $main->urlParamAsInteger("idTeam"));

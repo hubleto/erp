@@ -29,7 +29,7 @@ class Activity extends \Hubleto\Framework\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     if ($main->urlParamAsInteger("idTask") > 0) {
       $query = $query->where($this->table . '.id_task', $main->urlParamAsInteger("idTask"));

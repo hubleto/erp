@@ -9,7 +9,7 @@ class Source extends \Hubleto\Framework\RecordManager
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
 
-    $main = \Hubleto\Legacy\Core\Helper::getGlobalApp();
+    $main = \HubletoMain\Loader::getGlobalApp();
 
     $query = parent::prepareReadQuery($query, $level);
     $type = $main->urlParamAsString('type') ?? "";

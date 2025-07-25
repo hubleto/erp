@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "preserveSymlinks": true,
+    "baseUrl": ".",
+    "paths": {
+      "@hubleto/ui/core/*": ["../framework/src/Components/Core/*"],
+      "@hubleto/ui/ext/*": ["../framework/src/Components/Ext/*"],
+    }
+  },
+  "include": ["./**/*"]
+}

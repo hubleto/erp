@@ -19,7 +19,7 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("<endpoint> not provided.");
     }
 
-    $endpointPascalCase = \Hubleto\Legacy\Core\Helper::kebabToPascal($endpoint);
+    $endpointPascalCase = \Hubleto\Framework\Helper::kebabToPascal($endpoint);
 
     $app = $this->main->apps->getAppInstance($appNamespace);
 

@@ -11,7 +11,7 @@ class GetPipelines extends \HubletoMain\Controllers\ApiController
   {
 
     $mPipeline = $this->main->di->create(Pipeline::class);
-    $pipelines = \Hubleto\Legacy\Core\Helper::keyBy('id', $mPipeline->record->prepareReadQuery()->get()?->toArray());
+    $pipelines = \Hubleto\Framework\Helper::keyBy('id', $mPipeline->record->prepareReadQuery()->get()?->toArray());
 
     return [
       "status" => "success",

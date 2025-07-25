@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { deepObjectMerge, getUrlParam } from '@adios/Helper';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
+import { deepObjectMerge, getUrlParam } from '@hubleto/ui/core/Helper';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
 
 export interface FormProductProps extends HubletoFormProps {}
 export interface FormProductState extends HubletoFormState {}

@@ -2,7 +2,7 @@
 
 namespace Hubleto\Framework\Api;
 
-use Hubleto\Legacy\Core\Helper;
+use Hubleto\Framework\Helper;
 
 class Dictionary extends \HubletoMain\Controllers\ApiController
 {

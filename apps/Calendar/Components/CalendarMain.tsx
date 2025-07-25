@@ -1,11 +1,11 @@
 import React, { Component, useState } from "react";
-import { setUrlParam, deleteUrlParam } from "@adios/Helper";
+import { setUrlParam, deleteUrlParam } from "@hubleto/ui/core/Helper";
 import Calendar from "./Calendar";
-import ModalForm from "@adios/ModalForm";
+import ModalForm from "@hubleto/ui/core/ModalForm";
 import FormActivitySelector from "./FormActivitySelector";
-import request from "@adios/Request";
+import request from "@hubleto/ui/core/Request";
 import moment from 'moment';
-import TranslatedComponent from "@adios/TranslatedComponent";
+import TranslatedComponent from "@hubleto/ui/core/TranslatedComponent";
 
 
 interface CalendarMainProps {

@@ -70,7 +70,7 @@ class Loader extends \Hubleto\Framework\App
   {
     $accountUid = $this->configAsString('accountUid');
     if (empty($accountUid)) {
-      $accountUid = \Hubleto\Legacy\Core\Helper::generateUuidV4();
+      $accountUid = \Hubleto\Framework\Helper::generateUuidV4();
       $this->saveConfig('accountUid', $accountUid);
     }
     return $accountUid;

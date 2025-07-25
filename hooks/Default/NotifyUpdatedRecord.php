@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Hook\Default;
 
-class NotifyUpdatedRecord extends \Hubleto\Framework\Hook
+class NotifyUpdatedRecord extends \HubletoMain\Hook
 {
 
   public function run(string $event, array $args): void

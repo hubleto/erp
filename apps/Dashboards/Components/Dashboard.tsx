@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import request from "@adios/Request";
+import request from "@hubleto/ui/core/Request";
 import { ProgressBar } from 'primereact/progressbar';
-import TranslatedComponent from "@adios/TranslatedComponent";
-import ModalForm from "@adios/ModalForm";
+import TranslatedComponent from "@hubleto/ui/core/TranslatedComponent";
+import ModalForm from "@hubleto/ui/core/ModalForm";
 import FormPanel from "./FormPanel";
 
 export interface Panel {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
 import { Field, QueryBuilder, RuleGroupType, formatQuery, defaultOperators } from 'react-querybuilder';
 
 import 'react-querybuilder/dist/query-builder.css';

@@ -110,7 +110,7 @@ class Deal extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Framework\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {
@@ -205,7 +205,7 @@ class Deal extends \Hubleto\Framework\Models\Model
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
     if (isset($savedRecord["TAGS"])) {
-      $helper = new Helper($this->main, $this->app);
+      $helper = new Helper($this->main);
       $helper->deleteTags(
         array_column($savedRecord["TAGS"], "id"),
         "HubletoApp/Community/Deals/Models/DealTag",

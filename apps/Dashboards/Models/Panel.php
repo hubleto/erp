@@ -43,7 +43,7 @@ class Panel extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Framework\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {

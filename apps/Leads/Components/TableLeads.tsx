@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/core/Components/HubletoTable';
+import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/ui/ext/HubletoTable';
 import FormLead, { FormLeadProps } from './FormLead';
-import ModalSimple from "@adios/ModalSimple";
-import request from '@adios/Request';
+import ModalSimple from "@hubleto/ui/core/ModalSimple";
+import request from '@hubleto/ui/core/Request';
 
 export interface TableLeadsProps extends HubletoTableProps {
   idCustomer?: number,

@@ -90,7 +90,7 @@ class Controller extends \Hubleto\Framework\Controller
 
     $this->main->hooks->run('controller:prepare-view-start', [$this]);
 
-    $logFolder = $this->app->config->getAsString('logFolder');
+    $logFolder = $this->main->config->getAsString('logFolder');
 
     if ($this->main->auth->isUserInSession()) {
       $user = $this->main->auth->getUserFromSession();

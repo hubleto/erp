@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import 'primereact/resources/themes/lara-light-teal/theme.css';
 
-import { ADIOS } from "@adios/Loader";
-import request from "@adios/Request";
+import { ADIOS } from "@hubleto/ui/core/Loader";
+import request from "@hubleto/ui/core/Request";
 
 // ADIOS
-// import Table from "@adios/Table";
-import Modal from "@adios/ModalSimple";
-import InputVarchar from "@adios/Inputs/Varchar";
-import InputInt from "@adios/Inputs/Int";
-import InputLookup from "@adios/Inputs/Lookup";
-import InputImage from "@adios/Inputs/Image";
-import InputBoolean from "@adios/Inputs/Boolean";
-import InputColor from "@adios/Inputs/Color";
-import InputHyperlink from "@adios/Inputs/Hyperlink";
+// import Table from "@hubleto/ui/core/Table";
+import Modal from "@hubleto/ui/core/ModalSimple";
+import InputVarchar from "@hubleto/ui/core/Inputs/Varchar";
+import InputInt from "@hubleto/ui/core/Inputs/Int";
+import InputLookup from "@hubleto/ui/core/Inputs/Lookup";
+import InputImage from "@hubleto/ui/core/Inputs/Image";
+import InputBoolean from "@hubleto/ui/core/Inputs/Boolean";
+import InputColor from "@hubleto/ui/core/Inputs/Color";
+import InputHyperlink from "@hubleto/ui/core/Inputs/Hyperlink";
 
-import TableCellRendererHyperlink from "@adios/TableCellRenderers/Hyperlink";
+import TableCellRendererHyperlink from "@hubleto/ui/core/TableCellRenderers/Hyperlink";
 
 // Hubleto
-import HubletoForm from "@hubleto/core/Components/HubletoForm";
-import HubletoTable from "@hubleto/core/Components/HubletoTable";
-import HubletoChart from "@hubleto/core/Components/HubletoChart";
-import HubletoTableColumnCustomize from "@hubleto/core/Components/HubletoTableColumnsCustomize";
+import HubletoForm from "@hubleto/ui/ext/HubletoForm";
+import HubletoTable from "@hubleto/ui/ext/HubletoTable";
+import HubletoChart from "@hubleto/ui/ext/HubletoChart";
+import HubletoTableColumnCustomize from "@hubleto/ui/ext/HubletoTableColumnsCustomize";
 
 // Primereact
 import { Tooltip } from "primereact/tooltip";

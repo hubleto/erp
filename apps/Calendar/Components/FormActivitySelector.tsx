@@ -1,5 +1,5 @@
-import ModalForm from '@adios/ModalForm';
-import TranslatedComponent from '@adios/TranslatedComponent';
+import ModalForm from '@hubleto/ui/core/ModalForm';
+import TranslatedComponent from '@hubleto/ui/core/TranslatedComponent';
 import moment from 'moment';
 import React, { Component } from 'react';
 

@@ -15,7 +15,7 @@ class Document extends \Hubleto\Framework\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Legacy\Core\Helper::generateUuidV4()),
+      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
       'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setDefaultValue($this->main->urlParamAsInteger('idFolder')),
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired(),
       'file' => (new File($this, $this->translate('File'))),
@@ -38,7 +38,7 @@ class Document extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeInput(string $columnName): \Hubleto\Legacy\Core\Description\Input
+  public function describeInput(string $columnName): \Hubleto\Framework\Description\Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {

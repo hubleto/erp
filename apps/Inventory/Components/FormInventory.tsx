@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
-import Table, { TableProps, TableState } from '@adios/Table';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
+import Table, { TableProps, TableState } from '@hubleto/ui/core/Table';
 
 interface FormInventoryProps extends HubletoFormProps { }
 interface FormInventoryState extends HubletoFormState { }

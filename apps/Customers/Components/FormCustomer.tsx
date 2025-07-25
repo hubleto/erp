@@ -1,19 +1,19 @@
 import React, { Component, ChangeEvent } from "react";
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
-import InputTags2 from "@adios/Inputs/Tags2";
-import FormInput from "@adios/FormInput";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
+import InputTags2 from "@hubleto/ui/core/Inputs/Tags2";
+import FormInput from "@hubleto/ui/core/FormInput";
 import TableContacts from "../../Contacts/Components/TableContacts";
 import { TabPanel, TabView } from "primereact/tabview";
 import CustomerFormActivity, {CustomerFormActivityProps, CustomerFormActivityState} from "./CustomerFormActivity";
-import ModalForm from "@adios/ModalForm";
+import ModalForm from "@hubleto/ui/core/ModalForm";
 import { FormDealState } from "../../Deals/Components/FormDeal";
 import TableCustomerDocuments from "./TableCustomerDocuments";
 import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
 import FormContact, {FormContactProps, FormContactState} from "../../Contacts/Components/FormContact";
 import Calendar from '../../Calendar/Components/Calendar'
-import Hyperlink from "@adios/Inputs/Hyperlink";
-import request from "@adios/Request";
-import { FormProps, FormState } from "@adios/Form";
+import Hyperlink from "@hubleto/ui/core/Inputs/Hyperlink";
+import request from "@hubleto/ui/core/Request";
+import { FormProps, FormState } from "@hubleto/ui/core/Form";
 import moment from "moment";
 
 export interface FormCustomerProps extends HubletoFormProps {

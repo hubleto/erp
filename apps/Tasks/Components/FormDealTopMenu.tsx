@@ -1,9 +1,9 @@
 import React, { Component, createRef } from 'react';
 import FormDeal, { FormDealProps, FormDealState } from '@hubleto/apps/Deals/Components/FormDeal'
-import TranslatedComponent from "@adios/TranslatedComponent";
-import request from '@adios/Request';
+import TranslatedComponent from "@hubleto/ui/core/TranslatedComponent";
+import request from '@hubleto/ui/core/Request';
 import TableTasks from './TableTasks';
-import ModalSimple from "@adios/ModalSimple";
+import ModalSimple from "@hubleto/ui/core/ModalSimple";
 
 interface P {
   form: FormDeal<FormDealProps, FormDealState>

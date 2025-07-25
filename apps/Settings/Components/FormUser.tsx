@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { deepObjectMerge } from "@adios/Helper";
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
-import Table, { TableProps, TableState } from '@adios/Table';
-import request from '@adios/Request';
+import { deepObjectMerge } from "@hubleto/ui/core/Helper";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
+import Table, { TableProps, TableState } from '@hubleto/ui/core/Table';
+import request from '@hubleto/ui/core/Request';
 
 interface FormUserProps extends HubletoFormProps { }
 interface FormUserState extends HubletoFormState {

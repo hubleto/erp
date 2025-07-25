@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/core/Components/HubletoTable';
+import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/ui/ext/HubletoTable';
 import FormDeal, { FormDealProps } from './FormDeal';
-import request from '@adios/Request';
+import request from '@hubleto/ui/core/Request';
 
 interface TableDealsProps extends HubletoTableProps {
   idCustomer?: number,

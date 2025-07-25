@@ -6,7 +6,7 @@ class CronManager
 {
   public \Hubleto\Framework\Loader $main;
 
-  /** @var array<\Hubleto\Framework\Cron> */
+  /** @var array<\HubletoMain\Cron> */
   protected array $crons = [];
 
   public function __construct(\Hubleto\Framework\Loader $main)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
 import moment from 'moment';
 
 export interface FormSharedCalendarProps extends HubletoFormProps {

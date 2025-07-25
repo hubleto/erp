@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FormInput from '@adios/FormInput';
-import Lookup from '@adios/Inputs/Lookup';
+import FormInput from '@hubleto/ui/core/FormInput';
+import Lookup from '@hubleto/ui/core/Inputs/Lookup';
 import FormActivity, { FormActivityProps, FormActivityState } from '@hubleto/apps/Calendar/Components/FormActivity'
 
 export interface CustomerFormActivityProps extends FormActivityProps {

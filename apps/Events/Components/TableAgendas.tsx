@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/core/Components/HubletoTable';
+import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/ui/ext/HubletoTable';
 import FormAgenda from './FormAgenda';
 
 interface TableAgendasProps extends HubletoTableProps {

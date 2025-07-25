@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
 
 interface FormActivityProps extends HubletoFormProps { }
 interface FormActivityState extends HubletoFormState { }

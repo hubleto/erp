@@ -287,7 +287,7 @@ class AppManager
     $tplVars = [
       'appNamespace' => $appNamespace,
       'appName' => $appName,
-      'appRootUrlSlug' => \Hubleto\Legacy\Core\Helper::str2url($appName),
+      'appRootUrlSlug' => \Hubleto\Framework\Helper::str2url($appName),
       'appViewNamespace' => str_replace('\\', ':', $appNamespace),
       'appNamespaceForwardSlash' => str_replace('\\', '/', $appNamespace),
       'now' => date('Y-m-d H:i:s'),

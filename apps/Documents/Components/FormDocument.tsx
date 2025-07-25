@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/core/Components/HubletoForm';
-import { getUrlParam } from '@adios/Helper';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
+import { getUrlParam } from '@hubleto/ui/core/Helper';
 
 export interface FormDocumentProps extends HubletoFormProps {}
 export interface FormDocumentState extends HubletoFormState {}

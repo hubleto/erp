@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Reports\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Text;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
 class Report extends \Hubleto\Framework\Models\Model
@@ -22,7 +22,7 @@ class Report extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Report';
@@ -47,14 +47,14 @@ class Report extends \Hubleto\Framework\Models\Model
           ];
 
           if (
-            $column instanceof \Hubleto\Legacy\Core\Db\Column\Decimal
-            || $column instanceof \Hubleto\Legacy\Core\Db\Column\Integer
+            $column instanceof \Hubleto\Framework\Db\Column\Decimal
+            || $column instanceof \Hubleto\Framework\Db\Column\Integer
           ) {
             $field['inputType'] = 'number';
           }
 
           if (
-            $column instanceof \Hubleto\Legacy\Core\Db\Column\Boolean
+            $column instanceof \Hubleto\Framework\Db\Column\Boolean
           ) {
             $field['valueEditorType'] = 'checkbox';
           }

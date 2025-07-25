@@ -2,7 +2,7 @@
 
 namespace Hubleto\Framework\Api;
 
-class GetAppsInfo extends \Hubleto\Framework\Controllers\ApiController
+class GetAppsInfo extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): array
   {

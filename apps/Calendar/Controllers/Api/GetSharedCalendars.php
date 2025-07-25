@@ -2,10 +2,9 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Api;
 
-use Hubleto\Legacy\Core\Controller;
 use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
-class GetSharedCalendars extends \Hubleto\Framework\Controllers\ApiController
+class GetSharedCalendars extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

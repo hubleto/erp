@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Contacts\Models\Contact;
 
 class DealActivity extends \HubletoApp\Community\Calendar\Models\Activity

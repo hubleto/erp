@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Controllers\Test;
 
-class ClearCredit extends \Hubleto\Framework\Controllers\Controller
+class ClearCredit extends \HubletoMain\Controller
 {
   public function prepareView(): void
   {

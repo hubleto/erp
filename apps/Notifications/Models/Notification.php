@@ -2,13 +2,13 @@
 
 namespace HubletoApp\Community\Notifications\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Integer;
-use Hubleto\Legacy\Core\Db\Column\Text;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\Color;
-use Hubleto\Legacy\Core\Db\Column\DateTime;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Json;
+use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Color;
+use Hubleto\Framework\Db\Column\DateTime;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Json;
 use HubletoApp\Community\Settings\Models\User;
 
 class Notification extends \Hubleto\Framework\Models\Model
@@ -58,7 +58,7 @@ class Notification extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $folder = $this->main->urlParamAsString('folder');
 
@@ -91,7 +91,7 @@ class Notification extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
+  public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();
 

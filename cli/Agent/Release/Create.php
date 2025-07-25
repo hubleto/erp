@@ -33,12 +33,12 @@ class Create extends \HubletoMain\Cli\Agent\Command
 
     $hubletoRootFolder = realpath(__DIR__ . '/../../../..');
 
-    $this->cli->red("\n");
-    $this->cli->red("!!! WARNING !!! Script does not support symbolic links. Check your composer libraries ('vendor' folder).\n");
-    $this->cli->red("\n");
+    \Hubleto\Terminal::red("\n");
+    \Hubleto\Terminal::red("!!! WARNING !!! Script does not support symbolic links. Check your composer libraries ('vendor' folder).\n");
+    \Hubleto\Terminal::red("\n");
 
     $zipFilePath = pathinfo(get_included_files()[0], PATHINFO_DIRNAME) . '/hubleto-' . $this->main->release->getVersion() . '-ce.zip';
-    $zipFilePath = $this->cli->read('Full path to .zip file (File will be overwritten !!!)', $zipFilePath);
+    $zipFilePath = \Hubleto\Terminal::read('Full path to .zip file (File will be overwritten !!!)', $zipFilePath);
 
     $zip = new \ZipArchive();
     $zip->open($zipFilePath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);

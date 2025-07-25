@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Color;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Color;
+use Hubleto\Framework\Db\Column\Varchar;
 
 class Level extends \Hubleto\Framework\Models\Model
 {
@@ -19,7 +19,7 @@ class Level extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 
@@ -32,7 +32,7 @@ class Level extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
+  public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();
 

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Controllers;
 
-class ActivateSubscriptionRenewal extends \Hubleto\Framework\Controllers\Controller
+class ActivateSubscriptionRenewal extends \HubletoMain\Controller
 {
   public function prepareView(): void
   {

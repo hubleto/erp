@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Contacts\Controllers;
 
-class Import extends \Hubleto\Framework\Controllers\Controller
+class Import extends \HubletoMain\Controller
 {
   public function getBreadcrumbs(): array
   {

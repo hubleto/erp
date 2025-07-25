@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Boolean;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\Framework\Db\Column\Varchar;
 
 class UserRole extends \Hubleto\Framework\Models\Model
 {
@@ -41,7 +41,7 @@ class UserRole extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 

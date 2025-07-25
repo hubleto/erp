@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Inventory\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Varchar;
 
 class Status extends \Hubleto\Framework\Models\Model
 {

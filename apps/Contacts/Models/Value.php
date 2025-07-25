@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Contacts\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Varchar;
 
 class Value extends \Hubleto\Framework\Models\Model
 {
@@ -34,7 +34,7 @@ class Value extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = $this->translate('Contacts');

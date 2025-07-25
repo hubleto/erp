@@ -18,7 +18,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $this->main->permissions->DANGEROUS__grantAllPermissions();
 
-    $this->cli->cyan("Generating demo data...\n");
+    \Hubleto\Terminal::cyan("Generating demo data...\n");
 
     $mCompany = $this->main->di->create(\HubletoApp\Community\Settings\Models\Company::class);
     $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
@@ -178,7 +178,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $this->main->apps->getAppInstance($appNamespace)->generateDemoData();
     }
 
-    $this->cli->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
+    \Hubleto\Terminal::cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 
     $this->main->permissions->revokeGrantAllPermissions();
   }

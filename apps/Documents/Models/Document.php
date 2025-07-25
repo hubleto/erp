@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Documents\Models;
 
-use Hubleto\Legacy\Core\Db\Column\File;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\File;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Lookup;
 
 class Document extends \Hubleto\Framework\Models\Model
 {
@@ -24,7 +24,7 @@ class Document extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = ''; // 'Documents';

@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\Framework\Controllers;
+namespace HubletoMain\Controllers;
 
-class ControllerSignIn extends Controller
+class ControllerSignIn extends \HubletoMain\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;

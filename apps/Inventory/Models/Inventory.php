@@ -5,10 +5,10 @@ namespace HubletoApp\Community\Inventory\Models;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Warehouses\Models\Location;
 use HubletoApp\Community\Products\Models\Product;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Decimal;
-use Hubleto\Legacy\Core\Db\Column\DateTime;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\Framework\Db\Column\DateTime;
 
 // This is a crucial table that links products to their specific locations and quantities.
 // This is crucial for tracking what items are where.

@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Dashboards\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\Json;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Json;
 
 class Panel extends \Hubleto\Framework\Models\Model
 {
@@ -27,7 +27,7 @@ class Panel extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 

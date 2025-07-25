@@ -26,7 +26,7 @@ class RenderInvalidRoutes extends \Hubleto\Framework\AppTest
     }
 
     foreach ($routes as $route) {
-      $this->cli->cyan("Rendering route [{$route}].\n");
+      \Hubleto\Terminal::cyan("Rendering route [{$route}].\n");
       $this->main->render($route);
     }
   }

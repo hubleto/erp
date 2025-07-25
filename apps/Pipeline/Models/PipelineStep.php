@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Pipeline\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Color;
-use Hubleto\Legacy\Core\Db\Column\Integer;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Color;
+use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Deals\Models\Deal;
 
 class PipelineStep extends \Hubleto\Framework\Models\Model
@@ -31,7 +31,7 @@ class PipelineStep extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 

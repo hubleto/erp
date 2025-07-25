@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Worksheets\Controllers\Api;
 
 use Illuminate\Database\Capsule\Manager as DB;
 
-class DailyActivityChart extends \Hubleto\Framework\Controllers\ApiController
+class DailyActivityChart extends \HubletoMain\Controllers\ApiController
 {
   public function response(): array
   {

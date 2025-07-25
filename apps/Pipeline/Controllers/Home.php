@@ -8,7 +8,7 @@ use HubletoApp\Community\Settings\Models\Currency;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Settings\Models\Setting;
 
-class Home extends \Hubleto\Framework\Controllers\Controller
+class Home extends \HubletoMain\Controller
 {
   public function getBreadcrumbs(): array
   {

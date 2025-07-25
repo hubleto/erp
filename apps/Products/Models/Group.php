@@ -12,11 +12,11 @@ class Group extends \Hubleto\Framework\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      "title" => (new \Hubleto\Legacy\Core\Db\Column\Varchar($this, $this->translate("Title")))->setRequired()
+      "title" => (new \Hubleto\Framework\Db\Column\Varchar($this, $this->translate("Title")))->setRequired()
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 

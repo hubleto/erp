@@ -3,14 +3,14 @@
 namespace HubletoApp\Community\Products\Models;
 
 use HubletoApp\Community\Suppliers\Models\Supplier;
-use Hubleto\Legacy\Core\Db\Column\Boolean;
-use Hubleto\Legacy\Core\Db\Column\Date;
-use Hubleto\Legacy\Core\Db\Column\Decimal;
-use Hubleto\Legacy\Core\Db\Column\Image;
-use Hubleto\Legacy\Core\Db\Column\Integer;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Text;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\Framework\Db\Column\Image;
+use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Varchar;
 
 class Product extends \Hubleto\Framework\Models\Model
 {
@@ -54,7 +54,7 @@ class Product extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 

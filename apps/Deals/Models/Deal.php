@@ -2,14 +2,14 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Boolean;
-use Hubleto\Legacy\Core\Db\Column\Date;
-use Hubleto\Legacy\Core\Db\Column\DateTime;
-use Hubleto\Legacy\Core\Db\Column\Decimal;
-use Hubleto\Legacy\Core\Db\Column\Integer;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Text;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\DateTime;
+use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Leads\Models\Lead;
@@ -124,7 +124,7 @@ class Deal extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsBool("showArchive")) {
@@ -165,7 +165,7 @@ class Deal extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
+  public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $mSettings = $this->main->di->create(Setting::class);
     $defaultCurrency = (int) $mSettings->record

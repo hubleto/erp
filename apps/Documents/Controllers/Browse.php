@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Documents\Controllers;
 
-class Browse extends \Hubleto\Framework\Controllers\Controller
+class Browse extends \HubletoMain\Controller
 {
   public function getBreadcrumbs(): array
   {

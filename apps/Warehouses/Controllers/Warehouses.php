@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Warehouses\Controllers;
 
-class Warehouses extends \Hubleto\Framework\Controllers\Controller
+class Warehouses extends \HubletoMain\Controller
 {
   public function prepareView(): void
   {

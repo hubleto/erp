@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\Framework\Controllers;
+namespace HubletoMain\Controllers;
 
-class ControllerForgotPassword extends \Hubleto\Legacy\Core\Controller
+class ControllerForgotPassword extends \HubletoMain\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;

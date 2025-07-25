@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Leads\Controllers\Boards;
 
 use HubletoApp\Community\Leads\Models\Lead;
 
-class LeadWarnings extends \Hubleto\Framework\Controllers\Controller
+class LeadWarnings extends \HubletoMain\Controller
 {
   public bool $hideDefaultDesktop = true;
 

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\CalendarSync\Controllers;
 
-class Home extends \Hubleto\Framework\Controllers\Controller
+class Home extends \HubletoMain\Controller
 {
   public function prepareView(): void
   {

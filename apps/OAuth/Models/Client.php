@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\OAuth\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\VarcBooleanhar;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\VarcBooleanhar;
 
 class Client extends \Hubleto\Framework\Models\Model
 {
@@ -21,7 +21,7 @@ class Client extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Client';

@@ -39,8 +39,8 @@ class View extends \HubletoMain\Cli\Agent\Command
     }
     file_put_contents($rootFolder . '/Views/' . $view . '.twig', $this->main->twig->render('@snippets/View.twig.twig'));
 
-    $this->cli->cyan("View '{$view}' in '{$appNamespace}' created successfully.\n");
-    $this->cli->yellow("💡 TIP: Visit https://developer.hubleto.com/tutorial/add-route-controller-and-view on how to add routes for your controller and view.\n");
+    \Hubleto\Terminal::cyan("View '{$view}' in '{$appNamespace}' created successfully.\n");
+    \Hubleto\Terminal::yellow("💡 TIP: Visit https://developer.hubleto.com/tutorial/add-route-controller-and-view on how to add routes for your controller and view.\n");
   }
 
 }

@@ -5,7 +5,6 @@ namespace HubletoMain;
 class AppManager
 {
   public \Hubleto\Framework\Loader $main;
-  public \HubletoMain\Cli\Agent\Loader|null $cli;
   public \Hubleto\Framework\App $activatedApp;
 
   /** @var array<\Hubleto\Framework\App> */
@@ -20,7 +19,6 @@ class AppManager
   public function __construct(\Hubleto\Framework\Loader $main)
   {
     $this->main = $main;
-    $this->cli = null;
   }
 
   public function init(): void
@@ -62,11 +60,6 @@ class AppManager
   {
     $apps = $this->getEnabledApps();
     array_walk($apps, function ($app) { $app->onBeforeRender(); });
-  }
-
-  public function setCli(\HubletoMain\Cli\Agent\Loader $cli): void
-  {
-    $this->cli = $cli;
   }
 
   public function getAppNamespaceForConfig(string $appNamespace): string
@@ -136,9 +129,6 @@ class AppManager
   {
     $appClass = $appNamespace . '\Loader';
     $app = new $appClass($this->main);
-    if ($this->cli) {
-      $app->setCli($this->cli);
-    } // @phpstan-ignore-line
     return $app; // @phpstan-ignore-line
   }
 
@@ -210,9 +200,7 @@ class AppManager
       $appNamespace = substr($appNamespace, 0, -7);
     }
 
-    if ($this->cli) {
-      $this->cli->cyan("    -> Installing {$appNamespace}, round {$round}.\n");
-    }
+    \Hubleto\Terminal::cyan("    -> Installing {$appNamespace}, round {$round}.\n");
 
     if ($this->isAppInstalled($appNamespace) && !$forceInstall) {
       throw new \Exception("{$appNamespace} already installed. Set forceInstall to true if you want to reinstall.");
@@ -234,9 +222,7 @@ class AppManager
     foreach ($dependencies as $dependencyAppNamespace) {
       $dependencyAppNamespace = (string) $dependencyAppNamespace;
       if (!$this->isAppInstalled($dependencyAppNamespace)) {
-        if ($this->cli) {
-          $this->cli->cyan("    -> Installing dependency {$dependencyAppNamespace}.\n");
-        }
+        \Hubleto\Terminal::cyan("    -> Installing dependency {$dependencyAppNamespace}.\n");
         $this->installApp($round, $dependencyAppNamespace, [], $forceInstall);
       }
     }

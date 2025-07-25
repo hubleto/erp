@@ -6,7 +6,7 @@ use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Contacts\Models\ContactTag;
 use HubletoApp\Community\Contacts\Models\Tag;
 
-class CheckPrimaryContact extends \Hubleto\Framework\Controllers\ApiController
+class CheckPrimaryContact extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

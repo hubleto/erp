@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\CalendarSync\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Boolean;
-use Hubleto\Legacy\Core\Db\Column\Color;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\Framework\Db\Column\Color;
+use Hubleto\Framework\Db\Column\Varchar;
 
 class Source extends \Hubleto\Framework\Models\Model
 {

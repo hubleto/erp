@@ -197,7 +197,7 @@ class Installer
   public function installBaseModels(): void
   {
     (new \Hubleto\Framework\Models\Token($this->main))->install();
-    (new \Hubleto\Legacy\Models\Config($this->main))->install();
+    (new \Hubleto\Framework\Models\Config($this->main))->install();
   }
 
   public function installApps(int $round): void

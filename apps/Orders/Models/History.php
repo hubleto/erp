@@ -15,10 +15,10 @@ class History extends \Hubleto\Framework\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_order' => (new \Hubleto\Legacy\Core\Db\Column\Lookup($this, $this->translate("Order"), Order::class))->setRequired()->setReadonly(),
-      'short_description' => (new \Hubleto\Legacy\Core\Db\Column\Varchar($this, $this->translate("Short Description")))->setReadonly(),
-      'long_description' => (new \Hubleto\Legacy\Core\Db\Column\Text($this, $this->translate("Long Description")))->setReadonly(),
-      'date_time' => (new \Hubleto\Legacy\Core\Db\Column\DateTime($this, $this->translate("Date Time")))->setRequired()->setReadonly(),
+      'id_order' => (new \Hubleto\Framework\Db\Column\Lookup($this, $this->translate("Order"), Order::class))->setRequired()->setReadonly(),
+      'short_description' => (new \Hubleto\Framework\Db\Column\Varchar($this, $this->translate("Short Description")))->setReadonly(),
+      'long_description' => (new \Hubleto\Framework\Db\Column\Text($this, $this->translate("Long Description")))->setReadonly(),
+      'date_time' => (new \Hubleto\Framework\Db\Column\DateTime($this, $this->translate("Date Time")))->setRequired()->setReadonly(),
     ]);
   }
 }

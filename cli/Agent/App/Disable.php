@@ -9,6 +9,6 @@ class Disable extends \HubletoMain\Cli\Agent\Command
     $appNamespace = (string) ($this->arguments[3] ?? '');
 
     $this->main->apps->disableApp($appNamespace);
-    $this->cli->cyan("{$appNamespace} disabled successfully.\n");
+    \Hubleto\Terminal::cyan("{$appNamespace} disabled successfully.\n");
   }
 }

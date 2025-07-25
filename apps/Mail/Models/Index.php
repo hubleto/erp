@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Mail\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Settings\Models\User;
 
 class Index extends \Hubleto\Framework\Models\Model

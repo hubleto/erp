@@ -3,12 +3,12 @@
 namespace HubletoApp\Community\Warehouses\Models;
 
 use HubletoApp\Community\Settings\Models\User;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Decimal;
-use Hubleto\Legacy\Core\Db\Column\Image;
-use Hubleto\Legacy\Core\Db\Column\Integer;
-use Hubleto\Legacy\Core\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\Framework\Db\Column\Image;
+use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Text;
 
 class Warehouse extends \Hubleto\Framework\Models\Model
 {
@@ -65,7 +65,7 @@ class Warehouse extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add warehouse';

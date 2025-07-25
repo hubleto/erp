@@ -2,7 +2,7 @@
 
 namespace Hubleto\Framework\Api;
 
-class LogJavascriptError extends \Hubleto\Framework\Controllers\ApiController
+class LogJavascriptError extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): array
   {

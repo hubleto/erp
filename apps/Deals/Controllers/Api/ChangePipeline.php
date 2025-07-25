@@ -6,7 +6,7 @@ use Exception;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
-class ChangePipeline extends \Hubleto\Framework\Controllers\ApiController
+class ChangePipeline extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

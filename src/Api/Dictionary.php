@@ -4,7 +4,7 @@ namespace Hubleto\Framework\Api;
 
 use Hubleto\Legacy\Core\Helper;
 
-class Dictionary extends \Hubleto\Framework\Controllers\ApiController
+class Dictionary extends \HubletoMain\Controllers\ApiController
 {
   public \Hubleto\Framework\Loader $main;
 

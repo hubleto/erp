@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Controllers;
 
-class Levels extends \Hubleto\Framework\Controllers\Controller
+class Levels extends \HubletoMain\Controller
 {
   public function prepareView(): void
   {

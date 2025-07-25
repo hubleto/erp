@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Date;
-use Hubleto\Legacy\Core\Db\Column\Decimal;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Text;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Customers\Models\Customer;
 use HubletoApp\Community\Products\Models\Product;
 use HubletoApp\Community\Settings\Models\Currency;
@@ -41,7 +41,7 @@ class Order extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 
@@ -54,7 +54,7 @@ class Order extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
+  public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $mSettings = $this->main->di->create(Setting::class);
     $defaultCurrency = (int) $mSettings->record

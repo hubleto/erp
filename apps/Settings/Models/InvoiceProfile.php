@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Varchar;
 
 class InvoiceProfile extends \Hubleto\Framework\Models\Model
 {
@@ -33,7 +33,7 @@ class InvoiceProfile extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 
@@ -56,7 +56,7 @@ class InvoiceProfile extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
+  public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();
 

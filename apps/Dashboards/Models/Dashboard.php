@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Dashboards\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Text;
-use Hubleto\Legacy\Core\Db\Column\Boolean;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\Color;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Color;
+use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Settings\Models\User;
 
 class Dashboard extends \Hubleto\Framework\Models\Model
@@ -31,7 +31,7 @@ class Dashboard extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 

@@ -137,72 +137,72 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
 
     if ($rewriteBase === null) {
-      $rewriteBase = $this->cli->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
+      $rewriteBase = \Hubleto\Terminal::choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
     }
     if ($rootFolder === null) {
       $rootFolder = $this->main->config->getAsString('rootFolder');
     }
     if ($rootUrl === null) {
-      $rootUrl = $this->cli->read('ConfigEnv.rootUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
+      $rootUrl = \Hubleto\Terminal::read('ConfigEnv.rootUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
     }
     if ($srcFolder === null) {
       $srcFolder = realpath(__DIR__ . '/../../..');
     }
     if ($srcUrl === null) {
-      $srcUrl = $this->cli->read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/main');
+      $srcUrl = \Hubleto\Terminal::read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/main');
     }
     if ($dbHost === null) {
-      $dbHost = $this->cli->read('ConfigEnv.dbHost', 'localhost');
+      $dbHost = \Hubleto\Terminal::read('ConfigEnv.dbHost', 'localhost');
     }
     if ($dbUser === null) {
-      $dbUser = $this->cli->read('ConfigEnv.dbUser (user must exist)', 'root');
+      $dbUser = \Hubleto\Terminal::read('ConfigEnv.dbUser (user must exist)', 'root');
     }
     if ($dbPassword === null) {
-      $dbPassword = $this->cli->read('ConfigEnv.dbPassword');
+      $dbPassword = \Hubleto\Terminal::read('ConfigEnv.dbPassword');
     }
     if ($dbName === null) {
-      $dbName = $this->cli->read('ConfigEnv.dbName (database will be created, if it not exists)', 'my_hubleto');
+      $dbName = \Hubleto\Terminal::read('ConfigEnv.dbName (database will be created, if it not exists)', 'my_hubleto');
     }
     if ($dbCodepage === null) {
-      $dbCodepage = $this->cli->read('ConfigEnv.dbCodepage', 'utf8mb4');
+      $dbCodepage = \Hubleto\Terminal::read('ConfigEnv.dbCodepage', 'utf8mb4');
     }
     if ($accountFullName === null) {
-      $accountFullName = $this->cli->read('Account.accountFullName', 'My Company');
+      $accountFullName = \Hubleto\Terminal::read('Account.accountFullName', 'My Company');
     }
     if ($adminName === null) {
-      $adminName = $this->cli->read('Account.adminName', 'John');
+      $adminName = \Hubleto\Terminal::read('Account.adminName', 'John');
     }
     if ($adminFamilyName === null) {
-      $adminFamilyName = $this->cli->read('Account.adminFamilyName', 'Smith');
+      $adminFamilyName = \Hubleto\Terminal::read('Account.adminFamilyName', 'Smith');
     }
     if ($adminNick === null) {
-      $adminNick = $this->cli->read('Account.adminNick', 'johny');
+      $adminNick = \Hubleto\Terminal::read('Account.adminNick', 'johny');
     }
     if ($adminEmail === null) {
-      $adminEmail = $this->cli->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
+      $adminEmail = \Hubleto\Terminal::read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
     }
     if ($adminPassword === null) {
-      $adminPassword = $this->cli->read('Account.adminPassword (leave empty to generate random password)');
+      $adminPassword = \Hubleto\Terminal::read('Account.adminPassword (leave empty to generate random password)');
     }
 
-    if ($this->cli->isLaunchedFromTerminal()) {
+    if (\Hubleto\Terminal::isLaunchedFromTerminal()) {
       $confirm = '';
       if (isset($config['confirm'])) {
         $confirm = $config['confirm'];
       }
       while ($confirm != 'yes') {
-        $confirm = $this->cli->read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel');
+        $confirm = \Hubleto\Terminal::read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel');
         if ($confirm == 'exit') {
           exit;
         }
       }
     }
 
-    //    if ($smtpHost === null) $smtpHost = $this->cli->read('ConfigEnv.smtpHost');
-    //    if ($smtpHost != null && $smtpPort === null) $smtpPort = $this->cli->read('ConfigEnv.smtpPort');
-    //    if ($smtpHost != null && $smtpEncryption === null) $smtpEncryption = $this->cli->choose(['ssl', 'tls'], 'ConfigEnv.smtpEncryption', 'ssl');
-    //    if ($smtpHost != null && $smtpLogin === null) $smtpLogin = $this->cli->read('ConfigEnv.smtpLogin');
-    //    if ($smtpHost != null && $smtpPassword === null) $smtpPassword = $this->cli->read('ConfigEnv.smtpPassword');
+    //    if ($smtpHost === null) $smtpHost = \Hubleto\Terminal::read('ConfigEnv.smtpHost');
+    //    if ($smtpHost != null && $smtpPort === null) $smtpPort = \Hubleto\Terminal::read('ConfigEnv.smtpPort');
+    //    if ($smtpHost != null && $smtpEncryption === null) $smtpEncryption = \Hubleto\Terminal::choose(['ssl', 'tls'], 'ConfigEnv.smtpEncryption', 'ssl');
+    //    if ($smtpHost != null && $smtpLogin === null) $smtpLogin = \Hubleto\Terminal::read('ConfigEnv.smtpLogin');
+    //    if ($smtpHost != null && $smtpPassword === null) $smtpPassword = \Hubleto\Terminal::read('ConfigEnv.smtpPassword');
 
     $errors = [];
     $errorColumns = [];
@@ -226,41 +226,41 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $adminPassword = \Hubleto\Legacy\Core\Helper::randomPassword();
     }
 
-    $this->cli->green("  ###         ###         ###   \n");
-    $this->cli->green("  ###         ###         ###   \n");
-    $this->cli->green("  ### #####   ### #####   ###   \n");
-    $this->cli->green("  ##########  ##########  ###   \n");
-    $this->cli->green("  ###    ###  ###     ### ###   \n");
-    $this->cli->green("  ###    ###  ###     ### ###   \n");
-    $this->cli->green("  ###    ###  ##### ####  ####  \n");
-    $this->cli->green("  ###    ###  ### #####    ###  \n");
-    $this->cli->cyan("\n");
-    $this->cli->green("Hubleto, Business Application Hub & opensource CRM/ERP\n");
-    $this->cli->cyan("\n");
+    \Hubleto\Terminal::green("  ###         ###         ###   \n");
+    \Hubleto\Terminal::green("  ###         ###         ###   \n");
+    \Hubleto\Terminal::green("  ### #####   ### #####   ###   \n");
+    \Hubleto\Terminal::green("  ##########  ##########  ###   \n");
+    \Hubleto\Terminal::green("  ###    ###  ###     ### ###   \n");
+    \Hubleto\Terminal::green("  ###    ###  ###     ### ###   \n");
+    \Hubleto\Terminal::green("  ###    ###  ##### ####  ####  \n");
+    \Hubleto\Terminal::green("  ###    ###  ### #####    ###  \n");
+    \Hubleto\Terminal::cyan("\n");
+    \Hubleto\Terminal::green("Hubleto, Business Application Hub & opensource CRM/ERP\n");
+    \Hubleto\Terminal::cyan("\n");
 
     if (sizeof($errors) > 0) {
-      $this->cli->red("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
-      $this->cli->red(join("\n", $errors));
-      $this->cli->white("\n");
+      \Hubleto\Terminal::red("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
+      \Hubleto\Terminal::red(join("\n", $errors));
+      \Hubleto\Terminal::white("\n");
       throw new \ErrorException("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
     }
 
-    $this->cli->cyan("Initializing with following config:\n");
-    $this->cli->cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
-    $this->cli->cyan('  -> rootFolder = ' . (string) $rootFolder . "\n");
-    $this->cli->cyan('  -> rootUrl = ' . (string) $rootUrl . "\n");
-    $this->cli->cyan('  -> dbHost = ' . (string) $dbHost . "\n");
-    $this->cli->cyan('  -> dbUser = ' . (string) $dbUser . "\n");
-    $this->cli->cyan('  -> dbPassword = ***' . "\n");
-    $this->cli->cyan('  -> dbName = ' . (string) $dbName . "\n");
-    $this->cli->cyan('  -> dbCodepage = ' . (string) $dbCodepage . "\n");
-    $this->cli->cyan('  -> accountFullName = ' . (string) $accountFullName . "\n");
-    $this->cli->cyan('  -> adminName = ' . (string) $adminName . "\n");
-    $this->cli->cyan('  -> adminFamilyName = ' . (string) $adminFamilyName . "\n");
-    $this->cli->cyan('  -> adminNick = ' . (string) $adminNick . "\n");
-    $this->cli->cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
-    $this->cli->cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
-    $this->cli->cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
+    \Hubleto\Terminal::cyan("Initializing with following config:\n");
+    \Hubleto\Terminal::cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
+    \Hubleto\Terminal::cyan('  -> rootFolder = ' . (string) $rootFolder . "\n");
+    \Hubleto\Terminal::cyan('  -> rootUrl = ' . (string) $rootUrl . "\n");
+    \Hubleto\Terminal::cyan('  -> dbHost = ' . (string) $dbHost . "\n");
+    \Hubleto\Terminal::cyan('  -> dbUser = ' . (string) $dbUser . "\n");
+    \Hubleto\Terminal::cyan('  -> dbPassword = ***' . "\n");
+    \Hubleto\Terminal::cyan('  -> dbName = ' . (string) $dbName . "\n");
+    \Hubleto\Terminal::cyan('  -> dbCodepage = ' . (string) $dbCodepage . "\n");
+    \Hubleto\Terminal::cyan('  -> accountFullName = ' . (string) $accountFullName . "\n");
+    \Hubleto\Terminal::cyan('  -> adminName = ' . (string) $adminName . "\n");
+    \Hubleto\Terminal::cyan('  -> adminFamilyName = ' . (string) $adminFamilyName . "\n");
+    \Hubleto\Terminal::cyan('  -> adminNick = ' . (string) $adminNick . "\n");
+    \Hubleto\Terminal::cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
+    \Hubleto\Terminal::cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
+    \Hubleto\Terminal::cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
     $this->main->config->set('srcFolder', $srcFolder);
     $this->main->config->set('url', $srcUrl);
@@ -272,10 +272,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->main->config->set('db_password', $dbPassword);
     $this->main->config->set('db_name', $dbName);
 
-    $this->main->apps->setCli($this->cli);
-
-    $this->cli->cyan("\n");
-    $this->cli->cyan("Hurray. Installing your Hubleto packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
+    \Hubleto\Terminal::cyan("\n");
+    \Hubleto\Terminal::cyan("Hurray. Installing your Hubleto packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
 
     // install
     $installer = new \HubletoMain\Installer\Installer(
@@ -336,39 +334,39 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $installer->extraConfigEnv = $config['extraConfigEnv'];
     }
 
-    $this->cli->cyan("  -> Creating folders and files.\n");
+    \Hubleto\Terminal::cyan("  -> Creating folders and files.\n");
     $installer->createFoldersAndFiles();
 
-    $this->cli->cyan("  -> Creating database.\n");
+    \Hubleto\Terminal::cyan("  -> Creating database.\n");
     $installer->createDatabase();
 
     if ($smtpHost != '') {
-      $this->cli->cyan("  -> Initializing SMTP.\n");
+      \Hubleto\Terminal::cyan("  -> Initializing SMTP.\n");
       $installer->initSmtp();
     }
 
-    $this->cli->cyan("  -> Creating base tables.\n");
+    \Hubleto\Terminal::cyan("  -> Creating base tables.\n");
     $installer->installBaseModels();
 
-    $this->cli->cyan("  -> Installing apps, round #1.\n");
+    \Hubleto\Terminal::cyan("  -> Installing apps, round #1.\n");
     $installer->installApps(1);
 
-    $this->cli->cyan("  -> Installing apps, round #2.\n");
+    \Hubleto\Terminal::cyan("  -> Installing apps, round #2.\n");
     $installer->installApps(2);
 
-    $this->cli->cyan("  -> Installing apps, round #3.\n");
+    \Hubleto\Terminal::cyan("  -> Installing apps, round #3.\n");
     $installer->installApps(3);
 
-    $this->cli->cyan("  -> Adding default company and admin user.\n");
+    \Hubleto\Terminal::cyan("  -> Adding default company and admin user.\n");
     $installer->addCompanyAndAdminUser();
 
-    $this->cli->cyan("\n");
-    $this->cli->cyan("All done! You're a fantastic CRM developer.\n");
-    $this->cli->colored("cyan", "black", "Now open " . (string) $rootUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword);
-    $this->cli->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
-    $this->cli->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
-    $this->cli->cyan("\n");
-    $this->cli->cyan("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
-    $this->cli->cyan("Run: php hubleto app create HubletoApp\\Custom\\MyFirstApp");
+    \Hubleto\Terminal::cyan("\n");
+    \Hubleto\Terminal::cyan("All done! You're a fantastic CRM developer.\n");
+    \Hubleto\Terminal::colored("cyan", "black", "Now open " . (string) $rootUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword);
+    \Hubleto\Terminal::cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
+    \Hubleto\Terminal::cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
+    \Hubleto\Terminal::cyan("\n");
+    \Hubleto\Terminal::cyan("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
+    \Hubleto\Terminal::cyan("Run: php hubleto app create HubletoApp\\Custom\\MyFirstApp");
   }
 }

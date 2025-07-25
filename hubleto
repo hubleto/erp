@@ -16,11 +16,9 @@ $config['sessionSalt'] = 'hubleto-cli-agent';
 
 $main = new \HubletoMain\Loader($config);
 
-$cli = new \HubletoMain\Cli\Agent\Loader($main);
-
 // MAIN code
 
-$cli->green("Hubleto " . $main->release->getVersion() . " CLI agent.\n");
+\Hubleto\Terminal::green("Hubleto " . $main->release->getVersion() . " CLI agent.\n");
 
 $action = (string) ($argv[1] ?? '');
 
@@ -28,58 +26,58 @@ if (!empty($action)) {
   try {
     $command = null;
     switch ($action) {
-      case 'help': $command = new \HubletoMain\Cli\Agent\CommandHelp($cli, $argv); break;
-      case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($cli, $argv); break;
+      case 'help': $command = new \HubletoMain\Cli\Agent\CommandHelp($main, $argv); break;
+      case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($main, $argv); break;
       case 'release':
         switch ($argv[2]) {
-          case 'create': $command = new \HubletoMain\Cli\Agent\Release\Create($cli, $argv); break;
+          case 'create': $command = new \HubletoMain\Cli\Agent\Release\Create($main, $argv); break;
         }
       break;
       case 'app':
         switch ($argv[2]) {
-          case 'list': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($cli, $argv); break;
-          case 'install': $command = new \HubletoMain\Cli\Agent\App\Install($cli, $argv); break;
-          case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($cli, $argv); break;
-          case 'test': $command = new \HubletoMain\Cli\Agent\App\Test($cli, $argv); break;
-          case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($cli, $argv); break;
-          case 'create': $command = new \HubletoMain\Cli\Agent\App\Create($cli, $argv); break;
-          case 'add-repository': $command = new \HubletoMain\Cli\Agent\App\AddRepository($cli, $argv); break;
+          case 'list': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($main, $argv); break;
+          case 'install': $command = new \HubletoMain\Cli\Agent\App\Install($main, $argv); break;
+          case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($main, $argv); break;
+          case 'test': $command = new \HubletoMain\Cli\Agent\App\Test($main, $argv); break;
+          case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($main, $argv); break;
+          case 'create': $command = new \HubletoMain\Cli\Agent\App\Create($main, $argv); break;
+          case 'add-repository': $command = new \HubletoMain\Cli\Agent\App\AddRepository($main, $argv); break;
         }
       break;
       case 'debug':
         switch ($argv[2]) {
-          case 'test-oauth': $command = new \HubletoMain\Cli\Agent\Debug\TestOauth($cli, $argv); break;
-          case 'router': $command = new \HubletoMain\Cli\Agent\Debug\Router($cli, $argv); break;
+          case 'test-oauth': $command = new \HubletoMain\Cli\Agent\Debug\TestOauth($main, $argv); break;
+          case 'router': $command = new \HubletoMain\Cli\Agent\Debug\Router($main, $argv); break;
         }
       break;
       case 'create':
         switch ($argv[2]) {
-          case 'app': $command = new \HubletoMain\Cli\Agent\App\Create($cli, $argv); break;
-          case 'model': $command = new \HubletoMain\Cli\Agent\Create\Model($cli, $argv); break;
-          case 'controller': $command = new \HubletoMain\Cli\Agent\Create\Controller($cli, $argv); break;
-          case 'view': $command = new \HubletoMain\Cli\Agent\Create\View($cli, $argv); break;
-          case 'mvc': $command = new \HubletoMain\Cli\Agent\Create\TableFormViewAndController($cli, $argv); break;
-          case 'api': $command = new \HubletoMain\Cli\Agent\Create\ApiEndpoint($cli, $argv); break;
+          case 'app': $command = new \HubletoMain\Cli\Agent\App\Create($main, $argv); break;
+          case 'model': $command = new \HubletoMain\Cli\Agent\Create\Model($main, $argv); break;
+          case 'controller': $command = new \HubletoMain\Cli\Agent\Create\Controller($main, $argv); break;
+          case 'view': $command = new \HubletoMain\Cli\Agent\Create\View($main, $argv); break;
+          case 'mvc': $command = new \HubletoMain\Cli\Agent\Create\TableFormViewAndController($main, $argv); break;
+          case 'api': $command = new \HubletoMain\Cli\Agent\Create\ApiEndpoint($main, $argv); break;
         }
       break;
       case 'project':
         switch ($argv[2]) {
-          case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($cli, $argv); break;
-          case 'generate-demo-data': $command = new \HubletoMain\Cli\Agent\Project\GenerateDemoData($cli, $argv); break;
+          case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($main, $argv); break;
+          case 'generate-demo-data': $command = new \HubletoMain\Cli\Agent\Project\GenerateDemoData($main, $argv); break;
         }
       break;
     }
 
     if ($command === null) {
-      $cli->red("Don't know what to do.\n");
+      \Hubleto\Terminal::red("Don't know what to do.\n");
     } else {
       $command->run();
     }
   } catch (\Throwable $e) {
-    $cli->red("{$e->getMessage()}\n");
-    $cli->red($e->getTraceAsString()."\n");
+    \Hubleto\Terminal::red("{$e->getMessage()}\n");
+    \Hubleto\Terminal::red($e->getTraceAsString()."\n");
   }
 } else {
-  $cli->green("Usage: php hubleto <command>\n");
-  $cli->green("Example: php hubleto help\n");
+  \Hubleto\Terminal::green("Usage: php hubleto <command>\n");
+  \Hubleto\Terminal::green("Example: php hubleto help\n");
 }

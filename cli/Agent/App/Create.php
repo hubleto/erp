@@ -50,16 +50,16 @@ class Create extends \HubletoMain\Cli\Agent\Command
 
     $this->main->apps->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
 
-    $this->cli->cyan("App {$appNamespace} created successfully.\n");
+    \Hubleto\Terminal::cyan("App {$appNamespace} created successfully.\n");
 
-    if ($this->cli->confirm('Do you want to install the app now?')) {
+    if (\Hubleto\Terminal::confirm('Do you want to install the app now?')) {
       (new \HubletoMain\Cli\Agent\App\Install($this->cli, $this->arguments))->run();
     }
 
-    $this->cli->yellow("💡  TIPS:\n");
-    $this->cli->yellow("💡  -> Test the app in browser: {$this->main->config->getAsString('rootUrl')}/" . strtolower($appName) . "\n");
-    $this->cli->yellow("💡  -> Run command below to add your first model.\n");
-    $this->cli->colored("cyan", "black", "Run: php hubleto create model {$appNamespace} {$appName}FirstModel");
+    \Hubleto\Terminal::yellow("💡  TIPS:\n");
+    \Hubleto\Terminal::yellow("💡  -> Test the app in browser: {$this->main->config->getAsString('rootUrl')}/" . strtolower($appName) . "\n");
+    \Hubleto\Terminal::yellow("💡  -> Run command below to add your first model.\n");
+    \Hubleto\Terminal::colored("cyan", "black", "Run: php hubleto create model {$appNamespace} {$appName}FirstModel");
   }
 
   public function validateAppNamespace(string $appNamespace): void

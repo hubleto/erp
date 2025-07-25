@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\Decimal;
-use Hubleto\Legacy\Core\Db\Column\Integer;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Products\Models\Product;
 
 class OrderProduct extends \Hubleto\Framework\Models\Model
@@ -32,7 +32,7 @@ class OrderProduct extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 

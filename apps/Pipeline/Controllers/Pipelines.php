@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Pipeline\Controllers;
 
-class Pipelines extends \Hubleto\Framework\Controllers\Controller
+class Pipelines extends \HubletoMain\Controller
 {
   public function getBreadcrumbs(): array
   {

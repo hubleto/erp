@@ -4,7 +4,7 @@ namespace Hubleto\Framework\Api;
 
 use Exception;
 
-class GetTemplateChartData extends \Hubleto\Framework\Controllers\ApiController
+class GetTemplateChartData extends \HubletoMain\Controllers\ApiController
 {
   public const OPERATIONS = [
     1 => "=",

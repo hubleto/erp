@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Mail\Controllers;
 
-class Drafts extends \Hubleto\Framework\Controllers\Controller
+class Drafts extends \HubletoMain\Controller
 {
   public function getBreadcrumbs(): array
   {

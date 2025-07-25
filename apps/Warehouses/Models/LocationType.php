@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Warehouses\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Varchar;
 
 class LocationType extends \Hubleto\Framework\Models\Model
 {

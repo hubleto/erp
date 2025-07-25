@@ -1,11 +1,11 @@
 <?php
 
-namespace Hubleto\Framework\Controllers;
+namespace HubletoMain\Controllers;
 
 use HubletoApp\Community\Settings\Models\User;
 use Hubleto\Framework\Models\Token;
 
-class ControllerResetPassword extends \Hubleto\Legacy\Core\Controller
+class ControllerResetPassword extends \HubletoMain\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;

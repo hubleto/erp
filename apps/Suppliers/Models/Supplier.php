@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Suppliers\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\Country;
 use HubletoApp\Community\Contacts\Models\Contact;
 
@@ -31,7 +31,7 @@ class Supplier extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 

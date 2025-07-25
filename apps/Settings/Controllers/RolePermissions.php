@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class RolePermissions extends \Hubleto\Framework\Controllers\Controller
+class RolePermissions extends \HubletoMain\Controller
 {
   public function getBreadcrumbs(): array
   {

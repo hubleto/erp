@@ -58,31 +58,31 @@ class Model extends \HubletoMain\Cli\Agent\Command
       "\$this->main->di->create(Models\\{$model}::class)->dropTableIfExists()->install();"
     ];
 
-    $codeInstallModelInserted = $this->cli->insertCodeToFile(
+    $codeInstallModelInserted = \Hubleto\Terminal::insertCodeToFile(
       $rootFolder . '/Loader.php',
       '//@hubleto-cli:install-tables',
       $codeInstallModel
     );
 
-    $this->cli->white("\n");
-    $this->cli->cyan("Model '{$model}' in '{$appNamespace}' with sample set of columns created successfully.\n");
+    \Hubleto\Terminal::white("\n");
+    \Hubleto\Terminal::cyan("Model '{$model}' in '{$appNamespace}' with sample set of columns created successfully.\n");
 
     if (!$codeInstallModelInserted) {
-      $this->cli->yellow("⚠ Failed to add some code automatically\n");
-      $this->cli->yellow("⚠  -> Add the model in `installTables()` method in  {$app->rootFolder}/Loader.php\n");
-      $this->cli->colored("cyan", "black", "Add to Loader.php->installTables():");
-      $this->cli->colored("cyan", "black", join("\n", $codeInstallModel));
-      $this->cli->white("\n");
+      \Hubleto\Terminal::yellow("⚠ Failed to add some code automatically\n");
+      \Hubleto\Terminal::yellow("⚠  -> Add the model in `installTables()` method in  {$app->rootFolder}/Loader.php\n");
+      \Hubleto\Terminal::colored("cyan", "black", "Add to Loader.php->installTables():");
+      \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeInstallModel));
+      \Hubleto\Terminal::white("\n");
     }
 
-    if ($this->cli->confirm('Do you want to re-install the app with your new model now?')) {
+    if (\Hubleto\Terminal::confirm('Do you want to re-install the app with your new model now?')) {
       (new \HubletoMain\Cli\Agent\App\Install($this->cli, $this->arguments))->run();
     }
 
-    $this->cli->yellow("💡  TIPS:\n");
-    $this->cli->yellow("💡  -> Add columns to the model in model's `describeColumns()` method.\n");
-    $this->cli->yellow("💡  -> Run command below to add controllers, views and some UI components to manage data in your model.\n");
-    $this->cli->colored("cyan", "black", "Run: php hubleto create mvc {$appNamespace} {$model}");
+    \Hubleto\Terminal::yellow("💡  TIPS:\n");
+    \Hubleto\Terminal::yellow("💡  -> Add columns to the model in model's `describeColumns()` method.\n");
+    \Hubleto\Terminal::yellow("💡  -> Run command below to add controllers, views and some UI components to manage data in your model.\n");
+    \Hubleto\Terminal::colored("cyan", "black", "Run: php hubleto create mvc {$appNamespace} {$model}");
   }
 
 }

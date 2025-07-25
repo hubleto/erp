@@ -11,12 +11,11 @@ class Loader extends \Hubleto\Framework\Loader
 
   public \HubletoMain\ReleaseManager $release;
   public \HubletoMain\AppManager $apps;
-  public \HubletoMain\Cli\Agent\Loader $cli;
   public \HubletoMain\HookManager $hooks;
   public \HubletoMain\CronManager $crons;
 
-  public \Hubleto\Framework\Emails\EmailProvider $email;
-  public \Hubleto\Framework\Emails\EmailWrapper $emails;
+  public \HubletoMain\Emails\EmailProvider $email;
+  public \HubletoMain\Emails\EmailWrapper $emails;
 
   /**
    * If set to true, this run is managed as premium.
@@ -94,7 +93,7 @@ class Loader extends \Hubleto\Framework\Loader
       $this->createRenderer();
 
       // PDO
-      $this->pdo = new \Hubleto\Legacy\Core\PDO($this);
+      $this->pdo = new \Hubleto\Framework\PDO($this);
 
     } catch (\Exception $e) {
       echo "ADIOS BOOT failed: [".get_class($e)."] ".$e->getMessage() . "\n";
@@ -104,9 +103,6 @@ class Loader extends \Hubleto\Framework\Loader
 
 
 
-
-    // CLI
-    $this->cli = $this->di->create(\HubletoMain\Cli\Agent\Loader::class);
 
     // Hooks
     $this->hooks = $this->di->create(\HubletoMain\HookManager::class);
@@ -118,10 +114,10 @@ class Loader extends \Hubleto\Framework\Loader
     $this->release = $this->di->create(\HubletoMain\ReleaseManager::class);
 
     // Emails
-    $this->email = $this->di->create(\Hubleto\Framework\Emails\EmailProvider::class);
+    $this->email = $this->di->create(\HubletoMain\Emails\EmailProvider::class);
 
     // DEPRECATED
-    $this->emails = $this->di->create(\Hubleto\Framework\Emails\EmailWrapper::class);
+    $this->emails = $this->di->create(\HubletoMain\Emails\EmailWrapper::class);
     $this->emails->emailProvider = $this->email;
 
     // App manager
@@ -255,10 +251,10 @@ class Loader extends \Hubleto\Framework\Loader
   /**
    * Create dependency injection service
    *
-   * @return \Hubleto\Legacy\Core\DependencyInjection
+   * @return \Hubleto\Framework\DependencyInjection
    * 
    */
-  public function createDependencyInjection(): \Hubleto\Legacy\Core\DependencyInjection
+  public function createDependencyInjection(): \Hubleto\Framework\DependencyInjection
   {
     return new \Hubleto\Framework\DependencyInjection($this);
   }
@@ -266,21 +262,21 @@ class Loader extends \Hubleto\Framework\Loader
   /**
    * Create authentication provider
    *
-   * @return \Hubleto\Legacy\Core\Auth
+   * @return \Hubleto\Framework\Auth
    * 
    */
-  public function createAuthProvider(): \Hubleto\Legacy\Core\Auth
+  public function createAuthProvider(): \Hubleto\Framework\Auth
   {
-    return $this->di->create(\Hubleto\Framework\AuthProvider::class);
+    return $this->di->create(\HubletoMain\AuthProvider::class);
   }
 
   /**
    * Create router
    *
-   * @return \Hubleto\Legacy\Core\Router
+   * @return \Hubleto\Framework\Router
    * 
    */
-  public function createRouter(): \Hubleto\Legacy\Core\Router
+  public function createRouter(): \Hubleto\Framework\Router
   {
     return $this->di->create(\HubletoMain\Router::class);
   }
@@ -288,10 +284,10 @@ class Loader extends \Hubleto\Framework\Loader
   /**
    * Create permission manager
    *
-   * @return \Hubleto\Legacy\Core\Permissions
+   * @return \Hubleto\Framework\Permissions
    * 
    */
-  public function createPermissionsManager(): \Hubleto\Legacy\Core\Permissions
+  public function createPermissionsManager(): \Hubleto\Framework\Permissions
   {
     return $this->di->create(\Hubleto\Framework\Permissions::class);
   }

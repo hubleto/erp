@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Deals\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
 
 class DealDocument extends \Hubleto\Framework\Models\Model
@@ -34,7 +34,7 @@ class DealDocument extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsInteger('idDeal') > 0) {

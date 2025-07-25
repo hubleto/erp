@@ -7,7 +7,7 @@ use HubletoMain\Controllers\ControllerResetPassword;
 use HubletoMain\Controllers\ControllerSignIn;
 use HubletoMain\Controllers\ControllerNotFound;
 
-class Router extends \Hubleto\Legacy\Core\Router
+class Router extends \Hubleto\Framework\Router
 {
 
   public \Hubleto\Framework\Loader $main;
@@ -32,22 +32,22 @@ class Router extends \Hubleto\Legacy\Core\Router
     ]);
   }
 
-  public function createSignInController(): \Hubleto\Legacy\Core\Controller
+  public function createSignInController(): \HubletoMain\Controller
   {
     return new ControllerSignIn($this->main);
   }
 
-  public function createNotFoundController(): \Hubleto\Legacy\Core\Controller
+  public function createNotFoundController(): \HubletoMain\Controller
   {
     return new ControllerNotFound($this->main);
   }
 
-  public function createResetPasswordController(): \Hubleto\Legacy\Core\Controller
+  public function createResetPasswordController(): \HubletoMain\Controller
   {
     return new ControllerResetPassword($this->main);
   }
 
-  public function createDesktopController(): \Hubleto\Legacy\Core\Controller
+  public function createDesktopController(): \HubletoMain\Controller
   {
     return $this->main->di->create(\HubletoApp\Community\Desktop\Controllers\Desktop::class);
   }

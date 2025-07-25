@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Mail\Controllers;
 
-class Outbox extends \Hubleto\Framework\Controllers\Controller
+class Outbox extends \HubletoMain\Controller
 {
   public function getBreadcrumbs(): array
   {

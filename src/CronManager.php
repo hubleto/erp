@@ -16,7 +16,7 @@ class CronManager
 
   public function init(): void
   {
-    $crons = @\Hubleto\Legacy\Core\Helper::scanDirRecursively($this->main->config->getAsString('srcFolder') . '/crons');
+    $crons = @\Hubleto\Framework\Helper::scanDirRecursively($this->main->config->getAsString('srcFolder') . '/crons');
     foreach ($crons as $cron) {
       if (!\str_ends_with($cron, '.php')) continue;
       $cronClass = '\\HubletoMain\\Cron\\' . str_replace('/', '\\', $cron);
@@ -24,7 +24,7 @@ class CronManager
       $this->addCron($cronClass);
     }
 
-    $crons = @\Hubleto\Legacy\Core\Helper::scanDirRecursively($this->main->config->getAsString('rootFolder') . '/src/crons');
+    $crons = @\Hubleto\Framework\Helper::scanDirRecursively($this->main->config->getAsString('rootFolder') . '/src/crons');
     foreach ($crons as $cron) {
       if (!\str_ends_with($cron, '.php')) continue;
       $cronClass = '\\HubletoProject\\Cron\\' . str_replace('/', '\\', $cron);

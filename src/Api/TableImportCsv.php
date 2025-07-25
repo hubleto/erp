@@ -4,7 +4,7 @@ namespace Hubleto\Framework\Api;
 
 use Exception;
 
-class TableImportCsv extends \Hubleto\Framework\Controllers\ApiController
+class TableImportCsv extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

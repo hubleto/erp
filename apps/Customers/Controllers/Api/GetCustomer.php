@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Customers\Controllers\Api;
 
 use HubletoApp\Community\Customers\Models\Customer;
 
-class GetCustomer extends \Hubleto\Framework\Controllers\ApiController
+class GetCustomer extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

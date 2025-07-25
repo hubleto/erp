@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Desktop\Controllers;
 
-class Desktop extends \Hubleto\Framework\Controllers\Controller
+class Desktop extends \HubletoMain\Controller
 {
   public bool $disableLogUsage = true;
 

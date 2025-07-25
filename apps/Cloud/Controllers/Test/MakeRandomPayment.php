@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Controllers\Test;
 
-class MakeRandomPayment extends \Hubleto\Framework\Controllers\Controller
+class MakeRandomPayment extends \HubletoMain\Controller
 {
   public function prepareView(): void
   {

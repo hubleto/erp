@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Orders\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\Color;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Color;
 
 class State extends \Hubleto\Framework\Models\Model
 {

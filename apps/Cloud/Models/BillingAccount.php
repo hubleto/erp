@@ -2,9 +2,9 @@
 
 namespace HubletoApp\Community\Cloud\Models;
 
-use Hubleto\Legacy\Core\Db\Column\DateTime;
-use Hubleto\Legacy\Core\Db\Column\Boolean;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\DateTime;
+use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
 class BillingAccount extends \Hubleto\Framework\Models\Model
@@ -30,7 +30,7 @@ class BillingAccount extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->columns['id'] = $this->columns['id'];

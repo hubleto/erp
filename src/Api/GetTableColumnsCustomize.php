@@ -4,7 +4,7 @@ namespace Hubleto\Framework\Api;
 
 use Exception;
 
-class GetTableColumnsCustomize extends \Hubleto\Framework\Controllers\ApiController
+class GetTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

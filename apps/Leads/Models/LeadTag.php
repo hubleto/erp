@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Lookup;
 
 class LeadTag extends \Hubleto\Framework\Models\Model
 {
@@ -22,7 +22,7 @@ class LeadTag extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = 'Customer Categories';

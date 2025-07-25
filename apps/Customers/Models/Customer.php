@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Customers\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Boolean;
-use Hubleto\Legacy\Core\Db\Column\Date;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Text;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Contacts\Models\Contact;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Leads\Models\Lead;
@@ -94,7 +94,7 @@ class Customer extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = ''; //$this->translate('Customers');

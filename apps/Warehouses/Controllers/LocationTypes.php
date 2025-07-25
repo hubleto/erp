@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Warehouses\Controllers;
 
-class LocationTypes extends \Hubleto\Framework\Controllers\Controller
+class LocationTypes extends \HubletoMain\Controller
 {
   public function getBreadcrumbs(): array
   {

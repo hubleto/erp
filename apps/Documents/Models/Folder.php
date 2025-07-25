@@ -2,8 +2,8 @@
 
 namespace HubletoApp\Community\Documents\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Varchar;
 
 class Folder extends \Hubleto\Framework\Models\Model
 {

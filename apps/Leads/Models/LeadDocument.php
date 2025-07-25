@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Leads\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
 
 class LeadDocument extends \Hubleto\Framework\Models\Model
@@ -34,7 +34,7 @@ class LeadDocument extends \Hubleto\Framework\Models\Model
     return $description;
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     if ($this->main->urlParamAsInteger('idLead') > 0) {

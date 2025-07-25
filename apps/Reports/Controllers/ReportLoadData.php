@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Reports\Controllers;
 
-class ReportLoadData extends \Hubleto\Framework\Controllers\ApiController
+class ReportLoadData extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): array
   {

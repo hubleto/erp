@@ -2,11 +2,11 @@
 
 namespace HubletoApp\Community\Settings\Models;
 
-use Hubleto\Legacy\Core\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Db\Column\Lookup;
-use Hubleto\Legacy\Core\Db\Column\Json;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Json;
 
-class User extends \Hubleto\Legacy\Models\User
+class User extends \Hubleto\Framework\Models\User
 {
   public const ENUM_LANGUAGES = [
     'en' => 'English',
@@ -71,7 +71,7 @@ class User extends \Hubleto\Legacy\Models\User
     return $user;
   }
 
-  public function describeTable(): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
 
@@ -98,7 +98,7 @@ class User extends \Hubleto\Legacy\Models\User
     return $description;
   }
 
-  public function describeForm(): \Hubleto\Legacy\Core\Description\Form
+  public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();
     // $description->permissions = [

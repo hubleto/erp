@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/ui/ext/HubletoTable';
+import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
 import FormEventSpeaker from './FormEventSpeaker';
 
 interface TableEventSpeakersProps extends HubletoTableProps {

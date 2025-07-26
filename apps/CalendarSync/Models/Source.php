@@ -22,7 +22,7 @@ class Source extends \Hubleto\Framework\Models\Model
     ]);
   }
 
-  public function describeTable(array $description = []): \Hubleto\Legacy\Core\Description\Table
+  public function describeTable(array $description = []): \Hubleto\Framework\Description\Table
   {
     $description["model"] = $this->fullName;
     $description = parent::describeTable($description);

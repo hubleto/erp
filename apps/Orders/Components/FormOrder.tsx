@@ -1,9 +1,9 @@
 import React, { Component, createRef, useRef } from 'react';
-import { deepObjectMerge, getUrlParam } from '@hubleto/ui/core/Helper';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
+import { deepObjectMerge, getUrlParam } from '@hubleto/react-ui/core/Helper';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import TableOrderProducts from './TableOrderProducts';
-import FormInput from '@hubleto/ui/core/FormInput';
-import Lookup from '@hubleto/ui/core/Inputs/Lookup';
+import FormInput from '@hubleto/react-ui/core/FormInput';
+import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 import { TabPanel, TabView } from 'primereact/tabview';
 import TableHistories from './TableHistories';
 

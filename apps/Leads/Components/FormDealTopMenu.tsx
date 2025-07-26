@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormDeal, { FormDealProps, FormDealState } from '@hubleto/apps/Deals/Components/FormDeal'
-import TranslatedComponent from "@hubleto/ui/core/TranslatedComponent";
-import request from '@hubleto/ui/core/Request';
+import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
+import request from '@hubleto/react-ui/core/Request';
 
 interface P {
   form: FormDeal<FormDealProps, FormDealState>

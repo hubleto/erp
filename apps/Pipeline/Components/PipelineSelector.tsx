@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { getUrlParam } from "@hubleto/ui/core/Helper";
-import TranslatedComponent from "@hubleto/ui/core/TranslatedComponent";
-import Lookup from '@hubleto/ui/core/Inputs/Lookup';
+import { getUrlParam } from "@hubleto/react-ui/core/Helper";
+import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
+import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 import { ProgressBar } from 'primereact/progressbar';
-import request from "@hubleto/ui/core/Request";
+import request from "@hubleto/react-ui/core/Request";
 
 interface PipelineSelectorProps {
   idPipeline: number,

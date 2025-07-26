@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Lookup from "@hubleto/ui/core/Inputs/Lookup";
-import FormInput from "@hubleto/ui/core/FormInput";
-import request from "@hubleto/ui/core/Request";
+import Lookup from "@hubleto/react-ui/core/Inputs/Lookup";
+import FormInput from "@hubleto/react-ui/core/FormInput";
+import request from "@hubleto/react-ui/core/Request";
 import HubletoChart, { HubletoChartType } from "@hubleto/src/core/Components/HubletoChart";
 
 export interface FormReportProps {

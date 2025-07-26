@@ -39,7 +39,6 @@ class Controller extends \Hubleto\Framework\Controller
       && !$this->permittedForAllUsers
       && !$this->main->permissions->isAppPermittedForActiveUser($this->hubletoApp)
     ) {
-      // throw new \Hubleto\Legacy\Core\Exceptions\NotEnoughPermissionsException("You have no access neither to {$this->hubletoApp->manifest['name']} nor {$this->shortName}.");
       return false;
     }
 

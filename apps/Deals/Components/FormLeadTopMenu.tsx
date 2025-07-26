@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import FormLead, { FormLeadProps, FormLeadState } from '@hubleto/apps/Leads/Components/FormLead'
 import TableDeals from './TableDeals';
-import ModalSimple from "@hubleto/ui/core/ModalSimple";
-import TranslatedComponent from "@hubleto/ui/core/TranslatedComponent";
-import request from '@hubleto/ui/core/Request';
+import ModalSimple from "@hubleto/react-ui/core/ModalSimple";
+import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
+import request from '@hubleto/react-ui/core/Request';
 
 interface P {
   form: FormLead<FormLeadProps, FormLeadState>

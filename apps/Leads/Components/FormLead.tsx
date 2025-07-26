@@ -1,17 +1,17 @@
 import React, { Component, createRef, ChangeEvent } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
-import InputTags2 from '@hubleto/ui/core/Inputs/Tags2';
-import FormInput from '@hubleto/ui/core/FormInput';
-import request from '@hubleto/ui/core/Request';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import InputTags2 from '@hubleto/react-ui/core/Inputs/Tags2';
+import FormInput from '@hubleto/react-ui/core/FormInput';
+import request from '@hubleto/react-ui/core/Request';
 import { TabPanel, TabView } from 'primereact/tabview';
 import Calendar from '../../Calendar/Components/Calendar';
-import Lookup from '@hubleto/ui/core/Inputs/Lookup';
+import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 import TableLeadDocuments from './TableLeadDocuments';
-import ModalForm from '@hubleto/ui/core/ModalForm';
+import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
 import LeadFormActivity, { LeadFormActivityProps, LeadFormActivityState } from './LeadFormActivity';
-import Hyperlink from '@hubleto/ui/core/Inputs/Hyperlink';
-import { FormProps, FormState } from '@hubleto/ui/core/Form';
+import Hyperlink from '@hubleto/react-ui/core/Inputs/Hyperlink';
+import { FormProps, FormState } from '@hubleto/react-ui/core/Form';
 import moment, { Moment } from "moment";
 import TableLeadHistory from './TableLeadHistory';
 

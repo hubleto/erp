@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from '@hubleto/ui/core/Table';
-import { FormProps } from '@hubleto/ui/core/Form';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
+import { FormProps } from '@hubleto/react-ui/core/Form';
 import FormDocument from './FormDocument';
 
 interface TableDocumentsProps extends TableProps {}

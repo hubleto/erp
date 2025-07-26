@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import FormCustomer, { FormCustomerProps, FormCustomerState } from '@hubleto/apps/Customers/Components/FormCustomer'
 import TableLeads from './TableLeads';
-import ModalSimple from "@hubleto/ui/core/ModalSimple";
-import TranslatedComponent from "@hubleto/ui/core/TranslatedComponent";
+import ModalSimple from "@hubleto/react-ui/core/ModalSimple";
+import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
 
 interface P {
   form: FormCustomer<FormCustomerProps, FormCustomerState>

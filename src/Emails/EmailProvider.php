@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Emails;
 
-use Hubleto\Legacy\Core\Exceptions\GeneralException;
+use Hubleto\Framework\Exceptions\GeneralException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 

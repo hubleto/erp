@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from '@hubleto/ui/core/Table';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 
 interface TableHistoriesProps extends TableProps {
   sum?: number,

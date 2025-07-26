@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from '@hubleto/ui/core/Table';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 import FormOrder, { FormOrderProps } from './FormOrder';
-import request from '@hubleto/ui/core/Request';
+import request from '@hubleto/react-ui/core/Request';
 
 interface TableOrdersProps extends TableProps {}
 

@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import 'primereact/resources/themes/lara-light-teal/theme.css';
 
-import { ADIOS } from "@hubleto/ui/core/Loader";
-import request from "@hubleto/ui/core/Request";
+import { ADIOS } from "@hubleto/react-ui/core/Loader";
+import request from "@hubleto/react-ui/core/Request";
 
 // ADIOS
-// import Table from "@hubleto/ui/core/Table";
-import Modal from "@hubleto/ui/core/ModalSimple";
-import InputVarchar from "@hubleto/ui/core/Inputs/Varchar";
-import InputInt from "@hubleto/ui/core/Inputs/Int";
-import InputLookup from "@hubleto/ui/core/Inputs/Lookup";
-import InputImage from "@hubleto/ui/core/Inputs/Image";
-import InputBoolean from "@hubleto/ui/core/Inputs/Boolean";
-import InputColor from "@hubleto/ui/core/Inputs/Color";
-import InputHyperlink from "@hubleto/ui/core/Inputs/Hyperlink";
+// import Table from "@hubleto/react-ui/core/Table";
+import Modal from "@hubleto/react-ui/core/ModalSimple";
+import InputVarchar from "@hubleto/react-ui/core/Inputs/Varchar";
+import InputInt from "@hubleto/react-ui/core/Inputs/Int";
+import InputLookup from "@hubleto/react-ui/core/Inputs/Lookup";
+import InputImage from "@hubleto/react-ui/core/Inputs/Image";
+import InputBoolean from "@hubleto/react-ui/core/Inputs/Boolean";
+import InputColor from "@hubleto/react-ui/core/Inputs/Color";
+import InputHyperlink from "@hubleto/react-ui/core/Inputs/Hyperlink";
 
-import TableCellRendererHyperlink from "@hubleto/ui/core/TableCellRenderers/Hyperlink";
+import TableCellRendererHyperlink from "@hubleto/react-ui/core/TableCellRenderers/Hyperlink";
 
 // Hubleto
-import HubletoForm from "@hubleto/ui/ext/HubletoForm";
-import HubletoTable from "@hubleto/ui/ext/HubletoTable";
-import HubletoChart from "@hubleto/ui/ext/HubletoChart";
-import HubletoTableColumnCustomize from "@hubleto/ui/ext/HubletoTableColumnsCustomize";
+import HubletoForm from "@hubleto/react-ui/ext/HubletoForm";
+import HubletoTable from "@hubleto/react-ui/ext/HubletoTable";
+import HubletoChart from "@hubleto/react-ui/ext/HubletoChart";
+import HubletoTableColumnCustomize from "@hubleto/react-ui/ext/HubletoTableColumnsCustomize";
 
 // Primereact
 import { Tooltip } from "primereact/tooltip";

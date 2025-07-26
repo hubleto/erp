@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { deepObjectMerge, getUrlParam } from '@hubleto/ui/core/Helper';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
-import InputTags2 from '@hubleto/ui/core/Inputs/Tags2';
-import FormInput from '@hubleto/ui/core/FormInput';
+import { deepObjectMerge, getUrlParam } from '@hubleto/react-ui/core/Helper';
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import InputTags2 from '@hubleto/react-ui/core/Inputs/Tags2';
+import FormInput from '@hubleto/react-ui/core/FormInput';
 import TableValues from './TableValues';
-import Lookup from '@hubleto/ui/core/Inputs/Lookup';
-import Boolean from '@hubleto/ui/core/Inputs/Boolean';
-import request from '@hubleto/ui/core/Request';
-import { FormProps, FormState } from '@hubleto/ui/core/Form';
+import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import Boolean from '@hubleto/react-ui/core/Inputs/Boolean';
+import request from '@hubleto/react-ui/core/Request';
+import { FormProps, FormState } from '@hubleto/react-ui/core/Form';
 
 export interface FormContactProps extends HubletoFormProps {
   newEntryId?: number,

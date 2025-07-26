@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { deepObjectMerge, getUrlParam } from "@hubleto/ui/core/Helper";
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/ui/ext/HubletoForm';
+import { deepObjectMerge, getUrlParam } from "@hubleto/react-ui/core/Helper";
+import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import TablePipelineSteps from "./TablePipelineSteps";
-import { FormProps, FormState } from "@hubleto/ui/core/Form";
+import { FormProps, FormState } from "@hubleto/react-ui/core/Form";
 
 interface FormPipelineProps extends HubletoFormProps {}
 

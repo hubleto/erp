@@ -7,6 +7,10 @@
         "issues": "https://github.com/hubleto/main/issues",
         "source": "https://github.com/hubleto/main"
     },
+    "require": {
+        "hubleto/terminal": "@dev",
+        "hubleto/framework": "@dev"
+    },
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "autoload": {
         "psr-4": {
@@ -18,5 +22,16 @@
             "HubletoMain\\Installer\\": "installer",
             "HubletoApp\\Community\\": "apps"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../terminal"
+        },
+        {
+            "type": "path",
+            "url": "../framework"
+        }
+    ],
+    "minimum-stability": "dev"
 }

@@ -6,8 +6,8 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
 import FormActivity, { FormActivityProps, FormActivityState } from "../../Customers/Components/FormActivity";
-import ModalSimple from "@hubleto/ui/core/ModalSimple";
-import { getUrlParam } from "@hubleto/ui/core/Helper";
+import ModalSimple from "@hubleto/react-ui/core/ModalSimple";
+import { getUrlParam } from "@hubleto/react-ui/core/Helper";
 
 interface CalendarProps {
   views?: string,

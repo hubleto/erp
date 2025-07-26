@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import request from "@hubleto/ui/core/Request";
-import Table, { TableProps, TableState } from '@hubleto/ui/core/Table';
-import Form, { FormProps } from '@hubleto/ui/core/Form';
+import request from "@hubleto/react-ui/core/Request";
+import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
+import Form, { FormProps } from '@hubleto/react-ui/core/Form';
 import FormNotification from './FormNotification';
 
 interface TableNotificationsProps extends TableProps {

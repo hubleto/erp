@@ -7,7 +7,6 @@ use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Time;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\Legacy\Core\Description\Form;
 use HubletoApp\Community\Settings\Models\ActivityType;
 use HubletoApp\Community\Settings\Models\User;
 

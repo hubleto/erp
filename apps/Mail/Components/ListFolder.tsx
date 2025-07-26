@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import request from "@hubleto/ui/core/Request";
-import Table, { TableProps, TableState } from '@hubleto/ui/core/Table';
-import Form, { FormProps } from '@hubleto/ui/core/Form';
+import request from "@hubleto/react-ui/core/Request";
+import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
+import Form, { FormProps } from '@hubleto/react-ui/core/Form';
 import FormMail from './FormMail';
 import { ProgressBar } from 'primereact/progressbar';
-import ModalForm from "@hubleto/ui/core/ModalForm";
+import ModalForm from "@hubleto/react-ui/core/ModalForm";
 
 interface ListFolderProps extends TableProps {
   folder?: string,

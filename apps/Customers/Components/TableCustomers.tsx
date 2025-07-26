@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/ui/ext/HubletoTable';
+import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
 import FormCustomer, { FormCustomerProps } from './FormCustomer';
-import { getUrlParam } from '@hubleto/ui/core/Helper';
-import { FormProps } from '@hubleto/ui/core/Form';
-import request from '@hubleto/ui/core/Request';
+import { getUrlParam } from '@hubleto/react-ui/core/Helper';
+import { FormProps } from '@hubleto/react-ui/core/Form';
+import request from '@hubleto/react-ui/core/Request';
 
 interface TableCustomersProps extends HubletoTableProps {
 }

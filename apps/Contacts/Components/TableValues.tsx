@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from '@hubleto/ui/core/Table';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 import { ProgressBar } from 'primereact/progressbar';
-import FormInput from '@hubleto/ui/core/FormInput';
-import Lookup from '@hubleto/ui/core/Inputs/Lookup';
+import FormInput from '@hubleto/react-ui/core/FormInput';
+import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
 interface TableValuesProps extends TableProps {
 }

@@ -32,11 +32,21 @@ Hubleto is a `PHP-based opensource CRM and ERP development framework` with lots 
 +------------------------------------------+
 ```
 
-# Start developing your CRM in few minutes
+# Start using Hubleto in few minutes
 
-First, download & unzip Hubleto release: https://www.hubleto.com/en/download
+You have two options to install Hubleto: from a `.zip` package or using `composer`.
 
-Then run following commands in your terminal:
+## Zip package
+
+Download & unzip Hubleto release: https://www.hubleto.com/en/download
+
+## Composer
+
+Run `composer create-project hubleto/project` in any folder. More information here: https://github.com/hubleto/project
+
+# Develop your apps
+
+To develop your apps run following commands in your terminal:
 
 ```bash
 php hubleto init # init the project
@@ -45,17 +55,7 @@ php hubleto app install "HubletoApp\Custom\HelloWorldApp"
 php hubleto create model "HubletoApp\Custom\HelloWorldApp" "TodoItem"
 ```
 
-You can use **models and API of free community apps** available in [apps](apps) folder, e.g.:
-
-  * [Contacts](apps/Contacts) or [Customers](apps/Customers) as a full-featured addressbook
-  * [Settings](apps/Settings) for management of your app's settings
-  * [Reports](apps/Reports) as a centralized report visualizer
-  * [Products](apps/Products) for your e-commerce project
-  * and more...
-
-## Developer's guide
-
-Visit https://developer.hubleto.com with tutorials on how to download & install, create your own app, and more.
+More details are in developer's guide at https://developer.hubleto.com.
 
 <img src="https://developer.hubleto.com/book/content/assets/images/create-simple-addressbook.gif" alt="Create simple addressbook CRM" />
 

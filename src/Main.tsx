@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import 'primereact/resources/themes/lara-light-teal/theme.css';
 
-import { ADIOS } from "@hubleto/react-ui/core/Loader";
+import { HubletoReactUi } from "@hubleto/react-ui/core/Loader";
 import request from "@hubleto/react-ui/core/Request";
 
-// ADIOS
-// import Table from "@hubleto/react-ui/core/Table";
 import Modal from "@hubleto/react-ui/core/ModalSimple";
 import InputVarchar from "@hubleto/react-ui/core/Inputs/Varchar";
 import InputInt from "@hubleto/react-ui/core/Inputs/Int";
@@ -25,9 +23,8 @@ import HubletoTableColumnCustomize from "@hubleto/react-ui/ext/HubletoTableColum
 
 // Primereact
 import { Tooltip } from "primereact/tooltip";
-import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
 
-class HubletoMain extends ADIOS {
+class HubletoMain extends HubletoReactUi {
   language: string = 'en';
   idUser: number = 0;
   user: any;

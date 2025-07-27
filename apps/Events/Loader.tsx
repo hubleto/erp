@@ -4,7 +4,7 @@
 // 1. import the component
 // import TableMyModel from "./Components/TableMyModel"
 
-// 2. Register the React Component into Adios framework
+// 2. Register the React Component into Hubleto framework
 // globalThis.main.registerReactComponent('EventsTableMyModel', TableMyModel);
 
 // 3. Use the component in any of your Twig views:

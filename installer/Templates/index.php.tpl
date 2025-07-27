@@ -15,8 +15,6 @@ require_once(__DIR__ . "/ConfigEnv.php");
 // load autoloaders
 require_once("vendor/autoload.php");
 
-define('_ADIOS_ID', 'HubletoMain-' . $config['accountUid']);
-
 // render
 $main = new \HubletoMain\Loader($config);
 echo $main->render();

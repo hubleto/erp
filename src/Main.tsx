@@ -34,8 +34,6 @@ class HubletoMain extends HubletoReactUi {
   constructor(config: object) {
     super(config);
 
-    // ADIOS components
-    // this.registerReactComponent('Table', Table);
     this.registerReactComponent('Modal', Modal);
 
     this.registerReactComponent('InputVarchar', InputVarchar);
@@ -198,5 +196,5 @@ class HubletoMain extends HubletoReactUi {
 //@ts-ignore
 const main: HubletoMain = new HubletoMain(window.ConfigEnv);
 
-globalThis.app = main; // ADIOS requires 'app' property
+globalThis.app = main; // Hubleto requires 'app' property
 globalThis.main = main;

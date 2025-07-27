@@ -82,7 +82,7 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
         <div className='card-header'>
           {this.state.changePipeline ?
             <div className="input-body">
-              <div className="adios component input"><div className="inner">
+              <div className="hubleto component input"><div className="inner">
                 <div className="input-element">
                   {Object.keys(pipelines).map((idPipeline: any, key: any) => {
                     return <button

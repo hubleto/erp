@@ -92,7 +92,7 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                 <span className="icon"><i className={"fas fa-" + this.getIcon(item.value)}></i></span>
                 <span className="text w-full" style={{maxHeight: "10em"}}>
                   {this.props.parentForm.state.isInlineEditing ? <>
-                    <div className="adios component input w-full"><div className="input-element w-full">
+                    <div className="hubleto component input w-full"><div className="input-element w-full">
                       <input
                         className="w-full bg-blue-50"
                         onChange={(e) => {

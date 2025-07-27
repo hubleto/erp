@@ -31,7 +31,7 @@ class Loader extends \Hubleto\Framework\Loader
    * @param int $mode
    * 
    */
-  public function __construct(array $config = [], int $mode = self::ADIOS_MODE_FULL)
+  public function __construct(array $config = [], int $mode = self::HUBLETO_MODE_FULL)
   {
     $this->setAsGlobal();
 
@@ -96,7 +96,7 @@ class Loader extends \Hubleto\Framework\Loader
       $this->pdo = new \Hubleto\Framework\PDO($this);
 
     } catch (\Exception $e) {
-      echo "ADIOS BOOT failed: [".get_class($e)."] ".$e->getMessage() . "\n";
+      echo "Hubleto boot failed: [".get_class($e)."] ".$e->getMessage() . "\n";
       echo $e->getTraceAsString() . "\n";
       exit;
     }
@@ -139,7 +139,7 @@ class Loader extends \Hubleto\Framework\Loader
 
     try {
 
-      if ($this->mode == self::ADIOS_MODE_FULL) {
+      if ($this->mode == self::HUBLETO_MODE_FULL) {
         $this->session->start(true);
         $this->initDatabaseConnections();
         $this->config->loadFromDB();

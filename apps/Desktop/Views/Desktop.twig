@@ -57,11 +57,10 @@
     }
   </script>
 
-  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/adios.js'></script>
+  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/hubleto.js'></script>
   <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/ajax_functions.js'></script>
   <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/base64.js'></script>
   <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/cookie.js'></script>
-  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/desktop.js'></script>
   <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/jquery-3.5.1.js'></script>
   <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/md5.js'></script>
   <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/moment.min.js'></script>
@@ -73,7 +72,7 @@
   <link rel="stylesheet" type="text/css" href="{{ config.rootUrl }}/assets/compiled/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/themes/{{ viewParams.currentTheme }}.css">
   <script>
-    ADIOS.onAppLoaded(() => {
+    Hubleto.onAppLoaded(() => {
       globalThis.main.renderReactElements();
       globalThis.main.createThemeObserver();
       {% if config.debugConsoleErrors %}

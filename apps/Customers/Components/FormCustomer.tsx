@@ -289,7 +289,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
             ></Calendar>
           </div>
 
-          <div className="adios component input"><div className="input-element w-full flex gap-2">
+          <div className="hubleto component input"><div className="input-element w-full flex gap-2">
             <input
               className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
               placeholder={this.translate('Type recent activity here')}

@@ -22,7 +22,7 @@ class SharedCalendar extends \Hubleto\Framework\Models\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setDefaultValue($this->app->auth->getUserId())->setReadonly(),
+      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setDefaultValue($this->main->auth->getUserId())->setReadonly(),
       'calendar' => (new Varchar($this, $this->translate('Calendar ID')))->setRequired()->setReadonly(),
       'share_key' => (new Varchar($this, $this->translate('Share key')))->setReadonly()->setHidden(),
       'view_details' => (new Boolean($this, $this->translate('Display details')))->setDefaultValue(true),

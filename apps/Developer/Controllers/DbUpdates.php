@@ -17,11 +17,11 @@ class DbUpdates extends \HubletoMain\Controller
     $necessaryUpdates = [];
     $apps = $this->main->apps->getEnabledApps();
 
-    $tmpTables = $this->app->pdo->fetchAll("show tables");
+    $tmpTables = $this->main->pdo->fetchAll("show tables");
     $tables = [];
     foreach ($tmpTables as $tmp) {
       $tmpTable = reset($tmp);
-      $tmpColumns = $this->app->pdo->fetchAll("show columns from `{$tmpTable}`");
+      $tmpColumns = $this->main->pdo->fetchAll("show columns from `{$tmpTable}`");
       foreach ($tmpColumns as $tmpColumn) {
         $tables[$tmpTable][$tmpColumn['Field']] = $tmpColumn;
       }

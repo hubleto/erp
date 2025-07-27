@@ -13,7 +13,7 @@ class ControllerForgotPassword extends \HubletoMain\Controller
     parent::prepareView();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-      $this->app->auth->forgotPassword();
+      $this->main->auth->forgotPassword();
       $this->setView('@hubleto/ForgotPassword.twig', ['status' => 1]);
     } else {
       $this->setView('@hubleto/ForgotPassword.twig', ['status' => 0]);

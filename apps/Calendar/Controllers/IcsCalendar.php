@@ -19,17 +19,17 @@ class IcsCalendar extends \HubletoMain\Controller
 
   public function render(array $params): string
   {
-    $ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:Hubleto " . $this->app->config->getAsString('accountFullName') . "\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n";
+    $ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:Hubleto " . $this->main->config->getAsString('accountFullName') . "\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n";
     $events = "";
     $calendarManager = $this->main->apps->community('Calendar')->calendarManager;
 
-    $calendarKey = $this->app->getUrlParams()['key'];
+    $calendarKey = $this->main->getUrlParams()['key'];
 
     $mSharedCalendars = new SharedCalendar();
     $sharedCalendar = $mSharedCalendars->where('share_key', $calendarKey)->where('enabled', true)->first();
 
     if ($sharedCalendar == null) {
-      $this->app->router->redirectTo('/404');
+      $this->main->router->redirectTo('/404');
     }
     $calendarSource = $sharedCalendar->get('calendar')[0]['calendar'];
 

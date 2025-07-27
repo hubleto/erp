@@ -8,13 +8,13 @@ class TableExportCsv extends \HubletoMain\Controller
 {
   public function render(array $params): string
   {
-    $model = $this->app->urlParamAsString('model');
-    $this->model = $this->app->getModel($model);
+    $model = $this->main->urlParamAsString('model');
+    $this->model = $this->main->getModel($model);
 
     $records = $this->model->recordGetList(
-      $this->app->urlParamAsString('fulltextSearch'),
-      $this->app->urlParamAsArray('columnSearch'),
-      $this->app->urlParamAsArray('orderBy'),
+      $this->main->urlParamAsString('fulltextSearch'),
+      $this->main->urlParamAsArray('columnSearch'),
+      $this->main->urlParamAsArray('orderBy'),
       99999999, // itemsPerPage
       0, // page
     );

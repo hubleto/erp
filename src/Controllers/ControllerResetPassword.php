@@ -15,17 +15,17 @@ class ControllerResetPassword extends \HubletoMain\Controller
   {
     parent::prepareView();
 
-    $mToken = $this->app->di->create(Token::class);
-    if ($this->app->urlParamAsString('token') == '' || $mToken->record
+    $mToken = $this->main->di->create(Token::class);
+    if ($this->main->urlParamAsString('token') == '' || $mToken->record
         ->where('token', $_GET['token'])
         ->where('valid_to', '>', date('Y-m-d H:i:s'))
         ->where('type', 'reset-password')
         ->count() <= 0) {
-      $this->app->router->redirectTo('');
+      $this->main->router->redirectTo('');
     }
 
-    $password = $this->app->urlParamAsString('password');
-    $passwordConfirm = $this->app->urlParamAsString('password_confirm');
+    $password = $this->main->urlParamAsString('password');
+    $passwordConfirm = $this->main->urlParamAsString('password_confirm');
 
     if (
       $_SERVER['REQUEST_METHOD'] === 'POST'
@@ -40,9 +40,9 @@ class ControllerResetPassword extends \HubletoMain\Controller
         $this->setView('@hubleto/ResetPassword.twig', ['error' => 'Password must be at least 8 characters long and must contain at least one numeric character.']);
         return;
       } else {
-        $this->app->auth->resetPassword();
+        $this->main->auth->resetPassword();
 
-        $this->app->router->redirectTo('');
+        $this->main->router->redirectTo('');
       }
     }
 
@@ -51,7 +51,7 @@ class ControllerResetPassword extends \HubletoMain\Controller
       ->where('valid_to', '>', date('Y-m-d H:i:s'))
       ->where('type', 'reset-password')->first()->login;
 
-    $mUser = $this->app->di->create(User::class);
+    $mUser = $this->main->di->create(User::class);
     $passwordHash = $mUser->record->where('login', $login)->first()->password;
 
     $this->setView('@hubleto/ResetPassword.twig', ['status' => false, 'welcome' => $passwordHash == '']);

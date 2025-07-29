@@ -5,12 +5,10 @@ namespace HubletoMain\Emails;
 class EmailWrapper
 {
   public $emailProvider;
-  private $main;
   private const EMAIL_TEMPLATE = "@hubleto/layouts/Email.twig";
 
-  public function __construct(\Hubleto\Framework\Loader $main)
+  public function __construct(public \Hubleto\Framework\Loader $main)
   {
-    $this->main = $main;
   }
 
   public function sendResetPasswordEmail(String $login, String $name, String $language, String $token): void

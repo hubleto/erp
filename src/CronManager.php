@@ -4,14 +4,12 @@ namespace HubletoMain;
 
 class CronManager
 {
-  public \Hubleto\Framework\Loader $main;
 
   /** @var array<\HubletoMain\Cron> */
   protected array $crons = [];
 
-  public function __construct(\Hubleto\Framework\Loader $main)
+  public function __construct(public \Hubleto\Framework\Loader $main)
   {
-    $this->main = $main;
   }
 
   public function init(): void

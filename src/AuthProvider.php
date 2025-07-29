@@ -23,18 +23,15 @@ use Hubleto\Framework\Models\Token;
 class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
 {
 
-  use \Hubleto\Framework\Traits\MainTrait;
-
   /**
    * Class constructor.
    *
    * @param \Hubleto\Framework\Loader $main
    * 
    */
-  public function __construct(\Hubleto\Framework\Loader $main)
+  public function __construct(public \Hubleto\Framework\Loader $main)
   {
     parent::__construct($main);
-    $this->main = $main;
 
     $this->main->registerModel(\HubletoApp\Community\Settings\Models\User::class);
     $this->main->registerModel(\HubletoApp\Community\Settings\Models\UserRole::class);

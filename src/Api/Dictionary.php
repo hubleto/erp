@@ -6,11 +6,9 @@ use Hubleto\Framework\Helper;
 
 class Dictionary extends \HubletoMain\Controllers\ApiController
 {
-  public \Hubleto\Framework\Loader $main;
 
-  public function __construct(\Hubleto\Framework\Loader $main)
+  public function __construct(public \Hubleto\Framework\Loader $main)
   {
-    $this->main = $main;
   }
 
   public function renderJson(): array

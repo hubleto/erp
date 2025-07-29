@@ -16,12 +16,6 @@
 }
 
 @layer hubleto-main {
-  @font-face {
-    font-family: 'Gabarito';
-    font-style: normal;
-    font-weight: 500;
-    src: url(../../fonts/Gabarito/static/Gabarito-Regular.ttf) format('truetype');
-  }
 
   :root {
     --font-family: 'Gabarito' !important;

@@ -10,13 +10,9 @@ use HubletoMain\Controllers\ControllerNotFound;
 class Router extends \Hubleto\Framework\Router
 {
 
-  public \Hubleto\Framework\Loader $main;
-
-  public function __construct(\Hubleto\Framework\Loader $app)
+  public function __construct(public \Hubleto\Framework\Loader $main)
   {
-    parent::__construct($app);
-
-    $this->main = $app;
+    parent::__construct($main);
 
     $this->httpGet([
       '/^api\/get-apps-info\/?$/' => Api\GetAppsInfo::class,

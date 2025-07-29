@@ -4,14 +4,11 @@ namespace HubletoMain;
 
 class HookManager
 {
-  public \Hubleto\Framework\Loader $main;
-
   /** @var array<\Hubleto\Framework\Controller\HookController> */
   protected array $hooks = [];
 
-  public function __construct(\Hubleto\Framework\Loader $main)
+  public function __construct(public \Hubleto\Framework\Loader $main)
   {
-    $this->main = $main;
   }
 
   public function init(): void

@@ -4,7 +4,6 @@ namespace HubletoMain;
 
 class Calendar implements \Hubleto\Framework\Interfaces\TestableInterface
 {
-  public \Hubleto\Framework\Loader $main;
 
   /**
    * Specifies what Activity Form component will be opened and what title should be used for a new button in the `FormActivitySelector.tsx` component
@@ -18,9 +17,8 @@ class Calendar implements \Hubleto\Framework\Interfaces\TestableInterface
 
   protected string $color = 'blue';
 
-  public function __construct(\Hubleto\Framework\Loader $main)
+  public function __construct(public \Hubleto\Framework\Loader $main)
   {
-    $this->main = $main;
   }
 
   public function setColor(string $color): void

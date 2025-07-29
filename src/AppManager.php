@@ -4,7 +4,6 @@ namespace HubletoMain;
 
 class AppManager
 {
-  public \Hubleto\Framework\Loader $main;
   public \Hubleto\Framework\App $activatedApp;
 
   /** @var array<\Hubleto\Framework\App> */
@@ -16,9 +15,8 @@ class AppManager
   /** @var array<string> */
   public array $registeredAppNamespaces = [];
 
-  public function __construct(\Hubleto\Framework\Loader $main)
+  public function __construct(public \Hubleto\Framework\Loader $main)
   {
-    $this->main = $main;
   }
 
   public function init(): void

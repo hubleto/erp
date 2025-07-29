@@ -8,8 +8,6 @@ namespace HubletoMain;
 class ReleaseManager
 {
 
-  use \Hubleto\Framework\Traits\MainTrait;
-
   /**
    * @var array{version: string, codename: string}
    */
@@ -21,9 +19,8 @@ class ReleaseManager
    * @param \Hubleto\Framework\Loader $main
    * 
    */
-  public function __construct(\Hubleto\Framework\Loader $main)
+  public function __construct(public \Hubleto\Framework\Loader $main)
   {
-    $this->main = $main;
   }
 
   /**

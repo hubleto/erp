@@ -58,8 +58,6 @@ class Loader extends \Hubleto\Framework\Loader
           );
         }
 
-        // render static assets, if requested
-        $this->renderAssets();
       }
 
       // inicializacia dependency injection

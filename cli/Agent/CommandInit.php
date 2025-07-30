@@ -152,6 +152,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($srcFolder === null) {
       $srcFolder = realpath(__DIR__ . '/../../..');
     }
+    if ($srcUrl === null) {
+      $srcUrl = \Hubleto\Terminal::read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/main');
+    }
     if ($assetsUrl === null) {
       $assetsUrl = \Hubleto\Terminal::read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/assets');
     }
@@ -201,12 +204,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
         }
       }
     }
-
-    //    if ($smtpHost === null) $smtpHost = \Hubleto\Terminal::read('ConfigEnv.smtpHost');
-    //    if ($smtpHost != null && $smtpPort === null) $smtpPort = \Hubleto\Terminal::read('ConfigEnv.smtpPort');
-    //    if ($smtpHost != null && $smtpEncryption === null) $smtpEncryption = \Hubleto\Terminal::choose(['ssl', 'tls'], 'ConfigEnv.smtpEncryption', 'ssl');
-    //    if ($smtpHost != null && $smtpLogin === null) $smtpLogin = \Hubleto\Terminal::read('ConfigEnv.smtpLogin');
-    //    if ($smtpHost != null && $smtpPassword === null) $smtpPassword = \Hubleto\Terminal::read('ConfigEnv.smtpPassword');
 
     $errors = [];
     $errorColumns = [];

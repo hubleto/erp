@@ -1,8 +1,0 @@
-namespace: HubletoApp\Community\Desktop
-rootUrlSlug: desktop
-name: Desktop
-icon: fas fa-home
-author:
-  name: "WAI.blue"
-  company: "wai.blue"
-highlight: Default Hubleto desktop implementation.

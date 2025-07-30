@@ -9,7 +9,8 @@
     },
     "require": {
         "hubleto/terminal": "@dev",
-        "hubleto/framework": "@dev"
+        "hubleto/framework": "@dev",
+        "hubleto/apps": "@dev"
     },
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "autoload": {
@@ -19,19 +20,8 @@
             "HubletoMain\\Hook\\": "hooks",
             "HubletoMain\\Cron\\": "crons",
             "HubletoMain\\Report\\": "reports",
-            "HubletoMain\\Installer\\": "installer",
-            "HubletoApp\\Community\\": "apps"
+            "HubletoMain\\Installer\\": "installer"
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../terminal"
-        },
-        {
-            "type": "path",
-            "url": "../framework"
-        }
-    ],
     "minimum-stability": "dev"
 }

@@ -1,9 +1,0 @@
-namespace: HubletoApp\Community\Suppliers
-sidebarGroup: supply-chain
-rootUrlSlug: suppliers
-name: Suppliers
-icon: fas fa-truck-fast
-author:
-  name: "WAI.blue"
-  nick: "wai.blue"
-highlight: List of product suppliers

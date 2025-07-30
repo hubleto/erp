@@ -1,9 +1,0 @@
-namespace: HubletoApp\Community\Dashboards
-sidebarGroup: reporting
-rootUrlSlug: dashboards
-name: Dashboards
-icon: fas fa-table
-author:
-  name: "WAI.blue"
-  company: "wai.blue"
-highlight: Free dashboards app

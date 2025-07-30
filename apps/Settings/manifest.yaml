@@ -1,9 +1,0 @@
-namespace: HubletoApp\Community\Settings
-sidebarGroup: maintenance
-rootUrlSlug: settings
-name: Settings
-icon: fas fa-sliders
-author:
-  name: "WAI.blue"
-  company: "wai.blue"
-highlight: Settings and control panel for your Hubleto.

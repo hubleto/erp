@@ -10,15 +10,16 @@ $config['accountFullName'] = '{{ accountFullName }}';
 
 // dirs
 
-$config['srcFolder'] = '{{ srcFolder }}';
 $config['rootFolder'] = '{{ rootFolder }}';
+$config['srcFolder'] = '{{ srcFolder }}';
 $config['logFolder'] = '{{ rootFolder }}/log';
 $config['uploadFolder'] = '{{ rootFolder }}/upload';
 
 // urls
 $config['rewriteBase'] = "{{ rewriteBase }}";
-$config['srcUrl'] = '{{ srcUrl }}';
 $config['rootUrl'] = '{{ rootUrl }}';
+$config['srcUrl'] = '{{ srcUrl }}';
+$config['assetsUrl'] = '{{ assetsUrl }}';
 $config['uploadUrl'] = '{{ rootUrl }}/upload';
 
 // db

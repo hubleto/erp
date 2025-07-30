@@ -28,12 +28,18 @@ import { Tooltip } from "primereact/tooltip";
 class HubletoMain extends HubletoReactUi {
   language: string = 'en';
   idUser: number = 0;
+  isPremium: boolean = false;
   user: any;
   apps: any = {};
   dynamicContentInjectors: any = {};
 
   constructor(config: object) {
     super(config);
+
+    this.idUser = config['idUser'];
+    this.isPremium = config['isPremium'];
+    this.language = config['language'];
+    this.loadDictionary(config['language']);
 
     this.registerReactComponent('Modal', Modal);
 
@@ -196,18 +202,8 @@ class HubletoMain extends HubletoReactUi {
 
 //@ts-ignore
 const main: HubletoMain = new HubletoMain(window.ConfigEnv);
-// const framework: HubletoFramework = new HubletoFramework();
 
-globalThis.app = main; // Hubleto requires 'app' property
 globalThis.main = main;
-
-// globalThis.framework = framework;
-// console.log('globalThis.framework = ', framework);
-console.log('window.ConfigEnv = ', window.ConfigEnv);
-
-globalThis.main.idUser = window.ConfigEnv.idUser;
-globalThis.main.isPremium = window.ConfigEnv.isPremium;
-globalThis.main.loadDictionary(window.ConfigEnv.language);
 
 document.addEventListener('readystatechange', function() {
   if (document.readyState === 'complete') {

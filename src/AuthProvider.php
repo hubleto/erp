@@ -15,6 +15,7 @@ use Hubleto\Framework\Models\Token;
  *   login: string,
  *   email: string,
  *   language: string,
+ *   apps: string,
  *   ROLES: array<mixed>,
  *   TEAMS: array<mixed>,
  *   DEFAULT_COMPANY: array<mixed>,
@@ -55,6 +56,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
       'last_name' => (string) ($tmp['last_name'] ?? ''),
       'is_active' => (bool) ($tmp['is_active'] ?? false),
       'language' => (string) ($tmp['language'] ?? false),
+      'apps' => (string) ($tmp['apps'] ?? ''),
       'ROLES' => (array) ($tmp['ROLES'] ?? []),
       'TEAMS' => (array) ($tmp['TEAMS'] ?? []),
       'DEFAULT_COMPANY' => (array) ($tmp['DEFAULT_COMPANY'] ?? []),
@@ -78,6 +80,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
       'last_name' => (string) ($tmp['last_name'] ?? ''),
       'is_active' => (bool) ($tmp['is_active'] ?? false),
       'language' => (string) ($tmp['language'] ?? false),
+      'apps' => (string) ($tmp['apps'] ?? ''),
       'ROLES' => (array) ($tmp['ROLES'] ?? []),
       'TEAMS' => (array) ($tmp['TEAMS'] ?? []),
       'DEFAULT_COMPANY' => (array) ($tmp['DEFAULT_COMPANY'] ?? []),
@@ -112,7 +115,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
   public function findUsersByLogin(string $login): array
   {
     return $this->createUserModel()->record
-      ->where('email', $login)
+      ->where('email', trim($login))
       ->where($this->activeAttribute, '<>', 0)
       ->get()
       ->makeVisible([$this->passwordAttribute])

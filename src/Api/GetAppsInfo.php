@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\Framework\Api;
+namespace HubletoMain\Api;
 
 class GetAppsInfo extends \HubletoMain\Controllers\ApiController
 {

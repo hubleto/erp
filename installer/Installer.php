@@ -61,6 +61,7 @@ class Installer
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],
       \HubletoApp\Community\About\Loader::class => [ 'sidebarOrder' => 99998, ],
+      \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99998, ],
     ],
     'cloud' => [
       \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99999, ],

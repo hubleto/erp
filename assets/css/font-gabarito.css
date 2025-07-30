@@ -2,5 +2,5 @@
   font-family: 'Gabarito';
   font-style: normal;
   font-weight: 500;
-  src: url("../fonts/Gabarito/static/Gabarito-Regular.ttf") format('truetype');
+  src: url("../../../vendor/hubleto/main/assets/fonts/Gabarito/static/Gabarito-Regular.ttf") format('truetype');
 }

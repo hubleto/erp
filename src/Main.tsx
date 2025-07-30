@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React, { Component } from 'react';
 import 'primereact/resources/themes/lara-light-teal/theme.css';
 
@@ -195,6 +196,23 @@ class HubletoMain extends HubletoReactUi {
 
 //@ts-ignore
 const main: HubletoMain = new HubletoMain(window.ConfigEnv);
+// const framework: HubletoFramework = new HubletoFramework();
 
 globalThis.app = main; // Hubleto requires 'app' property
 globalThis.main = main;
+
+// globalThis.framework = framework;
+// console.log('globalThis.framework = ', framework);
+console.log('window.ConfigEnv = ', window.ConfigEnv);
+
+globalThis.main.idUser = window.ConfigEnv.idUser;
+globalThis.main.isPremium = window.ConfigEnv.isPremium;
+globalThis.main.loadDictionary(window.ConfigEnv.language);
+
+document.addEventListener('readystatechange', function() {
+  if (document.readyState === 'complete') {
+    globalThis.main.renderReactElements();
+    globalThis.main.createThemeObserver();
+  }
+});
+

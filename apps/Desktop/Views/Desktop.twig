@@ -54,52 +54,17 @@
       'url': '{{ config.rootUrl }}',
       'rootUrl': '{{ config.rootUrl }}',
       'uploadUrl': '{{ config.uploadUrl }}',
+      'idUser': {{ user.id ?? 0 }},
+      'isPremium': {% if viewParams.main.isPremium %} true {% else %} false {% endif %},
+      'language': '{{ user.language ?: "en" }}'
     }
   </script>
 
-  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/hubleto.js'></script>
-  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/ajax_functions.js'></script>
-  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/base64.js'></script>
-  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/cookie.js'></script>
-  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/jquery-3.5.1.js'></script>
-  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/md5.js'></script>
-  <script src='{{ config.rootUrl }}/vendor/hubleto/framework/src/Assets/Js/moment.min.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/main.js'></script>
 
-  <script defer src='{{ config.rootUrl }}/assets/compiled/js/vendors.js'></script>
-  <script defer src='{{ config.rootUrl }}/assets/compiled/js/hubleto.js'></script>
-
-  <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/font-gabarito.css">
-  <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/fontawesome-6.6.css">
-  <link rel="stylesheet" type="text/css" href="{{ config.rootUrl }}/assets/compiled/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/compiled/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ config.srcUrl }}/assets/css/themes/{{ viewParams.currentTheme }}.css">
-  <script>
-    Hubleto.onAppLoaded(() => {
-      globalThis.main.renderReactElements();
-      globalThis.main.createThemeObserver();
-      {% if config.debugConsoleErrors %}
-        globalThis.main.startConsoleErrorLogger();
-      {% endif %}
-      globalThis.main.idUser = {{ user.id ?? 0 }};
-      globalThis.main.isPremium = {% if viewParams.main.isPremium %} true {% else %} false {% endif %};
-      globalThis.main.loadDictionary('{{ user.language ?: "en" }}');
-    });
 
-    function applyTheme() {
-      if (localStorage.theme == "dark") {
-        $('*').addClass('dark');
-        $('#theme-toggle-btn').find('.icon i').removeClass('fa-sun').addClass('fa-moon');
-      } else {
-        $('*').removeClass('dark');
-        $('#theme-toggle-btn').find('.icon i').removeClass('fa-moon').addClass('fa-sun');
-      }
-    }
-
-    function toggleTheme() {
-      localStorage.theme = (localStorage.theme == "dark" ? "light" : "dark");
-      applyTheme();
-    }
-
-  </script>
 
 </head>
 
@@ -362,6 +327,7 @@
 
   <script>
     var sidebarState = false;
+
     function lchr(show) {
       if (show) {
         $('#app-launcher').addClass('visible');
@@ -379,12 +345,12 @@
       if (e.keyCode == 13) { b.filter(':visible').get(0).click(); return; }
     }
 
-    $(window).on('resize', function() {
+    {# $(window).on('resize', function() {
       if ($(window).width() > 768) {
         $('#default-sidebar').css('translate', '');
         sidebarState = false;
       }
-    });
+    }); #}
 
     function showSidebar() {
       if (sidebarState == false) {
@@ -396,7 +362,22 @@
       }
     }
 
-    applyTheme();
+    function applyTheme() {
+      if (localStorage.theme == "dark") {
+        $('*').addClass('dark');
+        $('#theme-toggle-btn').find('.icon i').removeClass('fa-sun').addClass('fa-moon');
+      } else {
+        $('*').removeClass('dark');
+        $('#theme-toggle-btn').find('.icon i').removeClass('fa-moon').addClass('fa-sun');
+      }
+    }
+
+    function toggleTheme() {
+      localStorage.theme = (localStorage.theme == "dark" ? "light" : "dark");
+      applyTheme();
+    }
+
+    {# applyTheme(); #}
 
   </script>
 

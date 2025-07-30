@@ -1,5 +1,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
+@import "../assets/css/font-gabarito.css";
+@import "../assets/css/fontawesome-6.6.css";
+
 @theme {
   --font-sans: 'Gabarito', 'sans-serif';
   --font-serif: 'Merriweather', 'serif';

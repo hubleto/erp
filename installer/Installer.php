@@ -17,6 +17,7 @@ class Installer
   public string $rootUrl = '';
   public string $srcFolder = '';
   public string $srcUrl = '';
+  public string $assetsUrl = '';
 
   public string $premiumRepoFolder = '';
 
@@ -108,6 +109,7 @@ class Installer
     string $rootUrl,
     string $srcFolder,
     string $srcUrl,
+    string $assetsUrl,
     string $dbHost,
     string $dbName,
     string $dbUser,
@@ -133,6 +135,7 @@ class Installer
     $this->rootUrl = $rootUrl;
     $this->srcFolder = str_replace('\\', '/', $srcFolder);
     $this->srcUrl = $srcUrl;
+    $this->assetsUrl = $assetsUrl;
 
     $this->dbHost = $dbHost;
     $this->dbName = $dbName;
@@ -245,12 +248,13 @@ class Installer
     $configEnv = str_replace('{{ srcFolder }}', $this->srcFolder, $configEnv);
     $configEnv = str_replace('{{ rootFolder }}', $this->rootFolder, $configEnv);
     $configEnv = str_replace('{{ srcUrl }}', $this->srcUrl, $configEnv);
+    $configEnv = str_replace('{{ rootUrl }}', $this->rootUrl, $configEnv);
+    $configEnv = str_replace('{{ assetsUrl }}', $this->assetsUrl, $configEnv);
     $configEnv = str_replace('{{ dbHost }}', $this->main->config->getAsString('db_host'), $configEnv);
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
     $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);
     $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);
     $configEnv = str_replace('{{ rewriteBase }}', $this->accountRewriteBase, $configEnv);
-    $configEnv = str_replace('{{ rootUrl }}', $this->rootUrl, $configEnv);
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
     $configEnv = str_replace('{{ sessionSalt }}', \Hubleto\Framework\Helper::str2url($this->uid), $configEnv);
     $configEnv = str_replace('{{ accountUid }}', \Hubleto\Framework\Helper::str2url($this->uid), $configEnv);

@@ -20,6 +20,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $rootUrl = null;
     $srcFolder = null;
     $srcUrl = null;
+    $assetsUrl = null;
     $dbHost = null;
     $dbUser = null;
     $dbPassword = null;
@@ -64,6 +65,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
     if (isset($config['srcUrl'])) {
       $srcUrl = $config['srcUrl'];
+    }
+    if (isset($config['assetsUrl'])) {
+      $assetsUrl = $config['assetsUrl'];
     }
     if (isset($config['dbHost'])) {
       $dbHost = $config['dbHost'];
@@ -148,8 +152,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($srcFolder === null) {
       $srcFolder = realpath(__DIR__ . '/../../..');
     }
-    if ($srcUrl === null) {
-      $srcUrl = \Hubleto\Terminal::read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/main');
+    if ($assetsUrl === null) {
+      $assetsUrl = \Hubleto\Terminal::read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/assets');
     }
     if ($dbHost === null) {
       $dbHost = \Hubleto\Terminal::read('ConfigEnv.dbHost', 'localhost');
@@ -248,7 +252,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan("Initializing with following config:\n");
     \Hubleto\Terminal::cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
     \Hubleto\Terminal::cyan('  -> rootFolder = ' . (string) $rootFolder . "\n");
+    \Hubleto\Terminal::cyan('  -> srcFolder = ' . (string) $srcFolder . "\n");
     \Hubleto\Terminal::cyan('  -> rootUrl = ' . (string) $rootUrl . "\n");
+    \Hubleto\Terminal::cyan('  -> srcUrl = ' . (string) $srcUrl . "\n");
+    \Hubleto\Terminal::cyan('  -> assetsUrl = ' . (string) $assetsUrl . "\n");
     \Hubleto\Terminal::cyan('  -> dbHost = ' . (string) $dbHost . "\n");
     \Hubleto\Terminal::cyan('  -> dbUser = ' . (string) $dbUser . "\n");
     \Hubleto\Terminal::cyan('  -> dbPassword = ***' . "\n");
@@ -262,10 +269,11 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
     \Hubleto\Terminal::cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
-    $this->main->config->set('srcFolder', $srcFolder);
-    $this->main->config->set('url', $srcUrl);
     $this->main->config->set('rootFolder', $rootFolder);
+    $this->main->config->set('srcFolder', $srcFolder);
     $this->main->config->set('rootUrl', $rootUrl);
+    $this->main->config->set('srcUrl', $srcUrl);
+    $this->main->config->set('assetsUrl', $assetsUrl);
 
     $this->main->config->set('db_host', $dbHost);
     $this->main->config->set('db_user', $dbUser);
@@ -291,6 +299,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       (string) $rootUrl,
       (string) $srcFolder,
       (string) $srcUrl,
+      (string) $assetsUrl,
       (string) $dbHost,
       (string) $dbName,
       (string) $dbUser,

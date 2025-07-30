@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 class EmailProvider
 {
 
-  private string $defaultEmailTemplate = "@hubleto/layouts/Email.twig";
+  private string $defaultEmailTemplate = "@hubleto-main/layouts/Email.twig";
 
   private $smtpHost;
   private $smtpPort;

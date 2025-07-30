@@ -16,7 +16,7 @@ class ControllerSignIn extends \HubletoMain\Controller
       setcookie('incorrectLogin', '', time() - 3600);
     }
 
-    $this->setView('@hubleto/SignIn.twig', [
+    $this->setView('@hubleto-main/SignIn.twig', [
       'status' => $incorrectLogin == "1",
       'login' => $this->main->urlParamAsString('user'),
     ]);

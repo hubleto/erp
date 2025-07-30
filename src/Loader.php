@@ -33,74 +33,7 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function __construct(array $config = [], int $mode = self::HUBLETO_MODE_FULL)
   {
-    $this->setAsGlobal();
-
-    $this->params = $this->extractParamsFromRequest();
-
-    $this->mode = $mode;
-
-    try {
-
-      // Helper::setGlobalApp($this);
-
-      $this->config = $this->createConfigManager($config);
-
-      if (php_sapi_name() !== 'cli') {
-        if (!empty($_GET['route'])) {
-          $this->requestedUri = $_GET['route'];
-        } else if ($this->config->getAsString('rewriteBase') == "/") {
-          $this->requestedUri = ltrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), "/");
-        } else {
-          $this->requestedUri = str_replace(
-            $this->config->getAsString('rewriteBase'),
-            "",
-            parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
-          );
-        }
-
-      }
-
-      // inicializacia dependency injection
-      $this->di = $this->createDependencyInjection();
-
-      // inicializacia session managementu
-      $this->session = $this->createSessionManager();
-
-      // inicializacia debug konzoly
-      $this->logger = $this->createLogger();
-
-      // translator
-      $this->translator = $this->createTranslator();
-
-      // inicializacia routera
-      $this->router = $this->createRouter();
-
-      // inicializacia locale objektu
-      $this->locale = $this->createLocale();
-
-      // object pre kontrolu permissions
-      $this->permissions = $this->createPermissionsManager();
-
-      // auth provider
-      $this->auth = $this->createAuthProvider();
-
-      // test provider
-      $this->test = $this->createTestProvider();
-
-      // Twig renderer
-      $this->createRenderer();
-
-      // PDO
-      $this->pdo = new \Hubleto\Framework\PDO($this);
-
-    } catch (\Exception $e) {
-      echo "Hubleto boot failed: [".get_class($e)."] ".$e->getMessage() . "\n";
-      echo $e->getTraceAsString() . "\n";
-      exit;
-    }
-
-
-
+    parent::__construct($config, $mode);
 
     // Hooks
     $this->hooks = $this->di->create(\HubletoMain\HookManager::class);
@@ -178,55 +111,14 @@ class Loader extends \Hubleto\Framework\Loader
   public function configureRenderer(): void
   {
 
-    $this->twigLoader->addPath($this->config->getAsString('srcFolder'));
-    $this->twigLoader->addPath($this->config->getAsString('srcFolder'), 'app');
+    parent::configureRenderer();
 
-    $this->twig->addGlobal('config', $this->config->get());
-    $this->twig->addExtension(new \Twig\Extension\StringLoaderExtension());
-    $this->twig->addExtension(new \Twig\Extension\DebugExtension());
-
-    $this->twig->addFunction(new \Twig\TwigFunction(
-      'str2url',
-      function ($string) {
-        return Helper::str2url($string ?? '');
-      }
-    ));
-    $this->twig->addFunction(new \Twig\TwigFunction(
-      'hasPermission',
-      function (string $permission, array $idUserRoles = []) {
-        return $this->permissions->granted($permission, $idUserRoles);
-      }
-    ));
-    $this->twig->addFunction(new \Twig\TwigFunction(
-      'hasRole',
-      function (int|string $role) {
-        return $this->permissions->hasRole($role);
-      }
-    ));
-    $this->twig->addFunction(new \Twig\TwigFunction(
-      'setTranslationContext',
-      function ($context) {
-        $this->translationContext = $context;
-      }
-    ));
-    $this->twig->addFunction(new \Twig\TwigFunction(
-      'translate',
-      function ($string, $context = '') {
-        if (empty($context)) $context = $this->translationContext;
-        return $this->translate($string, [], $context);
-      }
-    ));
-
-    $this->twigLoader->addPath(__DIR__ . '/../views', 'hubleto');
+    $this->twigLoader->addPath(__DIR__ . '/../views', 'hubleto-main');
     $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
-    $this->twigLoader->addPath($this->config->getAsString('rootFolder') . '/src/views', 'project');
 
-    $this->twig->addFunction(new \Twig\TwigFunction(
-      'number',
-      function (string $amount) {
-        return number_format((float) $amount, 2, ",", " ");
-      }
-    ));
+    if (is_dir($this->config->getAsString('rootFolder') . '/src/views')) {
+      $this->twigLoader->addPath($this->config->getAsString('rootFolder') . '/src/views', 'project');
+    }
 
   }
 

@@ -137,7 +137,7 @@ class Controller extends \Hubleto\Framework\Controller
   public function setView(null|string $view, array|null $viewParams = null)
   {
     if (!$this->activeUserHasPermission()) {
-      parent::setView('@hubleto/AccessForbidden.twig', [
+      parent::setView('@hubleto-main/AccessForbidden.twig', [
         'message' => "You have no access neither to {$this->hubletoApp->manifest['name']} nor {$this->shortName}."
       ]);
     } else {

@@ -14,7 +14,7 @@ class ControllerNotFound extends \HubletoMain\Controller
   {
     parent::prepareView();
 
-    $this->setView('@hubleto/NotFound.twig');
+    $this->setView('@hubleto-main/NotFound.twig');
   }
 
 }

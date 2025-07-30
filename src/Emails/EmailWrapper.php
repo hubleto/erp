@@ -5,7 +5,7 @@ namespace HubletoMain\Emails;
 class EmailWrapper
 {
   public $emailProvider;
-  private const EMAIL_TEMPLATE = "@hubleto/layouts/Email.twig";
+  private const EMAIL_TEMPLATE = "@hubleto-main/layouts/Email.twig";
 
   public function __construct(public \Hubleto\Framework\Loader $main)
   {

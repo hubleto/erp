@@ -6,14 +6,9 @@ namespace HubletoMain\Cli\Agent;
 
 class Command
 {
-  public \HubletoMain\Loader $main;
 
-  public array $arguments = [];
-
-  public function __construct(\HubletoMain\Loader $main, array $arguments)
+  public function __construct(public \HubletoMain\Loader $main, public array $arguments)
   {
-    $this->main = $main;
-    $this->arguments = $arguments;
   }
 
   public function sanitizeAppNamespace(string $appNamespace): string

@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain;
 
 class HookManager
 {
-  /** @var array<\Hubleto\Framework\Controller\HookController> */
+  /** @var array<\HubletoMain\Hook> */
   protected array $hooks = [];
 
   public function __construct(public \Hubleto\Framework\Loader $main)
@@ -37,7 +37,9 @@ class HookManager
 
   public function addHook(string $hookClass): void
   {
-    $this->hooks[$hookClass] = new $hookClass($this->main);
+    if (is_subclass_of($hookClass, \HubletoMain\Hook::class)) {
+      $this->hooks[$hookClass] = new $hookClass($this->main);
+    }
   }
 
   public function getHooks(): array
@@ -45,7 +47,7 @@ class HookManager
     return $this->hooks;
   }
 
-  public function run(string $trigger, array $args)
+  public function run(string $trigger, array $args): void
   {
     foreach ($this->hooks as $hookClass => $hook) {
       $hook->run($trigger, $args);

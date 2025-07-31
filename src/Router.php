@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain;
 
@@ -10,7 +10,7 @@ use HubletoMain\Controllers\ControllerNotFound;
 class Router extends \Hubleto\Framework\Router
 {
 
-  public function __construct(public \Hubleto\Framework\Loader $main)
+  public function __construct(\HubletoMain\Loader $main)
   {
     parent::__construct($main);
 
@@ -30,17 +30,17 @@ class Router extends \Hubleto\Framework\Router
 
   public function createSignInController(): \HubletoMain\Controller
   {
-    return new ControllerSignIn($this->main);
+    return $this->main->di->create(ControllerSignIn::class);
   }
 
   public function createNotFoundController(): \HubletoMain\Controller
   {
-    return new ControllerNotFound($this->main);
+    return $this->main->di->create(ControllerNotFound::class);
   }
 
   public function createResetPasswordController(): \HubletoMain\Controller
   {
-    return new ControllerResetPassword($this->main);
+    return $this->main->di->create(ControllerResetPassword::class);
   }
 
   public function createDesktopController(): \HubletoMain\Controller

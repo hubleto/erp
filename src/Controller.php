@@ -1,7 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain;
 
+/**
+ * @property \HubletoMain\Loader $main
+ */
 class Controller extends \Hubleto\Framework\Controller
 {
 
@@ -11,7 +14,7 @@ class Controller extends \Hubleto\Framework\Controller
   public string $appNamespace = '';
   public \Hubleto\Framework\App $hubletoApp;
 
-  public function __construct(public \Hubleto\Framework\Loader $main)
+  public function __construct(\Hubleto\Framework\Loader $main)
   {
 
     if (empty($this->translationContext)) {
@@ -99,7 +102,7 @@ class Controller extends \Hubleto\Framework\Controller
         }
         file_put_contents(
           $logFolder . '/usage/' . date('Y-m-d') . '.log',
-          date('H:i:s') . ' ' . $user['id'] . ' ' . get_class($this) . ' '. json_encode(array_keys($this->main->getUrlParams()), true) . "\n",
+          date('H:i:s') . ' ' . $user['id'] . ' ' . get_class($this) . ' '. json_encode(array_keys($this->main->getUrlParams())) . "\n",
           FILE_APPEND
         );
       }
@@ -134,15 +137,16 @@ class Controller extends \Hubleto\Framework\Controller
 
   }
 
-  public function setView(null|string $view, array|null $viewParams = null)
+  public function setView(string $view): void
   {
     if (!$this->activeUserHasPermission()) {
-      parent::setView('@hubleto-main/AccessForbidden.twig', [
+      $this->viewParams = [
         'message' => "You have no access neither to {$this->hubletoApp->manifest['name']} nor {$this->shortName}."
-      ]);
+      ];
+      parent::setView('@hubleto-main/AccessForbidden.twig');
     } else {
-      parent::setView($view, $viewParams);
-      $this->main->hooks->run('controller:set-view', [$this, $view, $viewParams]);
+      parent::setView($view);
+      $this->main->hooks->run('controller:set-view', [$this, $view]);
     }
   }
 

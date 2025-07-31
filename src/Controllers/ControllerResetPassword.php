@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain\Controllers;
 
@@ -34,10 +34,12 @@ class ControllerResetPassword extends \HubletoMain\Controller
     ) {
 
       if ($password !== $passwordConfirm) {
-        $this->setView('@hubleto-main/ResetPassword.twig', ['error' => 'Passwords do not match.']);
+        $this->viewParams = ['error' => 'Passwords do not match.'];
+        $this->setView('@hubleto-main/ResetPassword.twig');
         return;
       } elseif (strlen($password) < 8 || !preg_match('~[0-9]+~', $password)) {
-        $this->setView('@hubleto-main/ResetPassword.twig', ['error' => 'Password must be at least 8 characters long and must contain at least one numeric character.']);
+        $this->viewParams = ['error' => 'Password must be at least 8 characters long and must contain at least one numeric character.'];
+        $this->setView('@hubleto-main/ResetPassword.twig');
         return;
       } else {
         $this->main->auth->resetPassword();
@@ -54,7 +56,8 @@ class ControllerResetPassword extends \HubletoMain\Controller
     $mUser = $this->main->di->create(User::class);
     $passwordHash = $mUser->record->where('login', $login)->first()->password;
 
-    $this->setView('@hubleto-main/ResetPassword.twig', ['status' => false, 'welcome' => $passwordHash == '']);
+    $this->viewParams = ['status' => false, 'welcome' => $passwordHash == ''];
+    $this->setView('@hubleto-main/ResetPassword.twig');
   }
 
 }

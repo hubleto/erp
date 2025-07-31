@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain\Emails;
 
@@ -11,11 +11,11 @@ class EmailProvider
 
   private string $defaultEmailTemplate = "@hubleto-main/layouts/Email.twig";
 
-  private $smtpHost;
-  private $smtpPort;
-  private $smtpEncryption;
-  private $smtpUsername;
-  private $smtpPassword;
+  private string $smtpHost;
+  private int $smtpPort;
+  private string $smtpEncryption;
+  private string $smtpUsername;
+  private string $smtpPassword;
 
   public function __construct(public \Hubleto\Framework\Loader $main)
   {
@@ -24,7 +24,7 @@ class EmailProvider
   public function init(): void
   {
     $this->smtpHost = $this->main->config->getAsString('smtpHost', '');
-    $this->smtpPort = $this->main->config->getAsString('smtpPort', '');
+    $this->smtpPort = $this->main->config->getAsInteger('smtpPort', 0);
     $this->smtpEncryption = $this->main->config->getAsString('smtpEncryption', 'ssl');
     $this->smtpUsername = $this->main->config->getAsString('smtpLogin', '');
     $this->smtpPassword = $this->main->config->getAsString('smtpPassword', '');
@@ -38,7 +38,7 @@ class EmailProvider
     return $this->main->twig->render($template, ['title' => $title, 'body' => $rawBody]);
   }
 
-  public function send($to, $subject, $rawBody, $template = '', $fromName = 'Hubleto'): bool
+  public function send(string $to, string $subject, string $rawBody, string $template = '', string $fromName = 'Hubleto'): bool
   {
     if (!class_exists(PHPMailer::class)) {
       throw new \Exception('PHPMailer is required to send emails. Run `composer require phpmailer/phpmailer` to install it.');
@@ -74,7 +74,7 @@ class EmailProvider
     }
   }
 
-  public function sendEmail($to, $subject, $body, $fromName = 'Hubleto')
+  public function sendEmail(string $to, string $subject, string $body, string $fromName = 'Hubleto'): bool
   {
     if (!class_exists(PHPMailer::class)) {
       throw new \Exception('PHPMailer is required to send emails. Run `composer require phpmailer/phpmailer` to install it.');

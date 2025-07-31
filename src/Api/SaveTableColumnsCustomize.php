@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain\Api;
 
@@ -10,7 +10,9 @@ class SaveTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
   {
     try {
 
+      /** @var array<string, mixed> */
       $columnsConfig = $this->main->urlParamAsArray("record");
+
       $model = $this->main->getModel($this->main->urlParamAsString("model"));
       $tag = $this->main->urlParamAsString("tag");
       $allColumnsConfig = @json_decode($model->getConfigAsString('tableColumns'), true) ?? [];
@@ -20,10 +22,15 @@ class SaveTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
       }
 
       foreach ($columnsConfig as $colName => $column) {
-        $allColumnsConfig[$tag][$colName] = $column["is_hidden"];
+        if (is_array($column)) {
+          $allColumnsConfig[$tag][$colName] = (int) $column["is_hidden"];
+        }
       }
 
-      $this->main->config->save("user/".$this->main->auth->getUserId()."/models/".$model->fullName."/tableColumns", json_encode($allColumnsConfig));
+      $this->main->config->save(
+        "user/" . $this->main->auth->getUserId() . "/models/" . $model->fullName . "/tableColumns",
+        (string) json_encode($allColumnsConfig)
+      );
 
     } catch (Exception $e) {
       return [

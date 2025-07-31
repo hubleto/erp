@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
   This report does not do anything. It is just an example of how the

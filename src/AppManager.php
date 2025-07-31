@@ -1,7 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain;
 
+/**
+ * @property \HubletoMain\Loader $main
+ */
 class AppManager
 {
   public \Hubleto\Framework\App $activatedApp;
@@ -71,12 +74,13 @@ class AppManager
 
     // community apps
     $communityRepoFolder = $this->main->config->getAsString('srcFolder') . '/apps/community';
-    if (!empty($communityRepoFolder)) {
+    if (!is_dir($communityRepoFolder)) {
 
       foreach (scandir($communityRepoFolder) as $rootFolder) {
         $manifestFile = $communityRepoFolder . '/' . $rootFolder . '/manifest.yaml';
         if (@is_file($manifestFile)) {
-          $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
+          $manifestFileContent = file_get_contents($manifestFile);
+          $manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) $manifestFileContent);
           $manifest['appType'] = \Hubleto\Framework\App::APP_TYPE_COMMUNITY;
           $appNamespaces['HubletoApp\\Community\\' . $rootFolder] = $manifest;
         }
@@ -85,11 +89,12 @@ class AppManager
 
     // premium apps
     $premiumRepoFolder = $this->main->config->getAsString('premiumRepoFolder');
-    if (!empty($premiumRepoFolder)) {
+    if (!empty($premiumRepoFolder)&& is_dir($premiumRepoFolder)) {
       foreach (scandir($premiumRepoFolder) as $rootFolder) {
         $manifestFile = $premiumRepoFolder . '/' . $rootFolder . '/manifest.yaml';
         if (@is_file($manifestFile)) {
-          $manifest = (array) \Symfony\Component\Yaml\Yaml::parse(file_get_contents($manifestFile));
+          $manifestFileContent = file_get_contents($manifestFile);
+          $manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) $manifestFileContent);
           $manifest['appType'] = \Hubleto\Framework\App::APP_TYPE_PREMIUM;
           $appNamespaces['HubletoApp\\Premium\\' . $rootFolder] = $manifest;
         }
@@ -110,17 +115,6 @@ class AppManager
     }
 
     return $appNamespaces;
-  }
-
-  public function getAppConfig(string $appNamespace): array
-  {
-    $appNamespaces = $this->getInstalledAppNamespaces();
-    $key = $this->getAppNamespaceForConfig($appNamespace);
-    if (isset($apps[$key]) && is_array($appNamespaces[$key])) {
-      return $appNamespaces[$key];
-    } else {
-      return [];
-    }
   }
 
   public function createAppInstance(string $appNamespace): \Hubleto\Framework\App
@@ -300,8 +294,6 @@ class AppManager
     if (!is_dir($rootFolder . '/Controllers')) {
       mkdir($rootFolder . '/Controllers');
     }
-    // if (!is_dir($rootFolder . '/Models')) mkdir($rootFolder . '/Models');
-    // if (!is_dir($rootFolder . '/Models/RecordManagers')) mkdir($rootFolder . '/Models/RecordManagers');
     if (!is_dir($rootFolder . '/Views')) {
       mkdir($rootFolder . '/Views');
     }
@@ -310,17 +302,11 @@ class AppManager
     file_put_contents($rootFolder . '/Loader.tsx', $this->main->twig->render('@appTemplate/Loader.tsx.twig', $tplVars));
     file_put_contents($rootFolder . '/Calendar.php', $this->main->twig->render('@appTemplate/Calendar.php.twig', $tplVars));
     file_put_contents($rootFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml.twig', $tplVars));
-    // file_put_contents($rootFolder . '/Models/Contact.php', $this->main->twig->render('@appTemplate/Models/Contact.php.twig', $tplVars));
-    // file_put_contents($rootFolder . '/Models/RecordManagers/Contact.php', $this->main->twig->render('@appTemplate/Models/RecordManagers/Contact.php.twig', $tplVars));
     file_put_contents($rootFolder . '/Controllers/Home.php', $this->main->twig->render('@appTemplate/Controllers/Home.php.twig', $tplVars));
-    // file_put_contents($rootFolder . '/Controllers/Contacts.php', $this->main->twig->render('@appTemplate/Controllers/Contacts.php.twig', $tplVars));
     file_put_contents($rootFolder . '/Controllers/Settings.php', $this->main->twig->render('@appTemplate/Controllers/Settings.php.twig', $tplVars));
     file_put_contents($rootFolder . '/Views/Home.twig', $this->main->twig->render('@appTemplate/Views/Home.twig.twig', $tplVars));
-    // file_put_contents($rootFolder . '/Views/Contacts.twig', $this->main->twig->render('@appTemplate/Views/Contacts.twig.twig', $tplVars));
     file_put_contents($rootFolder . '/Views/Settings.twig', $this->main->twig->render('@appTemplate/Views/Settings.twig.twig', $tplVars));
   }
-
-
 
   public function canAppDangerouslyInjectDesktopHtmlContent(string $appNamespace): bool
   {

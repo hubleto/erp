@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain;
 
@@ -38,7 +38,9 @@ class CronManager
 
   public function addCron(string $cronClass): void
   {
-    $this->crons[$cronClass] = new $cronClass($this->main);
+    if (is_subclass_of($cronClass, \HubletoMain\Cron::class)) {
+      $this->crons[$cronClass] = new $cronClass($this->main);
+    }
   }
 
   public function getCrons(): array
@@ -54,7 +56,7 @@ class CronManager
       $minNow = (int) date('i');
       $hourNow = (int) date('H');
       $dayNow = (int) date('d');
-      $monthNowh = (int) date('m');
+      $monthNow = (int) date('m');
       $dowNow = (int) (date('N') - 1);
 
       $minSchedule = trim($schedule[0]);

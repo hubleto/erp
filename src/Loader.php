@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain;
 
@@ -91,7 +91,7 @@ class Loader extends \Hubleto\Framework\Loader
     }
   }
 
-  public function createRenderer()
+  public function createRenderer(): void
   {
     $this->twigLoader = new \Twig\Loader\FilesystemLoader();
     $this->twig = new \Twig\Environment($this->twigLoader, array(
@@ -242,7 +242,7 @@ class Loader extends \Hubleto\Framework\Loader
    * @param string $contextInner
    * @param string $string
    * 
-  * @return array|array<string, array<string, string>>
+  * @return void
    * 
    */
   public static function addToDictionary(string $language, string $contextInner, string $string): void
@@ -254,7 +254,7 @@ class Loader extends \Hubleto\Framework\Loader
 
     $main = \HubletoMain\Loader::getGlobalApp();
 
-    if ($main->config->getAsBool('autoTranslate')) {
+    if ($main->config->getAsBool('autoTranslate') && class_exists(\Stichoza\GoogleTranslate\GoogleTranslate::class)) {
       $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
       $tr->setSource('en'); // Translate from
       $tr->setTarget($language); // Translate to

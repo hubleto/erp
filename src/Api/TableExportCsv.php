@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain\Api;
 
@@ -6,6 +6,8 @@ use Exception;
 
 class TableExportCsv extends \HubletoMain\Controller
 {
+  public \Hubleto\Framework\Model $model;
+
   public function render(array $params): string
   {
     $model = $this->main->urlParamAsString('model');
@@ -42,9 +44,9 @@ class TableExportCsv extends \HubletoMain\Controller
         }
 
         if (is_array($value)) {
-          $valueStr = json_encode($value);
+          $valueStr = (string) json_encode($value);
         } elseif (is_object($value)) {
-          $valueStr = json_encode($value);
+          $valueStr = (string) json_encode($value);
         } else {
           $valueStr = (string) $value;
         }

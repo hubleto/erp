@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain\Emails;
 
 class EmailWrapper
 {
-  public $emailProvider;
+  public \HubletoMain\Emails\EmailProvider $emailProvider;
   private const EMAIL_TEMPLATE = "@hubleto-main/layouts/Email.twig";
 
   public function __construct(public \Hubleto\Framework\Loader $main)

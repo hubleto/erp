@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain\Controllers;
 
@@ -16,10 +16,12 @@ class ControllerSignIn extends \HubletoMain\Controller
       setcookie('incorrectLogin', '', time() - 3600);
     }
 
-    $this->setView('@hubleto-main/SignIn.twig', [
+    $this->viewParams = [
       'status' => $incorrectLogin == "1",
       'login' => $this->main->urlParamAsString('user'),
-    ]);
+    ];
+
+    $this->setView('@hubleto-main/SignIn.twig');
   }
 
 }

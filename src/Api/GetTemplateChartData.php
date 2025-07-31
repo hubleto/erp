@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain\Api;
 
@@ -17,7 +17,9 @@ class GetTemplateChartData extends \HubletoMain\Controllers\ApiController
 
   public function renderJson(): ?array
   {
+    /** @var array<string, mixed> */
     $config = $this->main->urlParamAsArray("config");
+
     $model = $this->main->getModel($this->main->urlParamAsString("model"));
 
     $groupBy = $config["groupsBy"][0]["field"];

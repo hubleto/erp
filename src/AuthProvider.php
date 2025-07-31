@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain;
 
@@ -20,6 +20,8 @@ use Hubleto\Framework\Models\Token;
  *   TEAMS: array<mixed>,
  *   DEFAULT_COMPANY: array<mixed>,
  * }
+ *
+ * @property \HubletoMain\Loader $main
  */
 class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
 {
@@ -171,7 +173,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
       $token->delete();
       $this->main->setUrlParam('password', $this->main->urlParamAsString('password'));
 
-      $this->main->auth->auth(false);
+      $this->main->auth->auth();
     } else {
       $token->delete();
     }

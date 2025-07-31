@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HubletoMain\Controllers;
 
@@ -14,9 +14,11 @@ class ControllerForgotPassword extends \HubletoMain\Controller
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
       $this->main->auth->forgotPassword();
-      $this->setView('@hubleto-main/ForgotPassword.twig', ['status' => 1]);
+      $this->viewParams = ['status' => 1];
+      $this->setView('@hubleto-main/ForgotPassword.twig');
     } else {
-      $this->setView('@hubleto-main/ForgotPassword.twig', ['status' => 0]);
+      $this->viewParams = ['status' => 0];
+      $this->setView('@hubleto-main/ForgotPassword.twig');
     }
   }
 

@@ -116,8 +116,8 @@ class Loader extends \Hubleto\Framework\Loader
     $this->twigLoader->addPath(__DIR__ . '/../views', 'hubleto-main');
     $this->twigLoader->addPath(__DIR__ . '/../../apps/src', 'app');
 
-    if (is_dir($this->config->getAsString('rootFolder') . '/src/views')) {
-      $this->twigLoader->addPath($this->config->getAsString('rootFolder') . '/src/views', 'project');
+    if (is_dir($this->projectFolder . '/src/views')) {
+      $this->twigLoader->addPath($this->projectFolder . '/src/views', 'project');
     }
 
   }

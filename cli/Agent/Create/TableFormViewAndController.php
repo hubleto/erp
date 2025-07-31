@@ -31,14 +31,12 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
     }
 
-    $rootFolder = $app->rootFolder;
-
     if (
       (
-        is_file($rootFolder . '/Components/Table' . $modelPluralForm . '.tsx')
-        || is_file($rootFolder . '/Components/Form' . $modelSingularForm . '.tsx')
-        || is_file($rootFolder . '/Controllers/' . $controller . '.php')
-        || is_file($rootFolder . '/Views/' . $view . '.php')
+        is_file($app->srcFolder . '/Components/Table' . $modelPluralForm . '.tsx')
+        || is_file($app->srcFolder . '/Components/Form' . $modelSingularForm . '.tsx')
+        || is_file($app->srcFolder . '/Controllers/' . $controller . '.php')
+        || is_file($app->srcFolder . '/Views/' . $view . '.php')
       )
       && !$force
     ) {
@@ -72,19 +70,19 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
       'view' => $view,
     ];
 
-    if (!is_dir($rootFolder . '/Components')) {
-      mkdir($rootFolder . '/Components');
+    if (!is_dir($app->srcFolder . '/Components')) {
+      mkdir($app->srcFolder . '/Components');
     }
-    if (!is_dir($rootFolder . '/Controllers')) {
-      mkdir($rootFolder . '/Controllers');
+    if (!is_dir($app->srcFolder . '/Controllers')) {
+      mkdir($app->srcFolder . '/Controllers');
     }
-    if (!is_dir($rootFolder . '/Views')) {
-      mkdir($rootFolder . '/Views');
+    if (!is_dir($app->srcFolder . '/Views')) {
+      mkdir($app->srcFolder . '/Views');
     }
-    file_put_contents($rootFolder . '/Components/Table' . $modelPluralForm . '.tsx', $this->main->twig->render('@snippets/Components/Table.tsx.twig', $tplVars));
-    file_put_contents($rootFolder . '/Components/Form' . $modelSingularForm . '.tsx', $this->main->twig->render('@snippets/Components/Form.tsx.twig', $tplVars));
-    file_put_contents($rootFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
-    file_put_contents($rootFolder . '/Views/' . $view . '.twig', $this->main->twig->render('@snippets/ViewWithTable.twig.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Components/Table' . $modelPluralForm . '.tsx', $this->main->twig->render('@snippets/Components/Table.tsx.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Components/Form' . $modelSingularForm . '.tsx', $this->main->twig->render('@snippets/Components/Form.tsx.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Views/' . $view . '.twig', $this->main->twig->render('@snippets/ViewWithTable.twig.twig', $tplVars));
 
     $codeLoaderTsxLine1 = [ "import Table{$modelPluralForm} from './Components/Table{$modelPluralForm}';" ];
     $codeLoaderTsxLine2 = [ "globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});" ];
@@ -96,17 +94,17 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
       "</a>",
     ];
 
-    $codeLoaderTsxLine1Inserted = \Hubleto\Terminal::insertCodeToFile($rootFolder . '/Loader.tsx', '//@hubleto-cli:imports', $codeLoaderTsxLine1);
-    $codeLoaderTsxLine2Inserted = \Hubleto\Terminal::insertCodeToFile($rootFolder . '/Loader.tsx', '//@hubleto-cli:register-components', $codeLoaderTsxLine2);
-    $codeRouteInserted = \Hubleto\Terminal::insertCodeToFile($rootFolder . '/Loader.php', '//@hubleto-cli:routes', $codeRoute);
-    $codeButtonInserted = \Hubleto\Terminal::insertCodeToFile($rootFolder . '/Views/Home.twig', '{# @hubleto-cli:buttons #}', $codeButton);
+    $codeLoaderTsxLine1Inserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Loader.tsx', '//@hubleto-cli:imports', $codeLoaderTsxLine1);
+    $codeLoaderTsxLine2Inserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Loader.tsx', '//@hubleto-cli:register-components', $codeLoaderTsxLine2);
+    $codeRouteInserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Loader.php', '//@hubleto-cli:routes', $codeRoute);
+    $codeButtonInserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Views/Home.twig', '{# @hubleto-cli:buttons #}', $codeButton);
 
     \Hubleto\Terminal::white("\n");
     \Hubleto\Terminal::cyan("Table, form, view and controller for model '{$model}' in '{$appNamespace}' created successfully.\n");
 
     if (!$codeLoaderTsxLine1Inserted || !$codeLoaderTsxLine2Inserted) {
       \Hubleto\Terminal::yellow("⚠ Failed to add some code automatically\n");
-      \Hubleto\Terminal::yellow("⚠  -> Add the Table component into {$app->rootFolder}/Loader.tsx\n");
+      \Hubleto\Terminal::yellow("⚠  -> Add the Table component into {$app->srcFolder}/Loader.tsx\n");
       \Hubleto\Terminal::colored("cyan", "black", "Add to Loader.tsx:");
       \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeLoaderTsxLine1));
       \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeLoaderTsxLine2));
@@ -115,7 +113,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
 
     if (!$codeRouteInserted) {
       \Hubleto\Terminal::yellow("⚠ Failed to add some code automatically\n");
-      \Hubleto\Terminal::yellow("⚠  -> Add the route in the `init()` method of {$app->rootFolder}/Loader.php\n");
+      \Hubleto\Terminal::yellow("⚠  -> Add the route in the `init()` method of {$app->srcFolder}/Loader.php\n");
       \Hubleto\Terminal::colored("cyan", "black", "Add to Loader.php->init():");
       \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeRoute));
       \Hubleto\Terminal::yellow("\n");
@@ -123,8 +121,8 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
 
     if (!$codeButtonInserted) {
       \Hubleto\Terminal::yellow("⚠ Failed to add some code automatically\n");
-      \Hubleto\Terminal::yellow("⚠  -> Add button to any view in {$app->rootFolder}/Views, e.g. Home.twig\n");
-      \Hubleto\Terminal::colored("cyan", "black", "Add to {$app->rootFolder}/Views/Home.twig:");
+      \Hubleto\Terminal::yellow("⚠  -> Add button to any view in {$app->srcFolder}/Views, e.g. Home.twig\n");
+      \Hubleto\Terminal::colored("cyan", "black", "Add to {$app->srcFolder}/Views/Home.twig:");
       \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeButton));
       \Hubleto\Terminal::white("\n");
     }
@@ -134,9 +132,9 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     }
 
     \Hubleto\Terminal::yellow("⚠  NEXT STEPS:\n");
-    \Hubleto\Terminal::yellow("⚠   -> Run `npm run build-js` in `{$this->main->config->getAsString('srcFolder')}` to compile Javascript.\n");
+    \Hubleto\Terminal::yellow("⚠   -> Run `npm run build-js` in `{$this->main->srcFolder}` to compile Javascript.\n");
     \Hubleto\Terminal::colored("cyan", "black", "Run: npm run --prefix hbl build-js");
-    \Hubleto\Terminal::colored("cyan", "black", "And then open in browser: {$this->main->config->getAsString('rootUrl')}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
+    \Hubleto\Terminal::colored("cyan", "black", "And then open in browser: {$this->main->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
   }
 
 }

@@ -29,9 +29,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
     }
 
-    $rootFolder = $app->rootFolder;
-
-    if (is_file($rootFolder . '/Models/' . $model . '.php') && !$force) {
+    if (is_file($app->srcFolder . '/Models/' . $model . '.php') && !$force) {
       throw new \Exception("Model '{$model}' already exists in app '{$appNamespace}'. Use 'force' to overwrite existing files.");
     }
 
@@ -45,21 +43,21 @@ class Model extends \HubletoMain\Cli\Agent\Command
       'modelPluralFormKebab' => $modelPluralFormKebab,
     ];
 
-    if (!is_dir($rootFolder . '/Models')) {
-      mkdir($rootFolder . '/Models');
+    if (!is_dir($app->srcFolder . '/Models')) {
+      mkdir($app->srcFolder . '/Models');
     }
-    if (!is_dir($rootFolder . '/Models/RecordManagers')) {
-      mkdir($rootFolder . '/Models/RecordManagers');
+    if (!is_dir($app->srcFolder . '/Models/RecordManagers')) {
+      mkdir($app->srcFolder . '/Models/RecordManagers');
     }
-    file_put_contents($rootFolder . '/Models/' . $model . '.php', $this->main->twig->render('@snippets/Model.php.twig', $tplVars));
-    file_put_contents($rootFolder . '/Models/RecordManagers/' . $model . '.php', $this->main->twig->render('@snippets/ModelRecordManager.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Models/' . $model . '.php', $this->main->twig->render('@snippets/Model.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Models/RecordManagers/' . $model . '.php', $this->main->twig->render('@snippets/ModelRecordManager.php.twig', $tplVars));
 
     $codeInstallModel = [
       "\$this->main->di->create(Models\\{$model}::class)->dropTableIfExists()->install();"
     ];
 
     $codeInstallModelInserted = \Hubleto\Terminal::insertCodeToFile(
-      $rootFolder . '/Loader.php',
+      $app->srcFolder . '/Loader.php',
       '//@hubleto-cli:install-tables',
       $codeInstallModel
     );
@@ -69,7 +67,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
 
     if (!$codeInstallModelInserted) {
       \Hubleto\Terminal::yellow("⚠ Failed to add some code automatically\n");
-      \Hubleto\Terminal::yellow("⚠  -> Add the model in `installTables()` method in  {$app->rootFolder}/Loader.php\n");
+      \Hubleto\Terminal::yellow("⚠  -> Add the model in `installTables()` method in  {$app->srcFolder}/Loader.php\n");
       \Hubleto\Terminal::colored("cyan", "black", "Add to Loader.php->installTables():");
       \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeInstallModel));
       \Hubleto\Terminal::white("\n");

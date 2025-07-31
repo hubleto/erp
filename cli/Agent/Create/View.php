@@ -25,19 +25,17 @@ class View extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
     }
 
-    $rootFolder = $app->rootFolder;
-
-    if (is_file($rootFolder . '/Views/' . $view . '.php') && !$force) {
+    if (is_file($app->srcFolder . '/Views/' . $view . '.php') && !$force) {
       throw new \Exception("View '{$view}' already exists in app '{$appNamespace}'. Use 'force' to overwrite existing files.");
     }
 
     $tplFolder = __DIR__ . '/../../Templates/snippets';
     $this->main->addTwigViewNamespace($tplFolder, 'snippets');
 
-    if (!is_dir($rootFolder . '/Views')) {
-      mkdir($rootFolder . '/Viewss');
+    if (!is_dir($app->srcFolder . '/Views')) {
+      mkdir($app->srcFolder . '/Viewss');
     }
-    file_put_contents($rootFolder . '/Views/' . $view . '.twig', $this->main->twig->render('@snippets/View.twig.twig'));
+    file_put_contents($app->srcFolder . '/Views/' . $view . '.twig', $this->main->twig->render('@snippets/View.twig.twig'));
 
     \Hubleto\Terminal::cyan("View '{$view}' in '{$appNamespace}' created successfully.\n");
     \Hubleto\Terminal::yellow("💡 TIP: Visit https://developer.hubleto.com/tutorial/add-route-controller-and-view on how to add routes for your controller and view.\n");

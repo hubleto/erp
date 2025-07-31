@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel='shortcut icon' href='{{ config.srcUrl }}/assets/images/logo-hubleto.png'>
+  <link rel='shortcut icon' href='{{ config.assetsUrl }}/images/logo-hubleto.png'>
   <title>Hubleto</title>
 
   <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/compiled/css/main.css">
@@ -18,16 +18,16 @@
   <div id="sign-in-screen">
     {% block languages %}
       <div class="languages">
-        <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ config.srcUrl }}/assets/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ config.srcUrl }}/assets/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ config.srcUrl }}/assets/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=cs" class="btn btn-white"><span class="icon"><img src="{{ config.srcUrl }}/assets/images/flags/cs.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=ro" class="btn btn-white"><span class="icon"><img src="{{ config.srcUrl }}/assets/images/flags/ro.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=cs" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/cs.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=ro" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/ro.jpg" style="max-height:1em;max-width:1em;" /></span></a>
       </div>
     {% endblock %}
     <div class="inner">
       <div class="logo">
-        <img src="{{ config.srcUrl }}/assets/images/logo-hubleto-text-horizontal.png" style="max-height:4em;margin-bottom:1em; width: auto;" />
+        <img src="{{ config.assetsUrl }}/images/logo-hubleto-text-horizontal.png" style="max-height:4em;margin-bottom:1em; width: auto;" />
       </div>
       <div class="form">
         <form class="content" id="login_form" action="" method="POST">
@@ -72,7 +72,7 @@
             </div>
             <div>
               {% block links %}
-                <a class="btn btn-transparent" href="{{ config.rootUrl }}/forgot-password">
+                <a class="btn btn-transparent" href="{{ config.projectUrl }}/forgot-password">
                   <span class="icon"><i class="fas fa-life-ring"></i></span>
                   <span class="text">{{ translate("Forgot password?") }}</span>
                 </a>

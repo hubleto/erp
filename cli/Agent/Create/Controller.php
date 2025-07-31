@@ -25,9 +25,7 @@ class Controller extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
     }
 
-    $rootFolder = $app->rootFolder;
-
-    if (is_file($rootFolder . '/Controllers/' . $controller . '.php') && !$force) {
+    if (is_file($app->srcFolder . '/Controllers/' . $controller . '.php') && !$force) {
       throw new \Exception("Controller '{$controller}' already exists in app '{$appNamespace}'. Use 'force' to overwrite existing files.");
     }
 
@@ -40,10 +38,10 @@ class Controller extends \HubletoMain\Cli\Agent\Command
       'controller' => $controller,
     ];
 
-    if (!is_dir($rootFolder . '/Controllers')) {
-      mkdir($rootFolder . '/Controllers');
+    if (!is_dir($app->srcFolder . '/Controllers')) {
+      mkdir($app->srcFolder . '/Controllers');
     }
-    file_put_contents($rootFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
 
     \Hubleto\Terminal::white("\n");
     \Hubleto\Terminal::cyan("Controller '{$controller}' in '{$appNamespace}' created successfully.\n");

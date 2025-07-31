@@ -73,30 +73,30 @@ class AppManager
     $appNamespaces = [];
 
     // community apps
-    $communityRepoFolder = $this->main->config->getAsString('srcFolder') . '/apps/community';
+    $communityRepoFolder = $this->main->srcFolder . '/../../apps/src';
     if (!is_dir($communityRepoFolder)) {
 
-      foreach (scandir($communityRepoFolder) as $rootFolder) {
-        $manifestFile = $communityRepoFolder . '/' . $rootFolder . '/manifest.yaml';
+      foreach (scandir($communityRepoFolder) as $folder) {
+        $manifestFile = $communityRepoFolder . '/' . $folder . '/manifest.yaml';
         if (@is_file($manifestFile)) {
           $manifestFileContent = file_get_contents($manifestFile);
           $manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) $manifestFileContent);
           $manifest['appType'] = \Hubleto\Framework\App::APP_TYPE_COMMUNITY;
-          $appNamespaces['HubletoApp\\Community\\' . $rootFolder] = $manifest;
+          $appNamespaces['HubletoApp\\Community\\' . $folder] = $manifest;
         }
       }
     }
 
     // premium apps
     $premiumRepoFolder = $this->main->config->getAsString('premiumRepoFolder');
-    if (!empty($premiumRepoFolder)&& is_dir($premiumRepoFolder)) {
-      foreach (scandir($premiumRepoFolder) as $rootFolder) {
-        $manifestFile = $premiumRepoFolder . '/' . $rootFolder . '/manifest.yaml';
+    if (!empty($premiumRepoFolder) && is_dir($premiumRepoFolder)) {
+      foreach (scandir($premiumRepoFolder) as $folder) {
+        $manifestFile = $premiumRepoFolder . '/' . $folder . '/manifest.yaml';
         if (@is_file($manifestFile)) {
           $manifestFileContent = file_get_contents($manifestFile);
           $manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) $manifestFileContent);
           $manifest['appType'] = \Hubleto\Framework\App::APP_TYPE_PREMIUM;
-          $appNamespaces['HubletoApp\\Premium\\' . $rootFolder] = $manifest;
+          $appNamespaces['HubletoApp\\Premium\\' . $folder] = $manifest;
         }
       }
     }
@@ -203,11 +203,11 @@ class AppManager
     }
 
     $app = $this->createAppInstance($appNamespace);
-    if (!file_exists($app->rootFolder . '/manifest.yaml')) {
+    if (!file_exists($app->srcFolder . '/manifest.yaml')) {
       throw new \Exception("{$appNamespace} does not provide manifest.yaml file.");
     }
 
-    $manifestFile = (string) file_get_contents($app->rootFolder . '/manifest.yaml');
+    $manifestFile = (string) file_get_contents($app->srcFolder . '/manifest.yaml');
     $manifest = (array) \Symfony\Component\Yaml\Yaml::parse($manifestFile);
     $dependencies = (array) ($manifest['requires'] ?? []);
 
@@ -263,12 +263,12 @@ class AppManager
     $app->test($test);
   }
 
-  public function createApp(string $appNamespace, string $rootFolder): void
+  public function createApp(string $appNamespace, string $appSrcFolder): void
   {
-    if (empty($rootFolder)) {
+    if (empty($appSrcFolder)) {
       throw new \Exception('App folder for \'' . $appNamespace . '\' not configured.');
     }
-    if (!is_dir($rootFolder)) {
+    if (!is_dir($appSrcFolder)) {
       throw new \Exception('App folder for \'' . $appNamespace . '\' is not a folder.');
     }
 
@@ -291,21 +291,21 @@ class AppManager
 
     $this->main->addTwigViewNamespace($tplFolder, 'appTemplate');
 
-    if (!is_dir($rootFolder . '/Controllers')) {
-      mkdir($rootFolder . '/Controllers');
+    if (!is_dir($appSrcFolder . '/Controllers')) {
+      mkdir($appSrcFolder . '/Controllers');
     }
-    if (!is_dir($rootFolder . '/Views')) {
-      mkdir($rootFolder . '/Views');
+    if (!is_dir($appSrcFolder . '/Views')) {
+      mkdir($appSrcFolder . '/Views');
     }
 
-    file_put_contents($rootFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
-    file_put_contents($rootFolder . '/Loader.tsx', $this->main->twig->render('@appTemplate/Loader.tsx.twig', $tplVars));
-    file_put_contents($rootFolder . '/Calendar.php', $this->main->twig->render('@appTemplate/Calendar.php.twig', $tplVars));
-    file_put_contents($rootFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml.twig', $tplVars));
-    file_put_contents($rootFolder . '/Controllers/Home.php', $this->main->twig->render('@appTemplate/Controllers/Home.php.twig', $tplVars));
-    file_put_contents($rootFolder . '/Controllers/Settings.php', $this->main->twig->render('@appTemplate/Controllers/Settings.php.twig', $tplVars));
-    file_put_contents($rootFolder . '/Views/Home.twig', $this->main->twig->render('@appTemplate/Views/Home.twig.twig', $tplVars));
-    file_put_contents($rootFolder . '/Views/Settings.twig', $this->main->twig->render('@appTemplate/Views/Settings.twig.twig', $tplVars));
+    file_put_contents($appSrcFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
+    file_put_contents($appSrcFolder . '/Loader.tsx', $this->main->twig->render('@appTemplate/Loader.tsx.twig', $tplVars));
+    file_put_contents($appSrcFolder . '/Calendar.php', $this->main->twig->render('@appTemplate/Calendar.php.twig', $tplVars));
+    file_put_contents($appSrcFolder . '/manifest.yaml', $this->main->twig->render('@appTemplate/manifest.yaml.twig', $tplVars));
+    file_put_contents($appSrcFolder . '/Controllers/Home.php', $this->main->twig->render('@appTemplate/Controllers/Home.php.twig', $tplVars));
+    file_put_contents($appSrcFolder . '/Controllers/Settings.php', $this->main->twig->render('@appTemplate/Controllers/Settings.php.twig', $tplVars));
+    file_put_contents($appSrcFolder . '/Views/Home.twig', $this->main->twig->render('@appTemplate/Views/Home.twig.twig', $tplVars));
+    file_put_contents($appSrcFolder . '/Views/Settings.twig', $this->main->twig->render('@appTemplate/Views/Settings.twig.twig', $tplVars));
   }
 
   public function canAppDangerouslyInjectDesktopHtmlContent(string $appNamespace): bool

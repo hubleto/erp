@@ -16,10 +16,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
   public function run(): void
   {
     $rewriteBase = null;
-    $rootFolder = null;
-    $rootUrl = null;
-    $srcFolder = null;
-    $srcUrl = null;
+    $projectFolder = null;
+    $projectUrl = null;
     $assetsUrl = null;
     $dbHost = null;
     $dbUser = null;
@@ -54,17 +52,11 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['rewriteBase'])) {
       $rewriteBase = $config['rewriteBase'];
     }
-    if (isset($config['rootFolder'])) {
-      $rootFolder = $config['rootFolder'];
+    if (isset($config['projectFolder'])) {
+      $projectFolder = $config['projectFolder'];
     }
-    if (isset($config['rootUrl'])) {
-      $rootUrl = $config['rootUrl'];
-    }
-    if (isset($config['srcFolder'])) {
-      $srcFolder = $config['srcFolder'];
-    }
-    if (isset($config['srcUrl'])) {
-      $srcUrl = $config['srcUrl'];
+    if (isset($config['projectUrl'])) {
+      $projectUrl = $config['projectUrl'];
     }
     if (isset($config['assetsUrl'])) {
       $assetsUrl = $config['assetsUrl'];
@@ -134,7 +126,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $rewriteBases = [];
     $lastRewriteBase = '';
 
-    $paths = explode('/', str_replace('\\', '/', $this->main->config->getAsString('rootFolder')));
+    $paths = explode('/', str_replace('\\', '/', $this->main->projectFolder));
     foreach (array_reverse($paths) as $tmpFolder) {
       $rewriteBases[] = $lastRewriteBase . '/';
       $lastRewriteBase = '/' . $tmpFolder . $lastRewriteBase;
@@ -143,17 +135,11 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($rewriteBase === null) {
       $rewriteBase = \Hubleto\Terminal::choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
     }
-    if ($rootFolder === null) {
-      $rootFolder = $this->main->config->getAsString('rootFolder');
+    if ($projectFolder === null) {
+      $projectFolder = $this->main->projectFolder;
     }
-    if ($rootUrl === null) {
-      $rootUrl = \Hubleto\Terminal::read('ConfigEnv.rootUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
-    }
-    if ($srcFolder === null) {
-      $srcFolder = realpath(__DIR__ . '/../../..');
-    }
-    if ($srcUrl === null) {
-      $srcUrl = \Hubleto\Terminal::read('ConfigEnv.srcUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/main');
+    if ($projectUrl === null) {
+      $projectUrl = \Hubleto\Terminal::read('ConfigEnv.projectUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
     }
     if ($assetsUrl === null) {
       $assetsUrl = \Hubleto\Terminal::read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/assets');
@@ -211,13 +197,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $errorColumns[] = 'adminEmail';
       $errors[] = 'Invalid admin email.';
     }
-    if (!filter_var($rootUrl, FILTER_VALIDATE_URL)) {
-      $errorColumns[] = 'rootUrl';
-      $errors[] = 'Invalid account url.';
-    }
-    if (!filter_var($srcUrl, FILTER_VALIDATE_URL)) {
-      $errorColumns[] = 'srcUrl';
-      $errors[] = 'Invalid main url.';
+    if (!filter_var($projectUrl, FILTER_VALIDATE_URL)) {
+      $errorColumns[] = 'projectUrl';
+      $errors[] = 'Invalid project URL.';
     }
 
     if (empty($packagesToInstall)) {
@@ -248,10 +230,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("Initializing with following config:\n");
     \Hubleto\Terminal::cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
-    \Hubleto\Terminal::cyan('  -> rootFolder = ' . (string) $rootFolder . "\n");
-    \Hubleto\Terminal::cyan('  -> srcFolder = ' . (string) $srcFolder . "\n");
-    \Hubleto\Terminal::cyan('  -> rootUrl = ' . (string) $rootUrl . "\n");
-    \Hubleto\Terminal::cyan('  -> srcUrl = ' . (string) $srcUrl . "\n");
+    \Hubleto\Terminal::cyan('  -> projectFolder = ' . (string) $projectFolder . "\n");
+    \Hubleto\Terminal::cyan('  -> projectUrl = ' . (string) $projectUrl . "\n");
     \Hubleto\Terminal::cyan('  -> assetsUrl = ' . (string) $assetsUrl . "\n");
     \Hubleto\Terminal::cyan('  -> dbHost = ' . (string) $dbHost . "\n");
     \Hubleto\Terminal::cyan('  -> dbUser = ' . (string) $dbUser . "\n");
@@ -266,16 +246,16 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
     \Hubleto\Terminal::cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
-    $this->main->config->set('rootFolder', $rootFolder);
-    $this->main->config->set('srcFolder', $srcFolder);
-    $this->main->config->set('rootUrl', $rootUrl);
-    $this->main->config->set('srcUrl', $srcUrl);
+    $this->main->config->set('projectFolder', $projectFolder);
+    $this->main->config->set('projectUrl', $projectUrl);
     $this->main->config->set('assetsUrl', $assetsUrl);
 
     $this->main->config->set('db_host', $dbHost);
     $this->main->config->set('db_user', $dbUser);
     $this->main->config->set('db_password', $dbPassword);
     $this->main->config->set('db_name', $dbName);
+
+    $this->main->projectFolder = $projectFolder;
 
     \Hubleto\Terminal::cyan("\n");
     \Hubleto\Terminal::cyan("Hurray. Installing your Hubleto packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
@@ -292,10 +272,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       (string) $adminEmail,
       (string) $adminPassword,
       (string) $rewriteBase,
-      (string) $rootFolder,
-      (string) $rootUrl,
-      (string) $srcFolder,
-      (string) $srcUrl,
+      (string) $projectFolder,
+      (string) $projectUrl,
       (string) $assetsUrl,
       (string) $dbHost,
       (string) $dbName,
@@ -368,7 +346,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("\n");
     \Hubleto\Terminal::cyan("All done! You're a fantastic CRM developer.\n");
-    \Hubleto\Terminal::colored("cyan", "black", "Now open " . (string) $rootUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword);
+    \Hubleto\Terminal::colored("cyan", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword);
     \Hubleto\Terminal::cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
     \Hubleto\Terminal::cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
     \Hubleto\Terminal::cyan("\n");

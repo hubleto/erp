@@ -13,10 +13,8 @@ class Installer
   public string $adminPassword = '';
   public string $accountFullName = '';
   public string $accountRewriteBase = '';
-  public string $rootFolder = '';
-  public string $rootUrl = '';
-  public string $srcFolder = '';
-  public string $srcUrl = '';
+  public string $projectFolder = '';
+  public string $projectUrl = '';
   public string $assetsUrl = '';
 
   public string $premiumRepoFolder = '';
@@ -106,10 +104,8 @@ class Installer
     string $adminEmail,
     string $adminPassword,
     string $accountRewriteBase,
-    string $rootFolder,
-    string $rootUrl,
-    string $srcFolder,
-    string $srcUrl,
+    string $projectFolder,
+    string $projectUrl,
     string $assetsUrl,
     string $dbHost,
     string $dbName,
@@ -132,10 +128,8 @@ class Installer
     $this->adminEmail = $adminEmail;
     $this->adminPassword = $adminPassword;
     $this->accountRewriteBase = $accountRewriteBase;
-    $this->rootFolder = str_replace('\\', '/', $rootFolder);
-    $this->rootUrl = $rootUrl;
-    $this->srcFolder = str_replace('\\', '/', $srcFolder);
-    $this->srcUrl = $srcUrl;
+    $this->projectFolder = str_replace('\\', '/', $projectFolder);
+    $this->projectUrl = $projectUrl;
     $this->assetsUrl = $assetsUrl;
 
     $this->dbHost = $dbHost;
@@ -164,10 +158,10 @@ class Installer
     }
 
     if (
-      is_file($this->rootFolder)
-      || is_dir($this->rootFolder)
+      is_file($this->projectFolder)
+      || is_dir($this->projectFolder)
     ) {
-      throw new \HubletoMain\Exceptions\AccountAlreadyExists('Account folder already exists');
+      throw new \HubletoMain\Exceptions\AccountAlreadyExists('Project folder already exists');
     }
   }
 
@@ -246,10 +240,8 @@ class Installer
   public function getConfigEnvContent(): string
   {
     $configEnv = (string) file_get_contents(__DIR__ . '/Templates/ConfigEnv.php.tpl');
-    $configEnv = str_replace('{{ srcFolder }}', $this->srcFolder, $configEnv);
-    $configEnv = str_replace('{{ rootFolder }}', $this->rootFolder, $configEnv);
-    $configEnv = str_replace('{{ srcUrl }}', $this->srcUrl, $configEnv);
-    $configEnv = str_replace('{{ rootUrl }}', $this->rootUrl, $configEnv);
+    $configEnv = str_replace('{{ projectFolder }}', $this->projectFolder, $configEnv);
+    $configEnv = str_replace('{{ projectUrl }}', $this->projectUrl, $configEnv);
     $configEnv = str_replace('{{ assetsUrl }}', $this->assetsUrl, $configEnv);
     $configEnv = str_replace('{{ dbHost }}', $this->main->config->getAsString('db_host'), $configEnv);
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
@@ -300,33 +292,31 @@ class Installer
   {
 
     // folders
-    @mkdir($this->rootFolder);
-    @mkdir($this->rootFolder . '/log');
-    @mkdir($this->rootFolder . '/upload');
+    @mkdir($this->projectFolder);
+    @mkdir($this->projectFolder . '/log');
+    @mkdir($this->projectFolder . '/upload');
 
     // ConfigEnv.php
 
-    file_put_contents($this->rootFolder . '/ConfigEnv.php', $this->getConfigEnvContent());
+    file_put_contents($this->projectFolder . '/ConfigEnv.php', $this->getConfigEnvContent());
 
     // index.php
     $index = (string) file_get_contents(__DIR__ . '/Templates/index.php.tpl');
     $index = str_replace('{{ accountUid }}', \Hubleto\Framework\Helper::str2url($this->accountFullName), $index);
-    $index = str_replace('{{ srcFolder }}', $this->srcFolder, $index);
-    $index = str_replace('{{ rootFolder }}', $this->rootFolder, $index);
-    file_put_contents($this->rootFolder . '/index.php', $index);
+    $index = str_replace('{{ projectFolder }}', $this->projectFolder, $index);
+    file_put_contents($this->projectFolder . '/index.php', $index);
 
     // hubleto cli agent
-    $hubletoCliAgentFile = $this->rootFolder . '/hubleto';
+    $hubletoCliAgentFile = $this->projectFolder . '/hubleto';
     if (!is_file($hubletoCliAgentFile)) {
       $hubleto = (string) file_get_contents(__DIR__ . '/Templates/hubleto.tpl');
-      $hubleto = str_replace('{{ srcFolder }}', $this->srcFolder, $hubleto);
       file_put_contents($hubletoCliAgentFile, $hubleto);
     }
 
     // .htaccess
     copy(
       __DIR__ . '/Templates/.htaccess.tpl',
-      $this->rootFolder . '/.htaccess'
+      $this->projectFolder . '/.htaccess'
     );
   }
 

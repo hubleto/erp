@@ -25,17 +25,17 @@ class Create extends \HubletoMain\Cli\Agent\Command
         $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
         break;
       case 'Custom':
-        $rootFolder = $this->main->config->getAsString('rootFolder');
-        if (empty($rootFolder) || !is_dir($rootFolder)) {
-          throw new \Exception('rootFolder is not properly configured. (' . $rootFolder . ')');
+        $projectFolder = $this->main->projectFolder;
+        if (empty($projectFolder) || !is_dir($projectFolder)) {
+          throw new \Exception('projectFolder is not properly configured. (' . $projectFolder . ')');
         }
-        if (!is_dir($rootFolder . '/src')) {
-          mkdir($rootFolder . '/src');
+        if (!is_dir($projectFolder . '/src')) {
+          mkdir($projectFolder . '/src');
         }
-        if (!is_dir($rootFolder . '/src/apps')) {
-          mkdir($rootFolder . '/src/apps');
+        if (!is_dir($projectFolder . '/src/apps')) {
+          mkdir($projectFolder . '/src/apps');
         }
-        $appRepositoryFolder = realpath($rootFolder . '/src/apps');
+        $appRepositoryFolder = realpath($projectFolder . '/src/apps');
         break;
     }
 
@@ -59,7 +59,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
     }
 
     \Hubleto\Terminal::yellow("💡  TIPS:\n");
-    \Hubleto\Terminal::yellow("💡  -> Test the app in browser: {$this->main->config->getAsString('rootUrl')}/" . strtolower($appName) . "\n");
+    \Hubleto\Terminal::yellow("💡  -> Test the app in browser: {$this->main->projectUrl}/" . strtolower($appName) . "\n");
     \Hubleto\Terminal::yellow("💡  -> Run command below to add your first model.\n");
     \Hubleto\Terminal::colored("cyan", "black", "Run: php hubleto create model {$appNamespace} {$appName}FirstModel");
   }

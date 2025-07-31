@@ -24,7 +24,6 @@ class AppManager
 
   public function init(): void
   {
-
     foreach ($this->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
       $appNamespace = (string) $appNamespace;
       $appClass = $appNamespace . '\\Loader';

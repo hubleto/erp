@@ -23,8 +23,6 @@ class Test extends \HubletoMain\Cli\Agent\Command
       $tests = [$test];
     }
 
-    $this->main->testMode = true;
-
     try {
 
       foreach ($tests as $test) {

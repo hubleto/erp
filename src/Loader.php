@@ -59,6 +59,13 @@ class Loader extends \Hubleto\Framework\Loader
 
   }
 
+  public function getServiceProviders(): array
+  {
+    $serviceProviders = parent::getServiceProviders();
+    $serviceProviders[\Hubleto\Framework\Controllers\DesktopController::class] = \HubletoApp\Community\Desktop\Controllers\Desktop::class;
+    return $serviceProviders;
+  }
+
   /**
    * Init phase after constructing.
    *
@@ -67,7 +74,6 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function init(): void
   {
-
     try {
 
       if ($this->mode == self::HUBLETO_MODE_FULL) {
@@ -192,17 +198,6 @@ class Loader extends \Hubleto\Framework\Loader
   {
     return $this->di->create(\Hubleto\Framework\Translator::class);
   }
-
-  // /**
-  //  * Create default controller for rendering desktop
-  //  *
-  //  * @return \Hubleto\Framework\Controllers\Controller
-  //  * 
-  //  */
-  // public function createDesktopController(): \Hubleto\Framework\Controllers\Controller
-  // {
-  //   return $this->di->create(\Hubleto\Framework\Controllers\Controller::class);
-  // }
 
   /**
    * Load dictionary for the specified language

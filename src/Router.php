@@ -43,11 +43,6 @@ class Router extends \Hubleto\Framework\Router
     return $this->main->di->create(ControllerResetPassword::class);
   }
 
-  public function createDesktopController(): \HubletoMain\Controller
-  {
-    return $this->main->di->create(\HubletoApp\Community\Desktop\Controllers\Desktop::class);
-  }
-
   public function httpGet(array $routes): void
   {
     parent::httpGet($routes);

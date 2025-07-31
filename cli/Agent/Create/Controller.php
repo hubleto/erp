@@ -6,7 +6,7 @@ class Controller extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = (string) ($this->arguments[3] ?? '');
+    $appNamespace = $this->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $controller = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
 

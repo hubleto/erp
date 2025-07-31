@@ -15,10 +15,11 @@ if (!isset($config) || !is_array($config)) $config = [];
 $config['sessionSalt'] = 'hubleto-cli-agent';
 
 $main = new \HubletoMain\Loader($config);
+$main->init();
 
 // MAIN code
 
-\Hubleto\Terminal::green("Hubleto " . $main->release->getVersion() . " CLI agent.\n");
+\Hubleto\Terminal::green("Hubleto CLI agent.\n");
 
 $action = (string) ($argv[1] ?? '');
 

@@ -281,9 +281,11 @@ class AppManager
     $appNamespace = trim($appNamespace, '\\');
     $appNamespaceParts = explode('\\', $appNamespace);
     $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
+    $appType = strtolower($appNamespaceParts[1]);
 
     $tplVars = [
       'appNamespace' => $appNamespace,
+      'appType' => $appType,
       'appName' => $appName,
       'appRootUrlSlug' => \Hubleto\Framework\Helper::str2url($appName),
       'appViewNamespace' => str_replace('\\', ':', $appNamespace),
@@ -291,7 +293,7 @@ class AppManager
       'now' => date('Y-m-d H:i:s'),
     ];
 
-    $tplFolder = __DIR__ . '/../../cli/Templates/app';
+    $tplFolder = __DIR__ . '/../cli/Templates/app';
 
     $this->main->addTwigViewNamespace($tplFolder, 'appTemplate');
 

@@ -6,7 +6,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = (string) ($this->arguments[3] ?? '');
+    $appNamespace = $this->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $model = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
 
@@ -76,7 +76,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
     }
 
     if (\Hubleto\Terminal::confirm('Do you want to re-install the app with your new model now?')) {
-      (new \HubletoMain\Cli\Agent\App\Install($this->cli, $this->arguments))->run();
+      (new \HubletoMain\Cli\Agent\App\Install($this->main, $this->arguments))->run();
     }
 
     \Hubleto\Terminal::yellow("💡  TIPS:\n");

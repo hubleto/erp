@@ -15,6 +15,9 @@ require_once(__DIR__ . "/ConfigEnv.php");
 // load autoloaders
 require_once("vendor/autoload.php");
 
-// render
+// init main class
 $main = new \HubletoMain\Loader($config);
+$main->init();
+
+// render
 echo $main->render();

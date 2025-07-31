@@ -6,11 +6,10 @@ class Create extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = (string) ($this->arguments[3] ?? '');
-    $appNamespace = trim($appNamespace, '\\');
+    $appNamespace = $this->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+
     $appNamespaceParts = explode('\\', $appNamespace);
 
-    $this->validateAppNamespace($appNamespace);
 
     $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
 
@@ -30,10 +29,13 @@ class Create extends \HubletoMain\Cli\Agent\Command
         if (empty($rootFolder) || !is_dir($rootFolder)) {
           throw new \Exception('rootFolder is not properly configured. (' . $rootFolder . ')');
         }
-        if (!is_dir($rootFolder . '/apps')) {
-          mkdir($rootFolder . '/apps');
+        if (!is_dir($rootFolder . '/src')) {
+          mkdir($rootFolder . '/src');
         }
-        $appRepositoryFolder = realpath($rootFolder . '/apps');
+        if (!is_dir($rootFolder . '/src/apps')) {
+          mkdir($rootFolder . '/src/apps');
+        }
+        $appRepositoryFolder = realpath($rootFolder . '/src/apps');
         break;
     }
 
@@ -53,55 +55,13 @@ class Create extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan("App {$appNamespace} created successfully.\n");
 
     if (\Hubleto\Terminal::confirm('Do you want to install the app now?')) {
-      (new \HubletoMain\Cli\Agent\App\Install($this->cli, $this->arguments))->run();
+      (new \HubletoMain\Cli\Agent\App\Install($this->main, $this->arguments))->run();
     }
 
     \Hubleto\Terminal::yellow("💡  TIPS:\n");
     \Hubleto\Terminal::yellow("💡  -> Test the app in browser: {$this->main->config->getAsString('rootUrl')}/" . strtolower($appName) . "\n");
     \Hubleto\Terminal::yellow("💡  -> Run command below to add your first model.\n");
     \Hubleto\Terminal::colored("cyan", "black", "Run: php hubleto create model {$appNamespace} {$appName}FirstModel");
-  }
-
-  public function validateAppNamespace(string $appNamespace): void
-  {
-    $appNamespace = trim($appNamespace, '\\');
-    $appNamespaceParts = explode('\\', $appNamespace);
-
-    if ($appNamespaceParts[0] != 'HubletoApp') {
-      throw new \Exception('Application namespace must start with \'HubletoApp\'. See https://developer.hubleto.com/apps for more details.');
-    }
-
-    switch ($appNamespaceParts[1]) {
-      case 'Community':
-        if (count($appNamespaceParts) != 3) {
-          throw new \Exception('Community app namespace must have exactly 3 parts');
-        }
-        break;
-      case 'Premium':
-        if (count($appNamespaceParts) != 3) {
-          throw new \Exception('Premium app namespace must have exactly 3 parts');
-        }
-        break;
-      case 'External':
-        if (count($appNamespaceParts) != 4) {
-          throw new \Exception('External app namespace must have exactly 4 parts');
-        }
-
-        $externalAppsRepositories = $this->main->config->getAsArray('externalAppsRepositories');
-        if (!isset($externalAppsRepositories[$appNamespaceParts[2]])) {
-          throw new \Exception('No repository found for vendor \'' . $appNamespaceParts[2] . '\'. Run \'php hubleto app add repository\' to add the repository.');
-        }
-        break;
-      case 'Custom':
-        if (count($appNamespaceParts) != 3) {
-          throw new \Exception('Custom app namespace must have exactly 3 parts');
-        }
-        break;
-      default:
-        throw new \Exception('Only following types of apps are available: Community, Premium, External or Custom.');
-        break;
-    }
-
   }
 
 }

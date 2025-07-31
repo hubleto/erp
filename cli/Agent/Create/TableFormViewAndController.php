@@ -6,9 +6,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-
-    // now create view and controller
-    $appNamespace = (string) ($this->arguments[3] ?? '');
+    $appNamespace = $this->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $model = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
 
@@ -132,7 +130,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     }
 
     if (\Hubleto\Terminal::confirm('Do you want to re-install the app?')) {
-      (new \HubletoMain\Cli\Agent\App\Install($this->cli, $this->arguments))->run();
+      (new \HubletoMain\Cli\Agent\App\Install($this->main, $this->arguments))->run();
     }
 
     \Hubleto\Terminal::yellow("⚠  NEXT STEPS:\n");

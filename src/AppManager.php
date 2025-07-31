@@ -187,10 +187,6 @@ class AppManager
   public function installApp(int $round, string $appNamespace, array $appConfig = [], bool $forceInstall = false): bool
   {
 
-    if (str_ends_with($appNamespace, '\\Loader')) {
-      $appNamespace = substr($appNamespace, 0, -7);
-    }
-
     \Hubleto\Terminal::cyan("    -> Installing {$appNamespace}, round {$round}.\n");
 
     if ($this->isAppInstalled($appNamespace) && !$forceInstall) {

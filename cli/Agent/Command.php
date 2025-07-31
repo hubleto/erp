@@ -17,6 +17,11 @@ class Command
     if (strpos($appNamespace, '\\') === false) {
       $appNamespace = 'HubletoApp\\Custom\\' . $appNamespace;
     }
+
+    if (str_ends_with($appNamespace, '\\Loader')) {
+      $appNamespace = substr($appNamespace, 0, -7);
+    }
+
     $this->validateAppNamespace($appNamespace);
     return $appNamespace;
   }
@@ -44,11 +49,6 @@ class Command
       case 'External':
         if (count($appNamespaceParts) != 4) {
           throw new \Exception('External app namespace must have exactly 4 parts');
-        }
-
-        $externalAppsRepositories = $this->main->config->getAsArray('externalAppsRepositories');
-        if (!isset($externalAppsRepositories[$appNamespaceParts[2]])) {
-          throw new \Exception('No repository found for vendor \'' . $appNamespaceParts[2] . '\'. Run \'php hubleto app add repository\' to add the repository.');
         }
         break;
       case 'Custom':

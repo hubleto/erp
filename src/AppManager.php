@@ -160,9 +160,8 @@ class AppManager
     $appNamespaces = [];
 
     // community apps
-    $communityRepoFolder = $this->main->srcFolder . '/../../apps';
-    if (!is_dir($communityRepoFolder)) {
-
+    $communityRepoFolder = $this->main->srcFolder . '/../../apps/src';
+    if (is_dir($communityRepoFolder)) {
       foreach (scandir($communityRepoFolder) as $folder) {
         $manifestFile = $communityRepoFolder . '/' . $folder . '/manifest.yaml';
         if (@is_file($manifestFile)) {

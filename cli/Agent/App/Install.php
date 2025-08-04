@@ -6,7 +6,7 @@ class Install extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = $this->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+    $appNamespace = $this->main->apps->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $forceInstall = (bool) ($this->arguments[4] ?? false);
 
     if (empty($appNamespace)) {

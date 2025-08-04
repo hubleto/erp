@@ -56,23 +56,111 @@ class AppManager
 
   }
 
+  /**
+   * [Description for sanitizeAppNamespace]
+   *
+   * @param string $appNamespace
+   * 
+   * @return string
+   * 
+   */
+  public function sanitizeAppNamespace(string $appNamespace): string
+  {
+    $appNamespace = trim($appNamespace, '\\');
+    if (strpos($appNamespace, '\\') === false) {
+      $appNamespace = 'HubletoApp\\Custom\\' . $appNamespace;
+    }
+
+    if (str_ends_with($appNamespace, '\\Loader')) {
+      $appNamespace = substr($appNamespace, 0, -7);
+    }
+
+    $this->validateAppNamespace($appNamespace);
+    return $appNamespace;
+  }
+
+  /**
+   * [Description for validateAppNamespace]
+   *
+   * @param string $appNamespace
+   * 
+   * @return void
+   * 
+   */
+  public function validateAppNamespace(string $appNamespace): void
+  {
+    $appNamespace = trim($appNamespace, '\\');
+    $appNamespaceParts = explode('\\', $appNamespace);
+
+    if ($appNamespaceParts[0] != 'HubletoApp') {
+      throw new \Exception('Application namespace must start with \'HubletoApp\'. See https://developer.hubleto.com/apps for more details.');
+    }
+
+    switch ($appNamespaceParts[1]) {
+      case 'Community':
+        if (count($appNamespaceParts) != 3) {
+          throw new \Exception('Community app namespace must have exactly 3 parts');
+        }
+        break;
+      case 'Premium':
+        if (count($appNamespaceParts) != 3) {
+          throw new \Exception('Premium app namespace must have exactly 3 parts');
+        }
+        break;
+      case 'External':
+        if (count($appNamespaceParts) != 4) {
+          throw new \Exception('External app namespace must have exactly 4 parts');
+        }
+        break;
+      case 'Custom':
+        if (count($appNamespaceParts) != 3) {
+          throw new \Exception('Custom app namespace must have exactly 3 parts');
+        }
+        break;
+      default:
+        throw new \Exception('Only following types of apps are available: Community, Premium, External or Custom.');
+        break;
+    }
+
+  }
+
+  /**
+   * [Description for onBeforeRender]
+   *
+   * @return void
+   * 
+   */
   public function onBeforeRender(): void
   {
     $apps = $this->getEnabledApps();
     array_walk($apps, function ($app) { $app->onBeforeRender(); });
   }
 
+  /**
+   * [Description for getAppNamespaceForConfig]
+   *
+   * @param string $appNamespace
+   * 
+   * @return string
+   * 
+   */
   public function getAppNamespaceForConfig(string $appNamespace): string
   {
     return trim($appNamespace, '\\');
   }
 
+  /**
+   * [Description for getAvailableApps]
+   *
+   * @return array
+   * 
+   */
   public function getAvailableApps(): array
   {
     $appNamespaces = [];
 
     // community apps
-    $communityRepoFolder = $this->main->srcFolder . '/../../apps/src';
+    $communityRepoFolder = $this->main->srcFolder . '/../../apps';
     if (!is_dir($communityRepoFolder)) {
 
       foreach (scandir($communityRepoFolder) as $folder) {
@@ -103,6 +191,12 @@ class AppManager
     return $appNamespaces;
   }
 
+  /**
+   * [Description for getInstalledAppNamespaces]
+   *
+   * @return array
+   * 
+   */
   public function getInstalledAppNamespaces(): array
   {
     $tmp = $this->main->config->getAsArray('apps');
@@ -116,6 +210,14 @@ class AppManager
     return $appNamespaces;
   }
 
+  /**
+   * [Description for createAppInstance]
+   *
+   * @param string $appNamespace
+   * 
+   * @return \Hubleto\Framework\App
+   * 
+   */
   public function createAppInstance(string $appNamespace): \Hubleto\Framework\App
   {
     $appClass = $appNamespace . '\Loader';
@@ -147,6 +249,12 @@ class AppManager
     return array_merge($this->apps, $this->disabledApps);
   }
 
+  /**
+   * [Description for getActivatedApp]
+   *
+   * @return \Hubleto\Framework\App|null
+   * 
+   */
   public function getActivatedApp(): \Hubleto\Framework\App|null
   {
     $apps = $this->getEnabledApps();
@@ -158,6 +266,14 @@ class AppManager
     return null;
   }
 
+  /**
+   * [Description for getAppInstance]
+   *
+   * @param string $appNamespace
+   * 
+   * @return null|\Hubleto\Framework\App
+   * 
+   */
   public function getAppInstance(string $appNamespace): null|\Hubleto\Framework\App
   {
     if (isset($this->apps[$appNamespace])) {
@@ -167,17 +283,41 @@ class AppManager
     }
   }
 
+  /**
+   * [Description for isAppInstalled]
+   *
+   * @param string $appNamespace
+   * 
+   * @return bool
+   * 
+   */
   public function isAppInstalled(string $appNamespace): bool
   {
     $apps = $this->getInstalledAppNamespaces();
     return isset($apps[$appNamespace]) && is_array($apps[$appNamespace]) && isset($apps[$appNamespace]['installedOn']);
   }
 
+  /**
+   * [Description for community]
+   *
+   * @param string $appName
+   * 
+   * @return null|\Hubleto\Framework\App
+   * 
+   */
   public function community(string $appName): null|\Hubleto\Framework\App
   {
     return $this->getAppInstance('HubletoApp\\Community\\' . $appName);
   }
 
+  /**
+   * [Description for custom]
+   *
+   * @param string $appName
+   * 
+   * @return null|\Hubleto\Framework\App
+   * 
+   */
   public function custom(string $appName): null|\Hubleto\Framework\App
   {
     return $this->getAppInstance('HubletoApp\\Custom\\' . $appName);
@@ -186,6 +326,7 @@ class AppManager
   /** @param array<string, mixed> $appConfig */
   public function installApp(int $round, string $appNamespace, array $appConfig = [], bool $forceInstall = false): bool
   {
+    $appNamespace = $this->sanitizeAppNamespace($appNamespace);
 
     \Hubleto\Terminal::cyan("    -> Installing {$appNamespace}, round {$round}.\n");
 

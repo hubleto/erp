@@ -11,6 +11,7 @@ adminFamilyName: Hubleto
 adminNick: my-hubleto
 adminEmail: my.hubleto@example.com
 adminPassword: my.hubleto
+generateDemoData: true
 
 # Uncomment following lines if you want to have full control over
 # what apps will be installed. Example below installs minimal set

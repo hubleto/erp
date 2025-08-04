@@ -36,6 +36,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $adminNick = null;
     $adminEmail = null;
     $adminPassword = null;
+    $generateDemoData = null;
     $packagesToInstall = null;
     $appsToInstall = null;
     $externalAppsRepositories = [];
@@ -93,6 +94,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
     if (isset($config['adminPassword'])) {
       $adminPassword = $config['adminPassword'];
+    }
+    if (isset($config['generateDemoData'])) {
+      $generateDemoData = $config['generateDemoData'];
     }
     if (isset($config['packagesToInstall'])) {
       $packagesToInstall = $config['packagesToInstall'];
@@ -177,6 +181,13 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if ($adminPassword === null) {
       $adminPassword = \Hubleto\Terminal::read('Account.adminPassword (leave empty to generate random password)');
     }
+    if ($generateDemoData === null) {
+      $confirm = '';
+      while (!in_array($confirm, ['yes', 'no'])) {
+        $confirm = \Hubleto\Terminal::read('Account.generateDemoData (type \'yes\' or \'no\')');
+      }
+      $generateDemoData = $confirm == 'yes';
+    }
 
     if (\Hubleto\Terminal::isLaunchedFromTerminal()) {
       $confirm = '';
@@ -244,6 +255,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan('  -> adminNick = ' . (string) $adminNick . "\n");
     \Hubleto\Terminal::cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
     \Hubleto\Terminal::cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
+    \Hubleto\Terminal::cyan('  -> generateDemoData = ' . ($generateDemoData ? 'yes' : 'no') . "\n");
     \Hubleto\Terminal::cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
     $this->main->config->set('projectFolder', $projectFolder);
@@ -343,6 +355,10 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("  -> Adding default company and admin user.\n");
     $installer->addCompanyAndAdminUser();
+
+    if ($generateDemoData) {
+      (new \HubletoMain\Cli\Agent\Project\GenerateDemoData($this->main, []))->run();
+    }
 
     \Hubleto\Terminal::cyan("\n");
     \Hubleto\Terminal::cyan("All done! You're a fantastic CRM developer.\n");

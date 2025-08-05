@@ -167,22 +167,35 @@ class AppManager
         if (@is_file($manifestFile)) {
           $manifestFileContent = file_get_contents($manifestFile);
           $manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) $manifestFileContent);
-          $manifest['appType'] = \Hubleto\Framework\App::APP_TYPE_COMMUNITY;
           $appNamespaces['HubletoApp\\Community\\' . $folder] = $manifest;
         }
       }
     }
 
-    // premium apps
-    $premiumRepoFolder = $this->main->config->getAsString('premiumRepoFolder');
-    if (!empty($premiumRepoFolder) && is_dir($premiumRepoFolder)) {
-      foreach (scandir($premiumRepoFolder) as $folder) {
-        $manifestFile = $premiumRepoFolder . '/' . $folder . '/manifest.yaml';
-        if (@is_file($manifestFile)) {
-          $manifestFileContent = file_get_contents($manifestFile);
-          $manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) $manifestFileContent);
-          $manifest['appType'] = \Hubleto\Framework\App::APP_TYPE_PREMIUM;
-          $appNamespaces['HubletoApp\\Premium\\' . $folder] = $manifest;
+    // appRepositories are supposed to be composer's 'vendor' folders
+    // Each repository is scanned, first for the vendor name ($vendorFolder), then for
+    // the app name ($appFolder).
+    // The $appFolder represents the HubletoApp only if there is src/manifest.yaml file.
+    $appRepositories = $this->main->config->getAsArray('appRepositories');
+    if (count($appRepositories) == 0) {
+      $appRepositories = [
+        $this->main->projectFolder . '/vendor'
+      ];
+    }
+
+    foreach ($appRepositories as $repoFolder) {
+      if (!empty($repoFolder) && is_dir($repoFolder)) {
+        foreach (scandir($repoFolder) as $vendorFolder) {
+          if (in_array($vendorFolder, ['.', '..'])) continue;
+          if (!is_dir($repoFolder . '/' . $vendorFolder)) continue;
+          foreach (scandir($repoFolder . '/' . $vendorFolder) as $appFolder) {
+            $manifestFile = $repoFolder . '/' . $vendorFolder . '/' . $appFolder . '/src/manifest.yaml';
+            if (@is_file($manifestFile)) {
+              $manifestFileContent = file_get_contents($manifestFile);
+              $manifest = (array) \Symfony\Component\Yaml\Yaml::parse((string) $manifestFileContent);
+              $appNamespaces[$manifest['namespace']] = $manifest;
+            }
+          }
         }
       }
     }

@@ -1,11 +1,12 @@
 ![](https://img.shields.io/github/v/tag/hubleto/main)
 ![](https://img.shields.io/github/license/hubleto/main)
 
-
 # Hubleto
 ## Business Application Hub
 
 Hubleto is a `PHP-based opensource CRM and ERP development framework` with lots of features and free apps to develop your custom CRM or ERP.
+
+🌟 Star if you like it!
 
 The whole platform consists of several repositories, check them all to get the full understanding:
 

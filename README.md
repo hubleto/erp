@@ -7,10 +7,16 @@
 
 Hubleto is a `PHP-based opensource CRM and ERP development framework` with lots of features and free apps to develop your custom CRM or ERP.
 
+The whole platform consists of several repositories, check them all to get the full understanding:
+
+  * [hubleto/main](https://github.com/hubleto/main) - package combining everything together into a Hubleto ERP solution.
+  * [hubleto/apps](https://github.com/hubleto/apps) - set of freely available apps covering features like CRM, supply-chain or project management
+  * [hubleto/framework](https://github.com/hubleto/framework) - PHP-based low level MVC framework
+  * [hubleto/react-ui](https://github.com/hubleto/react-ui) - React-based UI using other libraries like primereact but modified and tailored for Hubleto ERP
+  * [hubleto/terminal](https://github.com/hubleto/terminal) - a simple command-line tool for PHP
+
 ```
 +------------------------------------------+
-|                                          | Hubleto
-|                                          | 
 |       ###         ###         ###        | Free community apps (contacts, calendar, leads, deals, orders, ...)
 |       ###         ###         ###        | Download & install in just few minutes
 |       ### #####   ### #####   ###        | Uses React, TailwindCSS or Symfony's Twig
@@ -19,7 +25,6 @@ Hubleto is a `PHP-based opensource CRM and ERP development framework` with lots 
 |       ###    ###  ###     ### ###        | CLI automation tools
 |       ###    ###  ##### ####  ####       | Fast learning curve, comprehensive dev guide
 |       ###    ###  ### #####    ###       |
-|                                          |
 |                                          |
 |                    ##################### |
 |                  ####################### |

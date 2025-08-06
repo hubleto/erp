@@ -17,5 +17,6 @@ require(($config['srcFolder'] ?? '.'). "/vendor/autoload.php");
 $main = new \HubletoMain\Loader($config);
 $main->init();
 
-// render
-echo $main->render();
+// run
+$main->crons->init();
+$main->crons->run();

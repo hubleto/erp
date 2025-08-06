@@ -256,6 +256,12 @@ class Installer
     $index = str_replace('{{ projectFolder }}', $this->projectFolder, $index);
     file_put_contents($this->projectFolder . '/index.php', $index);
 
+    // cron.php
+    $index = (string) file_get_contents(__DIR__ . '/Templates/cron.php.tpl');
+    $index = str_replace('{{ accountUid }}', \Hubleto\Framework\Helper::str2url($this->accountFullName), $index);
+    $index = str_replace('{{ projectFolder }}', $this->projectFolder, $index);
+    file_put_contents($this->projectFolder . '/cron.php', $index);
+
     // hubleto cli agent
     $hubletoCliAgentFile = $this->projectFolder . '/hubleto';
     if (!is_file($hubletoCliAgentFile)) {

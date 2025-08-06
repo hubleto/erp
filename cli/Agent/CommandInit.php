@@ -203,6 +203,8 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $lastRewriteBase = '/' . $tmpFolder . $lastRewriteBase;
     }
 
+    \Hubleto\Terminal::cyan("For more information about the parameters check https://developer.hubleto.com/v0/cli/init\n");
+
     if ($rewriteBase === null) {
       $rewriteBase = \Hubleto\Terminal::choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
     }

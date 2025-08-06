@@ -19,9 +19,13 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       \HubletoApp\Community\Contacts\Loader::class => [ 'sidebarOrder' => 101 ],
       \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110 ],
       \HubletoApp\Community\Dashboards\Loader::class => [ 'sidebarOrder' => 99995 ],
+      \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220 ],
+      \HubletoApp\Community\Tasks\Loader::class => [ 'sidebarOrder' => 99995 ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996 ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998 ],
       \HubletoApp\Community\About\Loader::class => [ 'sidebarOrder' => 99998 ],
+    ],
+    'cloud' => [
       \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99998 ],
     ],
     'crm' => [
@@ -29,7 +33,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
       \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210 ],
-      \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220 ],
       \HubletoApp\Community\Mail\Loader::class => [ 'sidebarOrder' => 230 ],
     ],
     'marketing' => [
@@ -41,9 +44,14 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       \HubletoApp\Community\Mail\Loader::class => [ 'sidebarOrder' => 230 ],
       \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
       \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Campaigns\Loader::class => [ 'sidebarOrder' => 202 ],
+      \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210 ],
       \HubletoApp\Community\Deals\Loader::class => [ 'sidebarOrder' => 210 ],
-      \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220 ],
       \HubletoApp\Community\Orders\Loader::class => [ 'sidebarOrder' => 230 ],
+    ],
+    'projects' => [
+      \HubletoApp\Community\Projects\Loader::class => [ 'sidebarOrder' => 230 ],
+      \HubletoApp\Community\Worksheets\Loader::class => [ 'sidebarOrder' => 200 ],
     ],
     'supply-chain' => [
       \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],

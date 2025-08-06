@@ -79,6 +79,13 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
   public function run(): void
   {
+
+    if (is_file($this->main->projectFolder . '/ConfigEnv.php')) {
+      \Hubleto\Terminal::red("ConfigEnv.php already exists, project has already been initialized.\n");
+      \Hubleto\Terminal::red("If you want to re-initialize the project, delte ConfigEnv.php file first.\n");
+      exit;
+    }
+
     $rewriteBase = null;
     $projectFolder = null;
     $projectUrl = null;
@@ -440,6 +447,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
     \Hubleto\Terminal::cyan("\n");
     \Hubleto\Terminal::cyan("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
-    \Hubleto\Terminal::cyan("Run: php hubleto app create HubletoApp\\Custom\\MyFirstApp");
+    \Hubleto\Terminal::colored("cyan", "black", "Run: php hubleto app create MyFirstApp");
   }
 }

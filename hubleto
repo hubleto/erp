@@ -19,7 +19,7 @@ $main->init();
 
 // MAIN code
 
-\Hubleto\Terminal::green("Hubleto CLI agent.\n");
+\Hubleto\Terminal::green("Hubleto CLI agent (main version: " . \Composer\InstalledVersions::getPrettyVersion("hubleto/main") . ").\n");
 
 $action = (string) ($argv[1] ?? '');
 

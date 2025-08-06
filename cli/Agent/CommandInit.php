@@ -6,6 +6,62 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 {
   public array $initConfig = [];
 
+  public array $packages = [
+    'core' => [
+      \HubletoApp\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997 ],
+      \HubletoApp\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997 ],
+      \HubletoApp\Community\Desktop\Loader::class => [ 'sidebarOrder' => 0 ],
+      \HubletoApp\Community\Usage\Loader::class => [ 'sidebarOrder' => 0 ],
+      \HubletoApp\Community\Mail\Loader::class => [ 'sidebarOrder' => 125 ],
+      \HubletoApp\Community\Notifications\Loader::class => [ 'sidebarOrder' => 125 ],
+      \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120 ],
+      \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 102 ],
+      \HubletoApp\Community\Contacts\Loader::class => [ 'sidebarOrder' => 101 ],
+      \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110 ],
+      \HubletoApp\Community\Dashboards\Loader::class => [ 'sidebarOrder' => 99995 ],
+      \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996 ],
+      \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998 ],
+      \HubletoApp\Community\About\Loader::class => [ 'sidebarOrder' => 99998 ],
+      \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99998 ],
+    ],
+    'crm' => [
+      \HubletoApp\Community\Campaigns\Loader::class => [ 'sidebarOrder' => 202 ],
+      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210 ],
+      \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220 ],
+      \HubletoApp\Community\Mail\Loader::class => [ 'sidebarOrder' => 230 ],
+    ],
+    'marketing' => [
+      \HubletoApp\Community\Campaigns\Loader::class => [ 'sidebarOrder' => 202 ],
+      \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Mail\Loader::class => [ 'sidebarOrder' => 230 ],
+    ],
+    'sales' => [
+      \HubletoApp\Community\Mail\Loader::class => [ 'sidebarOrder' => 230 ],
+      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Deals\Loader::class => [ 'sidebarOrder' => 210 ],
+      \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220 ],
+      \HubletoApp\Community\Orders\Loader::class => [ 'sidebarOrder' => 230 ],
+    ],
+    'supply-chain' => [
+      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Warehouses\Loader::class => [ 'sidebarOrder' => 210 ],
+      \HubletoApp\Community\Inventory\Loader::class => [ 'sidebarOrder' => 220 ],
+    ],
+    'e-commerce' => [
+      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 310 ],
+      \HubletoApp\Community\Orders\Loader::class => [ 'sidebarOrder' => 320 ],
+    ],
+    'finance' => [
+      // \HubletoApp\Community\Billing\Loader::class => [ 'sidebarOrder' => 400 ],
+      \HubletoApp\Community\Invoices\Loader::class => [ 'sidebarOrder' => 410 ],
+    ],
+  ];
+
   public function parseConfigFile(string $configFile): array
   {
     $configStr = (string) file_get_contents($configFile);
@@ -37,6 +93,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $adminEmail = null;
     $adminPassword = null;
     $generateDemoData = null;
+    $noPrompt = null;
     $packagesToInstall = null;
     $appsToInstall = null;
     $externalAppsRepositories = [];
@@ -98,6 +155,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['generateDemoData'])) {
       $generateDemoData = $config['generateDemoData'];
     }
+    if (isset($config['noPrompt'])) {
+      $noPrompt = $config['noPrompt'];
+    }
     if (isset($config['packagesToInstall'])) {
       $packagesToInstall = $config['packagesToInstall'];
     }
@@ -110,7 +170,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     if (isset($config['premiumRepoFolder'])) {
       $premiumRepoFolder = $config['premiumRepoFolder'];
     }
-
     if (isset($config['smtpHost'])) {
       $smtpHost = $config['smtpHost'];
     }
@@ -189,7 +248,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $generateDemoData = $confirm == 'yes';
     }
 
-    if (\Hubleto\Terminal::isLaunchedFromTerminal()) {
+    if (\Hubleto\Terminal::isLaunchedFromTerminal() && $noPrompt !== true) {
       $confirm = '';
       if (isset($config['confirm'])) {
         $confirm = $config['confirm'];
@@ -214,7 +273,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
 
     if (empty($packagesToInstall)) {
-      $packagesToInstall = 'core,sales';
+      $packagesToInstall = 'sales';
     }
     if (empty($adminPassword) && !isset($smtpHost)) {
       $adminPassword = \Hubleto\Framework\Helper::randomPassword();
@@ -270,7 +329,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->main->projectFolder = $projectFolder;
 
     \Hubleto\Terminal::cyan("\n");
-    \Hubleto\Terminal::cyan("Hurray. Installing your Hubleto packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
+    \Hubleto\Terminal::cyan("Hurray. Installing your Hubleto with following packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
 
     // install
     $installer = new \HubletoMain\Installer\Installer(
@@ -300,11 +359,15 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     );
 
     $installer->appsToInstall = [];
-    foreach (explode(',', (string) $packagesToInstall) as $package) {
+
+    // 'core' is always installed
+    $packagesToInstall = array_merge(['core'], explode(',', (string) $packagesToInstall));
+    
+    foreach ($packagesToInstall as $package) {
       $package = trim((string) $package);
 
       /** @var array<string, array<string, mixed>> */
-      $appsInPackage = (is_array($installer->packages[$package] ?? null) ? $installer->packages[$package] : []);
+      $appsInPackage = (is_array($this->packages[$package] ?? null) ? $this->packages[$package] : []);
 
       $installer->appsToInstall = array_merge(
         $installer->appsToInstall,

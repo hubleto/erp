@@ -43,56 +43,6 @@ class Installer
   /** @property array<string, mixed> */
   public array $extraConfigEnv = [];
 
-  public array $packages = [
-    'core' => [
-      \HubletoApp\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997, ],
-      \HubletoApp\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997, ],
-      \HubletoApp\Community\Desktop\Loader::class => [ ],
-      \HubletoApp\Community\Usage\Loader::class => [ ],
-      \HubletoApp\Community\Mail\Loader::class => [ 'sidebarOrder' => 125, ],
-      \HubletoApp\Community\Notifications\Loader::class => [ 'sidebarOrder' => 125, ],
-      \HubletoApp\Community\Documents\Loader::class => [ 'sidebarOrder' => 120, ],
-      \HubletoApp\Community\Customers\Loader::class => [ 'sidebarOrder' => 102, 'calendarColor' => '#3DC266' ],
-      \HubletoApp\Community\Contacts\Loader::class => [ 'sidebarOrder' => 101, ],
-      \HubletoApp\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110, ],
-      \HubletoApp\Community\Dashboards\Loader::class => [ 'sidebarOrder' => 99995, ],
-      \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996, ],
-      \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998, ],
-      \HubletoApp\Community\About\Loader::class => [ 'sidebarOrder' => 99998, ],
-      \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99998, ],
-    ],
-    'cloud' => [
-      \HubletoApp\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99999, ],
-    ],
-    'stock' => [
-      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 210, ],
-      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 220, ],
-      \HubletoApp\Community\Warehouses\Loader::class => [ 'sidebarOrder' => 230, ],
-      \HubletoApp\Community\Inventory\Loader::class => [ 'sidebarOrder' => 240, ],
-    ],
-    'sales' => [
-      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200, ],
-      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 200, ],
-      \HubletoApp\Community\Campaigns\Loader::class => [ 'sidebarOrder' => 202, ],
-      \HubletoApp\Community\Leads\Loader::class => [ 'sidebarOrder' => 210, 'calendarColor' => '#C00994', ],
-      \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220, ],
-      \HubletoApp\Community\Deals\Loader::class => [
-        'sidebarOrder' => 230,
-        'calendarColor' => '#D7B628',
-      ],
-    ],
-    'shop' => [
-      \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200, ],
-      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 310, ],
-      \HubletoApp\Community\Orders\Loader::class => [ 'sidebarOrder' => 320, ],
-    ],
-    'invoices' => [
-      \HubletoApp\Community\Billing\Loader::class => [ 'sidebarOrder' => 400, ],
-      \HubletoApp\Community\Invoices\Loader::class => [ 'sidebarOrder' => 410, ],
-      \HubletoApp\Community\Products\Loader::class => [ 'sidebarOrder' => 420, ],
-    ],
-  ];
-
   public function __construct(
     \HubletoMain\Loader $main,
     string $env,

@@ -175,7 +175,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     }
 
     foreach ($this->main->apps->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
-      $this->main->apps->getAppInstance($appNamespace)->generateDemoData();
+      \Hubleto\Terminal::cyan("  {$appNamespace}\n");
+      $app = $this->main->apps->getAppInstance($appNamespace);
+      if ($app) $app->generateDemoData();
     }
 
     \Hubleto\Terminal::cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");

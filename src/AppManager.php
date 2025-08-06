@@ -186,7 +186,7 @@ class AppManager
     foreach ($appRepositories as $repoFolder) {
       if (!empty($repoFolder) && is_dir($repoFolder)) {
         foreach (scandir($repoFolder) as $vendorFolder) {
-          if (in_array($vendorFolder, ['.', '..'])) continue;
+          if (in_array($vendorFolder, ['.', '..', 'hubleto'])) continue;
           if (!is_dir($repoFolder . '/' . $vendorFolder)) continue;
           foreach (scandir($repoFolder . '/' . $vendorFolder) as $appFolder) {
             $manifestFile = $repoFolder . '/' . $vendorFolder . '/' . $appFolder . '/src/manifest.yaml';

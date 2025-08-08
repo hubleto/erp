@@ -17,6 +17,7 @@ import InputHyperlink from "@hubleto/react-ui/core/Inputs/Hyperlink";
 import TableCellRendererHyperlink from "@hubleto/react-ui/core/TableCellRenderers/Hyperlink";
 
 // Hubleto
+import HubletoSearch from "@hubleto/react-ui/ext/HubletoSearch";
 import HubletoForm from "@hubleto/react-ui/ext/HubletoForm";
 import HubletoTable from "@hubleto/react-ui/ext/HubletoTable";
 import HubletoChart from "@hubleto/react-ui/ext/HubletoChart";
@@ -54,6 +55,7 @@ class HubletoMain extends HubletoReactUi {
     this.registerReactComponent('TableCellRendererHyperlink', TableCellRendererHyperlink);
 
     // Hubleto components
+    this.registerReactComponent('Search', HubletoSearch);
     this.registerReactComponent('Form', HubletoForm);
     this.registerReactComponent('Table', HubletoTable);
     this.registerReactComponent('TableColumnsCustomize', HubletoTableColumnCustomize);

@@ -23,6 +23,7 @@ class Router extends \Hubleto\Framework\Router
       '/^api\/save-table-columns-customize\/?$/' =>  Api\SaveTableColumnsCustomize::class,
       '/^api\/table-export-csv\/?$/' =>  Api\TableExportCsv::class,
       '/^api\/table-import-csv\/?$/' =>  Api\TableImportCsv::class,
+      '/^api\/search\/?$/' =>  Api\Search::class,
       '/^reset-password$/' => ControllerResetPassword::class,
       '/^forgot-password$/' => ControllerForgotPassword::class,
     ]);

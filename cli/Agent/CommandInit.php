@@ -68,6 +68,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       // \HubletoApp\Community\Billing\Loader::class => [ 'sidebarOrder' => 400 ],
       \HubletoApp\Community\Invoices\Loader::class => [ 'sidebarOrder' => 410 ],
     ],
+    'developer' => [
+      \HubletoApp\Community\Developer\Loader::class => [ 'sidebarOrder' => 410 ],
+    ],
   ];
 
   public function parseConfigFile(string $configFile): array

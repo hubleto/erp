@@ -8,10 +8,23 @@ class Search extends \HubletoMain\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    return [
-      ["id" => "1", "label" => "contacts", "url" => "contacts", ],
-      ["id" => "2", "label" => "customers", "url" => "customers", ],
-      ["id" => "3", "label" => "about", "url" => "about", ],
-    ];
+    $query = $this->main->urlParamAsString('query');
+
+    $expressions = [];
+    foreach (explode(' ', strtr($query, ',', ' ')) as $e) {
+      $expressions[] = strtolower(trim($e, ' ,;./'));
+    }
+
+    $results = [];
+
+    foreach ($this->main->apps->getEnabledApps() as $appNamespace => $app) {
+      $appResults = $app->search($expressions);
+      foreach ($appResults as $key => $value) {
+        $value['APP_NAMESPACE'] = $appNamespace;
+        $results[] = $value;
+      }
+    }
+
+    return $results;
   }
 }

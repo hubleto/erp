@@ -185,7 +185,7 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function createPermissionsManager(): \Hubleto\Framework\Permissions
   {
-    return $this->di->create(\Hubleto\Framework\Permissions::class);
+    return $this->di->create(\HubletoMain\Permissions::class);
   }
 
   /**

@@ -2,6 +2,10 @@
 
 namespace HubletoMain\Installer;
 
+use HubletoApp\Community\Settings\Models\User;
+use HubletoApp\Community\Settings\Models\UserRole;
+use HubletoApp\Community\Settings\Models\UserHasRole;
+
 class Installer
 {
   public \HubletoMain\Loader $main;
@@ -159,12 +163,13 @@ class Installer
   public function addCompanyAndAdminUser(): void
   {
     $mCompany = $this->main->di->create(\HubletoApp\Community\Settings\Models\Company::class);
-    $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
-    $mUserHasRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserHasRole::class);
+    $mUser = $this->main->di->create(User::class);
+    $mUserHasRole = $this->main->di->create(UserHasRole::class);
 
     $idCompany = $mCompany->record->recordCreate(['name' => $this->accountFullName])['id'];
 
     $idUserAdministrator = $mUser->record->recordCreate([
+      "type" => User::TYPE_ADMINISTRATOR,
       'first_name' => $this->adminName,
       'last_name' => $this->adminFamilyName,
       'nick' => $this->adminNick,
@@ -178,7 +183,7 @@ class Installer
 
     $mUserHasRole->record->recordCreate([
       'id_user' => $idUserAdministrator,
-      'id_role' => \HubletoApp\Community\Settings\Models\UserRole::ROLE_ADMINISTRATOR,
+      'id_role' => UserRole::ROLE_ADMINISTRATOR,
     ])['id'];
 
     if ($this->adminPassword == '' && $this->smtpHost != '') {

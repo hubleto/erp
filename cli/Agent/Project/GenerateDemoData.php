@@ -20,16 +20,17 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("Generating demo data...\n");
 
-    $mCompany = $this->main->di->create(\HubletoApp\Community\Settings\Models\Company::class);
-    $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
-    $mUserRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserRole::class);
-    $mUserHasRole = $this->main->di->create(\HubletoApp\Community\Settings\Models\UserHasRole::class);
+    $mCompany = $this->main->di->create(Company::class);
+    $mUser = $this->main->di->create(User::class);
+    $mUserRole = $this->main->di->create(UserRole::class);
+    $mUserHasRole = $this->main->di->create(UserHasRole::class);
 
     $idCompany = 1; // plati za predpokladu, ze tento command sa spusta hned po CommandInit
 
-    $mUser = $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);
+    $mUser = $this->main->di->create(User::class);
 
     $idUserChiefOfficer = $mUser->record->recordCreate([
+      "type" => User::TYPE_CHIEF_OFFICER,
       "first_name" => "Richard",
       "last_name" => "Manstall",
       "nick" => "chief",
@@ -41,6 +42,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ])['id'];
 
     $idUserManager = $mUser->record->recordCreate([
+      "type" => User::TYPE_MANAGER,
       "first_name" => "Jeeve",
       "last_name" => "Stobs",
       "nick" => "manager",
@@ -52,6 +54,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ])['id'];
 
     $idUserEmployee = $mUser->record->recordCreate([
+      "type" => User::TYPE_EMPLOYEE,
       "first_name" => "Fedora",
       "last_name" => "Debian",
       "nick" => "employee",
@@ -63,6 +66,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ])['id'];
 
     $idUserAssistant = $mUser->record->recordCreate([
+      "type" => User::TYPE_ASSISTANT,
       "first_name" => "Hop",
       "last_name" => "Gracer",
       "nick" => "assistant",
@@ -74,6 +78,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     ])['id'];
 
     $idUserExternal = $mUser->record->recordCreate([
+      "type" => User::TYPE_EXTERNAL,
       "first_name" => "Chaplie",
       "last_name" => "Charlin",
       "nick" => "external",

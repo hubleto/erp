@@ -10,6 +10,7 @@ use Hubleto\Framework\Models\Token;
  *
  * @phpstan-type UserProfile array{
  *   id: int,
+ *   type: int,
  *   first_name: string,
  *   last_name: string,
  *   login: string,
@@ -52,6 +53,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
     $tmp = is_array($this->user) ? $this->user : [];
     return [
       'id' => (int) ($tmp['id'] ?? 0),
+      'type' => (int) ($tmp['type'] ?? 0),
       'login' => (string) ($tmp['login'] ?? ''),
       'email' => (string) ($tmp['email'] ?? ''),
       'first_name' => (string) ($tmp['first_name'] ?? ''),
@@ -76,6 +78,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
     $tmp = $this->main->session->get('userProfile') ?? [];
     return [
       'id' => (int) ($tmp['id'] ?? 0),
+      'type' => (int) ($tmp['type'] ?? 0),
       'login' => (string) ($tmp['login'] ?? ''),
       'email' => (string) ($tmp['email'] ?? ''),
       'first_name' => (string) ($tmp['first_name'] ?? ''),

@@ -5,15 +5,15 @@ namespace HubletoMain;
 /**
  * @property \HubletoMain\Loader $main
  */
-class AppManager
+class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
 {
   public \Hubleto\Framework\App $activatedApp;
 
   /** @var array<\Hubleto\Framework\App> */
-  protected array $apps = [];
+  public array $apps = [];
 
   /** @var array<\Hubleto\Framework\App> */
-  protected array $disabledApps = [];
+  public array $disabledApps = [];
 
   /** @var array<string> */
   public array $registeredAppNamespaces = [];

@@ -103,15 +103,6 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
     return false;
   }
 
-  public function getActiveUsers(): array
-  {
-    return (array) $this->createUserModel()->record
-      ->where($this->activeAttribute, '<>', 0)
-      ->get()
-      ->toArray()
-    ;
-  }
-
   public function createUserModel(): \HubletoApp\Community\Settings\Models\User
   {
     return $this->main->di->create(\HubletoApp\Community\Settings\Models\User::class);

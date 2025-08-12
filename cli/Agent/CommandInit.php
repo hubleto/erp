@@ -52,6 +52,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     'projects' => [
       \HubletoApp\Community\Projects\Loader::class => [ 'sidebarOrder' => 230 ],
       \HubletoApp\Community\Worksheets\Loader::class => [ 'sidebarOrder' => 200 ],
+      \HubletoApp\Community\Issues\Loader::class => [ 'sidebarOrder' => 230 ],
     ],
     'supply-chain' => [
       \HubletoApp\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],

@@ -10,7 +10,6 @@ class Loader extends \Hubleto\Framework\Loader
 {
 
   public \HubletoMain\ReleaseManager $release;
-  public \HubletoMain\AppManager $apps;
   public \HubletoMain\HookManager $hooks;
   public \HubletoMain\CronManager $crons;
 
@@ -129,22 +128,6 @@ class Loader extends \Hubleto\Framework\Loader
   }
 
   /**
-   * Adds namespace for Twig renderer
-   *
-   * @param string $folder
-   * @param string $namespace
-   * 
-   * @return void
-   * 
-   */
-  public function addTwigViewNamespace(string $folder, string $namespace)
-  {
-    if (isset($this->twigLoader) && is_dir($folder)) {
-      $this->twigLoader->addPath($folder, $namespace);
-    }
-  }
-
-  /**
    * Create dependency injection service
    *
    * @return \Hubleto\Framework\DependencyInjection
@@ -249,7 +232,9 @@ class Loader extends \Hubleto\Framework\Loader
 
     $main = \HubletoMain\Loader::getGlobalApp();
 
+    /** @disregard P1009 */
     if ($main->config->getAsBool('autoTranslate') && class_exists(\Stichoza\GoogleTranslate\GoogleTranslate::class)) {
+      /** @disregard P1009 */
       $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
       $tr->setSource('en'); // Translate from
       $tr->setTarget($language); // Translate to

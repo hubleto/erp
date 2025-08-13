@@ -15,10 +15,21 @@ class Calendar
     "formComponent" => ""
   ];
 
+  protected \Hubleto\Framework\Interfaces\AppInterface $app;
   protected string $color = 'blue';
 
   public function __construct(public \Hubleto\Framework\Loader $main)
   {
+  }
+
+  public function setApp(\Hubleto\Framework\Interfaces\AppInterface $app): void
+  {
+    $this->app = $app;
+  }
+
+  public function getApp(): \Hubleto\Framework\Interfaces\AppInterface
+  {
+    return $this->app;
   }
 
   public function setColor(string $color): void

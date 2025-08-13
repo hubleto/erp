@@ -33,15 +33,16 @@ class Loader extends \HubletoMain\App
       'url' => 'settings/{{ appRootUrlSlug }}',
     ]);
 
-    // Add placeholder for your app's calendar.
-    $calendarManager = $this->main->load(\HubletoApp\Community\Calendar\Manager::class);
-    $calendarManager->addCalendar(
-      '{{ appName }}-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
-      '#008000', // your app's calendar color
-      Calendar::class // your app's Calendar class
-    );
+    // Uncomment following if your app will provide own calendar.
+    // $calendarManager = $this->main->load(\HubletoApp\Community\Calendar\Manager::class);
+    // $calendarManager->addCalendar(
+    //   $this, // reference to this app
+    //   '{{ appName }}-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
+    //   '#008000', // your app's calendar color
+    //   Calendar::class // your app's Calendar class
+    // );
 
-    // Uncomment following to configure your app's menu
+    // Uncomment following to configure your app's menu.
     // $appMenu = $this->main->load(\HubletoApp\Community\Desktop\AppMenuManager::class);
     // $appMenu->addItem($this, '{{ appRootUrlSlug }}/item-1', $this->translate('Item 1'), 'fas fa-table');
     // $appMenu->addItem($this, '{{ appRootUrlSlug }}/item-2', $this->translate('Item 2'), 'fas fa-list');

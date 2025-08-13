@@ -19,6 +19,7 @@ class Installer
   public string $accountRewriteBase = '';
   public string $projectFolder = '';
   public string $projectUrl = '';
+  public string $secureFolder = '';
   public string $assetsUrl = '';
 
   public string $premiumRepoFolder = '';
@@ -59,6 +60,7 @@ class Installer
     string $adminPassword,
     string $accountRewriteBase,
     string $projectFolder,
+    string $secureFolder,
     string $projectUrl,
     string $assetsUrl,
     string $dbHost,
@@ -83,6 +85,7 @@ class Installer
     $this->adminPassword = $adminPassword;
     $this->accountRewriteBase = $accountRewriteBase;
     $this->projectFolder = str_replace('\\', '/', $projectFolder);
+    $this->secureFolder = str_replace('\\', '/', $secureFolder);
     $this->projectUrl = $projectUrl;
     $this->assetsUrl = $assetsUrl;
 
@@ -174,7 +177,7 @@ class Installer
       'last_name' => $this->adminFamilyName,
       'nick' => $this->adminNick,
       'login' => $this->adminEmail,
-      'password' => $this->adminPassword == '' ? '' : $mUser->hashPassword($this->adminPassword),
+      'password' => $this->adminPassword == '' ? '' : $mUser->encryptPassword($this->adminPassword),
       'email' => $this->adminEmail,
       'is_active' => true,
       'id_default_company' => $idCompany,
@@ -196,6 +199,7 @@ class Installer
   {
     $configEnv = (string) file_get_contents(__DIR__ . '/Templates/ConfigEnv.php.tpl');
     $configEnv = str_replace('{{ projectFolder }}', $this->projectFolder, $configEnv);
+    $configEnv = str_replace('{{ secureFolder }}', $this->secureFolder, $configEnv);
     $configEnv = str_replace('{{ projectUrl }}', $this->projectUrl, $configEnv);
     $configEnv = str_replace('{{ assetsUrl }}', $this->assetsUrl, $configEnv);
     $configEnv = str_replace('{{ dbHost }}', $this->main->config->getAsString('db_host'), $configEnv);
@@ -250,6 +254,7 @@ class Installer
     @mkdir($this->projectFolder);
     @mkdir($this->projectFolder . '/log');
     @mkdir($this->projectFolder . '/upload');
+    @mkdir($this->projectFolder . '/secure');
 
     // ConfigEnv.php
 
@@ -259,12 +264,14 @@ class Installer
     $index = (string) file_get_contents(__DIR__ . '/Templates/index.php.tpl');
     $index = str_replace('{{ accountUid }}', \Hubleto\Framework\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ projectFolder }}', $this->projectFolder, $index);
+    $index = str_replace('{{ secureFolder }}', $this->secureFolder, $index);
     file_put_contents($this->projectFolder . '/index.php', $index);
 
     // cron.php
     $index = (string) file_get_contents(__DIR__ . '/Templates/cron.php.tpl');
     $index = str_replace('{{ accountUid }}', \Hubleto\Framework\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ projectFolder }}', $this->projectFolder, $index);
+    $index = str_replace('{{ secureFolder }}', $this->secureFolder, $index);
     file_put_contents($this->projectFolder . '/cron.php', $index);
 
     // hubleto cli agent
@@ -279,7 +286,12 @@ class Installer
       __DIR__ . '/Templates/.htaccess.tpl',
       $this->projectFolder . '/.htaccess'
     );
-  }
+
+    // .htaccess-secure
+    copy(
+      __DIR__ . '/Templates/.htaccess-secure.tpl',
+      $this->secureFolder . '/.htaccess'
+    );  }
 
   public function installDefaultPermissions(): void
   {

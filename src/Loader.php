@@ -144,7 +144,7 @@ class Loader extends \Hubleto\Framework\Loader
    * @return \Hubleto\Framework\Auth
    * 
    */
-  public function createAuthProvider(): \Hubleto\Framework\Auth
+  public function createAuthProvider(): \Hubleto\Framework\Interfaces\AuthInterface
   {
     return $this->di->create(\HubletoMain\AuthProvider::class);
   }

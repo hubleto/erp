@@ -190,7 +190,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
         ->where('id', $this->getUserId())
         ->update(['language' => $setLanguage])
       ;
-      $this->user['language'] = $setLanguage;
+      $this->setUserLanguage($setLanguage);
 
       if ($this->isUserInSession()) {
         $this->updateUserInSession($this->user);
@@ -202,8 +202,8 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
       $this->main->router->redirectTo('');
     }
 
-    if (strlen((string) ($this->user['language'] ?? '')) != 2) {
-      $this->user['language'] = 'en';
+    if (strlen($this->getUserLanguage()) !== 2) {
+      $this->setUserLanguage('en');
     }
   }
 

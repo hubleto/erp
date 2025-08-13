@@ -4,7 +4,7 @@ namespace HubletoMain;
 
 class Report
 {
-  public \Hubleto\Framework\App $hubletoApp;
+  public \Hubleto\Framework\Interfaces\AppInterface $hubletoApp;
 
   public const OPERATIONS = [
     1 => "=",
@@ -103,7 +103,7 @@ class Report
         }
       }
 
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       return [
         "status" => "failed",
         "error" => $e

@@ -7,12 +7,12 @@ namespace HubletoMain;
  */
 class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
 {
-  public \Hubleto\Framework\App $activatedApp;
+  public \Hubleto\Framework\Interfaces\AppInterface $activatedApp;
 
-  /** @var array<\Hubleto\Framework\App> */
+  /** @var array<\Hubleto\Framework\Interfaces\AppInterface> */
   public array $apps = [];
 
-  /** @var array<\Hubleto\Framework\App> */
+  /** @var array<\Hubleto\Framework\Interfaces\AppInterface> */
   public array $disabledApps = [];
 
   /** @var array<string> */
@@ -227,18 +227,16 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
    *
    * @param string $appNamespace
    * 
-   * @return \Hubleto\Framework\App
+   * @return \Hubleto\Framework\Interfaces\AppInterface
    * 
    */
-  public function createAppInstance(string $appNamespace): \Hubleto\Framework\App
+  public function createAppInstance(string $appNamespace): \Hubleto\Framework\Interfaces\AppInterface
   {
-    $appClass = $appNamespace . '\Loader';
-    $app = new $appClass($this->main);
-    return $app; // @phpstan-ignore-line
+    return $this->main->di->create($appNamespace . '\Loader');
   }
 
   /**
-  * @return array<\Hubleto\Framework\App>
+  * @return array<\Hubleto\Framework\Interfaces\AppInterface>
   */
   public function getEnabledApps(): array
   {
@@ -246,7 +244,7 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
   }
 
   /**
-  * @return array<\Hubleto\Framework\App>
+  * @return array<\Hubleto\Framework\Interfaces\AppInterface>
   */
   public function getDisabledApps(): array
   {
@@ -254,7 +252,7 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
   }
 
   /**
-  * @return array<\Hubleto\Framework\App>
+  * @return array<\Hubleto\Framework\Interfaces\AppInterface>
   */
   public function getInstalledApps(): array
   {
@@ -264,10 +262,10 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
   /**
    * [Description for getActivatedApp]
    *
-   * @return \Hubleto\Framework\App|null
+   * @return null|\Hubleto\Framework\Interfaces\AppInterface
    * 
    */
-  public function getActivatedApp(): \Hubleto\Framework\App|null
+  public function getActivatedApp(): null|\Hubleto\Framework\Interfaces\AppInterface
   {
     $apps = $this->getEnabledApps();
     foreach ($apps as $app) {
@@ -283,16 +281,12 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
    *
    * @param string $appNamespace
    * 
-   * @return null|\Hubleto\Framework\App
+   * @return null|\Hubleto\Framework\Interfaces\AppInterface
    * 
    */
-  public function getAppInstance(string $appNamespace): null|\Hubleto\Framework\App
+  public function getAppInstance(string $appNamespace): null|\Hubleto\Framework\Interfaces\AppInterface
   {
-    if (isset($this->apps[$appNamespace])) {
-      return $this->apps[$appNamespace];
-    } else {
-      return null;
-    }
+    return $this->apps[$appNamespace] ?? null;
   }
 
   /**
@@ -314,10 +308,10 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
    *
    * @param string $appName
    * 
-   * @return null|\Hubleto\Framework\App
+   * @return null|\Hubleto\Framework\Interfaces\AppInterface
    * 
    */
-  public function community(string $appName): null|\Hubleto\Framework\App
+  public function community(string $appName): null|\Hubleto\Framework\Interfaces\AppInterface
   {
     return $this->getAppInstance('HubletoApp\\Community\\' . $appName);
   }
@@ -327,10 +321,10 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
    *
    * @param string $appName
    * 
-   * @return null|\Hubleto\Framework\App
+   * @return null|\Hubleto\Framework\Interfaces\AppInterface
    * 
    */
-  public function custom(string $appName): null|\Hubleto\Framework\App
+  public function custom(string $appName): null|\Hubleto\Framework\Interfaces\AppInterface
   {
     return $this->getAppInstance('HubletoApp\\Custom\\' . $appName);
   }

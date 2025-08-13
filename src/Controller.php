@@ -12,7 +12,7 @@ class Controller extends \Hubleto\Framework\Controller
   public bool $permittedForAllUsers = false;
 
   public string $appNamespace = '';
-  public \Hubleto\Framework\App $hubletoApp;
+  public \Hubleto\Framework\Interfaces\AppInterface $hubletoApp;
 
   public function __construct(\Hubleto\Framework\Loader $main)
   {
@@ -119,7 +119,9 @@ class Controller extends \Hubleto\Framework\Controller
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
 
-    $contextHelpUrls = $this->main->apps->community('Help')?->getCurrentContextHelpUrls($this->main->route);
+    $help = $this->main->di->create(\HubletoApp\Community\Help\Manager::class);
+    $contextHelpUrls = $help->getCurrentContextHelpUrls($this->main->route);
+
     $user = $this->main->auth->getUser();
 
     if (isset($contextHelpUrls[$user['language']])) {

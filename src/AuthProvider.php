@@ -28,21 +28,6 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
 {
 
   /**
-   * Class constructor.
-   *
-   * @param \Hubleto\Framework\Loader $main
-   * 
-   */
-  public function __construct(public \Hubleto\Framework\Loader $main)
-  {
-    parent::__construct($main);
-
-    $this->main->registerModel(\HubletoApp\Community\Settings\Models\User::class);
-    $this->main->registerModel(\HubletoApp\Community\Settings\Models\UserRole::class);
-    $this->main->registerModel(\HubletoApp\Community\Settings\Models\UserHasRole::class);
-  }
-
-  /**
    * Get information about authenticated user.
    *
    * @return UserProfile

@@ -41,7 +41,7 @@ class Loader extends \HubletoMain\App
     );
 
     // Uncomment following to configure your app's menu
-    // $appMenu = $this->main->apps->community('Desktop')->appMenu;
+    // $appMenu = $this->main->di->create(\HubletoApp\Community\Desktop\AppMenuManager::class);
     // $appMenu->addItem($this, '{{ appRootUrlSlug }}/item-1', $this->translate('Item 1'), 'fas fa-table');
     // $appMenu->addItem($this, '{{ appRootUrlSlug }}/item-2', $this->translate('Item 2'), 'fas fa-list');
   }

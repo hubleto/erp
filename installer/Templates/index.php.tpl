@@ -1,7 +1,7 @@
 <?php
 
-require('boot.php');
-echo $main->render();
+// bootstrap
+require_once(__DIR__ . "/boot.php");
 
 // render
 echo $main->render();

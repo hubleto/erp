@@ -1,8 +1,8 @@
 <?php
 
-require('boot.php');
-echo $main->render();
+// bootstrap
+require_once(__DIR__ . "/boot.php");
 
-// run
+// run cron
 $main->crons->init();
 $main->crons->run();

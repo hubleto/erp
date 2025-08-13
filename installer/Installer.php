@@ -260,18 +260,19 @@ class Installer
 
     file_put_contents($this->projectFolder . '/ConfigEnv.php', $this->getConfigEnvContent());
 
-    // index.php
-    $index = (string) file_get_contents(__DIR__ . '/Templates/index.php.tpl');
+    // boot.php
+    $index = (string) file_get_contents(__DIR__ . '/Templates/boot.php.tpl');
     $index = str_replace('{{ accountUid }}', \Hubleto\Framework\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ projectFolder }}', $this->projectFolder, $index);
     $index = str_replace('{{ secureFolder }}', $this->secureFolder, $index);
+    file_put_contents($this->projectFolder . '/boot.php', $index);
+
+    // index.php
+    $index = (string) file_get_contents(__DIR__ . '/Templates/index.php.tpl');
     file_put_contents($this->projectFolder . '/index.php', $index);
 
     // cron.php
     $index = (string) file_get_contents(__DIR__ . '/Templates/cron.php.tpl');
-    $index = str_replace('{{ accountUid }}', \Hubleto\Framework\Helper::str2url($this->accountFullName), $index);
-    $index = str_replace('{{ projectFolder }}', $this->projectFolder, $index);
-    $index = str_replace('{{ secureFolder }}', $this->secureFolder, $index);
     file_put_contents($this->projectFolder . '/cron.php', $index);
 
     // hubleto cli agent

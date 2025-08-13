@@ -7,11 +7,10 @@ class Create extends \HubletoMain\Cli\Agent\Command
   public function run(): void
   {
     $appNamespace = $this->main->apps->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
-
     $appNamespaceParts = explode('\\', $appNamespace);
-
-
     $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
+
+    $noPrompt = (bool) ($this->arguments[4] ?? false);
 
     switch ($appNamespaceParts[1]) {
       case 'Community':
@@ -54,7 +53,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("App {$appNamespace} created successfully.\n");
 
-    if (\Hubleto\Terminal::confirm('Do you want to install the app now?')) {
+    if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to install the app now?')) {
       (new \HubletoMain\Cli\Agent\App\Install($this->main, $this->arguments))->run();
     }
 

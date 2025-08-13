@@ -9,6 +9,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     $appNamespace = $this->main->apps->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $model = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
+    $noPrompt = (bool) ($this->arguments[6] ?? false);
 
     $modelSingularForm = $model;
     $modelPluralForm = $model . 's';
@@ -127,7 +128,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
       \Hubleto\Terminal::white("\n");
     }
 
-    if (\Hubleto\Terminal::confirm('Do you want to re-install the app?')) {
+    if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to re-install the app?')) {
       (new \HubletoMain\Cli\Agent\App\Install($this->main, $this->arguments))->run();
     }
 

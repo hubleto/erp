@@ -23,5 +23,8 @@
             "HubletoMain\\Installer\\": "installer"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "bin": [
+        "hubleto"
+    ]
 }

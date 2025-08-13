@@ -29,11 +29,6 @@ if (!empty($action)) {
     switch ($action) {
       case 'help': $command = new \HubletoMain\Cli\Agent\CommandHelp($main, $argv); break;
       case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($main, $argv); break;
-      case 'release':
-        switch ($argv[2]) {
-          case 'create': $command = new \HubletoMain\Cli\Agent\Release\Create($main, $argv); break;
-        }
-      break;
       case 'app':
         switch ($argv[2]) {
           case 'list': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($main, $argv); break;
@@ -42,7 +37,6 @@ if (!empty($action)) {
           case 'test': $command = new \HubletoMain\Cli\Agent\App\Test($main, $argv); break;
           case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($main, $argv); break;
           case 'create': $command = new \HubletoMain\Cli\Agent\App\Create($main, $argv); break;
-          case 'add-repository': $command = new \HubletoMain\Cli\Agent\App\AddRepository($main, $argv); break;
         }
       break;
       case 'debug':

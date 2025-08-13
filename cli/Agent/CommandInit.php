@@ -453,6 +453,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $installer->addCompanyAndAdminUser();
 
     if ($generateDemoData) {
+      $this->main->apps->init();
       (new \HubletoMain\Cli\Agent\Project\GenerateDemoData($this->main, []))->run();
     }
 

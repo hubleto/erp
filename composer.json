@@ -25,6 +25,7 @@
     },
     "minimum-stability": "dev",
     "bin": [
-        "hubleto"
+        "hubleto",
+        "hubleto-make-production-release"
     ]
 }

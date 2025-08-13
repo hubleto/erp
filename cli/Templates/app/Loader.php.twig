@@ -41,7 +41,7 @@ class Loader extends \HubletoMain\App
     );
 
     // Uncomment following to configure your app's menu
-    // $appMenu = $this->main->di->create(\HubletoApp\Community\Desktop\AppMenuManager::class);
+    // $appMenu = $this->main->load(\HubletoApp\Community\Desktop\AppMenuManager::class);
     // $appMenu->addItem($this, '{{ appRootUrlSlug }}/item-1', $this->translate('Item 1'), 'fas fa-table');
     // $appMenu->addItem($this, '{{ appRootUrlSlug }}/item-2', $this->translate('Item 2'), 'fas fa-list');
   }
@@ -51,7 +51,7 @@ class Loader extends \HubletoMain\App
   {
     if ($round == 1) {
       // install your models here
-      // Example: $this->main->di->create(Models\Contact::class)->dropTableIfExists()->install();
+      // Example: $this->main->load(Models\Contact::class)->dropTableIfExists()->install();
 
       // DO NOT DELETE FOLLOWING LINE, OR `php hubleto` WILL NOT GENERATE CODE HERE
       //@hubleto-cli:install-tables

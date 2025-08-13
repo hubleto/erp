@@ -25,7 +25,7 @@ class Permissions extends \Hubleto\Framework\Permissions
     if (!isset($this->main->pdo) || !$this->main->pdo->isConnected) {
       return [];
     }
-    $mUserRole = $this->main->di->create(UserRole::class);
+    $mUserRole = $this->main->load(UserRole::class);
     $administratorRoles = Helper::pluck('id', $this->main->pdo->fetchAll("select id from `{$mUserRole->table}` where grant_all = 1"));
     return $administratorRoles;
   }
@@ -54,14 +54,14 @@ class Permissions extends \Hubleto\Framework\Permissions
     }
 
     if (isset($this->main->pdo) && $this->main->pdo->isConnected) {
-      $mUserRole = $this->main->di->create(UserRole::class);
+      $mUserRole = $this->main->load(UserRole::class);
 
       $idCommonUserRoles = Helper::pluck('id', $this->main->pdo->fetchAll("select id from `{$mUserRole->table}` where grant_all = 0"));
 
       foreach ($idCommonUserRoles as $idCommonRole) {
         $idCommonRole = (int) $idCommonRole;
 
-        $mRolePermission = $this->main->di->create(RolePermission::class);
+        $mRolePermission = $this->main->load(RolePermission::class);
 
         /** @var array<int, array> */
         $rolePermissions = (array) $mRolePermission->record

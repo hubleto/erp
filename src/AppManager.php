@@ -232,7 +232,7 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
    */
   public function createAppInstance(string $appNamespace): \Hubleto\Framework\Interfaces\AppInterface
   {
-    return $this->main->di->create($appNamespace . '\Loader');
+    return $this->main->load($appNamespace . '\Loader');
   }
 
   /**

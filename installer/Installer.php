@@ -165,9 +165,9 @@ class Installer
 
   public function addCompanyAndAdminUser(): void
   {
-    $mCompany = $this->main->di->create(\HubletoApp\Community\Settings\Models\Company::class);
-    $mUser = $this->main->di->create(User::class);
-    $mUserHasRole = $this->main->di->create(UserHasRole::class);
+    $mCompany = $this->main->load(\HubletoApp\Community\Settings\Models\Company::class);
+    $mUser = $this->main->load(User::class);
+    $mUserHasRole = $this->main->load(UserHasRole::class);
 
     $idCompany = $mCompany->record->recordCreate(['name' => $this->accountFullName])['id'];
 

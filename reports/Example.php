@@ -27,7 +27,7 @@ class Example extends \Hubleto\Framework\Report
 
     // Sample implementation. Uncomment and modify to your needs.
 
-    // \$model = $this->main->di->create(Deal::class);
+    // \$model = $this->main->load(Deal::class);
     // $config['groupsBy'] = [
     //   ["field" => "id_customer", "title" => "Customer"],
     // ];

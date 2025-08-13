@@ -119,7 +119,7 @@ class Controller extends \Hubleto\Framework\Controller
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
 
-    $help = $this->main->di->create(\HubletoApp\Community\Help\Manager::class);
+    $help = $this->main->load(\HubletoApp\Community\Help\Manager::class);
     $contextHelpUrls = $help->getCurrentContextHelpUrls($this->main->route);
 
     $user = $this->main->auth->getUser();

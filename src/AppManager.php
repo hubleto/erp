@@ -31,11 +31,15 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
         is_array($appConfig)
         && $appClass::canBeAdded($this->main)
       ) {
-        if ($appConfig['enabled'] ?? false) {
-          $this->apps[$appNamespace] = $this->createAppInstance($appNamespace);
-          $this->apps[$appNamespace]->enabled = true;
-        } else {
-          $this->disabledApps[$appNamespace] = $this->createAppInstance($appNamespace);
+        try {
+          if ($appConfig['enabled'] ?? false) {
+            $this->apps[$appNamespace] = $this->createAppInstance($appNamespace);
+            $this->apps[$appNamespace]->enabled = true;
+          } else {
+            $this->disabledApps[$appNamespace] = $this->createAppInstance($appNamespace);
+          }
+        } catch (\Exception $e) {
+          // do nothing, if app cannot be instantiated
         }
       }
     }

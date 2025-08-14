@@ -22,6 +22,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       \HubletoApp\Community\Dashboards\Loader::class => [ 'sidebarOrder' => 99995 ],
       \HubletoApp\Community\Pipeline\Loader::class => [ 'sidebarOrder' => 220 ],
       \HubletoApp\Community\Tasks\Loader::class => [ 'sidebarOrder' => 99995 ],
+      \HubletoApp\Community\Worksheets\Loader::class => [ 'sidebarOrder' => 200 ],
       \HubletoApp\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996 ],
       \HubletoApp\Community\Help\Loader::class => [ 'sidebarOrder' => 99998 ],
       \HubletoApp\Community\About\Loader::class => [ 'sidebarOrder' => 99998 ],

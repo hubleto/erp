@@ -13,6 +13,7 @@ import InputImage from "@hubleto/react-ui/core/Inputs/Image";
 import InputBoolean from "@hubleto/react-ui/core/Inputs/Boolean";
 import InputColor from "@hubleto/react-ui/core/Inputs/Color";
 import InputHyperlink from "@hubleto/react-ui/core/Inputs/Hyperlink";
+import InputWysiwyg from "@hubleto/react-ui/core/Inputs/Wysiwyg";
 
 import TableCellRendererHyperlink from "@hubleto/react-ui/core/TableCellRenderers/Hyperlink";
 
@@ -51,6 +52,7 @@ class HubletoMain extends HubletoReactUi {
     this.registerReactComponent('InputImage', InputImage);
     this.registerReactComponent('InputColor', InputColor);
     this.registerReactComponent('InputHyperlink', InputHyperlink);
+    this.registerReactComponent('InputWysiwyg', InputWysiwyg);
 
     this.registerReactComponent('TableCellRendererHyperlink', TableCellRendererHyperlink);
 

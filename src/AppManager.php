@@ -38,7 +38,8 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
           } else {
             $this->disabledApps[$appNamespace] = $this->createAppInstance($appNamespace);
           }
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+          throw new \Exception("Failed to initialize app {$appNamespace}." . $e->getMessage());
           // do nothing, if app cannot be instantiated
         }
       }

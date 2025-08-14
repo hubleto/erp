@@ -734,14 +734,13 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     foreach ($products as $product) {
       $mProduct->record->create([
-        "title" => $product[0],
-        "unit_price" => $product[1],
+        "name" => $product[0],
+        "sales_price" => $product[1],
         "margin" => $product[2],
         "vat" => $product[3],
         "unit" => $product[4],
         "id_product_group" => rand(1, 4),
-        "id_supplier" => rand(1, 3),
-        "type" => 1,
+        "type" => \HubletoApp\Community\Products\Models\Product::TYPE_CONSUMABLE,
       ]);
     }
 
@@ -750,13 +749,12 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     //Create all services
     foreach ($serviceNames as $serviceName) {
       $mProduct->record->create([
-        "title" => $serviceName,
-        "unit_price" => rand(10, 100),
+        "name" => $serviceName,
+        "sales_price" => rand(10, 100),
         "margin" => rand(10, 40),
         "vat" => 25,
         "id_product_group" => 5,
-        "id_supplier" => rand(1, 3),
-        "type" => 2,
+        "type" => \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE,
       ]);
     }
   }

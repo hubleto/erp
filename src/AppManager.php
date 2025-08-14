@@ -398,12 +398,6 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
     $this->main->config->save('apps/' . $this->getAppNamespaceForConfig($appNamespace) . '/enabled', '1');
   }
 
-  public function testApp(string $appNamespace, string $test): void
-  {
-    $app = $this->createAppInstance($appNamespace);
-    $app->test($test);
-  }
-
   public function createApp(string $appNamespace, string $appSrcFolder): void
   {
     if (empty($appSrcFolder)) {

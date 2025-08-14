@@ -4,10 +4,8 @@ namespace HubletoMain;
 
 use \Hubleto\Framework\Helper;
 
-class App implements \Hubleto\Framework\Interfaces\AppInterface
+class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interfaces\AppInterface
 {
-
-  public \HubletoMain\Loader $main;
 
   public const DEFAULT_INSTALLATION_CONFIG = [
     'sidebarOrder' => 500,
@@ -34,21 +32,32 @@ class App implements \Hubleto\Framework\Interfaces\AppInterface
   public bool $isActivated = false;
   public bool $hasCustomSettings = false;
 
-  public \Hubleto\Framework\Interfaces\AppMenuManagerInterface $appMenu;
-
   /** @var array<int, array<\Hubleto\Framework\App, array>> */
   public array $settings = [];
 
-
+  /**
+   * Returns true, if an app can be added. Currently all apps can be added.
+   *
+   * @param \Hubleto\Framework\Loader $main
+   * 
+   * @return bool
+   * 
+   */
   public static function canBeAdded(\Hubleto\Framework\Loader $main): bool
   {
     return true;
   }
 
+  /**
+   * App constructor
+   *
+   * @param \HubletoMain\Loader $main
+   * 
+   */
   public function __construct(\HubletoMain\Loader $main)
   {
 
-    $this->main = $main;
+    parent::__construct($main);
 
     $reflection = new \ReflectionClass($this);
 
@@ -71,6 +80,12 @@ class App implements \Hubleto\Framework\Interfaces\AppInterface
 
   }
 
+  /**
+   * Validates if all required parameters of manifest are correctly provided.
+   *
+   * @return [type]
+   * 
+   */
   public function validateManifest()
   {
     $missing = [];
@@ -102,6 +117,12 @@ class App implements \Hubleto\Framework\Interfaces\AppInterface
     }
   }
 
+  /**
+   * Common initialization for all Hubleto apps.
+   *
+   * @return void
+   * 
+   */
   public function init(): void
   {
     $this->manifest['nameTranslated'] = $this->translate($this->manifest['name'], [], 'manifest');
@@ -128,36 +149,9 @@ class App implements \Hubleto\Framework\Interfaces\AppInterface
     return 0;
   }
 
-  public function createTestInstance(string $test): \Hubleto\Framework\AppTest
-  {
-    $reflection = new \ReflectionClass($this);
-    $testClass = $reflection->getNamespaceName() . '\\Tests\\' . $test;
-    return new $testClass($this);
-  }
-
-  public function test(string $test): void
-  {
-    ($this->createTestInstance($test))->run();
-  }
-
-  /** @return array<string> */
-  public function getAllTests(): array
-  {
-    $tests = [];
-    $testFiles = (array) @scandir($this->srcFolder . '/Tests');
-    foreach ($testFiles as $testFile) {
-      if (substr($testFile, -4) == '.php') {
-        $tests[] = substr($testFile, 0, -4);
-      }
-    }
-
-    return $tests;
-  }
-
   public static function getDictionaryFilename(string $language): string
   {
     if (strlen($language) == 2) {
-      $appClass = get_called_class();
       $reflection = new \ReflectionClass(get_called_class());
       $srcFolder = pathinfo((string) $reflection->getFilename(), PATHINFO_DIRNAME);
       return $srcFolder . '/Lang/' . $language . '.json';
@@ -248,7 +242,7 @@ class App implements \Hubleto\Framework\Interfaces\AppInterface
         $mClass = str_replace('.php', '', $mClass);
         if (class_exists($mClass)) {
           try {
-            $mObj = $this->main->load($mClass);
+            $this->main->load($mClass);
             $modelClasses[] = $mClass;
           } catch (\Throwable) {
           }
@@ -262,14 +256,7 @@ class App implements \Hubleto\Framework\Interfaces\AppInterface
 
   public function installDefaultPermissions(): void
   {
-    $permissions = [
-      // 'Api/Table/Describe',
-      // 'Api/Form/Describe',
-      // 'Api/Record/Get',
-      // 'Api/Record/GetList',
-      // 'Api/Record/Lookup',
-      // 'Api/Record/Save',
-    ];
+    $permissions = [];
 
     $controllersFolder = $this->srcFolder . '/Controllers';
     if (is_dir($controllersFolder)) {
@@ -328,6 +315,12 @@ class App implements \Hubleto\Framework\Interfaces\AppInterface
     // to be overriden
   }
 
+  /**
+   * Returns HTML of the second-level sidebar of this app.
+   *
+   * @return string
+   * 
+   */
   public function renderSecondSidebar(): string
   {
     return '';

@@ -429,15 +429,15 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
     return '';
   }
 
-  public function collectIntegrationItems(string $integrationName): array
+  public function collectExtendibles(string $extendibleName): array
   {
     $items = [];
     foreach ($this->main->apps->getEnabledApps() as $app) {
       try {
-        $integration = $this->main->load($app->namespace . '\\Integrations\\' . $integrationName);
-        $integration->app = $app;
-        if ($integration instanceof Integration) {
-          $items = array_merge($items, $integration->getItems());
+        $extendible = $this->main->load($app->namespace . '\\Extendibles\\' . $extendibleName);
+        $extendible->app = $app;
+        if ($extendible instanceof Extendible) {
+          $items = array_merge($items, $extendible->getItems());
         }
       } catch (\Throwable $e) {
         // do nothing

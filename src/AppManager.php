@@ -236,7 +236,8 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
    */
   public function createAppInstance(string $appNamespace): \Hubleto\Framework\Interfaces\AppInterface
   {
-    return $this->main->load($appNamespace . '\Loader');
+     if (!str_ends_with($appNamespace, '\Loader')) $appNamespace = $appNamespace . '\Loader';
+    return $this->main->load($appNamespace);
   }
 
   /**
@@ -437,6 +438,9 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
     if (!is_dir($appSrcFolder . '/Views')) {
       mkdir($appSrcFolder . '/Views');
     }
+    if (!is_dir($appSrcFolder . '/Extendibles')) {
+      mkdir($appSrcFolder . '/Extendibles');
+    }
 
     file_put_contents($appSrcFolder . '/Loader.php', $this->main->twig->render('@appTemplate/Loader.php.twig', $tplVars));
     file_put_contents($appSrcFolder . '/Loader.tsx', $this->main->twig->render('@appTemplate/Loader.tsx.twig', $tplVars));
@@ -446,6 +450,7 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
     file_put_contents($appSrcFolder . '/Controllers/Settings.php', $this->main->twig->render('@appTemplate/Controllers/Settings.php.twig', $tplVars));
     file_put_contents($appSrcFolder . '/Views/Home.twig', $this->main->twig->render('@appTemplate/Views/Home.twig.twig', $tplVars));
     file_put_contents($appSrcFolder . '/Views/Settings.twig', $this->main->twig->render('@appTemplate/Views/Settings.twig.twig', $tplVars));
+    file_put_contents($appSrcFolder . '/Extendibles/AppMenu.php', $this->main->twig->render('@appTemplate/Extendibles/AppMenu.php.twig', $tplVars));
   }
 
   public function canAppDangerouslyInjectDesktopHtmlContent(string $appNamespace): bool

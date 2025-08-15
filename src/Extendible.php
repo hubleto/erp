@@ -2,7 +2,7 @@
 
 namespace HubletoMain;
 
-class Integration extends CoreClass
+class Extendible extends CoreClass
 {
   public App $app;
   public array $items = [];

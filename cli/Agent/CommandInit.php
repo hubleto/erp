@@ -450,6 +450,16 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan("  -> Installing apps, round #3.\n");
     $installer->installApps(3);
 
+    \Hubleto\Terminal::cyan("    -> Finalizing...\n");
+    foreach ($installer->appsToInstall as $appNamespace => $appConfig) {
+      $app = $this->main->apps->createAppInstance($appNamespace);
+      $mClasses = $app->getAvailableModelClasses();
+      foreach ($mClasses as $mClass) {
+        $mObj = $this->main->load($mClass);
+        $mObj->createSqlForeignKeys();
+      }
+    }
+
     \Hubleto\Terminal::cyan("  -> Adding default company and admin user.\n");
     $installer->addCompanyAndAdminUser();
 

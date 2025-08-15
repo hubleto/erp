@@ -18,10 +18,22 @@ class Search extends \HubletoMain\Controllers\ApiController
     $results = [];
 
     foreach ($this->main->apps->getEnabledApps() as $appNamespace => $app) {
-      $appResults = $app->search($expressions);
-      foreach ($appResults as $key => $value) {
-        $value['APP_NAMESPACE'] = $appNamespace;
-        $results[] = $value;
+      $canSearchThisApp = true;
+      $expressionsToSearch = $expressions;
+      foreach ($expressions as $key => $e) {
+        if (str_starts_with($e, 'app:')) {
+          unset($expressionsToSearch[$key]);
+          if (!str_contains(strtolower($app->fullName), strtolower(str_replace('app:', '', $e)))) {
+            $canSearchThisApp = false;
+          }
+        }
+      }
+      if ($canSearchThisApp) {
+        $appResults = $app->search($expressionsToSearch);
+        foreach ($appResults as $key => $value) {
+          $value['APP_NAMESPACE'] = $appNamespace;
+          $results[] = $value;
+        }
       }
     }
 

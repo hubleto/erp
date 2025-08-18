@@ -147,6 +147,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mDealHistory  = $this->main->load(\HubletoApp\Community\Deals\Models\DealHistory::class);
     $mDealTag      = $this->main->load(\HubletoApp\Community\Deals\Models\DealTag::class);
     $mDealActivity = $this->main->load(\HubletoApp\Community\Deals\Models\DealActivity::class);
+    $mDealProduct = $this->main->load(\HubletoApp\Community\Deals\Models\DealProduct::class);
     $mDealDocument = $this->main->load(\HubletoApp\Community\Deals\Models\DealDocument::class);
 
     //Shop
@@ -165,6 +166,10 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $this->generateActivities($mCustomer, $mCustomerActivity);
 
+    if ($this->main->apps->isAppInstalled("HubletoApp\Community\Products")) {
+      $this->generateProducts($mProduct, $mGroup, $mSupplier);
+    }
+
     if (
       $this->main->apps->isAppInstalled("HubletoApp\Community\Customers") &&
       $this->main->apps->isAppInstalled("HubletoApp\Community\Documents") &&
@@ -173,10 +178,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
       $this->main->apps->isAppInstalled("HubletoApp\Community\Leads")
     ) {
       $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
-      $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity);
-    }
-    if ($this->main->apps->isAppInstalled("HubletoApp\Community\Products")) {
-      $this->generateProducts($mProduct, $mGroup, $mSupplier);
+      $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity, $mDealProduct);
     }
 
     foreach ($this->main->apps->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
@@ -584,7 +586,8 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     \HubletoApp\Community\Deals\Models\Deal $mDeal,
     \HubletoApp\Community\Deals\Models\DealHistory $mDealHistory,
     \HubletoApp\Community\Deals\Models\DealTag $mDealTag,
-    \HubletoApp\Community\Deals\Models\DealActivity $mDealActivity
+    \HubletoApp\Community\Deals\Models\DealActivity $mDealActivity,
+    \HubletoApp\Community\Deals\Models\DealProduct $mDealProduct
   ): void {
 
     $leads = $mLead->record->get();
@@ -654,6 +657,18 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
         "id_owner" => rand(1, 4),
       ]);
 
+      for ($i = 1; $i < 4; $i++) {
+        $mDealProduct->record->recordCreate([
+          "id_deal" => $idDeal,
+          "id_product" => $i,
+          "order" => $i,
+          "description" => "Follow-up call\nFollow-up call",
+          "unit_price" => rand(3, 5) * 15,
+          "vat" => 23,
+          "amount" => rand(10, 20) / 3,
+        ]);
+      }
+      
       $mDealTag->record->recordCreate([
         "id_deal" => $idDeal,
         "id_tag" => rand(1, 5)

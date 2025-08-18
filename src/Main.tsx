@@ -216,3 +216,9 @@ document.addEventListener('readystatechange', function() {
   }
 });
 
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.key === 'k') {
+    globalThis.main.reactElements['global-fulltext-search'].searchRef.current.focus();
+    e.preventDefault();
+  }
+});

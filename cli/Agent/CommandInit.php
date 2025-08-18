@@ -235,7 +235,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $projectUrl = \Hubleto\Terminal::read('ConfigEnv.projectUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
     }
     if ($assetsUrl === null) {
-      $assetsUrl = \Hubleto\Terminal::read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/assets');
+      $assetsUrl = \Hubleto\Terminal::read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/assets');
     }
     if ($dbHost === null) {
       $dbHost = \Hubleto\Terminal::read('ConfigEnv.dbHost', 'localhost');

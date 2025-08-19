@@ -32,6 +32,8 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
   public bool $isActivated = false;
   public bool $hasCustomSettings = false;
 
+  public array $searchSwitches = [];
+
   /** @var array<int, array<\Hubleto\Framework\App, array>> */
   public array $settings = [];
 
@@ -445,6 +447,17 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
     }
 
     return $items;
+  }
+
+  public function addSearchSwitch(string $switch): void
+  {
+    $this->searchSwitches[] = $switch;
+    $this->searchSwitches = array_unique($this->searchSwitches);
+  }
+
+  public function canHandleSearchSwith(string $switch): bool
+  {
+    return in_array($switch, $this->searchSwitches);
   }
 
 }

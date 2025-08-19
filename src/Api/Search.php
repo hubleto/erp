@@ -11,8 +11,8 @@ class Search extends \HubletoMain\Controllers\ApiController
     $query = $this->main->urlParamAsString('query');
 
     $expressions = [];
-    foreach (explode(' ', strtr($query, ',', ' ')) as $e) {
-      $expressions[] = strtolower(trim($e, ' ,;./'));
+    foreach (explode(' ', strtr($query, ',;.', '   ')) as $e) {
+      $expressions[] = trim($e);
     }
 
     $results = [];
@@ -27,7 +27,14 @@ class Search extends \HubletoMain\Controllers\ApiController
             $canSearchThisApp = false;
           }
         }
+        if (str_starts_with($e, '/')) {
+          unset($expressionsToSearch[$key]);
+          if (!$app->canHandleSearchSwith(trim($e, '/'))) {
+            $canSearchThisApp = false;
+          }
+        }
       }
+
       if ($canSearchThisApp) {
         $appResults = $app->search($expressionsToSearch);
         foreach ($appResults as $key => $value) {
@@ -36,6 +43,11 @@ class Search extends \HubletoMain\Controllers\ApiController
         }
       }
     }
+
+    // $results[] = [
+    //   'label' => 'Help: How to use search',
+    //   'url' => 'help/search',
+    // ];
 
     return $results;
   }

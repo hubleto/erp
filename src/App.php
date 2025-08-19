@@ -25,6 +25,7 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
   public string $srcFolder = '';
   public string $viewNamespace = '';
   public string $namespace = '';
+  public string $shortName = '';
   public string $fullName = '';
 
   public string $translationContext = '';
@@ -67,6 +68,10 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
     $this->namespace = $reflection->getNamespaceName();
     $this->fullName = $reflection->getName();
     $this->translationContext = trim(str_replace('\\', '/', $this->fullName), '/');
+
+    $tmp = explode("\\", $this->fullName);
+    $tmp = array_slice($tmp, 0, count($tmp) - 1);
+    $this->shortName = end($tmp);
 
     $this->viewNamespace = $this->namespace;
     $this->viewNamespace = str_replace('\\', ':', $this->viewNamespace);

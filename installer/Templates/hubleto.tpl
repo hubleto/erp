@@ -2,4 +2,4 @@
 
 require_once(__DIR__ . '/ConfigEnv.php');
 $tmpMain = new \HubletoMain\Loader($config);
-require_once($tmpMain->srcFolder . '/hubleto');
+require_once($tmpMain->releaseFolder . '/hubleto');

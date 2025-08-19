@@ -19,6 +19,7 @@ class Installer
   public string $accountRewriteBase = '';
   public string $projectFolder = '';
   public string $projectUrl = '';
+  public string $srcFolder = '';
   public string $secureFolder = '';
   public string $assetsUrl = '';
 
@@ -60,6 +61,7 @@ class Installer
     string $adminPassword,
     string $accountRewriteBase,
     string $projectFolder,
+    string $srcFolder,
     string $secureFolder,
     string $projectUrl,
     string $assetsUrl,
@@ -85,6 +87,7 @@ class Installer
     $this->adminPassword = $adminPassword;
     $this->accountRewriteBase = $accountRewriteBase;
     $this->projectFolder = str_replace('\\', '/', $projectFolder);
+    $this->srcFolder = str_replace('\\', '/', $srcFolder);
     $this->secureFolder = str_replace('\\', '/', $secureFolder);
     $this->projectUrl = $projectUrl;
     $this->assetsUrl = $assetsUrl;
@@ -199,6 +202,7 @@ class Installer
   {
     $configEnv = (string) file_get_contents(__DIR__ . '/Templates/ConfigEnv.php.tpl');
     $configEnv = str_replace('{{ projectFolder }}', $this->projectFolder, $configEnv);
+    $configEnv = str_replace('{{ srcFolder }}', $this->srcFolder, $configEnv);
     $configEnv = str_replace('{{ secureFolder }}', $this->secureFolder, $configEnv);
     $configEnv = str_replace('{{ projectUrl }}', $this->projectUrl, $configEnv);
     $configEnv = str_replace('{{ assetsUrl }}', $this->assetsUrl, $configEnv);
@@ -264,6 +268,7 @@ class Installer
     $index = (string) file_get_contents(__DIR__ . '/Templates/boot.php.tpl');
     $index = str_replace('{{ accountUid }}', \Hubleto\Framework\Helper::str2url($this->accountFullName), $index);
     $index = str_replace('{{ projectFolder }}', $this->projectFolder, $index);
+    $index = str_replace('{{ srcFolder }}', $this->srcFolder, $index);
     $index = str_replace('{{ secureFolder }}', $this->secureFolder, $index);
     file_put_contents($this->projectFolder . '/boot.php', $index);
 

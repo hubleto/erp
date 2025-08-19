@@ -94,6 +94,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     $rewriteBase = null;
     $projectFolder = null;
+    $srcFolder = null;
     $secureFolder = null;
     $projectUrl = null;
     $assetsUrl = null;
@@ -134,6 +135,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
     if (isset($config['projectFolder'])) {
       $projectFolder = $config['projectFolder'];
+    }
+    if (isset($config['srcFolder'])) {
+      $srcFolder = $config['srcFolder'];
     }
     if (isset($config['secureFolder'])) {
       $secureFolder = $config['secureFolder'];
@@ -227,6 +231,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     }
     if ($projectFolder === null) {
       $projectFolder = $this->main->projectFolder;
+    }
+    if ($srcFolder === null) {
+      $srcFolder = $this->main->srcFolder;
     }
     if ($secureFolder === null) {
       $secureFolder = $this->main->secureFolder;
@@ -334,6 +341,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan("Initializing with following config:\n");
     \Hubleto\Terminal::cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
     \Hubleto\Terminal::cyan('  -> projectFolder = ' . (string) $projectFolder . "\n");
+    \Hubleto\Terminal::cyan('  -> srcFolder = ' . (string) $srcFolder . "\n");
     \Hubleto\Terminal::cyan('  -> projectUrl = ' . (string) $projectUrl . "\n");
     \Hubleto\Terminal::cyan('  -> secureFolder = ' . (string) $secureFolder . "\n");
     \Hubleto\Terminal::cyan('  -> assetsUrl = ' . (string) $assetsUrl . "\n");
@@ -352,6 +360,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
     $this->main->config->set('projectFolder', $projectFolder);
+    $this->main->config->set('srcFolder', $srcFolder);
     $this->main->config->set('projectUrl', $projectUrl);
     $this->main->config->set('secureFolder', $secureFolder);
     $this->main->config->set('assetsUrl', $assetsUrl);
@@ -362,6 +371,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->main->config->set('db_name', $dbName);
 
     $this->main->projectFolder = $projectFolder;
+    $this->main->srcFolder = $srcFolder;
     $this->main->secureFolder = $secureFolder;
 
     \Hubleto\Terminal::cyan("\n");
@@ -380,6 +390,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       (string) $adminPassword,
       (string) $rewriteBase,
       (string) $projectFolder,
+      (string) $srcFolder,
       (string) $secureFolder,
       (string) $projectUrl,
       (string) $assetsUrl,

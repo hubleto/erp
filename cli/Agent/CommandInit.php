@@ -291,6 +291,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       }
     }
 
+    $projectUrl = str_replace('{{ rewriteBase }}', trim($rewriteBase, '/'), $projectUrl);
+    $assetsUrl = str_replace('{{ rewriteBase }}', trim($rewriteBase, '/'), $assetsUrl);
+
     $errors = [];
     $errorColumns = [];
     if (!filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {

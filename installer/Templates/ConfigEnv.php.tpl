@@ -11,6 +11,7 @@ $config['accountFullName'] = '{{ accountFullName }}';
 // dirs
 
 $config['projectFolder'] = __DIR__;
+$config['srcFolder'] = "{{ srcFolder }}";
 $config['logFolder'] = __DIR__ . '/log';
 $config['uploadFolder'] = __DIR__ . '/upload';
 

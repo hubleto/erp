@@ -29,10 +29,9 @@ class Dictionary extends \HubletoMain\Controllers\ApiController
     }
 
     $dict = $this->main->translator->loadDictionary($language);
-// var_dump($dict);exit;
+
     if (
-      empty($dict[$addNew['context']][$addNew['orig']])
-      &&  isset($addNew['context'])
+      isset($addNew['context'])
       && isset($addNew['orig'])
       && $language != 'en'
     ) {

@@ -18,10 +18,10 @@
         "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
         "Yes, delete": "Áno, zmazať",
         "No, do not delete": "Nie, zavrieť okno",
-        "Delete": "",
-        "Start typing to search...": "",
-        "Search...": "",
-        "No data.": ""
+        "Delete": "Zmazať",
+        "Start typing to search...": "Začnite vyhľadávať...",
+        "Search...": "Hľadať",
+        "No data.": "Žiadne údaje."
     },
     "Controllers\\ControllerSignIn": {
         "Keep signed in": "Zostať prihlásený"

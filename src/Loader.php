@@ -177,9 +177,9 @@ class Loader extends \Hubleto\Framework\Loader
    * @return \Hubleto\Framework\Translator
    * 
    */
-  public function createTranslator(): \Hubleto\Framework\Translator
+  public function createTranslator(): \Hubleto\Framework\Interfaces\TranslatorInterface
   {
-    return $this->di->create(\Hubleto\Framework\Translator::class);
+    return $this->di->create(\HubletoMain\Translator::class);
   }
 
   // /**

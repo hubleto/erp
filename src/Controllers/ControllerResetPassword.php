@@ -9,7 +9,7 @@ class ControllerResetPassword extends \HubletoMain\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;
-  public string $translationContext = 'Hubleto\\Core\\Loader::Controllers\\ResetPassword';
+  public string $translationContext = 'HubletoMain\\Loader::Controllers\\ResetPassword';
 
   public function prepareView(): void
   {

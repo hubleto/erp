@@ -182,25 +182,25 @@ class Loader extends \Hubleto\Framework\Loader
     return $this->di->create(\Hubleto\Framework\Translator::class);
   }
 
-  /**
-   * Load dictionary for the specified language
-   *
-   * @param string $language
-   * 
-   * @return array
-   * 
-   */
-  public static function loadDictionary(string $language): array
-  {
-    $dict = [];
-    if (strlen($language) == 2) {
-      $dictFilename = __DIR__ . '/../lang/' . $language . '.json';
-      if (is_file($dictFilename)) {
-        $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
-      }
-    }
-    return $dict;
-  }
+  // /**
+  //  * Load dictionary for the specified language
+  //  *
+  //  * @param string $language
+  //  * 
+  //  * @return array
+  //  * 
+  //  */
+  // public static function loadDictionary(string $language): array
+  // {
+  //   $dict = [];
+  //   if (strlen($language) == 2) {
+  //     $dictFilename = __DIR__ . '/../lang/' . $language . '.json';
+  //     if (is_file($dictFilename)) {
+  //       $dict = (array) @json_decode((string) file_get_contents($dictFilename), true);
+  //     }
+  //   }
+  //   return $dict;
+  // }
 
   /**
    * Callback called before the rendering starts.
@@ -227,10 +227,11 @@ class Loader extends \Hubleto\Framework\Loader
   {
 
     $dictFilename = static::getDictionaryFilename($language);
-
     $dict = static::loadDictionary($language);
 
     $main = \HubletoMain\Loader::getGlobalApp();
+
+    if (!empty($dict[$contextInner][$string])) return;
 
     /** @disregard P1009 */
     if ($main->config->getAsBool('autoTranslate') && class_exists(\Stichoza\GoogleTranslate\GoogleTranslate::class)) {
@@ -242,7 +243,6 @@ class Loader extends \Hubleto\Framework\Loader
     } else {
       $dict[$contextInner][$string] = '';
     }
-
 
     @file_put_contents($dictFilename, json_encode($dict, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 

@@ -191,6 +191,8 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
 
     $main = \Hubleto\Framework\Loader::getGlobalApp();
 
+    if (!empty($dict[$contextInner][$string])) return;
+
     if ($main->config->getAsBool('autoTranslate')) {
       /** @disregard P1009 */
       $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();

@@ -8,7 +8,7 @@ class ControllerNotFound extends \HubletoMain\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;
-  public string $translationContext = 'Hubleto\\Core\\Loader::Controllers\\NotFound';
+  public string $translationContext = 'HubletoMain\\Loader::Controllers\\NotFound';
 
   public function prepareView(): void
   {

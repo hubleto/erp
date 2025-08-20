@@ -2,6 +2,7 @@
 
 namespace HubletoMain;
 
+use Hubleto\Framework\Helper;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Settings\Models\UserRole;
 
@@ -33,9 +34,9 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     }
 
     $isTeamMember = false;
-    if ($hasIdTeam) {
-      $isTeamMember = $main->auth->isUserMemberOfTeam($record['id_team']);
-    }
+    // if ($hasIdTeam) {
+    //   $isTeamMember = $main->auth->isUserMemberOfTeam($record['id_team']);
+    // }
 
     // enable permissions by certain criteria
     $canRead = false;
@@ -157,6 +158,25 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       $query = $query->where($this->table . '.id_owner', $idUser);
     } elseif ($main->auth->getUserType() == User::TYPE_ASSISTANT && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);
+    }
+
+    // junctions
+
+    $junctionModel = $main->urlParamAsString('junctionModel');
+    $junctionSourceColumn = $main->urlParamAsString('junctionSourceColumn');
+    $junctionDestinationColumn = $main->urlParamAsString('junctionDestinationColumn');
+    $junctionSourceRecordId = $main->urlParamAsInteger('junctionSourceRecordId');
+
+    if (!empty($junctionModel) && !empty($junctionSourceColumn) && $junctionSourceRecordId > 0) {
+      $junctionModelObj = $main->load($junctionModel);
+      if ($junctionModelObj) {
+        $destinationIds = $junctionModelObj->record
+          ->where($junctionSourceColumn, $junctionSourceRecordId)
+          ->pluck($junctionDestinationColumn)
+          ->toArray()
+        ;
+        $query = $query->whereIn($this->table . '.id', $destinationIds);
+      }
     }
 
     return $query;

@@ -35,8 +35,19 @@ class Dictionary extends \HubletoMain\Controllers\ApiController
       && isset($addNew['orig'])
       && $language != 'en'
     ) {
-      list($contextClass, $contextInner) = explode('::', $addNew['context']);
-      $contextClass::addToDictionary($language, $contextInner, $addNew['orig']);
+
+      $tmp = explode('::', $addNew['context']);
+      $contextClass = $tmp[0] ?? '';
+      $contextInner = $tmp[1] ?? '';
+
+      if (
+        !empty($contextClass)
+        && class_exists($contextClass)
+        && !empty($contextInner)
+      ) {
+        $contextClass::addToDictionary($language, $contextInner, $addNew['orig']);
+      }
+
       return ['status' => true];
     } else {
       return $dict;

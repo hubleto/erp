@@ -8,12 +8,7 @@ interface Form{{ modelSingularForm }}State extends HubletoFormState { }
 export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{{ modelSingularForm }}Props, Form{{ modelSingularForm }}State> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: '{{ appNamespaceForwardSlash }}/Models/Team',
-    tabs: {
-      'default': { title: 'Task' },
-      // Add your tabs here.
-      // 'tab_with_nested_table': { title: 'Example tab with nested table' }
-    }
+    model: '{{ appNamespaceForwardSlash }}/Models/{{ modelSingularForm }}'
   }
 
   props: Form{{ modelSingularForm }}Props;
@@ -23,6 +18,17 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
 
   constructor(props: Form{{ modelSingularForm }}Props) {
     super(props);
+  }
+
+  getStateFromProps(props: FormDealProps) {
+    return {
+      ...super.getStateFromProps(props),
+      tabs: [
+        { uid: 'default', title: this.translate('Task') },
+        // Add your tabs here.
+        // 'tab_with_nested_table': { title: 'Example tab with nested table' }
+      ]
+    };
   }
 
   renderTitle(): JSX.Element {

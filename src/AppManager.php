@@ -309,6 +309,20 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
   }
 
   /**
+   * [Description for isAppEnabled]
+   *
+   * @param string $appNamespace
+   * 
+   * @return bool
+   * 
+   */
+  public function isAppEnabled(string $appNamespace): bool
+  {
+    $apps = $this->getEnabledApps();
+    return isset($apps[$appNamespace]);
+  }
+
+  /**
    * [Description for community]
    *
    * @param string $appName

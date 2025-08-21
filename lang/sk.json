@@ -25,5 +25,12 @@
     },
     "Controllers\\ControllerSignIn": {
         "Keep signed in": "Zostať prihlásený"
+    },
+    "Controllers\\SignIn": {
+        "Your email": "Email",
+        "Password": "Heslo",
+        "Keep signed in": "Zostať prihlásený",
+        "Sign in": "Prihlásiť sa",
+        "Forgot password?": "Zabudol som heslo"
     }
 }

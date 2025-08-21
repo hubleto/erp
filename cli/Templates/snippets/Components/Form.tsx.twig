@@ -33,8 +33,8 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
 
   renderTitle(): JSX.Element {
     return <>
-      <h2>Record #{this.state.record.id ?? '0'}</h2>
       <small>{{ model }}</small>
+      <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }
 

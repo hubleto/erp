@@ -3,14 +3,15 @@
 
 <nav class="breadcrumbs">
   <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-    <li>
+    {# <li>
       <a
         href="{{ config.projectUrl }}"
         class=" btn btn-primary-outline"
       >
-        <span class="text text">{{ user.DEFAULT_COMPANY.name }}</span>
+        <span class="icon"><i class="fas fa-home"></i></span>
+        <span class="text">{{ user.DEFAULT_COMPANY.name }}</span>
       </a>
-    </li>
+    </li> #}
     <li>
       <button class="btn btn-transparent {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %} btn-primary-outline">
         <span class="text">{{ viewParams.activatedApp.manifest.nameTranslated }}</span>

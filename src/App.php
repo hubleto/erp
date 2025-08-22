@@ -456,15 +456,14 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
     return $items;
   }
 
-  public function addSearchSwitch(string $switch): void
+  public function addSearchSwitch(string $switch, string $name): void
   {
-    $this->searchSwitches[] = $switch;
-    $this->searchSwitches = array_unique($this->searchSwitches);
+    $this->searchSwitches[$switch] = $name;
   }
 
   public function canHandleSearchSwith(string $switch): bool
   {
-    return in_array($switch, $this->searchSwitches);
+    return isset($this->searchSwitches[$switch]);
   }
 
 }

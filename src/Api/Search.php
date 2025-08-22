@@ -21,10 +21,12 @@ class Search extends \HubletoMain\Controllers\ApiController
 
     if (count($expressions) == 1 && str_starts_with($firstExpression, '>')) {
       foreach ($this->main->apps->getEnabledApps() as $appNamespace => $app) {
-        if (str_starts_with('>' . $app->shortName, $firstExpression)) {
+        if (str_starts_with('>' . strtolower($app->shortName), strtolower($firstExpression))) {
           $results[] = [
             'label' => '>' . $app->shortName,
-            'autocomplete' => '>' . $app->shortName,
+            // 'autocomplete' => '>' . $app->shortName,
+            'url' => $app->manifest['rootUrlSlug'],
+            'description' => 'Open ' . $app->shortName . ' app',
           ];
         }
       }
@@ -34,14 +36,17 @@ class Search extends \HubletoMain\Controllers\ApiController
     if (count($expressions) == 1 && str_starts_with($firstExpression, '/')) {
       $searchSwitches = [];
       foreach ($this->main->apps->getEnabledApps() as $appNamespace => $app) {
-        $searchSwitches = array_merge($searchSwitches, $app->searchSwitches);
+        foreach ($app->searchSwitches as $switch => $name) {
+          if (!isset($searchSwitches[$switch])) $searchSwitches[$switch] = [];
+          $searchSwitches[$switch][] = $name;
+        }
       }
-      $searchSwitches = array_unique($searchSwitches);
-      foreach ($searchSwitches as $switch) {
+      foreach ($searchSwitches as $switch => $names) {
         if (str_starts_with('/' . $switch, $firstExpression)) {
           $results[] = [
             'label' => '/' . $switch,
             'autocomplete' => '/' . $switch,
+            'description' => 'Search in ' . join(' or ', $names),
           ];
         }
       }

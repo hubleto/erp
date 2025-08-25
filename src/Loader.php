@@ -82,10 +82,10 @@ class Loader extends \Hubleto\Framework\Loader
       }
 
       $this->auth->init();
-      $this->hooks->init();
       $this->release->init();
       $this->email->init();
       $this->apps->init();
+      $this->hooks->init();
       $this->permissions->init();
 
       $this->hooks->run('core:init-end', [$this]);

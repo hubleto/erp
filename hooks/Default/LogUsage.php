@@ -10,9 +10,11 @@ class LogUsage extends \HubletoMain\Hook
     if ($event == 'controller:init-start') {
       $controller = $args[0];
       if (!$controller->disableLogUsage) {
-        $usageApp = $this->main->apps->community('Usage');
-        if (is_object($usageApp)) {
-          $usageApp->logUsage();
+        try {
+          $usageLogger = $this->main->load(\HubletoApp\Community\Usage\Logger::class);
+          $usageLogger->logUsage();
+        } catch (\Throwable $e) {
+          //
         }
       }
     }

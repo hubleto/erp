@@ -28,7 +28,6 @@ if (!empty($action)) {
           case 'list': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($main, $argv); break;
           case 'install': $command = new \HubletoMain\Cli\Agent\App\Install($main, $argv); break;
           case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($main, $argv); break;
-          case 'test': $command = new \HubletoMain\Cli\Agent\App\Test($main, $argv); break;
           case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($main, $argv); break;
           case 'create': $command = new \HubletoMain\Cli\Agent\App\Create($main, $argv); break;
         }

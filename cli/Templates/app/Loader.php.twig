@@ -17,7 +17,7 @@ class Loader extends \HubletoMain\App
     // Add app routes.
     // By default, each app should have a welcome dashboard.
     // If your app will have own settings panel, it should be under the `settings/your-app` slug.
-    $this->main->router->httpGet([
+    $this->getRouter()->httpGet([
       '/^{{ appRootUrlSlug }}\/?$/' => Controllers\Home::class,
       '/^settings\/{{ appRootUrlSlug }}\/?$/' => Controllers\Settings::class,
     ]);

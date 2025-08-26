@@ -21,7 +21,7 @@ class ControllerResetPassword extends \HubletoMain\Controller
         ->where('valid_to', '>', date('Y-m-d H:i:s'))
         ->where('type', 'reset-password')
         ->count() <= 0) {
-      $this->main->router->redirectTo('');
+      $this->getRouter()->redirectTo('');
     }
 
     $password = $this->main->urlParamAsString('password');
@@ -44,7 +44,7 @@ class ControllerResetPassword extends \HubletoMain\Controller
       } else {
         $this->main->auth->resetPassword();
 
-        $this->main->router->redirectTo('');
+        $this->getRouter()->redirectTo('');
       }
     }
 

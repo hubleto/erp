@@ -184,7 +184,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
       $date = date("D, d M Y H:i:s", strtotime('+1 year')) . 'GMT';
       header("Set-Cookie: language={$setLanguage}; EXPIRES{$date};");
       setcookie('incorrectLogin', '1');
-      $this->main->router->redirectTo('');
+      $this->getRouter()->redirectTo('');
     }
 
     if (strlen($this->getUserLanguage()) !== 2) {

@@ -43,6 +43,18 @@ class Controller extends \Hubleto\Framework\Controller
     return $this->main->getAppManager();
   }
 
+
+  /**
+   * [Description for getRouter]
+   *
+   * @return Router
+   * 
+   */
+  public function getRouter(): Router
+  {
+    return $this->main->getRouter();
+  }
+
   public function activeUserHasPermission(): bool
   {
     if (

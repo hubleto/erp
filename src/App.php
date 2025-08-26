@@ -162,6 +162,11 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
     return $this->main->getAppManager();
   }
 
+  public function getRouter(): Router
+  {
+    return $this->main->getRouter();
+  }
+
   public static function getDictionaryFilename(string $language): string
   {
     if (strlen($language) == 2) {

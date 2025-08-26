@@ -54,7 +54,10 @@ class Model extends \Hubleto\Framework\Models\Model
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $this->main->hooks->run('model:on-after-update', [
-      'model' => $this, 'originalRecord' => $originalRecord, 'savedRecord' => $savedRecord]);
+      'model' => $this,
+      'originalRecord' => $originalRecord,
+      'savedRecord' => $savedRecord
+    ]);
     return $savedRecord;
   }
 

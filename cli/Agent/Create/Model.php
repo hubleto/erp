@@ -75,7 +75,10 @@ class Model extends \HubletoMain\Cli\Agent\Command
     }
 
     if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to re-install the app with your new model now?')) {
-      (new \HubletoMain\Cli\Agent\App\Install($this->main, $this->arguments))->run();
+      $this->getService(\HubletoMain\Cli\Agent\App\Install::class)
+        ->setAguments($this->arguments)
+        ->run()
+      ;
     }
 
     \Hubleto\Terminal::yellow("💡  TIPS:\n");

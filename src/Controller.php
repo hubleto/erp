@@ -47,7 +47,7 @@ class Controller extends \Hubleto\Framework\Controller
 
   /**
     * Executed after the init() phase.
-    * Validates inputs ($this->main->params) used for the TWIG template.
+    * Validates inputs used for the TWIG template.
     *
     * return bool True if inputs are valid, otherwise false.
     */

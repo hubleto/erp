@@ -16,7 +16,7 @@ class PermissionsManager extends \Hubleto\Framework\PermissionsManager
 
   public function createUserRoleModel(): \Hubleto\Framework\Model
   {
-    return new \HubletoApp\Community\Settings\Models\UserRole($this->main);
+    return $this->getService(\HubletoApp\Community\Settings\Models\UserRole::class);
   }
 
   public function loadAdministratorRoles(): array

@@ -153,8 +153,8 @@ class Installer extends \Hubleto\Framework\CoreClass
 
   public function installBaseModels(): void
   {
-    (new \Hubleto\Framework\Models\Token($this->main))->install();
-    (new \Hubleto\Framework\Models\Config($this->main))->install();
+    $this->getService(\Hubleto\Framework\Models\Token::class)->install();
+    $this->getService(\Hubleto\Framework\Models\Config::class)->install();
   }
 
   public function installApps(int $round): void

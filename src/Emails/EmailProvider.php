@@ -38,6 +38,18 @@ class EmailProvider extends \Hubleto\Framework\CoreClass
     return $this->getRenderer()->renderView($template, ['title' => $title, 'body' => $rawBody]);
   }
 
+  /**
+   * [Description for send]
+   *
+   * @param string $to
+   * @param string $subject
+   * @param string $rawBody
+   * @param string $template
+   * @param string $fromName
+   * 
+   * @return bool
+   * 
+   */
   public function send(string $to, string $subject, string $rawBody, string $template = '', string $fromName = 'Hubleto'): bool
   {
     if (!class_exists(PHPMailer::class)) {
@@ -74,6 +86,17 @@ class EmailProvider extends \Hubleto\Framework\CoreClass
     }
   }
 
+  /**
+   * [Description for sendEmail]
+   *
+   * @param string $to
+   * @param string $subject
+   * @param string $body
+   * @param string $fromName
+   * 
+   * @return bool
+   * 
+   */
   public function sendEmail(string $to, string $subject, string $body, string $fromName = 'Hubleto'): bool
   {
     if (!class_exists(PHPMailer::class)) {
@@ -108,4 +131,62 @@ class EmailProvider extends \Hubleto\Framework\CoreClass
       throw new GeneralException("Mailer Error: " . $mail->ErrorInfo);
     }
   }
+
+  /**
+   * [Description for sendResetPasswordEmail]
+   *
+   * @param String $login
+   * @param String $name
+   * @param String $language
+   * @param String $token
+   * 
+   * @return void
+   * 
+   */
+  public function sendResetPasswordEmail(String $login, String $name, String $language, String $token): void
+  {
+    $greetings = $name == ' ' ? 'Hello from Hubleto!' : 'Dear ' . $name . ',';
+    $body = $greetings . '<br><br>
+    We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:
+    
+    <p style="text-align: center;">
+      <a href="'. $this->getEnv()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Reset password</a>
+    </p>
+    
+    If you did not request a password reset, please ignore this email. Your password will remain unchanged. <br><br><br>
+    
+    For security reasons, this link will expire in 15 minutes. <br>
+    ';
+
+    $this->send($login, "Reset your password | Hubleto", $body);
+  }
+
+  /**
+   * [Description for sendWelcomeEmail]
+   *
+   * @param String $login
+   * @param String $name
+   * @param String $language
+   * @param String $token
+   * 
+   * @return void
+   * 
+   */
+  public function sendWelcomeEmail(String $login, String $name, String $language, String $token): void
+  {
+    $greetings = 'Hello from Hubleto!';
+    $body = $greetings . '<br><br>
+    Thank you for signing up at our website! We\'re excited to have you on board. Please click the button below to confirm your account and get started.
+    <br>
+    <p style="text-align: center;">
+      <a href="'. $this->getEnv()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Get started</a>
+    </p>
+    <br>
+    
+    If you didn\'t sign up for this account, you can safely ignore this email.<br>
+    ';
+
+    $this->sendEmail($login, "Your Hubleto account has been created!", $body);
+  }
+
 }

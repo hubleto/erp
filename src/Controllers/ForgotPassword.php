@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Controllers;
 
-class ControllerForgotPassword extends \HubletoMain\Controller
+class ForgotPassword extends \HubletoMain\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;

@@ -38,19 +38,6 @@ class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Int
   public array $settings = [];
 
   /**
-   * Returns true, if an app can be added. Currently all apps can be added.
-   *
-   * @param \Hubleto\Framework\Loader $main
-   * 
-   * @return bool
-   * 
-   */
-  public static function canBeAdded(\Hubleto\Framework\Loader $main): bool
-  {
-    return true;
-  }
-
-  /**
    * App constructor
    *
    * @param \HubletoMain\Loader $main
@@ -224,7 +211,7 @@ class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Int
         $cClass = str_replace('/', '\\', $cClass);
         $cClass = str_replace('.php', '', $cClass);
         if (class_exists($cClass)) {
-          $cObj = new $cClass($this->main);
+          $cObj = $this->getService($cClass);
           $permissions[] = $cObj->permission;
         }
       }
@@ -260,7 +247,7 @@ class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Int
 
     $controllerClasses = $this->getAvailableControllerClasses();
     foreach ($controllerClasses as $controllerClass) {
-      $cObj = new $controllerClass($this->main);
+      $cObj = $this->getService($controllerClass);
       foreach ($userRoles as $role) {
         $mRolePermission->grantPermissionByString($role['id'], $cObj->fullName);
       }

@@ -2,7 +2,7 @@
 
 namespace HubletoMain\Controllers;
 
-class ControllerSignIn extends \HubletoMain\Controller
+class SignIn extends \HubletoMain\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;

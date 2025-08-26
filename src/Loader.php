@@ -4,22 +4,8 @@ namespace HubletoMain;
 
 use Hubleto\Framework\DependencyInjection;
 
-/**
- * Main Hubleto class. This class is always referenced
- * as `$this->main` or `$main`.
- */
 class Loader extends \Hubleto\Framework\Loader
 {
-
-  public \HubletoMain\Emails\EmailProvider $email;
-  public \HubletoMain\Emails\EmailWrapper $emails;
-
-  /**
-   * If set to true, this run is managed as premium.
-   *
-   * @var bool
-   */
-  public bool $isPremium = false;
 
   /**
    * Class construtor.
@@ -35,17 +21,20 @@ class Loader extends \Hubleto\Framework\Loader
     DependencyInjection::setServiceProviders([
       \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,
       \Hubleto\Framework\Auth\DefaultProvider::class => AuthProvider::class,
-      \Hubleto\Framework\Router::class => Router::class,
       \Hubleto\Framework\Renderer::class => Renderer::class,
-      \Hubleto\Framework\Controllers\DesktopController::class => \HubletoApp\Community\Desktop\Controllers\Desktop::class,
+      
+      \Hubleto\Framework\Controllers\Desktop::class => \HubletoApp\Community\Desktop\Controllers\Desktop::class,
+      \Hubleto\Framework\Controllers\SignIn::class => \HubletoMain\Controllers\SignIn::class,
+      \Hubleto\Framework\Controllers\NotFound::class => \HubletoMain\Controllers\NotFound::class,
+      
     ]);
 
-    // Emails
-    $this->email = DependencyInjection::create($this, \HubletoMain\Emails\EmailProvider::class);
+    // // Emails
+    // $this->email = DependencyInjection::create($this, \HubletoMain\Emails\EmailProvider::class);
 
-    // DEPRECATED
-    $this->emails = DependencyInjection::create($this, \HubletoMain\Emails\EmailWrapper::class);
-    $this->emails->emailProvider = $this->email;
+    // // DEPRECATED
+    // $this->emails = DependencyInjection::create($this, \HubletoMain\Emails\EmailWrapper::class);
+    // $this->emails->emailProvider = $this->email;
 
     // Finish
     $this->getHookManager()->run('core:bootstrap-end', [$this]);
@@ -63,7 +52,19 @@ class Loader extends \Hubleto\Framework\Loader
     try {
       parent::init();
 
-      $this->email->init();
+      $this->getRouter()->httpGet([
+        '/^api\/get-apps-info\/?$/' => Api\GetAppsInfo::class,
+        '/^api\/log-javascript-error\/?$/' => Api\LogJavascriptError::class,
+        '/^api\/dictionary\/?$/' => Api\Dictionary::class,
+        '/^api\/get-chart-data\/?$/' =>  Api\GetTemplateChartData::class,
+        '/^api\/get-table-columns-customize\/?$/' =>  Api\GetTableColumnsCustomize::class,
+        '/^api\/save-table-columns-customize\/?$/' =>  Api\SaveTableColumnsCustomize::class,
+        '/^api\/table-export-csv\/?$/' =>  Api\TableExportCsv::class,
+        '/^api\/table-import-csv\/?$/' =>  Api\TableImportCsv::class,
+        '/^api\/search\/?$/' =>  Api\Search::class,
+        '/^reset-password$/' => Controllers\ResetPassword::class,
+        '/^forgot-password$/' => Controllers\ForgotPassword::class,
+      ]);
 
       $this->getHookManager()->run('core:init-end', [$this]);
     } catch (\Exception $e) {

@@ -54,7 +54,10 @@ class Create extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan("App {$appNamespace} created successfully.\n");
 
     if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to install the app now?')) {
-      (new \HubletoMain\Cli\Agent\App\Install($this->main, $this->arguments))->run();
+      $this->getService(\HubletoMain\Cli\Agent\App\Install::class)
+        ->setAguments($this->arguments)
+        ->run()
+      ;
     }
 
     \Hubleto\Terminal::yellow("💡  TIPS:\n");

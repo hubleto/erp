@@ -129,9 +129,9 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
       }
 
       if ($user->password != '') {
-        $this->main->emails->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
+        $this->getEmailProvider()->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
       } else {
-        $this->main->emails->sendWelcomeEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
+        $this->getEmailProvider()->sendWelcomeEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
       }
     }
   }

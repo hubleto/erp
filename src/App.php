@@ -180,7 +180,7 @@ class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Int
 
     $modelsFolder = $this->srcFolder . '/Models';
     if (is_dir($modelsFolder)) {
-      $models = Helper::scanDirRecursively($modelsFolder);
+      $models = scandir($modelsFolder);
       foreach ($models as $model) {
         $mClass = $this->namespace . '/Models/' . $model;
         $mClass = str_replace('/', '\\', $mClass);

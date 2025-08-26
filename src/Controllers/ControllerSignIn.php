@@ -18,7 +18,7 @@ class ControllerSignIn extends \HubletoMain\Controller
 
     $this->viewParams = [
       'status' => $incorrectLogin == "1",
-      'login' => $this->main->urlParamAsString('user'),
+      'login' => $this->getRouter()->urlParamAsString('user'),
     ];
 
     $this->setView('@hubleto-main/SignIn.twig');

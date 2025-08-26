@@ -2,7 +2,7 @@
 
 namespace HubletoMain;
 
-class Report
+class Report extends CoreClass
 {
   public \Hubleto\Framework\Interfaces\AppInterface $hubletoApp;
 
@@ -45,7 +45,7 @@ class Report
 
   public function loadDataDefault(\Hubleto\Framework\Models\Model $model): array
   {
-    $config = $this->main->urlParamAsArray("config");
+    $config = $this->getRouter()->urlParamAsArray("config");
 
     $groupBy = $config["groupsBy"][0]["field"];
     $returnWith = (array) $config["returnWith"];

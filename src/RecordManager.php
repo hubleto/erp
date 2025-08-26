@@ -162,10 +162,10 @@ class RecordManager extends \Hubleto\Framework\RecordManager
 
     // junctions
 
-    $junctionModel = $main->urlParamAsString('junctionModel');
-    $junctionSourceColumn = $main->urlParamAsString('junctionSourceColumn');
-    $junctionDestinationColumn = $main->urlParamAsString('junctionDestinationColumn');
-    $junctionSourceRecordId = $main->urlParamAsInteger('junctionSourceRecordId');
+    $junctionModel = $main->getRouter()->urlParamAsString('junctionModel');
+    $junctionSourceColumn = $main->getRouter()->urlParamAsString('junctionSourceColumn');
+    $junctionDestinationColumn = $main->getRouter()->urlParamAsString('junctionDestinationColumn');
+    $junctionSourceRecordId = $main->getRouter()->urlParamAsInteger('junctionSourceRecordId');
 
     if (!empty($junctionModel) && !empty($junctionSourceColumn) && $junctionSourceRecordId > 0) {
       $junctionModelObj = $main->load($junctionModel);

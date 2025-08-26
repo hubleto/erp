@@ -106,7 +106,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
 
   public function forgotPassword(): void
   {
-    $login = $this->main->urlParamAsString('login');
+    $login = $this->getRouter()->urlParamAsString('login');
 
     $mUser = $this->main->load(User::class);
     if ($mUser->record->where('login', $login)->count() > 0) {
@@ -141,16 +141,16 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
     $mToken = $this->main->load(Token::class);
     $mUser = $this->main->load(User::class);
 
-    $token = $mToken->record->where('token', $this->main->urlParamAsString('token'))->first();
+    $token = $mToken->record->where('token', $this->getRouter()->urlParamAsString('token'))->first();
     $user = $mUser->record->where('login', $token->login)->first();
     $oldPassword = $user->password;
 
-    $user->update(['password' => password_hash($this->main->urlParamAsString('password'), PASSWORD_DEFAULT)]);
+    $user->update(['password' => password_hash($this->getRouter()->urlParamAsString('password'), PASSWORD_DEFAULT)]);
 
     if ($oldPassword == "") {
-      $this->main->setUrlParam('login', $token->login);
+      $this->getRouter()->setUrlParam('login', $token->login);
       $token->delete();
-      $this->main->setUrlParam('password', $this->main->urlParamAsString('password'));
+      $this->getRouter()->setUrlParam('password', $this->getRouter()->urlParamAsString('password'));
 
       $this->main->auth->auth();
     } else {
@@ -164,7 +164,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
 
     parent::auth();
 
-    $setLanguage = $this->main->urlParamAsString('set-language');
+    $setLanguage = $this->getRouter()->urlParamAsString('set-language');
 
     if (
       !empty($setLanguage)

@@ -9,10 +9,10 @@ class GetTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
   public function renderJson(): ?array
   {
     try {
-      $model = $this->main->getModel($this->main->urlParamAsString("model"));
+      $model = $this->main->getModel($this->getRouter()->urlParamAsString("model"));
       $allColumnsConfig = @json_decode($model->getConfigAsString('tableColumns'), true);
       $columns = $model->getColumns();
-      $columnsConfig = $allColumnsConfig[$this->main->urlParamAsString("tag")] ?? [];
+      $columnsConfig = $allColumnsConfig[$this->getRouter()->urlParamAsString("tag")] ?? [];
       $transformedColumns = [];
 
       // TODO: There needs to be developed a way to get ALL the virtual columns

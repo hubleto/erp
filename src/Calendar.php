@@ -2,7 +2,7 @@
 
 namespace HubletoMain;
 
-class Calendar
+class Calendar extends \HubletoMain\CoreClass
 {
 
   /**
@@ -17,10 +17,6 @@ class Calendar
 
   protected \Hubleto\Framework\Interfaces\AppInterface $app;
   protected string $color = 'blue';
-
-  public function __construct(public \Hubleto\Framework\Loader $main)
-  {
-  }
 
   public function setApp(\Hubleto\Framework\Interfaces\AppInterface $app): void
   {

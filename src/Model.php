@@ -3,6 +3,7 @@
 namespace HubletoMain;
 
 use Hubleto\Framework\Interfaces\AppManagerInterface;
+use Hubleto\Framework\Router;
 
 /**
  * Core implementation of model.
@@ -19,6 +20,17 @@ class Model extends \Hubleto\Framework\Models\Model
   public function getAppManager(): AppManagerInterface
   {
     return $this->main->getAppManager();
+  }
+
+  /**
+   * [Description for getRouter]
+   *
+   * @return Router
+   * 
+   */
+  public function getRouter(): Router
+  {
+    return $this->main->getRouter();
   }
 
   //////////////////////////////////////////////////////////////////

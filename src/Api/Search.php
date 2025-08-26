@@ -10,7 +10,7 @@ class Search extends \HubletoMain\Controllers\ApiController
   {
     $results = [];
 
-    $query = $this->main->urlParamAsString('query');
+    $query = $this->getRouter()->urlParamAsString('query');
 
     $expressions = [];
     foreach (explode(' ', strtr($query, ',;.', '   ')) as $e) {

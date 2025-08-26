@@ -13,8 +13,8 @@ class Dictionary extends \HubletoMain\Controllers\ApiController
 
   public function renderJson(): array
   {
-    $language = $this->main->urlParamAsString('language', 'en');
-    $addNew = $this->main->urlParamAsArray('addNew');
+    $language = $this->getRouter()->urlParamAsString('language', 'en');
+    $addNew = $this->getRouter()->urlParamAsArray('addNew');
 
     $dictFile = __DIR__ . '/../../lang/' . $language . '.json';
 

@@ -43,7 +43,6 @@ class Controller extends \Hubleto\Framework\Controller
     return $this->main->getAppManager();
   }
 
-
   /**
    * [Description for getRouter]
    *
@@ -124,7 +123,7 @@ class Controller extends \Hubleto\Framework\Controller
         }
         file_put_contents(
           $logFolder . '/usage/' . date('Y-m-d') . '.log',
-          date('H:i:s') . ' ' . $user['id'] . ' ' . get_class($this) . ' '. json_encode(array_keys($this->main->getUrlParams())) . "\n",
+          date('H:i:s') . ' ' . $user['id'] . ' ' . get_class($this) . ' '. json_encode(array_keys($this->getRouter()->getUrlParams())) . "\n",
           FILE_APPEND
         );
       }

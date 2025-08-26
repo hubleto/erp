@@ -3,6 +3,7 @@
 namespace HubletoMain;
 
 use Hubleto\Framework\Interfaces\AppManagerInterface;
+use Hubleto\Framework\Config;
 /**
  * @property \HubletoMain\Loader $main
  */
@@ -52,6 +53,11 @@ class Controller extends \Hubleto\Framework\Controller
   public function getRouter(): Router
   {
     return $this->main->getRouter();
+  }
+
+  public function getConfig(): Config
+  {
+    return $this->main->getConfig();
   }
 
   public function activeUserHasPermission(): bool
@@ -112,7 +118,7 @@ class Controller extends \Hubleto\Framework\Controller
 
     $this->main->hooks->run('controller:prepare-view-start', [$this]);
 
-    $logFolder = $this->main->config->getAsString('logFolder');
+    $logFolder = $this->main->getConfig()->getAsString('logFolder');
 
     if ($this->main->auth->isUserInSession()) {
       $user = $this->main->auth->getUserFromSession();
@@ -131,7 +137,7 @@ class Controller extends \Hubleto\Framework\Controller
 
     parent::prepareView();
 
-    $this->viewParams['currentTheme'] = $this->main->config->getAsString('uiTheme', 'default');
+    $this->viewParams['currentTheme'] = $this->main->getConfig()->getAsString('uiTheme', 'default');
 
     if (isset($this->hubletoApp)) {
       $this->viewParams['app'] = $this->hubletoApp;

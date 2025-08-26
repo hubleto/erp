@@ -4,6 +4,7 @@ namespace HubletoMain;
 
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 use Hubleto\Framework\Router;
+use Hubleto\Framework\Config;
 
 class CoreClass
 {
@@ -25,7 +26,6 @@ class CoreClass
     return $this->main->getAppManager();
   }
 
-
   /**
    * [Description for getRouter]
    *
@@ -35,6 +35,17 @@ class CoreClass
   public function getRouter(): Router
   {
     return $this->main->getRouter();
+  }
+
+  /**
+   * [Description for getConfig]
+   *
+   * @return Router
+   * 
+   */
+  public function getConfig(): Config
+  {
+    return $this->main->getConfig();
   }
 
 }

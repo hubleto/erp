@@ -32,7 +32,7 @@ class Report extends CoreClass
     return $this->urlSlug;
   }
 
-  public function getConfig(): array
+  public function getReportConfig(): array
   {
     return []; // to be overriden
   }

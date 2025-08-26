@@ -78,7 +78,7 @@ class Loader extends \Hubleto\Framework\Loader
       if ($this->mode == self::HUBLETO_MODE_FULL) {
         $this->session->start(true);
         $this->initDatabaseConnections();
-        $this->config->loadFromDB();
+        $this->getConfig()->loadFromDB();
       }
 
       $this->auth->init();
@@ -234,7 +234,7 @@ class Loader extends \Hubleto\Framework\Loader
     if (!empty($dict[$contextInner][$string])) return;
 
     /** @disregard P1009 */
-    if ($main->config->getAsBool('autoTranslate') && class_exists(\Stichoza\GoogleTranslate\GoogleTranslate::class)) {
+    if ($main->getConfig()->getAsBool('autoTranslate') && class_exists(\Stichoza\GoogleTranslate\GoogleTranslate::class)) {
       /** @disregard P1009 */
       $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
       $tr->setSource('en'); // Translate from

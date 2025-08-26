@@ -15,7 +15,7 @@ class SaveTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
 
       $model = $this->main->getModel($this->getRouter()->urlParamAsString("model"));
       $tag = $this->getRouter()->urlParamAsString("tag");
-      $allColumnsConfig = @json_decode($model->getConfigAsString('tableColumns'), true) ?? [];
+      $allColumnsConfig = @json_decode($model->configAsString('tableColumns'), true) ?? [];
 
       if (!$allColumnsConfig) {
         $allColumnsConfig[$tag] = [];
@@ -27,7 +27,7 @@ class SaveTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
         }
       }
 
-      $this->main->config->save(
+      $this->main->getConfig()->save(
         "user/" . $this->main->auth->getUserId() . "/models/" . $model->fullName . "/tableColumns",
         (string) json_encode($allColumnsConfig)
       );

@@ -31,7 +31,7 @@ class ReleaseManager
    */
   public function init(): void
   {
-    $releaseInfoFile = $this->main->config->getAsString('rootFolder') . '/release.json';
+    $releaseInfoFile = $this->main->getConfig()->getAsString('rootFolder') . '/release.json';
 
     if (@is_file($releaseInfoFile)) {
       $tmp = @json_decode((string) file_get_contents($releaseInfoFile), true) ?? [];

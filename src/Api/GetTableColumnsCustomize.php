@@ -10,7 +10,7 @@ class GetTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
   {
     try {
       $model = $this->main->getModel($this->getRouter()->urlParamAsString("model"));
-      $allColumnsConfig = @json_decode($model->getConfigAsString('tableColumns'), true);
+      $allColumnsConfig = @json_decode($model->configAsString('tableColumns'), true);
       $columns = $model->getColumns();
       $columnsConfig = $allColumnsConfig[$this->getRouter()->urlParamAsString("tag")] ?? [];
       $transformedColumns = [];

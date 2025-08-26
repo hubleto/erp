@@ -180,7 +180,7 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
     // Each repository is scanned, first for the vendor name ($vendorFolder), then for
     // the app name ($appFolder).
     // The $appFolder represents the HubletoApp only if there is src/manifest.yaml file.
-    $appRepositories = $this->main->config->getAsArray('appRepositories');
+    $appRepositories = $this->main->getConfig()->getAsArray('appRepositories');
     if (count($appRepositories) == 0) {
       $appRepositories = [
         $this->main->projectFolder . '/vendor'
@@ -215,7 +215,7 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
    */
   public function getInstalledAppNamespaces(): array
   {
-    $tmp = $this->main->config->getAsArray('apps');
+    $tmp = $this->main->getConfig()->getAsArray('apps');
     ksort($tmp);
 
     $appNamespaces = [];
@@ -388,15 +388,15 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
       $appNameForConfig = $this->getAppNamespaceForConfig($appNamespace);
 
       if (!in_array($appNamespace, $this->getInstalledAppNamespaces())) {
-        $this->main->config->set('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
-        $this->main->config->set('apps/' . $appNameForConfig . "/enabled", true);
-        $this->main->config->save('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
-        $this->main->config->save('apps/' . $appNameForConfig . "/enabled", '1');
+        $this->main->getConfig()->set('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+        $this->main->getConfig()->set('apps/' . $appNameForConfig . "/enabled", true);
+        $this->main->getConfig()->save('apps/' . $appNameForConfig . "/installedOn", date('Y-m-d H:i:s'));
+        $this->main->getConfig()->save('apps/' . $appNameForConfig . "/enabled", '1');
       }
 
       foreach ($appConfig as $cPath => $cValue) {
-        $this->main->config->set('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
-        $this->main->config->save('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
+        $this->main->getConfig()->set('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
+        $this->main->getConfig()->save('apps/' . $appNameForConfig . "/" . $cPath, (string) $cValue);
       }
     }
 
@@ -410,12 +410,12 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
 
   public function disableApp(string $appNamespace): void
   {
-    $this->main->config->save('apps/' . $this->getAppNamespaceForConfig($appNamespace) . '/enabled', '0');
+    $this->main->getConfig()->save('apps/' . $this->getAppNamespaceForConfig($appNamespace) . '/enabled', '0');
   }
 
   public function enableApp(string $appNamespace): void
   {
-    $this->main->config->save('apps/' . $this->getAppNamespaceForConfig($appNamespace) . '/enabled', '1');
+    $this->main->getConfig()->save('apps/' . $this->getAppNamespaceForConfig($appNamespace) . '/enabled', '1');
   }
 
   public function createApp(string $appNamespace, string $appSrcFolder): void

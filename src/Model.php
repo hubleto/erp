@@ -4,6 +4,7 @@ namespace HubletoMain;
 
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 use Hubleto\Framework\Router;
+use Hubleto\Framework\Config;
 
 /**
  * Core implementation of model.
@@ -31,6 +32,17 @@ class Model extends \Hubleto\Framework\Models\Model
   public function getRouter(): Router
   {
     return $this->main->getRouter();
+  }
+
+  /**
+   * [Description for getConfig]
+   *
+   * @return Router
+   * 
+   */
+  public function getConfig(): Config
+  {
+    return $this->main->getConfig();
   }
 
   //////////////////////////////////////////////////////////////////

@@ -20,7 +20,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
         throw new \Exception('Creation of premium apps is not implemented yet.');
         break;
       case 'External':
-        $externalAppsRepositories = $this->main->config->getAsArray('externalAppsRepositories');
+        $externalAppsRepositories = $this->main->getConfig()->getAsArray('externalAppsRepositories');
         $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
         break;
       case 'Custom':

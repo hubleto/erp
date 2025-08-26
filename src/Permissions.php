@@ -43,7 +43,7 @@ class Permissions extends \Hubleto\Framework\Permissions
   public function loadPermissions(): array
   {
     $permissions = [];
-    foreach ($this->main->config->getAsArray('permissions') as $idUserRole => $permissionsByRole) {
+    foreach ($this->main->getConfig()->getAsArray('permissions') as $idUserRole => $permissionsByRole) {
       $permissions[$idUserRole] = [];
       foreach ($permissionsByRole as $permissionPath => $isEnabled) {
         if ((bool) $isEnabled) {

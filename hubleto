@@ -21,37 +21,37 @@ if (!empty($action)) {
   try {
     $command = null;
     switch ($action) {
-      case 'help': $command = new \HubletoMain\Cli\Agent\CommandHelp($main, $argv); break;
-      case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($main, $argv); break;
+      case 'help': $command = $main->getService(\HubletoMain\Cli\Agent\CommandHelp::class)->setArguments($argv); break;
+      case 'init': $command = $main->getService(\HubletoMain\Cli\Agent\CommandInit::class)->setArguments($argv); break;
       case 'app':
         switch ($argv[2]) {
-          case 'list': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($main, $argv); break;
-          case 'install': $command = new \HubletoMain\Cli\Agent\App\Install($main, $argv); break;
-          case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($main, $argv); break;
-          case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($main, $argv); break;
-          case 'create': $command = new \HubletoMain\Cli\Agent\App\Create($main, $argv); break;
+          case 'list': $command = $main->getService(\HubletoMain\Cli\Agent\App\ListInstalled::class)->setArguments($argv); break;
+          case 'install': $command = $main->getService(\HubletoMain\Cli\Agent\App\Install::class)->setArguments($argv); break;
+          case 'disable': $command = $main->getService(\HubletoMain\Cli\Agent\App\Disable::class)->setArguments($argv); break;
+          case 'reset-all': $command = $main->getService(\HubletoMain\Cli\Agent\App\ResetAll::class)->setArguments($argv); break;
+          case 'create': $command = $main->getService(\HubletoMain\Cli\Agent\App\Create::class)->setArguments($argv); break;
         }
       break;
       case 'debug':
         switch ($argv[2]) {
-          case 'test-oauth': $command = new \HubletoMain\Cli\Agent\Debug\TestOauth($main, $argv); break;
-          case 'router': $command = new \HubletoMain\Cli\Agent\Debug\Router($main, $argv); break;
+          case 'test-oauth': $command = $main->getService(\HubletoMain\Cli\Agent\Debug\TestOauth::class)->setArguments($argv); break;
+          case 'router': $command = $main->getService(\HubletoMain\Cli\Agent\Debug\Router::class)->setArguments($argv); break;
         }
       break;
       case 'create':
         switch ($argv[2]) {
-          case 'app': $command = new \HubletoMain\Cli\Agent\App\Create($main, $argv); break;
-          case 'model': $command = new \HubletoMain\Cli\Agent\Create\Model($main, $argv); break;
-          case 'controller': $command = new \HubletoMain\Cli\Agent\Create\Controller($main, $argv); break;
-          case 'view': $command = new \HubletoMain\Cli\Agent\Create\View($main, $argv); break;
-          case 'mvc': $command = new \HubletoMain\Cli\Agent\Create\TableFormViewAndController($main, $argv); break;
-          case 'api': $command = new \HubletoMain\Cli\Agent\Create\ApiEndpoint($main, $argv); break;
+          case 'app': $command = $main->getService(\HubletoMain\Cli\Agent\App\Create::class)->setArguments($argv); break;
+          case 'model': $command = $main->getService(\HubletoMain\Cli\Agent\Create\Model::class)->setArguments($argv); break;
+          case 'controller': $command = $main->getService(\HubletoMain\Cli\Agent\Create\Controller::class)->setArguments($argv); break;
+          case 'view': $command = $main->getService(\HubletoMain\Cli\Agent\Create\View::class)->setArguments($argv); break;
+          case 'mvc': $command = $main->getService(\HubletoMain\Cli\Agent\Create\TableFormViewAndController::class)->setArguments($argv); break;
+          case 'api': $command = $main->getService(\HubletoMain\Cli\Agent\Create\ApiEndpoint::class)->setArguments($argv); break;
         }
       break;
       case 'project':
         switch ($argv[2]) {
-          case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($main, $argv); break;
-          case 'generate-demo-data': $command = new \HubletoMain\Cli\Agent\Project\GenerateDemoData($main, $argv); break;
+          case 'init': $command = $main->getService(\HubletoMain\Cli\Agent\CommandInit::class)->setArguments($argv); break;
+          case 'generate-demo-data': $command = $main->getService(\HubletoMain\Cli\Agent\Project\GenerateDemoData::class)->setArguments($argv); break;
         }
       break;
     }

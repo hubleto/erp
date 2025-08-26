@@ -29,8 +29,6 @@ class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Int
   public string $shortName = '';
   public string $fullName = '';
 
-  public string $translationContext = '';
-
   public bool $isActivated = false;
   public bool $hasCustomSettings = false;
 
@@ -209,7 +207,7 @@ class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Int
 
   public function translate(string $string, array $vars = [], string $context = 'root'): string
   {
-    return $this->main->translate($string, $vars, $this->fullName . '::' . $context);
+    return $this->getTranslator()->translate($string, $vars, $this->fullName . '::' . $context);
   }
 
   public function installTables(int $round): void

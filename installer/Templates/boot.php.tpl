@@ -14,5 +14,5 @@ require_once(__DIR__ . "/ConfigEnv.php");
 require(($config['releaseFolder'] ?? '.') . "/vendor/autoload.php");
 
 // init main class
-$main = new \HubletoMain\Loader($config);
-$main->init();
+$hubleto = new \HubletoMain\Loader($config);
+$hubleto->init();

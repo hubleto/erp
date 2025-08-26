@@ -7,10 +7,6 @@ class Cron extends \Hubleto\Framework\CoreClass
   // CRON-formatted string specifying the scheduling pattern
   public string $schedulingPattern = '* * * * *';
 
-  public function __construct(public \Hubleto\Framework\Loader $main)
-  {
-  }
-
   public function run(): void
   {
     // to be overriden

@@ -379,7 +379,6 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     // install
     $installer = new \HubletoMain\Installer\Installer(
-      $this->main,
       'local-env',
       trim(\Hubleto\Framework\Helper::str2url((string) $rewriteBase), '/-'), // uid
       (string) $accountFullName,
@@ -479,7 +478,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     if ($generateDemoData) {
       $this->getAppManager()->init();
-      (new \HubletoMain\Cli\Agent\Project\GenerateDemoData($this->main, []))->run();
+      $this->getService(\HubletoMain\Cli\Agent\Project\GenerateDemoData::class)->run();
     }
 
     \Hubleto\Terminal::cyan("\n");

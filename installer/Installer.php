@@ -49,7 +49,6 @@ class Installer extends \Hubleto\Framework\CoreClass
   public array $extraConfigEnv = [];
 
   public function __construct(
-    \HubletoMain\Loader $main,
     string $env,
     string $uid,
     string $accountFullName,
@@ -75,7 +74,6 @@ class Installer extends \Hubleto\Framework\CoreClass
     string $smtpPassword,
     bool $randomize = false
   ) {
-    $this->main = $main;
     $this->env = $env;
     $this->uid = $uid;
     $this->accountFullName = $accountFullName;
@@ -131,14 +129,14 @@ class Installer extends \Hubleto\Framework\CoreClass
     $this->getConfig()->set('db_host', $this->dbHost);
     $this->getConfig()->set('db_user', $this->dbUser);
     $this->getConfig()->set('db_password', $this->dbPassword);
-    $this->main->initDatabaseConnections();
+    $this->getPdo()->init();
 
     $this->getPdo()->execute("drop database if exists `{$this->dbName}`");
     $this->getPdo()->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
 
     $this->getConfig()->set('db_name', $this->dbName);
     $this->getConfig()->set('db_codepage', "utf8mb4");
-    $this->main->initDatabaseConnections();
+    $this->getPdo()->init();
 
   }
 

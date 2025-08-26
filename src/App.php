@@ -43,10 +43,10 @@ class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Int
    * @param \HubletoMain\Loader $main
    * 
    */
-  public function __construct(\HubletoMain\Loader $main)
+  public function __construct()
   {
 
-    parent::__construct($main);
+    parent::__construct();
 
     $reflection = new \ReflectionClass($this);
 

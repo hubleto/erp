@@ -16,7 +16,7 @@ class Controller extends \Hubleto\Framework\Controller
   public string $appNamespace = '';
   public null|\Hubleto\Framework\Interfaces\AppInterface $hubletoApp;
 
-  public function __construct(\Hubleto\Framework\Loader $main)
+  public function __construct()
   {
 
     $reflection = new \ReflectionClass($this);
@@ -26,7 +26,7 @@ class Controller extends \Hubleto\Framework\Controller
       $this->translationContext = $m[1] . '\\Loader::Controllers\\' . $m[2];
     }
 
-    parent::__construct($main);
+    parent::__construct();
 
     $this->hubletoApp = $this->getAppManager()->getApp($this->appNamespace);
   }

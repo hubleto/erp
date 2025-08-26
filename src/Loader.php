@@ -26,6 +26,8 @@ class Loader extends \Hubleto\Framework\Loader
       \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
       \Hubleto\Framework\Controllers\NotFound::class => Controllers\NotFound::class,
       \Hubleto\Framework\Controllers\Desktop::class => \HubletoApp\Community\Desktop\Controllers\Desktop::class,
+
+      \Hubleto\Framework\Models\User::class => \HubletoApp\Community\Settings\Models\User::class,
       
     ]);
 

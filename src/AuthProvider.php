@@ -88,11 +88,6 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     return false;
   }
 
-  public function createUserModel(): \HubletoApp\Community\Settings\Models\User
-  {
-    return $this->getService(\HubletoApp\Community\Settings\Models\User::class);
-  }
-
   public function findUsersByLogin(string $login): array
   {
     return $this->createUserModel()->record
@@ -170,7 +165,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       !empty($setLanguage)
       && !empty(\HubletoApp\Community\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
-      $mUser = $this->getService(\HubletoApp\Community\Settings\Models\User::class);
+      $mUser = $this->getModel(\HubletoApp\Community\Settings\Models\User::class);
       $mUser->record
         ->where('id', $this->getUserId())
         ->update(['language' => $setLanguage])

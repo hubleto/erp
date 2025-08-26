@@ -6,7 +6,7 @@ use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Settings\Models\UserRole;
 use HubletoApp\Community\Settings\Models\UserHasRole;
 
-class Installer extends \Hubleto\Framework\CoreClass
+class Installer extends \Hubleto\Framework\Core
 {
 
   public string $adminName = '';
@@ -151,8 +151,8 @@ class Installer extends \Hubleto\Framework\CoreClass
 
   public function installBaseModels(): void
   {
-    $this->getService(\Hubleto\Framework\Models\Token::class)->install();
-    $this->getService(\Hubleto\Framework\Models\Config::class)->install();
+    $this->getModel(\Hubleto\Framework\Models\Token::class)->install();
+    $this->getModel(\Hubleto\Framework\Models\Config::class)->install();
   }
 
   public function installApps(int $round): void
@@ -165,7 +165,7 @@ class Installer extends \Hubleto\Framework\CoreClass
 
   public function addCompanyAndAdminUser(): void
   {
-    $mCompany = $this->getService(\HubletoApp\Community\Settings\Models\Company::class);
+    $mCompany = $this->getModel(\HubletoApp\Community\Settings\Models\Company::class);
     $mUser = $this->getService(User::class);
     $mUserHasRole = $this->getService(UserHasRole::class);
 

@@ -2,7 +2,7 @@
 
 namespace HubletoMain;
 
-class Hook extends \Hubleto\Framework\CoreClass
+class Hook extends \Hubleto\Framework\Core
 {
 
   // public function __construct(public \Hubleto\Framework\Loader $main)

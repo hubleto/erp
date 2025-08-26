@@ -5,7 +5,7 @@ namespace HubletoMain;
 use \Hubleto\Framework\Helper;
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 
-class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Interfaces\AppInterface
+class App extends \Hubleto\Framework\Core implements \Hubleto\Framework\Interfaces\AppInterface
 {
 
   public const DEFAULT_INSTALLATION_CONFIG = [
@@ -217,7 +217,7 @@ class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Int
       }
     }
 
-    $mPermission = $this->getService(\HubletoApp\Community\Settings\Models\Permission::class);
+    $mPermission = $this->getModel(\HubletoApp\Community\Settings\Models\Permission::class);
 
     foreach ($permissions as $permission) {
       $mPermission->record->recordCreate([
@@ -228,8 +228,8 @@ class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Int
 
   public function assignPermissionsToRoles(): void
   {
-    $mUserRole = $this->getService(\HubletoApp\Community\Settings\Models\UserRole::class);
-    $mRolePermission = $this->getService(\HubletoApp\Community\Settings\Models\RolePermission::class);
+    $mUserRole = $this->getModel(\HubletoApp\Community\Settings\Models\UserRole::class);
+    $mRolePermission = $this->getModel(\HubletoApp\Community\Settings\Models\RolePermission::class);
 
     $userRoles = $mUserRole->record->get()->toArray();
     foreach ($userRoles as $role) {

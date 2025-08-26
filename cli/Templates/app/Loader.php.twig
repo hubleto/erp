@@ -2,7 +2,7 @@
 
 namespace {{ appNamespace }};
 
-class Loader extends \HubletoMain\App
+class Loader extends \Hubleto\Framework\App
 {
 
   // Uncomment following if you want a button for app's settings
@@ -55,7 +55,7 @@ class Loader extends \HubletoMain\App
   {
     if ($round == 1) {
       // install your models here
-      // Example: $this->getService(Models\Contact::class)->dropTableIfExists()->install();
+      // Example: $this->getModel(Models\Contact::class)->dropTableIfExists()->install();
 
       // DO NOT DELETE FOLLOWING LINE, OR `php hubleto` WILL NOT GENERATE CODE HERE
       //@hubleto-cli:install-tables

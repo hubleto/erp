@@ -2,7 +2,7 @@
 
 namespace HubletoMain;
 
-class Calendar extends \Hubleto\Framework\CoreClass
+class Calendar extends \Hubleto\Framework\Core
 {
 
   /**

@@ -13,7 +13,7 @@ class Install extends \HubletoMain\Cli\Agent\Command
       \Hubleto\Terminal::red("What app you want to install? Usage: php hubleto app install <APP_NAME>\n");
     }
 
-    require_once($this->main->projectFolder . "/ConfigEnv.php");
+    require_once($this->getEnv()->projectFolder . "/ConfigEnv.php");
 
     $this->getAppManager()->installApp(1, $appNamespace, [], $forceInstall);
     \Hubleto\Terminal::cyan("{$appNamespace} installed successfully.\n");

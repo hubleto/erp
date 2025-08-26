@@ -11,7 +11,6 @@ class GetAppsInfo extends \HubletoMain\Controllers\ApiController
       $appsInfo[$app->namespace] = [
         'manifest' => $app->manifest,
         'permittedForAllUsers' => $app->permittedForAllUsers,
-        // 'permittedForActiveUser' => $this->main->permissions->isAppPermittedForActiveUser($app),
       ];
     }
 

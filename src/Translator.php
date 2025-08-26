@@ -4,7 +4,7 @@ namespace HubletoMain;
 
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 
-class Translator implements \Hubleto\Framework\Interfaces\TranslatorInterface
+class Translator extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Interfaces\TranslatorInterface
 {
 
   public array $dictionary = [];
@@ -33,7 +33,7 @@ class Translator implements \Hubleto\Framework\Interfaces\TranslatorInterface
     if (empty($language)) $language = 'en';
 
     if (strlen($language) == 2) {
-      $dictionaryFile = $this->main->srcFolder . "/Lang/{$language}.json";
+      $dictionaryFile = $this->getEnv()->srcFolder . "/Lang/{$language}.json";
     }
 
     return $dictionaryFile;

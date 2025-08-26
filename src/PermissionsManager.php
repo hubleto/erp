@@ -2,7 +2,6 @@
 
 namespace HubletoMain;
 
-use HubletoApp\Community\Settings\Models\Permission;
 use HubletoApp\Community\Settings\Models\RolePermission;
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Settings\Models\UserRole;
@@ -12,7 +11,7 @@ use \Hubleto\Framework\Helper;
 /**
  * Class managing Hubleto permissions.
  */
-class Permissions extends \Hubleto\Framework\Permissions
+class PermissionsManager extends \Hubleto\Framework\PermissionsManager
 {
 
   public function createUserRoleModel(): \Hubleto\Framework\Model
@@ -22,11 +21,11 @@ class Permissions extends \Hubleto\Framework\Permissions
 
   public function loadAdministratorRoles(): array
   {
-    if (!isset($this->main->pdo) || !$this->main->pdo->isConnected) {
+    if (!$this->getPdo()->isConnected) {
       return [];
     }
     $mUserRole = $this->main->load(UserRole::class);
-    $administratorRoles = Helper::pluck('id', $this->main->pdo->fetchAll("select id from `{$mUserRole->table}` where grant_all = 1"));
+    $administratorRoles = Helper::pluck('id', $this->getPdo()->fetchAll("select id from `{$mUserRole->table}` where grant_all = 1"));
     return $administratorRoles;
   }
 
@@ -53,10 +52,10 @@ class Permissions extends \Hubleto\Framework\Permissions
       $permissions[$idUserRole] = array_unique($permissions[$idUserRole]);
     }
 
-    if (isset($this->main->pdo) && $this->main->pdo->isConnected) {
+    if ($this->getPdo()->isConnected) {
       $mUserRole = $this->main->load(UserRole::class);
 
-      $idCommonUserRoles = Helper::pluck('id', $this->main->pdo->fetchAll("select id from `{$mUserRole->table}` where grant_all = 0"));
+      $idCommonUserRoles = Helper::pluck('id', $this->getPdo()->fetchAll("select id from `{$mUserRole->table}` where grant_all = 0"));
 
       foreach ($idCommonUserRoles as $idCommonRole) {
         $idCommonRole = (int) $idCommonRole;

@@ -64,7 +64,7 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
 
     \Hubleto\Terminal::yellow("💡  TIPS:\n");
     \Hubleto\Terminal::yellow("💡  -> Test the endpoint\n");
-    \Hubleto\Terminal::colored("cyan", "black", "Open in browser: {$this->main->projectUrl}/{$app->manifest['rootUrlSlug']}/api/{$endpoint}");
+    \Hubleto\Terminal::colored("cyan", "black", "Open in browser: {$this->getEnv()->projectUrl}/{$app->manifest['rootUrlSlug']}/api/{$endpoint}");
     \Hubleto\Terminal::yellow("\n");
   }
 

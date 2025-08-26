@@ -8,7 +8,7 @@ class ResetAll extends \HubletoMain\Cli\Agent\Command
   {
     \Hubleto\Terminal::cyan("Reinstalling all apps...\n");
 
-    require_once($this->main->projectFolder . "/ConfigEnv.php");
+    require_once($this->getEnv()->projectFolder . "/ConfigEnv.php");
 
     foreach ($this->getAppManager()->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
       try {

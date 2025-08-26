@@ -60,7 +60,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
    */
   public function getUserFromSession(): array
   {
-    $tmp = $this->main->session->get('userProfile') ?? [];
+    $tmp = $this->getSessionManager()->get('userProfile') ?? [];
     return [
       'id' => (int) ($tmp['id'] ?? 0),
       'type' => (int) ($tmp['type'] ?? 0),
@@ -152,7 +152,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
       $token->delete();
       $this->getRouter()->setUrlParam('password', $this->getRouter()->urlParamAsString('password'));
 
-      $this->main->auth->auth();
+      $this->getAuth()->auth();
     } else {
       $token->delete();
     }

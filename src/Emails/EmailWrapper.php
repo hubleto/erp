@@ -18,7 +18,7 @@ class EmailWrapper
     We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:
     
     <p style="text-align: center;">
-      <a href="'. $this->main->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Reset password</a>
+      <a href="'. $this->getEnv()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Reset password</a>
     </p>
     
     If you did not request a password reset, please ignore this email. Your password will remain unchanged. <br><br><br>
@@ -37,7 +37,7 @@ class EmailWrapper
     Thank you for signing up at our website! We\'re excited to have you on board. Please click the button below to confirm your account and get started.
     <br>
     <p style="text-align: center;">
-      <a href="'. $this->main->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Get started</a>
+      <a href="'. $this->getEnv()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Get started</a>
     </p>
     <br>
     

@@ -16,7 +16,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
   public function run(): void
   {
 
-    $this->main->permissions->DANGEROUS__grantAllPermissions();
+    $this->getPermissionsManager()->DANGEROUS__grantAllPermissions();
 
     \Hubleto\Terminal::cyan("Generating demo data...\n");
 
@@ -191,7 +191,7 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 
-    $this->main->permissions->revokeGrantAllPermissions();
+    $this->getPermissionsManager()->revokeGrantAllPermissions();
   }
 
   public function generateInvoiceProfiles(): void

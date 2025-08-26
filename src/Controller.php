@@ -48,7 +48,7 @@ class Controller extends \Hubleto\Framework\Controller
       isset($this->hubletoApp)
       && $this->requiresUserAuthentication
       && !$this->permittedForAllUsers
-      && !$this->main->permissions->isAppPermittedForActiveUser($this->hubletoApp)
+      && !$this->getPermissionsManager()->isAppPermittedForActiveUser($this->hubletoApp)
     ) {
       return false;
     }
@@ -77,7 +77,7 @@ class Controller extends \Hubleto\Framework\Controller
    */
   public function init(): void
   {
-    $this->main->hooks->run('controller:init-start', [$this]);
+    $this->getHookManager()->run('controller:init-start', [$this]);
 
     // Put your controller's initialization code here. See example below.
     // Throw an exception on error.
@@ -98,12 +98,12 @@ class Controller extends \Hubleto\Framework\Controller
       return;
     }
 
-    $this->main->hooks->run('controller:prepare-view-start', [$this]);
+    $this->getHookManager()->run('controller:prepare-view-start', [$this]);
 
     $logFolder = $this->getConfig()->getAsString('logFolder');
 
-    if ($this->main->auth->isUserInSession()) {
-      $user = $this->main->auth->getUserFromSession();
+    if ($this->getAuth()->isUserInSession()) {
+      $user = $this->getAuth()->getUserFromSession();
 
       if (!empty($logFolder) && is_dir($logFolder)) {
         if (!is_dir($logFolder . '/usage')) {
@@ -125,12 +125,12 @@ class Controller extends \Hubleto\Framework\Controller
       $this->viewParams['app'] = $this->hubletoApp;
     }
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
-    $this->viewParams['requestedUri'] = $this->main->requestedUri;
+    $this->viewParams['requestedUri'] = $this->getEnv()->requestedUri;
 
     $help = $this->main->load(\HubletoApp\Community\Help\Loader::class);
     $contextHelpUrls = $help->contextHelp[$this->main->route] ?? '';
 
-    $user = $this->main->auth->getUser();
+    $user = $this->getAuth()->getUser();
 
     if (isset($contextHelpUrls[$user['language']])) {
       $contextHelpUrl = $contextHelpUrls[$user['language']];
@@ -142,7 +142,7 @@ class Controller extends \Hubleto\Framework\Controller
 
     $this->viewParams['contextHelpUrl'] = $contextHelpUrl;
 
-    $this->main->hooks->run('controller:prepare-view-end', [$this]);
+    $this->getHookManager()->run('controller:prepare-view-end', [$this]);
 
   }
 
@@ -155,7 +155,7 @@ class Controller extends \Hubleto\Framework\Controller
       parent::setView('@hubleto-main/AccessForbidden.twig');
     } else {
       parent::setView($view);
-      $this->main->hooks->run('controller:set-view', [$this, $view]);
+      $this->getHookManager()->run('controller:set-view', [$this, $view]);
     }
   }
 

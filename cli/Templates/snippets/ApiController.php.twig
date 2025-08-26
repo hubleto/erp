@@ -12,7 +12,7 @@ class {{ endpointPascalCase }} extends \HubletoMain\Controllers\ApiController
   {
 
     // Uncomment this if you want your api be hookable
-    // $this->main->hooks->run('api:render-json', [$this]);
+    // $this->getHookManager()->run('api:render-json', [$this]);
 
     // Uncomment example below to provide data for a specific model
     // \$mCountry = $this->main->load(\HubletoApp\Community\Settings\Models\Country::class);

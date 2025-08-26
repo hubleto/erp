@@ -16,7 +16,7 @@ class {{ controller }} extends \HubletoMain\Controller
   {
 
     // Uncomment this if you want your controller be hookable
-    // $this->main->hooks->run('controller:prepare-view-start', [$this]);
+    // $this->getHookManager()->run('controller:prepare-view-start', [$this]);
 
     parent::prepareView();
 
@@ -27,7 +27,7 @@ class {{ controller }} extends \HubletoMain\Controller
     $this->setView('@{{ appViewNamespace }}/{{ controller }}.twig');
 
     // Uncomment this if you want your controller be hookable
-    // $this->main->hooks->run('controller:prepare-view-end', [$this]);
+    // $this->getHookManager()->run('controller:prepare-view-end', [$this]);
   }
 
 }

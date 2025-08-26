@@ -7,6 +7,8 @@ namespace HubletoMain\Cli\Agent;
 class Command extends \Hubleto\Framework\CoreClass
 {
 
+  public array $arguments = [];
+
   public function run(): void
   {
     // to be implemented in sub-classes

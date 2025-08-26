@@ -24,7 +24,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
         $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
         break;
       case 'Custom':
-        $projectFolder = $this->main->projectFolder;
+        $projectFolder = $this->getEnv()->projectFolder;
         if (empty($projectFolder) || !is_dir($projectFolder)) {
           throw new \Exception('projectFolder is not properly configured. (' . $projectFolder . ')');
         }
@@ -58,7 +58,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
     }
 
     \Hubleto\Terminal::yellow("💡  TIPS:\n");
-    \Hubleto\Terminal::yellow("💡  -> Test the app in browser: {$this->main->projectUrl}/" . strtolower($appName) . "\n");
+    \Hubleto\Terminal::yellow("💡  -> Test the app in browser: {$this->getEnv()->projectUrl}/" . strtolower($appName) . "\n");
     \Hubleto\Terminal::yellow("💡  -> Run command below to add your first model.\n");
     \Hubleto\Terminal::colored("cyan", "black", "Run: php hubleto create model {$appNamespace} {$appName}FirstModel");
   }

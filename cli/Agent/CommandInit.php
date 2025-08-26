@@ -86,7 +86,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
   public function run(): void
   {
 
-    if (is_file($this->main->projectFolder . '/ConfigEnv.php')) {
+    if (is_file($this->getEnv()->projectFolder . '/ConfigEnv.php')) {
       \Hubleto\Terminal::red("ConfigEnv.php already exists, project has already been initialized.\n");
       \Hubleto\Terminal::red("If you want to re-initialize the project, delte ConfigEnv.php file first.\n");
       exit;
@@ -218,7 +218,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $rewriteBases = [];
     $lastRewriteBase = '';
 
-    $paths = explode('/', str_replace('\\', '/', $this->main->projectFolder));
+    $paths = explode('/', str_replace('\\', '/', $this->getEnv()->projectFolder));
     foreach (array_reverse($paths) as $tmpFolder) {
       $rewriteBases[] = $lastRewriteBase . '/';
       $lastRewriteBase = '/' . $tmpFolder . $lastRewriteBase;
@@ -230,13 +230,13 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $rewriteBase = \Hubleto\Terminal::choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
     }
     if ($projectFolder === null) {
-      $projectFolder = $this->main->projectFolder;
+      $projectFolder = $this->getEnv()->projectFolder;
     }
     if ($releaseFolder === null) {
-      $releaseFolder = $this->main->releaseFolder;
+      $releaseFolder = $this->getEnv()->releaseFolder;
     }
     if ($secureFolder === null) {
-      $secureFolder = $this->main->secureFolder;
+      $secureFolder = $this->getEnv()->secureFolder;
     }
     if ($projectUrl === null) {
       $projectUrl = \Hubleto\Terminal::read('ConfigEnv.projectUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
@@ -370,9 +370,9 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $this->getConfig()->set('db_password', $dbPassword);
     $this->getConfig()->set('db_name', $dbName);
 
-    $this->main->projectFolder = $projectFolder;
-    $this->main->releaseFolder = $releaseFolder;
-    $this->main->secureFolder = $secureFolder;
+    $this->getEnv()->projectFolder = $projectFolder;
+    $this->getEnv()->releaseFolder = $releaseFolder;
+    $this->getEnv()->secureFolder = $secureFolder;
 
     \Hubleto\Terminal::cyan("\n");
     \Hubleto\Terminal::cyan("Hurray. Installing your Hubleto with following packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");

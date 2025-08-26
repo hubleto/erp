@@ -133,9 +133,9 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     }
 
     \Hubleto\Terminal::yellow("⚠  NEXT STEPS:\n");
-    \Hubleto\Terminal::yellow("⚠   -> Run `npm run build-js` in `{$this->main->srcFolder}` to compile Javascript.\n");
+    \Hubleto\Terminal::yellow("⚠   -> Run `npm run build-js` in `{$this->getEnv()->srcFolder}` to compile Javascript.\n");
     \Hubleto\Terminal::colored("cyan", "black", "Run: npm run build-js");
-    \Hubleto\Terminal::colored("cyan", "black", "And then open in browser: {$this->main->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
+    \Hubleto\Terminal::colored("cyan", "black", "And then open in browser: {$this->getEnv()->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
   }
 
 }

@@ -2,6 +2,8 @@
 
 namespace HubletoMain;
 
+use Hubleto\Framework\DependencyInjection;
+
 /**
  * Main Hubleto class. This class is always referenced
  * as `$this->main` or `$main`.
@@ -10,8 +12,6 @@ class Loader extends \Hubleto\Framework\Loader
 {
 
   public \HubletoMain\ReleaseManager $release;
-  public \HubletoMain\HookManager $hooks;
-  public \HubletoMain\CronManager $crons;
 
   public \HubletoMain\Emails\EmailProvider $email;
   public \HubletoMain\Emails\EmailWrapper $emails;
@@ -34,24 +34,23 @@ class Loader extends \Hubleto\Framework\Loader
   {
     parent::__construct($config, $mode);
 
-    // Hooks
-    $this->hooks = $this->di->create(\HubletoMain\HookManager::class);
-
-    // Crons
-    $this->crons = $this->di->create(\HubletoMain\CronManager::class);
+    DependencyInjection::setServiceProviders([
+      \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,
+      \Hubleto\Framework\Auth\DefaultProvider::class => AuthProvider::class,
+    ]);
 
     // Release manager
-    $this->release = $this->di->create(\HubletoMain\ReleaseManager::class);
+    $this->release = DependencyInjection::create($this, \HubletoMain\ReleaseManager::class);
 
     // Emails
-    $this->email = $this->di->create(\HubletoMain\Emails\EmailProvider::class);
+    $this->email = DependencyInjection::create($this, \HubletoMain\Emails\EmailProvider::class);
 
     // DEPRECATED
-    $this->emails = $this->di->create(\HubletoMain\Emails\EmailWrapper::class);
+    $this->emails = DependencyInjection::create($this, \HubletoMain\Emails\EmailWrapper::class);
     $this->emails->emailProvider = $this->email;
 
     // Finish
-    $this->hooks->run('core:bootstrap-end', [$this]);
+    $this->getHookManager()->run('core:bootstrap-end', [$this]);
 
   }
 
@@ -71,21 +70,12 @@ class Loader extends \Hubleto\Framework\Loader
   public function init(): void
   {
     try {
+      parent::init();
 
-      if ($this->mode == self::HUBLETO_MODE_FULL) {
-        $this->session->start(true);
-        $this->initDatabaseConnections();
-        $this->getConfig()->loadFromDB();
-      }
-
-      $this->auth->init();
       $this->release->init();
       $this->email->init();
-      $this->getAppManager()->init();
-      $this->hooks->init();
-      $this->permissions->init();
 
-      $this->hooks->run('core:init-end', [$this]);
+      $this->getHookManager()->run('core:init-end', [$this]);
     } catch (\Exception $e) {
       echo "HUBLETO INIT failed: [".get_class($e)."] ".$e->getMessage() . "\n";
       echo $e->getTraceAsString() . "\n";
@@ -118,8 +108,8 @@ class Loader extends \Hubleto\Framework\Loader
     $this->twigLoader->addPath(__DIR__ . '/../views', 'hubleto-main');
     $this->twigLoader->addPath(__DIR__ . '/../../apps/src', 'app');
 
-    if (is_dir($this->projectFolder . '/src/views')) {
-      $this->twigLoader->addPath($this->projectFolder . '/src/views', 'project');
+    if (is_dir($this->getEnv()->projectFolder . '/src/views')) {
+      $this->twigLoader->addPath($this->getEnv()->projectFolder . '/src/views', 'project');
     }
 
   }
@@ -143,7 +133,7 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function createAuthProvider(): \Hubleto\Framework\Interfaces\AuthInterface
   {
-    return $this->di->create(\HubletoMain\AuthProvider::class);
+    return DependencyInjection::create($this, \HubletoMain\AuthProvider::class);
   }
 
   /**
@@ -154,7 +144,7 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function createRouter(): \Hubleto\Framework\Router
   {
-    return $this->di->create(\HubletoMain\Router::class);
+    return DependencyInjection::create($this, \HubletoMain\Router::class);
   }
 
   /**
@@ -163,9 +153,9 @@ class Loader extends \Hubleto\Framework\Loader
    * @return \Hubleto\Framework\Permissions
    * 
    */
-  public function createPermissionsManager(): \Hubleto\Framework\Permissions
+  public function createPermissionsManager(): \Hubleto\Framework\Interfaces\PermissionsManagerInterface
   {
-    return $this->di->create(\HubletoMain\Permissions::class);
+    return DependencyInjection::create($this, \HubletoMain\PermissionsManager::class);
   }
 
   /**
@@ -176,7 +166,7 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function createTranslator(): \Hubleto\Framework\Interfaces\TranslatorInterface
   {
-    return $this->di->create(\HubletoMain\Translator::class);
+    return DependencyInjection::create($this, \HubletoMain\Translator::class);
   }
 
   // /**

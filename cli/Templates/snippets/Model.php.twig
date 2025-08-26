@@ -84,10 +84,10 @@ class {{ model }} extends \Hubleto\Framework\Models\Model
       // 'image_example' => (new Image($this, $this->translate('Image')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
       // 'file_example' => (new File($this, $this->translate('File')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
       // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->main->auth->getUserId())
+      //   ->setDefaultValue($this->getAuth()->getUserId())
       // ,
       // 'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->main->auth->getUserId())
+      //   ->setDefaultValue($this->getAuth()->getUserId())
       // ,
     ]);
   }

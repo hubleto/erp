@@ -91,8 +91,8 @@ class Controller extends \Hubleto\Framework\Controller
 
     $logFolder = $this->getConfig()->getAsString('logFolder');
 
-    if ($this->getAuth()->isUserInSession()) {
-      $user = $this->getAuth()->getUserFromSession();
+    if ($this->getAuthProvider()->isUserInSession()) {
+      $user = $this->getAuthProvider()->getUserFromSession();
 
       if (!empty($logFolder) && is_dir($logFolder)) {
         if (!is_dir($logFolder . '/usage')) {
@@ -119,7 +119,7 @@ class Controller extends \Hubleto\Framework\Controller
     $help = $this->getService(\HubletoApp\Community\Help\Loader::class);
     $contextHelpUrls = $help->contextHelp[$this->getRouter()->getRoute()] ?? '';
 
-    $user = $this->getAuth()->getUser();
+    $user = $this->getAuthProvider()->getUser();
 
     if (isset($contextHelpUrls[$user['language']])) {
       $contextHelpUrl = $contextHelpUrls[$user['language']];

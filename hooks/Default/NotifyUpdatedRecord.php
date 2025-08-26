@@ -13,7 +13,7 @@ class NotifyUpdatedRecord extends \HubletoMain\Hook
 
       list($model, $originalRecord, $savedRecord) = $args;
 
-      $user = $this->getAuth()->getUser();
+      $user = $this->getAuthProvider()->getUser();
       if (isset($savedRecord['id_owner']) && $savedRecord['id_owner'] != $user['id']) {
         $diff = $model->diffRecords($originalRecord, $savedRecord);
 

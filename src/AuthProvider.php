@@ -24,7 +24,7 @@ use Hubleto\Framework\Models\Token;
  *
  * @property \HubletoMain\Loader $main
  */
-class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
+class AuthProvider extends \Hubleto\Framework\AuthProvider
 {
 
   /**
@@ -152,7 +152,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
       $token->delete();
       $this->getRouter()->setUrlParam('password', $this->getRouter()->urlParamAsString('password'));
 
-      $this->getAuth()->auth();
+      $this->getAuthProvider()->auth();
     } else {
       $token->delete();
     }

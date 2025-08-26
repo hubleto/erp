@@ -20,21 +20,14 @@ class Loader extends \Hubleto\Framework\Loader
 
     DependencyInjection::setServiceProviders([
       \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,
-      \Hubleto\Framework\Auth\DefaultProvider::class => AuthProvider::class,
+      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
       \Hubleto\Framework\Renderer::class => Renderer::class,
       
+      \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
+      \Hubleto\Framework\Controllers\NotFound::class => Controllers\NotFound::class,
       \Hubleto\Framework\Controllers\Desktop::class => \HubletoApp\Community\Desktop\Controllers\Desktop::class,
-      \Hubleto\Framework\Controllers\SignIn::class => \HubletoMain\Controllers\SignIn::class,
-      \Hubleto\Framework\Controllers\NotFound::class => \HubletoMain\Controllers\NotFound::class,
       
     ]);
-
-    // // Emails
-    // $this->email = DependencyInjection::create($this, \HubletoMain\Emails\EmailProvider::class);
-
-    // // DEPRECATED
-    // $this->emails = DependencyInjection::create($this, \HubletoMain\Emails\EmailWrapper::class);
-    // $this->emails->emailProvider = $this->email;
 
     // Finish
     $this->getHookManager()->run('core:bootstrap-end', [$this]);

@@ -42,7 +42,7 @@ class ResetPassword extends \HubletoMain\Controller
         $this->setView('@hubleto-main/ResetPassword.twig');
         return;
       } else {
-        $this->getAuth()->resetPassword();
+        $this->getAuthProvider()->resetPassword();
 
         $this->getRouter()->redirectTo('');
       }

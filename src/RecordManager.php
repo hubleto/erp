@@ -17,8 +17,8 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     // prepare some variables
 
     $main = \Hubleto\Framework\Loader::getGlobalApp();
-    $idUser = $main->getAuth()->getUserId();
-// var_dump($main->getAuth()->getUserType());
+    $idUser = $main->getAuthProvider()->getUserId();
+// var_dump($main->getAuthProvider()->getUserType());
     $hasIdOwner = isset($record['id_owner']);
     $hasIdManager = isset($record['id_manager']);
     $hasIdTeam = isset($record['id_team']);
@@ -35,17 +35,17 @@ class RecordManager extends \Hubleto\Framework\RecordManager
 
     $isTeamMember = false;
     // if ($hasIdTeam) {
-    //   $isTeamMember = $main->getAuth()->isUserMemberOfTeam($record['id_team']);
+    //   $isTeamMember = $main->getAuthProvider()->isUserMemberOfTeam($record['id_team']);
     // }
 
     // enable permissions by certain criteria
     $canRead = false;
     $canModify = false;
 
-    if ($main->getAuth()->getUserType() == User::TYPE_ADMINISTRATOR) {
+    if ($main->getAuthProvider()->getUserType() == User::TYPE_ADMINISTRATOR) {
       $canRead = true;
       $canModify = true;
-    } if ($main->getAuth()->getUserType() == User::TYPE_CHIEF_OFFICER) {
+    } if ($main->getAuthProvider()->getUserType() == User::TYPE_CHIEF_OFFICER) {
       // CxO can do anything except for modifying config and settings
 
       $canRead = true;
@@ -54,7 +54,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       if (str_starts_with($this->model->fullName, 'Hubleto/Core/Config')) {
         $canModify = false;
       }
-    } elseif ($main->getAuth()->getUserType() == User::TYPE_MANAGER) {
+    } elseif ($main->getAuthProvider()->getUserType() == User::TYPE_MANAGER) {
       // Manager can:
       //   - read only records where he/she is owner or manager
       //   - modify only records where he/she is owner
@@ -80,7 +80,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       }
 
       $permissions = [$canRead, $canModify, $canModify, $canModify];
-    } elseif ($main->getAuth()->getUserType() == User::TYPE_EMPLOYEE) {
+    } elseif ($main->getAuthProvider()->getUserType() == User::TYPE_EMPLOYEE) {
       // Employee can:
       //   - read/modify only records where he/she is owner
 
@@ -89,14 +89,14 @@ class RecordManager extends \Hubleto\Framework\RecordManager
         $canModify = true;
       }
 
-    } elseif ($main->getAuth()->getUserType() == User::TYPE_ASSISTANT) {
+    } elseif ($main->getAuthProvider()->getUserType() == User::TYPE_ASSISTANT) {
       // Assistant can:
       //   - read/modify only records where he/she is owner
 
       if ($hasIdOwner && $isOwner || !$hasIdOwner) {
         $canRead = true;
       }
-    } elseif ($main->getAuth()->getUserType() == User::TYPE_EXTERNAL) {
+    } elseif ($main->getAuthProvider()->getUserType() == User::TYPE_EXTERNAL) {
       // Externals cannot do anything by default
     }
 
@@ -115,15 +115,15 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $hasIdManager = $this->model->hasColumn('id_manager');
     $hasIdTeam = $this->model->hasColumn('id_team');
 
-    $idUser = $main->getAuth()->getUserId();
+    $idUser = $main->getAuthProvider()->getUserId();
 
-    $user = $main->getAuth()->getUser();
+    $user = $main->getAuthProvider()->getUser();
     $userTeams = [];
     foreach ($user['TEAMS'] ?? [] as $team) {
       $userTeams[] = $team['id'] ?? 0;
     }
 
-    if ($main->getAuth()->getUserType() == User::TYPE_MANAGER) {
+    if ($main->getAuthProvider()->getUserType() == User::TYPE_MANAGER) {
       if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
         $query = $query->where(function ($q) use ($idUser, $userTeams) {
           $q
@@ -145,9 +145,9 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       } elseif ($hasIdTeam) {
         $query = $query->whereIn($this->table . '.id_team', $userTeams);
       }
-    } elseif ($main->getAuth()->getUserType() == User::TYPE_EMPLOYEE && $hasIdOwner) {
+    } elseif ($main->getAuthProvider()->getUserType() == User::TYPE_EMPLOYEE && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);
-    } elseif ($main->getAuth()->getUserType() == User::TYPE_ASSISTANT && $hasIdOwner) {
+    } elseif ($main->getAuthProvider()->getUserType() == User::TYPE_ASSISTANT && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);
     }
 

@@ -30,9 +30,9 @@ class Loader extends \Hubleto\Framework\Loader
    * @param int $mode
    * 
    */
-  public function __construct(array $config = [], int $mode = self::HUBLETO_MODE_FULL)
+  public function __construct(array $config = [])
   {
-    parent::__construct($config, $mode);
+    parent::__construct($config);
 
     DependencyInjection::setServiceProviders([
       \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,

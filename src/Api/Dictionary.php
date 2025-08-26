@@ -28,7 +28,7 @@ class Dictionary extends \HubletoMain\Controllers\ApiController
       return [];
     }
 
-    $dict = $this->main->translator->loadDictionary($language);
+    $dict = $this->main->getTranslator()->loadDictionary($language);
 
     if (
       isset($addNew['context'])

@@ -20,7 +20,7 @@ class GetTemplateChartData extends \HubletoMain\Controllers\ApiController
     /** @var array<string, mixed> */
     $config = $this->getRouter()->urlParamAsArray("config");
 
-    $model = $this->main->getModel($this->getRouter()->urlParamAsString("model"));
+    $model = $this->getModel($this->getRouter()->urlParamAsString("model"));
 
     $groupBy = $config["groupsBy"][0]["field"];
     $returnWith = (array) $config["returnWith"];
@@ -56,7 +56,7 @@ class GetTemplateChartData extends \HubletoMain\Controllers\ApiController
 
       $data = $query->groupBy($groupBy)->get()->toArray();
 
-      $groupByModel = $this->main->getModel($model->getColumn($groupBy)->jsonSerialize()["model"]);
+      $groupByModel = $this->getModel($model->getColumn($groupBy)->jsonSerialize()["model"]);
       $groupByModelLookupSqlValue = $groupByModel->lookupSqlValue;
       $groupByModelLookupSqlValue = str_replace("{%TABLE%}.", "", $groupByModelLookupSqlValue);
 

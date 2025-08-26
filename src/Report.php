@@ -77,7 +77,7 @@ class Report extends \Hubleto\Framework\CoreClass
 
       $data = $query->groupBy($groupBy)->get()->toArray();
 
-      $groupByModel = $this->main->getModel($model->getColumn($groupBy)->jsonSerialize()["model"]);
+      $groupByModel = $this->getModel($model->getColumn($groupBy)->jsonSerialize()["model"]);
       $groupByModelLookupSqlValue = $groupByModel->lookupSqlValue;
       $groupByModelLookupSqlValue = str_replace("{%TABLE%}.", "", $groupByModelLookupSqlValue);
 

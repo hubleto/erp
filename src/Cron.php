@@ -2,7 +2,7 @@
 
 namespace HubletoMain;
 
-class Cron
+class Cron extends \Hubleto\Framework\CoreClass
 {
   // CRON-formatted string specifying the scheduling pattern
   public string $schedulingPattern = '* * * * *';

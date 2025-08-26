@@ -11,7 +11,7 @@ class TableExportCsv extends \HubletoMain\Controller
   public function render(array $params): string
   {
     $model = $this->getRouter()->urlParamAsString('model');
-    $this->model = $this->main->getModel($model);
+    $this->model = $this->getModel($model);
 
     $records = $this->model->recordGetList(
       $this->getRouter()->urlParamAsString('fulltextSearch'),

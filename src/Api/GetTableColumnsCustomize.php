@@ -9,7 +9,7 @@ class GetTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
   public function renderJson(): ?array
   {
     try {
-      $model = $this->main->getModel($this->getRouter()->urlParamAsString("model"));
+      $model = $this->getModel($this->getRouter()->urlParamAsString("model"));
       $allColumnsConfig = @json_decode($model->configAsString('tableColumns'), true);
       $columns = $model->getColumns();
       $columnsConfig = $allColumnsConfig[$this->getRouter()->urlParamAsString("tag")] ?? [];

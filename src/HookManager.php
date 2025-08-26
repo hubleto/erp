@@ -2,7 +2,7 @@
 
 namespace HubletoMain;
 
-class HookManager extends \HubletoMain\CoreClass
+class HookManager extends \Hubleto\Framework\CoreClass
 {
   /** @var array<\HubletoMain\Hook> */
   protected array $hooks = [];

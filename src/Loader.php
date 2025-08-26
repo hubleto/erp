@@ -50,9 +50,6 @@ class Loader extends \Hubleto\Framework\Loader
     $this->emails = $this->di->create(\HubletoMain\Emails\EmailWrapper::class);
     $this->emails->emailProvider = $this->email;
 
-    // App manager
-    $this->apps = $this->di->create(\HubletoMain\AppManager::class);
-
     // Finish
     $this->hooks->run('core:bootstrap-end', [$this]);
 
@@ -84,7 +81,7 @@ class Loader extends \Hubleto\Framework\Loader
       $this->auth->init();
       $this->release->init();
       $this->email->init();
-      $this->apps->init();
+      $this->getAppManager()->init();
       $this->hooks->init();
       $this->permissions->init();
 
@@ -210,7 +207,7 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function onBeforeRender(): void
   {
-    $this->apps->onBeforeRender();
+    $this->getAppManager()->onBeforeRender();
   }
 
   /**

@@ -359,16 +359,16 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan('  -> generateDemoData = ' . ($generateDemoData ? 'yes' : 'no') . "\n");
     \Hubleto\Terminal::cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
-    $this->main->getConfig()->set('projectFolder', $projectFolder);
-    $this->main->getConfig()->set('releaseFolder', $releaseFolder);
-    $this->main->getConfig()->set('projectUrl', $projectUrl);
-    $this->main->getConfig()->set('secureFolder', $secureFolder);
-    $this->main->getConfig()->set('assetsUrl', $assetsUrl);
+    $this->getConfig()->set('projectFolder', $projectFolder);
+    $this->getConfig()->set('releaseFolder', $releaseFolder);
+    $this->getConfig()->set('projectUrl', $projectUrl);
+    $this->getConfig()->set('secureFolder', $secureFolder);
+    $this->getConfig()->set('assetsUrl', $assetsUrl);
 
-    $this->main->getConfig()->set('db_host', $dbHost);
-    $this->main->getConfig()->set('db_user', $dbUser);
-    $this->main->getConfig()->set('db_password', $dbPassword);
-    $this->main->getConfig()->set('db_name', $dbName);
+    $this->getConfig()->set('db_host', $dbHost);
+    $this->getConfig()->set('db_user', $dbUser);
+    $this->getConfig()->set('db_password', $dbPassword);
+    $this->getConfig()->set('db_name', $dbName);
 
     $this->main->projectFolder = $projectFolder;
     $this->main->releaseFolder = $releaseFolder;

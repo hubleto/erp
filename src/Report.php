@@ -2,7 +2,7 @@
 
 namespace HubletoMain;
 
-class Report extends CoreClass
+class Report extends \Hubleto\Framework\CoreClass
 {
   public \Hubleto\Framework\Interfaces\AppInterface $hubletoApp;
 
@@ -22,10 +22,6 @@ class Report extends CoreClass
 
   protected string $urlSlug = '';
   protected string $name = '';
-
-  public function __construct(public \HubletoMain\Loader $main)
-  {
-  }
 
   public function getUrlSlug(): string
   {

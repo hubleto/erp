@@ -27,7 +27,7 @@ class SaveTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
         }
       }
 
-      $this->main->getConfig()->save(
+      $this->getConfig()->save(
         "user/" . $this->main->auth->getUserId() . "/models/" . $model->fullName . "/tableColumns",
         (string) json_encode($allColumnsConfig)
       );

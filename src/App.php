@@ -5,7 +5,7 @@ namespace HubletoMain;
 use \Hubleto\Framework\Helper;
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 
-class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interfaces\AppInterface
+class App extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Interfaces\AppInterface
 {
 
   public const DEFAULT_INSTALLATION_CONFIG = [
@@ -373,63 +373,63 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
 
   public function saveConfig(string $path, string $value = ''): void
   {
-    $this->main->getConfig()->save($this->getFullConfigPath($path), $value);
+    $this->getConfig()->save($this->getFullConfigPath($path), $value);
   }
 
   public function saveConfigForUser(string $path, string $value = ''): void
   {
-    $this->main->getConfig()->saveForUser($this->getFullConfigPath($path), $value);
+    $this->getConfig()->saveForUser($this->getFullConfigPath($path), $value);
   }
 
 
   public function configAsString(string $path, string $defaultValue = ''): string
   {
-    return (string) $this->main->getConfig()->get($this->getFullConfigPath($path), $defaultValue);
+    return (string) $this->getConfig()->get($this->getFullConfigPath($path), $defaultValue);
   }
 
   public function configAsInteger(string $path, int $defaultValue = 0): int
   {
-    return (int) $this->main->getConfig()->get($this->getFullConfigPath($path), $defaultValue);
+    return (int) $this->getConfig()->get($this->getFullConfigPath($path), $defaultValue);
   }
 
   public function configAsFloat(string $path, float $defaultValue = 0): float
   {
-    return (float) $this->main->getConfig()->get($this->getFullConfigPath($path), $defaultValue);
+    return (float) $this->getConfig()->get($this->getFullConfigPath($path), $defaultValue);
   }
 
   public function configAsBool(string $path, bool $defaultValue = false): bool
   {
-    return (bool) $this->main->getConfig()->get($this->getFullConfigPath($path), $defaultValue);
+    return (bool) $this->getConfig()->get($this->getFullConfigPath($path), $defaultValue);
   }
 
   public function configAsArray(string $path, array $defaultValue = []): array
   {
-    return (array) $this->main->getConfig()->get($path, $defaultValue);
+    return (array) $this->getConfig()->get($path, $defaultValue);
   }
 
   public function setConfigAsString(string $path, string $value = ''): void
   {
-    $this->main->getConfig()->set($this->getFullConfigPath($path), $value);
+    $this->getConfig()->set($this->getFullConfigPath($path), $value);
   }
 
   public function setConfigAsInteger(string $path, int $value = 0): void
   {
-    $this->main->getConfig()->set($this->getFullConfigPath($path), $value);
+    $this->getConfig()->set($this->getFullConfigPath($path), $value);
   }
 
   public function setConfigAsFloat(string $path, float $value = 0): void
   {
-    $this->main->getConfig()->set($this->getFullConfigPath($path), $value);
+    $this->getConfig()->set($this->getFullConfigPath($path), $value);
   }
 
   public function setConfigAsBool(string $path, bool $value = false): void
   {
-    $this->main->getConfig()->set($this->getFullConfigPath($path), $value);
+    $this->getConfig()->set($this->getFullConfigPath($path), $value);
   }
 
   public function setConfigAsArray(string $path, array $value = []): void
   {
-    $this->main->getConfig()->set($this->getFullConfigPath($path), $value);
+    $this->getConfig()->set($this->getFullConfigPath($path), $value);
   }
 
 

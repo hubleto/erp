@@ -6,7 +6,7 @@ use Hubleto\Framework\Exceptions\GeneralException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-class EmailProvider
+class EmailProvider extends \Hubleto\Framework\CoreClass
 {
 
   private string $defaultEmailTemplate = "@hubleto-main/layouts/Email.twig";
@@ -23,11 +23,11 @@ class EmailProvider
 
   public function init(): void
   {
-    $this->smtpHost = $this->main->getConfig()->getAsString('smtpHost', '');
-    $this->smtpPort = $this->main->getConfig()->getAsInteger('smtpPort', 0);
-    $this->smtpEncryption = $this->main->getConfig()->getAsString('smtpEncryption', 'ssl');
-    $this->smtpUsername = $this->main->getConfig()->getAsString('smtpLogin', '');
-    $this->smtpPassword = $this->main->getConfig()->getAsString('smtpPassword', '');
+    $this->smtpHost = $this->getConfig()->getAsString('smtpHost', '');
+    $this->smtpPort = $this->getConfig()->getAsInteger('smtpPort', 0);
+    $this->smtpEncryption = $this->getConfig()->getAsString('smtpEncryption', 'ssl');
+    $this->smtpUsername = $this->getConfig()->getAsString('smtpLogin', '');
+    $this->smtpPassword = $this->getConfig()->getAsString('smtpPassword', '');
   }
 
   public function getFormattedBody(string $title, string $rawBody, string $template = ''): string

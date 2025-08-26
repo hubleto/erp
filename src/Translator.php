@@ -29,7 +29,7 @@ class Translator implements \Hubleto\Framework\Interfaces\TranslatorInterface
   {
     $dictionaryFile = '';
 
-    if (empty($language)) $language = $this->main->getConfig()->getAsString('language', 'en');
+    if (empty($language)) $language = $this->getConfig()->getAsString('language', 'en');
     if (empty($language)) $language = 'en';
 
     if (strlen($language) == 2) {

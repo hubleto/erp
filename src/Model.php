@@ -12,39 +12,6 @@ use Hubleto\Framework\Config;
 class Model extends \Hubleto\Framework\Models\Model
 {
 
-  /**
-   * [Description for getAppManager]
-   *
-   * @return AppManagerInterface
-   * 
-   */
-  public function getAppManager(): AppManagerInterface
-  {
-    return $this->main->getAppManager();
-  }
-
-  /**
-   * [Description for getRouter]
-   *
-   * @return Router
-   * 
-   */
-  public function getRouter(): Router
-  {
-    return $this->main->getRouter();
-  }
-
-  /**
-   * [Description for getConfig]
-   *
-   * @return Router
-   * 
-   */
-  public function getConfig(): Config
-  {
-    return $this->main->getConfig();
-  }
-
   //////////////////////////////////////////////////////////////////
   // callbacks
 

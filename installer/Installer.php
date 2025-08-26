@@ -6,7 +6,7 @@ use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Settings\Models\UserRole;
 use HubletoApp\Community\Settings\Models\UserHasRole;
 
-class Installer extends \HubletoMain\CoreClass
+class Installer extends \Hubleto\Framework\CoreClass
 {
 
   public string $adminName = '';
@@ -127,28 +127,28 @@ class Installer extends \HubletoMain\CoreClass
   public function createDatabase(): void
   {
 
-    $this->main->getConfig()->set('db_name', '');
-    $this->main->getConfig()->set('db_host', $this->dbHost);
-    $this->main->getConfig()->set('db_user', $this->dbUser);
-    $this->main->getConfig()->set('db_password', $this->dbPassword);
+    $this->getConfig()->set('db_name', '');
+    $this->getConfig()->set('db_host', $this->dbHost);
+    $this->getConfig()->set('db_user', $this->dbUser);
+    $this->getConfig()->set('db_password', $this->dbPassword);
     $this->main->initDatabaseConnections();
 
     $this->main->pdo->execute("drop database if exists `{$this->dbName}`");
     $this->main->pdo->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
 
-    $this->main->getConfig()->set('db_name', $this->dbName);
-    $this->main->getConfig()->set('db_codepage', "utf8mb4");
+    $this->getConfig()->set('db_name', $this->dbName);
+    $this->getConfig()->set('db_codepage', "utf8mb4");
     $this->main->initDatabaseConnections();
 
   }
 
   public function initSmtp(): void
   {
-    $this->main->getConfig()->set('smtp_host', $this->smtpHost);
-    $this->main->getConfig()->set('smtp_port', $this->smtpPort);
-    $this->main->getConfig()->set('smtp_encryption', $this->smtpEncryption);
-    $this->main->getConfig()->set('smtp_login', $this->smtpLogin);
-    $this->main->getConfig()->set('smtp_password', $this->smtpPassword);
+    $this->getConfig()->set('smtp_host', $this->smtpHost);
+    $this->getConfig()->set('smtp_port', $this->smtpPort);
+    $this->getConfig()->set('smtp_encryption', $this->smtpEncryption);
+    $this->getConfig()->set('smtp_login', $this->smtpLogin);
+    $this->getConfig()->set('smtp_password', $this->smtpPassword);
   }
 
   public function installBaseModels(): void
@@ -159,7 +159,7 @@ class Installer extends \HubletoMain\CoreClass
 
   public function installApps(int $round): void
   {
-    $this->main->getConfig()->set('premiumRepoFolder', $this->premiumRepoFolder);
+    $this->getConfig()->set('premiumRepoFolder', $this->premiumRepoFolder);
     foreach ($this->appsToInstall as $appNamespace => $appConfig) {
       $this->getAppManager()->installApp($round, $appNamespace, $appConfig, true);
     }
@@ -205,7 +205,7 @@ class Installer extends \HubletoMain\CoreClass
     $configEnv = str_replace('{{ secureFolder }}', $this->secureFolder, $configEnv);
     $configEnv = str_replace('{{ projectUrl }}', $this->projectUrl, $configEnv);
     $configEnv = str_replace('{{ assetsUrl }}', $this->assetsUrl, $configEnv);
-    $configEnv = str_replace('{{ dbHost }}', $this->main->getConfig()->getAsString('db_host'), $configEnv);
+    $configEnv = str_replace('{{ dbHost }}', $this->getConfig()->getAsString('db_host'), $configEnv);
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
     $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);
     $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);

@@ -31,17 +31,17 @@ class Router extends \Hubleto\Framework\Router
 
   public function createSignInController(): \HubletoMain\Controller
   {
-    return $this->main->load(ControllerSignIn::class);
+    return $this->getService(ControllerSignIn::class);
   }
 
   public function createNotFoundController(): \HubletoMain\Controller
   {
-    return $this->main->load(ControllerNotFound::class);
+    return $this->getService(ControllerNotFound::class);
   }
 
   public function createResetPasswordController(): \HubletoMain\Controller
   {
-    return $this->main->load(ControllerResetPassword::class);
+    return $this->getService(ControllerResetPassword::class);
   }
 
   public function httpGet(array $routes): void

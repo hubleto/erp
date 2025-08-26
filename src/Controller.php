@@ -31,17 +31,6 @@ class Controller extends \Hubleto\Framework\Controller
     $this->hubletoApp = $this->getAppManager()->getApp($this->appNamespace);
   }
 
-  /**
-   * [Description for getAppManager]
-   *
-   * @return AppManagerInterface
-   * 
-   */
-  public function getAppManager(): AppManagerInterface
-  {
-    return $this->main->getAppManager();
-  }
-
   public function activeUserHasPermission(): bool
   {
     if (
@@ -127,7 +116,7 @@ class Controller extends \Hubleto\Framework\Controller
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->getEnv()->requestedUri;
 
-    $help = $this->main->load(\HubletoApp\Community\Help\Loader::class);
+    $help = $this->getService(\HubletoApp\Community\Help\Loader::class);
     $contextHelpUrls = $help->contextHelp[$this->main->route] ?? '';
 
     $user = $this->getAuth()->getUser();

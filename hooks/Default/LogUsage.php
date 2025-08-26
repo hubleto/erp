@@ -11,7 +11,7 @@ class LogUsage extends \HubletoMain\Hook
       $controller = $args[0];
       if (!$controller->disableLogUsage) {
         try {
-          $usageLogger = $this->main->load(\HubletoApp\Community\Usage\Logger::class);
+          $usageLogger = $this->getService(\HubletoApp\Community\Usage\Logger::class);
           $usageLogger->logUsage();
         } catch (\Throwable $e) {
           //

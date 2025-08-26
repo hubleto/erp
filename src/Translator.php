@@ -14,17 +14,6 @@ class Translator extends \Hubleto\Framework\CoreClass implements \Hubleto\Framew
     $this->dictionary = [];
   }
 
-  /**
-   * [Description for getAppManager]
-   *
-   * @return AppManagerInterface
-   * 
-   */
-  public function getAppManager(): AppManagerInterface
-  {
-    return $this->main->getAppManager();
-  }
-
   public function getDictionaryFilename(string $context, string $language = ''): string
   {
     $dictionaryFile = '';

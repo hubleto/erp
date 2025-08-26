@@ -90,7 +90,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
 
   public function createUserModel(): \HubletoApp\Community\Settings\Models\User
   {
-    return $this->main->load(\HubletoApp\Community\Settings\Models\User::class);
+    return $this->getService(\HubletoApp\Community\Settings\Models\User::class);
   }
 
   public function findUsersByLogin(string $login): array
@@ -108,11 +108,11 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
   {
     $login = $this->getRouter()->urlParamAsString('login');
 
-    $mUser = $this->main->load(User::class);
+    $mUser = $this->getService(User::class);
     if ($mUser->record->where('login', $login)->count() > 0) {
       $user = $mUser->record->where('login', $login)->first();
 
-      $mToken = $this->main->load(Token::class); // todo: token creation should be done withing the token itself
+      $mToken = $this->getService(Token::class); // todo: token creation should be done withing the token itself
       $tokenValue = bin2hex(random_bytes(16));
       $mToken->record->where('login', $login)->where('type', 'reset-password')->delete();
       $mToken->record->create([
@@ -138,8 +138,8 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
 
   public function resetPassword(): void
   {
-    $mToken = $this->main->load(Token::class);
-    $mUser = $this->main->load(User::class);
+    $mToken = $this->getService(Token::class);
+    $mUser = $this->getService(User::class);
 
     $token = $mToken->record->where('token', $this->getRouter()->urlParamAsString('token'))->first();
     $user = $mUser->record->where('login', $token->login)->first();
@@ -170,7 +170,7 @@ class AuthProvider extends \Hubleto\Framework\Auth\DefaultProvider
       !empty($setLanguage)
       && !empty(\HubletoApp\Community\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
-      $mUser = $this->main->load(\HubletoApp\Community\Settings\Models\User::class);
+      $mUser = $this->getService(\HubletoApp\Community\Settings\Models\User::class);
       $mUser->record
         ->where('id', $this->getUserId())
         ->update(['language' => $setLanguage])

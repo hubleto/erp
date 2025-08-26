@@ -15,7 +15,7 @@ class ControllerResetPassword extends \HubletoMain\Controller
   {
     parent::prepareView();
 
-    $mToken = $this->main->load(Token::class);
+    $mToken = $this->getService(Token::class);
     if ($this->getRouter()->urlParamAsString('token') == '' || $mToken->record
         ->where('token', $_GET['token'])
         ->where('valid_to', '>', date('Y-m-d H:i:s'))
@@ -53,7 +53,7 @@ class ControllerResetPassword extends \HubletoMain\Controller
       ->where('valid_to', '>', date('Y-m-d H:i:s'))
       ->where('type', 'reset-password')->first()->login;
 
-    $mUser = $this->main->load(User::class);
+    $mUser = $this->getService(User::class);
     $passwordHash = $mUser->record->where('login', $login)->first()->password;
 
     $this->viewParams = ['status' => false, 'welcome' => $passwordHash == ''];

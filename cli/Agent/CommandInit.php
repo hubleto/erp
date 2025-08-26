@@ -469,7 +469,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
       $app = $this->getAppManager()->createAppInstance($appNamespace);
       $mClasses = $app->getAvailableModelClasses();
       foreach ($mClasses as $mClass) {
-        $mObj = $this->main->load($mClass);
+        $mObj = $this->getService($mClass);
         $mObj->createSqlForeignKeys();
       }
     }

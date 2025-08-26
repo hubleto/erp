@@ -159,7 +159,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $junctionSourceRecordId = $main->getRouter()->urlParamAsInteger('junctionSourceRecordId');
 
     if (!empty($junctionModel) && !empty($junctionSourceColumn) && $junctionSourceRecordId > 0) {
-      $junctionModelObj = $main->load($junctionModel);
+      $junctionModelObj = $main->getService($junctionModel);
       if ($junctionModelObj) {
         $destinationIds = $junctionModelObj->record
           ->where($junctionSourceColumn, $junctionSourceRecordId)

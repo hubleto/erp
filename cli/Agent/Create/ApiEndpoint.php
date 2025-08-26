@@ -32,7 +32,7 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
     }
 
     $tplFolder = __DIR__ . '/../../Templates/snippets';
-    $this->main->addTwigViewNamespace($tplFolder, 'snippets');
+    $this->getRenderer()->addNamespace($tplFolder, 'snippets');
 
     $tplVars = [
       'appNamespace' => $appNamespace,
@@ -46,7 +46,7 @@ class ApiEndpoint extends \HubletoMain\Cli\Agent\Command
     if (!is_dir($app->srcFolder . '/Controllers/Api')) {
       mkdir($app->srcFolder . '/Controllers/Api');
     }
-    file_put_contents($app->srcFolder . '/Controllers/Api/' . $endpointPascalCase . '.php', $this->main->twig->render('@snippets/ApiController.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Controllers/Api/' . $endpointPascalCase . '.php', $this->getRenderer()->renderView('@snippets/ApiController.php.twig', $tplVars));
 
     $codeRoute = [ "\$this->getRouter()->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);" ];
     $codeRouteInserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Loader.php', '//@hubleto-cli:routes', $codeRoute);

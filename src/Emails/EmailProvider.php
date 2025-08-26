@@ -35,7 +35,7 @@ class EmailProvider extends \Hubleto\Framework\CoreClass
     if (empty($template)) {
       $template = $this->defaultEmailTemplate;
     }
-    return $this->main->twig->render($template, ['title' => $title, 'body' => $rawBody]);
+    return $this->getRenderer()->renderView($template, ['title' => $title, 'body' => $rawBody]);
   }
 
   public function send(string $to, string $subject, string $rawBody, string $template = '', string $fromName = 'Hubleto'): bool

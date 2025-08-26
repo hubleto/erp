@@ -35,7 +35,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
     }
 
     $tplFolder = __DIR__ . '/../../Templates/snippets';
-    $this->main->addTwigViewNamespace($tplFolder, 'snippets');
+    $this->getRenderer()->addNamespace($tplFolder, 'snippets');
 
     $tplVars = [
       'appNamespace' => $appNamespace,
@@ -50,8 +50,8 @@ class Model extends \HubletoMain\Cli\Agent\Command
     if (!is_dir($app->srcFolder . '/Models/RecordManagers')) {
       mkdir($app->srcFolder . '/Models/RecordManagers');
     }
-    file_put_contents($app->srcFolder . '/Models/' . $model . '.php', $this->main->twig->render('@snippets/Model.php.twig', $tplVars));
-    file_put_contents($app->srcFolder . '/Models/RecordManagers/' . $model . '.php', $this->main->twig->render('@snippets/ModelRecordManager.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Models/' . $model . '.php', $this->getRenderer()->renderView('@snippets/Model.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Models/RecordManagers/' . $model . '.php', $this->getRenderer()->renderView('@snippets/ModelRecordManager.php.twig', $tplVars));
 
     $codeInstallModel = [
       "\$this->getService(Models\\{$model}::class)->dropTableIfExists()->install();"

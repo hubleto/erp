@@ -4,7 +4,7 @@ namespace HubletoMain;
 
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 
-class Translator extends \Hubleto\Framework\CoreClass implements \Hubleto\Framework\Interfaces\TranslatorInterface
+class Translator extends \Hubleto\Framework\Translator
 {
 
   public array $dictionary = [];
@@ -50,7 +50,7 @@ class Translator extends \Hubleto\Framework\CoreClass implements \Hubleto\Framew
   public function loadDictionary(string $language = ""): array
   {
     if (empty($language)) {
-      $language = $this->main->getLanguage();
+      $language = $this->getAuth()->getUserLanguage();
     }
 
     if ($language == 'en') {
@@ -66,7 +66,7 @@ class Translator extends \Hubleto\Framework\CoreClass implements \Hubleto\Framew
       }
     }
 
-    $dictionary['HubletoMain\\Loader'] = Loader::loadDictionary($language);
+    // $dictionary['HubletoMain\\Loader'] = $this->loadDictionary($language);
 
     return $dictionary;
   }
@@ -77,7 +77,7 @@ class Translator extends \Hubleto\Framework\CoreClass implements \Hubleto\Framew
   public function translate(string $string, array $vars = [], string $context = "Hubleto\\Framework\\Loader::root", string $toLanguage = ""): string
   {
     if (empty($toLanguage)) {
-      $toLanguage = $this->main->getLanguage();
+      $toLanguage = $this->getAuth()->getUserLanguage();
     }
     if (strpos($context, '::')) {
       list($contextClass, $contextInner) = explode('::', $context);

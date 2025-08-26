@@ -45,7 +45,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     }
 
     $tplFolder = __DIR__ . '/../../Templates/snippets';
-    $this->main->addTwigViewNamespace($tplFolder, 'snippets');
+    $this->getRenderer()->addNamespace($tplFolder, 'snippets');
 
     $appNamespace = trim($appNamespace, '\\');
     $appNamespaceParts = explode('\\', $appNamespace);
@@ -80,10 +80,10 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     if (!is_dir($app->srcFolder . '/Views')) {
       mkdir($app->srcFolder . '/Views');
     }
-    file_put_contents($app->srcFolder . '/Components/Table' . $modelPluralForm . '.tsx', $this->main->twig->render('@snippets/Components/Table.tsx.twig', $tplVars));
-    file_put_contents($app->srcFolder . '/Components/Form' . $modelSingularForm . '.tsx', $this->main->twig->render('@snippets/Components/Form.tsx.twig', $tplVars));
-    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
-    file_put_contents($app->srcFolder . '/Views/' . $view . '.twig', $this->main->twig->render('@snippets/ViewWithTable.twig.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Components/Table' . $modelPluralForm . '.tsx', $this->getRenderer()->renderView('@snippets/Components/Table.tsx.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Components/Form' . $modelSingularForm . '.tsx', $this->getRenderer()->renderView('@snippets/Components/Form.tsx.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->getRenderer()->renderView('@snippets/Controller.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Views/' . $view . '.twig', $this->getRenderer()->renderView('@snippets/ViewWithTable.twig.twig', $tplVars));
 
     $codeLoaderTsxLine1 = [ "import Table{$modelPluralForm} from './Components/Table{$modelPluralForm}';" ];
     $codeLoaderTsxLine2 = [ "globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});" ];

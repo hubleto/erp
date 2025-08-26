@@ -25,7 +25,7 @@ class EmailWrapper
     
     For security reasons, this link will expire in 15 minutes. <br>
     ';
-    $body = $this->main->twig->render(self::EMAIL_TEMPLATE, ['title' => 'Reset your password | Hubleto', 'body' => $content]);
+    $body = $this->getRenderer()->renderView(self::EMAIL_TEMPLATE, ['title' => 'Reset your password | Hubleto', 'body' => $content]);
 
     $this->emailProvider->sendEmail($login, "Reset your password | Hubleto", $body);
   }
@@ -43,7 +43,7 @@ class EmailWrapper
     
     If you didn\'t sign up for this account, you can safely ignore this email.<br>
     ';
-    $body = $this->main->twig->render(self::EMAIL_TEMPLATE, ['title' => 'Reset your password | Hubleto', 'body' => $content]);
+    $body = $this->getRenderer()->renderView(self::EMAIL_TEMPLATE, ['title' => 'Reset your password | Hubleto', 'body' => $content]);
 
     $this->emailProvider->sendEmail($login, "Your Hubleto account has been created!", $body);
   }

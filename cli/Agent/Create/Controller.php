@@ -30,7 +30,7 @@ class Controller extends \HubletoMain\Cli\Agent\Command
     }
 
     $tplFolder = __DIR__ . '/../../Templates/snippets';
-    $this->main->addTwigViewNamespace($tplFolder, 'snippets');
+    $this->getRenderer()->addNamespace($tplFolder, 'snippets');
 
     $tplVars = [
       'appNamespace' => $appNamespace,
@@ -41,7 +41,7 @@ class Controller extends \HubletoMain\Cli\Agent\Command
     if (!is_dir($app->srcFolder . '/Controllers')) {
       mkdir($app->srcFolder . '/Controllers');
     }
-    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->main->twig->render('@snippets/Controller.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->getRenderer()->renderView('@snippets/Controller.php.twig', $tplVars));
 
     \Hubleto\Terminal::white("\n");
     \Hubleto\Terminal::cyan("Controller '{$controller}' in '{$appNamespace}' created successfully.\n");

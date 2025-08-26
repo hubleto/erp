@@ -6,11 +6,11 @@ class Controller extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = $this->main->apps->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+    $appNamespace = $this->getAppManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $controller = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
 
-    $this->main->apps->init();
+    $this->getAppManager()->init();
 
     if (empty($appNamespace)) {
       throw new \Exception("<appNamespace> not provided.");
@@ -19,7 +19,7 @@ class Controller extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("<controller> not provided.");
     }
 
-    $app = $this->main->apps->getAppInstance($appNamespace);
+    $app = $this->getAppManager()->getApp($appNamespace);
 
     if (!$app) {
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");

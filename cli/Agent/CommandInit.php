@@ -466,7 +466,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("    -> Finalizing...\n");
     foreach ($installer->appsToInstall as $appNamespace => $appConfig) {
-      $app = $this->main->apps->createAppInstance($appNamespace);
+      $app = $this->getAppManager()->createAppInstance($appNamespace);
       $mClasses = $app->getAvailableModelClasses();
       foreach ($mClasses as $mClass) {
         $mObj = $this->main->load($mClass);
@@ -478,7 +478,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     $installer->addCompanyAndAdminUser();
 
     if ($generateDemoData) {
-      $this->main->apps->init();
+      $this->getAppManager()->init();
       (new \HubletoMain\Cli\Agent\Project\GenerateDemoData($this->main, []))->run();
     }
 

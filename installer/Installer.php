@@ -6,9 +6,8 @@ use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Settings\Models\UserRole;
 use HubletoApp\Community\Settings\Models\UserHasRole;
 
-class Installer
+class Installer extends \HubletoMain\CoreClass
 {
-  public \HubletoMain\Loader $main;
 
   public string $adminName = '';
   public string $adminFamilyName = '';
@@ -162,7 +161,7 @@ class Installer
   {
     $this->main->config->set('premiumRepoFolder', $this->premiumRepoFolder);
     foreach ($this->appsToInstall as $appNamespace => $appConfig) {
-      $this->main->apps->installApp($round, $appNamespace, $appConfig, true);
+      $this->getAppManager()->installApp($round, $appNamespace, $appConfig, true);
     }
   }
 
@@ -301,7 +300,7 @@ class Installer
 
   public function installDefaultPermissions(): void
   {
-    $apps = $this->main->apps->getEnabledApps();
+    $apps = $this->getAppManager()->getEnabledApps();
     array_walk($apps, function ($apps) {
       $apps->installDefaultPermissions();
     });

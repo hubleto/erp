@@ -2,6 +2,8 @@
 
 namespace HubletoMain;
 
+use Hubleto\Framework\Interfaces\AppManagerInterface;
+
 class Translator implements \Hubleto\Framework\Interfaces\TranslatorInterface
 {
 
@@ -10,6 +12,17 @@ class Translator implements \Hubleto\Framework\Interfaces\TranslatorInterface
   public function __construct(public \Hubleto\Framework\Loader $main)
   {
     $this->dictionary = [];
+  }
+
+  /**
+   * [Description for getAppManager]
+   *
+   * @return AppManagerInterface
+   * 
+   */
+  public function getAppManager(): AppManagerInterface
+  {
+    return $this->main->getAppManager();
   }
 
   public function getDictionaryFilename(string $context, string $language = ''): string
@@ -57,12 +70,10 @@ class Translator implements \Hubleto\Framework\Interfaces\TranslatorInterface
 
     $dictionary = [];
 
-    if (isset($this->main->apps)) {
-      foreach ($this->main->apps->getEnabledApps() as $app) {
-        $appDict = $app->loadDictionary($language);
-        foreach ($appDict as $key => $value) {
-          $dictionary[$app->fullName][(string) $key] = $value;
-        }
+    foreach ($this->getAppManager()->getEnabledApps() as $app) {
+      $appDict = $app->loadDictionary($language);
+      foreach ($appDict as $key => $value) {
+        $dictionary[$app->fullName][(string) $key] = $value;
       }
     }
 

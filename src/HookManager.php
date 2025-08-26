@@ -2,14 +2,10 @@
 
 namespace HubletoMain;
 
-class HookManager
+class HookManager extends \HubletoMain\CoreClass
 {
   /** @var array<\HubletoMain\Hook> */
   protected array $hooks = [];
-
-  public function __construct(public \Hubleto\Framework\Loader $main)
-  {
-  }
 
   public function init(): void
   {
@@ -21,7 +17,7 @@ class HookManager
       $this->addHook($hookClass);
     }
 
-    foreach ($this->main->apps->getInstalledApps() as $appNamespace => $app) {
+    foreach ($this->getAppManager()->getInstalledApps() as $appNamespace => $app) {
       $hooks = @\Hubleto\Framework\Helper::scanDirRecursively($app->srcFolder . '/Hooks');
       // var_dump($appNamespace);var_dump($hooks);
       foreach ($hooks as $hook) {

@@ -10,7 +10,7 @@ class View extends \HubletoMain\Cli\Agent\Command
     $view = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
 
-    $this->main->apps->init();
+    $this->getAppManager()->init();
 
     if (empty($appNamespace)) {
       throw new \Exception("<appNamespace> not provided.");
@@ -19,7 +19,7 @@ class View extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("<view> not provided.");
     }
 
-    $app = $this->main->apps->getAppInstance($appNamespace);
+    $app = $this->getAppManager()->getApp($appNamespace);
 
     if (!$app) {
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");

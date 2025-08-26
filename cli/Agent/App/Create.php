@@ -6,7 +6,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = $this->main->apps->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+    $appNamespace = $this->getAppManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $appNamespaceParts = explode('\\', $appNamespace);
     $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
 
@@ -49,7 +49,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
       mkdir($appRepositoryFolder . '/' . $appName);
     }
 
-    $this->main->apps->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
+    $this->getAppManager()->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
 
     \Hubleto\Terminal::cyan("App {$appNamespace} created successfully.\n");
 

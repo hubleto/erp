@@ -8,29 +8,29 @@ class NotifyUpdatedRecord extends \HubletoMain\Hook
   public function run(string $event, array $args): void
   {
     if ($event == 'model:record-updated') {
-      $notificationsApp = $this->main->apps->community('Notifications');
-      if ($notificationsApp) {
-        list($model, $originalRecord, $savedRecord) = $args;
+      /** @var \HubletoApp\Community\Notifications\Loader $notificationsApp */
+      $notificationsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Notifications\Loader::class);
 
-        $user = $this->main->auth->getUser();
-        if (isset($savedRecord['id_owner']) && $savedRecord['id_owner'] != $user['id']) {
-          $diff = $model->diffRecords($originalRecord, $savedRecord);
+      list($model, $originalRecord, $savedRecord) = $args;
 
-          if (count($diff) > 0) {
+      $user = $this->main->auth->getUser();
+      if (isset($savedRecord['id_owner']) && $savedRecord['id_owner'] != $user['id']) {
+        $diff = $model->diffRecords($originalRecord, $savedRecord);
 
-            $body =
-              'User ' . $user['email'] . ' updated ' . $model->shortName . ":\n"
-              . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
-            ;
+        if (count($diff) > 0) {
 
-            $notificationsApp->send(
-              945, // category
-              [$model->shortName, $model->fullName],
-              (int) $savedRecord['id_owner'], // to
-              $model->shortName . ' updated', // subject
-              $body
-            );
-          }
+          $body =
+            'User ' . $user['email'] . ' updated ' . $model->shortName . ":\n"
+            . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+          ;
+
+          $notificationsApp->send(
+            945, // category
+            [$model->shortName, $model->fullName],
+            (int) $savedRecord['id_owner'], // to
+            $model->shortName . ' updated', // subject
+            $body
+          );
         }
       }
     }

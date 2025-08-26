@@ -282,16 +282,16 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
   }
 
   /**
-   * [Description for getAppInstance]
+   * [Description for getApp]
    *
    * @param string $appNamespace
    * 
    * @return null|\Hubleto\Framework\Interfaces\AppInterface
    * 
    */
-  public function getAppInstance(string $appNamespace): null|\Hubleto\Framework\Interfaces\AppInterface
+  public function getApp(string $appNamespace): null|\Hubleto\Framework\Interfaces\AppInterface
   {
-    return $this->apps[$appNamespace] ?? null;
+    return $this->apps[str_replace('\\Loader', '', $appNamespace)] ?? null;
   }
 
   /**
@@ -322,31 +322,31 @@ class AppManager implements \Hubleto\Framework\Interfaces\AppManagerInterface
     return isset($apps[$appNamespace]);
   }
 
-  /**
-   * [Description for community]
-   *
-   * @param string $appName
-   * 
-   * @return null|\Hubleto\Framework\Interfaces\AppInterface
-   * 
-   */
-  public function community(string $appName): null|\Hubleto\Framework\Interfaces\AppInterface
-  {
-    return $this->getAppInstance('HubletoApp\\Community\\' . $appName);
-  }
+  // /**
+  //  * [Description for community]
+  //  *
+  //  * @param string $appName
+  //  * 
+  //  * @return null|\Hubleto\Framework\Interfaces\AppInterface
+  //  * 
+  //  */
+  // public function community(string $appName): null|\Hubleto\Framework\Interfaces\AppInterface
+  // {
+  //   return $this->getApp('HubletoApp\\Community\\' . $appName);
+  // }
 
-  /**
-   * [Description for custom]
-   *
-   * @param string $appName
-   * 
-   * @return null|\Hubleto\Framework\Interfaces\AppInterface
-   * 
-   */
-  public function custom(string $appName): null|\Hubleto\Framework\Interfaces\AppInterface
-  {
-    return $this->getAppInstance('HubletoApp\\Custom\\' . $appName);
-  }
+  // /**
+  //  * [Description for custom]
+  //  *
+  //  * @param string $appName
+  //  * 
+  //  * @return null|\Hubleto\Framework\Interfaces\AppInterface
+  //  * 
+  //  */
+  // public function custom(string $appName): null|\Hubleto\Framework\Interfaces\AppInterface
+  // {
+  //   return $this->getApp('HubletoApp\\Custom\\' . $appName);
+  // }
 
   /** @param array<string, mixed> $appConfig */
   public function installApp(int $round, string $appNamespace, array $appConfig = [], bool $forceInstall = false): bool

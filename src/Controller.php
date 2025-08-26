@@ -2,6 +2,7 @@
 
 namespace HubletoMain;
 
+use Hubleto\Framework\Interfaces\AppManagerInterface;
 /**
  * @property \HubletoMain\Loader $main
  */
@@ -28,9 +29,18 @@ class Controller extends \Hubleto\Framework\Controller
 
     parent::__construct($main);
 
-    if ($this->main->apps->getAppInstance($this->appNamespace)) {
-      $this->hubletoApp = $this->main->apps->getAppInstance($this->appNamespace);
-    }
+    $this->hubletoApp = $this->getAppManager()->getApp($this->appNamespace);
+  }
+
+  /**
+   * [Description for getAppManager]
+   *
+   * @return AppManagerInterface
+   * 
+   */
+  public function getAppManager(): AppManagerInterface
+  {
+    return $this->main->getAppManager();
   }
 
   public function activeUserHasPermission(): bool
@@ -115,7 +125,6 @@ class Controller extends \Hubleto\Framework\Controller
     if (isset($this->hubletoApp)) {
       $this->viewParams['app'] = $this->hubletoApp;
     }
-    // $this->viewParams['help'] = $this->main->apps->community('Help');
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
     $this->viewParams['requestedUri'] = $this->main->requestedUri;
 

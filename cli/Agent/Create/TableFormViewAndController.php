@@ -6,7 +6,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = $this->main->apps->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+    $appNamespace = $this->getAppManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $model = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
     $noPrompt = (bool) ($this->arguments[6] ?? false);
@@ -17,7 +17,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
     $controller = $modelPluralForm; // using plural for controller managing the records in the model
     $view = $modelPluralForm; // using plural for view managing the records in the model
 
-    $this->main->apps->init();
+    $this->getAppManager()->init();
 
     if (empty($appNamespace)) {
       throw new \Exception("<appNamespace> not provided.");
@@ -26,7 +26,7 @@ class TableFormViewAndController extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("<model> not provided.");
     }
 
-    $app = $this->main->apps->getAppInstance($appNamespace);
+    $app = $this->getAppManager()->getApp($appNamespace);
 
     if (!$app) {
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");

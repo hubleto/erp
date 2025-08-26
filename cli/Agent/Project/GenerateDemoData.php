@@ -156,9 +156,9 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
     $mSupplier = $this->main->load(\HubletoApp\Community\Suppliers\Models\Supplier::class);
 
     if (
-      $this->main->apps->isAppInstalled("HubletoApp\Community\Documents") &&
-      $this->main->apps->isAppInstalled("HubletoApp\Community\Customers") &&
-      $this->main->apps->isAppInstalled("HubletoApp\Community\Contacts")
+      $this->getAppManager()->isAppInstalled("HubletoApp\Community\Documents") &&
+      $this->getAppManager()->isAppInstalled("HubletoApp\Community\Customers") &&
+      $this->getAppManager()->isAppInstalled("HubletoApp\Community\Contacts")
     ) {
       $this->generateCustomers($mCustomer, $mCustomerTag);
       $this->generateContacts($mContact, $mContactTag, $mValue);
@@ -166,23 +166,23 @@ class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
 
     $this->generateActivities($mCustomer, $mCustomerActivity);
 
-    if ($this->main->apps->isAppInstalled("HubletoApp\Community\Products")) {
+    if ($this->getAppManager()->isAppInstalled("HubletoApp\Community\Products")) {
       $this->generateProducts($mProduct, $mGroup, $mSupplier);
     }
 
     if (
-      $this->main->apps->isAppInstalled("HubletoApp\Community\Customers") &&
-      $this->main->apps->isAppInstalled("HubletoApp\Community\Documents") &&
-      $this->main->apps->isAppInstalled("HubletoApp\Community\Products") &&
-      $this->main->apps->isAppInstalled("HubletoApp\Community\Deals") &&
-      $this->main->apps->isAppInstalled("HubletoApp\Community\Leads")
+      $this->getAppManager()->isAppInstalled("HubletoApp\Community\Customers") &&
+      $this->getAppManager()->isAppInstalled("HubletoApp\Community\Documents") &&
+      $this->getAppManager()->isAppInstalled("HubletoApp\Community\Products") &&
+      $this->getAppManager()->isAppInstalled("HubletoApp\Community\Deals") &&
+      $this->getAppManager()->isAppInstalled("HubletoApp\Community\Leads")
     ) {
       $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
       $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity, $mDealProduct);
     }
 
-    foreach ($this->main->apps->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
-      $app = $this->main->apps->getAppInstance($appNamespace);
+    foreach ($this->getAppManager()->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
+      $app = $this->getAppManager()->getApp($appNamespace);
       if ($app) {
         \Hubleto\Terminal::cyan("  {$appNamespace}\n");
         $app->generateDemoData();

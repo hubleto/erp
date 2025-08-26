@@ -27,13 +27,15 @@ class Loader extends \HubletoMain\App
 
     // Add placeholder for custom settings.
     // This will be displayed in the Settings app, under the "All settings" card.
-    $this->main->apps->community('Settings')?->addSetting($this, [
+    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp->addSetting($this, [
       'title' => '{{ appName }}', // or $this->translate('{{ appName }}')
       'icon' => 'fas fa-table',
       'url' => 'settings/{{ appRootUrlSlug }}',
     ]);
 
     // Uncomment following if your app will provide own calendar.
+    // /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
     // $calendarManager = $this->main->load(\HubletoApp\Community\Calendar\Manager::class);
     // $calendarManager->addCalendar(
     //   $this, // reference to this app

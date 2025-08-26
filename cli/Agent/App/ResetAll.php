@@ -10,10 +10,10 @@ class ResetAll extends \HubletoMain\Cli\Agent\Command
 
     require_once($this->main->projectFolder . "/ConfigEnv.php");
 
-    foreach ($this->main->apps->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
+    foreach ($this->getAppManager()->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
       try {
-        if (!$this->main->apps->isAppInstalled($appNamespace)) {
-          $this->main->apps->installApp(1, $appNamespace, []);
+        if (!$this->getAppManager()->isAppInstalled($appNamespace)) {
+          $this->getAppManager()->installApp(1, $appNamespace, []);
         }
       } catch (\Throwable $e) {
         \Hubleto\Terminal::red($e->getMessage() . "\n");

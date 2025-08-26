@@ -3,6 +3,7 @@
 namespace HubletoMain;
 
 use \Hubleto\Framework\Helper;
+use Hubleto\Framework\Interfaces\AppManagerInterface;
 
 class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interfaces\AppInterface
 {
@@ -154,6 +155,11 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
   public function getNotificationsCount(): int
   {
     return 0;
+  }
+
+  public function getAppManager(): AppManagerInterface
+  {
+    return $this->main->getAppManager();
   }
 
   public static function getDictionaryFilename(string $language): string
@@ -367,7 +373,7 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
 
   public function getFullConfigPath(string $path): string
   {
-    return 'apps/' . $this->main->apps->getAppNamespaceForConfig($this->namespace) . '/' . $path;
+    return 'apps/' . $this->getAppManager()->getAppNamespaceForConfig($this->namespace) . '/' . $path;
   }
 
   public function saveConfig(string $path, string $value = ''): void
@@ -441,7 +447,7 @@ class App extends \HubletoMain\CoreClass implements \Hubleto\Framework\Interface
   public function collectExtendibles(string $extendibleName): array
   {
     $items = [];
-    foreach ($this->main->apps->getEnabledApps() as $app) {
+    foreach ($this->getAppManager()->getEnabledApps() as $app) {
       try {
         $extendible = $this->main->load($app->namespace . '\\Extendibles\\' . $extendibleName);
         $extendible->app = $app;

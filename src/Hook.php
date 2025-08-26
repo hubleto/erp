@@ -2,13 +2,22 @@
 
 namespace HubletoMain;
 
-class Hook
+class Hook extends \HubletoMain\CoreClass
 {
 
-  public function __construct(public \Hubleto\Framework\Loader $main)
-  {
-  }
+  // public function __construct(public \Hubleto\Framework\Loader $main)
+  // {
+  // }
 
+  /**
+   * [Description for run]
+   *
+   * @param string $event
+   * @param array $args
+   * 
+   * @return void
+   * 
+   */
   public function run(string $event, array $args): void
   {
     // to be overriden

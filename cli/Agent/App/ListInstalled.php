@@ -6,7 +6,7 @@ class ListInstalled extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespaces = $this->main->apps->getInstalledAppNamespaces();
+    $appNamespaces = $this->getAppManager()->getInstalledAppNamespaces();
 
     \Hubleto\Terminal::cyan("You have following apps installed:\n");
     foreach ($appNamespaces as $appNamespace => $appConfig) {

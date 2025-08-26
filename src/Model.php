@@ -2,11 +2,24 @@
 
 namespace HubletoMain;
 
+use Hubleto\Framework\Interfaces\AppManagerInterface;
+
 /**
  * Core implementation of model.
  */
 class Model extends \Hubleto\Framework\Models\Model
 {
+
+  /**
+   * [Description for getAppManager]
+   *
+   * @return AppManagerInterface
+   * 
+   */
+  public function getAppManager(): AppManagerInterface
+  {
+    return $this->main->getAppManager();
+  }
 
   //////////////////////////////////////////////////////////////////
   // callbacks

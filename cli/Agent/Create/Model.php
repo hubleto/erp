@@ -6,7 +6,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = $this->main->apps->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+    $appNamespace = $this->getAppManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $model = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
     $noPrompt = (bool) ($this->arguments[6] ?? false);
@@ -15,7 +15,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
     $modelPluralForm = $model . 's';
     $modelPluralFormKebab = \Hubleto\Framework\Helper::pascalToKebab($modelPluralForm);
 
-    $this->main->apps->init();
+    $this->getAppManager()->init();
 
     if (empty($appNamespace)) {
       throw new \Exception("<appNamespace> not provided.");
@@ -24,7 +24,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
       throw new \Exception("<model> not provided.");
     }
 
-    $app = $this->main->apps->getAppInstance($appNamespace);
+    $app = $this->getAppManager()->getApp($appNamespace);
 
     if (!$app) {
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");

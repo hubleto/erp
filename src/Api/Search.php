@@ -20,7 +20,7 @@ class Search extends \HubletoMain\Controllers\ApiController
     $firstExpression = reset($expressions);
 
     if (count($expressions) == 1 && str_starts_with($firstExpression, '>')) {
-      foreach ($this->main->apps->getEnabledApps() as $appNamespace => $app) {
+      foreach ($this->getAppManager()->getEnabledApps() as $appNamespace => $app) {
         if (str_starts_with('>' . strtolower($app->shortName), strtolower($firstExpression))) {
           $results[] = [
             'label' => '>' . $app->shortName,
@@ -35,7 +35,7 @@ class Search extends \HubletoMain\Controllers\ApiController
 
     if (count($expressions) == 1 && str_starts_with($firstExpression, '/')) {
       $searchSwitches = [];
-      foreach ($this->main->apps->getEnabledApps() as $appNamespace => $app) {
+      foreach ($this->getAppManager()->getEnabledApps() as $appNamespace => $app) {
         foreach ($app->searchSwitches as $switch => $name) {
           if (!isset($searchSwitches[$switch])) $searchSwitches[$switch] = [];
           $searchSwitches[$switch][] = $name;
@@ -53,7 +53,7 @@ class Search extends \HubletoMain\Controllers\ApiController
       array_shift($expressions);
     }
 
-    foreach ($this->main->apps->getEnabledApps() as $appNamespace => $app) {
+    foreach ($this->getAppManager()->getEnabledApps() as $appNamespace => $app) {
       $canSearchThisApp = true;
       $expressionsToSearch = $expressions;
       foreach ($expressions as $key => $e) {

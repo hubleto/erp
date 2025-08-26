@@ -4,7 +4,7 @@
 
 namespace HubletoMain\Cli\Agent;
 
-class Command
+class Command extends \HubletoMain\CoreClass
 {
 
   public function __construct(public \HubletoMain\Loader $main, public array $arguments)

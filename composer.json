@@ -1,11 +1,11 @@
 {
-    "name": "hubleto/main",
+    "name": "hubleto/erp",
     "license": "GPL-3.0-only",
     "description": "Business Application Hub. Opensource ERP and CRM.",
     "homepage": "https://www.hubleto.com",
     "support": {
-        "issues": "https://github.com/hubleto/main/issues",
-        "source": "https://github.com/hubleto/main"
+        "issues": "https://github.com/hubleto/erp/issues",
+        "source": "https://github.com/hubleto/erp"
     },
     "require": {
         "hubleto/terminal": "@dev",
@@ -15,12 +15,12 @@
     "autoload": {
         "psr-4": {
             "Hubleto\\Erp\\": "src",
-            "Hubleto\\App\\Community\\": "apps",
             "Hubleto\\Erp\\Cli\\": "cli",
             "Hubleto\\Erp\\Hook\\": "hooks",
             "Hubleto\\Erp\\Cron\\": "crons",
             "Hubleto\\Erp\\Report\\": "reports",
-            "Hubleto\\Erp\\Installer\\": "installer"
+            "Hubleto\\Erp\\Installer\\": "installer",
+            "Hubleto\\App\\Community\\": "apps"
         }
     },
     "minimum-stability": "dev",

@@ -1,0 +1,123 @@
+{
+    "loaders": {
+        "Leads": "Leads",
+        "Leads Archive": "Leadsarchiv"
+    },
+    "controllers.leads": {
+        "Sales": "Vertrieb",
+        "Leads": "Leads"
+    },
+    "controllers.leadsArchive": {
+        "Sales": "Vertrieb",
+        "Leads": "Leads",
+        "Archive": "Archiv"
+    },
+    "manifest": {
+        "Leads": "Leads",
+        "Management of leads, cold contacts. Convert leads to deals.": "Management von Leads, kalte Kontakte. Konvertieren führt zu Geschäften."
+    },
+    "root": {
+        "Lead statuses": "Lead Zustände",
+        "Lead Tags": "Lead -Tags",
+        "Lead Lost Reasons": "Führen Sie verlorene Gründe",
+        "Active leads": "Aktive Leads",
+        "Archived leads": "Archivierte Leads",
+        "Lead Levels": "Lead Stufen"
+    },
+    "Models\\LeadActivity": {
+        "Lead": "Führen",
+        "Contact": "Kontakt",
+        "Activity type": "Aktivitätstyp",
+        "Subject": "Thema",
+        "Start date": "Startdatum",
+        "Start time": "Startzeit",
+        "End date": "Enddatum",
+        "End time": "Endzeit",
+        "All day": "Den ganzen Tag",
+        "Completed": "Vollendet",
+        "Created by": "Erstellt von",
+        "Meeting minutes (link)": "Besprechungsminuten (Link)"
+    },
+    "Models\\Lead": {
+        "Lead Identifier": "Lead -Kennung",
+        "Title": "Titel",
+        "Customer": "Kunde",
+        "Contact": "Kontakt",
+        "Price": "Preis",
+        "Currency": "Währung",
+        "Score": "Punktzahl",
+        "Expected close date": "Erwartete Schließungsdatum",
+        "Created": "Erstellt",
+        "Status": "Status",
+        "Reason for Lost": "Grund für verlorene",
+        "Notes": "Notizen",
+        "Source channel": "Quellkanal",
+        "Archived": "Archiviert",
+        "Add lead": "Blei hinzufügen",
+        "Owner": "Eigentümer",
+        "Add Lead": "Blei hinzufügen",
+        "Manager": "Manager",
+        "Identifier": "Identifikator",
+        "Specific subject (if any)": "Betreff (falls vorhanden)",
+        "Campaign": "Kampagne",
+        "Email": "E-Mail",
+        "Phone number": "Telefonnummer",
+        "Level": "Stufe",
+        "Team": "Team"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Verlorener Vernunft"
+    },
+    "Models\\LeadHistory": {
+        "Change Date": "Datum ändern",
+        "Lead": "Führen",
+        "Description": "Beschreibung"
+    },
+    "Models\\LeadTag": {
+        "Lead": "Führen",
+        "Tag": "Etikett"
+    },
+    "Models\\LeadProduct": {
+        "Lead": "Führen",
+        "Product": "Produkt",
+        "Unit Price": "Stückpreis",
+        "Amount": "Menge",
+        "Vat": "Mehrwertsteuer",
+        "Discount": "Rabatt",
+        "Sum": "Summe"
+    },
+    "Models\\LeadDocument": {
+        "Lead": "Führen",
+        "Document": "Dokumentieren"
+    },
+    "Models\\Tag": {
+        "Name": "Name",
+        "Color": "Farbe"
+    },
+    "Components\\FormLead": {
+        "Show leads": "Show -Leads",
+        "Type recent activity here": "Geben Sie hier die aktuelle Aktivität ein",
+        "Shift+Enter = Schedule": "Shift+ENTER = Zeitplan",
+        "Most recent activities": "Letzte Aktivitäten",
+        "Enter = Log completed activity": "Geben Sie = log abgeschlossene Aktivität ein",
+        "Lead": "Führen",
+        "Not completed yet": "Noch nicht fertig",
+        "Go to deal": "Gehen Sie zu Deal",
+        "Calendar": "Kalender",
+        "Documents": "Unterlagen",
+        "History": "Geschichte",
+        "Local documents": "Lokale Dokumente"
+    },
+    "Controllers\\Leads": {
+        "Leads": "Leads"
+    },
+    "Controllers\\Boards\\LeadWarnings": {
+        "Pending leads without future plan": "Ausstehende Leads ohne weitere Planung",
+        "Open leads without future plan": "Offene Leads ohne weitere Planung",
+        "No warnings for leads.": "Keine Warnungen für Leads."
+    },
+    "Models\\Level": {
+        "Name": "Name",
+        "Color": "Farbe"
+    }
+}

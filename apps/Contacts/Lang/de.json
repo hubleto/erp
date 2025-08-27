@@ -1,0 +1,57 @@
+{
+    "manifest": {
+        "Contacts": "Kontakte",
+        "Default customer management and addressbook.": "Standard-Kundenmanagement und Adressbuch."
+    },
+    "root": {
+        "Contact Categories": "Kontaktkategorien",
+        "Contact Tags": "Kontakttags",
+        "Contacts": "Kontakte",
+        "Import contacts": "Kontakte importieren"
+    },
+    "Models\\Contact": {
+        "Salutation": "Anrede",
+        "Title before": "Titel vor",
+        "First name": "Vorname",
+        "Middle name": "Zweiter Vorname",
+        "Last name": "Nachname",
+        "Title after": "Titel nach",
+        "Customer": "Kunde",
+        "Primary Contact": "Hauptkontakt",
+        "Notes": "Notizen",
+        "Date Created": "Datum erstellt",
+        "Add contact": "Kontakt hinzufügen",
+        "Emails": "E -Mails",
+        "Phone Numbers": "Telefonnummern",
+        "Mr.": "Herr.",
+        "Mrs.": "Frau",
+        "Valid": "Gültig",
+        "Tags": "Markierungen"
+    },
+    "Models\\Value": {
+        "Contact": "Kontakt",
+        "Category": "Kategorie",
+        "Type": "Typ",
+        "Email": "E-Mail",
+        "Number": "Nummer",
+        "URL": "URL",
+        "Other": "Andere",
+        "Value": "Wert",
+        "Contacts": "Kontaktinformationen",
+        "Add Customer": "Kunde hinzufügen"
+    },
+    "Models\\ContactTag": {
+        "Contact": "Kontakt",
+        "Tag": "Tag"
+    },
+    "Models\\Category": {
+        "Type": "Typ"
+    },
+    "Models\\Tag": {
+        "Name": "Name",
+        "Color": "Farbe"
+    },
+    "Controllers\\Contacts": {
+        "Contacts": "Kontakte"
+    }
+}

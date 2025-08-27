@@ -1,0 +1,33 @@
+{
+    "manifest": {
+        "Products": "Produkty",
+        "Free product portfolio managment.": "Darmowe zarządzanie portfelem produktów."
+    },
+    "root": {
+        "Products": "Produkty",
+        "Groups": "Grupy",
+        "Suppliers": "Dostawcy"
+    },
+    "Models\\Product": {
+        "Title": "Tytuł",
+        "Product Group": "Grupa produktów",
+        "Product Type": "Typ produktu",
+        "Supplier": "Dostawca",
+        "On sale": "W sprzedaży",
+        "Image": "Obraz",
+        "Description": "Opis",
+        "Number of items in package": "Liczba elementów w pakiecie",
+        "Single unit price": "Pojedyncza cena jednostkowa",
+        "Unit": "Jednostka",
+        "Margin": "Margines",
+        "Vat": "Kadź",
+        "Single unit order possible": "Możliwe zamówienie pojedynczej jednostki",
+        "Packaging": "Opakowanie",
+        "Sale ended": "Sprzedaż zakończyła się",
+        "Show price to customer": "Pokaż cenę klientowi",
+        "Set price after reweight?": "Ustaw cenę po ponownej wadze?",
+        "Needs reordering?": "Wymaga zmiany kolejności?",
+        "Storage rules": "Zasady przechowywania",
+        "Table": "Tabela"
+    }
+}

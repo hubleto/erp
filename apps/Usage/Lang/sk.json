@@ -1,0 +1,17 @@
+{
+    "manifest": {
+        "Usage": "Používanie",
+        "Usage statistics": "Štatistiky používania"
+    },
+    "root": {
+        "Usage log": "Záznamy používania"
+    },
+    "Models\\Log": {
+        "Time": "Čas",
+        "IP": "Ip",
+        "Route": "Cesta",
+        "Params": "Parametre",
+        "Message": "Správa",
+        "User": "Užívateľ"
+    }
+}

@@ -1,0 +1,9 @@
+namespace: HubletoApp\Community\Invoices
+appType: community
+sidebarGroup: finance
+rootUrlSlug: invoices
+name: Invoices
+icon: fas fa-receipt
+highlight: Invoincing
+author:
+  company: "wai.blue"

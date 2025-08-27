@@ -1,0 +1,44 @@
+{
+    "manifest": {
+        "Contacts": "",
+        "Default customer management and addressbook.": ""
+    },
+    "root": {
+        "Contact Categories": "",
+        "Contact Tags": ""
+    },
+    "Models\\Contact": {
+        "Salutation": "",
+        "Title before": "",
+        "First name": "",
+        "Middle name": "",
+        "Last name": "",
+        "Title after": "",
+        "Customer": "",
+        "Primary Contact": "",
+        "Notes": "",
+        "Date Created": "",
+        "Active": ""
+    },
+    "Models\\Value": {
+        "Contact": "",
+        "Category": "",
+        "Type": "",
+        "Email": "",
+        "Number": "",
+        "URL": "",
+        "Other": "",
+        "Value": ""
+    },
+    "Models\\ContactTag": {
+        "Contact": "",
+        "Tag": ""
+    },
+    "Models\\Category": {
+        "Type": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
+    }
+}

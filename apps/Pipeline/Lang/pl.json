@@ -1,0 +1,28 @@
+{
+    "loader": {
+        "Sales": "Sprzedaż",
+        "Pipeline": "Pipeline"
+    },
+    "controllers.home": {
+        "Sales": "Sprzedaż"
+    },
+    "manifest": {
+        "Pipeline": "Rurociąg",
+        "Free sales pipeline management.": "Bezpłatne zarządzanie rurociągami sprzedaży."
+    },
+    "root": {
+        "Pipelines": "Rurociągi"
+    },
+    "Models\\Pipeline": {
+        "Name": "Nazwa",
+        "Description": "Opis"
+    },
+    "Models\\PipelineStep": {
+        "Name": "Nazwa",
+        "Order": "Zamówienie",
+        "Color": "Kolor",
+        "Probability": "Prawdopodobieństwo",
+        "Pipeline": "Rurociąg",
+        "Set result of a deal to": "Ustaw wynik umowy"
+    }
+}

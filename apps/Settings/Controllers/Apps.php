@@ -1,0 +1,85 @@
+<?php
+
+namespace HubletoApp\Community\Settings\Controllers;
+
+class Apps extends \HubletoMain\Controller
+{
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
+      [ 'url' => 'apps', 'content' => $this->translate('Apps') ],
+    ]);
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+
+    $installApp = $this->getRouter()->urlParamAsString('installApp');
+    $disableApp = $this->getRouter()->urlParamAsString('disableApp');
+    $enableApp = $this->getRouter()->urlParamAsString('enableApp');
+    $findApp = $this->getRouter()->urlParamAsString('findApp');
+
+    $appManager = $this->getAppManager();
+
+    if (!empty($installApp) && !$appManager->isAppInstalled($installApp)) {
+      $appManager->installApp(1, $installApp, [], true);
+      $appManager->installApp(2, $installApp, [], true);
+      $appManager->installApp(3, $installApp, [], true);
+      $this->getRouter()->redirectTo('');
+    }
+
+    if (!empty($disableApp) && $appManager->isAppInstalled($disableApp)) {
+      $appManager->disableApp($disableApp);
+      $this->getRouter()->redirectTo('');
+    }
+
+    if (!empty($enableApp) && $appManager->isAppInstalled($enableApp)) {
+      $appManager->enableApp($enableApp);
+      $this->getRouter()->redirectTo('');
+    }
+
+    $installedApps = array_merge($appManager->getEnabledApps(), $appManager->getDisabledApps());
+    $availableApps = $appManager->getAvailableApps();
+
+    $appsToShow = [];
+    if (empty($findApp)) {
+      foreach ($installedApps as $appNamespace => $app) {
+        $appsToShow[$appNamespace] = [
+          'manifest' => $app->manifest,
+          'instance' => $app,
+            'type' => $app->manifest['appType'],
+        ];
+      }
+    } else {
+      $appsFound = array_filter($availableApps, function ($appManifest, $appNamespace) use ($findApp) {
+        return \str_contains(strtolower($appNamespace), strtolower($findApp));
+      }, ARRAY_FILTER_USE_BOTH);
+
+      foreach ($appsFound as $appNamespace => $appManifest) {
+        if (isset($installedApps[$appNamespace])) {
+          $appsToShow[$appNamespace] = [
+            'manifest' => $installedApps[$appNamespace]->manifest,
+            'instance' => $installedApps[$appNamespace],
+            'type' => $installedApps[$appNamespace]->manifest['appType'],
+          ];
+        } else {
+          $appsToShow[$appNamespace] = [
+            'manifest' => $appManifest,
+            'instance' => null,
+            'type' => $appManifest['appType'],
+          ];
+        }
+      }
+    }
+
+    $this->viewParams['findApp'] = $findApp;
+    $this->viewParams['installedApps'] = $installedApps;
+    $this->viewParams['availableApps'] = $availableApps;
+    $this->viewParams['appsToShow'] = $appsToShow;
+
+    $this->setView('@HubletoApp:Community:Settings/Apps.twig');
+  }
+
+}

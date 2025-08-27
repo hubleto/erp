@@ -1,0 +1,17 @@
+<h1 class="app-main-title flex">
+  {{ translate('Deals') }}
+
+  <div class="flex gap-2 items-center ml-2">
+    <div class="badge badge-green text-nowrap">
+      {{ translate('Open deals') }}: {{ viewParams.result.count }}
+    </div>
+    <div class="badge badge-green text-nowrap">
+      {{ translate('Total value') }}: {{ viewParams.main.locale.formatCurrency(viewParams.result.price ?? '') }}
+    </div>
+  </div>
+</h1>
+
+<app-deals-table-deals
+  string:tag="table-deals"
+  int:record-id="{{ viewParams.recordId }}"
+></app-deals-table-deals>

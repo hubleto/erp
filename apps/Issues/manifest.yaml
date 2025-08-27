@@ -1,0 +1,10 @@
+namespace: HubletoApp\Community\Issues
+appType: community
+sidebarGroup: projects
+rootUrlSlug: issues
+name: Issues
+icon: fas fa-comment
+author:
+  name: "WAI.blue"
+  nick: "wai.blue"
+highlight: Issue management

@@ -1,0 +1,370 @@
+{% set secondSidebar = viewParams.activatedApp.renderSecondSidebar() %}
+
+{% macro appBtn(app, inGroup) %}
+  {% set notificationsCount = 0 %}
+  <div class="flex gap-1">
+    {% if notificationsCount > 0 %}
+      <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
+        <div class="badge badge-small badge-yellow px-1">{{ notificationsCount }}</div>
+      </div>
+    {% endif %}
+    <a
+      type="button"
+      class="
+        btn
+        {% if app.isActivated %} btn-active {% else %}
+        {% if notificationsCount > 0 %} text-yellow-100 {% endif %} {% endif %} flex-10 truncate
+      "
+      href="{{ config.projectUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
+      title="{{ app.manifest.nameTranslated }}"
+    >
+      <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
+      <span class="text">{{ app.manifest.nameTranslated }}</span>
+    </a>
+    {% if app.isActivated and app.hasCustomSettings %}
+      <a
+        class="btn btn-active flex-1"
+        href="{{ config.projectUrl }}/{{ app.manifest.rootUrlSlug }}/settings"
+      >
+        <span class="icon text-xs p-0 m-0"><i class="fas fa-cog"></i></span>
+      </a>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% set logoUrl = config.logoUrl ?? config.assetsUrl ~ "/images/logo-hubleto.png" %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel='shortcut icon' href='{{ logoUrl }}'>
+  <title>{{ config.appTitle ?? user.DEFAULT_COMPANY.name ~ " | Hubleto | Business Application Hub" }}</title>
+
+  <script>
+    window.ConfigEnv = {
+      'rewriteBase': '{{ config.rewriteBase }}',
+      'url': '{{ config.projectUrl }}',
+      'projectUrl': '{{ config.projectUrl }}',
+      'uploadUrl': '{{ config.uploadUrl }}',
+      'idUser': {{ user.id ?? 0 }},
+      'isPremium': {% if viewParams.main.isPremium %} true {% else %} false {% endif %},
+      'language': '{{ user.language ?: "en" }}'
+    }
+  </script>
+
+  <script src='{{ config.assetsUrl }}/jquery-3.5.1.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/main.js'></script>
+  <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/compiled/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
+</head>
+
+<body id="page-top">
+  {% if (viewParams.showOnlyContentHtml) %} {{ contentHtml|raw }} {% else %}
+
+    <div id="app-launcher" onclick="lchr(false);"><div>
+      <div class="app-launcher-header">
+        <input placeholder={{ translate("Search app...") }} onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
+      </div>
+      {% for app in viewParams.main.apps.getEnabledApps() %}
+        <a
+          class='btn app-launcher-app-button'
+          href="{{ config.projectUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
+        >
+          <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
+          <span class="text">{{ app.manifest.nameTranslated }}</span>
+        </a>
+      {% endfor %}
+    </div></div>
+
+    <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+      <span class="sr-only">{{ translate("Open sidebar") }}</span>
+      <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+      </svg>
+    </button>
+
+    <nav id="default-navbar"><div>
+      <div
+        class="fixed left-0 bottom-0 w-48 hidden md:block"
+        style="
+          overflow: hidden;
+          background:url({{ config.assetsUrl }}/images/logo-hubleto-stripe.png);
+          background-position: 0 0;
+          background-size: 20px 20px;
+          height: 20px;
+        "
+      >
+        <img src="{{ config.assetsUrl }}/images/logo-hubleto-symbol.png" style="height:20px">
+      </div>
+      <div class="flex items-center">
+        <div class="flex flex-row justify-around">
+          <a class="flex" href="{{ config.projectUrl }}">
+            <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
+          </a>
+          <button onclick="showSidebar()" class="sm:block md:hidden ml-6">
+            <span class="icon"><i id="menuButton" class="fas fa-bars"></i></span>
+            <span class="icon"><i id="menuButton" class="fas fa-bars"></i></span>
+          </button>
+        </div>
+      </div>
+      <div class="hidden sm:block flex-1 ml-2 max-w-72">
+        <app-search string:endpoint='api/search'></app-search>
+      </div>
+      <div class="hidden md:block flex-1">
+        {{ include('@hubleto-main/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
+      </div>
+      <div class="hidden md:block">
+        <ul class="flex font-sm gap-1">
+          {% if viewParams.availableLanguages|length > 0 %}
+            <li class="mr-2 hidden lg:block">
+              <button class="btn btn-transparent btn-dropdown">
+                <div class="menu">
+                  <div class="list mr-2">
+                    {% for langSymbol, lang in viewParams.availableLanguages %}
+                      <a
+                        href="?set-language={{ langSymbol }}"
+                        class="btn btn-white btn-no-border btn-list-item"
+                      >
+                        <span class="icon"><img src="{{ config.assetsUrl }}/images/flags/{{ lang.flagImage }}" style="max-height:1em;max-width:1em;" /></span>
+                        <span class="text">{{ lang.name }}</span>
+                      </a>
+                    {% endfor %}
+                  </div>
+                </div>
+                <span class="text">
+                  {{ (user.language ?: 'en')|upper }}
+                </span>
+                <span class="icon">
+                  <img src="{{ config.assetsUrl }}/images/flags/{{ (user.language ?: 'en')|lower }}.jpg" style="max-height:1em;max-width:1em;" />
+                </span>
+              </button>
+            </li>
+          {% endif %}
+          {% if viewParams.contextHelpUrl %}
+            <li class="mr-2 hidden lg:block">
+              <a
+                class="btn btn-transparent"
+                href="https://help.hubleto.com/v0/{{ viewParams.contextHelpUrl }}"
+                target="_blank"
+              >
+                <span class="icon text-blue-500"><i class="fas fa-life-ring"></i></span>
+                <span class="text">{{ translate('Help') }}</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if viewParams.main.apps.isAppInstalled('HubletoApp\\Community\\Notifications') %}
+            <li class="mr-2 hidden md:block">
+              {% if notificationsCount > 0 %}
+                <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
+                  <div class="badge badge-small badge-yellow px-1">{{ notificationsCount }}</div>
+                </div>
+              {% endif %}
+              <a
+                class="btn btn-transparent"
+                href="{{ config.projectUrl }}/notifications"
+              >
+                <span class="icon text-blue-500"><i class="fas fa-bell"></i></span>
+              </a>
+            </li>
+          {% endif %}
+          {% if viewParams.main.apps.isAppInstalled('HubletoApp\\Community\\Cloud') %}
+            <li class="mr-2 hidden lg:block">
+              {% if viewParams.main.isPremium %}
+                <a class="btn btn-transparent" href="{{ config.projectUrl }}/cloud">
+                  <span class="icon text-primary"><i class="fas fa-medal"></i></span>
+                  <span class="text">{{ translate('Premium') }}</span>
+                </a>
+              {% else %}
+                <a class="btn btn-transparent" href="{{ config.projectUrl }}/cloud">
+                  <span class="icon text-primary"><i class="fas fa-cloud"></i></span>
+                  <span class="text">{{ translate('Personal') }}</span>
+                </a>
+              {% endif %}
+            </li>
+          {% endif %}
+          <li class="mr-2 hidden lg:block">
+            <button id="theme-toggle-btn" class="btn btn-transparent" onclick="toggleTheme();">
+              <span class="icon"><i class="fas fa-sun"></i></span>
+            </a>
+          </li>
+          <li>
+            <button class="btn btn-transparent btn-dropdown mr-2">
+              <span class="text">{{ user.first_name }} {{ user.last_name }}</span>
+              <span class="icon"><i class='fas fa-user-tie'></i></span>
+              <div class="menu relative">
+                <div class="list bg-primary" style="position:absolute;right:7em;top:0.3em;width:20em;">
+                  <div class="text-center text-white text-lg p-2">
+                    {{ user.first_name }} {{ user.last_name }}<br/>
+                    {{ user.email }}<br/>
+                    {{ user.DEFAULT_COMPANY.name }}
+                  </div>
+                  <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/settings/my-account">
+                    <span class="icon"><i class='fas fa-user-tie'></i></span>
+                    <span class="text">{{ translate('Manage your user account') }}</span>
+                  </a>
+                  {% if viewParams.main.apps.isAppInstalled('HubletoApp\\Community\\Cloud') %}
+                    <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/cloud">
+                      <span class="icon"><i class='fas fa-cloud'></i></span>
+                      <span class="text">{{ translate('Manage cloud account') }}</span>
+                    </a>
+                  {% endif %}
+                  <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/?sign-out">
+                    <span class="icon"><i class='fas fa-sign-out-alt'></i></span>
+                    <span class="text">{{ translate('Sign out') }}</span>
+                  </a>
+                </div>
+              </div>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div></nav>
+
+    <aside id="default-sidebar">
+      <nav style="margin-bottom:1.5em;overflow-y:auto">
+        {% for app in viewParams.main.apps.getEnabledApps() %}
+          {% if viewParams.main.apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
+            {{ app.dangerouslyInjectDesktopHtmlContent('beforeSidebar')|raw }}
+          {% endif %}
+        {% endfor %}
+
+        <div class="bg-slate-100 p-1 w-full">
+          {{ user.DEFAULT_COMPANY.name }}
+        </div>
+
+        <a class="btn {% if viewParams.main.route == '' %} btn-active {% endif %}" href="{{ config.projectUrl }}">
+          <span class="icon"><i class="fas fa-home"></i></span>
+          <span class="text">{{ translate('Home') }}</span>
+        </a>
+
+        {% for sidebarGroup, sidebarGroupData in viewParams.sidebarGroups %}
+          {% set appBtns = [] %}
+          {% set hasActivatedApp = false %}
+          {% for app in viewParams.appsInSidebar %}
+            {% if app.manifest.sidebarGroup == sidebarGroup %}
+              {% set appBtns = appBtns|merge([_self.appBtn(app, true)]) %}
+              {% if app.isActivated %}
+                {% set hasActivatedApp = true %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          {% if appBtns|length == 0 %}
+          {% elseif appBtns|length == 1 %}
+            <div>
+              {{ appBtns[0]|raw }}
+            </div>
+          {% else %}
+            <div class="sidebar-group {% if hasActivatedApp %} activated {% endif %}">
+              <button
+                class="btn flex-10 truncate"
+                id="sg_{{ sidebarGroup }}_btn"
+                onclick="
+                  $('.sidebar-group').removeClass('activated');
+                  $(this).closest('.sidebar-group').addClass('activated');
+                "
+              >
+                <span class="icon"><i class="{{ sidebarGroupData.icon }}"></i></span>
+                <span class="text">{{ sidebarGroupData.title }}</span>
+              </button>
+              <div
+                id="sg_{{ sidebarGroup }}_btns"
+                class="sidebar-group-btns"
+              >
+                <div class="inner">{{ appBtns|join('')|raw }}</div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+        {% set i = 0 %}
+        {% for app in viewParams.appsInSidebar %}
+          {% if app.manifest.sidebarGroup is empty %} {{ _self.appBtn(app, false) }} {% endif %}
+          {% set i = i + 1 %}
+        {% endfor %}
+
+        <div class="sidebar-group">
+          <button type="button" class="mt-2 btn flex-10 truncate" onclick="lchr(true);">
+            <span class="icon"><i class="fas fa-magnifying-glass"></i></span>
+            <span class="text">{{ translate("Search app") }}</span>
+          </button>
+        </div>
+
+      </nav>
+      {% if secondSidebar != '' %} <div>{{ secondSidebar|raw }}</div> {% endif %}
+    </aside>
+
+    <div
+      id="app-main-content"
+      class="{% if secondSidebar != '' %} sidebar-two-levels {% endif %}"
+    >
+      {{ contentHtml|raw }}
+    </div>
+
+    <div id="app-dialogs"></div>
+
+  {% endif %}
+
+  {% for app in viewParams.main.apps.getEnabledApps() %}
+    {% if viewParams.main.apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
+      {{ app.dangerouslyInjectDesktopHtmlContent('footer')|raw }}
+    {% endif %}
+  {% endfor %}
+
+  <script>
+    var sidebarState = false;
+
+    function lchr(show) {
+      if (show) {
+        $('#app-launcher').addClass('visible');
+        $('#app-launcher > div .app-launcher-header input').focus();
+      } else {
+        $('#app-launcher').removeClass('visible');
+      }
+    }
+    function smis(e, q, b) {
+      if (q == '') b.slideDown(100); else {
+        let r = new RegExp(q, "i");
+        b.each(function() { if ($(this).find('.text').text().match(r)) $(this).slideDown(100); else $(this).slideUp(100); });
+      }
+      if (e.keyCode == 27) { lchr(false); return; }
+      if (e.keyCode == 13) { b.filter(':visible').get(0).click(); return; }
+    }
+
+    function showSidebar() {
+      if (sidebarState == false) {
+        $("#default-sidebar").css("translate", 0,0)
+        sidebarState = true;
+      } else {
+        $("#default-sidebar").css("translate", "-100%",0)
+        sidebarState = false;
+      }
+    }
+
+    function applyTheme() {
+      if (localStorage.theme == "dark") {
+        $('*').addClass('dark');
+        $('#theme-toggle-btn').find('.icon i').removeClass('fa-sun').addClass('fa-moon');
+      } else {
+        $('*').removeClass('dark');
+        $('#theme-toggle-btn').find('.icon i').removeClass('fa-moon').addClass('fa-sun');
+      }
+    }
+
+    function toggleTheme() {
+      localStorage.theme = (localStorage.theme == "dark" ? "light" : "dark");
+      applyTheme();
+    }
+
+    applyTheme();
+
+  </script>
+
+</body>
+
+</html>
+<!-- dbg:2 -->

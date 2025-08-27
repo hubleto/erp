@@ -1,0 +1,36 @@
+{
+    "manifest": {
+        "Dashboards": "Panely",
+        "Free dashboards app": "Panelová aplikace zdarma"
+    },
+    "root": {
+        "Dashboards": "Panely"
+    },
+    "Controllers\\Dashboards": {
+        "Dashboards": "Panely",
+        "Manage dashboards": "Spravovat panely"
+    },
+    "Models\\Dashboard": {
+        "Owner": "Vlastník",
+        "Title": "Název",
+        "Slug": "Slug",
+        "Color": "Barva",
+        "Is default": "Je výchozí",
+        "Add dashboard": "Přidat panel"
+    },
+    "Models\\Panel": {
+        "Dashboard": "Panel",
+        "Board": "Deska",
+        "Title": "Název",
+        "Configuration": "Konfigurace",
+        "-- Select board to be displayed in panel --": "Vyberte desku, ktoré se zobrazí v panelu",
+        "Add panel": "Přidat panel"
+    },
+    "Controllers\\Settings": {
+        "Dashboards": "Panely",
+        "Settings": "Nastavení"
+    },
+    "Components\\FormDashboard": {
+        "Panels": "Panely"
+    }
+}

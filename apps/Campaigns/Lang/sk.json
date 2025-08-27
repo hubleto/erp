@@ -1,0 +1,29 @@
+{
+    "manifest": {
+        "Campaigns": "Kampane",
+        "Management of marketing campaigns": "Správa marketingových kampaní"
+    },
+    "Models\\Campaign": {
+        "Name": "Meno",
+        "UTM source": "UTM source",
+        "UTM campaign": "UTM campaign",
+        "UTM term": "UTM term",
+        "UTM content": "UTM content",
+        "Target audience": "Cieľová skupina",
+        "Goal": "Cieľ",
+        "Notes": "Poznámky",
+        "Mail body (HTML)": "Emailová správa (HTML)",
+        "Color": "Farba",
+        "Mail template": "Šablóna emailovej správy",
+        "Manager": "Manažér",
+        "Created": "Vytvorená"
+    },
+    "Models\\CampaignContact": {
+        "Campaign": "",
+        "Contact": ""
+    },
+    "Models\\CampaignTask": {
+        "Campaign": "",
+        "Task": ""
+    }
+}

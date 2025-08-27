@@ -1,0 +1,12 @@
+<h1 class="app-main-title">{{ translate('Mail') }} > {{ translate('Mailboxes') }}</h1>
+
+<div class="list">
+  {% for m in viewParams.mailboxes %}
+    <a
+      class="btn btn-list-item btn-transparent"
+      href="mail/mails/{{ m.id }}"
+    >
+      <span class="text">{{ m.ACCOUNT.name }}: {{ m.name }}</span>
+    </a>
+  {% endfor %}
+</div>

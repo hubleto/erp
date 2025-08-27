@@ -1,0 +1,125 @@
+{
+    "manifest": {
+        "Leads": "Potenciální obchody",
+        "Management of leads, cold contacts. Convert leads to deals.": "Správa potenciálních obchodů, chladných kontaktů. Převést potenciální obchody k obchodům."
+    },
+    "root": {
+        "Lead Tags": "Značky potenciálních obchodů",
+        "Lead Lost Reasons": "Důvody pro ztrátu potenciálních obchodů",
+        "Active leads": "Aktivní potenciální obchody",
+        "Archived leads": "Archivované potenciální obchody",
+        "Lead Levels": "Úrovně potenciálních obchodů"
+    },
+    "Models\\LeadActivity": {
+        "Subject": "Předmět",
+        "Activity type": "Typ aktivity",
+        "Start date": "Datum zahájení",
+        "Start time": "Čas zahájení",
+        "End date": "Datum ukončení",
+        "End time": "Čas ukončení",
+        "All day": "Celý den",
+        "Completed": "Dokončeno",
+        "Created by": "Vytvořeno",
+        "Lead": "Potenciální ochod",
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
+    },
+    "Models\\Lead": {
+        "Lead Identifier": "Identifikátor potenciálniho obchodu",
+        "Title": "Titul",
+        "Customer": "Zákazník",
+        "Contact": "Kontakt",
+        "Price": "Cena",
+        "Currency": "Měna",
+        "Score": "Skóre",
+        "Expected close date": "Očekávané datum uzavření",
+        "Owner": "Majitel",
+        "Created": "Vytvořené",
+        "Status": "Status",
+        "Reason for Lost": "Důvod pro ztracení",
+        "Notes": "Poznámky",
+        "Source channel": "Zdrojový kanál",
+        "Archived": "Archivovaný",
+        "Identifier": "Identifikátor",
+        "Specific subject (if any)": "Název",
+        "Campaign": "Kampaň",
+        "Email": "Email",
+        "Phone number": "Telefoní číslo",
+        "Level": "Úroveň",
+        "Manager": "Manažér",
+        "Team": "Tím",
+        "Add lead": "Přidat potenciální obchod",
+        "Add Lead": "Přidat potenciální obchod"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Důvod ztracení"
+    },
+    "Models\\LeadHistory": {
+        "Change Date": "Datum změny",
+        "Lead": "Potenciální obchod",
+        "Description": "Popis"
+    },
+    "Models\\LeadTag": {
+        "Lead": "potenciální obchod",
+        "Tag": "Štítek"
+    },
+    "Models\\LeadProduct": {
+        "Lead": "potenciální obchod",
+        "Product": "Produkt",
+        "Unit Price": "Jednotková cena",
+        "Amount": "Množství",
+        "Vat": "DPH",
+        "Discount": "Sleva",
+        "Sum": "Součet"
+    },
+    "Models\\LeadDocument": {
+        "Lead": "potenciální obchod",
+        "Document": "Dokument"
+    },
+    "Models\\Tag": {
+        "Name": "Jméno",
+        "Color": "Barva"
+    },
+    "Models\\Level": {
+        "Name": "Jméno",
+        "Color": "Barva"
+    },
+    "Controllers\\Boards\\LeadWarnings": {
+        "Open leads without future plan": "Otevřít potenciální obchod bez budoucího plánu",
+        "No warnings for leads.": "Žádné upozornění pro potenciální obchod"
+    },
+    "Controllers\\Leads": {
+        "Leads": "Potenciální obchody"
+    },
+    "Components\\FormLead": {
+        "Log completed activity": "Zoznamenat dokončenou aktivitu",
+        "Type recent activity here": "Zde zadejte nedávnou aktivitu",
+        "Enter": "Enter",
+        "Schedule activity": "Naplánovat aktivitu",
+        "Shift+Enter": "Shift+Enter",
+        "Most recent activities": "Nejnovější aktivity",
+        "Not completed yet": "Zatím nedokončeno",
+        "Lead": "Potenciální obchod",
+        "Go to deal": "Přejít na obchod",
+        "Calendar": "Kalendář",
+        "Documents": "Dokumenty",
+        "Local documents": "Lokální dokumenty",
+        "History": "Historie",
+        "Show leads": "Ukázat potenciální obchody",
+        "Add document": "Přidat dokument",
+        "Link": "Odkaz",
+        "Document": "Dokument",
+        "Description": "Popis",
+        "Change Date": "Datum změny"
+    },
+    "Components\\FormActivity": {
+        "Start": "Začátek",
+        "End": "Konec",
+        "Lead": "Potenciální obchod",
+        "Contact": "Kontakt"
+    },
+    "Controllers\\LostReasons": {
+        "Settings": "Nastavení",
+        "Lead Lost Reasons": "Důvody pro ztrátu potenciálních obchodů"
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "manifest": {
+        "Developer": "Vývojař",
+        "Developer tools to automate your Hubleto development": "Nástroje pro vývojáře pro automatizaci vývoje Hubleto"
+    },
+    "root": {
+        "Developer tools": "Nástroje pro vývojáře"
+    },
+    "Controllers\\FormDesigner": {
+        "Developer": "Vývojař",
+        "Form designer": "Návrhář formulářů",
+        "Template": "Šablona",
+        "One column": "Jeden sloupec",
+        "Two columns": "Dva sloupce",
+        "Three columns": "Tři sloupce",
+        "Rendered Typescript code": "Renderovaný Typescript kód",
+        "Copy & paste following code into your ": "Zkopírujte a vložte následující kód do svého ",
+        " file and then:": " souboru a poté",
+        "1. Adapt the code to render inputs, nested tables or other components based on your requirements.": "1. Upravte kód pro vykreslování vstupů, vnořených tabulek nebo jiných komponent na základě vašich požadavků.",
+        "2. Run ": "2. Spustěte ",
+        " in your terminal.": " ve vašem terminálu",
+        "Check ": "Navštivte ",
+        " for more details.": " pro více informácií."
+    },
+    "Controllers\\Dashboard": {
+        "Developer": "Vývojař",
+        "DB Updates": "Aktualize databázy",
+        "Form designer": "Návrhář formulářů"
+    },
+    "Controllers\\DbUpdates": {
+        "Developer": "Vývojař",
+        "DB Updater": "Aktualizátor databáze",
+        "Database updater": "Aktualizátor databáze",
+        "UID": "UID",
+        "Type": "Typ",
+        "Description": "Popis",
+        "SQL": "SQL",
+        "Run this update": "Spustit tuto aktualizaci",
+        "Run the updates now!": "Spustiť aktualizace teď!"
+    }
+}

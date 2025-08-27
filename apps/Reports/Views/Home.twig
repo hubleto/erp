@@ -1,0 +1,13 @@
+<h1>{{ translate('Reports') }}</h1>
+
+<div class="list">
+  {% for key, report in viewParams.reports %}
+    <a
+      class="btn btn-list-item btn-transparent"
+      href="reports/{{ report.urlSlug }}"
+    >
+      <span class="icon text-xl"><i class="fas fa-chart-pie"></i></span>
+      <span class="text">{{ report.name }}</span>
+    </a>
+  {% endfor %}
+</div>

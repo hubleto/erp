@@ -1,0 +1,110 @@
+<?php
+
+namespace HubletoApp\Community\Customers;
+
+class Loader extends \Hubleto\Framework\App
+{
+  public bool $hasCustomSettings = true;
+
+  /**
+   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   *
+   * @return void
+   * 
+   */
+  public function init(): void
+  {
+    parent::init();
+
+    $this->getRouter()->httpGet([
+      '/^customers(\/(?<recordId>\d+))?\/?$/' => Controllers\Customers::class,
+      '/^customers\/add\/?$/' => ['controller' => Controllers\Customers::class, 'vars' => ['recordId' => -1]],
+      '/^customers\/settings\/?$/' => Controllers\Settings::class,
+      '/^customers\/activities\/?$/' => Controllers\Activity::class,
+      '/^settings\/customer-tags\/?$/' => Controllers\Tags::class,
+
+      '/^customers\/api\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
+      // '/^customers\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
+      '/^customers\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
+    ]);
+
+    $this->addSearchSwitch('c', 'customers');
+
+    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    $calendarManager->addCalendar($this, 'customers', $this->configAsString('calendarColor'), Calendar::class);
+
+    /** @var \HubletoApp\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp->addSetting($this, [
+      'title' => $this->translate('Customer Tags'),
+      'icon' => 'fas fa-tags',
+      'url' => 'settings/customer-tags',
+    ]);
+  }
+
+  public function installTables(int $round): void
+  {
+
+    if ($round == 1) {
+      $mCustomer = $this->getModel(Models\Customer::class);
+      $mCustomerDocument = $this->getModel(Models\CustomerDocument::class);
+      $mCustomerTag = $this->getModel(Models\Tag::class);
+      $mCrossCustomerTag = $this->getModel(Models\CustomerTag::class);
+
+      $mCustomer->dropTableIfExists()->install();
+      $mCustomerTag->dropTableIfExists()->install();
+      $mCrossCustomerTag->dropTableIfExists()->install();
+      $mCustomerDocument->dropTableIfExists()->install();
+
+      $mCustomerTag->record->recordCreate([ 'name' => "VIP", 'color' => '#D33115' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "Partner", 'color' => '#4caf50' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => "Public", 'color' => '#2196f3' ]);
+    }
+
+    if ($round == 2) {
+      $mCustomerActivity = $this->getModel(\HubletoApp\Community\Customers\Models\CustomerActivity::class);
+      $mCustomerActivity->dropTableIfExists()->install();
+    }
+  }
+
+  /**
+   * Implements fulltext search functionality for customers
+   *
+   * @param array $expressions List of expressions to be searched and glued with logical 'or'.
+   * 
+   * @return array
+   * 
+   */
+  public function search(array $expressions): array
+  {
+    $mCustomer = $this->getModel(Models\Customer::class);
+    $qCustomers = $mCustomer->record->prepareReadQuery();
+    
+    foreach ($expressions as $e) {
+      $qCustomers = $qCustomers->where(function($q) use ($e) {
+        $q->orWhere('customers.name', 'like', '%' . $e . '%');
+        $q->orWhere('customers.city', 'like', '%' . $e . '%');
+        $q->orWhere('customers.vat_id', 'like', '%' . $e . '%');
+        $q->orWhere('customers.tax_id', 'like', '%' . $e . '%');
+        $q->orWhere('customers.customer_id', 'like', '%' . $e . '%');
+      });
+    }
+
+    $customers = $qCustomers->get()->toArray();
+
+    $results = [];
+
+    foreach ($customers as $customer) {
+      $results[] = [
+        "id" => $customer['id'],
+        "label" => $customer['name'],
+        "url" => 'customers/' . $customer['id'],
+        "description" => $customer['customer_id'] . ' ' . $customer['city'],
+      ];
+    }
+
+    return $results;
+  }
+
+}

@@ -1,0 +1,84 @@
+{
+    "manifest": {
+        "Cloud": "Cloud",
+        "Management of cloud Hubleto account.": "Manažment cloud účtu Hubleto."
+    },
+    "Models\\Log": {
+        "Date": "Dátum",
+        "Active users": "Aktívni používatelia",
+        "Paid apps": "Platené aplikácie",
+        "Premium expected": "Premium účet vyžadovaný",
+        "Log datetime": "Denník DateTime"
+    },
+    "Models\\Credit": {
+        "Recalculated": "Dátum",
+        "Credit": "Kredit"
+    },
+    "Models\\Payment": {
+        "Charged": "Dátum a čas platby",
+        "Discount": "Zľava",
+        "Full amount": "Plná suma",
+        "Discounted amount": "Zľavnená suma",
+        "Type": "Typ",
+        "Details": "Detaily",
+        "Has invoice": "Má faktúru",
+        "Billing account": "Účtovací profil",
+        "UUID": "Uuid"
+    },
+    "Models\\Discount": {
+        "Year": "Rok",
+        "Month": "Mesiac",
+        "Discount": "Zľava",
+        "Notes": "Poznámky",
+        "Billing account": "Účtovací profil"
+    },
+    "Controllers\\Dashboard": {
+        "You are upgraded to Premium": "Máte aktivované Premium",
+        "Free trial expires in": "Skúšobná prevádzka skončí o",
+        "days": "dní",
+        "Configure your payment method.": "Nastavte si možnosti platby.",
+        "Automatic subscription renewal is active": "Automatické obnovenie predplatného je aktívne",
+        "Access to your Premium account will be automaticaly renewed next month.": "Prístup do Vášho Premium účtu bude automaticky predĺžený o mesiac.",
+        "Your Premium benefits": "Vaše výhody Premium",
+        "unlimited users": "neobmedzení používatelia",
+        "more apps & features": "viac aplikácií",
+        "premium support": "prémiová podpora",
+        "Add new users or install new apps": "Pridať používateľov a aplikácie",
+        "Configure payment with card": "Nastaviť platbu kartou",
+        "Charge credit via bank transfer": "Dobiť krediť bankovým prevodom",
+        "Show payments and download invoices": "Zobraziť platby",
+        "Manage billing accounts": "Spravovať účtovacie profily",
+        "Usage info": "Informácie o používaní",
+        "Month": "Mesiac",
+        "Active users": "Aktívni používatelia",
+        "Paid apps": "Platené aplikácie",
+        "Show details": "Zobraziť podrobnosti",
+        "Price for this month": "Cena za tento mesiac",
+        "Terms of use and privacy policy accepted": "Podmienky používania akceptované",
+        "Subscription active until": "Predplatné aktívne do",
+        "Premium account activated": "Premium účet aktivovaný",
+        "Free trial until": "Skúšobná doba do",
+        "Account UID": "Identifikátor účtu",
+        "Variable symbol for payments": "Variabilný symbol pre platby",
+        "Price is calculated based on maximum number of active users or paid apps during this month.": "Cena je požítaná na základe maximálneho počtu aktívnych používateľov alebo platených aplikácií v mesiaci.",
+        "Deactivate subscription renewal": "Deaktivovať automatické predĺženie predplatného"
+    },
+    "root": {
+        "Free trial expires in": "Skúšobná prevádzka skončí o",
+        "days": "dní"
+    },
+    "Models\\BillingAccount": {
+        "Name": "Pomenovať",
+        "Phone": "Telefonovať",
+        "E-mail": "E-mail",
+        "Tax ID": "Daňový ID",
+        "VAT ID": "ID DPH",
+        "Street, line 1": "Ulica, riadok 1",
+        "Street, line 2": "Ulica, riadok 2",
+        "ZIP": "Zips",
+        "City": "Mesto",
+        "Country": "Krajina",
+        "Is active": "Je aktívny",
+        "Created": "Vytvorený"
+    }
+}

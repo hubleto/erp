@@ -1,0 +1,33 @@
+<div class="flex">
+  <h1 class="app-main-title">{{ translate('Mail') }} > {{ translate('Settings') }}</h1>
+  {% if viewParams.settingsSaved %}
+    <div class="badge badge-info text-sm ml-4">Settings saved.</div>
+  {% endif %}
+</div>
+
+<script>
+  function saveSettings() {
+    $("#settings-form").submit();
+  }
+</script>
+
+<div class="card mt-10 w-1/2 m-auto">
+  <form id="settings-form" action="" method="POST">
+    <input type="hidden" name="settingsChanged" value="1">
+    <table class="table-default">
+      <tbody>
+        <tr>
+          <td>SMTP host</td>
+          <td>
+            <input
+              type="text" name="smtpHost"
+              class="hubleto component input"
+              value="{{ viewParams.app.configAsString('smtpHost') }}"
+              onchange="saveSettings();"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

@@ -1,0 +1,55 @@
+{
+    "manifest": {
+        "Products": "Produkte",
+        "Free product portfolio managment.": "Kostenloses Produktportfoliomanagement."
+    },
+    "root": {
+        "Products": "Produkte",
+        "Groups": "Gruppen",
+        "Suppliers": "Lieferanten"
+    },
+    "Models\\Product": {
+        "Title": "Titel",
+        "Product Group": "Produktgruppe",
+        "Product Type": "Produkttyp",
+        "Supplier": "Anbieter",
+        "On sale": "Zum Verkauf",
+        "Image": "Bild",
+        "Description": "Beschreibung",
+        "Number of items in package": "Anzahl der Artikel im Paket",
+        "Single unit price": "Einheitspreis",
+        "Unit": "Einheit",
+        "Margin": "Marge",
+        "Vat": "Mehrwertsteuer",
+        "Single unit order possible": "Einheitseinheiten -Bestellung möglich",
+        "Packaging": "Verpackung",
+        "Sale ended": "Verkauf endete",
+        "Show price to customer": "Preis für den Kunden zeigen",
+        "Set price after reweight?": "Preis nach dem Wiedergewicht festlegen?",
+        "Needs reordering?": "Braucht neu zu ordnen?",
+        "Storage rules": "Speicherregeln",
+        "Table": "Tisch",
+        "Add product": "Produkt hinzufügen"
+    },
+    "Controllers\\Products": {
+        "Products": "Produkte"
+    },
+    "Models\\Group": {
+        "Title": "Titel"
+    },
+    "Models\\Supplier": {
+        "Title": "Titel",
+        "Address": "Adresse",
+        "City": "Stadt",
+        "Postal code": "Postleitzahl",
+        "Country": "Land",
+        "Contact person": "Ansprechpartner",
+        "Phone number": "Telefonnummer",
+        "Supplier email": "Lieferanten -E -Mail",
+        "Order email": "E -Mail bestellen",
+        "Tax ID": "Steuer -ID",
+        "Company ID": "Firmen -ID",
+        "VAT ID": "Mehrwertsteuer id",
+        "Payment account number": "Zahlungskontonummer"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "manifest": {
+        "Help": "Pomoc",
+        "Help and user guide for Hubleto.": "Nápověda a uživatelská příručka pro HUBLETO."
+    },
+    "Controllers\\Help": {
+        "Help": "Pomoc",
+        "Need help using Hubleto?": "Potřebujete pomoc při používaní Hubleto?",
+        "Found a bug?": "Našli jste chybu?",
+        "Need help with development?": "Potřebujete pomoc při vývoji?",
+        "Just looking around?": "Jen se rozhlížíte?"
+    }
+}

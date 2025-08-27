@@ -1,0 +1,9 @@
+{
+    "manifest": {
+        "Developer": "Entwickler",
+        "Developer tools to automate your Hubleto development": "Entwicklerwerkzeuge zur Automatisierung deiner Hubleto-Entwicklung"
+    },
+    "root": {
+        "Developer tools": "Entwicklerwerkzeuge"
+    }
+}

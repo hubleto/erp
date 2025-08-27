@@ -1,0 +1,23 @@
+<style>
+  canvas {
+    width: 100%;
+    height: 350px;
+  }
+</style>
+
+<h1>Reports &raquo; {{ viewParams.report.name }}</h1>
+<x-app-form-report
+  string:report-url-slug="{{ viewParams.report.urlSlug }}"
+  config="{{ viewParams.report.getConfig()|json_encode }}"
+  {# string:model="{{ viewParams.report.modelClass }}" #}
+  string:name="{{ viewParams.report.name }}"
+  bool:readonly="false"
+></x-app-form-report>
+
+<app-report-builder
+  string:report-url-slug="{{ viewParams.report.urlSlug }}"
+  config="{{ viewParams.report.getConfig()|json_encode }}"
+  {# string:model="{{ viewParams.report.modelClass }}" #}
+  string:name="{{ viewParams.report.name }}"
+  bool:readonly="false"
+></app-report-builder>

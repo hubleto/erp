@@ -1,0 +1,24 @@
+{
+    "manifest": {
+        "Campaigns": "Kampaně",
+        "Management of marketing campaigns": "Řízení marketingových kampaní"
+    },
+    "Controllers\\Campaigns": {
+        "Campaigns": "Kampaně"
+    },
+    "Models\\Campaign": {
+        "Name": "Jméno",
+        "Target audience": "Cílová skupina",
+        "Goal": "Cíl",
+        "Notes": "Poznámky",
+        "Color": "Barva",
+        "Manager": "Manažér",
+        "Created": "Vytvořeno",
+        "Add Campaign": "Přidat kampaň"
+    },
+    "Components\\FormCampaign": {
+        "Leads": "Potencionální obchody",
+        "Campaign": "Kampaň",
+        "First create the campaign, then you will be prompted to create leads.": "Nejprve vytvořte kampaň a poté budete vyzváni k vytvoření potenciálních obchodu."
+    }
+}

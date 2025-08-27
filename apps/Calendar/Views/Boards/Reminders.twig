@@ -1,0 +1,64 @@
+{% macro reminders(reminders, viewParams) %}
+  <div class="list">
+    {% for reminder in reminders %}
+      <a
+        href="calendar?eventSource={{ reminder.source }}&eventId={{ reminder.id }}"
+        class="btn btn-list-item btn-transparent flex-col items-start md:flex-row"
+        target="_blank"
+      >
+        <span class="text">
+          <b>{{ reminder.title }}</b>
+        </span>
+        <span class="text">
+          <div class="badge badge-small {% if reminder['id_owner'] == viewParams.main.auth.getUserId() %} badge-blue {% endif %}">@{{ reminder.owner }}</div>
+          <div class="badge badge-small badge-lime">{{ reminder.details }}</div>
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+
+{% if viewParams.remindersToday|length > 0 %}
+  <b>Today</b><br/>
+  {{ _self.reminders(viewParams.remindersToday, viewParams) }}
+{% else %}
+  <div class="alert alert-info">
+    {{ translate("Let's have a break. You have nothing to do for today.") }} 🎉<br/>
+  </div>
+{% endif %}
+
+<div class="flex gap-2 mt-2 items-center flex-wrap">
+  {% if viewParams.remindersTomorrow|length > 0 %}
+    <button
+      class="btn btn-transparent"
+      onclick="$('#reminders-tomorrow').slideToggle();"
+    >
+      <span class="icon"><i class="fas fa-ellipsis"></i></span>
+      <span class="text">{{ viewParams.remindersTomorrow|length }} {{ translate('reminders tomorrow') }}</span>
+    </button>
+  {% endif %}
+  {% if viewParams.remindersLater|length > 0 %}
+    <button
+      class="btn btn-transparent"
+      onclick="$('#reminders-later').slideToggle();"
+    >
+      <span class="icon"><i class="fas fa-ellipsis"></i></span>
+      <span class="text">{{ viewParams.remindersLater|length }} {{ translate('reminders later') }}</span>
+    </button>
+  {% endif %}
+</div>
+
+{% if viewParams.remindersTomorrow|length > 0 %}
+  <div id="reminders-tomorrow" style="display:none" class="mt-2">
+    <b>{{translate("Tomorrow")}}</b><br/>
+    {{ _self.reminders(viewParams.remindersTomorrow, viewParams) }}
+  </div>
+{% endif %}
+
+{% if viewParams.remindersLater|length > 0 %}
+  <div id="reminders-later" style="display:none" class="mt-2">
+    <b>{{translate("Later")}}</b><br/>
+    {{ _self.reminders(viewParams.remindersLater, viewParams) }}
+  </div>
+{% endif %}

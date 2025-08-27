@@ -1,0 +1,232 @@
+{
+    "models.user": {
+        "First name": "Vorname",
+        "Middle name": "Mittelname",
+        "Last name": "Nachname",
+        "Email": "E-Mail",
+        "Language": "Sprache",
+        "Active profile": "Aktives Profil",
+        "Login": "Login",
+        "Password": "Passwort",
+        "Active": "Konto ist inaktiv",
+        "Time of last login": "Zeit letzter Anmeldung",
+        "Last login IP": "IP-Adresse letzter Anmeldung",
+        "Time of last access": "Zeit von letztem Zugriff",
+        "Last access IP": "IP-Adresse von letztem Zugriff"
+    },
+    "models.country": {
+        "Country Name": "Land",
+        "Code": "Code"
+    },
+    "models.profile": {
+        "Company": "Firma"
+    },
+    "models.activityType": {
+        "Type Name": "Typ",
+        "Color": "Farbe",
+        "Shown in Calendar": "Im Kalender anzeigen",
+        "Icon": "Symbol"
+    },
+    "models.currency": {
+        "Currency Name": "Währung",
+        "Currency Code": "Code"
+    },
+    "models.pipeline": {
+        "Name": "Titel",
+        "Description": "Beschreibung"
+    },
+    "models.pipelineStep": {
+        "Name": "Titel",
+        "Order": "Reihenfolge",
+        "Company": "Farbe"
+    },
+    "models.tag": {
+        "Name": "Titel",
+        "Color": "Farbe"
+    },
+    "models.setting": {
+        "Key": "Parameter",
+        "Value": "Wert",
+        "Only for user": "Nur für Nutzer"
+    },
+    "models.invoiceProfile": {
+        "Name": "Titel",
+        "Phone": "Telefon",
+        "E-mail": "E-Mail:",
+        "WWW": "WWW",
+        "Company ID": "Firmenkennung",
+        "Tax ID": "Steuer-IdNr.",
+        "VAT ID": "USt-IdNr.",
+        "Street, line 1": "Straße, erste Zeile",
+        "Street, line 2": "Straße, zweite Zeile",
+        "ZIP": "PLZ",
+        "City": "Stadt",
+        "Country": "Land",
+        "Bank name": "Bankname",
+        "Account number": "Kontonummer",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SWIFT",
+        "Numbering pattern": "Nummerierungsmuster"
+    },
+    "models.userRole": {
+        "Role": "Rolle",
+        "Grant all permissions": "Alle Berechtigungen erteilen"
+    },
+    "models.rolePermission": {
+        "Permission": "Berechtigung",
+        "Role": "Rolle"
+    },
+    "models.permission": {
+        "Permission": "Berechtigung"
+    },
+    "controllers.dashboard": {
+        "Settings": "Einstellungen",
+        "Users": "Benutzer",
+        "User Roles": "Benutzerrollen",
+        "Profiles": "Profile",
+        "Permissions": "Berechtigungen",
+        "Tags": "Markierungen",
+        "Activity Types": "Aktivitätstypen",
+        "Contact Types": "Kontakttypen",
+        "Countries": "Länder",
+        "Currencies": "Währungen",
+        "Lead Statuses": "Lead Zustände",
+        "Deal Statuses": "Deal Zustände",
+        "Pipelines": "Pipeline",
+        "Invoice profiles": "Abrechnungsprofile"
+    },
+    "controllers.userRoles": {
+        "Settings": "Einstellungen",
+        "User Roles": "Benutzerrollen"
+    },
+    "controllers.countries": {
+        "Settings": "Einstellungen",
+        "Countries": "Länder"
+    },
+    "loader": {
+        "Settings": "Einstellungen"
+    },
+    "models.activitytype": {
+        "Type Name": "Typ Name",
+        "Color": "Farbe",
+        "Shown in Calendar": "Im Kalender anzeigen",
+        "Icon": "Symbol"
+    },
+    "models.pipelinestep": {
+        "Name": "Name",
+        "Order": "Reihenfolge",
+        "Company": "Unternehmen"
+    },
+    "controllers.users": {
+        "Settings": "Einstellungen",
+        "Users": "Nutzer"
+    },
+    "manifest": {
+        "Settings": "Einstellungen",
+        "...": "...",
+        "Settings and control panel for your Hubleto.": "Einstellungen und Bedienfeld für Ihr Hubleto.",
+        "Settings and tools": "Einstellungen und Werkzeuge"
+    },
+    "root": {
+        "Users": "Benutzer",
+        "User roles": "",
+        "Your companies": "Ihre Unternehmen",
+        "General settings": "Allgemeine Einstellungen",
+        "Permissions": "Berechtigungen",
+        "Tags": "Markierungen",
+        "Activity types": "Aktivitätstypen",
+        "Contact types": "Kontakttypen",
+        "Countries": "Länder",
+        "Currencies": "Währungen",
+        "Pipelines": "Pipelines",
+        "Invoice profiles": "Rechnungsprofile",
+        "Platform config": "Plattformkonfiguration",
+        "Roles": "Rollen",
+        "Permissions list": "Berechtigungsliste",
+        "Role permissions": "Rollenberechtigungen",
+        "Sidebar": "Seitenleiste",
+        "Teams": "Teams"
+    },
+    "Models\\UserRole": {
+        "Role": "Rolle",
+        "Grant all permissions (admin role)": "Alle Berechtigungen gewähren (Adminrolle)",
+        "Grant all permissions (administrator role)": "Alle Berechtigungen gewähren (Administratorrolle)",
+        "Description": "Beschreibung",
+        "Is default role (cannot be modified)": "Ist Standardrolle (kann nicht geändert werden)"
+    },
+    "Models\\UserHasRole": {
+        "User": "Benutzer",
+        "Role": "Rolle"
+    },
+    "Controllers\\Dashboard": {
+        "Settings": "Einstellungen",
+        "Manage installed apps": "Installierte Anwendungen verwalten",
+        "Open": "Offen",
+        "Most common settings": "Die häufigsten Einstellungen",
+        "Manage users": "Benutzer verwalten",
+        "Manage apps": "Apps verwalten",
+        "All settings": "Alle Einstellungen",
+        "Change theme": ""
+    },
+    "Models\\RolePermission": {
+        "Permission": "Erlaubnis",
+        "Role": "Rolle"
+    },
+    "Models\\User": {
+        "First name": "Vorname",
+        "Last name": "Nachname",
+        "Nick": "Nick",
+        "Email": "E-Mail",
+        "Language": "Sprache",
+        "Default company": "Standardfirma",
+        "Roles": "Rollen",
+        "Teams": "Teams",
+        "Apps": "Anwendungen"
+    },
+    "Models\\Country": {
+        "Country": "Land",
+        "Code": "Code"
+    },
+    "Models\\Company": {
+        "Company": "Unternehmen",
+        "Tax ID": "Steuer -ID",
+        "VAT ID": "Mehrwertsteuer id",
+        "Street, line 1": "Straße, Zeile 1",
+        "Street, line 2": "Straße, Zeile 2",
+        "ZIP": "REISSVERSCHLUSS",
+        "City": "Stadt",
+        "Country": "Land"
+    },
+    "Models\\ActivityType": {
+        "Type": "Typ",
+        "Color": "Farbe",
+        "Show in calendar": "Im Kalender zeigen",
+        "Icon": "Symbol"
+    },
+    "Models\\Currency": {
+        "Currency": "Währung",
+        "Code": "Code",
+        "Symbol": "Symbol"
+    },
+    "Models\\Setting": {
+        "Key": "Schlüssel",
+        "Value": "Wert",
+        "Only for user": "Nur für den Benutzer"
+    },
+    "Controllers\\Users": {
+        "Settings": "Einstellungen",
+        "Users": "Benutzer"
+    },
+    "Controllers\\Apps": {
+        "Settings": "Einstellungen",
+        "Apps": "Apps",
+        "Open": "Offen",
+        "Disable": "Deaktivieren"
+    },
+    "Models\\Team": {
+        "Team name": "Teamname",
+        "Team color": "Teamfarbe",
+        "Description": "Beschreibung",
+        "Manager": "Manager"
+    }
+}

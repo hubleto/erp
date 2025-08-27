@@ -1,0 +1,10 @@
+{
+    "manifest": {
+        "Worksheets": "Vykazovanie",
+        "Worksheet log": "Vykazovanie odpracovaných hodín"
+    },
+    "root": {
+        "Worksheets": "Vykazovanie",
+        "Activity types": "Typy aktivít"
+    }
+}

@@ -1,0 +1,18 @@
+<h1 class='app-main-title'>{{ translate('Settings') }} > {{ translate('Permissions') }}</h1>
+
+{# <table class="table-default dense">
+  <thead>
+    <tr><th>Permission name</th></tr>
+  </thead>
+  <tbody>
+    {% for p in viewParams.permissions %}
+      <tr><td>{{ p.permission }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table> #}
+
+<app-table
+  string:model="HubletoApp/Community/Settings/Models/Permission"
+  bool:show-header="true"
+  bool:show-fulltext-search="true"
+></app-table>

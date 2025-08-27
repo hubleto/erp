@@ -1,0 +1,34 @@
+{% set main = viewParams.main %}
+{% set dashboard = viewParams.defaultDashboard %}
+{% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? config.assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
+
+<h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.first_name ?? user.email }}</h1>
+
+{% if main.apps.isAppInstalled('HubletoApp\\Community\\Usage') %}
+  {% set recentlyUsed = main.load('HubletoApp\\Community\\Usage\\Logger').getRecentlyUsedAppNamespaces() %}
+  {% if recentlyUsed|length > 0 %}
+    <div class="mb-2">
+      <div><small>Recently used apps</small></div>
+      <div>
+        {% for appNamespace in recentlyUsed %}
+          {% set manifest = main.apps.getApp(appNamespace).manifest %}
+          <a href="{{ manifest.rootUrlSlug }}" class="btn btn-square btn-large btn-transparent">
+            <span class="icon"><i class="{{ manifest.icon }}"></i></span>
+            <span class="text">{{ manifest.nameTranslated }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+
+<div class="mt-2">
+  <app-dashboards-dashboard
+    int:id-dashboard='{{ dashboard.id }}'
+    json:panels='{{ dashboard.PANELS|json_encode|raw }}'>
+  </app-dashboards-dashboard>
+</div>
+
+<div class="mx-auto pt-20">
+  <img src="{{ welcomeSplashImageUrl }}" class="max-w-90 m-auto">
+</div>

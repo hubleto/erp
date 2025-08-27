@@ -1,0 +1,53 @@
+{
+    "manifest": {
+        "Orders": "Objednávky",
+        "Free order managment.": "Správa objednávek zdarma."
+    },
+    "root": {
+        "Order states": "Stavy objednávek"
+    },
+    "Models\\History": {
+        "Order": "Objednávka",
+        "Short Description": "Krátký popis",
+        "Long Description": "Dlouhý popis",
+        "Date Time": "Datum a čas"
+    },
+    "Models\\Order": {
+        "Order number": "Číslo objednávky",
+        "Customer": "Zákazník",
+        "Title": "Název",
+        "State": "Stav",
+        "Price": "Cena",
+        "Currency": "Měna",
+        "Order date": "Datum objednávky",
+        "Required delivery date": "Požadovaný termín dodání",
+        "Shipping information": "Informace o dopravě",
+        "Notes": "Poznámky",
+        "Add order": "Přidat objednávku"
+    },
+    "Models\\OrderProduct": {
+        "Order": "Objednávka",
+        "Title": "Název",
+        "Product": "Produkt",
+        "Unit price": "Jednotková cena",
+        "Amount": "Množství",
+        "Discount": "Sleva",
+        "Vat": "DPH",
+        "Add product": "Přidat produkt"
+    },
+    "Models\\State": {
+        "Title": "Názov",
+        "Code": "Kód",
+        "Color": "Barva"
+    },
+    "Controllers\\Orders": {
+        "Orders": "Objednávky"
+    },
+    "Components\\FormOrder": {
+        "Order": "Objednávka"
+    },
+    "Controllers\\States": {
+        "Orders": "Objednávky",
+        "States": "Stavy"
+    }
+}

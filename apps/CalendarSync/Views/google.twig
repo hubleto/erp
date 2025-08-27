@@ -1,0 +1,15 @@
+<h1>{{ translate('Calendar Sources') }}</h1><br/>
+<h2>Google Calendar</h2><br/>
+
+<div class="alert alert-warning">
+  When using Google Calendar integration, also make sure to have $config['google-api-key'] defined in your ConfigEnv.php.<br/>
+  Visit <b><a href="https://developer.hubleto.com/apps/community/calendar-sync" target="_blank">https://developer.hubleto.com/apps/community/calendar-sync</a></b> for details on how to get and configure your Google Calendar API key.
+</div>
+
+<app-table-calendar-sync-sources
+  json:custom-endpoint-params='{"type": "google"}'
+  json:description='{"ui": { "title": "Google Calendar sources", "addButtonText": "Add Google Calendar source" }}'
+  json:form-props='{"descriptionSource": "props", "description": {"inputs": {"type": {"readonly": true}}, "defaultValues": {"type": "google"}}}'
+  descriptionSource="both"
+></app-table-calendar-sync-sources>
+<!-- string:model="HubletoApp/Community/CalendarSync/Models/Source" -->

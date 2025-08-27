@@ -1,0 +1,13 @@
+<h1 class="app-main-title">{{ translate('Mail') }}</h1>
+
+<div class="flex gap-2 w-full">
+  <div>
+    <div class="badge badge-extra-large ml-0">{{ viewParams.mailbox.name }}</div>
+    <div class="mt-4">
+      <app-mail-table-mails
+        int:id-mailbox="{{ viewParams.mailbox.id }}"
+        string:mailbox-name="{{ viewParams.mailbox.name }}"
+      ></app-mail-table-mails>
+    </div>
+  </div>
+</div>

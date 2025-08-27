@@ -1,0 +1,19 @@
+<h1 class="app-main-title">Worksheets</h1>
+
+<div class="w-full flex gap-2 flex-col md:flex-row">
+  <div class="grow">
+    <a class='btn btn-large btn-square btn-transparent' href='worksheets/activities'>
+      <span class='icon'><i class='fas fa-table'></i></span>
+      <span class='text'>Activities</span>
+    </a>
+  </div>
+  <div class="card grow">
+    <div class="card-body">
+      <app-chart
+        string:type="line"
+        bool:async="true"
+        string:endpoint="worksheets/api/daily-activity-chart"
+      ></app-chart>
+    </div>
+  </div>
+</div>

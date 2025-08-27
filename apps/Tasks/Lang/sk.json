@@ -1,0 +1,27 @@
+{
+    "manifest": {
+        "Tasks": "Úlohy",
+        "Task management app": "Správa úloh"
+    },
+    "Models\\Task": {
+        "Identifier": "Identifikátor",
+        "Title": "Názov",
+        "Description": "Popis",
+        "Developer": "Developer",
+        "Tester": "Tester",
+        "Priority": "Priorita",
+        "Estimation": "Odhad náročnosti",
+        "Duration": "Trvanie",
+        "Start": "Štart",
+        "Deadline": "Deadline",
+        "Pipeline": "Pipeline",
+        "Pipeline step": "Pipeline stav",
+        "Is milestone": "Míľnik",
+        "Closed": "Uzavretá",
+        "Notes": "Poznámky",
+        "Created": "Vytvorená",
+        "External Model": "Externý model",
+        "External ID": "Externé ID",
+        "Worked": "Odpracované"
+    }
+}

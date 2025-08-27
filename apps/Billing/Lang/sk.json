@@ -1,0 +1,14 @@
+{
+    "loader": {
+        "Billing": "Účtovanie",
+        "Billing Accounts": "Účty"
+    },
+    "controllers.billingAccounts": {
+        "Customers": "Zákazníci",
+        "Billing Accounts": "Účty"
+    },
+    "controllers.billingaccounts": {
+        "Customers": "",
+        "Billing Accounts": ""
+    }
+}

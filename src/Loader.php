@@ -11,7 +11,6 @@ class Loader extends \Hubleto\Framework\Loader
    * Class construtor.
    *
    * @param array $config
-   * @param int $mode
    * 
    */
   public function __construct(array $config = [])
@@ -31,7 +30,7 @@ class Loader extends \Hubleto\Framework\Loader
       
     ]);
 
-    // Finish
+    // run hook
     $this->getHookManager()->run('core:bootstrap-end', [$this]);
 
   }
@@ -61,6 +60,7 @@ class Loader extends \Hubleto\Framework\Loader
         '/^forgot-password$/' => Controllers\ForgotPassword::class,
       ]);
 
+      // run hook
       $this->getHookManager()->run('core:init-end', [$this]);
     } catch (\Exception $e) {
       echo "HUBLETO INIT failed: [".get_class($e)."] ".$e->getMessage() . "\n";

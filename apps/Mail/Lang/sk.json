@@ -1,0 +1,31 @@
+{
+    "root": {
+        "Active Mail": "",
+        "Templates": "Šablóny",
+        "Drafts": "Rozpísané",
+        "Accounts": "Účty"
+    },
+    "manifest": {
+        "Mail": "Email",
+        "Email client": "Emailový klient"
+    },
+    "Models\\Mail": {
+        "Mail Id": "ID správy",
+        "Mail Number": "Číslo správy",
+        "Mailbox": "Mailbox",
+        "Priority": "Priorita",
+        "Created": "Vytvorená",
+        "Sent": "Odoslaná",
+        "Read": "Prečítaná",
+        "Subject": "Predmet",
+        "From": "Odosielateľ",
+        "To": "Príjemca",
+        "Cc": "CC",
+        "Bcc": "BCC",
+        "Body (Text)": "Správa (Text)",
+        "Body (HTML)": "Správa (HTML)",
+        "Color": "Farba",
+        "Draft": "Rozpísaná",
+        "Template": "Šablóna"
+    }
+}

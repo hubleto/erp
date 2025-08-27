@@ -1,0 +1,113 @@
+{
+    "manifest": {
+        "Cloud": "Cloud",
+        "Management of cloud Hubleto account.": "Správa účtu Cloud Hubleto."
+    },
+    "Models\\Log": {
+        "Log datetime": "Zaznemenat datum a čas",
+        "Active users": "Aktivní uživatelé",
+        "Paid apps": "Placené aplikace",
+        "Premium expected": "Očekává se premium"
+    },
+    "Models\\Payment": {
+        "Charged": "Poplatek",
+        "Discount": "Sleva",
+        "Full amount": "Plná částka",
+        "Discounted amount": "Zlevněná částka",
+        "Type": "Typ",
+        "Details": "Podrobnosti",
+        "Has invoice": "Má fakturu",
+        "Billing account": "Fakturační účet",
+        "UUID": "Uuid"
+    },
+    "Models\\Credit": {
+        "Recalculated": "Přepočítán",
+        "Credit": "Kredit"
+    },
+    "root": {
+        "Free trial expires in": "Zkušební doba vyprší za",
+        "days": "dny"
+    },
+    "Models\\Discount": {
+        "Year": "Rok",
+        "Month": "Měsíc",
+        "Discount": "Sleva",
+        "Notes": "Poznámky",
+        "Billing account": "Fakturační účet"
+    },
+    "Controllers\\Dashboard": {
+        "You are upgraded to Premium": "Byli jste upgradováni na Premium",
+        "Free trial expires in": "Zkušební doba vyprší za",
+        "days": "dnů",
+        "Configure your payment method.": "Nakonfigurujte si platební metodu.",
+        "Automatic subscription renewal is active": "Automatické obnovení předplatného je aktivní",
+        "Access to your Premium account will be automaticaly renewed next month.": "Přístup k vašemu prémiovému účtu bude automaticky obnoven příští měsíc.",
+        "Your Premium benefits": "Výhody vašeho prémiového účtu",
+        "unlimited users": "neomezený počet uživatelů",
+        "more apps & features": "více aplikací a funkcí",
+        "premium support": "prémiová podpora",
+        "Add new users or install new apps": "Přidat nové užívatele nebo instalovat nové aplikace",
+        "Configure payment with card": "Konfigurovat platbu s kartou",
+        "Charge credit via bank transfer": "Nabít kredit bankovním převodem",
+        "Show payments and download invoices": "Zobrazit platby a stáhnout faktury",
+        "Manage billing accounts": "Správovat fakturační účty",
+        "Usage info": "Informace o použití",
+        "Month": "Měsíc",
+        "Active users": "Aktivní uživatelé",
+        "Paid apps": "Zaplacené aplikace",
+        "Show details": "Ukázat detaily",
+        "Price for this month": "Cena za tento měsíc",
+        "Terms of use and privacy policy accepted": "Podmínky použití a zásady ochrany osobních údajů přijaty",
+        "Subscription active until": "Předplatné aktivní do",
+        "Premium account activated": "Prémium účet aktivován",
+        "Free trial until": "Skušební doba do",
+        "Account UID": "UID účtu",
+        "Variable symbol for payments": "Variabilní symbol pro platby",
+        "Price is calculated based on maximum number of active users or paid apps during this month.": "Cena se vypočítává na základě maximálního počtu aktivních uživatelů nebo placených aplikací během daného měsíce.",
+        "Deactivate subscription renewal": "Zrušit obnovení předplatného",
+        "Your collaboration space": "Váš prostor pro spolupráci",
+        "welcome to Hubleto cloud.": "vítejte ve Hubleto Cloud",
+        "We are happy you decided to use Hubleto.": "Jsme rádi, že jste se rozhodli využít Hubleto",
+        "Before you start, you should first read, understand and accept our": "Než začnete, měli byste si nejprve přečíst, porozumět a přijmout naše",
+        "Terms of use": "Podmínky použití",
+        "and": "a",
+        "Privacy policy": "Zásady ochrany osobních údajů",
+        "Therefore, we kindly ask you to go through these documents and appoint your consent": "Proto vás laskavě žádáme o prostudování těchto dokumentů a udělení souhlasu",
+        "by ticking the checkbox below.": "zaškrtnutím níže uvedeného políčka.",
+        "I have read, undestrood and agree to the": "Přečetl(a) jsem si, pochopil(a) a souhlasím s",
+        "of Hubleto cloud": "Hubleto Cloud",
+        "Continue to the dashboard": "Pokračovat na hlavný panel",
+        "Automatic subscription renewal is deactivated": "Automatická obnova předplatného je deaktivována",
+        "Access to your Premium account will be blocked next month.": "Přistup do vašeho Premium účtu bude zablokovám příšti měsíc",
+        "Activate subscription renewal again": "Znovu aktivovat obnovu předplatného"
+    },
+    "Models\\BillingAccount": {
+        "Name": "Jméno",
+        "Phone": "Telofonní číslo",
+        "E-mail": "E-mail",
+        "Tax ID": "IČO",
+        "VAT ID": "DIČ",
+        "Street, line 1": "Ulice řádek 1",
+        "Street, line 2": "Ulice řádek 2",
+        "ZIP": "PSČ",
+        "City": "Město",
+        "Country": "Krajina",
+        "Is active": "Je aktivní",
+        "Created": "Vytvořeno"
+    },
+    "Controllers\\Log": {
+        "Usage log": "Záznamy použítí",
+        "Datetime": "Datum a čas",
+        "Active users": "Aktivní uživatelé",
+        "Paid apps": "Zaplacené aplikace"
+    },
+    "Controllers\\PaymentsAndInvoices": {
+        "Payments and invoices": "Platby a faktury",
+        "Charged": "Účtováno",
+        "UUID": "UUID",
+        "Type": "Typ",
+        "Amount": "Cena",
+        "Details": "Detaily",
+        "Invoice": "Faktura"
+    }
+}

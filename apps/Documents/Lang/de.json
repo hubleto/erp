@@ -1,0 +1,33 @@
+{
+    "loader": {
+        "Documents": "Dokumente"
+    },
+    "manifest": {
+        "Documents": "Unterlagen",
+        "Free document management.": "Kostenlose Dokumentverwaltung."
+    },
+    "root": {
+        "Browse": "Durchsuchen",
+        "List": "Liste"
+    },
+    "Models\\Document": {
+        "Uid": "Uid",
+        "Folder": "Ordner",
+        "Document name": "Dokumentname",
+        "File": "Datei",
+        "File Link": "Dateilink",
+        "Origin Link": "Ursprungslink",
+        "Add Document": "Dokument hinzufügen"
+    },
+    "Controllers\\Table": {
+        "Documents": "Unterlagen"
+    },
+    "Models\\Folder": {
+        "Uid": "Uid",
+        "Parent folder": "Elternordner",
+        "Folder name": "Ordner Name"
+    },
+    "Controllers\\Browse": {
+        "Documents": "Dokumente"
+    }
+}

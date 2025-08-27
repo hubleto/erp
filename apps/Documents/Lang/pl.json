@@ -1,0 +1,21 @@
+{
+    "loader": {
+        "Documents": "Dokumenty"
+    },
+    "manifest": {
+        "Documents": "Dokumenty",
+        "Free document management.": "Darmowe zarządzanie dokumentami."
+    },
+    "root": {
+        "Browse": "Przeglądać",
+        "List": "Lista"
+    },
+    "Models\\Document": {
+        "Uid": "UID",
+        "Folder": "Falcówka",
+        "Document name": "Nazwa dokumentu",
+        "File": "Plik",
+        "File Link": "Link pliku",
+        "Origin Link": "Link pochodzenia"
+    }
+}

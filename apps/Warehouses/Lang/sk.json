@@ -1,0 +1,10 @@
+{
+    "manifest": {
+        "Warehouses": "Sklady",
+        "Management of individual warehouses or storage facilities.": "Správa skladov"
+    },
+    "root": {
+        "Warehouses": "Sklady",
+        "Locations": "Lokality"
+    }
+}

@@ -26,11 +26,11 @@ class PermissionsManager extends \Hubleto\Framework\PermissionsManager
 
   public function loadAdministratorRoles(): array
   {
-    if (!$this->getPdo()->isConnected) {
+    if (!$this->getDb()->isConnected) {
       return [];
     }
     $mUserRole = $this->getService(UserRole::class);
-    $administratorRoles = Helper::pluck('id', $this->getPdo()->fetchAll("select id from `{$mUserRole->table}` where grant_all = 1"));
+    $administratorRoles = Helper::pluck('id', $this->getDb()->fetchAll("select id from `{$mUserRole->table}` where grant_all = 1"));
     return $administratorRoles;
   }
 
@@ -57,10 +57,10 @@ class PermissionsManager extends \Hubleto\Framework\PermissionsManager
       $permissions[$idUserRole] = array_unique($permissions[$idUserRole]);
     }
 
-    if ($this->getPdo()->isConnected) {
+    if ($this->getDb()->isConnected) {
       $mUserRole = $this->getService(UserRole::class);
 
-      $idCommonUserRoles = Helper::pluck('id', $this->getPdo()->fetchAll("select id from `{$mUserRole->table}` where grant_all = 0"));
+      $idCommonUserRoles = Helper::pluck('id', $this->getDb()->fetchAll("select id from `{$mUserRole->table}` where grant_all = 0"));
 
       foreach ($idCommonUserRoles as $idCommonRole) {
         $idCommonRole = (int) $idCommonRole;

@@ -1,0 +1,113 @@
+{
+    "models.user": {
+        "First name": "Prénom",
+        "Middle name": "Nom intermédiaire",
+        "Last name": "Nom",
+        "Email": "Courriel",
+        "Language": "Langue",
+        "Active profile": "Profil actif",
+        "Login": "Connexion",
+        "Password": "Mot de passe",
+        "Active": "Le compte est actif",
+        "Time of last login": "Temps de la dernière connexion",
+        "Last login IP": "Adresse IP de la dernière connexion",
+        "Time of last access": "Temps du dernier accès",
+        "Last access IP": "Adresse IP du dernier accès"
+    },
+    "models.country": {
+        "Country Name": "Pays",
+        "Code": "Code"
+    },
+    "models.profile": {
+        "Company": "Entreprise"
+    },
+    "models.activityType": {
+        "Type Name": "Type",
+        "Color": "Couleur",
+        "Shown in Calendar": "Montrer dans le calendrier",
+        "Icon": "Icône"
+    },
+    "models.currency": {
+        "Currency Name": "Nom de devise",
+        "Currency Code": "Code de devise"
+    },
+    "models.pipeline": {
+        "Name": "Nom",
+        "Description": "Description"
+    },
+    "models.pipelineStep": {
+        "Name": "Nom",
+        "Order": "Ordre",
+        "Company": "Entreprise"
+    },
+    "models.tag": {
+        "Name": "Nom",
+        "Color": "Couleur"
+    },
+    "models.setting": {
+        "Key": "Paramètre",
+        "Value": "Valeur",
+        "Only for user": "Seulement pour l'utilisateur"
+    },
+    "models.invoiceProfile": {
+        "Name": "Nom",
+        "Phone": "Téléphone",
+        "E-mail": "Courriel",
+        "WWW": "WWW",
+        "Company ID": "Numéro d'identification de l'entreprise",
+        "Tax ID": "Numéro d'identification fiscale",
+        "VAT ID": "Numéro de TVA",
+        "Street, line 1": "Rue, ligne no. 1",
+        "Street, line 2": "Rue, ligne no. 2",
+        "ZIP": "Code postal",
+        "City": "Ville",
+        "Country": "Pays",
+        "Bank name": "Nom de la banque",
+        "Account number": "Numéro de compte",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SWIFT",
+        "Numbering pattern": "Modèle de numérotation"
+    },
+    "models.userRole": {
+        "Role": "Rôle",
+        "Grant all permissions": "Accorder toutes les autorisations (administrateur)"
+    },
+    "models.rolePermission": {
+        "Permission": "Autorisation",
+        "Role": "Rôle"
+    },
+    "models.permission": {
+        "Permission": "Autorisation"
+    },
+    "controllers.dashboard": {
+        "Settings": "Paramètres",
+        "Users": "Utilisateurs",
+        "User Roles": "Rôles des utilisateurs",
+        "Profiles": "Profils",
+        "Permissions": "Autorisations",
+        "Tags": "Onglets",
+        "Activity Types": "Types d'activités",
+        "Contact Types": "Types de contacts",
+        "Countries": "Pays",
+        "Currencies": "Devises",
+        "Lead Statuses": "États de clients potentiels",
+        "Deal Statuses": "États de accords de vente",
+        "Pipelines": "Pipelines",
+        "Invoice profiles": "Profils de facturation"
+    },
+    "controllers.userRoles": {
+        "Settings": "Paramètres",
+        "User Roles": "Rôles des utilisateurs"
+    },
+    "controllers.countries": {
+        "Settings": "Paramètres",
+        "Countries": "Pays"
+    },
+    "loader": {
+        "Settings": "Paramètres"
+    },
+    "controllers.users": {
+        "Settings": "",
+        "Users": ""
+    }
+}

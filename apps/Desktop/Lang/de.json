@@ -1,0 +1,24 @@
+{
+    "Controllers\\Home": {
+        "Welcome": "Willkommen"
+    },
+    "Controllers\\Desktop": {
+        "CRM": "CRM",
+        "Tasks": "Aufgaben",
+        "Documents": "Dokumente",
+        "Marketing": "Marketing",
+        "Sales": "Sales",
+        "Communication": "Kommunikation",
+        "Projects": "Projekte",
+        "Supply chain": "Lieferkette",
+        "Helpdesk": "Helpdesk",
+        "Events": "Ereignisse",
+        "E-Commerce": "E-Commerce",
+        "Website": "Webseite",
+        "Finance": "Finanzen",
+        "Reporting": "Berichterstattung",
+        "Maintenance": "Wartung",
+        "Help": "Hilfe",
+        "Custom": "Benutzerdefiniert"
+    }
+}

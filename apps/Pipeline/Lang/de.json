@@ -1,0 +1,33 @@
+{
+    "controllers.home": {
+        "Sales": "Vertrieb"
+    },
+    "loader": {
+        "Sales": "Vertrieb"
+    },
+    "manifest": {
+        "Pipeline": "Pipeline",
+        "Free sales pipeline management.": "Kostenloses Verkaufspipelinemanagement."
+    },
+    "root": {
+        "Pipelines": "Pipelines"
+    },
+    "Models\\Pipeline": {
+        "Name": "Name",
+        "Description": "Beschreibung",
+        "Type": "Typ"
+    },
+    "Models\\PipelineStep": {
+        "Name": "Name",
+        "Order": "Befehl",
+        "Color": "Farbe",
+        "Probability": "Wahrscheinlichkeit",
+        "Pipeline": "Pipeline",
+        "Set result of a deal to": "Setzen Sie das Ergebnis eines Deals an"
+    },
+    "Controllers\\Home": {
+        "Pipeline": "Pipeline",
+        "Manage pipelines": "Pipelines verwalten",
+        "Add deal": "Deal hinzufügen"
+    }
+}

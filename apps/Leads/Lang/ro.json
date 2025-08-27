@@ -1,0 +1,72 @@
+{
+    "manifest": {
+        "Leads": "",
+        "Management of leads, cold contacts. Convert leads to deals.": ""
+    },
+    "root": {
+        "Lead Tags": "",
+        "Lead Lost Reasons": "",
+        "Active leads": "",
+        "Archived leads": ""
+    },
+    "Models\\LeadActivity": {
+        "Subject": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Meeting minutes (link)": "",
+        "Created by": "",
+        "Lead": "",
+        "Contact": ""
+    },
+    "Models\\Lead": {
+        "Lead Identifier": "",
+        "Title": "",
+        "Customer": "",
+        "Contact": "",
+        "Price": "",
+        "Currency": "",
+        "Score": "",
+        "Expected close date": "",
+        "Owner": "",
+        "Created": "",
+        "Status": "",
+        "Reason for Lost": "",
+        "Notes": "",
+        "Source channel": "",
+        "Archived": ""
+    },
+    "Models\\LostReason": {
+        "Lost Reason": ""
+    },
+    "Models\\LeadHistory": {
+        "Change Date": "",
+        "Lead": "",
+        "Description": ""
+    },
+    "Models\\LeadTag": {
+        "Lead": "",
+        "Tag": ""
+    },
+    "Models\\LeadProduct": {
+        "Lead": "",
+        "Product": "",
+        "Unit Price": "",
+        "Amount": "",
+        "Vat": "",
+        "Discount": "",
+        "Sum": ""
+    },
+    "Models\\LeadDocument": {
+        "Lead": "",
+        "Document": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "manifest": {
+        "Inventory": "Inventár",
+        "This is a crucial table that links products to their specific locations and quantities.": "",
+        "Management of inventory items in warehouses.": ""
+    },
+    "root": {
+        "Warehouses": "Sklady",
+        "Transactions": "Pohyby"
+    }
+}

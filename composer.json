@@ -16,6 +16,7 @@
     "autoload": {
         "psr-4": {
             "HubletoMain\\": "src",
+            "HubletoApp\\Community\\": "apps",
             "HubletoMain\\Cli\\": "cli",
             "HubletoMain\\Hook\\": "hooks",
             "HubletoMain\\Cron\\": "crons",

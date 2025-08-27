@@ -1,0 +1,18 @@
+<?php declare(strict_types=1);
+
+namespace HubletoApp\Community\Invoices\Controllers\Api;
+
+use HubletoApp\Community\Invoices\Models\Invoice;
+
+class GeneratePdf extends \HubletoMain\Controllers\ApiController
+{
+  public function renderJson(): ?array
+  {
+    $idInvoice = $this->getRouter()->urlParamAsInteger('idInvoice');
+    $mInvoice = $this->getService(Invoice::class);
+    $idDocument = $mInvoice->generatePdf($idInvoice);
+    return [
+      'idDocument' => $idDocument
+    ];
+  }
+}

@@ -10,7 +10,7 @@ class Renderer extends \Hubleto\Framework\Renderer
     parent::init();
 
     $this->twigLoader->addPath(__DIR__ . '/../views', 'hubleto-main');
-    $this->twigLoader->addPath(__DIR__ . '/../../apps/src', 'app');
+    $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
 
     if (is_dir($this->getEnv()->projectFolder . '/src/views')) {
       $this->twigLoader->addPath($this->getEnv()->projectFolder . '/src/views', 'project');

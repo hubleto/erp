@@ -1,0 +1,16 @@
+namespace: HubletoApp\Community\Calendar
+appType: community
+sidebarGroup: calendar
+rootUrlSlug: calendar
+name: Calendar
+icon: fas fa-calendar-days
+author:
+  name: "Dusan Daniska"
+  nick: "shoki"
+  company: "wai.blue"
+  github: "https://github.com/dusan-daniska"
+  linkedin: "https://www.linkedin.com/in/dusan-daniska"
+highlight: Free calendar app.
+tags:
+  - calendar
+  - event

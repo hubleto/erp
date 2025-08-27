@@ -1,0 +1,101 @@
+{
+    "manifest": {
+        "Customers": "Zákazníci",
+        "Free customer management and addressbook.": "Adresář a správa zákazníků zdarma."
+    },
+    "root": {
+        "Customer Tags": "Značky zákazníků"
+    },
+    "Models\\CustomerActivity": {
+        "Subject": "Předmět",
+        "Activity type": "Typ aktivity",
+        "Start date": "Datum zahájení",
+        "Start time": "Čas zahájení",
+        "End date": "Datum ukončení",
+        "End time": "Čas ukončení",
+        "All day": "Celý den",
+        "Completed": "Dokončeno",
+        "Created by": "Vytvořeno",
+        "Customer": "Zákazník",
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)"
+    },
+    "Models\\Customer": {
+        "Name": "Jméno",
+        "Street Line 1": "Ulice řádek 1",
+        "Street Line 2": "Ulice řádek 2",
+        "Region": "Kraj",
+        "City": "Město",
+        "Postal Code": "Poštovní kód",
+        "Country": "Země",
+        "VAT ID": "DIČ",
+        "Customer ID": "IČO",
+        "Tax ID": "IČ DIČ",
+        "Notes": "Poznámky",
+        "Date Created": "Datum vytvoření",
+        "Active": "Aktivní",
+        "Owner": "Majitel",
+        "Manager": "Manažér",
+        "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku (online úložiště) se souvisejícími dokumenty",
+        "Add Customer": "Přidat zákazníka",
+        "Shared folder (online document storage)": "Sdílená složka (online úložiště)",
+        "Tags": "Značky",
+        "Archive": "Archív",
+        "Archived": "Archivováno"
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "Zákazník",
+        "Document": "Dokument"
+    },
+    "Models\\CustomerTag": {
+        "Customer": "Zákazník",
+        "Tag": "Štítek"
+    },
+    "Models\\Tag": {
+        "Name": "Jméno",
+        "Color": "Barva",
+        "Customer Tags": "Značky zákazníků",
+        "Add Customer Tag": "Přidat značku zákazníka"
+    },
+    "Controllers\\Customers": {
+        "Customers": "Zákazníci"
+    },
+    "Components\\FormCustomer": {
+        "Customer": "Zákazník",
+        "Type recent activity here": "Zde napište nedávnou aktivitu",
+        "Log completed activity": "Zaznamenat dokončenou aktivitu",
+        "Enter": "Zadajte",
+        "Schedule activity": "Naplánovat aktivitu",
+        "Shift+Enter": "Shift+Enter",
+        "Most recent activities": "Nedávné aktivity",
+        "Show on map": "Ukázat na mapě",
+        "Contacts": "Kontakty",
+        "Add contact": "Přidat kontakt",
+        "First name": "Křestní jméno",
+        "Last name": "Příjmení",
+        "Email": "Email",
+        "Phone number": "Telefonní číslo",
+        "Primary Contact": "Hlavní kontakt",
+        "Tags": "Značky",
+        "Calendar": "Kalendář",
+        "Documents": "Dokumenty",
+        "Local documents": "Lokální dokumenty",
+        "Not completed yet": "Nedokončeno",
+        "Document": "Dokument",
+        "Add document": "Přidat dokument",
+        "Link": "Odkaz"
+    },
+    "Components\\CustomerFormActivity": {
+        "Start": "Začátek",
+        "Customer": "Zákazník",
+        "End": "Konec",
+        "Contact": "Kontakt"
+    },
+    "Components\\TableContacts": {
+        "Primary": "Hlavní"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Nastavení",
+        "Customer Tags": "Značky zákazníků"
+    }
+}

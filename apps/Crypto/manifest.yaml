@@ -1,0 +1,10 @@
+namespace: HubletoApp\Community\Crypto
+appType: community
+sidebarGroup: maintenance
+rootUrlSlug: crypto
+name: Crypto
+icon: fas fa-key
+author:
+  name: "WAI.blue"
+  company: "wai.blue"
+highlight: Manage security keys and other security settings.

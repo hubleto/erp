@@ -1,0 +1,33 @@
+{
+    "manifest": {
+        "Products": "",
+        "Free product portfolio managment.": ""
+    },
+    "root": {
+        "Products": "",
+        "Groups": "",
+        "Suppliers": ""
+    },
+    "Models\\Product": {
+        "Title": "",
+        "Product Group": "",
+        "Product Type": "",
+        "Supplier": "",
+        "On sale": "",
+        "Image": "",
+        "Description": "",
+        "Number of items in package": "",
+        "Single unit price": "",
+        "Unit": "",
+        "Margin": "",
+        "Vat": "",
+        "Single unit order possible": "",
+        "Packaging": "",
+        "Sale ended": "",
+        "Show price to customer": "",
+        "Set price after reweight?": "",
+        "Needs reordering?": "",
+        "Storage rules": "",
+        "Table": ""
+    }
+}

@@ -1,0 +1,11 @@
+namespace: HubletoApp\Community\CalendarSync
+appType: community
+rootUrlSlug: settings/calendar-sources
+name: Calendar Sync
+icon: fas fa-calendar
+highlight: Calendar syncing app (Google calendars, .ics calendars and more)
+author:
+  name: "Michal Barnas"
+  nick: "mrgopes"
+  company: "wai.blue"
+  github: "https://github.com/mrgopes"

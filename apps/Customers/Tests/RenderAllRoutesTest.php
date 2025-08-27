@@ -1,0 +1,43 @@
+<?php declare(strict_types=1);
+
+namespace HubletoApp\Community\Customers\Tests;
+
+use PHPUnit\Framework\TestCase;
+
+final class RenderAllRoutesTest extends TestCase
+{
+
+  public function testAddCustomer(): void
+  {
+    $html = \HubletoMain\Loader::getGlobalApp()->getRenderer()->render('customers/add');
+    $this->assertStringContainsString('app-main-title', $html);
+    $this->assertStringNotContainsStringIgnoringCase('error', $html);
+  }
+
+  public function testSettings(): void
+  {
+    $html = \HubletoMain\Loader::getGlobalApp()->getRenderer()->getRenderer()->render('customers/settings');
+    $this->assertStringContainsString('app-main-title', $html);
+    $this->assertStringNotContainsStringIgnoringCase('error', $html);
+  }
+
+  public function testCustomerActivities(): void
+  {
+    $html = \HubletoMain\Loader::getGlobalApp()->getRenderer()->render('customers/add');
+    $this->assertStringContainsString('app-main-title', $html);
+    $this->assertStringNotContainsStringIgnoringCase('error', $html);
+  }
+
+  public function testCustomerForms(): void
+  {
+    $main = \HubletoMain\Loader::getGlobalApp();
+    $mCustomer = $main->getModel(\HubletoApp\Community\Customers\Models\Customer::class);
+    $customers = $mCustomer->record->get()->toArray();
+    foreach ($customers as $customer) {
+      $html = $main->getRenderer()->render('customers/' . $customer['id']);
+      $this->assertStringContainsString('app-main-title', $html);
+      $this->assertStringNotContainsStringIgnoringCase('error', $html);
+    }
+  }
+
+}

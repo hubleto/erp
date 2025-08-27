@@ -1,0 +1,47 @@
+<h1 class="app-main-title">{{ translate('Help') }} > {{ translate('Search') }}</h1>
+
+<div class="w-1/3">
+  <div class="card card-body">
+    <h2>Bring search to the brand new level.</h2>
+    <p>
+      Hubleto fulltext search provides powerfull functionality to enhance search capabilities.
+    </p>
+  </div>
+  <div class="card mt-2">
+    <div class="card-header">Ctrl+K shortcut</div>
+    <div class="card-body">
+      Type <code>Ctrl+K</code> to start searching at any time.
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="card-header">App selectors</div>
+    <div class="card-body">
+      <i>App selectors</i> are special tags like, e.g. <code>app:deals</code>, filtering
+      what app should be used to search. Using app selectors makes search faster and more effective
+      because it directly points to a certain app and ignores searching in other apps.<br/>
+      <br/>
+      Example:
+      <div class="alert alert-info">
+        <code>>deals D25-005</code> will invoke search in <i>deals</i> app with expression <i>D25-005</i>.
+      </div>
+      <br/>
+      The app selectors are intuitive, try using <code>>contacts</code> or <code>>tasks</code>.
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="card-header">Switches</div>
+    <div class="card-body">
+      <i>Switches</i> behave a bit differently from <i>app selectors</i>. By providing a
+      switch (e.g, <code>/tasks</code>), you may directly specify, what kind of data you want to search.
+      One switch may be assigned with more than one app.
+      <br/>
+      Example:
+      <div class="alert alert-info">
+        <code>/tasks T25-005</code> will search for tasks (or related data) across the whole Hubleto, containing
+        identifier <i>T25-005</i>.
+      </div>
+      <br/>
+      Switches can have their shorthand variants, e.g. <code>/ts</code> is equal to <code>/tasks</code>.
+    </div>
+  </div>
+</div>

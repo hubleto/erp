@@ -1,0 +1,90 @@
+{
+    "loaders": {
+        "Leads": "Leads",
+        "Leads Archive": "Archiwum leadów"
+    },
+    "controllers.leads": {
+        "Sales": "Sprzedaż",
+        "Leads": "Leads"
+    },
+    "controllers.leadsArchive": {
+        "Sales": "Sprzedaż",
+        "Leads": "Leads",
+        "Archive": "Archiwum"
+    },
+    "manifest": {
+        "Leads": "Wskazówki",
+        "Management of leads, cold contacts. Convert leads to deals.": "Zarządzanie potencjalnymi klientami, zimnymi kontaktami. Konwertuj prowadzi do ofert."
+    },
+    "root": {
+        "Lead Tags": "Tagi ołowiowe",
+        "Lead Lost Reasons": "Ołów przegrał powody",
+        "Active leads": "Aktywne leady",
+        "Archived leads": "Zarchiwizowane przewody"
+    },
+    "Models\\LeadActivity": {
+        "Subject": "Temat",
+        "Activity type": "Typ aktywności",
+        "Start date": "Data rozpoczęcia",
+        "Start time": "Czas rozpoczęcia",
+        "End date": "Data zakończenia",
+        "End time": "Czas zakończenia",
+        "All day": "Cały dzień",
+        "Completed": "Zakończony",
+        "Created by": "Stworzone przez",
+        "Lead": "Ołów",
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Minuty spotkań (link)"
+    },
+    "Models\\Lead": {
+        "Lead Identifier": "Identyfikator ołowiu",
+        "Title": "Tytuł",
+        "Customer": "Klient",
+        "Contact": "Kontakt",
+        "Price": "Cena",
+        "Currency": "Waluta",
+        "Score": "Wynik",
+        "Expected close date": "Oczekiwana data zamknięcia",
+        "Owner": "Właściciel",
+        "Created": "Stworzony",
+        "Status": "Status",
+        "Reason for Lost": "Powód utraconego",
+        "Notes": "Notatki",
+        "Source channel": "Kanał źródłowy",
+        "Archived": "Zarchiwizowane",
+        "Add lead": "Dodaj ołów",
+        "Manager": "Menedżer"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Utracony rozum"
+    },
+    "Models\\LeadHistory": {
+        "Change Date": "Data zmiany",
+        "Lead": "Ołów",
+        "Description": "Opis"
+    },
+    "Models\\LeadTag": {
+        "Lead": "Ołów",
+        "Tag": "Etykietka"
+    },
+    "Models\\LeadProduct": {
+        "Lead": "Ołów",
+        "Product": "Produkt",
+        "Unit Price": "Cena jednostkowa",
+        "Amount": "Kwota",
+        "Vat": "Kadź",
+        "Discount": "Rabat",
+        "Sum": "Suma"
+    },
+    "Models\\LeadDocument": {
+        "Lead": "Ołów",
+        "Document": "Dokument"
+    },
+    "Models\\Tag": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
+    },
+    "Controllers\\Leads": {
+        "Leads": "Wskazówki"
+    }
+}

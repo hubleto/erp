@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Worksheets\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class ActivityType extends \HubletoMain\RecordManager
+class ActivityType extends \Hubleto\Erp\RecordManager
 {
   public $table = 'worksheet_activities_types';
 
@@ -14,7 +14,7 @@ class ActivityType extends \HubletoMain\RecordManager
     $query = parent::prepareReadQuery($query, $level);
 
     // Uncomment this line if you are going to use $main.
-    // $main = \HubletoMain\Loader::getGlobalApp();
+    // $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     // Uncomment and modify these lines if you want to apply filtering based on URL parameters
     // if ($main->getRouter()->urlParamAsInteger("idCustomer") > 0) {

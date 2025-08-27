@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Documents\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Folder extends \HubletoMain\Model
+class Folder extends \Hubleto\Erp\Model
 {
   public string $table = 'folders';
   public string $recordManagerClass = RecordManagers\Folder::class;

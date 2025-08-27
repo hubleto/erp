@@ -7,7 +7,7 @@ use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class BillingAccount extends \HubletoMain\Model
+class BillingAccount extends \Hubleto\Erp\Model
 {
   public string $table = 'cloud_billing_accounts';
   public string $recordManagerClass = RecordManagers\BillingAccount::class;

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoMain;
+namespace Hubleto\Erp;
 
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 use Hubleto\Framework\Router;

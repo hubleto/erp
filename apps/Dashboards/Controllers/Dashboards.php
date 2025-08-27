@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Dashboards\Controllers;
 
-class Dashboards extends \HubletoMain\Controller
+class Dashboards extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Reports;
 class ReportManager extends \Hubleto\Framework\Core
 {
 
-  /** @var array<string, \HubletoMain\Report> */
+  /** @var array<string, \Hubleto\Erp\Report> */
   protected array $reports = [];
 
   /**
@@ -20,7 +20,7 @@ class ReportManager extends \Hubleto\Framework\Core
   public function addReport(\Hubleto\Framework\Interfaces\AppInterface $hubletoApp, string $reportClass): void
   {
     $report = $this->getService($reportClass);
-    if ($report instanceof \HubletoMain\Report) {
+    if ($report instanceof \Hubleto\Erp\Report) {
       $report->hubletoApp = $hubletoApp;
       $this->reports[$reportClass] = $report;
     }
@@ -29,7 +29,7 @@ class ReportManager extends \Hubleto\Framework\Core
   /**
    * Get all reports registered in report manager.
    *
-   * @return array<string, \HubletoMain\Report>
+   * @return array<string, \Hubleto\Erp\Report>
    * 
    */
   public function getReports(): array
@@ -37,12 +37,12 @@ class ReportManager extends \Hubleto\Framework\Core
     return $this->reports;
   }
 
-  public function getReport(string $reportClass): \HubletoMain\Report
+  public function getReport(string $reportClass): \Hubleto\Erp\Report
   {
     return $this->reports[$reportClass];
   }
 
-  public function getReportByUrlSlug(string $reportUrlSlug): null|\HubletoMain\Report
+  public function getReportByUrlSlug(string $reportUrlSlug): null|\Hubleto\Erp\Report
   {
     foreach ($this->getReports() as $report) {
       if ($report->getUrlSlug() == $reportUrlSlug) {

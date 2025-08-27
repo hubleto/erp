@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Desktop\Controllers;
 
-class Home extends \HubletoMain\Controller
+class Home extends \Hubleto\Erp\Controller
 {
 
   /**

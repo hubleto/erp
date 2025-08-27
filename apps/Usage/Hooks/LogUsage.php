@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Usage\Hooks;
 
-class LogUsage extends \HubletoMain\Hook
+class LogUsage extends \Hubleto\Erp\Hook
 {
 
   public function run(string $event, array $args): void

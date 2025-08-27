@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Settings\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Country extends \HubletoMain\Model
+class Country extends \Hubleto\Erp\Model
 {
   public string $table = 'countries';
   public string $recordManagerClass = RecordManagers\Country::class;

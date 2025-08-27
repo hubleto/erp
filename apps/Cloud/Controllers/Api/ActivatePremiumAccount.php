@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Cloud\Controllers\Api;
 
 use HubletoApp\Community\Cloud\PremiumAccount;
 
-class ActivatePremiumAccount extends \HubletoMain\Controllers\ApiController
+class ActivatePremiumAccount extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

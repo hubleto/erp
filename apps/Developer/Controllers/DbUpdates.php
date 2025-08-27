@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Developer\Controllers;
 
-class DbUpdates extends \HubletoMain\Controller
+class DbUpdates extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

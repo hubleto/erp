@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Notifications\Hooks;
 
-class NotifyUpdatedRecord extends \HubletoMain\Hook
+class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
 {
 
   public function run(string $event, array $args): void

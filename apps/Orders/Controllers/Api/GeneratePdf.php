@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Orders\Controllers\Api;
 
 use HubletoApp\Community\Orders\Models\Order;
 
-class GeneratePdf extends \HubletoMain\Controllers\ApiController
+class GeneratePdf extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

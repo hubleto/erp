@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Inventory\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Status extends \HubletoMain\Model
+class Status extends \Hubleto\Erp\Model
 {
   public string $table = 'inventory_status';
   public string $recordManagerClass = RecordManagers\Status::class;

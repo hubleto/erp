@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Cloud\Controllers\Test;
 
 use HubletoApp\Community\Cloud\PremiumAccount;
 
-class ClearCredit extends \HubletoMain\Controller
+class ClearCredit extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {

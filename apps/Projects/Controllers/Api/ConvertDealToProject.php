@@ -7,7 +7,7 @@ use HubletoApp\Community\Projects\Models\Project;
 use HubletoApp\Community\Deals\Models\Deal;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 
-class ConvertDealToProject extends \HubletoMain\Controllers\ApiController
+class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

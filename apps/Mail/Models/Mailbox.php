@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Mail\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Mailbox extends \HubletoMain\Model
+class Mailbox extends \Hubleto\Erp\Model
 {
   public string $table = 'mails_mailboxes';
   public string $recordManagerClass = RecordManagers\Mailbox::class;

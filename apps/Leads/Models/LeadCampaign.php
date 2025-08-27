@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Leads\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Campaigns\Models\Campaign;
 
-class LeadCampaign extends \HubletoMain\Model
+class LeadCampaign extends \Hubleto\Erp\Model
 {
   public string $table = 'leads_campaigns';
   public string $recordManagerClass = RecordManagers\LeadCampaign::class;

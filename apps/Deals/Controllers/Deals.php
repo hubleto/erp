@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Deals\Controllers;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class Deals extends \HubletoMain\Controller
+class Deals extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

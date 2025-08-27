@@ -15,13 +15,13 @@
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "autoload": {
         "psr-4": {
-            "HubletoMain\\": "src",
+            "Hubleto\\Erp\\": "src",
             "HubletoApp\\Community\\": "apps",
-            "HubletoMain\\Cli\\": "cli",
-            "HubletoMain\\Hook\\": "hooks",
-            "HubletoMain\\Cron\\": "crons",
-            "HubletoMain\\Report\\": "reports",
-            "HubletoMain\\Installer\\": "installer"
+            "Hubleto\\Erp\\Cli\\": "cli",
+            "Hubleto\\Erp\\Hook\\": "hooks",
+            "Hubleto\\Erp\\Cron\\": "crons",
+            "Hubleto\\Erp\\Report\\": "reports",
+            "Hubleto\\Erp\\Installer\\": "installer"
         }
     },
     "minimum-stability": "dev",

@@ -10,7 +10,7 @@ class KeyManager
 
   public static function getKeyFileName(): string
   {
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
     $cryptoApp = $main->apps->community('Crypto');
     $fileName = $cryptoApp->configAsString('keyFileName');
 

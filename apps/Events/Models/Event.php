@@ -17,7 +17,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class Event extends \HubletoMain\Model
+class Event extends \Hubleto\Erp\Model
 {
   public const ENUM_ATTENDANCE_OPTION_IN_PERSON = 1;
   public const ENUM_ATTENDANCE_OPTION_VIRTUAL = 2;

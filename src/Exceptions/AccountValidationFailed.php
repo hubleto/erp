@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Exceptions;
+namespace Hubleto\Erp\Exceptions;
 
 class AccountValidationFailed extends \Exception
 {

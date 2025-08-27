@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class General extends \HubletoMain\Controller
+class General extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {

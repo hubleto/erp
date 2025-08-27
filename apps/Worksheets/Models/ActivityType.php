@@ -17,7 +17,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class ActivityType extends \HubletoMain\Model
+class ActivityType extends \Hubleto\Erp\Model
 {
   public string $table = 'worksheet_activities_types';
   public string $recordManagerClass = RecordManagers\ActivityType::class;

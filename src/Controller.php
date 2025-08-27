@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain;
+namespace Hubleto\Erp;
 
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 use Hubleto\Framework\Config;
 /**
- * @property \HubletoMain\Loader $main
+ * @property \Hubleto\Erp\Loader $main
  */
 class Controller extends \Hubleto\Framework\Controller
 {

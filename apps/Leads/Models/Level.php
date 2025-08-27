@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Leads\Models;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Level extends \HubletoMain\Model
+class Level extends \Hubleto\Erp\Model
 {
   public string $table = 'lead_levels';
   public string $recordManagerClass = RecordManagers\Level::class;

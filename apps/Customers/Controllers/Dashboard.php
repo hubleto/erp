@@ -2,6 +2,6 @@
 
 namespace HubletoApp\Community\Customers\Controllers;
 
-class Dashboard extends \HubletoMain\Controller
+class Dashboard extends \Hubleto\Erp\Controller
 {
 }

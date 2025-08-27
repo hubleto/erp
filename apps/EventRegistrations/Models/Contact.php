@@ -6,7 +6,7 @@ use HubletoApp\Community\Settings\Models\User;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 
-class Contact extends \HubletoMain\Model
+class Contact extends \Hubleto\Erp\Model
 {
   public string $table = 'my_app_contacts';
   public string $recordManagerClass = RecordManagers\Contact::class;

@@ -17,7 +17,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class Venue extends \HubletoMain\Model
+class Venue extends \Hubleto\Erp\Model
 {
   public string $table = 'events_venues';
   public string $recordManagerClass = RecordManagers\Venue::class;

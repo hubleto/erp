@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Customers\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
 
-class CustomerDocument extends \HubletoMain\Model
+class CustomerDocument extends \Hubleto\Erp\Model
 {
   public string $table = 'customer_documents';
   public string $recordManagerClass = RecordManagers\CustomerDocument::class;

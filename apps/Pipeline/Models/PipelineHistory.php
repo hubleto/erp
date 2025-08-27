@@ -7,7 +7,7 @@ use Hubleto\Framework\Db\Column\Datetime;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 
-class PipelineHistory extends \HubletoMain\Model
+class PipelineHistory extends \Hubleto\Erp\Model
 {
   public string $table = 'pipeline_history';
   public string $recordManagerClass = RecordManagers\PipelineHistory::class;

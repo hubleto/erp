@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Leads\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
 
-class LeadDocument extends \HubletoMain\Model
+class LeadDocument extends \Hubleto\Erp\Model
 {
   public string $table = 'lead_documents';
   public string $recordManagerClass = RecordManagers\LeadDocument::class;

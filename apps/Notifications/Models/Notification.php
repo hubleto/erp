@@ -11,7 +11,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Json;
 use HubletoApp\Community\Settings\Models\User;
 
-class Notification extends \HubletoMain\Model
+class Notification extends \Hubleto\Erp\Model
 {
   public string $table = 'notifications';
   public string $recordManagerClass = RecordManagers\Notification::class;

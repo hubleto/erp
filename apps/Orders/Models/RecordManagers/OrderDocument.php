@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Orders\Models\RecordManagers;
 use HubletoApp\Community\Documents\Models\RecordManagers\Document;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OrderDocument extends \HubletoMain\RecordManager
+class OrderDocument extends \Hubleto\Erp\RecordManager
 {
   public $table = 'orders_documents';
 

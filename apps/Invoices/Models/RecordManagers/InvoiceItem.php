@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Invoices\Models\RecordManagers;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class InvoiceItem extends \HubletoMain\RecordManager {
+class InvoiceItem extends \Hubleto\Erp\RecordManager {
   public $table = 'invoice_items';
 
   /** @return BelongsTo<Invoice, covariant InvoiceItem> */

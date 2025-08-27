@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Api;
+namespace Hubleto\Erp\Api;
 
 use Hubleto\Framework\Helper;
 
-class Dictionary extends \HubletoMain\Controllers\ApiController
+class Dictionary extends \Hubleto\Erp\Controllers\ApiController
 {
 
   public function __construct(public \Hubleto\Framework\Loader $main)

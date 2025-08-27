@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Documents\Controllers\Api;
 use HubletoApp\Community\Documents\Generator;
 use HubletoApp\Community\Documents\Models\Template;
 
-class GeneratePdfFromTemplate extends \HubletoMain\Controllers\ApiController
+class GeneratePdfFromTemplate extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

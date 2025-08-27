@@ -17,7 +17,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class Member extends \HubletoMain\Model
+class Member extends \Hubleto\Erp\Model
 {
   public string $table = 'discussions_members';
   public string $recordManagerClass = RecordManagers\Member::class;

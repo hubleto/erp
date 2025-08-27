@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Mail\Controllers;
 
 use HubletoApp\Community\Mail\Models\Mailbox;
 
-class Templates extends \HubletoMain\Controller
+class Templates extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

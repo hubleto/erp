@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoMain;
+namespace Hubleto\Erp;
 
 use Hubleto\Framework\Helper;
 use HubletoApp\Community\Settings\Models\User;

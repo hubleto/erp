@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Calendar;
 class Manager extends \Hubleto\Framework\Core
 {
 
-  /** @var array<string, \HubletoMain\Calendar> */
+  /** @var array<string, \Hubleto\Erp\Calendar> */
   protected array $calendars = [];
 
   public function addCalendar(\Hubleto\Framework\Interfaces\AppInterface $app, string $source, string $color, string $calendarClass): void
@@ -13,18 +13,18 @@ class Manager extends \Hubleto\Framework\Core
     $calendar = $this->getService($calendarClass);
     $calendar->setColor($color);
     $calendar->setApp($app);
-    if ($calendar instanceof \HubletoMain\Calendar) {
+    if ($calendar instanceof \Hubleto\Erp\Calendar) {
       $this->calendars[$source] = $calendar;
     }
   }
 
-  /** @return array<string, \HubletoMain\Calendar> */
+  /** @return array<string, \Hubleto\Erp\Calendar> */
   public function getCalendars(): array
   {
     return $this->calendars;
   }
 
-  public function getCalendar(string $calendarClass): \HubletoMain\Calendar
+  public function getCalendar(string $calendarClass): \Hubleto\Erp\Calendar
   {
     return $this->calendars[$calendarClass];
   }

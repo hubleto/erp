@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Settings\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserHasRole extends \HubletoMain\RecordManager
+class UserHasRole extends \Hubleto\Erp\RecordManager
 {
   public $table = 'user_has_roles';
 
@@ -13,7 +13,7 @@ class UserHasRole extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     if ($main->getRouter()->isUrlParam("idUser")) {
       $query = $query->where($this->table . '.id_user', $main->getRouter()->urlParamAsInteger("idUser"));

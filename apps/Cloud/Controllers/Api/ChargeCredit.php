@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Cloud\Controllers\Api;
 
 use HubletoApp\Community\Cloud\PremiumAccount;
 
-class ChargeCredit extends \HubletoMain\Controllers\ApiController
+class ChargeCredit extends \Hubleto\Erp\Controllers\ApiController
 {
   public bool $requiresUserAuthentication = false;
 

@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Deals\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 
-class DealTag extends \HubletoMain\Model
+class DealTag extends \Hubleto\Erp\Model
 {
   public string $table = 'cross_deal_tags';
   public string $recordManagerClass = RecordManagers\DealTag::class;

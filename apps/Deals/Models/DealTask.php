@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Deals\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Tasks\Models\Task;
 
-class DealTask extends \HubletoMain\Model
+class DealTask extends \Hubleto\Erp\Model
 {
   public string $table = 'deals_tasks';
   public string $recordManagerClass = RecordManagers\DealTask::class;

@@ -10,7 +10,7 @@ use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\ActivityType;
 use HubletoApp\Community\Settings\Models\User;
 
-class SharedCalendar extends \HubletoMain\Model
+class SharedCalendar extends \Hubleto\Erp\Model
 {
   public string $table = 'shared_calendars';
   public string $recordManagerClass = RecordManagers\SharedCalendar::class;

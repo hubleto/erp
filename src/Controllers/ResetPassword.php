@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Controllers;
+namespace Hubleto\Erp\Controllers;
 
 use HubletoApp\Community\Settings\Models\User;
 use Hubleto\Framework\Models\Token;
 
-class ResetPassword extends \HubletoMain\Controller
+class ResetPassword extends \Hubleto\Erp\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;
-  public string $translationContext = 'HubletoMain\\Loader::Controllers\\ResetPassword';
+  public string $translationContext = 'Hubleto\\Erp\\Loader::Controllers\\ResetPassword';
 
   public function prepareView(): void
   {

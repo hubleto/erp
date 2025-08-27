@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class Sidebar extends \HubletoMain\Controller
+class Sidebar extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

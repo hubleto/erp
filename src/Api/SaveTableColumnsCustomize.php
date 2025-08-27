@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Api;
+namespace Hubleto\Erp\Api;
 
 use Exception;
 
-class SaveTableColumnsCustomize extends \HubletoMain\Controllers\ApiController
+class SaveTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

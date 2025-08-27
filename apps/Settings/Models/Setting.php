@@ -6,7 +6,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Setting extends \HubletoMain\Model
+class Setting extends \Hubleto\Erp\Model
 {
   public string $table = 'settings';
   public string $recordManagerClass = RecordManagers\Setting::class;

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Api;
+namespace Hubleto\Erp\Api;
 
 use Exception;
 
-class TableExportCsv extends \HubletoMain\Controller
+class TableExportCsv extends \Hubleto\Erp\Controller
 {
   public \Hubleto\Framework\Model $model;
 

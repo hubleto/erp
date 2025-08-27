@@ -7,7 +7,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class Log extends \HubletoMain\Model
+class Log extends \Hubleto\Erp\Model
 {
   public string $table = 'usage_log';
   public string $recordManagerClass = RecordManagers\Log::class;

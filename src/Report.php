@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoMain;
+namespace Hubleto\Erp;
 
 class Report extends \Hubleto\Framework\Core
 {

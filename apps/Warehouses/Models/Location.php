@@ -11,7 +11,7 @@ use Hubleto\Framework\Db\Column\Json;
 use Hubleto\Framework\Db\Column\Image;
 use Hubleto\Framework\Db\Column\Text;
 
-class Location extends \HubletoMain\Model
+class Location extends \Hubleto\Erp\Model
 {
   public string $table = 'warehouses_locations';
   public string $recordManagerClass = RecordManagers\Location::class;

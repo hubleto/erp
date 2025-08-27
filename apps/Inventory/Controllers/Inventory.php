@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Inventory\Controllers;
 
-class Inventory extends \HubletoMain\Controller
+class Inventory extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

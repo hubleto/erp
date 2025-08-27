@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Api;
+namespace Hubleto\Erp\Api;
 
-class LogJavascriptError extends \HubletoMain\Controllers\ApiController
+class LogJavascriptError extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): array
   {

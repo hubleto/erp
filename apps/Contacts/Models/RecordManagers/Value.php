@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Contacts\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Value extends \HubletoMain\RecordManager
+class Value extends \Hubleto\Erp\RecordManager
 {
   public $table = 'contact_values';
 
@@ -25,7 +25,7 @@ class Value extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     if ($main->getRouter()->urlParamAsInteger("idContact") > 0) {
       $query = $query->where($this->table . '.id_contact', $main->getRouter()->urlParamAsInteger("idContact"));

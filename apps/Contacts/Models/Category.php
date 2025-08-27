@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Contacts\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Category extends \HubletoMain\Model
+class Category extends \Hubleto\Erp\Model
 {
   public string $table = 'contact_categories';
   public string $recordManagerClass = RecordManagers\Category::class;

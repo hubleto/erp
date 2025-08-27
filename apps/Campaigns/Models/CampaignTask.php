@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Campaigns\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Tasks\Models\Task;
 
-class CampaignTask extends \HubletoMain\Model
+class CampaignTask extends \Hubleto\Erp\Model
 {
   public string $table = 'campaigns_tasks';
   public string $recordManagerClass = RecordManagers\CampaignTask::class;

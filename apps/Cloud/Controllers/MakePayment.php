@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Controllers;
 
-class MakePayment extends \HubletoMain\Controller
+class MakePayment extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {

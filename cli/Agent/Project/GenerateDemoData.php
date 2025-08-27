@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Cli\Agent\Project;
+namespace Hubleto\Erp\Cli\Agent\Project;
 
 use HubletoApp\Community\Settings\Models\Country;
 use HubletoApp\Community\Settings\Models\Permission;
@@ -11,7 +11,7 @@ use HubletoApp\Community\Settings\Models\UserRole;
 use HubletoApp\Community\Settings\Models\UserHasRole;
 use HubletoApp\Community\Settings\Models\Tag;
 
-class GenerateDemoData extends \HubletoMain\Cli\Agent\Command
+class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {

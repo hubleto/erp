@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Dashboards\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Panel extends \HubletoMain\RecordManager
+class Panel extends \Hubleto\Erp\RecordManager
 {
   public $table = 'dashboards_panels';
 
@@ -18,7 +18,7 @@ class Panel extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     if ($main->getRouter()->isUrlParam("idDashboard")) {
       $query = $query->where($this->table . '.id_dashboard', $main->getRouter()->urlParamAsInteger("idDashboard"));

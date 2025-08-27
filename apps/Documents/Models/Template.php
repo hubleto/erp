@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Documents\Models;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Text;
 
-class Template extends \HubletoMain\Model
+class Template extends \Hubleto\Erp\Model
 {
   public string $table = 'documents_templates';
   public string $recordManagerClass = RecordManagers\Template::class;

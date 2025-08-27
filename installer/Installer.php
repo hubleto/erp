@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Installer;
+namespace Hubleto\Erp\Installer;
 
 use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Settings\Models\UserRole;
@@ -107,18 +107,18 @@ class Installer extends \Hubleto\Framework\Core
   public function validate(): void
   {
     if (strlen($this->uid) > 32) {
-      throw new \HubletoMain\Exceptions\AccountValidationFailed('Account name is too long.');
+      throw new \Hubleto\Erp\Exceptions\AccountValidationFailed('Account name is too long.');
     }
 
     if (!filter_var($this->adminEmail, FILTER_VALIDATE_EMAIL)) {
-      throw new \HubletoMain\Exceptions\AccountValidationFailed('Invalid admin email.');
+      throw new \Hubleto\Erp\Exceptions\AccountValidationFailed('Invalid admin email.');
     }
 
     if (
       is_file($this->projectFolder)
       || is_dir($this->projectFolder)
     ) {
-      throw new \HubletoMain\Exceptions\AccountAlreadyExists('Project folder already exists');
+      throw new \Hubleto\Erp\Exceptions\AccountAlreadyExists('Project folder already exists');
     }
   }
 

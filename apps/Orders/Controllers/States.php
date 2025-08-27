@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Orders\Controllers;
 
-class States extends \HubletoMain\Controller
+class States extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

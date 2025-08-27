@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 use HubletoApp\Community\Tasks\Models\RecordManagers\Task;
 
-class Activity extends \HubletoMain\RecordManager
+class Activity extends \Hubleto\Erp\RecordManager
 {
   public $table = 'worksheet_activities';
 
@@ -29,7 +29,7 @@ class Activity extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     if ($main->getRouter()->urlParamAsInteger("idTask") > 0) {
       $query = $query->where($this->table . '.id_task', $main->getRouter()->urlParamAsInteger("idTask"));

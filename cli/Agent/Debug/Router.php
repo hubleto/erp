@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Cli\Agent\Debug;
+namespace Hubleto\Erp\Cli\Agent\Debug;
 
-class Router extends \HubletoMain\Cli\Agent\Command
+class Router extends \Hubleto\Erp\Cli\Agent\Command
 {
   public array $releaseConfig = [];
 
@@ -12,7 +12,7 @@ class Router extends \HubletoMain\Cli\Agent\Command
     $routeToDebug = (string) ($this->arguments[3] ?? '');
 
     if (empty($routeToDebug)) {
-      $routes = $this->getRouter()->getRoutes(\HubletoMain\Router::HTTP_GET);
+      $routes = $this->getRouter()->getRoutes(\Hubleto\Erp\Router::HTTP_GET);
 
       \Hubleto\Terminal::cyan("Available routes (Route -> Controller):\n");
       foreach ($routes as $route => $controller) {
@@ -20,8 +20,8 @@ class Router extends \HubletoMain\Cli\Agent\Command
       }
     } else {
       \Hubleto\Terminal::cyan("Debugging route '" . $routeToDebug . "':\n");
-      $controller = $this->getRouter()->findController(\HubletoMain\Router::HTTP_GET, $routeToDebug);
-      $variables = $this->getRouter()->extractRouteVariables(\HubletoMain\Router::HTTP_GET, $routeToDebug);
+      $controller = $this->getRouter()->findController(\Hubleto\Erp\Router::HTTP_GET, $routeToDebug);
+      $variables = $this->getRouter()->extractRouteVariables(\Hubleto\Erp\Router::HTTP_GET, $routeToDebug);
       \Hubleto\Terminal::cyan("  - Controller: " . $controller . "\n");
       \Hubleto\Terminal::cyan("  - Variables:\n");
       foreach ($variables as $varName => $varValue) {

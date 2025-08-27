@@ -15,7 +15,7 @@ use HubletoApp\Community\Documents\Models\Template;
 use HubletoApp\Community\Documents\Generator;
 use Hubleto\Framework\Helper;
 
-class Invoice extends \HubletoMain\Model {
+class Invoice extends \Hubleto\Erp\Model {
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '{%TABLE%}.number';
   public string $recordManagerClass = RecordManagers\Invoice::class;

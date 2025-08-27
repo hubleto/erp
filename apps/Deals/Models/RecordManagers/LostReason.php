@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Deals\Models\RecordManagers;
 
-class LostReason extends \HubletoMain\RecordManager
+class LostReason extends \Hubleto\Erp\RecordManager
 {
   public $table = 'deal_lost_reasons';
 

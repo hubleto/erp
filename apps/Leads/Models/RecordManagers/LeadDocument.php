@@ -6,7 +6,7 @@ use HubletoApp\Community\Documents\Models\RecordManagers\Document;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class LeadDocument extends \HubletoMain\RecordManager
+class LeadDocument extends \Hubleto\Erp\RecordManager
 {
   public $table = 'lead_documents';
 

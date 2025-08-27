@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Crypto\Controllers;
 
-class Dashboard extends \HubletoMain\Controller
+class Dashboard extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

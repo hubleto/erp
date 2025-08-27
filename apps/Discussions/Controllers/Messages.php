@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Discussions\Controllers;
 
-class Messages extends \HubletoMain\Controller
+class Messages extends \Hubleto\Erp\Controller
 {
   // Uncomment this if you want to make your controller public
   // public bool $requiresUserAuthentication = false;

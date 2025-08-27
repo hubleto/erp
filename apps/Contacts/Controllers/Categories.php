@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Contacts\Controllers;
 
-class Categories extends \HubletoMain\Controller
+class Categories extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

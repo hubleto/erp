@@ -5,7 +5,7 @@ namespace HubletoApp\Community\OAuth\Models;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Boolean;
 
-class AccessToken extends \HubletoMain\Model
+class AccessToken extends \Hubleto\Erp\Model
 {
   public string $table = 'oauth_access_tokens';
   public string $recordManagerClass = RecordManagers\AccessToken::class;

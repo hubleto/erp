@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Pipeline\Controllers\Api;
 use Exception;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 
-class GetPipelines extends \HubletoMain\Controllers\ApiController
+class GetPipelines extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

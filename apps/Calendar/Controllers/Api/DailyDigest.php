@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Api;
 
-class DailyDigest extends \HubletoMain\Controllers\ApiController
+class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
 {
   public function formatReminder(string $category, string $color, array $reminder): array
   {

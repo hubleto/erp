@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Deals\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
 
-class DealDocument extends \HubletoMain\Model
+class DealDocument extends \Hubleto\Erp\Model
 {
   public string $table = 'deal_documents';
   public string $recordManagerClass = RecordManagers\DealDocument::class;

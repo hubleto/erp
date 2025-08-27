@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Deals\Controllers\Api;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class GenerateQuotationPdf extends \HubletoMain\Controllers\ApiController
+class GenerateQuotationPdf extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

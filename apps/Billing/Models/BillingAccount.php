@@ -6,7 +6,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Customers\Models\Customer;
 
-class BillingAccount extends \HubletoMain\Model
+class BillingAccount extends \Hubleto\Erp\Model
 {
   public string $table = 'billing_accounts';
   public string $recordManagerClass = RecordManagers\BillingAccount::class;

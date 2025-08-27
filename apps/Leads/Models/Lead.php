@@ -24,7 +24,7 @@ use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
 use HubletoApp\Community\Deals\Models\DealLead;
 
-class Lead extends \HubletoMain\Model
+class Lead extends \Hubleto\Erp\Model
 {
   public string $table = 'leads';
   public string $recordManagerClass = RecordManagers\Lead::class;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Emails;
+namespace Hubleto\Erp\Emails;
 
 use Hubleto\Framework\Exceptions\GeneralException;
 use PHPMailer\PHPMailer\PHPMailer;

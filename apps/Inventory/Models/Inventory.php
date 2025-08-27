@@ -12,7 +12,7 @@ use Hubleto\Framework\Db\Column\DateTime;
 
 // This is a crucial table that links products to their specific locations and quantities.
 // This is crucial for tracking what items are where.
-class Inventory extends \HubletoMain\Model
+class Inventory extends \Hubleto\Erp\Model
 {
   public string $table = 'inventory';
   public string $recordManagerClass = RecordManagers\Inventory::class;

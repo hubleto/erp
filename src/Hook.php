@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain;
+namespace Hubleto\Erp;
 
 class Hook extends \Hubleto\Framework\Core
 {

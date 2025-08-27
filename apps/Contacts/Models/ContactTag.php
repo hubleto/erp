@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Contacts\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 
-class ContactTag extends \HubletoMain\Model
+class ContactTag extends \Hubleto\Erp\Model
 {
   public string $table = 'contact_contact_tags';
   public string $recordManagerClass = RecordManagers\ContactTag::class;

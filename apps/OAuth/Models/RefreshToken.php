@@ -4,7 +4,7 @@ namespace HubletoApp\Community\OAuth\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 
-class RefreshToken extends \HubletoMain\Model
+class RefreshToken extends \Hubleto\Erp\Model
 {
   public string $table = 'oauth_access_tokens';
   public string $recordManagerClass = RecordManagers\RefreshToken::class;

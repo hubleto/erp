@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Controllers;
+namespace Hubleto\Erp\Controllers;
 
-class ForgotPassword extends \HubletoMain\Controller
+class ForgotPassword extends \Hubleto\Erp\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;
-  public string $translationContext = 'HubletoMain\\Loader::Controllers\\ForgotPassword';
+  public string $translationContext = 'Hubleto\\Erp\\Loader::Controllers\\ForgotPassword';
 
   public function prepareView(): void
   {

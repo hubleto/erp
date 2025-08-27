@@ -6,7 +6,7 @@ use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\PasswordGrant;
 use League\OAuth2\Server\Grant\AuthCodeGrant;
 
-class ServerController extends \HubletoMain\Controller
+class ServerController extends \Hubleto\Erp\Controller
 {
   public AuthorizationServer $server;
 

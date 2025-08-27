@@ -8,7 +8,7 @@ use HubletoApp\Community\Mail\Models\Mailbox;
 use Ddeboer\Imap\Server;
 use Hubleto\Framework\Helper;
 
-class GetMails extends \HubletoMain\Cron
+class GetMails extends \Hubleto\Erp\Cron
 {
   public string $schedulingPattern = '* * * * *';
 

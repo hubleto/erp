@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Orders\Models\RecordManagers;
 use HubletoApp\Community\Products\Models\RecordManagers\Product;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OrderProduct extends \HubletoMain\RecordManager
+class OrderProduct extends \Hubleto\Erp\RecordManager
 {
   public $table = 'orders_products';
 
@@ -26,7 +26,7 @@ class OrderProduct extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     if ($main->getRouter()->urlParamAsInteger("idOrder") > 0) {
       $query = $query->where($this->table . '.id_order', $main->getRouter()->urlParamAsInteger("idOrder"));

@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Invoices\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Documents\Models\Document;
 
-class InvoiceDocument extends \HubletoMain\Model
+class InvoiceDocument extends \Hubleto\Erp\Model
 {
   public string $table = 'invoice_documents';
   public string $recordManagerClass = RecordManagers\InvoiceDocument::class;

@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Pipeline\Models;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Integer;
 
-class Pipeline extends \HubletoMain\Model
+class Pipeline extends \Hubleto\Erp\Model
 {
   public string $table = 'pipelines';
   public string $recordManagerClass = RecordManagers\Pipeline::class;
@@ -60,7 +60,7 @@ class Pipeline extends \HubletoMain\Model
     return [$defaultPipeline, $idPipeline, $idPipelineStep];
   }
 
-  public static function buildTableDefaultFilterForPipelineSteps(\HubletoMain\Model $model, string $title): array
+  public static function buildTableDefaultFilterForPipelineSteps(\Hubleto\Erp\Model $model, string $title): array
   {
     $fPipelineSteps = [
       'title' => $title,

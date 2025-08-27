@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Campaigns\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use HubletoApp\Community\Contacts\Models\Contact;
 
-class CampaignContact extends \HubletoMain\Model
+class CampaignContact extends \Hubleto\Erp\Model
 {
   public string $table = 'campaigns_contacts';
   public string $recordManagerClass = RecordManagers\CampaignContact::class;

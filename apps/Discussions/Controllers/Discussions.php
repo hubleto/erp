@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Discussions\Controllers;
 
-class Discussions extends \HubletoMain\Controller
+class Discussions extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {

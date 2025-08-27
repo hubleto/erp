@@ -10,7 +10,7 @@ use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Json;
 
-class Payment extends \HubletoMain\Model
+class Payment extends \Hubleto\Erp\Model
 {
   public const TYPE_SUBSCRIPTION_FEE = 1;
   public const TYPE_BACK_PAY = 2;

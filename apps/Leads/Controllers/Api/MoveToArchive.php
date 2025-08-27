@@ -14,7 +14,7 @@ use HubletoApp\Community\Leads\Models\LeadProduct;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 use HubletoApp\Community\Settings\Models\Setting;
 
-class MoveToArchive extends \HubletoMain\Controllers\ApiController
+class MoveToArchive extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

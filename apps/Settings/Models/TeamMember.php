@@ -6,7 +6,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class TeamMember extends \HubletoMain\Model
+class TeamMember extends \Hubleto\Erp\Model
 {
   public string $table = 'teams_members';
   public string $recordManagerClass = RecordManagers\TeamMember::class;

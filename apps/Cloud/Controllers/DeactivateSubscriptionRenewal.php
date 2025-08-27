@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Cloud\Controllers;
 
 use HubletoApp\Community\Cloud\PremiumAccount;
 
-class DeactivateSubscriptionRenewal extends \HubletoMain\Controller
+class DeactivateSubscriptionRenewal extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {

@@ -9,7 +9,7 @@ use HubletoApp\Community\Projects\Models\RecordManagers\Project;
 use HubletoApp\Community\Pipeline\Models\RecordManagers\Pipeline;
 use HubletoApp\Community\Pipeline\Models\RecordManagers\PipelineStep;
 
-class Task extends \HubletoMain\RecordManager
+class Task extends \Hubleto\Erp\RecordManager
 {
   public $table = 'tasks';
 
@@ -44,7 +44,7 @@ class Task extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
 

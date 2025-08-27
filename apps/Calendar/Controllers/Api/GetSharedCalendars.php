@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Calendar\Controllers\Api;
 
 use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
-class GetSharedCalendars extends \HubletoMain\Controllers\ApiController
+class GetSharedCalendars extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

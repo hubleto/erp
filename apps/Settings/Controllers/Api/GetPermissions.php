@@ -6,7 +6,7 @@ use Exception;
 use HubletoApp\Community\Settings\Models\Permission;
 use HubletoApp\Community\Settings\Models\RolePermission;
 
-class GetPermissions extends \HubletoMain\Controllers\ApiController
+class GetPermissions extends \Hubleto\Erp\Controllers\ApiController
 {
   private array $MVCNamespaces = [
     "Models",

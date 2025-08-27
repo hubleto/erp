@@ -4,7 +4,7 @@ namespace HubletoApp\Community\OAuth\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Scope extends \HubletoMain\Model
+class Scope extends \Hubleto\Erp\Model
 {
   public string $table = 'oauth_scopes';
   public string $recordManagerClass = RecordManagers\Scope::class;

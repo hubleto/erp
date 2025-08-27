@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 use HubletoApp\Community\Projects\Models\RecordManagers\Project;
 
-class Discussion extends \HubletoMain\RecordManager
+class Discussion extends \Hubleto\Erp\RecordManager
 {
   public $table = 'discussions';
 

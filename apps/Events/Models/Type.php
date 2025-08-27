@@ -17,7 +17,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Settings\Models\User;
 
-class Type extends \HubletoMain\Model
+class Type extends \Hubleto\Erp\Model
 {
   public string $table = 'events_types';
   public string $recordManagerClass = RecordManagers\Type::class;

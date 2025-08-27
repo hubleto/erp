@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Projects\Models\RecordManagers;
 use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ProjectDeal extends \HubletoMain\RecordManager
+class ProjectDeal extends \Hubleto\Erp\RecordManager
 {
   public $table = 'projects_deals';
 

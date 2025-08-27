@@ -2,10 +2,10 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Api;
 
-use HubletoMain\Controller;
+use Hubleto\Erp\Controller;
 use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
-class StopSharingCalendar extends \HubletoMain\Controller
+class StopSharingCalendar extends \Hubleto\Erp\Controller
 {
   public int $returnType = Controller::RETURN_TYPE_JSON;
 

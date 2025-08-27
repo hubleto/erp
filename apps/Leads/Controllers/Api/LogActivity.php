@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Leads\Controllers\Api;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Leads\Models\LeadActivity;
 
-class LogActivity extends \HubletoMain\Controllers\ApiController
+class LogActivity extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

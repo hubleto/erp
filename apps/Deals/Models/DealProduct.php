@@ -9,7 +9,7 @@ use Hubleto\Framework\Db\Column\Text;
 use HubletoApp\Community\Products\Controllers\Api\CalculatePrice;
 use HubletoApp\Community\Products\Models\Product;
 
-class DealProduct extends \HubletoMain\Model
+class DealProduct extends \Hubleto\Erp\Model
 {
   public string $table = 'deal_products';
   public string $recordManagerClass = RecordManagers\DealProduct::class;

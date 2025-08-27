@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Tasks\Controllers;
 
-class Tasks extends \HubletoMain\Controller
+class Tasks extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {

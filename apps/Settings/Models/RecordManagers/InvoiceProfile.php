@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Settings\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class InvoiceProfile extends \HubletoMain\RecordManager
+class InvoiceProfile extends \Hubleto\Erp\RecordManager
 {
   public $table = 'invoice_profiles';
 

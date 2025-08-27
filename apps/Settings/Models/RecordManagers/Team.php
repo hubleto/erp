@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Settings\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Team extends \HubletoMain\RecordManager
+class Team extends \Hubleto\Erp\RecordManager
 {
   public $table = 'teams';
 

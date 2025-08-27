@@ -17,7 +17,7 @@ use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
 use HubletoApp\Community\Leads\Models\LeadCampaign;
 
-class Campaign extends \HubletoMain\Model
+class Campaign extends \Hubleto\Erp\Model
 {
   public string $table = 'campaigns';
   public string $recordManagerClass = RecordManagers\Campaign::class;

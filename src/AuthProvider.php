@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain;
+namespace Hubleto\Erp;
 
 use HubletoApp\Community\Settings\Models\User;
 use Hubleto\Framework\Models\Token;
@@ -22,7 +22,7 @@ use Hubleto\Framework\Models\Token;
  *   DEFAULT_COMPANY: array<mixed>,
  * }
  *
- * @property \HubletoMain\Loader $main
+ * @property \Hubleto\Erp\Loader $main
  */
 class AuthProvider extends \Hubleto\Framework\AuthProvider
 {

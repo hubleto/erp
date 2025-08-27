@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Suppliers\Controllers;
 
-class Suppliers extends \HubletoMain\Controller
+class Suppliers extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

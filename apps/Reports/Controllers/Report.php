@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Reports\Controllers;
 
-class Report extends \HubletoMain\Controller
+class Report extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Controllers;
 
-class BillingAccounts extends \HubletoMain\Controller
+class BillingAccounts extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {

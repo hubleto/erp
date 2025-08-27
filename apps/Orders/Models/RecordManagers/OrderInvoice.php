@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Orders\Models\RecordManagers;
 use HubletoApp\Community\Invoices\Models\RecordManagers\Invoice;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OrderInvoice extends \HubletoMain\RecordManager
+class OrderInvoice extends \Hubleto\Erp\RecordManager
 {
   public $table = 'orders_invoices';
 

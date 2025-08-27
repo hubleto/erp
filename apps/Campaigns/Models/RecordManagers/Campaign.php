@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use HubletoApp\Community\Pipeline\Models\RecordManagers\Pipeline;
 use HubletoApp\Community\Pipeline\Models\RecordManagers\PipelineStep;
 
-class Campaign extends \HubletoMain\RecordManager
+class Campaign extends \Hubleto\Erp\RecordManager
 {
   public $table = 'campaigns';
 
@@ -47,7 +47,7 @@ class Campaign extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
 

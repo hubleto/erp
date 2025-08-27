@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Deals\Controllers\Api;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class GenerateInvoice extends \HubletoMain\Controllers\ApiController
+class GenerateInvoice extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

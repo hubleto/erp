@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class MyAccount extends \HubletoMain\Controller
+class MyAccount extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

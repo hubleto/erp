@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Cli\Agent\Create;
+namespace Hubleto\Erp\Cli\Agent\Create;
 
-class Model extends \HubletoMain\Cli\Agent\Command
+class Model extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
@@ -75,7 +75,7 @@ class Model extends \HubletoMain\Cli\Agent\Command
     }
 
     if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to re-install the app with your new model now?')) {
-      $this->getService(\HubletoMain\Cli\Agent\App\Install::class)
+      $this->getService(\Hubleto\Erp\Cli\Agent\App\Install::class)
         ->setAguments($this->arguments)
         ->run()
       ;

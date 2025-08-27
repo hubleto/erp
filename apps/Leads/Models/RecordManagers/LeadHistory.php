@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class LeadHistory extends \HubletoMain\RecordManager
+class LeadHistory extends \Hubleto\Erp\RecordManager
 {
   public $table = 'lead_histories';
 

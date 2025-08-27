@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Controllers;
+namespace Hubleto\Erp\Controllers;
 
 use Hubleto\Framework\Controllers\Controller;
 
-class NotFound extends \HubletoMain\Controller
+class NotFound extends \Hubleto\Erp\Controller
 {
   public bool $requiresUserAuthentication = false;
   public bool $hideDefaultDesktop = true;
-  public string $translationContext = 'HubletoMain\\Loader::Controllers\\NotFound';
+  public string $translationContext = 'Hubleto\\Erp\\Loader::Controllers\\NotFound';
 
   public function prepareView(): void
   {

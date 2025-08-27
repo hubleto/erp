@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Products\Models;
 
-class Group extends \HubletoMain\Model
+class Group extends \Hubleto\Erp\Model
 {
   public string $table = 'product_groups';
   public string $recordManagerClass = RecordManagers\Group::class;

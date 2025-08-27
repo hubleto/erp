@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Deals\Controllers\Boards;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class DealValueByResult extends \HubletoMain\Controller
+class DealValueByResult extends \Hubleto\Erp\Controller
 {
   public bool $hideDefaultDesktop = true;
 

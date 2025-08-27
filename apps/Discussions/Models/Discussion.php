@@ -21,7 +21,7 @@ use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
-class Discussion extends \HubletoMain\Model
+class Discussion extends \Hubleto\Erp\Model
 {
   public string $table = 'discussions';
   public string $recordManagerClass = RecordManagers\Discussion::class;

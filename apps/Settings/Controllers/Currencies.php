@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class Currencies extends \HubletoMain\Controller
+class Currencies extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

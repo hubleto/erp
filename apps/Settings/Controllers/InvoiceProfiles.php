@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Settings\Controllers;
 
-class InvoiceProfiles extends \HubletoMain\Controller
+class InvoiceProfiles extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

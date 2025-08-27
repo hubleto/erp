@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class User extends \HubletoMain\RecordManager
+class User extends \Hubleto\Erp\RecordManager
 {
   /**
    * @var string
@@ -50,7 +50,7 @@ class User extends \HubletoMain\RecordManager
 
   public function prepareLookupQuery(string $search): mixed
   {
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
     $idUser = $main->getAuthProvider()->getUserId();
 
     $query = $this;

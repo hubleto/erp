@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Models\RecordManagers;
 
-class Log extends \HubletoMain\RecordManager
+class Log extends \Hubleto\Erp\RecordManager
 {
   public $table = 'cloud_log';
 

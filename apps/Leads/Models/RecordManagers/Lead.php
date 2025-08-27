@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Lead extends \HubletoMain\RecordManager
+class Lead extends \Hubleto\Erp\RecordManager
 {
   public $table = 'leads';
 
@@ -130,7 +130,7 @@ class Lead extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     if ($main->getRouter()->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where("leads.id_customer", $main->getRouter()->urlParamAsInteger("idCustomer"));

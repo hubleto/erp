@@ -7,7 +7,7 @@ use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 
-class Discount extends \HubletoMain\Model
+class Discount extends \Hubleto\Erp\Model
 {
   public string $table = 'cloud_discounts';
   public string $recordManagerClass = RecordManagers\Discount::class;

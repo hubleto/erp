@@ -7,7 +7,7 @@ use HubletoApp\Community\Projects\Models\Project;
 use HubletoApp\Community\Projects\Models\ProjectOrder;
 use HubletoApp\Community\Orders\Models\Order;
 
-class CreateFromOrder extends \HubletoMain\Controllers\ApiController
+class CreateFromOrder extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

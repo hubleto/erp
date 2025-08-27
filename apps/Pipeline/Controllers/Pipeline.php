@@ -8,7 +8,7 @@ use HubletoApp\Community\Tasks\Models\Task;
 use HubletoApp\Community\Orders\Models\Order;
 use HubletoApp\Community\Pipeline\Models\Pipeline as ModelPipeline;
 
-class Pipeline extends \HubletoMain\Controller
+class Pipeline extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

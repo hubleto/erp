@@ -10,7 +10,7 @@ use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Boolean;
 
-class Mail extends \HubletoMain\Model
+class Mail extends \Hubleto\Erp\Model
 {
   public string $table = 'mails';
   public string $recordManagerClass = RecordManagers\Mail::class;

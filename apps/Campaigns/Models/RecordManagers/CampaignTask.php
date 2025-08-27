@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Campaigns\Models\RecordManagers;
 use HubletoApp\Community\Tasks\Models\RecordManagers\Task;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CampaignTask extends \HubletoMain\RecordManager
+class CampaignTask extends \Hubleto\Erp\RecordManager
 {
   public $table = 'campaigns_tasks';
 

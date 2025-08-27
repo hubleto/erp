@@ -8,7 +8,7 @@ use Hubleto\Framework\Db\Column\Json;
 
 use HubletoApp\Community\Mail\Models\Account;
 
-class MailAccount extends \HubletoMain\Model
+class MailAccount extends \Hubleto\Erp\Model
 {
   public string $table = 'issues_mail_accounts';
   public string $recordManagerClass = RecordManagers\MailAccount::class;

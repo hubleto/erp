@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Category extends \HubletoMain\RecordManager
+class Category extends \Hubleto\Erp\RecordManager
 {
   public $table = 'contact_categories';
 

@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Calendar\Controllers\Api;
 
-class GetCalendarEvents extends \HubletoMain\Controllers\ApiController
+class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
 {
   public string $dateStart = '';
   public string $dateEnd = '';

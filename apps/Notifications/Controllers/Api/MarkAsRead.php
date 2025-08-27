@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Notifications\Controllers\Api;
 
-class MarkAsRead extends \HubletoMain\Controllers\ApiController
+class MarkAsRead extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

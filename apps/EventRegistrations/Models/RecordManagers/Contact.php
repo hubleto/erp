@@ -5,7 +5,7 @@ namespace HubletoApp\Community\EventRegistrations\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class Contact extends \HubletoMain\RecordManager
+class Contact extends \Hubleto\Erp\RecordManager
 {
   public $table = 'my_app_contacts';
 

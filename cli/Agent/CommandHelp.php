@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Cli\Agent;
+namespace Hubleto\Erp\Cli\Agent;
 
-class CommandHelp extends \HubletoMain\Cli\Agent\Command
+class CommandHelp extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {

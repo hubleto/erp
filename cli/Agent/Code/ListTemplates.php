@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoMain\Cli\Agent\Code;
+namespace Hubleto\Erp\Cli\Agent\Code;
 
-class ListTemplates extends \HubletoMain\Cli\Agent\Command
+class ListTemplates extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {

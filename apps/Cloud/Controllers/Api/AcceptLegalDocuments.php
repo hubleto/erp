@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Controllers\Api;
 
-class AcceptLegalDocuments extends \HubletoMain\Controllers\ApiController
+class AcceptLegalDocuments extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Cli\Agent\Debug;
+namespace Hubleto\Erp\Cli\Agent\Debug;
 
 class MyProvider extends \League\OAuth2\Client\Provider\GenericProvider
 {
@@ -16,7 +16,7 @@ class MyProvider extends \League\OAuth2\Client\Provider\GenericProvider
   }
 }
 
-class TestOauth extends \HubletoMain\Cli\Agent\Command
+class TestOauth extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {

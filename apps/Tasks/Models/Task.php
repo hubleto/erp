@@ -21,7 +21,7 @@ use HubletoApp\Community\Settings\Models\User;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 use HubletoApp\Community\Pipeline\Models\PipelineStep;
 
-class Task extends \HubletoMain\Model
+class Task extends \Hubleto\Erp\Model
 {
   public string $table = 'tasks';
   public string $recordManagerClass = RecordManagers\Task::class;

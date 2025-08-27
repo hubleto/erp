@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Discussions\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use HubletoApp\Community\Settings\Models\RecordManagers\User;
 
-class Member extends \HubletoMain\RecordManager
+class Member extends \Hubleto\Erp\RecordManager
 {
   public $table = 'discussions_members';
 
@@ -23,7 +23,7 @@ class Member extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     if ($main->getRouter()->urlParamAsInteger("idDiscussion") > 0) {
       $query = $query->where($this->table . '.id_discussion', $main->getRouter()->urlParamAsInteger("idDiscussion"));

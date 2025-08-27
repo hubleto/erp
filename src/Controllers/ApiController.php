@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Controllers;
+namespace Hubleto\Erp\Controllers;
 
-class ApiController extends \HubletoMain\Controller
+class ApiController extends \Hubleto\Erp\Controller
 {
   public int $returnType = self::RETURN_TYPE_JSON;
   public bool $permittedForAllUsers = true;

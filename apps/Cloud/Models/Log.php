@@ -8,7 +8,7 @@ use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Decimal;
 use HubletoApp\Community\Settings\Models\User;
 
-class Log extends \HubletoMain\Model
+class Log extends \Hubleto\Erp\Model
 {
   public string $table = 'cloud_log';
   public string $recordManagerClass = RecordManagers\Log::class;

@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Settings\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Currency extends \HubletoMain\Model
+class Currency extends \Hubleto\Erp\Model
 {
   public string $table = 'currencies';
   public string $recordManagerClass = RecordManagers\Currency::class;

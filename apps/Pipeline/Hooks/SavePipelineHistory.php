@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Pipeline\Hooks;
 
 use HubletoApp\Community\Pipeline\Models\PipelineHistory;
 
-class SavePipelineHistory extends \HubletoMain\Hook
+class SavePipelineHistory extends \Hubleto\Erp\Hook
 {
 
   public function run(string $event, array $args): void

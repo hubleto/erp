@@ -12,7 +12,7 @@ final class GenerateDocumentTest extends TestCase
 
   public function testCreateTemplate(): void
   {
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     $mTemplate = $main->getService(Template::class);
     $template = $mTemplate->record->recordCreate([

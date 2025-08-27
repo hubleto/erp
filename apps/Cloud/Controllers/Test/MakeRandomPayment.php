@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Cloud\Controllers\Test;
 
 use HubletoApp\Community\Cloud\PremiumAccount;
 
-class MakeRandomPayment extends \HubletoMain\Controller
+class MakeRandomPayment extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {

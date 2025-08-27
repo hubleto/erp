@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Cloud\Controllers;
 
-class Log extends \HubletoMain\Controller
+class Log extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {

@@ -6,7 +6,7 @@ use HubletoApp\Community\Documents\Models\RecordManagers\Document;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class InvoiceDocument extends \HubletoMain\RecordManager
+class InvoiceDocument extends \Hubleto\Erp\RecordManager
 {
   public $table = 'invoice_documents';
 

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Cli\Agent;
+namespace Hubleto\Erp\Cli\Agent;
 
-class CommandInit extends \HubletoMain\Cli\Agent\Command
+class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 {
   public array $initConfig = [];
 
@@ -378,7 +378,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan("Hurray. Installing your Hubleto with following packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
 
     // install
-    $installer = new \HubletoMain\Installer\Installer(
+    $installer = new \Hubleto\Erp\Installer\Installer(
       'local-env',
       trim(\Hubleto\Framework\Helper::str2url((string) $rewriteBase), '/-'), // uid
       (string) $accountFullName,
@@ -478,7 +478,7 @@ class CommandInit extends \HubletoMain\Cli\Agent\Command
 
     if ($generateDemoData) {
       $this->getAppManager()->init();
-      $this->getService(\HubletoMain\Cli\Agent\Project\GenerateDemoData::class)->run();
+      $this->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->run();
     }
 
     \Hubleto\Terminal::cyan("\n");

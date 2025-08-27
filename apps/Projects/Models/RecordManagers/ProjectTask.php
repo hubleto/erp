@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Projects\Models\RecordManagers;
 use HubletoApp\Community\Tasks\Models\RecordManagers\Task;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ProjectTask extends \HubletoMain\RecordManager
+class ProjectTask extends \Hubleto\Erp\RecordManager
 {
   public $table = 'projects_tasks';
 

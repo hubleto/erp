@@ -8,7 +8,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 use HubletoApp\Community\Deals\Models\Deal;
 
-class PipelineStep extends \HubletoMain\Model
+class PipelineStep extends \Hubleto\Erp\Model
 {
   public string $table = 'pipeline_steps';
   public string $recordManagerClass = RecordManagers\PipelineStep::class;

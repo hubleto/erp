@@ -8,7 +8,7 @@ use HubletoApp\Community\Deals\Models\DealLead;
 use HubletoApp\Community\Leads\Models\Lead;
 use HubletoApp\Community\Pipeline\Models\Pipeline;
 
-class CreateFromLead extends \HubletoMain\Controllers\ApiController
+class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

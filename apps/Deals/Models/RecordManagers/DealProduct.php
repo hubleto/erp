@@ -6,7 +6,7 @@ use HubletoApp\Community\Products\Models\RecordManagers\Product;
 use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DealProduct extends \HubletoMain\RecordManager
+class DealProduct extends \Hubleto\Erp\RecordManager
 {
   public $table = 'deal_products';
 
@@ -26,7 +26,7 @@ class DealProduct extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     if ($main->getRouter()->urlParamAsInteger("idDeal") > 0) {
       $query = $query->where("id_deal", $main->getRouter()->urlParamAsInteger("idDeal"));

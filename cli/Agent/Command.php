@@ -2,7 +2,7 @@
 
 // wrapper for `php hubleto` command
 
-namespace HubletoMain\Cli\Agent;
+namespace Hubleto\Erp\Cli\Agent;
 
 class Command extends \Hubleto\Framework\Core
 {

@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Leads\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 
-class LostReason extends \HubletoMain\Model
+class LostReason extends \Hubleto\Erp\Model
 {
   public string $table = 'lead_lost_reasons';
   public string $recordManagerClass = RecordManagers\LostReason::class;

@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Deals\Reports;
 
 use HubletoApp\Community\Deals\Models\Deal;
 
-class MonthlyRevenue extends \HubletoMain\Report
+class MonthlyRevenue extends \Hubleto\Erp\Report
 {
   protected string $urlSlug = 'month-revenue';
   public string $name = 'My revenue this month';

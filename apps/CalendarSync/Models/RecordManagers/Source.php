@@ -2,14 +2,14 @@
 
 namespace HubletoApp\Community\CalendarSync\Models\RecordManagers;
 
-class Source extends \HubletoMain\RecordManager
+class Source extends \Hubleto\Erp\RecordManager
 {
   public $table = 'calendar_sync_sources';
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     $query = parent::prepareReadQuery($query, $level);
     $type = $main->getRouter()->urlParamAsString('type') ?? "";

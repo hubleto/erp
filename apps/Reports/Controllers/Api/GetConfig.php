@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Reports\Controllers\Api;
 
-class GetConfig extends \HubletoMain\Controllers\ApiController
+class GetConfig extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

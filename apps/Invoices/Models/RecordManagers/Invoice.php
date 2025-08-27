@@ -13,7 +13,7 @@ use HubletoApp\Community\Pipeline\Models\RecordManagers\Pipeline;
 use HubletoApp\Community\Pipeline\Models\RecordManagers\PipelineStep;
 use HubletoApp\Community\Documents\Models\RecordManagers\Template;
 
-class Invoice extends \HubletoMain\RecordManager {
+class Invoice extends \Hubleto\Erp\RecordManager {
   public $table = 'invoices';
 
   /** @return BelongsTo<Customer, covariant Invoice> */
@@ -66,7 +66,7 @@ class Invoice extends \HubletoMain\RecordManager {
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     $idCustomer = $main->getRouter()->urlParamAsInteger('idCustomer');
     if ($idCustomer > 0) $query->where('id_customer', $idCustomer);

@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Settings\Models;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class UserRole extends \HubletoMain\Model
+class UserRole extends \Hubleto\Erp\Model
 {
   public const ROLE_ADMINISTRATOR = 1;
   public const ROLE_CHIEF_OFFICER = 2;

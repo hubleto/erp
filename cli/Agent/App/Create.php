@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoMain\Cli\Agent\App;
+namespace Hubleto\Erp\Cli\Agent\App;
 
-class Create extends \HubletoMain\Cli\Agent\Command
+class Create extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
@@ -54,7 +54,7 @@ class Create extends \HubletoMain\Cli\Agent\Command
     \Hubleto\Terminal::cyan("App {$appNamespace} created successfully.\n");
 
     if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to install the app now?')) {
-      $this->getService(\HubletoMain\Cli\Agent\App\Install::class)
+      $this->getService(\Hubleto\Erp\Cli\Agent\App\Install::class)
         ->setAguments($this->arguments)
         ->run()
       ;

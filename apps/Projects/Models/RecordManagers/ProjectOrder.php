@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Projects\Models\RecordManagers;
 use HubletoApp\Community\Orders\Models\RecordManagers\Order;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ProjectOrder extends \HubletoMain\RecordManager
+class ProjectOrder extends \Hubleto\Erp\RecordManager
 {
   public $table = 'projects_orders';
 

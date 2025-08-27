@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Contacts\Controllers;
 
-class Tags extends \HubletoMain\Controller
+class Tags extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

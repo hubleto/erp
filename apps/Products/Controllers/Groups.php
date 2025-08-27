@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Products\Controllers;
 
-class Groups extends \HubletoMain\Controller
+class Groups extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

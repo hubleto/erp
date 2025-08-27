@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Cloud\Controllers\Api;
 
 use HubletoApp\Community\Cloud\PremiumAccount;
 
-class PayMonthly extends \HubletoMain\Controllers\ApiController
+class PayMonthly extends \Hubleto\Erp\Controllers\ApiController
 {
   public const PAYMENT_SUCCESS = 1;
   public const THIS_IS_NOT_PREMIUM_ACCOUNT = 2;

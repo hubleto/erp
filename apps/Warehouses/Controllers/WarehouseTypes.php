@@ -2,7 +2,7 @@
 
 namespace HubletoApp\Community\Warehouses\Controllers;
 
-class WarehouseTypes extends \HubletoMain\Controller
+class WarehouseTypes extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {

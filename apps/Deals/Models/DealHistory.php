@@ -6,7 +6,7 @@ use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class DealHistory extends \HubletoMain\Model
+class DealHistory extends \Hubleto\Erp\Model
 {
   public string $table = 'deal_histories';
   public string $recordManagerClass = RecordManagers\DealHistory::class;

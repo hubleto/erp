@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoMain\Cli\Agent\App;
+namespace Hubleto\Erp\Cli\Agent\App;
 
-class Install extends \HubletoMain\Cli\Agent\Command
+class Install extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {

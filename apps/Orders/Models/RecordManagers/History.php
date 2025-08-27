@@ -4,7 +4,7 @@ namespace HubletoApp\Community\Orders\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class History extends \HubletoMain\RecordManager
+class History extends \Hubleto\Erp\RecordManager
 {
   public $table = 'order_histories';
 

@@ -5,7 +5,7 @@ namespace HubletoApp\Community\Customers\Models;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class Tag extends \HubletoMain\Model
+class Tag extends \Hubleto\Erp\Model
 {
   public string $table = 'customer_tags';
   public string $recordManagerClass = RecordManagers\Tag::class;

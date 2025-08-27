@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Order extends \HubletoMain\RecordManager
+class Order extends \Hubleto\Erp\RecordManager
 {
   public $table = 'orders';
 
@@ -100,7 +100,7 @@ class Order extends \HubletoMain\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \HubletoMain\Loader::getGlobalApp();
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
 

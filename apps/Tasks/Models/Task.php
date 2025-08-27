@@ -20,6 +20,8 @@ use Hubleto\App\Community\Projects\Models\Project;
 use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\App\Community\Pipeline\Models\Pipeline;
 use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Projects\Models\ProjectTask;
+use Hubleto\App\Community\Deals\Models\DealTask;
 
 class Task extends \Hubleto\Erp\Model
 {
@@ -32,6 +34,8 @@ class Task extends \Hubleto\Erp\Model
     'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
     'DEVELOPER' => [ self::BELONGS_TO, User::class, 'id_developer', 'id' ],
     'TESTER' => [ self::BELONGS_TO, User::class, 'id_tester', 'id' ],
+    'DEALS' => [ self::HAS_MANY, DealTask::class, 'id_deal', 'id' ],
+    'PROJECTS' => [ self::HAS_MANY, ProjectTask::class, 'id_project', 'id' ],
   ];
 
   /**

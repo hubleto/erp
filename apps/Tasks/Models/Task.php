@@ -93,6 +93,7 @@ class Task extends \Hubleto\Erp\Model
 
     $description->ui['defaultFilters'] = [
       'fTaskPipelineStep' => Pipeline::buildTableDefaultFilterForPipelineSteps($this, 'Status'),
+      'fTaskClosed' => [ 'title' => $this->translate('Open / Closed'), 'options' => [ 0 => $this->translate('Open'), 1 => $this->translate('Closed') ] ],
     ];
 
     return $description;

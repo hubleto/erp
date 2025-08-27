@@ -78,6 +78,7 @@ class Campaign extends \Hubleto\Erp\Model
 
     $description->ui['defaultFilters'] = [
       'fCampaignPipelineStep' => Pipeline::buildTableDefaultFilterForPipelineSteps($this, 'Phase'),
+      'fCampaignClosed' => [ 'title' => $this->translate('Open / Closed'), 'options' => [ 0 => $this->translate('Open'), 1 => $this->translate('Closed') ] ],
     ];
 
 

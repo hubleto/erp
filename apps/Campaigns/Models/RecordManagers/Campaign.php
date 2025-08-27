@@ -57,6 +57,14 @@ class Campaign extends \Hubleto\Erp\RecordManager
       $defaultFilters['fCampaignPipelineStep'] ?? []
     );
 
+    if (isset($defaultFilters["fCampaignClosed"])) {
+      if ($defaultFilters["fCampaignClosed"] == 1) {
+        $query = $query->where("campaigns.is_closed", true);
+      } else {
+        $query = $query->where("campaigns.is_closed", false);
+      }
+    }
+
     return $query;
   }
 

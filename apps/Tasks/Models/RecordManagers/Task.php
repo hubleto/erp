@@ -69,6 +69,14 @@ class Task extends \Hubleto\Erp\RecordManager
       $defaultFilters['fTaskPipelineStep'] ?? []
     );
 
+    if (isset($defaultFilters["fTaskClosed"])) {
+      if ($defaultFilters["fTaskClosed"] == 1) {
+        $query = $query->where("tasks.is_closed", true);
+      } else {
+        $query = $query->where("tasks.is_closed", false);
+      }
+    }
+
     return $query;
   }
 

@@ -84,6 +84,14 @@ class Project extends \Hubleto\Erp\RecordManager
       $defaultFilters['fProjectPipelineStep'] ?? []
     );
 
+    if (isset($defaultFilters["fProjectClosed"])) {
+      if ($defaultFilters["fProjectClosed"] == 1) {
+        $query = $query->where("projects.is_closed", true);
+      } else {
+        $query = $query->where("projects.is_closed", false);
+      }
+    }
+
     return $query;
   }
   

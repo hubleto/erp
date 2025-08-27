@@ -94,6 +94,7 @@ class Order extends \Hubleto\Erp\Model
 
     $description->ui['defaultFilters'] = [
       'fOrderPipelineStep' => Pipeline::buildTableDefaultFilterForPipelineSteps($this, 'Stage'),
+      'fOrderClosed' => [ 'title' => $this->translate('Open / Closed'), 'options' => [ 0 => $this->translate('Open'), 1 => $this->translate('Closed') ] ],
     ];
 
     return $description;

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HubletoApp\Community\Invoices\Controllers\Api;
+namespace Hubleto\App\Community\Invoices\Controllers\Api;
 
-use HubletoApp\Community\Invoices\Models\Invoice;
+use Hubleto\App\Community\Invoices\Models\Invoice;
 
 class GeneratePdf extends \Hubleto\Erp\Controllers\ApiController
 {

@@ -36,7 +36,7 @@ export interface FormLeadState extends HubletoFormState {
 export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Leads/Models/Lead',
+    model: 'Hubleto/App/Community/Leads/Models/Lead',
   };
 
   props: FormLeadProps;
@@ -44,9 +44,9 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
   refLogActivityInput: any;
 
-  translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\FormLead';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\FormLead';
 
-  parentApp: string = 'HubletoApp/Community/Leads';
+  parentApp: string = 'Hubleto/App/Community/Leads';
 
   constructor(props: FormLeadProps) {
     super(props);
@@ -104,7 +104,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Leads/Models/LeadDocument',
+        model: 'Hubleto/App/Community/Leads/Models/LeadDocument',
         idLead: this.state.id,
       },
       (description: any) => {
@@ -317,7 +317,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   {/* {this.inputWrapper('identifier', {readonly: R.is_archived})} */}
                   <FormInput title={"Contact"} required={true}>
                     <Lookup {...this.getInputProps('id_contact')}
-                      model='HubletoApp/Community/Contacts/Models/Contact'
+                      model='Hubleto/App/Community/Contacts/Models/Contact'
                       customEndpointParams={{idCustomer: R.id_customer}}
                       readonly={R.is_archived}
                       value={R.id_contact}
@@ -358,7 +358,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                     <InputTags2 {...this.getInputProps('tags_input')}
                       value={this.state.record.TAGS}
                       readonly={R.is_archived}
-                      model='HubletoApp/Community/Leads/Models/Tag'
+                      model='Hubleto/App/Community/Leads/Models/Tag'
                       targetColumn='id_lead'
                       sourceColumn='id_tag'
                       colorColumn='color'
@@ -370,7 +370,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   </FormInput>
                   <FormInput title={"Customer"}>
                     <Lookup {...this.getInputProps('id_customer')}
-                      model='HubletoApp/Community/Customers/Models/Customer'
+                      model='Hubleto/App/Community/Customers/Models/Customer'
                       urlAdd='customers/add'
                       readonly={R.is_archived}
                       value={R.id_customer}
@@ -460,7 +460,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           parentForm={this}
           uid={this.props.uid + "_table_lead_document"}
           junctionTitle='Lead'
-          junctionModel='HubletoApp/Community/Leads/Models/LeadDocument'
+          junctionModel='Hubleto/App/Community/Leads/Models/LeadDocument'
           junctionSourceColumn='id_lead'
           junctionSourceRecordId={R.id}
           junctionDestinationColumn='id_document'
@@ -473,7 +473,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           parentForm={this}
           uid={this.props.uid + "_table_lead_task"}
           junctionTitle='Lead'
-          junctionModel='HubletoApp/Community/Leads/Models/LeadTask'
+          junctionModel='Hubleto/App/Community/Leads/Models/LeadTask'
           junctionSourceColumn='id_lead'
           junctionSourceRecordId={R.id}
           junctionDestinationColumn='id_task'

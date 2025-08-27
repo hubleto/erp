@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Events\Models;
+namespace Hubleto\App\Community\Events\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
@@ -15,7 +15,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\User;
 
 class Type extends \Hubleto\Erp\Model
 {

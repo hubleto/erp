@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Deals;
+namespace Hubleto\App\Community\Deals;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -36,8 +36,8 @@ class Loader extends \Hubleto\Framework\App
     
     $this->addSearchSwitch('d', 'deals');
 
-    /** @var \HubletoApp\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Deal Tags'),
       'icon' => 'fas fa-tags',
@@ -49,20 +49,20 @@ class Loader extends \Hubleto\Framework\App
       'url' => 'settings/deal-lost-reasons',
     ]);
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar($this, 'deals', $this->configAsString('calendarColor'), Calendar::class);
 
-    /** @var \HubletoApp\Community\Pipeline\Manager $pipelineManager */
-    $pipelineManager = $this->getService(\HubletoApp\Community\Pipeline\Manager::class);
+    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
+    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
     $pipelineManager->addPipeline($this, 'deals', Pipeline::class);
 
-    /** @var \HubletoApp\Community\Reports\Loader $reportsApp */
-    $reportsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Reports\Loader::class);
+    /** @var \Hubleto\App\Community\Reports\Loader $reportsApp */
+    $reportsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
     $reportsApp->reportManager->addReport($this, Reports\MonthlyRevenue::class);
 
-    /** @var \HubletoApp\Community\Dashboards\Manager $dashboardManager */
-    $dashboardManager = $this->getService(\HubletoApp\Community\Dashboards\Manager::class);
+    /** @var \Hubleto\App\Community\Dashboards\Manager $dashboardManager */
+    $dashboardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
     $dashboardManager->addBoard($this, $this->translate('Deal warnings'), 'deals/boards/deal-warnings');
     $dashboardManager->addBoard($this, $this->translate('Most valuable deals'), 'deals/boards/most-valuable-deals');
     $dashboardManager->addBoard($this, $this->translate('Deal value by result'), 'deals/boards/deal-value-by-result');

@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\Billing\Models;
+namespace Hubleto\App\Community\Billing\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Customers\Models\Customer;
 
 class BillingAccount extends \Hubleto\Erp\Model
 {

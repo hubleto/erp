@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Models\RecordManagers;
+namespace Hubleto\App\Community\Mail\Models\RecordManagers;
 
 class Index extends \Hubleto\Erp\RecordManager
 {

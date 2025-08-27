@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HubletoApp\Community\Pipeline\Hooks;
+namespace Hubleto\App\Community\Pipeline\Hooks;
 
-use HubletoApp\Community\Pipeline\Models\PipelineHistory;
+use Hubleto\App\Community\Pipeline\Models\PipelineHistory;
 
 class SavePipelineHistory extends \Hubleto\Erp\Hook
 {

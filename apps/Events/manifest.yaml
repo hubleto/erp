@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Events
+namespace: Hubleto\App\Community\Events
 appType: community
 sidebarGroup: events
 rootUrlSlug: events

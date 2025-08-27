@@ -14,13 +14,13 @@ export default class TableTransaction extends HubletoTable<TableTransactionProps
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Inventory/Models/Transaction',
+    model: 'Hubleto/App/Community/Inventory/Models/Transaction',
   }
 
   props: TableTransactionProps;
   state: TableTransactionState;
 
-  translationContext: string = 'HubletoApp\\Community\\Inventory::Components\\TableTransaction';
+  translationContext: string = 'Hubleto\\App\\Community\\Inventory::Components\\TableTransaction';
 
   constructor(props: TableTransactionProps) {
     super(props);

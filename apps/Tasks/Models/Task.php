@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Tasks\Models;
+namespace Hubleto\App\Community\Tasks\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
@@ -16,10 +16,10 @@ use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
-use HubletoApp\Community\Projects\Models\Project;
-use HubletoApp\Community\Settings\Models\User;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Projects\Models\Project;
+use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\PipelineStep;
 
 class Task extends \Hubleto\Erp\Model
 {

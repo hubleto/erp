@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Dashboards
+namespace: Hubleto\App\Community\Dashboards
 appType: community
 sidebarGroup: reporting
 rootUrlSlug: dashboards

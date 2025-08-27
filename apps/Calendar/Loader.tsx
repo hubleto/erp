@@ -17,5 +17,5 @@ class CalendarApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Calendar', new CalendarApp());
+globalThis.main.registerApp('Hubleto/App/Community/Calendar', new CalendarApp());
 

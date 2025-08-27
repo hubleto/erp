@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Crypto;
+namespace Hubleto\App\Community\Crypto;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -21,8 +21,8 @@ class Loader extends \Hubleto\Framework\App
       '/^crypto\/?$/' => Controllers\Dashboard::class,
     ]);
 
-    /** @var \HubletoApp\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Crypto'),
       'icon' => 'fas fa-key',

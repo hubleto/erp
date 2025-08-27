@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoApp\Community\Notifications\Hooks;
+namespace Hubleto\App\Community\Notifications\Hooks;
 
 class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
 {
@@ -8,8 +8,8 @@ class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
   public function run(string $event, array $args): void
   {
     if ($event == 'model:record-updated') {
-      /** @var \HubletoApp\Community\Notifications\Loader $notificationsApp */
-      $notificationsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Notifications\Loader::class);
+      /** @var \Hubleto\App\Community\Notifications\Loader $notificationsApp */
+      $notificationsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Notifications\Loader::class);
 
       list($model, $originalRecord, $savedRecord) = $args;
 

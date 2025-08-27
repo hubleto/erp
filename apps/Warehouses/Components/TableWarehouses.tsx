@@ -14,13 +14,13 @@ export default class FormWarehouses extends HubletoTable<TableWarehousesProps, T
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Warehouses/Models/Warehouse',
+    model: 'Hubleto/App/Community/Warehouses/Models/Warehouse',
   }
 
   props: TableWarehousesProps;
   state: TableWarehousesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Warehouses::Components\\FormWarehouses';
+  translationContext: string = 'Hubleto\\App\\Community\\Warehouses::Components\\FormWarehouses';
 
   constructor(props: TableWarehousesProps) {
     super(props);

@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Controllers\Boards;
+namespace Hubleto\App\Community\Deals\Controllers\Boards;
 
-use HubletoApp\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\Deal;
 
 class MostValuableDeals extends \Hubleto\Erp\Controller
 {
@@ -26,7 +26,7 @@ class MostValuableDeals extends \Hubleto\Erp\Controller
 
     $this->viewParams['mostValuableDeals'] = $mostValuableDeals;
 
-    $this->setView('@HubletoApp:Community:Deals/Boards/MostValuableDeals.twig');
+    $this->setView('@Hubleto:App:Community:Deals/Boards/MostValuableDeals.twig');
   }
 
 }

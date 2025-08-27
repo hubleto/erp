@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Community\Tasks\Models\RecordManagers;
+namespace Hubleto\App\Community\Tasks\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
-use HubletoApp\Community\Projects\Models\RecordManagers\Project;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\Pipeline;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\PipelineStep;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Projects\Models\RecordManagers\Project;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\PipelineStep;
 
 class Task extends \Hubleto\Erp\RecordManager
 {

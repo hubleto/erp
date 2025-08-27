@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Desktop\Controllers;
+namespace Hubleto\App\Community\Desktop\Controllers;
 
 class Desktop extends \Hubleto\Erp\Controller
 {
@@ -26,7 +26,7 @@ class Desktop extends \Hubleto\Erp\Controller
     }
 
     if ($activatedApp === null) {
-      $activatedApp = $this->getAppManager()->getApp(\HubletoApp\Community\Desktop\Loader::class);
+      $activatedApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Desktop\Loader::class);
     }
 
     uasort($appsInSidebar, function ($a, $b) {
@@ -71,7 +71,7 @@ class Desktop extends \Hubleto\Erp\Controller
       "sk" => [ "flagImage" => "sk.jpg", "name" => "Slovensky" ],
     ]);
 
-    $appMenu = $this->getService(\HubletoApp\Community\Desktop\Loader::class)->appMenu;
+    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\Loader::class)->appMenu;
     $this->viewParams['appMenu'] = [];
     foreach ($appMenu as $item) {
       if ($item['app'] === $activatedApp) {
@@ -79,7 +79,7 @@ class Desktop extends \Hubleto\Erp\Controller
       }
     }
 
-    $this->setView('@HubletoApp:Community:Desktop/Desktop.twig');
+    $this->setView('@Hubleto:App:Community:Desktop/Desktop.twig');
   }
 
 }

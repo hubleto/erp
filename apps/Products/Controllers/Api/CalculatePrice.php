@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Products\Controllers\Api;
+namespace Hubleto\App\Community\Products\Controllers\Api;
 
 class CalculatePrice extends \Hubleto\Erp\Controllers\ApiController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Usage\Models\RecordManagers;
+namespace Hubleto\App\Community\Usage\Models\RecordManagers;
 
 class Log extends \Hubleto\Erp\RecordManager
 {

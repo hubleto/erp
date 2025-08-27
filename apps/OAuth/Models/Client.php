@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Models;
+namespace Hubleto\App\Community\OAuth\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\VarcBooleanhar;

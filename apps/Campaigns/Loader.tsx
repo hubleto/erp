@@ -11,4 +11,4 @@ class CampaignsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Campaigns', new CampaignsApp());
+globalThis.main.registerApp('Hubleto/App/Community/Campaigns', new CampaignsApp());

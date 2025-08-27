@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Models;
+namespace Hubleto\App\Community\Orders\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Invoices\Models\Invoice;
+use Hubleto\App\Community\Invoices\Models\Invoice;
 
 class OrderInvoice extends \Hubleto\Erp\Model
 {

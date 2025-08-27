@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Cloud
+namespace: Hubleto\App\Community\Cloud
 appType: community
 sidebarGroup: maintenance
 rootUrlSlug: cloud

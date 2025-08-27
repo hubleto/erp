@@ -23,13 +23,13 @@ export default class TableCustomers extends HubletoTable<TableCustomersProps, Ta
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Customers/Models/Customer',
+    model: 'Hubleto/App/Community/Customers/Models/Customer',
   }
 
   props: TableCustomersProps;
   state: TableCustomersState;
 
-  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableCustomers';
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\TableCustomers';
 
   getFormModalProps() {
     return {
@@ -56,7 +56,7 @@ export default class TableCustomers extends HubletoTable<TableCustomersProps, Ta
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Contacts/Models/Contact',
+        model: 'Hubleto/App/Community/Contacts/Models/Contact',
         idCustomer: this.props.recordId,
       },
       (description: any) => {
@@ -66,7 +66,7 @@ export default class TableCustomers extends HubletoTable<TableCustomersProps, Ta
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Leads/Models/Lead',
+        model: 'Hubleto/App/Community/Leads/Models/Lead',
         idCustomer: this.props.recordId,
       },
       (description: any) => {
@@ -76,7 +76,7 @@ export default class TableCustomers extends HubletoTable<TableCustomersProps, Ta
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Deals/Models/Deal',
+        model: 'Hubleto/App/Community/Deals/Models/Deal',
         idCustomer: this.props.recordId,
       },
       (description: any) => {
@@ -86,7 +86,7 @@ export default class TableCustomers extends HubletoTable<TableCustomersProps, Ta
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Customers/Models/CustomerDocument',
+        model: 'Hubleto/App/Community/Customers/Models/CustomerDocument',
         idCustomer: this.props.recordId,
       },
       (description: any) => {

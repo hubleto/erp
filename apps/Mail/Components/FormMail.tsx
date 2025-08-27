@@ -7,13 +7,13 @@ export interface FormMailState extends HubletoFormState {}
 export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Mail/Models/Mail',
+    model: 'Hubleto/App/Community/Mail/Models/Mail',
   };
 
   props: FormMailProps;
   state: FormMailState;
 
-  translationContext: string = 'HubletoApp\\Community\\Mail\\Loader::Components\\FormMail';
+  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader::Components\\FormMail';
 
   constructor(props: FormMailProps) {
     super(props);

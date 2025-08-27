@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Controllers;
+namespace Hubleto\App\Community\Deals\Controllers;
 
 class ReportGoal extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class ReportGoal extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Deals/Goals.twig');
+    $this->setView('@Hubleto:App:Community:Deals/Goals.twig');
   }
 
 }

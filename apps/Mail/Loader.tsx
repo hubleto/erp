@@ -11,4 +11,4 @@ class MailApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Mail', new MailApp());
+globalThis.main.registerApp('Hubleto/App/Community/Mail', new MailApp());

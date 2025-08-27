@@ -8,13 +8,13 @@ interface FormAgendaState extends HubletoFormState { }
 export default class FormAgenda<P, S> extends HubletoForm<FormAgendaProps, FormAgendaState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Events/Models/Team',
+    model: 'Hubleto/App/Community/Events/Models/Team',
   }
 
   props: FormAgendaProps;
   state: FormAgendaState;
 
-  translationContext: string = 'HubletoApp\\Community\\Events::Components\\FormAgenda';
+  translationContext: string = 'Hubleto\\App\\Community\\Events::Components\\FormAgenda';
 
   constructor(props: FormAgendaProps) {
     super(props);
@@ -70,7 +70,7 @@ export default class FormAgenda<P, S> extends HubletoForm<FormAgendaProps, FormA
   //           <Table
   //             uid={this.props.uid + '_table_locations'}
   //             parentForm={this}
-  //             model='HubletoApp/Community/Warehouses/Models/Location'
+  //             model='Hubleto/App/Community/Warehouses/Models/Location'
   //             customEndpointParams={ { idWarehouse: this.state.id } }
   //           ></Table>
   //         }

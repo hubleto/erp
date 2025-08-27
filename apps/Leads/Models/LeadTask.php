@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Models;
+namespace Hubleto\App\Community\Leads\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Tasks\Models\Task;
+use Hubleto\App\Community\Tasks\Models\Task;
 
 class LeadTask extends \Hubleto\Erp\Model
 {

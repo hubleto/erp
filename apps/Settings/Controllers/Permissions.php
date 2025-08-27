@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers;
+namespace Hubleto\App\Community\Settings\Controllers;
 
 class Permissions extends \Hubleto\Erp\Controller
 {
@@ -15,8 +15,8 @@ class Permissions extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->viewParams['permissions'] = ($this->getModel(\HubletoApp\Community\Settings\Models\Permission::class))->record->orderBy('permission')->get();
-    $this->setView('@HubletoApp:Community:Settings/Permissions.twig');
+    $this->viewParams['permissions'] = ($this->getModel(\Hubleto\App\Community\Settings\Models\Permission::class))->record->orderBy('permission')->get();
+    $this->setView('@Hubleto:App:Community:Settings/Permissions.twig');
   }
 
 }

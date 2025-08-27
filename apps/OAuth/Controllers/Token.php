@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Controllers;
+namespace Hubleto\App\Community\OAuth\Controllers;
 
-class Token extends \HubletoApp\Community\OAuth\ServerController
+class Token extends \Hubleto\App\Community\OAuth\ServerController
 {
   public bool $hideDefaultDesktop = true;
   public bool $requiresUserAuthentication = false;

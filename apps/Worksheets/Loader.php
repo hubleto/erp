@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Worksheets;
+namespace Hubleto\App\Community\Worksheets;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Framework\App
       '/^worksheets\/api\/daily-activity-chart\/?$/' => Controllers\Api\DailyActivityChart::class,
     ]);
 
-    $appMenu = $this->getService(\HubletoApp\Community\Desktop\AppMenuManager::class);
+    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'worksheets', $this->translate('Worksheets'), 'fas fa-user-clock');
     $appMenu->addItem($this, 'worksheets/activity-types', $this->translate('Activity types'), 'fas fa-table');
   }

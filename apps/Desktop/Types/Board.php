@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Desktop\Types;
+namespace Hubleto\App\Community\Desktop\Types;
 
 class Board
 {

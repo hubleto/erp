@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoApp\Help\Customers\Tests;
+namespace Hubleto\App\Help\Customers\Tests;
 
 use PHPUnit\Framework\TestCase;
 

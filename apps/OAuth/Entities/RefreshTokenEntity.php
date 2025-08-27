@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Entities;
+namespace Hubleto\App\Community\OAuth\Entities;
 
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Entities\Traits\EntityTrait;

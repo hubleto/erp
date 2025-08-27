@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\CalendarSync
+namespace: Hubleto\App\Community\CalendarSync
 appType: community
 rootUrlSlug: settings/calendar-sources
 name: Calendar Sync

@@ -7,13 +7,13 @@ export interface FormProductSupplierState extends HubletoFormState {}
 export default class FormProductSupplier<P, S> extends HubletoForm<FormProductSupplierProps,FormProductSupplierState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Products/Models/ProductSupplier',
+    model: 'Hubleto/App/Community/Products/Models/ProductSupplier',
   };
 
   props: FormProductSupplierProps;
   state: FormProductSupplierState;
 
-  translationContext: string = 'HubletoApp\\Community\\Products\\Loader::Components\\FormProductSupplier';
+  translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader::Components\\FormProductSupplier';
 
   constructor(props: FormProductSupplierProps) {
     super(props);

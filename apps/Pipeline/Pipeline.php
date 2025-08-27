@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Pipeline;
+namespace Hubleto\App\Community\Pipeline;
 
 class Pipeline extends \Hubleto\Framework\Core
 {

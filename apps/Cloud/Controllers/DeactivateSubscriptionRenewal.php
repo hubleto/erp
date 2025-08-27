@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Controllers;
+namespace Hubleto\App\Community\Cloud\Controllers;
 
-use HubletoApp\Community\Cloud\PremiumAccount;
+use Hubleto\App\Community\Cloud\PremiumAccount;
 
 class DeactivateSubscriptionRenewal extends \Hubleto\Erp\Controller
 {

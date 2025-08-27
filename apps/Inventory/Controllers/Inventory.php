@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Inventory\Controllers;
+namespace Hubleto\App\Community\Inventory\Controllers;
 
 class Inventory extends \Hubleto\Erp\Controller
 {
@@ -14,7 +14,7 @@ class Inventory extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Inventory/Inventory.twig');
+    $this->setView('@Hubleto:App:Community:Inventory/Inventory.twig');
   }
 
 }

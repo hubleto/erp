@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Calendar;
+namespace Hubleto\App\Community\Calendar;
 
 class Events extends \Hubleto\Framework\Core
 {

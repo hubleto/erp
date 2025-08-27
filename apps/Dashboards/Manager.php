@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Dashboards;
+namespace Hubleto\App\Community\Dashboards;
 
 class Manager extends \Hubleto\Framework\Core
 {

@@ -18,13 +18,13 @@ export default class TableNotifications extends Table<TableNotificationsProps, T
       field: "id",
       direction: "desc"
     },
-    model: 'HubletoApp/Community/Notifications/Models/Notification',
+    model: 'Hubleto/App/Community/Notifications/Models/Notification',
   }
 
   props: TableNotificationsProps;
   state: TableNotificationsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Notifications\\Loader::Components\\TableNotifications';
+  translationContext: string = 'Hubleto\\App\\Community\\Notifications\\Loader::Components\\TableNotifications';
 
   constructor(props: TableNotificationsProps) {
     super(props);

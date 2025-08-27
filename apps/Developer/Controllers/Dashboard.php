@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Developer\Controllers;
+namespace Hubleto\App\Community\Developer\Controllers;
 
 class Dashboard extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class Dashboard extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
     $this->viewParams['now'] = date('Y-m-d H:i:s');
-    $this->setView('@HubletoApp:Community:Developer/Dashboard.twig');
+    $this->setView('@Hubleto:App:Community:Developer/Dashboard.twig');
   }
 
 }

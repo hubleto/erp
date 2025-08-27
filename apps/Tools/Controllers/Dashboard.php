@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Tools\Controllers;
+namespace Hubleto\App\Community\Tools\Controllers;
 
 class Dashboard extends \Hubleto\Erp\Controller
 {
@@ -14,8 +14,8 @@ class Dashboard extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->viewParams['tools'] = $this->getService(\HubletoApp\Community\Tools\Loader::class)->tools;
-    $this->setView('@HubletoApp:Community:Tools/Dashboard.twig');
+    $this->viewParams['tools'] = $this->getService(\Hubleto\App\Community\Tools\Loader::class)->tools;
+    $this->setView('@Hubleto:App:Community:Tools/Dashboard.twig');
   }
 
 }

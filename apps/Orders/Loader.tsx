@@ -11,7 +11,7 @@ class OrdersApp extends HubletoApp {
     globalThis.main.registerReactComponent('OrdersTableOrders', TableOrders);
 
     // miscellaneous
-    globalThis.main.getApp('HubletoApp/Community/Deals').addFormTab({
+    globalThis.main.getApp('Hubleto/App/Community/Deals').addFormTab({
       uid: 'orders',
       title: <span className='italic'>Orders</span>,
       onRender: (form: any) => {
@@ -23,7 +23,7 @@ class OrdersApp extends HubletoApp {
           descriptionSource='both'
           uid={form.props.uid + "_table_order_deal"}
           junctionTitle='Deal'
-          junctionModel='HubletoApp/Community/Orders/Models/OrderDeal'
+          junctionModel='Hubleto/App/Community/Orders/Models/OrderDeal'
           junctionSourceColumn='id_deal'
           junctionSourceRecordId={form.state.record.id}
           junctionDestinationColumn='id_order'
@@ -31,7 +31,7 @@ class OrdersApp extends HubletoApp {
       },
     });
 
-    globalThis.main.getApp('HubletoApp/Community/Deals').addFormHeaderButton(
+    globalThis.main.getApp('Hubleto/App/Community/Deals').addFormHeaderButton(
       'Create order',
       (form: any) => {
         request.get(
@@ -49,4 +49,4 @@ class OrdersApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Orders', new OrdersApp());
+globalThis.main.registerApp('Hubleto/App/Community/Orders', new OrdersApp());

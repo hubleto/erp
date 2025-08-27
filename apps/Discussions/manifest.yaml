@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Discussions
+namespace: Hubleto\App\Community\Discussions
 appType: community
 sidebarGroup: communication
 rootUrlSlug: discussions

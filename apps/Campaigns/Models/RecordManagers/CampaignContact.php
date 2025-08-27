@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Campaigns\Models\RecordManagers;
+namespace Hubleto\App\Community\Campaigns\Models\RecordManagers;
 
-use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CampaignContact extends \Hubleto\Erp\RecordManager

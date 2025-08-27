@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Warehouses;
+namespace Hubleto\App\Community\Warehouses;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Framework\App
       '/^warehouses\/settings\/warehouse-location-types\/?$/' => Controllers\LocationTypes::class,
     ]);
 
-    $appMenu = $this->getService(\HubletoApp\Community\Desktop\AppMenuManager::class);
+    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'warehouses', $this->translate('Warehouses'), 'fas fa-warehouse');
     $appMenu->addItem($this, 'warehouses/locations', $this->translate('Locations'), 'fas fa-pallet');
 

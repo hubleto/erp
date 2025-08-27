@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Repositories;
+namespace Hubleto\App\Community\OAuth\Repositories;
 
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
-use HubletoApp\Community\OAuth\Entities\ClientEntity;
+use Hubleto\App\Community\OAuth\Entities\ClientEntity;
 
 class Client extends \Hubleto\Framework\Core implements ClientRepositoryInterface
 {
@@ -12,7 +12,7 @@ class Client extends \Hubleto\Framework\Core implements ClientRepositoryInterfac
   public function getClientEntity(string $clientIdentifier): ?ClientEntityInterface
   {
 
-    $mClient = $this->getModel(\HubletoApp\Community\OAuth\Models\Client::class);
+    $mClient = $this->getModel(\Hubleto\App\Community\OAuth\Models\Client::class);
     $clientData = $mClient->record->where('client_id', $clientIdentifier)->first()?->toArray();
 
     $client = new ClientEntity();
@@ -27,7 +27,7 @@ class Client extends \Hubleto\Framework\Core implements ClientRepositoryInterfac
   public function validateClient($clientIdentifier, $clientSecret, $grantType): bool
   {
 
-    $mClient = $this->getModel(\HubletoApp\Community\OAuth\Models\Client::class);
+    $mClient = $this->getModel(\Hubleto\App\Community\OAuth\Models\Client::class);
     $clientData = $mClient->record->where('client_id', $clientIdentifier)->first()?->toArray();
     return ($clientData['client_secret'] ?? '') == $clientSecret;
   }

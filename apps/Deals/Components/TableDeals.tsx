@@ -20,13 +20,13 @@ export default class TableDeals extends HubletoTable<TableDealsProps, TableDeals
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Deals/Models/Deal',
+    model: 'Hubleto/App/Community/Deals/Models/Deal',
   }
 
   props: TableDealsProps;
   state: TableDealsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\TableDeals';
+  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader::Components\\TableDeals';
 
   constructor(props: TableDealsProps) {
     super(props);

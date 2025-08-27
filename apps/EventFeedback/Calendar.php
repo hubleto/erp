@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\EventFeedback;
+namespace Hubleto\App\Community\EventFeedback;
 
-class Calendar extends \HubletoApp\Community\Calendar\Calendar
+class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 {
   public array $calendarConfig = [
     "title" => "EventFeedback",

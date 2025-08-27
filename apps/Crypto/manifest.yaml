@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Crypto
+namespace: Hubleto\App\Community\Crypto
 appType: community
 sidebarGroup: maintenance
 rootUrlSlug: crypto

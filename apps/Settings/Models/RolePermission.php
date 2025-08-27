@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Models;
+namespace Hubleto\App\Community\Settings\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 

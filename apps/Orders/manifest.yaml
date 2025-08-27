@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Orders
+namespace: Hubleto\App\Community\Orders
 appType: community
 sidebarGroup: sales
 rootUrlSlug: orders
@@ -12,8 +12,8 @@ author:
   linkedin: "https://www.linkedin.com/in/richard-ondrejka/"
 highlight: Free order managment.
 requires:
- - HubletoApp\Community\Products
- - HubletoApp\Community\Customers
+ - Hubleto\App\Community\Products
+ - Hubleto\App\Community\Customers
 tags:
   - e-commerce
   - products

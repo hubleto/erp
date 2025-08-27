@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Models;
+namespace Hubleto\App\Community\Cloud\Models;
 
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Decimal;
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\User;
 
 class Log extends \Hubleto\Erp\Model
 {

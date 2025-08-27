@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Pipeline\Controllers\Api;
+namespace Hubleto\App\Community\Pipeline\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
 
 class GetPipelines extends \Hubleto\Erp\Controllers\ApiController
 {

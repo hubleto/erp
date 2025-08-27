@@ -7,13 +7,13 @@ interface FormActivityState extends HubletoFormState { }
 export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, FormActivityState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Worksheets/Models/Activity',
+    model: 'Hubleto/App/Community/Worksheets/Models/Activity',
   }
 
   props: FormActivityProps;
   state: FormActivityState;
 
-  translationContext: string = 'HubletoApp\\Community\\Worksheets::Components\\FormActivity';
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets::Components\\FormActivity';
 
   constructor(props: FormActivityProps) {
     super(props);

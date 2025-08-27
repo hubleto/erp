@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Controllers\Api;
+namespace Hubleto\App\Community\Cloud\Controllers\Api;
 
-use HubletoApp\Community\Cloud\PremiumAccount;
+use Hubleto\App\Community\Cloud\PremiumAccount;
 
 class PayMonthly extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -44,8 +44,8 @@ class PayMonthly extends \Hubleto\Erp\Controllers\ApiController
       return [ 'result' => self::FREE_TRIAL_PERIOD ];
     }
 
-    /** @var \HubletoApp\Community\Cloud\Models\Payment */
-    $mPayment = $this->getModel(\HubletoApp\Community\Cloud\Models\Payment::class);
+    /** @var \Hubleto\App\Community\Cloud\Models\Payment */
+    $mPayment = $this->getModel(\Hubleto\App\Community\Cloud\Models\Payment::class);
 
     $prevMonth = date('m', strtotime('-1 month', strtotime($today)));
     $prevYear = date('Y', strtotime('-1 month', strtotime($today)));

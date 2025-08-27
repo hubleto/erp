@@ -14,13 +14,13 @@ export default class TableActivityTypes extends HubletoTable<TableActivityTypesP
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Worksheets/Models/ActivityType',
+    model: 'Hubleto/App/Community/Worksheets/Models/ActivityType',
   }
 
   props: TableActivityTypesProps;
   state: TableActivityTypesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Worksheets::Components\\TableActivityTypes';
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets::Components\\TableActivityTypes';
 
   constructor(props: TableActivityTypesProps) {
     super(props);

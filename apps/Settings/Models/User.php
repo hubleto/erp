@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Models;
+namespace Hubleto\App\Community\Settings\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
@@ -47,8 +47,8 @@ class User extends \Hubleto\Framework\Models\User
   public string $recordManagerClass = RecordManagers\User::class;
   public ?string $lookupSqlValue = 'ifnull({%TABLE%}.nick, {%TABLE%}.email)';
 
-  public string $translationContext = 'HubletoApp\\Community\\Settings\\Loader::Models\\User';
-  public string $permission = 'HubletoApp/Community/Settings/Loader::Models/User';
+  public string $translationContext = 'Hubleto\\App\\Community\\Settings\\Loader::Models\\User';
+  public string $permission = 'Hubleto/App/Community/Settings/Loader::Models/User';
   public array $rolePermissions = [ ];
 
   public function describeColumns(): array

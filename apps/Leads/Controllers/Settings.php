@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers;
+namespace Hubleto\App\Community\Leads\Controllers;
 
 class Settings extends \Hubleto\Erp\Controller
 {
@@ -20,7 +20,7 @@ class Settings extends \Hubleto\Erp\Controller
 
     if ($settingsChanged) {
       $calendarColor = $this->getRouter()->urlParamAsString('calendarColor');
-      $leadsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Leads\Loader::class);
+      $leadsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Leads\Loader::class);
       $leadsApp->setConfigAsString('calendarColor', $calendarColor);
       $leadsApp->saveConfig('calendarColor', $calendarColor);
 
@@ -31,7 +31,7 @@ class Settings extends \Hubleto\Erp\Controller
       $this->viewParams['settingsSaved'] = true;
     }
 
-    $this->setView('@HubletoApp:Community:Leads/Settings.twig');
+    $this->setView('@Hubleto:App:Community:Leads/Settings.twig');
   }
 
 }

@@ -14,13 +14,13 @@ export default class TableEventSpeakers extends HubletoTable<TableEventSpeakersP
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Events/Models/EventSpeaker',
+    model: 'Hubleto/App/Community/Events/Models/EventSpeaker',
   }
 
   props: TableEventSpeakersProps;
   state: TableEventSpeakersState;
 
-  translationContext: string = 'HubletoApp\\Community\\Events::Components\\TableEventSpeakers';
+  translationContext: string = 'Hubleto\\App\\Community\\Events::Components\\TableEventSpeakers';
 
   constructor(props: TableEventSpeakersProps) {
     super(props);

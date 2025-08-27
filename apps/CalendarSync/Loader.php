@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\CalendarSync;
+namespace Hubleto\App\Community\CalendarSync;
 
-use HubletoApp\Community\CalendarSync\Controllers\Google;
-use HubletoApp\Community\CalendarSync\Controllers\Home;
-use HubletoApp\Community\CalendarSync\Controllers\Ics;
+use Hubleto\App\Community\CalendarSync\Controllers\Google;
+use Hubleto\App\Community\CalendarSync\Controllers\Home;
+use Hubleto\App\Community\CalendarSync\Controllers\Ics;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -28,8 +28,8 @@ class Loader extends \Hubleto\Framework\App
       '/^settings\/calendar-sources\/ics\/?$/' => Ics::class,
     ]);
 
-    /** @var \HubletoApp\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Calendar sources'),
       'icon' => 'fas fa-calendar',
@@ -38,8 +38,8 @@ class Loader extends \Hubleto\Framework\App
 
     $this->setConfigAsInteger('sidebarOrder', 0);
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar($this, 'sync', 'yellow', Calendar::class);
   }
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Community\Worksheets\Controllers;
+namespace Hubleto\App\Community\Worksheets\Controllers;
 
 class Home extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Worksheets/Home.twig');
+    $this->setView('@Hubleto:App:Community:Worksheets/Home.twig');
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers;
+namespace Hubleto\App\Community\Settings\Controllers;
 
 class Sidebar extends \Hubleto\Erp\Controller
 {
@@ -49,7 +49,7 @@ class Sidebar extends \Hubleto\Erp\Controller
 
     $this->viewParams['installedApps'] = $installedApps;
 
-    $this->setView('@HubletoApp:Community:Settings/Sidebar.twig');
+    $this->setView('@Hubleto:App:Community:Settings/Sidebar.twig');
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Calendar\Controllers;
+namespace Hubleto\App\Community\Calendar\Controllers;
 
 class Calendar extends \Hubleto\Erp\Controller
 {
@@ -15,15 +15,15 @@ class Calendar extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
 
     foreach ($calendarManager->getCalendars() as $source => $calendar) {
       $calendarConfig = $calendar->calendarConfig;
       $calendarConfig['color'] = $calendar->getColor();
       $this->viewParams["calendarConfigs"][$source] = $calendarConfig;
     }
-    $this->setView('@HubletoApp:Community:Calendar/Calendar.twig');
+    $this->setView('@Hubleto:App:Community:Calendar/Calendar.twig');
   }
 
 }

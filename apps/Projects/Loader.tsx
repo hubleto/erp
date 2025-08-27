@@ -13,7 +13,7 @@ class ProjectsApp extends HubletoApp {
     globalThis.main.registerReactComponent('ProjectsTablePhases', TablePhases);
 
     // miscellaneous
-    globalThis.main.getApp('HubletoApp/Community/Orders').addFormTab({
+    globalThis.main.getApp('Hubleto/App/Community/Orders').addFormTab({
       uid: 'projects',
       title: <span className='italic'>Projects</span>,
       onRender: (form: any) => {
@@ -25,7 +25,7 @@ class ProjectsApp extends HubletoApp {
           descriptionSource='both'
           uid={form.props.uid + "_table_project_order"}
           junctionTitle='Order'
-          junctionModel='HubletoApp/Community/Projects/Models/ProjectOrder'
+          junctionModel='Hubleto/App/Community/Projects/Models/ProjectOrder'
           junctionSourceColumn='id_order'
           junctionSourceRecordId={form.state.record.id}
           junctionDestinationColumn='id_project'
@@ -33,7 +33,7 @@ class ProjectsApp extends HubletoApp {
       },
     });
 
-    globalThis.main.getApp('HubletoApp/Community/Orders').addFormHeaderButton(
+    globalThis.main.getApp('Hubleto/App/Community/Orders').addFormHeaderButton(
       'Create project',
       (form: any) => {
         request.get(
@@ -51,4 +51,4 @@ class ProjectsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Projects', new ProjectsApp());
+globalThis.main.registerApp('Hubleto/App/Community/Projects', new ProjectsApp());

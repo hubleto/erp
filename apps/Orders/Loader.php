@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Orders;
+namespace Hubleto\App\Community\Orders;
 
-use HubletoApp\Community\Documents\Models\Template;
+use Hubleto\App\Community\Documents\Models\Template;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -28,11 +28,11 @@ class Loader extends \Hubleto\Framework\App
 
     $this->addSearchSwitch('o', 'orders');
 
-    /** @var \HubletoApp\Community\Pipeline\Manager $pipelineManager */
-    $pipelineManager = $this->getService(\HubletoApp\Community\Pipeline\Manager::class);
+    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
+    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
     $pipelineManager->addPipeline($this, 'orders', Pipeline::class);
 
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Order states'),
       'icon' => 'fas fa-file-lines',
@@ -67,7 +67,7 @@ class Loader extends \Hubleto\Framework\App
 
   public function generateDemoData(): void
   {
-    $mCustomer = $this->getModel(\HubletoApp\Community\Customers\Models\Customer::class);
+    $mCustomer = $this->getModel(\Hubleto\App\Community\Customers\Models\Customer::class);
     $customerCount = $mCustomer->record->count();
 
     $mState = $this->getModel(Models\State::class);

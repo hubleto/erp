@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Warehouses\Models\RecordManagers;
+namespace Hubleto\App\Community\Warehouses\Models\RecordManagers;
 
 class WarehouseType extends \Hubleto\Erp\RecordManager
 {

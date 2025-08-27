@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Projects
+namespace: Hubleto\App\Community\Projects
 appType: community
 sidebarGroup: projects
 rootUrlSlug: projects

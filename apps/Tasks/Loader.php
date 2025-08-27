@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Tasks;
+namespace Hubleto\App\Community\Tasks;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -21,8 +21,8 @@ class Loader extends \Hubleto\Framework\App
 
     $this->addSearchSwitch('t', 'tasks');
 
-    /** @var \HubletoApp\Community\Pipeline\Manager $pipelineManager */
-    $pipelineManager = $this->getService(\HubletoApp\Community\Pipeline\Manager::class);
+    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
+    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
     $pipelineManager->addPipeline($this, 'tasks', Pipeline::class);
 
   }

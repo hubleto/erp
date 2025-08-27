@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Calendar;
+namespace Hubleto\App\Community\Calendar;
 
-use HubletoApp\Community\Calendar\Models\Activity;
+use Hubleto\App\Community\Calendar\Models\Activity;
 
 class Calendar extends \Hubleto\Erp\Calendar
 {
@@ -12,12 +12,12 @@ class Calendar extends \Hubleto\Erp\Calendar
     "formComponent" => "CalendarActivityForm",
   ];
 
-  public function prepareLoadActivityQuery(\HubletoApp\Community\Calendar\Models\Activity $mActivity, int $id): mixed
+  public function prepareLoadActivityQuery(\Hubleto\App\Community\Calendar\Models\Activity $mActivity, int $id): mixed
   {
     return $mActivity->record->prepareReadQuery()->where("{$mActivity->table}.id", $id);
   }
 
-  public function prepareLoadActivitiesQuery(\HubletoApp\Community\Calendar\Models\Activity $mActivity, string $dateStart, string $dateEnd, array $filter = []): mixed
+  public function prepareLoadActivitiesQuery(\Hubleto\App\Community\Calendar\Models\Activity $mActivity, string $dateStart, string $dateEnd, array $filter = []): mixed
   {
     $query = $mActivity->record->prepareReadQuery()
       ->with('ACTIVITY_TYPE')

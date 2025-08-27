@@ -1,18 +1,18 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models\RecordManagers;
+namespace Hubleto\App\Community\Deals\Models\RecordManagers;
 
-use HubletoApp\Community\Customers\Models\RecordManagers\Customer;
-use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
-use HubletoApp\Community\Settings\Models\RecordManagers\Currency;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\Pipeline;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\PipelineStep;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
-use HubletoApp\Community\Deals\Models\RecordManagers\DealHistory;
-use HubletoApp\Community\Deals\Models\RecordManagers\DealTag;
-use HubletoApp\Community\Leads\Models\RecordManagers\Lead;
-use HubletoApp\Community\Documents\Models\RecordManagers\Template;
-use HubletoApp\Community\Orders\Models\RecordManagers\OrderDeal;
+use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\PipelineStep;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Deals\Models\RecordManagers\DealHistory;
+use Hubleto\App\Community\Deals\Models\RecordManagers\DealTag;
+use Hubleto\App\Community\Leads\Models\RecordManagers\Lead;
+use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
+use Hubleto\App\Community\Orders\Models\RecordManagers\OrderDeal;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

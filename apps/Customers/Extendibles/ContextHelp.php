@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Extendibles;
+namespace Hubleto\App\Community\Customers\Extendibles;
 
 class ContextHelp extends \Hubleto\Framework\Extendible
 {

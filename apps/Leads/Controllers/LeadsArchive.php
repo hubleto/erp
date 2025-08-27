@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers;
+namespace Hubleto\App\Community\Leads\Controllers;
 
 class LeadsArchive extends \Hubleto\Erp\Controller
 {
@@ -15,6 +15,6 @@ class LeadsArchive extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Leads/LeadsArchive.twig');
+    $this->setView('@Hubleto:App:Community:Leads/LeadsArchive.twig');
   }
 }

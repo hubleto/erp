@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Repositories;
+namespace Hubleto\App\Community\OAuth\Repositories;
 
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
 use League\OAuth2\Server\Entities\ScopeEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
-use HubletoApp\Community\OAuth\Entities\ScopeEntity;
+use Hubleto\App\Community\OAuth\Entities\ScopeEntity;
 
 class Scope extends \Hubleto\Framework\Core implements ScopeRepositoryInterface
 {

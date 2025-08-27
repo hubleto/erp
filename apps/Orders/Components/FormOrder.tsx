@@ -18,15 +18,15 @@ export interface FormOrderState extends HubletoFormState {
 export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrderState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Orders/Models/Order',
+    model: 'Hubleto/App/Community/Orders/Models/Order',
   };
 
   props: FormOrderProps;
   state: FormOrderState;
 
-  translationContext: string = 'HubletoApp\\Community\\Orders\\Loader::Components\\FormOrder';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader::Components\\FormOrder';
 
-  parentApp: string = 'HubletoApp/Community/Orders';
+  parentApp: string = 'Hubleto/App/Community/Orders';
 
   constructor(props: FormOrderProps) {
     super(props);
@@ -177,7 +177,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           uid={this.props.uid + "_table_order_product"}
           idOrder={R.id}
           // junctionTitle='Order'
-          // junctionModel='HubletoApp/Community/Orders/Models/OrderProduct'
+          // junctionModel='Hubleto/App/Community/Orders/Models/OrderProduct'
           // junctionSourceColumn='id_order'
           // junctionSourceRecordId={R.id}
           // junctionDestinationColumn='id_product'
@@ -192,7 +192,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           parentForm={this}
           uid={this.props.uid + "_table_order_document"}
           junctionTitle='Order'
-          junctionModel='HubletoApp/Community/Orders/Models/OrderDocument'
+          junctionModel='Hubleto/App/Community/Orders/Models/OrderDocument'
           junctionSourceColumn='id_order'
           junctionSourceRecordId={R.id}
           junctionDestinationColumn='id_document'

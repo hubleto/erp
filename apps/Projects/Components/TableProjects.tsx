@@ -11,13 +11,13 @@ export default class TableProjects extends HubletoTable<TableProjectsProps, Tabl
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Projects/Models/Project',
+    model: 'Hubleto/App/Community/Projects/Models/Project',
   }
 
   props: TableProjectsProps;
   state: TableProjectsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Projects::Components\\TableProjects';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects::Components\\TableProjects';
 
   constructor(props: TableProjectsProps) {
     super(props);

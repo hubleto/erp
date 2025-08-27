@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Controllers;
+namespace Hubleto\App\Community\Mail\Controllers;
 
-use HubletoApp\Community\Mail\Models\Mailbox;
+use Hubleto\App\Community\Mail\Models\Mailbox;
 
 class Templates extends \Hubleto\Erp\Controller
 {
@@ -18,7 +18,7 @@ class Templates extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@HubletoApp:Community:Mail/Templates.twig');
+    $this->setView('@Hubleto:App:Community:Mail/Templates.twig');
   }
 
 }

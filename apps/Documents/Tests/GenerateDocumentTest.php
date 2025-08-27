@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace HubletoApp\Help\Customers\Tests;
+namespace Hubleto\App\Help\Customers\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-use HubletoApp\Community\Documents\Models\Template;
-use HubletoApp\Community\Documents\Generator;
+use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\App\Community\Documents\Generator;
 
 final class GenerateDocumentTest extends TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Models\RecordManagers;
+namespace Hubleto\App\Community\Customers\Models\RecordManagers;
 
-use HubletoApp\Community\Documents\Models\RecordManagers\Document;
+use Hubleto\App\Community\Documents\Models\RecordManagers\Document;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CustomerDocument extends \Hubleto\Erp\RecordManager

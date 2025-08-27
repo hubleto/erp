@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\CalendarSync\Models;
+namespace Hubleto\App\Community\CalendarSync\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;

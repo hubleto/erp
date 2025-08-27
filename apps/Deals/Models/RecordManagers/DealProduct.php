@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models\RecordManagers;
+namespace Hubleto\App\Community\Deals\Models\RecordManagers;
 
-use HubletoApp\Community\Products\Models\RecordManagers\Product;
-use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
+use Hubleto\App\Community\Products\Models\RecordManagers\Product;
+use Hubleto\App\Community\Deals\Models\RecordManagers\Deal;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DealProduct extends \Hubleto\Erp\RecordManager

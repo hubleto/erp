@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Notifications\Controllers;
+namespace Hubleto\App\Community\Notifications\Controllers;
 
 class All extends \Hubleto\Erp\Controller
 {
@@ -19,7 +19,7 @@ class All extends \Hubleto\Erp\Controller
     $this->viewParams['title'] = 'All';
     $this->viewParams['folder'] = 'all';
 
-    $this->setView('@HubletoApp:Community:Notifications/ListFolder.twig');
+    $this->setView('@Hubleto:App:Community:Notifications/ListFolder.twig');
   }
 
 }

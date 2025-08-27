@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Discussions;
+namespace Hubleto\App\Community\Discussions;
 
 class Loader extends \Hubleto\Framework\App
 {

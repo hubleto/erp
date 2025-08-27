@@ -14,13 +14,13 @@ export default class TablePhases extends HubletoTable<TablePhasesProps, TablePha
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Projects/Models/Phase',
+    model: 'Hubleto/App/Community/Projects/Models/Phase',
   }
 
   props: TablePhasesProps;
   state: TablePhasesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Projects::Components\\TablePhases';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects::Components\\TablePhases';
 
   constructor(props: TablePhasesProps) {
     super(props);

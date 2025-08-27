@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Help\Controllers;
+namespace Hubleto\App\Community\Help\Controllers;
 
 class Help extends \Hubleto\Erp\Controller
 {
@@ -14,7 +14,7 @@ class Help extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Help/Help.twig');
+    $this->setView('@Hubleto:App:Community:Help/Help.twig');
   }
 
 }

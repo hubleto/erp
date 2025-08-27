@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models\RecordManagers;
+namespace Hubleto\App\Community\Deals\Models\RecordManagers;
 
-use HubletoApp\Community\Leads\Models\RecordManagers\Lead;
+use Hubleto\App\Community\Leads\Models\RecordManagers\Lead;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DealLead extends \Hubleto\Erp\RecordManager

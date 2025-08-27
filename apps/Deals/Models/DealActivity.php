@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models;
+namespace Hubleto\App\Community\Deals\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Contacts\Models\Contact;
 
-class DealActivity extends \HubletoApp\Community\Calendar\Models\Activity
+class DealActivity extends \Hubleto\App\Community\Calendar\Models\Activity
 {
   public string $table = 'deal_activities';
   public string $recordManagerClass = RecordManagers\DealActivity::class;

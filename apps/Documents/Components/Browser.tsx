@@ -27,13 +27,13 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
       field: "id",
       direction: "desc"
     },
-    model: 'HubletoApp/Community/Documents/Models/Document',
+    model: 'Hubleto/App/Community/Documents/Models/Document',
   }
 
   props: BrowserProps;
   state: BrowserState;
 
-  translationContext: string = 'HubletoApp\\Community\\Documents\\Loader::Components\\Browser';
+  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader::Components\\Browser';
 
   constructor(props: BrowserProps) {
     super(props);
@@ -187,7 +187,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
         >
           <Form
             uid='create_sub_folder_form'
-            model='HubletoApp/Community/Documents/Models/Folder'
+            model='Hubleto/App/Community/Documents/Models/Folder'
             customEndpointParams={{idParentFolder: this.state.folderContent.folder.id}}
             id={this.state.showFolderProperties}
             showInModal={true}

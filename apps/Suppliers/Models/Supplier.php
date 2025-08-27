@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\Suppliers\Models;
+namespace Hubleto\App\Community\Suppliers\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Settings\Models\Country;
-use HubletoApp\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Settings\Models\Country;
+use Hubleto\App\Community\Contacts\Models\Contact;
 
 class Supplier extends \Hubleto\Erp\Model
 {

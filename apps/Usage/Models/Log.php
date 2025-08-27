@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\Usage\Models;
+namespace Hubleto\App\Community\Usage\Models;
 
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\User;
 
 class Log extends \Hubleto\Erp\Model
 {

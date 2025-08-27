@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Worksheets\Controllers\Api;
+namespace Hubleto\App\Community\Worksheets\Controllers\Api;
 
 use Illuminate\Database\Capsule\Manager as DB;
 
@@ -15,7 +15,7 @@ class DailyActivityChart extends \Hubleto\Erp\Controllers\ApiController
     //   if (rand(0, 1) == 0) $y += rand(12, 18) / 10;
     //   else $y -= rand(10, 15) / 10;
     // }
-    $mActivity = $this->getModel(\HubletoApp\Community\Worksheets\Models\Activity::class);
+    $mActivity = $this->getModel(\Hubleto\App\Community\Worksheets\Models\Activity::class);
     $worked = $mActivity->record
       ->groupBy(DB::raw('date(datetime_created)'))
       ->selectRaw('sum(duration) as worked, date(datetime_created) as date')

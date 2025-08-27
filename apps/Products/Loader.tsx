@@ -11,4 +11,4 @@ class ProductsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Products', new ProductsApp());
+globalThis.main.registerApp('Hubleto/App/Community/Products', new ProductsApp());

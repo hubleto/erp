@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Repositories;
+namespace Hubleto\App\Community\OAuth\Repositories;
 
 use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
-use HubletoApp\Community\OAuth\Entities\AuthCodeEntity;
+use Hubleto\App\Community\OAuth\Entities\AuthCodeEntity;
 
 class AuthCode extends \Hubleto\Framework\Core implements AuthCodeRepositoryInterface
 {
@@ -25,19 +25,19 @@ class AuthCode extends \Hubleto\Framework\Core implements AuthCodeRepositoryInte
       'revoked' => false,
     ];
 
-    $mAuthCode = $this->getModel(\HubletoApp\Community\OAuth\Models\AuthCode::class);
+    $mAuthCode = $this->getModel(\Hubleto\App\Community\OAuth\Models\AuthCode::class);
     $mAuthCode->record->recordCreate($dbData);
   }
 
   public function revokeAuthCode($codeId): void
   {
-    $mAuthCode = $this->getModel(\HubletoApp\Community\OAuth\Models\AuthCode::class);
+    $mAuthCode = $this->getModel(\Hubleto\App\Community\OAuth\Models\AuthCode::class);
     $mAuthCode->record->where('code', $codeId)->update(['revoked' => true]);
   }
 
   public function isAuthCodeRevoked($codeId): bool
   {
-    $mAuthCode = $this->getModel(\HubletoApp\Community\OAuth\Models\AuthCode::class);
+    $mAuthCode = $this->getModel(\Hubleto\App\Community\OAuth\Models\AuthCode::class);
     $authCode = $mAuthCode->record->find($codeId);
     return $authCode && $authCode->revoked;
   }

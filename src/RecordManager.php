@@ -3,8 +3,8 @@
 namespace Hubleto\Erp;
 
 use Hubleto\Framework\Helper;
-use HubletoApp\Community\Settings\Models\User;
-use HubletoApp\Community\Settings\Models\UserRole;
+use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\UserRole;
 
 class RecordManager extends \Hubleto\Framework\RecordManager
 {

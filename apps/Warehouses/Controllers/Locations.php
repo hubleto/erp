@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Warehouses\Controllers;
+namespace Hubleto\App\Community\Warehouses\Controllers;
 
 class Locations extends \Hubleto\Erp\Controller
 {
@@ -12,7 +12,7 @@ class Locations extends \Hubleto\Erp\Controller
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->viewParams['randomNumber'] = rand(1, 1000);
 
-    $this->setView('@HubletoApp:Community:Warehouses/Locations.twig');
+    $this->setView('@Hubleto:App:Community:Warehouses/Locations.twig');
   }
 
 }

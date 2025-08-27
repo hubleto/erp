@@ -14,13 +14,13 @@ export default class TableAgendas extends HubletoTable<TableAgendasProps, TableA
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Events/Models/Agenda',
+    model: 'Hubleto/App/Community/Events/Models/Agenda',
   }
 
   props: TableAgendasProps;
   state: TableAgendasState;
 
-  translationContext: string = 'HubletoApp\\Community\\Events::Components\\TableAgendas';
+  translationContext: string = 'Hubleto\\App\\Community\\Events::Components\\TableAgendas';
 
   constructor(props: TableAgendasProps) {
     super(props);

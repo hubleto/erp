@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Products\Models\RecordManagers;
+namespace Hubleto\App\Community\Products\Models\RecordManagers;
 
-use HubletoApp\Community\Suppliers\Models\RecordManagers\Supplier;
+use Hubleto\App\Community\Suppliers\Models\RecordManagers\Supplier;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ProductSupplier extends \Hubleto\Erp\RecordManager

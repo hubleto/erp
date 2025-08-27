@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Controllers\Api;
+namespace Hubleto\App\Community\Deals\Controllers\Api;
 
 class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -8,7 +8,7 @@ class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
   {
     $digest = [];
 
-    $mDeal = $this->getModel(\HubletoApp\Community\Deals\Models\Deal::class);
+    $mDeal = $this->getModel(\Hubleto\App\Community\Deals\Models\Deal::class);
 
     $myDeals = $mDeal->record->prepareReadQuery()
       ->where($mDeal->table . ".is_archived", 0)

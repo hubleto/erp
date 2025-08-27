@@ -8,13 +8,13 @@ export interface FormActivityState extends HubletoFormState {}
 export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Calendar/Models/Activity',
+    model: 'Hubleto/App/Community/Calendar/Models/Activity',
   };
 
   props: FormActivityProps;
   state: FormActivityState;
 
-  translationContext: string = 'HubletoApp\\Community\\Calendar\\Loader::Components\\FormActivity';
+  translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader::Components\\FormActivity';
 
   getActivitySourceReadable(): string
   {

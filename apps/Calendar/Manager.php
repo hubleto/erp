@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Calendar;
+namespace Hubleto\App\Community\Calendar;
 
 class Manager extends \Hubleto\Framework\Core
 {

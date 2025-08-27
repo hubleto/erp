@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Models;
+namespace Hubleto\App\Community\Cloud\Models;
 
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;

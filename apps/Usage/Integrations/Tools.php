@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Usage\Extendibles;
+namespace Hubleto\App\Community\Usage\Extendibles;
 
 class Tools extends \Hubleto\Framework\Extendible
 {

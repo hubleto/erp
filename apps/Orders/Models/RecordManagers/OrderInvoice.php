@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Models\RecordManagers;
+namespace Hubleto\App\Community\Orders\Models\RecordManagers;
 
-use HubletoApp\Community\Invoices\Models\RecordManagers\Invoice;
+use Hubleto\App\Community\Invoices\Models\RecordManagers\Invoice;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderInvoice extends \Hubleto\Erp\RecordManager

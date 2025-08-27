@@ -35,7 +35,7 @@ final class CliTest extends TestCase
   {
     $main = \Hubleto\Erp\Loader::getGlobalApp();
     (new \Hubleto\Erp\Cli\Agent\App\Create($main, $this->args(
-      'HubletoApp\\Custom\\TestApp', // appNamespace
+      'Hubleto\\App\\Custom\\TestApp', // appNamespace
       true // noPrompt
     )))->run();
 
@@ -56,7 +56,7 @@ final class CliTest extends TestCase
   {
     $main = \Hubleto\Erp\Loader::getGlobalApp();
     (new \Hubleto\Erp\Cli\Agent\Create\Model($main, $this->args(
-      'HubletoApp\\Custom\\TestApp', // appNamespace
+      'Hubleto\\App\\Custom\\TestApp', // appNamespace
       'TestModel', // model
       true, // force
       true // noPrompt
@@ -76,7 +76,7 @@ final class CliTest extends TestCase
   {
     $main = \Hubleto\Erp\Loader::getGlobalApp();
     (new \Hubleto\Erp\Cli\Agent\Create\TableFormViewAndController($main, $this->args(
-      'HubletoApp\\Custom\\TestApp', // appNamespace
+      'Hubleto\\App\\Custom\\TestApp', // appNamespace
       'TestModel', // model
       true, // force
       true // noPrompt

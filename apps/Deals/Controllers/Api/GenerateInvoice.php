@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace HubletoApp\Community\Deals\Controllers\Api;
+namespace Hubleto\App\Community\Deals\Controllers\Api;
 
-use HubletoApp\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\Deal;
 
 class GenerateInvoice extends \Hubleto\Erp\Controllers\ApiController
 {

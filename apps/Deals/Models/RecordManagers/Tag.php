@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models\RecordManagers;
+namespace Hubleto\App\Community\Deals\Models\RecordManagers;
 
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

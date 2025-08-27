@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\Inventory\Models;
+namespace Hubleto\App\Community\Inventory\Models;
 
-use HubletoApp\Community\Settings\Models\User;
-use HubletoApp\Community\Warehouses\Models\Location;
-use HubletoApp\Community\Products\Models\Product;
+use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Warehouses\Models\Location;
+use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Decimal;

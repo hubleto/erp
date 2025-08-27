@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Notifications
+namespace: Hubleto\App\Community\Notifications
 appType: community
 sidebarGroup: communication
 rootUrlSlug: notifications

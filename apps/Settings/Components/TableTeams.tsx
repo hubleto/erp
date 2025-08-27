@@ -12,13 +12,13 @@ export default class TableTeams extends Table<TableTeamsProps, TableTeamsState> 
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Settings/Models/Team',
+    model: 'Hubleto/App/Community/Settings/Models/Team',
   }
 
   props: TableTeamsProps;
   state: TableTeamsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Settings\\Loader::Components\\TableTeams';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\TableTeams';
 
   constructor(props: TableTeamsProps) {
     super(props);

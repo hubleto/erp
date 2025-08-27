@@ -2,7 +2,7 @@
 
 namespace Hubleto\Erp\Controllers;
 
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\Framework\Models\Token;
 
 class ResetPassword extends \Hubleto\Erp\Controller

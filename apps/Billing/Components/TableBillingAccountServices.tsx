@@ -13,13 +13,13 @@ export default class TableBillingAccountServices extends Table<TableBillingAccou
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Billing/Models/BillingAccountService',
+    model: 'Hubleto/App/Community/Billing/Models/BillingAccountService',
   }
 
   props: TableBillingAccountServicesProps;
   state: TableBillingAccountServicesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Billing\\Loader::Components\\TableBillingAccountServices';
+  translationContext: string = 'Hubleto\\App\\Community\\Billing\\Loader::Components\\TableBillingAccountServices';
 
   constructor(props: TableBillingAccountServicesProps) {
     super(props);

@@ -9,13 +9,13 @@ interface FormTaskState extends HubletoFormState { }
 export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Tasks/Models/Task',
+    model: 'Hubleto/App/Community/Tasks/Models/Task',
   }
 
   props: FormTaskProps;
   state: FormTaskState;
 
-  translationContext: string = 'HubletoApp\\Community\\Tasks::Components\\FormTask';
+  translationContext: string = 'Hubleto\\App\\Community\\Tasks::Components\\FormTask';
 
   constructor(props: FormTaskProps) {
     super(props);

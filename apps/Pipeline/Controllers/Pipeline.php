@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Community\Pipeline\Controllers;
+namespace Hubleto\App\Community\Pipeline\Controllers;
 
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Projects\Models\Project;
-use HubletoApp\Community\Tasks\Models\Task;
-use HubletoApp\Community\Orders\Models\Order;
-use HubletoApp\Community\Pipeline\Models\Pipeline as ModelPipeline;
+use Hubleto\App\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Projects\Models\Project;
+use Hubleto\App\Community\Tasks\Models\Task;
+use Hubleto\App\Community\Orders\Models\Order;
+use Hubleto\App\Community\Pipeline\Models\Pipeline as ModelPipeline;
 
 class Pipeline extends \Hubleto\Erp\Controller
 {
@@ -23,8 +23,8 @@ class Pipeline extends \Hubleto\Erp\Controller
 
     $fOwner = $this->getRouter()->urlParamAsInteger('fOwner');
 
-    /** @var \HubletoApp\Community\Pipeline\Manager */
-    $pipelineManager = $this->getService(\HubletoApp\Community\Pipeline\Manager::class);
+    /** @var \Hubleto\App\Community\Pipeline\Manager */
+    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
     $mPipeline = $this->getModel(ModelPipeline::class);
 
     $pipelines = $mPipeline->record->get()?->toArray();
@@ -47,7 +47,7 @@ class Pipeline extends \Hubleto\Erp\Controller
 
     $this->viewParams["pipelines"] = $pipelines;
 
-    $this->setView('@HubletoApp:Community:Pipeline/Pipeline.twig');
+    $this->setView('@Hubleto:App:Community:Pipeline/Pipeline.twig');
   }
 
 }

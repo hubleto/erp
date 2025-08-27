@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models;
+namespace Hubleto\App\Community\Deals\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Leads\Models\Lead;
 
 class DealLead extends \Hubleto\Erp\Model
 {

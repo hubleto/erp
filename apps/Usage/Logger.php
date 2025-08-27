@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Usage;
+namespace Hubleto\App\Community\Usage;
 
 class Logger extends \Hubleto\Framework\Core
 {

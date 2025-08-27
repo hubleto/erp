@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\Discussions\Models\RecordManagers;
+namespace Hubleto\App\Community\Discussions\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
-use HubletoApp\Community\Projects\Models\RecordManagers\Project;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Projects\Models\RecordManagers\Project;
 
 class Discussion extends \Hubleto\Erp\RecordManager
 {

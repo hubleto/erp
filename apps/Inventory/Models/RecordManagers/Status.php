@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Inventory\Models\RecordManagers;
+namespace Hubleto\App\Community\Inventory\Models\RecordManagers;
 
 class Status extends \Hubleto\Erp\RecordManager
 {

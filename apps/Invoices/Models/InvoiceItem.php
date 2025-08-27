@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Invoices\Models;
+namespace Hubleto\App\Community\Invoices\Models;
 
-use \HubletoApp\Community\Customers\Models\Customer;
-use \HubletoApp\Community\Settings\Models\User;
+use \Hubleto\App\Community\Customers\Models\Customer;
+use \Hubleto\App\Community\Settings\Models\User;
 
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;

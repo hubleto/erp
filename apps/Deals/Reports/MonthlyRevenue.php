@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Reports;
+namespace Hubleto\App\Community\Deals\Reports;
 
-use HubletoApp\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\Deal;
 
 class MonthlyRevenue extends \Hubleto\Erp\Report
 {

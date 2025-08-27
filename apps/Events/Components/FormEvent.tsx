@@ -10,13 +10,13 @@ interface FormEventState extends HubletoFormState { }
 export default class FormEvent<P, S> extends HubletoForm<FormEventProps, FormEventState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Events/Models/Team',
+    model: 'Hubleto/App/Community/Events/Models/Team',
   }
 
   props: FormEventProps;
   state: FormEventState;
 
-  translationContext: string = 'HubletoApp\\Community\\Events::Components\\FormEvent';
+  translationContext: string = 'Hubleto\\App\\Community\\Events::Components\\FormEvent';
 
   constructor(props: FormEventProps) {
     super(props);

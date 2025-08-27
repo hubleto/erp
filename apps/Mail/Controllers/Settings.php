@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Controllers;
+namespace Hubleto\App\Community\Mail\Controllers;
 
 class Settings extends \Hubleto\Erp\Controller
 {
@@ -20,14 +20,14 @@ class Settings extends \Hubleto\Erp\Controller
 
     if ($settingsChanged) {
       $smtpHost = $this->getRouter()->urlParamAsString('smtpHost');
-      $mailApp = $this->getAppManager()->getApp(\HubletoApp\Community\Mail\Loader::class);
+      $mailApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Mail\Loader::class);
       $mailApp->setConfigAsString('smtpHost', $smtpHost);
       $mailApp->saveConfig('smtpHost', $smtpHost);
 
       $this->viewParams['settingsSaved'] = true;
     }
 
-    $this->setView('@HubletoApp:Community:Mail/Settings.twig');
+    $this->setView('@Hubleto:App:Community:Mail/Settings.twig');
   }
 
 }

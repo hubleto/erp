@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Reports\Controllers;
+namespace Hubleto\App\Community\Reports\Controllers;
 
 class Home extends \Hubleto\Erp\Controller
 {
@@ -15,12 +15,12 @@ class Home extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    /** @var \HubletoApp\Community\Reports\Loader $reportsApp */
-    $reportsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Reports\Loader::class);
+    /** @var \Hubleto\App\Community\Reports\Loader $reportsApp */
+    $reportsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
     $reports = $reportsApp->reportManager->getReports();
     $this->viewParams['reports'] = $reports;
 
-    $this->setView('@HubletoApp:Community:Reports/Home.twig');
+    $this->setView('@Hubleto:App:Community:Reports/Home.twig');
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Calendar\Controllers\Api;
+namespace Hubleto\App\Community\Calendar\Controllers\Api;
 
 class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -19,7 +19,7 @@ class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
   {
     $digest = [];
 
-    $events = $this->getService(\HubletoApp\Community\Calendar\Events::class);
+    $events = $this->getService(\Hubleto\App\Community\Calendar\Events::class);
     list($remindersToday, $remindersTomorrow, $remindersLater) = $events->loadRemindersSummary($this->user['id'] ?? 0);
 
     foreach ($remindersToday as $reminder) {

@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Calendar;
+namespace Hubleto\App\Community\Calendar;
 
-use HubletoApp\Community\Calendar\Models\Activity;
-use HubletoApp\Community\Calendar\Models\SharedCalendar;
+use Hubleto\App\Community\Calendar\Models\Activity;
+use Hubleto\App\Community\Calendar\Models\SharedCalendar;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -29,15 +29,15 @@ class Loader extends \Hubleto\Framework\App
       '/^calendar\/api\/stop-sharing-calendar\/?$/' => Controllers\Api\StopSharingCalendar::class,
     ]);
 
-    $boards = $this->getService(\HubletoApp\Community\Dashboards\Manager::class);
+    $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
     $boards->addBoard(
       $this,
       $this->translate('Reminders'),
       'calendar/boards/reminders'
     );
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar($this, 'calendar', 'blue', Calendar::class);
 
   }

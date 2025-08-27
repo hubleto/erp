@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Contacts
+namespace: Hubleto\App\Community\Contacts
 appType: community
 sidebarGroup: addressbook
 rootUrlSlug: contacts

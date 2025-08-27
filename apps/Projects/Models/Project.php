@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Projects\Models;
+namespace Hubleto\App\Community\Projects\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
@@ -15,12 +15,12 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Settings\Models\User;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
-use HubletoApp\Community\Contacts\Models\Contact;
-use HubletoApp\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Customers\Models\Customer;
 
 class Project extends \Hubleto\Erp\Model
 {

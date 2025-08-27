@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Controllers;
+namespace Hubleto\App\Community\Orders\Controllers;
 
 class States extends \Hubleto\Erp\Controller
 {
@@ -16,7 +16,7 @@ class States extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@HubletoApp:Community:Orders/States.twig');
+    $this->setView('@Hubleto:App:Community:Orders/States.twig');
 
   }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Pipeline;
+namespace Hubleto\App\Community\Pipeline;
 
 class Manager extends \Hubleto\Framework\Core
 {

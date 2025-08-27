@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Events\Models\RecordManagers;
+namespace Hubleto\App\Community\Events\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class EventAttendee extends \Hubleto\Erp\RecordManager
 {

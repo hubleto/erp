@@ -8,13 +8,13 @@ interface FormPhaseState extends HubletoFormState { }
 export default class FormPhase<P, S> extends HubletoForm<FormPhaseProps, FormPhaseState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Projects/Models/Team',
+    model: 'Hubleto/App/Community/Projects/Models/Team',
   }
 
   props: FormPhaseProps;
   state: FormPhaseState;
 
-  translationContext: string = 'HubletoApp\\Community\\Projects::Components\\FormPhase';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects::Components\\FormPhase';
 
   constructor(props: FormPhaseProps) {
     super(props);
@@ -70,7 +70,7 @@ export default class FormPhase<P, S> extends HubletoForm<FormPhaseProps, FormPha
   //           <Table
   //             uid={this.props.uid + '_table_locations'}
   //             parentForm={this}
-  //             model='HubletoApp/Community/Warehouses/Models/Location'
+  //             model='Hubleto/App/Community/Warehouses/Models/Location'
   //             customEndpointParams={ { idWarehouse: this.state.id } }
   //           ></Table>
   //         }

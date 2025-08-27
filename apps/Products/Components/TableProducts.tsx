@@ -15,13 +15,13 @@ export default class TableProducts extends HubletoTable<TableProductsProps, Tabl
       direction: "asc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Products/Models/Product',
+    model: 'Hubleto/App/Community/Products/Models/Product',
   }
 
   props: TableProductsProps;
   state: TableProductsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Products\\Loader::Components\\TableProducts';
+  translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader::Components\\TableProducts';
 
   constructor(props: TableProductsProps) {
     super(props);

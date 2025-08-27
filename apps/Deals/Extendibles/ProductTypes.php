@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Extendibles;
+namespace Hubleto\App\Community\Deals\Extendibles;
 
 class ProductTypes extends \Hubleto\Framework\Extendible
 {

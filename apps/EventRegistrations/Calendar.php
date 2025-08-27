@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\EventRegistrations;
+namespace Hubleto\App\Community\EventRegistrations;
 
-class Calendar extends \HubletoApp\Community\Calendar\Calendar
+class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 {
   public array $calendarConfig = [
     "title" => "EventRegistrations",

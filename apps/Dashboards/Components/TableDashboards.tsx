@@ -12,13 +12,13 @@ export default class TableDashboards extends Table<TableDashboardsProps, TableDa
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Dashboards/Models/Dashboard',
+    model: 'Hubleto/App/Community/Dashboards/Models/Dashboard',
   }
 
   props: TableDashboardsProps;
   state: TableDashboardsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Dashboards\\Loader::Components\\TableDashboards';
+  translationContext: string = 'Hubleto\\App\\Community\\Dashboards\\Loader::Components\\TableDashboards';
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();

@@ -15,4 +15,4 @@ class CustomersApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Customers', new CustomersApp());
+globalThis.main.registerApp('Hubleto/App/Community/Customers', new CustomersApp());

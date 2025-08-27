@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Documents\Controllers;
+namespace Hubleto\App\Community\Documents\Controllers;
 
 class Browse extends \Hubleto\Erp\Controller
 {
@@ -14,7 +14,7 @@ class Browse extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Documents/Browse.twig');
+    $this->setView('@Hubleto:App:Community:Documents/Browse.twig');
   }
 
 }

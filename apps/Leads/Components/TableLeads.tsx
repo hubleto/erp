@@ -23,13 +23,13 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Leads/Models/Lead',
+    model: 'Hubleto/App/Community/Leads/Models/Lead',
   }
 
   props: TableLeadsProps;
   state: TableLeadsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\TableLeads';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\TableLeads';
 
   constructor(props: TableLeadsProps) {
     super(props);

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Dashboards\Models\RecordManagers;
+namespace Hubleto\App\Community\Dashboards\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

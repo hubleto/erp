@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Models;
+namespace Hubleto\App\Community\Mail\Models;
 
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Color;
 
-use HubletoApp\Community\Crypto\KeyManager;
+use Hubleto\App\Community\Crypto\KeyManager;
 
 class Account extends \Hubleto\Erp\Model
 {

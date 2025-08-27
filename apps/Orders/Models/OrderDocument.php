@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Models;
+namespace Hubleto\App\Community\Orders\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Documents\Models\Document;
+use Hubleto\App\Community\Documents\Models\Document;
 
 class OrderDocument extends \Hubleto\Erp\Model
 {

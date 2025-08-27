@@ -6,13 +6,13 @@ import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 export default class FormCalendarSyncSource<P, S> extends Form<FormProps, FormState> {
   static defaultProps: any = {
     ...Form.defaultProps,
-    model: 'HubletoApp/Community/Customers/Models/CustomerActivity',
+    model: 'Hubleto/App/Community/Customers/Models/CustomerActivity',
   };
 
   props: FormProps;
   state: FormState;
 
-  translationContext: string = 'HubletoApp\\Community\\CalendarSync\\Loader::Components\\FormSource';
+  translationContext: string = 'Hubleto\\App\\Community\\CalendarSync\\Loader::Components\\FormSource';
 
   renderContent(): JSX.Element {
 

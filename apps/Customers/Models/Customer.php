@@ -1,17 +1,17 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Models;
+namespace Hubleto\App\Community\Customers\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Contacts\Models\Contact;
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Leads\Models\Lead;
-use HubletoApp\Community\Settings\Models\Country;
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Settings\Models\Country;
+use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\Framework\Helper;
 
 class Customer extends \Hubleto\Erp\Model
@@ -120,7 +120,7 @@ class Customer extends \Hubleto\Erp\Model
       $helper = $this->getService(Helper::class);
       $helper->deleteTags(
         array_column($savedRecord["TAGS"], "id"),
-        $this->getModel("HubletoApp/Community/Customers/Models/CustomerTag"),
+        $this->getModel("Hubleto/App/Community/Customers/Models/CustomerTag"),
         "id_customer",
         $savedRecord["id"]
       );

@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models\RecordManagers;
+namespace Hubleto\App\Community\Deals\Models\RecordManagers;
 
-use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
+use Hubleto\App\Community\Deals\Models\RecordManagers\Deal;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DealHistory extends \Hubleto\Erp\RecordManager

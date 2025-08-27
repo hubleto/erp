@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Dashboards;
+namespace Hubleto\App\Community\Dashboards;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -20,8 +20,8 @@ class Loader extends \Hubleto\Framework\App
       '/^settings\/dashboards\/?$/' => Controllers\Settings::class,
     ]);
 
-    /** @var \HubletoApp\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Dashboards'),
       'icon' => 'fas fa-table',

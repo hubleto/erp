@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Contacts\Models;
+namespace Hubleto\App\Community\Contacts\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 

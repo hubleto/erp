@@ -15,13 +15,13 @@ export interface LeadFormActivityState extends FormActivityState {
 export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivityProps, LeadFormActivityState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Leads/Models/LeadActivity',
+    model: 'Hubleto/App/Community/Leads/Models/LeadActivity',
   };
 
   props: LeadFormActivityProps;
   state: LeadFormActivityState;
 
-  translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\FormActivity';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\FormActivity';
 
   constructor(props: LeadFormActivityProps) {
     super(props);
@@ -39,7 +39,7 @@ export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivit
       {this.inputWrapper('id_lead')}
       <FormInput title={this.translate("Contact")}>
         <Lookup {...this.getInputProps('id_contact')}
-          model='HubletoApp/Community/Contacts/Models/Contact'
+          model='Hubleto/App/Community/Contacts/Models/Contact'
           endpoint={`contacts/get-customer-contacts`}
           customEndpointParams={{id_customer: this.props.idCustomer}}
           value={R.id_contact}

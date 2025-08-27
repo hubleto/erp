@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Models;
+namespace Hubleto\App\Community\Orders\Models;
 
 use DateTimeImmutable;
 use Hubleto\Framework\Db\Column\Date;
@@ -9,19 +9,19 @@ use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Customers\Models\Customer;
-use HubletoApp\Community\Products\Models\Product;
-use HubletoApp\Community\Settings\Models\Currency;
-use HubletoApp\Community\Settings\Models\Setting;
+use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Products\Models\Product;
+use Hubleto\App\Community\Settings\Models\Currency;
+use Hubleto\App\Community\Settings\Models\Setting;
 
-use HubletoApp\Community\Documents\Generator;
-use HubletoApp\Community\Documents\Models\Template;
-use HubletoApp\Community\Projects\Models\ProjectOrder;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
-use HubletoApp\Community\Invoices\Models\Invoice;
-use HubletoApp\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Documents\Generator;
+use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\App\Community\Projects\Models\ProjectOrder;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Invoices\Models\Invoice;
+use Hubleto\App\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
+use Hubleto\App\Community\Settings\Models\User;
 
 class Order extends \Hubleto\Erp\Model
 {

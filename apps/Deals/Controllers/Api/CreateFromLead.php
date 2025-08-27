@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Controllers\Api;
+namespace Hubleto\App\Community\Deals\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Deals\Models\DealLead;
-use HubletoApp\Community\Leads\Models\Lead;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\DealLead;
+use Hubleto\App\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
 
 class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
 {

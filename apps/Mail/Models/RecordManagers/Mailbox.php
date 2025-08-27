@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Models\RecordManagers;
+namespace Hubleto\App\Community\Mail\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Mailbox extends \Hubleto\Erp\RecordManager
 {

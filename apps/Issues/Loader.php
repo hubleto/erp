@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Issues;
+namespace Hubleto\App\Community\Issues;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -20,14 +20,14 @@ class Loader extends \Hubleto\Framework\App
       '/^issues\/mail-accounts\/?$/' => Controllers\MailAccounts::class,
     ]);
 
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => 'Issues Mail Accounts', // or $this->translate('EventFeedback')
       'icon' => 'fas fa-table',
       'url' => 'issues/mail-accounts',
     ]);
 
-    $appMenu = $this->getService(\HubletoApp\Community\Desktop\AppMenuManager::class);
+    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'issues', $this->translate('Issues'), 'fas fa-table');
     $appMenu->addItem($this, 'issues/mail-accounts', $this->translate('Mail accounts'), 'fas fa-list');
   }

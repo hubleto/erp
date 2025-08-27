@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Developer
+namespace: Hubleto\App\Community\Developer
 appType: community
 sidebarGroup: -
 rootUrlSlug: developer

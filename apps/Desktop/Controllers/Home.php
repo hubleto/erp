@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Desktop\Controllers;
+namespace Hubleto\App\Community\Desktop\Controllers;
 
 class Home extends \Hubleto\Erp\Controller
 {
@@ -19,9 +19,9 @@ class Home extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $dashboardsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Dashboards\Loader::class);
+    $dashboardsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Dashboards\Loader::class);
     if ($dashboardsApp) {
-      $mDashboard = $this->getModel(\HubletoApp\Community\Dashboards\Models\Dashboard::class);
+      $mDashboard = $this->getModel(\Hubleto\App\Community\Dashboards\Models\Dashboard::class);
 
       $defaultDashboard = $mDashboard->record->prepareReadQuery()
         ->where('is_default', true)
@@ -34,7 +34,7 @@ class Home extends \Hubleto\Erp\Controller
 
     }
 
-    $this->setView('@HubletoApp:Community:Desktop/Home.twig');
+    $this->setView('@Hubleto:App:Community:Desktop/Home.twig');
   }
 
 }

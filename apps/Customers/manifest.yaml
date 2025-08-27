@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Customers
+namespace: Hubleto\App\Community\Customers
 appType: community
 sidebarGroup: addressbook
 rootUrlSlug: customers

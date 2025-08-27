@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Models;
+namespace Hubleto\App\Community\Orders\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Color;

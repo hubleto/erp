@@ -40,7 +40,7 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
     ...HubletoTable.defaultProps,
     itemsPerPage: 25,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Invoices/Models/Invoice',
+    model: 'Hubleto/App/Community/Invoices/Models/Invoice',
     // description: {
     //   ui: { addButtonText: this.translate('Create invoice') }
     // },
@@ -49,7 +49,7 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
   props: TableInvoicesProps;
   state: TableInvoicesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Invoices\\Loader::Components\\TableInvoices';
+  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader::Components\\TableInvoices';
 
   constructor(props: TableInvoicesProps) {
     super(props);
@@ -161,7 +161,7 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
               <b className="text-sm">{this.translate('Customer')}</b><br/>
               <InputLookup
                 uid={this.props.uid + '_filter_customer'}
-                model='HubletoApp/Community/Customers/Models/Customer'
+                model='Hubleto/App/Community/Customers/Models/Customer'
                 value={this.state.idCustomer}
                 onChange={(value: any) => {
                   this.setState({idCustomer: value} as TableInvoicesState, () => { this.loadData(); });

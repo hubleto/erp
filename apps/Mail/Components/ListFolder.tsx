@@ -21,13 +21,13 @@ export default class ListFolder extends Table<ListFolderProps, ListFolderState> 
       field: "id",
       direction: "desc"
     },
-    model: 'HubletoApp/Community/Mail/Models/Mail',
+    model: 'Hubleto/App/Community/Mail/Models/Mail',
   }
 
   props: ListFolderProps;
   state: ListFolderState;
 
-  translationContext: string = 'HubletoApp\\Community\\Mail\\Loader::Components\\ListFolder';
+  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader::Components\\ListFolder';
 
   constructor(props: ListFolderProps) {
     super(props);

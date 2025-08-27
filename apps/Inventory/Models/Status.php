@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Inventory\Models;
+namespace Hubleto\App\Community\Inventory\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 

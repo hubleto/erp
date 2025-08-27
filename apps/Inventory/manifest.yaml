@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Inventory
+namespace: Hubleto\App\Community\Inventory
 appType: community
 sidebarGroup: supply-chain
 rootUrlSlug: inventory

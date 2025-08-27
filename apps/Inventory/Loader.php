@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Inventory;
+namespace Hubleto\App\Community\Inventory;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -20,7 +20,7 @@ class Loader extends \Hubleto\Framework\App
       '/^inventory\/transactions\/?$/' => Controllers\Transactions::class,
     ]);
 
-    $appMenu = $this->getService(\HubletoApp\Community\Desktop\AppMenuManager::class);
+    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'inventory', $this->translate('Warehouses'), 'fas fa-boxes-stacked');
     $appMenu->addItem($this, 'inventory/transactions', $this->translate('Transactions'), 'fas fa-arrows-turn-to-dots');
 

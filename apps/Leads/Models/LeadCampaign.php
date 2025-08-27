@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Models;
+namespace Hubleto\App\Community\Leads\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Campaigns\Models\Campaign;
+use Hubleto\App\Community\Campaigns\Models\Campaign;
 
 class LeadCampaign extends \Hubleto\Erp\Model
 {

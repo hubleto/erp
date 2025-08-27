@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Campaigns\Models\RecordManagers;
+namespace Hubleto\App\Community\Campaigns\Models\RecordManagers;
 
-use HubletoApp\Community\Tasks\Models\RecordManagers\Task;
+use Hubleto\App\Community\Tasks\Models\RecordManagers\Task;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CampaignTask extends \Hubleto\Erp\RecordManager

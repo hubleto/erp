@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Invoices\Controllers;
+namespace Hubleto\App\Community\Invoices\Controllers;
 
 class Invoices extends \Hubleto\Erp\Controller {
 
@@ -15,7 +15,7 @@ class Invoices extends \Hubleto\Erp\Controller {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Invoices/Invoices.twig');
+    $this->setView('@Hubleto:App:Community:Invoices/Invoices.twig');
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Controllers;
+namespace Hubleto\App\Community\Cloud\Controllers;
 
 class MakePayment extends \Hubleto\Erp\Controller
 {
@@ -8,7 +8,7 @@ class MakePayment extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@HubletoApp:Community:Cloud/MakePayment.twig');
+    $this->setView('@Hubleto:App:Community:Cloud/MakePayment.twig');
   }
 
 }

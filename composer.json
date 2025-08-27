@@ -9,14 +9,13 @@
     },
     "require": {
         "hubleto/terminal": "@dev",
-        "hubleto/framework": "@dev",
-        "hubleto/apps": "@dev"
+        "hubleto/framework": "@dev"
     },
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "autoload": {
         "psr-4": {
             "Hubleto\\Erp\\": "src",
-            "HubletoApp\\Community\\": "apps",
+            "Hubleto\\App\\Community\\": "apps",
             "Hubleto\\Erp\\Cli\\": "cli",
             "Hubleto\\Erp\\Hook\\": "hooks",
             "Hubleto\\Erp\\Cron\\": "crons",

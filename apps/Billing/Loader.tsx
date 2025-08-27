@@ -11,5 +11,5 @@ class BillingApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Billing', new BillingApp());
+globalThis.main.registerApp('Hubleto/App/Community/Billing', new BillingApp());
 

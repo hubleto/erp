@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Projects;
+namespace Hubleto\App\Community\Projects;
 
-class Pipeline extends \HubletoApp\Community\Pipeline\Pipeline
+class Pipeline extends \Hubleto\App\Community\Pipeline\Pipeline
 {
 
   public function loadItems(int $idPipeline, array $filters): array

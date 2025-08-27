@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\CalendarSync\Models\RecordManagers;
+namespace Hubleto\App\Community\CalendarSync\Models\RecordManagers;
 
 class Source extends \Hubleto\Erp\RecordManager
 {

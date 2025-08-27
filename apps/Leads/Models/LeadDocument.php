@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Models;
+namespace Hubleto\App\Community\Leads\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Documents\Models\Document;
+use Hubleto\App\Community\Documents\Models\Document;
 
 class LeadDocument extends \Hubleto\Erp\Model
 {

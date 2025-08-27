@@ -8,13 +8,13 @@ interface FormInventoryState extends HubletoFormState { }
 export default class FormInventory<P, S> extends HubletoForm<FormInventoryProps, FormInventoryState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Inventory/Models/Team',
+    model: 'Hubleto/App/Community/Inventory/Models/Team',
   }
 
   props: FormInventoryProps;
   state: FormInventoryState;
 
-  translationContext: string = 'HubletoApp\\Community\\Inventory::Components\\FormInventory';
+  translationContext: string = 'Hubleto\\App\\Community\\Inventory::Components\\FormInventory';
 
   constructor(props: FormInventoryProps) {
     super(props);
@@ -70,7 +70,7 @@ export default class FormInventory<P, S> extends HubletoForm<FormInventoryProps,
   //           <Table
   //             uid={this.props.uid + '_table_locations'}
   //             parentForm={this}
-  //             model='HubletoApp/Community/Warehouses/Models/Location'
+  //             model='Hubleto/App/Community/Warehouses/Models/Location'
   //             customEndpointParams={ { idWarehouse: this.state.id } }
   //           ></Table>
   //         }

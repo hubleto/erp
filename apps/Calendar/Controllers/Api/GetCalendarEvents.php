@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Calendar\Controllers\Api;
+namespace Hubleto\App\Community\Calendar\Controllers\Api;
 
 class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -32,8 +32,8 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
 
     if ($this->getRouter()->isUrlParam('source')) {
 
-      /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-      $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+      /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+      $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
 
       $calendar = $calendarManager->getCalendar($this->getRouter()->urlParamAsString('source'));
       if ($this->getRouter()->isUrlParam('id')) {
@@ -64,8 +64,8 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
 
     $events = [];
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
 
     foreach ($calendarManager->getCalendars() as $source => $calendar) {
       if ($sources !== null && !in_array($source, $sources)) {

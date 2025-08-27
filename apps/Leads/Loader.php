@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Leads;
+namespace Hubleto\App\Community\Leads;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -33,7 +33,7 @@ class Loader extends \Hubleto\Framework\App
     $this->addSearchSwitch('l', 'leads');
     $this->addSearchSwitch('t', 'taskleads');
 
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Lead Levels'),
       'icon' => 'fas fa-layer-group',
@@ -50,15 +50,15 @@ class Loader extends \Hubleto\Framework\App
       'url' => 'settings/lead-lost-reasons',
     ]);
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar($this, 'leads', $this->configAsString('calendarColor'), Calendar::class);
 
-    $boards = $this->getService(\HubletoApp\Community\Dashboards\Manager::class);
+    $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
     $boards->addBoard( $this, 'Lead value by score', 'leads/boards/lead-value-by-score');
     $boards->addBoard( $this, 'Lead warnings', 'leads/boards/lead-warnings');
 
-    $appMenu = $this->getService(\HubletoApp\Community\Desktop\AppMenuManager::class);
+    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'leads', $this->translate('Active leads'), 'fas fa-people-arrows');
     $appMenu->addItem($this, 'leads/archive', $this->translate('Archived leads'), 'fas fa-box-archive');
   }

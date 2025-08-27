@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Warehouses\Models\RecordManagers;
+namespace Hubleto\App\Community\Warehouses\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Location extends \Hubleto\Erp\RecordManager
 {

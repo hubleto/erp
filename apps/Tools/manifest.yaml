@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Tools
+namespace: Hubleto\App\Community\Tools
 appType: community
 sidebarGroup: maintenance
 rootUrlSlug: tools

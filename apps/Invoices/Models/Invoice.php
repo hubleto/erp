@@ -1,18 +1,18 @@
 <?php
 
-namespace HubletoApp\Community\Invoices\Models;
+namespace Hubleto\App\Community\Invoices\Models;
 
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Customers\Models\Customer;
-use HubletoApp\Community\Settings\Models\InvoiceProfile;
-use HubletoApp\Community\Settings\Models\User;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
-use HubletoApp\Community\Documents\Models\Template;
-use HubletoApp\Community\Documents\Generator;
+use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Settings\Models\InvoiceProfile;
+use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\App\Community\Documents\Generator;
 use Hubleto\Framework\Helper;
 
 class Invoice extends \Hubleto\Erp\Model {

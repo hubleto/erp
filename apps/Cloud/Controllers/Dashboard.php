@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Controllers;
+namespace Hubleto\App\Community\Cloud\Controllers;
 
 class Dashboard extends \Hubleto\Erp\Controller
 {
@@ -8,7 +8,7 @@ class Dashboard extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $premiumAccount = $this->getService(\HubletoApp\Community\Cloud\PremiumAccount::class);
+    $premiumAccount = $this->getService(\Hubleto\App\Community\Cloud\PremiumAccount::class);
 
     $premiumAccount->updatePremiumInfo();
     $premiumAccount->recalculateCredit();
@@ -18,7 +18,7 @@ class Dashboard extends \Hubleto\Erp\Controller
 
     $premiumInfo = $premiumAccount->getPremiumInfo();
 
-    $mLog = $this->getModel(\HubletoApp\Community\Cloud\Models\Log::class);
+    $mLog = $this->getModel(\Hubleto\App\Community\Cloud\Models\Log::class);
     $this->viewParams['log'] = $mLog->record
       ->selectRaw('
         month(log_datetime) as month,
@@ -35,7 +35,7 @@ class Dashboard extends \Hubleto\Erp\Controller
     $this->viewParams['subscriptionInfo'] = $premiumAccount->getSubscriptionInfo();
     $this->viewParams['priceForThisMonth'] = $premiumAccount->getPrice($premiumInfo['activeUsers'], $premiumInfo['paidApps'], 0);
 
-    $this->setView('@HubletoApp:Community:Cloud/Dashboard.twig');
+    $this->setView('@Hubleto:App:Community:Cloud/Dashboard.twig');
   }
 
 }

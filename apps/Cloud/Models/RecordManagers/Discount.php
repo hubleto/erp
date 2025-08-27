@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Models\RecordManagers;
+namespace Hubleto\App\Community\Cloud\Models\RecordManagers;
 
 class Discount extends \Hubleto\Erp\RecordManager
 {

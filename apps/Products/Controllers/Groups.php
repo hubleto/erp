@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Products\Controllers;
+namespace Hubleto\App\Community\Products\Controllers;
 
 class Groups extends \Hubleto\Erp\Controller
 {
@@ -15,6 +15,6 @@ class Groups extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Products/Groups.twig');
+    $this->setView('@Hubleto:App:Community:Products/Groups.twig');
   }
 }

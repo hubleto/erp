@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "preserveSymlinks": true,
+    "baseUrl": ".",
+    "paths": {
+      "@hubleto/apps/*": ["./apps/*"],
+      "@hubleto/react-ui/*": ["../react-ui/*"],
+      "*": ["../react-ui/node_modules/*"],
+    },
+    "lib": [
+      "es2017",
+    ],
+  },
+  "include": ["./**/*"]
+}

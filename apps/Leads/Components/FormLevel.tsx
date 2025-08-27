@@ -8,13 +8,13 @@ interface FormLevelState extends HubletoFormState { }
 export default class FormLevel<P, S> extends HubletoForm<FormLevelProps, FormLevelState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Leads/Models/Team',
+    model: 'Hubleto/App/Community/Leads/Models/Team',
   }
 
   props: FormLevelProps;
   state: FormLevelState;
 
-  translationContext: string = 'HubletoApp\\Community\\Leads::Components\\FormLevel';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads::Components\\FormLevel';
 
   constructor(props: FormLevelProps) {
     super(props);
@@ -70,7 +70,7 @@ export default class FormLevel<P, S> extends HubletoForm<FormLevelProps, FormLev
   //           <Table
   //             uid={this.props.uid + '_table_locations'}
   //             parentForm={this}
-  //             model='HubletoApp/Community/Warehouses/Models/Location'
+  //             model='Hubleto/App/Community/Warehouses/Models/Location'
   //             customEndpointParams={ { idWarehouse: this.state.id } }
   //           ></Table>
   //         }

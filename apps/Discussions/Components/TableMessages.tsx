@@ -13,13 +13,13 @@ export default class TableMessages extends HubletoTable<TableMessagesProps, Tabl
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Discussions/Models/Message',
+    model: 'Hubleto/App/Community/Discussions/Models/Message',
   }
 
   props: TableMessagesProps;
   state: TableMessagesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Discussions::Components\\TableMessages';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\TableMessages';
 
   constructor(props: TableMessagesProps) {
     super(props);

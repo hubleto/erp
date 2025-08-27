@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers;
+namespace Hubleto\App\Community\Settings\Controllers;
 
 class Countries extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class Countries extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Settings/Countries.twig');
+    $this->setView('@Hubleto:App:Community:Settings/Countries.twig');
   }
 
 }

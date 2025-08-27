@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Controllers;
+namespace Hubleto\App\Community\Mail\Controllers;
 
 class Accounts extends \Hubleto\Erp\Controller
 {
@@ -16,7 +16,7 @@ class Accounts extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@HubletoApp:Community:Mail/Accounts.twig');
+    $this->setView('@Hubleto:App:Community:Mail/Accounts.twig');
   }
 
 }

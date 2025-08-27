@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers;
+namespace Hubleto\App\Community\Leads\Controllers;
 
 class Levels extends \Hubleto\Erp\Controller
 {
@@ -12,7 +12,7 @@ class Levels extends \Hubleto\Erp\Controller
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->viewParams['randomNumber'] = rand(1, 1000);
 
-    $this->setView('@HubletoApp:Community:Leads/Levels.twig');
+    $this->setView('@Hubleto:App:Community:Leads/Levels.twig');
   }
 
 }

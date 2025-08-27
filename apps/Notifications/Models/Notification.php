@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Notifications\Models;
+namespace Hubleto\App\Community\Notifications\Models;
 
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Text;
@@ -9,7 +9,7 @@ use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Json;
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\User;
 
 class Notification extends \Hubleto\Erp\Model
 {

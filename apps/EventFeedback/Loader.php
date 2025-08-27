@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\EventFeedback;
+namespace Hubleto\App\Community\EventFeedback;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -21,15 +21,15 @@ class Loader extends \Hubleto\Framework\App
       '/^settings\/eventfeedback\/?$/' => Controllers\Settings::class,
     ]);
 
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => 'EventFeedback', // or $this->translate('EventFeedback')
       'icon' => 'fas fa-table',
       'url' => 'settings/eventfeedback',
     ]);
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar(
       $this, 
       'EventFeedback-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.

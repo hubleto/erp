@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Billing
+namespace: Hubleto\App\Community\Billing
 appType: community
 sidebarGroup: finance
 rootUrlSlug: billing
@@ -17,4 +17,4 @@ tags:
   - account
   - currency
 requires:
-  - HubletoApp\Community\Customers
+  - Hubleto\App\Community\Customers

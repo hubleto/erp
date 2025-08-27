@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\CalendarSync;
+namespace Hubleto\App\Community\CalendarSync;
 
-use HubletoApp\Community\CalendarSync\Models\Source;
+use Hubleto\App\Community\CalendarSync\Models\Source;
 
 class Calendar extends \Hubleto\Erp\Calendar
 {

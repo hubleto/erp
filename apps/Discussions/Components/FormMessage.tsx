@@ -8,13 +8,13 @@ interface FormMessageState extends HubletoFormState { }
 export default class FormMessage<P, S> extends HubletoForm<FormMessageProps, FormMessageState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Discussions/Models/Message',
+    model: 'Hubleto/App/Community/Discussions/Models/Message',
   }
 
   props: FormMessageProps;
   state: FormMessageState;
 
-  translationContext: string = 'HubletoApp\\Community\\Discussions::Components\\FormMessage';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\FormMessage';
 
   constructor(props: FormMessageProps) {
     super(props);
@@ -83,7 +83,7 @@ export default class FormMessage<P, S> extends HubletoForm<FormMessageProps, For
       //     <Table
       //       uid={this.props.uid + '_table_locations'}
       //       parentForm={this}
-      //       model='HubletoApp/Community/Warehouses/Models/Location'
+      //       model='Hubleto/App/Community/Warehouses/Models/Location'
       //       customEndpointParams={ { idWarehouse: this.state.id } }
       //     ></Table>
       //   );

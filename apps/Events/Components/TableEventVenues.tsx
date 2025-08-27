@@ -13,13 +13,13 @@ export default class TableEventVenues extends HubletoTable<TableEventVenuesProps
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Events/Models/EventVenue',
+    model: 'Hubleto/App/Community/Events/Models/EventVenue',
   }
 
   props: TableEventVenuesProps;
   state: TableEventVenuesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Events::Components\\TableEventVenues';
+  translationContext: string = 'Hubleto\\App\\Community\\Events::Components\\TableEventVenues';
 
   constructor(props: TableEventVenuesProps) {
     super(props);

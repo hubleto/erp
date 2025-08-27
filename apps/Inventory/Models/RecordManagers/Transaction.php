@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\Inventory\Models\RecordManagers;
+namespace Hubleto\App\Community\Inventory\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
-use HubletoApp\Community\Products\Models\RecordManagers\Product;
-use HubletoApp\Community\Warehouses\Models\RecordManagers\Location;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Products\Models\RecordManagers\Product;
+use Hubleto\App\Community\Warehouses\Models\RecordManagers\Location;
 
 class Transaction extends \Hubleto\Erp\RecordManager
 {

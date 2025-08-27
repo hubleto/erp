@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Reports\Controllers\Api;
+namespace Hubleto\App\Community\Reports\Controllers\Api;
 
 class GetConfig extends \Hubleto\Erp\Controllers\ApiController
 {

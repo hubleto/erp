@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Controllers\Api;
+namespace Hubleto\App\Community\Cloud\Controllers\Api;
 
 class AcceptLegalDocuments extends \Hubleto\Erp\Controllers\ApiController
 {

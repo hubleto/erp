@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Tasks
+namespace: Hubleto\App\Community\Tasks
 appType: community
 sidebarGroup: projects
 rootUrlSlug: tasks
@@ -9,4 +9,4 @@ author:
   nick: "wai.blue"
 highlight: Task management app
 requires:
-  - HubletoApp\Community\Pipeline
+  - Hubleto\App\Community\Pipeline

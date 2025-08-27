@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace HubletoApp\Community\Documents\Controllers\Api;
+namespace Hubleto\App\Community\Documents\Controllers\Api;
 
-use HubletoApp\Community\Documents\Generator;
-use HubletoApp\Community\Documents\Models\Template;
+use Hubleto\App\Community\Documents\Generator;
+use Hubleto\App\Community\Documents\Models\Template;
 
 class GeneratePdfFromTemplate extends \Hubleto\Erp\Controllers\ApiController
 {

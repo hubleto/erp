@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers;
+namespace Hubleto\App\Community\Settings\Controllers;
 
 class Apps extends \Hubleto\Erp\Controller
 {
@@ -79,7 +79,7 @@ class Apps extends \Hubleto\Erp\Controller
     $this->viewParams['availableApps'] = $availableApps;
     $this->viewParams['appsToShow'] = $appsToShow;
 
-    $this->setView('@HubletoApp:Community:Settings/Apps.twig');
+    $this->setView('@Hubleto:App:Community:Settings/Apps.twig');
   }
 
 }

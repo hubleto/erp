@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Invoices
+namespace: Hubleto\App\Community\Invoices
 appType: community
 sidebarGroup: finance
 rootUrlSlug: invoices

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Help\Controllers;
+namespace Hubleto\App\Community\Help\Controllers;
 
 class Search extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class Search extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Help/Search.twig');
+    $this->setView('@Hubleto:App:Community:Help/Search.twig');
   }
 
 }

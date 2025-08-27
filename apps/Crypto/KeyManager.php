@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Crypto;
+namespace Hubleto\App\Community\Crypto;
 
 use Defuse\Crypto\File;
 use Defuse\Crypto\Key;

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Pipeline\Controllers;
+namespace Hubleto\App\Community\Pipeline\Controllers;
 
 class Home extends \Hubleto\Erp\Controller
 {
@@ -14,6 +14,6 @@ class Home extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Pipeline/Home.twig');
+    $this->setView('@Hubleto:App:Community:Pipeline/Home.twig');
   }
 }

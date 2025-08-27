@@ -8,13 +8,13 @@ export default class TableLeadDocuments extends Table<TableLeadDocumentsProps, T
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Leads/Models/LeadDocument',
+    model: 'Hubleto/App/Community/Leads/Models/LeadDocument',
   }
 
   props: TableLeadDocumentsProps;
   state: TableLeadDocumentsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\TableLeadDocuments';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\TableLeadDocuments';
 
   constructor(props: TableLeadDocumentsProps) {
     super(props);

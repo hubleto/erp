@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\Contacts\Controllers\Api;
+namespace Hubleto\App\Community\Contacts\Controllers\Api;
 
-use HubletoApp\Community\Contacts\Models\Contact;
-use HubletoApp\Community\Contacts\Models\ContactTag;
-use HubletoApp\Community\Contacts\Models\Tag;
+use Hubleto\App\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Contacts\Models\ContactTag;
+use Hubleto\App\Community\Contacts\Models\Tag;
 
 class CheckPrimaryContact extends \Hubleto\Erp\Controllers\ApiController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Reports;
+namespace Hubleto\App\Community\Reports;
 
 class ReportManager extends \Hubleto\Framework\Core
 {

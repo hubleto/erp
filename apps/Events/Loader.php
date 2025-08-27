@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Events;
+namespace Hubleto\App\Community\Events;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -29,14 +29,14 @@ class Loader extends \Hubleto\Framework\App
 
     // Add placeholder for custom settings.
     // This will be displayed in the Settings app, under the "All settings" card.
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => 'Event types',
       'icon' => 'fas fa-table',
       'url' => 'events/settings',
     ]);
 
-    $appMenu = $this->getService(\HubletoApp\Community\Desktop\AppMenuManager::class);
+    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'events', $this->translate('Events'), 'fas fa-people-group');
     $appMenu->addItem($this, 'events/venues', $this->translate('Venues'), 'fas fa-building-columns');
     $appMenu->addItem($this, 'events/speakers', $this->translate('Speakers'), 'fas fa-user-tie');

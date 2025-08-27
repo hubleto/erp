@@ -23,7 +23,7 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
   props: PipelineSelectorProps;
   state: PipelineSelectorState;
 
-  translationContext: string = "HubletoApp\\Community\\Pipeline\\Loader::Components\\PipelineSelector";
+  translationContext: string = "Hubleto\\App\\Community\\Pipeline\\Loader::Components\\PipelineSelector";
 
   constructor(props: PipelineSelectorProps) {
     super(props);

@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Controllers\Api;
+namespace Hubleto\App\Community\Deals\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\PipelineStep;
 
 class ChangePipeline extends \Hubleto\Erp\Controllers\ApiController
 {

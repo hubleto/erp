@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Reports\Controllers;
+namespace Hubleto\App\Community\Reports\Controllers;
 
 class Reports extends \Hubleto\Erp\Controller
 {
@@ -23,7 +23,7 @@ class Reports extends \Hubleto\Erp\Controller
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->viewParams['randomNumber'] = rand(1, 1000);
 
-    $this->setView('@HubletoApp:Community:Reports/Reports.twig');
+    $this->setView('@Hubleto:App:Community:Reports/Reports.twig');
 
     // Uncomment this if you want your controller be hookable
     $this->getHookManager()->run('controller:prepare-view-end', [$this]);

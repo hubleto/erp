@@ -45,7 +45,7 @@ export interface FormCustomerState extends HubletoFormState {
 export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, FormCustomerState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: "HubletoApp/Community/Customers/Models/Customer"
+    model: "Hubleto/App/Community/Customers/Models/Customer"
   };
 
   props: FormCustomerProps;
@@ -53,7 +53,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
 
   refLogActivityInput: any;
 
-  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\FormCustomer';
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\FormCustomer';
 
   constructor(props: FormCustomerProps) {
     super(props);
@@ -113,7 +113,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Contacts/Models/Value',
+        model: 'Hubleto/App/Community/Contacts/Models/Value',
         idContact: -1,
       },
       (description: any) => {
@@ -202,7 +202,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           descriptionSource="both"
           description={{
             defaultValues: {
-              creatingForModel: "HubletoApp/Community/Customers/Models/CustomerDocument",
+              creatingForModel: "Hubleto/App/Community/Customers/Models/CustomerDocument",
               creatingForId: this.state.record.id,
               origin_link: window.location.pathname + "?recordId=" + this.state.record.id,
             }
@@ -378,7 +378,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                     <InputTags2
                       {...this.getInputProps('tags')}
                       value={this.state.record.TAGS}
-                      model="HubletoApp/Community/Customers/Models/Tag"
+                      model="Hubleto/App/Community/Customers/Models/Tag"
                       targetColumn="id_customer"
                       sourceColumn="id_tag"
                       colorColumn="color"
@@ -508,7 +508,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
           <TableDocuments
             key={this.state.tablesKey + "_table_customer_document"}
             uid={this.props.uid + "_table_customer_documents"}
-            junctionModel='HubletoApp\Community\Customers\Models\CustomerDocument'
+            junctionModel='Hubleto\App\Community\Customers\Models\CustomerDocument'
             junctionSourceColumn='id_customer'
             junctionDestinationColumn='id_document'
             junctionSourceRecordId={R.id}

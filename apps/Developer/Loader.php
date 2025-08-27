@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Developer;
+namespace Hubleto\App\Community\Developer;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -21,7 +21,7 @@ class Loader extends \Hubleto\Framework\App
       '/^developer\/form-designer\/?$/' => Controllers\FormDesigner::class,
     ]);
 
-    // $tools = $this->getService(\HubletoApp\Community\Tools\Manager::class);
+    // $tools = $this->getService(\Hubleto\App\Community\Tools\Manager::class);
     // $tools->addTool($this, [
     //   'title' => $this->translate('Developer tools'),
     //   'icon' => 'fas fa-screwdriver-wrench',

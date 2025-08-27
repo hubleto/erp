@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Worksheets\Controllers;
+namespace Hubleto\App\Community\Worksheets\Controllers;
 
 class Activities extends \Hubleto\Erp\Controller
 {
@@ -23,7 +23,7 @@ class Activities extends \Hubleto\Erp\Controller
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->viewParams['randomNumber'] = rand(1, 1000);
 
-    $this->setView('@HubletoApp:Community:Worksheets/Activities.twig');
+    $this->setView('@Hubleto:App:Community:Worksheets/Activities.twig');
 
     // Uncomment this if you want your controller be hookable
     $this->getHookManager()->run('controller:prepare-view-end', [$this]);

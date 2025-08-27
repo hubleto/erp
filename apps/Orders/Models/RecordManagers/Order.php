@@ -1,14 +1,14 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Models\RecordManagers;
+namespace Hubleto\App\Community\Orders\Models\RecordManagers;
 
-use HubletoApp\Community\Projects\Models\RecordManagers\ProjectOrder;
-use HubletoApp\Community\Documents\Models\RecordManagers\Template;
-use HubletoApp\Community\Customers\Models\RecordManagers\Customer;
-use HubletoApp\Community\Settings\Models\RecordManagers\Currency;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\Pipeline;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\PipelineStep;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Projects\Models\RecordManagers\ProjectOrder;
+use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
+use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
+use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\PipelineStep;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;

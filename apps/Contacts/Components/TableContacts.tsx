@@ -21,13 +21,13 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Contacts/Models/Contact',
+    model: 'Hubleto/App/Community/Contacts/Models/Contact',
   }
 
   props: TableContactsProps;
   state: TableContactsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableContacts';
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\TableContacts';
 
   getFormModalProps() {
     return {
@@ -59,7 +59,7 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Contacts/Models/Value',
+        model: 'Hubleto/App/Community/Contacts/Models/Value',
         idContact: this.props.recordId ?? description.idContact,
       },
       (description: any) => {

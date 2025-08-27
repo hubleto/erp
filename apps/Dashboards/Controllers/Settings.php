@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Dashboards\Controllers;
+namespace Hubleto\App\Community\Dashboards\Controllers;
 
 class Settings extends \Hubleto\Erp\Controller
 {
@@ -16,7 +16,7 @@ class Settings extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@HubletoApp:Community:Dashboards/Settings.twig');
+    $this->setView('@Hubleto:App:Community:Dashboards/Settings.twig');
   }
 
 }

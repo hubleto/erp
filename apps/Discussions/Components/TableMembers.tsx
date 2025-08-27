@@ -13,13 +13,13 @@ export default class TableMembers extends HubletoTable<TableMembersProps, TableM
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Discussions/Models/Member',
+    model: 'Hubleto/App/Community/Discussions/Models/Member',
   }
 
   props: TableMembersProps;
   state: TableMembersState;
 
-  translationContext: string = 'HubletoApp\\Community\\Discussions::Components\\TableMembers';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\TableMembers';
 
   constructor(props: TableMembersProps) {
     super(props);

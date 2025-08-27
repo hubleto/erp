@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Desktop;
+namespace Hubleto\App\Community\Desktop;
 
 use Hubleto\Framework\DependencyInjection;
 

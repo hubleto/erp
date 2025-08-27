@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Models;
+namespace Hubleto\App\Community\Orders\Models;
 
 class History extends \Hubleto\Erp\Model
 {

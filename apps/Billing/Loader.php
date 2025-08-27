@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Billing;
+namespace Hubleto\App\Community\Billing;
 
-use HubletoApp\Community\Settings\Models\Permission;
+use Hubleto\App\Community\Settings\Models\Permission;
 
 class Loader extends \Hubleto\Framework\App
 {

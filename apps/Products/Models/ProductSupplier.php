@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Products\Models;
+namespace Hubleto\App\Community\Products\Models;
 
-use HubletoApp\Community\Suppliers\Models\Supplier;
+use Hubleto\App\Community\Suppliers\Models\Supplier;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Decimal;

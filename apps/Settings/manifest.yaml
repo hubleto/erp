@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Settings
+namespace: Hubleto\App\Community\Settings
 appType: community
 sidebarGroup: maintenance
 rootUrlSlug: settings

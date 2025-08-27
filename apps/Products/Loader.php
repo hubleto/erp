@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Products;
+namespace Hubleto\App\Community\Products;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Framework\App
       '/^products\/groups(\/(?<recordId>\d+))?\/?$/' => Controllers\Groups::class,
     ]);
 
-    $appMenu = $this->getService(\HubletoApp\Community\Desktop\AppMenuManager::class);
+    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'products', $this->translate('Products'), 'fas fa-cart-shopping');
     $appMenu->addItem($this, 'products/groups', $this->translate('Groups'), 'fas fa-burger');
 

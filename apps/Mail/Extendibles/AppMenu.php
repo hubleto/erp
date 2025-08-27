@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Extendibles;
+namespace Hubleto\App\Community\Mail\Extendibles;
 
 class AppMenu extends \Hubleto\Framework\Extendible
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Controllers\Test;
+namespace Hubleto\App\Community\Cloud\Controllers\Test;
 
-use HubletoApp\Community\Cloud\PremiumAccount;
+use Hubleto\App\Community\Cloud\PremiumAccount;
 
 class ClearCredit extends \Hubleto\Erp\Controller
 {
@@ -14,12 +14,12 @@ class ClearCredit extends \Hubleto\Erp\Controller
 
     $currentCredit = $premiumAccount->getCurrentCredit();
 
-    $mPayment = $this->getModel(\HubletoApp\Community\Cloud\Models\Payment::class);
+    $mPayment = $this->getModel(\Hubleto\App\Community\Cloud\Models\Payment::class);
     $mPayment->record->recordCreate(['datetime_charged' => date('Y-m-d H:i:s'), 'amount' => -$currentCredit - 1]);
 
     $premiumAccount->recalculateCredit();
 
-    $this->setView('@HubletoApp:Community:Cloud/Test/ClearCredit.twig');
+    $this->setView('@Hubleto:App:Community:Cloud/Test/ClearCredit.twig');
   }
 
 }

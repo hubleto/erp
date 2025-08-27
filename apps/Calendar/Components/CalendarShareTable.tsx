@@ -78,16 +78,16 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
     globalThis.main.showDialogConfirm(
       this.translate(
         'You are about to remove all shared access to the calendar "' + calendar + '". Do you want to continue?',
-        'HubletoApp\\Community\\Calendar\\Components\\CalendarShareTable'
+        'Hubleto\\App\\Community\\Calendar\\Components\\CalendarShareTable'
       ),
       {
         headerClassName: 'dialog-danger-header',
         contentClassName: 'dialog-danger-content',
-        header: this.translate('Stop sharing "' + calendar + '"', 'HubletoApp\\Community\\Calendar\\Components\\CalendarShareTable'),
-        yesText: this.translate('Yes, remove all shares', 'HubletoApp\\Community\\Calendar\\Components\\CalendarShareTable'),
+        header: this.translate('Stop sharing "' + calendar + '"', 'Hubleto\\App\\Community\\Calendar\\Components\\CalendarShareTable'),
+        yesText: this.translate('Yes, remove all shares', 'Hubleto\\App\\Community\\Calendar\\Components\\CalendarShareTable'),
         yesButtonClass: 'btn-danger',
         onYes: () => { this.stopSharingCalendar(calendar); },
-        noText: this.translate('No, keep current sharing', 'HubletoApp\\Community\\Calendar\\Components\\CalendarShareTable'),
+        noText: this.translate('No, keep current sharing', 'Hubleto\\App\\Community\\Calendar\\Components\\CalendarShareTable'),
         onNo: () => { },
       }
     );
@@ -184,7 +184,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
             </div>
             :
             <Table
-              model="HubletoApp/Community/Calendar/Models/SharedCalendar"
+              model="Hubleto/App/Community/Calendar/Models/SharedCalendar"
               formReactComponent="SharedCalendarForm"
               description={{
                 ui: {

@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Calendar
+namespace: Hubleto\App\Community\Calendar
 appType: community
 sidebarGroup: calendar
 rootUrlSlug: calendar

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Models\RecordManagers;
+namespace Hubleto\App\Community\OAuth\Models\RecordManagers;
 
 class AccessToken extends \Hubleto\Erp\RecordManager
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Campaigns\Controllers;
+namespace Hubleto\App\Community\Campaigns\Controllers;
 
 class Campaigns extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class Campaigns extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@HubletoApp:Community:Campaigns/Campaigns.twig');
+    $this->setView('@Hubleto:App:Community:Campaigns/Campaigns.twig');
   }
 
 }

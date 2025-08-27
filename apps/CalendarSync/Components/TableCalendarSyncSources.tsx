@@ -14,13 +14,13 @@ export default class TableCalendarSyncSources extends Table<TableSourcesProps, T
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/CalendarSync/Models/Source',
+    model: 'Hubleto/App/Community/CalendarSync/Models/Source',
   }
 
   props: TableSourcesProps;
   state: TableSourcesState;
 
-  translationContext: string = 'HubletoApp\\Community\\CalendarSync\\Loader::Components\\TableSources';
+  translationContext: string = 'Hubleto\\App\\Community\\CalendarSync\\Loader::Components\\TableSources';
 
   constructor(props: TableSourcesProps) {
     super(props);

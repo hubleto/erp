@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Controllers;
+namespace Hubleto\App\Community\Customers\Controllers;
 
 class Tags extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class Tags extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Customers/Tags.twig');
+    $this->setView('@Hubleto:App:Community:Customers/Tags.twig');
   }
 
 }

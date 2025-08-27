@@ -8,13 +8,13 @@ export default class TableDealHistory extends Table<TableDealHistoryProps, Table
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Deals/Models/DealHistory',
+    model: 'Hubleto/App/Community/Deals/Models/DealHistory',
   }
 
   props: TableDealHistoryProps;
   state: TableDealHistoryState;
 
-  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\TableDealHistory';
+  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader::Components\\TableDealHistory';
 
   constructor(props: TableDealHistoryProps) {
     super(props);

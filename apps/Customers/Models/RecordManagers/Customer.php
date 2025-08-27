@@ -1,14 +1,14 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Models\RecordManagers;
+namespace Hubleto\App\Community\Customers\Models\RecordManagers;
 
-use HubletoApp\Community\Billing\Models\RecordManagers\BillingAccount;
-use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
-use HubletoApp\Community\Customers\Models\RecordManagers\CustomerDocument;
-use HubletoApp\Community\Settings\Models\RecordManagers\Country;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
-use HubletoApp\Community\Deals\Models\RecordManagers\Deal;
-use HubletoApp\Community\Leads\Models\RecordManagers\Lead;
+use Hubleto\App\Community\Billing\Models\RecordManagers\BillingAccount;
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Hubleto\App\Community\Customers\Models\RecordManagers\CustomerDocument;
+use Hubleto\App\Community\Settings\Models\RecordManagers\Country;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Deals\Models\RecordManagers\Deal;
+use Hubleto\App\Community\Leads\Models\RecordManagers\Lead;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

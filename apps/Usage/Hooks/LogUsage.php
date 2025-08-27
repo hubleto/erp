@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoApp\Community\Usage\Hooks;
+namespace Hubleto\App\Community\Usage\Hooks;
 
 class LogUsage extends \Hubleto\Erp\Hook
 {
@@ -11,7 +11,7 @@ class LogUsage extends \Hubleto\Erp\Hook
       $controller = $args[0];
       if (!$controller->disableLogUsage) {
         try {
-          $usageLogger = $this->getService(\HubletoApp\Community\Usage\Logger::class);
+          $usageLogger = $this->getService(\Hubleto\App\Community\Usage\Logger::class);
           $usageLogger->logUsage();
         } catch (\Throwable $e) {
           //

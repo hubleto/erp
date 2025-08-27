@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Notifications\Crons;
+namespace Hubleto\App\Community\Notifications\Crons;
 
 class DailyDigest extends \Hubleto\Erp\Cron
 {
@@ -12,8 +12,8 @@ class DailyDigest extends \Hubleto\Erp\Cron
     $users = $this->getAuthProvider()->getActiveUsers();
     foreach ($users as $user) {
 
-      /** @var \HubletoApp\Community\Notifications\Digest $digest */
-      $digest = $this->getService(\HubletoApp\Community\Notifications\Digest::class);
+      /** @var \Hubleto\App\Community\Notifications\Digest $digest */
+      $digest = $this->getService(\Hubleto\App\Community\Notifications\Digest::class);
       $digestHtml = $digest->getDailyDigestForUser($user);
 
       if (!empty($digestHtml)) {

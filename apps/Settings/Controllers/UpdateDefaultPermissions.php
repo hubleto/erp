@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers;
+namespace Hubleto\App\Community\Settings\Controllers;
 
 class UpdateDefaultPermissions extends \Hubleto\Erp\Controller
 {
@@ -24,7 +24,7 @@ class UpdateDefaultPermissions extends \Hubleto\Erp\Controller
     });
     $this->viewParams['log'] = ob_get_clean();
 
-    $this->setView('@HubletoApp:Community:Settings/UpdateDefaultPermissions.twig');
+    $this->setView('@Hubleto:App:Community:Settings/UpdateDefaultPermissions.twig');
   }
 
 }

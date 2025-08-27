@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Models;
+namespace Hubleto\App\Community\Mail\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;

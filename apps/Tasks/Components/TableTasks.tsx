@@ -11,13 +11,13 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Tasks/Models/Task',
+    model: 'Hubleto/App/Community/Tasks/Models/Task',
   }
 
   props: TableTasksProps;
   state: TableTasksState;
 
-  translationContext: string = 'HubletoApp\\Community\\Tasks::Components\\TableTasks';
+  translationContext: string = 'Hubleto\\App\\Community\\Tasks::Components\\TableTasks';
 
   constructor(props: TableTasksProps) {
     super(props);

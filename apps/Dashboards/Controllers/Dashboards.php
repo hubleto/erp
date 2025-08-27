@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Dashboards\Controllers;
+namespace Hubleto\App\Community\Dashboards\Controllers;
 
 class Dashboards extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class Dashboards extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $mDashboard = $this->getModel(\HubletoApp\Community\Dashboards\Models\Dashboard::class);
+    $mDashboard = $this->getModel(\Hubleto\App\Community\Dashboards\Models\Dashboard::class);
 
     $dashboardSlug = $this->getRouter()->urlParamAsString('dashboardSlug');
 
@@ -34,7 +34,7 @@ class Dashboards extends \Hubleto\Erp\Controller
     $this->viewParams['dashboards'] = $dashboards;
     $this->viewParams['dashboardSlug'] = $dashboardSlug;
 
-    $this->setView('@HubletoApp:Community:Dashboards/Dashboards.twig');
+    $this->setView('@Hubleto:App:Community:Dashboards/Dashboards.twig');
   }
 
 }

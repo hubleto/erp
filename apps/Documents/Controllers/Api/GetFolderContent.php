@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Documents\Controllers\Api;
+namespace Hubleto\App\Community\Documents\Controllers\Api;
 
 class GetFolderContent extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -8,8 +8,8 @@ class GetFolderContent extends \Hubleto\Erp\Controllers\ApiController
   {
     $folderUid = $this->getRouter()->urlParamAsString('folderUid');
 
-    $mFolder = $this->getModel(\HubletoApp\Community\Documents\Models\Folder::class);
-    $mDocument = $this->getModel(\HubletoApp\Community\Documents\Models\Document::class);
+    $mFolder = $this->getModel(\Hubleto\App\Community\Documents\Models\Folder::class);
+    $mDocument = $this->getModel(\Hubleto\App\Community\Documents\Models\Document::class);
 
     $folder = $mFolder->record->with('PARENT_FOLDER')->where('uid', $folderUid)->first()->toArray();
     $subFolders = $mFolder->record

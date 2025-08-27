@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Campaigns\Controllers\Api;
+namespace Hubleto\App\Community\Campaigns\Controllers\Api;
 
-use HubletoApp\Community\Contacts\Models\Contact;
-use HubletoApp\Community\Campaigns\Models\CampaignContact;
+use Hubleto\App\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Campaigns\Models\CampaignContact;
 
 class SaveContacts extends \Hubleto\Erp\Controllers\ApiController
 {

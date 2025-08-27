@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Notifications;
+namespace Hubleto\App\Community\Notifications;
 
 class Digest extends \Hubleto\Framework\Core
 {

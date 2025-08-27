@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Dashboards\Models;
+namespace Hubleto\App\Community\Dashboards\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -48,7 +48,7 @@ class Panel extends \Hubleto\Erp\Model
     $description = parent::describeInput($columnName);
     switch ($columnName) {
       case 'board_url_slug':
-        $boards = $this->getService(\HubletoApp\Community\Dashboards\Manager::class);
+        $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
         $enumValues = [
           '' => $this->translate('-- Select board to be displayed in panel --'),
         ];

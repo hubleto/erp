@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Customers\Controllers\Api;
+namespace Hubleto\App\Community\Customers\Controllers\Api;
 
-use HubletoApp\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Customers\Models\Customer;
 
 class GetCustomer extends \Hubleto\Erp\Controllers\ApiController
 {

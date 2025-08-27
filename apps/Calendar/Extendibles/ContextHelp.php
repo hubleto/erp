@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Calendar\Extendibles;
+namespace Hubleto\App\Community\Calendar\Extendibles;
 
 class ContextHelp extends \Hubleto\Framework\Extendible
 {

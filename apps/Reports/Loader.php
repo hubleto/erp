@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Reports;
+namespace Hubleto\App\Community\Reports;
 
 use Hubleto\Framework\DependencyInjection;
 
@@ -45,7 +45,7 @@ class Loader extends \Hubleto\Framework\App
 
     $mReport->record->recordCreate([
       'title' => 'Test report for Customers',
-      'model' => \HubletoApp\Community\Customers\Models\Customer::class,
+      'model' => \Hubleto\App\Community\Customers\Models\Customer::class,
       'query' => '{}',
     ]);
   }

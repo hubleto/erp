@@ -15,13 +15,13 @@ export default class TableHistories extends Table<TableHistoriesProps, TableHist
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Orders/Models/History',
+    model: 'Hubleto/App/Community/Orders/Models/History',
   }
 
   props: TableHistoriesProps;
   state: TableHistoriesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Orders\\Loader::Components\\TableHistories';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader::Components\\TableHistories';
 
   constructor(props: TableHistoriesProps) {
     super(props);

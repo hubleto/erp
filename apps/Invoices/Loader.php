@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Invoices;
+namespace Hubleto\App\Community\Invoices;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -20,8 +20,8 @@ class Loader extends \Hubleto\Framework\App
       '/^invoices(\/(?<recordId>\d+))?\/?$/' => Controllers\Invoices::class,
     ]);
 
-    /** @var \HubletoApp\Community\Pipeline\Manager $pipelineManager */
-    $pipelineManager = $this->getService(\HubletoApp\Community\Pipeline\Manager::class);
+    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
+    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
     $pipelineManager->addPipeline($this, 'invoices', Pipeline::class);
 
   }

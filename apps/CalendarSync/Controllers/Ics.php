@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\CalendarSync\Controllers;
+namespace Hubleto\App\Community\CalendarSync\Controllers;
 
 class Ics extends \Hubleto\Erp\Controller
 {
@@ -8,7 +8,7 @@ class Ics extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
     $this->viewParams['now'] = date('Y-m-d H:i:s');
-    $this->setView('@HubletoApp:Community:CalendarSync/ics.twig');
+    $this->setView('@Hubleto:App:Community:CalendarSync/ics.twig');
   }
 
   public function getBreadcrumbs(): array

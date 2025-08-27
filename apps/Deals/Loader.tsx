@@ -13,7 +13,7 @@ class DealsApp extends HubletoApp {
     globalThis.main.registerReactComponent('DealsFormActivity', DealFormActivity);
 
     // miscellaneous
-    globalThis.main.getApp('HubletoApp/Community/Leads').addFormTab({
+    globalThis.main.getApp('Hubleto/App/Community/Leads').addFormTab({
       uid: 'deals',
       title: <span className='italic'>Deals</span>,
       onRender: (form: any) => {
@@ -25,7 +25,7 @@ class DealsApp extends HubletoApp {
           descriptionSource='both'
           uid={form.props.uid + "_table_lead_deal"}
           junctionTitle='Deal'
-          junctionModel='HubletoApp/Community/Deals/Models/DealLead'
+          junctionModel='Hubleto/App/Community/Deals/Models/DealLead'
           junctionSourceColumn='id_lead'
           junctionSourceRecordId={form.state.record.id}
           junctionDestinationColumn='id_deal'
@@ -33,7 +33,7 @@ class DealsApp extends HubletoApp {
       },
     });
 
-    globalThis.main.getApp('HubletoApp/Community/Leads').addFormHeaderButton(
+    globalThis.main.getApp('Hubleto/App/Community/Leads').addFormHeaderButton(
       'Create deal',
       (form: any) => {
         request.get(
@@ -51,4 +51,4 @@ class DealsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Deals', new DealsApp());
+globalThis.main.registerApp('Hubleto/App/Community/Deals', new DealsApp());

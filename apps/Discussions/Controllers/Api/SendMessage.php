@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Discussions\Controllers\Api;
+namespace Hubleto\App\Community\Discussions\Controllers\Api;
 
 class SendMessage extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -11,8 +11,8 @@ class SendMessage extends \Hubleto\Erp\Controllers\ApiController
 
     $idUser = $this->getAuthProvider()->getUserId();
 
-    $mMessage = $this->getModel(\HubletoApp\Community\Discussions\Models\Message::class);
-    $mMember = $this->getModel(\HubletoApp\Community\Discussions\Models\Member::class);
+    $mMessage = $this->getModel(\Hubleto\App\Community\Discussions\Models\Message::class);
+    $mMember = $this->getModel(\Hubleto\App\Community\Discussions\Models\Member::class);
 
     $sentMessage = [
       'id_discussion' => $idDiscussion,

@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Notifications\Models\RecordManagers;
+namespace Hubleto\App\Community\Notifications\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Notification extends \Hubleto\Erp\RecordManager
 {
@@ -44,8 +44,8 @@ class Notification extends \Hubleto\Erp\RecordManager
   {
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    /** @var \HubletoApp\Community\Notifications\Loader $notificationsApp */
-    $notificationsApp = $main->getAppManager(\HubletoApp\Community\Notifications\Loader::class);
+    /** @var \Hubleto\App\Community\Notifications\Loader $notificationsApp */
+    $notificationsApp = $main->getAppManager(\Hubleto\App\Community\Notifications\Loader::class);
 
     $message = $notificationsApp->send(
       $record['id_to'] ?? '',

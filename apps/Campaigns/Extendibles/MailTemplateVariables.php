@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Campaigns\Extendibles;
+namespace Hubleto\App\Community\Campaigns\Extendibles;
 
 class MailTemplateVariables extends \Hubleto\Framework\Extendible
 {

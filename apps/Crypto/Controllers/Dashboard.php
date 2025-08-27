@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Crypto\Controllers;
+namespace Hubleto\App\Community\Crypto\Controllers;
 
 class Dashboard extends \Hubleto\Erp\Controller
 {
@@ -14,7 +14,7 @@ class Dashboard extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Crypto/Dashboard.twig');
+    $this->setView('@Hubleto:App:Community:Crypto/Dashboard.twig');
   }
 
 }

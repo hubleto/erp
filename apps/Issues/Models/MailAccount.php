@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Community\Issues\Models;
+namespace Hubleto\App\Community\Issues\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Json;
 
-use HubletoApp\Community\Mail\Models\Account;
+use Hubleto\App\Community\Mail\Models\Account;
 
 class MailAccount extends \Hubleto\Erp\Model
 {

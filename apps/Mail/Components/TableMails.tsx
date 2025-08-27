@@ -21,13 +21,13 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
       field: "id",
       direction: "desc"
     },
-    model: 'HubletoApp/Community/Mail/Models/Mail',
+    model: 'Hubleto/App/Community/Mail/Models/Mail',
   }
 
   props: TableMailsProps;
   state: TableMailsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Mail\\Loader::Components\\TableMails';
+  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader::Components\\TableMails';
 
   constructor(props: TableMailsProps) {
     super(props);

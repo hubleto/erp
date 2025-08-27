@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\Projects\Controllers\Api;
+namespace Hubleto\App\Community\Projects\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Projects\Models\Project;
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Projects\Models\Project;
+use Hubleto\App\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
 
 class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
 {

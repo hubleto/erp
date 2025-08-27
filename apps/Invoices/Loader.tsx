@@ -13,4 +13,4 @@ class InvoicesApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Invoices', new InvoicesApp());
+globalThis.main.registerApp('Hubleto/App/Community/Invoices', new InvoicesApp());

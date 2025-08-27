@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Products\Models\RecordManagers;
+namespace Hubleto\App\Community\Products\Models\RecordManagers;
 
 class Group extends \Hubleto\Erp\RecordManager
 {

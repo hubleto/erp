@@ -10,13 +10,13 @@ interface TableOrderProductsState extends HubletoTableState {}
 export default class TableOrderProducts extends HubletoTable<TableOrderProductsProps, TableOrderProductsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    model: 'HubletoApp/Community/Orders/Models/OrderProduct',
+    model: 'Hubleto/App/Community/Orders/Models/OrderProduct',
   }
 
   props: TableOrderProductsProps;
   state: TableOrderProductsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Orders\\Loader::Components\\TableOrderProducts';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader::Components\\TableOrderProducts';
 
   constructor(props: TableOrderProductsProps) {
     super(props);

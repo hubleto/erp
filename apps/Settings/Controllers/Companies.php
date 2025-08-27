@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers;
+namespace Hubleto\App\Community\Settings\Controllers;
 
 class Companies extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class Companies extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Settings/Companies.twig');
+    $this->setView('@Hubleto:App:Community:Settings/Companies.twig');
   }
 
 }

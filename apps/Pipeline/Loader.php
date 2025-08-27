@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Pipeline;
+namespace Hubleto\App\Community\Pipeline;
 
-use HubletoApp\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\Deal;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -24,7 +24,7 @@ class Loader extends \Hubleto\Framework\App
       '/^settings\/pipelines\/?$/' => Controllers\Pipelines::class,
     ]);
 
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Pipelines'),
       'icon' => 'fas fa-bars-progress',

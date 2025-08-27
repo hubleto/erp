@@ -11,13 +11,13 @@ export default class TableRolePermissions extends Table<TableRolePermissionsProp
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Settings/Models/RolePermission',
+    model: 'Hubleto/App/Community/Settings/Models/RolePermission',
   }
 
   props: TableRolePermissionsProps;
   state: TableRolePermissionsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Settings\\Loader::Components\\TableRolePermissions';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\TableRolePermissions';
 
   constructor(props: TableRolePermissionsProps) {
     super(props);

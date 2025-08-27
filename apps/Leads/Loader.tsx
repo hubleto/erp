@@ -14,7 +14,7 @@ class LeadsApp extends HubletoApp {
     globalThis.main.registerReactComponent('LeadsTableLevels', TableLevels);
 
     // miscellaneous
-    globalThis.main.getApp('HubletoApp/Community/Campaigns').addFormTab({
+    globalThis.main.getApp('Hubleto/App/Community/Campaigns').addFormTab({
       uid: 'leads',
       title: <span className='italic'>Leads</span>,
       onRender: (form: any) => {
@@ -26,7 +26,7 @@ class LeadsApp extends HubletoApp {
           // descriptionSource='both'
           uid={form.props.uid + "_table_campaign_lead"}
           junctionTitle='Campaign'
-          junctionModel='HubletoApp/Community/Leads/Models/LeadCampaign'
+          junctionModel='Hubleto/App/Community/Leads/Models/LeadCampaign'
           junctionSourceColumn='id_campaign'
           junctionSourceRecordId={form.state.record.id}
           junctionDestinationColumn='id_lead'
@@ -37,4 +37,4 @@ class LeadsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Leads', new LeadsApp());
+globalThis.main.registerApp('Hubleto/App/Community/Leads', new LeadsApp());

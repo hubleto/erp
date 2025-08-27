@@ -7,13 +7,13 @@ export interface FormNotificationState extends HubletoFormState {}
 export default class FormNotification<P, S> extends HubletoForm<FormNotificationProps,FormNotificationState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Notifications/Models/Notification',
+    model: 'Hubleto/App/Community/Notifications/Models/Notification',
   };
 
   props: FormNotificationProps;
   state: FormNotificationState;
 
-  translationContext: string = 'HubletoApp\\Community\\Notifications\\Loader::Components\\FormNotification';
+  translationContext: string = 'Hubleto\\App\\Community\\Notifications\\Loader::Components\\FormNotification';
 
   constructor(props: FormNotificationProps) {
     super(props);

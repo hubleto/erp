@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers;
+namespace Hubleto\App\Community\Settings\Controllers;
 
 class Theme extends \Hubleto\Erp\Controller
 {
@@ -26,7 +26,7 @@ class Theme extends \Hubleto\Erp\Controller
 
     $this->viewParams['themes'] = $themes;
 
-    $this->setView('@HubletoApp:Community:Settings/Theme.twig');
+    $this->setView('@Hubleto:App:Community:Settings/Theme.twig');
   }
 
 }

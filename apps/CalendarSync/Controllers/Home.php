@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\CalendarSync\Controllers;
+namespace Hubleto\App\Community\CalendarSync\Controllers;
 
 class Home extends \Hubleto\Erp\Controller
 {
@@ -8,7 +8,7 @@ class Home extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
     $this->viewParams['now'] = date('Y-m-d H:i:s');
-    $this->setView('@HubletoApp:Community:CalendarSync/home.twig');
+    $this->setView('@Hubleto:App:Community:CalendarSync/home.twig');
   }
 
   public function getBreadcrumbs(): array

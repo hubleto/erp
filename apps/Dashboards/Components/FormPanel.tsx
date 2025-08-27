@@ -7,13 +7,13 @@ export interface FormPanelState extends HubletoFormState {}
 export default class FormPanel<P, S> extends HubletoForm<FormPanelProps,FormPanelState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Dashboards/Models/Panel',
+    model: 'Hubleto/App/Community/Dashboards/Models/Panel',
   };
 
   props: FormPanelProps;
   state: FormPanelState;
 
-  translationContext: string = 'HubletoApp\\Community\\Documents\\Loader::Components\\FormPanel';
+  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader::Components\\FormPanel';
 
   constructor(props: FormPanelProps) {
     super(props);

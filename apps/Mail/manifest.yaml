@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Mail
+namespace: Hubleto\App\Community\Mail
 appType: community
 sidebarGroup: communication
 rootUrlSlug: mail

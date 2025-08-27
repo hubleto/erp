@@ -13,13 +13,13 @@ export default class TableDocuments extends HubletoTable<TableDocumentsProps, Ta
       field: "id",
       direction: "desc"
     },
-    model: 'HubletoApp/Community/Documents/Models/Document',
+    model: 'Hubleto/App/Community/Documents/Models/Document',
   }
 
   props: TableDocumentsProps;
   state: TableDocumentsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Documents\\Loader::Components\\TableDocuments';
+  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader::Components\\TableDocuments';
 
   constructor(props: TableDocumentsProps) {
     super(props);

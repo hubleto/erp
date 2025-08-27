@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Community\Support\Controllers;
+namespace Hubleto\App\Community\Support\Controllers;
 
 class Dashboard extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Support/Dashboard.twig');
+    $this->setView('@Hubleto:App:Community:Support/Dashboard.twig');
   }
 
 }

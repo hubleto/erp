@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Issues\Controllers;
+namespace Hubleto\App\Community\Issues\Controllers;
 
 class Issues extends \Hubleto\Erp\Controller
 {
@@ -14,7 +14,7 @@ class Issues extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Issues/Issues.twig');
+    $this->setView('@Hubleto:App:Community:Issues/Issues.twig');
   }
 
 }

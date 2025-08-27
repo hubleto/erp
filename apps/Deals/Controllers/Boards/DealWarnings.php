@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Controllers\Boards;
+namespace Hubleto\App\Community\Deals\Controllers\Boards;
 
-use HubletoApp\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\Deal;
 
 class DealWarnings extends \Hubleto\Erp\Controller
 {
@@ -48,7 +48,7 @@ class DealWarnings extends \Hubleto\Erp\Controller
     $this->viewParams['warningsTotal'] = $warningsTotal;
     $this->viewParams['warnings'] = $warnings;
 
-    $this->setView('@HubletoApp:Community:Deals/Boards/DealWarnings.twig');
+    $this->setView('@Hubleto:App:Community:Deals/Boards/DealWarnings.twig');
   }
 
 }

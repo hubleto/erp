@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Models;
+namespace Hubleto\App\Community\Leads\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Integer;
@@ -11,18 +11,18 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
-use HubletoApp\Community\Contacts\Models\Contact;
-use HubletoApp\Community\Customers\Models\Customer;
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Settings\Models\Currency;
-use HubletoApp\Community\Settings\Models\Setting;
-use HubletoApp\Community\Settings\Models\User;
-use HubletoApp\Community\Settings\Models\Team;
+use Hubleto\App\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Settings\Models\Currency;
+use Hubleto\App\Community\Settings\Models\Setting;
+use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\Team;
 use Hubleto\Framework\Helper;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\PipelineStep;
 
-use HubletoApp\Community\Deals\Models\DealLead;
+use Hubleto\App\Community\Deals\Models\DealLead;
 
 class Lead extends \Hubleto\Erp\Model
 {
@@ -336,7 +336,7 @@ class Lead extends \Hubleto\Erp\Model
     $newLead['id_pipeline_step'] = $idPipelineStep;
 
     if (empty($newLead['identifier'])) {
-      $newLead["identifier"] = $this->getAppManager()->getApp(\HubletoApp\Community\Leads\Loader::class)->configAsString('leadPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
+      $newLead["identifier"] = $this->getAppManager()->getApp(\Hubleto\App\Community\Leads\Loader::class)->configAsString('leadPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
     }
 
     $this->record->recordUpdate($newLead);
@@ -361,7 +361,7 @@ class Lead extends \Hubleto\Erp\Model
       $helper = $this->getService(Helper::class);
       $helper->deleteTags(
         array_column($savedRecord["TAGS"], "id"),
-        $this->getModel("HubletoApp/Community/Leads/Models/LeadTag"),
+        $this->getModel("Hubleto/App/Community/Leads/Models/LeadTag"),
         "id_lead",
         $savedRecord["id"]
       );

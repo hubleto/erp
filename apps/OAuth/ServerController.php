@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\OAuth;
+namespace Hubleto\App\Community\OAuth;
 
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\PasswordGrant;
@@ -12,12 +12,12 @@ class ServerController extends \Hubleto\Erp\Controller
 
   public function getServer(): AuthorizationServer
   {
-    $clientRepository = $this->getService(\HubletoApp\Community\OAuth\Repositories\Client::class);
-    $userRepository = $this->getService(\HubletoApp\Community\OAuth\Repositories\User::class);
-    $scopeRepository = $this->getService(\HubletoApp\Community\OAuth\Repositories\Scope::class);
-    $accessTokenRepository = $this->getService(\HubletoApp\Community\OAuth\Repositories\AccessToken::class);
-    $refreshTokenRepository = $this->getService(\HubletoApp\Community\OAuth\Repositories\RefreshToken::class);
-    $authCodeRepository = $this->getService(\HubletoApp\Community\OAuth\Repositories\AuthCode::class);
+    $clientRepository = $this->getService(\Hubleto\App\Community\OAuth\Repositories\Client::class);
+    $userRepository = $this->getService(\Hubleto\App\Community\OAuth\Repositories\User::class);
+    $scopeRepository = $this->getService(\Hubleto\App\Community\OAuth\Repositories\Scope::class);
+    $accessTokenRepository = $this->getService(\Hubleto\App\Community\OAuth\Repositories\AccessToken::class);
+    $refreshTokenRepository = $this->getService(\Hubleto\App\Community\OAuth\Repositories\RefreshToken::class);
+    $authCodeRepository = $this->getService(\Hubleto\App\Community\OAuth\Repositories\AuthCode::class);
 
     $privateKey = 'file://' . $this->getConfig()->getAsString('OAuthPrivateKey'); // Path to your private key for JWT signing
     $publicKey = 'file://' . $this->getConfig()->getAsString('OAuthPublicKey'); // Path to your public key for JWT validation

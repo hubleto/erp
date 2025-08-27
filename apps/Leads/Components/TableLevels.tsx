@@ -14,13 +14,13 @@ export default class TableLevels extends HubletoTable<TableLevelsProps, TableLev
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Leads/Models/Level',
+    model: 'Hubleto/App/Community/Leads/Models/Level',
   }
 
   props: TableLevelsProps;
   state: TableLevelsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Leads::Components\\TableLevels';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads::Components\\TableLevels';
 
   constructor(props: TableLevelsProps) {
     super(props);

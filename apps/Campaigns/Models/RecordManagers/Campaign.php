@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Community\Campaigns\Models\RecordManagers;
+namespace Hubleto\App\Community\Campaigns\Models\RecordManagers;
 
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\Pipeline;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\PipelineStep;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\PipelineStep;
 
 class Campaign extends \Hubleto\Erp\RecordManager
 {

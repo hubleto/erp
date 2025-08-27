@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Calendar\Controllers\Api;
+namespace Hubleto\App\Community\Calendar\Controllers\Api;
 
 use Hubleto\Erp\Controller;
-use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
+use Hubleto\App\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
 class StopSharingCalendar extends \Hubleto\Erp\Controller
 {

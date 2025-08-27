@@ -13,4 +13,4 @@ class DashboardsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Dashboards', new DashboardsApp());
+globalThis.main.registerApp('Hubleto/App/Community/Dashboards', new DashboardsApp());

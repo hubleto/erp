@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Discussions\Models\RecordManagers;
+namespace Hubleto\App\Community\Discussions\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Member extends \Hubleto\Erp\RecordManager
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Projects\Models\RecordManagers;
+namespace Hubleto\App\Community\Projects\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Phase extends \Hubleto\Erp\RecordManager
 {

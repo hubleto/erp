@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Crons;
+namespace Hubleto\App\Community\Mail\Crons;
 
-use HubletoApp\Community\Mail\Models\Account;
-use HubletoApp\Community\Mail\Models\Mail;
-use HubletoApp\Community\Mail\Models\Mailbox;
+use Hubleto\App\Community\Mail\Models\Account;
+use Hubleto\App\Community\Mail\Models\Mail;
+use Hubleto\App\Community\Mail\Models\Mailbox;
 use Ddeboer\Imap\Server;
 use Hubleto\Framework\Helper;
 

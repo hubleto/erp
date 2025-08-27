@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Calendar\Controllers\Api;
+namespace Hubleto\App\Community\Calendar\Controllers\Api;
 
-use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
+use Hubleto\App\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
 class GetSharedCalendars extends \Hubleto\Erp\Controllers\ApiController
 {

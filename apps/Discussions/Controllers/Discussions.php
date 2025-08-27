@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Discussions\Controllers;
+namespace Hubleto\App\Community\Discussions\Controllers;
 
 class Discussions extends \Hubleto\Erp\Controller
 {
@@ -12,7 +12,7 @@ class Discussions extends \Hubleto\Erp\Controller
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->viewParams['randomNumber'] = rand(1, 1000);
 
-    $this->setView('@HubletoApp:Community:Discussions/Discussions.twig');
+    $this->setView('@Hubleto:App:Community:Discussions/Discussions.twig');
   }
 
 }

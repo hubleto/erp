@@ -14,13 +14,13 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Contacts/Models/Value',
+    model: 'Hubleto/App/Community/Contacts/Models/Value',
   }
 
   props: TableValuesProps;
   state: TableValuesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableValues';
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\TableValues';
 
   constructor(props: TableValuesProps) {
     super(props);
@@ -111,7 +111,7 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                 {this.props.parentForm.state.isInlineEditing ?
                   <Lookup
                     uid={'value_' + item.id + '_id_category'}
-                    model='HubletoApp/Community/Contacts/Models/Category'
+                    model='Hubleto/App/Community/Contacts/Models/Category'
                     value={item.id_category}
                     onChange={(input: any, value: any) => {
                       let newValues = this.state.data.data;

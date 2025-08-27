@@ -12,13 +12,13 @@ export default class TableDealProducts extends HubletoTable<TableDealProductsPro
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Deals/Models/DealProduct',
+    model: 'Hubleto/App/Community/Deals/Models/DealProduct',
   }
 
   props: TableDealProductsProps;
   state: TableDealProductsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\TableDealProducts';
+  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader::Components\\TableDealProducts';
 
   constructor(props: TableDealProductsProps) {
     super(props);

@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\Settings\Controllers\Api;
+namespace Hubleto\App\Community\Settings\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Settings\Models\RolePermission;
-use HubletoApp\Community\Settings\Models\UserRole;
+use Hubleto\App\Community\Settings\Models\RolePermission;
+use Hubleto\App\Community\Settings\Models\UserRole;
 
 class SavePermissions extends \Hubleto\Erp\Controllers\ApiController
 {

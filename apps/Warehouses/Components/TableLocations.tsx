@@ -13,13 +13,13 @@ export default class TableLocations extends HubletoTable<TableLocationsProps, Ta
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Warehouses/Models/Location',
+    model: 'Hubleto/App/Community/Warehouses/Models/Location',
   }
 
   props: TableLocationsProps;
   state: TableLocationsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Warehouses::Components\\FormLocations';
+  translationContext: string = 'Hubleto\\App\\Community\\Warehouses::Components\\FormLocations';
 
   constructor(props: TableLocationsProps) {
     super(props);

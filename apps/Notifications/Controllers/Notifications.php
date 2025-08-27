@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Notifications\Controllers;
+namespace Hubleto\App\Community\Notifications\Controllers;
 
 class Notifications extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class Notifications extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@HubletoApp:Community:Notifications/Notifications.twig');
+    $this->setView('@Hubleto:App:Community:Notifications/Notifications.twig');
   }
 
 }

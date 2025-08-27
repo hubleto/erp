@@ -14,7 +14,7 @@ export default class TableInvoiceItems extends Table<TableInvoiceItemsProps, Tab
     ...Table.defaultProps,
     itemsPerPage: 25,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Invoices/Models/InvoiceItem',
+    model: 'Hubleto/App/Community/Invoices/Models/InvoiceItem',
     // description: {
     //   ui: { addButtonText: this.translate('Create invoice') }
     // },
@@ -23,7 +23,7 @@ export default class TableInvoiceItems extends Table<TableInvoiceItemsProps, Tab
   props: TableInvoiceItemsProps;
   state: TableInvoiceItemsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Invoices\\Loader::Components\\TableInvoiceItems';
+  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader::Components\\TableInvoiceItems';
 
   constructor(props: TableInvoiceItemsProps) {
     super(props);

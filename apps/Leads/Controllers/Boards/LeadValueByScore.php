@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers\Boards;
+namespace Hubleto\App\Community\Leads\Controllers\Boards;
 
-use HubletoApp\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Leads\Models\Lead;
 
 class LeadValueByScore extends \Hubleto\Erp\Controller
 {
@@ -53,7 +53,7 @@ class LeadValueByScore extends \Hubleto\Erp\Controller
 
     $this->viewParams['chartData'] = $chartData;
 
-    $this->setView('@HubletoApp:Community:Leads/Boards/LeadValueByScore.twig');
+    $this->setView('@Hubleto:App:Community:Leads/Boards/LeadValueByScore.twig');
   }
 
 }

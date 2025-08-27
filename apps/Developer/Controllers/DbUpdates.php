@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Developer\Controllers;
+namespace Hubleto\App\Community\Developer\Controllers;
 
 class DbUpdates extends \Hubleto\Erp\Controller
 {
@@ -114,7 +114,7 @@ class DbUpdates extends \Hubleto\Erp\Controller
     $this->viewParams['necessaryUpdates'] = $necessaryUpdates;
     $this->viewParams['runLog'] = $runLog;
 
-    $this->setView('@HubletoApp:Community:Developer/DbUpdates.twig');
+    $this->setView('@Hubleto:App:Community:Developer/DbUpdates.twig');
   }
 
 }

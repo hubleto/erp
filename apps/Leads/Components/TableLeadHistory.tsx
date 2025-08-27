@@ -8,13 +8,13 @@ export default class TableLeadHistory extends Table<TableLeadHistoryProps, Table
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Leads/Models/LeadHistory',
+    model: 'Hubleto/App/Community/Leads/Models/LeadHistory',
   }
 
   props: TableLeadHistoryProps;
   state: TableLeadHistoryState;
 
-  translationContext: string = 'HubletoApp\\Community\\Leads\\Loader::Components\\TableLeadHistory';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\TableLeadHistory';
 
   constructor(props: TableLeadHistoryProps) {
     super(props);

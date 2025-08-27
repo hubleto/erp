@@ -1,17 +1,17 @@
 <?php
 
-namespace HubletoApp\Community\Invoices\Models\RecordManagers;
+namespace Hubleto\App\Community\Invoices\Models\RecordManagers;
 
 use \Illuminate\Database\Eloquent\Relations\HasOne;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-use \HubletoApp\Community\Customers\Models\RecordManagers\Customer;
-use \HubletoApp\Community\Settings\Models\RecordManagers\User;
-use \HubletoApp\Community\Settings\Models\RecordManagers\InvoiceProfile;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\Pipeline;
-use HubletoApp\Community\Pipeline\Models\RecordManagers\PipelineStep;
-use HubletoApp\Community\Documents\Models\RecordManagers\Template;
+use \Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
+use \Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use \Hubleto\App\Community\Settings\Models\RecordManagers\InvoiceProfile;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\RecordManagers\PipelineStep;
+use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
 
 class Invoice extends \Hubleto\Erp\RecordManager {
   public $table = 'invoices';

@@ -8,13 +8,13 @@ interface FormTransactionState extends HubletoFormState { }
 export default class FormTransaction<P, S> extends HubletoForm<FormTransactionProps, FormTransactionState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Inventory/Models/Team',
+    model: 'Hubleto/App/Community/Inventory/Models/Team',
   }
 
   props: FormTransactionProps;
   state: FormTransactionState;
 
-  translationContext: string = 'HubletoApp\\Community\\Inventory::Components\\FormTransaction';
+  translationContext: string = 'Hubleto\\App\\Community\\Inventory::Components\\FormTransaction';
 
   constructor(props: FormTransactionProps) {
     super(props);
@@ -70,7 +70,7 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
   //           <Table
   //             uid={this.props.uid + '_table_locations'}
   //             parentForm={this}
-  //             model='HubletoApp/Community/Warehouses/Models/Location'
+  //             model='Hubleto/App/Community/Warehouses/Models/Location'
   //             customEndpointParams={ { idWarehouse: this.state.id } }
   //           ></Table>
   //         }

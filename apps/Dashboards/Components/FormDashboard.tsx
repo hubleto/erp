@@ -8,13 +8,13 @@ interface FormDashboardState extends HubletoFormState {}
 export default class FormDashboard<P, S> extends HubletoForm<FormDashboardProps,FormDashboardState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Dashboards/Models/Dashboard',
+    model: 'Hubleto/App/Community/Dashboards/Models/Dashboard',
   };
 
   props: FormDashboardProps;
   state: FormDashboardState;
 
-  translationContext: string = 'HubletoApp\\Community\\Dashboards\\Loader::Components\\FormDashboard';
+  translationContext: string = 'Hubleto\\App\\Community\\Dashboards\\Loader::Components\\FormDashboard';
 
   constructor(props: FormDashboardProps) {
     super(props);
@@ -52,7 +52,7 @@ export default class FormDashboard<P, S> extends HubletoForm<FormDashboardProps,
         <div className='mt-2'>
           <Table
             uid='dashboard_panels'
-            model='HubletoApp/Community/Dashboards/Models/Panel'
+            model='Hubleto/App/Community/Dashboards/Models/Panel'
             customEndpointParams={{idDashboard: this.state.id}}
           ></Table>
         </div>

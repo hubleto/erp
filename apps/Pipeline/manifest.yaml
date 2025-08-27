@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Pipeline
+namespace: Hubleto\App\Community\Pipeline
 appType: community
 sidebarGroup: workflow
 rootUrlSlug: pipeline

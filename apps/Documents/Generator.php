@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\Documents;
+namespace Hubleto\App\Community\Documents;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-use HubletoApp\Community\Documents\Models\Template;
+use Hubleto\App\Community\Documents\Models\Template;
 
 class Generator extends \Hubleto\Framework\Core
 {

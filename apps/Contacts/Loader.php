@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Contacts;
+namespace Hubleto\App\Community\Contacts;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -26,8 +26,8 @@ class Loader extends \Hubleto\Framework\App
       '/^contacts\/import\/?$/' => Controllers\Import::class,
     ]);
 
-    /** @var \HubletoApp\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/categories']);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Contact Tags'),

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Contacts\Controllers;
+namespace Hubleto\App\Community\Contacts\Controllers;
 
 class Import extends \Hubleto\Erp\Controller
 {
@@ -16,10 +16,10 @@ class Import extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $mContact = $this->getModel(\HubletoApp\Community\Contacts\Models\Contact::class);
-    $mContactTag = $this->getModel(\HubletoApp\Community\Contacts\Models\ContactTag::class);
-    $mTag = $this->getModel(\HubletoApp\Community\Contacts\Models\Tag::class);
-    $mValue = $this->getModel(\HubletoApp\Community\Contacts\Models\Value::class);
+    $mContact = $this->getModel(\Hubleto\App\Community\Contacts\Models\Contact::class);
+    $mContactTag = $this->getModel(\Hubleto\App\Community\Contacts\Models\ContactTag::class);
+    $mTag = $this->getModel(\Hubleto\App\Community\Contacts\Models\Tag::class);
+    $mValue = $this->getModel(\Hubleto\App\Community\Contacts\Models\Value::class);
 
     $log = [];
     $importFinished = false;
@@ -141,7 +141,7 @@ class Import extends \Hubleto\Erp\Controller
     $this->viewParams['importFinished'] = $importFinished;
     $this->viewParams['checkImport'] = $checkImport;
 
-    $this->setView('@HubletoApp:Community:Contacts/Import.twig');
+    $this->setView('@Hubleto:App:Community:Contacts/Import.twig');
   }
 
 }

@@ -1,21 +1,21 @@
 <?php
 
-namespace HubletoApp\Community\Campaigns\Models;
+namespace Hubleto\App\Community\Campaigns\Models;
 
-use HubletoApp\Community\Campaigns\Lib;
+use Hubleto\App\Community\Campaigns\Lib;
 
-use HubletoApp\Community\Settings\Models\User;
-use HubletoApp\Community\Mail\Models\Mail;
+use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Mail\Models\Mail;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\PipelineStep;
 
-use HubletoApp\Community\Leads\Models\LeadCampaign;
+use Hubleto\App\Community\Leads\Models\LeadCampaign;
 
 class Campaign extends \Hubleto\Erp\Model
 {

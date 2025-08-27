@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\EventRegistrations\Models;
+namespace Hubleto\App\Community\EventRegistrations\Models;
 
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 

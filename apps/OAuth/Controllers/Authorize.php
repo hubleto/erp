@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Controllers;
+namespace Hubleto\App\Community\OAuth\Controllers;
 
-class Authorize extends \HubletoApp\Community\OAuth\ServerController
+class Authorize extends \Hubleto\App\Community\OAuth\ServerController
 {
   public bool $hideDefaultDesktop = true;
   public bool $requiresUserAuthentication = false;
@@ -34,7 +34,7 @@ class Authorize extends \HubletoApp\Community\OAuth\ServerController
         $userConsentApproved = true; // Replace with actual user consent (from a form, for example)
 
         // Set the user on the authorization request.
-        $authRequest->setUser(new \HubletoApp\Community\OAuth\Entities\UserEntity($authenticatedUserId)); // Your user entity
+        $authRequest->setUser(new \Hubleto\App\Community\OAuth\Entities\UserEntity($authenticatedUserId)); // Your user entity
 
         // Set the final scopes that were approved by the user
         $authRequest->setScopes($authRequest->getScopes()); // You might filter/reduce these based on consent

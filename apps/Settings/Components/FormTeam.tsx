@@ -9,13 +9,13 @@ interface FormTeamState extends HubletoFormState { }
 export default class FormTeam<P, S> extends HubletoForm<FormTeamProps, FormTeamState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Settings/Models/Team',
+    model: 'Hubleto/App/Community/Settings/Models/Team',
   }
 
   props: FormTeamProps;
   state: FormTeamState;
 
-  translationContext: string = 'HubletoApp\\Community\\Settings\\Loader::Components\\FormTeam';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\FormTeam';
 
   constructor(props: FormTeamProps) {
     super(props);
@@ -45,7 +45,7 @@ export default class FormTeam<P, S> extends HubletoForm<FormTeamProps, FormTeamS
           :
             <Table
               uid='teams_members'
-              model='HubletoApp/Community/Settings/Models/TeamMember'
+              model='Hubleto/App/Community/Settings/Models/TeamMember'
               customEndpointParams={{idTeam: this.state.id}}
             ></Table>
           }

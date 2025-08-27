@@ -1,14 +1,14 @@
 <?php
 
-namespace HubletoApp\Community\Desktop;
+namespace Hubleto\App\Community\Desktop;
 
 class DashboardManager extends \Hubleto\Framework\Core
 {
 
-  /** @var array<int, \HubletoApp\Community\Desktop\Types\Board> */
+  /** @var array<int, \Hubleto\App\Community\Desktop\Types\Board> */
   protected array $boards = [];
 
-  public function addBoard(\HubletoApp\Community\Desktop\Types\Board $board): void
+  public function addBoard(\Hubleto\App\Community\Desktop\Types\Board $board): void
   {
     $this->boards[] = $board;
   }

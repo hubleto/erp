@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Developer\Controllers;
+namespace Hubleto\App\Community\Developer\Controllers;
 
 class FormDesigner extends \Hubleto\Erp\Controller
 {
@@ -73,7 +73,7 @@ EOL;
 
     $this->viewParams['renderContentCode'] = $renderContentCode;
 
-    $this->setView('@HubletoApp:Community:Developer/FormDesigner.twig');
+    $this->setView('@Hubleto:App:Community:Developer/FormDesigner.twig');
   }
 
 }

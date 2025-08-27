@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Desktop
+namespace: Hubleto\App\Community\Desktop
 appType: community
 rootUrlSlug: desktop
 name: Desktop

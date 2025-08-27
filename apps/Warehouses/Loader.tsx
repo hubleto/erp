@@ -11,4 +11,4 @@ class WarehousesApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Suppliers', new WarehousesApp());
+globalThis.main.registerApp('Hubleto/App/Community/Suppliers', new WarehousesApp());

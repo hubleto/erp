@@ -11,13 +11,13 @@ export interface FormSharedCalendarState extends HubletoFormState {}
 export default class FormSharedCalendar<P, S> extends HubletoForm<FormSharedCalendarProps,FormSharedCalendarState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Calendar/Models/SharedCalendar',
+    model: 'Hubleto/App/Community/Calendar/Models/SharedCalendar',
   };
 
   props: FormSharedCalendarProps;
   state: FormSharedCalendarState;
 
-  translationContext: string = 'HubletoApp\\Community\\Calendar\\Loader::Components\\FormSharedCalendar';
+  translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader::Components\\FormSharedCalendar';
 
   renderTitle(): JSX.Element {
     return <>

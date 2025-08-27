@@ -24,13 +24,13 @@ export interface FormContactState extends HubletoFormState {
 export default class FormContact<P, S> extends HubletoForm<FormContactProps,FormContactState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Contacts/Models/Contact',
+    model: 'Hubleto/App/Community/Contacts/Models/Contact',
   };
 
   props: FormContactProps;
   state: FormContactState;
 
-  translationContext: string = 'HubletoApp\\Community\\Contacts\\Loader::Components\\FormContact';
+  translationContext: string = 'Hubleto\\App\\Community\\Contacts\\Loader::Components\\FormContact';
 
   constructor(props: FormContactProps) {
     super(props);
@@ -151,7 +151,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
                     enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
                   },
                   value: { type: 'varchar', title: this.translate('Value')},
-                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/Category' },
+                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'Hubleto/App/Community/Contacts/Models/Category' },
                 },
                 inputs: {
                   type: {
@@ -160,7 +160,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
                     enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
                   },
                   value: { type: 'varchar', title: this.translate('Value')},
-                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'HubletoApp/Community/Contacts/Models/Category' },
+                  id_category: { type: 'lookup', title: this.translate('Category'), model: 'Hubleto/App/Community/Contacts/Models/Category' },
                 }
               }}
             />
@@ -185,7 +185,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
           <div className="w-1/2">
             <FormInput title={this.translate("Customer")}>
               <Lookup {...this.getInputProps('id_customer')}
-                model='HubletoApp/Community/Contacts/Models/Customer'
+                model='Hubleto/App/Community/Contacts/Models/Customer'
                 endpoint={`customers/api/get-customer`}
                 value={R.id_customer}
                 readonly={this.props.creatingNew}
@@ -200,7 +200,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
             <FormInput title={this.translate('Tags')}>
               <InputTags2 {...this.getInputProps('id_tag')}
                 value={this.state.record.TAGS}
-                model='HubletoApp/Community/Contacts/Models/Tag'
+                model='Hubleto/App/Community/Contacts/Models/Tag'
                 targetColumn='id_contact'
                 sourceColumn='id_tag'
                 colorColumn='color'

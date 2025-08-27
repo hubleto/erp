@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Models;
+namespace Hubleto\App\Community\Orders\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Products\Models\Product;
-use HubletoApp\Community\Products\Controllers\Api\CalculatePrice;
+use Hubleto\App\Community\Products\Models\Product;
+use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
 
 class OrderProduct extends \Hubleto\Erp\Model
 {

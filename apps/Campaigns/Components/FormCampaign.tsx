@@ -11,15 +11,15 @@ export interface FormCampaignState extends HubletoFormState {}
 export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, FormCampaignState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Campaigns/Models/Campaign',
+    model: 'Hubleto/App/Community/Campaigns/Models/Campaign',
   };
 
   props: FormCampaignProps;
   state: FormCampaignState;
 
-  translationContext: string = 'HubletoApp\\Community\\Campaigns\\Loader::Components\\FormCampaign';
+  translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader::Components\\FormCampaign';
 
-  parentApp: string = 'HubletoApp/Community/Campaigns';
+  parentApp: string = 'Hubleto/App/Community/Campaigns';
 
   constructor(props: FormCampaignProps) {
     super(props);
@@ -126,7 +126,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             );
           }}
           // junctionTitle='Campaign'
-          // junctionModel='HubletoApp/Community/Campaigns/Models/CampaignContact'
+          // junctionModel='Hubleto/App/Community/Campaigns/Models/CampaignContact'
           // junctionSourceColumn='id_campaign'
           // junctionSourceRecordId={R.id}
           // junctionDestinationColumn='id_contact'
@@ -139,7 +139,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
           parentForm={this}
           uid={this.props.uid + "_table_campaign_task"}
           junctionTitle='Campaign'
-          junctionModel='HubletoApp/Community/Campaigns/Models/CampaignTask'
+          junctionModel='Hubleto/App/Community/Campaigns/Models/CampaignTask'
           junctionSourceColumn='id_campaign'
           junctionSourceRecordId={R.id}
           junctionDestinationColumn='id_task'

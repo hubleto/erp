@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Documents\Models;
+namespace Hubleto\App\Community\Documents\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Text;

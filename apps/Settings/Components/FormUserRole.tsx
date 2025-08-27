@@ -8,13 +8,13 @@ interface FormUserRoleState extends HubletoFormState {}
 export default class FormUserRole<P, S> extends HubletoForm<FormUserRoleProps,FormUserRoleState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Settings/Models/UserRole',
+    model: 'Hubleto/App/Community/Settings/Models/UserRole',
   };
 
   props: FormUserRoleProps;
   state: FormUserRoleState;
 
-  translationContext: string = 'HubletoApp\\Community\\Settings\\Loader::Components\\FormUserRole';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\FormUserRole';
 
   constructor(props: FormUserRoleProps) {
     super(props);
@@ -48,7 +48,7 @@ export default class FormUserRole<P, S> extends HubletoForm<FormUserRoleProps,Fo
       {R.grant_all || R.id <= 0 ? null :
         <Table
           uid='user_role_permissions'
-          model='HubletoApp/Community/Settings/Models/RolePermission'
+          model='Hubleto/App/Community/Settings/Models/RolePermission'
           customEndpointParams={{idRole: this.state.id}}
         ></Table>
       }

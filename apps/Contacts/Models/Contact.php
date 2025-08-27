@@ -1,13 +1,13 @@
 <?php
 
-namespace HubletoApp\Community\Contacts\Models;
+namespace Hubleto\App\Community\Contacts\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\Framework\Helper;
 
 class Contact extends \Hubleto\Erp\Model
@@ -99,7 +99,7 @@ class Contact extends \Hubleto\Erp\Model
       $helper = $this->getService(Helper::class);
       $helper->deleteTags(
         array_column($savedRecord["TAGS"], "id"),
-        $this->getModel("HubletoApp/Community/Contacts/Models/ContactTag"),
+        $this->getModel("Hubleto/App/Community/Contacts/Models/ContactTag"),
         "id_contact",
         $savedRecord["id"]
       );

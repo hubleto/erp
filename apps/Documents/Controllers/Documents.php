@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Documents\Controllers;
+namespace Hubleto\App\Community\Documents\Controllers;
 
 class Documents extends \Hubleto\Erp\Controller
 {
@@ -14,7 +14,7 @@ class Documents extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Documents/Documents.twig');
+    $this->setView('@Hubleto:App:Community:Documents/Documents.twig');
   }
 
 }

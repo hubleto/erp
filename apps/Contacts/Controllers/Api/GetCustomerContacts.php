@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Contacts\Controllers\Api;
+namespace Hubleto\App\Community\Contacts\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Contacts\Models\Contact;
 
 class GetCustomerContacts extends \Hubleto\Erp\Controllers\ApiController
 {

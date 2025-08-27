@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models;
+namespace Hubleto\App\Community\Deals\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Tasks\Models\Task;
+use Hubleto\App\Community\Tasks\Models\Task;
 
 class DealTask extends \Hubleto\Erp\Model
 {

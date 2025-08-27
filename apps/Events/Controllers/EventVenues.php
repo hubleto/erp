@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Events\Controllers;
+namespace Hubleto\App\Community\Events\Controllers;
 
 class EventVenues extends \Hubleto\Erp\Controller
 {
@@ -12,7 +12,7 @@ class EventVenues extends \Hubleto\Erp\Controller
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->viewParams['randomNumber'] = rand(1, 1000);
 
-    $this->setView('@HubletoApp:Community:Events/EventVenues.twig');
+    $this->setView('@Hubleto:App:Community:Events/EventVenues.twig');
   }
 
 }

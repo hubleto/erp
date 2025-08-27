@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Products\Models;
+namespace Hubleto\App\Community\Products\Models;
 
 class Group extends \Hubleto\Erp\Model
 {

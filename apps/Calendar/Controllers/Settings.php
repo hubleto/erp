@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Calendar\Controllers;
+namespace Hubleto\App\Community\Calendar\Controllers;
 
-use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
+use Hubleto\App\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
 class Settings extends \Hubleto\Erp\Controller
 {
@@ -18,8 +18,8 @@ class Settings extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
 
     $mSharedCalendar = new SharedCalendar();
 
@@ -29,7 +29,7 @@ class Settings extends \Hubleto\Erp\Controller
       $calendarConfig['shared'] = $mSharedCalendar->where('calendar', $source)->count();
       $this->viewParams["calendarConfigs"][$source] = $calendarConfig;
     }
-    $this->setView('@HubletoApp:Community:Calendar/Settings.twig');
+    $this->setView('@Hubleto:App:Community:Calendar/Settings.twig');
   }
 
 }

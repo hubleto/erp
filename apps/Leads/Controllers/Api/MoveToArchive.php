@@ -1,18 +1,18 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers\Api;
+namespace Hubleto\App\Community\Leads\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Deals\Models\Deal;
-use HubletoApp\Community\Deals\Models\DealDocument;
-use HubletoApp\Community\Deals\Models\DealHistory;
-use HubletoApp\Community\Deals\Models\DealProduct;
-use HubletoApp\Community\Leads\Models\Lead;
-use HubletoApp\Community\Leads\Models\LeadDocument;
-use HubletoApp\Community\Leads\Models\LeadHistory;
-use HubletoApp\Community\Leads\Models\LeadProduct;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
-use HubletoApp\Community\Settings\Models\Setting;
+use Hubleto\App\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\DealDocument;
+use Hubleto\App\Community\Deals\Models\DealHistory;
+use Hubleto\App\Community\Deals\Models\DealProduct;
+use Hubleto\App\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Leads\Models\LeadDocument;
+use Hubleto\App\Community\Leads\Models\LeadHistory;
+use Hubleto\App\Community\Leads\Models\LeadProduct;
+use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Settings\Models\Setting;
 
 class MoveToArchive extends \Hubleto\Erp\Controllers\ApiController
 {

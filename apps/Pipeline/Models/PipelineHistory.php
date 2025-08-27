@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Pipeline\Models;
+namespace Hubleto\App\Community\Pipeline\Models;
 
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Datetime;

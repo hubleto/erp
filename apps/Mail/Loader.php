@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Mail;
+namespace Hubleto\App\Community\Mail;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -81,7 +81,7 @@ class Loader extends \Hubleto\Framework\App
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 
-    $mUser = $this->getModel(\HubletoApp\Community\Settings\Models\User::class);
+    $mUser = $this->getModel(\Hubleto\App\Community\Settings\Models\User::class);
     $users = $mUser->record->get()->toArray();
     $usersByEmail = [];
     $emailsByUserId = [];

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Models\RecordManagers;
+namespace Hubleto\App\Community\Leads\Models\RecordManagers;
 
 class LostReason extends \Hubleto\Erp\RecordManager
 {

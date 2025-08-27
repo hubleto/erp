@@ -22,7 +22,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   props: FormInvoiceProps;
   state: FormInvoiceState;
 
-  translationContext: string = 'HubletoApp\\Community\\Invoices\\Loader::Components\\FormInvoice';
+  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader::Components\\FormInvoice';
 
   constructor(props: FormInvoiceProps) {
     super(props);
@@ -160,7 +160,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
             uid={this.props.uid + "_table_invoice_documents"}
             tag={'table_invoice_documents'}
             parentForm={this}
-            junctionModel='HubletoApp\Community\Invoices\Models\InvoiceDocument'
+            junctionModel='Hubleto\App\Community\Invoices\Models\InvoiceDocument'
             junctionSourceColumn='id_invoice'
             junctionDestinationColumn='id_document'
             junctionSourceRecordId={R.id}

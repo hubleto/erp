@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers\Boards;
+namespace Hubleto\App\Community\Leads\Controllers\Boards;
 
-use HubletoApp\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Leads\Models\Lead;
 
 class LeadWarnings extends \Hubleto\Erp\Controller
 {
@@ -47,7 +47,7 @@ class LeadWarnings extends \Hubleto\Erp\Controller
     $this->viewParams['warningsTotal'] = $warningsTotal;
     $this->viewParams['warnings'] = $warnings;
 
-    $this->setView('@HubletoApp:Community:Leads/Boards/LeadWarnings.twig');
+    $this->setView('@Hubleto:App:Community:Leads/Boards/LeadWarnings.twig');
   }
 
 }

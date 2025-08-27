@@ -14,13 +14,13 @@ export default class TableTypes extends HubletoTable<TableTypesProps, TableTypes
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Worksheets/Models/Type',
+    model: 'Hubleto/App/Community/Worksheets/Models/Type',
   }
 
   props: TableTypesProps;
   state: TableTypesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Worksheets::Components\\TableTypes';
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets::Components\\TableTypes';
 
   constructor(props: TableTypesProps) {
     super(props);

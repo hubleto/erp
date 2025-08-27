@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\Worksheets\Models\RecordManagers;
+namespace Hubleto\App\Community\Worksheets\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use HubletoApp\Community\Settings\Models\RecordManagers\User;
-use HubletoApp\Community\Tasks\Models\RecordManagers\Task;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Tasks\Models\RecordManagers\Task;
 
 class Activity extends \Hubleto\Erp\RecordManager
 {

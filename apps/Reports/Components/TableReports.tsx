@@ -14,13 +14,13 @@ export default class TableReports extends HubletoTable<TableReportsProps, TableR
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Reports/Models/Report',
+    model: 'Hubleto/App/Community/Reports/Models/Report',
   }
 
   props: TableReportsProps;
   state: TableReportsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Reports::Components\\TableReports';
+  translationContext: string = 'Hubleto\\App\\Community\\Reports::Components\\TableReports';
 
   constructor(props: TableReportsProps) {
     super(props);

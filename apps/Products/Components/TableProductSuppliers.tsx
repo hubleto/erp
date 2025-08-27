@@ -12,13 +12,13 @@ export default class TableProductSuppliers extends Table<TableProductSuppliersPr
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Products/Models/ProductSupplier',
+    model: 'Hubleto/App/Community/Products/Models/ProductSupplier',
   }
 
   props: TableProductSuppliersProps;
   state: TableProductSuppliersState;
 
-  translationContext: string = 'HubletoApp\\Community\\Products\\Loader::Components\\TableProductSuppliers';
+  translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader::Components\\TableProductSuppliers';
 
   constructor(props: TableProductSuppliersProps) {
     super(props);

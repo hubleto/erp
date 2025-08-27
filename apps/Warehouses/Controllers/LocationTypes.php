@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Warehouses\Controllers;
+namespace Hubleto\App\Community\Warehouses\Controllers;
 
 class LocationTypes extends \Hubleto\Erp\Controller
 {
@@ -16,7 +16,7 @@ class LocationTypes extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Warehouses/LocationTypes.twig');
+    $this->setView('@Hubleto:App:Community:Warehouses/LocationTypes.twig');
   }
 
 }

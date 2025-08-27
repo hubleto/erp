@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Models\RecordManagers;
+namespace Hubleto\App\Community\OAuth\Models\RecordManagers;
 
 class Scope extends \Hubleto\Erp\RecordManager
 {

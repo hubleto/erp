@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Controllers;
+namespace Hubleto\App\Community\Deals\Controllers;
 
-use HubletoApp\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\Deal;
 
 class Deals extends \Hubleto\Erp\Controller
 {
@@ -31,7 +31,7 @@ class Deals extends \Hubleto\Erp\Controller
     if ($this->getRouter()->isUrlParam('add')) {
       $this->viewParams['recordId'] = -1;
     }
-    $this->setView('@HubletoApp:Community:Deals/Deals.twig');
+    $this->setView('@Hubleto:App:Community:Deals/Deals.twig');
   }
 
 }

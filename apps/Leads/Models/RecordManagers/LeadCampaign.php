@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Models\RecordManagers;
+namespace Hubleto\App\Community\Leads\Models\RecordManagers;
 
-use HubletoApp\Community\Campaigns\Models\RecordManagers\Campaign;
+use Hubleto\App\Community\Campaigns\Models\RecordManagers\Campaign;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LeadCampaign extends \Hubleto\Erp\RecordManager

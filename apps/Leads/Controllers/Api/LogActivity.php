@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers\Api;
+namespace Hubleto\App\Community\Leads\Controllers\Api;
 
-use HubletoApp\Community\Leads\Models\Lead;
-use HubletoApp\Community\Leads\Models\LeadActivity;
+use Hubleto\App\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Leads\Models\LeadActivity;
 
 class LogActivity extends \Hubleto\Erp\Controllers\ApiController
 {

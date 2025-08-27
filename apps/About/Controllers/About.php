@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\About\Controllers;
+namespace Hubleto\App\Community\About\Controllers;
 
 class About extends \Hubleto\Erp\Controller
 {
@@ -26,7 +26,7 @@ class About extends \Hubleto\Erp\Controller
 
     $this->viewParams['packages'] = $packages;
 
-    $this->setView('@HubletoApp:Community:About/About.twig');
+    $this->setView('@Hubleto:App:Community:About/About.twig');
   }
 
 }

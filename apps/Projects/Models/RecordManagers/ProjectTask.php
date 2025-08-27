@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Projects\Models\RecordManagers;
+namespace Hubleto\App\Community\Projects\Models\RecordManagers;
 
-use HubletoApp\Community\Tasks\Models\RecordManagers\Task;
+use Hubleto\App\Community\Tasks\Models\RecordManagers\Task;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProjectTask extends \Hubleto\Erp\RecordManager

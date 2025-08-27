@@ -11,13 +11,13 @@ interface FormDiscussionState extends HubletoFormState { }
 export default class FormDiscussion<P, S> extends HubletoForm<FormDiscussionProps, FormDiscussionState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Discussions/Models/Discussion',
+    model: 'Hubleto/App/Community/Discussions/Models/Discussion',
   }
 
   props: FormDiscussionProps;
   state: FormDiscussionState;
 
-  translationContext: string = 'HubletoApp\\Community\\Discussions::Components\\FormDiscussion';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\FormDiscussion';
 
   constructor(props: FormDiscussionProps) {
     super(props);

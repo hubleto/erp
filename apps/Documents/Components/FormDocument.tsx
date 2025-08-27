@@ -9,13 +9,13 @@ export interface FormDocumentState extends HubletoFormState {}
 export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,FormDocumentState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Documents/Models/Document',
+    model: 'Hubleto/App/Community/Documents/Models/Document',
   };
 
   props: FormDocumentProps;
   state: FormDocumentState;
 
-  translationContext: string = 'HubletoApp\\Community\\Documents\\Loader::Components\\FormDocument';
+  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader::Components\\FormDocument';
 
   constructor(props: FormDocumentProps) {
     super(props);

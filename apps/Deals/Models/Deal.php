@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models;
+namespace Hubleto\App\Community\Deals\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
@@ -10,22 +10,22 @@ use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Contacts\Models\Contact;
-use HubletoApp\Community\Customers\Models\Customer;
-use HubletoApp\Community\Leads\Models\Lead;
-use HubletoApp\Community\Products\Controllers\Api\CalculatePrice;
-use HubletoApp\Community\Settings\Models\Currency;
-use HubletoApp\Community\Pipeline\Models\Pipeline;
-use HubletoApp\Community\Pipeline\Models\PipelineStep;
-use HubletoApp\Community\Settings\Models\Setting;
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
+use Hubleto\App\Community\Settings\Models\Currency;
+use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Settings\Models\Setting;
+use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\Framework\Helper;
 
-use HubletoApp\Community\Documents\Generator;
-use HubletoApp\Community\Documents\Models\Template;
-use HubletoApp\Community\Orders\Models\OrderDeal;
-use HubletoApp\Community\Invoices\Models\Invoice;
-use HubletoApp\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
+use Hubleto\App\Community\Documents\Generator;
+use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\App\Community\Orders\Models\OrderDeal;
+use Hubleto\App\Community\Invoices\Models\Invoice;
+use Hubleto\App\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
 
 class Deal extends \Hubleto\Erp\Model
 {
@@ -242,7 +242,7 @@ class Deal extends \Hubleto\Erp\Model
 
     $newDeal = $savedRecord;
     if (empty($newDeal['identifier'])) {
-      $newDeal["identifier"] = $this->getAppManager()->getApp(\HubletoApp\Community\Deals\Loader::class)->configAsString('dealPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
+      $newDeal["identifier"] = $this->getAppManager()->getApp(\Hubleto\App\Community\Deals\Loader::class)->configAsString('dealPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
       $this->record->recordUpdate($newDeal);
     }
 
@@ -266,7 +266,7 @@ class Deal extends \Hubleto\Erp\Model
       $helper = $this->getService(Helper::class);
       $helper->deleteTags(
         array_column($savedRecord["TAGS"], "id"),
-        $this->getModel("HubletoApp/Community/Deals/Models/DealTag"),
+        $this->getModel("Hubleto/App/Community/Deals/Models/DealTag"),
         "id_deal",
         $savedRecord["id"]
       );

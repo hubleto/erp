@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Inventory\Controllers;
+namespace Hubleto\App\Community\Inventory\Controllers;
 
 class Transactions extends \Hubleto\Erp\Controller
 {
@@ -12,7 +12,7 @@ class Transactions extends \Hubleto\Erp\Controller
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->viewParams['randomNumber'] = rand(1, 1000);
 
-    $this->setView('@HubletoApp:Community:Inventory/Transactions.twig');
+    $this->setView('@Hubleto:App:Community:Inventory/Transactions.twig');
   }
 
 }

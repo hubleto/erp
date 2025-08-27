@@ -8,13 +8,13 @@ interface FormLocationState extends HubletoFormState { }
 export default class FormLocation<P, S> extends HubletoForm<FormLocationProps, FormLocationState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Warehouses/Models/Team',
+    model: 'Hubleto/App/Community/Warehouses/Models/Team',
   }
 
   props: FormLocationProps;
   state: FormLocationState;
 
-  translationContext: string = 'HubletoApp\\Community\\Warehouses::Components\\FormLocation';
+  translationContext: string = 'Hubleto\\App\\Community\\Warehouses::Components\\FormLocation';
 
   constructor(props: FormLocationProps) {
     super(props);

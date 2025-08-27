@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Calendar\Controllers;
+namespace Hubleto\App\Community\Calendar\Controllers;
 
 use _PHPStan_ac6dae9b0\Nette\Utils\DateTime;
-use HubletoApp\Community\Calendar\Models\RecordManagers\SharedCalendar;
+use Hubleto\App\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
 class IcsCalendar extends \Hubleto\Erp\Controller
 {
@@ -22,8 +22,8 @@ class IcsCalendar extends \Hubleto\Erp\Controller
     $ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:Hubleto " . $this->getConfig()->getAsString('accountFullName') . "\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n";
     $events = "";
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
 
     $calendarKey = $this->getRouter()->getUrlParams()['key'];
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Calendar\Controllers\Boards;
+namespace Hubleto\App\Community\Calendar\Controllers\Boards;
 
 class Reminders extends \Hubleto\Erp\Controller
 {
@@ -10,7 +10,7 @@ class Reminders extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $events = $this->getService(\HubletoApp\Community\Calendar\Events::class);
+    $events = $this->getService(\Hubleto\App\Community\Calendar\Events::class);
     list($remindersToday, $remindersTomorrow, $remindersLater) = $events->loadRemindersSummary();
 
     $this->viewParams['today'] = date("Y-m-d");
@@ -18,7 +18,7 @@ class Reminders extends \Hubleto\Erp\Controller
     $this->viewParams['remindersTomorrow'] = $remindersTomorrow;
     $this->viewParams['remindersLater'] = $remindersLater;
 
-    $this->setView('@HubletoApp:Community:Calendar/Boards/Reminders.twig');
+    $this->setView('@Hubleto:App:Community:Calendar/Boards/Reminders.twig');
   }
 
 }

@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Usage
+namespace: Hubleto\App\Community\Usage
 appType: community
 rootUrlSlug: usage
 name: Usage

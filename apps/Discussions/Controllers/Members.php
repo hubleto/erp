@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Discussions\Controllers;
+namespace Hubleto\App\Community\Discussions\Controllers;
 
 class Members extends \Hubleto\Erp\Controller
 {
@@ -23,7 +23,7 @@ class Members extends \Hubleto\Erp\Controller
     $this->viewParams['now'] = date('Y-m-d H:i:s');
     $this->viewParams['randomNumber'] = rand(1, 1000);
 
-    $this->setView('@HubletoApp:Community:Discussions/Members.twig');
+    $this->setView('@Hubleto:App:Community:Discussions/Members.twig');
 
     // Uncomment this if you want your controller be hookable
     // $this->getHookManager()->run('controller:prepare-view-end', [$this]);

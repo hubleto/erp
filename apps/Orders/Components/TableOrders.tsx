@@ -15,13 +15,13 @@ export default class TableOrders extends HubletoTable<TableOrdersProps, TableOrd
       direction: "desc"
     },
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Orders/Models/Order',
+    model: 'Hubleto/App/Community/Orders/Models/Order',
   }
 
   props: TableOrdersProps;
   state: TableOrdersState;
 
-  translationContext: string = 'HubletoApp\\Community\\Orders\\Loader::Components\\TableOrders';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader::Components\\TableOrders';
 
   constructor(props: TableOrdersProps) {
     super(props);

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Suppliers\Models\RecordManagers;
+namespace Hubleto\App\Community\Suppliers\Models\RecordManagers;
 
 class Supplier extends \Hubleto\Erp\RecordManager
 {

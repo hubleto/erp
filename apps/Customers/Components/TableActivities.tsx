@@ -12,13 +12,13 @@ export default class TableActivities extends Table<TableActivitiesProps, TableAc
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Customers/Models/Activity',
+    model: 'Hubleto/App/Community/Customers/Models/Activity',
   }
 
   props: TableActivitiesProps;
   state: TableActivitiesState;
 
-  translationContext: string = 'HubletoApp\\Community\\Customers\\Loader::Components\\TableActivities';
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\TableActivities';
 
   constructor(props: TableActivitiesProps) {
     super(props);

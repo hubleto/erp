@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Controllers\Api;
+namespace Hubleto\App\Community\Cloud\Controllers\Api;
 
-use HubletoApp\Community\Cloud\PremiumAccount;
+use Hubleto\App\Community\Cloud\PremiumAccount;
 
 class ChargeCredit extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -12,8 +12,8 @@ class ChargeCredit extends \Hubleto\Erp\Controllers\ApiController
   {
     $premiumAccount = $this->getService(PremiumAccount::class);
 
-    $mDiscount = $this->getModel(\HubletoApp\Community\Cloud\Models\Discount::class);
-    $mPayment = $this->getModel(\HubletoApp\Community\Cloud\Models\Payment::class);
+    $mDiscount = $this->getModel(\Hubleto\App\Community\Cloud\Models\Discount::class);
+    $mPayment = $this->getModel(\Hubleto\App\Community\Cloud\Models\Payment::class);
 
     $discountThisMonth = $mDiscount->record
       ->where('month', date('m'))

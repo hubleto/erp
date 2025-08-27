@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Campaigns
+namespace: Hubleto\App\Community\Campaigns
 appType: community
 sidebarGroup: marketing
 rootUrlSlug: campaigns
@@ -13,6 +13,6 @@ tags:
   - leads
   - deals
 requires:
-  - HubletoApp\Community\Customers
-  - HubletoApp\Community\Calendar
-  - HubletoApp\Community\Pipeline
+  - Hubleto\App\Community\Customers
+  - Hubleto\App\Community\Calendar
+  - Hubleto\App\Community\Pipeline

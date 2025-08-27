@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\Orders\Controllers\Api;
+namespace Hubleto\App\Community\Orders\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Orders\Models\Order;
-use HubletoApp\Community\Orders\Models\OrderDeal;
-use HubletoApp\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Orders\Models\Order;
+use Hubleto\App\Community\Orders\Models\OrderDeal;
+use Hubleto\App\Community\Deals\Models\Deal;
 
 class CreateFromDeal extends \Hubleto\Erp\Controllers\ApiController
 {

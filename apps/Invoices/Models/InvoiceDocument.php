@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Invoices\Models;
+namespace Hubleto\App\Community\Invoices\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Documents\Models\Document;
+use Hubleto\App\Community\Documents\Models\Document;
 
 class InvoiceDocument extends \Hubleto\Erp\Model
 {

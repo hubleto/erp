@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Community\Pipeline\Models;
+namespace Hubleto\App\Community\Pipeline\Models;
 
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
-use HubletoApp\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\Deal;
 
 class PipelineStep extends \Hubleto\Erp\Model
 {

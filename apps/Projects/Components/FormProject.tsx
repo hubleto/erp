@@ -10,13 +10,13 @@ export interface FormProjectState extends HubletoFormState { }
 export default class FormProject<P, S> extends HubletoForm<FormProjectProps, FormProjectState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Projects/Models/Team',
+    model: 'Hubleto/App/Community/Projects/Models/Team',
   }
 
   props: FormProjectProps;
   state: FormProjectState;
 
-  translationContext: string = 'HubletoApp\\Community\\Projects::Components\\FormProject';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects::Components\\FormProject';
 
   constructor(props: FormProjectProps) {
     super(props);
@@ -121,7 +121,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                   parentForm={this}
                   uid={this.props.uid + "_table_project_task"}
                   junctionTitle='Project'
-                  junctionModel='HubletoApp/Community/Projects/Models/ProjectTask'
+                  junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
                   junctionSourceColumn='id_project'
                   junctionSourceRecordId={R.id}
                   junctionDestinationColumn='id_task'

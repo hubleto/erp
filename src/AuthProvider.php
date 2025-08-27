@@ -2,7 +2,7 @@
 
 namespace Hubleto\Erp;
 
-use HubletoApp\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\Framework\Models\Token;
 
 /**
@@ -163,9 +163,9 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
 
     if (
       !empty($setLanguage)
-      && !empty(\HubletoApp\Community\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
+      && !empty(\Hubleto\App\Community\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
-      $mUser = $this->getModel(\HubletoApp\Community\Settings\Models\User::class);
+      $mUser = $this->getModel(\Hubleto\App\Community\Settings\Models\User::class);
       $mUser->record
         ->where('id', $this->getUserId())
         ->update(['language' => $setLanguage])

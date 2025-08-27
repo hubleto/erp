@@ -8,13 +8,13 @@ interface FormTypeState extends HubletoFormState { }
 export default class FormType<P, S> extends HubletoForm<FormTypeProps, FormTypeState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Worksheets/Models/ActivityType',
+    model: 'Hubleto/App/Community/Worksheets/Models/ActivityType',
   }
 
   props: FormTypeProps;
   state: FormTypeState;
 
-  translationContext: string = 'HubletoApp\\Community\\Worksheets::Components\\FormType';
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets::Components\\FormType';
 
   constructor(props: FormTypeProps) {
     super(props);
@@ -72,7 +72,7 @@ export default class FormType<P, S> extends HubletoForm<FormTypeProps, FormTypeS
       //     <Table
       //       uid={this.props.uid + '_table_locations'}
       //       parentForm={this}
-      //       model='HubletoApp/Community/Warehouses/Models/Location'
+      //       model='Hubleto/App/Community/Warehouses/Models/Location'
       //       customEndpointParams={ { idWarehouse: this.state.id } }
       //     ></Table>
       //   );

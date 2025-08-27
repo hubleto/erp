@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Projects;
+namespace Hubleto\App\Community\Projects;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -25,21 +25,21 @@ class Loader extends \Hubleto\Framework\App
       '/^projects\/phases\/?$/' => Controllers\Phases::class,
     ]);
 
-    /** @var \HubletoApp\Community\Pipeline\Manager $pipelineManager */
-    $pipelineManager = $this->getService(\HubletoApp\Community\Pipeline\Manager::class);
+    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
+    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
     $pipelineManager->addPipeline($this, 'projects', Pipeline::class);
 
     $this->addSearchSwitch('p', 'projects');
 
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => 'Projects', // or $this->translate('Projects')
       'icon' => 'fas fa-table',
       'url' => 'settings/projects',
     ]);
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar(
       $this,
       'Projects-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
@@ -47,7 +47,7 @@ class Loader extends \Hubleto\Framework\App
       Calendar::class // your app's Calendar class
     );
 
-    $appMenu = $this->getService(\HubletoApp\Community\Desktop\AppMenuManager::class);
+    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'projects', $this->translate('Projects'), 'fas fa-diagram-project');
     $appMenu->addItem($this, 'projects/phases', $this->translate('Phases'), 'fas fa-list');
 

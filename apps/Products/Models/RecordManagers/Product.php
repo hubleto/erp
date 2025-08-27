@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Products\Models\RecordManagers;
+namespace Hubleto\App\Community\Products\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -20,9 +20,9 @@ class Product extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
     if ($main->getRouter()->urlParamAsBool("getServices") == true) {
-      $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_SERVICE);
+      $query->where("type", \Hubleto\App\Community\Products\Models\Product::TYPE_SERVICE);
     } elseif ($main->getRouter()->urlParamAsBool("getProducts") == true) {
-      $query->where("type", \HubletoApp\Community\Products\Models\Product::TYPE_CONSUMABLE);
+      $query->where("type", \Hubleto\App\Community\Products\Models\Product::TYPE_CONSUMABLE);
     }
     return $query;
   }

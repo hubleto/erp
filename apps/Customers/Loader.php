@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Customers;
+namespace Hubleto\App\Community\Customers;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -30,12 +30,12 @@ class Loader extends \Hubleto\Framework\App
 
     $this->addSearchSwitch('c', 'customers');
 
-    /** @var \HubletoApp\Community\Calendar\Manager $calendarManager */
-    $calendarManager = $this->getService(\HubletoApp\Community\Calendar\Manager::class);
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar($this, 'customers', $this->configAsString('calendarColor'), Calendar::class);
 
-    /** @var \HubletoApp\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Customer Tags'),
       'icon' => 'fas fa-tags',
@@ -63,7 +63,7 @@ class Loader extends \Hubleto\Framework\App
     }
 
     if ($round == 2) {
-      $mCustomerActivity = $this->getModel(\HubletoApp\Community\Customers\Models\CustomerActivity::class);
+      $mCustomerActivity = $this->getModel(\Hubleto\App\Community\Customers\Models\CustomerActivity::class);
       $mCustomerActivity->dropTableIfExists()->install();
     }
   }

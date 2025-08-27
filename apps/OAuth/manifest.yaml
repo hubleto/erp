@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\OAuth
+namespace: Hubleto\App\Community\OAuth
 appType: community
 sidebarGroup: -
 rootUrlSlug: oauth

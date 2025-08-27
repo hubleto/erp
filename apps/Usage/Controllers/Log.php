@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Usage\Controllers;
+namespace Hubleto\App\Community\Usage\Controllers;
 
 class Log extends \Hubleto\Erp\Controller
 {
@@ -15,6 +15,6 @@ class Log extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:Usage/Log.twig');
+    $this->setView('@Hubleto:App:Community:Usage/Log.twig');
   }
 }

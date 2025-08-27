@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Leads\Controllers\Api;
+namespace Hubleto\App\Community\Leads\Controllers\Api;
 
 use Exception;
-use HubletoApp\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Leads\Models\Lead;
 
 class SaveBulkStatusChange extends \Hubleto\Erp\Controllers\ApiController
 {

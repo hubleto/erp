@@ -1,9 +1,9 @@
 <?php
 
-namespace HubletoApp\Community\Campaigns\Models;
+namespace Hubleto\App\Community\Campaigns\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Tasks\Models\Task;
+use Hubleto\App\Community\Tasks\Models\Task;
 
 class CampaignTask extends \Hubleto\Erp\Model
 {

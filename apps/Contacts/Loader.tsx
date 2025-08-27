@@ -11,4 +11,4 @@ class ContactsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('HubletoApp/Community/Contacts', new ContactsApp());
+globalThis.main.registerApp('Hubleto/App/Community/Contacts', new ContactsApp());

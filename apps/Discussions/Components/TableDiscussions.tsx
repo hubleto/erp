@@ -11,13 +11,13 @@ export default class TableDiscussions extends HubletoTable<TableDiscussionsProps
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'HubletoApp/Community/Discussions/Models/Discussion',
+    model: 'Hubleto/App/Community/Discussions/Models/Discussion',
   }
 
   props: TableDiscussionsProps;
   state: TableDiscussionsState;
 
-  translationContext: string = 'HubletoApp\\Community\\Discussions::Components\\TableDiscussions';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\TableDiscussions';
 
   constructor(props: TableDiscussionsProps) {
     super(props);

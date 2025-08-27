@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Repositories;
+namespace Hubleto\App\Community\OAuth\Repositories;
 
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
 use League\OAuth2\Server\Entities\UserEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
-use HubletoApp\Community\OAuth\Entities\UserEntity;
+use Hubleto\App\Community\OAuth\Entities\UserEntity;
 
 class User extends \Hubleto\Framework\Core implements UserRepositoryInterface
 {
@@ -17,7 +17,7 @@ class User extends \Hubleto\Framework\Core implements UserRepositoryInterface
     ClientEntityInterface $clientEntity
   ): ?UserEntityInterface {
 
-    $mUser = $this->getService(\HubletoApp\Community\Settings\User::class);
+    $mUser = $this->getService(\Hubleto\App\Community\Settings\User::class);
 
     $users = $mUser->record
       ->whereRaw("UPPER(email) LIKE '" . strtoupper(str_replace("'", "", $value)))

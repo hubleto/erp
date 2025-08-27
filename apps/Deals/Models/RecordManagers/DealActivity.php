@@ -1,11 +1,11 @@
 <?php
 
-namespace HubletoApp\Community\Deals\Models\RecordManagers;
+namespace Hubleto\App\Community\Deals\Models\RecordManagers;
 
-use HubletoApp\Community\Contacts\Models\RecordManagers\Contact;
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DealActivity extends \HubletoApp\Community\Calendar\Models\RecordManagers\Activity
+class DealActivity extends \Hubleto\App\Community\Calendar\Models\RecordManagers\Activity
 {
   public $table = 'deal_activities';
 

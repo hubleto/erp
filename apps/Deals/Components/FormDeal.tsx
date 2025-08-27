@@ -40,18 +40,18 @@ export interface FormDealState extends HubletoFormState {
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Deals/Models/Deal',
+    model: 'Hubleto/App/Community/Deals/Models/Deal',
   };
 
   props: FormDealProps;
   state: FormDealState;
 
-  parentApp: string = 'HubletoApp/Community/Deals';
+  parentApp: string = 'Hubleto/App/Community/Deals';
 
   refLogActivityInput: any;
   refProductsLookup: any;
 
-  translationContext: string = 'HubletoApp\\Community\\Deals\\Loader::Components\\FormDeal';
+  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader::Components\\FormDeal';
 
   constructor(props: FormDealProps) {
     super(props);
@@ -98,7 +98,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Deals/Models/DealProduct',
+        model: 'Hubleto/App/Community/Deals/Models/DealProduct',
         idDeal: this.state.id,
       },
       (description: any) => {
@@ -108,7 +108,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     request.get(
       'api/table/describe',
       {
-        model: 'HubletoApp/Community/Deals/Models/DealDocument',
+        model: 'Hubleto/App/Community/Deals/Models/DealDocument',
         idDeal: this.state.id,
       },
       (description: any) => {
@@ -277,7 +277,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           {this.inputWrapper('version')}
           <FormInput title={"Customer"}>
             <Lookup {...this.getInputProps("id_customer")}
-              model='HubletoApp/Community/Customers/Models/Customer'
+              model='Hubleto/App/Community/Customers/Models/Customer'
               urlAdd='customers/add'
               value={R.id_customer}
               readonly={R.is_archived}
@@ -292,7 +292,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           </FormInput>
           <FormInput title={"Contact"}>
             <Lookup {...this.getInputProps("id_contact")}
-              model='HubletoApp/Community/Contacts/Models/Contact'
+              model='Hubleto/App/Community/Contacts/Models/Contact'
               customEndpointParams={{idCustomer: R.id_customer}}
               value={R.id_contact}
               urlAdd='contacts/add'
@@ -536,7 +536,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           parentForm={this}
           uid={this.props.uid + "_table_deal_task"}
           junctionTitle='Deal'
-          junctionModel='HubletoApp/Community/Deals/Models/DealTask'
+          junctionModel='Hubleto/App/Community/Deals/Models/DealTask'
           junctionSourceColumn='id_deal'
           junctionSourceRecordId={R.id}
           junctionDestinationColumn='id_task'
@@ -550,7 +550,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             uid={this.props.uid + "_table_deal_documents"}
             tag={'table_deal_documents'}
             parentForm={this}
-            junctionModel='HubletoApp\Community\Deals\Models\DealDocument'
+            junctionModel='Hubleto\App\Community\Deals\Models\DealDocument'
             junctionSourceColumn='id_deal'
             junctionDestinationColumn='id_document'
             junctionSourceRecordId={R.id}

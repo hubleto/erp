@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\OAuth;
+namespace Hubleto\App\Community\OAuth;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -20,7 +20,7 @@ class Loader extends \Hubleto\Framework\App
       '/^oauth\/token\/?$/' => Controllers\Token::class,
     ]);
 
-    $settingsApp = $this->getAppManager()->getApp(\HubletoApp\Community\Settings\Loader::class);
+    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => 'OAuth', // or $this->translate('OAuth')
       'icon' => 'fas fa-table',

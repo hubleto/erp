@@ -1,4 +1,4 @@
-namespace: HubletoApp\Community\Issues
+namespace: Hubleto\App\Community\Issues
 appType: community
 sidebarGroup: projects
 rootUrlSlug: issues

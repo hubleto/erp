@@ -1,12 +1,12 @@
 <?php
 
-namespace HubletoApp\Community\Projects\Models;
+namespace Hubleto\App\Community\Projects\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
-use HubletoApp\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Deals\Models\Deal;
 
 class ProjectDeal extends \Hubleto\Erp\Model
 {

@@ -9,13 +9,13 @@ interface FormWarehouseState extends HubletoFormState { }
 export default class FormWarehouse<P, S> extends HubletoForm<FormWarehouseProps, FormWarehouseState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Warehouses/Models/Team',
+    model: 'Hubleto/App/Community/Warehouses/Models/Team',
   }
 
   props: FormWarehouseProps;
   state: FormWarehouseState;
 
-  translationContext: string = 'HubletoApp\\Community\\Warehouses::Components\\FormWarehouse';
+  translationContext: string = 'Hubleto\\App\\Community\\Warehouses::Components\\FormWarehouse';
 
   constructor(props: FormWarehouseProps) {
     super(props);

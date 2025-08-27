@@ -158,7 +158,7 @@
               </a>
             </li>
           {% endif %}
-          {% if hubleto.getAppManager().isAppInstalled('HubletoApp\\Community\\Notifications') %}
+          {% if hubleto.getAppManager().isAppInstalled('Hubleto\\App\\Community\\Notifications') %}
             <li class="mr-2 hidden md:block">
               {% if notificationsCount > 0 %}
                 <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
@@ -173,7 +173,7 @@
               </a>
             </li>
           {% endif %}
-          {% if hubleto.getAppManager().isAppInstalled('HubletoApp\\Community\\Cloud') %}
+          {% if hubleto.getAppManager().isAppInstalled('Hubleto\\App\\Community\\Cloud') %}
             <li class="mr-2 hidden lg:block">
               {% if hubleto.isPremium %}
                 <a class="btn btn-transparent" href="{{ config.projectUrl }}/cloud">
@@ -208,7 +208,7 @@
                     <span class="icon"><i class='fas fa-user-tie'></i></span>
                     <span class="text">{{ translate('Manage your user account') }}</span>
                   </a>
-                  {% if hubleto.getAppManager().isAppInstalled('HubletoApp\\Community\\Cloud') %}
+                  {% if hubleto.getAppManager().isAppInstalled('Hubleto\\App\\Community\\Cloud') %}
                     <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/cloud">
                       <span class="icon"><i class='fas fa-cloud'></i></span>
                       <span class="text">{{ translate('Manage cloud account') }}</span>

@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Cloud;
+namespace Hubleto\App\Community\Cloud;
 
 class PremiumAccount extends \Hubleto\Framework\Core
 {
@@ -100,7 +100,7 @@ class PremiumAccount extends \Hubleto\Framework\Core
     }
 
     // count active users
-    $mUser = $this->getModel(\HubletoApp\Community\Settings\Models\User::class);
+    $mUser = $this->getModel(\Hubleto\App\Community\Settings\Models\User::class);
     $activeUsers = $mUser->record->where('is_active', 1)->count();
 
     // log change in number of users or paid apps
@@ -198,7 +198,7 @@ class PremiumAccount extends \Hubleto\Framework\Core
       }
 
       // count active users
-      $mUser = $this->getModel(\HubletoApp\Community\Settings\Models\User::class);
+      $mUser = $this->getModel(\Hubleto\App\Community\Settings\Models\User::class);
       $activeUsers = $mUser->record->where('is_active', 1)->count();
 
       $premiumInfo['activeUsers'] = $activeUsers;

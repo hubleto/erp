@@ -1,10 +1,10 @@
 <?php
 
-namespace HubletoApp\Community\OAuth\Repositories;
+namespace Hubleto\App\Community\OAuth\Repositories;
 
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
-use HubletoApp\Community\OAuth\Entities\RefreshTokenEntity;
+use Hubleto\App\Community\OAuth\Entities\RefreshTokenEntity;
 
 class RefreshToken extends \Hubleto\Framework\Core implements RefreshTokenRepositoryInterface
 {

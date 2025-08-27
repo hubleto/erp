@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\EventRegistrations\Controllers;
+namespace Hubleto\App\Community\EventRegistrations\Controllers;
 
 class Settings extends \Hubleto\Erp\Controller
 {
@@ -15,7 +15,7 @@ class Settings extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@HubletoApp:Community:EventRegistrations/Settings.twig');
+    $this->setView('@Hubleto:App:Community:EventRegistrations/Settings.twig');
   }
 
 }

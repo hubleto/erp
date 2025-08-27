@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Products\Models;
+namespace Hubleto\App\Community\Products\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
@@ -45,7 +45,7 @@ class Product extends \Hubleto\Erp\Model
   {
     $typeEnumValues = array_merge(
       self::TYPE_ENUM_VALUES,
-      $this->getService(\HubletoApp\Community\Products\Loader::class)->productTypes
+      $this->getService(\Hubleto\App\Community\Products\Loader::class)->productTypes
     );
 
     $typeDescription = 

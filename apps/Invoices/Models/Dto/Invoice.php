@@ -1,6 +1,6 @@
 <?php
 
-namespace HubletoApp\Community\Invoices\Models\Dto;
+namespace Hubleto\App\Community\Invoices\Models\Dto;
 
 class Invoice {
   private function __construct(

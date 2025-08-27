@@ -2,9 +2,9 @@
 
 namespace Hubleto\Erp\Installer;
 
-use HubletoApp\Community\Settings\Models\User;
-use HubletoApp\Community\Settings\Models\UserRole;
-use HubletoApp\Community\Settings\Models\UserHasRole;
+use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Settings\Models\UserRole;
+use Hubleto\App\Community\Settings\Models\UserHasRole;
 
 class Installer extends \Hubleto\Framework\Core
 {
@@ -165,7 +165,7 @@ class Installer extends \Hubleto\Framework\Core
 
   public function addCompanyAndAdminUser(): void
   {
-    $mCompany = $this->getModel(\HubletoApp\Community\Settings\Models\Company::class);
+    $mCompany = $this->getModel(\Hubleto\App\Community\Settings\Models\Company::class);
     $mUser = $this->getService(User::class);
     $mUserHasRole = $this->getService(UserHasRole::class);
 

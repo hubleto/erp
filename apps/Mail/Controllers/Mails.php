@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Mail\Controllers;
+namespace Hubleto\App\Community\Mail\Controllers;
 
-use HubletoApp\Community\Mail\Models\Mailbox;
+use Hubleto\App\Community\Mail\Models\Mailbox;
 
 class Mails extends \Hubleto\Erp\Controller
 {
@@ -22,7 +22,7 @@ class Mails extends \Hubleto\Erp\Controller
 
     $this->viewParams['mailbox'] = $mMailbox->record->find($idMailbox)?->toArray();
 
-    $this->setView('@HubletoApp:Community:Mail/Mails.twig');
+    $this->setView('@Hubleto:App:Community:Mail/Mails.twig');
   }
 
 }

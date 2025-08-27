@@ -1,14 +1,14 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Controllers;
+namespace Hubleto\App\Community\Cloud\Controllers;
 
 class PaymentsAndInvoices extends \Hubleto\Erp\Controller
 {
   public function prepareView(): void
   {
     parent::prepareView();
-    /** @var HubletoApp\Community\Cloud\Models\Payment */
-    $mPayment = $this->getModel(\HubletoApp\Community\Cloud\Models\Payment::class);
+    /** @var Hubleto\App\Community\Cloud\Models\Payment */
+    $mPayment = $this->getModel(\Hubleto\App\Community\Cloud\Models\Payment::class);
 
     $payments = $mPayment->record->get()?->toArray();
     foreach ($payments as $key => $payment) {
@@ -16,7 +16,7 @@ class PaymentsAndInvoices extends \Hubleto\Erp\Controller
       $payments[$key]['_ENUM[type_background_css_class]'] = $mPayment::TYPE_BACKGROUND_CSS_CLASSES[$payment['type']] ?? '';
     }
     $this->viewParams['payments'] = $payments;
-    $this->setView('@HubletoApp:Community:Cloud/PaymentsAndInvoices.twig');
+    $this->setView('@Hubleto:App:Community:Cloud/PaymentsAndInvoices.twig');
   }
 
 }

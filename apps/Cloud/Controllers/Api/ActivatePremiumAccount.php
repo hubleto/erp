@@ -1,8 +1,8 @@
 <?php
 
-namespace HubletoApp\Community\Cloud\Controllers\Api;
+namespace Hubleto\App\Community\Cloud\Controllers\Api;
 
-use HubletoApp\Community\Cloud\PremiumAccount;
+use Hubleto\App\Community\Cloud\PremiumAccount;
 
 class ActivatePremiumAccount extends \Hubleto\Erp\Controllers\ApiController
 {

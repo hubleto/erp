@@ -11,13 +11,13 @@ interface FormReportState extends HubletoFormState { }
 export default class FormReport<P, S> extends HubletoForm<FormReportProps, FormReportState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'HubletoApp/Community/Reports/Models/Team',
+    model: 'Hubleto/App/Community/Reports/Models/Team',
   }
 
   props: FormReportProps;
   state: FormReportState;
 
-  translationContext: string = 'HubletoApp\\Community\\Reports::Components\\FormReport';
+  translationContext: string = 'Hubleto\\App\\Community\\Reports::Components\\FormReport';
 
   constructor(props: FormReportProps) {
     super(props);

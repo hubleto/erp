@@ -6,7 +6,7 @@
 <br/>
 
 
-{% if viewParams.main.config.getAsString('legalDocumentsAccepted') == '' %}
+{% if hubleto.getConfig().getAsString('legalDocumentsAccepted') == '' %}
 
   <script>
     function acceptLegalDocuments() {
@@ -46,7 +46,7 @@
 {% else %}
   <div class="grid grid-cols-2 gap-2 mt-2">
     <div>
-      {% if viewParams.main.isPremium %}
+      {% if hubleto.isPremium %}
         <div class="badge badge-success text-center text-2xl p-4 block">
           <i class="fas fa-medal mr-2"></i>
           {{ translate('You are upgraded to Premium') }}
@@ -101,20 +101,6 @@
             </div>
           {% endif %}
         {% endif %}
-        {# <div class="block badge text-center {% if viewParams.currentCredit <= 0 %} badge-danger {% else %} badge-success {% endif %} text-2xl p-4 mt-2 ">
-          Your current credit is<br/>
-          <br/>
-          <b style="font-size:3em">{{ viewParams.main.locale.formatCurrency(viewParams.currentCredit, '€') }}</b>
-        </div>
-        {% if viewParams.currentCredit <= 0 %}
-          {% set creditExhaustedOn = viewParams.app.configAsString('creditExhaustedOn') %}
-          {% if creditExhaustedOn != '' %}
-            <div class="badge badge-danger block text-center">
-              Credit was exhausted on {{ creditExhaustedOn }}.<br/>
-              Do not want to get blocked? Configure payment with card or charge enough credit.
-            </div>
-          {% endif %}
-        {% endif %} #}
         <div class="card mt-2">
           <div class="card-header">
             {{ translate('Your Premium benefits') }}
@@ -253,7 +239,7 @@
             </tr>
             <tr>
               <td>{{ translate('Terms of use and privacy policy accepted') }}</td>
-              <td><b>{{ viewParams.main.config.getAsString('legalDocumentsAccepted')|date('l, F jS Y') }}</b></td>
+              <td><b>{{ hubleto.getConfig().getAsString('legalDocumentsAccepted')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>{{ translate('Subscription active until') }}</td>

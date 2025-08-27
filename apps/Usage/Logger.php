@@ -26,6 +26,7 @@ class Logger extends \Hubleto\Framework\Core
 
   public function getRecentlyUsedAppNamespaces(): array
   {
+
     $usedAppNamespaces = [];
 
     $mLog = $this->getModel(Models\Log::class);

@@ -10,7 +10,7 @@
           <b>{{ reminder.title }}</b>
         </span>
         <span class="text">
-          <div class="badge badge-small {% if reminder['id_owner'] == viewParams.main.auth.getUserId() %} badge-blue {% endif %}">@{{ reminder.owner }}</div>
+          <div class="badge badge-small {% if reminder['id_owner'] == hubleto.getAuthProvider().getUserId() %} badge-blue {% endif %}">@{{ reminder.owner }}</div>
           <div class="badge badge-small badge-lime">{{ reminder.details }}</div>
         </span>
       </a>

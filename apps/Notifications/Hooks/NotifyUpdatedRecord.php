@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HubletoMain\Hook\Default;
+namespace HubletoApp\Community\Notifications\Hooks;
 
 class NotifyUpdatedRecord extends \HubletoMain\Hook
 {

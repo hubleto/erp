@@ -59,12 +59,12 @@
                 </a>
               {% endif %}
             {% else %}
-              {% if app.type == 1 or viewParams.main.isPremium %}
+              {% if app.type == 1 or hubleto.isPremium %}
                 <a class="btn btn-primary" href="?installApp={{ appNamespace }}">
                   <span class="icon"><i class="fas fa-add"></i></span>
                   <span class="text">{{ translate('Install') }}</span>
                 </a>
-              {% elseif not viewParams.main.isPremium %}
+              {% elseif not hubleto.isPremium %}
                 <div class="badge badge-warning">You can install Premium apps only in Premium account.</div>
                 <a class="btn btn-primary" href="{{ config.projectUrl }}/cloud">
                   <span class="icon"><i class="fas fa-medal"></i></span>

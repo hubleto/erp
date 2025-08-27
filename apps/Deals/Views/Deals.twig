@@ -6,7 +6,7 @@
       {{ translate('Open deals') }}: {{ viewParams.result.count }}
     </div>
     <div class="badge badge-green text-nowrap">
-      {{ translate('Total value') }}: {{ viewParams.main.locale.formatCurrency(viewParams.result.price ?? '') }}
+      {{ translate('Total value') }}: {{ hubleto.getLocale().formatCurrency(viewParams.result.price ?? '') }}
     </div>
   </div>
 </h1>

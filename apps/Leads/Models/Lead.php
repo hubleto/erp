@@ -67,7 +67,7 @@ class Lead extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Specific subject (if any)'))),
+      'title' => (new Varchar($this, $this->translate('Specific subject (if any)')))->setCssClass('font-bold'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->getRouter()->urlParamAsInteger('idCustomer')),
       'virt_email' => (new Virtual($this, $this->translate('Email')))->setProperty('defaultVisibility', true)
         ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1")

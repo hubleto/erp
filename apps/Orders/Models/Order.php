@@ -57,7 +57,7 @@ class Order extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true)->setCssClass('font-bold'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setProperty('defaultVisibility', true),
       'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold')->setProperty('defaultVisibility', true),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setDefaultValue($this->getAuthProvider()->getUserId()),

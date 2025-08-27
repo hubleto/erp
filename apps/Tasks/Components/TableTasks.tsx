@@ -42,6 +42,10 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
     }
   }
 
+  rowClassName(rowData: any): string {
+    return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
+  }
+
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
     return <FormTask {...formProps}/>;

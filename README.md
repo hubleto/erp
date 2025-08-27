@@ -1,5 +1,5 @@
-![](https://img.shields.io/github/v/tag/hubleto/main)
-![](https://img.shields.io/github/license/hubleto/main)
+![](https://img.shields.io/github/v/tag/hubleto/erp)
+![](https://img.shields.io/github/license/hubleto/erp)
 
 # Hubleto
 ## Business Application Hub
@@ -10,7 +10,7 @@ Hubleto is a `PHP-based opensource CRM and ERP development framework` with lots 
 
 The whole platform consists of several repositories, check them all to get the full understanding:
 
-  * [hubleto/main](https://github.com/hubleto/main) - package combining everything together into a Hubleto ERP solution.
+  * [hubleto/erp](https://github.com/hubleto/erp) - package combining everything together into a Hubleto ERP solution.
   * [hubleto/apps](https://github.com/hubleto/apps) - set of freely available apps covering features like CRM, supply-chain or project management.
   * [hubleto/erp](https://github.com/hubleto/erp) - repo for installation of production-ready Hubleto ERP with `composer create-project`.
   * [hubleto/framework](https://github.com/hubleto/framework) - PHP-based low level MVC framework.
@@ -49,7 +49,7 @@ Download & unzip Hubleto release: https://www.hubleto.com/en/download
 
 ## Composer
 
-Run `composer create-project hubleto/project` in any folder. More information here: https://github.com/hubleto/project
+Run `composer create-project hubleto/er-project` in any folder. More information here: https://github.com/hubleto/project
 
 # Develop your apps
 
@@ -70,10 +70,10 @@ More details are in developer's guide at https://developer.hubleto.com.
 
 You can contribute in many areas:
 
-  * report [bugs](https://github.com/hubleto/main/issues) or submit [issues](https://github.com/hubleto/main/issues)
+  * report [bugs](https://github.com/hubleto/erp/issues) or submit [issues](https://github.com/hubleto/erp/issues)
   * improve or create new [community apps](apps)
-  * review [pull requests](https://github.com/hubleto/main/pulls)
-  * start [discussions](https://github.com/hubleto/main/discussions/categories/general)
+  * review [pull requests](https://github.com/hubleto/erp/pulls)
+  * start [discussions](https://github.com/hubleto/erp/discussions/categories/general)
   * improve [Hubleto Core](src)
   * translate [language packs](apps/Customers/Lang)
   * improve [developer's guide](https://developer.hubleto.com)

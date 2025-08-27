@@ -381,7 +381,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     // install
     $installer = new \Hubleto\Erp\Installer\Installer(
       'local-env',
-      trim(\Hubleto\Framework\Helper::str2url((string) $rewriteBase), '/-'), // uid
+      bin2hex(random_bytes(18)), // uid
       (string) $accountFullName,
       (string) $adminName,
       (string) $adminFamilyName,

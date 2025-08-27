@@ -46,13 +46,13 @@ class Task extends \Hubleto\Erp\RecordManager
   /** @return HasMany<DealProduct, covariant Deal> */
   public function DEALS(): HasMany
   {
-    return $this->hasMany(DealTask::class, 'id_deal', 'id');
+    return $this->hasMany(DealTask::class, 'id_task', 'id');
   }
 
   /** @return HasMany<DealProduct, covariant Deal> */
   public function PROJECTS(): HasMany
   {
-    return $this->hasMany(ProjectTask::class, 'id_project', 'id');
+    return $this->hasMany(ProjectTask::class, 'id_task', 'id');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed

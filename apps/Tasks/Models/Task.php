@@ -34,8 +34,8 @@ class Task extends \Hubleto\Erp\Model
     'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
     'DEVELOPER' => [ self::BELONGS_TO, User::class, 'id_developer', 'id' ],
     'TESTER' => [ self::BELONGS_TO, User::class, 'id_tester', 'id' ],
-    'DEALS' => [ self::HAS_MANY, DealTask::class, 'id_deal', 'id' ],
-    'PROJECTS' => [ self::HAS_MANY, ProjectTask::class, 'id_project', 'id' ],
+    'DEALS' => [ self::HAS_MANY, DealTask::class, 'id_task', 'id' ],
+    'PROJECTS' => [ self::HAS_MANY, ProjectTask::class, 'id_task', 'id' ],
   ];
 
   /**

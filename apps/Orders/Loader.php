@@ -49,7 +49,6 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\OrderDeal::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderInvoice::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDocument::class)->dropTableIfExists()->install();
-      $this->getModel(Models\OrderInvoice::class)->dropTableIfExists()->install();
       $this->getModel(Models\History::class)->dropTableIfExists()->install();
     }
 

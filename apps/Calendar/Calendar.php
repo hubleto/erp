@@ -22,11 +22,14 @@ class Calendar extends \Hubleto\Erp\Calendar
     $query = $mActivity->record->prepareReadQuery()
       ->with('ACTIVITY_TYPE')
       ->where(function ($q) use ($mActivity, $dateStart, $dateEnd) {
-        $q->whereRaw("
-          ({$mActivity->table}.date_start >= '{$dateStart}' AND {$mActivity->table}.date_start <= '{$dateEnd}')
-          OR ({$mActivity->table}.date_end >= '{$dateStart}' AND {$mActivity->table}.date_end <= '{$dateEnd}')
-          OR ({$mActivity->table}.date_start <= '{$dateStart}' AND {$mActivity->table}.date_end >= '{$dateEnd}')
-        ");
+        $q->whereRaw(
+          "
+            (`{$mActivity->table}`.`date_start` >= ? AND `{$mActivity->table}`.`date_start` <= ?)
+            OR (`{$mActivity->table}`.`date_end` >= ? AND `{$mActivity->table}`.`date_end` <= ?)
+            OR (`{$mActivity->table}`.`date_start` <= ? AND `{$mActivity->table}`.`date_end` >= ?)
+          ",
+          [$dateStart, $dateEnd, $dateStart, $dateEnd, $dateStart, $dateEnd]
+        );
       })
     ;
 

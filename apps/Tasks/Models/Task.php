@@ -75,8 +75,8 @@ class Task extends \Hubleto\Erp\Model
         ->setProperty('sql', "
           select
             concat(
-              ifnull(group_concat(deals.identifier separator ', '), ''),
-              ifnull(group_concat(projects.identifier separator ', '), '')
+              ifnull(group_concat(concat('D:', deals.identifier) separator ', '), ''),
+              ifnull(group_concat(concat('P:', projects.identifier) separator ', '), '')
             )
           from tasks t2
           left join deals_tasks on deals_tasks.id_task = t2.id

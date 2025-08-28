@@ -71,24 +71,24 @@ class Task extends \Hubleto\Erp\Model
       'virt_worked' => (new Virtual($this, $this->translate('Worked')))->setProperty('defaultVisibility', true)->setUnit("hours")
         ->setProperty('sql', "select sum(ifnull(duration, 0)) from worksheet_activities where id_task = tasks.id")
       ,
-      'virt_deals' => (new Virtual($this, $this->translate('Deals')))->setProperty('defaultVisibility', true)
+      'virt_related_to' => (new Virtual($this, $this->translate('Related to')))->setProperty('defaultVisibility', true)
         ->setProperty('sql', "
           select
-            group_concat(deals.identifier separator ', ')
-          from deals_tasks
+            concat(
+              ifnull(group_concat(deals.identifier separator ', '), ''),
+              ifnull(group_concat(projects.identifier separator ', '), '')
+            )
+          from tasks t2
+          left join deals_tasks on deals_tasks.id_task = t2.id
+          left join projects_tasks on projects_tasks.id_task = t2.id
           left join deals on deals.id = deals_tasks.id_deal
-          where
-            deals_tasks.id_task = tasks.id
-        ")
-      ,
-      'virt_projects' => (new Virtual($this, $this->translate('Projects')))->setProperty('defaultVisibility', true)
-        ->setProperty('sql', "
-          select
-            group_concat(projects.identifier separator ', ')
-          from projects_tasks
           left join projects on projects.id = projects_tasks.id_project
           where
-            projects_tasks.id_task = tasks.id
+            t2.id = tasks.id 
+            and (
+              deals_tasks.id_task = tasks.id
+              or projects_tasks.id_task = tasks.id
+            )
         ")
       ,
 

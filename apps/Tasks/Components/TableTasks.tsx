@@ -42,6 +42,10 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
     }
   }
 
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/tasks/' + id);
+  }
+
   rowClassName(rowData: any): string {
     return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
   }

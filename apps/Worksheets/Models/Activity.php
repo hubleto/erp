@@ -41,30 +41,6 @@ class Activity extends \Hubleto\Erp\Model
       'description' => (new Text($this, $this->translate('Description')))->setProperty('defaultVisibility', true),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultValue(date("Y-m-d H:i:s")),
-      // 'date_example' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue(date("Y-m-d"))
-      // ,
-      // 'datetime_example' => (new DateTime($this, $this->translate('DateTime')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue(date("Y-m-d H:i:s"))
-      // ,
-      // 'integer_example' => (new Integer($this, $this->translate('Integer')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setEnumValues(self::INTEGER_ENUM_VALUES)
-      //   ->setEnumCssClasses([
-      //     self::ENUM_ONE => 'bg-blue-50',
-      //     self::ENUM_TWO => 'bg-yellow-50',
-      //     self::ENUM_THREE => 'bg-green-50',
-      //   ])
-      //   ->setDefaultValue(self::ENUM_ONE)
-      // ,
-      // 'color_example' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'image_example' => (new Image($this, $this->translate('Image')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'file_example' => (new File($this, $this->translate('File')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->getAuthProvider()->getUserId())
-      // ,
-      // 'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->getAuthProvider()->getUserId())
-      // ,
     ]);
   }
 
@@ -77,32 +53,7 @@ class Activity extends \Hubleto\Erp\Model
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    // Uncomment and modify these lines if you want to define table filter for your model
-    // $description->ui['filters'] = [
-    //   'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
-    // ];
-
     return $description;
   }
-
-  // public function onBeforeCreate(array $record): array
-  // {
-  //   return parent::onBeforeCreate($record);
-  // }
-
-  // public function onBeforeUpdate(array $record): array
-  // {
-  //   return parent::onBeforeUpdate($record);
-  // }
-
-  // public function onAfterUpdate(array $originalRecord, array $savedRecord): array
-  // {
-  //   return parent::onAfterUpdate($originalRecord, $savedRecord);
-  // }
-
-  // public function onAfterCreate(array $savedRecord): array
-  // {
-  //   return parent::onAfterCreate($savedRecord);
-  // }
 
 }

@@ -35,7 +35,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    */
   public function getUser(): array
   {
-    $tmp = is_array($this->user) ? $this->user : [];
+    $tmp = $this->getUserFromSession();
     return [
       'id' => (int) ($tmp['id'] ?? 0),
       'type' => (int) ($tmp['type'] ?? 0),

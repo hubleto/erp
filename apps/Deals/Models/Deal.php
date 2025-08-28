@@ -176,13 +176,19 @@ class Deal extends \Hubleto\Erp\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
-    $description->ui['defaultFilters'] = [
-      'fDealPipelineStep' => Pipeline::buildTableDefaultFilterForPipelineSteps($this, 'State'),
+    $description->ui['filters'] = [
+      'fDealPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'State'),
       'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => self::ENUM_SOURCE_CHANNELS ],
-      // 'fDealBusinessType' => [ 'title' => $this->translate('Business type'), 'options' => array_merge([ 0 => $this->translate('All')], self::ENUM_BUSINESS_TYPES) ],
       'fDealOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
-      'fDealClosed' => [ 'title' => $this->translate('Open / Closed'), 'options' => [ 0 => $this->translate('Open'), 1 => $this->translate('Closed') ] ],
-      // 'fDealArchive' => [ 'title' => $this->translate('Archived'), 'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Archived') ] ],
+      'fDealClosed' => [
+        'title' => $this->translate('Open / Closed'),
+        'options' => [
+          0 => $this->translate('Open'),
+          1 => $this->translate('Closed'),
+          2 => $this->translate('All'),
+        ],
+        'default' => 0,
+      ],
     ];
 
     unset($description->columns['note']);

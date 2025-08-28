@@ -39,17 +39,17 @@ class Task extends \Hubleto\Erp\RecordManager
     return $this->hasOne(PipelineStep::class, 'id', 'id_pipeline_step');
   }
 
-  /** @return HasMany<DealProduct, covariant Deal> */
-  public function DEALS(): HasMany
-  {
-    return $this->hasMany(DealTask::class, 'id_task', 'id');
-  }
+  // /** @return HasMany<DealProduct, covariant Deal> */
+  // public function DEALS(): HasMany
+  // {
+  //   return $this->hasMany(DealTask::class, 'id_task', 'id');
+  // }
 
-  /** @return HasMany<DealProduct, covariant Deal> */
-  public function PROJECTS(): HasMany
-  {
-    return $this->hasMany(ProjectTask::class, 'id_task', 'id');
-  }
+  // /** @return HasMany<DealProduct, covariant Deal> */
+  // public function PROJECTS(): HasMany
+  // {
+  //   return $this->hasMany(ProjectTask::class, 'id_task', 'id');
+  // }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
@@ -57,20 +57,17 @@ class Task extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
+    $filters = $main->getRouter()->urlParamAsArray("filters");
 
-    $query = Pipeline::applyPipelineStepDefaultFilter(
+    $query = Pipeline::applyPipelineStepFilter(
       $this->model,
       $query,
-      $defaultFilters['fTaskPipelineStep'] ?? []
+      $filters['fTaskPipelineStep'] ?? []
     );
 
-    if (isset($defaultFilters["fTaskClosed"])) {
-      if ($defaultFilters["fTaskClosed"] == 1) {
-        $query = $query->where("tasks.is_closed", true);
-      } else {
-        $query = $query->where("tasks.is_closed", false);
-      }
+    if (isset($filters["fTaskClosed"])) {
+      if ($filters["fTaskClosed"] == 0) $query = $query->where("tasks.is_closed", false);
+      if ($filters["fTaskClosed"] == 1) $query = $query->where("tasks.is_closed", true);
     }
 
     return $query;

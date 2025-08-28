@@ -143,29 +143,29 @@ class Deal extends \Hubleto\Erp\RecordManager
       $query = $query->where("deals.id_customer", $main->getRouter()->urlParamAsInteger("idCustomer"));
     }
 
-    $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
+    $filters = $main->getRouter()->urlParamAsArray("filters");
 
-    $query = Pipeline::applyPipelineStepDefaultFilter(
+    $query = Pipeline::applyPipelineStepFilter(
       $this->model,
       $query,
-      $defaultFilters['fDealPipelineStep'] ?? []
+      $filters['fDealPipelineStep'] ?? []
     );
 
-    if (isset($defaultFilters["fDealSourceChannel"]) && $defaultFilters["fDealSourceChannel"] > 0) {
-      $query = $query->where("deals.source_channel", $defaultFilters["fDealSourceChannel"]);
+    if (isset($filters["fDealSourceChannel"]) && $filters["fDealSourceChannel"] > 0) {
+      $query = $query->where("deals.source_channel", $filters["fDealSourceChannel"]);
     }
-    if (isset($defaultFilters["fDealResult"]) && $defaultFilters["fDealResult"] > 0) {
-      $query = $query->where("deals.deal_result", $defaultFilters["fDealResult"]);
+    if (isset($filters["fDealResult"]) && $filters["fDealResult"] > 0) {
+      $query = $query->where("deals.deal_result", $filters["fDealResult"]);
     }
-    if (isset($defaultFilters["fDealBusinessType"]) && $defaultFilters["fDealBusinessType"] > 0) {
-      $query = $query->where("deals.business_type", $defaultFilters["fDealBusinessType"]);
+    if (isset($filters["fDealBusinessType"]) && $filters["fDealBusinessType"] > 0) {
+      $query = $query->where("deals.business_type", $filters["fDealBusinessType"]);
     }
-    if (isset($defaultFilters["fDealBusinessType"]) && $defaultFilters["fDealBusinessType"] > 0) {
-      $query = $query->where("deals.business_type", $defaultFilters["fDealBusinessType"]);
+    if (isset($filters["fDealBusinessType"]) && $filters["fDealBusinessType"] > 0) {
+      $query = $query->where("deals.business_type", $filters["fDealBusinessType"]);
     }
 
-    if (isset($defaultFilters["fDealOwnership"])) {
-      switch ($defaultFilters["fDealOwnership"]) {
+    if (isset($filters["fDealOwnership"])) {
+      switch ($filters["fDealOwnership"]) {
         case 1: $query = $query->where("deals.id_owner", $main->getAuthProvider()->getUserId());
           break;
         case 2: $query = $query->where("deals.id_manager", $main->getAuthProvider()->getUserId());
@@ -173,20 +173,9 @@ class Deal extends \Hubleto\Erp\RecordManager
       }
     }
 
-    if (isset($defaultFilters["fDealClosed"])) {
-      if ($defaultFilters["fDealClosed"] == 1) {
-        $query = $query->where("deals.is_closed", true);
-      } else {
-        $query = $query->where("deals.is_closed", false);
-      }
-    }
-
-    if (isset($defaultFilters["fDealArchive"])) {
-      if ($defaultFilters["fDealArchive"] == 1) {
-        $query = $query->where("deals.is_archived", 1);
-      } else {
-        $query = $query->where("deals.is_archived", 0);
-      }
+    if (isset($filters["fDealClosed"])) {
+      if ($filters["fDealClosed"] == 0) $query = $query->where("deals.is_closed", false);
+      if ($filters["fDealClosed"] == 1) $query = $query->where("deals.is_closed", true);
     }
 
     return $query;

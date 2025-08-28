@@ -73,7 +73,7 @@ class Warehouse extends \Hubleto\Erp\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    // $description->ui['defaultFilters'] = [
+    // $description->ui['filters'] = [
     //   'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
     // ];
 

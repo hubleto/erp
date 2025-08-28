@@ -13,7 +13,7 @@ class Pipeline extends \Hubleto\Erp\RecordManager
     return $this->hasMany(PipelineStep::class, 'id_pipeline', 'id')->orderBy('order', 'asc'); //@phpstan-ignore-line
   }
 
-  public static function applyPipelineStepDefaultFilter(
+  public static function applyPipelineStepFilter(
     mixed $model,
     mixed $query,
     array $steps

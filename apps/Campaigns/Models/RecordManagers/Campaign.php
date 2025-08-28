@@ -49,20 +49,17 @@ class Campaign extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
+    $filters = $main->getRouter()->urlParamAsArray("filters");
 
-    $query = Pipeline::applyPipelineStepDefaultFilter(
+    $query = Pipeline::applyPipelineStepFilter(
       $this->model,
       $query,
-      $defaultFilters['fCampaignPipelineStep'] ?? []
+      $filters['fCampaignPipelineStep'] ?? []
     );
 
-    if (isset($defaultFilters["fCampaignClosed"])) {
-      if ($defaultFilters["fCampaignClosed"] == 1) {
-        $query = $query->where("campaigns.is_closed", true);
-      } else {
-        $query = $query->where("campaigns.is_closed", false);
-      }
+    if (isset($filters["fCampaignClosed"])) {
+      if ($filters["fCampaignClosed"] == 0) $query = $query->where("campaigns.is_closed", false);
+      if ($filters["fCampaignClosed"] == 1) $query = $query->where("campaigns.is_closed", true);
     }
 
     return $query;

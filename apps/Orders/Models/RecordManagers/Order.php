@@ -102,20 +102,17 @@ class Order extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
+    $filters = $main->getRouter()->urlParamAsArray("filters");
 
-    $query = Pipeline::applyPipelineStepDefaultFilter(
+    $query = Pipeline::applyPipelineStepFilter(
       $this->model,
       $query,
-      $defaultFilters['fOrderPipelineStep'] ?? []
+      $filters['fOrderPipelineStep'] ?? []
     );
 
-    if (isset($defaultFilters["fOrderClosed"])) {
-      if ($defaultFilters["fOrderClosed"] == 1) {
-        $query = $query->where("orders.is_closed", true);
-      } else {
-        $query = $query->where("orders.is_closed", false);
-      }
+    if (isset($filters["fOrderClosed"])) {
+      if ($filters["fOrderClosed"] == 0) $query = $query->where("orders.is_closed", false);
+      if ($filters["fOrderClosed"] == 1) $query = $query->where("orders.is_closed", true);
     }
 
     return $query;

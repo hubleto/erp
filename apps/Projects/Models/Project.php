@@ -92,9 +92,17 @@ class Project extends \Hubleto\Erp\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    $description->ui['defaultFilters'] = [
-      'fProjectPipelineStep' => Pipeline::buildTableDefaultFilterForPipelineSteps($this, 'Phase'),
-      'fProjectClosed' => [ 'title' => $this->translate('Open / Closed'), 'options' => [ 0 => $this->translate('Open'), 1 => $this->translate('Closed') ] ],
+    $description->ui['filters'] = [
+      'fProjectPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Phase'),
+      'fProjectClosed' => [
+        'title' => $this->translate('Open / Closed'),
+        'options' => [
+          0 => $this->translate('Open'),
+          1 => $this->translate('Closed'),
+          2 => $this->translate('All'),
+        ],
+        'default' => 0,
+      ],
     ];
 
     return $description;

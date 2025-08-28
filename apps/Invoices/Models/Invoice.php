@@ -77,8 +77,8 @@ class Invoice extends \Hubleto\Erp\Model {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate("Add invoice");
 
-    $description->ui['defaultFilters'] = [
-      'fInvoicePipelineStep' => Pipeline::buildTableDefaultFilterForPipelineSteps($this, 'Status'),
+    $description->ui['filters'] = [
+      'fInvoicePipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Status'),
     ];
 
     return $description;

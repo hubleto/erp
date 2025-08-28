@@ -161,8 +161,8 @@ class Lead extends \Hubleto\Erp\Model
     $description->ui['showColumnSearch'] = true;
     $description->columns['tags'] = ["title" => "Tags"];
 
-    $description->ui['defaultFilters'] = [
-      'fLeadPipelineStep' => Pipeline::buildTableDefaultFilterForPipelineSteps($this, 'Level'),
+    $description->ui['filters'] = [
+      'fLeadPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Level'),
       'fLeadOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
     ];
 

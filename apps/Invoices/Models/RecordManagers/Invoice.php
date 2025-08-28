@@ -81,10 +81,10 @@ class Invoice extends \Hubleto\Erp\RecordManager {
     $idProfile = $main->getRouter()->urlParamAsInteger('idProfile');
     if ($idProfile > 0) $query->where('id_profil', $idProfile);
 
-    $query = Pipeline::applyPipelineStepDefaultFilter(
+    $query = Pipeline::applyPipelineStepFilter(
       $this->model,
       $query,
-      $defaultFilters['fInvoicePipelineStep'] ?? []
+      $filters['fInvoicePipelineStep'] ?? []
     );
 
     if ($main->getRouter()->isUrlParam('number')) $query->where('number', 'like', '%' . $main->getRouter()->urlParamAsString('number') . '%');

@@ -33,8 +33,8 @@ class Task extends \Hubleto\Erp\Model
   public array $relations = [
     'DEVELOPER' => [ self::BELONGS_TO, User::class, 'id_developer', 'id' ],
     'TESTER' => [ self::BELONGS_TO, User::class, 'id_tester', 'id' ],
-    'DEALS' => [ self::HAS_MANY, DealTask::class, 'id_task', 'id' ],
-    'PROJECTS' => [ self::HAS_MANY, ProjectTask::class, 'id_task', 'id' ],
+    // 'DEALS' => [ self::HAS_MANY, DealTask::class, 'id_task', 'id' ],
+    // 'PROJECTS' => [ self::HAS_MANY, ProjectTask::class, 'id_task', 'id' ],
   ];
 
   /**
@@ -110,9 +110,17 @@ class Task extends \Hubleto\Erp\Model
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    $description->ui['defaultFilters'] = [
-      'fTaskPipelineStep' => Pipeline::buildTableDefaultFilterForPipelineSteps($this, 'Status'),
-      'fTaskClosed' => [ 'title' => $this->translate('Open / Closed'), 'options' => [ 0 => $this->translate('Open'), 1 => $this->translate('Closed') ] ],
+    $description->ui['filters'] = [
+      'fTaskPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Status'),
+      'fTaskClosed' => [
+        'title' => $this->translate('Open / Closed'),
+        'options' => [
+          0 => $this->translate('Open'),
+          1 => $this->translate('Closed'),
+          2 => $this->translate('All'),
+        ],
+        'default' => 0,
+      ],
     ];
 
     return $description;

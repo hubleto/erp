@@ -105,7 +105,7 @@ class Customer extends \Hubleto\Erp\Model
     $description->ui['showFooter'] = false;
     $description->columns['tags'] = ["title" => $this->translate("Tags")];
 
-    $description->ui['defaultFilters'] = [
+    $description->ui['filters'] = [
       'fArchive' => [ 'title' => $this->translate('Archive'), 'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Archived') ] ],
     ];
 

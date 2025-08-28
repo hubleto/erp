@@ -60,7 +60,7 @@ class Pipeline extends \Hubleto\Erp\Model
     return [$defaultPipeline, $idPipeline, $idPipelineStep];
   }
 
-  public static function buildTableDefaultFilterForPipelineSteps(\Hubleto\Erp\Model $model, string $title): array
+  public static function buildTableFilterForPipelineSteps(\Hubleto\Erp\Model $model, string $title): array
   {
     $fPipelineSteps = [
       'title' => $title,

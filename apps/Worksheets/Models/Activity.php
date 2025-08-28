@@ -77,8 +77,8 @@ class Activity extends \Hubleto\Erp\Model
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    // Uncomment and modify these lines if you want to define defaultFilter for your model
-    // $description->ui['defaultFilters'] = [
+    // Uncomment and modify these lines if you want to define table filter for your model
+    // $description->ui['filters'] = [
     //   'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
     // ];
 

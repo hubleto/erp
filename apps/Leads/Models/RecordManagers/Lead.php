@@ -140,20 +140,20 @@ class Lead extends \Hubleto\Erp\RecordManager
       $query = $query->where("leads.id_campaign", $main->getRouter()->urlParamAsInteger("idCampaign"));
     }
 
-    $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
+    $filters = $main->getRouter()->urlParamAsArray("filters");
 
-    $query = Pipeline::applyPipelineStepDefaultFilter(
+    $query = Pipeline::applyPipelineStepFilter(
       $this->model,
       $query,
-      $defaultFilters['fLeadPipelineStep'] ?? []
+      $filters['fLeadPipelineStep'] ?? []
     );
 
-    if (isset($defaultFilters["fLeadArchive"]) && $defaultFilters["fLeadArchive"] > 0) {
-      $query = $query->where("leads.is_archived", $defaultFilters["fLeadArchive"]);
+    if (isset($filters["fLeadArchive"]) && $filters["fLeadArchive"] > 0) {
+      $query = $query->where("leads.is_archived", $filters["fLeadArchive"]);
     }
 
-    if (isset($defaultFilters["fLeadOwnership"])) {
-      switch ($defaultFilters["fLeadOwnership"]) {
+    if (isset($filters["fLeadOwnership"])) {
+      switch ($filters["fLeadOwnership"]) {
         case 1: $query = $query->where("leads.id_owner", $main->getAuthProvider()->getUserId());
           break;
         case 2: $query = $query->where("leads.id_manager", $main->getAuthProvider()->getUserId());

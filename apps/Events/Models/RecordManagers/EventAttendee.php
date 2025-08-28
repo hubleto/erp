@@ -30,8 +30,8 @@ class EventAttendee extends \Hubleto\Erp\RecordManager
     }
 
     // Uncomment and modify these lines if you want to apply default filters to your model.
-    // $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
-    // if (isset($defaultFilters["fArchive"]) && $defaultFilters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
+    // $filters = $main->getRouter()->urlParamAsArray("filters");
+    // if (isset($filters["fArchive"]) && $filters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
     // else $query = $query->where("customers.is_active", true);
 
     return $query;

@@ -73,23 +73,20 @@ class Project extends \Hubleto\Erp\RecordManager
       $query = $query->where($this->table . '.id_deal', $main->getRouter()->urlParamAsInteger("idDeal"));
     }
     
-    $defaultFilters = $main->getRouter()->urlParamAsArray("defaultFilters");
+    $filters = $main->getRouter()->urlParamAsArray("filters");
     if ($main->getRouter()->urlParamAsInteger("idDeal") > 0) {
       $query = $query->whereIn($this->table . '.', $main->getRouter()->urlParamAsInteger("idDeal"));
     }
 
-    $query = Pipeline::applyPipelineStepDefaultFilter(
+    $query = Pipeline::applyPipelineStepFilter(
       $this->model,
       $query,
-      $defaultFilters['fProjectPipelineStep'] ?? []
+      $filters['fProjectPipelineStep'] ?? []
     );
 
-    if (isset($defaultFilters["fProjectClosed"])) {
-      if ($defaultFilters["fProjectClosed"] == 1) {
-        $query = $query->where("projects.is_closed", true);
-      } else {
-        $query = $query->where("projects.is_closed", false);
-      }
+    if (isset($filters["fProjectClosed"])) {
+      if ($filters["fProjectClosed"] == 0) $query = $query->where("projects.is_closed", false);
+      if ($filters["fProjectClosed"] == 1) $query = $query->where("projects.is_closed", true);
     }
 
     return $query;

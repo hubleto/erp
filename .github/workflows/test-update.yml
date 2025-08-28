@@ -1,0 +1,13 @@
+name: Update dev-main on test.hubleto.com
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call update URL
+        run: curl -X POST "https://test.hubleto.com/api/test/update"

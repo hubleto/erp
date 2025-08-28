@@ -33,8 +33,8 @@ class Activity extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_worker' => (new Lookup($this, $this->translate('Worker'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->getAuthProvider()->getUserId()),
-      'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setProperty('defaultVisibility', true),
+      'id_worker' => (new Lookup($this, $this->translate('Worker'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->getAuthProvider()->getUserId())->setRequired(),
+      'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setProperty('defaultVisibility', true)->setRequired(),
       'id_type' => (new Lookup($this, $this->translate('Type'), ActivityType::class))->setProperty('defaultVisibility', true),
       'date_worked' => (new Date($this, $this->translate('Day')))->setProperty('defaultVisibility', true)->setDefaultValue(date("Y-m-d")),
       'duration' => (new Decimal($this, $this->translate('Duration')))->setProperty('defaultVisibility', true)->setDecimals(2)->setUnit('hours'),

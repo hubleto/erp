@@ -74,7 +74,7 @@ class Task extends \Hubleto\Erp\Model
       'virt_deals' => (new Virtual($this, $this->translate('Deals')))->setProperty('defaultVisibility', true)
         ->setProperty('sql', "
           select
-            group_concat(deals.title separator ', ')
+            group_concat(deals.identifier separator ', ')
           from deals_tasks
           left join deals on deals.id = deals_tasks.id_deal
           where
@@ -84,7 +84,7 @@ class Task extends \Hubleto\Erp\Model
       'virt_projects' => (new Virtual($this, $this->translate('Projects')))->setProperty('defaultVisibility', true)
         ->setProperty('sql', "
           select
-            group_concat(projects.title separator ', ')
+            group_concat(projects.identifier separator ', ')
           from projects_tasks
           left join projects on projects.id = projects_tasks.id_project
           where

@@ -20,7 +20,7 @@ class User extends \Hubleto\Framework\Core implements UserRepositoryInterface
     $mUser = $this->getService(\Hubleto\App\Community\Settings\User::class);
 
     $users = $mUser->record
-      ->whereRaw("UPPER(email) LIKE '" . strtoupper(str_replace("'", "", $value)))
+      ->whereRaw("UPPER(email) LIKE ?", [ strtoupper(str_replace("'", "", $value)) ])
       ->where($this->activeAttribute, '<>', 0)
       ->get()
       ->makeVisible([$this->passwordAttribute])

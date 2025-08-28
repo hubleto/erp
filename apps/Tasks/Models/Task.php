@@ -31,7 +31,6 @@ class Task extends \Hubleto\Erp\Model
   public ?string $lookupUrlDetail = 'tasks/{%ID%}';
 
   public array $relations = [
-    'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
     'DEVELOPER' => [ self::BELONGS_TO, User::class, 'id_developer', 'id' ],
     'TESTER' => [ self::BELONGS_TO, User::class, 'id_tester', 'id' ],
     'DEALS' => [ self::HAS_MANY, DealTask::class, 'id_task', 'id' ],
@@ -71,6 +70,26 @@ class Task extends \Hubleto\Erp\Model
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'virt_worked' => (new Virtual($this, $this->translate('Worked')))->setProperty('defaultVisibility', true)->setUnit("hours")
         ->setProperty('sql', "select sum(ifnull(duration, 0)) from worksheet_activities where id_task = tasks.id")
+      ,
+      'virt_deals' => (new Virtual($this, $this->translate('Deals')))->setProperty('defaultVisibility', true)
+        ->setProperty('sql', "
+          select
+            group_concat(deals.title separator ', ')
+          from deals_tasks
+          left join deals on deals.id = deals_tasks.id_deal
+          where
+            deals_tasks.id_task = tasks.id
+        ")
+      ,
+      'virt_projects' => (new Virtual($this, $this->translate('Projects')))->setProperty('defaultVisibility', true)
+        ->setProperty('sql', "
+          select
+            group_concat(projects.title separator ', ')
+          from projects_tasks
+          left join projects on projects.id = projects_tasks.id_project
+          where
+            projects_tasks.id_task = tasks.id
+        ")
       ,
 
     ]);

@@ -3,9 +3,11 @@
 namespace Hubleto\App\Community\Invoices\Models;
 
 use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Settings\Models\InvoiceProfile;
 use Hubleto\App\Community\Settings\Models\User;
@@ -13,6 +15,8 @@ use Hubleto\App\Community\Pipeline\Models\Pipeline;
 use Hubleto\App\Community\Pipeline\Models\PipelineStep;
 use Hubleto\App\Community\Documents\Models\Template;
 use Hubleto\App\Community\Documents\Generator;
+use Hubleto\App\Community\Settings\Models\Currency;
+
 use Hubleto\Framework\Helper;
 
 class Invoice extends \Hubleto\Erp\Model {
@@ -25,8 +29,10 @@ class Invoice extends \Hubleto\Erp\Model {
     'PROFILE' => [ self::BELONGS_TO, InvoiceProfile::class, "id_profile" ],
     'ISSUED_BY' => [ self::BELONGS_TO, User::class, "id_issued_by" ],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
+    'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
+
     'ITEMS' => [ self::HAS_MANY, InvoiceItem::class, "id_invoice", "id" ],
   ];
 
@@ -39,17 +45,20 @@ class Invoice extends \Hubleto\Erp\Model {
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_profile' => (new Lookup($this, $this->translate('Invoice profile'), InvoiceProfile::class)),
-      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class)),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
-      'number' => (new Varchar($this, $this->translate('Number'))),
-      'vs' => (new Varchar($this, $this->translate('Variable symbol'))),
+      'id_profile' => (new Lookup($this, $this->translate('Invoice profile'), InvoiceProfile::class))->setProperty('defaultVisibility', true),
+      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setProperty('defaultVisibility', true),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true),
+      'number' => (new Varchar($this, $this->translate('Number')))->setProperty('defaultVisibility', true),
+      'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setProperty('defaultVisibility', true),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
       'ss' => (new Varchar($this, $this->translate('Specific symbol'))),
-      'date_issue' => (new Date($this, $this->translate('Issued'))),
+      'date_issue' => (new Date($this, $this->translate('Issued')))->setProperty('defaultVisibility', true),
       'date_delivery' => (new Date($this, $this->translate('Delivered'))),
-      'date_due' => (new Date($this, $this->translate('Due'))),
-      'date_payment' => (new Date($this, $this->translate('Payment'))),
+      'date_due' => (new Date($this, $this->translate('Due')))->setProperty('defaultVisibility', true),
+      'date_payment' => (new Date($this, $this->translate('Payment')))->setProperty('defaultVisibility', true),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
+      'total_excl_vat' => new Decimal($this, $this->translate('Total excl. VAT'))->setReadonly(),
+      'total_incl_vat' => new Decimal($this, $this->translate('Total incl. VAT'))->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setDefaultValue(1),
@@ -89,6 +98,35 @@ class Invoice extends \Hubleto\Erp\Model {
       'issued' => date('Y-m-d H:i:s'),
     ];
     return $description;
+  }
+
+  /**
+   * [Description for recalculateTotalsForInvoice]
+   *
+   * @param int $idInvoice
+   * 
+   * @return void
+   * 
+   */
+  public function recalculateTotalsForInvoice(int $idInvoice): void
+  {
+    if ($idInvoice <= 0) return;
+
+    $totalExclVat = 0;
+    $totalInclVat = 0;
+
+    $mInvoiceItem = $this->getService(InvoiceItem::class);
+    $items = $mInvoiceItem->record->where('id_invoice', $idInvoice)->get();
+
+    foreach ($items as $item) {
+      $totalExclVat += $item->price_excl_vat;
+      $totalInclVat += $item->price_incl_vat;
+    }
+
+    $this->record->find($idInvoice)->update([
+      "total_excl_vat" => $totalExclVat,
+      "total_incl_vat" => $totalInclVat,
+    ]);
   }
 
   /**
@@ -141,6 +179,26 @@ class Invoice extends \Hubleto\Erp\Model {
     $savedRecord['id_pipeline_step'] = $idPipelineStep;
 
     $this->record->recordUpdate($savedRecord);
+
+    $this->recalculateTotalsForInvoice((int) $savedRecord['id']);
+
+    return $savedRecord;
+  }
+
+  /**
+   * [Description for onAfterUpdate]
+   *
+   * @param array $originalRecord
+   * @param array $savedRecord
+   * 
+   * @return array
+   * 
+   */
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
+    $this->recalculateTotalsForInvoice((int) $savedRecord['id']);
 
     return $savedRecord;
   }

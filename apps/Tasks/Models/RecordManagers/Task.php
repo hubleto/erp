@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Tasks\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 use Hubleto\App\Community\Projects\Models\RecordManagers\Project;
 use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
@@ -15,11 +16,6 @@ use Hubleto\App\Community\Projects\Models\RecordManagers\ProjectTask;
 class Task extends \Hubleto\Erp\RecordManager
 {
   public $table = 'tasks';
-
-  public function PROJECT(): BelongsTo
-  {
-    return $this->belongsTo(Project::class, 'id_project', 'id');
-  }
 
   public function DEVELOPER(): BelongsTo
   {

@@ -100,39 +100,9 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
     window.history.pushState({}, "", globalThis.main.config.projectUrl + '/invoices/' + id);
   }
 
-  onAfterLoadTableDescription(description: TableDescription): TableDescription {
-    delete description.columns.ks;
-    delete description.columns.ss;
-    delete description.columns.id_profil;
-
-    if (this.props.idCustomer > 0) delete description.columns['id_klient'];
-
-    description.columns['TOTAL_EXCLUDING_VAT'] = {
-      type: 'float',
-      title: this.translate('Total excl. VAT'),
-      unit: '€',
-    };
-
-    description.columns['TOTAL_VAT'] = {
-      type: 'float',
-      title: this.translate('VAT'),
-      unit: '€',
-    };
-
-    description.columns['TOTAL_INCLUDING_VAT'] = {
-      type: 'float',
-      title: this.translate('Total incl. VAT'),
-      unit: '€',
-    };
-
-    return description;
-  }
-
   cellClassName(columnName: string, column: any, rowData: any) {
     let cellClassName = super.cellClassName(columnName, column, rowData);
-
     if (rowData['date_payment'] == '0000-00-00') cellClassName += ' bg-red-50';
-
     return cellClassName;
   }
 

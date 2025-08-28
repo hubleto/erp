@@ -19,7 +19,10 @@ class GetCustomerContacts extends \Hubleto\Erp\Controllers\ApiController
         $contacts = $contacts->where("id_customer", (int) $this->getRouter()->urlParamAsInteger("id_customer"));
       }
       if (strlen($this->getRouter()->urlParamAsString("search")) > 1) {
-        $contacts->whereRaw("CONCAT(first_name, ' ', last_name) LIKE '%".$this->getRouter()->urlParamAsString("search")."%'");
+        $contacts->whereRaw(
+          "CONCAT(first_name, ' ', last_name) LIKE ?",
+          [ '%".$this->getRouter()->urlParamAsString("search")."%' ]
+        );
       }
 
       $contacts = $contacts->get()->toArray();

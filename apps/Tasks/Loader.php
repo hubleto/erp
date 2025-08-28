@@ -49,15 +49,33 @@ class Loader extends \Hubleto\Framework\App
     $qTasks = $mTask->record->prepareReadQuery();
     
     foreach ($expressions as $e) {
-      $qTasks = $qTasks->where(function($q) use ($e) {
-        $q->orWhere('tasks.identifier', 'like', '%' . $e . '%');
-        $q->orWhere('tasks.title', 'like', '%' . $e . '%');
-      })
-      ->where('tasks.is_closed', false);
+      $qTasks = $qTasks->whereRaw('
+        (
+          tasks.identifier like ?
+          or tasks.title like ?
+          or (
+            select deals_tasks.id from deals_tasks
+            left join deals on deals.id = deals_tasks.id_deal
+            where
+              deals_tasks.id_task = tasks.id
+              and deals.title like ?
+          )
+          or (
+            select projects_tasks.id from projects_tasks
+            left join projects on projects.id = projects_tasks.id_project
+            where
+              projects_tasks.id_task = tasks.id
+              and projects.title like ?
+          )
+        )
+        and not tasks.is_closed
+      ', [
+        '%' . $e . '%', '%' . $e . '%', '%' . $e . '%',
+        '%' . $e . '%', '%' . $e . '%', '%' . $e . '%',
+      ]);
     }
 
     $tasks = $qTasks->get()->toArray();
-
     $results = [];
 
     foreach ($tasks as $task) {
@@ -65,7 +83,7 @@ class Loader extends \Hubleto\Framework\App
         "id" => $task['id'],
         "label" => $task['identifier'] . ' ' . $task['title'],
         "url" => 'tasks/' . $task['id'],
-        "description" => $task['PROJECT']['name'] ?? '',
+        "description" => $task['PROJECTS'][0]['PROJECT']['title'] ?? '',
       ];
     }
 

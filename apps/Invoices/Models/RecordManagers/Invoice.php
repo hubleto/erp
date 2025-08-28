@@ -6,6 +6,7 @@ use \Illuminate\Database\Eloquent\Relations\HasOne;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
 use \Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use \Hubleto\App\Community\Settings\Models\RecordManagers\User;
 use \Hubleto\App\Community\Settings\Models\RecordManagers\InvoiceProfile;
@@ -29,6 +30,12 @@ class Invoice extends \Hubleto\Erp\RecordManager {
   /** @return BelongsTo<User, covariant Invoice> */
   public function ISSUED_BY(): BelongsTo {
     return $this->BelongsTo(User::class, 'id_issued_by');
+  }
+
+  /** @return HasOne<Currency, covariant Deal> */
+  public function CURRENCY(): HasOne
+  {
+    return $this->hasOne(Currency::class, 'id', 'id_currency');
   }
 
   /** @return HasOne<Pipeline, covariant Deal> */

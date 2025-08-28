@@ -105,11 +105,14 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               {this.inputWrapper('id_profile')}
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('id_template')}
+              {this.inputWrapper('id_currency')}
               {this.state.id == -1 ? null : <>
                 {this.inputWrapper('number')}
                 {this.inputWrapper('vs')}
                 {this.inputWrapper('cs')}
                 {this.inputWrapper('ss')}
+                {this.inputWrapper('total_excl_vat')}
+                {this.inputWrapper('total_incl_vat')}
               </>}
             </div>
             {this.state.id == -1 ? null : <>

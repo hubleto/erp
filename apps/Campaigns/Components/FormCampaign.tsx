@@ -147,7 +147,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       break;
 
       default:
-        super.renderTab(tab);
+        return super.renderTab(tab);
       break;
     }
   }

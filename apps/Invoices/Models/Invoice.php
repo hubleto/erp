@@ -61,8 +61,8 @@ class Invoice extends \Hubleto\Erp\Model {
       'total_incl_vat' => new Decimal($this, $this->translate('Total incl. VAT'))->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setDefaultValue(1),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setDefaultValue(null)->setProperty('defaultVisibility', true),
+      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
+      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
     ]);
   }
 

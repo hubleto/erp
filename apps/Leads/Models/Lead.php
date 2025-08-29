@@ -103,8 +103,8 @@ class Lead extends \Hubleto\Erp\Model
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, "Online document folder"),
       'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class))->setDefaultValue(1),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setDefaultValue(null)->setProperty('defaultVisibility', true),
+      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
+      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
         1 => "Advertisement",
         2 => "Partner",

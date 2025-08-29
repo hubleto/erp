@@ -47,6 +47,18 @@ export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ mod
     }
   }
 
+  rowClassName(rowData: any): string {
+    return '';
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState(
+      {},
+      "",
+      globalThis.main.config.projectUrl + '/{{ modelPluralFormKebab }}/' + id
+    );
+  }
+
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;

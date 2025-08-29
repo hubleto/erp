@@ -24,11 +24,15 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
     return {
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: this.translate('Task') },
+        { uid: 'default', title: <b>this.translate('{{ modelSingularForm }}')</b> },
         // Add your tabs here.
         // 'tab_with_nested_table': { title: 'Example tab with nested table' }
       ]
     };
+  }
+
+  getRecordFormUrl(): string {
+    return '{{ modelPluralFormKebab }}/' + this.state.record.id;
   }
 
   renderTitle(): JSX.Element {
@@ -88,7 +92,12 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
       //     ></Table>
       //   );
       // break;
+
+      default:
+        return super.renderTab(tab);
+      break;
     }
+
   }
 
 }

@@ -5,9 +5,17 @@ namespace {{ appNamespace }}\Controllers\Api;
 class {{ endpointPascalCase }} extends \Hubleto\Erp\Controllers\ApiController
 {
 
-  // Uncomment this if you want to make your API public
+  // Uncomment this if you want to make your controller publicly
+  // available without need for authentication.
   // public bool $requiresUserAuthentication = false;
 
+  /**
+   * Returns JSON data to be rendered as output.
+   * https://developer.hubleto.com/v0/docs/controllers
+   *
+   * @return void
+   * 
+   */
   public function renderJson(): array
   {
 
@@ -15,7 +23,7 @@ class {{ endpointPascalCase }} extends \Hubleto\Erp\Controllers\ApiController
     // $this->getHookManager()->run('api:render-json', [$this]);
 
     // Uncomment example below to provide data for a specific model
-    // \$mCountry = $this->getModel(\Hubleto\App\Community\Settings\Models\Country::class);
+    // $mCountry = $this->getModel(\Hubleto\App\Community\Settings\Models\Country::class);
     // return $mCountry->record->get()?->toArray();
 
     return [

@@ -40,28 +40,28 @@ class Lib extends \Hubleto\Framework\Core
     $trackerUrl = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/tracker';
 
     $body = preg_replace_callback(
-      '/(<a.*)href="([^"]*)"(.*<\/a>)/',
+      '/(<a\s*)href="([^"]*)"/i',
       function($m) use ($trackerUrl, $campaign, $contact) {
         return 
           $m[1] . 'href="' . $trackerUrl
           . '?cuid=' . $campaign['uid']
           . '&cnid=' . $contact['id']
           . '&url=' . urlencode($m[2])
-          . '"' . $m[3]
+          . '"'
         ;
       },
       $body
     );
 
     $body = preg_replace_callback(
-      '/(<a.*)href=\'([^\']*)\'(.*<\/a>)/',
+      '/(<a\s*)href=\'([^\']*)\'/i',
       function($m) use ($trackerUrl, $campaign, $contact) {
         return 
           $m[1] . 'href=\'' . $trackerUrl
           . '?cuid=' . $campaign['uid']
           . '&cnid=' . $contact['id']
           . '&url=' . urlencode($m[2])
-          . '\'' . $m[3]
+          . '\''
         ;
       },
       $body

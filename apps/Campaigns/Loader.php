@@ -18,7 +18,7 @@ class Loader extends \Hubleto\Framework\App
 
     $this->getRouter()->httpGet([
       '/^campaigns\/api\/save-contacts\/?$/' => Controllers\Api\SaveContacts::class,
-      '/^campaigns\/api\/get-mail-content-for-contact\/?$/' => Controllers\Api\GetMailContentForContact::class,
+      '/^campaigns\/api\/get-mail-preview-info\/?$/' => Controllers\Api\GetMailPreviewInfo::class,
       '/^campaigns(\/(?<recordId>\d+))?\/?$/' => Controllers\Campaigns::class,
       '/^campaigns\/tracker\/?$/' => Controllers\Tracker::class,
     ]);

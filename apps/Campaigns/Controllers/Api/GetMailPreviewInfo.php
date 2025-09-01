@@ -6,7 +6,7 @@ use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Campaigns\Models\CampaignContact;
 use Hubleto\App\Community\Campaigns\Lib;
 
-class GetMailContentForContact extends \Hubleto\Erp\Controllers\ApiController
+class GetMailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {

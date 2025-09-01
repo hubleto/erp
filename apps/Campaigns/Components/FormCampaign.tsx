@@ -7,7 +7,7 @@ import request from '@hubleto/react-ui/core/Request';
 
 export interface FormCampaignProps extends HubletoFormProps {}
 export interface FormCampaignState extends HubletoFormState {
-  mailContentForContact?: any,
+  mailPreviewInfo?: any,
 }
 
 export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, FormCampaignState> {
@@ -106,7 +106,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       break
 
       case 'contacts':
-        const mailPreview: any = this.state.mailContentForContact;
+        const mailPreviewInfo: any = this.state.mailPreviewInfo;
         return <div className='flex flex-col gap-2'>
           <div className='overflow-y-auto'>
             <TableContacts
@@ -132,7 +132,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               onRowClick={(table: any, row: any) => {
                 console.log('onRowClick', row);
                 request.post(
-                  'campaigns/api/get-mail-content-for-contact',
+                  'campaigns/api/get-mail-preview-info',
                   {
                     idCampaign: this.state.record.id,
                     idContact: row.id,
@@ -140,7 +140,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                   {},
                   (result: any) => {
                     console.log(result);
-                    this.setState({mailContentForContact: result});
+                    this.setState({mailPreviewInfo: result});
                   }
                 );
               }}
@@ -151,29 +151,29 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               // junctionDestinationColumn='id_contact'
             />
           </div>
-          {mailPreview && mailPreview.CONTACT && mailPreview.bodyHtml != '' ? 
+          {mailPreviewInfo && mailPreviewInfo.CONTACT && mailPreviewInfo.bodyHtml != '' ? 
             <div className=''>
               <div className='card'>
                 <div className='card-header'>
                   Mail preview
                   <button
                     className='btn btn-transparent'
-                    onClick={() => { this.setState({mailContentForContact: null}); }}
+                    onClick={() => { this.setState({mailPreviewInfo: null}); }}
                   ><span className='icon'><i className='fas fa-times'></i></span></button>
                 </div>
                 <div className='card-body'>
                   <div><b>Contact</b></div>
                   <div className='text-sm bg-slate-100 p-2 flex gap-2'>
-                    <div className='font-bold'>{mailPreview.CONTACT?.first_name}</div>
-                    <div className='font-bold'>{mailPreview.CONTACT?.last_name}</div>
-                    {mailPreview.CONTACT?.VALUES?.map((item, key) => {
+                    <div className='font-bold'>{mailPreviewInfo.CONTACT?.first_name}</div>
+                    <div className='font-bold'>{mailPreviewInfo.CONTACT?.last_name}</div>
+                    {mailPreviewInfo.CONTACT?.VALUES?.map((item, key) => {
                       return <div key={key}>{item.value}</div>;
                     })}
                   </div>
                   <div><b>Preview</b></div>
                   <div
                     className='text-blue-800'
-                    dangerouslySetInnerHTML={{__html: mailPreview.bodyHtml}}
+                    dangerouslySetInnerHTML={{__html: mailPreviewInfo.bodyHtml}}
                   ></div>
                 </div>
               </div>

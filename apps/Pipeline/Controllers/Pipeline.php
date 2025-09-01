@@ -42,7 +42,7 @@ class Pipeline extends \Hubleto\Erp\Controller
       $pipelineLoader = $pipelineManager->getPipelineLoaderForGroup($pipeline->group);
 
       $this->viewParams["pipeline"] = $pipeline;
-      $this->viewParams["items"] = $pipelineLoader->loadItems($idPipeline, ['fOwner' => $fOwner]);
+      $this->viewParams["items"] = ($pipelineLoader ? $pipelineLoader->loadItems($idPipeline, ['fOwner' => $fOwner]) : []);
     }
 
     $this->viewParams["pipelines"] = $pipelines;

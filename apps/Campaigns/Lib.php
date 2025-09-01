@@ -2,6 +2,9 @@
 
 namespace Hubleto\App\Community\Campaigns;
 
+use \Hubleto\Framework\Core;
+use \Hubleto\Framework\Env;
+
 class Lib extends \Hubleto\Framework\Core
 {
 
@@ -29,6 +32,25 @@ class Lib extends \Hubleto\Framework\Core
     $body = str_replace('{{ utmTerm }}', urlencode($utmTerm), $body);
     $body = str_replace('{{ utmContent }}', urlencode($utmContent), $body);
 
+    return $body;
+  }
+
+  public static function routeLinksThroughCampaignTracker(array $campaign, array $contact, string $body): string
+  {
+    $trackerUrl = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/tracker';
+    $body = preg_replace_callback(
+      '/(<a.*)href="([^"]*)"(.*<\/a>)/',
+      function($m) use ($trackerUrl, $campaign, $contact) {
+        return 
+          $m[1] . 'href="' . $trackerUrl
+          . '?cuid=' . $campaign['uid']
+          . '&cnid=' . $contact['id']
+          . '&url=' . urlencode($m[2])
+          . '"' . $m[3]
+        ;
+      },
+      $body
+    );
     return $body;
   }
 

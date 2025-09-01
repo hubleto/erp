@@ -17,7 +17,7 @@ class IcsCalendar extends \Hubleto\Erp\Controller
     ]);
   }
 
-  public function render(array $params): string
+  public function render(): string
   {
     $ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:Hubleto " . $this->getConfig()->getAsString('accountFullName') . "\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n";
     $events = "";

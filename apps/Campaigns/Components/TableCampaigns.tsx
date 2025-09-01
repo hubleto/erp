@@ -35,6 +35,10 @@ export default class TableCampaigns extends HubletoTable<TableCampaignsProps, Ta
     };
   }
 
+  rowClassName(rowData: any): string {
+    return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
+  }
+
   setRecordFormUrl(id: number) {
     window.history.pushState({}, "", globalThis.main.config.projectUrl + '/campaigns/' + id);
   }

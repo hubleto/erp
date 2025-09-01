@@ -41,6 +41,7 @@ class Campaign extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'uid' => (new Varchar($this, $this->translate('UID')))->setReadonly(true),
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true)->setCssClass('font-bold'),
       'utm_source' => (new Varchar($this, $this->translate('UTM source')))->setProperty('defaultVisibility', true),
       'utm_campaign' => (new Varchar($this, $this->translate('UTM campaign')))->setProperty('defaultVisibility', true),
@@ -103,6 +104,8 @@ class Campaign extends \Hubleto\Erp\Model
    */
   public function onAfterCreate(array $savedRecord): array
   {
+
+    $savedRecord['uid'] = \Hubleto\Framework\Helper::generateUuidV4();
 
     $mPipeline = $this->getService(Pipeline::class);
     list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInGroup('campaigns');

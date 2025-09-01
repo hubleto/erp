@@ -19,9 +19,9 @@ class Manager extends \Hubleto\Framework\Core
   }
 
   /** @return Pipeline */
-  public function getPipelineLoaderForGroup(string $group): Pipeline
+  public function getPipelineLoaderForGroup(string $group): null|Pipeline
   {
-    return $this->pipelineLoaders[$group];
+    return $this->pipelineLoaders[$group] ?? null;
   }
 
   public function getPipeline(string $pipelineClass): Pipeline

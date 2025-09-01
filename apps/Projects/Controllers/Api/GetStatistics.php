@@ -25,7 +25,7 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
       $statistics['project'] = $project;
 
       $projectTasksIds = $mProjectTask->record->prepareReadQuery()
-        ->where('id_project', $idProject)
+        ->where($mProjectTask->table . '.id_project', $idProject)
         ->pluck('id_task')
         ?->toArray()
       ;

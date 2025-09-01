@@ -4,14 +4,11 @@ namespace Hubleto\App\Community\Tasks\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Hubleto\App\Community\Settings\Models\RecordManagers\User;
-use Hubleto\App\Community\Projects\Models\RecordManagers\Project;
 use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
 use Hubleto\App\Community\Pipeline\Models\RecordManagers\PipelineStep;
-use Hubleto\App\Community\Deals\Models\RecordManagers\DealTask;
-use Hubleto\App\Community\Projects\Models\RecordManagers\ProjectTask;
+use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 
 class Task extends \Hubleto\Erp\RecordManager
 {
@@ -25,6 +22,16 @@ class Task extends \Hubleto\Erp\RecordManager
   public function TESTER(): BelongsTo
   {
     return $this->belongsTo(User::class, 'id_tester', 'id');
+  }
+
+  public function CUSTOMER(): BelongsTo
+  {
+    return $this->belongsTo(Customer::class, 'id_customer', 'id');
+  }
+
+  public function CONTACT(): BelongsTo
+  {
+    return $this->belongsTo(Contact::class, 'id_contact', 'id');
   }
 
   /** @return HasOne<Pipeline, covariant Deal> */

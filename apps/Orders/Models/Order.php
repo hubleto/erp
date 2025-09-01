@@ -59,7 +59,6 @@ class Order extends \Hubleto\Erp\Model
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setProperty('defaultVisibility', true),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true)->setCssClass('font-bold'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold')->setProperty('defaultVisibility', true),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getAuthProvider()->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getAuthProvider()->getUserId()),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),

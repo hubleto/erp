@@ -16,12 +16,11 @@ use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
-use Hubleto\App\Community\Projects\Models\Project;
 use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\App\Community\Pipeline\Models\Pipeline;
 use Hubleto\App\Community\Pipeline\Models\PipelineStep;
-use Hubleto\App\Community\Projects\Models\ProjectTask;
-use Hubleto\App\Community\Deals\Models\DealTask;
+use Hubleto\App\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Customers\Models\Customer;
 
 class Task extends \Hubleto\Erp\Model
 {
@@ -33,6 +32,8 @@ class Task extends \Hubleto\Erp\Model
   public array $relations = [
     'DEVELOPER' => [ self::BELONGS_TO, User::class, 'id_developer', 'id' ],
     'TESTER' => [ self::BELONGS_TO, User::class, 'id_tester', 'id' ],
+    'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id_customer', 'id' ],
+    'CONTACT' => [ self::HAS_ONE, Contact::class, 'id_contact', 'id' ],
     // 'DEALS' => [ self::HAS_MANY, DealTask::class, 'id_task', 'id' ],
     // 'PROJECTS' => [ self::HAS_MANY, ProjectTask::class, 'id_task', 'id' ],
   ];
@@ -49,6 +50,8 @@ class Task extends \Hubleto\Erp\Model
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setCssClass('badge badge-info')->setDescription('Leave empty to generate automatically.'),
       'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description'))),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', false),
       'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->getAuthProvider()->getUserId())
       ,

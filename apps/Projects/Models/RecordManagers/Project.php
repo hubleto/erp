@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 
 class Project extends \Hubleto\Erp\RecordManager
 {
@@ -27,6 +29,16 @@ class Project extends \Hubleto\Erp\RecordManager
   public function PHASE(): BelongsTo
   {
     return $this->belongsTo(Phase::class, 'id_phase', 'id');
+  }
+
+  public function CUSTOMER(): BelongsTo
+  {
+    return $this->belongsTo(Customer::class, 'id_customer', 'id');
+  }
+
+  public function CONTACT(): BelongsTo
+  {
+    return $this->belongsTo(Contact::class, 'id_contact', 'id');
   }
 
   public function OWNER(): BelongsTo

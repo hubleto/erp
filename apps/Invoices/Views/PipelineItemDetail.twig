@@ -1,0 +1,17 @@
+invoice
+<div class="card-header rounded flex flex-col p-2 text-sm font-normal">
+  <div class="flex justify-between w-full">
+    <div class="flex flex-col truncate">
+      <div>{{item.identifier}}</div>
+      <div class="text-gray-400">{{item.CUSTOMER.name}}</div>
+      <div class="font-bold">{{item.title}}</div>
+    </div>
+    <div class="mt-1">
+      <div class="mb-3 pr-2 text-right font-normal" style="border-right: 0.5em solid {{ resultEnumValues[item.deal_result]["color"] }}">{{ resultEnumValues[item.deal_result]["title"] }}</div>
+    </div>
+  </div>
+</div>
+<div class="card-body text-sm">
+  <div>Owner: {{ item.OWNER.email }}</div>
+  {% if item.note %} <div class="bg-yellow-50 p-2 text-yellow-800 whitespace-pre">{{ item.note }}</div> {% endif %}
+</div>

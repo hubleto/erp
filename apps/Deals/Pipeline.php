@@ -23,6 +23,7 @@ class Pipeline extends \Hubleto\App\Community\Pipeline\Pipeline
 
     foreach ($items as $key => $item) {
       $items[$key]['_DETAIL_URL'] = 'deals/' . $item['id'];
+      $items[$key]['_DETAIL_VIEW'] = '@Hubleto:App:Community:Deals/PipelineItemDetail.twig';
     }
 
     return $items;

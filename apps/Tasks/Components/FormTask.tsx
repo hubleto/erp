@@ -109,6 +109,8 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
               {this.inputWrapper('is_closed')}
             </div>
             <div className='flex-1'>
+              {this.inputWrapper('id_customer')}
+              {this.inputWrapper('id_contact')}
               {this.inputWrapper('priority')}
               {this.inputWrapper('duration_days')}
               {this.inputWrapper('date_start')}

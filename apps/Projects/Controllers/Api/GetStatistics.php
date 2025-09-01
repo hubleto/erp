@@ -64,7 +64,7 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
         left join `' . $mTask->table . '` on `' . $mTask->table . '`.`id` = `' . $mActivity->table . '`.`id_task`
         where
           `' . $mTask->table . '`.`id` in (' . join(',', $projectTasksIds) . ')
-          and `' . $mTask->table . '`.`is_chargeable` = 1
+          and `' . $mActivity->table . '`.`is_chargeable` = 1
         group by
           concat(year(date_worked), month(date_worked))
       ');

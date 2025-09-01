@@ -38,6 +38,7 @@ class Lib extends \Hubleto\Framework\Core
   public static function routeLinksThroughCampaignTracker(array $campaign, array $contact, string $body): string
   {
     $trackerUrl = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/tracker';
+
     $body = preg_replace_callback(
       '/(<a.*)href="([^"]*)"(.*<\/a>)/',
       function($m) use ($trackerUrl, $campaign, $contact) {
@@ -51,6 +52,21 @@ class Lib extends \Hubleto\Framework\Core
       },
       $body
     );
+
+    $body = preg_replace_callback(
+      '/(<a.*)href=\'([^\']*)\'(.*<\/a>)/',
+      function($m) use ($trackerUrl, $campaign, $contact) {
+        return 
+          $m[1] . 'href=\'' . $trackerUrl
+          . '?cuid=' . $campaign['uid']
+          . '&cnid=' . $contact['id']
+          . '&url=' . urlencode($m[2])
+          . '\'' . $m[3]
+        ;
+      },
+      $body
+    );
+
     return $body;
   }
 

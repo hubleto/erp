@@ -47,8 +47,8 @@ class Notification extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
       'category' => (new Integer($this, $this->translate('Category')))->setRequired()->setEnumValues(self::getCategories()),
-      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setRequired(),
-      'id_to' => (new Lookup($this, $this->translate('To'), User::class))->setRequired(),
+      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setRequired(),
+      'id_to' => (new Lookup($this, $this->translate('To'), User::class))->setReactComponent('InputUserSelect')->setRequired(),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
       'body' => (new Text($this, $this->translate('Body')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color'))),

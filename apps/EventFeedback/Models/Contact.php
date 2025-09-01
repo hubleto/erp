@@ -20,7 +20,7 @@ class Contact extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class)),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect'),
     ]);
   }
 

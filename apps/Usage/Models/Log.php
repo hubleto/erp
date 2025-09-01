@@ -20,7 +20,7 @@ class Log extends \Hubleto\Erp\Model
       'route' => (new Varchar($this, $this->translate('Route')))->setRequired(),
       'params' => (new Varchar($this, $this->translate('Params'))),
       'message' => (new Varchar($this, $this->translate('Message'))),
-      'id_user' => (new Lookup($this, $this->translate('User'), User::class))->setRequired(),
+      'id_user' => (new Lookup($this, $this->translate('User'), User::class))->setReactComponent('InputUserSelect')->setRequired(),
     ]);
   }
 

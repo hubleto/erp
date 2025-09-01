@@ -52,8 +52,8 @@ class Customer extends \Hubleto\Erp\Model
       'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setProperty('defaultVisibility', true),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setRequired()->setDefaultValue($this->getAuthProvider()->getUserId())->setProperty('defaultVisibility', true),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setRequired()->setDefaultValue($this->getAuthProvider()->getUserId())->setProperty('defaultVisibility', true),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getAuthProvider()->getUserId())->setProperty('defaultVisibility', true),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getAuthProvider()->getUserId())->setProperty('defaultVisibility', true),
       'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)")),
     ], parent::describeColumns());
   }

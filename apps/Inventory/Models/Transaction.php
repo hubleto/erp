@@ -59,7 +59,7 @@ class Transaction extends \Hubleto\Erp\Model
       'quantity' => (new Decimal($this, $this->translate('Quantity')))->setProperty('defaultVisibility', true),
       'id_location_source' => (new Lookup($this, $this->translate('Source location'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
       'id_location_destination' => (new Lookup($this, $this->translate('Destination location'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_user' => (new Lookup($this, $this->translate('Who performed the trancation'), User::class))->setProperty('defaultVisibility', true),
+      'id_user' => (new Lookup($this, $this->translate('Who performed the trancation'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
       'document_1' => (new File($this, $this->translate('Reference document #1')))->setProperty('defaultVisibility', true),
       'document_2' => (new File($this, $this->translate('Reference document #2'))),
       'document_3' => (new File($this, $this->translate('Reference document #3'))),

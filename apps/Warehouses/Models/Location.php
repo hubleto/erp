@@ -56,7 +56,7 @@ class Location extends \Hubleto\Erp\Model
       'photo_1' => (new Image($this, $this->translate('Photo #1'))),
       'photo_2' => (new Image($this, $this->translate('Photo #2'))),
       'photo_3' => (new Image($this, $this->translate('Photo #3'))),
-      'id_operation_manager' => (new Lookup($this, $this->translate('Manager of operation'), User::class)),
+      'id_operation_manager' => (new Lookup($this, $this->translate('Manager of operation'), User::class))->setReactComponent('InputUserSelect'),
     ]);
   }
 

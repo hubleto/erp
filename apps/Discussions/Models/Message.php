@@ -33,7 +33,7 @@ class Message extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setProperty('defaultVisibility', true),
+      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
       'from_email' => (new Varchar($this, $this->translate('From (Email)')))->setProperty('defaultVisibility', true),
       'message' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true),
       'sent' => (new Datetime($this, $this->translate('Sent')))->setProperty('defaultVisibility', true),

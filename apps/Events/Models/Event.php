@@ -48,7 +48,7 @@ class Event extends \Hubleto\Erp\Model
       'full_description' => (new Text($this, $this->translate('Full description'))),
       'date_start' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date("Y-m-d")),
       'date_end' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date("Y-m-d")),
-      'id_organizer' => (new Lookup($this, $this->translate('Organizer'), User::class))->setProperty('defaultVisibility', true)->setDefaultValue($this->getAuthProvider()->getUserId()),
+      'id_organizer' => (new Lookup($this, $this->translate('Organizer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getAuthProvider()->getUserId()),
       // 'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
       // 'text_example' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
       // 'decimal_example' => (new Decimal($this, $this->translate('Number')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary')

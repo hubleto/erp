@@ -12,7 +12,7 @@ class UserHasRole extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_user' => (new Lookup($this, $this->translate('User'), User::class)),
+      'id_user' => (new Lookup($this, $this->translate('User'), User::class))->setReactComponent('InputUserSelect'),
       'id_role' => (new Lookup($this, $this->translate('Role'), UserRole::class)),
     ]);
   }

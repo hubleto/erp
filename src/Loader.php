@@ -48,6 +48,7 @@ class Loader extends \Hubleto\Framework\Loader
 
       $this->getRouter()->httpGet([
         '/^api\/get-apps-info\/?$/' => Api\GetAppsInfo::class,
+        '/^api\/get-users\/?$/' => Api\GetUsers::class,
         '/^api\/log-javascript-error\/?$/' => Api\LogJavascriptError::class,
         '/^api\/dictionary\/?$/' => Api\Dictionary::class,
         '/^api\/get-chart-data\/?$/' =>  Api\GetTemplateChartData::class,

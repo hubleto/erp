@@ -15,7 +15,7 @@ class TeamMember extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_team' => (new Lookup($this, $this->translate("Team"), Team::class))->setRequired(),
-      'id_member' => (new Lookup($this, $this->translate("Member"), User::class))->setRequired(),
+      'id_member' => (new Lookup($this, $this->translate("Member"), User::class))->setReactComponent('InputUserSelect')->setRequired(),
     ]);
   }
 

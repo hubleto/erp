@@ -33,33 +33,8 @@ class Member extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_member' => (new Lookup($this, $this->translate('Member'), User::class))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->getAuthProvider()->getUserId()),
+      'id_member' => (new Lookup($this, $this->translate('Member'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->getAuthProvider()->getUserId()),
       'permissions' => (new Json($this, $this->translate('Permissions')))->setProperty('defaultVisibility', true),
-
-      // 'date_example' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue(date("Y-m-d"))
-      // ,
-      // 'datetime_example' => (new DateTime($this, $this->translate('DateTime')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue(date("Y-m-d H:i:s"))
-      // ,
-      // 'integer_example' => (new Integer($this, $this->translate('Integer')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setEnumValues(self::INTEGER_ENUM_VALUES)
-      //   ->setEnumCssClasses([
-      //     self::ENUM_ONE => 'bg-blue-50',
-      //     self::ENUM_TWO => 'bg-yellow-50',
-      //     self::ENUM_THREE => 'bg-green-50',
-      //   ])
-      //   ->setDefaultValue(self::ENUM_ONE)
-      // ,
-      // 'color_example' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'image_example' => (new Image($this, $this->translate('Image')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'file_example' => (new File($this, $this->translate('File')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->getAuthProvider()->getUserId())
-      // ,
-      // 'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->getAuthProvider()->getUserId())
-      // ,
     ]);
   }
 

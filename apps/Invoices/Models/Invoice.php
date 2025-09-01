@@ -46,7 +46,7 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     return array_merge(parent::describeColumns(), [
       'id_profile' => (new Lookup($this, $this->translate('Invoice profile'), InvoiceProfile::class))->setProperty('defaultVisibility', true),
-      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setProperty('defaultVisibility', true),
+      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true),
       'number' => (new Varchar($this, $this->translate('Number')))->setProperty('defaultVisibility', true),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setProperty('defaultVisibility', true),

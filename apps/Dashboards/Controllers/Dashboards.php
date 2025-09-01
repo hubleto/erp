@@ -26,10 +26,10 @@ class Dashboards extends \Hubleto\Erp\Controller
       ?->toArray();
     ;
 
-    if (empty($dashboardSlug)) {
-      $tmp = reset($dashboards);
-      $dashboardSlug = $tmp['slug'] ?? '';
-    }
+    // if (empty($dashboardSlug)) {
+    //   $tmp = reset($dashboards);
+    //   $dashboardSlug = $tmp['slug'] ?? '';
+    // }
 
     $this->viewParams['dashboards'] = $dashboards;
     $this->viewParams['dashboardSlug'] = $dashboardSlug;

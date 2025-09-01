@@ -55,6 +55,22 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
 
       $statistics['workedByMonth'] = $workedByMonth;
 
+      $chargeableByMonth = $this->getDb()->fetchAll('
+        select
+          month(`' . $mActivity->table . '`.`date_worked`) as `month`,
+          year(`' . $mActivity->table . '`.`date_worked`) as `year`,
+          sum(`' . $mActivity->table . '`.`worked_hours`) as `worked_hours`
+        from `' . $mActivity->table . '`
+        left join `' . $mTask->table . '` on `' . $mTask->table . '`.`id` = `' . $mActivity->table . '`.`id_task`
+        where
+          `' . $mTask->table . '`.`id` in (' . join(',', $projectTasksIds) . ')
+          and `' . $mTask->table . '`.`is_chargeable` = 1
+        group by
+          concat(year(date_worked), month(date_worked))
+      ');
+
+      $statistics['chargeableByMonth'] = $chargeableByMonth;
+
     } catch (\Exception $e) {
       return [
         "status" => "failed",

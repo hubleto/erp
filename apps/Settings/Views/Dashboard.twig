@@ -1,6 +1,6 @@
 <h1>{{ translate('Settings') }}</h1>
 
-<div class="flex gap-2">
+<div class="flex gap-2 items-start">
   <div class="card">
     <div class="card-header">{{ translate('Most common settings') }}</div>
     <div class="card-body flex gap-2">
@@ -16,6 +16,46 @@
         <span class="icon"><i class="fas fa-puzzle-piece"></i></span>
         <span class="text">{{ translate('Manage apps') }}</span>
       </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">{{ translate('Locale') }}</div>
+    <div class="card-body">
+      <table class="table-default dense">
+        <tbody>
+          <tr>
+            <td>Default currency</td>
+            <td>
+              {{ hubleto.getLocale().getCurrencyIsoCode() }}
+              [{{ hubleto.getLocale().getCurrencySymbol() }}]
+            </td>
+          </tr>
+          <tr>
+            <td>Date format (short)</td>
+            <td>
+              {{ hubleto.getLocale().getDateShortFormat() }}
+            </td>
+          </tr>
+          <tr>
+            <td>Date format (long)</td>
+            <td>
+              {{ hubleto.getLocale().getDateLongFormat() }}
+            </td>
+          </tr>
+          <tr>
+            <td>Time format</td>
+            <td>
+              {{ hubleto.getLocale().getTimeFormat() }}
+            </td>
+          </tr>
+          <tr>
+            <td>Datetime format</td>
+            <td>
+              {{ hubleto.getLocale().getDatetimeFormat() }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

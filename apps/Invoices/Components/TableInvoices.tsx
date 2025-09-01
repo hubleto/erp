@@ -106,93 +106,93 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
     return cellClassName;
   }
 
-  _datetimeFilter(stateParamName: string, urlParamName: string): JSX.Element {
-    return <>
-      <InputDateTime
-        uid={this.props.uid + '_filter_' + urlParamName}
-        type='date'
-        value={this.state[stateParamName] ?? ''}
-        onChange={(value: any) => {
-          this.setState({[stateParamName]: value} as TableInvoicesState, () => { this.loadData(); });
-          if (value == null) deleteUrlParam(urlParamName);
-          else setUrlParam(urlParamName, value);
-        }}
-      ></InputDateTime>
-    </>;
-  }
+  // _datetimeFilter(stateParamName: string, urlParamName: string): JSX.Element {
+  //   return <>
+  //     <InputDateTime
+  //       uid={this.props.uid + '_filter_' + urlParamName}
+  //       type='date'
+  //       value={this.state[stateParamName] ?? ''}
+  //       onChange={(value: any) => {
+  //         this.setState({[stateParamName]: value} as TableInvoicesState, () => { this.loadData(); });
+  //         if (value == null) deleteUrlParam(urlParamName);
+  //         else setUrlParam(urlParamName, value);
+  //       }}
+  //     ></InputDateTime>
+  //   </>;
+  // }
 
-  renderFilter(): JSX.Element {
-    return <>
-      <div className="card">
-        <div className="card-body flex gap-1">
-          <div><i className="fas fa-filter text-2xl text-gray-200 mr-4"></i></div>
-          <div className={"p-1 flex-1" + (this.state.idCustomer > 0 || this.state.number != '' || this.state.vs != '' ? " bg-yellow-100" : "")}>
-            {this.props.idCustomer ? null : <div>
-              <b className="text-sm">{this.translate('Customer')}</b><br/>
-              <InputLookup
-                uid={this.props.uid + '_filter_customer'}
-                model='Hubleto/App/Community/Customers/Models/Customer'
-                value={this.state.idCustomer}
-                onChange={(value: any) => {
-                  this.setState({idCustomer: value} as TableInvoicesState, () => { this.loadData(); });
-                  if (value == 0) deleteUrlParam('id-customer');
-                  else setUrlParam('id-customer', value);
-                }}
-              ></InputLookup>
-            </div>}
-            <div>
-              <b className="text-sm">{this.translate('Number')}</b><br/>
-              <InputVarchar
-                uid={this.props.uid + '_filter_number'}
-                value={this.state.number}
-                onChange={(value: any) => {
-                  this.setState({number: value} as TableInvoicesState, () => { this.loadData(); });
-                  if (value == '') deleteUrlParam('number');
-                  else setUrlParam('number', value);
-                }}
-              ></InputVarchar>
-            </div>
-            <div>
-              <b className="text-sm">{this.translate('Variable symbol')}</b><br/>
-              <InputVarchar
-                uid={this.props.uid + '_filter_vs'}
-                value={this.state.vs}
-                onChange={(value: any) => {
-                  this.setState({vs: value} as TableInvoicesState, () => { this.loadData(); });
-                  if (value == '') deleteUrlParam('vs');
-                  else setUrlParam('vs', value);
-                }}
-              ></InputVarchar>
-            </div>
-          </div>
-          <div className={"p-1 flex-1" + (this.state.dateIssueFrom != '' || this.state.dateIssueTo != '' || this.state.dateDeliveryFrom != '' || this.state.dateDeliveryTo != '' || this.state.dateDueFrom != '' || this.state.dateDueTo != ''? " bg-yellow-100" : "")}>
-            <b className="text-sm">{this.translate('Issue')}</b><br/>
-            <div className="flex">
-              {this._datetimeFilter('dateIssueFrom', 'date-issue-from')}
-              {this._datetimeFilter('dateIssueTo', 'date-issue-to')}
-            </div>
-            <b className="text-sm">{this.translate('Delivery')}</b><br/>
-            <div className="flex">
-              {this._datetimeFilter('dateDeliveryFrom', 'date-delivery-from')}
-              {this._datetimeFilter('dateDeliveryTo', 'date-delivery-to')}
-            </div>
-            <b className="text-sm">{this.translate('Due')}</b><br/>
-            <div className="flex">
-              {this._datetimeFilter('dateDueFrom', 'date-due-from')}
-              {this._datetimeFilter('dateDueTo', 'date-due-to')}
-            </div>
-          </div>
-          <div className={"p-1 flex-1" + (this.state.datePaymentFrom != '' || this.state.datePaymentTo != '' ? " bg-yellow-100" : "")}>
-            <b className="text-sm">{this.translate('Payment')}</b><br/>
-            <div className="flex">
-              {this._datetimeFilter('datePaymentFrom', 'date-payment-from')}
-              {this._datetimeFilter('datePaymentTo', 'date-payment-to')}
-            </div>
-          </div>
-        </div>
-      </div>
-    </>;
-  }
+  // renderFilter(): JSX.Element {
+  //   return <>
+  //     <div className="card">
+  //       <div className="card-body flex gap-1">
+  //         <div><i className="fas fa-filter text-2xl text-gray-200 mr-4"></i></div>
+  //         <div className={"p-1 flex-1" + (this.state.idCustomer > 0 || this.state.number != '' || this.state.vs != '' ? " bg-yellow-100" : "")}>
+  //           {this.props.idCustomer ? null : <div>
+  //             <b className="text-sm">{this.translate('Customer')}</b><br/>
+  //             <InputLookup
+  //               uid={this.props.uid + '_filter_customer'}
+  //               model='Hubleto/App/Community/Customers/Models/Customer'
+  //               value={this.state.idCustomer}
+  //               onChange={(value: any) => {
+  //                 this.setState({idCustomer: value} as TableInvoicesState, () => { this.loadData(); });
+  //                 if (value == 0) deleteUrlParam('id-customer');
+  //                 else setUrlParam('id-customer', value);
+  //               }}
+  //             ></InputLookup>
+  //           </div>}
+  //           <div>
+  //             <b className="text-sm">{this.translate('Number')}</b><br/>
+  //             <InputVarchar
+  //               uid={this.props.uid + '_filter_number'}
+  //               value={this.state.number}
+  //               onChange={(value: any) => {
+  //                 this.setState({number: value} as TableInvoicesState, () => { this.loadData(); });
+  //                 if (value == '') deleteUrlParam('number');
+  //                 else setUrlParam('number', value);
+  //               }}
+  //             ></InputVarchar>
+  //           </div>
+  //           <div>
+  //             <b className="text-sm">{this.translate('Variable symbol')}</b><br/>
+  //             <InputVarchar
+  //               uid={this.props.uid + '_filter_vs'}
+  //               value={this.state.vs}
+  //               onChange={(value: any) => {
+  //                 this.setState({vs: value} as TableInvoicesState, () => { this.loadData(); });
+  //                 if (value == '') deleteUrlParam('vs');
+  //                 else setUrlParam('vs', value);
+  //               }}
+  //             ></InputVarchar>
+  //           </div>
+  //         </div>
+  //         <div className={"p-1 flex-1" + (this.state.dateIssueFrom != '' || this.state.dateIssueTo != '' || this.state.dateDeliveryFrom != '' || this.state.dateDeliveryTo != '' || this.state.dateDueFrom != '' || this.state.dateDueTo != ''? " bg-yellow-100" : "")}>
+  //           <b className="text-sm">{this.translate('Issue')}</b><br/>
+  //           <div className="flex">
+  //             {this._datetimeFilter('dateIssueFrom', 'date-issue-from')}
+  //             {this._datetimeFilter('dateIssueTo', 'date-issue-to')}
+  //           </div>
+  //           <b className="text-sm">{this.translate('Delivery')}</b><br/>
+  //           <div className="flex">
+  //             {this._datetimeFilter('dateDeliveryFrom', 'date-delivery-from')}
+  //             {this._datetimeFilter('dateDeliveryTo', 'date-delivery-to')}
+  //           </div>
+  //           <b className="text-sm">{this.translate('Due')}</b><br/>
+  //           <div className="flex">
+  //             {this._datetimeFilter('dateDueFrom', 'date-due-from')}
+  //             {this._datetimeFilter('dateDueTo', 'date-due-to')}
+  //           </div>
+  //         </div>
+  //         <div className={"p-1 flex-1" + (this.state.datePaymentFrom != '' || this.state.datePaymentTo != '' ? " bg-yellow-100" : "")}>
+  //           <b className="text-sm">{this.translate('Payment')}</b><br/>
+  //           <div className="flex">
+  //             {this._datetimeFilter('datePaymentFrom', 'date-payment-from')}
+  //             {this._datetimeFilter('datePaymentTo', 'date-payment-to')}
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </>;
+  // }
 
   renderFooter(): JSX.Element {
     let totalExclVat = 0;

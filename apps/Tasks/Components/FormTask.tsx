@@ -115,6 +115,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
               {this.inputWrapper('duration_days')}
               {this.inputWrapper('date_start')}
               {this.inputWrapper('date_deadline')}
+              {this.inputWrapper('is_chargeable')}
               {this.inputWrapper('is_milestone')}
               {this.inputWrapper('notes')}
               {this.inputWrapper('date_created')}

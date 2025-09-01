@@ -55,7 +55,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'date_issue' => (new Date($this, $this->translate('Issued')))->setProperty('defaultVisibility', true),
       'date_delivery' => (new Date($this, $this->translate('Delivered'))),
       'date_due' => (new Date($this, $this->translate('Due')))->setProperty('defaultVisibility', true),
-      'date_payment' => (new Date($this, $this->translate('Payment')))->setProperty('defaultVisibility', true),
+      'date_payment' => (new Date($this, $this->translate('Paid')))->setProperty('defaultVisibility', true),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
       'total_excl_vat' => new Decimal($this, $this->translate('Total excl. VAT'))->setReadonly(),
       'total_incl_vat' => new Decimal($this, $this->translate('Total incl. VAT'))->setReadonly(),
@@ -76,6 +76,7 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate("Add invoice");
+    $description->ui['showColumnSearch'] = true;
 
     $description->ui['filters'] = [
       'fInvoicePipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Status'),

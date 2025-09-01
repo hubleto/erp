@@ -40,6 +40,7 @@ class Activity extends \Hubleto\Erp\Model
       'worked_hours' => (new Decimal($this, $this->translate('Worked hours')))->setProperty('defaultVisibility', true)->setDecimals(2)->setUnit('hours'),
       'description' => (new Text($this, $this->translate('Description')))->setProperty('defaultVisibility', true),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
+      'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultValue(date("Y-m-d H:i:s")),
     ]);
   }

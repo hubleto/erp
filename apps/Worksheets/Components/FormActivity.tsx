@@ -54,6 +54,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, F
             <div className="w-full">
               {this.inputWrapper('id_type')}
               {this.inputWrapper('is_approved')}
+              {this.inputWrapper('is_chargeable')}
               {this.inputWrapper('datetime_created')}
             </div>
           </div>

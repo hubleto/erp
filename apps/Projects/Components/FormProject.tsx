@@ -166,9 +166,9 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
       case 'statistics':
         if (this.state.statistics) {
           console.log('stats', this.state.statistics.workedByMonth);
-          return <>
+          return <div className='flex gap-2'>
             <div className='card'>
-              <div className='card-header'>Worked by month</div>
+              <div className='card-header'>Worked hours by month</div>
               <div className='card-body'>
                 <table className='table-default dense'>
                   <tbody>
@@ -182,7 +182,23 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                 </table>
               </div>
             </div>
-          </>;
+
+            <div className='card'>
+              <div className='card-header'>Chargeable hours by month</div>
+              <div className='card-body'>
+                <table className='table-default dense'>
+                  <tbody>
+                    {this.state.statistics.chargeableByMonth.map((item, key) => {
+                      return <tr key={key}>
+                        <td>{item.year}-{item.month}</td>
+                        <td>{item.worked_hours} hours</td>
+                      </tr>;
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>;
         }
       break;
 

@@ -104,7 +104,7 @@
       </div>
       <div class="flex items-center">
         <div class="flex flex-row justify-around">
-          <a class="flex" href="{{ config.projectUrl }}">
+          <a class="flex" href="{{ config.projectUrl }}/">
             <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
           </a>
           <button onclick="showSidebar()" class="sm:block md:hidden ml-6">
@@ -238,7 +238,7 @@
           {{ user.DEFAULT_COMPANY.name }}
         </div>
 
-        <a class="btn {{ hubleto.getRouter().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}">
+        <a class="btn {{ hubleto.getRouter().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}/">
           <span class="icon"><i class="fas fa-home"></i></span>
           <span class="text">{{ translate('Home') }}</span>
         </a>

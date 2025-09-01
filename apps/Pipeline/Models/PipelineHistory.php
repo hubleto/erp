@@ -7,6 +7,8 @@ use Hubleto\Framework\Db\Column\Datetime;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 
+use Hubleto\App\Community\Settings\Models\User;
+
 class PipelineHistory extends \Hubleto\Erp\Model
 {
   public string $table = 'pipeline_history';
@@ -19,6 +21,7 @@ class PipelineHistory extends \Hubleto\Erp\Model
       'model' => (new Varchar($this, $this->translate('Model')))->addIndex('INDEX `model` (`model`)'),
       'record_id' => (new Integer($this, $this->translate('Record Id')))->setRequired(),
       'datetime_change' => (new Datetime($this, $this->translate('Changed')))->setRequired(),
+      'id_user' => (new Lookup($this, $this->translate('User'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getAuthProvider()->getUserId()),
       'id_pipeline' => (new Lookup($this, $this->translate("Pipeline"), Pipeline::class))->setRequired(),
       'id_pipeline_step' => (new Lookup($this, $this->translate("Pipeline Step"), PipelineStep::class))->setRequired(),
     ]);

@@ -31,6 +31,7 @@ class SavePipelineHistory extends \Hubleto\Erp\Hook
             'model' => get_class($model),
             'record_id' => $savedRecord['id'],
             'datetime_change' => date('Y-m-d H:i:s'),
+            'id_user' => $this->getAuthProvider()->getUserId(),
             'id_pipeline' => $savedRecord['id_pipeline'] ?? 0,
             'id_pipeline_step' => $savedRecord['id_pipeline_step'] ?? 0,
           ]);

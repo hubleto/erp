@@ -91,6 +91,7 @@ class Project extends \Hubleto\Erp\Model
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Project';
     $description->ui['showHeader'] = true;
+    $description->ui['showColumnSearch'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 

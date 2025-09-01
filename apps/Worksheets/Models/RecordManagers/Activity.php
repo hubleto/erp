@@ -43,7 +43,7 @@ class Activity extends \Hubleto\Erp\RecordManager
       $mProjectTask = $main->getService(ProjectTask::class);
 
       $projectTasksIds = $mProjectTask->record->prepareReadQuery()
-        ->where('id_project', $idProject)
+        ->where($mProjectTask->table . '.id_project', $idProject)
         ->pluck('id_task')
         ?->toArray()
       ;

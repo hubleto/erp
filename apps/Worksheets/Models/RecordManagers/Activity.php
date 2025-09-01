@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Worksheets\Models\RecordManagers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 use Hubleto\App\Community\Tasks\Models\RecordManagers\Task;
+use Hubleto\App\Community\Projects\Models\ProjectTask;
 
 class Activity extends \Hubleto\Erp\RecordManager
 {
@@ -31,8 +32,25 @@ class Activity extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->urlParamAsInteger("idTask") > 0) {
-      $query = $query->where($this->table . '.id_task', $main->getRouter()->urlParamAsInteger("idTask"));
+    $idTask = $main->getRouter()->urlParamAsInteger("idTask");
+    $idProject = $main->getRouter()->urlParamAsInteger("idProject");
+
+    if ($idTask > 0) {
+      $query = $query->where($this->table . '.id_task', $idTask);
+    }
+
+    if ($idProject > 0) {
+      $mProjectTask = $main->getService(ProjectTask::class);
+
+      $projectTasksIds = $mProjectTask->record->prepareReadQuery()
+        ->where('id_project', $idProject)
+        ->pluck('id_task')
+        ?->toArray()
+      ;
+
+      if (count($projectTasksIds) == 0) $projectTasksIds = [0];
+
+      $query = $query->whereIn($this->table . '.id_task', $projectTasksIds);
     }
 
     // Uncomment and modify these lines if you want to apply default filters to your model.

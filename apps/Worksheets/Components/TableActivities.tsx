@@ -4,6 +4,7 @@ import FormActivity from './FormActivity';
 
 interface TableActivitiesProps extends HubletoTableProps {
   idTask?: number,
+  idProject?: number,
 }
 
 interface TableActivitiesState extends HubletoTableState {
@@ -42,6 +43,7 @@ export default class TableActivities extends HubletoTable<TableActivitiesProps, 
     return {
       ...super.getEndpointParams(),
       idTask: this.props.idTask,
+      idProject: this.props.idProject,
     }
   }
 

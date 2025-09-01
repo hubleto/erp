@@ -38,10 +38,10 @@ export default class FormMessage<P, S> extends HubletoForm<FormMessageProps, For
     </>;
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
         return <>
          {/* <div className='w-full flex gap-2 flex-col md:flex-row'>

@@ -251,10 +251,10 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
   }
 
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
         const customInputs = this.renderCustomInputs();
 
@@ -519,7 +519,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       break;
 
       default:
-        super.renderTab(tab);
+        super.renderTab(tabUid);
       break;
     }
   }

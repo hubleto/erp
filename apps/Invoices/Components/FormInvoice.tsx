@@ -93,10 +93,10 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     </>;
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
         return <>
           <div className="grid grid-cols-2 gap-1">

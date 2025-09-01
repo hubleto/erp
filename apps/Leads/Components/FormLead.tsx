@@ -214,10 +214,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     } as FormLeadState);
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
         //@ts-ignore
         const tmpCalendarSmall = <Calendar
@@ -523,7 +523,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       break;
 
       default:
-        super.renderTab(tab);
+        super.renderTab(tabUid);
       break;
     }
   }

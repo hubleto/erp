@@ -8,7 +8,7 @@ class TableExportCsv extends \Hubleto\Erp\Controller
 {
   public \Hubleto\Framework\Model $model;
 
-  public function render(array $params): string
+  public function render(): string
   {
     $model = $this->getRouter()->urlParamAsString('model');
     $this->model = $this->getModel($model);
@@ -60,8 +60,6 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     header('Content-Disposition: attachment; filename=Export-' . $this->model->shortName . '- ' . date('Ymd-His') . '.csv');
     header('Pragma: no-cache');
 
-    echo iconv("UTF-8", "windows-1250//TRANSLIT", $csvContent);
-
-    exit;
+    return iconv("UTF-8", "windows-1250//TRANSLIT", $csvContent);
   }
 }

@@ -18,7 +18,7 @@ class DailyActivityChart extends \Hubleto\Erp\Controllers\ApiController
     $mActivity = $this->getModel(\Hubleto\App\Community\Worksheets\Models\Activity::class);
     $worked = $mActivity->record
       ->groupBy(DB::raw('date(datetime_created)'))
-      ->selectRaw('sum(duration) as worked, date(datetime_created) as date')
+      ->selectRaw('sum(worked_hours) as worked, date(datetime_created) as date')
       ->get()?->toArray()
     ;
 

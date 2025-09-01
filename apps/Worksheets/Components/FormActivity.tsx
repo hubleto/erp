@@ -35,10 +35,10 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, F
     </>;
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
         return <>
           <div className="flex gap-2 flex-col md:flex-row">
@@ -49,7 +49,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, F
           <div className="flex gap-2 flex-col md:flex-row">
             <div className="w-full">
               {this.inputWrapper('date_worked')}
-              {this.inputWrapper('duration')}
+              {this.inputWrapper('worked_hours')}
             </div>
             <div className="w-full">
               {this.inputWrapper('id_type')}

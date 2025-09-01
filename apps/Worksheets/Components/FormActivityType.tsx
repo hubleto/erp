@@ -27,10 +27,10 @@ export default class FormActivityType<P, S> extends HubletoForm<FormActivityType
     </>;
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
         return <>
          {/* <div className='w-full flex gap-2'>

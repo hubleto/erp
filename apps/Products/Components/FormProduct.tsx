@@ -42,10 +42,10 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
     </>;
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
         return <>
           <div className='card'>
@@ -97,7 +97,7 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
       break;
 
       default:
-        super.renderTab(tab);
+        super.renderTab(tabUid);
       break;
     }
   }

@@ -37,7 +37,7 @@ class Activity extends \Hubleto\Erp\Model
       'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setProperty('defaultVisibility', true)->setRequired(),
       'id_type' => (new Lookup($this, $this->translate('Type'), ActivityType::class))->setProperty('defaultVisibility', true),
       'date_worked' => (new Date($this, $this->translate('Day')))->setProperty('defaultVisibility', true)->setDefaultValue(date("Y-m-d")),
-      'duration' => (new Decimal($this, $this->translate('Duration')))->setProperty('defaultVisibility', true)->setDecimals(2)->setUnit('hours'),
+      'worked_hours' => (new Decimal($this, $this->translate('Worked hours')))->setProperty('defaultVisibility', true)->setDecimals(2)->setUnit('hours'),
       'description' => (new Text($this, $this->translate('Description')))->setProperty('defaultVisibility', true),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultValue(date("Y-m-d H:i:s")),

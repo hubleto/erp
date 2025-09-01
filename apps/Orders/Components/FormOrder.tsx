@@ -126,10 +126,10 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     </>
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
 
         return <>
@@ -235,7 +235,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       break;
 
       default:
-        super.renderTab(tab);
+        super.renderTab(tabUid);
       break;
     }
   }

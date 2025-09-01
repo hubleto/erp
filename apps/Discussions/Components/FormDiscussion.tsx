@@ -50,7 +50,7 @@ export default class FormDiscussion<P, S> extends HubletoForm<FormDiscussionProp
     </>;
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
     const tabAbout = (
@@ -78,7 +78,7 @@ export default class FormDiscussion<P, S> extends HubletoForm<FormDiscussionProp
     );
 
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default': return this.state.id < 0 ? tabAbout : tabMessages; break;
       case 'about': return this.state.id < 0 ? null : tabAbout; break;
     }

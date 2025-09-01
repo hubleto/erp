@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import PipelineSelector from '@hubleto/apps/Pipeline/Components/PipelineSelector';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
+import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import FormInput from '@hubleto/react-ui/core/FormInput';
+import request from '@hubleto/react-ui/core/Request';
 
 export interface FormProjectProps extends HubletoFormProps { }
-export interface FormProjectState extends HubletoFormState { }
+export interface FormProjectState extends HubletoFormState {
+  statistics?: any
+}
 
 export default class FormProject<P, S> extends HubletoForm<FormProjectProps, FormProjectState> {
   static defaultProps: any = {
@@ -28,6 +32,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
       tabs: [
         { uid: 'default', title: <b>{this.translate('Project')}</b> },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
+        { uid: 'worksheet', title: this.translate('Worksheet') },
         { uid: 'statistics', title: this.translate('Statistics') },
         ...(this.getParentApp()?.getFormTabs() ?? [])
       ]
@@ -41,6 +46,22 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
   contentClassName(): string
   {
     return this.state.record.is_closed ? 'opacity-85 bg-slate-100' : '';
+  }
+
+  onTabChange() {
+    const tabUid = this.state.activeTabUid;
+    switch (tabUid) {
+      case 'statistics':
+        request.post(
+          'projects/api/get-statistics',
+          { idProject: this.state.record.id },
+          {},
+          (data: any) => {
+            this.setState({statistics: data});
+          }
+        )
+      break;
+    }
   }
 
   renderTitle(): JSX.Element {
@@ -70,10 +91,10 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
     </>;
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
         return <>
           <div className='w-full flex gap-2 flex-col md:flex-row'>
@@ -133,8 +154,40 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
         }
       break;
 
+      case 'worksheet':
+        return <TableActivities
+          uid={this.props.uid + "_table_activities"}
+          tag="ProjectActivities"
+          parentForm={this}
+          idProject={R.id}
+        />;
+      break;
+
+      case 'statistics':
+        if (this.state.statistics) {
+          console.log('stats', this.state.statistics.workedByMonth);
+          return <>
+            <div className='card'>
+              <div className='card-header'>Worked by month</div>
+              <div className='card-body'>
+                <table className='table-default dense'>
+                  <tbody>
+                    {this.state.statistics.workedByMonth.map((item, key) => {
+                      return <tr key={key}>
+                        <td>{item.year}-{item.month}</td>
+                        <td>{item.worked_hours} hours</td>
+                      </tr>;
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </>;
+        }
+      break;
+
       default:
-        super.renderTab(tab);
+        super.renderTab(tabUid);
       break;
     }
   }

@@ -255,10 +255,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     ]
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
 
         const inputsColumnLeft = <>
@@ -601,7 +601,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       break;
 
       default:
-        super.renderTab(tab);
+        super.renderTab(tabUid);
       break;
     }
   }

@@ -69,10 +69,10 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
     </>
   }
 
-  renderTab(tab: string) {
+  renderTab(tabUid: string) {
     const R = this.state.record;
 
-    switch (tab) {
+    switch (tabUid) {
       case 'default':
         return <>
           <div className='w-full flex gap-2 flex-col md:flex-row'>
@@ -131,7 +131,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
       break;
 
       default:
-        super.renderTab(tab);
+        super.renderTab(tabUid);
       break;
     }
   }

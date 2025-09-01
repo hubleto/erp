@@ -69,7 +69,7 @@ class Task extends \Hubleto\Erp\Model
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'virt_worked' => (new Virtual($this, $this->translate('Worked')))->setProperty('defaultVisibility', true)->setUnit("hours")
-        ->setProperty('sql', "select sum(ifnull(duration, 0)) from worksheet_activities where id_task = tasks.id")
+        ->setProperty('sql', "select sum(ifnull(worked_hours, 0)) from worksheet_activities where id_task = tasks.id")
       ,
       'virt_related_to' => (new Virtual($this, $this->translate('Related to')))->setProperty('defaultVisibility', true)
         ->setProperty('sql', "

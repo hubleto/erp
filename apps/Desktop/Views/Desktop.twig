@@ -113,16 +113,16 @@
           </button>
         </div>
       </div>
-      <div class="hidden sm:block flex-1 ml-2 max-w-72">
+      <div class="{# hidden #} sm:block flex-1 ml-2 max-w-72">
         <app-search string:endpoint='api/search'></app-search>
       </div>
-      <div class="hidden md:block flex-1">
+      <div class="{# hidden #} md:block flex-1">
         {{ include('@hubleto-main/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
       </div>
-      <div class="hidden md:block">
+      <div class="{# hidden #} md:block">
         <ul class="flex font-sm gap-1">
           {% if viewParams.availableLanguages|length > 0 %}
-            <li class="mr-2 hidden lg:block">
+            <li class="mr-2 {# hidden #} lg:block">
               <button class="btn btn-transparent btn-dropdown">
                 <div class="menu">
                   <div class="list mr-2">
@@ -147,7 +147,7 @@
             </li>
           {% endif %}
           {% if viewParams.contextHelpUrl %}
-            <li class="mr-2 hidden lg:block">
+            <li class="mr-2 {# hidden #} lg:block">
               <a
                 class="btn btn-transparent"
                 href="https://help.hubleto.com/v0/{{ viewParams.contextHelpUrl }}"
@@ -159,7 +159,7 @@
             </li>
           {% endif %}
           {% if hubleto.getAppManager().isAppInstalled('Hubleto\\App\\Community\\Notifications') %}
-            <li class="mr-2 hidden md:block">
+            <li class="mr-2 {# hidden #} md:block">
               {% if notificationsCount > 0 %}
                 <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
                   <div class="badge badge-small badge-yellow px-1">{{ notificationsCount }}</div>
@@ -174,7 +174,7 @@
             </li>
           {% endif %}
           {% if hubleto.getAppManager().isAppInstalled('Hubleto\\App\\Community\\Cloud') %}
-            <li class="mr-2 hidden lg:block">
+            <li class="mr-2 {# hidden #} lg:block">
               {% if hubleto.isPremium %}
                 <a class="btn btn-transparent" href="{{ config.projectUrl }}/cloud">
                   <span class="icon text-primary"><i class="fas fa-medal"></i></span>
@@ -188,7 +188,7 @@
               {% endif %}
             </li>
           {% endif %}
-          <li class="mr-2 hidden lg:block">
+          <li class="mr-2 {# hidden #} lg:block">
             <button id="theme-toggle-btn" class="btn btn-transparent" onclick="toggleTheme();">
               <span class="icon"><i class="fas fa-sun"></i></span>
             </a>

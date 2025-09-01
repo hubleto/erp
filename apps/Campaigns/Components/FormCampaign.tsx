@@ -172,7 +172,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                   </div>
                   <div><b>Preview</b></div>
                   <div
-                    className='text-blue-800'
+                    className='text-blue-800 max-h-72'
                     dangerouslySetInnerHTML={{__html: mailPreviewInfo.bodyHtml}}
                   ></div>
                 </div>

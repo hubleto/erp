@@ -21,15 +21,27 @@ class GetMailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
     $campaignContact = $mCampaignContact->record
       ->where('id_campaign', $idCampaign)
       ->where('id_contact', $idContact)
-      ->with('CAMPAIGN')
+      ->with('CAMPAIGN.MAIL_TEMPLATE')
       ->with('CONTACT.VALUES')
       ->first();
 
     if ($campaignContact) {
+      $campaign = $campaignContact->CAMPAIGN->toArray();
+      $contact = $campaignContact->CONTACT->toArray();
+      $template = $campaign['MAIL_TEMPLATE'];
+
+      $bodyHtml = Lib::addUtmVariablesToEmailLinks(
+        (string) $template['body_html'],
+        (string) $campaign['utm_source'],
+        (string) $campaign['utm_campaign'],
+        (string) $campaign['utm_term'],
+        (string) $campaign['utm_content'],
+      );
+
       $bodyHtml = Lib::routeLinksThroughCampaignTracker(
-        $campaignContact->CAMPAIGN->toArray(),
-        $campaignContact->CONTACT->toArray(),
-        $campaignContact->CAMPAIGN->mail_body
+        $campaign,
+        $contact,
+        $bodyHtml,
       );
     }
 

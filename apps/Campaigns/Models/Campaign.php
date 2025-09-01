@@ -24,6 +24,7 @@ class Campaign extends \Hubleto\Erp\Model
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
+    'MAIL_TEMPLATE' => [ self::HAS_ONE, User::class, 'id_main_template', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],

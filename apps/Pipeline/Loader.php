@@ -21,6 +21,7 @@ class Loader extends \Hubleto\Framework\App
       '/^pipeline\/api\/get-pipelines\/?$/' => Controllers\Api\GetPipelines::class,
       '/^pipeline\/?$/' => Controllers\Pipeline::class,
       '/^pipeline(\/(?<idPipeline>\d+))?\/?$/' => Controllers\Pipeline::class,
+      '/^pipeline\/history\/?$/' => Controllers\PipelineHistory::class,
       '/^settings\/pipelines\/?$/' => Controllers\Pipelines::class,
     ]);
 

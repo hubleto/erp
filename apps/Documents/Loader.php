@@ -15,7 +15,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^documents\/?$/' => Controllers\Browse::class,
       // '/^documents\/api\/save-junction\/?$/' => Controllers\Api\SaveJunction::class,
       '/^documents\/browse\/?$/' => Controllers\Browse::class,

@@ -36,7 +36,7 @@ class Currency extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
 
-    $id = $this->getRouter()->urlParamAsInteger('id');
+    $id = $this->router()->urlParamAsInteger('id');
 
     $description->ui['title'] = ($id == -1 ? "New currency" : "Currency");
     $description->ui['subTitle'] = ($id == -1 ? "Adding" : "Editing");

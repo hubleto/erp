@@ -11,7 +11,7 @@ class CreateFromOrder extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idOrder = $this->getRouter()->urlParamAsInteger("idOrder");
+    $idOrder = $this->router()->urlParamAsInteger("idOrder");
 
     if ($idOrder <= 0) {
       return [

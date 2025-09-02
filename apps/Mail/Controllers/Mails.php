@@ -17,7 +17,7 @@ class Mails extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $idMailbox = $this->getRouter()->urlParamAsInteger('idMailbox');
+    $idMailbox = $this->router()->urlParamAsInteger('idMailbox');
     $mMailbox = $this->getService(Mailbox::class);
 
     $this->viewParams['mailbox'] = $mMailbox->record->find($idMailbox)?->toArray();

@@ -87,7 +87,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
   public function run(): void
   {
 
-    if (is_file($this->getEnv()->projectFolder . '/ConfigEnv.php')) {
+    if (is_file($this->env()->projectFolder . '/ConfigEnv.php')) {
       \Hubleto\Terminal::red("ConfigEnv.php already exists, project has already been initialized.\n");
       \Hubleto\Terminal::red("If you want to re-initialize the project, delte ConfigEnv.php file first.\n");
       exit;
@@ -219,7 +219,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $rewriteBases = [];
     $lastRewriteBase = '';
 
-    $paths = explode('/', str_replace('\\', '/', $this->getEnv()->projectFolder));
+    $paths = explode('/', str_replace('\\', '/', $this->env()->projectFolder));
     foreach (array_reverse($paths) as $tmpFolder) {
       $rewriteBases[] = $lastRewriteBase . '/';
       $lastRewriteBase = '/' . $tmpFolder . $lastRewriteBase;
@@ -231,13 +231,13 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $rewriteBase = \Hubleto\Terminal::choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
     }
     if ($projectFolder === null) {
-      $projectFolder = $this->getEnv()->projectFolder;
+      $projectFolder = $this->env()->projectFolder;
     }
     if ($releaseFolder === null) {
-      $releaseFolder = $this->getEnv()->releaseFolder;
+      $releaseFolder = $this->env()->releaseFolder;
     }
     if ($secureFolder === null) {
-      $secureFolder = $this->getEnv()->secureFolder;
+      $secureFolder = $this->env()->secureFolder;
     }
     if ($projectUrl === null) {
       $projectUrl = \Hubleto\Terminal::read('ConfigEnv.projectUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
@@ -360,20 +360,20 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     \Hubleto\Terminal::cyan('  -> generateDemoData = ' . ($generateDemoData ? 'yes' : 'no') . "\n");
     \Hubleto\Terminal::cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
-    $this->getConfig()->set('projectFolder', $projectFolder);
-    $this->getConfig()->set('releaseFolder', $releaseFolder);
-    $this->getConfig()->set('projectUrl', $projectUrl);
-    $this->getConfig()->set('secureFolder', $secureFolder);
-    $this->getConfig()->set('assetsUrl', $assetsUrl);
+    $this->config()->set('projectFolder', $projectFolder);
+    $this->config()->set('releaseFolder', $releaseFolder);
+    $this->config()->set('projectUrl', $projectUrl);
+    $this->config()->set('secureFolder', $secureFolder);
+    $this->config()->set('assetsUrl', $assetsUrl);
 
-    $this->getConfig()->set('db_host', $dbHost);
-    $this->getConfig()->set('db_user', $dbUser);
-    $this->getConfig()->set('db_password', $dbPassword);
-    $this->getConfig()->set('db_name', $dbName);
+    $this->config()->set('db_host', $dbHost);
+    $this->config()->set('db_user', $dbUser);
+    $this->config()->set('db_password', $dbPassword);
+    $this->config()->set('db_name', $dbName);
 
-    $this->getEnv()->projectFolder = $projectFolder;
-    $this->getEnv()->releaseFolder = $releaseFolder;
-    $this->getEnv()->secureFolder = $secureFolder;
+    $this->env()->projectFolder = $projectFolder;
+    $this->env()->releaseFolder = $releaseFolder;
+    $this->env()->secureFolder = $secureFolder;
 
     \Hubleto\Terminal::cyan("\n");
     \Hubleto\Terminal::cyan("Hurray. Installing your Hubleto with following packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
@@ -466,7 +466,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("    -> Finalizing...\n");
     foreach ($installer->appsToInstall as $appNamespace => $appConfig) {
-      $app = $this->getAppManager()->createAppInstance($appNamespace);
+      $app = $this->appManager()->createAppInstance($appNamespace);
       $mClasses = $app->getAvailableModelClasses();
       foreach ($mClasses as $mClass) {
         $mObj = $this->getService($mClass);
@@ -478,7 +478,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $installer->addCompanyAndAdminUser();
 
     if ($generateDemoData) {
-      $this->getAppManager()->init();
+      $this->appManager()->init();
       $this->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->run();
     }
 

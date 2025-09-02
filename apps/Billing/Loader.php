@@ -17,7 +17,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^billing\/?$/' => Controllers\BillingAccounts::class,
     ]);
 

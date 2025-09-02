@@ -41,7 +41,7 @@ class Report extends \Hubleto\Framework\Core
 
   public function loadDataDefault(\Hubleto\Framework\Models\Model $model): array
   {
-    $config = $this->getRouter()->urlParamAsArray("config");
+    $config = $this->router()->urlParamAsArray("config");
 
     $groupBy = $config["groupsBy"][0]["field"];
     $returnWith = (array) $config["returnWith"];

@@ -4,4 +4,4 @@
 require_once(__DIR__ . "/boot.php");
 
 // render
-echo $hubleto->getRenderer()->render();
+echo $hubleto->renderer()->render();

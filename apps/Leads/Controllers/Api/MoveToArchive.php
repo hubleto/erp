@@ -18,14 +18,14 @@ class MoveToArchive extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    if (!$this->getRouter()->isUrlParam("recordId")) {
+    if (!$this->router()->isUrlParam("recordId")) {
       return [
         "status" => "failed",
         "error" => "The lead for converting was not set"
       ];
     }
 
-    $leadId = $this->getRouter()->urlParamAsInteger("recordId");
+    $leadId = $this->router()->urlParamAsInteger("recordId");
     $mLead = $this->getService(Lead::class);
     $mLead->record->find($leadId)->update(['is_archived' => true]);
 

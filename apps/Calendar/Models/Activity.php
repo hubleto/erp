@@ -32,7 +32,7 @@ class Activity extends \Hubleto\Erp\Model
       'all_day' => (new Boolean($this, $this->translate('All day'))),
       'completed' => (new Boolean($this, $this->translate('Completed')))->setDefaultValue(0),
       'meeting_minutes_link' => (new Varchar($this, $this->translate('Meeting minutes (link)'))),
-      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getAuthProvider()->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
     ]);
   }
 

@@ -17,10 +17,10 @@ class Dashboards extends \Hubleto\Erp\Controller
 
     $mDashboard = $this->getModel(\Hubleto\App\Community\Dashboards\Models\Dashboard::class);
 
-    $dashboardSlug = $this->getRouter()->urlParamAsString('dashboardSlug');
+    $dashboardSlug = $this->router()->urlParamAsString('dashboardSlug');
 
     $dashboards = $mDashboard->record->prepareReadQuery()
-      ->where('id_owner', $this->getAuthProvider()->getUserId())
+      ->where('id_owner', $this->authProvider()->getUserId())
       ->with('PANELS')
       ->get()
       ?->toArray();

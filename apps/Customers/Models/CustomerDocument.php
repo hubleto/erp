@@ -38,7 +38,7 @@ class CustomerDocument extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    if ($this->getRouter()->urlParamAsInteger('idCustomer') > 0) {
+    if ($this->router()->urlParamAsInteger('idCustomer') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

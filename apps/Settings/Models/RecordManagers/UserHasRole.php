@@ -15,8 +15,8 @@ class UserHasRole extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->isUrlParam("idUser")) {
-      $query = $query->where($this->table . '.id_user', $main->getRouter()->urlParamAsInteger("idUser"));
+    if ($main->router()->isUrlParam("idUser")) {
+      $query = $query->where($this->table . '.id_user', $main->router()->urlParamAsInteger("idUser"));
     }
 
     return $query;

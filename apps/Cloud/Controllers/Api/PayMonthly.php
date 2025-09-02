@@ -18,8 +18,8 @@ class PayMonthly extends \Hubleto\Erp\Controllers\ApiController
   {
     $premiumAccount = $this->getService(PremiumAccount::class);
 
-    if ($this->getRouter()->isUrlParam('today')) {
-      $today = date('Y-m-d', strtotime($this->getRouter()->urlParamAsString('today')));
+    if ($this->router()->isUrlParam('today')) {
+      $today = date('Y-m-d', strtotime($this->router()->urlParamAsString('today')));
     } else {
       $today = date('Y-m-d');
     }

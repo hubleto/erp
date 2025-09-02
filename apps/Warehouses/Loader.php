@@ -16,7 +16,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^warehouses\/?$/' => Controllers\Warehouses::class,
       '/^warehouses\/locations\/?$/' => Controllers\Locations::class,
       '/^warehouses\/settings\/warehouse-types\/?$/' => Controllers\WarehouseTypes::class,

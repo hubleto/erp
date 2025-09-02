@@ -15,7 +15,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^notifications\/?$/' => Controllers\Notifications::class,
       '/^notifications\/inbox\/?$/' => Controllers\Inbox::class,
       '/^notifications\/sent\/?$/' => Controllers\Sent::class,
@@ -24,7 +24,7 @@ class Loader extends \Hubleto\Framework\App
       '/^notifications\/api\/mark-as-unread\/?$/' => Controllers\Api\MarkAsUnread::class,
     ]);
 
-    $this->getCronManager()->addCron(Crons\DailyDigest::class);
+    $this->cronManager()->addCron(Crons\DailyDigest::class);
   }
 
   /**
@@ -52,7 +52,7 @@ class Loader extends \Hubleto\Framework\App
   {
     $mNotification = $this->getModel(Models\Notification::class);
     return $mNotification->record->prepareReadQuery()
-      ->where('id_to', $this->getAuthProvider()->getUserId())
+      ->where('id_to', $this->authProvider()->getUserId())
       ->whereNull('datetime_read')
       ->count()
     ;
@@ -81,7 +81,7 @@ class Loader extends \Hubleto\Framework\App
     string $color = '',
     int $priority = 0
   ): array {
-    $user = $this->getAuthProvider()->getUser();
+    $user = $this->authProvider()->getUser();
     $idUser = $user['id'] ?? 0;
 
     if ($idTo > 0) {

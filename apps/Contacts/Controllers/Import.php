@@ -23,8 +23,8 @@ class Import extends \Hubleto\Erp\Controller
 
     $log = [];
     $importFinished = false;
-    $checkImport = $this->getRouter()->urlParamAsBool("checkImport");
-    $tag = $this->getRouter()->urlParamAsString("tag");
+    $checkImport = $this->router()->urlParamAsBool("checkImport");
+    $tag = $this->router()->urlParamAsString("tag");
 
     $theTag = $mTag->record->whereLike('name', $tag)->first()?->toArray();
 
@@ -32,7 +32,7 @@ class Import extends \Hubleto\Erp\Controller
       $theTag = $mTag->record->recordCreate(['name' => $tag]);
     }
 
-    $contactsFile = $this->getRouter()->getUploadedFile('contactsFile');
+    $contactsFile = $this->router()->getUploadedFile('contactsFile');
     if (is_array($contactsFile) && is_file($contactsFile['tmp_name'])) {
       if (($handle = fopen($contactsFile['tmp_name'], "r")) !== false) {
         $rowIdx = 0;

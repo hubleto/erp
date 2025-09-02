@@ -9,11 +9,11 @@ class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
   {
     if ($event == 'model:record-updated') {
       /** @var \Hubleto\App\Community\Notifications\Loader $notificationsApp */
-      $notificationsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Notifications\Loader::class);
+      $notificationsApp = $this->appManager()->getApp(\Hubleto\App\Community\Notifications\Loader::class);
 
       list($model, $originalRecord, $savedRecord) = $args;
 
-      $user = $this->getAuthProvider()->getUser();
+      $user = $this->authProvider()->getUser();
       if (isset($savedRecord['id_owner']) && $savedRecord['id_owner'] != $user['id']) {
         $diff = $model->diffRecords($originalRecord, $savedRecord);
 

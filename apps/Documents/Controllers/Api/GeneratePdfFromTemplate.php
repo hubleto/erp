@@ -9,9 +9,9 @@ class GeneratePdfFromTemplate extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idTemplate = $this->getRouter()->urlParamAsInteger('idTemplate');
-    $outpuFilename = $this->getRouter()->urlParamAsString('outpuFilename');
-    $vars = $this->getRouter()->urlParamAsArray('vars');
+    $idTemplate = $this->router()->urlParamAsInteger('idTemplate');
+    $outpuFilename = $this->router()->urlParamAsString('outpuFilename');
+    $vars = $this->router()->urlParamAsArray('vars');
 
     $mTemplate = $this->getService(Template::class);
     $template = $mTemplate->record->prepareReadQuery()->where('id', $idTemplate)->get();

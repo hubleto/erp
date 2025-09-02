@@ -37,7 +37,7 @@ class InvoiceDocument extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    if ($this->getRouter()->urlParamAsInteger('idInvoice') > 0) {
+    if ($this->router()->urlParamAsInteger('idInvoice') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

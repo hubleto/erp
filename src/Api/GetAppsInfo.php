@@ -7,7 +7,7 @@ class GetAppsInfo extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): array
   {
     $appsInfo = [];
-    foreach ($this->getAppManager()->getInstalledApps() as $app) {
+    foreach ($this->appManager()->getInstalledApps() as $app) {
       $appsInfo[$app->namespace] = [
         'manifest' => $app->manifest,
         'permittedForAllUsers' => $app->permittedForAllUsers,

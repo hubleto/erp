@@ -15,13 +15,13 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^eventregistrations\/?$/' => Controllers\Dashboard::class,
       '/^eventregistrations\/contacts\/?$/' => Controllers\Contacts::class,
       '/^settings\/eventregistrations\/?$/' => Controllers\Settings::class,
     ]);
 
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => 'EventRegistrations', // or $this->translate('EventRegistrations')
       'icon' => 'fas fa-table',

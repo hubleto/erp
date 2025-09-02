@@ -43,7 +43,7 @@ class Value extends \Hubleto\Erp\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
 
-    if ($this->getRouter()->urlParamAsInteger('idContact') != 0) {
+    if ($this->router()->urlParamAsInteger('idContact') != 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

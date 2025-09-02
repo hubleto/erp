@@ -6,7 +6,7 @@ class Create extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = $this->getAppManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+    $appNamespace = $this->appManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $appNamespaceParts = explode('\\', $appNamespace);
     $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
 
@@ -20,11 +20,11 @@ class Create extends \Hubleto\Erp\Cli\Agent\Command
         throw new \Exception('Creation of premium apps is not implemented yet.');
         break;
       case 'External':
-        $externalAppsRepositories = $this->getConfig()->getAsArray('externalAppsRepositories');
+        $externalAppsRepositories = $this->config()->getAsArray('externalAppsRepositories');
         $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
         break;
       case 'Custom':
-        $projectFolder = $this->getEnv()->projectFolder;
+        $projectFolder = $this->env()->projectFolder;
         if (empty($projectFolder) || !is_dir($projectFolder)) {
           throw new \Exception('projectFolder is not properly configured. (' . $projectFolder . ')');
         }
@@ -49,7 +49,7 @@ class Create extends \Hubleto\Erp\Cli\Agent\Command
       mkdir($appRepositoryFolder . '/' . $appName);
     }
 
-    $this->getAppManager()->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
+    $this->appManager()->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
 
     \Hubleto\Terminal::cyan("App {$appNamespace} created successfully.\n");
 
@@ -61,7 +61,7 @@ class Create extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     \Hubleto\Terminal::yellow("💡  TIPS:\n");
-    \Hubleto\Terminal::yellow("💡  -> Test the app in browser: {$this->getEnv()->projectUrl}/" . strtolower($appName) . "\n");
+    \Hubleto\Terminal::yellow("💡  -> Test the app in browser: {$this->env()->projectUrl}/" . strtolower($appName) . "\n");
     \Hubleto\Terminal::yellow("💡  -> Run command below to add your first model.\n");
     \Hubleto\Terminal::colored("cyan", "black", "Run: php hubleto create model {$appNamespace} {$appName}FirstModel");
   }

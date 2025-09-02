@@ -16,7 +16,7 @@ class FormDesigner extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $template = $this->getRouter()->urlParamAsString('template');
+    $template = $this->router()->urlParamAsString('template');
 
     $renderContentCode = '';
 

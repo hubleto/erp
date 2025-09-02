@@ -18,7 +18,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^usage\/?$/' => Controllers\Home::class,
       '/^usage\/log\/?$/' => Controllers\Log::class,
     ]);

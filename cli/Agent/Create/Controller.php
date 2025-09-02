@@ -6,11 +6,11 @@ class Controller extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = $this->getAppManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+    $appNamespace = $this->appManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $controller = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
 
-    $this->getAppManager()->init();
+    $this->appManager()->init();
 
     if (empty($appNamespace)) {
       throw new \Exception("<appNamespace> not provided.");
@@ -19,7 +19,7 @@ class Controller extends \Hubleto\Erp\Cli\Agent\Command
       throw new \Exception("<controller> not provided.");
     }
 
-    $app = $this->getAppManager()->getApp($appNamespace);
+    $app = $this->appManager()->getApp($appNamespace);
 
     if (!$app) {
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
@@ -30,7 +30,7 @@ class Controller extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     $tplFolder = __DIR__ . '/../../Templates/snippets';
-    $this->getRenderer()->addNamespace($tplFolder, 'snippets');
+    $this->renderer()->addNamespace($tplFolder, 'snippets');
 
     $tplVars = [
       'appNamespace' => $appNamespace,
@@ -41,7 +41,7 @@ class Controller extends \Hubleto\Erp\Cli\Agent\Command
     if (!is_dir($app->srcFolder . '/Controllers')) {
       mkdir($app->srcFolder . '/Controllers');
     }
-    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->getRenderer()->renderView('@snippets/Controller.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->renderer()->renderView('@snippets/Controller.php.twig', $tplVars));
 
     \Hubleto\Terminal::white("\n");
     \Hubleto\Terminal::cyan("Controller '{$controller}' in '{$appNamespace}' created successfully.\n");

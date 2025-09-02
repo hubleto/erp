@@ -6,9 +6,9 @@ class LogJavascriptError extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): array
   {
-    $logFolder = $this->getConfig()->getAsString('logFolder');
-    $errorRoute = $this->getRouter()->urlParamAsString('errorRoute');
-    $errors = $this->getRouter()->urlParamAsArray('errors');
+    $logFolder = $this->config()->getAsString('logFolder');
+    $errorRoute = $this->router()->urlParamAsString('errorRoute');
+    $errors = $this->router()->urlParamAsArray('errors');
 
     if (!is_dir($logFolder)) {
       @mkdir($logFolder);

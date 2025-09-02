@@ -13,8 +13,8 @@ class Dictionary extends \Hubleto\Erp\Controllers\ApiController
 
   public function renderJson(): array
   {
-    $language = $this->getRouter()->urlParamAsString('language', 'en');
-    $addNew = $this->getRouter()->urlParamAsArray('addNew');
+    $language = $this->router()->urlParamAsString('language', 'en');
+    $addNew = $this->router()->urlParamAsArray('addNew');
 
     $dictFile = __DIR__ . '/../../lang/' . $language . '.json';
 
@@ -28,7 +28,7 @@ class Dictionary extends \Hubleto\Erp\Controllers\ApiController
       return [];
     }
 
-    $dict = $this->getTranslator()->loadDictionary($language);
+    $dict = $this->translator()->loadDictionary($language);
 
     if (
       isset($addNew['context'])

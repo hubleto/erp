@@ -11,9 +11,9 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
   {
     parent::__construct();
 
-    if ($this->getRouter()->isUrlParam("start") && $this->getRouter()->isUrlParam("end")) {
-      $dateStart = date("Y-m-d H:i:s", (int) strtotime($this->getRouter()->urlParamAsString("start")));
-      $dateEnd = date("Y-m-d H:i:s", (int) strtotime($this->getRouter()->urlParamAsString("end")));
+    if ($this->router()->isUrlParam("start") && $this->router()->isUrlParam("end")) {
+      $dateStart = date("Y-m-d H:i:s", (int) strtotime($this->router()->urlParamAsString("start")));
+      $dateEnd = date("Y-m-d H:i:s", (int) strtotime($this->router()->urlParamAsString("end")));
     } else {
       $dateStart = date("Y-m-d H:i:s");
       $dateEnd = date("Y-m-d H:i:s", strtotime("+1 day"));
@@ -27,17 +27,17 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): array
   {
     $filter = [
-      'fOwnership' => $this->getRouter()->urlParamAsInteger('fOwnership'),
+      'fOwnership' => $this->router()->urlParamAsInteger('fOwnership'),
     ];
 
-    if ($this->getRouter()->isUrlParam('source')) {
+    if ($this->router()->isUrlParam('source')) {
 
       /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
       $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
 
-      $calendar = $calendarManager->getCalendar($this->getRouter()->urlParamAsString('source'));
-      if ($this->getRouter()->isUrlParam('id')) {
-        $event = (array) $calendar->loadEvent($this->getRouter()->urlParamAsInteger('id'));
+      $calendar = $calendarManager->getCalendar($this->router()->urlParamAsString('source'));
+      if ($this->router()->isUrlParam('id')) {
+        $event = (array) $calendar->loadEvent($this->router()->urlParamAsInteger('id'));
         $event['SOURCEFORM'] = $calendar->calendarConfig["formComponent"] ?? null;
 
         return $event;
@@ -50,7 +50,7 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
         $this->dateStart,
         $this->dateEnd,
         $filter,
-        $this->getRouter()->urlParamAsArray('fSources')
+        $this->router()->urlParamAsArray('fSources')
       );
     }
   }

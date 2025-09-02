@@ -15,7 +15,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       // '/^projects\/api\/save-junction\/?$/' => Controllers\Api\SaveJunction::class,
 
       '/^projects\/api\/convert-deal-to-project\/?$/' => Controllers\Api\ConvertDealToProject::class,
@@ -32,7 +32,7 @@ class Loader extends \Hubleto\Framework\App
 
     $this->addSearchSwitch('p', 'projects');
 
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => 'Projects', // or $this->translate('Projects')
       'icon' => 'fas fa-table',

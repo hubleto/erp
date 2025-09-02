@@ -28,8 +28,8 @@ class OrderProduct extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->urlParamAsInteger("idOrder") > 0) {
-      $query = $query->where($this->table . '.id_order', $main->getRouter()->urlParamAsInteger("idOrder"));
+    if ($main->router()->urlParamAsInteger("idOrder") > 0) {
+      $query = $query->where($this->table . '.id_order', $main->router()->urlParamAsInteger("idOrder"));
     }
 
     return $query;

@@ -17,9 +17,9 @@ class Mail extends \Hubleto\Erp\RecordManager
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
     $main = \Hubleto\Erp\Loader::getGlobalApp();
-    $idMailbox = $main->getRouter()->urlParamAsInteger('idMailbox');
-    $showOnlyDrafts = $main->getRouter()->urlParamAsBool('showOnlyDrafts');
-    $showOnlyTemplates = $main->getRouter()->urlParamAsBool('showOnlyTemplates');
+    $idMailbox = $main->router()->urlParamAsInteger('idMailbox');
+    $showOnlyDrafts = $main->router()->urlParamAsBool('showOnlyDrafts');
+    $showOnlyTemplates = $main->router()->urlParamAsBool('showOnlyTemplates');
 
     $query = parent::prepareReadQuery($query, $level);
 

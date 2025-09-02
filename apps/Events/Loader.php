@@ -18,7 +18,7 @@ class Loader extends \Hubleto\Framework\App
     // Add app routes.
     // By default, each app should have a welcome dashboard.
     // If your app will have own settings panel, it should be under the `settings/your-app` slug.
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^events\/?$/' => Controllers\Events::class,
       '/^events\/venues\/?$/' => Controllers\Venues::class,
       '/^events\/speakers\/?$/' => Controllers\Speakers::class,
@@ -29,7 +29,7 @@ class Loader extends \Hubleto\Framework\App
 
     // Add placeholder for custom settings.
     // This will be displayed in the Settings app, under the "All settings" card.
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => 'Event types',
       'icon' => 'fas fa-table',

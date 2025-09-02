@@ -16,11 +16,11 @@ class Settings extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $settingsChanged = $this->getRouter()->urlParamAsBool('settingsChanged');
+    $settingsChanged = $this->router()->urlParamAsBool('settingsChanged');
 
     if ($settingsChanged) {
-      $calendarColor = $this->getRouter()->urlParamAsString('calendarColor');
-      $customersApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Customers\Loader::class);
+      $calendarColor = $this->router()->urlParamAsString('calendarColor');
+      $customersApp = $this->appManager()->getApp(\Hubleto\App\Community\Customers\Loader::class);
       $customersApp->setConfigAsString('calendarColor', $calendarColor);
       $customersApp->saveConfig('calendarColor', $calendarColor);
 

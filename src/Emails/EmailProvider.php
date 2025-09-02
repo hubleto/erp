@@ -23,11 +23,11 @@ class EmailProvider extends \Hubleto\Framework\Core
 
   public function init(): void
   {
-    $this->smtpHost = $this->getConfig()->getAsString('smtpHost', '');
-    $this->smtpPort = $this->getConfig()->getAsInteger('smtpPort', 0);
-    $this->smtpEncryption = $this->getConfig()->getAsString('smtpEncryption', 'ssl');
-    $this->smtpUsername = $this->getConfig()->getAsString('smtpLogin', '');
-    $this->smtpPassword = $this->getConfig()->getAsString('smtpPassword', '');
+    $this->smtpHost = $this->config()->getAsString('smtpHost', '');
+    $this->smtpPort = $this->config()->getAsInteger('smtpPort', 0);
+    $this->smtpEncryption = $this->config()->getAsString('smtpEncryption', 'ssl');
+    $this->smtpUsername = $this->config()->getAsString('smtpLogin', '');
+    $this->smtpPassword = $this->config()->getAsString('smtpPassword', '');
   }
 
   public function getFormattedBody(string $title, string $rawBody, string $template = ''): string
@@ -35,7 +35,7 @@ class EmailProvider extends \Hubleto\Framework\Core
     if (empty($template)) {
       $template = $this->defaultEmailTemplate;
     }
-    return $this->getRenderer()->renderView($template, ['title' => $title, 'body' => $rawBody]);
+    return $this->renderer()->renderView($template, ['title' => $title, 'body' => $rawBody]);
   }
 
   /**
@@ -150,7 +150,7 @@ class EmailProvider extends \Hubleto\Framework\Core
     We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:
     
     <p style="text-align: center;">
-      <a href="'. $this->getEnv()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Reset password</a>
+      <a href="'. $this->env()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Reset password</a>
     </p>
     
     If you did not request a password reset, please ignore this email. Your password will remain unchanged. <br><br><br>
@@ -179,7 +179,7 @@ class EmailProvider extends \Hubleto\Framework\Core
     Thank you for signing up at our website! We\'re excited to have you on board. Please click the button below to confirm your account and get started.
     <br>
     <p style="text-align: center;">
-      <a href="'. $this->getEnv()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Get started</a>
+      <a href="'. $this->env()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Get started</a>
     </p>
     <br>
     

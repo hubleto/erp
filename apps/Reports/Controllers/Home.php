@@ -16,7 +16,7 @@ class Home extends \Hubleto\Erp\Controller
     parent::prepareView();
 
     /** @var \Hubleto\App\Community\Reports\Loader $reportsApp */
-    $reportsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
+    $reportsApp = $this->appManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
     $reports = $reportsApp->reportManager->getReports();
     $this->viewParams['reports'] = $reports;
 

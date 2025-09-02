@@ -21,7 +21,7 @@ class Pipeline extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $fOwner = $this->getRouter()->urlParamAsInteger('fOwner');
+    $fOwner = $this->router()->urlParamAsInteger('fOwner');
 
     /** @var \Hubleto\App\Community\Pipeline\Manager */
     $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
@@ -30,7 +30,7 @@ class Pipeline extends \Hubleto\Erp\Controller
     $pipelines = $mPipeline->record->get()?->toArray();
     if (!is_array($pipelines)) $pipelines = [];
 
-    $idPipeline = $this->getRouter()->urlParamAsInteger('idPipeline');
+    $idPipeline = $this->router()->urlParamAsInteger('idPipeline');
 
     $pipeline = $mPipeline->record
       ->where("id", $idPipeline)

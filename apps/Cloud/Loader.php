@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Framework\App
 
     $this->isPremium = $premiumAccount->premiumAccountActivated();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^cloud\/?$/' => Controllers\Dashboard::class,
       '/^cloud\/api\/accept-legal-documents\/?$/' => Controllers\Api\AcceptLegalDocuments::class,
       '/^cloud\/api\/activate-premium-account\/?$/' => Controllers\Api\ActivatePremiumAccount::class,
@@ -45,15 +45,15 @@ class Loader extends \Hubleto\Framework\App
 
   public function onBeforeRender(): void
   {
-    if ($this->getAuthProvider()->getUserId() > 0) {
-      if (!str_starts_with($this->getRouter()->getRoute(), 'cloud')) {
-        if (!$this->getConfig()->getAsBool('legalDocumentsAccepted')) {
-          $this->getRouter()->redirectTo('cloud');
+    if ($this->authProvider()->getUserId() > 0) {
+      if (!str_starts_with($this->router()->getRoute(), 'cloud')) {
+        if (!$this->config()->getAsBool('legalDocumentsAccepted')) {
+          $this->router()->redirectTo('cloud');
         } elseif ($this->isPremium) {
           $premiumAccount = $this->getService(PremiumAccount::class);
           $subscriptionInfo = $premiumAccount->getSubscriptionInfo();
           if (!$subscriptionInfo['isActive']) {
-            $this->getRouter()->redirectTo('cloud');
+            $this->router()->redirectTo('cloud');
           }
         }
       }
@@ -82,7 +82,7 @@ class Loader extends \Hubleto\Framework\App
     if ($where == 'beforeSidebar') {
       if ($isTrialPeriod) {
         return '
-          <a class="btn btn-square bg-red-50 text-red-800" href="' . $this->getEnv()->projectUrl . '/cloud">
+          <a class="btn btn-square bg-red-50 text-red-800" href="' . $this->env()->projectUrl . '/cloud">
             <span class="text">' . $this->translate('Free trial expires in') . ' ' .$trialPeriodExpiresIn . ' ' . $this->translate('days') . '.</span>
           </a>
         ';

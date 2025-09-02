@@ -8,7 +8,7 @@ class TableImportCsv extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $csvData = $this->getRouter()->urlParamAsString('csvData');
+    $csvData = $this->router()->urlParamAsString('csvData');
     return [
       "status" => "success",
       "csvDataLength" => strlen($csvData),

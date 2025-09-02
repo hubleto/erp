@@ -81,13 +81,13 @@ class Project extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->urlParamAsInteger("idDeal") > 0) {
-      $query = $query->where($this->table . '.id_deal', $main->getRouter()->urlParamAsInteger("idDeal"));
+    if ($main->router()->urlParamAsInteger("idDeal") > 0) {
+      $query = $query->where($this->table . '.id_deal', $main->router()->urlParamAsInteger("idDeal"));
     }
     
-    $filters = $main->getRouter()->urlParamAsArray("filters");
-    if ($main->getRouter()->urlParamAsInteger("idDeal") > 0) {
-      $query = $query->whereIn($this->table . '.', $main->getRouter()->urlParamAsInteger("idDeal"));
+    $filters = $main->router()->urlParamAsArray("filters");
+    if ($main->router()->urlParamAsInteger("idDeal") > 0) {
+      $query = $query->whereIn($this->table . '.', $main->router()->urlParamAsInteger("idDeal"));
     }
 
     $query = Pipeline::applyPipelineStepFilter(

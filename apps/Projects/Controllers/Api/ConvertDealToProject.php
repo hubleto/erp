@@ -11,14 +11,14 @@ class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    if (!$this->getRouter()->isUrlParam("idDeal")) {
+    if (!$this->router()->isUrlParam("idDeal")) {
       return [
         "status" => "failed",
         "error" => "The deal for converting was not set"
       ];
     }
 
-    $idDeal = $this->getRouter()->urlParamAsInteger("idDeal");
+    $idDeal = $this->router()->urlParamAsInteger("idDeal");
 
     $mDeal = $this->getService(Deal::class);
     $mProject = $this->getService(Project::class);
@@ -41,8 +41,8 @@ class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
         "id_contact" => $deal->id_contact,
         "title" => $deal->title,
         "identifier" => $deal->identifier . ':' . ($projectsCount + 1),
-        "id_main_developer" => $this->getAuthProvider()->getUserId(),
-        "id_account_manager" => $this->getAuthProvider()->getUserId(),
+        "id_main_developer" => $this->authProvider()->getUserId(),
+        "id_account_manager" => $this->authProvider()->getUserId(),
         "id_pipeline" => $idPipeline,
         "id_pipeline_step" => $idPipelineStep,
         "is_closed" => false,

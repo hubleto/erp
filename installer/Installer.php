@@ -125,28 +125,28 @@ class Installer extends \Hubleto\Framework\Core
   public function createDatabase(): void
   {
 
-    $this->getConfig()->set('db_name', '');
-    $this->getConfig()->set('db_host', $this->dbHost);
-    $this->getConfig()->set('db_user', $this->dbUser);
-    $this->getConfig()->set('db_password', $this->dbPassword);
-    $this->getDb()->init();
+    $this->config()->set('db_name', '');
+    $this->config()->set('db_host', $this->dbHost);
+    $this->config()->set('db_user', $this->dbUser);
+    $this->config()->set('db_password', $this->dbPassword);
+    $this->db()->init();
 
-    $this->getDb()->execute("drop database if exists `{$this->dbName}`");
-    $this->getDb()->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
+    $this->db()->execute("drop database if exists `{$this->dbName}`");
+    $this->db()->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
 
-    $this->getConfig()->set('db_name', $this->dbName);
-    $this->getConfig()->set('db_codepage', "utf8mb4");
-    $this->getDb()->init();
+    $this->config()->set('db_name', $this->dbName);
+    $this->config()->set('db_codepage', "utf8mb4");
+    $this->db()->init();
 
   }
 
   public function initSmtp(): void
   {
-    $this->getConfig()->set('smtp_host', $this->smtpHost);
-    $this->getConfig()->set('smtp_port', $this->smtpPort);
-    $this->getConfig()->set('smtp_encryption', $this->smtpEncryption);
-    $this->getConfig()->set('smtp_login', $this->smtpLogin);
-    $this->getConfig()->set('smtp_password', $this->smtpPassword);
+    $this->config()->set('smtp_host', $this->smtpHost);
+    $this->config()->set('smtp_port', $this->smtpPort);
+    $this->config()->set('smtp_encryption', $this->smtpEncryption);
+    $this->config()->set('smtp_login', $this->smtpLogin);
+    $this->config()->set('smtp_password', $this->smtpPassword);
   }
 
   public function installBaseModels(): void
@@ -157,9 +157,9 @@ class Installer extends \Hubleto\Framework\Core
 
   public function installApps(int $round): void
   {
-    $this->getConfig()->set('premiumRepoFolder', $this->premiumRepoFolder);
+    $this->config()->set('premiumRepoFolder', $this->premiumRepoFolder);
     foreach ($this->appsToInstall as $appNamespace => $appConfig) {
-      $this->getAppManager()->installApp($round, $appNamespace, $appConfig, true);
+      $this->appManager()->installApp($round, $appNamespace, $appConfig, true);
     }
   }
 
@@ -190,8 +190,8 @@ class Installer extends \Hubleto\Framework\Core
     ])['id'];
 
     if ($this->adminPassword == '' && $this->smtpHost != '') {
-      $this->getRouter()->setUrlParam('login', $this->adminEmail);
-      $this->getAuthProvider()->forgotPassword();
+      $this->router()->setUrlParam('login', $this->adminEmail);
+      $this->authProvider()->forgotPassword();
     }
   }
 
@@ -203,7 +203,7 @@ class Installer extends \Hubleto\Framework\Core
     $configEnv = str_replace('{{ secureFolder }}', $this->secureFolder, $configEnv);
     $configEnv = str_replace('{{ projectUrl }}', $this->projectUrl, $configEnv);
     $configEnv = str_replace('{{ assetsUrl }}', $this->assetsUrl, $configEnv);
-    $configEnv = str_replace('{{ dbHost }}', $this->getConfig()->getAsString('db_host'), $configEnv);
+    $configEnv = str_replace('{{ dbHost }}', $this->config()->getAsString('db_host'), $configEnv);
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
     $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);
     $configEnv = str_replace('{{ dbName }}', $this->dbName, $configEnv);
@@ -298,7 +298,7 @@ class Installer extends \Hubleto\Framework\Core
 
   public function installDefaultPermissions(): void
   {
-    $apps = $this->getAppManager()->getEnabledApps();
+    $apps = $this->appManager()->getEnabledApps();
     array_walk($apps, function ($apps) {
       $apps->installDefaultPermissions();
     });

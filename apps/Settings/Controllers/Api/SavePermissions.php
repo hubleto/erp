@@ -10,10 +10,10 @@ class SavePermissions extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $roleId = $this->getRouter()->urlParamAsInteger("roleId");
-    $rolePermissions = $this->getRouter()->urlParamAsArray("permissions");
-    $roleTitle = $this->getRouter()->urlParamAsString("roleTitle");
-    $grantAll = $this->getRouter()->urlParamAsBool("grantAll");
+    $roleId = $this->router()->urlParamAsInteger("roleId");
+    $rolePermissions = $this->router()->urlParamAsArray("permissions");
+    $roleTitle = $this->router()->urlParamAsString("roleTitle");
+    $grantAll = $this->router()->urlParamAsBool("grantAll");
 
     if ($roleId > 0) {
       try {

@@ -7,20 +7,20 @@ class PremiumAccount extends \Hubleto\Framework\Core
 
   public function getAccountUid()
   {
-    $accountUid = $this->getConfig()->getAsString('cloud/accountUid');
+    $accountUid = $this->config()->getAsString('cloud/accountUid');
     if (empty($accountUid)) {
       $accountUid = \Hubleto\Framework\Helper::generateUuidV4();
-      $this->getConfig()->save('cloud/accountUid', $accountUid);
+      $this->config()->save('cloud/accountUid', $accountUid);
     }
     return $accountUid;
   }
 
   public function getPaymentVariableSymbol()
   {
-    $paymentVariableSymbol = $this->getConfig()->getAsString('cloud/paymentVariableSymbol');
+    $paymentVariableSymbol = $this->config()->getAsString('cloud/paymentVariableSymbol');
     if (empty($paymentVariableSymbol)) {
       $paymentVariableSymbol = '3' . date('y') . str_pad(rand(0, 999), 3, STR_PAD_LEFT) . str_pad(rand(0, 9999), 4, STR_PAD_LEFT);
-      $this->getConfig()->save('cloud/paymentVariableSymbol', $paymentVariableSymbol);
+      $this->config()->save('cloud/paymentVariableSymbol', $paymentVariableSymbol);
     }
     return $paymentVariableSymbol;
   }
@@ -42,9 +42,9 @@ class PremiumAccount extends \Hubleto\Framework\Core
   {
     $trialPeriodExpiresIn = 0;
 
-    $premiumAccountSince = $this->getConfig()->getAsString('cloud/premiumAccountSince');
-    $freeTrialPeriodUntil = $this->getConfig()->getAsString('cloud/freeTrialPeriodUntil');
-    $isTrialPeriod = $this->getConfig()->getAsBool('cloud/isTrialPeriod');
+    $premiumAccountSince = $this->config()->getAsString('cloud/premiumAccountSince');
+    $freeTrialPeriodUntil = $this->config()->getAsString('cloud/freeTrialPeriodUntil');
+    $isTrialPeriod = $this->config()->getAsBool('cloud/isTrialPeriod');
 
     if (!empty($premiumAccountSince)) {
       $trialPeriodExpiresIn = floor((strtotime($freeTrialPeriodUntil) - time()) / 3600 / 24);
@@ -60,8 +60,8 @@ class PremiumAccount extends \Hubleto\Framework\Core
 
   public function getSubscriptionInfo(): array
   {
-    $subscriptionRenewalActive = $this->getConfig()->getAsBool('cloud/subscriptionRenewalActive');
-    $subscriptionActiveUntil = $this->getConfig()->getAsString('cloud/subscriptionActiveUntil');
+    $subscriptionRenewalActive = $this->config()->getAsBool('cloud/subscriptionRenewalActive');
+    $subscriptionActiveUntil = $this->config()->getAsString('cloud/subscriptionActiveUntil');
     $subscriptionActive = strtotime($subscriptionActiveUntil) > time();
 
     return [
@@ -93,7 +93,7 @@ class PremiumAccount extends \Hubleto\Framework\Core
 
     // count enabled non-community apps
     $paidApps = 0;
-    foreach ($this->getAppManager()->getEnabledApps() as $app) {
+    foreach ($this->appManager()->getEnabledApps() as $app) {
       if ($app->manifest['appType'] != \Hubleto\Framework\App::APP_TYPE_COMMUNITY) {
         $paidApps++;
       }
@@ -139,7 +139,7 @@ class PremiumAccount extends \Hubleto\Framework\Core
     }
 
     if (is_array($lastCreditData) && $lastCreditData['credit'] > 0 && $currentCredit <= 0) {
-      $this->getConfig()->save('cloud/creditExhaustedOn', date('Y-m-d'));
+      $this->config()->save('cloud/creditExhaustedOn', date('Y-m-d'));
     }
 
     $mCredit->record->recordCreate(['datetime_recalculated' => date('Y-m-d H:i:s'), 'credit' => $currentCredit]);
@@ -191,7 +191,7 @@ class PremiumAccount extends \Hubleto\Framework\Core
     if ($log['max_active_users'] === null || $log['max_paid_apps'] === null) {
       // count enabled non-community apps
       $paidApps = 0;
-      foreach ($this->getAppManager()->getEnabledApps() as $app) {
+      foreach ($this->appManager()->getEnabledApps() as $app) {
         if ($app->manifest['appType'] != \Hubleto\Framework\App::APP_TYPE_COMMUNITY) {
           $paidApps++;
         }
@@ -242,32 +242,32 @@ class PremiumAccount extends \Hubleto\Framework\Core
 
   public function activatePremiumAccount(): void
   {
-    $this->getConfig()->save('cloud/premiumAccountSince', date('Y-m-d H:i:s'));
-    $this->getConfig()->save('cloud/isTrialPeriod', '1');
-    $this->getConfig()->save('cloud/freeTrialPeriodUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
+    $this->config()->save('cloud/premiumAccountSince', date('Y-m-d H:i:s'));
+    $this->config()->save('cloud/isTrialPeriod', '1');
+    $this->config()->save('cloud/freeTrialPeriodUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
 
     $this->activateSubscriptionRenewal();
   }
 
   public function activateSubscriptionRenewal(): void
   {
-    $this->getConfig()->save('cloud/subscriptionRenewalActive', '1');
+    $this->config()->save('cloud/subscriptionRenewalActive', '1');
     $this->extendSubscriptionByOneMonth();
   }
 
   public function deactivateSubscriptionRenewal(): void
   {
-    $this->getConfig()->save('cloud/subscriptionRenewalActive', '0');
+    $this->config()->save('cloud/subscriptionRenewalActive', '0');
   }
 
   public function extendSubscriptionByOneMonth()
   {
-    $this->getConfig()->save('cloud/subscriptionActiveUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
+    $this->config()->save('cloud/subscriptionActiveUntil', date('Y-m-d H:i:s', strtotime('+1 month')));
   }
 
   public function premiumAccountActivated(): bool
   {
-    $activated = !empty($this->getConfig()->getAsString('cloud/premiumAccountSince'));
+    $activated = !empty($this->config()->getAsString('cloud/premiumAccountSince'));
     if (!$activated) {
       $premiumInfo = $this->getPremiumInfo();
       $activated = $premiumInfo['activeUsers'] > 1 || $premiumInfo['paidApps'] > 0;

@@ -19,7 +19,7 @@ class Home extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $dashboardsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Dashboards\Loader::class);
+    $dashboardsApp = $this->appManager()->getApp(\Hubleto\App\Community\Dashboards\Loader::class);
     if ($dashboardsApp) {
       $mDashboard = $this->getModel(\Hubleto\App\Community\Dashboards\Models\Dashboard::class);
 

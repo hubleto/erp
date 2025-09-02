@@ -6,7 +6,7 @@ class MarkAsRead extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idMail = $this->getRouter()->urlParamAsInteger('idMail');
+    $idMail = $this->router()->urlParamAsInteger('idMail');
     $mMail = $this->getModel(\Hubleto\App\Community\Mail\Models\Mail::class);
     $mMail->record->find($idMail)->update(['datetime_read' => date('Y-m-d H:i:s')]);
     return ['success' => true];

@@ -16,7 +16,7 @@ class Document extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
-      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setDefaultValue($this->getRouter()->urlParamAsInteger('idFolder'))->setProperty('defaultVisibility', true),
+      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setDefaultValue($this->router()->urlParamAsInteger('idFolder'))->setProperty('defaultVisibility', true),
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired()->setProperty('defaultVisibility', true),
       'file' => (new File($this, $this->translate('File')))->setProperty('defaultVisibility', true),
       'hyperlink' => (new Varchar($this, $this->translate('File Link')))->setReactComponent('InputHyperlink'),
@@ -49,8 +49,8 @@ class Document extends \Hubleto\Erp\Model
     $document = (array) $this->record->find($id)->toArray();
 
     $localFilename = ltrim((string) $document["file"], "./");
-    if (file_exists($this->getConfig()->getAsString('uploadFolder') . "/" . $localFilename)) {
-      unlink($this->getConfig()->getAsString('uploadFolder') . "/" . $localFilename);
+    if (file_exists($this->config()->getAsString('uploadFolder') . "/" . $localFilename)) {
+      unlink($this->config()->getAsString('uploadFolder') . "/" . $localFilename);
     }
 
     return $id;

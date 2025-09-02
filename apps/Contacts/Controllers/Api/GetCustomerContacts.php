@@ -15,13 +15,13 @@ class GetCustomerContacts extends \Hubleto\Erp\Controllers\ApiController
 
     try {
       $contacts = $mContact->record->selectRaw("*, CONCAT(first_name, ' ', last_name) as _LOOKUP");
-      if ($this->getRouter()->urlParamAsInteger("id_customer") > 0) {
-        $contacts = $contacts->where("id_customer", (int) $this->getRouter()->urlParamAsInteger("id_customer"));
+      if ($this->router()->urlParamAsInteger("id_customer") > 0) {
+        $contacts = $contacts->where("id_customer", (int) $this->router()->urlParamAsInteger("id_customer"));
       }
-      if (strlen($this->getRouter()->urlParamAsString("search")) > 1) {
+      if (strlen($this->router()->urlParamAsString("search")) > 1) {
         $contacts->whereRaw(
           "CONCAT(first_name, ' ', last_name) LIKE ?",
-          [ '%".$this->getRouter()->urlParamAsString("search")."%' ]
+          [ '%".$this->router()->urlParamAsString("search")."%' ]
         );
       }
 

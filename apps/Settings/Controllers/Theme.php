@@ -18,10 +18,10 @@ class Theme extends \Hubleto\Erp\Controller
 
     $themes = ['default', 'grayscale', 'pink'];
 
-    $set = $this->getRouter()->urlParamAsString('set');
+    $set = $this->router()->urlParamAsString('set');
     if (!empty($set) && in_array($set, $themes)) {
-      $this->getConfig()->save('uiTheme', $set);
-      $this->getRouter()->redirectTo($this->getRouter()->getRoute());
+      $this->config()->save('uiTheme', $set);
+      $this->router()->redirectTo($this->router()->getRoute());
     }
 
     $this->viewParams['themes'] = $themes;

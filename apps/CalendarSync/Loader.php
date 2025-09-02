@@ -22,14 +22,14 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^settings\/calendar-sources\/google\/?$/' => Google::class,
       '/^settings\/calendar-sources\/?$/' => Home::class,
       '/^settings\/calendar-sources\/ics\/?$/' => Ics::class,
     ]);
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Calendar sources'),
       'icon' => 'fas fa-calendar',

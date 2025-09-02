@@ -15,7 +15,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^invoices\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
       '/^invoices(\/(?<recordId>\d+))?\/?$/' => Controllers\Invoices::class,
     ]);

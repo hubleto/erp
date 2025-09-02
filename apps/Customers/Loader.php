@@ -16,7 +16,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^customers(\/(?<recordId>\d+))?\/?$/' => Controllers\Customers::class,
       '/^customers\/add\/?$/' => ['controller' => Controllers\Customers::class, 'vars' => ['recordId' => -1]],
       '/^customers\/settings\/?$/' => Controllers\Settings::class,
@@ -35,7 +35,7 @@ class Loader extends \Hubleto\Framework\App
     $calendarManager->addCalendar($this, 'customers', $this->configAsString('calendarColor'), Calendar::class);
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Customer Tags'),
       'icon' => 'fas fa-tags',

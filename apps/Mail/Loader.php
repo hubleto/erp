@@ -18,7 +18,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^mail\/?$/' => Controllers\Mailboxes::class,
       '/^mail\/accounts\/?$/' => Controllers\Accounts::class,
       '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
@@ -29,7 +29,7 @@ class Loader extends \Hubleto\Framework\App
       '/^mail\/api\/mark-as-unread\/?$/' => Controllers\Api\MarkAsUnread::class,
     ]);
 
-    $this->getCronManager()->addCron(Crons\GetMails::class);
+    $this->cronManager()->addCron(Crons\GetMails::class);
 
     $this->templateVariables = $this->collectExtendibles('MailTemplateVariables');
   }
@@ -77,7 +77,7 @@ class Loader extends \Hubleto\Framework\App
     string $color = '',
     int $priority = 0
   ): array {
-    $user = $this->getAuthProvider()->getUser();
+    $user = $this->authProvider()->getUser();
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 

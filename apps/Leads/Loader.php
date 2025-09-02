@@ -16,7 +16,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^leads(\/(?<recordId>\d+))?\/?$/' => Controllers\Leads::class,
       '/^leads\/settings\/?$/' => Controllers\Settings::class,
       '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
@@ -33,7 +33,7 @@ class Loader extends \Hubleto\Framework\App
     $this->addSearchSwitch('l', 'leads');
     $this->addSearchSwitch('t', 'taskleads');
 
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Lead Levels'),
       'icon' => 'fas fa-layer-group',

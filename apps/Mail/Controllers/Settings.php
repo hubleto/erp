@@ -16,11 +16,11 @@ class Settings extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $settingsChanged = $this->getRouter()->urlParamAsBool('settingsChanged');
+    $settingsChanged = $this->router()->urlParamAsBool('settingsChanged');
 
     if ($settingsChanged) {
-      $smtpHost = $this->getRouter()->urlParamAsString('smtpHost');
-      $mailApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Mail\Loader::class);
+      $smtpHost = $this->router()->urlParamAsString('smtpHost');
+      $mailApp = $this->appManager()->getApp(\Hubleto\App\Community\Mail\Loader::class);
       $mailApp->setConfigAsString('smtpHost', $smtpHost);
       $mailApp->saveConfig('smtpHost', $smtpHost);
 

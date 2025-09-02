@@ -31,7 +31,7 @@ class ProjectOrder extends \Hubleto\Erp\Model
     $description->ui['title'] = 'Order Projects';
     $description->ui["addButtonText"] = $this->translate("Add project");
 
-    if ($this->getRouter()->urlParamAsInteger('idOrder') > 0) {
+    if ($this->router()->urlParamAsInteger('idOrder') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

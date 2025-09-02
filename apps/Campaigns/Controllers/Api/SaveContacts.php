@@ -9,8 +9,8 @@ class SaveContacts extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idCampaign = $this->getRouter()->urlParamAsInteger('idCampaign');
-    $contactIds = $this->getRouter()->urlParamAsArray('contactIds');
+    $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
+    $contactIds = $this->router()->urlParamAsArray('contactIds');
 
     $mContact = $this->getService(Contact::class);
     $mCampaignContact = $this->getService(CampaignContact::class);

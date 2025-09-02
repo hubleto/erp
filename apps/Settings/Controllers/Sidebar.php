@@ -18,8 +18,8 @@ class Sidebar extends \Hubleto\Erp\Controller
 
     $installedApps = array_merge($appManager->getEnabledApps(), $appManager->getDisabledApps());
 
-    if ($this->getRouter()->urlParamAsBool("save")) {
-      $appSidebarSettings = $this->getRouter()->urlParamAsArray('app');
+    if ($this->router()->urlParamAsBool("save")) {
+      $appSidebarSettings = $this->router()->urlParamAsArray('app');
 
       foreach ($appSidebarSettings as $rootUrlSlug => $sidebarOrder) {
         foreach ($installedApps as $appNamespace => $app) {

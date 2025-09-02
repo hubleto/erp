@@ -8,12 +8,12 @@ class ResetAll extends \Hubleto\Erp\Cli\Agent\Command
   {
     \Hubleto\Terminal::cyan("Reinstalling all apps...\n");
 
-    require_once($this->getEnv()->projectFolder . "/ConfigEnv.php");
+    require_once($this->env()->projectFolder . "/ConfigEnv.php");
 
-    foreach ($this->getAppManager()->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
+    foreach ($this->appManager()->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
       try {
-        if (!$this->getAppManager()->isAppInstalled($appNamespace)) {
-          $this->getAppManager()->installApp(1, $appNamespace, []);
+        if (!$this->appManager()->isAppInstalled($appNamespace)) {
+          $this->appManager()->installApp(1, $appNamespace, []);
         }
       } catch (\Throwable $e) {
         \Hubleto\Terminal::red($e->getMessage() . "\n");

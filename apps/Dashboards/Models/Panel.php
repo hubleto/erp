@@ -20,7 +20,7 @@ class Panel extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class))
-        ->setRequired()->setReadonly()->setDefaultValue($this->getRouter()->urlParamAsInteger('idDashboard')),
+        ->setRequired()->setReadonly()->setDefaultValue($this->router()->urlParamAsInteger('idDashboard')),
       'board_url_slug' => (new Varchar($this, $this->translate('Board')))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'configuration' => (new Json($this, $this->translate('Configuration'))),

@@ -9,8 +9,8 @@ class LogActivity extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idDeal = $this->getRouter()->urlParamAsInteger("idDeal");
-    $activity = $this->getRouter()->urlParamAsString("activity");
+    $idDeal = $this->router()->urlParamAsInteger("idDeal");
+    $activity = $this->router()->urlParamAsString("activity");
     if ($idDeal > 0 && $activity != '') {
       $mDeal = $this->getService(Deal::class);
       $deal = $mDeal->record->find($idDeal)->first()?->toArray();
@@ -24,7 +24,7 @@ class LogActivity extends \Hubleto\Erp\Controllers\ApiController
           'time_start' => date('H:i:s'),
           'all_day' => true,
           'completed' => true,
-          'id_owner' => $this->getAuthProvider()->getUserId(),
+          'id_owner' => $this->authProvider()->getUserId(),
         ]);
       }
     }

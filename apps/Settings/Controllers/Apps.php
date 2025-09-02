@@ -16,10 +16,10 @@ class Apps extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $installApp = $this->getRouter()->urlParamAsString('installApp');
-    $disableApp = $this->getRouter()->urlParamAsString('disableApp');
-    $enableApp = $this->getRouter()->urlParamAsString('enableApp');
-    $findApp = $this->getRouter()->urlParamAsString('findApp');
+    $installApp = $this->router()->urlParamAsString('installApp');
+    $disableApp = $this->router()->urlParamAsString('disableApp');
+    $enableApp = $this->router()->urlParamAsString('enableApp');
+    $findApp = $this->router()->urlParamAsString('findApp');
 
     $appManager = $this->getAppManager();
 
@@ -27,17 +27,17 @@ class Apps extends \Hubleto\Erp\Controller
       $appManager->installApp(1, $installApp, [], true);
       $appManager->installApp(2, $installApp, [], true);
       $appManager->installApp(3, $installApp, [], true);
-      $this->getRouter()->redirectTo('');
+      $this->router()->redirectTo('');
     }
 
     if (!empty($disableApp) && $appManager->isAppInstalled($disableApp)) {
       $appManager->disableApp($disableApp);
-      $this->getRouter()->redirectTo('');
+      $this->router()->redirectTo('');
     }
 
     if (!empty($enableApp) && $appManager->isAppInstalled($enableApp)) {
       $appManager->enableApp($enableApp);
-      $this->getRouter()->redirectTo('');
+      $this->router()->redirectTo('');
     }
 
     $installedApps = array_merge($appManager->getEnabledApps(), $appManager->getDisabledApps());

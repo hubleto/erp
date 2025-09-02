@@ -9,7 +9,7 @@ class DailyDigest extends \Hubleto\Erp\Cron
   public function run(): void
   {
     $emailsSent = [];
-    $users = $this->getAuthProvider()->getActiveUsers();
+    $users = $this->authProvider()->getActiveUsers();
     foreach ($users as $user) {
 
       /** @var \Hubleto\App\Community\Notifications\Digest $digest */
@@ -17,13 +17,13 @@ class DailyDigest extends \Hubleto\Erp\Cron
       $digestHtml = $digest->getDailyDigestForUser($user);
 
       if (!empty($digestHtml)) {
-        if ($this->getEmailProvider()->send($user['email'], 'Hubleto: Your Daily Digest', $digestHtml)) {
+        if ($this->emailProvider()->send($user['email'], 'Hubleto: Your Daily Digest', $digestHtml)) {
           $emailsSent[] = $user['email'];
         }
       }
     }
 
-    $this->getLogger()->info('Daily digest sent to: ' . join(', ', $emailsSent));
+    $this->logger()->info('Daily digest sent to: ' . join(', ', $emailsSent));
   }
 
 }

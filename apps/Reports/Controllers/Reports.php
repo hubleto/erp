@@ -15,7 +15,7 @@ class Reports extends \Hubleto\Erp\Controller
   {
 
     // Uncomment this if you want your controller be hookable
-    $this->getHookManager()->run('controller:prepare-view-start', [$this]);
+    $this->hookManager()->run('controller:prepare-view-start', [$this]);
 
     parent::prepareView();
 
@@ -26,7 +26,7 @@ class Reports extends \Hubleto\Erp\Controller
     $this->setView('@Hubleto:App:Community:Reports/Reports.twig');
 
     // Uncomment this if you want your controller be hookable
-    $this->getHookManager()->run('controller:prepare-view-end', [$this]);
+    $this->hookManager()->run('controller:prepare-view-end', [$this]);
   }
 
 }

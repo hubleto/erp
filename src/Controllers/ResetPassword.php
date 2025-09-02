@@ -16,16 +16,16 @@ class ResetPassword extends \Hubleto\Erp\Controller
     parent::prepareView();
 
     $mToken = $this->getService(Token::class);
-    if ($this->getRouter()->urlParamAsString('token') == '' || $mToken->record
+    if ($this->router()->urlParamAsString('token') == '' || $mToken->record
         ->where('token', $_GET['token'])
         ->where('valid_to', '>', date('Y-m-d H:i:s'))
         ->where('type', 'reset-password')
         ->count() <= 0) {
-      $this->getRouter()->redirectTo('');
+      $this->router()->redirectTo('');
     }
 
-    $password = $this->getRouter()->urlParamAsString('password');
-    $passwordConfirm = $this->getRouter()->urlParamAsString('password_confirm');
+    $password = $this->router()->urlParamAsString('password');
+    $passwordConfirm = $this->router()->urlParamAsString('password_confirm');
 
     if (
       $_SERVER['REQUEST_METHOD'] === 'POST'
@@ -42,9 +42,9 @@ class ResetPassword extends \Hubleto\Erp\Controller
         $this->setView('@hubleto-main/ResetPassword.twig');
         return;
       } else {
-        $this->getAuthProvider()->resetPassword();
+        $this->authProvider()->resetPassword();
 
-        $this->getRouter()->redirectTo('');
+        $this->router()->redirectTo('');
       }
     }
 

@@ -6,7 +6,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = $this->getAppManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+    $appNamespace = $this->appManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $model = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
     $noPrompt = (bool) ($this->arguments[6] ?? false);
@@ -15,7 +15,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
     $modelPluralForm = $model . 's';
     $modelPluralFormKebab = \Hubleto\Framework\Helper::pascalToKebab($modelPluralForm);
 
-    $this->getAppManager()->init();
+    $this->appManager()->init();
 
     if (empty($appNamespace)) {
       throw new \Exception("<appNamespace> not provided.");
@@ -24,7 +24,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
       throw new \Exception("<model> not provided.");
     }
 
-    $app = $this->getAppManager()->getApp($appNamespace);
+    $app = $this->appManager()->getApp($appNamespace);
 
     if (!$app) {
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
@@ -35,7 +35,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     $tplFolder = __DIR__ . '/../../Templates/snippets';
-    $this->getRenderer()->addNamespace($tplFolder, 'snippets');
+    $this->renderer()->addNamespace($tplFolder, 'snippets');
 
     $tplVars = [
       'appNamespace' => $appNamespace,
@@ -50,8 +50,8 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
     if (!is_dir($app->srcFolder . '/Models/RecordManagers')) {
       mkdir($app->srcFolder . '/Models/RecordManagers');
     }
-    file_put_contents($app->srcFolder . '/Models/' . $model . '.php', $this->getRenderer()->renderView('@snippets/Model.php.twig', $tplVars));
-    file_put_contents($app->srcFolder . '/Models/RecordManagers/' . $model . '.php', $this->getRenderer()->renderView('@snippets/ModelRecordManager.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Models/' . $model . '.php', $this->renderer()->renderView('@snippets/Model.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Models/RecordManagers/' . $model . '.php', $this->renderer()->renderView('@snippets/ModelRecordManager.php.twig', $tplVars));
 
     $codeInstallModel = [
       "\$this->getModel(Models\\{$model}::class)->dropTableIfExists()->install();"

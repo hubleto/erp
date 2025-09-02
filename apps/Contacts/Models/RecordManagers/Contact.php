@@ -37,8 +37,8 @@ class Contact extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->urlParamAsInteger("idCustomer") > 0) {
-      $query = $query->where($this->table . '.id_customer', $main->getRouter()->urlParamAsInteger("idCustomer"));
+    if ($main->router()->urlParamAsInteger("idCustomer") > 0) {
+      $query = $query->where($this->table . '.id_customer', $main->router()->urlParamAsInteger("idCustomer"));
     }
 
     $query = $query->selectRaw("
@@ -147,7 +147,7 @@ class Contact extends \Hubleto\Erp\RecordManager
   public function prepareLookupQuery(string $search): mixed
   {
     $main = \Hubleto\Erp\Loader::getGlobalApp();
-    $idCustomer = $main->getRouter()->urlParamAsInteger('idCustomer');
+    $idCustomer = $main->router()->urlParamAsInteger('idCustomer');
 
     $query = parent::prepareLookupQuery($search);
     if ($idCustomer > 0) {

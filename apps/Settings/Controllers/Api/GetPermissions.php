@@ -19,7 +19,7 @@ class GetPermissions extends \Hubleto\Erp\Controllers\ApiController
     $allPermissions = [];
     $sortedAllPermissions = [];
     $rolePermissions = [];
-    $roleId = $this->getRouter()->urlParamAsInteger("roleId");
+    $roleId = $this->router()->urlParamAsInteger("roleId");
 
     try {
       $mPermission = $this->getService(Permission::class);

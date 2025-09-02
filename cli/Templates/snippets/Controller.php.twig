@@ -26,7 +26,7 @@ class {{ controller }} extends \Hubleto\Erp\Controller
 
     // Uncomment this if you want your controller be hookable
     // For more details see http://localhost/hubleto/developer/v0/docs/hooks
-    // $this->getHookManager()->run('controller:prepare-view-start', [$this]);
+    // $this->hookManager()->run('controller:prepare-view-start', [$this]);
 
     parent::prepareView();
 
@@ -43,7 +43,7 @@ class {{ controller }} extends \Hubleto\Erp\Controller
 
     // Uncomment this if you want your controller be hookable
     // For more details see http://localhost/hubleto/developer/v0/docs/hooks
-    // $this->getHookManager()->run('controller:prepare-view-end', [$this]);
+    // $this->hookManager()->run('controller:prepare-view-end', [$this]);
   }
 
 }

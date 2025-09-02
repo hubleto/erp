@@ -68,7 +68,7 @@ class Lead extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true),
       'title' => (new Varchar($this, $this->translate('Specific subject (if any)')))->setCssClass('font-bold'),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->getRouter()->urlParamAsInteger('idCustomer')),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer')),
       'virt_email' => (new Virtual($this, $this->translate('Email')))->setProperty('defaultVisibility', true)
         ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1")
       ,
@@ -96,8 +96,8 @@ class Lead extends \Hubleto\Erp\Model
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setProperty('defaultVisibility', true)->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getAuthProvider()->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getAuthProvider()->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId()),
       'id_team' => (new Lookup($this, $this->translate('Team'), Team::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
@@ -166,12 +166,12 @@ class Lead extends \Hubleto\Erp\Model
       'fLeadOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
     ];
 
-    if ($this->getRouter()->urlParamAsBool("showArchive")) {
+    if ($this->router()->urlParamAsBool("showArchive")) {
       $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
-        "canDelete" => $this->getPermissionsManager()->granted($this->fullName . ':Delete')
+        "canDelete" => $this->permissionsManager()->granted($this->fullName . ':Delete')
       ];
     } else {
       $description->ui['addButtonText'] = $this->translate('Add lead');
@@ -336,7 +336,7 @@ class Lead extends \Hubleto\Erp\Model
     $newLead['id_pipeline_step'] = $idPipelineStep;
 
     if (empty($newLead['identifier'])) {
-      $newLead["identifier"] = $this->getAppManager()->getApp(\Hubleto\App\Community\Leads\Loader::class)->configAsString('leadPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
+      $newLead["identifier"] = $this->appManager()->getApp(\Hubleto\App\Community\Leads\Loader::class)->configAsString('leadPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
     }
 
     $this->record->recordUpdate($newLead);

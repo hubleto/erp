@@ -34,7 +34,7 @@ class OrderDocument extends \Hubleto\Erp\Model
     $description->ui['title'] = 'Order Documents';
     $description->ui["addButtonText"] = $this->translate("Add document");
 
-    if ($this->getRouter()->urlParamAsInteger('idOrder') > 0) {
+    if ($this->router()->urlParamAsInteger('idOrder') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

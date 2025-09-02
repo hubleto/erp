@@ -11,14 +11,14 @@ class CreateFromDeal extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    if (!$this->getRouter()->isUrlParam("idDeal")) {
+    if (!$this->router()->isUrlParam("idDeal")) {
       return [
         "status" => "failed",
         "error" => "The deal for converting was not set"
       ];
     }
 
-    $idDeal = $this->getRouter()->urlParamAsInteger("idDeal");
+    $idDeal = $this->router()->urlParamAsInteger("idDeal");
 
     $mDeal = $this->getService(Deal::class);
     $mOrder = $this->getService(Order::class);

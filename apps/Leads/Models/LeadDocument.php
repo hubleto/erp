@@ -37,7 +37,7 @@ class LeadDocument extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    if ($this->getRouter()->urlParamAsInteger('idLead') > 0) {
+    if ($this->router()->urlParamAsInteger('idLead') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

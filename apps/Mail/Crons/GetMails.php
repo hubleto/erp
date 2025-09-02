@@ -35,7 +35,7 @@ class GetMails extends \Hubleto\Erp\Cron
     $mMail = $this->getService(Mail::class);
 
     foreach ($accounts as $account) {
-      $this->getLogger()->info('GetMails: checking account ' . $account['name']);
+      $this->logger()->info('GetMails: checking account ' . $account['name']);
       $localMailboxes = Helper::keyBy('name', $mMailbox->record->where('id_account', $account['id'])->get()->toArray());
 
       $server = new Server(
@@ -51,7 +51,7 @@ class GetMails extends \Hubleto\Erp\Cron
       $imapMailboxes = $connection->getMailboxes();
 
       foreach ($imapMailboxes as $imapMailbox) {
-        $this->getLogger()->info('GetMails: mailbox ' . $account['name'] . ' -> ' . $imapMailbox->getName());
+        $this->logger()->info('GetMails: mailbox ' . $account['name'] . ' -> ' . $imapMailbox->getName());
 
         // Skip container-only mailboxes
         // @see https://secure.php.net/manual/en/function.imap-getmailboxes.php
@@ -90,13 +90,13 @@ class GetMails extends \Hubleto\Erp\Cron
           $mailId = $message->getId();
           $mailHeaders = $message->getHeaders();
 
-          $this->getLogger()->info('GetMails: found mail ' . $mailNumber . ' ' . $mailId);
+          $this->logger()->info('GetMails: found mail ' . $mailNumber . ' ' . $mailId);
 
           if (
             !in_array($mailNumber, $mailNumbers)
             && !in_array($mailId, $mailIds)
           ) {
-            $this->getLogger()->info('GetMails: creating mail in database');
+            $this->logger()->info('GetMails: creating mail in database');
             $mMail->record->recordCreate([
               'id_mailbox' => $localMailbox['id'],
               'mail_id' => $mailId,

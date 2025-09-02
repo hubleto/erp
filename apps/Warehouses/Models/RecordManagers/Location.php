@@ -25,12 +25,12 @@ class Location extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->urlParamAsInteger("idWarehouse") > 0) {
-      $query = $query->where($this->table . '.id_warehouse', $main->getRouter()->urlParamAsInteger("idWarehouse"));
+    if ($main->router()->urlParamAsInteger("idWarehouse") > 0) {
+      $query = $query->where($this->table . '.id_warehouse', $main->router()->urlParamAsInteger("idWarehouse"));
     }
 
     // Uncomment and modify these lines if you want to apply default filters to your model.
-    // $filters = $main->getRouter()->urlParamAsArray("filters");
+    // $filters = $main->router()->urlParamAsArray("filters");
     // if (isset($filters["fArchive"]) && $filters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
     // else $query = $query->where("customers.is_active", true);
 

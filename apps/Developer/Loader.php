@@ -15,7 +15,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^developer\/?$/' => Controllers\Dashboard::class,
       '/^developer\/db-updates\/?$/' => Controllers\DbUpdates::class,
       '/^developer\/form-designer\/?$/' => Controllers\FormDesigner::class,

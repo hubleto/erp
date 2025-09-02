@@ -10,12 +10,12 @@ class Desktop extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $appsInSidebar = $this->getAppManager()->getEnabledApps();
+    $appsInSidebar = $this->appManager()->getEnabledApps();
     $activatedApp = null;
 
     foreach ($appsInSidebar as $appNamespace => $app) {
       if (
-        !$this->getPermissionsManager()->isAppPermittedForActiveUser($app)
+        !$this->permissionsManager()->isAppPermittedForActiveUser($app)
         || $app->configAsInteger('sidebarOrder') <= 0
       ) {
         unset($appsInSidebar[$appNamespace]);
@@ -26,7 +26,7 @@ class Desktop extends \Hubleto\Erp\Controller
     }
 
     if ($activatedApp === null) {
-      $activatedApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Desktop\Loader::class);
+      $activatedApp = $this->appManager()->getApp(\Hubleto\App\Community\Desktop\Loader::class);
     }
 
     uasort($appsInSidebar, function ($a, $b) {
@@ -37,7 +37,7 @@ class Desktop extends \Hubleto\Erp\Controller
 
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
     $this->viewParams['activatedApp'] = $activatedApp;
-    $this->viewParams['sidebarGroups'] = $this->getConfig()->getAsArray('sidebarGroups', [
+    $this->viewParams['sidebarGroups'] = $this->config()->getAsArray('sidebarGroups', [
       'addressbook' => [ 'title' => $this->translate('Addressbook'), 'icon' => 'fas fa-id-card-clip' ],
       'calendar' => [ 'title' => $this->translate('Calendar'), 'icon' => 'fas fa-calendar' ],
       // 'productivity' => [ 'title' => $this->translate('Productivity'), 'icon' => 'fas fa-list-check' ],
@@ -59,7 +59,7 @@ class Desktop extends \Hubleto\Erp\Controller
       'custom' => [ 'title' => $this->translate('Custom'), 'icon' => 'fas fa-puzzle-piece' ],
     ]);
 
-    $this->viewParams['availableLanguages'] = $this->getConfig()->getAsArray('availableLanguages', [
+    $this->viewParams['availableLanguages'] = $this->config()->getAsArray('availableLanguages', [
       "en" => [ "flagImage" => "en.jpg", "name" => "English" ],
       "de" => [ "flagImage" => "de.jpg", "name" => "Deutsch" ],
       "es" => [ "flagImage" => "es.jpg", "name" => "Español" ],

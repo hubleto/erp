@@ -15,13 +15,13 @@ class DbUpdates extends \Hubleto\Erp\Controller
   public function getNecessaryUpdates(): array
   {
     $necessaryUpdates = [];
-    $apps = $this->getAppManager()->getEnabledApps();
+    $apps = $this->appManager()->getEnabledApps();
 
-    $tmpTables = $this->getDb()->fetchAll("show tables");
+    $tmpTables = $this->db()->fetchAll("show tables");
     $tables = [];
     foreach ($tmpTables as $tmp) {
       $tmpTable = reset($tmp);
-      $tmpColumns = $this->getDb()->fetchAll("show columns from `{$tmpTable}`");
+      $tmpColumns = $this->db()->fetchAll("show columns from `{$tmpTable}`");
       foreach ($tmpColumns as $tmpColumn) {
         $tables[$tmpTable][$tmpColumn['Field']] = $tmpColumn;
       }
@@ -80,8 +80,8 @@ class DbUpdates extends \Hubleto\Erp\Controller
     $necessaryUpdates = $this->getNecessaryUpdates();
     $runLog = [];
 
-    if ($this->getRouter()->isUrlParam('updatesToRun')) {
-      $updatesToRun = $this->getRouter()->urlParamAsArray('updatesToRun');
+    if ($this->router()->isUrlParam('updatesToRun')) {
+      $updatesToRun = $this->router()->urlParamAsArray('updatesToRun');
       $sqls = [];
       foreach ($updatesToRun as $updateUid) {
         if (isset($necessaryUpdates[$updateUid])) {
@@ -93,19 +93,19 @@ class DbUpdates extends \Hubleto\Erp\Controller
 
       try {
         $runLog[] = 'Starting transaction.';
-        $this->getDb()->startTransaction();
+        $this->db()->startTransaction();
 
         foreach ($sqls as $sql) {
           $runLog[] = $sql;
-          $this->getDb()->execute($sql);
+          $this->db()->execute($sql);
         }
 
         $runLog[] = 'Commiting.';
-        $this->getDb()->commit();
+        $this->db()->commit();
       } catch (\Throwable $e) {
         $runLog[] = 'ERROR when running above SQL. Rolling back.';
         $runLog[] = $e->getMessage();
-        $this->getDb()->rollback();
+        $this->db()->rollback();
       }
 
       $necessaryUpdates = $this->getNecessaryUpdates();

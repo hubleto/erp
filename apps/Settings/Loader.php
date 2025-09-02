@@ -16,7 +16,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^settings\/?$/' => Controllers\Dashboard::class,
       '/^settings\/my-account\/?$/' => Controllers\MyAccount::class,
       '/^settings\/apps\/?$/' => Controllers\Apps::class,

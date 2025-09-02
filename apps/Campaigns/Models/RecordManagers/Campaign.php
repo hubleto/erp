@@ -56,7 +56,7 @@ class Campaign extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $filters = $main->getRouter()->urlParamAsArray("filters");
+    $filters = $main->router()->urlParamAsArray("filters");
 
     $query = Pipeline::applyPipelineStepFilter(
       $this->model,

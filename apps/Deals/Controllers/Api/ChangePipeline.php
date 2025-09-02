@@ -13,10 +13,10 @@ class ChangePipeline extends \Hubleto\Erp\Controllers\ApiController
     $mPipeline = $this->getService(Pipeline::class);
     $newPipeline = null;
 
-    if ($this->getRouter()->isUrlParam('idPipeline')) {
+    if ($this->router()->isUrlParam('idPipeline')) {
       try {
         $newPipeline = $mPipeline->record
-          ->where("id", $this->getRouter()->urlParamAsInteger('idPipeline'))
+          ->where("id", $this->router()->urlParamAsInteger('idPipeline'))
           ->with("STEPS")
           ->first()
           ->toArray()

@@ -19,7 +19,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^calendar\/?$/' => Controllers\Calendar::class,
       '/^calendar(\/(?<key>\w+))?\/ics\/?$/' => Controllers\IcsCalendar::class,
       '/^calendar\/settings\/?$/' => Controllers\Settings::class,

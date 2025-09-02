@@ -19,7 +19,7 @@ class GetCustomer extends \Hubleto\Erp\Controllers\ApiController
        * due to the lookup inputs not clearing the search parameter when empty
        */
 
-      $search = $this->getRouter()->urlParamAsString("search");
+      $search = $this->router()->urlParamAsString("search");
       if (strlen($search) > 1) {
         $customers
           ->where("name", "LIKE", "%" . $search . "%")

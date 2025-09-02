@@ -6,7 +6,7 @@ class GetConfig extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $model = $this->getRouter()->urlParamAsString("model");
+    $model = $this->router()->urlParamAsString("model");
     $modelObj = $this->getModel($model::class);
 
     $fields = [];

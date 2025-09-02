@@ -6,7 +6,7 @@
 <br/>
 
 
-{% if hubleto.getConfig().getAsString('legalDocumentsAccepted') == '' %}
+{% if hubleto.config().getAsString('legalDocumentsAccepted') == '' %}
 
   <script>
     function acceptLegalDocuments() {
@@ -239,7 +239,7 @@
             </tr>
             <tr>
               <td>{{ translate('Terms of use and privacy policy accepted') }}</td>
-              <td><b>{{ hubleto.getConfig().getAsString('legalDocumentsAccepted')|date('l, F jS Y') }}</b></td>
+              <td><b>{{ hubleto.config().getAsString('legalDocumentsAccepted')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>{{ translate('Subscription active until') }}</td>

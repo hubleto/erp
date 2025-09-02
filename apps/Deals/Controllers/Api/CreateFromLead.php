@@ -13,7 +13,7 @@ class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): ?array
   {
 
-    $idLead = $this->getRouter()->urlParamAsInteger("idLead");
+    $idLead = $this->router()->urlParamAsInteger("idLead");
 
     if ($idLead <= 0) {
       return [

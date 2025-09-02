@@ -13,7 +13,7 @@ class ActivateSubscriptionRenewal extends \Hubleto\Erp\Controller
     $premiumAccount = $this->getService(PremiumAccount::class);
     $premiumAccount->activateSubscriptionRenewal();
 
-    $this->getRouter()->redirectTo('cloud');
+    $this->router()->redirectTo('cloud');
   }
 
 }

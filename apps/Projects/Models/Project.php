@@ -58,10 +58,10 @@ class Project extends \Hubleto\Erp\Model
       'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->getAuthProvider()->getUserId())
+        ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->getAuthProvider()->getUserId())
+        ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'date_start' => (new Date($this, $this->translate('Start')))->setReadonly()->setDefaultValue(date("Y-m-d")),
@@ -71,7 +71,7 @@ class Project extends \Hubleto\Erp\Model
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
       // 'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setProperty('defaultVisibility', true)->setRequired()
-      //   ->setDefaultValue($this->getAuthProvider()->getUserId())
+      //   ->setDefaultValue($this->authProvider()->getUserId())
       // ,
       'color' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true),
       'online_documentation_folder' => (new Varchar($this, "Online documentation folder"))->setReactComponent('InputHyperlink'),

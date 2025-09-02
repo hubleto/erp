@@ -60,7 +60,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    */
   public function getUserFromSession(): array
   {
-    $tmp = $this->getSessionManager()->get('userProfile') ?? [];
+    $tmp = $this->sessionManager()->get('userProfile') ?? [];
     return [
       'id' => (int) ($tmp['id'] ?? 0),
       'type' => (int) ($tmp['type'] ?? 0),
@@ -101,7 +101,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
 
   public function forgotPassword(): void
   {
-    $login = $this->getRouter()->urlParamAsString('login');
+    $login = $this->router()->urlParamAsString('login');
 
     $mUser = $this->getService(User::class);
     if ($mUser->record->where('login', $login)->count() > 0) {
@@ -124,9 +124,9 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       }
 
       if ($user->password != '') {
-        $this->getEmailProvider()->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
+        $this->emailProvider()->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
       } else {
-        $this->getEmailProvider()->sendWelcomeEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
+        $this->emailProvider()->sendWelcomeEmail($login, $name, $user['language'] ?? 'en', $tokenValue);
       }
     }
   }
@@ -136,18 +136,18 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     $mToken = $this->getService(Token::class);
     $mUser = $this->getService(User::class);
 
-    $token = $mToken->record->where('token', $this->getRouter()->urlParamAsString('token'))->first();
+    $token = $mToken->record->where('token', $this->router()->urlParamAsString('token'))->first();
     $user = $mUser->record->where('login', $token->login)->first();
     $oldPassword = $user->password;
 
-    $user->update(['password' => password_hash($this->getRouter()->urlParamAsString('password'), PASSWORD_DEFAULT)]);
+    $user->update(['password' => password_hash($this->router()->urlParamAsString('password'), PASSWORD_DEFAULT)]);
 
     if ($oldPassword == "") {
-      $this->getRouter()->setUrlParam('login', $token->login);
+      $this->router()->setUrlParam('login', $token->login);
       $token->delete();
-      $this->getRouter()->setUrlParam('password', $this->getRouter()->urlParamAsString('password'));
+      $this->router()->setUrlParam('password', $this->router()->urlParamAsString('password'));
 
-      $this->getAuthProvider()->auth();
+      $this->authProvider()->auth();
     } else {
       $token->delete();
     }
@@ -159,7 +159,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
 
     parent::auth();
 
-    $setLanguage = $this->getRouter()->urlParamAsString('set-language');
+    $setLanguage = $this->router()->urlParamAsString('set-language');
 
     if (
       !empty($setLanguage)
@@ -179,7 +179,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       $date = date("D, d M Y H:i:s", strtotime('+1 year')) . 'GMT';
       header("Set-Cookie: language={$setLanguage}; EXPIRES{$date};");
       setcookie('incorrectLogin', '1');
-      $this->getRouter()->redirectTo('');
+      $this->router()->redirectTo('');
     }
 
     if (strlen($this->getUserLanguage()) !== 2) {

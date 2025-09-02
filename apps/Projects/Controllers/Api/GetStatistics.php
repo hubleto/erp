@@ -11,7 +11,7 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idProject = $this->getRouter()->urlParamAsInteger("idProject");
+    $idProject = $this->router()->urlParamAsInteger("idProject");
 
     $statistics = [];
 
@@ -40,7 +40,7 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
       //   ->groupByRaw('concat(year(date_worked), month(date_worked)')
       //   ->get()
       // ;
-      $workedByMonth = $this->getDb()->fetchAll('
+      $workedByMonth = $this->db()->fetchAll('
         select
           month(`' . $mActivity->table . '`.`date_worked`) as `month`,
           year(`' . $mActivity->table . '`.`date_worked`) as `year`,
@@ -55,7 +55,7 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
 
       $statistics['workedByMonth'] = $workedByMonth;
 
-      $chargeableByMonth = $this->getDb()->fetchAll('
+      $chargeableByMonth = $this->db()->fetchAll('
         select
           month(`' . $mActivity->table . '`.`date_worked`) as `month`,
           year(`' . $mActivity->table . '`.`date_worked`) as `year`,

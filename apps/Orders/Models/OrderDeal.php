@@ -31,7 +31,7 @@ class OrderDeal extends \Hubleto\Erp\Model
     $description->ui['title'] = 'Order Deals';
     $description->ui["addButtonText"] = $this->translate("Add deal");
 
-    if ($this->getRouter()->urlParamAsInteger('idOrder') > 0) {
+    if ($this->router()->urlParamAsInteger('idOrder') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

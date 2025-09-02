@@ -10,7 +10,7 @@ class SaveBulkStatusChange extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): ?array
   {
 
-    $records = $this->getRouter()->urlParamAsArray("record");
+    $records = $this->router()->urlParamAsArray("record");
     $mLead = $this->getService(Lead::class);
 
     try {

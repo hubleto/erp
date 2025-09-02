@@ -132,15 +132,15 @@ class Lead extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->urlParamAsInteger("idCustomer") > 0) {
-      $query = $query->where("leads.id_customer", $main->getRouter()->urlParamAsInteger("idCustomer"));
+    if ($main->router()->urlParamAsInteger("idCustomer") > 0) {
+      $query = $query->where("leads.id_customer", $main->router()->urlParamAsInteger("idCustomer"));
     }
 
-    if ($main->getRouter()->urlParamAsInteger("idCampaign") > 0) {
-      $query = $query->where("leads.id_campaign", $main->getRouter()->urlParamAsInteger("idCampaign"));
+    if ($main->router()->urlParamAsInteger("idCampaign") > 0) {
+      $query = $query->where("leads.id_campaign", $main->router()->urlParamAsInteger("idCampaign"));
     }
 
-    $filters = $main->getRouter()->urlParamAsArray("filters");
+    $filters = $main->router()->urlParamAsArray("filters");
 
     $query = Pipeline::applyPipelineStepFilter(
       $this->model,
@@ -154,9 +154,9 @@ class Lead extends \Hubleto\Erp\RecordManager
 
     if (isset($filters["fLeadOwnership"])) {
       switch ($filters["fLeadOwnership"]) {
-        case 1: $query = $query->where("leads.id_owner", $main->getAuthProvider()->getUserId());
+        case 1: $query = $query->where("leads.id_owner", $main->authProvider()->getUserId());
           break;
-        case 2: $query = $query->where("leads.id_manager", $main->getAuthProvider()->getUserId());
+        case 2: $query = $query->where("leads.id_manager", $main->authProvider()->getUserId());
           break;
       }
     }

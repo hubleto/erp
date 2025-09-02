@@ -15,13 +15,13 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^dashboards(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboards::class,
       '/^settings\/dashboards\/?$/' => Controllers\Settings::class,
     ]);
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Dashboards'),
       'icon' => 'fas fa-table',

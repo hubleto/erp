@@ -17,7 +17,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^products\/?$/' => Controllers\Products::class,
       '/^products\/groups\/?$/' => Controllers\Groups::class,
       '/^products\/groups(\/(?<recordId>\d+))?\/?$/' => Controllers\Groups::class,

@@ -28,8 +28,8 @@ class DealProduct extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->urlParamAsInteger("idDeal") > 0) {
-      $query = $query->where("id_deal", $main->getRouter()->urlParamAsInteger("idDeal"));
+    if ($main->router()->urlParamAsInteger("idDeal") > 0) {
+      $query = $query->where("id_deal", $main->router()->urlParamAsInteger("idDeal"));
     }
 
     return $query;

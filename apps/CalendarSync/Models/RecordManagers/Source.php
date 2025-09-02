@@ -12,7 +12,7 @@ class Source extends \Hubleto\Erp\RecordManager
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     $query = parent::prepareReadQuery($query, $level);
-    $type = $main->getRouter()->urlParamAsString('type') ?? "";
+    $type = $main->router()->urlParamAsString('type') ?? "";
 
     if ($type == 'google') {
       $query = $query->where('type', 'google');

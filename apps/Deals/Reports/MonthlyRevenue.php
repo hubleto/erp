@@ -23,7 +23,7 @@ class MonthlyRevenue extends \Hubleto\Erp\Report
     ];
 
     $config["searchGroups"] = [
-      ["fieldName" => "id_owner", "field" => $model->getColumn("id_owner"), "option" => 1,  "value" => $this->getAuthProvider()->getUser()["id"],],
+      ["fieldName" => "id_owner", "field" => $model->getColumn("id_owner"), "option" => 1,  "value" => $this->authProvider()->getUser()["id"],],
       ["fieldName" => "date_created", "field" => $model->getColumn("date_created"), "option" => 6,  "value" => date("Y-m-01"), "value2" => date('Y-m-t')],
     ];
 

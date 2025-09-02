@@ -6,7 +6,7 @@ class GetFolderContent extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $folderUid = $this->getRouter()->urlParamAsString('folderUid');
+    $folderUid = $this->router()->urlParamAsString('folderUid');
 
     $mFolder = $this->getModel(\Hubleto\App\Community\Documents\Models\Folder::class);
     $mDocument = $this->getModel(\Hubleto\App\Community\Documents\Models\Document::class);

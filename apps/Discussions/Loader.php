@@ -15,7 +15,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^discussions(\/(?<recordId>\d+))?\/?$/' => Controllers\Discussions::class,
       '/^discussions\/members(\/(?<recordId>\d+))?\/?$/' => Controllers\Members::class,
       '/^discussions\/messages(\/(?<recordId>\d+))?\/?$/' => Controllers\Messages::class,

@@ -16,7 +16,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
   public function run(): void
   {
 
-    $this->getPermissionsManager()->DANGEROUS__grantAllPermissions();
+    $this->permissionsManager()->DANGEROUS__grantAllPermissions();
 
     \Hubleto\Terminal::cyan("Generating demo data...\n");
 
@@ -156,9 +156,9 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
     $mSupplier = $this->getModel(\Hubleto\App\Community\Suppliers\Models\Supplier::class);
 
     if (
-      $this->getAppManager()->isAppInstalled("Hubleto\App\Community\Documents") &&
-      $this->getAppManager()->isAppInstalled("Hubleto\App\Community\Customers") &&
-      $this->getAppManager()->isAppInstalled("Hubleto\App\Community\Contacts")
+      $this->appManager()->isAppInstalled("Hubleto\App\Community\Documents") &&
+      $this->appManager()->isAppInstalled("Hubleto\App\Community\Customers") &&
+      $this->appManager()->isAppInstalled("Hubleto\App\Community\Contacts")
     ) {
       $this->generateCustomers($mCustomer, $mCustomerTag);
       $this->generateContacts($mContact, $mContactTag, $mValue);
@@ -166,23 +166,23 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->generateActivities($mCustomer, $mCustomerActivity);
 
-    if ($this->getAppManager()->isAppInstalled("Hubleto\App\Community\Products")) {
+    if ($this->appManager()->isAppInstalled("Hubleto\App\Community\Products")) {
       $this->generateProducts($mProduct, $mGroup, $mSupplier);
     }
 
     if (
-      $this->getAppManager()->isAppInstalled("Hubleto\App\Community\Customers") &&
-      $this->getAppManager()->isAppInstalled("Hubleto\App\Community\Documents") &&
-      $this->getAppManager()->isAppInstalled("Hubleto\App\Community\Products") &&
-      $this->getAppManager()->isAppInstalled("Hubleto\App\Community\Deals") &&
-      $this->getAppManager()->isAppInstalled("Hubleto\App\Community\Leads")
+      $this->appManager()->isAppInstalled("Hubleto\App\Community\Customers") &&
+      $this->appManager()->isAppInstalled("Hubleto\App\Community\Documents") &&
+      $this->appManager()->isAppInstalled("Hubleto\App\Community\Products") &&
+      $this->appManager()->isAppInstalled("Hubleto\App\Community\Deals") &&
+      $this->appManager()->isAppInstalled("Hubleto\App\Community\Leads")
     ) {
       $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
       $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity, $mDealProduct);
     }
 
-    foreach ($this->getAppManager()->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
-      $app = $this->getAppManager()->getApp($appNamespace);
+    foreach ($this->appManager()->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
+      $app = $this->appManager()->getApp($appNamespace);
       if ($app) {
         \Hubleto\Terminal::cyan("  {$appNamespace}\n");
         $app->generateDemoData();
@@ -191,7 +191,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 
-    $this->getPermissionsManager()->revokeGrantAllPermissions();
+    $this->permissionsManager()->revokeGrantAllPermissions();
   }
 
   public function generateInvoiceProfiles(): void

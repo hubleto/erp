@@ -139,11 +139,11 @@ class Deal extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->urlParamAsInteger("idCustomer") > 0) {
-      $query = $query->where("deals.id_customer", $main->getRouter()->urlParamAsInteger("idCustomer"));
+    if ($main->router()->urlParamAsInteger("idCustomer") > 0) {
+      $query = $query->where("deals.id_customer", $main->router()->urlParamAsInteger("idCustomer"));
     }
 
-    $filters = $main->getRouter()->urlParamAsArray("filters");
+    $filters = $main->router()->urlParamAsArray("filters");
 
     $query = Pipeline::applyPipelineStepFilter(
       $this->model,
@@ -166,9 +166,9 @@ class Deal extends \Hubleto\Erp\RecordManager
 
     if (isset($filters["fDealOwnership"])) {
       switch ($filters["fDealOwnership"]) {
-        case 1: $query = $query->where("deals.id_owner", $main->getAuthProvider()->getUserId());
+        case 1: $query = $query->where("deals.id_owner", $main->authProvider()->getUserId());
           break;
-        case 2: $query = $query->where("deals.id_manager", $main->getAuthProvider()->getUserId());
+        case 2: $query = $query->where("deals.id_manager", $main->authProvider()->getUserId());
           break;
       }
     }

@@ -34,7 +34,7 @@ class OrderInvoice extends \Hubleto\Erp\Model
     $description->ui['title'] = 'Order Invoices';
     $description->ui["addButtonText"] = $this->translate("Add invoice");
 
-    if ($this->getRouter()->urlParamAsInteger('idOrder') > 0) {
+    if ($this->router()->urlParamAsInteger('idOrder') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

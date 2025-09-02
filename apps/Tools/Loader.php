@@ -17,7 +17,7 @@ class Loader extends \Hubleto\Framework\App
   public function init(): void
   {
     parent::init();
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^tools\/?$/' => Controllers\Dashboard::class,
     ]);
 

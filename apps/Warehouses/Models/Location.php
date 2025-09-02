@@ -62,7 +62,7 @@ class Location extends \Hubleto\Erp\Model
 
   public function recalculateWarehouseData(int $idWarehouse): void
   {
-    $this->getDb()->execute("
+    $this->db()->execute("
       update `warehouses` set
         `capacity` = ifnull((select sum(ifnull(`capacity`, 0)) from `warehouses_locations` where `id_warehouse` = :idWarehouse), 0),
         `current_occupancy` = ifnull((select sum(ifnull(`current_occupancy`, 0)) from `warehouses_locations` where `id_warehouse` = :idWarehouse), 0)

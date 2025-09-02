@@ -27,12 +27,12 @@ class Event extends \Hubleto\Erp\RecordManager
     // $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     // Uncomment and modify these lines if you want to apply filtering based on URL parameters
-    // if ($main->getRouter()->urlParamAsInteger("idCustomer") > 0) {
-    //   $query = $query->where($this->table . '.id_customer', $main->getRouter()->urlParamAsInteger("idCustomer"));
+    // if ($main->router()->urlParamAsInteger("idCustomer") > 0) {
+    //   $query = $query->where($this->table . '.id_customer', $main->router()->urlParamAsInteger("idCustomer"));
     // }
 
     // Uncomment and modify these lines if you want to apply default filters to your model.
-    // $filters = $main->getRouter()->urlParamAsArray("filters");
+    // $filters = $main->router()->urlParamAsArray("filters");
     // if (isset($filters["fArchive"]) && $filters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
     // else $query = $query->where("customers.is_active", true);
 

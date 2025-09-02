@@ -8,7 +8,7 @@ class GenerateInvoice extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idOrder = $this->getRouter()->urlParamAsInteger('idOrder');
+    $idOrder = $this->router()->urlParamAsInteger('idOrder');
 
     $mOrder = $this->getService(Order::class);
     $idInvoice = $mOrder->generateInvoice($idOrder);

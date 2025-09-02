@@ -13,7 +13,7 @@ class Calendar extends \Hubleto\Erp\Calendar
 
     foreach ($mSources->record->where('active', true)->get() as $key => $source) {
       if ($source->type === 'google') {
-        $url = "https://www.googleapis.com/calendar/v3/calendars/{$source->link}/events?orderBy=startTime&singleEvents=true&timeMin=" . urlencode(date('c')) . "&key={$this->getConfig()->getAsString('google-api-key')}";
+        $url = "https://www.googleapis.com/calendar/v3/calendars/{$source->link}/events?orderBy=startTime&singleEvents=true&timeMin=" . urlencode(date('c')) . "&key={$this->config()->getAsString('google-api-key')}";
 
         $jsonData = @file_get_contents($url);
         if (!$jsonData) {

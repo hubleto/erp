@@ -11,9 +11,9 @@ class Tracker extends \Hubleto\Erp\Controller
 
   public function render(): string
   {
-    $campaignUid = $this->getRouter()->urlParamAsString('cuid');
-    $contactId = $this->getRouter()->urlParamAsInteger('cnid');
-    $url = $this->getRouter()->urlParamAsString('url');
+    $campaignUid = $this->router()->urlParamAsString('cuid');
+    $contactId = $this->router()->urlParamAsInteger('cnid');
+    $url = $this->router()->urlParamAsString('url');
 
     // $mCampaign = $this->getModel(Campaign::class);
     // $campaign = $mCampaign->where('uid', $campaignUid)->get();

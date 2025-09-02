@@ -18,7 +18,7 @@ class Digest extends \Hubleto\Framework\Core
     $dailyDigest = [];
     $digestHtml = '';
 
-    $apps = $this->getAppManager()->getEnabledApps();
+    $apps = $this->appManager()->getEnabledApps();
     foreach ($apps as $appNamespace => $app) {
       $appDigest = [];
 
@@ -42,7 +42,7 @@ class Digest extends \Hubleto\Framework\Core
           $digestHtml .= "
             <div style='font-size:11pt;margin-bottom:0.25em;padding:0.25em;border:1px solid #EEEEEE;border-left:0.5em solid {$item['color']}'>
               <b>" . htmlspecialchars($item['category']) . "</b>
-              <a href='{$this->getEnv()->projectUrl}/{$item['url']}'>" . htmlspecialchars($item['text']) . "</a><br/>
+              <a href='{$this->env()->projectUrl}/{$item['url']}'>" . htmlspecialchars($item['text']) . "</a><br/>
               <small>" . htmlspecialchars($item['description']) . "</small>
             </div>
           ";

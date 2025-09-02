@@ -31,7 +31,7 @@ class Loader extends \Hubleto\Framework\Loader
     ]);
 
     // run hook
-    $this->getHookManager()->run('core:bootstrap-end', [$this]);
+    $this->hookManager()->run('core:bootstrap-end', [$this]);
 
   }
 
@@ -46,7 +46,7 @@ class Loader extends \Hubleto\Framework\Loader
     try {
       parent::init();
 
-      $this->getRouter()->httpGet([
+      $this->router()->get([
         '/^api\/get-apps-info\/?$/' => Api\GetAppsInfo::class,
         '/^api\/get-users\/?$/' => Api\GetUsers::class,
         '/^api\/log-javascript-error\/?$/' => Api\LogJavascriptError::class,
@@ -62,7 +62,7 @@ class Loader extends \Hubleto\Framework\Loader
       ]);
 
       // run hook
-      $this->getHookManager()->run('core:init-end', [$this]);
+      $this->hookManager()->run('core:init-end', [$this]);
     } catch (\Exception $e) {
       echo "HUBLETO INIT failed: [".get_class($e)."] ".$e->getMessage() . "\n";
       echo $e->getTraceAsString() . "\n";

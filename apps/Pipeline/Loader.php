@@ -17,7 +17,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^pipeline\/api\/get-pipelines\/?$/' => Controllers\Api\GetPipelines::class,
       '/^pipeline\/?$/' => Controllers\Pipeline::class,
       '/^pipeline(\/(?<idPipeline>\d+))?\/?$/' => Controllers\Pipeline::class,
@@ -25,7 +25,7 @@ class Loader extends \Hubleto\Framework\App
       '/^settings\/pipelines\/?$/' => Controllers\Pipelines::class,
     ]);
 
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Pipelines'),
       'icon' => 'fas fa-bars-progress',

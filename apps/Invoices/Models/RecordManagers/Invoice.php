@@ -75,10 +75,10 @@ class Invoice extends \Hubleto\Erp\RecordManager {
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $idCustomer = $main->getRouter()->urlParamAsInteger('idCustomer');
+    $idCustomer = $main->router()->urlParamAsInteger('idCustomer');
     if ($idCustomer > 0) $query->where('id_customer', $idCustomer);
 
-    $idProfile = $main->getRouter()->urlParamAsInteger('idProfile');
+    $idProfile = $main->router()->urlParamAsInteger('idProfile');
     if ($idProfile > 0) $query->where('id_profil', $idProfile);
 
     $query = Pipeline::applyPipelineStepFilter(
@@ -87,17 +87,17 @@ class Invoice extends \Hubleto\Erp\RecordManager {
       $filters['fInvoicePipelineStep'] ?? []
     );
 
-    if ($main->getRouter()->isUrlParam('number')) $query->where('number', 'like', '%' . $main->getRouter()->urlParamAsString('number') . '%');
-    if ($main->getRouter()->isUrlParam('vs')) $query->where('vs', 'like', '%' . $main->getRouter()->urlParamAsString('vs') . '%');
+    if ($main->router()->isUrlParam('number')) $query->where('number', 'like', '%' . $main->router()->urlParamAsString('number') . '%');
+    if ($main->router()->isUrlParam('vs')) $query->where('vs', 'like', '%' . $main->router()->urlParamAsString('vs') . '%');
 
-    if ($main->getRouter()->isUrlParam('dateIssueFrom')) $query->whereDate('date_issue', '>=', $main->getRouter()->urlParamAsString('dateIssueFrom'));
-    if ($main->getRouter()->isUrlParam('dateIssueTo')) $query->whereDate('date_issue', '<=', $main->getRouter()->urlParamAsString('dateIssueTo'));
-    if ($main->getRouter()->isUrlParam('dateDeliveryFrom')) $query->whereDate('date_delivery', '>=', $main->getRouter()->urlParamAsString('dateDeliveryFrom'));
-    if ($main->getRouter()->isUrlParam('dateDeliveryTo')) $query->whereDate('date_delivery', '<=', $main->getRouter()->urlParamAsString('dateDeliveryTo'));
-    if ($main->getRouter()->isUrlParam('dateTueFrom')) $query->whereDate('date_due', '>=', $main->getRouter()->urlParamAsString('dateTueFrom'));
-    if ($main->getRouter()->isUrlParam('dateTueTo')) $query->whereDate('date_due', '<=', $main->getRouter()->urlParamAsString('dateTueTo'));
-    if ($main->getRouter()->isUrlParam('datePaymentFrom')) $query->whereDate('date_payment', '>=', $main->getRouter()->urlParamAsString('datePaymentFrom'));
-    if ($main->getRouter()->isUrlParam('datePaymentTo')) $query->whereDate('date_payment', '<=', $main->getRouter()->urlParamAsString('datePaymentTo'));
+    if ($main->router()->isUrlParam('dateIssueFrom')) $query->whereDate('date_issue', '>=', $main->router()->urlParamAsString('dateIssueFrom'));
+    if ($main->router()->isUrlParam('dateIssueTo')) $query->whereDate('date_issue', '<=', $main->router()->urlParamAsString('dateIssueTo'));
+    if ($main->router()->isUrlParam('dateDeliveryFrom')) $query->whereDate('date_delivery', '>=', $main->router()->urlParamAsString('dateDeliveryFrom'));
+    if ($main->router()->isUrlParam('dateDeliveryTo')) $query->whereDate('date_delivery', '<=', $main->router()->urlParamAsString('dateDeliveryTo'));
+    if ($main->router()->isUrlParam('dateTueFrom')) $query->whereDate('date_due', '>=', $main->router()->urlParamAsString('dateTueFrom'));
+    if ($main->router()->isUrlParam('dateTueTo')) $query->whereDate('date_due', '<=', $main->router()->urlParamAsString('dateTueTo'));
+    if ($main->router()->isUrlParam('datePaymentFrom')) $query->whereDate('date_payment', '>=', $main->router()->urlParamAsString('datePaymentFrom'));
+    if ($main->router()->isUrlParam('datePaymentTo')) $query->whereDate('date_payment', '<=', $main->router()->urlParamAsString('datePaymentTo'));
 
     $query
       ->first()

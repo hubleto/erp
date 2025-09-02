@@ -31,7 +31,7 @@ class LeadCampaign extends \Hubleto\Erp\Model
     $description->ui['title'] = 'Campaign Leads';
     $description->ui["addButtonText"] = $this->translate("Add lead");
 
-    if ($this->getRouter()->urlParamAsInteger('idCampaign') > 0) {
+    if ($this->router()->urlParamAsInteger('idCampaign') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

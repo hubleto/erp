@@ -19,8 +19,8 @@ class ServerController extends \Hubleto\Erp\Controller
     $refreshTokenRepository = $this->getService(\Hubleto\App\Community\OAuth\Repositories\RefreshToken::class);
     $authCodeRepository = $this->getService(\Hubleto\App\Community\OAuth\Repositories\AuthCode::class);
 
-    $privateKey = 'file://' . $this->getConfig()->getAsString('OAuthPrivateKey'); // Path to your private key for JWT signing
-    $publicKey = 'file://' . $this->getConfig()->getAsString('OAuthPublicKey'); // Path to your public key for JWT validation
+    $privateKey = 'file://' . $this->config()->getAsString('OAuthPrivateKey'); // Path to your private key for JWT signing
+    $publicKey = 'file://' . $this->config()->getAsString('OAuthPublicKey'); // Path to your public key for JWT validation
 
     // Setup the authorization server
     $server = new AuthorizationServer(

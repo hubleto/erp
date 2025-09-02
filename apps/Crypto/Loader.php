@@ -17,12 +17,12 @@ class Loader extends \Hubleto\Framework\App
 
     $this->setConfigAsInteger('sidebarOrder', 0);
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^crypto\/?$/' => Controllers\Dashboard::class,
     ]);
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Crypto'),
       'icon' => 'fas fa-key',

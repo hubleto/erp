@@ -16,7 +16,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^deals\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^deals\/api\/create-from-lead\/?$/' => Controllers\Api\CreateFromLead::class,
       '/^deals\/api\/generate-quotation-pdf\/?$/' => Controllers\Api\GenerateQuotationPdf::class,
@@ -37,7 +37,7 @@ class Loader extends \Hubleto\Framework\App
     $this->addSearchSwitch('d', 'deals');
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Deal Tags'),
       'icon' => 'fas fa-tags',
@@ -58,7 +58,7 @@ class Loader extends \Hubleto\Framework\App
     $pipelineManager->addPipeline($this, 'deals', Pipeline::class);
 
     /** @var \Hubleto\App\Community\Reports\Loader $reportsApp */
-    $reportsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
+    $reportsApp = $this->appManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
     $reportsApp->reportManager->addReport($this, Reports\MonthlyRevenue::class);
 
     /** @var \Hubleto\App\Community\Dashboards\Manager $dashboardManager */

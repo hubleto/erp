@@ -8,7 +8,7 @@
 <h1>Reports &raquo; {{ viewParams.report.name }}</h1>
 <x-app-form-report
   string:report-url-slug="{{ viewParams.report.urlSlug }}"
-  config="{{ viewParams.report.getConfig()|json_encode }}"
+  config="{{ viewParams.report.config()|json_encode }}"
   {# string:model="{{ viewParams.report.modelClass }}" #}
   string:name="{{ viewParams.report.name }}"
   bool:readonly="false"
@@ -16,7 +16,7 @@
 
 <app-report-builder
   string:report-url-slug="{{ viewParams.report.urlSlug }}"
-  config="{{ viewParams.report.getConfig()|json_encode }}"
+  config="{{ viewParams.report.config()|json_encode }}"
   {# string:model="{{ viewParams.report.modelClass }}" #}
   string:name="{{ viewParams.report.name }}"
   bool:readonly="false"

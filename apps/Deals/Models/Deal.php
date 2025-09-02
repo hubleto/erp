@@ -87,7 +87,7 @@ class Deal extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Deal Identifier')))->setCssClass('badge badge-info')->setProperty('defaultVisibility', true),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true)->setCssClass('font-bold'),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->getRouter()->urlParamAsInteger('idCustomer')),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setReadonly(),
       'version' => (new Integer($this, $this->translate('Version'))),
@@ -96,8 +96,8 @@ class Deal extends \Hubleto\Erp\Model
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT')),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getAuthProvider()->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getAuthProvider()->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
       'id_template_quotation' => (new Lookup($this, $this->translate('Template for quotation'), Template::class)),
       'customer_order_number' => (new Varchar($this, $this->translate('Customer\'s order number')))->setProperty('defaultVisibility', true),
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
@@ -162,12 +162,12 @@ class Deal extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    if ($this->getRouter()->urlParamAsBool("showArchive")) {
+    if ($this->router()->urlParamAsBool("showArchive")) {
       $description->permissions = [
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
-        "canDelete" => $this->getPermissionsManager()->granted($this->fullName . ':Delete')
+        "canDelete" => $this->permissionsManager()->granted($this->fullName . ':Delete')
       ];
     } else {
       $description->ui['addButtonText'] = $this->translate('Add Deal');
@@ -248,7 +248,7 @@ class Deal extends \Hubleto\Erp\Model
 
     $newDeal = $savedRecord;
     if (empty($newDeal['identifier'])) {
-      $newDeal["identifier"] = $this->getAppManager()->getApp(\Hubleto\App\Community\Deals\Loader::class)->configAsString('dealPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
+      $newDeal["identifier"] = $this->appManager()->getApp(\Hubleto\App\Community\Deals\Loader::class)->configAsString('dealPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
       $this->record->recordUpdate($newDeal);
     }
 
@@ -425,7 +425,7 @@ class Deal extends \Hubleto\Erp\Model
     if ($deal) {
       $idInvoice = $mInvoice->generateInvoice(new InvoiceDto(
         1, // $idProfile
-        $this->getAuthProvider()->getUserId(), // $idIssuedBy
+        $this->authProvider()->getUserId(), // $idIssuedBy
         (int) $deal['id_customer'], // $idCustomer
         'ORD/' . $deal->number, // $number
         null, // $vs

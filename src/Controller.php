@@ -28,7 +28,7 @@ class Controller extends \Hubleto\Framework\Controller
 
     parent::__construct();
 
-    $this->hubletoApp = $this->getAppManager()->getApp($this->appNamespace);
+    $this->hubletoApp = $this->appManager()->getApp($this->appNamespace);
   }
 
   public function activeUserHasPermission(): bool
@@ -37,7 +37,7 @@ class Controller extends \Hubleto\Framework\Controller
       isset($this->hubletoApp)
       && $this->requiresUserAuthentication
       && !$this->permittedForAllUsers
-      && !$this->getPermissionsManager()->isAppPermittedForActiveUser($this->hubletoApp)
+      && !$this->permissionsManager()->isAppPermittedForActiveUser($this->hubletoApp)
     ) {
       return false;
     }
@@ -66,7 +66,7 @@ class Controller extends \Hubleto\Framework\Controller
    */
   public function init(): void
   {
-    $this->getHookManager()->run('controller:init-start', [$this]);
+    $this->hookManager()->run('controller:init-start', [$this]);
 
     // Put your controller's initialization code here. See example below.
     // Throw an exception on error.
@@ -87,12 +87,12 @@ class Controller extends \Hubleto\Framework\Controller
       return;
     }
 
-    $this->getHookManager()->run('controller:prepare-view-start', [$this]);
+    $this->hookManager()->run('controller:prepare-view-start', [$this]);
 
-    $logFolder = $this->getConfig()->getAsString('logFolder');
+    $logFolder = $this->config()->getAsString('logFolder');
 
-    if ($this->getAuthProvider()->isUserInSession()) {
-      $user = $this->getAuthProvider()->getUserFromSession();
+    if ($this->authProvider()->isUserInSession()) {
+      $user = $this->authProvider()->getUserFromSession();
 
       if (!empty($logFolder) && is_dir($logFolder)) {
         if (!is_dir($logFolder . '/usage')) {
@@ -100,7 +100,7 @@ class Controller extends \Hubleto\Framework\Controller
         }
         file_put_contents(
           $logFolder . '/usage/' . date('Y-m-d') . '.log',
-          date('H:i:s') . ' ' . $user['id'] . ' ' . get_class($this) . ' '. json_encode(array_keys($this->getRouter()->getUrlParams())) . "\n",
+          date('H:i:s') . ' ' . $user['id'] . ' ' . get_class($this) . ' '. json_encode(array_keys($this->router()->getUrlParams())) . "\n",
           FILE_APPEND
         );
       }
@@ -108,18 +108,18 @@ class Controller extends \Hubleto\Framework\Controller
 
     parent::prepareView();
 
-    $this->viewParams['currentTheme'] = $this->getConfig()->getAsString('uiTheme', 'default');
+    $this->viewParams['currentTheme'] = $this->config()->getAsString('uiTheme', 'default');
 
     if (isset($this->hubletoApp)) {
       $this->viewParams['app'] = $this->hubletoApp;
     }
     $this->viewParams['breadcrumbs'] = $this->getBreadcrumbs();
-    $this->viewParams['requestedUri'] = $this->getEnv()->requestedUri;
+    $this->viewParams['requestedUri'] = $this->env()->requestedUri;
 
     $help = $this->getService(\Hubleto\App\Community\Help\Loader::class);
-    $contextHelpUrls = $help->contextHelp[$this->getRouter()->getRoute()] ?? '';
+    $contextHelpUrls = $help->contextHelp[$this->router()->getRoute()] ?? '';
 
-    $user = $this->getAuthProvider()->getUser();
+    $user = $this->authProvider()->getUser();
 
     if (isset($contextHelpUrls[$user['language']])) {
       $contextHelpUrl = $contextHelpUrls[$user['language']];
@@ -131,7 +131,7 @@ class Controller extends \Hubleto\Framework\Controller
 
     $this->viewParams['contextHelpUrl'] = $contextHelpUrl;
 
-    $this->getHookManager()->run('controller:prepare-view-end', [$this]);
+    $this->hookManager()->run('controller:prepare-view-end', [$this]);
 
   }
 
@@ -144,7 +144,7 @@ class Controller extends \Hubleto\Framework\Controller
       parent::setView('@hubleto-main/AccessForbidden.twig');
     } else {
       parent::setView($view);
-      $this->getHookManager()->run('controller:set-view', [$this, $view]);
+      $this->hookManager()->run('controller:set-view', [$this, $view]);
     }
   }
 

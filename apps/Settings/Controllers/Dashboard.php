@@ -14,7 +14,7 @@ class Dashboard extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->viewParams['settings'] = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class)->getSettings();
+    $this->viewParams['settings'] = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class)->getSettings();
     $this->setView('@Hubleto:App:Community:Settings/Dashboard.twig');
   }
 

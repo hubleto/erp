@@ -6,10 +6,10 @@ class SendMessage extends \Hubleto\Erp\Controllers\ApiController
 {
   public function response(): array
   {
-    $idDiscussion = $this->getRouter()->urlParamAsInteger('idDiscussion');
-    $message = $this->getRouter()->urlParamAsString('message');
+    $idDiscussion = $this->router()->urlParamAsInteger('idDiscussion');
+    $message = $this->router()->urlParamAsString('message');
 
-    $idUser = $this->getAuthProvider()->getUserId();
+    $idUser = $this->authProvider()->getUserId();
 
     $mMessage = $this->getModel(\Hubleto\App\Community\Discussions\Models\Message::class);
     $mMember = $this->getModel(\Hubleto\App\Community\Discussions\Models\Member::class);

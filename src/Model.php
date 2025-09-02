@@ -18,7 +18,7 @@ class Model extends \Hubleto\Framework\Models\Model
    */
   public function onBeforeCreate(array $record): array
   {
-    $this->getHookManager()->run('model:on-before-create', ['model' => $this, 'record' => $record]);
+    $this->hookManager()->run('model:on-before-create', ['model' => $this, 'record' => $record]);
     return $record;
   }
 
@@ -29,7 +29,7 @@ class Model extends \Hubleto\Framework\Models\Model
    */
   public function onBeforeUpdate(array $record): array
   {
-    $this->getHookManager()->run('model:on-before-update', ['model' => $this, 'record' => $record]);
+    $this->hookManager()->run('model:on-before-update', ['model' => $this, 'record' => $record]);
     return $record;
   }
 
@@ -41,7 +41,7 @@ class Model extends \Hubleto\Framework\Models\Model
    */
   public function onAfterCreate(array $savedRecord): array
   {
-    $this->getHookManager()->run('model:on-after-create', ['model' => $this, 'savedRecord' => $savedRecord]);
+    $this->hookManager()->run('model:on-after-create', ['model' => $this, 'savedRecord' => $savedRecord]);
     return $savedRecord;
   }
 
@@ -53,7 +53,7 @@ class Model extends \Hubleto\Framework\Models\Model
    */
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
-    $this->getHookManager()->run('model:on-after-update', [
+    $this->hookManager()->run('model:on-after-update', [
       'model' => $this,
       'originalRecord' => $originalRecord,
       'savedRecord' => $savedRecord
@@ -68,7 +68,7 @@ class Model extends \Hubleto\Framework\Models\Model
    */
   public function onBeforeDelete(int $id): int
   {
-    $this->getHookManager()->run('model:on-before-delete', ['model' => $this, 'id' => $id]);
+    $this->hookManager()->run('model:on-before-delete', ['model' => $this, 'id' => $id]);
     return $id;
   }
 
@@ -79,7 +79,7 @@ class Model extends \Hubleto\Framework\Models\Model
    */
   public function onAfterDelete(int $id): int
   {
-    $this->getHookManager()->run('model:on-after-delete', ['model' => $this, 'id' => $id]);
+    $this->hookManager()->run('model:on-after-delete', ['model' => $this, 'id' => $id]);
     return $id;
   }
 

@@ -21,7 +21,7 @@ class Generator extends \Hubleto\Framework\Core
    */
   public function saveFromString(string $content, string $outputFilename): int
   {
-    @file_put_contents($this->getEnv()->uploadFolder . '/' . $outputFilename, $content);
+    @file_put_contents($this->env()->uploadFolder . '/' . $outputFilename, $content);
     
     $mDocument = $this->getModel(Models\Document::class);
     $document = $mDocument->record->recordCreate([
@@ -50,14 +50,14 @@ class Generator extends \Hubleto\Framework\Core
             font-family: 'Gabarito';
             font-style: normal;
             font-weight: normal;
-            src: url('{$this->getEnv()->assetsUrl}/fonts/Gabarito/Gabarito-VariableFont_wght.ttf') format('truetype');
+            src: url('{$this->env()->assetsUrl}/fonts/Gabarito/Gabarito-VariableFont_wght.ttf') format('truetype');
           }
 
           @font-face {
             font-family: 'Gabarito';
             font-style: normal;
             font-weight: bold;
-            src: url('{$this->getEnv()->assetsUrl}/fonts/Gabarito/Gabarito-VariableFont_wght.ttf') format('truetype');
+            src: url('{$this->env()->assetsUrl}/fonts/Gabarito/Gabarito-VariableFont_wght.ttf') format('truetype');
           }
 
           * { font-family: 'Gabarito'; font-size: '10pt' }
@@ -65,7 +65,7 @@ class Generator extends \Hubleto\Framework\Core
       </head>
     ";
 
-    $twigTemplate = $this->getRenderer()->getTwig()->createTemplate($template->content);
+    $twigTemplate = $this->renderer()->getTwig()->createTemplate($template->content);
     return $twigTemplate->render($vars);
   }
 
@@ -81,7 +81,7 @@ class Generator extends \Hubleto\Framework\Core
    */
   public function generatePdfFromTemplate(int $idTemplate, string $outputFilename, array $vars): int
   {
-    $pdfGeneratorEndpoint = $this->getConfig()->getAsString('pdfGeneratorEndpoint');
+    $pdfGeneratorEndpoint = $this->config()->getAsString('pdfGeneratorEndpoint');
 
     $htmlString = $this->renderTemplate($idTemplate, $vars);
     $pdfString = '';

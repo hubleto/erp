@@ -17,7 +17,7 @@ class UpdateDefaultPermissions extends \Hubleto\Erp\Controller
     parent::prepareView();
 
     ob_start();
-    $apps = $this->getAppManager()->getEnabledApps();
+    $apps = $this->appManager()->getEnabledApps();
     array_walk($apps, function ($app) {
       echo $app->manifest['namespace'] . "\n";
       $app->assignPermissionsToRoles();

@@ -18,7 +18,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
-    $idCustomer = $this->getRouter()->urlParamAsString('idCustomer');
+    $idCustomer = $this->router()->urlParamAsString('idCustomer');
     $mCustomerActivity = $this->getModel(Models\CustomerActivity::class);
     $activities = $this->prepareLoadActivitiesQuery($mCustomerActivity, $dateStart, $dateEnd, $filter)->with('CUSTOMER')->with('CONTACT');
     if ($idCustomer > 0) {

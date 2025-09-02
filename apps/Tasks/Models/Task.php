@@ -53,10 +53,10 @@ class Task extends \Hubleto\Erp\Model
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', false),
       'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->getAuthProvider()->getUserId())
+        ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'id_tester' => (new Lookup($this, $this->translate('Tester'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->getAuthProvider()->getUserId())
+        ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'hours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setProperty('defaultVisibility', true)->setUnit('h')->setDecimals(2),

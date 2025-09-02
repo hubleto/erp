@@ -13,7 +13,7 @@ class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
     $myDeals = $mDeal->record->prepareReadQuery()
       ->where($mDeal->table . ".is_archived", 0)
       ->where($mDeal->table . ".is_closed", 0)
-      ->where($mDeal->table . ".id_owner", $this->getAuthProvider()->getUserId())
+      ->where($mDeal->table . ".id_owner", $this->authProvider()->getUserId())
       ->orderBy('price_excl_vat', 'desc')
       ->get()
       ->toArray()

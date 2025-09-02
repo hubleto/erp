@@ -10,7 +10,7 @@ class ActivatePremiumAccount extends \Hubleto\Erp\Controllers\ApiController
   {
     $premiumAccount = $this->getService(PremiumAccount::class);
     $premiumAccount->activatePremiumAccount();
-    $this->getRouter()->redirectTo('cloud');
+    $this->router()->redirectTo('cloud');
   }
 
 }

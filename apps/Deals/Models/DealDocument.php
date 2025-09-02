@@ -37,7 +37,7 @@ class DealDocument extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    if ($this->getRouter()->urlParamAsInteger('idDeal') > 0) {
+    if ($this->router()->urlParamAsInteger('idDeal') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

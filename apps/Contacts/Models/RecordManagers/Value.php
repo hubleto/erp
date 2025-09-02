@@ -27,8 +27,8 @@ class Value extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->urlParamAsInteger("idContact") > 0) {
-      $query = $query->where($this->table . '.id_contact', $main->getRouter()->urlParamAsInteger("idContact"));
+    if ($main->router()->urlParamAsInteger("idContact") > 0) {
+      $query = $query->where($this->table . '.id_contact', $main->router()->urlParamAsInteger("idContact"));
     }
 
     return $query;

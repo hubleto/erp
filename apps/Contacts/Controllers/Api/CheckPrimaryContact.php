@@ -10,14 +10,14 @@ class CheckPrimaryContact extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idContact = $this->getRouter()->urlParamAsInteger("idContact");
-    $idCustomer = $this->getRouter()->urlParamAsInteger("idCustomer");
-    $tags = $this->getRouter()->urlParamAsArray("tags");
+    $idContact = $this->router()->urlParamAsInteger("idContact");
+    $idCustomer = $this->router()->urlParamAsInteger("idCustomer");
+    $tags = $this->router()->urlParamAsArray("tags");
 
     if ($idContact == null || $idCustomer == null) {
       return [
         "result" => false,
-        "error" => $this->getTranslator()->translate("Some request data were missing")
+        "error" => $this->translator()->translate("Some request data were missing")
       ];
     }
     if ($tags == null) {
@@ -63,7 +63,7 @@ class CheckPrimaryContact extends \Hubleto\Erp\Controllers\ApiController
       $existingTagNames = implode(", ", $matchesNames);
       return [
         "result" => false,
-        "error" => $this->getTranslator()->translate("There already exists a primary contact for this customer for these tags:"),
+        "error" => $this->translator()->translate("There already exists a primary contact for this customer for these tags:"),
         "names" => $existingTagNames
       ];
     }

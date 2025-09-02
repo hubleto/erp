@@ -15,7 +15,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^contacts\/?$/' => Controllers\Contacts::class,
       '/^contacts\/add\/?$/' => ['controller' => Controllers\Contacts::class, 'vars' => ['recordId' => -1]],
       '/^contacts(\/(?<recordId>\d+))?\/?$/' => Controllers\Contacts::class,
@@ -27,7 +27,7 @@ class Loader extends \Hubleto\Framework\App
     ]);
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/categories']);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Contact Tags'),

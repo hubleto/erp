@@ -71,7 +71,7 @@
       <div class="app-launcher-header">
         <input placeholder={{ translate("Search app...") }} onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
       </div>
-      {% for app in hubleto.getAppManager().getEnabledApps() %}
+      {% for app in hubleto.appManager().getEnabledApps() %}
         <a
           class='btn app-launcher-app-button'
           href="{{ config.projectUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
@@ -158,7 +158,7 @@
               </a>
             </li>
           {% endif %}
-          {% if hubleto.getAppManager().isAppInstalled('Hubleto\\App\\Community\\Notifications') %}
+          {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Notifications') %}
             <li class="mr-2 {# hidden #} md:block">
               {% if notificationsCount > 0 %}
                 <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
@@ -173,7 +173,7 @@
               </a>
             </li>
           {% endif %}
-          {% if hubleto.getAppManager().isAppInstalled('Hubleto\\App\\Community\\Cloud') %}
+          {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Cloud') %}
             <li class="mr-2 {# hidden #} lg:block">
               {% if hubleto.isPremium %}
                 <a class="btn btn-transparent" href="{{ config.projectUrl }}/cloud">
@@ -208,7 +208,7 @@
                     <span class="icon"><i class='fas fa-user-tie'></i></span>
                     <span class="text">{{ translate('Manage your user account') }}</span>
                   </a>
-                  {% if hubleto.getAppManager().isAppInstalled('Hubleto\\App\\Community\\Cloud') %}
+                  {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Cloud') %}
                     <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/cloud">
                       <span class="icon"><i class='fas fa-cloud'></i></span>
                       <span class="text">{{ translate('Manage cloud account') }}</span>
@@ -228,8 +228,8 @@
 
     <aside id="default-sidebar">
       <nav style="margin-bottom:1.5em;overflow-y:auto">
-        {% for app in hubleto.getAppManager().getEnabledApps() %}
-          {% if hubleto.getAppManager().apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
+        {% for app in hubleto.appManager().getEnabledApps() %}
+          {% if hubleto.appManager().apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
             {{ app.dangerouslyInjectDesktopHtmlContent('beforeSidebar')|raw }}
           {% endif %}
         {% endfor %}
@@ -238,7 +238,7 @@
           {{ user.DEFAULT_COMPANY.name }}
         </div>
 
-        <a class="btn {{ hubleto.getRouter().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}/">
+        <a class="btn {{ hubleto.router().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}/">
           <span class="icon"><i class="fas fa-home"></i></span>
           <span class="text">{{ translate('Home') }}</span>
         </a>
@@ -309,8 +309,8 @@
 
   {% endif %}
 
-  {% for app in hubleto.getAppManager().getEnabledApps() %}
-    {% if hubleto.getAppManager().canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
+  {% for app in hubleto.appManager().getEnabledApps() %}
+    {% if hubleto.appManager().canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
       {{ app.dangerouslyInjectDesktopHtmlContent('footer')|raw }}
     {% endif %}
   {% endfor %}

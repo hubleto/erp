@@ -20,8 +20,8 @@ class Panel extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->getRouter()->isUrlParam("idDashboard")) {
-      $query = $query->where($this->table . '.id_dashboard', $main->getRouter()->urlParamAsInteger("idDashboard"));
+    if ($main->router()->isUrlParam("idDashboard")) {
+      $query = $query->where($this->table . '.id_dashboard', $main->router()->urlParamAsInteger("idDashboard"));
     }
 
     return $query;

@@ -16,7 +16,7 @@ class Loader extends \Hubleto\Framework\App
   public function init(): void
   {
     parent::init();
-    $this->getRouter()->httpGet([ '/^about\/?$/' => Controllers\About::class ]);
+    $this->router()->get([ '/^about\/?$/' => Controllers\About::class ]);
   }
 
 }

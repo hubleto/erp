@@ -10,13 +10,13 @@ class TableExportCsv extends \Hubleto\Erp\Controller
 
   public function render(): string
   {
-    $model = $this->getRouter()->urlParamAsString('model');
+    $model = $this->router()->urlParamAsString('model');
     $this->model = $this->getModel($model);
 
     $records = $this->model->recordGetList(
-      $this->getRouter()->urlParamAsString('fulltextSearch'),
-      $this->getRouter()->urlParamAsArray('columnSearch'),
-      $this->getRouter()->urlParamAsArray('orderBy'),
+      $this->router()->urlParamAsString('fulltextSearch'),
+      $this->router()->urlParamAsArray('columnSearch'),
+      $this->router()->urlParamAsArray('orderBy'),
       99999999, // itemsPerPage
       0, // page
     );

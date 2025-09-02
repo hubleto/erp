@@ -43,7 +43,7 @@ class Notification extends \Hubleto\Erp\Model
 
   public function describeColumns(): array
   {
-    $user = $this->getAuthProvider()->getUser();
+    $user = $this->authProvider()->getUser();
     return array_merge(parent::describeColumns(), [
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
       'category' => (new Integer($this, $this->translate('Category')))->setRequired()->setEnumValues(self::getCategories()),
@@ -60,7 +60,7 @@ class Notification extends \Hubleto\Erp\Model
 
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
-    $folder = $this->getRouter()->urlParamAsString('folder');
+    $folder = $this->router()->urlParamAsString('folder');
 
     $description = parent::describeTable();
 

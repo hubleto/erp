@@ -65,7 +65,7 @@ class Contact extends \Hubleto\Erp\Model
     unset($description->columns['is_primary']);
 
 
-    if ($this->getRouter()->urlParamAsInteger('idCustomer') > 0) {
+    if ($this->router()->urlParamAsInteger('idCustomer') > 0) {
       $description->columns = [];
       $description->inputs = [];
       $description->ui = [];

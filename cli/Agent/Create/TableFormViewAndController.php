@@ -6,7 +6,7 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
-    $appNamespace = $this->getAppManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
+    $appNamespace = $this->appManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
     $model = (string) ($this->arguments[4] ?? '');
     $force = (bool) ($this->arguments[5] ?? false);
     $noPrompt = (bool) ($this->arguments[6] ?? false);
@@ -17,7 +17,7 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
     $controller = $modelPluralForm; // using plural for controller managing the records in the model
     $view = $modelPluralForm; // using plural for view managing the records in the model
 
-    $this->getAppManager()->init();
+    $this->appManager()->init();
 
     if (empty($appNamespace)) {
       throw new \Exception("<appNamespace> not provided.");
@@ -26,7 +26,7 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
       throw new \Exception("<model> not provided.");
     }
 
-    $app = $this->getAppManager()->getApp($appNamespace);
+    $app = $this->appManager()->getApp($appNamespace);
 
     if (!$app) {
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
@@ -45,7 +45,7 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     $tplFolder = __DIR__ . '/../../Templates/snippets';
-    $this->getRenderer()->addNamespace($tplFolder, 'snippets');
+    $this->renderer()->addNamespace($tplFolder, 'snippets');
 
     $appNamespace = trim($appNamespace, '\\');
     $appNamespaceParts = explode('\\', $appNamespace);
@@ -80,14 +80,14 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
     if (!is_dir($app->srcFolder . '/Views')) {
       mkdir($app->srcFolder . '/Views');
     }
-    file_put_contents($app->srcFolder . '/Components/Table' . $modelPluralForm . '.tsx', $this->getRenderer()->renderView('@snippets/Components/Table.tsx.twig', $tplVars));
-    file_put_contents($app->srcFolder . '/Components/Form' . $modelSingularForm . '.tsx', $this->getRenderer()->renderView('@snippets/Components/Form.tsx.twig', $tplVars));
-    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->getRenderer()->renderView('@snippets/Controller.php.twig', $tplVars));
-    file_put_contents($app->srcFolder . '/Views/' . $view . '.twig', $this->getRenderer()->renderView('@snippets/ViewWithTable.twig.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Components/Table' . $modelPluralForm . '.tsx', $this->renderer()->renderView('@snippets/Components/Table.tsx.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Components/Form' . $modelSingularForm . '.tsx', $this->renderer()->renderView('@snippets/Components/Form.tsx.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->renderer()->renderView('@snippets/Controller.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Views/' . $view . '.twig', $this->renderer()->renderView('@snippets/ViewWithTable.twig.twig', $tplVars));
 
     $codeLoaderTsxLine1 = [ "import Table{$modelPluralForm} from './Components/Table{$modelPluralForm}';" ];
     $codeLoaderTsxLine2 = [ "globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});" ];
-    $codeRoute = [ "\$this->getRouter()->httpGet([ '/^{$app->manifest['rootUrlSlug']}\/" . strtolower($modelPluralFormKebab) . "(\/(?<recordId>\d+))?\/?$/' => Controllers\\{$controller}::class ]);" ];
+    $codeRoute = [ "\$this->router()->get([ '/^{$app->manifest['rootUrlSlug']}\/" . strtolower($modelPluralFormKebab) . "(\/(?<recordId>\d+))?\/?$/' => Controllers\\{$controller}::class ]);" ];
     $codeButton = [
       "<a class='btn btn-large btn-square btn-transparent' href='{$app->manifest['rootUrlSlug']}/{$modelPluralFormKebab}'>",
       "  <span class='icon'><i class='fas fa-table'></i></span>",
@@ -136,9 +136,9 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     \Hubleto\Terminal::yellow("⚠  NEXT STEPS:\n");
-    \Hubleto\Terminal::yellow("⚠   -> Run `npm run build-js` in `{$this->getEnv()->srcFolder}` to compile Javascript.\n");
+    \Hubleto\Terminal::yellow("⚠   -> Run `npm run build-js` in `{$this->env()->srcFolder}` to compile Javascript.\n");
     \Hubleto\Terminal::colored("cyan", "black", "Run: npm run build-js");
-    \Hubleto\Terminal::colored("cyan", "black", "And then open in browser: {$this->getEnv()->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
+    \Hubleto\Terminal::colored("cyan", "black", "And then open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
   }
 
 }

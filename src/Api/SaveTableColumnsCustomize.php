@@ -11,10 +11,10 @@ class SaveTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
     try {
 
       /** @var array<string, mixed> */
-      $columnsConfig = $this->getRouter()->urlParamAsArray("record");
+      $columnsConfig = $this->router()->urlParamAsArray("record");
 
-      $model = $this->getModel($this->getRouter()->urlParamAsString("model"));
-      $tag = $this->getRouter()->urlParamAsString("tag");
+      $model = $this->getModel($this->router()->urlParamAsString("model"));
+      $tag = $this->router()->urlParamAsString("tag");
       $allColumnsConfig = @json_decode($model->configAsString('tableColumns'), true) ?? [];
 
       if (!$allColumnsConfig) {
@@ -27,8 +27,8 @@ class SaveTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
         }
       }
 
-      $this->getConfig()->save(
-        "user/" . $this->getAuthProvider()->getUserId() . "/models/" . $model->fullName . "/tableColumns",
+      $this->config()->save(
+        "user/" . $this->authProvider()->getUserId() . "/models/" . $model->fullName . "/tableColumns",
         (string) json_encode($allColumnsConfig)
       );
 

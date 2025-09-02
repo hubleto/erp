@@ -11,7 +11,7 @@ class DeactivateSubscriptionRenewal extends \Hubleto\Erp\Controller
     parent::prepareView();
     $premiumAccount = $this->getService(PremiumAccount::class);
     $premiumAccount->deactivateSubscriptionRenewal();
-    $this->getRouter()->redirectTo('cloud');
+    $this->router()->redirectTo('cloud');
   }
 
 }

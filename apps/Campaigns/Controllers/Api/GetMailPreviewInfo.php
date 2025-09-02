@@ -10,8 +10,8 @@ class GetMailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idCampaign = $this->getRouter()->urlParamAsInteger('idCampaign');
-    $idContact = $this->getRouter()->urlParamAsInteger('idContact');
+    $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
+    $idContact = $this->router()->urlParamAsInteger('idContact');
 
     $mContact = $this->getService(Contact::class);
     $mCampaignContact = $this->getService(CampaignContact::class);

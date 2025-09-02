@@ -17,7 +17,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
-    $this->getRouter()->httpGet([
+    $this->router()->get([
       '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,
       '/^orders\/?$/' => Controllers\Orders::class,
       '/^orders\/(?<recordId>\d+)\/?$/' => Controllers\Orders::class,
@@ -32,7 +32,7 @@ class Loader extends \Hubleto\Framework\App
     $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
     $pipelineManager->addPipeline($this, 'orders', Pipeline::class);
 
-    $settingsApp = $this->getAppManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Order states'),
       'icon' => 'fas fa-file-lines',

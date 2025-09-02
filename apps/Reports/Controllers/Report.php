@@ -6,8 +6,8 @@ class Report extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
-    $reportUrlSlug = $this->getRouter()->routeVarAsString('reportUrlSlug');
-    $report = $this->getAppManager()->getApp(\Hubleto\App\Community\Reports\Loader::class)->reportManager->getReportByUrlSlug($reportUrlSlug);
+    $reportUrlSlug = $this->router()->routeVarAsString('reportUrlSlug');
+    $report = $this->appManager()->getApp(\Hubleto\App\Community\Reports\Loader::class)->reportManager->getReportByUrlSlug($reportUrlSlug);
 
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'reports', 'content' => $this->translate('Reports') ],
@@ -19,9 +19,9 @@ class Report extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $reportUrlSlug = $this->getRouter()->routeVarAsString('reportUrlSlug');
-    $report = $this->getAppManager()->getApp(\Hubleto\App\Community\Reports\Loader::class)->reportManager->getReportByUrlSlug($reportUrlSlug);
-    // $reportConfig = $report->getConfig();
+    $reportUrlSlug = $this->router()->routeVarAsString('reportUrlSlug');
+    $report = $this->appManager()->getApp(\Hubleto\App\Community\Reports\Loader::class)->reportManager->getReportByUrlSlug($reportUrlSlug);
+    // $reportConfig = $report->config();
 
     $this->viewParams['report'] = $report;
     // $this->viewParams['reportConfig'] = $reportConfig;

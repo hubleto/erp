@@ -71,7 +71,7 @@ class Loader extends \Hubleto\Framework\App
         and not tasks.is_closed
       ', [
         '%' . $e . '%', '%' . $e . '%', '%' . $e . '%',
-        '%' . $e . '%', '%' . $e . '%', '%' . $e . '%',
+        '%' . $e . '%'
       ]);
     }
 

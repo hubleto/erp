@@ -311,12 +311,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               return <div key={key}>{item.value}</div>;
             })}
           </div> : null}
-          {this.state.isInlineEditing && (R.PRODUCTS && R.PRODUCTS.length > 0) ?
-            <div className='text-yellow-500 mb-3'>
-              <span className='icon mr-2'><i className='fas fa-warning'></i></span>
-              <span className='text'>Price was calculated from products in deal.</span>
-            </div>
-          : <></>}
           <div className='flex flex-row *:w-1/2'>
             {this.inputWrapper('price_excl_vat', {
               cssClass: 'text-2xl',
@@ -328,7 +322,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             {this.inputWrapper('price_incl_vat', {
               readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
             })}
-            {this.inputWrapper('id_currency')}
+            {this.state.isInlineEditing && (R.PRODUCTS && R.PRODUCTS.length > 0) ?
+              <div className='badge badge-warning'>
+                <span className='icon mr-2'><i className='fas fa-warning'></i></span>
+                <span className='text'>Price cannot be changed, it is calculated from product prices.</span>
+              </div>
+            : <></>}
           </div>
           {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
           {this.inputWrapper('customer_order_number', {readonly: R.is_archived})}
@@ -336,10 +335,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         </>;
 
         const inputsColumnRight = <>
-          <div className="flex gap-2">
-            {this.inputWrapper('id_owner', {readonly: R.is_archived})}
-            {this.inputWrapper('id_manager', {readonly: R.is_archived})}
-          </div>
+          {this.inputWrapper('id_owner', {readonly: R.is_archived})}
+          {this.inputWrapper('id_manager', {readonly: R.is_archived})}
           {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
           <div className="flex gap-2">
             {this.inputWrapper('source_channel', {readonly: R.is_archived})}

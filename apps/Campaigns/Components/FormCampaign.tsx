@@ -88,7 +88,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               {this.inputWrapper('target_audience')}
               {this.inputWrapper('goal')}
               {this.inputWrapper('id_mail_template')}
-              {this.inputWrapper('mail_body')}
+              {/* {this.inputWrapper('mail_body')} */}
             </div>
             <div className='flex-1'>
               {this.inputWrapper('utm_source')}

@@ -17,9 +17,7 @@ class SaveTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
       $tag = $this->router()->urlParamAsString("tag");
       $allColumnsConfig = @json_decode($model->configAsString('tableColumns'), true) ?? [];
 
-      if (!$allColumnsConfig) {
-        $allColumnsConfig[$tag] = [];
-      }
+      $allColumnsConfig[$tag] = [];
 
       foreach ($columnsConfig as $colName => $column) {
         if (is_array($column)) {

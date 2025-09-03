@@ -24,13 +24,17 @@ class GetTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
       // }
       // exit;
 
-      foreach ($columns as $colName => $column) {
-        $transformedColumns[$colName]["title"] = $column->getTitle();
-        $transformedColumns[$colName]["is_hidden"] = $columnsConfig ? 0 : (int) !$column->getProperty("defaultVisibility");
-      }
-
-      foreach ($columnsConfig as $key => $is_hidden) {
-        $transformedColumns[$key]["is_hidden"] = $is_hidden;
+      if (!empty($columnsConfig)) {
+        foreach ($columnsConfig as $colName => $is_hidden) {
+          $originalColName = $columns[$colName]->getTitle();
+          $transformedColumns[$colName]["title"] = $originalColName;
+          $transformedColumns[$colName]["is_hidden"] = $is_hidden;
+        }
+      } else {
+        foreach ($columns as $colName => $column) {
+          $transformedColumns[$colName]["title"] = $column->getTitle();
+          $transformedColumns[$colName]["is_hidden"] = $columnsConfig ? 0 : (int) !$column->getProperty("defaultVisibility");
+        }
       }
 
       unset($transformedColumns["id"]);

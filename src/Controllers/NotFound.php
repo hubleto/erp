@@ -6,7 +6,7 @@ use Hubleto\Framework\Controllers\Controller;
 
 class NotFound extends \Hubleto\Erp\Controller
 {
-  public bool $requiresUserAuthentication = false;
+  public bool $requiresAuthenticatedUser = false;
   public bool $hideDefaultDesktop = true;
   public string $translationContext = 'Hubleto\\Erp\\Loader::Controllers\\NotFound';
 

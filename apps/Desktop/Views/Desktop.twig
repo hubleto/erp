@@ -195,7 +195,13 @@
           </li>
           <li>
             <button class="btn btn-transparent btn-dropdown mr-2">
-              <span class="text">{{ user.first_name }} {{ user.last_name }}</span>
+              <span class="text">
+                {% if user.first_name == '' and user.last_name == '' %}
+                  {{ user.email }}
+                {% else %}
+                  {{ user.first_name }} {{ user.last_name }}
+                {% endif %}
+              </span>
               <span class="icon"><i class='fas fa-user-tie'></i></span>
               <div class="menu relative">
                 <div class="list bg-primary" style="position:absolute;right:7em;top:0.3em;width:20em;">

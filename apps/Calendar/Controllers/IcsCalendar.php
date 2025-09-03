@@ -8,7 +8,7 @@ use Hubleto\App\Community\Calendar\Models\RecordManagers\SharedCalendar;
 class IcsCalendar extends \Hubleto\Erp\Controller
 {
   public bool $hideDefaultDesktop = true;
-  public bool $requiresUserAuthentication = false;
+  public bool $requiresAuthenticatedUser = false;
 
   public function getBreadcrumbs(): array
   {

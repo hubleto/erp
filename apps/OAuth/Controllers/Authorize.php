@@ -5,9 +5,9 @@ namespace Hubleto\App\Community\OAuth\Controllers;
 class Authorize extends \Hubleto\App\Community\OAuth\ServerController
 {
   public bool $hideDefaultDesktop = true;
-  public bool $requiresUserAuthentication = false;
+  public bool $requiresAuthenticatedUser = false;
 
-  public function render(array $params): string
+  public function render(): string
   {
     $server = $this->getServer();
 

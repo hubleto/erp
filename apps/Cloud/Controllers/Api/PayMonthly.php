@@ -12,7 +12,7 @@ class PayMonthly extends \Hubleto\Erp\Controllers\ApiController
   public const FREE_TRIAL_PERIOD = 4;
   public const THIS_MONTH_ALREADY_PAID = 5;
 
-  public bool $requiresUserAuthentication = false;
+  public bool $requiresAuthenticatedUser = false;
 
   public function renderJson(): ?array
   {

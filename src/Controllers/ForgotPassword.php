@@ -4,7 +4,7 @@ namespace Hubleto\Erp\Controllers;
 
 class ForgotPassword extends \Hubleto\Erp\Controller
 {
-  public bool $requiresUserAuthentication = false;
+  public bool $requiresAuthenticatedUser = false;
   public bool $hideDefaultDesktop = true;
   public string $translationContext = 'Hubleto\\Erp\\Loader::Controllers\\ForgotPassword';
 

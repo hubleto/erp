@@ -55,8 +55,8 @@ class User extends \Hubleto\Framework\Models\User
   {
     return array_merge(parent::describeColumns(), [
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPE_ENUM_VALUES),
-      'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
-      'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
+      'first_name' => (new Varchar($this, $this->translate('First name'))),
+      'last_name' => (new Varchar($this, $this->translate('Last name'))),
       'nick' => (new Varchar($this, $this->translate('Nick'))),
       'email' => (new Varchar($this, $this->translate('Email')))->setRequired(),
       'language' => (new Varchar($this, $this->translate('Language')))->setEnumValues(self::ENUM_LANGUAGES)->setRequired(),

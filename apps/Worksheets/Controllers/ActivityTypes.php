@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Worksheets\Controllers;
 class ActivityTypes extends \Hubleto\Erp\Controller
 {
   // Uncomment this if you want to make your controller public
-  // public bool $requiresUserAuthentication = false;
+  // public bool $requiresAuthenticatedUser = false;
 
   // Uncomment this if you want to have full control over the response content
   // (default Hubleto's desktop will not be rendered)

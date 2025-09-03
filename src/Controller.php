@@ -35,7 +35,7 @@ class Controller extends \Hubleto\Framework\Controller
   {
     if (
       isset($this->hubletoApp)
-      && $this->requiresUserAuthentication
+      && $this->requiresAuthenticatedUser
       && !$this->permittedForAllUsers
       && !$this->permissionsManager()->isAppPermittedForActiveUser($this->hubletoApp)
     ) {

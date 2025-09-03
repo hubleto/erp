@@ -7,7 +7,7 @@ use Hubleto\App\Community\Campaigns\Models\Campaign;
 class Tracker extends \Hubleto\Erp\Controller
 {
   public bool $hideDefaultDesktop = true;
-  public bool $requiresUserAuthentication = false;
+  public bool $requiresAuthenticatedUser = false;
 
   public function render(): string
   {

@@ -6,7 +6,7 @@ use Hubleto\App\Community\Cloud\PremiumAccount;
 
 class ChargeCredit extends \Hubleto\Erp\Controllers\ApiController
 {
-  public bool $requiresUserAuthentication = false;
+  public bool $requiresAuthenticatedUser = false;
 
   public function renderJson(): ?array
   {

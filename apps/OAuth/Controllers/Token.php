@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\OAuth\Controllers;
 class Token extends \Hubleto\App\Community\OAuth\ServerController
 {
   public bool $hideDefaultDesktop = true;
-  public bool $requiresUserAuthentication = false;
+  public bool $requiresAuthenticatedUser = false;
 
   public function prepareView(): void
   {

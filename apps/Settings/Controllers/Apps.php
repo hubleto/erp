@@ -21,7 +21,7 @@ class Apps extends \Hubleto\Erp\Controller
     $enableApp = $this->router()->urlParamAsString('enableApp');
     $findApp = $this->router()->urlParamAsString('findApp');
 
-    $appManager = $this->getAppManager();
+    $appManager = $this->appManager();
 
     if (!empty($installApp) && !$appManager->isAppInstalled($installApp)) {
       $appManager->installApp(1, $installApp, [], true);

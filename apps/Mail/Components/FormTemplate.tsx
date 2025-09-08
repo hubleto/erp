@@ -43,10 +43,8 @@ export default class FormTemplate<P, S> extends HubletoForm<FormTemplateProps,Fo
   renderContent(): JSX.Element {
 
     return <>
-      <div className='flex gap-2'>
-        {this.inputWrapper('subject')}
-        {this.inputWrapper('body_html')}
-      </div>
+      {this.inputWrapper('subject')}
+      {this.inputWrapper('body_html')}
     </>;
   }
 }

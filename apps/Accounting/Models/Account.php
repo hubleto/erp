@@ -15,7 +15,7 @@ class Account extends \Hubleto\Erp\Model
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
-    'ACCOUNT_TYPE' => [ self::BELONGS_TO, JournalEntryLine::class, 'id_account_type', 'id'  ],
+    'ACCOUNT_TYPE' => [ self::BELONGS_TO, AccountType::class, 'id_account_type', 'id'  ],
     'ACCOUNT_SUBTYPE' => [ self::BELONGS_TO, AccountSubtype::class, 'id_account_subtype', 'id'  ],
   ];
 
@@ -23,7 +23,7 @@ class Account extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'name' => new Varchar($this, $this->translate("Account name"))->setRequired(),
-      'id_account_type' => new Lookup($this, $this->translate("Account type"), JournalEntryLine::class)->setDescription('Broad categorization of the account')->setRequired(),
+      'id_account_type' => new Lookup($this, $this->translate("Account type"), AccountType::class)->setDescription('Broad categorization of the account')->setRequired(),
       'id_account_subtype' => new Lookup($this, $this->translate("Account subtype"), AccountSubtype::class)->setDescription('Closer specification of this accounts purpose'),
       'balance' => new Integer($this, $this->translate('Balance'))->setEnumValues([
         1 => "Credit",

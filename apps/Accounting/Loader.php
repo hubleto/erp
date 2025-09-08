@@ -36,15 +36,15 @@ class Loader extends \Hubleto\Framework\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\JournalEntryLine::class)->dropTableIfExists()->install();
+      $this->getModel(Models\AccountType::class)->dropTableIfExists()->install();
       $this->getModel(Models\AccountSubtype::class)->dropTableIfExists()->install();
-      $this->getModel(Models\JournalEntry::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Account::class)->dropTableIfExists()->install();
     } else if ($round == 2) {
-      $this->getModel(Models\JournalEntryLine::class)->record->create(["title" => "Liability"]);
-      $this->getModel(Models\JournalEntryLine::class)->record->create(["title" => "Asset"]);
-      $this->getModel(Models\JournalEntryLine::class)->record->create(["title" => "Equity"]);
-      $this->getModel(Models\JournalEntryLine::class)->record->create(["title" => "Expense"]);
-      $this->getModel(Models\JournalEntryLine::class)->record->create(["title" => "Revenue"]);
+      $this->getModel(Models\AccountType::class)->record->create(["title" => "Liability"]);
+      $this->getModel(Models\AccountType::class)->record->create(["title" => "Asset"]);
+      $this->getModel(Models\AccountType::class)->record->create(["title" => "Equity"]);
+      $this->getModel(Models\AccountType::class)->record->create(["title" => "Expense"]);
+      $this->getModel(Models\AccountType::class)->record->create(["title" => "Revenue"]);
     }
   }
 

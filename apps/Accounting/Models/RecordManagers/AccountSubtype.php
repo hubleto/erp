@@ -12,6 +12,6 @@ class AccountSubtype extends \Hubleto\Erp\RecordManager
   /** @return HasMany<JournalEntry> */
   public function CUSTOMER(): hasMany
   {
-    return $this->hasMany(JournalEntry::class, 'id_account_subtype', 'id');
+    return $this->hasMany(Account::class, 'id_account_subtype', 'id');
   }
 }

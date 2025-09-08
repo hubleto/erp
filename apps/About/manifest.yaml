@@ -1,0 +1,10 @@
+namespace: Hubleto\App\Community\About
+appType: community
+sidebarGroup: help
+rootUrlSlug: about
+name: About
+icon: fas fa-circle-question
+author:
+  name: "WAI.blue"
+  company: "wai.blue"
+highlight: About your Hubleto

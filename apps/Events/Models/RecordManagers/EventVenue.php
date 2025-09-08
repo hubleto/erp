@@ -1,0 +1,40 @@
+<?php
+
+namespace Hubleto\App\Community\Events\Models\RecordManagers;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+
+class EventVenue extends \Hubleto\Erp\RecordManager
+{
+  public $table = 'events_has_venues';
+
+  public function EVENT(): BelongsTo
+  {
+    return $this->belongsTo(Event::class, 'id_event', 'id');
+  }
+
+  public function VENUE(): BelongsTo
+  {
+    return $this->belongsTo(Venue::class, 'id_venue', 'id');
+  }
+
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
+
+    if ($main->router()->urlParamAsInteger("idEvent") > 0) {
+      $query = $query->where($this->table . '.id_event', $main->router()->urlParamAsInteger("idEvent"));
+    }
+
+    // Uncomment and modify these lines if you want to apply default filters to your model.
+    // $filters = $main->router()->urlParamAsArray("filters");
+    // if (isset($filters["fArchive"]) && $filters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
+    // else $query = $query->where("customers.is_active", true);
+
+    return $query;
+  }
+
+}

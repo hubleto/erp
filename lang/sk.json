@@ -1,18 +1,5 @@
 {
-    "Desktop": {
-        "Upgrade to PRO": "Prejsť na PRO",
-        "Your messages": "Vaše správy",
-        "Help center": "Centrum pomoci",
-        "Browse knowledgebase": "Prejsť na bázu znalostí",
-        "Hot tips & tricks": "Horúce tipy a triky",
-        "Need more help?": "Potrebujete pomôcť?",
-        "Contact us": "Kontaktujte nás",
-        "Manage your account": "Spravovať účet",
-        "Sign out": "Odhlásiť sa",
-        "Search knowledgebase...": "Prehľadávať bázu znalostí...",
-        "No hot tips for this screen": "Žiadne horúce tipy pre túto obrazovku"
-    },
-    "form": {
+    "Components\\Form": {
         "Add": "Pridať",
         "Save": "Uložiť",
         "Copy": "Kopírovať",
@@ -24,14 +11,26 @@
         "Record": "Záznam",
         "New record": "Nový záznam"
     },
-    "input": {
-        "Upload file": ""
+    "Components\\Input": {
+        "Upload file": "Nahrať súbor"
     },
-    "table": {
+    "Components\\Table": {
         "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
         "Yes, delete": "Áno, zmazať",
         "No, do not delete": "Nie, zavrieť okno",
-        "Delete": "",
-        "Start typing to search...": ""
+        "Delete": "Zmazať",
+        "Start typing to search...": "Začnite vyhľadávať...",
+        "Search...": "Hľadať",
+        "No data.": "Žiadne údaje."
+    },
+    "Controllers\\ControllerSignIn": {
+        "Keep signed in": "Zostať prihlásený"
+    },
+    "Controllers\\SignIn": {
+        "Your email": "Email",
+        "Password": "Heslo",
+        "Keep signed in": "Zostať prihlásený",
+        "Sign in": "Prihlásiť sa",
+        "Forgot password?": "Zabudol som heslo"
     }
 }

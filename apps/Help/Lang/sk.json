@@ -1,0 +1,15 @@
+{
+    "manifest": {
+        "Help": "Pomoc",
+        "Help and user guide for Hubleto.": "Pomocník a používateľská príručka pre Hubleto."
+    },
+    "Controllers\\Help": {
+        "Help center": "",
+        "Search knowledgebase...": "",
+        "Browse knowledgebase": "",
+        "Hot tips & tricks": "",
+        "No hot tips for this screen": "",
+        "Need more help?": "",
+        "Contact us": ""
+    }
+}

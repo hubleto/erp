@@ -1,0 +1,102 @@
+{
+    "loader": {
+        "Deals": "Deals",
+        "Deals Archive": "Archiwum dealów"
+    },
+    "controllers.deals": {
+        "Sales": "Sprzedaż",
+        "Deals": "Deals"
+    },
+    "controllers.dealsArchive": {
+        "Sales": "Sprzedaż",
+        "Deals": "Deals",
+        "Archive": "Archiwum"
+    },
+    "manifest": {
+        "Deals": "Oferty",
+        "Deal management. From deal to purchase.": "Zarządzanie transakcją. Od umowy do zakupu."
+    },
+    "root": {
+        "Deal Tags": "Tagi transakcji",
+        "Deal Lost Reasons": "Umakalizuje się utracone powody",
+        "Most valuable deals": "Najcenniejsze oferty",
+        "Deal value by result": "Wartość transakcji według wyniku",
+        "Active deals": "Aktywne oferty",
+        "Archived deals": "Zarchiwizowane oferty",
+        "Deal warnings": "Ostrzeżenia o transakcji"
+    },
+    "Models\\Deal": {
+        "Deal Identifier": "Identyfikator transakcji",
+        "Title": "Tytuł",
+        "Customer": "Klient",
+        "Contact": "Kontakt",
+        "Lead": "Ołów",
+        "Price": "Cena",
+        "Currency": "Waluta",
+        "Expected close date": "Oczekiwana data zamknięcia",
+        "Owner": "Właściciel",
+        "Created": "Stworzony",
+        "Pipeline": "Rurociąg",
+        "Pipeline step": "Krok rurociągu",
+        "Notes": "Notatki",
+        "Source channel": "Kanał źródłowy",
+        "Archived": "Zarchiwizowane",
+        "Deal Result": "Wynik transakcji",
+        "Reason for Lost": "Powód utraconego",
+        "Date of result update": "Data aktualizacji wyników",
+        "New Customer": "Nowy klient",
+        "Business type": "Typ biznesu",
+        "Link to shared folder (online storage) with related documents": "Link do folderu udostępnionego (przechowywanie online) z powiązanymi dokumentami",
+        "Add Deal": "Dodaj ofertę",
+        "Manager": "Menedżer"
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": "Otwarta umowa"
+    },
+    "Models\\DealActivity": {
+        "Subject": "Temat",
+        "Activity type": "Typ aktywności",
+        "Start date": "Data rozpoczęcia",
+        "Start time": "Czas rozpoczęcia",
+        "End date": "Data zakończenia",
+        "End time": "Czas zakończenia",
+        "All day": "Cały dzień",
+        "Completed": "Zakończony",
+        "Created by": "Stworzone przez",
+        "Deal": "Umowa",
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Minuty spotkań (link)"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Utracony rozum"
+    },
+    "Models\\DealHistory": {
+        "Change Date": "Data zmiany",
+        "Deal": "Umowa",
+        "Description": "Opis"
+    },
+    "Models\\DealTag": {
+        "Deal": "Umowa",
+        "Tag": "Etykietka"
+    },
+    "Models\\DealProduct": {
+        "Deal": "Umowa",
+        "Product": "Produkt",
+        "Unit Price": "Cena jednostkowa",
+        "Amount": "Kwota",
+        "Vat": "Kadź",
+        "Discount": "Rabat",
+        "Sum": "Suma"
+    },
+    "Models\\DealDocument": {
+        "Deal": "Umowa",
+        "Document": "Dokument"
+    },
+    "Models\\Tag": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": "Oczekiwane oferty bez przyszłego planu"
+    }
+}

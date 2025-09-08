@@ -1,26 +1,19 @@
+#!/usr/bin/env php
 <?php
 
 if (php_sapi_name() !== 'cli') exit;
 
-require_once("vendor/autoload.php");
-require_once("src/Main.php");
-
-if (is_file(__DIR__ . '/ConfigEnv.php')) require_once(__DIR__ . '/ConfigEnv.php');
-
 // cli agent is used also in 'Installer/template/hubleto'
-if (!is_array($config)) $config = [];
+if (!isset($config) || !is_array($config)) $config = [];
 
-$main = new \HubletoMain($config, \ADIOS\Core\Loader::ADIOS_MODE_LITE);
-$main->initDatabaseConnections();
-$main->loadConfigFromDB();
-$main->initTwig();
-$main->configureTwig();
+$config['sessionSalt'] = 'hubleto-cli-agent';
 
-$cli = new \HubletoMain\Cli\Agent\Loader($main);
+$main = new \Hubleto\Erp\Loader($config);
+$main->init();
 
 // MAIN code
 
-$cli->green("Hubleto " . \HubletoMain::RELEASE . " CLI agent.\n");
+\Hubleto\Terminal::green("Hubleto CLI agent (main version: " . \Composer\InstalledVersions::getPrettyVersion("hubleto/erp") . ").\n");
 
 $action = (string) ($argv[1] ?? '');
 
@@ -28,52 +21,51 @@ if (!empty($action)) {
   try {
     $command = null;
     switch ($action) {
-      case 'help': $command = new \HubletoMain\Cli\Agent\CommandHelp($cli, $argv); break;
-      case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($cli, $argv); break;
-      case 'release':
-        switch ($argv[2]) {
-          case 'create': $command = new \HubletoMain\Cli\Agent\Release\Create($cli, $argv); break;
-        }
-      break;
+      case 'help': $command = $main->getService(\Hubleto\Erp\Cli\Agent\CommandHelp::class)->setArguments($argv); break;
+      case 'init': $command = $main->getService(\Hubleto\Erp\Cli\Agent\CommandInit::class)->setArguments($argv); break;
       case 'app':
         switch ($argv[2]) {
-          case 'list': $command = new \HubletoMain\Cli\Agent\App\ListInstalled($cli, $argv); break;
-          case 'install': $command = new \HubletoMain\Cli\Agent\App\Install($cli, $argv); break;
-          case 'disable': $command = new \HubletoMain\Cli\Agent\App\Disable($cli, $argv); break;
-          case 'test': $command = new \HubletoMain\Cli\Agent\App\Test($cli, $argv); break;
-          case 'reset-all': $command = new \HubletoMain\Cli\Agent\App\ResetAll($cli, $argv); break;
-          case 'create': $command = new \HubletoMain\Cli\Agent\App\Create($cli, $argv); break;
-          case 'add-repository': $command = new \HubletoMain\Cli\Agent\App\AddRepository($cli, $argv); break;
+          case 'list': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\ListInstalled::class)->setArguments($argv); break;
+          case 'install': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\Install::class)->setArguments($argv); break;
+          case 'disable': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\Disable::class)->setArguments($argv); break;
+          case 'reset-all': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\ResetAll::class)->setArguments($argv); break;
+          case 'create': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\Create::class)->setArguments($argv); break;
         }
       break;
       case 'debug':
         switch ($argv[2]) {
-          case 'router': $command = new \HubletoMain\Cli\Agent\Debug\Router($cli, $argv); break;
+          case 'test-oauth': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Debug\TestOauth::class)->setArguments($argv); break;
+          case 'router': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Debug\Router::class)->setArguments($argv); break;
         }
       break;
       case 'create':
         switch ($argv[2]) {
-          case 'model': $command = new \HubletoMain\Cli\Agent\Create\Model($cli, $argv); break;
+          case 'app': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\Create::class)->setArguments($argv); break;
+          case 'model': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\Model::class)->setArguments($argv); break;
+          case 'controller': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\Controller::class)->setArguments($argv); break;
+          case 'view': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\View::class)->setArguments($argv); break;
+          case 'mvc': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\TableFormViewAndController::class)->setArguments($argv); break;
+          case 'api': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\ApiEndpoint::class)->setArguments($argv); break;
         }
       break;
       case 'project':
         switch ($argv[2]) {
-          case 'init': $command = new \HubletoMain\Cli\Agent\CommandInit($cli, $argv); break;
-          case 'generate-demo-data': $command = new \HubletoMain\Cli\Agent\Project\GenerateDemoData($cli, $argv); break;
+          case 'init': $command = $main->getService(\Hubleto\Erp\Cli\Agent\CommandInit::class)->setArguments($argv); break;
+          case 'generate-demo-data': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->setArguments($argv); break;
         }
       break;
     }
 
     if ($command === null) {
-      $cli->red("Don't know what to do.\n");
+      \Hubleto\Terminal::red("Don't know what to do.\n");
     } else {
       $command->run();
     }
   } catch (\Throwable $e) {
-    $cli->red("{$e->getMessage()}\n");
-    $cli->red($e->getTraceAsString()."\n");
+    \Hubleto\Terminal::red("{$e->getMessage()}\n");
+    \Hubleto\Terminal::red($e->getTraceAsString()."\n");
   }
 } else {
-  $cli->green("Usage: php hubleto <command>\n");
-  $cli->green("Example: php hubleto help\n");
+  \Hubleto\Terminal::green("Usage: php hubleto <command>\n");
+  \Hubleto\Terminal::green("Example: php hubleto help\n");
 }

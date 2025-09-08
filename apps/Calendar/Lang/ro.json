@@ -1,0 +1,27 @@
+{
+    "manifest": {
+        "Calendar": "",
+        "Free calendar app.": ""
+    },
+    "root": {
+        "Events for today": ""
+    },
+    "Models\\Activity": {
+        "Subject": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Meeting minutes (link)": "",
+        "Created by": ""
+    },
+    "Controllers\\Boards\\Reminders": {
+        "All-day": "",
+        "Open event details": "",
+        "events for tomorrow": "",
+        "events later": ""
+    }
+}

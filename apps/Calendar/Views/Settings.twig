@@ -1,0 +1,10 @@
+<div class="flex">
+  <h1 class="app-main-title">{{ translate('Calendar: Settings') }}</h1>
+  {% if viewParams.settingsSaved %}
+    <div class="badge badge-info text-sm ml-4">{{ translate('Settings saved.') }}</div>
+  {% endif %}
+</div>
+
+<app-calendar-share-table
+  configs='{{viewParams.calendarConfigs|json_encode|raw}}'
+></app-calendar-share-table>

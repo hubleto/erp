@@ -1,0 +1,24 @@
+{
+    "manifest": {
+        "Campaigns": "Kampagnen",
+        "Management of marketing campaigns": "Verwaltung von Marketingkampagnen"
+    },
+    "Controllers\\Campaigns": {
+        "Campaigns": "Kampagnen"
+    },
+    "Models\\Campaign": {
+        "Name": "Name",
+        "Target audience": "Zielgruppe",
+        "Goal": "Ziel",
+        "Notes": "Notizen",
+        "Color": "Farbe",
+        "Manager": "Verwalter",
+        "Created": "Erstellt am",
+        "Add Campaign": "Kampagne hinzufügen"
+    },
+    "Components\\FormCampaign": {
+        "Leads": "Leads",
+        "Campaign": "Kampagne",
+        "First create the campaign, then you will be prompted to create leads.": "Erstellen Sie zuerst eine Kampagne, anschließend werden Sie aufgefordert, Leads hinzuzufügen."
+    }
+}

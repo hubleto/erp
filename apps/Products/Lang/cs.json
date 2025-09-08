@@ -1,0 +1,45 @@
+{
+    "manifest": {
+        "Products": "Produkty",
+        "Free product portfolio managment.": "Správa portfolia produktů zdarma."
+    },
+    "root": {
+        "Products": "Produkty",
+        "Groups": "Skupiny",
+        "Suppliers": "Dodavatelé"
+    },
+    "Models\\Product": {
+        "Title": "Titul",
+        "Product Group": "Skupina produktů",
+        "Product Type": "Typ produktu",
+        "Supplier": "Dodavatel",
+        "On sale": "Na prodej",
+        "Image": "Obrázek",
+        "Description": "Popis",
+        "Number of items in package": "Počet položek v balíčku",
+        "Single unit price": "Jednotková cena",
+        "Unit": "Jednotka",
+        "Margin": "Marže",
+        "Vat": "DPH",
+        "Single unit order possible": "Možnost objednání jednoho kusu",
+        "Packaging": "Obal",
+        "Sale ended": "Prodej skončil",
+        "Show price to customer": "Zobrazit cenu zákazníkovi",
+        "Set price after reweight?": "Nastavit cenu po převážení?",
+        "Needs reordering?": "Potřebuje znovu objednat?",
+        "Storage rules": "Pravidla skladování",
+        "Table": "Tabulka",
+        "Add product": "Přidat produkt"
+    },
+    "Controllers\\Products": {
+        "Products": "Produkty"
+    },
+    "Models\\Group": {
+        "Title": "Názov",
+        "Add product group": "Přidat produktovou skupinu"
+    },
+    "Controllers\\Groups": {
+        "Products": "Produkty",
+        "Product Groups": "Produktová skupina"
+    }
+}

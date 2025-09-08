@@ -1,0 +1,179 @@
+{
+    "models.user": {
+        "First name": "Imię",
+        "Middle name": "Drugie imię",
+        "Last name": "Nazwisko",
+        "Email": "Email",
+        "Language": "Język",
+        "Active profile": "Aktywny profil",
+        "Login": "Login",
+        "Password": "Hasło",
+        "Active": "Konto jest aktywne",
+        "Time of last login": "Godzina ostatniego logowania",
+        "Last login IP": "Adres IP ostatniego logowania",
+        "Time of last access": "Ostatni czas dostępu",
+        "Last access IP": "Adres IP ostatniego dostępu"
+    },
+    "models.country": {
+        "Country Name": "Państwo",
+        "Code": "Kod"
+    },
+    "models.profile": {
+        "Company": "Firma"
+    },
+    "models.activityType": {
+        "Type Name": "Typ",
+        "Color": "Kolor",
+        "Shown in Calendar": "Zobacz w kalendarzu",
+        "Icon": "Ikona"
+    },
+    "models.currency": {
+        "Currency Name": "Waluta",
+        "Currency Code": "Kod"
+    },
+    "models.pipeline": {
+        "Name": "Nazwa",
+        "Description": "Opis"
+    },
+    "models.pipelineStep": {
+        "Name": "Nazwa",
+        "Order": "Zamówienie",
+        "Company": "Kolor"
+    },
+    "models.tag": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
+    },
+    "models.setting": {
+        "Key": "Parametr",
+        "Value": "Wartość",
+        "Only for user": "Tylko dla użytkownika"
+    },
+    "models.invoiceProfile": {
+        "Name": "Nazwa",
+        "Phone": "Telefon",
+        "E-mail": "Email",
+        "WWW": "WWW",
+        "Company ID": "Numer identyfikacyjny",
+        "Tax ID": "CYNA",
+        "VAT ID": "NUMER VAT",
+        "Street, line 1": "Ulica, rząd nr. 1",
+        "Street, line 2": "Ulica, rząd nr. 2",
+        "ZIP": "Kod pocztowy",
+        "City": "Miasto",
+        "Country": "Państwo",
+        "Bank name": "Názwa banku",
+        "Account number": "Numer konta",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SWIFT",
+        "Numbering pattern": "Wzór na numerację"
+    },
+    "models.userRole": {
+        "Role": "Rola",
+        "Grant all permissions": "Przyznaj wszystkie uprawnienia"
+    },
+    "models.rolePermission": {
+        "Permission": "Pozwolenie",
+        "Role": "Rola"
+    },
+    "models.permission": {
+        "Permission": "Pozwolenie"
+    },
+    "controllers.dashboard": {
+        "Settings": "Ustawienia",
+        "Users": "Użytkownicy",
+        "User Roles": "Role użytkowników",
+        "Profiles": "Profile",
+        "Permissions": "Uprawnienia",
+        "Tags": "Tags",
+        "Activity Types": "Rodzaje działalności",
+        "Contact Types": "Rodzaje działalności",
+        "Countries": "Państwa",
+        "Currencies": "Waluty",
+        "Lead Statuses": "Statusy leadów",
+        "Deal Statuses": "Statusy dealów",
+        "Pipelines": "Pipelines",
+        "Invoice profiles": "Profile rozliczeniowe"
+    },
+    "controllers.userRoles": {
+        "Settings": "Ustawienia",
+        "User Roles": "Role użytkowników"
+    },
+    "controllers.countries": {
+        "Settings": "Ustawienia",
+        "Countries": "Państwa"
+    },
+    "loader": {
+        "Settings": "Ustawienia"
+    },
+    "input": {
+        "Upload file": ""
+    },
+    "Models\\User": {
+        "First name": "Imię",
+        "Last name": "Nazwisko",
+        "Nick": "Nacięcie",
+        "Email": "E-mail",
+        "Language": "Język",
+        "Default company": "Firma domyślna"
+    },
+    "Models\\UserRole": {
+        "Role": "Rola",
+        "Grant all permissions (administrator role)": "Przyznać wszystkie uprawnienia (rola administratora)",
+        "Description": "Opis",
+        "Is default role (cannot be modified)": "Jest domyślną rolą (nie można zmodyfikować)"
+    },
+    "Models\\UserHasRole": {
+        "User": "Użytkownik",
+        "Role": "Rola"
+    },
+    "Models\\RolePermission": {
+        "Permission": "Pozwolenie",
+        "Role": "Rola"
+    },
+    "manifest": {
+        "Settings": "Ustawienia",
+        "Settings and control panel for your Hubleto.": "Ustawienia i panel sterowania dla twojego Hubleto.",
+        "Settings and tools": "Ustawienia i narzędzia"
+    },
+    "root": {
+        "Users": "Użytkownicy",
+        "Roles": "Role",
+        "Your companies": "Twoje firmy",
+        "General settings": "Ustawienia ogólne",
+        "Permissions list": "Lista uprawnień",
+        "Role permissions": "Uprawnienia do ról",
+        "Activity types": "Typy aktywności",
+        "Countries": "Kraje",
+        "Currencies": "Waluty",
+        "Invoice profiles": "Profile faktury",
+        "Platform config": "Konfiguracja platformy",
+        "Sidebar": "Pasek boczny",
+        "Teams": "Zespoły"
+    },
+    "Models\\Country": {
+        "Country": "Kraj",
+        "Code": "Kod"
+    },
+    "Models\\Company": {
+        "Company": "Firma",
+        "Tax ID": "Identyfikator podatkowy",
+        "VAT ID": "VAT ID",
+        "Street, line 1": "Ulica, linia 1",
+        "Street, line 2": "Ulica, linia 2",
+        "ZIP": "ZAMEK BŁYSKAWICZNY",
+        "City": "Miasto",
+        "Country": "Kraj"
+    },
+    "Models\\ActivityType": {
+        "Type": "Typ",
+        "Color": "Kolor",
+        "Show in calendar": "Pokaż w kalendarzu",
+        "Icon": "Ikona"
+    },
+    "Models\\Currency": {
+        "Currency": "Waluta",
+        "Code": "Kod",
+        "Symbol": "Symbol"
+    }
+}

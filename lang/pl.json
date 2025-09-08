@@ -1,6 +1,6 @@
 {
     "desktop": {
-        "Upgrade to PRO": "Przejdź do PRO",
+        "Upgrade to Premium": "Przejdź do Premium",
         "Your messages": "Twoje wiadomości",
         "Help center": "Centrum pomocy",
         "Browse knowledgebase": "Przeglądaj bazę wiedzy",
@@ -33,5 +33,12 @@
         "No, do not delete": "Nie, zamknij okno",
         "Delete": "Usuwać",
         "Start typing to search...": "Aby wyszukać, zacznij pisać..."
+    },
+    "Desktop": {
+        "Premium": "Premia",
+        "Manage your user account": "Zarządzaj swoim kontem użytkownika",
+        "Manage cloud account": "Zarządzaj kontem w chmurze",
+        "Sign out": "Wyloguj się",
+        "Help": "Pomoc"
     }
 }

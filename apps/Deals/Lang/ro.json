@@ -1,0 +1,86 @@
+{
+    "manifest": {
+        "Deals": "",
+        "Deal management. From deal to purchase.": ""
+    },
+    "root": {
+        "Deal Tags": "",
+        "Deal Lost Reasons": "",
+        "Deal warnings": "",
+        "Most valuable deals": "",
+        "Deal value by result": "",
+        "Active deals": "",
+        "Archived deals": ""
+    },
+    "Models\\DealActivity": {
+        "Subject": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Meeting minutes (link)": "",
+        "Created by": "",
+        "Deal": "",
+        "Contact": ""
+    },
+    "Models\\Deal": {
+        "Deal Identifier": "",
+        "Title": "",
+        "Customer": "",
+        "Contact": "",
+        "Lead": "",
+        "Price": "",
+        "Currency": "",
+        "Expected close date": "",
+        "Owner": "",
+        "Created": "",
+        "Pipeline": "",
+        "Pipeline step": "",
+        "Notes": "",
+        "Source channel": "",
+        "Archived": "",
+        "Deal Result": "",
+        "Reason for Lost": "",
+        "Date of result update": "",
+        "New Customer": "",
+        "Business type": ""
+    },
+    "Models\\LostReason": {
+        "Lost Reason": ""
+    },
+    "Models\\DealHistory": {
+        "Change Date": "",
+        "Deal": "",
+        "Description": ""
+    },
+    "Models\\DealTag": {
+        "Deal": "",
+        "Tag": ""
+    },
+    "Models\\DealProduct": {
+        "Deal": "",
+        "Product": "",
+        "Unit Price": "",
+        "Amount": "",
+        "Vat": "",
+        "Discount": "",
+        "Sum": ""
+    },
+    "Models\\DealDocument": {
+        "Deal": "",
+        "Document": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": ""
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": ""
+    }
+}

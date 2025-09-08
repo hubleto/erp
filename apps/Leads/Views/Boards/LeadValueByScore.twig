@@ -1,0 +1,19 @@
+{% if viewParams.chartData|length > 0 %}
+  <div className="w-full">
+    <app-chart
+      string:type='pie'
+      json:legend='{"display": true, "position": "right"}'
+      json:data='{{ viewParams.chartData|json_encode|raw }}'
+      class="block h-[20em] text-center p-2"
+    ></app-chart>
+  </div>
+{% else %}
+  <div class="alert alert-info">
+    No leads found.<br/>
+    <br/>
+    <a href="leads?add" class="btn btn-transparent">
+      <span class="icon"><i class="fas fa-add"></i></span>
+      <span class="text">Add lead</span>
+    </a>
+  </div>
+{% endif %}

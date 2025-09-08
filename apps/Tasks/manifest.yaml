@@ -1,0 +1,12 @@
+namespace: Hubleto\App\Community\Tasks
+appType: community
+sidebarGroup: projects
+rootUrlSlug: tasks
+name: Tasks
+icon: fas fa-list-check
+author:
+  name: "WAI.blue"
+  nick: "wai.blue"
+highlight: Task management app
+requires:
+  - Hubleto\App\Community\Pipeline

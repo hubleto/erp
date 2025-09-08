@@ -1,0 +1,53 @@
+{# {% set bcItems = [ {"url": "", "text": "<i class='fas fa-home'></i>"} ] %}
+{% if items is iterable %}{% set bcItems = bcItems|merge(items) %}{% endif %} #}
+
+<nav class="breadcrumbs">
+  <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+    {# <li>
+      <a
+        href="{{ config.projectUrl }}/"
+        class=" btn btn-primary-outline"
+      >
+        <span class="icon"><i class="fas fa-home"></i></span>
+        <span class="text">{{ user.DEFAULT_COMPANY.name }}</span>
+      </a>
+    </li> #}
+    <li>
+      <button class="btn btn-transparent {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %} btn-primary-outline">
+        <span class="text">{{ viewParams.activatedApp.manifest.nameTranslated }}</span>
+        {% if viewParams.appMenu|length > 0 %}
+          <span class="icon"><i class="fas fa-chevron-down"></i></span>
+          <div class="menu">
+            <div class="list">
+              {% for item in viewParams.appMenu %}
+                <a href="{{ config.projectUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
+                  <span class="icon"><i class="{{ item.icon }}"></i></span>
+                  <span class="text">{{ item.title }}</span>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </button>
+    </li>
+    {% set i = 0 %}
+    {% for item in items %}
+      <li>
+        <div class="flex items-center">
+          <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+          {% if item.url %}
+            <a
+              href="{{ config.projectUrl }}/{{ item.url }}"
+              class="ms-1 text-sm dark:text-white"
+            >{{ item.content|raw }}</a>
+          {% else %}
+            <div class="ms-1 text-sm dark:text-white">{{ item.content|raw }}</div>
+          {% endif %}
+        </div>
+      </li>
+      {% set i = i + 1 %}
+    {% endfor %}
+  </ol>
+</nav>

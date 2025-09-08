@@ -1,0 +1,33 @@
+{
+    "controllers.calendar": {
+        "Calendar": "Kalendarz"
+    },
+    "loader": {
+        "Calendar": "Kalendarz"
+    },
+    "manifest": {
+        "Calendar": "Kalendarz",
+        "Free calendar app.": "Bezpłatna aplikacja kalendarza."
+    },
+    "root": {
+        "Events for today": "Wydarzenia na dziś"
+    },
+    "Models\\Activity": {
+        "Subject": "Temat",
+        "Activity type": "Typ aktywności",
+        "Start date": "Data rozpoczęcia",
+        "Start time": "Czas rozpoczęcia",
+        "End date": "Data zakończenia",
+        "End time": "Czas zakończenia",
+        "All day": "Cały dzień",
+        "Completed": "Zakończony",
+        "Created by": "Stworzone przez",
+        "Meeting minutes (link)": "Minuty spotkań (link)"
+    },
+    "Controllers\\Boards\\Reminders": {
+        "All-day": "Cały dzień",
+        "Open event details": "Otwarte szczegóły wydarzenia",
+        "events for tomorrow": "Wydarzenia na jutro",
+        "events later": "wydarzenia później"
+    }
+}

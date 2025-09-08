@@ -1,0 +1,21 @@
+<?php
+
+namespace Hubleto\App\Community\Contacts\Controllers;
+
+class Categories extends \Hubleto\Erp\Controller
+{
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => 'contacts', 'content' => $this->translate('Contacts') ],
+      [ 'url' => 'categories', 'content' => $this->translate('Categories') ],
+    ]);
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@Hubleto:App:Community:Contacts/Categories.twig');
+  }
+
+}

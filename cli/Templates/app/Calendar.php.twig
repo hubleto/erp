@@ -1,0 +1,26 @@
+<?php
+
+namespace {{ appNamespace }};
+
+class Calendar extends \Hubleto\App\Community\Calendar\Calendar {
+
+  public array $calendarConfig = [
+    "title" => "{{ appName }}",
+    "addNewActivityButtonText" => "Add new activity linked to {{ appName }}",
+    "icon" => "fas fa-calendar",
+    "formComponent" => "{{ appName }}FormActivity"
+  ];
+
+  public function loadEvent(int $id): array
+  {
+    // Implement your functionality for loading single calendar event.
+    return [];
+  }
+
+  public function loadEvents(string $dateStart, string $dateEnd, array $filter = [], $idUser = 0): array
+  {
+    // Implement your functionality for loading multiple calendar events.
+    return [];
+  }
+
+}

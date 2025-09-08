@@ -1,0 +1,9 @@
+{
+    "manifest": {
+        "Orders": "Święcenia",
+        "Free order managment.": "Zarządzanie wolnym zamówieniem."
+    },
+    "root": {
+        "Order states": "Zamów stany"
+    }
+}

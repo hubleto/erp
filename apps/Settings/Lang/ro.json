@@ -1,0 +1,69 @@
+{
+    "Models\\User": {
+        "First name": "",
+        "Last name": "",
+        "Nick": "",
+        "Email": "",
+        "Language": "",
+        "Default company": ""
+    },
+    "Models\\UserRole": {
+        "Role": "",
+        "Grant all permissions (administrator role)": "",
+        "Description": "",
+        "Is default role (cannot be modified)": ""
+    },
+    "Models\\UserHasRole": {
+        "User": "",
+        "Role": ""
+    },
+    "Models\\RolePermission": {
+        "Permission": "",
+        "Role": ""
+    },
+    "manifest": {
+        "Settings": "",
+        "Settings and control panel for your Hubleto.": "",
+        "Settings and tools": ""
+    },
+    "root": {
+        "Users": "",
+        "Roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions list": "",
+        "Role permissions": "",
+        "Activity types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Invoice profiles": "",
+        "Platform config": "",
+        "Sidebar": "",
+        "Teams": ""
+    },
+    "Models\\ActivityType": {
+        "Type": "",
+        "Color": "",
+        "Show in calendar": "",
+        "Icon": ""
+    },
+    "Models\\Country": {
+        "Country": "",
+        "Code": ""
+    },
+    "Models\\Company": {
+        "Company": "",
+        "Tax ID": "",
+        "VAT ID": "",
+        "Street, line 1": "",
+        "Street, line 2": "",
+        "ZIP": "",
+        "City": "",
+        "Country": ""
+    },
+    "Models\\Currency": {
+        "Currency": "",
+        "Code": "",
+        "Symbol": ""
+    }
+}

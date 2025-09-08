@@ -1,0 +1,138 @@
+{
+    "loader": {
+        "Deals": "Dealy",
+        "Deals Archive": "Archív dealov"
+    },
+    "controllers.deals": {
+        "Sales": "Vertrieb",
+        "Deals": "Deals"
+    },
+    "controllers.dealsArchive": {
+        "Sales": "Vertrieb",
+        "Deals": "Leads",
+        "Archive": "Archiv"
+    },
+    "manifest": {
+        "Deals": "Angebote",
+        "Deal management. From deal to purchase.": "Deal Management. Vom Deal zum Kauf."
+    },
+    "root": {
+        "Deal statuses": "",
+        "Deal Tags": "Deal -Tags",
+        "Most valuable deals": "Wertvollste Angebote",
+        "Deal value by result": "Dealwert nach Ergebnis",
+        "Deal Lost Reasons": "Verlorene Gründe",
+        "Active deals": "Aktive Angebote",
+        "Archived deals": "Archivierte Geschäfte",
+        "Deal warnings": ""
+    },
+    "Models\\Deal": {
+        "Deal Identifier": "Deal Identifier",
+        "Title": "Titel",
+        "Customer": "Kunde",
+        "Contact": "Kontakt",
+        "Lead": "Führen",
+        "Price": "Preis",
+        "Currency": "Währung",
+        "Expected close date": "Erwartete Schließungsdatum",
+        "Owner": "Eigentümer",
+        "Created": "Erstellt",
+        "Pipeline": "Pipeline",
+        "Pipeline step": "Pipeline -Schritt",
+        "Notes": "Notizen",
+        "Source channel": "Quellkanal",
+        "Archived": "Archiviert",
+        "Deal Result": "Deal Ergebnis",
+        "Reason for Lost": "Grund für verlorene",
+        "Date of result update": "Datum des Ergebnis Update",
+        "New Customer": "Neuer Kunde",
+        "Business type": "Geschäftstyp",
+        "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
+        "Add Deal": "Deal hinzufügen",
+        "Manager": "Manager",
+        "Customer' order number": "",
+        "Closed": "Geschlossen",
+        "Result": "Ergebnis",
+        "All": "Alle",
+        "Ownership": "Eigentum",
+        "Owned by me": "In meinem Besitz",
+        "Managed by me": "Von mir verwaltet",
+        "Open \/ Closed": "Offen \/ Geschlossen",
+        "Open": "Offen",
+        "Active": "Aktiv"
+    },
+    "Models\\DealActivity": {
+        "Deal": "Handeln",
+        "Contact": "Kontakt",
+        "Activity type": "Aktivitätstyp",
+        "Subject": "Thema",
+        "Start date": "Startdatum",
+        "Start time": "Startzeit",
+        "End date": "Enddatum",
+        "End time": "Endzeit",
+        "All day": "Den ganzen Tag",
+        "Completed": "Vollendet",
+        "Created by": "Erstellt von",
+        "Meeting minutes (link)": "Besprechungsminuten (Link)"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Verlorener Vernunft"
+    },
+    "Models\\DealHistory": {
+        "Change Date": "Datum ändern",
+        "Deal": "Handeln",
+        "Description": "Beschreibung"
+    },
+    "Models\\DealTag": {
+        "Deal": "Handeln",
+        "Tag": "Etikett"
+    },
+    "Models\\DealProduct": {
+        "Deal": "Handeln",
+        "Product": "Produkt",
+        "Unit Price": "Stückpreis",
+        "Amount": "Menge",
+        "Vat": "Mehrwertsteuer",
+        "Discount": "Rabatt",
+        "Sum": "Summe"
+    },
+    "Models\\DealDocument": {
+        "Deal": "Handeln",
+        "Document": "Dokumentieren"
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": "Offenes Geschäft"
+    },
+    "Components\\FormDeal": {
+        "Show deals": "Showgeschäfte",
+        "Type recent activity here": "Geben Sie hier die aktuelle Aktivität ein",
+        "Enter = Log completed activity": "Geben Sie = log abgeschlossene Aktivität ein",
+        "Shift+Enter = Schedule": "Shift+ENTER = Zeitplan",
+        "Most recent activities": "Letzte Aktivitäten",
+        "Not completed yet": "Noch nicht fertig",
+        "Go to original lead": "Zu Originalführung gehen",
+        "Calendar": "Kalender",
+        "Documents": "Unterlagen",
+        "Local documents": "Lokale Dokumente",
+        "History": "Geschichte"
+    },
+    "Models\\Tag": {
+        "Name": "Name",
+        "Color": "Farbe"
+    },
+    "Controllers\\Deals": {
+        "Deals": "Angebote",
+        "Open deals": "Offene Angebote",
+        "Total value": "Gesamtwert"
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": "Ausstehende Geschäfte ohne zukünftige Plan",
+        "Open deals without future plan": "Offene Deals ohne zukünftige Pläne"
+    },
+    "Controllers\\Boards\\DealValueByResult": {
+        "Unknown": "Unbekannt",
+        "Pending": "Ausstehend",
+        "Won": "Gewonnen",
+        "Lost": "Verloren"
+    }
+}

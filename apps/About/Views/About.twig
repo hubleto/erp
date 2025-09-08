@@ -1,0 +1,48 @@
+<h1 class="app-main-title">About</h1>
+
+<div class="flex gap-2 w-full">
+  <div class="card grow">
+    <div class="card-header">
+      {{ translate('About your Hubleto') }}
+    </div>
+    <div class="card-body">
+      <table class="table-default dense">
+        <thead>
+          <tr>
+            <td>Package</td>
+            <td>Version</td>
+            <td>Commit</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pName, pInfo in viewParams.packages %}
+            {% if pName starts with 'hubleto' %}
+              <tr>
+                <td>{{ pName }}</td>
+                <td>{{ pInfo.version }}</td>
+                <td>{{ pInfo.reference }}</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card grow">
+    <div class="card-header">
+      Packages
+    </div>
+    <div class="card-body">
+      <table class="table-default dense">
+        <tbody>
+          {% for pName, pInfo in viewParams.packages %}
+            <tr>
+              <td>{{ pName }}</td>
+              <td>{{ pInfo.version }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

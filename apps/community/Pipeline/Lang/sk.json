@@ -1,9 +1,0 @@
-{
-    "manifest": {
-        "Pipeline": "Pipeline",
-        "...": ""
-    },
-    "Controllers\\Home": {
-        "Pipeline": "Pipeline"
-    }
-}

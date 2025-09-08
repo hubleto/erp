@@ -1,0 +1,40 @@
+<?php
+
+namespace Hubleto\App\Community\Desktop\Controllers;
+
+class Home extends \Hubleto\Erp\Controller
+{
+
+  /**
+   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   *
+   * @return void
+   * 
+   */
+  public function init(): void
+  {
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+
+    $dashboardsApp = $this->appManager()->getApp(\Hubleto\App\Community\Dashboards\Loader::class);
+    if ($dashboardsApp) {
+      $mDashboard = $this->getModel(\Hubleto\App\Community\Dashboards\Models\Dashboard::class);
+
+      $defaultDashboard = $mDashboard->record->prepareReadQuery()
+        ->where('is_default', true)
+        ->with('PANELS')
+        ->first()
+        ?->toArray();
+      ;
+
+      $this->viewParams['defaultDashboard'] = $defaultDashboard;
+
+    }
+
+    $this->setView('@Hubleto:App:Community:Desktop/Home.twig');
+  }
+
+}

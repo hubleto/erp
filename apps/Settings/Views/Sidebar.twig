@@ -1,0 +1,27 @@
+<h1 class='app-main-title'>{{ translate('Settings') }} > {{ translate('Sidebar') }}</h1>
+
+<form action="" method="POST">
+  <input type="hidden" name="save" value="1" />
+  <div class="m-auto" style="width:500px">
+    <div class="list">
+      {% for appNamespace, app in viewParams.installedApps %}
+        <div class="list-item"><div class="flex gap-2 w-full justify-between items-center p-2 hover:bg-gray-50">
+          <div class="items-center">
+            <div>
+              <i class="mr-2 {{ app.manifest.icon }}"></i>
+              {{ app.manifest.nameTranslated ?? app.manifest.name }}
+            </div>
+            <small>{{ app.manifest.highlightTranslated ?? app.manifest.highlight }}</small>
+          </div>
+          <div>
+            <input name="app[{{ app.manifest.rootUrlSlug }}]" value="{{ app.configAsInteger('sidebarOrder') ?? 0 }}">
+          </div>
+        </div></div>
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary mt-2 w-full">
+      <span class="icon"><i class="fas fa-check"></i></span>
+      <span class="text">Save sidebar configuration</span>
+    </button>
+  </div>
+</form>

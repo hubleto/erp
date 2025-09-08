@@ -1,0 +1,39 @@
+{
+    "manifest": {
+        "Dashboard": "Úvod",
+        "Desktop": "Pracovná plocha",
+        "Default Hubleto desktop implementation.": "Hubleto pracovná plocha"
+    },
+    "Controllers\\Home": {
+        "Welcome": "Vitajte",
+        "Upgrade to Premium and get exciting rewards.": "",
+        "You are using free version of Hubleto. Certain features are unavailable.": "",
+        "Upgrade to Premium": ""
+    },
+    "Controllers\\Desktop": {
+        "CRM": "CRM",
+        "Tasks": "Úlohy",
+        "Documents": "Dokumenty",
+        "Marketing": "Marketing",
+        "Sales": "Predaj",
+        "Communication": "Komunikácia",
+        "Projects": "Projekty",
+        "Supply chain": "Dodávatelia",
+        "Helpdesk": "Helpdesk",
+        "Events": "Eventy",
+        "E-Commerce": "E-Commerce",
+        "Website": "Webstránka",
+        "Finance": "Financie",
+        "Reporting": "Reporty",
+        "Maintenance": "Údržba",
+        "Help": "Pomoc",
+        "Custom": "Vlastné",
+        "Search app...": "Hľadať appku...",
+        "Open sidebar": "Zobraziť bočný panel",
+        "Manage your user account": "Môj účet",
+        "Sign out": "Odhlásiť sa",
+        "Search app": "Hľadať appku",
+        "Home": "Domov",
+        "You have no apps in this group.": "V tejto skupine nemáte žiadnu appku."
+    }
+}

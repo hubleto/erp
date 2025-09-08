@@ -1,0 +1,12 @@
+{
+    "loader": {
+        "Home": "Wstęp"
+    },
+    "manifest": {
+        "Desktop": "Desiktop",
+        "Default Hubleto desktop implementation.": "Domyślna implementacja Hubleto Desktop."
+    },
+    "Controllers\\Home": {
+        "Welcome": "Powitanie"
+    }
+}

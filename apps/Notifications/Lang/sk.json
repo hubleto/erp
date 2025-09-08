@@ -1,0 +1,18 @@
+{
+    "manifest": {
+        "Notifications": "Upozornenia",
+        "Internal team notifications": "Interné upozornenia"
+    },
+    "Models\\Notification": {
+        "Priority": "Priorita",
+        "Category": "Kategória",
+        "From": "Odosielateľ",
+        "To": "Príjemca",
+        "Subject": "Predmet",
+        "Body": "Správa",
+        "Color": "Farba",
+        "Tags": "Značky",
+        "Sent": "Odoslaná",
+        "Read": "Prečítaná"
+    }
+}

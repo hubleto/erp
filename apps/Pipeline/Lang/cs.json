@@ -1,0 +1,31 @@
+{
+    "manifest": {
+        "Pipeline": "Pipeline",
+        "Free sales pipeline management.": "Správa pipeline zdarma."
+    },
+    "root": {
+        "Pipelines": "Pipeline"
+    },
+    "Models\\Pipeline": {
+        "Name": "Jméno",
+        "Description": "Popis",
+        "Type": "Typ"
+    },
+    "Models\\PipelineStep": {
+        "Name": "Jméno",
+        "Order": "Objednávka",
+        "Color": "Barva",
+        "Probability": "Pravděpodobnost",
+        "Pipeline": "Pipeline",
+        "Set result of a deal to": "Stanovit výsledek obchodu"
+    },
+    "Controllers\\Home": {
+        "Pipeline": "Pipeline",
+        "Manage pipelines": "Spravovat Pipeline",
+        "Add deal": "Přidat obchod"
+    },
+    "Controllers\\Pipelines": {
+        "Settings": "Nastavení",
+        "Pipelines": "Pipeline"
+    }
+}

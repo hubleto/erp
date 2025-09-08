@@ -11,3 +11,6 @@
 /.htaccess
 /apps/external/*
 !/apps/external/README.md
+/repositories.tsx
+/.vscode
+/.php-cs-fixer.cache

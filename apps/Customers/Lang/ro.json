@@ -1,0 +1,51 @@
+{
+    "manifest": {
+        "Customers": "",
+        "Free customer management and addressbook.": ""
+    },
+    "root": {
+        "Customer Tags": ""
+    },
+    "Models\\CustomerActivity": {
+        "Subject": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Meeting minutes (link)": "",
+        "Created by": "",
+        "Customer": "",
+        "Contact": ""
+    },
+    "Models\\Customer": {
+        "Name": "",
+        "Street Line 1": "",
+        "Street Line 2": "",
+        "Region": "",
+        "City": "",
+        "Postal Code": "",
+        "Country": "",
+        "VAT ID": "",
+        "Customer ID": "",
+        "Tax ID": "",
+        "Notes": "",
+        "Date Created": "",
+        "Active": "",
+        "Owner": ""
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "",
+        "Document": ""
+    },
+    "Models\\CustomerTag": {
+        "Customer": "",
+        "Tag": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
+    }
+}

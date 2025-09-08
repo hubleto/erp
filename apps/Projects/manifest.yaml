@@ -1,0 +1,10 @@
+namespace: Hubleto\App\Community\Projects
+appType: community
+sidebarGroup: projects
+rootUrlSlug: projects
+name: Projects
+icon: fas fa-diagram-project
+author:
+  name: "WAI.blue"
+  nick: "wai.blue"
+highlight: Project management

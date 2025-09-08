@@ -1,0 +1,62 @@
+{
+    "manifest": {
+        "Calendar": "Kalender",
+        "Free calendar app.": "Kostenlose Kalender-App."
+    },
+    "root": {
+        "Reminders": "Erinnerungen"
+    },
+    "Models\\Activity": {
+        "Subject": "Thema",
+        "Activity type": "Aktivitätstyp",
+        "Start date": "Startdatum",
+        "Start time": "Startzeit",
+        "End date": "Enddatum",
+        "End time": "Endzeit",
+        "All day": "Den ganzen Tag",
+        "Completed": "Vollendet",
+        "Created by": "Erstellt von",
+        "Meeting minutes (link)": "Besprechungsminuten (Link)"
+    },
+    "Controllers\\Calendar": {
+        "Calendar": "Kalender"
+    },
+    "Models\\SharedCalendar": {
+        "Created by": "Erstellt am",
+        "Calendar ID": "Kalender ID",
+        "Share key": "Kalenderschlüssel",
+        "Display details": "Details anzeigen",
+        "Enabled": "Aktiv",
+        "Date from": "Datum ab",
+        "Date to": "Datum bis"
+    },
+    "Controllers\\Boards\\Reminders": {
+        "All-day": "Ganztägig",
+        "Open event details": "Offene Ereignisdetails",
+        "events for tomorrow": "Ereignisse für morgen",
+        "events later": "Ereignisse später",
+        "Open reminder details": "Erinnerungsdetails öffnen",
+        "Let's have a break. You have nothing to do for today.": "Lass uns eine Pause machen. Heute hast du nichts zu tun.",
+        "reminders later": "spätere Erinnerungen",
+        "Later": "Später"
+    },
+    "Components\\CalendarMain": {
+        "Calendars": "Kalender",
+        "Ownership": "Eigentümer",
+        "All": "Alle",
+        "My activities": "Meine Aktivitäten"
+    },
+    "Components\\FormActivity": {
+        "Start": "Anfang",
+        "End": "Ende"
+    },
+    "Components\\FormActivitySelector": {
+        "New event": "Neues Ereignis",
+        "Choose calendar to which the event should be created.": "Wählen Sie ein Kalender aus, in denem Sie das Ereignis erstellen wollen"
+    },
+    "Controllers\\Settings": {
+        "Calendar": "Kalender",
+        "Settings": "Einstellungen",
+        "Calendar: Settings": "Kalender: Einstellungen"
+    }
+}

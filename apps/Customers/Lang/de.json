@@ -1,0 +1,100 @@
+{
+    "manifest": {
+        "Customers": "Kunden",
+        "Free customer management and addressbook.": "Kostenloses Kundenmanagement und Adressbuch."
+    },
+    "root": {
+        "Customer Tags": "Kunden-Tags"
+    },
+    "Models\\CustomerActivity": {
+        "Customer": "Kunde",
+        "Contact": "Kontakt",
+        "Activity type": "Aktivitätstyp",
+        "Subject": "Thema",
+        "Start Date": "Anfangsdatum",
+        "Start Time": "Anfangszeit",
+        "End Date": "Enddatum",
+        "End Time": "Endzeit",
+        "All day": "Ganztägig",
+        "Completed": "Abgeschlossen",
+        "Created by": "Erstellt von",
+        "Start date": "Startdatum",
+        "Start time": "Startzeit",
+        "End date": "Enddatum",
+        "End time": "Endzeit",
+        "Meeting minutes (link)": "Meeting minutes (Link)"
+    },
+    "Controllers\\Customers": {
+        "Customers": "Kunden"
+    },
+    "Models\\Customer": {
+        "Name": "Name",
+        "Street Line 1": "Adresszeile 1",
+        "Street Line 2": "Adresszeile 2",
+        "Region": "Region",
+        "City": "Stadt",
+        "Postal Code": "Postleitzahl",
+        "Country": "Land",
+        "VAT ID": "USt-IdNr",
+        "Customer ID": "Kundenausweis",
+        "Tax ID": "Steuer-ID",
+        "Notes": "Notizen",
+        "Date Created": "Erstellt am",
+        "Active": "Aktiv",
+        "Owner": "Eigentümer",
+        "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
+        "Add Customer": "Kunden hinzufügen",
+        "Tags": "Tags",
+        "Archive": "Archiv",
+        "Archived": "Archiviert",
+        "Manager": "Verwalter",
+        "Shared folder (online document storage)": "Geteilter Ordner"
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "Kunde",
+        "Document": "Dokumentieren"
+    },
+    "Models\\CustomerTag": {
+        "Customer": "Kunde",
+        "Tag": "Etikett"
+    },
+    "Models\\Tag": {
+        "Name": "Name",
+        "Color": "Farbe"
+    },
+    "Components\\FormCustomer": {
+        "Type recent activity here": "Geben Sie hier die aktuelle Aktivität ein",
+        "Shift+Enter = Schedule": "Shift+ENTER = Zeitplan",
+        "Not completed yet": "Noch nicht fertig",
+        "Most recent activities": "Letzte Aktivitäten",
+        "Customer": "Kunde",
+        "Contacts": "Kontakte",
+        "Show on map": "Auf Karte anzeigen",
+        "Add contact": "Kontakt hinzufügen",
+        "First name": "Vorname",
+        "Last name": "Nachname",
+        "Phone number": "Telefonnummer",
+        "Email": "E-Mail",
+        "Primary Contact": "Hauptkontakt",
+        "Calendar": "Kalender",
+        "Tags": "Tags",
+        "Documents": "Unterlagen",
+        "Local documents": "Lokale Dokumente",
+        "Log completed activity": "Abgeschlossene Aktivität erfassen",
+        "Enter": "Enter",
+        "Schedule activity": "Aktivität planen",
+        "Shift+Enter": "Shift+Enter",
+        "Document": "Dokument",
+        "Add document": "Dokument hinzufügen",
+        "Link": "Link"
+    },
+    "Components\\CustomerFormActivity": {
+        "Start": "Anfang",
+        "Customer": "Kunde",
+        "End": "Ende",
+        "Contact": "Kontakt"
+    },
+    "Components\\TableContacts": {
+        "Primary": "Primär"
+    }
+}

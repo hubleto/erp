@@ -1,18 +1,5 @@
 {
-    "desktop": {
-        "Upgrade to PRO": "Upgrade auf PRO",
-        "Your messages": "Ihre Nachrichten",
-        "Help center": "Hilfszentrum",
-        "Browse knowledgebase": "Wissensbasis durchsuchen",
-        "Hot tips & tricks": "Heiße Tipps & Tricks",
-        "Need more help?": "Brauchen Sie Hilfe?",
-        "Contact us": "Kontaktieren Sie uns",
-        "Manage your account": "Konto verwalten",
-        "Sign out": "Abmelden",
-        "Search knowledgebase...": "Wissensbasis durchsuchen...",
-        "No hot tips for this screen": "Keine heißen Tipps für diesen Bildschirm"
-    },
-    "form": {
+    "Components\\Form": {
         "Add": "Hinzufügen",
         "Save": "Speichern",
         "Copy": "Kopieren",
@@ -24,10 +11,10 @@
         "Record": "Eintrag",
         "New record": "Neuer Eintrag"
     },
-    "input": {
+    "Components\\Input": {
         "Upload file": ""
     },
-    "table": {
+    "Components\\Table": {
         "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, einen Eintrag zu löschen. Drücken Sie OK um dies zu bestätigen.",
         "Yes, delete": "Ja, löschen",
         "No, do not delete": "Nein, Fenster schließen",
@@ -36,7 +23,7 @@
         "No data.": "Keine Daten"
     },
     "Desktop": {
-        "Upgrade to PRO": "",
+        "Upgrade to Premium": "",
         "Your messages": "",
         "Help center": "",
         "Search knowledgebase...": "",
@@ -46,6 +33,12 @@
         "Need more help?": "",
         "Contact us": "",
         "Manage your account": "",
-        "Sign out": ""
+        "Sign out": "Abmelden",
+        "Get premium": "",
+        "Premium": "Prämie",
+        "Manage your user account": "Verwalten Sie Ihr Benutzerkonto",
+        "Manage cloud account": "Cloud -Konto verwalten",
+        "Help": "Helfen",
+        "Personal": "Persönlich"
     }
 }

@@ -1,9 +1,0 @@
-{
-    "loader": {
-        "Documents": "Dokumente"
-    },
-    "manifest": {
-        "Documents": "",
-        "...": ""
-    }
-}

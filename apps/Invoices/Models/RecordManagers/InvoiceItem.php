@@ -1,0 +1,16 @@
+<?php
+
+namespace Hubleto\App\Community\Invoices\Models\RecordManagers;
+
+use \Illuminate\Database\Eloquent\Relations\HasMany;
+use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class InvoiceItem extends \Hubleto\Erp\RecordManager {
+  public $table = 'invoice_items';
+
+  /** @return BelongsTo<Invoice, covariant InvoiceItem> */
+  public function INVOICE(): BelongsTo {
+    return $this->BelongsTo(Invoice::class, 'id_invoice');
+  }
+
+}

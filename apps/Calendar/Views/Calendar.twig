@@ -1,0 +1,6 @@
+<app-calendar-main
+  string:height="85vh"
+  configs='{{viewParams.calendarConfigs|json_encode|raw}}'
+  string:event-source="{{ viewParams.eventSource }}"
+  int:event-id="{{ viewParams.eventId }}"
+></app-calendar-main>

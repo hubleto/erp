@@ -1,0 +1,22 @@
+<?php
+
+namespace {{ appNamespace }}\Controllers;
+
+class Settings extends \Hubleto\Erp\Controller
+{
+
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => '{{ appRootUrlSlug }}', 'content' => '{{ appName }}' ],
+      [ 'url' => 'settings', 'content' => 'Settings' ],
+    ]);
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@{{ appViewNamespace }}/Settings.twig');
+  }
+
+}

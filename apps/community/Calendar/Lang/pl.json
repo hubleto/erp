@@ -1,8 +1,0 @@
-{
-    "controllers.calendar": {
-        "Calendar": "Kalendarz"
-    },
-    "loader": {
-        "Calendar": "Kalendarz"
-    }
-}

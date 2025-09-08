@@ -1,0 +1,45 @@
+<h1 class="app-main-title">{{ translate('Database updater') }}</h1>
+
+{% if viewParams.runLog|length > 0 %}
+  <pre class="bg-yellow-50 p-2 mb-2">{{ viewParams.runLog|join('\n') }}</pre>
+{% endif %}
+
+{% if viewParams.necessaryUpdates|length > 0 %}
+  <form action="" method="POST">
+    <table class="table-default dense">
+      <thead>
+        <tr>
+          <th>{{ translate("UID") }}</th>
+          <th>{{ translate("Type") }}</th>
+          <th>{{ translate("Description")}}</th>
+          <th>{{ translate("SQL") }}</th>
+          <th>{{ translate("Run this update") }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for updateUid, update in viewParams.necessaryUpdates %}
+          <tr class="{{ update.bgClass }}">
+            <td>{{ updateUid }}</td>
+            <td>{{ update.type }}</td>
+            <td>{{ update.description }}</td>
+            <td><pre>{{ update.sql|join('\n') }}</pre></td>
+            <td>
+              <input type="checkbox" style="zoom:2"
+                name="updatesToRun[]"
+                value="{{ updateUid }}"
+              />
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button class="btn btn-primary mt-2">
+      <span class="icon"><i class="fas fa-check"></i></span>
+      <span class="text">{{ translate("Run the updates now!") }}</span>
+    </button>
+  </form>
+{% else %}
+  <div class="alert alert-success">
+    {{ translate("No necessary database updates found.") }}
+  </div>
+{% endif %}

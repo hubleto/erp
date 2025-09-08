@@ -1,9 +1,0 @@
-{
-    "manifest": {
-        "Calendar": "Kalendár",
-        "Default calendar app. Display calendars and events from other apps.": "Hlavný kalendár. Zobrazuje čiastkové kalendáre z ostatných aplikácií."
-    },
-    "Controllers\\Calendar": {
-        "Calendar": "Kalendár"
-    }
-}

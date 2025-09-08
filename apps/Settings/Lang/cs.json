@@ -1,0 +1,169 @@
+{
+    "Models\\User": {
+        "First name": "Křestní jméno",
+        "Last name": "Příjmení",
+        "Nick": "Nick",
+        "Email": "E-mail",
+        "Language": "Jazyk",
+        "Default company": "Výchozí společnost",
+        "Apps": "Aplikace",
+        "Roles": "Role",
+        "Teams": "Tímy"
+    },
+    "Models\\UserRole": {
+        "Role": "Role",
+        "Grant all permissions (administrator role)": "Udělejte všechna povolení (role správce)",
+        "Description": "Popis",
+        "Is default role (cannot be modified)": "Je výchozí role (nelze upravit)"
+    },
+    "Models\\UserHasRole": {
+        "User": "Uživatel",
+        "Role": "Role"
+    },
+    "Models\\RolePermission": {
+        "Permission": "Povolení",
+        "Role": "Role"
+    },
+    "manifest": {
+        "Settings": "Nastavení",
+        "Settings and control panel for your Hubleto.": "Nastavení a ovládací panel pro váš Hubteto."
+    },
+    "root": {
+        "Users": "Uživatelé",
+        "Roles": "Role",
+        "Your companies": "Vaše společnosti",
+        "General settings": "Obecná nastavení",
+        "Permissions list": "Seznam oprávnění",
+        "Role permissions": "Oprávnění role",
+        "Activity types": "Typy aktivity",
+        "Countries": "Země",
+        "Currencies": "Měny",
+        "Invoice profiles": "Profily faktury",
+        "Platform config": "Konfigurace platformy",
+        "Sidebar": "Bončý panel",
+        "Teams": "Týmy"
+    },
+    "Models\\Country": {
+        "Country": "Země",
+        "Code": "Kód"
+    },
+    "Models\\Company": {
+        "Company": "Společnost",
+        "Tax ID": "ID daně",
+        "VAT ID": "DPH ID",
+        "Street, line 1": "Ulice, řádek 1",
+        "Street, line 2": "Street, řádek 2",
+        "ZIP": "Zip",
+        "City": "Město",
+        "Country": "Země"
+    },
+    "Models\\ActivityType": {
+        "Type": "Typ",
+        "Color": "Barva",
+        "Show in calendar": "Zobrazit v kalendáři",
+        "Icon": "Ikona"
+    },
+    "Models\\Currency": {
+        "Currency": "Měna",
+        "Code": "Kód",
+        "Symbol": "Symbol"
+    },
+    "Models\\Team": {
+        "Team name": "Tímový jméno",
+        "Team color": "Tímová barva",
+        "Description": "Popis",
+        "Manager": "Manažér",
+        "Members": "Členové"
+    },
+    "Models\\Setting": {
+        "Key": "Klíč",
+        "Value": "Hodnota",
+        "Only for user": "Iba pro uživatele"
+    },
+    "Controllers\\MyAccount": {
+        "Settings": "Nastavení",
+        "Company": "Firma"
+    },
+    "Components\\FormUser": {
+        "About the user": "O užívateli"
+    },
+    "Controllers\\Dashboard": {
+        "Settings": "Nastavení",
+        "Most common settings": "Nejběžnější nastavení",
+        "Change theme": "Změnit tématiku",
+        "Manage users": "Spravovat uživatele",
+        "Manage apps": "Spravovat aplikace",
+        "All settings": "Všechny nastavení"
+    },
+    "Models\\InvoiceProfile": {
+        "Name": "Jméno",
+        "Phone": "Telefonní číslo",
+        "E-mail": "E-mail",
+        "WWW": "Webstránka",
+        "Customer ID": "IČO",
+        "Tax ID": "DIČ",
+        "VAT ID": "IČ DPH",
+        "Street, line 1": "Ulice, řádek 1",
+        "Street, line 2": "Ulice, řadek 2",
+        "ZIP": "PSČ",
+        "City": "Město",
+        "Country": "Krajina",
+        "Bank name": "Jméno banky",
+        "Account number": "Číslo účtu",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SWIFT",
+        "Numbering pattern": "Číslovací vzor"
+    },
+    "Models\\Permission": {
+        "Permission": "Povolení"
+    },
+    "Models\\TeamMember": {
+        "Team": "Tím",
+        "Member": "Člen"
+    },
+    "Controllers\\UserRoles": {
+        "Settings": "Nastavení",
+        "User Roles": "Rola uživatele"
+    },
+    "Controllers\\Currencies": {
+        "Settings": "Nastavení",
+        "Currencies": "Měny"
+    },
+    "Controllers\\RolePermissions": {
+        "Settings": "Nastavení",
+        "Role permissions": "Oprávnění role"
+    },
+    "Controllers\\Sidebar": {
+        "Settings": "Nastavení",
+        "Sidebar": "Boční panel"
+    },
+    "Controllers\\InvoiceProfiles": {
+        "Settings": "Nastavení",
+        "Invoice profiles": "Profily pro fakturování"
+    },
+    "Controllers\\Permissions": {
+        "Settings": "Nastavení",
+        "Permissions": "Povolení"
+    },
+    "Controllers\\ActivityTypes": {
+        "Settings": "Nastavení",
+        "Activity Types": "Typy aktivit",
+        "Types of activities": "Typy aktivit"
+    },
+    "Controllers\\Teams": {
+        "Settings": "Nastavení",
+        "Teams": "Tímy"
+    },
+    "Controllers\\Users": {
+        "Settings": "Nastavení",
+        "Users": "Uživatelé"
+    },
+    "Controllers\\Companies": {
+        "Settings": "Nastavení",
+        "Companies": "Firmy"
+    },
+    "Controllers\\Countries": {
+        "Settings": "Nastavení",
+        "Countries": "Krajiny"
+    }
+}

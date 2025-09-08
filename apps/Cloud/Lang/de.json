@@ -1,0 +1,113 @@
+{
+    "manifest": {
+        "Cloud": "Cloud",
+        "Management of cloud Hubleto account.": "Verwaltung des Cloud-Hubleto-Kontos."
+    },
+    "Models\\Log": {
+        "Log datetime": "Protokolldatensätze",
+        "Active users": "Aktive Benutzer",
+        "Paid apps": "Bezahlte Apps",
+        "Premium expected": "Premium erwartet"
+    },
+    "Models\\Payment": {
+        "Charged": "Aufgeladen",
+        "Discount": "Rabatt",
+        "Full amount": "Vollbetrag",
+        "Discounted amount": "Ermäßigter Betrag",
+        "Type": "Typ",
+        "Details": "Details",
+        "Has invoice": "Hat Rechnung",
+        "Billing account": "Abrechnungskonto",
+        "UUID": "Uuid"
+    },
+    "Models\\Credit": {
+        "Recalculated": "Neu berechnet",
+        "Credit": "Kredit"
+    },
+    "root": {
+        "Free trial expires in": "Kostenlose Testversion läuft in",
+        "days": "Tage"
+    },
+    "Models\\Discount": {
+        "Year": "Jahr",
+        "Month": "Monat",
+        "Discount": "Rabatt",
+        "Notes": "Notizen",
+        "Billing account": "Abrechnungskonto"
+    },
+    "Controllers\\Dashboard": {
+        "You are upgraded to Premium": "Sie werden auf Premium verbessert",
+        "Free trial expires in": "Kostenlose Testversion läuft in",
+        "days": "Tage",
+        "Configure your payment method.": "Konfigurieren Sie Ihre Zahlungsmethode.",
+        "Automatic subscription renewal is active": "Automatische Abonnementverlängerung ist aktiv",
+        "Access to your Premium account will be automaticaly renewed next month.": "Der Zugriff auf Ihr Premium-Konto wird im nächsten Monat automatisch erneuert.",
+        "Your Premium benefits": "Ihre Premium-Vorteile",
+        "unlimited users": "unbegrenzte Benutzer",
+        "more apps & features": "Weitere Apps und Funktionen",
+        "premium support": "Premium -Unterstützung",
+        "Add new users or install new apps": "Fügen Sie neue Benutzer hinzu oder installieren Sie neue Apps",
+        "Configure payment with card": "Die Zahlung mit Karte konfigurieren",
+        "Charge credit via bank transfer": "Gutschrift über Bankübertragung belasten",
+        "Show payments and download invoices": "Zeigen Sie Zahlungen an und laden Sie Rechnungen herunter",
+        "Manage billing accounts": "Abrechnungskonten verwalten",
+        "Usage info": "Nutzungsinformationen",
+        "Month": "Monat",
+        "Active users": "Aktive Benutzer",
+        "Paid apps": "Bezahlte Apps",
+        "Show details": "Details anzeigen",
+        "Price for this month": "Preis für diesen Monat",
+        "Terms of use and privacy policy accepted": "Nutzungsbedingungen und Datenschutzrichtlinien akzeptiert",
+        "Subscription active until": "Abonnement aktiv bis",
+        "Premium account activated": "Premium-Konto aktiviert",
+        "Free trial until": "Kostenlose Testversion bis",
+        "Account UID": "Konto UID",
+        "Variable symbol for payments": "Variabler Symbol für Zahlungen",
+        "Price is calculated based on maximum number of active users or paid apps during this month.": "Der Preis wird in diesem Monat auf der Grundlage der maximalen Anzahl aktiver Benutzer oder bezahlten Apps berechnet.",
+        "Deactivate subscription renewal": "Abonnementverlängerung deaktivieren",
+        "Your collaboration space": "Ihr Kollaborationsraum",
+        "welcome to Hubleto cloud.": "willkommen bei Hubleto Cloud",
+        "We are happy you decided to use Hubleto.": "Wir freuen uns, dass Sie sich für Hubleto entschieden haben.",
+        "Before you start, you should first read, understand and accept our": "Bevor Sie beginnen, sollten Sie unsere AGB lesen, verstehen und akzeptieren.",
+        "Terms of use": "Allgemeine Geschäftsbedingungen",
+        "and": "und",
+        "Privacy policy": "Datenschutzerklärung",
+        "Therefore, we kindly ask you to go through these documents and appoint your consent": "Daher bitten wir Sie höflich, diese Dokumente durchzulesen und Ihre Einwilligung zu erteilen.",
+        "by ticking the checkbox below.": "durch das Ankreuzen des Kästchens unten.",
+        "I have read, undestrood and agree to the": "Ich habe gelesen, verstanden und stimme den",
+        "of Hubleto cloud": "von Hubleto Cloud zu",
+        "Continue to the dashboard": "Zum Dashboard fortfahren",
+        "Automatic subscription renewal is deactivated": "Automatische Erneuerung des Abonnements ist deaktiviert",
+        "Access to your Premium account will be blocked next month.": "Zugang zu Ihrem Premium-Konto wird nächsten Monat gesperrt.",
+        "Activate subscription renewal again": "Abonnementverlängerung wieder aktivieren"
+    },
+    "Models\\BillingAccount": {
+        "Name": "Name",
+        "Phone": "Handynummer",
+        "E-mail": "E-mail",
+        "Tax ID": "Unternehmensnummer",
+        "VAT ID": "USt-IdNr.",
+        "Street, line 1": "Straße und Hausnummer",
+        "Street, line 2": "Adresszusatz",
+        "ZIP": "PLZ",
+        "City": "Stadt",
+        "Country": "Land",
+        "Is active": "ist aktiv",
+        "Created": "Erstellt am"
+    },
+    "Controllers\\Log": {
+        "Usage log": "Nutzungsprotokoll",
+        "Datetime": "Datum und Zeit",
+        "Active users": "Aktive Nutzer",
+        "Paid apps": "Kostenpflichtige Apps"
+    },
+    "Controllers\\PaymentsAndInvoices": {
+        "Payments and invoices": "Zahlungen und Rechnungen",
+        "Charged": "Abgerechnet",
+        "UUID": "UUID",
+        "Type": "Typ",
+        "Amount": "Preis",
+        "Details": "Details",
+        "Invoice": "Rechnung"
+    }
+}

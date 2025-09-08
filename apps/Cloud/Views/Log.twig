@@ -1,0 +1,21 @@
+
+<h1 class="app-main-title">Hubleto Cloud > {{ translate("Usage log") }}</h1>
+
+<table class="table-default dense">
+  <thead>
+    <tr>
+      <th>{{ translate("Datetime") }}</th>
+      <th>{{ translate("Active users") }}</th>
+      <th>{{ translate("Paid apps") }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for log in viewParams.log %}
+      <tr>
+        <td>{{ log.log_datetime }}</td>
+        <td>{{ log.active_users }}</td>
+        <td>{{ log.paid_apps }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

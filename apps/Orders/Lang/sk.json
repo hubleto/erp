@@ -1,0 +1,65 @@
+{
+    "manifest": {
+        "Orders": "Objednávky",
+        "Free order managment.": "Správa objednávok zdarma."
+    },
+    "root": {
+        "Order states": "Stavy objednávok"
+    },
+    "Controllers\\Orders": {
+        "Orders": "Objednávky"
+    },
+    "Models\\Order": {
+        "Order number": "Číslo objednávky",
+        "Customer": "Zákazník",
+        "Title": "Názov",
+        "State": "Stav",
+        "Price": "Cena",
+        "Currency": "Mena",
+        "Order date": "Dátum objednania",
+        "Required delivery date": "Požadovaný dátum dodania",
+        "Shipping information": "Dodacie informácie",
+        "Notes": "Poznámky",
+        "Add order": "Pridať objednávku",
+        "Pipeline": "",
+        "Pipeline step": "",
+        "Template": ""
+    },
+    "Models\\State": {
+        "Title": "Názov",
+        "Code": "Kódovať",
+        "Color": "Farba"
+    },
+    "Models\\OrderProduct": {
+        "Order": "Objednávka",
+        "Title": "Názov",
+        "Product": "Produkt",
+        "Unit price": "Jednotková cena",
+        "Amount": "Výška",
+        "Discount": "Zľavu",
+        "Vat": "Kov",
+        "Add product": ""
+    },
+    "Models\\History": {
+        "Order": "Objednávka",
+        "Short Description": "Krátky popis",
+        "Long Description": "Dlhý popis",
+        "Date Time": "Čas"
+    },
+    "Components\\FormOrder": {
+        "Order": "Objednávka",
+        "History": "História",
+        "Title": "Názov",
+        "Documents": "",
+        "Projects": "",
+        "Invoices": ""
+    },
+    "Models\\OrderInvoice": {
+        "Order": "",
+        "Invoice": ""
+    },
+    "Models\\OrderDocument": {
+        "Order": "",
+        "Document": ""
+    }
+}

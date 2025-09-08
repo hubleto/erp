@@ -1,0 +1,53 @@
+{
+    "manifest": {
+        "Calendar": "Kalendář",
+        "Free calendar app.": "Aplikace kalendáře zdarma."
+    },
+    "root": {
+        "Events for today": "Události pro dnešek",
+        "Reminders": "Připomínky"
+    },
+    "Models\\Activity": {
+        "Subject": "Předmět",
+        "Activity type": "Typ aktivity",
+        "Start date": "Datum zahájení",
+        "Start time": "Čas zahájení",
+        "End date": "Datum ukončení",
+        "End time": "Čas ukončení",
+        "All day": "Celý den",
+        "Completed": "Dokončeno",
+        "Created by": "Vytvořeno",
+        "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
+    },
+    "Controllers\\Boards\\Reminders": {
+        "All-day": "Celý den",
+        "Open event details": "Otevřít podrobnosti o události",
+        "events for tomorrow": "Události pro zítřek",
+        "events later": "Události později",
+        "Open reminder details": "Otevřít podrobnosti o připomínkách",
+        "Let's have a break. You have nothing to do for today.": "Dájte si pauzu. Dneska nemáte co dělat."
+    },
+    "Controllers\\Calendar": {
+        "Calendar": "Kalendář"
+    },
+    "Components\\CalendarMain": {
+        "Calendars": "Kalendáře",
+        "Ownership": "Vlastík",
+        "All": "Všichni",
+        "My activities": "Moje aktivity",
+        "New activity": "Nová aktivita"
+    },
+    "Components\\FormActivity": {
+        "Start": "Začátek",
+        "End": "Konec"
+    },
+    "Components\\FormActivitySelector": {
+        "New event": "Nová událost",
+        "Choose calendar to which the event should be created.": "Vyberte kalendář, ve kterém vytvořít událost"
+    },
+    "Controllers\\Settings": {
+        "Calendar": "Kalendář",
+        "Settings": "Nastavení",
+        "Calendar: Settings": "Kalendář: Nastavení"
+    }
+}

@@ -1,0 +1,32 @@
+<h1 class="app-main-title">Developer > Form designer</h1>
+
+<div class="flex gap-2 h-full">
+  <div class="flex-1">
+    <b>{{ translate("Template") }}</b>
+    <div class="list">
+      <a href="?template=one-column" class="btn btn-small btn-list-item {% if viewParams.template == 'one-column' %} btn-primary {% else %} btn-transparent {% endif %}">
+        <span class="text">{{ translate("One column") }}</span>
+      </a>
+      <a href="?template=two-columns" class="btn btn-small btn-list-item {% if viewParams.template == 'two-columns' %} btn-primary {% else %} btn-transparent {% endif %}">
+        <span class="text">{{ translate("Two columns") }}</span>
+      </a>
+      <a href="?template=three-columns" class="btn btn-small btn-list-item {% if viewParams.template == 'three-columns' %} btn-primary {% else %} btn-transparent {% endif %}">
+        <span class="text">{{ translate("Three columns") }}</span>
+      </a>
+    </div>
+  </div>
+  <div class="flex-10">
+    <div class="card">
+      <div class="card-header">{{ translate("Rendered Typescript code") }}</div>
+      <div class="card-body">
+        {{ translate("Copy & paste following code into your ") }}<i>Form.tsx</i>{{ translate(" file and then:") }}<br/>
+        &nbsp;&nbsp;{{ translate("1. Adapt the code to render inputs, nested tables or other components based on your requirements.") }}<br/>
+        &nbsp;&nbsp;{{translate("2. Run ")}}<i>npm run build-js</i>{{translate(" in your terminal.")}}<br/>
+        <br/>
+        {{translate("Check ")}}<a href="https://developer.hubleto.com" target="_blank">https://developer.hubleto.com</a>{{translate(" for more details.")}}<br/>
+        <br/>
+        <textarea class="w-full" style="font-family:courier new;font-size:8pt;height:calc(100vh - 35em);color:blue" spellcheck="false">{{ viewParams.renderContentCode }}</textarea>
+      </div>
+    </div>
+  </div>
+</div>

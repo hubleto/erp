@@ -1,0 +1,12 @@
+namespace: Hubleto\App\Community\Contacts
+appType: community
+sidebarGroup: addressbook
+rootUrlSlug: contacts
+name: Contacts
+icon: fas fa-user
+author:
+  company: "wai.blue"
+highlight: Default customer management and addressbook.
+tags:
+  - customers
+  - contacts

@@ -1,0 +1,27 @@
+{
+    "Components\\Form": {
+        "Add": "Přidat",
+        "Save": "Uložit",
+        "Copy": "Kopírovat",
+        "Delete": "Smazat",
+        "Confirm delete": "Potvrďte smazání",
+        "Edit": "Upravit",
+        "Adding record": "Přidat záznam",
+        "Editing record": "Úprava záznamu",
+        "Record": "Záznam",
+        "New record": "Nový záznam"
+    },
+    "Components\\Input": {
+        "Upload file": "Nahrát soubor"
+    },
+    "Components\\Table": {
+        "You are about to delete the record. Press OK to confirm.": "Chystáte se smazat záznam. Potvrďte stisknutím OK.",
+        "Yes, delete": "Ano, smazat",
+        "No, do not delete": "Ne, nesmazat",
+        "Delete": "Smazat",
+        "Start typing to search...": "Začnete psát pro vyhledávaní..."
+    },
+    "Controllers\\ControllerSignIn": {
+        "Keep signed in": "Zůstat přihlášen"
+    }
+}

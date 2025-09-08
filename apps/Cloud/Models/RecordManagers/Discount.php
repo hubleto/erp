@@ -1,0 +1,13 @@
+<?php
+
+namespace Hubleto\App\Community\Cloud\Models\RecordManagers;
+
+class Discount extends \Hubleto\Erp\RecordManager
+{
+  public $table = 'cloud_discounts';
+
+  public function recordDelete(int|string $id): int
+  {
+    return 0;
+  }
+}

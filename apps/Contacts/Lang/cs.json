@@ -1,0 +1,116 @@
+{
+    "manifest": {
+        "Contacts": "Kontakty",
+        "Default customer management and addressbook.": "Výchozí správa zákazníků a adresář."
+    },
+    "root": {
+        "Contact Categories": "Kontaktní kategorie",
+        "Contact Tags": "Kontaktní značky",
+        "Contacts": "Kontakty",
+        "Import contacts": "Importovat kontakty"
+    },
+    "Controllers\\Contacts": {
+        "Contacts": "Kontakty",
+        "Import contacts": "Importovat kontakty"
+    },
+    "Models\\Contact": {
+        "Salutation": "Oslovení",
+        "Title before": "Titul dříve",
+        "First name": "Křestní jméno",
+        "Middle name": "Střední jméno",
+        "Last name": "Příjmení",
+        "Title after": "Název po",
+        "Customer": "Zákazník",
+        "Primary Contact": "Primární kontakt",
+        "Notes": "Poznámky",
+        "Date Created": "Datum vytvoření",
+        "Active": "Aktivní",
+        "Valid": "Platný",
+        "Add contact": "Přidat kontakt",
+        "Emails": "Emaily",
+        "Phone Numbers": "Telefoní čísla",
+        "Mr.": "Pan",
+        "Mrs.": "Pani",
+        "Tags": "Značky"
+    },
+    "Models\\Value": {
+        "Contact": "Kontakt",
+        "Category": "Kategorie",
+        "Type": "Typ",
+        "Email": "E-mail",
+        "Number": "Číslo",
+        "URL": "URL",
+        "Other": "Ostatní",
+        "Value": "Hodnota",
+        "Contacts": "Kontaktní informace",
+        "Add Customer": "Přidat zákazníka"
+    },
+    "Models\\ContactTag": {
+        "Contact": "Kontakt",
+        "Tag": "Štítek"
+    },
+    "Models\\Category": {
+        "Type": "Typ"
+    },
+    "Models\\Tag": {
+        "Name": "Jméno",
+        "Color": "Barva",
+        "Contact Tags": "Kontaktní značky",
+        "Add Contact Tag": "Přidat kontaktní značku"
+    },
+    "Components\\FormContact": {
+        "Contact": "Kontaktní informace",
+        "No contacts yet.": "Zatím žádné kontaktní informace",
+        "Contacts": "Kontaktní informace",
+        "Type": "Typ",
+        "Phone Number": "Telefoní čísla",
+        "Email": "Email",
+        "Other": "Jiný",
+        "Category": "Kategorie",
+        "Value": "Hodnota",
+        "Add contact": "Přidat kontakt",
+        "Tags": "Značky",
+        "Customer": "Zákazník",
+        "Primary Contact": "Primární kontakt",
+        "Due to some changes the Primary Contact has to be checked again": "Z důvodu vykonaných změn je nutné znovu zapnout primární kontakt."
+    },
+    "Controllers\\Import": {
+        "Contacts": "Kontakty",
+        "Import": "Import",
+        "Check the import now": "Skontrolovat import",
+        "Step 1: Prepare list of contacts": "Krok 1: Připravte si zoznam kontaktů",
+        "Contacts can be imported from a ": "Kontakty mohou být importovaný z ",
+        " or ": " nebo ",
+        " file. The file for import must comply with following rules": " souboru. Soubor pro import musí splňovat následující pravidla",
+        "The file can contain unlimited number of lines.": "Soubor může obsahovat nekonečno řádků",
+        "Values in file must be separated by semicolon": "Hodnoty v souboru musí být odděleny středníkem",
+        "First line of the file must be the header containig names of the columns.": "První řádek souboru musí být záhlaví obsahující názvy sloupců.",
+        "Following lines contain ": "Nasledujíci řádky obsahují ",
+        "persons": "osoby",
+        "First 3 columns must be ": "První tři sloupce musí být",
+        "First name": "Křestní jméno",
+        "Middle name": "Střední jméno",
+        " and ": " a ",
+        "Last name": "Příjmení",
+        " or the ": " nebo ",
+        "person": "osobu",
+        "Following columns contain contact information. Each column represents one contact information.": "Nasledujíci sloupce obsajucí kontaktní informace. Každý sloupec reprezentuje jednu kontaktní informaci.",
+        "Each person can contain any number of contact information.": "Každá osoba může obsahovat libovolný počet kontaktních informací",
+        "The import automatically detects ": "Import automaticky detekuje ",
+        "emails": "emaily",
+        "phone numbers": "telefonní čísla",
+        "links": "odakzy",
+        "Example CSV file": "Příklad CSV souboru",
+        "You may also": "Můžete také",
+        "Export your addressbook": "Exportovat adresář",
+        "modify it and re-import again": "změnit ho nebo spustit import znova",
+        "Step 2: Upload the file with contacts": "Krok 2: Nahrajte soubor s kontaktmy",
+        "Step 3: Check the import": "Krok 3: Zkontrolujte import",
+        "Step 4: Run the import": "Krok 4: Spusťte import",
+        "You will be able to run the import after its check": "Po kontrole budete moci spustit import"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Nastavení",
+        "Contact Tags": "Kontaktní značky"
+    }
+}

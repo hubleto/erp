@@ -1,0 +1,40 @@
+<div class="flex">
+  <h1 class="app-main-title">{{ translate('Customers: Settings') }}</h1>
+  {% if viewParams.settingsSaved %}
+    <div class="badge badge-info text-sm ml-4">{{ translate('Settings saved.') }}</div>
+  {% endif %}
+</div>
+
+<script>
+  function saveSettings() {
+    $("#settings-form").submit();
+  }
+</script>
+
+<div class="mt-10 w-1/2 m-auto">
+  <div>
+    <a href="../settings/customer-tags" class="btn btn-transparent btn-square w-32">
+      <span class="icon"><i class="fas fa-tag"></i></span>
+      <span class="text">{{ translate('Customer tags') }}</span>
+    </a>
+  </div>
+  <form id="settings-form" action="" method="POST" class="mt-2">
+    <input type="hidden" name="settingsChanged" value="1">
+    <table class="table-default">
+      <tbody>
+        <tr>
+          <td>{{ translate('Calendar color') }}</td>
+          <td>
+            <input
+              type="text" name="calendarColor"
+              class="hubleto component input"
+              value="{{ viewParams.app.configAsString('calendarColor') }}"
+              onchange="saveSettings();"
+              style="border-left: 2em solid {{ viewParams.app.configAsString('calendarColor') }}"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

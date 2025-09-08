@@ -1,0 +1,7 @@
+<h1 class="app-main-title">{{ translate(Archived deals) }}</h1>
+
+<app-deals-table-deals
+  string:tag="table-deals"
+  bool:show-archive="true"
+  int:record-id="{{ viewParams.recordId }}"
+></app-deals-table-deals>

@@ -1,0 +1,51 @@
+<?php
+
+namespace Hubleto\App\Community\Deals\Controllers\Boards;
+
+use Hubleto\App\Community\Deals\Models\Deal;
+
+class DealValueByResult extends \Hubleto\Erp\Controller
+{
+  public bool $hideDefaultDesktop = true;
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+
+    $mDeal = $this->getService(Deal::class);
+
+    $deals = $mDeal->record->prepareReadQuery()
+      ->selectRaw("`{$mDeal->table}`.`deal_result`, SUM(`{$mDeal->table}`.`price_excl_vat`) as price")
+      ->where($mDeal->table . ".is_archived", 0)
+      ->where($mDeal->table . ".id_owner", $this->authProvider()->getUserId())
+      ->with('CURRENCY')
+      ->groupBy($mDeal->table . '.deal_result')
+      ->get()
+      ->toArray()
+    ;
+
+    $chartData = [
+      'labels' => [],
+      'values' => [],
+      'colors' => [],
+    ];
+
+    $results = [
+      0 => ['name' => $this->translate('Unknown'), 'color' => 'black'],
+      1 => ['name' => $this->translate('Pending'), 'color' => 'gray'],
+      2 => ['name' => $this->translate('Won'), 'color' => 'green'],
+      3 => ['name' => $this->translate('Lost'), 'color' => 'red'],
+    ];
+
+    foreach ($deals as $deal) {
+      $chartData['labels'][] = $results[$deal['deal_result']]['name'];
+      $chartData['values'][] = $deal['price_excl_vat'];
+      $chartData['colors'][] = $results[$deal['deal_result']]['color'];
+    }
+
+    $this->viewParams['chartData'] = $chartData;
+
+    $this->setView('@Hubleto:App:Community:Deals/Boards/DealValueByResult.twig');
+  }
+
+}

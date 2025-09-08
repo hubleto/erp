@@ -1,0 +1,10 @@
+namespace: Hubleto\App\Community\Worksheets
+appType: community
+sidebarGroup: projects
+rootUrlSlug: worksheets
+name: Worksheets
+icon: fas fa-user-clock
+author:
+  name: "WAI.blue"
+  nick: "wai.blue"
+highlight: Worksheet log

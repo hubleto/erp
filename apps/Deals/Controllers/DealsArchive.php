@@ -1,0 +1,20 @@
+<?php
+
+namespace Hubleto\App\Community\Deals\Controllers;
+
+class DealsArchive extends \Hubleto\Erp\Controller
+{
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => 'deals', 'content' => $this->translate('Deals') ],
+      [ 'url' => '', 'content' => $this->translate('Archive') ],
+    ]);
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@Hubleto:App:Community:Deals/DealsArchive.twig');
+  }
+}

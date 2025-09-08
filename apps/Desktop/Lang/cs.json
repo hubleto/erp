@@ -1,0 +1,28 @@
+{
+    "manifest": {
+        "Desktop": "Desktop",
+        "Default Hubleto desktop implementation.": "Výchozí implementace úvodní obrazovky Hubteto."
+    },
+    "Controllers\\Home": {
+        "Welcome": "Vítejte"
+    },
+    "Controllers\\Desktop": {
+        "CRM": "CRM",
+        "Documents": "Dokumenty",
+        "Marketing": "Marketing",
+        "Sales": "Prodej",
+        "Communication": "Komunikace",
+        "Projects": "Projekty",
+        "Supply chain": "Dodavatelský řetězec",
+        "Helpdesk": "Helpdesk",
+        "Events": "Události",
+        "E-Commerce": "E-obchodování",
+        "Website": "Webstránky",
+        "Finance": "Finance",
+        "Reporting": "Reporty",
+        "Maintenance": "Údržba",
+        "Help": "Pomoc",
+        "Custom": "Vlastní",
+        "Tasks": "Značky"
+    }
+}

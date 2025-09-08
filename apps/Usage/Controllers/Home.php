@@ -1,0 +1,19 @@
+<?php
+
+namespace Hubleto\App\Community\Usage\Controllers;
+
+class Home extends \Hubleto\Erp\Controller
+{
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => 'usage', 'content' => $this->translate('Usage') ],
+    ]);
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@Hubleto:App:Community:Usage/Home.twig');
+  }
+}

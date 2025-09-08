@@ -6,8 +6,13 @@
     "preserveSymlinks": true,
     "baseUrl": ".",
     "paths": {
-      "@hubleto/*": ["./*"],
-    }
+      "@hubleto/apps/*": ["./apps/*"],
+      "@hubleto/react-ui/*": ["../react-ui/*"],
+      "*": ["../react-ui/node_modules/*"],
+    },
+    "lib": [
+      "es2017",
+    ],
   },
   "include": ["./**/*"]
 }

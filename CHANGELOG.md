@@ -1,17 +1,29 @@
 # Hubleto CHANGELOG
 
-## Release v0.8 (not released yet)
+For releases v0.10 and later, check release notes at https://github.com/hubleto/erp/releases.
+
+## Release v0.9
+
+  * easier app creation (`php hubleto app create HubletoApp\Custom\MyFirstApp`)
+  * codebase clean-up
+  * new apps `Reports`
+  * improved session management
+  * various new features and bug fixes
+
+## Release v0.8
 
   * new `<HubletoChart>` React component
   * new `php hubleto app create`, `php hubleto debug router` and `php hubleto create model` commands
   * improved translation and language support
+  * new community app `Goals`
+  * cleaned-up code base
 
 ## Release v0.7
 
   * improved unit testing
   * deals and leads are now linked to an online shared folder (document storage)
   * started to use `value objects` (see why: https://stevegrunwell.com/blog/php-value-objects)
-  * RecordManager extracted from the Model
+  * Record management extracted from the Model class
   * `columns()` renamed to `describeColumns()`
   * more flexible CSS skin (thanks to TailwindCSS v4)
   * color scales in tables
@@ -28,7 +40,7 @@
   * static code analysis checks (thanks to the PHPStan)
   * new features in community apps
   * improved routing featurs (using named groups in routes), see [Dynamic routes with variables](https://developer.hubleto.com/tutorial/advanced/dynamic-routes)
-  * new `\HubletoMain\Core\CalendarManager` class and `$this->main->calendarManager` object
+  * new `\Hubleto\Framework\CalendarManager` class and `$this->main->calendarManager` object
 
 New ASCII art logo :-)
 
@@ -50,7 +62,7 @@ New ASCII art logo :-)
   * platform config made available via Settings app
   * UI improvements
   * many bugfixes
-  * new class \HubletoMain\Core\ModelEloquent
+  * new class \Hubleto\Framework\ModelEloquent
   * app manifests
   * platform config available in settings app
 

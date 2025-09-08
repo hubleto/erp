@@ -1,0 +1,34 @@
+{
+    "loader": {
+        "Cloud": "Cloud"
+    },
+    "manifest": {
+        "Cloud": "Chmura",
+        "Management of cloud Hubleto account.": "Zarządzanie konto Cloud Hubleto."
+    },
+    "Models\\Log": {
+        "Log datetime": "Log Datetime",
+        "Active users": "Aktywni użytkownicy",
+        "Paid apps": "Płatne aplikacje",
+        "Premium expected": "Premium oczekiwane"
+    },
+    "Models\\Payment": {
+        "Charged": "Oskarżony",
+        "Discount": "Rabat",
+        "Full amount": "Pełna kwota",
+        "Discounted amount": "Dyskontowana kwota",
+        "Type": "Typ",
+        "Details": "Bliższe dane",
+        "Has invoice": "Ma fakturę",
+        "Billing account": "Konto rozliczeniowe",
+        "UUID": "Uuid"
+    },
+    "Models\\Credit": {
+        "Recalculated": "Ponownie obliczone",
+        "Credit": "Kredyt"
+    },
+    "root": {
+        "Free trial expires in": "Bezpłatny proces wygasa w",
+        "days": "dni"
+    }
+}

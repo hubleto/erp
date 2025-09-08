@@ -1,0 +1,188 @@
+{
+    "manifest": {
+        "Deals": "Dealy",
+        "Deal management. From deal to purchase.": "Manažment obchodných prípadov až po vytvorenie ponuky."
+    },
+    "Controllers\\Deals": {
+        "Sales": "Predaj",
+        "Deals": "Dealy",
+        "Open deals": "Otvorené ponuky",
+        "Total value": "Celková hodnota"
+    },
+    "Controllers\\DealsArchive": {
+        "Sales": "Predaj",
+        "Deals": "Dealy",
+        "Archive": "Archív"
+    },
+    "Models\\Deal": {
+        "Deal Identifier": "Identifikátor",
+        "Title": "Názov",
+        "Customer": "Zákazník",
+        "Contact person": "Kontaktná osoba",
+        "Lead": "Lead",
+        "Price": "Cena",
+        "Currency": "Mena",
+        "Expected close date": "Predpokladaný dátum ukončenia",
+        "Assigned user": "Zodpovedný",
+        "Date created": "Vytvorený",
+        "Pipeline": "Pipeline",
+        "Pipeline step": "Krok pipeline",
+        "Notes": "Poznámky",
+        "Source channel": "Zdroj",
+        "Archived": "Archivovaný",
+        "Status": "Stav",
+        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný dokument",
+        "Deal Progress": "",
+        "Date of progress update": "",
+        "Deal Result": "Výsledok dealu",
+        "Date of result update": "Dátum aktualizácie výsledku",
+        "New Customer": "Nový zákazník",
+        "Business type": "Typ biznisu",
+        "Contact": "Kontakt",
+        "Owner": "Majiteľ",
+        "Created": "Vytvorený",
+        "Reason for Lost": "Dôvod pre stratu",
+        "Add Deal": "Pridať deal",
+        "Version": "Verzia",
+        "Price excl. VAT": "Cena bez DPH",
+        "Price incl. VAT": "Cena s DPH",
+        "Manager": "Manažér",
+        "Template for quotation": "Šablóna pre ponuku",
+        "Customer's order number": "Číslo objednávky u zákazníka",
+        "Closed": "Uzavretý",
+        "Result": "Výsledok",
+        "All": "Všetky",
+        "Ownership": "Vlastníctvo",
+        "Owned by me": "Moje",
+        "Managed by me": "Mnou spravované",
+        "Open \/ Closed": "Otvorené \/ Zavreté",
+        "Open": "Otvorené",
+        "Active": "Aktívne",
+        " changed from ": "",
+        " to ": ""
+    },
+    "Models\\DealHistory": {
+        "Change Date": "Dátum zmeny",
+        "Deal": "Deal",
+        "Description": "Opis"
+    },
+    "Models\\DealTag": {
+        "Deal": "Deal",
+        "Tag": "Označenie"
+    },
+    "Models\\DealService": {
+        "Deal": "",
+        "Service": "",
+        "Unit Price": "",
+        "Amount": "",
+        "Dicount (%)": "",
+        "Vat (%)": ""
+    },
+    "Models\\DealActivity": {
+        "Deal": "Deal",
+        "Contact person": "",
+        "Activity type": "Typ aktivity",
+        "Subject": "Predmet",
+        "Start date": "Dátum začiatku",
+        "Start time": "Začiatok",
+        "End date": "Dátum",
+        "End time": "Čas",
+        "All day": "Celý deň",
+        "Completed": "Dokončená",
+        "Created by": "Vytvorené",
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
+    },
+    "Models\\DealDocument": {
+        "Deal": "Deal",
+        "Document": "Dokument"
+    },
+    "root": {
+        "Deal statuses": "Stavy dealov",
+        "Deal Tags": "Značky dealov",
+        "Deal value by result": "Hodnota dealov podľa výsledku",
+        "Most valuable deals": "Najhodnotnejšie dealy",
+        "Active deals": "Aktívne dealy",
+        "Archived deals": "Archivované dealy",
+        "Deal Lost Reasons": "Dôvody straty dealu",
+        "Deal warnings": "Upozornenia"
+    },
+    "Components\\FormDeal": {
+        "Calendar": "Kalendár",
+        "Local documents": "Dokumenty",
+        "Shared documents": "Zdieľané dokumenty",
+        "History": "História",
+        "Go to original lead": "Prejsť na pôvodný lead",
+        "Documents": "Dokumenty",
+        "Show deals": "Zobraziť dealy",
+        "Enter = Log completed activity": "Enter = zapísať ukončenú aktivitu",
+        "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
+        "Type recent activity here": "Zadajte poslednú aktivitu tu",
+        "Not completed yet": "Nedokončená",
+        "Most recent activities": "Najnovšie aktivity",
+        "Deal": "Deal",
+        "Log completed activity": "Zaevidovať aktivitu",
+        "Enter": "Enter",
+        "Schedule activity": "Naplánovať aktivitu",
+        "Shift+Enter": "Shift+Enter",
+        "Deal value:": "Hodnota dealu",
+        "Weighted profit": "Vážená hodnota dealu",
+        "Tasks": "Úlohy",
+        "Products": "Produkty"
+    },
+    "Models\\Tag": {
+        "Name": "Pomenovať",
+        "Color": "Farba"
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": "Otvoriť deal"
+    },
+    "Models\\DealProduct": {
+        "Deal": "Deal",
+        "Product": "Produkt",
+        "Unit Price": "Jednotková cena",
+        "Amount": "Výška",
+        "Vat": "Kov",
+        "Discount": "Zľavu",
+        "Sum": "Súčet",
+        "Order": "",
+        "Description": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Stratený dôvod"
+    },
+    "Controllers\\LostReasons": {
+        "Settings": "Nastavenia",
+        "Deal Lost Reasons": "Dohoda stratená dôvody"
+    },
+    "Controllers\\Settings": {
+        "Deals": "Dealy",
+        "Settings": "Nastavenia",
+        "Show 'Deal warnings' in dashboard": "Ukážte „Deal Warnings“ na prístrojovej doske",
+        "Show 'Most valuable deals' in dashboard": "Zobraziť „najcennejšie ponuky“ na prístrojovej doske",
+        "Show 'Deal value by result' in dashboard": "Zobraziť „hodnotu dealu podľa výsledku“ na prístrojovej doske",
+        "Calendar color": "Kalendár"
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": "Čakajúce dealy bez budúceho plánu",
+        "No notifications for deals.": "Žiadne oznámenia o dealoch.",
+        "Open deal": "Deal",
+        "Open deals without future plan": "Otvorené dealy bez budúceho plánu"
+    },
+    "Controllers\\Boards\\DealValueByResult": {
+        "Unknown": "",
+        "Pending": "",
+        "Won": "",
+        "Lost": ""
+    },
+    "Models\\DealLead": {
+        "Deal": "",
+        "Lead": ""
+    },
+    "Models\\DealTask": {
+        "Deal": "",
+        "Task": ""
+    }
+}

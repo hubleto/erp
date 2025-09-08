@@ -1,0 +1,25 @@
+<?php
+
+namespace Hubleto\App\Community\Notifications\Controllers;
+
+class Inbox extends \Hubleto\Erp\Controller
+{
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => 'notifications', 'content' => $this->translate('Notifications') ],
+      [ 'url' => 'inbox', 'content' => $this->translate('Inbox') ],
+    ]);
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+
+    $this->viewParams['title'] = 'Inbox';
+    $this->viewParams['folder'] = 'inbox';
+
+    $this->setView('@Hubleto:App:Community:Notifications/ListFolder.twig');
+  }
+
+}

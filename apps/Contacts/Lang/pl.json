@@ -1,0 +1,39 @@
+{
+    "Models\\Contact": {
+        "Salutation": "Pozdrowienie",
+        "Title before": "Tytuł wcześniej",
+        "First name": "Imię",
+        "Middle name": "Drugie imię",
+        "Last name": "Nazwisko",
+        "Title after": "Tytuł po",
+        "Customer": "Klient",
+        "Primary Contact": "Kontakt podstawowy",
+        "Notes": "Notatki",
+        "Date Created": "Utworzona data",
+        "Active": "Aktywny",
+        "Add contact": "Dodaj kontakt",
+        "Emails": "E -maile",
+        "Phone Numbers": "Numery telefonów"
+    },
+    "Models\\Value": {
+        "Contact": "Kontakt",
+        "Category": "Kategoria",
+        "Type": "Typ",
+        "Email": "E-mail",
+        "Number": "Numer",
+        "URL": "URL",
+        "Other": "Inny",
+        "Value": "Wartość"
+    },
+    "Models\\ContactTag": {
+        "Contact": "Kontakt",
+        "Tag": "Etykietka"
+    },
+    "Models\\Category": {
+        "Type": "Typ"
+    },
+    "Models\\Tag": {
+        "Name": "Nazwa",
+        "Color": "Kolor"
+    }
+}

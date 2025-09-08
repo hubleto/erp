@@ -1,27 +1,30 @@
 {
-    "name": "wai-blue/hubleto",
+    "name": "hubleto/erp",
+    "license": "GPL-3.0-only",
     "description": "Business Application Hub. Opensource ERP and CRM.",
     "homepage": "https://www.hubleto.com",
     "support": {
-        "issues": "https://github.com/wai-blue/hubleto/issues",
-        "source": "https://github.com/wai-blue/hubleto"
+        "issues": "https://github.com/hubleto/erp/issues",
+        "source": "https://github.com/hubleto/erp"
+    },
+    "require": {
+        "hubleto/terminal": "@dev",
+        "hubleto/framework": "@dev"
     },
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
-    "require": {
-        "illuminate/database": "^11",
-        "illuminate/pagination": "^11",
-        "laravel/serializable-closure": "^2",
-        "monolog/monolog": "^3",
-        "php": "^8.2",
-        "phpstan/phpstan": "^2",
-        "snipworks/php-smtp": "^2",
-        "symfony/yaml": "^7",
-        "twig/twig": "^3",
-        "wai-blue/adios": "^1"
-    },
     "autoload": {
         "psr-4": {
-            "WaiBlue\\": ""
+            "Hubleto\\Erp\\": "src",
+            "Hubleto\\Erp\\Cli\\": "cli",
+            "Hubleto\\Erp\\Hook\\": "hooks",
+            "Hubleto\\Erp\\Cron\\": "crons",
+            "Hubleto\\Erp\\Report\\": "reports",
+            "Hubleto\\Erp\\Installer\\": "installer",
+            "Hubleto\\App\\Community\\": "apps"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "bin": [
+        "hubleto"
+    ]
 }

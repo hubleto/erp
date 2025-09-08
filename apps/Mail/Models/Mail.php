@@ -179,7 +179,7 @@ class Mail extends \Hubleto\Erp\Model
       $mailer->Subject = $mail['subject'];
       $mailer->Body = $mail['body_html'];
 
-      $this->logger()->info('Sending email to `' . $mail['to'] . '` from `' . $mail['ACCOUNT']['smtp_username'] . ':' . $password . '@' . $mail['ACCOUNT']['smtp_host'] . ':' . $mail['ACCOUNT']['smtp_port'] . '/' . $mail['ACCOUNT']['smtp_encryption']);
+      $this->logger()->info('Sending email to `' . $mail['to'] . '` from `' . $mail['ACCOUNT']['smtp_username'] . '`');
 
       $sent = $mailer->send();
 

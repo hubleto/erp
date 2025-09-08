@@ -15,7 +15,7 @@ class ChartOfAccounts extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@Hubleto:App:Community:Accounting/Accounting.twig');
+    $this->setView('@Hubleto:App:Community:ChartOfAccounts/Accounting.twig');
   }
 
 }

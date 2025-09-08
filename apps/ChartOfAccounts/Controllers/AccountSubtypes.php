@@ -15,7 +15,7 @@ class AccountSubtypes extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Community:Accounting/AccountSubtypes.twig');
+    $this->setView('@Hubleto:App:Community:ChartOfAccounts/AccountSubtypes.twig');
   }
 
 }

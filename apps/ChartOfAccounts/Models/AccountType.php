@@ -9,10 +9,11 @@ class AccountType extends \Hubleto\Erp\Model
   public string $table = 'accounting_account_type';
   public string $recordManagerClass = RecordManagers\AccountType::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
-  public ?string $lookupUrlAdd = '/accounting/account-type/add';
-  public ?string $lookupUrlDetail = '/accounting/account-type/{%ID%}';
+  public ?string $lookupUrlAdd = 'chart-of-accounts/account-types/add';
+  public ?string $lookupUrlDetail = 'chart-of-accounts/account-types/{%ID%}';
 
   public array $relations = [
+    'ACCOUNT' => [ self::HAS_MANY, Account::class, 'id_account_type', 'id'  ],
   ];
 
   public function describeColumns(): array

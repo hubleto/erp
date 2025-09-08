@@ -2,7 +2,6 @@
 
 namespace Hubleto\App\Community\ChartOfAccounts\Models\RecordManagers;
 
-use Hubleto\App\Community\Billing\Models\RecordManagers\BillingAccountService;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;

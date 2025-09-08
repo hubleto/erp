@@ -1,9 +1,9 @@
-namespace: Hubleto\App\Community\Accounting
+namespace: Hubleto\App\Community\ChartOfAccounts
 appType: community
 sidebarGroup: finance
-rootUrlSlug: accounting
-name: Accounting
+rootUrlSlug: chart-of-accounts
+name: Chart of Accounts
 icon: fas fa-receipt
-highlight: Accounting
+highlight: Chart of Accounts
 author:
   company: "wai.blue"

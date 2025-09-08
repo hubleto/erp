@@ -11,8 +11,8 @@ class AccountType extends \Hubleto\Erp\RecordManager
   public $table = 'accounting_account_type';
 
   /** @return HasMany<JournalEntry> */
-  public function CUSTOMER(): hasMany
+  public function ACCOUNT(): hasMany
   {
-    return $this->hasMany(JournalEntry::class, 'id_account_type', 'id');
+    return $this->hasMany(Account::class, 'id_account_type', 'id');
   }
 }

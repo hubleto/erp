@@ -9,11 +9,11 @@ class AccountSubtype extends \Hubleto\Erp\Model
   public string $table = 'accounting_account_subtype';
   public string $recordManagerClass = RecordManagers\AccountSubtype::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
-
-  public ?string $lookupUrlAdd = '/accounting/account-subtype/add';
-  public ?string $lookupUrlDetail = '/accounting/account-subtype/{%ID%}';
+  public ?string $lookupUrlAdd = 'chart-of-accounts/account-subtypes/add';
+  public ?string $lookupUrlDetail = 'chart-of-accounts/account-subtypes/{%ID%}';
 
   public array $relations = [
+    'ACCOUNT' => [ self::HAS_MANY, Account::class, 'id_account_subtype', 'id'  ],
   ];
 
   public function describeColumns(): array

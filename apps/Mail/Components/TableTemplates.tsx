@@ -51,6 +51,10 @@ export default class TableTemplates extends Table<TableTemplatesProps, TableTemp
     return params;
   }
 
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/mail/templates/' + id);
+  }
+
   renderForm(): JSX.Element {
     let formProps: FormProps = this.getFormProps();
     return <FormTemplate {...formProps}/>;

@@ -30,6 +30,7 @@ class Loader extends \Hubleto\Framework\App
     ]);
 
     $this->cronManager()->addCron(Crons\GetMails::class);
+    $this->cronManager()->addCron(Crons\SendMails::class);
 
     $this->templateVariables = $this->collectExtendibles('MailTemplateVariables');
   }

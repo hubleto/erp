@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
 use Hubleto\App\Community\Pipeline\Models\RecordManagers\PipelineStep;
 use Hubleto\App\Community\Mail\Models\RecordManagers\Mail;
+use Hubleto\App\Community\Mail\Models\RecordManagers\Account;
 
 class Campaign extends \Hubleto\Erp\RecordManager
 {
@@ -18,6 +19,12 @@ class Campaign extends \Hubleto\Erp\RecordManager
   public function MANAGER(): BelongsTo
   {
     return $this->belongsTo(User::class, 'id_manager', 'id');
+  }
+
+  /** @return HasOne<Pipeline, covariant Deal> */
+  public function MAIL_ACCOUNT(): HasOne
+  {
+    return $this->hasOne(Account::class, 'id', 'id_mail_account');
   }
 
   /** @return HasOne<Pipeline, covariant Deal> */

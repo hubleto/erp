@@ -10,7 +10,12 @@ class Mail extends \Hubleto\Erp\RecordManager
   public $table = 'mails';
 
   /** @return BelongsTo<User, covariant Customer> */
-  public function FOLDER(): BelongsTo {
+  public function ACCOUNT(): BelongsTo {
+    return $this->belongsTo(Account::class, 'id_account', 'id');
+  }
+
+  /** @return BelongsTo<User, covariant Customer> */
+  public function MAILBOX(): BelongsTo {
     return $this->belongsTo(Mailbox::class, 'id_mailbox', 'id');
   }
 

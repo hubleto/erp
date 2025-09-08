@@ -25,6 +25,13 @@ export default class TablePipelines extends Table<TablePipelinesProps, TablePipe
     this.state = this.getStateFromProps(props);
   }
 
+  getFormModalProps() {
+    return {
+      ...super.getFormModalProps(),
+      type: 'right wide'
+    }
+  }
+
   renderForm(): JSX.Element {
     let formDescription = this.getFormProps();
     return <FormPipeline {...formDescription}/>;

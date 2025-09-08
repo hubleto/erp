@@ -8,6 +8,48 @@ use \Hubleto\Framework\Env;
 class Lib extends \Hubleto\Framework\Core
 {
 
+  /**
+   * [Description for getMailPreview]
+   *
+   * @param array $campaign
+   * @param array $contact
+   * 
+   * @return string
+   * 
+   */
+  public static function getMailPreview(array $campaign, array $contact): string
+  {
+    $template = $campaign['MAIL_TEMPLATE'];
+
+    $bodyHtml = Lib::addUtmVariablesToEmailLinks(
+      (string) $template['body_html'],
+      (string) $campaign['utm_source'],
+      (string) $campaign['utm_campaign'],
+      (string) $campaign['utm_term'],
+      (string) $campaign['utm_content'],
+    );
+
+    $bodyHtml = Lib::routeLinksThroughCampaignTracker(
+      $campaign,
+      $contact,
+      $bodyHtml,
+    );
+
+    return $bodyHtml;
+  }
+
+  /**
+   * [Description for addUtmVariablesToEmailLinks]
+   *
+   * @param string $body
+   * @param string $utmSource
+   * @param string $utmCampaign
+   * @param string $utmTerm
+   * @param string $utmContent
+   * 
+   * @return string
+   * 
+   */
   public static function addUtmVariablesToEmailLinks(
     string $body,
     string $utmSource,
@@ -37,15 +79,15 @@ class Lib extends \Hubleto\Framework\Core
 
   public static function routeLinksThroughCampaignTracker(array $campaign, array $contact, string $body): string
   {
-    $trackerUrl = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/tracker';
+    $trackerUrl = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/click-tracker';
 
     $body = preg_replace_callback(
       '/(<a\s*)href="([^"]*)"/i',
       function($m) use ($trackerUrl, $campaign, $contact) {
         return 
           $m[1] . 'href="' . $trackerUrl
-          . '?cuid=' . $campaign['uid']
-          . '&cnid=' . $contact['id']
+          . '?cuid=' . ($campaign['uid'] ?? '')
+          . '&cnid=' . ($contact['id'] ?? '')
           . '&url=' . urlencode($m[2])
           . '"'
         ;
@@ -58,8 +100,8 @@ class Lib extends \Hubleto\Framework\Core
       function($m) use ($trackerUrl, $campaign, $contact) {
         return 
           $m[1] . 'href=\'' . $trackerUrl
-          . '?cuid=' . $campaign['uid']
-          . '&cnid=' . $contact['id']
+          . '?cuid=' . ($campaign['uid'] ?? '')
+          . '&cnid=' . ($contact['id'] ?? '')
           . '&url=' . urlencode($m[2])
           . '\''
         ;

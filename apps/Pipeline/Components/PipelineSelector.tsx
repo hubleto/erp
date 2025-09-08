@@ -13,8 +13,6 @@ interface PipelineSelectorProps {
 }
 
 interface PipelineSelectorState {
-  idPipeline: number,
-  idPipelineStep: number,
   pipelines: Array<any>,
   changePipeline: boolean,
 }
@@ -33,8 +31,6 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
   getStateFromProps(props: PipelineSelectorProps) {
     return {
       pipelines: null,
-      idPipeline: this.props.idPipeline,
-      idPipelineStep: this.props.idPipelineStep,
       changePipeline: false,
     };
   }
@@ -69,7 +65,7 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
 
   render(): JSX.Element {
     const pipelines = this.state.pipelines;
-    const steps = pipelines ? pipelines[this.state.idPipeline]?.STEPS : null;
+    const steps = pipelines ? pipelines[this.props.idPipeline]?.STEPS : null;
 
     if (!pipelines) {
       return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
@@ -92,7 +88,7 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
                 {Object.keys(pipelines).map((idPipeline: any, key: any) => {
                   return <button
                     key={key}
-                    className={"btn " + (this.state.idPipeline == idPipeline ? "btn-primary" : "btn-transparent")}
+                    className={"btn " + (this.props.idPipeline == idPipeline ? "btn-primary" : "btn-transparent")}
                     onClick={() => { this.onPipelineChange(idPipeline); }}
                   ><span className="text">{pipelines[idPipeline]?.name}</span></button>
                 })}
@@ -109,7 +105,7 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
             {steps && steps.length > 0 ?
               steps.map((s, i) => {
                 if (stepBtnClass == "btn-primary") stepBtnClass = "btn-transparent";
-                else if (s.id == this.state.idPipelineStep) stepBtnClass = "btn-primary";
+                else if (s.id == this.props.idPipelineStep) stepBtnClass = "btn-primary";
               return <button
                   key={i}
                   onClick={() => this.onPipelineStepChange(s.id, s)}
@@ -137,4 +133,17 @@ export default class PipelineSelector<P, S> extends TranslatedComponent<Pipeline
       </div>
     </>;
   }
+}
+
+export function updateFormPipelineByTag(form: any, tag: string, onsuccess: any) {
+  request.post(
+    'pipeline/api/get-pipeline-step-by-tag',
+    { idPipeline: form.state.record.id_pipeline, tag: tag },
+    {},
+    (result: any) => {
+      form.updateRecord({id_pipeline_step: result.id}, () => {
+        if (onsuccess) onsuccess();
+      });
+    }
+  );
 }

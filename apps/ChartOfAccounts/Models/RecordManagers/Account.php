@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\Accounting\Models\RecordManagers;
+namespace Hubleto\App\Community\ChartOfAccounts\Models\RecordManagers;
 
 use Hubleto\App\Community\Billing\Models\RecordManagers\BillingAccountService;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;

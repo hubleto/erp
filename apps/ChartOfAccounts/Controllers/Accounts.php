@@ -1,21 +1,21 @@
 <?php
 
-namespace Hubleto\App\Community\Accounting\Controllers;
+namespace Hubleto\App\Community\ChartOfAccounts\Controllers;
 
-class Accounting extends \Hubleto\Erp\Controller
+class Accounts extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'accounting', 'content' => $this->translate('Accounting') ],
+      [ 'url' => 'accounting/accounts', 'content' => $this->translate('Chart of accounts') ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-
-    $this->setView('@Hubleto:App:Community:Accounting/Accounting.twig');
+    $this->setView('@Hubleto:App:Community:Accounting/Accounts.twig');
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\Accounting;
+namespace Hubleto\App\Community\ChartOfAccounts;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -16,13 +16,13 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^accounting\/?$/' => Controllers\Accounting::class,
-      '/^accounting\/accounts\/add\/?$/' => ['controller' => Controllers\Accounts::class, 'vars' => ['recordId' => -1]],
-      '/^accounting\/accounts\/?$/' => Controllers\Accounts::class,
-      '/^accounting\/account-types\/add\/?$/' => ['controller' => Controllers\AccountTypes::class, 'vars' => ['recordId' => -1]],
-      '/^accounting\/account-types\/?$/' => Controllers\AccountTypes::class,
-      '/^accounting\/account-subtypes\/add\/?$/' => ['controller' => Controllers\AccountSubtypes::class, 'vars' => ['recordId' => -1]],
-      '/^accounting\/account-subtypes\/?$/' => Controllers\AccountSubtypes::class,
+      '/^chart-of-accounts\/?$/' => Controllers\ChartOfAccounts::class,
+      '/^chart-of-accounts\/accounts\/add\/?$/' => ['controller' => Controllers\Accounts::class, 'vars' => ['recordId' => -1]],
+      '/^chart-of-accounts\/accounts\/?$/' => Controllers\Accounts::class,
+      '/^chart-of-accounts\/account-types\/add\/?$/' => ['controller' => Controllers\AccountTypes::class, 'vars' => ['recordId' => -1]],
+      '/^chart-of-accounts\/account-types\/?$/' => Controllers\AccountTypes::class,
+      '/^chart-of-accounts\/account-subtypes\/add\/?$/' => ['controller' => Controllers\AccountSubtypes::class, 'vars' => ['recordId' => -1]],
+      '/^chart-of-accounts\/account-subtypes\/?$/' => Controllers\AccountSubtypes::class,
 //      '/^invoices\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
 //      '/^invoices(\/(?<recordId>\d+))?\/?$/' => Controllers\Invoices::class,
     ]);

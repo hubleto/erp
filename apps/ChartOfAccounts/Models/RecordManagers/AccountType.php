@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Community\Accounting\Models\RecordManagers;
+namespace Hubleto\App\Community\ChartOfAccounts\Models\RecordManagers;
 
-use Hubleto\App\Community\Accounting\Models\JournalEntry;
+use Hubleto\App\Community\ChartOfAccounts\Models\JournalEntry;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

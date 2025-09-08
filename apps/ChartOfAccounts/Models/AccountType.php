@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\Accounting\Models;
+namespace Hubleto\App\Community\ChartOfAccounts\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\Accounting\Models;
+namespace Hubleto\App\Community\ChartOfAccounts\Models;
 
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\Framework\Db\Column\Integer;

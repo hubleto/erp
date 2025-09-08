@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\Accounting\Controllers;
+namespace Hubleto\App\Community\ChartOfAccounts\Controllers;
 
 class AccountSubtypes extends \Hubleto\Erp\Controller
 {

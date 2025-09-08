@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
+import FormEntry from "@hubleto/apps/Journal/Components/FormEntry";
 
 interface TableEntriesProps extends TableProps {
 }
@@ -30,8 +31,8 @@ export default class TableEntries extends Table<TableEntriesProps, TableEntriesS
     }
   }
 
-  // renderForm(): JSX.Element {
-  //   let formDescription = this.getFormProps();
-    // return <CustomerFormActivity {...formDescription}/>;
-  // }
+  renderForm(): JSX.Element {
+    let formDescription = this.getFormProps();
+    return <FormEntry {...formDescription}/>;
+  }
 }

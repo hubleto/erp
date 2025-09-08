@@ -13,6 +13,6 @@ class Entry extends \Hubleto\Erp\RecordManager
   /** @return hasMany<EntryLine, covariant Entry> */
   public function JOURNAL_ENTRY_LINE(): hasMany
   {
-    return $this->hasMany(EntryLine::class, 'id_entry', 'id');
+    return $this->hasMany(EntryLine::class, 'id', 'id_entry');
   }
 }

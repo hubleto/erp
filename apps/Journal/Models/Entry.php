@@ -38,4 +38,5 @@ class Entry extends \Hubleto\Erp\Model
     $description->ui['showFooter'] = false;
     return $description;
   }
+
 }

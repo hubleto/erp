@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Journal\Models;
 
 use Hubleto\App\Community\ChartOfAccounts\Models\Account;
+use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 
@@ -27,7 +28,7 @@ class EntryLine extends \Hubleto\Erp\Model
         'debit' => 'Debit',
         'credit' => 'Credit',
       ])->setRequired(),
-      'amount' => new Varchar($this, $this->translate("Amount"))->setRequired(),
+      'amount' => new Integer($this, $this->translate("Amount"))->setRequired(),
       'id_account' => new Lookup($this, $this->translate("Account"), Account::class)->setRequired(),
       'id_entry' => new Lookup($this, $this->translate("Journal Entry"), Entry::class)->setRequired(),
     ]);

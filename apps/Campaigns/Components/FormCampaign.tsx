@@ -9,6 +9,7 @@ export interface FormCampaignProps extends HubletoFormProps {}
 export interface FormCampaignState extends HubletoFormState {
   mailPreviewInfo?: any,
   testEmailSendResult?: any,
+  campaignWarnings?: any,
 }
 
 export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, FormCampaignState> {
@@ -49,6 +50,22 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
   contentClassName(): string
   {
     return this.state.record.is_closed ? 'opacity-85 bg-slate-100' : '';
+  }
+
+  onTabChange() {
+    const tabUid = this.state.activeTabUid;
+    switch (tabUid) {
+      case 'launch':
+        request.post(
+          'campaigns/api/get-campaign-warnings',
+          { idCampaign: this.state.record.id },
+          {},
+          (data: any) => {
+            this.setState({campaignWarnings: data});
+          }
+        )
+      break;
+    }
   }
 
   renderTitle(): JSX.Element {
@@ -129,7 +146,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                   },
                   {},
                   (result: any) => {
-                    console.log(result);
+                    this.setState({record: {...R, CONTACTS: result}});
                   }
                 );
               }}
@@ -148,11 +165,6 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                   }
                 );
               }}
-              // junctionTitle='Campaign'
-              // junctionModel='Hubleto/App/Community/Campaigns/Models/CampaignContact'
-              // junctionSourceColumn='id_campaign'
-              // junctionSourceRecordId={R.id}
-              // junctionDestinationColumn='id_contact'
             />
           </div>
           {mailPreviewInfo && mailPreviewInfo.CONTACT && mailPreviewInfo.bodyHtml != '' ? 
@@ -206,7 +218,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       break;
 
       case 'launch':
-        return <div className='flex gap-2'>
+        return <div className='grid gap-2'>
           <div className='card'>
             <div className='card-header'>Test</div>
             <div className='card-body'>
@@ -238,6 +250,33 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
           <div className='card'>
             <div className='card-header'>Launch</div>
             <div className='card-body'>
+
+              {this.state.campaignWarnings ? <>
+                {this.state.campaignWarnings.recentlyContacted
+                  && this.state.campaignWarnings.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
+                  <b>Recently contacted</b>
+                  {this.state.campaignWarnings.recentlyContacted.map((item, key) => {
+                    return <div key={key}>
+                      <code>
+                        {item.CONTACT.first_name}&nbsp;{item.CONTACT.last_name}
+                        &nbsp;
+                        {item.CONTACT.VALUES ? item.CONTACT.VALUES.map((vItem, vKey) => {
+                          if (vItem.type == 'email') {
+                            return <span key={vKey}>{vItem.value}</span>;
+                          } else {
+                            return null;
+                          }
+                        }) : null}
+                      </code> in
+                      campaign <a
+                        href={globalThis.main.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
+                        target='_blank'
+                      >{item.CAMPAIGN.name}</a>.
+                    </div>;
+                  })}
+                </div> : null}
+              </> : null }
+
               <button
                 className="btn btn-transparent"
                 onClick={() => {
@@ -260,6 +299,12 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 <span className="icon"><i className="fas fa-envelope"></i></span>
                 <span className="text">Send email to {R.CONTACTS.length} contacts now!</span>
               </button>
+
+              <div className='flex flex-wrap mt-2 text-sm gap-2'>
+                {R.CONTACTS.map((item, key) => {
+                  return <span key={key}>{item.CONTACT?.virt_email}</span>;
+                })}
+              </div>
             </div>
           </div>
         </div>;

@@ -12,7 +12,7 @@ class SaveContacts extends \Hubleto\Erp\Controllers\ApiController
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $contactIds = $this->router()->urlParamAsArray('contactIds');
 
-    $mContact = $this->getService(Contact::class);
+    /** @var CampaignContact */
     $mCampaignContact = $this->getService(CampaignContact::class);
 
     $campaignContacts = $mCampaignContact->record->where('id_campaign', $idCampaign)->pluck('id_contact')?->toArray();
@@ -35,10 +35,16 @@ class SaveContacts extends \Hubleto\Erp\Controllers\ApiController
 
     foreach ($campaignContacts as $idContact) {
       if (!in_array($idContact, $contactIds)) {
-        $mCampaignContact->record->recordDelete($idContact);
+        $mCampaignContact->record
+          ->where('id_campaign', $idCampaign)
+          ->where('id_contact', $idContact)
+          ->delete()
+        ;
       }
     }
 
-    return $contactIds;
+    $campaignContacts = $mCampaignContact->record->where('id_campaign', $idCampaign)->get();
+
+    return $campaignContacts->toArray();
   }
 }

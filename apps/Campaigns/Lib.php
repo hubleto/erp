@@ -19,14 +19,12 @@ class Lib extends \Hubleto\Framework\Core
    */
   public static function getMailPreview(array $campaign, array $contact): string
   {
-    $template = $campaign['MAIL_TEMPLATE'];
-
     $bodyHtml = Lib::addUtmVariablesToEmailLinks(
-      (string) $template['body_html'],
-      (string) $campaign['utm_source'],
-      (string) $campaign['utm_campaign'],
-      (string) $campaign['utm_term'],
-      (string) $campaign['utm_content'],
+      (string) ($campaign['MAIL_TEMPLATE']['body_html'] ?? ''),
+      (string) ($campaign['utm_source'] ?? ''),
+      (string) ($campaign['utm_campaign'] ?? ''),
+      (string) ($campaign['utm_term'] ?? ''),
+      (string) ($campaign['utm_content'] ?? ''),
     );
 
     $bodyHtml = Lib::routeLinksThroughCampaignTracker(
@@ -58,17 +56,6 @@ class Lib extends \Hubleto\Framework\Core
     string $utmContent
   ): string
   {
-    // $utmUrlString = 'utm_source=' . urlencode($utmSource);
-    // $utmUrlString .= '&utm_campaign=' . urlencode($utmCampaign);
-    // $utmUrlString .= '&utm_term=' . urlencode($utmTerm);
-    // $utmUrlString .= '&utm_content=' . urlencode($utmContent);
-
-    // $body = preg_replace('/(<a.*)href="([^"]*)\?([^"]*)"(.*>)/', '$1href="$2?$3&' . $utmUrlString . '"$4', $body);
-    // $body = preg_replace('/(<a.*)href="([^"?]*)"([^"]*>)/', '$1href="$2?' . $utmUrlString . '"$3', $body);
-
-    // $body = preg_replace("/(<a.*)href='([^']*)\\?([^']*)'(.*>)/", '$1href=\'$2?$3&' . $utmUrlString . '\'$4', $body);
-    // $body = preg_replace("/(<a.*)href='([^'?]*)'([^']*>)/", '$1href=\'$2?' . $utmUrlString . '\'$3', $body);
-
     $body = str_replace('{{ utmSource }}', urlencode($utmSource), $body);
     $body = str_replace('{{ utmCampaign }}', urlencode($utmCampaign), $body);
     $body = str_replace('{{ utmTerm }}', urlencode($utmTerm), $body);

@@ -28,24 +28,26 @@ class GetMails extends \Hubleto\Erp\Cron
     $today = new \DateTimeImmutable();
     $thirtyDaysAgo = $today->sub(new \DateInterval('P30D'));
 
-    $mAccount = $this->getService(Account::class);
+    /** @var Account */
+    $mAccount = $this->getModel(Account::class);
     $accounts = $mAccount->record->get()->toArray();
 
-    $mMailbox = $this->getService(Mailbox::class);
-    $mMail = $this->getService(Mail::class);
+    /** @var Mailbox */
+    $mMailbox = $this->getModel(Mailbox::class);
+    $mMail = $this->getModel(Mail::class);
 
     foreach ($accounts as $account) {
       $this->logger()->info('GetMails: checking account ' . $account['name']);
       $localMailboxes = Helper::keyBy('name', $mMailbox->record->where('id_account', $account['id'])->get()->toArray());
 
       $server = new Server(
-        $account['smtp_host'],
-        $account['smtp_port'],
-        $account['smtp_encryption'], 
+        $account['imap_host'],
+        $account['imap_port'],
+        $account['imap_encryption'], 
       );
       $connection = $server->authenticate(
-        $account['smtp_username'],
-        $mAccount->decryptPassword($account['smtp_password'])
+        $account['imap_username'],
+        $mAccount->decryptPassword($account['imap_password'])
       );
 
       $imapMailboxes = $connection->getMailboxes();

@@ -5,7 +5,8 @@ namespace Hubleto\App\Community\Campaigns\Models;
 use Hubleto\App\Community\Campaigns\Lib;
 
 use Hubleto\App\Community\Settings\Models\User;
-use Hubleto\App\Community\Mail\Models\Mail;
+use Hubleto\App\Community\Mail\Models\Template;
+use Hubleto\App\Community\Mail\Models\Account;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Text;
@@ -24,7 +25,8 @@ class Campaign extends \Hubleto\Erp\Model
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
-    'MAIL_TEMPLATE' => [ self::HAS_ONE, Mail::class, 'id_main_template', 'id'],
+    'MAIL_ACCOUNT' => [ self::HAS_ONE, Account::class, 'id_mail_account', 'id'],
+    'MAIL_TEMPLATE' => [ self::HAS_ONE, Template::class, 'id_mail_template', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
     'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
     'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
@@ -51,12 +53,16 @@ class Campaign extends \Hubleto\Erp\Model
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setProperty('defaultVisibility', true),
       'goal' => (new Text($this, $this->translate('Goal')))->setProperty('defaultVisibility', true),
       'notes' => (new Text($this, $this->translate('Notes'))),
-      'mail_body' => (new Text($this, $this->translate('Mail body (HTML)')))->setReactComponent('InputWysiwyg'),
+      // 'mail_body' => (new Text($this, $this->translate('Mail body (HTML)')))->setReactComponent('InputWysiwyg'),
       'color' => (new Color($this, $this->translate('Color'))),
-      'id_mail_template' => (new Lookup($this, $this->translate('Mail template'), Mail::class))->setProperty('defaultVisibility', true),
+      'id_mail_account' => (new Lookup($this, $this->translate('Mail account to send email from'), Account::class)),
+      'id_mail_template' => (new Lookup($this, $this->translate('Mail template'), Template::class))
+        ->setProperty('defaultVisibility', true)
+      ,
       'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
       'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId())->setProperty('defaultVisibility', true),
+      'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date('Y-m-d H:i:s')),
     ]);
@@ -118,38 +124,38 @@ class Campaign extends \Hubleto\Erp\Model
     return parent::onAfterCreate($savedRecord);
   }
 
-  /**
-   * [Description for onAfterUpdate]
-   *
-   * @param array $originalRecord
-   * @param array $savedRecord
-   * 
-   * @return array
-   * 
-   */
-  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
-  {
-    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+  // /**
+  //  * [Description for onAfterUpdate]
+  //  *
+  //  * @param array $originalRecord
+  //  * @param array $savedRecord
+  //  * 
+  //  * @return array
+  //  * 
+  //  */
+  // public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  // {
+  //   $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-    $mMail = $this->getService(Mail::class);
-    $template = $mMail->record->find((int) ($savedRecord['id_mail_template'] ?? 0));
+  //   $mTemplate = $this->getService(Template::class);
+  //   $template = $mTemplate->record->find((int) ($savedRecord['id_mail_template'] ?? 0));
 
-    if ($template) {
-      $bodyHtml = Lib::addUtmVariablesToEmailLinks(
-        (string) $template->body_html,
-        (string) $savedRecord['utm_source'],
-        (string) $savedRecord['utm_campaign'],
-        (string) $savedRecord['utm_term'],
-        (string) $savedRecord['utm_content'],
-      );
+  //   if ($template) {
+  //     $bodyHtml = Lib::addUtmVariablesToEmailLinks(
+  //       (string) $template->body_html,
+  //       (string) $savedRecord['utm_source'],
+  //       (string) $savedRecord['utm_campaign'],
+  //       (string) $savedRecord['utm_term'],
+  //       (string) $savedRecord['utm_content'],
+  //     );
 
-      $mCampaign = $this->getService(Campaign::class);
-      $mCampaign->record->find((int) $savedRecord['id'])->update([
-        'mail_body' => $bodyHtml
-      ]);
-    }
+  //     $mCampaign = $this->getService(Campaign::class);
+  //     $mCampaign->record->find((int) $savedRecord['id'])->update([
+  //       'mail_body' => $bodyHtml
+  //     ]);
+  //   }
 
-    return $savedRecord;
-  }
+  //   return $savedRecord;
+  // }
 
 }

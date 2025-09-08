@@ -12,7 +12,7 @@ class Create extends \Hubleto\Erp\Cli\Agent\Command
 
     $noPrompt = (bool) ($this->arguments[4] ?? false);
 
-    switch ($appNamespaceParts[1]) {
+    switch ($appNamespaceParts[2]) {
       case 'Community':
         $appRepositoryFolder = realpath(__DIR__ . '/../../../apps');
         break;
@@ -21,7 +21,7 @@ class Create extends \Hubleto\Erp\Cli\Agent\Command
         break;
       case 'External':
         $externalAppsRepositories = $this->config()->getAsArray('externalAppsRepositories');
-        $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[2]];
+        $appRepositoryFolder = $externalAppsRepositories[$appNamespaceParts[3]];
         break;
       case 'Custom':
         $projectFolder = $this->env()->projectFolder;

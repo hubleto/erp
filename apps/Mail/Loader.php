@@ -23,13 +23,14 @@ class Loader extends \Hubleto\Framework\App
       '/^mail\/accounts\/?$/' => Controllers\Accounts::class,
       '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
       '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
-      '/^mail\/templates\/?$/' => Controllers\Templates::class,
+      '/^mail\/templates\/?(?<recordId>\d+)?\/?$/' => Controllers\Templates::class,
       '/^mail\/settings\/?$/' => Controllers\Settings::class,
       '/^mail\/api\/mark-as-read\/?$/' => Controllers\Api\MarkAsRead::class,
       '/^mail\/api\/mark-as-unread\/?$/' => Controllers\Api\MarkAsUnread::class,
     ]);
 
     $this->cronManager()->addCron(Crons\GetMails::class);
+    $this->cronManager()->addCron(Crons\SendMails::class);
 
     $this->templateVariables = $this->collectExtendibles('MailTemplateVariables');
   }
@@ -40,6 +41,7 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\Account::class)->dropTableIfExists()->install();
       $this->getModel(Models\Mailbox::class)->dropTableIfExists()->install();
       $this->getModel(Models\Mail::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Template::class)->dropTableIfExists()->install();
       $this->getModel(Models\Index::class)->dropTableIfExists()->install();
     }
   }

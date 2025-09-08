@@ -4,6 +4,7 @@ namespace Hubleto\App\Community\Campaigns\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\App\Community\Contacts\Models\Contact;
+use Hubleto\App\Community\Mail\Models\Mail;
 
 class CampaignContact extends \Hubleto\Erp\Model
 {
@@ -13,6 +14,7 @@ class CampaignContact extends \Hubleto\Erp\Model
   public array $relations = [
     'CAMPAIGN' => [ self::BELONGS_TO, Campaign::class, 'id_campaign', 'id' ],
     'CONTACT' => [ self::BELONGS_TO, Contact::class, 'id_contact', 'id' ],
+    'MAIL' => [ self::BELONGS_TO, Mail::class, 'id_mail', 'id' ],
   ];
 
   public function describeColumns(): array
@@ -20,6 +22,7 @@ class CampaignContact extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired(),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setRequired(),
+      'id_mail' => (new Lookup($this, $this->translate('Mail'), Mail::class))->setRequired(),
     ]);
   }
 

@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Campaigns\Models\RecordManagers;
 
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Hubleto\App\Community\Mail\Models\RecordManagers\Mail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CampaignContact extends \Hubleto\Erp\RecordManager
@@ -19,6 +20,12 @@ class CampaignContact extends \Hubleto\Erp\RecordManager
   public function CONTACT(): BelongsTo
   {
     return $this->belongsTo(Contact::class, 'id_contact', 'id');
+  }
+
+  /** @return BelongsTo<Contact, covariant LeadTag> */
+  public function MAIL(): BelongsTo
+  {
+    return $this->belongsTo(Mail::class, 'id_mail', 'id');
   }
 
 }

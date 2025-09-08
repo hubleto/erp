@@ -1,5 +1,6 @@
 <h1 class="app-main-title">{{ translate('Mail') }} > Templates</h1>
 
-<app-mail-table-mails
+<app-mail-table-templates
+  int:record-id="{{ viewParams.recordId }}"
   bool:show-only-templates="true"
-></app-mail-table-mails>
+></app-mail-table-templates>

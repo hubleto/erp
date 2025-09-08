@@ -1,5 +1,6 @@
 import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
 import TableMails from "./Components/TableMails"
+import TableTemplates from "./Components/TableTemplates"
 
 class MailApp extends HubletoApp {
   init() {
@@ -7,6 +8,7 @@ class MailApp extends HubletoApp {
 
     // register react components
     globalThis.main.registerReactComponent('MailTableMails', TableMails);
+    globalThis.main.registerReactComponent('MailTableTemplates', TableTemplates);
   }
 }
 

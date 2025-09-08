@@ -21,11 +21,12 @@ class PipelineStep extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'id_pipeline' => (new Lookup($this, $this->translate("Pipeline"), Pipeline::class))->setRequired(),
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'order' => (new Integer($this, $this->translate('Order')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color')))->setRequired(),
+      'tag' => (new Varchar($this, $this->translate('Tag'))),
       'probability' => (new Integer($this, $this->translate('Probability')))->setUnit("%"),
-      'id_pipeline' => (new Lookup($this, $this->translate("Pipeline"), Pipeline::class))->setRequired(),
       'set_result' => (new Integer($this, $this->translate('Set result of a deal to')))
         ->setEnumValues([Deal::RESULT_UNKNOWN => "Unknown", Deal::RESULT_WON => "Won",  Deal::RESULT_LOST => "Lost"])
     ]);

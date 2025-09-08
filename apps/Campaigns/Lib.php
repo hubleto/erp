@@ -19,6 +19,7 @@ class Lib extends \Hubleto\Framework\Core
    */
   public static function getMailPreview(array $campaign, array $contact): string
   {
+
     $bodyHtml = Lib::addUtmVariablesToEmailLinks(
       (string) ($campaign['MAIL_TEMPLATE']['body_html'] ?? ''),
       (string) ($campaign['utm_source'] ?? ''),

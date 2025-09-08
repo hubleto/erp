@@ -28,15 +28,15 @@ class GetMailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
 
     if ($campaignContact) {
       $bodyHtml = Lib::getMailPreview(
-        (array) $campaignContact->CAMPAIGN,
-        (array) $campaignContact->CONTACT,
+        $campaignContact->CAMPAIGN->toArray(),
+        $campaignContact->CONTACT->toArray(),
       );
     }
 
     return [
       'bodyHtml' => $bodyHtml,
-      'CONTACT' => $campaignContact ? $campaignContact->CONTACT : null,
-      'MAIL' => $campaignContact ? $campaignContact->MAIL : null,
+      'CONTACT' => $campaignContact?->CONTACT ? $campaignContact?->CONTACT->toArray() : null,
+      'MAIL' => $campaignContact?->MAIL ? $campaignContact?->MAIL->toArray() : null,
     ];
   }
 }

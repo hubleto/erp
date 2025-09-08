@@ -129,7 +129,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       case 'contacts':
         const mailPreviewInfo: any = this.state.mailPreviewInfo;
         return <div className='flex gap-2'>
-          <div className='overflow-y-auto'>
+          <div className='flex-3 overflow-auto'>
             <TableContacts
               tag={"table_campaign_contact"}
               parentForm={this}
@@ -167,17 +167,11 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               }}
             />
           </div>
-          {mailPreviewInfo && mailPreviewInfo.CONTACT && mailPreviewInfo.bodyHtml != '' ? 
-            <div className=''>
-              <div className='card'>
-                <div className='card-header'>
-                  Mail preview
-                  <button
-                    className='btn btn-transparent'
-                    onClick={() => { this.setState({mailPreviewInfo: null}); }}
-                  ><span className='icon'><i className='fas fa-times'></i></span></button>
-                </div>
-                <div className='card-body'>
+          <div className='flex-2'>
+            <div className='card'>
+              <div className='card-header'>Mail preview</div>
+              <div className='card-body'>
+                {mailPreviewInfo && mailPreviewInfo.CONTACT && mailPreviewInfo.bodyHtml != '' ? <>
                   <div><b>Contact</b></div>
                   <div className='text-sm bg-slate-100 p-2 flex flex-col'>
                     <div className='font-bold'>{mailPreviewInfo.CONTACT?.first_name}</div>
@@ -197,10 +191,12 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                       Mail was sent on {mailPreviewInfo.MAIL.datetime_sent} from {mailPreviewInfo.MAIL.from}.
                     </div>
                   </> : null}
-                </div>
+                </> : <div>
+                  No mail preview available.
+                </div>}
               </div>
             </div>
-          : null}
+          </div>
         </div>
       break;
 

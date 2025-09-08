@@ -18,6 +18,7 @@ class Mail extends \Hubleto\Erp\Model
   public string $table = 'mails';
   public string $recordManagerClass = RecordManagers\Mail::class;
   public ?string $lookupSqlValue = '{%TABLE%}.subject';
+  // public string $lookupUrlDetail = 'mail/{%ID%}';
 
   public array $relations = [
     'ACCOUNT' => [ self::BELONGS_TO, Account::class, 'id_account', 'id' ],

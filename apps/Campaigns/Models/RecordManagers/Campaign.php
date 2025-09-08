@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
 use Hubleto\App\Community\Pipeline\Models\RecordManagers\PipelineStep;
-use Hubleto\App\Community\Mail\Models\RecordManagers\Mail;
+use Hubleto\App\Community\Mail\Models\RecordManagers\Template;
 use Hubleto\App\Community\Mail\Models\RecordManagers\Account;
 
 class Campaign extends \Hubleto\Erp\RecordManager
@@ -30,7 +30,7 @@ class Campaign extends \Hubleto\Erp\RecordManager
   /** @return HasOne<Pipeline, covariant Deal> */
   public function MAIL_TEMPLATE(): HasOne
   {
-    return $this->hasOne(Mail::class, 'id', 'id_mail_template');
+    return $this->hasOne(Template::class, 'id', 'id_mail_template');
   }
 
   /** @return HasOne<Pipeline, covariant Deal> */

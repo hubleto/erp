@@ -170,7 +170,7 @@ class Mail extends \Hubleto\Erp\Model
       $mailer->Username = $mail['ACCOUNT']['smtp_username'];
       $mailer->Password = $password;
       $mailer->SMTPDebug = 4;
-      $mailer->AuthType = 'PLAIN';
+      $mailer->AuthType = 'LOGIN';
 
       $mailer->setFrom(
         $mail['ACCOUNT']['sender_email'],

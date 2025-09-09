@@ -1,9 +1,0 @@
-{
-    "loader": {
-        "Sales": "Ventes",
-        "Pipeline": "Pipeline"
-    },
-    "controllers.home": {
-        "Sales": "Ventes"
-    }
-}

@@ -6,7 +6,7 @@ use Exception;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Deals\Models\DealLead;
 use Hubleto\App\Community\Leads\Models\Lead;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Workflow\Models\Workflow;
 
 class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -27,8 +27,8 @@ class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
 
     $mDeal = $this->getService(Deal::class);
 
-    $mPipeline = $this->getService(Pipeline::class);
-    list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInGroup('deals');
+    $mWorkflow = $this->getService(Workflow::class);
+    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('deals');
 
     try {
       $lead = $mLead->record->where("id", $idLead)->first();
@@ -48,8 +48,8 @@ class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
         "is_archived" => false,
         "id_lead" => $lead->id,
         "deal_result" => $mDeal::RESULT_UNKNOWN,
-        "id_pipeline" => $idPipeline,
-        "id_pipeline_step" => $idPipelineStep,
+        "id_workflow" => $idWorkflow,
+        "id_workflow_step" => $idWorkflowStep,
       ]);
 
       $mDealLead->record->recordCreate([

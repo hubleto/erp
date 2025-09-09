@@ -17,8 +17,8 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Settings\Models\User;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
-use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\Workflow;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Customers\Models\Customer;
 
@@ -67,8 +67,8 @@ class Project extends \Hubleto\Erp\Model
       'date_start' => (new Date($this, $this->translate('Start')))->setReadonly()->setDefaultValue(date("Y-m-d")),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setReadonly()->setDefaultValue(date("Y-m-d")),
       'budget' => (new Integer($this, $this->translate('Budget')))->setProperty('defaultVisibility', true)->setUnit('€'),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
       // 'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setProperty('defaultVisibility', true)->setRequired()
       //   ->setDefaultValue($this->authProvider()->getUserId())
@@ -96,7 +96,7 @@ class Project extends \Hubleto\Erp\Model
     $description->ui['showFooter'] = false;
 
     $description->ui['filters'] = [
-      'fProjectPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Phase'),
+      'fProjectWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Phase'),
       'fProjectClosed' => [
         'title' => $this->translate('Open / Closed'),
         'options' => [
@@ -122,10 +122,10 @@ class Project extends \Hubleto\Erp\Model
   public function onAfterCreate(array $savedRecord): array
   {
 
-    $mPipeline = $this->getService(Pipeline::class);
-    list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInGroup('projects');
-    $savedRecord['id_pipeline'] = $idPipeline;
-    $savedRecord['id_pipeline_step'] = $idPipelineStep;
+    $mWorkflow = $this->getService(Workflow::class);
+    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('projects');
+    $savedRecord['id_workflow'] = $idWorkflow;
+    $savedRecord['id_workflow_step'] = $idWorkflowStep;
 
     if (empty($savedRecord['identifier'])) {
       $savedRecord["identifier"] = 'P' . $savedRecord["id"];

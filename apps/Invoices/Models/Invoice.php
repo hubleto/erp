@@ -11,8 +11,8 @@ use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Settings\Models\InvoiceProfile;
 use Hubleto\App\Community\Settings\Models\User;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
-use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\Workflow;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Documents\Models\Template;
 use Hubleto\App\Community\Documents\Generator;
 use Hubleto\App\Community\Settings\Models\Currency;
@@ -30,8 +30,8 @@ class Invoice extends \Hubleto\Erp\Model {
     'ISSUED_BY' => [ self::BELONGS_TO, User::class, "id_issued_by" ],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
-    'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
-    'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
+    'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
+    'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
 
     'ITEMS' => [ self::HAS_MANY, InvoiceItem::class, "id_invoice", "id" ],
   ];
@@ -61,8 +61,8 @@ class Invoice extends \Hubleto\Erp\Model {
       'total_incl_vat' => new Decimal($this, $this->translate('Total incl. VAT'))->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
     ]);
   }
 
@@ -79,7 +79,7 @@ class Invoice extends \Hubleto\Erp\Model {
     $description->ui['showColumnSearch'] = true;
 
     $description->ui['filters'] = [
-      'fInvoicePipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Status'),
+      'fInvoiceWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),
     ];
 
     return $description;
@@ -172,12 +172,12 @@ class Invoice extends \Hubleto\Erp\Model {
    */
   public function onAfterCreate(array $savedRecord): array
   {
-    $mPipeline = $this->getService(Pipeline::class);
+    $mWorkflow = $this->getService(Workflow::class);
 
-    list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInGroup('invoices');
+    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('invoices');
 
-    $savedRecord['id_pipeline'] = $idPipeline;
-    $savedRecord['id_pipeline_step'] = $idPipelineStep;
+    $savedRecord['id_workflow'] = $idWorkflow;
+    $savedRecord['id_workflow_step'] = $idWorkflowStep;
 
     $this->record->recordUpdate($savedRecord);
 

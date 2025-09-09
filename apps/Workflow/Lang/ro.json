@@ -1,0 +1,21 @@
+{
+    "manifest": {
+        "Workflow": "",
+        "Free sales workflow management.": ""
+    },
+    "root": {
+        "Workflows": ""
+    },
+    "Models\\Workflow": {
+        "Name": "",
+        "Description": ""
+    },
+    "Models\\WorkflowStep": {
+        "Name": "",
+        "Order": "",
+        "Color": "",
+        "Probability": "",
+        "Workflow": "",
+        "Set result of a deal to": ""
+    }
+}

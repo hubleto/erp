@@ -1,0 +1,9 @@
+{
+    "loader": {
+        "Sales": "Ventes",
+        "Workflow": "Workflow"
+    },
+    "controllers.home": {
+        "Sales": "Ventes"
+    }
+}

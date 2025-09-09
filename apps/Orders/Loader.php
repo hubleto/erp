@@ -28,9 +28,9 @@ class Loader extends \Hubleto\Framework\App
 
     $this->addSearchSwitch('o', 'orders');
 
-    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
-    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
-    $pipelineManager->addPipeline($this, 'orders', Pipeline::class);
+    /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflow($this, 'orders', Workflow::class);
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [

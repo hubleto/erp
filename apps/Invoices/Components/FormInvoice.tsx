@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "@hubleto/react-ui/ext/HubletoForm";
 import TableInvoiceItems from './TableInvoiceItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
-import PipelineSelector from '../../Pipeline/Components/PipelineSelector';
+import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 import request from '@hubleto/react-ui/core/Request';
 
 interface FormInvoiceProps extends HubletoFormProps {
@@ -71,16 +71,16 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     return <>
       {super.renderTopMenu()}
       {this.state.id <= 0 ? null : <>
-        <PipelineSelector
-          idPipeline={R.id_pipeline}
-          idPipelineStep={R.id_pipeline_step}
-          onPipelineChange={(idPipeline: number, idPipelineStep: number) => {
-            this.updateRecord({id_pipeline: idPipeline, id_pipeline_step: idPipelineStep});
+        <WorkflowSelector
+          idWorkflow={R.id_workflow}
+          idWorkflowStep={R.id_workflow_step}
+          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
+            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
           }}
-          onPipelineStepChange={(idPipelineStep: number, step: any) => {
-            this.updateRecord({id_pipeline_step: idPipelineStep});
+          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
+            this.updateRecord({id_workflow_step: idWorkflowStep});
           }}
-        ></PipelineSelector>
+        ></WorkflowSelector>
       </>}
     </>
   }

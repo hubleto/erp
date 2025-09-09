@@ -31,11 +31,11 @@
         "Currency Name": "Waluta",
         "Currency Code": "Kod"
     },
-    "models.pipeline": {
+    "models.workflow": {
         "Name": "Nazwa",
         "Description": "Opis"
     },
-    "models.pipelineStep": {
+    "models.workflowStep": {
         "Name": "Nazwa",
         "Order": "Zamówienie",
         "Company": "Kolor"
@@ -92,7 +92,7 @@
         "Currencies": "Waluty",
         "Lead Statuses": "Statusy leadów",
         "Deal Statuses": "Statusy dealów",
-        "Pipelines": "Pipelines",
+        "Workflows": "Workflows",
         "Invoice profiles": "Profile rozliczeniowe"
     },
     "controllers.userRoles": {

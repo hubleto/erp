@@ -17,8 +17,8 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\App\Community\Settings\Models\User;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
-use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\Workflow;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Customers\Models\Customer;
 
@@ -63,8 +63,8 @@ class Task extends \Hubleto\Erp\Model
       'duration_days' => (new Integer($this, $this->translate('Duration')))->setProperty('defaultVisibility', true)->setUnit('days'),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
       'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
       'is_milestone' => (new Boolean($this, $this->translate('Is milestone')))->setDefaultValue(false),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
@@ -115,7 +115,7 @@ class Task extends \Hubleto\Erp\Model
     $description->ui['showFooter'] = false;
 
     $description->ui['filters'] = [
-      'fTaskPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Status'),
+      'fTaskWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),
       'fTaskClosed' => [
         'title' => $this->translate('Open / Closed'),
         'options' => [
@@ -141,10 +141,10 @@ class Task extends \Hubleto\Erp\Model
   public function onAfterCreate(array $savedRecord): array
   {
 
-    $mPipeline = $this->getService(Pipeline::class);
-    list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInGroup('tasks');
-    $savedRecord['id_pipeline'] = $idPipeline;
-    $savedRecord['id_pipeline_step'] = $idPipelineStep;
+    $mWorkflow = $this->getService(Workflow::class);
+    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('tasks');
+    $savedRecord['id_workflow'] = $idWorkflow;
+    $savedRecord['id_workflow_step'] = $idWorkflowStep;
 
     if (empty($savedRecord['identifier'])) {
       $savedRecord["identifier"] = '#' . $savedRecord["id"];

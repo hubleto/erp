@@ -13,8 +13,8 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
-use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\Workflow;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 
 use Hubleto\App\Community\Leads\Models\LeadCampaign;
 
@@ -28,8 +28,8 @@ class Campaign extends \Hubleto\Erp\Model
     'MAIL_ACCOUNT' => [ self::HAS_ONE, Account::class, 'id_mail_account', 'id'],
     'MAIL_TEMPLATE' => [ self::HAS_ONE, Template::class, 'id_mail_template', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
-    'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
-    'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
+    'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
+    'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
 
     'CONTACTS' => [ self::HAS_MANY, CampaignContact::class, 'id_deal', 'id'],
     'TASKS' => [ self::HAS_MANY, CampaignTask::class, 'id_deal', 'id'],
@@ -59,8 +59,8 @@ class Campaign extends \Hubleto\Erp\Model
       'id_mail_template' => (new Lookup($this, $this->translate('Mail template'), Template::class))
         ->setProperty('defaultVisibility', true)
       ,
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId())->setProperty('defaultVisibility', true),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
@@ -85,7 +85,7 @@ class Campaign extends \Hubleto\Erp\Model
     $description->ui['showFooter'] = false;
 
     $description->ui['filters'] = [
-      'fCampaignPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Phase'),
+      'fCampaignWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Phase'),
       'fCampaignClosed' => [
         'title' => $this->translate('Open / Closed'),
         'options' => [
@@ -114,10 +114,10 @@ class Campaign extends \Hubleto\Erp\Model
 
     $savedRecord['uid'] = \Hubleto\Framework\Helper::generateUuidV4();
 
-    $mPipeline = $this->getService(Pipeline::class);
-    list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInGroup('campaigns');
-    $savedRecord['id_pipeline'] = $idPipeline;
-    $savedRecord['id_pipeline_step'] = $idPipelineStep;
+    $mWorkflow = $this->getService(Workflow::class);
+    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('campaigns');
+    $savedRecord['id_workflow'] = $idWorkflow;
+    $savedRecord['id_workflow_step'] = $idWorkflowStep;
 
     $this->record->recordUpdate($savedRecord);
 

@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Projects\Controllers\Api;
 use Exception;
 use Hubleto\App\Community\Projects\Models\Project;
 use Hubleto\App\Community\Deals\Models\Deal;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
+use Hubleto\App\Community\Workflow\Models\Workflow;
 
 class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -32,8 +32,8 @@ class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
 
       $projectsCount = $mProject->record->where('id_deal', $deal->id)->count();
 
-      $mPipeline = $this->getService(Pipeline::class);
-      list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInGroup('projects');
+      $mWorkflow = $this->getService(Workflow::class);
+      list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('projects');
 
       $project = $mProject->record->recordCreate([
         "id_deal" => $deal->id,
@@ -43,8 +43,8 @@ class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
         "identifier" => $deal->identifier . ':' . ($projectsCount + 1),
         "id_main_developer" => $this->authProvider()->getUserId(),
         "id_account_manager" => $this->authProvider()->getUserId(),
-        "id_pipeline" => $idPipeline,
-        "id_pipeline_step" => $idPipelineStep,
+        "id_workflow" => $idWorkflow,
+        "id_workflow_step" => $idWorkflowStep,
         "is_closed" => false,
         "date_created" => date("Y-m-d H:i:s"),
       ]);

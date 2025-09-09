@@ -26,9 +26,9 @@ class Loader extends \Hubleto\Framework\App
       '/^projects\/phases\/?$/' => Controllers\Phases::class,
     ]);
 
-    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
-    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
-    $pipelineManager->addPipeline($this, 'projects', Pipeline::class);
+    /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflow($this, 'projects', Workflow::class);
 
     $this->addSearchSwitch('p', 'projects');
 

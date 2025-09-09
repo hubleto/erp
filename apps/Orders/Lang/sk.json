@@ -21,8 +21,8 @@
         "Shipping information": "Dodacie informácie",
         "Notes": "Poznámky",
         "Add order": "Pridať objednávku",
-        "Pipeline": "",
-        "Pipeline step": "",
+        "Workflow": "",
+        "Workflow step": "",
         "Template": ""
     },
     "Models\\State": {

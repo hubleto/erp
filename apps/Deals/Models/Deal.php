@@ -15,8 +15,8 @@ use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Leads\Models\Lead;
 use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
 use Hubleto\App\Community\Settings\Models\Currency;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
-use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\Workflow;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Settings\Models\Setting;
 use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\Framework\Helper;
@@ -60,8 +60,8 @@ class Deal extends \Hubleto\Erp\Model
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
-    'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
-    'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
+    'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
+    'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'TEMPLATE_QUOTATION' => [ self::HAS_ONE, Template::class, 'id', 'id_template_quotation'],
 
@@ -100,8 +100,8 @@ class Deal extends \Hubleto\Erp\Model
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
       'id_template_quotation' => (new Lookup($this, $this->translate('Template for quotation'), Template::class)),
       'customer_order_number' => (new Varchar($this, $this->translate('Customer\'s order number')))->setProperty('defaultVisibility', true),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(self::ENUM_SOURCE_CHANNELS),
@@ -177,7 +177,7 @@ class Deal extends \Hubleto\Erp\Model
     $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
     $description->ui['filters'] = [
-      'fDealPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'State'),
+      'fDealWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'State'),
       'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => self::ENUM_SOURCE_CHANNELS ],
       'fDealOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
       'fDealClosed' => [
@@ -196,7 +196,7 @@ class Deal extends \Hubleto\Erp\Model
     unset($description->columns['source_channel']);
     unset($description->columns['is_archived']);
     unset($description->columns['id_lead']);
-    unset($description->columns['id_pipeline']);
+    unset($description->columns['id_workflow']);
     unset($description->columns['shared_folder']);
     unset($description->columns['date_result_update']);
     unset($description->columns['lost_reason']);

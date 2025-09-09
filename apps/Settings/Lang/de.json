@@ -31,11 +31,11 @@
         "Currency Name": "Währung",
         "Currency Code": "Code"
     },
-    "models.pipeline": {
+    "models.workflow": {
         "Name": "Titel",
         "Description": "Beschreibung"
     },
-    "models.pipelineStep": {
+    "models.workflowStep": {
         "Name": "Titel",
         "Order": "Reihenfolge",
         "Company": "Farbe"
@@ -92,7 +92,7 @@
         "Currencies": "Währungen",
         "Lead Statuses": "Lead Zustände",
         "Deal Statuses": "Deal Zustände",
-        "Pipelines": "Pipeline",
+        "Workflows": "Workflow",
         "Invoice profiles": "Abrechnungsprofile"
     },
     "controllers.userRoles": {
@@ -112,7 +112,7 @@
         "Shown in Calendar": "Im Kalender anzeigen",
         "Icon": "Symbol"
     },
-    "models.pipelinestep": {
+    "models.workflowstep": {
         "Name": "Name",
         "Order": "Reihenfolge",
         "Company": "Unternehmen"
@@ -138,7 +138,7 @@
         "Contact types": "Kontakttypen",
         "Countries": "Länder",
         "Currencies": "Währungen",
-        "Pipelines": "Pipelines",
+        "Workflows": "Workflows",
         "Invoice profiles": "Rechnungsprofile",
         "Platform config": "Plattformkonfiguration",
         "Roles": "Rollen",

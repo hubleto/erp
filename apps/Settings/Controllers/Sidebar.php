@@ -14,7 +14,7 @@ class Sidebar extends \Hubleto\Erp\Controller
 
   public function init(): void
   {
-    $appManager = $this->getAppManager();
+    $appManager = $this->appManager();
 
     $installedApps = array_merge($appManager->getEnabledApps(), $appManager->getDisabledApps());
 
@@ -37,7 +37,7 @@ class Sidebar extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $appManager = $this->getAppManager();
+    $appManager = $this->appManager();
 
     $installedApps = array_merge($appManager->getEnabledApps(), $appManager->getDisabledApps());
 

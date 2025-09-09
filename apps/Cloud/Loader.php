@@ -19,6 +19,7 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
+    /** @var PremiumAccount */
     $premiumAccount = $this->getService(PremiumAccount::class);
 
     $this->isPremium = $premiumAccount->premiumAccountActivated();

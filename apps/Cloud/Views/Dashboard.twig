@@ -1,3 +1,5 @@
+{% set isPremium = hubleto.appManager().getApp('Hubleto/App/Community/Cloud').isPremium %}
+
 <h1 class="app-main-title text-center">
   <i class="fas fa-cloud" style="font-size:30pt"></i><br/>
   <div style="font-size:30pt">Hubleto Cloud</div>
@@ -46,7 +48,7 @@
 {% else %}
   <div class="grid grid-cols-2 gap-2 mt-2">
     <div>
-      {% if hubleto.isPremium %}
+      {% if isPremium %}
         <div class="badge badge-success text-center text-2xl p-4 block">
           <i class="fas fa-medal mr-2"></i>
           {{ translate('You are upgraded to Premium') }}

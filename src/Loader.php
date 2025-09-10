@@ -70,4 +70,18 @@ class Loader extends \Hubleto\Framework\Loader
     }
   }
 
+  /**
+   * Checks whether this Hubleto installation can use premium features.
+   *
+   * @return boolean
+   * 
+   */
+  public function isPremium(): bool
+  {
+    $isPremium = true;
+    $cloudApp = $this->appManager()->getApp('Hubleto/App/Community/Cloud');
+    if ($cloudApp) $isPremium = $cloudApp->isPremium;
+    return $isPremium;
+  }
+
 }

@@ -1,5 +1,5 @@
 {% set secondSidebar = viewParams.activatedApp.renderSecondSidebar() %}
-{% set isPremium = hubleto.appManager().getApp('Hubleto/App/Community/Cloud').isPremium %}
+{% set isPremium = hubleto.isPremium() %}
 
 {% macro appBtn(app, inGroup) %}
   {% set notificationsCount = 0 %}

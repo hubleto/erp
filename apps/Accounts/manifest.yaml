@@ -1,0 +1,9 @@
+namespace: Hubleto\App\Community\Accounts
+appType: community
+sidebarGroup: finance
+rootUrlSlug: accounts
+name: Accounts
+icon: fas fa-receipt
+highlight: Accounts
+author:
+  company: "wai.blue"

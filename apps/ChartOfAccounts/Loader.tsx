@@ -1,6 +1,4 @@
 import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
-import InvoicesTableInvoices from "./Components/TableInvoices"
-import InvoicesTableInvoiceItems from "./Components/TableInvoiceItems"
 
 class ChartOfAccountsApp extends HubletoApp {
   init() {

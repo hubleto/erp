@@ -149,7 +149,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             this.updateRecord({id_workflow_step: idWorkflowStep});
           }}
         ></WorkflowSelector>
-        {this.inputWrapper('is_closed')}
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>
   }

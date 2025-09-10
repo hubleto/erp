@@ -74,7 +74,7 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
     let stepBtnClass = "btn-light";
 
     return <>
-      <div className='flex flex-row mt-2 flex-wrap'>
+      <div className='flex flex-row flex-wrap'>
         {this.state.changeWorkflow ? <div className='flex gap-2 items-center'>
           <button className="btn btn-transparent btn-small ml-2" onClick={() => { this.setState({changeWorkflow: false}); }}>
             <span className="icon"><i className='fas fa-grip-lines'></i></span>
@@ -96,17 +96,18 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
             </div></div>
           </div>
         </div> : <div className='flex gap-2'>
-          <div>
+          <div className='flex items-center'>
             <button className="btn btn-transparent btn-small ml-2" onClick={() => { this.setState({changeWorkflow: true}); }}>
               <span className="icon"><i className='fas fa-grip-lines'></i></span>
             </button>
           </div>
-          <div>
+          <div className='flex items-center'>
             {steps && steps.length > 0 ?
               steps.map((s, i) => {
                 if (stepBtnClass == "btn-primary") stepBtnClass = "btn-transparent";
                 else if (s.id == this.props.idWorkflowStep) stepBtnClass = "btn-primary";
-              return <button
+                
+                return <button
                   key={i}
                   onClick={() => this.onWorkflowStepChange(s.id, s)}
                   className={`btn ${stepBtnClass} border-none rounded-none`}

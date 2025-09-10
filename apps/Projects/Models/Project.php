@@ -64,8 +64,8 @@ class Project extends \Hubleto\Erp\Model
         ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
-      'date_start' => (new Date($this, $this->translate('Start')))->setReadonly()->setDefaultValue(date("Y-m-d")),
-      'date_deadline' => (new Date($this, $this->translate('Deadline')))->setReadonly()->setDefaultValue(date("Y-m-d")),
+      'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
+      'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),
       'budget' => (new Integer($this, $this->translate('Budget')))->setProperty('defaultVisibility', true)->setUnit('€'),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),

@@ -622,7 +622,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             this.updateRecord(newRecord);
           }}
         ></WorkflowSelector>
-        {this.inputWrapper('is_closed', {readonly: R.is_archived})}
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>
   }

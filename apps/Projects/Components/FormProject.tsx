@@ -86,7 +86,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
             this.updateRecord({id_workflow_step: idWorkflowStep});
           }}
         ></WorkflowSelector>
-        {this.inputWrapper('is_closed', {readonly: R.is_archived})}
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>;
   }
@@ -160,6 +160,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
           tag="ProjectActivities"
           parentForm={this}
           idProject={R.id}
+          readonly={true}
         />;
       break;
 

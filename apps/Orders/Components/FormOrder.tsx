@@ -121,7 +121,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
             this.updateRecord({id_workflow_step: idWorkflowStep});
           }}
         ></WorkflowSelector>
-        {this.inputWrapper('is_closed')}
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>
   }

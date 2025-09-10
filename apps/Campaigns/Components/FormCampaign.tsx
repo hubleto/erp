@@ -90,7 +90,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             this.updateRecord({id_workflow_step: idWorkflowStep});
           }}
         ></WorkflowSelector>
-        {this.inputWrapper('is_closed')}
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>
   }

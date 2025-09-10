@@ -64,7 +64,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
             this.updateRecord({id_workflow_step: idWorkflowStep});
           }}
         ></WorkflowSelector>
-        {this.inputWrapper('is_closed', {readonly: R.is_archived})}
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>
   }
@@ -106,7 +106,6 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
               {this.inputWrapper('id_tester')}
               {this.inputWrapper('shared_folder')}
               {this.inputWrapper('hours_estimation')}
-              {this.inputWrapper('is_closed')}
             </div>
             <div className='flex-1'>
               {this.inputWrapper('id_customer')}

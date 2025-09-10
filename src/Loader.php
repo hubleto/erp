@@ -21,7 +21,8 @@ class Loader extends \Hubleto\Framework\Loader
       \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,
       \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
       \Hubleto\Framework\Renderer::class => Renderer::class,
-      
+      \Hubleto\Framework\Env::class => Env::class,
+
       \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
       \Hubleto\Framework\Controllers\NotFound::class => Controllers\NotFound::class,
       \Hubleto\Framework\Controllers\Desktop::class => \Hubleto\App\Community\Desktop\Controllers\Desktop::class,
@@ -68,20 +69,6 @@ class Loader extends \Hubleto\Framework\Loader
       echo $e->getTraceAsString() . "\n";
       exit;
     }
-  }
-
-  /**
-   * Checks whether this Hubleto installation can use premium features.
-   *
-   * @return boolean
-   * 
-   */
-  public function isPremium(): bool
-  {
-    $isPremium = true;
-    $cloudApp = $this->appManager()->getApp('Hubleto/App/Community/Cloud');
-    if ($cloudApp) $isPremium = $cloudApp->isPremium;
-    return $isPremium;
   }
 
 }

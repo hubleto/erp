@@ -11,7 +11,7 @@ class EntryLine extends \Hubleto\Erp\Model
 {
   public string $table = 'journal_entry_line';
   public string $recordManagerClass = RecordManagers\EntryLine::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.memo';
+  public ?string $lookupSqlValue = 'concat({%TABLE%}.memo, \' \', \' (\', {%TABLE%}.amount, \')\')';
   public ?string $lookupUrlAdd = '/journal/entry-line/add';
   public ?string $lookupUrlDetail = '/journal/entry-line/{%ID%}';
 

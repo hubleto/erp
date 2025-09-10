@@ -1,20 +1,5 @@
 import React, { Component, ChangeEvent } from "react";
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
-import InputTags2 from "@hubleto/react-ui/core/Inputs/Tags2";
-import FormInput from "@hubleto/react-ui/core/FormInput";
-import TableContacts from "../../Contacts/Components/TableContacts";
-import { TabPanel, TabView } from "primereact/tabview";
-import CustomerFormActivity, {CustomerFormActivityProps, CustomerFormActivityState} from "./CustomerFormActivity";
-import ModalForm from "@hubleto/react-ui/core/ModalForm";
-import { FormDealState } from "../../Deals/Components/FormDeal";
-import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
-import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
-import FormContact, {FormContactProps, FormContactState} from "../../Contacts/Components/FormContact";
-import Calendar from '../../Calendar/Components/Calendar'
-import Hyperlink from "@hubleto/react-ui/core/Inputs/Hyperlink";
-import request from "@hubleto/react-ui/core/Request";
-import { FormProps, FormState } from "@hubleto/react-ui/core/Form";
-import moment from "moment";
 import Table from "@hubleto/react-ui/core/Table";
 
 export interface FormEntryProps extends HubletoFormProps {
@@ -53,15 +38,28 @@ export default class FormEntry<P, S> extends HubletoForm<FormEntryProps, FormEnt
     // const linkExists = this.state.description.defaultValues?.creatingForModel ? false : true
 
     return <>
-      {this.inputWrapper('description')}
-      {this.inputWrapper('date')}
-      {this.inputWrapper('reference')}
+      <div className="card">
+        <div className="card-body">
+          <div className="flex w-full">
+            <div className="flex-grow">
+              {this.inputWrapper('reference')}
+            </div>
+            {this.inputWrapper('date')}
+          </div>
+          {this.inputWrapper('description')}
+        </div>
+      </div>
 
       { R.id > 0 &&
-      <Table model="Hubleto/App/Community/Journal/Models/EntryLine" formProps={{
-        model: 'Hubleto/App/Community/Journal/Models/EntryLine',
-        description: { defaultValues: { id_entry: R.id }, inputs: { 'id_entry': { readonly: true } } }
-      }} uid={this.props.uid} customEndpointParams={{ idEntry: R.id}}></Table>
+
+        <div className="card mt-4">
+          <div className="card-body">
+            <Table model="Hubleto/App/Community/Journal/Models/EntryLine" formProps={{
+              model: 'Hubleto/App/Community/Journal/Models/EntryLine',
+              description: { defaultValues: { id_entry: R.id }, inputs: { 'id_entry': { readonly: true } } }
+            }} uid={this.props.uid} customEndpointParams={{ idEntry: R.id}}></Table>
+          </div>
+        </div>
       }
     </>;
   }

@@ -13,7 +13,7 @@ class Entry extends \Hubleto\Erp\Model
 {
   public string $table = 'journal_entry';
   public string $recordManagerClass = RecordManagers\Entry::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.description';
+  public ?string $lookupSqlValue = '{%TABLE%}.reference';
 
   public array $relations = [
     'JOURNAL_ENTRY_LINE' => [ self::HAS_MANY, EntryLine::class, 'id_entry', 'id'  ],
@@ -22,9 +22,9 @@ class Entry extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'description' => new Varchar($this, $this->translate("Description"))->setRequired(),
+      'description' => new Varchar($this, $this->translate("Description")),
       'date' => new Date($this, $this->translate("Date"))->setRequired(),
-      'reference' => new Varchar($this, $this->translate("Reference number"))->setDescription('Reference number of a corresponding check or invoice'),
+      'reference' => new Varchar($this, $this->translate("Reference number"))->setDescription('Reference number of a corresponding check or invoice')->setRequired(),
     ]);
   }
 

@@ -18,8 +18,8 @@ use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\App\Community\Projects\Models\Project;
 use Hubleto\App\Community\Settings\Models\User;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
-use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\Workflow;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 
 class Discussion extends \Hubleto\Erp\Model
 {

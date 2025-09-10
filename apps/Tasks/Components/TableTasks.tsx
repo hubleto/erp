@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import ModalForm from "@hubleto/react-ui/core/ModalForm";
 import FormTask from './FormTask';
+import FormActivity from '@hubleto/apps/Worksheets/Components/FormActivity';
 
 interface TableTasksProps extends HubletoTableProps { }
 
 interface TableTasksState extends HubletoTableState {
+  addActivityForIdTask: number,
 }
 
 export default class TableTasks extends HubletoTable<TableTasksProps, TableTasksState> {
@@ -27,6 +30,7 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
   getStateFromProps(props: TableTasksProps) {
     return {
       ...super.getStateFromProps(props),
+      addActivityForIdTask: 0,
     }
   }
 
@@ -50,8 +54,46 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
     return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
   }
 
+  renderActionsColumn(data: any, options: any) {
+    return <>
+      <button
+        className="btn btn-small btn-add-outline text-nowrap"
+        onClick={(e) => {
+          e.preventDefault();
+          this.setState({addActivityForIdTask: data.id});
+        }}
+      >
+        <span className="icon"><i className="fas fa-plus"></i></span>
+        <span className="text">Add activity</span>
+      </button>
+    </>;
+  }
+
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
     return <FormTask {...formProps}/>;
+  }
+
+  renderContent(): JSX.Element {
+    return <>
+      {super.renderContent()}
+      {this.state.addActivityForIdTask > 0 ?
+        <ModalForm
+          uid={this.props.uid + "_add_activity_modal"}
+          isOpen={true}
+          type='centered small theme-secondary'
+        >
+          <FormActivity
+            id={-1}
+            showInModal={true}
+            description={{defaultValues: {id_task: this.state.addActivityForIdTask}}}
+            onClose={() => {
+              this.setState({addActivityForIdTask: 0});
+              this.reload();
+            }}
+          ></FormActivity>
+        </ModalForm>
+      : null}
+    </>;
   }
 }

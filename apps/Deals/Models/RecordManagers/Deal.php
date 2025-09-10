@@ -5,8 +5,8 @@ namespace Hubleto\App\Community\Deals\Models\RecordManagers;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
-use Hubleto\App\Community\Pipeline\Models\RecordManagers\Pipeline;
-use Hubleto\App\Community\Pipeline\Models\RecordManagers\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
+use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 use Hubleto\App\Community\Deals\Models\RecordManagers\DealHistory;
 use Hubleto\App\Community\Deals\Models\RecordManagers\DealTag;
@@ -28,16 +28,16 @@ class Deal extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Customer::class, 'id_customer', 'id');
   }
 
-  /** @return HasOne<Pipeline, covariant Deal> */
-  public function PIPELINE(): HasOne
+  /** @return HasOne<Workflow, covariant Deal> */
+  public function WORKFLOW(): HasOne
   {
-    return $this->hasOne(Pipeline::class, 'id', 'id_pipeline');
+    return $this->hasOne(Workflow::class, 'id', 'id_workflow');
   }
 
-  /** @return HasOne<PipelineStep, covariant Deal> */
-  public function PIPELINE_STEP(): HasOne
+  /** @return HasOne<WorkflowStep, covariant Deal> */
+  public function WORKFLOW_STEP(): HasOne
   {
-    return $this->hasOne(PipelineStep::class, 'id', 'id_pipeline_step');
+    return $this->hasOne(WorkflowStep::class, 'id', 'id_workflow_step');
   }
 
   /** @return BelongsTo<Lead, covariant Deal> */
@@ -145,10 +145,10 @@ class Deal extends \Hubleto\Erp\RecordManager
 
     $filters = $main->router()->urlParamAsArray("filters");
 
-    $query = Pipeline::applyPipelineStepFilter(
+    $query = Workflow::applyWorkflowStepFilter(
       $this->model,
       $query,
-      $filters['fDealPipelineStep'] ?? []
+      $filters['fDealWorkflowStep'] ?? []
     );
 
     if (isset($filters["fDealSourceChannel"]) && $filters["fDealSourceChannel"] > 0) {

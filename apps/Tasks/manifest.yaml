@@ -9,4 +9,4 @@ author:
   nick: "wai.blue"
 highlight: Task management app
 requires:
-  - Hubleto\App\Community\Pipeline
+  - Hubleto\App\Community\Workflow

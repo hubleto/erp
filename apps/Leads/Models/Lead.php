@@ -19,8 +19,8 @@ use Hubleto\App\Community\Settings\Models\Setting;
 use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\App\Community\Settings\Models\Team;
 use Hubleto\Framework\Helper;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
-use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\Workflow;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 
 use Hubleto\App\Community\Deals\Models\DealLead;
 
@@ -46,8 +46,8 @@ class Lead extends \Hubleto\Erp\Model
     // 'LEVEL' => [ self::BELONGS_TO, Level::class, 'id_level', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
-    'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
-    'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
+    'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
+    'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
 
     'HISTORY' => [ self::HAS_MANY, LeadHistory::class, 'id_lead', 'id', ],
     'TAGS' => [ self::HAS_MANY, LeadTag::class, 'id_lead', 'id' ],
@@ -103,8 +103,8 @@ class Lead extends \Hubleto\Erp\Model
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, "Online document folder"),
       'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
         1 => "Advertisement",
         2 => "Partner",
@@ -162,7 +162,7 @@ class Lead extends \Hubleto\Erp\Model
     $description->columns['tags'] = ["title" => "Tags"];
 
     $description->ui['filters'] = [
-      'fLeadPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Level'),
+      'fLeadWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Level'),
       'fLeadOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
     ];
 
@@ -330,10 +330,10 @@ class Lead extends \Hubleto\Erp\Model
 
     $newLead = $savedRecord;
 
-    $mPipeline = $this->getService(Pipeline::class);
-    list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInGroup('leads');
-    $newLead['id_pipeline'] = $idPipeline;
-    $newLead['id_pipeline_step'] = $idPipelineStep;
+    $mWorkflow = $this->getService(Workflow::class);
+    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('leads');
+    $newLead['id_workflow'] = $idWorkflow;
+    $newLead['id_workflow_step'] = $idWorkflowStep;
 
     if (empty($newLead['identifier'])) {
       $newLead["identifier"] = $this->appManager()->getApp(\Hubleto\App\Community\Leads\Loader::class)->configAsString('leadPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);

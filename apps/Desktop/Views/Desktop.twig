@@ -1,4 +1,5 @@
 {% set secondSidebar = viewParams.activatedApp.renderSecondSidebar() %}
+{% set isPremium = hubleto.env().isPremium() %}
 
 {% macro appBtn(app, inGroup) %}
   {% set notificationsCount = 0 %}
@@ -53,7 +54,7 @@
       'projectUrl': '{{ config.projectUrl }}',
       'uploadUrl': '{{ config.uploadUrl }}',
       'idUser': {{ user.id ?? 0 }},
-      'isPremium': {% if hubleto.isPremium %} true {% else %} false {% endif %},
+      'isPremium': {% if isPremium %} true {% else %} false {% endif %},
       'language': '{{ user.language ?: "en" }}'
     }
   </script>
@@ -175,7 +176,7 @@
           {% endif %}
           {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Cloud') %}
             <li class="mr-2 {# hidden #} lg:block">
-              {% if hubleto.isPremium %}
+              {% if isPremium %}
                 <a class="btn btn-transparent" href="{{ config.projectUrl }}/cloud">
                   <span class="icon text-primary"><i class="fas fa-medal"></i></span>
                   <span class="text">{{ translate('Premium') }}</span>

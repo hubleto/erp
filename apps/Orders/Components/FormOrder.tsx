@@ -5,7 +5,7 @@ import TableOrderProducts from '@hubleto/apps/Orders/Components/TableOrderProduc
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';
-import PipelineSelector from '../../Pipeline/Components/PipelineSelector';
+import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 
 export interface FormOrderProps extends HubletoFormProps {
@@ -111,17 +111,17 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     return <>
       {super.renderTopMenu()}
       {this.state.id <= 0 ? null : <>
-        <PipelineSelector
-          idPipeline={R.id_pipeline}
-          idPipelineStep={R.id_pipeline_step}
-          onPipelineChange={(idPipeline: number, idPipelineStep: number) => {
-            this.updateRecord({id_pipeline: idPipeline, id_pipeline_step: idPipelineStep});
+        <WorkflowSelector
+          idWorkflow={R.id_workflow}
+          idWorkflowStep={R.id_workflow_step}
+          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
+            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
           }}
-          onPipelineStepChange={(idPipelineStep: number, step: any) => {
-            this.updateRecord({id_pipeline_step: idPipelineStep});
+          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
+            this.updateRecord({id_workflow_step: idWorkflowStep});
           }}
-        ></PipelineSelector>
-        {this.inputWrapper('is_closed')}
+        ></WorkflowSelector>
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>
   }

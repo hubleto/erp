@@ -169,6 +169,7 @@ class Mail extends \Hubleto\Erp\Model
       $mailer->SMTPSecure = $mail['ACCOUNT']['smtp_encryption'];
       $mailer->Username = $mail['ACCOUNT']['smtp_username'];
       $mailer->Password = $password;
+      $mailer->AuthType = 'LOGIN';
 
       $mailer->setFrom(
         $mail['ACCOUNT']['sender_email'],
@@ -182,6 +183,8 @@ class Mail extends \Hubleto\Erp\Model
       $mailer->Body = $mail['body_html'];
 
       $this->logger()->info('Sending email to `' . $mail['to'] . '` from `' . $mail['ACCOUNT']['smtp_username'] . '`');
+      // $this->logger()->debug($mail['ACCOUNT']['smtp_username'] . '@' . $mail['ACCOUNT']['smtp_host'] . ':' . $mail['ACCOUNT']['smtp_port']);
+      // $this->logger()->debug($password);
 
       $sent = $mailer->send();
 

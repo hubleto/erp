@@ -1,0 +1,20 @@
+<?php
+
+namespace Hubleto\App\Community\Workflow\Controllers;
+
+class Workflows extends \Hubleto\Erp\Controller
+{
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
+      [ 'url' => '', 'content' => $this->translate('Workflows') ],
+    ]);
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@Hubleto:App:Community:Workflow/Workflows.twig');
+  }
+}

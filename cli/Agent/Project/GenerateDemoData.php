@@ -592,15 +592,15 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     $leads = $mLead->record->get();
 
-    $mPipeline = $this->getModel(\Hubleto\App\Community\Pipeline\Models\Pipeline::class);
-    $pipeline = $mPipeline->record->prepareReadQuery()->where('id', 1)->first()->toArray();
+    $mWorkflow = $this->getModel(\Hubleto\App\Community\Workflow\Models\Workflow::class);
+    $workflow = $mWorkflow->record->prepareReadQuery()->where('id', 1)->first()->toArray();
 
     foreach ($leads as $lead) { // @phpstan-ignore-line
       if (rand(1, 3) != 1) {
         continue;
       } // negenerujem deal pre vsetky leads
 
-      $pStepsRandom = $pipeline['STEPS'];
+      $pStepsRandom = $workflow['STEPS'];
       shuffle($pStepsRandom);
       $pStep = reset($pStepsRandom);
 
@@ -619,8 +619,8 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
         "id_owner" => $lead->id_owner,
         "source_channel" => $lead->source_channel,
         "is_archived" => $lead->is_archived,
-        "id_pipeline" => $pipeline['id'],
-        "id_pipeline_step" => $pStep['id'],
+        "id_workflow" => $workflow['id'],
+        "id_workflow_step" => $pStep['id'],
         "id_lead" => $lead->id,
         "deal_result" => $pStep['set_result'] ?? 0,
         "date_created" => $dealDateCreated,

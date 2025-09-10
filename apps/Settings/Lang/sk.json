@@ -48,15 +48,15 @@
         "Code": "Kódovať",
         "Symbol": "Symbol"
     },
-    "Models\\Pipeline": {
+    "Models\\Workflow": {
         "Name": "Názov",
         "Description": "Popis"
     },
-    "Models\\PipelineStep": {
+    "Models\\WorkflowStep": {
         "Name": "Názov",
         "Order": "Poradie",
         "Company": "Farba",
-        "Pipeline": "Kanál",
+        "Workflow": "Kanál",
         "Color": "Farba",
         "Set result of a deal to": ""
     },
@@ -117,7 +117,7 @@
         "Currencies": "Meny",
         "Lead Statuses": "Stavy leadov",
         "Deal Statuses": "Stavy dealov",
-        "Pipelines": "Pipeline",
+        "Workflows": "Workflow",
         "Invoice profiles": "Fakturačné profily",
         "Manage installed apps": "Spravovať nainštalované aplikácie",
         "Disable": "Deaktivovať",
@@ -155,7 +155,7 @@
         "Contact types": "Typy kontaktov",
         "Countries": "Štáty",
         "Currencies": "Meny",
-        "Pipelines": "Pipelines",
+        "Workflows": "Workflows",
         "Invoice profiles": "Fakturačné profily",
         "Platform config": "Konfigurácia platformy",
         "Contact Categories": "Kategórie kontaktov",

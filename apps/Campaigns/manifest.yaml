@@ -8,11 +8,11 @@ author:
   company: "wai.blue"
 highlight: Management of marketing campaigns
 tags:
-  - pipeline
+  - workflow
   - sales
   - leads
   - deals
 requires:
   - Hubleto\App\Community\Customers
   - Hubleto\App\Community\Calendar
-  - Hubleto\App\Community\Pipeline
+  - Hubleto\App\Community\Workflow

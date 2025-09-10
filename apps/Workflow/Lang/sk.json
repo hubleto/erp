@@ -1,0 +1,28 @@
+{
+    "manifest": {
+        "Workflow": "Workflow",
+        "Free sales workflow management.": "Bezplatný manažment predajných kanálov"
+    },
+    "Controllers\\Home": {
+        "Workflow": "Workflow",
+        "Add workflow": "",
+        "Manage workflow steps": ""
+    },
+    "root": {
+        "Workflows": "Potrubia"
+    },
+    "Models\\Workflow": {
+        "Name": "Pomenovať",
+        "Description": "Opis",
+        "Type": "Typ",
+        "Group": ""
+    },
+    "Models\\WorkflowStep": {
+        "Name": "Pomenovať",
+        "Order": "Objednávka",
+        "Color": "Farba",
+        "Probability": "Pravdepodobnosť",
+        "Workflow": "Potrubie",
+        "Set result of a deal to": "Stanovený výsledok dohody"
+    }
+}

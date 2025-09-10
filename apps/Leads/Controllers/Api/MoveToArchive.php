@@ -11,7 +11,7 @@ use Hubleto\App\Community\Leads\Models\Lead;
 use Hubleto\App\Community\Leads\Models\LeadDocument;
 use Hubleto\App\Community\Leads\Models\LeadHistory;
 use Hubleto\App\Community\Leads\Models\LeadProduct;
-use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Settings\Models\Setting;
 
 class MoveToArchive extends \Hubleto\Erp\Controllers\ApiController

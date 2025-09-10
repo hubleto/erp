@@ -18,7 +18,7 @@ import TableDealHistory from './TableDealHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableOrders from '@hubleto/apps/Orders/Components/TableOrders';
 // import TableProjects from '@hubleto/apps/Projects/Components/TableProjects';
-import PipelineSelector from '../../Pipeline/Components/PipelineSelector';
+import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 
 export interface FormDealProps extends HubletoFormProps {
   newEntryId?: number,
@@ -34,7 +34,7 @@ export interface FormDealState extends HubletoFormState {
   tableDealProductsDescription: any,
   tableDealDocumentsDescription: any,
   tablesKey: number,
-  // pipelineFirstLoad: boolean;
+  // workflowFirstLoad: boolean;
 }
 
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
@@ -70,7 +70,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       tableDealProductsDescription: null,
       tableDealDocumentsDescription: null,
       tablesKey: 0,
-      // pipelineFirstLoad: false,
+      // workflowFirstLoad: false,
     };
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
@@ -149,28 +149,28 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     return <small>{this.translate('Deal')}</small>;
   }
 
-  // pipelineChange(idPipeline: number) {
+  // workflowChange(idWorkflow: number) {
   //   request.get(
-  //     'deals/change-pipeline',
+  //     'deals/change-workflow',
   //     {
-  //       idPipeline: idPipeline
+  //       idWorkflow: idWorkflow
   //     },
   //     (data: any) => {
   //       if (data.status == "success") {
   //         var R = this.state.record;
-  //         if (data.newPipeline.STEPS?.length > 0) {
-  //           R.id_pipeline = data.newPipeline.id;
-  //           R.id_pipeline_step = data.newPipeline.STEPS[0].id;
-  //           R.deal_result = data.newPipeline.STEPS[0].set_result;
-  //           R.PIPELINE = data.newPipeline;
-  //           R.PIPELINE_STEP = data.newPipeline.STEPS[0];
+  //         if (data.newWorkflow.STEPS?.length > 0) {
+  //           R.id_workflow = data.newWorkflow.id;
+  //           R.id_workflow_step = data.newWorkflow.STEPS[0].id;
+  //           R.deal_result = data.newWorkflow.STEPS[0].set_result;
+  //           R.WORKFLOW = data.newWorkflow;
+  //           R.WORKFLOW_STEP = data.newWorkflow.STEPS[0];
 
   //           this.setState({ record: R });
   //         } else {
-  //           R.id_pipeline = data.newPipeline.id;
-  //           R.id_pipeline_step = null;
-  //           R.PIPELINE = data.newPipeline;
-  //           R.PIPELINE_STEP = null;
+  //           R.id_workflow = data.newWorkflow.id;
+  //           R.id_workflow_step = null;
+  //           R.WORKFLOW = data.newWorkflow;
+  //           R.WORKFLOW_STEP = null;
 
   //           this.setState({ record: R });
   //         }
@@ -183,13 +183,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     return (probability / 100) * price;
   }
 
-  // changePipelineStepFromResult() {
-  //   if (this.state.record.PIPELINE.STEPS.length > 0) {
-  //     this.state.record.PIPELINE.STEPS.some(step => {
+  // changeWorkflowStepFromResult() {
+  //   if (this.state.record.WORKFLOW.STEPS.length > 0) {
+  //     this.state.record.WORKFLOW.STEPS.some(step => {
   //       if (step.set_result == this.state.record.deal_result) {
   //         let R = this.state.record;
-  //         R.id_pipeline_step = step.id;
-  //         R.PIPELINE_STEP = step;
+  //         R.id_workflow_step = step.id;
+  //         R.WORKFLOW_STEP = step;
   //         this.setState({record: R});
   //         return true;
   //       } else return false;
@@ -358,8 +358,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 readonly: R.is_archived,
                 onChange: (input: any, value: any) => {
                   this.updateRecord({lost_reason: null});
-                  // if (this.state.record.PIPELINE && this.state.record.PIPELINE.STEPS?.length > 0) {
-                  //   this.changePipelineStepFromResult();
+                  // if (this.state.record.WORKFLOW && this.state.record.WORKFLOW.STEPS?.length > 0) {
+                  //   this.changeWorkflowStepFromResult();
                   // }
                 }
               }
@@ -463,10 +463,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 <div className="badge badge-violet">
                   {this.translate("Deal value:")} {globalThis.main.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY.code}
                 </div>
-                {R.PIPELINE_STEP && R.PIPELINE_STEP.probability ?
+                {R.WORKFLOW_STEP && R.WORKFLOW_STEP.probability ?
                   <div className="badge badge-violet">
-                    {this.translate("Weighted profit")} ({R.PIPELINE_STEP?.probability} %):
-                    <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.PIPELINE_STEP?.probability, R.price_excl_vat), 2, ',', ' ')} {R.CURRENCY.code}</strong>
+                    {this.translate("Weighted profit")} ({R.WORKFLOW_STEP?.probability} %):
+                    <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.WORKFLOW_STEP?.probability, R.price_excl_vat), 2, ',', ' ')} {R.CURRENCY.code}</strong>
                   </div>
                 : null}
               </div> : null}
@@ -608,21 +608,21 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     return <>
       {super.renderTopMenu()}
       {this.state.id <= 0 ? null : <>
-        <PipelineSelector
-          idPipeline={R.id_pipeline}
-          idPipelineStep={R.id_pipeline_step}
-          onPipelineChange={(idPipeline: number, idPipelineStep: number) => {
-            this.updateRecord({id_pipeline: idPipeline, id_pipeline_step: idPipelineStep});
+        <WorkflowSelector
+          idWorkflow={R.id_workflow}
+          idWorkflowStep={R.id_workflow_step}
+          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
+            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
           }}
-          onPipelineStepChange={(idPipelineStep: number, step: any) => {
-            let newRecord: any = {id_pipeline_step: idPipelineStep, deal_result: 0, is_closed: false};
+          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
+            let newRecord: any = {id_workflow_step: idWorkflowStep, deal_result: 0, is_closed: false};
             if (step.name.match(/won/i)) newRecord.deal_result = 1;
             if (step.name.match(/lost/i)) newRecord.deal_result = 2;
             if (newRecord.deal_result != 0) newRecord.is_closed = true;
             this.updateRecord(newRecord);
           }}
-        ></PipelineSelector>
-        {this.inputWrapper('is_closed', {readonly: R.is_archived})}
+        ></WorkflowSelector>
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>
   }

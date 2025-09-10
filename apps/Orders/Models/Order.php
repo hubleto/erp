@@ -17,8 +17,8 @@ use Hubleto\App\Community\Settings\Models\Setting;
 use Hubleto\App\Community\Documents\Generator;
 use Hubleto\App\Community\Documents\Models\Template;
 use Hubleto\App\Community\Projects\Models\ProjectOrder;
-use Hubleto\App\Community\Pipeline\Models\Pipeline;
-use Hubleto\App\Community\Pipeline\Models\PipelineStep;
+use Hubleto\App\Community\Workflow\Models\Workflow;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Invoices\Models\Invoice;
 use Hubleto\App\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
 use Hubleto\App\Community\Settings\Models\User;
@@ -34,8 +34,8 @@ class Order extends \Hubleto\Erp\Model
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
-    'PIPELINE' => [ self::HAS_ONE, Pipeline::class, 'id', 'id_pipeline'],
-    'PIPELINE_STEP' => [ self::HAS_ONE, PipelineStep::class, 'id', 'id_pipeline_step'],
+    'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
+    'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
 
     'PRODUCTS' => [ self::HAS_MANY, OrderProduct::class, 'id_order', 'id' ],
@@ -61,8 +61,8 @@ class Order extends \Hubleto\Erp\Model
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setProperty('defaultVisibility', true),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
-      'id_pipeline' => (new Lookup($this, $this->translate('Pipeline'), Pipeline::class)),
-      'id_pipeline_step' => (new Lookup($this, $this->translate('Pipeline step'), PipelineStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
       'price_excl_vat' => (new Decimal($this, $this->translate('Price excl. VAT')))->setDefaultValue(0)->setProperty('defaultVisibility', true),
       'price_incl_vat' => (new Decimal($this, $this->translate('Price incl. VAT')))->setDefaultValue(0)->setProperty('defaultVisibility', true),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
@@ -92,7 +92,7 @@ class Order extends \Hubleto\Erp\Model
     unset($description->columns["note"]);
 
     $description->ui['filters'] = [
-      'fOrderPipelineStep' => Pipeline::buildTableFilterForPipelineSteps($this, 'Stage'),
+      'fOrderWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Stage'),
       'fOrderClosed' => [
         'title' => $this->translate('Open / Closed'),
         'options' => [
@@ -174,12 +174,12 @@ class Order extends \Hubleto\Erp\Model
    */
   public function onAfterCreate(array $savedRecord): array
   {
-    $mPipeline = $this->getService(Pipeline::class);
+    $mWorkflow = $this->getService(Workflow::class);
 
-    list($defaultPipeline, $idPipeline, $idPipelineStep) = $mPipeline->getDefaultPipelineInGroup('orders');
+    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('orders');
 
-    $savedRecord['id_pipeline'] = $idPipeline;
-    $savedRecord['id_pipeline_step'] = $idPipelineStep;
+    $savedRecord['id_workflow'] = $idWorkflow;
+    $savedRecord['id_workflow_step'] = $idWorkflowStep;
 
     $this->record->recordUpdate($savedRecord);
 

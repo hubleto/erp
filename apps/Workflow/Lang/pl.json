@@ -1,0 +1,28 @@
+{
+    "loader": {
+        "Sales": "Sprzedaż",
+        "Workflow": "Workflow"
+    },
+    "controllers.home": {
+        "Sales": "Sprzedaż"
+    },
+    "manifest": {
+        "Workflow": "Rurociąg",
+        "Free sales workflow management.": "Bezpłatne zarządzanie rurociągami sprzedaży."
+    },
+    "root": {
+        "Workflows": "Rurociągi"
+    },
+    "Models\\Workflow": {
+        "Name": "Nazwa",
+        "Description": "Opis"
+    },
+    "Models\\WorkflowStep": {
+        "Name": "Nazwa",
+        "Order": "Zamówienie",
+        "Color": "Kolor",
+        "Probability": "Prawdopodobieństwo",
+        "Workflow": "Rurociąg",
+        "Set result of a deal to": "Ustaw wynik umowy"
+    }
+}

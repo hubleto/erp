@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
-import PipelineSelector, { updateFormPipelineByTag } from '@hubleto/apps/Pipeline/Components/PipelineSelector';
+import WorkflowSelector, { updateFormWorkflowByTag } from '@hubleto/apps/Workflow/Components/WorkflowSelector';
 import request from '@hubleto/react-ui/core/Request';
 
 export interface FormCampaignProps extends HubletoFormProps {}
@@ -80,17 +80,17 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
     return <>
       {super.renderTopMenu()}
       {this.state.id <= 0 ? null : <>
-        <PipelineSelector
-          idPipeline={R.id_pipeline}
-          idPipelineStep={R.id_pipeline_step}
-          onPipelineChange={(idPipeline: number, idPipelineStep: number) => {
-            this.updateRecord({id_pipeline: idPipeline, id_pipeline_step: idPipelineStep});
+        <WorkflowSelector
+          idWorkflow={R.id_workflow}
+          idWorkflowStep={R.id_workflow_step}
+          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
+            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
           }}
-          onPipelineStepChange={(idPipelineStep: number, step: any) => {
-            this.updateRecord({id_pipeline_step: idPipelineStep});
+          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
+            this.updateRecord({id_workflow_step: idWorkflowStep});
           }}
-        ></PipelineSelector>
-        {this.inputWrapper('is_closed')}
+        ></WorkflowSelector>
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>
   }
@@ -283,7 +283,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                     (result: any) => {
                       if (result.status && result.status == 'success') {
                         this.setState({launchResult: result}, () => {
-                          updateFormPipelineByTag(this, 'campaign-launched', () => {
+                          updateFormWorkflowByTag(this, 'campaign-launched', () => {
                             this.saveRecord();
                           });
                         });

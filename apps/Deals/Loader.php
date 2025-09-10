@@ -26,7 +26,7 @@ class Loader extends \Hubleto\Framework\App
       '/^deals\/add\/?$/' => ['controller' => Controllers\Deals::class, 'vars' => ['recordId' => -1]],
       '/^deals\/settings\/?$/' => Controllers\Settings::class,
       '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
-      '/^deals\/change-pipeline\/?$/' => Controllers\Api\ChangePipeline::class,
+      '/^deals\/change-workflow\/?$/' => Controllers\Api\ChangeWorkflow::class,
       '/^settings\/deal-tags\/?$/' => Controllers\Tags::class,
       '/^settings\/deal-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^deals\/boards\/deal-warnings\/?$/' => Controllers\Boards\DealWarnings::class,
@@ -53,9 +53,9 @@ class Loader extends \Hubleto\Framework\App
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar($this, 'deals', $this->configAsString('calendarColor'), Calendar::class);
 
-    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
-    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
-    $pipelineManager->addPipeline($this, 'deals', Pipeline::class);
+    /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflow($this, 'deals', Workflow::class);
 
     /** @var \Hubleto\App\Community\Reports\Loader $reportsApp */
     $reportsApp = $this->appManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);

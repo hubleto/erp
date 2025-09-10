@@ -45,7 +45,7 @@ class Notification extends \Hubleto\Erp\RecordManager
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
     /** @var \Hubleto\App\Community\Notifications\Loader $notificationsApp */
-    $notificationsApp = $main->getAppManager(\Hubleto\App\Community\Notifications\Loader::class);
+    $notificationsApp = $main->appManager(\Hubleto\App\Community\Notifications\Loader::class);
 
     $message = $notificationsApp->send(
       $record['id_to'] ?? '',

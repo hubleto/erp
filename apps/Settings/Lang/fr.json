@@ -31,11 +31,11 @@
         "Currency Name": "Nom de devise",
         "Currency Code": "Code de devise"
     },
-    "models.pipeline": {
+    "models.workflow": {
         "Name": "Nom",
         "Description": "Description"
     },
-    "models.pipelineStep": {
+    "models.workflowStep": {
         "Name": "Nom",
         "Order": "Ordre",
         "Company": "Entreprise"
@@ -92,7 +92,7 @@
         "Currencies": "Devises",
         "Lead Statuses": "États de clients potentiels",
         "Deal Statuses": "États de accords de vente",
-        "Pipelines": "Pipelines",
+        "Workflows": "Workflows",
         "Invoice profiles": "Profils de facturation"
     },
     "controllers.userRoles": {

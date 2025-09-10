@@ -1,3 +1,5 @@
+{% set isPremium = hubleto.env().isPremium() %}
+
 <h1>{{ translate('Settings') }} > {{ translate('Apps') }}</h1>
 
 <div class="flex gap-2">
@@ -59,12 +61,12 @@
                 </a>
               {% endif %}
             {% else %}
-              {% if app.type == 1 or hubleto.isPremium %}
+              {% if app.type == 1 or isPremium %}
                 <a class="btn btn-primary" href="?installApp={{ appNamespace }}">
                   <span class="icon"><i class="fas fa-add"></i></span>
                   <span class="text">{{ translate('Install') }}</span>
                 </a>
-              {% elseif not hubleto.isPremium %}
+              {% elseif not isPremium %}
                 <div class="badge badge-warning">You can install Premium apps only in Premium account.</div>
                 <a class="btn btn-primary" href="{{ config.projectUrl }}/cloud">
                   <span class="icon"><i class="fas fa-medal"></i></span>

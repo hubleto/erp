@@ -1,0 +1,13 @@
+namespace: Hubleto\App\Community\Workflow
+appType: community
+sidebarGroup: workflow
+rootUrlSlug: workflow
+name: Workflow
+icon: fas fa-timeline
+author:
+  name: "Richard Ondrejka"
+  nick: "rindo"
+  company: "wai.blue"
+  github: "https://github.com/rindo789"
+  linkedin: "https://www.linkedin.com/in/richard-ondrejka/"
+highlight: Free sales workflow management.

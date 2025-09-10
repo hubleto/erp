@@ -1,0 +1,33 @@
+{
+    "controllers.home": {
+        "Sales": "Vertrieb"
+    },
+    "loader": {
+        "Sales": "Vertrieb"
+    },
+    "manifest": {
+        "Workflow": "Workflow",
+        "Free sales workflow management.": "Kostenloses Verkaufsworkflowmanagement."
+    },
+    "root": {
+        "Workflows": "Workflows"
+    },
+    "Models\\Workflow": {
+        "Name": "Name",
+        "Description": "Beschreibung",
+        "Type": "Typ"
+    },
+    "Models\\WorkflowStep": {
+        "Name": "Name",
+        "Order": "Befehl",
+        "Color": "Farbe",
+        "Probability": "Wahrscheinlichkeit",
+        "Workflow": "Workflow",
+        "Set result of a deal to": "Setzen Sie das Ergebnis eines Deals an"
+    },
+    "Controllers\\Home": {
+        "Workflow": "Workflow",
+        "Manage workflows": "Workflows verwalten",
+        "Add deal": "Deal hinzufügen"
+    }
+}

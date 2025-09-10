@@ -21,7 +21,8 @@ class Loader extends \Hubleto\Framework\Loader
       \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,
       \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
       \Hubleto\Framework\Renderer::class => Renderer::class,
-      
+      \Hubleto\Framework\Env::class => Env::class,
+
       \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
       \Hubleto\Framework\Controllers\NotFound::class => Controllers\NotFound::class,
       \Hubleto\Framework\Controllers\Desktop::class => \Hubleto\App\Community\Desktop\Controllers\Desktop::class,

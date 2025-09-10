@@ -1,0 +1,40 @@
+<?php
+
+namespace Hubleto\App\Community\Transactions;
+
+class Loader extends \Hubleto\Framework\App
+{
+
+  /**
+   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   *
+   * @return void
+   * 
+   */
+  public function init(): void
+  {
+    parent::init();
+
+    $this->router()->get([
+      '/^transactions\/list?$/' => Controllers\Transactions::class,
+      '/^transactions\/list\/add?$/' => ['controller' => Controllers\Transactions::class, 'vars' => ['recordId' => -1]],
+      '/^transactions\/api\/get-reconciled-amount?$/' => Controllers\Api\GetReconciledAmount::class,
+      //      '/^invoices\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
+//      '/^invoices(\/(?<recordId>\d+))?\/?$/' => Controllers\Invoices::class,
+    ]);
+
+    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
+//    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
+//    $pipelineManager->addPipeline($this, 'invoices', Pipeline::class);
+
+  }
+
+  public function installTables(int $round): void
+  {
+    if ($round == 1) {
+      $this->getModel(Models\Transaction::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Reconciliation::class)->dropTableIfExists()->install();
+    }
+  }
+
+}

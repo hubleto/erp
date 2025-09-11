@@ -6,7 +6,7 @@
       <div class="text-primary">{{ item.DEVELOPER.email }}</div>
       {% for t in item.TODO %}
         {% if not t.is_closed %}
-          <div class="text-sm text-yellow-600">{{ t.todo }}</div>
+          <div class="text-sm text-yellow-400">{{ t.todo }}</div>
         {% endif %}
       {% endfor %}
     </div>

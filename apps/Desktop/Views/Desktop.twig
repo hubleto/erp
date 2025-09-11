@@ -68,9 +68,10 @@
 <body id="page-top">
   {% if (viewParams.showOnlyContentHtml) %} {{ contentHtml|raw }} {% else %}
 
-    <div id="app-launcher" onclick="lchr(false);"><div>
+    <div id="app-launcher" onclick="lchr(false);">
+      <div>
       <div class="app-launcher-header">
-        <input placeholder={{ translate("Search app...") }} onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
+          <input placeholder="{{ translate('Search app...') }}" onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
       </div>
       {% for app in hubleto.appManager().getEnabledApps() %}
         <a
@@ -192,7 +193,7 @@
           <li class="mr-2 {# hidden #} lg:block">
             <button id="theme-toggle-btn" class="btn btn-transparent" onclick="toggleTheme();">
               <span class="icon"><i class="fas fa-sun"></i></span>
-            </a>
+            </button>
           </li>
           <li>
             <button class="btn btn-transparent btn-dropdown mr-2">
@@ -261,6 +262,11 @@
               {% endif %}
             {% endif %}
           {% endfor %}
+
+          {% if hubleto.router().getRoute() == 'desktop/' ~ sidebarGroup %}
+            {% set hasActivatedApp = true %}
+          {% endif %}
+
           {% if appBtns|length == 0 %}
           {% elseif appBtns|length == 1 %}
             <div>
@@ -268,17 +274,18 @@
             </div>
           {% else %}
             <div class="sidebar-group {% if hasActivatedApp %} activated {% endif %}">
-              <button
+              <a
                 class="btn flex-10 truncate"
                 id="sg_{{ sidebarGroup }}_btn"
-                onclick="
-                  $('.sidebar-group').removeClass('activated');
-                  $(this).closest('.sidebar-group').addClass('activated');
-                "
+{#                onclick="#}
+{#                  $('.sidebar-group').removeClass('activated');#}
+{#                  $(this).closest('.sidebar-group').addClass('activated');#}
+{#                "#}
+                href="{{ config.projectUrl }}/desktop/{{ sidebarGroup }}"
               >
                 <span class="icon"><i class="{{ sidebarGroupData.icon }}"></i></span>
                 <span class="text">{{ sidebarGroupData.title }}</span>
-              </button>
+              </a>
               <div
                 id="sg_{{ sidebarGroup }}_btns"
                 class="sidebar-group-btns"

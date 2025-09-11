@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Framework\App
       '/^accounts\/payable\/add?$/' => ['controller' => Controllers\Payable::class, 'vars' => ['recordId' => -1]],
     ]);
 
-    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
+//    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
 //    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
 //    $pipelineManager->addPipeline($this, 'invoices', Pipeline::class);
 

@@ -112,13 +112,14 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
           {panelsRight.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
         </div>
       </div>
+      { this.props.idDashboard > 0 &&
       <button
         className='btn btn-add mt-2'
         onClick={() => { this.setState({showIdPanel: -1}); }}
       >
         <span className='icon'><i className='fas fa-plus'></i></span>
         <span className='text'>{this.translate('Add new panel')}</span>
-      </button>
+      </button>}
       {this.state.showIdPanel != 0 ?
         <ModalForm
           uid='add_new_panel_modal'

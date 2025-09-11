@@ -33,6 +33,13 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
     }
   }
 
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      saveRelations: ['TODO'],
+    }
+  }
+
   getRecordFormUrl(): string {
     return 'tasks/' + this.state.record.id;
   }
@@ -119,6 +126,71 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
               {this.inputWrapper('notes')}
               {this.inputWrapper('date_created')}
             </div>
+            {this.state.id <= 0 ? null :
+              <div className='flex-1'>
+                <div className='card'>
+                  <div className='card-header'>TODO</div>
+                  <div className='card-body btn-list bg-yellow-50'>
+                    {R.TODO && R.TODO.map((item, key) => {
+                      const refInputTodo = React.createRef();
+
+                      return <div className={'btn-list-item items-center flex gap-2' + (item._toBeDeleted_ ? ' bg-red-100' : '')} key={key}>
+                        <div>
+                          <input
+                            type='checkbox'
+                            checked={item.is_closed}
+                            onChange={(e) => {
+                              let newR = R;
+                              newR.TODO[key].is_closed = e.currentTarget.checked;
+                              this.updateRecord(newR);
+                            }}
+                          ></input>
+                        </div>
+                        <div className='w-full'>
+                          <input
+                            className={'w-full ' + (item.is_closed ? 'bg-slate-200' : 'bg-white')}
+                            readOnly={item.is_closed}
+                            ref={refInputTodo}
+                            value={item.todo}
+                            placeholder='What to do?'
+                            onChange={(e) => {
+                              let newR = R;
+                              newR.TODO[key].todo = refInputTodo.current.value;
+                              this.updateRecord(newR);
+                            }}
+                          ></input>
+                        </div>
+                        <div>
+                          <button
+                            className='btn btn-transparent'
+                            onClick={(e) => {
+                              let newR = R;
+                              newR.TODO[key]._toBeDeleted_ = true;
+                              this.updateRecord(newR);
+                            }}
+                          ><span className='icon'><i className='fas fa-times'></i></span></button>
+                        </div>
+                      </div>;
+                    })}
+                    <button
+                      className='btn btn-transparent'
+                      onClick={() => {
+                        let newR = R;
+                        newR.TODO.push({
+                          id_task: R.id,
+                          todo: '',
+                          is_closed: false,
+                        })
+                        this.updateRecord(newR);
+                      }}
+                    >
+                      <span className='icon'><i className='fas fa-plus'></i></span>
+                      <span className='text'>Add todo</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
           </div>
         </>;
       break;

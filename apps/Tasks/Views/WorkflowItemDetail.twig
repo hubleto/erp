@@ -4,6 +4,13 @@
       <div class="text-gray-400">{{ item.CUSTOMER.name }}</div>
       <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
       <div class="text-primary">{{ item.DEVELOPER.email }}</div>
+      {% for t in item.TODO %}
+        {% if t.is_closed %}
+          <div class="text-green-600">✓ {{ t.todo }}</div>
+        {% else %}
+          <div class="text-yellow-600">{{ t.todo }}</div>
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
 </div>

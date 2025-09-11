@@ -32,6 +32,7 @@ class Loader extends \Hubleto\Framework\App
   {
     if ($round == 1) {
       $this->getModel(Models\Task::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Todo::class)->dropTableIfExists()->install();
     }
   }
 

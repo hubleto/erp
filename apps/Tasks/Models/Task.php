@@ -34,6 +34,7 @@ class Task extends \Hubleto\Erp\Model
     'TESTER' => [ self::BELONGS_TO, User::class, 'id_tester', 'id' ],
     'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id_customer', 'id' ],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id_contact', 'id' ],
+    'TODO' => [ self::HAS_MANY, Todo::class, 'id_task', 'id' ],
     // 'DEALS' => [ self::HAS_MANY, DealTask::class, 'id_task', 'id' ],
     // 'PROJECTS' => [ self::HAS_MANY, ProjectTask::class, 'id_task', 'id' ],
   ];

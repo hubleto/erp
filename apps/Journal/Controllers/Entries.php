@@ -7,7 +7,7 @@ class Entries extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'journal/journal-entries', 'content' => $this->translate('Journal Entries') ],
+      [ 'url' => 'journal/entries', 'content' => $this->translate('Journal Entries') ],
     ]);
   }
 

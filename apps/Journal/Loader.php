@@ -19,11 +19,6 @@ class Loader extends \Hubleto\Framework\App
       '/^journal\/entries\/?$/' => Controllers\Entries::class,
       '/^journal\/entries\/add\/?$/' => ['controller' => Controllers\Entries::class, 'vars' => ['recordId' => -1]],
     ]);
-
-    /** @var \Hubleto\App\Community\Pipeline\Manager $pipelineManager */
-//    $pipelineManager = $this->getService(\Hubleto\App\Community\Pipeline\Manager::class);
-//    $pipelineManager->addPipeline($this, 'invoices', Pipeline::class);
-
   }
 
   public function installTables(int $round): void

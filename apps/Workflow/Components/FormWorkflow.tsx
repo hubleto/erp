@@ -38,7 +38,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      saveRecursively: true,
+      saveRelations: ['STEPS'],
     }
   }
 

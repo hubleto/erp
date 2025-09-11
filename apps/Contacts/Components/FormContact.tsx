@@ -51,7 +51,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      saveRecursively: true,
+      saveRelations: ['VALUES'],
     }
   }
 

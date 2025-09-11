@@ -30,6 +30,12 @@ class Order extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(User::class, 'id_manager', 'id');
   }
 
+  /** @return HasMany<OrderActivity, covariant Deal> */
+  public function ACTIVITIES(): HasMany
+  {
+    return $this->hasMany(OrderActivity::class, 'id_order', 'id');
+  }
+
   /** @return HasOne<Workflow, covariant Deal> */
   public function WORKFLOW(): HasOne
   {

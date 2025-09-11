@@ -43,6 +43,7 @@ class Order extends \Hubleto\Erp\Model
     'INVOICES' => [ self::HAS_MANY, OrderInvoice::class, 'id_order', 'id' ],
     'HISTORY' => [ self::HAS_MANY, History::class, 'id_order', 'id' ],
     'DEALS' => [ self::HAS_MANY, OrderDeal::class, 'id_order', 'id' ],
+    'ACTIVITIES' => [ self::HAS_MANY, OrderActivity::class, 'id_deal', 'id' ],
 
     'PROJECTS' => [ self::HAS_MANY, ProjectOrder::class, 'id_order', 'id' ],
   ];

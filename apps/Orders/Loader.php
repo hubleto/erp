@@ -18,12 +18,14 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
+      '/^orders\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,
       '/^orders\/?$/' => Controllers\Orders::class,
       '/^orders\/(?<recordId>\d+)\/?$/' => Controllers\Orders::class,
       '/^orders\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
       '/^orders\/api\/generate-invoice\/?$/' => Controllers\Api\GenerateInvoice::class,
       '/^settings\/order-states\/?$/' => Controllers\States::class,
+      '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
     ]);
 
     $this->addSearchSwitch('o', 'orders');
@@ -38,6 +40,14 @@ class Loader extends \Hubleto\Framework\App
       'icon' => 'fas fa-file-lines',
       'url' => 'settings/order-states',
     ]);
+
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
+    $calendarManager->addCalendar($this, 'orders', $this->configAsString('calendarColor'), Calendar::class);
+
+    /** @var \Hubleto\App\Community\Dashboards\Manager $dashboardManager */
+    $dashboardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
+    $dashboardManager->addBoard($this, $this->translate('Order warnings'), 'orders/boards/order-warnings');
   }
 
   public function installTables(int $round): void
@@ -49,6 +59,7 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\OrderDeal::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderInvoice::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDocument::class)->dropTableIfExists()->install();
+      $this->getModel(Models\OrderActivity::class)->dropTableIfExists()->install();
       $this->getModel(Models\History::class)->dropTableIfExists()->install();
     }
 

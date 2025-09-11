@@ -263,22 +263,22 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                 </FormInput>
                 {this.inputWrapper('identifier')}
                 {this.inputWrapper('title')}
+                {this.inputWrapper('id_customer')}
                 {<div className='flex flex-row *:w-1/2'>
                     {this.inputWrapper('price_excl_vat')}
                     {this.inputWrapper('price_incl_vat')}
                     {this.inputWrapper('id_currency')}
                 </div>}
+                {this.inputWrapper('note')}
+                {this.inputWrapper('id_owner')}
+                {this.inputWrapper('id_manager')}
                 {this.inputWrapper('date_order')}
                 {this.inputWrapper('required_delivery_date')}
                 {this.inputWrapper('shipping_info')}
+                {this.inputWrapper('id_template')}
               </div>
               <div className='border-l border-gray-200'></div>
               <div className='grow'>
-                {this.inputWrapper('id_customer')}
-                {this.inputWrapper('id_owner')}
-                {this.inputWrapper('id_manager')}
-                {this.inputWrapper('note')}
-                {this.inputWrapper('id_template')}
                 {this.state.id > 0 ? recentActivitiesAndCalendar : null}
               </div>
             </div>

@@ -88,6 +88,11 @@ class Order extends \Hubleto\Erp\Model
     $description->ui['title'] = ''; // 'Orders';
     $description->ui['addButtonText'] = $this->translate("Add order");
 
+    $description->ui['showHeader'] = true;
+    $description->ui['showFulltextSearch'] = true;
+    $description->ui['showColumnSearch'] = true;
+    $description->ui['showFooter'] = false;
+
     unset($description->columns["shipping_info"]);
     unset($description->columns["note"]);
 

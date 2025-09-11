@@ -80,8 +80,10 @@ class Campaign extends \Hubleto\Erp\Model
 
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = $this->translate('Add Campaign');
+
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
+    $description->ui['showColumnSearch'] = true;
     $description->ui['showFooter'] = false;
 
     $description->ui['filters'] = [

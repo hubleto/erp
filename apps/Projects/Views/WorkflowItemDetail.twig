@@ -4,6 +4,9 @@
       <div class="text-gray-400">{{ item.CUSTOMER.name }}</div>
       <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
       <div class="text-primary">{{ item.MAIN_DEVELOPER.email }}</div>
+      {% for t in item.TASKS %}
+        <div>{{ t.TASK.identifier }} {{ t.TASK.title }}</div>
+      {% endfor %}
     </div>
   </div>
 </div>

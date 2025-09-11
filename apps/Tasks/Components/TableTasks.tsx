@@ -69,6 +69,20 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
     </>;
   }
 
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "title") {
+      return <>
+        {super.renderCell(columnName, column, data, options)}
+        {data['TODO'] ? data['TODO'].map((item, key) => {
+          if (item.is_closed) return null;
+          else return <div className='text-yellow-600 font-normal' key={key}>{item.todo}</div>
+        }) : null}
+      </>;
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
+  }
+
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
     return <FormTask {...formProps}/>;

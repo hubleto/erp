@@ -44,7 +44,7 @@ class Loader extends \Hubleto\Framework\App
     $sidebarGroups = $this->getSidebarGroups();
     foreach ($sidebarGroups as $key => $group) {
       $this->router()->get([
-        '/^desktop\/' . $key . '$/' => ['controller' => $group['controller'] ?? Controllers\SidebarGroup::class, 'vars' => ['group' => $key]],
+        '/^~\/' . $key . '$/' => ['controller' => $group['controller'] ?? Controllers\SidebarGroup::class, 'vars' => ['group' => $key]],
       ]);
     }
 

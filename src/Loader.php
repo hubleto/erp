@@ -2,6 +2,7 @@
 
 namespace Hubleto\Erp;
 
+use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\DependencyInjection;
 
 class Loader extends \Hubleto\Framework\Loader
@@ -18,22 +19,22 @@ class Loader extends \Hubleto\Framework\Loader
     parent::__construct($config);
 
     DependencyInjection::setServiceProviders([
-      \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,
-      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
       \Hubleto\Framework\Renderer::class => Renderer::class,
       \Hubleto\Framework\Env::class => Env::class,
 
-      \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
       \Hubleto\Framework\Controllers\NotFound::class => Controllers\NotFound::class,
       \Hubleto\Framework\Controllers\Desktop::class => \Hubleto\App\Community\Desktop\Controllers\Desktop::class,
 
-      \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Settings\Models\User::class,
-      
+
     ]);
 
     // run hook
     $this->hookManager()->run('core:bootstrap-end', [$this]);
 
+  }
+
+  public function permissionsManager() {
+    return $this->getService(PermissionsManager::class);
   }
 
   /**
@@ -58,8 +59,6 @@ class Loader extends \Hubleto\Framework\Loader
         '/^api\/table-export-csv\/?$/' => Api\TableExportCsv::class,
         '/^api\/table-import-csv\/?$/' => Api\TableImportCsv::class,
         '/^api\/search\/?$/' => Api\Search::class,
-        '/^reset-password$/' => Controllers\ResetPassword::class,
-        '/^forgot-password$/' => Controllers\ForgotPassword::class,
       ]);
 
       // run hook

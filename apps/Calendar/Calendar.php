@@ -44,7 +44,7 @@ class Calendar extends \Hubleto\Erp\Calendar
     if (isset($filter['fOwnership'])) {
       switch ($filter["fOwnership"]) {
         case 1:
-          $query = $query->where($mActivity->table.".id_owner", $this->authProvider()->getUserId());
+          $query = $query->where($mActivity->table.".id_owner", $this->getService(AuthProvider::class)->getUserId());
           break;
       }
     }

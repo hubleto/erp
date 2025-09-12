@@ -6,7 +6,7 @@ use Hubleto\App\Community\Settings\Models\Country;
 use Hubleto\App\Community\Settings\Models\Permission;
 use Hubleto\App\Community\Settings\Models\Company;
 use Hubleto\App\Community\Settings\Models\RolePermission;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Settings\Models\UserRole;
 use Hubleto\App\Community\Settings\Models\UserHasRole;
 use Hubleto\App\Community\Settings\Models\Tag;

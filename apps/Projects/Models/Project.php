@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Projects\Models;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -16,7 +17,7 @@ use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\App\Community\Deals\Models\Deal;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Contacts\Models\Contact;
@@ -58,10 +59,10 @@ class Project extends \Hubleto\Erp\Model
       'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->authProvider()->getUserId())
+        ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
       ,
       'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->authProvider()->getUserId())
+        ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
@@ -71,7 +72,7 @@ class Project extends \Hubleto\Erp\Model
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
       // 'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setProperty('defaultVisibility', true)->setRequired()
-      //   ->setDefaultValue($this->authProvider()->getUserId())
+      //   ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
       // ,
       'color' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true),
       'online_documentation_folder' => (new Varchar($this, "Online documentation folder"))->setReactComponent('InputHyperlink'),

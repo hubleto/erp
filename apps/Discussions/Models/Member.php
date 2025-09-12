@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Discussions\Models;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -15,7 +16,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Member extends \Hubleto\Erp\Model
 {
@@ -33,7 +34,7 @@ class Member extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_member' => (new Lookup($this, $this->translate('Member'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->authProvider()->getUserId()),
+      'id_member' => (new Lookup($this, $this->translate('Member'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
       'permissions' => (new Json($this, $this->translate('Permissions')))->setProperty('defaultVisibility', true),
     ]);
   }

@@ -35,7 +35,7 @@ class SendTestEmailToMe extends \Hubleto\Erp\Controllers\ApiController
         'body_html' => $bodyHtml,
         'id_account' => $campaign->id_mail_account,
         'from' => $campaign->MAIL_ACCOUNT->sender_email ?? '',
-        'to' => $this->authProvider()->getUserEmail(),
+        'to' => $this->getService(AuthProvider::class)->getUserEmail(),
         'datetime_created' => date('Y-m-d H:i:s'),
       ]);
 

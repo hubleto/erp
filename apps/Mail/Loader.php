@@ -79,7 +79,7 @@ class Loader extends \Hubleto\Framework\App
     string $color = '',
     int $priority = 0
   ): array {
-    $user = $this->authProvider()->getUser();
+    $user = $this->getService(AuthProvider::class)->getUser();
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 

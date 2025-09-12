@@ -10,7 +10,7 @@ use Hubleto\Framework\Db\Column\Varchar;
 
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Settings\Models\InvoiceProfile;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Documents\Models\Template;
@@ -95,7 +95,7 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     $description = parent::describeForm();
     $description->defaultValues = [
-      'id_issued_by' => $this->authProvider()->getUserId(),
+      'id_issued_by' => $this->getService(AuthProvider::class)->getUserId(),
       'issued' => date('Y-m-d H:i:s'),
     ];
     return $description;

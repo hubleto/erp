@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Notifications\Models;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -9,7 +10,7 @@ use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Json;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Notification extends \Hubleto\Erp\Model
 {
@@ -43,7 +44,7 @@ class Notification extends \Hubleto\Erp\Model
 
   public function describeColumns(): array
   {
-    $user = $this->authProvider()->getUser();
+    $user = $this->getService(AuthProvider::class)->getUser();
     return array_merge(parent::describeColumns(), [
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
       'category' => (new Integer($this, $this->translate('Category')))->setRequired()->setEnumValues(self::getCategories()),

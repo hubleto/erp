@@ -52,7 +52,7 @@ class Loader extends \Hubleto\Framework\App
   {
     $mNotification = $this->getModel(Models\Notification::class);
     return $mNotification->record->prepareReadQuery()
-      ->where('id_to', $this->authProvider()->getUserId())
+      ->where('id_to', $this->getService(AuthProvider::class)->getUserId())
       ->whereNull('datetime_read')
       ->count()
     ;
@@ -81,7 +81,7 @@ class Loader extends \Hubleto\Framework\App
     string $color = '',
     int $priority = 0
   ): array {
-    $user = $this->authProvider()->getUser();
+    $user = $this->getService(AuthProvider::class)->getUser();
     $idUser = $user['id'] ?? 0;
 
     if ($idTo > 0) {

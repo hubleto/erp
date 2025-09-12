@@ -2,15 +2,14 @@
 
 namespace Hubleto\App\Community\Projects\Models\RecordManagers;
 
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
-
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
-use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
-use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Project extends \Hubleto\Erp\RecordManager
 {

@@ -2,20 +2,16 @@
 
 namespace Hubleto\App\Community\Deals\Models\RecordManagers;
 
-use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
+use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
+use Hubleto\App\Community\Leads\Models\RecordManagers\Lead;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
-use Hubleto\App\Community\Deals\Models\RecordManagers\DealHistory;
-use Hubleto\App\Community\Deals\Models\RecordManagers\DealTag;
-use Hubleto\App\Community\Leads\Models\RecordManagers\Lead;
-use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
-use Hubleto\App\Community\Orders\Models\RecordManagers\OrderDeal;
-
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Deal extends \Hubleto\Erp\RecordManager
@@ -166,9 +162,9 @@ class Deal extends \Hubleto\Erp\RecordManager
 
     if (isset($filters["fDealOwnership"])) {
       switch ($filters["fDealOwnership"]) {
-        case 1: $query = $query->where("deals.id_owner", $main->authProvider()->getUserId());
+        case 1: $query = $query->where("deals.id_owner", $main->getService(AuthProvider::class)->getUserId());
           break;
-        case 2: $query = $query->where("deals.id_manager", $main->authProvider()->getUserId());
+        case 2: $query = $query->where("deals.id_manager", $main->getService(AuthProvider::class)->getUserId());
           break;
       }
     }

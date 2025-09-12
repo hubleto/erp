@@ -17,7 +17,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\App\Community\Projects\Models\Project;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 
@@ -37,7 +37,7 @@ class Discussion extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'topic' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired(),
       'description' => (new Text($this, $this->translate('Description'))),
-      'id_main_mod' => (new Lookup($this, $this->translate('Main MOD'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->authProvider()->getUserId()),
+      'id_main_mod' => (new Lookup($this, $this->translate('Main MOD'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),

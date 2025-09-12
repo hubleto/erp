@@ -13,7 +13,7 @@ class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
 
       list($model, $originalRecord, $savedRecord) = $args;
 
-      $user = $this->authProvider()->getUser();
+      $user = $this->getService(AuthProvider::class)->getUser();
       if (isset($savedRecord['id_owner']) && $savedRecord['id_owner'] != $user['id']) {
         $diff = $model->diffRecords($originalRecord, $savedRecord);
 

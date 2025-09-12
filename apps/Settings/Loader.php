@@ -60,9 +60,6 @@ class Loader extends \Hubleto\Framework\App
   {
     if ($round == 1) {
       $mCompany = $this->getModel(Models\Company::class);
-      $mUser = $this->getModel(Models\User::class);
-      $mUserRole = $this->getModel(Models\UserRole::class);
-      $mUserHasRole = $this->getModel(Models\UserHasRole::class);
       $mPermission = $this->getModel(Models\Permission::class);
       $mRolePermission = $this->getModel(Models\RolePermission::class);
       $mCountry = $this->getModel(Models\Country::class);
@@ -72,11 +69,10 @@ class Loader extends \Hubleto\Framework\App
       $mInvoiceProfile = $this->getModel(Models\InvoiceProfile::class);
       $mTeam = $this->getModel(Models\Team::class);
       $mTeamMember = $this->getModel(Models\TeamMember::class);
+      $mUserRole = $this->getModel(Models\UserRole::class);
+      $mUserHasRole = $this->getModel(Models\UserHasRole::class);
 
       $mCompany->dropTableIfExists()->install();
-      $mUser->dropTableIfExists()->install();
-      $mUserRole->dropTableIfExists()->install();
-      $mUserHasRole->dropTableIfExists()->install();
       $mPermission->dropTableIfExists()->install();
       $mRolePermission->dropTableIfExists()->install();
       $mCountry->dropTableIfExists()->install();
@@ -86,6 +82,8 @@ class Loader extends \Hubleto\Framework\App
       $mInvoiceProfile->dropTableIfExists()->install();
       $mTeam->dropTableIfExists()->install();
       $mTeamMember->dropTableIfExists()->install();
+      $mUserRole->dropTableIfExists()->install();
+      $mUserHasRole->dropTableIfExists()->install();
 
       $mSetting->record->recordCreate([
         'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',
@@ -431,6 +429,8 @@ class Loader extends \Hubleto\Framework\App
         'is_default' => true,
       ])['id'];
 
+    } else if ($round == 2) {
+      $this->getService(PermissionsManager::class)->init();
     }
   }
 

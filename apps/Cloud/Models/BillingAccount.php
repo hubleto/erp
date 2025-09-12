@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Cloud\Models;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 
 class BillingAccount extends \Hubleto\Erp\Model
 {

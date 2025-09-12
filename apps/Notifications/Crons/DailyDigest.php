@@ -9,7 +9,7 @@ class DailyDigest extends \Hubleto\Erp\Cron
   public function run(): void
   {
     $emailsSent = [];
-    $users = $this->authProvider()->getActiveUsers();
+    $users = $this->getService(AuthProvider::class)->getActiveUsers();
     foreach ($users as $user) {
 
       /** @var \Hubleto\App\Community\Notifications\Digest $digest */

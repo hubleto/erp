@@ -1,12 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Hubleto\Erp\Controllers;
+namespace Hubleto\App\Community\Auth\Controllers;
 
 class SignIn extends \Hubleto\Erp\Controller
 {
   public bool $requiresAuthenticatedUser = false;
   public bool $hideDefaultDesktop = true;
-  public string $translationContext = 'Hubleto\\Erp\\Loader::Controllers\\SignIn';
 
   public function prepareView(): void
   {
@@ -21,7 +20,7 @@ class SignIn extends \Hubleto\Erp\Controller
       'login' => $this->router()->urlParamAsString('user'),
     ];
 
-    $this->setView('@hubleto-main/SignIn.twig');
+    $this->setView('@Hubleto:App:Community:Auth/SignIn.twig');
   }
 
 }

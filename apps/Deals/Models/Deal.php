@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Deals\Models;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\DateTime;
@@ -18,7 +19,7 @@ use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Settings\Models\Setting;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\Framework\Helper;
 
 use Hubleto\App\Community\Documents\Generator;
@@ -96,8 +97,8 @@ class Deal extends \Hubleto\Erp\Model
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT')),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
       'id_template_quotation' => (new Lookup($this, $this->translate('Template for quotation'), Template::class)),
       'customer_order_number' => (new Varchar($this, $this->translate('Customer\'s order number')))->setProperty('defaultVisibility', true),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
@@ -425,7 +426,7 @@ class Deal extends \Hubleto\Erp\Model
     if ($deal) {
       $idInvoice = $mInvoice->generateInvoice(new InvoiceDto(
         1, // $idProfile
-        $this->authProvider()->getUserId(), // $idIssuedBy
+        $this->getService(AuthProvider::class)->getUserId(), // $idIssuedBy
         (int) $deal['id_customer'], // $idCustomer
         'ORD/' . $deal->number, // $number
         null, // $vs

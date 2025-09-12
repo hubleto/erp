@@ -75,7 +75,7 @@ export default class TableDeals extends HubletoTable<TableDealsProps, TableDeals
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/deals/' + id);
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/deals/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

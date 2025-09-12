@@ -23,6 +23,7 @@ class Loader extends \Hubleto\Framework\App
       '/^campaigns\/api\/send-test-email-to-me\/?$/' => Controllers\Api\SendTestEmailToMe::class,
       '/^campaigns\/api\/launch\/?$/' => Controllers\Api\Launch::class,
       '/^campaigns(\/(?<recordId>\d+))?\/?$/' => Controllers\Campaigns::class,
+      '/^campaigns\/add?\/?$/' => ['controller' => Controllers\Campaigns::class, 'vars' => [ 'recordId' => -1 ]],
       '/^campaigns\/click-tracker\/?$/' => Controllers\ClickTracker::class,
     ]);
 

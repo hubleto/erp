@@ -55,7 +55,7 @@ export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ mod
     window.history.pushState(
       {},
       "",
-      globalThis.main.config.projectUrl + '/{{ modelPluralFormKebab }}/' + id
+      globalThis.main.config.projectUrl + '/{{ modelPluralFormKebab }}//' + (id > 0 ? id : 'add')
     );
   }
 

@@ -17,17 +17,19 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^leads(\/(?<recordId>\d+))?\/?$/' => Controllers\Leads::class,
-      '/^leads\/settings\/?$/' => Controllers\Settings::class,
-      '/^leads\/archive\/?$/' => Controllers\LeadsArchive::class,
       '/^leads\/api\/move-to-archive\/?$/' => Controllers\Api\MoveToArchive::class,
       '/^leads\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
+      '/^leads\/api\/save-bulk-status-change\/?$/' => Controllers\Api\SaveBulkStatusChange::class,
+
+      '/^leads(\/(?<recordId>\d+))?\/?$/' => Controllers\Leads::class,
+      '/^leads\/add?\/?$/' => ['controller' => Controllers\Leads::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^leads\/settings\/?$/' => Controllers\Settings::class,
+
       '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
       '/^settings\/lead-levels\/?$/' => Controllers\Levels::class,
       '/^settings\/lead-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
       '/^leads\/boards\/lead-warnings\/?$/' => Controllers\Boards\LeadWarnings::class,
-      '/^leads\/save-bulk-status-change\/?$/' => Controllers\Api\SaveBulkStatusChange::class,
     ]);
 
     $this->addSearchSwitch('l', 'leads');

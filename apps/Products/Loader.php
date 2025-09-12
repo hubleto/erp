@@ -19,8 +19,8 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^products\/?$/' => Controllers\Products::class,
-      '/^products\/groups\/?$/' => Controllers\Groups::class,
       '/^products\/groups(\/(?<recordId>\d+))?\/?$/' => Controllers\Groups::class,
+      '/^products\/groups\/add?\/?$/' => ['controller' => Controllers\Groups::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
     $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);

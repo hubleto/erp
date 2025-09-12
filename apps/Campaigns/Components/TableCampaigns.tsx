@@ -40,7 +40,7 @@ export default class TableCampaigns extends HubletoTable<TableCampaignsProps, Ta
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/campaigns/' + id);
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/campaigns/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

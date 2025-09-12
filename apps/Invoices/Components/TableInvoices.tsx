@@ -97,7 +97,7 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/invoices/' + id);
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/invoices/' + (id > 0 ? id : 'add'));
   }
 
   cellClassName(columnName: string, column: any, rowData: any) {

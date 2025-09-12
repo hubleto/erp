@@ -1,5 +1,7 @@
 <?php
 
+$config['release'] = trim(@file_get_contents('release')) ?? '';
+
 ini_set('display_errors', 1);
 ini_set("error_reporting", E_ALL ^ E_DEPRECATED);
 
@@ -20,6 +22,10 @@ $config['rewriteBase'] = "{{ rewriteBase }}";
 $config['projectUrl'] = '{{ projectUrl }}';
 $config['assetsUrl'] = '{{ assetsUrl }}';
 $config['uploadUrl'] = '{{ projectUrl }}/upload';
+
+// sanitize dirs and urls based on used release
+$config['releaseFolder'] = str_replace('__RELEASE__', $config['release'], $config['releaseFolder']);
+$config['assetsUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsUrl']);
 
 // db
 $config['db_host'] = '{{ dbHost }}';

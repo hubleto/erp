@@ -14,6 +14,7 @@ export default class TableUsages extends HubletoTable<TableUsagesProps, TableUsa
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Api/Models/Usage',
+    readonly: true,
   }
 
   props: TableUsagesProps;

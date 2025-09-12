@@ -40,6 +40,7 @@ export default class FormUsage<P, S> extends HubletoForm<FormUsageProps, FormUsa
           {this.inputWrapper('controller')}
           {this.inputWrapper('used_on')}
           {this.inputWrapper('ip_address')}
+          {this.inputWrapper('status')}
         </>;
       break;
     }

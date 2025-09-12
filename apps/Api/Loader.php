@@ -17,6 +17,7 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^api\/?$/' => Controllers\Home::class,
+      '/^api\/call?$/' => Controllers\Api\Call::class,
       '/^api\/keys(\/(?<recordId>\d+))?\/?$/' => Controllers\Keys::class,
       '/^api\/keys\/add?\/?$/' => ['controller' => Controllers\Keys::class, 'vars' => [ 'recordId' => -1 ]],
       '/^api\/permissions(\/(?<recordId>\d+))?\/?$/' => Controllers\Permissions::class,

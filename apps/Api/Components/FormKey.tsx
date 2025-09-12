@@ -53,6 +53,8 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
           {this.inputWrapper('valid_until')}
           {this.inputWrapper('is_enabled')}
           {this.inputWrapper('notes')}
+          {this.inputWrapper('ip_address_blacklist')}
+          {this.inputWrapper('ip_address_whitelist')}
           {this.inputWrapper('created')}
           {this.inputWrapper('id_created_by')}
           {this.divider('Permissions')}

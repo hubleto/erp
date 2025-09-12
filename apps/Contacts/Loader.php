@@ -19,6 +19,7 @@ class Loader extends \Hubleto\Framework\App
       '/^contacts\/?$/' => Controllers\Contacts::class,
       '/^contacts\/add\/?$/' => ['controller' => Controllers\Contacts::class, 'vars' => ['recordId' => -1]],
       '/^contacts(\/(?<recordId>\d+))?\/?$/' => Controllers\Contacts::class,
+      '/^contacts\/add?\/?$/' => ['controller' => Controllers\Contacts::class, 'vars' => [ 'recordId' => -1 ]],
       '/^contacts\/get-customer-contacts\/?$/' => Controllers\Api\GetCustomerContacts::class,
       '/^contacts\/check-primary-contact\/?$/' => Controllers\Api\CheckPrimaryContact::class,
       '/^settings\/contact-tags\/?$/' => Controllers\Tags::class,

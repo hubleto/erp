@@ -18,6 +18,7 @@ class Loader extends \Hubleto\Framework\App
     $this->router()->get([
       '/^invoices\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
       '/^invoices(\/(?<recordId>\d+))?\/?$/' => Controllers\Invoices::class,
+      '/^invoices\/add?\/?$/' => ['controller' => Controllers\Invoices::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
     /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */

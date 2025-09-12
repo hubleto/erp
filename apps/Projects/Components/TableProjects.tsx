@@ -37,7 +37,7 @@ export default class TableProjects extends HubletoTable<TableProjectsProps, Tabl
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/projects/' + id);
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/projects/' + (id > 0 ? id : 'add'));
   }
 
   rowClassName(rowData: any): string {

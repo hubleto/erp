@@ -23,6 +23,7 @@ class Loader extends \Hubleto\Framework\App
       '/^projects\/api\/get-statistics\/?$/' => Controllers\Api\GetStatistics::class,
 
       '/^projects(\/(?<recordId>\d+))?\/?$/' => Controllers\Projects::class,
+      '/^projects\/add?\/?$/' => ['controller' => Controllers\Projects::class, 'vars' => [ 'recordId' => -1 ]],
       '/^projects\/phases\/?$/' => Controllers\Phases::class,
     ]);
 

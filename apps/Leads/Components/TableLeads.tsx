@@ -56,7 +56,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/leads/' + id);
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/leads/' + (id > 0 ? id : 'add'));
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
@@ -106,7 +106,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
 
   // saveBulkStatusChange() {
   //   request.post(
-  //     "leads/save-bulk-status-change",
+  //     "leads/api/save-bulk-status-change",
   //     {
   //       record: this.state.selection,
   //     },

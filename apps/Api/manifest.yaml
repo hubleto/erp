@@ -1,0 +1,10 @@
+namespace: Hubleto\App\Community\Api
+appType: community
+sidebarGroup: maintenance
+rootUrlSlug: api
+name: Api
+icon: fas fa-list-check
+author:
+  name: "WAI.blue"
+  nick: "wai.blue"
+highlight: Hubleto Api Key management

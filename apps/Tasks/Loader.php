@@ -17,6 +17,7 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^tasks(\/(?<recordId>\d+))?\/?$/' => Controllers\Tasks::class,
+      '/^tasks\/add?\/?$/' => ['controller' => Controllers\Tasks::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
     $this->addSearchSwitch('t', 'tasks');

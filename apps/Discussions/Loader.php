@@ -16,10 +16,14 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^discussions(\/(?<recordId>\d+))?\/?$/' => Controllers\Discussions::class,
-      '/^discussions\/members(\/(?<recordId>\d+))?\/?$/' => Controllers\Members::class,
-      '/^discussions\/messages(\/(?<recordId>\d+))?\/?$/' => Controllers\Messages::class,
       '/^discussions\/api\/send-message\/?$/' => Controllers\Api\SendMessage::class,
+
+      '/^discussions(\/(?<recordId>\d+))?\/?$/' => Controllers\Discussions::class,
+      '/^discussions\/add?\/?$/' => ['controller' => Controllers\Discussions::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^discussions\/members(\/(?<recordId>\d+))?\/?$/' => Controllers\Members::class,
+      '/^discussions\/members\/add?\/?$/' => ['controller' => Controllers\Members::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^discussions\/messages(\/(?<recordId>\d+))?\/?$/' => Controllers\Messages::class,
+      '/^discussions\/messages\/add?\/?$/' => ['controller' => Controllers\Messages::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
   }

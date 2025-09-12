@@ -47,7 +47,7 @@ export default class TableOrders extends HubletoTable<TableOrdersProps, TableOrd
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/orders/' + id);
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/orders/' + (id > 0 ? id : 'add'));
   }
 
   rowClassName(rowData: any): string {

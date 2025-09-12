@@ -32,6 +32,7 @@ class Permission extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_key' => (new Lookup($this, $this->translate('Key'), Key::class))->setProperty('defaultVisibility', true)->setRequired(),
+      'app' => (new Varchar($this, $this->translate('App')))->setProperty('defaultVisibility', true)->setRequired()->setDescription('Namespace of the app, e.g. `Hubleto\App\Community\Deals`.'),
       'controller' => (new Varchar($this, $this->translate('Controller')))->setProperty('defaultVisibility', true)->setRequired(),
     ]);
   }

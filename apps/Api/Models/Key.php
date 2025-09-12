@@ -37,10 +37,12 @@ class Key extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'key' => (new Varchar($this, $this->translate('Key')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
+      'key' => (new Varchar($this, $this->translate('Key')))->setProperty('defaultVisibility', true)->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
       'valid_until' => (new DateTime($this, $this->translate('Valid until')))->setProperty('defaultVisibility', true)->setDefaultValue(date("Y-m-d H:i:s", strtotime("+14 days"))),
       'is_enabled' => (new Boolean($this, $this->translate('Enabled')))->setDefaultValue(true)->setProperty('defaultVisibility', true),
       'notes' => (new Text($this, $this->translate('Notes'))),
+      'ip_address_blacklist' => (new Varchar($this, $this->translate('IP Address blacklist'))),
+      'ip_address_whitelist' => (new Varchar($this, $this->translate('IP Address whitelist'))),
       'id_created_by' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->authProvider()->getUserId()),
       'created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
     ]);

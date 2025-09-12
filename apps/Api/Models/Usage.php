@@ -35,6 +35,12 @@ class Usage extends \Hubleto\Erp\Model
       'controller' => (new Varchar($this, $this->translate('Controller')))->setProperty('defaultVisibility', true)->setRequired(),
       'used_on' => (new DateTime($this, $this->translate('Used on')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'ip_address' => (new Varchar($this, $this->translate('IP address')))->setProperty('defaultVisibility', true),
+      'status' => (new Varchar($this, $this->translate('Status')))
+        ->setEnumValues([
+          0 => $this->translate('Success'),
+          1 => $this->translate('Error'),
+        ])
+      ,
     ]);
   }
 

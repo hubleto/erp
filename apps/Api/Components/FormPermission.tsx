@@ -37,6 +37,7 @@ export default class FormPermission<P, S> extends HubletoForm<FormPermissionProp
       case 'default':
         return <>
           {this.inputWrapper('id_key')}
+          {this.inputWrapper('app')}
           {this.inputWrapper('controller')}
         </>;
       break;

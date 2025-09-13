@@ -5,7 +5,7 @@ namespace Hubleto\Erp;
 /**
  * Core implementation of model.
  */
-class Model extends \Hubleto\Framework\Models\Model
+class Model extends \Hubleto\Framework\Model
 {
 
   //////////////////////////////////////////////////////////////////

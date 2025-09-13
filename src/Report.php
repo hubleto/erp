@@ -39,7 +39,7 @@ class Report extends \Hubleto\Framework\Core
     return []; // to be overriden
   }
 
-  public function loadDataDefault(\Hubleto\Framework\Models\Model $model): array
+  public function loadDataDefault(\Hubleto\Framework\Interfaces\ModelInterface $model): array
   {
     $config = $this->router()->urlParamAsArray("config");
 

@@ -2,6 +2,10 @@
 
 namespace Hubleto\App\Community\Orders\Models;
 
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\DateTime;
 class History extends \Hubleto\Erp\Model
 {
   public string $table = 'order_histories';
@@ -15,10 +19,10 @@ class History extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_order' => (new \Hubleto\Framework\Db\Column\Lookup($this, $this->translate("Order"), Order::class))->setRequired()->setReadonly(),
-      'short_description' => (new \Hubleto\Framework\Db\Column\Varchar($this, $this->translate("Short Description")))->setReadonly(),
-      'long_description' => (new \Hubleto\Framework\Db\Column\Text($this, $this->translate("Long Description")))->setReadonly(),
-      'date_time' => (new \Hubleto\Framework\Db\Column\DateTime($this, $this->translate("Date Time")))->setRequired()->setReadonly(),
+      'id_order' => (new Lookup($this, $this->translate("Order"), Order::class))->setRequired()->setReadonly(),
+      'short_description' => (new Varchar($this, $this->translate("Short Description")))->setReadonly(),
+      'long_description' => (new Text($this, $this->translate("Long Description")))->setReadonly(),
+      'date_time' => (new DateTime($this, $this->translate("Date Time")))->setRequired()->setReadonly(),
     ]);
   }
 }

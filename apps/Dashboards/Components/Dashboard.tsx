@@ -24,6 +24,7 @@ export interface DesktopDashboardState {
   panels: Array<Panel>,
   showIdPanel: number,
   draggedIdPanel: number,
+  hidePanelsWhileDragging: boolean,
 }
 
 export default class DesktopDashboard extends TranslatedComponent<DesktopDashboardProps, DesktopDashboardState> {
@@ -40,6 +41,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
       panels: this.props.panels,
       showIdPanel: 0,
       draggedIdPanel: 0,
+      hidePanelsWhileDragging: false,
     }
   }
 
@@ -102,6 +104,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
 
   onDragStart(e: any, idPanel: number) {
     this.setState({ draggedIdPanel: idPanel });
+    setTimeout(() => { this.setState({ hidePanelsWhileDragging: true }) }, 1000);
     e.dataTransfer.effectAllowed = "move";
   };
 
@@ -139,7 +142,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
         panelOrder: this.state.panels.map((item: Panel) => item.id),
       },
       (html: any) => {
-        this.setState({ draggedIdPanel: null });
+        this.setState({ draggedIdPanel: null, hidePanelsWhileDragging: false });
       }
     );
   };
@@ -193,13 +196,15 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
           <span className='icon'><i className='fas fa-cog'></i></span>
         </button>
       </div>
-      {panel.contentLoaded ? 
+      {this.state.hidePanelsWhileDragging ?
+        <div className="card-body bg-gray-50 p-4"></div>
+      : (panel.contentLoaded ? 
         <div className="card-body" dangerouslySetInnerHTML={{__html: panel.content}}></div>
       :
         <div className="card-body">
           <ProgressBar mode="indeterminate" style={{ height: '2em' }}></ProgressBar>
         </div>
-      }
+      )}
     </div>
   }
 

@@ -23,7 +23,7 @@ export interface DesktopDashboardProps {
 export interface DesktopDashboardState {
   panels: Array<Panel>,
   showIdPanel: number,
-  draggedPanelUrlSlug: string,
+  draggedIdPanel: number,
 }
 
 export default class DesktopDashboard extends TranslatedComponent<DesktopDashboardProps, DesktopDashboardState> {
@@ -39,7 +39,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
     this.state = {
       panels: this.props.panels,
       showIdPanel: 0,
-      draggedPanelUrlSlug: '',
+      draggedIdPanel: 0,
     }
   }
 
@@ -100,29 +100,27 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
     );
   }
 
-  onDragStart(e: any, panelUrlSlug: string) {
-    this.setState({ draggedPanelUrlSlug: panelUrlSlug });
+  onDragStart(e: any, idPanel: number) {
+    this.setState({ draggedIdPanel: idPanel });
     e.dataTransfer.effectAllowed = "move";
   };
 
-  onDragOver(e: any, targetPanelUrlSlug: string) {
+  onDragOver(e: any, targetPanelId: number) {
     e.preventDefault();
-    const draggedPanelUrlSlug = this.state.draggedPanelUrlSlug;
+    const draggedIdPanel = this.state.draggedIdPanel;
     const panels = this.state.panels;
 
-    if (draggedPanelUrlSlug === targetPanelUrlSlug) return;
-
-    // console.log(draggedPanelUrlSlug, targetPanelUrlSlug);
+    if (draggedIdPanel === targetPanelId) return;
 
     let draggedPanel: Panel = null;
     for (let i in panels) {
-      if (panels[i].board_url_slug === draggedPanelUrlSlug) draggedPanel = panels[i];
+      if (panels[i].id === draggedIdPanel) draggedPanel = panels[i];
     }
 
     const newPanels = [];
     for (let i in panels) {
-      if (panels[i].board_url_slug == draggedPanelUrlSlug) continue;
-      if (panels[i].board_url_slug == targetPanelUrlSlug) {
+      if (panels[i].id == draggedIdPanel) continue;
+      if (panels[i].id == targetPanelId) {
         newPanels.push(draggedPanel);
       }
       newPanels.push(panels[i]);
@@ -141,7 +139,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
         panelOrder: this.state.panels.map((item: Panel) => item.id),
       },
       (html: any) => {
-        this.setState({ draggedPanelUrlSlug: null });
+        this.setState({ draggedIdPanel: null });
       }
     );
   };
@@ -152,22 +150,22 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
       key={index}
       className={
         "card"
-        + " " + (panel.board_url_slug == this.state.draggedPanelUrlSlug ? "card-info" : "")
+        + " " + (panel.id == this.state.draggedIdPanel ? "card-info" : "")
       }
       style={{gridColumn: `span ${width}`}}
     >
       <div
         className="card-header cursor-move"
         draggable
-        onDragStart={(e: any) => this.onDragStart(e, panel.board_url_slug)}
-        onDragOver={(e: any) => this.onDragOver(e, panel.board_url_slug)}
+        onDragStart={(e: any) => this.onDragStart(e, panel.id)}
+        onDragOver={(e: any) => this.onDragOver(e, panel.id)}
         onDrop={(e: any) => this.onDrop(e)}
       >
         <div className='btn-group items-center'>
           <button
             className='btn btn-transparent btn-small'
             onClick={() => {
-              let newWidth = (panel.width ?? 0) - 1;
+              let newWidth = (panel.width ?? 3) - 1;
               if (newWidth > 6) newWidth = 6;
               if (newWidth < 2) newWidth = 2;
               this.setPanelWidth(panel.id, newWidth);
@@ -178,7 +176,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
           <button
             className='btn btn-transparent btn-small'
             onClick={() => {
-              let newWidth = (panel.width ?? 0) + 1;
+              let newWidth = (panel.width ?? 3) + 1;
               if (newWidth > 6) newWidth = 6;
               if (newWidth < 2) newWidth = 2;
               this.setPanelWidth(panel.id, newWidth);

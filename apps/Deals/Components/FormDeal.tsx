@@ -262,16 +262,16 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       case 'default':
 
         const inputsColumnLeft = <>
-          <FormInput title={"Lead"}>
-            {R.LEADS ? R.LEADS.map((item, key) => {
+          {R.LEADS && R.LEADS.length > 0 ? <FormInput title={"Lead"}>
+            {R.LEADS.map((item, key) => {
               return (item.LEAD ? <a
                 key={key}
                 className='badge'
                 href={globalThis.main.config.projectUrl + '/leads/' + item.LEAD.id}
                 target='_blank'
               >{item.LEAD.id}</a> : '#');
-            }) : null}
-          </FormInput>
+            })}
+          </FormInput> : null}
           {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
           {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
           {this.inputWrapper('version')}
@@ -316,28 +316,29 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               cssClass: 'text-2xl',
               readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
             })}
-            {this.inputWrapper('id_currency')}
+            {this.input('id_currency')}
           </div>
-          <div className='flex flex-row *:w-1/2'>
+          <div className='flex flex-row *:w-1/2 items-center'>
             {this.inputWrapper('price_incl_vat', {
               readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
             })}
             {this.state.isInlineEditing && (R.PRODUCTS && R.PRODUCTS.length > 0) ?
               <div className='badge badge-warning'>
                 <span className='icon mr-2'><i className='fas fa-warning'></i></span>
-                <span className='text'>Price cannot be changed, it is calculated from product prices.</span>
+                <span className='text'>Price is calculated from products.</span>
               </div>
             : <></>}
           </div>
           {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
           {this.inputWrapper('customer_order_number', {readonly: R.is_archived})}
           {this.inputWrapper('id_template_quotation', {readonly: R.is_archived})}
+          {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
+          {this.inputWrapper('date_created')}
         </>;
 
         const inputsColumnRight = <>
           {this.inputWrapper('id_owner', {readonly: R.is_archived})}
           {this.inputWrapper('id_manager', {readonly: R.is_archived})}
-          {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
           <div className="flex gap-2">
             {this.inputWrapper('source_channel', {readonly: R.is_archived})}
             {this.inputWrapper('is_new_customer', {readonly: R.is_archived, onChange: (input: any, value: any) => {
@@ -365,7 +366,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               }
             )}
           </div>
-          {this.inputWrapper('date_created')}
           {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
           {this.state.record.deal_result == 2 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
         </>;

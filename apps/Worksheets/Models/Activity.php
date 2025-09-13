@@ -48,11 +48,27 @@ class Activity extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add Activity';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    switch ($this->router()->urlParamAsString('view')) {
+      case 'briefOverview':
+        $description->ui['showHeader'] = false;
+        $description->ui['showColumnSearch'] = false;
+        $description->ui['showFulltextSearch'] = false;
+        $description->ui['showFooter'] = false;
+        $description->columns = [
+          'identifier' => $description->columns['identifier'],
+          'title' => $description->columns['title'],
+          'id_developer' => $description->columns['id_developer'],
+          'virt_worked' => $description->columns['virt_worked'],
+        ];
+      break;
+      default:
+        $description->ui['addButtonText'] = 'Add Activity';
+        $description->ui['showHeader'] = true;
+        $description->ui['showFulltextSearch'] = true;
+        $description->ui['showColumnSearch'] = true;
+        $description->ui['showFooter'] = false;
+      break;
+    }
 
     return $description;
   }

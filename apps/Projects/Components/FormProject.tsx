@@ -121,6 +121,22 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
               {/* {this.inputWrapper('is_closed')} */}
             </div>
             <div className='flex-1'>
+              <div className='card card-info'>
+                <div className='card-header'>Tasks</div>
+                <div className='card-body'>
+                  <TableTasks
+                    tag={"table_project_task"}
+                    parentForm={this}
+                    uid={this.props.uid + "_table_project_task"}
+                    junctionTitle='Project'
+                    junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
+                    junctionSourceColumn='id_project'
+                    junctionSourceRecordId={R.id}
+                    junctionDestinationColumn='id_task'
+                    view='briefOverview'
+                  />
+                </div>
+              </div>
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('id_contact')}
               {this.inputWrapper('color')}

@@ -110,7 +110,7 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
                 return <button
                   key={i}
                   onClick={() => this.onWorkflowStepChange(s.id, s)}
-                  className={`btn ${stepBtnClass} border-none rounded-none`}
+                  className={`btn btn-small ${stepBtnClass} border-none rounded-none`}
                 >
                   <div
                     className="icon p-0"

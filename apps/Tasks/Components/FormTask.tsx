@@ -128,9 +128,9 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
             </div>
             {this.state.id <= 0 ? null :
               <div className='flex-1'>
-                <div className='card'>
-                  <div className='card-header'>TODO</div>
-                  <div className='card-body btn-list bg-yellow-50'>
+                <div className='card card-info'>
+                  <div className='card-header'>Todo</div>
+                  <div className='card-body btn-list'>
                     {R.TODO && R.TODO.map((item, key) => {
                       const refInputTodo = React.createRef();
 

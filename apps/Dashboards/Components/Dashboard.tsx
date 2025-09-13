@@ -168,8 +168,8 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
             className='btn btn-transparent btn-small'
             onClick={() => {
               let newWidth = (panel.width ?? 0) - 1;
-              if (newWidth > 5) newWidth = 5;
-              if (newWidth <2) newWidth = 2;
+              if (newWidth > 6) newWidth = 6;
+              if (newWidth < 2) newWidth = 2;
               this.setPanelWidth(panel.id, newWidth);
             }}
           >
@@ -179,8 +179,8 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
             className='btn btn-transparent btn-small'
             onClick={() => {
               let newWidth = (panel.width ?? 0) + 1;
-              if (newWidth > 5) newWidth = 5;
-              if (newWidth <2) newWidth = 2;
+              if (newWidth > 6) newWidth = 6;
+              if (newWidth < 2) newWidth = 2;
               this.setPanelWidth(panel.id, newWidth);
             }}
           >

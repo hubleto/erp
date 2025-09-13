@@ -104,7 +104,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
 
   onDragStart(e: any, idPanel: number) {
     this.setState({ draggedIdPanel: idPanel });
-    setTimeout(() => { this.setState({ hidePanelsWhileDragging: true }) }, 1000);
+    setTimeout(() => { this.setState({ hidePanelsWhileDragging: true }) }, 50);
     e.dataTransfer.effectAllowed = "move";
   };
 

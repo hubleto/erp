@@ -21,15 +21,16 @@ class Loader extends \Hubleto\Framework\App
       '/^leads\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^leads\/api\/save-bulk-status-change\/?$/' => Controllers\Api\SaveBulkStatusChange::class,
 
+      '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
+      '/^leads\/boards\/lead-warnings\/?$/' => Controllers\Boards\LeadWarnings::class,
+
       '/^leads(\/(?<recordId>\d+))?\/?$/' => Controllers\Leads::class,
       '/^leads\/add?\/?$/' => ['controller' => Controllers\Leads::class, 'vars' => [ 'recordId' => -1 ]],
       '/^leads\/settings\/?$/' => Controllers\Settings::class,
 
-      '/^settings\/lead-tags\/?$/' => Controllers\Tags::class,
-      '/^settings\/lead-levels\/?$/' => Controllers\Levels::class,
-      '/^settings\/lead-lost-reasons\/?$/' => Controllers\LostReasons::class,
-      '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
-      '/^leads\/boards\/lead-warnings\/?$/' => Controllers\Boards\LeadWarnings::class,
+      '/^leads\/tags\/?$/' => Controllers\Tags::class,
+      '/^leads\/levels\/?$/' => Controllers\Levels::class,
+      '/^leads\/lost-reasons\/?$/' => Controllers\LostReasons::class,
     ]);
 
     $this->addSearchSwitch('l', 'leads');
@@ -39,17 +40,17 @@ class Loader extends \Hubleto\Framework\App
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Lead Levels'),
       'icon' => 'fas fa-layer-group',
-      'url' => 'settings/lead-levels',
+      'url' => 'leads/levels',
     ]);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Lead Tags'),
       'icon' => 'fas fa-tags',
-      'url' => 'settings/lead-levels',
+      'url' => 'leads/levels',
     ]);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Lead Lost Reasons'),
       'icon' => 'fas fa-tags',
-      'url' => 'settings/lead-lost-reasons',
+      'url' => 'leads/lost-reasons',
     ]);
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */

@@ -22,6 +22,8 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
+    $this->setConfigAsInteger('sidebarOrder', 0);
+
     $this->router()->get([
       '/^settings\/calendar-sources\/google\/?$/' => Google::class,
       '/^settings\/calendar-sources\/?$/' => Home::class,
@@ -35,8 +37,6 @@ class Loader extends \Hubleto\Framework\App
       'icon' => 'fas fa-calendar',
       'url' => 'settings/calendar-sources',
     ]);
-
-    $this->setConfigAsInteger('sidebarOrder', 0);
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);

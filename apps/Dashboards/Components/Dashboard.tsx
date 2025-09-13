@@ -6,6 +6,8 @@ import ModalForm from "@hubleto/react-ui/core/ModalForm";
 import FormPanel from "./FormPanel";
 
 export interface Panel {
+  id: number,
+  width: number,
   title: string,
   board_url_slug: string,
   configuration: any,
@@ -21,6 +23,7 @@ export interface DesktopDashboardProps {
 export interface DesktopDashboardState {
   panels: Array<Panel>,
   showIdPanel: number,
+  draggedPanelUrlSlug: string,
 }
 
 export default class DesktopDashboard extends TranslatedComponent<DesktopDashboardProps, DesktopDashboardState> {
@@ -36,6 +39,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
     this.state = {
       panels: this.props.panels,
       showIdPanel: 0,
+      draggedPanelUrlSlug: '',
     }
   }
 
@@ -73,9 +77,116 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
     }
   }
 
+  setPanelWidth(idPanel: number, width: number) {
+    console.log(idPanel, width);
+
+    let newPanels = this.state.panels;
+    for (let i in newPanels) {
+      if (newPanels[i].id == idPanel) {
+        newPanels[i].width = width;
+      }
+    }
+    this.setState({panels: newPanels});
+
+    request.get(
+      'dashboards/api/set-panel-width',
+      {
+        idDashboard: this.props.idDashboard,
+        idPanel: idPanel,
+        width: width,
+      },
+      (result: any) => {
+      }
+    );
+  }
+
+  onDragStart(e: any, panelUrlSlug: string) {
+    this.setState({ draggedPanelUrlSlug: panelUrlSlug });
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  onDragOver(e: any, targetPanelUrlSlug: string) {
+    e.preventDefault();
+    const draggedPanelUrlSlug = this.state.draggedPanelUrlSlug;
+    const panels = this.state.panels;
+
+    if (draggedPanelUrlSlug === targetPanelUrlSlug) return;
+
+    // console.log(draggedPanelUrlSlug, targetPanelUrlSlug);
+
+    let draggedPanel: Panel = null;
+    for (let i in panels) {
+      if (panels[i].board_url_slug === draggedPanelUrlSlug) draggedPanel = panels[i];
+    }
+
+    const newPanels = [];
+    for (let i in panels) {
+      if (panels[i].board_url_slug == draggedPanelUrlSlug) continue;
+      if (panels[i].board_url_slug == targetPanelUrlSlug) {
+        newPanels.push(draggedPanel);
+      }
+      newPanels.push(panels[i]);
+    }
+
+    this.setState({ panels: newPanels });
+  };
+
+  onDrop(e: any) {
+    e.preventDefault();
+
+    request.get(
+      'dashboards/api/save-panel-order',
+      {
+        idDashboard: this.props.idDashboard,
+        panelOrder: this.state.panels.map((item: Panel) => item.id),
+      },
+      (html: any) => {
+        this.setState({ draggedPanelUrlSlug: null });
+      }
+    );
+  };
+
   renderPanel(panel: any, index: any) {
-    return <div key={index} className="card">
-      <div className="card-header">
+    const width = panel.width ?? 1;
+    return <div
+      key={index}
+      className={
+        "card"
+        + " " + (panel.board_url_slug == this.state.draggedPanelUrlSlug ? "card-info" : "")
+      }
+      style={{gridColumn: `span ${width}`}}
+    >
+      <div
+        className="card-header cursor-move"
+        draggable
+        onDragStart={(e: any) => this.onDragStart(e, panel.board_url_slug)}
+        onDragOver={(e: any) => this.onDragOver(e, panel.board_url_slug)}
+        onDrop={(e: any) => this.onDrop(e)}
+      >
+        <div className='btn-group items-center'>
+          <button
+            className='btn btn-transparent btn-small'
+            onClick={() => {
+              let newWidth = (panel.width ?? 0) - 1;
+              if (newWidth > 5) newWidth = 5;
+              if (newWidth <2) newWidth = 2;
+              this.setPanelWidth(panel.id, newWidth);
+            }}
+          >
+            <span className='icon'><i className='fas fa-arrow-left'></i></span>
+          </button>
+          <button
+            className='btn btn-transparent btn-small'
+            onClick={() => {
+              let newWidth = (panel.width ?? 0) + 1;
+              if (newWidth > 5) newWidth = 5;
+              if (newWidth <2) newWidth = 2;
+              this.setPanelWidth(panel.id, newWidth);
+            }}
+          >
+            <span className='icon'><i className='fas fa-arrow-right'></i></span>
+          </button>
+        </div>
         {panel.title}
         <button
           className='btn btn-transparent btn-small'
@@ -99,26 +210,21 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
       globalThis.main.renderReactElements();
     }, 100);
 
-    const panels = this.props.panels;
-    const panelsLeft = Array.from(panels.slice(0, Math.ceil(panels.length / 2)));
-    const panelsRight = Array.from(panels.slice(Math.ceil(panels.length / 2)));
+    const panels = this.state.panels;
 
-    return <>
-      <div className="flex flex-col gap-2 md:flex-row">
-        <div className="flex flex-1 flex-col gap-2">
-          {panelsLeft.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
-        </div>
-        <div className="flex flex-1 flex-col gap-2">
-          {panelsRight.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
-        </div>
+    return <div className='flex flex-col gap-2'>
+      <div className='grid grid-cols-6 gap-2'>
+        {panels.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
       </div>
-      <button
-        className='btn btn-add mt-2'
-        onClick={() => { this.setState({showIdPanel: -1}); }}
-      >
-        <span className='icon'><i className='fas fa-plus'></i></span>
-        <span className='text'>{this.translate('Add new panel')}</span>
-      </button>
+      <div>
+        <button
+          className='btn btn-add mt-2'
+          onClick={() => { this.setState({showIdPanel: -1}); }}
+        >
+          <span className='icon'><i className='fas fa-plus'></i></span>
+          <span className='text'>{this.translate('Add new panel')}</span>
+        </button>
+      </div>
       {this.state.showIdPanel != 0 ?
         <ModalForm
           uid='add_new_panel_modal'
@@ -135,7 +241,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
           />
         </ModalForm>
       : <></>}
-    </>
+    </div>
   }
 
 }

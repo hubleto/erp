@@ -168,7 +168,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             />
           </div>
           <div className='flex-2'>
-            <div className='card'>
+            <div className='card card-info'>
               <div className='card-header'>Mail preview</div>
               <div className='card-body'>
                 {mailPreviewInfo && mailPreviewInfo.CONTACT && mailPreviewInfo.bodyHtml != '' ? <>

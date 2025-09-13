@@ -20,6 +20,7 @@ class Loader extends \Hubleto\Framework\App
     $this->router()->get([
       '/^workflow\/api\/get-workflows\/?$/' => Controllers\Api\GetWorkflows::class,
       '/^workflow\/api\/get-workflow-step-by-tag\/?$/' => Controllers\Api\GetWorkflowStepByTag::class,
+
       '/^workflow\/?$/' => Controllers\Workflow::class,
       '/^workflow(\/(?<idWorkflow>\d+))?\/?$/' => Controllers\Workflow::class,
       '/^workflow\/history\/?$/' => Controllers\WorkflowHistory::class,

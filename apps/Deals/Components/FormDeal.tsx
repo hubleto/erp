@@ -149,53 +149,9 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     return <small>{this.translate('Deal')}</small>;
   }
 
-  // workflowChange(idWorkflow: number) {
-  //   request.get(
-  //     'deals/change-workflow',
-  //     {
-  //       idWorkflow: idWorkflow
-  //     },
-  //     (data: any) => {
-  //       if (data.status == "success") {
-  //         var R = this.state.record;
-  //         if (data.newWorkflow.STEPS?.length > 0) {
-  //           R.id_workflow = data.newWorkflow.id;
-  //           R.id_workflow_step = data.newWorkflow.STEPS[0].id;
-  //           R.deal_result = data.newWorkflow.STEPS[0].set_result;
-  //           R.WORKFLOW = data.newWorkflow;
-  //           R.WORKFLOW_STEP = data.newWorkflow.STEPS[0];
-
-  //           this.setState({ record: R });
-  //         } else {
-  //           R.id_workflow = data.newWorkflow.id;
-  //           R.id_workflow_step = null;
-  //           R.WORKFLOW = data.newWorkflow;
-  //           R.WORKFLOW_STEP = null;
-
-  //           this.setState({ record: R });
-  //         }
-  //       }
-  //     }
-  //   );
-  // }
-
   calculateWeightedProfit(probability: number, price: number) {
     return (probability / 100) * price;
   }
-
-  // changeWorkflowStepFromResult() {
-  //   if (this.state.record.WORKFLOW.STEPS.length > 0) {
-  //     this.state.record.WORKFLOW.STEPS.some(step => {
-  //       if (step.set_result == this.state.record.deal_result) {
-  //         let R = this.state.record;
-  //         R.id_workflow_step = step.id;
-  //         R.WORKFLOW_STEP = step;
-  //         this.setState({record: R});
-  //         return true;
-  //       } else return false;
-  //     })
-  //   }
-  // }
 
   onCreateActivityCallback() {
     this.loadRecord();

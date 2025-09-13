@@ -4,7 +4,6 @@ namespace Hubleto\App\Community\Campaigns;
 
 class Loader extends \Hubleto\Framework\App
 {
-  public bool $hasCustomSettings = true;
 
   /**
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...

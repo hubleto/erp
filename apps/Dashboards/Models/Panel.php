@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Dashboards\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Json;
+use Hubleto\Framework\Db\Column\Integer;
 
 class Panel extends \Hubleto\Erp\Model
 {
@@ -23,6 +24,8 @@ class Panel extends \Hubleto\Erp\Model
         ->setRequired()->setReadonly()->setDefaultValue($this->router()->urlParamAsInteger('idDashboard')),
       'board_url_slug' => (new Varchar($this, $this->translate('Board')))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'width' => (new Integer($this, $this->translate('Width')))->setProperty('defaultVisibility', true)->setDefaultValue(1),
+      'order' => (new Integer($this, $this->translate('Order')))->setProperty('defaultVisibility', true),
       'configuration' => (new Json($this, $this->translate('Configuration'))),
     ]);
   }

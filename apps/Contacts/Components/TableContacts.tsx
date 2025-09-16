@@ -6,6 +6,7 @@ import request from '@hubleto/react-ui/core/Request';
 import { ProgressBar } from 'primereact/progressbar';
 
 interface TableContactsProps extends HubletoTableProps {
+  idCustomer: number,
   showAsCards?: boolean;
 }
 
@@ -32,7 +33,7 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
   getFormModalProps() {
     return {
       ...super.getFormModalProps(),
-      type: (this.props.customEndpointParams?.idCustomer ? 'right theme-secondary' : 'right wide'),
+      type: (this.props.idCustomer ? 'right theme-secondary' : 'right wide'),
     };
   }
 
@@ -53,6 +54,10 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
         }
       }
     }
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/contacts/' + (id > 0 ? id : 'add'));
   }
 
   onAfterLoadTableDescription(description: any) {
@@ -121,7 +126,8 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
 
   renderForm(): JSX.Element {
     let formProps: FormContactProps = this.getFormProps();
-    formProps.tableValuesDescription = this.state.tableValuesDescription;
+    if (!formProps.description) formProps.description = {};
+    formProps.description.defaultValues = {id_customer: this.props.idCustomer};
     return <FormContact {...formProps}/>;
   }
 

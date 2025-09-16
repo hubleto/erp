@@ -76,22 +76,10 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
   }
 
   renderTopMenu(): JSX.Element {
-    const R = this.state.record;
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <WorkflowSelector
-          idWorkflow={R.id_workflow}
-          idWorkflowStep={R.id_workflow_step}
-          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
-            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
-          }}
-          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
-            this.updateRecord({id_workflow_step: idWorkflowStep});
-          }}
-        ></WorkflowSelector>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
+      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>}
+      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
     </>
   }
 
@@ -136,6 +124,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               uid={this.props.uid + "_table_campaign_contact"}
               selectionMode='multiple'
               readonly={true}
+              idCustomer={0}
               selection={R.CONTACTS.map((item) => { return { id: item.id_contact } })}
               onSelectionChange={(table: any) => {
                 request.post(
@@ -168,7 +157,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             />
           </div>
           <div className='flex-2'>
-            <div className='card'>
+            <div className='card card-info'>
               <div className='card-header'>Mail preview</div>
               <div className='card-body'>
                 {mailPreviewInfo && mailPreviewInfo.CONTACT && mailPreviewInfo.bodyHtml != '' ? <>

@@ -73,6 +73,8 @@ class Task extends \Hubleto\Erp\RecordManager
 
     $filters = $main->router()->urlParamAsArray("filters");
 
+    $query = $query->with('TODO');
+
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
       $query,

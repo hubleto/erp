@@ -40,7 +40,7 @@ export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivit
       <FormInput title={this.translate("Contact")}>
         <Lookup {...this.getInputProps('id_contact')}
           model='Hubleto/App/Community/Contacts/Models/Contact'
-          endpoint={`contacts/get-customer-contacts`}
+          endpoint={`contacts/api/get-customer-contacts`}
           customEndpointParams={{id_customer: this.props.idCustomer}}
           value={R.id_contact}
           onChange={(input: any, value: any) => {

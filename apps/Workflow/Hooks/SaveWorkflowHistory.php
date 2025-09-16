@@ -10,8 +10,10 @@ class SaveWorkflowHistory extends \Hubleto\Erp\Hook
   public function run(string $event, array $args): void
   {
     if ($event == 'model:on-after-update') {
-      $model = $args['model'];
-      $savedRecord = $args['savedRecord'];
+      $model = $args['model'] ?? null;
+      $savedRecord = $args['savedRecord'] ?? null;
+
+      if (!$model || !$savedRecord) return;
 
       if ($model->hasColumn('id_workflow') && $model->hasColumn('id_workflow_step')) {
         $mWorkflowHistory = $this->getService(WorkflowHistory::class);

@@ -65,11 +65,11 @@ class Contact extends \Hubleto\Erp\Model
     unset($description->columns['is_primary']);
 
 
-    if ($this->router()->urlParamAsInteger('idCustomer') > 0) {
-      $description->columns = [];
-      $description->inputs = [];
-      $description->ui = [];
-    }
+    // if ($this->router()->urlParamAsInteger('idCustomer') > 0) {
+    //   $description->columns = [];
+    //   $description->inputs = [];
+    //   $description->ui = [];
+    // }
 
     return $description;
   }

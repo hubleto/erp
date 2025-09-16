@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Products\Models;
 
+use Hubleto\Framework\Db\Column\Varchar;
+
 class Group extends \Hubleto\Erp\Model
 {
   public string $table = 'product_groups';
@@ -12,7 +14,7 @@ class Group extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      "title" => (new \Hubleto\Framework\Db\Column\Varchar($this, $this->translate("Title")))->setRequired()
+      "title" => (new Varchar($this, $this->translate("Title")))->setRequired()
     ]);
   }
 

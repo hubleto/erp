@@ -42,7 +42,7 @@ export default class CustomerFormActivity<P, S> extends FormActivity<CustomerFor
       <FormInput title={this.translate("Contact")}>
         <Lookup {...this.getInputProps("id_contact")}
           model='Hubleto/App/Community/Contacts/Models/Contact'
-          endpoint={`contacts/get-customer-contacts`}
+          endpoint={`contacts/api/get-customer-contacts`}
           customEndpointParams={{id_customer: R.id_customer}}
           value={R.id_contact}
           onChange={(input: any, value: any) => {

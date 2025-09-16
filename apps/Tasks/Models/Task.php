@@ -110,24 +110,41 @@ class Task extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add Task';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    switch ($this->router()->urlParamAsString('view')) {
+      case 'briefOverview':
+        $description->ui['showHeader'] = false;
+        $description->ui['showColumnSearch'] = false;
+        $description->ui['showFulltextSearch'] = false;
+        $description->ui['showFooter'] = false;
+        $description->columns = [
+          'identifier' => $description->columns['identifier'],
+          'title' => $description->columns['title'],
+          'id_developer' => $description->columns['id_developer'],
+          'id_workflow_step' => $description->columns['id_workflow_step'],
+          'virt_worked' => $description->columns['virt_worked'],
+        ];
+      break;
+      default:
+        $description->ui['addButtonText'] = 'Add Task';
+        $description->ui['showHeader'] = true;
+        $description->ui['showFulltextSearch'] = true;
+        $description->ui['showColumnSearch'] = true;
+        $description->ui['showFooter'] = false;
 
-    $description->ui['filters'] = [
-      'fTaskWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),
-      'fTaskClosed' => [
-        'title' => $this->translate('Open / Closed'),
-        'options' => [
-          0 => $this->translate('Open'),
-          1 => $this->translate('Closed'),
-          2 => $this->translate('All'),
-        ],
-        'default' => 0,
-      ],
-    ];
+        $description->ui['filters'] = [
+          'fTaskWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),
+          'fTaskClosed' => [
+            'title' => $this->translate('Open / Closed'),
+            'options' => [
+              0 => $this->translate('Open'),
+              1 => $this->translate('Closed'),
+              2 => $this->translate('All'),
+            ],
+            'default' => 0,
+          ],
+        ];
+      break;
+    }
 
     return $description;
   }

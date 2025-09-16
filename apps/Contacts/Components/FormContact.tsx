@@ -71,7 +71,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
       }
 
       request.get(
-        "contacts/check-primary-contact",
+        "contacts/api/check-primary-contact",
         {
           idContact: this.state.record.id ?? -1,
           idCustomer: R.id_customer,

@@ -24,6 +24,9 @@ class GetWorkflows extends \Hubleto\Erp\Controllers\ApiController
     $history = [];
     if (!empty($model) && $recordId > 0) {
       $history = $mWorkflowHistory->record
+        ->with(['USER' => function ($query) {
+          $query->select('id', 'nick');
+        }])
         ->where('model', $model)
         ->where('record_id', $recordId)
         ->orderBy('datetime_change', 'desc')

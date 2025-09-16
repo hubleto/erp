@@ -13,6 +13,14 @@ class User extends \Hubleto\Erp\RecordManager
    */
   public $table = 'users';
 
+  protected $hidden = [
+    'password',
+    'last_access_time',
+    'last_access_ip',
+    'last_login_time',
+    'last_login_ip',
+  ];
+
   /** @return BelongsTo<Company, covariant User> */
   public function DEFAULT_COMPANY(): BelongsTo
   {

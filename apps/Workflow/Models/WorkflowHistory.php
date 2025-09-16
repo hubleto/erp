@@ -15,6 +15,10 @@ class WorkflowHistory extends \Hubleto\Erp\Model
   public string $recordManagerClass = RecordManagers\WorkflowHistory::class;
   public ?string $lookupSqlValue = '{%TABLE%}.id';
 
+  public array $relations = [
+    'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
+  ];
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [

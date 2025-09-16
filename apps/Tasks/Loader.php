@@ -16,15 +16,21 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
+      '/^tasks\/boards\/my-recent-tasks\/?$/' => Controllers\Boards\MyRecentTasks::class,
+
       '/^tasks(\/(?<recordId>\d+))?\/?$/' => Controllers\Tasks::class,
       '/^tasks\/add?\/?$/' => ['controller' => Controllers\Tasks::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
     $this->addSearchSwitch('t', 'tasks');
 
-    /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
+    /** @var \Hubleto\App\Community\Workflow\Manager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $workflowManager->addWorkflow($this, 'tasks', Workflow::class);
+
+    /** @var \Hubleto\App\Community\Dashboards\ */
+    $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
+    $boards->addBoard( $this, 'My recent tasks', 'tasks/boards/my-recent-tasks');
 
   }
 

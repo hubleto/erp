@@ -44,7 +44,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
   }
 
   getRecordFormUrl(): string {
-    return 'campaigns/' + this.state.record.id;
+    return 'campaigns/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   contentClassName(): string

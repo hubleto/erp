@@ -27,7 +27,7 @@ export default class FormTemplate<P, S> extends HubletoForm<FormTemplateProps,Fo
   }
 
   getRecordFormUrl(): string {
-    return 'mail/templates/' + this.state.record.id;
+    return 'mail/templates/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): null|JSX.Element {

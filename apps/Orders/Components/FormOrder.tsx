@@ -70,7 +70,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
   }
 
   getRecordFormUrl(): string {
-    return 'orders/' + this.state.record.id;
+    return 'orders/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   contentClassName(): string

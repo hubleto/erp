@@ -20,7 +20,7 @@ export default class FormPermission<P, S> extends HubletoForm<FormPermissionProp
   }
 
   getRecordFormUrl(): string {
-    return 'api/permissions/' + this.state.record.id;
+    return 'api/permissions/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {

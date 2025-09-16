@@ -164,13 +164,13 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
         onDragOver={(e: any) => this.onDragOver(e, panel.id)}
         onDrop={(e: any) => this.onDrop(e)}
       >
-        <div className='btn-group items-center'>
+        <div className='btn-group items-center hidden md:block'>
           <button
             className='btn btn-transparent btn-small'
             onClick={() => {
               let newWidth = (panel.width ?? 3) - 1;
               if (newWidth > 6) newWidth = 6;
-              if (newWidth < 2) newWidth = 2;
+              if (newWidth < 1) newWidth = 1;
               this.setPanelWidth(panel.id, newWidth);
             }}
           >
@@ -181,7 +181,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
             onClick={() => {
               let newWidth = (panel.width ?? 3) + 1;
               if (newWidth > 6) newWidth = 6;
-              if (newWidth < 2) newWidth = 2;
+              if (newWidth < 1) newWidth = 1;
               this.setPanelWidth(panel.id, newWidth);
             }}
           >
@@ -216,7 +216,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
     const panels = this.state.panels;
 
     return <div className='flex flex-col gap-2'>
-      <div className='grid grid-cols-6 gap-2'>
+      <div className='block gap-2 md:grid md:grid-cols-6'>
         {panels.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
       </div>
       <div>

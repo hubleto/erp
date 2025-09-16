@@ -20,7 +20,7 @@ export default class FormUsage<P, S> extends HubletoForm<FormUsageProps, FormUsa
   }
 
   getRecordFormUrl(): string {
-    return 'api/usages/' + this.state.record.id;
+    return 'api/usages/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {

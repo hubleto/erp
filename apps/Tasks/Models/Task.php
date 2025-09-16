@@ -119,6 +119,7 @@ class Task extends \Hubleto\Erp\Model
           'identifier' => $description->columns['identifier'],
           'title' => $description->columns['title'],
           'id_developer' => $description->columns['id_developer'],
+          'id_workflow_step' => $description->columns['id_workflow_step'],
           'virt_worked' => $description->columns['virt_worked'],
         ];
       break;

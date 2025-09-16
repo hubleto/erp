@@ -95,6 +95,13 @@ class Project extends \Hubleto\Erp\Model
         $description->ui['showColumnSearch'] = false;
         $description->ui['showFulltextSearch'] = false;
         $description->ui['showFooter'] = false;
+        $description->columns = [
+          'identifier' => $description->columns['identifier'],
+          'title' => $description->columns['title'],
+          'id_main_developer' => $description->columns['id_main_developer'],
+          'id_account_manager' => $description->columns['id_account_manager'],
+          'id_workflow_step' => $description->columns['id_workflow_step'],
+        ];
       break;
       default:
         $description->ui['addButtonText'] = 'Add Project';

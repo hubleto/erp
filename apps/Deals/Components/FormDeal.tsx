@@ -560,16 +560,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   }
 
   renderTopMenu(): JSX.Element {
-    const R = this.state.record;
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
+      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'>
         <WorkflowSelector
-          idWorkflow={R.id_workflow}
-          idWorkflowStep={R.id_workflow_step}
-          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
-            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
-          }}
+          parentForm={this}
           onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
             let newRecord: any = {id_workflow_step: idWorkflowStep, deal_result: 0, is_closed: false};
             if (step.name.match(/won/i)) newRecord.deal_result = 1;
@@ -578,8 +573,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             this.updateRecord(newRecord);
           }}
         ></WorkflowSelector>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
+      </div>}
+      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
     </>
   }
 

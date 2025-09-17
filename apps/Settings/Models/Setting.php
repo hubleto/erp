@@ -2,10 +2,11 @@
 
 namespace Hubleto\App\Community\Settings\Models;
 
-use Hubleto\App\Community\Auth\Models\User;
+
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Models\User;
 
 class Setting extends \Hubleto\Erp\Model
 {
@@ -17,7 +18,7 @@ class Setting extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'key' => (new Varchar($this, $this->translate("Key")))->setRequired(),
       'value' => (new Text($this, $this->translate("Value"))),
-      'id_owner' => (new Lookup($this, $this->translate("Only for user"), User::class))->setReactComponent('InputUserSelect'),
+      'id_owner' => (new Lookup($this, $this->translate("Only for user"), get_class($this->getService(User::class))))->setReactComponent('InputUserSelect'),
     ]);
   }
 

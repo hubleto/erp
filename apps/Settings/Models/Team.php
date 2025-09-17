@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Settings\Models;
 
-use Hubleto\App\Community\Auth\Models\User;
+
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Color;
@@ -20,7 +20,7 @@ class Team extends \Hubleto\Erp\Model
       'name' => (new Varchar($this, $this->translate("Team name")))->setRequired(),
       'color' => (new Color($this, $this->translate("Team color"))),
       'description' => (new Text($this, $this->translate("Description"))),
-      'id_manager' => (new Lookup($this, $this->translate("Manager"), User::class))->setReactComponent('InputUserSelect')->setRequired(),
+      'id_manager' => (new Lookup($this, $this->translate("Manager"), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setRequired(),
     ]);
   }
 

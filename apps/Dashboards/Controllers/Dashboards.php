@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Dashboards\Controllers;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 
 class Dashboards extends \Hubleto\Erp\Controller
 {
@@ -22,7 +22,7 @@ class Dashboards extends \Hubleto\Erp\Controller
     $dashboardSlug = $this->router()->urlParamAsString('dashboardSlug');
 
     $dashboards = $mDashboard->record->prepareReadQuery()
-      ->where('id_owner', $this->getService(AuthProvider::class)->getUserId())
+      ->where('id_owner', $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ->with('PANELS')
       ->get()
       ?->toArray();

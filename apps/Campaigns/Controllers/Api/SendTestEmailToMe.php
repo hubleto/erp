@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Campaigns\Controllers\Api;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 use Hubleto\App\Community\Campaigns\Models\Campaign;
 use Hubleto\App\Community\Campaigns\Models\CampaignContact;
 use Hubleto\App\Community\Mail\Models\Mail;
@@ -36,7 +36,7 @@ class SendTestEmailToMe extends \Hubleto\Erp\Controllers\ApiController
         'body_html' => $bodyHtml,
         'id_account' => $campaign->id_mail_account,
         'from' => $campaign->MAIL_ACCOUNT->sender_email ?? '',
-        'to' => $this->getService(AuthProvider::class)->getUserEmail(),
+        'to' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserEmail(),
         'datetime_created' => date('Y-m-d H:i:s'),
       ]);
 

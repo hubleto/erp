@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Auth\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 use Hubleto\App\Community\Settings\Models\RecordManagers\Company;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Team;
 use Hubleto\App\Community\Settings\Models\RecordManagers\UserRole;
@@ -65,7 +65,7 @@ class User extends \Hubleto\Erp\RecordManager
   public function prepareLookupQuery(string $search): mixed
   {
     $main = \Hubleto\Erp\Loader::getGlobalApp();
-    $idUser = $main->getService(AuthProvider::class)->getUserId();
+    $idUser = $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
 
     $query = $this;
 

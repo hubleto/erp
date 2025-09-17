@@ -2,14 +2,14 @@
 
 namespace Hubleto\App\Community\Usage;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 
 class Logger extends \Hubleto\Framework\Core
 {
 
   public function logUsage(string $message = ''): void
   {
-    if ((bool) $this->getService(AuthProvider::class)->getUserId()) {
+    if ((bool) $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()) {
 
       $urlParams = $this->router()->getUrlParams();
       $mLog = $this->getModel(Models\Log::class);
@@ -21,7 +21,7 @@ class Logger extends \Hubleto\Framework\Core
         'route' => trim($this->router()->getRoute(), '/'),
         'params' => strlen($paramsStr) < 255 ? $paramsStr : '',
         'message' => $message,
-        'id_user' => $this->getService(AuthProvider::class)->getUserId(),
+        'id_user' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(),
       ]);
     }
   }
@@ -33,7 +33,7 @@ class Logger extends \Hubleto\Framework\Core
 
     $mLog = $this->getModel(Models\Log::class);
     $usageLogs = $mLog->record
-      ->where('id_user', $this->getService(AuthProvider::class)->getUserId())
+      ->where('id_user', $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ->where('datetime', '>=', date("Y-m-d", strtotime("-7 days")))
       ->orderBy('datetime', 'desc')
       ->get()

@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Mail\Models;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -34,7 +34,7 @@ class Mail extends \Hubleto\Erp\Model
    */
   public function describeColumns(): array
   {
-    $user = $this->getService(AuthProvider::class)->getUser();
+    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
     return array_merge(parent::describeColumns(), [
       'mail_number' => (new Varchar($this, $this->translate('Mail Id')))->addIndex('INDEX `mail_number` (`mail_number`)'),
       'mail_id' => (new Varchar($this, $this->translate('Mail Number')))->addIndex('INDEX `mail_id` (`mail_id`)'),

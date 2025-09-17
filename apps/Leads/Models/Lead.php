@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Leads\Models;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Date;
@@ -17,7 +17,7 @@ use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Settings\Models\Setting;
-use Hubleto\App\Community\Auth\Models\User;
+
 use Hubleto\App\Community\Settings\Models\Team;
 use Hubleto\Framework\Helper;
 use Hubleto\App\Community\Workflow\Models\Workflow;
@@ -41,8 +41,8 @@ class Lead extends \Hubleto\Erp\Model
   public array $relations = [
     'DEAL' => [ self::HAS_ONE, Deal::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
+    'OWNER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_owner', 'id'],
+    'MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id'],
     'TEAM' => [ self::BELONGS_TO, Team::class, 'id_team', 'id'],
     // 'LEVEL' => [ self::BELONGS_TO, Level::class, 'id_level', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
@@ -97,8 +97,8 @@ class Lead extends \Hubleto\Erp\Model
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setProperty('defaultVisibility', true)->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_team' => (new Lookup($this, $this->translate('Team'), Team::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),

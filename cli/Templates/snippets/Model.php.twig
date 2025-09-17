@@ -51,8 +51,8 @@ class {{ model }} extends \Hubleto\Framework\Model
   // Definition of model's relations.
   // For more details see https://developer.hubleto.com/v0/docs/models/relations
   public array $relations = [ 
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    'OWNER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_owner', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id' ],
   ];
 
   /**
@@ -99,11 +99,11 @@ class {{ model }} extends \Hubleto\Framework\Model
       // 'color_example' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
       // 'image_example' => (new Image($this, $this->translate('Image')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
       // 'file_example' => (new File($this, $this->translate('File')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
+      // 'id_owner' => (new Lookup($this, $this->translate('Owner'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
+      //   ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       // ,
-      // 'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
+      // 'id_manager' => (new Lookup($this, $this->translate('Manager'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
+      //   ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       // ,
     ]);
   }

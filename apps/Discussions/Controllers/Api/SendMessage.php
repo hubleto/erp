@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Discussions\Controllers\Api;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 
 class SendMessage extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -11,7 +11,7 @@ class SendMessage extends \Hubleto\Erp\Controllers\ApiController
     $idDiscussion = $this->router()->urlParamAsInteger('idDiscussion');
     $message = $this->router()->urlParamAsString('message');
 
-    $idUser = $this->getService(AuthProvider::class)->getUserId();
+    $idUser = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
 
     $mMessage = $this->getModel(\Hubleto\App\Community\Discussions\Models\Message::class);
     $mMember = $this->getModel(\Hubleto\App\Community\Discussions\Models\Member::class);

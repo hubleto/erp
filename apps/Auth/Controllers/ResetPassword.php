@@ -2,8 +2,8 @@
 
 namespace Hubleto\App\Community\Auth\Controllers;
 
-use Hubleto\App\Community\Auth\AuthProvider;
-use Hubleto\App\Community\Auth\Models\User;
+
+
 use Hubleto\Framework\Models\Token;
 
 class ResetPassword extends \Hubleto\Erp\Controller
@@ -39,7 +39,7 @@ class ResetPassword extends \Hubleto\Erp\Controller
         $this->setView('@Hubleto:App:Community:Auth/ResetPassword.twig');
         return;
       } else {
-        $this->getService(AuthProvider::class)->resetPassword();
+        $this->getService(\Hubleto\Framework\AuthProvider::class)->resetPassword();
 
         $this->router()->redirectTo('');
       }

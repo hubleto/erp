@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Settings\Models;
 
-use Hubleto\App\Community\Auth\Models\User;
+
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -16,7 +16,7 @@ class TeamMember extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_team' => (new Lookup($this, $this->translate("Team"), Team::class))->setRequired(),
-      'id_member' => (new Lookup($this, $this->translate("Member"), User::class))->setReactComponent('InputUserSelect')->setRequired(),
+      'id_member' => (new Lookup($this, $this->translate("Member"), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setRequired(),
     ]);
   }
 

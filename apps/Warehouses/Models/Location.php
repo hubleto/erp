@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Warehouses\Models;
 
-use Hubleto\App\Community\Auth\Models\User;
+
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -29,7 +29,7 @@ class Location extends \Hubleto\Erp\Model
 
   public array $relations = [
     'TYPE' => [ self::BELONGS_TO, LocationType::class, 'id_type', 'id' ],
-    'OPERATION_MANAGER' => [ self::BELONGS_TO, User::class, 'id_operaion_manager', 'id' ],
+    'OPERATION_MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_operaion_manager', 'id' ],
   ];
 
   public function describeColumns(): array
@@ -56,7 +56,7 @@ class Location extends \Hubleto\Erp\Model
       'photo_1' => (new Image($this, $this->translate('Photo #1'))),
       'photo_2' => (new Image($this, $this->translate('Photo #2'))),
       'photo_3' => (new Image($this, $this->translate('Photo #3'))),
-      'id_operation_manager' => (new Lookup($this, $this->translate('Manager of operation'), User::class))->setReactComponent('InputUserSelect'),
+      'id_operation_manager' => (new Lookup($this, $this->translate('Manager of operation'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect'),
     ]);
   }
 

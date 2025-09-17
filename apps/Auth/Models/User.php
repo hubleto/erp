@@ -13,19 +13,11 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class User extends Model
+class User extends \Hubleto\Framework\Models\User
 {
 
   const int TOKEN_TYPE_USER_FORGOT_PASSWORD = 551155;
   const int TOKEN_TYPE_USER_REMEMBER_ME = 661166;
-
-  protected array $hidden = [
-    'password',
-    'last_access_time',
-    'last_access_ip',
-    'last_login_time',
-    'last_login_ip',
-  ];
 
   public const int TYPE_NOT_SPECIFIED = 0;
   public const int TYPE_ADMINISTRATOR = 1;

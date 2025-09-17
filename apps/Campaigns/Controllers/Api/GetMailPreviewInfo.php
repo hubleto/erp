@@ -10,17 +10,14 @@ class GetMailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
-    $idContact = $this->router()->urlParamAsInteger('idContact');
+    $idRecipient = $this->router()->urlParamAsInteger('idRecipient');
 
-    $mContact = $this->getService(Contact::class);
     $mRecipient = $this->getService(Recipient::class);
 
     $bodyHtml = '';
 
     $recipient = $mRecipient->record
-      ->where('id_campaign', $idCampaign)
-      ->where('id_contact', $idContact)
+      ->where('id', $idRecipient)
       ->with('CAMPAIGN.MAIL_TEMPLATE')
       ->with('CONTACT.VALUES')
       ->with('MAIL')
@@ -29,14 +26,12 @@ class GetMailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
     if ($recipient) {
       $bodyHtml = Lib::getMailPreview(
         $recipient->CAMPAIGN->toArray(),
-        $recipient->CONTACT->toArray(),
+        $recipient->toArray(),
       );
     }
 
     return [
       'bodyHtml' => $bodyHtml,
-      'CONTACT' => $recipient?->CONTACT ? $recipient?->CONTACT->toArray() : null,
-      'MAIL' => $recipient?->MAIL ? $recipient?->MAIL->toArray() : null,
     ];
   }
 }

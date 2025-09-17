@@ -8,9 +8,9 @@ import request from '@hubleto/react-ui/core/Request';
 
 export interface FormCampaignProps extends HubletoFormProps {}
 export interface FormCampaignState extends HubletoFormState {
-  mailPreviewInfo?: any,
   testEmailSendResult?: any,
   campaignWarnings?: any,
+  recipients?: any,
 }
 
 export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, FormCampaignState> {
@@ -37,7 +37,6 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
         { uid: 'contacts', title: this.translate('Add recipients from contacts') },
-        { uid: 'recipients', title: this.translate('Contacts'), showCountFor: 'RECIPIENTS' },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'launch', title: this.translate('Launch') },
         ...(this.getParentApp()?.getFormTabs() ?? [])
@@ -96,18 +95,37 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               {this.inputWrapper('name')}
               {this.inputWrapper('target_audience')}
               {this.inputWrapper('goal')}
+              {this.inputWrapper('notes')}
               {this.inputWrapper('id_mail_account')}
               {this.inputWrapper('id_mail_template')}
               {this.inputWrapper('is_approved')}
               {/* {this.inputWrapper('mail_body')} */}
             </div>
             <div className='flex-1'>
-              {this.inputWrapper('utm_source')}
-              {this.inputWrapper('utm_campaign')}
-              {this.inputWrapper('utm_term')}
-              {this.inputWrapper('utm_content')}
+              <div className='card card-info mb-2'>
+                <div className='card-header'>Recipients</div>
+                <div className='card-body'>
+                  <TableRecipients
+                    tag={"table_campaign_recipients"}
+                    parentForm={this}
+                    uid={this.props.uid + "_table_campaign_recipient"}
+                    idCampaign={R.id}
+                    view='briefOverview'
+                    onAfterLoadData={(table: any) => {
+                      this.setState({ recipients: table.state.data.data });
+                    }}
+                  />
+                </div>
+              </div>  
+              <div className='w-full flex gap-2'>
+                {this.inputWrapper('utm_source')}
+                {this.inputWrapper('utm_campaign')}
+              </div>
+              <div className='w-full flex gap-2'>
+                {this.inputWrapper('utm_term')}
+                {this.inputWrapper('utm_content')}
+              </div>
               {this.inputWrapper('id_manager')}
-              {this.inputWrapper('notes')}
               {this.inputWrapper('color')}
               {this.inputWrapper('datetime_created')}
               {this.inputWrapper('uid')}
@@ -117,93 +135,31 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       break
 
       case 'contacts':
-        const mailPreviewInfo: any = this.state.mailPreviewInfo;
-        return <div className='flex gap-2'>
-          <div className='flex-3 overflow-auto'>
-            <TableContacts
-              tag={"table_campaign_contact"}
-              parentForm={this}
-              uid={this.props.uid + "_table_campaign_contact"}
-              selectionMode='multiple'
-              readonly={true}
-              descriptionSource='both'
-              //@ts-ignore
-              description={{ui: {showHeader: false}}}
-              idCustomer={0}
-              selection={R.RECIPIENTS.map((item) => { return { id: item.id_contact } })}
-              onSelectionChange={(table: any) => {
-                request.post(
-                  'campaigns/api/save-contacts',
-                  {
-                    idCampaign: this.state.record.id,
-                    contactIds: table.state.selection.map((item) => item.id)
-                  },
-                  {},
-                  (result: any) => {
-                    this.setState({record: {...R, RECIPIENTS: result}});
-                  }
-                );
-              }}
-              onRowClick={(table: any, row: any) => {
-                console.log('onRowClick', row);
-                request.post(
-                  'campaigns/api/get-mail-preview-info',
-                  {
-                    idCampaign: this.state.record.id,
-                    idContact: row.id,
-                  },
-                  {},
-                  (result: any) => {
-                    console.log(result);
-                    this.setState({mailPreviewInfo: result});
-                  }
-                );
-              }}
-            />
-          </div>
-          <div className='flex-2'>
-            <div className='card card-info'>
-              <div className='card-header'>Mail preview</div>
-              <div className='card-body'>
-                {mailPreviewInfo && mailPreviewInfo.CONTACT && mailPreviewInfo.bodyHtml != '' ? <>
-                  <div><b>Contact</b></div>
-                  <div className='text-sm bg-slate-100 p-2 flex flex-col'>
-                    <div className='font-bold'>{mailPreviewInfo.CONTACT?.first_name}</div>
-                    <div className='font-bold'>{mailPreviewInfo.CONTACT?.last_name}</div>
-                    {mailPreviewInfo.CONTACT?.VALUES?.map((item, key) => {
-                      return <div key={key}>{item.value}</div>;
-                    })}
-                  </div>
-                  <div className='mt-2'><b>Preview</b></div>
-                  <div
-                    className='text-blue-800 max-h-72'
-                    dangerouslySetInnerHTML={{__html: mailPreviewInfo.bodyHtml}}
-                  ></div>
-                  {mailPreviewInfo.MAIL ? <>
-                    <div className='mt-2'><b>Send info</b></div>
-                    <div>
-                      Mail was sent on {mailPreviewInfo.MAIL.datetime_sent} from {mailPreviewInfo.MAIL.from}.
-                    </div>
-                  </> : null}
-                </> : <div>
-                  No mail preview available.
-                </div>}
-              </div>
-            </div>
-          </div>
-        </div>
-      break;
-
-      case 'recipients':
-        return <>
-          <TableRecipients
-            tag={"table_campaign_recipients"}
-            parentForm={this}
-            uid={this.props.uid + "_table_campaign_recipient"}
-            idCampaign={R.id}
-            view='briefOverview'
-          />
-        </>;
+        return <TableContacts
+          tag={"table_campaign_contact"}
+          parentForm={this}
+          uid={this.props.uid + "_table_campaign_contact"}
+          selectionMode='multiple'
+          readonly={true}
+          descriptionSource='both'
+          //@ts-ignore
+          description={{ui: {showHeader: false}}}
+          idCustomer={0}
+          selection={R.RECIPIENTS.map((item) => { return { id: item.id_contact } })}
+          onSelectionChange={(table: any) => {
+            request.post(
+              'campaigns/api/save-recipients-from-contacts',
+              {
+                idCampaign: this.state.record.id,
+                contactIds: table.state.selection.map((item) => item.id)
+              },
+              {},
+              (result: any) => {
+                this.setState({record: {...R, RECIPIENTS: result}});
+              }
+            );
+          }}
+        />;
       break;
 
       case 'tasks':
@@ -299,13 +255,13 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 }}
               >
                 <span className="icon"><i className="fas fa-envelope"></i></span>
-                <span className="text">Send email to {R.RECIPIENTS.length} contacts now!</span>
+                <span className="text">Send email to {this.state.recipients.length} recipients now!</span>
               </button>
 
               <div className='flex flex-wrap mt-2 text-sm gap-2'>
-                {R.RECIPIENTS.map((item, key) => {
-                  return <span key={key}>{item.CONTACT?.virt_email}</span>;
-                })}
+                {this.state.recipients ? this.state.recipients.map((item, key) => {
+                  return <span key={key}>{item.email}</span>;
+                }) : null}
               </div>
             </div>
           </div>

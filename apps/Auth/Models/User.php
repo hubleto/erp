@@ -16,9 +16,6 @@ use Hubleto\Framework\Db\Column\Varchar;
 class User extends \Hubleto\Framework\Models\User
 {
 
-  const int TOKEN_TYPE_USER_FORGOT_PASSWORD = 551155;
-  const int TOKEN_TYPE_USER_REMEMBER_ME = 661166;
-
   public const int TYPE_NOT_SPECIFIED = 0;
   public const int TYPE_ADMINISTRATOR = 1;
   public const int TYPE_CHIEF_OFFICER = 2;
@@ -90,12 +87,12 @@ class User extends \Hubleto\Framework\Models\User
     /** @var Token $tokenModel */
     $tokenModel = $this->getModel(Token::class);
 
-    if (!$tokenModel->isTokenTypeRegistered(self::TOKEN_TYPE_USER_FORGOT_PASSWORD)) {
-      $tokenModel->registerTokenType(self::TOKEN_TYPE_USER_FORGOT_PASSWORD);
+    if (!$tokenModel->isTokenTypeRegistered(Token::TOKEN_TYPE_USER_FORGOT_PASSWORD)) {
+      $tokenModel->registerTokenType(Token::TOKEN_TYPE_USER_FORGOT_PASSWORD);
     }
 
-    if (!$tokenModel->isTokenTypeRegistered(self::TOKEN_TYPE_USER_REMEMBER_ME)) {
-      $tokenModel->registerTokenType(self::TOKEN_TYPE_USER_REMEMBER_ME);
+    if (!$tokenModel->isTokenTypeRegistered(Token::TOKEN_TYPE_USER_REMEMBER_ME)) {
+      $tokenModel->registerTokenType(Token::TOKEN_TYPE_USER_REMEMBER_ME);
     }
   }
 

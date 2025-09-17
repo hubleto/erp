@@ -4,6 +4,8 @@ namespace Hubleto\App\Community\Auth;
 
 
 use Hubleto\App\Community\Auth\Models\Token;
+use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Auth\Models\UserHasToken;
 use Hubleto\Framework\Core;
 use Hubleto\Framework\Model;
 
@@ -132,12 +134,10 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     if ($mUser->record->where('login', $login)->count() > 0) {
       $user = $mUser->record->where('login', $login)->first();
 
-      $mToken = $this->getService(Token::class); // todo: token creation should be done within the token itself
-      if (get_class($mToken) != Token::class) {
-        throw new \Exception('Token model must be instance of \Hubleto\Framework\Models\Token class');
-      }
+      /** @var Token $mToken */
+      $mToken = $this->getService(Token::class);
       $tokenSalt = bin2hex(random_bytes(16));
-      $token = $mToken->generateToken($tokenSalt, User::TOKEN_TYPE_USER_FORGOT_PASSWORD, date("Y-m-d H:i:s", strtotime("+ 30 minute", time())));
+      $token = $mToken->generateToken($tokenSalt, Token::TOKEN_TYPE_USER_FORGOT_PASSWORD, date("Y-m-d H:i:s", strtotime("+ 30 minute", time())));
 
       if ($user['middle_name'] != '') {
         $name = $user['first_name'] . ' ' . $user['middle_name'] . ' '. $user['last_name'];
@@ -177,6 +177,53 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     }
   }
 
+  private function initiateRememberMe($userId) {
+
+    /** @var Token $mToken */
+    $mToken = $this->getService(Token::class);
+    $token = $mToken->generateToken($this->config()->getAsString('sessionSalt'), Token::TOKEN_TYPE_USER_REMEMBER_ME, date("Y-m-d H:i:s", strtotime("+ 30 day", time())));
+
+    $mJunctionTable = $this->getModel(UserHasToken::class);
+    $mJunctionTable->record->recordCreate([
+      'id_user' => $userId,
+      'id_token' => $token['id'],
+    ]);
+
+    setcookie($this->config()->getAsString('accountUid') . '-rememberMe', $token['token'], time() + (86400 * 30), "/");
+  }
+
+  public function authenticateRememberedUser(): bool {
+
+    /** @var Token $mToken */
+    $mToken = $this->getService(Token::class);
+    $matchingTokensQuery = $mToken
+      ->record
+      ->where(
+        'token',
+        $_COOKIE[$this->config()->getAsString('accountUid') . '-rememberMe'] ?? ''
+      )->where('type', Token::TOKEN_TYPE_USER_REMEMBER_ME)
+      ->where('valid_to', '>', date("Y-m-d H:i:s"));
+    if (
+      $matchingTokensQuery->count() > 0)
+    {
+      $tokenId = $matchingTokensQuery->first()->id;
+
+      $mJunctionTable = $this->getModel(UserHasToken::class);
+      $junctionEntry = $mJunctionTable->record->where('id_token', $tokenId)->first();
+      if (!empty($junctionEntry)) {
+        $userId = $junctionEntry['id_user'];
+        /** @var User $userModel */
+        $userModel = $this->getService(User::class);
+
+        $authResult = $userModel->loadUser($userId);
+        $this->signIn($authResult);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public function auth(): void
   {
 
@@ -207,7 +254,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
             $this->signIn($authResult);
 
             if ($rememberLogin) {
-              $this->sessionManager()->prolongSession();
+              $this->initiateRememberMe($user['id']);
             }
 
             break;
@@ -221,7 +268,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
 
     if (
       !empty($setLanguage)
-      && !empty(\Hubleto\App\Community\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
+      && !empty(\Hubleto\App\Community\Auth\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
       $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
       $mUser->record
@@ -253,6 +300,28 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
   public function userHasRole(int $idRole): bool
   {
     return in_array($idRole, $this->getUserRoles());
+  }
+
+  public function signOut()
+  {
+    if (isset($_COOKIE[$this->config()->getAsString('accountUid') . '-rememberMe'])) {
+      unset($_COOKIE[$this->config()->getAsString('accountUid') . '-rememberMe']);
+      setcookie($this->config()->getAsString('accountUid') . '-rememberMe', '', time() - 3600, "/");
+    }
+
+    /** @var Token $mToken */
+    $mToken = $this->getService(Token::class);
+    /** @var UserHasToken $mJunctionTable */
+    $mJunctionTable = $this->getService(UserHasToken::class);
+
+    $tokenIds = $mJunctionTable->record->where('id_user', $this->getUserId())->get(['id_token']);
+    $mJunctionTable->record->where('id_user', $this->getUserId())->delete();
+
+    foreach ($tokenIds as $entry) {
+      $mToken->record->where('id', $entry['id_token'])->delete();
+    }
+
+    parent::signOut();
   }
 
 }

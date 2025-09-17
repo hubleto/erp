@@ -14,6 +14,9 @@ use Hubleto\Framework\Db\Column\Varchar;
  */
 class Token extends Model {
 
+  public const int TOKEN_TYPE_USER_FORGOT_PASSWORD = 551155;
+  public const int TOKEN_TYPE_USER_REMEMBER_ME = 661166;
+
   public string $table = "tokens";
   public ?string $lookupSqlValue = "{%TABLE%}.token";
   public $tokenTypes = [];
@@ -75,7 +78,7 @@ class Token extends Model {
       "token" => $token,
     ]);
 
-    return ["id" => $tokenId, "token" => $token];
+    return $tokenId;
   }
 
   public function validateToken($token) {

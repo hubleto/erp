@@ -33,7 +33,7 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
   }
 
   getRecordFormUrl(): string {
-    return 'api/keys/' + this.state.record.id;
+    return 'api/keys/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {

@@ -40,7 +40,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
   }
 
   getRecordFormUrl(): string {
-    return 'projects/' + this.state.record.id;
+    return 'projects/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   contentClassName(): string

@@ -91,7 +91,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   }
 
   getRecordFormUrl(): string {
-    return 'deals/' + this.state.record.id;
+    return 'deals/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   onAfterLoadFormDescription(description: any) {

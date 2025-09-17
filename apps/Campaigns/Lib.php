@@ -13,6 +13,7 @@ class Lib extends \Hubleto\Framework\Core
    *
    * @param array $campaign
    * @param array $contact
+   * @param array $vars
    * 
    * @return string
    * 
@@ -28,6 +29,15 @@ class Lib extends \Hubleto\Framework\Core
       (string) ($campaign['utm_content'] ?? ''),
     );
 
+    $bodyHtml = Lib::replaceVariables($bodyHtml, [
+      'CONTACT:salutation' => $contact['salutation'] ?? '',
+      'CONTACT:title_before' => $contact['title_before'] ?? '',
+      'CONTACT:first_name' => $contact['first_name'] ?? '',
+      'CONTACT:middle_name' => $contact['middle_name'] ?? '',
+      'CONTACT:last_name' => $contact['last_name'] ?? '',
+      'CONTACT:title_after' => $contact['title_after'] ?? '',
+    ]);
+
     $bodyHtml = Lib::routeLinksThroughCampaignTracker(
       $campaign,
       $contact,
@@ -35,6 +45,27 @@ class Lib extends \Hubleto\Framework\Core
     );
 
     return $bodyHtml;
+  }
+
+  /**
+   * [Description for replaceVariables]
+   *
+   * @param string $body
+   * @param array $vars
+   * 
+   * @return string
+   * 
+   */
+  public static function replaceVariables(string $body, array $vars): string
+  {
+    foreach ($vars as $vName => $vValue) {
+      $body = str_replace('{{ ' . $vName . ' }}', $vValue, $body);
+      $body = str_replace('{{' . $vName . '}}', $vValue, $body);
+      $body = str_replace('{{ ' . $vName . '}}', $vValue, $body);
+      $body = str_replace('{{' . $vName . ' }}', $vValue, $body);
+    }
+
+    return $body;
   }
 
   /**
@@ -65,6 +96,16 @@ class Lib extends \Hubleto\Framework\Core
     return $body;
   }
 
+  /**
+   * [Description for routeLinksThroughCampaignTracker]
+   *
+   * @param array $campaign
+   * @param array $contact
+   * @param string $body
+   * 
+   * @return string
+   * 
+   */
   public static function routeLinksThroughCampaignTracker(array $campaign, array $contact, string $body): string
   {
     $trackerUrl = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/click-tracker';

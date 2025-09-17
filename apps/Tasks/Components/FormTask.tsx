@@ -41,7 +41,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
   }
 
   getRecordFormUrl(): string {
-    return 'tasks/' + this.state.record.id;
+    return 'tasks/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   contentClassName(): string

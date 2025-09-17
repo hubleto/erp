@@ -23,6 +23,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
 
       $campaign = $mCampaign->record->prepareReadQuery()
         ->where('campaigns.id', $idCampaign)
+        ->with('MAIL_TEMPLATE')
         ->with('CONTACTS.CONTACT.VALUES')
         ->first()
       ;
@@ -44,7 +45,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
           if (!filter_var($value->value, FILTER_VALIDATE_EMAIL)) continue;
 
           $mailData = [
-            'subject' => $campaign->name,
+            'subject' => $campaign->MAIL_TEMPLATE->subject,
             'body_html' => $bodyHtml,
             'id_account' => $campaign->id_mail_account,
             'from' => $campaign->MAIL_ACCOUNT->sender_email ?? '',

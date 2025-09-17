@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Dashboards
 appType: community
-sidebarGroup: reporting
+sidebarGroup: crm
 rootUrlSlug: dashboards
 name: Dashboards
 icon: fas fa-table

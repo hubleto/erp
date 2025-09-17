@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Notifications
 appType: community
-sidebarGroup: communication
+sidebarGroup: maintenance
 rootUrlSlug: notifications
 name: Notifications
 icon: fas fa-bell

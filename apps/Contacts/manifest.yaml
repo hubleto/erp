@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Contacts
 appType: community
-sidebarGroup: addressbook
+sidebarGroup: crm
 rootUrlSlug: contacts
 name: Contacts
 icon: fas fa-user

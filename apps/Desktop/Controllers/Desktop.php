@@ -41,6 +41,7 @@ class Desktop extends \Hubleto\Erp\Controller
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
     $this->viewParams['activatedApp'] = $activatedApp;
     $this->viewParams['sidebarGroups'] = $this->config()->getAsArray('sidebarGroups', [
+      'crm' => [ 'title' => $this->translate('CRM'), 'icon' => 'fas fa-id-card-clip' ],
       'addressbook' => [ 'title' => $this->translate('Addressbook'), 'icon' => 'fas fa-id-card-clip' ],
       'calendar' => [ 'title' => $this->translate('Calendar'), 'icon' => 'fas fa-calendar' ],
       // 'productivity' => [ 'title' => $this->translate('Productivity'), 'icon' => 'fas fa-list-check' ],

@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Documents
 appType: community
-sidebarGroup: documents
+sidebarGroup: crm
 rootUrlSlug: documents
 name: Documents
 icon: fa-regular fa-file

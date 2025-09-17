@@ -63,7 +63,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   }
 
   getRecordFormUrl(): string {
-    return 'invoices/' + this.state.record.id;
+    return 'invoices/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTopMenu(): JSX.Element {

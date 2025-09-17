@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Campaigns\Controllers\Api;
 
 use Hubleto\App\Community\Contacts\Models\Contact;
-use Hubleto\App\Community\Campaigns\Models\CampaignContact;
+use Hubleto\App\Community\Campaigns\Models\Recipient;
 
 class SaveContacts extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -12,19 +12,19 @@ class SaveContacts extends \Hubleto\Erp\Controllers\ApiController
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $contactIds = $this->router()->urlParamAsArray('contactIds');
 
-    /** @var CampaignContact */
-    $mCampaignContact = $this->getService(CampaignContact::class);
+    /** @var Recipient */
+    $mRecipient = $this->getService(Recipient::class);
 
-    $campaignContacts = $mCampaignContact->record->where('id_campaign', $idCampaign)->pluck('id_contact')?->toArray();
-    if (!is_array($campaignContacts)) $campaignContacts = [];
+    $recipients = $mRecipient->record->where('id_campaign', $idCampaign)->pluck('id_contact')?->toArray();
+    if (!is_array($recipients)) $recipients = [];
 
     // pridam nove kontakty
 
     foreach ($contactIds as $idContact) {
       $idContact = (int) $idContact;
       if ($idContact <= 0) continue;
-      if (!in_array($idContact, $campaignContacts)) {
-        $mCampaignContact->record->recordCreate([
+      if (!in_array($idContact, $recipients)) {
+        $mRecipient->record->recordCreate([
           'id_campaign' => $idCampaign,
           'id_contact' => $idContact,
         ]);
@@ -33,9 +33,9 @@ class SaveContacts extends \Hubleto\Erp\Controllers\ApiController
 
     // zmazem, ktore treba zmazat
 
-    foreach ($campaignContacts as $idContact) {
+    foreach ($recipients as $idContact) {
       if (!in_array($idContact, $contactIds)) {
-        $mCampaignContact->record
+        $mRecipient->record
           ->where('id_campaign', $idCampaign)
           ->where('id_contact', $idContact)
           ->delete()
@@ -43,8 +43,8 @@ class SaveContacts extends \Hubleto\Erp\Controllers\ApiController
       }
     }
 
-    $campaignContacts = $mCampaignContact->record->where('id_campaign', $idCampaign)->get();
+    $recipients = $mRecipient->record->where('id_campaign', $idCampaign)->get();
 
-    return $campaignContacts->toArray();
+    return $recipients->toArray();
   }
 }

@@ -18,7 +18,7 @@
         "Manager": "Manažér",
         "Created": "Vytvorená"
     },
-    "Models\\CampaignContact": {
+    "Models\\Recipient": {
         "Campaign": "",
         "Contact": ""
     },

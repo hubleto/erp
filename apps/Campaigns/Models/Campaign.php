@@ -32,7 +32,7 @@ class Campaign extends \Hubleto\Erp\Model
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
 
-    'CONTACTS' => [ self::HAS_MANY, CampaignContact::class, 'id_deal', 'id'],
+    'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_deal', 'id'],
     'TASKS' => [ self::HAS_MANY, CampaignTask::class, 'id_deal', 'id'],
   ];
 

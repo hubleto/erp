@@ -2,7 +2,6 @@
 
 namespace Hubleto\App\Community\Orders\Controllers\Api;
 
-use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Orders\Models\Order;
 use Hubleto\App\Community\Orders\Models\OrderActivity;
 
@@ -25,7 +24,7 @@ class LogActivity extends \Hubleto\Erp\Controllers\ApiController
           'time_start' => date('H:i:s'),
           'all_day' => true,
           'completed' => true,
-          'id_owner' => $this->getService(AuthProvider::class)->getUserId(),
+          'id_owner' => $this->authProvider()->getUserId(),
         ]);
       }
     }

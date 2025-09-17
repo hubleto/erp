@@ -2,7 +2,6 @@
 
 namespace Hubleto\App\Community\Settings\Models;
 
-use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Color;

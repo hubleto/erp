@@ -3,7 +3,6 @@
 namespace Hubleto\App\Community\Orders\Models;
 
 use DateTimeImmutable;
-use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -22,7 +21,7 @@ use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Invoices\Models\Invoice;
 use Hubleto\App\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
-use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Settings\Models\User;
 
 class Order extends \Hubleto\Erp\Model
 {
@@ -61,8 +60,8 @@ class Order extends \Hubleto\Erp\Model
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setProperty('defaultVisibility', true),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true)->setCssClass('font-bold'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setProperty('defaultVisibility', true),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
       'price_excl_vat' => (new Decimal($this, $this->translate('Price excl. VAT')))->setDefaultValue(0)->setProperty('defaultVisibility', true),
@@ -261,7 +260,7 @@ class Order extends \Hubleto\Erp\Model
     if ($order) {
       $idInvoice = $mInvoice->generateInvoice(new InvoiceDto(
         1, // $idProfile
-        $this->getService(AuthProvider::class)->getUserId(), // $idIssuedBy
+        $this->authProvider()->getUserId(), // $idIssuedBy
         (int) $order['id_customer'], // $idCustomer
         'ORD/' . $order->number, // $number
         null, // $vs

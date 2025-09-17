@@ -2,9 +2,6 @@
 
 namespace Hubleto\App\Community\Desktop\Controllers;
 
-use Hubleto\App\Community\Auth\AuthProvider;
-use Hubleto\App\Community\Settings\PermissionsManager;
-
 class Desktop extends \Hubleto\Erp\Controller
 {
   public bool $disableLogUsage = true;
@@ -18,7 +15,7 @@ class Desktop extends \Hubleto\Erp\Controller
 
     foreach ($appsInSidebar as $appNamespace => $app) {
       if (
-        !$this->getService(PermissionsManager::class)->isAppPermittedForActiveUser($app)
+        !$this->permissionsManager()->isAppPermittedForActiveUser($app)
         || $app->configAsInteger('sidebarOrder') <= 0
       ) {
         unset($appsInSidebar[$appNamespace]);
@@ -82,10 +79,6 @@ class Desktop extends \Hubleto\Erp\Controller
         $this->viewParams['appMenu'][] = $item;
       }
     }
-
-    /** @var AuthProvider $authProvider */
-    $authProvider = $this->getService(AuthProvider::class);
-    $this->viewParams['user'] = $authProvider->getUserFromSession();
 
     $this->setView('@Hubleto:App:Community:Desktop/Desktop.twig');
   }

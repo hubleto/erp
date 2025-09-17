@@ -2,8 +2,6 @@
 
 namespace Hubleto\Erp;
 
-use Hubleto\Framework\Router;
-
 /**
  * Core implementation of model.
  */

@@ -124,6 +124,9 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               uid={this.props.uid + "_table_campaign_contact"}
               selectionMode='multiple'
               readonly={true}
+              descriptionSource='both'
+              //@ts-ignore
+              description={{ui: {showHeader: false}}}
               idCustomer={0}
               selection={R.CONTACTS.map((item) => { return { id: item.id_contact } })}
               onSelectionChange={(table: any) => {

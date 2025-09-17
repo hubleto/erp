@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Reports
 appType: community
-sidebarGroup: reporting
+sidebarGroup: crm
 rootUrlSlug: reports
 name: Reports
 icon: fas fa-square-poll-vertical

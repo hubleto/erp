@@ -33,7 +33,7 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
   getFormModalProps() {
     return {
       ...super.getFormModalProps(),
-      type: 'right wide',
+      type: 'centered theme-secondary',
     };
   }
 
@@ -54,6 +54,8 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormRecipientProps;
+    if (!formProps.description) formProps.description = {};
+    formProps.description.defaultValues = { id_campaign: this.props.idCampaign };
     return <FormRecipient {...formProps}/>;
   }
 }

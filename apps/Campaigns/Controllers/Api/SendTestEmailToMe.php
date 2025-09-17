@@ -29,7 +29,12 @@ class SendTestEmailToMe extends \Hubleto\Erp\Controllers\ApiController
         ->first()
       ;
 
-      $bodyHtml = Lib::getMailPreview($campaign->toArray(), []);
+      $user = $this->authProvider()->getUser();
+
+      $bodyHtml = Lib::getMailPreview($campaign->toArray(), [
+        'first_name' => $user['first_name'],
+        'last_name' => $user['last_name'],
+      ]);
 
       $mMail->createAndSend([
         'subject' => $campaign->MAIL_TEMPLATE->subject,

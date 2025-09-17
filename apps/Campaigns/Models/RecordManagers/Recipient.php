@@ -6,9 +6,9 @@ use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Mail\Models\RecordManagers\Mail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CampaignContact extends \Hubleto\Erp\RecordManager
+class Recipient extends \Hubleto\Erp\RecordManager
 {
-  public $table = 'campaigns_contacts';
+  public $table = 'campaigns_recipients';
 
   /** @return BelongsTo<Tag, covariant LeadTag> */
   public function CAMPAIGN(): BelongsTo
@@ -28,4 +28,17 @@ class CampaignContact extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Mail::class, 'id_mail', 'id');
   }
 
+
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    $main = \Hubleto\Erp\Loader::getGlobalApp();
+
+    if ($main->router()->urlParamAsInteger("idCampaign") > 0) {
+      $query = $query->where($this->table . '.id_campaign', $main->router()->urlParamAsInteger("idCampaign"));
+    }
+
+    return $query;
+  }
 }

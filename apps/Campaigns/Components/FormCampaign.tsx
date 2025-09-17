@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
+import TableRecipients from '@hubleto/apps/Campaigns/Components/TableRecipients';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import WorkflowSelector, { updateFormWorkflowByTag } from '@hubleto/apps/Workflow/Components/WorkflowSelector';
 import request from '@hubleto/react-ui/core/Request';
@@ -35,7 +36,8 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
-        { uid: 'contacts', title: this.translate('Contacts'), showCountFor: 'CONTACTS' },
+        { uid: 'contacts', title: this.translate('Add recipients from contacts') },
+        { uid: 'recipients', title: this.translate('Contacts'), showCountFor: 'RECIPIENTS' },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'launch', title: this.translate('Launch') },
         ...(this.getParentApp()?.getFormTabs() ?? [])
@@ -128,7 +130,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               //@ts-ignore
               description={{ui: {showHeader: false}}}
               idCustomer={0}
-              selection={R.CONTACTS.map((item) => { return { id: item.id_contact } })}
+              selection={R.RECIPIENTS.map((item) => { return { id: item.id_contact } })}
               onSelectionChange={(table: any) => {
                 request.post(
                   'campaigns/api/save-contacts',
@@ -138,7 +140,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                   },
                   {},
                   (result: any) => {
-                    this.setState({record: {...R, CONTACTS: result}});
+                    this.setState({record: {...R, RECIPIENTS: result}});
                   }
                 );
               }}
@@ -190,6 +192,18 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             </div>
           </div>
         </div>
+      break;
+
+      case 'recipients':
+        return <>
+          <TableRecipients
+            tag={"table_campaign_recipients"}
+            parentForm={this}
+            uid={this.props.uid + "_table_campaign_recipient"}
+            idCampaign={R.id}
+            view='briefOverview'
+          />
+        </>;
       break;
 
       case 'tasks':
@@ -285,11 +299,11 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 }}
               >
                 <span className="icon"><i className="fas fa-envelope"></i></span>
-                <span className="text">Send email to {R.CONTACTS.length} contacts now!</span>
+                <span className="text">Send email to {R.RECIPIENTS.length} contacts now!</span>
               </button>
 
               <div className='flex flex-wrap mt-2 text-sm gap-2'>
-                {R.CONTACTS.map((item, key) => {
+                {R.RECIPIENTS.map((item, key) => {
                   return <span key={key}>{item.CONTACT?.virt_email}</span>;
                 })}
               </div>

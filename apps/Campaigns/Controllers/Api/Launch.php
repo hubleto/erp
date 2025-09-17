@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Campaigns\Controllers\Api;
 
 use Hubleto\App\Community\Campaigns\Models\Campaign;
-use Hubleto\App\Community\Campaigns\Models\CampaignContact;
+use Hubleto\App\Community\Campaigns\Models\Recipient;
 use Hubleto\App\Community\Mail\Models\Mail;
 use Hubleto\App\Community\Campaigns\Lib;
 
@@ -18,13 +18,13 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
     try {
 
       $mCampaign = $this->getModel(Campaign::class);
-      $mCampaignContact = $this->getModel(CampaignContact::class);
+      $mRecipient = $this->getModel(Recipient::class);
       $mMail = $this->getModel(Mail::class);
 
       $campaign = $mCampaign->record->prepareReadQuery()
         ->where('campaigns.id', $idCampaign)
         ->with('MAIL_TEMPLATE')
-        ->with('CONTACTS.CONTACT.VALUES')
+        ->with('RECIPIENTS.CONTACT.VALUES')
         ->first()
       ;
 
@@ -32,9 +32,9 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
 
       $sec = 0;
 
-      foreach ($campaign->CONTACTS as $campaignContact) {
+      foreach ($campaign->RECIPIENTS as $recipient) {
 
-        $contact = $campaignContact->CONTACT;
+        $contact = $recipient->CONTACT;
         $bodyHtml = Lib::getMailPreview(
           $campaign->toArray(),
           $contact->toArray(),
@@ -56,12 +56,12 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
 
           $sec += 10;
 
-          if ($campaignContact->id_mail > 0) {
-            $mMail->record->where('id', $campaignContact->id_mail)->update($mailData);
+          if ($recipient->id_mail > 0) {
+            $mMail->record->where('id', $recipient->id_mail)->update($mailData);
           } else {
             $mail = $mMail->record->recordCreate($mailData);
 
-            $mCampaignContact->record
+            $mRecipient->record
               ->where('id_campaign', $idCampaign)
               ->where('id_contact', $contact->id)
               ->update(['id_mail' => (int) $mail['id']])

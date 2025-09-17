@@ -46,9 +46,9 @@ class Campaign extends \Hubleto\Erp\RecordManager
   }
 
   /** @return HasMany<DealTask, covariant Deal> */
-  public function CONTACTS(): HasMany
+  public function RECIPIENTS(): HasMany
   {
-    return $this->hasMany(CampaignContact::class, 'id_campaign', 'id');
+    return $this->hasMany(Recipient::class, 'id_campaign', 'id');
   }
 
   /** @return HasMany<DealTask, covariant Deal> */

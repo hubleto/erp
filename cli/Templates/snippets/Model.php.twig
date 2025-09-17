@@ -16,7 +16,7 @@ use \Hubleto\Framework\Db\Column\Password;
 use \Hubleto\Framework\Db\Column\Text;
 use \Hubleto\Framework\Db\Column\Varchar;
 
-use \Hubleto\App\Community\Settings\Models\User;
+use \Hubleto\App\Community\Auth\Models\User;
 
 class {{ model }} extends \Hubleto\Framework\Model
 {
@@ -100,10 +100,10 @@ class {{ model }} extends \Hubleto\Framework\Model
       // 'image_example' => (new Image($this, $this->translate('Image')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
       // 'file_example' => (new File($this, $this->translate('File')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
       // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->authProvider()->getUserId())
+      //   ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
       // ,
       // 'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
-      //   ->setDefaultValue($this->authProvider()->getUserId())
+      //   ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
       // ,
     ]);
   }

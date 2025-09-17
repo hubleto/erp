@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Inventory\Models;
 
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Warehouses\Models\Location;
 use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\Framework\Db\Column\Varchar;

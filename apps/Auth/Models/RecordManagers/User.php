@@ -1,13 +1,19 @@
 <?php
 
-namespace Hubleto\App\Community\Settings\Models\RecordManagers;
+namespace Hubleto\App\Community\Auth\Models\RecordManagers;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Hubleto\App\Community\Auth\AuthProvider;
+use Hubleto\App\Community\Settings\Models\RecordManagers\Company;
+use Hubleto\App\Community\Settings\Models\RecordManagers\Team;
+use Hubleto\App\Community\Settings\Models\RecordManagers\UserRole;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends \Hubleto\Erp\RecordManager
 {
+  public static $snakeAttributes = false;
+
   /**
    * @var string
    */
@@ -59,7 +65,7 @@ class User extends \Hubleto\Erp\RecordManager
   public function prepareLookupQuery(string $search): mixed
   {
     $main = \Hubleto\Erp\Loader::getGlobalApp();
-    $idUser = $main->authProvider()->getUserId();
+    $idUser = $main->getService(AuthProvider::class)->getUserId();
 
     $query = $this;
 

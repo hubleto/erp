@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Reports\Models;
 
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Report extends \Hubleto\Erp\Model
 {

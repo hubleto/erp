@@ -12,7 +12,7 @@ interface FormUserState extends HubletoFormState {
 export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'Hubleto/App/Community/Settings/Models/User',
+    model: 'Hubleto/App/Community/Auth/Models/User',
   }
 
   props: FormUserProps;

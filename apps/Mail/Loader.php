@@ -82,7 +82,7 @@ class Loader extends \Hubleto\Framework\App
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 
-    $mUser = $this->getModel(\Hubleto\App\Community\Settings\Models\User::class);
+    $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
     $users = $mUser->record->get()->toArray();
     $usersByEmail = [];
     $emailsByUserId = [];

@@ -27,7 +27,7 @@ class Loader extends \Hubleto\Framework\App
     DependencyInjection::setServiceProviders([
 //      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
 //      \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
-//      \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Settings\Models\User::class,
+//      \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Auth\Models\User::class,
     ]);
 
     $this->getService(AuthProvider::class)->init();

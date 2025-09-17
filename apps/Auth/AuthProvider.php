@@ -233,7 +233,7 @@ class AuthProvider extends Core implements Interfaces\AuthInterface
       !empty($setLanguage)
       && !empty(\Hubleto\App\Community\Settings\Models\User::ENUM_LANGUAGES[$setLanguage])
     ) {
-      $mUser = $this->getModel(\Hubleto\App\Community\Settings\Models\User::class);
+      $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
       $mUser->record
         ->where('id', $this->getUserId())
         ->update(['language' => $setLanguage])

@@ -34,6 +34,7 @@ class Loader extends \Hubleto\Framework\Loader
       \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
       \Hubleto\Framework\Controllers\SignIn::class => SignIn::class,
       \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Auth\Models\User::class,
+      \Hubleto\Framework\Models\Token::class => \Hubleto\App\Community\Auth\Models\Token::class,
     ]);
 
     // run hook

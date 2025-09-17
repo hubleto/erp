@@ -4,7 +4,9 @@ namespace Hubleto\App\Community\Auth\Controllers;
 
 
 
-use Hubleto\Framework\Models\Token;
+use Hubleto\App\Community\Auth\Models\Token;
+use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Auth\Models\UserHasToken;
 
 class ResetPassword extends \Hubleto\Erp\Controller
 {
@@ -17,7 +19,9 @@ class ResetPassword extends \Hubleto\Erp\Controller
 
     /** @var Token $mToken */
     $mToken = $this->getService(Token::class);
-    if ($this->router()->urlParamAsString('token') == '' || !$mToken->validateToken($this->router()->urlParamAsString('token'))) {
+    $idToken = $mToken->validateToken($this->router()->urlParamAsString('token'), Token::TOKEN_TYPE_USER_FORGOT_PASSWORD);
+
+    if ($this->router()->urlParamAsString('token') == '' || !$idToken) {
       $this->router()->redirectTo('');
     }
 
@@ -45,13 +49,12 @@ class ResetPassword extends \Hubleto\Erp\Controller
       }
     }
 
-    $login = $mToken->record
-      ->where('token', $_GET['token'])
-      ->where('valid_to', '>', date('Y-m-d H:i:s'))
-      ->where('type', 'reset-password')->first()?->login;
+    /** @var UserHasToken $mJunctionTable */
+    $mJunctionTable = $this->getModel(\Hubleto\App\Community\Auth\Models\UserHasToken::class);
+    $idUser = $mJunctionTable->record->where('id_token', $idToken)->first()?->id_user;
 
     $mUser = $this->getService(User::class);
-    $passwordHash = $mUser->record->where('login', $login)->first()?->password;
+    $passwordHash = $mUser->record->where('id', $idUser)->first()?->password;
 
     $this->viewParams = ['status' => false, 'welcome' => $passwordHash == ''];
     $this->setView('@Hubleto:App:Community:Auth/ResetPassword.twig');

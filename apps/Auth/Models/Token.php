@@ -12,7 +12,7 @@ use Hubleto\Framework\Db\Column\Varchar;
  *
  * @package DefaultModels
  */
-class Token extends Model {
+class Token extends \Hubleto\Framework\Models\Token {
 
   public const int TOKEN_TYPE_USER_FORGOT_PASSWORD = 551155;
   public const int TOKEN_TYPE_USER_REMEMBER_ME = 661166;
@@ -81,17 +81,20 @@ class Token extends Model {
     return $tokenId;
   }
 
-  public function validateToken($token) {
-    $tokenQuery = $this->record->where("token", "=", $token)
-      ->where("valid_to", ">=", date("Y-m-d H:i:s"));
+  public function validateToken($token, int $token_type = 0): int|bool {
+    $tokenQuery = $this->record
+      ->where("token", $token)
+      ->where("type", $token_type)
+      ->where("valid_to", ">", date("Y-m-d H:i:s"))
+    ;
 
-    $tokenData = $tokenQuery->get()->first();
+    $tokenData = $tokenQuery->get()->toArray();
 
-    if (gettype($tokenData) != "object" || get_class($tokenData) != RecordManagers\Token::class) {
+    if (!is_array($tokenData)) {
       throw new \Hubleto\Framework\Exceptions\InvalidToken($token);
     }
 
-    return $tokenData;
+    return $tokenData[0]['id'] ?? false;
   }
 
   public function deleteToken($tokenId) {

@@ -17,8 +17,9 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^mail\/?$/' => Controllers\Mailboxes::class,
-      '/^mail\/accounts\/?$/' => Controllers\Accounts::class,
+      '/^mail\/?$/' => Controllers\Home::class,
+      '/^mail\/accounts\/(?<idAccount>\d+)\/scheduled\/?$/' => Controllers\Account\Scheduled::class,
+      '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
       '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
       '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
       '/^mail\/templates\/?(?<recordId>\d+)?\/?$/' => Controllers\Templates::class,

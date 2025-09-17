@@ -1,0 +1,19 @@
+<h1 class="app-main-title">{{ translate('Mail') }} > {{ translate('Accounts') }}</h1>
+
+<div class="flex gap-2">
+  {% for a in viewParams.accounts %}
+    <div class="card w-1/3">
+      <div class="card-header">{{ a.name }}</div>
+      <div class="card-body list">
+        {% for m in a.MAILBOXES %}
+          <a class="btn btn-list btn-transparent" href="accounts/{{ a.id }}/mailboxes/{{ m.id }}">
+            <span class="text">{{ m.name }}</span>
+          </a>
+        {% endfor %}
+        <a class="btn btn-list btn-transparent" href="mail/accounts/{{ a.id }}/scheduled">
+          <span class="text">Scheduled to send</span>
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+</div>

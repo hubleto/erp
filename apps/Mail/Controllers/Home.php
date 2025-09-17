@@ -2,7 +2,10 @@
 
 namespace Hubleto\App\Community\Mail\Controllers;
 
-class Accounts extends \Hubleto\Erp\Controller
+use Hubleto\App\Community\Mail\Models\Mailbox;
+use Hubleto\App\Community\Mail\Models\Account;
+
+class Home extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
@@ -16,7 +19,11 @@ class Accounts extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@Hubleto:App:Community:Mail/Accounts.twig');
+    $mAccount = $this->getModel(Account::class);
+
+    $this->viewParams['accounts'] = $mAccount->record->prepareReadQuery()->with('MAILBOXES')->get();
+
+    $this->setView('@Hubleto:App:Community:Mail/Home.twig');
   }
 
 }

@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Mail;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -78,7 +78,7 @@ class Loader extends \Hubleto\Framework\App
     string $color = '',
     int $priority = 0
   ): array {
-    $user = $this->getService(AuthProvider::class)->getUser();
+    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 

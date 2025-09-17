@@ -3,7 +3,7 @@
 namespace Hubleto\Erp\Api;
 
 use Exception;
-use Hubleto\App\Community\Auth\AuthProvider;
+
 
 class SaveTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -27,7 +27,7 @@ class SaveTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
       }
 
       $this->config()->save(
-        "user/" . $this->getService(AuthProvider::class)->getUserId() . "/models/" . $model->fullName . "/tableColumns",
+        "user/" . $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId() . "/models/" . $model->fullName . "/tableColumns",
         (string) json_encode($allColumnsConfig)
       );
 

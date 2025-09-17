@@ -5,7 +5,8 @@ namespace Hubleto\App\Community\Usage\Models;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\Framework\Models\User;
+
 
 class Log extends \Hubleto\Erp\Model
 {
@@ -20,7 +21,7 @@ class Log extends \Hubleto\Erp\Model
       'route' => (new Varchar($this, $this->translate('Route')))->setRequired(),
       'params' => (new Varchar($this, $this->translate('Params'))),
       'message' => (new Varchar($this, $this->translate('Message'))),
-      'id_user' => (new Lookup($this, $this->translate('User'), User::class))->setReactComponent('InputUserSelect')->setRequired(),
+      'id_user' => (new Lookup($this, $this->translate('User'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setRequired(),
     ]);
   }
 

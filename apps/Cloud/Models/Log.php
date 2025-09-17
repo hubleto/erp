@@ -6,7 +6,7 @@ use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Decimal;
-use Hubleto\App\Community\Auth\Models\User;
+
 
 class Log extends \Hubleto\Erp\Model
 {

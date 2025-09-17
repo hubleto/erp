@@ -15,7 +15,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Auth\Models\User;
+
 
 class Event extends \Hubleto\Erp\Model
 {
@@ -35,7 +35,7 @@ class Event extends \Hubleto\Erp\Model
 
   public array $relations = [
     'TYPE' => [ self::BELONGS_TO, Type::class, 'id_type', 'id' ],
-    'ORGANIZER' => [ self::BELONGS_TO, User::class, 'id_organizer', 'id' ],
+    'ORGANIZER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_organizer', 'id' ],
   ];
 
   public function describeColumns(): array
@@ -48,7 +48,7 @@ class Event extends \Hubleto\Erp\Model
       'full_description' => (new Text($this, $this->translate('Full description'))),
       'date_start' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date("Y-m-d")),
       'date_end' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date("Y-m-d")),
-      'id_organizer' => (new Lookup($this, $this->translate('Organizer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
+      'id_organizer' => (new Lookup($this, $this->translate('Organizer'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       // 'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
       // 'text_example' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
       // 'decimal_example' => (new Decimal($this, $this->translate('Number')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary')

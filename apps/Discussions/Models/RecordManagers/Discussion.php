@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Discussions\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Discussion extends \Hubleto\Erp\RecordManager

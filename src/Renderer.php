@@ -2,7 +2,7 @@
 
 namespace Hubleto\Erp;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 use Hubleto\App\Community\Auth\Controllers\SignIn;
 use Hubleto\App\Community\Desktop\Controllers\Desktop;
 use Hubleto\App\Community\Settings\PermissionsManager;
@@ -21,19 +21,6 @@ class Renderer extends \Hubleto\Framework\Renderer
 
     $this->twigLoader->addPath(__DIR__ . '/../views', 'hubleto-main');
     $this->twigLoader->addPath(__DIR__ . '/../apps', 'app');
-
-    $this->twig->addFunction(new \Twig\TwigFunction(
-      'hasPermission',
-      function (string $permission, array $idUserRoles = []) {
-        return $this->getService(PermissionsManager::class)->granted($permission, $idUserRoles);
-      }
-    ));
-    $this->twig->addFunction(new \Twig\TwigFunction(
-      'hasRole',
-      function (int|string $role) {
-        return $this->getService(PermissionsManager::class)->hasRole($role);
-      }
-    ));
 
     if (is_dir($this->env()->projectFolder . '/src/views')) {
       $this->twigLoader->addPath($this->env()->projectFolder . '/src/views', 'project');
@@ -66,7 +53,7 @@ class Renderer extends \Hubleto\Framework\Renderer
       $permissionManager = $this->getService(PermissionsManager::class);
 
       /* @var AuthProvider $authProvider */
-      $authProvider = $this->getService(AuthProvider::class);
+      $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
 
       // Find-out which route is used for rendering
 
@@ -123,7 +110,7 @@ class Renderer extends \Hubleto\Framework\Renderer
       }
 
       if ($controllerObject->requiresAuthenticatedUser) {
-        if (!$this->getService(AuthProvider::class)?->isUserInSession()) {
+        if (!$this->getService(\Hubleto\Framework\AuthProvider::class)?->isUserInSession()) {
           $controllerObject = $this->getController(SignIn::class);
           $permissionManager->setPermission($controllerObject->permission);
         }
@@ -172,7 +159,7 @@ class Renderer extends \Hubleto\Framework\Renderer
 
         $contentParams = [
           'hubleto' => $this,
-          'user' => $this->getService(AuthProvider::class)->getUser(),
+          'user' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser(),
           'config' => $this->config()->get(),
           // 'routeUrl' => $router->getRoute(),
           // 'routeParams' => $this->router()->getRouteVars(),
@@ -224,7 +211,7 @@ class Renderer extends \Hubleto\Framework\Renderer
       return $this->renderFatal('Controller not found: ' . $e->getMessage(), false);
     } catch (NotEnoughPermissionsException $e) {
       $message = $e->getMessage();
-      if ($this->getService(AuthProvider::class)->isUserInSession()) {
+      if ($this->getService(\Hubleto\Framework\AuthProvider::class)->isUserInSession()) {
         $message .= " Hint: Sign out at {$this->env()->projectUrl}?sign-out and sign in again or check your permissions.";
       }
       return $this->renderFatal($message, false);

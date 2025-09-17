@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Customers\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Deals\Models\RecordManagers\Deal;
 use Hubleto\App\Community\Leads\Models\RecordManagers\Lead;

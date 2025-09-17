@@ -2,7 +2,9 @@
 
 namespace Hubleto\Erp;
 
+
 use Hubleto\App\Community\Auth\AuthProvider;
+use Hubleto\App\Community\Auth\Controllers\SignIn;
 use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\DependencyInjection;
 
@@ -25,8 +27,13 @@ class Loader extends \Hubleto\Framework\Loader
 
       \Hubleto\Framework\Controllers\NotFound::class => Controllers\NotFound::class,
       \Hubleto\Framework\Controllers\Desktop::class => \Hubleto\App\Community\Desktop\Controllers\Desktop::class,
+    ]);
 
-
+    // Todo: this should be part of the app itself
+    DependencyInjection::setServiceProviders([
+      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
+      \Hubleto\Framework\Controllers\SignIn::class => SignIn::class,
+      \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Auth\Models\User::class,
     ]);
 
     // run hook

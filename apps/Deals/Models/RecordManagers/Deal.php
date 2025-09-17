@@ -2,8 +2,8 @@
 
 namespace Hubleto\App\Community\Deals\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\AuthProvider;
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+
+
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
@@ -163,9 +163,9 @@ class Deal extends \Hubleto\Erp\RecordManager
 
     if (isset($filters["fDealOwnership"])) {
       switch ($filters["fDealOwnership"]) {
-        case 1: $query = $query->where("deals.id_owner", $main->getService(AuthProvider::class)->getUserId());
+        case 1: $query = $query->where("deals.id_owner", $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
           break;
-        case 2: $query = $query->where("deals.id_manager", $main->getService(AuthProvider::class)->getUserId());
+        case 2: $query = $query->where("deals.id_manager", $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
           break;
       }
     }

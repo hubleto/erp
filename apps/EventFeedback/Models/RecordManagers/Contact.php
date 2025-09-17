@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\EventFeedback\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contact extends \Hubleto\Erp\RecordManager

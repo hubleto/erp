@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Inventory\Models;
 
-use Hubleto\App\Community\Auth\Models\User;
+
 use Hubleto\App\Community\Warehouses\Models\Location;
 use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -21,7 +21,7 @@ class Inventory extends \Hubleto\Erp\Model
     'PRODUCT' => [ self::HAS_ONE, Product::class, 'id_product', 'id' ],
     'STATUS' => [ self::HAS_ONE, Status::class, 'id_status', 'id' ],
     'LOCATION' => [ self::HAS_ONE, Location::class, 'id_location', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id' ],
   ];
 
   public function describeColumns(): array

@@ -2,8 +2,8 @@
 
 namespace Hubleto\App\Community\Leads\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\AuthProvider;
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+
+
 use Hubleto\App\Community\Campaigns\Models\RecordManagers\Campaign;
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
@@ -151,9 +151,9 @@ class Lead extends \Hubleto\Erp\RecordManager
 
     if (isset($filters["fLeadOwnership"])) {
       switch ($filters["fLeadOwnership"]) {
-        case 1: $query = $query->where("leads.id_owner", $main->getService(AuthProvider::class)->getUserId());
+        case 1: $query = $query->where("leads.id_owner", $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
           break;
-        case 2: $query = $query->where("leads.id_manager", $main->getService(AuthProvider::class)->getUserId());
+        case 2: $query = $query->where("leads.id_manager", $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
           break;
       }
     }

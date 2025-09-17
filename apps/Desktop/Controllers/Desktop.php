@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Desktop\Controllers;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 use Hubleto\App\Community\Settings\PermissionsManager;
 
 class Desktop extends \Hubleto\Erp\Controller
@@ -84,7 +84,7 @@ class Desktop extends \Hubleto\Erp\Controller
     }
 
     /** @var AuthProvider $authProvider */
-    $authProvider = $this->getService(AuthProvider::class);
+    $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
     $this->viewParams['user'] = $authProvider->getUserFromSession();
 
     $this->setView('@Hubleto:App:Community:Desktop/Desktop.twig');

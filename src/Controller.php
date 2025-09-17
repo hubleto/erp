@@ -2,7 +2,7 @@
 
 namespace Hubleto\Erp;
 
-use Hubleto\App\Community\Auth\AuthProvider;
+
 use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 use Hubleto\Framework\Config;
@@ -93,8 +93,8 @@ class Controller extends \Hubleto\Framework\Controller
 
     $logFolder = $this->config()->getAsString('logFolder');
 
-    if ($this->getService(AuthProvider::class)->isUserInSession()) {
-      $user = $this->getService(AuthProvider::class)->getUserFromSession();
+    if ($this->getService(\Hubleto\Framework\AuthProvider::class)->isUserInSession()) {
+      $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserFromSession();
 
       if (!empty($logFolder) && is_dir($logFolder)) {
         if (!is_dir($logFolder . '/usage')) {
@@ -121,7 +121,7 @@ class Controller extends \Hubleto\Framework\Controller
     $help = $this->getService(\Hubleto\App\Community\Help\Loader::class);
     $contextHelpUrls = $help->contextHelp[$this->router()->getRoute()] ?? '';
 
-    $user = $this->getService(AuthProvider::class)->getUser();
+    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
 
     if (isset($contextHelpUrls[$user['language']])) {
       $contextHelpUrl = $contextHelpUrls[$user['language']];

@@ -2,8 +2,8 @@
 
 namespace Hubleto\App\Community\Calendar\Models;
 
-use Hubleto\App\Community\Auth\AuthProvider;
-use Hubleto\App\Community\Auth\Models\User;
+
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
@@ -17,13 +17,13 @@ class SharedCalendar extends \Hubleto\Erp\Model
   public string $recordManagerClass = RecordManagers\SharedCalendar::class;
 
   public array $relations = [
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
+    'OWNER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_owner', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(AuthProvider::class)->getUserId())->setReadonly(),
+      'id_owner' => (new Lookup($this, $this->translate('Created by'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setReadonly(),
       'calendar' => (new Varchar($this, $this->translate('Calendar ID')))->setRequired()->setReadonly(),
       'share_key' => (new Varchar($this, $this->translate('Share key')))->setReadonly()->setHidden(),
       'view_details' => (new Boolean($this, $this->translate('Display details')))->setDefaultValue(true),

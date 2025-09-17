@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Auth
 appType: community
-sidebarGroup: maintenance
+sidebarGroup: ~
 rootUrlSlug: auth
 name: Auth
 icon: fas fa-user

@@ -9,6 +9,7 @@ use Hubleto\App\Community\Settings\Models\UserRole;
 use Hubleto\Erp\Exceptions;
 use Hubleto\Erp\Interfaces;
 use Hubleto\Framework\Core;
+use Hubleto\Framework\Exceptions\NotEnoughPermissionsException;
 use Hubleto\Framework\Helper;
 use Hubleto\Framework\Model;
 
@@ -221,7 +222,7 @@ class PermissionsManager extends Core implements Interfaces\PermissionsManagerIn
   public function check(string $permission): void
   {
     if (!$this->granted($permission) && !$this->granted(str_replace('\\', '/', $permission))) {
-      throw new Exceptions\NotEnoughPermissionsException("Not enough permissions ({$permission}).");
+      throw new NotEnoughPermissionsException("Not enough permissions ({$permission}).");
     }
   }
 

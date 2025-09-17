@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Orders\Controllers\Api;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Orders\Models\Order;
 use Hubleto\App\Community\Orders\Models\OrderActivity;
 

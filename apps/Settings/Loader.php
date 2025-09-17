@@ -16,6 +16,8 @@ class Loader extends \Hubleto\Framework\App
   {
     parent::init();
 
+    $this->getService(PermissionsManager::class)->init();
+
     $this->router()->get([
       '/^settings\/?$/' => Controllers\Dashboard::class,
       '/^settings\/my-account\/?$/' => Controllers\MyAccount::class,
@@ -429,8 +431,6 @@ class Loader extends \Hubleto\Framework\App
         'is_default' => true,
       ])['id'];
 
-    } else if ($round == 2) {
-      $this->getService(PermissionsManager::class)->init();
     }
   }
 

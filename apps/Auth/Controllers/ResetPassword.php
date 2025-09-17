@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Auth\Controllers;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\Framework\Models\Token;
 

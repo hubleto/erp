@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Campaigns\Controllers\Api;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Campaigns\Models\Campaign;
 use Hubleto\App\Community\Campaigns\Models\CampaignContact;
 use Hubleto\App\Community\Mail\Models\Mail;

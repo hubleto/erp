@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Deals\Controllers\Boards;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Deals\Models\Deal;
 
 class DealValueByResult extends \Hubleto\Erp\Controller

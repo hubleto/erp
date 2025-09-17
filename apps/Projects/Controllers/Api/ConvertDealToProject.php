@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Projects\Controllers\Api;
 
 use Exception;
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Projects\Models\Project;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Workflow\Models\Workflow;

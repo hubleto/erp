@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Leads\Controllers\Boards;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Leads\Models\Lead;
 
 class LeadValueByScore extends \Hubleto\Erp\Controller

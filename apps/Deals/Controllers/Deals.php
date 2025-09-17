@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Deals\Controllers;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Deals\Models\Deal;
 
 class Deals extends \Hubleto\Erp\Controller

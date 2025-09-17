@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Invoices\Models;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;

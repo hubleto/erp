@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Notifications\Crons;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class DailyDigest extends \Hubleto\Erp\Cron
 {
   public string $schedulingPattern = '05 06 * * *';

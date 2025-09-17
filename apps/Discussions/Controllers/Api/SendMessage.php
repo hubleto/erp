@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Discussions\Controllers\Api;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class SendMessage extends \Hubleto\Erp\Controllers\ApiController
 {
   public function response(): array

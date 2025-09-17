@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Leads\Controllers\Api;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Leads\Models\Lead;
 use Hubleto\App\Community\Leads\Models\LeadActivity;
 

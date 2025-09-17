@@ -172,7 +172,7 @@ class Lead extends \Hubleto\Erp\Model
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
-        "canDelete" => $this->permissionsManager()->granted($this->fullName . ':Delete')
+        "canDelete" => $this->getService(PermissionsManager::class)->granted($this->fullName . ':Delete')
       ];
     } else {
       $description->ui['addButtonText'] = $this->translate('Add lead');

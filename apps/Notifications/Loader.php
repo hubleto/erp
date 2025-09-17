@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Notifications;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class Loader extends \Hubleto\Framework\App
 {
 

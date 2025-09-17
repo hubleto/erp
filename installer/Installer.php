@@ -2,6 +2,7 @@
 
 namespace Hubleto\Erp\Installer;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Settings\Models\UserRole;
 use Hubleto\App\Community\Settings\Models\UserHasRole;

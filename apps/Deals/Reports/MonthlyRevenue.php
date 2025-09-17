@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Deals\Reports;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Deals\Models\Deal;
 
 class MonthlyRevenue extends \Hubleto\Erp\Report

@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Cloud;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class Loader extends \Hubleto\Framework\App
 {
   public bool $canBeDisabled = false;

@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Usage;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class Logger extends \Hubleto\Framework\Core
 {
 

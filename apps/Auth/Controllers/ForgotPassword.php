@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Auth\Controllers;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class ForgotPassword extends \Hubleto\Erp\Controller
 {
   public bool $requiresAuthenticatedUser = false;

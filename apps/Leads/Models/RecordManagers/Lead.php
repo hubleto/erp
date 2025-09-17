@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Leads\Models\RecordManagers;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Hubleto\App\Community\Campaigns\Models\RecordManagers\Campaign;
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;

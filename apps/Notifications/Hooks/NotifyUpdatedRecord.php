@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Notifications\Hooks;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
 {
 

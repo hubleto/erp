@@ -2,6 +2,7 @@
 
 namespace Hubleto\Erp;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\DependencyInjection;
 
@@ -31,10 +32,6 @@ class Loader extends \Hubleto\Framework\Loader
     // run hook
     $this->hookManager()->run('core:bootstrap-end', [$this]);
 
-  }
-
-  public function permissionsManager() {
-    return $this->getService(PermissionsManager::class);
   }
 
   /**

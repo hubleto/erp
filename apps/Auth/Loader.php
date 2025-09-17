@@ -18,17 +18,19 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^api\/?$/' => Controllers\Home::class,
+//      '/^api\/?$/' => Controllers\Home::class,
+      '/^sign-in$/' => Controllers\SignIn::class,
       '/^reset-password$/' => Controllers\ResetPassword::class,
       '/^forgot-password$/' => Controllers\ForgotPassword::class,
     ]);
 
     DependencyInjection::setServiceProviders([
-      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
-      \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
-      \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Settings\Models\User::class,
+//      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
+//      \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
+//      \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Settings\Models\User::class,
     ]);
 
+    $this->getService(AuthProvider::class)->init();
   }
 
   // installTables

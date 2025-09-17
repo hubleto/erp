@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Deals\Controllers\Api;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
 {
   public function response(): array

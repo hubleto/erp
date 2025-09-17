@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Deals\Models;
 
 use Hubleto\App\Community\Auth\AuthProvider;
+use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\DateTime;
@@ -168,7 +169,7 @@ class Deal extends \Hubleto\Erp\Model
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
-        "canDelete" => $this->permissionsManager()->granted($this->fullName . ':Delete')
+        "canDelete" => $this->getService(PermissionsManager::class)->granted($this->fullName . ':Delete')
       ];
     } else {
       $description->ui['addButtonText'] = $this->translate('Add Deal');

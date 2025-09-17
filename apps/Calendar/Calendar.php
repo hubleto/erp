@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Calendar;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Calendar\Models\Activity;
 
 class Calendar extends \Hubleto\Erp\Calendar

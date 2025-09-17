@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Deals\Controllers\Api;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Deals\Models\DealActivity;
 

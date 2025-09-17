@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Workflow\Hooks;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Workflow\Models\WorkflowHistory;
 
 class SaveWorkflowHistory extends \Hubleto\Erp\Hook

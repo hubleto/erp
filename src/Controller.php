@@ -2,6 +2,8 @@
 
 namespace Hubleto\Erp;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 use Hubleto\Framework\Config;
 /**
@@ -37,7 +39,7 @@ class Controller extends \Hubleto\Framework\Controller
       isset($this->hubletoApp)
       && $this->requiresAuthenticatedUser
       && !$this->permittedForAllUsers
-      && !$this->permissionsManager()->isAppPermittedForActiveUser($this->hubletoApp)
+      && !$this->getService(PermissionsManager::class)->isAppPermittedForActiveUser($this->hubletoApp)
     ) {
       return false;
     }

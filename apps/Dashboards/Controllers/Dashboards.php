@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Dashboards\Controllers;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class Dashboards extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array

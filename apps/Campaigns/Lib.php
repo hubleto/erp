@@ -18,7 +18,7 @@ class Lib extends \Hubleto\Framework\Core
    * @return string
    * 
    */
-  public static function getMailPreview(array $campaign, array $contact): string
+  public static function getMailPreview(array $campaign, array $recipient): string
   {
 
     $bodyHtml = Lib::addUtmVariablesToEmailLinks(
@@ -30,17 +30,14 @@ class Lib extends \Hubleto\Framework\Core
     );
 
     $bodyHtml = Lib::replaceVariables($bodyHtml, [
-      'CONTACT:salutation' => $contact['salutation'] ?? '',
-      'CONTACT:title_before' => $contact['title_before'] ?? '',
-      'CONTACT:first_name' => $contact['first_name'] ?? '',
-      'CONTACT:middle_name' => $contact['middle_name'] ?? '',
-      'CONTACT:last_name' => $contact['last_name'] ?? '',
-      'CONTACT:title_after' => $contact['title_after'] ?? '',
+      'RECIPIENT:salutation' => $recipient['salutation'] ?? '',
+      'RECIPIENT:first_name' => $recipient['first_name'] ?? '',
+      'RECIPIENT:last_name' => $recipient['last_name'] ?? '',
     ]);
 
     $bodyHtml = Lib::routeLinksThroughCampaignTracker(
       $campaign,
-      $contact,
+      $recipient,
       $bodyHtml,
     );
 
@@ -106,17 +103,17 @@ class Lib extends \Hubleto\Framework\Core
    * @return string
    * 
    */
-  public static function routeLinksThroughCampaignTracker(array $campaign, array $contact, string $body): string
+  public static function routeLinksThroughCampaignTracker(array $campaign, array $recipient, string $body): string
   {
     $trackerUrl = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/click-tracker';
 
     $body = preg_replace_callback(
       '/(<a\s*)href="([^"]*)"/i',
-      function($m) use ($trackerUrl, $campaign, $contact) {
+      function($m) use ($trackerUrl, $campaign, $recipient) {
         return 
           $m[1] . 'href="' . $trackerUrl
           . '?cuid=' . ($campaign['uid'] ?? '')
-          . '&cnid=' . ($contact['id'] ?? '')
+          . '&rcid=' . ($recipient['id'] ?? '')
           . '&url=' . urlencode($m[2])
           . '"'
         ;
@@ -126,11 +123,11 @@ class Lib extends \Hubleto\Framework\Core
 
     $body = preg_replace_callback(
       '/(<a\s*)href=\'([^\']*)\'/i',
-      function($m) use ($trackerUrl, $campaign, $contact) {
+      function($m) use ($trackerUrl, $campaign, $recipient) {
         return 
           $m[1] . 'href=\'' . $trackerUrl
           . '?cuid=' . ($campaign['uid'] ?? '')
-          . '&cnid=' . ($contact['id'] ?? '')
+          . '&rcid=' . ($recipient['id'] ?? '')
           . '&url=' . urlencode($m[2])
           . '\''
         ;

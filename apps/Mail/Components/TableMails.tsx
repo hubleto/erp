@@ -5,8 +5,10 @@ import { FormProps } from '@hubleto/react-ui/core/Form';
 import FormMail from './FormMail';
 
 interface TableMailsProps extends TableProps {
+  idAccount?: number,
   idMailbox?: number,
   mailboxName?: string,
+  showOnlyScheduledToSend?: boolean,
   showOnlyDrafts?: boolean,
   showOnlyTemplates?: boolean,
 }
@@ -39,7 +41,9 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
   getEndpointParams() {
     return {
       ...super.getEndpointParams(),
+      idAccount: this.props.idAccount,
       idMailbox: this.props.idMailbox,
+      showOnlyScheduledToSend: this.props.showOnlyScheduledToSend,
       showOnlyDrafts: this.props.showOnlyDrafts,
       showOnlyTemplates: this.props.showOnlyTemplates,
     }

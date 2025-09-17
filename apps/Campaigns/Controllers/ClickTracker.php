@@ -13,7 +13,7 @@ class ClickTracker extends \Hubleto\Erp\Controller
   public function render(): string
   {
     $campaignUid = $this->router()->urlParamAsString('cuid');
-    $contactId = $this->router()->urlParamAsInteger('cnid');
+    $idRecipient = $this->router()->urlParamAsInteger('rcid');
     $url = $this->router()->urlParamAsString('url');
 
     /** @var Campaign */
@@ -27,7 +27,7 @@ class ClickTracker extends \Hubleto\Erp\Controller
     if ($campaign->id) {
       $mClick->record->recordCreate([
         'id_campaign' => $campaign->id,
-        'id_contact' => $contactId,
+        'id_recipient' => $idRecipient,
         'url' => $url,
         'datetime_clicked' => date('Y-m-d H:i:s'),
       ]);

@@ -6,7 +6,7 @@ use Hubleto\App\Community\Mail\Models\Mail;
 
 class SendMails extends \Hubleto\Erp\Cron
 {
-  public string $schedulingPattern = '* * * * *';
+  public string $schedulingPattern = '*/5 * * * *';
 
 
   public function run(): void
@@ -28,6 +28,7 @@ class SendMails extends \Hubleto\Erp\Cron
       try {
         $mMail->send($mail->toArray());
         $this->logger()->info('Email `' . $mail['subject'] . '` to `' . $mail['to'] . '` sent successfully.');
+        sleep(30); // waiting 30 sec to avoid spam blacklisting
       } catch (\Exception $e) {
         $this->logger()->error('Failed to send email `' . $mail['subject'] . '` to `' . $mail['to'] . '`: ' . $e->getMessage());
       }

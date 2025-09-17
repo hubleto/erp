@@ -24,50 +24,46 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
       $campaign = $mCampaign->record->prepareReadQuery()
         ->where('campaigns.id', $idCampaign)
         ->with('MAIL_TEMPLATE')
-        ->with('RECIPIENTS.CONTACT.VALUES')
+        ->with('RECIPIENTS')
         ->first()
       ;
 
+      if (!$campaign->id_mail_account) throw new \Exception('Campaign has not configured mail account to send emails from.');
+      if (!$campaign->id_mail_template) throw new \Exception('Campaign has not configured mail template.');
       if (!$campaign->is_approved) throw new \Exception('Campaign is not approved.');
 
       $sec = 0;
 
       foreach ($campaign->RECIPIENTS as $recipient) {
 
-        $contact = $recipient->CONTACT;
         $bodyHtml = Lib::getMailPreview(
           $campaign->toArray(),
-          $contact->toArray(),
+          $recipient->toArray(),
         );
 
-        foreach ($contact->VALUES as $value) {
+        if (!filter_var($recipient->email, FILTER_VALIDATE_EMAIL)) continue;
 
-          if (!filter_var($value->value, FILTER_VALIDATE_EMAIL)) continue;
+        $mailData = [
+          'subject' => $campaign->MAIL_TEMPLATE->subject,
+          'body_html' => $bodyHtml,
+          'id_account' => $campaign->id_mail_account,
+          'from' => $campaign->MAIL_ACCOUNT->sender_email ?? '',
+          'to' => $recipient->email,
+          'datetime_created' => date('Y-m-d H:i:s'),
+          'datetime_scheduled_to_send' => date('Y-m-d H:i:s', strtotime("+{$sec} seconds")),
+        ];
 
-          $mailData = [
-            'subject' => $campaign->MAIL_TEMPLATE->subject,
-            'body_html' => $bodyHtml,
-            'id_account' => $campaign->id_mail_account,
-            'from' => $campaign->MAIL_ACCOUNT->sender_email ?? '',
-            'to' => $value->value,
-            'datetime_created' => date('Y-m-d H:i:s'),
-            'datetime_scheduled_to_send' => date('Y-m-d H:i:s', strtotime("+{$sec} seconds")),
-          ];
+        $sec += 10;
 
-          $sec += 10;
+        if ($recipient->id_mail > 0) {
+          $mMail->record->where('id', $recipient->id_mail)->update($mailData);
+        } else {
+          $mail = $mMail->record->recordCreate($mailData);
 
-          if ($recipient->id_mail > 0) {
-            $mMail->record->where('id', $recipient->id_mail)->update($mailData);
-          } else {
-            $mail = $mMail->record->recordCreate($mailData);
-
-            $mRecipient->record
-              ->where('id_campaign', $idCampaign)
-              ->where('id_contact', $contact->id)
-              ->update(['id_mail' => (int) $mail['id']])
-            ;
-          }
-
+          $mRecipient->record
+            ->where('id', $recipient->id)
+            ->update(['id_mail' => (int) $mail['id']])
+          ;
         }
       }
 

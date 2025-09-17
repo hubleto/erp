@@ -21,31 +21,39 @@ class Recipient extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired(),
+      'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired()->setReadonly()->setProperty('defaultVisibility', true),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
-      'email' => (new Varchar($this, $this->translate('Recipient\'s email'))),
-      'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class)),
+      'email' => (new Varchar($this, $this->translate('Email')))->setProperty('defaultVisibility', true),
+      'first_name' => (new Varchar($this, $this->translate('First name')))->setProperty('defaultVisibility', true),
+      'last_name' => (new Varchar($this, $this->translate('Last name')))->setProperty('defaultVisibility', true),
+      'salutation' => (new Varchar($this, $this->translate('Salutation')))->setProperty('defaultVisibility', true),
+      'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class))->setReadonly()->setProperty('defaultVisibility', true),
     ]);
   }
 
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Add recipient';
+    $description->ui['addButtonText'] = 'Add recipient';
+    $description->ui['showHeader'] = true;
+    $description->ui['showColumnSearch'] = false;
+    $description->ui['showMoreActionsButton'] = false;
+    $description->ui['showFulltextSearch'] = true;
+    $description->ui['showFooter'] = false;
+
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
-        $description->ui['showHeader'] = false;
-        $description->ui['showColumnSearch'] = false;
-        $description->ui['showFulltextSearch'] = false;
-        $description->ui['showFooter'] = false;
+        $description->ui['moreActions'] = null;
         $description->columns = [
-          'id_contact' => $description->columns['id_contact'],
           'email' => $description->columns['email'],
+          'first_name' => $description->columns['first_name'],
+          'last_name' => $description->columns['last_name'],
         ];
       break;
       default:
       break;
     }
+
     return $description;
   }
 

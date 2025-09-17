@@ -35,7 +35,7 @@ class Recipient extends \Hubleto\Erp\RecordManager
 
     $main = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->urlParamAsInteger("idCampaign") > 0) {
+    if ($main->router()->isUrlParam("idCampaign")) {
       $query = $query->where($this->table . '.id_campaign', $main->router()->urlParamAsInteger("idCampaign"));
     }
 

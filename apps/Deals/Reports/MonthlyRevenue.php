@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Deals\Reports;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Deals\Models\Deal;
 
 class MonthlyRevenue extends \Hubleto\Erp\Report
@@ -23,7 +24,7 @@ class MonthlyRevenue extends \Hubleto\Erp\Report
     ];
 
     $config["searchGroups"] = [
-      ["fieldName" => "id_owner", "field" => $model->getColumn("id_owner"), "option" => 1,  "value" => $this->authProvider()->getUser()["id"],],
+      ["fieldName" => "id_owner", "field" => $model->getColumn("id_owner"), "option" => 1,  "value" => $this->getService(AuthProvider::class)->getUser()["id"],],
       ["fieldName" => "date_created", "field" => $model->getColumn("date_created"), "option" => 6,  "value" => date("Y-m-01"), "value2" => date('Y-m-t')],
     ];
 

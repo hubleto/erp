@@ -1,16 +1,21 @@
 <?php declare(strict_types=1);
 
-namespace Hubleto\Erp\Controllers;
+namespace Hubleto\App\Community\Auth\Controllers;
+
+use Hubleto\App\Community\Auth\AuthProvider;
 
 class SignIn extends \Hubleto\Erp\Controller
 {
   public bool $requiresAuthenticatedUser = false;
   public bool $hideDefaultDesktop = true;
-  public string $translationContext = 'Hubleto\\Erp\\Loader::Controllers\\SignIn';
 
   public function prepareView(): void
   {
     parent::prepareView();
+
+    /* @var AuthProvider $authProvider */
+    $authProvider = $this->getService(AuthProvider::class);
+
     $incorrectLogin = $_COOKIE['incorrectLogin'] ?? '';
     if (isset($_COOKIE['incorrectLogin'])) {
       setcookie('incorrectLogin', '', time() - 3600);
@@ -21,7 +26,16 @@ class SignIn extends \Hubleto\Erp\Controller
       'login' => $this->router()->urlParamAsString('user'),
     ];
 
-    $this->setView('@hubleto-main/SignIn.twig');
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $authProvider->auth();
+    }
+
+    if ($authProvider->isUserInSession()) {
+      $this->router()->redirectTo('');
+      return;
+    }
+
+    $this->setView('@Hubleto:App:Community:Auth/SignIn.twig');
   }
 
 }

@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Tasks\Models;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -16,7 +17,7 @@ use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Contacts\Models\Contact;
@@ -45,7 +46,7 @@ class Todo extends \Hubleto\Erp\Model
       'todo' => (new Varchar($this, $this->translate('To do')))->setProperty('defaultVisibility', true),
       'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setProperty('defaultVisibility', true)->setRequired(),
       'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)
-        ->setDefaultValue($this->authProvider()->getUserId())
+        ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
       ,
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),

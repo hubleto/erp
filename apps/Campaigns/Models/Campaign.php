@@ -2,9 +2,10 @@
 
 namespace Hubleto\App\Community\Campaigns\Models;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Campaigns\Lib;
 
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Mail\Models\Template;
 use Hubleto\App\Community\Mail\Models\Account;
 use Hubleto\Framework\Db\Column\Color;
@@ -61,7 +62,7 @@ class Campaign extends \Hubleto\Erp\Model
       ,
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId())->setProperty('defaultVisibility', true),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date('Y-m-d H:i:s')),

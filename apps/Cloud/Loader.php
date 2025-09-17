@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Cloud;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class Loader extends \Hubleto\Framework\App
 {
   public bool $canBeDisabled = false;
@@ -46,7 +48,7 @@ class Loader extends \Hubleto\Framework\App
 
   public function onBeforeRender(): void
   {
-    if ($this->authProvider()->getUserId() > 0) {
+    if ($this->getService(AuthProvider::class)->getUserId() > 0) {
       if (!str_starts_with($this->router()->getRoute(), 'cloud')) {
         if (!$this->config()->getAsBool('legalDocumentsAccepted')) {
           $this->router()->redirectTo('cloud');

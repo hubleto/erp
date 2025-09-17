@@ -6,17 +6,18 @@ use Hubleto\App\Community\Settings\Models\Country;
 use Hubleto\App\Community\Settings\Models\Permission;
 use Hubleto\App\Community\Settings\Models\Company;
 use Hubleto\App\Community\Settings\Models\RolePermission;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Settings\Models\UserRole;
 use Hubleto\App\Community\Settings\Models\UserHasRole;
 use Hubleto\App\Community\Settings\Models\Tag;
+use Hubleto\App\Community\Settings\PermissionsManager;
 
 class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
 
-    $this->permissionsManager()->DANGEROUS__grantAllPermissions();
+    $this->getService(PermissionsManager::class)->DANGEROUS__grantAllPermissions();
 
     \Hubleto\Terminal::cyan("Generating demo data...\n");
 
@@ -191,7 +192,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 
-    $this->permissionsManager()->revokeGrantAllPermissions();
+    $this->getService(PermissionsManager::class)->revokeGrantAllPermissions();
   }
 
   public function generateInvoiceProfiles(): void

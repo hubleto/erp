@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Mail;
 
+use Hubleto\App\Community\Auth\AuthProvider;
+
 class Loader extends \Hubleto\Framework\App
 {
   public array $templateVariables = [];
@@ -76,11 +78,11 @@ class Loader extends \Hubleto\Framework\App
     string $color = '',
     int $priority = 0
   ): array {
-    $user = $this->authProvider()->getUser();
+    $user = $this->getService(AuthProvider::class)->getUser();
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 
-    $mUser = $this->getModel(\Hubleto\App\Community\Settings\Models\User::class);
+    $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
     $users = $mUser->record->get()->toArray();
     $usersByEmail = [];
     $emailsByUserId = [];

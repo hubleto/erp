@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Tasks\Models;
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -16,7 +17,7 @@ use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Contacts\Models\Contact;
@@ -54,10 +55,10 @@ class Task extends \Hubleto\Erp\Model
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', false),
       'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->authProvider()->getUserId())
+        ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
       ,
       'id_tester' => (new Lookup($this, $this->translate('Tester'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->authProvider()->getUserId())
+        ->setDefaultValue($this->getService(AuthProvider::class)->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'hours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setProperty('defaultVisibility', true)->setUnit('h')->setDecimals(2),

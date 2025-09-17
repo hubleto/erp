@@ -2,8 +2,7 @@
 
 namespace Hubleto\App\Community\Calendar\Models\RecordManagers;
 
-use Hubleto\App\Community\Settings\Models\RecordManagers\ActivityType;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SharedCalendar extends \Hubleto\Erp\RecordManager

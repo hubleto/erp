@@ -16,6 +16,10 @@ class Account extends \Hubleto\Erp\Model
   public string $recordManagerClass = RecordManagers\Account::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
+  public array $relations = [
+    'MAILBOXES' => [ self::HAS_MANY, Mailbox::class, 'id_account', 'id'],
+  ];
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [

@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Worksheets\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class ActivityType extends \Hubleto\Erp\RecordManager
 {

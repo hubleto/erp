@@ -2,7 +2,6 @@
 
 namespace Hubleto\App\Community\Leads\Models;
 
-use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Date;
@@ -17,7 +16,7 @@ use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Settings\Models\Setting;
-use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Settings\Models\User;
 use Hubleto\App\Community\Settings\Models\Team;
 use Hubleto\Framework\Helper;
 use Hubleto\App\Community\Workflow\Models\Workflow;
@@ -97,8 +96,8 @@ class Lead extends \Hubleto\Erp\Model
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setProperty('defaultVisibility', true)->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(AuthProvider::class)->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId()),
       'id_team' => (new Lookup($this, $this->translate('Team'), Team::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
@@ -172,7 +171,7 @@ class Lead extends \Hubleto\Erp\Model
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
-        "canDelete" => $this->getService(PermissionsManager::class)->granted($this->fullName . ':Delete')
+        "canDelete" => $this->permissionsManager()->granted($this->fullName . ':Delete')
       ];
     } else {
       $description->ui['addButtonText'] = $this->translate('Add lead');

@@ -2,16 +2,17 @@
 
 namespace Hubleto\App\Community\Invoices\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
-use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
-use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
+use \Illuminate\Database\Eloquent\Relations\HasOne;
+use \Illuminate\Database\Eloquent\Relations\HasMany;
+use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
-use Hubleto\App\Community\Settings\Models\RecordManagers\InvoiceProfile;
+use \Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
+use \Hubleto\App\Community\Settings\Models\RecordManagers\User;
+use \Hubleto\App\Community\Settings\Models\RecordManagers\InvoiceProfile;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
 
 class Invoice extends \Hubleto\Erp\RecordManager {
   public $table = 'invoices';

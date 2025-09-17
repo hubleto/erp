@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Projects\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Phase extends \Hubleto\Erp\RecordManager
 {

@@ -2,18 +2,21 @@
 
 namespace Hubleto\App\Community\Leads\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\AuthProvider;
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
-use Hubleto\App\Community\Campaigns\Models\RecordManagers\Campaign;
-use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
-use Hubleto\App\Community\Deals\Models\RecordManagers\Deal;
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Team;
+use Hubleto\App\Community\Campaigns\Models\RecordManagers\Campaign;
+use Hubleto\App\Community\Deals\Models\RecordManagers\Deal;
+use Hubleto\App\Community\Deals\Models\RecordManagers\DealLead;
+use Hubleto\App\Community\Leads\Models\RecordManagers\LeadHistory;
+use Hubleto\App\Community\Leads\Models\RecordManagers\LeadTag;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -151,9 +154,9 @@ class Lead extends \Hubleto\Erp\RecordManager
 
     if (isset($filters["fLeadOwnership"])) {
       switch ($filters["fLeadOwnership"]) {
-        case 1: $query = $query->where("leads.id_owner", $main->getService(AuthProvider::class)->getUserId());
+        case 1: $query = $query->where("leads.id_owner", $main->authProvider()->getUserId());
           break;
-        case 2: $query = $query->where("leads.id_manager", $main->getService(AuthProvider::class)->getUserId());
+        case 2: $query = $query->where("leads.id_manager", $main->authProvider()->getUserId());
           break;
       }
     }

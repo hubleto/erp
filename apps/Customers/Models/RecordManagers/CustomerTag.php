@@ -2,8 +2,10 @@
 
 namespace Hubleto\App\Community\Customers\Models\RecordManagers;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Hubleto\App\Community\Customers\Models\RecordManagers\Tag;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CustomerTag extends \Hubleto\Erp\RecordManager

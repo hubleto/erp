@@ -2,7 +2,6 @@
 
 namespace Hubleto\App\Community\Deals\Controllers\Boards;
 
-use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Deals\Models\Deal;
 
 class DealValueByResult extends \Hubleto\Erp\Controller
@@ -18,7 +17,7 @@ class DealValueByResult extends \Hubleto\Erp\Controller
     $deals = $mDeal->record->prepareReadQuery()
       ->selectRaw("`{$mDeal->table}`.`deal_result`, SUM(`{$mDeal->table}`.`price_excl_vat`) as price")
       ->where($mDeal->table . ".is_archived", 0)
-      ->where($mDeal->table . ".id_owner", $this->getService(AuthProvider::class)->getUserId())
+      ->where($mDeal->table . ".id_owner", $this->authProvider()->getUserId())
       ->with('CURRENCY')
       ->groupBy($mDeal->table . '.deal_result')
       ->get()

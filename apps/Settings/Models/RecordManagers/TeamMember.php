@@ -2,9 +2,8 @@
 
 namespace Hubleto\App\Community\Settings\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TeamMember extends \Hubleto\Erp\RecordManager
 {

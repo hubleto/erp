@@ -89,6 +89,7 @@ class Mail extends \Hubleto\Erp\Model
           'subject' => $description->columns['subject'],
           'from' => $description->columns['from'],
           'to' => $description->columns['to'],
+          'datetime_scheduled_to_send' => $description->columns['datetime_scheduled_to_send'],
         ];
       break;
       default:

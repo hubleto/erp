@@ -2,8 +2,6 @@
 
 namespace Hubleto\App\Community\Notifications\Crons;
 
-use Hubleto\App\Community\Auth\AuthProvider;
-
 class DailyDigest extends \Hubleto\Erp\Cron
 {
   public string $schedulingPattern = '05 06 * * *';
@@ -11,7 +9,7 @@ class DailyDigest extends \Hubleto\Erp\Cron
   public function run(): void
   {
     $emailsSent = [];
-    $users = $this->getService(AuthProvider::class)->getActiveUsers();
+    $users = $this->authProvider()->getActiveUsers();
     foreach ($users as $user) {
 
       /** @var \Hubleto\App\Community\Notifications\Digest $digest */

@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Events\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Agenda extends \Hubleto\Erp\RecordManager
 {

@@ -8,7 +8,6 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
   public array $packages = [
     'core' => [
-      \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 99999],
       \Hubleto\App\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997 ],
       \Hubleto\App\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997 ],
       \Hubleto\App\Community\Crypto\Loader::class => [ ],
@@ -470,7 +469,6 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $app = $this->appManager()->createAppInstance($appNamespace);
       $mClasses = $app->getAvailableModelClasses();
       foreach ($mClasses as $mClass) {
-        var_dump($mClass);
         $mObj = $this->getService($mClass);
         $mObj->createSqlForeignKeys();
       }

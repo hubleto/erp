@@ -2,9 +2,8 @@
 
 namespace Hubleto\App\Community\Notifications\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\AuthProvider;
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Notification extends \Hubleto\Erp\RecordManager
 {
@@ -29,7 +28,7 @@ class Notification extends \Hubleto\Erp\RecordManager
     $query = parent::prepareReadQuery($query, $level);
 
     $folder = $main->router()->urlParamAsString('folder');
-    $idUser = $main->getService(AuthProvider::class)->getUserId();
+    $idUser = $main->authProvider()->getUserId();
 
     switch ($folder) {
       case 'inbox': $query->where('id_to', $idUser);

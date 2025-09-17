@@ -53,6 +53,7 @@ class Recipient extends \Hubleto\Erp\Model
       default:
       break;
     }
+
     return $description;
   }
 

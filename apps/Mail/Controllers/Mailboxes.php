@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Mail\Controllers;
 
 use Hubleto\App\Community\Mail\Models\Mailbox;
+use Hubleto\App\Community\Mail\Models\Account;
 
 class Mailboxes extends \Hubleto\Erp\Controller
 {
@@ -17,8 +18,10 @@ class Mailboxes extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $mMailbox = $this->getService(Mailbox::class);
+    $mMailbox = $this->getModel(Mailbox::class);
+    $mAccount = $this->getModel(Account::class);
 
+    $this->viewParams['accounts'] = $mAccount->record->prepareReadQuery()->get()->toArray();
     $this->viewParams['mailboxes'] = $mMailbox->record->prepareReadQuery()->get()->toArray();
 
     $this->setView('@Hubleto:App:Community:Mail/Mailboxes.twig');

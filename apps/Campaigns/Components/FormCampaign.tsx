@@ -9,6 +9,7 @@ import request from '@hubleto/react-ui/core/Request';
 export interface FormCampaignProps extends HubletoFormProps {}
 export interface FormCampaignState extends HubletoFormState {
   testEmailSendResult?: any,
+  launchResult?: any,
   campaignWarnings?: any,
   recipients?: any,
 }
@@ -200,7 +201,11 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 <div className='alert alert-success mt-2'>Test email was sent to you.</div>
               : null}
               {this.state.testEmailSendResult && this.state.testEmailSendResult.status != 'success' ?
-                <div className='alert alert-danger mt-2'>Error occured when sending a test email to you.</div>
+                <div className='alert alert-danger mt-2'>
+                  Error occured when sending a test email to you.
+                  <br/>
+                  <b>{this.state.testEmailSendResult.message}</b>
+                </div>
               : null}
             </div>
           </div>
@@ -235,34 +240,44 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 </div> : null}
               </> : null }
 
-              <button
-                className="btn btn-transparent"
-                onClick={() => {
-                  request.post(
-                    'campaigns/api/launch',
-                    { idCampaign: this.state.record.id },
-                    {},
-                    (result: any) => {
-                      if (result.status && result.status == 'success') {
-                        this.setState({launchResult: result}, () => {
+              {this.state.recipients ? <>
+                <button
+                  className="btn btn-transparent"
+                  onClick={() => {
+                    request.post(
+                      'campaigns/api/launch',
+                      { idCampaign: this.state.record.id },
+                      {},
+                      (result: any) => {
+                        this.setState({launchResult: result});
+                        if (result.status && result.status == 'success') {
                           updateFormWorkflowByTag(this, 'campaign-launched', () => {
                             this.saveRecord();
                           });
-                        });
+                        }
                       }
-                    }
-                  );
-                }}
-              >
-                <span className="icon"><i className="fas fa-envelope"></i></span>
-                <span className="text">Send email to {this.state.recipients.length} recipients now!</span>
-              </button>
+                    );
+                  }}
+                >
+                  <span className="icon"><i className="fas fa-envelope"></i></span>
+                  <span className="text">Send email to {this.state.recipients.length} recipients now!</span>
+                </button>
+                {this.state.launchResult && this.state.launchResult.status == 'success' ?
+                  <div className='alert alert-success mt-2'>Campaign was launched.</div>
+                : null}
+                {this.state.launchResult && this.state.launchResult.status != 'success' ?
+                  <div className='alert alert-danger mt-2'>
+                    Error occured when launching the campaign.<br/>
+                    <b>{this.state.launchResult.message}</b>
+                  </div>
+                : null}
 
-              <div className='flex flex-wrap mt-2 text-sm gap-2'>
-                {this.state.recipients ? this.state.recipients.map((item, key) => {
-                  return <span key={key}>{item.email}</span>;
-                }) : null}
-              </div>
+                <div className='flex flex-wrap mt-2 text-sm gap-2'>
+                  {this.state.recipients ? this.state.recipients.map((item, key) => {
+                    return <span key={key}>{item.email}</span>;
+                  }) : null}
+                </div>
+              </> : null}
             </div>
           </div>
         </div>;

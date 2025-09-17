@@ -82,15 +82,18 @@ class Mail extends \Hubleto\Erp\Model
     unset($description->columns['priority']);
     unset($description->columns['read']);
 
-    switch ($folder) {
-      case 'inbox':
-        unset($description->columns['to']);
-        unset($description->columns['cc']);
-        unset($description->columns['bcc']);
-        break;
-      case 'sent':
-        unset($description->columns['from']);
-        break;
+    switch ($this->router()->urlParamAsString('view')) {
+      case 'briefOverview':
+        $description->ui['moreActions'] = null;
+        $description->columns = [
+          'id_account' => $description->columns['id_account'],
+          'subject' => $description->columns['subject'],
+          'from' => $description->columns['from'],
+          'to' => $description->columns['to'],
+        ];
+      break;
+      default:
+      break;
     }
 
     $description->permissions['canDelete'] = false;

@@ -9,6 +9,7 @@ interface TableMailsProps extends TableProps {
   idMailbox?: number,
   mailboxName?: string,
   showOnlyScheduledToSend?: boolean,
+  showOnlySent?: boolean,
   showOnlyDrafts?: boolean,
   showOnlyTemplates?: boolean,
 }
@@ -44,6 +45,7 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
       idAccount: this.props.idAccount,
       idMailbox: this.props.idMailbox,
       showOnlyScheduledToSend: this.props.showOnlyScheduledToSend,
+      showOnlySent: this.props.showOnlySent,
       showOnlyDrafts: this.props.showOnlyDrafts,
       showOnlyTemplates: this.props.showOnlyTemplates,
     }

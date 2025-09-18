@@ -25,6 +25,7 @@ class Mail extends \Hubleto\Erp\RecordManager
     $idAccount = $main->router()->urlParamAsInteger('idAccount');
     $idMailbox = $main->router()->urlParamAsInteger('idMailbox');
     $showOnlyScheduledToSend = $main->router()->urlParamAsBool('showOnlyScheduledToSend');
+    $showOnlySent = $main->router()->urlParamAsBool('showOnlySent');
     $showOnlyDrafts = $main->router()->urlParamAsBool('showOnlyDrafts');
     $showOnlyTemplates = $main->router()->urlParamAsBool('showOnlyTemplates');
 
@@ -33,6 +34,7 @@ class Mail extends \Hubleto\Erp\RecordManager
     if ($idAccount > 0) $query = $query->where('mails.id_account', $idAccount);
     if ($idMailbox > 0) $query = $query->where('mails.id_mailbox', $idMailbox);
     if ($showOnlyScheduledToSend) $query = $query->whereNotNull('mails.datetime_scheduled_to_send')->whereNull('mails.datetime_sent');
+    if ($showOnlySent) $query = $query->whereNotNull('mails.datetime_sent');
     if ($showOnlyDrafts) $query = $query->where('mails.is_draft', true);
     if ($showOnlyTemplates) $query = $query->where('mails.is_template', true);
 

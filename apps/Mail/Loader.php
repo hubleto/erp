@@ -17,11 +17,14 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^mail\/?$/' => Controllers\Home::class,
-      '/^mail\/accounts\/(?<idAccount>\d+)\/scheduled\/?$/' => Controllers\Account\Scheduled::class,
+      '/^mail\/?(?<idMailbox>\d+)?\/?$/' => Controllers\Home::class,
+      '/^mail\/accounts\/?(?<idAccount>\d+)?\/?$/' => Controllers\Accounts::class,
+      '/^mail\/accounts\/scheduled\/?$/' => Controllers\Scheduled::class,
+      '/^mail\/accounts\/sent\/?$/' => Controllers\Sent::class,
+      '/^mail\/get\/?$/' => Controllers\Get::class,
       '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
       '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
-      '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
+      // '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
       '/^mail\/templates\/?(?<recordId>\d+)?\/?$/' => Controllers\Templates::class,
       '/^mail\/api\/mark-as-read\/?$/' => Controllers\Api\MarkAsRead::class,
       '/^mail\/api\/mark-as-unread\/?$/' => Controllers\Api\MarkAsUnread::class,

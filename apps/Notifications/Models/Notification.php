@@ -68,10 +68,6 @@ class Notification extends \Hubleto\Erp\Model
 
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = 'Send message';
-    $description->ui['showHeader'] = false;
-    $description->ui['showFulltextSearch'] = false;
-    $description->ui['showColumnSearch'] = false;
-    $description->ui['showFooter'] = false;
 
     unset($description->columns['body']);
     unset($description->columns['color']);

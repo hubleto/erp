@@ -13,9 +13,9 @@ class RefreshToken extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'access_token' => (new Varchar($this, $this->translate('Access Token')))->setProperty('defaultVisibility', true),
-      'access_token' => (new Varchar($this, $this->translate('Refresh Token')))->setProperty('defaultVisibility', true),
-      'expires_at' => (new Varchar($this, $this->translate('Expires At')))->setProperty('defaultVisibility', true),
+      'access_token' => (new Varchar($this, $this->translate('Access Token')))->setDefaultVisible(),
+      'access_token' => (new Varchar($this, $this->translate('Refresh Token')))->setDefaultVisible(),
+      'expires_at' => (new Varchar($this, $this->translate('Expires At')))->setDefaultVisible(),
     ]);
   }
 

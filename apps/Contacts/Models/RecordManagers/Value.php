@@ -25,10 +25,10 @@ class Value extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->urlParamAsInteger("idContact") > 0) {
-      $query = $query->where($this->table . '.id_contact', $main->router()->urlParamAsInteger("idContact"));
+    if ($hubleto->router()->urlParamAsInteger("idContact") > 0) {
+      $query = $query->where($this->table . '.id_contact', $hubleto->router()->urlParamAsInteger("idContact"));
     }
 
     return $query;

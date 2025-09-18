@@ -107,7 +107,6 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 <div className='card-header'>Recipients</div>
                 <div className='card-body'>
                   <TableRecipients
-                    tag={"table_campaign_recipients"}
                     parentForm={this}
                     uid={this.props.uid + "_table_campaign_recipient"}
                     idCampaign={R.id}

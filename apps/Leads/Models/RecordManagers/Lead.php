@@ -128,17 +128,17 @@ class Lead extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->urlParamAsInteger("idCustomer") > 0) {
-      $query = $query->where("leads.id_customer", $main->router()->urlParamAsInteger("idCustomer"));
+    if ($hubleto->router()->urlParamAsInteger("idCustomer") > 0) {
+      $query = $query->where("leads.id_customer", $hubleto->router()->urlParamAsInteger("idCustomer"));
     }
 
-    if ($main->router()->urlParamAsInteger("idCampaign") > 0) {
-      $query = $query->where("leads.id_campaign", $main->router()->urlParamAsInteger("idCampaign"));
+    if ($hubleto->router()->urlParamAsInteger("idCampaign") > 0) {
+      $query = $query->where("leads.id_campaign", $hubleto->router()->urlParamAsInteger("idCampaign"));
     }
 
-    $filters = $main->router()->urlParamAsArray("filters");
+    $filters = $hubleto->router()->urlParamAsArray("filters");
 
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
@@ -152,9 +152,9 @@ class Lead extends \Hubleto\Erp\RecordManager
 
     if (isset($filters["fLeadOwnership"])) {
       switch ($filters["fLeadOwnership"]) {
-        case 1: $query = $query->where("leads.id_owner", $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+        case 1: $query = $query->where("leads.id_owner", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
           break;
-        case 2: $query = $query->where("leads.id_manager", $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+        case 2: $query = $query->where("leads.id_manager", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
           break;
       }
     }

@@ -26,10 +26,10 @@ class TeamMember extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->isUrlParam("idTeam")) {
-      $query = $query->where($this->table . '.id_team', $main->router()->urlParamAsInteger("idTeam"));
+    if ($hubleto->router()->isUrlParam("idTeam")) {
+      $query = $query->where($this->table . '.id_team', $hubleto->router()->urlParamAsInteger("idTeam"));
     }
 
     return $query;

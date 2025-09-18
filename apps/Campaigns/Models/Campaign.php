@@ -47,26 +47,26 @@ class Campaign extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('UID')))->setReadonly(true),
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true)->setCssClass('font-bold'),
-      'utm_source' => (new Varchar($this, $this->translate('UTM source')))->setProperty('defaultVisibility', true),
-      'utm_campaign' => (new Varchar($this, $this->translate('UTM campaign')))->setProperty('defaultVisibility', true),
-      'utm_term' => (new Varchar($this, $this->translate('UTM term')))->setProperty('defaultVisibility', true),
-      'utm_content' => (new Varchar($this, $this->translate('UTM content')))->setProperty('defaultVisibility', true),
-      'target_audience' => (new Text($this, $this->translate('Target audience')))->setProperty('defaultVisibility', true),
-      'goal' => (new Text($this, $this->translate('Goal')))->setProperty('defaultVisibility', true),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
+      'utm_source' => (new Varchar($this, $this->translate('UTM source')))->setDefaultVisible(),
+      'utm_campaign' => (new Varchar($this, $this->translate('UTM campaign')))->setDefaultVisible(),
+      'utm_term' => (new Varchar($this, $this->translate('UTM term')))->setDefaultVisible(),
+      'utm_content' => (new Varchar($this, $this->translate('UTM content')))->setDefaultVisible(),
+      'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible(),
+      'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       // 'mail_body' => (new Text($this, $this->translate('Mail body (HTML)')))->setReactComponent('InputWysiwyg'),
       'color' => (new Color($this, $this->translate('Color'))),
       'id_mail_account' => (new Lookup($this, $this->translate('Mail account to send email from'), Account::class)),
       'id_mail_template' => (new Lookup($this, $this->translate('Mail template'), Template::class))
-        ->setProperty('defaultVisibility', true)
+        ->setDefaultVisible()
       ,
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
-      'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
-      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date('Y-m-d H:i:s')),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
+      'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setRequired()->setDefaultValue(date('Y-m-d H:i:s')),
     ]);
   }
 
@@ -83,10 +83,8 @@ class Campaign extends \Hubleto\Erp\Model
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = $this->translate('Add Campaign');
 
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     $description->ui['filters'] = [
       'fCampaignWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Phase'),

@@ -18,10 +18,10 @@ class Panel extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->isUrlParam("idDashboard")) {
-      $query = $query->where($this->table . '.id_dashboard', $main->router()->urlParamAsInteger("idDashboard"));
+    if ($hubleto->router()->isUrlParam("idDashboard")) {
+      $query = $query->where($this->table . '.id_dashboard', $hubleto->router()->urlParamAsInteger("idDashboard"));
     }
 
     $query->orderBy('order', 'asc');

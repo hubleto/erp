@@ -25,11 +25,8 @@ class UserHasRole extends \Hubleto\Erp\Model
 
     // $description->ui['title'] = 'Role Assigments';
     $description->ui['addButtonText'] = 'Assign Roles';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = false;
-    $description->ui['showColumnSearch'] = false;
-    $description->ui['showFooter'] = false;
-
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
     return $description;
   }
 }

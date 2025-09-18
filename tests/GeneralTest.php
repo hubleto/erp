@@ -6,7 +6,7 @@ final class GeneralTest extends TestCase
 {
   public function testBootstrap(): void
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
-    $this->assertInstanceOf(\Hubleto\Erp\Loader::class, $main);
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $this->assertInstanceOf(\Hubleto\Erp\Loader::class, $hubleto);
   }
 }

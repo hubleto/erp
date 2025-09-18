@@ -50,35 +50,35 @@ class Task extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setCssClass('badge badge-info')->setDescription('Leave empty to generate automatically.'),
-      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('font-bold'),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setDescription('Leave empty to generate automatically.'),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', false),
-      'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden(),
+      'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
-      'id_tester' => (new Lookup($this, $this->translate('Tester'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
+      'id_tester' => (new Lookup($this, $this->translate('Tester'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
-      'hours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setProperty('defaultVisibility', true)->setUnit('h')->setDecimals(2),
-      'duration_days' => (new Integer($this, $this->translate('Duration')))->setProperty('defaultVisibility', true)->setUnit('days'),
+      'hours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setDefaultVisible()->setUnit('h')->setDecimals(2),
+      'duration_days' => (new Integer($this, $this->translate('Duration')))->setDefaultVisible()->setUnit('days'),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
       'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
       'is_milestone' => (new Boolean($this, $this->translate('Is milestone')))->setDefaultValue(false),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
-      // 'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setProperty('defaultVisibility', true),
+      // 'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setDefaultVisible(),
       'shared_folder' => (new Varchar($this, "Shared folder (online document storage)"))->setReactComponent('InputHyperlink'),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
-      'virt_worked' => (new Virtual($this, $this->translate('Worked')))->setProperty('defaultVisibility', true)->setUnit("hours")
+      'virt_worked' => (new Virtual($this, $this->translate('Worked')))->setDefaultVisible()->setUnit("hours")
         ->setProperty('sql', "select sum(ifnull(worked_hours, 0)) from worksheet_activities where id_task = tasks.id")
       ,
-      'virt_related_to' => (new Virtual($this, $this->translate('Related to')))->setProperty('defaultVisibility', true)
+      'virt_related_to' => (new Virtual($this, $this->translate('Related to')))->setDefaultVisible()
         ->setProperty('sql', "
           select
             concat(
@@ -113,24 +113,12 @@ class Task extends \Hubleto\Erp\Model
     $description = parent::describeTable();
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
-        $description->ui['showHeader'] = false;
-        $description->ui['showColumnSearch'] = false;
-        $description->ui['showFulltextSearch'] = false;
-        $description->ui['showFooter'] = false;
-        $description->columns = [
-          'identifier' => $description->columns['identifier'],
-          'title' => $description->columns['title'],
-          'id_developer' => $description->columns['id_developer'],
-          'id_workflow_step' => $description->columns['id_workflow_step'],
-          'virt_worked' => $description->columns['virt_worked'],
-        ];
+        $description->showOnlyColumns(['identifier', 'title', 'id_main_developer', 'id_workflow_step', 'virt_worked']);
       break;
       default:
         $description->ui['addButtonText'] = 'Add Task';
-        $description->ui['showHeader'] = true;
-        $description->ui['showFulltextSearch'] = true;
-        $description->ui['showColumnSearch'] = true;
-        $description->ui['showFooter'] = false;
+        $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+        $description->hide(['footer']);
 
         $description->ui['filters'] = [
           'fTaskWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),

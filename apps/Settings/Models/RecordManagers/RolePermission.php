@@ -27,10 +27,10 @@ class RolePermission extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->isUrlParam("idRole")) {
-      $query = $query->where($this->table . '.id_role', $main->router()->urlParamAsInteger("idRole"));
+    if ($hubleto->router()->isUrlParam("idRole")) {
+      $query = $query->where($this->table . '.id_role', $hubleto->router()->urlParamAsInteger("idRole"));
     }
 
     return $query;

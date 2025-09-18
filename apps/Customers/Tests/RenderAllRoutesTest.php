@@ -30,11 +30,11 @@ final class RenderAllRoutesTest extends TestCase
 
   public function testCustomerForms(): void
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
-    $mCustomer = $main->getModel(\Hubleto\App\Community\Customers\Models\Customer::class);
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $mCustomer = $hubleto->getModel(\Hubleto\App\Community\Customers\Models\Customer::class);
     $customers = $mCustomer->record->get()->toArray();
     foreach ($customers as $customer) {
-      $html = $main->renderer()->render('customers/' . $customer['id']);
+      $html = $hubleto->renderer()->render('customers/' . $customer['id']);
       $this->assertStringContainsString('app-main-title', $html);
       $this->assertStringNotContainsStringIgnoringCase('error', $html);
     }

@@ -26,10 +26,10 @@ class Inventory extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_location' => (new Lookup($this, $this->translate('Location in warehouse'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_status' => (new Lookup($this, $this->translate('Status'), Status::class))->setProperty('defaultVisibility', true),
-      'quantity' => (new Decimal($this, $this->translate('Quantity')))->setProperty('defaultVisibility', true),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible()->setRequired(),
+      'id_location' => (new Lookup($this, $this->translate('Location in warehouse'), Location::class))->setDefaultVisible()->setRequired(),
+      'id_status' => (new Lookup($this, $this->translate('Status'), Status::class))->setDefaultVisible(),
+      'quantity' => (new Decimal($this, $this->translate('Quantity')))->setDefaultVisible(),
       'batch_number' => (new Varchar($this, $this->translate('Batch number'))),
       'serial_number' => (new Varchar($this, $this->translate('Serial number'))),
       'datetime_expiration' => (new DateTime($this, $this->translate('Expiration'))),

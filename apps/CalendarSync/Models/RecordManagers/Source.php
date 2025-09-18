@@ -9,10 +9,10 @@ class Source extends \Hubleto\Erp\RecordManager
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
     $query = parent::prepareReadQuery($query, $level);
-    $type = $main->router()->urlParamAsString('type') ?? "";
+    $type = $hubleto->router()->urlParamAsString('type') ?? "";
 
     if ($type == 'google') {
       $query = $query->where('type', 'google');

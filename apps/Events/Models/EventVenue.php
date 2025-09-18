@@ -31,8 +31,8 @@ class EventVenue extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setProperty('defaultVisibility', true),
-      'id_venue' => (new Lookup($this, $this->translate('Venue'), Venue::class))->setProperty('defaultVisibility', true),
+      'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setDefaultVisible(),
+      'id_venue' => (new Lookup($this, $this->translate('Venue'), Venue::class))->setDefaultVisible(),
     ]);
   }
 

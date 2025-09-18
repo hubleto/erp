@@ -31,17 +31,17 @@ class Activity extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $idTask = $main->router()->urlParamAsInteger("idTask");
-    $idProject = $main->router()->urlParamAsInteger("idProject");
+    $idTask = $hubleto->router()->urlParamAsInteger("idTask");
+    $idProject = $hubleto->router()->urlParamAsInteger("idProject");
 
     if ($idTask > 0) {
       $query = $query->where($this->table . '.id_task', $idTask);
     }
 
     if ($idProject > 0) {
-      $mProjectTask = $main->getService(ProjectTask::class);
+      $mProjectTask = $hubleto->getService(ProjectTask::class);
 
       $projectTasksIds = $mProjectTask->record->prepareReadQuery()
         ->where($mProjectTask->table . '.id_project', $idProject)
@@ -55,7 +55,7 @@ class Activity extends \Hubleto\Erp\RecordManager
     }
 
     // Uncomment and modify these lines if you want to apply default filters to your model.
-    // $filters = $main->router()->urlParamAsArray("filters");
+    // $filters = $hubleto->router()->urlParamAsArray("filters");
     // if (isset($filters["fArchive"]) && $filters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
     // else $query = $query->where("customers.is_active", true);
 

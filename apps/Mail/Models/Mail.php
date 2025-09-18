@@ -71,11 +71,8 @@ class Mail extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'New message';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     unset($description->columns['body']);
     unset($description->columns['color']);
@@ -85,14 +82,14 @@ class Mail extends \Hubleto\Erp\Model
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
         $description->ui['moreActions'] = null;
-        $description->columns = [
-          'id_account' => $description->columns['id_account'],
-          'subject' => $description->columns['subject'],
-          'from' => $description->columns['from'],
-          'to' => $description->columns['to'],
-          'datetime_scheduled_to_send' => $description->columns['datetime_scheduled_to_send'],
-          'datetime_sent' => $description->columns['datetime_sent'],
-        ];
+        $description->showOnlyColumns([
+          'id_account',
+          'subject',
+          'from',
+          'to',
+          'datetime_scheduled_to_send',
+          'datetime_sent',
+        ]);
       break;
       default:
       break;

@@ -79,15 +79,20 @@ class Project extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->urlParamAsInteger("idDeal") > 0) {
-      $query = $query->where($this->table . '.id_deal', $main->router()->urlParamAsInteger("idDeal"));
+    $view = $hubleto->router()->urlParamAsString('view');
+    if ($view == 'briefOverview') {
+      $query = $query->where($this->table . '.is_closed', false);
+    }
+
+    if ($hubleto->router()->urlParamAsInteger("idDeal") > 0) {
+      $query = $query->where($this->table . '.id_deal', $hubleto->router()->urlParamAsInteger("idDeal"));
     }
     
-    $filters = $main->router()->urlParamAsArray("filters");
-    if ($main->router()->urlParamAsInteger("idDeal") > 0) {
-      $query = $query->whereIn($this->table . '.', $main->router()->urlParamAsInteger("idDeal"));
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+    if ($hubleto->router()->urlParamAsInteger("idDeal") > 0) {
+      $query = $query->whereIn($this->table . '.', $hubleto->router()->urlParamAsInteger("idDeal"));
     }
 
     $query = Workflow::applyWorkflowStepFilter(

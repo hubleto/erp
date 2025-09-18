@@ -42,10 +42,8 @@ class Setting extends \Hubleto\Erp\Model
 
     $description->ui['title'] = 'Settings';
     $description->ui['addButtonText'] = 'Add Setting';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     return $description;
   }

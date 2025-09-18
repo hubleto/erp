@@ -35,13 +35,13 @@ class Activity extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_worker' => (new Lookup($this, $this->translate('Worker'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setRequired(),
-      'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_type' => (new Lookup($this, $this->translate('Type'), ActivityType::class))->setProperty('defaultVisibility', true),
-      'date_worked' => (new Date($this, $this->translate('Day')))->setProperty('defaultVisibility', true)->setDefaultValue(date("Y-m-d")),
-      'worked_hours' => (new Decimal($this, $this->translate('Worked hours')))->setProperty('defaultVisibility', true)->setDecimals(2)->setUnit('hours')->setStep(0.25),
-      'description' => (new Text($this, $this->translate('Description')))->setProperty('defaultVisibility', true),
-      'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
+      'id_worker' => (new Lookup($this, $this->translate('Worker'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setRequired(),
+      'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setDefaultVisible()->setRequired(),
+      'id_type' => (new Lookup($this, $this->translate('Type'), ActivityType::class))->setDefaultVisible(),
+      'date_worked' => (new Date($this, $this->translate('Day')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
+      'worked_hours' => (new Decimal($this, $this->translate('Worked hours')))->setDefaultVisible()->setDecimals(2)->setUnit('hours')->setStep(0.25),
+      'description' => (new Text($this, $this->translate('Description')))->setDefaultVisible(),
+      'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultValue(date("Y-m-d H:i:s"))->setReadonly(true),
     ]);
@@ -52,23 +52,12 @@ class Activity extends \Hubleto\Erp\Model
     $description = parent::describeTable();
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
-        $description->ui['showHeader'] = false;
-        $description->ui['showColumnSearch'] = false;
-        $description->ui['showFulltextSearch'] = false;
-        $description->ui['showFooter'] = false;
-        $description->columns = [
-          'identifier' => $description->columns['identifier'],
-          'title' => $description->columns['title'],
-          'id_developer' => $description->columns['id_developer'],
-          'virt_worked' => $description->columns['virt_worked'],
-        ];
+        $description->showOnlyColumns(['identifier', 'title', 'id_developer', 'virt_worked']);
       break;
       default:
         $description->ui['addButtonText'] = 'Add Activity';
-        $description->ui['showHeader'] = true;
-        $description->ui['showFulltextSearch'] = true;
-        $description->ui['showColumnSearch'] = true;
-        $description->ui['showFooter'] = false;
+        $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+        $description->hide(['footer']);
       break;
     }
 

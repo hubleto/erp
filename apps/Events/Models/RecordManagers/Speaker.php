@@ -12,16 +12,16 @@ class Speaker extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    // Uncomment this line if you are going to use $main.
-    // $main = \Hubleto\Erp\Loader::getGlobalApp();
+    // Uncomment this line if you are going to use $hubleto.
+    // $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
     // Uncomment and modify these lines if you want to apply filtering based on URL parameters
-    // if ($main->router()->urlParamAsInteger("idCustomer") > 0) {
-    //   $query = $query->where($this->table . '.id_customer', $main->router()->urlParamAsInteger("idCustomer"));
+    // if ($hubleto->router()->urlParamAsInteger("idCustomer") > 0) {
+    //   $query = $query->where($this->table . '.id_customer', $hubleto->router()->urlParamAsInteger("idCustomer"));
     // }
 
     // Uncomment and modify these lines if you want to apply default filters to your model.
-    // $filters = $main->router()->urlParamAsArray("filters");
+    // $filters = $hubleto->router()->urlParamAsArray("filters");
     // if (isset($filters["fArchive"]) && $filters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
     // else $query = $query->where("customers.is_active", true);
 

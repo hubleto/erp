@@ -31,10 +31,10 @@ class Usage extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_key' => (new Lookup($this, $this->translate('Key'), Key::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'controller' => (new Varchar($this, $this->translate('Controller')))->setProperty('defaultVisibility', true)->setRequired(),
+      'id_key' => (new Lookup($this, $this->translate('Key'), Key::class))->setDefaultVisible()->setRequired(),
+      'controller' => (new Varchar($this, $this->translate('Controller')))->setDefaultVisible()->setRequired(),
       'used_on' => (new DateTime($this, $this->translate('Used on')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
-      'ip_address' => (new Varchar($this, $this->translate('IP address')))->setProperty('defaultVisibility', true),
+      'ip_address' => (new Varchar($this, $this->translate('IP address')))->setDefaultVisible(),
       'status' => (new Varchar($this, $this->translate('Status')))
         ->setEnumValues([
           0 => $this->translate('Success'),
@@ -48,11 +48,8 @@ class Usage extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Usage';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
-
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
     return $description;
   }
 

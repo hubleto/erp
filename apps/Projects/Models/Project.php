@@ -53,29 +53,29 @@ class Project extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setProperty('defaultVisibility', false),
+      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setDefaultHidden(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', false),
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('badge badge-info')->setDescription('Leave empty to generate automatically.'),
-      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('font-bold'),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden(),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setRequired()->setCssClass('badge badge-info')->setDescription('Leave empty to generate automatically.'),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description'))),
-      'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
+      'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
-      'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
+      'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),
-      'budget' => (new Integer($this, $this->translate('Budget')))->setProperty('defaultVisibility', true)->setUnit('€'),
+      'budget' => (new Integer($this, $this->translate('Budget')))->setDefaultVisible()->setUnit('€'),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
-      // 'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setProperty('defaultVisibility', true)->setRequired()
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      // 'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setDefaultVisible()->setRequired()
       //   ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       // ,
-      'color' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true),
+      'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
       'online_documentation_folder' => (new Varchar($this, "Online documentation folder"))->setReactComponent('InputHyperlink'),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
@@ -91,26 +91,17 @@ class Project extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    switch ($this->router()->urlParamAsString('view')) {
+
+    $view = $this->router()->urlParamAsString('view');
+
+    switch ($view) {
       case 'briefOverview':
-        $description->ui['showHeader'] = false;
-        $description->ui['showColumnSearch'] = false;
-        $description->ui['showFulltextSearch'] = false;
-        $description->ui['showFooter'] = false;
-        $description->columns = [
-          'identifier' => $description->columns['identifier'],
-          'title' => $description->columns['title'],
-          'id_main_developer' => $description->columns['id_main_developer'],
-          'id_account_manager' => $description->columns['id_account_manager'],
-          'id_workflow_step' => $description->columns['id_workflow_step'],
-        ];
+        $description->showOnlyColumns(['identifier', 'title', 'id_main_developer', 'id_account_manager', 'id_workflow_step']);
       break;
       default:
         $description->ui['addButtonText'] = 'Add Project';
-        $description->ui['showHeader'] = true;
-        $description->ui['showColumnSearch'] = true;
-        $description->ui['showFulltextSearch'] = true;
-        $description->ui['showFooter'] = false;
+        $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+        $description->hide(['footer']);
 
         $description->ui['filters'] = [
           'fProjectWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Phase'),

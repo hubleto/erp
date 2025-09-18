@@ -16,9 +16,9 @@ class Document extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
-      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setDefaultValue($this->router()->urlParamAsInteger('idFolder'))->setProperty('defaultVisibility', true),
-      'name' => (new Varchar($this, $this->translate('Document name')))->setRequired()->setProperty('defaultVisibility', true),
-      'file' => (new File($this, $this->translate('File')))->setProperty('defaultVisibility', true),
+      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setDefaultValue($this->router()->urlParamAsInteger('idFolder'))->setDefaultVisible(),
+      'name' => (new Varchar($this, $this->translate('Document name')))->setRequired()->setDefaultVisible(),
+      'file' => (new File($this, $this->translate('File')))->setDefaultVisible(),
       'hyperlink' => (new Varchar($this, $this->translate('File Link')))->setReactComponent('InputHyperlink'),
       'origin_link' => (new Varchar($this, $this->translate('Origin Link'))),
     ]);
@@ -29,9 +29,8 @@ class Document extends \Hubleto\Erp\Model
     $description = parent::describeTable();
     $description->ui['title'] = ''; // 'Documents';
     $description->ui['addButtonText'] = $this->translate('Add Document');
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     unset($description->columns["origin_link"]);
 

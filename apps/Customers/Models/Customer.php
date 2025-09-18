@@ -45,21 +45,21 @@ class Customer extends Model
   {
     return array_merge(
       [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
       'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),
       'region' => (new Varchar($this, $this->translate('Region'))),
-      'city' => (new Varchar($this, $this->translate('City')))->setProperty('defaultVisibility', true),
+      'city' => (new Varchar($this, $this->translate('City')))->setDefaultVisible(),
       'postal_code' => (new Varchar($this, $this->translate('Postal Code'))),
       'id_country' => (new Lookup($this, $this->translate('Country'), Country::class)),
       'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
-      'customer_id' => (new Varchar($this, $this->translate('Customer ID')))->setRequired()->setProperty('defaultVisibility', true),
+      'customer_id' => (new Varchar($this, $this->translate('Customer ID')))->setRequired()->setDefaultVisible(),
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
-      'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
+      'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
-      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setProperty('defaultVisibility', true),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
-      'id_manager' => new Lookup($this, $this->translate('Manager'), User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setDefaultVisible(),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
+      'id_manager' => new Lookup($this, $this->translate('Manager'), User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)")),
     ], parent::describeColumns());
   }
@@ -105,10 +105,9 @@ class Customer extends Model
     $description = parent::describeTable();
     $description->ui['title'] = ''; //$this->translate('Customers');
     $description->ui['addButtonText'] = $this->translate('Add Customer');
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+
     $description->columns['tags'] = ["title" => $this->translate("Tags")];
 
     $description->ui['filters'] = [

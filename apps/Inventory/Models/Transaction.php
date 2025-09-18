@@ -51,20 +51,20 @@ class Transaction extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Transaction UID')))->setRequired(),
-      'type' => (new Integer($this, $this->translate('Type')))->setProperty('defaultVisibility', true)
+      'type' => (new Integer($this, $this->translate('Type')))->setDefaultVisible()
         ->setEnumValues(self::TYPES)
         ->setDefaultValue(self::TYPE_RECEIPT)
       ,
       'datetime_when' => (new DateTime($this, $this->translate('Date and time of transaction')))->setRequired(),
-      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'quantity' => (new Decimal($this, $this->translate('Quantity')))->setProperty('defaultVisibility', true),
-      'id_location_source' => (new Lookup($this, $this->translate('Source location'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_location_destination' => (new Lookup($this, $this->translate('Destination location'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_user' => (new Lookup($this, $this->translate('Who performed the trancation'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
-      'document_1' => (new File($this, $this->translate('Reference document #1')))->setProperty('defaultVisibility', true),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible()->setRequired(),
+      'quantity' => (new Decimal($this, $this->translate('Quantity')))->setDefaultVisible(),
+      'id_location_source' => (new Lookup($this, $this->translate('Source location'), Location::class))->setDefaultVisible()->setRequired(),
+      'id_location_destination' => (new Lookup($this, $this->translate('Destination location'), Location::class))->setDefaultVisible()->setRequired(),
+      'id_user' => (new Lookup($this, $this->translate('Who performed the trancation'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
+      'document_1' => (new File($this, $this->translate('Reference document #1')))->setDefaultVisible(),
       'document_2' => (new File($this, $this->translate('Reference document #2'))),
       'document_3' => (new File($this, $this->translate('Reference document #3'))),
-      'notes' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
+      'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
     ]);
   }
 

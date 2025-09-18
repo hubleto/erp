@@ -88,8 +88,8 @@ class Deal extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'identifier' => (new Varchar($this, $this->translate('Deal Identifier')))->setCssClass('badge badge-info')->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true)->setCssClass('font-bold'),
+      'identifier' => (new Varchar($this, $this->translate('Deal Identifier')))->setCssClass('badge badge-info')->setDefaultVisible(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setReadonly(),
@@ -102,13 +102,13 @@ class Deal extends \Hubleto\Erp\Model
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_template_quotation' => (new Lookup($this, $this->translate('Template for quotation'), Template::class)),
-      'customer_order_number' => (new Varchar($this, $this->translate('Customer\'s order number')))->setProperty('defaultVisibility', true),
+      'customer_order_number' => (new Varchar($this, $this->translate('Customer\'s order number')))->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
       'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(self::ENUM_SOURCE_CHANNELS),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
       'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(false),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues(self::ENUM_DEAL_RESULTS)
@@ -175,10 +175,8 @@ class Deal extends \Hubleto\Erp\Model
     } else {
       $description->ui['addButtonText'] = $this->translate('Add Deal');
     }
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
     $description->ui['filters'] = [
       'fDealWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'State'),
       'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => self::ENUM_SOURCE_CHANNELS ],

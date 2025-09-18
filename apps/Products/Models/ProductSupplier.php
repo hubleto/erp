@@ -42,10 +42,9 @@ class ProductSupplier extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = 'Product Suppliers';
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
     $description->ui["addButtonText"] = $this->translate("Add supplier");
-    $description->ui['title'] = '';
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     return $description;
   }

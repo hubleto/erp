@@ -70,9 +70,9 @@ class Task extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $filters = $main->router()->urlParamAsArray("filters");
+    $filters = $hubleto->router()->urlParamAsArray("filters");
 
     $query = $query->with('TODO');
 

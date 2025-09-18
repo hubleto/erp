@@ -47,24 +47,24 @@ class Invoice extends \Hubleto\Erp\Model {
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_profile' => (new Lookup($this, $this->translate('Invoice profile'), InvoiceProfile::class))->setProperty('defaultVisibility', true),
-      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true),
-      'number' => (new Varchar($this, $this->translate('Number')))->setProperty('defaultVisibility', true),
-      'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setProperty('defaultVisibility', true),
+      'id_profile' => (new Lookup($this, $this->translate('Invoice profile'), InvoiceProfile::class))->setDefaultVisible(),
+      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible(),
+      'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible(),
+      'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
       'ss' => (new Varchar($this, $this->translate('Specific symbol'))),
-      'date_issue' => (new Date($this, $this->translate('Issued')))->setProperty('defaultVisibility', true),
+      'date_issue' => (new Date($this, $this->translate('Issued')))->setDefaultVisible(),
       'date_delivery' => (new Date($this, $this->translate('Delivered'))),
-      'date_due' => (new Date($this, $this->translate('Due')))->setProperty('defaultVisibility', true),
-      'date_payment' => (new Date($this, $this->translate('Paid')))->setProperty('defaultVisibility', true),
+      'date_due' => (new Date($this, $this->translate('Due')))->setDefaultVisible(),
+      'date_payment' => (new Date($this, $this->translate('Paid')))->setDefaultVisible(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
       'total_excl_vat' => new Decimal($this, $this->translate('Total excl. VAT'))->setReadonly(),
       'total_incl_vat' => new Decimal($this, $this->translate('Total incl. VAT'))->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
     ]);
   }
 
@@ -78,7 +78,8 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate("Add invoice");
-    $description->ui['showColumnSearch'] = true;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     $description->ui['filters'] = [
       'fInvoiceWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),

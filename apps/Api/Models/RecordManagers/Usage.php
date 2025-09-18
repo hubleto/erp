@@ -17,9 +17,9 @@ class Usage extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $idKey = $main->router()->urlParamAsInteger("idKey");
+    $idKey = $hubleto->router()->urlParamAsInteger("idKey");
     if ($idKey > 0) $query = $query->where($this->table . '.id_key', $idKey);
 
     return $query;

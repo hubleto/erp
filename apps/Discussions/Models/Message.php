@@ -33,11 +33,11 @@ class Message extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
-      'from_email' => (new Varchar($this, $this->translate('From (Email)')))->setProperty('defaultVisibility', true),
-      'message' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true),
-      'sent' => (new Datetime($this, $this->translate('Sent')))->setProperty('defaultVisibility', true),
+      'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setDefaultVisible()->setRequired(),
+      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
+      'from_email' => (new Varchar($this, $this->translate('From (Email)')))->setDefaultVisible(),
+      'message' => (new Text($this, $this->translate('Text')))->setDefaultVisible(),
+      'sent' => (new Datetime($this, $this->translate('Sent')))->setDefaultVisible(),
     ]);
   }
 
@@ -45,10 +45,8 @@ class Message extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Message';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     // Uncomment and modify these lines if you want to define table filter for your model
     // $description->ui['filters'] = [

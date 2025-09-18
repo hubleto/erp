@@ -32,8 +32,10 @@ class Log extends \Hubleto\Erp\Model
     $description->permissions['canCreate'] = false;
     $description->permissions['canUpdate'] = false;
     $description->permissions['canDelete'] = false;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
+
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+
     return $description;
   }
 

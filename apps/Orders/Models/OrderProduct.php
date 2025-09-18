@@ -24,15 +24,15 @@ class OrderProduct extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
-      'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true),
-      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setProperty('defaultVisibility', true),
-      'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setRequired()->setProperty('defaultVisibility', true),
-      'amount' => (new Integer($this, $this->translate('Amount')))->setRequired()->setProperty('defaultVisibility', true),
-      'discount' => (new Integer($this, $this->translate('Discount')))->setUnit('%')->setProperty('defaultVisibility', true),
-      'vat' => (new Integer($this, $this->translate('Vat')))->setUnit('%')->setProperty('defaultVisibility', true),
-      'price_excl_vat' => new Decimal($this, $this->translate('Price excl. VAT'))->setProperty('defaultVisibility', true),
-      'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setProperty('defaultVisibility', true),
+      'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setDefaultVisible(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible(),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible(),
+      'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setRequired()->setDefaultVisible(),
+      'amount' => (new Integer($this, $this->translate('Amount')))->setRequired()->setDefaultVisible(),
+      'discount' => (new Integer($this, $this->translate('Discount')))->setUnit('%')->setDefaultVisible(),
+      'vat' => (new Integer($this, $this->translate('Vat')))->setUnit('%')->setDefaultVisible(),
+      'price_excl_vat' => new Decimal($this, $this->translate('Price excl. VAT'))->setDefaultVisible(),
+      'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setDefaultVisible(),
     ]);
   }
 

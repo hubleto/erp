@@ -63,8 +63,8 @@ class User extends \Hubleto\Erp\RecordManager
 
   public function prepareLookupQuery(string $search): mixed
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
-    $idUser = $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $idUser = $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
 
     $query = $this;
 

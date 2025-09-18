@@ -73,12 +73,12 @@ class Invoice extends \Hubleto\Erp\RecordManager {
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $idCustomer = $main->router()->urlParamAsInteger('idCustomer');
+    $idCustomer = $hubleto->router()->urlParamAsInteger('idCustomer');
     if ($idCustomer > 0) $query->where('id_customer', $idCustomer);
 
-    $idProfile = $main->router()->urlParamAsInteger('idProfile');
+    $idProfile = $hubleto->router()->urlParamAsInteger('idProfile');
     if ($idProfile > 0) $query->where('id_profil', $idProfile);
 
     $query = Workflow::applyWorkflowStepFilter(
@@ -87,17 +87,17 @@ class Invoice extends \Hubleto\Erp\RecordManager {
       $filters['fInvoiceWorkflowStep'] ?? []
     );
 
-    if ($main->router()->isUrlParam('number')) $query->where('number', 'like', '%' . $main->router()->urlParamAsString('number') . '%');
-    if ($main->router()->isUrlParam('vs')) $query->where('vs', 'like', '%' . $main->router()->urlParamAsString('vs') . '%');
+    if ($hubleto->router()->isUrlParam('number')) $query->where('number', 'like', '%' . $hubleto->router()->urlParamAsString('number') . '%');
+    if ($hubleto->router()->isUrlParam('vs')) $query->where('vs', 'like', '%' . $hubleto->router()->urlParamAsString('vs') . '%');
 
-    if ($main->router()->isUrlParam('dateIssueFrom')) $query->whereDate('date_issue', '>=', $main->router()->urlParamAsString('dateIssueFrom'));
-    if ($main->router()->isUrlParam('dateIssueTo')) $query->whereDate('date_issue', '<=', $main->router()->urlParamAsString('dateIssueTo'));
-    if ($main->router()->isUrlParam('dateDeliveryFrom')) $query->whereDate('date_delivery', '>=', $main->router()->urlParamAsString('dateDeliveryFrom'));
-    if ($main->router()->isUrlParam('dateDeliveryTo')) $query->whereDate('date_delivery', '<=', $main->router()->urlParamAsString('dateDeliveryTo'));
-    if ($main->router()->isUrlParam('dateTueFrom')) $query->whereDate('date_due', '>=', $main->router()->urlParamAsString('dateTueFrom'));
-    if ($main->router()->isUrlParam('dateTueTo')) $query->whereDate('date_due', '<=', $main->router()->urlParamAsString('dateTueTo'));
-    if ($main->router()->isUrlParam('datePaymentFrom')) $query->whereDate('date_payment', '>=', $main->router()->urlParamAsString('datePaymentFrom'));
-    if ($main->router()->isUrlParam('datePaymentTo')) $query->whereDate('date_payment', '<=', $main->router()->urlParamAsString('datePaymentTo'));
+    if ($hubleto->router()->isUrlParam('dateIssueFrom')) $query->whereDate('date_issue', '>=', $hubleto->router()->urlParamAsString('dateIssueFrom'));
+    if ($hubleto->router()->isUrlParam('dateIssueTo')) $query->whereDate('date_issue', '<=', $hubleto->router()->urlParamAsString('dateIssueTo'));
+    if ($hubleto->router()->isUrlParam('dateDeliveryFrom')) $query->whereDate('date_delivery', '>=', $hubleto->router()->urlParamAsString('dateDeliveryFrom'));
+    if ($hubleto->router()->isUrlParam('dateDeliveryTo')) $query->whereDate('date_delivery', '<=', $hubleto->router()->urlParamAsString('dateDeliveryTo'));
+    if ($hubleto->router()->isUrlParam('dateTueFrom')) $query->whereDate('date_due', '>=', $hubleto->router()->urlParamAsString('dateTueFrom'));
+    if ($hubleto->router()->isUrlParam('dateTueTo')) $query->whereDate('date_due', '<=', $hubleto->router()->urlParamAsString('dateTueTo'));
+    if ($hubleto->router()->isUrlParam('datePaymentFrom')) $query->whereDate('date_payment', '>=', $hubleto->router()->urlParamAsString('datePaymentFrom'));
+    if ($hubleto->router()->isUrlParam('datePaymentTo')) $query->whereDate('date_payment', '<=', $hubleto->router()->urlParamAsString('datePaymentTo'));
 
     $query
       ->first()

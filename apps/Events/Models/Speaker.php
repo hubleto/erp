@@ -26,20 +26,20 @@ class Speaker extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'salutation' => (new Varchar($this, $this->translate('Salutation')))->setProperty('defaultVisibility', true),
-      'title_before' => (new Varchar($this, $this->translate('Title before')))->setProperty('defaultVisibility', true),
-      'full_name' => (new Varchar($this, $this->translate('Full name')))->setProperty('defaultVisibility', true),
-      'title_after' => (new Varchar($this, $this->translate('Title after')))->setProperty('defaultVisibility', true),
-      'short_bio' => (new Varchar($this, $this->translate('Short bio')))->setProperty('defaultVisibility', true),
-      'long_bio' => (new Text($this, $this->translate('Long bio')))->setProperty('defaultVisibility', true),
-      'email' => (new Varchar($this, $this->translate('Email')))->setProperty('defaultVisibility', true),
-      'phone' => (new Varchar($this, $this->translate('Phone')))->setProperty('defaultVisibility', true),
+      'salutation' => (new Varchar($this, $this->translate('Salutation')))->setDefaultVisible(),
+      'title_before' => (new Varchar($this, $this->translate('Title before')))->setDefaultVisible(),
+      'full_name' => (new Varchar($this, $this->translate('Full name')))->setDefaultVisible(),
+      'title_after' => (new Varchar($this, $this->translate('Title after')))->setDefaultVisible(),
+      'short_bio' => (new Varchar($this, $this->translate('Short bio')))->setDefaultVisible(),
+      'long_bio' => (new Text($this, $this->translate('Long bio')))->setDefaultVisible(),
+      'email' => (new Varchar($this, $this->translate('Email')))->setDefaultVisible(),
+      'phone' => (new Varchar($this, $this->translate('Phone')))->setDefaultVisible(),
       'social_profile_url_1' => (new Varchar($this, $this->translate('Social profile URL #1'))),
       'social_profile_url_2' => (new Varchar($this, $this->translate('Social profile URL #2'))),
       'social_profile_url_3' => (new Varchar($this, $this->translate('Social profile URL #3'))),
       'social_profile_url_4' => (new Varchar($this, $this->translate('Social profile URL #4'))),
       'social_profile_url_5' => (new Varchar($this, $this->translate('Social profile URL #5'))),
-      'notes' => (new Varchar($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
+      'notes' => (new Varchar($this, $this->translate('Notes')))->setDefaultVisible(),
     ]);
   }
 

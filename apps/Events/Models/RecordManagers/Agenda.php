@@ -17,14 +17,14 @@ class Agenda extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->urlParamAsInteger("idEvent") > 0) {
-      $query = $query->where($this->table . '.id_event', $main->router()->urlParamAsInteger("idEvent"));
+    if ($hubleto->router()->urlParamAsInteger("idEvent") > 0) {
+      $query = $query->where($this->table . '.id_event', $hubleto->router()->urlParamAsInteger("idEvent"));
     }
 
     // Uncomment and modify these lines if you want to apply default filters to your model.
-    // $filters = $main->router()->urlParamAsArray("filters");
+    // $filters = $hubleto->router()->urlParamAsArray("filters");
     // if (isset($filters["fArchive"]) && $filters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
     // else $query = $query->where("customers.is_active", true);
 

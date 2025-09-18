@@ -15,8 +15,8 @@ class Report extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true),
-      'model' => (new Varchar($this, $this->translate('Model')))->setProperty('defaultVisibility', true),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible(),
+      'model' => (new Varchar($this, $this->translate('Model')))->setDefaultVisible(),
       'query' => (new Text($this, $this->translate('Query'))),
       'notes' => (new Varchar($this, $this->translate('Notes'))),
     ]);

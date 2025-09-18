@@ -59,22 +59,22 @@ class Order extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true)->setCssClass('font-bold'),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setProperty('defaultVisibility', true),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setDefaultVisible(),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
-      'price_excl_vat' => (new Decimal($this, $this->translate('Price excl. VAT')))->setDefaultValue(0)->setProperty('defaultVisibility', true),
-      'price_incl_vat' => (new Decimal($this, $this->translate('Price incl. VAT')))->setDefaultValue(0)->setProperty('defaultVisibility', true),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
+      'price_excl_vat' => (new Decimal($this, $this->translate('Price excl. VAT')))->setDefaultValue(0)->setDefaultVisible(),
+      'price_incl_vat' => (new Decimal($this, $this->translate('Price incl. VAT')))->setDefaultValue(0)->setDefaultVisible(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
       'date_order' => (new Date($this, $this->translate('Order date')))->setRequired()->setDefaultValue(date("Y-m-d")),
       'required_delivery_date' => (new Date($this, $this->translate('Required delivery date'))),
       'shipping_info' => (new Varchar($this, $this->translate('Shipping information'))),
       'note' => (new Text($this, $this->translate('Notes'))),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
     ]);
   }
 
@@ -91,10 +91,8 @@ class Order extends \Hubleto\Erp\Model
     $description->ui['title'] = ''; // 'Orders';
     $description->ui['addButtonText'] = $this->translate("Add order");
 
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     unset($description->columns["shipping_info"]);
     unset($description->columns["note"]);

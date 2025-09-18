@@ -31,9 +31,9 @@ class EventAttendee extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setProperty('defaultVisibility', true),
-      'id_attendee' => (new Lookup($this, $this->translate('Attendee'), Attendee::class))->setProperty('defaultVisibility', true),
-      'is_attending_virtually' => (new Boolean($this, $this->translate('Is attending virtually')))->setProperty('defaultVisibility', true),
+      'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setDefaultVisible(),
+      'id_attendee' => (new Lookup($this, $this->translate('Attendee'), Attendee::class))->setDefaultVisible(),
+      'is_attending_virtually' => (new Boolean($this, $this->translate('Is attending virtually')))->setDefaultVisible(),
     ]);
   }
 

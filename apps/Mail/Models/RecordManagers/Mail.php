@@ -21,13 +21,13 @@ class Mail extends \Hubleto\Erp\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
-    $idAccount = $main->router()->urlParamAsInteger('idAccount');
-    $idMailbox = $main->router()->urlParamAsInteger('idMailbox');
-    $showOnlyScheduledToSend = $main->router()->urlParamAsBool('showOnlyScheduledToSend');
-    $showOnlySent = $main->router()->urlParamAsBool('showOnlySent');
-    $showOnlyDrafts = $main->router()->urlParamAsBool('showOnlyDrafts');
-    $showOnlyTemplates = $main->router()->urlParamAsBool('showOnlyTemplates');
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $idAccount = $hubleto->router()->urlParamAsInteger('idAccount');
+    $idMailbox = $hubleto->router()->urlParamAsInteger('idMailbox');
+    $showOnlyScheduledToSend = $hubleto->router()->urlParamAsBool('showOnlyScheduledToSend');
+    $showOnlySent = $hubleto->router()->urlParamAsBool('showOnlySent');
+    $showOnlyDrafts = $hubleto->router()->urlParamAsBool('showOnlyDrafts');
+    $showOnlyTemplates = $hubleto->router()->urlParamAsBool('showOnlyTemplates');
 
     $query = parent::prepareReadQuery($query, $level);
 

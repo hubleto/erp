@@ -9,9 +9,9 @@ final class RenderAllRoutesTest extends TestCase
 
   public function testRenderAllRoutes(): void
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $html = $main->render('help');
+    $html = $hubleto->render('help');
     $this->assertStringContainsString('app-main-title', $html);
     $this->assertStringNotContainsStringIgnoringCase('error', $html);
   }

@@ -60,17 +60,17 @@ class Product extends \Hubleto\Erp\Model
     ;
 
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'id_product_group' => (new Lookup($this, $this->translate('Product Group'), Group::class)),
-      'type' => (new Integer($this, $this->translate('Product Type')))->setEnumValues($typeEnumValues)->setDescription($typeDescription)->setProperty('defaultVisibility', true),
+      'type' => (new Integer($this, $this->translate('Product Type')))->setEnumValues($typeEnumValues)->setDescription($typeDescription)->setDefaultVisible(),
       'invoicing_policy' => (new Integer($this, $this->translate('Invoicing policy')))->setEnumValues(self::INVOICING_POLICY_ENUM_VALUES)->setDescription($invoicingPolicyDescription),
-      'is_on_sale' => new Boolean($this, $this->translate('On sale'))->setProperty('defaultVisibility', true),
+      'is_on_sale' => new Boolean($this, $this->translate('On sale'))->setDefaultVisible(),
       'image' => new Image($this, $this->translate('Image') . ' [540x600px]'),
       'description' => new Text($this, $this->translate('Description')),
       'notes' => new Text($this, $this->translate('Internal notes')),
       'amount_in_package' => new Decimal($this, $this->translate('Amount of items in package')),
-      'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setRequired()->setProperty('defaultVisibility', true),
-      'unit' => new Varchar($this, $this->translate('Unit'))->setProperty('defaultVisibility', true),
+      'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setRequired()->setDefaultVisible(),
+      'unit' => new Varchar($this, $this->translate('Unit'))->setDefaultVisible(),
       'margin' => (new Decimal($this, $this->translate('Margin')))->setUnit("%")->setColorScale('bg-light-blue-to-dark-blue'),
       'vat' => (new Decimal($this, $this->translate('VAT')))->setUnit("%"),
       'bar_code' => new Varchar($this, $this->translate('Bar code')),
@@ -91,9 +91,9 @@ class Product extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = 'Products';
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
     $description->ui["addButtonText"] = $this->translate("Add product");
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     return $description;
   }

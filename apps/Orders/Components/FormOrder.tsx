@@ -325,11 +325,11 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
               },
               columns: {
                 short_description: { type: "text", title: "Short Description" },
-                date: { type: "datetime", title: "Date Time"},
+                date_time: { type: "datetime", title: "Date Time"},
               },
               inputs: {
                 short_description: { type: "text", title: "Short Description" },
-                date: { type: "datetime", title: "Date Time"},
+                date_time: { type: "datetime", title: "Date Time"},
               }
             }}
             isUsedAsInput={true}

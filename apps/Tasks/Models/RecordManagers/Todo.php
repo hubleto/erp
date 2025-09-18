@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Tasks\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 class Todo extends \Hubleto\Erp\RecordManager
 {

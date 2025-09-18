@@ -22,6 +22,7 @@ use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Project extends \Hubleto\Erp\Model
 {
@@ -31,13 +32,13 @@ class Project extends \Hubleto\Erp\Model
   public ?string $lookupUrlDetail = 'projects/{%ID%}';
 
   public array $relations = [
-    'MAIN_DEVELOPER' => [ self::HAS_ONE, \Hubleto\Framework\Models\User::class, 'id_main_developer', 'id' ],
-    'ACCOUNT_MANAGER' => [ self::HAS_ONE, \Hubleto\Framework\Models\User::class, 'id_account_manager', 'id' ],
+    'MAIN_DEVELOPER' => [ self::HAS_ONE, User::class, 'id_main_developer', 'id' ],
+    'ACCOUNT_MANAGER' => [ self::HAS_ONE, User::class, 'id_account_manager', 'id' ],
     'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id_customer', 'id' ],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id_contact', 'id' ],
     'PHASE' => [ self::HAS_ONE, Phase::class, 'id_phase', 'id' ],
-    'OWNER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_owner', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id' ],
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
 
     'ORDERS' => [ self::HAS_MANY, ProjectOrder::class, 'id_order', 'id'],
     'TASKS' => [ self::HAS_MANY, ProjectTask::class, 'id_task', 'id'],
@@ -58,10 +59,10 @@ class Project extends \Hubleto\Erp\Model
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('badge badge-info')->setDescription('Leave empty to generate automatically.'),
       'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description'))),
-      'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
+      'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
-      'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
+      'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),

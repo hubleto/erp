@@ -6,6 +6,7 @@ namespace Hubleto\App\Community\Inventory\Models\RecordManagers;
 use Hubleto\App\Community\Products\Models\RecordManagers\Product;
 use Hubleto\App\Community\Warehouses\Models\RecordManagers\Location;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 class Transaction extends \Hubleto\Erp\RecordManager
 {

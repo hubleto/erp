@@ -21,7 +21,6 @@ class Inventory extends \Hubleto\Erp\Model
     'PRODUCT' => [ self::HAS_ONE, Product::class, 'id_product', 'id' ],
     'STATUS' => [ self::HAS_ONE, Status::class, 'id_status', 'id' ],
     'LOCATION' => [ self::HAS_ONE, Location::class, 'id_location', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id' ],
   ];
 
   public function describeColumns(): array

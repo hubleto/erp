@@ -8,7 +8,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
   public array $packages = [
     'core' => [
-      \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 99999],
+      \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 0],
       \Hubleto\App\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997 ],
       \Hubleto\App\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997 ],
       \Hubleto\App\Community\Crypto\Loader::class => [ ],

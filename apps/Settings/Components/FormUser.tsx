@@ -97,7 +97,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
                 :
                   <Table
                     uid='user_roles'
-                    model='Hubleto/App/Community/Settings/Models/UserHasRole'
+                    model='Hubleto/App/Community/Auth/Models/UserHasRole'
                     customEndpointParams={{idUser: this.state.id}}
                   ></Table>
                 }

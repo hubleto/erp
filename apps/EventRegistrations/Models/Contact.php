@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\EventRegistrations\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Contact extends \Hubleto\Erp\Model
 {
@@ -12,7 +13,7 @@ class Contact extends \Hubleto\Erp\Model
   public string $recordManagerClass = RecordManagers\Contact::class;
 
   public array $relations = [
-    'MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id' ]
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ]
   ];
 
   public function describeColumns(): array
@@ -20,7 +21,7 @@ class Contact extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'first_name' => (new Varchar($this, $this->translate('First name')))->setRequired(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setRequired(),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect'),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect'),
     ]);
   }
 

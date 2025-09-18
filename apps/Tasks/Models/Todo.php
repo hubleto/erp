@@ -22,6 +22,7 @@ use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Todo extends \Hubleto\Erp\Model
 {
@@ -30,7 +31,7 @@ class Todo extends \Hubleto\Erp\Model
   public ?string $lookupSqlValue = '{%TABLE%}.todo';
 
   public array $relations = [
-    'RESPONSIBLE' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_responsible', 'id' ],
+    'RESPONSIBLE' => [ self::BELONGS_TO, User::class, 'id_responsible', 'id' ],
     'TASK' => [ self::BELONGS_TO, Task::class, 'id_task', 'id' ],
   ];
 
@@ -45,7 +46,7 @@ class Todo extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'todo' => (new Varchar($this, $this->translate('To do')))->setProperty('defaultVisibility', true),
       'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)
+      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),

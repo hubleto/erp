@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Settings\Models;
 
+use Hubleto\App\Community\Auth\Models\UserRole;
 use Hubleto\Framework\Db\Column\Lookup;
 
 class RolePermission extends \Hubleto\Erp\Model

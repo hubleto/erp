@@ -22,7 +22,7 @@ class SendMails extends \Hubleto\Erp\Cron
       ->get()
     ;
 
-      $this->logger()->info('SendMails: ' . $mailsToSend->count() . ' mails to send.');
+    $this->logger()->info('SendMails: ' . $mailsToSend->count() . ' mails to send.');
 
     foreach ($mailsToSend as $mail) {
       try {

@@ -12,6 +12,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\App\Community\Auth\Models\User;
 
 // This table records all movements of inventory within the warehouse.
 class Transaction extends \Hubleto\Erp\Model
@@ -24,7 +25,7 @@ class Transaction extends \Hubleto\Erp\Model
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id' ],
     'LOCATION_SOURCE' => [ self::BELONGS_TO, Location::class, 'id_location_source', 'id' ],
     'LOCATION_DESTINATION' => [ self::BELONGS_TO, Location::class, 'id_location_destination', 'id' ],
-    'USER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id' ],
+    'USER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
   ];
 
   public const TYPE_RECEIPT = 1;
@@ -59,7 +60,7 @@ class Transaction extends \Hubleto\Erp\Model
       'quantity' => (new Decimal($this, $this->translate('Quantity')))->setProperty('defaultVisibility', true),
       'id_location_source' => (new Lookup($this, $this->translate('Source location'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
       'id_location_destination' => (new Lookup($this, $this->translate('Destination location'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_user' => (new Lookup($this, $this->translate('Who performed the trancation'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
+      'id_user' => (new Lookup($this, $this->translate('Who performed the trancation'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
       'document_1' => (new File($this, $this->translate('Reference document #1')))->setProperty('defaultVisibility', true),
       'document_2' => (new File($this, $this->translate('Reference document #2'))),
       'document_3' => (new File($this, $this->translate('Reference document #3'))),

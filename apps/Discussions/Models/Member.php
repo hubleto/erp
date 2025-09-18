@@ -16,6 +16,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\App\Community\Auth\Models\User;
 
 
 class Member extends \Hubleto\Erp\Model
@@ -27,14 +28,14 @@ class Member extends \Hubleto\Erp\Model
 
   public array $relations = [
     'DISCUSSION' => [ self::BELONGS_TO, Discussion::class, 'id_discussion', 'id' ],
-    'MEMBER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_member', 'id' ],
+    'MEMBER' => [ self::BELONGS_TO, User::class, 'id_member', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
       'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_member' => (new Lookup($this, $this->translate('Member'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'id_member' => (new Lookup($this, $this->translate('Member'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'permissions' => (new Json($this, $this->translate('Permissions')))->setProperty('defaultVisibility', true),
     ]);
   }

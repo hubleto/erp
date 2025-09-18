@@ -10,6 +10,7 @@ use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Leads\Models\Lead;
@@ -31,8 +32,8 @@ class Customer extends Model
   public array $relations = [
     'CONTACTS' => [ self::HAS_MANY, Contact::class, 'id_customer' ],
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
-    'OWNER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_owner', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id' ],
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, CustomerActivity::class, 'id_customer', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, CustomerDocument::class, 'id_customer', 'id'],
     'TAGS' => [ self::HAS_MANY, CustomerTag::class, 'id_customer', 'id' ],
@@ -57,8 +58,8 @@ class Customer extends Model
       'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setProperty('defaultVisibility', true),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
-      'id_manager' => new Lookup($this, $this->translate('Manager'), \Hubleto\Framework\Models\User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
+      'id_manager' => new Lookup($this, $this->translate('Manager'), User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
       'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)")),
     ], parent::describeColumns());
   }

@@ -24,7 +24,9 @@ class Panel extends \Hubleto\Erp\Model
         ->setRequired()->setReadonly()->setDefaultValue($this->router()->urlParamAsInteger('idDashboard')),
       'board_url_slug' => (new Varchar($this, $this->translate('Board')))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
-      'width' => (new Integer($this, $this->translate('Width')))->setProperty('defaultVisibility', true)->setDefaultValue(1),
+      'width' => (new Integer($this, $this->translate('Width')))->setProperty('defaultVisibility', true)->setDefaultValue(1)->setEnumValues(
+        [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6]
+      ),
       'order' => (new Integer($this, $this->translate('Order')))->setProperty('defaultVisibility', true),
       'configuration' => (new Json($this, $this->translate('Configuration'))),
     ]);

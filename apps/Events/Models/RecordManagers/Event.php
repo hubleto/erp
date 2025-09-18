@@ -4,6 +4,7 @@ namespace Hubleto\App\Community\Events\Models\RecordManagers;
 
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 class Event extends \Hubleto\Erp\RecordManager
 {

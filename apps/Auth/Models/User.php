@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Auth\Models;
 
 use Hubleto\App\Community\Settings\Models\Company;
-use Hubleto\App\Community\Settings\Models\UserHasRole;
+use Hubleto\App\Community\Auth\Models\UserHasRole;
 use Hubleto\Erp\Model;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\DateTime;
@@ -46,7 +46,7 @@ class User extends \Hubleto\Framework\Models\User
   ];
 
   public string $table = 'users';
-  public string $recordManagerClass = \Hubleto\App\Community\Auth\Models\RecordManagers\User::class;
+  public string $recordManagerClass = RecordManagers\User::class;
   public ?string $lookupSqlValue = 'ifnull({%TABLE%}.nick, {%TABLE%}.email)';
 
   public string $translationContext = 'Hubleto\\App\\Community\\Settings\\Loader::Models\\User';

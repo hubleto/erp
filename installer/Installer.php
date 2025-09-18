@@ -4,8 +4,8 @@ namespace Hubleto\Erp\Installer;
 
 
 
-use Hubleto\App\Community\Settings\Models\UserRole;
-use Hubleto\App\Community\Settings\Models\UserHasRole;
+use Hubleto\App\Community\Auth\Models\UserRole;
+use Hubleto\App\Community\Auth\Models\UserHasRole;
 use Hubleto\App\Community\Auth\Models\User;
 
 class Installer extends \Hubleto\Framework\Core
@@ -167,8 +167,8 @@ class Installer extends \Hubleto\Framework\Core
   public function addCompanyAndAdminUser(): void
   {
     $mCompany = $this->getModel(\Hubleto\App\Community\Settings\Models\Company::class);
-    $mUser = $this->getService(User::class);
-    $mUserHasRole = $this->getService(UserHasRole::class);
+    $mUser = $this->getModel(User::class);
+    $mUserHasRole = $this->getModel(UserHasRole::class);
 
     $idCompany = $mCompany->record->recordCreate(['name' => $this->accountFullName])['id'];
 
@@ -188,7 +188,7 @@ class Installer extends \Hubleto\Framework\Core
     $mUserHasRole->record->recordCreate([
       'id_user' => $idUserAdministrator,
       'id_role' => UserRole::ROLE_ADMINISTRATOR,
-    ])['id'];
+    ]);
 
     if ($this->adminPassword == '' && $this->smtpHost != '') {
       $this->router()->setUrlParam('login', $this->adminEmail);

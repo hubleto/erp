@@ -12,7 +12,7 @@ export default class TableUserRoles extends Table<TableUserRolesProps, TableUser
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'Hubleto/App/Community/Settings/Models/UserRole',
+    model: 'Hubleto/App/Community/Auth/Models/UserRole',
   }
 
   props: TableUserRolesProps;

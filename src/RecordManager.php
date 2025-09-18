@@ -6,7 +6,7 @@ namespace Hubleto\Erp;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\Framework\Helper;
 
-use Hubleto\App\Community\Settings\Models\UserRole;
+use Hubleto\App\Community\Auth\Models\UserRole;
 
 class RecordManager extends \Hubleto\Framework\RecordManager
 {

@@ -18,6 +18,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\App\Community\Projects\Models\Project;
+use Hubleto\App\Community\Auth\Models\User;
 
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
@@ -44,7 +45,7 @@ class Key extends \Hubleto\Erp\Model
       'notes' => (new Text($this, $this->translate('Notes'))),
       'ip_address_blacklist' => (new Varchar($this, $this->translate('IP Address blacklist'))),
       'ip_address_whitelist' => (new Varchar($this, $this->translate('IP Address whitelist'))),
-      'id_created_by' => (new Lookup($this, $this->translate('Created by'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'id_created_by' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
     ]);
   }

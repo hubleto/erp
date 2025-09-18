@@ -10,6 +10,7 @@ use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 class Campaign extends \Hubleto\Erp\RecordManager
 {

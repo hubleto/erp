@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Notifications\Models\RecordManagers;
 
 
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

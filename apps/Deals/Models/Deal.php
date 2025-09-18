@@ -20,6 +20,7 @@ use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Settings\Models\Setting;
+use Hubleto\App\Community\Auth\Models\User;
 
 use Hubleto\Framework\Helper;
 
@@ -59,8 +60,8 @@ class Deal extends \Hubleto\Erp\Model
   public array $relations = [
     'LEAD' => [ self::BELONGS_TO, Lead::class, 'id_lead', 'id'],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, 'id_customer', 'id' ],
-    'OWNER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_owner', 'id'],
-    'MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id'],
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
@@ -98,8 +99,8 @@ class Deal extends \Hubleto\Erp\Model
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT')),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setFkOnUpdate('RESTRICT')->setFkOnDelete('SET NULL')->setReadonly(),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_template_quotation' => (new Lookup($this, $this->translate('Template for quotation'), Template::class)),
       'customer_order_number' => (new Varchar($this, $this->translate('Customer\'s order number')))->setProperty('defaultVisibility', true),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),

@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Settings;
 
 
 use Hubleto\App\Community\Settings\Models\RolePermission;
-use Hubleto\App\Community\Settings\Models\UserRole;
+use Hubleto\App\Community\Auth\Models\UserRole;
 use Hubleto\Erp\Exceptions;
 use Hubleto\Erp\Interfaces;
 use Hubleto\Framework\Core;
@@ -37,7 +37,7 @@ class PermissionsManager extends Core implements Interfaces\PermissionsManagerIn
 
   public function createUserRoleModel(): \Hubleto\Framework\Model
   {
-    return $this->getModel(\Hubleto\App\Community\Settings\Models\UserRole::class);
+    return $this->getModel(\Hubleto\App\Community\Auth\Models\UserRole::class);
   }
 
   public function createRolePermissionModel(): Model

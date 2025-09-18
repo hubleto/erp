@@ -6,6 +6,7 @@ namespace Hubleto\App\Community\Worksheets\Models\RecordManagers;
 use Hubleto\App\Community\Projects\Models\ProjectTask;
 use Hubleto\App\Community\Tasks\Models\RecordManagers\Task;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 class Activity extends \Hubleto\Erp\RecordManager
 {

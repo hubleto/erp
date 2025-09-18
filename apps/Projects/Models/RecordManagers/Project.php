@@ -82,9 +82,7 @@ class Project extends \Hubleto\Erp\RecordManager
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
     $view = $hubleto->router()->urlParamAsString('view');
-    if ($view == 'briefOverview') {
-      $query = $query->where($this->table . '.is_closed', false);
-    }
+    if ($view == 'briefOverview') $query = $query->where($this->table . '.is_closed', false);
 
     if ($hubleto->router()->urlParamAsInteger("idDeal") > 0) {
       $query = $query->where($this->table . '.id_deal', $hubleto->router()->urlParamAsInteger("idDeal"));

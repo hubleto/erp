@@ -11,7 +11,7 @@ interface FormReportState extends HubletoFormState { }
 export default class FormReport<P, S> extends HubletoForm<FormReportProps, FormReportState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'Hubleto/App/Community/Reports/Models/Team',
+    model: 'Hubleto/App/Community/Reports/Models/Report',
   }
 
   props: FormReportProps;
@@ -32,7 +32,7 @@ export default class FormReport<P, S> extends HubletoForm<FormReportProps, FormR
 
   renderContent(): JSX.Element {
     const R = this.state.record;
-    console.log(R, R._QUERY_BUILDER.fields);
+    console.log(R, R._QUERY_BUILDER?.fields);
     return <>
       <div className='w-full flex gap-2'>
         <div className="flex-1 border-r border-gray-100">
@@ -44,6 +44,7 @@ export default class FormReport<P, S> extends HubletoForm<FormReportProps, FormR
         </div>
       </div>
       {this.divider('Query')}
+      { R.id > 0 ?
       <div className='w-full flex gap-2'>
         <div className="flex-1 border-r border-gray-100">
           <QueryBuilder
@@ -69,6 +70,7 @@ export default class FormReport<P, S> extends HubletoForm<FormReportProps, FormR
           {this.inputWrapper('query', {readonly: true})}
         </div>
       </div>
+      : <div className='p-4 italic text-gray-400'>Save the report to build the query.</div>}
     </>;
   }
 }

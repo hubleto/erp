@@ -38,7 +38,7 @@ class Report extends \Hubleto\Erp\Model
     try {
       $model = $record['model'];
       if (class_exists($model)) {
-        $modelObj = $this->getModel($model::class);
+        $modelObj = $this->getModel(get_class($model));
 
         foreach ($modelObj->getColumns() as $colName => $column) {
           $field = [

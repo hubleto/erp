@@ -1,4 +1,4 @@
-<h1 class="app-main-title"></h1>
+{# <h1 class="app-main-title"></h1>
 
 
 <div class="flex gap-2 w-full">
@@ -80,4 +80,12 @@
       ></app-mail-table-mails>
     </div>
   </div>
-</div>
+</div> #}
+
+<h1 class="app-main-title">{{ translate('Mail') }} > {{ viewParams.account.name }} > {{ viewParams.mailbox.name }}</h1>
+<app-mail-table-mails
+  int:id-account="{{ viewParams.account.id }}"
+  int:id-mailbox="{{ viewParams.mailbox.id }}"
+  bool:readonly="true"
+  string:view="briefOverview"
+></app-mail-table-mails>

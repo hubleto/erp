@@ -1,4 +1,3 @@
-{% set secondSidebar = viewParams.activatedApp.renderSecondSidebar() %}
 {% set isPremium = hubleto.env().isPremium() %}
 
 {% macro appBtn(app, inGroup) %}
@@ -288,12 +287,12 @@
         {% endfor %}
 
       </nav>
-      {% if secondSidebar != '' %} <div>{{ secondSidebar|raw }}</div> {% endif %}
+      {% if viewParams.activatedApp.sidebarView != '' %} <div>{{ include(viewParams.activatedApp.sidebarView) }}</div> {% endif %}
     </aside>
 
     <div
       id="app-main-content"
-      class="{% if secondSidebar != '' %} sidebar-two-levels {% endif %}"
+      class="{% if viewParams.activatedApp.sidebarView != '' %} sidebar-two-levels {% endif %}"
     >
       {{ contentHtml|raw }}
     </div>

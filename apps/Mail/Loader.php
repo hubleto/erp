@@ -34,6 +34,7 @@ class Loader extends \Hubleto\Framework\App
     $this->cronManager()->addCron(Crons\SendMails::class);
 
     $this->templateVariables = $this->collectExtendibles('MailTemplateVariables');
+    $this->sidebarView = '@Hubleto:App:Community:Mail/Sidebar.twig';
   }
 
   public function installTables(int $round): void
@@ -156,4 +157,5 @@ class Loader extends \Hubleto\Framework\App
 
     return $mail;
   }
+
 }

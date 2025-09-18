@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Campaigns\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use Hubleto\Framework\Db\Column\Datetime;
+use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Varchar;
 
 class Click extends \Hubleto\Erp\Model
@@ -22,7 +22,7 @@ class Click extends \Hubleto\Erp\Model
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired(),
       'id_recipient' => (new Lookup($this, $this->translate('Recipient'), Recipient::class)),
       'url' => (new Varchar($this, $this->translate('Url'))),
-      'datetime_clicked' => (new Datetime($this, $this->translate('Clicked'))),
+      'datetime_clicked' => (new DateTime($this, $this->translate('Clicked'))),
     ]);
   }
 

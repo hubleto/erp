@@ -37,7 +37,7 @@ class Message extends \Hubleto\Erp\Model
       'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
       'from_email' => (new Varchar($this, $this->translate('From (Email)')))->setProperty('defaultVisibility', true),
       'message' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true),
-      'sent' => (new Datetime($this, $this->translate('Sent')))->setProperty('defaultVisibility', true),
+      'sent' => (new DateTime($this, $this->translate('Sent')))->setProperty('defaultVisibility', true),
     ]);
   }
 

@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Workflow\Hooks;
 
+
 use Hubleto\App\Community\Workflow\Models\WorkflowHistory;
 
 class SaveWorkflowHistory extends \Hubleto\Erp\Hook
@@ -33,7 +34,7 @@ class SaveWorkflowHistory extends \Hubleto\Erp\Hook
             'model' => get_class($model),
             'record_id' => $savedRecord['id'],
             'datetime_change' => date('Y-m-d H:i:s'),
-            'id_user' => $this->authProvider()->getUserId(),
+            'id_user' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(),
             'id_workflow' => $savedRecord['id_workflow'] ?? 0,
             'id_workflow_step' => $savedRecord['id_workflow_step'] ?? 0,
           ]);

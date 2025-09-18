@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Notifications\Models;
 
+
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -9,7 +10,8 @@ use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Json;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\Framework\Models\User;
+
 
 class Notification extends \Hubleto\Erp\Model
 {
@@ -22,8 +24,8 @@ class Notification extends \Hubleto\Erp\Model
   ];
 
   public array $relations = [
-    'FROM' => [ self::BELONGS_TO, User::class, 'id_from', 'id' ],
-    'TO' => [ self::BELONGS_TO, User::class, 'id_to', 'id' ],
+    'FROM' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_from', 'id' ],
+    'TO' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_to', 'id' ],
   ];
 
   public static function addCategory(int $id, string $category): bool
@@ -43,12 +45,12 @@ class Notification extends \Hubleto\Erp\Model
 
   public function describeColumns(): array
   {
-    $user = $this->authProvider()->getUser();
+    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
     return array_merge(parent::describeColumns(), [
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
       'category' => (new Integer($this, $this->translate('Category')))->setRequired()->setEnumValues(self::getCategories()),
-      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setRequired(),
-      'id_to' => (new Lookup($this, $this->translate('To'), User::class))->setReactComponent('InputUserSelect')->setRequired(),
+      'id_from' => (new Lookup($this, $this->translate('From'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setRequired(),
+      'id_to' => (new Lookup($this, $this->translate('To'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setRequired(),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
       'body' => (new Text($this, $this->translate('Body')))->setRequired(),
       'color' => (new Color($this, $this->translate('Color'))),

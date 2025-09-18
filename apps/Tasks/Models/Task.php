@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Tasks\Models;
 
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -16,7 +17,7 @@ use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Contacts\Models\Contact;
@@ -30,8 +31,8 @@ class Task extends \Hubleto\Erp\Model
   public ?string $lookupUrlDetail = 'tasks/{%ID%}';
 
   public array $relations = [
-    'DEVELOPER' => [ self::BELONGS_TO, User::class, 'id_developer', 'id' ],
-    'TESTER' => [ self::BELONGS_TO, User::class, 'id_tester', 'id' ],
+    'DEVELOPER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_developer', 'id' ],
+    'TESTER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_tester', 'id' ],
     'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id_customer', 'id' ],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id_contact', 'id' ],
     'TODO' => [ self::HAS_MANY, Todo::class, 'id_task', 'id' ],
@@ -53,11 +54,11 @@ class Task extends \Hubleto\Erp\Model
       'description' => (new Text($this, $this->translate('Description'))),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setProperty('defaultVisibility', false),
-      'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->authProvider()->getUserId())
+      'id_developer' => (new Lookup($this, $this->translate('Developer'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
+        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
-      'id_tester' => (new Lookup($this, $this->translate('Tester'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
-        ->setDefaultValue($this->authProvider()->getUserId())
+      'id_tester' => (new Lookup($this, $this->translate('Tester'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()
+        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'hours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setProperty('defaultVisibility', true)->setUnit('h')->setDecimals(2),

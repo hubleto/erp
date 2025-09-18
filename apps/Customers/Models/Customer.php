@@ -2,6 +2,9 @@
 
 namespace Hubleto\App\Community\Customers\Models;
 
+
+
+use Hubleto\Erp\Model;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
@@ -11,10 +14,11 @@ use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Leads\Models\Lead;
 use Hubleto\App\Community\Settings\Models\Country;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\Framework\Description\Input;
+use Hubleto\Framework\Description\Table;
 use Hubleto\Framework\Helper;
 
-class Customer extends \Hubleto\Erp\Model
+class Customer extends Model
 {
   public bool $isExtendableByCustomColumns = true;
 
@@ -27,8 +31,8 @@ class Customer extends \Hubleto\Erp\Model
   public array $relations = [
     'CONTACTS' => [ self::HAS_MANY, Contact::class, 'id_customer' ],
     'COUNTRY' => [ self::HAS_ONE, Country::class, 'id', 'id_country' ],
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    'OWNER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_owner', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_manager', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, CustomerActivity::class, 'id_customer', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, CustomerDocument::class, 'id_customer', 'id'],
     'TAGS' => [ self::HAS_MANY, CustomerTag::class, 'id_customer', 'id' ],
@@ -38,7 +42,8 @@ class Customer extends \Hubleto\Erp\Model
 
   public function describeColumns(): array
   {
-    return array_merge([
+    return array_merge(
+      [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true),
       'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
       'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),
@@ -52,8 +57,8 @@ class Customer extends \Hubleto\Erp\Model
       'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setProperty('defaultVisibility', true),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->authProvider()->getUserId())->setProperty('defaultVisibility', true),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->authProvider()->getUserId())->setProperty('defaultVisibility', true),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
+      'id_manager' => new Lookup($this, $this->translate('Manager'), \Hubleto\Framework\Models\User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setProperty('defaultVisibility', true),
       'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)")),
     ], parent::describeColumns());
   }
@@ -80,7 +85,7 @@ class Customer extends \Hubleto\Erp\Model
     ]);
   }
 
-  public function describeInput(string $columnName): \Hubleto\Framework\Description\Input
+  public function describeInput(string $columnName): Input
   {
     $description = parent::describeInput($columnName);
     switch ($columnName) {
@@ -94,7 +99,7 @@ class Customer extends \Hubleto\Erp\Model
     return $description;
   }
 
-  public function describeTable(): \Hubleto\Framework\Description\Table
+  public function describeTable(): Table
   {
     $description = parent::describeTable();
     $description->ui['title'] = ''; //$this->translate('Customers');

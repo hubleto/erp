@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Settings\Models;
 
+
 use Hubleto\Framework\Db\Column\Lookup;
 
 class UserHasRole extends \Hubleto\Erp\Model
@@ -12,7 +13,7 @@ class UserHasRole extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_user' => (new Lookup($this, $this->translate('User'), User::class))->setReactComponent('InputUserSelect'),
+      'id_user' => (new Lookup($this, $this->translate('User'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect'),
       'id_role' => (new Lookup($this, $this->translate('Role'), UserRole::class)),
     ]);
   }

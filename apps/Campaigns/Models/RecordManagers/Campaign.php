@@ -2,14 +2,14 @@
 
 namespace Hubleto\App\Community\Campaigns\Models\RecordManagers;
 
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+
+use Hubleto\App\Community\Mail\Models\RecordManagers\Account;
+use Hubleto\App\Community\Mail\Models\RecordManagers\Template;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
-use Hubleto\App\Community\Mail\Models\RecordManagers\Template;
-use Hubleto\App\Community\Mail\Models\RecordManagers\Account;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Campaign extends \Hubleto\Erp\RecordManager
 {

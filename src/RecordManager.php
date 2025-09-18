@@ -2,8 +2,10 @@
 
 namespace Hubleto\Erp;
 
+
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\Framework\Helper;
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\App\Community\Settings\Models\UserRole;
 
 class RecordManager extends \Hubleto\Framework\RecordManager
@@ -17,8 +19,8 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     // prepare some variables
 
     $main = \Hubleto\Framework\Loader::getGlobalApp();
-    $idUser = $main->authProvider()->getUserId();
-// var_dump($main->authProvider()->getUserType());
+    $idUser = $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
+// var_dump($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType());
     $hasIdOwner = isset($record['id_owner']);
     $hasIdManager = isset($record['id_manager']);
     $hasIdTeam = isset($record['id_team']);
@@ -35,17 +37,17 @@ class RecordManager extends \Hubleto\Framework\RecordManager
 
     $isTeamMember = false;
     // if ($hasIdTeam) {
-    //   $isTeamMember = $main->authProvider()->isUserMemberOfTeam($record['id_team']);
+    //   $isTeamMember = $main->getService(\Hubleto\Framework\AuthProvider::class)->isUserMemberOfTeam($record['id_team']);
     // }
 
     // enable permissions by certain criteria
     $canRead = false;
     $canModify = false;
 
-    if ($main->authProvider()->getUserType() == User::TYPE_ADMINISTRATOR) {
+    if ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_ADMINISTRATOR) {
       $canRead = true;
       $canModify = true;
-    } if ($main->authProvider()->getUserType() == User::TYPE_CHIEF_OFFICER) {
+    } if ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_CHIEF_OFFICER) {
       // CxO can do anything except for modifying config and settings
 
       $canRead = true;
@@ -54,7 +56,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       if (str_starts_with($this->model->fullName, 'Hubleto/Core/Config')) {
         $canModify = false;
       }
-    } elseif ($main->authProvider()->getUserType() == User::TYPE_MANAGER) {
+    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_MANAGER) {
       // Manager can:
       //   - read only records where he/she is owner or manager
       //   - modify only records where he/she is owner
@@ -80,7 +82,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       }
 
       $permissions = [$canRead, $canModify, $canModify, $canModify];
-    } elseif ($main->authProvider()->getUserType() == User::TYPE_EMPLOYEE) {
+    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_EMPLOYEE) {
       // Employee can:
       //   - read/modify only records where he/she is owner
 
@@ -89,14 +91,14 @@ class RecordManager extends \Hubleto\Framework\RecordManager
         $canModify = true;
       }
 
-    } elseif ($main->authProvider()->getUserType() == User::TYPE_ASSISTANT) {
+    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_ASSISTANT) {
       // Assistant can:
       //   - read/modify only records where he/she is owner
 
       if ($hasIdOwner && $isOwner || !$hasIdOwner) {
         $canRead = true;
       }
-    } elseif ($main->authProvider()->getUserType() == User::TYPE_EXTERNAL) {
+    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_EXTERNAL) {
       // Externals cannot do anything by default
     }
 
@@ -115,15 +117,15 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $hasIdManager = $this->model->hasColumn('id_manager');
     $hasIdTeam = $this->model->hasColumn('id_team');
 
-    $idUser = $main->authProvider()->getUserId();
+    $idUser = $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
 
-    $user = $main->authProvider()->getUser();
+    $user = $main->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
     $userTeams = [];
     foreach ($user['TEAMS'] ?? [] as $team) {
       $userTeams[] = $team['id'] ?? 0;
     }
 
-    if ($main->authProvider()->getUserType() == User::TYPE_MANAGER) {
+    if ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_MANAGER) {
       if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
         $query = $query->where(function ($q) use ($idUser, $userTeams) {
           $q
@@ -145,9 +147,9 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       } elseif ($hasIdTeam) {
         $query = $query->whereIn($this->table . '.id_team', $userTeams);
       }
-    } elseif ($main->authProvider()->getUserType() == User::TYPE_EMPLOYEE && $hasIdOwner) {
+    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_EMPLOYEE && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);
-    } elseif ($main->authProvider()->getUserType() == User::TYPE_ASSISTANT && $hasIdOwner) {
+    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_ASSISTANT && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);
     }
 

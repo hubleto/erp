@@ -8,6 +8,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
   public array $packages = [
     'core' => [
+      \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 99999],
       \Hubleto\App\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997 ],
       \Hubleto\App\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997 ],
       \Hubleto\App\Community\Crypto\Loader::class => [ ],
@@ -23,7 +24,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       \Hubleto\App\Community\Workflow\Loader::class => [ 'sidebarOrder' => 220 ],
       \Hubleto\App\Community\Tasks\Loader::class => [ 'sidebarOrder' => 195 ],
       \Hubleto\App\Community\Worksheets\Loader::class => [ 'sidebarOrder' => 200 ],
-      // \Hubleto\App\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996 ],
+      \Hubleto\App\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996 ],
       \Hubleto\App\Community\Help\Loader::class => [ 'sidebarOrder' => 99998 ],
       \Hubleto\App\Community\About\Loader::class => [ 'sidebarOrder' => 99998 ],
     ],

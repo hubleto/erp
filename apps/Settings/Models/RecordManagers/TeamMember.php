@@ -2,8 +2,9 @@
 
 namespace Hubleto\App\Community\Settings\Models\RecordManagers;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TeamMember extends \Hubleto\Erp\RecordManager
 {
@@ -18,7 +19,7 @@ class TeamMember extends \Hubleto\Erp\RecordManager
   /** @return BelongsTo<User, covariant User> */
   public function MEMBER(): BelongsTo
   {
-    return $this->belongsTo(User::class, 'id_member', 'id');
+    return $this->belongsTo(\Hubleto\Framework\Models\RecordManagers\User::class, 'id_member', 'id');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed

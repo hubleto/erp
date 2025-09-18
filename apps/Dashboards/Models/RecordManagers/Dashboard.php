@@ -2,9 +2,9 @@
 
 namespace Hubleto\App\Community\Dashboards\Models\RecordManagers;
 
+
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Dashboard extends \Hubleto\Erp\RecordManager
 {

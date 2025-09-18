@@ -2,9 +2,11 @@
 
 namespace Hubleto\Erp\Installer;
 
-use Hubleto\App\Community\Settings\Models\User;
+
+
 use Hubleto\App\Community\Settings\Models\UserRole;
 use Hubleto\App\Community\Settings\Models\UserHasRole;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Installer extends \Hubleto\Framework\Core
 {
@@ -151,7 +153,6 @@ class Installer extends \Hubleto\Framework\Core
 
   public function installBaseModels(): void
   {
-    $this->getModel(\Hubleto\Framework\Models\Token::class)->install();
     $this->getModel(\Hubleto\Framework\Models\Config::class)->install();
   }
 
@@ -191,7 +192,7 @@ class Installer extends \Hubleto\Framework\Core
 
     if ($this->adminPassword == '' && $this->smtpHost != '') {
       $this->router()->setUrlParam('login', $this->adminEmail);
-      $this->authProvider()->forgotPassword();
+      $this->getService(\Hubleto\Framework\AuthProvider::class)->forgotPassword();
     }
   }
 

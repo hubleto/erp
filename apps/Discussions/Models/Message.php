@@ -15,7 +15,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+
 
 class Message extends \Hubleto\Erp\Model
 {
@@ -26,14 +26,14 @@ class Message extends \Hubleto\Erp\Model
 
   public array $relations = [
     'DISCUSSION' => [ self::BELONGS_TO, Discussion::class, 'id_discussion', 'id' ],
-    'FROM' => [ self::BELONGS_TO, User::class, 'id_from', 'id' ],
+    'FROM' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_from', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
       'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
+      'id_from' => (new Lookup($this, $this->translate('From'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
       'from_email' => (new Varchar($this, $this->translate('From (Email)')))->setProperty('defaultVisibility', true),
       'message' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true),
       'sent' => (new Datetime($this, $this->translate('Sent')))->setProperty('defaultVisibility', true),

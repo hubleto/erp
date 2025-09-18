@@ -2,9 +2,9 @@
 
 namespace Hubleto\App\Community\Calendar\Models\RecordManagers;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+
 use Hubleto\App\Community\Settings\Models\RecordManagers\ActivityType;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Activity extends \Hubleto\Erp\RecordManager
 {

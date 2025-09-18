@@ -2,13 +2,14 @@
 
 namespace Hubleto\App\Community\Calendar\Models;
 
+
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Time;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\App\Community\Settings\Models\ActivityType;
-use Hubleto\App\Community\Settings\Models\User;
 
 class Activity extends \Hubleto\Erp\Model
 {
@@ -16,7 +17,7 @@ class Activity extends \Hubleto\Erp\Model
   public string $recordManagerClass = RecordManagers\Activity::class;
 
   public array $relations = [
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
+    'OWNER' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, 'id_owner', 'id' ],
     'ACTIVITY_TYPE' => [ self::BELONGS_TO, ActivityType::class, 'id_activity_type', 'id' ],
   ];
 
@@ -32,7 +33,7 @@ class Activity extends \Hubleto\Erp\Model
       'all_day' => (new Boolean($this, $this->translate('All day'))),
       'completed' => (new Boolean($this, $this->translate('Completed')))->setDefaultValue(0),
       'meeting_minutes_link' => (new Varchar($this, $this->translate('Meeting minutes (link)'))),
-      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Created by'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
     ]);
   }
 

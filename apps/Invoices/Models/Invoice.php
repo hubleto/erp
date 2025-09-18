@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Invoices\Models;
 
+
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;
@@ -10,7 +11,7 @@ use Hubleto\Framework\Db\Column\Varchar;
 
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Settings\Models\InvoiceProfile;
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Documents\Models\Template;
@@ -27,7 +28,7 @@ class Invoice extends \Hubleto\Erp\Model {
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, "id_customer" ],
     'PROFILE' => [ self::BELONGS_TO, InvoiceProfile::class, "id_profile" ],
-    'ISSUED_BY' => [ self::BELONGS_TO, User::class, "id_issued_by" ],
+    'ISSUED_BY' => [ self::BELONGS_TO, \Hubleto\Framework\Models\User::class, "id_issued_by" ],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
@@ -46,7 +47,7 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     return array_merge(parent::describeColumns(), [
       'id_profile' => (new Lookup($this, $this->translate('Invoice profile'), InvoiceProfile::class))->setProperty('defaultVisibility', true),
-      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
+      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), \Hubleto\Framework\Models\User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true),
       'number' => (new Varchar($this, $this->translate('Number')))->setProperty('defaultVisibility', true),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setProperty('defaultVisibility', true),
@@ -95,7 +96,7 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     $description = parent::describeForm();
     $description->defaultValues = [
-      'id_issued_by' => $this->authProvider()->getUserId(),
+      'id_issued_by' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(),
       'issued' => date('Y-m-d H:i:s'),
     ];
     return $description;

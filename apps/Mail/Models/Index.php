@@ -3,7 +3,8 @@
 namespace Hubleto\App\Community\Mail\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\Framework\Models\User;
+
 
 class Index extends \Hubleto\Erp\Model
 {
@@ -15,10 +16,10 @@ class Index extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_mail' => (new Lookup($this, $this->translate('Mail'), Mail::class)),
-      'id_from' => (new Lookup($this, $this->translate('From'), User::class)),
-      'id_to' => (new Lookup($this, $this->translate('To'), User::class)),
-      'id_cc' => (new Lookup($this, $this->translate('Cc'), User::class)),
-      'id_bcc' => (new Lookup($this, $this->translate('Bcc'), User::class)),
+      'id_from' => (new Lookup($this, $this->translate('From'), \Hubleto\Framework\Models\User::class)),
+      'id_to' => (new Lookup($this, $this->translate('To'), \Hubleto\Framework\Models\User::class)),
+      'id_cc' => (new Lookup($this, $this->translate('Cc'), \Hubleto\Framework\Models\User::class)),
+      'id_bcc' => (new Lookup($this, $this->translate('Bcc'), \Hubleto\Framework\Models\User::class)),
     ]);
   }
 }

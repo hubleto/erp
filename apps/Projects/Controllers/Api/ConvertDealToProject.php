@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Projects\Controllers\Api;
 
 use Exception;
+
 use Hubleto\App\Community\Projects\Models\Project;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Workflow\Models\Workflow;
@@ -41,8 +42,8 @@ class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
         "id_contact" => $deal->id_contact,
         "title" => $deal->title,
         "identifier" => $deal->identifier . ':' . ($projectsCount + 1),
-        "id_main_developer" => $this->authProvider()->getUserId(),
-        "id_account_manager" => $this->authProvider()->getUserId(),
+        "id_main_developer" => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(),
+        "id_account_manager" => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(),
         "id_workflow" => $idWorkflow,
         "id_workflow_step" => $idWorkflowStep,
         "is_closed" => false,

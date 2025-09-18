@@ -74,6 +74,9 @@ class Task extends \Hubleto\Erp\RecordManager
 
     $filters = $hubleto->router()->urlParamAsArray("filters");
 
+    $view = $hubleto->router()->urlParamAsString('view');
+    if ($view == 'briefOverview') $query = $query->where($this->table . '.is_closed', false);
+
     $query = $query->with('TODO');
 
     $query = Workflow::applyWorkflowStepFilter(

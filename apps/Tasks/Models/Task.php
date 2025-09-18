@@ -113,6 +113,7 @@ class Task extends \Hubleto\Erp\Model
     $description = parent::describeTable();
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
+        $description->hide(['header', 'footer']);
         $description->showOnlyColumns(['identifier', 'title', 'id_main_developer', 'id_workflow_step', 'virt_worked']);
       break;
       default:

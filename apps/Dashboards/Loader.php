@@ -60,6 +60,7 @@ class Loader extends \Hubleto\Framework\App
         'title' => $board['title'],
         'board_url_slug' => $board['boardUrlSlug'],
         'configuration' => '',
+        'width' => rand(2, 3),
       ]);
     }
   }

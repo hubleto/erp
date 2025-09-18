@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Deals;
 
 class Loader extends \Hubleto\Framework\App
 {
-  public bool $hasCustomSettings = true;
+  // public bool $hasCustomSettings = true;
 
   /**
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
@@ -30,7 +30,7 @@ class Loader extends \Hubleto\Framework\App
       '/^deals\/add\/?$/' => ['controller' => Controllers\Deals::class, 'vars' => ['recordId' => -1]],
       '/^deals\/tags\/?$/' => Controllers\Tags::class,
       '/^deals\/lost-reasons\/?$/' => Controllers\LostReasons::class,
-      '/^deals\/settings\/?$/' => Controllers\Settings::class,
+      // '/^deals\/settings\/?$/' => Controllers\Settings::class,
     ]);
     
     $this->addSearchSwitch('d', 'deals');

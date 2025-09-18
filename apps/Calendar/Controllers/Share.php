@@ -4,13 +4,13 @@ namespace Hubleto\App\Community\Calendar\Controllers;
 
 use Hubleto\App\Community\Calendar\Models\RecordManagers\SharedCalendar;
 
-class Settings extends \Hubleto\Erp\Controller
+class Share extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'calendar', 'content' => $this->translate('Calendar') ],
-      [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
+      [ 'url' => 'share', 'content' => $this->translate('Share') ],
     ]);
   }
 

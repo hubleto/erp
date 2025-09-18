@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Customers;
 
 class Loader extends \Hubleto\Framework\App
 {
-  public bool $hasCustomSettings = true;
+  // public bool $hasCustomSettings = true;
 
   /**
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Framework\App
 
       '/^customers(\/(?<recordId>\d+))?\/?$/' => Controllers\Customers::class,
       '/^customers\/add\/?$/' => ['controller' => Controllers\Customers::class, 'vars' => ['recordId' => -1]],
-      '/^customers\/settings\/?$/' => Controllers\Settings::class,
+      // '/^customers\/settings\/?$/' => Controllers\Settings::class,
       '/^customers\/activities\/?$/' => Controllers\Activity::class,
       '/^customers\/tags\/?$/' => Controllers\Tags::class,
     ]);

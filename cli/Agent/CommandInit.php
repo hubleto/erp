@@ -315,7 +315,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     if (empty($packagesToInstall)) {
-      $packagesToInstall = 'sales';
+      $packagesToInstall = 'crm,marketing,sales,projects';
     }
     if (empty($adminPassword) && !isset($smtpHost)) {
       $adminPassword = \Hubleto\Framework\Helper::randomPassword();

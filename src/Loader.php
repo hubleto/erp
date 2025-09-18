@@ -50,6 +50,8 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function init(): void
   {
+    date_default_timezone_set($this->locale()->getTimezone());
+
     try {
       parent::init();
 

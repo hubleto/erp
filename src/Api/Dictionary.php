@@ -21,7 +21,7 @@ class Dictionary extends \Hubleto\Erp\Controllers\ApiController
     if ($language == 'en') {
       return [];
     }
-    if (!in_array($language, array_keys(\Hubleto\App\Community\Settings\Models\User::ENUM_LANGUAGES))) {
+    if (!in_array($language, array_keys(\Hubleto\App\Community\Auth\Models\User::ENUM_LANGUAGES))) {
       return [];
     }
     if (!is_file($dictFile)) {

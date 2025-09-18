@@ -17,7 +17,7 @@ class ProductSupplier extends \Hubleto\Erp\Model
 
   public string $table = 'products_suppliers';
   public string $recordManagerClass = RecordManagers\ProductSupplier::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.title';
+  public ?string $lookupSqlValue = '{%TABLE%}.supplier_product_code';
 
   public array $relations = [
     'PRODUCT' => [ self::HAS_ONE, Product::class, 'id', 'id_product'],

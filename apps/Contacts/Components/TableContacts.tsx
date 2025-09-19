@@ -139,15 +139,17 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
       }
 
       return <>
-        {this.renderHeaderButtons()}
-        {this.renderFulltextSearch()}
+        <div className='flex gap-2'>
+          {this.renderHeaderButtons()}
+          {this.renderFulltextSearch()}
+        </div>
         {this.renderFormModal()}
-        <div className="flex gap-2 flex-wrap mt-2">
+        <div className="md:grid md:grid-cols-2 gap-2 mt-2">
           {Object.keys(this.state.data?.data).map((key) => {
             const item = this.state.data.data[key];
             return <div key={key}>
               <button
-                className="btn btn-transparent"
+                className="btn btn-transparent w-full"
                 onClick={() => {
                   this.setState({recordId: item.id})
                 }}
@@ -174,7 +176,7 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
                     })}
                   </div>
                   {item.VALUES.map((value, index) => {
-                    return <div key={index}><small>{value.value}</small></div>
+                    return <div key={index} className='w-full truncate'><small>{value.value}</small></div>
                   })}
                 </span>
               </button>

@@ -97,6 +97,13 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     return 'customers/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      saveRelations: ['TAGS'],
+    }
+  }
+
   onBeforeSaveRecord(record: any) {
     //Delete all spaces in identifiers
     if (record.tax_id) record.tax_id = record.tax_id.replace(/\s+/g, "");

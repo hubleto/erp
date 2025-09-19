@@ -14,7 +14,8 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
   props: Form{{ modelSingularForm }}Props;
   state: Form{{ modelSingularForm }}State;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Form{{ modelSingularForm }}';
+  translationContext: string = '{{ appNamespaceDoubleBackslash }}';
+  translationContextInner: string = 'Components\\Form{{ modelSingularForm }}';
 
   constructor(props: Form{{ modelSingularForm }}Props) {
     super(props);

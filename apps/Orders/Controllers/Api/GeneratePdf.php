@@ -8,8 +8,12 @@ class GeneratePdf extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
+
     $idOrder = $this->router()->urlParamAsInteger('idOrder');
-    $mOrder = $this->getService(Order::class);
+
+    /** @var Order */
+    $mOrder = $this->getModel(Order::class);
+
     $idDocument = $mOrder->generatePdf($idOrder);
     return [
       'idDocument' => $idDocument

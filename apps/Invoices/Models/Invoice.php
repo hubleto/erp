@@ -175,7 +175,8 @@ class Invoice extends \Hubleto\Erp\Model {
    */
   public function onAfterCreate(array $savedRecord): array
   {
-    $mWorkflow = $this->getService(Workflow::class);
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
 
     list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('invoices');
 
@@ -284,7 +285,9 @@ class Invoice extends \Hubleto\Erp\Model {
    */
   public function generatePdf(int $idInvoice): int
   {
-    $mInvoice = $this->getService(Invoice::class);
+    /** @var Invoice */
+    $mInvoice = $this->getModel(Invoice::class);
+
     $invoice = $mInvoice->record->prepareReadQuery()->where('invoices.id', $idInvoice)->first();
     if (!$invoice) throw new \Exception('Invoice was not found.');
 

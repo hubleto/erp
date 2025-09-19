@@ -13,7 +13,8 @@ class LeadValueByScore extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $mLead = $this->getService(Lead::class);
+    /** @var Lead */
+    $mLead = $this->getModel(Lead::class);
 
     $leads = $mLead->record
       ->selectRaw("score, SUM(price) as price")

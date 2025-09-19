@@ -121,7 +121,10 @@ class Order extends \Hubleto\Erp\Model
    */
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
-    $mSettings = $this->getService(Setting::class);
+
+    /** @var Setting */
+    $mSettings = $this->getModel(Setting::class);
+
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
@@ -180,7 +183,8 @@ class Order extends \Hubleto\Erp\Model
    */
   public function onAfterCreate(array $savedRecord): array
   {
-    $mWorkflow = $this->getService(Workflow::class);
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
 
     list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('orders');
 
@@ -251,7 +255,8 @@ class Order extends \Hubleto\Erp\Model
    */
   public function generateInvoice(int $idOrder): int
   {
-    $mInvoice = $this->getService(Invoice::class);
+    /** @var Invoice */
+    $mInvoice = $this->getModel(Invoice::class);
 
     $order = $this->record->prepareReadQuery()->where('id', $idOrder)->first();
 

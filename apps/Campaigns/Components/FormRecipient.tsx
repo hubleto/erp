@@ -16,7 +16,8 @@ export default class FormRecipient<P, S> extends HubletoForm<FormRecipientProps,
   props: FormRecipientProps;
   state: FormRecipientState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader::Components\\FormRecipient';
+  translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader';
+  translationContextInner: string = 'Components\\FormRecipient';
 
   parentApp: string = 'Hubleto/App/Community/Campaigns';
 

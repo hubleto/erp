@@ -2,14 +2,8 @@
 
 namespace Hubleto\Erp\Api;
 
-use Hubleto\Framework\Helper;
-
 class Dictionary extends \Hubleto\Erp\Controllers\ApiController
 {
-
-  public function __construct(public \Hubleto\Framework\Loader $main)
-  {
-  }
 
   public function renderJson(): array
   {

@@ -11,7 +11,9 @@ class SaveBulkStatusChange extends \Hubleto\Erp\Controllers\ApiController
   {
 
     $records = $this->router()->urlParamAsArray("record");
-    $mLead = $this->getService(Lead::class);
+
+    /** @var Lead */
+    $mLead = $this->getModel(Lead::class);
 
     try {
       foreach ($records as $key => $lead) {

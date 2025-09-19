@@ -18,7 +18,8 @@ export default class TableTeams extends Table<TableTeamsProps, TableTeamsState> 
   props: TableTeamsProps;
   state: TableTeamsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\TableTeams';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader';
+  translationContextInner: string = 'Components\\TableTeams';
 
   constructor(props: TableTeamsProps) {
     super(props);

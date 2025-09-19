@@ -30,7 +30,8 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
   props: FormContactProps;
   state: FormContactState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Contacts\\Loader::Components\\FormContact';
+  translationContext: string = 'Hubleto\\App\\Community\\Contacts\\Loader';
+  translationContextInner: string = 'Components\\FormContact';
 
   constructor(props: FormContactProps) {
     super(props);

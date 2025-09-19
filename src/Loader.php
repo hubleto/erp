@@ -55,6 +55,36 @@ class Loader extends \Hubleto\Framework\Loader
     try {
       parent::init();
 
+      // set user language
+      $setLanguage = $this->router()->urlParamAsString('set-language');
+      $authProvider = $this->authProvider();
+
+      if (
+        !empty($setLanguage)
+        && !empty(\Hubleto\App\Community\Auth\Models\User::ENUM_LANGUAGES[$setLanguage])
+      ) {
+        $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
+        $mUser->record
+          ->where('id', $authProvider->getUserId())
+          ->update(['language' => $setLanguage])
+        ;
+        $authProvider->setUserLanguage($setLanguage);
+
+        if ($authProvider->isUserInSession()) {
+          $authProvider->updateUserInSession($authProvider->user);
+        }
+
+        $date = date("D, d M Y H:i:s", strtotime('+1 year')) . 'GMT';
+        header("Set-Cookie: language={$setLanguage}; EXPIRES{$date};");
+        setcookie('incorrectLogin', '1');
+        $this->router()->redirectTo('');
+      }
+
+      if (strlen($authProvider->getUserLanguage()) !== 2) {
+        $authProvider->setUserLanguage('en');
+      }
+
+      // add core routes
       $this->router()->get([
         '/^api\/get-apps-info\/?$/' => Api\GetAppsInfo::class,
         '/^api\/get-users\/?$/' => Api\GetUsers::class,

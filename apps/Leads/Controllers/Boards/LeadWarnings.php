@@ -14,7 +14,8 @@ class LeadWarnings extends \Hubleto\Erp\Controller
 
     $warningsTotal = 0;
 
-    $mLead = $this->getService(Lead::class);
+    /** @var Lead */
+    $mLead = $this->getModel(Lead::class);
 
     $myLeads = $mLead->record->prepareReadQuery()
       ->where($mLead->table . ".is_archived", 0)

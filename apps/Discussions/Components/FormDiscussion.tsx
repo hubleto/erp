@@ -17,7 +17,8 @@ export default class FormDiscussion<P, S> extends HubletoForm<FormDiscussionProp
   props: FormDiscussionProps;
   state: FormDiscussionState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\FormDiscussion';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions';
+  translationContextInner: string = 'Components\\FormDiscussion';
 
   constructor(props: FormDiscussionProps) {
     super(props);

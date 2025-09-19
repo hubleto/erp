@@ -53,7 +53,8 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
 
   refLogActivityInput: any;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\FormCustomer';
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
+  translationContextInner: string = 'Components\\FormCustomer';
 
   constructor(props: FormCustomerProps) {
     super(props);

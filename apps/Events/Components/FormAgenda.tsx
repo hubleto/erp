@@ -14,7 +14,8 @@ export default class FormAgenda<P, S> extends HubletoForm<FormAgendaProps, FormA
   props: FormAgendaProps;
   state: FormAgendaState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Events::Components\\FormAgenda';
+  translationContext: string = 'Hubleto\\App\\Community\\Events';
+  translationContextInner: string = 'Components\\FormAgenda';
 
   constructor(props: FormAgendaProps) {
     super(props);

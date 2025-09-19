@@ -20,7 +20,8 @@ export default class TableTemplates extends HubletoTable<TableTemplatesProps, Ta
   props: TableTemplatesProps;
   state: TableTemplatesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader::Components\\TableTemplates';
+  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
+  translationContextInner: string = 'Components\\TableTemplates';
 
   constructor(props: TableTemplatesProps) {
     super(props);

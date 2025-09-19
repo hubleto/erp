@@ -20,7 +20,8 @@ export default class OrderFormActivity<P, S> extends FormActivity<OrderFormActiv
   props: OrderFormActivityProps;
   state: OrderFormActivityState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader::Components\\FormActivity';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
+  translationContextInner: string = 'Components\\FormActivity';
 
   getActivitySourceReadable(): string
   {

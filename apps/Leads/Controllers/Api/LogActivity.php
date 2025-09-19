@@ -13,7 +13,8 @@ class LogActivity extends \Hubleto\Erp\Controllers\ApiController
     $idLead = $this->router()->urlParamAsInteger("idLead");
     $activity = $this->router()->urlParamAsString("activity");
     if ($idLead > 0 && $activity != '') {
-      $mLead = $this->getService(Lead::class);
+      /** @var Lead */
+      $mLead = $this->getModel(Lead::class);
       $lead = $mLead->record->find($idLead)->first()?->toArray();
 
       if ($lead && $lead['id'] > 0) {

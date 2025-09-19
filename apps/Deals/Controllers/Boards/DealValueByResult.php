@@ -13,7 +13,8 @@ class DealValueByResult extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $mDeal = $this->getService(Deal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
 
     $deals = $mDeal->record->prepareReadQuery()
       ->selectRaw("`{$mDeal->table}`.`deal_result`, SUM(`{$mDeal->table}`.`price_excl_vat`) as price")

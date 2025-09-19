@@ -14,7 +14,8 @@ export default class TableLeadHistory extends Table<TableLeadHistoryProps, Table
   props: TableLeadHistoryProps;
   state: TableLeadHistoryState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\TableLeadHistory';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
+  translationContextInner: string = 'Components\\TableLeadHistory';
 
   constructor(props: TableLeadHistoryProps) {
     super(props);

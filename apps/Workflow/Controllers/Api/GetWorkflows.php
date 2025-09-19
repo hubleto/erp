@@ -16,8 +16,11 @@ class GetWorkflows extends \Hubleto\Erp\Controllers\ApiController
 
     $model = trim(str_replace('/', '\\', $model), '\\');
 
-    $mWorkflow = $this->getService(Workflow::class);
-    $mWorkflowHistory = $this->getService(WorkflowHistory::class);
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+
+    /** @var WorkflowHistory */
+    $mWorkflowHistory = $this->getModel(WorkflowHistory::class);
 
     $workflows = Helper::keyBy('id', $mWorkflow->record->prepareReadQuery()->get()?->toArray());
 

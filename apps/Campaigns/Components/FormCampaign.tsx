@@ -23,7 +23,8 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
   props: FormCampaignProps;
   state: FormCampaignState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader::Components\\FormCampaign';
+  translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader';
+  translationContextInner: string = 'Components\\FormCampaign';
 
   parentApp: string = 'Hubleto/App/Community/Campaigns';
 

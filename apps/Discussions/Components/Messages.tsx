@@ -21,7 +21,8 @@ export default class Messages extends HubletoTable<MessagesProps, MessagesState>
   props: MessagesProps;
   state: MessagesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\Messages';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions';
+  translationContextInner: string = 'Components\\Messages';
 
   refMessageTextarea: any;
 

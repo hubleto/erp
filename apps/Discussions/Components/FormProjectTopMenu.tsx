@@ -17,7 +17,8 @@ export default class FormProjectTopMenu extends TranslatedComponent<P, S> {
   props: P;
   state: S;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader::Components\\FormProject';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader';
+  translationContextInner: string = 'Components\\FormProject';
 
   constructor(props: P) {
     super(props);

@@ -14,7 +14,8 @@ export default class FormLocation<P, S> extends HubletoForm<FormLocationProps, F
   props: FormLocationProps;
   state: FormLocationState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Warehouses::Components\\FormLocation';
+  translationContext: string = 'Hubleto\\App\\Community\\Warehouses';
+  translationContextInner: string = 'Components\\FormLocation';
 
   constructor(props: FormLocationProps) {
     super(props);

@@ -17,7 +17,8 @@ export default class FormSharedCalendar<P, S> extends HubletoForm<FormSharedCale
   props: FormSharedCalendarProps;
   state: FormSharedCalendarState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader::Components\\FormSharedCalendar';
+  translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader';
+  translationContextInner: string = 'Components\\FormSharedCalendar';
 
   renderTitle(): JSX.Element {
     return <>

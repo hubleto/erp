@@ -33,7 +33,8 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
   props: BrowserProps;
   state: BrowserState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader::Components\\Browser';
+  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
+  translationContextInner: string = 'Components\\Browser';
 
   constructor(props: BrowserProps) {
     super(props);

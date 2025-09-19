@@ -17,7 +17,8 @@ class Deals extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
 
-    $mDeal = $this->getService(Deal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
 
     $result = $mDeal->record
       ->selectRaw("COUNT(id) as count, SUM(price_excl_vat) as price_excl_vat")

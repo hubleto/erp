@@ -356,6 +356,8 @@
 
   </script>
 
+  <script> globalThis.dictionary = JSON.parse(atob('{{ viewParams.dictionaryString }}')); console.log(this.dictionary); </script>
+
 </body>
 
 </html>

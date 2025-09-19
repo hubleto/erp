@@ -28,7 +28,8 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
   props: TableContactsProps;
   state: TableContactsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\TableContacts';
+  translationContext: string = 'Hubleto\\App\\Community\\Contacts\\Loader';
+  translationContextInner: string = 'Components\\TableContacts';
 
   getFormModalProps() {
     return {

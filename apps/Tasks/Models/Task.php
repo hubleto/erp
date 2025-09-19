@@ -150,7 +150,9 @@ class Task extends \Hubleto\Erp\Model
   public function onAfterCreate(array $savedRecord): array
   {
 
-    $mWorkflow = $this->getService(Workflow::class);
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+
     list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('tasks');
     $savedRecord['id_workflow'] = $idWorkflow;
     $savedRecord['id_workflow_step'] = $idWorkflowStep;

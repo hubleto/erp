@@ -17,7 +17,8 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
   props: TableRecipientsProps;
   state: TableRecipientsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader::Components\\TableRecipients';
+  translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader';
+  translationContextInner: string = 'Components\\TableRecipients';
 
   constructor(props: TableRecipientsProps) {
     super(props);

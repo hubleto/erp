@@ -20,7 +20,8 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
   props: DealFormActivityProps;
   state: DealFormActivityState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader::Components\\FormActivity';
+  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader';
+  translationContextInner: string = 'Components\\FormActivity';
 
   getActivitySourceReadable(): string
   {

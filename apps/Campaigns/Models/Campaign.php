@@ -116,7 +116,8 @@ class Campaign extends \Hubleto\Erp\Model
 
     $savedRecord['uid'] = \Hubleto\Framework\Helper::generateUuidV4();
 
-    $mWorkflow = $this->getService(Workflow::class);
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
     list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('campaigns');
     $savedRecord['id_workflow'] = $idWorkflow;
     $savedRecord['id_workflow_step'] = $idWorkflowStep;
@@ -139,7 +140,7 @@ class Campaign extends \Hubleto\Erp\Model
   // {
   //   $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-  //   $mTemplate = $this->getService(Template::class);
+  //   $mTemplate = $this->getModel(Template::class);
   //   $template = $mTemplate->record->find((int) ($savedRecord['id_mail_template'] ?? 0));
 
   //   if ($template) {
@@ -151,7 +152,7 @@ class Campaign extends \Hubleto\Erp\Model
   //       (string) $savedRecord['utm_content'],
   //     );
 
-  //     $mCampaign = $this->getService(Campaign::class);
+  //     $mCampaign = $this->getModel(Campaign::class);
   //     $mCampaign->record->find((int) $savedRecord['id'])->update([
   //       'mail_body' => $bodyHtml
   //     ]);

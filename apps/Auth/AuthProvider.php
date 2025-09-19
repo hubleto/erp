@@ -115,6 +115,14 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     return false;
   }
 
+  /**
+   * [Description for findUsersByLogin]
+   *
+   * @param string $login
+   * 
+   * @return array
+   * 
+   */
   public function findUsersByLogin(string $login): array
   {
     return $this->createUserModel()->record
@@ -126,16 +134,22 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     ;
   }
 
+  /**
+   * [Description for forgotPassword]
+   *
+   * @return void
+   * 
+   */
   public function forgotPassword(): void
   {
     $login = $this->router()->urlParamAsString('login');
 
-    $mUser = $this->getService(User::class);
+    $mUser = $this->getModel(User::class);
     if ($mUser->record->where('email', $login)->count() > 0) {
       $user = $mUser->record->where('email', $login)->first();
 
       /** @var Token $mToken */
-      $mToken = $this->getService(Token::class);
+      $mToken = $this->getModel(Token::class);
       $tokenSalt = bin2hex(random_bytes(16));
       $token = $mToken->generateToken($tokenSalt, Token::TOKEN_TYPE_USER_FORGOT_PASSWORD, date("Y-m-d H:i:s", strtotime("+ 30 minute", time())));
 
@@ -159,14 +173,22 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     }
   }
 
+  /**
+   * [Description for resetPassword]
+   *
+   * @return void
+   * 
+   */
   public function resetPassword(): void
   {
     /** @var Token $mToken */
-    $mToken = $this->getService(Token::class);
+    $mToken = $this->getModel(Token::class);
+
     /** @var User $mUser */
-    $mUser = $this->getService(User::class);
+    $mUser = $this->getModel(User::class);
+
     /** @var UserHasToken $mJunctionTable */
-    $mJunctionTable = $this->getService(UserHasToken::class);
+    $mJunctionTable = $this->getModel(UserHasToken::class);
 
     $token = $mToken->record->where('token', $this->router()->urlParamAsString('token'))->first();
     $junctionEntry = $mJunctionTable->record->where('id_token', $token->id)->first();
@@ -186,10 +208,18 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     }
   }
 
+  /**
+   * [Description for initiateRememberMe]
+   *
+   * @param mixed $userId
+   * 
+   * @return [type]
+   * 
+   */
   private function initiateRememberMe($userId) {
 
     /** @var Token $mToken */
-    $mToken = $this->getService(Token::class);
+    $mToken = $this->getModel(Token::class);
     $token = $mToken->generateToken($this->config()->getAsString('sessionSalt'), Token::TOKEN_TYPE_USER_REMEMBER_ME, date("Y-m-d H:i:s", strtotime("+ 30 day", time())));
 
     $mJunctionTable = $this->getModel(UserHasToken::class);
@@ -201,10 +231,16 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     setcookie($this->config()->getAsString('accountUid') . '-rememberMe', $token['token'], time() + (86400 * 30), "/");
   }
 
+  /**
+   * [Description for authenticateRememberedUser]
+   *
+   * @return bool
+   * 
+   */
   public function authenticateRememberedUser(): bool {
 
     /** @var Token $mToken */
-    $mToken = $this->getService(Token::class);
+    $mToken = $this->getModel(Token::class);
     $tokenId = $mToken->validateToken($_COOKIE[$this->config()->getAsString('accountUid') . '-rememberMe'] ?? '', Token::TOKEN_TYPE_USER_REMEMBER_ME);
     if (
       $tokenId !== false)
@@ -225,6 +261,12 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     return false;
   }
 
+  /**
+   * [Description for auth]
+   *
+   * @return void
+   * 
+   */
   public function auth(): void
   {
 
@@ -265,44 +307,38 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       }
     }
 
-    $setLanguage = $this->router()->urlParamAsString('set-language');
-
-    if (
-      !empty($setLanguage)
-      && !empty(\Hubleto\App\Community\Auth\Models\User::ENUM_LANGUAGES[$setLanguage])
-    ) {
-      $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
-      $mUser->record
-        ->where('id', $this->getUserId())
-        ->update(['language' => $setLanguage])
-      ;
-      $this->setUserLanguage($setLanguage);
-
-      if ($this->isUserInSession()) {
-        $this->updateUserInSession($this->user);
-      }
-
-      $date = date("D, d M Y H:i:s", strtotime('+1 year')) . 'GMT';
-      header("Set-Cookie: language={$setLanguage}; EXPIRES{$date};");
-      setcookie('incorrectLogin', '1');
-      $this->router()->redirectTo('');
-    }
-
-    if (strlen($this->getUserLanguage()) !== 2) {
-      $this->setUserLanguage('en');
-    }
   }
 
+  /**
+   * [Description for createUserModel]
+   *
+   * @return Model
+   * 
+   */
   public function createUserModel(): Model
   {
     return $this->getModel(Models\User::class);
   }
 
+  /**
+   * [Description for userHasRole]
+   *
+   * @param int $idRole
+   * 
+   * @return bool
+   * 
+   */
   public function userHasRole(int $idRole): bool
   {
     return in_array($idRole, $this->getUserRoles());
   }
 
+  /**
+   * [Description for signOut]
+   *
+   * @return [type]
+   * 
+   */
   public function signOut()
   {
     if (isset($_COOKIE[$this->config()->getAsString('accountUid') . '-rememberMe'])) {
@@ -311,9 +347,9 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     }
 
     /** @var Token $mToken */
-    $mToken = $this->getService(Token::class);
+    $mToken = $this->getModel(Token::class);
     /** @var UserHasToken $mJunctionTable */
-    $mJunctionTable = $this->getService(UserHasToken::class);
+    $mJunctionTable = $this->getModel(UserHasToken::class);
 
     $tokenIds = $mJunctionTable->record->where('id_user', $this->getUserId())->get(['id', 'id_token']);
 

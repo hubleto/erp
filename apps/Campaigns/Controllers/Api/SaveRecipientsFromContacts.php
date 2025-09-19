@@ -13,13 +13,13 @@ class SaveRecipientsFromContacts extends \Hubleto\Erp\Controllers\ApiController
     $contactIds = $this->router()->urlParamAsArray('contactIds');
 
     /** @var Recipient */
-    $mRecipient = $this->getService(Recipient::class);
+    $mRecipient = $this->getModel(Recipient::class);
 
     $recipients = $mRecipient->record->where('id_campaign', $idCampaign)->pluck('id_contact')?->toArray();
     if (!is_array($recipients)) $recipients = [];
 
     /** @var Contact */
-    $mContact = $this->getService(Contact::class);
+    $mContact = $this->getModel(Contact::class);
     $contactsRaw = $mContact->record->whereIn('id', $contactIds)->with('VALUES')->get();
     $contacts = [];
     foreach ($contactsRaw as $contact) $contacts[$contact->id] = $contact;

@@ -15,7 +15,8 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
   props: FormKeyProps;
   state: FormKeyState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Api::Components\\FormKey';
+  translationContext: string = 'Hubleto\\App\\Community\\Api';
+  translationContextInner: string = 'Components\\FormKey';
 
   constructor(props: FormKeyProps) {
     super(props);

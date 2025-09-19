@@ -8,7 +8,8 @@ class NotFound extends \Hubleto\Erp\Controller
 {
   public bool $requiresAuthenticatedUser = false;
   public bool $hideDefaultDesktop = true;
-  public string $translationContext = 'Hubleto\\Erp\\Loader::Controllers\\NotFound';
+  public string $translationContext = 'Hubleto\\Erp\\Loader';
+  public string $translationContextInner = 'Controllers\\NotFound';
 
   public function prepareView(): void
   {

@@ -21,7 +21,8 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
   props: WorkflowSelectorProps;
   state: WorkflowSelectorState;
 
-  translationContext: string = "Hubleto\\App\\Community\\Workflow\\Loader::Components\\WorkflowSelector";
+  translationContext: string = 'Hubleto\\App\\Community\\Workflow\\Loader';
+  translationContextInner: string = 'Components\\WorkflowSelector';
 
   constructor(props: WorkflowSelectorProps) {
     super(props);

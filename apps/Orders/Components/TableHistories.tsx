@@ -21,7 +21,8 @@ export default class TableHistories extends Table<TableHistoriesProps, TableHist
   props: TableHistoriesProps;
   state: TableHistoriesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader::Components\\TableHistories';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
+  translationContextInner: string = 'Components\\TableHistories';
 
   constructor(props: TableHistoriesProps) {
     super(props);

@@ -16,7 +16,8 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
   props: FormTaskProps;
   state: FormTaskState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Tasks::Components\\FormTask';
+  translationContext: string = 'Hubleto\\App\\Community\\Tasks';
+  translationContextInner: string = 'Components\\FormTask';
 
   constructor(props: FormTaskProps) {
     super(props);

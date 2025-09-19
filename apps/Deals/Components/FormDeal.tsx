@@ -51,7 +51,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   refLogActivityInput: any;
   refProductsLookup: any;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader::Components\\FormDeal';
+  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader';
+  translationContextInner: string = 'Components\\FormDeal';
 
   constructor(props: FormDealProps) {
     super(props);

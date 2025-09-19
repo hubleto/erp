@@ -14,7 +14,8 @@ class OrderWarnings extends \Hubleto\Erp\Controller
 
     $warningsTotal = 0;
 
-    $mOrder = $this->getService(Order::class);
+    /** @var Order */
+    $mOrder = $this->getModel(Order::class);
 
     $myOrders = $mOrder->record->prepareReadQuery()
       ->get()

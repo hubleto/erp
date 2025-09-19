@@ -14,7 +14,8 @@ export default class FormLevel<P, S> extends HubletoForm<FormLevelProps, FormLev
   props: FormLevelProps;
   state: FormLevelState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Leads::Components\\FormLevel';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads';
+  translationContextInner: string = 'Components\\FormLevel';
 
   constructor(props: FormLevelProps) {
     super(props);

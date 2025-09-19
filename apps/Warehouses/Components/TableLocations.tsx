@@ -19,7 +19,8 @@ export default class TableLocations extends HubletoTable<TableLocationsProps, Ta
   props: TableLocationsProps;
   state: TableLocationsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Warehouses::Components\\FormLocations';
+  translationContext: string = 'Hubleto\\App\\Community\\Warehouses';
+  translationContextInner: string = 'Components\\FormLocations';
 
   constructor(props: TableLocationsProps) {
     super(props);

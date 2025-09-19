@@ -8,7 +8,8 @@ class GetCustomer extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $mCustomer = $this->getService(Customer::class);
+    /** @var Customer */
+    $mCustomer = $this->getModel(Customer::class);
     $customers = null;
     $customerArray = [];
 

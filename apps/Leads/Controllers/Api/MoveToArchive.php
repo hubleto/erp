@@ -26,7 +26,10 @@ class MoveToArchive extends \Hubleto\Erp\Controllers\ApiController
     }
 
     $leadId = $this->router()->urlParamAsInteger("recordId");
-    $mLead = $this->getService(Lead::class);
+
+    /** @var Lead */
+    $mLead = $this->getModel(Lead::class);
+
     $mLead->record->find($leadId)->update(['is_archived' => true]);
 
     return [

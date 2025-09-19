@@ -18,7 +18,8 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
   props: FormUserProps;
   state: FormUserState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\FormUser';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader';
+  translationContextInner: string = 'Components\\FormUser';
 
   constructor(props: FormUserProps) {
     super(props);

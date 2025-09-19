@@ -18,7 +18,8 @@ export default class CustomerFormActivity<P, S> extends FormActivity<CustomerFor
   props: CustomerFormActivityProps;
   state: CustomerFormActivityState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\CustomerFormActivity';
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
+  translationContextInner: string = 'Components\\CustomerFormActivity';
 
   getActivitySourceReadable(): string
   {

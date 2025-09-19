@@ -14,7 +14,8 @@ export default class FormEventVenue<P, S> extends HubletoForm<FormEventVenueProp
   props: FormEventVenueProps;
   state: FormEventVenueState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Events::Components\\FormEventVenue';
+  translationContext: string = 'Hubleto\\App\\Community\\Events';
+  translationContextInner: string = 'Components\\FormEventVenue';
 
   constructor(props: FormEventVenueProps) {
     super(props);

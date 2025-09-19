@@ -13,7 +13,8 @@ export default class FormPanel<P, S> extends HubletoForm<FormPanelProps,FormPane
   props: FormPanelProps;
   state: FormPanelState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader::Components\\FormPanel';
+  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
+  translationContextInner: string = 'Components\\FormPanel';
 
   constructor(props: FormPanelProps) {
     super(props);

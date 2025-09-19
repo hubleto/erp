@@ -24,9 +24,14 @@ class CheckPrimaryContact extends \Hubleto\Erp\Controllers\ApiController
       return [ "result" => true ];
     }
 
-    $mContact = $this->getService(Contact::class);
-    $mTag = $this->getService(Tag::class);
-    $mContactTag = $this->getService(ContactTag::class);
+    /** @var Contact */
+    $mContact = $this->getModel(Contact::class);
+
+    /** @var Tag */
+    $mTag = $this->getModel(Tag::class);
+
+    /** @var ContactTag */
+    $mContactTag = $this->getModel(ContactTag::class);
 
     // get the tags of the primary contacts in the customer
     $primaryContactTagIds = $mContact->record

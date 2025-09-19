@@ -44,7 +44,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
   refLogActivityInput: any;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\FormLead';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
+  translationContextInner: string = 'Components\\FormLead';
 
   parentApp: string = 'Hubleto/App/Community/Leads';
 

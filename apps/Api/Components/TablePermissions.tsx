@@ -19,7 +19,8 @@ export default class TablePermissions extends HubletoTable<TablePermissionsProps
   props: TablePermissionsProps;
   state: TablePermissionsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Api::Components\\TablePermissions';
+  translationContext: string = 'Hubleto\\App\\Community\\Api';
+  translationContextInner: string = 'Components\\TablePermissions';
 
   constructor(props: TablePermissionsProps) {
     super(props);

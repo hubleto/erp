@@ -21,7 +21,8 @@ export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivit
   props: LeadFormActivityProps;
   state: LeadFormActivityState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\FormActivity';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
+  translationContextInner: string = 'Components\\FormActivity';
 
   constructor(props: LeadFormActivityProps) {
     super(props);

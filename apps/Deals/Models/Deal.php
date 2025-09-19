@@ -215,7 +215,9 @@ class Deal extends \Hubleto\Erp\Model
    */
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
-    $mSettings = $this->getService(Setting::class);
+    /** @var Setting */
+    $mSettings = $this->getModel(Setting::class);
+
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
@@ -378,7 +380,8 @@ class Deal extends \Hubleto\Erp\Model
    */
   public function generateQuotationPdf(int $idDeal): int
   {
-    $mDeal = $this->getService(Deal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
     $deal = $mDeal->record->prepareReadQuery()->where('deals.id', $idDeal)->first();
     if (!$deal) throw new \Exception('Deal was not found.');
 
@@ -417,7 +420,8 @@ class Deal extends \Hubleto\Erp\Model
    */
   public function generateInvoice(int $idDeal): int
   {
-    $mInvoice = $this->getService(Invoice::class);
+    /** @var Invoice */
+    $mInvoice = $this->getModel(Invoice::class);
 
     $deal = $this->record->prepareReadQuery()->where('id', $idDeal)->first();
 

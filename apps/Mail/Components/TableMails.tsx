@@ -30,7 +30,8 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
   props: TableMailsProps;
   state: TableMailsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader::Components\\TableMails';
+  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader';
+  translationContextInner: string = 'Components\\TableMails';
 
   constructor(props: TableMailsProps) {
     super(props);

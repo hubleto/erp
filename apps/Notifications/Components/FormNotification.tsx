@@ -13,7 +13,8 @@ export default class FormNotification<P, S> extends HubletoForm<FormNotification
   props: FormNotificationProps;
   state: FormNotificationState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Notifications\\Loader::Components\\FormNotification';
+  translationContext: string = 'Hubleto\\App\\Community\\Notifications\\Loader';
+  translationContextInner: string = 'Components\\FormNotification';
 
   constructor(props: FormNotificationProps) {
     super(props);

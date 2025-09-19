@@ -87,6 +87,10 @@ class Desktop extends \Hubleto\Erp\Controller
     $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
     $this->viewParams['user'] = $authProvider->getUserFromSession();
 
+    $dictionary = $this->translator()->loadFullDictionary($this, $this->authProvider()->getUserLanguage());
+
+    $this->viewParams['dictionaryString'] = base64_encode(json_encode($dictionary));
+
     $this->setView('@Hubleto:App:Community:Desktop/Desktop.twig');
   }
 

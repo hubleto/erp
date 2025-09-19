@@ -22,7 +22,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   props: FormInvoiceProps;
   state: FormInvoiceState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader::Components\\FormInvoice';
+  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader';
+  translationContextInner: string = 'Components\\FormInvoice';
 
   constructor(props: FormInvoiceProps) {
     super(props);

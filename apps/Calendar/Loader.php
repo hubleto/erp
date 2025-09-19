@@ -44,9 +44,9 @@ class Loader extends \Hubleto\Framework\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mActivity = $this->getService(Activity::class);
+      $mActivity = $this->getModel(Activity::class);
       $mActivity->install();
-      $mSharedCalendar = $this->getService(SharedCalendar::class);
+      $mSharedCalendar = $this->getModel(SharedCalendar::class);
       $mSharedCalendar->install();
     }
   }

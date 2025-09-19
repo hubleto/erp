@@ -18,7 +18,7 @@ class ResetPassword extends \Hubleto\Erp\Controller
     parent::prepareView();
 
     /** @var Token $mToken */
-    $mToken = $this->getService(Token::class);
+    $mToken = $this->getModel(Token::class);
     $idToken = $mToken->validateToken($this->router()->urlParamAsString('token'), Token::TOKEN_TYPE_USER_FORGOT_PASSWORD);
 
     if ($this->router()->urlParamAsString('token') == '' || !$idToken) {
@@ -53,7 +53,7 @@ class ResetPassword extends \Hubleto\Erp\Controller
     $mJunctionTable = $this->getModel(\Hubleto\App\Community\Auth\Models\UserHasToken::class);
     $idUser = $mJunctionTable->record->where('id_token', $idToken)->first()?->id_user;
 
-    $mUser = $this->getService(User::class);
+    $mUser = $this->getModel(User::class);
     $passwordHash = $mUser->record->where('id', $idUser)->first()?->password;
 
     $this->viewParams = ['status' => false, 'welcome' => $passwordHash == ''];

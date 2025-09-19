@@ -33,7 +33,9 @@ class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
 
       $projectsCount = $mProject->record->where('id_deal', $deal->id)->count();
 
-      $mWorkflow = $this->getService(Workflow::class);
+      /** @var Workflow */
+      $mWorkflow = $this->getModel(Workflow::class);
+
       list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('projects');
 
       $project = $mProject->record->recordCreate([

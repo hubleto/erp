@@ -13,11 +13,13 @@ class LogActivity extends \Hubleto\Erp\Controllers\ApiController
     $idCustomer = $this->router()->urlParamAsInteger("idCustomer");
     $activity = $this->router()->urlParamAsString("activity");
     if ($idCustomer > 0 && $activity != '') {
-      $mCustomer = $this->getService(Customer::class);
+      /** @var Customer */
+      $mCustomer = $this->getModel(Customer::class);
       $customer = $mCustomer->record->find($idCustomer)->first()?->toArray();
 
       if ($customer && $customer['id'] > 0) {
-        $mCustomerActivity = $this->getService(CustomerActivity::class);
+        /** var CustomerActivity */
+        $mCustomerActivity = $this->getModel(CustomerActivity::class);
         $mCustomerActivity->record->recordCreate([
           'id_customer' => $idCustomer,
           'subject' => $activity,

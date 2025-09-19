@@ -192,7 +192,9 @@ class Lead extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
 
-    $mSettings = $this->getService(Setting::class);
+    /** @var Setting */
+    $mSettings = $this->getModel(Setting::class);
+
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
@@ -332,7 +334,9 @@ class Lead extends \Hubleto\Erp\Model
 
     $newLead = $savedRecord;
 
-    $mWorkflow = $this->getService(Workflow::class);
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+
     list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('leads');
     $newLead['id_workflow'] = $idWorkflow;
     $newLead['id_workflow_step'] = $idWorkflowStep;

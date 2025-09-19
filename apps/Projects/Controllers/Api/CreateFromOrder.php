@@ -20,9 +20,14 @@ class CreateFromOrder extends \Hubleto\Erp\Controllers\ApiController
       ];
     }
 
-    $mOrder = $this->getService(Order::class);
-    $mProject = $this->getService(Project::class);
-    $mProjectOrder = $this->getService(ProjectOrder::class);
+    /** @var Order */
+    $mOrder = $this->getModel(Order::class);
+
+    /** @var Project */
+    $mProject = $this->getModel(Project::class);
+
+    /** @var ProjectOrder */
+    $mProjectOrder = $this->getModel(ProjectOrder::class);
 
     try {
       $order = $mOrder->record->prepareReadQuery()->where($mOrder->table . ".id", $idOrder)->first();

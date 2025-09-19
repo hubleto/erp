@@ -29,7 +29,8 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
   props: TableLeadsProps;
   state: TableLeadsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\TableLeads';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
+  translationContextInner: string = 'Components\\TableLeads';
 
   constructor(props: TableLeadsProps) {
     super(props);

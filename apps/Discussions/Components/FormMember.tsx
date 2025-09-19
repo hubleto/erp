@@ -14,7 +14,8 @@ export default class FormMember<P, S> extends HubletoForm<FormMemberProps, FormM
   props: FormMemberProps;
   state: FormMemberState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\FormMember';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions';
+  translationContextInner: string = 'Components\\FormMember';
 
   constructor(props: FormMemberProps) {
     super(props);

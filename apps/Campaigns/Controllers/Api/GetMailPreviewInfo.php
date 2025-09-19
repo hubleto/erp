@@ -12,7 +12,7 @@ class GetMailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
   {
     $idRecipient = $this->router()->urlParamAsInteger('idRecipient');
 
-    $mRecipient = $this->getService(Recipient::class);
+    $mRecipient = $this->getModel(Recipient::class);
 
     $bodyHtml = '';
 

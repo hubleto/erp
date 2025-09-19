@@ -12,7 +12,8 @@ class MostValuableDeals extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $mDeal = $this->getService(Deal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
 
     $mostValuableDeals = $mDeal->record->prepareReadQuery()
       ->where($mDeal->table . ".is_archived", 0)

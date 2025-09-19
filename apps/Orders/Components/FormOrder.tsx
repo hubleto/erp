@@ -35,7 +35,8 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
 
   refLogActivityInput: any;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader::Components\\FormOrder';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
+  translationContextInner: string = 'Components\\FormOrder';
 
   parentApp: string = 'Hubleto/App/Community/Orders';
 

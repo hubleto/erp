@@ -18,7 +18,8 @@ export default class TableUserRoles extends Table<TableUserRolesProps, TableUser
   props: TableUserRolesProps;
   state: TableUserRolesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\TableUserRoles';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader';
+  translationContextInner: string = 'Components\\TableUserRoles';
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();

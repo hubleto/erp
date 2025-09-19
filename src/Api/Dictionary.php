@@ -10,41 +10,35 @@ class Dictionary extends \Hubleto\Erp\Controllers\ApiController
     $language = $this->router()->urlParamAsString('language', 'en');
     $addNew = $this->router()->urlParamAsArray('addNew');
 
-    $dictFile = __DIR__ . '/../../lang/' . $language . '.json';
+    // $dictFile = __DIR__ . '/../../lang/' . $language . '.json';
 
-    if ($language == 'en') {
-      return [];
-    }
-    if (!in_array($language, array_keys(\Hubleto\App\Community\Auth\Models\User::ENUM_LANGUAGES))) {
-      return [];
-    }
-    if (!is_file($dictFile)) {
-      return [];
-    }
+    // if ($language == 'en') {
+    //   return [];
+    // }
+    // if (!in_array($language, array_keys(\Hubleto\App\Community\Auth\Models\User::ENUM_LANGUAGES))) {
+    //   return [];
+    // }
+    // if (!is_file($dictFile)) {
+    //   return [];
+    // }
 
-    $dict = $this->translator()->loadDictionary($language);
+    // $dict = $this->translator()->loadDictionary($language);
 
     if (
       isset($addNew['context'])
+      && isset($addNew['contextInner'])
       && isset($addNew['orig'])
       && $language != 'en'
     ) {
 
-      $tmp = explode('::', $addNew['context']);
-      $contextClass = $tmp[0] ?? '';
-      $contextInner = $tmp[1] ?? '';
-
-      if (
-        !empty($contextClass)
-        && class_exists($contextClass)
-        && !empty($contextInner)
-      ) {
-        $contextClass::addToDictionary($language, $contextInner, $addNew['orig']);
+      if (!empty($context) && !empty($contextInner)) {
+        $service = $this->getService($context);
+        $this->translator()->addToDictionary($service, $language, $contextInner, $addNew['orig']);
       }
 
       return ['status' => true];
     } else {
-      return $dict;
+      return [];
     }
   }
 

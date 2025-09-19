@@ -155,6 +155,9 @@ class Renderer extends \Hubleto\Framework\Renderer
       } else {
         $controllerObject->prepareView();
 
+        $this->translationContext = $controllerObject->translationContext;
+        $this->translationContextInner = $controllerObject->translationContextInner;
+
         $view = $controllerObject->getView();
 
         $contentParams = [

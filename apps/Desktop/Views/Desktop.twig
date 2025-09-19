@@ -1,3 +1,4 @@
+{{ setTranslationContext('hubleto-app-community-desktop-loader', 'Controllers\\Desktop') }}
 {% set isPremium = hubleto.env().isPremium() %}
 
 {% macro appBtn(app, inGroup) %}
@@ -356,7 +357,7 @@
 
   </script>
 
-  <script> globalThis.dictionary = JSON.parse(atob('{{ viewParams.dictionaryString }}')); console.log(this.dictionary); </script>
+  <script> globalThis.dictionary = JSON.parse(atob('{{ viewParams.dictionaryString }}')); </script>
 
 </body>
 

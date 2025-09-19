@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Projects": "Projekty",
-        "Project management": "Projektový manažment"
+        "Project management": "Projektový manažment",
+        "Phases": ""
     },
     "root": {
         "Projects": "Projekty",

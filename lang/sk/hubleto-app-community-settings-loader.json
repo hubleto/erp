@@ -2,7 +2,20 @@
     "manifest": {
         "Settings": "Nastavenia",
         "Settings and control panel for your Hubleto.": "Nastavenia Hubleto účtu.",
-        "Settings and tools": ""
+        "Settings and tools": "",
+        "Users": "",
+        "Roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions list": "",
+        "Role permissions": "",
+        "Activity types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Invoice profiles": "",
+        "Platform config": "",
+        "Sidebar": "",
+        "Teams": ""
     },
     "Models\\User": {
         "First name": "Meno",

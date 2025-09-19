@@ -34,6 +34,9 @@
         "Sign out": "Odhlásiť sa",
         "Search app": "Hľadať appku",
         "Home": "Domov",
-        "You have no apps in this group.": "V tejto skupine nemáte žiadnu appku."
+        "You have no apps in this group.": "V tejto skupine nemáte žiadnu appku.",
+        "Addressbook": "",
+        "Calendar": "",
+        "Workflow": ""
     }
 }

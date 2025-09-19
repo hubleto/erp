@@ -22,6 +22,10 @@
         "Created": "Vytvorená",
         "External Model": "Externý model",
         "External ID": "Externé ID",
-        "Worked": "Odpracované"
+        "Worked": "Odpracované",
+        "Customer": "",
+        "Contact": "",
+        "Is chargeable": "",
+        "Related to": ""
     }
 }

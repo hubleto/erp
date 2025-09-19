@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Calendar": "Kalendár",
-        "Free calendar app.": "Bezplatný kalendár."
+        "Free calendar app.": "Bezplatný kalendár.",
+        "Reminders": "",
+        "Share": ""
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalendár"

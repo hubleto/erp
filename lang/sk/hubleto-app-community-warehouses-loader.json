@@ -1,7 +1,10 @@
 {
     "manifest": {
         "Warehouses": "Sklady",
-        "Management of individual warehouses or storage facilities.": "Správa skladov"
+        "Management of individual warehouses or storage facilities.": "Správa skladov",
+        "Warehouse types": "",
+        "Warehouse locations types": "",
+        "Locations": ""
     },
     "root": {
         "Warehouses": "Sklady",

@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Products": "Produkty",
-        "Free product portfolio managment.": "Správa produktového portfólia zdarma."
+        "Free product portfolio managment.": "Správa produktového portfólia zdarma.",
+        "Groups": ""
     },
     "root": {
         "Products": "Produkty",

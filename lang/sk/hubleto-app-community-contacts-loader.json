@@ -1,7 +1,10 @@
 {
     "manifest": {
         "Contacts": "Kontakty",
-        "Default customer management and addressbook.": "Adresár a manažment zákazníkov."
+        "Default customer management and addressbook.": "Adresár a manažment zákazníkov.",
+        "Contact Categories": "",
+        "Contact Tags": "",
+        "Import contacts": ""
     },
     "Components\\FormPerson": {
         "Edit": "Upraviť",
@@ -47,7 +50,9 @@
         "Contact": "Kontakt",
         "Category": "Kategória",
         "Number": "Počet",
-        "URL": "Adresa URL"
+        "URL": "Adresa URL",
+        "Contacts": "",
+        "Add Customer": ""
     },
     "Models\\PersonTag": {
         "Person": "Kontakt",
@@ -92,7 +97,8 @@
         "Phone Numbers": "Telefónne čísla",
         "Mr.": "Pán",
         "Mrs.": "Pani",
-        "Valid": "Platný"
+        "Valid": "Platný",
+        "Tags": ""
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
@@ -115,5 +121,8 @@
         "Primary Contact": "Primárny kontakt",
         "Contact": "Kontakt",
         "Contacts": "Kontakty"
+    },
+    "Components\\TableContacts": {
+        "Primary": ""
     }
 }

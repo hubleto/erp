@@ -1,7 +1,12 @@
 {
     "manifest": {
         "Leads": "Leady",
-        "Management of leads, cold contacts. Convert leads to deals.": "Správa leadov. Konverzia do dealov."
+        "Management of leads, cold contacts. Convert leads to deals.": "Správa leadov. Konverzia do dealov.",
+        "Lead Levels": "",
+        "Lead Tags": "",
+        "Lead Lost Reasons": "",
+        "Active leads": "",
+        "Archived leads": ""
     },
     "Controllers\\Leads": {
         "Sales": "Obchod",
@@ -56,7 +61,10 @@
         "Phone number": "Telefón",
         "Level": "Úroveň",
         "Manager": "Manažér",
-        "Team": "Tím"
+        "Team": "Tím",
+        "Workflow": "",
+        "Workflow step": "",
+        "Closed": ""
     },
     "root": {
         "Lead statuses": "Stavy leadov",

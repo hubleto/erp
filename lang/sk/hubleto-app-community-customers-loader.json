@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Customers": "Zákazníci",
-        "Free customer management and addressbook.": "Adresár a manažment zákazníkov."
+        "Free customer management and addressbook.": "Adresár a manažment zákazníkov.",
+        "Customer Tags": ""
     },
     "Models\\Customer": {
         "Add Customer": "Pridať zákazníka",
@@ -23,7 +24,10 @@
         "Shared folder (online document storage)": "Zdieľaný priečinok",
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok",
         "Owner": "Vlastník",
-        "Manager": "Manažér"
+        "Manager": "Manažér",
+        "Tags": "",
+        "Archive": "",
+        "Archived": ""
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"
@@ -80,7 +84,10 @@
         "Type recent activity here": "Zadajte poslednú aktivitu tu",
         "Not completed yet": "Nedokončená",
         "Most recent activities": "Najnovšie aktivity",
-        "Log completed activity": ""
+        "Log completed activity": "",
+        "Schedule activity": "",
+        "Enter": "",
+        "Shift+Enter": ""
     },
     "root": {
         "Customer Tags": "Značky zákazníkov"

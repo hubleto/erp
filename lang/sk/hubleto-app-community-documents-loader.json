@@ -1,7 +1,10 @@
 {
     "manifest": {
         "Documents": "Dokumenty",
-        "Free document management.": "Bezplatný manažment dokumentov."
+        "Free document management.": "Bezplatný manažment dokumentov.",
+        "Browse": "",
+        "List": "",
+        "Templates": ""
     },
     "Models\\Document": {
         "Document name": "Názov dokumentu",

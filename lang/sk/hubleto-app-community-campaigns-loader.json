@@ -16,7 +16,13 @@
         "Color": "Farba",
         "Mail template": "Šablóna emailovej správy",
         "Manager": "Manažér",
-        "Created": "Vytvorená"
+        "Created": "Vytvorená",
+        "UID": "",
+        "Mail account to send email from": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Approved": "",
+        "Closed": ""
     },
     "Models\\Recipient": {
         "Campaign": "",

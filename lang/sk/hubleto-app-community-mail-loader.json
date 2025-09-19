@@ -7,7 +7,10 @@
     },
     "manifest": {
         "Mail": "Email",
-        "Email client": "Emailový klient"
+        "Email client": "Emailový klient",
+        "Active Mail": "",
+        "Templates": "",
+        "Accounts": ""
     },
     "Models\\Mail": {
         "Mail Id": "ID správy",

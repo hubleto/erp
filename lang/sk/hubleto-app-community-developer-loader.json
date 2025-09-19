@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Developer": "Vývojár",
-        "Developer tools to automate your Hubleto development": "Nástroja pre vývojárov"
+        "Developer tools to automate your Hubleto development": "Nástroja pre vývojárov",
+        "Developer tools": ""
     },
     "root": {
         "Developer tools": "Nástroje pre vývojárov"

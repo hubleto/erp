@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Workflow": "Workflow",
-        "Free sales workflow management.": "Bezplatný manažment predajných kanálov"
+        "Free sales workflow management.": "Bezplatný manažment predajných kanálov",
+        "History": "",
+        "Workflows": ""
     },
     "Controllers\\Home": {
         "Workflow": "Workflow",
@@ -23,6 +25,7 @@
         "Color": "Farba",
         "Probability": "Pravdepodobnosť",
         "Workflow": "Potrubie",
-        "Set result of a deal to": "Stanovený výsledok dohody"
+        "Set result of a deal to": "Stanovený výsledok dohody",
+        "Tag": ""
     }
 }

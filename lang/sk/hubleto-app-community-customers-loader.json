@@ -79,7 +79,8 @@
         "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
         "Type recent activity here": "Zadajte poslednú aktivitu tu",
         "Not completed yet": "Nedokončená",
-        "Most recent activities": "Najnovšie aktivity"
+        "Most recent activities": "Najnovšie aktivity",
+        "Log completed activity": ""
     },
     "root": {
         "Customer Tags": "Značky zákazníkov"

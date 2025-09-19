@@ -31,9 +31,15 @@ class Dictionary extends \Hubleto\Erp\Controllers\ApiController
       && $language != 'en'
     ) {
 
-      if (!empty($context) && !empty($contextInner)) {
-        $service = $this->getService($context);
-        $this->translator()->addToDictionary($service, $language, $contextInner, $addNew['orig']);
+      if (!empty($addNew['context']) && !empty($addNew['contextInner'])) {
+        // $service = $this->getService($addNew['context']);
+        $this->translator()->addToDictionary(
+          $this,
+          $language,
+          $addNew['context'],
+          $addNew['contextInner'],
+          $addNew['orig']
+        );
       }
 
       return ['status' => true];

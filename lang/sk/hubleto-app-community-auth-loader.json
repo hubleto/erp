@@ -25,5 +25,12 @@
     "Models\\UserHasRole": {
         "User": "",
         "Role": ""
+    },
+    "Controllers\\SignIn": {
+        "Your email": "",
+        "Password": "",
+        "Keep signed in": "",
+        "Sign in": "",
+        "Forgot password?": ""
     }
 }

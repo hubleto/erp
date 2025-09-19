@@ -66,7 +66,7 @@ class Campaign extends \Hubleto\Erp\Model
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
-      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setRequired()->setDefaultValue(date('Y-m-d H:i:s')),
+      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setDefaultValue(date('Y-m-d H:i:s')),
     ]);
   }
 

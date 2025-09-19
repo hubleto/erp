@@ -23,11 +23,8 @@ class Controller extends \Hubleto\Framework\Controller
 
     $reflection = new \ReflectionClass($this);
     preg_match('/^(.*?)\\\Controllers\\\(.*?)$/', $reflection->getName(), $m);
-    if (isset($m[1]) && isset($m[2])) {
-      $this->appNamespace = $m[1];
-      $this->translationContext = $m[1] . '\\Loader';
-      $this->translationContextInner = 'Controllers\\' . $m[2];
-    }
+    $this->translationContext = str_replace('\\', '-', strtolower($m[1] . '\\Loader'));
+    $this->translationContextInner = 'Controllers\\' . $m[2];
 
     parent::__construct();
 

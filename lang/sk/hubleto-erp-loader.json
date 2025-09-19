@@ -39,5 +39,10 @@
     "Components\\Inputs\\Password": {
         "New password": "",
         "Confirm new password": ""
+    },
+    "Controllers\\NotFound": {
+        "Page Not Found": "",
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "",
+        "Home": ""
     }
 }

@@ -11,7 +11,8 @@
         "Title": "Názov",
         "Slug": "URL cesta",
         "Color": "Farba",
-        "Is default": "Východzí"
+        "Is default": "Východzí",
+        "Add dashboard": ""
     },
     "Models\\Panel": {
         "Dashboard": "Dashboard",
@@ -28,5 +29,12 @@
     "Controllers\\Dashboards": {
         "Dashboards": "",
         "Add dashboard": ""
+    },
+    "Controllers\\Settings": {
+        "Dashboards": "",
+        "Settings": ""
+    },
+    "Components\\FormDashboard": {
+        "Panels": ""
     }
 }

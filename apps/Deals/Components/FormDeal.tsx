@@ -76,13 +76,29 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
 
+  onAfterFormInitialized(): void {
+    super.onAfterFormInitialized();
+
+    if (this.state.record.id > 0) {
+      this.setState({
+        tabs: [
+          { uid: 'default', title: <b>{this.translate('Deal')}</b> },
+          { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
+          { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
+          { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
+          { uid: 'calendar', icon: 'fas fa-calendar', position: 'right' },
+          { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
+        ]
+      })
+    }
+  }
+
   getStateFromProps(props: FormDealProps) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Deal')}</b> },
         { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
-        { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'calendar', icon: 'fas fa-calendar', position: 'right' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },

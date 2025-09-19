@@ -33,14 +33,26 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
     this.state = this.getStateFromProps(props);
   }
 
+  onAfterFormInitialized(): void {
+    super.onAfterFormInitialized();
+
+    if (this.state.record.id > 0) {
+      this.setState({
+        tabs: [
+          {uid: 'default', title: <b>{this.translate('Campaign')}</b>},
+          {uid: 'contacts', title: this.translate('Add recipients from contacts')},
+          {uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS'},
+          {uid: 'launch', title: this.translate('Launch')},
+        ]
+      })
+    }
+  }
+
   getStateFromProps(props: FormCampaignProps) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
-        { uid: 'contacts', title: this.translate('Add recipients from contacts') },
-        { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
-        { uid: 'launch', title: this.translate('Launch') },
         ...(this.getParentApp()?.getFormTabs() ?? [])
       ]
     };

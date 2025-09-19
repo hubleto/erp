@@ -116,6 +116,13 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     return description;
   }
 
+  getEndpointParams(): object {
+    return {
+      ...super.getEndpointParams() as any,
+      saveRelations: ['TAGS'],
+    };
+  }
+
   onAfterSaveRecord(saveResponse: any): void {
     let params = this.getEndpointParams() as any;
     let isArchived = saveResponse.savedRecord.is_archived;

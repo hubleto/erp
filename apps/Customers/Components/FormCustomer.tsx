@@ -87,7 +87,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Customer')}</b> },
-        { uid: 'documents', title: this.translate('Documents') },
         { uid: 'calendar', title: this.translate('Calendar') },
       ],
     };
@@ -121,6 +120,16 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
   }
 
   onAfterFormInitialized(): void {
+    if (this.state.record.id > 0) {
+      this.setState({
+        tabs: [
+          { uid: 'default', title: <b>{this.translate('Customer')}</b> },
+          { uid: 'documents', title: this.translate('Documents') },
+          { uid: 'calendar', title: this.translate('Calendar') },
+        ]
+      })
+    }
+
     request.get(
       'api/table/describe',
       {
@@ -218,16 +227,16 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               origin_link: window.location.pathname + "?recordId=" + this.state.record.id,
             }
           }}
-          isInlineEditing={this.state.showIdDocument < 0 ? true : false}
+          isInlineEditing={this.state.showIdDocument < 0}
           showInModalSimple={true}
           onSaveCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-            if (saveResponse.status = "success") {
+            if (saveResponse.status == "success") {
               this.loadRecord();
               this.setState({ showIdDocument: 0 } as FormCustomerState)
             }
           }}
           onDeleteCallback={(form: FormDocument<FormDocumentProps, FormDocumentState>, saveResponse: any) => {
-            if (saveResponse.status = "success") {
+            if (saveResponse.status == "success") {
               this.loadRecord();
               this.setState({ showIdDocument: 0 } as FormCustomerState)
             }

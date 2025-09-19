@@ -45,6 +45,9 @@ class Mailer extends \Hubleto\Framework\Core
       $mMailbox = $this->getModel(Mailbox::class);
       $mMail = $this->getModel(Mail::class);
 
+      $this->logger()->info('GetMails: getting emails from ' . count($accounts) . ' account(s).');
+      $result['log'][] = 'GetMails: getting emails from ' . count($accounts) . ' account(s).';
+
       foreach ($accounts as $account) {
         $this->logger()->info('GetMails: checking account ' . $account['name']);
         $result['log'][] = 'GetMails: checking account ' . $account['name'];

@@ -18,6 +18,7 @@ class Get extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
+    /** @var Mailer */
     $mailer = $this->getService(Mailer::class);
     $result = $mailer->getMails();
 

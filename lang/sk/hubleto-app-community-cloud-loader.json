@@ -61,7 +61,11 @@
         "Account UID": "Identifikátor účtu",
         "Variable symbol for payments": "Variabilný symbol pre platby",
         "Price is calculated based on maximum number of active users or paid apps during this month.": "Cena je požítaná na základe maximálneho počtu aktívnych používateľov alebo platených aplikácií v mesiaci.",
-        "Deactivate subscription renewal": "Deaktivovať automatické predĺženie predplatného"
+        "Deactivate subscription renewal": "Deaktivovať automatické predĺženie predplatného",
+        "Your collaboration space": "",
+        "Automatic subscription renewal is deactivated": "",
+        "Access to your Premium account will be blocked next month.": "",
+        "Activate subscription renewal again": ""
     },
     "root": {
         "Free trial expires in": "Skúšobná prevádzka skončí o",

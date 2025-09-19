@@ -27,5 +27,16 @@
         "Workflow": "Potrubie",
         "Set result of a deal to": "Stanovený výsledok dohody",
         "Tag": ""
+    },
+    "Controllers\\Workflow": {
+        "Workflow": ""
+    },
+    "Models\\WorkflowHistory": {
+        "Model": "",
+        "Record Id": "",
+        "Changed": "",
+        "User": "",
+        "Workflow": "",
+        "Workflow Step": ""
     }
 }

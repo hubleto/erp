@@ -16,7 +16,16 @@
         "Delivered": "Dodanie služby",
         "Due": "Splatnosť",
         "Payment": "Úhrada",
-        "Notes": "Poznámky"
+        "Notes": "Poznámky",
+        "Invoice profile": "",
+        "Paid": "",
+        "Currency": "",
+        "Total excl. VAT": "",
+        "Total incl. VAT": "",
+        "Template": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Add invoice": ""
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Spolu bez DPH",
@@ -40,9 +49,17 @@
         "Invoice": "Faktúra",
         "Item": "Položka",
         "Unit price": "Jednotková cena",
-        "Amount": "Množstvo"
+        "Amount": "Množstvo",
+        "Discount": "",
+        "VAT": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
     },
     "Controllers\\Invoices": {
         "Invoices": "Faktúry"
+    },
+    "Models\\InvoiceDocument": {
+        "Invoice": "",
+        "Document": ""
     }
 }

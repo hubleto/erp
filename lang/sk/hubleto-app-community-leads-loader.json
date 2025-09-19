@@ -100,7 +100,12 @@
         "Enter = Log completed activity": "Enter = zapísať ukončenú aktivitu",
         "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
         "Most recent activities": "Najnovšie aktivity",
-        "Not completed yet": "Nedokončená"
+        "Not completed yet": "Nedokončená",
+        "Tasks": "",
+        "Log completed activity": "",
+        "Enter": "",
+        "Schedule activity": "",
+        "Shift+Enter": ""
     },
     "Models\\Tag": {
         "Name": "Pomenovať",

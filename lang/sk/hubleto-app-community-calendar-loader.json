@@ -31,5 +31,20 @@
     "root": {
         "Events for today": "Dnešné udalosti",
         "Reminders": "Pripomienky"
+    },
+    "Components\\CalendarMain": {
+        "New activity": "",
+        "All": "",
+        "Ownership": "",
+        "My activities": ""
+    },
+    "Models\\SharedCalendar": {
+        "Created by": "",
+        "Calendar ID": "",
+        "Share key": "",
+        "Display details": "",
+        "Enabled": "",
+        "Date from": "",
+        "Date to": ""
     }
 }

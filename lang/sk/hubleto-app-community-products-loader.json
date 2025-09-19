@@ -62,5 +62,18 @@
         "Company ID": "IČO",
         "VAT ID": "IČDPH",
         "Payment account number": "Číslo platobného účtu"
+    },
+    "Components\\FormProduct": {
+        "Product": "",
+        "Suppliers": ""
+    },
+    "Models\\ProductSupplier": {
+        "Product": "",
+        "Supplier": "",
+        "Supplier product name": "",
+        "Supplier product code": "",
+        "Purchase price": "",
+        "Internal notes": "",
+        "Delivery time": ""
     }
 }

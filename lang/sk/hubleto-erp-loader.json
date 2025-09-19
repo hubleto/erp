@@ -32,5 +32,12 @@
         "Keep signed in": "Zostať prihlásený",
         "Sign in": "Prihlásiť sa",
         "Forgot password?": "Zabudol som heslo"
+    },
+    "Components\\Inputs\\Image": {
+        "Choose image": ""
+    },
+    "Components\\Inputs\\Password": {
+        "New password": "",
+        "Confirm new password": ""
     }
 }

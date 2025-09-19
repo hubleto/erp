@@ -22,14 +22,38 @@
         "Workflow": "",
         "Workflow step": "",
         "Approved": "",
-        "Closed": ""
+        "Closed": "",
+        "Add Campaign": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
     },
     "Models\\Recipient": {
         "Campaign": "",
-        "Contact": ""
+        "Contact": "",
+        "Email": "",
+        "First name": "",
+        "Last name": "",
+        "Salutation": "",
+        "Reference to mail sent": ""
     },
     "Models\\CampaignTask": {
         "Campaign": "",
         "Task": ""
+    },
+    "Controllers\\Campaigns": {
+        "Campaigns": ""
+    },
+    "Components\\FormCampaign": {
+        "Campaign": "",
+        "Add recipients from contacts": "",
+        "Tasks": "",
+        "Launch": ""
+    },
+    "Models\\Click": {
+        "Campaign": "",
+        "Recipient": "",
+        "Url": "",
+        "Clicked": ""
     }
 }

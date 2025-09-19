@@ -13,5 +13,9 @@
         "No hot tips for this screen": "",
         "Need more help?": "",
         "Contact us": ""
+    },
+    "Controllers\\About": {
+        "About": "",
+        "About your Hubleto": ""
     }
 }

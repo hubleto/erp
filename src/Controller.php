@@ -21,11 +21,6 @@ class Controller extends \Hubleto\Framework\Controller
   public function __construct()
   {
 
-    $reflection = new \ReflectionClass($this);
-    preg_match('/^(.*?)\\\Controllers\\\(.*?)$/', $reflection->getName(), $m);
-    $this->translationContext = str_replace('\\', '-', strtolower($m[1] . '\\Loader'));
-    $this->translationContextInner = 'Controllers\\' . $m[2];
-
     parent::__construct();
 
     $this->hubletoApp = $this->appManager()->getApp($this->appNamespace);

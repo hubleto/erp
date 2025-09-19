@@ -26,7 +26,10 @@
         "Closed": "Uzavretý",
         "Color": "Farba",
         "Notes": "Poznámky",
-        "Created": "Vytvorený"
+        "Created": "Vytvorený",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
     },
     "Models\\Phase": {
         "Name": "Názov",
@@ -35,5 +38,17 @@
     },
     "Components\\FormProject": {
         "Projects": "Projekty"
+    },
+    "Models\\ProjectOrder": {
+        "Project": "",
+        "Order": ""
+    },
+    "Models\\ProjectTask": {
+        "Project": "",
+        "Task": ""
+    },
+    "Models\\ProjectDeal": {
+        "Project": "",
+        "Deal": ""
     }
 }

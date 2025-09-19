@@ -2,5 +2,22 @@
     "manifest": {
         "Suppliers": "Dodávatelia",
         "List of product suppliers": "Zoznam dodávateľov"
+    },
+    "Controllers\\Suppliers": {
+        "Suppliers": ""
+    },
+    "Models\\Supplier": {
+        "Name": "",
+        "Address": "",
+        "City": "",
+        "Postal code": "",
+        "Country": "",
+        "Contact": "",
+        "Order email": "",
+        "Tax ID": "",
+        "Company ID": "",
+        "VAT ID": "",
+        "Payment account number": "",
+        "Add supplier": ""
     }
 }

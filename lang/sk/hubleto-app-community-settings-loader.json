@@ -100,7 +100,8 @@
         "Account IBAN": "IBAN",
         "SWIFT": "SWIFT",
         "Numbering pattern": "Vzorec pre číslovanie",
-        "Customer ID": "ID zákazníka"
+        "Customer ID": "ID zákazníka",
+        "Supplier": ""
     },
     "Models\\UserRole": {
         "Role": "Rola",
@@ -139,7 +140,9 @@
         "Most common settings": "Najbežnejšie nastavenia",
         "Manage users": "Spravujte používateľov",
         "Manage apps": "Spravovať aplikácie",
-        "All settings": "Všetky nastavenia"
+        "All settings": "Všetky nastavenia",
+        "Change theme": "",
+        "Locale": ""
     },
     "Controllers\\UserRoles": {
         "Settings": "Nastavenia",

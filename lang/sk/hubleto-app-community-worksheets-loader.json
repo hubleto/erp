@@ -7,5 +7,20 @@
     "root": {
         "Worksheets": "Vykazovanie",
         "Activity types": "Typy aktivít"
+    },
+    "Models\\Activity": {
+        "Worker": "",
+        "Task": "",
+        "Type": "",
+        "Day": "",
+        "Worked hours": "",
+        "Description": "",
+        "Approved": "",
+        "Is chargeable": "",
+        "Created": ""
+    },
+    "Models\\ActivityType": {
+        "Varchar": "",
+        "Color": ""
     }
 }

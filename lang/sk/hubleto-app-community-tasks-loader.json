@@ -26,6 +26,22 @@
         "Customer": "",
         "Contact": "",
         "Is chargeable": "",
-        "Related to": ""
+        "Related to": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
+    },
+    "Models\\Todo": {
+        "To do": "",
+        "Task": "",
+        "Responsible": "",
+        "Closed": "",
+        "Deadline": ""
+    },
+    "Controllers\\Boards\\MyRecentTasks": {
+        "You did not work on any task since last 2 weeks.": ""
+    },
+    "Controllers\\Tasks": {
+        "Tasks": ""
     }
 }

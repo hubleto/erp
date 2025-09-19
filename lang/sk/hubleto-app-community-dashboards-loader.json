@@ -18,9 +18,15 @@
         "Board": "Zdroj",
         "Title": "Názov",
         "Configuration": "Konfigurácia",
-        "-- Select board to be displayed in panel --": "-- Zvoľte panel --"
+        "-- Select board to be displayed in panel --": "-- Zvoľte panel --",
+        "Width": "",
+        "Order": ""
     },
     "Components\\Dashboard": {
         "Add new panel": "Pridať panel"
+    },
+    "Controllers\\Dashboards": {
+        "Dashboards": "",
+        "Add dashboard": ""
     }
 }

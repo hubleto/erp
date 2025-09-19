@@ -6,5 +6,16 @@
     },
     "root": {
         "Developer tools": "Nástroje pre vývojárov"
+    },
+    "Controllers\\Dashboard": {
+        "Developer": "",
+        "DB Updates": "",
+        "Form designer": ""
+    },
+    "Controllers\\DbUpdates": {
+        "Developer": "",
+        "DB Updater": "",
+        "Database updater": "",
+        "No necessary database updates found.": ""
     }
 }

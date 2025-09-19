@@ -36,5 +36,15 @@
         "Name": "Názov",
         "Content": "Obsah",
         "Notes": "Poznámky"
+    },
+    "Controllers\\Browse": {
+        "Documents": ""
+    },
+    "Components\\Browser": {
+        "Add folder": "",
+        "Add document": ""
+    },
+    "Components\\FormDocument": {
+        "Document": ""
     }
 }

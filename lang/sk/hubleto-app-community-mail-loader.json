@@ -29,6 +29,63 @@
         "Body (HTML)": "Správa (HTML)",
         "Color": "Farba",
         "Draft": "Rozpísaná",
-        "Template": "Šablóna"
+        "Template": "Šablóna",
+        "Account": "",
+        "Scheduled to send": ""
+    },
+    "Models\\Account": {
+        "Name": "",
+        "Color": "",
+        "Sender email address": "",
+        "Sender name": "",
+        "IMAP host": "",
+        "IMAP port": "",
+        "IMAP encryption": "",
+        "IMAP username": "",
+        "IMAP password": "",
+        "SMTP host": "",
+        "SMTP port": "",
+        "SMTP encryption": "",
+        "SMTP username": "",
+        "SMTP password": ""
+    },
+    "Models\\Mailbox": {
+        "Account": "",
+        "Name": ""
+    },
+    "Controllers\\Home": {
+        "Mail": ""
+    },
+    "Controllers\\Templates": {
+        "Mail": "",
+        "Templates": ""
+    },
+    "Models\\Template": {
+        "Subject": "",
+        "Body (Text)": "",
+        "Body (HTML)": ""
+    },
+    "Controllers\\Scheduled": {
+        "Scheduled": "",
+        "Mail": ""
+    },
+    "Controllers\\Sent": {
+        "Sent": "",
+        "Mail": ""
+    },
+    "Controllers\\Get": {
+        "Mail": "",
+        "Get": ""
+    },
+    "Controllers\\Accounts": {
+        "Mail": "",
+        "Accounts": ""
+    },
+    "Models\\Index": {
+        "Mail": "",
+        "From": "",
+        "To": "",
+        "Cc": "",
+        "Bcc": ""
     }
 }

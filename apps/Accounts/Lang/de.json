@@ -1,0 +1,49 @@
+{
+    "loader": {
+        "Invoices": "Rechnungen"
+    },
+    "models.invoice": {
+        "Profile": "Profil",
+        "Issued by": "Ausgestellt von",
+        "Customer": "Kunde",
+        "Number": "Nummer",
+        "TIP: Number is auto-generated based on the pattern configured in the profile.": "Hinweis: Die Nummer wird automatisch basierend auf dem im Profil konfigurierten Muster generiert.",
+        "Variable symbol": "Variabler Symbol",
+        "Constant symbol": "Konstanter Symbol",
+        "Specific symbol": "Spezifischer Symbol",
+        "Issued": "Ausgestellt",
+        "Delivered": "Dodanie služby",
+        "Due": "Fällig",
+        "Payment": "Zahlung",
+        "Notes": "Notizen"
+    },
+    "models.invoiceItem": {
+        "Invoice": "Rechnung",
+        "Item": "Artikel",
+        "Unit price": "Einheitspreis",
+        "Amount": "Menge"
+    },
+    "controllers.invoices": {
+        "Invoices": "Rechnungen"
+    },
+    "tableInvoices": {
+        "Total excl. VAT": "",
+        "Total incl. VAT": "",
+        "VAT": "",
+        "Customer": "",
+        "Variable symbol": "",
+        "Number": "",
+        "Issue": "",
+        "Due": "",
+        "Delivery": "",
+        "Payment": "",
+        "Total VAT": ""
+    },
+    "formInvoice": {
+        "Invoice": "Rechnung"
+    },
+    "manifest": {
+        "Invoices": "",
+        "Invoincing": ""
+    }
+}

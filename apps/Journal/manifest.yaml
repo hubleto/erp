@@ -1,0 +1,9 @@
+namespace: Hubleto\App\Community\Journal
+appType: community
+sidebarGroup: finance
+rootUrlSlug: journal/entries
+name: Journal
+icon: fas fa-book
+highlight: Journal
+author:
+  company: "wai.blue"

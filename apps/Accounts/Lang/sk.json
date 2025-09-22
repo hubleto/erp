@@ -1,0 +1,48 @@
+{
+    "manifest": {
+        "Invoices": "Faktúry",
+        "Invoincing": "Fakturácia"
+    },
+    "Models\\Invoice": {
+        "Profile": "Profil",
+        "Issued by": "Vystavil",
+        "Customer": "Zákazník",
+        "Number": "Číslo",
+        "TIP: Number is auto-generated based on the pattern configured in the profile.": "TIP: Číslo je generované automaticky podľa vzorca v profile.",
+        "Variable symbol": "Variabilný symbol",
+        "Constant symbol": "Konštantný symbol",
+        "Specific symbol": "Špecifický symbol",
+        "Issued": "Vystavená",
+        "Delivered": "Dodanie služby",
+        "Due": "Splatnosť",
+        "Payment": "Úhrada",
+        "Notes": "Poznámky"
+    },
+    "Components\\TableInvoices": {
+        "Total excl. VAT": "Spolu bez DPH",
+        "Total incl. VAT": "Spolu s DPH",
+        "VAT": "DPH",
+        "Customer": "Zákazník",
+        "Variable symbol": "Variabilný symbol",
+        "Number": "Číslo",
+        "Issue": "Vystavená",
+        "Due": "Splatnosť",
+        "Delivery": "Dodanie",
+        "Payment": "Úhrada",
+        "Total VAT": "Spolu DPH"
+    },
+    "Components\\FormInvoice": {
+        "Invoice": "Faktúra",
+        "Items": "Položky",
+        "Print invoice": "Vytlačiť faktúru"
+    },
+    "Models\\InvoiceItem": {
+        "Invoice": "Faktúra",
+        "Item": "Položka",
+        "Unit price": "Jednotková cena",
+        "Amount": "Množstvo"
+    },
+    "Controllers\\Invoices": {
+        "Invoices": "Faktúry"
+    }
+}

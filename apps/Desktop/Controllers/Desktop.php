@@ -5,6 +5,8 @@ namespace Hubleto\App\Community\Desktop\Controllers;
 
 use Hubleto\App\Community\Settings\PermissionsManager;
 
+use Hubleto\App\Community\Desktop\Loader;
+
 class Desktop extends \Hubleto\Erp\Controller
 {
   public bool $disableLogUsage = true;
@@ -62,6 +64,7 @@ class Desktop extends \Hubleto\Erp\Controller
       'help' => [ 'title' => $this->translate('Help'), 'icon' => 'fas fa-life-ring' ],
       'custom' => [ 'title' => $this->translate('Custom'), 'icon' => 'fas fa-puzzle-piece' ],
     ]);
+    $this->viewParams['sidebarGroups'] = $this->getService(Loader::class)->getSidebarGroups();
 
     $this->viewParams['availableLanguages'] = $this->config()->getAsArray('availableLanguages', [
       "en" => [ "flagImage" => "en.jpg", "name" => "English" ],
@@ -75,7 +78,7 @@ class Desktop extends \Hubleto\Erp\Controller
       "sk" => [ "flagImage" => "sk.jpg", "name" => "Slovensky" ],
     ]);
 
-    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\Loader::class)->appMenu;
+    $appMenu = $this->getService(Loader::class)->appMenu;
     $this->viewParams['appMenu'] = [];
     foreach ($appMenu as $item) {
       if ($item['app'] === $activatedApp) {

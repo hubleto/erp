@@ -81,7 +81,7 @@ class Create extends \Hubleto\Erp\Cli\Agent\Command
 
     switch ($appNamespaceParts[2]) {
       case 'Community':
-        $appRepositoryFolder = realpath(__DIR__ . '/../../../../apps/community');
+        $appRepositoryFolder = realpath(__DIR__ . '/../../../apps');
         break;
       case 'Premium':
         throw new \Exception('Creation of premium apps is not implemented yet.');

@@ -16,7 +16,7 @@ final class RenderAllRoutesTest extends TestCase
 
   public function testSettings(): void
   {
-    $html = \Hubleto\Erp\Loader::getGlobalApp()->renderer()->renderer()->render('customers/settings');
+    $html = \Hubleto\Erp\Loader::getGlobalApp()->renderer()->render('customers/settings');
     $this->assertStringContainsString('app-main-title', $html);
     $this->assertStringNotContainsStringIgnoringCase('error', $html);
   }

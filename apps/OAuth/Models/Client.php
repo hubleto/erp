@@ -14,10 +14,10 @@ class Client extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'client_id' => (new Varchar($this, $this->translate('Client Id')))->setProperty('defaultVisibility', true),
-      'client_secret' => (new Varchar($this, $this->translate('Client Secret')))->setProperty('defaultVisibility', true),
-      'name' => (new Varchar($this, $this->translate('Name')))->setProperty('defaultVisibility', true),
-      'redirect_uri' => (new Varchar($this, $this->translate('Redirect Uri')))->setProperty('defaultVisibility', true),
+      'client_id' => (new Varchar($this, $this->translate('Client Id')))->setDefaultVisible(),
+      'client_secret' => (new Varchar($this, $this->translate('Client Secret')))->setDefaultVisible(),
+      'name' => (new Varchar($this, $this->translate('Name')))->setDefaultVisible(),
+      'redirect_uri' => (new Varchar($this, $this->translate('Redirect Uri')))->setDefaultVisible(),
     ]);
   }
 

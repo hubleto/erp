@@ -16,6 +16,10 @@ class Account extends \Hubleto\Erp\Model
   public string $recordManagerClass = RecordManagers\Account::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
+  public array $relations = [
+    'MAILBOXES' => [ self::HAS_MANY, Mailbox::class, 'id_account', 'id'],
+  ];
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
@@ -25,12 +29,12 @@ class Account extends \Hubleto\Erp\Model
       'sender_name' => (new Varchar($this, $this->translate('Sender name')))->setRequired(),
       'imap_host' => (new Varchar($this, $this->translate('IMAP host')))->setRequired(),
       'imap_port' => (new Integer($this, $this->translate('IMAP port')))->setRequired(),
-      'imap_encryption' => (new Varchar($this, $this->translate('IMAP encryption')))->setRequired(),
+      'imap_encryption' => (new Varchar($this, $this->translate('IMAP encryption')))->setRequired()->setEnumValues(['ssl' => 'ssl', 'tls' => 'tls']),
       'imap_username' => (new Varchar($this, $this->translate('IMAP username')))->setRequired(),
       'imap_password' => (new Password($this, $this->translate('IMAP password')))->setRequired(),
       'smtp_host' => (new Varchar($this, $this->translate('SMTP host')))->setRequired(),
       'smtp_port' => (new Integer($this, $this->translate('SMTP port')))->setRequired(),
-      'smtp_encryption' => (new Varchar($this, $this->translate('SMTP encryption')))->setRequired(),
+      'smtp_encryption' => (new Varchar($this, $this->translate('SMTP encryption')))->setRequired()->setEnumValues(['ssl' => 'ssl', 'tls' => 'tls']),
       'smtp_username' => (new Varchar($this, $this->translate('SMTP username')))->setRequired(),
       'smtp_password' => (new Password($this, $this->translate('SMTP password')))->setRequired(),
     ]);

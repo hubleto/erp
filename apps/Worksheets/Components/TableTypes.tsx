@@ -20,7 +20,8 @@ export default class TableTypes extends HubletoTable<TableTypesProps, TableTypes
   props: TableTypesProps;
   state: TableTypesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Worksheets::Components\\TableTypes';
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets\\Loader';
+  translationContextInner: string = 'Components\\TableTypes';
 
   constructor(props: TableTypesProps) {
     super(props);

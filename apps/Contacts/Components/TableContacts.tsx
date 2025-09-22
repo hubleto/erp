@@ -6,6 +6,7 @@ import request from '@hubleto/react-ui/core/Request';
 import { ProgressBar } from 'primereact/progressbar';
 
 interface TableContactsProps extends HubletoTableProps {
+  idCustomer: number,
   showAsCards?: boolean;
 }
 
@@ -27,12 +28,13 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
   props: TableContactsProps;
   state: TableContactsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\TableContacts';
+  translationContext: string = 'Hubleto\\App\\Community\\Contacts\\Loader';
+  translationContextInner: string = 'Components\\TableContacts';
 
   getFormModalProps() {
     return {
       ...super.getFormModalProps(),
-      type: (this.props.customEndpointParams?.idCustomer ? 'right theme-secondary' : 'right wide'),
+      type: (this.props.idCustomer ? 'right theme-secondary' : 'right wide'),
     };
   }
 
@@ -53,6 +55,10 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
         }
       }
     }
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/contacts/' + (id > 0 ? id : 'add'));
   }
 
   onAfterLoadTableDescription(description: any) {
@@ -121,7 +127,8 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
 
   renderForm(): JSX.Element {
     let formProps: FormContactProps = this.getFormProps();
-    formProps.tableValuesDescription = this.state.tableValuesDescription;
+    if (!formProps.description) formProps.description = {};
+    formProps.description.defaultValues = {id_customer: this.props.idCustomer};
     return <FormContact {...formProps}/>;
   }
 
@@ -132,15 +139,17 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
       }
 
       return <>
-        {this.renderHeaderButtons()}
-        {this.renderFulltextSearch()}
+        <div className='flex gap-2'>
+          {this.renderHeaderButtons()}
+          {this.renderFulltextSearch()}
+        </div>
         {this.renderFormModal()}
-        <div className="flex gap-2 flex-wrap mt-2">
+        <div className="md:grid md:grid-cols-2 gap-2 mt-2">
           {Object.keys(this.state.data?.data).map((key) => {
             const item = this.state.data.data[key];
             return <div key={key}>
               <button
-                className="btn btn-transparent"
+                className="btn btn-transparent w-full"
                 onClick={() => {
                   this.setState({recordId: item.id})
                 }}
@@ -167,7 +176,7 @@ export default class TableContacts extends HubletoTable<TableContactsProps, Tabl
                     })}
                   </div>
                   {item.VALUES.map((value, index) => {
-                    return <div key={index}><small>{value.value}</small></div>
+                    return <div key={index} className='w-full truncate'><small>{value.value}</small></div>
                   })}
                 </span>
               </button>

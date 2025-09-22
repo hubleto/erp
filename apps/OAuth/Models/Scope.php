@@ -13,8 +13,8 @@ class Scope extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'scope_id' => (new Varchar($this, $this->translate('Scope Id')))->setProperty('defaultVisibility', true),
-      'description' => (new Varchar($this, $this->translate('Description')))->setProperty('defaultVisibility', true),
+      'scope_id' => (new Varchar($this, $this->translate('Scope Id')))->setDefaultVisible(),
+      'description' => (new Varchar($this, $this->translate('Description')))->setDefaultVisible(),
     ]);
   }
 

@@ -2,6 +2,8 @@
 
 namespace Hubleto\Erp;
 
+
+use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\Interfaces\AppManagerInterface;
 use Hubleto\Framework\Config;
 /**
@@ -19,13 +21,6 @@ class Controller extends \Hubleto\Framework\Controller
   public function __construct()
   {
 
-    $reflection = new \ReflectionClass($this);
-    preg_match('/^(.*?)\\\Controllers\\\(.*?)$/', $reflection->getName(), $m);
-    if (isset($m[1]) && isset($m[2])) {
-      $this->appNamespace = $m[1];
-      $this->translationContext = $m[1] . '\\Loader::Controllers\\' . $m[2];
-    }
-
     parent::__construct();
 
     $this->hubletoApp = $this->appManager()->getApp($this->appNamespace);
@@ -37,7 +32,7 @@ class Controller extends \Hubleto\Framework\Controller
       isset($this->hubletoApp)
       && $this->requiresAuthenticatedUser
       && !$this->permittedForAllUsers
-      && !$this->permissionsManager()->isAppPermittedForActiveUser($this->hubletoApp)
+      && !$this->getService(PermissionsManager::class)->isAppPermittedForActiveUser($this->hubletoApp)
     ) {
       return false;
     }
@@ -91,8 +86,8 @@ class Controller extends \Hubleto\Framework\Controller
 
     $logFolder = $this->config()->getAsString('logFolder');
 
-    if ($this->authProvider()->isUserInSession()) {
-      $user = $this->authProvider()->getUserFromSession();
+    if ($this->getService(\Hubleto\Framework\AuthProvider::class)->isUserInSession()) {
+      $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserFromSession();
 
       if (!empty($logFolder) && is_dir($logFolder)) {
         if (!is_dir($logFolder . '/usage')) {
@@ -119,7 +114,7 @@ class Controller extends \Hubleto\Framework\Controller
     $help = $this->getService(\Hubleto\App\Community\Help\Loader::class);
     $contextHelpUrls = $help->contextHelp[$this->router()->getRoute()] ?? '';
 
-    $user = $this->authProvider()->getUser();
+    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
 
     if (isset($contextHelpUrls[$user['language']])) {
       $contextHelpUrl = $contextHelpUrls[$user['language']];

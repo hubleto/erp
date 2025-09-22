@@ -1,0 +1,106 @@
+{
+    "manifest": {
+        "Orders": "Objednávky",
+        "Free order managment.": "Správa objednávok zdarma.",
+        "Order states": "",
+        "Order warnings": ""
+    },
+    "root": {
+        "Order states": "Stavy objednávok"
+    },
+    "Controllers\\Orders": {
+        "Orders": "Objednávky"
+    },
+    "Models\\Order": {
+        "Order number": "Číslo objednávky",
+        "Customer": "Zákazník",
+        "Title": "Názov",
+        "State": "Stav",
+        "Price": "Cena",
+        "Currency": "Mena",
+        "Order date": "Dátum objednania",
+        "Required delivery date": "Požadovaný dátum dodania",
+        "Shipping information": "Dodacie informácie",
+        "Notes": "Poznámky",
+        "Add order": "Pridať objednávku",
+        "Workflow": "",
+        "Workflow step": "",
+        "Template": "",
+        "Identifier": "",
+        "Owner": "",
+        "Manager": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": "",
+        "Closed": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
+    },
+    "Models\\State": {
+        "Title": "Názov",
+        "Code": "Kódovať",
+        "Color": "Farba"
+    },
+    "Models\\OrderProduct": {
+        "Order": "Objednávka",
+        "Title": "Názov",
+        "Product": "Produkt",
+        "Unit price": "Jednotková cena",
+        "Amount": "Výška",
+        "Discount": "Zľavu",
+        "Vat": "Kov",
+        "Add product": "",
+        "Sales price": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
+    },
+    "Models\\History": {
+        "Order": "Objednávka",
+        "Short Description": "Krátky popis",
+        "Long Description": "Dlhý popis",
+        "Date Time": "Čas"
+    },
+    "Components\\FormOrder": {
+        "Order": "Objednávka",
+        "History": "História",
+        "Title": "Názov",
+        "Documents": "",
+        "Projects": "",
+        "Invoices": "",
+        "Products": "",
+        "Type recent activity here": "",
+        "Log completed activity": "",
+        "Enter": "",
+        "Schedule activity": "",
+        "Shift+Enter": "",
+        "Most recent activities": ""
+    },
+    "Models\\OrderInvoice": {
+        "Order": "",
+        "Invoice": ""
+    },
+    "Models\\OrderDocument": {
+        "Order": "",
+        "Document": ""
+    },
+    "Models\\OrderActivity": {
+        "Subject": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Meeting minutes (link)": "",
+        "Created by": "",
+        "Order": ""
+    },
+    "Models\\OrderDeal": {
+        "Order": "",
+        "Deal": ""
+    },
+    "Controllers\\Boards\\OrderWarnings": {
+        "Open orders without future plan": ""
+    }
+}

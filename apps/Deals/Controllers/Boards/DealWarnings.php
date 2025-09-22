@@ -14,7 +14,8 @@ class DealWarnings extends \Hubleto\Erp\Controller
 
     $warningsTotal = 0;
 
-    $mDeal = $this->getService(Deal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
 
     $myDeals = $mDeal->record->prepareReadQuery()
       ->where($mDeal->table . ".is_archived", 0)

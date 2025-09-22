@@ -20,7 +20,8 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
   props: TableTasksProps;
   state: TableTasksState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Tasks::Components\\TableTasks';
+  translationContext: string = 'Hubleto\\App\\Community\\Tasks\\Loader';
+  translationContextInner: string = 'Components\\TableTasks';
 
   constructor(props: TableTasksProps) {
     super(props);
@@ -75,7 +76,7 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
         {super.renderCell(columnName, column, data, options)}
         {data['TODO'] ? data['TODO'].map((item, key) => {
           if (item.is_closed) return null;
-          else return <div className='text-yellow-600 font-normal' key={key}>{item.todo}</div>
+          else return <div className='text-yellow-600 font-normal text-xs' key={key}>{item.todo}</div>
         }) : null}
       </>;
     } else {

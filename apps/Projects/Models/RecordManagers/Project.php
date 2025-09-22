@@ -2,15 +2,15 @@
 
 namespace Hubleto\App\Community\Projects\Models\RecordManagers;
 
+
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
-
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
-use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
-use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 class Project extends \Hubleto\Erp\RecordManager
 {
@@ -79,15 +79,18 @@ class Project extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->urlParamAsInteger("idDeal") > 0) {
-      $query = $query->where($this->table . '.id_deal', $main->router()->urlParamAsInteger("idDeal"));
+    $view = $hubleto->router()->urlParamAsString('view');
+    if ($view == 'briefOverview') $query = $query->where($this->table . '.is_closed', false);
+
+    if ($hubleto->router()->urlParamAsInteger("idDeal") > 0) {
+      $query = $query->where($this->table . '.id_deal', $hubleto->router()->urlParamAsInteger("idDeal"));
     }
     
-    $filters = $main->router()->urlParamAsArray("filters");
-    if ($main->router()->urlParamAsInteger("idDeal") > 0) {
-      $query = $query->whereIn($this->table . '.', $main->router()->urlParamAsInteger("idDeal"));
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+    if ($hubleto->router()->urlParamAsInteger("idDeal") > 0) {
+      $query = $query->whereIn($this->table . '.', $hubleto->router()->urlParamAsInteger("idDeal"));
     }
 
     $query = Workflow::applyWorkflowStepFilter(

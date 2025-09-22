@@ -14,11 +14,11 @@ class AccessToken extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'access_token' => (new Varchar($this, $this->translate('Access Token')))->setProperty('defaultVisibility', true),
-      'expires_at' => (new Varchar($this, $this->translate('User Id')))->setProperty('defaultVisibility', true),
-      'client_id' => (new Varchar($this, $this->translate('Client Id')))->setProperty('defaultVisibility', true),
-      'scopes' => (new Varchar($this, $this->translate('Scopes')))->setProperty('defaultVisibility', true),
-      'revoked' => (new Boolean($this, $this->translate('Revoked')))->setProperty('defaultVisibility', true),
+      'access_token' => (new Varchar($this, $this->translate('Access Token')))->setDefaultVisible(),
+      'expires_at' => (new Varchar($this, $this->translate('User Id')))->setDefaultVisible(),
+      'client_id' => (new Varchar($this, $this->translate('Client Id')))->setDefaultVisible(),
+      'scopes' => (new Varchar($this, $this->translate('Scopes')))->setDefaultVisible(),
+      'revoked' => (new Boolean($this, $this->translate('Revoked')))->setDefaultVisible(),
     ]);
   }
 

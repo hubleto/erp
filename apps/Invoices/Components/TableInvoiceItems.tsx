@@ -23,7 +23,8 @@ export default class TableInvoiceItems extends Table<TableInvoiceItemsProps, Tab
   props: TableInvoiceItemsProps;
   state: TableInvoiceItemsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader::Components\\TableInvoiceItems';
+  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader';
+  translationContextInner: string = 'Components\\TableInvoiceItems';
 
   constructor(props: TableInvoiceItemsProps) {
     super(props);

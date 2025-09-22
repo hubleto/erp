@@ -4,16 +4,12 @@ namespace Hubleto\App\Help\Customers\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-final class RenderAllRoutesTest extends TestCase
+final class RenderAllRoutesTest extends \Hubleto\Erp\TestCase
 {
 
-  public function testRenderAllRoutes(): void
+  public function testRoutesContainAppMainTitle(): void
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
-
-    $html = $main->render('help');
-    $this->assertStringContainsString('app-main-title', $html);
-    $this->assertStringNotContainsStringIgnoringCase('error', $html);
+    $this->testRouteContainsAppMainTitle('help');
   }
 
 }

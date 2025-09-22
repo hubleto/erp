@@ -2,17 +2,16 @@
 
 namespace Hubleto\App\Community\Customers\Models\RecordManagers;
 
-use Hubleto\App\Community\Billing\Models\RecordManagers\BillingAccount;
+
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
-use Hubleto\App\Community\Customers\Models\RecordManagers\CustomerDocument;
-use Hubleto\App\Community\Settings\Models\RecordManagers\Country;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 use Hubleto\App\Community\Deals\Models\RecordManagers\Deal;
 use Hubleto\App\Community\Leads\Models\RecordManagers\Lead;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Hubleto\App\Community\Settings\Models\RecordManagers\Country;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Customer extends \Hubleto\Erp\RecordManager
 {
@@ -76,9 +75,9 @@ class Customer extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $filters = $main->router()->urlParamAsArray("filters");
+    $filters = $hubleto->router()->urlParamAsArray("filters");
     if (isset($filters["fArchive"])) {
       if ($filters["fArchive"] == 1) {
         $query = $query->where("customers.is_active", false);

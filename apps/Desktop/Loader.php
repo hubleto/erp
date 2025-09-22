@@ -21,10 +21,8 @@ class Loader extends \Hubleto\Framework\App
   public function __construct()
   {
     parent::__construct();
-    // $this->sidebar = DependencyInjection::create($main, SidebarManager::class);
-    // $this->dashboard = DependencyInjection::create($main, DashboardManager::class);
-    $this->sidebar = DependencyInjection::create(SidebarManager::class);
-    $this->dashboard = DependencyInjection::create(DashboardManager::class);
+    // $this->sidebar = DependencyInjection::create(SidebarManager::class);
+    // $this->dashboard = DependencyInjection::create(DashboardManager::class);
   }
 
   /**

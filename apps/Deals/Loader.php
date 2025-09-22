@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Deals;
 
 class Loader extends \Hubleto\Framework\App
 {
-  public bool $hasCustomSettings = true;
+  // public bool $hasCustomSettings = true;
 
   /**
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
@@ -22,16 +22,15 @@ class Loader extends \Hubleto\Framework\App
       '/^deals\/api\/generate-quotation-pdf\/?$/' => Controllers\Api\GenerateQuotationPdf::class,
       '/^deals\/api\/generate-invoice\/?$/' => Controllers\Api\GenerateInvoice::class,
 
-      '/^deals(\/(?<recordId>\d+))?\/?$/' => Controllers\Deals::class,
-      '/^deals\/add\/?$/' => ['controller' => Controllers\Deals::class, 'vars' => ['recordId' => -1]],
-      '/^deals\/settings\/?$/' => Controllers\Settings::class,
-      '/^deals\/archive\/?$/' => Controllers\DealsArchive::class,
-      '/^deals\/change-workflow\/?$/' => Controllers\Api\ChangeWorkflow::class,
-      '/^settings\/deal-tags\/?$/' => Controllers\Tags::class,
-      '/^settings\/deal-lost-reasons\/?$/' => Controllers\LostReasons::class,
       '/^deals\/boards\/deal-warnings\/?$/' => Controllers\Boards\DealWarnings::class,
       '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,
       '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
+
+      '/^deals(\/(?<recordId>\d+))?\/?$/' => Controllers\Deals::class,
+      '/^deals\/add\/?$/' => ['controller' => Controllers\Deals::class, 'vars' => ['recordId' => -1]],
+      '/^deals\/tags\/?$/' => Controllers\Tags::class,
+      '/^deals\/lost-reasons\/?$/' => Controllers\LostReasons::class,
+      // '/^deals\/settings\/?$/' => Controllers\Settings::class,
     ]);
     
     $this->addSearchSwitch('d', 'deals');
@@ -41,12 +40,12 @@ class Loader extends \Hubleto\Framework\App
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Deal Tags'),
       'icon' => 'fas fa-tags',
-      'url' => 'settings/deal-tags',
+      'url' => 'deals/tags',
     ]);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Deal Lost Reasons'),
       'icon' => 'fas fa-tags',
-      'url' => 'settings/deal-lost-reasons',
+      'url' => 'deals/lost-reasons',
     ]);
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */

@@ -6,17 +6,19 @@ use Hubleto\App\Community\Settings\Models\Country;
 use Hubleto\App\Community\Settings\Models\Permission;
 use Hubleto\App\Community\Settings\Models\Company;
 use Hubleto\App\Community\Settings\Models\RolePermission;
-use Hubleto\App\Community\Settings\Models\User;
-use Hubleto\App\Community\Settings\Models\UserRole;
-use Hubleto\App\Community\Settings\Models\UserHasRole;
+
+use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Auth\Models\UserRole;
+use Hubleto\App\Community\Auth\Models\UserHasRole;
 use Hubleto\App\Community\Settings\Models\Tag;
+use Hubleto\App\Community\Settings\PermissionsManager;
 
 class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
 
-    $this->permissionsManager()->DANGEROUS__grantAllPermissions();
+    $this->getService(PermissionsManager::class)->DANGEROUS__grantAllPermissions();
 
     \Hubleto\Terminal::cyan("Generating demo data...\n");
 
@@ -90,34 +92,34 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "language" => "en",
     ])['id'];
 
-    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Settings\Models\UserHasRole::class);
+    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Auth\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserChiefOfficer,
-      "id_role" => \Hubleto\App\Community\Settings\Models\UserRole::ROLE_CHIEF_OFFICER,
+      "id_role" => \Hubleto\App\Community\Auth\Models\UserRole::ROLE_CHIEF_OFFICER,
     ]);
 
-    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Settings\Models\UserHasRole::class);
+    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Auth\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserManager,
-      "id_role" => \Hubleto\App\Community\Settings\Models\UserRole::ROLE_MANAGER,
+      "id_role" => \Hubleto\App\Community\Auth\Models\UserRole::ROLE_MANAGER,
     ]);
 
-    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Settings\Models\UserHasRole::class);
+    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Auth\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserEmployee,
-      "id_role" => \Hubleto\App\Community\Settings\Models\UserRole::ROLE_EMPLOYEE,
+      "id_role" => \Hubleto\App\Community\Auth\Models\UserRole::ROLE_EMPLOYEE,
     ]);
 
-    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Settings\Models\UserHasRole::class);
+    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Auth\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserAssistant,
-      "id_role" => \Hubleto\App\Community\Settings\Models\UserRole::ROLE_ASSISTANT,
+      "id_role" => \Hubleto\App\Community\Auth\Models\UserRole::ROLE_ASSISTANT,
     ]);
 
-    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Settings\Models\UserHasRole::class);
+    $mUserHasRole = $this->getModel(\Hubleto\App\Community\Auth\Models\UserHasRole::class);
     $mUserHasRole->record->recordCreate([
       "id_user" => $idUserExternal,
-      "id_role" => \Hubleto\App\Community\Settings\Models\UserRole::ROLE_EXTERNAL,
+      "id_role" => \Hubleto\App\Community\Auth\Models\UserRole::ROLE_EXTERNAL,
     ]);
 
     $mInvoiceProfile = $this->getModel(\Hubleto\App\Community\Settings\Models\InvoiceProfile::class);
@@ -191,7 +193,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     \Hubleto\Terminal::cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 
-    $this->permissionsManager()->revokeGrantAllPermissions();
+    $this->getService(PermissionsManager::class)->revokeGrantAllPermissions();
   }
 
   public function generateInvoiceProfiles(): void

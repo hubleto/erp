@@ -14,15 +14,15 @@ class AuthCode extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'code' => (new Varchar($this, $this->translate('Code')))->setProperty('defaultVisibility', true),
-      'expires_at' => (new Varchar($this, $this->translate('Expires At')))->setProperty('defaultVisibility', true),
-      'user_id' => (new Varchar($this, $this->translate('User Id')))->setProperty('defaultVisibility', true),
-      'client_id' => (new Varchar($this, $this->translate('Client Id')))->setProperty('defaultVisibility', true),
-      'scopes' => (new Varchar($this, $this->translate('Scopes')))->setProperty('defaultVisibility', true),
-      'code_challenge' => (new Varchar($this, $this->translate('Code Challenge')))->setProperty('defaultVisibility', true),
-      'code_challenge_method' => (new Varchar($this, $this->translate('Code Challenge Method')))->setProperty('defaultVisibility', true),
-      'redirect_uri' => (new Varchar($this, $this->translate('Redirect Uri')))->setProperty('defaultVisibility', true),
-      'revoked' => (new Boolean($this, $this->translate('Revoked')))->setProperty('defaultVisibility', true),
+      'code' => (new Varchar($this, $this->translate('Code')))->setDefaultVisible(),
+      'expires_at' => (new Varchar($this, $this->translate('Expires At')))->setDefaultVisible(),
+      'user_id' => (new Varchar($this, $this->translate('User Id')))->setDefaultVisible(),
+      'client_id' => (new Varchar($this, $this->translate('Client Id')))->setDefaultVisible(),
+      'scopes' => (new Varchar($this, $this->translate('Scopes')))->setDefaultVisible(),
+      'code_challenge' => (new Varchar($this, $this->translate('Code Challenge')))->setDefaultVisible(),
+      'code_challenge_method' => (new Varchar($this, $this->translate('Code Challenge Method')))->setDefaultVisible(),
+      'redirect_uri' => (new Varchar($this, $this->translate('Redirect Uri')))->setDefaultVisible(),
+      'revoked' => (new Boolean($this, $this->translate('Revoked')))->setDefaultVisible(),
     ]);
   }
 

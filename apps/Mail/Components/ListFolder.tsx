@@ -27,7 +27,8 @@ export default class ListFolder extends Table<ListFolderProps, ListFolderState> 
   props: ListFolderProps;
   state: ListFolderState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader::Components\\ListFolder';
+  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader';
+  translationContextInner: string = 'Components\\ListFolder';
 
   constructor(props: ListFolderProps) {
     super(props);

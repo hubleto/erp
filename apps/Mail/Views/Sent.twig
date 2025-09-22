@@ -1,0 +1,10 @@
+{% set a = viewParams.account %}
+
+<h1 class="app-main-title">{{ translate('Mail') }} > Sent</h1>
+
+<app-mail-table-mails
+  int:id-account="{{ a.id }}"
+  bool:show-only-sent="true"
+  bool:readonly="true"
+  string:view="briefOverview"
+></app-mail-table-mails>

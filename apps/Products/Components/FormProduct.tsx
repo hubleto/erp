@@ -15,7 +15,8 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
   props: FormProductProps;
   state: FormProductState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader::Components\\FormProduct';
+  translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader';
+  translationContextInner: string = 'Components\\FormProduct';
 
   constructor(props: FormProductProps) {
     super(props);
@@ -24,12 +25,24 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
     };
   }
 
+  onAfterFormInitialized(): void {
+    super.onAfterFormInitialized();
+
+    if (this.state.record.id > 0) {
+      this.setState({
+        tabs: [
+          { uid: 'default', title: <b>{this.translate('Product')}</b> },
+          { uid: 'suppliers', title: this.translate('Suppliers') },
+        ]
+      })
+    }
+  }
+
   getStateFromProps(props: FormProductProps) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Product')}</b> },
-        { uid: 'suppliers', title: this.translate('Suppliers') },
         ...(this.getParentApp()?.getFormTabs() ?? [])
       ]
     };
@@ -52,29 +65,24 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
             <div className='card-body grid grid-cols-2 gap-2'>
               <div className='border-r border-gray-200'>
                 {this.inputWrapper('name', {cssClass: 'text-2xl text-primary'})}
+                {this.inputWrapper('is_on_sale')}
                 {this.inputWrapper('sales_price')}
+                {this.inputWrapper('id_product_group')}
                 {this.inputWrapper('vat')}
                 {this.inputWrapper('margin')}
                 {this.inputWrapper('unit')}
-              </div>
-              <div className=''>
-                {this.inputWrapper('image')}
                 {this.inputWrapper('description')}
-                {this.inputWrapper('id_product_group')}
-                {this.inputWrapper('type')}
-                {this.inputWrapper('invoicing_policy')}
-                {this.inputWrapper('amount_in_package')}
-                {this.inputWrapper('is_on_sale')}
-                {this.inputWrapper('sale_ended')}
-              </div>
-
-              <div className='border-r border-t border-gray-200'>
                 {this.inputWrapper('is_single_order_possible')}
                 {this.inputWrapper('show_price')}
                 {this.inputWrapper('packaging')}
                 {this.inputWrapper('needs_reordering')}
               </div>
-              <div className='border-t border-gray-200'>
+              <div className=''>
+                {this.inputWrapper('image')}
+                {this.inputWrapper('type')}
+                {this.inputWrapper('invoicing_policy')}
+                {this.inputWrapper('amount_in_package')}
+                {this.inputWrapper('sale_ended')}
                 {this.inputWrapper('price_after_reweight')}
                 {this.inputWrapper('storage_rules')}
                 {this.inputWrapper('table')}

@@ -1,0 +1,23 @@
+{
+    "manifest": {
+        "Issues": "",
+        "Issue management": "",
+        "Mail accounts": ""
+    },
+    "root": {
+        "Issues": "",
+        "Mail accounts": ""
+    },
+    "Controllers\\Issues": {
+        "Issues": ""
+    },
+    "Models\\Issue": {
+        "Title": "",
+        "Problem description": ""
+    },
+    "Models\\MailAccount": {
+        "Mail account (requires Mail app)": "",
+        "Configuration": "",
+        "Notes": ""
+    }
+}

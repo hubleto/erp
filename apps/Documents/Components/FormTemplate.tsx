@@ -13,7 +13,8 @@ export default class FormTemplate<P, S> extends HubletoForm<FormTemplateProps,Fo
   props: FormTemplateProps;
   state: FormTemplateState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader::Components\\FormTemplate';
+  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
+  translationContextInner: string = 'Components\\FormTemplate';
 
   constructor(props: FormTemplateProps) {
     super(props);

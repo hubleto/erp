@@ -12,13 +12,14 @@ export default class TableUsers extends Table<TableUsersProps, TableUsersState> 
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'Hubleto/App/Community/Settings/Models/User',
+    model: 'Hubleto/App/Community/Auth/Models/User',
   }
 
   props: TableUsersProps;
   state: TableUsersState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\TableUsers';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader';
+  translationContextInner: string = 'Components\\TableUsers';
 
   constructor(props: TableUsersProps) {
     super(props);

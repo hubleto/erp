@@ -1,0 +1,53 @@
+{
+    "manifest": {
+        "Warehouses": "Sklady",
+        "Management of individual warehouses or storage facilities.": "Správa skladov",
+        "Warehouse types": "",
+        "Warehouse locations types": "",
+        "Locations": ""
+    },
+    "root": {
+        "Warehouses": "Sklady",
+        "Locations": "Lokality"
+    },
+    "Models\\Warehouse": {
+        "Name": "",
+        "Warehouse type": "",
+        "Address": "",
+        "Address Plus code": "",
+        "Contact person": "",
+        "Contact email": "",
+        "Contact phone": "",
+        "Coordinates: longitude": "",
+        "Coordinates: latitude": "",
+        "Description": "",
+        "Capacity": "",
+        "Capacity unit": "",
+        "Current occupancy": "",
+        "Operational status": "",
+        "Photo #1": "",
+        "Photo #2": "",
+        "Photo #3": "",
+        "Manager of operation": ""
+    },
+    "Models\\WarehouseType": {
+        "Name": ""
+    },
+    "Models\\Location": {
+        "Warehouse": "",
+        "Location code": "",
+        "Location type": "",
+        "Description": "",
+        "Capacity": "",
+        "Current occupancy": "",
+        "Operational status": "",
+        "Placement": "",
+        "Photo #1": "",
+        "Photo #2": "",
+        "Photo #3": "",
+        "Manager of operation": ""
+    },
+    "Models\\LocationType": {
+        "Name": ""
+    }
+}

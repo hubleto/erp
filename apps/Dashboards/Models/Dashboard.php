@@ -2,12 +2,13 @@
 
 namespace Hubleto\App\Community\Dashboards\Models;
 
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Lookup;
-use Hubleto\App\Community\Settings\Models\User;
+
 
 class Dashboard extends \Hubleto\Erp\Model
 {
@@ -23,11 +24,11 @@ class Dashboard extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_owner' => (new Lookup($this, $this->translate("Owner"), User::class))->setReactComponent('InputUserSelect')->setRequired()->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setProperty('defaultVisibility', true),
-      'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired()->setProperty('defaultVisibility', true),
-      'color' => (new Color($this, $this->translate('Color')))->setRequired()->setProperty('defaultVisibility', true),
-      'is_default' => (new Boolean($this, $this->translate('Is default')))->setProperty('defaultVisibility', true),
+      'id_owner' => (new Lookup($this, $this->translate("Owner"), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultVisible(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible(),
+      'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired()->setDefaultVisible(),
+      'color' => (new Color($this, $this->translate('Color')))->setRequired()->setDefaultVisible(),
+      'is_default' => (new Boolean($this, $this->translate('Is default')))->setDefaultVisible(),
     ]);
   }
 
@@ -37,11 +38,8 @@ class Dashboard extends \Hubleto\Erp\Model
 
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = $this->translate('Add dashboard');
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
-
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
     return $description;
   }
 

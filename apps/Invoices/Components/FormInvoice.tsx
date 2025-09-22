@@ -22,7 +22,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   props: FormInvoiceProps;
   state: FormInvoiceState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader::Components\\FormInvoice';
+  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader';
+  translationContextInner: string = 'Components\\FormInvoice';
 
   constructor(props: FormInvoiceProps) {
     super(props);
@@ -63,25 +64,14 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   }
 
   getRecordFormUrl(): string {
-    return 'invoices/' + this.state.record.id;
+    return 'invoices/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTopMenu(): JSX.Element {
-    const R = this.state.record;
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <WorkflowSelector
-          idWorkflow={R.id_workflow}
-          idWorkflowStep={R.id_workflow_step}
-          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
-            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
-          }}
-          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
-            this.updateRecord({id_workflow_step: idWorkflowStep});
-          }}
-        ></WorkflowSelector>
-      </>}
+      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>}
+      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
     </>
   }
 

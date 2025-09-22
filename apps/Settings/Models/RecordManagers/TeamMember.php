@@ -2,8 +2,9 @@
 
 namespace Hubleto\App\Community\Settings\Models\RecordManagers;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TeamMember extends \Hubleto\Erp\RecordManager
 {
@@ -18,17 +19,17 @@ class TeamMember extends \Hubleto\Erp\RecordManager
   /** @return BelongsTo<User, covariant User> */
   public function MEMBER(): BelongsTo
   {
-    return $this->belongsTo(User::class, 'id_member', 'id');
+    return $this->belongsTo(\Hubleto\Framework\Models\RecordManagers\User::class, 'id_member', 'id');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->isUrlParam("idTeam")) {
-      $query = $query->where($this->table . '.id_team', $main->router()->urlParamAsInteger("idTeam"));
+    if ($hubleto->router()->isUrlParam("idTeam")) {
+      $query = $query->where($this->table . '.id_team', $hubleto->router()->urlParamAsInteger("idTeam"));
     }
 
     return $query;

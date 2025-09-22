@@ -2,8 +2,9 @@
 
 namespace Hubleto\App\Community\Settings\Models\RecordManagers;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Hubleto\App\Community\Auth\Models\RecordManagers\UserRole;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RolePermission extends \Hubleto\Erp\RecordManager
@@ -26,10 +27,10 @@ class RolePermission extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->isUrlParam("idRole")) {
-      $query = $query->where($this->table . '.id_role', $main->router()->urlParamAsInteger("idRole"));
+    if ($hubleto->router()->isUrlParam("idRole")) {
+      $query = $query->where($this->table . '.id_role', $hubleto->router()->urlParamAsInteger("idRole"));
     }
 
     return $query;

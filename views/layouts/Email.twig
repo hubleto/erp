@@ -61,7 +61,8 @@
 
       <!-- Body -->
       <div class="email-body">
-        <img src="https://hubleto.com/assets/images/logo-hubleto-text-horizontal.png" style="max-height: 50px;"></img>
+        <img src="https://hubleto.com/assets/images/logo-hubleto-text-horizontal.png" style="max-height: 50px;"></img><br/>
+        <a href="{{ env.projectUrl }}">{{ env.projectUrl }}</a>
 
         <p>
           {{ body|raw }}

@@ -18,7 +18,8 @@ export default class TableDealProducts extends HubletoTable<TableDealProductsPro
   props: TableDealProductsProps;
   state: TableDealProductsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader::Components\\TableDealProducts';
+  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader';
+  translationContextInner: string = 'Components\\TableDealProducts';
 
   constructor(props: TableDealProductsProps) {
     super(props);

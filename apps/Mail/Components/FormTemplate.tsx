@@ -13,7 +13,8 @@ export default class FormTemplate<P, S> extends HubletoForm<FormTemplateProps,Fo
   props: FormTemplateProps;
   state: FormTemplateState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader::Components\\FormTemplate';
+  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader';
+  translationContextInner: string = 'Components\\FormTemplate';
 
   constructor(props: FormTemplateProps) {
     super(props);
@@ -27,7 +28,7 @@ export default class FormTemplate<P, S> extends HubletoForm<FormTemplateProps,Fo
   }
 
   getRecordFormUrl(): string {
-    return 'mail/templates/' + this.state.record.id;
+    return 'mail/templates/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): null|JSX.Element {

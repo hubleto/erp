@@ -11,8 +11,7 @@ class Loader extends \Hubleto\Framework\App
   public function __construct()
   {
     parent::__construct();
-    // $this->reportManager = DependencyInjection::create($main, ReportManager::class);
-    $this->reportManager = DependencyInjection::create(ReportManager::class);
+    $this->reportManager = $this->getService(ReportManager::class);
   }
 
   /**

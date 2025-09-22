@@ -2,9 +2,11 @@
 
 namespace Hubleto\App\Community\Settings\Models;
 
+
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\App\Community\Auth\Models\User;
 
 class TeamMember extends \Hubleto\Erp\Model
 {
@@ -25,10 +27,8 @@ class TeamMember extends \Hubleto\Erp\Model
 
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = 'Add member to team';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = false;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     unset($description->columns['id_team']);
 

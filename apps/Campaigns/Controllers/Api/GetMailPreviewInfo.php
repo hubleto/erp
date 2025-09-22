@@ -3,40 +3,35 @@
 namespace Hubleto\App\Community\Campaigns\Controllers\Api;
 
 use Hubleto\App\Community\Contacts\Models\Contact;
-use Hubleto\App\Community\Campaigns\Models\CampaignContact;
+use Hubleto\App\Community\Campaigns\Models\Recipient;
 use Hubleto\App\Community\Campaigns\Lib;
 
 class GetMailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
   {
-    $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
-    $idContact = $this->router()->urlParamAsInteger('idContact');
+    $idRecipient = $this->router()->urlParamAsInteger('idRecipient');
 
-    $mContact = $this->getService(Contact::class);
-    $mCampaignContact = $this->getService(CampaignContact::class);
+    $mRecipient = $this->getModel(Recipient::class);
 
     $bodyHtml = '';
 
-    $campaignContact = $mCampaignContact->record
-      ->where('id_campaign', $idCampaign)
-      ->where('id_contact', $idContact)
+    $recipient = $mRecipient->record
+      ->where('id', $idRecipient)
       ->with('CAMPAIGN.MAIL_TEMPLATE')
       ->with('CONTACT.VALUES')
       ->with('MAIL')
       ->first();
 
-    if ($campaignContact) {
+    if ($recipient) {
       $bodyHtml = Lib::getMailPreview(
-        $campaignContact->CAMPAIGN->toArray(),
-        $campaignContact->CONTACT->toArray(),
+        $recipient->CAMPAIGN->toArray(),
+        $recipient->toArray(),
       );
     }
 
     return [
       'bodyHtml' => $bodyHtml,
-      'CONTACT' => $campaignContact?->CONTACT ? $campaignContact?->CONTACT->toArray() : null,
-      'MAIL' => $campaignContact?->MAIL ? $campaignContact?->MAIL->toArray() : null,
     ];
   }
 }

@@ -14,7 +14,8 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
   props: FormTransactionProps;
   state: FormTransactionState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Inventory::Components\\FormTransaction';
+  translationContext: string = 'Hubleto\\App\\Community\\Inventory\\Loader';
+  translationContextInner: string = 'Components\\FormTransaction';
 
   constructor(props: FormTransactionProps) {
     super(props);

@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Warehouses\Models;
 
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -10,6 +10,7 @@ use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Json;
 use Hubleto\Framework\Db\Column\Image;
 use Hubleto\Framework\Db\Column\Text;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Location extends \Hubleto\Erp\Model
 {
@@ -36,12 +37,12 @@ class Location extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_warehouse' => (new Lookup($this, $this->translate('Warehouse'), Warehouse::class)),
-      'code' => (new Varchar($this, $this->translate('Location code')))->setExamples(['Aisle 1', 'Rack B', 'Shelf 2.3', 'Bin A1'])->setProperty('defaultVisibility', true),
-      'id_type' => (new Lookup($this, $this->translate('Location type'), LocationType::class))->setProperty('defaultVisibility', true),
+      'code' => (new Varchar($this, $this->translate('Location code')))->setExamples(['Aisle 1', 'Rack B', 'Shelf 2.3', 'Bin A1'])->setDefaultVisible(),
+      'id_type' => (new Lookup($this, $this->translate('Location type'), LocationType::class))->setDefaultVisible(),
       'description' => (new Text($this, $this->translate('Description'))),
-      'capacity' => (new Decimal($this, $this->translate('Capacity')))->setProperty('defaultVisibility', true),
-      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy')))->setProperty('defaultVisibility', true),
-      'operational_status' => (new Integer($this, $this->translate('Operational status')))->setProperty('defaultVisibility', true)
+      'capacity' => (new Decimal($this, $this->translate('Capacity')))->setDefaultVisible(),
+      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy')))->setDefaultVisible(),
+      'operational_status' => (new Integer($this, $this->translate('Operational status')))->setDefaultVisible()
         ->setEnumValues(self::OPERATIONAL_STATUSES)
         ->setDefaultValue(self::OPERATIONAL_STATUS_ACTIVE)
         ->setEnumCssClasses([

@@ -2,8 +2,9 @@
 
 namespace Hubleto\App\Community\Discussions\Models\RecordManagers;
 
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Member extends \Hubleto\Erp\RecordManager
 {
@@ -23,14 +24,14 @@ class Member extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->urlParamAsInteger("idDiscussion") > 0) {
-      $query = $query->where($this->table . '.id_discussion', $main->router()->urlParamAsInteger("idDiscussion"));
+    if ($hubleto->router()->urlParamAsInteger("idDiscussion") > 0) {
+      $query = $query->where($this->table . '.id_discussion', $hubleto->router()->urlParamAsInteger("idDiscussion"));
     }
 
     // Uncomment and modify these lines if you want to apply default filters to your model.
-    // $filters = $main->router()->urlParamAsArray("filters");
+    // $filters = $hubleto->router()->urlParamAsArray("filters");
     // if (isset($filters["fArchive"]) && $filters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
     // else $query = $query->where("customers.is_active", true);
 

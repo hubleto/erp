@@ -1,0 +1,59 @@
+{
+    "manifest": {
+        "Campaigns": "Kampane",
+        "Management of marketing campaigns": "Správa marketingových kampaní"
+    },
+    "Models\\Campaign": {
+        "Name": "Meno",
+        "UTM source": "UTM source",
+        "UTM campaign": "UTM campaign",
+        "UTM term": "UTM term",
+        "UTM content": "UTM content",
+        "Target audience": "Cieľová skupina",
+        "Goal": "Cieľ",
+        "Notes": "Poznámky",
+        "Mail body (HTML)": "Emailová správa (HTML)",
+        "Color": "Farba",
+        "Mail template": "Šablóna emailovej správy",
+        "Manager": "Manažér",
+        "Created": "Vytvorená",
+        "UID": "",
+        "Mail account to send email from": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Approved": "",
+        "Closed": "",
+        "Add Campaign": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
+    },
+    "Models\\Recipient": {
+        "Campaign": "",
+        "Contact": "",
+        "Email": "",
+        "First name": "",
+        "Last name": "",
+        "Salutation": "",
+        "Reference to mail sent": ""
+    },
+    "Models\\CampaignTask": {
+        "Campaign": "",
+        "Task": ""
+    },
+    "Controllers\\Campaigns": {
+        "Campaigns": ""
+    },
+    "Components\\FormCampaign": {
+        "Campaign": "",
+        "Add recipients from contacts": "",
+        "Tasks": "",
+        "Launch": ""
+    },
+    "Models\\Click": {
+        "Campaign": "",
+        "Recipient": "",
+        "Url": "",
+        "Clicked": ""
+    }
+}

@@ -18,7 +18,8 @@ export default class TableProductSuppliers extends Table<TableProductSuppliersPr
   props: TableProductSuppliersProps;
   state: TableProductSuppliersState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader::Components\\TableProductSuppliers';
+  translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader';
+  translationContextInner: string = 'Components\\TableProductSuppliers';
 
   constructor(props: TableProductSuppliersProps) {
     super(props);

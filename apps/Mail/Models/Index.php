@@ -3,7 +3,8 @@
 namespace Hubleto\App\Community\Mail\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
+
 
 class Index extends \Hubleto\Erp\Model
 {

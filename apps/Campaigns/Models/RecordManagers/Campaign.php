@@ -2,14 +2,15 @@
 
 namespace Hubleto\App\Community\Campaigns\Models\RecordManagers;
 
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+
+use Hubleto\App\Community\Mail\Models\RecordManagers\Account;
+use Hubleto\App\Community\Mail\Models\RecordManagers\Template;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
-use Hubleto\App\Community\Mail\Models\RecordManagers\Template;
-use Hubleto\App\Community\Mail\Models\RecordManagers\Account;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 class Campaign extends \Hubleto\Erp\RecordManager
 {
@@ -46,9 +47,9 @@ class Campaign extends \Hubleto\Erp\RecordManager
   }
 
   /** @return HasMany<DealTask, covariant Deal> */
-  public function CONTACTS(): HasMany
+  public function RECIPIENTS(): HasMany
   {
-    return $this->hasMany(CampaignContact::class, 'id_campaign', 'id');
+    return $this->hasMany(Recipient::class, 'id_campaign', 'id');
   }
 
   /** @return HasMany<DealTask, covariant Deal> */
@@ -61,9 +62,9 @@ class Campaign extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $filters = $main->router()->urlParamAsArray("filters");
+    $filters = $hubleto->router()->urlParamAsArray("filters");
 
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,

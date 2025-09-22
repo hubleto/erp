@@ -10,12 +10,12 @@ class KeyManager
 
   public static function getKeyFileName(): string
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
-    $cryptoApp = $main->appManager()->getApp(\Hubleto\App\Community\Crypto\Loader::class);
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $cryptoApp = $hubleto->appManager()->getApp(\Hubleto\App\Community\Crypto\Loader::class);
     $fileName = $cryptoApp->configAsString('keyFileName');
 
     if (empty($fileName)) {
-      $fileName = $main->env()->secureFolder . '/hubleto-key-' . rand(1000, 9999) . rand(1000, 9999);
+      $fileName = $hubleto->env()->secureFolder . '/hubleto-key-' . rand(1000, 9999) . rand(1000, 9999);
       $cryptoApp->saveConfig('keyFileName', $fileName);
     }
 

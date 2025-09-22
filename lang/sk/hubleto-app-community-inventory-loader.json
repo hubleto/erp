@@ -1,0 +1,41 @@
+{
+    "manifest": {
+        "Inventory": "Inventár",
+        "This is a crucial table that links products to their specific locations and quantities.": "",
+        "Management of inventory items in warehouses.": "",
+        "Warehouses": "",
+        "Transactions": ""
+    },
+    "root": {
+        "Warehouses": "Sklady",
+        "Transactions": "Pohyby"
+    },
+    "Models\\Inventory": {
+        "Product": "",
+        "Location in warehouse": "",
+        "Status": "",
+        "Quantity": "",
+        "Batch number": "",
+        "Serial number": "",
+        "Expiration": "",
+        "Received": "",
+        "Last moved": ""
+    },
+    "Models\\Status": {
+        "Name": ""
+    },
+    "Models\\Transaction": {
+        "Transaction UID": "",
+        "Type": "",
+        "Date and time of transaction": "",
+        "Product": "",
+        "Quantity": "",
+        "Source location": "",
+        "Destination location": "",
+        "Who performed the trancation": "",
+        "Reference document #1": "",
+        "Reference document #2": "",
+        "Reference document #3": "",
+        "Notes": ""
+    }
+}

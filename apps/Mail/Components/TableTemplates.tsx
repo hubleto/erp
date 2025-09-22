@@ -27,7 +27,8 @@ export default class TableTemplates extends Table<TableTemplatesProps, TableTemp
   props: TableTemplatesProps;
   state: TableTemplatesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader::Components\\TableTemplates';
+  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader';
+  translationContextInner: string = 'Components\\TableTemplates';
 
   constructor(props: TableTemplatesProps) {
     super(props);

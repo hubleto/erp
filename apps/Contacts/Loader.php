@@ -16,13 +16,14 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
+      '/^contacts\/api\/get-customer-contacts\/?$/' => Controllers\Api\GetCustomerContacts::class,
+      '/^contacts\/api\/check-primary-contact\/?$/' => Controllers\Api\CheckPrimaryContact::class,
+
       '/^contacts\/?$/' => Controllers\Contacts::class,
       '/^contacts\/add\/?$/' => ['controller' => Controllers\Contacts::class, 'vars' => ['recordId' => -1]],
       '/^contacts(\/(?<recordId>\d+))?\/?$/' => Controllers\Contacts::class,
       '/^contacts\/add?\/?$/' => ['controller' => Controllers\Contacts::class, 'vars' => [ 'recordId' => -1 ]],
-      '/^contacts\/get-customer-contacts\/?$/' => Controllers\Api\GetCustomerContacts::class,
-      '/^contacts\/check-primary-contact\/?$/' => Controllers\Api\CheckPrimaryContact::class,
-      '/^settings\/contact-tags\/?$/' => Controllers\Tags::class,
+      '/^contacts\/tags\/?$/' => Controllers\Tags::class,
       '/^contacts\/categories\/?$/' => Controllers\Categories::class,
       '/^contacts\/import\/?$/' => Controllers\Import::class,
     ]);
@@ -33,7 +34,7 @@ class Loader extends \Hubleto\Framework\App
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Contact Tags'),
       'icon' => 'fas fa-tags',
-      'url' => 'settings/contact-tags',
+      'url' => 'contacts/tags',
     ]);
 
   }

@@ -35,15 +35,15 @@ class Contact extends \Hubleto\Erp\Model
     return array_merge([
       'salutation' => (new Varchar($this, $this->translate('Salutation'))),
       'title_before' => (new Varchar($this, $this->translate('Title before'))),
-      'first_name' => (new Varchar($this, $this->translate('First name')))->setProperty('defaultVisibility', true),
+      'first_name' => (new Varchar($this, $this->translate('First name')))->setDefaultVisible(),
       'middle_name' => (new Varchar($this, $this->translate('Middle name'))),
-      'last_name' => (new Varchar($this, $this->translate('Last name')))->setProperty('defaultVisibility', true),
+      'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),
       'title_after' => (new Varchar($this, $this->translate('Title after'))),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setProperty('defaultVisibility', true),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible(),
       'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0),
-      'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
+      'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
-      'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1)->setProperty('defaultVisibility', true),
+      'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1)->setDefaultVisible(),
     ], parent::describeColumns());
   }
 
@@ -52,10 +52,8 @@ class Contact extends \Hubleto\Erp\Model
     $description = parent::describeTable();
     $description->ui['title'] = ''; // $this->translate('Contacts');
     $description->ui['addButtonText'] = $this->translate('Add contact');
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     $description->columns['virt_email'] = ["title" => $this->translate("Emails")];
     $description->columns['virt_number'] = ["title" => $this->translate("Phone Numbers")];
@@ -65,11 +63,11 @@ class Contact extends \Hubleto\Erp\Model
     unset($description->columns['is_primary']);
 
 
-    if ($this->router()->urlParamAsInteger('idCustomer') > 0) {
-      $description->columns = [];
-      $description->inputs = [];
-      $description->ui = [];
-    }
+    // if ($this->router()->urlParamAsInteger('idCustomer') > 0) {
+    //   $description->columns = [];
+    //   $description->inputs = [];
+    //   $description->ui = [];
+    // }
 
     return $description;
   }

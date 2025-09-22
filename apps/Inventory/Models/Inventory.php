@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Inventory\Models;
 
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\App\Community\Warehouses\Models\Location;
 use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -21,16 +21,15 @@ class Inventory extends \Hubleto\Erp\Model
     'PRODUCT' => [ self::HAS_ONE, Product::class, 'id_product', 'id' ],
     'STATUS' => [ self::HAS_ONE, Status::class, 'id_status', 'id' ],
     'LOCATION' => [ self::HAS_ONE, Location::class, 'id_location', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_location' => (new Lookup($this, $this->translate('Location in warehouse'), Location::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_status' => (new Lookup($this, $this->translate('Status'), Status::class))->setProperty('defaultVisibility', true),
-      'quantity' => (new Decimal($this, $this->translate('Quantity')))->setProperty('defaultVisibility', true),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible()->setRequired(),
+      'id_location' => (new Lookup($this, $this->translate('Location in warehouse'), Location::class))->setDefaultVisible()->setRequired(),
+      'id_status' => (new Lookup($this, $this->translate('Status'), Status::class))->setDefaultVisible(),
+      'quantity' => (new Decimal($this, $this->translate('Quantity')))->setDefaultVisible(),
       'batch_number' => (new Varchar($this, $this->translate('Batch number'))),
       'serial_number' => (new Varchar($this, $this->translate('Serial number'))),
       'datetime_expiration' => (new DateTime($this, $this->translate('Expiration'))),

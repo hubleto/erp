@@ -2,10 +2,12 @@
 
 namespace Hubleto\Erp;
 
+use Hubleto\Framework\Router;
+
 /**
  * Core implementation of model.
  */
-class Model extends \Hubleto\Framework\Models\Model
+class Model extends \Hubleto\Framework\Model
 {
 
   //////////////////////////////////////////////////////////////////

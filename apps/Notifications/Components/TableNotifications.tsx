@@ -24,7 +24,8 @@ export default class TableNotifications extends Table<TableNotificationsProps, T
   props: TableNotificationsProps;
   state: TableNotificationsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Notifications\\Loader::Components\\TableNotifications';
+  translationContext: string = 'Hubleto\\App\\Community\\Notifications\\Loader';
+  translationContextInner: string = 'Components\\TableNotifications';
 
   constructor(props: TableNotificationsProps) {
     super(props);

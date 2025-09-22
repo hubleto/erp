@@ -22,12 +22,18 @@ class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
       ];
     }
 
-    $mLead = $this->getService(Lead::class);
-    $mDealLead = $this->getService(DealLead::class);
+    /** @var Lead */
+    $mLead = $this->getModel(Lead::class);
 
-    $mDeal = $this->getService(Deal::class);
+    /** @var DealLead */
+    $mDealLead = $this->getModel(DealLead::class);
 
-    $mWorkflow = $this->getService(Workflow::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
+
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+
     list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('deals');
 
     try {

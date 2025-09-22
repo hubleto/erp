@@ -2,6 +2,10 @@
 
 namespace Hubleto\Erp;
 
+
+use Hubleto\App\Community\Auth\AuthProvider;
+use Hubleto\App\Community\Auth\Controllers\SignIn;
+use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\DependencyInjection;
 
 class Loader extends \Hubleto\Framework\Loader
@@ -18,17 +22,19 @@ class Loader extends \Hubleto\Framework\Loader
     parent::__construct($config);
 
     DependencyInjection::setServiceProviders([
-      \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,
-      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
       \Hubleto\Framework\Renderer::class => Renderer::class,
       \Hubleto\Framework\Env::class => Env::class,
 
-      \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
       \Hubleto\Framework\Controllers\NotFound::class => Controllers\NotFound::class,
       \Hubleto\Framework\Controllers\Desktop::class => \Hubleto\App\Community\Desktop\Controllers\Desktop::class,
+    ]);
 
-      \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Settings\Models\User::class,
-      
+    // Todo: this should be part of the app itself
+    DependencyInjection::setServiceProviders([
+      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
+      \Hubleto\Framework\Controllers\SignIn::class => SignIn::class,
+      \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Auth\Models\User::class,
+      \Hubleto\Framework\Models\Token::class => \Hubleto\App\Community\Auth\Models\Token::class,
     ]);
 
     // run hook
@@ -44,9 +50,41 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function init(): void
   {
+    date_default_timezone_set($this->locale()->getTimezone());
+
     try {
       parent::init();
 
+      // set user language
+      $setLanguage = $this->router()->urlParamAsString('set-language');
+      $authProvider = $this->authProvider();
+
+      if (
+        !empty($setLanguage)
+        && !empty(\Hubleto\App\Community\Auth\Models\User::ENUM_LANGUAGES[$setLanguage])
+      ) {
+        $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
+        $mUser->record
+          ->where('id', $authProvider->getUserId())
+          ->update(['language' => $setLanguage])
+        ;
+        $authProvider->setUserLanguage($setLanguage);
+
+        if ($authProvider->isUserInSession()) {
+          $authProvider->updateUserInSession($authProvider->user);
+        }
+
+        $date = date("D, d M Y H:i:s", strtotime('+1 year')) . 'GMT';
+        header("Set-Cookie: language={$setLanguage}; EXPIRES{$date};");
+        setcookie('incorrectLogin', '1');
+        $this->router()->redirectTo('');
+      }
+
+      if (strlen($authProvider->getUserLanguage()) !== 2) {
+        $authProvider->setUserLanguage('en');
+      }
+
+      // add core routes
       $this->router()->get([
         '/^api\/get-apps-info\/?$/' => Api\GetAppsInfo::class,
         '/^api\/get-users\/?$/' => Api\GetUsers::class,
@@ -58,8 +96,6 @@ class Loader extends \Hubleto\Framework\Loader
         '/^api\/table-export-csv\/?$/' => Api\TableExportCsv::class,
         '/^api\/table-import-csv\/?$/' => Api\TableImportCsv::class,
         '/^api\/search\/?$/' => Api\Search::class,
-        '/^reset-password$/' => Controllers\ResetPassword::class,
-        '/^forgot-password$/' => Controllers\ForgotPassword::class,
       ]);
 
       // run hook

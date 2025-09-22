@@ -20,7 +20,8 @@ export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ mod
   props: Table{{ modelPluralForm }}Props;
   state: Table{{ modelPluralForm }}State;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Table{{ modelPluralForm }}';
+  translationContext: string = '{{ appNamespaceDoubleBackslash }}';
+  translationContextInner: string = 'Components\\Table{{ modelPluralForm }}';
 
   constructor(props: Table{{ modelPluralForm }}Props) {
     super(props);

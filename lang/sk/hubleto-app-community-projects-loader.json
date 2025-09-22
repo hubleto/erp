@@ -1,0 +1,58 @@
+{
+    "manifest": {
+        "Projects": "Projekty",
+        "Project management": "Projektový manažment",
+        "Phases": "Fázy"
+    },
+    "root": {
+        "Projects": "Projekty",
+        "Phases": "Fázy"
+    },
+    "Models\\Project": {
+        "Deal": "Deal",
+        "Customer": "Zákazník",
+        "Contact": "Kontakt",
+        "Identifier": "Identifikátor",
+        "Title": "Názov",
+        "Description": "Popis",
+        "Main developer": "Hlavný developer",
+        "Account manager": "Account manažér",
+        "Priority": "Priorita",
+        "Start": "Štart",
+        "Deadline": "Deadline",
+        "Budget": "Rozpočet",
+        "Workflow": "Workflow",
+        "Workflow step": "Workflow stav",
+        "Closed": "Uzavretý",
+        "Color": "Farba",
+        "Notes": "Poznámky",
+        "Created": "Vytvorený",
+        "Open \/ Closed": "Otvorené \/ Zatvorené",
+        "Open": "Otvorené",
+        "All": "Všetky"
+    },
+    "Models\\Phase": {
+        "Name": "Názov",
+        "Order": "Poradie",
+        "Color": "Farba"
+    },
+    "Components\\FormProject": {
+        "Projects": "Projekty",
+        "Worksheet": "Výkaz práce",
+        "Project": "Projekt",
+        "Tasks": "Úloha",
+        "Statistics": "Štatistiky"
+    },
+    "Models\\ProjectOrder": {
+        "Project": "Projekt",
+        "Order": "Objednávka"
+    },
+    "Models\\ProjectTask": {
+        "Project": "Projekt",
+        "Task": "Úloha"
+    },
+    "Models\\ProjectDeal": {
+        "Project": "Projekt",
+        "Deal": "Deal"
+    }
+}

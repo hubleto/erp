@@ -15,7 +15,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+
 
 class Permission extends \Hubleto\Erp\Model
 {
@@ -31,9 +31,9 @@ class Permission extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_key' => (new Lookup($this, $this->translate('Key'), Key::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'app' => (new Varchar($this, $this->translate('App')))->setProperty('defaultVisibility', true)->setRequired()->setDescription('Namespace of the app, e.g. `Hubleto\App\Community\Deals`.'),
-      'controller' => (new Varchar($this, $this->translate('Controller')))->setProperty('defaultVisibility', true)->setRequired(),
+      'id_key' => (new Lookup($this, $this->translate('Key'), Key::class))->setDefaultVisible()->setRequired(),
+      'app' => (new Varchar($this, $this->translate('App')))->setDefaultVisible()->setRequired()->setDescription('Namespace of the app, e.g. `Hubleto\App\Community\Deals`.'),
+      'controller' => (new Varchar($this, $this->translate('Controller')))->setDefaultVisible()->setRequired(),
     ]);
   }
 
@@ -41,11 +41,8 @@ class Permission extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Permission';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
-
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
     return $description;
   }
 

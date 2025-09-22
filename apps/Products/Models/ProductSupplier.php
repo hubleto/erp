@@ -17,7 +17,7 @@ class ProductSupplier extends \Hubleto\Erp\Model
 
   public string $table = 'products_suppliers';
   public string $recordManagerClass = RecordManagers\ProductSupplier::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.title';
+  public ?string $lookupSqlValue = '{%TABLE%}.supplier_product_code';
 
   public array $relations = [
     'PRODUCT' => [ self::HAS_ONE, Product::class, 'id', 'id_product'],
@@ -42,10 +42,9 @@ class ProductSupplier extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = 'Product Suppliers';
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
     $description->ui["addButtonText"] = $this->translate("Add supplier");
-    $description->ui['title'] = '';
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     return $description;
   }

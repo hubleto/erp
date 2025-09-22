@@ -14,7 +14,8 @@ export default class FormMessage<P, S> extends HubletoForm<FormMessageProps, For
   props: FormMessageProps;
   state: FormMessageState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\FormMessage';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions\\Loader';
+  translationContextInner: string = 'Components\\FormMessage';
 
   constructor(props: FormMessageProps) {
     super(props);

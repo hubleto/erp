@@ -2,8 +2,10 @@
 
 namespace Hubleto\App\Community\Notifications\Models\RecordManagers;
 
+
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Notification extends \Hubleto\Erp\RecordManager
 {
@@ -23,12 +25,12 @@ class Notification extends \Hubleto\Erp\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
     $query = parent::prepareReadQuery($query, $level);
 
-    $folder = $main->router()->urlParamAsString('folder');
-    $idUser = $main->authProvider()->getUserId();
+    $folder = $hubleto->router()->urlParamAsString('folder');
+    $idUser = $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
 
     switch ($folder) {
       case 'inbox': $query->where('id_to', $idUser);
@@ -42,10 +44,10 @@ class Notification extends \Hubleto\Erp\RecordManager
 
   public function recordCreate(array $record): array
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
     /** @var \Hubleto\App\Community\Notifications\Loader $notificationsApp */
-    $notificationsApp = $main->appManager(\Hubleto\App\Community\Notifications\Loader::class);
+    $notificationsApp = $hubleto->appManager(\Hubleto\App\Community\Notifications\Loader::class);
 
     $message = $notificationsApp->send(
       $record['id_to'] ?? '',

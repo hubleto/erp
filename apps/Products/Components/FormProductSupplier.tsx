@@ -13,7 +13,8 @@ export default class FormProductSupplier<P, S> extends HubletoForm<FormProductSu
   props: FormProductSupplierProps;
   state: FormProductSupplierState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader::Components\\FormProductSupplier';
+  translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader';
+  translationContextInner: string = 'Components\\FormProductSupplier';
 
   constructor(props: FormProductSupplierProps) {
     super(props);

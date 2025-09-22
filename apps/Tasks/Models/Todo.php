@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Tasks\Models;
 
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -16,11 +17,12 @@ use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Todo extends \Hubleto\Erp\Model
 {
@@ -42,10 +44,10 @@ class Todo extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'todo' => (new Varchar($this, $this->translate('To do')))->setProperty('defaultVisibility', true),
-      'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)
-        ->setDefaultValue($this->authProvider()->getUserId())
+      'todo' => (new Varchar($this, $this->translate('To do')))->setDefaultVisible(),
+      'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setDefaultVisible()->setRequired(),
+      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()
+        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),
@@ -62,11 +64,8 @@ class Todo extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Task';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
-
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
     return $description;
   }
 

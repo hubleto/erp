@@ -1,0 +1,48 @@
+{
+    "Components\\Form": {
+        "Add": "Pridať",
+        "Save": "Uložiť",
+        "Copy": "Kopírovať",
+        "Delete": "Zmazať",
+        "Confirm delete": "Potvrďte zmazanie",
+        "Edit": "Upraviť",
+        "Adding record": "Pridať záznam",
+        "Editing record": "Úprava záznamu",
+        "Record": "Záznam",
+        "New record": "Nový záznam"
+    },
+    "Components\\Input": {
+        "Upload file": "Nahrať súbor"
+    },
+    "Components\\Table": {
+        "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
+        "Yes, delete": "Áno, zmazať",
+        "No, do not delete": "Nie, zavrieť okno",
+        "Delete": "Zmazať",
+        "Start typing to search...": "Začnite vyhľadávať...",
+        "Search...": "Hľadať",
+        "No data.": "Žiadne údaje."
+    },
+    "Controllers\\ControllerSignIn": {
+        "Keep signed in": "Zostať prihlásený"
+    },
+    "Controllers\\SignIn": {
+        "Your email": "Email",
+        "Password": "Heslo",
+        "Keep signed in": "Zostať prihlásený",
+        "Sign in": "Prihlásiť sa",
+        "Forgot password?": "Zabudol som heslo"
+    },
+    "Components\\Inputs\\Image": {
+        "Choose image": ""
+    },
+    "Components\\Inputs\\Password": {
+        "New password": "",
+        "Confirm new password": ""
+    },
+    "Controllers\\NotFound": {
+        "Page Not Found": "",
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "",
+        "Home": ""
+    }
+}

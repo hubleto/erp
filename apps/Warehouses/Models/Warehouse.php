@@ -2,13 +2,14 @@
 
 namespace Hubleto\App\Community\Warehouses\Models;
 
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Image;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Text;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Warehouse extends \Hubleto\Erp\Model
 {
@@ -34,22 +35,22 @@ class Warehouse extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true),
-      'id_type' => (new Lookup($this, $this->translate('Warehouse type'), WarehouseType::class))->setProperty('defaultVisibility', true),
-      'address' => (new Varchar($this, $this->translate('Address')))->setProperty('defaultVisibility', true),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
+      'id_type' => (new Lookup($this, $this->translate('Warehouse type'), WarehouseType::class))->setDefaultVisible(),
+      'address' => (new Varchar($this, $this->translate('Address')))->setDefaultVisible(),
       'address_plus_code' => (new Varchar($this, $this->translate('Address Plus code'))),
       'contact_person' => (new Varchar($this, $this->translate('Contact person'))),
-      'contact_email' => (new Varchar($this, $this->translate('Contact email')))->setProperty('defaultVisibility', true),
+      'contact_email' => (new Varchar($this, $this->translate('Contact email')))->setDefaultVisible(),
       'contact_phone' => (new Varchar($this, $this->translate('Contact phone'))),
       'lng' => (new Decimal($this, $this->translate('Coordinates: longitude'))),
       'lat' => (new Decimal($this, $this->translate('Coordinates: latitude'))),
       'description' => (new Text($this, $this->translate('Description'))),
-      'capacity' => (new Decimal($this, $this->translate('Capacity')))->setReadonly()->setProperty('defaultVisibility', true)
+      'capacity' => (new Decimal($this, $this->translate('Capacity')))->setReadonly()->setDefaultVisible()
         ->setDescription('Automatically calculated as total capacity of all locations in warehouse.')
       ,
-      'capacity_unit' => (new Varchar($this, $this->translate('Capacity unit')))->setProperty('defaultVisibility', true),
-      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy')))->setProperty('defaultVisibility', true),
-      'operational_status' => (new Integer($this, $this->translate('Operational status')))->setProperty('defaultVisibility', true)
+      'capacity_unit' => (new Varchar($this, $this->translate('Capacity unit')))->setDefaultVisible(),
+      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy')))->setDefaultVisible(),
+      'operational_status' => (new Integer($this, $this->translate('Operational status')))->setDefaultVisible()
         ->setEnumValues(self::OPERATIONAL_STATUSES)
         ->setDefaultValue(self::OPERATIONAL_STATUS_ACTIVE)
         ->setEnumCssClasses([
@@ -61,7 +62,7 @@ class Warehouse extends \Hubleto\Erp\Model
       'photo_1' => (new Image($this, $this->translate('Photo #1'))),
       'photo_2' => (new Image($this, $this->translate('Photo #2'))),
       'photo_3' => (new Image($this, $this->translate('Photo #3'))),
-      'id_operation_manager' => (new Lookup($this, $this->translate('Manager of operation'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true),
+      'id_operation_manager' => (new Lookup($this, $this->translate('Manager of operation'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
     ]);
   }
 

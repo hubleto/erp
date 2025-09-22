@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Api\Models;
 
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -17,7 +18,8 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\App\Community\Projects\Models\Project;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
+
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 
@@ -37,13 +39,13 @@ class Key extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'key' => (new Varchar($this, $this->translate('Key')))->setProperty('defaultVisibility', true)->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
-      'valid_until' => (new DateTime($this, $this->translate('Valid until')))->setProperty('defaultVisibility', true)->setDefaultValue(date("Y-m-d H:i:s", strtotime("+14 days"))),
-      'is_enabled' => (new Boolean($this, $this->translate('Enabled')))->setDefaultValue(true)->setProperty('defaultVisibility', true),
+      'key' => (new Varchar($this, $this->translate('Key')))->setDefaultVisible()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
+      'valid_until' => (new DateTime($this, $this->translate('Valid until')))->setDefaultVisible()->setDefaultValue(date("Y-m-d H:i:s", strtotime("+14 days"))),
+      'is_enabled' => (new Boolean($this, $this->translate('Enabled')))->setDefaultValue(true)->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'ip_address_blacklist' => (new Varchar($this, $this->translate('IP Address blacklist'))),
       'ip_address_whitelist' => (new Varchar($this, $this->translate('IP Address whitelist'))),
-      'id_created_by' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->authProvider()->getUserId()),
+      'id_created_by' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
     ]);
   }
@@ -58,10 +60,8 @@ class Key extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Key';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     return $description;
   }

@@ -15,7 +15,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+
 
 class Venue extends \Hubleto\Erp\Model
 {
@@ -26,16 +26,16 @@ class Venue extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true),
-      'address' => (new Varchar($this, $this->translate('Address')))->setProperty('defaultVisibility', true),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
+      'address' => (new Varchar($this, $this->translate('Address')))->setDefaultVisible(),
       'address_plus_code' => (new Varchar($this, $this->translate('Address Plus code'))),
       'contact_person' => (new Varchar($this, $this->translate('Contact person'))),
-      'contact_email' => (new Varchar($this, $this->translate('Contact email')))->setProperty('defaultVisibility', true),
+      'contact_email' => (new Varchar($this, $this->translate('Contact email')))->setDefaultVisible(),
       'contact_phone' => (new Varchar($this, $this->translate('Contact phone'))),
       'lng' => (new Decimal($this, $this->translate('Coordinates: longitude'))),
       'lat' => (new Decimal($this, $this->translate('Coordinates: latitude'))),
       'description' => (new Text($this, $this->translate('Description'))),
-      'capacity' => (new Decimal($this, $this->translate('Capacity')))->setReadonly()->setProperty('defaultVisibility', true)
+      'capacity' => (new Decimal($this, $this->translate('Capacity')))->setReadonly()->setDefaultVisible()
         ->setDescription('Automatically calculated as total capacity of all locations in warehouse.')
       ,
       'photo_1' => (new Image($this, $this->translate('Photo #1'))),

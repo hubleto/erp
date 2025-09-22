@@ -14,9 +14,9 @@ class Template extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'content' => (new Text($this, $this->translate('Content'))), // ->setReactComponent('InputWysiwyg'),
-      'notes' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
+      'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
     ]);
   }
 
@@ -25,9 +25,8 @@ class Template extends \Hubleto\Erp\Model
     $description = parent::describeTable();
     $description->ui['title'] = ''; // 'Documents';
     $description->ui['addButtonText'] = $this->translate('Add template');
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     return $description;
   }

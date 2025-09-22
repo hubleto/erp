@@ -2,9 +2,10 @@
 
 namespace Hubleto\App\Community\EventFeedback\Models;
 
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Contact extends \Hubleto\Erp\Model
 {

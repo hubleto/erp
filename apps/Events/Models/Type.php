@@ -15,7 +15,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+
 
 class Type extends \Hubleto\Erp\Model
 {
@@ -26,7 +26,7 @@ class Type extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setProperty('defaultVisibility', true)->setRequired(),
+      'name' => (new Varchar($this, $this->translate('Name')))->setDefaultVisible()->setRequired(),
     ]);
   }
 

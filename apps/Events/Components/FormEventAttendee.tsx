@@ -14,7 +14,8 @@ export default class FormEventAttendee<P, S> extends HubletoForm<FormEventAttend
   props: FormEventAttendeeProps;
   state: FormEventAttendeeState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Events::Components\\FormEventAttendee';
+  translationContext: string = 'Hubleto\\App\\Community\\Events\\Loader';
+  translationContextInner: string = 'Components\\FormEventAttendee';
 
   constructor(props: FormEventAttendeeProps) {
     super(props);

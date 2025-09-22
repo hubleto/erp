@@ -8,6 +8,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
   public array $packages = [
     'core' => [
+      \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 0],
       \Hubleto\App\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997 ],
       \Hubleto\App\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997 ],
       \Hubleto\App\Community\Crypto\Loader::class => [ ],
@@ -16,8 +17,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       \Hubleto\App\Community\Mail\Loader::class => [ 'sidebarOrder' => 125 ],
       \Hubleto\App\Community\Notifications\Loader::class => [ 'sidebarOrder' => 125 ],
       \Hubleto\App\Community\Documents\Loader::class => [ 'sidebarOrder' => 120 ],
-      \Hubleto\App\Community\Customers\Loader::class => [ 'sidebarOrder' => 102 ],
-      \Hubleto\App\Community\Contacts\Loader::class => [ 'sidebarOrder' => 101 ],
+      \Hubleto\App\Community\Customers\Loader::class => [ 'sidebarOrder' => 101 ],
+      \Hubleto\App\Community\Contacts\Loader::class => [ 'sidebarOrder' => 102 ],
       \Hubleto\App\Community\Calendar\Loader::class => [ 'sidebarOrder' => 110 ],
       \Hubleto\App\Community\Dashboards\Loader::class => [ 'sidebarOrder' => 99995 ],
       \Hubleto\App\Community\Workflow\Loader::class => [ 'sidebarOrder' => 220 ],
@@ -314,7 +315,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     if (empty($packagesToInstall)) {
-      $packagesToInstall = 'sales';
+      $packagesToInstall = 'crm,marketing,sales,projects';
     }
     if (empty($adminPassword) && !isset($smtpHost)) {
       $adminPassword = \Hubleto\Framework\Helper::randomPassword();

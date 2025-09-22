@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Campaigns\Controllers\Api;
 
-use Hubleto\App\Community\Campaigns\Models\CampaignContact;
+use Hubleto\App\Community\Campaigns\Models\Recipient;
 use Hubleto\App\Community\Campaigns\Models\Campaign;
 use Hubleto\App\Community\Campaigns\Lib;
 
@@ -17,11 +17,11 @@ class GetCampaignWarnings extends \Hubleto\Erp\Controllers\ApiController
     ];
 
     /** @var Campaign */ $mCampaign = $this->getModel(Campaign::class);
-    /** @var CampaignContact */ $mCampaignContact = $this->getModel(CampaignContact::class);
+    /** @var Recipient */ $mRecipient = $this->getModel(Recipient::class);
 
-    $contactIds = $mCampaignContact->record->where('id_campaign', $idCampaign)->pluck('id_contact');
+    $contactIds = $mRecipient->record->where('id_campaign', $idCampaign)->pluck('id_contact');
 
-    $recentlyContacted = $mCampaignContact->record
+    $recentlyContacted = $mRecipient->record
       ->whereIn('id_contact', $contactIds)
       ->whereHas('MAIL', function($q) {
         return $q->where('datetime_sent', '>=', date('Y-m-d H:i:s', strtotime('-1 month')));

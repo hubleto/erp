@@ -35,7 +35,8 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
 
   refLogActivityInput: any;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader::Components\\FormOrder';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
+  translationContextInner: string = 'Components\\FormOrder';
 
   parentApp: string = 'Hubleto/App/Community/Orders';
 
@@ -55,14 +56,28 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     };
   }
 
+  onAfterFormInitialized(): void {
+    super.onAfterFormInitialized();
+
+    if (this.state.record.id > 0) {
+      this.setState({
+        tabs: [
+          { uid: 'default', title: <b>{this.translate('Order')}</b> },
+          { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
+          { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
+          // { uid: 'invoices', title: this.translate('Invoices'), showCountFor: 'INVOICES' },
+          { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
+        ]
+      })
+    }
+  }
+
   getStateFromProps(props: FormOrderProps) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
         { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
-        { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
-        // { uid: 'invoices', title: this.translate('Invoices'), showCountFor: 'INVOICES' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
         ...(this.getParentApp()?.getFormTabs() ?? [])
       ]
@@ -70,7 +85,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
   }
 
   getRecordFormUrl(): string {
-    return 'orders/' + this.state.record.id;
+    return 'orders/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   contentClassName(): string
@@ -153,19 +168,8 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     const R = this.state.record;
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <WorkflowSelector
-          idWorkflow={R.id_workflow}
-          idWorkflowStep={R.id_workflow_step}
-          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
-            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
-          }}
-          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
-            this.updateRecord({id_workflow_step: idWorkflowStep});
-          }}
-        ></WorkflowSelector>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
+      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>}
+      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
     </>
   }
 
@@ -336,11 +340,11 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
               },
               columns: {
                 short_description: { type: "text", title: "Short Description" },
-                date: { type: "datetime", title: "Date Time"},
+                date_time: { type: "datetime", title: "Date Time"},
               },
               inputs: {
                 short_description: { type: "text", title: "Short Description" },
-                date: { type: "datetime", title: "Date Time"},
+                date_time: { type: "datetime", title: "Date Time"},
               }
             }}
             isUsedAsInput={true}

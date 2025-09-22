@@ -7,7 +7,6 @@ use Hubleto\App\Community\Calendar\Models\SharedCalendar;
 
 class Loader extends \Hubleto\Framework\App
 {
-  public bool $hasCustomSettings = true;
 
   /**
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
@@ -22,7 +21,7 @@ class Loader extends \Hubleto\Framework\App
     $this->router()->get([
       '/^calendar\/?$/' => Controllers\Calendar::class,
       '/^calendar(\/(?<key>\w+))?\/ics\/?$/' => Controllers\IcsCalendar::class,
-      '/^calendar\/settings\/?$/' => Controllers\Settings::class,
+      '/^calendar\/share\/?$/' => Controllers\Share::class,
       '/^calendar\/boards\/reminders\/?$/' => Controllers\Boards\Reminders::class,
       '/^calendar\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^calendar\/api\/get-shared-calendars\/?$/' => Controllers\Api\GetSharedCalendars::class,
@@ -45,9 +44,9 @@ class Loader extends \Hubleto\Framework\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $mActivity = $this->getService(Activity::class);
+      $mActivity = $this->getModel(Activity::class);
       $mActivity->install();
-      $mSharedCalendar = $this->getService(SharedCalendar::class);
+      $mSharedCalendar = $this->getModel(SharedCalendar::class);
       $mSharedCalendar->install();
     }
   }

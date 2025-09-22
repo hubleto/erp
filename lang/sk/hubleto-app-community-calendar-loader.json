@@ -1,0 +1,50 @@
+{
+    "manifest": {
+        "Calendar": "Kalendár",
+        "Free calendar app.": "Bezplatný kalendár.",
+        "Reminders": "",
+        "Share": ""
+    },
+    "Controllers\\Calendar": {
+        "Calendar": "Kalendár"
+    },
+    "Models\\Activity": {
+        "Subject": "Predmet",
+        "Activity type": "Typ",
+        "Start date": "Začiatok",
+        "Start time": "Čas začiatku",
+        "End date": "Koniec",
+        "End time": "Čas konca",
+        "All day": "Celodenná",
+        "Completed": "Ukončená",
+        "Created by": "Vytvoril",
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
+    },
+    "Controllers\\Boards\\Reminders": {
+        "Open event details": "Zobraziť podrobnosti",
+        "All-day": "Celodenná",
+        "events for tomorrow": "Udalosti na zajtra",
+        "events later": "Udalosti neskôr",
+        "reminders later": "pripomienok neskôr",
+        "Later": "Neskôr"
+    },
+    "root": {
+        "Events for today": "Dnešné udalosti",
+        "Reminders": "Pripomienky"
+    },
+    "Components\\CalendarMain": {
+        "New activity": "",
+        "All": "",
+        "Ownership": "",
+        "My activities": ""
+    },
+    "Models\\SharedCalendar": {
+        "Created by": "",
+        "Calendar ID": "",
+        "Share key": "",
+        "Display details": "",
+        "Enabled": "",
+        "Date from": "",
+        "Date to": ""
+    }
+}

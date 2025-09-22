@@ -20,9 +20,15 @@ class CreateFromDeal extends \Hubleto\Erp\Controllers\ApiController
 
     $idDeal = $this->router()->urlParamAsInteger("idDeal");
 
-    $mDeal = $this->getService(Deal::class);
-    $mOrder = $this->getService(Order::class);
-    $mOrderDeal = $this->getService(OrderDeal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
+
+    /** @var Order */
+    $mOrder = $this->getModel(Order::class);
+
+    /** @var OrderDeal */
+    $mOrderDeal = $this->getModel(OrderDeal::class);
+
     $deal = null;
 
     try {

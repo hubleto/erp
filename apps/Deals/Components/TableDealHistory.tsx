@@ -14,7 +14,8 @@ export default class TableDealHistory extends Table<TableDealHistoryProps, Table
   props: TableDealHistoryProps;
   state: TableDealHistoryState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader::Components\\TableDealHistory';
+  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader';
+  translationContextInner: string = 'Components\\TableDealHistory';
 
   constructor(props: TableDealHistoryProps) {
     super(props);

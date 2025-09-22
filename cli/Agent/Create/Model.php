@@ -76,7 +76,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
 
     if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to re-install the app with your new model now?')) {
       $this->getService(\Hubleto\Erp\Cli\Agent\App\Install::class)
-        ->setAguments($this->arguments)
+        ->setArguments($this->arguments)
         ->run()
       ;
     }

@@ -44,7 +44,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
   refLogActivityInput: any;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader::Components\\FormLead';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
+  translationContextInner: string = 'Components\\FormLead';
 
   parentApp: string = 'Hubleto/App/Community/Leads';
 
@@ -71,12 +72,27 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({tablesKey: Math.random()} as FormLeadState)
   }
 
+  onAfterFormInitialized(): void {
+    super.onAfterFormInitialized();
+
+    if (this.state.record.id > 0) {
+      this.setState({
+        tabs: [
+          { uid: 'default', title: <b>{this.translate('Lead')}</b> },
+          { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
+          { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
+          { uid: 'calendar', icon: 'fas fa-calendar', position: 'right' },
+          { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
+        ]
+      })
+    }
+  }
+
   getStateFromProps(props: FormLeadProps) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Lead')}</b> },
-        { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'calendar', icon: 'fas fa-calendar', position: 'right' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
@@ -97,7 +113,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   }
 
   getRecordFormUrl(): string {
-    return 'leads/' + this.state.record.id;
+    return 'leads/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   onAfterLoadFormDescription(description: any) {
@@ -113,6 +129,13 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     );
 
     return description;
+  }
+
+  getEndpointParams(): object {
+    return {
+      ...super.getEndpointParams() as any,
+      saveRelations: ['TAGS'],
+    };
   }
 
   onAfterSaveRecord(saveResponse: any): void {
@@ -135,22 +158,10 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   }
 
   renderTopMenu(): JSX.Element {
-    const R = this.state.record;
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <WorkflowSelector
-          idWorkflow={R.id_workflow}
-          idWorkflowStep={R.id_workflow_step}
-          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
-            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
-          }}
-          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
-            this.updateRecord({id_workflow_step: idWorkflowStep});
-          }}
-        ></WorkflowSelector>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
+      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>}
+      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
     </>
   }
 

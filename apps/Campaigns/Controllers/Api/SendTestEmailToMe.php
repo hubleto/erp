@@ -2,8 +2,9 @@
 
 namespace Hubleto\App\Community\Campaigns\Controllers\Api;
 
+
 use Hubleto\App\Community\Campaigns\Models\Campaign;
-use Hubleto\App\Community\Campaigns\Models\CampaignContact;
+use Hubleto\App\Community\Campaigns\Models\Recipient;
 use Hubleto\App\Community\Mail\Models\Mail;
 use Hubleto\App\Community\Campaigns\Lib;
 
@@ -28,14 +29,19 @@ class SendTestEmailToMe extends \Hubleto\Erp\Controllers\ApiController
         ->first()
       ;
 
-      $bodyHtml = Lib::getMailPreview($campaign->toArray(), []);
+      $user = $this->authProvider()->getUser();
+
+      $bodyHtml = Lib::getMailPreview($campaign->toArray(), [
+        'first_name' => $user['first_name'],
+        'last_name' => $user['last_name'],
+      ]);
 
       $mMail->createAndSend([
-        'subject' => $campaign->name,
+        'subject' => $campaign->MAIL_TEMPLATE->subject,
         'body_html' => $bodyHtml,
         'id_account' => $campaign->id_mail_account,
         'from' => $campaign->MAIL_ACCOUNT->sender_email ?? '',
-        'to' => $this->authProvider()->getUserEmail(),
+        'to' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserEmail(),
         'datetime_created' => date('Y-m-d H:i:s'),
       ]);
 

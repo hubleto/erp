@@ -17,7 +17,7 @@ class User extends \Hubleto\Framework\Core implements UserRepositoryInterface
     ClientEntityInterface $clientEntity
   ): ?UserEntityInterface {
 
-    $mUser = $this->getService(\Hubleto\App\Community\Settings\User::class);
+    $mUser = $this->getService(\Hubleto\App\Community\Auth\Models\User::class);
 
     $users = $mUser->record
       ->whereRaw("UPPER(email) LIKE ?", [ strtoupper(str_replace("'", "", $value)) ])

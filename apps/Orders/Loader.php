@@ -18,14 +18,17 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^orders\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
-      '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,
-      '/^orders\/?$/' => Controllers\Orders::class,
-      '/^orders\/(?<recordId>\d+)\/?$/' => Controllers\Orders::class,
       '/^orders\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
       '/^orders\/api\/generate-invoice\/?$/' => Controllers\Api\GenerateInvoice::class,
-      '/^settings\/order-states\/?$/' => Controllers\States::class,
+      '/^orders\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
+      '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,
+
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
+
+      '/^orders\/?$/' => Controllers\Orders::class,
+      '/^orders\/(?<recordId>\d+)\/?$/' => Controllers\Orders::class,
+
+      '/^orders\/states\/?$/' => Controllers\States::class,
     ]);
 
     $this->addSearchSwitch('o', 'orders');
@@ -38,7 +41,7 @@ class Loader extends \Hubleto\Framework\App
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Order states'),
       'icon' => 'fas fa-file-lines',
-      'url' => 'settings/order-states',
+      'url' => 'orders/states',
     ]);
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */

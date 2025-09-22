@@ -11,7 +11,9 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
 
     $mProject = $this->getModel(Models\Project::class);
     $items = $mProject->record->prepareReadQuery()
-      ->with('TASKS.TASK')
+      ->with('TASKS.TASK', function($q) {
+        $q->where('tasks.is_closed', false);
+      })
       ->where($mProject->table . ".id_workflow", $idWorkflow)
       ->where($mProject->table . ".is_closed", false)
     ;

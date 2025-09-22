@@ -9,16 +9,36 @@ class Command extends \Hubleto\Framework\Core
 
   public array $arguments = [];
 
+  /**
+   * [Description for run]
+   *
+   * @return void
+   * 
+   */
   public function run(): void
   {
     // to be implemented in sub-classes
   }
 
+  /**
+   * [Description for getArguments]
+   *
+   * @return array
+   * 
+   */
   public function getArguments(): array
   {
     return $this->arguments;
   }
 
+  /**
+   * [Description for setArguments]
+   *
+   * @param array $arguments
+   * 
+   * @return Command
+   * 
+   */
   public function setArguments(array $arguments): Command
   {
     $this->arguments = $arguments;

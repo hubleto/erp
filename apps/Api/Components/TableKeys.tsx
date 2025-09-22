@@ -19,7 +19,8 @@ export default class TableKeys extends HubletoTable<TableKeysProps, TableKeysSta
   props: TableKeysProps;
   state: TableKeysState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Api::Components\\TableKeys';
+  translationContext: string = 'Hubleto\\App\\Community\\Api\\Loader';
+  translationContextInner: string = 'Components\\TableKeys';
 
   constructor(props: TableKeysProps) {
     super(props);

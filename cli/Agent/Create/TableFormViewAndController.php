@@ -130,7 +130,7 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
 
     if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to re-install the app?')) {
       $this->getService(\Hubleto\Erp\Cli\Agent\App\Install::class)
-        ->setAguments($this->arguments)
+        ->setArguments($this->arguments)
         ->run()
       ;
     }

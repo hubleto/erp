@@ -18,10 +18,10 @@ class Product extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareLookupQuery($search);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
-    if ($main->router()->urlParamAsBool("getServices") == true) {
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    if ($hubleto->router()->urlParamAsBool("getServices") == true) {
       $query->where("type", \Hubleto\App\Community\Products\Models\Product::TYPE_SERVICE);
-    } elseif ($main->router()->urlParamAsBool("getProducts") == true) {
+    } elseif ($hubleto->router()->urlParamAsBool("getProducts") == true) {
       $query->where("type", \Hubleto\App\Community\Products\Models\Product::TYPE_CONSUMABLE);
     }
     return $query;

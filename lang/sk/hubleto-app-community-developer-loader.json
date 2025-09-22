@@ -1,0 +1,21 @@
+{
+    "manifest": {
+        "Developer": "Vývojár",
+        "Developer tools to automate your Hubleto development": "Nástroja pre vývojárov",
+        "Developer tools": ""
+    },
+    "root": {
+        "Developer tools": "Nástroje pre vývojárov"
+    },
+    "Controllers\\Dashboard": {
+        "Developer": "",
+        "DB Updates": "",
+        "Form designer": ""
+    },
+    "Controllers\\DbUpdates": {
+        "Developer": "",
+        "DB Updater": "",
+        "Database updater": "",
+        "No necessary database updates found.": ""
+    }
+}

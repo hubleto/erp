@@ -12,15 +12,15 @@ final class GenerateDocumentTest extends TestCase
 
   public function testCreateTemplate(): void
   {
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $mTemplate = $main->getService(Template::class);
+    $mTemplate = $hubleto->getService(Template::class);
     $template = $mTemplate->record->recordCreate([
       'name' => 'Test template',
       'content' => '<p>This is a test template. Current time is: {{ time }}</p>',
     ]);
 
-    $generator = $main->getService(Generator::class);
+    $generator = $hubleto->getService(Generator::class);
     $generator->generatePdfFromTemplate(
       $template['id'],
       'test-create-template.pdf',

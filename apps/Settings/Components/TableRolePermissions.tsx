@@ -17,7 +17,8 @@ export default class TableRolePermissions extends Table<TableRolePermissionsProp
   props: TableRolePermissionsProps;
   state: TableRolePermissionsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\TableRolePermissions';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader';
+  translationContextInner: string = 'Components\\TableRolePermissions';
 
   constructor(props: TableRolePermissionsProps) {
     super(props);

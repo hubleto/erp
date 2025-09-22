@@ -19,7 +19,8 @@ export default class TableBillingAccountServices extends Table<TableBillingAccou
   props: TableBillingAccountServicesProps;
   state: TableBillingAccountServicesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Billing\\Loader::Components\\TableBillingAccountServices';
+  translationContext: string = 'Hubleto\\App\\Community\\Billing\\Loader';
+  translationContextInner: string = 'Components\\TableBillingAccountServices';
 
   constructor(props: TableBillingAccountServicesProps) {
     super(props);

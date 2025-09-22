@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Deals\Reports;
 
+
 use Hubleto\App\Community\Deals\Models\Deal;
 
 class MonthlyRevenue extends \Hubleto\Erp\Report
@@ -14,7 +15,9 @@ class MonthlyRevenue extends \Hubleto\Erp\Report
   {
     $config = [];
 
-    $model = $this->getService(Deal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
+
     $config['groupsBy'] = [
       ["field" => "id_customer", "title" => "Customer"],
     ];
@@ -23,7 +26,7 @@ class MonthlyRevenue extends \Hubleto\Erp\Report
     ];
 
     $config["searchGroups"] = [
-      ["fieldName" => "id_owner", "field" => $model->getColumn("id_owner"), "option" => 1,  "value" => $this->authProvider()->getUser()["id"],],
+      ["fieldName" => "id_owner", "field" => $model->getColumn("id_owner"), "option" => 1,  "value" => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser()["id"],],
       ["fieldName" => "date_created", "field" => $model->getColumn("date_created"), "option" => 6,  "value" => date("Y-m-01"), "value2" => date('Y-m-t')],
     ];
 
@@ -32,7 +35,9 @@ class MonthlyRevenue extends \Hubleto\Erp\Report
 
   public function loadData(): array
   {
-    $model = $this->getService(Deal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
+
     return $this->loadDataDefault($model);
   }
 

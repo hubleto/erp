@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Leads\Controllers\Boards;
 
+
 use Hubleto\App\Community\Leads\Models\Lead;
 
 class LeadValueByScore extends \Hubleto\Erp\Controller
@@ -12,12 +13,13 @@ class LeadValueByScore extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $mLead = $this->getService(Lead::class);
+    /** @var Lead */
+    $mLead = $this->getModel(Lead::class);
 
     $leads = $mLead->record
       ->selectRaw("score, SUM(price) as price")
       ->where("is_archived", 0)
-      ->where("id_owner", $this->authProvider()->getUserId())
+      ->where("id_owner", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ->with('CURRENCY')
       ->groupBy('score')
       ->get()

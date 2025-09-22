@@ -16,7 +16,8 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
   props: FormTaskProps;
   state: FormTaskState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Tasks::Components\\FormTask';
+  translationContext: string = 'Hubleto\\App\\Community\\Tasks\\Loader';
+  translationContextInner: string = 'Components\\FormTask';
 
   constructor(props: FormTaskProps) {
     super(props);
@@ -41,7 +42,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
   }
 
   getRecordFormUrl(): string {
-    return 'tasks/' + this.state.record.id;
+    return 'tasks/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   contentClassName(): string
@@ -57,22 +58,10 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
   }
 
   renderTopMenu() {
-    const R = this.state.record;
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <WorkflowSelector
-          idWorkflow={R.id_workflow}
-          idWorkflowStep={R.id_workflow_step}
-          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
-            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
-          }}
-          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
-            this.updateRecord({id_workflow_step: idWorkflowStep});
-          }}
-        ></WorkflowSelector>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
+      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>}
+      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
     </>
   }
 
@@ -128,9 +117,9 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
             </div>
             {this.state.id <= 0 ? null :
               <div className='flex-1'>
-                <div className='card'>
-                  <div className='card-header'>TODO</div>
-                  <div className='card-body btn-list bg-yellow-50'>
+                <div className='card card-info'>
+                  <div className='card-header'>Todo</div>
+                  <div className='card-body btn-list'>
                     {R.TODO && R.TODO.map((item, key) => {
                       const refInputTodo = React.createRef();
 

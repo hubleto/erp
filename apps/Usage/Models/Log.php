@@ -5,7 +5,8 @@ namespace Hubleto\App\Community\Usage\Models;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
+
 
 class Log extends \Hubleto\Erp\Model
 {
@@ -31,8 +32,10 @@ class Log extends \Hubleto\Erp\Model
     $description->permissions['canCreate'] = false;
     $description->permissions['canUpdate'] = false;
     $description->permissions['canDelete'] = false;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
+
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+
     return $description;
   }
 

@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Customers;
 
 class Loader extends \Hubleto\Framework\App
 {
-  public bool $hasCustomSettings = true;
+  // public bool $hasCustomSettings = true;
 
   /**
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
@@ -17,15 +17,12 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
+      '/^customers\/api\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
+      '/^customers\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
+
       '/^customers(\/(?<recordId>\d+))?\/?$/' => Controllers\Customers::class,
       '/^customers\/add\/?$/' => ['controller' => Controllers\Customers::class, 'vars' => ['recordId' => -1]],
-      '/^customers\/settings\/?$/' => Controllers\Settings::class,
-      '/^customers\/activities\/?$/' => Controllers\Activity::class,
-      '/^settings\/customer-tags\/?$/' => Controllers\Tags::class,
-
-      '/^customers\/api\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
-      // '/^customers\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
-      '/^customers\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
+      '/^customers\/tags\/?$/' => Controllers\Tags::class,
     ]);
 
     $this->addSearchSwitch('c', 'customers');
@@ -39,7 +36,7 @@ class Loader extends \Hubleto\Framework\App
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Customer Tags'),
       'icon' => 'fas fa-tags',
-      'url' => 'settings/customer-tags',
+      'url' => 'customers/tags',
     ]);
   }
 

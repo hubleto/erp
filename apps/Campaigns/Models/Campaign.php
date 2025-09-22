@@ -2,9 +2,10 @@
 
 namespace Hubleto\App\Community\Campaigns\Models;
 
+
 use Hubleto\App\Community\Campaigns\Lib;
 
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\App\Community\Mail\Models\Template;
 use Hubleto\App\Community\Mail\Models\Account;
 use Hubleto\Framework\Db\Column\Color;
@@ -15,6 +16,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
+use Hubleto\App\Community\Auth\Models\User;
 
 use Hubleto\App\Community\Leads\Models\LeadCampaign;
 
@@ -31,7 +33,7 @@ class Campaign extends \Hubleto\Erp\Model
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
 
-    'CONTACTS' => [ self::HAS_MANY, CampaignContact::class, 'id_deal', 'id'],
+    'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_deal', 'id'],
     'TASKS' => [ self::HAS_MANY, CampaignTask::class, 'id_deal', 'id'],
   ];
 
@@ -45,26 +47,26 @@ class Campaign extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('UID')))->setReadonly(true),
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setProperty('defaultVisibility', true)->setCssClass('font-bold'),
-      'utm_source' => (new Varchar($this, $this->translate('UTM source')))->setProperty('defaultVisibility', true),
-      'utm_campaign' => (new Varchar($this, $this->translate('UTM campaign')))->setProperty('defaultVisibility', true),
-      'utm_term' => (new Varchar($this, $this->translate('UTM term')))->setProperty('defaultVisibility', true),
-      'utm_content' => (new Varchar($this, $this->translate('UTM content')))->setProperty('defaultVisibility', true),
-      'target_audience' => (new Text($this, $this->translate('Target audience')))->setProperty('defaultVisibility', true),
-      'goal' => (new Text($this, $this->translate('Goal')))->setProperty('defaultVisibility', true),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
+      'utm_source' => (new Varchar($this, $this->translate('UTM source')))->setDefaultVisible(),
+      'utm_campaign' => (new Varchar($this, $this->translate('UTM campaign')))->setDefaultVisible(),
+      'utm_term' => (new Varchar($this, $this->translate('UTM term')))->setDefaultVisible(),
+      'utm_content' => (new Varchar($this, $this->translate('UTM content')))->setDefaultVisible(),
+      'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible(),
+      'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       // 'mail_body' => (new Text($this, $this->translate('Mail body (HTML)')))->setReactComponent('InputWysiwyg'),
       'color' => (new Color($this, $this->translate('Color'))),
       'id_mail_account' => (new Lookup($this, $this->translate('Mail account to send email from'), Account::class)),
       'id_mail_template' => (new Lookup($this, $this->translate('Mail template'), Template::class))
-        ->setProperty('defaultVisibility', true)
+        ->setDefaultVisible()
       ,
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId())->setProperty('defaultVisibility', true),
-      'is_approved' => (new Boolean($this, $this->translate('Approved')))->setProperty('defaultVisibility', true),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
-      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date('Y-m-d H:i:s')),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
+      'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setDefaultValue(date('Y-m-d H:i:s')),
     ]);
   }
 
@@ -81,10 +83,8 @@ class Campaign extends \Hubleto\Erp\Model
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = $this->translate('Add Campaign');
 
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     $description->ui['filters'] = [
       'fCampaignWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Phase'),
@@ -116,7 +116,8 @@ class Campaign extends \Hubleto\Erp\Model
 
     $savedRecord['uid'] = \Hubleto\Framework\Helper::generateUuidV4();
 
-    $mWorkflow = $this->getService(Workflow::class);
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
     list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('campaigns');
     $savedRecord['id_workflow'] = $idWorkflow;
     $savedRecord['id_workflow_step'] = $idWorkflowStep;
@@ -139,7 +140,7 @@ class Campaign extends \Hubleto\Erp\Model
   // {
   //   $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-  //   $mTemplate = $this->getService(Template::class);
+  //   $mTemplate = $this->getModel(Template::class);
   //   $template = $mTemplate->record->find((int) ($savedRecord['id_mail_template'] ?? 0));
 
   //   if ($template) {
@@ -151,7 +152,7 @@ class Campaign extends \Hubleto\Erp\Model
   //       (string) $savedRecord['utm_content'],
   //     );
 
-  //     $mCampaign = $this->getService(Campaign::class);
+  //     $mCampaign = $this->getModel(Campaign::class);
   //     $mCampaign->record->find((int) $savedRecord['id'])->update([
   //       'mail_body' => $bodyHtml
   //     ]);

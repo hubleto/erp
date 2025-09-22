@@ -16,8 +16,11 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
+      '/^dashboards\/api\/save-panel-order\/?$/' => Controllers\Api\SavePanelOrder::class,
+      '/^dashboards\/api\/set-panel-width\/?$/' => Controllers\Api\SetPanelWidth::class,
+
       '/^dashboards(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboards::class,
-      '/^settings\/dashboards\/?$/' => Controllers\Settings::class,
+      '/^dashboards\/manage\/?$/' => Controllers\Settings::class,
     ]);
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
@@ -25,7 +28,7 @@ class Loader extends \Hubleto\Framework\App
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Dashboards'),
       'icon' => 'fas fa-table',
-      'url' => 'settings/dashboards',
+      'url' => 'dashboards/manage',
     ]);
 
   }
@@ -57,6 +60,7 @@ class Loader extends \Hubleto\Framework\App
         'title' => $board['title'],
         'board_url_slug' => $board['boardUrlSlug'],
         'configuration' => '',
+        'width' => rand(2, 3),
       ]);
     }
   }

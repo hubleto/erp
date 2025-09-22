@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Settings;
 
+use Hubleto\App\Community\Auth\Models\UserRole;
+
 class Loader extends \Hubleto\Framework\App
 {
   public bool $canBeDisabled = false;
@@ -15,6 +17,8 @@ class Loader extends \Hubleto\Framework\App
   public function init(): void
   {
     parent::init();
+
+    $this->getService(PermissionsManager::class)->init();
 
     $this->router()->get([
       '/^settings\/?$/' => Controllers\Dashboard::class,
@@ -60,9 +64,6 @@ class Loader extends \Hubleto\Framework\App
   {
     if ($round == 1) {
       $mCompany = $this->getModel(Models\Company::class);
-      $mUser = $this->getModel(Models\User::class);
-      $mUserRole = $this->getModel(Models\UserRole::class);
-      $mUserHasRole = $this->getModel(Models\UserHasRole::class);
       $mPermission = $this->getModel(Models\Permission::class);
       $mRolePermission = $this->getModel(Models\RolePermission::class);
       $mCountry = $this->getModel(Models\Country::class);
@@ -74,9 +75,6 @@ class Loader extends \Hubleto\Framework\App
       $mTeamMember = $this->getModel(Models\TeamMember::class);
 
       $mCompany->dropTableIfExists()->install();
-      $mUser->dropTableIfExists()->install();
-      $mUserRole->dropTableIfExists()->install();
-      $mUserHasRole->dropTableIfExists()->install();
       $mPermission->dropTableIfExists()->install();
       $mRolePermission->dropTableIfExists()->install();
       $mCountry->dropTableIfExists()->install();
@@ -385,51 +383,7 @@ class Loader extends \Hubleto\Framework\App
         ]);
       }
 
-      $mUserRole = $this->getModel(Models\UserRole::class);
       $mPermission = $this->getModel(Models\Permission::class);
-
-      $mUserRole->record->recordCreate([
-        'id' => Models\UserRole::ROLE_ADMINISTRATOR,
-        'role' => 'Administrator',
-        'description' => 'Can do anything.',
-        'grant_all' => true,
-        'is_default' => true,
-      ])['id'];
-      $mUserRole->record->recordCreate([
-        'id' => Models\UserRole::ROLE_CHIEF_OFFICER,
-        'role' => 'Chief Officer (default permissions)',
-        'description' => 'Can read all data and can modify most of the data. Does not have access to settings.',
-        'grant_all' => false,
-        'is_default' => true,
-      ])['id'];
-      $mUserRole->record->recordCreate([
-        'id' => Models\UserRole::ROLE_MANAGER,
-        'role' => 'Manager (default permissions)',
-        'description' => 'Can read and modify all data that he/she owns or is manager.',
-        'grant_all' => false,
-        'is_default' => true,
-      ])['id'];
-      $mUserRole->record->recordCreate([
-        'id' => Models\UserRole::ROLE_EMPLOYEE,
-        'role' => 'Employee (default permissions)',
-        'description' => 'In general, can read or modify only data that he/she owns.',
-        'grant_all' => false,
-        'is_default' => true,
-      ])['id'];
-      $mUserRole->record->recordCreate([
-        'id' => Models\UserRole::ROLE_ASSISTANT,
-        'role' => 'Assistant (default permissions)',
-        'description' => 'Very similar to employee, but may be more limited in some certain situations.',
-        'grant_all' => false,
-        'is_default' => true,
-      ])['id'];
-      $mUserRole->record->recordCreate([
-        'id' => Models\UserRole::ROLE_EXTERNAL,
-        'role' => 'External (default permissions)',
-        'description' => 'By default should not have access to anything. Access permissions must be enabled in settings by administrator.',
-        'grant_all' => false,
-        'is_default' => true,
-      ])['id'];
 
     }
   }

@@ -14,7 +14,8 @@ export default class FormEventSpeaker<P, S> extends HubletoForm<FormEventSpeaker
   props: FormEventSpeakerProps;
   state: FormEventSpeakerState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Events::Components\\FormEventSpeaker';
+  translationContext: string = 'Hubleto\\App\\Community\\Events\\Loader';
+  translationContextInner: string = 'Components\\FormEventSpeaker';
 
   constructor(props: FormEventSpeakerProps) {
     super(props);

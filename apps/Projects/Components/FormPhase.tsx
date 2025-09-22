@@ -14,7 +14,8 @@ export default class FormPhase<P, S> extends HubletoForm<FormPhaseProps, FormPha
   props: FormPhaseProps;
   state: FormPhaseState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Projects::Components\\FormPhase';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader';
+  translationContextInner: string = 'Components\\FormPhase';
 
   constructor(props: FormPhaseProps) {
     super(props);

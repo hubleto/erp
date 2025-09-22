@@ -15,7 +15,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+
 
 class Agenda extends \Hubleto\Erp\Model
 {
@@ -30,12 +30,12 @@ class Agenda extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setProperty('defaultVisibility', true),
-      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true),
-      'topic' => (new Varchar($this, $this->translate('Topic')))->setProperty('defaultVisibility', true),
+      'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setDefaultVisible(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible(),
+      'topic' => (new Varchar($this, $this->translate('Topic')))->setDefaultVisible(),
       'description' => (new Text($this, $this->translate('Description'))),
-      'floor' => (new Varchar($this, $this->translate('Floor')))->setProperty('defaultVisibility', true),
-      'room' => (new Varchar($this, $this->translate('Room')))->setProperty('defaultVisibility', true),
+      'floor' => (new Varchar($this, $this->translate('Floor')))->setDefaultVisible(),
+      'room' => (new Varchar($this, $this->translate('Room')))->setDefaultVisible(),
       'datetime_start' => (new DateTime($this, $this->translate('Start')))->setDefaultValue(date("Y-m-h H:i:s")),
       'datetime_end' => (new DateTime($this, $this->translate('End')))->setDefaultValue(date("Y-m-h H:i:s")),
     ]);

@@ -15,7 +15,8 @@ export default class TableCampaigns extends HubletoTable<TableCampaignsProps, Ta
   props: TableCampaignsProps;
   state: TableCampaignsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader::Components\\TableCampaigns';
+  translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader';
+  translationContextInner: string = 'Components\\TableCampaigns';
 
   constructor(props: TableCampaignsProps) {
     super(props);

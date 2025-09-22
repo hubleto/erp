@@ -14,7 +14,8 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
   props: Form{{ modelSingularForm }}Props;
   state: Form{{ modelSingularForm }}State;
 
-  translationContext: string = '{{ appNamespaceDoubleBackslash }}::Components\\Form{{ modelSingularForm }}';
+  translationContext: string = '{{ appNamespaceDoubleBackslash }}';
+  translationContextInner: string = 'Components\\Form{{ modelSingularForm }}';
 
   constructor(props: Form{{ modelSingularForm }}Props) {
     super(props);
@@ -32,7 +33,7 @@ export default class Form{{ modelSingularForm }}<P, S> extends HubletoForm<Form{
   }
 
   getRecordFormUrl(): string {
-    return '{{ modelPluralFormKebab }}/' + this.state.record.id;
+    return '{{ modelPluralFormKebab }}/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {

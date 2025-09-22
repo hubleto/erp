@@ -1,0 +1,18 @@
+{
+    "manifest": {
+        "Notifications": "Notifikácie",
+        "Internal team notifications": ""
+    },
+    "Models\\Notification": {
+        "Priority": "",
+        "Category": "",
+        "From": "",
+        "To": "",
+        "Subject": "",
+        "Body": "",
+        "Color": "",
+        "Tags": "",
+        "Sent": "",
+        "Read": ""
+    }
+}

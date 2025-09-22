@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Leads\Models;
 
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Date;
@@ -16,11 +17,14 @@ use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Settings\Models\Setting;
-use Hubleto\App\Community\Settings\Models\User;
+
 use Hubleto\App\Community\Settings\Models\Team;
 use Hubleto\Framework\Helper;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
+use Hubleto\App\Community\Auth\Models\User;
+
+use Hubleto\App\Community\Settings\PermissionsManager;
 
 use Hubleto\App\Community\Deals\Models\DealLead;
 
@@ -66,18 +70,18 @@ class Lead extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setProperty('defaultVisibility', true),
+      // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible(),
       'title' => (new Varchar($this, $this->translate('Specific subject (if any)')))->setCssClass('font-bold'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer')),
-      'virt_email' => (new Virtual($this, $this->translate('Email')))->setProperty('defaultVisibility', true)
+      'virt_email' => (new Virtual($this, $this->translate('Email')))->setDefaultVisible()
         ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1")
       ,
       'virt_phone_number' => (new Virtual($this, $this->translate('Phone number')))
         ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'number' LIMIT 1")
       ,
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setRequired()->setDefaultValue(null),
-      // 'id_level' => (new Lookup($this, $this->translate('Level'), Level::class))->setProperty('defaultVisibility', true),
-      // 'status' => (new Integer($this, $this->translate('Status')))->setProperty('defaultVisibility', true)->setEnumValues(
+      // 'id_level' => (new Lookup($this, $this->translate('Level'), Level::class))->setDefaultVisible(),
+      // 'status' => (new Integer($this, $this->translate('Status')))->setDefaultVisible()->setEnumValues(
       //   [
       //     $this::STATUS_NO_INTERACTION_YET => 'No interaction yet',
       //     $this::STATUS_CONTACTED => 'Contacted',
@@ -94,17 +98,17 @@ class Lead extends \Hubleto\Erp\Model
       // ]),
       'price' => (new Decimal($this, $this->translate('Price')))->setDefaultValue(0),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
-      'score' => (new Integer($this, $this->translate('Score')))->setProperty('defaultVisibility', true)->setColorScale('bg-light-blue-to-dark-blue'),
+      'score' => (new Integer($this, $this->translate('Score')))->setDefaultVisible()->setColorScale('bg-light-blue-to-dark-blue'),
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_team' => (new Lookup($this, $this->translate('Team'), Team::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, "Online document folder"),
-      'note' => (new Text($this, $this->translate('Notes')))->setProperty('defaultVisibility', true),
+      'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setProperty('defaultVisibility', true),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
         1 => "Advertisement",
         2 => "Partner",
@@ -114,7 +118,7 @@ class Lead extends \Hubleto\Erp\Model
         6 => "Refferal",
         7 => "Other",
       ]),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setProperty('defaultVisibility', true),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
       'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
     ]);
   }
@@ -154,11 +158,9 @@ class Lead extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['showHeader'] = true;
-    $description->ui['showFooter'] = false;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showSidebarFilter'] = true;
-    $description->ui['showColumnSearch'] = true;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+
     $description->columns['tags'] = ["title" => "Tags"];
 
     $description->ui['filters'] = [
@@ -171,7 +173,7 @@ class Lead extends \Hubleto\Erp\Model
         "canCreate" => false,
         "canUpdate" => false,
         "canRead" => true,
-        "canDelete" => $this->permissionsManager()->granted($this->fullName . ':Delete')
+        "canDelete" => $this->getService(PermissionsManager::class)->granted($this->fullName . ':Delete')
       ];
     } else {
       $description->ui['addButtonText'] = $this->translate('Add lead');
@@ -190,7 +192,9 @@ class Lead extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
 
-    $mSettings = $this->getService(Setting::class);
+    /** @var Setting */
+    $mSettings = $this->getModel(Setting::class);
+
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
@@ -330,7 +334,9 @@ class Lead extends \Hubleto\Erp\Model
 
     $newLead = $savedRecord;
 
-    $mWorkflow = $this->getService(Workflow::class);
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+
     list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('leads');
     $newLead['id_workflow'] = $idWorkflow;
     $newLead['id_workflow_step'] = $idWorkflowStep;

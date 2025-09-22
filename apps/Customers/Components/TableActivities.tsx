@@ -18,7 +18,8 @@ export default class TableActivities extends Table<TableActivitiesProps, TableAc
   props: TableActivitiesProps;
   state: TableActivitiesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\TableActivities';
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
+  translationContextInner: string = 'Components\\TableActivities';
 
   constructor(props: TableActivitiesProps) {
     super(props);

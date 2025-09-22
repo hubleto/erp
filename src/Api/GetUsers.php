@@ -2,7 +2,7 @@
 
 namespace Hubleto\Erp\Api;
 
-use \Hubleto\App\Community\Settings\Models\User;
+use \Hubleto\App\Community\Auth\Models\User;
 
 class GetUsers extends \Hubleto\Erp\Controllers\ApiController
 {

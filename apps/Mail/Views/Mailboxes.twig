@@ -1,12 +1,25 @@
 <h1 class="app-main-title">{{ translate('Mail') }} > {{ translate('Mailboxes') }}</h1>
 
-<div class="list">
-  {% for m in viewParams.mailboxes %}
-    <a
-      class="btn btn-list-item btn-transparent"
-      href="mail/mails/{{ m.id }}"
-    >
-      <span class="text">{{ m.ACCOUNT.name }}: {{ m.name }}</span>
-    </a>
-  {% endfor %}
+<div class="flex gap-2">
+  <div class="list">
+    {% for m in viewParams.mailboxes %}
+      <a
+        class="btn btn-list-item btn-transparent"
+        href="mail/mails/{{ m.id }}"
+      >
+        <span class="text">{{ m.ACCOUNT.name }}: {{ m.name }}</span>
+      </a>
+    {% endfor %}
+  </div>
+  <div>
+    {% for a in viewParams.accounts %}
+      {{ a.name }}
+      <app-mail-table-mails
+        int:id-account="{{ a.id }}"
+        bool:show-only-scheduled-to-send="true"
+        bool:readonly="true"
+        string:view="briefOverview"
+      ></app-mail-table-mails>
+    {% endfor %}
+  </div>
 </div>

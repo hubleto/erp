@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Mail
 appType: community
-sidebarGroup: communication
+sidebarGroup: crm
 rootUrlSlug: mail
 name: Mail
 icon: fas fa-envelope

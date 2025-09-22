@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Mail\Models;
 
+
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -33,7 +34,7 @@ class Mail extends \Hubleto\Erp\Model
    */
   public function describeColumns(): array
   {
-    $user = $this->authProvider()->getUser();
+    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
     return array_merge(parent::describeColumns(), [
       'mail_number' => (new Varchar($this, $this->translate('Mail Id')))->addIndex('INDEX `mail_number` (`mail_number`)'),
       'mail_id' => (new Varchar($this, $this->translate('Mail Number')))->addIndex('INDEX `mail_id` (`mail_id`)'),
@@ -70,26 +71,28 @@ class Mail extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'New message';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     unset($description->columns['body']);
     unset($description->columns['color']);
     unset($description->columns['priority']);
     unset($description->columns['read']);
 
-    switch ($folder) {
-      case 'inbox':
-        unset($description->columns['to']);
-        unset($description->columns['cc']);
-        unset($description->columns['bcc']);
-        break;
-      case 'sent':
-        unset($description->columns['from']);
-        break;
+    switch ($this->router()->urlParamAsString('view')) {
+      case 'briefOverview':
+        $description->ui['moreActions'] = null;
+        $description->showOnlyColumns([
+          'id_account',
+          'subject',
+          'from',
+          'to',
+          'datetime_scheduled_to_send',
+          'datetime_sent',
+        ]);
+      break;
+      default:
+      break;
     }
 
     $description->permissions['canDelete'] = false;

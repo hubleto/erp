@@ -15,7 +15,8 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
   props: FormDocumentProps;
   state: FormDocumentState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader::Components\\FormDocument';
+  translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
+  translationContextInner: string = 'Components\\FormDocument';
 
   constructor(props: FormDocumentProps) {
     super(props);

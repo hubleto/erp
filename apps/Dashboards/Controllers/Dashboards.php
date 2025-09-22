@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Dashboards\Controllers;
 
+
+
 class Dashboards extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
@@ -20,7 +22,7 @@ class Dashboards extends \Hubleto\Erp\Controller
     $dashboardSlug = $this->router()->urlParamAsString('dashboardSlug');
 
     $dashboards = $mDashboard->record->prepareReadQuery()
-      ->where('id_owner', $this->authProvider()->getUserId())
+      ->where('id_owner', $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ->with('PANELS')
       ->get()
       ?->toArray();

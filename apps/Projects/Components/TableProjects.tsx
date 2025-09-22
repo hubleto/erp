@@ -17,7 +17,8 @@ export default class TableProjects extends HubletoTable<TableProjectsProps, Tabl
   props: TableProjectsProps;
   state: TableProjectsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Projects::Components\\TableProjects';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader';
+  translationContextInner: string = 'Components\\TableProjects';
 
   constructor(props: TableProjectsProps) {
     super(props);

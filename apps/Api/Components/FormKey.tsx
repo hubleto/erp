@@ -15,7 +15,8 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
   props: FormKeyProps;
   state: FormKeyState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Api::Components\\FormKey';
+  translationContext: string = 'Hubleto\\App\\Community\\Api\\Loader';
+  translationContextInner: string = 'Components\\FormKey';
 
   constructor(props: FormKeyProps) {
     super(props);
@@ -33,7 +34,7 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
   }
 
   getRecordFormUrl(): string {
-    return 'api/keys/' + this.state.record.id;
+    return 'api/keys/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {

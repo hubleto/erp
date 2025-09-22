@@ -15,7 +15,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+
 
 class EventSpeaker extends \Hubleto\Erp\Model
 {
@@ -31,9 +31,9 @@ class EventSpeaker extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setProperty('defaultVisibility', true),
-      'id_speaker' => (new Lookup($this, $this->translate('Speaker'), Speaker::class))->setProperty('defaultVisibility', true),
-      'is_attending_virtually' => (new Boolean($this, $this->translate('Is attending virtually')))->setProperty('defaultVisibility', true),
+      'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setDefaultVisible(),
+      'id_speaker' => (new Lookup($this, $this->translate('Speaker'), Speaker::class))->setDefaultVisible(),
+      'is_attending_virtually' => (new Boolean($this, $this->translate('Is attending virtually')))->setDefaultVisible(),
     ]);
   }
 

@@ -20,7 +20,8 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
   props: DealFormActivityProps;
   state: DealFormActivityState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader::Components\\FormActivity';
+  translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader';
+  translationContextInner: string = 'Components\\FormActivity';
 
   getActivitySourceReadable(): string
   {
@@ -35,7 +36,7 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
       <FormInput title={this.translate("Contact")}>
         <Lookup {...this.getInputProps('id_contact')}
           model='Hubleto/App/Community/Contacts/Models/Contact'
-          endpoint={`contacts/get-customer-contacts`}
+          endpoint={`contacts/api/get-customer-contacts`}
           customEndpointParams={{id_customer: this.props.idCustomer}}
           value={R.id_contact}
           onChange={(input: any, value: any) => {

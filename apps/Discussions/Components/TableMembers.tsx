@@ -19,7 +19,8 @@ export default class TableMembers extends HubletoTable<TableMembersProps, TableM
   props: TableMembersProps;
   state: TableMembersState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Discussions::Components\\TableMembers';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions\\Loader';
+  translationContextInner: string = 'Components\\TableMembers';
 
   constructor(props: TableMembersProps) {
     super(props);

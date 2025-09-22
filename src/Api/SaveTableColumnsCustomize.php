@@ -4,6 +4,7 @@ namespace Hubleto\Erp\Api;
 
 use Exception;
 
+
 class SaveTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): ?array
@@ -26,7 +27,7 @@ class SaveTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
       }
 
       $this->config()->save(
-        "user/" . $this->authProvider()->getUserId() . "/models/" . $model->fullName . "/tableColumns",
+        "user/" . $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId() . "/models/" . $model->fullName . "/tableColumns",
         (string) json_encode($allColumnsConfig)
       );
 

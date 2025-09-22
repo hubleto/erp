@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Deals\Controllers\Boards;
 
+
 use Hubleto\App\Community\Deals\Models\Deal;
 
 class DealValueByResult extends \Hubleto\Erp\Controller
@@ -12,12 +13,13 @@ class DealValueByResult extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $mDeal = $this->getService(Deal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
 
     $deals = $mDeal->record->prepareReadQuery()
       ->selectRaw("`{$mDeal->table}`.`deal_result`, SUM(`{$mDeal->table}`.`price_excl_vat`) as price")
       ->where($mDeal->table . ".is_archived", 0)
-      ->where($mDeal->table . ".id_owner", $this->authProvider()->getUserId())
+      ->where($mDeal->table . ".id_owner", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ->with('CURRENCY')
       ->groupBy($mDeal->table . '.deal_result')
       ->get()

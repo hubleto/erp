@@ -13,7 +13,8 @@ export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailSt
   props: FormMailProps;
   state: FormMailState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader::Components\\FormMail';
+  translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader';
+  translationContextInner: string = 'Components\\FormMail';
 
   constructor(props: FormMailProps) {
     super(props);

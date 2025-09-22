@@ -15,7 +15,8 @@ export default class FormTeam<P, S> extends HubletoForm<FormTeamProps, FormTeamS
   props: FormTeamProps;
   state: FormTeamState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader::Components\\FormTeam';
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader';
+  translationContextInner: string = 'Components\\FormTeam';
 
   constructor(props: FormTeamProps) {
     super(props);

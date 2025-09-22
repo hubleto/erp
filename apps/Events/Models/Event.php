@@ -15,7 +15,8 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
+
 
 class Event extends \Hubleto\Erp\Model
 {
@@ -41,26 +42,26 @@ class Event extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true)->setRequired()->setCssClass('text-2xl text-primary'),
-      'id_type' => (new Lookup($this, $this->translate('Type'), Type::class))->setProperty('defaultVisibility', true),
-      'attendance_options' => (new Integer($this, $this->translate('Attendance options')))->setProperty('defaultVisibility', true)->setEnumValues(self::ENUM_ATTENDANCE_OPTIONS),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('text-2xl text-primary'),
+      'id_type' => (new Lookup($this, $this->translate('Type'), Type::class))->setDefaultVisible(),
+      'attendance_options' => (new Integer($this, $this->translate('Attendance options')))->setDefaultVisible()->setEnumValues(self::ENUM_ATTENDANCE_OPTIONS),
       'brief_description' => (new Text($this, $this->translate('Brief description'))),
       'full_description' => (new Text($this, $this->translate('Full description'))),
-      'date_start' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date("Y-m-d")),
-      'date_end' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue(date("Y-m-d")),
-      'id_organizer' => (new Lookup($this, $this->translate('Organizer'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setDefaultValue($this->authProvider()->getUserId()),
-      // 'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
-      // 'text_example' => (new Text($this, $this->translate('Text')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
-      // 'decimal_example' => (new Decimal($this, $this->translate('Number')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()->setCssClass('text-2xl text-primary')
+      'date_start' => (new Date($this, $this->translate('Date')))->setDefaultVisible()->setRequired()->setDefaultValue(date("Y-m-d")),
+      'date_end' => (new Date($this, $this->translate('Date')))->setDefaultVisible()->setRequired()->setDefaultValue(date("Y-m-d")),
+      'id_organizer' => (new Lookup($this, $this->translate('Organizer'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      // 'varchar_example' => (new Varchar($this, $this->translate('Varchar')))->setDefaultVisible()->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
+      // 'text_example' => (new Text($this, $this->translate('Text')))->setDefaultVisible()->setReadonly()->setRequired()->setCssClass('text-2xl text-primary'),
+      // 'decimal_example' => (new Decimal($this, $this->translate('Number')))->setDefaultVisible()->setReadonly()->setRequired()->setCssClass('text-2xl text-primary')
       //   ->setDecimals(4)
       // ,
-      // 'date_example' => (new Date($this, $this->translate('Date')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
+      // 'date_example' => (new Date($this, $this->translate('Date')))->setDefaultVisible()->setReadonly()->setRequired()
       //   ->setDefaultValue(date("Y-m-d"))
       // ,
-      // 'datetime_example' => (new DateTime($this, $this->translate('DateTime')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
+      // 'datetime_example' => (new DateTime($this, $this->translate('DateTime')))->setDefaultVisible()->setReadonly()->setRequired()
       //   ->setDefaultValue(date("Y-m-d H:i:s"))
       // ,
-      // 'integer_example' => (new Integer($this, $this->translate('Integer')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired()
+      // 'integer_example' => (new Integer($this, $this->translate('Integer')))->setDefaultVisible()->setReadonly()->setRequired()
       //   ->setEnumValues(self::INTEGER_ENUM_VALUES)
       //   ->setEnumCssClasses([
       //     self::ENUM_ONE => 'bg-blue-50',
@@ -69,9 +70,9 @@ class Event extends \Hubleto\Erp\Model
       //   ])
       //   ->setDefaultValue(self::ENUM_ONE)
       // ,
-      // 'color_example' => (new Color($this, $this->translate('Color')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'image_example' => (new Image($this, $this->translate('Image')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
-      // 'file_example' => (new File($this, $this->translate('File')))->setProperty('defaultVisibility', true)->setReadonly()->setRequired(),
+      // 'color_example' => (new Color($this, $this->translate('Color')))->setDefaultVisible()->setReadonly()->setRequired(),
+      // 'image_example' => (new Image($this, $this->translate('Image')))->setDefaultVisible()->setReadonly()->setRequired(),
+      // 'file_example' => (new File($this, $this->translate('File')))->setDefaultVisible()->setReadonly()->setRequired(),
     ]);
   }
 

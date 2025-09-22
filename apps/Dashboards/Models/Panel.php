@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Dashboards\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Json;
+use Hubleto\Framework\Db\Column\Integer;
 
 class Panel extends \Hubleto\Erp\Model
 {
@@ -23,6 +24,10 @@ class Panel extends \Hubleto\Erp\Model
         ->setRequired()->setReadonly()->setDefaultValue($this->router()->urlParamAsInteger('idDashboard')),
       'board_url_slug' => (new Varchar($this, $this->translate('Board')))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'width' => (new Integer($this, $this->translate('Width')))->setDefaultVisible()->setDefaultValue(1)->setEnumValues(
+        [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6]
+      ),
+      'order' => (new Integer($this, $this->translate('Order')))->setDefaultVisible(),
       'configuration' => (new Json($this, $this->translate('Configuration'))),
     ]);
   }
@@ -33,10 +38,8 @@ class Panel extends \Hubleto\Erp\Model
 
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = $this->translate('Add panel');
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     unset($description->columns['id_dashboard']);
 

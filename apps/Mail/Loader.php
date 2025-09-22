@@ -2,10 +2,10 @@
 
 namespace Hubleto\App\Community\Mail;
 
+
+
 class Loader extends \Hubleto\Framework\App
 {
-  public bool $hasCustomSettings = true;
-
   public array $templateVariables = [];
 
   /**
@@ -19,12 +19,15 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^mail\/?$/' => Controllers\Mailboxes::class,
-      '/^mail\/accounts\/?$/' => Controllers\Accounts::class,
+      '/^mail\/?(?<idMailbox>\d+)?\/?$/' => Controllers\Home::class,
+      '/^mail\/accounts\/?(?<idAccount>\d+)?\/?$/' => Controllers\Accounts::class,
+      '/^mail\/accounts\/scheduled\/?$/' => Controllers\Scheduled::class,
+      '/^mail\/accounts\/sent\/?$/' => Controllers\Sent::class,
+      '/^mail\/get\/?$/' => Controllers\Get::class,
+      '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
       '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
-      '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
+      // '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
       '/^mail\/templates\/?(?<recordId>\d+)?\/?$/' => Controllers\Templates::class,
-      '/^mail\/settings\/?$/' => Controllers\Settings::class,
       '/^mail\/api\/mark-as-read\/?$/' => Controllers\Api\MarkAsRead::class,
       '/^mail\/api\/mark-as-unread\/?$/' => Controllers\Api\MarkAsUnread::class,
     ]);
@@ -33,6 +36,7 @@ class Loader extends \Hubleto\Framework\App
     $this->cronManager()->addCron(Crons\SendMails::class);
 
     $this->templateVariables = $this->collectExtendibles('MailTemplateVariables');
+    $this->sidebarView = '@Hubleto:App:Community:Mail/Sidebar.twig';
   }
 
   public function installTables(int $round): void
@@ -79,11 +83,11 @@ class Loader extends \Hubleto\Framework\App
     string $color = '',
     int $priority = 0
   ): array {
-    $user = $this->authProvider()->getUser();
+    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 
-    $mUser = $this->getModel(\Hubleto\App\Community\Settings\Models\User::class);
+    $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
     $users = $mUser->record->get()->toArray();
     $usersByEmail = [];
     $emailsByUserId = [];
@@ -155,4 +159,5 @@ class Loader extends \Hubleto\Framework\App
 
     return $mail;
   }
+
 }

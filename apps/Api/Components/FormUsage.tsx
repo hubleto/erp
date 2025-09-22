@@ -13,14 +13,15 @@ export default class FormUsage<P, S> extends HubletoForm<FormUsageProps, FormUsa
   props: FormUsageProps;
   state: FormUsageState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Api::Components\\FormUsage';
+  translationContext: string = 'Hubleto\\App\\Community\\Api\\Loader';
+  translationContextInner: string = 'Components\\FormUsage';
 
   constructor(props: FormUsageProps) {
     super(props);
   }
 
   getRecordFormUrl(): string {
-    return 'api/usages/' + this.state.record.id;
+    return 'api/usages/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {

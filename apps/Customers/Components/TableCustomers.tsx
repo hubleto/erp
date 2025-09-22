@@ -29,13 +29,18 @@ export default class TableCustomers extends HubletoTable<TableCustomersProps, Ta
   props: TableCustomersProps;
   state: TableCustomersState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader::Components\\TableCustomers';
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
+  translationContextInner: string = 'Components\\TableCustomers';
 
   getFormModalProps() {
     return {
       ...super.getFormModalProps(),
       type: 'right wide'
     }
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/customers/' + (id > 0 ? id : 'add'));
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {

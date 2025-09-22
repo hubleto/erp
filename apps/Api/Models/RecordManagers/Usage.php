@@ -3,7 +3,6 @@
 namespace Hubleto\App\Community\Api\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
 
 class Usage extends \Hubleto\Erp\RecordManager
 {
@@ -18,9 +17,9 @@ class Usage extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $idKey = $main->router()->urlParamAsInteger("idKey");
+    $idKey = $hubleto->router()->urlParamAsInteger("idKey");
     if ($idKey > 0) $query = $query->where($this->table . '.id_key', $idKey);
 
     return $query;

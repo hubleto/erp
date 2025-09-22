@@ -13,11 +13,12 @@ class Lib extends \Hubleto\Framework\Core
    *
    * @param array $campaign
    * @param array $contact
+   * @param array $vars
    * 
    * @return string
    * 
    */
-  public static function getMailPreview(array $campaign, array $contact): string
+  public static function getMailPreview(array $campaign, array $recipient): string
   {
 
     $bodyHtml = Lib::addUtmVariablesToEmailLinks(
@@ -28,13 +29,40 @@ class Lib extends \Hubleto\Framework\Core
       (string) ($campaign['utm_content'] ?? ''),
     );
 
+    $bodyHtml = Lib::replaceVariables($bodyHtml, [
+      'RECIPIENT:salutation' => $recipient['salutation'] ?? '',
+      'RECIPIENT:first_name' => $recipient['first_name'] ?? '',
+      'RECIPIENT:last_name' => $recipient['last_name'] ?? '',
+    ]);
+
     $bodyHtml = Lib::routeLinksThroughCampaignTracker(
       $campaign,
-      $contact,
+      $recipient,
       $bodyHtml,
     );
 
     return $bodyHtml;
+  }
+
+  /**
+   * [Description for replaceVariables]
+   *
+   * @param string $body
+   * @param array $vars
+   * 
+   * @return string
+   * 
+   */
+  public static function replaceVariables(string $body, array $vars): string
+  {
+    foreach ($vars as $vName => $vValue) {
+      $body = str_replace('{{ ' . $vName . ' }}', $vValue, $body);
+      $body = str_replace('{{' . $vName . '}}', $vValue, $body);
+      $body = str_replace('{{ ' . $vName . '}}', $vValue, $body);
+      $body = str_replace('{{' . $vName . ' }}', $vValue, $body);
+    }
+
+    return $body;
   }
 
   /**
@@ -65,17 +93,27 @@ class Lib extends \Hubleto\Framework\Core
     return $body;
   }
 
-  public static function routeLinksThroughCampaignTracker(array $campaign, array $contact, string $body): string
+  /**
+   * [Description for routeLinksThroughCampaignTracker]
+   *
+   * @param array $campaign
+   * @param array $contact
+   * @param string $body
+   * 
+   * @return string
+   * 
+   */
+  public static function routeLinksThroughCampaignTracker(array $campaign, array $recipient, string $body): string
   {
     $trackerUrl = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/click-tracker';
 
     $body = preg_replace_callback(
       '/(<a\s*)href="([^"]*)"/i',
-      function($m) use ($trackerUrl, $campaign, $contact) {
+      function($m) use ($trackerUrl, $campaign, $recipient) {
         return 
           $m[1] . 'href="' . $trackerUrl
           . '?cuid=' . ($campaign['uid'] ?? '')
-          . '&cnid=' . ($contact['id'] ?? '')
+          . '&rcid=' . ($recipient['id'] ?? '')
           . '&url=' . urlencode($m[2])
           . '"'
         ;
@@ -85,11 +123,11 @@ class Lib extends \Hubleto\Framework\Core
 
     $body = preg_replace_callback(
       '/(<a\s*)href=\'([^\']*)\'/i',
-      function($m) use ($trackerUrl, $campaign, $contact) {
+      function($m) use ($trackerUrl, $campaign, $recipient) {
         return 
           $m[1] . 'href=\'' . $trackerUrl
           . '?cuid=' . ($campaign['uid'] ?? '')
-          . '&cnid=' . ($contact['id'] ?? '')
+          . '&rcid=' . ($recipient['id'] ?? '')
           . '&url=' . urlencode($m[2])
           . '\''
         ;

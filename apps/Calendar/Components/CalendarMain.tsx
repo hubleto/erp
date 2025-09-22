@@ -38,7 +38,8 @@ interface CalendarMainState {
 
 export default class CalendarComponent extends TranslatedComponent<CalendarMainProps, CalendarMainState> {
 
-  translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader::Components\\CalendarMain';
+  translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader';
+  translationContextInner: string = 'Components\\CalendarMain';
 
   refCalendar: any;
 

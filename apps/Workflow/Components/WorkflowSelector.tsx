@@ -6,14 +6,14 @@ import { ProgressBar } from 'primereact/progressbar';
 import request from "@hubleto/react-ui/core/Request";
 
 interface WorkflowSelectorProps {
-  idWorkflow: number,
-  idWorkflowStep: number,
-  onWorkflowChange: (idWorkflow: number, idWorkflowStep: number) => void,
-  onWorkflowStepChange: (idWorkflowStep: number, step: any) => void,
+  parentForm: any,
+  onWorkflowChange?: (idWorkflow: number, idWorkflowStep: number) => void,
+  onWorkflowStepChange?: (idWorkflowStep: number, step: any) => void,
 }
 
 interface WorkflowSelectorState {
   workflows: Array<any>,
+  history: Array<any>,
   changeWorkflow: boolean,
 }
 
@@ -21,7 +21,8 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
   props: WorkflowSelectorProps;
   state: WorkflowSelectorState;
 
-  translationContext: string = "Hubleto\\App\\Community\\Workflow\\Loader::Components\\WorkflowSelector";
+  translationContext: string = 'Hubleto\\App\\Community\\Workflow\\Loader\\Loader';
+  translationContextInner: string = 'Components\\WorkflowSelector';
 
   constructor(props: WorkflowSelectorProps) {
     super(props);
@@ -31,54 +32,71 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
   getStateFromProps(props: WorkflowSelectorProps) {
     return {
       workflows: null,
+      history: null,
       changeWorkflow: false,
     };
   }
 
   componentDidMount() {
-    this.loadWorkflows();
+    this.loadData();
   }
 
-  loadWorkflows() {
-    request.get(
+  loadData(onSuccess?: any) {
+    const R = this.props.parentForm.state.record ?? {};
+
+    request.post(
       'workflow/api/get-workflows',
+      {
+        model: this.props.parentForm.props.model,
+        recordId: R.id,
+      },
       {},
-      (data: any) => { this.setState({ workflows: data.workflows }); }
+      (data: any) => {
+        this.setState({ workflows: data.workflows, history: data.history });
+        if (onSuccess) onSuccess();
+      }
     );
   }
   
   onWorkflowChange(idWorkflow: number) {
-    this.setState({ idWorkflow: idWorkflow }, () => {
-      if (this.props.onWorkflowChange) {
-        this.props.onWorkflowChange(idWorkflow, 0);
-      }
+    this.setState({ idWorkflow: idWorkflow, changeWorkflow: false }, () => {
+      this.props.parentForm.updateRecord({id_workflow: idWorkflow}, () => {
+        this.loadData(() => {
+          if (this.props.onWorkflowChange) {
+            this.props.onWorkflowChange(idWorkflow, 0);
+          }
+        });
+      });
     });
   }
 
   onWorkflowStepChange(idWorkflowStep: number, step: any) {
     this.setState({ idWorkflowStep: idWorkflowStep }, () => {
-      if (this.props.onWorkflowStepChange) {
-        this.props.onWorkflowStepChange(idWorkflowStep, step);
-      }
+      this.props.parentForm.updateRecord({id_workflow_step: idWorkflowStep}, () => {
+        if (this.props.onWorkflowStepChange) {
+          this.props.onWorkflowStepChange(idWorkflowStep, step);
+        }
+      });
     });
   }
 
   render(): JSX.Element {
-    const workflows = this.state.workflows;
-    const steps = workflows ? workflows[this.props.idWorkflow]?.STEPS : null;
-
-    if (!workflows) {
+    if (!this.state.workflows) {
       return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
     }
+
+    const R = this.props.parentForm.state.record ?? {};
+    const workflows = this.state.workflows;
+    const history = this.state.history.filter((item) => item.id_workflow_step == R.id_workflow_step);
+    const steps = workflows ? workflows[R.id_workflow]?.STEPS : null;
+
+    // console.log(this.state.history, history);
 
     let stepBtnClass = "btn-light";
 
     return <>
       <div className='flex flex-row flex-wrap'>
         {this.state.changeWorkflow ? <div className='flex gap-2 items-center'>
-          <button className="btn btn-transparent btn-small ml-2" onClick={() => { this.setState({changeWorkflow: false}); }}>
-            <span className="icon"><i className='fas fa-grip-lines'></i></span>
-          </button>
           <div>
             Set workflow to
           </div>
@@ -88,7 +106,7 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
                 {Object.keys(workflows).map((idWorkflow: any, key: any) => {
                   return <button
                     key={key}
-                    className={"btn " + (this.props.idWorkflow == idWorkflow ? "btn-primary" : "btn-transparent")}
+                    className={"btn " + (R.id_workflow == idWorkflow ? "btn-primary" : "btn-transparent")}
                     onClick={() => { this.onWorkflowChange(idWorkflow); }}
                   ><span className="text">{workflows[idWorkflow]?.name}</span></button>
                 })}
@@ -96,39 +114,41 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
             </div></div>
           </div>
         </div> : <div className='flex gap-2'>
-          <div className='flex items-center'>
-            <button className="btn btn-transparent btn-small ml-2" onClick={() => { this.setState({changeWorkflow: true}); }}>
-              <span className="icon"><i className='fas fa-grip-lines'></i></span>
-            </button>
-          </div>
-          <div className='flex items-center'>
-            {steps && steps.length > 0 ?
-              steps.map((s, i) => {
-                if (stepBtnClass == "btn-primary") stepBtnClass = "btn-transparent";
-                else if (s.id == this.props.idWorkflowStep) stepBtnClass = "btn-primary";
-                
-                return <button
-                  key={i}
-                  onClick={() => this.onWorkflowStepChange(s.id, s)}
-                  className={`btn ${stepBtnClass} border-none rounded-none`}
-                >
-                  <div
-                    className="icon p-0"
-                    style={{
-                      borderTop: '1em solid transparent',
-                      borderBottom: '1em solid transparent',
-                      borderLeft: '1em solid ' + s.color
-                    }}
+          <div className='flex flex-col'>
+            <div className='flex items-center'>
+              {steps && steps.length > 0 ? 
+                steps.map((s, i) => {
+                  if (stepBtnClass == "btn-primary") stepBtnClass = "btn-transparent";
+                  else if (s.id == R.id_workflow_step) stepBtnClass = "btn-primary";
+                  
+                  return <button
+                    key={i}
+                    onClick={() => this.onWorkflowStepChange(s.id, s)}
+                    className={`btn btn-small ${stepBtnClass} border-none rounded-none`}
                   >
-                  </div>
-                  <div className='text'>
-                    {s.name}
-                    {/* {s.probability ? <small className='whitespace-nowrap ml-2'>({s.probability} %)</small> : null} */}
-                  </div>
-                </button>;
-              })
-              : <p className='w-full text-center'>Workflow has no steps.</p>
-            }
+                    <div
+                      className="icon p-0"
+                      style={{
+                        borderTop: '1em solid transparent',
+                        borderBottom: '1em solid transparent',
+                        borderLeft: '1em solid ' + s.color
+                      }}
+                    >
+                    </div>
+                    <div className='text'>
+                      {s.name}
+                      {/* {s.probability ? <small className='whitespace-nowrap ml-2'>({s.probability} %)</small> : null} */}
+                    </div>
+                  </button>;
+                })
+              : <p className='w-full text-center'>Workflow has no steps.</p>}
+            </div>
+            <div className='text-xs text-gray-400 flex gap-2'>
+              {history[0] ? <>Last update: {history[0].datetime_change} by {history[0].USER?.nick ?? 'unknown'}</> : null}
+              <a href='#' onClick={() => { this.setState({changeWorkflow: true}); }}>
+                <span className="text">Change workflow</span>
+              </a>
+            </div>
           </div>
         </div>}
       </div>

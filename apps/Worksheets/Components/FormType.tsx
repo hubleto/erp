@@ -14,7 +14,8 @@ export default class FormType<P, S> extends HubletoForm<FormTypeProps, FormTypeS
   props: FormTypeProps;
   state: FormTypeState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Worksheets::Components\\FormType';
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets\\Loader';
+  translationContextInner: string = 'Components\\FormType';
 
   constructor(props: FormTypeProps) {
     super(props);

@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Discussions\Models;
 
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -15,7 +16,8 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+use Hubleto\App\Community\Auth\Models\User;
+
 
 class Member extends \Hubleto\Erp\Model
 {
@@ -32,9 +34,9 @@ class Member extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setProperty('defaultVisibility', true)->setRequired(),
-      'id_member' => (new Lookup($this, $this->translate('Member'), User::class))->setReactComponent('InputUserSelect')->setProperty('defaultVisibility', true)->setRequired()->setDefaultValue($this->authProvider()->getUserId()),
-      'permissions' => (new Json($this, $this->translate('Permissions')))->setProperty('defaultVisibility', true),
+      'id_discussion' => (new Lookup($this, $this->translate('Discussion'), Discussion::class))->setDefaultVisible()->setRequired(),
+      'id_member' => (new Lookup($this, $this->translate('Member'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'permissions' => (new Json($this, $this->translate('Permissions')))->setDefaultVisible(),
     ]);
   }
 
@@ -42,10 +44,8 @@ class Member extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add Member';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showColumnSearch'] = true;
-    $description->ui['showFooter'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
 
     // Uncomment and modify these lines if you want to define table filter for your model
     // $description->ui['filters'] = [

@@ -19,12 +19,12 @@ class AppMenu extends \Hubleto\Framework\Extendible
         'title' => $this->app->translate('Templates'),
         'icon' => 'fas fa-box-archive',
       ],
-      [
-        'app' => $this->app,
-        'url' => 'mail/drafts',
-        'title' => $this->app->translate('Drafts'),
-        'icon' => 'fas fa-box-archive',
-      ],
+      // [
+      //   'app' => $this->app,
+      //   'url' => 'mail/drafts',
+      //   'title' => $this->app->translate('Drafts'),
+      //   'icon' => 'fas fa-box-archive',
+      // ],
       [
         'app' => $this->app,
         'url' => 'mail/accounts',

@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Leads\Controllers\Api;
 
+
 use Hubleto\App\Community\Leads\Models\Lead;
 use Hubleto\App\Community\Leads\Models\LeadActivity;
 
@@ -12,7 +13,8 @@ class LogActivity extends \Hubleto\Erp\Controllers\ApiController
     $idLead = $this->router()->urlParamAsInteger("idLead");
     $activity = $this->router()->urlParamAsString("activity");
     if ($idLead > 0 && $activity != '') {
-      $mLead = $this->getService(Lead::class);
+      /** @var Lead */
+      $mLead = $this->getModel(Lead::class);
       $lead = $mLead->record->find($idLead)->first()?->toArray();
 
       if ($lead && $lead['id'] > 0) {
@@ -24,7 +26,7 @@ class LogActivity extends \Hubleto\Erp\Controllers\ApiController
           'time_start' => date('H:i:s'),
           'all_day' => true,
           'completed' => true,
-          'id_owner' => $this->authProvider()->getUserId(),
+          'id_owner' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(),
         ]);
       }
     }

@@ -10,7 +10,9 @@ class GenerateInvoice extends \Hubleto\Erp\Controllers\ApiController
   {
     $idDeal = $this->router()->urlParamAsInteger('idDeal');
 
-    $mDeal = $this->getService(Deal::class);
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
+
     $idInvoice = $mDeal->generateInvoice($idDeal);
 
     return $idInvoice;

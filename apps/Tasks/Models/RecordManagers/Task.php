@@ -2,14 +2,15 @@
 
 namespace Hubleto\App\Community\Tasks\Models\RecordManagers;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Hubleto\App\Community\Settings\Models\RecordManagers\User;
+
+use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
-use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
-use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 class Task extends \Hubleto\Erp\RecordManager
 {
@@ -69,9 +70,14 @@ class Task extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $filters = $main->router()->urlParamAsArray("filters");
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+
+    $view = $hubleto->router()->urlParamAsString('view');
+    if ($view == 'briefOverview') $query = $query->where($this->table . '.is_closed', false);
+
+    $query = $query->with('TODO');
 
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,

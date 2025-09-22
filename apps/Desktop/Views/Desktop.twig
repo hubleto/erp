@@ -1,4 +1,4 @@
-{% set secondSidebar = viewParams.activatedApp.renderSecondSidebar() %}
+{{ setTranslationContext('hubleto-app-community-desktop-loader', 'Controllers\\Desktop') }}
 {% set isPremium = hubleto.env().isPremium() %}
 
 {% macro appBtn(app, inGroup) %}
@@ -71,7 +71,7 @@
     <div id="app-launcher" onclick="lchr(false);">
       <div>
       <div class="app-launcher-header">
-          <input placeholder="{{ translate('Search app...') }}" onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
+        <input placeholder="{{ translate("Search app...") }}" onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
       </div>
       {% for app in hubleto.appManager().getEnabledApps() %}
         <a
@@ -117,6 +117,11 @@
       </div>
       <div class="{# hidden #} sm:block flex-1 ml-2 max-w-72">
         <app-search string:endpoint='api/search'></app-search>
+      </div>
+      <div class="{# hidden #} sm:block ml-2">
+        <button class="btn btn-primary-outline" onclick="lchr(true);">
+          <span class="icon"><i class="fas fa-table-cells-large"></i></span>
+        </button>
       </div>
       <div class="{# hidden #} md:block flex-1">
         {{ include('@hubleto-main/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
@@ -242,14 +247,12 @@
           {% endif %}
         {% endfor %}
 
-        <div class="bg-slate-100 p-1 w-full">
-          {{ user.DEFAULT_COMPANY.name }}
+        <div class="sidebar-group {% if hubleto.router().getRoute() == '' %} activated {% endif %}">
+          <a class="btn {{ hubleto.router().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}/">
+            <span class="icon"><i class="fas fa-home"></i></span>
+            <span class="text">{{ user.DEFAULT_COMPANY.name }}</span>
+          </a>
         </div>
-
-        <a class="btn {{ hubleto.router().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}/">
-          <span class="icon"><i class="fas fa-home"></i></span>
-          <span class="text">{{ translate('Home') }}</span>
-        </a>
 
         {% for sidebarGroup, sidebarGroupData in viewParams.sidebarGroups %}
           {% set appBtns = [] %}
@@ -268,28 +271,17 @@
           {% endif %}
 
           {% if appBtns|length == 0 %}
-          {% elseif appBtns|length == 1 %}
-            <div>
-              {{ appBtns[0]|raw }}
-            </div>
           {% else %}
             <div class="sidebar-group {% if hasActivatedApp %} activated {% endif %}">
-              <a
-                class="btn flex-10 truncate"
-                id="sg_{{ sidebarGroup }}_btn"
-{#                onclick="#}
-{#                  $('.sidebar-group').removeClass('activated');#}
-{#                  $(this).closest('.sidebar-group').addClass('activated');#}
-{#                "#}
-                href="{{ config.projectUrl }}/~/{{ sidebarGroup }}"
+              <div class="sidebar-group-title" id="sg_{{ sidebarGroup }}_btn"
+                onclick="
+                  $('.sidebar-group').removeClass('activated');
+                  $(this).closest('.sidebar-group').addClass('activated');
+                "
               >
-                <span class="icon"><i class="{{ sidebarGroupData.icon }}"></i></span>
                 <span class="text">{{ sidebarGroupData.title }}</span>
-              </a>
-              <div
-                id="sg_{{ sidebarGroup }}_btns"
-                class="sidebar-group-btns"
-              >
+              </div>
+              <div id="sg_{{ sidebarGroup }}_btns" class="sidebar-group-btns">
                 <div class="inner">{{ appBtns|join('')|raw }}</div>
               </div>
             </div>
@@ -301,20 +293,13 @@
           {% set i = i + 1 %}
         {% endfor %}
 
-        <div class="sidebar-group">
-          <button type="button" class="mt-2 btn flex-10 truncate" onclick="lchr(true);">
-            <span class="icon"><i class="fas fa-magnifying-glass"></i></span>
-            <span class="text">{{ translate("Search app") }}</span>
-          </button>
-        </div>
-
       </nav>
-      {% if secondSidebar != '' %} <div>{{ secondSidebar|raw }}</div> {% endif %}
+      {% if viewParams.activatedApp.sidebarView != '' %} <div>{{ include(viewParams.activatedApp.sidebarView) }}</div> {% endif %}
     </aside>
 
     <div
       id="app-main-content"
-      class="{% if secondSidebar != '' %} sidebar-two-levels {% endif %}"
+      class="{% if viewParams.activatedApp.sidebarView != '' %} sidebar-two-levels {% endif %}"
     >
       {{ contentHtml|raw }}
     </div>
@@ -377,6 +362,8 @@
     applyTheme();
 
   </script>
+
+  <script> globalThis.dictionary = JSON.parse(atob('{{ viewParams.dictionaryString }}')); </script>
 
 </body>
 

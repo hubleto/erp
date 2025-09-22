@@ -1,0 +1,50 @@
+{
+    "manifest": {
+        "Documents": "Dokumenty",
+        "Free document management.": "Bezplatný manažment dokumentov.",
+        "Browse": "",
+        "List": "",
+        "Templates": ""
+    },
+    "Models\\Document": {
+        "Document name": "Názov dokumentu",
+        "File": "Súbor",
+        "Link": "Odkaz na online verziu",
+        "File Link": "Odkaz na dokument",
+        "Origin Link": "Pôvodný odkaz",
+        "Uid": "Uid",
+        "Folder": "Priečinok",
+        "Add Document": ""
+    },
+    "Controllers\\Documents": {
+        "Documents": "Dokumenty"
+    },
+    "root": {
+        "Browse": "Prehliadať",
+        "List": "Zoznam",
+        "Templates": "Šablóny"
+    },
+    "Controllers\\Table": {
+        "Documents": "Dokumenty"
+    },
+    "Models\\Folder": {
+        "Uid": "Uid",
+        "Parent folder": "Priečinok",
+        "Folder name": "Názov priečinka"
+    },
+    "Models\\Template": {
+        "Name": "Názov",
+        "Content": "Obsah",
+        "Notes": "Poznámky"
+    },
+    "Controllers\\Browse": {
+        "Documents": ""
+    },
+    "Components\\Browser": {
+        "Add folder": "",
+        "Add document": ""
+    },
+    "Components\\FormDocument": {
+        "Document": ""
+    }
+}

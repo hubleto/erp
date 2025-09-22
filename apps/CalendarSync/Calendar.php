@@ -9,7 +9,7 @@ class Calendar extends \Hubleto\Erp\Calendar
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
     $formattedEvents = [];
-    $mSources = $this->getService(Source::class);
+    $mSources = $this->getModel(Source::class);
 
     foreach ($mSources->record->where('active', true)->get() as $key => $source) {
       if ($source->type === 'google') {

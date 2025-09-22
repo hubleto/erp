@@ -1,0 +1,36 @@
+{
+    "manifest": {
+        "Notifications": "Autentifikácia",
+        "Auth": "",
+        "Hubleto Authorization App for User Management": ""
+    },
+    "Models\\User": {
+        "Type": "",
+        "First name": "",
+        "Last name": "",
+        "Nick": "",
+        "Email": "",
+        "Language": "",
+        "Default company": "",
+        "Apps": "",
+        "Roles": "",
+        "Teams": ""
+    },
+    "Models\\UserRole": {
+        "Role": "",
+        "Grant all permissions (administrator role)": "",
+        "Description": "",
+        "Is default role (cannot be modified)": ""
+    },
+    "Models\\UserHasRole": {
+        "User": "",
+        "Role": ""
+    },
+    "Controllers\\SignIn": {
+        "Your email": "",
+        "Password": "",
+        "Keep signed in": "",
+        "Sign in": "",
+        "Forgot password?": ""
+    }
+}

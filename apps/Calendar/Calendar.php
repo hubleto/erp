@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Calendar;
 
+
 use Hubleto\App\Community\Calendar\Models\Activity;
 
 class Calendar extends \Hubleto\Erp\Calendar
@@ -44,7 +45,7 @@ class Calendar extends \Hubleto\Erp\Calendar
     if (isset($filter['fOwnership'])) {
       switch ($filter["fOwnership"]) {
         case 1:
-          $query = $query->where($mActivity->table.".id_owner", $this->authProvider()->getUserId());
+          $query = $query->where($mActivity->table.".id_owner", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
           break;
       }
     }

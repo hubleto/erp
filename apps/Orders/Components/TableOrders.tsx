@@ -21,7 +21,8 @@ export default class TableOrders extends HubletoTable<TableOrdersProps, TableOrd
   props: TableOrdersProps;
   state: TableOrdersState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader::Components\\TableOrders';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
+  translationContextInner: string = 'Components\\TableOrders';
 
   constructor(props: TableOrdersProps) {
     super(props);

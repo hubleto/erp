@@ -11,7 +11,8 @@
         "hubleto/terminal": "@dev",
         "hubleto/framework": "@dev",
         "defuse/php-encryption": "^2.4",
-        "ddeboer/imap": "^1.21"
+        "ddeboer/imap": "^1.21",
+        "dompdf/dompdf": "^3.1"
     },
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "autoload": {

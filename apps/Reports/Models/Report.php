@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Reports\Models;
 
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Settings\Models\User;
+
 
 class Report extends \Hubleto\Erp\Model
 {
@@ -15,8 +15,8 @@ class Report extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'title' => (new Varchar($this, $this->translate('Title')))->setProperty('defaultVisibility', true),
-      'model' => (new Varchar($this, $this->translate('Model')))->setProperty('defaultVisibility', true),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible(),
+      'model' => (new Varchar($this, $this->translate('Model')))->setDefaultVisible(),
       'query' => (new Text($this, $this->translate('Query'))),
       'notes' => (new Varchar($this, $this->translate('Notes'))),
     ]);
@@ -38,7 +38,7 @@ class Report extends \Hubleto\Erp\Model
     try {
       $model = $record['model'];
       if (class_exists($model)) {
-        $modelObj = $this->getModel($model::class);
+        $modelObj = $this->getModel(get_class($model));
 
         foreach ($modelObj->getColumns() as $colName => $column) {
           $field = [

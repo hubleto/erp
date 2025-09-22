@@ -4,7 +4,6 @@ namespace Hubleto\App\Community\Warehouses;
 
 class Loader extends \Hubleto\Framework\App
 {
-  public bool $hasCustomSettings = true;
 
   /**
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
@@ -23,6 +22,20 @@ class Loader extends \Hubleto\Framework\App
       '/^warehouses\/settings\/warehouse-location-types\/?$/' => Controllers\LocationTypes::class,
     ]);
 
+    /** @var \Hubleto\App\Community\Settings\Loader */
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp->addSetting($this, [
+      'title' => $this->translate('Warehouse types'),
+      'icon' => 'fas fa-building',
+      'url' => 'warehouses/settings/warehouse-types',
+    ]);
+    $settingsApp->addSetting($this, [
+      'title' => $this->translate('Warehouse locations types'),
+      'icon' => 'fas fa-building',
+      'url' => 'warehouses/settings/warehouse-location-types',
+    ]);
+
+    /** @var \Hubleto\App\Community\Desktop\AppMenuManager */
     $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'warehouses', $this->translate('Warehouses'), 'fas fa-warehouse');
     $appMenu->addItem($this, 'warehouses/locations', $this->translate('Locations'), 'fas fa-pallet');

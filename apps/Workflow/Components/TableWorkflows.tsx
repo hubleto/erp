@@ -18,7 +18,8 @@ export default class TableWorkflows extends Table<TableWorkflowsProps, TableWork
   props: TableWorkflowsProps;
   state: TableWorkflowsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Workflow\\Loader::Components\\TableWorkflows';
+  translationContext: string = 'Hubleto\\App\\Community\\Workflow\\Loader\\Loader';
+  translationContextInner: string = 'Components\\TableWorkflows';
 
   constructor(props: TableWorkflowsProps) {
     super(props);

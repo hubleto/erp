@@ -22,7 +22,10 @@ class GetPermissions extends \Hubleto\Erp\Controllers\ApiController
     $roleId = $this->router()->urlParamAsInteger("roleId");
 
     try {
-      $mPermission = $this->getService(Permission::class);
+
+      /** @var Permission */
+      $mPermission = $this->getModel(Permission::class);
+
       $allPermissions = $mPermission->record->orderBy("permission", "asc")->get()->toArray();
 
       foreach ($allPermissions as $permission) { //@phpstan-ignore-line

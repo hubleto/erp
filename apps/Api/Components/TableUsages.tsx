@@ -20,7 +20,8 @@ export default class TableUsages extends HubletoTable<TableUsagesProps, TableUsa
   props: TableUsagesProps;
   state: TableUsagesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Api::Components\\TableUsages';
+  translationContext: string = 'Hubleto\\App\\Community\\Api\\Loader';
+  translationContextInner: string = 'Components\\TableUsages';
 
   constructor(props: TableUsagesProps) {
     super(props);

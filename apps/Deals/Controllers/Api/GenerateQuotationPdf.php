@@ -9,8 +9,12 @@ class GenerateQuotationPdf extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): ?array
   {
     $idDeal = $this->router()->urlParamAsInteger('idDeal');
-    $mDeal = $this->getService(Deal::class);
+
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
+
     $idDocument = $mDeal->generateQuotationPdf($idDeal);
+
     return [
       'idDocument' => $idDocument
     ];

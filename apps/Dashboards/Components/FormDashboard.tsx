@@ -14,7 +14,8 @@ export default class FormDashboard<P, S> extends HubletoForm<FormDashboardProps,
   props: FormDashboardProps;
   state: FormDashboardState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Dashboards\\Loader::Components\\FormDashboard';
+  translationContext: string = 'Hubleto\\App\\Community\\Dashboards\\Loader';
+  translationContextInner: string = 'Components\\FormDashboard';
 
   constructor(props: FormDashboardProps) {
     super(props);

@@ -20,10 +20,26 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
   props: FormProjectProps;
   state: FormProjectState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Projects::Components\\FormProject';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader';
+  translationContextInner: string = 'Components\\FormProject';
 
   constructor(props: FormProjectProps) {
     super(props);
+  }
+
+  onAfterFormInitialized(): void {
+    super.onAfterFormInitialized();
+
+    if (this.state.record.id > 0) {
+      this.setState({
+        tabs: [
+          { uid: 'default', title: <b>{this.translate('Project')}</b> },
+          { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
+          { uid: 'worksheet', title: this.translate('Worksheet') },
+          { uid: 'statistics', title: this.translate('Statistics') },
+        ]
+      })
+    }
   }
 
   getStateFromProps(props: FormProjectProps) {
@@ -31,16 +47,14 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Project')}</b> },
-        { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'worksheet', title: this.translate('Worksheet') },
-        { uid: 'statistics', title: this.translate('Statistics') },
         ...(this.getParentApp()?.getFormTabs() ?? [])
       ]
     }
   }
 
   getRecordFormUrl(): string {
-    return 'projects/' + this.state.record.id;
+    return 'projects/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   contentClassName(): string
@@ -72,22 +86,10 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
   }
 
   renderTopMenu(): JSX.Element {
-    const R = this.state.record;
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <WorkflowSelector
-          idWorkflow={R.id_workflow}
-          idWorkflowStep={R.id_workflow_step}
-          onWorkflowChange={(idWorkflow: number, idWorkflowStep: number) => {
-            this.updateRecord({id_workflow: idWorkflow, id_workflow_step: idWorkflowStep});
-          }}
-          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
-            this.updateRecord({id_workflow_step: idWorkflowStep});
-          }}
-        ></WorkflowSelector>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
+      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>}
+      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
     </>;
   }
 
@@ -121,6 +123,22 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
               {/* {this.inputWrapper('is_closed')} */}
             </div>
             <div className='flex-1'>
+              <div className='card card-info'>
+                <div className='card-header'>Tasks</div>
+                <div className='card-body'>
+                  <TableTasks
+                    tag={"table_project_task"}
+                    parentForm={this}
+                    uid={this.props.uid + "_table_project_task"}
+                    junctionTitle='Project'
+                    junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
+                    junctionSourceColumn='id_project'
+                    junctionSourceRecordId={R.id}
+                    junctionDestinationColumn='id_task'
+                    view='briefOverview'
+                  />
+                </div>
+              </div>
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('id_contact')}
               {this.inputWrapper('color')}

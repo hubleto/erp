@@ -68,7 +68,8 @@
 <body id="page-top">
   {% if (viewParams.showOnlyContentHtml) %} {{ contentHtml|raw }} {% else %}
 
-    <div id="app-launcher" onclick="lchr(false);"><div>
+    <div id="app-launcher" onclick="lchr(false);">
+      <div>
       <div class="app-launcher-header">
         <input placeholder="{{ translate("Search app...") }}" onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
       </div>
@@ -197,7 +198,7 @@
           <li class="mr-2 {# hidden #} lg:block">
             <button id="theme-toggle-btn" class="btn btn-transparent" onclick="toggleTheme();">
               <span class="icon"><i class="fas fa-sun"></i></span>
-            </a>
+            </button>
           </li>
           <li>
             <button class="btn btn-transparent btn-dropdown mr-2">
@@ -264,17 +265,23 @@
               {% endif %}
             {% endif %}
           {% endfor %}
+
+          {% if hubleto.router().getRoute() == 'desktop/' ~ sidebarGroup %}
+            {% set hasActivatedApp = true %}
+          {% endif %}
+
           {% if appBtns|length == 0 %}
           {% else %}
             <div class="sidebar-group {% if hasActivatedApp %} activated {% endif %}">
-              <div class="sidebar-group-title" id="sg_{{ sidebarGroup }}_btn"
+              <a class="sidebar-group-title block" id="sg_{{ sidebarGroup }}_btn"
                 onclick="
                   $('.sidebar-group').removeClass('activated');
                   $(this).closest('.sidebar-group').addClass('activated');
                 "
+                 href="{{ config.projectUrl }}/~/{{ sidebarGroup }}" data-pr-tooltip="{{ sidebarGroupData.title }}"
               >
                 <span class="text">{{ sidebarGroupData.title }}</span>
-              </div>
+              </a>
               <div id="sg_{{ sidebarGroup }}_btns" class="sidebar-group-btns">
                 <div class="inner">{{ appBtns|join('')|raw }}</div>
               </div>

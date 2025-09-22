@@ -3,7 +3,7 @@ appType: community
 sidebarGroup: finance
 rootUrlSlug: invoices
 name: Invoices
-icon: fas fa-receipt
+icon: fas fa-file-invoice
 highlight: Invoincing
 author:
   company: "wai.blue"

@@ -13,6 +13,7 @@ class Account extends \Hubleto\Erp\Model
   public string $table = 'accounting_account';
   public string $recordManagerClass = RecordManagers\Account::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupUrlAdd = 'chart-of-accounts/add';
 
   public array $relations = [
     'ACCOUNT_TYPE' => [ self::BELONGS_TO, AccountType::class, 'id_account_type', 'id'  ],

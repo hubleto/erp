@@ -7,8 +7,7 @@ class Accounts extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'accounting', 'content' => $this->translate('Accounting') ],
-      [ 'url' => 'accounting/accounts', 'content' => $this->translate('Chart of accounts') ],
+      [ 'url' => 'chart-of-accounts/accounts', 'content' => $this->translate('Accounts') ],
     ]);
   }
 

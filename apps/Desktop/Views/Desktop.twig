@@ -273,14 +273,15 @@
           {% if appBtns|length == 0 %}
           {% else %}
             <div class="sidebar-group {% if hasActivatedApp %} activated {% endif %}">
-              <div class="sidebar-group-title" id="sg_{{ sidebarGroup }}_btn"
+              <a class="sidebar-group-title block" id="sg_{{ sidebarGroup }}_btn"
                 onclick="
                   $('.sidebar-group').removeClass('activated');
                   $(this).closest('.sidebar-group').addClass('activated');
                 "
+                 href="{{ config.projectUrl }}/~/{{ sidebarGroup }}" data-pr-tooltip="{{ sidebarGroupData.title }}"
               >
                 <span class="text">{{ sidebarGroupData.title }}</span>
-              </div>
+              </a>
               <div id="sg_{{ sidebarGroup }}_btns" class="sidebar-group-btns">
                 <div class="inner">{{ appBtns|join('')|raw }}</div>
               </div>

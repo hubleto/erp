@@ -8,7 +8,6 @@
         "source": "https://github.com/hubleto/erp"
     },
     "require": {
-        "hubleto/terminal": "@dev",
         "hubleto/framework": "@dev",
         "defuse/php-encryption": "^2.4",
         "ddeboer/imap": "^1.21",

@@ -94,7 +94,9 @@
     },
     "Models\\Tag": {
         "Name": "Značka",
-        "Color": "Farba"
+        "Color": "Farba",
+        "Customer Tags": "",
+        "Add Customer Tag": ""
     },
     "Components\\FormActivity": {
         "Customer": "Zákazník"
@@ -103,5 +105,15 @@
         "Customer": "Zákazník",
         "End": "Ukončiť",
         "Start": "Štart"
+    },
+    "Controllers\\Activity": {
+        "Customers": "",
+        "Activities": ""
+    },
+    "Controllers\\Tags": {
+        "Settings": "",
+        "Customer Tags": "",
+        "Customers": "",
+        "Tags": ""
     }
 }

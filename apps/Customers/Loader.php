@@ -18,13 +18,10 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^customers\/api\/get-customer\/?$/' => Controllers\Api\GetCustomer::class,
-      // '/^customers\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
       '/^customers\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
 
       '/^customers(\/(?<recordId>\d+))?\/?$/' => Controllers\Customers::class,
       '/^customers\/add\/?$/' => ['controller' => Controllers\Customers::class, 'vars' => ['recordId' => -1]],
-      // '/^customers\/settings\/?$/' => Controllers\Settings::class,
-      '/^customers\/activities\/?$/' => Controllers\Activity::class,
       '/^customers\/tags\/?$/' => Controllers\Tags::class,
     ]);
 

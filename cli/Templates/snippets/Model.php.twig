@@ -41,10 +41,6 @@ class {{ model }} extends \Hubleto\Framework\Model
   // For more details see https://developer.hubleto.com/v0/docs/models/record-manager
   public string $recordManagerClass = RecordManagers\{{ model }}::class;
 
-  // Configuration of model's lookup behaviour
-  // For more details see https://developer.hubleto.com/v0/docs/models/lookups
-  public string $recordManagerClass = RecordManagers\{{ model }}::class;
-
   public ?string $lookupSqlValue = 'concat("{{ model }} #", {{ '{%' }}TABLE{{ '%}' }}.id)';
   public ?string $lookupUrlDetail = '{{ modelPluralFormKebab }}/{{ '{%' }}ID{{ '%}' }}';
 

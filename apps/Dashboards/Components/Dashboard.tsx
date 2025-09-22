@@ -17,7 +17,8 @@ export interface Panel {
 
 export interface DesktopDashboardProps {
   idDashboard: number,
-  panels: Array<Panel>
+  panels: Array<Panel>,
+  showAddNewPanelButton?: boolean,
 }
 
 export interface DesktopDashboardState {
@@ -220,15 +221,17 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
       <div className='block gap-2 md:grid md:grid-cols-6'>
         {panels.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
       </div>
-      <div>
-        <button
-          className='btn btn-add mt-2'
-          onClick={() => { this.setState({showIdPanel: -1}); }}
-        >
-          <span className='icon'><i className='fas fa-plus'></i></span>
-          <span className='text'>{this.translate('Add new panel')}</span>
-        </button>
-      </div>
+      {this.props.showAddNewPanelButton ?
+        <div>
+          <button
+            className='btn btn-add mt-2'
+            onClick={() => { this.setState({showIdPanel: -1}); }}
+          >
+            <span className='icon'><i className='fas fa-plus'></i></span>
+            <span className='text'>{this.translate('Add new panel')}</span>
+          </button>
+        </div>
+      : null}
       {this.state.showIdPanel != 0 ?
         <ModalForm
           uid='add_new_panel_modal'

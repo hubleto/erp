@@ -53,6 +53,7 @@ class Loader extends \Hubleto\Framework\App
 
   public function getSidebarGroups() {
     return $this->config()->getAsArray('sidebarGroups', [
+      'crm' => [ 'title' => $this->translate('CRM'), 'icon' => 'fas fa-id-card-clip' ],
       'addressbook' => [ 'title' => $this->translate('Addressbook'), 'icon' => 'fas fa-id-card-clip' ],
       'calendar' => [ 'title' => $this->translate('Calendar'), 'icon' => 'fas fa-calendar' ],
       // 'productivity' => [ 'title' => $this->translate('Productivity'), 'icon' => 'fas fa-list-check' ],

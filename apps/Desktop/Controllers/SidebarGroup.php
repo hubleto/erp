@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Desktop\Controllers;
 
+use Hubleto\App\Community\Desktop\Loader;
 class SidebarGroup extends \Hubleto\Erp\Controller
 {
   public bool $requiresAuthenticatedUser = true;
@@ -12,7 +13,12 @@ class SidebarGroup extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->viewParams['groupTitle'] = 'App group ' . $this->viewParams['group'];
+    /** @var Loader */
+    $desktopApp = $this->getService(Loader::class);
+
+    $sidebarGroups = $desktopApp->getSidebarGroups();
+    $sidebarGroup = $sidebarGroups[$this->viewParams['group']] ?? [];
+    $this->viewParams['sidebarGroup'] = $sidebarGroup;
 
     $apps = [];
 

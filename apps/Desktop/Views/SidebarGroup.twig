@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between align-items-center">
-  <h1 class="app-main-title">{{ translate(viewParams.groupTitle) }}</h1>
+  <h1 class="app-main-title">{{ translate(viewParams.sidebarGroup.title) }}</h1>
 
   <div>
     {% for app in viewParams.apps %}
@@ -11,7 +11,8 @@
 
     <div class="mt-4">
       <app-dashboards-dashboard
-        json:panels='{{ viewParams.boards|json_encode|raw }}'>
-      </app-dashboards-dashboard>
+        json:panels='{{ viewParams.boards|json_encode|raw }}'
+        bool:show-add-new-panel-button='false'
+      ></app-dashboards-dashboard>
     </div>
 </div>

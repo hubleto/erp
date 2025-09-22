@@ -24,8 +24,9 @@
 <div class="mt-2">
   <app-dashboards-dashboard
     int:id-dashboard='{{ dashboard.id }}'
-    json:panels='{{ dashboard.PANELS|json_encode|raw }}'>
-  </app-dashboards-dashboard>
+    json:panels='{{ dashboard.PANELS|json_encode|raw }}'
+    bool:show-add-new-panel-button='true'
+  ></app-dashboards-dashboard>
 </div>
 
 <div class="mx-auto pt-20">

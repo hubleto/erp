@@ -96,6 +96,7 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
           <div className="card-body">
             <Table model="Hubleto/App/Community/Transactions/Models/Reconciliation" formProps={{
               model: 'Hubleto/App/Community/Transactions/Models/Reconciliation',
+              description: { defaultValues: { id_transaction: R.id }, inputs: { 'id_transaction': { readonly: true } } }
             }} uid={this.props.uid} customEndpointParams={{ idTransaction: R.id}}></Table>
           </div>
         </div>

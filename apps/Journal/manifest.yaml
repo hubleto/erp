@@ -3,7 +3,7 @@ appType: community
 sidebarGroup: finance
 rootUrlSlug: journal/entries
 name: Journal
-icon: fas fa-receipt
+icon: fas fa-book
 highlight: Journal
 author:
   company: "wai.blue"

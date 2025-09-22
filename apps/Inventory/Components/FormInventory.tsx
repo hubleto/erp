@@ -14,7 +14,7 @@ export default class FormInventory<P, S> extends HubletoForm<FormInventoryProps,
   props: FormInventoryProps;
   state: FormInventoryState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Inventory';
+  translationContext: string = 'Hubleto\\App\\Community\\Inventory\\Loader';
   translationContextInner: string = 'Components\\FormInventory';
 
   constructor(props: FormInventoryProps) {

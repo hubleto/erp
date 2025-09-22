@@ -19,7 +19,7 @@ export default class TableEventVenues extends HubletoTable<TableEventVenuesProps
   props: TableEventVenuesProps;
   state: TableEventVenuesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Events';
+  translationContext: string = 'Hubleto\\App\\Community\\Events\\Loader';
   translationContextInner: string = 'Components\\TableEventVenues';
 
   constructor(props: TableEventVenuesProps) {

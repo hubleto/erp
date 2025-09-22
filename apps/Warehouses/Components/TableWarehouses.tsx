@@ -20,7 +20,7 @@ export default class FormWarehouses extends HubletoTable<TableWarehousesProps, T
   props: TableWarehousesProps;
   state: TableWarehousesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Warehouses';
+  translationContext: string = 'Hubleto\\App\\Community\\Warehouses\\Loader';
   translationContextInner: string = 'Components\\FormWarehouses';
 
   constructor(props: TableWarehousesProps) {

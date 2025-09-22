@@ -20,7 +20,7 @@ export default class TableTransaction extends HubletoTable<TableTransactionProps
   props: TableTransactionProps;
   state: TableTransactionState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Inventory';
+  translationContext: string = 'Hubleto\\App\\Community\\Inventory\\Loader';
   translationContextInner: string = 'Components\\TableTransaction';
 
   constructor(props: TableTransactionProps) {

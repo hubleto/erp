@@ -19,7 +19,7 @@ export default class TableMessages extends HubletoTable<TableMessagesProps, Tabl
   props: TableMessagesProps;
   state: TableMessagesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Discussions';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions\\Loader';
   translationContextInner: string = 'Components\\TableMessages';
 
   constructor(props: TableMessagesProps) {

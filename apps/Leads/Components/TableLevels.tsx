@@ -20,7 +20,7 @@ export default class TableLevels extends HubletoTable<TableLevelsProps, TableLev
   props: TableLevelsProps;
   state: TableLevelsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Leads';
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
   translationContextInner: string = 'Components\\TableLevels';
 
   constructor(props: TableLevelsProps) {

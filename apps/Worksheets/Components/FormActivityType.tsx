@@ -14,7 +14,7 @@ export default class FormActivityType<P, S> extends HubletoForm<FormActivityType
   props: FormActivityTypeProps;
   state: FormActivityTypeState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Worksheets';
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets\\Loader';
   translationContextInner: string = 'Components\\FormActivityType';
 
   constructor(props: FormActivityTypeProps) {

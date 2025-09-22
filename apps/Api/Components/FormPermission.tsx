@@ -13,7 +13,7 @@ export default class FormPermission<P, S> extends HubletoForm<FormPermissionProp
   props: FormPermissionProps;
   state: FormPermissionState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Api';
+  translationContext: string = 'Hubleto\\App\\Community\\Api\\Loader';
   translationContextInner: string = 'Components\\FormPermission';
 
   constructor(props: FormPermissionProps) {

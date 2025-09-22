@@ -20,7 +20,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
   props: FormProjectProps;
   state: FormProjectState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Projects';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader';
   translationContextInner: string = 'Components\\FormProject';
 
   constructor(props: FormProjectProps) {

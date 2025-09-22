@@ -17,7 +17,7 @@ export default class FormReport<P, S> extends HubletoForm<FormReportProps, FormR
   props: FormReportProps;
   state: FormReportState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Reports';
+  translationContext: string = 'Hubleto\\App\\Community\\Reports\\Loader';
   translationContextInner: string = 'Components\\FormReport';
 
   constructor(props: FormReportProps) {

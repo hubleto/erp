@@ -19,7 +19,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
   props: FormWorkflowProps;
   state: FormWorkflowState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Workflow\\Loader';
+  translationContext: string = 'Hubleto\\App\\Community\\Workflow\\Loader\\Loader';
   translationContextInner: string = 'Components\\FormWorkflow';
 
   constructor(props: FormWorkflowProps) {

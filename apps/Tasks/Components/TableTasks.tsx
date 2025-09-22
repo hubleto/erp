@@ -20,7 +20,7 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
   props: TableTasksProps;
   state: TableTasksState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Tasks';
+  translationContext: string = 'Hubleto\\App\\Community\\Tasks\\Loader';
   translationContextInner: string = 'Components\\TableTasks';
 
   constructor(props: TableTasksProps) {

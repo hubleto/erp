@@ -20,7 +20,7 @@ export default class TablePhases extends HubletoTable<TablePhasesProps, TablePha
   props: TablePhasesProps;
   state: TablePhasesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Projects';
+  translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader';
   translationContextInner: string = 'Components\\TablePhases';
 
   constructor(props: TablePhasesProps) {

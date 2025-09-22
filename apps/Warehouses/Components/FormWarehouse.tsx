@@ -15,7 +15,7 @@ export default class FormWarehouse<P, S> extends HubletoForm<FormWarehouseProps,
   props: FormWarehouseProps;
   state: FormWarehouseState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Warehouses';
+  translationContext: string = 'Hubleto\\App\\Community\\Warehouses\\Loader';
   translationContextInner: string = 'Components\\FormWarehouse';
 
   constructor(props: FormWarehouseProps) {

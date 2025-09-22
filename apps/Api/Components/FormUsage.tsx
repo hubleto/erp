@@ -13,7 +13,7 @@ export default class FormUsage<P, S> extends HubletoForm<FormUsageProps, FormUsa
   props: FormUsageProps;
   state: FormUsageState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Api';
+  translationContext: string = 'Hubleto\\App\\Community\\Api\\Loader';
   translationContextInner: string = 'Components\\FormUsage';
 
   constructor(props: FormUsageProps) {

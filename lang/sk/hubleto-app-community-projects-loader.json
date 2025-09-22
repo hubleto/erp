@@ -2,7 +2,7 @@
     "manifest": {
         "Projects": "Projekty",
         "Project management": "Projektový manažment",
-        "Phases": ""
+        "Phases": "Fázy"
     },
     "root": {
         "Projects": "Projekty",
@@ -27,9 +27,9 @@
         "Color": "Farba",
         "Notes": "Poznámky",
         "Created": "Vytvorený",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": ""
+        "Open \/ Closed": "Otvorené \/ Zatvorené",
+        "Open": "Otvorené",
+        "All": "Všetky"
     },
     "Models\\Phase": {
         "Name": "Názov",
@@ -37,18 +37,22 @@
         "Color": "Farba"
     },
     "Components\\FormProject": {
-        "Projects": "Projekty"
+        "Projects": "Projekty",
+        "Worksheet": "Výkaz práce",
+        "Project": "Projekt",
+        "Tasks": "Úloha",
+        "Statistics": "Štatistiky"
     },
     "Models\\ProjectOrder": {
-        "Project": "",
-        "Order": ""
+        "Project": "Projekt",
+        "Order": "Objednávka"
     },
     "Models\\ProjectTask": {
-        "Project": "",
-        "Task": ""
+        "Project": "Projekt",
+        "Task": "Úloha"
     },
     "Models\\ProjectDeal": {
-        "Project": "",
-        "Deal": ""
+        "Project": "Projekt",
+        "Deal": "Deal"
     }
 }

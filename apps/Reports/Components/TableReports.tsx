@@ -20,7 +20,7 @@ export default class TableReports extends HubletoTable<TableReportsProps, TableR
   props: TableReportsProps;
   state: TableReportsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Reports';
+  translationContext: string = 'Hubleto\\App\\Community\\Reports\\Loader';
   translationContextInner: string = 'Components\\TableReports';
 
   constructor(props: TableReportsProps) {

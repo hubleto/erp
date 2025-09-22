@@ -17,7 +17,7 @@ export default class TableDiscussions extends HubletoTable<TableDiscussionsProps
   props: TableDiscussionsProps;
   state: TableDiscussionsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Discussions';
+  translationContext: string = 'Hubleto\\App\\Community\\Discussions\\Loader';
   translationContextInner: string = 'Components\\TableDiscussions';
 
   constructor(props: TableDiscussionsProps) {

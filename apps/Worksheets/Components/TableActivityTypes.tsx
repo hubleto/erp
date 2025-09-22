@@ -20,7 +20,7 @@ export default class TableActivityTypes extends HubletoTable<TableActivityTypesP
   props: TableActivityTypesProps;
   state: TableActivityTypesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Worksheets';
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets\\Loader';
   translationContextInner: string = 'Components\\TableActivityTypes';
 
   constructor(props: TableActivityTypesProps) {

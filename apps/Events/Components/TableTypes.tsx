@@ -20,7 +20,7 @@ export default class TableTypes extends HubletoTable<TableTypesProps, TableTypes
   props: TableTypesProps;
   state: TableTypesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Events';
+  translationContext: string = 'Hubleto\\App\\Community\\Events\\Loader';
   translationContextInner: string = 'Components\\TableTypes';
 
   constructor(props: TableTypesProps) {

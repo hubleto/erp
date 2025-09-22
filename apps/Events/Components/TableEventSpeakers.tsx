@@ -20,7 +20,7 @@ export default class TableEventSpeakers extends HubletoTable<TableEventSpeakersP
   props: TableEventSpeakersProps;
   state: TableEventSpeakersState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Events';
+  translationContext: string = 'Hubleto\\App\\Community\\Events\\Loader';
   translationContextInner: string = 'Components\\TableEventSpeakers';
 
   constructor(props: TableEventSpeakersProps) {

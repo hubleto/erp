@@ -20,7 +20,7 @@ export default class TableAgendas extends HubletoTable<TableAgendasProps, TableA
   props: TableAgendasProps;
   state: TableAgendasState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Events';
+  translationContext: string = 'Hubleto\\App\\Community\\Events\\Loader';
   translationContextInner: string = 'Components\\TableAgendas';
 
   constructor(props: TableAgendasProps) {

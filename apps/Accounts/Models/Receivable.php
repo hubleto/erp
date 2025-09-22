@@ -12,7 +12,7 @@ class Receivable extends \Hubleto\Erp\Model
 {
   public string $table = 'accounts_receivable';
   public string $recordManagerClass = RecordManagers\Receivable::class;
-  public ?string $lookupSqlValue = 'concat({%TABLE%}.id_transaction, \' \', \' (\', {%TABLE%}.amount, \')\')';
+  public ?string $lookupSqlValue = 'concat({%TABLE%}.amount, \' \', \' (\', {%TABLE%}.status, \')\')';
 
   public array $relations = [
   ];
@@ -20,14 +20,14 @@ class Receivable extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'invoice_date' => new Date($this, $this->translate("Invoice date"))->setRequired(),
-      'due_date' => new Date($this, $this->translate("Due date"))->setRequired(),
-      'amount' => new Integer($this, $this->translate("Amount"))->setRequired(),
+      'invoice_date' => new Date($this, $this->translate("Invoice date")),
+      'due_date' => new Date($this, $this->translate("Due date")),
+      'amount' => new Integer($this, $this->translate("Amount"))->setRequired(), // todo: set currency
       'status' => new Integer($this, $this->translate("Status"))->setEnumValues([
         0 => 'Pending',
         1 => 'Paid',
         2 => 'Overdue',
-      ])->setRequired(),
+      ])->setDefaultValue(0),
       'description' => new Varchar($this, $this->translate("Description")),
     ]);
   }

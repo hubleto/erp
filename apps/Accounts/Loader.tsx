@@ -1,16 +1,16 @@
 import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
-import TableTransactions from "@hubleto/apps/Transactions/Components/TableTransactions";
-import FormTransaction from "@hubleto/apps/Transactions/Components/FormTransaction";
+import TableAccounts from "./Components/TableAccounts";
+import FormAccount from './Components/FormAccount';
 
-class TransactionsApp extends HubletoApp {
+class AccountsApp extends HubletoApp {
   init() {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('TableTransactions', TableTransactions);
-    globalThis.main.registerReactComponent('FormTransaction', FormTransaction);
+    globalThis.main.registerReactComponent('FormAccount', FormAccount);
+    globalThis.main.registerReactComponent('TableAccounts', TableAccounts);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Transactions', new TransactionsApp());
+globalThis.main.registerApp('Hubleto/App/Community/Accounts', new AccountsApp());

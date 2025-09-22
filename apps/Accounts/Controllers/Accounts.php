@@ -2,19 +2,19 @@
 
 namespace Hubleto\App\Community\Accounts\Controllers;
 
-class Payable extends \Hubleto\Erp\Controller
+class Accounts extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'accounts/payable', 'content' => $this->translate('Payable') ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Community:Accounts/payable.twig');
+
+    $this->setView('@Hubleto:App:Community:Accounts/accounts.twig');
   }
 
 }

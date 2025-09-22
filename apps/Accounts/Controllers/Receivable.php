@@ -7,7 +7,7 @@ class Receivable extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'receivable', 'content' => $this->translate('Receivable') ],
+      [ 'url' => 'accounts/receivable', 'content' => $this->translate('Receivable') ],
     ]);
   }
 

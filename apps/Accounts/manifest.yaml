@@ -3,7 +3,7 @@ appType: community
 sidebarGroup: finance
 rootUrlSlug: accounts
 name: Accounts
-icon: fas fa-receipt
+icon: fas fa-money-bill-transfer
 highlight: Accounts
 author:
   company: "wai.blue"

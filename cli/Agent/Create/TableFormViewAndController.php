@@ -95,50 +95,51 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
       "</a>",
     ];
 
-    $codeLoaderTsxLine1Inserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Loader.tsx', '//@hubleto-cli:imports', $codeLoaderTsxLine1);
-    $codeLoaderTsxLine2Inserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Loader.tsx', '//@hubleto-cli:register-components', $codeLoaderTsxLine2);
-    $codeRouteInserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Loader.php', '//@hubleto-cli:routes', $codeRoute);
-    $codeButtonInserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Views/Home.twig', '{# @hubleto-cli:buttons #}', $codeButton);
+    $codeLoaderTsxLine1Inserted = $this->terminal()->insertCodeToFile($app->srcFolder . '/Loader.tsx', '//@hubleto-cli:imports', $codeLoaderTsxLine1);
+    $codeLoaderTsxLine2Inserted = $this->terminal()->insertCodeToFile($app->srcFolder . '/Loader.tsx', '//@hubleto-cli:register-components', $codeLoaderTsxLine2);
+    $codeRouteInserted = $this->terminal()->insertCodeToFile($app->srcFolder . '/Loader.php', '//@hubleto-cli:routes', $codeRoute);
+    $codeButtonInserted = $this->terminal()->insertCodeToFile($app->srcFolder . '/Views/Home.twig', '{# @hubleto-cli:buttons #}', $codeButton);
 
-    \Hubleto\Terminal::white("\n");
-    \Hubleto\Terminal::cyan("Table, form, view and controller for model '{$model}' in '{$appNamespace}' created successfully.\n");
+    $this->terminal()->white("\n");
+    $this->terminal()->cyan("Table, form, view and controller for model '{$model}' in '{$appNamespace}' created successfully.\n");
 
     if (!$codeLoaderTsxLine1Inserted || !$codeLoaderTsxLine2Inserted) {
-      \Hubleto\Terminal::yellow("⚠ Failed to add some code automatically\n");
-      \Hubleto\Terminal::yellow("⚠  -> Add the Table component into {$app->srcFolder}/Loader.tsx\n");
-      \Hubleto\Terminal::colored("cyan", "black", "Add to Loader.tsx:");
-      \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeLoaderTsxLine1));
-      \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeLoaderTsxLine2));
-      \Hubleto\Terminal::yellow("\n");
+      $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
+      $this->terminal()->yellow("⚠  -> Add the Table component into {$app->srcFolder}/Loader.tsx\n");
+      $this->terminal()->colored("cyan", "black", "Add to Loader.tsx:");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeLoaderTsxLine1));
+      $this->terminal()->colored("cyan", "black", join("\n", $codeLoaderTsxLine2));
+      $this->terminal()->yellow("\n");
     }
 
     if (!$codeRouteInserted) {
-      \Hubleto\Terminal::yellow("⚠ Failed to add some code automatically\n");
-      \Hubleto\Terminal::yellow("⚠  -> Add the route in the `init()` method of {$app->srcFolder}/Loader.php\n");
-      \Hubleto\Terminal::colored("cyan", "black", "Add to Loader.php->init():");
-      \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeRoute));
-      \Hubleto\Terminal::yellow("\n");
+      $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
+      $this->terminal()->yellow("⚠  -> Add the route in the `init()` method of {$app->srcFolder}/Loader.php\n");
+      $this->terminal()->colored("cyan", "black", "Add to Loader.php->init():");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeRoute));
+      $this->terminal()->yellow("\n");
     }
 
     if (!$codeButtonInserted) {
-      \Hubleto\Terminal::yellow("⚠ Failed to add some code automatically\n");
-      \Hubleto\Terminal::yellow("⚠  -> Add button to any view in {$app->srcFolder}/Views, e.g. Home.twig\n");
-      \Hubleto\Terminal::colored("cyan", "black", "Add to {$app->srcFolder}/Views/Home.twig:");
-      \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeButton));
-      \Hubleto\Terminal::white("\n");
+      $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
+      $this->terminal()->yellow("⚠  -> Add button to any view in {$app->srcFolder}/Views, e.g. Home.twig\n");
+      $this->terminal()->colored("cyan", "black", "Add to {$app->srcFolder}/Views/Home.twig:");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeButton));
+      $this->terminal()->white("\n");
     }
 
-    if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to re-install the app?')) {
+    if ($noPrompt || $this->terminal()->confirm('Do you want to re-install the app?')) {
       $this->getService(\Hubleto\Erp\Cli\Agent\App\Install::class)
+        ->setTerminalOutput($this->terminal()->output)
         ->setArguments($this->arguments)
         ->run()
       ;
     }
 
-    \Hubleto\Terminal::yellow("⚠  NEXT STEPS:\n");
-    \Hubleto\Terminal::yellow("⚠   -> Run `npm run build-js` in `{$this->env()->srcFolder}` to compile Javascript.\n");
-    \Hubleto\Terminal::colored("cyan", "black", "Run: npm run build-js");
-    \Hubleto\Terminal::colored("cyan", "black", "And then open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
+    $this->terminal()->yellow("⚠  NEXT STEPS:\n");
+    $this->terminal()->yellow("⚠   -> Run `npm run build-js` in `{$this->env()->srcFolder}` to compile Javascript.\n");
+    $this->terminal()->colored("cyan", "black", "Run: npm run build-js");
+    $this->terminal()->colored("cyan", "black", "And then open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
   }
 
 }

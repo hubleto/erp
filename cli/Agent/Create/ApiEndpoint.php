@@ -49,23 +49,23 @@ class ApiEndpoint extends \Hubleto\Erp\Cli\Agent\Command
     file_put_contents($app->srcFolder . '/Controllers/Api/' . $endpointPascalCase . '.php', $this->renderer()->renderView('@snippets/ApiController.php.twig', $tplVars));
 
     $codeRoute = [ "\$this->router()->get([ '/^{$app->manifest['rootUrlSlug']}\/api\/{$endpoint}\/?$/' => Controllers\\Api\\{$endpointPascalCase}::class ]);" ];
-    $codeRouteInserted = \Hubleto\Terminal::insertCodeToFile($app->srcFolder . '/Loader.php', '//@hubleto-cli:routes', $codeRoute);
+    $codeRouteInserted = $this->terminal()->insertCodeToFile($app->srcFolder . '/Loader.php', '//@hubleto-cli:routes', $codeRoute);
 
-    \Hubleto\Terminal::white("\n");
-    \Hubleto\Terminal::cyan("REST API endpoint '{$endpoint}' in '{$appNamespace}' created successfully.\n");
+    $this->terminal()->white("\n");
+    $this->terminal()->cyan("REST API endpoint '{$endpoint}' in '{$appNamespace}' created successfully.\n");
 
     if (!$codeRouteInserted) {
-      \Hubleto\Terminal::yellow("⚠ Failed to add some code automatically\n");
-      \Hubleto\Terminal::yellow("⚠  -> Add the route in the `init()` method of {$app->srcFolder}/Loader.php\n");
-      \Hubleto\Terminal::colored("cyan", "black", "Add to Loader.php->init():");
-      \Hubleto\Terminal::colored("cyan", "black", join("\n", $codeRoute));
-      \Hubleto\Terminal::yellow("\n");
+      $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
+      $this->terminal()->yellow("⚠  -> Add the route in the `init()` method of {$app->srcFolder}/Loader.php\n");
+      $this->terminal()->colored("cyan", "black", "Add to Loader.php->init():");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeRoute));
+      $this->terminal()->yellow("\n");
     }
 
-    \Hubleto\Terminal::yellow("💡  TIPS:\n");
-    \Hubleto\Terminal::yellow("💡  -> Test the endpoint\n");
-    \Hubleto\Terminal::colored("cyan", "black", "Open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/api/{$endpoint}");
-    \Hubleto\Terminal::yellow("\n");
+    $this->terminal()->yellow("💡  TIPS:\n");
+    $this->terminal()->yellow("💡  -> Test the endpoint\n");
+    $this->terminal()->colored("cyan", "black", "Open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/api/{$endpoint}");
+    $this->terminal()->yellow("\n");
   }
 
 }

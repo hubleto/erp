@@ -8,12 +8,12 @@ if (!isset($config) || !is_array($config)) $config = [];
 
 $config['sessionSalt'] = 'hubleto-cli-agent';
 
-$main = new \Hubleto\Erp\Loader($config);
-$main->init();
+$hubleto = new \Hubleto\Erp\Loader($config);
+$hubleto->init();
 
 // MAIN code
 
-\Hubleto\Terminal::green("Hubleto CLI agent (main version: " . \Composer\InstalledVersions::getPrettyVersion("hubleto/erp") . ").\n");
+$hubleto->terminal()->green("Hubleto CLI agent (main version: " . \Composer\InstalledVersions::getPrettyVersion("hubleto/erp") . ").\n");
 
 $action = (string) ($argv[1] ?? '');
 
@@ -21,51 +21,51 @@ if (!empty($action)) {
   try {
     $command = null;
     switch ($action) {
-      case 'help': $command = $main->getService(\Hubleto\Erp\Cli\Agent\CommandHelp::class)->setArguments($argv); break;
-      case 'init': $command = $main->getService(\Hubleto\Erp\Cli\Agent\CommandInit::class)->setArguments($argv); break;
+      case 'help': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\CommandHelp::class)->setArguments($argv); break;
+      case 'init': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\CommandInit::class)->setArguments($argv); break;
       case 'app':
         switch ($argv[2]) {
-          case 'list': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\ListInstalled::class)->setArguments($argv); break;
-          case 'install': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\Install::class)->setArguments($argv); break;
-          case 'disable': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\Disable::class)->setArguments($argv); break;
-          case 'reset-all': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\ResetAll::class)->setArguments($argv); break;
-          case 'create': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\Create::class)->setArguments($argv); break;
+          case 'list': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\App\ListInstalled::class)->setArguments($argv); break;
+          case 'install': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\App\Install::class)->setArguments($argv); break;
+          case 'disable': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\App\Disable::class)->setArguments($argv); break;
+          case 'reset-all': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\App\ResetAll::class)->setArguments($argv); break;
+          case 'create': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\App\Create::class)->setArguments($argv); break;
         }
       break;
       case 'debug':
         switch ($argv[2]) {
-          case 'test-oauth': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Debug\TestOauth::class)->setArguments($argv); break;
-          case 'router': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Debug\Router::class)->setArguments($argv); break;
+          case 'test-oauth': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Debug\TestOauth::class)->setArguments($argv); break;
+          case 'router': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Debug\Router::class)->setArguments($argv); break;
         }
       break;
       case 'create':
         switch ($argv[2]) {
-          case 'app': $command = $main->getService(\Hubleto\Erp\Cli\Agent\App\Create::class)->setArguments($argv); break;
-          case 'model': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\Model::class)->setArguments($argv); break;
-          case 'controller': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\Controller::class)->setArguments($argv); break;
-          case 'view': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\View::class)->setArguments($argv); break;
-          case 'mvc': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\TableFormViewAndController::class)->setArguments($argv); break;
-          case 'api': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Create\ApiEndpoint::class)->setArguments($argv); break;
+          case 'app': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\App\Create::class)->setArguments($argv); break;
+          case 'model': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Create\Model::class)->setArguments($argv); break;
+          case 'controller': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Create\Controller::class)->setArguments($argv); break;
+          case 'view': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Create\View::class)->setArguments($argv); break;
+          case 'mvc': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Create\TableFormViewAndController::class)->setArguments($argv); break;
+          case 'api': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Create\ApiEndpoint::class)->setArguments($argv); break;
         }
       break;
       case 'project':
         switch ($argv[2]) {
-          case 'init': $command = $main->getService(\Hubleto\Erp\Cli\Agent\CommandInit::class)->setArguments($argv); break;
-          case 'generate-demo-data': $command = $main->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->setArguments($argv); break;
+          case 'init': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\CommandInit::class)->setArguments($argv); break;
+          case 'generate-demo-data': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->setArguments($argv); break;
         }
       break;
     }
 
     if ($command === null) {
-      \Hubleto\Terminal::red("Don't know what to do.\n");
+      $hubleto->terminal()->red("Don't know what to do.\n");
     } else {
       $command->run();
     }
   } catch (\Throwable $e) {
-    \Hubleto\Terminal::red("{$e->getMessage()}\n");
-    \Hubleto\Terminal::red($e->getTraceAsString()."\n");
+    $hubleto->terminal()->red("{$e->getMessage()}\n");
+    $hubleto->terminal()->red($e->getTraceAsString()."\n");
   }
 } else {
-  \Hubleto\Terminal::green("Usage: php hubleto <command>\n");
-  \Hubleto\Terminal::green("Example: php hubleto help\n");
+  $hubleto->terminal()->green("Usage: php hubleto <command>\n");
+  $hubleto->terminal()->green("Example: php hubleto help\n");
 }

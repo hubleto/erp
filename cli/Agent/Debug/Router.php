@@ -14,18 +14,18 @@ class Router extends \Hubleto\Erp\Cli\Agent\Command
     if (empty($routeToDebug)) {
       $routes = $this->router()->getRoutes(\Hubleto\Erp\Router::HTTP_GET);
 
-      \Hubleto\Terminal::cyan("Available routes (Route -> Controller):\n");
+      $this->terminal()->cyan("Available routes (Route -> Controller):\n");
       foreach ($routes as $route => $controller) {
-        \Hubleto\Terminal::cyan("  {$route} -> {$controller}\n");
+        $this->terminal()->cyan("  {$route} -> {$controller}\n");
       }
     } else {
-      \Hubleto\Terminal::cyan("Debugging route '" . $routeToDebug . "':\n");
+      $this->terminal()->cyan("Debugging route '" . $routeToDebug . "':\n");
       $controller = $this->router()->findController(\Hubleto\Erp\Router::HTTP_GET, $routeToDebug);
       $variables = $this->router()->extractRouteVariables(\Hubleto\Erp\Router::HTTP_GET, $routeToDebug);
-      \Hubleto\Terminal::cyan("  - Controller: " . $controller . "\n");
-      \Hubleto\Terminal::cyan("  - Variables:\n");
+      $this->terminal()->cyan("  - Controller: " . $controller . "\n");
+      $this->terminal()->cyan("  - Variables:\n");
       foreach ($variables as $varName => $varValue) {
-        \Hubleto\Terminal::cyan("      {$varName} = {$varValue}\n");
+        $this->terminal()->cyan("      {$varName} = {$varValue}\n");
       }
     }
 

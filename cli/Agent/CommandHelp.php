@@ -6,6 +6,6 @@ class CommandHelp extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
-    \Hubleto\Terminal::cyan((string) file_get_contents(__DIR__ . "/help.md"));
+    $this->terminal()->cyan((string) file_get_contents(__DIR__ . "/help.md"));
   }
 }

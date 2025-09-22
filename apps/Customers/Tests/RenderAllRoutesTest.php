@@ -8,12 +8,12 @@ final class RenderAllRoutesTest extends \Hubleto\Erp\TestCase
 
   public function testModelCruds(): void
   {
-    $this->testModelCrud(Customer::class, 'customers');
+    $this->_testModelCrud(Customer::class, 'customers');
   }
 
   public function testRoutesContainAppMainTitle(): void
   {
-    $this->testRouteContainsAppMainTitle('customers/tags');
+    $this->_testRouteContainsAppMainTitle('customers/tags');
   }
 
   // public function testRoutesRendersJson(): void

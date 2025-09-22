@@ -118,19 +118,20 @@ class Create extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->createApp($appNamespace, $appRepositoryFolder . '/' . $appName);
 
-    \Hubleto\Terminal::cyan("App {$appNamespace} created successfully.\n");
+    $this->terminal()->cyan("App {$appNamespace} created successfully.\n");
 
-    if ($noPrompt || \Hubleto\Terminal::confirm('Do you want to install the app now?')) {
+    if ($noPrompt || $this->terminal()->confirm('Do you want to install the app now?')) {
       $this->getService(\Hubleto\Erp\Cli\Agent\App\Install::class)
+        ->setTerminalOutput($this->terminal()->output)
         ->setArguments($this->arguments)
         ->run()
       ;
     }
 
-    \Hubleto\Terminal::yellow("💡  TIPS:\n");
-    \Hubleto\Terminal::yellow("💡  -> Test the app in browser: {$this->env()->projectUrl}/" . strtolower($appName) . "\n");
-    \Hubleto\Terminal::yellow("💡  -> Run command below to add your first model.\n");
-    \Hubleto\Terminal::colored("cyan", "black", "Run: php hubleto create model {$appNamespace} {$appName}FirstModel");
+    $this->terminal()->yellow("💡  TIPS:\n");
+    $this->terminal()->yellow("💡  -> Test the app in browser: {$this->env()->projectUrl}/" . strtolower($appName) . "\n");
+    $this->terminal()->yellow("💡  -> Run command below to add your first model.\n");
+    $this->terminal()->colored("cyan", "black", "Run: php hubleto create model {$appNamespace} {$appName}FirstModel");
   }
 
 }

@@ -4,6 +4,9 @@
 
 namespace Hubleto\Erp\Cli\Agent;
 
+use Hubleto\Framework\Interfaces\TerminalInterface;
+use Hubleto\Framework\Terminal;
+
 class Command extends \Hubleto\Framework\Core
 {
 
@@ -44,5 +47,12 @@ class Command extends \Hubleto\Framework\Core
     $this->arguments = $arguments;
     return $this;
   }
+
+  public function setTerminalOutput(mixed $output): Command
+  {
+    $this->terminal()->setOutput($output);
+    return $this;
+  }
+
 
 }

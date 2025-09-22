@@ -9,6 +9,6 @@ class Disable extends \Hubleto\Erp\Cli\Agent\Command
     $appNamespace = $this->appManager()->sanitizeAppNamespace((string) ($this->arguments[3] ?? ''));
 
     $this->appManager()->disableApp($appNamespace);
-    \Hubleto\Terminal::cyan("{$appNamespace} disabled successfully.\n");
+    $this->terminal()->cyan("{$appNamespace} disabled successfully.\n");
   }
 }

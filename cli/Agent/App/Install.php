@@ -10,12 +10,12 @@ class Install extends \Hubleto\Erp\Cli\Agent\Command
     $forceInstall = (bool) ($this->arguments[4] ?? false);
 
     if (empty($appNamespace)) {
-      \Hubleto\Terminal::red("What app you want to install? Usage: php hubleto app install <APP_NAME>\n");
+      $this->terminal()->red("What app you want to install? Usage: php hubleto app install <APP_NAME>\n");
     }
 
     require_once($this->env()->projectFolder . "/ConfigEnv.php");
 
     $this->appManager()->installApp(1, $appNamespace, [], $forceInstall);
-    \Hubleto\Terminal::cyan("{$appNamespace} installed successfully.\n");
+    $this->terminal()->cyan("{$appNamespace} installed successfully.\n");
   }
 }

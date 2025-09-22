@@ -26,8 +26,8 @@ class TestOauth extends \Hubleto\Erp\Cli\Agent\Command
     $redirectUri = (string) ($this->arguments[6] ?? '');
 
     if (empty($clientId) || empty($clientSecret) || empty($serverBaseUrl) || empty($redirectUri)) {
-      \Hubleto\Terminal::white("Usage:\n");
-      \Hubleto\Terminal::white("  php hubleto debug test-oauth <clientId> <clientSecret> <serverBaseUrl> <redirectUri>\n");
+      $this->terminal()->white("Usage:\n");
+      $this->terminal()->white("  php hubleto debug test-oauth <clientId> <clientSecret> <serverBaseUrl> <redirectUri>\n");
     }
 
     $provider = new MyProvider([
@@ -59,9 +59,9 @@ class TestOauth extends \Hubleto\Erp\Cli\Agent\Command
     // var_dump($scheme);
     // var_dump((string) $response->getBody());
     if (isset($scheme['error'])) {
-      \Hubleto\Terminal::red("Error\n");
-      \Hubleto\Terminal::red($scheme['error'] . "\n");
-      \Hubleto\Terminal::red($scheme['hint'] . "\n");
+      $this->terminal()->red("Error\n");
+      $this->terminal()->red($scheme['error'] . "\n");
+      $this->terminal()->red($scheme['hint'] . "\n");
     } else {
       // $response = (new \Laminas\Http\Client($accessTokenUrl, [ 'maxredirects' => 0 ]))->send();
       $provider->getAccessToken('authorization_code', ['code' => $scheme['code']]);

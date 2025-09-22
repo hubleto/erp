@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
+use Hubleto\Erp\Cli\Agent\App\Create;
+use Hubleto\Erp\Cli\Agent\Create\Model;
+use Hubleto\Erp\Cli\Agent\Create\TableFormViewAndController;
 
 final class CliTest extends TestCase
 {
@@ -34,7 +37,7 @@ final class CliTest extends TestCase
   public function testCreateApp(): void
   {
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
-    (new \Hubleto\Erp\Cli\Agent\App\Create())->setArguments($this->args(
+    (new Create())->setTerminalOutput(null)->setArguments($this->args(
       'Hubleto\\App\\Custom\\TestApp', // appNamespace
       true // noPrompt
     ))->run();
@@ -55,7 +58,7 @@ final class CliTest extends TestCase
   public function testCreateModel(): void
   {
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
-    (new \Hubleto\Erp\Cli\Agent\Create\Model)->setArguments($this->args(
+    (new Model())->setTerminalOutput(null)->setArguments($this->args(
       'Hubleto\\App\\Custom\\TestApp', // appNamespace
       'TestModel', // model
       true, // force
@@ -75,7 +78,7 @@ final class CliTest extends TestCase
   public function testCreateMvcForModel(): void
   {
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
-    (new \Hubleto\Erp\Cli\Agent\Create\TableFormViewAndController)->setArguments($this->args(
+    (new TableFormViewAndController())->setTerminalOutput(null)->setArguments($this->args(
       'Hubleto\\App\\Custom\\TestApp', // appNamespace
       'TestModel', // model
       true, // force

@@ -49,7 +49,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
   }
 
   /**
-   * [Description for testRouteContainsAppMainTitle]
+   * [Description for _testRouteContainsAppMainTitle]
    *
    * @param string $route
    * @param array $vars
@@ -57,7 +57,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
    * @return void
    * 
    */
-  public function testRouteContainsAppMainTitle(string $route, array $vars = []): void
+  public function _testRouteContainsAppMainTitle(string $route, array $vars = []): void
   {
     $renderer = \Hubleto\Erp\Loader::getGlobalApp()->renderer();
     foreach ($this->expandRoutesByVars($route, $vars) as $route) {
@@ -68,7 +68,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
   }
 
   /**
-   * [Description for testRouteContainsError]
+   * [Description for _testRouteContainsError]
    *
    * @param string $route
    * @param array $vars
@@ -76,7 +76,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
    * @return void
    * 
    */
-  public function testRouteContainsError(string $route, array $vars = []): void
+  public function _testRouteContainsError(string $route, array $vars = []): void
   {
     $renderer = \Hubleto\Erp\Loader::getGlobalApp()->renderer();
     foreach ($this->expandRoutesByVars($route, $vars) as $route) {
@@ -87,7 +87,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
   }
 
   /**
-   * [Description for testRouteRendersJson]
+   * [Description for _testRouteRendersJson]
    *
    * @param string $route
    * @param array $vars
@@ -95,7 +95,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
    * @return void
    * 
    */
-  public function testRouteRendersJson(string $route, array $vars = []): void
+  public function _testRouteRendersJson(string $route, array $vars = []): void
   {
     $renderer = \Hubleto\Erp\Loader::getGlobalApp()->renderer();
     foreach ($this->expandRoutesByVars($route, $vars) as $route) {
@@ -113,15 +113,15 @@ class TestCase extends \PHPUnit\Framework\TestCase
    * @return void
    * 
    */
-  public function testModelCrud(string $modelClass, string $modelBaseUrl): void
+  public function _testModelCrud(string $modelClass, string $modelBaseUrl): void
   {
-    $this->testRouteContainsAppMainTitle($modelBaseUrl . '/add');
-    $this->testRouteContainsError(
+    $this->_testRouteContainsAppMainTitle($modelBaseUrl . '/add');
+    $this->_testRouteContainsError(
       $modelBaseUrl . 'customers/{{ id }}',
       ['id' => $this->generateRandomIds(100)]
     );
 
-    $this->testRouteRendersJson('api/record/save', [
+    $this->_testRouteRendersJson('api/record/save', [
       'model' => $modelClass,
     ]);
   }

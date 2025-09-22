@@ -89,8 +89,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
   {
 
     if (is_file($this->env()->projectFolder . '/ConfigEnv.php')) {
-      \Hubleto\Terminal::red("ConfigEnv.php already exists, project has already been initialized.\n");
-      \Hubleto\Terminal::red("If you want to re-initialize the project, delte ConfigEnv.php file first.\n");
+      $this->terminal()->red("ConfigEnv.php already exists, project has already been initialized.\n");
+      $this->terminal()->red("If you want to re-initialize the project, delte ConfigEnv.php file first.\n");
       exit;
     }
 
@@ -226,10 +226,10 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $lastRewriteBase = '/' . $tmpFolder . $lastRewriteBase;
     }
 
-    \Hubleto\Terminal::cyan("For more information about the parameters check https://developer.hubleto.com/v0/cli/init\n");
+    $this->terminal()->cyan("For more information about the parameters check https://developer.hubleto.com/v0/cli/init\n");
 
     if ($rewriteBase === null) {
-      $rewriteBase = \Hubleto\Terminal::choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
+      $rewriteBase = $this->terminal()->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
     }
     if ($projectFolder === null) {
       $projectFolder = $this->env()->projectFolder;
@@ -241,59 +241,59 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $secureFolder = $this->env()->secureFolder;
     }
     if ($projectUrl === null) {
-      $projectUrl = \Hubleto\Terminal::read('ConfigEnv.projectUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
+      $projectUrl = $this->terminal()->read('ConfigEnv.projectUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
     }
     if ($assetsUrl === null) {
-      $assetsUrl = \Hubleto\Terminal::read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/assets');
+      $assetsUrl = $this->terminal()->read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/assets');
     }
     if ($dbHost === null) {
-      $dbHost = \Hubleto\Terminal::read('ConfigEnv.dbHost', 'localhost');
+      $dbHost = $this->terminal()->read('ConfigEnv.dbHost', 'localhost');
     }
     if ($dbUser === null) {
-      $dbUser = \Hubleto\Terminal::read('ConfigEnv.dbUser (user must exist)', 'root');
+      $dbUser = $this->terminal()->read('ConfigEnv.dbUser (user must exist)', 'root');
     }
     if ($dbPassword === null) {
-      $dbPassword = \Hubleto\Terminal::read('ConfigEnv.dbPassword');
+      $dbPassword = $this->terminal()->read('ConfigEnv.dbPassword');
     }
     if ($dbName === null) {
-      $dbName = \Hubleto\Terminal::read('ConfigEnv.dbName (database will be created, if it not exists)', 'my_hubleto');
+      $dbName = $this->terminal()->read('ConfigEnv.dbName (database will be created, if it not exists)', 'my_hubleto');
     }
     if ($dbCodepage === null) {
-      $dbCodepage = \Hubleto\Terminal::read('ConfigEnv.dbCodepage', 'utf8mb4');
+      $dbCodepage = $this->terminal()->read('ConfigEnv.dbCodepage', 'utf8mb4');
     }
     if ($accountFullName === null) {
-      $accountFullName = \Hubleto\Terminal::read('Account.accountFullName', 'My Company');
+      $accountFullName = $this->terminal()->read('Account.accountFullName', 'My Company');
     }
     if ($adminName === null) {
-      $adminName = \Hubleto\Terminal::read('Account.adminName', 'John');
+      $adminName = $this->terminal()->read('Account.adminName', 'John');
     }
     if ($adminFamilyName === null) {
-      $adminFamilyName = \Hubleto\Terminal::read('Account.adminFamilyName', 'Smith');
+      $adminFamilyName = $this->terminal()->read('Account.adminFamilyName', 'Smith');
     }
     if ($adminNick === null) {
-      $adminNick = \Hubleto\Terminal::read('Account.adminNick', 'johny');
+      $adminNick = $this->terminal()->read('Account.adminNick', 'johny');
     }
     if ($adminEmail === null) {
-      $adminEmail = \Hubleto\Terminal::read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
+      $adminEmail = $this->terminal()->read('Account.adminEmail (will be used also for login)', 'john.smith@example.com');
     }
     if ($adminPassword === null) {
-      $adminPassword = \Hubleto\Terminal::read('Account.adminPassword (leave empty to generate random password)');
+      $adminPassword = $this->terminal()->read('Account.adminPassword (leave empty to generate random password)');
     }
     if ($generateDemoData === null) {
       $confirm = '';
       while (!in_array($confirm, ['yes', 'no'])) {
-        $confirm = \Hubleto\Terminal::read('Account.generateDemoData (type \'yes\' or \'no\')');
+        $confirm = $this->terminal()->read('Account.generateDemoData (type \'yes\' or \'no\')');
       }
       $generateDemoData = $confirm == 'yes';
     }
 
-    if (\Hubleto\Terminal::isLaunchedFromTerminal() && $noPrompt !== true) {
+    if ($this->terminal()->isLaunchedFromTerminal() && $noPrompt !== true) {
       $confirm = '';
       if (isset($config['confirm'])) {
         $confirm = $config['confirm'];
       }
       while ($confirm != 'yes') {
-        $confirm = \Hubleto\Terminal::read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel');
+        $confirm = $this->terminal()->read('Hubleto will be installed now. Type \'yes\' to continue or \'exit\' to cancel');
         if ($confirm == 'exit') {
           exit;
         }
@@ -321,45 +321,45 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $adminPassword = \Hubleto\Framework\Helper::randomPassword();
     }
 
-    \Hubleto\Terminal::green("  ###         ###         ###   \n");
-    \Hubleto\Terminal::green("  ###         ###         ###   \n");
-    \Hubleto\Terminal::green("  ### #####   ### #####   ###   \n");
-    \Hubleto\Terminal::green("  ##########  ##########  ###   \n");
-    \Hubleto\Terminal::green("  ###    ###  ###     ### ###   \n");
-    \Hubleto\Terminal::green("  ###    ###  ###     ### ###   \n");
-    \Hubleto\Terminal::green("  ###    ###  ##### ####  ####  \n");
-    \Hubleto\Terminal::green("  ###    ###  ### #####    ###  \n");
-    \Hubleto\Terminal::cyan("\n");
-    \Hubleto\Terminal::green("Hubleto, Business Application Hub & opensource CRM/ERP\n");
-    \Hubleto\Terminal::cyan("\n");
+    $this->terminal()->green("  ###         ###         ###   \n");
+    $this->terminal()->green("  ###         ###         ###   \n");
+    $this->terminal()->green("  ### #####   ### #####   ###   \n");
+    $this->terminal()->green("  ##########  ##########  ###   \n");
+    $this->terminal()->green("  ###    ###  ###     ### ###   \n");
+    $this->terminal()->green("  ###    ###  ###     ### ###   \n");
+    $this->terminal()->green("  ###    ###  ##### ####  ####  \n");
+    $this->terminal()->green("  ###    ###  ### #####    ###  \n");
+    $this->terminal()->cyan("\n");
+    $this->terminal()->green("Hubleto, Business Application Hub & opensource CRM/ERP\n");
+    $this->terminal()->cyan("\n");
 
     if (sizeof($errors) > 0) {
-      \Hubleto\Terminal::red("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
-      \Hubleto\Terminal::red(join("\n", $errors));
-      \Hubleto\Terminal::white("\n");
+      $this->terminal()->red("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
+      $this->terminal()->red(join("\n", $errors));
+      $this->terminal()->white("\n");
       throw new \ErrorException("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
     }
 
-    \Hubleto\Terminal::cyan("Initializing with following config:\n");
-    \Hubleto\Terminal::cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
-    \Hubleto\Terminal::cyan('  -> projectFolder = ' . (string) $projectFolder . "\n");
-    \Hubleto\Terminal::cyan('  -> releaseFolder = ' . (string) $releaseFolder . "\n");
-    \Hubleto\Terminal::cyan('  -> projectUrl = ' . (string) $projectUrl . "\n");
-    \Hubleto\Terminal::cyan('  -> secureFolder = ' . (string) $secureFolder . "\n");
-    \Hubleto\Terminal::cyan('  -> assetsUrl = ' . (string) $assetsUrl . "\n");
-    \Hubleto\Terminal::cyan('  -> dbHost = ' . (string) $dbHost . "\n");
-    \Hubleto\Terminal::cyan('  -> dbUser = ' . (string) $dbUser . "\n");
-    \Hubleto\Terminal::cyan('  -> dbPassword = ***' . "\n");
-    \Hubleto\Terminal::cyan('  -> dbName = ' . (string) $dbName . "\n");
-    \Hubleto\Terminal::cyan('  -> dbCodepage = ' . (string) $dbCodepage . "\n");
-    \Hubleto\Terminal::cyan('  -> accountFullName = ' . (string) $accountFullName . "\n");
-    \Hubleto\Terminal::cyan('  -> adminName = ' . (string) $adminName . "\n");
-    \Hubleto\Terminal::cyan('  -> adminFamilyName = ' . (string) $adminFamilyName . "\n");
-    \Hubleto\Terminal::cyan('  -> adminNick = ' . (string) $adminNick . "\n");
-    \Hubleto\Terminal::cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
-    \Hubleto\Terminal::cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
-    \Hubleto\Terminal::cyan('  -> generateDemoData = ' . ($generateDemoData ? 'yes' : 'no') . "\n");
-    \Hubleto\Terminal::cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
+    $this->terminal()->cyan("Initializing with following config:\n");
+    $this->terminal()->cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
+    $this->terminal()->cyan('  -> projectFolder = ' . (string) $projectFolder . "\n");
+    $this->terminal()->cyan('  -> releaseFolder = ' . (string) $releaseFolder . "\n");
+    $this->terminal()->cyan('  -> projectUrl = ' . (string) $projectUrl . "\n");
+    $this->terminal()->cyan('  -> secureFolder = ' . (string) $secureFolder . "\n");
+    $this->terminal()->cyan('  -> assetsUrl = ' . (string) $assetsUrl . "\n");
+    $this->terminal()->cyan('  -> dbHost = ' . (string) $dbHost . "\n");
+    $this->terminal()->cyan('  -> dbUser = ' . (string) $dbUser . "\n");
+    $this->terminal()->cyan('  -> dbPassword = ***' . "\n");
+    $this->terminal()->cyan('  -> dbName = ' . (string) $dbName . "\n");
+    $this->terminal()->cyan('  -> dbCodepage = ' . (string) $dbCodepage . "\n");
+    $this->terminal()->cyan('  -> accountFullName = ' . (string) $accountFullName . "\n");
+    $this->terminal()->cyan('  -> adminName = ' . (string) $adminName . "\n");
+    $this->terminal()->cyan('  -> adminFamilyName = ' . (string) $adminFamilyName . "\n");
+    $this->terminal()->cyan('  -> adminNick = ' . (string) $adminNick . "\n");
+    $this->terminal()->cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
+    $this->terminal()->cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
+    $this->terminal()->cyan('  -> generateDemoData = ' . ($generateDemoData ? 'yes' : 'no') . "\n");
+    $this->terminal()->cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
 
     $this->config()->set('projectFolder', $projectFolder);
     $this->config()->set('releaseFolder', $releaseFolder);
@@ -376,8 +376,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->env()->releaseFolder = $releaseFolder;
     $this->env()->secureFolder = $secureFolder;
 
-    \Hubleto\Terminal::cyan("\n");
-    \Hubleto\Terminal::cyan("Hurray. Installing your Hubleto with following packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
+    $this->terminal()->cyan("\n");
+    $this->terminal()->cyan("Hurray. Installing your Hubleto with following packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
 
     // install
     $installer = new \Hubleto\Erp\Installer\Installer(
@@ -442,30 +442,30 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $installer->extraConfigEnv = $config['extraConfigEnv'];
     }
 
-    \Hubleto\Terminal::cyan("  -> Creating folders and files.\n");
+    $this->terminal()->cyan("  -> Creating folders and files.\n");
     $installer->createFoldersAndFiles();
 
-    \Hubleto\Terminal::cyan("  -> Creating database.\n");
+    $this->terminal()->cyan("  -> Creating database.\n");
     $installer->createDatabase();
 
     if ($smtpHost != '') {
-      \Hubleto\Terminal::cyan("  -> Initializing SMTP.\n");
+      $this->terminal()->cyan("  -> Initializing SMTP.\n");
       $installer->initSmtp();
     }
 
-    \Hubleto\Terminal::cyan("  -> Creating base tables.\n");
+    $this->terminal()->cyan("  -> Creating base tables.\n");
     $installer->installBaseModels();
 
-    \Hubleto\Terminal::cyan("  -> Installing apps, round #1.\n");
+    $this->terminal()->cyan("  -> Installing apps, round #1.\n");
     $installer->installApps(1);
 
-    \Hubleto\Terminal::cyan("  -> Installing apps, round #2.\n");
+    $this->terminal()->cyan("  -> Installing apps, round #2.\n");
     $installer->installApps(2);
 
-    \Hubleto\Terminal::cyan("  -> Installing apps, round #3.\n");
+    $this->terminal()->cyan("  -> Installing apps, round #3.\n");
     $installer->installApps(3);
 
-    \Hubleto\Terminal::cyan("    -> Finalizing...\n");
+    $this->terminal()->cyan("    -> Finalizing...\n");
     foreach ($installer->appsToInstall as $appNamespace => $appConfig) {
       $app = $this->appManager()->createAppInstance($appNamespace);
       $mClasses = $app->getAvailableModelClasses();
@@ -475,7 +475,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       }
     }
 
-    \Hubleto\Terminal::cyan("  -> Adding default company and admin user.\n");
+    $this->terminal()->cyan("  -> Adding default company and admin user.\n");
     $installer->addCompanyAndAdminUser();
 
     if ($generateDemoData) {
@@ -483,13 +483,13 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $this->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->run();
     }
 
-    \Hubleto\Terminal::cyan("\n");
-    \Hubleto\Terminal::cyan("All done! You're a fantastic CRM developer.\n");
-    \Hubleto\Terminal::colored("cyan", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword);
-    \Hubleto\Terminal::cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
-    \Hubleto\Terminal::cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
-    \Hubleto\Terminal::cyan("\n");
-    \Hubleto\Terminal::cyan("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
-    \Hubleto\Terminal::colored("cyan", "black", "Run: php hubleto app create MyFirstApp");
+    $this->terminal()->cyan("\n");
+    $this->terminal()->cyan("All done! You're a fantastic CRM developer.\n");
+    $this->terminal()->colored("cyan", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword);
+    $this->terminal()->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
+    $this->terminal()->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
+    $this->terminal()->cyan("\n");
+    $this->terminal()->cyan("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
+    $this->terminal()->colored("cyan", "black", "Run: php hubleto app create MyFirstApp");
   }
 }

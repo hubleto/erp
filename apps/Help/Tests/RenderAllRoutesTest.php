@@ -9,7 +9,7 @@ final class RenderAllRoutesTest extends \Hubleto\Erp\TestCase
 
   public function testRoutesContainAppMainTitle(): void
   {
-    $this->testRouteContainsAppMainTitle('help');
+    $this->_testRouteContainsAppMainTitle('help');
   }
 
 }

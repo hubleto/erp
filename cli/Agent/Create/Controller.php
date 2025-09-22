@@ -43,9 +43,9 @@ class Controller extends \Hubleto\Erp\Cli\Agent\Command
     }
     file_put_contents($app->srcFolder . '/Controllers/' . $controller . '.php', $this->renderer()->renderView('@snippets/Controller.php.twig', $tplVars));
 
-    \Hubleto\Terminal::white("\n");
-    \Hubleto\Terminal::cyan("Controller '{$controller}' in '{$appNamespace}' created successfully.\n");
-    \Hubleto\Terminal::yellow("💡 TIP: Run 'php hubleto create view {$appNamespace} {$controller}' to create a view for this controler.\n");
+    $this->terminal()->white("\n");
+    $this->terminal()->cyan("Controller '{$controller}' in '{$appNamespace}' created successfully.\n");
+    $this->terminal()->yellow("💡 TIP: Run 'php hubleto create view {$appNamespace} {$controller}' to create a view for this controler.\n");
   }
 
 }

@@ -6,7 +6,7 @@ class ListTemplates extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
-    \Hubleto\Terminal::cyan("Templates for `code generate`:\n");
-    \Hubleto\Terminal::cyan("  Model - generate model to specified app\n");
+    $this->terminal()->cyan("Templates for `code generate`:\n");
+    $this->terminal()->cyan("  Model - generate model to specified app\n");
   }
 }

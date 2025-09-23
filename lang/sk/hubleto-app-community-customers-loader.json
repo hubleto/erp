@@ -25,9 +25,9 @@
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok",
         "Owner": "Vlastník",
         "Manager": "Manažér",
-        "Tags": "",
-        "Archive": "",
-        "Archived": ""
+        "Tags": "Značky",
+        "Archive": "Archív",
+        "Archived": "Archivovaný"
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"
@@ -84,10 +84,10 @@
         "Type recent activity here": "Zadajte poslednú aktivitu tu",
         "Not completed yet": "Nedokončená",
         "Most recent activities": "Najnovšie aktivity",
-        "Log completed activity": "",
-        "Schedule activity": "",
-        "Enter": "",
-        "Shift+Enter": ""
+        "Log completed activity": "Zaznamenať ukončenú aktivitu",
+        "Schedule activity": "Naplánovať aktivitu",
+        "Enter": "Enter",
+        "Shift+Enter": "Shift+Enter"
     },
     "root": {
         "Customer Tags": "Značky zákazníkov"
@@ -95,8 +95,8 @@
     "Models\\Tag": {
         "Name": "Značka",
         "Color": "Farba",
-        "Customer Tags": "",
-        "Add Customer Tag": ""
+        "Customer Tags": "Značky zákazníkov",
+        "Add Customer Tag": "Pridať značku"
     },
     "Components\\FormActivity": {
         "Customer": "Zákazník"
@@ -107,13 +107,13 @@
         "Start": "Štart"
     },
     "Controllers\\Activity": {
-        "Customers": "",
-        "Activities": ""
+        "Customers": "Zákazníci",
+        "Activities": "Aktivity"
     },
     "Controllers\\Tags": {
-        "Settings": "",
-        "Customer Tags": "",
-        "Customers": "",
-        "Tags": ""
+        "Settings": "Nastavenia",
+        "Customer Tags": "Značky zákazníkov",
+        "Customers": "Zákazníci",
+        "Tags": "Značky"
     }
 }

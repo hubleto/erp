@@ -2,13 +2,29 @@
     "manifest": {
         "Dashboard": "Úvod",
         "Desktop": "Pracovná plocha",
-        "Default Hubleto desktop implementation.": "Hubleto pracovná plocha"
+        "Default Hubleto desktop implementation.": "Hubleto pracovná plocha",
+        "CRM": "CRM",
+        "Addressbook": "Adresár",
+        "Calendar": "Kalendár",
+        "Documents": "Dokumenty",
+        "Communication": "Komunikácia",
+        "Workflow": "Workflow",
+        "Marketing": "Marketing",
+        "Sales": "Obchod",
+        "Projects": "Projekty",
+        "Supply chain": "Dodávateľský reťazec",
+        "Helpdesk": "Helpdesk",
+        "Events": "",
+        "E-Commerce": "",
+        "Website": "Webstránka",
+        "Finance": "Financie",
+        "Reporting": "Reporty",
+        "Maintenance": "Údržba",
+        "Help": "Pomoc",
+        "Custom": "Vlastné"
     },
     "Controllers\\Home": {
-        "Welcome": "Vitajte",
-        "Upgrade to Premium and get exciting rewards.": "",
-        "You are using free version of Hubleto. Certain features are unavailable.": "",
-        "Upgrade to Premium": ""
+        "Welcome": "Vitajte"
     },
     "Controllers\\Desktop": {
         "CRM": "CRM",
@@ -35,10 +51,10 @@
         "Search app": "Hľadať appku",
         "Home": "Domov",
         "You have no apps in this group.": "V tejto skupine nemáte žiadnu appku.",
-        "Addressbook": "",
-        "Calendar": "",
+        "Addressbook": "Adresár",
+        "Calendar": "Kalendár",
         "Workflow": "",
-        "Premium": "",
-        "Manage cloud account": ""
+        "Premium": "Premium",
+        "Manage cloud account": "Spravovať cloud účet"
     }
 }

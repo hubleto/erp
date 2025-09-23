@@ -11,6 +11,8 @@ use Hubleto\Framework\DependencyInjection;
 class Loader extends \Hubleto\Framework\Loader
 {
 
+  public string $translationContext = 'Hubleto\\Erp\\Loader';
+
   /**
    * Class construtor.
    *

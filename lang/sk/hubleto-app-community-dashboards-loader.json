@@ -20,21 +20,21 @@
         "Title": "Názov",
         "Configuration": "Konfigurácia",
         "-- Select board to be displayed in panel --": "-- Zvoľte panel --",
-        "Width": "",
-        "Order": ""
+        "Width": "Širka",
+        "Order": "Poradie"
     },
     "Components\\Dashboard": {
         "Add new panel": "Pridať panel"
     },
     "Controllers\\Dashboards": {
-        "Dashboards": "",
-        "Add dashboard": ""
+        "Dashboards": "Dashboardy",
+        "Add dashboard": "Pridať dashboard"
     },
     "Controllers\\Settings": {
-        "Dashboards": "",
-        "Settings": ""
+        "Dashboards": "Dashboardy",
+        "Settings": "Nastavenia"
     },
     "Components\\FormDashboard": {
-        "Panels": ""
+        "Panels": "Panely"
     }
 }

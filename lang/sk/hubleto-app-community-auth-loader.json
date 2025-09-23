@@ -2,35 +2,35 @@
     "manifest": {
         "Notifications": "Autentifikácia",
         "Auth": "",
-        "Hubleto Authorization App for User Management": ""
+        "Hubleto Authorization App for User Management": "Aplikácia na autentifikáciu používateľov"
     },
     "Models\\User": {
-        "Type": "",
-        "First name": "",
-        "Last name": "",
-        "Nick": "",
-        "Email": "",
-        "Language": "",
-        "Default company": "",
-        "Apps": "",
-        "Roles": "",
-        "Teams": ""
+        "Type": "Typ",
+        "First name": "Meno",
+        "Last name": "Priezvisko",
+        "Nick": "Prezývka",
+        "Email": "Email",
+        "Language": "Jazyk",
+        "Default company": "Spoločnosť",
+        "Apps": "Appky",
+        "Roles": "Role",
+        "Teams": "Tímy"
     },
     "Models\\UserRole": {
-        "Role": "",
-        "Grant all permissions (administrator role)": "",
-        "Description": "",
+        "Role": "Rola",
+        "Grant all permissions (administrator role)": "Povoliť všetko (administrátor)",
+        "Description": "Popis",
         "Is default role (cannot be modified)": ""
     },
     "Models\\UserHasRole": {
-        "User": "",
-        "Role": ""
+        "User": "Používateľ",
+        "Role": "Rola"
     },
     "Controllers\\SignIn": {
-        "Your email": "",
-        "Password": "",
-        "Keep signed in": "",
-        "Sign in": "",
-        "Forgot password?": ""
+        "Your email": "Váš email",
+        "Password": "Heslo",
+        "Keep signed in": "Zostať prihlásený",
+        "Sign in": "Prihlásiť sa",
+        "Forgot password?": "Zabudnuté heslo?"
     }
 }

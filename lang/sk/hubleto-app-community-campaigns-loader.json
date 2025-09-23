@@ -17,43 +17,43 @@
         "Mail template": "Šablóna emailovej správy",
         "Manager": "Manažér",
         "Created": "Vytvorená",
-        "UID": "",
-        "Mail account to send email from": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Approved": "",
-        "Closed": "",
-        "Add Campaign": "",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": ""
+        "UID": "UID",
+        "Mail account to send email from": "Odosielací účet",
+        "Workflow": "Workflow",
+        "Workflow step": "Workflow step",
+        "Approved": "Schválená",
+        "Closed": "Uzavretá",
+        "Add Campaign": "Pridať kampaň",
+        "Open \/ Closed": "Otvorená / Zavretá",
+        "Open": "Otvorená",
+        "All": "Všetky"
     },
     "Models\\Recipient": {
-        "Campaign": "",
-        "Contact": "",
-        "Email": "",
-        "First name": "",
-        "Last name": "",
-        "Salutation": "",
-        "Reference to mail sent": ""
+        "Campaign": "Kampaň",
+        "Contact": "Kontakt",
+        "Email": "Email",
+        "First name": "Meno",
+        "Last name": "Priezvisko",
+        "Salutation": "Oslovenie",
+        "Reference to mail sent": "Odoslaný email"
     },
     "Models\\CampaignTask": {
-        "Campaign": "",
-        "Task": ""
+        "Campaign": "Kampaň",
+        "Task": "Úloha"
     },
     "Controllers\\Campaigns": {
-        "Campaigns": ""
+        "Campaigns": "Kampaň"
     },
     "Components\\FormCampaign": {
-        "Campaign": "",
-        "Add recipients from contacts": "",
-        "Tasks": "",
-        "Launch": ""
+        "Campaign": "Kampaň",
+        "Add recipients from contacts": "Pridať príjemcu z kontaktov",
+        "Tasks": "Úlohy",
+        "Launch": "Spustiť"
     },
     "Models\\Click": {
-        "Campaign": "",
-        "Recipient": "",
-        "Url": "",
-        "Clicked": ""
+        "Campaign": "Kampaň",
+        "Recipient": "Príjemca",
+        "Url": "Url",
+        "Clicked": "Kliknuté"
     }
 }

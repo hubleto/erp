@@ -2,8 +2,8 @@
     "manifest": {
         "Calendar": "Kalendár",
         "Free calendar app.": "Bezplatný kalendár.",
-        "Reminders": "",
-        "Share": ""
+        "Reminders": "Pripomienky",
+        "Share": "Zdieľať"
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalendár"
@@ -33,18 +33,18 @@
         "Reminders": "Pripomienky"
     },
     "Components\\CalendarMain": {
-        "New activity": "",
-        "All": "",
-        "Ownership": "",
-        "My activities": ""
+        "New activity": "Nová aktivita",
+        "All": "Všetko",
+        "Ownership": "Vlastníctvo",
+        "My activities": "Moje aktivity"
     },
     "Models\\SharedCalendar": {
-        "Created by": "",
-        "Calendar ID": "",
-        "Share key": "",
-        "Display details": "",
-        "Enabled": "",
-        "Date from": "",
-        "Date to": ""
+        "Created by": "Vytvoril",
+        "Calendar ID": "ID kalendáru",
+        "Share key": "Kľúč pre zdieľanie",
+        "Display details": "Zobraziť detaily",
+        "Enabled": "Povolené",
+        "Date from": "Od",
+        "Date to": "Do"
     }
 }

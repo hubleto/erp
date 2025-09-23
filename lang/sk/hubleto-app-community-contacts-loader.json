@@ -2,8 +2,8 @@
     "manifest": {
         "Contacts": "Kontakty",
         "Default customer management and addressbook.": "Adresár a manažment zákazníkov.",
-        "Contact Categories": "",
-        "Contact Tags": "",
+        "Contact Categories": "Kategórie kontaktov",
+        "Contact Tags": "Značky kontaktov",
         "Import contacts": ""
     },
     "Components\\FormPerson": {
@@ -51,7 +51,7 @@
         "Category": "Kategória",
         "Number": "Počet",
         "URL": "Adresa URL",
-        "Contacts": "",
+        "Contacts": "Kontakty",
         "Add Customer": ""
     },
     "Models\\PersonTag": {

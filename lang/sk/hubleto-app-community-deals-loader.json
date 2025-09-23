@@ -1,14 +1,7 @@
 {
     "manifest": {
         "Deals": "Dealy",
-        "Deal management. From deal to purchase.": "Manažment obchodných prípadov až po vytvorenie ponuky.",
-        "Deal Tags": "",
-        "Deal Lost Reasons": "",
-        "Deal warnings": "",
-        "Most valuable deals": "",
-        "Deal value by result": "",
-        "Active deals": "",
-        "Archived deals": ""
+        "Deal management. From deal to purchase.": "Manažment obchodných prípadov až po vytvorenie ponuky."
     },
     "Controllers\\Deals": {
         "Sales": "Predaj",
@@ -39,8 +32,6 @@
         "Archived": "Archivovaný",
         "Status": "Stav",
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný dokument",
-        "Deal Progress": "",
-        "Date of progress update": "",
         "Deal Result": "Výsledok dealu",
         "Date of result update": "Dátum aktualizácie výsledku",
         "New Customer": "Nový zákazník",
@@ -64,9 +55,7 @@
         "Managed by me": "Mnou spravované",
         "Open \/ Closed": "Otvorené \/ Zavreté",
         "Open": "Otvorené",
-        "Active": "Aktívne",
-        " changed from ": "",
-        " to ": ""
+        "Active": "Aktívne"
     },
     "Models\\DealHistory": {
         "Change Date": "Dátum zmeny",
@@ -77,17 +66,9 @@
         "Deal": "Deal",
         "Tag": "Označenie"
     },
-    "Models\\DealService": {
-        "Deal": "",
-        "Service": "",
-        "Unit Price": "",
-        "Amount": "",
-        "Dicount (%)": "",
-        "Vat (%)": ""
-    },
     "Models\\DealActivity": {
         "Deal": "Deal",
-        "Contact person": "",
+        "Contact person": "Kontaktná osoba",
         "Activity type": "Typ aktivity",
         "Subject": "Predmet",
         "Start date": "Dátum začiatku",
@@ -152,11 +133,11 @@
         "Vat": "Kov",
         "Discount": "Zľavu",
         "Sum": "Súčet",
-        "Order": "",
-        "Description": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": "",
-        "Sales Price": ""
+        "Order": "Objednávka",
+        "Description": "Popis",
+        "Price excl. VAT": "Cena bez DPH",
+        "Price incl. VAT": "Cena s DPH",
+        "Sales Price": "Nákupná cena"
     },
     "Models\\LostReason": {
         "Lost Reason": "Stratený dôvod"
@@ -180,17 +161,17 @@
         "Open deals without future plan": "Otvorené dealy bez budúceho plánu"
     },
     "Controllers\\Boards\\DealValueByResult": {
-        "Unknown": "",
-        "Pending": "",
-        "Won": "",
-        "Lost": ""
+        "Unknown": "Neznámy",
+        "Pending": "V procese",
+        "Won": "Vyhraný",
+        "Lost": "Prehraný"
     },
     "Models\\DealLead": {
-        "Deal": "",
-        "Lead": ""
+        "Deal": "Deal",
+        "Lead": "Lead"
     },
     "Models\\DealTask": {
-        "Deal": "",
-        "Task": ""
+        "Deal": "Deal",
+        "Task": "Úloha"
     }
 }

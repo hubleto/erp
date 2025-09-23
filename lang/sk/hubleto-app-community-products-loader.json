@@ -75,5 +75,10 @@
         "Purchase price": "",
         "Internal notes": "",
         "Delivery time": ""
+    },
+    "Controllers\\Groups": {
+        "Products": "",
+        "Product Groups": "",
+        "Groups": ""
     }
 }

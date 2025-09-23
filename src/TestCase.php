@@ -116,6 +116,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
   public function _testModelCrud(string $modelClass, string $modelBaseUrl): void
   {
     $this->_testRouteContainsAppMainTitle($modelBaseUrl . '/add');
+    $this->_testRouteContainsError($modelBaseUrl . '/add');
     $this->_testRouteContainsError(
       $modelBaseUrl . 'customers/{{ id }}',
       ['id' => $this->generateRandomIds(100)]

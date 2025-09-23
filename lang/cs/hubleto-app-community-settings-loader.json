@@ -26,7 +26,20 @@
     },
     "manifest": {
         "Settings": "Nastavení",
-        "Settings and control panel for your Hubleto.": "Nastavení a ovládací panel pro váš Hubteto."
+        "Settings and control panel for your Hubleto.": "Nastavení a ovládací panel pro váš Hubteto.",
+        "Users": "",
+        "Roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions list": "",
+        "Role permissions": "",
+        "Activity types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Invoice profiles": "",
+        "Platform config": "",
+        "Sidebar": "",
+        "Teams": ""
     },
     "root": {
         "Users": "Uživatelé",

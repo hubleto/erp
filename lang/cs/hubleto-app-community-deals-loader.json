@@ -1,7 +1,14 @@
 {
     "manifest": {
         "Deals": "Obchody",
-        "Deal management. From deal to purchase.": "Správa obchodů. Od obchodu k nákupu."
+        "Deal management. From deal to purchase.": "Správa obchodů. Od obchodu k nákupu.",
+        "Deal Tags": "",
+        "Deal Lost Reasons": "",
+        "Deal warnings": "",
+        "Most valuable deals": "",
+        "Deal value by result": "",
+        "Active deals": "",
+        "Archived deals": ""
     },
     "root": {
         "Deal Tags": "Značky obchodu",
@@ -62,7 +69,12 @@
         "Deal created": "Obchod vytvořen",
         " changed from ": " změnil z ",
         " to ": " na ",
-        "Customer' order number": "Číslo objednávky zákazníka"
+        "Customer' order number": "Číslo objednávky zákazníka",
+        "Version": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": "",
+        "Template for quotation": "",
+        "Customer's order number": ""
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otevřený obchod"
@@ -88,7 +100,12 @@
         "Amount": "Množství",
         "Vat": "DPH",
         "Discount": "Sleva",
-        "Sum": "Součet"
+        "Sum": "Součet",
+        "Order": "",
+        "Description": "",
+        "Sales Price": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
     },
     "Models\\DealDocument": {
         "Deal": "Obchod",
@@ -169,5 +186,13 @@
     "Controllers\\Tags": {
         "Settings": "Nastavení",
         "Deal Tags": "Značky obchodů"
+    },
+    "Models\\DealLead": {
+        "Deal": "",
+        "Lead": ""
+    },
+    "Models\\DealTask": {
+        "Deal": "",
+        "Task": ""
     }
 }

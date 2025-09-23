@@ -1,7 +1,26 @@
 {
     "manifest": {
         "Desktop": "Desktop",
-        "Default Hubleto desktop implementation.": "Výchozí implementace úvodní obrazovky Hubteto."
+        "Default Hubleto desktop implementation.": "Výchozí implementace úvodní obrazovky Hubteto.",
+        "CRM": "",
+        "Addressbook": "",
+        "Calendar": "",
+        "Documents": "",
+        "Communication": "",
+        "Workflow": "",
+        "Marketing": "",
+        "Sales": "",
+        "Projects": "",
+        "Supply chain": "",
+        "Helpdesk": "",
+        "Events": "",
+        "E-Commerce": "",
+        "Website": "",
+        "Finance": "",
+        "Reporting": "",
+        "Maintenance": "",
+        "Help": "",
+        "Custom": ""
     },
     "Controllers\\Home": {
         "Welcome": "Vítejte"
@@ -23,6 +42,12 @@
         "Maintenance": "Údržba",
         "Help": "Pomoc",
         "Custom": "Vlastní",
-        "Tasks": "Značky"
+        "Tasks": "Značky",
+        "Search app...": "",
+        "Open sidebar": "",
+        "Premium": "",
+        "Manage your user account": "",
+        "Manage cloud account": "",
+        "Sign out": ""
     }
 }

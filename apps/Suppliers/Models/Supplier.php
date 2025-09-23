@@ -12,7 +12,7 @@ class Supplier extends \Hubleto\Erp\Model
   public string $table = 'suppliers';
   public string $recordManagerClass = RecordManagers\Supplier::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
-  public ?string $lookupUrlDetail = 'Suppliers/{%ID%}';
+  public ?string $lookupUrlDetail = 'suppliers/{%ID%}';
 
   public function describeColumns(): array
   {

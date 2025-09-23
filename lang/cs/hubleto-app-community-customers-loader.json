@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Customers": "Zákazníci",
-        "Free customer management and addressbook.": "Adresář a správa zákazníků zdarma."
+        "Free customer management and addressbook.": "Adresář a správa zákazníků zdarma.",
+        "Customer Tags": ""
     },
     "root": {
         "Customer Tags": "Značky zákazníků"

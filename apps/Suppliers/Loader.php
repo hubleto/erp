@@ -17,6 +17,7 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^suppliers\/?$/' => Controllers\Suppliers::class,
+      '/^suppliers\/add\/?$/' => ['controller' => Controllers\Suppliers::class, 'vars' => ['recordId' => -1]],
     ]);
   }
 

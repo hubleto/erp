@@ -56,5 +56,11 @@
         "Workflow": "",
         "Premium": "Premium",
         "Manage cloud account": "Spravovať cloud účet"
+    },
+    "Controllers\\SidebarGroup": {
+        "Obchod": "",
+        "Projekty": "",
+        "Dodávateľský reťazec": "",
+        "Financie": ""
     }
 }

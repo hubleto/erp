@@ -1,7 +1,12 @@
 {
     "manifest": {
         "Leads": "Potenciální obchody",
-        "Management of leads, cold contacts. Convert leads to deals.": "Správa potenciálních obchodů, chladných kontaktů. Převést potenciální obchody k obchodům."
+        "Management of leads, cold contacts. Convert leads to deals.": "Správa potenciálních obchodů, chladných kontaktů. Převést potenciální obchody k obchodům.",
+        "Lead Levels": "",
+        "Lead Tags": "",
+        "Lead Lost Reasons": "",
+        "Active leads": "",
+        "Archived leads": ""
     },
     "root": {
         "Lead Tags": "Značky potenciálních obchodů",
@@ -49,7 +54,10 @@
         "Manager": "Manažér",
         "Team": "Tím",
         "Add lead": "Přidat potenciální obchod",
-        "Add Lead": "Přidat potenciální obchod"
+        "Add Lead": "Přidat potenciální obchod",
+        "Workflow": "",
+        "Workflow step": "",
+        "Closed": ""
     },
     "Models\\LostReason": {
         "Lost Reason": "Důvod ztracení"
@@ -121,5 +129,13 @@
     "Controllers\\LostReasons": {
         "Settings": "Nastavení",
         "Lead Lost Reasons": "Důvody pro ztrátu potenciálních obchodů"
+    },
+    "Models\\LeadCampaign": {
+        "Lead": "",
+        "Campaign": ""
+    },
+    "Models\\LeadTask": {
+        "Lead": "",
+        "Task": ""
     }
 }

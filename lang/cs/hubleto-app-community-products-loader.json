@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Products": "Produkty",
-        "Free product portfolio managment.": "Správa portfolia produktů zdarma."
+        "Free product portfolio managment.": "Správa portfolia produktů zdarma.",
+        "Groups": ""
     },
     "root": {
         "Products": "Produkty",
@@ -29,7 +30,15 @@
         "Needs reordering?": "Potřebuje znovu objednat?",
         "Storage rules": "Pravidla skladování",
         "Table": "Tabulka",
-        "Add product": "Přidat produkt"
+        "Add product": "Přidat produkt",
+        "Name": "",
+        "Invoicing policy": "",
+        "Internal notes": "",
+        "Amount of items in package": "",
+        "Sales price": "",
+        "VAT": "",
+        "Bar code": "",
+        "Data ": ""
     },
     "Controllers\\Products": {
         "Products": "Produkty"

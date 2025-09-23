@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Workflow": "Workflow",
-        "Free sales workflow management.": "Správa workflow zdarma."
+        "Free sales workflow management.": "Správa workflow zdarma.",
+        "History": "",
+        "Workflows": ""
     },
     "root": {
         "Workflows": "Workflow"
@@ -9,7 +11,8 @@
     "Models\\Workflow": {
         "Name": "Jméno",
         "Description": "Popis",
-        "Type": "Typ"
+        "Type": "Typ",
+        "Group": ""
     },
     "Models\\WorkflowStep": {
         "Name": "Jméno",
@@ -17,7 +20,8 @@
         "Color": "Barva",
         "Probability": "Pravděpodobnost",
         "Workflow": "Workflow",
-        "Set result of a deal to": "Stanovit výsledek obchodu"
+        "Set result of a deal to": "Stanovit výsledek obchodu",
+        "Tag": ""
     },
     "Controllers\\Home": {
         "Workflow": "Workflow",

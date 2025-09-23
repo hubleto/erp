@@ -1,7 +1,10 @@
 {
     "manifest": {
         "Documents": "Dokumenty",
-        "Free document management.": "Správa dokumentů zdarma."
+        "Free document management.": "Správa dokumentů zdarma.",
+        "Browse": "",
+        "List": "",
+        "Templates": ""
     },
     "root": {
         "Browse": "Prohlížet",
@@ -30,5 +33,10 @@
     },
     "Components\\FormDocument": {
         "Document": "Dokument"
+    },
+    "Models\\Template": {
+        "Name": "",
+        "Content": "",
+        "Notes": ""
     }
 }

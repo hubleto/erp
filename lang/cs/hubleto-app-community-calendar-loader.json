@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Calendar": "Kalendář",
-        "Free calendar app.": "Aplikace kalendáře zdarma."
+        "Free calendar app.": "Aplikace kalendáře zdarma.",
+        "Reminders": "",
+        "Share": ""
     },
     "root": {
         "Events for today": "Události pro dnešek",
@@ -25,7 +27,9 @@
         "events for tomorrow": "Události pro zítřek",
         "events later": "Události později",
         "Open reminder details": "Otevřít podrobnosti o připomínkách",
-        "Let's have a break. You have nothing to do for today.": "Dájte si pauzu. Dneska nemáte co dělat."
+        "Let's have a break. You have nothing to do for today.": "Dájte si pauzu. Dneska nemáte co dělat.",
+        "reminders later": "",
+        "Later": ""
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalendář"

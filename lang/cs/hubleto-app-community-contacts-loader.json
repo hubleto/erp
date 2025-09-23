@@ -1,7 +1,10 @@
 {
     "manifest": {
         "Contacts": "Kontakty",
-        "Default customer management and addressbook.": "Výchozí správa zákazníků a adresář."
+        "Default customer management and addressbook.": "Výchozí správa zákazníků a adresář.",
+        "Contact Categories": "",
+        "Contact Tags": "",
+        "Import contacts": ""
     },
     "root": {
         "Contact Categories": "Kontaktní kategorie",

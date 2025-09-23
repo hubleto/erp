@@ -1,7 +1,14 @@
 {
     "manifest": {
         "Deals": "Dealy",
-        "Deal management. From deal to purchase.": "Manažment obchodných prípadov až po vytvorenie ponuky."
+        "Deal management. From deal to purchase.": "Manažment obchodných prípadov až po vytvorenie ponuky.",
+        "Deal Tags": "",
+        "Deal Lost Reasons": "",
+        "Deal warnings": "",
+        "Most valuable deals": "",
+        "Deal value by result": "",
+        "Active deals": "",
+        "Archived deals": ""
     },
     "Controllers\\Deals": {
         "Sales": "Predaj",

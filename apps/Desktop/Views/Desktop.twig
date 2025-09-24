@@ -229,13 +229,7 @@
     </div></nav>
 
     <aside id="default-sidebar">
-      <nav style="margin-bottom:1.5em;overflow-y:auto">
-        {% for app in hubleto.appManager().getEnabledApps() %}
-          {% if hubleto.appManager().apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
-            {{ app.dangerouslyInjectDesktopHtmlContent('beforeSidebar')|raw }}
-          {% endif %}
-        {% endfor %}
-
+      <nav>
         <div class="sidebar-group {% if hubleto.router().getRoute() == '' %} activated {% endif %}">
           <a class="btn {{ hubleto.router().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}/">
             <span class="icon"><i class="fas fa-home"></i></span>
@@ -243,46 +237,56 @@
           </a>
         </div>
 
-        {% for sidebarGroup, sidebarGroupData in viewParams.sidebarGroups %}
-          {% set appBtns = [] %}
-          {% set hasActivatedApp = false %}
-          {% for app in viewParams.appsInSidebar %}
-            {% if app.manifest.sidebarGroup == sidebarGroup %}
-              {% set appBtns = appBtns|merge([_self.appBtn(app, true)]) %}
-              {% if app.isActivated %}
-                {% set hasActivatedApp = true %}
-              {% endif %}
+        <div class="nav-inner">
+          {% for app in hubleto.appManager().getEnabledApps() %}
+            {% if hubleto.appManager().apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
+              {{ app.dangerouslyInjectDesktopHtmlContent('beforeSidebar')|raw }}
             {% endif %}
           {% endfor %}
 
-          {% if hubleto.router().getRoute() == 'desktop/' ~ sidebarGroup %}
-            {% set hasActivatedApp = true %}
-          {% endif %}
+          {% for sidebarGroup, sidebarGroupData in viewParams.sidebarGroups %}
+            {% set appBtns = [] %}
+            {% set hasActivatedApp = false %}
+            {% for app in viewParams.appsInSidebar %}
+              {% if app.manifest.sidebarGroup == sidebarGroup %}
+                {% set appBtns = appBtns|merge([_self.appBtn(app, true)]) %}
+                {% if app.isActivated %}
+                  {% set hasActivatedApp = true %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
 
-          {% if appBtns|length == 0 %}
-          {% else %}
-            <div class="sidebar-group {% if hasActivatedApp %} activated {% endif %}">
-              <a class="sidebar-group-title block" id="sg_{{ sidebarGroup }}_btn"
-                onclick="
-                  $('.sidebar-group').removeClass('activated');
-                  $(this).closest('.sidebar-group').addClass('activated');
-                "
-                 href="{{ config.projectUrl }}/~/{{ sidebarGroup }}" data-pr-tooltip="{{ sidebarGroupData.title }}"
-              >
-                <span class="text">{{ sidebarGroupData.title }}</span>
-              </a>
-              <div id="sg_{{ sidebarGroup }}_btns" class="sidebar-group-btns">
-                <div class="inner">{{ appBtns|join('')|raw }}</div>
+            {% if hubleto.router().getRoute() == 'desktop/' ~ sidebarGroup %}
+              {% set hasActivatedApp = true %}
+            {% endif %}
+
+            {% if appBtns|length == 0 %}
+            {% else %}
+              <div class="sidebar-group {% if hasActivatedApp %} activated {% endif %}">
+                <a class="sidebar-group-title block" id="sg_{{ sidebarGroup }}_btn"
+                  onclick="
+                    $('.sidebar-group').removeClass('activated');
+                    $(this).closest('.sidebar-group').addClass('activated');
+                  "
+                  href="{{ config.projectUrl }}/~/{{ sidebarGroup }}" data-pr-tooltip="{{ sidebarGroupData.title }}"
+                >
+                  <span class="text">{{ sidebarGroupData.title }}</span>
+                </a>
+                <div id="sg_{{ sidebarGroup }}_btns" class="sidebar-group-btns">
+                  <div class="inner">{{ appBtns|join('')|raw }}</div>
+                </div>
               </div>
-            </div>
-          {% endif %}
-        {% endfor %}
-        {% set i = 0 %}
-        {% for app in viewParams.appsInSidebar %}
-          {% if app.manifest.sidebarGroup is empty %} {{ _self.appBtn(app, false) }} {% endif %}
-          {% set i = i + 1 %}
-        {% endfor %}
-
+            {% endif %}
+          {% endfor %}
+          {% set i = 0 %}
+          {% for app in viewParams.appsInSidebar %}
+            {% if app.manifest.sidebarGroup is empty %} {{ _self.appBtn(app, false) }} {% endif %}
+            {% set i = i + 1 %}
+          {% endfor %}
+        </div>
+        <div class='nav-release-info'>
+          Hubleto, release {{ viewParams.release }}
+        </div>
       </nav>
       {% if viewParams.activatedApp.sidebarView != '' %} <div>{{ include(viewParams.activatedApp.sidebarView) }}</div> {% endif %}
     </aside>

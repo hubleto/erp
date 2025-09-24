@@ -4,5 +4,9 @@
         "Help and user guide for Hubleto.": "Pomocník a používateľská príručka pre Hubleto.",
         "About": "O Hubleto",
         "About your Hubleto": "O Hubleto"
+    },
+    "Controllers\\About": {
+        "About": "O Hubleto",
+        "About your Hubleto": "O Hubleto"
     }
 }

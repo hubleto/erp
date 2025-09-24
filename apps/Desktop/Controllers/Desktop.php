@@ -46,6 +46,7 @@ class Desktop extends \Hubleto\Erp\Controller
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
     $this->viewParams['activatedApp'] = $activatedApp;
     $this->viewParams['sidebarGroups'] = $desktopApp->getSidebarGroups();
+    $this->viewParams['release'] = \Composer\InstalledVersions::getPrettyVersion('hubleto/erp');
 
     $this->viewParams['availableLanguages'] = $this->config()->getAsArray('availableLanguages', [
       "en" => [ "flagImage" => "en.jpg", "name" => "English" ],

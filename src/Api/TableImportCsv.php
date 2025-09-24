@@ -6,7 +6,7 @@ use Exception;
 
 class TableImportCsv extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $csvData = $this->router()->urlParamAsString('csvData');
     return [

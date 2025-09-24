@@ -7,7 +7,7 @@ use Hubleto\App\Community\Documents\Models\Template;
 
 class GeneratePdfFromTemplate extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idTemplate = $this->router()->urlParamAsInteger('idTemplate');
     $outpuFilename = $this->router()->urlParamAsString('outpuFilename');

@@ -10,7 +10,7 @@ class GetReconciledAmount extends ApiController
 {
 
 
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
 
     $mTransaction = $this->getModel(Transaction::class);

@@ -7,7 +7,7 @@ use Hubleto\App\Community\Leads\Models\Lead;
 
 class SaveBulkStatusChange extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
 
     $records = $this->router()->urlParamAsArray("record");

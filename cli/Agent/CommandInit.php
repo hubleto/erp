@@ -27,6 +27,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       \Hubleto\App\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996 ],
       \Hubleto\App\Community\Help\Loader::class => [ 'sidebarOrder' => 99998 ],
       \Hubleto\App\Community\About\Loader::class => [ 'sidebarOrder' => 99998 ],
+      \Hubleto\App\Community\Api\Loader::class => [ 'sidebarOrder' => 99998 ],
     ],
     'cloud' => [
       \Hubleto\App\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99998 ],

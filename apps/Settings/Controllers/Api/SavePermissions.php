@@ -8,7 +8,7 @@ use Hubleto\App\Community\Auth\Models\UserRole;
 
 class SavePermissions extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $roleId = $this->router()->urlParamAsInteger("roleId");
     $rolePermissions = $this->router()->urlParamAsArray("permissions");

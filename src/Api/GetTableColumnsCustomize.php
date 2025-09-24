@@ -6,7 +6,7 @@ use Exception;
 
 class GetTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     try {
       $model = $this->getModel($this->router()->urlParamAsString("model"));

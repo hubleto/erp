@@ -31,14 +31,16 @@ class Usage extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_key' => (new Lookup($this, $this->translate('Key'), Key::class))->setDefaultVisible()->setRequired(),
-      'controller' => (new Varchar($this, $this->translate('Controller')))->setDefaultVisible()->setRequired(),
-      'used_on' => (new DateTime($this, $this->translate('Used on')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
-      'ip_address' => (new Varchar($this, $this->translate('IP address')))->setDefaultVisible(),
-      'status' => (new Varchar($this, $this->translate('Status')))
+      'id_key' => (new Lookup($this, $this->translate('Key'), Key::class))->setDefaultVisible()->setRequired()->setReadonly(),
+      'app' => (new Varchar($this, $this->translate('App')))->setDefaultVisible()->setRequired()->addIndex('INDEX `app` (`app`)')->setReadonly(),
+      'controller' => (new Varchar($this, $this->translate('Controller')))->setDefaultVisible()->setRequired()->addIndex('INDEX `controller` (`controller`)')->setReadonly(),
+      'used_on' => (new DateTime($this, $this->translate('Used on')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s"))->setReadonly(),
+      'ip_address' => (new Varchar($this, $this->translate('IP address')))->setDefaultVisible()->addIndex('INDEX `ip_address` (`ip_address`)')->setReadonly(),
+      'status' => (new Varchar($this, $this->translate('Status'))->setReadonly())
         ->setEnumValues([
-          0 => $this->translate('Success'),
-          1 => $this->translate('Error'),
+          0 => $this->translate('Unknown'),
+          1 => $this->translate('Success'),
+          2 => $this->translate('Error'),
         ])
       ,
     ]);

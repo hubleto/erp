@@ -9,7 +9,7 @@ use Hubleto\App\Community\Deals\Models\Deal;
 
 class CreateFromDeal extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     if (!$this->router()->isUrlParam("idDeal")) {
       return [

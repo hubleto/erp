@@ -15,7 +15,7 @@ class GetTemplateChartData extends \Hubleto\Erp\Controllers\ApiController
     6 => "BETWEEN",
   ];
 
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     /** @var array<string, mixed> */
     $config = $this->router()->urlParamAsArray("config");

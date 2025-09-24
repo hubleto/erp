@@ -6,7 +6,7 @@ use Hubleto\App\Community\Deals\Models\Deal;
 
 class GenerateQuotationPdf extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idDeal = $this->router()->urlParamAsInteger('idDeal');
 

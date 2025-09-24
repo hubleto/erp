@@ -6,7 +6,7 @@ use Hubleto\App\Community\Invoices\Models\Invoice;
 
 class GeneratePdf extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idInvoice = $this->router()->urlParamAsInteger('idInvoice');
 

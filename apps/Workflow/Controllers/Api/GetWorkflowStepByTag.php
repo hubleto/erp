@@ -7,7 +7,7 @@ use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 
 class GetWorkflowStepByTag extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
 
     $idWorkflow = $this->router()->urlParamAsInteger('idWorkflow');

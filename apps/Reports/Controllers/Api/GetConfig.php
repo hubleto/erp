@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Reports\Controllers\Api;
 
 class GetConfig extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $model = $this->router()->urlParamAsString("model");
     $modelObj = $this->getModel($model::class);

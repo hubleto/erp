@@ -8,7 +8,7 @@ use Hubleto\App\Community\Customers\Models\CustomerActivity;
 
 class LogActivity extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idCustomer = $this->router()->urlParamAsInteger("idCustomer");
     $activity = $this->router()->urlParamAsString("activity");

@@ -17,13 +17,22 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^api\/?$/' => Controllers\Home::class,
-      '/^api\/call?$/' => Controllers\Api\Call::class,
+      '/^api\/call?$/' => Controllers\Call::class,
       '/^api\/keys(\/(?<recordId>\d+))?\/?$/' => Controllers\Keys::class,
       '/^api\/keys\/add?\/?$/' => ['controller' => Controllers\Keys::class, 'vars' => [ 'recordId' => -1 ]],
       '/^api\/permissions(\/(?<recordId>\d+))?\/?$/' => Controllers\Permissions::class,
       '/^api\/permissions\/add?\/?$/' => ['controller' => Controllers\Permissions::class, 'vars' => [ 'recordId' => -1 ]],
       '/^api\/usages(\/(?<recordId>\d+))?\/?$/' => Controllers\Usages::class,
       '/^api\/usages\/add?\/?$/' => ['controller' => Controllers\Usages::class, 'vars' => [ 'recordId' => -1 ]],
+    ]);
+
+
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp->addSetting($this, [
+      'title' => $this->translate('API keys'),
+      'icon' => 'fas fa-key',
+      'url' => 'api/keys',
     ]);
 
   }

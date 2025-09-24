@@ -6,7 +6,7 @@ use Hubleto\App\Community\Deals\Models\Deal;
 
 class GenerateInvoice extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idDeal = $this->router()->urlParamAsInteger('idDeal');
 
@@ -15,6 +15,6 @@ class GenerateInvoice extends \Hubleto\Erp\Controllers\ApiController
 
     $idInvoice = $mDeal->generateInvoice($idDeal);
 
-    return $idInvoice;
+    return ["status" => "success", "idInvoice" => $idInvoice];
   }
 }

@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Notifications\Controllers\Api;
 
 class MarkAsUnread extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idNotification = $this->router()->urlParamAsInteger('idNotification');
     $mNotification = $this->getModel(\Hubleto\App\Community\Notifications\Models\Notification::class);

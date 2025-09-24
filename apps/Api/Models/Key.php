@@ -30,6 +30,10 @@ class Key extends \Hubleto\Erp\Model
   public ?string $lookupSqlValue = 'concat(substr({%TABLE%}.key, 1, 8), " ...")';
   public ?string $lookupUrlDetail = 'api/keys/{%ID%}';
 
+  public array $relations = [
+    'PERMISSIONS' => [ self::HAS_MANY, Permission::class, 'id_key', 'id'],
+  ];
+
   /**
    * [Description for describeColumns]
    *
@@ -39,7 +43,7 @@ class Key extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'key' => (new Varchar($this, $this->translate('Key')))->setDefaultVisible()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
+      'key' => (new Varchar($this, $this->translate('Key')))->setDefaultVisible()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4())->addIndex('INDEX `key` (`key`)'),
       'valid_until' => (new DateTime($this, $this->translate('Valid until')))->setDefaultVisible()->setDefaultValue(date("Y-m-d H:i:s", strtotime("+14 days"))),
       'is_enabled' => (new Boolean($this, $this->translate('Enabled')))->setDefaultValue(true)->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),

@@ -1,0 +1,41 @@
+{
+    "manifest": {
+        "Api": "API",
+        "Hubleto Api Key management": "Správa API kľúčov",
+        "API keys": "API kľúče"
+    },
+    "Models\\Key": {
+        "Key": "Kľúč",
+        "Valid until": "Platný do",
+        "Enabled": "Povolený",
+        "Notes": "Poznámky",
+        "IP Address blacklist": "Zakázané IP adresy",
+        "IP Address whitelist": "Povolené IP adresy",
+        "Created by": "Vytvoril",
+        "Created": "Vytvorený"
+    },
+    "Models\\Permission": {
+        "Key": "Kľúč",
+        "App": "Appka",
+        "Controller": "Kontrolér"
+    },
+    "Components\\FormKey": {
+        "Usage": "Záznamy používania",
+        "Key": "Kľúč",
+        "Permissions": "Povolenia",
+        "Test": "Otestovať",
+        "Test result": "Výsledok testu",
+        "Run test": "Spustiť test"
+    },
+    "Models\\Usage": {
+        "Key": "Kľúč",
+        "App": "Appka",
+        "Controller": "Kontrolér",
+        "Used on": "Použitý",
+        "IP address": "IP adresa",
+        "Status": "Stav",
+        "Unknown": "Neznámy",
+        "Success": "Úspech",
+        "Error": "Chyba"
+    }
+}

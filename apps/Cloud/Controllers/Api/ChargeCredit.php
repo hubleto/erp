@@ -8,7 +8,7 @@ class ChargeCredit extends \Hubleto\Erp\Controllers\ApiController
 {
   public bool $requiresAuthenticatedUser = false;
 
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $premiumAccount = $this->getService(PremiumAccount::class);
 

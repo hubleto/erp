@@ -14,7 +14,7 @@ class GetPermissions extends \Hubleto\Erp\Controllers\ApiController
     "Api"
   ];
 
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $allPermissions = [];
     $sortedAllPermissions = [];

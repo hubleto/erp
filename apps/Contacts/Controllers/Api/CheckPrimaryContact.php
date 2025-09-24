@@ -8,7 +8,7 @@ use Hubleto\App\Community\Contacts\Models\Tag;
 
 class CheckPrimaryContact extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idContact = $this->router()->urlParamAsInteger("idContact");
     $idCustomer = $this->router()->urlParamAsInteger("idCustomer");
@@ -17,7 +17,7 @@ class CheckPrimaryContact extends \Hubleto\Erp\Controllers\ApiController
     if ($idContact == null || $idCustomer == null) {
       return [
         "result" => false,
-        "error" => $this->translator()->translate("Some request data were missing")
+        "error" => $this->translate("Some request data were missing")
       ];
     }
     if ($tags == null) {
@@ -68,7 +68,7 @@ class CheckPrimaryContact extends \Hubleto\Erp\Controllers\ApiController
       $existingTagNames = implode(", ", $matchesNames);
       return [
         "result" => false,
-        "error" => $this->translator()->translate("There already exists a primary contact for this customer for these tags:"),
+        "error" => $this->translate("There already exists a primary contact for this customer for these tags:"),
         "names" => $existingTagNames
       ];
     }

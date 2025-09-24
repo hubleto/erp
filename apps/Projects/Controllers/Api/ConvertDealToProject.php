@@ -10,7 +10,7 @@ use Hubleto\App\Community\Workflow\Models\Workflow;
 
 class ConvertDealToProject extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     if (!$this->router()->isUrlParam("idDeal")) {
       return [

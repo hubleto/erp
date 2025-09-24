@@ -7,7 +7,7 @@ use Hubleto\App\Community\Campaigns\Models\Recipient;
 
 class SaveRecipientsFromContacts extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $contactIds = $this->router()->urlParamAsArray('contactIds');

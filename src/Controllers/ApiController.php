@@ -13,7 +13,7 @@ class ApiController extends \Hubleto\Erp\Controller
     return [];
   }
 
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     try {
       return $this->response();

@@ -8,7 +8,7 @@ use Hubleto\App\Community\Campaigns\Lib;
 
 class GetMailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idRecipient = $this->router()->urlParamAsInteger('idRecipient');
 

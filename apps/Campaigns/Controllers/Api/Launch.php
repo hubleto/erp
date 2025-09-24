@@ -9,7 +9,7 @@ use Hubleto\App\Community\Campaigns\Lib;
 
 class Launch extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
 

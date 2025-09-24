@@ -9,7 +9,7 @@ use Hubleto\App\Community\Worksheets\Models\Activity;
 
 class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $idProject = $this->router()->urlParamAsInteger("idProject");
 

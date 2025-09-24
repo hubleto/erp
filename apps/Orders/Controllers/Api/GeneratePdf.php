@@ -6,7 +6,7 @@ use Hubleto\App\Community\Orders\Models\Order;
 
 class GeneratePdf extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
 
     $idOrder = $this->router()->urlParamAsInteger('idOrder');

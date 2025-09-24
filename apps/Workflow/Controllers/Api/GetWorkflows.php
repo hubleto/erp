@@ -9,7 +9,7 @@ use Hubleto\App\Community\Workflow\Models\WorkflowHistory;
 
 class GetWorkflows extends \Hubleto\Erp\Controllers\ApiController
 {
-  public function renderJson(): ?array
+  public function renderJson(): array
   {
     $model = $this->router()->urlParamAsString('model');
     $recordId = $this->router()->urlParamAsString('recordId');

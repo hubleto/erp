@@ -85,6 +85,7 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
         : null;
       break;
       case 'test':
+        console.log(this.refInputApp.current, this.refInputController.current, this.refInputVars.current);
         return R.id > 0 ? <>
           <table className='table-default dense'>
             <thead>
@@ -94,6 +95,10 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
               <tr>
                 <td>Endpoint</td>
                 <td className='m-2'>{globalThis.main.config.projectUrl + '/api/call'}</td>
+              </tr>
+              <tr>
+                <td>Key</td>
+                <td className='m-2'>{R.key}</td>
               </tr>
               <tr>
                 <td>App</td>
@@ -130,12 +135,24 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
             <span className='icon'><i className='fas fa-bolt'></i></span>
             <span className='text'>{this.translate('Run test')}</span>
           </button>
-          <div className='card mt-2'>
-            <div className='card-header'>{this.translate('Test result')}</div>
-            <div className='card-body'>
-              <pre className='text-xs bg-gray-50 p-2'>{JSON.stringify(this.state.testResult, null, 2)}</pre>
+          {this.state.testResult ?
+            <div className='card mt-2'>
+              <div className='card-header'>{this.translate('Test result')}</div>
+              <div className='card-body'>
+                <pre className='text-xs bg-yellow-50 p-2'>
+                  POST accounts/wai-blue/api/call{"\n"}
+                  {"  "}-H 'Content-type: application/json'{"\n"}
+                  {"  "}-D '&#123;{"\n"}
+                  {"    "}key: {R.key}{"\n"}
+                  {"    "}app: {this.refInputApp.current.state.value}{"\n"}
+                  {"    "}controller: {this.refInputController.current.state.value}{"\n"}
+                  {"    "}vars: {JSON.stringify(this.refInputVars.current.state.value)}{"\n"}
+                  {"  "}&#125;'{"\n"}
+                </pre>
+                <pre className='text-xs bg-blue-50 p-2'>{JSON.stringify(this.state.testResult, null, 2)}</pre>
+              </div>
             </div>
-          </div>
+          : null}
         </> : null;
       break;
       case 'usage':

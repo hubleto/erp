@@ -14,8 +14,8 @@
         "Projects": "Projekty",
         "Supply chain": "Dodávateľský reťazec",
         "Helpdesk": "Helpdesk",
-        "Events": "",
-        "E-Commerce": "",
+        "Events": "Eventy",
+        "E-Commerce": "E-Commerce",
         "Website": "Webstránka",
         "Finance": "Financie",
         "Reporting": "Reporty",
@@ -53,14 +53,8 @@
         "You have no apps in this group.": "V tejto skupine nemáte žiadnu appku.",
         "Addressbook": "Adresár",
         "Calendar": "Kalendár",
-        "Workflow": "",
+        "Workflow": "Workflow",
         "Premium": "Premium",
         "Manage cloud account": "Spravovať cloud účet"
-    },
-    "Controllers\\SidebarGroup": {
-        "Obchod": "",
-        "Projekty": "",
-        "Dodávateľský reťazec": "",
-        "Financie": ""
     }
 }

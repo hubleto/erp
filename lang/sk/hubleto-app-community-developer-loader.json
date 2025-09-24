@@ -8,13 +8,13 @@
         "Developer tools": "Nástroje pre vývojárov"
     },
     "Controllers\\Dashboard": {
-        "Developer": "",
-        "DB Updates": "",
-        "Form designer": ""
+        "Developer": "Vývojár",
+        "DB Updates": "Aktualizácie databázy",
+        "Form designer": "Návrhár formulárov"
     },
     "Controllers\\DbUpdates": {
-        "Developer": "",
-        "DB Updater": "",
+        "Developer": "Vývojár",
+        "DB Updater": "Aktualizácie databázy",
         "Database updater": "",
         "No necessary database updates found.": ""
     }

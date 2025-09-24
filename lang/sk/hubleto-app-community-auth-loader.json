@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Notifications": "Autentifikácia",
-        "Auth": "",
+        "Auth": "Autentifikácia",
         "Hubleto Authorization App for User Management": "Aplikácia na autentifikáciu používateľov"
     },
     "Models\\User": {

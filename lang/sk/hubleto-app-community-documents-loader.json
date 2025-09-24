@@ -2,9 +2,9 @@
     "manifest": {
         "Documents": "Dokumenty",
         "Free document management.": "Bezplatný manažment dokumentov.",
-        "Browse": "",
-        "List": "",
-        "Templates": ""
+        "Browse": "Prehliadať",
+        "List": "Zoznam",
+        "Templates": "Šablóny"
     },
     "Models\\Document": {
         "Document name": "Názov dokumentu",
@@ -41,10 +41,10 @@
         "Documents": ""
     },
     "Components\\Browser": {
-        "Add folder": "",
-        "Add document": ""
+        "Add folder": "Pridať priečinok",
+        "Add document": "Pridať dokument"
     },
     "Components\\FormDocument": {
-        "Document": ""
+        "Document": "Dokument"
     }
 }

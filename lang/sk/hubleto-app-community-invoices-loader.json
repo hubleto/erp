@@ -17,15 +17,15 @@
         "Due": "Splatnosť",
         "Payment": "Úhrada",
         "Notes": "Poznámky",
-        "Invoice profile": "",
-        "Paid": "",
-        "Currency": "",
-        "Total excl. VAT": "",
-        "Total incl. VAT": "",
-        "Template": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Add invoice": ""
+        "Invoice profile": "Fakturačný profil",
+        "Paid": "Uhradená",
+        "Currency": "Mena",
+        "Total excl. VAT": "Suma bez DPH",
+        "Total incl. VAT": "Suma s DPH",
+        "Template": "Šablóna",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
+        "Add invoice": "Pridať faktúru"
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Spolu bez DPH",
@@ -50,16 +50,16 @@
         "Item": "Položka",
         "Unit price": "Jednotková cena",
         "Amount": "Množstvo",
-        "Discount": "",
-        "VAT": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Discount": "Zľava",
+        "VAT": "DPH",
+        "Price excl. VAT": "Cena bez DPH",
+        "Price incl. VAT": "Cena s DPH"
     },
     "Controllers\\Invoices": {
         "Invoices": "Faktúry"
     },
     "Models\\InvoiceDocument": {
-        "Invoice": "",
-        "Document": ""
+        "Invoice": "Faktúra",
+        "Document": "Dokument"
     }
 }

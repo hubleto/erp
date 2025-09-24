@@ -2,11 +2,11 @@
     "manifest": {
         "Leads": "Leady",
         "Management of leads, cold contacts. Convert leads to deals.": "Správa leadov. Konverzia do dealov.",
-        "Lead Levels": "",
-        "Lead Tags": "",
-        "Lead Lost Reasons": "",
-        "Active leads": "",
-        "Archived leads": ""
+        "Lead Levels": "Levely leadov",
+        "Lead Tags": "Značky leadov",
+        "Lead Lost Reasons": "Dôvody pre stratu leadu",
+        "Active leads": "Aktívne leady",
+        "Archived leads": "Archivované leady"
     },
     "Controllers\\Leads": {
         "Sales": "Obchod",
@@ -21,7 +21,7 @@
         "Activity type": "Typ aktivity",
         "Subject": "Predmet",
         "Lead": "Vedenie",
-        "Contact person": "",
+        "Contact person": "Kontaktná osoba",
         "Start date": "Dátum začiatku",
         "Start time": "Začiatok",
         "End date": "Dátum",
@@ -55,22 +55,22 @@
         "Add lead": "Pridať lead",
         "Owner": "Majiteľ",
         "Identifier": "Identifikátor",
-        "Specific subject (if any)": "",
+        "Specific subject (if any)": "Predmet",
         "Campaign": "Kampaň",
         "Email": "Email",
         "Phone number": "Telefón",
         "Level": "Úroveň",
         "Manager": "Manažér",
         "Team": "Tím",
-        "Workflow": "",
-        "Workflow step": "",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
         "Closed": ""
     },
     "root": {
         "Lead statuses": "Stavy leadov",
         "Lead Tags": "Značky leadov",
-        "Active leads": "Aktívne zvody",
-        "Archived leads": "Archivované vodiče",
+        "Active leads": "Aktívne leady",
+        "Archived leads": "Archivované leady",
         "Lead Lost Reasons": "Dôvody pre stratu leadu",
         "Lead Levels": "Úrovne leadov"
     },
@@ -101,11 +101,11 @@
         "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
         "Most recent activities": "Najnovšie aktivity",
         "Not completed yet": "Nedokončená",
-        "Tasks": "",
-        "Log completed activity": "",
-        "Enter": "",
-        "Schedule activity": "",
-        "Shift+Enter": ""
+        "Tasks": "Úlohy",
+        "Log completed activity": "Zaevidovať vykonanú činnosť",
+        "Enter": "Enter",
+        "Schedule activity": "Naplánovať aktivitu",
+        "Shift+Enter": "Shift+Enter"
     },
     "Models\\Tag": {
         "Name": "Pomenovať",
@@ -116,10 +116,10 @@
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
         "Amount": "Výška",
-        "Dicount (%)": "",
-        "Vat (%)": "",
-        "Vat": "Kov",
-        "Discount": "Zľavu",
+        "Dicount (%)": "Zľava (%)",
+        "Vat (%)": "DPH (%)",
+        "Vat": "DPH",
+        "Discount": "Zľava",
         "Sum": "Súčet"
     },
     "Models\\LostReason": {
@@ -138,11 +138,11 @@
         "No warnings for leads.": "Žiadne upozornenia pre leady."
     },
     "Models\\LeadCampaign": {
-        "Lead": "",
-        "Campaign": ""
+        "Lead": "Lead",
+        "Campaign": "Kampaň"
     },
     "Models\\LeadTask": {
-        "Lead": "",
-        "Task": ""
+        "Lead": "Lead",
+        "Task": "Úloha"
     }
 }

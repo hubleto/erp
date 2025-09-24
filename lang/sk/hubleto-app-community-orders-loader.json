@@ -2,8 +2,8 @@
     "manifest": {
         "Orders": "Objednávky",
         "Free order managment.": "Správa objednávok zdarma.",
-        "Order states": "",
-        "Order warnings": ""
+        "Order states": "Stavy objednávok",
+        "Order warnings": "Upozornenia na objednávky"
     },
     "root": {
         "Order states": "Stavy objednávok"
@@ -23,18 +23,18 @@
         "Shipping information": "Dodacie informácie",
         "Notes": "Poznámky",
         "Add order": "Pridať objednávku",
-        "Workflow": "",
-        "Workflow step": "",
-        "Template": "",
-        "Identifier": "",
-        "Owner": "",
-        "Manager": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": "",
-        "Closed": "",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": ""
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
+        "Template": "Šablóna",
+        "Identifier": "Identifikátor",
+        "Owner": "Vlastník",
+        "Manager": "Manažér",
+        "Price excl. VAT": "Suma bez DPH",
+        "Price incl. VAT": "Suma s DPH",
+        "Closed": "Uzavreté",
+        "Open \/ Closed": "Otvorené / Uzavreté",
+        "Open": "Otvorené",
+        "All": "Všetky"
     },
     "Models\\State": {
         "Title": "Názov",
@@ -49,10 +49,10 @@
         "Amount": "Výška",
         "Discount": "Zľavu",
         "Vat": "Kov",
-        "Add product": "",
-        "Sales price": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Add product": "Pridať produkt",
+        "Sales price": "Predajná cena",
+        "Price excl. VAT": "Suma bez DPH",
+        "Price incl. VAT": "Suma s DPH"
     },
     "Models\\History": {
         "Order": "Objednávka",
@@ -64,41 +64,41 @@
         "Order": "Objednávka",
         "History": "História",
         "Title": "Názov",
-        "Documents": "",
-        "Projects": "",
-        "Invoices": "",
-        "Products": "",
-        "Type recent activity here": "",
-        "Log completed activity": "",
-        "Enter": "",
-        "Schedule activity": "",
-        "Shift+Enter": "",
-        "Most recent activities": ""
+        "Documents": "Dokumenty",
+        "Projects": "Projekty",
+        "Invoices": "Faktúry",
+        "Products": "Produkty",
+        "Type recent activity here": "Vložte nedávnu aktivitu",
+        "Log completed activity": "Zaevidovať vykonanú činnosť",
+        "Enter": "Enter",
+        "Schedule activity": "Naplánovať aktivitu",
+        "Shift+Enter": "Shift+Enter",
+        "Most recent activities": "Posledné aktivity"
     },
     "Models\\OrderInvoice": {
-        "Order": "",
-        "Invoice": ""
+        "Order": "Objednávka",
+        "Invoice": "Faktúra"
     },
     "Models\\OrderDocument": {
-        "Order": "",
-        "Document": ""
+        "Order": "Objednávka",
+        "Document": "Dokument"
     },
     "Models\\OrderActivity": {
-        "Subject": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Meeting minutes (link)": "",
-        "Created by": "",
-        "Order": ""
+        "Subject": "Predmet",
+        "Activity type": "Typ činnosti",
+        "Start date": "Začiatok",
+        "Start time": "Do",
+        "End date": "Koniec",
+        "End time": "Do",
+        "All day": "Celý deň",
+        "Completed": "Ukončená",
+        "Meeting minutes (link)": "Zápis zo stretnutia (odkaz na dokument)",
+        "Created by": "Vytvoril",
+        "Order": "Objednávka"
     },
     "Models\\OrderDeal": {
-        "Order": "",
-        "Deal": ""
+        "Order": "Objednávka",
+        "Deal": "Deal"
     },
     "Controllers\\Boards\\OrderWarnings": {
         "Open orders without future plan": ""

@@ -14,7 +14,14 @@
     },
     "manifest": {
         "Deals": "Angebote",
-        "Deal management. From deal to purchase.": "Deal Management. Vom Deal zum Kauf."
+        "Deal management. From deal to purchase.": "Deal Management. Vom Deal zum Kauf.",
+        "Deal Tags": "",
+        "Deal Lost Reasons": "",
+        "Deal warnings": "",
+        "Most valuable deals": "",
+        "Deal value by result": "",
+        "Active deals": "",
+        "Archived deals": ""
     },
     "root": {
         "Deal statuses": "",

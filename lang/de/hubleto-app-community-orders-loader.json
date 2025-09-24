@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Orders": "Bestellungen",
-        "Free order managment.": "Kostenloses Bestellmanagement."
+        "Free order managment.": "Kostenloses Bestellmanagement.",
+        "Order states": "",
+        "Order warnings": ""
     },
     "root": {
         "Order states": "Bestellstaaten"

@@ -14,7 +14,12 @@
     },
     "manifest": {
         "Leads": "Leads",
-        "Management of leads, cold contacts. Convert leads to deals.": "Management von Leads, kalte Kontakte. Konvertieren führt zu Geschäften."
+        "Management of leads, cold contacts. Convert leads to deals.": "Management von Leads, kalte Kontakte. Konvertieren führt zu Geschäften.",
+        "Lead Levels": "",
+        "Lead Tags": "",
+        "Lead Lost Reasons": "",
+        "Active leads": "",
+        "Archived leads": ""
     },
     "root": {
         "Lead statuses": "Lead Zustände",

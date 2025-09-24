@@ -125,7 +125,20 @@
         "Settings": "Einstellungen",
         "...": "...",
         "Settings and control panel for your Hubleto.": "Einstellungen und Bedienfeld für Ihr Hubleto.",
-        "Settings and tools": "Einstellungen und Werkzeuge"
+        "Settings and tools": "Einstellungen und Werkzeuge",
+        "Users": "",
+        "Roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions list": "",
+        "Role permissions": "",
+        "Activity types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Invoice profiles": "",
+        "Platform config": "",
+        "Sidebar": "",
+        "Teams": ""
     },
     "root": {
         "Users": "Benutzer",

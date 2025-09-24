@@ -19,6 +19,35 @@
         "Reporting": "Berichterstattung",
         "Maintenance": "Wartung",
         "Help": "Hilfe",
-        "Custom": "Benutzerdefiniert"
+        "Custom": "Benutzerdefiniert",
+        "Search app...": "",
+        "Open sidebar": "",
+        "Premium": "",
+        "Manage your user account": "",
+        "Manage cloud account": "",
+        "Sign out": ""
+    },
+    "manifest": {
+        "Desktop": "",
+        "Default Hubleto desktop implementation.": "",
+        "CRM": "",
+        "Addressbook": "",
+        "Calendar": "",
+        "Documents": "",
+        "Communication": "",
+        "Workflow": "",
+        "Marketing": "",
+        "Sales": "",
+        "Projects": "",
+        "Supply chain": "",
+        "Helpdesk": "",
+        "Events": "",
+        "E-Commerce": "",
+        "Website": "",
+        "Finance": "",
+        "Reporting": "",
+        "Maintenance": "",
+        "Help": "",
+        "Custom": ""
     }
 }

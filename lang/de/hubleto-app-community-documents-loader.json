@@ -4,7 +4,10 @@
     },
     "manifest": {
         "Documents": "Unterlagen",
-        "Free document management.": "Kostenlose Dokumentverwaltung."
+        "Free document management.": "Kostenlose Dokumentverwaltung.",
+        "Browse": "",
+        "List": "",
+        "Templates": ""
     },
     "root": {
         "Browse": "Durchsuchen",

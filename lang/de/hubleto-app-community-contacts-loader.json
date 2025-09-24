@@ -1,7 +1,10 @@
 {
     "manifest": {
         "Contacts": "Kontakte",
-        "Default customer management and addressbook.": "Standard-Kundenmanagement und Adressbuch."
+        "Default customer management and addressbook.": "Standard-Kundenmanagement und Adressbuch.",
+        "Contact Categories": "",
+        "Contact Tags": "",
+        "Import contacts": ""
     },
     "root": {
         "Contact Categories": "Kontaktkategorien",

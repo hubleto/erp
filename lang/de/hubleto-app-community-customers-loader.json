@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Customers": "Kunden",
-        "Free customer management and addressbook.": "Kostenloses Kundenmanagement und Adressbuch."
+        "Free customer management and addressbook.": "Kostenloses Kundenmanagement und Adressbuch.",
+        "Customer Tags": ""
     },
     "root": {
         "Customer Tags": "Kunden-Tags"

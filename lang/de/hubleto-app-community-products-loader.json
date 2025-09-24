@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Products": "Produkte",
-        "Free product portfolio managment.": "Kostenloses Produktportfoliomanagement."
+        "Free product portfolio managment.": "Kostenloses Produktportfoliomanagement.",
+        "Groups": ""
     },
     "root": {
         "Products": "Produkte",

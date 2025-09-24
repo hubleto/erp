@@ -120,7 +120,7 @@ class Renderer extends \Hubleto\Framework\Renderer
         $controllerObject->requiresAuthenticatedUser
         && !$controllerObject->permittedForAllUsers
       ) {
-        $this->getService(PermissionsManager::class)->checkPermission();
+        $this->permissionsManager()->checkPermission();
       }
 
       $controllerObject->preInit();

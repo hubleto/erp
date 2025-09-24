@@ -7,7 +7,9 @@
     },
     "manifest": {
         "Workflow": "Workflow",
-        "Free sales workflow management.": "Kostenloses Verkaufsworkflowmanagement."
+        "Free sales workflow management.": "Kostenloses Verkaufsworkflowmanagement.",
+        "History": "",
+        "Workflows": ""
     },
     "root": {
         "Workflows": "Workflows"

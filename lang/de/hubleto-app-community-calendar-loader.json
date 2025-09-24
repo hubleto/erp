@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Calendar": "Kalender",
-        "Free calendar app.": "Kostenlose Kalender-App."
+        "Free calendar app.": "Kostenlose Kalender-App.",
+        "Reminders": "",
+        "Share": ""
     },
     "root": {
         "Reminders": "Erinnerungen"

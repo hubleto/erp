@@ -1,0 +1,8 @@
+{
+    "manifest": {
+        "Accounts": ""
+    },
+    "Controllers\\Accounts": {
+        "Accounting": ""
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "manifest": {
+        "Journal": ""
+    },
+    "Controllers\\Entries": {
+        "Journal Entries": ""
+    },
+    "Models\\Entry": {
+        "Description": "",
+        "Date": "",
+        "Reference number": ""
+    },
+    "Models\\EntryLine": {
+        "Memo": "",
+        "Type": "",
+        "Amount": "",
+        "Account": "",
+        "Journal Entry": ""
+    }
+}

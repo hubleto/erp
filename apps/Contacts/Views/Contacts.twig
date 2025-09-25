@@ -3,4 +3,5 @@
 <app-contacts-table-contacts
   string:tag="table-contacts"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-contacts-table-contact>

@@ -3,4 +3,5 @@
 <app-table
   string:model="\Hubleto\App\Community\Products\Models\Group"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-table>

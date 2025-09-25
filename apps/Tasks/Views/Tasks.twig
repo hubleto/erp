@@ -3,4 +3,5 @@
 <app-tasks-table-tasks
   string:tag="table-tasks"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-tasks-table-tasks>

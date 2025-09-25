@@ -3,4 +3,5 @@
 <app-settings-table-workflows
   string:tag="table-workflows"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-settings-table-workflows>

@@ -2,4 +2,5 @@
 
 <app-settings-table-users
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-settings-table-users>

@@ -3,4 +3,5 @@
 <app-discussions-table-members
   string:tag="table-members"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-discussions-table-members>

@@ -3,4 +3,5 @@
 <app-inventory-table-inventory
   string:tag="table-inventory"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-inventory-table-inventory>

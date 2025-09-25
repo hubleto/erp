@@ -3,4 +3,5 @@
 <app-events-table-types
   string:tag="table-types"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-events-table-types>

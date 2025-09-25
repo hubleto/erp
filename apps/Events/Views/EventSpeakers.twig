@@ -3,4 +3,5 @@
 <app-events-table-eventspeakers
   string:tag="table-eventspeakers"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-events-table-eventspeakers>

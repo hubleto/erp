@@ -3,4 +3,5 @@
 <app-events-table-agendas
   string:tag="table-agendas"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-events-table-agendas>

@@ -2,5 +2,6 @@
 
 <app-table
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
   string:model="Hubleto/App/Community/Workflow/Models/WorkflowHistory"
 ></app-table>

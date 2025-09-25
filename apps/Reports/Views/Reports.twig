@@ -5,4 +5,5 @@
 <app-reports-table-reports
   string:tag="table-reports"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-reports-table-reports>

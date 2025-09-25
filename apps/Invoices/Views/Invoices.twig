@@ -3,4 +3,5 @@
 <app-invoices-table-invoices
   string:tag="table-invoices"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-invoices-table-invoices>

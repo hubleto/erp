@@ -3,4 +3,5 @@
 <app-customers-table-customers
   string:tag="table-customers"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-customers-table-customers>

@@ -2,5 +2,6 @@
 
 <app-mail-table-templates
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
   bool:show-only-templates="true"
 ></app-mail-table-templates>

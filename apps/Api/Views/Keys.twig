@@ -3,4 +3,5 @@
 <app-api-table-keys
   string:tag="api-table-keys"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-api-table-keys>

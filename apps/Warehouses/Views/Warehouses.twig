@@ -3,4 +3,5 @@
 <app-warehouses-table-warehouses
   string:tag="table-warehouses"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-warehouses-table-warehouses>

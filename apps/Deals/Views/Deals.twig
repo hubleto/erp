@@ -14,4 +14,5 @@
 <app-deals-table-deals
   string:tag="table-deals"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-deals-table-deals>

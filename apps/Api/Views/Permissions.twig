@@ -3,4 +3,5 @@
 <app-api-table-permissions
   string:tag="api-table-permissions"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-api-table-permissions>

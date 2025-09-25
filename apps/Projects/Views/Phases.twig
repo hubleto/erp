@@ -3,4 +3,5 @@
 <app-projects-table-phases
   string:tag="table-project-phases"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-projects-table-phases>

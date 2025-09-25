@@ -3,4 +3,5 @@
 <app-leads-table-leads
   string:tag="table-leads"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-leads-table-leads>

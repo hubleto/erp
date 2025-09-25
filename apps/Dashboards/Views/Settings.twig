@@ -3,4 +3,5 @@
 <app-dashboards-table-dashboards
   string:tag="table-dashboards"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-dashboards-table-dashboards>

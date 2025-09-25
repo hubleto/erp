@@ -3,4 +3,5 @@
 <app-worksheets-table-activity-types
   string:tag="table-activity-types"
   int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
 ></app-worksheets-table-activity-types>

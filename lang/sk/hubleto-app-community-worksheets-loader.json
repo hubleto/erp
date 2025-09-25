@@ -2,22 +2,35 @@
     "manifest": {
         "Worksheets": "Vykazovanie",
         "Worksheet log": "Vykazovanie odpracovaných hodín",
-        "Activity types": ""
+        "Activity types": "Typy činností"
     },
     "root": {
         "Worksheets": "Vykazovanie",
         "Activity types": "Typy aktivít"
     },
     "Models\\Activity": {
-        "Worker": "",
-        "Task": "",
-        "Type": "",
-        "Day": "",
-        "Worked hours": "",
-        "Description": "",
-        "Approved": "",
-        "Is chargeable": "",
-        "Created": ""
+        "Worker": "Pracovník",
+        "Task": "Úloha",
+        "Type": "Typ činnosti",
+        "Day": "Deň",
+        "Worked hours": "Odpracované",
+        "Description": "Popis",
+        "Approved": "Schválené",
+        "Is chargeable": "Účtovateľné",
+        "Created": "Vytvorené",
+        "Period": "Obdobie",
+        "All": "Všetko",
+        "Today": "Dnes",
+        "This week": "Tento týždeň",
+        "Last week": "Minulý týždeň",
+        "This month": "Tento mesiac",
+        "Last month": "Minulý mesiac",
+        "This year": "Tento rok",
+        "Last year": "Minulý rok",
+        "Yesterday": "Včera",
+        "Last 7 days": "Posledných 7 dní",
+        "Last 14 days": "Posledných 14 dní",
+        "Month before last": "Predminulý mesiac"
     },
     "Models\\ActivityType": {
         "Varchar": "",

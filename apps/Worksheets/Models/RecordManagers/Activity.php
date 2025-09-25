@@ -33,6 +33,7 @@ class Activity extends \Hubleto\Erp\RecordManager
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
+    $filters = $hubleto->router()->urlParamAsArray("filters");
     $idTask = $hubleto->router()->urlParamAsInteger("idTask");
     $idProject = $hubleto->router()->urlParamAsInteger("idProject");
 
@@ -54,10 +55,20 @@ class Activity extends \Hubleto\Erp\RecordManager
       $query = $query->whereIn($this->table . '.id_task', $projectTasksIds);
     }
 
-    // Uncomment and modify these lines if you want to apply default filters to your model.
-    // $filters = $hubleto->router()->urlParamAsArray("filters");
-    // if (isset($filters["fArchive"]) && $filters["fArchive"] == 1) $query = $query->where("customers.is_active", false);
-    // else $query = $query->where("customers.is_active", true);
+    if (isset($filters['fPeriod'])) {
+      switch ($filters['fPeriod']) {
+        case 'today': $query = $query->whereDate('date_worked', date('Y-m-d')); break;
+        case 'yesterday': $query = $query->whereDate('date_worked', date('Y-m-d'), strtotime('-1 day')); break;
+        case 'last7Days': $query = $query->whereDate('date_worked', '>=', date('m', strtotime('-7 days'))); break;
+        case 'last14Days': $query = $query->whereDate('date_worked', '>=', date('m', strtotime('-14 days'))); break;
+        case 'lastMonth': $query = $query->whereMonth('date_worked', date('m'), strtotime('-1 months')); break;
+        case 'beforeLastMonth': $query = $query->whereMonth('date_worked', date('m'), strtotime('-2 months')); break;
+        case 'thisMonth': $query = $query->whereMonth('date_worked', date('m')); break;
+        case 'lastMonth': $query = $query->whereMonth('date_worked', date('m'), strtotime('-1 month')); break;
+        case 'thisYear': $query = $query->whereYear('date_worked', date('Y')); break;
+        case 'lastYear': $query = $query->whereYear('date_worked', date('Y'), strtotime('-1 year')); break;
+      }
+    }
 
     return $query;
   }

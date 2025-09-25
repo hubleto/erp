@@ -61,6 +61,25 @@ class Activity extends \Hubleto\Erp\Model
       break;
     }
 
+    $description->ui['filters'] = [
+      'fPeriod' => [
+        'title' => $this->translate('Period'),
+        'options' => [
+          'all' => $this->translate('All'),
+          'today' => $this->translate('Today'),
+          'yesterday' => $this->translate('Yesterday'),
+          'last7Days' => $this->translate('Last 7 days'),
+          'last14Days' => $this->translate('Last 14 days'),
+          'thisMonth' => $this->translate('This month'),
+          'lastMonth' => $this->translate('Last month'),
+          'beforeLastMonth' => $this->translate('Month before last'),
+          'thisYear' => $this->translate('This year'),
+          'lastYear' => $this->translate('Last year'),
+        ],
+        'default' => 0,
+      ],
+    ];
+
     return $description;
   }
 

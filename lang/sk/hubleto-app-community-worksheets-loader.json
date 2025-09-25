@@ -35,5 +35,9 @@
     "Models\\ActivityType": {
         "Varchar": "",
         "Color": ""
+    },
+    "Components\\TableActivities": {
+        "Worked total": "Odpracované celkom",
+        "hours": "hodín"
     }
 }

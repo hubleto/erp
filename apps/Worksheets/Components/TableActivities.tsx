@@ -20,7 +20,7 @@ export default class TableActivities extends HubletoTable<TableActivitiesProps, 
   props: TableActivitiesProps;
   state: TableActivitiesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Activities\\Loader';
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets\\Loader';
   translationContextInner: string = 'Components\\TableActivities';
 
   constructor(props: TableActivitiesProps) {
@@ -58,7 +58,7 @@ console.log('a');
 
     return <>
       <div className="font-bold">
-        {this.translate('Worked total')}: {globalThis.main.numberFormat(workedTotal, 2, ",", " ")} €<br/>
+        {this.translate('Worked total')}: {globalThis.main.numberFormat(workedTotal, 2, ",", " ")} {this.translate('hours')}<br/>
       </div>
     </>
   }

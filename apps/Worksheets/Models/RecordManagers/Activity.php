@@ -61,12 +61,11 @@ class Activity extends \Hubleto\Erp\RecordManager
         case 'yesterday': $query = $query->whereDate('date_worked', date('Y-m-d', strtotime('-1 day'))); break;
         case 'last7Days': $query = $query->whereDate('date_worked', '>=', date('Y-m-d', strtotime('-7 days'))); break;
         case 'last14Days': $query = $query->whereDate('date_worked', '>=', date('Y-m-d', strtotime('-14 days'))); break;
-        case 'lastMonth': $query = $query->whereMonth('date_worked', date('m'), strtotime('-1 months')); break;
-        case 'beforeLastMonth': $query = $query->whereMonth('date_worked', date('m'), strtotime('-2 months')); break;
         case 'thisMonth': $query = $query->whereMonth('date_worked', date('m')); break;
-        case 'lastMonth': $query = $query->whereMonth('date_worked', date('m'), strtotime('-1 month')); break;
+        case 'lastMonth': $query = $query->whereMonth('date_worked', date('m') - 1); break;
+        case 'beforeLastMonth': $query = $query->whereMonth('date_worked', date('m') - 2); break;
         case 'thisYear': $query = $query->whereYear('date_worked', date('Y')); break;
-        case 'lastYear': $query = $query->whereYear('date_worked', date('Y'), strtotime('-1 year')); break;
+        case 'lastYear': $query = $query->whereYear('date_worked', date('Y') - 1); break;
       }
     }
 

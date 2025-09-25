@@ -37,8 +37,10 @@
           <div class="text-2xl text-primary text-center pt-8 pb-4">{{ config.accountFullName }}</div>
 
           {% block status %}
-            {% if viewParams.status %}
+            {% if viewParams.status == 'incorrectLogin' %}
               <div class="alert alert-danger">Email or password invalid. Try again.</div>
+            {% elseif viewParams.status == 'passwordReset' %}
+              <div class="alert alert-success">Password successfully updated.</div>
             {% endif %}
           {% endblock %}
 

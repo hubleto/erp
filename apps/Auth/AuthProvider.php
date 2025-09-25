@@ -205,6 +205,8 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       $this->router()->setUrlParam('password', $this->router()->urlParamAsString('password'));
 
       $this->getService(\Hubleto\Framework\AuthProvider::class)->auth();
+    } else {
+      setcookie('passwordReset', '1', time() + 1000, "/");
     }
   }
 
@@ -289,12 +291,16 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       if (!empty($login) && !empty($password)) {
         $users = $this->findUsersByLogin($login);
 
+        $successful = false;
+
         foreach ($users as $user) {
           $passwordMatch = $this->verifyPassword($password, $user[$this->passwordAttribute]);
 
           if ($passwordMatch) {
             $authResult = $userModel->loadUser($user['id']);
             $this->signIn($authResult);
+
+            $successful = true;
 
             if ($rememberLogin) {
               $this->initiateRememberMe($user['id']);
@@ -303,6 +309,10 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
             break;
 
           }
+        }
+
+        if (!$successful) {
+          setcookie('incorrectLogin', "1", time(), "/");
         }
       }
     }

@@ -4,6 +4,7 @@ namespace Hubleto\App\Community\Auth\Controllers;
 
 
 
+use Hubleto\App\Community\Auth\AuthProvider;
 use Hubleto\App\Community\Auth\Models\Token;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Auth\Models\UserHasToken;
@@ -38,12 +39,20 @@ class ResetPassword extends \Hubleto\Erp\Controller
         $this->viewParams = ['error' => 'Passwords do not match.'];
         $this->setView('@Hubleto:App:Community:Auth/ResetPassword.twig');
         return;
-      } elseif (strlen($password) < 8 || !preg_match('~[0-9]+~', $password)) {
-        $this->viewParams = ['error' => 'Password must be at least 8 characters long and must contain at least one numeric character.'];
+      } elseif (
+        strlen($password) < 8
+        || !preg_match('~[A-Z]~', $password)
+        || !preg_match('~[a-z]~', $password)
+        || !preg_match('~[0-9]~', $password)
+        || !preg_match('~[\W_]~', $password)
+      ) {
+        $this->viewParams = ['error' => 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.'];
         $this->setView('@Hubleto:App:Community:Auth/ResetPassword.twig');
         return;
       } else {
-        $this->getService(\Hubleto\Framework\AuthProvider::class)->resetPassword();
+        /** @var AuthProvider $authProvider */
+        $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
+        $authProvider->resetPassword();
 
         $this->router()->redirectTo('');
       }

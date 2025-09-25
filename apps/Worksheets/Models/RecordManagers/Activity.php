@@ -59,8 +59,8 @@ class Activity extends \Hubleto\Erp\RecordManager
       switch ($filters['fPeriod']) {
         case 'today': $query = $query->whereDate('date_worked', date('Y-m-d')); break;
         case 'yesterday': $query = $query->whereDate('date_worked', date('Y-m-d'), strtotime('-1 day')); break;
-        case 'last7Days': $query = $query->whereDate('date_worked', '>=', date('m', strtotime('-7 days'))); break;
-        case 'last14Days': $query = $query->whereDate('date_worked', '>=', date('m', strtotime('-14 days'))); break;
+        case 'last7Days': $query = $query->whereDate('date_worked', '>=', date('Y-m-d', strtotime('-7 days'))); break;
+        case 'last14Days': $query = $query->whereDate('date_worked', '>=', date('Y-m-d', strtotime('-14 days'))); break;
         case 'lastMonth': $query = $query->whereMonth('date_worked', date('m'), strtotime('-1 months')); break;
         case 'beforeLastMonth': $query = $query->whereMonth('date_worked', date('m'), strtotime('-2 months')); break;
         case 'thisMonth': $query = $query->whereMonth('date_worked', date('m')); break;

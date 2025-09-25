@@ -57,7 +57,7 @@ class Activity extends \Hubleto\Erp\Model
       default:
         $description->ui['addButtonText'] = 'Add Activity';
         $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
-        $description->hide(['footer']);
+        // $description->hide(['footer']);
       break;
     }
 

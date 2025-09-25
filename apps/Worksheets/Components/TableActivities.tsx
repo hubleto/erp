@@ -48,6 +48,21 @@ export default class TableActivities extends HubletoTable<TableActivitiesProps, 
     }
   }
 
+  renderFooter(): JSX.Element {
+    let workedTotal = 0;
+console.log('a');
+    for (let i in this.state.data?.data) {
+      const row = this.state.data?.data[i];
+      workedTotal += parseFloat(row['worked_hours']);
+    }
+
+    return <>
+      <div className="font-bold">
+        {this.translate('Worked total')}: {globalThis.main.numberFormat(workedTotal, 2, ",", " ")} €<br/>
+      </div>
+    </>
+  }
+
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idTask = this.props.idTask;

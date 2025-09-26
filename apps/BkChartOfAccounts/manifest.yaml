@@ -1,0 +1,9 @@
+namespace: Hubleto\App\Community\BkChartOfAccounts
+appType: community
+sidebarGroup: finance
+rootUrlSlug: chart-of-accounts
+name: Chart of Accounts
+icon: fas fa-money-check-dollar
+highlight: Chart of Accounts
+author:
+  company: "wai.blue"

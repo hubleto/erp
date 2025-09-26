@@ -31,10 +31,12 @@ class SignIn extends \Hubleto\Framework\Controllers\SignIn
       if (!$authProvider->isUserInSession()) {
         $incorrectLogin = true;
         $status = "incorrectLogin";
-      } else {
-        $this->router()->redirectTo('');
-        return;
       }
+    }
+
+    if ($authProvider->isUserInSession()) {
+      $this->router()->redirectTo('');
+      return;
     }
 
     if ($incorrectLogin) {

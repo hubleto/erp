@@ -24,6 +24,7 @@ class Loader extends \Hubleto\Framework\App
       '/^contacts(\/(?<recordId>\d+))?\/?$/' => Controllers\Contacts::class,
       '/^contacts\/add?\/?$/' => ['controller' => Controllers\Contacts::class, 'vars' => [ 'recordId' => -1 ]],
       '/^contacts\/tags\/?$/' => Controllers\Tags::class,
+      '/^contacts\/tags\/add\/?$/' => Controllers\Tags::class, 'vars' => [ 'recordId' => -1 ],
       '/^contacts\/categories\/?$/' => Controllers\Categories::class,
       '/^contacts\/import\/?$/' => Controllers\Import::class,
     ]);

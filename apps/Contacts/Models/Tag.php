@@ -10,6 +10,8 @@ class Tag extends \Hubleto\Erp\Model
   public string $table = 'contact_tags';
   public string $recordManagerClass = RecordManagers\Tag::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupUrlAdd = 'contacts/tags/add';
+  public ?string $lookupUrlDetail = 'contacts/tags/{%ID%}';
 
   public function describeColumns(): array
   {

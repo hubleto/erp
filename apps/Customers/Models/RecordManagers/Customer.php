@@ -86,23 +86,29 @@ class Customer extends \Hubleto\Erp\RecordManager
       }
     }
 
+    // Virtual tag list (aggregated)
+    $query->selectSub(function($sub) {
+      $sub->from('cross_customer_tags')
+        ->join('customer_tags', 'customer_tags.id', '=', 'cross_customer_tags.id_tag')
+        ->whereColumn('cross_customer_tags.id_customer', 'customers.id')
+        ->selectRaw("GROUP_CONCAT(DISTINCT customer_tags.name ORDER BY customer_tags.name SEPARATOR ', ')");
+    }, 'customerTag');
+
+    // Virtual tag count
+    $query->selectSub(function($sub) {
+      $sub->from('cross_customer_tags')
+        ->join('customer_tags', 'customer_tags.id', '=', 'cross_customer_tags.id_tag')
+        ->whereColumn('cross_customer_tags.id_customer', 'customers.id')
+        ->selectRaw("COUNT(DISTINCT customer_tags.id)");
+    }, 'tags_count');
+
     return $query;
   }
 
   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
   {
-    if (isset($orderBy['field']) && $orderBy['field'] == 'tags') {
-      if (empty($this->joinManager["tags"])) {
-        $this->joinManager["tags"]["order"] = true;
-        $query
-          ->addSelect("customer_tags.name")
-          ->leftJoin('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
-          ->leftJoin('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
-        ;
-      }
-      $query->orderBy('customer_tags.name', $orderBy['direction']);
-
-      return $query;
+    if (($orderBy['field'] ?? null) === 'tags') {
+      return $query->orderBy('tags_count', $orderBy['direction']);
     } else {
       return parent::addOrderByToQuery($query, $orderBy);
     }
@@ -113,16 +119,8 @@ class Customer extends \Hubleto\Erp\RecordManager
     if (!empty($fulltextSearch)) {
       $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
 
-      if (empty($this->joinManager["tags"])) {
-        $this->joinManager["tags"]["fullText"] = true;
-        $query
-          ->addSelect("customer_tags.name as customerTag")
-          ->leftJoin('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
-          ->leftJoin('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
-        ;
-      }
-      $query->orHaving('customerTag', 'like', "%{$fulltextSearch}%");
-
+      $like = "%{$fulltextSearch}%";
+      $query->orHaving('customerTag', 'like', "%{$like}%");
     }
     return $query;
   }
@@ -131,17 +129,10 @@ class Customer extends \Hubleto\Erp\RecordManager
   {
     $query = parent::addColumnSearchToQuery($query, $columnSearch);
 
-    if (!empty($columnSearch) && !empty($columnSearch['tags'])) {
-      if (empty($this->joinManager["tags"])) {
-        $this->joinManager["tags"]["column"] = true;
-        $query
-          ->addSelect("customer_tags.name as customerTag")
-          ->leftJoin('cross_customer_tags', 'cross_customer_tags.id_customer', '=', 'customers.id')
-          ->leftJoin('customer_tags', 'cross_customer_tags.id_tag', '=', 'customer_tags.id')
-        ;
-      }
+    if (!empty($columnSearch['tags'] ?? '')) {
       $query->having('customerTag', 'like', "%{$columnSearch['tags']}%");
     }
+
     return $query;
   }
 

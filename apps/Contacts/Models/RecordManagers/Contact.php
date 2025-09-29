@@ -32,117 +32,85 @@ class Contact extends \Hubleto\Erp\RecordManager
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
     $query = parent::prepareReadQuery($query, $level);
-
     $query = $query->orderBy('is_primary', 'desc');
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
-
     if ($hubleto->router()->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where($this->table . '.id_customer', $hubleto->router()->urlParamAsInteger("idCustomer"));
     }
 
-    $query = $query->selectRaw("
-      (Select value from contact_values where id_contact = contacts.id and type = 'number' LIMIT 1) virt_number,
-      (Select value from contact_values where id_contact = contacts.id and type = 'email' LIMIT 1) virt_email
-    ");
+    // Virtual number
+    $query->selectSub(function($sub) {
+      $sub->from('contact_values')
+        ->select('value')
+        ->whereColumn('contact_values.id_contact', 'contacts.id')
+        ->where('type', 'number')
+        ->limit(1);
+    }, 'virt_number');
+
+    // Virtual email
+    $query->selectSub(function($sub) {
+      $sub->from('contact_values')
+        ->select('value')
+        ->whereColumn('contact_values.id_contact', 'contacts.id')
+        ->where('type', 'email')
+        ->limit(1);
+    }, 'virt_email');
+
+    // Virtual tag list (aggregated)
+    $query->selectSub(function($sub) {
+      $sub->from('contact_contact_tags')
+        ->join('contact_tags', 'contact_tags.id', '=', 'contact_contact_tags.id_tag')
+        ->whereColumn('contact_contact_tags.id_contact', 'contacts.id')
+        ->selectRaw("GROUP_CONCAT(DISTINCT contact_tags.name ORDER BY contact_tags.name SEPARATOR ', ')");
+    }, 'contactTag');
+
+    // Virtual tag count
+    $query->selectSub(function($sub) {
+      $sub->from('contact_contact_tags')
+        ->join('contact_tags', 'contact_tags.id', '=', 'contact_contact_tags.id_tag')
+        ->whereColumn('contact_contact_tags.id_contact', 'contacts.id')
+        ->selectRaw("COUNT(DISTINCT contact_tags.id)");
+    }, 'tags_count');
 
     return $query;
   }
 
-  // public function addOrderByToQuery(mixed $query, array $orderBy): mixed
-  // {
-  //   if (isset($orderBy['field']) && $orderBy['field'] == 'tags') {
-  //     if (empty($this->joinManager["tags"])) {
-  //       $this->joinManager["tags"]["order"] = true;
-  //       $query
-  //         ->addSelect("contact_tags.name")
-  //         ->leftJoin('contact_contact_tags', 'contact_contact_tags.id_contact', '=', 'contacts.id')
-  //         ->leftJoin('contact_tags', 'contact_contact_tags.id_tag', '=', 'contact_tags.id')
-  //       ;
-  //     }
-  //     $query->orderBy('contact_tags.name', $orderBy['direction']);
+   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
+   {
+     if (($orderBy['field'] ?? null) === 'virt_tags') {
+       return $query->orderBy('tags_count', $orderBy['direction']);
+     }
+     return parent::addOrderByToQuery($query, $orderBy);
+   }
 
-  //     return $query;
-  //   } else {
-  //     return parent::addOrderByToQuery($query, $orderBy);
-  //   }
-  // }
+   public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
+   {
+     if (!empty($fulltextSearch)) {
+       $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
+       $like = "%{$fulltextSearch}%";
+       $query->orHaving('contactTag', 'like', "%{$like}%");
+       $query->orHaving('virt_email', 'like', "%{$like}%");
+       $query->orHaving('virt_number', 'like', "%{$like}%");
+     }
+     return $query;
+   }
 
-  // public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
-  // {
-  //   if (!empty($fulltextSearch)) {
-  //     $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
+   public function addColumnSearchToQuery(mixed $query, array $columnSearch): mixed
+   {
+     $query = parent::addColumnSearchToQuery($query, $columnSearch);
 
-  //     if (empty($this->joinManager["tags"])) {
-  //       $this->joinManager["tags"]["fullText"] = true;
-  //       $query
-  //         ->addSelect("contact_tags.name as contactTag")
-  //         ->leftJoin('contact_contact_tags', 'contact_contact_tags.id_contact', '=', 'contacts.id')
-  //         ->leftJoin('contact_tags', 'contact_contact_tags.id_tag', '=', 'contact_tags.id')
-  //       ;
-  //     }
-  //     $query->orHaving('contactTag', 'like', "%{$fulltextSearch}%");
-
-  //     if (empty($this->joinManager["virt_contact"])) {
-  //       $this->joinManager["virt_contact"]["fullText"] = true;
-  //       $query
-  //         ->addSelect("contact_values.value")
-  //         ->leftJoin('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
-  //       ;
-  //     }
-  //     $query
-  //       ->orHaving('contact_values.value', 'like', "%{$fulltextSearch}%")
-  //       ->groupBy("contacts.id")
-  //     ;
-  //   }
-  //   return $query;
-  // }
-
-  // public function addColumnSearchToQuery(mixed $query, array $columnSearch): mixed
-  // {
-  //   $query = parent::addColumnSearchToQuery($query, $columnSearch);
-
-  //   if (!empty($columnSearch) && !empty($columnSearch['tags'])) {
-  //     if (empty($this->joinManager["tags"])) {
-  //       $this->joinManager["tags"]["column"] = true;
-  //       $query
-  //         ->addSelect("contact_tags.name as contactTag")
-  //         ->leftJoin('contact_contact_tags', 'contact_contact_tags.id_contact', '=', 'contacts.id')
-  //         ->leftJoin('contact_tags', 'contact_contact_tags.id_tag', '=', 'contact_tags.id')
-  //       ;
-  //     }
-  //     $query->having('contactTag', 'like', "%{$columnSearch['tags']}%");
-  //   }
-
-  //   if (!empty($columnSearch) && !empty($columnSearch['virt_email'])) {
-  //     if (empty($this->joinManager["virt_contact"])) {
-  //       $this->joinManager["virt_contact"]["email"] = true;
-  //       $query
-  //         ->addSelect("contact_values.value")
-  //         ->leftJoin('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
-  //       ;
-  //     }
-  //     $query
-  //       ->where("contact_values.type", "email")
-  //       ->having('contact_values.value', 'like', "%{$columnSearch['virt_email']}%")
-  //     ;
-  //   }
-
-  //   if (!empty($columnSearch) && !empty($columnSearch['virt_number'])) {
-  //     if (empty($this->joinManager["virt_contact"])) {
-  //       $this->joinManager["virt_contact"]["number"] = true;
-  //       $query
-  //         ->addSelect("contact_values.value")
-  //         ->leftJoin('contact_values', 'contact_values.id_contact', '=', 'contacts.id')
-  //       ;
-  //     }
-  //     $query
-  //       ->where("contact_values.type", "number")
-  //       ->having('contact_values.value', 'like', "%{$columnSearch['virt_number']}%")
-  //     ;
-  //   }
-  //   return $query;
-  // }
+     if (!empty($columnSearch['virt_tags'] ?? '')) {
+       $query->having('contactTag', 'like', "%{$columnSearch['virt_tags']}%");
+     }
+     if (!empty($columnSearch['virt_email'] ?? '')) {
+       $query->having('virt_email', 'like', "%{$columnSearch['virt_email']}%");
+     }
+     if (!empty($columnSearch['virt_number'] ?? '')) {
+       $query->having('virt_number', 'like', "%{$columnSearch['virt_number']}%");
+     }
+     return $query;
+   }
 
   public function prepareLookupQuery(string $search): mixed
   {

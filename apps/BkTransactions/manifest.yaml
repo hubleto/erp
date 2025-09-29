@@ -1,9 +1,0 @@
-namespace: Hubleto\App\Community\BkTransactions
-appType: community
-sidebarGroup: finance
-rootUrlSlug: transactions/list
-name: Transactions
-icon: fas fa-receipt
-highlight: Transactions
-author:
-  company: "wai.blue"

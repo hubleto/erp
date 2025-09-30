@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from '@hubleto/react-ui/core/Helper';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import TableProductSuppliers from './TableProductSuppliers';
+import Barcode from 'react-barcode';
 
 export interface FormProductProps extends HubletoFormProps {}
 export interface FormProductState extends HubletoFormState {}
@@ -58,7 +59,10 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
           <div className='card'>
             <div className='card-body grid grid-cols-2 gap-2'>
               <div className='border-r border-gray-200'>
-                {this.inputWrapper('ean')}
+                <div className='flex gap-2'>
+                  <div className='flex grow'>{this.inputWrapper('ean')}</div>
+                  <div className='flex grow'><Barcode value={R.ean} height={30} /></div>
+                </div>
                 {this.inputWrapper('name', {cssClass: 'text-2xl text-primary'})}
                 {this.inputWrapper('is_on_sale')}
                 {this.inputWrapper('sales_price')}

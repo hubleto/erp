@@ -15,8 +15,11 @@ use Hubleto\App\Community\Settings\PermissionsManager;
 
 class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 {
+  public $faker;
   public function run(): void
   {
+
+    $this->faker = \Faker\Factory::create();;
 
     $this->getService(PermissionsManager::class)->DANGEROUS__grantAllPermissions();
 
@@ -684,21 +687,11 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
     \Hubleto\App\Community\Suppliers\Models\Supplier $mSupplier,
   ): void {
 
-    $mGroup->record->recordCreate([
-      "title" => "Food"
-    ]);
-    $mGroup->record->recordCreate([
-      "title" => "Furniture"
-    ]);
-    $mGroup->record->recordCreate([
-      "title" => "Dry foods"
-    ]);
-    $mGroup->record->recordCreate([
-      "title" => "Liquids"
-    ]);
-    $mGroup->record->create([
-      "title" => "Service"
-    ]);
+    $mGroup->record->recordCreate([ "title" => "Food" ]);
+    $mGroup->record->recordCreate([ "title" => "Furniture" ]);
+    $mGroup->record->recordCreate([ "title" => "Dry foods" ]);
+    $mGroup->record->recordCreate([ "title" => "Liquids" ]);
+    $mGroup->record->create([ "title" => "Service" ]);
 
     $mCountry = $this->getService(Country::class);
 
@@ -751,6 +744,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     foreach ($products as $product) {
       $mProduct->record->create([
+        "ean" => $this->faker->ean13(),
         "name" => $product[0],
         "sales_price" => $product[1],
         "margin" => $product[2],

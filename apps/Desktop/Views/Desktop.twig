@@ -1,4 +1,5 @@
 {{ setTranslationContext('hubleto-app-community-desktop-loader', 'Controllers\\Desktop') }}
+{% set secondSidebar = viewParams.activatedApp.renderSecondSidebar() %}
 {% set isPremium = hubleto.env().isPremium() %}
 
 {% macro appBtn(app, inGroup) %}
@@ -288,12 +289,16 @@
           Hubleto, release {{ viewParams.release }}
         </div>
       </nav>
-      {% if viewParams.activatedApp.sidebarView != '' %} <div>{{ include(viewParams.activatedApp.sidebarView) }}</div> {% endif %}
+      {% if secondSidebar != '' %}
+        <div class="second-sidebar">
+          {{ secondSidebar|raw }}
+        </div>
+      {% endif %}
     </aside>
 
     <div
       id="app-main-content"
-      class="{% if viewParams.activatedApp.sidebarView != '' %} sidebar-two-levels {% endif %}"
+      class="{% if secondSidebar != '' %} sidebar-two-levels {% endif %}"
     >
       {{ contentHtml|raw }}
     </div>

@@ -63,7 +63,7 @@ class Transaction extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'uid' => (new Varchar($this, $this->translate('Transaction UID')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4())->addIndex('INDEX `key` (`key`)'),
+      'uid' => (new Varchar($this, $this->translate('Transaction UID')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4())->addIndex('INDEX `uid` (`uid`)'),
       'direction' => (new Integer($this, $this->translate('Direction')))->setDefaultVisible()
         ->setEnumValues(self::DIRECTIONS)
         ->setDefaultValue(self::DIRECTION_INBOUND)
@@ -72,7 +72,6 @@ class Transaction extends \Hubleto\Erp\Model
         ->setEnumValues(self::TYPES)
         ->setDefaultValue(self::TYPE_RECEIPT)
       ,
-      'id_order' => (new Lookup($this, $this->translate("Order"), Order::class)),
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class)),
       'supplier_invoice_number' => (new Varchar($this, $this->translate('Supplier invoice number'))),
       'supplier_order_number' => (new Varchar($this, $this->translate('Supplier order number'))),

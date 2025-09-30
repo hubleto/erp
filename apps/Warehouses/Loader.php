@@ -40,6 +40,38 @@ class Loader extends \Hubleto\Framework\App
 
   }
 
+  public function renderSecondSidebar(): string
+  {
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/warehouses">
+          <span class="icon"><i class="fas fa-warehouse"></i></span>
+          <span class="text">' . $this->translate('Warehouses') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/warehouses/locations">
+          <span class="icon"><i class="fas fa-pallet"></i></span>
+          <span class="text">' . $this->translate('Locations') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/warehouses/inventory">
+          <span class="icon"><i class="fas fa-boxes-stacked"></i></span>
+          <span class="text">' . $this->translate('Inventory') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/warehouses/transactions">
+          <span class="icon"><i class="fas fa-arrows-turn-to-dots"></i></span>
+          <span class="text">' . $this->translate('Transactions') . '</span>
+        </a>
+        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/warehouses/transactions/add?direction=1">
+          <span class="icon"><i class="fas fa-plus"></i></span>
+          <span class="text">' . $this->translate('Create inbound') . '</span>
+        </a>
+        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/warehouses/transactions/add?direction=2">
+          <span class="icon"><i class="fas fa-minus"></i></span>
+          <span class="text">' . $this->translate('Create outbound') . '</span>
+        </a>
+      </div>
+    ';
+  }
+
   // installTables
   public function installTables(int $round): void
   {

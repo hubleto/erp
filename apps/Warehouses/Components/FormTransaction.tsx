@@ -62,7 +62,6 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
             {this.inputWrapper('uid')}
             {this.inputWrapper('direction')}
             {this.inputWrapper('type')}
-            {this.inputWrapper('id_order')}
             {this.inputWrapper('id_supplier')}
             {this.inputWrapper('supplier_invoice_number')}
             {this.inputWrapper('supplier_order_number')}

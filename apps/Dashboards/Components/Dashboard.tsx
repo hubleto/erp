@@ -176,7 +176,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
               this.setPanelWidth(panel.id, newWidth);
             }}
           >
-            <span className='icon'><i className='fas fa-arrow-left'></i></span>
+            <span className='icon'><i className='fas fa-minus'></i></span>
           </button>
           <button
             className='btn btn-transparent btn-small'
@@ -187,7 +187,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
               this.setPanelWidth(panel.id, newWidth);
             }}
           >
-            <span className='icon'><i className='fas fa-arrow-right'></i></span>
+            <span className='icon'><i className='fas fa-plus'></i></span>
           </button>
         </div>
         {panel.title}

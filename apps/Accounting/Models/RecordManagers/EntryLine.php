@@ -24,10 +24,10 @@ class EntryLine extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level);
 
-    $main = \Hubleto\Erp\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($main->router()->urlParamAsInteger("idEntry") > 0) {
-      $query = $query->where($this->table . '.id_entry', $main->router()->urlParamAsInteger("idEntry"));
+    if ($hubleto->router()->urlParamAsInteger("idEntry") > 0) {
+      $query = $query->where($this->table . '.id_entry', $hubleto->router()->urlParamAsInteger("idEntry"));
     }
 
     return $query;

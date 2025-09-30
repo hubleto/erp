@@ -12,6 +12,8 @@ use Hubleto\Framework\Db\Column\Image;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\App\Community\Auth\Models\User;
 
+use Hubleto\App\Community\Warehouses\StockStatus;
+
 class Location extends \Hubleto\Erp\Model
 {
   public string $table = 'warehouses_locations';
@@ -47,7 +49,7 @@ class Location extends \Hubleto\Erp\Model
       'id_type' => (new Lookup($this, $this->translate('Location type'), LocationType::class))->setDefaultVisible(),
       'description' => (new Text($this, $this->translate('Description'))),
       'capacity' => (new Decimal($this, $this->translate('Capacity')))->setDefaultVisible(),
-      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy')))->setDefaultVisible(),
+      'current_stock_status' => (new Decimal($this, $this->translate('Current stock status')))->setDefaultVisible(),
       'operational_status' => (new Integer($this, $this->translate('Operational status')))->setDefaultVisible()
         ->setEnumValues(self::OPERATIONAL_STATUSES)
         ->setDefaultValue(self::OPERATIONAL_STATUS_ACTIVE)
@@ -67,27 +69,25 @@ class Location extends \Hubleto\Erp\Model
     ]);
   }
 
-  public function recalculateWarehouseData(int $idWarehouse): void
-  {
-    $this->db()->execute("
-      update `warehouses` set
-        `capacity` = ifnull((select sum(ifnull(`capacity`, 0)) from `warehouses_locations` where `id_warehouse` = :idWarehouse), 0),
-        `current_occupancy` = ifnull((select sum(ifnull(`current_occupancy`, 0)) from `warehouses_locations` where `id_warehouse` = :idWarehouse), 0)
-      where `id` = :idWarehouse
-    ", ["idWarehouse" => $idWarehouse]);
-  }
-
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
-    $this->recalculateWarehouseData((int) $savedRecord['id_warehouse']);
+
+    /** @var StockStatus */
+    $stockStatus = $this->getService(StockStatus::class);
+    $stockStatus->recalculateCapacityAndStockStatusOfWarehouse((int) $savedRecord['id_warehouse']);
+
     return $savedRecord;
   }
 
   public function onAfterCreate(array $savedRecord): array
   {
     $savedRecord = parent::onAfterCreate($savedRecord);
-    $this->recalculateWarehouseData((int) $savedRecord['id_warehouse']);
+
+    /** @var StockStatus */
+    $stockStatus = $this->getService(StockStatus::class);
+    $stockStatus->recalculateCapacityAndStockStatusOfWarehouse((int) $savedRecord['id_warehouse']);
+
     return $savedRecord;
   }
 

@@ -15,7 +15,7 @@ class DealsApp extends HubletoApp {
     // miscellaneous
     globalThis.main.getApp('Hubleto/App/Community/Leads').addCustomFormTab({
       uid: 'deals',
-      title: <span className='italic'>Deals</span>,
+      title: 'Deals',
       onRender: (form: any) => {
         return <TableDeals
           tag={"table_lead_deal"}

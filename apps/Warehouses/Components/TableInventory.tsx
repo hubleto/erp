@@ -13,13 +13,13 @@ export default class TableInventory extends HubletoTable<TableInventoryProps, Ta
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'Hubleto/App/Community/Inventory/Models/Inventory',
+    model: 'Hubleto/App/Community/Warehouses/Models/Inventory',
   }
 
   props: TableInventoryProps;
   state: TableInventoryState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Inventory\\Loader';
+  translationContext: string = 'Hubleto\\App\\Community\\Warehouses\\Loader';
   translationContextInner: string = 'Components\\TableInventory';
 
   constructor(props: TableInventoryProps) {

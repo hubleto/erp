@@ -18,9 +18,10 @@ class RecordManager extends \Hubleto\Framework\RecordManager
 
     // prepare some variables
 
-    $main = \Hubleto\Framework\Loader::getGlobalApp();
-    $idUser = $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
-// var_dump($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType());
+    $hubleto = \Hubleto\Framework\Loader::getGlobalApp();
+    $authProvider = $hubleto->getService(\Hubleto\Framework\AuthProvider::class);
+    $idUser = $authProvider->getUserId();
+
     $hasIdOwner = isset($record['id_owner']);
     $hasIdManager = isset($record['id_manager']);
     $hasIdTeam = isset($record['id_team']);
@@ -36,18 +37,15 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     }
 
     $isTeamMember = false;
-    // if ($hasIdTeam) {
-    //   $isTeamMember = $main->getService(\Hubleto\Framework\AuthProvider::class)->isUserMemberOfTeam($record['id_team']);
-    // }
 
     // enable permissions by certain criteria
     $canRead = false;
     $canModify = false;
 
-    if ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_ADMINISTRATOR) {
+    if ($authProvider->getUserType() == User::TYPE_ADMINISTRATOR) {
       $canRead = true;
       $canModify = true;
-    } if ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_CHIEF_OFFICER) {
+    } if ($authProvider->getUserType() == User::TYPE_CHIEF_OFFICER) {
       // CxO can do anything except for modifying config and settings
 
       $canRead = true;
@@ -56,7 +54,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       if (str_starts_with($this->model->fullName, 'Hubleto/Core/Config')) {
         $canModify = false;
       }
-    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_MANAGER) {
+    } elseif ($authProvider->getUserType() == User::TYPE_MANAGER) {
       // Manager can:
       //   - read only records where he/she is owner or manager
       //   - modify only records where he/she is owner
@@ -82,7 +80,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       }
 
       $permissions = [$canRead, $canModify, $canModify, $canModify];
-    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_EMPLOYEE) {
+    } elseif ($authProvider->getUserType() == User::TYPE_EMPLOYEE) {
       // Employee can:
       //   - read/modify only records where he/she is owner
 
@@ -91,14 +89,14 @@ class RecordManager extends \Hubleto\Framework\RecordManager
         $canModify = true;
       }
 
-    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_ASSISTANT) {
+    } elseif ($authProvider->getUserType() == User::TYPE_ASSISTANT) {
       // Assistant can:
       //   - read/modify only records where he/she is owner
 
       if ($hasIdOwner && $isOwner || !$hasIdOwner) {
         $canRead = true;
       }
-    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_EXTERNAL) {
+    } elseif ($authProvider->getUserType() == User::TYPE_EXTERNAL) {
       // Externals cannot do anything by default
     }
 
@@ -109,7 +107,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
-    $main = \Hubleto\Framework\Loader::getGlobalApp();
+    $hubleto = \Hubleto\Framework\Loader::getGlobalApp();
 
     $query = parent::prepareReadQuery($query, $level);
 
@@ -117,15 +115,17 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $hasIdManager = $this->model->hasColumn('id_manager');
     $hasIdTeam = $this->model->hasColumn('id_team');
 
-    $idUser = $main->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
+    $authProvider = $hubleto->getService(\Hubleto\Framework\AuthProvider::class);
 
-    $user = $main->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
+    $idUser = $authProvider->getUserId();
+
+    $user = $authProvider->getUser();
     $userTeams = [];
     foreach ($user['TEAMS'] ?? [] as $team) {
       $userTeams[] = $team['id'] ?? 0;
     }
 
-    if ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_MANAGER) {
+    if ($authProvider->getUserType() == User::TYPE_MANAGER) {
       if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
         $query = $query->where(function ($q) use ($idUser, $userTeams) {
           $q
@@ -147,21 +147,21 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       } elseif ($hasIdTeam) {
         $query = $query->whereIn($this->table . '.id_team', $userTeams);
       }
-    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_EMPLOYEE && $hasIdOwner) {
+    } elseif ($authProvider->getUserType() == User::TYPE_EMPLOYEE && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);
-    } elseif ($main->getService(\Hubleto\Framework\AuthProvider::class)->getUserType() == User::TYPE_ASSISTANT && $hasIdOwner) {
+    } elseif ($authProvider->getUserType() == User::TYPE_ASSISTANT && $hasIdOwner) {
       $query = $query->where($this->table . '.id_owner', $idUser);
     }
 
     // junctions
 
-    $junctionModel = $main->router()->urlParamAsString('junctionModel');
-    $junctionSourceColumn = $main->router()->urlParamAsString('junctionSourceColumn');
-    $junctionDestinationColumn = $main->router()->urlParamAsString('junctionDestinationColumn');
-    $junctionSourceRecordId = $main->router()->urlParamAsInteger('junctionSourceRecordId');
+    $junctionModel = $hubleto->router()->urlParamAsString('junctionModel');
+    $junctionSourceColumn = $hubleto->router()->urlParamAsString('junctionSourceColumn');
+    $junctionDestinationColumn = $hubleto->router()->urlParamAsString('junctionDestinationColumn');
+    $junctionSourceRecordId = $hubleto->router()->urlParamAsInteger('junctionSourceRecordId');
 
     if (!empty($junctionModel) && !empty($junctionSourceColumn) && $junctionSourceRecordId > 0) {
-      $junctionModelObj = $main->getModel($junctionModel);
+      $junctionModelObj = $hubleto->getModel($junctionModel);
       if ($junctionModelObj) {
         $destinationIds = $junctionModelObj->record
           ->where($junctionSourceColumn, $junctionSourceRecordId)

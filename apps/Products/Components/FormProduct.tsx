@@ -45,7 +45,7 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
   renderTitle(): JSX.Element {
     return <>
       <small>Product</small>
-      <h2>{this.state.record.name ?? '-'}</h2>
+      <h2>{this.state.record.ean ?? '-'} {this.state.record.name ?? '-'}</h2>
     </>;
   }
 
@@ -58,6 +58,7 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
           <div className='card'>
             <div className='card-body grid grid-cols-2 gap-2'>
               <div className='border-r border-gray-200'>
+                {this.inputWrapper('ean')}
                 {this.inputWrapper('name', {cssClass: 'text-2xl text-primary'})}
                 {this.inputWrapper('is_on_sale')}
                 {this.inputWrapper('sales_price')}

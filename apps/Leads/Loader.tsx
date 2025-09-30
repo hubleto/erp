@@ -16,14 +16,11 @@ class LeadsApp extends HubletoApp {
     // miscellaneous
     globalThis.main.getApp('Hubleto/App/Community/Campaigns').addCustomFormTab({
       uid: 'leads',
-      title: <span className='italic'>Leads</span>,
+      title: 'Leads',
       onRender: (form: any) => {
         return <TableLeads
           tag={"table_campaign_lead"}
           parentForm={form}
-          // //@ts-ignore
-          // description={{ui: {showHeader:false}}}
-          // descriptionSource='both'
           uid={form.props.uid + "_table_campaign_lead"}
           junctionTitle='Campaign'
           junctionModel='Hubleto/App/Community/Leads/Models/LeadCampaign'

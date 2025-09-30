@@ -2,7 +2,7 @@ import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
 import TableAccounts from "./Components/TableAccounts";
 import FormAccount from './Components/FormAccount';
 import TableEntries from "@hubleto/apps/Accounting/Components/TableEntries";
-import FormTransaction from "@hubleto/apps/Inventory/Components/FormTransaction";
+import FormTransaction from "@hubleto/apps/Accounting/Components/FormTransaction";
 import TableTransactions from "@hubleto/apps/Accounting/Components/TableTransactions";
 
 class Accounting extends HubletoApp {

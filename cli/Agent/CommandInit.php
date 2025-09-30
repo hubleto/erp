@@ -63,7 +63,6 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
       \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
       \Hubleto\App\Community\Warehouses\Loader::class => [ 'sidebarOrder' => 210 ],
-      \Hubleto\App\Community\Inventory\Loader::class => [ 'sidebarOrder' => 220 ],
     ],
     'e-commerce' => [
       \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],

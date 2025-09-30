@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\Inventory\Models;
+namespace Hubleto\App\Community\Warehouses\Models;
 
 
 use Hubleto\App\Community\Warehouses\Models\Location;
@@ -14,12 +14,11 @@ use Hubleto\Framework\Db\Column\DateTime;
 // This is crucial for tracking what items are where.
 class Inventory extends \Hubleto\Erp\Model
 {
-  public string $table = 'inventory';
+  public string $table = 'warehouses_inventory';
   public string $recordManagerClass = RecordManagers\Inventory::class;
 
   public array $relations = [
     'PRODUCT' => [ self::HAS_ONE, Product::class, 'id_product', 'id' ],
-    'STATUS' => [ self::HAS_ONE, Status::class, 'id_status', 'id' ],
     'LOCATION' => [ self::HAS_ONE, Location::class, 'id_location', 'id' ],
   ];
 
@@ -28,7 +27,6 @@ class Inventory extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible()->setRequired(),
       'id_location' => (new Lookup($this, $this->translate('Location in warehouse'), Location::class))->setDefaultVisible()->setRequired(),
-      'id_status' => (new Lookup($this, $this->translate('Status'), Status::class))->setDefaultVisible(),
       'quantity' => (new Decimal($this, $this->translate('Quantity')))->setDefaultVisible(),
       'batch_number' => (new Varchar($this, $this->translate('Batch number'))),
       'serial_number' => (new Varchar($this, $this->translate('Serial number'))),

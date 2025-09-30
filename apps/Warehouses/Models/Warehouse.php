@@ -49,7 +49,7 @@ class Warehouse extends \Hubleto\Erp\Model
         ->setDescription('Automatically calculated as total capacity of all locations in warehouse.')
       ,
       'capacity_unit' => (new Varchar($this, $this->translate('Capacity unit')))->setDefaultVisible(),
-      'current_occupancy' => (new Decimal($this, $this->translate('Current occupancy')))->setDefaultVisible(),
+      'current_stock_status' => (new Decimal($this, $this->translate('Current stock status')))->setDefaultVisible(),
       'operational_status' => (new Integer($this, $this->translate('Operational status')))->setDefaultVisible()
         ->setEnumValues(self::OPERATIONAL_STATUSES)
         ->setDefaultValue(self::OPERATIONAL_STATUS_ACTIVE)

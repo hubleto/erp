@@ -48,7 +48,7 @@ export default class FormWarehouse<P, S> extends HubletoForm<FormWarehouseProps,
             <div className="w-full">{this.inputWrapper('capacity')}</div>
             <div className="w-full">{this.inputWrapper('capacity_unit')}</div>
           </div>
-          {this.inputWrapper('current_occupancy')}
+          {this.inputWrapper('current_stock_status')}
         </div>
         <div className="flex-1">
           {this.divider(this.translate('Address'))}

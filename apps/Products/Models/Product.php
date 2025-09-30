@@ -35,7 +35,7 @@ class Product extends \Hubleto\Erp\Model
 
   public string $table = 'products';
   public string $recordManagerClass = RecordManagers\Product::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupSqlValue = 'concat({%TABLE%}.ean, " ", {%TABLE%}.name)';
 
   public array $relations = [
     'GROUP' => [ self::HAS_ONE, Group::class, 'id', 'id_product_group'],
@@ -60,6 +60,7 @@ class Product extends \Hubleto\Erp\Model
     ;
 
     return array_merge(parent::describeColumns(), [
+      'ean' => (new Varchar($this, $this->translate('EAN')))->setRequired()->setDefaultVisible(),
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'id_product_group' => (new Lookup($this, $this->translate('Product Group'), Group::class)),
       'type' => (new Integer($this, $this->translate('Product Type')))->setEnumValues($typeEnumValues)->setDescription($typeDescription)->setDefaultVisible(),

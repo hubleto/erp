@@ -1,0 +1,7 @@
+<h1 class="app-main-title">{{ translate('Warehouses') }} > Inventory</h1>
+
+<app-warehouses-table-inventory
+  string:tag="table-inventory"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></app-warehouses-table-inventory>

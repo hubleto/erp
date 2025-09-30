@@ -15,7 +15,7 @@ class ProjectsApp extends HubletoApp {
     // miscellaneous
     globalThis.main.getApp('Hubleto/App/Community/Orders').addCustomFormTab({
       uid: 'projects',
-      title: <span className='italic'>Projects</span>,
+      title: 'Projects',
       onRender: (form: any) => {
         return <TableProjects
           tag={"table_project_order"}

@@ -20,6 +20,7 @@ class Loader extends \Hubleto\Framework\App
     $this->router()->get([
       '/^products\/?$/' => Controllers\Products::class,
       '/^products\/add?\/?$/' => ['controller' => Controllers\Products::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^products(\/(?<recordId>\d+))?\/?$/' => Controllers\Products::class,
       '/^products\/groups(\/(?<recordId>\d+))?\/?$/' => Controllers\Groups::class,
       '/^products\/groups\/add?\/?$/' => ['controller' => Controllers\Groups::class, 'vars' => [ 'recordId' => -1 ]],
     ]);

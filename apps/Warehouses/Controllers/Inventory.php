@@ -1,20 +1,20 @@
 <?php
 
-namespace Hubleto\App\Community\Inventory\Controllers;
+namespace Hubleto\App\Community\Warehouses\Controllers;
 
 class Inventory extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'inventory', 'content' => 'Inventory' ],
+      [ 'url' => 'warehouses', 'content' => 'Inventory' ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Community:Inventory/Inventory.twig');
+    $this->setView('@Hubleto:App:Community:Warehouses/Inventory.twig');
   }
 
 }

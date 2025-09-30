@@ -18,6 +18,8 @@ class Loader extends \Hubleto\Framework\App
     $this->router()->get([
       '/^warehouses\/?$/' => Controllers\Warehouses::class,
       '/^warehouses\/locations\/?$/' => Controllers\Locations::class,
+      '/^warehouses\/inventory\/?$/' => Controllers\Inventory::class,
+      '/^warehouses\/transactions\/?$/' => Controllers\Transactions::class,
       '/^warehouses\/settings\/warehouse-types\/?$/' => Controllers\WarehouseTypes::class,
       '/^warehouses\/settings\/warehouse-location-types\/?$/' => Controllers\LocationTypes::class,
     ]);
@@ -39,6 +41,7 @@ class Loader extends \Hubleto\Framework\App
     $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'warehouses', $this->translate('Warehouses'), 'fas fa-warehouse');
     $appMenu->addItem($this, 'warehouses/locations', $this->translate('Locations'), 'fas fa-pallet');
+    $appMenu->addItem($this, 'warehouses/transactions', $this->translate('Transactions'), 'fas fa-arrows-turn-to-dots');
 
   }
 
@@ -50,6 +53,9 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\LocationType::class)->dropTableIfExists()->install();
       $this->getModel(Models\Warehouse::class)->dropTableIfExists()->install();
       $this->getModel(Models\Location::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Inventory::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Transaction::class)->dropTableIfExists()->install();
+      $this->getModel(Models\TransactionItem::class)->dropTableIfExists()->install();
     }
     if ($round == 2) {
       $mLocationType = $this->getModel(Models\LocationType::class);
@@ -85,7 +91,7 @@ class Loader extends \Hubleto\Framework\App
       'description' => 'Main warehouse used for supplying the most important customers.',
       'capacity' => 5400,
       'capacity_unit' => 'm2',
-      'current_occupancy' => 1240,
+      'current_stock_status' => 1240,
       'id_operation_manager' => 1,
     ])['id'];
 
@@ -107,7 +113,7 @@ class Loader extends \Hubleto\Framework\App
       'code' => 'A1.1',
       'id_type' => 2,
       'capacity' => 230,
-      'current_occupancy' => 15,
+      'current_stock_status' => 15,
       'id_operation_manager' => 1,
     ]);
 
@@ -116,7 +122,7 @@ class Loader extends \Hubleto\Framework\App
       'code' => 'A1.2',
       'id_type' => 2,
       'capacity' => 340,
-      'current_occupancy' => 156,
+      'current_stock_status' => 156,
       'id_operation_manager' => 1,
     ]);
   }

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 import TableTransactionItems from './TableTransactionItems';
+import Int from '@hubleto/react-ui/core/Inputs/Int';
+import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
 interface FormTransactionProps extends HubletoFormProps {
   direction?: number,
@@ -24,11 +26,30 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
     super(props);
   }
 
+  getEndpointParams(): object {
+    return {
+      ...super.getEndpointParams() as any,
+      saveRelations: ['ITEMS'],
+    };
+  }
+
+  getRecordFormUrl(): string {
+    return 'warehouses/transactions/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+  }
+
   renderTitle(): JSX.Element {
     return <>
       <small>{this.props.direction == 1 ? 'Inbound transaction' : 'Outbound transaction'}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
+  }
+
+  updateItem(index: number, newItem: any) {
+    let newRecord = this.state.record;
+    if (!newRecord.ITEMS[index]) newRecord.ITEMS[index] = {};
+    newRecord.ITEMS[index].id_transaction = { _useMasterRecordId_: true };
+    newRecord.ITEMS[index] = {...newRecord.ITEMS[index], ...newItem};
+    this.updateRecord(newRecord);
   }
 
   renderTab(tabUid: string) {
@@ -37,7 +58,7 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
     switch (tabUid) {
       case 'default':
         return <div className='flex gap-2'>
-          <div className='w-full'>
+          <div className='w-full flex-1'>
             {this.inputWrapper('uid')}
             {this.inputWrapper('direction')}
             {this.inputWrapper('type')}
@@ -54,12 +75,71 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
             {this.inputWrapper('created_on')}
             {this.inputWrapper('id_created_by')}
           </div>
-          <div className='w-full'>
-            <TableTransactionItems
-              uid={this.props.uid + '_table_transaction_items'}
-              parentForm={this}
-              idTransaction={this.state.id}
-            ></TableTransactionItems>
+          <div className='w-full flex-3'>
+            <table className='table-default dense'>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Qty.</th>
+                  <th>Purchase price</th>
+                  <th>From</th>
+                  <th>To</th>
+                </tr>
+              </thead>
+              <tbody>
+                {R.ITEMS ? R.ITEMS.map((item, index) => {
+                  return <tr>
+                    <td>
+                      <Lookup
+                        model='Hubleto/App/Community/Products/Models/Product'
+                        value={item.id_product}
+                        onChange={(input: any, value: any) => { this.updateItem(index, {id_product: value}); }}
+                      ></Lookup>
+                    </td>
+                    <td>
+                      <Int
+                        value={item.quantity}
+                        description={{decimals: 4}}
+                        onChange={(input: any, value: any) => { this.updateItem(index, {quantity: value}); }}
+                      ></Int>
+                    </td>
+                    <td>
+                      <Int
+                        value={item.purchase_price}
+                        description={{decimals: 4, unit: '€'}}
+                        onChange={(input: any, value: any) => { this.updateItem(index, {purchase_price: value}); }}
+                      ></Int>
+                    </td>
+                    <td>
+                      <Lookup
+                        model='Hubleto/App/Community/Warehouses/Models/Location'
+                        value={item.id_location_source}
+                        onChange={(input: any, value: any) => { this.updateItem(index, {id_location_source: value}); }}
+                      ></Lookup>
+                    </td>
+                    <td>
+                      <Lookup
+                        model='Hubleto/App/Community/Warehouses/Models/Location'
+                        value={item.id_location_destination}
+                        onChange={(input: any, value: any) => { this.updateItem(index, {id_location_destination: value}); }}
+                      ></Lookup>
+                    </td>
+                  </tr>
+                }) : null}
+              </tbody>
+            </table>
+            <button
+              className='btn btn-add mt-2'
+              onClick={() => {
+                let newR = R
+                if (!newR.ITEMS) newR.ITEMS = [];
+                newR.ITEMS.push({});
+                this.updateRecord(newR);
+              }}
+            >
+              <span className='icon'><i className='fas fa-plus'></i></span>
+              <span className='text'>{this.translate('Add item')}</span>
+            </button>
           </div>
         </div>;
       break;

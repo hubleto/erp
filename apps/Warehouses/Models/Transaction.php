@@ -29,6 +29,8 @@ class Transaction extends \Hubleto\Erp\Model
     'LOCATION_SOURCE' => [ self::BELONGS_TO, Location::class, 'id_location_source', 'id' ],
     'LOCATION_DESTINATION' => [ self::BELONGS_TO, Location::class, 'id_location_destination', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+
+    'ITEMS' => [ self::HAS_MANY, TransactionItem::class, 'id_transaction', 'id' ],
   ];
 
   public const DIRECTION_INBOUND = 1;
@@ -85,4 +87,20 @@ class Transaction extends \Hubleto\Erp\Model
     ]);
   }
 
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['addButtonText'] = $this->translate('Add transaction');
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+
+    $description->ui['filters'] = [
+      'fDirection' => [ 'title' => $this->translate('Direction'), 'options' => [
+        self::DIRECTION_INBOUND => $this->translate('Inbound'),
+        self::DIRECTION_OUTBOUND => $this->translate('Outbound'),
+      ] ],
+    ];
+
+    return $description;
+  }
 }

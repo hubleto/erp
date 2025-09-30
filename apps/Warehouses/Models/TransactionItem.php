@@ -18,7 +18,7 @@ class TransactionItem extends \Hubleto\Erp\Model
 {
   public string $table = 'warehouses_transactions_items';
   public string $recordManagerClass = RecordManagers\TransactionItem::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.uid';
+  public ?string $lookupSqlValue = '{%TABLE%}.id_transaction';
 
   public array $relations = [
     'TRANSACTION' => [ self::BELONGS_TO, Transaction::class, 'id_transaction', 'id' ],

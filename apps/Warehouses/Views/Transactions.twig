@@ -3,5 +3,6 @@
 <app-warehouses-table-transactions
   string:tag="table-transactions"
   int:record-id="{{ viewParams.recordId }}"
+  int:direction="{{ viewParams.direction }}"
   json:filters='{{ viewParams.filters|json_encode }}'
 ></app-warehouses-table-transactions>

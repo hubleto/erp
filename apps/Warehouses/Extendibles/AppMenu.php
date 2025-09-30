@@ -28,13 +28,13 @@ class AppMenu extends \Hubleto\Framework\Extendible
       ],
       [
         'app' => $this->app,
-        'url' => 'warehouses/transactions/add/inbound',
+        'url' => 'warehouses/transactions/add?direction=1',
         'title' => $this->app->translate('Create inbound transaction'),
         'icon' => 'fas fa-plus',
       ],
       [
         'app' => $this->app,
-        'url' => 'warehouses/transactions/add/outbound',
+        'url' => 'warehouses/transactions/add?direction=2',
         'title' => $this->app->translate('Create outbound transaction'),
         'icon' => 'fas fa-minus',
       ],

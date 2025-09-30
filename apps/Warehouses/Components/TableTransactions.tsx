@@ -4,6 +4,7 @@ import FormTransaction from './FormTransaction';
 
 interface TableTransactionsProps extends HubletoTableProps {
   idProduct?: number,
+  direction?: number,
 }
 
 interface TableTransactionsState extends HubletoTableState {
@@ -43,14 +44,28 @@ export default class TableTransaction extends HubletoTable<TableTransactionsProp
     return {
       ...super.getEndpointParams(),
       idProduct: this.props.idProduct,
+      direction: this.props.direction,
     }
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/warehouses/transactions/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
+
+    formProps.direction = this.props.direction;
+
     formProps.customEndpointParams.idProduct = this.props.idProduct;
+    formProps.customEndpointParams.direction = this.props.direction;
+    
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_product: this.props.idProduct };
+    formProps.description.defaultValues = {
+      id_product: this.props.idProduct,
+      direction: this.props.direction,
+    };
+
     return <FormTransaction {...formProps}/>;
   }
 }

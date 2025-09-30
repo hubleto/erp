@@ -20,8 +20,7 @@ class Loader extends \Hubleto\Framework\App
       '/^warehouses\/locations\/?$/' => Controllers\Locations::class,
       '/^warehouses\/inventory\/?$/' => Controllers\Inventory::class,
       '/^warehouses\/transactions\/?$/' => Controllers\Transactions::class,
-      '/^warehouses\/transactions\/add\/inbound\/?$/' => [ 'controller' => Controllers\TransactionAdd::class, 'vars' => [ 'direction' => Models\Transaction::DIRECTION_INBOUND ] ],
-      '/^warehouses\/transactions\/add\/outbound\/?$/' => [ 'controller' => Controllers\TransactionAdd::class, 'vars' => [ 'direction' => Models\Transaction::DIRECTION_OUTBOUND ] ],
+      '/^warehouses\/transactions\/add\/?$/' => [ 'controller' => Controllers\Transactions::class, 'vars' => [ 'recordId' => -1 ] ],
       '/^warehouses\/settings\/warehouse-types\/?$/' => Controllers\WarehouseTypes::class,
       '/^warehouses\/settings\/warehouse-location-types\/?$/' => Controllers\LocationTypes::class,
     ]);

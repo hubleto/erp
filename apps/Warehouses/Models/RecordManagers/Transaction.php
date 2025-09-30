@@ -5,8 +5,10 @@ namespace Hubleto\App\Community\Warehouses\Models\RecordManagers;
 
 use Hubleto\App\Community\Products\Models\RecordManagers\Product;
 use Hubleto\App\Community\Warehouses\Models\RecordManagers\Location;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Transaction extends \Hubleto\Erp\RecordManager
 {
@@ -30,6 +32,10 @@ class Transaction extends \Hubleto\Erp\RecordManager
   public function USER(): BelongsTo
   {
     return $this->belongsTo(User::class, 'id_user', 'id');
+  }
+
+  public function ITEMS(): HasMany {
+    return $this->hasMany(TransactionItem::class, 'id_transaction', 'id' );
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed

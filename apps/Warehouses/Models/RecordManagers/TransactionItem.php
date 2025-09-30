@@ -42,8 +42,10 @@ class TransactionItem extends \Hubleto\Erp\RecordManager
     $query = parent::prepareReadQuery($query, $level);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
-    $idProduct = $hubleto->router()->urlParamAsInteger("idEntry");
+    $idTransaction = $hubleto->router()->urlParamAsInteger("idTransaction");
+    $idProduct = $hubleto->router()->urlParamAsInteger("idProduct");
 
+    if ($idTransaction > 0) $query = $query->where($this->table . '.id_transaction', $idTransaction);
     if ($idProduct > 0) $query = $query->where($this->table . '.id_product', $idProduct);
 
     return $query;

@@ -61,7 +61,7 @@ class Transaction extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'uid' => (new Varchar($this, $this->translate('Transaction UID')))->setRequired(),
+      'uid' => (new Varchar($this, $this->translate('Transaction UID')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4())->addIndex('INDEX `key` (`key`)'),
       'direction' => (new Integer($this, $this->translate('Direction')))->setDefaultVisible()
         ->setEnumValues(self::DIRECTIONS)
         ->setDefaultValue(self::DIRECTION_INBOUND)
@@ -70,7 +70,7 @@ class Transaction extends \Hubleto\Erp\Model
         ->setEnumValues(self::TYPES)
         ->setDefaultValue(self::TYPE_RECEIPT)
       ,
-      'id_order' => (new Lookup($this, $this->translate("Order"), Order::class))->setRequired()->setReadonly(),
+      'id_order' => (new Lookup($this, $this->translate("Order"), Order::class)),
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class)),
       'supplier_invoice_number' => (new Varchar($this, $this->translate('Supplier invoice number'))),
       'supplier_order_number' => (new Varchar($this, $this->translate('Supplier order number'))),
@@ -80,8 +80,8 @@ class Transaction extends \Hubleto\Erp\Model
       'document_2' => (new File($this, $this->translate('Reference document #2'))),
       'document_3' => (new File($this, $this->translate('Reference document #3'))),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
-      'created_on' => (new DateTime($this, $this->translate('Date and time of transaction')))->setRequired(),
-      'id_created_by' => (new Lookup($this, $this->translate('Who performed the transaction'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
+      'created_on' => (new DateTime($this, $this->translate('Date and time of transaction')))->setRequired()->setDefaultValue(date('Y-m-d H:i:s')),
+      'id_created_by' => (new Lookup($this, $this->translate('Who performed the transaction'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
     ]);
   }
 

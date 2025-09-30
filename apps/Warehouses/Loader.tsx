@@ -2,6 +2,7 @@ import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
 import TableWarehouses from "./Components/TableWarehouses"
 import TableInventory from "./Components/TableInventory"
 import TableTransactions from "./Components/TableTransactions"
+import FormTransaction from "./Components/FormTransaction"
 
 class WarehousesApp extends HubletoApp {
   init() {
@@ -11,6 +12,7 @@ class WarehousesApp extends HubletoApp {
     globalThis.main.registerReactComponent('WarehousesTableWarehouses', TableWarehouses);
     globalThis.main.registerReactComponent('WarehousesTableInventory', TableInventory);
     globalThis.main.registerReactComponent('WarehousesTableTransactions', TableTransactions);
+    globalThis.main.registerReactComponent('WarehousesFormTransaction', FormTransaction);
 
     // custom tabs
     globalThis.main.getApp('Hubleto/App/Community/Products').addCustomFormTab({

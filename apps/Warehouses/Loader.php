@@ -71,6 +71,7 @@ class Loader extends \Hubleto\Framework\App
 
     $idWarehouseTypeMain = $mWarehouseType->record->recordCreate(['name' => 'Main'])['id'];
     $idWarehouseTypeRegional = $mWarehouseType->record->recordCreate(['name' => 'Regional'])['id'];
+    $idWarehouseTypeExternal = $mWarehouseType->record->recordCreate(['name' => 'External'])['id'];
 
     $idWarehouseMain = $mWarehouse->record->recordCreate([
       'name' => 'Main Distribution Center',

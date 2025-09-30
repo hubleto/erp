@@ -13,7 +13,7 @@ class DealsApp extends HubletoApp {
     globalThis.main.registerReactComponent('DealsFormActivity', DealFormActivity);
 
     // miscellaneous
-    globalThis.main.getApp('Hubleto/App/Community/Leads').addFormTab({
+    globalThis.main.getApp('Hubleto/App/Community/Leads').addCustomFormTab({
       uid: 'deals',
       title: <span className='italic'>Deals</span>,
       onRender: (form: any) => {

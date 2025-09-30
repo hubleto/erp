@@ -29,9 +29,15 @@ class Location extends \Hubleto\Erp\Model
   ];
 
   public array $relations = [
+    'WAREHOUSE' => [ self::BELONGS_TO, Warehouse::class, 'id_warehouse', 'id' ],
     'TYPE' => [ self::BELONGS_TO, LocationType::class, 'id_type', 'id' ],
     'OPERATION_MANAGER' => [ self::BELONGS_TO, User::class, 'id_operaion_manager', 'id' ],
   ];
+
+  public function getLookupValue(array $dataRaw): string
+  {
+    return $dataRaw['code'] . ' @' . $dataRaw['WAREHOUSE']['name'];
+  }
 
   public function describeColumns(): array
   {

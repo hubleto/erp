@@ -15,6 +15,8 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
   props: FormProductProps;
   state: FormProductState;
 
+  parentApp: string = 'Hubleto/App/Community/Products';
+
   translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader';
   translationContextInner: string = 'Components\\FormProduct';
 
@@ -25,27 +27,19 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
     };
   }
 
-  onAfterFormInitialized(): void {
-    super.onAfterFormInitialized();
-
-    if (this.state.record.id > 0) {
-      this.setState({
-        tabs: [
-          { uid: 'default', title: <b>{this.translate('Product')}</b> },
-          { uid: 'suppliers', title: this.translate('Suppliers') },
-        ]
-      })
-    }
-  }
-
   getStateFromProps(props: FormProductProps) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Product')}</b> },
-        ...(this.getParentApp()?.getFormTabs() ?? [])
+        { uid: 'suppliers', title: this.translate('Suppliers') },
+        ...this.getCustomTabs()
       ]
     };
+  }
+
+  getRecordFormUrl(): string {
+    return 'products/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {

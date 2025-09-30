@@ -72,22 +72,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({tablesKey: Math.random()} as FormLeadState)
   }
 
-  onAfterFormInitialized(): void {
-    super.onAfterFormInitialized();
-
-    if (this.state.record.id > 0) {
-      this.setState({
-        tabs: [
-          { uid: 'default', title: <b>{this.translate('Lead')}</b> },
-          { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
-          { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
-          { uid: 'calendar', icon: 'fas fa-calendar', position: 'right' },
-          { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
-        ]
-      })
-    }
-  }
-
   getStateFromProps(props: FormLeadProps) {
     return {
       ...super.getStateFromProps(props),
@@ -96,15 +80,15 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'calendar', icon: 'fas fa-calendar', position: 'right' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
-        ...(this.getParentApp()?.getFormTabs() ?? [])
+        ...this.getCustomTabs()
       ]
     };
   }
 
-  getFormHeaderButtons()
+  getHeaderButtons()
   {
     return [
-      ...super.getFormHeaderButtons(),
+      ...super.getHeaderButtons(),
       {
         title: 'Close lead',
         onClick: () => { }

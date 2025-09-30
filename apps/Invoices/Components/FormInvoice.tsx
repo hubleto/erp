@@ -36,15 +36,15 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
         { uid: 'default', title: <b>{this.translate('Invoice')}</b> },
         { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
         { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
-        ...(this.getParentApp()?.getFormTabs() ?? [])
+        ...this.getCustomTabs()
       ],
     };
   }
 
-  getFormHeaderButtons()
+  getHeaderButtons()
   {
     return [
-      ...super.getFormHeaderButtons(),
+      ...super.getHeaderButtons(),
       {
         title: 'Print to PDF',
         onClick: () => {

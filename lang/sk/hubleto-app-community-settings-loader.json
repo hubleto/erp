@@ -230,5 +230,9 @@
         "Open": "OTVORENÉ",
         "Disable": "Zakázať",
         "Install": "Inštalovať"
+    },
+    "Controllers\\MyAccount": {
+        "Settings": "",
+        "Company": ""
     }
 }

@@ -29,7 +29,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
       tabs: [
         { uid: 'default', title: <b>{this.translate('Task')}</b> },
         { uid: 'worksheet', title: this.translate('Worksheet') },
-        ...(this.getParentApp()?.getFormTabs() ?? [])
+        ...this.getCustomTabs()
       ]
     }
   }

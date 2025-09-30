@@ -120,16 +120,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
   }
 
   onAfterFormInitialized(): void {
-    if (this.state.record.id > 0) {
-      this.setState({
-        tabs: [
-          { uid: 'default', title: <b>{this.translate('Customer')}</b> },
-          { uid: 'documents', title: this.translate('Documents') },
-          { uid: 'calendar', title: this.translate('Calendar') },
-        ]
-      })
-    }
-
     request.get(
       'api/table/describe',
       {

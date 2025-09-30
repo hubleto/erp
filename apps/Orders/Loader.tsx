@@ -11,7 +11,7 @@ class OrdersApp extends HubletoApp {
     globalThis.main.registerReactComponent('OrdersTableOrders', TableOrders);
 
     // miscellaneous
-    globalThis.main.getApp('Hubleto/App/Community/Deals').addFormTab({
+    globalThis.main.getApp('Hubleto/App/Community/Deals').addCustomFormTab({
       uid: 'orders',
       title: <span className='italic'>Orders</span>,
       onRender: (form: any) => {

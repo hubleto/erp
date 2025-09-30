@@ -56,22 +56,6 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     };
   }
 
-  onAfterFormInitialized(): void {
-    super.onAfterFormInitialized();
-
-    if (this.state.record.id > 0) {
-      this.setState({
-        tabs: [
-          { uid: 'default', title: <b>{this.translate('Order')}</b> },
-          { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
-          { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
-          // { uid: 'invoices', title: this.translate('Invoices'), showCountFor: 'INVOICES' },
-          { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
-        ]
-      })
-    }
-  }
-
   getStateFromProps(props: FormOrderProps) {
     return {
       ...super.getStateFromProps(props),
@@ -79,7 +63,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
         { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
-        ...(this.getParentApp()?.getFormTabs() ?? [])
+        ...this.getCustomTabs()
       ]
     };
   }
@@ -137,10 +121,10 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     } as FormOrderState);
   }
 
-  getFormHeaderButtons()
+  getHeaderButtons()
   {
     return [
-      ...super.getFormHeaderButtons(),
+      ...super.getHeaderButtons(),
       {
         title: 'Generate PDF',
         onClick: () => {

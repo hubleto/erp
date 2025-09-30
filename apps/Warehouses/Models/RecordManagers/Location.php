@@ -10,6 +10,11 @@ class Location extends \Hubleto\Erp\RecordManager
 {
   public $table = 'warehouses_locations';
 
+  public function WAREHOUSE(): BelongsTo
+  {
+    return $this->belongsTo(Warehouse::class, 'id_warehouse', 'id');
+  }
+
   public function OPERATION_MANAGER(): BelongsTo
   {
     return $this->belongsTo(User::class, 'id_operation_manager', 'id');

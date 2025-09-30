@@ -1,17 +1,35 @@
-// How to add any React Component to be usable in Twig templates as '<app-*></app-*>' HTML tag.
-// -> Replace 'MyModel' with the name of your model in the examples below
-
-// 1. import the component
-// import TableMyModel from "./Components/TableMyModel"
-
-// 2. Register the React Component into Hubleto framework
-// globalThis.main.registerReactComponent('WarehousesTableMyModel', TableMyModel);
-
-// 3. Use the component in any of your Twig views:
-// <app-warehouses-table-my-model string:some-property="some-value"></app-warehouses-table-my-model>
-
+import React from 'react';
 import TableInventory from "./Components/TableInventory"
 import TableTransactions from "./Components/TableTransactions"
+import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
 
-globalThis.main.registerReactComponent('InventoryTableInventory', TableInventory);
-globalThis.main.registerReactComponent('InventoryTableTransactions', TableTransactions);
+class InventoryApp extends HubletoApp {
+  init() {
+    super.init();
+
+    // register react components
+    globalThis.main.registerReactComponent('InventoryTableInventory', TableInventory);
+    globalThis.main.registerReactComponent('InventoryTableTransactions', TableTransactions);
+
+    // miscellaneous
+    globalThis.main.getApp('Hubleto/App/Community/Products').addCustomFormTab({
+      uid: 'inventory',
+      title: <span className='italic'>Inventory</span>,
+      onRender: (form: any) => {
+        return <TableInventory
+          tag={"table_project_order"}
+          parentForm={form}
+          //@ts-ignore
+          description={{ui: {showHeader:false}}}
+          descriptionSource='both'
+          uid={form.props.uid + "_table_product_inventory"}
+          idProduct={form.state.record.id}
+        />;
+      },
+    });
+  }
+}
+
+// register app
+globalThis.main.registerApp('Hubleto/App/Community/Inventory', new InventoryApp());
+

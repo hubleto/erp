@@ -3,8 +3,7 @@ import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/rea
 import FormInventory from './FormInventory';
 
 interface TableInventoryProps extends HubletoTableProps {
-  // Uncomment and modify these lines if you want to create URL-based filtering for your model
-  // idCustomer?: number,
+  idProduct?: number,
 }
 
 interface TableInventoryState extends HubletoTableState {
@@ -43,16 +42,30 @@ export default class TableInventory extends HubletoTable<TableInventoryProps, Ta
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      // Uncomment and modify these lines if you want to create URL-based filtering for your model
-      // idCustomer: this.props.idCustomer,
+      idProduct: this.props.idProduct,
     }
+  }
+
+  renderFooter(): JSX.Element {
+    let totalQuantity = 0;
+
+    for (let i in this.state.data?.data) {
+      const row = this.state.data?.data[i];
+      totalQuantity += parseFloat(row['quantity']);
+    }
+
+    return <>
+      <div className="font-bold">
+        {this.translate('Total quantity')}: {totalQuantity.toFixed(2)}<br/>
+      </div>
+    </>
   }
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
-    // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
-    // if (!formProps.description) formProps.description = {};
-    // formProps.description.defaultValues = { idDashboard: this.props.idDashboard };
+    formProps.customEndpointParams.idProduct = this.props.idProduct;
+    if (!formProps.description) formProps.description = {};
+    formProps.description.defaultValues = { id_product: this.props.idProduct };
     return <FormInventory {...formProps}/>;
   }
 }

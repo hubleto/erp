@@ -70,14 +70,8 @@ class Warehouse extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add warehouse';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showFooter'] = false;
-
-    // $description->ui['filters'] = [
-    //   'fArchive' => [ 'title' => 'Archive', 'options' => [ 0 => 'Active', 1 => 'Archived' ] ],
-    // ];
-
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
     return $description;
   }
 

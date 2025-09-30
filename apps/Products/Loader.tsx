@@ -1,3 +1,4 @@
+import React from 'react';
 import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
 import ProductsTableProducts from "./Components/TableProducts";
 

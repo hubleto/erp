@@ -13,7 +13,7 @@ class ProjectsApp extends HubletoApp {
     globalThis.main.registerReactComponent('ProjectsTablePhases', TablePhases);
 
     // miscellaneous
-    globalThis.main.getApp('Hubleto/App/Community/Orders').addFormTab({
+    globalThis.main.getApp('Hubleto/App/Community/Orders').addCustomFormTab({
       uid: 'projects',
       title: <span className='italic'>Projects</span>,
       onRender: (form: any) => {

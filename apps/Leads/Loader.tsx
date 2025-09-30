@@ -14,7 +14,7 @@ class LeadsApp extends HubletoApp {
     globalThis.main.registerReactComponent('LeadsTableLevels', TableLevels);
 
     // miscellaneous
-    globalThis.main.getApp('Hubleto/App/Community/Campaigns').addFormTab({
+    globalThis.main.getApp('Hubleto/App/Community/Campaigns').addCustomFormTab({
       uid: 'leads',
       title: <span className='italic'>Leads</span>,
       onRender: (form: any) => {

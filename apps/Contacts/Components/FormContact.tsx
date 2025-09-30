@@ -220,11 +220,14 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
                   this.setState({record: R});
                   this.updateRecord({is_primary: 0});
                 }}
-                newTagService={{
-                  getNewRecord: (value: string) => {
-                    return { id: -1, name: value, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
-                  },
+                onNewTag={(title: string) => {
+                  return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
                 }}
+                // newTagService={{
+                //   getNewRecord: (value: string) => {
+                //     return { id: -1, name: value, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
+                //   },
+                // }}
               ></InputTags2>
             </FormInput>
             {this.state.record?.id_customer > 0 ?

@@ -62,7 +62,9 @@
         "Managed by me": "Mnou spravované",
         "Open \/ Closed": "Otvorené \/ Zavreté",
         "Open": "Otvorené",
-        "Active": "Aktívne"
+        "Active": "Aktívne",
+        " changed from ": "",
+        " to ": ""
     },
     "Models\\DealHistory": {
         "Change Date": "Dátum zmeny",

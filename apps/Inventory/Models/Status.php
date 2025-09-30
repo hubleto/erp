@@ -8,6 +8,7 @@ class Status extends \Hubleto\Erp\Model
 {
   public string $table = 'inventory_status';
   public string $recordManagerClass = RecordManagers\Status::class;
+  public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array
   {

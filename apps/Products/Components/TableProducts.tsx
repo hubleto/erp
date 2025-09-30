@@ -47,6 +47,10 @@ export default class TableProducts extends HubletoTable<TableProductsProps, Tabl
     }
   }
 
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/products/' + (id > 0 ? id : 'add'));
+  }
+
   renderHeaderRight(): Array<JSX.Element> {
     let elements: Array<JSX.Element> = super.renderHeaderRight();
 

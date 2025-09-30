@@ -27,28 +27,13 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
     super(props);
   }
 
-  onAfterFormInitialized(): void {
-    super.onAfterFormInitialized();
-
-    if (this.state.record.id > 0) {
-      this.setState({
-        tabs: [
-          { uid: 'default', title: <b>{this.translate('Project')}</b> },
-          { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
-          { uid: 'worksheet', title: this.translate('Worksheet') },
-          { uid: 'statistics', title: this.translate('Statistics') },
-        ]
-      })
-    }
-  }
-
   getStateFromProps(props: FormProjectProps) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Project')}</b> },
         { uid: 'worksheet', title: this.translate('Worksheet') },
-        ...(this.getParentApp()?.getFormTabs() ?? [])
+        ...this.getCustomTabs()
       ]
     }
   }

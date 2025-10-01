@@ -32,7 +32,9 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Project')}</b> },
+        { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'worksheet', title: this.translate('Worksheet') },
+        { uid: 'statistics', title: this.translate('Statistics') },
         ...this.getCustomTabs()
       ]
     }
@@ -110,7 +112,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
             <div className='flex-1'>
               {R.id > 0 ?
                 <div className='card card-info'>
-                  <div className='card-header'>Tasks</div>
+                  <div className='card-header'>{this.translate('Open tasks')}</div>
                   <div className='card-body'>
                     <TableTasks
                       tag={"table_project_task"}

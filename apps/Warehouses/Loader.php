@@ -16,7 +16,8 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^warehouses\/?$/' => Controllers\Warehouses::class,
+      '/^warehouses(\/(?<recordId>\d+))?\/?$/' => Controllers\Warehouses::class,
+      '/^warehouses\/add?\/?$/' => ['controller' => Controllers\Warehouses::class, 'vars' => [ 'recordId' => -1 ]],
       '/^warehouses\/locations\/?$/' => Controllers\Locations::class,
       '/^warehouses\/inventory\/?$/' => Controllers\Inventory::class,
       '/^warehouses\/transactions\/?$/' => Controllers\Transactions::class,
@@ -40,6 +41,12 @@ class Loader extends \Hubleto\Framework\App
 
   }
 
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   * 
+   */
   public function renderSecondSidebar(): string
   {
     return '
@@ -72,7 +79,14 @@ class Loader extends \Hubleto\Framework\App
     ';
   }
 
-  // installTables
+  /**
+   * [Description for installTables]
+   *
+   * @param int $round
+   * 
+   * @return void
+   * 
+   */
   public function installTables(int $round): void
   {
     if ($round == 1) {

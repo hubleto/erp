@@ -66,12 +66,35 @@ class Warehouse extends \Hubleto\Erp\Model
     ]);
   }
 
+  /**
+   * [Description for describeTable]
+   *
+   * @return \Hubleto\Framework\Description\Table
+   * 
+   */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add warehouse';
+    $description->ui['addButtonText'] = $this->translate('Add warehouse');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
+
+    $description->addFilter('fWarehouseOperationalStatus', [
+      'title' => $this->translate('Operational status'),
+      'type' => 'multipleSelectButtons',
+      'options' => self::OPERATIONAL_STATUSES
+    ]);
+
+    $fWarehouseTypeOptions = [];
+    foreach ($this->getModel(WarehouseType::class)->record->get() as $value) {
+      $fWarehouseTypeOptions[$value->id] = $value->name;
+    }
+    $description->addFilter('fWarehouseType', [
+      'title' => $this->translate('Type'),
+      'type' => 'multipleSelectButtons',
+      'options' => $fWarehouseTypeOptions,
+    ]);
+
     return $description;
   }
 

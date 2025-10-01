@@ -112,15 +112,15 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
                     <td>
                       <Lookup
                         model='Hubleto/App/Community/Warehouses/Models/Location'
-                        value={item.id_location_source}
-                        onChange={(input: any, value: any) => { this.updateItem(index, {id_location_source: value}); }}
+                        value={item.id_location_original}
+                        onChange={(input: any, value: any) => { this.updateItem(index, {id_location_original: value}); }}
                       ></Lookup>
                     </td>
                     <td>
                       <Lookup
                         model='Hubleto/App/Community/Warehouses/Models/Location'
-                        value={item.id_location_destination}
-                        onChange={(input: any, value: any) => { this.updateItem(index, {id_location_destination: value}); }}
+                        value={item.id_location_new}
+                        onChange={(input: any, value: any) => { this.updateItem(index, {id_location_new: value}); }}
                       ></Lookup>
                     </td>
                   </tr>

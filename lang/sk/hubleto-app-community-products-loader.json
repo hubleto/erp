@@ -43,7 +43,8 @@
         "Sales price": "Predajná cena",
         "VAT": "DPH",
         "Bar code": "Čiarový kód",
-        "Data ": "Dáta"
+        "Data ": "Dáta",
+        "EAN": ""
     },
     "Models\\Group": {
         "Title": "Názov"

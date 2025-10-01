@@ -39,7 +39,7 @@ export default class FormLocation<P, S> extends HubletoForm<FormLocationProps, F
           {this.inputWrapper('id_type')}
           {this.inputWrapper('operational_status')}
           {this.inputWrapper('id_operational_manager')}
-          {this.divider(this.translate('Capacity and occupancy'))}
+          {this.divider(this.translate('Capacity and stock status'))}
           <div className="flex gap-2">
             <div className="w-full">{this.inputWrapper('capacity')}</div>
             <div className="w-full">{this.inputWrapper('capacity_unit')}</div>

@@ -1,6 +1,7 @@
 import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
 import TableWarehouses from "./Components/TableWarehouses"
 import TableInventory from "./Components/TableInventory"
+import TableLocations from "./Components/TableLocations"
 import TableTransactions from "./Components/TableTransactions"
 import FormTransaction from "./Components/FormTransaction"
 
@@ -11,6 +12,7 @@ class WarehousesApp extends HubletoApp {
     // register react components
     globalThis.main.registerReactComponent('WarehousesTableWarehouses', TableWarehouses);
     globalThis.main.registerReactComponent('WarehousesTableInventory', TableInventory);
+    globalThis.main.registerReactComponent('WarehousesTableLocations', TableLocations);
     globalThis.main.registerReactComponent('WarehousesTableTransactions', TableTransactions);
     globalThis.main.registerReactComponent('WarehousesFormTransaction', FormTransaction);
 

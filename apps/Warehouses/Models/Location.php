@@ -41,6 +41,12 @@ class Location extends \Hubleto\Erp\Model
     return $dataRaw['code'] . ' @' . $dataRaw['WAREHOUSE']['name'];
   }
 
+  /**
+   * [Description for describeColumns]
+   *
+   * @return array
+   * 
+   */
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
@@ -69,6 +75,47 @@ class Location extends \Hubleto\Erp\Model
     ]);
   }
 
+  /**
+   * [Description for describeTable]
+   *
+   * @return \Hubleto\Framework\Description\Table
+   * 
+   */
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['addButtonText'] = $this->translate('Add location');
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+
+    $description->addFilter('fLocationOperationalStatus', [
+      'title' => $this->translate('Operational status'),
+      'type' => 'multipleSelectButtons',
+      'options' => self::OPERATIONAL_STATUSES
+    ]);
+
+    $fLocationTypeOptions = [];
+    foreach ($this->getModel(LocationType::class)->record->get() as $value) {
+      $fLocationTypeOptions[$value->id] = $value->name;
+    }
+    $description->addFilter('fLocationType', [
+      'title' => $this->translate('Type'),
+      'type' => 'multipleSelectButtons',
+      'options' => $fLocationTypeOptions,
+    ]);
+
+    return $description;
+  }
+
+  /**
+   * [Description for onAfterUpdate]
+   *
+   * @param array $originalRecord
+   * @param array $savedRecord
+   * 
+   * @return array
+   * 
+   */
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
@@ -80,6 +127,14 @@ class Location extends \Hubleto\Erp\Model
     return $savedRecord;
   }
 
+  /**
+   * [Description for onAfterCreate]
+   *
+   * @param array $savedRecord
+   * 
+   * @return array
+   * 
+   */
   public function onAfterCreate(array $savedRecord): array
   {
     $savedRecord = parent::onAfterCreate($savedRecord);

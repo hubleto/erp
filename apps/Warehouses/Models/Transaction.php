@@ -26,8 +26,6 @@ class Transaction extends \Hubleto\Erp\Model
 
   public array $relations = [
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id' ],
-    'LOCATION_SOURCE' => [ self::BELONGS_TO, Location::class, 'id_location_source', 'id' ],
-    'LOCATION_DESTINATION' => [ self::BELONGS_TO, Location::class, 'id_location_destination', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
 
     'ITEMS' => [ self::HAS_MANY, TransactionItem::class, 'id_transaction', 'id' ],
@@ -93,12 +91,15 @@ class Transaction extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 
-    $description->ui['filters'] = [
-      'fDirection' => [ 'title' => $this->translate('Direction'), 'options' => [
-        self::DIRECTION_INBOUND => $this->translate('Inbound'),
-        self::DIRECTION_OUTBOUND => $this->translate('Outbound'),
-      ] ],
-    ];
+    $description->addFilter('fTransactionDirection', [
+      'title' => $this->translate('Direction'),
+      'options' => self::DIRECTIONS
+    ]);
+
+    $description->addFilter('fTransactionType', [
+      'title' => $this->translate('Type'),
+      'options' => self::TYPES
+    ]);
 
     return $description;
   }

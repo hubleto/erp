@@ -1,0 +1,17 @@
+{
+    "manifest": {
+        "Accounting": "Účtovníctvo"
+    },
+    "Models\\Account": {
+        "Account name": "Názov účtu",
+        "Account type": "Typ účtu",
+        "Account subtype": "Podtyp účtu",
+        "Balance": "Aktuálny stav"
+    },
+    "Models\\AccountType": {
+        "Type title": "Typ účtu"
+    },
+    "Models\\AccountSubtype": {
+        "Subtype title": "Podtyp účtu"
+    }
+}

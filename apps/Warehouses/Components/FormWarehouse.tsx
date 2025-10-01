@@ -9,7 +9,7 @@ interface FormWarehouseState extends HubletoFormState { }
 export default class FormWarehouse<P, S> extends HubletoForm<FormWarehouseProps, FormWarehouseState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
-    model: 'Hubleto/App/Community/Warehouses/Models/Team',
+    model: 'Hubleto/App/Community/Warehouses/Models/Warehouse',
   }
 
   props: FormWarehouseProps;
@@ -22,50 +22,66 @@ export default class FormWarehouse<P, S> extends HubletoForm<FormWarehouseProps,
     super(props);
   }
 
+  getStateFromProps(props: FormWarehouseProps) {
+    return {
+      ...super.getStateFromProps(props),
+      tabs: [
+        { uid: 'default', title: <b>{this.translate('Warehouse')}</b> },
+        { uid: 'locations', title: this.translate('Locations'), showCountFor: 'LOCATIONS' },
+        ...this.getCustomTabs()
+      ]
+    }
+  }
+
+  getRecordFormUrl(): string {
+    return 'warehouses/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+  }
+
   renderTitle(): JSX.Element {
     return <>
-      <small>Warehouse</small>
-      <h2>Record #{this.state.record.id ?? '0'}</h2>
+      <small>{this.translate('Warehouse')}</small>
+      <h2>{this.state.record.name ?? '-'}</h2>
     </>;
   }
 
-  renderContent(): JSX.Element {
-    // This is an example code to render content of the form.
-    // You should develop your own render content.
-    return <>
-      <div className='w-full flex gap-2'>
-        <div className="flex-1 border-r border-gray-100">
-          {this.inputWrapper('name')}
-          {this.inputWrapper('id_type')}
-          {this.inputWrapper('operational_status')}
-          {this.inputWrapper('id_operation_manager')}
-          {this.divider(this.translate('Contact'))}
-          {this.inputWrapper('contact_person')}
-          {this.inputWrapper('contact_email')}
-          {this.inputWrapper('contact_phone')}
-          {this.divider(this.translate('Capacity and occupancy'))}
-          <div className="flex gap-2">
-            <div className="w-full">{this.inputWrapper('capacity')}</div>
-            <div className="w-full">{this.inputWrapper('capacity_unit')}</div>
+  renderTab(tabUid: string) {
+    const R = this.state.record;
+
+    switch (tabUid) {
+      case 'default':
+        return <div className='w-full flex gap-2'>
+          <div className="flex-1 border-r border-gray-100">
+            {this.inputWrapper('name')}
+            {this.inputWrapper('id_type')}
+            {this.inputWrapper('operational_status')}
+            {this.inputWrapper('id_operation_manager')}
+            {this.divider(this.translate('Contact'))}
+            {this.inputWrapper('contact_person')}
+            {this.inputWrapper('contact_email')}
+            {this.inputWrapper('contact_phone')}
+            {this.divider(this.translate('Capacity and stock status'))}
+            <div className="flex gap-2">
+              <div className="w-full">{this.inputWrapper('capacity')}</div>
+              <div className="w-full">{this.inputWrapper('capacity_unit')}</div>
+            </div>
+            {this.inputWrapper('current_stock_status')}
           </div>
-          {this.inputWrapper('current_stock_status')}
-        </div>
-        <div className="flex-1">
-          {this.divider(this.translate('Address'))}
-          {this.inputWrapper('address')}
-          {this.inputWrapper('address_plus_code')}
-          {this.inputWrapper('lng')}
-          {this.inputWrapper('lat')}
-          {this.divider(this.translate('More information'))}
-          {this.inputWrapper('description')}
-          {this.inputWrapper('photo_1')}
-          {this.inputWrapper('photo_2')}
-          {this.inputWrapper('photo_3')}
-        </div>
-      </div>
-      <div className="card mt-2">
-        <div className="card-header">{this.translate('Locations')}</div>
-        <div className="card-body">
+          <div className="flex-1">
+            {this.divider(this.translate('Address'))}
+            {this.inputWrapper('address')}
+            {this.inputWrapper('address_plus_code')}
+            {this.inputWrapper('lng')}
+            {this.inputWrapper('lat')}
+            {this.divider(this.translate('More information'))}
+            {this.inputWrapper('description')}
+            {this.inputWrapper('photo_1')}
+            {this.inputWrapper('photo_2')}
+            {this.inputWrapper('photo_3')}
+          </div>
+        </div>;
+      break;
+      case 'locations':
+        return <>
           {this.state.id < 0 ?
             <div className="badge badge-info">First create warehouse, then you will be prompted to add its locations.</div>
           :
@@ -76,8 +92,8 @@ export default class FormWarehouse<P, S> extends HubletoForm<FormWarehouseProps,
               customEndpointParams={ { idWarehouse: this.state.id } }
             ></TableLocations>
           }
-        </div>
-      </div>
-    </>;
+        </>;
+      break;
+    };
   }
 }

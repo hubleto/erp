@@ -1,3 +1,7 @@
-<h1 class="app-main-title">{{ translate('Warehouses') }} > Locations</h1>
+<h1 class="app-main-title">{{ translate('Warehouses') }} > {{ translate('Locations') }}</h1>
 
-<app-warehouses-table-locations></app-warehouses-table-locations>
+<app-warehouses-table-locations
+  string:tag="table-locations"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></app-warehouses-table-locations>

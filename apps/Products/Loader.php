@@ -32,6 +32,14 @@ class Loader extends \Hubleto\Framework\App
     $this->productTypes = $this->collectExtendibles('ProductTypes');
   }
 
+  /**
+   * [Description for installTables]
+   *
+   * @param int $round
+   * 
+   * @return void
+   * 
+   */
   public function installTables(int $round): void
   {
     if ($round == 1) {
@@ -41,4 +49,38 @@ class Loader extends \Hubleto\Framework\App
     }
   }
 
+
+  /**
+   * Implements fulltext search functionality for the contacts
+   *
+   * @param array $expressions List of expressions to be searched and glued with logical 'or'.
+   * 
+   * @return array
+   * 
+   */
+  public function search(array $expressions): array
+  {
+    $mProduct = $this->getModel(Models\Product::class);
+    $qProducts = $mProduct->record->prepareReadQuery();
+    
+    foreach ($expressions as $e) {
+      $qProducts = $qProducts->orWhere('products.ean', $e);
+      $qProducts = $qProducts->orWhere('products.name', 'like', '%' . $e . '%');
+    }
+
+    $products = $qProducts->get()->toArray();
+
+    $results = [];
+
+    foreach ($products as $product) {
+      $results[] = [
+        "id" => $product['id'],
+        "label" => $product['ean'] . ' ' . $product['name'],
+        "url" => 'products/' . $product['id'],
+        "description" => $product['GROUP']['title'],
+      ];
+    }
+
+    return $results;
+  }
 }

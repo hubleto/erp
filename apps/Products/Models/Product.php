@@ -40,7 +40,7 @@ class Product extends \Hubleto\Erp\Model
   public ?string $lookupUrlDetail = 'products/{%ID%}';
 
   public array $relations = [
-    'GROUP' => [ self::HAS_ONE, Group::class, 'id', 'id_product_group'],
+    'GROUP' => [ self::HAS_ONE, Group::class, 'id', 'id_group'],
   ];
 
   public function describeColumns(): array
@@ -64,7 +64,7 @@ class Product extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'ean' => (new Varchar($this, $this->translate('EAN')))->setRequired()->setDefaultVisible(),
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
-      'id_product_group' => (new Lookup($this, $this->translate('Product Group'), Group::class)),
+      'id_group' => (new Lookup($this, $this->translate('Group'), Group::class)),
       'type' => (new Integer($this, $this->translate('Product Type')))->setEnumValues($typeEnumValues)->setDescription($typeDescription)->setDefaultVisible(),
       'invoicing_policy' => (new Integer($this, $this->translate('Invoicing policy')))->setEnumValues(self::INVOICING_POLICY_ENUM_VALUES)->setDescription($invoicingPolicyDescription),
       'is_on_sale' => new Boolean($this, $this->translate('On sale'))->setDefaultVisible(),
@@ -76,7 +76,6 @@ class Product extends \Hubleto\Erp\Model
       'unit' => new Varchar($this, $this->translate('Unit'))->setDefaultVisible(),
       'margin' => (new Decimal($this, $this->translate('Margin')))->setUnit("%")->setColorScale('bg-light-blue-to-dark-blue'),
       'vat' => (new Decimal($this, $this->translate('VAT')))->setUnit("%"),
-      'bar_code' => new Varchar($this, $this->translate('Bar code')),
       'qr_code_data' => new Varchar($this, $this->translate('Data ')),
       'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
       'packaging' => new Varchar($this, $this->translate('Packaging')),
@@ -97,6 +96,28 @@ class Product extends \Hubleto\Erp\Model
     $description->ui["addButtonText"] = $this->translate("Add product");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
+
+    $description->addFilter('fProductType', [
+      'title' => $this->translate('Type'),
+      'type' => 'multipleSelectButtons',
+      'options' => self::TYPE_ENUM_VALUES
+    ]);
+
+    $description->addFilter('fProductInvoicingPolicy', [
+      'title' => $this->translate('Invoicing policy'),
+      'type' => 'multipleSelectButtons',
+      'options' => self::INVOICING_POLICY_ENUM_VALUES
+    ]);
+
+    $fGroupOptions = [];
+    foreach ($this->getModel(Group::class)->record->get() as $value) {
+      $fGroupOptions[$value->id] = $value->title;
+    }
+    $description->addFilter('fProductGroup', [
+      'title' => $this->translate('Group'),
+      'type' => 'multipleSelectButtons',
+      'options' => $fGroupOptions,
+    ]);
 
     return $description;
   }

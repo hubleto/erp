@@ -36,6 +36,17 @@ class Inventory extends \Hubleto\Erp\Model
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add item';
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'footer']);
+
+    $fLocationOptions = [];
+    foreach ($this->record->groupBy('id_location')->with('LOCATION')->get() as $value) {
+      if ($value->LOCATION) $fLocationOptions[$value->id] = $value->LOCATION->code;
+    }
+    $description->addFilter('fInventoryLocation', [
+      'title' => $this->translate('Location'),
+      'type' => 'multipleSelectButtons',
+      'options' => $fLocationOptions,
+    ]);
+    
     return $description;
   }
 

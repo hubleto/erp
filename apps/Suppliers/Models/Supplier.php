@@ -14,6 +14,10 @@ class Supplier extends \Hubleto\Erp\Model
   public ?string $lookupSqlValue = '{%TABLE%}.name';
   public ?string $lookupUrlDetail = 'suppliers/{%ID%}';
 
+  public array $relations = [
+    'COUNTRY' => [ self::BELONGS_TO, Country::class, 'id_country', 'id'  ],
+  ];
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
@@ -38,6 +42,16 @@ class Supplier extends \Hubleto\Erp\Model
     $description->ui['title'] = 'Suppliers';
     $description->ui["addButtonText"] = $this->translate("Add supplier");
 
+    $fCountryOptions = [];
+    foreach ($this->record->groupBy('id_country')->with('COUNTRY')->get() as $value) {
+      if ($value->COUNTRY) $fCountryOptions[$value->id] = $value->COUNTRY->name;
+    }
+    $description->addFilter('fSupplierCountry', [
+      'title' => $this->translate('Country'),
+      'type' => 'multipleSelectButtons',
+      'options' => $fCountryOptions,
+    ]);
+    
     return $description;
   }
 }

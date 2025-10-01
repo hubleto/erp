@@ -750,7 +750,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
         "margin" => $product[2],
         "vat" => $product[3],
         "unit" => $product[4],
-        "id_product_group" => rand(1, 4),
+        "id_group" => rand(1, 4),
         "type" => \Hubleto\App\Community\Products\Models\Product::TYPE_CONSUMABLE,
       ]);
     }
@@ -764,7 +764,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
         "sales_price" => rand(10, 100),
         "margin" => rand(10, 40),
         "vat" => 25,
-        "id_product_group" => 5,
+        "id_group" => 5,
         "type" => \Hubleto\App\Community\Products\Models\Product::TYPE_SERVICE,
       ]);
     }

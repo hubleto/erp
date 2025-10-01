@@ -110,6 +110,16 @@ class Order extends \Hubleto\Erp\Model
       ],
     ];
 
+    $fCustomerOptions = [];
+    foreach ($this->record->groupBy('id_customer')->with('CUSTOMER')->get() as $value) {
+      if ($value->CUSTOMER) $fCustomerOptions[$value->id] = $value->CUSTOMER->name;
+    }
+    $description->addFilter('fOrderCustomer', [
+      'title' => $this->translate('Customer'),
+      'type' => 'multipleSelectButtons',
+      'options' => $fCustomerOptions,
+    ]);
+    
     return $description;
   }
 

@@ -11,7 +11,7 @@ class Product extends \Hubleto\Erp\RecordManager
   /** @return HasOne<Group, covariant Product> */
   public function GROUP(): HasOne
   {
-    return $this->hasOne(Group::class, 'id', 'id_product_group');
+    return $this->hasOne(Group::class, 'id', 'id_group');
   }
 
   public function prepareLookupQuery(string $search): mixed

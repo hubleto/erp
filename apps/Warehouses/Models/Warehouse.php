@@ -15,7 +15,7 @@ class Warehouse extends \Hubleto\Erp\Model
 {
   public string $table = 'warehouses';
   public string $recordManagerClass = RecordManagers\Warehouse::class;
-  public ?string $lookupSqlValue = 'concat("Warehouse #", {%TABLE%}.id)';
+  public ?string $lookupSqlValue = '{%TABLE%}.name';
   public ?string $lookupUrlAdd = 'warehouses/add';
   public ?string $lookupUrlDetail = 'warehouses/{%ID%}';
 

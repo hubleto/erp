@@ -27,7 +27,7 @@ class Inventory extends \Hubleto\Erp\RecordManager
     $query = parent::prepareReadQuery($query, $level);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
-    $idProduct = $hubleto->router()->urlParamAsInteger("idEntry");
+    $idProduct = $hubleto->router()->urlParamAsInteger("idProduct");
 
     if ($idProduct > 0) $query = $query->where($this->table . '.id_product', $idProduct);
 

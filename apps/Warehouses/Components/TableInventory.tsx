@@ -46,6 +46,21 @@ export default class TableInventory extends HubletoTable<TableInventoryProps, Ta
     }
   }
 
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    let cell = super.renderCell(columnName, column, data, options);
+
+    if (columnName == 'quantity') {
+      if (data[columnName] >= 0) {
+        cell = <span className='text-green-800'>{data[columnName]}</span>;
+      } else {
+        cell = <span className='text-red-800'>{data[columnName]}</span>;
+      }
+    }
+
+    return cell;
+
+  }
+
   renderFooter(): JSX.Element {
     let totalQuantity = 0;
 

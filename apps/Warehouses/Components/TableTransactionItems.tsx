@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
-import FormTransaction from './FormTransaction';
+import FormTransactionItem from './FormTransactionItem';
 
 interface TableTransactionItemsProps extends HubletoTableProps {
   idTransaction?: number,
@@ -10,7 +10,7 @@ interface TableTransactionItemsProps extends HubletoTableProps {
 interface TableTransactionItemsState extends HubletoTableState {
 }
 
-export default class TableTransaction extends HubletoTable<TableTransactionItemsProps, TableTransactionItemsState> {
+export default class TableTransactionItems extends HubletoTable<TableTransactionItemsProps, TableTransactionItemsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
@@ -48,6 +48,65 @@ export default class TableTransaction extends HubletoTable<TableTransactionItems
     }
   }
 
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/warehouses/transactions/items/' + (id > 0 ? id : 'add'));
+  }
+
+  cellClassName(columnName: string, column: any, rowData: any) {
+    let cellClassName = super.cellClassName(columnName, column, rowData);
+
+    if (columnName == 'id_transaction') {
+      if (rowData.TRANSACTION.direction == 1) {
+        cellClassName += ' bg-green-50';
+      } else {
+        cellClassName += ' bg-red-50';
+      }
+    }
+
+    return cellClassName;
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    let cell = super.renderCell(columnName, column, data, options);
+
+    if (columnName == 'id_transaction') {
+      if (data.TRANSACTION.direction == 1) {
+        cell = <><i className='fas fa-plus'></i> {cell}</>
+      } else {
+        cell = <><i className='fas fa-minus'></i> {cell}</>
+      }
+    }
+
+    if (columnName == 'quantity') {
+      if (data.TRANSACTION.direction == 1) {
+        cell = <span className='text-green-800'>{data[columnName]}</span>;
+      } else {
+        cell = <span className='text-red-800'>- {data[columnName]}</span>;
+      }
+    }
+
+    return cell;
+
+  }
+
+  renderFooter(): JSX.Element {
+    let totalQuantity = 0;
+    for (let i in this.state.data?.data) {
+      const row = this.state.data?.data[i];
+
+      if (row.TRANSACTION.direction == 1) // inbound
+        totalQuantity += parseFloat(row['quantity']);
+      else // outbound
+        totalQuantity -= parseFloat(row['quantity']);
+    }
+
+    return <>
+      <div className="font-bold">
+        {this.translate('Total quantity')}: {totalQuantity.toFixed(2)} €<br/>
+      </div>
+    </>
+  }
+
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idTransaction = this.props.idTransaction;
@@ -57,6 +116,6 @@ export default class TableTransaction extends HubletoTable<TableTransactionItems
       id_transaction: this.props.idTransaction,
       id_product: this.props.idProduct,
     };
-    return <FormTransaction {...formProps}/>;
+    return <FormTransactionItem {...formProps}/>;
   }
 }

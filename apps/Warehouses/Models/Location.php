@@ -19,6 +19,8 @@ class Location extends \Hubleto\Erp\Model
   public string $table = 'warehouses_locations';
   public string $recordManagerClass = RecordManagers\Location::class;
   public ?string $lookupSqlValue = '{%TABLE%}.code';
+  public ?string $lookupUrlAdd = 'warehouses/locations/add';
+  public ?string $lookupUrlDetail = 'warehouses/locations/{%ID%}';
 
   public const OPERATIONAL_STATUS_ACTIVE = 1;
   public const OPERATIONAL_STATUS_INACTIVE = 2;
@@ -50,7 +52,7 @@ class Location extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_warehouse' => (new Lookup($this, $this->translate('Warehouse'), Warehouse::class)),
+      'id_warehouse' => (new Lookup($this, $this->translate('Warehouse'), Warehouse::class))->setDefaultVisible(),
       'code' => (new Varchar($this, $this->translate('Location code')))->setExamples(['Aisle 1', 'Rack B', 'Shelf 2.3', 'Bin A1'])->setDefaultVisible(),
       'id_type' => (new Lookup($this, $this->translate('Location type'), LocationType::class))->setDefaultVisible(),
       'description' => (new Text($this, $this->translate('Description'))),

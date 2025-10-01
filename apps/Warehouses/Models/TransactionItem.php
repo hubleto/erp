@@ -57,4 +57,12 @@ class TransactionItem extends \Hubleto\Erp\Model
     ]);
   }
 
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->permissions['canCreate'] = false;
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'footer']);
+    return $description;
+  }
+
 }

@@ -40,8 +40,9 @@
         "Projects": "Projekty",
         "Worksheet": "Výkaz práce",
         "Project": "Projekt",
-        "Tasks": "Úloha",
-        "Statistics": "Štatistiky"
+        "Tasks": "Úlohy",
+        "Statistics": "Štatistiky",
+        "Open tasks": "Otvorené úlohy"
     },
     "Models\\ProjectOrder": {
         "Project": "Projekt",

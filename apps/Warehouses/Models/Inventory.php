@@ -25,14 +25,9 @@ class Inventory extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible()->setRequired(),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible()->setRequired()->addIndex('UNIQUE `id_product__id_location` (`id_product`, `id_location`)'),
       'id_location' => (new Lookup($this, $this->translate('Location in warehouse'), Location::class))->setDefaultVisible()->setRequired(),
       'quantity' => (new Decimal($this, $this->translate('Quantity')))->setDefaultVisible(),
-      'batch_number' => (new Varchar($this, $this->translate('Batch number'))),
-      'serial_number' => (new Varchar($this, $this->translate('Serial number'))),
-      'datetime_expiration' => (new DateTime($this, $this->translate('Expiration'))),
-      'datetime_received' => (new DateTime($this, $this->translate('Received'))),
-      'datetime_last_move' => (new DateTime($this, $this->translate('Last moved'))),
     ]);
   }
 

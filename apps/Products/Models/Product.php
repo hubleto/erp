@@ -36,6 +36,8 @@ class Product extends \Hubleto\Erp\Model
   public string $table = 'products';
   public string $recordManagerClass = RecordManagers\Product::class;
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.ean, ""), " ", ifnull({%TABLE%}.name, ""))';
+  public ?string $lookupUrlAdd = 'products/add';
+  public ?string $lookupUrlDetail = 'products/{%ID%}';
 
   public array $relations = [
     'GROUP' => [ self::HAS_ONE, Group::class, 'id', 'id_product_group'],

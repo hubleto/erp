@@ -23,6 +23,8 @@ class Transaction extends \Hubleto\Erp\Model
   public string $table = 'warehouses_transactions';
   public string $recordManagerClass = RecordManagers\Transaction::class;
   public ?string $lookupSqlValue = '{%TABLE%}.uid';
+  public ?string $lookupUrlAdd = 'warehouses/transactions/add';
+  public ?string $lookupUrlDetail = 'warehouses/transactions/{%ID%}';
 
   public array $relations = [
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id' ],
@@ -73,9 +75,9 @@ class Transaction extends \Hubleto\Erp\Model
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class)),
       'supplier_invoice_number' => (new Varchar($this, $this->translate('Supplier invoice number'))),
       'supplier_order_number' => (new Varchar($this, $this->translate('Supplier order number'))),
-      'batch_number' => (new Varchar($this, $this->translate('Batch number'))),
-      'serial_number' => (new Varchar($this, $this->translate('Serial number'))),
-      'document_1' => (new File($this, $this->translate('Reference document #1')))->setDefaultVisible(),
+      'batch_number' => (new Varchar($this, $this->translate('Batch number')))->setDefaultVisible(),
+      'serial_number' => (new Varchar($this, $this->translate('Serial number')))->setDefaultVisible(),
+      'document_1' => (new File($this, $this->translate('Reference document #1'))),
       'document_2' => (new File($this, $this->translate('Reference document #2'))),
       'document_3' => (new File($this, $this->translate('Reference document #3'))),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
@@ -102,5 +104,12 @@ class Transaction extends \Hubleto\Erp\Model
     ]);
 
     return $description;
+  }
+
+  public function onAfterCreate(array $savedRecord): array
+  {
+    if (empty($savedRecord['uid'])) $savedRecord['uid'] = \Hubleto\Framework\Helper::generateUuidV4();
+    $this->record->recordUpdate($savedRecord);
+    return parent::onAfterCreate($savedRecord);
   }
 }

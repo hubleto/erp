@@ -1,0 +1,7 @@
+<h1 class="app-main-title">{{ translate('Warehouses') }} > {{ translate('Transactions') }} > {{ translate('Items') }}</h1>
+
+<app-warehouses-table-transaction-items
+  string:tag="table-transaction-items"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></app-warehouses-table-transaction-items>

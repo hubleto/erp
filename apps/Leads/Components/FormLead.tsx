@@ -361,6 +361,9 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                         R.TAGS = value;
                         this.setState({record: R});
                       }}
+                      onNewTag={(title: string) => {
+                        return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
+                      }}
                     ></InputTags2>
                   </FormInput>
                   <FormInput title={"Customer"}>

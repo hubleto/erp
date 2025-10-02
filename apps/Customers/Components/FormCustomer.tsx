@@ -396,6 +396,9 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                         R.TAGS = value;
                         this.setState({record: R});
                       }}
+                      onNewTag={(title: string) => {
+                        return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
+                      }}
                     />
                   </FormInput>
                   {this.inputWrapper("id_owner")}

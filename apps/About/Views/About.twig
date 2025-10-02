@@ -1,48 +1,71 @@
 <h1 class="app-main-title">About</h1>
 
 <div class="flex gap-2 w-full">
-  <div class="card grow">
-    <div class="card-header">
-      {{ translate('About your Hubleto') }}
+  <div class="grow flex flex-col gap-2">
+    <div class="card">
+      <div class="card-header">
+        {{ translate('About your Hubleto') }}
+      </div>
+      <div class="card-body">
+        <table class="table-default dense">
+          <thead>
+            <tr>
+              <td>Package</td>
+              <td>Version</td>
+              <td>Commit</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pName, pInfo in viewParams.packages %}
+              {% if pName starts with 'hubleto' %}
+                <tr>
+                  <td>{{ pName }}</td>
+                  <td>{{ pInfo.version }}</td>
+                  <td>{{ pInfo.reference }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="card-body">
-      <table class="table-default dense">
-        <thead>
-          <tr>
-            <td>Package</td>
-            <td>Version</td>
-            <td>Commit</td>
-          </tr>
-        </thead>
-        <tbody>
-          {% for pName, pInfo in viewParams.packages %}
-            {% if pName starts with 'hubleto' %}
+    <div class="card">
+      <div class="card-header">
+        {{ translate('Useful links') }}
+      </div>
+      <div class="card-body">
+        <a href="https://www.hubleto.com/en/privacy-policy" target="_blank">Privacy policy</a><br/>
+        <a href="https://www.hubleto.com/en/terms-of-use" target="_blank">Terms of use</a><br/>
+        <br/>
+        <a href="https://www.hubleto.com" target="_blank">Website</a><br/>
+        <a href="https://help.hubleto.com" target="_blank">User guide</a><br/>
+        <a href="https://community.hubleto.com" target="_blank">Community discussion forum</a><br/>
+        <br/>
+        <a href="https://www.linkedin.com/company/hubleto" target="_blank">LinkedIn</a><br/>
+        <a href="https://www.reddit.com/r/hubleto" target="_blank">Reddit</a><br/>
+        <br/>
+        <a href="https://developer.hubleto.com" target="_blank">Developer's guide</a><br/>
+        <a href="https://github.com/hubleto" target="_blank">Source code</a><br/>
+      </div>
+    </div>
+  </div>
+  <div class="grow">
+    <div class="card">
+      <div class="card-header">
+        Packages
+      </div>
+      <div class="card-body">
+        <table class="table-default dense">
+          <tbody>
+            {% for pName, pInfo in viewParams.packages %}
               <tr>
                 <td>{{ pName }}</td>
                 <td>{{ pInfo.version }}</td>
-                <td>{{ pInfo.reference }}</td>
               </tr>
-            {% endif %}
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="card grow">
-    <div class="card-header">
-      Packages
-    </div>
-    <div class="card-body">
-      <table class="table-default dense">
-        <tbody>
-          {% for pName, pInfo in viewParams.packages %}
-            <tr>
-              <td>{{ pName }}</td>
-              <td>{{ pInfo.version }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

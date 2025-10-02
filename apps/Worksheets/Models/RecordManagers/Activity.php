@@ -69,6 +69,10 @@ class Activity extends \Hubleto\Erp\RecordManager
       }
     }
 
+    if (is_array($filters['fWorker']) && count($filters['fWorker']) > 0) {
+      $query = $query->whereIn($this->table . '.id_worker', $filters['fWorker']);
+    }
+
     return $query;
   }
 

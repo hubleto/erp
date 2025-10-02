@@ -19,7 +19,7 @@ class Location extends \Hubleto\Erp\Model
   public string $table = 'warehouses_locations';
   public string $recordManagerClass = RecordManagers\Location::class;
   public ?string $lookupSqlValue = '{%TABLE%}.code';
-  public ?string $lookupUrlAdd = 'warehouses/locations/add';
+  // public ?string $lookupUrlAdd = 'warehouses/locations/add';
   public ?string $lookupUrlDetail = 'warehouses/locations/{%ID%}';
 
   public const OPERATIONAL_STATUS_ACTIVE = 1;

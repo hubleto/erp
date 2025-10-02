@@ -5,9 +5,7 @@ import TableTransactionItems from './TableTransactionItems';
 import Int from '@hubleto/react-ui/core/Inputs/Int';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
-interface FormTransactionProps extends HubletoFormProps {
-  direction?: number,
-}
+interface FormTransactionProps extends HubletoFormProps { }
 interface FormTransactionState extends HubletoFormState { }
 
 export default class FormTransaction<P, S> extends HubletoForm<FormTransactionProps, FormTransactionState> {
@@ -39,7 +37,7 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
 
   renderTitle(): JSX.Element {
     return <>
-      <small>{this.props.direction == 1 ? 'Inbound transaction' : 'Outbound transaction'}</small>
+      <small>{this.translate('Transaction')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }
@@ -60,7 +58,6 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
         return <div className='flex gap-2'>
           <div className='w-full flex-1'>
             {this.inputWrapper('uid')}
-            {this.inputWrapper('direction')}
             {this.inputWrapper('type')}
             {this.inputWrapper('id_supplier')}
             {this.inputWrapper('supplier_invoice_number')}
@@ -75,55 +72,47 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
             {this.inputWrapper('id_created_by')}
           </div>
           <div className='w-full flex-3'>
-            <table className='table-default dense'>
+            <div className='flex gap-2 items-center bg-blue-50 p-2'>
+              <div className='grow'>{this.inputWrapper('id_location_old')}</div>
+              <div><i className='fas fa-arrow-right'></i></div>
+              <div className='grow'>{this.inputWrapper('id_location_new')}</div>
+            </div>
+            <table className='table-default dense mt-2'>
               <thead>
                 <tr>
                   <th>Product</th>
                   <th>Qty.</th>
                   <th>Purchase price</th>
-                  <th>From</th>
-                  <th>To</th>
                 </tr>
               </thead>
               <tbody>
                 {R.ITEMS ? R.ITEMS.map((item, index) => {
-                  return <tr>
-                    <td>
-                      <Lookup
-                        model='Hubleto/App/Community/Products/Models/Product'
-                        value={item.id_product}
-                        onChange={(input: any, value: any) => { this.updateItem(index, {id_product: value}); }}
-                      ></Lookup>
-                    </td>
-                    <td>
-                      <Int
-                        value={item.quantity}
-                        description={{decimals: 4}}
-                        onChange={(input: any, value: any) => { this.updateItem(index, {quantity: value}); }}
-                      ></Int>
-                    </td>
-                    <td>
-                      <Int
-                        value={item.purchase_price}
-                        description={{decimals: 4, unit: '€'}}
-                        onChange={(input: any, value: any) => { this.updateItem(index, {purchase_price: value}); }}
-                      ></Int>
-                    </td>
-                    <td>
-                      <Lookup
-                        model='Hubleto/App/Community/Warehouses/Models/Location'
-                        value={item.id_location_original}
-                        onChange={(input: any, value: any) => { this.updateItem(index, {id_location_original: value}); }}
-                      ></Lookup>
-                    </td>
-                    <td>
-                      <Lookup
-                        model='Hubleto/App/Community/Warehouses/Models/Location'
-                        value={item.id_location_new}
-                        onChange={(input: any, value: any) => { this.updateItem(index, {id_location_new: value}); }}
-                      ></Lookup>
-                    </td>
-                  </tr>
+                  return <>
+                    <tr>
+                      <td>
+                        <Lookup
+                          model='Hubleto/App/Community/Products/Models/Product'
+                          value={item.id_product}
+                          cssClass='font-bold'
+                          onChange={(input: any, value: any) => { this.updateItem(index, {id_product: value}); }}
+                        ></Lookup>
+                      </td>
+                      <td>
+                        <Int
+                          value={item.quantity}
+                          description={{decimals: 4}}
+                          onChange={(input: any, value: any) => { this.updateItem(index, {quantity: value}); }}
+                        ></Int>
+                      </td>
+                      <td>
+                        <Int
+                          value={item.purchase_price}
+                          description={{decimals: 4, unit: '€'}}
+                          onChange={(input: any, value: any) => { this.updateItem(index, {purchase_price: value}); }}
+                        ></Int>
+                      </td>
+                    </tr>
+                  </>
                 }) : null}
               </tbody>
             </table>

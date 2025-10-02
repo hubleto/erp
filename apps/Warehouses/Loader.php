@@ -78,13 +78,9 @@ class Loader extends \Hubleto\Framework\App
           <span class="icon"><i class="fas fa-arrows-turn-to-dots"></i></span>
           <span class="text">' . $this->translate('Transactions') . '</span>
         </a>
-        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/warehouses/transactions/add?direction=1">
+        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/warehouses/transactions/add">
           <span class="icon"><i class="fas fa-plus"></i></span>
-          <span class="text">' . $this->translate('Create inbound') . '</span>
-        </a>
-        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/warehouses/transactions/add?direction=2">
-          <span class="icon"><i class="fas fa-minus"></i></span>
-          <span class="text">' . $this->translate('Create outbound') . '</span>
+          <span class="text">' . $this->translate('Create transaction') . '</span>
         </a>
         <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/warehouses/transactions/items">
           <span class="icon"><i class="fas fa-list"></i></span>
@@ -192,10 +188,28 @@ class Loader extends \Hubleto\Framework\App
       'id_operation_manager' => 1,
     ])['id'];
 
-    for ($i = 1; $i < 100; $i++) {
+    for ($i = 1; $i < 10; $i++) {
+      $direction = rand(0, 2);
+      $idlocationOld = 0;
+      $idLocationNew = 0;
+      if ($direction == 0) { // prijatie na sklad
+        $idlocationOld = 0;
+        $idLocationNew = $idsLocation[rand(0, count($idsLocation) - 1)];
+      } else if ($direction == 1) { // presun medzi skladmi
+        $idlocationOld = $idsLocation[rand(0, count($idsLocation) - 1)];
+        $idLocationNew = $idsLocation[rand(0, count($idsLocation) - 1)];
+        while ($idLocationNew == $idlocationOld) {
+          $idLocationNew = $idsLocation[rand(0, count($idsLocation) - 1)];
+        }
+      } else if ($direction == 2) { // vydanie zo skladu
+        $idlocationOld = $idsLocation[rand(0, count($idsLocation) - 1)];
+        $idLocationNew = 0;
+      }
+
       $idTransaction = $mTransaction->record->recordCreate([
-        'direction' => rand(0, 1) == 0 ? Models\Transaction::DIRECTION_OUTBOUND : Models\Transaction::DIRECTION_INBOUND,
         'batch_number' => 'DEMO-' . $i,
+        'id_location_old' => $idlocationOld,
+        'id_location_new' => $idLocationNew,
       ])['id'];
 
       for ($j = 1; $j < rand(3, 5); $j++) {
@@ -204,13 +218,9 @@ class Loader extends \Hubleto\Framework\App
           'id_product' => $idsProduct[rand(0, count($idsProduct) - 1)],
           'purchase_price' => rand(100, 600) / 2,
           'quantity' => rand(10, 500),
-          'id_location_original' => 0,
-          'id_location_new' => $idsLocation[rand(0, count($idsLocation) - 1)],
         ]);
       }
     }
-
-    $stockStatus->recalculateCapacityAndStockStatusOfWarehouse($idWarehouseMain);
   }
 
 }

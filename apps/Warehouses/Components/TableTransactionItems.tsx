@@ -56,10 +56,12 @@ export default class TableTransactionItems extends HubletoTable<TableTransaction
     let cellClassName = super.cellClassName(columnName, column, rowData);
 
     if (columnName == 'id_transaction') {
-      if (rowData.TRANSACTION.direction == 1) {
-        cellClassName += ' bg-green-50';
-      } else {
+      if (rowData.TRANSACTION.id_location_old > 0 && rowData.TRANSACTION.id_location_new > 0) {
+        cellClassName += ' bg-blue-50';
+      } else if (rowData.TRANSACTION.id_location_old > 0) {
         cellClassName += ' bg-red-50';
+      } else if (rowData.TRANSACTION.id_location_new > 0) {
+        cellClassName += ' bg-green-50';
       }
     }
 
@@ -70,20 +72,22 @@ export default class TableTransactionItems extends HubletoTable<TableTransaction
     let cell = super.renderCell(columnName, column, data, options);
 
     if (columnName == 'id_transaction') {
-      if (data.TRANSACTION.direction == 1) {
-        cell = <><i className='fas fa-plus'></i> {cell}</>
-      } else {
+      if (data.TRANSACTION.id_location_old > 0 && data.TRANSACTION.id_location_new > 0) {
+        cell = <><i className='fas fa-refresh'></i> {cell}</>
+      } else if (data.TRANSACTION.id_location_old > 0) {
         cell = <><i className='fas fa-minus'></i> {cell}</>
+      } else if (data.TRANSACTION.id_location_new > 0) {
+        cell = <><i className='fas fa-plus'></i> {cell}</>
       }
     }
 
-    if (columnName == 'quantity') {
-      if (data.TRANSACTION.direction == 1) {
-        cell = <span className='text-green-800'>{data[columnName]}</span>;
-      } else {
-        cell = <span className='text-red-800'>- {data[columnName]}</span>;
-      }
-    }
+    // if (columnName == 'quantity') {
+    //   if (data.TRANSACTION.direction == 1) {
+    //     cell = <span className='text-green-800'>{data[columnName]}</span>;
+    //   } else {
+    //     cell = <span className='text-red-800'>- {data[columnName]}</span>;
+    //   }
+    // }
 
     return cell;
 

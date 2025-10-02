@@ -38,34 +38,32 @@ class StockStatus extends \Hubleto\Framework\Core
     }
 
     // start transaction
-    $this->db()->execute('start transaction');
+    // $this->db()->execute('start transaction');
 
     // recalculate stock status of all locations in the warehouse
     $this->db()->execute('
       update `warehouses_locations` `wl` set
         `current_stock_status` =
-          /* add inbound transactions */
+          /* add inbound transactions: transactions where items are relocated to id_location_new */
           ifnull(
             (
               select sum(ifnull(`quantity`, 0))
               from `warehouses_transactions_items` `wti`
               left join `warehouses_transactions` `wt` on `wt`.id = `wti`.id_transaction
               where
-                `wti`.`id_location_new` = `wl`.`id`
-                and `wt`.`direction` = ' . Transaction::DIRECTION_INBOUND . '
+                `wt`.`id_location_new` = `wl`.`id`
             ),
             0
           )
 
-          /* subtract outbound transactions */
+          /* subtract outbound transactions: transactions where items are relocated from id_location_old */
           - ifnull(
             (
               select sum(ifnull(`quantity`, 0))
               from `warehouses_transactions_items` `wti`
               left join `warehouses_transactions` `wt` on `wt`.id = `wti`.id_transaction
               where
-                `wti`.`id_location_new` = `wl`.`id`
-                and `wt`.`direction` = ' . Transaction::DIRECTION_OUTBOUND . '
+                `wt`.`id_location_old` = `wl`.`id`
             ),
             0
           )
@@ -77,30 +75,15 @@ class StockStatus extends \Hubleto\Framework\Core
     $this->db()->execute('
       update `warehouses_inventory` `wi` set
         `quantity` =
-          /* add inbound transactions */
+          /* add inbound transactions: transactions where items are relocated to id_location_new */
           ifnull(
             (
-              select sum(ifnull(`quantity`, 0))
+              select sum(ifnull(`wti`.`quantity`, 0))
               from `warehouses_transactions_items` `wti`
               left join `warehouses_transactions` `wt` on `wt`.id = `wti`.id_transaction
               where
-                `wti`.`id_location_new` = `wi`.`id_location`
+                `wt`.`id_location_new` = `wi`.`id_location`
                 and `wti`.`id_product` = `wi`.`id_product`
-                and `wt`.`direction` = ' . Transaction::DIRECTION_INBOUND . '
-            ),
-            0
-          )
-
-          /* subtract outbound transactions */
-          - ifnull(
-            (
-              select sum(ifnull(`quantity`, 0))
-              from `warehouses_transactions_items` `wti`
-              left join `warehouses_transactions` `wt` on `wt`.id = `wti`.id_transaction
-              where
-                `wti`.`id_location_new` = `wi`.`id_location`
-                and `wti`.`id_product` = `wi`.`id_product`
-                and `wt`.`direction` = ' . Transaction::DIRECTION_OUTBOUND . '
             ),
             0
           )
@@ -115,7 +98,32 @@ class StockStatus extends \Hubleto\Framework\Core
     ", ["idWarehouse" => $idWarehouse]);
 
     // commit
-    $this->db()->execute('commit');
+    // $this->db()->execute('commit');
+  }
+
+  public function recalculateCapacityAndStockStatusForTransaction(int $idTransaction): void
+  {
+    /** @var Transaction */
+    $mTransaction = $this->getModel(Transaction::class);
+
+    $transaction = $mTransaction->record
+      ->with('LOCATION_OLD.WAREHOUSE')
+      ->with('LOCATION_NEW.WAREHOUSE')
+      ->where($mTransaction->table . '.id', $idTransaction)
+      ->first();
+
+    $idsWarehouse = [];
+    if ($transaction?->LOCATION_OLD?->WAREHOUSE) {
+      $idsWarehouse[] = $transaction?->LOCATION_OLD?->WAREHOUSE->id;
+    }
+    if ($transaction?->LOCATION_NEW?->WAREHOUSE) {
+      $idsWarehouse[] = $transaction?->LOCATION_NEW?->WAREHOUSE->id;
+    }
+
+    $idsWarehouse = array_unique($idsWarehouse);
+    foreach ($idsWarehouse as $idWarehouse) {
+      $this->recalculateCapacityAndStockStatusOfWarehouse($idWarehouse);
+    }
   }
 
 }

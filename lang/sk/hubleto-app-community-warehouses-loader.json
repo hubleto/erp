@@ -6,11 +6,7 @@
         "Warehouse locations types": "Typy umiestnení",
         "Locations": "Umiestnenia",
         "Transactions": "Pohyby",
-        "Create inbound transaction": "Vytvoriť príjemku",
-        "Create outbound transaction": "Vytvoriť výdajku",
-        "Inventory": "Inventár",
-        "Create inbound": "Vytvoriť príjemku",
-        "Create outbound": "Vytvoriť výdajku"
+        "Inventory": "Inventár"
     },
     "root": {
         "Warehouses": "Sklady",

@@ -4,7 +4,6 @@ namespace Hubleto\App\Community\Warehouses\Models;
 
 
 use Hubleto\App\Community\Products\Models\Product;
-use Hubleto\App\Community\Warehouses\Models\Location;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
@@ -23,8 +22,6 @@ class TransactionItem extends \Hubleto\Erp\Model
   public array $relations = [
     'TRANSACTION' => [ self::BELONGS_TO, Transaction::class, 'id_transaction', 'id' ],
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id' ],
-    'LOCATION_ORIGINAL' => [ self::BELONGS_TO, Location::class, 'id_location_original', 'id' ],
-    'LOCATION_NEW' => [ self::BELONGS_TO, Location::class, 'id_location_new', 'id' ],
   ];
 
   public const TYPE_RECEIPT = 1;
@@ -52,8 +49,6 @@ class TransactionItem extends \Hubleto\Erp\Model
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible()->setRequired(),
       'purchase_price' => (new Decimal($this, $this->translate('Purchase price')))->setDefaultVisible(),
       'quantity' => (new Decimal($this, $this->translate('Quantity')))->setDefaultVisible(),
-      'id_location_original' => (new Lookup($this, $this->translate('Original location'), Location::class))->setDefaultVisible()->setRequired(),
-      'id_location_new' => (new Lookup($this, $this->translate('New location'), Location::class))->setDefaultVisible()->setRequired(),
     ]);
   }
 

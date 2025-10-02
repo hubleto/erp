@@ -28,6 +28,16 @@ class Transaction extends \Hubleto\Erp\RecordManager
     return $this->hasMany(TransactionItem::class, 'id_transaction', 'id' );
   }
 
+  public function LOCATION_OLD(): BelongsTo
+  {
+    return $this->belongsTo(Location::class, 'id_location_old', 'id');
+  }
+
+  public function LOCATION_NEW(): BelongsTo
+  {
+    return $this->belongsTo(Location::class, 'id_location_new', 'id');
+  }
+
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
     $query = parent::prepareReadQuery($query, $level);

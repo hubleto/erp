@@ -22,16 +22,6 @@ class TransactionItem extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Product::class, 'id_product', 'id');
   }
 
-  public function LOCATION_ORIGINAL(): BelongsTo
-  {
-    return $this->belongsTo(Location::class, 'id_location_original', 'id');
-  }
-
-  public function LOCATION_NEW(): BelongsTo
-  {
-    return $this->belongsTo(Location::class, 'id_location_new', 'id');
-  }
-
   public function USER(): BelongsTo
   {
     return $this->belongsTo(User::class, 'id_user', 'id');

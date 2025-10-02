@@ -16,6 +16,7 @@ use Hubleto\App\Community\Auth\Models\User;
 
 use Hubleto\App\Community\Orders\Models\Order;
 use Hubleto\App\Community\Suppliers\Models\Supplier;
+use Hubleto\App\Community\Warehouses\StockStatus;
 
 // This table records all movements of inventory within the warehouse.
 class Transaction extends \Hubleto\Erp\Model
@@ -29,16 +30,10 @@ class Transaction extends \Hubleto\Erp\Model
   public array $relations = [
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id' ],
     'USER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    'LOCATION_OLD' => [ self::BELONGS_TO, Location::class, 'id_location_old' ],
+    'LOCATION_NEW' => [ self::BELONGS_TO, Location::class, 'id_location_new', 'id' ],
 
     'ITEMS' => [ self::HAS_MANY, TransactionItem::class, 'id_transaction', 'id' ],
-  ];
-
-  public const DIRECTION_INBOUND = 1;
-  public const DIRECTION_OUTBOUND = 2;
-
-  public const DIRECTIONS = [
-    self::DIRECTION_INBOUND => 'Inbound',
-    self::DIRECTION_OUTBOUND => 'Outbound',
   ];
 
   public const TYPE_RECEIPT = 1;
@@ -64,10 +59,6 @@ class Transaction extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Transaction UID')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4())->addIndex('INDEX `uid` (`uid`)'),
-      'direction' => (new Integer($this, $this->translate('Direction')))->setDefaultVisible()
-        ->setEnumValues(self::DIRECTIONS)
-        ->setDefaultValue(self::DIRECTION_INBOUND)
-      ,
       'type' => (new Integer($this, $this->translate('Type')))->setDefaultVisible()
         ->setEnumValues(self::TYPES)
         ->setDefaultValue(self::TYPE_RECEIPT)
@@ -77,6 +68,8 @@ class Transaction extends \Hubleto\Erp\Model
       'supplier_order_number' => (new Varchar($this, $this->translate('Supplier order number'))),
       'batch_number' => (new Varchar($this, $this->translate('Batch number')))->setDefaultVisible(),
       'serial_number' => (new Varchar($this, $this->translate('Serial number')))->setDefaultVisible(),
+      'id_location_old' => (new Lookup($this, $this->translate('Old location'), Location::class))->setDefaultVisible(),
+      'id_location_new' => (new Lookup($this, $this->translate('New location'), Location::class))->setDefaultVisible(),
       'document_1' => (new File($this, $this->translate('Reference document #1'))),
       'document_2' => (new File($this, $this->translate('Reference document #2'))),
       'document_3' => (new File($this, $this->translate('Reference document #3'))),
@@ -86,17 +79,18 @@ class Transaction extends \Hubleto\Erp\Model
     ]);
   }
 
+  /**
+   * [Description for describeTable]
+   *
+   * @return \Hubleto\Framework\Description\Table
+   * 
+   */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate('Add transaction');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
-
-    $description->addFilter('fTransactionDirection', [
-      'title' => $this->translate('Direction'),
-      'options' => self::DIRECTIONS
-    ]);
 
     $description->addFilter('fTransactionType', [
       'title' => $this->translate('Type'),
@@ -106,10 +100,44 @@ class Transaction extends \Hubleto\Erp\Model
     return $description;
   }
 
+  /**
+   * [Description for onAfterCreate]
+   *
+   * @param array $savedRecord
+   * 
+   * @return array
+   * 
+   */
   public function onAfterCreate(array $savedRecord): array
   {
     if (empty($savedRecord['uid'])) $savedRecord['uid'] = \Hubleto\Framework\Helper::generateUuidV4();
     $this->record->recordUpdate($savedRecord);
+
+    /** @var StockStatus */
+    $stockStatus = $this->getService(StockStatus::class);
+    $stockStatus->recalculateCapacityAndStockStatusForTransaction((int) $savedRecord['id']);
+
     return parent::onAfterCreate($savedRecord);
   }
+
+  /**
+   * [Description for onAfterUpdate]
+   *
+   * @param array $originalRecord
+   * @param array $savedRecord
+   * 
+   * @return array
+   * 
+   */
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
+    /** @var StockStatus */
+    $stockStatus = $this->getService(StockStatus::class);
+    $stockStatus->recalculateCapacityAndStockStatusForTransaction((int) $savedRecord['id']);
+
+    return $savedRecord;
+  }
+
 }

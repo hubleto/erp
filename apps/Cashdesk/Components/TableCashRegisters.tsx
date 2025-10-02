@@ -51,8 +51,8 @@ export default class TableCashRegisters extends HubletoTable<TableCashRegistersP
   renderTable(): JSX.Element {
     return <div className='grid grid-cols-4 gap-2'>
       {this.state.data.data.map((row, index) => {
-        return <a
-          href={globalThis.main.config.projectUrl + '/cashdesk/cash-registers/' + row.id}
+        return <button
+          onClick={() => { this.openForm(row.id); }}
           className='btn btn-square btn-transparent btn-large'
         >
           <div className='card-header text-center flex-col'>
@@ -62,7 +62,7 @@ export default class TableCashRegisters extends HubletoTable<TableCashRegistersP
           <div className='card-body'>
             {row.description}
           </div>
-        </a>;
+        </button>;
       })}
     </div>;
   }

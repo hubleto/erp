@@ -35,6 +35,51 @@ class Loader extends \Hubleto\Framework\App
     ]);
   }
 
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   * 
+   */
+  public function renderSecondSidebar(): string
+  {
+    $mWorkflow = $this->getModel(Models\Workflow::class);
+
+    $html = '';
+    foreach ($mWorkflow->record->get() as $workflow) {
+      $html .= '
+        <a
+          class="
+            btn ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-primary" : "btn-transparent") . '
+            mb-2 w-full
+          "
+          href="' . $this->env()->projectUrl . '/workflow/' . $workflow->id . '"
+        >
+          <span class="text">' . $workflow->name . '</span>
+        </a>
+      ';
+    }
+    $html .= '
+      <a
+        class="btn btn-transparent mt-2"
+        href="' . $this->env()->projectUrl . '/settings/workflows"
+      >
+        <span class="icon"><i class="fas fa-cog"></i></span>
+        <span class="text">Manage workflows</span>
+      </a>
+    ';
+
+    return $html;
+  }
+
+  /**
+   * [Description for installTables]
+   *
+   * @param int $round
+   * 
+   * @return void
+   * 
+   */
   public function installTables(int $round): void
   {
     if ($round == 1) {

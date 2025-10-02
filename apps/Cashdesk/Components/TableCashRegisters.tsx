@@ -47,4 +47,23 @@ export default class TableCashRegisters extends HubletoTable<TableCashRegistersP
     let formProps: FormCashRegisterProps = this.getFormProps() as FormCashRegisterProps;
     return <FormCashRegister {...formProps}/>;
   }
+  
+  renderTable(): JSX.Element {
+    return <div className='grid grid-cols-4 gap-2'>
+      {this.state.data.data.map((row, index) => {
+        return <a
+          href={globalThis.main.config.projectUrl + '/cashdesk/cash-registers/' + row.id}
+          className='btn btn-square btn-transparent btn-large'
+        >
+          <div className='card-header text-center flex-col'>
+            <div><i className='fas fa-cash-register text-4xl mb-4'></i></div>
+            <div>{row.identifier}</div>
+          </div>
+          <div className='card-body'>
+            {row.description}
+          </div>
+        </a>;
+      })}
+    </div>;
+  }
 }

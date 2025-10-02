@@ -49,7 +49,7 @@ class CashRegister extends Model
     $description = parent::describeTable();
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = $this->translate('Add cash register');
-    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->show(['header', 'fulltextSearch']);
     $description->hide(['footer']);
     return $description;
   }

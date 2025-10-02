@@ -45,6 +45,28 @@ class Loader extends \Hubleto\Framework\App
   }
 
   /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   * 
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/cashdesk/cash-registers">
+          <span class="icon"><i class="fas fa-cash-register"></i></span>
+          <span class="text">' . $this->translate('Cash registers') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/cashdesk/receipts">
+          <span class="icon"><i class="fas fa-receipt"></i></span>
+          <span class="text">' . $this->translate('Receipts') . '</span>
+        </a>
+      </div>
+    ';
+  }
+
+  /**
    * [Description for generateDemoData]
    *
    * @return void

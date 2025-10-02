@@ -9,7 +9,7 @@ class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
 
   public function run(string $event, array $args): void
   {
-    if ($event == 'model:record-updated') {
+    if (false && $event == 'model:record-updated') {
       /** @var \Hubleto\App\Community\Notifications\Loader $notificationsApp */
       $notificationsApp = $this->appManager()->getApp(\Hubleto\App\Community\Notifications\Loader::class);
 

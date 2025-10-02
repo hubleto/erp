@@ -30,6 +30,16 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
     $mUserRole = $this->getService(UserRole::class);
     $mUserHasRole = $this->getService(UserHasRole::class);
 
+    $mCompany->record->where('id', 1)->update([
+      'tax_id' => $this->faker->randomNumber(5, true).$this->faker->randomNumber(5, true),
+      'vat_id' => $this->faker->randomNumber(5, true).$this->faker->randomNumber(5, true),
+      'street_1' => $this->faker->streetAddress(),
+      'street_2' => '',
+      'zip' => $this->faker->postcode(),
+      'city' => $this->faker->city(),
+      'country' => $this->faker->country(),
+    ]);
+
     $idCompany = 1; // plati za predpokladu, ze tento command sa spusta hned po CommandInit
 
     $mUser = $this->getService(User::class);

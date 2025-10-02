@@ -72,6 +72,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     'finance' => [
       // \Hubleto\App\Community\Billing\Loader::class => [ 'sidebarOrder' => 400 ],
       \Hubleto\App\Community\Invoices\Loader::class => [ 'sidebarOrder' => 410 ],
+      \Hubleto\App\Community\Cashdesk\Loader::class => [ 'sidebarOrder' => 410 ],
       \Hubleto\App\Community\Accounting\Loader::class => [ 'sidebarOrder' => 410 ],
     ],
     'developer' => [

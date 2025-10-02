@@ -1,0 +1,7 @@
+<h1 class="app-main-title">{{ translate('Cashdesk') }} > {{ translate('Cash registers') }}</h1>
+
+<app-cashdesk-table-cash-registers
+  string:tag="table-receipts"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></app-cashdesk-table-cash-registers>

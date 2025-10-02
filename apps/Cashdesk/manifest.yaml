@@ -1,0 +1,7 @@
+namespace: Hubleto\App\Community\Cashdesk
+appType: community
+sidebarGroup: finance
+rootUrlSlug: cashdesk
+name: Cashdesk
+icon: fas fa-cash-register
+highlight: Cashdesk and receipts.

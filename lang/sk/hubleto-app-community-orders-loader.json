@@ -101,6 +101,6 @@
         "Deal": "Deal"
     },
     "Controllers\\Boards\\OrderWarnings": {
-        "Open orders without future plan": ""
+        "Open orders without future plan": "Otvoriť objednávky bez plánu"
     }
 }

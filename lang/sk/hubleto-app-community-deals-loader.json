@@ -63,8 +63,8 @@
         "Open \/ Closed": "Otvorené \/ Zavreté",
         "Open": "Otvorené",
         "Active": "Aktívne",
-        " changed from ": "",
-        " to ": ""
+        " changed from ": " zmenené z ",
+        " to ": " na "
     },
     "Models\\DealHistory": {
         "Change Date": "Dátum zmeny",

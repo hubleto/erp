@@ -2,20 +2,20 @@
     "manifest": {
         "Settings": "Nastavenia",
         "Settings and control panel for your Hubleto.": "Nastavenia Hubleto účtu.",
-        "Settings and tools": "",
-        "Users": "",
-        "Roles": "",
-        "Your companies": "",
-        "General settings": "",
-        "Permissions list": "",
-        "Role permissions": "",
-        "Activity types": "",
-        "Countries": "",
-        "Currencies": "",
-        "Invoice profiles": "",
-        "Platform config": "",
-        "Sidebar": "",
-        "Teams": ""
+        "Settings and tools": "Nastavenia a nástroje",
+        "Users": "Používatelia",
+        "Roles": "Role",
+        "Your companies": "Vaše firmy",
+        "General settings": "Všeobecné nastavenia",
+        "Permissions list": "Zoznam povolení",
+        "Role permissions": "Povolenia rolí",
+        "Activity types": "Typy aktivít",
+        "Countries": "Štáty",
+        "Currencies": "Meny",
+        "Invoice profiles": "Fakturačné profily",
+        "Platform config": "Konfigurácia platformy",
+        "Sidebar": "Ľavé menu",
+        "Teams": "Tímy"
     },
     "Models\\User": {
         "First name": "Meno",
@@ -101,12 +101,11 @@
         "SWIFT": "SWIFT",
         "Numbering pattern": "Vzorec pre číslovanie",
         "Customer ID": "ID zákazníka",
-        "Supplier": ""
+        "Supplier": "Dodávateľ"
     },
     "Models\\UserRole": {
         "Role": "Rola",
         "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)",
-        "Grant all permissions (admin role)": "",
         "Grant all permissions (administrator role)": "Udeliť všetky povolenia (úloha správcu)",
         "Description": "Opis",
         "Is default role (cannot be modified)": "Je predvolená úloha (nedá sa upraviť)"
@@ -141,8 +140,8 @@
         "Manage users": "Spravujte používateľov",
         "Manage apps": "Spravovať aplikácie",
         "All settings": "Všetky nastavenia",
-        "Change theme": "",
-        "Locale": ""
+        "Change theme": "Zmeniť tému",
+        "Locale": "Lokalizácia"
     },
     "Controllers\\UserRoles": {
         "Settings": "Nastavenia",
@@ -157,8 +156,8 @@
         "Users": "Užívatelia"
     },
     "Controllers\\Activitytypes": {
-        "Settings": "",
-        "Activity Types": ""
+        "Settings": "Nastavenia",
+        "Activity Types": "Typy aktivít"
     },
     "root": {
         "Users": "Používatelia",
@@ -204,7 +203,7 @@
         "Sidebar": "Bočný panel"
     },
     "Components\\FormUserRole": {
-        "Save": ""
+        "Save": "Uložiť"
     },
     "Components\\FormUser": {
         "About the user": "O používateľovi"
@@ -232,7 +231,7 @@
         "Install": "Inštalovať"
     },
     "Controllers\\MyAccount": {
-        "Settings": "",
-        "Company": ""
+        "Settings": "Nastavenia",
+        "Company": "Firma"
     }
 }

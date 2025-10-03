@@ -20,7 +20,7 @@
         "Role": "Rola",
         "Grant all permissions (administrator role)": "Povoliť všetko (administrátor)",
         "Description": "Popis",
-        "Is default role (cannot be modified)": ""
+        "Is default role (cannot be modified)": "Je východzia rola (nemôže byť upravená)"
     },
     "Models\\UserHasRole": {
         "User": "Používateľ",

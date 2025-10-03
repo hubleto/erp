@@ -2,7 +2,7 @@
     "manifest": {
         "Developer": "Vývojár",
         "Developer tools to automate your Hubleto development": "Nástroja pre vývojárov",
-        "Developer tools": ""
+        "Developer tools": "Nástroje pre vývojárov"
     },
     "root": {
         "Developer tools": "Nástroje pre vývojárov"
@@ -15,7 +15,7 @@
     "Controllers\\DbUpdates": {
         "Developer": "Vývojár",
         "DB Updater": "Aktualizácie databázy",
-        "Database updater": "",
-        "No necessary database updates found.": ""
+        "Database updater": "Aktualizácie databázy",
+        "No necessary database updates found.": "Neboli nájdené potrebné databázové aktualizácie."
     }
 }

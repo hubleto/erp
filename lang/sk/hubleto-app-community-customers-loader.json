@@ -2,7 +2,7 @@
     "manifest": {
         "Customers": "Zákazníci",
         "Free customer management and addressbook.": "Adresár a manažment zákazníkov.",
-        "Customer Tags": ""
+        "Customer Tags": "Značky zákazníkov"
     },
     "Models\\Customer": {
         "Add Customer": "Pridať zákazníka",

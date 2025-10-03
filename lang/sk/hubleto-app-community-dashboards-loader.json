@@ -12,7 +12,7 @@
         "Slug": "URL cesta",
         "Color": "Farba",
         "Is default": "Východzí",
-        "Add dashboard": ""
+        "Add dashboard": "Pridať dashboard"
     },
     "Models\\Panel": {
         "Dashboard": "Dashboard",

@@ -1,6 +1,6 @@
 {
     "manifest": {
-        "Crypto": "",
-        "Manage security keys and other security settings.": ""
+        "Crypto": "Crypto",
+        "Manage security keys and other security settings.": "Manažment bezpečnostných kľúčov."
     }
 }

@@ -14,7 +14,7 @@
         "Origin Link": "Pôvodný odkaz",
         "Uid": "Uid",
         "Folder": "Priečinok",
-        "Add Document": ""
+        "Add Document": "Pridať dokument"
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"
@@ -38,7 +38,7 @@
         "Notes": "Poznámky"
     },
     "Controllers\\Browse": {
-        "Documents": ""
+        "Documents": "Dokumenty"
     },
     "Components\\Browser": {
         "Add folder": "Pridať priečinok",

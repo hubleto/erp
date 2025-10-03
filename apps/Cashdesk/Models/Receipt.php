@@ -46,6 +46,7 @@ class Receipt extends Model
       'total_price_excl_vat' => (new Decimal($this, $this->translate('Total price excl. VAT')))->setDefaultVisible()->setUnit('€'),
       'total_price_incl_vat' => (new Decimal($this, $this->translate('Total price incl. VAT')))->setDefaultVisible()->setUnit('€'),
       'created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setDefaultValue(date("Y-m-d H:i:s", strtotime("+14 days"))),
+      'sent_to_cash_register' => (new DateTime($this, $this->translate('Sent to cash register')))->setDefaultVisible()->setDefaultValue(date("Y-m-d H:i:s", strtotime("+14 days"))),
     ], parent::describeColumns());
   }
 

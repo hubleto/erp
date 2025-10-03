@@ -27,8 +27,8 @@
         "events later": "Udalosti neskôr",
         "reminders later": "pripomienok neskôr",
         "Later": "Neskôr",
-        "reminders tomorrow": "",
-        "Tomorrow": ""
+        "reminders tomorrow": "pripomienok zajtra",
+        "Tomorrow": "Zajtra"
     },
     "root": {
         "Events for today": "Dnešné udalosti",

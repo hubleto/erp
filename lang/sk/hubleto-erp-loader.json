@@ -34,16 +34,16 @@
         "Forgot password?": "Zabudol som heslo"
     },
     "Components\\Inputs\\Image": {
-        "Choose image": ""
+        "Choose image": "Nahrať obrázok"
     },
     "Components\\Inputs\\Password": {
-        "New password": "",
-        "Confirm new password": ""
+        "New password": "Nové heslo",
+        "Confirm new password": "Potvrdiť nové heslo"
     },
     "Controllers\\NotFound": {
-        "Page Not Found": "",
-        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "",
-        "Home": ""
+        "Page Not Found": "Stránka nenájdená",
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Stránku, ktorú hľadáte, sme nenašli.",
+        "Home": "Úvod"
     },
     "Model": {
         "Export to CSV": "Exportovať do CSV",

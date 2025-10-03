@@ -32,10 +32,6 @@
         "Last 14 days": "Posledných 14 dní",
         "Month before last": "Predminulý mesiac"
     },
-    "Models\\ActivityType": {
-        "Varchar": "",
-        "Color": ""
-    },
     "Components\\TableActivities": {
         "Worked total": "Odpracované celkom",
         "hours": "hodín"

@@ -4,7 +4,7 @@
         "Default customer management and addressbook.": "Adresár a manažment zákazníkov.",
         "Contact Categories": "Kategórie kontaktov",
         "Contact Tags": "Značky kontaktov",
-        "Import contacts": ""
+        "Import contacts": "Importovať kontakty"
     },
     "Components\\FormPerson": {
         "Edit": "Upraviť",
@@ -37,7 +37,7 @@
         "Emails": "Emaily",
         "Phone Numbers": "Telefóny",
         "Add": "Pridať",
-        "Primary Contact": ""
+        "Primary Contact": "Primárny kontakt"
     },
     "Models\\Value": {
         "Person": "Kontakt",
@@ -52,7 +52,7 @@
         "Number": "Počet",
         "URL": "Adresa URL",
         "Contacts": "Kontakty",
-        "Add Customer": ""
+        "Add Customer": "Pridať zákazníka"
     },
     "Models\\PersonTag": {
         "Person": "Kontakt",
@@ -98,7 +98,7 @@
         "Mr.": "Pán",
         "Mrs.": "Pani",
         "Valid": "Platný",
-        "Tags": ""
+        "Tags": "Značky"
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
@@ -123,6 +123,6 @@
         "Contacts": "Kontakty"
     },
     "Components\\TableContacts": {
-        "Primary": ""
+        "Primary": "Primárny"
     }
 }

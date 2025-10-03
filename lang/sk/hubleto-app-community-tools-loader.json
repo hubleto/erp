@@ -4,6 +4,6 @@
         "Management of internal maintenance tools.": "Správa nástrojov na údržbu"
     },
     "Controllers\\Dashboard": {
-        "Tools": ""
+        "Tools": "Nástroje"
     }
 }

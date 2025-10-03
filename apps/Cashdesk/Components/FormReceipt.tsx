@@ -68,13 +68,16 @@ export default class FormReceipt<P, S> extends HubletoForm<FormReceiptProps, For
 
   renderTab(tabUid: string) {
     const R = this.state.record;
-console.log(R);
+
     switch (tabUid) {
       case 'default':
         return <div className='flex gap-2'>
           <div className='w-full flex-3'>
             {this.inputWrapper('id_company')}
             {this.inputWrapper('number')}
+            {this.inputWrapper('id_cash_register')}
+            {this.inputWrapper('created')}
+            {this.inputWrapper('sent_to_cash_register')}
             <table className='table-default dense mt-2'>
               <thead>
                 <tr>
@@ -142,6 +145,13 @@ console.log(R);
               <span className='icon'><i className='fas fa-plus'></i></span>
               <span className='text'>{this.translate('Add item')}</span>
             </button>
+
+            <div className='mt-8 text-center'>
+              <button className='btn btn-add-outline btn-extra-large'>
+                <span className='icon'><i className='fas fa-arrow-right'></i></span>
+                <span className='text'>{this.translate('Send to cash register')}</span>
+              </button>
+            </div>
           </div>
           <div className='w-full flex-1'>
             <div className='m-4 shadow p-2 rounded-lg border border-gray-200'>

@@ -23,25 +23,25 @@
         "External Model": "Externý model",
         "External ID": "Externé ID",
         "Worked": "Odpracované",
-        "Customer": "",
-        "Contact": "",
-        "Is chargeable": "",
-        "Related to": "",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": ""
+        "Customer": "Zákazník",
+        "Contact": "Kontakt",
+        "Is chargeable": "Je útovateľné",
+        "Related to": "Súvisí s",
+        "Open \/ Closed": "Otvorené / Uzavreté",
+        "Open": "Otvorené",
+        "All": "Všetky"
     },
     "Models\\Todo": {
-        "To do": "",
-        "Task": "",
-        "Responsible": "",
-        "Closed": "",
-        "Deadline": ""
+        "To do": "Todo",
+        "Task": "Úloha",
+        "Responsible": "Zodpovedný",
+        "Closed": "Uzavreté",
+        "Deadline": "Termín"
     },
     "Controllers\\Boards\\MyRecentTasks": {
-        "You did not work on any task since last 2 weeks.": ""
+        "You did not work on any task since last 2 weeks.": "Z posledné 2 týždne si nepracoval na žiadnej úlohe."
     },
     "Controllers\\Tasks": {
-        "Tasks": ""
+        "Tasks": "Úlohy"
     }
 }

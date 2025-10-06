@@ -128,7 +128,7 @@ class User extends \Hubleto\Framework\Models\User
     ;
   }
 
-  public function getClientIpAddress() {
+  public function getClientIpAddress(): string {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
       $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -229,7 +229,7 @@ class User extends \Hubleto\Framework\Models\User
     return md5($login.".".$password).",".$login;
   }
 
-  public function generateToken($idUser, $tokenSalt, $tokenType): mixed
+  public function generateToken($idUser, $tokenSalt, $tokenType): string
   {
     /** @var Token $tokenModel */
     $tokenModel = $this->getModel(Token::class);
@@ -242,7 +242,7 @@ class User extends \Hubleto\Framework\Models\User
     return $token['token'];
   }
 
-  public function generatePasswordResetToken($idUser, $tokenSalt): mixed
+  public function generatePasswordResetToken($idUser, $tokenSalt): string
   {
     return $this->generateToken(
       $idUser,
@@ -277,7 +277,7 @@ class User extends \Hubleto\Framework\Models\User
     return $userData;
   }
 
-  public function getByEmail(string $email) {
+  public function getByEmail(string $email): array {
     $user = $this->record->where("email", $email)->first();
 
     return !empty($user) ? $user->toArray() : [];
@@ -287,7 +287,7 @@ class User extends \Hubleto\Framework\Models\User
     return password_hash($password, PASSWORD_DEFAULT);
   }
 
-  public function updatePassword(int $idUser, string $password) {
+  public function updatePassword(int $idUser, string $password): array {
     return $this->record
       ->where('id', $idUser)
       ->update(

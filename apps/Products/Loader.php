@@ -77,7 +77,7 @@ class Loader extends \Hubleto\Framework\App
         "id" => $product['id'],
         "label" => $product['ean'] . ' ' . $product['name'],
         "url" => 'products/' . $product['id'],
-        "description" => $product['GROUP']['title'],
+        "description" => $product['GROUP']['title'] ?? '',
       ];
     }
 

@@ -1,9 +1,0 @@
-namespace: Hubleto\App\Community\Accounting
-appType: community
-sidebarGroup: finance
-rootUrlSlug: accounting
-name: Accounting
-icon: fas fa-money-bill-transfer
-highlight: Accounting
-author:
-  company: "wai.blue"

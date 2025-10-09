@@ -57,14 +57,14 @@ class ApiEndpoint extends \Hubleto\Erp\Cli\Agent\Command
     if (!$codeRouteInserted) {
       $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
       $this->terminal()->yellow("⚠  -> Add the route in the `init()` method of {$app->srcFolder}/Loader.php\n");
-      $this->terminal()->colored("cyan", "black", "Add to Loader.php->init():");
-      $this->terminal()->colored("cyan", "black", join("\n", $codeRoute));
+      $this->terminal()->colored("cyan", "black", "Add to Loader.php->init():\n");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeRoute) . "\n");
       $this->terminal()->yellow("\n");
     }
 
     $this->terminal()->yellow("💡  TIPS:\n");
     $this->terminal()->yellow("💡  -> Test the endpoint\n");
-    $this->terminal()->colored("cyan", "black", "Open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/api/{$endpoint}");
+    $this->terminal()->colored("cyan", "black", "Open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/api/{$endpoint}\n");
     $this->terminal()->yellow("\n");
   }
 

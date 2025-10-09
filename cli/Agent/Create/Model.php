@@ -69,8 +69,8 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
     if (!$codeInstallModelInserted) {
       $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
       $this->terminal()->yellow("⚠  -> Add the model in `installTables()` method in  {$app->srcFolder}/Loader.php\n");
-      $this->terminal()->colored("cyan", "black", "Add to Loader.php->installTables():");
-      $this->terminal()->colored("cyan", "black", join("\n", $codeInstallModel));
+      $this->terminal()->colored("cyan", "black", "Add to Loader.php->installTables():\n");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeInstallModel) . "\n");
       $this->terminal()->white("\n");
     }
 
@@ -85,7 +85,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->yellow("💡  TIPS:\n");
     $this->terminal()->yellow("💡  -> Add columns to the model in model's `describeColumns()` method.\n");
     $this->terminal()->yellow("💡  -> Run command below to add controllers, views and some UI components to manage data in your model.\n");
-    $this->terminal()->colored("cyan", "black", "Run: php hubleto create mvc {$appNamespace} {$model}");
+    $this->terminal()->colored("cyan", "black", "Run: php hubleto create mvc {$appNamespace} {$model}\n");
   }
 
 }

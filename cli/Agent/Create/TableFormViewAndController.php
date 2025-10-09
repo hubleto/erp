@@ -106,25 +106,25 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
     if (!$codeLoaderTsxLine1Inserted || !$codeLoaderTsxLine2Inserted) {
       $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
       $this->terminal()->yellow("⚠  -> Add the Table component into {$app->srcFolder}/Loader.tsx\n");
-      $this->terminal()->colored("cyan", "black", "Add to Loader.tsx:");
-      $this->terminal()->colored("cyan", "black", join("\n", $codeLoaderTsxLine1));
-      $this->terminal()->colored("cyan", "black", join("\n", $codeLoaderTsxLine2));
+      $this->terminal()->colored("cyan", "black", "Add to Loader.tsx:\n");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeLoaderTsxLine1) . "\n");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeLoaderTsxLine2) . "\n");
       $this->terminal()->yellow("\n");
     }
 
     if (!$codeRouteInserted) {
       $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
       $this->terminal()->yellow("⚠  -> Add the route in the `init()` method of {$app->srcFolder}/Loader.php\n");
-      $this->terminal()->colored("cyan", "black", "Add to Loader.php->init():");
-      $this->terminal()->colored("cyan", "black", join("\n", $codeRoute));
+      $this->terminal()->colored("cyan", "black", "Add to Loader.php->init():\n");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeRoute) . "\n");
       $this->terminal()->yellow("\n");
     }
 
     if (!$codeButtonInserted) {
       $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
       $this->terminal()->yellow("⚠  -> Add button to any view in {$app->srcFolder}/Views, e.g. Home.twig\n");
-      $this->terminal()->colored("cyan", "black", "Add to {$app->srcFolder}/Views/Home.twig:");
-      $this->terminal()->colored("cyan", "black", join("\n", $codeButton));
+      $this->terminal()->colored("cyan", "black", "Add to {$app->srcFolder}/Views/Home.twig:\n");
+      $this->terminal()->colored("cyan", "black", join("\n", $codeButton) . "\n");
       $this->terminal()->white("\n");
     }
 
@@ -138,8 +138,8 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->terminal()->yellow("⚠  NEXT STEPS:\n");
     $this->terminal()->yellow("⚠   -> Run `npm run build-js` in `{$this->env()->srcFolder}` to compile Javascript.\n");
-    $this->terminal()->colored("cyan", "black", "Run: npm run build-js");
-    $this->terminal()->colored("cyan", "black", "And then open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm));
+    $this->terminal()->colored("cyan", "black", "Run: npm run build-js\n");
+    $this->terminal()->colored("cyan", "black", "And then open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm) . "\n");
   }
 
 }

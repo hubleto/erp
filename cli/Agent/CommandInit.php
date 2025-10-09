@@ -486,11 +486,11 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->terminal()->cyan("\n");
     $this->terminal()->cyan("All done! You're a fantastic CRM developer.\n");
-    $this->terminal()->colored("cyan", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword);
+    $this->terminal()->colored("cyan", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword . "\n");
     $this->terminal()->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
     $this->terminal()->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
     $this->terminal()->cyan("\n");
     $this->terminal()->cyan("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
-    $this->terminal()->colored("cyan", "black", "Run: php hubleto app create MyFirstApp");
+    $this->terminal()->colored("cyan", "black", "Run: php hubleto app create MyFirstApp\n");
   }
 }

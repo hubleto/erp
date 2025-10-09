@@ -13,7 +13,7 @@ $hubleto->init();
 
 // MAIN code
 
-$hubleto->terminal()->green("Hubleto CLI agent (main version: " . \Composer\InstalledVersions::getPrettyVersion("hubleto/erp") . ").\n");
+$hubleto->terminal()->green("Hubleto CLI agent (release [" . \Composer\InstalledVersions::getPrettyVersion("hubleto/erp") . "]).\n");
 
 $action = (string) ($argv[1] ?? '');
 

@@ -5,7 +5,9 @@ import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities
 import FormInput from '@hubleto/react-ui/core/FormInput';
 
 interface FormTaskProps extends HubletoFormProps { }
-interface FormTaskState extends HubletoFormState { }
+interface FormTaskState extends HubletoFormState {
+  newTodo?: string,
+}
 
 export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskState> {
   static defaultProps: any = {
@@ -19,12 +21,16 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
   translationContext: string = 'Hubleto\\App\\Community\\Tasks\\Loader';
   translationContextInner: string = 'Components\\FormTask';
 
+  refInputNewTodo: any;
+
   constructor(props: FormTaskProps) {
     super(props);
+    this.refInputNewTodo = React.createRef();
   }
 
   getStateFromProps(props: FormTaskProps) {
     return {
+      newTodo: '',
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Task')}</b> },
@@ -136,8 +142,8 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                           ></input>
                         </div>
                         <div className='w-full'>
-                          <input
-                            className={'w-full ' + (item.is_closed ? 'bg-slate-200' : 'bg-white')}
+                          <textarea
+                            className={'w-full field-sizing-content ' + (item.is_closed ? 'bg-slate-100 text-slate-400' : 'bg-yellow-50')}
                             readOnly={item.is_closed}
                             ref={refInputTodo}
                             value={item.todo}
@@ -147,11 +153,11 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                               newR.TODO[key].todo = refInputTodo.current.value;
                               this.updateRecord(newR);
                             }}
-                          ></input>
+                          ></textarea>
                         </div>
                         <div>
                           <button
-                            className='btn btn-transparent'
+                            className='btn btn-danger'
                             onClick={(e) => {
                               let newR = R;
                               newR.TODO[key]._toBeDeleted_ = true;
@@ -161,7 +167,33 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                         </div>
                       </div>;
                     })}
-                    <button
+                    <div className='btn-list-item flex gap-2'>
+                      <div className='w-full'>
+                        <textarea
+                          className='w-full field-sizing-content bg-yellow-50'
+                          ref={this.refInputNewTodo}
+                          placeholder='Add new todo...'
+                          onChange={(e) => {
+                            this.setState({newTodo: this.refInputNewTodo.current.value});
+                          }}
+                          onBlur={(e) => {
+                            console.log(this.state.newTodo);
+                            if (this.state.newTodo != '') {
+                              let newR = R;
+                              newR.TODO.push({ id_task: R.id, todo: this.state.newTodo });
+                              this.refInputNewTodo.current.value = '';
+                              this.updateRecord(newR);
+                            }
+                          }}
+                        ></textarea>
+                      </div>
+                      <div>
+                        <button
+                          className='btn btn-success'
+                        ><span className='icon'><i className='fas fa-check'></i></span></button>
+                      </div>
+                    </div>
+                    {/* <button
                       className='btn btn-transparent'
                       onClick={() => {
                         let newR = R;
@@ -175,7 +207,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                     >
                       <span className='icon'><i className='fas fa-plus'></i></span>
                       <span className='text'>Add todo</span>
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>

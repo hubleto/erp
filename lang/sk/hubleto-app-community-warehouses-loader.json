@@ -6,7 +6,9 @@
         "Warehouse locations types": "Typy umiestnení",
         "Locations": "Umiestnenia",
         "Transactions": "Pohyby",
-        "Inventory": "Inventár"
+        "Inventory": "Inventár",
+        "Create transaction": "Zaevidovať pohyb",
+        "Locations types": "Typu umiestnení"
     },
     "root": {
         "Warehouses": "Sklady",

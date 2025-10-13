@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Help": "Pomoc",
-        "Help and user guide for Hubleto.": "Nápověda a uživatelská příručka pro HUBLETO."
+        "Help and user guide for Hubleto.": "Nápověda a uživatelská příručka pro Hubleto."
     },
     "Controllers\\Help": {
         "Help": "Pomoc",

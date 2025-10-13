@@ -2,13 +2,13 @@
     "manifest": {
         "Contacts": "Kontakty",
         "Default customer management and addressbook.": "Výchozí správa zákazníků a adresář.",
-        "Contact Categories": "",
-        "Contact Tags": "",
-        "Import contacts": ""
+        "Contact Categories": "Kategorie kontaktú",
+        "Contact Tags": "Štítky kontaktú",
+        "Import contacts": "Importovat kontakty"
     },
     "root": {
-        "Contact Categories": "Kontaktní kategorie",
-        "Contact Tags": "Kontaktní značky",
+        "Contact Categories": "Kategorie kontaktú",
+        "Contact Tags": "Štítky kontaktú",
         "Contacts": "Kontakty",
         "Import contacts": "Importovat kontakty"
     },
@@ -22,7 +22,7 @@
         "First name": "Křestní jméno",
         "Middle name": "Střední jméno",
         "Last name": "Příjmení",
-        "Title after": "Název po",
+        "Title after": "Titul po",
         "Customer": "Zákazník",
         "Primary Contact": "Primární kontakt",
         "Notes": "Poznámky",
@@ -34,7 +34,7 @@
         "Phone Numbers": "Telefoní čísla",
         "Mr.": "Pan",
         "Mrs.": "Pani",
-        "Tags": "Značky"
+        "Tags": "Štítky"
     },
     "Models\\Value": {
         "Contact": "Kontakt",
@@ -56,9 +56,9 @@
         "Type": "Typ"
     },
     "Models\\Tag": {
-        "Name": "Jméno",
+        "Name": "Název",
         "Color": "Barva",
-        "Contact Tags": "Kontaktní značky",
+        "Contact Tags": "Kontaktní štítky",
         "Add Contact Tag": "Přidat kontaktní značku"
     },
     "Components\\FormContact": {
@@ -72,7 +72,7 @@
         "Category": "Kategorie",
         "Value": "Hodnota",
         "Add contact": "Přidat kontakt",
-        "Tags": "Značky",
+        "Tags": "Štítky",
         "Customer": "Zákazník",
         "Primary Contact": "Primární kontakt",
         "Due to some changes the Primary Contact has to be checked again": "Z důvodu vykonaných změn je nutné znovu zapnout primární kontakt."
@@ -102,7 +102,7 @@
         "The import automatically detects ": "Import automaticky detekuje ",
         "emails": "emaily",
         "phone numbers": "telefonní čísla",
-        "links": "odakzy",
+        "links": "odkazy",
         "Example CSV file": "Příklad CSV souboru",
         "You may also": "Můžete také",
         "Export your addressbook": "Exportovat adresář",
@@ -114,6 +114,6 @@
     },
     "Controllers\\Tags": {
         "Settings": "Nastavení",
-        "Contact Tags": "Kontaktní značky"
+        "Contact Tags": "Kontaktní štítky"
     }
 }

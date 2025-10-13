@@ -2,10 +2,10 @@
     "manifest": {
         "Customers": "Zákazníci",
         "Free customer management and addressbook.": "Adresář a správa zákazníků zdarma.",
-        "Customer Tags": ""
+        "Customer Tags": "Štitky zákazníků"
     },
     "root": {
-        "Customer Tags": "Značky zákazníků"
+        "Customer Tags": "Štítky zákazníků"
     },
     "Models\\CustomerActivity": {
         "Subject": "Předmět",
@@ -40,7 +40,7 @@
         "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku (online úložiště) se souvisejícími dokumenty",
         "Add Customer": "Přidat zákazníka",
         "Shared folder (online document storage)": "Sdílená složka (online úložiště)",
-        "Tags": "Značky",
+        "Tags": "Štítky",
         "Archive": "Archív",
         "Archived": "Archivováno"
     },
@@ -53,10 +53,10 @@
         "Tag": "Štítek"
     },
     "Models\\Tag": {
-        "Name": "Jméno",
+        "Name": "Název",
         "Color": "Barva",
-        "Customer Tags": "Značky zákazníků",
-        "Add Customer Tag": "Přidat značku zákazníka"
+        "Customer Tags": "Štítky zákazníků",
+        "Add Customer Tag": "Přidat štítek zákazníka"
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"
@@ -65,7 +65,7 @@
         "Customer": "Zákazník",
         "Type recent activity here": "Zde napište nedávnou aktivitu",
         "Log completed activity": "Zaznamenat dokončenou aktivitu",
-        "Enter": "Zadajte",
+        "Enter": "Enter",
         "Schedule activity": "Naplánovat aktivitu",
         "Shift+Enter": "Shift+Enter",
         "Most recent activities": "Nedávné aktivity",
@@ -77,11 +77,11 @@
         "Email": "Email",
         "Phone number": "Telefonní číslo",
         "Primary Contact": "Hlavní kontakt",
-        "Tags": "Značky",
+        "Tags": "Štítky",
         "Calendar": "Kalendář",
         "Documents": "Dokumenty",
         "Local documents": "Lokální dokumenty",
-        "Not completed yet": "Nedokončeno",
+        "Not completed yet": "Zatím nedokončeno",
         "Document": "Dokument",
         "Add document": "Přidat dokument",
         "Link": "Odkaz"
@@ -97,6 +97,6 @@
     },
     "Controllers\\Tags": {
         "Settings": "Nastavení",
-        "Customer Tags": "Značky zákazníků"
+        "Customer Tags": "Štítky zákazníků"
     }
 }

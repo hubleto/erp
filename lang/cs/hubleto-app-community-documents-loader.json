@@ -2,9 +2,9 @@
     "manifest": {
         "Documents": "Dokumenty",
         "Free document management.": "Správa dokumentů zdarma.",
-        "Browse": "",
-        "List": "",
-        "Templates": ""
+        "Browse": "Prohlížet",
+        "List": "Seznam",
+        "Templates": "Šablony"
     },
     "root": {
         "Browse": "Prohlížet",
@@ -16,13 +16,13 @@
         "Document name": "Název dokumentu",
         "File": "Soubor",
         "File Link": "Odkaz souboru",
-        "Origin Link": "Původ odkaz",
+        "Origin Link": "Odkaz původu souboru",
         "Add Document": "Přidat dokument"
     },
     "Models\\Folder": {
         "Uid": "Uid",
         "Parent folder": "Nadřazená složka",
-        "Folder name": "Název služky"
+        "Folder name": "Název složky"
     },
     "Controllers\\Browse": {
         "Documents": "Dokumenty"
@@ -35,8 +35,8 @@
         "Document": "Dokument"
     },
     "Models\\Template": {
-        "Name": "",
-        "Content": "",
-        "Notes": ""
+        "Name": "Název",
+        "Content": "Obsah",
+        "Notes": "Poznámky"
     }
 }

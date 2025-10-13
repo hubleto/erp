@@ -1,8 +1,8 @@
 {
     "manifest": {
-        "Accounts": ""
+        "Accounts": "Účty"
     },
     "Controllers\\Accounts": {
-        "Accounting": ""
+        "Accounting": "Účetnictví"
     }
 }

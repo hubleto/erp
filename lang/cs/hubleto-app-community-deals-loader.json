@@ -2,22 +2,22 @@
     "manifest": {
         "Deals": "Obchody",
         "Deal management. From deal to purchase.": "Správa obchodů. Od obchodu k nákupu.",
-        "Deal Tags": "",
-        "Deal Lost Reasons": "",
-        "Deal warnings": "",
-        "Most valuable deals": "",
-        "Deal value by result": "",
-        "Active deals": "",
-        "Archived deals": ""
+        "Deal Tags": "Štitky obchodů",
+        "Deal Lost Reasons": "Důvody zraty obchodů",
+        "Deal warnings": "Upozornění obchodů",
+        "Most valuable deals": "Nejcennejší obchody",
+        "Deal value by result": "Hodnota obchodu podle výsledku",
+        "Active deals": "Aktivní obchody",
+        "Archived deals": "Archivované obchody"
     },
     "root": {
-        "Deal Tags": "Značky obchodu",
-        "Deal Lost Reasons": "Důvody ztraceného obchodu ",
+        "Deal Tags": "Štítky obchodu",
+        "Deal Lost Reasons": "Důvody zraty obchodů",
         "Most valuable deals": "Nejcennější obchody",
-        "Deal value by result": "Hodnota obchodu na základě výsledku",
+        "Deal value by result": "Hodnota obchodu podle výsledku",
         "Active deals": "Aktivní obchody",
         "Archived deals": "Archivované obchody",
-        "Deal warnings": "Varování pro obchody"
+        "Deal warnings": "Upozornění obchodů"
     },
     "Models\\DealActivity": {
         "Subject": "Předmět",
@@ -42,7 +42,7 @@
         "Price": "Cena",
         "Currency": "Měna",
         "Expected close date": "Očekávané datum uzavření",
-        "Owner": "Majitel",
+        "Owner": "Vlastník",
         "Created": "Vytvořené",
         "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
@@ -70,11 +70,11 @@
         " changed from ": " změnil z ",
         " to ": " na ",
         "Customer' order number": "Číslo objednávky zákazníka",
-        "Version": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": "",
-        "Template for quotation": "",
-        "Customer's order number": ""
+        "Version": "Verze",
+        "Price excl. VAT": "Cena bez DPH",
+        "Price incl. VAT": "Cena s DPH",
+        "Template for quotation": "Šablona pro nabídku",
+        "Customer's order number": "Čislo objednávky zákazníka"
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otevřený obchod"
@@ -101,21 +101,21 @@
         "Vat": "DPH",
         "Discount": "Sleva",
         "Sum": "Součet",
-        "Order": "",
-        "Description": "",
-        "Sales Price": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Order": "Objednávka",
+        "Description": "Popis",
+        "Sales Price": "Prodejná cena",
+        "Price excl. VAT": "Cena bez DPH",
+        "Price incl. VAT": "Cena s DPH"
     },
     "Models\\DealDocument": {
         "Deal": "Obchod",
         "Document": "Dokument"
     },
     "Models\\Tag": {
-        "Name": "Jméno",
+        "Name": "Název",
         "Color": "Barva",
-        "Deal Tags": "Značky obchodů",
-        "Add Deal Tag": "Přidat značky obchodů"
+        "Deal Tags": "Štítky obchodů",
+        "Add Deal Tag": "Přidat štítky obchodů"
     },
     "Controllers\\Boards\\DealWarnings": {
         "Pending deals without future plan": "Čekající obchody bez budoucího plánu",
@@ -129,11 +129,11 @@
     "Components\\FormDeal": {
         "Log completed activity": "Zaznamenat dokončenou aktivitu",
         "Type recent activity here": "Zde napište nedávnou aktivitu",
-        "Enter": "Zadajte",
+        "Enter": "Enter",
         "Most recent activities": "Nedávné aktivity",
         "Schedule activity": "Naplánovat aktivitu",
         "Shift+Enter": "Shift+Enter",
-        "Go to original lead": "Přejít k původnímu potenciálnímu obchodu",
+        "Go to original lead": "Přejít k původnímu potenciálnimu obchodu",
         "Not completed yet": "Zatím nedokončeno",
         "Calendar": "Kalendář",
         "Local documents": "Lokální dokumenty",
@@ -185,14 +185,14 @@
     },
     "Controllers\\Tags": {
         "Settings": "Nastavení",
-        "Deal Tags": "Značky obchodů"
+        "Deal Tags": "Štítky obchodů"
     },
     "Models\\DealLead": {
-        "Deal": "",
-        "Lead": ""
+        "Deal": "Obchod",
+        "Lead": "Potenciální obchod"
     },
     "Models\\DealTask": {
-        "Deal": "",
-        "Task": ""
+        "Deal": "Obchod",
+        "Task": "Úloha"
     }
 }

@@ -2,7 +2,7 @@
     "manifest": {
         "Products": "Produkty",
         "Free product portfolio managment.": "Správa portfolia produktů zdarma.",
-        "Groups": ""
+        "Groups": "Skupiny"
     },
     "root": {
         "Products": "Produkty",
@@ -10,20 +10,20 @@
         "Suppliers": "Dodavatelé"
     },
     "Models\\Product": {
-        "Title": "Titul",
+        "Title": "Název",
         "Product Group": "Skupina produktů",
         "Product Type": "Typ produktu",
         "Supplier": "Dodavatel",
-        "On sale": "Na prodej",
+        "On sale": "V slevě",
         "Image": "Obrázek",
         "Description": "Popis",
-        "Number of items in package": "Počet položek v balíčku",
+        "Number of items in package": "Počet položek v balíku",
         "Single unit price": "Jednotková cena",
         "Unit": "Jednotka",
         "Margin": "Marže",
         "Vat": "DPH",
         "Single unit order possible": "Možnost objednání jednoho kusu",
-        "Packaging": "Obal",
+        "Packaging": "Balení",
         "Sale ended": "Prodej skončil",
         "Show price to customer": "Zobrazit cenu zákazníkovi",
         "Set price after reweight?": "Nastavit cenu po převážení?",
@@ -31,20 +31,20 @@
         "Storage rules": "Pravidla skladování",
         "Table": "Tabulka",
         "Add product": "Přidat produkt",
-        "Name": "",
-        "Invoicing policy": "",
-        "Internal notes": "",
-        "Amount of items in package": "",
-        "Sales price": "",
-        "VAT": "",
-        "Bar code": "",
-        "Data ": ""
+        "Name": "Název",
+        "Invoicing policy": "Fakturační zásady",
+        "Internal notes": "Interní pozvámky",
+        "Amount of items in package": "Množství položek v balení",
+        "Sales price": "Prodejní cena",
+        "VAT": "DPH",
+        "Bar code": "Čárový kód",
+        "Data ": "Data"
     },
     "Controllers\\Products": {
         "Products": "Produkty"
     },
     "Models\\Group": {
-        "Title": "Názov",
+        "Title": "Název",
         "Add product group": "Přidat produktovou skupinu"
     },
     "Controllers\\Groups": {

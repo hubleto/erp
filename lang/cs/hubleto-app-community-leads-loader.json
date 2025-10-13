@@ -2,15 +2,15 @@
     "manifest": {
         "Leads": "Potenciální obchody",
         "Management of leads, cold contacts. Convert leads to deals.": "Správa potenciálních obchodů, chladných kontaktů. Převést potenciální obchody k obchodům.",
-        "Lead Levels": "",
-        "Lead Tags": "",
-        "Lead Lost Reasons": "",
-        "Active leads": "",
-        "Archived leads": ""
+        "Lead Levels": "Úrovně potenciálních obchodů",
+        "Lead Tags": "Štítky potienciálních obchodů",
+        "Lead Lost Reasons": "Důvody zraty potienciálních obchodů",
+        "Active leads": "Aktivní potenciální obchody",
+        "Archived leads": "Archivované potenciální obchody"
     },
     "root": {
-        "Lead Tags": "Značky potenciálních obchodů",
-        "Lead Lost Reasons": "Důvody pro ztrátu potenciálních obchodů",
+        "Lead Tags": "Štítky potenciálních obchodů",
+        "Lead Lost Reasons": "Důvody zraty potienciálních obchodů",
         "Active leads": "Aktivní potenciální obchody",
         "Archived leads": "Archivované potenciální obchody",
         "Lead Levels": "Úrovně potenciálních obchodů"
@@ -27,7 +27,7 @@
         "Created by": "Vytvořeno",
         "Lead": "Potenciální ochod",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
+        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)"
     },
     "Models\\Lead": {
         "Lead Identifier": "Identifikátor potenciálniho obchodu",
@@ -55,9 +55,9 @@
         "Team": "Tím",
         "Add lead": "Přidat potenciální obchod",
         "Add Lead": "Přidat potenciální obchod",
-        "Workflow": "",
-        "Workflow step": "",
-        "Closed": ""
+        "Workflow": "Workflow",
+        "Workflow step": "Workflow krok",
+        "Closed": "Uzavření"
     },
     "Models\\LostReason": {
         "Lost Reason": "Důvod ztracení"
@@ -68,11 +68,11 @@
         "Description": "Popis"
     },
     "Models\\LeadTag": {
-        "Lead": "potenciální obchod",
+        "Lead": "Potenciální obchod",
         "Tag": "Štítek"
     },
     "Models\\LeadProduct": {
-        "Lead": "potenciální obchod",
+        "Lead": "Potenciální obchod",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
         "Amount": "Množství",
@@ -81,20 +81,20 @@
         "Sum": "Součet"
     },
     "Models\\LeadDocument": {
-        "Lead": "potenciální obchod",
+        "Lead": "Potenciální obchod",
         "Document": "Dokument"
     },
     "Models\\Tag": {
-        "Name": "Jméno",
+        "Name": "Název",
         "Color": "Barva"
     },
     "Models\\Level": {
-        "Name": "Jméno",
+        "Name": "Název",
         "Color": "Barva"
     },
     "Controllers\\Boards\\LeadWarnings": {
         "Open leads without future plan": "Otevřít potenciální obchod bez budoucího plánu",
-        "No warnings for leads.": "Žádné upozornění pro potenciální obchod"
+        "No warnings for leads.": "Žádné upozornění pro potenciální obchody"
     },
     "Controllers\\Leads": {
         "Leads": "Potenciální obchody"
@@ -131,11 +131,11 @@
         "Lead Lost Reasons": "Důvody pro ztrátu potenciálních obchodů"
     },
     "Models\\LeadCampaign": {
-        "Lead": "",
-        "Campaign": ""
+        "Lead": "Potenciální obchod",
+        "Campaign": "Kampaň"
     },
     "Models\\LeadTask": {
-        "Lead": "",
-        "Task": ""
+        "Lead": "Potenciální obchod",
+        "Task": "Úloha"
     }
 }

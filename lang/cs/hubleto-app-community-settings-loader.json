@@ -26,32 +26,32 @@
     },
     "manifest": {
         "Settings": "Nastavení",
-        "Settings and control panel for your Hubleto.": "Nastavení a ovládací panel pro váš Hubteto.",
-        "Users": "",
-        "Roles": "",
-        "Your companies": "",
-        "General settings": "",
-        "Permissions list": "",
-        "Role permissions": "",
-        "Activity types": "",
-        "Countries": "",
-        "Currencies": "",
-        "Invoice profiles": "",
-        "Platform config": "",
-        "Sidebar": "",
-        "Teams": ""
-    },
-    "root": {
+        "Settings and control panel for your Hubleto.": "Nastavení a ovládací panel pro Vaše Hubteto.",
         "Users": "Uživatelé",
         "Roles": "Role",
-        "Your companies": "Vaše společnosti",
+        "Your companies": "Vaše firmy",
         "General settings": "Obecná nastavení",
         "Permissions list": "Seznam oprávnění",
         "Role permissions": "Oprávnění role",
         "Activity types": "Typy aktivity",
         "Countries": "Země",
         "Currencies": "Měny",
-        "Invoice profiles": "Profily faktury",
+        "Invoice profiles": "Profily pro fakturování",
+        "Platform config": "Konfigurace platformy",
+        "Sidebar": "Bončí panel",
+        "Teams": "Tímy"
+    },
+    "root": {
+        "Users": "Uživatelé",
+        "Roles": "Role",
+        "Your companies": "Vaše firmy",
+        "General settings": "Obecná nastavení",
+        "Permissions list": "Seznam oprávnění",
+        "Role permissions": "Oprávnění role",
+        "Activity types": "Typy aktivity",
+        "Countries": "Země",
+        "Currencies": "Měny",
+        "Invoice profiles": "Profily pro fakturování",
         "Platform config": "Konfigurace platformy",
         "Sidebar": "Bončý panel",
         "Teams": "Týmy"
@@ -62,11 +62,11 @@
     },
     "Models\\Company": {
         "Company": "Společnost",
-        "Tax ID": "ID daně",
-        "VAT ID": "DPH ID",
+        "Tax ID": "DIČ",
+        "VAT ID": "IČ DPH",
         "Street, line 1": "Ulice, řádek 1",
-        "Street, line 2": "Street, řádek 2",
-        "ZIP": "Zip",
+        "Street, line 2": "Ulice, řádek 2",
+        "ZIP": "PSČ",
         "City": "Město",
         "Country": "Země"
     },
@@ -109,7 +109,7 @@
         "All settings": "Všechny nastavení"
     },
     "Models\\InvoiceProfile": {
-        "Name": "Jméno",
+        "Name": "Název",
         "Phone": "Telefonní číslo",
         "E-mail": "E-mail",
         "WWW": "Webstránka",
@@ -121,7 +121,7 @@
         "ZIP": "PSČ",
         "City": "Město",
         "Country": "Krajina",
-        "Bank name": "Jméno banky",
+        "Bank name": "Název banky",
         "Account number": "Číslo účtu",
         "Account IBAN": "IBAN",
         "SWIFT": "SWIFT",
@@ -136,7 +136,7 @@
     },
     "Controllers\\UserRoles": {
         "Settings": "Nastavení",
-        "User Roles": "Rola uživatele"
+        "User Roles": "Role uživatele"
     },
     "Controllers\\Currencies": {
         "Settings": "Nastavení",

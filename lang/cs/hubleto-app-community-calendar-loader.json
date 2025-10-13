@@ -2,8 +2,8 @@
     "manifest": {
         "Calendar": "Kalendář",
         "Free calendar app.": "Aplikace kalendáře zdarma.",
-        "Reminders": "",
-        "Share": ""
+        "Reminders": "Připomínky",
+        "Share": "Zdílet"
     },
     "root": {
         "Events for today": "Události pro dnešek",
@@ -19,7 +19,7 @@
         "All day": "Celý den",
         "Completed": "Dokončeno",
         "Created by": "Vytvořeno",
-        "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
+        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)"
     },
     "Controllers\\Boards\\Reminders": {
         "All-day": "Celý den",
@@ -27,9 +27,9 @@
         "events for tomorrow": "Události pro zítřek",
         "events later": "Události později",
         "Open reminder details": "Otevřít podrobnosti o připomínkách",
-        "Let's have a break. You have nothing to do for today.": "Dájte si pauzu. Dneska nemáte co dělat.",
-        "reminders later": "",
-        "Later": ""
+        "Let's have a break. You have nothing to do for today.": "Dejte si pauzu. Dneska nemáte co dělat.",
+        "reminders later": "připonínek později",
+        "Later": "Později"
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalendář"

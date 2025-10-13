@@ -18,7 +18,7 @@
         "Details": "Podrobnosti",
         "Has invoice": "Má fakturu",
         "Billing account": "Fakturační účet",
-        "UUID": "Uuid"
+        "UUID": "UUID"
     },
     "Models\\Credit": {
         "Recalculated": "Přepočítán",
@@ -38,11 +38,11 @@
     "Controllers\\Dashboard": {
         "You are upgraded to Premium": "Byli jste upgradováni na Premium",
         "Free trial expires in": "Zkušební doba vyprší za",
-        "days": "dnů",
+        "days": "dny",
         "Configure your payment method.": "Nakonfigurujte si platební metodu.",
         "Automatic subscription renewal is active": "Automatické obnovení předplatného je aktivní",
         "Access to your Premium account will be automaticaly renewed next month.": "Přístup k vašemu prémiovému účtu bude automaticky obnoven příští měsíc.",
-        "Your Premium benefits": "Výhody vašeho prémiového účtu",
+        "Your Premium benefits": "Výhody Vašeho prémiového účtu",
         "unlimited users": "neomezený počet uživatelů",
         "more apps & features": "více aplikací a funkcí",
         "premium support": "prémiová podpora",
@@ -50,8 +50,8 @@
         "Configure payment with card": "Konfigurovat platbu s kartou",
         "Charge credit via bank transfer": "Nabít kredit bankovním převodem",
         "Show payments and download invoices": "Zobrazit platby a stáhnout faktury",
-        "Manage billing accounts": "Správovat fakturační účty",
-        "Usage info": "Informace o použití",
+        "Manage billing accounts": "Spravovat fakturační účty",
+        "Usage info": "Informace o používaní",
         "Month": "Měsíc",
         "Active users": "Aktivní uživatelé",
         "Paid apps": "Zaplacené aplikace",
@@ -82,7 +82,7 @@
         "Activate subscription renewal again": "Znovu aktivovat obnovu předplatného"
     },
     "Models\\BillingAccount": {
-        "Name": "Jméno",
+        "Name": "Název",
         "Phone": "Telofonní číslo",
         "E-mail": "E-mail",
         "Tax ID": "IČO",

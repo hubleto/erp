@@ -4,13 +4,13 @@
         "Usage statistics": "Statistiky použití"
     },
     "root": {
-        "Usage log": "Protokol použití"
+        "Usage log": "Záznam použití"
     },
     "Models\\Log": {
         "Time": "Čas",
-        "IP": "Ip",
+        "IP": "IP",
         "Route": "Trasa",
-        "Params": "Params",
+        "Params": "Parametry",
         "Message": "Zpráva",
         "User": "Uživatel"
     }

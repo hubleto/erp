@@ -2,8 +2,8 @@
     "manifest": {
         "Orders": "Objednávky",
         "Free order managment.": "Správa objednávek zdarma.",
-        "Order states": "",
-        "Order warnings": ""
+        "Order states": "Stavy objednávek",
+        "Order warnings": "Upozornění objednávek"
     },
     "root": {
         "Order states": "Stavy objednávek"
@@ -26,15 +26,15 @@
         "Shipping information": "Informace o dopravě",
         "Notes": "Poznámky",
         "Add order": "Přidat objednávku",
-        "Identifier": "",
-        "Owner": "",
-        "Manager": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": "",
-        "Template": "",
-        "Closed": ""
+        "Identifier": "Identifikátor",
+        "Owner": "Vlastník",
+        "Manager": "Manažér",
+        "Workflow": "Workflow",
+        "Workflow step": "Workflow krok",
+        "Price excl. VAT": "Cena bez DPH",
+        "Price incl. VAT": "Cena s DPH",
+        "Template": "Šablona",
+        "Closed": "Uzavřeno"
     },
     "Models\\OrderProduct": {
         "Order": "Objednávka",
@@ -45,12 +45,12 @@
         "Discount": "Sleva",
         "Vat": "DPH",
         "Add product": "Přidat produkt",
-        "Sales price": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Sales price": "Prodejní cena",
+        "Price excl. VAT": "Cena bez DPH",
+        "Price incl. VAT": "Cena s DPH"
     },
     "Models\\State": {
-        "Title": "Názov",
+        "Title": "Název",
         "Code": "Kód",
         "Color": "Barva"
     },
@@ -65,31 +65,31 @@
         "States": "Stavy"
     },
     "Models\\OrderActivity": {
-        "Subject": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Meeting minutes (link)": "",
-        "Created by": "",
-        "Order": ""
+        "Subject": "Předmět",
+        "Activity type": "Typ aktivity",
+        "Start date": "Datum zahájení",
+        "Start time": "Čas zahájení",
+        "End date": "Datum ukončení",
+        "End time": "Čas ukončení",
+        "All day": "Celý den",
+        "Completed": "Dokončeno",
+        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)",
+        "Created by": "Vytvořeno",
+        "Order": "Objednávka"
     },
     "Models\\OrderDocument": {
-        "Order": "",
-        "Document": ""
+        "Order": "Objednávka",
+        "Document": "Dokument"
     },
     "Models\\OrderInvoice": {
-        "Order": "",
-        "Invoice": ""
+        "Order": "Objednávka",
+        "Invoice": "Faktura"
     },
     "Models\\OrderDeal": {
-        "Order": "",
-        "Deal": ""
+        "Order": "Objednávka",
+        "Deal": "Obchod"
     },
     "Controllers\\Boards\\OrderWarnings": {
-        "Open orders without future plan": ""
+        "Open orders without future plan": "otevřené objednávky bez budoucího plánu"
     }
 }

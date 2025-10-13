@@ -7,7 +7,7 @@
         "Campaigns": "Kampaně"
     },
     "Models\\Campaign": {
-        "Name": "Jméno",
+        "Name": "Název",
         "Target audience": "Cílová skupina",
         "Goal": "Cíl",
         "Notes": "Poznámky",
@@ -15,17 +15,17 @@
         "Manager": "Manažér",
         "Created": "Vytvořeno",
         "Add Campaign": "Přidat kampaň",
-        "UID": "",
-        "UTM source": "",
-        "UTM campaign": "",
-        "UTM term": "",
-        "UTM content": "",
-        "Mail account to send email from": "",
-        "Mail template": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Approved": "",
-        "Closed": ""
+        "UID": "UID",
+        "UTM source": "UTM zdroj",
+        "UTM campaign": "UTM kampaň",
+        "UTM term": "UTM výraz",
+        "UTM content": "UTM obsah",
+        "Mail account to send email from": "Mailoví účet pro odesílání e-mailů",
+        "Mail template": "Mailová šablona",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
+        "Approved": "Schváleno",
+        "Closed": "Uzavřeno"
     },
     "Components\\FormCampaign": {
         "Leads": "Potencionální obchody",

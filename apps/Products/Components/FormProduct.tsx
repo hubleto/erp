@@ -32,6 +32,8 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Product')}</b> },
+        { uid: 'packaging', title: this.translate('Packaging') },
+        { uid: 'gallery', title: this.translate('Gallery') },
         { uid: 'suppliers', title: this.translate('Suppliers') },
         ...this.getCustomTabs()
       ]
@@ -55,38 +57,54 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
     switch (tabUid) {
       case 'default':
         return <>
-          <div className='card'>
-            <div className='card-body grid grid-cols-2 gap-2'>
-              <div className='border-r border-gray-200'>
-                <div className='flex gap-2'>
-                  <div className='flex grow'>{this.inputWrapper('ean')}</div>
-                  <div className='flex grow'><Barcode value={R.ean} height={30} /></div>
-                </div>
-                {this.inputWrapper('name', {cssClass: 'text-2xl text-primary'})}
-                {this.inputWrapper('is_on_sale')}
-                {this.inputWrapper('sales_price')}
-                {this.inputWrapper('id_group')}
-                {this.inputWrapper('vat')}
-                {this.inputWrapper('margin')}
-                {this.inputWrapper('unit')}
-                {this.inputWrapper('description')}
-                {this.inputWrapper('is_single_order_possible')}
-                {this.inputWrapper('show_price')}
-                {this.inputWrapper('packaging')}
-                {this.inputWrapper('needs_reordering')}
+          <div className='grid grid-cols-2 gap-2'>
+            <div className='border-r border-gray-200'>
+              <div className='flex gap-2'>
+                <div className='flex grow'>{this.inputWrapper('ean')}</div>
+                <div className='flex grow'><Barcode value={R.ean} height={30} /></div>
               </div>
-              <div className=''>
-                {this.inputWrapper('image')}
-                {this.inputWrapper('type')}
-                {this.inputWrapper('invoicing_policy')}
-                {this.inputWrapper('amount_in_package')}
-                {this.inputWrapper('sale_ended')}
-                {this.inputWrapper('price_after_reweight')}
-                {this.inputWrapper('storage_rules')}
-                {this.inputWrapper('table')}
-              </div>
+              {this.inputWrapper('name', {cssClass: 'text-2xl text-primary'})}
+              {this.inputWrapper('is_on_sale')}
+              {this.inputWrapper('sales_price')}
+              {this.inputWrapper('id_group')}
+              {this.inputWrapper('vat')}
+              {this.inputWrapper('margin')}
+              {this.inputWrapper('unit')}
+              {this.inputWrapper('description')}
+              {this.inputWrapper('is_single_order_possible')}
+              {this.inputWrapper('show_price')}
+              {this.inputWrapper('needs_reordering')}
+            </div>
+            <div className=''>
+              {this.inputWrapper('type')}
+              {this.inputWrapper('invoicing_policy')}
+              {this.inputWrapper('sale_ended')}
+              {this.inputWrapper('price_after_reweight')}
+              {this.inputWrapper('storage_rules')}
             </div>
           </div>
+        </>;
+      break;
+      case 'packaging':
+        return <>
+          {this.inputWrapper('package_unit')}
+          {this.inputWrapper('package_amount')}
+          {this.inputWrapper('package_length')}
+          {this.inputWrapper('package_width')}
+          {this.inputWrapper('package_height')}
+          {this.inputWrapper('package_volume')}
+          {this.inputWrapper('package_mass')}
+          {this.inputWrapper('package_discount')}
+          {this.inputWrapper('package_description')}
+        </>;
+      break;
+      case 'gallery':
+        return <>
+          {this.inputWrapper('image_1')}
+          {this.inputWrapper('image_2')}
+          {this.inputWrapper('image_3')}
+          {this.inputWrapper('image_4')}
+          {this.inputWrapper('image_5')}
         </>;
       break;
       case 'suppliers':

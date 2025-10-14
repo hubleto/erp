@@ -28,11 +28,11 @@ class ProductSupplier extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class)),
-      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class)),
-      'supplier_product_name' => new Text($this, $this->translate('Supplier product name')),
-      'supplier_product_code' => new Text($this, $this->translate('Supplier product code')),
-      'purchase_price' => (new Decimal($this, $this->translate('Purchase price')))->setRequired(),
-      'notes' => new Text($this, $this->translate('Internal notes')),
+      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible(),
+      'supplier_product_name' => new Text($this, $this->translate('Supplier product name'))->setDefaultVisible(),
+      'supplier_product_code' => new Text($this, $this->translate('Supplier product code'))->setDefaultVisible(),
+      'purchase_price' => (new Decimal($this, $this->translate('Purchase price')))->setDefaultVisible(),
+      'notes' => new Text($this, $this->translate('Internal notes'))->setDefaultVisible(),
       'delivery_time' => new Integer($this, $this->translate('Delivery time'))->setUnit('days'),
     ]);
   }

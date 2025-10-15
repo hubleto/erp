@@ -169,6 +169,14 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
             onClick={() => { this.setState({fOwnership: 1}); }}
           ><span className="text">{this.translate("My activities")}</span></button>
         </div>
+
+        <a
+          className="btn btn-primary-outline mt-2"
+          href={globalThis.main.config.projectUrl + "/calendar/share"}
+        >
+          <span className="icon"><i className="fa-solid fa-share-from-square"></i></span>
+          <span className="text">{this.translate("Export calendar")}</span>
+        </a>
       </div>
       <div className="w-full">
         <Calendar

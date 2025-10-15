@@ -23,6 +23,8 @@ use \Hubleto\App\Community\Api\Models\Key;
 
 class Call extends \Hubleto\Erp\Controllers\ApiController
 {
+  public bool $requiresAuthenticatedUser = false;
+
   public function renderJson(): array
   {
     try {
@@ -32,23 +34,23 @@ class Call extends \Hubleto\Erp\Controllers\ApiController
       $controller = $this->router()->urlParamAsString('controller');
       $varsString = $this->router()->urlParamAsString('vars');
 
-      /** @var Validator */
+      /** @var $validator Validator */
       $validator = $this->getService(Validator::class);
 
       $validator->validateAppAndController($app, $controller);
       $validator->validateApiKey($app, $controller, $key);
 
-      /** @var \Hubleto\Erp\Controller */
+      /** @var $controllerObject \Hubleto\Erp\Controller */
       $controllerObject = $this->getService($validator->getFullControllerClassName($app, $controller));
       $vars = @json_decode($varsString, true);
-      $controllerObject->router()->setRouteVars($vars);
+      $controllerObject->router()->setRouteVars($vars?? []);
       $output = $controllerObject->renderJson();
 
-      /** @var Key */
+      /** @var $mKey Key */
       $mKey = $this->getModel(Key::class);
       $key = $mKey->record->where('key', $key)->first();
 
-      /** @var Usage */
+      /** @var $mUsage Usage */
       $mUsage = $this->getModel(Usage::class);
       $mUsage->record->recordCreate([
         'id_key' => $key->id,

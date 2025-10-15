@@ -39,10 +39,17 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
     const customInputs = this.renderCustomInputs();
 
     let daysDuration = moment(R.date_end).diff(moment(R.date_start), 'days');
-    let minutesDuration = moment(R.date_end + ' ' + R.time_end).diff(moment(R.date_end + ' ' + R.time_start), 'minutes');
+    let hoursDuration = moment(R.date_end + ' ' + R.time_end).diff(moment(R.date_end + ' ' + R.time_start), 'hours');
+    let minutesDuration = moment(R.date_end + ' ' + R.time_end).diff(moment(R.date_end + ' ' + R.time_start), 'minutes') - ((hoursDuration ?? 0) * 60);
 
+    if (isNaN(hoursDuration)) hoursDuration = 0;
     if (isNaN(daysDuration)) daysDuration = 0;
     if (isNaN(minutesDuration)) minutesDuration = 15;
+
+    if (R.all_day) {
+      hoursDuration = 0;
+      minutesDuration = 0;
+    }
 
     return <>
       {customInputs ? <div className="p-2 mb-2 bg-blue-50">{customInputs}</div> : null}
@@ -52,7 +59,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
         <div className='w-full'>{this.inputWrapper('id_activity_type')}</div>
       </div>
       {this.inputWrapper('all_day')}
-      <div className="mt-2 alert alert-info">{daysDuration} day(s), {minutesDuration} minutes</div>
+      <div className="mt-2 alert alert-info">{daysDuration > 0 && daysDuration + " day(s)"}{(daysDuration > 0 && (hoursDuration > 0 || minutesDuration > 0)) && ", "}{ hoursDuration > 0 && hoursDuration + " hours"}{(hoursDuration > 0 && minutesDuration > 0) && ", "}{ minutesDuration > 0 && minutesDuration + " minutes"}</div>
       <div className='flex gap-2 w-full flex-col md:flex-row'>
         <div className='w-full'>
           {this.divider(this.translate('Start'))}

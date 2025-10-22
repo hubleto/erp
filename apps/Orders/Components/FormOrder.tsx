@@ -263,6 +263,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                 {this.inputWrapper('id_manager')}
                 {this.inputWrapper('date_order')}
                 {this.inputWrapper('required_delivery_date')}
+                {this.inputWrapper('shared_folder')}
                 {this.inputWrapper('shipping_info')}
                 {this.inputWrapper('id_template')}
               </div>

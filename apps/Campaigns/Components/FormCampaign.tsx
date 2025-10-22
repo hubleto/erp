@@ -81,8 +81,10 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
   renderTopMenu(): JSX.Element {
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>}
-      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+      {this.state.id <= 0 ? null : <>
+        <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+      </>}
     </>
   }
 

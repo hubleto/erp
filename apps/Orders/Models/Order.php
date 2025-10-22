@@ -60,6 +60,7 @@ class Order extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible(),
+      'identifier_customer' => (new Varchar($this, $this->translate('Identifier at customer')))->setDefaultVisible(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setDefaultVisible(),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
@@ -73,6 +74,10 @@ class Order extends \Hubleto\Erp\Model
       'required_delivery_date' => (new Date($this, $this->translate('Required delivery date'))),
       'shipping_info' => (new Varchar($this, $this->translate('Shipping information'))),
       'note' => (new Text($this, $this->translate('Notes'))),
+      'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)"))
+        ->setReactComponent('InputHyperlink')
+        ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
+      ,
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
     ]);

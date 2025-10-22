@@ -33,12 +33,23 @@ class Generator extends \Hubleto\Framework\Core
     return (int) $document['id'];
   }
 
+  /**
+   * [Description for renderTemplate]
+   *
+   * @param int $idTemplate
+   * @param array $vars
+   * 
+   * @return string
+   * 
+   */
   public function renderTemplate(int $idTemplate, array $vars): string
   {
+    /** @var Template */
     $mTemplate = $this->getService(Template::class);
     $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $idTemplate)->first();
     if (!$template) throw new \Exception('Template was not found.');
 
+    /** @var Models\Template */
     $mTemplate = $this->getModel(Models\Template::class);
     $template = $mTemplate->record->prepareReadQuery()->where('id', $idTemplate)->first();
 

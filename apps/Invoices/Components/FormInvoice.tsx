@@ -30,37 +30,44 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   }
 
   getStateFromProps(props: FormInvoiceProps) {
+    let tabs = [];
+    
+    if (this.props.id > 0) {
+      tabs.push({ uid: 'default', title: <b>{this.translate('Invoice')}</b> });
+      tabs.push({ uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' });
+      tabs.push({ uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' });
+    }
+    tabs = [...tabs, ...this.getCustomTabs()];
+
     return {
       ...super.getStateFromProps(props),
-      tabs: [
-        { uid: 'default', title: <b>{this.translate('Invoice')}</b> },
-        { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
-        { uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' },
-        ...this.getCustomTabs()
-      ],
+      tabs: tabs,
     };
   }
 
   getHeaderButtons()
   {
-    return [
-      ...super.getHeaderButtons(),
-      {
-        title: 'Print to PDF',
-        onClick: () => {
-          request.post(
-            'invoices/api/generate-pdf',
-            {idInvoice: this.state.record.id},
-            {},
-            (result: any) => {
-              if (result.idDocument) {
-                window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+    let buttons = super.getHeaderButtons();
+    if (this.state.id > 0) {
+      buttons.push(
+        {
+          title: 'Print to PDF',
+          onClick: () => {
+            request.post(
+              'invoices/api/generate-pdf',
+              {idInvoice: this.state.record.id},
+              {},
+              (result: any) => {
+                if (result.idDocument) {
+                  window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+                }
               }
-            }
-          );
+            );
+          }
         }
-      }
-    ]
+      );
+    }
+    return buttons;
   }
 
   getRecordFormUrl(): string {
@@ -70,16 +77,18 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   renderTopMenu(): JSX.Element {
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>}
-      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+      {this.state.id <= 0 ? null : <>
+        <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+      </>}
     </>
   }
 
   renderTitle(): JSX.Element {
     const r = this.state.record;
     return <>
+      <small>{this.translate('Invoice')}</small>
       <h2>{r.number ? r.number : '---'}</h2>
-      <div className="badge border-indigo-500 text-indigo-500 text-lg">{this.translate('Invoice')}</div>
     </>;
   }
 
@@ -94,6 +103,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               {this.inputWrapper('id_issued_by')}
               {this.inputWrapper('id_profile')}
               {this.inputWrapper('id_customer')}
+              {this.inputWrapper('type')}
               {this.inputWrapper('id_template')}
               {this.inputWrapper('id_currency')}
               {this.state.id == -1 ? null : <>

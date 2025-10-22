@@ -16,13 +16,17 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
+      '/^documents\/api\/get-folder-content\/?$/' => Controllers\Api\GetFolderContent::class,
+
       '/^documents\/?$/' => Controllers\Browse::class,
-      // '/^documents\/api\/save-junction\/?$/' => Controllers\Api\SaveJunction::class,
       '/^documents\/browse\/?$/' => Controllers\Browse::class,
       '/^documents\/list\/?$/' => Controllers\Documents::class,
-      '/^documents\/(?<recordId>\d+)\/?$/' => Controllers\Documents::class,
-      '/^documents\/templates\/?$/' => Controllers\Templates::class,
-      '/^documents\/api\/get-folder-content\/?$/' => Controllers\Api\GetFolderContent::class,
+
+      '/^documents(\/(?<recordId>\d+))?\/?$/' => Controllers\Documents::class,
+      '/^documents\/add\/?$/' => ['controller' => Controllers\Documents::class, 'vars' => ['recordId' => -1]],
+
+      '/^documents\/templates(\/(?<recordId>\d+))?\/?$/' => Controllers\Templates::class,
+      '/^documents\/templates\/add\/?$/' => ['controller' => Controllers\Templates::class, 'vars' => ['recordId' => -1]],
     ]);
 
   }
@@ -83,65 +87,27 @@ class Loader extends \Hubleto\Framework\App
     $mDocument->record->recordCreate([ 'id_folder' => $idFolderCU, 'name' => 'customer_profile_1.pdf', 'hyperlink' => 'https://www.google.com' ]);
     $mDocument->record->recordCreate([ 'id_folder' => $idFolderCU, 'name' => 'customer_profile_2.pdf', 'hyperlink' => 'https://www.google.com' ]);
 
-    $idTemplate = $mTemplate->record->recordCreate([
-      'name' => 'PDF template for quotation',
-      'content' => '
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style>
-  * { font-family: "Helvetica"; font-size: 12px; }
-</style>
+    $templates = [
+      'en-quotation' => ['name' => 'Quotation', 'file' => 'en/Quotation.twig'],
+      'en-invoice-proforma' => ['name' => 'Proforma invoice', 'file' => 'en/InvoiceProforma.twig'],
+      'en-invoice-advance' => ['name' => 'Advance invoice', 'file' => 'en/InvoiceAdvance.twig'],
+      'en-invoice-standard' => ['name' => 'Standard invoice', 'file' => 'en/InvoiceStandard.twig'],
+      'en-invoice-credit-note' => ['name' => 'Credit note', 'file' => 'en/InvoiceCreditNote.twig'],
+      'en-invoice-debit-note' => ['name' => 'Debit note', 'file' => 'en/InvoiceDebitNote.twig'],
+      'sk-invoice-proforma' => ['name' => 'Proforma faktúra', 'file' => 'sk/InvoiceProforma.twig'],
+      'sk-invoice-advance' => ['name' => 'Zálohová faktúra', 'file' => 'sk/InvoiceAdvance.twig'],
+      'sk-invoice-standard' => ['name' => 'Faktúra', 'file' => 'sk/InvoiceStandard.twig'],
+      'sk-invoice-credit-note' => ['name' => 'Dobropis', 'file' => 'sk/InvoiceCreditNote.twig'],
+      'sk-invoice-debit-note' => ['name' => 'Ťarchopis', 'file' => 'sk/InvoiceDebitNote.twig'],
+    ];
 
-<div>
-  <div class="dtop">
-    <div style="font-size:24pt"><b>Quotation</b></div>
-    Deal: {{ identifier }} {{ title }}<br/>
-    {% if version %} Version {{ version }}<br/> {% endif %}
-    Generated on: {{ now }}<br/>
-    Customer: {{ CUSTOMER.name }}<br/>
-    Contact person: {{ CONTACT.first_name }} {{ CONTACT.last_name }}<br/>
-  </div>
-  <br/>
-  <br/>
-
-  <table style="width:100%">
-    <tr>
-      <td style="width:60%"><b>Product</b></td>
-      <td style="width:10%"><b>Unit price</b></td>
-      <td style="width:10%"><b>Amount</b></td>
-      <td style="width:10%"><b>Discount</b></td>
-      <td style="width:10%"><b>Subtotal</b></td>
-    </tr>
-    {% for product in PRODUCTS %}
-      <tr>
-        <td style="width:60%">
-          {{ product.PRODUCT.name }}
-          {% if product.description %}
-            <div style="color:#666666">
-              {{ product.description }}
-            </div>
-          {% endif %}
-        </td>
-        <td style="width:10%">{{ product.unit_price|number_format(2, ",", " ") }} €</td>
-        <td style="width:10%">{{ product.amount|number_format(2, ",", " ") }} </td>
-        <td style="width:10%">{{ product.discount|number_format(0, ",", " ") }} %</td>
-        <td style="width:10%"><b>{{ product.price_excl_vat }}|number_format(2, ",", " ") €</b></td>
-      </tr>
-    {% endfor %}
-  </table>
-
-  <div style="font-size:24px"><b>Total: {{ price_excl_vat }}|number_format(2, ",", " ") €</b></div>
-
-  Note: All prices are excluding value added tax.
-</div>
-
-<br/><br/><br/>
-<div>
-  <b><span style="color:#05b9e9">wai</span><span style="color:#58585a">blue</span></b><br/>
-  <span style="color:#58585a">software_engineering_experts</span><br/>
-</div>
-      '
-    ])['id'];
-
+    foreach ($templates as $usedFor => $templateData) {
+      $mTemplate->record->recordCreate([
+        'name' => $templateData['name'],
+        'used_for' => $usedFor,
+        'content' => file_get_contents(__DIR__ . '/DefaultTemplates/' . $templateData['file']),
+      ]);
+    }
 
   }
 

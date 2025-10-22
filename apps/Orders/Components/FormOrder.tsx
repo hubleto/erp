@@ -152,8 +152,10 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     const R = this.state.record;
     return <>
       {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>}
-      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+      {this.state.id <= 0 ? null : <>
+        <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
+        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+      </>}
     </>
   }
 
@@ -250,6 +252,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                   }) : null}
                 </FormInput>
                 {this.inputWrapper('identifier')}
+                {this.inputWrapper('identifier_customer')}
                 {this.inputWrapper('title')}
                 {this.inputWrapper('id_customer')}
                 {<div className='flex flex-row *:w-1/2'>
@@ -262,6 +265,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                 {this.inputWrapper('id_manager')}
                 {this.inputWrapper('date_order')}
                 {this.inputWrapper('required_delivery_date')}
+                {this.inputWrapper('shared_folder')}
                 {this.inputWrapper('shipping_info')}
                 {this.inputWrapper('id_template')}
               </div>

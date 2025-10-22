@@ -250,6 +250,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                   }) : null}
                 </FormInput>
                 {this.inputWrapper('identifier')}
+                {this.inputWrapper('identifier_customer')}
                 {this.inputWrapper('title')}
                 {this.inputWrapper('id_customer')}
                 {<div className='flex flex-row *:w-1/2'>

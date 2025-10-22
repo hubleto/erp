@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call update URL
-        run: curl -X POST "https://test.hubleto.com/api/test/update"
+        run: curl -X POST "https://test.hubleto.com/api/server/update-node"

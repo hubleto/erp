@@ -97,6 +97,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
               </a>
 
               <TableWorkflowSteps
+                invalidInputs={this.state.invalidInputs}
                 key={this.state.tablesKey}
                 uid={this.props.uid + "_table_workflow_steps_input"}
                 context="Hello World"

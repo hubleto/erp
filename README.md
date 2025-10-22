@@ -17,7 +17,7 @@ The whole platform consists of several repositories, check them all to get the f
   * [hubleto/react-ui](https://github.com/hubleto/react-ui) - React-based UI using other libraries like primereact but modified and tailored for Hubleto ERP.
   * [hubleto/terminal](https://github.com/hubleto/terminal) - a simple command-line tool for PHP.
 
-```
+```sh
 +------------------------------------------+
 |       ###         ###         ###        | Free community apps (contacts, calendar, leads, deals, orders, ...)
 |       ###         ###         ###        | Download & install in just few minutes

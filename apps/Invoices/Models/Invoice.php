@@ -8,6 +8,7 @@ use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Integer;
 
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Settings\Models\InvoiceProfile;
@@ -22,6 +23,21 @@ use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\Framework\Helper;
 
 class Invoice extends \Hubleto\Erp\Model {
+
+  const TYPE_PROFORMA = 1;
+  const TYPE_ADVANCE = 2;
+  const TYPE_STANDARD = 3;
+  const TYPE_CREDIT_NOTE = 4;
+  const TYPE_DEBIT_NOTE = 5;
+
+  const TYPES = [
+    1 => 'Proforma',
+    2 => 'Advance',
+    3 => 'Standard',
+    4 => 'Credit Note',
+    5 => 'Debit Note',
+  ];
+
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '{%TABLE%}.number';
   public string $recordManagerClass = RecordManagers\Invoice::class;
@@ -50,6 +66,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_profile' => (new Lookup($this, $this->translate('Invoice profile'), InvoiceProfile::class))->setDefaultVisible(),
       'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible(),
+      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES),
       'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible(),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
@@ -298,10 +315,11 @@ class Invoice extends \Hubleto\Erp\Model {
     $vars = $invoice->toArray();
     $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
 
+    /** @var Generator */
     $generator = $this->getService(Generator::class);
     $idDocument = $generator->generatePdfFromTemplate(
       $template->id,
-      'invoice-' . Helper::str2url($invoice->number) . '-' . Helper::str2url($invoice->vs) . '.pdf',
+      'invoice-' . Helper::str2url($invoice->number) . '.pdf',
       $vars
     );
 

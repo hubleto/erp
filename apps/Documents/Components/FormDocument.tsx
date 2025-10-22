@@ -29,6 +29,10 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
     };
   }
 
+  getRecordFormUrl(): string {
+    return 'documents/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+  }
+
   renderTitle(): JSX.Element {
     return <>
       <small>{this.translate("Document")}</small>

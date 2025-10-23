@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "@hubleto/react-ui/ext/HubletoForm";
 import TableInvoiceItems from './TableInvoiceItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
+import { InputFactory } from "@hubleto/react-ui/core/InputFactory";
 import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 import request from '@hubleto/react-ui/core/Request';
 
@@ -34,7 +35,6 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     
     if (this.props.id > 0) {
       tabs.push({ uid: 'default', title: <b>{this.translate('Invoice')}</b> });
-      tabs.push({ uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' });
       tabs.push({ uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' });
     }
     tabs = [...tabs, ...this.getCustomTabs()];
@@ -43,6 +43,13 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
       ...super.getStateFromProps(props),
       tabs: tabs,
     };
+  }
+
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      saveRelations: ['ITEMS'],
+    }
   }
 
   getHeaderButtons()
@@ -79,7 +86,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
       {super.renderTopMenu()}
       {this.state.id <= 0 ? null : <>
         <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+        {this.inputWrapper('id_profile', {wrapperCssClass: 'flex gap-2'})}
       </>}
     </>
   }
@@ -93,67 +100,172 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   }
 
   renderTab(tabUid: string) {
-    const R = this.state.record;
+    let R = this.state.record;
 
     switch (tabUid) {
       case 'default':
         return <>
-          <div className="grid grid-cols-2 gap-1">
-            <div>
-              {this.inputWrapper('id_issued_by')}
-              {this.inputWrapper('id_profile')}
+          <div className='flex w-full bg-gradient-to-b from-slate-100 to-white'>
+            <div className='border-t border-t-4 border-t-slate-600 p-2 grow text-nowrap bg-slate-100 text-slate-800'>
+              <div>
+                <div className='text-sm'>
+                  <b>{globalThis.main.numberFormat(R.total_excl_vat, 2, ',', ' ')} {R.CURRENCY.symbol}</b>
+                  &nbsp;excl. VAT
+                </div>
+              </div>
+              <div className='mt-2'>
+                <div className='text-2xl'>
+                  {globalThis.main.numberFormat(R.total_incl_vat, 2, ',', ' ')} {R.CURRENCY.symbol}
+                </div>
+                <div className='text-sm'>incl. VAT</div>
+              </div>
+            </div>
+            <div className='border-t border-t-4 border-t-blue-600 p-2 grow'>
+              {this.inputWrapper('number', {wrapperCssClass: 'block'})}
+            </div>
+            <div className={'border-t border-t-4 border-t-blue-400 p-2 grow ' + (R.date_delivery ? '' : 'bg-gradient-to-b from-red-50 to-white border-b border-b-red-800')}>
+              {this.inputWrapper('date_delivery', {wrapperCssClass: 'block'})}
+            </div>
+            <div className={'border-t border-t-4 border-t-orange-300 p-2 grow ' + (R.date_issue ? '' : 'bg-gradient-to-b from-red-50 to-white border-b border-b-red-800')}>
+              {this.inputWrapper('date_issue', {wrapperCssClass: 'block'})}
+            </div>
+            <div className={'border-t border-t-4 border-t-green-400 p-2 grow ' + (R.date_due ? '' : 'bg-gradient-to-b from-red-50 to-white border-b border-b-red-800')}>
+              {this.inputWrapper('date_due', {wrapperCssClass: 'block'})}
+            </div>
+            <div className={'border-t border-t-4 border-t-green-600 p-2 grow ' + (R.date_payment ? '' : 'bg-gradient-to-b from-red-50 to-white border-b border-b-red-800')}>
+              {this.inputWrapper('date_payment', {wrapperCssClass: 'block'})}
+            </div>
+          </div>
+          <div className="flex gap-2 mt-2">
+            <div className='flex-1'>
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('type')}
               {this.inputWrapper('id_template')}
               {this.inputWrapper('id_currency')}
               {this.state.id == -1 ? null : <>
-                {this.inputWrapper('number')}
-                {this.inputWrapper('vs')}
-                {this.inputWrapper('cs')}
-                {this.inputWrapper('ss')}
-                {this.inputWrapper('total_excl_vat')}
-                {this.inputWrapper('total_incl_vat')}
+                <div className='flex gap-2'>
+                  <div className='grow'>
+                    {this.inputWrapper('vs')}
+                  </div>
+                  <div className='grow'>
+                    {this.inputWrapper('cs')}
+                  </div>
+                  <div className='grow'>
+                    {this.inputWrapper('ss')}
+                  </div>
+                </div>
+                {this.inputWrapper('notes')}
+                {this.inputWrapper('id_issued_by')}
               </>}
             </div>
-            {this.state.id == -1 ? null : <>
-              <div>
-                {this.inputWrapper('date_issue')}
-                {this.inputWrapper('date_delivery')}
-                {this.inputWrapper('date_due')}
-                {this.inputWrapper('date_payment')}
-                {this.inputWrapper('notes')}
+            <div className='card flex-2'>
+              <div className='card-header'>Items</div>
+              <div className='card-body'>
+                <table className='table-default dense not-striped'>
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Unit price</th>
+                      <th>Amount</th>
+                      <th>Price excl. VAT</th>
+                      <th>Price incl. VAT</th>
+                      <th>VAT</th>
+                      <th>Discount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {R.ITEMS.map((item, key) => {
+                      console.log(item);
+                      return <tr key={key} className={item._toBeDeleted_ ? 'border border-red-400' : ''}>
+                        <td>
+                          {InputFactory({
+                            value: item.item,
+                            cssClass: 'bg-white',
+                            description: { type: 'string' },
+                            onChange: (e) => {
+                              R.ITEMS[key].item = e.state.value;
+                              this.updateRecord(R);
+                            }
+                          })}
+                        </td>
+                        <td>
+                          {InputFactory({
+                            value: item.unit_price,
+                            cssClass: 'bg-white',
+                            description: { type: 'number' },
+                            onChange: (e) => {
+                              R.ITEMS[key].unit_price = e.state.value;
+                              this.updateRecord(R);
+                            }
+                          })}
+                        </td>
+                        <td>
+                          {InputFactory({
+                            value: item.amount,
+                            cssClass: 'bg-white',
+                            description: { type: 'number' },
+                            onChange: (e) => {
+                              R.ITEMS[key].amount = e.state.value;
+                              this.updateRecord(R);
+                            }
+                          })}
+                        </td>
+                        <td>
+                          {InputFactory({
+                            value: item.discount,
+                            cssClass: 'bg-white',
+                            description: { type: 'number', unit: '%' },
+                            onChange: (e) => {
+                              R.ITEMS[key].discount = e.state.value;
+                              this.updateRecord(R);
+                            }
+                          })}
+                        </td>
+                        <td>
+                          {InputFactory({
+                            value: item.vat,
+                            cssClass: 'bg-white',
+                            description: { type: 'number', unit: '%' },
+                            onChange: (e) => {
+                              R.ITEMS[key].vat = e.state.value;
+                              this.updateRecord(R);
+                            }
+                          })}
+                        </td>
+                        <td>
+                          {globalThis.main.numberFormat(item.price_excl_vat, 2, ',', ' ')} {R.CURRENCY.symbol}
+                        </td>
+                        <td>
+                          {globalThis.main.numberFormat(item.price_incl_vat, 2, ',', ' ')} {R.CURRENCY.symbol}
+                        </td>
+                        <td>
+                          <button
+                            className='btn btn-danger'
+                            onClick={() => {
+                              R.ITEMS[key]._toBeDeleted_ = true;
+                              this.updateRecord(R);
+                            }}
+                          >
+                            <span className='icon'><i className='fas fa-trash'></i></span>
+                          </button>
+                        </td>
+                      </tr>;
+                    })}
+                  </tbody>
+                </table>
+                <button
+                  className='btn btn-add mt-2'
+                  onClick={() => {
+                    R.ITEMS.push({id_invoice: this.state.id});
+                    this.updateRecord(R);
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-plus'></i></span>
+                  <span className='text'>Add item</span>
+                </button>
               </div>
-            </>}
-          </div>
-        </>;
-      break;
-
-      case 'items':
-        return <>
-          {this.state.id == -1 ? null : <>
-            {/* <div className="mt-4">
-              <a
-                className='btn btn-large'
-                href={globalThis.main.config['accountUrl'] + '/invoices/print?id=' + this.state.record._idHash_}
-                target="_blank"
-              >
-                <span className='icon'><i className='fas fa-print'></i></span>
-                <span className='text'>{this.translate('Print invoice')}</span>
-              </a>
             </div>
-            <div className="card mt-4">
-              <div className="card-header">
-                {this.translate('Items')}
-              </div>
-              <div className="card-body"> */}
-                <TableInvoiceItems
-                  uid={this.props.uid + '_table_items'}
-                  idInvoice={this.state.record.id}
-                  parentForm={this}
-                ></TableInvoiceItems>
-              {/* </div>
-            </div> */}
-          </>}
+          </div>
         </>;
       break;
 

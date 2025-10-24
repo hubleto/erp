@@ -14,6 +14,7 @@ export interface FormProjectState extends HubletoFormState {
 export default class FormProject<P, S> extends HubletoForm<FormProjectProps, FormProjectState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
+    icon: 'fas fa-diagram-project',
     model: 'Hubleto/App/Community/Projects/Models/Team',
   }
 

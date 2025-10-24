@@ -45,6 +45,7 @@ export interface FormCustomerState extends HubletoFormState {
 export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, FormCustomerState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
+    icon: 'fas fa-address-card',
     model: "Hubleto/App/Community/Customers/Models/Customer"
   };
 

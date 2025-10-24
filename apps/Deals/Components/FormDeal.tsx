@@ -40,6 +40,7 @@ export interface FormDealState extends HubletoFormState {
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
+    icon: 'fas fa-handshake',
     model: 'Hubleto/App/Community/Deals/Models/Deal',
   };
 

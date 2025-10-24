@@ -15,6 +15,7 @@ interface FormInvoiceState extends HubletoFormState {
 export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoiceState> {
   static defaultProps = {
     ...HubletoForm.defaultProps,
+    icon: 'fas fa-file-invoice',
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
     }

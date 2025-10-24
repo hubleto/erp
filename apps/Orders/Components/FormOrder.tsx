@@ -27,6 +27,7 @@ export interface FormOrderState extends HubletoFormState {
 export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrderState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
+    icon: 'fas fa-money-check-dollar',
     model: 'Hubleto/App/Community/Orders/Models/Order',
   };
 

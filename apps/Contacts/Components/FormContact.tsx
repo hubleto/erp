@@ -24,6 +24,7 @@ export interface FormContactState extends HubletoFormState {
 export default class FormContact<P, S> extends HubletoForm<FormContactProps,FormContactState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
+    icon: 'fas fa-user',
     model: 'Hubleto/App/Community/Contacts/Models/Contact',
   };
 

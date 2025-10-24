@@ -8,6 +8,7 @@ export interface FormActivityState extends HubletoFormState {}
 export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
+    icon: 'fas fa-calendar-days',
     model: 'Hubleto/App/Community/Calendar/Models/Activity',
   };
 

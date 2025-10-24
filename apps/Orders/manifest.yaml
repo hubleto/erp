@@ -3,7 +3,7 @@ appType: community
 sidebarGroup: sales
 rootUrlSlug: orders
 name: Orders
-icon: fas fa-file-lines
+icon: fas fa-money-check-dollar
 author:
   name: "Richard Ondrejka"
   nick: "rindo789"

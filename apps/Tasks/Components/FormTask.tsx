@@ -12,6 +12,7 @@ interface FormTaskState extends HubletoFormState {
 export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskState> {
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
+    icon: 'fas fa-list-check',
     model: 'Hubleto/App/Community/Tasks/Models/Task',
   }
 

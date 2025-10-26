@@ -31,7 +31,7 @@ class Template extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
       'body_text' => (new Text($this, $this->translate('Body (Text)'))),
-      'body_html' => (new Text($this, $this->translate('Body (HTML)')))->setReactComponent('InputWysiwyg'),
+      'body_html' => (new Text($this, $this->translate('Body (HTML)')))->setReactComponent('InputTextareaWithHtmlPreview'),
     ]);
   }
 }

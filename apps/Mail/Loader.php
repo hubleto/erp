@@ -20,14 +20,21 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^mail\/?(?<idMailbox>\d+)?\/?$/' => Controllers\Home::class,
+
       '/^mail\/accounts\/?(?<idAccount>\d+)?\/?$/' => Controllers\Accounts::class,
+      '/^mail\/accounts\/add\/?$/' => ['controller' => Controllers\Accounts::class, 'vars' => ['recordId' => -1]],
+
       '/^mail\/accounts\/scheduled\/?$/' => Controllers\Scheduled::class,
       '/^mail\/accounts\/sent\/?$/' => Controllers\Sent::class,
       '/^mail\/get\/?$/' => Controllers\Get::class,
       '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
       '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
+      '/^mail\/mails\/add\/?$/' => ['controller' => Controllers\Mails::class, 'vars' => ['recordId' => -1]],
       // '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
+
       '/^mail\/templates\/?(?<recordId>\d+)?\/?$/' => Controllers\Templates::class,
+      '/^mail\/templates\/add\/?$/' => ['controller' => Controllers\Templates::class, 'vars' => ['recordId' => -1]],
+
       '/^mail\/api\/mark-as-read\/?$/' => Controllers\Api\MarkAsRead::class,
       '/^mail\/api\/mark-as-unread\/?$/' => Controllers\Api\MarkAsUnread::class,
     ]);

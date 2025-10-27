@@ -74,6 +74,15 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
     </>
   }
 
+  addTodo(value: string, R: any) {
+    if (value.trim() != '') {
+      let newR = R;
+      newR.TODO.push({ id_task: R.id, todo: value });
+      this.refInputNewTodo.current.value = '';
+      this.updateRecord(newR);
+    }
+  }
+
   renderTab(tabUid: string) {
     const R = this.state.record;
 
@@ -127,7 +136,12 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
             {this.state.id <= 0 ? null :
               <div className='flex-1'>
                 <div className='card card-info'>
-                  <div className='card-header'>Todo</div>
+                  <div className='card-header'>
+                    <div className="flex w-full justify-between">
+                      <div>Todo</div>
+                      <div className="text-sm">{this.translate("Press ENTER to add new Todo")}</div>
+                    </div>
+                  </div>
                   <div className='card-body btn-list'>
                     {R.TODO && R.TODO.map((item, key) => {
                       const refInputTodo = React.createRef();
@@ -163,7 +177,11 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                             className='btn btn-danger'
                             onClick={(e) => {
                               let newR = R;
-                              newR.TODO[key]._toBeDeleted_ = true;
+                              if (newR.TODO[key].id == undefined) {
+                                newR.TODO = newR.TODO.filter((todoItem: any, todoKey: number) => todoKey !== key);
+                              } else {
+                                newR.TODO[key]._toBeDeleted_ = !newR.TODO[key]._toBeDeleted_;
+                              }
                               this.updateRecord(newR);
                             }}
                           ><span className='icon'><i className='fas fa-times'></i></span></button>
@@ -179,20 +197,22 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                           onChange={(e) => {
                             this.setState({newTodo: this.refInputNewTodo.current.value});
                           }}
-                          onBlur={(e) => {
-                            console.log(this.state.newTodo);
-                            if (this.state.newTodo != '') {
-                              let newR = R;
-                              newR.TODO.push({ id_task: R.id, todo: this.state.newTodo });
-                              this.refInputNewTodo.current.value = '';
-                              this.updateRecord(newR);
-                            }
+                          onKeyDown={(e) => {
+                            if (e.key !== 'Enter' || e.shiftKey || e.ctrlKey) return;
+                            e.preventDefault();
+                            this.addTodo(this.state.newTodo, R);
+                            this.setState({newTodo: ""});
                           }}
                         ></textarea>
                       </div>
                       <div>
                         <button
                           className='btn btn-success'
+                          onClick={(e) => {
+                            e.preventDefault();
+                            this.addTodo(this.state.newTodo, R);
+                            this.setState({newTodo: ""});
+                          }}
                         ><span className='icon'><i className='fas fa-check'></i></span></button>
                       </div>
                     </div>

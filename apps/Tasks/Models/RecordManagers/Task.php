@@ -5,6 +5,8 @@ namespace Hubleto\App\Community\Tasks\Models\RecordManagers;
 
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
+use Hubleto\App\Community\Projects\Models\RecordManagers\Project;
+use Hubleto\App\Community\Projects\Models\RecordManagers\ProjectTask;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -60,11 +62,12 @@ class Task extends \Hubleto\Erp\RecordManager
   //   return $this->hasMany(DealTask::class, 'id_task', 'id');
   // }
 
-  // /** @return HasMany<DealProduct, covariant Deal> */
-  // public function PROJECTS(): HasMany
-  // {
-  //   return $this->hasMany(ProjectTask::class, 'id_task', 'id');
-  // }
+   /** @return \Illuminate\Database\Eloquent\Relations\HasManyThrough */
+   public function PROJECTS(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+   {
+     // todo: verify, if the app is installed
+     return $this->hasManyThrough(Project::class, ProjectTask::class, 'id_task', 'id', 'id', 'id_project');
+   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
@@ -77,7 +80,7 @@ class Task extends \Hubleto\Erp\RecordManager
     $view = $hubleto->router()->urlParamAsString('view');
     if ($view == 'briefOverview') $query = $query->where($this->table . '.is_closed', false);
 
-    $query = $query->with('TODO');
+    $query = $query->with('TODO')->with('PROJECTS');
 
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,

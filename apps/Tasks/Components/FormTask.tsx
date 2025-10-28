@@ -104,12 +104,12 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                 : null}
                 {R.PROJECTS && R.PROJECTS.length > 0 ?
                   <FormInput title={"Projects"}>{R.PROJECTS.map((item, key) => {
-                    return (item.PROJECT ? <a
+                    return (item ? <a
                       key={key}
                       className='badge'
-                      href={globalThis.main.config.projectUrl + '/projects/' + item.PROJECT.id}
+                      href={globalThis.main.config.projectUrl + '/projects/' + item.id}
                       target='_blank'
-                    >{item.PROJECT.identifier}</a> : '#');
+                    >{item.identifier}</a> : '#');
                   })}</FormInput>
                 : null}
               </div>

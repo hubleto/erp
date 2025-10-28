@@ -58,7 +58,9 @@ class Loader extends \Hubleto\Framework\App
 
     /** @var \Hubleto\App\Community\Reports\Loader $reportsApp */
     $reportsApp = $this->appManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
-    $reportsApp->reportManager->addReport($this, Reports\MonthlyRevenue::class);
+    if ($reportsApp != null) {
+      $reportsApp->reportManager->addReport($this, Reports\MonthlyRevenue::class);
+    }
 
     /** @var \Hubleto\App\Community\Dashboards\Manager $dashboardManager */
     $dashboardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);

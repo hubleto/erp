@@ -335,8 +335,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan("\n");
 
     if (sizeof($errors) > 0) {
-      $this->terminal()->red("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
-      $this->terminal()->red(join("\n", $errors));
+      $this->terminal()->error("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
+      $this->terminal()->error(join("\n", $errors));
       $this->terminal()->white("\n");
       throw new \ErrorException("Some fields contain incorrect values: " . join(" ", $errorColumns) . "\n");
     }

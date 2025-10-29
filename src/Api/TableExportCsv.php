@@ -21,6 +21,7 @@ class TableExportCsv extends \Hubleto\Erp\Controller
       0, // page
     );
 
+    $separator = $this->router()->urlParamAsString('separator', ',');
     $data = $records['data'] ?? [];
 
     $csvContent = "";
@@ -30,7 +31,7 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     foreach ($columns as $columnName => $column) {
       $cols[] = $column->getTitle();
     }
-    $csvContent .= join(",", $cols) . "\n";
+    $csvContent .= join($separator, $cols) . "\n";
 
     foreach ($data as $row) {
       $cols = [];
@@ -53,7 +54,7 @@ class TableExportCsv extends \Hubleto\Erp\Controller
 
         $cols[] = '"' . str_replace('"', '\\"', $valueStr) . '"';
       }
-      $csvContent .= join(",", $cols) . "\n";
+      $csvContent .= join($separator, $cols) . "\n";
     }
 
     header('Content-Type: application/csv');

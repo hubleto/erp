@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Tasks\Models;
 
 
+use Hubleto\App\Community\Deals\Models\DealTask;
 use Hubleto\App\Community\Projects\Models\ProjectTask;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
@@ -38,8 +39,8 @@ class Task extends \Hubleto\Erp\Model
     'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id_customer', 'id' ],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id_contact', 'id' ],
     'TODO' => [ self::HAS_MANY, Todo::class, 'id_task', 'id' ],
-    // 'DEALS' => [ self::HAS_MANY, DealTask::class, 'id_task', 'id' ],
-     'PROJECTS' => [ self::HAS_MANY_THROUGH, ProjectTask::class, 'id_task', 'id' ],
+    'DEALS' => [ self::HAS_MANY_THROUGH, DealTask::class, 'id_task', 'id' ],
+    'PROJECTS' => [ self::HAS_MANY_THROUGH, ProjectTask::class, 'id_task', 'id' ],
   ];
 
   /**

@@ -92,14 +92,24 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
           <div className='w-full flex gap-2 flex-col md:flex-row'>
             <div className='flex-1 border-r border-gray-100'>
               <div className='flex gap-2'>
-                {R.DEALS && R.DEALS.length > 0 ?
-                  <FormInput title={"Projects"}>{R.DEALS.map((item, key) => {
-                    return (item.DEAL ? <a
+                {R.ORDERS && R.ORDERS.length > 0 ?
+                  <FormInput title={"Orders"}>{R.ORDERS.map((item, key) => {
+                    return (item ? <a
                       key={key}
                       className='badge'
-                      href={globalThis.main.config.projectUrl + '/deals/' + item.DEAL.id}
+                      href={globalThis.main.config.projectUrl + '/orders/' + item.id}
                       target='_blank'
-                    >{item.DEAL.identifier}</a> : '#');
+                    >{item.identifier}</a> : '#');
+                  })}</FormInput>
+                  : null}
+                {R.DEALS && R.DEALS.length > 0 ?
+                  <FormInput title={"Deals"}>{R.DEALS.map((item, key) => {
+                    return (item ? <a
+                      key={key}
+                      className='badge'
+                      href={globalThis.main.config.projectUrl + '/deals/' + item.id}
+                      target='_blank'
+                    >{item.identifier}</a> : '#');
                   })}</FormInput>
                 : null}
                 {R.PROJECTS && R.PROJECTS.length > 0 ?

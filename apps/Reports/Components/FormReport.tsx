@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
-import { Field, QueryBuilder, RuleGroupType, formatQuery, defaultOperators } from 'react-querybuilder';
+import { QueryBuilder, RuleGroupType, defaultOperators } from 'react-querybuilder';
+import formatQuery from 'react-querybuilder/formatQuery';
+import parseJsonLogic from 'react-querybuilder/parseJsonLogic';
 
 import 'react-querybuilder/dist/query-builder.css';
+
 import { parseJsonLogic } from "react-querybuilder/parseJsonLogic"
 
 interface FormReportProps extends HubletoFormProps { }

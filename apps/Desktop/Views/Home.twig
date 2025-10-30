@@ -6,7 +6,7 @@
 {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Usage') %}
   {% set recentlyUsed = hubleto.getService('Hubleto\\App\\Community\\Usage\\Logger').getRecentlyUsedAppNamespaces() %}
   {% if recentlyUsed|length > 0 %}
-    <div class="mb-2">
+    <div class="mb-2 dark:text-gray-200">
       <div><small>Recently used apps</small></div>
       <div>
         {% for appNamespace in recentlyUsed %}

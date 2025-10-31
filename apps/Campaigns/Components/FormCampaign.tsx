@@ -5,9 +5,11 @@ import TableRecipients from '@hubleto/apps/Campaigns/Components/TableRecipients'
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import WorkflowSelector, { updateFormWorkflowByTag } from '@hubleto/apps/Workflow/Components/WorkflowSelector';
 import request from '@hubleto/react-ui/core/Request';
+import InputJsonKeyValue from "@hubleto/react-ui/core/Inputs/JsonKeyValue";
 
 export interface FormCampaignProps extends HubletoFormProps {}
 export interface FormCampaignState extends HubletoFormState {
+  testEmailVariables?: any,
   testEmailSendResult?: any,
   launchResult?: any,
   campaignWarnings?: any,
@@ -193,9 +195,15 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 className="ml-2"
                 type="text"
                 placeholder="Recipient email"
-                value={globalThis.main.userEmail ?? ''}
               />
               <br/>
+              Test email variables:
+              <InputJsonKeyValue uid="test-email-variables"
+                onChange={(input: any, value: any) => {
+                  input.setState({value: value});
+                  this.setState({testEmailVariables: value});
+                }}
+              ></InputJsonKeyValue>
               <button
                 className="btn btn-transparent mt-2"
                 onClick={() => {
@@ -204,6 +212,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                     {
                       idCampaign: this.state.record.id,
                       to: this.refTestEmailRecipientInput.current.value,
+                      variables: this.state.testEmailVariables,
                     },
                     {},
                     (result: any) => {

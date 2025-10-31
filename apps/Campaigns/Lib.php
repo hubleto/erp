@@ -29,11 +29,18 @@ class Lib extends \Hubleto\Framework\Core
       (string) ($campaign['utm_content'] ?? ''),
     );
 
-    $bodyHtml = Lib::replaceVariables($bodyHtml, [
+    $emailVariables = [
       'RECIPIENT:salutation' => $recipient['salutation'] ?? '',
       'RECIPIENT:first_name' => $recipient['first_name'] ?? '',
       'RECIPIENT:last_name' => $recipient['last_name'] ?? '',
-    ]);
+    ];
+
+    $recipientVariables = @json_decode($recipient['variables'], true);
+    if (is_array($recipientVariables)) {
+      $emailVariables = array_merge($emailVariables, $recipientVariables);
+    }
+
+    $bodyHtml = Lib::replaceVariables($bodyHtml, $emailVariables);
 
     $bodyHtml = Lib::routeLinksThroughCampaignTracker(
       $campaign,

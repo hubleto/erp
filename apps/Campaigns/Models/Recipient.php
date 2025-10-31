@@ -4,6 +4,7 @@ namespace Hubleto\App\Community\Campaigns\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Json;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Mail\Models\Mail;
 
@@ -27,6 +28,7 @@ class Recipient extends \Hubleto\Erp\Model
       'first_name' => (new Varchar($this, $this->translate('First name')))->setDefaultVisible(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),
       'salutation' => (new Varchar($this, $this->translate('Salutation')))->setDefaultVisible(),
+      'variables' => (new Json($this, $this->translate('Variables')))->setDefaultVisible()->setReactComponent('InputJsonKeyValue'),
       'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class))->setReadonly()->setDefaultVisible(),
     ]);
   }
@@ -38,7 +40,7 @@ class Recipient extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'moreActionsButton']);
     $description->hide(['footer']);
     $view = $this->router()->urlParamAsString('view');
-    if ($view == 'briefOverview') $description->showOnlyColumns(['email', 'first_name', 'last_name', 'salutation']);
+    if ($view == 'briefOverview') $description->showOnlyColumns(['email', 'first_name', 'last_name', 'salutation', 'variables']);
 
     return $description;
   }

@@ -14,6 +14,7 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
   {
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $to = $this->router()->urlParamAsString('to');
+    $variables = $this->router()->urlParamAsString('variables');
 
     if (empty($to)) throw new \Exception("Recipient must be provided.");
     if (!filter_var($to, FILTER_VALIDATE_EMAIL)) throw new \Exception("Recipient is not valid email address.");
@@ -38,6 +39,7 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
       $bodyHtml = Lib::getMailPreview($campaign->toArray(), [
         'first_name' => $user['first_name'],
         'last_name' => $user['last_name'],
+        'variables' => $variables,
       ]);
 
       $mMail->createAndSend([

@@ -19,7 +19,7 @@ class Loader extends \Hubleto\Framework\App
       '/^campaigns\/api\/save-recipients-from-contacts\/?$/' => Controllers\Api\SaveRecipientsFromContacts::class,
       '/^campaigns\/api\/get-mail-preview-info\/?$/' => Controllers\Api\GetMailPreviewInfo::class,
       '/^campaigns\/api\/get-campaign-warnings\/?$/' => Controllers\Api\GetCampaignWarnings::class,
-      '/^campaigns\/api\/send-test-email-to-me\/?$/' => Controllers\Api\SendTestEmailToMe::class,
+      '/^campaigns\/api\/send-test-email\/?$/' => Controllers\Api\SendTestEmail::class,
       '/^campaigns\/api\/launch\/?$/' => Controllers\Api\Launch::class,
       '/^campaigns(\/(?<recordId>\d+))?\/?$/' => Controllers\Campaigns::class,
       '/^campaigns\/add?\/?$/' => ['controller' => Controllers\Campaigns::class, 'vars' => [ 'recordId' => -1 ]],

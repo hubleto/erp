@@ -28,9 +28,12 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
 
   parentApp: string = 'Hubleto/App/Community/Campaigns';
 
+  refTestEmailRecipientInput: any;
+
   constructor(props: FormCampaignProps) {
     super(props);
     this.state = this.getStateFromProps(props);
+    this.refTestEmailRecipientInput = React.createRef();
   }
 
   getStateFromProps(props: FormCampaignProps) {
@@ -179,16 +182,29 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       break;
 
       case 'launch':
+        console.log(globalThis.main, globalThis.main.userEmail);
         return <div className='grid gap-2'>
           <div className='card'>
             <div className='card-header'>Test</div>
             <div className='card-body'>
+              Test email recipient:
+              <input
+                ref={this.refTestEmailRecipientInput}
+                className="ml-2"
+                type="text"
+                placeholder="Recipient email"
+                value={globalThis.main.userEmail ?? ''}
+              />
+              <br/>
               <button
-                className="btn btn-transparent"
+                className="btn btn-transparent mt-2"
                 onClick={() => {
                   request.post(
-                    'campaigns/api/send-test-email-to-me',
-                    { idCampaign: this.state.record.id },
+                    'campaigns/api/send-test-email',
+                    {
+                      idCampaign: this.state.record.id,
+                      to: this.refTestEmailRecipientInput.current.value,
+                    },
                     {},
                     (result: any) => {
                       this.setState({testEmailSendResult: result})
@@ -197,7 +213,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 }}
               >
                 <span className="icon"><i className="fas fa-envelope"></i></span>
-                <span className="text">Send test email to me</span>
+                <span className="text">Send test email</span>
               </button>
               {this.state.testEmailSendResult && this.state.testEmailSendResult.status == 'success' ?
                 <div className='alert alert-success mt-2'>Test email was sent to you.</div>

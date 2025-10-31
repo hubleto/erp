@@ -55,6 +55,7 @@
       'projectUrl': '{{ config.projectUrl }}',
       'uploadUrl': '{{ config.uploadUrl }}',
       'idUser': {{ user.id ?? 0 }},
+      'userEmail': '{{ user.email ?? '' }}',
       'isPremium': {% if isPremium %} true {% else %} false {% endif %},
       'language': '{{ user.language ?: "en" }}'
     }

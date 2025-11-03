@@ -43,8 +43,9 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
-        { uid: 'contacts', title: this.translate('Add recipients from contacts') },
+        { uid: 'contacts', title: this.translate('Contacts') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
+        { uid: 'test', title: this.translate('Test') },
         { uid: 'launch', title: this.translate('Launch') },
         ...this.getCustomTabs()
       ]
@@ -143,31 +144,36 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       break
 
       case 'contacts':
-        return <TableContacts
-          tag={"table_campaign_contact"}
-          parentForm={this}
-          uid={this.props.uid + "_table_campaign_contact"}
-          selectionMode='multiple'
-          readonly={true}
-          descriptionSource='both'
-          //@ts-ignore
-          description={{ui: {showHeader: false}}}
-          idCustomer={0}
-          selection={R.RECIPIENTS.map((item) => { return { id: item.id_contact } })}
-          onSelectionChange={(table: any) => {
-            request.post(
-              'campaigns/api/save-recipients-from-contacts',
-              {
-                idCampaign: this.state.record.id,
-                contactIds: table.state.selection.map((item) => item.id)
-              },
-              {},
-              (result: any) => {
-                this.setState({record: {...R, RECIPIENTS: result}});
-              }
-            );
-          }}
-        />;
+        return <div>
+          <div>
+            Select contacts which will be added as recipients
+          </div>
+          <TableContacts
+            tag={"table_campaign_contact"}
+            parentForm={this}
+            uid={this.props.uid + "_table_campaign_contact"}
+            selectionMode='multiple'
+            readonly={true}
+            descriptionSource='both'
+            //@ts-ignore
+            description={{ui: {showHeader: false}}}
+            idCustomer={0}
+            selection={R.RECIPIENTS.map((item) => { return { id: item.id_contact } })}
+            onSelectionChange={(table: any) => {
+              request.post(
+                'campaigns/api/save-recipients-from-contacts',
+                {
+                  idCampaign: this.state.record.id,
+                  contactIds: table.state.selection.map((item) => item.id)
+                },
+                {},
+                (result: any) => {
+                  this.setState({record: {...R, RECIPIENTS: result}});
+                }
+              );
+            }}
+          />
+        </div>;
       break;
 
       case 'tasks':
@@ -183,131 +189,123 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
         />;
       break;
 
-      case 'launch':
-        console.log(globalThis.main, globalThis.main.userEmail);
-        return <div className='grid gap-2'>
-          <div className='card'>
-            <div className='card-header'>Test</div>
-            <div className='card-body'>
-              Test email recipient:
-              <input
-                ref={this.refTestEmailRecipientInput}
-                className="ml-2"
-                type="text"
-                placeholder="Recipient email"
-              />
+      case 'test':
+        return <>
+          Test email recipient:
+          <input
+            ref={this.refTestEmailRecipientInput}
+            className="ml-2"
+            type="text"
+            placeholder="Recipient email"
+          />
+          <br/>
+          Test email variables:
+          <InputJsonKeyValue uid="test-email-variables"
+            onChange={(input: any, value: any) => {
+              input.setState({value: value});
+              this.setState({testEmailVariables: value});
+            }}
+          ></InputJsonKeyValue>
+          <button
+            className="btn btn-transparent mt-2"
+            onClick={() => {
+              request.post(
+                'campaigns/api/send-test-email',
+                {
+                  idCampaign: this.state.record.id,
+                  to: this.refTestEmailRecipientInput.current.value,
+                  variables: this.state.testEmailVariables,
+                },
+                {},
+                (result: any) => {
+                  this.setState({testEmailSendResult: result})
+                }
+              );
+            }}
+          >
+            <span className="icon"><i className="fas fa-envelope"></i></span>
+            <span className="text">Send test email</span>
+          </button>
+          {this.state.testEmailSendResult && this.state.testEmailSendResult.status == 'success' ?
+            <div className='alert alert-success mt-2'>Test email was sent to you.</div>
+          : null}
+          {this.state.testEmailSendResult && this.state.testEmailSendResult.status != 'success' ?
+            <div className='alert alert-danger mt-2'>
+              Error occured when sending a test email to you.
               <br/>
-              Test email variables:
-              <InputJsonKeyValue uid="test-email-variables"
-                onChange={(input: any, value: any) => {
-                  input.setState({value: value});
-                  this.setState({testEmailVariables: value});
-                }}
-              ></InputJsonKeyValue>
-              <button
-                className="btn btn-transparent mt-2"
-                onClick={() => {
-                  request.post(
-                    'campaigns/api/send-test-email',
-                    {
-                      idCampaign: this.state.record.id,
-                      to: this.refTestEmailRecipientInput.current.value,
-                      variables: this.state.testEmailVariables,
-                    },
-                    {},
-                    (result: any) => {
-                      this.setState({testEmailSendResult: result})
-                    }
-                  );
-                }}
-              >
-                <span className="icon"><i className="fas fa-envelope"></i></span>
-                <span className="text">Send test email</span>
-              </button>
-              {this.state.testEmailSendResult && this.state.testEmailSendResult.status == 'success' ?
-                <div className='alert alert-success mt-2'>Test email was sent to you.</div>
-              : null}
-              {this.state.testEmailSendResult && this.state.testEmailSendResult.status != 'success' ?
-                <div className='alert alert-danger mt-2'>
-                  Error occured when sending a test email to you.
-                  <br/>
-                  <b>{this.state.testEmailSendResult.message}</b>
-                </div>
-              : null}
+              <b>{this.state.testEmailSendResult.message}</b>
             </div>
-          </div>
+          : null}
+        </>;
+      break;
 
-          <div className='card'>
-            <div className='card-header'>Launch</div>
-            <div className='card-body'>
-
-              {this.state.campaignWarnings ? <>
-                {this.state.campaignWarnings.recentlyContacted
-                  && this.state.campaignWarnings.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
-                  <b>Recently contacted</b>
-                  {this.state.campaignWarnings.recentlyContacted.map((item, key) => {
-                    return <div key={key}>
-                      <code>
-                        {item.CONTACT.first_name}&nbsp;{item.CONTACT.last_name}
-                        &nbsp;
-                        {item.CONTACT.VALUES ? item.CONTACT.VALUES.map((vItem, vKey) => {
-                          if (vItem.type == 'email') {
-                            return <span key={vKey}>{vItem.value}</span>;
-                          } else {
-                            return null;
-                          }
-                        }) : null}
-                      </code> in
-                      campaign <a
-                        href={globalThis.main.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
-                        target='_blank'
-                      >{item.CAMPAIGN.name}</a>.
-                    </div>;
-                  })}
-                </div> : null}
-              </> : null }
-
-              {this.state.recipients ? <>
-                <button
-                  className="btn btn-transparent"
-                  onClick={() => {
-                    request.post(
-                      'campaigns/api/launch',
-                      { idCampaign: this.state.record.id },
-                      {},
-                      (result: any) => {
-                        this.setState({launchResult: result});
-                        if (result.status && result.status == 'success') {
-                          updateFormWorkflowByTag(this, 'campaign-launched', () => {
-                            this.saveRecord();
-                          });
-                        }
+      case 'launch':
+        return <>
+          {this.state.campaignWarnings ? <>
+            {this.state.campaignWarnings.recentlyContacted
+              && this.state.campaignWarnings.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
+              <b>Recently contacted</b>
+              {this.state.campaignWarnings.recentlyContacted.map((item, key) => {
+                return <div key={key}>
+                  <code>
+                    {item.CONTACT.first_name}&nbsp;{item.CONTACT.last_name}
+                    &nbsp;
+                    {item.CONTACT.VALUES ? item.CONTACT.VALUES.map((vItem, vKey) => {
+                      if (vItem.type == 'email') {
+                        return <span key={vKey}>{vItem.value}</span>;
+                      } else {
+                        return null;
                       }
-                    );
-                  }}
-                >
-                  <span className="icon"><i className="fas fa-envelope"></i></span>
-                  <span className="text">Send email to {this.state.recipients.length} recipients now!</span>
-                </button>
-                {this.state.launchResult && this.state.launchResult.status == 'success' ?
-                  <div className='alert alert-success mt-2'>Campaign was launched.</div>
-                : null}
-                {this.state.launchResult && this.state.launchResult.status != 'success' ?
-                  <div className='alert alert-danger mt-2'>
-                    Error occured when launching the campaign.<br/>
-                    <b>{this.state.launchResult.message}</b>
-                  </div>
-                : null}
+                    }) : null}
+                  </code> in
+                  campaign <a
+                    href={globalThis.main.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
+                    target='_blank'
+                  >{item.CAMPAIGN.name}</a>.
+                </div>;
+              })}
+            </div> : null}
+          </> : null }
 
-                <div className='flex flex-wrap mt-2 text-sm gap-2'>
-                  {this.state.recipients ? this.state.recipients.map((item, key) => {
-                    return <span key={key}>{item.email}</span>;
-                  }) : null}
-                </div>
-              </> : null}
+          {this.state.recipients ? <>
+            <button
+              className="btn btn-transparent"
+              onClick={() => {
+                request.post(
+                  'campaigns/api/launch',
+                  { idCampaign: this.state.record.id },
+                  {},
+                  (result: any) => {
+                    this.setState({launchResult: result});
+                    if (result.status && result.status == 'success') {
+                      updateFormWorkflowByTag(this, 'campaign-launched', () => {
+                        this.saveRecord();
+                      });
+                    }
+                  }
+                );
+              }}
+            >
+              <span className="icon"><i className="fas fa-envelope"></i></span>
+              <span className="text">Send email to {this.state.recipients.length} recipients now!</span>
+            </button>
+            {this.state.launchResult && this.state.launchResult.status == 'success' ?
+              <div className='alert alert-success mt-2'>Campaign was launched.</div>
+            : null}
+            {this.state.launchResult && this.state.launchResult.status != 'success' ?
+              <div className='alert alert-danger mt-2'>
+                Error occured when launching the campaign.<br/>
+                <b>{this.state.launchResult.message}</b>
+              </div>
+            : null}
+
+            <div className='flex flex-wrap mt-2 text-sm gap-2'>
+              {this.state.recipients ? this.state.recipients.map((item, key) => {
+                return <span key={key}>{item.email}</span>;
+              }) : null}
             </div>
-          </div>
-        </div>;
+          </> : null}
+        </>;
       break;
 
       default:

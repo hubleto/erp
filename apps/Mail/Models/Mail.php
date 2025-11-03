@@ -130,7 +130,7 @@ class Mail extends \Hubleto\Erp\Model
     if (!empty($mail['datetime_scheduled_to_send']) && $mail['datetime_scheduled_to_send'] > date('Y-m-d H:i:s')) throw new \Exception('Email is scheduled to be sent later.');
     if (empty($mail['subject'])) throw new \Exception('Email has not subject.');
     if (!filter_var($mail['to'], FILTER_VALIDATE_EMAIL)) throw new \Exception('Email does not have a valid recipient address.');
-    if (empty($mail['ACCOUNT'])) throw new \Exception('Email has no account information.');
+    if (empty($mail['ACCOUNT'])) throw new \Exception('No SMTP email account configured.');
     if (
       empty($mail['ACCOUNT']['smtp_host'])
       || empty($mail['ACCOUNT']['smtp_port'])

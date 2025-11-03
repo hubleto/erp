@@ -37,7 +37,7 @@ class Recipient extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = 'Add recipient';
-    $description->show(['header', 'fulltextSearch', 'moreActionsButton']);
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
     $view = $this->router()->urlParamAsString('view');
     if ($view == 'briefOverview') $description->showOnlyColumns(['email', 'first_name', 'last_name', 'salutation', 'variables']);

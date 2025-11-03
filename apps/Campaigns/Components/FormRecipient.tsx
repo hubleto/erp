@@ -81,20 +81,16 @@ export default class FormRecipient<P, S> extends HubletoForm<FormRecipientProps,
               {this.inputWrapper('id_mail')}
             </div>
             <div className='flex-1'>
-              <div className='flex-2'>
-                <div className='card card-info'>
-                  <div className='card-header'>Mail preview</div>
-                  <div className='card-body'>
-                    {mailPreviewInfo && mailPreviewInfo.bodyHtml != '' ? <>
-                      <div className='mt-2'><b>Preview</b></div>
-                      <div
-                        className='text-blue-800 max-h-72'
-                        dangerouslySetInnerHTML={{__html: mailPreviewInfo.bodyHtml}}
-                      ></div>
-                    </> : <div>
-                      No mail preview available.
-                    </div>}
-                  </div>
+              <div className='card'>
+                <div className='card-header'>Mail preview</div>
+                <div className='card-body'>
+                  {mailPreviewInfo && mailPreviewInfo.bodyHtml != '' ? <>
+                    <div
+                      dangerouslySetInnerHTML={{__html: mailPreviewInfo.bodyHtml}}
+                    ></div>
+                  </> : <div>
+                    No mail preview available.
+                  </div>}
                 </div>
               </div>
             </div>

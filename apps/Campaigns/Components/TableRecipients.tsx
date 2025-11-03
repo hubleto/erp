@@ -34,7 +34,7 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
   getFormModalProps() {
     return {
       ...super.getFormModalProps(),
-      type: 'centered theme-secondary',
+      type: 'right wide',
     };
   }
 

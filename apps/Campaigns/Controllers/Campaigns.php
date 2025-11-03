@@ -7,7 +7,7 @@ class Campaigns extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'campaigns', 'content' => $this->translate('Campaigns') ],
+      // [ 'url' => 'campaigns', 'content' => $this->translate('Campaigns') ],
     ]);
   }
 

@@ -9,8 +9,7 @@ class Templates extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'mail', 'content' => $this->translate('Mail') ],
-      [ 'url' => 'templates', 'content' => $this->translate('Templates') ],
+      [ 'url' => 'mail/templates', 'content' => $this->translate('Templates') ],
     ]);
   }
 

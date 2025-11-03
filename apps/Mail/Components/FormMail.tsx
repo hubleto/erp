@@ -72,6 +72,7 @@ export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailSt
           {this.inputWrapper('to')}
           {this.inputWrapper('cc')}
           {this.inputWrapper('bcc')}
+          {this.inputWrapper('reply_to')}
           {this.inputWrapper('subject')}
           {this.inputWrapper('body_html')}
         </div>

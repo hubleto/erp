@@ -61,6 +61,7 @@ class Campaign extends \Hubleto\Erp\Model
       'id_mail_template' => (new Lookup($this, $this->translate('Mail template'), Template::class))
         ->setDefaultVisible()
       ,
+      'reply_to' => (new Varchar($this, $this->translate('Reply to'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),

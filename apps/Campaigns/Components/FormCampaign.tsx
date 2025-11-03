@@ -108,6 +108,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               {this.inputWrapper('notes')}
               {this.inputWrapper('id_mail_account')}
               {this.inputWrapper('id_mail_template')}
+              {this.inputWrapper('reply_to')}
               {this.inputWrapper('is_approved')}
               {/* {this.inputWrapper('mail_body')} */}
             </div>

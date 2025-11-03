@@ -48,6 +48,7 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
         'id_account' => $campaign->id_mail_account,
         'from' => $campaign->MAIL_ACCOUNT->sender_email ?? '',
         'to' => $to,
+        'reply_to' => $campaign->reply_to ?? '',
         'datetime_created' => date('Y-m-d H:i:s'),
       ]);
 

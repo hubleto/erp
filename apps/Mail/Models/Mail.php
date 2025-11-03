@@ -50,6 +50,7 @@ class Mail extends \Hubleto\Erp\Model
       'to' => (new Varchar($this, $this->translate('To'))),
       'cc' => (new Varchar($this, $this->translate('Cc'))),
       'bcc' => (new Varchar($this, $this->translate('Bcc'))),
+      'reply_to' => (new Varchar($this, $this->translate('Reply to')))->setReadonly()->setDefaultValue($user['email'] ?? ''),
       'body_text' => (new Text($this, $this->translate('Body (Text)'))),
       'body_html' => (new Text($this, $this->translate('Body (HTML)')))->setReactComponent('InputWysiwyg'),
       'color' => (new Color($this, $this->translate('Color'))),
@@ -180,6 +181,10 @@ class Mail extends \Hubleto\Erp\Model
       );
 
       $mailer->addAddress($mail['to']);
+
+      if (!empty($mail['reply_to'])) {
+        $mailer->addReplyTo($mail['reply_to']);
+      }
 
       $mailer->isHTML(true);
       $mailer->Subject = $mail['subject'];

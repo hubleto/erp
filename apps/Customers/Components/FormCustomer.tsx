@@ -53,6 +53,9 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
   state: FormCustomerState;
 
   refLogActivityInput: any;
+  refDocumentModal: any;
+  refActivityModal: any;
+
 
   translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
   translationContextInner: string = 'Components\\FormCustomer';
@@ -61,6 +64,8 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     super(props);
 
     this.refLogActivityInput = React.createRef();
+    this.refDocumentModal = React.createRef();
+    this.refActivityModal = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -133,47 +138,16 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
     );
   }
 
-  // renderNewContactForm(R: any): JSX.Element {
-  //   return (
-  //     <ModalForm
-  //       uid='contact_form'
-  //       isOpen={true}
-  //       type='right wide'
-  //     >
-  //       <FormContact
-  //         id={-1}
-  //         creatingNew={true}
-  //         isInlineEditing={true}
-  //         descriptionSource="both"
-  //         tableValuesDescription={this.state.tableValuesDescription}
-  //         description={{
-  //           defaultValues: {
-  //             id_customer: R.id
-  //           }
-  //         }}
-  //         showInModal={true}
-  //         showInModalSimple={true}
-  //         onClose={() => { this.setState({ createNewContact: false } as FormCustomerState); }}
-  //         onSaveCallback={(form: FormContact<FormContactProps, FormContactState>, saveResponse: any) => {
-  //           if (saveResponse.status = "success") {
-  //             this.setState({createNewContact: false} as FormCustomerState)
-  //             this.loadRecord()
-  //           }
-  //         }}
-  //       >
-  //       </FormContact>
-  //     </ModalForm>
-  //   )
-  // }
-
   renderActivityForm(R: any): JSX.Element {
     return (
       <ModalForm
+        ref={this.refActivityModal}
         uid='activity_form'
         isOpen={true}
         type='right theme-secondary'
       >
         <CustomerFormActivity
+          modal={this.refActivityModal}
           id={this.state.showIdActivity}
           isInlineEditing={true}
           description={{
@@ -186,8 +160,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
               all_day: this.state.activityAllDay,
             }
           }}
-          showInModal={true}
-          showInModalSimple={true}
           onClose={() => { this.setState({ showIdActivity: 0 } as FormCustomerState) }}
           onSaveCallback={(form: CustomerFormActivity<CustomerFormActivityProps, CustomerFormActivityState>, saveResponse: any) => {
             if (saveResponse.status == "success") {
@@ -202,14 +174,15 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
   renderDocumentForm(): JSX.Element{
     return (
       <ModalForm
+        ref={this.refDocumentModal}
         uid='document_form'
         isOpen={true}
         type='right'
       >
         <FormDocument
+          modal={this.refDocumentModal}
           id={this.state.showIdDocument}
           onClose={() => this.setState({showIdDocument: 0} as FormCustomerState)}
-          showInModal={true}
           descriptionSource="both"
           description={{
             defaultValues: {

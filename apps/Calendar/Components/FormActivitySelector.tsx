@@ -21,6 +21,14 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
   translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader';
   translationContextInner: string = 'Components\\FormActivitySelector';
 
+  refActivityModal: any;
+
+  constructor(props: FormActivitySelectorProps) {
+    super(props);
+
+    this.refActivityModal = React.createRef();
+  }
+
   render(): JSX.Element {
     var calendarConfigs = this.props.calendarConfigs;
     return (
@@ -68,15 +76,13 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
                           }
                         },
                         id: -1,
-                        showInModal: true,
-                        showInModalSimple: true,
+                        modal: this.refActivityModal,
                         onClose:() => {this.setState({formSelected: null}), this.props.onCallback()},
                         onSaveCallback:() => {this.setState({formSelected: null}), this.props.onCallback()},
                       })
                     });
                   }}
                 >
-                  {item.icon ? <span className='icon'><i className={calendarConfigs[item]["icon"]}></i></span> : null}
                   <span className='text text-center self-center !h-auto text-lg'>{calendarConfigs[item]["title"]}</span>
                 </button>
               </>
@@ -87,6 +93,7 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
         </div>
         {this.state?.formSelected ?
           <ModalForm
+            ref={this.refActivityModal}
             uid='activity_form'
             isOpen={true}
             type='inside-parent'

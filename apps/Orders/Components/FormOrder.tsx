@@ -35,6 +35,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
   state: FormOrderState;
 
   refLogActivityInput: any;
+  refActivityModal: any;
 
   translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
   translationContextInner: string = 'Components\\FormOrder';
@@ -45,6 +46,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     super(props);
 
     this.refLogActivityInput = React.createRef();
+    this.refActivityModal = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -355,12 +357,14 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       {super.renderContent()}
       {this.state.showIdActivity == 0 ? <></> :
         <ModalForm
+          ref={this.refActivityModal}
           uid='activity_form'
           isOpen={true}
           type='right'
         >
           <OrderFormActivity
             id={this.state.showIdActivity}
+            modal={this.refActivityModal}
             isInlineEditing={true}
             description={{
               defaultValues: {
@@ -374,8 +378,6 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
               }
             }}
             idCustomer={R.id_customer}
-            showInModal={true}
-            showInModalSimple={true}
             onClose={() => { this.setState({ showIdActivity: 0 } as FormOrderState) }}
             onSaveCallback={(form: OrderFormActivity<OrderFormActivityProps, OrderFormActivityState>, saveResponse: any) => {
               if (saveResponse.status == "success") {

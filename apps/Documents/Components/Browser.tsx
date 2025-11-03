@@ -36,8 +36,11 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
   translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
   translationContextInner: string = 'Components\\Browser';
 
+  refFolderPropertiesModal: any;
+
   constructor(props: BrowserProps) {
     super(props);
+    this.refFolderPropertiesModal = React.createRef();
     this.state = {
       ...this.getStateFromProps(props),
       folderUid: this.props.folderUid ? this.props.folderUid : '_ROOT_',
@@ -182,17 +185,17 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
       {this.renderFormModal()}
       {this.state.showFolderProperties ?
         <ModalForm
+          ref={this.refFolderPropertiesModal}
           uid='create_sub_folder_modal'
           isOpen={true}
           type='right'
         >
           <Form
+            modal={this.refFolderPropertiesModal}
             uid='create_sub_folder_form'
             model='Hubleto/App/Community/Documents/Models/Folder'
             customEndpointParams={{idParentFolder: this.state.folderContent.folder.id}}
             id={this.state.showFolderProperties}
-            showInModal={true}
-            showInModalSimple={true}
             onClose={() => { this.setState({showFolderProperties: 0}); }}
           />
         </ModalForm>

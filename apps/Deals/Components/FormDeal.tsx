@@ -51,6 +51,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
   refLogActivityInput: any;
   refProductsLookup: any;
+  refActivityModal: any;
+
 
   translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader';
   translationContextInner: string = 'Components\\FormDeal';
@@ -60,6 +62,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
     this.refLogActivityInput = React.createRef();
     this.refProductsLookup = React.createRef();
+    this.refActivityModal = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -585,11 +588,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       {super.renderContent()}
       {this.state.showIdActivity == 0 ? <></> :
         <ModalForm
+          ref={this.refActivityModal}
           uid='activity_form'
           isOpen={true}
           type='right'
         >
           <DealFormActivity
+            modal={this.refActivityModal}
             id={this.state.showIdActivity}
             isInlineEditing={true}
             description={{
@@ -604,8 +609,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               }
             }}
             idCustomer={R.id_customer}
-            showInModal={true}
-            showInModalSimple={true}
             onClose={() => { this.setState({ showIdActivity: 0 } as FormDealState) }}
             onSaveCallback={(form: DealFormActivity<DealFormActivityProps, DealFormActivityState>, saveResponse: any) => {
               if (saveResponse.status == "success") {

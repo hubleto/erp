@@ -23,8 +23,11 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
   translationContext: string = 'Hubleto\\App\\Community\\Tasks\\Loader';
   translationContextInner: string = 'Components\\TableTasks';
 
+  refActivityModal: any = null;
+
   constructor(props: TableTasksProps) {
     super(props);
+    this.refActivityModal = React.createRef();
     this.state = this.getStateFromProps(props);
   }
 
@@ -94,13 +97,14 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
       {super.renderContent()}
       {this.state.addActivityForIdTask > 0 ?
         <ModalForm
+          ref={this.refActivityModal}
           uid={this.props.uid + "_add_activity_modal"}
           isOpen={true}
           type='centered small theme-secondary'
         >
           <FormActivity
             id={-1}
-            showInModal={true}
+            modal={this.refActivityModal}
             description={{defaultValues: {id_task: this.state.addActivityForIdTask}}}
             onClose={() => {
               this.setState({addActivityForIdTask: 0});

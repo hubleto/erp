@@ -1,6 +1,7 @@
 <h1 class="app-main-title">{{ translate('Mail') }} > Templates</h1>
 
 <app-mail-table-templates
+  string:tag="mail-templates"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
   bool:show-only-templates="true"

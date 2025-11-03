@@ -43,6 +43,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   state: FormLeadState;
 
   refLogActivityInput: any;
+  refActivityModal: any;
 
   translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
   translationContextInner: string = 'Components\\FormLead';
@@ -53,6 +54,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     super(props);
 
     this.refLogActivityInput = React.createRef();
+    this.refActivityModal = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -421,11 +423,13 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           {tmpCalendarLarge}
           {this.state.showIdActivity == 0 ? <></> :
             <ModalForm
+              ref={this.refActivityModal}
               uid='activity_form'
               isOpen={true}
               type='right'
             >
               <LeadFormActivity
+                modal={this.refActivityModal}
                 id={this.state.showIdActivity}
                 isInlineEditing={true}
                 description={{
@@ -440,8 +444,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   }
                 }}
                 idCustomer={R.id_customer}
-                showInModal={true}
-                showInModalSimple={true}
                 onClose={() => { this.setState({ showIdActivity: 0 } as FormLeadState) }}
                 onSaveCallback={(form: LeadFormActivity<LeadFormActivityProps, LeadFormActivityState>, saveResponse: any) => {
                   if (saveResponse.status == "success") {

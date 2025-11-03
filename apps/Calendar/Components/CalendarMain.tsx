@@ -38,15 +38,20 @@ interface CalendarMainState {
 
 export default class CalendarComponent extends TranslatedComponent<CalendarMainProps, CalendarMainState> {
 
+  props: CalendarMainProps;
+  state: CalendarMainState;
+
   translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader';
   translationContextInner: string = 'Components\\CalendarMain';
 
   refCalendar: any;
+  refActivityModal: any;
 
   constructor(props) {
     super(props);
 
     this.refCalendar = React.createRef();
+    this.refActivityModal = React.createRef();
 
     this.state = {
       eventSource: this.props.eventSource ?? '',
@@ -84,8 +89,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
               activityFormComponent: globalThis.main.renderReactElement(event.SOURCEFORM,
                 {
                   id: event.id,
-                  showInModal: true,
-                  showInModalSimple: true,
+                  modal: this.refActivityModal,
                   onClose:() => {this.setState({activityFormComponent: null})},
                   onSaveCallback:() => {this.setState({activityFormComponent: null})}
                 }
@@ -107,6 +111,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
 
   render(): JSX.Element {
     let activityFormModalProps = {
+      modal: this.refActivityModal,
       uid: 'activity_form',
       isOpen: true,
       type: 'right',
@@ -227,7 +232,6 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
 
             this.setState({
               newActivity: false,
-              // activityFormModalProps: info.event.extendedProps.SOURCEFORM_MODALPROPS,
               activityFormComponent: globalThis.main.renderReactElement(info.event.extendedProps.SOURCEFORM,
                 {
                   id: info.event.id,
@@ -249,6 +253,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
       : <></>}
       {this.state.newActivity ?
         <ModalForm
+          ref={this.refActivityModal}
           uid='activity_new_form'
           isOpen={true}
           type='right'

@@ -36,8 +36,12 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
   translationContext: string = 'Hubleto\\App\\Community\\Dashboards\\Loader';
   translationContextInner: string = 'Components\\Dashboard';
 
+  refPanelModal: any;
+
   constructor(props: DesktopDashboardProps) {
     super(props);
+
+    this.refPanelModal = React.createRef();
 
     this.state = {
       panels: this.props.panels,
@@ -234,16 +238,16 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
       : null}
       {this.state.showIdPanel != 0 ?
         <ModalForm
+          ref={this.refPanelModal}
           uid='add_new_panel_modal'
           isOpen={true}
           type='right'
         >
           <FormPanel
+            modal={this.refPanelModal}
             uid='add_new_panel_form'
             customEndpointParams={{idDashboard: this.props.idDashboard}}
             id={this.state.showIdPanel}
-            showInModal={true}
-            showInModalSimple={true}
             onClose={() => { this.setState({showIdPanel: 0}); }}
           />
         </ModalForm>

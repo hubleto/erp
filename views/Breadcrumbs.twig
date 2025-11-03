@@ -20,7 +20,7 @@
           <div class="menu">
             <div class="list">
               {% for item in viewParams.appMenu %}
-                <a href="{{ config.projectUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
+                <a onclick="window.location.replace('{{ config.projectUrl }}/{{ item.url }}')" class="btn btn-list-item btn-transparent">
                   <span class="icon"><i class="{{ item.icon }}"></i></span>
                   <span class="text">{{ item.title }}</span>
                 </a>

@@ -18,6 +18,7 @@ class Template extends \Hubleto\Erp\Model
   public string $table = 'mails_templates';
   public string $recordManagerClass = RecordManagers\Template::class;
   public ?string $lookupSqlValue = '{%TABLE%}.subject';
+  public ?string $lookupUrlAdd = 'mail/templates/add';
   public ?string $lookupUrlDetail = 'mail/templates/{%ID%}';
 
   /**

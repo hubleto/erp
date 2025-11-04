@@ -20,7 +20,7 @@
           <div class="menu">
             <div class="list">
               {% for item in viewParams.appMenu %}
-                <a onclick="window.location.replace('{{ config.projectUrl }}/{{ item.url }}')" class="btn btn-list-item btn-transparent">
+                <a href="{{ config.projectUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
                   <span class="icon"><i class="{{ item.icon }}"></i></span>
                   <span class="text">{{ item.title }}</span>
                 </a>
@@ -51,3 +51,39 @@
     {% endfor %}
   </ol>
 </nav>
+
+<script>
+  (function () {
+    const getDropdowns = () => Array.from(document.querySelectorAll('.btn-dropdown'));
+
+    function closeAll() {
+      getDropdowns().forEach(el => el.classList.remove('open'));
+    }
+
+    document.addEventListener('click', (event) => {
+      const clicked = event.target;
+      const btn = clicked.closest('.btn-dropdown');
+
+      if (!btn) {
+        closeAll();
+        return;
+      }
+
+      const insideMenu = clicked.closest('.menu');
+      if (insideMenu && btn.contains(insideMenu)) {
+        closeAll();
+        return;
+      }
+
+      event.preventDefault();
+      const wasOpen = btn.classList.contains('open');
+      closeAll();
+      if (!wasOpen) btn.classList.add('open');
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeAll();
+    });
+  })();
+
+</script>

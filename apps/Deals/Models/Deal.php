@@ -251,7 +251,7 @@ class Deal extends \Hubleto\Erp\Model
 
     $newDeal = $savedRecord;
     if (empty($newDeal['identifier'])) {
-      $newDeal["identifier"] = $this->appManager()->getApp(\Hubleto\App\Community\Deals\Loader::class)->configAsString('dealPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
+      $newDeal["identifier"] = $newDeal["id"];
       $this->record->recordUpdate($newDeal);
     }
 

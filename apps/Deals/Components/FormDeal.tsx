@@ -421,7 +421,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             <div className='flex-1'>
               {this.state.id > 0 ? <div className='flex gap-2 mb-2'>
                 <div className="badge badge-violet">
-                  {this.translate("Deal value:")} {globalThis.main.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY.code}
+                  {this.translate("Deal value:")} {globalThis.main.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY?.code}
                 </div>
                 {R.WORKFLOW_STEP && R.WORKFLOW_STEP.probability ?
                   <div className="badge badge-violet">

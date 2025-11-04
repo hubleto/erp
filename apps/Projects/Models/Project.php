@@ -140,7 +140,7 @@ class Project extends \Hubleto\Erp\Model
     $savedRecord['id_workflow_step'] = $idWorkflowStep;
 
     if (empty($savedRecord['identifier'])) {
-      $savedRecord["identifier"] = 'P' . $savedRecord["id"];
+      $savedRecord["identifier"] = $savedRecord["id"];
       $this->record->recordUpdate($savedRecord);
     }
 

@@ -342,7 +342,7 @@ class Lead extends \Hubleto\Erp\Model
     $newLead['id_workflow_step'] = $idWorkflowStep;
 
     if (empty($newLead['identifier'])) {
-      $newLead["identifier"] = $this->appManager()->getApp(\Hubleto\App\Community\Leads\Loader::class)->configAsString('leadPrefix') . str_pad($savedRecord["id"], 6, 0, STR_PAD_LEFT);
+      $newLead["identifier"] = $newLead["id"];
     }
 
     $this->record->recordUpdate($newLead);

@@ -211,8 +211,11 @@ class Order extends \Hubleto\Erp\Model
     $savedRecord = parent::onAfterCreate($savedRecord);
 
     $order = $this->record->find($savedRecord["id"]);
-    $order->identifier = $order->id;
-    $order->save();
+
+    if (empty($savedRecord['identifier'])) {
+      $order->identifier = $order->id;
+      $order->save();
+    }
 
     $mHistory = $this->getService(History::class);
     $mHistory->record->recordCreate([

@@ -37,15 +37,12 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
       \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
       \Hubleto\App\Community\Leads\Loader::class => [ 'sidebarOrder' => 210 ],
-      \Hubleto\App\Community\Mail\Loader::class => [ 'sidebarOrder' => 230 ],
     ],
     'marketing' => [
       \Hubleto\App\Community\Campaigns\Loader::class => [ 'sidebarOrder' => 202 ],
       \Hubleto\App\Community\Leads\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\Mail\Loader::class => [ 'sidebarOrder' => 230 ],
     ],
     'sales' => [
-      \Hubleto\App\Community\Mail\Loader::class => [ 'sidebarOrder' => 230 ],
       \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
       \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
       \Hubleto\App\Community\Campaigns\Loader::class => [ 'sidebarOrder' => 202 ],

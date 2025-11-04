@@ -119,9 +119,9 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
                 {this.inputWrapper('salutation')}
                 <div className="flex gap-2">
                   <div className="flex-1">{this.inputWrapper('title_before', {cssClass: 'text-2xl'})}</div>
-                  <div className="flex-2">{this.inputWrapper('first_name', {cssClass: 'text-2xl text-primary'})}</div>
-                  <div className="flex-2">{this.inputWrapper('middle_name', {cssClass: 'text-2xl text-primary'})}</div>
-                  <div className="flex-2">{this.inputWrapper('last_name', {cssClass: 'text-2xl text-primary'})}</div>
+                  <div className="flex-2">{this.inputWrapper('first_name', {cssClass: 'text-2xl'})}</div>
+                  <div className="flex-2">{this.inputWrapper('middle_name', {cssClass: 'text-2xl'})}</div>
+                  <div className="flex-2">{this.inputWrapper('last_name', {cssClass: 'text-2xl'})}</div>
                   <div className="flex-1">{this.inputWrapper('title_after', {cssClass: 'text-2xl'})}</div>
                 </div>
               </div>

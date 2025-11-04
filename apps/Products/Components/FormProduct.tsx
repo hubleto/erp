@@ -63,7 +63,7 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
                 <div className='flex grow'>{this.inputWrapper('ean')}</div>
                 <div className='flex grow'><Barcode value={R.ean} height={30} /></div>
               </div>
-              {this.inputWrapper('name', {cssClass: 'text-2xl text-primary'})}
+              {this.inputWrapper('name', {cssClass: 'text-2xl'})}
               {this.inputWrapper('is_on_sale')}
               {this.inputWrapper('sales_price')}
               {this.inputWrapper('id_group')}

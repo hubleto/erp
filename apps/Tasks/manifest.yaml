@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Tasks
 appType: community
-sidebarGroup: projects
+sidebarGroup: crm
 rootUrlSlug: tasks
 name: Tasks
 icon: fas fa-list-check

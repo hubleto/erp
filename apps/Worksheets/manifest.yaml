@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Worksheets
 appType: community
-sidebarGroup: projects
+sidebarGroup: crm
 rootUrlSlug: worksheets
 name: Worksheets
 icon: fas fa-user-clock

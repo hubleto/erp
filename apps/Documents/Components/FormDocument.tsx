@@ -50,7 +50,7 @@ export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,Fo
       <div className='card mt-4'>
         <div className='card-body'>
           {this.inputWrapper('id_folder')}
-          {this.inputWrapper('name', {cssClass: 'text-2xl text-primary'})}
+          {this.inputWrapper('name', {cssClass: 'text-2xl'})}
           {this.inputWrapper('file')}
           {this.inputWrapper('hyperlink')}
           {/* {R.origin_link && linkExists ?

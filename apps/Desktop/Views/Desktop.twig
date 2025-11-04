@@ -224,13 +224,10 @@
 
     <aside id="default-sidebar">
       <nav>
-        <div class="sidebar-group {% if hubleto.router().getRoute() == '' %} activated {% endif %}">
-          <a class="btn {{ hubleto.router().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}/">
-            <span class="icon"><i class="fas fa-home"></i></span>
-            <span class="text">{{ user.DEFAULT_COMPANY.name }}</span>
-          </a>
-        </div>
-
+        <a class="btn {{ hubleto.router().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}/">
+          <span class="icon"><i class="fas fa-home"></i></span>
+          <span class="text">{{ user.DEFAULT_COMPANY.name }}</span>
+        </a>
         <div class="nav-inner">
           {% for app in hubleto.appManager().getEnabledApps() %}
             {% if hubleto.appManager().apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
@@ -256,15 +253,23 @@
 
             {% if appBtns|length == 0 %}
             {% else %}
-              <div class="sidebar-group {% if hasActivatedApp %} activated {% endif %}">
-                <a class="sidebar-group-title block" id="sg_{{ sidebarGroup }}_btn"
+              <div
+                class="sidebar-group {% if hasActivatedApp %} activated {% endif %}"
+                style="
+                  border-left:5px solid {{ sidebarGroupData.color }};
+                  border-top:1px solid {{ sidebarGroupData.color }}20;
+                  margin-top:1px;
+                "
+              >
+                <a
+                  class="sidebar-group-title"
                   onclick="
                     $('.sidebar-group').removeClass('activated');
                     $(this).closest('.sidebar-group').addClass('activated');
                   "
                   href="{{ config.projectUrl }}/~/{{ sidebarGroup }}" data-pr-tooltip="{{ sidebarGroupData.title }}"
                 >
-                  <span class="text">{{ sidebarGroupData.title }}</span>
+                  {{ sidebarGroupData.title }}
                 </a>
                 <div id="sg_{{ sidebarGroup }}_btns" class="sidebar-group-btns">
                   <div class="inner">{{ appBtns|join('')|raw }}</div>

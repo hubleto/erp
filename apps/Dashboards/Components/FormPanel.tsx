@@ -40,7 +40,7 @@ export default class FormPanel<P, S> extends HubletoForm<FormPanelProps,FormPane
     return <>
       {this.inputWrapper('id_dashboard')}
       {this.inputWrapper('board_url_slug', {
-        cssClass: 'text-2xl text-primary',
+        cssClass: 'text-2xl',
         onChange: (input: any, value: any) => {
           const enumValues = input.props.enumValues;
           this.updateRecord({title: enumValues[value] ?? '-'})

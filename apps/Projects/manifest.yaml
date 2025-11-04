@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Projects
 appType: community
-sidebarGroup: projects
+sidebarGroup: productivity
 rootUrlSlug: projects
 name: Projects
 icon: fas fa-diagram-project

@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Issues
 appType: community
-sidebarGroup: projects
+sidebarGroup: productivity
 rootUrlSlug: issues
 name: Issues
 icon: fas fa-comment

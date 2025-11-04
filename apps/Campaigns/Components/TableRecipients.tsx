@@ -45,6 +45,15 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
     }
   }
 
+  getCsvImportEndpointParams(): any {
+    return {
+      model: this.props.model,
+      defaultCsvImportValues: {
+        id_campaign: this.props.idCampaign,
+      }
+    }
+  }
+
   rowClassName(rowData: any): string {
     return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
   }

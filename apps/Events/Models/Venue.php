@@ -26,7 +26,7 @@ class Venue extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'address' => (new Varchar($this, $this->translate('Address')))->setDefaultVisible(),
       'address_plus_code' => (new Varchar($this, $this->translate('Address Plus code'))),
       'contact_person' => (new Varchar($this, $this->translate('Contact person'))),

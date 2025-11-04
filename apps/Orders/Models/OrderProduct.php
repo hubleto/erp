@@ -25,7 +25,7 @@ class OrderProduct extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
       'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setDefaultVisible(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible(),
       'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setRequired()->setDefaultVisible(),
       'amount' => (new Integer($this, $this->translate('Amount')))->setRequired()->setDefaultVisible(),

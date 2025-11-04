@@ -10,6 +10,11 @@ use Hubleto\Framework\Router;
 class Model extends \Hubleto\Framework\Model
 {
 
+  const COLUMN_ID_CUSTOMER_DEFAULT_ICON = 'fas fa-address-card bg-yellow-100 rounded text-yellow-600 p-2 mr-2 w-10 text-center block';
+  const COLUMN_CONTACT_DEFAULT_ICON = 'fas fa-id-badge bg-yellow-100 rounded text-yellow-600 p-2 mr-2 w-10 text-center block';
+  CONST COLUMN_IDENTIFIER_DEFUALT_ICON = 'fas fa-pen bg-blue-200 rounded text-blue-600 p-2 mr-2 w-10 text-center block';
+  const COLUMN_NAME_DEFAULT_ICON = 'fas fa-a bg-sky-200 rounded text-sky-600 p-2 mr-2 w-10 text-center block';
+
   //////////////////////////////////////////////////////////////////
   // callbacks
 

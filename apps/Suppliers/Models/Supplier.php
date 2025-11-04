@@ -21,12 +21,12 @@ class Supplier extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'address' => (new Varchar($this, $this->translate('Address'))),
       'city' => (new Varchar($this, $this->translate('City'))),
       'postal_code' => (new Varchar($this, $this->translate('Postal code'))),
       'id_country' => (new Lookup($this, $this->translate('Country'), Country::class)),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'order_email' => (new Varchar($this, $this->translate('Order email'))),
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'company_id' => (new Varchar($this, $this->translate('Company ID'))),

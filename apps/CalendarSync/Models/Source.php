@@ -14,7 +14,7 @@ class Source extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'link' => (new Varchar($this, $this->translate('Calendar ID')))->setRequired(),
       'type' => (new Varchar($this, $this->translate('Type')))->setRequired()->setEnumValues(['google' => 'Google Calendar', 'ics' => '.ics Url']),
       'color' => (new Color($this, $this->translate('Color')))->setRequired(),

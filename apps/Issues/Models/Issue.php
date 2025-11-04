@@ -12,7 +12,7 @@ class Issue extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'problem' => (new Varchar($this, $this->translate('Problem description')))->setRequired(),
     ]);
   }

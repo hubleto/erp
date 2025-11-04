@@ -39,7 +39,7 @@ class CashRegister extends Model
   {
     return array_merge([
       'id_company' => new Lookup($this, $this->translate("Company"), Company::class)->setRequired()->setDefaultVisible(),
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setRequired()->setDefaultVisible(),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
       'description' => (new Varchar($this, $this->translate('Description')))->setRequired()->setDefaultVisible(),
     ], parent::describeColumns());
   }

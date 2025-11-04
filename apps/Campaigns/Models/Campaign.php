@@ -47,7 +47,7 @@ class Campaign extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('UID')))->setReadonly(true),
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'utm_source' => (new Varchar($this, $this->translate('UTM source')))->setDefaultVisible(),
       'utm_campaign' => (new Varchar($this, $this->translate('UTM campaign')))->setDefaultVisible(),
       'utm_term' => (new Varchar($this, $this->translate('UTM term')))->setDefaultVisible(),

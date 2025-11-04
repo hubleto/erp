@@ -17,7 +17,7 @@ class ContactTag extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setRequired(),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setRequired()->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class))->setRequired(),
     ]);
   }

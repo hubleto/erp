@@ -42,7 +42,7 @@ class Event extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('text-2xl text-primary'),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('text-2xl text-primary')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_type' => (new Lookup($this, $this->translate('Type'), Type::class))->setDefaultVisible(),
       'attendance_options' => (new Integer($this, $this->translate('Attendance options')))->setDefaultVisible()->setEnumValues(self::ENUM_ATTENDANCE_OPTIONS),
       'brief_description' => (new Text($this, $this->translate('Brief description'))),

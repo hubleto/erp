@@ -23,7 +23,7 @@ class Recipient extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired()->setReadonly()->setDefaultVisible(),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class)),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'email' => (new Varchar($this, $this->translate('Email')))->setDefaultVisible(),
       'first_name' => (new Varchar($this, $this->translate('First name')))->setDefaultVisible(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),

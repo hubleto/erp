@@ -31,7 +31,7 @@ class Agenda extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_event' => (new Lookup($this, $this->translate('Event'), Event::class))->setDefaultVisible(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'topic' => (new Varchar($this, $this->translate('Topic')))->setDefaultVisible(),
       'description' => (new Text($this, $this->translate('Description'))),
       'floor' => (new Varchar($this, $this->translate('Floor')))->setDefaultVisible(),

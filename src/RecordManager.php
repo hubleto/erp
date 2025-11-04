@@ -68,6 +68,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       } else {
         if ($hasIdManager && $isManager) {
           $canRead = true;
+          $canModify = true;
         }
         if ($hasIdTeam && $isTeamMember) {
           $canRead = true;

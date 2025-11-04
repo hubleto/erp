@@ -5,10 +5,12 @@ import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import request from '@hubleto/react-ui/core/Request';
+import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
 export interface FormProjectProps extends HubletoFormProps { }
 export interface FormProjectState extends HubletoFormState {
-  statistics?: any
+  statistics?: any,
+  selectParentOrder?: boolean,
 }
 
 export default class FormProject<P, S> extends HubletoForm<FormProjectProps, FormProjectState> {
@@ -31,6 +33,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
   getStateFromProps(props: FormProjectProps) {
     return {
       ...super.getStateFromProps(props),
+      selectParentOrder: false,
       tabs: [
         { uid: 'default', title: <b>{this.translate('Project')}</b> },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
@@ -92,14 +95,42 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
           <div className='w-full flex gap-2 flex-col md:flex-row'>
             <div className='flex-1 border-r border-gray-100'>
               <FormInput title={"Order"}>
-                {R.ORDERS ? R.ORDERS.map((item, key) => {
-                  return (item.ORDER ? <a
-                    key={key}
-                    className='badge'
-                    href={globalThis.main.config.projectUrl + '/orders/' + item.ORDER.id}
-                    target='_blank'
-                  >{item.ORDER.identifier}</a> : '#');
-                }) : null}
+                {this.state.selectParentOrder ? <>
+                  <Lookup
+                    model='Hubleto/App/Community/Orders/Models/Order'
+                    cssClass='font-bold'
+                    onChange={(input: any, value: any) => {
+                      request.post(
+                        'projects/api/set-parent-order',
+                        {
+                          idProject: this.state.record.id,
+                          idOrder: value,
+                        },
+                        {},
+                        (data: any) => {
+                          this.setState({selectParentOrder: false}, () => this.reload());
+                        }
+                      )
+                    }}
+                  ></Lookup>
+                </> : <>
+                  {R.ORDERS ? R.ORDERS.map((item, key) => {
+                    return (item.ORDER ? <a
+                      key={key}
+                      className='badge'
+                      href={globalThis.main.config.projectUrl + '/orders/' + item.ORDER.id}
+                      target='_blank'
+                    >{item.ORDER.identifier}</a> : '#');
+                  }) : null}
+                  <button
+                    className='btn btn-small btn-transparent'
+                    onClick={() => {
+                      this.setState({selectParentOrder: true});
+                    }}
+                  >
+                    <span className='text'>Select parent order</span>
+                  </button>
+                </>}
               </FormInput>
               {this.inputWrapper('identifier')}
               {this.inputWrapper('title')}

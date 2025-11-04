@@ -21,6 +21,7 @@ class Loader extends \Hubleto\Framework\App
       '/^projects\/api\/convert-deal-to-project\/?$/' => Controllers\Api\ConvertDealToProject::class,
       '/^projects\/api\/create-from-order\/?$/' => Controllers\Api\CreateFromOrder::class,
       '/^projects\/api\/get-statistics\/?$/' => Controllers\Api\GetStatistics::class,
+      '/^projects\/api\/set-parent-order\/?$/' => Controllers\Api\SetParentOrder::class,
 
       '/^projects(\/(?<recordId>\d+))?\/?$/' => Controllers\Projects::class,
       '/^projects\/add?\/?$/' => ['controller' => Controllers\Projects::class, 'vars' => [ 'recordId' => -1 ]],

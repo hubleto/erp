@@ -120,7 +120,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                       className='badge'
                       href={globalThis.main.config.projectUrl + '/orders/' + item.ORDER.id}
                       target='_blank'
-                    >{item.ORDER.identifier}</a> : '#');
+                    >#{item.ORDER.identifier}&nbsp;{item.ORDER.title}</a> : '#');
                   }) : null}
                   <button
                     className='btn btn-small btn-transparent'

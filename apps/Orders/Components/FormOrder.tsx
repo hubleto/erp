@@ -251,7 +251,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                       className='badge'
                       href={globalThis.main.config.projectUrl + '/deals/' + item.DEAL.id}
                       target='_blank'
-                    >{item.DEAL.identifier}</a> : '#');
+                    >#{item.DEAL.identifier}&nbsp;{item.DEAL.title}</a> : '#');
                   }) : null}
                 </FormInput>
                 {this.inputWrapper('identifier')}

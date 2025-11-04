@@ -58,90 +58,79 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
 
-    return (
-      <>
-        <div
-          className="grid grid-cols-2 gap-1"
-          style={{
-            gridTemplateAreas: `
-            'info info'
-            'steps steps'
-          `,
-          }}
-        >
-          <div className="card mt-4" style={{ gridArea: "info" }}>
-            <div className="card-header">Workflow Information</div>
-            <div className="card-body flex flex-row justify-around">
-              {this.inputWrapper("name")}
-              {this.inputWrapper("group")}
-              {this.inputWrapper("description")}
-            </div>
-          </div>
-
-          <div className="card mt-4" style={{ gridArea: "steps" }}>
-            <div className="card-header">Workflow Steps</div>
-            <div className="card-body">
-
-              <a
-                className="btn btn-add-outline mb-2"
-                onClick={() => {
-                  if (!R.STEPS) R.STEPS = [];
-                  R.STEPS.push({
-                    id_workflow: { _useMasterRecordId_: true },
-                  });
-                  this.setState({ record: R, isInlineEditing: true});
-                }}
-              >
-                <span className="icon"><i className="fas fa-add"></i></span>
-                <span className="text">Add step</span>
-              </a>
-
-              <TableWorkflowSteps
-                invalidInputs={this.state.invalidInputs}
-                key={this.state.tablesKey}
-                uid={this.props.uid + "_table_workflow_steps_input"}
-                context="Hello World"
-                descriptionSource="props"
-                data={{ data: R.STEPS }}
-                isUsedAsInput={true}
-                isInlineEditing={this.state.isInlineEditing}
-                onRowClick={() => this.setState({isInlineEditing: true})}
-                onChange={(table: TableWorkflowSteps) => {
-                  this.updateRecord({ STEPS: table.state.data?.data });
-                }}
-                description={{
-                  ui: {
-                    showFooter: false,
-                    showHeader: false,
-                  },
-                  permissions: {
-                    canCreate: true,
-                    canDelete: true,
-                    canRead: true,
-                    canUpdate: true,
-                  },
-                  columns: {
-                    name: { type: "varchar", title: "Name" },
-                    order: { type: "int", title: "Order" },
-                    color: { type: "color", title: "Color" },
-                    probability: { type: "int", title: "Probability", unit: "%" },
-                    tag: { type: "varchar", title: "Tag"},
-                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
-                  },
-                  inputs: {
-                    name: { type: "varchar", title: "Name" },
-                    order: { type: "int", title: "Order" },
-                    color: { type: "color", title: "Color" },
-                    probability: { type: "int", title: "Probability", unit: "%" },
-                    tag: { type: "varchar", title: "Tag"},
-                    set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
-                  },
-                }}
-              ></TableWorkflowSteps>
-            </div>
-          </div>
+    return <div className="flex gap-2" >
+      <div>
+        <div className="card-header">Workflow</div>
+        <div className="card-body">
+          {this.inputWrapper("name")}
+          {this.inputWrapper("order")}
+          {this.inputWrapper("group")}
+          {this.inputWrapper("description")}
         </div>
-      </>
-    );
+      </div>
+
+      <div>
+        <div className="card-header">Steps</div>
+        <div className="card-body">
+
+          <a
+            className="btn btn-add-outline mb-2"
+            onClick={() => {
+              if (!R.STEPS) R.STEPS = [];
+              R.STEPS.push({
+                id_workflow: { _useMasterRecordId_: true },
+              });
+              this.setState({ record: R, isInlineEditing: true});
+            }}
+          >
+            <span className="icon"><i className="fas fa-add"></i></span>
+            <span className="text">Add step</span>
+          </a>
+
+          <TableWorkflowSteps
+            invalidInputs={this.state.invalidInputs}
+            key={this.state.tablesKey}
+            uid={this.props.uid + "_table_workflow_steps_input"}
+            context="Hello World"
+            descriptionSource="props"
+            data={{ data: R.STEPS }}
+            isUsedAsInput={true}
+            isInlineEditing={this.state.isInlineEditing}
+            onRowClick={() => this.setState({isInlineEditing: true})}
+            onChange={(table: TableWorkflowSteps) => {
+              this.updateRecord({ STEPS: table.state.data?.data });
+            }}
+            description={{
+              ui: {
+                showFooter: false,
+                showHeader: false,
+              },
+              permissions: {
+                canCreate: true,
+                canDelete: true,
+                canRead: true,
+                canUpdate: true,
+              },
+              columns: {
+                name: { type: "varchar", title: "Name" },
+                order: { type: "int", title: "Order" },
+                color: { type: "color", title: "Color" },
+                probability: { type: "int", title: "Probability", unit: "%" },
+                tag: { type: "varchar", title: "Tag"},
+                set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
+              },
+              inputs: {
+                name: { type: "varchar", title: "Name" },
+                order: { type: "int", title: "Order" },
+                color: { type: "color", title: "Color" },
+                probability: { type: "int", title: "Probability", unit: "%" },
+                tag: { type: "varchar", title: "Tag"},
+                set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
+              },
+            }}
+          ></TableWorkflowSteps>
+        </div>
+      </div>
+    </div>;
   }
 }

@@ -123,8 +123,8 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                   })}</FormInput>
                 : null}
               </div>
-              {this.inputWrapper('identifier')}
-              {this.inputWrapper('title')}
+              {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
+              {this.inputWrapper('title', {cssClass: 'text-2xl'})}
               {this.inputWrapper('description')}
               {this.inputWrapper('id_developer')}
               {this.inputWrapper('id_tester')}

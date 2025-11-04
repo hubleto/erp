@@ -132,8 +132,8 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                   </button>
                 </>}
               </FormInput>
-              {this.inputWrapper('identifier')}
-              {this.inputWrapper('title')}
+              {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
+              {this.inputWrapper('title', {cssClass: 'text-2xl'})}
               {this.inputWrapper('description')}
               {this.inputWrapper('id_main_developer')}
               {this.inputWrapper('id_account_manager')}

@@ -19,6 +19,7 @@ class Workflow extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setDefaultVisible(),
       'description' => (new Varchar($this, $this->translate('Description')))->setDefaultVisible(),
       'group' => (new Varchar($this, $this->translate('Group')))->setDefaultVisible()->setPredefinedValues([
         'deals',

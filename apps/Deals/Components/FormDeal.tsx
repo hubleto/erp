@@ -232,8 +232,8 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               >{item.LEAD.id}</a> : '#');
             })}
           </FormInput> : null}
-          {this.inputWrapper('identifier', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
-          {this.inputWrapper('title', {cssClass: 'text-2xl text-primary', readonly: R.is_archived})}
+          {this.inputWrapper('identifier', {cssClass: 'text-2xl', readonly: R.is_archived})}
+          {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_archived})}
           {this.inputWrapper('version')}
           <FormInput title={"Customer"}>
             <Lookup {...this.getInputProps("id_customer")}

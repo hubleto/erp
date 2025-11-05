@@ -16,8 +16,9 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^worksheets\/?$/' => Controllers\Home::class,
-      '/^worksheets\/activities\/?$/' => Controllers\Activities::class,
+      '/^worksheets\/?$/' => Controllers\Activities::class,
+      '/^worksheets\/add\/?$/' => ['controller' => Controllers\Activities::class, 'vars' => ['recordId' => -1]],
+      // '/^worksheets\/activities\/?$/' => Controllers\Activities::class,
       '/^worksheets\/activity-types\/?$/' => Controllers\ActivityTypes::class,
 
       '/^worksheets\/api\/daily-activity-chart\/?$/' => Controllers\Api\DailyActivityChart::class,

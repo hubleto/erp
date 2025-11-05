@@ -7,8 +7,8 @@ class Receipts extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'cashdesk', 'content' => $this->translate('Cashdesk') ],
-      [ 'url' => 'receipts', 'content' => $this->translate('Receipts') ],
+      // [ 'url' => 'cashdesk', 'content' => $this->translate('Cashdesk') ],
+      [ 'url' => 'cashdesk/receipts', 'content' => $this->translate('Receipts') ],
     ]);
   }
 

@@ -7,7 +7,7 @@ class Suppliers extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'suppliers', 'content' => $this->translate('Suppliers') ]
+      // [ 'url' => 'suppliers', 'content' => $this->translate('Suppliers') ]
     ]);
   }
 

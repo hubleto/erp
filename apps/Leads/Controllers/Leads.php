@@ -7,7 +7,7 @@ class Leads extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => '', 'content' => $this->translate('Leads') ],
+      // [ 'url' => '', 'content' => $this->translate('Leads') ],
     ]);
   }
 

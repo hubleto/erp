@@ -13,7 +13,13 @@
       </a>
     </li> #}
     <li>
-      <button class="btn btn-transparent {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %} btn-primary-outline">
+      <button
+        class="btn btn-transparent {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %} btn-primary"
+        {% if viewParams.appMenu|length == 0 %}
+          onclick="location.href='{{ viewParams.activatedApp.manifest.rootUrlSlug }}';"
+        {% endif %}
+      >
+        <span class="icon"><i class="{{ viewParams.activatedApp.manifest.icon }}"></i></span>
         <span class="text">{{ viewParams.activatedApp.manifest.nameTranslated }}</span>
         {% if viewParams.appMenu|length > 0 %}
           <span class="icon"><i class="fas fa-chevron-down"></i></span>

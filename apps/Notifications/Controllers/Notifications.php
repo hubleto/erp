@@ -7,7 +7,7 @@ class Notifications extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'notifications', 'content' => $this->translate('Notifications') ],
+      // [ 'url' => 'notifications', 'content' => $this->translate('Notifications') ],
     ]);
   }
 

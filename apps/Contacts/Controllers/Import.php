@@ -7,8 +7,8 @@ class Import extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'contacts', 'content' => $this->translate('Contacts') ],
-      [ 'url' => 'import', 'content' => $this->translate('Import') ],
+      // [ 'url' => 'contacts', 'content' => $this->translate('Contacts') ],
+      [ 'url' => 'contacts/import', 'content' => $this->translate('Import') ],
     ]);
   }
 

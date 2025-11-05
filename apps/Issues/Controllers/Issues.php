@@ -7,7 +7,7 @@ class Issues extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'issues', 'content' => 'Issues' ],
+      // [ 'url' => 'issues', 'content' => 'Issues' ],
     ]);
   }
 

@@ -7,7 +7,7 @@ class Documents extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'documents', 'content' => $this->translate('Documents') ],
+      // [ 'url' => 'documents', 'content' => $this->translate('Documents') ],
     ]);
   }
 

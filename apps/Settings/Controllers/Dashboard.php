@@ -7,7 +7,7 @@ class Dashboard extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
+      // [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
     ]);
   }
 

@@ -25,6 +25,8 @@ class Activity extends \Hubleto\Erp\Model
   public string $table = 'worksheet_activities';
   public string $recordManagerClass = RecordManagers\Activity::class;
   public ?string $lookupSqlValue = 'concat("Activity #", {%TABLE%}.id)';
+  public ?string $lookupUrlAdd = 'worksheets/add';
+  public ?string $lookupUrlDetail = 'worksheets/{%ID%}';
 
   public array $relations = [
     'WORKER' => [ self::BELONGS_TO, User::class, 'id_worker', 'id' ],

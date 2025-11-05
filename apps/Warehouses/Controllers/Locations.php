@@ -4,6 +4,14 @@ namespace Hubleto\App\Community\Warehouses\Controllers;
 
 class Locations extends \Hubleto\Erp\Controller
 {
+
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => 'warehouses/locations', 'content' => $this->translate('Locations') ],
+    ]);
+  }
+
   public function prepareView(): void
   {
     parent::prepareView();

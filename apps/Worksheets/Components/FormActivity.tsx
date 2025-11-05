@@ -29,6 +29,10 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, F
   //   }
   // }
 
+  getRecordFormUrl(): string {
+    return 'worksheets/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+  }
+
   renderTitle(): JSX.Element {
     return <>
       <small></small>

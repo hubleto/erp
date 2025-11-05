@@ -9,8 +9,8 @@ class Share extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'calendar', 'content' => $this->translate('Calendar') ],
-      [ 'url' => 'share', 'content' => $this->translate('Share') ],
+      // [ 'url' => 'calendar', 'content' => $this->translate('Calendar') ],
+      [ 'url' => 'calendar/share', 'content' => $this->translate('Share') ],
     ]);
   }
 

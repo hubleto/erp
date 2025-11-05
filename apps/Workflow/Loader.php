@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Framework\App
 
       '/^workflow\/?$/' => Controllers\Workflow::class,
       '/^workflow(\/(?<idWorkflow>\d+))?\/?$/' => Controllers\Workflow::class,
-      '/^workflow\/history\/?$/' => Controllers\WorkflowHistory::class,
+      '/^workflow\/history\/?$/' => Controllers\History::class,
       '/^settings\/workflows\/?$/' => Controllers\Workflows::class,
     ]);
 

@@ -7,7 +7,7 @@ class About extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'about', 'content' => $this->translate('About') ],
+      // [ 'url' => 'about', 'content' => $this->translate('About') ],
     ]);
   }
 

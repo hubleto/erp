@@ -8,8 +8,8 @@ class Transactions extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'warehouses', 'content' => 'Warehouses' ],
-      [ 'url' => 'transactions', 'content' => 'Transactions' ],
+      // [ 'url' => 'warehouses', 'content' => 'Warehouses' ],
+      [ 'url' => 'warehouses/transactions', 'content' => 'Transactions' ],
     ]);
   }
 

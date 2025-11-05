@@ -7,7 +7,7 @@ class Orders extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => '', 'content' => $this->translate('Orders') ],
+      // [ 'url' => '', 'content' => $this->translate('Orders') ],
     ]);
   }
 

@@ -7,7 +7,7 @@ class Calendar extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'calendar', 'content' => $this->translate('Calendar') ],
+      // [ 'url' => 'calendar', 'content' => $this->translate('Calendar') ],
     ]);
   }
 

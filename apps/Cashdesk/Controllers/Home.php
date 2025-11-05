@@ -7,7 +7,7 @@ class Home extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'cashdesk', 'content' => $this->translate('Cashdesk') ],
+      // [ 'url' => 'cashdesk', 'content' => $this->translate('Cashdesk') ],
     ]);
   }
 

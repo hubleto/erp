@@ -48,6 +48,10 @@ export default class TableActivities extends HubletoTable<TableActivitiesProps, 
     }
   }
 
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/worksheets/' + (id > 0 ? id : 'add'));
+  }
+
   renderFooter(): JSX.Element {
     let workedTotal = 0;
     for (let i in this.state.data?.data) {

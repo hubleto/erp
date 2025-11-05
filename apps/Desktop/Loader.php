@@ -59,9 +59,9 @@ class Loader extends \Hubleto\Framework\App
       'productivity' => [ 'color' => '#20689f', 'title' => $this->translate('Productivity'), 'icon' => 'fas fa-diagram-project' ],
       'supply-chain' => [ 'color' => '#4bbd44', 'title' => $this->translate('Supply chain'), 'icon' => 'fas fa-truck' ],
       'finance' => [ 'color' => '#ce4715ff', 'title' => $this->translate('Finance'), 'icon' => 'fas fa-credit-card' ],
+      'custom' => [ 'color' => '#888888', 'title' => $this->translate('Custom'), 'icon' => 'fas fa-puzzle-piece' ],
       'maintenance' => [ 'color' => '#c0c90e', 'title' => $this->translate('Maintenance'), 'icon' => 'fas fa-cog' ],
       'help' => [ 'color' => '#831616', 'title' => $this->translate('Help'), 'icon' => 'fas fa-life-ring' ],
-      'custom' => [ 'color' => '#888888', 'title' => $this->translate('Custom'), 'icon' => 'fas fa-puzzle-piece' ],
 
       'addressbook' => [ 'color' => '#888888', 'title' => $this->translate('Addressbook'), 'icon' => 'fas fa-id-card-clip' ],
       'calendar' => [ 'color' => '#888888', 'title' => $this->translate('Calendar'), 'icon' => 'fas fa-calendar' ],

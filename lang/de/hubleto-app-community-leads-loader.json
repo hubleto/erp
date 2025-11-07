@@ -68,7 +68,10 @@
         "Email": "E-Mail",
         "Phone number": "Telefonnummer",
         "Level": "Stufe",
-        "Team": "Team"
+        "Team": "Team",
+        "Workflow": "",
+        "Workflow step": "",
+        "Closed": ""
     },
     "Models\\LostReason": {
         "Lost Reason": "Verlorener Vernunft"
@@ -124,5 +127,13 @@
     "Models\\Level": {
         "Name": "Name",
         "Color": "Farbe"
+    },
+    "Models\\LeadCampaign": {
+        "Lead": "",
+        "Campaign": ""
+    },
+    "Models\\LeadTask": {
+        "Lead": "",
+        "Task": ""
     }
 }

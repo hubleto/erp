@@ -45,5 +45,26 @@
     "manifest": {
         "Invoices": "",
         "Invoincing": ""
+    },
+    "Models\\Invoice": {
+        "Supplier": "",
+        "Issued by": "",
+        "Customer": "",
+        "Type": "",
+        "Number": "",
+        "Variable symbol": "",
+        "Constant symbol": "",
+        "Specific symbol": "",
+        "Issued": "",
+        "Delivered": "",
+        "Due": "",
+        "Paid": "",
+        "Currency": "",
+        "Total excl. VAT": "",
+        "Total incl. VAT": "",
+        "Notes": "",
+        "Template": "",
+        "Workflow": "",
+        "Workflow step": ""
     }
 }

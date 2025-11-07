@@ -32,5 +32,11 @@
     },
     "Controllers\\Browse": {
         "Documents": "Dokumente"
+    },
+    "Models\\Template": {
+        "Name": "",
+        "Used For": "",
+        "Content": "",
+        "Notes": ""
     }
 }

@@ -22,7 +22,19 @@
         "Required delivery date": "Erforderlicher Liefertermin",
         "Shipping information": "Versandinformationen",
         "Notes": "Notizen",
-        "Add order": "Bestellung hinzufügen"
+        "Add order": "Bestellung hinzufügen",
+        "Identifier": "",
+        "Identifier at customer": "",
+        "Owner": "",
+        "Manager": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": "",
+        "Shared folder (online document storage)": "",
+        "Link to shared folder (online storage) with related documents": "",
+        "Template": "",
+        "Closed": ""
     },
     "Models\\State": {
         "Title": "Titel",
@@ -37,7 +49,11 @@
         "Amount": "Menge",
         "Discount": "Rabatt",
         "Vat": "Mehrwertsteuer",
-        "Add product": "Produkt hinzufügen"
+        "Add product": "Produkt hinzufügen",
+        "Item order": "",
+        "Sales price": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
     },
     "Models\\History": {
         "Order": "Befehl",
@@ -49,5 +65,33 @@
         "Order": "Befehl",
         "Title": "Titel",
         "History": "Geschichte"
+    },
+    "Models\\OrderActivity": {
+        "Subject": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "All day": "",
+        "Completed": "",
+        "Meeting minutes (link)": "",
+        "Created by": "",
+        "Order": ""
+    },
+    "Models\\OrderDocument": {
+        "Order": "",
+        "Document": ""
+    },
+    "Models\\OrderInvoice": {
+        "Order": "",
+        "Invoice": ""
+    },
+    "Models\\OrderDeal": {
+        "Order": "",
+        "Deal": ""
+    },
+    "Controllers\\Boards\\OrderWarnings": {
+        "Open orders without future plan": ""
     }
 }

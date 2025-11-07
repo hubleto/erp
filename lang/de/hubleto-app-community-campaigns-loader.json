@@ -14,7 +14,19 @@
         "Color": "Farbe",
         "Manager": "Verwalter",
         "Created": "Erstellt am",
-        "Add Campaign": "Kampagne hinzufügen"
+        "Add Campaign": "Kampagne hinzufügen",
+        "UID": "",
+        "UTM source": "",
+        "UTM campaign": "",
+        "UTM term": "",
+        "UTM content": "",
+        "Mail account to send email from": "",
+        "Mail template": "",
+        "Reply to": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Approved": "",
+        "Closed": ""
     },
     "Components\\FormCampaign": {
         "Leads": "Leads",

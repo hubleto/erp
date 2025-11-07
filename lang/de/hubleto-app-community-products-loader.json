@@ -2,7 +2,8 @@
     "manifest": {
         "Products": "Produkte",
         "Free product portfolio managment.": "Kostenloses Produktportfoliomanagement.",
-        "Groups": ""
+        "Groups": "",
+        "Categories": ""
     },
     "root": {
         "Products": "Produkte",
@@ -30,7 +31,30 @@
         "Needs reordering?": "Braucht neu zu ordnen?",
         "Storage rules": "Speicherregeln",
         "Table": "Tisch",
-        "Add product": "Produkt hinzufügen"
+        "Add product": "Produkt hinzufügen",
+        "EAN": "",
+        "Name": "",
+        "Group": "",
+        "Category": "",
+        "Invoicing policy": "",
+        "Image 1": "",
+        "Image 2": "",
+        "Image 3": "",
+        "Image 4": "",
+        "Image 5": "",
+        "Internal notes": "",
+        "Sales price": "",
+        "VAT": "",
+        "Data ": "",
+        "Packaging unit": "",
+        "Amount of items in package": "",
+        "Package length": "",
+        "Package width": "",
+        "Package height": "",
+        "Package volume": "",
+        "Package mass": "",
+        "Package discount": "",
+        "Package description": ""
     },
     "Controllers\\Products": {
         "Products": "Produkte"

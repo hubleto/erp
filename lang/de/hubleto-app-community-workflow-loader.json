@@ -17,7 +17,9 @@
     "Models\\Workflow": {
         "Name": "Name",
         "Description": "Beschreibung",
-        "Type": "Typ"
+        "Type": "Typ",
+        "Order": "",
+        "Group": ""
     },
     "Models\\WorkflowStep": {
         "Name": "Name",
@@ -25,7 +27,8 @@
         "Color": "Farbe",
         "Probability": "Wahrscheinlichkeit",
         "Workflow": "Workflow",
-        "Set result of a deal to": "Setzen Sie das Ergebnis eines Deals an"
+        "Set result of a deal to": "Setzen Sie das Ergebnis eines Deals an",
+        "Tag": ""
     },
     "Controllers\\Home": {
         "Workflow": "Workflow",

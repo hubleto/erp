@@ -1,6 +1,7 @@
 {
     "Controllers\\Home": {
-        "Welcome": "Willkommen"
+        "Welcome": "Willkommen",
+        "Edit profile": ""
     },
     "Controllers\\Desktop": {
         "CRM": "CRM",
@@ -48,6 +49,7 @@
         "Reporting": "",
         "Maintenance": "",
         "Help": "",
-        "Custom": ""
+        "Custom": "",
+        "Productivity": ""
     }
 }

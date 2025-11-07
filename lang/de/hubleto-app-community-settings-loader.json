@@ -208,7 +208,10 @@
         "Street, line 2": "Straße, Zeile 2",
         "ZIP": "REISSVERSCHLUSS",
         "City": "Stadt",
-        "Country": "Land"
+        "Country": "Land",
+        "Logo": "",
+        "Brand color - primary": "",
+        "Brand color - secondary": ""
     },
     "Models\\ActivityType": {
         "Type": "Typ",

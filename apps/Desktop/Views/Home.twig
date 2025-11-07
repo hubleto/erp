@@ -6,7 +6,7 @@
   style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE' }}"
 >
   {% if user.DEFAULT_COMPANY.logo != '' %}
-    <div class="border-r" style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE' }}">
+    <div class="flex border-r items-center" style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE' }}">
       <img
         src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
         class="max-h-32 max-w-32 m-8"

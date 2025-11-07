@@ -65,6 +65,9 @@
   <script defer src='{{ config.assetsUrl }}/compiled/js/main.js'></script>
   <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/compiled/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
+  {% if user.DEFAULT_COMPANY.brand_color_primary != '' %}
+    <style> :root { --color-primary: {{ user.DEFAULT_COMPANY.brand_color_primary }} !important; } </style>
+  {% endif %}
 </head>
 
 <body id="page-top">

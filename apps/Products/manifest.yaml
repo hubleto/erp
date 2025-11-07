@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Products
 appType: community
-sidebarGroup: sales,e-commerce
+sidebarGroup: sales
 rootUrlSlug: products
 name: Products
 icon: fas fa-cart-shopping

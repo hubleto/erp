@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Orders
 appType: community
-sidebarGroup: sales,e-commerce
+sidebarGroup: sales
 rootUrlSlug: orders
 name: Orders
 icon: fas fa-money-check-dollar

@@ -6,7 +6,7 @@ class Payment extends \Hubleto\Erp\RecordManager
 {
   public $table = 'cloud_payments';
 
-  public function recordCreate(array $record): array
+  public function recordCreate(array $record, $useProvidedRecordId = false): array
   {
     $cloudApp = $this->model->main->apps->community('Cloud');
     $isTrialPeriod = $cloudApp->saveConfig('isTrialPeriod', '0');

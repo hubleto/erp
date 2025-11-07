@@ -88,7 +88,7 @@ class Loader extends \Hubleto\Framework\App
 
     $mOrder = $this->getModel(Models\Order::class);
     $mHistory = $this->getModel(Models\History::class);
-    $mOrderProduct = $this->getModel(Models\OrderProduct::class);
+    // $mOrderProduct = $this->getModel(Models\OrderProduct::class);
     $mTemplate = $this->getModel(Template::class);
 
     $idTemplate = $mTemplate->record->recordCreate([
@@ -115,15 +115,15 @@ class Loader extends \Hubleto\Framework\App
 
       $mHistory->record->recordCreate([ 'id_order' => $idOrder, 'short_description' => 'Order created', 'date_time' => date('Y-m-d H:i:s') ]);
 
-      for ($j = 1; $j <= 5; $j++) {
-        $mOrderProduct->record->recordCreate([
-          'id_order' => $idOrder,
-          'id_product' => rand(1, 5),
-          'title' => 'Item #' . $i . '.' . $j,
-          'amount' => rand(100, 200) / rand(3, 7),
-          'sales_price' => rand(50, 80) / rand(2, 5),
-        ]);
-      }
+      // for ($j = 1; $j <= 5; $j++) {
+      //   $mOrderProduct->record->recordCreate([
+      //     'id_order' => $idOrder,
+      //     'id_product' => rand(1, 5),
+      //     'title' => 'Item #' . $i . '.' . $j,
+      //     'amount' => rand(100, 200) / rand(3, 7),
+      //     'sales_price' => rand(50, 80) / rand(2, 5),
+      //   ]);
+      // }
     }
 
   }

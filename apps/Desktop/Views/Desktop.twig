@@ -239,7 +239,7 @@
             {% set appBtns = [] %}
             {% set hasActivatedApp = false %}
             {% for app in viewParams.appsInSidebar %}
-              {% if app.manifest.sidebarGroup == sidebarGroup %}
+              {% if sidebarGroup in app.manifest.sidebarGroup|split(',') %}
                 {% set appBtns = appBtns|merge([_self.appBtn(app, true)]) %}
                 {% if app.isActivated %}
                   {% set hasActivatedApp = true %}

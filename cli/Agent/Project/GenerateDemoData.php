@@ -162,13 +162,6 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
     $mDealHistory  = $this->getModel(\Hubleto\App\Community\Deals\Models\DealHistory::class);
     $mDealTag      = $this->getModel(\Hubleto\App\Community\Deals\Models\DealTag::class);
     $mDealActivity = $this->getModel(\Hubleto\App\Community\Deals\Models\DealActivity::class);
-    $mDealProduct = $this->getModel(\Hubleto\App\Community\Deals\Models\DealProduct::class);
-    $mDealDocument = $this->getModel(\Hubleto\App\Community\Deals\Models\DealDocument::class);
-
-    //Shop
-    $mProduct = $this->getModel(\Hubleto\App\Community\Products\Models\Product::class);
-    $mGroup = $this->getModel(\Hubleto\App\Community\Products\Models\Group::class);
-    $mSupplier = $this->getModel(\Hubleto\App\Community\Suppliers\Models\Supplier::class);
 
     if (
       $this->appManager()->isAppInstalled("Hubleto\App\Community\Documents") &&
@@ -181,19 +174,14 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->generateActivities($mCustomer, $mCustomerActivity);
 
-    if ($this->appManager()->isAppInstalled("Hubleto\App\Community\Products")) {
-      $this->generateProducts($mProduct, $mGroup, $mSupplier);
-    }
-
     if (
       $this->appManager()->isAppInstalled("Hubleto\App\Community\Customers") &&
       $this->appManager()->isAppInstalled("Hubleto\App\Community\Documents") &&
-      $this->appManager()->isAppInstalled("Hubleto\App\Community\Products") &&
       $this->appManager()->isAppInstalled("Hubleto\App\Community\Deals") &&
       $this->appManager()->isAppInstalled("Hubleto\App\Community\Leads")
     ) {
       $this->generateLeads($mCustomer, $mLead, $mLeadHistory, $mLeadTag, $mLeadActivity);
-      $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity, $mDealProduct);
+      $this->generateDeals($mLead, $mLeadHistory, $mLeadTag, $mDeal, $mDealHistory, $mDealTag, $mDealActivity);
     }
 
     foreach ($this->appManager()->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
@@ -602,7 +590,6 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
     \Hubleto\App\Community\Deals\Models\DealHistory $mDealHistory,
     \Hubleto\App\Community\Deals\Models\DealTag $mDealTag,
     \Hubleto\App\Community\Deals\Models\DealActivity $mDealActivity,
-    \Hubleto\App\Community\Deals\Models\DealProduct $mDealProduct
   ): void {
 
     $leads = $mLead->record->get();
@@ -672,110 +659,9 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
         "id_owner" => rand(1, 4),
       ]);
 
-      for ($i = 1; $i < 4; $i++) {
-        $mDealProduct->record->recordCreate([
-          "id_deal" => $idDeal,
-          "id_product" => $i,
-          "order" => $i,
-          "description" => "Follow-up call\nFollow-up call",
-          "unit_price" => rand(3, 5) * 15,
-          "vat" => 23,
-          "amount" => rand(10, 20) / 3,
-        ]);
-      }
-      
       $mDealTag->record->recordCreate([
         "id_deal" => $idDeal,
         "id_tag" => rand(1, 5)
-      ]);
-    }
-  }
-
-  public function generateProducts(
-    \Hubleto\App\Community\Products\Models\Product $mProduct,
-    \Hubleto\App\Community\Products\Models\Group $mGroup,
-    \Hubleto\App\Community\Suppliers\Models\Supplier $mSupplier,
-  ): void {
-
-    $mGroup->record->recordCreate([ "title" => "Food" ]);
-    $mGroup->record->recordCreate([ "title" => "Furniture" ]);
-    $mGroup->record->recordCreate([ "title" => "Dry foods" ]);
-    $mGroup->record->recordCreate([ "title" => "Liquids" ]);
-    $mGroup->record->create([ "title" => "Service" ]);
-
-    $mCountry = $this->getService(Country::class);
-
-    $mSupplier->record->recordCreate([
-      "vat_id" => "GB123562563",
-      "title" => "Fox Foods",
-      "id_country" => $mCountry->record->inRandomOrder()->first()->id,
-    ]);
-    $mSupplier->record->recordCreate([
-      "vat_id" => "CZ123562563",
-      "title" => "Bořek Furniture",
-      "id_country" => $mCountry->record->inRandomOrder()->first()->id,
-    ]);
-    $mSupplier->record->recordCreate([
-      "vat_id" => "FR123562563",
-      "title" => "Denise's Dry Goods",
-      "id_country" => $mCountry->record->inRandomOrder()->first()->id,
-    ]);
-
-
-    $products = [
-      ["Wine - Masi Valpolocell",94.27,62.93,23,"l"],
-      ["Eggplant Italian",21.98,86.56,23,"ml"],
-      ["Carrots - Mini, Stem On",76.44,56.95,23,"kg"],
-      ["Lentils - Green Le Puy",42.94,98.78,23,"l"],
-      ["Ice - Clear, 300 Lb For Carving",51.43,70.54,23,"ml"],
-      ["Chicken - Leg / Back Attach",82.7,96.13,23,"l"],
-      ["Thyme - Dried",96.11,76.39,23,"l"],
-      ["Lettuce - Belgian Endive",35.14,89.06,23,"bottle"],
-      ["Pasta - Rotini, Dry",4.42,88.99,23,"l"],
-      ["Coffee Cup 8oz 5338cd",25.64,77.44,23,"mg"],
-      ["Wine - Magnotta, White",7.21,89.8,23,"dc"],
-      ["Sauerkraut",41.14,71.11,23,"bottle"],
-      ["Yams",58.91,70.92,23,"l"],
-      ["Salt - Celery",54.01,90.84,23,"bottle"],
-      ["Bar Mix - Lemon",49.62,61.33,23,"kg"],
-      ["Raspberries - Fresh",78.84,74.08,23,"l"],
-      ["Lambcasing",71.23,58.71,23,"dc"],
-      ["Sauce - Chili",14.92,92.16,23,"ml"],
-      ["Chef Hat 20cm",62.76,71.59,23,"mg"],
-      ["Wine - Sake",96.35,68.66,23,"bottle"],
-      ["Chevril",20.34,88.6,23,"ml"],
-      ["Milk - Buttermilk",26.1,74.32,23,"kg"],
-      ["Cream - 35%",59.74,68.28,23,"bottle"],
-      ["Liqueur - Melon",88.46,85.78,23,"l"],
-      ["Beer - Muskoka Cream Ale",53.6,62.33,23,"l"],
-      ["Beets - Candy Cane, Organic",29.0,95.1,23,"dc"],
-      ["Oven Mitt - 13 Inch",57.49,89.41,23,"ml"],
-    ];
-
-    foreach ($products as $product) {
-      $mProduct->record->create([
-        "ean" => $this->faker->ean13(),
-        "name" => $product[0],
-        "sales_price" => $product[1],
-        "margin" => $product[2],
-        "vat" => $product[3],
-        "unit" => $product[4],
-        "id_group" => rand(1, 4),
-        "type" => \Hubleto\App\Community\Products\Models\Product::TYPE_CONSUMABLE,
-      ]);
-    }
-
-    $serviceNames = ["Cloud Storage", "Plugins", "Subscription", "Virtual Server", "Marketing", "Premium Package"];
-
-    //Create all services
-    foreach ($serviceNames as $serviceName) {
-      $mProduct->record->create([
-        "name" => $serviceName,
-        "sales_price" => rand(10, 100),
-        "margin" => rand(10, 40),
-        "vat" => 25,
-        "id_group" => 5,
-        "type" => \Hubleto\App\Community\Products\Models\Product::TYPE_SERVICE,
       ]);
     }
   }

@@ -2,16 +2,36 @@
 
 namespace Hubleto\App\Community\Products\Models\RecordManagers;
 
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends \Hubleto\Erp\RecordManager
 {
   public $table = 'products';
 
   /** @return HasOne<Group, covariant Product> */
-  public function GROUP(): HasOne
+  public function GROUP(): BelongsTo
   {
-    return $this->hasOne(Group::class, 'id', 'id_group');
+    return $this->belongsTo(Group::class, 'id_group', 'id');
+  }
+
+  /** @return HasOne<Group, covariant Product> */
+  public function CATEGORY(): BelongsTo
+  {
+    return $this->belongsTo(Category::class, 'id_category', 'id');
+  }
+
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $idCategory = $hubleto->router()->urlParamAsInteger('idCategory');
+
+    if ($idCategory > 0) {
+      $query = $query->where($this->table . '.id_category', $idCategory);
+    }
+
+    return $query;
   }
 
   public function prepareLookupQuery(string $search): mixed

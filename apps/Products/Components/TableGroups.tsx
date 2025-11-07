@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
-import FormProduct from './FormProduct';
+import FormGroup from './FormGroup';
 
-interface TableProductsProps extends HubletoTableProps {
-  idCategory?: number,
-}
+interface TableGroupsProps extends HubletoTableProps {}
 
-interface TableProductsState extends HubletoTableState {
-  idCategory?: number,
-}
+interface TableGroupsState extends HubletoTableState {}
 
-export default class TableProducts extends HubletoTable<TableProductsProps, TableProductsState> {
+export default class TableGroups extends HubletoTable<TableGroupsProps, TableGroupsState> {
 
   static defaultProps = {
     ...HubletoTable.defaultProps,
@@ -19,21 +15,21 @@ export default class TableProducts extends HubletoTable<TableProductsProps, Tabl
       direction: "asc"
     },
     formUseModalSimple: true,
-    model: 'Hubleto/App/Community/Products/Models/Product',
+    model: 'Hubleto/App/Community/Products/Models/Group',
   }
 
-  props: TableProductsProps;
-  state: TableProductsState;
+  props: TableGroupsProps;
+  state: TableGroupsState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader';
-  translationContextInner: string = 'Components\\TableProducts';
+  translationContextInner: string = 'Components\\TableGroups';
 
-  constructor(props: TableProductsProps) {
+  constructor(props: TableGroupsProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: TableProductsProps) {
+  getStateFromProps(props: TableGroupsProps) {
     return {
       ...super.getStateFromProps(props)
     }
@@ -48,12 +44,11 @@ export default class TableProducts extends HubletoTable<TableProductsProps, Tabl
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      idCategory: this.props.idCategory,
     }
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/products/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/products/groups/' + (id > 0 ? id : 'add'));
   }
 
   renderHeaderRight(): Array<JSX.Element> {
@@ -64,6 +59,6 @@ export default class TableProducts extends HubletoTable<TableProductsProps, Tabl
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
-    return <FormProduct {...formProps}/>;
+    return <FormGroup {...formProps}/>;
   }
 }

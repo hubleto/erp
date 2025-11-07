@@ -102,11 +102,14 @@ class Loader extends \Hubleto\Framework\App
     ];
 
     foreach ($templates as $usedFor => $templateData) {
-      $mTemplate->record->recordCreate([
-        'name' => $templateData['name'],
-        'used_for' => $usedFor,
-        'content' => file_get_contents(__DIR__ . '/DefaultTemplates/' . $templateData['file']),
-      ]);
+      $templateFile = __DIR__ . '/DefaultTemplates/' . $templateData['file'];
+      if (file_exists($templateFile)) {
+        $mTemplate->record->recordCreate([
+          'name' => $templateData['name'],
+          'used_for' => $usedFor,
+          'content' => file_get_contents($templateFile),
+        ]);
+      }
     }
 
   }

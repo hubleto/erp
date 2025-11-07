@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Suppliers
 appType: community
-sidebarGroup: sales
+sidebarGroup: sales,supply-chain,e-commerce
 rootUrlSlug: suppliers
 name: Suppliers
 icon: fas fa-truck-fast

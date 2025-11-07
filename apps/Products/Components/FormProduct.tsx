@@ -67,6 +67,7 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
               {this.inputWrapper('is_on_sale')}
               {this.inputWrapper('sales_price')}
               {this.inputWrapper('id_group')}
+              {this.inputWrapper('id_category')}
               {this.inputWrapper('vat')}
               {this.inputWrapper('margin')}
               {this.inputWrapper('unit')}

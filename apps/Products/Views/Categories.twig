@@ -1,0 +1,7 @@
+<h1 class="app-main-title">{{ translate('Products') }} > {{ translate('Categories') }}</h1>
+
+<app-products-table-categories
+  string:tag="products-table-categories"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></app-products-table-categories>

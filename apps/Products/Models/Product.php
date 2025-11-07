@@ -41,6 +41,7 @@ class Product extends \Hubleto\Erp\Model
 
   public array $relations = [
     'GROUP' => [ self::HAS_ONE, Group::class, 'id', 'id_group'],
+    'CATEGORY' => [ self::HAS_ONE, Category::class, 'id', 'id_category'],
   ];
 
   public function describeColumns(): array
@@ -65,6 +66,7 @@ class Product extends \Hubleto\Erp\Model
       'ean' => (new Varchar($this, $this->translate('EAN')))->setRequired()->setDefaultVisible(),
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_group' => (new Lookup($this, $this->translate('Group'), Group::class)),
+      'id_category' => (new Lookup($this, $this->translate('Category'), Category::class)),
       'type' => (new Integer($this, $this->translate('Product Type')))->setEnumValues($typeEnumValues)->setDescription($typeDescription)->setDefaultVisible(),
       'invoicing_policy' => (new Integer($this, $this->translate('Invoicing policy')))->setEnumValues(self::INVOICING_POLICY_ENUM_VALUES)->setDescription($invoicingPolicyDescription),
       'is_on_sale' => new Boolean($this, $this->translate('On sale'))->setDefaultVisible(),

@@ -2,18 +2,18 @@
 
 namespace Hubleto\App\Community\Products\Controllers;
 
-class Groups extends \Hubleto\Erp\Controller
+class Categories extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => '', 'content' => $this->translate('Groups') ],
+      [ 'url' => '', 'content' => $this->translate('Categories') ],
     ]);
   }
 
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Community:Products/Groups.twig');
+    $this->setView('@Hubleto:App:Community:Products/Categories.twig');
   }
 }

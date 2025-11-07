@@ -42,7 +42,7 @@ class Notification extends \Hubleto\Erp\RecordManager
     return $query;
   }
 
-  public function recordCreate(array $record): array
+  public function recordCreate(array $record, $useProvidedRecordId = false): array
   {
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 

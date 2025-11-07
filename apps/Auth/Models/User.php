@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Auth\Models;
 use Hubleto\App\Community\Settings\Models\Company;
 use Hubleto\App\Community\Auth\Models\UserHasRole;
 use Hubleto\Erp\Model;
+use Hubleto\Framework\Db\Column\Image;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Integer;
@@ -111,6 +112,10 @@ class User extends \Hubleto\Framework\Models\User
       'last_name' => (new Varchar($this, $this->translate('Last name'))),
       'nick' => (new Varchar($this, $this->translate('Nick'))),
       'email' => (new Varchar($this, $this->translate('Email')))->setRequired(),
+      'position' => (new Varchar($this, $this->translate('Position'))),
+      'phone_1' => (new Varchar($this, $this->translate('Phone number #1'))),
+      'phone_2' => (new Varchar($this, $this->translate('Phone number #2'))),
+      'photo' => (new Image($this, $this->translate('Photo'))),
       'language' => (new Varchar($this, $this->translate('Language')))->setEnumValues(self::ENUM_LANGUAGES)->setRequired(),
       'id_default_company' => (new Lookup($this, $this->translate("Default company"), Company::class)),
       'apps' => (new Json($this, $this->translate('Apps'))),
@@ -190,6 +195,7 @@ class User extends \Hubleto\Framework\Models\User
 
     $description->columns = [
       'type' => $description->columns['type'],
+      'photo' => $description->columns['photo'],
       'first_name' => $description->columns['first_name'],
       'last_name' => $description->columns['last_name'],
       'nick' => $description->columns['nick'],

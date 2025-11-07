@@ -5,6 +5,8 @@ namespace Hubleto\App\Community\Desktop\Controllers;
 class Home extends \Hubleto\Erp\Controller
 {
 
+  public bool $permittedForAllUsers = true;
+
   /**
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
    *

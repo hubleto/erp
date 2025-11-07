@@ -33,6 +33,7 @@ class Loader extends \Hubleto\Framework\Loader
 
     // Todo: this should be part of the app itself
     DependencyInjection::setServiceProviders([
+      \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,
       \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
       \Hubleto\Framework\Controllers\SignIn::class => SignIn::class,
       \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Auth\Models\User::class,

@@ -88,6 +88,9 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
   public function getUserFromSession(): array
   {
     $tmp = $this->sessionManager()->get('userProfile') ?? [];
+    $apps = @json_decode($tmp['apps'] ?? '');
+    if (!is_array($apps)) $apps = [];
+
     return [
       'id' => (int) ($tmp['id'] ?? 0),
       'type' => (int) ($tmp['type'] ?? 0),
@@ -98,6 +101,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       'is_active' => (bool) ($tmp['is_active'] ?? false),
       'language' => (string) ($tmp['language'] ?? false),
       'apps' => (string) ($tmp['apps'] ?? ''),
+      'APPS' => (array) $apps,
       'ROLES' => (array) ($tmp['ROLES'] ?? []),
       'TEAMS' => (array) ($tmp['TEAMS'] ?? []),
       'DEFAULT_COMPANY' => (array) ($tmp['DEFAULT_COMPANY'] ?? []),

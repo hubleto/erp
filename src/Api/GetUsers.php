@@ -10,7 +10,7 @@ class GetUsers extends \Hubleto\Erp\Controllers\ApiController
   {
     $mUser = $this->getModel(User::class);
     $users = $mUser->record
-      ->select(['id', 'login', 'email', 'first_name', 'last_name', 'nick'])
+      ->select(['id', 'login', 'email', 'first_name', 'last_name', 'nick', 'photo', 'position'])
       ->where('is_active', true)
       ->get()
       ->toArray()

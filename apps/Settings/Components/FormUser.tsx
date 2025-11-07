@@ -60,20 +60,23 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
 
     return <>
       <div className='w-full flex gap-2'>
-        <div className="p-4 flex-1 text-center">
-          <i className="fas fa-user text-primary" style={{fontSize: '8em'}}></i>
-        </div>
-        <div className="flex-6">
-          {this.state.id == -1 && !globalThis.main.isPremium ?
-            <div className="badge badge-warning text-lg w-full block p-8">
-              You may add new users only in Premium account.<br/>
-              <br/>
-              <a href={globalThis.main.config.projectUrl + '/cloud'} className="btn btn-primary">
-                <span className="icon"><i className="fas fa-medal"></i></span>
-                <span className="text">Activate Premium account</span>
-              </a>
+        {this.state.id == -1 && !globalThis.main.isPremium ?
+          <div className="badge badge-warning text-lg w-full block p-8">
+            You may add new users only in Premium account.<br/>
+            <br/>
+            <a href={globalThis.main.config.projectUrl + '/cloud'} className="btn btn-primary">
+              <span className="icon"><i className="fas fa-medal"></i></span>
+              <span className="text">Activate Premium account</span>
+            </a>
+          </div>
+        : <>
+          <div className="p-4 flex-1 text-center">
+            <i className="fas fa-user text-primary" style={{fontSize: '8em'}}></i>
+            <div className='mt-2'>
+              {this.input('photo')}
             </div>
-          : <>
+          </div>
+          <div className="flex-6">
             <div className='flex gap-2 flex-col md:flex-row'>
               <div className="flex-1">
                 {this.divider(this.translate('About the user'))}
@@ -81,7 +84,10 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
                 {this.inputWrapper('first_name')}
                 {this.inputWrapper('last_name')}
                 {this.inputWrapper('nick')}
+                {this.inputWrapper('position')}
                 {this.inputWrapper('email')}
+                {this.inputWrapper('phone_1')}
+                {this.inputWrapper('phone_2')}
                 {this.inputWrapper('language')}
                 {this.inputWrapper('id_default_company')}
 
@@ -142,8 +148,8 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
                 </div>
               </div>
             </div>
-          </>}
-        </div>
+          </div>
+        </>}
       </div>
     </>;
   }

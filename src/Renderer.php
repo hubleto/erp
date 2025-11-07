@@ -112,15 +112,16 @@ class Renderer extends \Hubleto\Framework\Renderer
       if ($controllerObject->requiresAuthenticatedUser) {
         if (!$this->getService(\Hubleto\Framework\AuthProvider::class)?->isUserInSession()) {
           $controllerObject = $this->getController(SignIn::class);
-          $permissionManager->setPermission($controllerObject->permission);
         }
       }
+
+      $permissionManager->setPermission($controllerObject->permission);
 
       if (
         $controllerObject->requiresAuthenticatedUser
         && !$controllerObject->permittedForAllUsers
       ) {
-        $this->permissionsManager()->checkPermission();
+        $permissionManager->checkPermission();
       }
 
       $controllerObject->preInit();
@@ -211,13 +212,17 @@ class Renderer extends \Hubleto\Framework\Renderer
 
     } catch (ControllerNotFound $e) {
       header('HTTP/1.1 400 Bad Request', true, 400);
-      return $this->renderFatal('Controller not found: ' . $e->getMessage(), false);
+      return $this->renderFatal($e, false);
     } catch (NotEnoughPermissionsException $e) {
       $message = $e->getMessage();
       if ($this->getService(\Hubleto\Framework\AuthProvider::class)->isUserInSession()) {
         $message .= " Hint: Sign out at {$this->env()->projectUrl}?sign-out and sign in again or check your permissions.";
       }
-      return $this->renderFatal($message, false);
+      return "
+        <div class='alert alert-danger' role='alert' style='z-index:99999999'>
+          {$message}
+        </div>
+      ";
       // header('HTTP/1.1 401 Unauthorized', true, 401);
     } catch (GeneralException $e) {
       header('HTTP/1.1 400 Bad Request', true, 400);
@@ -230,19 +235,7 @@ class Renderer extends \Hubleto\Framework\Renderer
     } catch (\Exception $e) {
       $error = error_get_last();
 
-      if ($error && $error['type'] == E_ERROR) {
-        $return = $this->renderFatal(
-          '<div style="margin-bottom:1em;">'
-          . $error['message'] . ' in ' . $error['file'] . ':' . $error['line']
-          . '</div>'
-          . '<pre style="font-size:0.75em;font-family:Courier New">'
-          . $e->getTraceAsString()
-          . '</pre>',
-          true
-        );
-      } else {
-        $return = $this->renderFatal($this->renderExceptionHtml($e));
-      }
+      $return = $this->renderFatal($e, true);
 
       return $return;
 

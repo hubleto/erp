@@ -17,7 +17,7 @@ use Hubleto\App\Community\Auth\Models\User;
 /**
  * Class managing Hubleto permissions.
  */
-class PermissionsManager extends Core implements Interfaces\PermissionsManagerInterface
+class PermissionsManager extends \Hubleto\Framework\PermissionsManager
 {
 
   protected bool $grantAllPermissions = false;
@@ -188,14 +188,27 @@ class PermissionsManager extends Core implements Interfaces\PermissionsManagerIn
     if ($this->grantAllPermissions) {
       return true;
     } else {
+      /** @var AuthProvider */
+      $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
+
       if (empty($permission)) return true;
-      if (count($userRoles) == 0) $userRoles = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserRoles();
-      if ($userType == 0) $userType = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserType();
+      if (count($userRoles) == 0) $userRoles = $authProvider->getUserRoles();
+      if ($userType == 0) $userType = $authProvider->getUserType();
 
       $granted = false;
 
       if (count(array_intersect($this->administratorRoles, $userRoles)) > 0) $granted = true;
       if (in_array($userType, $this->administratorTypes)) $granted = true;
+
+      if (!$granted && str_starts_with($permission, 'Hubleto/App')) {
+        $appsEnabled = $authProvider->getUserFromSession()['APPS'];
+        foreach ($appsEnabled as $app) {
+          if (str_starts_with($permission, str_replace('\\', '/', $app))) {
+            $granted = true;
+            break;
+          }
+        }
+      }
 
       // check if the premission is granted for one of the roles of the user
       if (!$granted) {

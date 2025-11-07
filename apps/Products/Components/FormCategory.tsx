@@ -32,7 +32,6 @@ export default class FormCategory<P, S> extends HubletoForm<FormCategoryProps,Fo
       tabs: [
         { uid: 'default', title: <b>{this.translate('Category')}</b> },
         { uid: 'description', title: this.translate('Description') },
-        { uid: 'gallery', title: this.translate('Gallery') },
         { uid: 'products', title: this.translate('Products') },
       ]
     };
@@ -54,26 +53,26 @@ export default class FormCategory<P, S> extends HubletoForm<FormCategoryProps,Fo
 
     switch (tabUid) {
       case 'default':
-        return <>
-          {this.inputWrapper('name', {cssClass: 'text-2xl'})}
-          {this.inputWrapper('id_parent')}
-          {this.inputWrapper('color')}
-          {this.inputWrapper('short_description')}
-          {this.inputWrapper('url_slug')}
-        </>;
+        return <div className='flex gap-2'>
+          <div className='grow'>
+            {this.inputWrapper('name', {cssClass: 'text-2xl'})}
+            {this.inputWrapper('id_parent')}
+            {this.inputWrapper('color')}
+            {this.inputWrapper('short_description')}
+            {this.inputWrapper('url_slug')}
+          </div>
+          <div className='grow'>
+            {this.inputWrapper('photo_1')}
+            {this.inputWrapper('photo_2')}
+            {this.inputWrapper('photo_3')}
+            {this.inputWrapper('photo_4')}
+            {this.inputWrapper('photo_5')}
+          </div>
+        </div>;
       break;
       case 'description':
         return <>
           {this.inputWrapper('long_description')}
-        </>;
-      break;
-      case 'gallery':
-        return <>
-          {this.inputWrapper('photo_1')}
-          {this.inputWrapper('photo_2')}
-          {this.inputWrapper('photo_3')}
-          {this.inputWrapper('photo_4')}
-          {this.inputWrapper('photo_5')}
         </>;
       break;
       case 'products':

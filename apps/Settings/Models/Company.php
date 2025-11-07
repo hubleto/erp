@@ -3,6 +3,8 @@
 namespace Hubleto\App\Community\Settings\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Image;
+use Hubleto\Framework\Db\Column\Color;
 
 class Company extends \Hubleto\Erp\Model
 {
@@ -21,6 +23,9 @@ class Company extends \Hubleto\Erp\Model
       'zip' => (new Varchar($this, $this->translate('ZIP'))),
       'city' => (new Varchar($this, $this->translate('City'))),
       'country' => (new Varchar($this, $this->translate('Country'))),
+      'logo' => (new Image($this, $this->translate('Logo'))),
+      'brand_color_primary' => (new Color($this, $this->translate('Brand color - primary'))),
+      'brand_color_secondary' => (new Color($this, $this->translate('Brand color - secondary'))),
     ]);
   }
 

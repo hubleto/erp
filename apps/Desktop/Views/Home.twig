@@ -1,7 +1,25 @@
 {% set dashboard = viewParams.defaultDashboard %}
 {% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? config.assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
 
-<h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.first_name ?? user.email }}</h1>
+<div
+  class="border p-2 mb-2 flex gap-2 rounded"
+  style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE' }}"
+>
+  {% if user.DEFAULT_COMPANY.logo != '' %}
+    <div class="border-r" style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE' }}">
+      <img
+        src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
+        class="max-h-32 m-8"
+      />
+    </div>
+  {% endif %}
+  <div class="m-8">
+    <h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.first_name ?? user.email }}</h1>
+    <b>{{ user.DEFAULT_COMPANY.name }}</b><br/>
+    {{ user.email }}
+    <a href="settings/my-account" class="text-primary">{{ translate('Edit profile') }}</a><br/>
+  </div>
+</div>
 
 {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Usage') %}
   {% set recentlyUsed = hubleto.getService('Hubleto\\App\\Community\\Usage\\Logger').getRecentlyUsedAppNamespaces() %}

@@ -48,11 +48,11 @@ class PremiumAccount extends \Hubleto\Framework\Core
 
     if (!empty($premiumAccountSince)) {
       $trialPeriodExpiresIn = floor((strtotime($freeTrialPeriodUntil) - time()) / 3600 / 24);
-      // $isTrialPeriod = $trialPeriodExpiresIn > 0;
     }
 
     return [
       'isTrialPeriod' => $isTrialPeriod,
+      'isTrialPeriodExpired' => $isTrialPeriod && ($trialPeriodExpiresIn <= 0),
       'trialPeriodExpiresIn' => $trialPeriodExpiresIn,
       'trialPeriodUntil' => $freeTrialPeriodUntil,
     ];

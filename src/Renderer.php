@@ -3,6 +3,7 @@
 namespace Hubleto\Erp;
 
 
+use Hubleto\Framework\AuthProvider;
 use Hubleto\App\Community\Auth\Controllers\SignIn;
 use Hubleto\App\Community\Desktop\Controllers\Desktop;
 use Hubleto\App\Community\Settings\PermissionsManager;
@@ -49,11 +50,11 @@ class Renderer extends \Hubleto\Framework\Renderer
 
       $router = $this->router();
 
-      /* @var PermissionsManager $permissionManager */
+      /** @var PermissionsManager */
       $permissionManager = $this->getService(PermissionsManager::class);
 
-      /* @var AuthProvider $authProvider */
-      $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
+      /** @var AuthProvider */
+      $authProvider = $this->getService(AuthProvider::class);
 
       // Find-out which route is used for rendering
 
@@ -110,7 +111,7 @@ class Renderer extends \Hubleto\Framework\Renderer
       }
 
       if ($controllerObject->requiresAuthenticatedUser) {
-        if (!$this->getService(\Hubleto\Framework\AuthProvider::class)?->isUserInSession()) {
+        if (!$authProvider->isUserInSession()) {
           $controllerObject = $this->getController(SignIn::class);
         }
       }

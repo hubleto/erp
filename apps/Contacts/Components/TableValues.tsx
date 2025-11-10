@@ -137,7 +137,6 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                     let newValues = this.state.data.data;
                     newValues[key]._toBeDeleted_ = !newValues[key]._toBeDeleted_;
                     this.props.parentForm.updateRecord({ VALUES: newValues });
-                    console.log(this.props.parentForm.state.record.VALUES)
                   }}
                 >
                   <span className="icon"><i className="fas fa-trash-can"></i></span>

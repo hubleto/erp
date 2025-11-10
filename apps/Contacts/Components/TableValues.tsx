@@ -67,7 +67,7 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
           Object.keys(this.state.data?.data).map((key) => {
             const item = this.state.data.data[key];
             const itemType = this.getType(item.value);
-            return <div key={key} className="flex gap-2 items-center">
+            return <div key={key} className={'flex gap-2 items-center'  + (item._toBeDeleted_ ? ' bg-red-100' : '')}>
               <button
                 className="btn btn-transparent w-3/4"
                 onClick={(e) => {
@@ -135,8 +135,9 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                   className="btn btn-danger"
                   onClick={() => {
                     let newValues = this.state.data.data;
-                    delete newValues[key];
+                    newValues[key]._toBeDeleted_ = !newValues[key]._toBeDeleted_;
                     this.props.parentForm.updateRecord({ VALUES: newValues });
+                    console.log(this.props.parentForm.state.record.VALUES)
                   }}
                 >
                   <span className="icon"><i className="fas fa-trash-can"></i></span>

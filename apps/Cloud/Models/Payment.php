@@ -42,6 +42,8 @@ class Payment extends \Hubleto\Erp\Model
       'notes' => $notes,
     ]);
 
+    $this->config()->save('cloud/isTrialPeriod', '0');
+
   }
 
   public function describeColumns(): array

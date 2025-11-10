@@ -53,9 +53,12 @@ class Loader extends \Hubleto\Framework\App
         if (!$this->config()->getAsBool('legalDocumentsAccepted')) {
           $this->router()->redirectTo('cloud');
         } elseif ($this->isPremium) {
+          /** @var PremiumAccount */
           $premiumAccount = $this->getService(PremiumAccount::class);
+          $freeTrialInfo = $premiumAccount->getFreeTrialInfo();
           $subscriptionInfo = $premiumAccount->getSubscriptionInfo();
-          if (!$subscriptionInfo['isActive']) {
+
+          if (!$subscriptionInfo['isActive'] || $freeTrialInfo['isTrialPeriodExpired']) {
             $this->router()->redirectTo('cloud');
           }
         }

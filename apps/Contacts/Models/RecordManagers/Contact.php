@@ -101,13 +101,46 @@ class Contact extends \Hubleto\Erp\RecordManager
      $query = parent::addColumnSearchToQuery($query, $columnSearch);
 
      if (!empty($columnSearch['virt_tags'] ?? '')) {
-       $query->having('contactTag', 'like', "%{$columnSearch['virt_tags']}%");
+      $searchGlue = $columnSearch['virt_tags'][0];
+      unset($columnSearch['virt_tags'][0]);
+      foreach ($columnSearch['virt_tags'] as $searchValue) {
+        switch ($searchGlue) {
+          case 'OR':
+            $query = $query->orHaving('contactTag', 'like', "%{$searchValue}%");
+            break;
+          case 'AND':
+            $query = $query->having('contactTag', 'like', "%{$searchValue}%");
+            break;
+        }
+      }
      }
      if (!empty($columnSearch['virt_email'] ?? '')) {
-       $query->having('virt_email', 'like', "%{$columnSearch['virt_email']}%");
+      $searchGlue = $columnSearch['virt_email'][0];
+      unset($columnSearch['virt_email'][0]);
+       foreach ($columnSearch['virt_email'] as $searchValue) {
+        switch ($searchGlue) {
+          case 'OR':
+            $query = $query->orHaving('virt_email', 'like', "%{$searchValue}%");
+            break;
+          case 'AND':
+            $query = $query->having('virt_email', 'like', "%{$searchValue}%");
+            break;
+        }
+      }
      }
      if (!empty($columnSearch['virt_number'] ?? '')) {
-       $query->having('virt_number', 'like', "%{$columnSearch['virt_number']}%");
+      $searchGlue = $columnSearch['virt_number'][0];
+      unset($columnSearch['virt_number'][0]);
+       foreach ($columnSearch['virt_number'] as $searchValue) {
+        switch ($searchGlue) {
+          case 'OR':
+            $query = $query->orHaving('virt_number', 'like', "%{$searchValue}%");
+            break;
+          case 'AND':
+            $query = $query->having('virt_number', 'like', "%{$searchValue}%");
+            break;
+        }
+      }
      }
      return $query;
    }

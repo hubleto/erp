@@ -245,15 +245,15 @@
             </tr>
             <tr>
               <td>{{ translate('Subscription active until') }}</td>
-              <td><b>{{ viewParams.app.configAsString('subscriptionActiveUntil')|date('l, F jS Y') }}</b></td>
+              <td><b>{{ viewParams.app.configAsString('cloud/subscriptionActiveUntil')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>{{ translate('Premium account activated') }}</td>
-              <td><b>{{ viewParams.app.configAsString('premiumAccountSince')|date('l, F jS Y') }}</b></td>
+              <td><b>{{ viewParams.app.configAsString('cloud/premiumAccountSince')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>{{ translate('Free trial until') }}</td>
-              <td><b>{{ viewParams.app.configAsString('freeTrialPeriodUntil')|date('l, F jS Y') }}</b></td>
+              <td><b>{{ viewParams.app.configAsString('cloud/freeTrialPeriodUntil')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>{{ translate('Account UID') }}</td>

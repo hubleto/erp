@@ -241,19 +241,19 @@
             </tr>
             <tr>
               <td>{{ translate('Terms of use and privacy policy accepted') }}</td>
-              <td><b>{{ hubleto.config().getAsString('legalDocumentsAccepted')|date('l, F jS Y') }}</b></td>
+              <td><b>{{ hubleto.config().getAsString('cloud/legalDocumentsAccepted')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>{{ translate('Subscription active until') }}</td>
-              <td><b>{{ viewParams.app.configAsString('cloud/subscriptionActiveUntil')|date('l, F jS Y') }}</b></td>
+              <td><b>{{ hubleto.config().getAsString('cloud/subscriptionActiveUntil')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>{{ translate('Premium account activated') }}</td>
-              <td><b>{{ viewParams.app.configAsString('cloud/premiumAccountSince')|date('l, F jS Y') }}</b></td>
+              <td><b>{{ hubleto.config().getAsString('cloud/premiumAccountSince')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>{{ translate('Free trial until') }}</td>
-              <td><b>{{ viewParams.app.configAsString('cloud/freeTrialPeriodUntil')|date('l, F jS Y') }}</b></td>
+              <td><b>{{ hubleto.config().getAsString('cloud/freeTrialPeriodUntil')|date('l, F jS Y') }}</b></td>
             </tr>
             <tr>
               <td>{{ translate('Account UID') }}</td>

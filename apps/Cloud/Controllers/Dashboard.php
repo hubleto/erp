@@ -8,6 +8,7 @@ class Dashboard extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
+    /** @var \Hubleto\App\Community\Cloud\PremiumAccount */
     $premiumAccount = $this->getService(\Hubleto\App\Community\Cloud\PremiumAccount::class);
 
     $premiumAccount->updatePremiumInfo();

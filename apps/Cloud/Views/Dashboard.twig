@@ -54,12 +54,20 @@
           {{ translate('You are upgraded to Premium') }}
         </div>
         {% if viewParams.freeTrialInfo.isTrialPeriod %}
-          <div class="badge badge-warning block text-center text-2xl p-4 mt-2">
-            {{ translate('Free trial expires in') }} <b>{{ viewParams.freeTrialInfo.trialPeriodExpiresIn }} {{ translate('days') }}</b>.<br/>
-          </div>
-          <div class="badge badge-warning text-center block">
+          {% if viewParams.freeTrialInfo.trialPeriodExpiresIn <= 0 %}
+            <div class="badge badge-danger block text-center text-2xl p-4 mt-2">
+              <i class="fas fa-times mr-2"></i> {{ translate('Free trial expired.') }}<br/>
+              {{ translate('Configure your payment method.') }}
+            </div>
+          {% else %}
+            <div class="badge badge-warning block text-center text-2xl p-4 mt-2">
+              {{ translate('Free trial expires in') }} <b>{{ viewParams.freeTrialInfo.trialPeriodExpiresIn }} {{ translate('days') }}</b>.<br/>
+              {{ translate('Configure your payment method.') }}
+            </div>
+          {% endif %}
+          {# <div class="badge badge-warning text-center block">
             {{ translate('Configure your payment method.') }}
-          </div>
+          </div> #}
         {% endif %}
         {% if not viewParams.subscriptionInfo.isActive %}
           <div class="block badge text-center badge-danger p-4 mt-2">
@@ -77,12 +85,12 @@
             </div>
           </div>
         {% else %}
-          {% if viewParams.app.configAsBool('subscriptionRenewalActive') %}
+          {% if viewParams.subscriptionInfo.renewalActive %}
             <div class="block badge text-center badge-success p-4 mt-2">
               <div class="text-2xl">
                 <i class="fas fa-rotate mr-2"></i> {{ translate('Automatic subscription renewal is active') }}
               </div>
-              <div>
+              <div class="text-base my-2">
                 {{ translate('Access to your Premium account will be automaticaly renewed next month.') }}
               </div>
             </div>
@@ -91,13 +99,14 @@
               <div class="text-2xl">
                 <i class="fas fa-times mr-2"></i> {{ translate('Automatic subscription renewal is deactivated') }}
               </div>
-              <div>
-                {{ translate('Access to your Premium account will be blocked next month.') }}
+              <div class="text-base my-2">
+                {{ translate('Access to your Premium account will be blocked on ') }}<br/>
+                <b>{{ hubleto.config().getAsString('cloud/subscriptionActiveUntil')|date('l, F jS Y') }}</b>.
               </div>
               <div class="mt-8">
                 <a class="btn btn-square btn-large btn-warning" href="{{ config.projectUrl }}/cloud/activate-subscription-renewal">
-                  <span class="icon"><i class="fas fa-arrow-up"></i></span>
-                  <span class="text">{{ translate('Activate subscription renewal again') }}</span>
+                  <span class="icon"><i class="fas fa-rotate"></i></span>
+                  <span class="text">{{ translate('Activate subscription renewal') }}</span>
                 </a>
               </div>
             </div>

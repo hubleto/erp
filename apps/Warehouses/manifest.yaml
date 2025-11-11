@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Warehouses
 appType: community
-sidebarGroup: supply-chain
+sidebarGroup: retail
 rootUrlSlug: warehouses
 name: Warehouses
 icon: fas fa-warehouse

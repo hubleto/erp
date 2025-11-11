@@ -15,7 +15,7 @@ class Tag extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
-      'color' => (new Color($this, $this->translate('Color')))->setRequired(),
+      'color' => (new Color($this, $this->translate('Color')))->setRequired()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
     ]);
   }
 

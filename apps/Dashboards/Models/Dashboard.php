@@ -27,7 +27,7 @@ class Dashboard extends \Hubleto\Erp\Model
       'id_owner' => (new Lookup($this, $this->translate("Owner"), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultVisible(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired()->setDefaultVisible(),
-      'color' => (new Color($this, $this->translate('Color')))->setRequired()->setDefaultVisible(),
+      'color' => (new Color($this, $this->translate('Color')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'is_default' => (new Boolean($this, $this->translate('Is default')))->setDefaultVisible(),
     ]);
   }

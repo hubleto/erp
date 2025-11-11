@@ -22,7 +22,7 @@ class Supplier extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'address' => (new Varchar($this, $this->translate('Address'))),
+      'address' => (new Varchar($this, $this->translate('Address')))->setIcon(self::COLUMN_ADDRESS_DEFAULT_ICON),
       'city' => (new Varchar($this, $this->translate('City'))),
       'postal_code' => (new Varchar($this, $this->translate('Postal code'))),
       'id_country' => (new Lookup($this, $this->translate('Country'), Country::class)),

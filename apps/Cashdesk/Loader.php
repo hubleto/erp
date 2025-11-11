@@ -84,53 +84,53 @@ class Loader extends \Hubleto\Framework\App
       'description' => 'DEMO Cash Register'
     ])['id'];
 
-    $mProduct = $this->getModel(\Hubleto\App\Community\Products\Models\Product::class);
-    $idsProduct = $mProduct->record->pluck('id');
+    // $mProduct = $this->getModel(\Hubleto\App\Community\Products\Models\Product::class);
+    // $idsProduct = $mProduct->record->pluck('id');
 
-    for ($i = 1; $i < 10; $i++) {
-      $idReceipt = $mReceipt->record->recordCreate([
-        'id_company' => 1,
-        'id_cash_register' => $idCashRegister,
-        'number' => date('Y') . '-' . $i,
-        'created' => date('Y-m-d H:i:s'),
-      ])['id'];
+    // for ($i = 1; $i < 10; $i++) {
+    //   $idReceipt = $mReceipt->record->recordCreate([
+    //     'id_company' => 1,
+    //     'id_cash_register' => $idCashRegister,
+    //     'number' => date('Y') . '-' . $i,
+    //     'created' => date('Y-m-d H:i:s'),
+    //   ])['id'];
 
-      $totalReceiptPriceExclVat = 0;
-      $totalReceiptPriceInclVat = 0;
+    //   $totalReceiptPriceExclVat = 0;
+    //   $totalReceiptPriceInclVat = 0;
 
-      for ($j = 1; $j < rand(3, 5); $j++) {
-        $vatPercent = 23;
-        $quantity = rand(1, 25);
+    //   for ($j = 1; $j < rand(3, 5); $j++) {
+    //     $vatPercent = 23;
+    //     $quantity = rand(1, 25);
 
-        $unitPriceExclVat = rand(100, 200) / 23;
-        $unitVat = $unitPriceExclVat * $vatPercent / 100;
-        $unitPriceInclVat = $unitPriceExclVat + $unitVat;
-        $totalPriceExclVat = $unitPriceExclVat * $quantity;
-        $totalVat = $unitVat * $quantity;
-        $totalPriceInclVat = $unitPriceExclVat * $quantity;
+    //     $unitPriceExclVat = rand(100, 200) / 23;
+    //     $unitVat = $unitPriceExclVat * $vatPercent / 100;
+    //     $unitPriceInclVat = $unitPriceExclVat + $unitVat;
+    //     $totalPriceExclVat = $unitPriceExclVat * $quantity;
+    //     $totalVat = $unitVat * $quantity;
+    //     $totalPriceInclVat = $unitPriceExclVat * $quantity;
 
-        $totalReceiptPriceExclVat += $totalPriceExclVat;
-        $totalReceiptPriceInclVat += $totalPriceInclVat;
+    //     $totalReceiptPriceExclVat += $totalPriceExclVat;
+    //     $totalReceiptPriceInclVat += $totalPriceInclVat;
 
-        $mReceiptItem->record->recordCreate([
-          'id_receipt' => $idReceipt,
-          'id_product' => $idsProduct[rand(0, count($idsProduct) - 1)],
-          'quantity' => $quantity,
-          'vat_percent' => $vatPercent,
-          'unit_price_excl_vat' => $unitPriceExclVat,
-          'unit_price_incl_vat' => $unitPriceInclVat,
-          'unit_vat' => $unitVat,
-          'total_price_excl_vat' => $totalPriceExclVat,
-          'total_price_incl_vat' => $totalPriceInclVat,
-          'total_vat' => $totalVat,
-        ]);
-      }
+    //     $mReceiptItem->record->recordCreate([
+    //       'id_receipt' => $idReceipt,
+    //       'id_product' => $idsProduct[rand(0, count($idsProduct) - 1)],
+    //       'quantity' => $quantity,
+    //       'vat_percent' => $vatPercent,
+    //       'unit_price_excl_vat' => $unitPriceExclVat,
+    //       'unit_price_incl_vat' => $unitPriceInclVat,
+    //       'unit_vat' => $unitVat,
+    //       'total_price_excl_vat' => $totalPriceExclVat,
+    //       'total_price_incl_vat' => $totalPriceInclVat,
+    //       'total_vat' => $totalVat,
+    //     ]);
+    //   }
 
-      $mReceipt->record->where('id', $idReceipt)->update([
-        'total_price_excl_vat' => $totalReceiptPriceExclVat,
-        'total_price_incl_vat' => $totalReceiptPriceInclVat,
-      ]);
-    }
+    //   $mReceipt->record->where('id', $idReceipt)->update([
+    //     'total_price_excl_vat' => $totalReceiptPriceExclVat,
+    //     'total_price_incl_vat' => $totalReceiptPriceInclVat,
+    //   ]);
+    // }
   }
 
 }

@@ -1,0 +1,10 @@
+namespace: Hubleto\App\Community\Shops
+appType: community
+sidebarGroup: retail
+rootUrlSlug: Shops
+name: Shops
+icon: fas fa-shop
+author:
+  name: "WAI.blue"
+  nick: "wai.blue"
+highlight: Retail shop management

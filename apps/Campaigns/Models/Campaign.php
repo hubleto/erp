@@ -56,7 +56,7 @@ class Campaign extends \Hubleto\Erp\Model
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       // 'mail_body' => (new Text($this, $this->translate('Mail body (HTML)')))->setReactComponent('InputWysiwyg'),
-      'color' => (new Color($this, $this->translate('Color'))),
+      'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'id_mail_account' => (new Lookup($this, $this->translate('Mail account to send email from'), Account::class)),
       'id_mail_template' => (new Lookup($this, $this->translate('Mail template'), Template::class))
         ->setDefaultVisible()

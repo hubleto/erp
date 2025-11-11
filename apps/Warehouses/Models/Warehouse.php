@@ -39,7 +39,7 @@ class Warehouse extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_type' => (new Lookup($this, $this->translate('Warehouse type'), WarehouseType::class))->setDefaultVisible(),
-      'address' => (new Varchar($this, $this->translate('Address')))->setDefaultVisible(),
+      'address' => (new Varchar($this, $this->translate('Address')))->setDefaultVisible()->setIcon(self::COLUMN_ADDRESS_DEFAULT_ICON),
       'address_plus_code' => (new Varchar($this, $this->translate('Address Plus code'))),
       'contact_person' => (new Varchar($this, $this->translate('Contact person'))),
       'contact_email' => (new Varchar($this, $this->translate('Contact email')))->setDefaultVisible(),

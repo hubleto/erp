@@ -64,6 +64,7 @@ export default class FormCashRegister<P, S> extends HubletoForm<FormCashRegister
       case 'default':
         return <>
           {this.inputWrapper('id_company')}
+          {this.inputWrapper('id_shop')}
           {this.inputWrapper('identifier')}
           {this.inputWrapper('description')}
         </>

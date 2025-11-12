@@ -16,9 +16,9 @@ class Click extends \Hubleto\Erp\RecordManager
   }
 
   /** @return BelongsTo<Tag, covariant LeadTag> */
-  public function RECIPIENT(): HasOne
+  public function RECIPIENT(): BelongsTo
   {
-    return $this->hasOne(Recipient::class, 'id_recipient', 'id');
+    return $this->belongsTo(Recipient::class, 'id_recipient', 'id');
   }
 
 }

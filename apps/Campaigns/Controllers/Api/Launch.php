@@ -67,6 +67,11 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
         }
       }
 
+      $mCampaign->record->where('id', $idCampaign)->update([
+        'id_launched_by' => $this->authProvider()->getUserId(),
+        'datetime_launched' => date('Y-m-d H:i:s'),
+      ]);
+
       return ['status' => 'success'];
     } catch (\Throwable $e) {
       return ['status' => 'error', 'message' => $e->getMessage()];

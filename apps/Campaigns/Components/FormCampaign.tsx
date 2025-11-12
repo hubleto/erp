@@ -266,46 +266,52 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 </div>;
               })}
             </div> : null}
-          </> : null }
+          </> : null}
 
-          {this.state.recipients ? <>
-            <button
-              className="btn btn-transparent"
-              onClick={() => {
-                request.post(
-                  'campaigns/api/launch',
-                  { idCampaign: this.state.record.id },
-                  {},
-                  (result: any) => {
-                    this.setState({launchResult: result});
-                    if (result.status && result.status == 'success') {
-                      updateFormWorkflowByTag(this, 'campaign-launched', () => {
-                        this.saveRecord();
-                      });
-                    }
-                  }
-                );
-              }}
-            >
-              <span className="icon"><i className="fas fa-envelope"></i></span>
-              <span className="text">Send email to {this.state.recipients.length} recipients now!</span>
-            </button>
-            {this.state.launchResult && this.state.launchResult.status == 'success' ?
-              <div className='alert alert-success mt-2'>Campaign was launched.</div>
-            : null}
-            {this.state.launchResult && this.state.launchResult.status != 'success' ?
-              <div className='alert alert-danger mt-2'>
-                Error occured when launching the campaign.<br/>
-                <b>{this.state.launchResult.message}</b>
-              </div>
-            : null}
-
+          {R.id_launched_by ? 
+            <div className='alert alert-warning'>Campaign was already launched by {R.LAUNCHED_BY.email} on {R.datetime_launched}.</div>
+          : this.state.recipients ? <>
             <div className='flex flex-wrap mt-2 text-sm gap-2'>
+              <b>Recipients:</b>
               {this.state.recipients ? this.state.recipients.map((item, key) => {
                 return <span key={key}>{item.email}</span>;
               }) : null}
             </div>
-          </> : null}
+            <div className='mt-2'>
+              <button
+                className="btn btn-primary-outline btn-large"
+                onClick={() => {
+                  request.post(
+                    'campaigns/api/launch',
+                    { idCampaign: this.state.record.id },
+                    {},
+                    (result: any) => {
+                      this.setState({launchResult: result});
+                      if (result.status && result.status == 'success') {
+                        updateFormWorkflowByTag(this, 'campaign-launched', () => {
+                          this.saveRecord();
+                        });
+                      }
+                    }
+                  );
+                }}
+              >
+                <span className="icon"><i className="fas fa-paper-plane"></i></span>
+                <span className="text">Send email to {this.state.recipients.length} recipients now!</span>
+              </button>
+              {this.state.launchResult && this.state.launchResult.status == 'success' ?
+                <div className='alert alert-success mt-2'>Campaign was launched.</div>
+              : null}
+              {this.state.launchResult && this.state.launchResult.status != 'success' ?
+                <div className='alert alert-danger mt-2'>
+                  Error occured when launching the campaign.<br/>
+                  <b>{this.state.launchResult.message}</b>
+                </div>
+              : null}
+            </div>
+          </> : <>
+            <div className='alert alert-warning'>Campaign has no recipients. Add recipients first and then launch.</div>
+          </>}
         </>;
       break;
 

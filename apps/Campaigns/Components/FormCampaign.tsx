@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
 import TableRecipients from '@hubleto/apps/Campaigns/Components/TableRecipients';
+import TableClicks from '@hubleto/apps/Campaigns/Components/TableClicks';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import WorkflowSelector, { updateFormWorkflowByTag } from '@hubleto/apps/Workflow/Components/WorkflowSelector';
 import request from '@hubleto/react-ui/core/Request';
@@ -47,6 +48,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'test', title: this.translate('Test') },
         { uid: 'launch', title: this.translate('Launch') },
+        { uid: 'clicks', title: this.translate('Clicks') },
         ...this.getCustomTabs()
       ]
     };
@@ -315,6 +317,14 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             <div className='alert alert-warning'>Campaign has no recipients. Add recipients first and then launch.</div>
           </>}
         </>;
+      break;
+
+      case 'clicks':
+        return <TableClicks
+          parentForm={this}
+          uid={this.props.uid + "_table_campaign_click"}
+          idCampaign={R.id}
+        />;
       break;
 
       default:

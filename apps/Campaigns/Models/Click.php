@@ -26,4 +26,25 @@ class Click extends \Hubleto\Erp\Model
     ]);
   }
 
+  /**
+   * [Description for describeTable]
+   *
+   * @return \Hubleto\Framework\Description\Table
+   * 
+   */
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+
+    $description->ui['title'] = '';
+    $description->permissions['canCreate'] = false;
+    $description->permissions['canModify'] = false;
+    $description->permissions['canDelete'] = false;
+
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+
+    return $description;
+  }
+
 }

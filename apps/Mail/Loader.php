@@ -27,6 +27,7 @@ class Loader extends \Hubleto\Framework\App
       '/^mail\/scheduled\/?$/' => Controllers\Scheduled::class,
       '/^mail\/sent\/?$/' => Controllers\Sent::class,
       '/^mail\/get\/?$/' => Controllers\Get::class,
+      '/^mail\/send-scheduled\/?$/' => Controllers\SendScheduled::class,
       '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
       '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
       '/^mail\/mails\/add\/?$/' => ['controller' => Controllers\Mails::class, 'vars' => ['recordId' => -1]],
@@ -104,9 +105,16 @@ class Loader extends \Hubleto\Framework\App
         </a>
         <a
           class="btn btn-small btn-list-item btn-transparent mt-2"
+          href="' . $this->env()->projectUrl . '/mail/send-scheduled"
+        >
+          <span class="icon"><i class="fas fa-paper-plane"></i></span>
+          <span class="text">Send scheduled</span>
+        </a>
+        <a
+          class="btn btn-small btn-list-item btn-transparent mt-2"
           href="' . $this->env()->projectUrl . '/mail/accounts"
         >
-          <span class="icon"><i class="fas fa-download"></i></span>
+          <span class="icon"><i class="fas fa-cog"></i></span>
           <span class="text">Manage accounts</span>
         </a>
       </div>

@@ -31,6 +31,18 @@ class AppMenu extends \Hubleto\Framework\Extendible
         'title' => $this->app->translate('Accounts'),
         'icon' => 'fas fa-box-archive',
       ],
+      [
+        'app' => $this->app,
+        'url' => 'mail/scheduled',
+        'title' => $this->app->translate('Scheduled to send'),
+        'icon' => 'fas fa-clock',
+      ],
+      [
+        'app' => $this->app,
+        'url' => 'mail/sent',
+        'title' => $this->app->translate('Sent from Hubleto'),
+        'icon' => 'fas fa-paper-plane',
+      ],
     ];
   }
 

@@ -117,13 +117,16 @@ class Lib extends \Hubleto\Framework\Core
     $body = preg_replace_callback(
       '/(<a\s*)href="([^"]*)"/i',
       function($m) use ($trackerUrl, $campaign, $recipient) {
-        return 
-          $m[1] . 'href="' . $trackerUrl
-          . '?cuid=' . ($campaign['uid'] ?? '')
-          . '&rcid=' . ($recipient['id'] ?? '')
-          . '&url=' . urlencode($m[2])
-          . '"'
-        ;
+
+        $clickData = [
+          'cuid' => ($campaign['uid'] ?? ''),
+          'rcid' => ($recipient['id'] ?? ''),
+          'url' => $m[2],
+        ];
+
+        $clickDataB64 = base64_encode(json_encode($clickData));
+
+        return $m[1] . 'href="' . $trackerUrl . '?c=' . $clickDataB64 . '"';
       },
       $body
     );

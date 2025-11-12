@@ -29,7 +29,7 @@ class SendMails extends \Hubleto\Erp\Cron
       try {
         $mMail->send($mail->toArray());
         $this->logger()->info('Email `' . $mail['subject'] . '` to `' . $mail['to'] . '` sent successfully.');
-        sleep(12); // waiting to avoid spam blacklisting
+        sleep(3); // waiting to avoid spam blacklisting
       } catch (\Exception $e) {
         $this->logger()->error('Failed to send email `' . $mail['subject'] . '` to `' . $mail['to'] . '`: ' . $e->getMessage());
       }

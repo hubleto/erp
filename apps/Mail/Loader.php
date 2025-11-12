@@ -80,7 +80,7 @@ class Loader extends \Hubleto\Framework\App
               "
               href="' . $this->env()->projectUrl . '/mail/' . $mailbox->id . '"
             >
-              <span class="text">{{ m.name }}</span>
+              <span class="text">' . $mailbox->name . '</span>
             </a>
           ';
         }

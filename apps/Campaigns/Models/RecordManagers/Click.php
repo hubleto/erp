@@ -21,4 +21,16 @@ class Click extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Recipient::class, 'id_recipient', 'id');
   }
 
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+
+    if ($hubleto->router()->isUrlParam("idCampaign")) {
+      $query = $query->where($this->table . '.id_campaign', $hubleto->router()->urlParamAsInteger("idCampaign"));
+    }
+
+    return $query;
+  }
 }

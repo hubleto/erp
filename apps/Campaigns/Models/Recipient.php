@@ -12,6 +12,7 @@ class Recipient extends \Hubleto\Erp\Model
 {
   public string $table = 'campaigns_recipients';
   public string $recordManagerClass = RecordManagers\Recipient::class;
+  public ?string $lookupSqlValue = '{%TABLE%}.email';
 
   public array $relations = [
     'CAMPAIGN' => [ self::BELONGS_TO, Campaign::class, 'id_campaign', 'id' ],

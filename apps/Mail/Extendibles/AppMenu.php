@@ -10,7 +10,7 @@ class AppMenu extends \Hubleto\Framework\Extendible
       [
         'app' => $this->app,
         'url' => 'mail',
-        'title' => $this->app->translate('Active Mail'),
+        'title' => $this->app->translate('Mail'),
         'icon' => 'fas fa-envelope',
       ],
       [

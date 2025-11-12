@@ -270,7 +270,9 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
 
           {R.id_launched_by ? 
             <div className='alert alert-warning'>Campaign was already launched by {R.LAUNCHED_BY.email} on {R.datetime_launched}.</div>
-          : this.state.recipients ? <>
+          : null}
+
+          {this.state.recipients ? <>
             <div className='flex flex-wrap mt-2 text-sm gap-2'>
               <b>Recipients:</b>
               {this.state.recipients ? this.state.recipients.map((item, key) => {

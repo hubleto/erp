@@ -39,32 +39,6 @@ class Contact extends \Hubleto\Erp\RecordManager
       $query = $query->where($this->table . '.id_customer', $hubleto->router()->urlParamAsInteger("idCustomer"));
     }
 
-    // Virtual number
-    $query->selectSub(function($sub) {
-      $sub->from('contact_values')
-        ->select('value')
-        ->whereColumn('contact_values.id_contact', 'contacts.id')
-        ->where('type', 'number')
-        ->limit(1);
-    }, 'virt_number');
-
-    // Virtual email
-    $query->selectSub(function($sub) {
-      $sub->from('contact_values')
-        ->select('value')
-        ->whereColumn('contact_values.id_contact', 'contacts.id')
-        ->where('type', 'email')
-        ->limit(1);
-    }, 'virt_email');
-
-    // Virtual tag list (aggregated)
-    $query->selectSub(function($sub) {
-      $sub->from('contact_contact_tags')
-        ->join('contact_tags', 'contact_tags.id', '=', 'contact_contact_tags.id_tag')
-        ->whereColumn('contact_contact_tags.id_contact', 'contacts.id')
-        ->selectRaw("GROUP_CONCAT(DISTINCT contact_tags.name ORDER BY contact_tags.name SEPARATOR ', ')");
-    }, 'contactTag');
-
     // Virtual tag count
     $query->selectSub(function($sub) {
       $sub->from('contact_contact_tags')
@@ -89,58 +63,9 @@ class Contact extends \Hubleto\Erp\RecordManager
      if (!empty($fulltextSearch)) {
        $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
        $like = "%{$fulltextSearch}%";
-       $query->orHaving('contactTag', 'like', "%{$like}%");
+       $query->orHaving('virt_tags', 'like', "%{$like}%");
        $query->orHaving('virt_email', 'like', "%{$like}%");
        $query->orHaving('virt_number', 'like', "%{$like}%");
-     }
-     return $query;
-   }
-
-   public function addColumnSearchToQuery(mixed $query, array $columnSearch): mixed
-   {
-     $query = parent::addColumnSearchToQuery($query, $columnSearch);
-
-     if (!empty($columnSearch['virt_tags'] ?? '')) {
-      $searchGlue = $columnSearch['virt_tags'][0];
-      unset($columnSearch['virt_tags'][0]);
-      foreach ($columnSearch['virt_tags'] as $searchValue) {
-        switch ($searchGlue) {
-          case 'OR':
-            $query = $query->orHaving('contactTag', 'like', "%{$searchValue}%");
-            break;
-          case 'AND':
-            $query = $query->having('contactTag', 'like', "%{$searchValue}%");
-            break;
-        }
-      }
-     }
-     if (!empty($columnSearch['virt_email'] ?? '')) {
-      $searchGlue = $columnSearch['virt_email'][0];
-      unset($columnSearch['virt_email'][0]);
-       foreach ($columnSearch['virt_email'] as $searchValue) {
-        switch ($searchGlue) {
-          case 'OR':
-            $query = $query->orHaving('virt_email', 'like', "%{$searchValue}%");
-            break;
-          case 'AND':
-            $query = $query->having('virt_email', 'like', "%{$searchValue}%");
-            break;
-        }
-      }
-     }
-     if (!empty($columnSearch['virt_number'] ?? '')) {
-      $searchGlue = $columnSearch['virt_number'][0];
-      unset($columnSearch['virt_number'][0]);
-       foreach ($columnSearch['virt_number'] as $searchValue) {
-        switch ($searchGlue) {
-          case 'OR':
-            $query = $query->orHaving('virt_number', 'like', "%{$searchValue}%");
-            break;
-          case 'AND':
-            $query = $query->having('virt_number', 'like', "%{$searchValue}%");
-            break;
-        }
-      }
      }
      return $query;
    }

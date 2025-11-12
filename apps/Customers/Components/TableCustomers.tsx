@@ -44,7 +44,7 @@ export default class TableCustomers extends HubletoTable<TableCustomersProps, Ta
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
-    if (columnName == "tags") {
+    if (columnName == "virt_tags") {
       return <>
         {data.TAGS.map((tag, key) => {
           return <div style={{backgroundColor: tag.TAG.color}} className='badge' key={'tag-' + data.id + '-' + key}>{tag.TAG.name}</div>;

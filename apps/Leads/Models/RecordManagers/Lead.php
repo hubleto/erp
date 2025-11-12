@@ -159,14 +159,6 @@ class Lead extends \Hubleto\Erp\RecordManager
       }
     }
 
-    // Virtual tag list (aggregated)
-    $query->selectSub(function($sub) {
-      $sub->from('cross_lead_tags')
-        ->join('lead_tags', 'lead_tags.id', '=', 'cross_lead_tags.id_tag')
-        ->whereColumn('cross_lead_tags.id_lead', 'leads.id')
-        ->selectRaw("GROUP_CONCAT(DISTINCT lead_tags.name ORDER BY lead_tags.name SEPARATOR ', ')");
-    }, 'leadTag');
-
     // Virtual tag count
     $query->selectSub(function($sub) {
       $sub->from('cross_lead_tags')
@@ -180,7 +172,7 @@ class Lead extends \Hubleto\Erp\RecordManager
 
   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
   {
-    if (($orderBy['field'] ?? null) === 'tags') {
+    if (($orderBy['field'] ?? null) === 'virt_tags') {
       return $query->orderBy('tags_count', $orderBy['direction']);
     }
     return parent::addOrderByToQuery($query, $orderBy);
@@ -191,17 +183,7 @@ class Lead extends \Hubleto\Erp\RecordManager
     if (!empty($fulltextSearch)) {
       $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
       $like = "%{$fulltextSearch}%";
-      $query->having('leadTag', 'like', "%{$like}%");
-    }
-    return $query;
-  }
-
-  public function addColumnSearchToQuery(mixed $query, array $columnSearch): mixed
-  {
-    $query = parent::addColumnSearchToQuery($query, $columnSearch);
-
-    if (!empty($columnSearch['tags'] ?? '')) {
-      $query->having('leadTag', 'like', "%{$columnSearch['tags']}%");
+      $query->having('virt_tags', 'like', "%{$like}%");
     }
     return $query;
   }

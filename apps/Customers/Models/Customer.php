@@ -15,6 +15,7 @@ use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Leads\Models\Lead;
 use Hubleto\App\Community\Settings\Models\Country;
+use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\Framework\Description\Input;
 use Hubleto\Framework\Description\Table;
 use Hubleto\Framework\Helper;
@@ -61,6 +62,15 @@ class Customer extends Model
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'id_manager' => new Lookup($this, $this->translate('Manager'), User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)")),
+      'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
+        ->setProperty('sql',"
+          SELECT
+            GROUP_CONCAT(DISTINCT customer_tags.name ORDER BY customer_tags.name SEPARATOR ', ')
+          FROM `cross_customer_tags`
+          INNER JOIN `customer_tags` ON `customer_tags`.`id` = `cross_customer_tags`.`id_tag`
+          WHERE `cross_customer_tags`.`id_customer` = `customers`.`id`
+        "),
+
     ], parent::describeColumns());
   }
 
@@ -107,8 +117,6 @@ class Customer extends Model
     $description->ui['addButtonText'] = $this->translate('Add Customer');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
-
-    $description->columns['tags'] = ["title" => $this->translate("Tags")];
 
     $description->ui['filters'] = [
       'fArchive' => [ 'title' => $this->translate('Archive'), 'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Archived') ] ],

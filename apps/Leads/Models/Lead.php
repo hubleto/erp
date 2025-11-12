@@ -65,7 +65,7 @@ class Lead extends \Hubleto\Erp\Model
    * [Description for describeColumns]
    *
    * @return array
-   * 
+   *
    */
   public function describeColumns(): array
   {
@@ -120,6 +120,14 @@ class Lead extends \Hubleto\Erp\Model
       ]),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
       'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
+      'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
+        ->setProperty('sql',"
+          SELECT
+            GROUP_CONCAT(DISTINCT lead_tags.name ORDER BY lead_tags.name SEPARATOR ', ')
+          FROM `cross_lead_tags`
+          INNER JOIN `lead_tags` ON `lead_tags`.`id` = `cross_lead_tags`.`id_tag`
+          WHERE `cross_lead_tags`.`id_lead` = `leads`.`id`
+        "),
     ]);
   }
 
@@ -127,9 +135,9 @@ class Lead extends \Hubleto\Erp\Model
    * [Description for describeInput]
    *
    * @param string $columnName
-   * 
+   *
    * @return \Hubleto\Framework\Description\Input
-   * 
+   *
    */
   public function describeInput(string $columnName): \Hubleto\Framework\Description\Input
   {
@@ -153,15 +161,13 @@ class Lead extends \Hubleto\Erp\Model
    * [Description for describeTable]
    *
    * @return \Hubleto\Framework\Description\Table
-   * 
+   *
    */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
-
-    $description->columns['tags'] = ["title" => "Tags"];
 
     $description->ui['filters'] = [
       'fLeadWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Level'),
@@ -186,7 +192,7 @@ class Lead extends \Hubleto\Erp\Model
    * [Description for describeForm]
    *
    * @return \Hubleto\Framework\Description\Form
-   * 
+   *
    */
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
@@ -211,9 +217,9 @@ class Lead extends \Hubleto\Erp\Model
    * [Description for checkOwnership]
    *
    * @param array $record
-   * 
+   *
    * @return void
-   * 
+   *
    */
   public function checkOwnership(array $record): void
   {
@@ -235,9 +241,9 @@ class Lead extends \Hubleto\Erp\Model
    * [Description for onBeforeCreate]
    *
    * @param array $record
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onBeforeCreate(array $record): array
   {
@@ -249,9 +255,9 @@ class Lead extends \Hubleto\Erp\Model
    * [Description for onBeforeUpdate]
    *
    * @param array $record
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onBeforeUpdate(array $record): array
   {
@@ -317,9 +323,9 @@ class Lead extends \Hubleto\Erp\Model
    * [Description for onAfterCreate]
    *
    * @param array $savedRecord
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onAfterCreate(array $savedRecord): array
   {
@@ -355,9 +361,9 @@ class Lead extends \Hubleto\Erp\Model
    *
    * @param array $originalRecord
    * @param array $savedRecord
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {

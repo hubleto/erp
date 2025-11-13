@@ -20,18 +20,31 @@ class Calendar extends \Hubleto\Erp\Calendar
 
   public function prepareLoadActivitiesQuery(\Hubleto\App\Community\Calendar\Models\Activity $mActivity, string $dateStart, string $dateEnd, array $filter = []): mixed
   {
+    $dates = [];
+    $tsStart = strtotime($dateStart);
+    $tsEnd = strtotime($dateEnd);
+    for ($ts = $tsStart; $ts < $tsEnd; $ts += 24*60*60) {
+      $dates[] = date('Y-m-d', $ts);
+    }
+
     $query = $mActivity->record->prepareReadQuery()
       ->with('ACTIVITY_TYPE')
-      ->where(function ($q) use ($mActivity, $dateStart, $dateEnd) {
-        $q->whereRaw("
+    ;
+
+    $query->where(function($q1) use ($mActivity, $dateStart, $dateEnd, $dates) {
+      $q1->orWhere(function ($q2) use ($mActivity, $dateStart, $dateEnd) {
+        $q2->whereRaw("
             (`{$mActivity->table}`.`date_start` >= ? AND `{$mActivity->table}`.`date_start` <= ?)
             OR (`{$mActivity->table}`.`date_end` >= ? AND `{$mActivity->table}`.`date_end` <= ?)
             OR (`{$mActivity->table}`.`date_start` <= ? AND `{$mActivity->table}`.`date_end` >= ?)
           ",
           [$dateStart, $dateEnd, $dateStart, $dateEnd, $dateStart, $dateEnd]
         );
-      })
-    ;
+      });
+      foreach ($dates as $date) {
+        $q1->orWhereRaw('JSON_CONTAINS(`' . $mActivity->table . '`.`recurrence`, \'"' . $date . '"\', "$.dates")');
+      }
+    });
 
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
       $query = $query->where($mActivity->table . '.id_owner', $filter['idUser']);
@@ -56,48 +69,58 @@ class Calendar extends \Hubleto\Erp\Calendar
   public function convertActivitiesToEvents(string $source, array $activities, \Closure $detailsCallback): array
   {
     $events = [];
+    $eventKey = 0;
 
     foreach ($activities as $key => $activity) { //@phpstan-ignore-line
+      $recurrence = @json_decode($activity['recurrence'], true);
 
-      $dStart = (string) ($activity['date_start'] ?? '');
-      $tStart = (string) ($activity['time_start'] ?? '');
-      $dEnd = (string) ($activity['date_end'] ?? '');
-      $tEnd = (string) ($activity['time_end'] ?? '');
-
-      $events[$key]['id'] = (int) ($activity['id'] ?? 0);
-
-      if ($tStart != '') {
-        $events[$key]['start'] = $dStart . " " . $tStart;
+      if (is_array($recurrence) && is_array($recurrence['dates'])) {
+        $dates = $recurrence['dates'];
       } else {
-        $events[$key]['start'] = $dStart;
+        $dates = [ $activity['date_start'] ];
       }
+      foreach ($dates as $date) {
+        $dStart = date("Y-m-d", strtotime($date));
+        $tStart = (string) ($activity['time_start'] ?? '');
+        $dEnd = date("Y-m-d", strtotime($date));
+        $tEnd = (string) ($activity['time_end'] ?? '');
 
-      if ($dEnd != '') {
-        if ($tEnd != '') {
-          $events[$key]['end'] = $dEnd . " " . $tEnd;
+        $events[$eventKey]['id'] = (int) ($activity['id'] ?? 0);
+
+        if ($tStart != '') {
+          $events[$eventKey]['start'] = $dStart . " " . $tStart;
         } else {
-          $events[$key]['end'] = $dEnd;
+          $events[$eventKey]['start'] = $dStart;
         }
-      } elseif ($tEnd != '') {
-        $events[$key]['end'] = $dStart . " " . $tEnd;
+
+        if ($dEnd != '') {
+          if ($tEnd != '') {
+            $events[$eventKey]['end'] = $dEnd . " " . $tEnd;
+          } else {
+            $events[$eventKey]['end'] = $dEnd;
+          }
+        } elseif ($tEnd != '') {
+          $events[$eventKey]['end'] = $dStart . " " . $tEnd;
+        }
+
+        $longerThanDay = (!empty($dStart) && !empty($dEnd) && ($dStart != $dEnd));
+
+        // fix for fullCalendar not showing the last date of an event longer than one day
+        if ((!empty($dStart) && !empty($dEnd) && $longerThanDay)) {
+          $events[$eventKey]['end'] = date("Y-m-d", strtotime("+ 1 day", strtotime($dEnd)));
+        }
+
+        $events[$eventKey]['allDay'] = ($activity['all_day'] ?? 0) == 1 || $tStart == null ? true : false || $longerThanDay;
+        $events[$eventKey]['title'] = (string) ($activity['subject'] ?? '');
+        $events[$eventKey]['backColor'] = (string) ($activity['color'] ?? '');
+        $events[$eventKey]['color'] = $this->color;
+        $events[$eventKey]['type'] = (int) ($activity['activity_type'] ?? 0);
+        $events[$eventKey]['source'] = $source; //'customers';
+        $events[$eventKey]['details'] = $detailsCallback($activity);
+        $events[$eventKey]['id_owner'] = $activity['id_owner'] ?? 0;
+        $events[$eventKey]['owner'] = $activity['_LOOKUP[id_owner]'] ?? '';
+        $eventKey++;
       }
-
-      $longerThanDay = (!empty($dStart) && !empty($dEnd) && ($dStart != $dEnd));
-
-      // fix for fullCalendar not showing the last date of an event longer than one day
-      if ((!empty($dStart) && !empty($dEnd) && $longerThanDay)) {
-        $events[$key]['end'] = date("Y-m-d", strtotime("+ 1 day", strtotime($dEnd)));
-      }
-
-      $events[$key]['allDay'] = ($activity['all_day'] ?? 0) == 1 || $tStart == null ? true : false || $longerThanDay;
-      $events[$key]['title'] = (string) ($activity['subject'] ?? '');
-      $events[$key]['backColor'] = (string) ($activity['color'] ?? '');
-      $events[$key]['color'] = $this->color;
-      $events[$key]['type'] = (int) ($activity['activity_type'] ?? 0);
-      $events[$key]['source'] = $source; //'customers';
-      $events[$key]['details'] = $detailsCallback($activity);
-      $events[$key]['id_owner'] = $activity['id_owner'] ?? 0;
-      $events[$key]['owner'] = $activity['_LOOKUP[id_owner]'] ?? '';
     }
 
     return $events;

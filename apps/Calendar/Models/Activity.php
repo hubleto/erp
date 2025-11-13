@@ -5,10 +5,12 @@ namespace Hubleto\App\Community\Calendar\Models;
 
 
 use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Time;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Json;
 use Hubleto\App\Community\Settings\Models\ActivityType;
 use Hubleto\App\Community\Auth\Models\User;
 
@@ -26,28 +28,19 @@ class Activity extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),
+      'location' => (new Varchar($this, $this->translate('Location'))),
+      'description' => (new Text($this, $this->translate('Description'))),
       'id_activity_type' => (new Lookup($this, $this->translate('Activity type'), ActivityType::class, 'SET NULL')),
       'date_start' => (new Date($this, $this->translate('Start date')))->setRequired(),
       'time_start' => (new Time($this, $this->translate('Start time'))),
       'date_end' => (new Date($this, $this->translate('End date'))),
       'time_end' => (new Time($this, $this->translate('End time'))),
+      'recurrence' => (new Json($this, $this->translate('Recurrence'))),
       'all_day' => (new Boolean($this, $this->translate('All day'))),
       'completed' => (new Boolean($this, $this->translate('Completed')))->setDefaultValue(0),
-      'meeting_minutes_link' => (new Varchar($this, $this->translate('Meeting minutes (link)'))),
+      'meeting_minutes_link' => (new Varchar($this, $this->translate('Meeting minutes (link to external document)')))->setReactComponent('InputHyperlink'),
+      'meeting_minutes' => (new Text($this, $this->translate('Meeting minutes')))->setReactComponent('InputWysiwyg'),
       'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
     ]);
-  }
-
-  public function describeInput(string $columnName): \Hubleto\Framework\Description\Input
-  {
-    $description = parent::describeInput($columnName);
-    switch ($columnName) {
-      case 'meeting_minutes_link':
-        $description
-          ->setReactComponent('InputHyperlink')
-        ;
-        break;
-    }
-    return $description;
   }
 }

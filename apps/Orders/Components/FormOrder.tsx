@@ -64,6 +64,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
+        { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
         ...this.getCustomTabs()
@@ -167,79 +168,6 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
 
     switch (tabUid) {
       case 'default':
-
-        //@ts-ignore
-        const tmpCalendar = <Calendar
-          onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
-          initialView='dayGridMonth'
-          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
-          onDateClick={(date, time, info) => {
-            this.setState({
-              activityDate: date,
-              activityTime: time,
-              activityAllDay: false,
-              showIdActivity: -1,
-            } as FormOrderState);
-          }}
-          onEventClick={(info) => {
-            this.setState({
-              showIdActivity: parseInt(info.event.id),
-            } as FormOrderState);
-            info.jsEvent.preventDefault();
-          }}
-        ></Calendar>;
-
-        const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
-          <div className='mb-2'>
-            {tmpCalendar}
-          </div>
-          <div className="hubleto component input"><div className="input-element w-full flex gap-2">
-            <input
-              className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
-              placeholder={this.translate('Type recent activity here')}
-              ref={this.refLogActivityInput}
-              onKeyUp={(event: any) => {
-                if (event.keyCode == 13) {
-                  if (event.shiftKey) {
-                    this.scheduleActivity();
-                  } else {
-                    this.logCompletedActivity();
-                  }
-                }
-              }}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                this.refLogActivityInput.current.value = event.target.value;
-              }}
-            />
-          </div></div>
-          <div className='mt-2'>
-            <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
-              <span className="icon"><i className="fas fa-check"></i></span>
-              <span className="text">{this.translate('Log completed activity')}</span>
-              <span className="shortcut">{this.translate('Enter')}</span>
-            </button>
-            <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
-              <span className="icon"><i className="fas fa-clock"></i></span>
-              <span className="text">{this.translate('Schedule activity')}</span>
-              <span className="shortcut">{this.translate('Shift+Enter')}</span>
-            </button>
-          </div>
-          {this.divider(this.translate('Most recent activities'))}
-          {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
-            return <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
-              onClick={() => this.setState({showIdActivity: item.id} as FormOrderState)}
-            >
-              <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
-              <span className="text">
-                {item.subject}
-                {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
-              </span>
-            </button>;
-          })}</div> : null}
-        </div>;
-
         return <>
           <div className='card'>
             <div className='card-body flex flex-row gap-2'>
@@ -272,15 +200,156 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                 {this.inputWrapper('shipping_info')}
                 {this.inputWrapper('id_template')}
               </div>
-              <div className='border-l border-gray-200'></div>
-              <div className='grow'>
-                {this.state.id > 0 ? recentActivitiesAndCalendar : null}
-              </div>
             </div>
           </div>
         </>;
       break;
 
+
+      case 'calendar':
+        //@ts-ignore
+        const tmpCalendarSmall = <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_archived}
+          initialView='dayGridMonth'
+          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
+          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormOrderState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormOrderState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>;
+
+        const recentActivitiesAndCalendar = <div className='card card-body flex flex-col gap-2'>
+          <div>
+            {tmpCalendarSmall}
+          </div>
+          <div>
+            <div className="hubleto component input"><div className="input-element w-full flex gap-2">
+              <input
+                className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
+                placeholder={this.translate('Type recent activity here')}
+                ref={this.refLogActivityInput}
+                onKeyUp={(event: any) => {
+                  if (event.keyCode == 13) {
+                    if (event.shiftKey) {
+                      this.scheduleActivity();
+                    } else {
+                      this.logCompletedActivity();
+                    }
+                  }
+                }}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  this.refLogActivityInput.current.value = event.target.value;
+                }}
+              />
+            </div></div>
+            <div className='mt-2'>
+              <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
+                <span className="icon"><i className="fas fa-check"></i></span>
+                <span className="text">{this.translate('Log completed activity')}</span>
+                <span className="shortcut">{this.translate('Enter')}</span>
+              </button>
+              <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
+                <span className="icon"><i className="fas fa-clock"></i></span>
+                <span className="text">{this.translate('Schedule activity')}</span>
+                <span className="shortcut">{this.translate('Shift+Enter')}</span>
+              </button>
+            </div>
+            {this.divider(this.translate('Most recent activities'))}
+            {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
+              return <>
+                <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
+                  onClick={() => this.setState({showIdActivity: item.id} as FormOrderState)}
+                >
+                  <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
+                  <span className="text">
+                    {item.subject}
+                    {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
+                  </span>
+                </button>
+              </>
+            })}</div> : null}
+          </div>
+        </div>;
+
+        //@ts-ignore
+        const tmpCalendarLarge = <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_archived}
+          initialView='timeGridWeek'
+          views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormOrderState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormOrderState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>;
+
+        return <>
+          <div className='flex gap-2 mt-2'>
+            <div className='flex-2 w-2/3'>
+              {tmpCalendarLarge}
+            </div>
+            <div className='flex-1 w-1/3'>
+              {this.state.id > 0 ? recentActivitiesAndCalendar : null}
+            </div>
+          </div>
+          {this.state.showIdActivity == 0 ? null :
+            <ModalForm
+              ref={this.refActivityModal}
+              uid='activity_form'
+              isOpen={true}
+              type='right'
+            >
+              <OrderFormActivity
+                modal={this.refActivityModal}
+                id={this.state.showIdActivity}
+                isInlineEditing={true}
+                description={{
+                  defaultValues: {
+                    id_order: R.id,
+                    id_contact: R.id_contact,
+                    date_start: this.state.activityDate,
+                    time_start: this.state.activityTime == "00:00:00" ? null : this.state.activityTime,
+                    date_end: this.state.activityDate,
+                    all_day: this.state.activityAllDay,
+                    subject: this.state.activitySubject,
+                  }
+                }}
+                idCustomer={R.id_customer}
+                onClose={() => { this.setState({ showIdActivity: 0 } as FormOrderState) }}
+                onSaveCallback={(form: OrderFormActivity<OrderFormActivityProps, OrderFormActivityState>, saveResponse: any) => {
+                  if (saveResponse.status == "success") {
+                    this.setState({ showIdActivity: 0 } as FormOrderState);
+                  }
+                }}
+              ></OrderFormActivity>
+            </ModalForm>
+          }
+        </>;
+      break;
+      
       case 'products':
         return <TableOrderProducts
           tag={"table_order_product"}

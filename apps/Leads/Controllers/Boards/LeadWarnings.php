@@ -19,6 +19,7 @@ class LeadWarnings extends \Hubleto\Erp\Controller
 
     $myLeads = $mLead->record->prepareReadQuery()
       ->where($mLead->table . ".is_archived", 0)
+      ->where($mLead->table . ".is_closed", 0)
       ->get()
       ->toArray()
     ;
@@ -26,18 +27,18 @@ class LeadWarnings extends \Hubleto\Erp\Controller
     // open-leads-without-future-plan
     $items = [];
 
-    // foreach ($myLeads as $lead) {
-    //   $futureActivities = 0;
-    //   foreach ($lead['ACTIVITIES'] as $activity) {
-    //     if (strtotime($activity['date_start']) > time()) {
-    //       $futureActivities++;
-    //     }
-    //   }
-    //   if (in_array($lead['status'], [Lead::STATUS_IN_PROGRESS]) && $futureActivities == 0) {
-    //     $items[] = $lead;
-    //     $warningsTotal++;
-    //   }
-    // }
+    foreach ($myLeads as $lead) {
+      $futureActivities = 0;
+      foreach ($lead['ACTIVITIES'] as $activity) {
+        if (strtotime($activity['date_start']) > time()) {
+          $futureActivities++;
+        }
+      }
+      if ($futureActivities == 0) {
+        $items[] = $lead;
+        $warningsTotal++;
+      }
+    }
 
     $warnings['open-leads-without-future-plan'] = [
       "title" => $this->translate('Open leads without future plan'),

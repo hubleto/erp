@@ -11,7 +11,8 @@ class SendMails extends \Hubleto\Erp\Cron
 
   public function run(): void
   {
-    $maxMailsToSend = 3;
+    $maxMailsToSend = $this->router()->urlParamAsInteger('maxMailsToSend', 3);
+    if ($maxMailsToSend > 30) $maxMailsToSend = 30;
 
     /** @var Mail */
     $mMail = $this->getModel(Mail::class);

@@ -61,18 +61,26 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
     const R = this.state.record;
     const customInputs = this.renderCustomInputs();
 
-    let recurrence: Recurrence = null;
-    
-    try {
-      recurrence = JSON.parse(R.recurrence);
-    } catch (ex) {
-      recurrence = {
-        period: '',
-        periodEvery: 1,
-        periodCount: 0,
-        dates: [],
-      };
-      recurrence.dates = this.expandRecurrenceDates(recurrence);
+    let recurrence: Recurrence = {
+      period: '',
+      periodEvery: 1,
+      periodCount: 0,
+      dates: [],
+    };
+
+    if (R.recurrence != '') {
+      try {
+        recurrence = JSON.parse(R.recurrence);
+        recurrence.dates = this.expandRecurrenceDates(recurrence);
+      } catch (ex) {
+        recurrence = {
+          period: '',
+          periodEvery: 1,
+          periodCount: 0,
+          dates: [],
+        };
+        recurrence.dates = this.expandRecurrenceDates(recurrence);
+      }
     }
 
     let daysDuration = moment(R.date_end).diff(moment(R.date_start), 'days');
@@ -133,7 +141,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
         <div className='w-1/2'>
           {this.divider(this.translate('Repeats'))}
           {this.inputWrapperCustom('recurrence', {}, '', <div className='hubleto component input flex flex-col items-start gap-2'>
-            {recurrence.period == '' ?
+            {recurrence && recurrence.period == '' ?
               <select
                 value={recurrence.period}
                 className='w-full'

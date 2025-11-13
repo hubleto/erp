@@ -11,6 +11,8 @@ class SendMails extends \Hubleto\Erp\Cron
 
   public function run(): void
   {
+    $maxMailsToSend = 3;
+
     /** @var Mail */
     $mMail = $this->getModel(Mail::class);
 
@@ -19,11 +21,11 @@ class SendMails extends \Hubleto\Erp\Cron
       ->where('datetime_scheduled_to_send', '<=', date('Y-m-d H:i:s'))
       ->with('ACCOUNT')
       ->with('MAILBOX')
-      ->limit(3) // cron is launched each minute; send max 3 emails per minute
+      ->limit($maxMailsToSend) // cron is launched each minute; send max 3 emails per minute
       ->get()
     ;
 
-    $this->logger()->info('SendMails: ' . $mailsToSend->count() . ' mails to send.');
+    $this->logger()->info('SendMails: found ' . $mailsToSend->count() . ' mails to send (maxMailsToSend = ' . $maxMailsToSend . ')');
 
     foreach ($mailsToSend as $mail) {
       try {

@@ -16,6 +16,7 @@
   <div>
     <app-mail-table-mails
       int:id-account="{{ a.id }}"
+      int:record-id="{{ viewParams.recordId }}"
       string:tag="scheduled-emails"
       bool:show-only-scheduled-to-send="true"
       bool:readonly="true"

@@ -322,6 +322,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       case 'clicks':
         return <TableClicks
           parentForm={this}
+          tag="table_campaign_click"
           uid={this.props.uid + "_table_campaign_click"}
           idCampaign={R.id}
         />;

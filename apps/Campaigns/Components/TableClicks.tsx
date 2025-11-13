@@ -12,6 +12,7 @@ export default class TableClicks extends HubletoTable<TableClicksProps, TableCli
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Campaigns/Models/Click',
+    orderBy: {field: 'datetime_clicked', direction: 'desc'},
   }
 
   props: TableClicksProps;

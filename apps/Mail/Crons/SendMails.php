@@ -7,13 +7,11 @@ use Hubleto\App\Community\Mail\Models\Mail;
 class SendMails extends \Hubleto\Erp\Cron
 {
   public string $schedulingPattern = '* * * * *';
+  public int $maxMailsToSend = 3;
 
 
   public function run(): void
   {
-    $maxMailsToSend = $this->router()->urlParamAsInteger('maxMailsToSend', 3);
-    if ($maxMailsToSend > 30) $maxMailsToSend = 30;
-
     /** @var Mail */
     $mMail = $this->getModel(Mail::class);
 
@@ -22,11 +20,11 @@ class SendMails extends \Hubleto\Erp\Cron
       ->where('datetime_scheduled_to_send', '<=', date('Y-m-d H:i:s'))
       ->with('ACCOUNT')
       ->with('MAILBOX')
-      ->limit($maxMailsToSend) // cron is launched each minute; send max 3 emails per minute
+      ->limit($this->maxMailsToSend) // cron is launched each minute; send max 3 emails per minute
       ->get()
     ;
 
-    $this->logger()->info('SendMails: found ' . $mailsToSend->count() . ' mails to send (maxMailsToSend = ' . $maxMailsToSend . ')');
+    $this->logger()->info('SendMails: found ' . $mailsToSend->count() . ' mails to send (maxMailsToSend = ' . $this->maxMailsToSend . ')');
 
     foreach ($mailsToSend as $mail) {
       try {

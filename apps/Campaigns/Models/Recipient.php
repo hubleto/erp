@@ -33,6 +33,7 @@ class Recipient extends \Hubleto\Erp\Model
       'variables' => (new Json($this, $this->translate('Variables')))->setDefaultVisible()->setReactComponent('InputJsonKeyValue'),
       'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class))->setReadonly()->setDefaultVisible(),
       'is_opted_out' => (new Boolean($this, $this->translate('Is opted-out')))->setDefaultVisible(),
+      'is_invalid' => (new Boolean($this, $this->translate('Is invalid')))->setDefaultVisible(),
     ]);
   }
 
@@ -43,7 +44,9 @@ class Recipient extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
     $view = $this->router()->urlParamAsString('view');
-    if ($view == 'briefOverview') $description->showOnlyColumns(['email', 'first_name', 'last_name', 'salutation', 'variables', 'is_opted_out']);
+    if ($view == 'briefOverview') {
+      $description->showOnlyColumns(['email', 'first_name', 'last_name', 'salutation', 'variables', 'is_opted_out', 'is_invalid']);
+    }
 
     return $description;
   }

@@ -56,7 +56,7 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
   }
 
   rowClassName(rowData: any): string {
-    return rowData.is_opted_out ? 'bg-red-300' : super.rowClassName(rowData);
+    return rowData.is_opted_out ? 'bg-red-300' : (rowData.is_invalid ? 'bg-gray-300' : super.rowClassName(rowData));
   }
 
   setRecordFormUrl(id: number) {

@@ -8,6 +8,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\Framework\Helper;
 
 class Contact extends \Hubleto\Erp\Model
@@ -44,6 +45,30 @@ class Contact extends \Hubleto\Erp\Model
       'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
       'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1)->setDefaultVisible(),
+      'virt_number' => (new Virtual($this, $this->translate('Phone Numbers')))->setDefaultVisible()
+        ->setProperty('sql','
+          SELECT
+            value
+          FROM contact_values
+          WHERE contact_values.id_contact = contacts.id
+          AND contact_values.type = "number"
+        '),
+      'virt_email' => (new Virtual($this, $this->translate('Emails')))->setDefaultVisible()
+        ->setProperty('sql','
+          SELECT
+            value
+          FROM contact_values
+          WHERE contact_values.id_contact = contacts.id
+          AND contact_values.type = "email"
+        '),
+      'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
+        ->setProperty('sql',"
+          SELECT
+            GROUP_CONCAT(DISTINCT contact_tags.name ORDER BY contact_tags.name SEPARATOR ', ')
+          FROM `contact_contact_tags`
+          INNER join `contact_tags` ON `contact_tags`.`id` = `contact_contact_tags`.`id_tag`
+          WHERE `contact_contact_tags`.`id_contact` = `contacts`.`id`
+        "),
     ], parent::describeColumns());
   }
 
@@ -54,14 +79,6 @@ class Contact extends \Hubleto\Erp\Model
     $description->ui['addButtonText'] = $this->translate('Add contact');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
-
-    $description->columns['virt_email'] = ["title" => $this->translate("Emails")];
-    $description->columns['virt_number'] = ["title" => $this->translate("Phone Numbers")];
-    $description->columns['virt_tags'] = ["title" => $this->translate("Tags")];
-
-    unset($description->columns['note']);
-    unset($description->columns['is_primary']);
-
 
     // if ($this->router()->urlParamAsInteger('idCustomer') > 0) {
     //   $description->columns = [];

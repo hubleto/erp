@@ -86,14 +86,6 @@ class Customer extends \Hubleto\Erp\RecordManager
       }
     }
 
-    // Virtual tag list (aggregated)
-    $query->selectSub(function($sub) {
-      $sub->from('cross_customer_tags')
-        ->join('customer_tags', 'customer_tags.id', '=', 'cross_customer_tags.id_tag')
-        ->whereColumn('cross_customer_tags.id_customer', 'customers.id')
-        ->selectRaw("GROUP_CONCAT(DISTINCT customer_tags.name ORDER BY customer_tags.name SEPARATOR ', ')");
-    }, 'customerTag');
-
     // Virtual tag count
     $query->selectSub(function($sub) {
       $sub->from('cross_customer_tags')
@@ -107,7 +99,7 @@ class Customer extends \Hubleto\Erp\RecordManager
 
   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
   {
-    if (($orderBy['field'] ?? null) === 'tags') {
+    if (($orderBy['field'] ?? null) === 'virt_tags') {
       return $query->orderBy('tags_count', $orderBy['direction']);
     } else {
       return parent::addOrderByToQuery($query, $orderBy);
@@ -120,19 +112,8 @@ class Customer extends \Hubleto\Erp\RecordManager
       $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
 
       $like = "%{$fulltextSearch}%";
-      $query->orHaving('customerTag', 'like', "%{$like}%");
+      $query->orHaving('virt_tags', 'like', "%{$like}%");
     }
-    return $query;
-  }
-
-  public function addColumnSearchToQuery(mixed $query, array $columnSearch): mixed
-  {
-    $query = parent::addColumnSearchToQuery($query, $columnSearch);
-
-    if (!empty($columnSearch['tags'] ?? '')) {
-      $query->having('customerTag', 'like', "%{$columnSearch['tags']}%");
-    }
-
     return $query;
   }
 

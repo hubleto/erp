@@ -2,9 +2,23 @@
 
 <h1 class="app-main-title">{{ translate('Mail') }} > Scheduled to send</h1>
 
-<app-mail-table-mails
-  int:id-account="{{ a.id }}"
-  bool:show-only-scheduled-to-send="true"
-  bool:readonly="true"
-  string:view="briefOverview"
-></app-mail-table-mails>
+<div class="flex flex-col gap-2">
+  <div class="flex gap-2">
+    <a href="send-scheduled" class="btn btn-primary">
+      <span class="icon"><i class="fas fa-paper-plane"></i></span>
+      <span class="text">{{ translate('Send scheduled emails now') }}</span>
+    </a>
+    <a href="sent" class="btn btn-transparent">
+      <span class="icon"><i class="fas fa-paper-plane"></i></span>
+      <span class="text">{{ translate('Show sent emails') }}</span>
+    </a>
+  </div>
+  <div>
+    <app-mail-table-mails
+      int:id-account="{{ a.id }}"
+      string:tag="scheduled-emails"
+      bool:show-only-scheduled-to-send="true"
+      bool:readonly="true"
+    ></app-mail-table-mails>
+  </div>
+</div>

@@ -105,10 +105,10 @@ class Loader extends \Hubleto\Framework\App
         </a>
         <a
           class="btn btn-small btn-list-item btn-transparent mt-2"
-          href="' . $this->env()->projectUrl . '/mail/send-scheduled"
+          href="' . $this->env()->projectUrl . '/mail/scheduled"
         >
-          <span class="icon"><i class="fas fa-paper-plane"></i></span>
-          <span class="text">Send scheduled</span>
+          <span class="icon"><i class="fas fa-clock"></i></span>
+          <span class="text">Scheduled to send</span>
         </a>
         <a
           class="btn btn-small btn-list-item btn-transparent mt-2"

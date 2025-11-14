@@ -353,7 +353,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className="w-1/2">
-                  {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+                  {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_archived})}
                   {this.inputWrapper("vat_id")}
                   {this.inputWrapper("tax_id")}
                   {this.inputWrapper("date_created")}

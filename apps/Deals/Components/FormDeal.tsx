@@ -326,7 +326,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               }
             )}
           </div>
-          {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+          {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_archived})}
           {this.state.record.deal_result == 2 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
         </>;
 

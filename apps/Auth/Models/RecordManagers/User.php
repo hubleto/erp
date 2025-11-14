@@ -82,7 +82,7 @@ class User extends \Hubleto\Erp\RecordManager
         ifnull(' . $this->table . '.nick, ' . $this->table . '.email),
         if(' . $this->table . '.id = ' . $idUser .  ', " (you)", "")
       ) as _LOOKUP,
-      concat("rounded inline-block px-1 ", if(' . $this->table . '.id = ' . $idUser .  ', "border border-lime-300 bg-lime-50 text-lime-800", "border border-slate-100 bg-slate-50 text-slate-800")) as _LOOKUP_CLASS,
+      concat("rounded inline-block px-1 ", if(' . $this->table . '.id = ' . $idUser .  ', "border border-lime-300 bg-lime-50 text-lime-800 dark:bg-primary dark:border-none dark:text-white", "border border-slate-100 bg-slate-50 dark:bg-transparent dark:text-white text-slate-800")) as _LOOKUP_CLASS,
       "" as _LOOKUP_COLOR
     ');
 

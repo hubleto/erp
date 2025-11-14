@@ -155,7 +155,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
   renderTitle(): JSX.Element {
     const R = this.state.record;
-    
+
     let values = [];
     if (R && R.CONTACT) {
       if (R.CONTACT.first_name) values.push(R.CONTACT.first_name);

@@ -79,6 +79,8 @@ export default class FormRecipient<P, S> extends HubletoForm<FormRecipientProps,
               {this.inputWrapper('salutation')}
               {this.inputWrapper('variables')}
               {this.inputWrapper('id_mail')}
+              {this.inputWrapper('is_opted_out')}
+              {this.inputWrapper('is_invalid')}
             </div>
             <div className='flex-1'>
               <div className='card'>

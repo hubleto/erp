@@ -22,6 +22,12 @@ class Campaign extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(User::class, 'id_manager', 'id');
   }
 
+  /** @return BelongsTo<User, covariant Lead> */
+  public function LAUNCHED_BY(): BelongsTo
+  {
+    return $this->belongsTo(User::class, 'id_launched_by', 'id');
+  }
+
   /** @return HasOne<Account, covariant Deal> */
   public function MAIL_ACCOUNT(): HasOne
   {

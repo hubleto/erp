@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Mail;
 
-
+use Hubleto\App\Community\Mail\Models\Account;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -24,8 +24,9 @@ class Loader extends \Hubleto\Framework\App
       '/^mail\/accounts\/?(?<idAccount>\d+)?\/?$/' => Controllers\Accounts::class,
       '/^mail\/accounts\/add\/?$/' => ['controller' => Controllers\Accounts::class, 'vars' => ['recordId' => -1]],
 
-      '/^mail\/accounts\/scheduled\/?$/' => Controllers\Scheduled::class,
-      '/^mail\/accounts\/sent\/?$/' => Controllers\Sent::class,
+      '/^mail\/scheduled\/?$/' => Controllers\Scheduled::class,
+      '/^mail\/scheduled\/send\/?$/' => Controllers\SendScheduled::class,
+      '/^mail\/sent\/?$/' => Controllers\Sent::class,
       '/^mail\/get\/?$/' => Controllers\Get::class,
       '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
       '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
@@ -44,6 +45,81 @@ class Loader extends \Hubleto\Framework\App
 
     $this->templateVariables = $this->collectExtendibles('MailTemplateVariables');
     $this->sidebarView = '@Hubleto:App:Community:Mail/Sidebar.twig';
+  }
+
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   * 
+   */
+  public function renderSecondSidebar(): string
+  {
+    $activeIdMailbox = $this->router()->urlParamAsInteger('idMailbox');
+
+    $mAccount = $this->getModel(Account::class);
+    $accounts = $mAccount->record->prepareReadQuery()->with('MAILBOXES')->get();
+
+    $accountsHtml = '';
+    foreach ($accounts as $account) {
+      $accountsHtml .= '
+        <div class="bg-primary/10 p-1 text-sm"> ' . $account->name . '</div>
+        <div class="list">
+      ';
+
+      if (count($account->MAILBOXES) == 0) {
+        $accountsHtml .= '
+          <div class="alert alert-info text-sm m-2">Account has no mailboxes.</div>
+        ';
+      } else {
+        foreach ($account->MAILBOXES as $mailbox) {
+          $accountsHtml .= '
+            <a
+              class="
+                btn btn-small btn-list-item
+                ' . ($mailbox->id == $activeIdMailbox ? "btn-primary" : "btn-transparent") . '
+              "
+              href="' . $this->env()->projectUrl . '/mail/' . $mailbox->id . '"
+            >
+              <span class="text">' . $mailbox->name . '</span>
+            </a>
+          ';
+        }
+      }
+        
+      $accountsHtml .= '
+        </div>
+      ';
+    }
+
+    return '
+      ' . $accountsHtml . '
+
+      <div>
+        <a
+          class="btn btn-small btn-list-item btn-transparent mt-2"
+          href="' . $this->env()->projectUrl . '/mail/get"
+        >
+          <span class="icon"><i class="fas fa-download"></i></span>
+          <span class="text">Get emails</span>
+        </a>
+        <a
+          class="btn btn-small btn-list-item btn-transparent mt-2"
+          href="' . $this->env()->projectUrl . '/mail/scheduled"
+        >
+          <span class="icon"><i class="fas fa-clock"></i></span>
+          <span class="text">Scheduled to send</span>
+        </a>
+        <a
+          class="btn btn-small btn-list-item btn-transparent mt-2"
+          href="' . $this->env()->projectUrl . '/mail/accounts"
+        >
+          <span class="icon"><i class="fas fa-cog"></i></span>
+          <span class="text">Manage accounts</span>
+        </a>
+      </div>
+
+    ';
   }
 
   public function installTables(int $round): void

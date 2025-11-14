@@ -20,10 +20,31 @@ class Click extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired(),
-      'id_recipient' => (new Lookup($this, $this->translate('Recipient'), Recipient::class)),
-      'url' => (new Varchar($this, $this->translate('Url'))),
-      'datetime_clicked' => (new DateTime($this, $this->translate('Clicked'))),
+      'id_recipient' => (new Lookup($this, $this->translate('Recipient'), Recipient::class))->setDefaultVisible(),
+      'url' => (new Varchar($this, $this->translate('Url')))->setDefaultVisible(),
+      'datetime_clicked' => (new DateTime($this, $this->translate('Clicked')))->setDefaultVisible(),
     ]);
+  }
+
+  /**
+   * [Description for describeTable]
+   *
+   * @return \Hubleto\Framework\Description\Table
+   * 
+   */
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+
+    $description->ui['title'] = '';
+    $description->permissions['canCreate'] = false;
+    $description->permissions['canModify'] = false;
+    $description->permissions['canDelete'] = false;
+
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+
+    return $description;
   }
 
 }

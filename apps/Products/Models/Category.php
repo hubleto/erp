@@ -21,7 +21,7 @@ class Category extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_parent' => (new Lookup($this, $this->translate("Parent"), Category::class))->setDefaultVisible(),
       'name' => (new Varchar($this, $this->translate("Name")))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'color' => (new Color($this, $this->translate("Color")))->setDefaultVisible(),
+      'color' => (new Color($this, $this->translate("Color")))->setDefaultVisible()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'short_description' => (new Text($this, $this->translate("Short description"))),
       'long_description' => (new Text($this, $this->translate("Long description")))->setReactComponent('InputWysiwyg'),
       'photo_1' => (new Image($this, $this->translate("Photo #1")))->setDefaultVisible(),

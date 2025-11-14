@@ -30,6 +30,7 @@ class Campaign extends \Hubleto\Erp\Model
     'MAIL_ACCOUNT' => [ self::HAS_ONE, Account::class, 'id_mail_account', 'id'],
     'MAIL_TEMPLATE' => [ self::HAS_ONE, Template::class, 'id_mail_template', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
+    'LAUNCHED_BY' => [ self::BELONGS_TO, User::class, 'id_launched_by', 'id'],
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
 
@@ -56,7 +57,7 @@ class Campaign extends \Hubleto\Erp\Model
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       // 'mail_body' => (new Text($this, $this->translate('Mail body (HTML)')))->setReactComponent('InputWysiwyg'),
-      'color' => (new Color($this, $this->translate('Color'))),
+      'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'id_mail_account' => (new Lookup($this, $this->translate('Mail account to send email from'), Account::class)),
       'id_mail_template' => (new Lookup($this, $this->translate('Mail template'), Template::class))
         ->setDefaultVisible()
@@ -68,6 +69,8 @@ class Campaign extends \Hubleto\Erp\Model
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setDefaultValue(date('Y-m-d H:i:s')),
+      'id_launched_by' => (new Lookup($this, $this->translate('Lanuched by'), User::class))->setReadonly(true),
+      'datetime_launched' => (new DateTime($this, $this->translate('Launched')))->setReadonly(true)->setDefaultVisible(),
     ]);
   }
 
@@ -100,6 +103,20 @@ class Campaign extends \Hubleto\Erp\Model
       ],
     ];
 
+
+    return $description;
+  }
+
+  /**
+   * [Description for describeForm]
+   *
+   * @return \Hubleto\Framework\Description\Form
+   * 
+   */
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+    $description->includeRelations = ['WORKFLOW', 'WORKFLOW_STEP'];
 
     return $description;
   }

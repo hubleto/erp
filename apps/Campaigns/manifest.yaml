@@ -3,7 +3,7 @@ appType: community
 sidebarGroup: marketing
 rootUrlSlug: campaigns
 name: Campaigns
-icon: fas fa-signal
+icon: fas fa-users-viewfinder
 author:
   company: "wai.blue"
 highlight: Management of marketing campaigns

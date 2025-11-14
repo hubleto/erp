@@ -41,19 +41,19 @@ class Mail extends \Hubleto\Erp\Model
       'id_account' => (new Lookup($this, $this->translate('Account'), Account::class))->setReadonly(),
       'id_mailbox' => (new Lookup($this, $this->translate('Mailbox'), Mailbox::class))->setReadonly(),
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
-      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
+      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s'))->setDefaultVisible(),
       'datetime_scheduled_to_send' => (new DateTime($this, $this->translate('Scheduled to send'))),
-      'datetime_sent' => (new DateTime($this, $this->translate('Sent')))->setReadonly(),
+      'datetime_sent' => (new DateTime($this, $this->translate('Sent')))->setReadonly()->setDefaultVisible(),
       'datetime_read' => (new DateTime($this, $this->translate('Read'))),
-      'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
-      'from' => (new Varchar($this, $this->translate('From')))->setReadonly()->setDefaultValue($user['email'] ?? ''),
-      'to' => (new Varchar($this, $this->translate('To'))),
-      'cc' => (new Varchar($this, $this->translate('Cc'))),
+      'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold')->setDefaultVisible(),
+      'from' => (new Varchar($this, $this->translate('From')))->setReadonly()->setDefaultValue($user['email'] ?? '')->setDefaultVisible(),
+      'to' => (new Varchar($this, $this->translate('To')))->setDefaultVisible(),
+      'cc' => (new Varchar($this, $this->translate('Cc')))->setDefaultVisible(),
       'bcc' => (new Varchar($this, $this->translate('Bcc'))),
       'reply_to' => (new Varchar($this, $this->translate('Reply to')))->setReadonly()->setDefaultValue($user['email'] ?? ''),
       'body_text' => (new Text($this, $this->translate('Body (Text)'))),
       'body_html' => (new Text($this, $this->translate('Body (HTML)')))->setReactComponent('InputWysiwyg'),
-      'color' => (new Color($this, $this->translate('Color'))),
+      'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'is_draft' => (new Boolean($this, $this->translate('Draft')))->setDefaultValue(true),
       'is_template' => (new Boolean($this, $this->translate('Template'))),
     ]);
@@ -67,8 +67,6 @@ class Mail extends \Hubleto\Erp\Model
    */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
-    $folder = $this->router()->urlParamAsString('folder');
-
     $description = parent::describeTable();
 
     $description->ui['title'] = '';

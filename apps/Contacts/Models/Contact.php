@@ -35,20 +35,20 @@ class Contact extends \Hubleto\Erp\Model
   {
     return array_merge([
       'salutation' => (new Varchar($this, $this->translate('Salutation'))),
-      'title_before' => (new Varchar($this, $this->translate('Title before'))),
+      'title_before' => (new Varchar($this, $this->translate('Title before')))->setDefaultVisible(),
       'first_name' => (new Varchar($this, $this->translate('First name')))->setDefaultVisible(),
       'middle_name' => (new Varchar($this, $this->translate('Middle name'))),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),
       'title_after' => (new Varchar($this, $this->translate('Title after'))),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
       'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0),
-      'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
+      'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
       'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1)->setDefaultVisible(),
       'virt_number' => (new Virtual($this, $this->translate('Phone Numbers')))->setDefaultVisible()
         ->setProperty('sql','
           SELECT
-            value
+            group_concat(value)
           FROM contact_values
           WHERE contact_values.id_contact = contacts.id
           AND contact_values.type = "number"
@@ -56,7 +56,7 @@ class Contact extends \Hubleto\Erp\Model
       'virt_email' => (new Virtual($this, $this->translate('Emails')))->setDefaultVisible()
         ->setProperty('sql','
           SELECT
-            value
+            group_concat(value)
           FROM contact_values
           WHERE contact_values.id_contact = contacts.id
           AND contact_values.type = "email"

@@ -16,9 +16,21 @@ class Click extends \Hubleto\Erp\RecordManager
   }
 
   /** @return BelongsTo<Tag, covariant LeadTag> */
-  public function RECIPIENT(): HasOne
+  public function RECIPIENT(): BelongsTo
   {
-    return $this->hasOne(Recipient::class, 'id_recipient', 'id');
+    return $this->belongsTo(Recipient::class, 'id_recipient', 'id');
   }
 
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level);
+
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+
+    if ($hubleto->router()->isUrlParam("idCampaign")) {
+      $query = $query->where($this->table . '.id_campaign', $hubleto->router()->urlParamAsInteger("idCampaign"));
+    }
+
+    return $query;
+  }
 }

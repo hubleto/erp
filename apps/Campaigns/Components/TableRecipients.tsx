@@ -12,6 +12,7 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Campaigns/Models/Recipient',
+    orderBy: {field: 'is_opted_out', direction: 'desc'},
   }
 
   props: TableRecipientsProps;
@@ -55,7 +56,7 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
   }
 
   rowClassName(rowData: any): string {
-    return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
+    return rowData.is_opted_out ? 'bg-red-300' : (rowData.is_invalid ? 'bg-gray-300' : super.rowClassName(rowData));
   }
 
   setRecordFormUrl(id: number) {

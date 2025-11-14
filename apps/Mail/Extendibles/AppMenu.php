@@ -10,7 +10,7 @@ class AppMenu extends \Hubleto\Framework\Extendible
       [
         'app' => $this->app,
         'url' => 'mail',
-        'title' => $this->app->translate('Active Mail'),
+        'title' => $this->app->translate('Mail'),
         'icon' => 'fas fa-envelope',
       ],
       [
@@ -30,6 +30,18 @@ class AppMenu extends \Hubleto\Framework\Extendible
         'url' => 'mail/accounts',
         'title' => $this->app->translate('Accounts'),
         'icon' => 'fas fa-box-archive',
+      ],
+      [
+        'app' => $this->app,
+        'url' => 'mail/scheduled',
+        'title' => $this->app->translate('Scheduled to send'),
+        'icon' => 'fas fa-clock',
+      ],
+      [
+        'app' => $this->app,
+        'url' => 'mail/sent',
+        'title' => $this->app->translate('Sent from Hubleto'),
+        'icon' => 'fas fa-paper-plane',
       ],
     ];
   }

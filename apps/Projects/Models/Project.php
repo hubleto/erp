@@ -75,7 +75,7 @@ class Project extends \Hubleto\Erp\Model
       // 'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setDefaultVisible()->setRequired()
       //   ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       // ,
-      'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
+      'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'online_documentation_folder' => (new Varchar($this, "Online documentation folder"))->setReactComponent('InputHyperlink'),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),

@@ -79,8 +79,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Lead')}</b> },
+        { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
-        { uid: 'calendar', icon: 'fas fa-calendar', position: 'right' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
         ...this.getCustomTabs()
       ]
@@ -218,6 +218,106 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
     switch (tabUid) {
       case 'default':
+        return <>
+          {R.is_archived == 1 ?
+            <div className='alert-warning mt-2 mb-1'>
+              <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
+              <span className='text'>{this.translate("This lead is archived.")}</span>
+            </div>
+          : null}
+          <div className='card card-body flex flex-row gap-2'>
+            <div className='grow'>
+              <FormInput title={"Campaign"}>
+                {R.CAMPAIGNS ? R.CAMPAIGNS.map((item, key) => {
+                  return <a
+                    key={key}
+                    className='badge'
+                    href={globalThis.main.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
+                    target='_blank'
+                  >{item.CAMPAIGN.name}</a>;
+                }) : null}
+              </FormInput>
+              {/* {this.inputWrapper('identifier', {readonly: R.is_archived})} */}
+              <FormInput title={"Contact"} required={true}>
+                <Lookup {...this.getInputProps('id_contact')}
+                  model='Hubleto/App/Community/Contacts/Models/Contact'
+                  customEndpointParams={{idCustomer: R.id_customer}}
+                  readonly={R.is_archived}
+                  value={R.id_contact}
+                  urlAdd='contacts/add'
+                  onChange={(input: any, value: any) => {
+                    this.updateRecord({ id_contact: value })
+                    if (R.id_contact == 0) {
+                      R.id_contact = null;
+                      this.setState({record: R})
+                    }
+                  }}
+                ></Lookup>
+              </FormInput>
+              {R.CONTACT && R.CONTACT.VALUES ? <div className="ml-4 text-sm p-2 bg-lime-100 text-lime-900 mb-2">
+                {R.CONTACT.VALUES.map((item, key) => {
+                  return <div key={key}>{item.value}</div>;
+                })}
+              </div> : null}
+              {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_archived})}
+              {/* {this.inputWrapper('id_level', {readonly: R.is_archived, uiStyle: 'buttons'})}
+              {this.inputWrapper('status', {readonly: R.is_archived, uiStyle: 'buttons', onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})} */}
+              {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+              {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
+            </div>
+            <div className='border-l border-gray-200'></div>
+            <div className='grow'>
+              <div className='flex flex-row *:w-1/2'>
+                {this.inputWrapper('price', { cssClass: 'text-2xl', readonly: R.is_archived ? true : false })}
+                {this.inputWrapper('id_currency')}
+              </div>
+              {this.inputWrapper('score', {readonly: R.is_archived})}
+              {this.inputWrapper('id_owner', {readonly: R.is_archived})}
+              {this.inputWrapper('id_manager', {readonly: R.is_archived})}
+              {this.inputWrapper('id_team', {readonly: R.is_archived})}
+              {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
+              {this.inputWrapper('source_channel', {readonly: R.is_archived})}
+              <FormInput title='Tags'>
+                <InputTags2 {...this.getInputProps('tags_input')}
+                  value={this.state.record.TAGS}
+                  readonly={R.is_archived}
+                  model='Hubleto/App/Community/Leads/Models/Tag'
+                  targetColumn='id_lead'
+                  sourceColumn='id_tag'
+                  colorColumn='color'
+                  onChange={(input: any, value: any) => {
+                    R.TAGS = value;
+                    this.setState({record: R});
+                  }}
+                  onNewTag={(title: string) => {
+                    return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
+                  }}
+                ></InputTags2>
+              </FormInput>
+              <FormInput title={"Customer"}>
+                <Lookup {...this.getInputProps('id_customer')}
+                  model='Hubleto/App/Community/Customers/Models/Customer'
+                  urlAdd='customers/add'
+                  readonly={R.is_archived}
+                  value={R.id_customer}
+                  onChange={(input: any, value: any) => {
+                    this.updateRecord({ id_customer: value, id_contact: null });
+                    if (R.id_customer == 0) {
+                      R.id_customer = null;
+                      this.setState({record: R});
+                    }
+                  }}
+                ></Lookup>
+              </FormInput>
+              {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+              {this.inputWrapper('date_created')}
+              {this.inputWrapper('is_archived')}
+            </div>
+          </div>
+        </>
+      break;
+
+      case 'calendar':
         //@ts-ignore
         const tmpCalendarSmall = <Calendar
           onCreateCallback={() => this.loadRecord()}
@@ -241,55 +341,57 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           }}
         ></Calendar>;
 
-        const recentActivitiesAndCalendar = <div className='card card-body shadow-blue-200'>
-          <div className='mb-2'>
+        const recentActivitiesAndCalendar = <div className='card card-body flex flex-col gap-2'>
+          <div>
             {tmpCalendarSmall}
           </div>
-          <div className="hubleto component input"><div className="input-element w-full flex gap-2">
-            <input
-              className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
-              placeholder={this.translate('Type recent activity here')}
-              ref={this.refLogActivityInput}
-              onKeyUp={(event: any) => {
-                if (event.keyCode == 13) {
-                  if (event.shiftKey) {
-                    this.scheduleActivity();
-                  } else {
-                    this.logCompletedActivity();
+          <div>
+            <div className="hubleto component input"><div className="input-element w-full flex gap-2">
+              <input
+                className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
+                placeholder={this.translate('Type recent activity here')}
+                ref={this.refLogActivityInput}
+                onKeyUp={(event: any) => {
+                  if (event.keyCode == 13) {
+                    if (event.shiftKey) {
+                      this.scheduleActivity();
+                    } else {
+                      this.logCompletedActivity();
+                    }
                   }
-                }
-              }}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                this.refLogActivityInput.current.value = event.target.value;
-              }}
-            />
-          </div></div>
-          <div className='mt-2'>
-            <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
-              <span className="icon"><i className="fas fa-check"></i></span>
-              <span className="text">{this.translate('Log completed activity')}</span>
-              <span className="shortcut">{this.translate('Enter')}</span>
-            </button>
-            <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
-              <span className="icon"><i className="fas fa-clock"></i></span>
-              <span className="text">{this.translate('Schedule activity')}</span>
-              <span className="shortcut">{this.translate('Shift+Enter')}</span>
-            </button>
-          </div>
-          {this.divider(this.translate('Most recent activities'))}
-          {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
-            return <>
-              <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
-                onClick={() => this.setState({showIdActivity: item.id} as FormLeadState)}
-              >
-                <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
-                <span className="text">
-                  {item.subject}
-                  {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
-                </span>
+                }}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  this.refLogActivityInput.current.value = event.target.value;
+                }}
+              />
+            </div></div>
+            <div className='mt-2'>
+              <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
+                <span className="icon"><i className="fas fa-check"></i></span>
+                <span className="text">{this.translate('Log completed activity')}</span>
+                <span className="shortcut">{this.translate('Enter')}</span>
               </button>
-            </>
-          })}</div> : null}
+              <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
+                <span className="icon"><i className="fas fa-clock"></i></span>
+                <span className="text">{this.translate('Schedule activity')}</span>
+                <span className="shortcut">{this.translate('Shift+Enter')}</span>
+              </button>
+            </div>
+            {this.divider(this.translate('Most recent activities'))}
+            {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
+              return <>
+                <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
+                  onClick={() => this.setState({showIdActivity: item.id} as FormLeadState)}
+                >
+                  <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
+                  <span className="text">
+                    {item.subject}
+                    {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
+                  </span>
+                </button>
+              </>
+            })}</div> : null}
+          </div>
         </div>;
 
         return <>
@@ -419,9 +521,17 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             info.jsEvent.preventDefault();
           }}
         ></Calendar>;
+
         return <>
-          {tmpCalendarLarge}
-          {this.state.showIdActivity == 0 ? <></> :
+          <div className='flex gap-2 mt-2'>
+            <div className='flex-2 w-2/3'>
+              {tmpCalendarLarge}
+            </div>
+            <div className='flex-1 w-1/3'>
+              {this.state.id > 0 ? recentActivitiesAndCalendar : null}
+            </div>
+          </div>
+          {this.state.showIdActivity == 0 ? null :
             <ModalForm
               ref={this.refActivityModal}
               uid='activity_form'
@@ -453,7 +563,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
               ></LeadFormActivity>
             </ModalForm>
           }
-        </>
+        </>;
       break;
 
       case 'documents':

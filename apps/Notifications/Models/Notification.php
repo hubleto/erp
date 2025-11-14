@@ -53,7 +53,7 @@ class Notification extends \Hubleto\Erp\Model
       'id_to' => (new Lookup($this, $this->translate('To'), User::class))->setReactComponent('InputUserSelect')->setRequired(),
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
       'body' => (new Text($this, $this->translate('Body')))->setRequired(),
-      'color' => (new Color($this, $this->translate('Color'))),
+      'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'tags' => (new Json($this, $this->translate('Tags'))),
       'datetime_sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
       'datetime_read' => (new DateTime($this, $this->translate('Read'))),

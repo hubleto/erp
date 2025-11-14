@@ -12,9 +12,16 @@ class ClickTracker extends \Hubleto\Erp\Controller
 
   public function render(): string
   {
-    $campaignUid = $this->router()->urlParamAsString('cuid');
-    $idRecipient = $this->router()->urlParamAsInteger('rcid');
-    $url = $this->router()->urlParamAsString('url');
+    $clickDataB64 = $this->router()->urlParamAsString('c');
+
+    $clickDataJson = @base64_decode($clickDataB64);
+    $clickData = @json_decode($clickDataJson, true);
+
+    $campaignUid = $clickData['cuid'] ?? '';
+    $idRecipient = (int) ($clickData['rcid'] ?? 0);
+    $url = $clickData['url'] ?? '';
+
+    if (empty($campaignUid) || empty($url) || $idRecipient <= 0) return 'Invalid click data.';
 
     /** @var Campaign */
     $mCampaign = $this->getModel(Campaign::class);
@@ -31,10 +38,12 @@ class ClickTracker extends \Hubleto\Erp\Controller
         'url' => $url,
         'datetime_clicked' => date('Y-m-d H:i:s'),
       ]);
-    }
 
-    header('Location: ' . $url, 302);
-    exit;
+      header('Location: ' . $url, 302);
+      exit;
+    } else {
+      return 'Campaign not found.';
+    }
   }
 
 }

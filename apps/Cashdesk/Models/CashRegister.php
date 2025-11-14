@@ -20,6 +20,7 @@ use Hubleto\Framework\Description\Table;
 use Hubleto\Framework\Helper;
 
 use Hubleto\App\Community\Settings\Models\Company;
+use Hubleto\App\Community\Shops\Models\Shop;
 
 class CashRegister extends Model
 {
@@ -33,12 +34,14 @@ class CashRegister extends Model
 
   public array $relations = [
     'COMPANY' => [ self::BELONGS_TO, Company::class, 'id_company', 'id' ],
+    'SHOP' => [ self::BELONGS_TO, Shop::class, 'id_shop', 'id' ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge([
       'id_company' => new Lookup($this, $this->translate("Company"), Company::class)->setRequired()->setDefaultVisible(),
+      'id_shop' => new Lookup($this, $this->translate("Shop"), Shop::class)->setDefaultVisible(),
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
       'description' => (new Varchar($this, $this->translate('Description')))->setRequired()->setDefaultVisible(),
     ], parent::describeColumns());

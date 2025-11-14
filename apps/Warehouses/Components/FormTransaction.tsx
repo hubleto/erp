@@ -92,6 +92,7 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
                       <td>
                         <Lookup
                           model='Hubleto/App/Community/Products/Models/Product'
+                          urlAdd={'products/add'}
                           value={item.id_product}
                           cssClass='font-bold'
                           onChange={(input: any, value: any) => { this.updateItem(index, {id_product: value}); }}

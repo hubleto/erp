@@ -24,7 +24,7 @@ class Account extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'color' => (new Color($this, $this->translate('Color'))),
+      'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'sender_email' => (new Varchar($this, $this->translate('Sender email address')))->setRequired(),
       'sender_name' => (new Varchar($this, $this->translate('Sender name')))->setRequired(),
       'imap_host' => (new Varchar($this, $this->translate('IMAP host')))->setRequired(),

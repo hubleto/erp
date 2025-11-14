@@ -33,6 +33,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
       if (!$campaign->is_approved) throw new \Exception('Campaign is not approved.');
 
       $sec = 0;
+      $createdMails = 0;
 
       foreach ($campaign->RECIPIENTS as $recipient) {
 
@@ -55,19 +56,24 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
 
         $sec += 10;
 
-        if ($recipient->id_mail > 0) {
-          $mMail->record->where('id', $recipient->id_mail)->update($mailData);
-        } else {
-          $mail = $mMail->record->recordCreate($mailData);
+        $mail = $mMail->record->recordCreate($mailData);
+        $createdMails++;
 
-          $mRecipient->record
-            ->where('id', $recipient->id)
-            ->update(['id_mail' => (int) $mail['id']])
-          ;
-        }
+        $mRecipient->record
+          ->where('id', $recipient->id)
+          ->update(['id_mail' => (int) $mail['id']])
+        ;
       }
 
-      return ['status' => 'success'];
+      $mCampaign->record->where('id', $idCampaign)->update([
+        'id_launched_by' => $this->authProvider()->getUserId(),
+        'datetime_launched' => date('Y-m-d H:i:s'),
+      ]);
+
+      return [
+        'status' => 'success',
+        'createdMails' => $createdMails,
+      ];
     } catch (\Throwable $e) {
       return ['status' => 'error', 'message' => $e->getMessage()];
     }

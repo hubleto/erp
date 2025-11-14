@@ -6,7 +6,8 @@ use Hubleto\App\Community\Mail\Models\Mail;
 
 class SendMails extends \Hubleto\Erp\Cron
 {
-  public string $schedulingPattern = '*/5 * * * *';
+  public string $schedulingPattern = '* * * * *';
+  public int $maxMailsToSend = 3;
 
 
   public function run(): void
@@ -19,16 +20,17 @@ class SendMails extends \Hubleto\Erp\Cron
       ->where('datetime_scheduled_to_send', '<=', date('Y-m-d H:i:s'))
       ->with('ACCOUNT')
       ->with('MAILBOX')
+      ->limit($this->maxMailsToSend) // cron is launched each minute; send max 3 emails per minute
       ->get()
     ;
 
-    $this->logger()->info('SendMails: ' . $mailsToSend->count() . ' mails to send.');
+    $this->logger()->info('SendMails: found ' . $mailsToSend->count() . ' mails to send (maxMailsToSend = ' . $this->maxMailsToSend . ')');
 
     foreach ($mailsToSend as $mail) {
       try {
         $mMail->send($mail->toArray());
         $this->logger()->info('Email `' . $mail['subject'] . '` to `' . $mail['to'] . '` sent successfully.');
-        sleep(30); // waiting 30 sec to avoid spam blacklisting
+        sleep(3); // waiting to avoid spam blacklisting
       } catch (\Exception $e) {
         $this->logger()->error('Failed to send email `' . $mail['subject'] . '` to `' . $mail['to'] . '`: ' . $e->getMessage());
       }

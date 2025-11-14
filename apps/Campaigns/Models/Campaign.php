@@ -108,6 +108,20 @@ class Campaign extends \Hubleto\Erp\Model
   }
 
   /**
+   * [Description for describeForm]
+   *
+   * @return \Hubleto\Framework\Description\Form
+   * 
+   */
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+    $description->includeRelations = ['WORKFLOW', 'WORKFLOW_STEP'];
+
+    return $description;
+  }
+
+  /**
    * [Description for onAfterCreate]
    *
    * @param array $savedRecord

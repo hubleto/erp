@@ -25,9 +25,9 @@ class Loader extends \Hubleto\Framework\App
       '/^mail\/accounts\/add\/?$/' => ['controller' => Controllers\Accounts::class, 'vars' => ['recordId' => -1]],
 
       '/^mail\/scheduled\/?$/' => Controllers\Scheduled::class,
+      '/^mail\/scheduled\/send\/?$/' => Controllers\SendScheduled::class,
       '/^mail\/sent\/?$/' => Controllers\Sent::class,
       '/^mail\/get\/?$/' => Controllers\Get::class,
-      '/^mail\/scheduled-send\/?$/' => Controllers\SendScheduled::class,
       '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
       '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
       '/^mail\/mails\/add\/?$/' => ['controller' => Controllers\Mails::class, 'vars' => ['recordId' => -1]],

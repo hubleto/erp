@@ -1,3 +1,6 @@
 <h1 class='app-main-title'>{{ translate('Settings') }} > {{ translate('Countries') }}</h1>
 
-<app-table string:model="Hubleto/App/Community/Settings/Models/Country"></app-table>
+<app-table
+  int:record-id="{{ viewParams.recordId }}"
+  string:model="Hubleto/App/Community/Settings/Models/Country"
+></app-table>

@@ -2,6 +2,7 @@
 <h2>Online .ics Calendar</h2><br/>
 
 <app-table-calendar-sync-sources
+  int:record-id="{{ viewParams.recordId }}"
   json:custom-endpoint-params='{"type": "ics"}'
   json:description='{"ui": { "title": "ICS sources", "addButtonText": "Add ICS url" }}'
   json:form-props='{"descriptionSource": "props", "description": {"inputs": {"type": {"readonly": true}}, "defaultValues": {"type": "ics"}}}'

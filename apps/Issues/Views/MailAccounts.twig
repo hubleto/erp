@@ -1,3 +1,6 @@
 <h1 class="app-main-title">{{ translate('Issues') }} > Mail accounts</h1>
 
-<app-table string:model="Hubleto/App/Community/Issues/Models/MailAccount"></app-table>
+<app-table
+  int:record-id="{{ viewParams.recordId }}"
+  string:model="Hubleto/App/Community/Issues/Models/MailAccount"
+></app-table>

@@ -7,6 +7,7 @@
 </div>
 
 <app-table-calendar-sync-sources
+  int:record-id="{{ viewParams.recordId }}"
   json:custom-endpoint-params='{"type": "google"}'
   json:description='{"ui": { "title": "Google Calendar sources", "addButtonText": "Add Google Calendar source" }}'
   json:form-props='{"descriptionSource": "props", "description": {"inputs": {"type": {"readonly": true}}, "defaultValues": {"type": "google"}}}'

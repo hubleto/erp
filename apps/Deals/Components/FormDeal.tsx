@@ -326,6 +326,17 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         </>;
 
         const inputsColumnRight = <>
+          {this.state.id > 0 ? <div className='flex gap-2 mb-2'>
+            <div className="badge badge-violet">
+              {this.translate("Deal value:")} {globalThis.main.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY?.code}
+            </div>
+            {R.WORKFLOW_STEP && R.WORKFLOW_STEP.probability ?
+              <div className="badge badge-violet">
+                {this.translate("Weighted profit")} ({R.WORKFLOW_STEP?.probability} %):
+                <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.WORKFLOW_STEP?.probability, R.price_excl_vat), 2, ',', ' ')} {R.CURRENCY.code}</strong>
+              </div>
+            : null}
+          </div> : null}
           {this.inputWrapper('id_owner', {readonly: R.is_archived})}
           {this.inputWrapper('id_manager', {readonly: R.is_archived})}
           <div className="flex gap-2">
@@ -348,9 +359,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 readonly: R.is_archived,
                 onChange: (input: any, value: any) => {
                   this.updateRecord({lost_reason: null});
-                  // if (this.state.record.WORKFLOW && this.state.record.WORKFLOW.STEPS?.length > 0) {
-                  //   this.changeWorkflowStepFromResult();
-                  // }
                 }
               }
             )}
@@ -373,19 +381,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 <div className='border-t md:border-l border-gray-200'></div>
                 <div className='grow'>{inputsColumnRight}</div>
               </div>
-            </div>
-            <div className='flex-1'>
-              {this.state.id > 0 ? <div className='flex gap-2 mb-2'>
-                <div className="badge badge-violet">
-                  {this.translate("Deal value:")} {globalThis.main.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY?.code}
-                </div>
-                {R.WORKFLOW_STEP && R.WORKFLOW_STEP.probability ?
-                  <div className="badge badge-violet">
-                    {this.translate("Weighted profit")} ({R.WORKFLOW_STEP?.probability} %):
-                    <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.WORKFLOW_STEP?.probability, R.price_excl_vat), 2, ',', ' ')} {R.CURRENCY.code}</strong>
-                  </div>
-                : null}
-              </div> : null}
             </div>
           </div>
         </>

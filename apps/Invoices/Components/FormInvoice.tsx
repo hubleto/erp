@@ -3,7 +3,6 @@ import HubletoForm, {HubletoFormProps, HubletoFormState} from "@hubleto/react-ui
 import TableInvoiceItems from './TableInvoiceItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import { InputFactory } from "@hubleto/react-ui/core/InputFactory";
-import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 import request from '@hubleto/react-ui/core/Request';
 
 interface FormInvoiceProps extends HubletoFormProps {

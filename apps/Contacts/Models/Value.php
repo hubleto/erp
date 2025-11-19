@@ -29,6 +29,7 @@ class Value extends \Hubleto\Erp\Model
           'other' => $this->translate('Other')
         ])
         ->setRequired()
+        ->addIndex('INDEX `type` (`type`)')
       ,
       'value' => (new Varchar($this, $this->translate('Value')))->setRequired(),
     ]);

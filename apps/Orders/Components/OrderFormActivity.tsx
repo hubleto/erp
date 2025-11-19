@@ -32,7 +32,7 @@ export default class OrderFormActivity<P, S> extends FormActivity<OrderFormActiv
     const R = this.state.record;
 
     return <>
-      {this.inputWrapper('id_order')}
+      {this.inputWrapper('id_order', {readonly: true})}
     </>;
   }
 }

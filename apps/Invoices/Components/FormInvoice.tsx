@@ -18,7 +18,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     icon: 'fas fa-file-invoice',
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
-    }
+    },
+    renderWorkflowUi: true,
   }
 
   props: FormInvoiceProps;
@@ -82,15 +83,15 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     return 'invoices/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTopMenu(): JSX.Element {
-    return <>
-      {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-        {this.inputWrapper('id_profile', {wrapperCssClass: 'flex gap-2'})}
-      </>}
-    </>
-  }
+  // renderTopMenu(): JSX.Element {
+  //   return <>
+  //     {super.renderTopMenu()}
+  //     {this.state.id <= 0 ? null : <>
+  //       <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
+  //       {this.inputWrapper('id_profile', {wrapperCssClass: 'flex gap-2'})}
+  //     </>}
+  //   </>
+  // }
 
   renderTitle(): JSX.Element {
     const r = this.state.record;

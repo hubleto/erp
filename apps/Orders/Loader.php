@@ -22,6 +22,7 @@ class Loader extends \Hubleto\Framework\App
       '/^orders\/api\/generate-invoice\/?$/' => Controllers\Api\GenerateInvoice::class,
       '/^orders\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,
+      '/^orders\/api\/set-parent-deal\/?$/' => Controllers\Api\SetParentDeal::class,
 
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
 

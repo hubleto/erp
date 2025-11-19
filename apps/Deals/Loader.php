@@ -21,6 +21,7 @@ class Loader extends \Hubleto\Framework\App
       '/^deals\/api\/create-from-lead\/?$/' => Controllers\Api\CreateFromLead::class,
       '/^deals\/api\/generate-quotation-pdf\/?$/' => Controllers\Api\GenerateQuotationPdf::class,
       '/^deals\/api\/generate-invoice\/?$/' => Controllers\Api\GenerateInvoice::class,
+      '/^deals\/api\/set-parent-lead\/?$/' => Controllers\Api\SetParentLead::class,
 
       '/^deals\/boards\/deal-warnings\/?$/' => Controllers\Boards\DealWarnings::class,
       '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,

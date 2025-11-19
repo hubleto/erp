@@ -34,7 +34,7 @@ export interface FormDealState extends HubletoFormState {
   tableDealProductsDescription: any,
   tableDealDocumentsDescription: any,
   tablesKey: number,
-  // workflowFirstLoad: boolean;
+  selectParentLead?: boolean,
 }
 
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
@@ -42,6 +42,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     ...HubletoForm.defaultProps,
     icon: 'fas fa-handshake',
     model: 'Hubleto/App/Community/Deals/Models/Deal',
+    renderWorkflowUi: true,
   };
 
   props: FormDealProps;
@@ -75,7 +76,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       tableDealProductsDescription: null,
       tableDealDocumentsDescription: null,
       tablesKey: 0,
-      // workflowFirstLoad: false,
+      selectParentLead: false,
     };
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
@@ -222,16 +223,44 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       case 'default':
 
         const inputsColumnLeft = <>
-          {R.LEADS && R.LEADS.length > 0 ? <FormInput title={"Lead"}>
-            {R.LEADS.map((item, key) => {
-              return (item.LEAD ? <a
-                key={key}
-                className='badge'
-                href={globalThis.main.config.projectUrl + '/leads/' + item.LEAD.id}
-                target='_blank'
-              >{item.LEAD.id}</a> : '#');
-            })}
-          </FormInput> : null}
+          <FormInput title={"Lead"}>
+            {this.state.selectParentLead ? <>
+              <Lookup
+                model='Hubleto/App/Community/Leads/Models/Lead'
+                cssClass='font-bold'
+                onChange={(input: any, value: any) => {
+                  request.post(
+                    'deals/api/set-parent-lead',
+                    {
+                      idDeal: this.state.record.id,
+                      idLead: value,
+                    },
+                    {},
+                    (data: any) => {
+                      this.setState({selectParentLead: false}, () => this.reload());
+                    }
+                  )
+                }}
+              ></Lookup>
+            </> : <>
+              {R.LEADS ? R.LEADS.map((item, key) => {
+                return (item.LEAD ? <a
+                  key={key}
+                  className='badge'
+                  href={globalThis.main.config.projectUrl + '/leads/' + item.LEAD.id}
+                  target='_blank'
+                >#{item.LEAD.id}</a> : '#');
+              }) : null}
+              <button
+                className='btn btn-small btn-transparent'
+                onClick={() => {
+                  this.setState({selectParentLead: true});
+                }}
+              >
+                <span className='text'>Select parent lead</span>
+              </button>
+            </>}
+          </FormInput>
           {this.inputWrapper('identifier', {cssClass: 'text-2xl', readonly: R.is_archived})}
           {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_archived})}
           {this.inputWrapper('version')}
@@ -608,24 +637,24 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     }
   }
 
-  renderTopMenu(): JSX.Element {
-    return <>
-      {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'>
-        <WorkflowSelector
-          parentForm={this}
-          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
-            let newRecord: any = {id_workflow_step: idWorkflowStep, deal_result: 0, is_closed: false};
-            if (step.name.match(/won/i)) newRecord.deal_result = 1;
-            if (step.name.match(/lost/i)) newRecord.deal_result = 2;
-            if (newRecord.deal_result != 0) newRecord.is_closed = true;
-            this.updateRecord(newRecord);
-          }}
-        ></WorkflowSelector>
-      </div>}
-      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-    </>
-  }
+  // renderTopMenu(): JSX.Element {
+  //   return <>
+  //     {super.renderTopMenu()}
+  //     {this.state.id <= 0 ? null : <div className='flex-2 pl-4'>
+  //       <WorkflowSelector
+  //         parentForm={this}
+  //         onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
+  //           let newRecord: any = {id_workflow_step: idWorkflowStep, deal_result: 0, is_closed: false};
+  //           if (step.name.match(/won/i)) newRecord.deal_result = 1;
+  //           if (step.name.match(/lost/i)) newRecord.deal_result = 2;
+  //           if (newRecord.deal_result != 0) newRecord.is_closed = true;
+  //           this.updateRecord(newRecord);
+  //         }}
+  //       ></WorkflowSelector>
+  //     </div>}
+  //     {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+  //   </>
+  // }
 
   renderContent(): JSX.Element {
     const R = this.state.record;

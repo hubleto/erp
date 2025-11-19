@@ -18,6 +18,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
     ...HubletoForm.defaultProps,
     icon: 'fas fa-diagram-project',
     model: 'Hubleto/App/Community/Projects/Models/Team',
+    renderWorkflowUi: true,
   }
 
   props: FormProjectProps;
@@ -76,15 +77,15 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
     </>;
   }
 
-  renderTopMenu(): JSX.Element {
-    return <>
-      {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
-    </>;
-  }
+  // renderTopMenu(): JSX.Element {
+  //   return <>
+  //     {super.renderTopMenu()}
+  //     {this.state.id <= 0 ? null : <>
+  //       <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
+  //       {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+  //     </>}
+  //   </>;
+  // }
 
   renderTab(tabUid: string) {
     const R = this.state.record;

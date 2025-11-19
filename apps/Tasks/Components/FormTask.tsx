@@ -14,6 +14,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
     ...HubletoForm.defaultProps,
     icon: 'fas fa-list-check',
     model: 'Hubleto/App/Community/Tasks/Models/Task',
+    renderWorkflowUi: true,
   }
 
   props: FormTaskProps;
@@ -64,15 +65,15 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
     </>;
   }
 
-  renderTopMenu() {
-    return <>
-      {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
-    </>
-  }
+  // renderTopMenu() {
+  //   return <>
+  //     {super.renderTopMenu()}
+  //     {this.state.id <= 0 ? null : <>
+  //       <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
+  //       {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+  //     </>}
+  //   </>
+  // }
 
   addTodo(value: string, R: any) {
     if (value.trim() != '') {

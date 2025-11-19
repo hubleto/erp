@@ -14,6 +14,7 @@ interface CalendarMainProps {
   children: any,
   eventsEndpoint: string,
   views?: string,
+  initialView?: string,
   height?: any,
   readonly?: number,
   onCreateCallback?: any
@@ -189,31 +190,9 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           readonly={false}
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           height={this.props.height}
-          initialView="timeGridWeek"
+          initialView={this.props.initialView ?? "timeGridWeek"}
           eventsEndpoint={globalThis.main.config.projectUrl + '/' + this.getCalendarEventsEndpointUrl()}
           onEventsLoaded={(events) => {
-            // for (let i in events) {
-            //   if (
-            //     !this.state.activityFormComponent
-            //     && events[i].extendedProps?.source == this.state.eventSource
-            //     && events[i].id == this.state.eventId
-            //   ) {
-
-            //     this.setState({
-            //       eventSource: '',
-            //       eventId: 0,
-            //       activityFormComponent: globalThis.main.renderReactElement(events[i].extendedProps.SOURCEFORM,
-            //         {
-            //           id: events[i].id,
-            //           showInModal: true,
-            //           showInModalSimple: true,
-            //           onClose:() => {this.setState({activityFormComponent: null})},
-            //           onSaveCallback:() => {this.setState({activityFormComponent: null})}
-            //         }
-            //       )
-            //     });
-            //   }
-            // }
           }}
           onDateClick={(date, time, info) => {
             deleteUrlParam('eventSource');

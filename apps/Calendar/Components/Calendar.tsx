@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
+import request from "@hubleto/react-ui/core/Request";
 
 interface CalendarProps {
   eventsEndpoint: string,
@@ -86,6 +87,10 @@ export default class Calendar extends Component {
           }}
           //initialEvents={this.state.events} // alternatively, use the `events` setting to fetch from a feed
           //select={handleDateSelect}
+          viewDidMount={(data: any) => {
+            request.post('calendar/api/set-initial-view', {initialView: data.view.type});
+            console.log('view mounted', data);
+          }}
           dateClick={(info) => {
             if (this.props.readonly) return;
 

@@ -75,10 +75,6 @@
         "Shift+Enter": "Shift+Enter",
         "Most recent activities": "Posledné aktivity"
     },
-    "Models\\OrderInvoice": {
-        "Order": "Objednávka",
-        "Invoice": "Faktúra"
-    },
     "Models\\OrderDocument": {
         "Order": "Objednávka",
         "Document": "Dokument"

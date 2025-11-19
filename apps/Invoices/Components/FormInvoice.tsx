@@ -102,22 +102,23 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   }
 
   renderTab(tabUid: string) {
-    let R = this.state.record;
+    const R = this.state.record;
 
     switch (tabUid) {
       case 'default':
+        const currencySymbol = R && R.CURRENCY ? R.CURRENCY.symbol : '';
         return <>
           <div className='flex w-full bg-gradient-to-b from-slate-100 to-white'>
             <div className='border-t border-t-4 border-t-slate-600 p-2 grow text-nowrap bg-slate-100 text-slate-800'>
               <div>
                 <div className='text-sm'>
-                  <b>{globalThis.main.numberFormat(R.total_excl_vat, 2, ',', ' ')} {R.CURRENCY.symbol}</b>
+                  <b>{globalThis.main.numberFormat(R.total_excl_vat, 2, ',', ' ')} {currencySymbol}</b>
                   &nbsp;excl. VAT
                 </div>
               </div>
               <div className='mt-2'>
                 <div className='text-2xl'>
-                  {globalThis.main.numberFormat(R.total_incl_vat, 2, ',', ' ')} {R.CURRENCY.symbol}
+                  {globalThis.main.numberFormat(R.total_incl_vat, 2, ',', ' ')} {currencySymbol}
                 </div>
                 <div className='text-sm'>incl. VAT</div>
               </div>
@@ -140,6 +141,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
           </div>
           <div className="flex gap-2 mt-2">
             <div className='flex-1'>
+              {this.inputWrapper('id_profile')}
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('type')}
               {this.inputWrapper('id_template')}
@@ -163,108 +165,167 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
             <div className='card flex-2'>
               <div className='card-header'>Items</div>
               <div className='card-body'>
-                <table className='table-default dense not-striped'>
-                  <thead>
-                    <tr>
-                      <th>Item</th>
-                      <th>Unit price</th>
-                      <th>Amount</th>
-                      <th>Price excl. VAT</th>
-                      <th>Price incl. VAT</th>
-                      <th>VAT</th>
-                      <th>Discount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {R.ITEMS.map((item, key) => {
-                      console.log(item);
-                      return <tr key={key} className={item._toBeDeleted_ ? 'border border-red-400' : ''}>
-                        <td>
-                          {InputFactory({
-                            value: item.item,
-                            cssClass: 'bg-white',
-                            description: { type: 'string' },
-                            onChange: (e) => {
-                              R.ITEMS[key].item = e.state.value;
-                              this.updateRecord(R);
-                            }
-                          })}
-                        </td>
-                        <td>
-                          {InputFactory({
-                            value: item.unit_price,
-                            cssClass: 'bg-white',
-                            description: { type: 'number' },
-                            onChange: (e) => {
-                              R.ITEMS[key].unit_price = e.state.value;
-                              this.updateRecord(R);
-                            }
-                          })}
-                        </td>
-                        <td>
-                          {InputFactory({
-                            value: item.amount,
-                            cssClass: 'bg-white',
-                            description: { type: 'number' },
-                            onChange: (e) => {
-                              R.ITEMS[key].amount = e.state.value;
-                              this.updateRecord(R);
-                            }
-                          })}
-                        </td>
-                        <td>
-                          {InputFactory({
-                            value: item.discount,
-                            cssClass: 'bg-white',
-                            description: { type: 'number', unit: '%' },
-                            onChange: (e) => {
-                              R.ITEMS[key].discount = e.state.value;
-                              this.updateRecord(R);
-                            }
-                          })}
-                        </td>
-                        <td>
-                          {InputFactory({
-                            value: item.vat,
-                            cssClass: 'bg-white',
-                            description: { type: 'number', unit: '%' },
-                            onChange: (e) => {
-                              R.ITEMS[key].vat = e.state.value;
-                              this.updateRecord(R);
-                            }
-                          })}
-                        </td>
-                        <td>
-                          {globalThis.main.numberFormat(item.price_excl_vat, 2, ',', ' ')} {R.CURRENCY.symbol}
-                        </td>
-                        <td>
-                          {globalThis.main.numberFormat(item.price_incl_vat, 2, ',', ' ')} {R.CURRENCY.symbol}
-                        </td>
-                        <td>
-                          <button
-                            className='btn btn-danger'
-                            onClick={() => {
-                              R.ITEMS[key]._toBeDeleted_ = true;
-                              this.updateRecord(R);
-                            }}
-                          >
-                            <span className='icon'><i className='fas fa-trash'></i></span>
-                          </button>
-                        </td>
-                      </tr>;
-                    })}
-                  </tbody>
-                </table>
-                <button
-                  className='btn btn-add mt-2'
-                  onClick={() => {
-                    R.ITEMS.push({id_invoice: this.state.id});
-                    this.updateRecord(R);
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-plus'></i></span>
-                  <span className='text'>Add item</span>
-                </button>
+                {this.state.id <= 0 ? <div className='alert alert-info'>{this.translate('Create invoice before adding items.')}</div>
+                : <>
+                  <table className='table-default dense not-striped'>
+                    <thead>
+                      <tr>
+                        <th colSpan={3}>Order</th>
+                        <th colSpan={4}>Product</th>
+                      </tr>
+                      <tr>
+                        <th>Item</th>
+                        <th>Unit price</th>
+                        <th>Amount</th>
+                        <th>Discount</th>
+                        <th>VAT</th>
+                        <th>Price excl. VAT</th>
+                        <th>Price incl. VAT</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {R && R.ITEMS ? R.ITEMS.map((item, key) => {
+                        console.log(item, key);
+                        const rowBgClass = (key % 2 == 0 ? 'bg-white' : 'bg-gray-50');
+
+                        return <>
+                          <tr key={key + '1'} className={item._toBeDeleted_ ? 'border border-red-400' : ''}>
+                            <td colSpan={3} className={rowBgClass}>
+                              {InputFactory({
+                                value: item.id_order,
+                                cssClass: 'bg-white min-w-64',
+                                description: {
+                                  type: 'lookup',
+                                  model: 'Hubleto/App/Community/Orders/Models/Order'
+                                },
+                                onChange: (e) => {
+                                  R.ITEMS[key].id_order = e.state.value;
+                                  this.updateRecord(R);
+                                }
+                              })}
+                            </td>
+                            <td colSpan={4} className={rowBgClass}>
+                              {InputFactory({
+                                value: item.id_order_product,
+                                cssClass: 'bg-white min-w-64',
+                                description: {
+                                  type: 'lookup',
+                                  model: 'Hubleto/App/Community/Orders/Models/OrderProduct',
+                                },
+                                customEndpointParams: { idOrder: item.id_order },
+                                onChange: (e) => {
+
+                                  request.post('orders/api/get-product',
+                                    {idOrderProduct: e.state.value},
+                                    {},
+                                    (data: any) => {
+                                      console.log('dat', data);
+                                      const P = data.orderProduct;
+                                      R.ITEMS[key].id_order_product = e.state.value;
+                                      R.ITEMS[key].item = P?.title ?? '';
+                                      R.ITEMS[key].unit_price = P?.sales_price ?? 0;
+                                      R.ITEMS[key].amount = P?.amount ?? 0;
+                                      R.ITEMS[key].price_excl_vat = P?.price_excl_vat ?? 0;
+                                      R.ITEMS[key].price_incl_vat = P?.price_incl_vat ?? 0;
+                                      R.ITEMS[key].vat = P?.vat ?? 0;
+                                      R.ITEMS[key].discount = P?.discount ?? 0;
+                                      this.updateRecord(R);
+                                    }
+                                  )
+                                }
+                              })}
+                            </td>
+                            <td rowSpan={2} className={rowBgClass}>
+                              <button
+                                className='btn btn-danger'
+                                onClick={() => {
+                                  R.ITEMS[key]._toBeDeleted_ = true;
+                                  this.updateRecord(R);
+                                }}
+                              >
+                                <span className='icon'><i className='fas fa-trash'></i></span>
+                              </button>
+                            </td>
+                          </tr>
+                          <tr key={key + '2'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
+                            <td className={rowBgClass}>
+                              {InputFactory({
+                                value: item.item,
+                                cssClass: 'bg-white',
+                                description: { type: 'string' },
+                                onChange: (e) => {
+                                  R.ITEMS[key].item = e.state.value;
+                                  this.updateRecord(R);
+                                }
+                              })}
+                            </td>
+                            <td className={rowBgClass}>
+                              {InputFactory({
+                                value: item.unit_price,
+                                cssClass: 'bg-white',
+                                description: { type: 'number' },
+                                onChange: (e) => {
+                                  R.ITEMS[key].unit_price = e.state.value;
+                                  this.updateRecord(R);
+                                }
+                              })}
+                            </td>
+                            <td className={rowBgClass}>
+                              {InputFactory({
+                                value: item.amount,
+                                cssClass: 'bg-white',
+                                description: { type: 'number' },
+                                onChange: (e) => {
+                                  R.ITEMS[key].amount = e.state.value;
+                                  this.updateRecord(R);
+                                }
+                              })}
+                            </td>
+                            <td className={rowBgClass}>
+                              {InputFactory({
+                                value: item.discount,
+                                cssClass: 'bg-white',
+                                description: { type: 'number', unit: '%' },
+                                onChange: (e) => {
+                                  R.ITEMS[key].discount = e.state.value;
+                                  this.updateRecord(R);
+                                }
+                              })}
+                            </td>
+                            <td className={rowBgClass}>
+                              {InputFactory({
+                                value: item.vat,
+                                cssClass: 'bg-white',
+                                description: { type: 'number', unit: '%' },
+                                onChange: (e) => {
+                                  R.ITEMS[key].vat = e.state.value;
+                                  this.updateRecord(R);
+                                }
+                              })}
+                            </td>
+                            <td className={rowBgClass}>
+                              {globalThis.main.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol}
+                            </td>
+                            <td className={rowBgClass}>
+                              {globalThis.main.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol}
+                            </td>
+                          </tr>
+                        </>;
+                      }) : null}
+                    </tbody>
+                  </table>
+                  <button
+                    className='btn btn-add mt-2'
+                    onClick={() => {
+                      if (!R.ITEMS) R.ITEMS = [];
+                      R.ITEMS.push({id_invoice: this.state.id});
+                      this.updateRecord(R);
+                    }}
+                  >
+                    <span className='icon'><i className='fas fa-plus'></i></span>
+                    <span className='text'>Add item</span>
+                  </button>
+                </>}
               </div>
             </div>
           </div>

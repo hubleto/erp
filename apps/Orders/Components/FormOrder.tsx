@@ -68,8 +68,8 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
-        { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
+        { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
         ...this.getCustomTabs()
       ]

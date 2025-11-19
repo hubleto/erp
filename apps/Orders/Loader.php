@@ -23,6 +23,7 @@ class Loader extends \Hubleto\Framework\App
       '/^orders\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,
       '/^orders\/api\/set-parent-deal\/?$/' => Controllers\Api\SetParentDeal::class,
+      '/^orders\/api\/get-product\/?$/' => Controllers\Api\GetProduct::class,
 
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
 
@@ -61,7 +62,6 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\Order::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderProduct::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDeal::class)->dropTableIfExists()->install();
-      $this->getModel(Models\OrderInvoice::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDocument::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderActivity::class)->dropTableIfExists()->install();
       $this->getModel(Models\History::class)->dropTableIfExists()->install();
@@ -89,7 +89,7 @@ class Loader extends \Hubleto\Framework\App
 
     $mOrder = $this->getModel(Models\Order::class);
     $mHistory = $this->getModel(Models\History::class);
-    // $mOrderProduct = $this->getModel(Models\OrderProduct::class);
+    $mOrderProduct = $this->getModel(Models\OrderProduct::class);
     $mTemplate = $this->getModel(Template::class);
 
     $idTemplate = $mTemplate->record->recordCreate([
@@ -116,7 +116,7 @@ class Loader extends \Hubleto\Framework\App
 
       $mHistory->record->recordCreate([ 'id_order' => $idOrder, 'short_description' => 'Order created', 'date_time' => date('Y-m-d H:i:s') ]);
 
-      // for ($j = 1; $j <= 5; $j++) {
+      // for ($j = 0; $j <= rand(0, 3); $j++) {
       //   $mOrderProduct->record->recordCreate([
       //     'id_order' => $idOrder,
       //     'id_product' => rand(1, 5),

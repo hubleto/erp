@@ -216,6 +216,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
                   id: info.event.id,
                   showInModal: true,
                   showInModalSimple: true,
+                  modal: this.refActivityModal,
                   onClose:() => {this.setState({activityFormComponent: null})},
                   onSaveCallback:() => {this.setState({activityFormComponent: null})}
                 }

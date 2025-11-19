@@ -46,6 +46,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
         { uid: 'contacts', title: this.translate('Contacts') },
+        { uid: 'recipients', title: this.translate('Recipients') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'test', title: this.translate('Test') },
         { uid: 'launch', title: this.translate('Launch') },
@@ -116,20 +117,6 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               {/* {this.inputWrapper('mail_body')} */}
             </div>
             <div className='flex-1'>
-              <div className='card card-info mb-2'>
-                <div className='card-header'>Recipients</div>
-                <div className='card-body'>
-                  <TableRecipients
-                    parentForm={this}
-                    uid={this.props.uid + "_table_campaign_recipient"}
-                    idCampaign={R.id}
-                    view='briefOverview'
-                    onAfterLoadData={(table: any) => {
-                      this.setState({ recipients: table.state.data.data });
-                    }}
-                  />
-                </div>
-              </div>  
               <div className='w-full flex gap-2'>
                 {this.inputWrapper('utm_source')}
                 {this.inputWrapper('utm_campaign')}
@@ -162,7 +149,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             //@ts-ignore
             description={{ui: {showHeader: false}}}
             idCustomer={0}
-            selection={R.RECIPIENTS.map((item) => { return { id: item.id_contact } })}
+            selection={R && R.RECIPIENTS ? R.RECIPIENTS.map((item) => { return { id: item.id_contact } }) : null}
             onSelectionChange={(table: any) => {
               request.post(
                 'campaigns/api/save-recipients-from-contacts',
@@ -178,6 +165,18 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             }}
           />
         </div>;
+      break;
+
+      case 'recipients':
+        return <TableRecipients
+          parentForm={this}
+          uid={this.props.uid + "_table_campaign_recipient"}
+          idCampaign={R.id}
+          view='briefOverview'
+          onAfterLoadData={(table: any) => {
+            this.setState({ recipients: table.state.data.data });
+          }}
+        />;
       break;
 
       case 'tasks':

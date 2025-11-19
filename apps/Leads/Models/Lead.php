@@ -172,6 +172,15 @@ class Lead extends \Hubleto\Erp\Model
     $description->ui['filters'] = [
       'fLeadWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Level'),
       'fLeadOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
+      'fLeadClosed' => [
+        'title' => $this->translate('Open / Closed'),
+        'options' => [
+          0 => $this->translate('Open'),
+          1 => $this->translate('Closed'),
+          2 => $this->translate('All'),
+        ],
+        'default' => 0,
+      ],
     ];
 
     if ($this->router()->urlParamAsBool("showArchive")) {

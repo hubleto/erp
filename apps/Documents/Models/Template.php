@@ -16,7 +16,7 @@ class Template extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'used_for' => (new Varchar($this, $this->translate('Used For')))->setRequired()->setDefaultVisible(),
-      'content' => (new Text($this, $this->translate('Content'))), // ->setReactComponent('InputWysiwyg'),
+      'content' => (new Text($this, $this->translate('Content')))->setReactComponent('InputTextareaWithHtmlPreview'), // ->setReactComponent('InputWysiwyg'),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
     ]);
   }

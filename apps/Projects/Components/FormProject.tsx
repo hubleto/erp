@@ -6,6 +6,7 @@ import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import request from '@hubleto/react-ui/core/Request';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import { ProgressBar } from 'primereact/progressbar';
 
 export interface FormProjectProps extends HubletoFormProps { }
 export interface FormProjectState extends HubletoFormState {
@@ -209,6 +210,8 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
 
       case 'statistics':
         if (this.state.statistics) {
+          let totalWorkedHours = 0;
+          let totalCosts = 0;
           return <div className='flex gap-2'>
             <div className='card'>
               <div className='card-header'>Worked hours & costs by month</div>
@@ -216,6 +219,8 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                 <table className='table-default dense'>
                   <tbody>
                     {this.state.statistics.workedByMonth.map((item, key) => {
+                      totalWorkedHours += parseFloat(item.worked_hours);
+                      totalCosts += parseFloat(item.costs);
                       return <tr key={key}>
                         <td>{item.year}-{item.month}</td>
                         <td>{item.worked_hours} hours</td>
@@ -223,6 +228,13 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                       </tr>;
                     })}
                   </tbody>
+                  <tfoot>
+                    <tr>
+                      <td className='bg-primary text-white'>Total</td>
+                      <td className='bg-primary text-white'>{totalWorkedHours} hours</td>
+                      <td className='bg-primary text-white'>{globalThis.main.numberFormat(totalCosts, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>
@@ -243,6 +255,8 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
               </div>
             </div>
           </div>;
+        } else {
+          return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
         }
       break;
 

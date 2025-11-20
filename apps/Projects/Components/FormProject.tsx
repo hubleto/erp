@@ -168,6 +168,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
               {this.inputWrapper('color')}
               {this.inputWrapper('online_documentation_folder')}
               {this.inputWrapper('notes')}
+              {this.inputWrapper('average_hourly_costs')}
               {/* {this.inputWrapper('id_deal')} */}
             </div>
           </div>
@@ -208,10 +209,9 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
 
       case 'statistics':
         if (this.state.statistics) {
-          console.log('stats', this.state.statistics.workedByMonth);
           return <div className='flex gap-2'>
             <div className='card'>
-              <div className='card-header'>Worked hours by month</div>
+              <div className='card-header'>Worked hours & costs by month</div>
               <div className='card-body'>
                 <table className='table-default dense'>
                   <tbody>
@@ -219,6 +219,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                       return <tr key={key}>
                         <td>{item.year}-{item.month}</td>
                         <td>{item.worked_hours} hours</td>
+                        <td>{globalThis.main.numberFormat(item.costs, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
                       </tr>;
                     })}
                   </tbody>

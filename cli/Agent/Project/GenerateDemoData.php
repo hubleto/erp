@@ -2,15 +2,10 @@
 
 namespace Hubleto\Erp\Cli\Agent\Project;
 
-use Hubleto\App\Community\Settings\Models\Country;
-use Hubleto\App\Community\Settings\Models\Permission;
 use Hubleto\App\Community\Settings\Models\Company;
-use Hubleto\App\Community\Settings\Models\RolePermission;
-
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Auth\Models\UserRole;
 use Hubleto\App\Community\Auth\Models\UserHasRole;
-use Hubleto\App\Community\Settings\Models\Tag;
 use Hubleto\App\Community\Settings\PermissionsManager;
 
 class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
@@ -21,7 +16,10 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->faker = \Faker\Factory::create();;
 
-    $this->getService(PermissionsManager::class)->DANGEROUS__grantAllPermissions();
+    /** @var PermissionsManager */
+    $permissionsManager = $this->getService(PermissionsManager::class);
+
+    $permissionsManager->DANGEROUS__grantAllPermissions();
 
     $this->terminal()->cyan("Generating demo data...\n");
 
@@ -194,7 +192,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->terminal()->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 
-    $this->getService(PermissionsManager::class)->revokeGrantAllPermissions();
+    $permissionsManager->revokeGrantAllPermissions();
   }
 
   public function generateInvoiceProfiles(): void

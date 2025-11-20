@@ -230,9 +230,9 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td className='bg-primary text-white'>Total</td>
-                      <td className='bg-primary text-white'>{totalWorkedHours} hours</td>
-                      <td className='bg-primary text-white'>{globalThis.main.numberFormat(totalCosts, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
+                      <td className='bg-primary text-white p-2'>Total</td>
+                      <td className='bg-primary text-white p-2'>{totalWorkedHours} hours</td>
+                      <td className='bg-primary text-white p-2'>{globalThis.main.numberFormat(totalCosts, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
                     </tr>
                   </tfoot>
                 </table>

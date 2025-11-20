@@ -1,18 +1,23 @@
 <?php
 
-namespace Hubleto\App\Community\Settings\Models;
+namespace Hubleto\App\Community\Invoices\Models;
 
+use Hubleto\App\Community\Settings\Models\Company;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\App\Community\Documents\Models\Template;
 
-class InvoiceProfile extends \Hubleto\Erp\Model
+class Profile extends \Hubleto\Erp\Model
 {
   public string $table = 'invoice_profiles';
+  public string $recordManagerClass = RecordManagers\Profile::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
-  public string $recordManagerClass = RecordManagers\InvoiceProfile::class;
+  public ?string $lookupUrlDetail = 'invoices/profiles/{%ID%}';
+  public ?string $lookupUrlAdd = 'invoices/profiles/add';
 
   public array $relations = [
-    'SUPPLIER' => [ self::BELONGS_TO, Company::class, "id_supplier" ],
+    'COMPANY' => [ self::BELONGS_TO, Company::class, "id_company" ],
+    'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
   ];
 
   /**
@@ -25,8 +30,9 @@ class InvoiceProfile extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name'))),
-      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Company::class)),
+      'id_company' => (new Lookup($this, $this->translate('Company'), Company::class)),
       'numbering_pattern' => (new Varchar($this, $this->translate('Numbering pattern'))),
+      'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
     ]);
   }
 

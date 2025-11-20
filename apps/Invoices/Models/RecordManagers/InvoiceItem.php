@@ -2,8 +2,8 @@
 
 namespace Hubleto\App\Community\Invoices\Models\RecordManagers;
 
-use Hubleto\App\Community\Orders\Models\Order;
-use Hubleto\App\Community\Orders\Models\OrderProduct;
+use Hubleto\App\Community\Orders\Models\RecordManagers\Order;
+use Hubleto\App\Community\Orders\Models\RecordManagers\OrderProduct;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class InvoiceItem extends \Hubleto\Erp\RecordManager {

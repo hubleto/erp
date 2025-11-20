@@ -27,8 +27,8 @@ class InvoiceItem extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class))->setRequired(),
-      'id_order' => (new Lookup($this, $this->translate('Order'), OrderProduct::class))->setRequired(),
-      'id_order_product' => (new Lookup($this, $this->translate('Order Product'), OrderProduct::class))->setRequired(),
+      'id_order' => (new Lookup($this, $this->translate('Order'), OrderProduct::class)),
+      'id_order_product' => (new Lookup($this, $this->translate('Order Product'), OrderProduct::class)),
       'item' => (new Varchar($this, $this->translate('Item')))->setRequired(),
       'unit_price' => new Decimal($this, $this->translate('Unit price')),
       'amount' => new Decimal($this, $this->translate('Amount')),

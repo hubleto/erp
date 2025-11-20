@@ -4,6 +4,7 @@ import TableInvoiceItems from './TableInvoiceItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import { InputFactory } from "@hubleto/react-ui/core/InputFactory";
 import request from '@hubleto/react-ui/core/Request';
+import TablePayments from './TablePayments';
 
 interface FormInvoiceProps extends HubletoFormProps {
 }
@@ -36,7 +37,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     
     if (this.props.id > 0) {
       tabs.push({ uid: 'default', title: <b>{this.translate('Invoice')}</b> });
-      tabs.push({ uid: 'documents', title: this.translate('Documents'), showCountFor: 'DOCUMENTS' });
+      tabs.push({ uid: 'documents', title: this.translate('Documents') });
+      tabs.push({ uid: 'payments', title: this.translate('Payments') });
     }
     tabs = [...tabs, ...this.getCustomTabs()];
 
@@ -106,44 +108,43 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     switch (tabUid) {
       case 'default':
         const currencySymbol = R && R.CURRENCY ? R.CURRENCY.symbol : '';
-        return <>
-          <div className='flex w-full bg-gradient-to-b from-slate-100 to-white'>
-            <div className='border-t border-t-4 border-t-slate-600 p-2 grow text-nowrap bg-slate-100 text-slate-800'>
+        return <div className='flex gap-2'>
+          <div className='flex flex-1 flex-col gap-2 w-full'>
+            <div className='p-2 grow'>
+              {this.inputWrapper('number', {wrapperCssClass: 'block', cssClass: 'text-4xl'})}
+            </div>
+            <div className='p-2 grow text-nowrap bg-slate-100 text-slate-800'>
               <div>
-                <div className='text-sm'>
+                <div className='text-4xl'>
                   <b>{globalThis.main.numberFormat(R.total_excl_vat, 2, ',', ' ')} {currencySymbol}</b>
-                  &nbsp;excl. VAT
                 </div>
+                <div className='text-sm'>excl. VAT</div>
               </div>
               <div className='mt-2'>
-                <div className='text-2xl'>
+                <div className='text-4xl'>
                   {globalThis.main.numberFormat(R.total_incl_vat, 2, ',', ' ')} {currencySymbol}
                 </div>
                 <div className='text-sm'>incl. VAT</div>
               </div>
             </div>
-            <div className='border-t border-t-4 border-t-blue-600 p-2 grow'>
-              {this.inputWrapper('number', {wrapperCssClass: 'block'})}
-            </div>
-            <div className={'border-t border-t-4 border-t-blue-400 p-2 grow ' + (R.date_delivery ? '' : 'bg-gradient-to-b from-red-50 to-white border-b border-b-red-800')}>
+            <div className={'border-t border-t-4 border-t-blue-400 p-2 grow ' + (R.date_delivery ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
               {this.inputWrapper('date_delivery', {wrapperCssClass: 'block'})}
             </div>
-            <div className={'border-t border-t-4 border-t-orange-300 p-2 grow ' + (R.date_issue ? '' : 'bg-gradient-to-b from-red-50 to-white border-b border-b-red-800')}>
+            <div className={'border-t border-t-4 border-t-orange-300 p-2 grow ' + (R.date_issue ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
               {this.inputWrapper('date_issue', {wrapperCssClass: 'block'})}
             </div>
-            <div className={'border-t border-t-4 border-t-green-400 p-2 grow ' + (R.date_due ? '' : 'bg-gradient-to-b from-red-50 to-white border-b border-b-red-800')}>
+            <div className={'border-t border-t-4 border-t-green-400 p-2 grow ' + (R.date_due ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
               {this.inputWrapper('date_due', {wrapperCssClass: 'block'})}
             </div>
-            <div className={'border-t border-t-4 border-t-green-600 p-2 grow ' + (R.date_payment ? '' : 'bg-gradient-to-b from-red-50 to-white border-b border-b-red-800')}>
+            <div className={'border-t border-t-4 border-t-green-600 p-2 grow ' + (R.date_payment ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
               {this.inputWrapper('date_payment', {wrapperCssClass: 'block'})}
             </div>
           </div>
-          <div className="flex gap-2 mt-2">
+          <div className="flex flex-col flex-5 gap-2 mt-2">
             <div className='flex-1'>
-              {this.inputWrapper('id_profile')}
+              {this.inputWrapper('id_profile', {uiStyle: 'buttons'})}
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('type')}
-              {this.inputWrapper('id_template')}
               {this.inputWrapper('id_currency')}
               {this.state.id == -1 ? null : <>
                 <div className='flex gap-2'>
@@ -328,7 +329,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               </div>
             </div>
           </div>
-        </>;
+        </div>;
       break;
 
       case 'documents':
@@ -343,6 +344,15 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
             junctionSourceRecordId={R.id}
           />
         </>
+      break;
+
+      case 'payments':
+        return <TablePayments
+          uid={this.props.uid + "_table_invoice_payments"}
+          tag={'table_invoice_payments'}
+          parentForm={this}
+          idInvoice={R.id}
+        />;
       break;
 
     }

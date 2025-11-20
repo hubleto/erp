@@ -35,7 +35,6 @@ class Loader extends \Hubleto\Framework\App
       '/^settings\/permissions\/?$/' => Controllers\Permissions::class,
       '/^settings\/role-permissions\/?$/' => Controllers\RolePermissions::class,
       '/^settings\/teams\/?$/' => Controllers\Teams::class,
-      '/^settings\/invoice-profiles\/?$/' => Controllers\InvoiceProfiles::class,
       '/^settings\/theme\/?$/' => Controllers\Theme::class,
       '/^settings\/config\/?$/' => Controllers\Config::class,
       '/^settings\/get-permissions\/?$/' => Controllers\Api\GetPermissions::class,
@@ -70,7 +69,6 @@ class Loader extends \Hubleto\Framework\App
       $mSetting = $this->getModel(Models\Setting::class);
       $mActivityTypes = $this->getModel(Models\ActivityType::class);
       $mCurrency = $this->getModel(Models\Currency::class);
-      $mInvoiceProfile = $this->getModel(Models\InvoiceProfile::class);
       $mTeam = $this->getModel(Models\Team::class);
       $mTeamMember = $this->getModel(Models\TeamMember::class);
 
@@ -81,7 +79,6 @@ class Loader extends \Hubleto\Framework\App
       $mSetting->dropTableIfExists()->install();
       $mActivityTypes->dropTableIfExists()->install();
       $mCurrency->dropTableIfExists()->install();
-      $mInvoiceProfile->dropTableIfExists()->install();
       $mTeam->dropTableIfExists()->install();
       $mTeamMember->dropTableIfExists()->install();
 

@@ -5,9 +5,8 @@ namespace Hubleto\App\Community\Invoices\Models\RecordManagers;
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
-use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
-use Hubleto\App\Community\Settings\Models\RecordManagers\InvoiceProfile;
+use Hubleto\App\Community\Invoices\Models\RecordManagers\Profile;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,9 +21,9 @@ class Invoice extends \Hubleto\Erp\RecordManager {
     return $this->BelongsTo(Customer::class, 'id_customer');
   }
 
-  /** @return BelongsTo<InvoiceProfile, covariant Invoice> */
+  /** @return BelongsTo<Profile, covariant Invoice> */
   public function PROFILE(): BelongsTo {
-    return $this->BelongsTo(InvoiceProfile::class, 'id_profile');
+    return $this->BelongsTo(Profile::class, 'id_profile');
   }
 
   /** @return BelongsTo<User, covariant Invoice> */
@@ -50,11 +49,6 @@ class Invoice extends \Hubleto\Erp\RecordManager {
     return $this->hasOne(WorkflowStep::class, 'id', 'id_workflow_step');
   }
 
-  /** @return hasOne<Currency, covariant Lead> */
-  public function TEMPLATE(): HasOne
-  {
-    return $this->hasOne(Template::class, 'id', 'id_template');
-  }
   /** @return HasMany<InvoiceItem, covariant Invoice> */
   public function ITEMS(): HasMany {
     return $this->HasMany(InvoiceItem::class, 'id_invoice');
@@ -79,7 +73,7 @@ class Invoice extends \Hubleto\Erp\RecordManager {
     if ($idCustomer > 0) $query->where('id_customer', $idCustomer);
 
     $idProfile = $hubleto->router()->urlParamAsInteger('idProfile');
-    if ($idProfile > 0) $query->where('id_profil', $idProfile);
+    if ($idProfile > 0) $query->where('id_profile', $idProfile);
 
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,

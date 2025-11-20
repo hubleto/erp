@@ -11,7 +11,6 @@ import LeadFormActivity, { LeadFormActivityProps, LeadFormActivityState } from '
 import Hyperlink from '@hubleto/react-ui/core/Inputs/Hyperlink';
 import { FormProps, FormState } from '@hubleto/react-ui/core/Form';
 import moment, { Moment } from "moment";
-import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 
 import TableLeadHistory from './TableLeadHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
@@ -37,6 +36,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   static defaultProps: any = {
     ...HubletoForm.defaultProps,
     model: 'Hubleto/App/Community/Leads/Models/Lead',
+    renderWorkflowUi: true,
   };
 
   props: FormLeadProps;
@@ -141,16 +141,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
   contentClassName(): string
   {
     return this.state.record.is_closed ? 'opacity-85 bg-slate-100' : '';
-  }
-
-  renderTopMenu(): JSX.Element {
-    return <>
-      {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
-    </>
   }
 
   renderTitle(): JSX.Element {

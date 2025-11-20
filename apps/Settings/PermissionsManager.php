@@ -200,6 +200,11 @@ class PermissionsManager extends \Hubleto\Framework\PermissionsManager
       if (count(array_intersect($this->administratorRoles, $userRoles)) > 0) $granted = true;
       if (in_array($userType, $this->administratorTypes)) $granted = true;
 
+      if (!$granted) {
+        $activatedApp = $this->appManager()->getActivatedApp();
+        if ($activatedApp && $activatedApp->permittedForAllUsers) $granted = true;
+      }
+
       if (!$granted && str_starts_with($permission, 'Hubleto/App')) {
         $appsEnabled = $authProvider->getUserFromSession()['APPS'];
         foreach ($appsEnabled as $app) {

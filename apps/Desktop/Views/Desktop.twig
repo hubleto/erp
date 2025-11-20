@@ -64,7 +64,11 @@
   </script>
 
   <script src='{{ config.assetsUrl }}/jquery-3.5.1.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/react-ui-vendor.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/react-ui-core.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/react-ui-ext.js'></script>
   <script defer src='{{ config.assetsUrl }}/compiled/js/main.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/apps.js'></script>
   <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/compiled/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
   {% if user.DEFAULT_COMPANY.brand_color_primary != '' %}

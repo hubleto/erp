@@ -13,7 +13,7 @@ class OrderProduct extends \Hubleto\Erp\Model
 {
   public string $table = 'orders_products';
   public string $recordManagerClass = RecordManagers\OrderProduct::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.id';
+  public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
     'ORDER' => [ self::BELONGS_TO, Order::class, 'id_order', 'id'],
@@ -24,7 +24,7 @@ class OrderProduct extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
-      'order' => (new Integer($this, $this->translate('Item order')))->setRequired()->setDefaultVisible(),
+      'position' => (new Integer($this, $this->translate('Position')))->setRequired()->setDefaultVisible(),
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible(),
       'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setRequired()->setDefaultVisible(),

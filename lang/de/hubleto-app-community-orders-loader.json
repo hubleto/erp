@@ -83,10 +83,6 @@
         "Order": "",
         "Document": ""
     },
-    "Models\\OrderInvoice": {
-        "Order": "",
-        "Invoice": ""
-    },
     "Models\\OrderDeal": {
         "Order": "",
         "Deal": ""

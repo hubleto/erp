@@ -1,0 +1,20 @@
+{% extends '@Hubleto:App:Community:Auth/layouts/Auth.twig' %}
+
+{% block status %}
+  <div class="alert alert-danger">
+    {{ viewParams.message }}
+  </div>
+{% endblock %}
+
+{% block inputs %}
+{% endblock %}
+
+{% block button %}
+  <a href="?sign-out" class="btn btn-large">
+    <span class="icon"><i class="fas fa-arrow-right"></i></span>
+    <span class="text">{{ translate("Sign out") }}</span>
+  </a>
+{% endblock %}
+
+{% block links %}
+{% endblock %}

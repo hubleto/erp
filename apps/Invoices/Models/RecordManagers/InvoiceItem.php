@@ -2,7 +2,8 @@
 
 namespace Hubleto\App\Community\Invoices\Models\RecordManagers;
 
-use \Illuminate\Database\Eloquent\Relations\HasMany;
+use Hubleto\App\Community\Orders\Models\Order;
+use Hubleto\App\Community\Orders\Models\OrderProduct;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class InvoiceItem extends \Hubleto\Erp\RecordManager {
@@ -11,6 +12,16 @@ class InvoiceItem extends \Hubleto\Erp\RecordManager {
   /** @return BelongsTo<Invoice, covariant InvoiceItem> */
   public function INVOICE(): BelongsTo {
     return $this->BelongsTo(Invoice::class, 'id_invoice');
+  }
+
+  /** @return BelongsTo<Invoice, covariant InvoiceItem> */
+  public function ORDER(): BelongsTo {
+    return $this->BelongsTo(Order::class, 'id_order');
+  }
+
+  /** @return BelongsTo<Invoice, covariant InvoiceItem> */
+  public function ORDER_PRODUCT(): BelongsTo {
+    return $this->BelongsTo(OrderProduct::class, 'id_order_product');
   }
 
 }

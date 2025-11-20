@@ -81,10 +81,6 @@
         "Order": "Objednávka",
         "Document": "Dokument"
     },
-    "Models\\OrderInvoice": {
-        "Order": "Objednávka",
-        "Invoice": "Faktura"
-    },
     "Models\\OrderDeal": {
         "Order": "Objednávka",
         "Deal": "Obchod"

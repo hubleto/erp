@@ -140,7 +140,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
   contentClassName(): string
   {
-    return this.state.record.is_closed ? 'opacity-85 bg-slate-100' : '';
+    return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
   renderTitle(): JSX.Element {

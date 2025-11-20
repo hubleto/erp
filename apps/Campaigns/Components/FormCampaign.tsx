@@ -62,7 +62,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
 
   contentClassName(): string
   {
-    return this.state.record.is_closed ? 'opacity-85 bg-slate-100' : '';
+    return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
   onTabChange() {
@@ -169,6 +169,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
 
       case 'recipients':
         return <TableRecipients
+          tag='table_campaign_recipients'
           parentForm={this}
           uid={this.props.uid + "_table_campaign_recipient"}
           idCampaign={R.id}

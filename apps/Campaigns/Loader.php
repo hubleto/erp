@@ -25,6 +25,8 @@ class Loader extends \Hubleto\Framework\App
       '/^campaigns\/add?\/?$/' => ['controller' => Controllers\Campaigns::class, 'vars' => [ 'recordId' => -1 ]],
       '/^campaigns\/recipients(\/(?<recordId>\d+))?\/?$/' => Controllers\Recipients::class,
       '/^campaigns\/recipients\/add?\/?$/' => ['controller' => Controllers\Recipients::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^campaigns\/recipients\/statuses(\/(?<recordId>\d+))?\/?$/' => Controllers\RecipientStatuses::class,
+      '/^campaigns\/recipients\/statuses\/add?\/?$/' => ['controller' => Controllers\RecipientStatuses::class, 'vars' => [ 'recordId' => -1 ]],
       '/^campaigns\/click-tracker\/?$/' => Controllers\ClickTracker::class,
     ]);
 

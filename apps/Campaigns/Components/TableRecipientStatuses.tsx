@@ -1,31 +1,31 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
-import FormRecipient, { FormRecipientProps } from './FormRecipient';
+import FormRecipientStatus, { FormRecipientStatusProps } from './FormRecipientStatus';
 
-interface TableRecipientsProps extends HubletoTableProps {
+interface TableRecipientStatusesProps extends HubletoTableProps {
   idCampaign: number
 }
-interface TableRecipientsState extends HubletoTableState {}
+interface TableRecipientStatusesState extends HubletoTableState {}
 
-export default class TableRecipients extends HubletoTable<TableRecipientsProps, TableRecipientsState> {
+export default class TableRecipientStatuses extends HubletoTable<TableRecipientStatusesProps, TableRecipientStatusesState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    model: 'Hubleto/App/Community/Campaigns/Models/Recipient',
+    model: 'Hubleto/App/Community/Campaigns/Models/RecipientStatus',
   }
 
-  props: TableRecipientsProps;
-  state: TableRecipientsState;
+  props: TableRecipientStatusesProps;
+  state: TableRecipientStatusesState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader';
-  translationContextInner: string = 'Components\\TableRecipients';
+  translationContextInner: string = 'Components\\TableRecipientStatuses';
 
-  constructor(props: TableRecipientsProps) {
+  constructor(props: TableRecipientStatusesProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: TableRecipientsProps) {
+  getStateFromProps(props: TableRecipientStatusesProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -62,24 +62,10 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
     window.history.pushState({}, "", globalThis.main.config.projectUrl + '/campaigns/recipients/' + (id > 0 ? id : 'add'));
   }
 
-  renderCell(columnName: string, column: any, data: any, options: any) {
-    if (columnName == "virt_status" && data.virt_status) {
-      const status = data.virt_status.split(',');
-      const isOptedOut = status[0] == 'opted-out';
-      const isInvalid = status[1] == 'invalid';
-      return <>
-        {isOptedOut ? <div className='badge badge-danger'>Opted out</div> : null}
-        {isInvalid ? <div className='badge'>Invalid</div> : null}
-      </>;
-    } else {
-      return super.renderCell(columnName, column, data, options);
-    }
-  }
-
   renderForm(): JSX.Element {
-    let formProps = this.getFormProps() as FormRecipientProps;
+    let formProps = this.getFormProps() as FormRecipientStatusProps;
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = { id_campaign: this.props.idCampaign };
-    return <FormRecipient {...formProps}/>;
+    return <FormRecipientStatus {...formProps}/>;
   }
 }

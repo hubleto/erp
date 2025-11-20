@@ -55,7 +55,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
 
   contentClassName(): string
   {
-    return this.state.record.is_closed ? 'opacity-85 bg-slate-100' : '';
+    return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
   renderTitle(): JSX.Element {

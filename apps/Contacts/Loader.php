@@ -9,7 +9,7 @@ class Loader extends \Hubleto\Framework\App
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
    *
    * @return void
-   * 
+   *
    */
   public function init(): void
   {
@@ -31,7 +31,7 @@ class Loader extends \Hubleto\Framework\App
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    $settingsApp->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'settings/categories']);
+    $settingsApp->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'contacts/categories']);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Contact Tags'),
       'icon' => 'fas fa-tags',
@@ -72,15 +72,15 @@ class Loader extends \Hubleto\Framework\App
    * Implements fulltext search functionality for the contacts
    *
    * @param array $expressions List of expressions to be searched and glued with logical 'or'.
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function search(array $expressions): array
   {
     $mContact = $this->getModel(Models\Contact::class);
     $qContacts = $mContact->record->prepareReadQuery();
-    
+
     foreach ($expressions as $e) {
       $qContacts = $qContacts->where(function($q) use ($e) {
         $q->orWhere('contacts.first_name', 'like', '%' . $e . '%');

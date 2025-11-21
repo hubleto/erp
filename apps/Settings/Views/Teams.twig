@@ -1,3 +1,5 @@
 <h1 class='app-main-title'>{{ translate('Settings') }} > {{ translate('Teams') }}</h1>
 
-<app-settings-table-teams></app-settings-table-teams>
+<app-settings-table-teams
+  int:record-id="{{ viewParams.recordId }}"
+></app-settings-table-teams>

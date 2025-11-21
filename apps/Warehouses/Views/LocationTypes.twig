@@ -1,3 +1,6 @@
 <h1 class="app-main-title">{{ translate('Warehouses') }} > Location types</h1>
 
-<app-table string:model="Hubleto/App/Community/Warehouses/Models/LocationType"></app-table>
+<app-table
+  int:record-id="{{ viewParams.recordId }}"
+  string:model="Hubleto/App/Community/Warehouses/Models/LocationType"
+></app-table>

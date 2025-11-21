@@ -1,3 +1,6 @@
 <h1 class='app-main-title'>{{ translate('Invoices') }} > {{ translate('Profiles') }}</h1>
 
-<app-table string:model="Hubleto/App/Community/Invoices/Models/Profile"></app-table>
+<app-table
+  string:model="Hubleto/App/Community/Invoices/Models/Profile"
+  int:record-id="{{ viewParams.recordId }}"
+></app-table>

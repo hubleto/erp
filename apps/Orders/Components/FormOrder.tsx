@@ -7,7 +7,7 @@ import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';
 import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 import FormInput from '@hubleto/react-ui/core/FormInput';
-import OrderFormActivity, { OrderFormActivityProps, OrderFormActivityState } from './OrderFormActivity';
+import OrdersFormActivity, { OrdersFormActivityProps, OrdersFormActivityState } from './OrdersFormActivity';
 import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import Calendar from '../../Calendar/Components/Calendar';
 import moment, { Moment } from "moment";
@@ -354,7 +354,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
               isOpen={true}
               type='right'
             >
-              <OrderFormActivity
+              <OrdersFormActivity
                 modal={this.refActivityModal}
                 id={this.state.showIdActivity}
                 isInlineEditing={true}
@@ -371,12 +371,12 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                 }}
                 idCustomer={R.id_customer}
                 onClose={() => { this.setState({ showIdActivity: 0 } as FormOrderState) }}
-                onSaveCallback={(form: OrderFormActivity<OrderFormActivityProps, OrderFormActivityState>, saveResponse: any) => {
+                onSaveCallback={(form: OrdersFormActivity<OrdersFormActivityProps, OrdersFormActivityState>, saveResponse: any) => {
                   if (saveResponse.status == "success") {
                     this.setState({ showIdActivity: 0 } as FormOrderState);
                   }
                 }}
-              ></OrderFormActivity>
+              ></OrdersFormActivity>
             </ModalForm>
           }
         </>;
@@ -463,7 +463,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           isOpen={true}
           type='right'
         >
-          <OrderFormActivity
+          <OrdersFormActivity
             id={this.state.showIdActivity}
             modal={this.refActivityModal}
             isInlineEditing={true}
@@ -480,12 +480,12 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
             }}
             idCustomer={R.id_customer}
             onClose={() => { this.setState({ showIdActivity: 0 } as FormOrderState) }}
-            onSaveCallback={(form: OrderFormActivity<OrderFormActivityProps, OrderFormActivityState>, saveResponse: any) => {
+            onSaveCallback={(form: OrdersFormActivity<OrdersFormActivityProps, OrdersFormActivityState>, saveResponse: any) => {
               if (saveResponse.status == "success") {
                 this.setState({ showIdActivity: 0 } as FormOrderState);
               }
             }}
-          ></OrderFormActivity>
+          ></OrdersFormActivity>
         </ModalForm>
       }
     </>;

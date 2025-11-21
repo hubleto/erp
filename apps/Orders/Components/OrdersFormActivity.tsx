@@ -3,22 +3,22 @@ import FormInput from '@hubleto/react-ui/core/FormInput';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 import FormActivity, { FormActivityProps, FormActivityState } from '@hubleto/apps/Calendar/Components/FormActivity'
 
-export interface OrderFormActivityProps extends FormActivityProps {
+export interface OrdersFormActivityProps extends FormActivityProps {
   idOrder: number,
   idCustomer?: number,
 }
 
-export interface OrderFormActivityState extends FormActivityState {
+export interface OrdersFormActivityState extends FormActivityState {
 }
 
-export default class OrderFormActivity<P, S> extends FormActivity<OrderFormActivityProps, OrderFormActivityState> {
+export default class OrdersFormActivity<P, S> extends FormActivity<OrdersFormActivityProps, OrdersFormActivityState> {
   static defaultProps: any = {
     ...FormActivity.defaultProps,
     model: 'Hubleto/App/Community/Orders/Models/OrderActivity',
   };
 
-  props: OrderFormActivityProps;
-  state: OrderFormActivityState;
+  props: OrdersFormActivityProps;
+  state: OrdersFormActivityState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
   translationContextInner: string = 'Components\\FormActivity';

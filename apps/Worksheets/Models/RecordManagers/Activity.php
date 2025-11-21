@@ -76,10 +76,4 @@ class Activity extends \Hubleto\Erp\RecordManager
     return $query;
   }
 
-  public function addOrderByToQuery(mixed $query, array $orderBy): mixed
-  {
-    if (empty($orderBy)) $query->orderBy("id", "desc");
-    return parent::addOrderByToQuery($query, $orderBy);
-  }
-
 }

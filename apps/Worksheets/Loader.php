@@ -17,6 +17,7 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^worksheets\/?$/' => Controllers\Activities::class,
+      '/^worksheets(\/(?<recordId>\d+))?\/?$/' => Controllers\Activities::class,
       '/^worksheets\/add\/?$/' => ['controller' => Controllers\Activities::class, 'vars' => ['recordId' => -1]],
       // '/^worksheets\/activities\/?$/' => Controllers\Activities::class,
       '/^worksheets\/activity-types\/?$/' => Controllers\ActivityTypes::class,

@@ -4,7 +4,7 @@
     class="btn btn-list-item btn-transparent flex-col items-start md:flex-row"
     target="_blank"
   >
-    <span class="text">
+    <span class="text max-h-none">
       <b>{{ reminder.title }}</b>
       <div class="badge badge-small {% if reminder['id_owner'] == hubleto.authProvider().getUserId() %} badge-blue {% endif %}">@{{ reminder.owner }}</div>
       <div class="badge badge-small badge-lime">{{ reminder.details }}</div>

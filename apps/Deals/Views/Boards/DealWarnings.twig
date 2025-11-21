@@ -1,6 +1,6 @@
 {% macro item(item) %}
   <a href="deals/{{ item.id }}" class="btn btn-list-item btn-transparent flex-col items-start md:flex-row">
-    <span class="text">
+    <span class="text max-h-none">
       <b>{{ item.identifier }}</b>
       {{ item.title }}
       <div class="badge badge-small {% if item['id_owner'] == hubleto.getAuth().getUserId() %} badge-blue {% endif %}">@{{ item['_LOOKUP[id_owner]'] }}</div>

@@ -12,6 +12,7 @@
             {{ item.title }}
             <div class="badge badge-small badge-blue">@{{ item['_LOOKUP[id_owner]'] }}</div>
             <div class="badge badge-small badge-lime">{{ item['_LOOKUP[id_contact]'] }}</div>
+            <div class="badge badge-small" style="border:1px solid {{ item.WORKFLOW_STEP.color }};border-left:0.5em solid {{ item.WORKFLOW_STEP.color }};">{{ item.WORKFLOW_STEP.name }}</div>
           </span>
         </a>
       {% endfor %}

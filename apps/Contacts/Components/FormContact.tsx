@@ -256,7 +256,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
 
               </>
             : <></>}
-            {this.inputWrapper('note', {cssClass: 'bg-yellow-50'})}
+            {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600'})}
             {this.inputWrapper('is_valid')}
             {showAdditional ? this.inputWrapper('date_created') : null}
           </div>

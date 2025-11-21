@@ -1,19 +1,29 @@
-{% macro showWarnings(warnings, viewParams) %}
+{% macro item(item) %}
+  <a href="orders/{{ item.id }}" class="btn btn-list-item btn-transparent flex-col items-start md:flex-row">
+    <span class="text max-h-none">
+      <b>{{ item.identifier }}</b>
+      {{ item.title }}
+      <div class="badge badge-small {% if item['id_owner'] == hubleto.getAuth().getUserId() %} badge-blue {% endif %}">@{{ item['_LOOKUP[id_owner]'] }}</div>
+      <div class="badge badge-small badge-lime">{{ item.CUSTOMER.name }}</div>
+      <div class="badge badge-small" style="border:1px solid {{ item.WORKFLOW_STEP.color }};border-left:0.5em solid {{ item.WORKFLOW_STEP.color }};">{{ item.WORKFLOW_STEP.name }}</div>
+    </span>
+  </a>
+{% endmacro %}
+
+{% macro showWarnings(warnings, viewParams, user) %}
   {% set title = warnings.title %}
   {% set items = warnings.items %}
 
   <b>{{ title }}</b>
   {% if items|length > 0 %}
-    <div class="list">
+    <div class="list mt-2">
       {% for item in items %}
-        <a href="orders/{{ item.id }}" class="btn btn-list-item btn-transparent flex-col items-start md:flex-row">
-          <span class="text">
-            <b>{{ item.identifier }}</b>
-            {{ item.title }}
-            <div class="badge badge-small {% if item['id_owner'] == hubleto.getAuth().getUserId() %} badge-blue {% endif %}">@{{ item['_LOOKUP[id_owner]'] }}</div>
-            <div class="badge badge-small badge-lime">{{ item.CUSTOMER.name }}</div>
-          </span>
-        </a>
+        {% if item.id_owner == user.id %} {{ _self.item(item) }} {% endif %}
+      {% endfor %}
+    </div>
+    <div class="list mt-2 text-xs bg-gray-50">
+      {% for item in items %}
+        {% if item.id_owner != user.id %} {{ _self.item(item) }} {% endif %}
       {% endfor %}
     </div>
   {% endif %}
@@ -25,6 +35,6 @@
   </div>
 {% else %}
   {% for warnings in viewParams.warnings %}
-    {{ _self.showWarnings(warnings, viewParams) }}
+    {{ _self.showWarnings(warnings, viewParams, user) }}
   {% endfor %}
 {% endif %}

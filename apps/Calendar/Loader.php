@@ -19,13 +19,15 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
+      '/^calendar\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
+      '/^calendar\/api\/get-shared-calendars\/?$/' => Controllers\Api\GetSharedCalendars::class,
+      '/^calendar\/api\/stop-sharing-calendar\/?$/' => Controllers\Api\StopSharingCalendar::class,
+      '/^calendar\/api\/set-initial-view\/?$/' => Controllers\Api\SetInitialView::class,
+
       '/^calendar\/?$/' => Controllers\Calendar::class,
       '/^calendar(\/(?<key>\w+))?\/ics\/?$/' => Controllers\IcsCalendar::class,
       '/^calendar\/share\/?$/' => Controllers\Share::class,
       '/^calendar\/boards\/reminders\/?$/' => Controllers\Boards\Reminders::class,
-      '/^calendar\/api\/get-calendar-events\/?$/' => Controllers\Api\GetCalendarEvents::class,
-      '/^calendar\/api\/get-shared-calendars\/?$/' => Controllers\Api\GetSharedCalendars::class,
-      '/^calendar\/api\/stop-sharing-calendar\/?$/' => Controllers\Api\StopSharingCalendar::class,
     ]);
 
     $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
@@ -49,6 +51,19 @@ class Loader extends \Hubleto\Framework\App
       $mSharedCalendar = $this->getModel(SharedCalendar::class);
       $mSharedCalendar->install();
     }
+  }
+
+  public function getInitialView(): string
+  {
+    $initialView = $this->config()->getAsString('apps/Hubleto\\App\\Community\\Calendar/initialView', 'timeGridWeek');
+    if (!in_array($initialView, ['timeGridDay', 'timeGridWeek', 'dayGridMonth', 'listYear'])) $initialView = 'timeGridWeek';
+    return $initialView;
+  }
+
+  public function setInitialView(string $initialView): void
+  {
+    if (!in_array($initialView, ['timeGridDay', 'timeGridWeek', 'dayGridMonth', 'listYear'])) $initialView = 'timeGridWeek';
+    $this->config()->save('apps/Hubleto\\App\\Community\\Calendar/initialView', $initialView);
   }
 
 }

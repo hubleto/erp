@@ -53,14 +53,20 @@ class Loader extends \Hubleto\Framework\App
       'url' => 'leads/lost-reasons',
     ]);
 
-    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    /** @var \Hubleto\App\Community\Calendar\Manager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar($this, 'leads', $this->configAsString('calendarColor'), Calendar::class);
 
+    /** @var \Hubleto\App\Community\Workflow\Manager */
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflow($this, 'leads', Workflow::class);
+
+    /** @var \Hubleto\App\Community\Dashboards\Manager */
     $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
     $boards->addBoard( $this, 'Lead value by score', 'leads/boards/lead-value-by-score');
     $boards->addBoard( $this, 'Lead warnings', 'leads/boards/lead-warnings');
 
+    /** @var \Hubleto\App\Community\Desktop\AppMenuManager */
     $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'leads', $this->translate('Active leads'), 'fas fa-people-arrows');
     $appMenu->addItem($this, 'leads/archive', $this->translate('Archived leads'), 'fas fa-box-archive');

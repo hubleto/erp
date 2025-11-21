@@ -72,12 +72,6 @@ class Order extends \Hubleto\Erp\RecordManager
     return $this->hasMany(ProjectOrder::class, 'id_order', 'id');
   }
 
-  /** @return HasMany<OrderInvoice, covariant Order> */
-  public function INVOICES(): HasMany
-  {
-    return $this->hasMany(OrderInvoice::class, 'id_order', 'id');
-  }
-
   /** @return HasMany<History, covariant Order> */
   public function HISTORY(): HasMany
   {
@@ -113,7 +107,7 @@ class Order extends \Hubleto\Erp\RecordManager
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
       $query,
-      $filters['fOrderWorkflowStep'] ?? []
+      (array) ($filters['fOrderWorkflowStep'] ?? [])
     );
 
     if (isset($filters["fOrderClosed"])) {

@@ -43,6 +43,18 @@ class Document extends \Hubleto\Erp\Model
     return $savedRecord;
   }
 
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    if ($originalRecord["file"] != $savedRecord["file"]) {
+      $localFilename = ltrim((string) $originalRecord["file"], "./");
+      if (file_exists($this->config()->getAsString('uploadFolder') . "/" . $localFilename)) {
+        unlink($this->config()->getAsString('uploadFolder') . "/" . $localFilename);
+      }
+    }
+
+    return parent::onAfterUpdate($originalRecord, $savedRecord);
+  }
+
   public function onBeforeDelete(int $id): int
   {
     $document = (array) $this->record->find($id)->toArray();

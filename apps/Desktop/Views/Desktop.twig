@@ -64,7 +64,11 @@
   </script>
 
   <script src='{{ config.assetsUrl }}/jquery-3.5.1.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/react-ui-vendor.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/react-ui-core.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/react-ui-ext.js'></script>
   <script defer src='{{ config.assetsUrl }}/compiled/js/main.js'></script>
+  <script defer src='{{ config.assetsUrl }}/compiled/js/apps.js'></script>
   <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/compiled/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
   {% if user.DEFAULT_COMPANY.brand_color_primary != '' %}
@@ -117,7 +121,7 @@
       <div class="md:block ml-2">
         <ul class="flex font-sm gap-1">
           {% if viewParams.availableLanguages|length > 0 %}
-            <li class="mr-2 hidden lg:block">
+            <li class="mr-2 block">
               <button class="btn btn-transparent btn-dropdown">
                 <div class="menu">
                   <div class="list mr-2">

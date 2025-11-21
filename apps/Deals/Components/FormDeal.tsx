@@ -34,7 +34,7 @@ export interface FormDealState extends HubletoFormState {
   tableDealProductsDescription: any,
   tableDealDocumentsDescription: any,
   tablesKey: number,
-  // workflowFirstLoad: boolean;
+  selectParentLead?: boolean,
 }
 
 export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
@@ -42,6 +42,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     ...HubletoForm.defaultProps,
     icon: 'fas fa-handshake',
     model: 'Hubleto/App/Community/Deals/Models/Deal',
+    renderWorkflowUi: true,
   };
 
   props: FormDealProps;
@@ -75,7 +76,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       tableDealProductsDescription: null,
       tableDealDocumentsDescription: null,
       tablesKey: 0,
-      // workflowFirstLoad: false,
+      selectParentLead: false,
     };
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
@@ -139,7 +140,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
   contentClassName(): string
   {
-    return this.state.record.is_closed ? 'opacity-85 bg-slate-100' : '';
+    return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
   renderTitle(): JSX.Element {
@@ -222,16 +223,44 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       case 'default':
 
         const inputsColumnLeft = <>
-          {R.LEADS && R.LEADS.length > 0 ? <FormInput title={"Lead"}>
-            {R.LEADS.map((item, key) => {
-              return (item.LEAD ? <a
-                key={key}
-                className='badge'
-                href={globalThis.main.config.projectUrl + '/leads/' + item.LEAD.id}
-                target='_blank'
-              >{item.LEAD.id}</a> : '#');
-            })}
-          </FormInput> : null}
+          <FormInput title={"Lead"}>
+            {this.state.selectParentLead ? <>
+              <Lookup
+                model='Hubleto/App/Community/Leads/Models/Lead'
+                cssClass='font-bold'
+                onChange={(input: any, value: any) => {
+                  request.post(
+                    'deals/api/set-parent-lead',
+                    {
+                      idDeal: this.state.record.id,
+                      idLead: value,
+                    },
+                    {},
+                    (data: any) => {
+                      this.setState({selectParentLead: false}, () => this.reload());
+                    }
+                  )
+                }}
+              ></Lookup>
+            </> : <>
+              {R.LEADS ? R.LEADS.map((item, key) => {
+                return (item.LEAD ? <a
+                  key={key}
+                  className='badge'
+                  href={globalThis.main.config.projectUrl + '/leads/' + item.LEAD.id}
+                  target='_blank'
+                >#{item.LEAD.id}</a> : '#');
+              }) : null}
+              <button
+                className='btn btn-small btn-transparent'
+                onClick={() => {
+                  this.setState({selectParentLead: true});
+                }}
+              >
+                <span className='text'>Select parent lead</span>
+              </button>
+            </>}
+          </FormInput>
           {this.inputWrapper('identifier', {cssClass: 'text-2xl', readonly: R.is_archived})}
           {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_archived})}
           {this.inputWrapper('version')}
@@ -297,6 +326,17 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         </>;
 
         const inputsColumnRight = <>
+          {this.state.id > 0 ? <div className='flex gap-2 mb-2'>
+            <div className="badge badge-violet">
+              {this.translate("Deal value:")} {globalThis.main.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY?.code}
+            </div>
+            {R.WORKFLOW_STEP && R.WORKFLOW_STEP.probability ?
+              <div className="badge badge-violet">
+                {this.translate("Weighted profit")} ({R.WORKFLOW_STEP?.probability} %):
+                <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.WORKFLOW_STEP?.probability, R.price_excl_vat), 2, ',', ' ')} {R.CURRENCY.code}</strong>
+              </div>
+            : null}
+          </div> : null}
           {this.inputWrapper('id_owner', {readonly: R.is_archived})}
           {this.inputWrapper('id_manager', {readonly: R.is_archived})}
           <div className="flex gap-2">
@@ -319,14 +359,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 readonly: R.is_archived,
                 onChange: (input: any, value: any) => {
                   this.updateRecord({lost_reason: null});
-                  // if (this.state.record.WORKFLOW && this.state.record.WORKFLOW.STEPS?.length > 0) {
-                  //   this.changeWorkflowStepFromResult();
-                  // }
                 }
               }
             )}
           </div>
-          {this.inputWrapper('note', {cssClass: 'bg-yellow-50', readonly: R.is_archived})}
+          {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_archived})}
           {this.state.record.deal_result == 2 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
         </>;
 
@@ -344,19 +381,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 <div className='border-t md:border-l border-gray-200'></div>
                 <div className='grow'>{inputsColumnRight}</div>
               </div>
-            </div>
-            <div className='flex-1'>
-              {this.state.id > 0 ? <div className='flex gap-2 mb-2'>
-                <div className="badge badge-violet">
-                  {this.translate("Deal value:")} {globalThis.main.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY?.code}
-                </div>
-                {R.WORKFLOW_STEP && R.WORKFLOW_STEP.probability ?
-                  <div className="badge badge-violet">
-                    {this.translate("Weighted profit")} ({R.WORKFLOW_STEP?.probability} %):
-                    <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.WORKFLOW_STEP?.probability, R.price_excl_vat), 2, ',', ' ')} {R.CURRENCY.code}</strong>
-                  </div>
-                : null}
-              </div> : null}
             </div>
           </div>
         </>
@@ -608,24 +632,24 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     }
   }
 
-  renderTopMenu(): JSX.Element {
-    return <>
-      {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <div className='flex-2 pl-4'>
-        <WorkflowSelector
-          parentForm={this}
-          onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
-            let newRecord: any = {id_workflow_step: idWorkflowStep, deal_result: 0, is_closed: false};
-            if (step.name.match(/won/i)) newRecord.deal_result = 1;
-            if (step.name.match(/lost/i)) newRecord.deal_result = 2;
-            if (newRecord.deal_result != 0) newRecord.is_closed = true;
-            this.updateRecord(newRecord);
-          }}
-        ></WorkflowSelector>
-      </div>}
-      {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-    </>
-  }
+  // renderTopMenu(): JSX.Element {
+  //   return <>
+  //     {super.renderTopMenu()}
+  //     {this.state.id <= 0 ? null : <div className='flex-2 pl-4'>
+  //       <WorkflowSelector
+  //         parentForm={this}
+  //         onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
+  //           let newRecord: any = {id_workflow_step: idWorkflowStep, deal_result: 0, is_closed: false};
+  //           if (step.name.match(/won/i)) newRecord.deal_result = 1;
+  //           if (step.name.match(/lost/i)) newRecord.deal_result = 2;
+  //           if (newRecord.deal_result != 0) newRecord.is_closed = true;
+  //           this.updateRecord(newRecord);
+  //         }}
+  //       ></WorkflowSelector>
+  //     </div>}
+  //     {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+  //   </>
+  // }
 
   renderContent(): JSX.Element {
     const R = this.state.record;

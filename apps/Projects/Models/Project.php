@@ -68,13 +68,11 @@ class Project extends \Hubleto\Erp\Model
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),
-      'budget' => (new Integer($this, $this->translate('Budget')))->setDefaultVisible()->setUnit('€'),
+      'average_hourly_costs' => (new Decimal($this, $this->translate('Average hourly costs')))->setDefaultVisible()->setUnit('€'),
+      'budget' => (new Decimal($this, $this->translate('Budget')))->setDefaultVisible()->setUnit('€'),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
-      // 'id_phase' => (new Lookup($this, $this->translate('Phase'), Phase::class))->setDefaultVisible()->setRequired()
-      //   ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
-      // ,
       'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'online_documentation_folder' => (new Varchar($this, "Online documentation folder"))->setReactComponent('InputHyperlink'),
       'notes' => (new Text($this, $this->translate('Notes'))),

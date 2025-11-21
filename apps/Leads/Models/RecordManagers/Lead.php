@@ -159,6 +159,11 @@ class Lead extends \Hubleto\Erp\RecordManager
       }
     }
 
+    if (isset($filters["fLeadClosed"])) {
+      if ($filters["fLeadClosed"] == 0) $query = $query->where("leads.is_closed", false);
+      if ($filters["fLeadClosed"] == 1) $query = $query->where("leads.is_closed", true);
+    }
+
     // Virtual tag count
     $query->selectSub(function($sub) {
       $sub->from('cross_lead_tags')

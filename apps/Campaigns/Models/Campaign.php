@@ -27,15 +27,15 @@ class Campaign extends \Hubleto\Erp\Model
   public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public array $relations = [
-    'MAIL_ACCOUNT' => [ self::HAS_ONE, Account::class, 'id_mail_account', 'id'],
-    'MAIL_TEMPLATE' => [ self::HAS_ONE, Template::class, 'id_mail_template', 'id'],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
-    'LAUNCHED_BY' => [ self::BELONGS_TO, User::class, 'id_launched_by', 'id'],
-    'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
-    'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
+    'MAIL_ACCOUNT' => [ self::HAS_ONE, Account::class, 'id_mail_account', 'id' ],
+    'MAIL_TEMPLATE' => [ self::HAS_ONE, Template::class, 'id_mail_template', 'id' ],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    'LAUNCHED_BY' => [ self::BELONGS_TO, User::class, 'id_launched_by', 'id' ],
+    'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow' ],
+    'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step' ],
 
-    'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_deal', 'id'],
-    'TASKS' => [ self::HAS_MANY, CampaignTask::class, 'id_deal', 'id'],
+    // 'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_deal', 'id' ],
+    'TASKS' => [ self::HAS_MANY, CampaignTask::class, 'id_deal', 'id' ],
   ];
 
   /**

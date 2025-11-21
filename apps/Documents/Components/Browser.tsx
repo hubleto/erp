@@ -196,7 +196,16 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
             model='Hubleto/App/Community/Documents/Models/Folder'
             customEndpointParams={{idParentFolder: this.state.folderContent.folder.id}}
             id={this.state.showFolderProperties}
+            onSaveCallback={() => {this.loadData(); this.setState({showFolderProperties: 0});}}
             onClose={() => { this.setState({showFolderProperties: 0}); }}
+            onDeleteCallback={() => {
+              const secondLastIndex = this.state.path.length - 2;
+              let item = this.state.path[secondLastIndex]
+              let newPath: Array<any> = [];
+              for (let i = 0; i <= secondLastIndex; i++) newPath.push(this.state.path[i]);
+              this.changeFolder(item.uid, newPath);
+              this.setState({showFolderProperties: 0});
+            }}
           />
         </ModalForm>
       : null}

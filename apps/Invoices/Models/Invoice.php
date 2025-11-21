@@ -11,15 +11,13 @@ use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Integer;
 
 use Hubleto\App\Community\Customers\Models\Customer;
-use Hubleto\App\Community\Settings\Models\InvoiceProfile;
 
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
-use Hubleto\App\Community\Documents\Models\Template;
 use Hubleto\App\Community\Documents\Generator;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Auth\Models\User;
-
+use Hubleto\App\Community\Documents\Models\Template;
 use Hubleto\Framework\Helper;
 
 class Invoice extends \Hubleto\Erp\Model {
@@ -39,14 +37,24 @@ class Invoice extends \Hubleto\Erp\Model {
   ];
 
   public string $table = 'invoices';
-  public ?string $lookupSqlValue = '{%TABLE%}.number';
+  public ?string $lookupSqlValue = '
+    concat(
+      ifnull({%TABLE%}.number, ""),
+      " ",
+      ifnull(
+        (
+          select `c`.`name` from `customers` `c`
+          where `c`.`id` = {%TABLE%}.`id_customer`
+        ),
+        ""
+      )
+    )';
   public string $recordManagerClass = RecordManagers\Invoice::class;
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, "id_customer" ],
-    'PROFILE' => [ self::BELONGS_TO, InvoiceProfile::class, "id_profile" ],
+    'PROFILE' => [ self::BELONGS_TO, Profile::class, "id_profile" ],
     'ISSUED_BY' => [ self::BELONGS_TO, User::class, "id_issued_by" ],
-    'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
@@ -63,11 +71,11 @@ class Invoice extends \Hubleto\Erp\Model {
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_profile' => (new Lookup($this, $this->translate('Supplier'), InvoiceProfile::class))->setDefaultVisible(),
+      'id_profile' => (new Lookup($this, $this->translate('Invoicing profile'), Profile::class))->setDefaultVisible()->setRequired(),
       'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
-      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES),
-      'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON)->setRequired(),
+      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired(),
+      'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setRequired(),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
       'ss' => (new Varchar($this, $this->translate('Specific symbol'))),
@@ -75,11 +83,10 @@ class Invoice extends \Hubleto\Erp\Model {
       'date_delivery' => (new Date($this, $this->translate('Delivered'))),
       'date_due' => (new Date($this, $this->translate('Due')))->setDefaultVisible(),
       'date_payment' => (new Date($this, $this->translate('Paid')))->setDefaultVisible(),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setRequired(),
       'total_excl_vat' => new Decimal($this, $this->translate('Total excl. VAT'))->setReadonly(),
       'total_incl_vat' => new Decimal($this, $this->translate('Total incl. VAT'))->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
-      'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
     ]);
@@ -161,12 +168,12 @@ class Invoice extends \Hubleto\Erp\Model {
   public function onBeforeCreate(array $record): array
   {
 
-    $mInvoiceProfile = $this->getService(InvoiceProfile::class);
+    $mProfile = $this->getService(Profile::class);
 
     $invoicesThisYear = (array) $this->record->whereYear('date_delivery', date('Y'))->get()->toArray();
-    $profil = $mInvoiceProfile->record->where('id', $record['id_profile'])->first()->toArray();
+    $profile = $mProfile->record->where('id', $record['id_profile'])->first();
 
-    $record['number'] = (string) ($profil['numbering_pattern'] ?? '{YYYY}{NNNN}');
+    $record['number'] = (string) ($profile->numbering_pattern ?? '{YYYY}{NNNN}');
     $record['number'] = str_replace('{YY}', date('y'), $record['number']);
     $record['number'] = str_replace('{YYYY}', date('Y'), $record['number']);
     $record['number'] = str_replace('{NN}', str_pad((string) (count($invoicesThisYear) + 1), 2, '0', STR_PAD_LEFT), $record['number']);
@@ -308,8 +315,10 @@ class Invoice extends \Hubleto\Erp\Model {
     $invoice = $mInvoice->record->prepareReadQuery()->where('invoices.id', $idInvoice)->first();
     if (!$invoice) throw new \Exception('Invoice was not found.');
 
+    /** @var Template */
     $mTemplate = $this->getService(Template::class);
-    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $invoice->id_template)->first();
+
+    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $invoice->PROFILE->id_template)->first();
     if (!$template) throw new \Exception('Template was not found.');
 
     $vars = $invoice->toArray();
@@ -324,6 +333,7 @@ class Invoice extends \Hubleto\Erp\Model {
     );
 
     if ($idDocument > 0) {
+      /** @var InvoiceDocument */
       $mInvoiceDocument = $this->getService(InvoiceDocument::class);
       $mInvoiceDocument->record->recordCreate([
         'id_invoice' => $idInvoice,

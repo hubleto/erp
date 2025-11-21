@@ -95,7 +95,7 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                   {this.props.parentForm.state.isInlineEditing ? <>
                     <div className="hubleto component input w-full"><div className="input-element w-full">
                       <input
-                        className="w-full bg-blue-50"
+                        className="w-full bg-blue-50 dark:bg-white/20"
                         onChange={(e) => {
                           let newValues = this.state.data.data;
                           newValues[key].value = e.currentTarget.value;

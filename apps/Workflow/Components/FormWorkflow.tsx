@@ -80,7 +80,9 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
               R.STEPS.push({
                 id_workflow: { _useMasterRecordId_: true },
               });
-              this.setState({ record: R, isInlineEditing: true});
+              this.updateRecord(R, () => {
+                this.setState({ isInlineEditing: true});
+              });
             }}
           >
             <span className="icon"><i className="fas fa-add"></i></span>

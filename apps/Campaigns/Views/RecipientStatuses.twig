@@ -1,0 +1,7 @@
+<h1 class="app-main-title">{{ translate('Campaigns') }} > {{ translate('Recipients') }} > {{ translate('Statuses') }}</h1>
+
+<app-campaigns-table-recipient-statuses
+  string:tag="table-recipients"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></app-campaigns-table-recipient-statuses>

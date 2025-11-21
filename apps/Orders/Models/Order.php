@@ -42,7 +42,6 @@ class Order extends \Hubleto\Erp\Model
 
     'PRODUCTS' => [ self::HAS_MANY, OrderProduct::class, 'id_order', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, OrderDocument::class, 'id_order', 'id' ],
-    'INVOICES' => [ self::HAS_MANY, OrderInvoice::class, 'id_order', 'id' ],
     'HISTORY' => [ self::HAS_MANY, History::class, 'id_order', 'id' ],
     'DEALS' => [ self::HAS_MANY, OrderDeal::class, 'id_order', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, OrderActivity::class, 'id_deal', 'id' ],

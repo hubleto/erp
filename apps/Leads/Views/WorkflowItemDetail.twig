@@ -1,0 +1,19 @@
+<div class="card-header rounded flex flex-col p-2 text-sm font-normal">
+  <div class="flex justify-between w-full">
+    <div class="flex flex-col truncate">
+      <div class="flex gap-2">
+        {% for c in item.CAMPAIGNS %}
+          <div class="badge badge-lime badge-small">{{ c.CAMPAIGN.name }}</div>
+        {% endfor %}
+      </div>
+      <div class="text-gray-400">{{ item.CUSTOMER.name ?? "[Customer unknown]" }}</div>
+      <div class="font-bold">
+        {% for v in item.CONTACT.VALUES %}
+          <div>{{ v.value }}</div>
+        {% endfor %}
+      </div>
+      <div class="text-primary">{{ item.OWNER.email }}</div>
+    </div>
+  </div>
+</div>
+

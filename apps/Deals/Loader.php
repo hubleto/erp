@@ -21,6 +21,7 @@ class Loader extends \Hubleto\Framework\App
       '/^deals\/api\/create-from-lead\/?$/' => Controllers\Api\CreateFromLead::class,
       '/^deals\/api\/generate-quotation-pdf\/?$/' => Controllers\Api\GenerateQuotationPdf::class,
       '/^deals\/api\/generate-invoice\/?$/' => Controllers\Api\GenerateInvoice::class,
+      '/^deals\/api\/set-parent-lead\/?$/' => Controllers\Api\SetParentLead::class,
 
       '/^deals\/boards\/deal-warnings\/?$/' => Controllers\Boards\DealWarnings::class,
       '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,
@@ -48,21 +49,21 @@ class Loader extends \Hubleto\Framework\App
       'url' => 'deals/lost-reasons',
     ]);
 
-    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    /** @var \Hubleto\App\Community\Calendar\Manager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar($this, 'deals', $this->configAsString('calendarColor'), Calendar::class);
 
-    /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
+    /** @var \Hubleto\App\Community\Workflow\Manager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $workflowManager->addWorkflow($this, 'deals', Workflow::class);
 
-    /** @var \Hubleto\App\Community\Reports\Loader $reportsApp */
-    $reportsApp = $this->appManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
-    if ($reportsApp != null) {
-      $reportsApp->reportManager->addReport($this, Reports\MonthlyRevenue::class);
-    }
+    // /** @var \Hubleto\App\Community\Reports\Loader */
+    // $reportsApp = $this->appManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
+    // if ($reportsApp != null) {
+    //   $reportsApp->reportManager->addReport($this, Reports\MonthlyRevenue::class);
+    // }
 
-    /** @var \Hubleto\App\Community\Dashboards\Manager $dashboardManager */
+    /** @var \Hubleto\App\Community\Dashboards\Manager */
     $dashboardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
     $dashboardManager->addBoard($this, $this->translate('Deal warnings'), 'deals/boards/deal-warnings');
     $dashboardManager->addBoard($this, $this->translate('Most valuable deals'), 'deals/boards/most-valuable-deals');

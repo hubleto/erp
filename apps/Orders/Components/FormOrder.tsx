@@ -7,10 +7,11 @@ import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';
 import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 import FormInput from '@hubleto/react-ui/core/FormInput';
-import OrderFormActivity, { OrderFormActivityProps, OrderFormActivityState } from './OrderFormActivity';
+import OrdersFormActivity, { OrdersFormActivityProps, OrdersFormActivityState } from './OrdersFormActivity';
 import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import Calendar from '../../Calendar/Components/Calendar';
 import moment, { Moment } from "moment";
+import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
 export interface FormOrderProps extends HubletoFormProps {
 }
@@ -22,6 +23,7 @@ export interface FormOrderState extends HubletoFormState {
   activityDate: string,
   activitySubject: string,
   activityAllDay: boolean,
+  selectParentDeal?: boolean,
 }
 
 export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrderState> {
@@ -29,6 +31,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     ...HubletoForm.defaultProps,
     icon: 'fas fa-money-check-dollar',
     model: 'Hubleto/App/Community/Orders/Models/Order',
+    renderWorkflowUi: true,
   };
 
   props: FormOrderProps;
@@ -56,6 +59,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       activityDate: '',
       activitySubject: '',
       activityAllDay: false,
+      selectParentDeal: false,
     };
   }
 
@@ -64,8 +68,8 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
-        { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
+        { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
         ...this.getCustomTabs()
       ]
@@ -78,7 +82,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
 
   contentClassName(): string
   {
-    return this.state.record.is_closed ? 'opacity-85 bg-slate-100' : '';
+    return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
   renderTitle(): JSX.Element {
@@ -152,16 +156,16 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     ]
   }
 
-  renderTopMenu(): JSX.Element {
-    const R = this.state.record;
-    return <>
-      {super.renderTopMenu()}
-      {this.state.id <= 0 ? null : <>
-        <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-        {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-      </>}
-    </>
-  }
+  // renderTopMenu(): JSX.Element {
+  //   const R = this.state.record;
+  //   return <>
+  //     {super.renderTopMenu()}
+  //     {this.state.id <= 0 ? null : <>
+  //       <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
+  //       {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
+  //     </>}
+  //   </>
+  // }
 
   renderTab(tabUid: string) {
     const R = this.state.record;
@@ -173,14 +177,42 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
             <div className='card-body flex flex-row gap-2'>
               <div className='grow'>
                 <FormInput title={"Deal"}>
-                  {R.DEALS ? R.DEALS.map((item, key) => {
-                    return (item.DEAL ? <a
-                      key={key}
-                      className='badge'
-                      href={globalThis.main.config.projectUrl + '/deals/' + item.DEAL.id}
-                      target='_blank'
-                    >#{item.DEAL.identifier}&nbsp;{item.DEAL.title}</a> : '#');
-                  }) : null}
+                  {this.state.selectParentDeal ? <>
+                    <Lookup
+                      model='Hubleto/App/Community/Deals/Models/Deal'
+                      cssClass='font-bold'
+                      onChange={(input: any, value: any) => {
+                        request.post(
+                          'orders/api/set-parent-deal',
+                          {
+                            idOrder: this.state.record.id,
+                            idDeal: value,
+                          },
+                          {},
+                          (data: any) => {
+                            this.setState({selectParentDeal: false}, () => this.reload());
+                          }
+                        )
+                      }}
+                    ></Lookup>
+                  </> : <>
+                    {R.DEALS ? R.DEALS.map((item, key) => {
+                      return (item.DEAL ? <a
+                        key={key}
+                        className='badge'
+                        href={globalThis.main.config.projectUrl + '/deals/' + item.DEAL.id}
+                        target='_blank'
+                      >#{item.DEAL.identifier}&nbsp;{item.DEAL.title}</a> : '#');
+                    }) : null}
+                    <button
+                      className='btn btn-small btn-transparent'
+                      onClick={() => {
+                        this.setState({selectParentDeal: true});
+                      }}
+                    >
+                      <span className='text'>Select parent deal</span>
+                    </button>
+                  </>}
                 </FormInput>
                 {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
                 {this.inputWrapper('identifier_customer')}
@@ -322,7 +354,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
               isOpen={true}
               type='right'
             >
-              <OrderFormActivity
+              <OrdersFormActivity
                 modal={this.refActivityModal}
                 id={this.state.showIdActivity}
                 isInlineEditing={true}
@@ -339,12 +371,12 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                 }}
                 idCustomer={R.id_customer}
                 onClose={() => { this.setState({ showIdActivity: 0 } as FormOrderState) }}
-                onSaveCallback={(form: OrderFormActivity<OrderFormActivityProps, OrderFormActivityState>, saveResponse: any) => {
+                onSaveCallback={(form: OrdersFormActivity<OrdersFormActivityProps, OrdersFormActivityState>, saveResponse: any) => {
                   if (saveResponse.status == "success") {
                     this.setState({ showIdActivity: 0 } as FormOrderState);
                   }
                 }}
-              ></OrderFormActivity>
+              ></OrdersFormActivity>
             </ModalForm>
           }
         </>;
@@ -431,7 +463,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           isOpen={true}
           type='right'
         >
-          <OrderFormActivity
+          <OrdersFormActivity
             id={this.state.showIdActivity}
             modal={this.refActivityModal}
             isInlineEditing={true}
@@ -448,12 +480,12 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
             }}
             idCustomer={R.id_customer}
             onClose={() => { this.setState({ showIdActivity: 0 } as FormOrderState) }}
-            onSaveCallback={(form: OrderFormActivity<OrderFormActivityProps, OrderFormActivityState>, saveResponse: any) => {
+            onSaveCallback={(form: OrdersFormActivity<OrdersFormActivityProps, OrdersFormActivityState>, saveResponse: any) => {
               if (saveResponse.status == "success") {
                 this.setState({ showIdActivity: 0 } as FormOrderState);
               }
             }}
-          ></OrderFormActivity>
+          ></OrdersFormActivity>
         </ModalForm>
       }
     </>;

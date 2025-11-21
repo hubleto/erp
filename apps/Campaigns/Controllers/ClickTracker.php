@@ -21,7 +21,7 @@ class ClickTracker extends \Hubleto\Erp\Controller
     $idRecipient = (int) ($clickData['rcid'] ?? 0);
     $url = $clickData['url'] ?? '';
 
-    if (empty($campaignUid) || empty($url) || $idRecipient <= 0) return 'Invalid click data.';
+    if (empty($campaignUid) || empty($url)) return 'Invalid click data.';
 
     /** @var Campaign */
     $mCampaign = $this->getModel(Campaign::class);

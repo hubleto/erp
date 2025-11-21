@@ -12,7 +12,6 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Campaigns/Models/Recipient',
-    orderBy: {field: 'is_opted_out', direction: 'desc'},
   }
 
   props: TableRecipientsProps;
@@ -61,6 +60,20 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
 
   setRecordFormUrl(id: number) {
     window.history.pushState({}, "", globalThis.main.config.projectUrl + '/campaigns/recipients/' + (id > 0 ? id : 'add'));
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "virt_status" && data.virt_status) {
+      const status = data.virt_status.split(',');
+      const isOptedOut = status[0] == 'opted-out';
+      const isInvalid = status[1] == 'invalid';
+      return <>
+        {isOptedOut ? <div className='badge badge-danger'>Opted out</div> : null}
+        {isInvalid ? <div className='badge'>Invalid</div> : null}
+      </>;
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
   }
 
   renderForm(): JSX.Element {

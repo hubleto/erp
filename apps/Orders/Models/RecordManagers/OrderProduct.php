@@ -21,17 +21,26 @@ class OrderProduct extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Product::class, 'id_product', 'id');
   }
 
-
   public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
   {
     $query = parent::prepareReadQuery($query, $level);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $idOrder = $hubleto->router()->urlParamAsInteger("idOrder");
 
-    if ($hubleto->router()->urlParamAsInteger("idOrder") > 0) {
-      $query = $query->where($this->table . '.id_order', $hubleto->router()->urlParamAsInteger("idOrder"));
-    }
+    if ($idOrder > 0) $query = $query->where($this->table . '.id_order', $idOrder);
 
+    return $query;
+  }
+
+  public function prepareLookupQuery(string $search): mixed
+  {
+    $query = parent::prepareLookupQuery($search);
+
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $idOrder = $hubleto->router()->urlParamAsInteger("idOrder");
+
+    if ($idOrder > 0) $query = $query->where($this->table . '.id_order', $idOrder);
     return $query;
   }
 }

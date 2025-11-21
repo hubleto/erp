@@ -5,6 +5,7 @@ namespace Hubleto\Erp;
 
 use Hubleto\Framework\AuthProvider;
 use Hubleto\App\Community\Auth\Controllers\SignIn;
+use Hubleto\App\Community\Auth\Controllers\NotEnoughPermissions;
 use Hubleto\App\Community\Desktop\Controllers\Desktop;
 use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\Controller;
@@ -116,13 +117,29 @@ class Renderer extends \Hubleto\Framework\Renderer
         }
       }
 
-      $permissionManager->setPermission($controllerObject->permission);
+      try {
 
-      if (
-        $controllerObject->requiresAuthenticatedUser
-        && !$controllerObject->permittedForAllUsers
-      ) {
-        $permissionManager->checkPermission();
+        $permissionManager->setPermission($controllerObject->permission);
+
+        if (
+          $controllerObject->requiresAuthenticatedUser
+          && !$controllerObject->permittedForAllUsers
+        ) {
+          $permissionManager->checkPermission();
+        }
+
+      } catch (NotEnoughPermissionsException $e) {
+        /** @var NotEnoughPermissions */
+        $controllerObject = $this->getController(NotEnoughPermissions::class);
+        $controllerObject->message = $e->getMessage();
+        // $message = $e->getMessage();
+        //   $message .= " Hint: Sign out at {$this->env()->projectUrl}?sign-out and sign in again or check your permissions.";
+        // }
+        // return "
+        //   <div class='alert alert-danger' role='alert' style='z-index:99999999'>
+        //     {$message}
+        //   </div>
+        // ";
       }
 
       $controllerObject->preInit();
@@ -214,17 +231,6 @@ class Renderer extends \Hubleto\Framework\Renderer
     } catch (ControllerNotFound $e) {
       header('HTTP/1.1 400 Bad Request', true, 400);
       return $this->renderFatal($e, false);
-    } catch (NotEnoughPermissionsException $e) {
-      $message = $e->getMessage();
-      if ($this->getService(\Hubleto\Framework\AuthProvider::class)->isUserInSession()) {
-        $message .= " Hint: Sign out at {$this->env()->projectUrl}?sign-out and sign in again or check your permissions.";
-      }
-      return "
-        <div class='alert alert-danger' role='alert' style='z-index:99999999'>
-          {$message}
-        </div>
-      ";
-      // header('HTTP/1.1 401 Unauthorized', true, 401);
     } catch (GeneralException $e) {
       header('HTTP/1.1 400 Bad Request', true, 400);
       return "Hubleto run failed: [".get_class($e)."] ".$e->getMessage();

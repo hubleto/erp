@@ -106,7 +106,7 @@ class Generator extends \Hubleto\Framework\Core
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
         $pdfString = curl_exec($ch);
         $error = curl_error($ch);
-        curl_close($ch);
+        // curl_close($ch);
 
         if (!empty($error)) throw new \Exception($error);
       } catch (\Throwable $e) {

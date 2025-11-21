@@ -2,25 +2,33 @@
 
 namespace Hubleto\App\Community\Invoices\Models;
 
-use \Hubleto\App\Community\Invoices\PriceCalculator;
-
+use Hubleto\App\Community\Invoices\PriceCalculator;
+use Hubleto\App\Community\Orders\Models\Order;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Decimal;
 
-class InvoiceItem extends \Hubleto\Erp\Model {
+use Hubleto\App\Community\Orders\Models\OrderProduct;
+
+class InvoiceItem extends \Hubleto\Erp\Model
+{
+
   public string $table = 'invoice_items';
   public ?string $lookupSqlValue = '{%TABLE%}.id_invoice';
   public string $recordManagerClass = RecordManagers\InvoiceItem::class;
 
   public array $relations = [
     'INVOICE' => [ self::BELONGS_TO, Invoice::class, "id_invoice" ],
+    'ORDER' => [ self::BELONGS_TO, Order::class, "id_order" ],
+    'ORDER_PRODUCT' => [ self::BELONGS_TO, OrderProduct::class, "id_order_product" ],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
       'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class))->setRequired(),
+      'id_order' => (new Lookup($this, $this->translate('Order'), OrderProduct::class)),
+      'id_order_product' => (new Lookup($this, $this->translate('Order Product'), OrderProduct::class)),
       'item' => (new Varchar($this, $this->translate('Item')))->setRequired(),
       'unit_price' => new Decimal($this, $this->translate('Unit price')),
       'amount' => new Decimal($this, $this->translate('Amount')),

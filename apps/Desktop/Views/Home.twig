@@ -3,17 +3,17 @@
 
 <div
   class="border p-2 mb-2 flex gap-2 rounded"
-  style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE' }}"
+  style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE dark:border-slate-600' }}"
 >
   {% if user.DEFAULT_COMPANY.logo != '' %}
-    <div class="flex border-r items-center" style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE' }}">
+    <div class="flex border-r items-center" style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE dark:border-slate-600' }}">
       <img
         src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
         class="max-h-32 max-w-32 m-8"
       />
     </div>
   {% endif %}
-  <div class="m-8">
+  <div class="m-8 dark:text-white">
     <h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.first_name ?? user.email }}</h1>
     <b>{{ user.DEFAULT_COMPANY.name }}</b><br/>
     {{ user.email }}

@@ -32,7 +32,30 @@ class Lead extends \Hubleto\Erp\Model
 {
   public string $table = 'leads';
   public string $recordManagerClass = RecordManagers\Lead::class;
-  public ?string $lookupSqlValue = 'concat({%TABLE%}.id, " ", {%TABLE%}.title)';
+  public ?string $lookupSqlValue = '
+    concat(
+      "#",
+      `{%TABLE%}`.id,
+      " ",
+      ifnull(
+        (
+          select concat(ifnull(`c`.`first_name`, ""), " ", ifnull(`c`.`last_name`, "")) from `contacts` `c`
+          where `c`.`id` = `{%TABLE%}`.`id_contact`
+        ),
+        "---"
+      ),
+      " ",
+      ifnull(
+        (
+          select group_concat(`cv`.`value` separator ", ") from `contact_values` `cv`
+          where
+            `cv`.`id_contact` = `{%TABLE%}`.`id_contact`
+            and `type` in ("email", "other")
+        ),
+        "---"
+      )
+    )
+  ';
   public ?string $lookupUrlDetail = 'leads/{%ID%}';
 
   public const STATUS_NO_INTERACTION_YET = 0;
@@ -172,6 +195,15 @@ class Lead extends \Hubleto\Erp\Model
     $description->ui['filters'] = [
       'fLeadWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Level'),
       'fLeadOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
+      'fLeadClosed' => [
+        'title' => $this->translate('Open / Closed'),
+        'options' => [
+          0 => $this->translate('Open'),
+          1 => $this->translate('Closed'),
+          2 => $this->translate('All'),
+        ],
+        'default' => 0,
+      ],
     ];
 
     if ($this->router()->urlParamAsBool("showArchive")) {

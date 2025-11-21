@@ -19,6 +19,10 @@ class Loader extends \Hubleto\Framework\App
       '/^invoices\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
       '/^invoices(\/(?<recordId>\d+))?\/?$/' => Controllers\Invoices::class,
       '/^invoices\/add?\/?$/' => ['controller' => Controllers\Invoices::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^invoices\/profiles(\/(?<recordId>\d+))?\/?$/' => Controllers\Profiles::class,
+      '/^invoices\/profiles\/add?\/?$/' => ['controller' => Controllers\Profiles::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^invoices\/payments(\/(?<recordId>\d+))?\/?$/' => Controllers\Payments::class,
+      '/^invoices\/payments\/add?\/?$/' => ['controller' => Controllers\Payments::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
     /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
@@ -31,8 +35,10 @@ class Loader extends \Hubleto\Framework\App
   {
     if ($round == 1) {
       $this->getModel(Models\Invoice::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Profile::class)->dropTableIfExists()->install();
       $this->getModel(Models\InvoiceItem::class)->dropTableIfExists()->install();
       $this->getModel(Models\InvoiceDocument::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Payment::class)->dropTableIfExists()->install();
     }
   }
 

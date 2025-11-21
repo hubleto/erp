@@ -1,0 +1,20 @@
+<?php
+
+namespace Hubleto\App\Community\Invoices\Controllers;
+
+class Payments extends \Hubleto\Erp\Controller
+{
+  public function getBreadcrumbs(): array
+  {
+    return array_merge(parent::getBreadcrumbs(), [
+      [ 'url' => '', 'content' => $this->translate('Payments') ],
+    ]);
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+    $this->setView('@Hubleto:App:Community:Invoices/Payments.twig');
+  }
+
+}

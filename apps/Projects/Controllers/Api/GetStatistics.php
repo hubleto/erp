@@ -24,6 +24,8 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
       $project = $mProject->record->prepareReadQuery()->where($mProject->table.".id", $idProject)->first();
       $statistics['project'] = $project;
 
+      $averageHourlyCosts = $project->average_hourly_costs ?? 0;
+
       $projectTasksIds = $mProjectTask->record->prepareReadQuery()
         ->where($mProjectTask->table . '.id_project', $idProject)
         ->pluck('id_task')
@@ -32,19 +34,13 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
 
       if (count($projectTasksIds) == 0) $projectTasksIds = [0];
 
-      // $workedByMonth = $mActivity->record->prepareReadQuery()
-      //   ->select($mActivity->table . '.date_worked')
-      //   ->selectRaw('sum(' . $mActivity->table . '.worked_hours) as worked_hours')
-      //   ->leftJoin($mTask->table, $mActivity->table . '.id_task', '=', $mTask->table . '.id')
-      //   // ->whereIn($mTask->table . '.id', $projectTasksIds)
-      //   ->groupByRaw('concat(year(date_worked), month(date_worked)')
-      //   ->get()
-      // ;
+      // workedByMonth
       $workedByMonth = $this->db()->fetchAll('
         select
           month(`' . $mActivity->table . '`.`date_worked`) as `month`,
           year(`' . $mActivity->table . '`.`date_worked`) as `year`,
-          sum(`' . $mActivity->table . '`.`worked_hours`) as `worked_hours`
+          sum(`' . $mActivity->table . '`.`worked_hours`) as `worked_hours`,
+          sum(`' . $mActivity->table . '`.`worked_hours`) * ' . $averageHourlyCosts . ' as `costs`
         from `' . $mActivity->table . '`
         left join `' . $mTask->table . '` on `' . $mTask->table . '`.`id` = `' . $mActivity->table . '`.`id_task`
         where
@@ -55,6 +51,7 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
 
       $statistics['workedByMonth'] = $workedByMonth;
 
+      // chargeableByMonth
       $chargeableByMonth = $this->db()->fetchAll('
         select
           month(`' . $mActivity->table . '`.`date_worked`) as `month`,

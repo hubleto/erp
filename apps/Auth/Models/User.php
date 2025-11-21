@@ -4,6 +4,8 @@ namespace Hubleto\App\Community\Auth\Models;
 
 use Hubleto\App\Community\Settings\Models\Company;
 use Hubleto\App\Community\Auth\Models\UserHasRole;
+use Hubleto\App\Community\Mail\Models\Account;
+use Hubleto\App\Community\Mail\Models\Mail;
 use Hubleto\Erp\Model;
 use Hubleto\Framework\Db\Column\Image;
 use Hubleto\Framework\Db\Column\Boolean;
@@ -300,6 +302,23 @@ class User extends \Hubleto\Framework\Models\User
         ["password" => $this->encryptPassword($password)]
       )
       ;
+  }
+
+  public function onAfterCreate(array $savedRecord): array
+  {
+    $bodyHTML = "
+      <h1>Welcome to Hubleto {$savedRecord['first_name']} {$savedRecord['last_name']}!</h1>
+      <p>Your account has been created.</p>
+      <p>To start using Hubleto, please <a href='{$this->env()->projectUrl}/forgot-password'>change your password</a> and login using your email address.</p>
+    ";
+
+    $this->emailProvider()->send(
+      $savedRecord['email'],
+      "Your Hubleto account has been created",
+      $bodyHTML
+    );
+
+    return parent::onAfterCreate($savedRecord);
   }
 
 }

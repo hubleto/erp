@@ -58,7 +58,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * Get information about authenticated user.
    *
    * @return UserProfile
-   * 
+   *
    */
   public function getUser(): array
   {
@@ -83,7 +83,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * Get user information from the session.
    *
    * @return UserProfile
-   * 
+   *
    */
   public function getUserFromSession(): array
   {
@@ -123,9 +123,9 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * [Description for findUsersByLogin]
    *
    * @param string $login
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function findUsersByLogin(string $login): array
   {
@@ -142,7 +142,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * [Description for forgotPassword]
    *
    * @return void
-   * 
+   *
    */
   public function forgotPassword(): void
   {
@@ -181,7 +181,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * [Description for resetPassword]
    *
    * @return void
-   * 
+   *
    */
   public function resetPassword(): void
   {
@@ -205,7 +205,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     $token->delete();
 
     if ($oldPassword == "") {
-      $this->router()->setUrlParam('login', $token->login);
+      $this->router()->setUrlParam('login', $user->email);
       $this->router()->setUrlParam('password', $this->router()->urlParamAsString('password'));
 
       $this->getService(\Hubleto\Framework\AuthProvider::class)->auth();
@@ -218,9 +218,9 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * [Description for initiateRememberMe]
    *
    * @param mixed $userId
-   * 
+   *
    * @return [type]
-   * 
+   *
    */
   private function initiateRememberMe($userId) {
 
@@ -241,7 +241,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * [Description for authenticateRememberedUser]
    *
    * @return bool
-   * 
+   *
    */
   public function authenticateRememberedUser(): bool {
 
@@ -271,7 +271,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * [Description for auth]
    *
    * @return void
-   * 
+   *
    */
   public function auth(): void
   {
@@ -327,7 +327,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * [Description for createUserModel]
    *
    * @return Model
-   * 
+   *
    */
   public function createUserModel(): Model
   {
@@ -338,9 +338,9 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * [Description for userHasRole]
    *
    * @param int $idRole
-   * 
+   *
    * @return bool
-   * 
+   *
    */
   public function userHasRole(int $idRole): bool
   {
@@ -351,7 +351,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
    * [Description for signOut]
    *
    * @return [type]
-   * 
+   *
    */
   public function signOut()
   {

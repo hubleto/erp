@@ -169,64 +169,77 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                             }}
                           ></input>
                         </div>
+                        {item.is_closed ?
+                          <div className='w-full line-through'>{item.todo}</div>
+                        :
+                          <div className='w-full'>
+                            <textarea
+                              className={'w-full field-sizing-content dark:bg-slate-600 ' + (this.state.record.is_closed ? 'bg-slate-100 text-slate-400' : 'bg-yellow-50')}
+                              readOnly={this.state.record.is_closed}
+                              ref={refInputTodo}
+                              value={item.todo}
+                              placeholder='What to do?'
+                              onChange={(e) => {
+                                let newR = R;
+                                newR.TODO[key].todo = refInputTodo.current.value;
+                                this.updateRecord(newR);
+                              }}
+                            ></textarea>
+                          </div>
+                        }
+                        <div>
+                          {this.state.record.is_closed ? <></> :
+                            <button
+                              className={'btn ' + (item._toBeDeleted_ ? 'btn-primary' : 'btn-danger')}
+                              onClick={(e) => {
+                                let newR = R;
+                                if (newR.TODO[key].id == undefined) {
+                                  newR.TODO = newR.TODO.filter((todoItem: any, todoKey: number) => todoKey !== key);
+                                } else {
+                                  newR.TODO[key]._toBeDeleted_ = !newR.TODO[key]._toBeDeleted_;
+                                }
+                                this.updateRecord(newR);
+                              }}
+                            >
+                              <span className='icon'>
+                                <i className={'fas ' + (item._toBeDeleted_ ? 'fa-rotate-right' : 'fa-trash-can')}></i>
+                              </span>
+                            </button>
+                          }
+
+                        </div>
+                      </div>;
+                    })}
+                    {!this.state.record.is_closed ?
+                      <div className='btn-list-item flex gap-2'>
                         <div className='w-full'>
                           <textarea
-                            className={'w-full field-sizing-content ' + (item.is_closed ? 'bg-slate-100 text-slate-400' : 'bg-yellow-50')}
-                            readOnly={item.is_closed}
-                            ref={refInputTodo}
-                            value={item.todo}
-                            placeholder='What to do?'
+                            className='w-full field-sizing-content bg-yellow-50 dark:bg-slate-600'
+                            ref={this.refInputNewTodo}
+                            placeholder='Add new todo...'
                             onChange={(e) => {
-                              let newR = R;
-                              newR.TODO[key].todo = refInputTodo.current.value;
-                              this.updateRecord(newR);
+                              this.setState({newTodo: this.refInputNewTodo.current.value});
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.key !== 'Enter' || e.shiftKey || e.ctrlKey) return;
+                              e.preventDefault();
+                              this.addTodo(this.state.newTodo, R);
+                              this.setState({newTodo: ""});
                             }}
                           ></textarea>
                         </div>
                         <div>
                           <button
-                            className='btn btn-danger'
+                            className='btn btn-success'
                             onClick={(e) => {
-                              let newR = R;
-                              if (newR.TODO[key].id == undefined) {
-                                newR.TODO = newR.TODO.filter((todoItem: any, todoKey: number) => todoKey !== key);
-                              } else {
-                                newR.TODO[key]._toBeDeleted_ = !newR.TODO[key]._toBeDeleted_;
-                              }
-                              this.updateRecord(newR);
+                              e.preventDefault();
+                              this.addTodo(this.state.newTodo, R);
+                              this.setState({newTodo: ""});
                             }}
-                          ><span className='icon'><i className='fas fa-times'></i></span></button>
+                          ><span className='icon'><i className='fas fa-check'></i></span></button>
                         </div>
-                      </div>;
-                    })}
-                    <div className='btn-list-item flex gap-2'>
-                      <div className='w-full'>
-                        <textarea
-                          className='w-full field-sizing-content bg-yellow-50'
-                          ref={this.refInputNewTodo}
-                          placeholder='Add new todo...'
-                          onChange={(e) => {
-                            this.setState({newTodo: this.refInputNewTodo.current.value});
-                          }}
-                          onKeyDown={(e) => {
-                            if (e.key !== 'Enter' || e.shiftKey || e.ctrlKey) return;
-                            e.preventDefault();
-                            this.addTodo(this.state.newTodo, R);
-                            this.setState({newTodo: ""});
-                          }}
-                        ></textarea>
                       </div>
-                      <div>
-                        <button
-                          className='btn btn-success'
-                          onClick={(e) => {
-                            e.preventDefault();
-                            this.addTodo(this.state.newTodo, R);
-                            this.setState({newTodo: ""});
-                          }}
-                        ><span className='icon'><i className='fas fa-check'></i></span></button>
-                      </div>
-                    </div>
+                    : <></>}
                     {/* <button
                       className='btn btn-transparent'
                       onClick={() => {

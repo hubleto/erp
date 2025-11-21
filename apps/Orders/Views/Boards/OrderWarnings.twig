@@ -21,7 +21,7 @@
         {% if item.id_owner == user.id %} {{ _self.item(item) }} {% endif %}
       {% endfor %}
     </div>
-    <div class="list mt-2 text-xs">
+    <div class="list mt-2 text-xs bg-gray-50">
       {% for item in items %}
         {% if item.id_owner != user.id %} {{ _self.item(item) }} {% endif %}
       {% endfor %}

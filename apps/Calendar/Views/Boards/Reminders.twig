@@ -18,7 +18,7 @@
       {% if reminder.id_owner == user.id %} {{ _self.reminder(reminder) }} {% endif %}
     {% endfor %}
   </div>
-  <div class="list mt-2 text-xs">
+  <div class="list mt-2 text-xs bg-gray-50">
     {% for reminder in reminders %}
       {% if reminder.id_owner != user.id %} {{ _self.reminder(reminder) }} {% endif %}
     {% endfor %}

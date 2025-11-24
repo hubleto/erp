@@ -3,7 +3,7 @@
     {% for month, days in months %}
       <tr>
         <td colspan="2">
-          <div class="border-t border-primary text-primary p-1">{{ month ~ " " ~ year }} {{ viewParams.employee }}</div>
+          <div class="border-t border-primary text-primary bg-primary/10 p-1">{{ month ~ " " ~ year }} {{ viewParams.employee }}</div>
         </td>
       </tr>
       {% for day, dayInfo in days %}

@@ -19,7 +19,7 @@
         </tr>
         {% for day, dayInfo in days %}
           <tr {% if dayInfo.weekend == true %} style="background-color: #e5e5e5;" {% endif %}>
-            <td class="px-1 text-nowrap">{{ day|date("d. m. Y") }}</td>
+            <td class="px-1 text-nowrap"><b>{{ day|date(hubleto.locale().getDateShortFormat()) }}</b></td>
             <td>
               <div class="flex">
                 {% if ((dayInfo.hours / viewParams.quota) * 100) > 0 %}
@@ -56,7 +56,7 @@
                     href="{{ hubleto.env().projectUrl }}/tasks/{{ task.id }}"
                     target="_blank"
                   >
-                    [{{ task.identifier }}] [{{ task.PROJECTS[0].title }}] {{ task.title }}
+                    <b>{{ task.PROJECTS[0].title }}</b> [{{ task.identifier }}] {{ task.title }}
                   </a>
                 {% endfor %}
               </div></td>

@@ -10,12 +10,13 @@ class Folder extends \Hubleto\Erp\Model
   public string $table = 'folders';
   public string $recordManagerClass = RecordManagers\Folder::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupUrlAdd = 'documents/folders/add';
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
-      'id_parent_folder' => (new Lookup($this, $this->translate("Parent folder"), Folder::class))->setRequired()->setReadonly()->setDefaultValue($this->router()->urlParamAsInteger('idParentFolder')),
+      'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4())->setDefaultHidden(),
+      'id_parent_folder' => (new Lookup($this, $this->translate("Parent folder"), Folder::class))->setRequired()->setDefaultValue($this->router()->urlParamAsInteger('idParentFolder')),
       'name' => (new Varchar($this, $this->translate('Folder name')))->setRequired()->setCssClass('text-2xl text-primary'),
     ]);
   }
@@ -34,4 +35,12 @@ class Folder extends \Hubleto\Erp\Model
     ]);
   }
 
+   public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['addButtonText'] = 'Add Folder';
+    $description->show(['header', 'fulltextSearch', 'columnSearch']);
+    $description->hide(['footer']);
+    return $description;
+  }
 }

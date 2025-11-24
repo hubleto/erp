@@ -22,4 +22,25 @@ class Folder extends \Hubleto\Erp\RecordManager
     return parent::recordCreate($record);
   }
 
+  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  {
+    //disables the _ROOT_ folder record from opening
+    $query = parent::prepareReadQuery($query, $level);
+    $query->where($this->table.".id", "!=", 1);
+    return $query;
+  }
+
+
+  public function prepareLookupQuery(string $search): mixed
+  {
+    //restric the folder to be moved to itself
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $record = $hubleto->router()->urlParamAsArray("formRecord");
+    $query = parent::prepareLookupQuery($search);
+    if ($hubleto->router()->urlParamAsBool("noSelfParent") && isset($record["id"])) {
+      $query->where($this->table.".id", "!=", $record["id"]);
+    }
+
+    return $query;
+  }
 }

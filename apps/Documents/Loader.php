@@ -4,12 +4,12 @@ namespace Hubleto\App\Community\Documents;
 
 class Loader extends \Hubleto\Framework\App
 {
-  
+
   /**
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
    *
    * @return void
-   * 
+   *
    */
   public function init(): void
   {
@@ -24,6 +24,9 @@ class Loader extends \Hubleto\Framework\App
 
       '/^documents(\/(?<recordId>\d+))?\/?$/' => Controllers\Documents::class,
       '/^documents\/add\/?$/' => ['controller' => Controllers\Documents::class, 'vars' => ['recordId' => -1]],
+
+      '/^documents\/folders\/?$/' => Controllers\Folders::class,
+      '/^documents\/folders\/add\/?$/' => ['controller' => Controllers\Folders::class, 'vars' => ['recordId' => -1]],
 
       '/^documents\/templates(\/(?<recordId>\d+))?\/?$/' => Controllers\Templates::class,
       '/^documents\/templates\/add\/?$/' => ['controller' => Controllers\Templates::class, 'vars' => ['recordId' => -1]],

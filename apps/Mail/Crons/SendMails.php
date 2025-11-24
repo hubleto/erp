@@ -7,7 +7,7 @@ use Hubleto\App\Community\Mail\Models\Mail;
 class SendMails extends \Hubleto\Erp\Cron
 {
   public string $schedulingPattern = '* * * * *';
-  public int $maxMailsToSend = 3;
+  public int $maxMailsToSend = 10;
 
 
   public function run(): void
@@ -15,12 +15,15 @@ class SendMails extends \Hubleto\Erp\Cron
     /** @var Mail */
     $mMail = $this->getModel(Mail::class);
 
+    $maxMailsToSend = $this->maxMailsToSend;
+    if ($maxMailsToSend > 30) $maxMailsToSend = 30;
+
     $mailsToSend = $mMail->record->prepareReadQuery()
       ->whereNull('datetime_sent')
       ->where('datetime_scheduled_to_send', '<=', date('Y-m-d H:i:s'))
       ->with('ACCOUNT')
       ->with('MAILBOX')
-      ->limit($this->maxMailsToSend) // cron is launched each minute; send max 3 emails per minute
+      ->limit($maxMailsToSend) // cron is launched each minute; send max 3 emails per minute
       ->get()
     ;
 

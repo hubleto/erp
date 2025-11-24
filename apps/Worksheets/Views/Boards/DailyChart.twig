@@ -49,14 +49,16 @@
           </tr>
           {% if dayInfo.tasks|length > 0 %}
             <tr {% if dayInfo.weekend == true %} style="background-color: #e5e5e5;" {% endif %}>
-              <td colspan="2"><div class="flex flex-col gap-2 m-2">
+              <td colspan="2"><div class="m-2 list text-xs">
                 {% for task in dayInfo.tasks %}
                   <a
-                    class="badge badge-small"
+                    class="btn btn-list-item btn-transparent p-1"
                     href="{{ hubleto.env().projectUrl }}/tasks/{{ task.id }}"
                     target="_blank"
                   >
-                    <b>{{ task.PROJECTS[0].title }}</b> [{{ task.identifier }}] {{ task.title }}
+                    <span class="text p-0">
+                      <b>{{ task.PROJECTS[0].title }}</b> [{{ task.identifier }}] {{ task.title }}
+                    </span>
                   </a>
                 {% endfor %}
               </div></td>

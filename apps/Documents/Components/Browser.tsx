@@ -199,7 +199,6 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
             id={this.state.showFolderProperties}
             onSaveCallback={(form, saveResponse, customSaveOptions) => {
               //if the folder is being moved to another parent folder
-              console.log(saveResponse.originalRecord.id_parent_folder, saveResponse.savedRecord.id_parent_folder);
               if (saveResponse.originalRecord.id_parent_folder != saveResponse.savedRecord.id_parent_folder) {
                 this.changeFolder("_ROOT_", []);
               } else {
